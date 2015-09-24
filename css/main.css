@@ -1,0 +1,24 @@
+
+
+.docs-search {
+  position: relative;
+margin: 0 .15vw;
+padding: 6px;
+}
+
+.docs-search input.form-control {
+  background: #303541;
+  color: #FFF;
+  border-color: #252933;
+  box-shadow: inset 0 8px 8px -8px #252933;
+  font-weight: 300;
+  padding: 0 0 0 40px;
+}
+
+.docs-search .kbc-icon-search {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  color: #a3a9b7;
+  font-size: 22px;
+}
