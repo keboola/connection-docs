@@ -7,6 +7,8 @@
 
 * Clone the repo
 * `cd` into repo workspace
+* `gem install bundle`
+* `gem install jekyll`
 * `bundle install`
 
 ### Run
