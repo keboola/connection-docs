@@ -74,30 +74,3 @@ ul.kbc-nav-sidebar li > ul {
 ul.kbc-nav-sidebar li.active > ul {
     display: block;
 }
-
-/* experimental recoloring below */
-.kbc-nav-sidebar>li.active>a, .kbc-nav-sidebar>li>a:hover, .kbc-nav-sidebar>li>a:focus {
-    color: #282d38 !important;
-    border-left-color: #282d38 !important;
-}
-
-.kbc-nav-sidebar>li>a {
-    border-left-color: #1698c0 !important; 
-}
-
-.kbc-sidebar, .kbc-logo {
-    background: #1698c0 !important;
-}
-
-.kbc-logo {
-  border-bottom-color: #15c3ff !important;
-}
-
-.docs-search input.form-control {
-  background: #1698c0 !important;
-  border-color: #15c3ff !important;
-}
-
-.docs-search .kbc-icon-search, .st-default-search-input::-webkit-input-placeholder {
-  color: #f5f5f7;
-}
