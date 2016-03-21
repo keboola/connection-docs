@@ -1,0 +1,35 @@
+items:
+
+  - url: /overview/
+    title: Kebooola Overview
+    items:
+
+      - url: /overview/mission/
+        title: Keboola Mission
+
+  - url: /getting-started/
+    title: Getting started
+
+  - url: /load/
+    title: Loading Data
+
+  - url: /storage/
+    title: Storage
+
+  - url: /manipulate/
+    title: Manipulating Data
+
+  - url: /write/
+    title: Writing Data
+
+  - url: /automation/
+    title: Automation
+
+  - url: /administration/
+    title: Administration
+
+  - url: /tips-tricks/
+    title: Tips & Tricks
+
+
+

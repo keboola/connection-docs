@@ -10,9 +10,11 @@
 	<title>{{ page.title }} | Keboola Connection Knowledge Base</title>
 
 	<!-- Custom styles for this template -->
-	<link rel="stylesheet" href="https://d3qqa9wia2dvbu.cloudfront.net/v0.1.77-0-g1e89767/css/kbc.css">
-	<link rel="stylesheet" href="/css/main.css">
-	<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+s	<link rel="stylesheet" href="https://d3qqa9wia2dvbu.cloudfront.net/v0.1.77-0-g1e89767/css/kbc.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+	<link rel="stylesheet" href="/assets/css/highlight.css">
+	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -28,8 +30,20 @@
 		<div class="col-xs-9 kbc-main-header-container">
 			<div class="kbc-main-header kbc-header">
 				<div class="kbc-title">
-					<h1>Keboola Connection Knowledge Base</h1>
+					<h1>{{ page.title }}</h1>
 				</div>
+                    
+          <ol class="pull-right breadcrumb">
+            {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+            <li><a href="/">Home</a></li>
+            {% for crumb in crumbs offset: 1 %}
+              {% if forloop.last %}
+                <li>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</li>
+              {% else %}
+                <li><a href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ol>                    
 
 			</div>
 		</div>
@@ -43,29 +57,36 @@
 						<input class="st-default-search-input form-control" placeholder="Search the docs" value="" autocomplete="off">
 				</div>
 
-				<ul class="kbc-nav-sidebar nav nav-sidebar">
-
-					<li><a href="/getting-started">Getting Started</a></li>
-					<li><a href="/extractors">Extractors</a></li>
-
-				</ul>
+				{% include navigation.html context="/" %} 
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 kbc-main">
 				<div class="container-fluid kbc-main-content">
-					{{ content }}
+
+
+		 {{ content }}
 				</div>
 			</div>
 
 		</div>
 	</div>
 
-	<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install','hK7Qf4GSoizYPK1XFExX','2.0.0');
-</script>
+    _st('install','tM-dZKs7DADT5bRod7bF','2.0.0');
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/assets/js/magnific-popup.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.image-popup').magnificPopup({type:'image', delegate:'img',
+        callbacks: {
+          elementParse: function(item) { item.src = item.el.attr('src'); }
+        }});
+    });
+  </script>
 </body>
 </html>
