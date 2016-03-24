@@ -37,10 +37,10 @@ You should therefore end up with buckets `in.c-tutorial` and `out.c-tutorial`.
 To manually create a table in Storage, you need a CSV file. You can either upload a CSV file from your computer, or
 directly refer to an URL. For this tutorial we have prepared four sample tables:
 
-- opportunity - [https://help.keboola.com/overview/tutorial/opportunity.csv](/overview/tutorial/opportunity.csv)
-- account - [https://help.keboola.com/overview/tutorial/account.csv](/overview/tutorial/account.csv)
-- user - [https://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
-- usergoals - [https://help.keboola.com/overview/tutorial/usergoal.csv](/overview/tutorial/usergoal.csv)
+- opportunity - [http://help.keboola.com/overview/tutorial/opportunity.csv](/overview/tutorial/opportunity.csv)
+- account - [http://help.keboola.com/overview/tutorial/account.csv](/overview/tutorial/account.csv)
+- user - [http://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
+- usergoals - [http://help.keboola.com/overview/tutorial/usergoal.csv](/overview/tutorial/usergoal.csv)
 
 {: .image-popup}
 ![Screenshot - Create a table](/overview/tutorial/load/create-table-2.png) 
