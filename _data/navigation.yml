@@ -1,14 +1,18 @@
 items:
-
   - url: /overview/
     title: Kebooola Overview
     items:
+      - url: /overview/tutorial/
+        title: Getting Started
+        items:
+          - url: /overview/tutorial/load/
+            title: Part 1 - Manually Loading Data 
+            items:
+              - url: /overview/tutorial/load/extractor/
+                title: Part 1b - Loading data with Extractor
 
-      - url: /overview/mission/
-        title: Keboola Mission
-
-  - url: /getting-started/
-    title: Getting started
+          - url: /overview/tutorial/manipulate/
+            title: Part 2 - Data Manipulation
 
   - url: /load/
     title: Loading Data
@@ -30,6 +34,3 @@ items:
 
   - url: /tips-tricks/
     title: Tips & Tricks
-
-
-

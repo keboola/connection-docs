@@ -1,6 +1,6 @@
 ---
 title: Part 1 - Manually Loading Data 
-permalink: /overview/tutorial/manual-loading/
+permalink: /overview/tutorial/load/
 ---
 
 There are multiple ways to load data into KBC. When you are starting with a project or doing any kind of 
@@ -11,7 +11,7 @@ data loading using extractors. In this tutorial, you will load four tables into 
 To manully load data go to **Storage** section:
 
 {: .image-popup}
-![Screenhost - Storage Console](/overview/tutorial/intro-screen.png)
+![Screenhost - Storage Console](/overview/tutorial/load/intro-screen.png)
 
 In the 
 [*Storage Console*](/storage/) there is a tab *Tables* which lists database tables stored in your project. Tables are 
@@ -19,7 +19,7 @@ grouped together into *Buckets*. There are two buckets ready for you `in.c-main`
 a new one especially for this tutorial. Click the plus button to create a new bucket.
 
 {: .image-popup}
-![Screenshot - Create Bucket](/overview/tutorial/create-bucket.png)
+![Screenshot - Create Bucket](/overview/tutorial/load/create-bucket.png)
 
 Create a bucket and name it *tutorial* (optionally you can also add a description). When creating a bucket, you need 
 to select a *Stage* and *Backend*. *Stage* is used
@@ -32,7 +32,7 @@ When you are done with the *tutorial* bucket in the *input* stage, creat another
 You should therefore end up with buckets `in.c-tutorial` and `out.c-tutorial`.
 
 {: .image-popup}
-![Screenshot - Create a table](/overview/tutorial/create-table.png) 
+![Screenshot - Create a table](/overview/tutorial/load/create-table.png) 
 
 To manually create a table in Storage, you need a CSV file. You can either upload a CSV file from your computer, or
 directly refer to an URL. For this tutorial we have prepared four sample tables:
@@ -42,18 +42,23 @@ directly refer to an URL. For this tutorial we have prepared four sample tables:
 - user - [https://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
 - usergoals - [https://help.keboola.com/overview/tutorial/usergoal.csv](/overview/tutorial/usergoal.csv)
 
+{: .image-popup}
+![Screenshot - Create a table](/overview/tutorial/load/create-table-2.png) 
+
 You can either load them directly from the URLs above, or download them to your computer and load them 
 by file upload (they are about 6MB total). When you upload a table, you can check its contents in the 
 *Data sample* tab.
 
 {: .image-popup}
-![Screenshot - Data sample](/overview/tutorial/data-sample.png)
+![Screenshot - Data sample](/overview/tutorial/load/data-sample.png)
 
-That's it. You should now have four tables with sample data stored in your KBC project. You can now 
-go to:
+That's it. You should now have four tables with sample data stored in your KBC project. The tables represent 
+business opportunities (*opportunity*), their associated users (*user*) and accounts (*account*). Additionally 
+business goals for each user are specified (*usergoal*). The tables represent real world data, but they are 
+anonymized. You can now go to:
 
-- the next step [Data Manipulation](/overview/tutorial/data-manipulation/)
-- or you can take a brief side step to [Loading data with Extractor](/overview/tutorial/extractor-loading/)
+- the next step [Data Manipulation](/overview/tutorial/manipulate/)
+- or you can take a brief side step to [Loading data with Extractor](/overview/tutorial/load/extractor/)
 
 
  
