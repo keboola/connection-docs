@@ -25,11 +25,11 @@ Not sure where to start? If you are new to Keboola Connection and want a brief o
 of the Keboola ecosystem, please check out our [overview](/overview/) or 
 [tutorial](/overview/tutorial/) for some hands on experience on using KBC.
 
-If you wish to get in touch with our partners, please use the following contact information:
+To get in touch with our partners, please use the following contact information:
 
-- cz.support@keboola.com -- Europe 
-- support.ca@keboola.com --  North America 
-- apac.support@keboola.com -- Asia
+- If in Europe, write to cz.support@keboola.com
+- If in North America, write to support.ca@keboola.com
+- If in Asia, write to apac.support@keboola.com
 
 
 
