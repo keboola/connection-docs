@@ -1,6 +1,7 @@
 <ul class="kbc-nav-sidebar nav nav-sidebar">
 {% for item in include.items %}
-    <li{% if item.url == page.url or page.url contains item.url %} class="active"{% endif %}>
+    {% assign pageUrlSplitByItemUrl = page.url | split: item.url  %}
+    <li{% if item.url == page.url or page.url contains item.url and pageUrlSplitByItemUrl.first.size == 0 %} class="active"{% endif %}>
         <a href="{{ item.url }}">{{ item.title }}</a>
         {% if item.items %}
         {% include nav-items.html items=item.items %}
