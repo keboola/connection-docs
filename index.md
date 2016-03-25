@@ -27,9 +27,9 @@ of the Keboola ecosystem, please check out our [overview](/overview/) or
 
 To get in touch with our partners, please use the following contact information:
 
-- If in Europe, write to cz.support@keboola.com
-- If in North America, write to support.ca@keboola.com
-- If in Asia, write to apac.support@keboola.com
+- If in Europe, write to _cz.support@keboola.com_
+- If in North America, write to _support.ca@keboola.com_
+- If in Asia, write to _apac.support@keboola.com_
 
 
 
