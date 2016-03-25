@@ -9,9 +9,10 @@ Keboola Connection (KBC) is a cloud platform for interconnecting diverse systems
 - *manipulate* and augment the extracted data with other data, and finally, 
 - *write* the results to a destination system.
 
-For example, you might use KBC to *extract* data about your customers from your Salesforce CRM. You can also *extract* comments from your Facebook page and find sentiment
-in them. You can then join those data sets together with weather reports, and *write* everything into Tableau Online, where you can build reports and analyze your
-customers' behavior. This is, of course, just a simple example of what Keboola Connection can be used for.
+To give a simple example of what this means, you might use KBC to *extract* data about your customers from your Salesforce CRM. 
+Then you *extract* comments from your Facebook page and find sentiment in them. 
+After that, you join those data sets together with weather reports, and *write* everything into Tableau Online 
+in order to create reports and analyze your customers' behavior. 
 
 ## Keboola Connection Overview
 KBC is a complex platform composed of many connected components. The chart below shows how KBC is structured and explains some commonly used terms.
