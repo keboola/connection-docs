@@ -3,7 +3,7 @@ title: Keboola Connection User Documentation
 permalink: /
 ---
 
-Welome to the Keboola Connection (KBC) Manual pages,
+Welcome to the Keboola Connection (KBC) Manual pages,
 This site is aimed for end-users who are working with Keboola Connection UI. There are other noteworthy sites:
 
 - If you want to log in into KBC, use [connection.keboola.com](https://connection.keboola.com).
