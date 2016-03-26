@@ -6,14 +6,14 @@ permalink: /
 Welcome to the Keboola Connection (KBC) Manual pages.
 If you are working with the KBC UI as an **end-user**, you are at the right place. 
 
-There are also other KBC sites available to you:
+Other KBC sites available to you:
 
 - [connection.keboola.com](https://connection.keboola.com) for logging in into KBC
-- [status.keboola.com](http://status.keboola.com/) for getting Keboola Status updates (service status and changelog). We recommend subscribing to the feed or monitoring it in a Slack channel to keep up to date.
+- [status.keboola.com](http://status.keboola.com/) for getting KBC Status updates (service status and changelog); we recommend subscribing to the feed or monitoring it in a Slack channel to keep up to date.
 - [developers.keboola.com](https://developers.keboola.com) for developing a KBC extension  
 - [wiki.keboola.com](http://wiki.keboola.com/) for adding tips and tricks for other KBC users
 
-If you happen to be a data analyst or a tech geek, we also post blogs for you to enjoy: 
+Our blog posts for you to enjoy: 
 
 - [blog.keboola.com](http://blog.keboola.com/) for data analysts
 - [500.keboola.com](https://500.keboola.com/) for tech geeks
@@ -24,15 +24,12 @@ Feel free to
 - Visit our main web page at [www.keboola.com](http://www.keboola.com/).
 - Send us your request for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
 
-Not sure where to start? If you are new to Keboola Connection and want a brief orientation
-to the Keboola ecosystem, please check out our [overview](/overview/) or 
-[tutorial](/overview/tutorial/) for some hands on experience on using KBC.
-
 To get in touch with our **partners**, please use the following contact information:
 
 - If in Europe, write to [cz.support@keboola.com](mailto:cz.support@keboola.com).
 - If in North America, write to [support.ca@keboola.com](mailto:support.ca@keboola.com).
 - If in Asia, write to [apac.support@keboola.com](mailto:apac.support@keboola.com).
 
+Not sure where to start? If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out our [overview](/overview/) or [tutorial](/overview/tutorial/) for some hands on experience on using KBC.
 
 
