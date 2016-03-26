@@ -61,4 +61,4 @@ of different services and their connections:
 
 ![External Environment Schema](/overview/kbc_environment.png)
 
-In place of the *Data Consumption*, the GoodData Bussiness Intelligence Analytics platform is shown.
+In place of the *Data Consumption*, the GoodData Business Intelligence Analytics platform is shown.

@@ -4,19 +4,16 @@ permalink: /
 ---
 
 Welcome to the Keboola Connection (KBC) Manual pages.
-If you are working with the KBC UI as an **end-user**, you are at the right place. 
+If you are working with the KBC UI as an end-user, you are at the right place. 
 
 Other KBC sites available to you:
 
-- [connection.keboola.com](https://connection.keboola.com) for logging in into KBC
-- [status.keboola.com](http://status.keboola.com/) for getting KBC Status updates (service status and changelog); we recommend subscribing to the feed or monitoring it in a Slack channel to keep up to date.
-- [developers.keboola.com](https://developers.keboola.com) for developing a KBC extension  
-- [wiki.keboola.com](http://wiki.keboola.com/) for adding tips and tricks for other KBC users
-
-Our blog posts for you to enjoy: 
-
-- [blog.keboola.com](http://blog.keboola.com/) for data analysts
-- [500.keboola.com](https://500.keboola.com/) for tech geeks
+- [connection.keboola.com](https://connection.keboola.com) -- for logging in into KBC
+- [status.keboola.com](http://status.keboola.com/) -- for getting KBC Status updates (service status and changelog); we recommend subscribing to the feed or monitoring it in a Slack channel to keep up to date.
+- [developers.keboola.com](https://developers.keboola.com) -- for developing a KBC extension  
+- [wiki.keboola.com](http://wiki.keboola.com/) -- for adding tips and tricks for other KBC users
+- [blog.keboola.com](http://blog.keboola.com/) -- something to read for data analysts 
+- [500.keboola.com](https://500.keboola.com/) -- something to read for tech geeks
 
 Feel free to
 
