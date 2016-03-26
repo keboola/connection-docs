@@ -19,8 +19,8 @@ KBC is a complex platform composed of many connected components. The chart below
 
 ![KBC Structure Chart](/overview/kbc_structure.png)
 
-### Data source / Systems
-Data source are systems that contain the data you wish to bring into KBC. They can be pretty much anything from GoogleAnalytics, Facebook, SalesForce
+### Data Source / Systems
+Data sources are systems containing data you wish to bring into KBC. They can be pretty much anything from GoogleAnalytics, Facebook, SalesForce
 to on-premise databases, legacy systems or even appliances and IoT devices. Data source is not part of KBC.
 
 ### Extractors
@@ -28,7 +28,7 @@ to on-premise databases, legacy systems or even appliances and IoT devices. Data
 services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
 
 ### Storage
-*Storage* is the central KBC subsystem managing everything related with the data storage and an access to it.
+*Storage* is the central KBC subsystem managing everything related to storing data and accessing it.
 It is implemented as a layer on top of various database engines that we use as our *backends* ([Mysql](https://www.mysql.com/),
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). Storage provides an important API (Storage API) access for
 other KBC components and 3rd party applications.
@@ -51,7 +51,7 @@ Applications can also augment data (for example, adding Weather or Exchange Rate
 *Data Consumption* is represented by 3rd party systems that accept (or extract) data from KBC and use it further. These may be business intelligence analytics or visualization systems, but also e-mail marketing, CRM, or simply any system that can help our customers to realize the extra value KBC adds to the data.
 
 ### Orchestrator / Scheduler
-In the background, behind the scenes, there is an *Orchestrator* component which allows everything to be
+In the background, behind the scenes, there is the *Orchestrator* component which allows everything to be
 fully automated.  Orchestrator enables to run any component (e.g., data extraction) in specified intervals or at specified times of the day.
 
 ## External Environment Schema
