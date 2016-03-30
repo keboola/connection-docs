@@ -17,7 +17,7 @@ Additionally you can also:
 
 - Check us out on [Twitter](https://twitter.com/keboola_support).
 - Visit our main web page at [www.keboola.com](http://www.keboola.com/).
-- Send us a wishing for a new or updated project feature to [wishlist@keboola.com](wishlist@keboola.com).
+- Send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
 
 Not sure where to start? If you are new to Keboola Connection (KBC) and want a brief orientation
 of the Keboola ecosystem please check out the [overview](/overview/) or to the
@@ -25,9 +25,9 @@ of the Keboola ecosystem please check out the [overview](/overview/) or to the
 
 If you want to talk to our partners:
 
-- For our friends from Europe please email cz.support@keboola.com
-- For our friends from North America please email support.ca@keboola.com
-- For our friends from Asia please email  apac.support@keboola.com
+- For our friends from Europe please email [cz.support@keboola.com](mailto:cz.support@keboola.com)
+- For our friends from North America please email [support.ca@keboola.com](malito:support.ca@keboola.com)
+- For our friends from Asia please email  [apac.support@keboola.com](mailto:apac.support@keboola.com)
 
 
 

@@ -9,6 +9,7 @@ For example you might use KBC to *extract* data about your customers from your S
 in them. You can then join those data sets together with weather reports and *write* everything into Tableau Online where you can build reports and analyze your
 customers behaviour. This is of course just a simple example of what Keboola Connection can be used for.
 
+ 
 ## Keboola Connection Overview
 Keboola Connection (KBC) is a complex platform composed of many connected components. The chart below shows how KBC is structured and explains some commonly used terms.
 
@@ -48,6 +49,11 @@ Applicacations can also do data augmentation (e.g. adding Weather or Exchange Ra
 ### Orchestrator / Scheduler
 On the background, behind the scenes, there is an *Orchestrator* component which allows everything to be
 fully automated.  Orchestrator allows to run any component (e.g. data extraction) in specified intervals or at specified times of days.
+
+### Jobs
+Most things done in KBC are done using batch approach. This means that when you do some operation, a **Job** is created
+and executed on the background. We also call these jobs **asynchronous***. Multiple jobs can be running at the same 
+time and you can continue your work in the mean time. 
 
 ## External Environment Schema
 

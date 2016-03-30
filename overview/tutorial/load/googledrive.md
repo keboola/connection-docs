@@ -1,6 +1,6 @@
 ---
-title: Part 1b - Loading data with Extractor
-permalink: /overview/tutorial/load/extractor/
+title: Part 1b - Loading data with GoogleDrive Extractor
+permalink: /overview/tutorial/load/googledrive/
 ---
 
 In the [previous step](/overview/tutorial/load/) you learned, how to quickly load data into
@@ -9,18 +9,18 @@ obtained automatically using *extractors*. In this tutorial, you will use a Goog
 load data from an external data sheet.
 
 Google Drive is a common method for sharing small reference tables between different organizations. Lets 
-assume that someone shared a *usergoals* table with you through Google Drive. Well, because no one actually did
-you have to pretend it and create a Google spreadsheet from [usergoal.csv](/overview/tutorial/usergoal.csv) file.
+assume that someone shared a *level* table with you through Google Drive. Well, because no one actually did
+you have to pretend it and create a Google spreadsheet from [level.csv](/overview/tutorial/level.csv) file.
 
 ## Prepare
 Go to [Google Spreadsheets](https://docs.google.com/spreadsheets) and *Start a new Blank Spreadsheet*. Then go to
-*File* - *Open* and Upload the [usergoal.csv](/overview/tutorial/usergoal.csv) file.
+*File* - *Open* and Upload the [level.csv](/overview/tutorial/level.csv) file.
 
 {: .image-popup}
 ![Google Spreadsheets Screenshot](/overview/tutorial/load/google-drive-spreadsheet.png)
 
 
-## Configure the KBC Extractor
+## Configure the GoogleDrive Extractor
 
 Go to *Extractors* in KBC and find *Google Drive* extractor. You can see that there are plenty of prepared 
 extractors, so it's a good idea to use the search box. Also note that if your favorite app is not listed, it
@@ -60,26 +60,26 @@ When the extractor is authorized, you can proceed with selecting the files you w
 {: .image-popup}
 ![Google Drive Select Documents](/overview/tutorial/load/extractor-google-drive-select.png)
 
-Find the spreadsheet named *usergoal* (or whatever you named it)
+Find the spreadsheet named *level* (or whatever you named it)
 
 {: .image-popup}
 ![Google Drive Selected Document](/overview/tutorial/load/extractor-google-drive-selected.png)
  
 Once the spreadsheet documents are selected, you need to select individual spreadsheets.  
-Our document 'usergoal' contains only a single sheet 'usergoal', so select that one.
+Our document 'level' contains only a single sheet 'level', so select that one.
 
 {: .image-popup}
 ![Google Drive Selected Documents](/overview/tutorial/load/extractor-google-drive-select-sheets.png) 
 
 Save the configuration and you should obtain a result like the one below. You can then *Run Extraction*.
-This will create an asynchronous job which will extract the selected sheet from the Google Drive document
+This will create a background job which will extract the selected sheet from the Google Drive document
 and then it will load it into the Storage.
 
 {: .image-popup}
 ![Google Drive Results](/overview/tutorial/load/extractor-google-drive-result.png) 
 
 The Extractor automatically creates the output bucket and table - here it is 
-`in.c-ex-google-drive-socialmediafollowers.0-usergoal`. You can check the contents of the table 
+`in.c-ex-google-drive-userlevels.0-level`. You can check the contents of the table 
 by clicking on its name (after the job has been finished).
 
 {: .image-popup}
@@ -87,15 +87,15 @@ by clicking on its name (after the job has been finished).
 
 ## Aftermath
 This concludes an example setup of a Google Drive Extractor. To be consistent with the rest of this tutorial, we
-would like the result table of the extractor be `in.c-tutorial.usergoal` so as to be consistent with what 
+would like the result table of the extractor be `in.c-tutorial.level` so as to be consistent with what 
 you have done in the [previous step](/overview/tutorial/load/) of this tutorial.
 
-This step is not at all necessary, you can replace `in.c-tutorial.usergoal` with
-`in.c-ex-google-drive-socialmediafollowers.0-usergoal` in the following examples, or you can go
-to Storage and delete the table `in.c-tutorial.usergoal`
+This step is not at all technically necessary, you can replace `in.c-tutorial.level` with
+`in.c-ex-google-drive-userlevels.0-level` in the following examples, or you can go
+to Storage and delete the table `in.c-tutorial.level`
 
 {: .image-popup}
-![Storage Delete Table Screenshot](/overview/tutorial/load/extractor-delete-table.png) 
+![Storage Delete Table Screenshot](/overview/tutorial/load/storage-delete-table.png) 
 
 Then create a new *Alias Table*. An alias table behaves like a [Database View](https://en.wikipedia.org/wiki/View_(SQL))
 - it does not contain any data, it is simply a link to some existing data.
@@ -103,11 +103,12 @@ Then create a new *Alias Table*. An alias table behaves like a [Database View](h
 {: .image-popup}
 ![Storage Delete Table Create Alias Screenshot](/overview/tutorial/load/storage-create-alias.png) 
 
-In the configuration popup, select the table `in.c-ex-google-drive-socialmediafollowers.0-usergoal` as 
-a *Source Table* and write `usergoal` as the alias *Name*. 
+In the configuration popup, select the table `in.c-ex-google-drive-userlevels.0-level` as 
+a *Source Table* and write `level` as the alias *Name*. 
 
 {: .image-popup}
 ![Storage Delete Table Create Alias configuration Screenshot](/overview/tutorial/load/storage-create-alias-2.png) 
 
-You can now continue with the [rest of the tutorial](/overview/tutorial/manipulate/)
+You can now continue with the [rest of the tutorial](/overview/tutorial/manipulate/) or take a side step
+to configure also a [database extractor](/overview/tutorial/load/database/).
 

@@ -8,9 +8,26 @@ items:
           - url: /overview/tutorial/load/
             title: Part 1 - Manually Loading Data 
             items:
-              - url: /overview/tutorial/load/extractor/
-                title: Part 1b - Loading data with Extractor
+              - url: /overview/tutorial/load/googledrive/
+                title: Part 1b - Loading data with GoogleDrive Extractor
+                
+              - url: /overview/tutorial/load/database/
+                title: Part 1c - Loading data with Database Extractor
 
           - url: /overview/tutorial/manipulate/
             title: Part 2 - Data Manipulation
+            items:
+              - url: /overview/tutorial/manipulate/sandbox
+                title: Part 2b - Using Sandbox
 
+          - url: /overview/tutorial/write/
+            title: Part 3 - Writing data
+            items:
+              - url: /overview/tutorial/write/gooddata
+                title: Part 3b - Writing to GoodData
+
+          - url: /overview/tutorial/automate/
+            title: Part 4 - Automation
+
+          - url: /overview/tutorial/management/
+            title: Part 5 - Management

@@ -11,7 +11,7 @@ data loading using extractors. In this tutorial, you will load four tables into 
 To manully load data go to **Storage** section:
 
 {: .image-popup}
-![Screenhost - Storage Console](/overview/tutorial/load/intro-screen.png)
+![Screenshot - Storage Console](/overview/tutorial/load/intro-screen.png)
 
 In the 
 [*Storage Console*](/storage/) there is a tab *Tables* which lists database tables stored in your project. Tables are 
@@ -40,13 +40,13 @@ directly refer to an URL. For this tutorial we have prepared four sample tables:
 - opportunity - [http://help.keboola.com/overview/tutorial/opportunity.csv](/overview/tutorial/opportunity.csv)
 - account - [http://help.keboola.com/overview/tutorial/account.csv](/overview/tutorial/account.csv)
 - user - [http://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
-- usergoals - [http://help.keboola.com/overview/tutorial/usergoal.csv](/overview/tutorial/usergoal.csv)
+- usergoals - [http://help.keboola.com/overview/tutorial/level.csv](/overview/tutorial/level.csv)
 
 {: .image-popup}
 ![Screenshot - Create a table](/overview/tutorial/load/create-table-2.png) 
 
-You can either load them directly from the URLs above, or download them to your computer and load them 
-by file upload (they are about 6MB total). When you upload a table, you can check its contents in the 
+You can either load them directly from the URLs above, or download them to your computer (they are very small)
+and load them by file upload. When you upload a table, you can check its contents in the 
 *Data sample* tab.
 
 {: .image-popup}
@@ -54,13 +54,11 @@ by file upload (they are about 6MB total). When you upload a table, you can chec
 
 That's it. You should now have four tables with sample data stored in your KBC project. The tables represent 
 business opportunities (*opportunity*), their associated users (*user*) and accounts (*account*). Additionally 
-business goals for each user are specified (*usergoal*). The tables represent real world data, but they are 
-anonymized. You can now go to:
+company levels for each user are specified (*level*). Note: All characters 
+appearing in this data are fictitious. Any resemblance to real persons, living or dead or undead or unborn or 
+otherwise semi-existent is purely coincidental.
+. You can now go to:
 
 - the next step [Data Manipulation](/overview/tutorial/manipulate/)
-- or you can take a brief side step to [Loading data with Extractor](/overview/tutorial/load/extractor/)
-
-
- 
-
-
+- or you can take a brief side step to [Loading data with GoogleDrive Extractor](/overview/tutorial/load/googledrive/)
+- or you can take a brief side step to [Loading data with Database Extractor](/overview/tutorial/load/database/)
