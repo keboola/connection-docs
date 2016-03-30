@@ -3,6 +3,9 @@ title: Part 5 - Management
 permalink: /overview/tutorial/management/
 ---
 
+* TOC
+{:toc}
+
 In the previous steps you learned how to quickly
 [load tables into KBC manually](/overview/tutorial/load/) 
 (or [using extractor](/overview/tutorial/extractor/)), 

@@ -74,3 +74,23 @@ ul.kbc-nav-sidebar li > ul {
 ul.kbc-nav-sidebar li.active > ul {
     display: block;
 }
+
+#markdown-toc {
+    border: solid 2px #ededf0;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 40px;
+    display: inline-block;
+    list-style: none;
+}
+
+#markdown-toc ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+#markdown-toc:before {
+    content: "Table of contents";
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: -20px;
+}
