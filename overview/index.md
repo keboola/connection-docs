@@ -55,10 +55,15 @@ Applications can also augment data (for example, adding Weather or Exchange Rate
 In the background, behind the scenes, there is the *Orchestrator* component which allows everything to be
 fully automated.  Orchestrator enables to run any component (e.g., data extraction) in specified intervals or at specified times of the day.
 
+## Other Commonly Used Terms
+
 ### Jobs
 Most things done in KBC are done using batch approach. This means that when you do some operation, a **Job** is created
 and executed on the background. We also call these jobs **asynchronous***. Multiple jobs can be running at the same 
 time and you can continue your work in the mean time. 
+
+### Token
+Every operation done in KBC must be authorized with a *token*. Each user of KBC is automatically assigned a token on the first login. So every operation he does using the UI is authorized with his token. Apart from that tokens with limited access to some KBC operations can be created (and shared with other people). The principle of token authorization alows you for example to easily [share a single table](/overview/tutorial/managment/#user-management) from your Storage with someone without her having to register to KBC (enter email/password).
 
 ## External Environment Schema
 

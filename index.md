@@ -20,7 +20,7 @@ Feel free to
 - Visit our main web page at [www.keboola.com](http://www.keboola.com/).
 - Send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
 
-To get in touch with our **partners**, please use the following email addresses:
+To get in touch with our [**partners**](/overview/environment/), please use the following email addresses:
 
 - If in Europe, write to [cz.support@keboola.com](mailto:cz.support@keboola.com).
 - If in North America, write to [support.ca@keboola.com](mailto:support.ca@keboola.com).

@@ -1,5 +1,5 @@
 # Keboola Connection Documentation
-
+How to write documentation [http://sites.google.com/a/keboola.com/devel/kbc/dokumentace](http://sites.google.com/a/keboola.com/devel/kbc/dokumentace)
 
 ## Documentation Development
 
