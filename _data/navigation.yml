@@ -17,13 +17,13 @@ items:
           - url: /overview/tutorial/manipulate/
             title: Part 2 - Data Manipulation
             items:
-              - url: /overview/tutorial/manipulate/sandbox
+              - url: /overview/tutorial/manipulate/sandbox/
                 title: Part 2b - Using Sandbox
 
           - url: /overview/tutorial/write/
             title: Part 3 - Writing data
             items:
-              - url: /overview/tutorial/write/gooddata
+              - url: /overview/tutorial/write/gooddata/
                 title: Part 3b - Writing to GoodData
 
           - url: /overview/tutorial/automate/
@@ -37,10 +37,10 @@ items:
       - url: /manipulation/transformations/
         title: Transformations
         items:
-          - url: /manipulation/transformations/python
+          - url: /manipulation/transformations/python/
             title: Python
 
-          - url: /manipulation/transformations/r
+          - url: /manipulation/transformations/r/
             title: R
             items:
               - url: /manipulation/transformations/r/array-splitter/
