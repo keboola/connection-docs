@@ -78,6 +78,7 @@ tryCatch(
 ## Examples
 There are more in-depth examples dealing with:
 
+- [array splitting](/manipuluation/transfornations/r/array-splitter/)
 - [plotting charts & graphs](/manipulation/transformations/r/plots/)
 - [using trained models and binary files](/manipulation/transformations/r/binary/)
 

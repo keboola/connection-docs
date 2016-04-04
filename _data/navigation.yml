@@ -43,6 +43,9 @@ items:
           - url: /manipulation/transformations/r
             title: R
             items:
+              - url: /manipulation/transformations/r/array-splitter/
+                title: Array Splitting
+
               - url: /manipulation/transformations/r/plots/
                 title: Graphs & Charts
 
