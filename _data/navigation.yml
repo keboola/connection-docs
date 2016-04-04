@@ -31,3 +31,22 @@ items:
 
           - url: /overview/tutorial/management/
             title: Part 5 - Management
+  - url: /manipulation/
+    title: Data Manipulation
+    items:
+      - url: /manipulation/transformations/
+        title: Transformations
+        items:
+          - url: /manipulation/transformations/python
+            title: Python
+
+          - url: /manipulation/transformations/r
+            title: R
+            items:
+              - url: /manipulation/transformations/r/plots/
+                title: Graphs & Charts
+
+              - url: /manipulation/transformations/r/binary/
+                title: Using binary files
+
+
