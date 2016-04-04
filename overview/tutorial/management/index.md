@@ -8,7 +8,7 @@ permalink: /overview/tutorial/management/
 
 In the previous steps you learned how to quickly
 [load tables into KBC manually](/overview/tutorial/load/) 
-(or [using extractor](/overview/tutorial/extractor/)), 
+(or [using extractor](/overview/tutorial/load/database/)), 
 [manipulate data using SQL](/overview/tutorial/manipulate/) and then  
 write data into [Tableu BI](/overview/tutorial/write/) (or [GoodData BI](/overview/tutorial/write/gooddata/)) 
 and how to set so that [all these things run automatically](/overview/tutorial/automate/). In this part,

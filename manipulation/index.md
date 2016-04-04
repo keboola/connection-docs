@@ -12,4 +12,4 @@ Choosing between Transformations and Applications chould be based on your capabi
 complexity of the task you need to perform. Both transformations and applications can be used in your orchestrations in 
 exactly the same way. Also if you need to create very complex transformations, or you need a 3rd to develop 
 transformations/applications for you, you should have a look at 
-[Custom Science](http://developer.keboola.com/extend/custom-science/)   
+[Custom Science](http://developers.keboola.com/extend/custom-science/)   

@@ -25,7 +25,7 @@ Create a bucket and name it *tutorial* (optionally you can also add a descriptio
 to select a *Stage* and *Backend*. *Stage* is used
 to further organize buckets. The *in*put stage should be generally used for data loaded from outside into KBC. The *out*put 
 stage should be used for data ready to be written into external systems. This is a purely formal differentiation between raw 
-and processed data. *Backend* refers to database [backend](/storage/backend/) used for storing your data, let's use 
+and processed data. *Backend* refers to database [backend](/storage/) used for storing your data, let's use 
 MySQL for now.
 
 When you are done with the *tutorial* bucket in the *input* stage, creat another *tutorial* bucket in the *output* stage. 

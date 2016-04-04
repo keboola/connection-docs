@@ -63,7 +63,7 @@ and executed on the background. We also call these jobs **asynchronous***. Multi
 time and you can continue your work in the mean time. 
 
 ### Token
-Every operation done in KBC must be authorized with a *token*. Each user of KBC is automatically assigned a token on the first login. So every operation he does using the UI is authorized with his token. Apart from that tokens with limited access to some KBC operations can be created (and shared with other people). The principle of token authorization alows you for example to easily [share a single table](/overview/tutorial/managment/#user-management) from your Storage with someone without her having to register to KBC (enter email/password).
+Every operation done in KBC must be authorized with a *token*. Each user of KBC is automatically assigned a token on the first login. So every operation he does using the UI is authorized with his token. Apart from that tokens with limited access to some KBC operations can be created (and shared with other people). The principle of token authorization alows you for example to easily [share a single table](/overview/tutorial/management/#user-management) from your Storage with someone without her having to register to KBC (enter email/password).
 
 ## External Environment Schema
 

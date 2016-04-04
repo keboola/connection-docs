@@ -28,7 +28,7 @@ And produce a table like:
 | 2        | 3         | sixth     |
 
 ## Prepare 
-You can use a [sample table](/manipulation/transformations/r/array_source.csv) shown above and import it into 
+You can use a [sample table](/manipulation/transformations/r/array-source.csv) shown above and import it into 
 your *Storage*. Then set input and output mapping for the transformation.
 
 {: .image-popup}

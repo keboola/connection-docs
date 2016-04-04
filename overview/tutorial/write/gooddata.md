@@ -213,4 +213,4 @@ top right corner.
 
 This will give you the same chart, we produced in the [Tableu Example](/overview/tutorial/write/).
 This concludes the tutorial to writing data to GoodData BI platform using KBC. You can now:
-continue to [Setting up Automation](/overview/tutorial/automation/) 
+continue to [Setting up Automation](/overview/tutorial/automate/) 
