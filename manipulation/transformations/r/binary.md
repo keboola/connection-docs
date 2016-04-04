@@ -112,3 +112,15 @@ The result table will be stored according to output mapping setting and will loo
 This contains the predicted value and lower and upper bound of the confidence interval. The predicted value was 
 obtained from the (very simple linear) model that was created outside KBC in the first step. This technique with 
 binary files can also be used for other purposes as they can contain virtually any R code or data.
+
+## Running & Debugging Locally
+When you attempt to run the above [transformation locally](/manipulation/transformations/r/#development-tutorial)
+make sure that you:
+
+- Put the R code in the in working directory in a file, e.g. `script.R`.
+- Download the table from input mapping `in.c-r-transformations.cashier-data-predict` and place it inside `in/tables` 
+subdirectory of the working directory into file `cashier-data-predict.csv`.
+- Download file from Storage File Uploads with the tag `predictionModel` and place that
+file inside `in/user` subdirectory of the working directory in file `predictionModel`, make sure that the
+ downloaded file has **no extension**.
+- Make sure that the result R `data.frame` is stored in inside `out/tables` subdirectory in `data-predicted.csv`.

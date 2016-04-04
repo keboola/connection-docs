@@ -89,22 +89,40 @@ The following image shows the directory structure:
 ![Screenshot - Data folder structure](/manipulation/transformations/r/tree.png)
 
 The script itself is expected to reside in the `data` directory, its name is arbitrary. You can use relative directories, 
-so that you can move the script to KBC transformation without any changes.
-
-To replicate the transformation locally, we need to:
+so that you can move the script to KBC transformation without any changes. To develop a Python transformation which takes
+ a [sample CSV file](/manipulation/transformations/r/source.csv) 
+locally, you need to:
 
 - put the R code in the in working directory in a file, e.g. script.R  
-- download all tables from input mapping and place them inside `in/tables` subdirectory of the working directory, e.g
-download table `in.c-r-transformations.cashier-data-predict` into file `cashier-data-predict.csv` 
-- if you use any binary files, then download each file from Storage File Uploads with the specified tag and place that
-file inside `in/user` subdirectory of the working directory, make sure that the downloaded file is 
-named without any extension, e.g. `predictionModel`
-- make sure that the result R `data.frame` is stored in inside `out/tables` subdirectory - e.g. data-predicted.csv.
+- put all tables from input mapping inside `in/tables` subdirectory of the working directory 
+- if you use any binary files, place them inside the `in/user` subdirectory of the working directory,
+ make sure that the is named without any extension,
+- make sure that the result CSV files are stored in inside `out/tables` subdirectory
 
-A finished example of the above is attached below in [data.zip](/manipulation/transformations/r/data.zip) 
-(which is the [binary file example](/manipulation/transformations/r/binary-transformation/)). You can download 
-the zip file and verify that you can execute it in your local R installation. When the script finishes successfully, it
-will create the output file `data-predicted.csv`, you can then use this script in transformations without any modifications.
+Use this sample script:
+{% highlight r %}
+data <- read.csv(file = "in/tables/source.csv");
+
+df <- data.frame(
+  col1 = paste0(data$first, 'ping'),
+  col2 = data$second * 42
+)
+write.csv(df, file = "out/tables/result.csv", row.names = FALSE)
+{% endhighlight %}
+
+A finished example of the above is attached below in [data.zip](/manipulation/transformations/r/data.zip). You can 
+download the zip file and verify that you can execute it in your local R installation. When the script finishes successfully, it
+will create the output file `result.csv`, you can then use this script in transformations without any modifications. To 
+use it in the transformations do:
+
+- upload the [sample CSV file](/manipulation/transformations/r/source.csv) into your Storage
+- set input mapping from that table to `source.csv` (expected by the R script)
+- set ouput mapping from `result.csv` (produced by the R script) to a new table in your Storage
+- copy & paste the script into the transfromation
+- run the transformation
+
+{: .image-popup}
+![Screenshot - Sample Input Output Mapping](/manipulation/transformations/python/sample-io.png)
 
 ### Going further
 The above steps are usually sufficient for daily development and debugging of moderately complex R transformations 
@@ -115,8 +133,6 @@ which has the exact same configuration as the transformation environment, you ca
 ## Examples
 There are more in-depth examples dealing with:
 
-- [array splitting](/manipuluation/transfornations/r/array-splitter/)
+- [array splitting](/manipulation/transformations/r/array-splitter/)
 - [plotting charts & graphs](/manipulation/transformations/r/plots/)
 - [using trained models and binary files](/manipulation/transformations/r/binary/)
-
- 
