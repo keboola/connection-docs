@@ -10,12 +10,13 @@ Other KBC sites available to you:
 
 - [connection.keboola.com](https://connection.keboola.com) -- for logging in into KBC
 - [status.keboola.com](http://status.keboola.com/) -- for getting KBC Status updates (service status and changelog); we recommend subscribing to the feed or monitoring it in a Slack channel to keep up to date.
-- [developers.keboola.com](https://developers.keboola.com) -- for developing a KBC extension  
+- [developers.keboola.com](http://developers.keboola.com) -- for developing a KBC extension  
 - [wiki.keboola.com](http://wiki.keboola.com/) -- for sharing your tips and tricks with other KBC users
 - [blog.keboola.com](http://blog.keboola.com/) -- something to read for data analysts 
 - [500.keboola.com](https://500.keboola.com/) -- something to read for tech geeks
 
 Feel free to
+
 - Check us out on [Twitter](https://twitter.com/keboola_support).
 - Visit our main web page at [www.keboola.com](http://www.keboola.com/).
 - Send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).

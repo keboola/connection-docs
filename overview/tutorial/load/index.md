@@ -31,11 +31,13 @@ Click the plus button to create your first bucket.
 
 Name your bucket *tutorial*; entering a description is optional. 
 Then select the *in*put *Stage* which is used for loading outside data into KBC. 
-Finish by selecting *Backend* that refers to the [backend](/storage/backend/) database storing your data. 
+The distinction between input and output stage is purely conventional differentiation between raw and processed data. 
+Finish by selecting *Backend* that refers to the [backend](/storage/) database storing your data. 
 For now, let's use MySQL.
 
 After that create your second *tutorial* bucket, this time in the *out*put stage; it is used for data ready to be written into external systems. 
 Now you have two buckets: `in.c-tutorial` and `out.c-tutorial`.
+
 
 
 {: .image-popup}

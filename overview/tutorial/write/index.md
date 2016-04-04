@@ -74,7 +74,7 @@ When you save the configuration, you can now export the data set (so far it is o
 clicking on **Export tables to TDE**:
 
 {: .image-popup}
-![Screenshot - Tableau Writer - TDE](/overview/tutorial/write/Tableau-intro-2.png)
+![Screenshot - Tableau Writer - TDE](/overview/tutorial/write/tableau-intro-2.png)
 
 This will create a background job, which generates the TDE file, you can then download the latest version
 of the Tableau Data Export by clicking on the `out.c_tutorial.opportunity_denorm.tde` link. This will offer you to
@@ -170,5 +170,5 @@ operating KBC. You can:
 
 - [return to the tutorial index](/overview/tutorial/) to see for additional steps 
 - or take a brief sidestep showing how to setup [writer to GoodData BI](/overview/tutorial/write/gooddata/)
-- or continue to [Setting up Automation](/overview/tutorial/automation/) 
+- or continue to [Setting up Automation](/overview/tutorial/automate/) 
 - or [talk to us](/)

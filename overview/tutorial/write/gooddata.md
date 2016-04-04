@@ -44,7 +44,7 @@ Storage bucket `in.c-tutorial`. Then create output mapping for tables
 ![Screenshot - Transformation Input & Output Mapping](/overview/tutorial/write/gooddata-transformation-mapping.png)
 
 Use the following four SQL queries, to create the tables in output bucket. There are no modifications to 
-to the *account* table, so we might have also used an [alias](/storage/alias/). 
+to the *account* table, so we might have also used an [alias](/storage/aliases/). 
 
 {% highlight sql %}
 CREATE TABLE tmp_level AS 
@@ -213,4 +213,4 @@ top right corner.
 
 This will give you the same chart, we produced in the [Tableu Example](/overview/tutorial/write/).
 This concludes the tutorial to writing data to GoodData BI platform using KBC. You can now:
-continue to [Setting up Automation](/overview/tutorial/automation/) 
+continue to [Setting up Automation](/overview/tutorial/automate/) 
