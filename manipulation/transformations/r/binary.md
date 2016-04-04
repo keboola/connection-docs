@@ -16,6 +16,8 @@ or that you'd like the results verified before using them in production
 - the model is provided by a 3rd party
 
 In either case it is possible to use a pre-computed model in R transformation using standard R function `save()` and `load()`. 
+You can also [download a sample package](/manipulation/transformations/r/data.zip) 
+for [local development](/manipulation/transformations/r/#development-tutorial). 
 
 ## Prepare
 To demonstrate the use, we'll use an example in which we have a table cashier-data with the following data 
@@ -83,16 +85,17 @@ transformation (allows easy updates; if you need to rollback, just delete the ne
 - If you need multiple files in your R transformation, each one must have different tag (forces clarity).
 - If there is no file with the given tag in file uploads, the transformation will fail.
 
-The following sample script demonstrates the use of the pre-computed model.
+The following sample script demonstrates the use of the pre-computed model. Variable
+`lm` is loaded from the `predictionModel` file.
 
 {% highlight r %}
-data <- read.csv(file = "in/tables/in.c-r-tests.data-predict.csv");
+data <- read.csv(file = "in/tables/cashier-data-predict.csv");
 
 # Load the pre-computed model
 load("in/user/predictionModel")
 
 # Predict unknown values
-predicted <- predict(fit, data, interval = "confidence")
+predicted <- predict(lm, data, interval = "confidence")
 
 # Write the results
 df <- round(data.frame(data, predicted))

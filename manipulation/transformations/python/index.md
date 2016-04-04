@@ -23,6 +23,8 @@ The Python script itself will be compiled to `/data/script.py`. To access input 
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute paths (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`). 
 To access downloaded files use `in/user/tag` or `/data/in/user/tag` path. If you want to dig really deep, you can
 have a look at [full Common Interface specication](http://developers.keboola.com/extend/common-interface/)
+If you need to write temporary files, write them to `/tmp/` folder (do not use the `/data/` folder for
+files you do not wish to exchange with KBC).
 
 ## Python script requirements
 Python language is sensitive to indentation - make sure not to mix tabs and spaces. All files are assumed to be in UTF, putting 
@@ -48,6 +50,43 @@ are stored as CSV files in `in/tables/`, output tables are stored in `out/tables
 
 If you can process the file line-by-line, then the most effective way is to read each line, process it and write 
 it immediately. The following two examples show two ways of reading CSV file and manipulating it.
+
+## Development Tutorial
+To develop and debug Python transformations, you can replicate the execution environment on your local machine. 
+To do so, you need to have [Python installed](https://www.python.org/downloads/), preferably in the same version as we 
+have.
+
+To simulate input and output mapping, all you need to do is create the right directories with right files. 
+The following image shows the directory structure:
+
+{: .image-popup}
+![Screenshot - Data folder structure](/manipulation/transformations/python/tree.png)
+
+The script itself is expected to reside in the `data` directory, its name is arbitrary. You can use relative directories, 
+so that you can move the script to KBC transformation without any changes.
+
+To replicate the transformation locally, we need to:
+
+- put the Python code in the in working directory in a file, e.g. script.py  
+- download all tables from input mapping and place them inside `in/tables` subdirectory of the working directory, e.g
+download table `in.c-r-transformations.cashier-data-predict` into file `cashier-data-predict.csv` 
+- if you use any binary files, then download each file from Storage File Uploads with the specified tag and place that
+file inside `in/user` subdirectory of the working directory, make sure that the downloaded file is 
+named without any extension, e.g. `predictionModel`
+- make sure that the result R `data.frame` is stored in inside `out/tables` subdirectory - e.g. data-predicted.csv.
+
+A finished example of the above is attached below in [data.zip](/manipulation/transformations/r/data.zip) 
+(which is the [binary file example](/manipulation/transformations/r/binary-transformation/)). You can download 
+the zip file and verify that you can execute it in your local R installation. When the script finishes successfully, it
+will create the output file `data-predicted.csv`, you can then use this script in transformations without any modifications.
+You can look at more detailed guide how to use this in the [binary example](/manipulation/transformations/r/binary-example/)
+
+### Going further
+The above steps are usually sufficient for daily development and debugging of moderately complex R transformations 
+(although they do not reproduce the transformation execution environment exactly). To create development environment 
+which has the exact same configuration as the transformation environment, you can use 
+[our docker image](http://developers.keboola.com/extend/docker/running/#running-transformations).
+
 
 ### Working with data using dictionaries
 
