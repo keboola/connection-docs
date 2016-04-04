@@ -45,7 +45,7 @@ then available steps are:
 - [load data using Datababse Extractor](/overview/tutorial/load/database/)
 - [manipulate data using transformations](/overview/tutorial/manipulate/)
 - [write data into Tableu BI](/overview/tutorial/write/)
-- [write data into GoodData BI](/overview/tutorial/gooddata/)
+- [write data into GoodData BI](/overview/tutorial/write/gooddata/)
 
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Editing](/overview/tutorial/automate/orchestration-tasks-2.png)

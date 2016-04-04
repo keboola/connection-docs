@@ -16,6 +16,7 @@ Other KBC sites available to you:
 - [500.keboola.com](https://500.keboola.com/) -- something to read for tech geeks
 
 Feel free to
+
 - Check us out on [Twitter](https://twitter.com/keboola_support).
 - Visit our main web page at [www.keboola.com](http://www.keboola.com/).
 - Send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
