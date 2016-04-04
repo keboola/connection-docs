@@ -10,7 +10,7 @@ data loading using extractors.
 
 In this tutorial, you will load four tables into KBC Storage. 
 The tables represent business opportunities, their associated users and accounts. 
-Additionally company levels for each user are specified. 
+Additionally, company levels for each user are specified. 
 Note: All characters appearing in this data are fictitious. 
 Any resemblance to real persons, living or dead or undead or unborn or otherwise semi-existent is purely coincidental.
 
@@ -20,7 +20,7 @@ To manually load data, go to the **Storage** section:
 ![Screenshot -- Storage Console](/overview/tutorial/load/intro-screen.png)
 
 In the 
-[*Storage Console*](/storage/) there is a tab called *Tables* listing all database tables stored in your project. 
+[*Storage Console*](/storage/), there is a tab called *Tables* listing all database tables stored in your project. 
 The tables are grouped together into *Buckets*. 
 There are two buckets, `in.c-main` and `out.c-main`, ready for you. 
 However, for the purposes of this tutorial, let's create new ones. 
@@ -31,7 +31,7 @@ Click the plus button to create your first bucket.
 
 Name your bucket *tutorial*; entering a description is optional. 
 Then select the *in*put *Stage* which is used for loading outside data into KBC. 
-The distinction between input and output stage is purely conventional differentiation between raw and processed data. 
+The distinction between the input and output stage is purely conventional differentiation between raw and processed data. 
 Finish by selecting *Backend* that refers to the [backend](/storage/) database storing your data. 
 For now, let's use MySQL.
 
