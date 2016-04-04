@@ -35,10 +35,10 @@ The distinction between the input and output stage is purely conventional differ
 Finish by selecting *Backend* that refers to the [backend](/storage/) database storing your data. 
 For now, let's use MySQL.
 
-After that create your second *tutorial* bucket, this time in the *out*put stage; it is used for data ready to be written into external systems. 
+After that prepare your second tutorial bucket, this time in the *out*put stage; it is used for data ready to be written into external systems. 
 Now you have two buckets: `in.c-tutorial` and `out.c-tutorial`.
 
-
+To create the four tables in your input tutorial bucket, hover over its name and click the plus button that appears.
 
 {: .image-popup}
 ![Screenshot -- Create a table](/overview/tutorial/load/create-table.png) 
