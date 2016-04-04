@@ -44,7 +44,7 @@ Storage bucket `in.c-tutorial`. Then create output mapping for tables
 ![Screenshot - Transformation Input & Output Mapping](/overview/tutorial/write/gooddata-transformation-mapping.png)
 
 Use the following four SQL queries, to create the tables in output bucket. There are no modifications to 
-to the *account* table, so we might have also used an [alias](/storage/alias/). 
+to the *account* table, so we might have also used an [alias](/storage/aliases/). 
 
 {% highlight sql %}
 CREATE TABLE tmp_level AS 
