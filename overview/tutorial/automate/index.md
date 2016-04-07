@@ -64,14 +64,24 @@ the data for Tablau, and write them to Tableu Server. Or you can use:
 The above configuration will extract data from database and Google Drive sheet then it will transform
 the data for GoodData, and write them to GoodData project.
 
-Obviously the order of the tasks is important,
-so you can drag them around to the correct order. If you do not have all the tasks set up at the moment, 
-it does not matter, you can safely continue with the next steps.
+Obviously the order of some of the tasks is important - so some tasks must run sequentialy and some tasks can 
+run in paralell. To achieve this there are **orchestration phases**. Tasks which are in a single 
+phase will execute in parallel and phases execute sequentialy. You can drag the phases around so that 
+they are in the correct order. In the above configuration, each task is in its
+own phase, therefore this is a very defensive configuration which executes all tasks sequentially.
 
+You can make this better aranged by using the *Group tasks into phases by component type* action:
+
+{: .image-popup}
+![Screenshot - Orchestration Phases](/overview/tutorial/automate/orchestration-tasks-setup-3.png)
+
+This will group each of extractors, transformations and writers into their own phase to follow the common
+ETL scheme. You can then **Save** the orchestration, If you do not have all the tasks set up at the moment, 
+it does not matter, you can safely continue with the next steps.
 When you are done configuring the tasks, go back to the orchestration setting:
 
 {: .image-popup}
-![Screenshot - Orchestration Tasks Setup End](/overview/tutorial/automate/orchestration-tasks-setup-3.png)
+![Screenshot - Orchestration Tasks Setup End](/overview/tutorial/automate/orchestration-tasks-setup-4.png)
 
 In the orchestration detail, you can now see that there are some tasks configured. You can now run the 
 orchestration manually to test that everything works smoothly by clicking on the play button in top right corner.
