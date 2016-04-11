@@ -6,11 +6,11 @@ items:
         title: Getting Started
         items:
           - url: /overview/tutorial/load/
-            title: Part 1 - Manually Loading Data 
+            title: Part 1 - Manually Loading Data
             items:
               - url: /overview/tutorial/load/googledrive/
                 title: Part 1b - Loading data with GoogleDrive Extractor
-                
+
               - url: /overview/tutorial/load/database/
                 title: Part 1c - Loading data with Database Extractor
 
@@ -31,6 +31,11 @@ items:
 
           - url: /overview/tutorial/management/
             title: Part 5 - Management
+  - url: /extractors
+    title: Extractors
+    items:
+      - url: /extractors/twitter
+        title: Twitter
   - url: /manipulation/
     title: Data Manipulation
     items:
@@ -54,5 +59,3 @@ items:
 
               - url: /manipulation/transformations/r/binary/
                 title: Using binary files
-
-
