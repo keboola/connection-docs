@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker-compose -v
+
+script:
+  - docker-compose run jekyll jekyll build
+
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: help.keboola.com
+  local-dir: _site
+  acl: public_read
+  skip_cleanup: true
+  detect_encoding: true
