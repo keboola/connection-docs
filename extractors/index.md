@@ -3,12 +3,13 @@ title: Extractors
 permalink: /extractors/
 ---
 
+
 {%comment %}
 
 *Extractors* are [KBC components](/overview/) used for gathering data from sources. Typically, they connect to external
 services (like facebook, youtube). But they can also connect directly to an arbitrary database, or process incoming e-mails. For a definitive list of usable extractors, see your project **Extractors** section. Since each extractor connects to a different data source, their configurations might differ greatly
 
-Extractors are designed for automated of data collection (though they can of course always be triggered manually). If you really want to import data ad-hoc manually, see [data import in storage](/storage/import) or consult the corresponding 
+Extractors are designed for automated of data collection (though they can of course always be triggered manually). If you really want to import data ad-hoc manually, see [data import in storage](/storage/import) or consult the corresponding
 [part of tutorial](/overview/tutorial/load/)
 
   - introduction (goal, limits, sources)
