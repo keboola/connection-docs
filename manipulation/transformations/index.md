@@ -13,8 +13,7 @@ We consider transformation a unit of work, that runs a custom process on (a segm
 Think of a transformation as a task you want to achieve - eg. *Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels and sales*. By deconstructing these complex tasks into simple steps allows you to deploy correct tool (*transformation backend*) for each part. Currently we offer these transformation backends
 
  - SQL (MySQL, Redshift, Snowflake)
- - R
- - Python
+ - Script (R, Python)
 
 In a single transformation you can freely mix & match backends. Some tasks are difficult to solve in SQL, so don't be afraid to step in with Python and finish the transformation with SQL again.
 

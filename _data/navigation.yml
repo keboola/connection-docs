@@ -37,6 +37,9 @@ items:
       - url: /manipulation/transformations/
         title: Transformations
         items:
+          - url: /manipulation/transformations/sandbox/
+            title: Sandbox
+
           - url: /manipulation/transformations/python/
             title: Python
 
