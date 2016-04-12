@@ -12,3 +12,4 @@ exclude:
   - Gemfile.lock
   - README.md
   - CNAME
+  - vendor
