@@ -31,11 +31,6 @@ items:
 
           - url: /overview/tutorial/management/
             title: Part 5 - Management
-  - url: /extractors
-    title: Extractors
-    items:
-      - url: /extractors/twitter
-        title: Twitter
   - url: /manipulation/
     title: Data Manipulation
     items:
