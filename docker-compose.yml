@@ -1,5 +1,5 @@
 jekyll:
-  build: .
+  image: quay.io/keboola/docs-jekyll
   tty: true
   stdin_open: true
   volumes:
