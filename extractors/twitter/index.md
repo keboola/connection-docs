@@ -70,7 +70,6 @@ existing rows are updated after each execution.
 
 Following tables are output of the Twitter extractor.
 
-
 ## Table - tweets
 
 - Tweets from `User timeline`, `Mentions` or `Search` tab
