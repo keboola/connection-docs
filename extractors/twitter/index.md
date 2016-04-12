@@ -71,7 +71,7 @@ existing rows are updated after each execution.
 Following tables are output of the Twitter extractor.
 
 
-## Table - tweets
+## Table - tweets
 
 - Tweets from `User timeline`, `Mentions` or `Search` tab
 - Tweets attached to one of previous tweets (It is usually retweeted_status - original Tweet that was retweeted )
