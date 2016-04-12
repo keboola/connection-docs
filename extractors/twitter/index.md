@@ -68,7 +68,7 @@ Extraction job should be started immediately.
 The output of extractor is always **incremental** and **primary keys** are set for all tables so new rows are appended and
 existing rows are updated after each execution.
 
-Following tables are output of the Twitter extractor:
+Following tables are output of the Twitter extractor.
 
 
 ## Table - tweets
