@@ -31,6 +31,13 @@ items:
 
           - url: /overview/tutorial/management/
             title: Part 5 - Management
+
+  - url: /extractors/
+    title: Extractors
+    items:
+      - url: /extractors/pigeon/
+        title: Pigeon Importer
+
   - url: /manipulation/
     title: Data Manipulation
     items:

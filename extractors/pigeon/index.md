@@ -3,77 +3,67 @@ title: Pigeon Importer
 permalink: /extractors/pigeon/
 ---
 
-Pigeon Importer allows you to import data from your e-mail attachments to Storage API (SAPI)
-tables for future work.
-
 * TOC
 {:toc}
 
-## First steps
+Pigeon Importer allows you to import data from e-mail attachments to KBC. Pigeon Importer should be
+used in case you need to extract data from some system which can export data only in form of CSV files attached
+to an email.
+Pigeon Importer may also be used instead of [manualy importing CSV](/overview/tutorial/load/) files in 
+case you need to do so more often.
 
-Pigeon Importer is perfect for situations where CSV data are produced by your system
-and only way you can export them is e-mail. 
+It is important to note that the table is imported only when the extractor runs, i.e the table import is **not** triggered 
+when the email is received (or sent). When the Pigeon Importer runs, it will import all received emails from the time it 
+was last run. Generally, the Pigeon Importer therefore should be set up in 
+a [**scheduled** orchestration](/orchestrator/scheduling/). 
 
-Assume this table as sample CSV produced by that system:
+## Create New Configuration
+Find Pigeon Importer in Extractors section and create new configuration. Each configuration can import multiple
+tables, so you should create multiple configurations if it makes organizational sense (e.g. you would create 
+one configuration for daily data, and a second one for a yearly report).
+
+{: .image-popup}
+![Screenshot - Create New Pigeon Importer Configuration](/extractors/pigeon/01-create-new-config.png)
+
+Choose meaningful name for the configuration:
+
+{: .image-popup}
+![Screenshot - Create Name Confgiruation](/extractors/pigeon/02-choose-name-and-desc.png)
+
+## Create Email Import
+An *Email import* defines the link between and email and a table in Storage. An *Email import* imports a 
+single table into Storage.  
+
+{: .image-popup}
+![Screenshot - Create New Email Import](/extractors/pigeon/03-create-email-import.png)
+
+Choose an existing table from Storage or write new table ID (bucket and table name), you can specify primary 
+key or CSV options if needed.
+
+{: .image-popup}
+![Screenshot - Configure email import](/extractors/pigeon/04-table-id-and-pk.png)
+
+## Test Email Import
+Now you can send e-mail with witch attached data to the generated email address and run email import.
+In case you want to test it, you can use a [sample table](/extractors/pigeon/pigeon-importer-sample.csv):
 
 | date | new | lost | total |
-| ---| --- | --- | --- |
+| --- | --- | --- | --- |
 | 2016-03-29 | 8 | 5 | 256 |
 | 2016-03-30 | 9 | 1 | 264 |
 | 2016-03-31 | 15 | 3 | 276 |
 
-And you need this table to be available to join with other data in Keboola Connection.
+The email message content is completely arbitrary, all that matters is attached CSV file. The file must always be 
+in the format specified in the *Email import*. It can also be [gzipped](http://www.gzip.org/). 
 
-That's the place for Pigeon Importer.
-
-
-### Create New Configuration
-
-Find Pigeon Importer in Extractors section and create new configuration.
+Click on *Run email import* and confirm.
 
 {: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/01-create-new-config.png)
+![Screenshot - List email imports](/extractors/pigeon/05-list-email-imports.png)
 
-Choose meaningful name, you will thank yourself later.
-
-{: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/02-choose-name-and-desc.png)
-
-### Create Email Import
+When you run the import Job, you can follow the UI instructions and navigate to job detail, where you
+can check processed data in imported table. Note that there may be some delay between when the email message is sent 
+and received (and picked up by the importer).
 
 {: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/03-create-email-import.png)
-
-Choose table ID, then primary key if needed.
-
-{: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/04-table-id-and-pk.png)
-
-### Run E-mail Import
-
-Now you can send e-mail with mentioned data as attachment to generated e-mail address and run e-mail import.
-
-Click Run email report.
-
-{: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/05-list-email-imports.png)
-
-Then confirm.
-
-{: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/06-run-email-import.png)
-
-### Check Imported Data
-
-After scheduling job for run, follow the UI instructions and navigate to job detail, where you
-can check processed data in imported table.
-
-{: .image-popup}
-![Pigeon Importer Screenshot](/extractors/pigeon/07-check-processed-data.png)
-
-## Tips and Tricks
-
-- Also gzipped CSVs as attachments are allowed
-- Every CSV file should have its own configuration (otherwise you'll get into error where columns
-differ)
-- To automate downloading of attachments regularly, setup Orchestration
+![Screenshot - Job Detail](/extractors/pigeon/07-check-processed-data.png)
