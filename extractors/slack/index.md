@@ -18,6 +18,6 @@ Choose some meaningful name (you can change it anytime later) of configuration a
 
 
 {: .image-popup}
-![Slack New Configuration](/extractors/twitter/01-new-configuration.png)
+![Slack New Configuration](/extractors/slack/01-new-configuration.png)
 
 *** to be done ***
