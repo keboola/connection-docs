@@ -1,4 +1,7 @@
 # Keboola Connection Documentation
+
+[![Build Status](https://travis-ci.org/keboola/connection-docs.svg?branch=master)](https://travis-ci.org/keboola/connection-docs)
+
 How to write documentation [http://sites.google.com/a/keboola.com/devel/kbc/dokumentace](http://sites.google.com/a/keboola.com/devel/kbc/dokumentace)
 
 ## Documentation Development
