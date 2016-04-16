@@ -18,7 +18,7 @@ in order to create reports and analyze your customers' behavior.
 ## Keboola Connection Overview
 KBC is a complex platform composed of many connected components. The chart below shows how KBC is structured and explains some commonly used terms.
 
-![KBC Structure Chart](/overview/kbc_structure.png)
+![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
 
 ### Data Source / Systems
 Data sources are systems containing data you wish to bring into KBC. They can be pretty much anything from GoogleAnalytics, Facebook, SalesForce
@@ -70,6 +70,6 @@ Every operation done in KBC must be authorized with a *token*. Each user of KBC 
 KBC is a fully cloud environment heavily relaying on Amazon Services. The following chart shows the overview
 of different services and their connections:
 
-![External Environment Schema](/overview/kbc_environment.png)
+![External Environment Schema](/overview/kbc_environment.png){: .img-responsive}
 
 In place of the *Data Consumption*, the GoodData Business Intelligence Analytics platform is shown.

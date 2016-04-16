@@ -15,6 +15,7 @@ The following example will take a table like:
 |----|--------------------|
 | 1  | first,second,third |
 | 2  | fourth,fifth,sixth |
+{: .table}
 
 And produce a table like:
 
@@ -26,6 +27,7 @@ And produce a table like:
 | 2        | 1         | fourth    |
 | 2        | 2         | fifth     |
 | 2        | 3         | sixth     |
+{: .table}
 
 ## Prepare 
 You can use a [sample table](/manipulation/transformations/r/array-source.csv) shown above and import it into 
