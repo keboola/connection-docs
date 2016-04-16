@@ -23,9 +23,9 @@ Documentation will be available at http://localhost:4000
 
 ### Publish
 
-* `git push origin HEAD` - on gh-pages branch
+* `git push origin HEAD` - on `master` branch
 
-New version is published immediately after push by [Github Pages](https://pages.github.com/)
+New version is published immediately after push by [Travis](https://travis-ci.org/keboola/connection-docs)
 
 ### Running in Docker
 
