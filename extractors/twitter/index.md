@@ -97,7 +97,7 @@ Following tables are output of the Twitter extractor.
 | `user_id` | Reference to user who posted this Tweet. Referenced user can be found in `users` with `id` equals to `user_id`. |
 | `withheld_copyright` | When present and set to “true”, it indicates that this piece of content has been withheld due to a DMCA complaint. |
 | `keboola_source` | Source of the tweet - `userTimeline`, `mentions` or `search`. When the same tweet is source of more targets (eq. search and mentions) only one (later imported) source is set.
-
+{: .table}
 
 ## Table - users
 
@@ -120,6 +120,7 @@ Following tables are output of the Twitter extractor.
 | `screen_name` | The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use id_str as a user identifier whenever possible. Typically a maximum of 15 characters long, but some historical accounts may exist with longer names. |
 | `statuses_count` | The number of tweets (including retweets) issued by the user. |
 | `keboola_source` | Source of the user - `followersList`, `userTimeline`, `mentions` or `search`. When the same tweet is source of more targets (eq. search and mentions) only one (later imported) source is set.
+{: .table}
 
 ## Table - tweets-user-mentions
 
@@ -130,6 +131,7 @@ Users mentioned in tweets.
 | `tweets_pk` [PK] |  Id of [tweet](#table---tweets) |
 | `name` | The name of the user, as they’ve defined it. Not necessarily a person’s name. Typically capped at 20 characters, but subject to change. |
 | `screen_name` | The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use id_str as a user identifier whenever possible. Typically a maximum of 15 characters long, but some historical accounts may exist with longer names.  |
+{: .table}
 
 ## Table - tweets-urls
 
@@ -140,7 +142,7 @@ URLs included in the text of a Tweet.
 | `url` [PK] | Wrapped URL, corresponding to the value embedded directly into the raw Tweet text. |
 | `display_url` | Version of the URL to display to clients. |
 | `expanded_url` | Expanded version of display_url. |
-
+{: .table}
 
 ## Table - tweets-hashtags
 
@@ -149,3 +151,4 @@ Hashtags present in tweets.
 | Column | Description |
 | `tweets_pk` [PK] |  Id of [tweet](#table---tweets) |
 | `text` [PK] | Name of the hashtag, minus the leading ‘#’ character. |
+{: .table}
