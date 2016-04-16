@@ -1,0 +1,19 @@
+{% assign parts = include.parts %}
+{% assign current = include.current %}
+
+{% for item in include.items %}
+    {% assign url = current | prepend: '/' | append: '/' %}
+    {% if item.url == url %}
+        {% if parts.size > 0 and item.items %}
+            <li><a href="{{ item.url | prepend: site.baseurl}}">{{ item.title }}</a></li>
+
+            {% assign current = current | append: '/' | append: parts.first %}
+            {% assign parts = parts | join: '/' | remove_first: '/' | remove_first: parts.first | split: '/' %}
+
+            {% include breadcrumbs-item.html items=item.items parts=parts current=current %}
+
+        {% else %}
+            <li>{{ item.title }}</li>
+        {% endif %}
+    {% endif %}
+{% endfor %}

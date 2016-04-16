@@ -1,7 +1,16 @@
-<ul class="kbc-nav-sidebar nav nav-sidebar">
+<ul class="nav">
 {% for item in include.items %}
-    {% assign pageUrlSplitByItemUrl = page.url | split: item.url  %}
-    <li{% if item.url == page.url or page.url contains item.url and pageUrlSplitByItemUrl.first.size == 0 %} class="active"{% endif %}>
+    {% assign pageUrlSplitByItemUrl = page.url | split: item.url %}
+
+    {% if item.url == page.url %}
+    {% assign cssClass = 'current active' %}
+    {% elsif page.url contains item.url and pageUrlSplitByItemUrl.first.size == 0 %}
+        {% assign cssClass = 'active' %}
+    {% else %}
+        {% assign cssClass = '' %}
+    {% endif %}
+
+    <li class="{{ cssClass }}">
         <a href="{{ item.url }}">{{ item.title }}</a>
         {% if item.items %}
         {% include nav-items.html items=item.items %}

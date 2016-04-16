@@ -3,90 +3,91 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Keboola">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/assets/favicon.ico" >
+	<meta name="google-site-verification" content="n1l-N1t6-C7U4LHT357y-Kat9FbKQ-obMm5vSCpPkcA">
 
-	<title>{{ page.title }} | Keboola Connection Knowledge Base</title>
+	<title>{{ page.title }} | Keboola Connection Developers Knowledge Base</title>
 
-	<!-- Custom styles for this template -->
-	<link rel="stylesheet" href="https://d3qqa9wia2dvbu.cloudfront.net/v0.1.77-0-g1e89767/css/kbc.css">
-	<link rel="stylesheet" href="/assets/css/main.css">
-	<link rel="stylesheet" href="/assets/css/highlight.css">
-	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
-	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ '/assets/css/style.css' | prepend: site.baseurl }}">
 </head>
 <body>
-	<nav class="navbar navbar-fixed-top kbc-navbar" role="navigation">
-		<div class="col-xs-3 kbc-logo">
-			<a href="/"><span class="kbc-icon-keboola-logo"></span></a>
-		</div>
-		<div class="col-xs-9 kbc-main-header-container">
-			<div class="kbc-main-header kbc-header">
-				<div class="kbc-title">
-					<h1>{{ page.title }}</h1>
-				</div>
 
-          <ol class="pull-right breadcrumb">
-            {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
-            <li><a href="/">Home</a></li>
-            {% for crumb in crumbs offset: 1 %}
-              {% if forloop.last %}
-                <li>{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</li>
-              {% else %}
-                <li><a href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ol>
+	<div class="root">
+		<div class="container header">
+			<div class="inside">
+				<a href="{{ '/' | prepend: site.baseurl }}" class="logo"><img src="{{ '/assets/img/logo.png' | prepend: site.baseurl }}"></a>
+				<span class="label">USER DOCUMENTATION</span>
 
+				<form class="pull-right" role="search">
+					<input size="20" type="text" class="st-default-search-input form-control" placeholder="Search">
+				</form>
 			</div>
 		</div>
-	</nav>
-	<div class="container-fluid">
-		<div class="row">
 
-			<div class="col-sm-3 col-md-2 kbc-sidebar">
-				<div class="docs-search">
-						<span class="kbc-icon-search"></span>
-						<input class="st-default-search-input form-control" placeholder="Search the docs" value="" autocomplete="off">
+		<div class="container main">
+			<div class="inside">
+				<div class="row">
+
+					<div class="col-md-3 sidebar">
+						<div class="navigation">
+						{% include navigation.html context="/" %}
+						</div>
+					</div>
+					<div class="col-md-9 content">
+
+						<div class="page">
+							{% if page.showBreadcrumbs != false %}
+							{% include breadcrumbs.html %}
+							{% endif %}
+
+							<h1>{{ page.title }}</h1>
+
+						 	{{ content }}
+						</div>
+					</div>
+
 				</div>
-
-				{% include navigation.html context="/" %}
 			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 kbc-main">
-				<div class="container-fluid kbc-main-content">
-
-
-		 {{ content }}
-				</div>
-			</div>
-
 		</div>
+
+		<div class="container footer">
+			<div class="inside">
+				<div class="row">
+					<div class="col-sm-12">
+						<!--Footer-->
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
+	<script type="text/javascript">
+		(function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+					(w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+			e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+		})(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+		_st('install','tM-dZKs7DADT5bRod7bF','2.0.0');
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="{{ '/assets/js/magnific-popup.js' | prepend: site.baseurl }}"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $('.image-popup').magnificPopup({type:'image', delegate:'img',
+		callbacks: {
+		  elementParse: function(item) { item.src = item.el.attr('src'); }
+		}});
 
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-    _st('install','tM-dZKs7DADT5bRod7bF','2.0.0');
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/assets/js/magnific-popup.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.image-popup').magnificPopup({type:'image', delegate:'img',
-        callbacks: {
-          elementParse: function(item) { item.src = item.el.attr('src'); }
-        }});
-    });
-  </script>
+		$('.sidebar .navigation').affix({
+			offset: {
+				top: function() {
+					return $('.container.header').height();
+				}
+			}
+		})
+	});
+	</script>
 </body>
 </html>

@@ -1,0 +1,10 @@
+{% assign parts = page.url | strip | remove_first: '/' | split: '/' %}
+
+{% if parts.size > 0 %}
+{% assign current = parts.first %}
+<ol class="breadcrumb">
+    <li><a href="{{ '/' | prepend: site.baseurl}}">Home</a></li>
+    {% assign parts = parts | join: '/' | remove_first: current | remove_first: '/' | split: '/' %}
+    {% include breadcrumbs-item.html items=site.data.navigation.items parts=parts current=current %}
+</ol>
+{% endif %}
