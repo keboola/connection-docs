@@ -52,7 +52,6 @@ In case you want to test it, you can use a [sample table](/extractors/pigeon/pig
 | 2016-03-29 | 8 | 5 | 256 |
 | 2016-03-30 | 9 | 1 | 264 |
 | 2016-03-31 | 15 | 3 | 276 |
-{: .table}
 
 The email message content is completely arbitrary, all that matters is attached CSV file. The file must always be 
 in the format specified in the *Email import*. It can also be [gzipped](http://www.gzip.org/). 

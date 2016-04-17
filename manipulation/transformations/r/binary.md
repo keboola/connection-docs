@@ -29,7 +29,6 @@ To demonstrate the use, we'll use an example in which we have a table cashier-da
 |  27              |  3006                 |       |
 |  110             |  7456                 |       |
 |  ...             |                       |       |
-{: .table}
  
 The table contains some observed values for customers who visited the shop. Now we'd like to know how much time a 
 customer with 40 items in his basket will spent in the shop. We therefore create another table 
@@ -39,7 +38,6 @@ customer with 40 items in his basket will spent in the shop. We therefore create
 |------------------|
 |  40              |
 |  ...             |
-{: .table}
 
 Only the second table will be used in the actual R transformation. Upload that table to your **Storage**. 
 
@@ -110,7 +108,6 @@ The result table will be stored according to output mapping setting and will loo
 |------------------|-------|-------|-------|
 |  40              |  3481 |  3168 |  3795 |
 |  ...             |       |       |       |
-{: .table}
 
 This contains the predicted value and lower and upper bound of the confidence interval. The predicted value was 
 obtained from the (very simple linear) model that was created outside KBC in the first step. This technique with 
