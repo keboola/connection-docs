@@ -144,8 +144,11 @@ table {
 
 .header {
   .inside {
-    height: 5em;
-    line-height: 5em;
+    line-height: 3em;
+    @media (min-width: $screen-sm-min) {
+      height: 5em;
+      line-height: 5em;
+    }
     margin: 1em;
     .logo {
       display: inline-block;
@@ -158,6 +161,9 @@ table {
       input {
         font-weight: normal;
         display: inline;
+      }
+      @media (min-width: $screen-sm-min) {
+        float: right;
       }
     }
     span.label {
@@ -218,12 +224,15 @@ table {
 .content {
   background-color: #fff;
   .page {
-    padding: 1.8em 2.5em 2em;
+    padding: 1.8em 1em 2em;
     min-height: 100em;
     .breadcrumb {
       margin: 0 0 1em 0;
       padding: 0;
       background-color: transparent;
+    }
+    @media (min-width: $screen-md-min) {
+      padding: 1.8em 2.5em 2em;
     }
   }
 }
