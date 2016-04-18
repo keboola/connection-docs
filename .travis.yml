@@ -9,7 +9,7 @@ before_install:
   - docker-compose -v
 
 script:
-  - docker-compose run jekyll jekyll build
+  - docker-compose run --rm -e JEKYLL_ENV=production jekyll jekyll build
 
 deploy:
   provider: s3
