@@ -35,6 +35,8 @@ items:
   - url: /extractors/
     title: Extractors
     items:
+      - url: /extractors/twitter/
+        title: Twitter
       - url: /extractors/pigeon/
         title: Pigeon Importer
 
