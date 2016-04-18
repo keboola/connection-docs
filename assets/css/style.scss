@@ -137,7 +137,7 @@ table {
 .root {
   .container {
     &.main {
-      background-color: $keboola-violet;
+      background-color: $keboola-gray;
     }
   }
 }
@@ -186,10 +186,10 @@ table {
             display: block;
             padding-left: 1em;
           }
-          background-color: $keboola-violet-light;
+          background-color: $keboola-gray-light;
           &.current {
             > a {
-              background-color: $keboola-violet-lighter;
+              background-color: $keboola-gray-lighter;
               font-weight: bold;
               &:hover {
                 background-color: #fff;
