@@ -30,6 +30,27 @@ table>thead>tr>th, table>thead>tr>td, table>tbody>tr>th, table>tbody>tr>td, tabl
   border: none;
 }
 
+.gsc-control-cse, .gsc-control-cse .gsc-table-result {
+  font-family: "Lato",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+}
+
+.gsc-result .gs-title {
+  height: auto;
+}
+
+.gsc-above-wrapper-area {
+  border-bottom: none;
+}
+
+.gs-result .gs-title, .gs-result .gs-title * {
+  text-decoration: none;  
+}
+
+.gs-result .gs-title:hover {
+  text-decoration: underline;
+}
+
 .cse .gsc-control-cse, .gsc-control-cse {
   padding: 0;
 }
