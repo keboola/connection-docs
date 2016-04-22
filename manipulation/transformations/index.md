@@ -6,6 +6,9 @@ permalink: /manipulation/transformations/
 * TOC
 {:toc}
 
+*See how transformations are an integral part of the workflow in our [Getting Started tutorial](/overview/tutorial/manipulate/).*
+
+
 **Transformation** allows you to manipulate data in your project. Transformation is a task you want to achieve - eg. *Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels and sales*.
 Transformations are grouped into folders called **Transformation buckets** and each transformation within a bucket can use a different backend to perform the task with the most suitable tool or language. Some tasks are difficult to solve in SQL, so don't be afraid to step in with Python and finish the work with SQL again. Currently available backends are:
 
@@ -17,24 +20,57 @@ Transformations are grouped into folders called **Transformation buckets** and e
    - R
    - Python
 
-{: .image-popup}
-![Transformation steps](/manipulation/transformations/transformation-steps.png)
+
 
 ## Mappings
 
-Each transformation has a predefined sets of inputs and outputs.
+Input and output mapping is used to separate the source data from your transformation, so you can be sure, that you SQL code or script won't harm the source tables. Each transformation has a secure workspace with copied data from the tables specified in the input mappings and after the transformation has executed successfully, only tables/files that are defined in the output mappings are brought back to Storage. Any other artifacts (temporary tables/files) are deleted permanently from the transformation workspace when the execution finishes.   
 
-**Input mapping** defines data, that you have in the Storage and want to use in a transformation. This data will be made available as a table (for SQL) or a CSV file (for R and Python).
+{: .image-popup}
+![Simple input and output mapping](./mappings.png)
 
-**Output mapping** takes the results (tables or files) from you transformation and stores it back in Storage. It can create/overwrite/append any table.
+### Input mapping 
 
-## Data flow
+Input mapping defines data, that you have in the Storage and want to use in a transformation. This data will be made available as a table (for SQL) or a CSV file (for R and Python).
 
-Steps of a transformation run in a defined sequential order and are completely independent and isolated. You can store the results of a step in a table in Storage and pick it up from there in a following step.
+{: .image-popup}
+![Input mapping](./input-mapping.png)
+
+Any input mapping has the following options
+
+ - **Source** - Table identifier in Storage
+ - **File name**/**Destination** - Destination file name for your script or table name for your SQL; file names should end with `.csv`
+ - **Columns** - Select columns, if you don't want to import all columns. Saves processing time for larger tables
+ - **Days** - If you're into incremental processing, this comes in handy; imports only rows changed during given number of days (`0` downloads all)
+ - **Data filter** - Download only rows, that will match this single column multiple values filter
+ 
+ You can combine these options freely. Input mappings for Snowflake, MySQL and Redshift have input mappings specific to the backends and include more options
+  
+  - **Data types** (MySQL, Redshift, Snowflake) - Data type for each column (Redshift allows to set [column compression type](http://docs.aws.amazon.com/redshift/latest/dg/t_Compressing_data_on_disk.html) as well)
+  - **Indexes** (MySQL) - Create indexes on the destination table
+  - **Sort key** (Redshift) - Table [sort key](http://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html)
+  - **Dist key** (Redshift) - Table [distribution key](http://docs.aws.amazon.com/redshift/latest/dg/t_Distributing_data.html) and  [distribution style](http://docs.aws.amazon.com/redshift/latest/dg/c_choosing_dist_sort.html)
+  - **COPY options** (Redshift) - Specifies options for the Redshift [COPY command](http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html)
+  - **Table type** (Redshift) - The table can be either completely transferred (using `CREATE TABLE`) or just created as a `CREATE VIEW` from the source table on the same Redshift cluster 
+
+
+### Output mapping
+
+Output mapping takes the results (tables or files) from you transformation and stores it back in Storage. It can create/overwrite/append any table. These tables are typically derived from the tables/files in Input mapping. In SQL transformations you can use any `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE` or `DELETE` queries to create the desired result.
+ 
+![Output mapping](./output-mapping.png)
+ 
+Any output mapping has the following options
+ 
+  - **Source** - Either a table name in the transformation database or a file name (including `.csv`)
+  - **Destination** - Table identifier in Storage
+  - **Incremental** - Use incremental upload to Storage
+  - **Primary key** - Primary key of the destination table, if the table already exists, the primary key must match; feel free to use multi-column primary key
+  - **Delete rows** - Delete rows matching the criteria from the destination table before importing the data
 
 ## Versions
 
-Each change in the transformation configuration creates a new version of the configuration. You can easily access previous versions of all transformations in a bucket and see what's changed.
+Each change in the transformation configuration creates a new version of the whole bucket configuration. You can easily access previous versions of all transformations in a bucket and see what's changed.
 
 ## Developing transformations
 
