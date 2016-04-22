@@ -13,14 +13,12 @@ permalink: /manipulation/transformations/
 Transformations are grouped into folders called **Transformation buckets** and each transformation within a bucket can use a different backend to perform the task with the most suitable tool or language. Some tasks are difficult to solve in SQL, so don't be afraid to step in with Python and finish the work with SQL again. Currently available backends are:
 
  - SQL
-   - MySQL
-   - Redshift
+   - [MySQL](./mysql/)
+   - [Redshift](./redshift/)
    - Snowflake
  - Script
-   - R
-   - Python
-
-
+   - [R](./r/)
+   - [Python](./python/)
 
 ## Mappings
 
