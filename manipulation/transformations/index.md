@@ -15,7 +15,7 @@ Transformations are grouped into folders called **Transformation buckets** and e
  - SQL
    - [MySQL](./mysql/)
    - [Redshift](./redshift/)
-   - Snowflake
+   - [Snowflake](./snowflake/)
  - Script
    - [R](./r/)
    - [Python](./python/)

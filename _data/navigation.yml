@@ -49,6 +49,15 @@ items:
           - url: /manipulation/transformations/sandbox/
             title: Sandbox
 
+          - url: /manipulation/transformations/mysql/
+            title: MySQL
+
+          - url: /manipulation/transformations/redshift/
+            title: Redshift
+
+          - url: /manipulation/transformations/snowflake/
+            title: Snowflake
+
           - url: /manipulation/transformations/python/
             title: Python
 
