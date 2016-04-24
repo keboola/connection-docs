@@ -10,7 +10,19 @@ Redshift transformations use AWS Redshift. You can have your own dedicated clust
    
 For transformations migrating from MySQL to Redshift this [hint sheet](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/redshift-hints) is handy.   
 
-## Limitations and best practices
+## Limits
+
+There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redsift cluster to a larger size these limits can be increased.
+
+### Time
+
+Redshift queries are limited to 3600 seconds by default.
+
+### Resources
+
+All Redshift queries are performed on the cluster assigned to the project. By default there is a limit of 5 concurrent queries. Additional queries will be queued.
+
+## Best practices
 
 ### Quoting
 
