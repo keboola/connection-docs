@@ -61,7 +61,7 @@ Credentials available
 
 ### Connecting to sandbox
 
-Almost any PGSQL client can connect to a AWS Redshift cluster. We have tested Navicat and DBeaver (free) and they both work fine. For a secure connection follow [this guide](http://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html). 
+Almost any PGSQL client can connect to a AWS Redshift cluster. We have tested Navicat and DBeaver (free) and they both work fine, just [follow this guide](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/how-to-set-up-a-redshift-sandbox-using-kbc-dbeaver). For a secure connection follow [this guide](http://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html). 
 
 ### Direct access to Storage tables
 
