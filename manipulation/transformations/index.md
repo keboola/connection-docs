@@ -20,6 +20,50 @@ Transformations are grouped into folders called **Transformation buckets** and e
    - [R](./r/)
    - [Python](./python/)
 
+## Backends
+
+How to decide which backend is appropriate for each task? A rule of thumb is that SQL performs better for joining tables, filtering data, grouping and simple aggregations. Script languages are more suitable for processing one line at a time, raw data processing or custom analytical tasks. 
+
+### SQL
+
+Choosing between MySQL, Redshift and Snowflake can be a matter of your preference or the overall performance. Many projects start with MySQL and as their projects grow, they switch to Redshift on their own dedicated cluster. That unfortunately requires rewriting the SQL code.
+  
+#### MySQL
+
+MySQL is simple yet powerful. 
+
+ - To get the most of it, you need to take care of indexing columns and correct data types (in input mapping). 
+ - It's better to divide large queries into a series of simple queries, that makes the queries easier to optimize. 
+ - Don't be afraid of creating plenty of intermediary or temporary tables.
+ - Always try to materialize the query (use `CREATE TABLE ...` instead of `CREATE VIEW`).
+ - Tooling around MySQL is plenty. 
+
+As a rule of thumb, if your queries last more than single digits minutes or transformations in your orchestration last more than one hour, it's time to switch to Redshift/Snowflake. You can iterate faster on your development, when you don't need to wait long minutes before the next test run is finished. 
+
+#### Redshift
+
+AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. 
+ 
+ - You get your own dedicated cluster, all the power is at your hands.
+ - If your source data is on Redshift, there is no data transfer. 
+ - Redshift is a columnar database - no more indexing, nest JOINs without worries.
+ - Redshift is a bit bitchy about data types (eg. invalid characters).
+ - If a query gets slow, dive into [sort keys](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html), [distribution styles](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html) and [column compression](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html). 
+
+#### Snowflake
+
+We're currently betatesting [Snowflake](http://www.snowflake.net/). It takes all database administration stuff out. No indexes, sort keys, distribution styles, column compressions. Easy scaling, simple data types. Amazing processing power and data throughput. [Let us know](mailto:support@keboola.com) if you want to try! 
+
+{% comment %}
+TODO
+### Script
+ 
+#### R
+ 
+#### Python
+
+{% endcomment %}
+
 ## Mappings
 
 Input and output mapping is used to separate the source data from your transformation, so you can be sure, that you SQL code or script won't harm the source tables. Each transformation has a secure workspace with copied data from the tables specified in the input mappings and after the transformation has executed successfully, only tables/files that are defined in the output mappings are brought back to Storage. Any other artifacts (temporary tables/files) are deleted permanently from the transformation workspace when the execution finishes.   
