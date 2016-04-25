@@ -26,7 +26,7 @@ MySQL transformations use MariaDB 5.5.44, the server is fine tuned for performan
 
 ## Best practices
 
- - To get the most of it, you need to take care of indexing columns and correct data types (in input mapping). 
+ - To get the most of MySQL, you need to take care of [column indexes](http://dev.mysql.com/doc/refman/5.7/en/optimization-indexes.html) and correct [data types](http://dev.mysql.com/doc/refman/5.7/en/data-types.html) (in input mapping). 
  - It's better to divide large queries into a series of simple queries, that makes the queries easier to optimize. 
  - Don't be afraid of creating plenty of intermediary or temporary tables.
  - Always try to materialize the query (use `CREATE TABLE ...` instead of `CREATE VIEW`).
