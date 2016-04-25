@@ -14,11 +14,13 @@ AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and mad
  - Redshift is a bit bitchy about data types (eg. invalid characters).
  - If a query gets slow, dive into [sort keys](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html), [distribution styles](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html) and [column compression](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html). 
 
+## Migration from MySQL
+
 For transformations migrating from MySQL to Redshift this [hint sheet](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/redshift-hints) is handy.   
 
 ## Limits
 
-There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redsift cluster to a larger size these limits can be increased.
+There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redshift cluster to a larger size these limits can be increased.
 
 ### Time
 
