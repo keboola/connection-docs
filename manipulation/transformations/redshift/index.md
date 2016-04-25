@@ -5,9 +5,15 @@ permalink: /manipulation/transformations/redshift/
 
 * TOC
 {:toc}
+ 
+AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. You can have your own dedicated cluster in Keboola Connection or "bring your own cluster" (soon). 
+ 
+ - You get your own dedicated cluster, all the power is at your hands.
+ - If your source data is on Redshift, there is no data transfer. 
+ - Redshift is a columnar database - no more indexing, nest JOINs without worries.
+ - Redshift is a bit bitchy about data types (eg. invalid characters).
+ - If a query gets slow, dive into [sort keys](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html), [distribution styles](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html) and [column compression](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html). 
 
-Redshift transformations use AWS Redshift. You can have your own dedicated cluster in Keboola Connection or "bring your own cluster" (soon).
-   
 For transformations migrating from MySQL to Redshift this [hint sheet](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/redshift-hints) is handy.   
 
 ## Limits
