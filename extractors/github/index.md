@@ -3,7 +3,7 @@ title: GitHub
 permalink: /extractors/github/
 ---
 
-Slack extractor allows you to fetch data from [GitHub](https://github.com/).
+GitHub extractor allows you to fetch data from [GitHub](https://github.com/).
 
 * TOC
 {:toc}
@@ -18,6 +18,22 @@ Choose some meaningful name (you can change it anytime later) of configuration a
 
 
 {: .image-popup}
-![GitHub New Configuration](/extractors/slack/01-new-configuration.png)
+![GitHub New Configuration](/extractors/github/01-new-configuration.png)
 
-*** to be done ***
+## Authorize GitHub Account
+Select the method of authorization:
+
+ - **Instant** - Use this if you have access to GitHub account. The authorization will be done immediately.
+ - **External** - If you need to authorize access to a service from someone who does not have account in Keboola Connection you can generate external link which will guide him through this process.
+
+{: .image-popup}
+![GitHub Authorization](/extractors/github/02-authorize.png)
+
+
+{: .image-popup}
+![GitHub Authorization Selection](/extractors/github/03-authorize-modal.png)
+
+Log in to your GitHub profile:
+
+{: .image-popup}
+![GitHub Login](/extractors/github/04-github-auth.png)
