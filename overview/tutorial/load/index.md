@@ -1,5 +1,5 @@
 ---
-title: Part 1 -- Manually Loading Data
+title: Part 1 - Manually Loading Data
 permalink: /overview/tutorial/load/
 ---
 
@@ -8,7 +8,7 @@ There are multiple ways to load data into KBC. When you are starting with a proj
 If everything goes well and the project goes to production, you will later switch to automatic
 data loading using extractors.
 
-In this tutorial, you will load four tables into KBC Storage.
+In this part of our tutorial, you will load four tables into KBC Storage.
 The tables represent business opportunities, their associated users and accounts.
 Additionally, company levels for each user are specified.
 Note: All characters appearing in this data are fictitious.

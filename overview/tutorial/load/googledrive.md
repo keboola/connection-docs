@@ -1,16 +1,15 @@
 ---
-title: Part 1b - Loading data with GoogleDrive Extractor
+title: Part 1b - Loading Data with GoogleDrive Extractor
 permalink: /overview/tutorial/load/googledrive/
 ---
 
-In the [previous step](/overview/tutorial/load/) you learned, how to quickly load data into
-KBC using manual import. In real production projects, this is seldom used as most of the data are 
-obtained automatically using *extractors*. In this tutorial, you will use a Google Drive extractor to 
-load data from an external data sheet.
+In the [previous step](/overview/tutorial/load/), you learned how to quickly load data into KBC using manual import. 
+In real production projects, this is seldom used as most of the data is obtained automatically using *extractors*. 
+In this part of the tutorial, you will use a Google Drive extractor to load data from an external data sheet.   
 
-Google Drive is a common method for sharing small reference tables between different organizations. Lets 
-assume that someone shared a *level* table with you through Google Drive. Well, because no one actually did
-you have to pretend it and create a Google spreadsheet from [level.csv](/overview/tutorial/level.csv) file.
+Google Drive is a common method for sharing small reference tables between different organizations. 
+For our purposes, create a Google spreadsheet from the [level.csv](/overview/tutorial/level.csv) file. 
+Let's pretend someone shared the *level* table with you through Google Drive. 
 
 ## Prepare
 Go to [Google Spreadsheets](https://docs.google.com/spreadsheets) and *Start a new Blank Spreadsheet*. Then go to
@@ -22,93 +21,110 @@ Go to [Google Spreadsheets](https://docs.google.com/spreadsheets) and *Start a n
 
 ## Configure the GoogleDrive Extractor
 
-Go to *Extractors* in KBC and find *Google Drive* extractor. You can see that there are plenty of prepared 
-extractors, so it's a good idea to use the search box. Also note that if your favorite app is not listed, it
+Go to *Extractors* in KBC and use the search box to find the *Google Drive* extractor. If your favorite app is not listed, it
 certainly does **not** mean that we can't extract data from it.
 
 {: .image-popup}
 ![Extractors Overview Screenshot](/overview/tutorial/load/extractor-intro.png)
 
-Each KBC extractor can have multiple *configurations*. This concept allows you to extract data from e.g. 
-multiple Google accounts. So far, there are no configurations of the Google Drive Extractor, so click
-on *Create New Configuration*. Lets name the configuration *Social media followers* because the the file we 
-want to extract contains goals for number of followers for each user.
+Each KBC extractor can have multiple *configurations*. This concept allows you to extract data from, for example, 
+multiple Google accounts. So far, there are no configurations of the Google Drive Extractor. 
+Click on *Create New Configuration* and name the new configuration *User Levels*; the file we 
+want to extract contains seniority level of each user.
 
 {: .image-popup}
 ![Create Google Drive Configuration](/overview/tutorial/load/extractor-google-drive-create.png)
 
-Once the configuration is created, you can't do much unless you authorize the extractor to access the 
-spreadsheet. 
+Then authorize the extractor to access the spreadsheet by clicking the *Authorize Google Account* button.
 
 {: .image-popup}
 ![Google Drive Configuration Start](/overview/tutorial/load/extractor-google-drive-intro.png)
 
-Click the *Authorize Google Account* button.
+There are two basic authorization options: *Instant Authorization* and *External Authorization*. The latter is
+useful when someone wants to share their document with you without sharing their account directly. 
+Use *Instant Authorization* now.
 
 {: .image-popup}
 ![Google Drive Authorization Start](/overview/tutorial/load/extractor-google-drive-authorize.png)
 
-There are two basic options *Instant Authorization* and *External Authorization*. The latter is
-useful when someone wants to share his document with you, but does not want to share his account with
-you directly. At this moment, you can use *Instant Authorization*:
+On the following screen, click *Allow*.
 
 {: .image-popup}
 ![Google Drive Authorization End](/overview/tutorial/load/extractor-google-drive-authorize-2.png)
 
-When the extractor is authorized, you can proceed with selecting the files you want to import.
+Now select the files you want to import into the authorized extractor.
 
 {: .image-popup}
 ![Google Drive Select Documents](/overview/tutorial/load/extractor-google-drive-select.png)
 
-Find the spreadsheet named *level* (or whatever you named it)
+Find and select your spreadsheet document named *level*.
 
 {: .image-popup}
 ![Google Drive Selected Document](/overview/tutorial/load/extractor-google-drive-selected.png)
  
-Once the spreadsheet documents are selected, you need to select individual spreadsheets.  
-Our document 'level' contains only a single sheet 'level', so select that one.
+Then select the individual sheet. Click on the 'level' bar below the sheet search box. 
+Our 'level' document contains only one 'level' sheet, so select that one. 
+It will appear on the right side of the screen as one of the *Sheets to Be Added to Project*.
 
 {: .image-popup}
 ![Google Drive Selected Documents](/overview/tutorial/load/extractor-google-drive-select-sheets.png) 
 
-Save the configuration and you should obtain a result like the one below. You can then *Run Extraction*.
-This will create a background job which will extract the selected sheet from the Google Drive document
-and then it will load it into the Storage.
+Save the configuration by clicking the *Save* button in the upper right corner of the screen. 
+You should obtain a result like the one below. Then, click on the *Run Extraction* command on the right.
+This will create a background job extracting the selected sheet from the Google Drive document
+and loading it into Storage.
 
 {: .image-popup}
 ![Google Drive Results](/overview/tutorial/load/extractor-google-drive-result.png) 
 
-The Extractor automatically creates the output bucket and table - here it is 
-`in.c-ex-google-drive-userlevels.0-level`. You can check the contents of the table 
-by clicking on its name (after the job has been finished).
+The Extractor automatically creates an output bucket and table - here it is 
+`in.c-ex-google-drive-userlevels.0-level`. Click on the name of the output table to check its contents.
 
 {: .image-popup}
 ![Google Drive Result Table Detail](/overview/tutorial/load/extractor-google-drive-table-detail.png) 
 
-## Aftermath
-This concludes an example setup of a Google Drive Extractor. To be consistent with the rest of this tutorial, we
-would like the result table of the extractor be `in.c-tutorial.level` so as to be consistent with what 
-you have done in the [previous step](/overview/tutorial/load/) of this tutorial.
+
+To be consistent with the rest of this tutorial and with what 
+you have done in its [previous step](/overview/tutorial/load/), 
+we would like the result table of the extractor to be `in.c-tutorial.level`.
+
+
+This concludes our example setup of a Google Drive Extractor. To be consistent with the rest of this tutorial and with what 
+you have done in its [previous step](/overview/tutorial/load/), 
+we would like the result table of the extractor to be `in.c-tutorial.level`.
 
 This step is not at all technically necessary, you can replace `in.c-tutorial.level` with
 `in.c-ex-google-drive-userlevels.0-level` in the following examples, or you can go
 to Storage and delete the table `in.c-tutorial.level`
 
+## Aftermath
+
+This concludes our example setup of a Google Drive Extractor. 
+
+If you want to use the table created in this side-step in the rest of the tutorial, you have two options:
+
+1. Replace `in.c-tutorial.level` with `in.c-ex-google-drive-userlevels.0-level` in the following steps.
+2. Ensure this table is accessible under the `in.c-tutorial.level` name using an alias table, as described below.
+
+#### Creating an Alias Table
+
+First, go to Storage and delete the table `in.c-tutorial.level` you manually loaded in the first part of the tutorial.
+
 {: .image-popup}
 ![Storage Delete Table Screenshot](/overview/tutorial/load/storage-delete-table.png) 
 
-Then create a new *Alias Table*. An alias table behaves like a [Database View](https://en.wikipedia.org/wiki/View_(SQL))
-- it does not contain any data, it is simply a link to some existing data.
+Then create a new *Alias Table*. It behaves like a [Database View](https://en.wikipedia.org/wiki/View_(SQL))
+as it does not contain any data. It is simply a link to already existing data.
 
 {: .image-popup}
 ![Storage Delete Table Create Alias Screenshot](/overview/tutorial/load/storage-create-alias.png) 
 
-In the configuration popup, select the table `in.c-ex-google-drive-userlevels.0-level` as 
-a *Source Table* and write `level` as the alias *Name*. 
+In the configuration popup, select the `in.c-ex-google-drive-userlevels.0-level` table as 
+the *Source Table* and write `level` as the alias *Name*. 
 
 {: .image-popup}
 ![Storage Delete Table Create Alias configuration Screenshot](/overview/tutorial/load/storage-create-alias-2.png) 
 
-You can now continue with the [rest of the tutorial](/overview/tutorial/manipulate/) or take a side step
-to configure also a [database extractor](/overview/tutorial/load/database/).
+Continue with the [rest of the tutorial](/overview/tutorial/manipulate/), or take a side step
+to configure a [database extractor](/overview/tutorial/load/database/).
 

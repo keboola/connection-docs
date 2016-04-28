@@ -3,7 +3,7 @@ title: Keboola Connection Overview
 permalink: /overview/
 ---
 
-Keboola Connection (KBC) is a cloud platform for interconnecting diverse systems. It is used to:
+Keboola Connection (KBC) is a cloud platform for interconnecting diverse systems. It is used to
 
 - *extract* data from a source system, 
 - *manipulate* and augment the extracted data with other data, and finally, 
@@ -25,14 +25,15 @@ Data sources are systems containing data you wish to bring into KBC. They can be
 to on-premise databases, legacy systems or even appliances and IoT devices. Data source is not part of KBC.
 
 ### Extractors
-*Extractors* are KBC components used for gathering data from sources. Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
+*Extractors* are KBC components used for gathering data from sources. 
+Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
 services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
 
 ### Storage
 *Storage* is the central KBC subsystem managing everything related to storing data and accessing it.
 It is implemented as a layer on top of various database engines that we use as our *backends* ([Mysql](https://www.mysql.com/),
-[Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). Storage provides an important API (Storage API) access for
-other KBC components and 3rd party applications.
+[Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). 
+Storage provides an important API (Storage API) access for other KBC components and 3rd party applications.
 
 ### Transformations
 *Transformations* are the first part of data manipulation. The transformation engine is tasked with modifying the data in Storage.
@@ -41,29 +42,37 @@ It picks data from Storage, manipulates it and then stores it back. Transformati
 [Python](https://www.python.org/about/).
 
 ### Recipes (Applications)
-Recipes and *Applications* form the second part of data manipulation. Applications allow you to enrich the data in Storage.  Unlike the free-form Transformations, these are predefined blocks which can be used to do some pretty
+Recipes and *Applications* form the second part of data manipulation. Applications allow you to enrich the data in Storage. 
+Unlike the free-form Transformations, these are predefined blocks which can be used to do some pretty
 advanced stuff like sentiment analysis, association discovery, or histogram grouping.
-Applications can also augment data (for example, adding Weather or Exchange Rates). They actually call on *3rd party services* to bring in additional data. Applications can also be completely created by 3rd party developers - KBC is a very open environment.
+Applications can also augment data (for example, add Weather or Exchange Rates). 
+They actually call on *3rd party services* to bring in additional data. 
+Applications can also be completely created by 3rd party developers - KBC is a very open environment.
 
 ### Writers
 *Writers* are KBC components delivering output data from KBC into the systems and applications where the data gets used/consumed.
 
 ### Data Consumption
-*Data Consumption* is represented by 3rd party systems that accept (or extract) data from KBC and use it further. These may be business intelligence analytics or visualization systems, but also e-mail marketing, CRM, or simply any system that can help our customers to realize the extra value KBC adds to the data.
+*Data Consumption* is represented by 3rd party systems that accept (or extract) data from KBC and use it further. 
+These may be business intelligence analytics or visualization systems, but also e-mail marketing, CRM, 
+or simply any system that can help our customers to realize the extra value KBC adds to the data.
 
 ### Orchestrator / Scheduler
 In the background, behind the scenes, there is the *Orchestrator* component which allows everything to be
-fully automated.  Orchestrator enables to run any component (e.g., data extraction) in specified intervals or at specified times of the day.
+fully automated. Orchestrator enables to run any component (e.g., data extraction) in specified intervals or at specified times of the day.
 
 ## Other Commonly Used Terms
 
 ### Jobs
-Most things done in KBC are done using batch approach. This means that when you do some operation, a **Job** is created
-and executed on the background. We also call these jobs **asynchronous***. Multiple jobs can be running at the same 
-time and you can continue your work in the mean time. 
+Most things in KBC are done using the batch approach; when you do some operation, a **Job** is created
+and executed in the background. We also call these jobs **asynchronous***. Multiple jobs can be running at the same 
+time and you can continue your work in the meantime. 
 
 ### Token
-Every operation done in KBC must be authorized with a *token*. Each user of KBC is automatically assigned a token on the first login. So every operation he does using the UI is authorized with his token. Apart from that tokens with limited access to some KBC operations can be created (and shared with other people). The principle of token authorization alows you for example to easily [share a single table](/overview/tutorial/management/#user-management) from your Storage with someone without her having to register to KBC (enter email/password).
+Every operation done in KBC must be authorized with a *token*. Each KBC user is automatically assigned a token on their first login. 
+Apart from that, tokens with limited access to some KBC operations can be created (and shared with other people). 
+The principle of token authorization alows you, for example, to easily [share a single table](/overview/tutorial/management/#user-management) 
+from your Storage with someone without them having to register to KBC (enter email/password).
 
 ## External Environment Schema
 

@@ -17,9 +17,9 @@ Other KBC sites available to you:
 
 Feel free to
 
-- Check us out on [Twitter](https://twitter.com/keboola_support).
-- Visit our main web page at [www.keboola.com](http://www.keboola.com/).
-- Send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
+- check us out on [Twitter](https://twitter.com/keboola_support).
+- visit our main web page at [www.keboola.com](http://www.keboola.com/).
+- send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
 
 To get in touch with our [**partners**](/overview/environment/), please use the following email addresses:
 
