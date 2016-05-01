@@ -8,10 +8,10 @@ Twitter extractor allows you to fetch data from [Twitter](https://twitter.com/).
 * TOC
 {:toc}
 
-# Configuring Extractor
+## Configuring Extractor
 To configure your Twitter extractor please follow these steps:
 
-## Create new configuration
+### Create new configuration
 
 Find Twitter in Extractors section and create new configuration.
 Choose some meaningful name (you can change it anytime later) of configuration and continue.
@@ -20,7 +20,7 @@ Choose some meaningful name (you can change it anytime later) of configuration a
 {: .image-popup}
 ![Twitter New Configuration](/extractors/twitter/01-new-configuration.png)
 
-## Authorize Twitter Account
+### Authorize Twitter Account
 Select the method of authorization:
 
  - **Instant** - Use this if you have access to Twitter account. The authorization will be done immediately.
@@ -33,7 +33,7 @@ Select the method of authorization:
 {: .image-popup}
 ![Twitter Authorization Selection](/extractors/twitter/03-authorize-modal.png)
 
-## Data Selection
+### Data Selection
 Now you can configure what you want to fetch from Twitter. The options are:
 
  - **User Timeline** - Returns a collection of the most recent Tweets posted by the user indicated by the [Screen Name](#how-to-get-user-screen-name).
@@ -50,27 +50,27 @@ When you are done click `Save` to save the configuration.
 {: .image-popup}
 ![Twitter Data Selection](/extractors/twitter/04-authorized.png)
 
-## Run Extractor
+### Run Extractor
 When the extractor is configured you can run extraction by hitting the Run button.
 Extraction job should be started immediately.
 
 {: .image-popup}
 ![Twitter Job](/extractors/twitter/06-twitter-job.png)
 
-### How to get user screen name
+#### How to get user screen name
 
 {: .image-popup}
 ![Twitter Screen Name](/extractors/twitter/05-screen-name.png)
 
 
-# Extraction Output
+## Extraction Output
 
 The output of extractor is always **incremental** and **primary keys** are set for all tables so new rows are appended and
 existing rows are updated after each execution.
 
 Following tables are output of the Twitter extractor.
 
-## Table - tweets
+### Table - tweets
 
 - Tweets from `User timeline`, `Mentions` or `Search` tab
 - Tweets attached to one of previous tweets (It is usually retweeted_status - original Tweet that was retweeted )
@@ -98,7 +98,7 @@ Following tables are output of the Twitter extractor.
 | `withheld_copyright` | When present and set to “true”, it indicates that this piece of content has been withheld due to a DMCA complaint. |
 | `keboola_source` | Source of the tweet - `userTimeline`, `mentions` or `search`. When the same tweet is source of more targets (eq. search and mentions) only one (later imported) source is set.
 
-## Table - users
+### Table - users
 
 - Users from `Followers List` tab
 - Users attached to tweets
@@ -120,7 +120,7 @@ Following tables are output of the Twitter extractor.
 | `statuses_count` | The number of tweets (including retweets) issued by the user. |
 | `keboola_source` | Source of the user - `followersList`, `userTimeline`, `mentions` or `search`. When the same tweet is source of more targets (eq. search and mentions) only one (later imported) source is set.
 
-## Table - tweets-user-mentions
+### Table - tweets-user-mentions
 
 Users mentioned in tweets.
 
@@ -130,7 +130,7 @@ Users mentioned in tweets.
 | `name` | The name of the user, as they’ve defined it. Not necessarily a person’s name. Typically capped at 20 characters, but subject to change. |
 | `screen_name` | The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use id_str as a user identifier whenever possible. Typically a maximum of 15 characters long, but some historical accounts may exist with longer names.  |
 
-## Table - tweets-urls
+### Table - tweets-urls
 
 URLs included in the text of a Tweet.
 
@@ -140,7 +140,7 @@ URLs included in the text of a Tweet.
 | `display_url` | Version of the URL to display to clients. |
 | `expanded_url` | Expanded version of display_url. |
 
-## Table - tweets-hashtags
+### Table - tweets-hashtags
 
 Hashtags present in tweets.
 
