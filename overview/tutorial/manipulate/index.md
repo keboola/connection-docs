@@ -3,83 +3,80 @@ title: Part 2 - Data Manipulation
 permalink: /overview/tutorial/manipulate/
 ---
 
-In the [previous step](/overview/tutorial/load/) you learned, how to quickly load data into
-KBC and you should now have tables *account*, *opportunity*, *user* and *usergoal* in bucket 
-*in.c-tutorial*. In this part of the tutorial you will learn how to manipulate with data in storage 
-using Transformations. We will create a denormalized table from the input tables and do some
-minor modifications to it.
+At this point, you already know how to quickly [load data into KBC](/overview/tutorial/load/),
+and your *in.c-tutorial* bucket contains four new tables: *account*, *opportunity*, *level* and *user*. 
+In this part of the tutorial, we will show you how to manipulate data in Storage using Transformations. 
+Let's create a denormalized table from the input tables and do some minor modifications to it.
 
-To create a transformation, go to **Transformations** section:
+To start, go to the **Transformations** section:
 
 {: .image-popup}
 ![Screenshot - Transformations Console](/overview/tutorial/manipulate/transformations-intro.png)
 
 Like tables, Transformations are organized into *buckets*. Each transformation bucket can contain any number
-of individiual transformations and it should represent a logical set (container) of operations you want to perform together.
-Before you can start with transformations, you must create a bucket. Lets name the bucket *Opportunity*. 
+of individual transformations. It should represent a logical set (container) of operations you want to perform together.
+Before you start with transformations, create a bucket and call it *Opportunity*. 
 
 {: .image-popup}
 ![Screenshot - Create a Transformation Bucket](/overview/tutorial/manipulate/transformations-create-bucket.png)
 
-When the bucket is created, you can create individual transformations by clicking on *Add Transformation*. Each 
-transformation must have a *Name* and *Backend*. Backend is the engine running the transformation script, it can be
-a database server (MySQL, Redshift, Snowflake) or a language interpreter (R, Python). Create a new tranformation
-*Denormalize opportunities* on the *MySQL* backend.
+Then click on *Add Transformation* in the upper right corner to create an individual transformation. 
+Make sure to enter its *Name* and select *Backend*. A backend is the engine running the transformation script;
+it is either a database server (MySQL, Redshift, Snowflake) or a language interpreter (R, Python). 
+Name your transformation *Denormalize opportunities*, and choose the *MySQL* backend.
 
 {: .image-popup}
 ![Screenshot - Create a Transformation](/overview/tutorial/manipulate/transformations-create.png)
 
 When you create a transformation, you need to enter three things:
 
-- *Input mapping* - definition of what tables will be used in the Transformation  
-- *Transformation script* - SQL queries which define what will happen with the data 
-- *Output mapping* - definition of what tables will be put into Storage
+- *Input Mapping* - what tables will be used in the Transformation,  
+- *Transformation Script* - SQL queries defining what will happen with the data, and 
+- *Output Mapping* - what tables will be written into Storage.
 
-The *Input mapping* is there to select the tables you will use in your transformation. Tables not 
-mentioned in Input Mapping cannot be used in the transformation. The *Output Mapping* is there to
-select what tables will be written to Storage. Tables from Storage not mentioned in the output mapping will 
-never be modified. Tables from Transformation not mentioned in the output mapping will not be permanently 
-stored (i.e. they are temporary). The transformation script itself should therefore take the tables from
-*input mapping*, modify them and produce tables referenced in *output mapping*.
+Tables not mentioned in *Input Mapping* cannot be used in the transformation. 
+Tables from Storage not mentioned in *Output Mapping* will never be modified nor permanently stored (i.e. they are temporary). 
+*Transformation Script* itself takes the tables from *Input Mapping*, modifies them and produces tables referenced in *Output Mapping*.
 
-The concept of input/output mapping is an important safeguard when you are manipulating with your data. Thanks
-to it, there is no way to modify unwanted tables by accident. The only tables which are modifed by your transformation
-are those explicitly specified in the output mapping.  
+The concept of the input/output mapping is an important safeguard when you are manipulating your data. 
+Thanks to it, there is no way to modify unwanted tables by accident. 
+The only tables which are modified by your transformation are those explicitly specified in *Output Mapping*.  
 
-Lets start with setting the Input mapping by clicking on the *Add Input* button.
+Let's start with setting the input mapping by clicking on the *Add Input* button.
 
 {: .image-popup}
 ![Screenshot - Add input mapping](/overview/tutorial/manipulate/transformation-input.png)
 
-The source field in input mapping refers to Storage. In the *source* field, select the source table `in.c-tutorial.account`. 
-You can do fulltext search in the select field, so typying `acc` will give you the table as well. In the 
-*destination* field, the table name `account` is automatically filled for you. This is the name of the 
-table inside the transformation. *Create* the input mapping.
+The *source* field in the input mapping refers to Storage. Select `in.c-tutorial.account` as the source table. 
+You can do a full text search in the select field; typing `acc` will give you the table as well. 
+In the *destination* field, the table name `account` is automatically filled for you. 
+This is the name of the table inside the transformation. *Create* the input mapping.
 
-Add the tables `opportunity`, `user` and `level` in the same way. And you should end up with the following configuration:
+Add the remaining three tables: `opportunity`, `user` and `level`. You will get the following configuration:
 
 {: .image-popup}
 ![Screenshot - Input mapping result](/overview/tutorial/manipulate/transformation-input-end.png)
 
-Lets continue with setting up *Output mapping* by clicking on the *Add Output* button.
+Continue with setting up *Output Mapping* by clicking on the *Add Output* button.
 
 {: .image-popup}
 ![Screenshot - Add output mapping](/overview/tutorial/manipulate/transformation-output.png)
 
-The source field in output mapping refers to the Transformation. In the *source* field, enter e.g.
-`opportunity_denorm` - we don't have this table yet, we will have to create it in the transformation.
-The *destination* field referes to the name of the table in Storage. Enter 
-`out.c-tutorial.opportunity_denorm` which will create a table `opportunity_denorm` in bucket `tutorial` in
-the *out*put stage in Storage. This table does not exist either, but it will be created once the 
-transformation runs. You should obtain the following result when you create the output mapping:
+Enter `opportunity_denorm` into the *source* field in the output mapping; the source field refers to the transformation.
+This table does not exist yet. We will create it in the transformation.
+
+The *destination* field refers to the name of the table in Storage. Enter `out.c-tutorial.opportunity_denorm`. 
+It will create the `opportunity_denorm` table in the `tutorial` bucket in the *out*put stage in Storage. 
+This table does not exist either, but it will be created once the transformation runs. 
+After you finish the output mapping, you will see this:
 
 {: .image-popup}
 ![Screenshot - Output mapping result](/overview/tutorial/manipulate/transformation-output-end.png)
 
-Note that the `opportunity_denorm` table shows *N/A* size, this is correct, because the table does not exist yet.
-You can now write the transformation script which will produce that table from tables
-`account`, `opportunity` and `user`. To save you some time, we already prepared the necessary SQL queries for
-you:
+The size of the `opportunity_denorm` table shows as *N/A* because the table does not exist yet.
+
+To produce that table from tables `account`, `opportunity` and `user`, click *Edit Queries* and write the transformation script. 
+To save you some time, we have already prepared the necessary SQL queries for you:
 
 {% highlight sql %}
 CREATE TABLE tmp_level AS 
@@ -111,18 +108,23 @@ CREATE TABLE opportunity_denorm AS
 {: .image-popup}
 ![Screenshot - Transformation Queries](/overview/tutorial/manipulate/transformation-queries.png)
 
-In the first query, we change the user level descriptions into something more clear. In the second query
-we compute deal opportunity quality level based. In the third query, we denormalize all four tables into a 
-single one. We prepared the single table so that it will load nicely into 
-Tableu.
+In the first query, we change the user level descriptions into something more clear. 
+In the second query, we compute the quality level for each deal opportunity based on the estimated probability of closing the deal. 
+In the third query, we denormalize all four tables into a single one. 
+We have prepared the single table so that it will load nicely into Tableau.
 
 {: .image-popup}
 ![Screenshot - Run Transformation](/overview/tutorial/manipulate/transformations-intro-3.png)
 
 
-You can now click on *Run Transformation*, this will create a background job, 
-which will get the specified tables from Storage, put them in a transformation database, execute the queries and
-store the result in Storage again. You can now:
+Save the queries and then click on *Run Transformation*. This will create a background job which will 
+
+- get the specified tables from Storage,
+- put them in a transformation database, 
+- execute the queries, and 
+- store the result in Storage again. 
+
+Having learned to set up a transformation, you can now
   
-- continue with the next step [Writing data](/overview/tutorial/write/)
-- or you can take a brief side step to [Using Sandbox](/overview/tutorial/manipulate/sandbox/)
+- continue with the next [Writing Data](/overview/tutorial/write/) step, or
+- take a brief side step to [Using Sandbox](/overview/tutorial/manipulate/sandbox/).
