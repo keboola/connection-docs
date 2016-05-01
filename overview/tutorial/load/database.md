@@ -32,7 +32,7 @@ Name the configuration.
 {: .image-popup}
 ![Screenshot - Create a new Database Extractor Configuration](/overview/tutorial/load/extractor-db-create.png) 
 
-Now, setup credentials to the source database. Set
+Now, set up credentials to the source database. Set
 
 - **Driver** to `MySQL`,
 - **Host** to `datagirls.keboola.com`,
