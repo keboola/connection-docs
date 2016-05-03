@@ -33,7 +33,7 @@ meet the following requirements.
 
 ### Packages
 You can list extra packages in the UI. These packages are installed using [pip](https://pypi.python.org/pypi/pip).
-Generally any package available on [PyPI](https://pypi.python.org/) can be installed. However some packages have external
+Generally any package available on [PyPI](https://pypi.python.org/pypi) can be installed. However some packages have external
 dependencies which might not be available, contact us on support if you run into problems.
 When the package is installed you still need to `import` from it.
 

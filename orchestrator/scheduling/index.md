@@ -1,6 +1,6 @@
 ---
 title: Scheduling
-permalink: /orchestrator/scheduling
+permalink: /orchestrator/scheduling/
 ---
 
 {%comment %}

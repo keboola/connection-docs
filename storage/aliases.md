@@ -1,6 +1,6 @@
 ---
 title: Storage Aliases
-permalink: /storage/aliases
+permalink: /storage/aliases/
 ---
 
 {% comment %}
