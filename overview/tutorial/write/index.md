@@ -54,7 +54,7 @@ represent the type of values stored in the column. Additionally, you can `IGNORE
 into Tableau at all.
 
 Since most columns ins the `opportunity_denorm` table are strings (characters), you can start 
-with `Set All Columns to` and select `string` to quickly set them. Then use the **Preview** to peek at
+with `Set All Types to` and select `string` to quickly set them. Then use the **Preview** to peek at
 the contents of each column and set its type accordingly.
 
 {: .image-popup}
