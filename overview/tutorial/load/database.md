@@ -73,6 +73,9 @@ Running the Extractor creates a background job that
 - executes the queries, and
 - stores results of the queries in specified tables in Storage. 
 
+When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job. 
+Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
+
 Once the job is finished, click on the names of the tables to inspect their contents. In case you had loaded the 
 [tables manually](/overview/tutorial/load/) before, their contents will not change at all. 
 The extractor overwrites the table contents, and the manually loaded CSV files match the contents of the sample database.

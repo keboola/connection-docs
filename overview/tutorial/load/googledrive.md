@@ -72,7 +72,10 @@ It will appear on the right side of the screen as one of the *Sheets to Be Added
 Save the configuration by clicking the *Save* button in the upper right corner of the screen.
 You should obtain a result like the one below. Then, click on the *Run Extraction* command on the right.
 This will create a background job extracting the selected sheet from the Google Drive document
-and loading it into Storage.
+and loading it into Storage. 
+
+When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job. 
+Green is for success, red for failure. Click on the indicator, or the info next to it for more details.
 
 {: .image-popup}
 ![Google Drive Results](/overview/tutorial/load/extractor-google-drive-result.png)
