@@ -11,6 +11,8 @@ You have learned to [manipulate data](/overview/tutorial/manipulate/) in KBC usi
 and have a denormalized table called `opportunity_denorm` ready in the `out.c-tutorial` storage bucket. 
 This table is suitable to be loaded into [Tableau Analytics](http://www.tableau.com/). 
 
+## Getting Started
+
 **Before you proceed, have [Tableau Desktop](http://www.tableau.com/products/desktop) installed**.
 If you want to try connection to Tableau Server, have credentials for that server as well. 
 As an alternative, sign up for a free trial of [Tableau Online](http://www.tableau.com/products/cloud-bi) to test it out.
