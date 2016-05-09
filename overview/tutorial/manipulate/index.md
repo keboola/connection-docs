@@ -124,8 +124,7 @@ Save the queries and then click on *Run Transformation*. This will create a back
 - execute the queries, and 
 - store the result in Storage again. 
 
-When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job. 
-Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
+To see if the transformation job was successful, go to **Jobs**.
 
 Having learned to set up a transformation, you can now
   
