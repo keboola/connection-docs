@@ -16,7 +16,7 @@ Writing data to GoodData is very similar to writing data to Tableau, although
 there are some changes due to the fundamental differences in both platforms.
 The GoodData platform uses the concept of 
 [Logical Models](https://help.gooddata.com/display/doc/Tutorial+-+Creating+Your+First+Data+Model)
-where multiple tables are loaded into the GoodData platform together with their logical connection model (schema).
+where multiple tables are loaded into the platform together with their logical connection model (schema).
 KBC will assist you in creating the model.
 
 ## Prepare Data for Writer
