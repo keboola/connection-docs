@@ -61,7 +61,6 @@ Any input mapping has the following options
   - **Sort key** (Redshift) - Table [sort key](http://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html)
   - **Dist key** (Redshift) - Table [distribution key](http://docs.aws.amazon.com/redshift/latest/dg/t_Distributing_data.html) and  [distribution style](http://docs.aws.amazon.com/redshift/latest/dg/c_choosing_dist_sort.html)
   - **COPY options** (Redshift) - Specifies options for the Redshift [COPY command](http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html)
-  - **Table type** (Redshift) - The table can be either completely transferred (using `CREATE TABLE`) or just created as a `CREATE VIEW` from the source table on the same Redshift cluster
 
 
 ### Output mapping
