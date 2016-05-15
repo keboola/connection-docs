@@ -124,7 +124,8 @@ Save the queries and then click on *Run Transformation*. This will create a back
 - execute the queries, and 
 - store the result in Storage again. 
 
-To see if the transformation job was successful, go to **Jobs**.
+To see if the transformation job was successful, go to **Jobs**, or click on the little **Transformations job has been scheduled** window 
+that pops up after a transformation starts running. 
 
 Having learned to set up a transformation, you can now
   

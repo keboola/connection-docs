@@ -7,7 +7,7 @@ So far, you have learned to use KBC to
 
 - load tables [manually](/overview/tutorial/load/) or [using an extractor](/overview/tutorial/load/database/), 
 - [manipulate data in SQL](/overview/tutorial/manipulate/), and
-- write data [into Tableu BI](/overview/tutorial/write/) or [into GoodData BI](/overview/tutorial/write/gooddata/).
+- write data [into Tableau BI](/overview/tutorial/write/) or [into GoodData BI](/overview/tutorial/write/gooddata/).
  
 Connecting various systems together alone makes Keboola Connection a powerful and easy-to-use tool. 
 However, the above steps must be done repeatedly to bring in the newest data available. 
@@ -64,12 +64,16 @@ transform it for GoodData, and write it to a GoodData project.
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Setup for GoodData](/overview/tutorial/automate/orchestration-tasks-setup-2.png)
 
-The order of certain tasks is important; some must run sequentialy and others can run in paralell. 
+The order of certain tasks is important; some must run sequentially and others can run in parallel. 
 That is what **orchestration phases** are for. Tasks in a single phase are executed in parallel, 
-phases execute sequentially. To properly order the phases, you can drag them around. 
+phases execute sequentially. 
+
+To order the phases, grab the triple bar icon on their left. 
+To move a task to a different phase, tick the checkbox on the left. Then go to **Actions**, select 
+**Move selected tasks between phases** and assign the desired phase.
 
 In the above configuration, each task is in its own phase.
-Therefore this is a very defensive configuration which executes all tasks sequentially.
+Therefore, this is a very defensive configuration which executes all tasks sequentially.
 
 It can be better arranged by using the *Group tasks into phases by component type* action:
 
@@ -79,42 +83,41 @@ It can be better arranged by using the *Group tasks into phases by component typ
 This will group each of the extractors, transformations and writers into their own phase to follow the common
 ETL scheme. Then **Save** the orchestration. If you do not have all the tasks set up at the moment, 
 it does not matter. You can safely continue with the next steps.
-When you are done configuring the tasks, go back to the orchestration setting.
+When done configuring the tasks, go back to the orchestration setting.
 
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Setup End](/overview/tutorial/automate/orchestration-tasks-setup-4.png)
 
 In the orchestration detail, you can now see some tasks configured. Run the orchestration manually 
-to test everything works smoothly by clicking on the **Play** button in top right corner.
+to test everything works smoothly; click on the **Play** button in the top right corner and select the tasks you want to run.
 This creates a background job which executes all the tasks specified in the orchestration. 
-Continue setting up the orchestration in the mean time.
+Continue setting up the orchestration in the meantime.
 
 {: .image-popup}
 ![Screenshot - Orchestration Detail](/overview/tutorial/automate/orchestration-detail-2.png)
 
-Additionally, you can also schedule the orchestration to be run automatically at a given time by clicking on
-**Edit schedule**. 
+By clicking on **Edit schedule**, set the orchestration to run automatically at a given time. 
 
 {: .image-popup}
 ![Screenshot - Orchestration Schedule](/overview/tutorial/automate/orchestration-schedule.png)
 
-When setting up a schedule, it is recommended to also set up notifications. 
-Click on **Configure Notifications**:
+It is recommended to also set up notifications. 
+Click on **Configure Notifications** and then on **Edit Notifications** in the upper-right corner:
 
 {: .image-popup}
 ![Screenshot - Orchestration Detail](/overview/tutorial/automate/orchestration-detail-3.png)
 
-Notifications are set to specified emails. Set at least the notification on error conditions.
-When an orchestration is run manually, the notifications will be sent only to the KBC user who
+Notifications are sent to selected email addresses. Set at least the error notification: enter your email address and 
+click on the plus sign next to it. Repeat if you want to add another email address. Then click **Save**.
+
+When an orchestration is run manually, notifications will be sent only to the KBC user who
 runs the orchestration, not to those specified in Notifications.
 
 {: .image-popup}
 ![Screenshot - Orchestration Notifications](/overview/tutorial/automate/orchestration-notifications.png)
 
-If everything goes well, you should see your orchestration job finished by now and the notifications set. 
-Now set up the full pipeline from data extraction to data writing. 
-This means that whatever you change in your Google Drive sheet, 
-if you [created one](/overview/tutorial/load/googledrive/), will automatically propagate
-up to your Tableau or GoodData project. Or both, if you set it that way.   
+Your orchestration job should be finished by now. From data extraction to data writing, you have set up the full pipeline. 
+Any change in your [GoogleDrive sheet](/overview/tutorial/load/googledrive/) will automatically propagate up 
+to your Tableau or GoodData project. Or both, if you set it that way.   
 
-That is all for dealing with automation. Proceed to the [management part](/overview/tutorial/management/) of KBC. 
+Having mastered the automation process, proceed to the [management part](/overview/tutorial/management/) of KBC. 

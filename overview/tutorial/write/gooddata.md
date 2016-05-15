@@ -89,8 +89,9 @@ This will create a background job which will
 - modify them with the SQL queries of the Transformation script, and 
 - create three new tables in the `out.c-tutorial` output bucket in Storage. 
 
-To see if the transformation job has finished running, go to **Jobs**. Continue, even while waiting for the job to end,
-configuring the GoodData writer. Start by creating a new writer in the **Writers** section:
+To see if the transformation job has finished, go to **Jobs**, or click on the little **Transformations job has been scheduled** window 
+that pops up after a transformation starts running. When finished, or while waiting for the job to end, continue configuring the GoodData writer.
+Start by creating a new writer in the **Writers** section:
 
 {: .image-popup}
 ![Screenshot - New Writer](/overview/tutorial/write/gooddata-writer-intro-1.png)
