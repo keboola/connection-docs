@@ -6,160 +6,153 @@ permalink: /overview/tutorial/management/
 * TOC
 {:toc}
 
-In the previous steps you learned how to quickly
-[load tables into KBC manually](/overview/tutorial/load/) 
-(or [using extractor](/overview/tutorial/load/database/)), 
-[manipulate data using SQL](/overview/tutorial/manipulate/) and then  
-write data into [Tableu BI](/overview/tutorial/write/) (or [GoodData BI](/overview/tutorial/write/gooddata/)) 
-and how to set so that [all these things run automatically](/overview/tutorial/automate/). In this part,
-we'll show you around some additional features of KBC related to Data and User management. We would like to 
-show you, that we take great care to ensure that everything done in KBC is traceable (and if possible recoverable). 
+After you have loaded your tables, either [manually](/overview/tutorial/load/) or 
+[using an extractor](/overview/tutorial/load/database/), [manipulated the data](/overview/tutorial/manipulate/) in SQL, 
+written it [into Tableau BI](/overview/tutorial/write/) or [into GoodData BI](/overview/tutorial/write/gooddata/), and 
+set everything to run [automatically](/overview/tutorial/automate/), let's take a look at some additional KBC features
+related to Data and User management. We take great care to ensure that everything done in KBC is traceable,
+and, if possible, also recoverable. 
 
 ## Data Governance
 
 ### Jobs
-As you have probably noticed during this tutorial, most of the things done in KBC are background (asynchronous)
-jobs. You can get an overview of the all running and terminated jobs in the **Jobs** section: 
+Most of the things done in KBC run as background, asynchronous, jobs. 
+For an overview of all jobs, running and finished, go to the **Jobs** section: 
 
 {: .image-popup}
 ![Screenshot - Jobs](/overview/tutorial/management/jobs.png)
 
-Clicking on a job will give you its details, such as what tables were modified, how much data was transfered and 
-what events occured during job execution. The job history is virtually unlimited.
+Clicking a job will give you its details, such as what tables were modified, how much data was transferred and 
+what events occurred during the job execution. The job history is virtually unlimited.
 
 {: .image-popup}
 ![Screenshot - Jobs Detail](/overview/tutorial/management/jobs-detail.png)
 
 ### Storage Jobs
-Not only we record all Jobs which were executed in your KBC project, we also record all data which were uploaded
-into your project. When you go to **Storage** section and **Jobs** tab:
+Not only we record all jobs which were executed in your KBC project, we also record all data which were uploaded
+into your project. Go to **Storage** and click the **Jobs** tab:
 
 {: .image-popup}
 ![Screenshot - Storage Jobs](/overview/tutorial/management/storage-jobs.png)
 
-In the event list you can surely find an **importTable** job, when you click it, you'll see a Storage Job detail:
+When you click an **importTable** job, you'll see a Storage job detail:
 
 {: .image-popup}
 ![Screenshot - Storage Job Detail](/overview/tutorial/management/storage-jobs-detail.png)
 
-There, among other information is also listed **File ID**, when you click it, you will be taken to 
-**File Uploads** tab of the **Storage**, where all data pushed into your KBC project are stored. You 
-can download the data and import them into other tables or revert to an older table version. 
+Clicking **File ID** will take you to the **File Uploads** tab in **Storage**, 
+where all data pushed into your KBC project are stored. 
+You can download the data and import it into other tables, or you can revert to an older table version. 
 
 {: .image-popup}
 ![Screenshot - File uploads](/overview/tutorial/management/storage-file-uploads.png)
 
 ### Table Snapshots
-Another (and more sophisticated) option to reverting data to an earlier verison is using
-**Table Snapshots**, you can access table snapshots in **Storage** section in table 
-details: 
+Another, more sophisticated option for reverting data to an earlier version is using 
+**Table Snapshots** in **Storage**: 
 
 {: .image-popup}
 ![Screenshot - Storage Snapshots](/overview/tutorial/management/storage-snapshots.png)
 
-When a Snapshot does exist for the table, it can be either used to revert the contents of that
-table or to copy that table into another table: 
+A table snapshot can be either used to revert the contents of that table, or to copy the table into another one. 
 
 {: .image-popup}
 ![Screenshot - Storage Snapshots List](/overview/tutorial/management/storage-snapshots-list.png)
 
 ### Data Takeout
-If for any reason you want to terminate your project, you can use **Data Takeout** feature to extract all
-your project data. Though you can use it at any time, please do not confuse it with project backup. 
-The data from takeout cannot be automatically imported into KBC, also make sure to protect your takeout data 
-accordingly.  
+If, for any reason, you want to terminate your project, use the **Data Takeout** feature in **Users&Settings** to extract all
+your project data. Even though it can be used at any time, do not confuse it with the project backup. 
+The takeout data cannot be automatically imported into KBC; make sure to protect it accordingly.  
 
 {: .image-popup}
 ![Screenshot - Data Takeout](/overview/tutorial/management/data-takeout.png)
 
-This feature is especially usefull for project POCs, which are suppose to end after a certain time period, but
-you still want to keep them for reference for some time. Of course, this feature can also be used 
-if get fed up and want to leave us, which we certainly don't like, but we are never blocking you from doing so. 
+This feature is especially useful for Proof-of-Concept projects. They are supposed to end after a certain time period, but
+you still want to keep them for reference for some time. This feature can also be used in case you decide to leave us. 
+We won't be happy about it, but we are never going to prevent you from doing so. 
 
 ## User Management
-You probably also noticed the link to **Users & Settings** in the bottom left corner. This link allows you to
-add other **Administrators** to your project. These are full fledged trusted users (which also count to
-your project quota). You invite an user just by entering email, the user will receive an invitation and 
-a wizard will guide him through logging into KBC.
+Apart from Data Takeout, the **Users & Settings** link in the bottom left corner of your screen allows you to add 
+other **Administrators** to your project. These are full-fledged trusted users that also count to your project quota. 
+Invite a user by entering their email address. If they already have an account in KBC, they will receive an email message. 
+If they don't, an invitation will be sent to them. They can log into KBC with the help of a wizard.
 
 {: .image-popup}
 ![Screenshot - Project Administrators](/overview/tutorial/management/administrators.png)
 
-The standard users are all equal because most operations in KBC generally require access to 
-most of the data and functions. You might want to create users with limited access to only 
-some of your data. You should create a (temporary) access token. Create a new access token:
+Standard users are all equal as most KBC operations generally require access to most of the data and functions. 
+To add users with access limited to only some of your data, create a new, temporary, access token:
 
 {: .image-popup}
 ![Screenshot - Access Tokens](/overview/tutorial/management/access-tokens.png)
 
-You can now limit access of that token to a single Storage bucket - e.g. 'out.c-tutorial'. You can
-also limit the validity of that token.
+Limit access of that token to a single Storage bucket, for instance, 'out.c-tutorial'. 
+You can also limit the token validity.
 
 {: .image-popup}
-![Screenshot - Access Tokens](/overview/tutorial/management/access-tokens.png)
+![Screenshot - Access Tokens](/overview/tutorial/management/access-token-detail.png)
 
-Once the token is created, you can display its details and send that token to an
-arbitrary email using the **Send token** button.
+Once the token is created, display its details and send it to an arbitrary email address by clicking the **Send token** button.
 
 {: .image-popup}
 ![Screenshot - Access Tokens](/overview/tutorial/management/access-token-detail-2.png)
 
-When you send the token, you can add additional message:
+An additional message can be sent along with the token.
 
 {: .image-popup}
 ![Screenshot - Send Token](/overview/tutorial/management/send-token.png)
 
-The recipient will obtain an email with an invitation link, which will lead the user to the
-following screen:
+The recipient will obtain an email with an invitation link leading to the following screen:
 
 {: .image-popup}
 ![Screenshot - Token Welcome Screen](/overview/tutorial/management/token-welcome.png)
 
-The user can then log on to your project using the *Storage Console*:
+Via the *Storage Console*, the added user can log into your project.
 
 {: .image-popup}
 ![Screenshot - Storage Console](/overview/tutorial/management/storage-console.png)
 
-And the user will see only the buckets you allowed him to access:
+Only the buckets you made accessible will be seen.
 
 {: .image-popup}
 ![Screenshot - Storage Console View](/overview/tutorial/management/storage-console-view.png)
  
-This way you can share limited portions of your data with the users you specify. The buckets can be 
-also used for writing, so you may use this way for someone to easily send you some data (instead of fighting 
-with FTP or e-mail attachments) directly to your KBC project. You can always revoke the access simply
-by deleting the token.
+In addition to sharing sections of your data with selected users, the buckets can be also used for writing; 
+people can send data directly to your KBC project instead of struggling with FTP or e-mail attachments. 
+To revoke the access, simply delete the token.
 
 
-## Project status
-In agreement with our openess, we attempt to show you everything important regarding your project. There
-are two main channels for project status information. 
+## Project Status
+KBC is an open system and, as such, we want you to have all important information on your project at your disposal. 
+There are two main channels for project status information available: **Notifications**, 
+and the Limits tab in **Users & Settings**. 
 
 {: .image-popup}
 ![Screenshot - Project Overview](/overview/tutorial/management/project-overview.png)
 
-First are notifications, which you can access by
-clicking the bell on the top left of the side bar. These show highly important messages - such as expiring
-project, component migration, or other things needing your attention. The notifications are your user channel, so
-each user sees all notifications for all projects there. Additionaly important messages regarding project
-are displayed on the project **Overview** section.   
+Click the top of the side bar bell for **Notifications** and highly important messages, such as expiring projects, 
+component migration, and other things to pay attention to. The channel is user specific, and as such shows
+each user all notifications for all their projects. Another place where important status info can be found
+is the **Overview** section.   
 
 {: .image-popup}
 ![Screenshot - Notifications](/overview/tutorial/management/notifications.png)
 
-Second project status channel contains project quotas and can be accessed via **Users & Settings** link.
-In the limits tab, you can see all billable metrics measured on your project. You also see your current
-limits that you have signed up to and also a monthly trend. This way you can control your usage to fit into 
-the limits or contact our sales to increase the limits as you need.
+The second project status channel contains project quotas and can be accessed via the **Users & Settings** link.
+The **Limits** tab gives you an overview of all your measured billable metrics, your current limits, 
+as well as the monthly trend. This enables you to control your usage in order to fit into your limits. 
+To increase the limits, contact our sales.
 
 {: .image-popup}
 ![Screenshot - Project Limits](/overview/tutorial/management/project-limits.png)
 
-Keep in mind that the limits displayed here are *soft limits*, which means that you won't be charged 
-for exceeding them, nor will the acces to your project be limited. We don't do such things.
+The limits displayed here are *soft limits*; you won't be charged for exceeding them, 
+nor will the access to your project be limited. We don't do such things.
 
-## Final note
-This is the end of our stroll aroun Keboola Connection. On our walk we missed quite a few things (
-Applications, Python or R transformations, Redshift and Snowflake features, to name a few), but we tried to
-show you how Keboola Connection can help you in connecting different systems together. You can 
-[return to the begining](/overview/tutorial/) or [contact us](/)
+## Final Note
+This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things --
+Applications, Python and R transformations, Redshift and Snowflake features, to name a few. 
+However, teaching you everything was not really the point of this tutorial. 
+We wanted to show you how Keboola Connection can help in connecting different systems together. 
+
+[Return to the beginning](/overview/tutorial/) or [contact us](/).
