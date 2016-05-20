@@ -35,6 +35,15 @@ items:
   - url: /extractors/
     title: Extractors
     items:
+      - url: /extractors/database/
+        title: Database
+        items:
+          - url: /extractors/database/mongodb/
+            title: MongoDB
+            items:
+              - url: /extractors/database/mongodb/mapping/
+                title: Mapping Examples
+
       - url: /extractors/twitter/
         title: Twitter
       - url: /extractors/pigeon/
