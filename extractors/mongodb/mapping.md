@@ -1,6 +1,6 @@
 ---
 title: Mapping Examples
-permalink: /extractors/database/mongodb/mapping/
+permalink: /extractors/mongodb/mapping/
 ---
 
 ## Basic mapping without nested documents

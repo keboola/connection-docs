@@ -35,14 +35,11 @@ items:
   - url: /extractors/
     title: Extractors
     items:
-      - url: /extractors/database/
-        title: Database
+      - url: /extractors/mongodb/
+        title: MongoDB
         items:
-          - url: /extractors/database/mongodb/
-            title: MongoDB
-            items:
-              - url: /extractors/database/mongodb/mapping/
-                title: Mapping Examples
+          - url: /extractors/mongodb/mapping/
+            title: Mapping Examples
 
       - url: /extractors/twitter/
         title: Twitter

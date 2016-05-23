@@ -1,6 +1,6 @@
 ---
 title: MongoDB
-permalink: /extractors/database/mongodb/
+permalink: /extractors/mongodb/
 ---
 
 * TOC
@@ -15,7 +15,7 @@ By following these steps you should be able to prepare MongoDB Extractor for you
 ### Create new configuration
 
 {: .image-popup}
-![MongoDB add configuration](/extractors/database/mongodb/01-add-configuration.png)
+![MongoDB add configuration](/extractors/mongodb/01-add-configuration.png)
 
 
 ### Setup database credentials
@@ -25,7 +25,7 @@ your credentials. We recommend you to test new database credentials before savin
 SSH tunnel.
 
 {: .image-popup}
-![MongoDB new credentials](/extractors/database/mongodb/02-new-credentials.png)
+![MongoDB new credentials](/extractors/mongodb/02-new-credentials.png)
 
 ### Configure export(s)
 
@@ -34,7 +34,7 @@ configure your first export.
 
 
 {: .image-popup}
-![MongoDB new export](/extractors/database/mongodb/03-new-export.png)
+![MongoDB new export](/extractors/mongodb/03-new-export.png)
 
 Options:
 
@@ -71,7 +71,7 @@ By defining mapping the extractor allows you to set how output tables and theirs
 how they'll be connected and which columns will consist.
 
 {: .image-popup}
-![MongoDB new export filled](/extractors/database/mongodb/04-new-export-filled.png)
+![MongoDB new export filled](/extractors/mongodb/04-new-export-filled.png)
 
 Check out [more mapping examples](/extractors/database/mongodb/mapping/).
 
@@ -81,6 +81,6 @@ Check out [more mapping examples](/extractors/database/mongodb/mapping/).
 After successful mapping configuration you can run extractor by hitting *Run Extraction* button.
 
 {: .image-popup}
-![MongoDB new export](/extractors/database/mongodb/05-exports-index.png)
+![MongoDB new export](/extractors/mongodb/05-exports-index.png)
 
 
