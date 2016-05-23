@@ -73,8 +73,43 @@ how they'll be connected and which columns will consist.
 {: .image-popup}
 ![MongoDB new export filled](/extractors/mongodb/04-new-export-filled.png)
 
-Check out [more mapping examples](/extractors/database/mongodb/mapping/).
+#### Primary key
 
+Since the MongoDB identifies each document in a collection uniquely by `_id`, we recommend to set
+a primary key to this field by defining first item in a mapping section:
+
+{% highlight json %}
+{
+    "_id.$oid": {
+        "type": "column",
+        "mapping": {
+            "destination": "id",
+            "primaryKey": true
+        }
+    }
+}
+{% endhighlight %}
+
+*Note: Desination dolumn with the primary key should be named `id` not `_id` to prevent problems with
+ data import.*
+
+
+#### Other data types
+
+To handle MongoDB data types correctly, define mapping similarly as in the following example for
+`MongoId`, `ISODate` and `NumberLong` data types:
+
+{% highlight json %}
+{
+    "_id.$oid": "id",
+    "publishedAt.$date": "publishedAt",
+    "views.$numberLong": "views"
+}
+{% endhighlight %}
+
+#### Mapping examples
+
+Check out [more mapping examples](/extractors/mongodb/mapping/).
 
 ## Running
 
