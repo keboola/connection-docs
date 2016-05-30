@@ -3,6 +3,9 @@ title: Data Takeout
 permalink: /management/project-export/
 ---
 
+* TOC
+{:toc}
+
 Using the **Data Takeout** feature, it is possible to export the entire contents of your project. 
 Data takeout is useful if you want to make a snapshost of your entire project
 for any purpose or if you want to terminate the project and don't want to loose any data.
