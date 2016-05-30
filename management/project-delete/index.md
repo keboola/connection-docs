@@ -20,4 +20,4 @@ deleted and cannot be undeleted any more.
 
 Note that expiring projects will be deleted automatically when the expiration day is due. You will receive a 
 notification a week before a project will expire. When an expired project is deleted, the same rules
-about grace period apply as if it were deleted manually.  
+about grace period apply as if it was deleted manually.  
