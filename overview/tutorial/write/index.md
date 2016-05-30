@@ -1,5 +1,5 @@
 ---
-title: Part 3 - Writing data
+title: Part 3 - Writing Data
 permalink: /overview/tutorial/write/
 ---
 
