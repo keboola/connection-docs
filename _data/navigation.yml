@@ -84,4 +84,8 @@ items:
     items:
       - url: /management/project-export/
         title: Data Takeout
-        items:    
+        items:
+
+      - url: /management/project-delete/
+        title: Delete Project
+        items: 
