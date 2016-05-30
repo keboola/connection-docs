@@ -7,4 +7,4 @@ permalink: /management/organization/
 
 ne kazdy to ma
 
-{% endcomment %}
+{% endcomment %}av
