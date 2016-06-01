@@ -3,7 +3,7 @@ title: Mapping Examples
 permalink: /extractors/mongodb/mapping/
 ---
 
-## Basic mapping without nested documents
+## Basic Mapping Without Nested Documents
 
 <table class="table table-bordered">
 <tr>
@@ -45,7 +45,7 @@ extractors
 </tbody>
 </table>
 
-## Defining primary key
+## Defining Primary Key
 
 <table class="table table-bordered">
 <tr>
@@ -91,7 +91,7 @@ extractors
 </tbody>
 </table>
 
-## With nested documents
+## With Nested Documents
 
 <table class="table table-bordered">
 <tr>
@@ -165,7 +165,7 @@ extractors-revisions
 <tr><td>68fc980</td><td>Second version</td><td>5716054bee6e764c94fa7ddd</td></tr>
 </table>
 
-As you can see, joining those two tables will be simple as a pie.
+As you can see, joining those two tables will be easy as pie.
 
 </td>
 </tr>
