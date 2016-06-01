@@ -111,4 +111,5 @@ To save time, you can run multiple orchestration tasks in parallel.
 ### Dependencies
 
 Dependencies allow you to chain transformation steps. A given transformation is executed after all required steps have been executed. 
-Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of SQL code.
+
+Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of SQL code. However, a network of nontransparent dependency trees was usually created, so we have decided to abolish this feature in the near future. If possible, please do not use dependencies as it will make future migrations easier.
