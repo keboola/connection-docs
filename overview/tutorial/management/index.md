@@ -60,7 +60,8 @@ A table snapshot can be either used to revert the contents of that table, or to 
 ![Screenshot - Storage Snapshots List](/overview/tutorial/management/storage-snapshots-list.png)
 
 ### Data Takeout
-If, for any reason, you want to terminate your project, use the **Data Takeout** feature in **Users&Settings** to extract all
+If, for any reason, you want to terminate your project, use the 
+[**Data Takeout**](/management/project-export/) feature in **Users&Settings** to extract all
 your project data. Even though it can be used at any time, do not confuse it with the project backup. 
 The takeout data cannot be automatically imported into KBC; make sure to protect it accordingly.  
 

@@ -7,11 +7,9 @@ permalink: /extractors/twitter/
 {:toc}
 
 The Twitter extractor, as the name implies, fetches data from [Twitter](https://twitter.com/).
+Complete the following steps to configure it:
 
-## Configuring Extractor
-Configure your Twitter extractor by completing the following five steps.
-
-### 1 -- Creating New Configuration
+### Create New Configuration
 
 Find Twitter in the **Extractors** section. Create a new configuration, and name it. 
 It can be renamed at any time.
@@ -19,7 +17,7 @@ It can be renamed at any time.
 {: .image-popup}
 ![Twitter New Configuration](/extractors/twitter/01-new-configuration.png)
 
-### 2 -- Authorizing Twitter Account
+### Authorize Twitter Account
 Select one of the two authorization methods:
 
  - **Instant** -- Use if having access to a Twitter account. It will be done immediately.
@@ -37,7 +35,7 @@ When finished setting up authorization, click **Continue** to move to the next t
 {: .image-popup}
 ![Twitter Data Selection](/extractors/twitter/04-authorized.png)
 
-### 3 -- Selecting Data
+### Select Data
 To configure what you want to fetch from Twitter, use the other four tabs displayed in the above pop-up window.
 It is okay to leave any of the steps blank.
 
@@ -55,7 +53,7 @@ It is okay to leave any of the steps blank.
 
 When done, **Save** the configuration.
 
-### 4 -- Running Extractor
+### Run Extractor
 **Run** the extraction job. It will start immediatelly.
 
 {: .image-popup}

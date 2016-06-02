@@ -7,7 +7,7 @@ So far, you have learned to load data into KBC either [manually](/overview/tutor
 via a [GoogleDrive extractor](/overview/tutorial/load/googledrive/).
 Let's load data from an external database with the help of the Database extractor now.
 
-We will use our own sample database, so don't worry about getting database credentials from anyone.
+We will use our own sample MySQL database, so don't worry about getting database credentials from anyone.
 
 ## Configure the Database Extractor
 Start by going into the **Extractors** section of KBC and create a new extractor.
@@ -15,7 +15,7 @@ Start by going into the **Extractors** section of KBC and create a new extractor
 {: .image-popup}
 ![Screenshot - Create a new Extractor](/overview/tutorial/load/extractor-intro-2.png) 
 
-Select **Database Extractor** (use the search feature to find it quickly).
+Select **MySQL Extractor** (use the search feature to find it quickly).
 
 {: .image-popup}
 ![Screenshot - Create a new Database Extractor](/overview/tutorial/load/extractor-intro-3.png) 
@@ -34,7 +34,6 @@ Name the configuration.
 
 Now, set up credentials to the source database. Set
 
-- **Driver** to `MySQL`,
 - **Host** to `datagirls.keboola.com`,
 - **Port** to `3306`, and
 - **Username**, **Password** and **Database** to `datagirls`. 

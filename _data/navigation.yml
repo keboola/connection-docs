@@ -82,3 +82,14 @@ items:
 
               - url: /manipulation/transformations/r/binary/
                 title: Using binary files
+                
+  - url: /management/
+    title: Project Management
+    items:
+      - url: /management/project-export/
+        title: Data Takeout
+        items:
+
+      - url: /management/project-delete/
+        title: Delete Project
+        items: 
