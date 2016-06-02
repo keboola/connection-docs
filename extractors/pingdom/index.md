@@ -51,9 +51,18 @@ When registration is finished, copy your key to extractor configuration in KBC
 {: .image-popup}
 ![Pingdom API key](/extractors/pingdom/05-pingdom-api-key.png)
 
-### 2 -- Selecting data
+### 2 -- Select data
 
-todo
+Choose one of **data periods** to start fetching data for:
+
+- `24 hours ago`
+- `Last 3O days` -- *Pingdom API provides history only for up to 30 days before current day*
+
+Finally, select one of data mapping **template**s and click on **Save configuration**
+
+{: .image-popup}
+![Pingdom Data Mapping](/extractors/pingdom/06-template.png)
+
 
 ## Extraction Output Tables
 
@@ -71,11 +80,9 @@ Table contains overview of all checks
 | `status` | Current status of check (`up`, `down`, `unconfirmed_down`, `unknown`, `paused`) |
 | `resolution` | Number of minutes, how often should the check be tested |
 | `hostname` | Target hostname |
-| `use_legacy_notifications` | ? |
-| `alert_policy` | ? |
-| `alert_policy_name` | ? |
-| `acktimeout` | ? |
-| `autoresolve` | ? |
+| `use_legacy_notifications` | Use legacy (UP/DOWN) notifications (`1` if enabled) |
+| `alert_policy` | Alert policy identifier |
+| `alert_policy_name` | Alert policy name |
 | `created` | Unix timestame of check creation |
 | `ipv6` | Use ipv6 instead of ipv4 |
 
@@ -84,19 +91,19 @@ Table contains overview of all checks
 Table contains detailed informations of all checks
 
 | Column | Description |
-| `id` [PK] | The integer representation of the unique identifier for the check. |
+| `id` [PK] | The integer representation of the unique identifier for the check |
 | `name` | Check name.|
 | `hostname` | Target hostname |
 | `status` | Current status of check (`up`, `down`, `unconfirmed_down`, `unknown`, `paused`) |
 | `resolution` | Number of minutes, how often should the check be tested |
-| `sendtoemail` | ? |
-| `sendtosms` | ? |
-| `sendtotwitter` | ? |
-| `sendtoiphone` | ? |
-| `sendtoandroid` | ? |
-| `sendnotificationwhendown` | ? |
-| `notifyagainevery` | ? |
-| `notifywhenbackup` | ? |
+| `sendtoemail` | Send alerts as email (`1` if enabled) |
+| `sendtosms` |  Send alerts as SMS (`1` if enabled) |
+| `sendtotwitter` | Send alerts through Twitter (`1` if enabled) |
+| `sendtoiphone` | Send alerts to iPhone (`1` if enabled) |
+| `sendtoandroid` | Send alerts to Android (`1` if enabled) |
+| `sendnotificationwhendown` |  Send notification when down `n` times (integer) |
+| `notifyagainevery` | Notify again every `n` result (integer)|
+| `notifywhenbackup` | Notify when back up again (`1` if enabled) |
 | `lasterrortime` | If some error was occured, this field will contain the unix timestamp of last error |
 | `lasttesttime` | If the check was already tested, this field will contain the unix timestamp of last test |
 | `lastresponsetime` | Response time (in milliseconds) of last test |
@@ -105,153 +112,91 @@ Table contains detailed informations of all checks
 
 ### 3 -- Checks-tags
 
-Table contains detailed informations of all checks
+Table contains list of all checks tags
 
 | Column | Description |
-| `name` | ? |
-| `type` | ? |
-| `count` | ? |
-| `checks_detailed_pk` | Use ipv6 instead of ipv4 |
+| `name` | Tag name |
+| `type` | Type of the tag (`u` tagged by user, `a` auto tagged by system) |
+| `count` | Number of this tag in check |
+| `checks_detailed_pk` | Check identifier |
 
 ### 4 -- Checks-contacts
 
-Table contains detailed informations of all checks
+This table represents relations between checks and contacts
 
 | Column | Description |
-| `contacts_id` | ? |
-| `checks_detailed_pk` | ? |
+| `contacts_pk` | Contact identifier |
+| `checks_detailed_pk` | Check identifier |
 
 ### 5 -- Contacts
 
-Table contains detailed informations of all checks
+Table contains contains data of all contacts
 
 | Column | Description |
-| `id` [PK] | ? |
-| `name` | ? |
-| `email` | ? |
-| `cellphone` | ? |
-| `countryiso` | ? |
-| `defaultsmsprovider` | ? |
-| `directtwitter` | ? |
-| `twitteruser` | ? |
-| `paused` | ? |
+| `id` [PK] | The integer representation of the unique identifier for the check |
+| `name` | Contact name	 |
+| `email` | Contact email |
+| `cellphone` | Contact cellphone |
+| `countryiso` | Cellphone country ISO code |
+| `defaultsmsprovider` | Default SMS provider |
+| `directtwitter` | Send Twitter messages as Direct Messages |
+| `twitteruser` | Twitter username |
+| `paused` | `1` if contact is paused |
 
 ### 6 -- Probes
 
-Table contains detailed informations of all checks
+Pingdom probe servers list
 
 | Column | Description |
-| `id` [PK] | ? |
-| `country` | ? |
-| `city` | ? |
-| `name` | ? |
-| `active` | ? |
-| `hostname` | ? |
-| `ip` | ? |
-| `countryiso` | ? |
-| `ipv6` | ? |
-| `region` | ? |
+| `id` [PK] | The integer representation of the unique identifier for the probe |
+| `name` | Probe name |
+| `countryiso` | Country ISO code |
+| `city` | City |
+| `region` | Region of probe (`NA` for North America, `EU` for Europe, etc) |
+| `hostname` | DNS name	 |
+| `ip` | IP address |
+| `ipv6` | IPV6 address  |
+| `active` | `1` if is  the probe currently active |
 
 ### 7 -- Results
 
-Table contains detailed informations of all checks
+Table contains raw test results for all checks
 
 | Column | Description |
-| `probeid` [PK] | ? |
-| `time` [PK] | ? |
-| `status` | ? |
-| `responsetime` | ? |
-| `statusdesc` | ? |
-| `statusdesclong` | ? |
-| `analysisid` | ? |
-| `checks_pk` [PK] | ? |
-
+| `probes_pk` [PK] | Probe identifier |
+| `checks_pk` [PK] | Check identifier |
+| `time` [PK] | Time when test was performed as unix timestamp |
+| `status` | Result status (`up`, `down`, `unconfirmed_down`, `unknown`, `paused`) |
+| `responsetime` | Response time (in milliseconds) (Will be 0 if no response was received) |
+| `statusdesc` | Short result status description |
+| `statusdesclong` | Long result status description |
+| `analysis_pk` | Analysis identifier |
 
 ### 8 -- Credits
 
-Table contains detailed informations of all checks
+Table with information about current plan limits, SMS credits and SMS auto-refilling
 
 | Column | Description |
-| `checklimit` [PK] | ? |
-| `defaultchecklimit` | ? |
-| `transactionchecklimit` | ? |
-| `availablechecks` | ? |
-| `availabledefaultchecks` | ? |
-| `availabletransactionchecks` | ? |
-| `useddefault` | ? |
-| `availablesms` | ? |
-| `availablesmstests` | ? |
-| `autofillsms` | ? |
-| `autofillsms_amount` | ? |
-| `autofillsms_when_left` | ? |
-| `max_sms_overage` | ? |
-| `availablerumsites` | ? |
-| `usedrumsites` | ? |
-| `maxrumfilters` | ? |
-| `maxrumpageviews` | ? |
-| `maxalertingfullusers` | ? |
-| `availablealertingfullusers` | ? |
-| `autofillsms_amount` | ? |
+| `availablesms` | SMS credits remaining |
+| `availablesmstests` | SMS provider tests remaining |
+| `autofillsms` | Automaticaly refill your SMS credits (`1` if enabled) |
+| `autofillsms_amount` | Number of credits to refill |
+| `autofillsms_when_left` | Automaticaly refill when `n` SMS credits left |
+| `defaultchecklimit` | Checks: Total slots |
+| `availabledefaultchecks` | Checks: Remaining free slots |
+| `useddefault` | Checks: Number of used slots |
 
-
-### 9 -- Settings
+### 8 -- Alerts
 
 Table contains detailed informations of all checks
 
 | Column | Description |
-| `firstname` | ? |
-| `lastname` | ? |
-| `company` | ? |
-| `description` | ? |
-| `email` | ? |
-| `billing_email` | ? |
-| `phone` | ? |
-| `cellphone` | ? |
-| `address` | ? |
-| `address2` | ? |
-| `zip` | ? |
-| `location` | ? |
-| `state` | ? |
-| `vatcode` | ? |
-| `accountcreated` | ? |
-| `external_reference` | ? |
-| `publicreportscode` | ? |
-| `settingssaved` | ? |
-| `autologout` | ? |
-| `numberformatid` | ? |
-| `datetimeformatid` | ? |
-| `cellphonecountryiso` | ? |
-| `phonecountryiso` | ? |
-| `country_iso` | ? |
-| `country_countryid` | ? |
-| `regionid` | ? |
-| `timezone_id` | ? |
-| `timezone_description` | ? |
-| `timezone_timezoneid` | ? |
-| `timezone_offset` | ? |
-| `dateformat` | ? |
-| `timeformat` | ? |
-| `numberformat` | ? |
-| `numberexample` | ? |
-| `publicreports_customdesign` | ? |
-| `publicreports_textcolor` | ? |
-| `publicreports_backgroundcolor` | ? |
-| `publicreports_logourl` | ? |
-| `publicreports_months` | ? |
-| `publicreports_showoverview` | ? |
-| `publicreports_customdomain` | ? |
-
-### 9 -- Alerts
-
-Table contains detailed informations of all checks
-
-| Column | Description |
-| `contactname` | ? |
-| `contactid` [PK] | ? |
-| `checkid` [PK] | ? |
-| `time` [PK] | ? |
-| `via` [PK] | ? |
-| `status` | ? |
-| `messageshort` | ? |
-| `sentto` | ? |
-| `charged` | ? |
+| `checks_pk` [PK] | Identifier of check |
+| `contacts_pk` [PK] | Identifier of alerted contact |
+| `time` [PK] | Unix timestame of alert creation |
+| `via` [PK] | Alert medium	(`email`, `sms`, `twitter`, `iphone` or `android`) |
+| `contactname` | Name of alerted contact |
+| `status` | Alert status (`sent`, `delivered`, `error`, `notdelivered` or `nocredits`) |
+| `messageshort` | Short description of message |
+| `sentto` | Target address, phone number etc |
+| `charged` | `1` if account was charged for this message |
