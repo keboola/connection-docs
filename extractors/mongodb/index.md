@@ -6,7 +6,7 @@ permalink: /extractors/mongodb/
 * TOC
 {:toc}
 
-The MongoDB extractor allows you to fetch data from the MongoDB database.
+The MongoDB extractor allows you to fetch data from the [MongoDB database](https://www.mongodb.com/).
 Complete the following steps to configure it:
 
 ### Create New Configuration
@@ -19,7 +19,7 @@ Find MongoDB in the Extractors section. Create a new configuration and name it.
 
 ### Setup Database Credentials
 
-Click **Setup Database Credentials** and fill in the form. Then test the new credentials and save them. 
+Click **Setup Database Credentials** and fill in the form. Then test the new credentials and save them.
 Optionally, set up a SSH tunnel.
 
 {: .image-popup}
@@ -47,7 +47,7 @@ Must be specified in [strict format](#strict-format).
 
 - **Incremental** -- Loads data to your tables incrementally.
 
-- **Mapping** -- This is the most important section, defining how documents in the collection are mapped to the output tables. 
+- **Mapping** -- This is the most important section, defining how documents in the collection are mapped to the output tables.
 It, too, has to be valid JSON. To learn more about mapping, go to the [next section](#configure-mapping).
 
 #### Strict Format
