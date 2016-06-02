@@ -41,10 +41,14 @@ items:
           - url: /extractors/mongodb/mapping/
             title: Mapping Examples
 
-      - url: /extractors/twitter/
-        title: Twitter
+      - url: /extractors/pingdom/
+        title: Pingdom
+
       - url: /extractors/pigeon/
         title: Pigeon Importer
+
+      - url: /extractors/twitter/
+        title: Twitter
 
   - url: /manipulation/
     title: Data Manipulation

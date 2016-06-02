@@ -11,32 +11,18 @@ This extractor helps you to extract data from [Pingdom](link https://www.pingdom
 Pingdom is service for monitoring the uptime and performance of your websites or web applications
 
 ## Configuring Extractor
-In the Extractors section, find Pingdom and create new configuration.
-
-{: .image-popup}
-![Pingdom New Configuration](/extractors/pingdom/01-new-configuration.png)
-
-### 1 -- Setup API credentials
-
-You must provide credentials of your Pingdom account and App Key
-
-- **Email address** -- It is your account login name to
-- **Password**
-- **Application API key**
-
-{: .image-popup}
-![Pingdom Credentials](/extractors/pingdom/02-credentials.png)
+Before you start, you need to have a working Pingdom account and you need to obtain a Pingdom API Key.
 
 #### Create new Application API key
 
-Log in to you account on [Pingdom](link https://www.pingdom.com/) site
+Log in to your account on [Pingdom](link https://www.pingdom.com/) site
 
 Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys) and use **Register application** button
 
 {: .image-popup}
 ![Pingdom Api key list](/extractors/pingdom/03-pingdom-api.png)
 
-Fill required fields of register form.
+Fill required fields of registration form.
 
 - **Application name** -- Set name of your application key, for example: `Keboola Pingdom Extractor`
 - **Application description** -- Fill some description
@@ -46,12 +32,28 @@ Fill required fields of register form.
 {: .image-popup}
 ![Pingdom API registration](/extractors/pingdom/04-pingdom-api-form.png)
 
-When registration is finished, copy your key to extractor configuration in KBC
+When registration is finished, take not of the Application Key, which you will use when creating extractor configuration in KBC
 
 {: .image-popup}
 ![Pingdom API key](/extractors/pingdom/05-pingdom-api-key.png)
 
-### 2 -- Select data
+### Setup Extractor
+In the Extractors section, find Pingdom and create new configuration.
+
+{: .image-popup}
+![Pingdom New Configuration](/extractors/pingdom/01-new-configuration.png)
+
+
+You must provide credentials of your Pingdom account and Application Key
+
+- **Email address** -- It is your account login name to
+- **Password**
+- **Application API key**
+
+{: .image-popup}
+![Pingdom Credentials](/extractors/pingdom/02-credentials.png)
+
+### Select data
 
 Choose one of **data periods** to start fetching data for:
 
@@ -188,7 +190,7 @@ Table with information about current plan limits, SMS credits and SMS auto-refil
 
 ### 8 -- Alerts
 
-Table contains detailed informations of all checks
+Table contains detailed informations of generated alerts
 
 | Column | Description |
 | `checks_pk` [PK] | Identifier of check |

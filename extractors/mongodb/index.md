@@ -6,7 +6,7 @@ permalink: /extractors/mongodb/
 * TOC
 {:toc}
 
-MongoDB Extractor allows you to extract data from MongoDB database.
+MongoDB Extractor allows you to extract data from [MongoDB database](https://www.mongodb.com/).
 
 ## Configuring
 
