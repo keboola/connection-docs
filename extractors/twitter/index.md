@@ -153,3 +153,16 @@ This table contains hashtags present in tweets.
 | Column | Description |
 | `tweets_pk` [PK] |  Id of [tweet](#table---tweets) |
 | `text` [PK] | Name of the hashtag, minus the leading ‘#’ character. |
+
+## Usage Limits
+
+This extractor is designed to download up to
+
+- 3200 most recent user tweets (User Timeline)
+-  800 mentions (Mentions)
+- 3000 followers (Followers List)
+- 36000 tweets (Search Tweets)
+
+in one execution. Following executions will incrementally add newer data.
+
+These limits follow [Twitter API Rate Limits](https://dev.twitter.com/rest/public/rate-limits).
