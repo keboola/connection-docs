@@ -50,9 +50,12 @@ Must be specified in [strict format](#strict-format).
 - **Mapping** -- This is the most important section, defining how documents in the collection are mapped to the output tables.
 It, too, has to be valid JSON. To learn more about mapping, go to the [next section](#configure-mapping).
 
+*Tip: Use combination of limit (e.g. only 10 documents) and query (e.g. only document with specific ID)
+while playing with the mapping section to prevent full collection export.*
+
 #### Strict Format
 
-Strict format means standard valid JSON must be used, and you cannot use Mongo extensions as in the
+Strict format means standard valid JSON must be used, and you cannot use MongoDB objects as in the
 [JavaScript shell interface](https://docs.mongodb.com/v3.2/reference/program/mongo/#bin.mongo).
 Thus using objects such as *ObjectId*, *Date* or *NumberLong* is not allowed until you specify them
 in the strict format. Read more on the [strict format](https://docs.mongodb.com/v3.2/reference/mongodb-extended-json/).
