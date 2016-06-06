@@ -3,26 +3,26 @@ title: Snowflake
 permalink: /manipulation/transformations/snowflake/
 ---
 
-* TOC
-{:toc}
+[Snowflake](http://www.snowflake.net/) has many advantages:
 
-We're currently betatesting [Snowflake](http://www.snowflake.net/). It takes all database administration stuff out. No indexes, sort keys, distribution styles, column compressions. Easy scaling, simple data types. Amazing processing power and data throughput. [Let us know](mailto:support@keboola.com) if you want to try! 
+- no database administration stuff
+- no indexes, sort keys, distribution styles, or column compressions
+- easy scaling 
+- simple data types 
+- amazing processing power and data throughput
 
-## Migration from Redshift
+We are currently betatesting it. [Let us know](mailto:support@keboola.com) if you want to give it a try! 
 
-We're collecting tips for [migration from Redshift to Snowflake](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/snowflake/redshift-snowflake).
+### Migration from Redshift to Snowflake
 
-## Limits
+Please share your [migration tips](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/snowflake/redshift-snowflake) with us.
 
-### Time
+### Limits
+Snowflake queries are **limited** to 3,600 seconds by default.
 
-Snowflake queries are limited to 3600 seconds by default.
+### Best Practices
 
-## Best practices
-
-### Case sensitivity 
-
-Snowflake is case case sensitive. All unquoted table/column names are converted to upper case, quoted names keep their case. So this won't work:
+Snowflake is case sensitive. All unquoted table/column names are converted to upper case, quoted names keep their case. So this will not work:
 
 {% highlight sql %}
 -- created as LOWERCASETABLE
@@ -36,4 +36,4 @@ SELECT * FROM LOWERCASETABLE;
 SELECT * FROM "LOWERCASETABLE";
 {% endhighlight %}
  
-Be especially careful in output mappings, table names specifined in output mapping are always quoted.
+Be especially careful in the output mappings. Table names specified in the output mapping are always quoted.
