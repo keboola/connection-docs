@@ -188,7 +188,7 @@ Table with information about current plan limits, SMS credits and SMS auto-refil
 | `availabledefaultchecks` | Checks: Remaining free slots |
 | `useddefault` | Checks: Number of used slots |
 
-### 8 -- Alerts
+### 9 -- Alerts
 
 Table contains detailed informations of generated alerts
 
