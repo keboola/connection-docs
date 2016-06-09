@@ -102,7 +102,7 @@ although they do not reproduce the transformation execution environment exactly.
 with the exact same configuration as the transformation environment, use [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
 
 ## Example 1 -- Using dictionaries
-The following piece of code reads a table with two columns, named **first** and **second**, from the **source.csv** input mapping file into the `csvReader` dictionary. 
+The following piece of code reads a table with two columns, named **first** and **second**, from the **source.csv** input mapping file into the `row` dictionary using `csvReader`. 
 It then adds *ping* to the first column and multiplies the second column by *42*. After that, it saves the row to the **destination.csv** output mapping file.
 
 {% highlight python %}
@@ -129,7 +129,7 @@ It is also important to use `encoding='utf-8'` when reading and writing files.
 
 ## Example 2 -- Using lists
 
-The following piece of code reads a table with some of its columns from the **source.csv** input mapping file into a list of strings `reader`. 
+The following piece of code reads a table with some of its columns from the **source.csv** input mapping file into the `row` list of strings. 
 It then adds *ping* to the first column and multiplies the second column by *42*. After that it saves the row to the **destination.csv** output mapping file.
 
 {% highlight python %}
