@@ -93,11 +93,12 @@ You can now, go to KBC and select **Users & Settings** and on the **Settings**
 there is *Data Takeout* button:
 
 {: .image-popup}
-![Screenshot - Data Takeout](/overview/tutorial/management/data-takeout-project-settings.png)
+![Screenshot - Data Takeout](/management/project-export/data-takeout-project-settings.png)
 
-Now fill the *Access Key ID*, *Secret Access Key*, *S3 Bucket Region* and *S3 Bucket name*:  
+Now fill the *Access Key ID*, *Secret Access Key*, *S3 Bucket Region* and *S3 Bucket name*:
+
 {: .image-popup}
-![Screenshot - Data Takeout](/overview/tutorial/management/data-takeout-settings.png)
+![Screenshot - Data Takeout](/management/project-export/data-takeout-settings.png)
 
 Optionally, you can configure Path inside the S3 bucket, e. g, you can set the path to `my-take/`
 and the data will be stored in `s3://keboola-data-takeout/my-take/`. Leave the path empty, to store
@@ -109,8 +110,9 @@ no actual data will be exported.
 ![Screenshot - Data Takeout](/overview/tutorial/management/data-takeout.png)
 
 When you are ready, click the *Run Export* button:
+
 {: .image-popup}
-![Screenshot - Data Takeout Run](/overview/tutorial/management/data-takeout-project-export.png)
+![Screenshot - Data Takeout Run](/management/project-export/data-takeout-project-export.png)
 
 You can monitor the progress of the data export by clicking the *Export started* link. 
 The data takout may take a considerable amount of time if your project is large.
@@ -130,7 +132,7 @@ Each configuration lists *all properties* (including configuration rows) and *al
 These also contain definitions of all your transformation queries.
 
 {: .image-popup}
-![Screenshot - Sample Folder Structure](/overview/tutorial/management/folder-structure.png)
+![Screenshot - Sample Folder Structure](/management/project-export/folder-structure.png)
 
 If you have ticked the `Export project structure only` checkbox when exporting. Then noactual data were. Only 
 configurations and `sys` tables which are configurations of legacy components were exported.
