@@ -36,6 +36,9 @@ items:
     title: Extractors
     items:
 
+      - url: /extractors/geocoding-augumentation/
+        title: Geocoding Augmentation
+
       - url: /extractors/google-adwords-reports/
         title: Google Adwords Reports
 
