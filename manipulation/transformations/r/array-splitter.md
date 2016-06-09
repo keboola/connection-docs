@@ -3,20 +3,17 @@ title: Array Splitting
 permalink: /manipulation/transformations/r/array-splitter/
 ---
 
-* TOC
-{:toc}
+Array splitting is what you do if you have a list of values in a single cell delimited by a character (a comma, semi-colon, etc.), 
+and want each of those delimited values in a separate row.
 
-Array splitting is when you have a list of values in a single cell delimited by some 
-character (a comma, semi-colon, etc.), and you want each of those delimited values on a separate row.
-
-The following example will take a table like:
+The following example will take a table like
 
 | id | name               |
 |----|--------------------|
 | 1  | first,second,third |
 | 2  | fourth,fifth,sixth |
 
-And produce a table like:
+and produce a table like
 
 | globalId | globalPos | globalVal |
 |----------|-----------|-----------|
@@ -28,17 +25,17 @@ And produce a table like:
 | 2        | 3         | sixth     |
 
 ## Prepare 
-You can use a [sample table](/manipulation/transformations/r/array-source.csv) shown above and import it into 
-your *Storage*. Then set input and output mapping for the transformation.
+Use the [sample table](/manipulation/transformations/r/array-source.csv) shown above and import it into your *Storage*. 
+Then set the input and output mapping for your transformation.
 
 {: .image-popup}
 ![Screenshot - Input/Output mapping](/manipulation/transformations/r/array-split-io.png)
 
-## Use the script
-The following script will take each row of the source table, split the colum which name is specified in the
+## Use the Script
+The following script will take each row of the source table, and split the column, the name of which is specified in the
 `splitCol` variable by the character specified in the `splitChar` variable. The resulting values will be put 
-together with their id specified in the `idCol` variable and they will also be assigned a new sequential id
-in `globalPos` column.   
+together with their id specified in the `idCol` variable, and they will also be assigned a new sequential id
+in the `globalPos` column.   
 
 {% highlight r %}
 splitChar = ','
@@ -83,7 +80,6 @@ write.csv(processedData, file = "out/tables/split-values.csv", row.names = FALSE
 
 When you run the transformation, you will obtain a table with three columns:
 
-- `globalId` - the ID of each row in the original table (name of the id column is in `idCol` variable)
-- `globalPos` - sequential ID of each value **within** the original row
-- `globalVal` - each value that has been split out of the original array column (name of that 
-column is specified in the `splitCol` variable)
+- `globalId` -- ID of each row in the original table (the name of the id column is in the `idCol` variable),
+- `globalPos` -- sequential ID of each value **within** the original row, and
+- `globalVal` -- each value that has been split out of the original array column (the name of that column is specified in the `splitCol` variable).

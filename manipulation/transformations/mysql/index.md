@@ -1,5 +1,5 @@
 ---
-title: MySQL
+title: MySQL Transformation
 permalink: /manipulation/transformations/mysql/
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Redshift
+title: Redshift Transformation
 permalink: /manipulation/transformations/redshift/
 ---
 

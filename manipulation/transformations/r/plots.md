@@ -6,31 +6,27 @@ permalink: /manipulation/transformations/r/plots/
 * TOC
 {:toc}
 
+Generating plots in R is supported through [Storage file uploads](/storage/file-uploads/). To upload a plot to Storage, 
+save the file in the output directory for files (`out/files/`). Each file in that directory will be automatically saved into Storage File Uploads. 
 
-Generating plots in R is supported through [Storage file uploads](/storage/file-uploads/). To upload a plot to 
-the Storage, save the file in the output directory for files (`out/files/`), each file in that directory will 
-automatically be saved into Storage File Uploads. To make file handling a bit easier, it is optionally possible 
-to write a *manifest* which describes the file. This can be used to set *file tags* and other 
-file upload options. To write a manifest use the `app$writeFileManifest` function with the following signature:
+To make file handling a bit easier, it is possible to write a *manifest*, which describes the file. This can be used to set *file tags* 
+and other file upload options. To write the manifest, use the `app$writeFileManifest` function with the following signature:
 
 {% highlight r %}
 app$writeFileManifest = function(fileName, fileTags = vector(), isPublic = FALSE, isPermanent = TRUE, notify = FALSE)
 {% endhighlight %}
 
-Note: Do remember to use the `out/files/` directory for plots.
+Remember to use the `out/files/` directory for plots. And note that the `rDocker` tag will be automatically added to all files with manifests.
 
-Note: Tag `rDocker` will be automatically added to all files with manifests.
-
-For the examples, you may use the sample [graph-source.csv](/manipulation/transformations/r/graph-source.csv) data file,
-upload the table to your **Storage**.
+In the following **examples**, use the sample [graph-source.csv](/manipulation/transformations/r/graph-source.csv) data file. Create a new bucket in Storage and upload the table to it.
 
 {: .image-popup}
 ![Screenshot - Upload table](/manipulation/transformations/r/graph-source.png)
 
-## Example 1 - Output of single file
+## Example 1 -- Output of a single file
 
 Create a [new R transformation](/overview/tutorial/manipulate/), and add the **graph-source** table 
-in input mapping. There is not outputmapping.
+in the input mapping. There is no output mapping.
 
 {: .image-popup}
 ![Screenshot - Configure transformations](/manipulation/transformations/r/graph-source-2.png)
@@ -52,7 +48,7 @@ par(oldPar)
 app$writeFileManifest("/data/out/files/graph-2x2.png", c("regression", "all-in-one"))
 {% endhighlight %}
 
-Once the transformation finishes, a file will be added to file uploads:
+Once the transformation finishes, a file will be added to File uploads:
 
 {: .image-popup}
 ![Screenshot - File Uploads](/manipulation/transformations/r/plot-file-uploads.png)
@@ -63,12 +59,12 @@ single image using a 2x2 grid.
 {: .image-popup}
 ![Result linear model plots](/manipulation/transformations/r/graph_2x2.png) 
 
-## Example 2 - Output of multiple files
-You can use the following script analogously to Example 1, the only difference is that this script
+## Example 2 -- Output of multiple files
+Use the following script the same way as in Example 1. The only difference is that this script
 produces multiple files. 
 
 {% highlight r %}
-data <- read.csv("/data/in/tables/graphSource.csv")
+data <- read.csv("/data/in/tables/graph-source.csv")
 
 model <- lm(formula = time_spent_in_shop ~ customer_age + I(customer_age^2), data = data)
 png("/data/out/files/graph-%d.png", width = 800, height = 800, res=120)
@@ -81,17 +77,17 @@ app$writeFileManifest("/data/out/files/graph-3.png", c("regression", "scale-loca
 app$writeFileManifest("/data/out/files/graph-4.png", c("regression", "residuals vs. leverage"))
 {% endhighlight %}
 
-If a plot function produces multiple graphs (like the `lm.plot` in the above example), you need to 
-use `%d` in file name so that multiple files are generated. Manifest is written for each file individually)
+If a plot function produces multiple graphs, like the `lm.plot` in the above example, use `%d` in the file name in order to generate multiple files. 
+A manifest is written for each file individually.
 
-## Example 3 - Using ggplot
+## Example 3 -- Using ggplot
 
-If you want to use the [ggplot](http://docs.ggplot2.org/current/) package, you need to use 
-different function for saving a file in your script. The rest remains the same as in previous examples.
+If you want to use the [ggplot](http://docs.ggplot2.org/current/) package, use a different function for saving a file in your script. 
+The rest remains the same as in the previous examples.
 
 {% highlight r %}
 library(ggplot2)
-data <- read.csv("/data/in/tables/graphSource.csv")
+data <- read.csv("/data/in/tables/graph-source.csv")
 
 plot <- ggplot(data, aes(y = time_spent_in_shop, x = customer_age)) + 
     geom_point(shape = 1) + 
@@ -101,4 +97,4 @@ ggsave(filename = "/data/out/files/graph2.png", width = 10, height = 10, units =
 app$writeFileManifest("/data/out/files/graph2.png", c("regression", "ggplot"))
 {% endhighlight %}
 
-Don't forget to list `ggplot2` in the packages section of transformation.
+Do not forget to list `ggplot2` in the packages section of the transformation.

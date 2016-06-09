@@ -38,7 +38,7 @@ Credentials available
   - *SSL* -- Show secure connection information.
   - *Drop credentials* -- Delete the database (and all tables); if this is the last MySQL sandbox of the KBC user, delete the MySQL user. 
 
-### Connecting to sandbox
+### Connecting to Sandbox
 
 To connect to a MySQL sandbox, use any MySQL client. We recommend using this [SSL certificate](https://d3iz2gfan5zufq.cloudfront.net/files/sh-tapi.ca.pem) for a secure connection.
 
@@ -83,18 +83,18 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 
 There are two ways to create a sandbox: 
 
-- A plain sandbox simply loads tables from Storage into your sandbox. The data are always loaded from scratch. When you modify the input mapping (for example, by adding another table), the old sandbox is deleted and a new one is created. 
+- **Plain sandbox** -- Load tables from Storage into your sandbox. The data are always loaded from scratch. When you modify the input mapping (for example, by adding another table), the old sandbox is deleted and a new one is created. 
 
-- A transformation sandbox, on the other hand, can be used for gradual development of transformations. The input structure can be modified during the process without deleting the current state of the sandbox.
+- **Transformation sandbox** -- Use for gradual development of transformations; the input structure can be modified during the process without deleting the current state of the sandbox.
 
 ### Plain Sandbox
 
 {: .image-popup}
 ![MySQL sandbox](/manipulation/transformations/sandbox/sandbox-mysql-load-data.png)
 
-Use the **Load data** button to load tables or whole buckets into a sandbox. You can limit the number of rows that are loaded, 
-this is useful for sampling a large table, or use the **preserve** option to keep the current state of your sandbox. 
-Otherwise it will be emptied. The **preserver** option is handy when you need to add a table to your working sandbox.
+Use the **Load data** button to load tables or whole buckets into a sandbox. You can limit the number of rows that are loaded;
+this is useful for sampling a large table. Or, use the **Preserve** option to keep the current state of your sandbox. 
+Otherwise, it will be emptied. The **Preserve** option comes in handy when you need to add a table to your working sandbox.
 
 Imported tables will have their full names including bucket names as table names.
 
@@ -107,8 +107,10 @@ To start or continue work on your transformation, create a transformation sandbo
 
 There you can  
 
- - load the tables specified in the input mapping 
- - load the input tables and execute required transformations -- that prepares the sandbox workspace for the current transformation (if there are any dependencies)
- - execute the transformation, and all dependencies, without writing back to Storage -- that is a dry-run for validation
+ - load the tables specified in the input mapping, 
+ - load the input tables and execute required transformations -- that prepares the sandbox workspace for the current transformation (if there are any dependencies), and
+ - execute the transformation and all dependencies, without writing back to Storage -- that is a dry-run for validation.
  
-Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page. To add tables to an existing sandbox, use the transformation sandbox. 
+Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page. To add tables to an existing sandbox, use the plain sandbox. 
+
+Your sandboxes can be later accessed by clicking the **Sandbox** icon in the top right corner of your screen, next to the **Add Bucket** button.

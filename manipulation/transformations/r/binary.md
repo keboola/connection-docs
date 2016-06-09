@@ -1,19 +1,18 @@
 ---
-title: Using binary files
+title: Using Binary Files
 permalink: /manipulation/transformations/r/binary/
 ---
 
 * TOC
 {:toc}
 
-It is possible to use pre-computed models (models of some kind of behaviour in your data which may be used e.g for predictions)
-inside an R transformation. There may be multiple reasons for using a pre-computed model inside an R transformation e.g.:
+Inside an R transformation, it is possible to use pre-computed models. It means models of some kind of behaviour in your data, which may be used, for example, for predictions). 
+The following are several reasons for using a pre-computed model inside an R transformation:
 
-- it takes too much resources (time/memory) to compute the model and it's therefore impractical to compute it inside a 
-(daily) business transformation
-- the model requires manual action, it can be either that its creation requires specially treated data (cleaned, validated)
-or that you'd like the results verified before using them in production
-- the model is provided by a 3rd party
+- When it comes to time and memory, too many resources are required to compute the model and it is therefore impractical to compute it inside a (daily) business transformation.
+- The model requires manual action; its creation requires specially treated data (cleaned, validated),
+or you would like verify the results before using them in production.
+- The model is provided by a 3rd party.
 
 In either case it is possible to use a pre-computed model in R transformation using standard R function `save()` and `load()`. 
 You can also [download a sample package](/manipulation/transformations/r/data.zip) 
