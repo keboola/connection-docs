@@ -35,6 +35,10 @@ items:
   - url: /extractors/
     title: Extractors
     items:
+
+      - url: /extractors/google-adwords-reports/
+        title: Google Adwords Reports
+
       - url: /extractors/mongodb/
         title: MongoDB
         items:
@@ -88,8 +92,6 @@ items:
     items:
       - url: /management/project-export/
         title: Data Takeout
-        items:
 
       - url: /management/project-delete/
         title: Delete Project
-        items: 
