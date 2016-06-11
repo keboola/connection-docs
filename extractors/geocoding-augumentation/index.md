@@ -6,50 +6,51 @@ permalink: /extractors/geocoding-augumentation/
 * TOC
 {:toc}
 
-This extractor allows you to do geocoding of locations to GPS coordinates and vice versa.
+This extractor allows you to do extract additonal data about locations given by their coordinates 
+and vice versa.
 
 ## Create new configuration
+Find Geocoding Augmentation in the list of extractors and create a new configuration.
 
 {: .image-popup}
-![](/extractors/geocoding-augumentation/ui2.png)
+![Screenshot - Create configuration](/extractors/geocoding-augumentation/ui1.png)
 
-## Configure Extraction
-
-1. Add one or more input tables to input mapping. Please note that the table must have exactly one column with
-locations (or two columns with latitudes and longitudes in case of reverse geocoding) or you have to map the
-one (or two) columns in the configuration.
-
-2. Add exactly one table to output mapping which will be filled with result of geocoding.
-
-3. Fill [parameters configuration](#parameters). It is in JSON format and must contain method of geocoding,
-data provider and other optional parameters like API key or locale.
+## Augment locations
+In this mode operation, you need to specify location, and the extractor
+will fetch its geographical lattitude and longitude using a specified [provided](#providers).
+Specify one or more tables which have exactly one column which contains textual 
+specification of the location. If the source table does not meet these requirements, edit
+the *input mapping details* accordingly. You can test extraction 
+on [sample file](/extractors/geocoding-augmentation/locations.csv). 
+Specify a single table in the output mapping and select **geocode** method in configuration.
+(names of input and CSV files are arbitrary, so are the names of the columns). 
 
 {: .image-popup}
-![](/extractors/geocoding-augumentation/ui3.png)
+![Screenshot - Add coordinates to locations](/extractors/geocoding-augumentation/ui2.png)
 
-### Parameters
+## Augment coordinates
+In this mode operation, you need to specify geographical lattitude and longitude, and the extractor
+will fetch information about the closest place found on the map of the given [provided](#providers)
+Specify one or more tables which have exactly two columns, first column must be lattitude, second 
+column is longitude. If the source table does not meet these requirements, edit
+the *input mapping details* accordingly. You can test extraction 
+on [sample file](/extractors/geocoding-augmentation/coords.csv). 
+Specify a single table in the output mapping and select **reverse** method in configuration.
+(names of input and CSV files are arbitrary, so are the names of the columns). 
 
-- **method** - method of geocoding, allowed values are:
-    - **geocode** - standard geocoding of locations to coordinates
-    - **reverse** - reverse geocoding of coordinates to locations
-- **provider** - name of provider which will be queried for the data, allowed values are:
-    - **google_maps** - Google Maps provider, needs parameter **apiKey** with your access key to the API (you need "Server" type of key)
-    - **google_maps_business** - Google Maps for Business provider, needs parameters **clientId** and **privateKey**
-    - **bing_maps** - Bing Maps provider, needs attribute **apiKey**
-    - **yandex** - Yandex provider, does not need any API key, locale parameter may be one of these values: uk-UA, be-BY, en-US, en-BR, tr-TR
-    - **map_quest** - MapQuest provider, needs parameter **apiKey**
-    - **tomtom** - TomTom provider, needs parameter **apiKey**, parameter locale may have one of these values: de, es, fr, it, nl, pl, pt, sv
-    - **opencage**: OpenCage provider, needs parameter **apiKey**
-    - **openstreetmap**: OpenStreetMap provider, does not need API key
-- **locale** - code of language used for local names
+{: .image-popup}
+![Screenshot - Add locations to coordinates](/extractors/geocoding-augumentation/ui3.png)
 
-### Example
+## Providers
+In component configuration, you can specify different providers of the location 
+data. Usage limits and the result data may differ between various providers.
+Available providers which will be queried for the data, are:
 
-{% highlight json %}
-{
-    "method": "reverse",
-    "provider": "google_maps",
-    "#apiKey": "jfdksjknvmcxmvnc,x",
-    "locale": "de"
-}
-{% endhighlight %}
+- **google_maps** - [Google Maps](https://developers.google.com/maps/documentation/geocoding/intro) provider, needs parameter **apiKey** with your access key to the API (you need "Server" type of key)
+- **google_maps_business** - [Google Maps](https://developers.google.com/maps/premium/faq#getting_started) for Business provider, needs parameters **clientId** and **privateKey**
+- **bing_maps** - [Bing Maps](https://msdn.microsoft.com/en-us/library/ff701733.aspx) provider, needs attribute **apiKey**
+- **yandex** - [Yandex](https://tech.yandex.com/maps/doc/geocoder/desc/concepts/About-docpage/) provider, does not need any API key, locale parameter may be one of these values: uk-UA, be-BY, en-US, en-BR, tr-TR
+- **map_quest** - [MapQuest](https://www.mapquestapi.com/geocoding/) provider, needs parameter **apiKey**
+- **tomtom** - [TomTom](http://www.programmableweb.com/api/tomtom-geocoding) provider, needs parameter **apiKey**, parameter locale may have one of these values: de, es, fr, it, nl, pl, pt, sv
+- **opencage**: [OpenCage](https://geocoder.opencagedata.com/) provider, needs parameter **apiKey**
+- **openstreetmap**: [OpenStreetMap](http://wiki.openstreetmap.org/wiki/Nominatim) provider, does not need API key
