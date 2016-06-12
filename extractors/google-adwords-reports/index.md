@@ -18,13 +18,13 @@ If you don't have an account, you can create a [test account](https://developers
 Create new configuration and give it some name
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/google-adwrds-reports/ui_create_config.png)
+![Screenshot - Create configuration](/extractors/google-adwords-reports/ui_create_config.png)
 
 When you the configuration is created, you need to authorize the extractor to access your AdWords 
 reports. Clicking on the button will redirect you to Google and ask for authorization.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/google-adwrds-reports/ui_authorize_config.png)
+![Screenshot - Create configuration](/extractors/google-adwords-reports/ui_authorize_config.png)
 
 ## Configuration
 You must specify your *developer token* and *customer id* to run the extractor. To download a report, you 
@@ -41,4 +41,4 @@ Additionally, for each query, you can specify array of columns to be used as pri
 (e.g. for CampaignId use Campaign_ID and for Date use Day)
 
 {: .image-popup}
-![Screenshot - Report column names](/extractors/google-adwrds-reports/report_types.png)
+![Screenshot - Report column names](/extractors/google-adwords-reports/report_types.png)
