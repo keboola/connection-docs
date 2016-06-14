@@ -43,7 +43,8 @@ Specify a single table in the output mapping and select **reverse** method in co
 
 ## Providers
 In component configuration, you can specify different providers of the location 
-data. Usage limits and the result data may differ between various providers.
+data. Usage limits and the result data may differ between various providers. Some of the providers 
+require the parameter `locale` to be set, if you are unsure, leave it empty or use `us`. 
 Available providers which will be queried for the data, are:
 
 - **google_maps** - [Google Maps](https://developers.google.com/maps/documentation/geocoding/intro) provider, needs parameter **apiKey** with your access key to the API (you need "Server" type of key)
