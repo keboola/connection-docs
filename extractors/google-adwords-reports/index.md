@@ -60,7 +60,8 @@ as `Keyword_ID` in the primary columns, because that is
 [its display name](https://developers.google.com/adwords/api/docs/appendix/reports/keywords-performance-report#id).
 
 When you run the above configuration, you will obtain three tables in the output bucket -
-`campaigns`, `customers` and `keywords`. 
+`campaigns`, `customers` and `keywords`. Note that the tables will be overwritten on each run,
+incremental downloads are not supported.
 
 #### campaigns
 This table is created automatically and contains list of all campaigns in the used account, e.g.:
