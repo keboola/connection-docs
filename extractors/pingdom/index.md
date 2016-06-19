@@ -6,47 +6,47 @@ permalink: /extractors/pingdom/
 * TOC
 {:toc}
 
-This extractor helps you to extract data from [Pingdom](link https://www.pingdom.com/).
+This extractor helps you extract data from [Pingdom](link https://www.pingdom.com/).
 
-Pingdom is service for monitoring the uptime and performance of your websites or web applications
+Pingdom is a service for monitoring the uptime and performance of your websites or web applications.
 
 ## Configuring Extractor
-Before you start, you need to have a working Pingdom account and you need to obtain a Pingdom API Key.
+Before you start, have a working Pingdom account and get a Pingdom API Key.
 
 #### Create new Application API key
 
-Log in to your account on [Pingdom](link https://www.pingdom.com/) site
+Log in to your account on the [Pingdom](link https://www.pingdom.com/) site.
 
-Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys) and use **Register application** button
+Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys) and use the **Register application** button.
 
 {: .image-popup}
 ![Pingdom Api key list](/extractors/pingdom/03-pingdom-api.png)
 
-Fill required fields of registration form.
+Fill the required fields of the registration form.
 
-- **Application name** -- Set name of your application key, for example: `Keboola Pingdom Extractor`
+- **Application name** -- Set the name of your application key, for example: `Keboola Pingdom Extractor`
 - **Application description** -- Fill some description
-- **Application type** select `Public` option
-- **Platform**: select `Server` option
+- **Application type** select the `Public` option
+- **Platform**: select the `Server` option
 
 {: .image-popup}
 ![Pingdom API registration](/extractors/pingdom/04-pingdom-api-form.png)
 
-When registration is finished, take not of the Application Key, which you will use when creating extractor configuration in KBC
+When registration is finished, take not of the Application Key, which you will use when creating an extractor configuration in KBC.
 
 {: .image-popup}
 ![Pingdom API key](/extractors/pingdom/05-pingdom-api-key.png)
 
 ### Setup Extractor
-In the Extractors section, find Pingdom and create new configuration.
+In the Extractors section, find Pingdom and create a new configuration.
 
 {: .image-popup}
 ![Pingdom New Configuration](/extractors/pingdom/01-new-configuration.png)
 
 
-You must provide credentials of your Pingdom account and Application Key
+Provide credentials of your Pingdom account and Application Key.
 
-- **Email address** -- It is your account login name to
+- **Email address** -- It is your account login name 
 - **Password**
 - **Application API key**
 
@@ -55,12 +55,12 @@ You must provide credentials of your Pingdom account and Application Key
 
 ### Select data
 
-Choose one of **data periods** to start fetching data for:
+Choose one of the **data periods** to start fetching data for
 
-- `24 hours ago`
-- `Last 3O days` -- *Pingdom API provides history only for up to 30 days before current day*
+- `24 hours ago`;
+- `Last 3O days` -- *Pingdom API provides history only for up to 30 days before the current day*
 
-Finally, select one of data mapping **template**s and click on **Save configuration**
+Finally, select one of the data mapping **templates** and click on **Save configuration**.
 
 {: .image-popup}
 ![Pingdom Data Mapping](/extractors/pingdom/06-template.png)
@@ -70,7 +70,7 @@ Finally, select one of data mapping **template**s and click on **Save configurat
 
 ### 1 -- Checks
 
-Table contains overview of all checks
+This table contains overview of all checks:
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the check. |
@@ -90,7 +90,7 @@ Table contains overview of all checks
 
 ### 2 -- Checks-detailed
 
-Table contains detailed informations of all checks
+This table contains detailed information of all checks:
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the check |
@@ -106,15 +106,15 @@ Table contains detailed informations of all checks
 | `sendnotificationwhendown` |  Send notification when down `n` times (integer) |
 | `notifyagainevery` | Notify again every `n` result (integer)|
 | `notifywhenbackup` | Notify when back up again (`1` if enabled) |
-| `lasterrortime` | If some error was occured, this field will contain the unix timestamp of last error |
+| `lasterrortime` | If some error was occurred, this field will contain the unix timestamp of last error |
 | `lasttesttime` | If the check was already tested, this field will contain the unix timestamp of last test |
 | `lastresponsetime` | Response time (in milliseconds) of last test |
-| `created` | Unix timestame of check creation |
+| `created` | Unix timestamp of check creation |
 | `ipv6` | Use ipv6 instead of ipv4 |
 
 ### 3 -- Checks-tags
 
-Table contains list of all checks tags
+The table contains a list of all checks tags:
 
 | Column | Description |
 | `name` | Tag name |
@@ -124,7 +124,7 @@ Table contains list of all checks tags
 
 ### 4 -- Checks-contacts
 
-This table represents relations between checks and contacts
+This table represents relations between checks and contacts:
 
 | Column | Description |
 | `contacts_pk` | Contact identifier |
@@ -132,7 +132,7 @@ This table represents relations between checks and contacts
 
 ### 5 -- Contacts
 
-Table contains contains data of all contacts
+This table contains all contact data:
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the check |
@@ -147,7 +147,7 @@ Table contains contains data of all contacts
 
 ### 6 -- Probes
 
-Pingdom probe servers list
+The Pingdom probe servers list:
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the probe |
@@ -162,7 +162,7 @@ Pingdom probe servers list
 
 ### 7 -- Results
 
-Table contains raw test results for all checks
+This table contains raw test results for all checks:
 
 | Column | Description |
 | `probes_pk` [PK] | Probe identifier |
@@ -176,29 +176,29 @@ Table contains raw test results for all checks
 
 ### 8 -- Credits
 
-Table with information about current plan limits, SMS credits and SMS auto-refilling
+This table has information about current plan limits, SMS credits and SMS auto-refilling:
 
 | Column | Description |
 | `availablesms` | SMS credits remaining |
 | `availablesmstests` | SMS provider tests remaining |
-| `autofillsms` | Automaticaly refill your SMS credits (`1` if enabled) |
+| `autofillsms` | Automatically refill your SMS credits (`1` if enabled) |
 | `autofillsms_amount` | Number of credits to refill |
-| `autofillsms_when_left` | Automaticaly refill when `n` SMS credits left |
+| `autofillsms_when_left` | Automatically refill when `n` SMS credits left |
 | `defaultchecklimit` | Checks: Total slots |
 | `availabledefaultchecks` | Checks: Remaining free slots |
 | `useddefault` | Checks: Number of used slots |
 
 ### 9 -- Alerts
 
-Table contains detailed informations of generated alerts
+This table contains detailed information on generated alerts:
 
 | Column | Description |
 | `checks_pk` [PK] | Identifier of check |
 | `contacts_pk` [PK] | Identifier of alerted contact |
-| `time` [PK] | Unix timestame of alert creation |
+| `time` [PK] | Unix timestamp of alert creation |
 | `via` [PK] | Alert medium	(`email`, `sms`, `twitter`, `iphone` or `android`) |
 | `contactname` | Name of alerted contact |
 | `status` | Alert status (`sent`, `delivered`, `error`, `notdelivered` or `nocredits`) |
 | `messageshort` | Short description of message |
-| `sentto` | Target address, phone number etc |
+| `sentto` | Target address, phone number etc. |
 | `charged` | `1` if account was charged for this message |
