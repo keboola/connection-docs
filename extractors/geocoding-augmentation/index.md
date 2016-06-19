@@ -1,6 +1,6 @@
 ---
 title: Geocoding Augmentation
-permalink: /extractors/geocoding-augumentation/
+permalink: /extractors/geocoding-augmentation/
 ---
 
 * TOC
@@ -13,7 +13,7 @@ and vice versa.
 Find Geocoding Augmentation in the list of extractors and create a new configuration.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/geocoding-augumentation/ui1.png)
+![Screenshot - Create configuration](/extractors/geocoding-augmentation/ui1.png)
 
 ## Augment locations
 In this mode operation, you need to specify location, and the extractor
@@ -26,7 +26,7 @@ Specify a single table in the output mapping and select **geocode** method in co
 (names of input and CSV files are arbitrary, so are the names of the columns). 
 
 {: .image-popup}
-![Screenshot - Add coordinates to locations](/extractors/geocoding-augumentation/ui2.png)
+![Screenshot - Add coordinates to locations](/extractors/geocoding-augmentation/ui2.png)
 
 ## Augment coordinates
 In this mode operation, you need to specify geographical lattitude and longitude, and the extractor
@@ -39,7 +39,7 @@ Specify a single table in the output mapping and select **reverse** method in co
 (names of input and CSV files are arbitrary, so are the names of the columns). 
 
 {: .image-popup}
-![Screenshot - Add locations to coordinates](/extractors/geocoding-augumentation/ui3.png)
+![Screenshot - Add locations to coordinates](/extractors/geocoding-augmentation/ui3.png)
 
 ## Providers
 In component configuration, you can specify different providers of the location 
