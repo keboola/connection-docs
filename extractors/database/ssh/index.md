@@ -21,7 +21,8 @@ The extractor will then connect to this *SSH proxy server* and through it to the
 Follow these steps, to setup a SSH tunnel to your database server:  
 
 #### 1. Setup SSH proxy server
-Here is a very basic example Dockerfile. All it does is run an sshd daemon and exposes port 22.
+Here is a very basic example [Dockerfile](https://docs.docker.com/engine/reference/builder/). 
+All it does is run an sshd daemon and exposes port 22.
 
 ~~~
 FROM ubuntu:14.04
