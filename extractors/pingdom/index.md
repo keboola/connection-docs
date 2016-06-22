@@ -6,7 +6,7 @@ permalink: /extractors/pingdom/
 * TOC
 {:toc}
 
-This extractor helps you extract data from [Pingdom](link https://www.pingdom.com/).
+This extractor helps you extract data from [Pingdom](https://www.pingdom.com/).
 
 Pingdom is a service for monitoring the uptime and performance of your websites or web applications.
 
@@ -15,7 +15,7 @@ Before you start, have a working Pingdom account and get a Pingdom API Key.
 
 #### Create new Application API key
 
-Log in to your account on the [Pingdom](link https://www.pingdom.com/) site.
+Log in to your account on the [Pingdom](https://www.pingdom.com/) site.
 
 Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys) and use the **Register application** button.
 
@@ -46,7 +46,7 @@ In the Extractors section, find Pingdom and create a new configuration.
 
 Provide credentials of your Pingdom account and Application Key.
 
-- **Email address** -- It is your account login name 
+- **Email address** -- It is your account login name
 - **Password**
 - **Application API key**
 

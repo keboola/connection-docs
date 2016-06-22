@@ -85,7 +85,7 @@ Standard users are all equal as most KBC operations generally require access to 
 You can also create users with [limited access](/storage/tokens/#limited-tokens), which can only read or write to some buckets:
 
 {: .image-popup}
-![Screenshot - Storage Console View](/overview/tutorial/management/storage-console-view.png)
+![Screenshot - Storage Console View](/overview/tutorial/management/access-token-detail.png)
 
 In addition to sharing sections of your data with selected users, the buckets can be also used for writing;
 people can send data directly to your KBC project instead of struggling with FTP or e-mail attachments.

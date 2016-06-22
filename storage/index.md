@@ -11,7 +11,7 @@ It is implemented as a layer on top of various database engines that we use as o
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)).
 
 As with every other component, everything what can be done through the UI can be done programatically via
-the [Storage API](apiary), see the [developer guide](https://developers.keboola.com/storage/) if you are interested.
+the [Storage API](http://docs.keboola.apiary.io/), see the [developer guide](https://developers.keboola.com/integrate/storage/) if you are interested.
 Every operation done in the Storage must be authorized via a [token](/storage/tokens/).
 
 Storage component manages all data stored in each KBC project. These are:
