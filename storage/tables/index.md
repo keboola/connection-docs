@@ -3,6 +3,9 @@ title: Tables
 permalink: /storage/tables/
 ---
 
+* TOC
+{:toc}
+
 The Table storage of your project is accessible through *Storage* - *Tables* view. Your data tables are organized into
 *buckets* which are organized into *stages*. There are three stages available:
 

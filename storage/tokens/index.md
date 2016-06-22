@@ -3,6 +3,9 @@ title: Tokens
 permalink: /storage/tokens/
 ---
 
+* TOC
+{:toc}
+
 Every operation done in KBC must be authorized with a *Token* (sometimes called *Storage API Token*,
 *SAPI Token* or simply *Storage Token*). Storage token is required for almost all operations because they
 (may) manipulate data in Storage.

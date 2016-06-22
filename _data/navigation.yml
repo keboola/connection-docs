@@ -35,6 +35,8 @@ items:
   - url: /extractors/
     title: Extractors
     items:
+      - url: /extractors/database/
+        title: Database
 
       - url: /extractors/geocoding-augmentation/
         title: Geocoding Augmentation
@@ -56,6 +58,21 @@ items:
 
       - url: /extractors/twitter/
         title: Twitter
+
+  - url: /storage/
+    title: Storage
+    items:
+      - url: /storage/tables/
+        title: Tables & Aliases
+
+      - url: /storage/file-uploads/
+        title: File Uploads
+
+      - url: /storage/tokens/
+        title: Tokens
+
+      - url: /storage/configurations/
+        title: Configurations
 
   - url: /manipulation/
     title: Data Manipulation
@@ -89,7 +106,7 @@ items:
 
               - url: /manipulation/transformations/r/binary/
                 title: Using binary files
-                
+
   - url: /management/
     title: Project Management
     items:
