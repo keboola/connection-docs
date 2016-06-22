@@ -3,27 +3,43 @@ title: Storage
 permalink: /storage/
 ---
 
-{%comment %}
-### Storage
+*See how to start working with Storage in our [Getting Started tutorial](/overview/tutorial/load/).*
+
 *Storage* is the central KBC [subsystem](/overview/) managing everything related to storing data and accessing it.
-It is implemented as a layer on top of various database engines that we use as our *backends* ([Mysql](https://www.mysql.com/),
-[Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). 
+It is implemented as a layer on top of various database engines that we use as our *backends*
+([Mysql/MariaDB](https://mariadb.org/),
+[Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)).
 
-Pojmy
-Stage/Bucket/Table/Backend/Alias - je to uz v /overview/tutorial/store/ ale tady udelat jasny vicet, odkazat se na tutorial
-priklad na alias je v /overview/tutorial/googledrive/ nakonci
-Token je popsany v /overview/ popsat lip/doplnit odkaz?
+As with every other component, everything what can be done through the UI can be done programatically via
+the [Storage API](apiary), see the [developer guide](https://developers.keboola.com/storage/) if you are interested.
+Every operation done in the Storage must be authorized via a [token](/storage/tokens/).
 
+Storage component manages all data stored in each KBC project. These are:
+- [data tables](/storage/tables/)
+- [data files](/storage/file-uploads/)
+- [component configurations](/storage/configurations/)
+
+Data in storage are internally stored in a database backend. Each backend has some specific properties, which
+are compared in the below table:
+
+Feature | MySQL | Redshift | Snowflake
+---------- | ----------- | ---------- | -------------
+Partial Import (Deprecated) | ✓ | x | x
+Export formats | `RFC`, `ESCAPED*`, `RAW*` | `RFC`, `ESCAPED*`, `RAW*`  | `RFC`
+Simple Aliases | ✓ | x | ✓
+Custom SQL Aliases | x | ✓ | ✓
+Maximum number of columns in single table | Max. row size of 65,535 bytes | 1200 | 1200 |
+Maximum table cell size | 64kB | 64kB | 1MB |
+Sync export (Data Preview) columns limit | x | x | 110 |
+
+* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`
+
+
+{%comment %}
 Backendy
 - vypsat a strucne uvest jake jsou mezi nimi rozdily, odkaz na billing a na sales
 
-odkaz na API a developers.kebooola.com
-
-Jobs/Events
-ze je to k nicemu a lepsi jsou events u Jobu
+Jobs/Events ze je to k nicemu a lepsi jsou events u Jobu
 
 kopirovani/sdileni dat mezi projekty
-
-vysvetlit jak je to s pridavanim sloupcu
-
 {% endcomment %}
