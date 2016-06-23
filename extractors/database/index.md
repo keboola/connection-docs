@@ -43,3 +43,6 @@ to be accessed directly from the internet. The SSH connection is encrypted and u
 detailed instructions for your system administrator for setting up a SSH tunel, see the [developer documentation](https://developers.keboola.com/integrate/database/).
 While setting up an SSH tunnel requires some work from your system administrator, it is the most reliable and secure option for connecting to your database server.
 
+### MySQL Encryption
+MySQL database server also supports encrypting the whole database communication using SSL Certificates. See the
+[official guide](http://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) for instruction to set it up.
