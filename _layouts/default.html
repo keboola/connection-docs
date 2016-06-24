@@ -54,11 +54,9 @@
 
 		<div class="container footer">
 			<div class="inside">
-				<div class="row">
-					<div class="col-sm-12">
-						<!--Footer-->
-					</div>
-				</div>
+				<p>
+					&copy; 2016 Keboola
+				</p>
 			</div>
 		</div>
 
@@ -73,13 +71,21 @@
 		  elementParse: function(item) { item.src = item.el.attr('src'); }
 		}});
 
-		$('.sidebar .navigation').affix({
-			offset: {
-				top: function() {
-					return $('.container.header').height();
+		setTimeout(function () {
+			$('.sidebar .navigation').affix({
+				offset: {
+					top: function () {
+						return (this.top = $('.container.header').height());
+					},
+					bottom: function () {
+						return (this.bottom = ($('.container.footer').outerHeight(true) + 36));
+					}
 				}
-			}
-		})
+			});
+
+			$('body').trigger('click'); // fix for "affix-bottom"
+		}, 100);
+
 	});
 	</script>
 {% include analytics.html %}

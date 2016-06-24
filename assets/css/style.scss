@@ -218,6 +218,16 @@ table {
         width: 262.5px;
       }
     }
+    &.affix-bottom {
+      @media (min-width: $screen-md-min) {
+        position: absolute;
+        top: 0;
+        width: 212.5px;
+      }
+      @media (min-width: $screen-lg-min) {
+        width: 262.5px;
+      }
+    }
   }
 }
 
@@ -234,6 +244,13 @@ table {
     @media (min-width: $screen-md-min) {
       padding: 1.8em 2.5em 2em;
     }
+  }
+}
+
+.footer {
+  .inside {
+    text-align: center;
+    padding: 2em 1em;
   }
 }
 
