@@ -6,7 +6,7 @@ permalink: /extractors/geocoding-augmentation/
 * TOC
 {:toc}
 
-This extractor allows you to import additional location data based on coordinates, and vice versa.
+This extractor allows you to import additional location data specified as coordinates, and vice versa.
 
 ## Create New Configuration
 Find Geocoding Augmentation in the list of extractors and create a new configuration. Name it.
@@ -19,6 +19,7 @@ In this case, specify the location. The extractor will fetch its geographical la
 Specify one or more tables which have exactly one column with textual specification of the location. 
 If the source table does not meet these requirements, edit the *input mapping details* accordingly. 
 You can test the extraction on this [sample file](/extractors/geocoding-augmentation/locations.csv). 
+Upload it to the 'in.c-main' bucket in Storage first and call it *locations*.
 Specify a single table in the output mapping and select the **geocode** method in the configuration.
 (The names of the input and CSV files are arbitrary, and so are the names of the columns.)
 
