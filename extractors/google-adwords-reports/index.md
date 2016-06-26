@@ -18,7 +18,7 @@ Find Google AdWords in the list of extractors and create a new configuration. Na
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/google-adwords-reports/ui_create_config.png)
 
-Then authorize the extractor to access your AdWords reports. Clicking the button will redirect you to Google and ask for authorization.
+Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your AdWords reports.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/google-adwords-reports/ui_authorize_config.png)
