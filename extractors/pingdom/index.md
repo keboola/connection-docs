@@ -32,7 +32,7 @@ Fill the required fields of the registration form.
 {: .image-popup}
 ![Pingdom API registration](/extractors/pingdom/04-pingdom-api-form.png)
 
-When registration is finished, take note of the Application Key. You will need it when creating your extractor configuration in KBC.
+When registration is finished, take note of the Application Key and save it. You will need it when creating your extractor configuration in KBC.
 
 {: .image-popup}
 ![Pingdom API key](/extractors/pingdom/05-pingdom-api-key.png)
