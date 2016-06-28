@@ -62,6 +62,9 @@ items:
       - url: /extractors/twitter/
         title: Twitter
 
+      - url: /extractors/zendesk/
+        title: Zendesk
+
   - url: /storage/
     title: Storage
     items:
