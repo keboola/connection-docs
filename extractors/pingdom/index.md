@@ -56,7 +56,7 @@ Provide credentials of your Pingdom account and Application Key.
 
 Choose the **period** you want to fetch data for.
 
-- `24 hours ago`
+- `Last 24 hours`
 - `Last 3O days` -- *Pingdom API provides history only for up to 30 days before the current day*
 
 And finally, select one of the data mapping **templates** and click on **Save configuration**.
