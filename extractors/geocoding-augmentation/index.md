@@ -6,7 +6,7 @@ permalink: /extractors/geocoding-augmentation/
 * TOC
 {:toc}
 
-This extractor allows you to import additional location data specified as coordinates, and vice versa.
+This extractor provides detailed data for locations specified by their names, address or coordinates.
 
 ## Create New Configuration
 Find Geocoding Augmentation in the list of extractors and create a new configuration. Name it.

@@ -8,7 +8,7 @@ There are a number of database extractors sharing common properties.
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
 - [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/)
-- [Microsfot SQL Server](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
+- [Microsoft SQL Server](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
 - [MySQL](https://www.mysql.com/)
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
@@ -20,11 +20,11 @@ The [MongoDB](https://www.mongodb.com/) extractor requires a [different configur
 After creating a new configuration, and setting up database credentials, 
 specify individual queries for importing data from your server into KBC Storage: 
  
-- Use as **simple queries** as possible. Avoid doing complex joins and aggregations in the queries. 
+- Use as **simple queries** as possible. Avoid doing complex joins and aggregations. 
 Keep in mind that these queries are executed on the database server you are extracting from. 
 This database system might not be designed or optimized for complex SELECT queries. 
 Complex queries may result in timeouts, or they might produce unnecessary loads on your internal systems. 
-Import raw data and then use KBC tools to give it the shape you want.
+Instead, import raw data and then use KBC tools to give it the shape you want.
 - Define a **primary key** where possible. Primary keys substantially speed up both the data loads and further processing of the table.
 
 
