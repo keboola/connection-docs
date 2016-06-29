@@ -75,12 +75,7 @@ Make sure to replace *keboola-data-takeout* in the above document with the true 
 {: .image-popup}
 ![Screenshot - AWS Create Custom Policy Document](/management/project-export/aws-create-custom-policy-document.png)
 
-Now you have 
-
-- name of S3 bucket (keboola-data-takeout)
-- region of the S3 bucket (US Standard)
-- *Access Key ID* of the IAM user
-- *Secret Access Key* of the IAM user
+Having your S3 bucket named and its region set, along with the *Access Key ID* and *Secret Access Key* of the IAM user, you are ready to export the project.
 
 ## Export Project
 Go to KBC and select **Users & Settings**. In the **Settings** tab, click the *Data Takeout* button:
@@ -88,23 +83,21 @@ Go to KBC and select **Users & Settings**. In the **Settings** tab, click the *D
 {: .image-popup}
 ![Screenshot - Data Takeout](/management/project-export/data-takeout-project-settings.png)
 
-Now fill the *Access Key ID*, *Secret Access Key*, *S3 Bucket Region* and *S3 Bucket name*:
+Now fill the *Access Key ID*, *Secret Access Key*, *S3 Region* and *S3 Bucket name*:
 
 {: .image-popup}
 ![Screenshot - Data Takeout](/management/project-export/data-takeout-settings.png)
 
-Optionally, you can configure Path inside the S3 bucket. For instance, you can set the path to `my-take/`
-and the data will be stored in `s3://keboola-data-takeout/my-take/`. Leave the path empty to store
-the export in the bucket root. 
+You can also configure the path inside the S3 bucket. For instance, set the path to `my-take/` and the data will be stored in `s3://keboola-data-takeout/my-take/`. 
+To store the export in the bucket root, leave the path empty. 
 
 **Important**: The existing files will be overwritten. 
-Optionally, you can select to export project structure only; it means that
-no actual data will be exported.  
+Optionally, you can select to export project structure only and no actual data will be exported.  
 
 {: .image-popup}
 ![Screenshot - Data Takeout](/overview/tutorial/management/data-takeout.png)
 
-When ready, click the *Run Export* button:
+When ready, **Run Export**:
 
 {: .image-popup}
 ![Screenshot - Data Takeout Run](/management/project-export/data-takeout-project-export.png)
@@ -129,14 +122,13 @@ These also contain definitions of all your transformation queries.
 ![Screenshot - Sample Folder Structure](/management/project-export/folder-structure.png)
 
 If you tick the `Export project structure only` checkbox when exporting, no actual data will be exported. 
-Only configurations and `sys` tables which are configurations of legacy components will be exported.
+Only configurations and `sys` tables as configurations of legacy components will be exported.
 
 ## Security Considerations
-Once the files are written to your S3 bucket, you must ensure that they are kept safely and only authorized
-persons can access them. You should also deactivate the AWS Key once the export is finished.
+1. The *Data Takeout* tool will overwrite existing files in your S3 bucket (no files will be deleted though).  
+Make sure your S3 bucket is **empty**, or use an appropriate **S3 path**.
 
-The *Data Takeout* tool will **overwrite** existing files in your S3 bucket (no files will be deleted though), 
-so make sure that your S3 bucket is empty, or use an appropriate S3 path.
+2. If your configurations contain encrypted values (such as password to database server), these
+values will be exported encrypted. **Exported encrypted values cannot be decrypted**.  
 
-If your configurations contain some encrypted values (such as password to database server), these
-value will be exported encrypted, and there is no way to decrypt them.  
+3. Once the files are written to your S3 bucket, make sure they are kept safely and only **authorized** persons can access them. Also, **deactivate** the AWS Key.
