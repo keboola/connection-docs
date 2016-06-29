@@ -8,7 +8,7 @@ There are a number of database extractors sharing common properties.
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
 - [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/)
-- [Microsoft SQL Server](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
+- [Microsoft SQL Server](https://www.microsoft.com/en/server-cloud/products/sql-server/)
 - [MySQL](https://www.mysql.com/)
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
