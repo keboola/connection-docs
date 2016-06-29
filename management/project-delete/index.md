@@ -1,5 +1,5 @@
 ---
-title: Delete Project 
+title: Project Deletion
 permalink: /management/project-delete/
 ---
 
