@@ -1,23 +1,24 @@
 ---
-title: Project Delete
+title: Delete Project 
 permalink: /management/project-delete/
 ---
 
-It is possible to entirely delete your project. To delete a project select *Users & Settings* and
-on the *Settings* tab, there is a *Delete Project* button. The project deletion actually only marks the
-project for deletion and does no other changes to it. We strongly suggest, that you make a 
-[backup of your project](/management/project-export/) before deleting it. 
+It is possible to entirely delete your project. 
+
+To do so, go to **Users & Settings** and select the **Settings** tab. Then click the **Delete Project** button. 
+The project deletion actually only marks a project for deletion and, for some time, does no other changes to it. 
 
 {: .image-popup}
 ![Screenshot - Project Delete](/management/project-delete/project-delete.png)
 
-Once the project is marked for deletion, it enters a 60 days grace period during which it cannot 
-be acessed and all operations (data loads, orchestrations) in the project are stopped.
+Once the project is marked for deletion, it enters a **60-day grace period** during which it cannot 
+be accessed and all project operations, such as data loads and orchestrations, are stopped.
 
-During the grace period, you can send a request to [Support](mailto:support@keboola.com) to 
-undelete the project. After the grace period, the project and all its associated data will be really 
-deleted and cannot be undeleted any more.
+During the grace period, a request for undeleting the project can be sent to our [Support](mailto:support@keboola.com). 
+However, the deletion will become irreversible after the time expires, and the project along with any associated data will be gone for good.
 
-Note that expiring projects will be deleted automatically when the expiration day is due. You will receive a 
-notification a week before a project will expire. When an expired project is deleted, the same rules
-about grace period apply as if it was deleted manually.  
+We strongly suggest you make a [backup of your project](/management/project-export/) before deleting it. 
+
+**Important**: Expiring projects will be deleted automatically when the expiration day is due. 
+You will receive a notification a week in advance. 
+When an expired project is deleted, the same grace period rules will apply as if it was deleted manually.  
