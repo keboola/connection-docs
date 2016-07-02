@@ -5,7 +5,7 @@ permalink: /extractors/
 
 *Extractors* are [KBC components](/overview/) used for **importing data from external sources into KBC**. 
 
-Typically, they connect to **external services** [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs), like Facebook, Youtube, etc. 
+Typically, they connect to external services [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs), like Facebook, Youtube, etc. 
 They can also connect directly to an arbitrary database, or, for instance, process incoming e-mails. 
 
 For a definitive list of usable extractors, see your project **Extractors** section. 
@@ -21,7 +21,7 @@ be triggered manually at any time.
 As **bringing data into KBC** is the main purpose of an extractor, go the path of least resistance:
 
 - Get your **data in** first, and 
-- **then convert** it to what you want it to look like. 
+- **Then convert** it to what you want it to look like. 
 
 To give an example, when you are connecting to existing information systems, do not modify the data in them. 
 Such data conversion can prove to be difficult and expensive. Extract what you need and shape it in KBC.

@@ -19,6 +19,6 @@ However, the deletion will become irreversible after the time expires, and the p
 
 We strongly suggest you make a [backup of your project](/management/project-export/) before deleting it. 
 
-**Important**: Expiring projects will be deleted automatically when the expiration day is due. 
-You will receive a notification a week in advance. 
+**Important**: Expiring projects will be deleted **automatically** when the expiration day is due. 
+You will receive a **notification** a week in advance. 
 When an expired project is deleted, the same grace period rules will apply as if it was deleted manually.  

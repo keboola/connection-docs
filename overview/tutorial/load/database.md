@@ -1,27 +1,27 @@
 ---
-title: Part 1c - Loading Data with Database Extractor
+title: Part 1c - Loading Data with MySQL Extractor
 permalink: /overview/tutorial/load/database/
 ---
 
-So far, you have learned to load data into KBC either [manually](/overview/tutorial/load/), or
+So far, you have learned to load data into KBC [manually](/overview/tutorial/load/), and
 via a [GoogleDrive extractor](/overview/tutorial/load/googledrive/).
-Let's load data from an external database with the help of the Database extractor now.
+Let's now load data from an external database with the help of the MySQL extractor.
 
-We will use our own sample MySQL database, so don't worry about getting database credentials from anyone.
+We will use our own sample MySQL database, so do not worry about having to get database credentials from anyone.
 
-## Configure the Database Extractor
+## Configure MySQL Extractor
 Start by going into the **Extractors** section of KBC and create a new extractor.
 
 {: .image-popup}
 ![Screenshot - Create a new Extractor](/overview/tutorial/load/extractor-intro-2.png) 
 
-Select **MySQL Extractor** (use the search feature to find it quickly).
+Find **MySQL**. You can use the search feature to find it quickly.
 
 {: .image-popup}
 ![Screenshot - Create a new Database Extractor](/overview/tutorial/load/extractor-intro-3.png) 
 
-Similarly to the [GoogleDrive extractor](/overview/tutorial/load/googledrive/), the database extractor can
-have multiple configurations. As each configuration represents a single database connection, we'll only
+Similarly to the [GoogleDrive extractor](/overview/tutorial/load/googledrive/), the MySQL extractor can
+have multiple configurations. As each configuration represents a single database connection, we only
 need one configuration. Continue with **Create New Configuration**.
 
 {: .image-popup}
@@ -39,7 +39,7 @@ Now, set up credentials to the source database. Set
 - **Username**, **Password** and **Database** to `datagirls`. 
 [_Curious who are Datagirls?_](https://www.facebook.com/datagirls/) 
 
-Test that the credentials work and save them.
+Test the credentials and save them.
 
 {: .image-popup}
 ![Screenshot - Database Extractor Credentials](/overview/tutorial/load/extractor-db-credentials.png)
@@ -60,13 +60,13 @@ One by one, create and save the following three queries:
 - `SELECT * FROM sfdc_user;` with output table `in.c-tutorial.user`
 - `SELECT * FROM sfdc_opportunity;` with output table `in.c-tutorial.opportunity`
 
-You will obtain the following configuration. Click on **Run Extraction** to load the data
+You will get the following configuration. Click on **Run Extraction** to load the data
 from the database into your tables in Storage.
 
 {: .image-popup}
 ![Screenshot - Add database query](/overview/tutorial/load/extractor-db-queries.png)
 
-Running the Extractor creates a background job that 
+Running the extractor creates a background job that 
 
 - connects to the database, 
 - executes the queries, and
@@ -79,5 +79,6 @@ Once the job is finished, click on the names of the tables to inspect their cont
 [tables manually](/overview/tutorial/load/) before, their contents will not change at all. 
 The extractor overwrites the table contents, and the manually loaded CSV files match the contents of the sample database.
 
-Now when you know how to use the database extractor, continue with the [rest of the tutorial](/overview/tutorial/manipulate/).
+Now when you know how to use the MySQL extractor, continue with the [rest of the tutorial](/overview/tutorial/manipulate/).
 
+	
