@@ -12,7 +12,7 @@ items:
                 title: Part 1b - Loading data with GoogleDrive Extractor
 
               - url: /overview/tutorial/load/database/
-                title: Part 1c - Loading data with Database Extractor
+                title: Part 1c - Loading data with MySQL Extractor
 
           - url: /overview/tutorial/manipulate/
             title: Part 2 - Data Manipulation

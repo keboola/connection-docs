@@ -3,24 +3,25 @@ title: Storage
 permalink: /storage/
 ---
 
-*See how to start working with Storage in our [Getting Started tutorial](/overview/tutorial/load/).*
+*See our [Getting Started](/overview/tutorial/load/) tutorial for instructions on how to use Storage.*
 
-*Storage* is the central KBC [subsystem](/overview/) managing everything related to storing data and accessing it.
+As the central [KBC subsystem](/overview/), *Storage* manages everything related to **storing** data and **accessing** it.
 It is implemented as a layer on top of various database engines that we use as our *backends*
-([Mysql/MariaDB](https://mariadb.org/),
+([MySQL/MariaDB](https://mariadb.org/),
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)).
 
-As with every other component, everything what can be done through the UI can be done programatically via
-the [Storage API](http://docs.keboola.apiary.io/), see the [developer guide](https://developers.keboola.com/integrate/storage/) if you are interested.
-Every operation done in the Storage must be authorized via a [token](/storage/tokens/).
+As all components, everything that can be done through the UI can be also done programatically via
+the [Storage API](http://docs.keboola.apiary.io/). See our [developers' guide](https://developers.keboola.com/integrate/storage/) to learn more.
+Every operation done in Storage must be authorized via a [token](/storage/tokens/).
 
-Storage component manages all data stored in each KBC project. These are:
-- [data tables](/storage/tables/)
-- [data files](/storage/file-uploads/)
-- [component configurations](/storage/configurations/)
+The Storage component manages all data stored in each KBC project:
 
-Data in storage are internally stored in a database backend. Each backend has some specific properties, which
-are compared in the below table:
+- [Data tables](/storage/tables/)
+- [Data files](/storage/file-uploads/)
+- [Component configurations](/storage/configurations/)
+
+Data in Storage are internally stored in a **database backend**. Specific properties of each backend 
+are compared in the following table:
 
 Feature | MySQL | Redshift | Snowflake
 ---------- | ----------- | ---------- | -------------

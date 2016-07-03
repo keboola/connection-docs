@@ -6,11 +6,11 @@ permalink: /extractors/zendesk/
 * TOC
 {:toc}
 
-This extractor helps you extract data from [Zendesk](link https://www.zendesk.com/).
+This extractor fetches data from [Zendesk](link https://www.zendesk.com/).
 
 
-## Configuring Extractor
-Before you start, have a working Zendesk account and get a API Token.
+### Configuring Extractor
+Before you start, have a working Zendesk account and get an API Token.
 
 #### Create New Application API Token
 
@@ -21,23 +21,23 @@ Go to **Admin / Channels / API**, and use the **add new token** link.
 {: .image-popup}
 ![Zendesk API token list](/extractors/zendesk/01-zendesk-api.png)
 
-Fill **label** for new token (f.e. `Keboola Zendesk Extractor`) and click on **Create** button
+Fill a **label** for the new token (for example, `Keboola Zendesk Extractor`) and click the **Create** button.
 
 {: .image-popup}
 ![Zendesk Token registration](/extractors/zendesk/02-zendesk-api-form.png)
 
-When registration is finished, take note of the API Key and save it. You will need it when creating your extractor configuration in KBC.
+When the registration is finished, take a note of the API Key and save it. You will need it when creating your extractor configuration in KBC.
 
 {: .image-popup}
 ![Zendesk API token](/extractors/zendesk/03-zendesk-api-key.png)
 
-### Setup Extractor
+#### Setup Extractor
 In the Extractors section, find Zendesk and create a new configuration.
 
 {: .image-popup}
 ![Zendesk New configuration](/extractors/zendesk/04-new-configuration.png)
 
-Provide informations about your Zendesk Account and API token.
+Provide information about your Zendesk Account and API token.
 
 - **Your Zendesk domain**
 - **Password** -- your account login
@@ -48,19 +48,19 @@ Provide informations about your Zendesk Account and API token.
 
 
 
-## Extraction Output Tables
+### Extraction Output Tables
 
-### 1 -- Tags
+#### 1 -- Tags
 
-This table contains overview of tags in Zendesk:
+This table contains an overview of tags in Zendesk:
 
 | Column | Description |
 | `name` | Tag name |
-| `count` | Count of objects with assigned tag (tickets, etc)|
+| `count` | Count of objects with assigned tag (tickets, etc.)|
 
-### 2 -- Groups
+#### 2 -- Groups
 
-Informations about groups of tickets and users
+Information about groups of tickets and users
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the group |
@@ -70,9 +70,9 @@ Informations about groups of tickets and users
 | `created_at` | Date/time string of group creation |
 | `updated_at` | Date/time string of the last update of the group |
 
-### 3 -- Organizations
+#### 3 -- Organizations
 
-Informations about organizations of your customers (end-users)
+Information about organizations of your customers (end-users)
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the organization  |
@@ -86,7 +86,7 @@ Informations about organizations of your customers (end-users)
 | `notes` | Note about organization |
 | `groups_pk` | Group identifier |
 
-### 4 -- Organizations-domain-names
+#### 4 -- Organizations-domain-names
 
 List of domain names associated with customer organizations
 
@@ -94,7 +94,7 @@ List of domain names associated with customer organizations
 | `domain` | Domain name |
 | `organizations_pk` | Organization identifier |
 
-### 5 -- Users
+#### 5 -- Users
 
 List of all agents and customers
 
@@ -130,9 +130,9 @@ List of all agents and customers
 | `suspended` | `1` if user account is suspended |
 | `chat_only` | `1` if user is agent only in Zopim, not in Zendesk |
 
-### 6 -- Users-photos
+#### 6 -- Users-photos
 
-List of users profile photos
+List of user profile photos
 
 | Column | Description |
 | `id` | The integer representation of the unique identifier for the file |
@@ -145,15 +145,15 @@ List of users profile photos
 | `inline` | `1` if file is excluded from the attachment list |
 | `users_pk` | User identifier |
 
-### 7 -- Users-groups
+#### 7 -- Users-groups
 
-This table represents relations between users and groups:
+Relations between users and groups
 
 | Column | Description |
 | `users_pk` | User identifier |
 | `groups_pk` | Group name |
 
-### 8 -- Tickets
+#### 8 -- Tickets
 
 List of created tickets
 
@@ -180,28 +180,28 @@ List of created tickets
 | `created_at` | Date/time string of ticket creation |
 | `updated_at` | Date/time string of the last update of the ticket |
 
-### 9 -- Tickets-ratings
+#### 9 -- Tickets-ratings
 
-Basic data for tickets's satisfaction ratings
+Basic data for ticket satisfaction ratings
 
 | Column | Description |
 | `id` | Rating identifier |
 | `score` | Rating state (`offered`, `unoffered`, `good`, or `bad`) |
 | `tickets_pk` [PK] | Ticket identifier |
 
-### 10 -- Tickets-sharing-agreements
+#### 10 -- Tickets-sharing-agreements
 
 | Column | Description |
 | `sharing_agreements_pk` [PK] | Agreement identifier |
 | `tickets_pk` [PK] | Ticket identifier |
 
-### 11 -- Tickets-followups
+#### 11 -- Tickets-followups
 
 | Column | Description |
-| `followup_tickets_pk` [PK] | Followup ticket identifier |
+| `followup_tickets_pk` [PK] | Follow-up ticket identifier |
 | `tickets_pk` [PK] | Ticket identifier |
 
-### 12 -- Tickets-comments
+#### 12 -- Tickets-comments
 
 List of conversation (comments) between requesters, collaborators, and agents
 
@@ -217,9 +217,9 @@ List of conversation (comments) between requesters, collaborators, and agents
 | `created_at` | Date/time string of comment creation |
 | `tickets_pk` | Ticket identifier |
 
-### 13 -- Tickets-comments-attachments
+#### 13 -- Tickets-comments-attachments
 
-List of uploaded attachments to comments
+List of uploaded comment attachments 
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the file |
@@ -232,9 +232,9 @@ List of uploaded attachments to comments
 | `inline` | `1` if file is excluded from the attachment list |
 | `tickets_comments_pk` | Comment identifier |
 
-### 14 -- Tickets-comments-attachments-thumbnails
+#### 14 -- Tickets-comments-attachments-thumbnails
 
-Uploaded attachments thumbnails
+Uploaded attachment thumbnails
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the thumbnail |
@@ -247,9 +247,9 @@ Uploaded attachments thumbnails
 | `inline` | `1` if file is excluded from the attachment list |
 | `tickets_comments_attachments_pk` | Attachment identifier |
 
-### 15 -- Tickets-audits
+#### 15 -- Tickets-audits
 
-Basic info about each update of tickets
+Basic info about each ticket update 
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the audit |
@@ -258,7 +258,7 @@ Basic info about each update of tickets
 | `via_channel` | Info how was the audit created |
 | `author_pk` | Author user identifier |
 
-### 16 -- Tickets-metrics
+#### 16 -- Tickets-metrics
 
 Metrics data for tickets
 
