@@ -9,10 +9,10 @@ permalink: /extractors/zendesk/
 This extractor fetches data from [Zendesk](link https://www.zendesk.com/).
 
 
-### Configuring Extractor
+## Configuring Extractor
 Before you start, have a working Zendesk account and get an API Token.
 
-#### Create New Application API Token
+### Create New Application API Token
 
 Log in to your account on the [Zendesk](link https://www.zendesk.com/) site.
 
@@ -31,7 +31,7 @@ When the registration is finished, take a note of the API Key and save it. You w
 {: .image-popup}
 ![Zendesk API token](/extractors/zendesk/03-zendesk-api-key.png)
 
-#### Setup Extractor
+### Setup Extractor
 In the Extractors section, find Zendesk and create a new configuration.
 
 {: .image-popup}
@@ -46,11 +46,11 @@ Provide information about your Zendesk Account and API token.
 {: .image-popup}
 ![Zendesk Credentials](/extractors/zendesk/05-credentials.png)
 
+**Save** and click **Run Extraction**.
 
+## Extraction Output Tables
 
-### Extraction Output Tables
-
-#### 1 -- Tags
+### 1 -- Tags
 
 This table contains an overview of tags in Zendesk:
 
@@ -58,7 +58,7 @@ This table contains an overview of tags in Zendesk:
 | `name` | Tag name |
 | `count` | Count of objects with assigned tag (tickets, etc.)|
 
-#### 2 -- Groups
+### 2 -- Groups
 
 Information about groups of tickets and users
 
@@ -70,7 +70,7 @@ Information about groups of tickets and users
 | `created_at` | Date/time string of group creation |
 | `updated_at` | Date/time string of the last update of the group |
 
-#### 3 -- Organizations
+### 3 -- Organizations
 
 Information about organizations of your customers (end-users)
 
@@ -86,7 +86,7 @@ Information about organizations of your customers (end-users)
 | `notes` | Note about organization |
 | `groups_pk` | Group identifier |
 
-#### 4 -- Organizations-domain-names
+### 4 -- Organizations-domain-names
 
 List of domain names associated with customer organizations
 
@@ -94,7 +94,7 @@ List of domain names associated with customer organizations
 | `domain` | Domain name |
 | `organizations_pk` | Organization identifier |
 
-#### 5 -- Users
+### 5 -- Users
 
 List of all agents and customers
 
@@ -130,7 +130,7 @@ List of all agents and customers
 | `suspended` | `1` if user account is suspended |
 | `chat_only` | `1` if user is agent only in Zopim, not in Zendesk |
 
-#### 6 -- Users-photos
+### 6 -- Users-photos
 
 List of user profile photos
 
@@ -145,7 +145,7 @@ List of user profile photos
 | `inline` | `1` if file is excluded from the attachment list |
 | `users_pk` | User identifier |
 
-#### 7 -- Users-groups
+### 7 -- Users-groups
 
 Relations between users and groups
 
@@ -153,7 +153,7 @@ Relations between users and groups
 | `users_pk` | User identifier |
 | `groups_pk` | Group name |
 
-#### 8 -- Tickets
+### 8 -- Tickets
 
 List of created tickets
 
@@ -180,7 +180,7 @@ List of created tickets
 | `created_at` | Date/time string of ticket creation |
 | `updated_at` | Date/time string of the last update of the ticket |
 
-#### 9 -- Tickets-ratings
+### 9 -- Tickets-ratings
 
 Basic data for ticket satisfaction ratings
 
@@ -189,19 +189,19 @@ Basic data for ticket satisfaction ratings
 | `score` | Rating state (`offered`, `unoffered`, `good`, or `bad`) |
 | `tickets_pk` [PK] | Ticket identifier |
 
-#### 10 -- Tickets-sharing-agreements
+### 10 -- Tickets-sharing-agreements
 
 | Column | Description |
 | `sharing_agreements_pk` [PK] | Agreement identifier |
 | `tickets_pk` [PK] | Ticket identifier |
 
-#### 11 -- Tickets-followups
+### 11 -- Tickets-followups
 
 | Column | Description |
 | `followup_tickets_pk` [PK] | Follow-up ticket identifier |
 | `tickets_pk` [PK] | Ticket identifier |
 
-#### 12 -- Tickets-comments
+### 12 -- Tickets-comments
 
 List of conversation (comments) between requesters, collaborators, and agents
 
@@ -217,7 +217,7 @@ List of conversation (comments) between requesters, collaborators, and agents
 | `created_at` | Date/time string of comment creation |
 | `tickets_pk` | Ticket identifier |
 
-#### 13 -- Tickets-comments-attachments
+### 13 -- Tickets-comments-attachments
 
 List of uploaded comment attachments 
 
@@ -232,7 +232,7 @@ List of uploaded comment attachments
 | `inline` | `1` if file is excluded from the attachment list |
 | `tickets_comments_pk` | Comment identifier |
 
-#### 14 -- Tickets-comments-attachments-thumbnails
+### 14 -- Tickets-comments-attachments-thumbnails
 
 Uploaded attachment thumbnails
 
@@ -247,7 +247,7 @@ Uploaded attachment thumbnails
 | `inline` | `1` if file is excluded from the attachment list |
 | `tickets_comments_attachments_pk` | Attachment identifier |
 
-#### 15 -- Tickets-audits
+### 15 -- Tickets-audits
 
 Basic info about each ticket update 
 
@@ -258,7 +258,7 @@ Basic info about each ticket update
 | `via_channel` | Info how was the audit created |
 | `author_pk` | Author user identifier |
 
-#### 16 -- Tickets-metrics
+### 16 -- Tickets-metrics
 
 Metrics data for tickets
 

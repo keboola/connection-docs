@@ -8,7 +8,7 @@ permalink: /extractors/gmail/
 
 The Gmail extractor allows you to fetch data from your Gmail account.
 
-### Create New Configuration
+## Create New Configuration
 
 Find Gmail in the Extractors section, create a new configuration and name it.
 
@@ -21,7 +21,7 @@ Then click **Authorize Account** to be redirected to Google, and authorize the e
 {: .image-popup}
 ![Gmail - authorize account](/extractors/gmail/02-authorize-account.png)
 
-### Configure Queries
+## Configure Queries
 
 Click **Edit configuration** and fill the form to fit your needs.
 

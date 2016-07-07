@@ -12,7 +12,7 @@ and your Google AdWords [customer ID](https://support.google.com/adwords/answer/
 
 If you do not have a Google AdWords account, create a [test account](https://developers.google.com/adwords/api/docs/guides/first-api-call#create_test_accounts).
 
-### Create New Configuration
+## Create New Configuration
 Find Google AdWords in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}

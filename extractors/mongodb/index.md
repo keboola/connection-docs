@@ -9,7 +9,7 @@ permalink: /extractors/mongodb/
 The MongoDB extractor allows you to fetch data from the [MongoDB database](https://www.mongodb.com/).
 Complete the following steps to configure it:
 
-### Create New Configuration
+## Create New Configuration
 
 Find MongoDB in the Extractors section. Create a new configuration and name it.
 
@@ -17,7 +17,7 @@ Find MongoDB in the Extractors section. Create a new configuration and name it.
 ![MongoDB add configuration](/extractors/mongodb/01-add-configuration.png)
 
 
-### Setup Database Credentials
+## Setup Database Credentials
 
 Click **Setup Database Credentials** and fill in the form. Then test the new credentials and save them.
 Optionally, set up a SSH tunnel.
@@ -25,7 +25,7 @@ Optionally, set up a SSH tunnel.
 {: .image-popup}
 ![MongoDB new credentials](/extractors/mongodb/02-new-credentials.png)
 
-### Configure export(s)
+## Configure export(s)
 
 Click the *Add Export* button and configure your first export using the following options:
 
@@ -53,21 +53,21 @@ It, too, has to be valid JSON. To learn more about mapping, go to the [next sect
 *Tip: Use combination of limit (e.g. only 10 documents) and query (e.g. only document with specific ID)
 while playing with the mapping section to prevent full collection export.*
 
-#### Strict Format
+### Strict Format
 
 Strict format means standard valid JSON must be used, and you cannot use MongoDB objects as in the
 [JavaScript shell interface](https://docs.mongodb.com/v3.2/reference/program/mongo/#bin.mongo).
 Thus using objects such as *ObjectId*, *Date* or *NumberLong* is not allowed until you specify them
 in the strict format. Read more on the [strict format](https://docs.mongodb.com/v3.2/reference/mongodb-extended-json/).
 
-### Configure Mapping
+## Configure Mapping
 
 By defining mapping, you to specify the structure and content of output tables, their columns and relations between them.
 
 {: .image-popup}
 ![MongoDB new export filled](/extractors/mongodb/04-new-export-filled.png)
 
-#### Primary Key
+### Primary Key
 
 Since MongoDB identifies each document in a collection uniquely by `_id`, we recommend to set
 a primary key to this field by defining the first item in a mapping section:
@@ -88,7 +88,7 @@ a primary key to this field by defining the first item in a mapping section:
 the data import.*
 
 
-#### Other Data Types
+### Other Data Types
 
 To handle MongoDB data types correctly, define mapping similarly to the following example for
 `MongoId`, `ISODate` and `NumberLong` data types:
@@ -101,13 +101,13 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
 }
 {% endhighlight %}
 
-#### Mapping Examples
+### Mapping Examples
 
 Check out [more mapping examples](/extractors/mongodb/mapping/).
 
-### Run Extractor
+## Run Extractor
 
-Having successfuly mapped the configuration, run the extractor by hitting the *Run Extraction* button.
+Having successfully mapped the configuration, run the extractor by hitting the *Run Extraction* button.
 
 {: .image-popup}
 ![MongoDB new export](/extractors/mongodb/05-exports-index.png)

@@ -13,7 +13,7 @@ Pingdom is a service for monitoring the uptime and performance of your websites 
 ## Configuring Extractor
 Before you start, have a working Pingdom account and get a Pingdom API Key.
 
-#### Create New Application API Key
+### Create New Application API Key
 
 Log in to your account on the [Pingdom](https://www.pingdom.com/) site.
 
