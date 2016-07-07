@@ -84,6 +84,6 @@ If you want to physically copy a table, use the [*table snapshot*](/overview/tut
 A copy of the table contents at the time of creating the snapshot will be made. 
 It can be used immediately to make a physical copy of the table, or later to revert the table into its previous state.
 
-Table Snapshots are useful when experimenting with extractors or transformations, or generally when refactoring your project: 
+Table Snapshots are useful when **experimenting** with extractors or transformations, or generally when **refactoring** your project: 
 you can create a copy of your output table, experiment a little, and then compare the new output table with the original one to make sure your output remained the same.
-They can also be used as a workaround to renaming tables because it is not available yet.
+They can also be used as a workaround to renaming tables; it is not available yet.
