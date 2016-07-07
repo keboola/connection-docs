@@ -6,82 +6,84 @@ permalink: /storage/tables/
 * TOC
 {:toc}
 
-The Table storage of your project is accessible through *Storage* - *Tables* view. Your data tables are organized into
-*buckets* which are organized into *stages*. There are three stages available:
+Your project table storage is available in the *Tables* tab in the *Storage* section. All data tables are organized into
+*buckets* which are further organized into the following three *stages*:
 
-- 'in' - for input data (usually result from extractors)
-- 'out' - for processed data (usually result from transformations or applications)
-- 'sys' - deprecated stage used for configuration of some components
+- **in** - for input data (usually extractor results)
+- **out** - for processed data (usually results of transformations or applications)
+- **sys** - deprecated stage used for configuration of some components
 
-When you create a new bucket, you must select a single stage from the above and also a database
-backend. Choose a suitable backend based on [their properties](/storage/#backends). To get
-started with creating buckets and tables, see the corresponding part of the
-[tutorial](/overview/tutorial/load/).
+When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#backends) based on its properties. 
+For detailed information on how to create a bucket and its tables, see the corresponding part of our [tutorial](/overview/tutorial/load/).
 
 {: .image-popup}
 ![Screenshot - Create bucket](/storage/tables/create-bucket.png)
 
-In buckets you can create actual tables containing your data. Tables are primarily created by
-KBC components (extractors, transformations, applications), or imported from CSV files. When importing
-data to an **existing table** the imported table must have all the columns of the old
-table (even if the old table is empty). If some
-columns are missing, you will receive a message like this:
+The actual data tables in the buckets are created primarily by KBC components (extractors, transformations and applications), 
+or they are imported from CSV files. In case you want to import data to an already **existing table**, 
+the imported table must have all the columns of the old, existing table, even if it the old table is empty. 
+If some columns are missing, you will receive a message like this:
 
-    Some columns are missing in csv file. Missing columns: lat,long. Expected columns: lat,long.'
-    Please check if expected delimiter "," is used in csv file.
+    Some columns are missing in the csv file. Missing columns: lat,long. Expected columns: lat,long.
+    Please check if the expected "," delimiter is used in the csv file.
 
-Also note, that the imported file **may** contain additional columns not present in the existing
+Also note that the imported file **may** contain additional columns not present in the existing
 table. In that case, the columns from the imported table will be added to the existing table.
 
 ## Aliases
-Apart from actual tables, it is also possible to create aliases. Aliases are internally implemented
-as [database views](https://en.wikipedia.org/wiki/View_(SQL) and they inherit their basic properties.
-Alias does not contain any actual data, it is simply a link to existing data. Hence alias cannot
-be written to and its size does not count to your project quota. Also note that if you create an
-alias from a table, that table cannot be deleted unless the alias is deleted. If you attempt to do so, you
-will receive an error message similar to:
+Apart from actual tables, it is also possible to create aliases. They are internally implemented
+as [database views](https://en.wikipedia.org/wiki/View_(SQL)) and inherit their basic properties.
 
-    Table blog-data cannot be deleted. Please delete first its aliases: in.c-tutorial.blog-data,in.c-my-bucket.blog-data.
+An alias does not contain any actual data; it is simply a link to some already existing data. 
+Hence an alias cannot be written to and its size does not count to your project quota. 
 
-There are two types of aliases
-**Simple Alias** available for MySQL backend and **Custom SQL Alias** available for Redshift backend.
-You can see example use of an alias in the [tutorial](/overview/tutorial/load/googledrive/#aftermath).
+In addition, if you create an alias from a table, the table **cannot be deleted** without the alias being deleted as well. 
+If you attempt to do so, you will receive an error message similar to this one:
+
+    The blog-data table cannot be deleted. Please delete its aliases first: in.c-tutorial.blog-data,in.c-my-bucket.blog-data.
+
+There are two types of aliases:
+
+- **Simple Alias** -- available for the MySQL backend
+- **Custom SQL Alias** -- available for the Redshift backend
+
+See an example use of an alias in our [tutorial](/overview/tutorial/load/googledrive/#aftermath).
 
 {: .image-popup}
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
 
-### Simple alias
-Simple alias is allowed in these bucket Stage combinations:
+### Simple Alias
+The simple alias is allowed in these bucket stage combinations:
 
 - in -> in
 - in -> out
 - out -> out
 
-Simple aliases cannot be chained and can be applied only between buckets with same backend. Alias table
-can be filtered by simple condition.
+Simple aliases cannot be chained and can be applied only between buckets with the same backend. 
+An alias table can be filtered by a simple condition.
 
 {: .image-popup}
 ![Screenshot - Create Simple alias](/storage/tables/create-simple-alias.png)
 
-There are some limitation - filtering is enabled only on indexed columns. When an alias is created, the index
-on filtered column of source table cannot be removed. By default alias columns are automatically synchronized
-with source table (when you add columns to the source table, it will get added to the alias automatically).
-You can disable this behaviour by disabling *Synchronize columns with source table*.
+There are the following limitations:
+
+- Filtering is enabled only on indexed columns. 
+- When an alias is created, the index on the filtered column of the source table cannot be removed. 
+- Alias columns are automatically synchronized, by default, with the source table. Columns added to the source table will be added to the alias automatically.
+You can prevent this by disabling *Synchronize columns with source table*.
 
 ### Custom SQL Alias
-Custom SQL Alias table is defined by SQL select like `SELECT * FROM "in.c-main"."blog-data"`.
-You can access all your tables in buckets with the same backend, select can also join data from
-multiple tables. These aliases are supported only in Redshift backend.
+The Custom SQL Alias table is defined by SQL select like `SELECT * FROM "in.c-main"."blog-data"`.
+Select can also join data from multiple tables. You can access all your tables in any bucket, as long as they use Redshift, the backend supported by this type of alias.
 
 {: .image-popup}
 ![Screenshot - Create Custom alias](/storage/tables/create-custom-alias.png)
 
 ## Copying Tables / Table Snapshots
-If you want to physically copy a table, you can use the
-[*table snapshot*](/overview/tutorial/management/#table-snapshots) feature. Table Snapshot will create a copy of the
-table contents in the time you created the snapshot. The snapshot can then be used immediatelly to make a
-physical copy of the table, or later to revert the table into previous state.
+If you want to physically copy a table, use the [*table snapshot*](/overview/tutorial/management/#table-snapshots) feature. 
+A copy of the table contents at the time of creating the snapshot will be made. 
+It can be used immediately to make a physical copy of the table, or later to revert the table into its previous state.
 
-Table Snapshots can be usefull when you are experimenting with extractors or transformations or generally during
-refactoring of your project - you can create a copy of a table and then make sure that the output remained the same.
-Table Snapshots can also be used as a workaround to renaming tables which is not available yet.
+Table Snapshots are useful when experimenting with extractors or transformations, or generally when refactoring your project: 
+you can create a copy of your output table, experiment a little, and then compare the new output table with the original one to make sure your output remained the same.
+They can also be used as a workaround to renaming tables because it is not available yet.
