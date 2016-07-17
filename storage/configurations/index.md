@@ -1,10 +1,10 @@
 ---
-title: Component configurations
+title: Component Configurations
 permalink: /storage/configurations/
 ---
 
-Each KBC component (extractor, writer, ...) has configurations, which can be created through the UI. When
-any configuration is saved, it is saved into Storage. When a configuration is modifed actually a new version of that
+Each KBC component (extractor, writer, etc.) has configurations, which can be created through the UI. When
+any configuration is saved, it is saved into Storage. When a configuration is modified actually a new version of that
 configuration is created and the old version is kept in history. Old configuration version cannot be accessed
 through the UI yet, but they can be [accessed via API](http://docs.keboola.apiary.io/#reference/component-configurations/create-config). See the
 developer guide for [working with configurations](https://developers.keboola.com/integrate/storage/api/configurations/).
