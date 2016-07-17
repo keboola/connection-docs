@@ -45,7 +45,7 @@ items:
         title: Gmail
 
       - url: /extractors/google-adwords-reports/
-        title: Google Adwords Reports
+        title: Google AdWords Reports
 
       - url: /extractors/mongodb/
         title: MongoDB

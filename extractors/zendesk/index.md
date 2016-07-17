@@ -85,6 +85,7 @@ Information about organizations of your customers (end-users)
 | `details` | Details note about organization |
 | `notes` | Note about organization |
 | `groups_pk` | Group identifier |
+| `tags` | JSON encoded array of assigned tags |
 
 ### 4 -- Organizations-domain-names
 
@@ -129,6 +130,7 @@ List of all agents and customers
 | `restricted_agent` | `1` if agent has some restrictions (`1` for agents, empty for admins) |
 | `suspended` | `1` if user account is suspended |
 | `chat_only` | `1` if user is agent only in Zopim, not in Zendesk |
+| `tags` | JSON encoded array of assigned tags |
 
 ### 6 -- Users-photos
 
@@ -179,6 +181,7 @@ List of created tickets
 | `brand_pk` | Brand identifier |
 | `created_at` | Date/time string of ticket creation |
 | `updated_at` | Date/time string of the last update of the ticket |
+| `tags` | JSON encoded array of assigned tags |
 
 ### 9 -- Tickets-ratings
 
@@ -186,7 +189,7 @@ Basic data for ticket satisfaction ratings
 
 | Column | Description |
 | `id` | Rating identifier |
-| `score` | Rating state (`offered`, `unoffered`, `good`, or `bad`) |
+| `score` | Rating state (`offered`, `unoffered`, `good` or `bad`) |
 | `tickets_pk` [PK] | Ticket identifier |
 
 ### 10 -- Tickets-sharing-agreements
@@ -291,3 +294,23 @@ Metrics data for tickets
 | `requester_wait_time_in_minutes_business` | Number of minutes the requester spent waiting inside and out of business hours |
 | `on_hold_time_in_minutes_calendar` |  Number of minutes the ticket was marked as `hold` |
 | `on_hold_time_in_minutes_business` |  Number of minutes the ticket was marked as `hold` |
+
+### 17 -- Tickets-fields
+
+List of customized fields that are displayed on the ticket form
+
+| Column | Description |
+| `id` [PK] | The integer representation of the unique identifier for the fields |
+| `type` | Field type (`checkbox`, `date`, `decimal`, `integer`, `regexp`, `tagger`, `text` or `textarea`) |
+| `title` | Field title |
+| `active` | `1` if field is available |
+| `tag` | Tag value to set for `checkbox` fields when checked |
+
+### 18 -- Tickets-fields-values
+
+Values of ticket custom fields
+
+| Column | Description |
+| `tickets_fields_pk` [PK] | Ticket field identifier |
+| `value` | JSON encoded value of the field |
+| `tickets_pk` [PK] | Ticket identifier |
