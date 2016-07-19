@@ -52,6 +52,9 @@ See an example use of an alias in our [tutorial](/overview/tutorial/load/googled
 {: .image-popup}
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
 
+If you select any table from any bucket in Storage, detailed information about the table will be displayed on the right side of your screen.
+This is what we refer to as a **Table detail** throughout our documentation.
+
 ### Simple Alias
 The simple alias is allowed in these bucket stage combinations:
 

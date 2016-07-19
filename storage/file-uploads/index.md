@@ -74,8 +74,7 @@ Every time a table is **exported** from Storage, the process is reversed: first 
 created in File uploads and then it is actually downloaded from there. Beware however that due to the
 nature of database exports, an exported table may be sliced and require
 [substantial effort to reconstruct](http://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files). 
-For exporting tables, always use the feature in [table detail](/storage/tables/#export) which
-produces merged files.
+To make sure your tables are exported as merged files, always use the **Export** feature in the **Action** tab of the [table detail](/storage/tables/#export).
 
 As stated above, unless marked as permanent, each file will be automatically deleted 180 days after it has been created. This
 also applies to automatically generated files as a result of table imports and exports. Also, because the
