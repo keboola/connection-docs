@@ -10,17 +10,17 @@ Every operation done in KBC must be authorized with a *Token* (sometimes called 
 *SAPI Token* or simply *Storage Token*). Storage token is required for almost all operations because they
 (may) manipulate data in Storage.
 
-Each KBC user is automatically assigned when he joins a project. Additionally, other tokens are created
+Each KBC user is automatically assigned when they join a project. Additionally, other tokens are created
 automatically in some cases when you create a new configuration of a component (e.g. Orchestrations).
 Apart from that, you may create unlimited number of other tokens with access to all or some Storage
 buckets to easily [share a single table](/overview/tutorial/management/#user-management)
 from your Storage with someone without them having to become a project administrator.
 
 Tokens can be managed from *Storage* - *File Uploads* page. Tokens which belong to project
-adminstrators are called *Master Tokens* and they have the user email as their description.
+administrators are called *Master Tokens* and they have the user email as their description.
 Master tokens cannot be modified or deleted. If you want to delete a Master token, you must
-remove the user from the project at *Users & Settings* page.
-Every token can be *refreshed*, which means that the actual token becomes immediatelly invalid.
+remove the user from the project at the *Users & Settings* page.
+Every token can be *refreshed*, which means that the actual token becomes immediately invalid.
 If you invalidate your own master token, you must refresh your Storage view in console.
 Because tokens allow access to data, you should refresh a token in case there is a suspicion
 that the token has leaked.
@@ -28,7 +28,7 @@ that the token has leaked.
 {: .image-popup}
 ![Screenshot - Storage Tokens](/storage/tokens/overview.png)
 
-## Using limited tokens
+## Using Limited Tokens
 To add users with access limited to only some of your data, create a new, temporary, access token:
 
 {: .image-popup}
@@ -63,7 +63,7 @@ Via the [*Storage Console*](https://storage-api-console.keboola.com/), the added
 Only the buckets you made accessible will be seen. If you set the token to expire, it will
 get deleted automatically after the specified period.
 
-## Limited access to components
+## Limited Access to Components
 A Storage token itself does not allow the bearer to access KBC via Administrative UI. However the
 allows the bearer to call various [APIs](http://developers.keboola.com/overview/api/) and run tasks.
 A Master token has always access to all components, so having the master token is equivalent of
