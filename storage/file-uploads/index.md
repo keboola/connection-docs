@@ -71,8 +71,8 @@ the CSV file is first stored in File uploads and only then imported to an actual
 2. analyzing how something got into a table (useful mainly for incremental loads)
 
 Every time a table is **exported** from Storage, the process is reversed: first a file is
-created in File uploads and then it is actually downloaded from there. Beware however that due to the
-nature of database exports, an exported table may be sliced and require
+created in File uploads (not when exporting manually) and then it is actually downloaded from there. Beware, however, that due to the
+nature of database exports, the exported table may be sliced and require
 [substantial effort to reconstruct](http://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files). 
 To make sure your tables are exported as merged files, always use the **Export** feature in the **Action** tab of the [table detail](/storage/tables/#export).
 

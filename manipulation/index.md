@@ -15,4 +15,4 @@ When deciding between the two, consider your capabilities, available resources a
 complexity of the task you need to perform. 
 
 If you want to create **very complex** transformations, or need a **3rd party** to develop a transformation or application for you, 
-go to [Custom Science](https://developers.keboola.com/extend/custom-science/).
+go to [Custom Science](https://developers.keboola.com/extend/).
