@@ -67,14 +67,14 @@ get deleted automatically after the specified period.
 ## Limited Access to Components
 The Storage token itself does not allow the bearer to access KBC via the Administration UI. However, it
 allows them to call various [APIs](http://developers.keboola.com/overview/api/) and run tasks.
-You can access the KBC Administration UI with a Master token as it has permanent access to all components.
+You can access the KBC Administration UI with Master Token as it has permanent access to all components.
 
 When creating a new token, the following rules apply:
 
 - The token by default gives **no access** to any of the KBC components; 
-- The token bearer can only access permitted Storage buckets via [Storage API](http://developers.keboola.com/integrate/storage/) or 
+- The token bearer can only access **permitted** Storage buckets via [Storage API](http://developers.keboola.com/integrate/storage/) or 
 [Storage Console](https://storage-api-console.keboola.com/); and
-- The token cannot be used to run any actions in your project.
+- The token **cannot** be used to run any actions in your project.
 
 For production use, it is recommended not to give away your Master Token, but to create **dedicated** tokens for
 different uses. This also simplifies their invalidation as it is clear for what each token is used. 
@@ -86,6 +86,6 @@ You would then create a token which is authorized for running the *MySQL Databas
 {: .image-popup}
 ![Screenshot - Component limited token](/storage/tokens/component-limited.png)
 
-You can then give away the token to the administrator of the database process and be sure that they can use
+You can then give away the token to the maintainer of the database process and be sure that they can use
 only that particular component in that particular bucket (while they can still reconfigure it, e.g. update the extraction queries).
-Also, being able to write to a **limited** set of buckets is a good way how to prevent accidentally overwriting data.
+Also, being able to write to a limited set of buckets is a good way how to prevent accidentally overwriting data.
