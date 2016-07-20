@@ -86,6 +86,6 @@ You would then create a token which is authorized for running the *MySQL Databas
 {: .image-popup}
 ![Screenshot - Component limited token](/storage/tokens/component-limited.png)
 
-You can then give away the token to the maintainer of the database process and be sure that they can use
+You can then give away the token to the person responsible for the database process and be sure that they can use
 only that particular component in that particular bucket (while they can still reconfigure it, e.g. update the extraction queries).
 Also, being able to write to a limited set of buckets is a good way how to prevent accidentally overwriting data.

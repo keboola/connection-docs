@@ -19,7 +19,7 @@ You can also [download a sample package](/manipulation/transformations/r/data.zi
 for [local development](/manipulation/transformations/r/#development-tutorial). 
 
 ## Prepare
-To show you how it works, let's use an example in which we have a table cashier-data with the following data 
+To show you how it works, let's use an example in which we have a `cashier-data` table with the following data 
 ([full table](/manipulation/transformations/r/cashier-data.csv)):
 
 | number_of_items  |  time_spent_in_shop   |  ...  |
@@ -30,7 +30,7 @@ To show you how it works, let's use an example in which we have a table cashier-
 |  ...             |                       |       |
  
 The table contains some observed values of customers who visited the shop. Now, let's find out how much time 
-a customer with 40 items in their basket will spend in the shop. Create another table (cashier-data-predict) like the following ([full table](/manipulation/transformations/r/cashier-data-predict.csv)):
+a customer with 40 items in their basket will spend in the shop. Create another table (`cashier-data-predict`) like the following ([full table](/manipulation/transformations/r/cashier-data-predict.csv)):
 
 | number_of_items  |
 |------------------|
@@ -53,7 +53,7 @@ save(lm, file = "time_model.rda")
 
 After executing the script, you get the `time_model.rda` binary file with a very simple model of dependency 
 of the **time_spent_in_shop** column on the **number_of_items** column in the data 
-([cashiser-data.csv](/manipulation/transformations/r/cashier-data.csv)):
+([cashier-data.csv](/manipulation/transformations/r/cashier-data.csv)):
  
 ## Step 2 - Save the model to KBC
 
@@ -73,14 +73,14 @@ and add the (`predictionModel`) tag to select stored files.
 {: .image-popup}
 ![Screenshot - Transformation Setup](/manipulation/transformations/r/binary-transformation.png)
 
-Note that in the transformation, you reference only the file tag, not the actual uploaded file. 
+**Important:** In the transformation, you reference only the file tag, not the actual uploaded file. 
 The rules for transforming a tag to a file are following: 
 
 - Only a single file will always be present in the R transformation (removes ambiguity).
-- If multiple files with the same tag are present in file uploads, only the latest one will be copied to the R 
+- If multiple files with the same tag are present in File uploads, only the latest one will be copied to the R 
 transformation (it allows easy updates; if you need to rollback, just delete the new file, or re-upload an old one).
-- If you need multiple files in your R transformation, each one must have different tag (it forces clarity).
-- If there is no file with a given tag in file uploads, the transformation will fail.
+- If you need multiple files in your R transformation, each one must have a different tag (it forces clarity).
+- If there is no file with a given tag in File uploads, the transformation will fail.
 
 The following sample script demonstrates the use of the pre-computed model. The `lm` variable is loaded from the `predictionModel` file.
 
@@ -114,9 +114,9 @@ When attempting to run the above [transformation locally](/manipulation/transfor
 make sure to
 
 - Put the R code in the working directory in a file, for example, `script.R`.
-- Download the table `in.c-r-transformations.cashier-data-predict` from the input mapping and place it inside `in/tables`. 
-subdirectory of the working directory into file `cashier-data-predict.csv`.
-- Download a file with the `predictionModel` tag from Storage File Uploads, and place that
+- Download the table `in.c-r-transformations.cashier-data-predict` from the input mapping and place it inside the `in/tables` 
+subdirectory of the working directory into the `cashier-data-predict.csv` file.
+- Download a file with the `predictionModel` tag from Storage File Uploads and place that
 file inside the `in/user` subdirectory of the working directory in the `predictionModel` file. Make sure the
  downloaded file has **no extension**.
-- Make sure the result R `data.frame` is stored inside the `out/tables` subdirectory in `data-predicted.csv`.
+- Store the result R `data.frame` inside the `out/tables` subdirectory in `data-predicted.csv`.
