@@ -21,10 +21,10 @@ Tokens can be managed from the *Storage* - *File Uploads* page. If they belong t
 administrators, they are called **Master Tokens**. Their description is their user email and they cannot be modified or deleted. 
 The only way to delete Master Tokens is removing the user from the project at the *Users & Settings* page.
 
-As the actual token becomes immediately invalid, it needs to be **refreshed**.
-If your own Master Token has been invalidated, refresh your Storage view in the console.
-
-Allowing access to data, tokens should be refreshed every time there is a suspicion they have leaked.
+Every token can be *refreshed*: a new token is generated and the old token becomes immediately invalid.
+If you invalidate your Master Token, reload your Storage view in the browser.
+Because tokens allow access to data, you should refresh a token in case there is a suspicion
+that the token has leaked.
 
 {: .image-popup}
 ![Screenshot - Storage Tokens](/storage/tokens/overview.png)
@@ -65,9 +65,9 @@ Only the buckets you made accessible will be seen. If you set the token to expir
 get deleted automatically after the specified period.
 
 ## Limited Access to Components
-The Storage token itself does not allow the bearer to access KBC via the Administration UI. However, it
+A Storage token itself does not allow the bearer to access KBC via the Administration UI. However, it
 allows them to call various [APIs](http://developers.keboola.com/overview/api/) and run tasks.
-You can access the KBC Administration UI with Master Token as it has permanent access to all components.
+A Master token has always access to all components, so having the master token allows you to do everything that can be otherwise done via the KBC Administration UI.
 
 When creating a new token, the following rules apply:
 
