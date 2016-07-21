@@ -17,7 +17,7 @@ Tokens are assigned to/by KBC users in the following three situations:
 from your Storage with someone, without them having to become a project administrator. 
 You can create an unlimited number of tokens with access to all or selected Storage buckets .
 
-Tokens can be managed from the *Storage* - *File Uploads* page. If they belong to project
+Tokens can be managed from the *Storage* - *Tokens* page. If they belong to project
 administrators, they are called **Master Tokens**. Their description is their user email and they cannot be modified or deleted. 
 The only way to delete Master Tokens is removing the user from the project at the *Users & Settings* page.
 
