@@ -14,11 +14,6 @@ Additionally, company levels for each user are specified.
 Note: All characters appearing in this data are fictitious.
 Any resemblance to real persons, living or dead or undead or unborn or otherwise semi-existent is purely coincidental.
 
-To manually load data, go to the **Storage** section:
-
-{: .image-popup}
-![Screenshot -- Storage Console](/overview/tutorial/load/intro-screen.png)
-
 In the
 [*Storage Console*](/storage/), there is a tab called *Tables* listing all database tables stored in your project.
 The tables are grouped together into *Buckets*.
@@ -38,28 +33,47 @@ For now, let's use MySQL.
 After that prepare your second tutorial bucket, this time in the *out*put stage; it is used for data ready to be written into external systems.
 Now you have two buckets: `in.c-tutorial` and `out.c-tutorial`.
 
-To create the four tables in your input tutorial bucket, hover over its name and click the plus button that appears.
+*Please note that creating a bucket beforehand is not required. You can load a CSV file into a bucket and table that do not yet exist.* 
+
+To manually load data, go to the **Extractors** section and find **CSV Import**:
 
 {: .image-popup}
-![Screenshot -- Create a table](/overview/tutorial/load/create-table.png)
+![Screenshot -- CSV Import](/overview/tutorial/load/intro-screen.png)
 
-To manually create a table in Storage, you need a CSV file. For our tutorial, we have prepared four sample tables:
+Click on the More button and you'll see **CSV Import** details. Here you can store predefined import configurations. 
+Each configuration will point to a different table and will allow you to reuse it quickly later.
+
+{: .image-popup}
+![Screenshot -- CSV Import](/overview/tutorial/load/csv-import-empty-list.png)
+
+Now you need a CSV file. For our tutorial, we have prepared four sample tables:
 
 - opportunity (business opportunities) -- [https://help.keboola.com/overview/tutorial/opportunity.csv](/overview/tutorial/opportunity.csv)
 - account (associated accounts) -- [https://help.keboola.com/overview/tutorial/account.csv](/overview/tutorial/account.csv)
 - user (associated users) -- [https://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
 - level (company levels) -- [https://help.keboola.com/overview/tutorial/level.csv](/overview/tutorial/level.csv)
 
-Either refer directly to the URLs above,
-or download the files to your computer (they are very small) and load them by file upload.
+Download the files to your computer (they are very small) and you're ready to start loading data.
 
 {: .image-popup}
-![Screenshot -- Create a table](/overview/tutorial/load/create-table-2.png)
+![Screenshot -- CSV Import Configuration](/overview/tutorial/load/csv-import-default-configuration.png)
 
-When you upload a table, you can check its contents in the *Data sample* tab.
+
+To create a configuration click on the *Create New Configuration* button. You will be asked to name the configuration, 
+we'll be creating configuration for each file, so let's name the first one `Opportunity`. You'll be immediately redirected to the configuration detail. 
 
 {: .image-popup}
-![Screenshot -- Data sample](/overview/tutorial/load/data-sample.png)
+![Screenshot -- Change upload settings](/overview/tutorial/load/csv-import-change-settings.png)
+
+You could start uploading right now, but we want to use a different bucket than the default provided. 
+Click on the *Change Settings* link and type `in.c-tutorial.opportunity` in the *Destination* field (you need to click add option below the text input after typing). 
+Click on *Save Settings* to confirm the change.
+
+{: .image-popup}
+![Screenshot -- Upload CSV file](/overview/tutorial/load/csv-import-upload.png)
+
+
+Now you can start uploading. Select the downloaded `opportunity.csv` file from your computer and hit the *Upload* button. Once this is finished (you'll get a notification) repeat the process for the other 3 tables.
 
 That's it. You should now have four tables with sample data stored in your KBC project.
 
