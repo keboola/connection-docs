@@ -66,7 +66,7 @@ we'll be creating configuration for each file, so let's name the first one `Oppo
 ![Screenshot -- Change upload settings](/overview/tutorial/load/csv-import-change-settings.png)
 
 You could start uploading right now, but we want to use a different bucket than the default provided. 
-Click on the *Change Settings* link and type `in.c-tutorial.opportunity` in the *Destination* field (you need to click add option below the text input after typing). 
+Click on the *Change Settings* link and type `in.c-tutorial.opportunity` in the *Destination* field. 
 Click on *Save Settings* to confirm the change.
 
 {: .image-popup}
