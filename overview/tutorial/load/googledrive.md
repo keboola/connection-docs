@@ -21,7 +21,12 @@ Go to [Google Spreadsheets](https://docs.google.com/spreadsheets/) and *Start a 
 
 ## Configure the GoogleDrive Extractor
 
-Go to *Extractors* in KBC and use the search box to find the *Google Drive* extractor. If your favorite app is not listed, it
+Go to *Extractors* in KBC and click the *New extractor* button:
+
+{: .image-popup}
+![Extractors Overview Screenshot](/overview/tutorial/load/extractor-intro-0.png)
+
+Use the search box to find the *Google Drive* extractor. If your favorite app is not listed, it
 certainly does **not** mean that we can't extract data from it.
 
 {: .image-popup}
@@ -72,9 +77,9 @@ It will appear on the right side of the screen as one of the *Sheets to Be Added
 Save the configuration by clicking the *Save* button in the upper right corner of the screen.
 You should obtain a result like the one below. Then, click on the *Run Extraction* command on the right.
 This will create a background job extracting the selected sheet from the Google Drive document
-and loading it into Storage. 
+and loading it into Storage.
 
-When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job. 
+When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.
 Green is for success, red for failure. Click on the indicator, or the info next to it for more details.
 
 {: .image-popup}
@@ -106,7 +111,7 @@ This concludes our example setup of a Google Drive Extractor.
 
 If you want to use the table created in this side-step in the rest of the tutorial, you have two options:
 
-1. Replace `in.c-tutorial.level` with `in.c-ex-google-drive-userlevels.0-level` in the following steps.
+1. Replace `in.c-tutorial.level` with `in.c-ex-google-drive-userlevels.0-level` in the following steps of the tutorial.
 2. Ensure this table is accessible under the `in.c-tutorial.level` name using an alias table, as described below.
 
 #### Creating an Alias Table
