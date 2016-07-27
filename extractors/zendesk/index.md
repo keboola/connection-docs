@@ -314,3 +314,8 @@ Values of ticket custom fields
 | `tickets_fields_pk` [PK] | Ticket field identifier |
 | `value` | JSON encoded value of the field |
 | `tickets_pk` [PK] | Ticket identifier |
+
+## Usage Limits
+
+Limits of the extractor is based on [Zendesk API Rate Limits](https://developer.zendesk.com/rest_api/docs/core/introduction#rate-limits).
+
