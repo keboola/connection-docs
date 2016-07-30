@@ -317,5 +317,5 @@ Values of ticket custom fields
 
 ## Usage Limits
 
-Limits of the extractor is based on [Zendesk API Rate Limits](https://developer.zendesk.com/rest_api/docs/core/introduction#rate-limits).
+Limits of the extractor are based on [Zendesk API Rate Limits](https://developer.zendesk.com/rest_api/docs/core/introduction#rate-limits).
 
