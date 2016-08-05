@@ -28,13 +28,13 @@ These are sandboxes in projects `232`, `258` and `1067`. You can easily switch b
 
 No credentials available
 
-  - *Create credentials* -- Create new MySQL credentials. If there is already a MySQL user assigned to the current KBC user, username
-and password remain the same, the user only gets a new database assigned. 
+  - *Create credentials* -- Create new MySQL credentials. If there is already a MySQL user assigned to the current KBC user, their 
+  username and password remain the same, the user only gets a new database assigned. 
   
 Credentials available  
   
   - *Load data* -- Load data into the sandbox; see [Loading data](/manipulation/transformations/sandbox/#loading-data).
-  - *Connect* -- Connect to the sandox using a web SWL client.
+  - *Connect* -- Connect to the sandbox using a web SWL client.
   - *SSL* -- Show secure connection information.
   - *Drop credentials* -- Delete the database (and all tables); if this is the last MySQL sandbox of the KBC user, delete the MySQL user. 
 
@@ -65,15 +65,17 @@ Credentials available
 
 ### Connecting to Sandbox
 
-Almost any PGSQL client can connect to an AWS Redshift cluster. We have tested Navicat and DBeaver (free) and they both work fine, 
-just [follow this guide](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/how-to-set-up-a-redshift-sandbox-using-kbc-dbeaver).
-For a secure connection follow [this guide](http://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html). 
+Almost any PGSQL client can connect to an AWS Redshift cluster. We have tested Navicat and DBeaver (free) and they both work fine.
+Just follow [this guide](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/how-to-set-up-a-redshift-sandbox-using-kbc-dbeaver).
+For a secure connection, follow [this guide](http://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html). 
 
 ### Direct Access to Storage Tables
 
-In a Redshift sandbox, you have native access to all Redshift buckets in the project. You can easily access a table in Storage using schema/bucket namespacing, for example, `SELECT * FROM "in.c-main"."mytable"`. Use double quotes as the schema (= bucket) name always contains a dot.
+In a Redshift sandbox, you have native access to all Redshift buckets in the project. 
+You can easily access a table in Storage using schema/bucket namespacing, for example, `SELECT * FROM "in.c-main"."mytable"`. 
+Use double quotes as the schema (= bucket) name always contains a dot.
    
-We do not recommend working with Storage tables directly in your SQL code. Always use the input mapping to bring tables to your schema. This adds another level of security and features to your transformation. 
+We do not recommend working with Storage tables directly in your SQL code. Always use input mapping to bring tables to your schema. This adds another level of security and features to your transformation. 
 
 ### Version
 
@@ -83,9 +85,9 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 
 There are two ways to create a sandbox: 
 
-- **Plain sandbox** -- Load tables from Storage into your sandbox. The data are always loaded from scratch. When you modify the input mapping (for example, by adding another table), the old sandbox is deleted and a new one is created. 
+1. **Plain sandbox** -- Load tables from Storage into your sandbox. Data are always loaded from scratch. When modifying the input mapping (for example, by adding another table), the old sandbox is deleted and a new one is created. 
 
-- **Transformation sandbox** -- Use for gradual development of transformations; the input structure can be modified during the process without deleting the current state of the sandbox.
+2. **Transformation sandbox** -- Use for gradual development of transformations; the input structure can be modified during the process without deleting the current state of the sandbox.
 
 ### Plain Sandbox
 
@@ -96,7 +98,7 @@ Use the **Load data** button to load tables or whole buckets into a sandbox. You
 this is useful for sampling a large table. Or, use the **Preserve** option to keep the current state of your sandbox. 
 Otherwise, it will be emptied. The **Preserve** option comes in handy when you need to add a table to your working sandbox.
 
-Imported tables will have their full names including bucket names as table names.
+Imported tables will have their full names, including bucket names, as table names.
 
 ### Transformation Sandbox
 
@@ -107,8 +109,8 @@ To start or continue work on your transformation, create a transformation sandbo
 
 There you can  
 
- - load the tables specified in the input mapping, 
- - load the input tables and execute required transformations -- that prepares the sandbox workspace for the current transformation (if there are any dependencies), and
+ - load the tables specified in the input mapping; 
+ - load the input tables and execute required transformations -- that prepares the sandbox workspace for the current transformation (if there are any dependencies); and
  - execute the transformation and all dependencies, without writing back to Storage -- that is a dry-run for validation.
  
 Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page. To add tables to an existing sandbox, use the plain sandbox. 
