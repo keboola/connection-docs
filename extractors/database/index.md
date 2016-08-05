@@ -33,7 +33,7 @@ The connection to your internal database must be well secured. If you, or your s
 we highly recommend setting up an SSH Tunnel for the connection.
 
 {: .image-popup}
-![Schema - SSH tunnel](/extractors/database/ssh/ssh-tunnel.jpg)
+![Schema - SSH tunnel](/extractors/database/ssh-tunnel.jpg)
 
 A [Secure Shell (SSH)](https://en.wikipedia.org/wiki/Secure_Shell) [tunnel](https://en.wikipedia.org/wiki/Tunneling_protocol) consists of an encrypted connection created
 through the SSH protocol connection. You can set up this tunnel to connect to your database server located in your private network that you do not want

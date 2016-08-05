@@ -11,57 +11,74 @@ data loading using extractors.
 In this part of our tutorial, you will load four tables into KBC Storage.
 The tables represent business opportunities, their associated users and accounts.
 Additionally, company levels for each user are specified.
-Note: All characters appearing in this data are fictitious.
-Any resemblance to real persons, living or dead or undead or unborn or otherwise semi-existent is purely coincidental.
-
-To manually load data, go to the **Storage** section:
-
-{: .image-popup}
-![Screenshot -- Storage Console](/overview/tutorial/load/intro-screen.png)
-
-In the
-[*Storage Console*](/storage/), there is a tab called *Tables* listing all database tables stored in your project.
-The tables are grouped together into *Buckets*.
-There are two buckets, `in.c-main` and `out.c-main`, ready for you.
-However, for the purposes of this tutorial, let's create new ones.
-Click the plus button to create your first bucket.
-
-{: .image-popup}
-![Screenshot -- Create Bucket](/overview/tutorial/load/create-bucket.png)
-
-Name your bucket *tutorial*; entering a description is optional.
-Then select the *in*put *Stage* which is used for loading outside data into KBC.
-The distinction between the input and output stage is purely conventional differentiation between raw and processed data.
-Finish by selecting *Backend* that refers to the [backend](/storage/) database storing your data.
-For now, let's use MySQL.
-
-After that prepare your second tutorial bucket, this time in the *out*put stage; it is used for data ready to be written into external systems.
-Now you have two buckets: `in.c-tutorial` and `out.c-tutorial`.
-
-To create the four tables in your input tutorial bucket, hover over its name and click the plus button that appears.
-
-{: .image-popup}
-![Screenshot -- Create a table](/overview/tutorial/load/create-table.png)
-
-To manually create a table in Storage, you need a CSV file. For our tutorial, we have prepared four sample tables:
+For our tutorial, we have prepared the tables as CSV files:
 
 - opportunity (business opportunities) -- [https://help.keboola.com/overview/tutorial/opportunity.csv](/overview/tutorial/opportunity.csv)
 - account (associated accounts) -- [https://help.keboola.com/overview/tutorial/account.csv](/overview/tutorial/account.csv)
 - user (associated users) -- [https://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
 - level (company levels) -- [https://help.keboola.com/overview/tutorial/level.csv](/overview/tutorial/level.csv)
 
-Either refer directly to the URLs above,
-or download the files to your computer (they are very small) and load them by file upload.
+Download the files to your computer (they are very small) and you're ready to start loading data.
+
+Note: All characters appearing in this data are fictitious.
+Any resemblance to real persons, living or dead or undead or unborn or otherwise semi-existent is purely coincidental.
+
+To manually load data, go to the **Extractors** section and use the search box to find **CSV Import**:
 
 {: .image-popup}
-![Screenshot -- Create a table](/overview/tutorial/load/create-table-2.png)
+![Screenshot -- Extractors](/overview/tutorial/load/extractor-intro-1.png)
 
-When you upload a table, you can check its contents in the *Data sample* tab.
+Click on the More button and you'll see **CSV Import** details. Here you can store predefined import configurations.
+Each KBC extractor can have multiple *configurations*. This concept allows you to extract data from multiple sources
+of the same type. Each configuration of **CSV Import** will point to a different table and will allow you to reuse it quickly later.
 
 {: .image-popup}
-![Screenshot -- Data sample](/overview/tutorial/load/data-sample.png)
+![Screenshot -- CSV Import Intro](/overview/tutorial/load/csv-import-empty-list.png)
 
-That's it. You should now have four tables with sample data stored in your KBC project.
+Click on *Create new Configuration* to continue.
+
+{: .image-popup}
+![Screenshot -- CSV New Configuration](/overview/tutorial/load/csv-import-create-new-configuration.png)
+
+You need to name the configuration, you'll be creating configuration for each table, so let's name the first one *Opportunity*
+and click on *Create*. When the configuration is created, it is filled with defaults - e.g. *CSV format* and *destination* name of the table in
+[KBC Storage](/storage/). For this tutorial, you need to change the *Destination* setting. To change it, click on *Change settings*.
+
+{: .image-popup}
+![Screenshot -- CSV Import Configuration](/overview/tutorial/load/csv-import-default-configuration.png)
+
+Now type `in.c-tutorial.opportunity` in the *Destination* field and click on *Save Settings* to confirm the change.
+You don't need to change any other setting.
+
+{: .image-popup}
+![Screenshot -- Change upload settings](/overview/tutorial/load/csv-import-change-settings.png)
+
+Now you can start uploading. Select the downloaded `opportunity.csv` file from your computer and hit the *Upload* button.
+
+{: .image-popup}
+![Screenshot -- Upload CSV file](/overview/tutorial/load/csv-import-upload-before.png)
+
+Once the upload is finished (you'll get a notification) go back to the *CSV import* (you can use navigation on the top) and
+repeat the process for the other 3 tables (create configuration, change destination, upload file).
+
+{: .image-popup}
+![Screenshot -- Upload CSV file progress](/overview/tutorial/load/csv-import-upload.png)
+
+That's it. You should now have four tables with sample data stored in your KBC project:
+
+- `in.c-tutorial.opportunity`
+- `in.c-tutorial.account`
+- `in.c-tutorial.user`
+- `in.c-tutorial.level`
+
+To verify that you loaded all the tables, and peek at the data, you can go to
+[*Storage Console*](/storage/), there is a tab called *Tables* listing all database tables stored in your project.
+The tables are grouped together into *Buckets*. The tables you just loaded are
+contained in the bucket `in.c-tutorial`. Click the arrow next to bucket name to show tables in bucket.
+Click a table name to see table details including *Data Sample*.
+
+{: .image-popup}
+![Screenshot -- Storage preview](/overview/tutorial/load/csv-import-storage.png)
 
 You can now take
 
