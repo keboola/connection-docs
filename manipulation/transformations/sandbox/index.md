@@ -16,7 +16,7 @@ Each user gets credentials for MySQL and Redshift sandboxes with each project (w
 {: .image-popup}
 ![Sandbox credentials](/manipulation/transformations/sandbox/sandbox-credentials.png)
 
-## MySQL
+## MySQL Sandbox
 
 For a single user, MySQL credentials are shared within all projects. Each project sandbox is represented as a database assigned to the user. 
 The user and password remain the same until you delete all MySQL sandboxes in all your projects.  
@@ -39,10 +39,12 @@ Credentials available
   - *Drop credentials* -- Delete the database (and all tables); if this is the last MySQL sandbox of the KBC user, delete the MySQL user. 
 
 ### Connecting to Sandbox
-To connect to a MySQL sandbox, use any MySQL client. We recommend using SSL secure connection. 
+
+To connect to a MySQL sandbox, use any MySQL client, for instance [Sequel Pro](http://www.sequelpro.com/) or
+[DBeaver](http://dbeaver.jkiss.org/download/). 
+We recommend using SSL secure connection. 
 To use secure connection, download the [SSL certificate](https://d3iz2gfan5zufq.cloudfront.net/files/sh-tapi.ca.pem) 
-and use it in your preferred MySQL client, for instance [Sequel Pro](http://www.sequelpro.com/) or
-[DBeaver](http://dbeaver.jkiss.org/download/).
+and use it in your MySQL client.
 
 Sequel Pro configuration:
 
@@ -56,7 +58,8 @@ DBeaver configuration:
 
 MySQL sandboxes use MariaDB 5.5.44. 
 
-## Redshift
+## Redshift Sandbox
+
 Credentials for Redshift sandboxes are not shared between projects as each project sits on a 
 different cluster. For each project you have its own set of credentials.
 
@@ -88,7 +91,7 @@ To establish a secure connection to a Redshift sandbox, follow the
 
 In a Redshift sandbox, you have native access to all Redshift buckets in the project. 
 You can easily access a table in Storage using schema/bucket namespacing, for example: `SELECT * FROM "in.c-main"."mytable"`. 
-Use double quotes as the schema (= bucket) name always contains a dot.
+Use double quotes, as the schema (= bucket) name always contains a dot.
    
 We do not recommend working with Storage tables directly in your SQL code. Always use input mapping to bring tables to your schema. This adds another level of security and features to your transformation. 
 
@@ -97,22 +100,26 @@ We do not recommend working with Storage tables directly in your SQL code. Alway
 A Redshift sandbox always uses the latest Redshift version available on the cluster.  
 
 ## Working with Sandbox
-There are two types of sandboxes -- **Transformation Sandbox** and **Plain Sandbox**. 
-Transformation Sandbox is tied to a specific transformation bucket and data is loaded into it through input mapping. 
-It is useful for developing and debugging transformation code. 
+There are two types of sandboxes: Plain Sandbox and Transformation Sandbox. 
 
-Plain Sandbox allows you to load any data from Storage and is suitable for data exploration and experiments. 
+**Plain Sandbox**
 
-The sandboxes differ in their behaviour: 
+- Great for **data exploration and experiments** run on the copies of the tables you select.
+- Loads any data from Storage.
+- Loads data from scratch. For example, if you want to add another table, the old sandbox is by default deleted 
+and a new one is created. To add a table to your already existing, working sandbox and keep its state, 
+select the *Preserve* option. 
 
-- **Plain Sandbox** -- Load tables from Storage into your sandbox. The data is always loaded from scratch.
-When modifying the input mapping (for example, by adding another table), the old sandbox is deleted and a new one is created. 
+**Transformation Sandbox**
 
-- **Transformation Sandbox** -- Use for gradual development of transformations; the input structure 
-can be modified during the process without deleting the current state of the sandbox.
+- Tied to a specific transformation bucket.
+- Intended for **gradual development and debugging** of your transformation code.
+- Input structure can be modified during the process without deleting the current state of the sandbox.
+- Data is loaded through input mapping.
 
-### Plain Sandbox
-To create credentials to Plain Sandbox, go to **Transformations** section and use the **Sandbox** button.
+
+### Create Plain Sandbox
+To create credentials to Plain Sandbox, go to the **Transformations** section and use the **Sandbox** button.
 
 {: .image-popup}
 ![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-1.png)
@@ -138,7 +145,7 @@ Otherwise, it will be emptied. The **Preserve** option comes in handy when you n
 
 The imported tables will have full tables names - including both a bucket and table name.
 
-### Transformation Sandbox
+### Create Transformation Sandbox
 
 To create credentials to Transformation Sandbox go to the **Transformations** section and select the respective transformation:
 
@@ -161,7 +168,7 @@ be loaded into the sandbox database.
 In the transformation sandbox dialog you can
 
  - load the tables specified in the input mapping; 
- - load the input tables and execute required transformations -- that prepares the sandbox workspace for the current transformation 
+ - execute required transformations -- that prepares the sandbox workspace for the current transformation 
   (if there are any dependencies); and
  - execute the transformation and all dependencies without writing back to Storage -- that is a dry-run for validation.
  
