@@ -18,9 +18,9 @@ For our tutorial, we have prepared the tables as CSV files:
 - user (associated users) -- [https://help.keboola.com/overview/tutorial/user.csv](/overview/tutorial/user.csv)
 - level (company levels) -- [https://help.keboola.com/overview/tutorial/level.csv](/overview/tutorial/level.csv)
 
-Download the files to your computer (they are very small) and you're ready to start loading data.
+Download the files to your computer (they are very small) and start loading data.
 
-Note: All characters appearing in this data are fictitious.
+**Important**: All characters appearing in this data are fictitious.
 Any resemblance to real persons, living or dead or undead or unborn or otherwise semi-existent is purely coincidental.
 
 To manually load data, go to the **Extractors** section and use the search box to find **CSV Import**:
@@ -28,7 +28,7 @@ To manually load data, go to the **Extractors** section and use the search box t
 {: .image-popup}
 ![Screenshot -- Extractors](/overview/tutorial/load/extractor-intro-1.png)
 
-Click on the More button and you'll see **CSV Import** details. Here you can store predefined import configurations.
+Click on the *More* button to see **CSV Import** details. Here you can store predefined import configurations.
 Each KBC extractor can have multiple *configurations*. This concept allows you to extract data from multiple sources
 of the same type. Each configuration of **CSV Import** will point to a different table and will allow you to reuse it quickly later.
 
@@ -40,15 +40,14 @@ Click on *Create new Configuration* to continue.
 {: .image-popup}
 ![Screenshot -- CSV New Configuration](/overview/tutorial/load/csv-import-create-new-configuration.png)
 
-You need to name the configuration, you'll be creating configuration for each table, so let's name the first one *Opportunity*
-and click on *Create*. When the configuration is created, it is filled with defaults - e.g. *CSV format* and *destination* name of the table in
-[KBC Storage](/storage/). For this tutorial, you need to change the *Destination* setting. To change it, click on *Change settings*.
+You will be creating configuration for each table, so let's name the first one *Opportunity* and click on *Create*. 
+Each created configuration is filled with defaults; for example, *CSV format* and *destination* name of the table in
+[KBC Storage](/storage/). For this tutorial, change only the *Destination* setting by clicking on *Change settings*.
 
 {: .image-popup}
 ![Screenshot -- CSV Import Configuration](/overview/tutorial/load/csv-import-default-configuration.png)
 
-Now type `in.c-tutorial.opportunity` in the *Destination* field and click on *Save Settings* to confirm the change.
-You don't need to change any other setting.
+Now type `in.c-tutorial.opportunity` in the *Destination* field and click on *Save Settings*.
 
 {: .image-popup}
 ![Screenshot -- Change upload settings](/overview/tutorial/load/csv-import-change-settings.png)
@@ -58,8 +57,8 @@ Now you can start uploading. Select the downloaded `opportunity.csv` file from y
 {: .image-popup}
 ![Screenshot -- Upload CSV file](/overview/tutorial/load/csv-import-upload-before.png)
 
-Once the upload is finished (you'll get a notification) go back to the *CSV import* (you can use navigation on the top) and
-repeat the process for the other 3 tables (create configuration, change destination, upload file).
+Once the upload is finished (you will get a notification), go back to the *CSV import* (you can use navigation on the top) and
+repeat the process for the other three tables (create configuration, change destination, upload file).
 
 {: .image-popup}
 ![Screenshot -- Upload CSV file progress](/overview/tutorial/load/csv-import-upload.png)
@@ -71,10 +70,10 @@ That's it. You should now have four tables with sample data stored in your KBC p
 - `in.c-tutorial.user`
 - `in.c-tutorial.level`
 
-To verify that you loaded all the tables, and peek at the data, you can go to
-[*Storage Console*](/storage/), there is a tab called *Tables* listing all database tables stored in your project.
-The tables are grouped together into *Buckets*. The tables you just loaded are
-contained in the bucket `in.c-tutorial`. Click the arrow next to bucket name to show tables in bucket.
+To verify that you have loaded all the tables and to peek at the data, go to [*Storage Console*](/storage/).
+All database tables stored in your project are listed in the *Tables* tab. 
+They are grouped together into *Buckets*, and the newly loaded tables can be found in the `in.c-tutorial` bucket. 
+To see all tables in a bucket, click the arrow next to its name.
 Click a table name to see table details including *Data Sample*.
 
 {: .image-popup}
