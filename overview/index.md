@@ -31,23 +31,26 @@ services. But they can also connect directly to an arbitrary database, or proces
 
 ### Storage
 *Storage* is the central KBC subsystem managing everything related to storing data and accessing it.
-It is implemented as a layer on top of various database engines that we use as our *backends* ([Mysql](https://www.mysql.com/),
+It is implemented as a layer on top of various database engines that we use as our *backends* ([MySQL](https://www.mysql.com/),
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). 
 Storage provides an important API (Storage API) access for other KBC components and 3rd party applications.
 
-### Transformations
-*Transformations* are the first part of data manipulation. The transformation engine is tasked with modifying the data in Storage.
-It picks data from Storage, manipulates it and then stores it back. Transformations can be created by writing a free-form script in
-[SQL](https://en.wikipedia.org/wiki/SQL) (MysQL, Redshift), [R](https://www.r-project.org/about.html) and
+### Data Manipulation
+There are two ways how data in KBC can be manipulated: via **Transformations** (simpler) and **Applications** 
+(not as simple but more powerful). Both pick data from Storage, manipulate it and then store it back. 
+
+#### Transformations
+Transformations can be created by writing a free-form script in
+[SQL](https://en.wikipedia.org/wiki/SQL) (MySQL, Redshift), [R](https://www.r-project.org/about.html) and
 [Python](https://www.python.org/about/).
 
-### Recipes (Applications)
-Recipes and *Applications* form the second part of data manipulation. Applications allow you to enrich the data in Storage. 
-Unlike the free-form Transformations, these are predefined blocks which can be used to do some pretty
+#### Applications
+Unlike the free-form Transformations, Applications are predefined blocks which can be used to do some pretty
 advanced stuff like sentiment analysis, association discovery, or histogram grouping.
-Applications can also augment data (for example, add Weather or Exchange Rates). 
-They actually call on *3rd party services* to bring in additional data. 
-Applications can also be completely created by 3rd party developers - KBC is a very open environment.
+Applications can also augment data (for example, add Weather or Exchange Rates) by calling on *3rd party services* to bring in additional data. 
+All applications are implemented as extensions (see below) and as such can be completely created by 3rd party developers - 
+KBC is a very open environment.
+
 
 ### Writers
 *Writers* are KBC components delivering output data from KBC into the systems and applications where the data gets used/consumed.
@@ -71,8 +74,13 @@ time and you can continue your work in the meantime.
 ### Token
 Every operation done in KBC must be authorized with a *token*. Each KBC user is automatically assigned a token on their first login. 
 Apart from that, tokens with limited access to some KBC operations can be created (and shared with other people). 
-The principle of token authorization alows you, for example, to easily [share a single table](/overview/tutorial/management/#user-management) 
+The principle of token authorization allows you, for example, to easily [share a single table](/overview/tutorial/management/#user-management) 
 from your Storage with someone without them having to register to KBC (enter email/password).
+
+### Extensions
+KBC, as an environment consisting of many built-in interoperating components (Storage, Transformations, Readers etc.), can be extended 
+with arbitrary code to extract, manipulate or write data. There are two types of extensions: 
+[Custom Extensions](https://developers.keboola.com/extend/) and [Generic Extractor](todo). They can be created by us or by 3rd parties, and can be offered to other KBC users as well.
 
 ## External Environment Schema
 
@@ -82,3 +90,4 @@ of different services and their connections:
 ![External Environment Schema](/overview/kbc_environment.png){: .img-responsive}
 
 In place of the *Data Consumption*, the GoodData Business Intelligence Analytics platform is shown.
+
