@@ -58,6 +58,9 @@ Lets create simple query with some basic metrics like Sessions, Users and Pagevi
  7. When you are happy with the results, save your query
  
  8. To store results to Storage, click on the "play" icon on the query list page
+ 
+ ![Screenshot - Create New Query](/extractors/google-analytics/ui_new_query.png)
+ {: .image-popup}
 
 ## Date Ranges
 Date range specifies a time window from which the data will be extracted.
