@@ -47,6 +47,9 @@ items:
       - url: /extractors/google-adwords-reports/
         title: Google AdWords Reports
 
+      - url: /extractors/google-analytics/
+        title: Google Analytics
+
       - url: /extractors/mongodb/
         title: MongoDB
         items:
