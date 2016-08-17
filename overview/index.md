@@ -3,6 +3,10 @@ title: Keboola Connection Overview
 permalink: /overview/
 ---
 
+* TOC
+{:toc}
+
+
 Keboola Connection (KBC) is a cloud platform for interconnecting diverse systems. It is used to
 
 - *extract* data from a source system, 
@@ -31,9 +35,14 @@ services. But they can also connect directly to an arbitrary database, or proces
 
 ### Storage
 *Storage* is the central KBC subsystem managing everything related to storing data and accessing it.
-It is implemented as a layer on top of various database engines that we use as our *backends* ([MySQL](https://www.mysql.com/),
+It has two sections: [File Storage](https://help.keboola.com/storage/file-uploads/) with all raw files uploaded 
+to your project, and [Table Storage](https://help.keboola.com/storage/tables/) where all data tables are organized 
+into buckets which are further organized into *in* and *out* stages.
+
+Storage is implemented as a layer on top of various database engines that we use as our *backends* ([MySQL](https://www.mysql.com/),
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). 
-Storage provides an important API (Storage API) access for other KBC components and 3rd party applications.
+It provides an important API (Storage API) access for other KBC components and 3rd party applications. 
+Your own remote storage can be connected to KBC as well.
 
 ### Data Manipulation
 There are two ways how data in KBC can be manipulated: via **Transformations** (simpler) and **Applications** 
@@ -61,18 +70,19 @@ These may be business intelligence analytics or visualization systems, but also 
 or simply any system that can help our customers to realize the extra value KBC adds to the data.
 
 ### Orchestrator / Scheduler
-In the background, behind the scenes, there is the *Orchestrator* component which allows everything to be
-fully automated. Orchestrator enables to run any component (e.g., data extraction) in specified intervals or at specified times of the day.
+In the background, behind the scenes, there is the [*Orchestrator*](https://help.keboola.com/overview/tutorial/automate/) 
+component which allows everything to be fully automated. 
+Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
 
 ## Other Commonly Used Terms
 
 ### Jobs
 Most things in KBC are done using the batch approach; when you do some operation, a **Job** is created
-and executed in the background. We also call these jobs **asynchronous***. Multiple jobs can be running at the same 
+and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same 
 time and you can continue your work in the meantime. 
 
 ### Token
-Every operation done in KBC must be authorized with a *token*. Each KBC user is automatically assigned a token on their first login. 
+Every operation done in KBC must be authorized with a [*token*](https://help.keboola.com/storage/tokens/). Each KBC user is automatically assigned a token on their first login. 
 Apart from that, tokens with limited access to some KBC operations can be created (and shared with other people). 
 The principle of token authorization allows you, for example, to easily [share a single table](/overview/tutorial/management/#user-management) 
 from your Storage with someone without them having to register to KBC (enter email/password).
@@ -80,7 +90,10 @@ from your Storage with someone without them having to register to KBC (enter ema
 ### Extensions
 KBC, as an environment consisting of many built-in interoperating components (Storage, Transformations, Readers etc.), can be extended 
 with arbitrary code to extract, manipulate or write data. There are two types of extensions: 
-[Custom Extensions](https://developers.keboola.com/extend/) and [Generic Extractor](todo). They can be created by us or by 3rd parties, and can be offered to other KBC users as well.
+[Custom Extensions](https://developers.keboola.com/extend/) and Generic Extractor. They can be created by us or by 3rd parties, and can be offered to other KBC users as well.
+
+### Input / Output Mapping
+coming soon
 
 ## External Environment Schema
 
@@ -89,5 +102,5 @@ of different services and their connections:
 
 ![External Environment Schema](/overview/kbc_environment.png){: .img-responsive}
 
-In place of the *Data Consumption*, the GoodData Business Intelligence Analytics platform is shown.
+In place of *Data Consumption*, the GoodData Business Intelligence Analytics platform is shown.
 
