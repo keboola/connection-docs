@@ -3,6 +3,9 @@ title: Mapping Examples
 permalink: /extractors/mongodb/mapping/
 ---
 
+* TOC
+{:toc}
+
 ## Basic Mapping Without Nested Documents
 
 <table class="table table-bordered">
