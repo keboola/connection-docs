@@ -3,6 +3,9 @@ title: Mapping Examples
 permalink: /extractors/mongodb/mapping/
 ---
 
+* TOC
+{:toc}
+
 ## Basic Mapping Without Nested Documents
 
 <table class="table table-bordered">
@@ -237,6 +240,66 @@ extractors-tags
 <tr><td>keboola</td><td>5716054bee6e764c94fa7ddd</td></tr>
 <tr><td>extractor</td><td>5716054bee6e764c94fa7ddd</td></tr>
 <tr><td>mongodb</td><td>5716054bee6e764c94fa7ddd</td></tr>
+</table>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+
+## Boolean values
+
+<table class="table table-bordered">
+<tr>
+<td>Documents</td>
+<td>
+{% highlight json %}
+[
+    {
+        "_id": {
+            "$oid" : "764c94fa7ddd5716054bee6e"
+        },
+        "name": "MySQL extractor",
+        "isActive": false
+    },
+    {
+        "_id": {
+            "$oid" : "5716054bee6e764c94fa7ddd"
+        },
+        "name": "MongoDB extractor",
+        "isActive": true
+    }
+]
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Mapping</td>
+<td>
+{% highlight json %}
+{
+    "_id.$oid": {
+        "type": "column",
+        "mapping": {
+            "destination": "id",
+            "primaryKey": true
+        }
+    },
+    "isActive": "isActive"
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>
+
+extractors
+<table>
+<tr><th>id (marked as PK)</th><th>name</th><th>isActive</th></tr>
+<tr><td>764c94fa7ddd5716054bee6e</td><td>MySQL extractor</td><td>(empty string)</td></tr>
+<tr><td>5716054bee6e764c94fa7ddd</td><td>MongoDB extractor</td><td>1</td></tr>
 </table>
 
 </td>
