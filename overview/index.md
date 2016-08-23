@@ -29,14 +29,14 @@ Data sources are systems containing data you wish to bring into KBC. They can be
 to on-premise databases, legacy systems or even appliances and IoT devices. Data source is not part of KBC.
 
 ### Extractors
-*Extractors* are KBC components used for gathering data from sources. 
+[*Extractors*](/extractors/) are KBC components used for gathering data from sources. 
 Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
 services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
 
 ### Storage
-*Storage* is the central KBC subsystem managing everything related to storing data and accessing it.
-It has two sections: [File Storage](https://help.keboola.com/storage/file-uploads/) with all raw files uploaded 
-to your project, and [Table Storage](https://help.keboola.com/storage/tables/) where all data tables are organized 
+[*Storage*](/storage/) is the central KBC subsystem managing everything related to storing data and accessing it.
+It has two sections: [File Storage](/storage/file-uploads/) with all raw files uploaded 
+to your project, and [Table Storage](/storage/tables/) where all data tables are organized 
 into buckets which are further organized into *in* and *out* stages.
 
 Storage is implemented as a layer on top of various database engines that we use as our *backends* ([MySQL](https://www.mysql.com/),
@@ -45,13 +45,13 @@ It provides an important API (Storage API) access for other KBC components and 3
 Your own remote storage can be connected to KBC as well.
 
 ### Data Manipulation
-There are two ways how data in KBC can be manipulated: via **Transformations** (simpler) and **Applications** 
+There are two ways how data in KBC can be [manipulated](/manipulation/): via [**Transformations**](/manipulation/transformations/) (simpler) and **Applications** 
 (not as simple but more powerful). Both pick data from Storage, manipulate it and then store it back. 
 
 #### Transformations
 Transformations can be created by writing a free-form script in
 [SQL](https://en.wikipedia.org/wiki/SQL) (MySQL, Redshift), [R](https://www.r-project.org/about.html) and
-[Python](https://www.python.org/about/).
+[Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) - a safe environment for your experiments. 
 
 #### Applications
 Unlike the free-form Transformations, Applications are predefined blocks which can be used to do some pretty
@@ -81,7 +81,7 @@ Most things in KBC are done using the batch approach; when you do some operation
 and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same 
 time and you can continue your work in the meantime. 
 
-### Token
+### Tokens
 Every operation done in KBC must be authorized with a [*token*](https://help.keboola.com/storage/tokens/). Each KBC user is automatically assigned a token on their first login. 
 Apart from that, tokens with limited access to some KBC operations can be created (and shared with other people). 
 The principle of token authorization allows you, for example, to easily [share a single table](/overview/tutorial/management/#user-management) 
