@@ -13,17 +13,20 @@ A sandbox is a **safe environment** for you to
 - explore, analyze and experiment with copies of selected Storage data. 
 - test, troubleshoot and develop transformations without modifying any Storage data.
 
-You can fill a sandbox with any data from Storage (regardless of the backend the data is stored in) and safely experiment with it.
-However, to simplify transformation development, KBC provides a specific loader for your transformations. 
+You can fill a sandbox with any data from Storage. However, to simplify transformation development, 
+KBC provides a specific loader for your transformations. 
 It automatically fills the sandbox with relevant tables and takes the Input Mapping of the transformation into account.
 
-Each user has one sandbox per project and backend (MySQL, Snowflake and Redshift) to their disposal. 
-Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management -- see below.
+Each user has **one sandbox per project and backend** (MySQL, Snowflake and Redshift) to their disposal. 
+Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management -- see below. 
 
 {: .image-popup}
 ![Sandbox credentials](/manipulation/transformations/sandbox/sandbox-credentials.png)
 
-   
+**Important:** The backend of the sandbox does not have to match the backend of the original data. 
+For example, you can load data from Snowflake into a Redshift sandbox.
+
+
 ## Loading Data
 
 Data can be loaded into your sandbox in two different ways:
