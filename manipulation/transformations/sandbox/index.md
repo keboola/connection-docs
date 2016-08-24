@@ -94,18 +94,14 @@ Choose how the data will be loaded and processed:
  
 Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page. 
 
-Note that transformation loading always deletes the contents of the sandbox first. 
-
-[TODO- nasledujici vete nerozumim. Transformation Load prece vzdycky nejdriv smaze obsah. Nebo ne? Pokud ne, tak jak ten loader pozna, kdy to ma smazat a kdy jsem jenom zmenil strukturu a nema to smazat? A co se mysli tou zmenou vstupni struktury? Zmena Input Mapping? Takze treba v IM zmenim jmeno sloupecku a on se mi v sandboxu taky prejmenuje, aniz by se mi prepsaly data? A co kdyz v IM pridam/uberu sloupecek?]
-However, the input structure can be modified without deleting the current state of the sandbox. 
-
+**Important:** Transformation loading always deletes the contents of the sandbox first. 
 
 ## Additional Sandbox Actions
 
 Except loading data, sandbox supports several other basic actions. To access them, go to the **Transformations** section 
 and click the **Sandbox** button at the top.
 
-  - *Connect* -- Connect to the sandbox using a web SQL client. TODO: tohle asi plati jen pro MySQL, ostani nemuzu vyzkouset (pro Snowflake mi to zobrazi login dlg a Redshift backend nemuzu do projektu pridat)
+  - *Connect* (MySQL and Snowflake only) -- Connect to the sandbox using a web SQL client. 
   - *SSL* (MySQL and Redshift only) -- Show secure connection information.
   - *Refresh privileges* (Redshift only) -- REVOKE and GRANT privileges on tables and schemas to the current Redshift user. Because  Redshift privileges are granted on a per-table basis, tables created later than the current user are not available unless you refresh the privileges.
   - *Drop Sandbox* -- Deletes the sandbox database (and all its tables)
@@ -183,6 +179,3 @@ This adds another level of security and features to your transformation.
 
 A Redshift sandbox always uses the latest Redshift version available on the cluster.  
 
-### Snowflake Sandbox
-
-TODO 
