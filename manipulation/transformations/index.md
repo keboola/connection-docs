@@ -11,6 +11,7 @@ permalink: /manipulation/transformations/
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform. *Marketing data preaggregation*, 
 *Tableau denormalizer*, *Integrity checker* or *Join marketing channels and sales*, to name a few.
+
 They are grouped into folders called **Transformation buckets**. Each transformation within a bucket can use a different backend 
 to perform the task with the most suitable tool and programming language. As some tasks are difficult to solve in SQL, 
 feel free to step in with Python and finish the work with SQL again. The following are the currently available backends:
@@ -41,8 +42,9 @@ That unfortunately requires rewriting the SQL code.
 
 ## Mappings
 
-To make sure your SQL code or script does not harm the source tables, the input and output mapping separates the source data from your transformation. 
-Each transformation has a secure workspace with copied data from the tables specified in the input mappings. 
+To make sure your SQL code or script does not harm the source tables, the input and output mapping **separates** the source data from your transformation, 
+creating a **secure workspace with copied data** from the tables specified in the input mappings. 
+
 After the transformation has executed successfully, only tables/files defined in the output mappings are brought back to Storage. 
 Any other artifacts, such as temporary tables or files, are deleted permanently from the transformation workspace when the execution finishes.
 

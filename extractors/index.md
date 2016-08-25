@@ -27,8 +27,8 @@ To give an example, when you are connecting to existing information systems, do 
 Such data conversion can prove to be difficult and expensive. Extract what you need and shape it in KBC.
 
 Some extractors have **limits inherent to their sources**. Unfortunately, there is not much we can do about it. 
-For example, the Twitter extractor will not let you access the history of a particular account tweets 
-because the Twitter API [does not do so](http://stackoverflow.com/questions/1662151/getting-historical-data-from-twitter). 
+For example, the Twitter extractor will not let you access the history of a particular tweet account beyond a certain point
+because of the [limitations](http://stackoverflow.com/questions/1662151/getting-historical-data-from-twitter) of Twitter API.  
 
 
 {% comment %}

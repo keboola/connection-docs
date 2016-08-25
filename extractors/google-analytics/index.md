@@ -10,12 +10,12 @@ This extractor allows you to integrate your Google Analytics data into the KBC e
 To do that, you will need a Google Analytics account. If you do not have one, create it [here](https://analytics.google.com).
 
 ## Features
-Google Analytics Extractor works with the newest version of the Google Analytics Reporting API - V4
+Google Analytics Extractor works with the newest version of the Google Analytics Reporting API - V4,
 and provides the following key features:
 
  - **Metric expressions**
  
-    The API allows you to request not only built-in metrics but also combination of metrics expressed in mathematical operations. For example, you can use the expression ga:goal1completions/ga:sessions to request the goal completions per number of sessions.
+    The API allows you to request not only built-in metrics but also combinations of metrics expressed in mathematical operations. For example, you can use the expression ga:goal1completions/ga:sessions to request the goal completions per number of sessions.
     
  - **Multiple date ranges**
  
@@ -34,7 +34,7 @@ and provides the following key features:
 
  2. **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google Analytics data.
 
- 3. Select Google Analytics account and choose profiles (views), from which you would like to extract data. 
+ 3. Select Google Analytics account and choose profiles (views) from which you would like to extract data. 
 
     ![Screenshot - Select profiles](/extractors/google-analytics/ui_profiles.png)
     {: .image-popup}
@@ -45,15 +45,15 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 
  1. Name your query, for example "Audience".
  
- 2. From the metrics selector, choose following metrics: `ga:sessions`, `ga:users`, `ga:pageviews`.
+ 2. From the metrics selector, choose the following metrics: `ga:sessions`, `ga:users`, `ga:pageviews`.
  
- 3. From the dimensions selector, choose `ga:date` dimension.
+ 3. From the dimensions selector, choose the `ga:date` dimension.
  
  4. Leave the date range on default (last 5 days). 
  
- 5. See query results by hitting the `Test query` button.
+ 5. See the query results by hitting the `Test query` button.
  
- 6. Now you see sessions, users and pageviews of the last five days, sliced by date.
+ 6. Now you see sessions, users and pageviews of the last five days sliced by date.
  
  7. When you are happy with the results, save your query.
  
@@ -64,7 +64,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 
 ## Date Ranges
 A date range specifies a time window from which the data will be extracted.
-You can use any expression compatible with [PHP strtotime() function](http://php.net/manual/en/datetime.formats.php).
+You can use any expression compatible with the [PHP strtotime() function](http://php.net/manual/en/datetime.formats.php).
  
 **Multiple date ranges** are useful, for example, when you want to compare metric performance to the previous date range. 
 Let's say you want to see Sessions by month, compared to the same month last year.
