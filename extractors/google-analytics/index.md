@@ -88,9 +88,9 @@ You will have to type it in, however, because it is not in the option list of di
 ## Custom Dimensions and Metrics
 It is possible to use custom dimensions and metrics. 
 Although they are not listed in the selector options, you can type them in manually. 
-You have to insert the dimension or metric ID. The ID should be in format `ga:metricXX` or `ga:dimensionXX`, where XX is a number, for example `ga:metric1`.
+Insert the dimension or metric ID in the format of `ga:metricXX` or `ga:dimensionXX` where XX is a number, for example `ga:metric1`.
 
-You can find the IDs in the Google Analytics page:
+You can find the IDs on the Google Analytics page:
 
 ![Screenshot - Custom metric ID](/extractors/google-analytics/ga_custom_metrics.png)
  {: .image-popup}
