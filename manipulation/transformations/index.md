@@ -43,7 +43,7 @@ That unfortunately requires rewriting the SQL code.
 ## Mappings
 
 To make sure your SQL code or script does not harm the source tables, the input and output mapping **separates** the source data from your transformation, 
-creating a **secure workspace with copied data** from the tables specified in the input mappings. 
+creating a **secure workspace with data copied** from the tables specified in the input mappings. 
 
 After the transformation has executed successfully, only tables/files defined in the output mappings are brought back to Storage. 
 Any other artifacts, such as temporary tables or files, are deleted permanently from the transformation workspace when the execution finishes.
@@ -97,7 +97,7 @@ An output mapping has the following options:
 Each change in the transformation configuration creates a new version of the whole bucket configuration. 
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
-## Developing transformations
+## Developing Transformations
 
 You can easily develop MySQL and Redshift transformations using [Sandbox](/manipulation/transformations/sandbox). 
 We provide you with a safe workspace with required data where you can play with your SQL code.

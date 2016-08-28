@@ -27,7 +27,7 @@ or, if you want to start right away, use the *Connect* button to connect to the 
 {: .image-popup}
 ![Screenshot - Sandbox](/overview/tutorial/manipulate/sandbox-intro.png)
 
-Your sandbox might be deleted after 7 days of inactivity; make sure not to use them as a permanent data storage!
+Your sandbox might be deleted after 7 days of inactivity; make sure not to use it as a permanent data storage!
 
 When happy with the outcomes of your SQL queries, go back to [transformations](/overview/tutorial/manipulate/) 
 and paste the queries into the transformation script.  
