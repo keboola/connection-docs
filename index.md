@@ -19,7 +19,7 @@ Feel free to
 
 - check us out on [Twitter](https://twitter.com/keboola_support).
 - visit our main web page at [www.keboola.com](http://www.keboola.com/).
-- send us a wishing for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
+- send us your suggestions for a new or updated project feature to [wishlist@keboola.com](mailto:wishlist@keboola.com).
 
 To get in touch with our [**partners**](/overview/environment/), please use the following email addresses:
 
