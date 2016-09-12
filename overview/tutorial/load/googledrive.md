@@ -57,25 +57,34 @@ On the following screen, click *Allow*.
 {: .image-popup}
 ![Google Drive Authorization End](/overview/tutorial/load/extractor-google-drive-authorize-2.png)
 
-Now select the files you want to import into the authorized extractor.
+Now you want to select the google drive files to import.
 
 {: .image-popup}
-![Google Drive Select Documents](/overview/tutorial/load/extractor-google-drive-select.png)
+![Screenshot - Google Drive Start Select](/overview/tutorial/load/extractor-google-drive-select.png)
+
+To select the files you want to import into the authorized extractor, you need to temporarily elevate the
+authorization so that the extractor can access your sheets.
+
+{: .image-popup}
+![Screenshot - Google Drive Start Select](/overview/tutorial/load/extractor-google-drive-select-2.png)
+
+On the following screen, click *Allow*.
+
+{: .image-popup}
+![Screenshot - Google Drive Authorize](/overview/tutorial/load/extractor-google-drive-select-3.png)
 
 Find and select your spreadsheet document named *level*.
 
 {: .image-popup}
 ![Google Drive Selected Document](/overview/tutorial/load/extractor-google-drive-selected.png)
 
-Then select the individual sheet. Click on the 'level' bar below the sheet search box.
-Our 'level' document contains only one 'level' sheet, so select that one.
+Then select the individual sheet. Our 'level' document contains only one 'level' sheet, so select that one.
 It will appear on the right side of the screen as one of the *Sheets to Be Added to Project*.
 
 {: .image-popup}
 ![Google Drive Selected Documents](/overview/tutorial/load/extractor-google-drive-select-sheets.png)
 
-Save the configuration by clicking the *Save* button in the upper right corner of the screen.
-You should obtain a result like the one below. Then, click on the *Run Extraction* command on the right.
+When you *Save changes*, you should obtain a result like the one below. Then, click on the *Run Extraction* command on the right.
 This will create a background job extracting the selected sheet from the Google Drive document
 and loading it into Storage.
 
@@ -86,24 +95,10 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 ![Google Drive Results](/overview/tutorial/load/extractor-google-drive-result.png)
 
 The Extractor automatically creates an output bucket and table - here it is
-`in.c-ex-google-drive-userlevels.0-level`. Click on the name of the output table to check its contents.
+`in.c-keboola-ex-google-drive-user-levels-11.level-level`. Click on the name of the output table to check its contents.
 
 {: .image-popup}
 ![Google Drive Result Table Detail](/overview/tutorial/load/extractor-google-drive-table-detail.png)
-
-
-To be consistent with the rest of this tutorial and with what
-you have done in its [previous step](/overview/tutorial/load/),
-we would like the result table of the extractor to be `in.c-tutorial.level`.
-
-
-This concludes our example setup of a Google Drive Extractor. To be consistent with the rest of this tutorial and with what
-you have done in its [previous step](/overview/tutorial/load/),
-we would like the result table of the extractor to be `in.c-tutorial.level`.
-
-This step is not at all technically necessary, you can replace `in.c-tutorial.level` with
-`in.c-ex-google-drive-userlevels.0-level` in the following examples, or you can go
-to Storage and delete the table `in.c-tutorial.level`
 
 ## Aftermath
 
@@ -114,7 +109,7 @@ If you want to use the table created in this side-step in the rest of the tutori
 1. Replace `in.c-tutorial.level` with `in.c-ex-google-drive-userlevels.0-level` in the following steps of the tutorial.
 2. Ensure this table is accessible under the `in.c-tutorial.level` name using an alias table, as described below.
 
-#### Creating an Alias Table
+### Creating an Alias Table
 
 First, go to Storage and delete the table `in.c-tutorial.level` you manually loaded in the first part of the tutorial.
 
@@ -127,7 +122,7 @@ as it does not contain any data. It is simply a link to already existing data.
 {: .image-popup}
 ![Storage Delete Table Create Alias Screenshot](/overview/tutorial/load/storage-create-alias.png)
 
-In the configuration popup, select the `in.c-ex-google-drive-userlevels.0-level` table as
+In the configuration popup, select the `in.c-keboola-ex-google-drive-user-level-11.level-level` table as
 the *Source Table* and write `level` as the alias *Name*.
 
 {: .image-popup}

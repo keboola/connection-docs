@@ -43,11 +43,6 @@ If you attempt to do so, you will receive an error message similar to this one:
 
     The blog-data table cannot be deleted. Please delete its aliases first: in.c-tutorial.blog-data,in.c-my-bucket.blog-data.
 
-There are two types of aliases:
-
-- **Simple Alias** -- available for the MySQL backend
-- **Custom SQL Alias** -- available for the Redshift backend
-
 See an example use of an alias in our [tutorial](/overview/tutorial/load/googledrive/#aftermath).
 
 {: .image-popup}
@@ -56,14 +51,7 @@ See an example use of an alias in our [tutorial](/overview/tutorial/load/googled
 If you select any table from any bucket in Storage, detailed information about the table will be displayed on the right side of your screen.
 This is what we refer to as a **Table detail** throughout our documentation.
 
-### Simple Alias
-The simple alias is allowed in these bucket stage combinations:
-
-- in -> in
-- in -> out
-- out -> out
-
-Simple aliases cannot be chained and can be applied only between buckets with the same backend.
+Aliases cannot be chained and can be applied only between buckets with the same backend.
 An alias table can be filtered by a simple condition.
 
 {: .image-popup}
@@ -75,13 +63,6 @@ There are the following limitations:
 - When an alias is created, the index on the filtered column of the source table cannot be removed.
 - Alias columns are automatically synchronized, by default, with the source table. Columns added to the source table will be added to the alias automatically.
 You can prevent this by disabling *Synchronize columns with source table*.
-
-### Custom SQL Alias
-The Custom SQL Alias table is defined by SQL select like `SELECT * FROM "in.c-main"."blog-data"`.
-Select can also join data from multiple tables. You can access all your tables in any bucket, as long as they use Redshift, the backend supported by this type of alias.
-
-{: .image-popup}
-![Screenshot - Create Custom alias](/storage/tables/create-custom-alias.png)
 
 ## Copying Tables / Table Snapshots
 If you want to physically copy a table, use the [*table snapshot*](/overview/tutorial/management/#table-snapshots) feature.

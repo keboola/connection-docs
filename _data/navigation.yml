@@ -73,6 +73,9 @@ items:
     items:
       - url: /storage/tables/
         title: Tables & Aliases
+        items:
+          - url: /storage/tables/csv-files/
+            title: CSV Files
 
       - url: /storage/file-uploads/
         title: File Uploads
