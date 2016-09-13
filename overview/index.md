@@ -100,9 +100,6 @@ in the [input mapping](/manipulation/transformations/#input-mapping).
 After the transformation has been executed successfully, only tables and files defined 
 in the [output mapping](/manipulation/transformations/#output-mapping) are brought back to Storage. 
 
-### Sandbox
-A [sandbox](/manipulation/transformations/sandbox/) is a safe environment in which you can explore, analyze and experiment with copies of selected Storage data. It also allows you to test, troubleshoot and develop transformations without affecting your data in Storage.
-
 ## External Environment Schema
 
 KBC is a fully cloud environment heavily relaying on Amazon Services. The following chart shows the overview
