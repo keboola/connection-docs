@@ -63,6 +63,7 @@ Clicking the **Compare** versions button shows a detailed diff:
 {: .image-popup}
 ![Screenshot -- Diff](/storage/configurations/compare-2.png)
 
+Removed lines are highlighted in red, added lines are green. The diff above shows that only the name
 of the output table was modified.
 
 ## Rollback Version
