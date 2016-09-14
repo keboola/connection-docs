@@ -14,7 +14,25 @@ HubSpot is inbound marketing and sales software that helps companies attract vis
 
 ### Create New Application API Key
 
-Log in to your account on the [HubSpot](http://www.hubspot.com/) site.
+Login to [HubSpot](http://www.hubspot.com/) and in top right corner click on the arrow next to your avatar. Then select **Integrations**.
+
+{: .image-popup}
+![HubSpot Logged Menu](/extractors/hubspot/03-logged-menu.jpg)
+
+On the following screen click on **Get your HubSpot API Key**.
+
+{: .image-popup}
+![HubSpot Integrations](/extractors/hubspot/04-integrations.jpg)
+
+On the following screen click on the biggest blue button in the world, which reveals your API Key.
+
+{: .image-popup}
+![HubSpot API](/extractors/hubspot/05-key.png)
+
+The API Key will be revealed and you can easily copy it to your clipboard.
+
+{: .image-popup}
+![HubSpot API](/extractors/hubspot/05-key-clipboard.png)
 
 ### Setup Extractor
 In the Extractors section, find HubSpot and create a new configuration.

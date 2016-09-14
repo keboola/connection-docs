@@ -50,6 +50,9 @@ items:
       - url: /extractors/google-analytics/
         title: Google Analytics
 
+      - url: /extractors/hubspot/
+        title: HubSpot
+
       - url: /extractors/mongodb/
         title: MongoDB
         items:
