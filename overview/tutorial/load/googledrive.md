@@ -19,23 +19,23 @@ Go to [Google Spreadsheets](https://docs.google.com/spreadsheets/) and *Start a 
 ![Google Spreadsheets Screenshot](/overview/tutorial/load/google-drive-spreadsheet.png)
 
 
-## Configure the GoogleDrive Extractor
+## Configure Google Drive Extractor
 
 Go to *Extractors* in KBC and click the *New extractor* button:
 
 {: .image-popup}
 ![Extractors Overview Screenshot](/overview/tutorial/load/extractor-intro-0.png)
 
-Use the search box to find the *Google Drive* extractor. If your favorite app is not listed, it
-certainly does **not** mean that we can't extract data from it.
+Use the search box to find the *Google Drive* extractor. 
 
 {: .image-popup}
 ![Extractors Overview Screenshot](/overview/tutorial/load/extractor-intro.png)
 
 Each KBC extractor can have multiple *configurations*. This concept allows you to extract data from, for example,
 multiple Google accounts. So far, there are no configurations of the Google Drive Extractor.
+
 Click on *Create New Configuration* and name the new configuration *User Levels*; the file we
-want to extract contains seniority level of each user.
+want to extract contains the seniority level of each user.
 
 {: .image-popup}
 ![Create Google Drive Configuration](/overview/tutorial/load/extractor-google-drive-create.png)
@@ -57,7 +57,7 @@ On the following screen, click *Allow*.
 {: .image-popup}
 ![Google Drive Authorization End](/overview/tutorial/load/extractor-google-drive-authorize-2.png)
 
-Now you want to select the google drive files to import.
+Now you want to select the Google Drive files to import.
 
 {: .image-popup}
 ![Screenshot - Google Drive Start Select](/overview/tutorial/load/extractor-google-drive-select.png)
@@ -94,7 +94,7 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 {: .image-popup}
 ![Google Drive Results](/overview/tutorial/load/extractor-google-drive-result.png)
 
-The Extractor automatically creates an output bucket and table - here it is
+The extractor automatically creates an output bucket and table - here it is
 `in.c-keboola-ex-google-drive-user-levels-11.level-level`. Click on the name of the output table to check its contents.
 
 {: .image-popup}
@@ -102,7 +102,7 @@ The Extractor automatically creates an output bucket and table - here it is
 
 ## Aftermath
 
-This concludes our example setup of a Google Drive Extractor.
+This concludes our example setup of the Google Drive extractor.
 
 If you want to use the table created in this side-step in the rest of the tutorial, you have two options:
 
