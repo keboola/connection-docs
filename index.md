@@ -1,6 +1,7 @@
 ---
 title: Keboola Connection User Documentation
 permalink: /
+showLinkToGithubPage: false
 ---
 
 Welcome to the Keboola Connection (KBC) Manual pages.
