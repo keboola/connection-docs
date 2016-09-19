@@ -41,7 +41,6 @@ Imported file:
 
     col1,col2
     line without enclosure,second column
-    line with enclosure,second column
     "column with enclosure "", and comma inside text","second column enclosure in text """
     "columns with
     new line",columns with    tab
