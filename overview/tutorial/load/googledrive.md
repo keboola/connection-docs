@@ -94,7 +94,7 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 {: .image-popup}
 ![Google Drive Results](/overview/tutorial/load/extractor-google-drive-result.png)
 
-The extractor automatically creates an output bucket and table - here it is
+The extractor automatically creates an output bucket and a table; here it is
 `in.c-keboola-ex-google-drive-user-levels-11.level-level`. Click on the name of the output table to check its contents.
 
 {: .image-popup}
