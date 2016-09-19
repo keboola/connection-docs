@@ -8,7 +8,7 @@ permalink: /storage/configurations/
 
 Each KBC component (extractor, writer, etc.) has configurations, which can be created through the UI.
 
-All configurations are saved into Storage. When modified, their new version is created and the old one is kept in history. 
+All configurations are saved into Storage. When modified, their new version is created and the old one is kept in history.
 You can see the configuration versions in (nearly) all details of the component configurations:
 
 {: .image-popup}
@@ -54,11 +54,6 @@ The new configuration is completely independent on the old one. You may modify o
 Compare two consecutive versions and see the modifications as a [diff](https://en.wikipedia.org/wiki/Data_comparison) of
 the raw [JSON](https://en.wikipedia.org/wiki/JSON) configuration. Each component automatically generates a description
 of the change, so the following version represents a change in the *level/level* sheet in the Google Drive extractor configuration:
-
-Compare two consecutive versions and see the modifications as a [diff](https://en.wikipedia.org/wiki/Data_comparison) of
-the raw [JSON](https://en.wikipedia.org/wiki/JSON) configuration. Each component automatically generates a description
-of the change, so the following version represents a change in the *level/level* sheet in the Google drive configuration:
-
 
 {: .image-popup}
 ![Screenshot -- Compare Start](/storage/configurations/compare-1.png)
