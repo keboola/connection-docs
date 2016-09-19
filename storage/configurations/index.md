@@ -9,7 +9,8 @@ permalink: /storage/configurations/
 Each KBC component (extractor, writer, etc.) has configurations, which can be created through the UI.
 
 All configurations are saved into Storage. When modified, their new version is created and the old one is kept in history.
-You can see the configuration versions in (nearly) all details of the component configurations:
+Most components, with the exception of a few old ones, enable you to see the configuration versions 
+in their configuration detail:
 
 {: .image-popup}
 ![Screenshot -- Storage Configurations](/storage/configurations/configurations-intro.png)
