@@ -6,7 +6,7 @@ permalink: /storage/tables/csv-files/
 * TOC
 {:toc}
 
-All data imported to and exported from Storage have to be in the CSV format.
+All data imported to and exported from Storage has to be in the CSV format.
 
 In many cases, our extractors and writers take care of the necessary conversion,
 but sometimes you have to be aware of the supported formats -- for
@@ -23,7 +23,7 @@ This is basically compatible with CSV exports from OpenOffice Calc, MS Excel, an
 - Supported line breaks:
     - Windows (CRLF -- \r\n)
     - Unix (LF -- \n)
-- File encoding must be `UTF-8`.
+- File encoding is `UTF-8`.
 - File can be uncompressed, [gzipped](http://www.gzip.org/) or [zipped](https://en.wikipedia.org/wiki/Zip_(file_format).
 
 ### Example
@@ -66,7 +66,7 @@ format:
 ![Screenshot -- Excel Export - Save File](/storage/tables/excel-export-1.png)
 
 This will produce a tab-delimited file in UTF-16 encoding, which you can convert in Windows
-Notepad. Simply open the file, and without modifying save it with `UTF-8` encoding (and .csv extension):
+Notepad. Simply open the file, and without making any modifications, save it with `UTF-8` encoding (and .csv extension):
 
 {: .image-popup}
 ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
@@ -97,21 +97,21 @@ when asked about the file format).
 
 ### Opening in Microsoft Excel
 The easiest way to import the CSV file exported from KBC into Microsoft Excel is by starting Excel and opening 
-a **blank workbook**. Then use the **data** -- **from text** function and select the exported file:
+a **blank workbook**. Then use the **Data** -- **From Text** function and select the exported file:
 
 {: .image-popup}
-![Screenshot -- Excel Import -- Select file](/storage/tables/excel-export-1.png)
+![Screenshot -- Excel Import -- Select file](/storage/tables/excel-import-1.png)
 
-An import wizard will start. Make sure, on the next screen, you have selected the **delimited** file
+An import wizard will start. On its first screen, make sure you have selected the **delimited** file
 and **Unicode UTF-8** encoding:
 
 {: .image-popup}
-![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-export-2.png)
+![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-2.png)
 
-On the next page of the wizard, make sure that *only* the **comma** delimiter is selected:
+On the next screen, make sure that *only* the **comma** delimiter is selected:
 
 {: .image-popup}
-![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-export-3.png)
+![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-3.png)
 
 However, using this method, Excel is not able to import new lines contained in table cells. 
 If you need that, you have to use a more [complicated approach](http://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).
