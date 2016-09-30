@@ -22,7 +22,7 @@ in order to create reports and analyze your customers' behavior.
 The following chart shows how KBC is structured. All KBC parts are briefly described below.
 
 {: .image-popup}
-![KBC Structure Chart](/overview/KBC_structureTest.png){: .img-responsive}
+![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
 
 ### Data Sources
 Data sources are systems containing data you wish to bring into KBC. They can be pretty much anything from GoogleAnalytics, 
