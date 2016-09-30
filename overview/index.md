@@ -21,7 +21,6 @@ in order to create reports and analyze your customers' behavior.
 
 The following chart shows how KBC is structured. All KBC parts are briefly described below.
 
-{: .image-popup}
 ![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
 
 ### Data Sources
