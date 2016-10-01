@@ -28,7 +28,7 @@ Feature | MySQL | Redshift | Snowflake
 Partial Import (Deprecated) | ✓ | x | x
 Export formats | `RFC`, `ESCAPED*`, `RAW*` | `RFC`, `ESCAPED*`, `RAW*`  | `RFC`
 Simple Aliases | ✓ | x | ✓
-Custom SQL Aliases | x | ✓ | ✓
+Custom SQL Aliases (Deprecated) | x | ✓ | ✓
 Maximum number of columns in single table | Max. row size of 65,535 bytes | 1200 | 1200 |
 Maximum table cell size | 64kB | 64kB | 1MB |
 Sync export (Data Preview) columns limit | x | x | 110 |
