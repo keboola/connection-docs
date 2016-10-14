@@ -1,4 +1,5 @@
 ---
+title: Manually Loading Data
 permalink: /tutorial/load/manual/
 ---
 
@@ -12,6 +13,10 @@ The tables represent business opportunities, their associated users and accounts
 Additionally, company levels for each user are specified.
 For our tutorial, we have prepared the tables as CSV files:
 
+- opportunity (business opportunities) --- [https://help.keboola.com/tutorial/opportunity.csv](/tutorial/opportunity.csv)
+- account (associated accounts) --- [https://help.keboola.com/tutorial/account.csv](/tutorial/account.csv)
+- user (associated users) --- [https://help.keboola.com/tutorial/user.csv](/tutorial/user.csv)
+- level (company levels) --- [https://help.keboola.com/tutorial/level.csv](/tutorial/level.csv)
 
 Download the files to your computer (they are very small) and start loading data.
 
@@ -76,5 +81,6 @@ Click a table name to see table details including *Data Sample*.
 
 You can now take
 
+- the next step --- [Data Manipulation](/tutorial/manipulate/), or
 - a brief side step to [Loading data with GoogleDrive Extractor](/tutorial/load/googledrive/), or
 - a brief side step to [Loading data with Database Extractor](/tutorial/load/database/).
