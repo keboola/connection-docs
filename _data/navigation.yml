@@ -2,35 +2,38 @@ items:
   - url: /overview/
     title: Kebooola Overview
     items:
-      - url: /overview/tutorial/
-        title: Getting Started
+  - url: /tutorial/
+    title: Getting Started Tutorial
+    items:
+      - url: /tutorial/load/
+        title: Part 1 - Loading Data
         items:
-          - url: /overview/tutorial/load/
-            title: Part 1 - Manually Loading Data
-            items:
-              - url: /overview/tutorial/load/googledrive/
-                title: Part 1b - Loading data with GoogleDrive Extractor
+          - url: /tutorial/load/manual/
+            title: Manually Loading Data
 
-              - url: /overview/tutorial/load/database/
-                title: Part 1c - Loading data with MySQL Extractor
+          - url: /tutorial/load/googledrive/
+            title: Loading with GoogleDrive Extractor
 
-          - url: /overview/tutorial/manipulate/
-            title: Part 2 - Data Manipulation
-            items:
-              - url: /overview/tutorial/manipulate/sandbox/
-                title: Part 2b - Using Sandbox
+          - url: /tutorial/load/database/
+            title: Loading with MySQL Extractor
 
-          - url: /overview/tutorial/write/
-            title: Part 3 - Writing data
-            items:
-              - url: /overview/tutorial/write/gooddata/
-                title: Part 3b - Writing to GoodData
+      - url: /tutorial/manipulate/
+        title: Part 2 - Data Manipulation
+        items:
+          - url: /tutorial/manipulate/sandbox/
+            title: Part 2b - Using Sandbox
 
-          - url: /overview/tutorial/automate/
-            title: Part 4 - Automation
+      - url: /tutorial/write/
+        title: Part 3 - Writing Data
+        items:
+          - url: /tutorial/write/gooddata/
+            title: Part 3b - Writing to GoodData
 
-          - url: /overview/tutorial/management/
-            title: Part 5 - Management
+      - url: /tutorial/automate/
+        title: Part 4 - Automation
+
+      - url: /tutorial/management/
+        title: Part 5 - Management
 
   - url: /extractors/
     title: Extractors

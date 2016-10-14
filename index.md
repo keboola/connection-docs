@@ -18,29 +18,29 @@ It is a safe, open and extendable cloud based environment for working with your 
 
 #### Where to Start
 
-If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out its [overview](/overview/), or see our [tutorial](/overview/tutorial/) for some hands-on experience on using KBC.
+If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out its [overview](/overview/), or see our [tutorial](/tutorial/) for some hands-on experience on using KBC.
 
 If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) and log in.
 
 #### More to Read
 
-- [www.keboola.com](http://www.keboola.com/) -- our main web page
-- [blog.keboola.com](http://blog.keboola.com/) -- something to read for data analysts
-- [500.keboola.com](https://500.keboola.com/) -- something to read for tech geeks
-- [developers.keboola.com](https://developers.keboola.com) -- documentation for extending or integrating KBC
+- [www.keboola.com](http://www.keboola.com/) --- our main web page
+- [blog.keboola.com](http://blog.keboola.com/) --- something to read for data analysts
+- [500.keboola.com](https://500.keboola.com/) --- something to read for tech geeks
+- [developers.keboola.com](https://developers.keboola.com) --- documentation for extending or integrating KBC
 
 #### KBC Status Updates
 
 There are three equivalent places where you can get KBC Status updates (service status and changelog):
 
-- [status.keboola.com](http://status.keboola.com/) -- we recommend subscribing to the feed
+- [status.keboola.com](http://status.keboola.com/) --- we recommend subscribing to the feed
 - Slack channel
 - [Twitter](https://twitter.com/keboola_support)
 
 #### Your Tips and Suggestions
 
-- [wishlist@keboola.com](mailto:wishlist@keboola.com) -- send us your suggestions for a new or updated project feature
-- [wiki.keboola.com](http://wiki.keboola.com/) -- share your tips and tricks with other KBC users 
+- [wishlist@keboola.com](mailto:wishlist@keboola.com) --- send us your suggestions for a new or updated project feature
+- [wiki.keboola.com](http://wiki.keboola.com/) --- share your tips and tricks with other KBC users 
 
 #### Keboola's Partners Program
 

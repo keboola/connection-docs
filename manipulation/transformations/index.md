@@ -6,11 +6,10 @@ permalink: /manipulation/transformations/
 * TOC
 {:toc}
 
-*See how Transformations are an integral part of the KBC workflow in our [Getting Started tutorial](/overview/tutorial/manipulate/).*
+*To create your first transformation, and to see how Transformations are an integral part of the KBC workflow, go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
-
-**Transformations** allow you to manipulate data in your project. They are the tasks you want to perform. *Marketing data preaggregation*, 
-*Tableau denormalizer*, *Integrity checker* or *Join marketing channels and sales*, to name a few.
+**Transformations** allow you to manipulate data in your project. They are the tasks you want to perform. 
+*Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels and sales*, to name a few.
 
 They are grouped into folders called **Transformation buckets**. Each transformation within a bucket can use a different backend 
 to perform the task with the most suitable tool and programming language. As some tasks are difficult to solve in SQL, 
@@ -41,19 +40,27 @@ That unfortunately requires rewriting the SQL code.
 [Python](./python/) or [R](./r/)? Choose according to your taste and available libraries.
 
 ## Mappings
+To make sure your SQL code or script does not harm the source tables, the input and output mapping **separates** 
+the source data from your transformation, creating a **secure workspace with data copied** from the tables 
+specified in the input mappings. 
 
-To make sure your SQL code or script does not harm the source tables, the input and output mapping **separates** the source data from your transformation, 
-creating a **secure workspace with data copied** from the tables specified in the input mappings. 
+[Creating a transformation](/tutorial/manipulate/) requires you to enter three things:
 
-After the transformation has executed successfully, only tables/files defined in the output mappings are brought back to Storage. 
-Any other artifacts, such as temporary tables or files, are deleted permanently from the transformation workspace when the execution finishes.
+1. **Input Mapping** — what Storage tables are used in your transformation; 
+tables not mentioned in *Input Mapping* cannot be used in the transformation. 
+2. **Output Mapping** — what tables are written into Storage after running the transformation; 
+tables not mentioned in *Output Mapping* are never modified nor permanently stored (i.e. they are temporary). 
+They are deleted permanently from the transformation workspace when the execution finishes. 
+3. **Transformation Script** — SQL queries defining what happens with the data; it takes the tables from *Input Mapping*, 
+modifies them and produces the tables referenced in *Output Mapping*.
 
 {: .image-popup}
 ![Simple input and output mapping](./mappings.png)
 
 ### Input Mapping
 
-The input mapping defines data you have in Storage and want to use in a transformation. This data will be made available as a table for SQL, or as a CSV file for R and Python.
+The input mapping defines data you have in Storage and want to use in a transformation. 
+This data will be made available as a table for SQL, or as a CSV file for R and Python.
 
 {: .image-popup}
 ![Input mapping](./input-mapping.png)

@@ -24,8 +24,9 @@ The following chart shows how KBC is structured. All KBC parts are briefly descr
 ![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
 
 ### Data Sources
-Data sources are systems containing data you wish to bring into KBC. They can be pretty much anything from GoogleAnalytics, 
-Facebook, SalesForce to on-premise databases, legacy systems or even appliances and IoT devices. Data sources are not part of KBC.
+Data sources are systems containing data you wish to [bring into KBC](/tutorial/load/). 
+They can be pretty much anything from GoogleAnalytics, Facebook, SalesForce to on-premise databases, 
+legacy systems or even appliances and IoT devices. Data sources are not part of KBC.
 
 ### Extractors
 [*Extractors*](/extractors/) are KBC components used for gathering data from sources. 
