@@ -95,6 +95,9 @@ items:
       - url: /manipulation/transformations/
         title: Transformations
         items:
+          - url: /manipulation/transformations/mappings
+            title: Mappings
+
           - url: /manipulation/transformations/sandbox/
             title: Sandbox
 
@@ -121,6 +124,9 @@ items:
 
               - url: /manipulation/transformations/r/binary/
                 title: Using binary files
+
+      - url: /manipulation/applications/
+        title: Applications
 
   - url: /management/
     title: Project Management
