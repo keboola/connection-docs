@@ -44,7 +44,7 @@ To make sure your SQL code or script does not harm the source tables, the input 
 the source data from your transformation, creating a **secure workspace with data copied** from the tables 
 specified in the input mappings. 
 
-[Creating a transformation](/tutorial/manipulate/) requires you to enter three things:
+[Creating a transformation](/tutorial/manipulate/) requires you to fill in 
 
 1. **Input Mapping** — what Storage tables are used in your transformation; 
 tables not mentioned in *Input Mapping* cannot be used in the transformation. 

@@ -8,9 +8,6 @@ items:
       - url: /tutorial/load/
         title: Part 1 - Loading Data
         items:
-          - url: /tutorial/load/manual/
-            title: Manually Loading Data
-
           - url: /tutorial/load/googledrive/
             title: Loading with GoogleDrive Extractor
 

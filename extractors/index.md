@@ -14,7 +14,7 @@ Since each extractor connects to a different data source, their configurations m
 Extractors are generally designed for **automated and repeated** data collection, though they can 
 be triggered manually at any time. 
 
-- For manual import of ad-hoc data, see [Data Import in Storage](/storage/), or our tutorial on [manual data loading](/tutorial/load/manual/).
+- For manual import of ad-hoc data, see [Data Import in Storage](/storage/), or our tutorial on [manual data loading](/tutorial/load/).
 - Configure a [sample extractor](/tutorial/load/googledrive/). 
 - Configure a [database extractor](/tutorial/load/database/).
 

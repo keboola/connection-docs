@@ -3,7 +3,7 @@ title: Loading Data with MySQL Extractor
 permalink: /tutorial/load/database/
 ---
 
-So far, you have learned to load data into KBC [manually](/tutorial/load/manual/) and
+So far, you have learned to load data into KBC [manually](/tutorial/load/) and
 via a [GoogleDrive extractor](/tutorial/load/googledrive/).
 Let's now load data from an external database with the help of the MySQL extractor
 (the procedure is same for all our [database extractors](/extractors/database/).
