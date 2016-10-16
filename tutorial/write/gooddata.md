@@ -1,5 +1,5 @@
 ---
-title: Part 3b - Writing to GoodData
+title: Writing to GoodData
 permalink: /tutorial/write/gooddata/
 ---
 

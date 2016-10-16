@@ -5,7 +5,7 @@ permalink: /tutorial/
 
 This tutorial will guide you through basic usage of Keboola Connection (KBC).
 
-Before you start, make sure you have **basic knowledge of [SQL](https://en.wikipedia.org/wiki/SQL)**, and 
+Before you start, make sure you have **basic knowledge of** [SQL](https://en.wikipedia.org/wiki/SQL), and 
 **access to a KBC project** (preferably empty). To get set up, either ask one of our partners, 
 or ping us on [sales@keboola.com](mailto:sales@keboola.com).
 
@@ -25,7 +25,7 @@ doing some minor modifications to it.
 ## Advanced Steps
 If you want to try more of KBC features, follow some of the following side steps:
 
-- Loading data using extractors
+- Loading data using extractors:
 	- [Loading data: GoogleDrive Extractor](/tutorial/load/googledrive/) --- loading data from an external
 	data sheet using the GoogleDrive extractor.
 	- [Loading data: Database Extractor](/tutorial/load/database/) --- loading data from an external database

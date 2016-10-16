@@ -95,11 +95,11 @@ The principle of token authorization allows you, for example, to easily [share a
 from your Storage with someone without them having to register to KBC (enter email/password).
 
 ### Input / Output Mapping
-To make sure your transformation does not harm data in Storage, [mapping](/manipulation/transformations/#mappings) separates 
-source data from your script. A secure workspace is created with data copied from the tables specified 
-in the [input mapping](/manipulation/transformations/#input-mapping).
+To make sure your transformation does not harm data in Storage, [mapping](/manipulation/transformations/mappings)
+separates source data from your script. A secure workspace is created with data copied from the tables specified 
+in the [input mapping](/manipulation/transformations/mappings/#input-mapping).
 After the transformation has been executed successfully, only tables and files defined 
-in the [output mapping](/manipulation/transformations/#output-mapping) are brought back to Storage. 
+in the [output mapping](/manipulation/transformations/mappings/#output-mapping) are brought back to Storage. 
 
 ## External Environment Schema
 

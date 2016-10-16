@@ -1,5 +1,5 @@
 ---
-title: Part 2b - Using Sandbox
+title: Using Sandbox
 permalink: /tutorial/manipulate/sandbox/
 ---
 

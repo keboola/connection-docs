@@ -18,13 +18,13 @@ items:
         title: Part 2 - Data Manipulation
         items:
           - url: /tutorial/manipulate/sandbox/
-            title: Part 2b - Using Sandbox
+            title: Using Sandbox
 
       - url: /tutorial/write/
         title: Part 3 - Writing Data
         items:
           - url: /tutorial/write/gooddata/
-            title: Part 3b - Writing to GoodData
+            title: Writing to GoodData
 
       - url: /tutorial/automate/
         title: Part 4 - Automation
@@ -95,7 +95,7 @@ items:
       - url: /manipulation/transformations/
         title: Transformations
         items:
-          - url: /manipulation/transformations/mappings
+          - url: /manipulation/transformations/mappings/
             title: Mappings
 
           - url: /manipulation/transformations/sandbox/
