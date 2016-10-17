@@ -62,7 +62,7 @@ in the strict format. Read more on the [strict format](https://docs.mongodb.com/
 
 ## Configure Mapping
 
-By defining mapping, you to specify the structure and content of output tables, their columns and relations between them.
+By defining mapping, you specify the structure and content of output tables, their columns and relations between them.
 
 {: .image-popup}
 ![MongoDB new export filled](/extractors/mongodb/04-new-export-filled.png)
