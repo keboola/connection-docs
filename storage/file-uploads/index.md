@@ -23,20 +23,20 @@ In the following dialog, select a file to upload along with other options:
 {: .image-popup}
 ![Screenshot - File upload detail](/storage/file-uploads/file-upload-detail.png)
 
-For each uploaded file, you can enter an arbitrary number of tags in the `Tags` field, separating individual tags by pressing Enter. 
-The tags can be used for filtering files later. 
+For each uploaded file, you can enter an arbitrary number of tags in the `Tags` field, separating individual tags by pressing Enter.
+The tags can be used for filtering files later.
 
-**Important:** The name of an uploaded file does not have to be unique because 
+**Important:** The name of an uploaded file does not have to be unique because
 files are identified by their ID assigned on upload.
 
 To avoid files being automatically deleted after 180 days, by default, and to keep them permanently,
 do not forget to tick the respective checkbox.
 
-Also by default, all files will be available only to project administrators (those listed in the *Users & Settings* section) 
+Also by default, all files will be available only to project administrators (those listed in the *Users & Settings* section)
 and users with Storage [tokens](/storage/tokens/) who have the permission to *Read all file uploads*.
-For each file in File uploads, you can 
+For each file in File uploads, you can
 
-- *copy* its download link, 
+- *copy* its download link,
 - *download* the file and
 - *delete* the file.
 
@@ -48,7 +48,7 @@ If you copy a link of a non-public file, you will obtain a URL in the following 
     https://s3.amazonaws.com/kbc-sapi-files/exp-180/1134/files/2016/06/12/191341241.private.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160617%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160617T174909Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=30007ae706388816aaf3bd9ad585d9a30df6ab50dcc126881efbe6423ef57909
 
 Such a URL is valid only one hour from the time of its generation - the time when the File upload list was shown to you,
-not when you clicked the link. 
+not when you clicked the link.
 
 **Important:** The URL itself does not require any other authorization.
 That is, you can send a link to non-public files to people without access to your KBC project and they
@@ -73,7 +73,7 @@ the CSV file is first stored in File uploads and only then imported to an actual
 Every time a table is **exported** from Storage, the process is reversed: first a file is
 created in File uploads (not when exporting manually) and then it is actually downloaded from there. Beware, however, that due to the
 nature of database exports, the exported table may be sliced and require
-[substantial effort to reconstruct](http://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files). 
+[substantial effort to reconstruct](http://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
 To make sure your tables are exported as merged files, always use the **Export** feature in the **Action** tab of the [table detail](/storage/tables/#export).
 
 As stated above, unless marked as permanent, each file will be automatically deleted 180 days after it has been created. This
@@ -81,3 +81,6 @@ also applies to automatically generated files as a result of table imports and e
 majority of KBC File Storage contains duplicates of your table data, the whole storage does not
 count towards your project quota.
 
+## Limits
+Maximum allowed size of uploaded file is currently 5GB (5 368 709 120 bytes exactly). This applies to both file and table uploads. Actual
+table size may be bigger, because it is uploaded as compressed file.
