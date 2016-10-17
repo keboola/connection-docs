@@ -51,7 +51,7 @@ There are two ways how data in KBC can be [manipulated](/manipulation/): via [Tr
 #### Transformations
 Transformations can be created by writing a **free-form script** in
 [SQL](https://en.wikipedia.org/wiki/SQL) (MySQL, Redshift), [R](https://www.r-project.org/about.html) and
-[Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) - a safe environment for your experiments. 
+[Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments. 
 
 #### Applications
 Unlike the free-form Transformations, Applications are **predefined blocks** which can be used to do some pretty

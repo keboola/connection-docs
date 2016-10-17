@@ -32,18 +32,17 @@ Name your transformation *Denormalize opportunities*, and choose the *MySQL* bac
 {: .image-popup}
 ![Screenshot - Create a Transformation](/tutorial/manipulate/transformations-create.png)
 
-When you create a transformation, you need to fill in 
 
 1. **Input Mapping** — what tables will be used in your transformation; tables not mentioned in *Input Mapping* cannot be used in the transformation. 
 2. **Output Mapping** — what tables will be written into Storage; tables not mentioned in *Output Mapping* will never be modified nor permanently stored (i.e. they are temporary). 
 3. **Transformation Script** — SQL queries defining what will happen with the data; it takes the tables from *Input Mapping*, modifies them and produces the tables referenced in *Output Mapping*.
 
-### Input Mapping
-The concept of mapping is an important safeguard when you are manipulating your data. 
+The concept of *mapping is an important safeguard* when you are manipulating your data. 
 Thanks to it, there is no way to modify unwanted tables by accident. 
 The only tables which are modified by your transformation are those explicitly specified in *Output Mapping*.  
 
-Let's start with setting the input mapping by clicking the *Add Input* button.
+### Input Mapping
+Let's start with setting Input Mapping by clicking the **Add Input** button.
 
 {: .image-popup}
 ![Screenshot - Add input mapping](/tutorial/manipulate/transformation-input.png)
@@ -51,20 +50,24 @@ Let's start with setting the input mapping by clicking the *Add Input* button.
 The *source* field in the input mapping refers to Storage. Select `in.c-tutorial.account` as the source table. 
 You can do a full text search in the select field; typing `acc` will give you the table as well. 
 In the *destination* field, the table name `account` is automatically filled for you. 
-This is the name of the table inside the transformation. *Create* the input mapping.
+This is the name of the table inside the transformation. **Create** the input mapping.
 
 Add the remaining three tables: `opportunity`, `user` and `level`. You will get the following configuration:
 
 {: .image-popup}
 ![Screenshot - Input mapping result](/tutorial/manipulate/transformation-input-end.png)
 
+*See additional information about [Input Mapping](/manipulation/transformations/mappings/#input-mapping) 
+(available options, etc.).*
+
 ### Output Mapping
-Continue with setting up *Output Mapping* by clicking on the *Add Output* button.
+Continue with setting up Output Mapping by clicking on the **Add Output** button.
 
 {: .image-popup}
 ![Screenshot - Add output mapping](/tutorial/manipulate/transformation-output.png)
 
-Enter `opportunity_denorm` into the *source* field in the output mapping; the source field refers to the transformation.
+Enter `opportunity_denorm` into the *source* field in the output mapping; 
+the source field refers to the transformation.
 This table does not exist yet. We will create it in the transformation.
 
 The *destination* field refers to the name of the table in Storage. Enter `out.c-tutorial.opportunity_denorm`. 
@@ -76,6 +79,9 @@ After you finish the output mapping, you will see this:
 ![Screenshot - Output mapping result](/tutorial/manipulate/transformation-output-end.png)
 
 The size of the `opportunity_denorm` table shows as *N/A* because the table does not exist yet.
+
+*See additional information about [Output Mapping](/manipulation/transformations/mappings/#output-mapping) 
+(available options, etc.).*
 
 ### Transformation Script
 To produce that table from tables `account`, `opportunity` and `user`, click *Edit Queries* and write the transformation script. 
@@ -112,7 +118,8 @@ CREATE TABLE opportunity_denorm AS
 ![Screenshot - Transformation Queries](/tutorial/manipulate/transformation-queries.png)
 
 In the first query, we change the user level descriptions into something more clear. 
-In the second query, we compute the quality level for each deal opportunity based on the estimated probability of closing the deal. 
+In the second query, we compute the quality level for each deal opportunity based on the estimated probability 
+of closing the deal. 
 In the third query, we denormalize all four tables into a single one. 
 We have prepared the single table so that it will load nicely into Tableau.
 
@@ -127,8 +134,8 @@ Save the queries and then click on *Run Transformation*. This will create a back
 - execute the queries, and 
 - store the result in Storage again. 
 
-To see if the transformation job was successful, go to **Jobs**, or click on the little **Transformations job has been scheduled**
-window that pops up after a transformation starts running. 
+To see if the transformation job was successful, go to **Jobs**, or click on the small 
+**Transformations job has been scheduled** window that pops up after a transformation starts running. 
 
 Having learned to set up a transformation, you can now
   

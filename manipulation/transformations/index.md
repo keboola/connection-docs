@@ -6,22 +6,27 @@ permalink: /manipulation/transformations/
 * TOC
 {:toc}
 
-*To create your first transformation, and to see how Transformations are an integral part of the KBC workflow, go to our [Getting Started tutorial](/tutorial/manipulate/).*
+*To create your first transformation, and to see how Transformations are an integral part of the KBC workflow, 
+go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform 
-(*Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels and sales*, etc.), and are grouped into folders called **Transformation buckets**. 
+(*Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels 
+and sales*, etc.), and are grouped into folders called **Transformation buckets**. 
 
-No transformation can be created without
+## Mappings
+No transformation can be created without 
 
-1. **Input Mapping** — what Storage tables are used in your transformation.
-2. **Output Mapping** — what tables are written into Storage after running the transformation.
-3. **Transformation Script** — SQL, Python or R code defining what happens with the data; 
-it takes the tables from *Input Mapping*, modifies them and produces the tables referenced in *Output Mapping*.
+1) [**Input and Output Mapping**](/manipulation/transformations/mappings/) --- makes sure your SQL code or script 
+does not harm the source tables, and separates the source data from your transformation. 
+Mapping creates a secure workspace with data copied from the tables specified in the input mappings. 
+
+2) **Transformation Script** --- SQL, Python or R code defining what happens with the data while taking the
+ *tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping*.
 
 {: .image-popup}
 ![Simple input and output mapping](./mappings.png)
 
-## Backends
+## Backends and Scripts
 How to decide which backend is appropriate for each task? A rule of thumb is that SQL performs better 
 for joining tables, filtering data,grouping and simple aggregations. Script languages are more suitable 
 for processing one line at a time, raw data processing or custom analytical tasks.
@@ -38,22 +43,17 @@ they are switched to Redshift on a dedicated cluster. That unfortunately require
 
 - **Script** --- [Python](./python/) or [R](./r/)? Choose according to your taste and available libraries.
 
-
-## Mappings
-To make sure your SQL code or script does not harm the source tables, 
-the [input and output mapping](/manipulation/transformations/mappings/) **separates** the source data 
-from your transformation, creating a **secure workspace with data copied** from the tables 
-specified in the input mappings. 
-
 ## Versions
 
 Each change in the transformation configuration creates a new version of the whole bucket configuration. 
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
 ## Developing Transformations
+You can easily develop MySQL and Redshift transformations using [Sandbox](/manipulation/transformations/sandbox),
+a separate database storage. As a safe workspace with required data, 
+it allows you to run  and play with your arbitrary SQL scripts on the copies of your tables 
+without affecting data in your Storage, or your transformations.
 
-You can easily develop MySQL and Redshift transformations using [Sandbox](/manipulation/transformations/sandbox). 
-We provide you with a safe workspace with required data where you can play with your SQL code.
 
 ## Advanced Features
 
