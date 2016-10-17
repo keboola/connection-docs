@@ -3,7 +3,7 @@ title: Storage
 permalink: /storage/
 ---
 
-*See our [Getting Started](/overview/tutorial/load/) tutorial for instructions on how to use Storage.*
+*See our [Getting Started](/tutorial/load/) tutorial for instructions on how to use Storage.*
 
 As the central [KBC subsystem](/overview/), *Storage* manages everything related to **storing** data and **accessing** it.
 It is implemented as a layer on top of various database engines that we use as our *backends*
