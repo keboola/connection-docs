@@ -13,7 +13,7 @@ Tokens are assigned to/by KBC users in the following three situations:
 
 1. When joining a project -- assigned automatically
 2. When creating a new configuration of a component (for example, Orchestrations) -- assigned automatically
-3. When [sharing a single table](/overview/tutorial/management/#user-management)
+3. When [sharing a single table](/tutorial/management/#user-management)
 from your Storage with someone, without them having to become a project administrator. 
 You can create an unlimited number of tokens with access to all or selected Storage buckets .
 

@@ -10,7 +10,7 @@ All data imported to and exported from Storage has to be in the CSV format.
 
 In many cases, our extractors and writers take care of the necessary conversion,
 but sometimes you have to be aware of the supported formats -- for
-example, when you are [loading data manually](/overview/tutorial/load/).
+example, when you are [loading data manually](/tutorial/load/).
 
 ## Input CSV Format
 Storage accepts CSV files in the format defined by [RFC 4180 Specification](http://tools.ietf.org/html/rfc4180).
@@ -52,7 +52,7 @@ A CSV file in this format can be exported from
 
 - OpenOffice / LibreOffice Calc, where you simply save the file in Text CSV file and select *Unicode (UTF-8)* encoding.
 - Google Drive, where it is the default output format (note, however, that you might
-    prefer to use the [Google Drive Extractor](/overview/tutorial/load/googledrive/) instead).
+    prefer to use the [Google Drive Extractor](/tutorial/load/googledrive/) instead).
 - Microsoft Excel by following the below instructions.
 
 ### Exporting from Microsoft Excel

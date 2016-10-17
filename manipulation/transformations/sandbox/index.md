@@ -6,7 +6,7 @@ permalink: /manipulation/transformations/sandbox/
 * TOC
 {:toc}
 
-*To create your first Sandbox, and to see how it is an integral part of the KBC workflow in our [Getting Started tutorial](/overview/tutorial/manipulate/sandbox/).*
+*To create your first Sandbox, and to see how it is an integral part of the KBC workflow in our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
 
 A sandbox is a **safe environment** for you to 
 

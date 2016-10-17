@@ -5,7 +5,7 @@ permalink: /extractors/pigeon/
 
 Pigeon Importer allows you to import data from e-mail attachments to KBC. 
 It extracts data from systems generating exports only as CSV files attached to an email, and
-can also be used instead of repeated [manual imports of CSV](/overview/tutorial/load/) files.
+can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
 
 Tables only get imported with the extractor running. The import is **not** triggered by an email 
 being sent or received. When running, the extractor will import all emails received since its previous run. 

@@ -15,7 +15,7 @@ Your project table storage is available in the *Tables* tab in the *Storage* sec
 
 The distinction between the input and output stage is purely conventional differentiation between raw and processed data.
 When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#backends) based on its properties.
-For information on how to load data into Storage, see the corresponding part of our [tutorial](/overview/tutorial/load/).
+For information on how to load data into Storage, see the corresponding part of our [tutorial](/tutorial/load/).
 
 {: .image-popup}
 ![Screenshot - Create bucket](/storage/tables/create-bucket.png)
@@ -43,7 +43,7 @@ If you attempt to do so, you will receive an error message similar to this one:
 
     The blog-data table cannot be deleted. Please delete its aliases first: in.c-tutorial.blog-data,in.c-my-bucket.blog-data.
 
-See an example use of an alias in our [tutorial](/overview/tutorial/load/googledrive/#aftermath).
+See an example use of an alias in our [tutorial](/tutorial/load/googledrive/#aftermath).
 
 {: .image-popup}
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
@@ -65,7 +65,7 @@ There are the following limitations:
 You can prevent this by disabling *Synchronize columns with source table*.
 
 ## Copying Tables / Table Snapshots
-If you want to physically copy a table, use the [*table snapshot*](/overview/tutorial/management/#table-snapshots) feature.
+If you want to physically copy a table, use the [*table snapshot*](/tutorial/management/#table-snapshots) feature.
 A copy of the table contents at the time of creating the snapshot will be made.
 It can be used immediately to make a physical copy of the table, or later to revert the table into its previous state.
 

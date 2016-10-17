@@ -13,7 +13,7 @@ There are a number of database extractors sharing common properties.
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
 
-See our [tutorial](/overview/tutorial/load/database/) for help with configuring these extractors. They all are configured in the same way.
+See our [tutorial](/tutorial/load/database/) for help with configuring these extractors. They all are configured in the same way.
 The [MongoDB](https://www.mongodb.com/) extractor requires a [different configuration](/extractors/mongodb/).
 
 ## Database Extractor Configuration
