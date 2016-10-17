@@ -32,6 +32,7 @@ Name your transformation *Denormalize opportunities*, and choose the *MySQL* bac
 {: .image-popup}
 ![Screenshot - Create a Transformation](/tutorial/manipulate/transformations-create.png)
 
+When you create a transformation, you need to set up 
 
 1. **Input Mapping** — what tables will be used in your transformation; tables not mentioned in *Input Mapping* cannot be used in the transformation. 
 2. **Output Mapping** — what tables will be written into Storage; tables not mentioned in *Output Mapping* will never be modified nor permanently stored (i.e. they are temporary). 

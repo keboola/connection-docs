@@ -26,7 +26,7 @@ Mapping creates a secure workspace with data copied from the tables specified in
 {: .image-popup}
 ![Simple input and output mapping](./mappings.png)
 
-## Backends and Scripts
+## Backends
 How to decide which backend is appropriate for each task? A rule of thumb is that SQL performs better 
 for joining tables, filtering data,grouping and simple aggregations. Script languages are more suitable 
 for processing one line at a time, raw data processing or custom analytical tasks.
