@@ -24,7 +24,11 @@ Applications may
 - vary in terms and conditions
 - be billed extra; some are for free
 - send your data to 3rd party services outside of KBC
-- be created by you, Keboola or third parties; see a screenshot of some KBC applications below
+- extract data from outside sources
+- be created by you, Keboola, or third parties 
+- have support provided by their author 
+
+The following screenshot shows some of many KBC applications (created by both, Keboola and 3rd parties): 
 
 {: .image-popup}
 ![Keboola and 3rd parties Applications in KBC](/manipulation/applications/applications.png)

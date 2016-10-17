@@ -3,8 +3,8 @@ title: Input and Output Mapping
 permalink: /manipulation/transformations/mappings/
 ---
 
-*To see how input and output mappings are created and used in creating a transformation, 
-go to our [Getting Started tutorial](/tutorial/manipulation/).*
+*To configure input and output mappings in the process of creating a transformation, 
+go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 * TOC
 {:toc}
