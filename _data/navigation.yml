@@ -102,19 +102,19 @@ items:
             title: Sandbox
 
           - url: /manipulation/transformations/mysql/
-            title: MySQL
+            title: MySQL Transformations
 
           - url: /manipulation/transformations/redshift/
-            title: Redshift
+            title: Redshift Transformations
 
           - url: /manipulation/transformations/snowflake/
-            title: Snowflake
+            title: Snowflake Transformations
 
           - url: /manipulation/transformations/python/
-            title: Python
+            title: Python Transformations
 
           - url: /manipulation/transformations/r/
-            title: R
+            title: R Transformations
             items:
               - url: /manipulation/transformations/r/array-splitter/
                 title: Array Splitting
