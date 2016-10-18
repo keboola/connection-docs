@@ -4,7 +4,8 @@ permalink: /tutorial/manipulate/
 ---
 
 At this point, you already know how to quickly [load data into KBC](/tutorial/load/),
-and your *in.c-tutorial* bucket contains four new tables: *account*, *opportunity*, *level* and *user*. 
+and your *in.c-tutorial* [table bucket](/storage/tables/) contains four new tables: 
+*account*, *opportunity*, *level* and *user*. 
 In this part of the tutorial, we will show you how to manipulate data in Storage using Transformations. 
 Let's create a denormalized table from the input tables and do some minor modifications to it.
 
@@ -12,13 +13,14 @@ Let's create a denormalized table from the input tables and do some minor modifi
 {:toc}
 
 ## Creating Transformation
-To start, go to the **Transformations** section:
+To start, go to the KBC **Transformations** section:
 
 {: .image-popup}
 ![Screenshot - Transformations Console](/tutorial/manipulate/transformations-intro.png)
 
-Like tables, Transformations are organized into *buckets*. Each transformation bucket can contain any number
-of individual transformations. It should represent a logical set (container) of operations you want to perform together.
+Like [tables](/storage/tables/), Transformations are organized into *buckets*. 
+Each transformation bucket can contain any number of individual transformations. 
+It should represent a logical set (container) of operations you want to perform together.
 Before you start with transformations, create a bucket and call it *Opportunity*. 
 
 {: .image-popup}
@@ -34,13 +36,18 @@ Name your transformation *Denormalize opportunities*, and choose the *MySQL* bac
 
 When you create a transformation, you need to set up 
 
-1. **Input Mapping** — what tables will be used in your transformation; tables not mentioned in *Input Mapping* cannot be used in the transformation. 
-2. **Output Mapping** — what tables will be written into Storage; tables not mentioned in *Output Mapping* will never be modified nor permanently stored (i.e. they are temporary). 
-3. **Transformation Script** — SQL queries defining what will happen with the data; it takes the tables from *Input Mapping*, modifies them and produces the tables referenced in *Output Mapping*.
+1. [**Input Mapping**](/tutorial/manipulate/#input-mapping) — what tables will be used in your transformation; 
+tables not mentioned in Input Mapping cannot be used in the transformation. 
+2. [**Output Mapping**](/tutorial/manipulate/#output-mapping) — what tables will be written into Storage; 
+tables not mentioned in Output Mapping will never be modified nor permanently stored (i.e. they are temporary). 
+3. [**Transformation Script**](/tutorial/manipulate/#transformation-script) — SQL queries defining 
+what will happen with the data; it takes the tables from Input Mapping, modifies them 
+and produces the tables referenced in Output Mapping.
 
-The concept of *mapping is an important safeguard* when you are manipulating your data. 
-Thanks to it, there is no way to modify unwanted tables by accident. 
-The only tables which are modified by your transformation are those explicitly specified in *Output Mapping*.  
+The concept of [**mapping**](/manipulation/transformations/mappings) is an important safeguard 
+when you are manipulating your data. 
+Thanks to it, there is no way to modify the wrong tables by accident. 
+The only tables which are modified by your transformation are those explicitly specified in Output Mapping.  
 
 ### Input Mapping
 Let's start with setting Input Mapping by clicking the **Add Input** button.
@@ -48,10 +55,10 @@ Let's start with setting Input Mapping by clicking the **Add Input** button.
 {: .image-popup}
 ![Screenshot - Add input mapping](/tutorial/manipulate/transformation-input.png)
 
-The *source* field in the input mapping refers to Storage. Select `in.c-tutorial.account` as the source table. 
+The *Source* field in the input mapping refers to Storage. Select `in.c-tutorial.account` as the source table. 
 You can do a full text search in the select field; typing `acc` will give you the table as well. 
-In the *destination* field, the table name `account` is automatically filled for you. 
-This is the name of the table inside the transformation. **Create** the input mapping.
+In the *Destination* field, the table name `account` is automatically filled for you. 
+This is the name of the source table inside the transformation. **Create** the input mapping.
 
 Add the remaining three tables: `opportunity`, `user` and `level`. You will get the following configuration:
 
@@ -59,7 +66,7 @@ Add the remaining three tables: `opportunity`, `user` and `level`. You will get 
 ![Screenshot - Input mapping result](/tutorial/manipulate/transformation-input-end.png)
 
 *See additional information about [Input Mapping](/manipulation/transformations/mappings/#input-mapping) 
-(available options, etc.).*
+(all available options, etc.).*
 
 ### Output Mapping
 Continue with setting up Output Mapping by clicking on the **Add Output** button.
@@ -67,14 +74,17 @@ Continue with setting up Output Mapping by clicking on the **Add Output** button
 {: .image-popup}
 ![Screenshot - Add output mapping](/tutorial/manipulate/transformation-output.png)
 
-Enter `opportunity_denorm` into the *source* field in the output mapping; 
-the source field refers to the transformation.
-This table does not exist yet. We will create it in the transformation.
+Enter `opportunity_denorm` into the *Source* field in the output mapping; 
+the *Source* field refers to the transformation. This table does not exist yet. 
+We will create it in the transformation.
 
-The *destination* field refers to the name of the table in Storage. Enter `out.c-tutorial.opportunity_denorm`. 
-It will create the `opportunity_denorm` table in the `tutorial` bucket in the *out*put stage in Storage. 
-This table does not exist either, but it will be created once the transformation runs. 
-After you finish the output mapping, you will see this:
+The *Destination* field refers to the name of the output table in Storage.
+Start typing in and find our tutorial output bucket and 
+add the source table name to it: `out.c-tutorial.opportunity_denorm`.
+It will create the `opportunity_denorm` table in the `tutorial` [bucket in the output stage](/storage/tables/)
+in Storage. This table does not exist either, but it will be created once the transformation runs. 
+
+After you finish Output Mapping, you will see this:
 
 {: .image-popup}
 ![Screenshot - Output mapping result](/tutorial/manipulate/transformation-output-end.png)
@@ -82,7 +92,7 @@ After you finish the output mapping, you will see this:
 The size of the `opportunity_denorm` table shows as *N/A* because the table does not exist yet.
 
 *See additional information about [Output Mapping](/manipulation/transformations/mappings/#output-mapping) 
-(available options, etc.).*
+(all available options, etc.).*
 
 ### Transformation Script
 To produce that table from tables `account`, `opportunity` and `user`, click *Edit Queries* and write the transformation script. 

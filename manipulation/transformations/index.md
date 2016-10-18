@@ -12,6 +12,8 @@ go to our [Getting Started tutorial](/tutorial/manipulate/).*
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform 
 (*Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels 
 and sales*, etc.), and are grouped into folders called **Transformation buckets**. 
+Each transformation bucket can contain any number of individual transformations. 
+It should represent a logical set of operations you want to perform together.
 
 ## Mappings
 No transformation can be created without 
@@ -20,14 +22,17 @@ No transformation can be created without
 does not harm the source tables, and separates the source data from your transformation. 
 Mapping creates a secure workspace with data copied from the tables specified in the input mappings. 
 
-2) **Transformation Script** --- SQL, Python or R code defining what happens with the data while taking the
- *tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping*.
+2) **Transformation Script** --- SQL, Python or R code: defines what happens with the data while taking the
+ tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
 
 {: .image-popup}
 ![Simple input and output mapping](./mappings.png)
 
 ## Backends
-How to decide which backend is appropriate for each task? A rule of thumb is that SQL performs better 
+A backend is the engine running the transformation script. It is either a database server (MySQL, Redshift,
+Snowflake) or a language interpreter (R, Python).
+
+How to decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better 
 for joining tables, filtering data,grouping and simple aggregations. Script languages are more suitable 
 for processing one line at a time, raw data processing or custom analytical tasks.
 
@@ -44,7 +49,6 @@ they are switched to Redshift on a dedicated cluster. That unfortunately require
 - **Script** --- [Python](./python/) or [R](./r/)? Choose according to your taste and available libraries.
 
 ## Versions
-
 Each change in the transformation configuration creates a new version of the whole bucket configuration. 
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
@@ -64,7 +68,6 @@ If multiple steps use the same input mapping (they share data), it might save a 
 To save time, you can run multiple orchestration tasks in parallel.
 
 ### Dependencies
-
 Dependencies allow you to chain transformation steps. A given transformation is executed after all required steps have been executed. 
 
 Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of SQL code. However, a network of nontransparent dependency trees was usually created, so we have decided to abolish this feature in the near future. If possible, please do not use dependencies as it will make future migrations easier.
