@@ -58,6 +58,6 @@ Alternatively you can use our Docker image prepared in our GitHub repository
 Note that building Docker images will take a while, we're building OpenRefine from sources.
 After everything runs just point your browser to `localhost:3333`.
 
-## Beta Warning
+## Public Beta Warning
 
-OpenRefine transformations are currently in open beta. Some thing may not work as expected. Please bear with us while we polish all necessities, all feedback welcomed at [support@keboola.com](mailto:support@keboola.com). 
+OpenRefine transformations are currently in public beta. Some thing may not work as expected. Please bear with us while we polish all necessities, all feedback welcomed at [support@keboola.com](mailto:support@keboola.com). 
