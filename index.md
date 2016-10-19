@@ -12,7 +12,8 @@ If you are working with the KBC UI as an end-user, you are at the right place.
 
 #### What Keboola Connection Is
 
-KBC is a complex data preparation platform composed of many interconnected components, extracting data from various sources, 
+KBC is a powerful data preparation platform composed of many interconnected components, 
+extracting data from various sources, 
 manipulating and enriching the data, and writing the results to desired Business Intelligence tools. 
 It is a safe, open and extendable cloud based environment for working with your data.
 
