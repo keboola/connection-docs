@@ -125,6 +125,9 @@ items:
               - url: /manipulation/transformations/r/binary/
                 title: Using binary files
 
+          - url: /manipulation/transformations/openrefine/
+            title: OpenRefine Transformations
+
       - url: /manipulation/applications/
         title: Applications
 
