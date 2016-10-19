@@ -11,10 +11,11 @@ Common data operations like joining, sorting, or grouping are still easier and f
 
 ## Environment
 
-The Python script is running in an isolated Docker environment. The current Python version is 3.5.1.
+The Python script is running in an isolated [Docker environment](https://developers.keboola.com/overview/docker-bundle/). The current Python version is 3.5.1.
 
-### Memory
-So far, we have allocated 8GB of memory to the Docker instance running the Python transformation. We will be increasing this limit along the way, but there will always be a defined memory constraint.
+### Memory and Processing Constraints
+
+The Docker container running the Python transformation has allocated 8GB of memory and the maximum running time is 6 hours.
 
 ### File locations
 The Python script itself will be compiled to `/data/script.py`. To access your input and output tables, use

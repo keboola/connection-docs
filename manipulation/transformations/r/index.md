@@ -15,9 +15,9 @@ Common operations with data like joining, sorting, and grouping are still easier
 The R script is running in an isolated [Docker environment](https://developers.keboola.com/overview/docker-bundle/).
 The current R version is R 3.2.1.
 
-### Memory
-So far, we have allocated 8GB of memory to the Docker instance running the R transformation.
-We will be increasing this limit along the way, but there will always be a defined memory constraint.
+### Memory and Processing Constraints
+
+The Docker container running the R transformation has allocated 8GB of memory and the maximum running time is 6 hours.
 
 ### File locations
 The R script itself will be compiled to `/data/script.R`. To access input and output tables, use relative (`in/tables/file.csv`, `out/tables/file.csv`),
