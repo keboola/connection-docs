@@ -10,11 +10,11 @@ permalink: /manipulation/transformations/openrefine/
 
 ## Environment
 
-The OpenRefine transformation scripts is running in an isolated Docker environment. The installed OpenRefine version is `2.6-rc.2`.
+The OpenRefine transformation scripts are running in an isolated [Docker environment](https://developers.keboola.com/overview/docker-bundle/). The installed OpenRefine version is `2.6-rc.2`.
 
-### Memory
+### Memory and Processing Constraints
 
-So far, we have allocated 8GB of memory to the Docker instance running the OpenRefine transformation. We will be increasing this limit along the way, but there will always be a defined memory constraint.
+The Docker container running the OpenRefine server and transformation has allocated 8GB of memory and the maximum running time is 6 hours.
 
 ### Inputs/Outputs
 
@@ -44,20 +44,10 @@ And finally copy the Operation History JSON to the transformation script
 {: .image-popup}
 ![Screenshot - OpenRefine Extract Operation History](/manipulation/transformations/openrefine/operationhistoryextract.png)
 
-### Using Docker
+### OpenRefine Sandbox
 
-Alternatively you can use our Docker image prepared in our GitHub repository
-
-
-    git clone https://github.com/keboola/openrefine-php-client
-    cd openrefine-php-client
-    docker-compose build
-    docker-compose up openrefine
-
-
-Note that building Docker images will take a while, we're building OpenRefine from sources.
-After everything runs just point your browser to `localhost:3333`.
+We're working hard on preparing OpenRefine Sandboxes. We'll launch OpenRefine server for you and load the desired table into the environment. Stay tuned for more information and meanwhile use OpenRefine locally.  
 
 ## Public Beta Warning
 
-OpenRefine transformations are currently in public beta. Some thing may not work as expected. Please bear with us while we polish all necessities, all feedback welcomed at [support@keboola.com](mailto:support@keboola.com). 
+OpenRefine transformations are currently in public beta. Some features may not work as expected. Please bear with us while we polish all necessities, all feedback welcomed at [support@keboola.com](mailto:support@keboola.com). 
