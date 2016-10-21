@@ -14,7 +14,11 @@ The OpenRefine transformation scripts are running in an isolated [Docker environ
 
 ### Memory and Processing Constraints
 
-The Docker container running the OpenRefine server and transformation has allocated 8GB of memory and the maximum running time is 6 hours.
+The Docker container running the OpenRefine server and transformation has allocated 8GB of memory, 7GB of that is allocated directly to OpenRefine. 
+
+In our experience this memory limit is enough to process ~2M rows or 0.5GB of raw CSV data.
+
+The maximum running time is 6 hours.
 
 ### Inputs/Outputs
 
