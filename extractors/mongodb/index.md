@@ -47,8 +47,10 @@ Must be specified in [strict format](#strict-format).
 
 - **Incremental** -- Loads data to your tables incrementally.
 
-- **Mapping** -- This is the most important section, defining how documents in the collection are mapped to the output tables.
-It, too, has to be valid JSON. To learn more about mapping, go to the [next section](#configure-mapping).
+- **Mode** -- Specifies export mode; one of *Mapping* or *Raw*.
+
+- **Mapping** -- When *Mapping* mode selected, this is the most important section, defining how documents in the collection are mapped to the output tables.
+It, too, has to be valid JSON. To learn more about mapping, go to the [Configure Mapping section](#configure-mapping).
 
 *Tip: Use combination of limit (e.g. only 10 documents) and query (e.g. only document with specific ID)
 while playing with the mapping section to prevent full collection export.*
@@ -104,6 +106,48 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
 ### Mapping Examples
 
 Check out [more mapping examples](/extractors/mongodb/mapping/).
+
+## Raw export mode
+
+In raw export mode, documents are exported as plain JSON strings.
+
+<table class="table table-bordered">
+<tr>
+<td>Document</td>
+<td>
+{% highlight json %}
+{
+    "_id": {
+        "$oid" : "5716054bee6e764c94fa7ddd"
+    },
+    "name": "MongoDB extractor"
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>
+
+<table>
+<tr><th>id</th><th>data</th></tr>
+<tr>
+<td>5716054bee6e764c94fa7ddd</td>
+<td>
+{
+    "_id": {
+        "$oid" : "5716054bee6e764c94fa7ddd"
+    },
+    "name": "MongoDB extractor"
+}
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Run Extractor
 
