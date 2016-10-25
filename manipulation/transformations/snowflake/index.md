@@ -3,9 +3,12 @@ title: Snowflake Transformation
 permalink: /manipulation/transformations/snowflake/
 ---
 
+* TOC
+{:toc}
+
 [Snowflake](http://www.snowflake.net/) has many advantages:
 
-- No database administration stuff
+- No database administration 
 - No indexes, sort keys, distribution styles, or column compressions
 - Easy scaling
 - Simple data types
@@ -21,15 +24,17 @@ Snowflake queries are **limited** to 3,600 seconds by default.
 ## Best Practices
 
 ### Case Sensitivity
-Snowflake is case sensitive. All unquoted table/column names are converted to upper case, while quoted names keep their case.
-So if you want to create this table,
+Snowflake is case sensitive. All unquoted table/column names are converted to upper case 
+while quoted names keep their case. 
+
+So if you want to create the following table,
 
 {% highlight sql %}
 -- created as LOWERCASETABLE
 CREATE TABLE lowercasetable (...);
 {% endhighlight %}
 
-all of the following commands will work,
+all of these commands will work
 
 {% highlight sql %}
 SELECT * FROM LOWERCASETABLE;
@@ -44,21 +49,22 @@ while this one will not:
 SELECT * FROM "lowercasetable";
 {% endhighlight %}
 
-Be especially careful in the output mappings. Table names specified in the output mapping are always quoted.
+Be especially careful in the [output mappings](/manipulation/transformations/mappings/#output-mapping). 
+Table names specified in the output mapping are always quoted.
 
 ### Timestamp Columns
-By default, snowflake uses the
+By default, Snowflake uses the 
 [`DY, DD MON YYYY HH24:MI:SS TZHTZM` format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
-when converting timestamp column to character string.
+when converting the timestamp column to a character string.
 
-This means that if you create a table in transformation which uses a `timestamp` column
+This means that if you create a table in a transformation which uses a `timestamp` column,
 
 {% highlight sql %}
 CREATE TABLE "ts_test" AS (SELECT CURRENT_TIMESTAMP AS "ts");
 {% endhighlight %}
 
-The table value will come out as `Wed, 19 Oct 2016 01:24:21 -0700` in Storage. If you
-want to output it in different format, you have to cast the column to string first, e.g.:
+the table value will come out as `Wed, 19 Oct 2016 01:24:21 -0700` in Storage. If you
+want to output it in a different format, you have to cast the column to a string first, for example:
 
 {% highlight sql %}
 CREATE TABLE "out" AS
@@ -73,8 +79,8 @@ CREATE TABLE "out" AS
     (SELECT "ts"::varchar AS "ts" FROM "ts_test");
 {% endhighlight %}
 
-Also you should be aware that Snowflake works with timezones (and [DST](https://en.wikipedia.org/wiki/Daylight_saving_time)), which means that you need to
-distinguish between various conversion functions:
+**Important:** Snowflake works with timezones (and [Daylight Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time)),
+requiring you to distinguish between various conversion functions:
 
 {% highlight sql %}
 SELECT
