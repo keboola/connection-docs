@@ -7,7 +7,7 @@ permalink: /extractors/mongodb/
 {:toc}
 
 The MongoDB extractor allows you to fetch data from the [MongoDB database](https://www.mongodb.com/).
-Complete the following steps to configure it:
+Complete the following steps to configure it.
 
 ## Create New Configuration
 
@@ -25,7 +25,7 @@ Optionally, set up an SSH tunnel.
 {: .image-popup}
 ![MongoDB new credentials](/extractors/mongodb/02-new-credentials.png)
 
-## Configure export(s)
+## Configure Export(s)
 
 Click the **Add Export** button and configure your first export using the following options:
 

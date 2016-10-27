@@ -64,7 +64,8 @@ KBC, as an open environment consisting of many built-in interoperating component
 can be [extended](https://developers.keboola.com/extend/) with **arbitrary code to extract, manipulate or write data**. 
 
 There are two types of extensions: [Custom Extensions](https://developers.keboola.com/extend/) 
-(used as extractors, applications and writers) and Generic Extractor. 
+(used as extractors, applications and writers) and 
+[Generic Extractor](https://developers.keboola.com/extend/#generic-extractor). 
 They can be created by us, our customers and 3rd parties, and can be offered also to other KBC users through our AppStore.
 
 ### Writers
