@@ -168,7 +168,7 @@ extractors-revisions
 <tr><td>68fc980</td><td>Second version</td><td>5716054bee6e764c94fa7ddd</td></tr>
 </table>
 
-As you can see, joining those two tables will be easy as pie.
+As you can see, joining those two tables will be as easy as pie.
 
 </td>
 </tr>
@@ -177,7 +177,7 @@ As you can see, joining those two tables will be easy as pie.
 
 
 
-## With lists
+## With Lists
 
 <table class="table table-bordered">
 <tr>
