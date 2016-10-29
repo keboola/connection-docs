@@ -1,6 +1,8 @@
 ---
 title: Geocoding Augmentation
 permalink: /extractors/geocoding-augmentation/
+redirect_from:
+  - /extractors/geocoding-augumentation/
 ---
 
 * TOC
