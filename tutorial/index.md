@@ -1,6 +1,8 @@
 ---
 title: Keboola Connection Getting Started Tutorial
 permalink: /tutorial/
+redirect_from:
+  - /getting-started/
 ---
 
 This tutorial will guide you through basic usage of Keboola Connection (KBC).

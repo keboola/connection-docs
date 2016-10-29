@@ -1,6 +1,8 @@
 ---
 title: MongoDB
 permalink: /extractors/mongodb/
+redirect_from:
+  - /extractors/database/mongodb/
 ---
 
 * TOC
