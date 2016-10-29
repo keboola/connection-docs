@@ -8,3 +8,9 @@ jekyll:
   ports:
     - "4000:4000"
   command: jekyll serve --watch -H 0.0.0.0 --force_polling
+
+aws:
+  image: quay.io/keboola/aws-cli
+  volumes:
+    - ./:/code
+  working_dir: /code
