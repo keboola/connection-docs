@@ -24,9 +24,12 @@ Mapping creates a secure workspace with data copied from the tables specified in
 
 2) **Transformation Script** --- SQL, Python or R code: defines what happens with the data while taking the
  tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
-
+ 
 {: .image-popup}
 ![Simple input and output mapping](./mappings.png)
+
+*When writing transformation scripts, keep in mind that the table names referenced by mappings 
+are automatically quoted by KBC. This is especially important for Snowflake, which is case sensitive.*
 
 ## Backends
 A backend is the engine running the transformation script. It is either a database server (MySQL, Redshift,

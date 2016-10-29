@@ -24,33 +24,36 @@ Snowflake queries are **limited** to 3,600 seconds by default.
 ## Best Practices
 
 ### Case Sensitivity
-Snowflake is case sensitive. All unquoted table/column names are converted to upper case 
+Unlike Redshift or MySQL, Snowflake is case sensitive. All unquoted table/column names are converted to upper case 
 while quoted names keep their case. 
 
 So if you want to create the following table,
 
 {% highlight sql %}
--- created as LOWERCASETABLE
-CREATE TABLE lowercasetable (...);
+-- creates table FOOTABLE 
+CREATE TABLE footable (...);
 {% endhighlight %}
 
 all of these commands will work
 
 {% highlight sql %}
-SELECT * FROM LOWERCASETABLE;
-SELECT * FROM "LOWERCASETABLE";
-SELECT * FROM lowercasetable;
+SELECT * FROM FOOTABLE;
+SELECT * FROM "FOOTABLE";
+SELECT * FROM footable;
 {% endhighlight %}
 
 while this one will not:
 
 {% highlight sql %}
--- table lowercasetable not found!
-SELECT * FROM "lowercasetable";
+-- table footable not found!
+SELECT * FROM "footable";
 {% endhighlight %}
 
-Be especially careful in the [output mappings](/manipulation/transformations/mappings/#output-mapping). 
-Table names specified in the output mapping are always quoted.
+Be especially careful when setting up [input and output mappings](/manipulation/transformations/mappings/). 
+In the KBC UI, it is necessary to enter all table names using the exact casing 
+because all table names referenced by mappings are automatically quoted by KBC. 
+
+When writing your transformation script, we recommend quoting all table names as well. 
 
 ### Timestamp Columns
 By default, Snowflake uses the 

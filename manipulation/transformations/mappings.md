@@ -24,6 +24,9 @@ They are deleted from the transformation workspace when the execution finishes.
 {: .image-popup}
 ![Simple input and output mapping](/manipulation/transformations/mappings.png)
 
+*Table names referenced by mappings are automatically quoted by KBC. 
+This is especially important for Snowflake, which is case sensitive.*
+
 ### Input Mapping
 Input Mapping defines data you have in Storage and want to use in a transformation. 
 This data is made available as a table for SQL, or as a CSV file for R and Python.
@@ -31,7 +34,8 @@ This data is made available as a table for SQL, or as a CSV file for R and Pytho
 {: .image-popup}
 ![Input mapping](/manipulation/transformations/input-mapping.png)
 
-Any input mapping has the following options (to see all options, the *Show details* checkbox above the *Source* field must be checked):
+Any input mapping has the following options (to see all options, the *Show details* checkbox 
+above the *Source* field must be checked):
 
 - **Source** --- Select a table in Storage as the source table for your transformation.
 - **Destination** --- This is the *Source* table/file name to be used inside the transformation 
