@@ -11,10 +11,16 @@ AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and mad
  - Redshift is not very friendly when it come to data types, for instance, invalid characters).
  - If a query gets slow, dive into [sort keys](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html), [distribution styles](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html) and [column compression](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html). 
 
-### Migration from MySQL 
+### No User-Defined Functions
+
+Redshift in KBC does not support functions or stored procedures.
+
+### Migration from MySQL
+
 If you want to **migrate a transformation** from MySQL to Redshift, use this [hint sheet](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/redshift-hints).   
 
 ### Limits
+
 There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redshift cluster to a larger size, these limits can be increased.
 
 - Redshift queries are limited to 3,600 seconds by default.
