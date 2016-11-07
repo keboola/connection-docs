@@ -3,6 +3,7 @@ title: Search
 showBreadcrumbs: false
 permalink: /search/
 sitemap: false
+showLinkToGithubPage: false
 ---
 
 <script>
