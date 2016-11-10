@@ -6,16 +6,18 @@ permalink: /manipulation/applications/
 * TOC
 {:toc}
 
-Applications further enrich data or add value to it in new ways. 
-As predefined blocks with set functionality, which can be customized or parametrized to some extent, 
+Applications are without any doubt more powerful than [Transformations](/manipulation/transformations/). 
+They further enrich your data, and add value to it in new ways. 
+At the same time, they are more difficult to create. 
+
+As **predefined blocks with set functionality**, which can be customized or parametrized to some extent, 
 they can perform really advanced tasks such as sentiment analysis, association discovery, or 
 histogram grouping. They can also enhance data by calling on 3rd party services to bring in additional data 
 such as Weather or Exchange Rates. 
 
-All applications are implemented as [extensions](https://developers.keboola.com/extend/) 
+All applications are **implemented as [extensions](https://developers.keboola.com/extend/)** 
 and as such can be completely created by 3rd party developers. 
-You can even create your own application. They are as not easy to create as [Transformations](/manipulation/transformations/), 
-but they are without any doubt more powerful. 
+You can even create your own application. 
 Applications can be created either for a particular end-user, or they may be offered 
 to all KBC customers; in that case they have to be registered in KBC App Store.
 

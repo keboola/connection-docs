@@ -7,6 +7,9 @@ In the [previous step](/tutorial/load/), you learned how to quickly load data in
 In real production projects, this is seldom used as most of the data is obtained automatically using *extractors*.
 In this part of the tutorial, you will use a Google Drive extractor to load data from an external data sheet.
 
+* TOC
+{:toc}
+
 Google Drive is a common method for sharing small reference tables between different organizations.
 For our purposes, create a Google spreadsheet from the [level.csv](/tutorial/level.csv) file.
 Let's pretend someone shared the *level* table with you through Google Drive.

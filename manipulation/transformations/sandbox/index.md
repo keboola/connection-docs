@@ -15,10 +15,12 @@ A sandbox is a **safe environment** for you to
 
 You can fill a sandbox with any data from Storage. However, to simplify transformation development, 
 KBC provides a specific loader for your transformations. 
-It automatically fills the sandbox with relevant tables and takes the Input Mapping of the transformation into account.
+It automatically fills the sandbox with relevant tables and takes 
+the [Input Mapping](/manipulation/transformations/mappings/#input-mapping) of the transformation into account.
 
-Each user has **one sandbox per project and backend** (MySQL, Snowflake and Redshift) to their disposal. 
-Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management -- see below. 
+Each user has **one sandbox per project and [backend](/manipulation/transformations/#backend)** 
+(MySQL, Snowflake and Redshift) to their disposal. 
+Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management --- see below. 
 
 {: .image-popup}
 ![Sandbox credentials](/manipulation/transformations/sandbox/sandbox-credentials.png)
@@ -26,14 +28,15 @@ Sandboxes with different backends are very similar; but there are few specifics,
 **Important:** The backend of the sandbox does not have to match the backend of the original data. 
 For example, you can load data from Snowflake into a Redshift sandbox.
 
+Also, your sandbox might be deleted after 7 days of inactivity; make sure not to use it as a permanent data storage! 
 
 ## Loading Data
 
 Data can be loaded into your sandbox in two different ways:
 
-- Plain loading -- Copying any tables from Storage into a Sandbox database. 
-- Transformation loading -- Loading specifically tailored for transformation development. 
-Select a transformation and all relevant tables based on transformation input mapping are automatically loaded. 
+- Plain loading --- Copying any tables from Storage into a Sandbox database. 
+- Transformation loading --- Loading specifically tailored for transformation development. 
+Select a transformation and all relevant tables based on the transformation input mapping are automatically loaded. 
 
 If you, while developing your transformation, need to add data to the tables already specified in the input mapping, 
 the two ways can be combined. However, in that case, perform the plain load *after* the transformation load, 
@@ -57,7 +60,7 @@ You can limit the number of rows that are loaded; this is useful for sampling a 
 {: .image-popup}
 ![MySQL sandbox](/manipulation/transformations/sandbox/sandbox-mysql-load-data.png)
 
-The imported tables will have full tables names -- including both a bucket and table name.
+The imported tables will have full tables names --- including both a bucket and table name.
 
 By default, the sandbox content is deleted before loading new data. 
 Use the *Preserve existing data* option to keep its content and add new data to it.
@@ -66,7 +69,8 @@ Use the *Preserve existing data* option to keep its content and add new data to 
 ### Transformation Loading
 
 This type of loading is intended for **gradual development and debugging** of your transformation code. 
-Data loaded through the transformation loading is tied to a specific transformation bucket and input mapping. 
+Data loaded through the transformation loading is tied to a specific transformation bucket and 
+[input mapping](/manipulation/transformations/mappings/#input-mapping). 
 Only data specified in the input mapping is loaded into your transformation sandbox. 
 You can choose whether the transformation itself is performed on the load or not.
 
@@ -88,9 +92,9 @@ Clicking the **Create** button will get you the connection credentials:
 
 Choose how the data will be loaded and processed:
 
- - *Load input tables only* -- load the tables specified in the input mapping; 
- - *Prepare transformation* -- execute [transformation dependencies](/manipulation/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies); and
- - *Execute transformation without writing to Storage API* -- this is a dry-run for validation.
+ - *Load input tables only* --- load the tables specified in the input mapping; 
+ - *Prepare transformation* --- execute [transformation dependencies](/manipulation/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies); and
+ - *Execute transformation without writing to Storage API* --- this is a dry-run for validation.
  
 Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page. 
 
@@ -98,26 +102,29 @@ Once the sandbox is ready, you will get a notification. Or, watch the progress o
 
 ## Additional Sandbox Actions
 
-Except loading data, sandbox supports several other basic actions. To access them, go to the **Transformations** section 
-and click the **Sandbox** button at the top.
+Except loading data, sandbox supports several other basic actions. 
+To access them, go to the **Transformations** section and click the **Sandbox** button at the top.
 
-  - *Connect* (MySQL and Snowflake only) -- Connect to the sandbox using a web SQL client. 
-  - *SSL* (MySQL and Redshift only) -- Show secure connection information.
-  - *Refresh privileges* (Redshift only) -- REVOKE and GRANT privileges on tables and schemas to the current Redshift user. Because  Redshift privileges are granted on a per-table basis, tables created later than the current user are not available unless you refresh the privileges.
-  - *Drop Sandbox* -- Deletes the sandbox database (and all its tables)
+  - *Connect* (MySQL and Snowflake only) --- Connect to the sandbox using a web SQL client. 
+  - *SSL* (MySQL and Redshift only) --- Show secure connection information.
+  - *Refresh privileges* (Redshift only) --- REVOKE and GRANT privileges on tables and schemas to the current Redshift user. Because  Redshift privileges are granted on a per-table basis, tables created later than the current user are not available unless you refresh the privileges.
+  - *Drop Sandbox* --- Deletes the sandbox database (and all its tables)
 
-In the same place you can also see the sandbox connection credentials. To copy & paste individual values, use the *copy icon*:
+In the same place you can also see the sandbox connection credentials. To copy & paste individual values, 
+use the *copy icon*:
 
 {: .image-popup}
 ![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-3.png)
 
 ## Backend Specifics
 
-Even though sandboxes with different backends are very similar, let's take a look at a few specifics that are mostly related to access management.
+Even though sandboxes with different backends are very similar, let's take a look at a few specifics 
+that are mostly related to access management.
 
 ### MySQL Sandbox
 
-For a single user, MySQL credentials are shared within all projects. Each project sandbox is represented as a database assigned to the user. 
+For a single user, MySQL credentials are shared within all projects. 
+Each project sandbox is represented as a database assigned to the user. 
 The user and password remain the same until you delete all MySQL sandboxes in all your projects.  
 
 For instance, `user_4` can have assigned the `sand_232_3800`, `sand_258_3849` and `sand_1067_46400` databases. 
@@ -168,11 +175,12 @@ To establish a secure connection to a Redshift sandbox, follow the
 #### Direct Access to Storage Tables
 
 In a Redshift sandbox, you have native access to all Redshift buckets in the project. 
-You can easily access a table in Storage using schema/bucket namespacing. For example: `SELECT * FROM "in.c-main"."mytable"`. 
+You can easily access a table in Storage using schema/bucket namespacing. 
+For example: `SELECT * FROM "in.c-main"."mytable"`. 
 Use double quotes, as the schema (= bucket) name always contains a dot.
    
 We do not recommend working with Storage tables directly in your SQL code. 
-Always use input mapping to bring tables to your schema. 
+Always use the input mapping to bring tables to your schema. 
 This adds another level of security and features to your transformation. 
 
 #### Version

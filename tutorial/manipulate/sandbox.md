@@ -3,11 +3,13 @@ title: Using Sandbox
 permalink: /tutorial/manipulate/sandbox/
 ---
 
-An important part of [setting up a transformation](/tutorial/manipulate/) is the SQL (or R or Python) script itself. 
-To make writing of these scripts easier for you, we provide the *Sandbox* functionality.
+An important part of [setting up a transformation](/tutorial/manipulate/) is 
+the SQL (or R or Python) script itself. 
+To make writing of these scripts easier for you, we provide the *Sandbox* functionality. 
 
 As a separate database storage, Sandbox allows you to run arbitrary SQL scripts on the
-**copies** of your tables without affecting data in your Storage, or your transformations. 
+**copies** of your tables without affecting data in your Storage, or your transformations.
+Learn more about Sandbox [here](/manipulation/transformations/sandbox/). 
 
 Let's create a Sandbox from the Transformations page:
 
@@ -31,3 +33,4 @@ Your sandbox might be deleted after 7 days of inactivity; make sure not to use i
 
 When happy with the outcomes of your SQL queries, go back to [transformations](/tutorial/manipulate/) 
 and paste the queries into the transformation script.  
+

@@ -32,8 +32,9 @@ Mapping creates a secure workspace with data copied from the tables specified in
 are automatically quoted by KBC. This is especially important for Snowflake, which is case sensitive.*
 
 ## Backends
-A backend is the engine running the transformation script. It is either a database server (MySQL, Redshift,
-Snowflake) or a language interpreter (R, Python).
+A backend is the engine running the transformation script. It is either a database server 
+[MySQL](http://www.mysql.com/), [Redshift](https://aws.amazon.com/redshift/), 
+and [Snowflake](http://www.snowflake.net/), or a language interpreter ([R](https://www.r-project.org/about.html), [Python](https://www.python.org/about/)).
 
 How to decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better 
 for joining tables, filtering data,grouping and simple aggregations. Script languages are more suitable 

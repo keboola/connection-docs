@@ -29,34 +29,36 @@ They can be pretty much anything from GoogleAnalytics, Facebook, SalesForce to o
 legacy systems or even appliances and IoT devices. Data sources are not part of KBC.
 
 ### Extractors
-[*Extractors*](/extractors/) are KBC components used for gathering data from sources. 
+[Extractors](/extractors/) are KBC components used for gathering data from sources. 
 Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
 services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
 
 ### Storage
-[*Storage*](/storage/) is the central KBC component managing everything related to storing data and accessing it.
+[Storage](/storage/) is the central KBC component managing everything related to storing data and accessing it.
 It has two sections: [File Storage](/storage/file-uploads/) with all raw files uploaded 
 to your project, and [Table Storage](/storage/tables/) where all data tables are organized 
 into buckets which are further organized into *in* and *out* stages.
 
-Storage is implemented as a layer on top of various database engines that we use as our *backends* ([MySQL](https://www.mysql.com/),
+Storage is implemented as a layer on top of various database engines that we use as our [backends](/manipulation/transformations/#backends) ([MySQL](https://www.mysql.com/),
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)). 
 It provides an important API (Storage API) access for other KBC components and 3rd party applications. 
 Your own **remote storage** can be connected to KBC as well.
 
 ### Data Manipulation
-There are two ways how data in KBC can be [manipulated](/manipulation/): via [Transformations](/manipulation/transformations/) 
-(simpler) and Applications (not as simple but more powerful). Both pick data from Storage, manipulate it and then store it back. 
+There are two ways how data in KBC can be [manipulated](/manipulation/): via **Transformations** (simpler) 
+and **Applications** (not as simple but more powerful). 
+Both pick data from Storage, manipulate it and then store it back. 
 
 #### Transformations
-Transformations can be created by writing a **free-form script** in
+[Transformations](/manipulation/transformations/) can be created by writing a **free-form script** in
 [SQL](https://en.wikipedia.org/wiki/SQL) (MySQL, Redshift), [R](https://www.r-project.org/about.html) and
 [Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments. 
 
 #### Applications
-Unlike the free-form Transformations, Applications are **predefined blocks** which can be used to do some pretty
-advanced stuff like sentiment analysis, association discovery, or histogram grouping.
-Applications can also augment data (for example, add Weather or Exchange Rates) by calling on *3rd party services* to bring in additional data. 
+Unlike the free-form Transformations, [Applications](/manipulation/applications/) are **predefined blocks**, which 
+can be used to do some pretty advanced stuff like sentiment analysis, association discovery, or histogram grouping.
+Applications can also augment data (for example, add Weather or Exchange Rates) by calling on *3rd party services*
+to bring in additional data. 
 All applications are **implemented as extensions** (see below) and as such can be completely created by 3rd party developers.
 
 ### Extensions

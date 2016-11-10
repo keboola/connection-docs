@@ -12,7 +12,7 @@ Before you start, make sure you have **basic knowledge of** [SQL](https://en.wik
 or ping us on [sales@keboola.com](mailto:sales@keboola.com).
 
 If developing KBC components is the only reason you need a project for, apply for a
-[development project](https://developers.keboola.com/overview/devel-project/).
+[development project](https://developers.keboola.com/#development-project).
 
 ## Get Going
 Follow these three basic steps of our tutorial to get going as quickly as possible:
