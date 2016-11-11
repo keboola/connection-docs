@@ -6,15 +6,15 @@ permalink: /management/project-export/
 * TOC
 {:toc}
 
-Using the **Data Takeout** feature, it is possible to export the entire contents of your project. 
-It can come in handy when 
+Using the **Data Takeout** feature, it is possible to export the entire contents of your project.
+It can come in handy when
 
-- making a snapshot of your entire project for any purpose, 
+- making a snapshot of your entire project for any purpose,
 - terminating the project without loosing any data,
-- doing project POCs and keeping them for reference after they have ended, or 
+- doing project POCs and keeping them for reference after they have ended, or
 - leaving us.
 
-**Important**: Do not confuse this feature with the project backup. 
+**Important**: Do not confuse this feature with the project backup.
 Takeout data *cannot* be automatically imported into KBC (recovering a project must be done by KBC Support).
 
 Things to have before you start:
@@ -24,20 +24,20 @@ Things to have before you start:
 
 ## Prepare Project
 We strongly recommend that you create a dedicated user with a dedicated bucket to
-prevent an accidental leak of credentials or your project management.  
+prevent an accidental leak of credentials or your project management.
 
 - **Create an S3 Bucket** following the [Amazon documentation](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html).
 Name it *keboola-data-takeout*, for example, and choose the region suitable with your Amazon subscription.
-If unsure, choose *US Standard (N. Virginia)*.  
+If unsure, choose *US Standard (N. Virginia)*.
 
-- **Create an IAM User** (Identity and Access Management) following the [Amazon documentation](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console). 
+- **Create an IAM User** (Identity and Access Management) following the [Amazon documentation](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
 You get an *Access Key ID* and *Secret Access Key* with the new user. You can always regenerate them in the IAM Management Console:
 
 {: .image-popup}
 ![Screenshot - AWS IAM Management Console](/management/project-export/aws-user-credentials.png)
 
 
-- **Create and Assign a User Policy** -- In Amazon IAM, select *Users* and user *data-takeout*. 
+- **Create and Assign a User Policy** -- In Amazon IAM, select *Users* and user *data-takeout*.
 Then create a new *Inline policy* in the *Permissions* tab:
 
 {: .image-popup}
@@ -88,27 +88,27 @@ Now fill the *Access Key ID*, *Secret Access Key*, *S3 Region* and *S3 Bucket na
 {: .image-popup}
 ![Screenshot - Data Takeout](/management/project-export/data-takeout-settings.png)
 
-You can also configure the path inside the S3 bucket. For instance, set the path to `my-take/` and the data will be stored in `s3://keboola-data-takeout/my-take/`. 
-To store the export in the bucket root, leave the path empty. 
+You can also configure the path inside the S3 bucket. For instance, set the path to `my-take/` and the data will be stored in `s3://keboola-data-takeout/my-take/`.
+To store the export in the bucket root, leave the path empty.
 
-**Important**: The existing files will be overwritten. 
-Optionally, you can select to export project structure only and no actual data will be exported.  
+**Important**: The existing files will be overwritten.
+Optionally, you can select to export project structure only and no actual data will be exported.
 
 {: .image-popup}
-![Screenshot - Data Takeout](/overview/tutorial/management/data-takeout.png)
+![Screenshot - Data Takeout](/tutorial/management/data-takeout.png)
 
 When ready, **Run Export**:
 
 {: .image-popup}
 ![Screenshot - Data Takeout Run](/management/project-export/data-takeout-project-export.png)
 
-To monitor the progress of the data export, click the *Export started* link. 
+To monitor the progress of the data export, click the *Export started* link.
 The data takeout may take a considerable amount of time if your project is large.
 
-## Exported Data  
+## Exported Data
 The exported project has the following general structure:
 
-- `buckets.json` -- all buckets in the project and their metadata 
+- `buckets.json` -- all buckets in the project and their metadata
 - `tables.json` -- all tables in the project and their metadata (bucket, columns, description, etc.).
 Table aliases are not exported.
 - `configurations.json` -- all components used in the project and *main properties* of their configurations
@@ -121,14 +121,14 @@ These also contain definitions of all your transformation queries.
 {: .image-popup}
 ![Screenshot - Sample Folder Structure](/management/project-export/folder-structure.png)
 
-If you tick the `Export project structure only` checkbox when exporting, no actual data will be exported. 
+If you tick the `Export project structure only` checkbox when exporting, no actual data will be exported.
 Only configurations and `sys` tables as configurations of legacy components will be exported.
 
 ## Security Considerations
-1. The *Data Takeout* tool will overwrite existing files in your S3 bucket (no files will be deleted though).  
+1. The *Data Takeout* tool will overwrite existing files in your S3 bucket (no files will be deleted though).
 Make sure your S3 bucket is **empty**, or use an appropriate **S3 path**.
 
 2. If your configurations contain encrypted values (such as password to database server), these
-values will be exported encrypted. **Exported encrypted values cannot be decrypted**.  
+values will be exported encrypted. **Exported encrypted values cannot be decrypted**.
 
 3. Once the files are written to your S3 bucket, make sure they are kept safely and only **authorized** persons can access them. Also, **deactivate** the AWS Key.

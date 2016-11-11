@@ -12,7 +12,7 @@ R transformations complement Python and SQL transformations (MySQL or Redshift) 
 Common operations with data like joining, sorting, and grouping are still easier and faster to do in [SQL Transformations](/manipulation/transformations/).
 
 ## Environment
-The R script is running in an isolated [Docker environment](https://developers.keboola.com/overview/docker-bundle/).
+The R script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
 The current R version is R 3.2.1.
 
 ### Memory and Processing Constraints

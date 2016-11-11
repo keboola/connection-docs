@@ -6,10 +6,10 @@ permalink: /manipulation/transformations/r/plots/
 * TOC
 {:toc}
 
-Generating plots in R is supported through [Storage file uploads](/storage/file-uploads/). To upload a plot to Storage, 
-save the file in the output directory for files (`out/files/`). Each file in that directory will be automatically saved into Storage File Uploads. 
+Generating plots in R is supported through [Storage file uploads](/storage/file-uploads/). To upload a plot to Storage,
+save the file in the output directory for files (`out/files/`). Each file in that directory will be automatically saved into Storage File Uploads.
 
-To make file handling a bit easier, it is possible to write a *manifest*, which describes the file. This can be used to set *file tags* 
+To make file handling a bit easier, it is possible to write a *manifest*, which describes the file. This can be used to set *file tags*
 and other file upload options. To write the manifest, use the `app$writeFileManifest` function with the following signature:
 
 {% highlight r %}
@@ -25,7 +25,7 @@ In the following **examples**, use the sample [graph-source.csv](/manipulation/t
 
 ## Example 1 -- Output of a single file
 
-Create a [new R transformation](/overview/tutorial/manipulate/), and add the **graph-source** table 
+Create a [new R transformation](/tutorial/manipulate/), and add the **graph-source** table
 in the input mapping. There is no output mapping.
 
 {: .image-popup}
@@ -57,11 +57,11 @@ Because the `lm.plot` function produces multiple plots, the above example plots 
 single image using a 2x2 grid.
 
 {: .image-popup}
-![Result linear model plots](/manipulation/transformations/r/graph_2x2.png) 
+![Result linear model plots](/manipulation/transformations/r/graph_2x2.png)
 
 ## Example 2 -- Output of multiple files
 Use the following script the same way as in Example 1. The only difference is that this script
-produces multiple files. 
+produces multiple files.
 
 {% highlight r %}
 data <- read.csv("/data/in/tables/graph-source.csv")
@@ -77,20 +77,20 @@ app$writeFileManifest("/data/out/files/graph-3.png", c("regression", "scale-loca
 app$writeFileManifest("/data/out/files/graph-4.png", c("regression", "residuals vs. leverage"))
 {% endhighlight %}
 
-If a plot function produces multiple graphs, like the `lm.plot` in the above example, use `%d` in the file name in order to generate multiple files. 
+If a plot function produces multiple graphs, like the `lm.plot` in the above example, use `%d` in the file name in order to generate multiple files.
 A manifest is written for each file individually.
 
 ## Example 3 -- Using ggplot
 
-If you want to use the [ggplot](http://docs.ggplot2.org/current/) package, use a different function for saving a file in your script. 
+If you want to use the [ggplot](http://docs.ggplot2.org/current/) package, use a different function for saving a file in your script.
 The rest remains the same as in the previous examples.
 
 {% highlight r %}
 library(ggplot2)
 data <- read.csv("/data/in/tables/graph-source.csv")
 
-plot <- ggplot(data, aes(y = time_spent_in_shop, x = customer_age)) + 
-    geom_point(shape = 1) + 
+plot <- ggplot(data, aes(y = time_spent_in_shop, x = customer_age)) +
+    geom_point(shape = 1) +
     stat_smooth(method = "lm", formula = y ~ x + I(x^2), size = 1)
 ggsave(filename = "/data/out/files/graph2.png", width = 10, height = 10, units = "cm")
 
