@@ -8,7 +8,7 @@ permalink: /manipulation/transformations/snowflake/
 
 [Snowflake](http://www.snowflake.net/) has many advantages:
 
-- No database administration 
+- No database administration
 - No indexes, sort keys, distribution styles, or column compressions
 - Easy scaling
 - Simple data types
@@ -24,13 +24,13 @@ Snowflake queries are **limited** to 3,600 seconds by default.
 ## Best Practices
 
 ### Case Sensitivity
-Unlike Redshift or MySQL, Snowflake is case sensitive. All unquoted table/column names are converted to upper case 
-while quoted names keep their case. 
+Unlike Redshift or MySQL, Snowflake is case sensitive. All unquoted table/column names are converted to upper case
+while quoted names keep their case.
 
 So if you want to create the following table,
 
 {% highlight sql %}
--- creates table FOOTABLE 
+-- creates table FOOTABLE
 CREATE TABLE footable (...);
 {% endhighlight %}
 
@@ -49,14 +49,14 @@ while this one will not:
 SELECT * FROM "footable";
 {% endhighlight %}
 
-Be especially careful when setting up [input and output mappings](/manipulation/transformations/mappings/). 
-In the KBC UI, it is necessary to enter all table names using the exact casing 
-because all table names referenced by mappings are automatically quoted by KBC. 
+Be especially careful when setting up [input and output mappings](/manipulation/transformations/mappings/).
+In the KBC UI, it is necessary to enter all table names using the exact casing
+because all table names referenced by mappings are automatically quoted by KBC.
 
-When writing your transformation script, we recommend quoting all table names as well. 
+When writing your transformation script, we recommend quoting all table names as well.
 
 ### Timestamp Columns
-By default, Snowflake uses the 
+By default, Snowflake uses the
 [`DY, DD MON YYYY HH24:MI:SS TZHTZM` format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
 when converting the timestamp column to a character string.
 
@@ -87,7 +87,8 @@ requiring you to distinguish between various conversion functions:
 
 {% highlight sql %}
 SELECT
-    TO_TIMESTAMP_NTZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'); -- yields 2013-03-10 02:12:00.000 +0000
-    TO_TIMESTAMP_TZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');  -- yields 2013-03-10 03:12:00.000 -0700
+    TO_TIMESTAMP_NTZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'), -- yields 2013-03-10 02:12:00.000 +0000
+    TO_TIMESTAMP_TZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'),  -- yields 2013-03-10 03:12:00.000 -0700
     TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');     -- yields 2013-03-10 03:12:00.000 -0700
+
 {% endhighlight %}
