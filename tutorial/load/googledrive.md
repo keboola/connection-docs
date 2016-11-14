@@ -3,7 +3,7 @@ title: Loading Data with GoogleDrive Extractor
 permalink: /tutorial/load/googledrive/
 ---
 
-In the [previous step](/tutorial/load/), you learned how to quickly load data into KBC using manual import.
+In the [previous step](/tutorial/load/), you learned how to quickly load data into KBC using [manual import](/tutorial/load/).
 In real production projects, this is seldom used as most of the data is obtained automatically using *extractors*.
 In this part of the tutorial, you will use a Google Drive extractor to load data from an external data sheet.
 

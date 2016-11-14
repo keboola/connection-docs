@@ -63,7 +63,7 @@ repeat the process for the other three tables (create configuration, change dest
 
 {: .image-popup}
 ![Screenshot -- Upload CSV file progress](/tutorial/load/csv-import-upload.png)
-
+	
 That's it. You should now have four tables with sample data stored in your KBC project:
 
 - `in.c-tutorial.opportunity`

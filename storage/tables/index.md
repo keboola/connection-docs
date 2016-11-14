@@ -6,15 +6,15 @@ permalink: /storage/tables/
 * TOC
 {:toc}
 
-Your project table storage is available in the *Tables* tab in the *Storage* section. All data tables are organized into
-*buckets* which are further organized into the following three *stages*:
+Your project table storage is available in the **Tables** tab in the Storage section. 
+All **data tables are organized into buckets**, which are further organized into the following three **stages**:
 
-- **in** - for input data (usually extractor results)
-- **out** - for processed data (usually results of transformations or applications)
-- **sys** - deprecated stage used for configuration of some components
+- **in** --- for input data (usually extractor results)
+- **out** --- for processed data (usually results of transformations or applications)
+- **sys** --- deprecated stage used for configuration of some components
 
 The distinction between the input and output stage is purely conventional differentiation between raw and processed data.
-When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#backends) based on its properties.
+When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#backend-properties) based on its properties.
 For information on how to load data into Storage, see the corresponding part of our [tutorial](/tutorial/load/).
 
 {: .image-popup}

@@ -9,7 +9,7 @@ redirect_from:
 At this point, you already know how to quickly [load data into KBC](/tutorial/load/),
 and your *in.c-tutorial* [table bucket](/storage/tables/) contains four new tables: 
 *account*, *opportunity*, *level* and *user*. 
-In this part of the tutorial, we will show you how to manipulate data in Storage using Transformations. 
+In this part of the tutorial, we will show you how to manipulate data in Storage using [Transformations](/manipulation/transformations/). 
 Let's create a denormalized table from the input tables and do some minor modifications to it.
 
 * TOC
@@ -39,9 +39,9 @@ Name your transformation *Denormalize opportunities*, and choose the *MySQL* bac
 
 When you create a transformation, you need to set up 
 
-1. [**Input Mapping**](/tutorial/manipulate/#input-mapping) — what tables will be used in your transformation; 
+1. [**Input Mapping**](/manipulation/transformations/mappings/#input-mapping) — what tables will be used in your transformation; 
 tables not mentioned in Input Mapping cannot be used in the transformation. 
-2. [**Output Mapping**](/tutorial/manipulate/#output-mapping) — what tables will be written into Storage; 
+2. [**Output Mapping**](/manipulation/transformations/#output-mapping) — what tables will be written into Storage; 
 tables not mentioned in Output Mapping will never be modified nor permanently stored (i.e. they are temporary). 
 3. [**Transformation Script**](/tutorial/manipulate/#transformation-script) — SQL queries defining 
 what will happen with the data; it takes the tables from Input Mapping, modifies them 
