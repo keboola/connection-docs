@@ -92,7 +92,7 @@ You can also configure the path inside the S3 bucket. For instance, set the path
 To store the export in the bucket root, leave the path empty.
 
 **Important**: The existing files will be overwritten.
-Optionally, you can select to export project structure only and no actual data will be exported.
+Optionally, you can select to export the project structure only and no actual data will be exported.
 
 {: .image-popup}
 ![Screenshot - Data Takeout](/tutorial/management/data-takeout.png)
@@ -108,13 +108,13 @@ The data takeout may take a considerable amount of time if your project is large
 ## Exported Data
 The exported project has the following general structure:
 
-- `buckets.json` -- all buckets in the project and their metadata
-- `tables.json` -- all tables in the project and their metadata (bucket, columns, description, etc.).
+- `buckets.json` --- all buckets in the project and their metadata
+- `tables.json` --- all tables in the project and their metadata (bucket, columns, description, etc.).
 Table aliases are not exported.
-- `configurations.json` -- all components used in the project and *main properties* of their configurations
-- `/in/`, `/out/` and `/sys/` folders -- all project tables in the CSV format (compressed with
+- `configurations.json` --- all components used in the project and *main properties* of their configurations
+- `/in/`, `/out/` and `/sys/` folders --- all project tables in the CSV format (compressed with
 [gzip](http://www.gzip.org/)). **Important**: `sys` tables contain only configuration of older components and may not be present in your project.
-- /configurations/ -- all configurations created in the project organized by component names into folder.
+- /configurations/ --- all configurations created in the project organized by component names into folder.
 Each configuration lists *all properties* (including configuration rows) and *all versions* of each configuration.
 These also contain definitions of all your transformation queries.
 

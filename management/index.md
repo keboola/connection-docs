@@ -3,7 +3,7 @@ title: Management
 permalink: /management/
 ---
 
-Everything you do in KBC must take place within a KBC **Project**,the basic organizational unit. 
+Everything you do in KBC must take place within a KBC **Project**, the basic organizational unit. 
 Projects are grouped into **Organizations**, and organizations are assigned to **Maintainers**. A maintainer is usually a Keboola Partner. 
 
 A brief overview of the project management features is available in our [tutorial](/tutorial/management/).
