@@ -134,6 +134,9 @@ items:
   - url: /management/
     title: Project Management
     items:
+      - url: /management/users/
+        title: Users
+
       - url: /management/project-export/
         title: Data Takeout
 

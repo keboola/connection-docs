@@ -75,8 +75,7 @@ We won't be happy about it, but we are never going to prevent you from doing so.
 ## User Management
 Apart from Data Takeout, the **Users & Settings** link in the bottom left corner of your screen allows you to add
 other **Administrators** to your project. These are full-fledged trusted users that also count to your project quota.
-Invite a user by entering their email address. If they already have an account in KBC, they will receive an email message.
-If they don't, an invitation will be sent to them. They can log into KBC with the help of a wizard.
+You can [invite a user](/management/users/) by entering their email address.
 
 {: .image-popup}
 ![Screenshot - Project Administrators](/tutorial/management/administrators.png)

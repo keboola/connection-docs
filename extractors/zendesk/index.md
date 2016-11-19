@@ -6,7 +6,7 @@ permalink: /extractors/zendesk/
 * TOC
 {:toc}
 
-This extractor fetches data from [Zendesk](link https://www.zendesk.com/).
+This extractor fetches data from [Zendesk](https://www.zendesk.com/).
 
 
 ## Configuring Extractor
@@ -14,7 +14,7 @@ Before you start, have a working Zendesk account and get an API Token.
 
 ### Create New Application API Token
 
-Log in to your account on the [Zendesk](link https://www.zendesk.com/) site.
+Log in to your account on the [Zendesk](https://www.zendesk.com/) site.
 
 Go to **Admin / Channels / API**, and use the **add new token** link.
 
@@ -169,7 +169,7 @@ List of created tickets
 | `status` | State (`new`, `open`, `pending`, `hold`, `solved` or `closed`) |
 | `recipient` | Recipient e-mail address |
 | `requester_pk` | Requester user identifier |
-| `submitter_pk` | Submiter user identifier |
+| `submitter_pk` | Submitter user identifier |
 | `assignee_pk` | Assigned user identifier |
 | `organization_pk` | Organization identifier |
 | `group_pk` | Group identifier |
@@ -222,7 +222,7 @@ List of conversation (comments) between requesters, collaborators, and agents
 
 ### 13 -- Tickets-comments-attachments
 
-List of uploaded comment attachments 
+List of uploaded comment attachments
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the file |
@@ -252,7 +252,7 @@ Uploaded attachment thumbnails
 
 ### 15 -- Tickets-audits
 
-Basic info about each ticket update 
+Basic info about each ticket update
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the audit |
