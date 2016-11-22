@@ -119,7 +119,7 @@ The limits displayed here are *soft limits*; you won't be charged for exceeding 
 nor will the access to your project be limited. We don't do such things.
 
 ## Final Note
-This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things --
+This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things:
 Applications, Python and R transformations, Redshift and Snowflake features, to name a few.
 However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola Connection can help in connecting different systems together.
