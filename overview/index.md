@@ -71,7 +71,7 @@ There are two types of extensions: [Custom Extensions](https://developers.kebool
 They can be created by us, our customers and 3rd parties, and can be offered also to other KBC users through our AppStore.
 
 ### Writers
-Writers are KBC components delivering output data from KBC into the systems and applications where the data gets used/consumed.
+[Writers](/tutorial/write/) are KBC components delivering output data from KBC into the systems and applications where the data gets used/consumed.
 
 ### Data Consumption
 *Data Consumption* is represented by 3rd party systems that accept (or extract) data from KBC and use it further.
