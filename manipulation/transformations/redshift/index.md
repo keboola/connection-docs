@@ -24,8 +24,8 @@ If you want to **migrate a transformation** from MySQL to Redshift, use this [hi
 There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redshift cluster to a larger size, these limits can be increased.
 
 - Redshift queries are limited to 3,600 seconds by default.
-
 - All Redshift queries are performed on the cluster assigned to your project. By default, there is a limit of five concurrent queries. Additional queries will be queued.
+- Queries containing comments longer than 8192 characters will segfault.
 
 ### Best Practices
 

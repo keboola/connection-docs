@@ -19,7 +19,9 @@ permalink: /manipulation/transformations/snowflake/
 Please [share your migration tips](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/snowflake/redshift-snowflake) with us.
 
 ## Limits
-Snowflake queries are **limited** to 3,600 seconds by default.
+
+- Snowflake queries are **limited** to 3,600 seconds by default.
+- Queries containing comments longer than 8192 characters will segfault.
 
 ## Best Practices
 
