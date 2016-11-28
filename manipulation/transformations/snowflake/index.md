@@ -76,13 +76,7 @@ CREATE TABLE "out" AS
     (SELECT TO_CHAR("ts", 'YYYY-MM-DD HH:MI:SS') AS "ts" FROM "ts_test");
 {% endhighlight %}
 
-Alternatively, you can set the [output format](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-output-format):
-
-{% highlight sql %}
-ALTER SESSION SET TIMESTAMP_OUTPUT_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
-CREATE TABLE "out" AS
-    (SELECT "ts"::varchar AS "ts" FROM "ts_test");
-{% endhighlight %}
+Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate from your transformation/sandbox session and the format may change unexpectedly. 
 
 **Important:** Snowflake works with time zones (and [Daylight Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time)),
 requiring you to distinguish between various conversion functions:
