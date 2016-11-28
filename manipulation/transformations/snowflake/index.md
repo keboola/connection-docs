@@ -83,8 +83,11 @@ requiring you to distinguish between various conversion functions:
 
 {% highlight sql %}
 SELECT
-    TO_TIMESTAMP_NTZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'), -- yields 2013-03-10 02:12:00.000 +0000
-    TO_TIMESTAMP_TZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'),  -- yields 2013-03-10 03:12:00.000 -0700
-    TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');     -- yields 2013-03-10 03:12:00.000 -0700
+    -- yields 2013-03-10 02:12:00.000 +0000
+    TO_TIMESTAMP_NTZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'), 
+    -- yields 2013-03-10 03:12:00.000 -0700
+    TO_TIMESTAMP_TZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'),  
+    -- yields 2013-03-10 03:12:00.000 -0700
+    TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');     
 
 {% endhighlight %}
