@@ -83,4 +83,5 @@ count towards your project quota.
 
 ## Limits
 Maximum allowed size of uploaded file is currently 5GB (5 368 709 120 bytes exactly). This applies to both file and table uploads. Actual
-table size may be bigger, because it is uploaded as compressed file.
+table size may be bigger, because it is uploaded as compressed file. If you need to upload a larger file, you need to use 
+[sliced upload](https://docs.keboola.apiary.io/#reference/files/upload-file). In that case, the limit applies to the chunk size.
