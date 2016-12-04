@@ -14,7 +14,7 @@ To be able to work with KBC, each user needs
 Once users can access a project, they gain full administrative access to that project. 
 Each user is, system-wide, **identified by their email address**.
 This means that you need to enter correct email addresses for existing users. 
-Be especially careful about company aliases; from KBC point of view, they are different users.
+Be especially careful about company aliases; from KBC's point of view, they are different users.
 
 ## Inviting a User
 If you want to add a new user to the project, go to the **Users & Settings** page in the project and 
@@ -160,13 +160,13 @@ You can review the state of MFA for any user in the user list:
 
 ### Keboola Users
 When requested, Keboola employees may join your project without being formally invited by you through the *Users & Setting* page.
-Keboola employees may enter your project only in response to a support ticket and they are marked by the Keboola badge:
+They may enter your project only in response to a support ticket and they are marked by the Keboola badge:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/users/users-list-5.png)
 
-Keboola Support users are always expiring accounts, have a reason to enter the project and they have MFA enabled. 
-Keboola Support users do not count towards the project limits.
+Keboola Support users are always accounts that expire, they have a reason to enter the project and have MFA enabled. 
+They do not count towards the project limits.
 
 ## Authorization
 All users listed in the *Users & Settings* page are project administrators which means they can do all operations
