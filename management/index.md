@@ -38,7 +38,7 @@ There are two types of [KBC project users](/management/users/):
 sending data directly to your KBC project. The access can be revoked.
 
 ### Project Status
-All important information on your [project status](/management/#project-status) can be found in the following places:
+All important information on your [project status](/tutorial/management/#project-status) can be found in the following places:
 
 - **Overview** --- Quick access to the basic project status.
 - **Notifications** --- Highly important messages (expiring projects,component migration, etc.); 
