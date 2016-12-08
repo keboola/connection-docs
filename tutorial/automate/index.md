@@ -16,8 +16,8 @@ However, the above steps must be done repeatedly to bring in the newest data ava
 
 Use KBC **Orchestrator**  
 
-- to specify what tasks should be executed in what order, for example orchestrate tasks, and
-- to configure the automatic execution, for instance schedule orchestrated tasks.
+- to specify what tasks should be executed in what order (orchestrate tasks) and
+- to configure the automatic execution (schedule orchestrated tasks).
 
 Go to the **Orchestrations** section of KBC, and
 
