@@ -10,7 +10,7 @@ Everything you do in Keboola Connection (KBC) must take place within a KBC **Pro
 All projects are grouped into **Organizations**, and organizations are assigned to **Maintainers**. 
 A maintainer is usually a Keboola Partner.
 
-Some KBC project management features related to data and users are also covered in our [**tutorial**](/tutorial/management/).
+*Some KBC project management features related to data and users are also covered in our [**tutorial**](/tutorial/management/).*
 
 {% comment %}
 notifikace
