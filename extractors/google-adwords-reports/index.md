@@ -1,6 +1,6 @@
 ---
 title: Google AdWords Reports
-permalink: /extractors/google-adwords-reports/
+permalink: /extractors/marketing-sales/google-adwords-reports/
 ---
 
 * TOC

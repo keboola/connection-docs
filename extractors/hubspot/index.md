@@ -1,6 +1,6 @@
 ---
 title: HubSpot
-permalink: /extractors/hubspot/
+permalink: /extractors/marketing-sales/hubspot/
 ---
 
 * TOC

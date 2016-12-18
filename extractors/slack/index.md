@@ -1,6 +1,6 @@
 ---
 title: Slack
-permalink: /extractors/slack/
+permalink: /extractors/communication/slack/
 ---
 
 Slack extractor allows you to fetch data from [Slack](https://slack.com/).
@@ -18,6 +18,6 @@ Choose some meaningful name (you can change it anytime later) of configuration a
 
 
 {: .image-popup}
-![Slack New Configuration](/extractors/slack/01-new-configuration.png)
+![Slack New Configuration](/extractors/communication/slack/01-new-configuration.png)
 
 *** to be done ***

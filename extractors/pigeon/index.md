@@ -1,6 +1,6 @@
 ---
 title: Pigeon Importer
-permalink: /extractors/pigeon/
+permalink: /extractors/communication/pigeon/
 ---
 
 Pigeon Importer allows you to import data from e-mail attachments to KBC. 

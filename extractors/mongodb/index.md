@@ -1,14 +1,14 @@
 ---
 title: MongoDB
-permalink: /extractors/mongodb/
+permalink: /extractors/database/mongodb/
 redirect_from:
-  - /extractors/database/mongodb/
+  - /extractors/mongodb/
 ---
 
 * TOC
 {:toc}
 
-The MongoDB extractor allows you to fetch data from the [MongoDB database](https://www.mongodb.com/).
+The MongoDB extractor allows you to fetch data from the NoSQL [MongoDB database](https://www.mongodb.com/).
 Complete the following steps to configure it.
 
 ## Create New Configuration

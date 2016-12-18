@@ -1,6 +1,6 @@
 ---
 title: Twitter
-permalink: /extractors/twitter/
+permalink: /extractors/social/twitter/
 ---
 
 * TOC

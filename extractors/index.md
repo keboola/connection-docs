@@ -38,8 +38,8 @@ mohli by byt podstejnou slozkou
 - alternativne bysme mohli mit neco jako
 
 extractors
-- generic databases (databazovy extractor, )
 - information systems (salesforce, appanie)
+- generic databases (databazovy extractor, )
 - social services (youtube, facebook, twitter)
 - other services (generic extractor)
 

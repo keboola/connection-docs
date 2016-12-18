@@ -1,6 +1,6 @@
 ---
 title: Google Analytics
-permalink: /extractors/google-analytics/
+permalink: /extractors/marketing-sales/google-analytics/
 ---
 
 * TOC
@@ -36,7 +36,7 @@ and provides the following key features:
 
  3. Select Google Analytics account and choose profiles (views) from which you would like to extract data. 
 
-    ![Screenshot - Select profiles](/extractors/google-analytics/ui_profiles.png)
+    ![Screenshot - Select profiles](/extractors/ui_profiles.png)
     {: .image-popup}
 
 ## Create New Query
@@ -59,7 +59,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
  
  8. To store the results to Storage, click the "play" icon on the query list page.
  
- ![Screenshot - Create New Query](/extractors/google-analytics/ui_new_query.png)
+ ![Screenshot - Create New Query](/extractors/ui_new_query.png)
  {: .image-popup}
 
 ## Date Ranges
@@ -92,6 +92,6 @@ Insert the dimension or metric ID in the format of `ga:metricXX` or `ga:dimensio
 
 You can find the IDs on the Google Analytics page:
 
-![Screenshot - Custom metric ID](/extractors/google-analytics/ga_custom_metrics.png)
+![Screenshot - Custom metric ID](/extractors/ga_custom_metrics.png)
  {: .image-popup}
 

@@ -1,6 +1,6 @@
 ---
 title: Pingdom
-permalink: /extractors/pingdom/
+permalink: /extractors/other/pingdom/
 ---
 
 * TOC

@@ -1,6 +1,6 @@
 ---
 title: Gmail
-permalink: /extractors/gmail/
+permalink: /extractors/communication/gmail/
 ---
 
 * TOC

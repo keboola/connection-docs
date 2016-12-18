@@ -1,7 +1,8 @@
 ---
 title: Geocoding Augmentation
-permalink: /extractors/geocoding-augmentation/
+permalink: /extractors/other/geocoding-augmentation/
 redirect_from:
+  - /extractors/geocoding-augmentation/
   - /extractors/geocoding-augumentation/
 ---
 

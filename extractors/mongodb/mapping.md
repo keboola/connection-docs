@@ -1,6 +1,6 @@
 ---
 title: Mapping Examples
-permalink: /extractors/mongodb/mapping/
+permalink: /extractors/database/mongodb/mapping/
 ---
 
 * TOC

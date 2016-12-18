@@ -1,6 +1,6 @@
 ---
 title: Zendesk
-permalink: /extractors/zendesk/
+permalink: /extractors/communication/zendesk/
 ---
 
 * TOC
