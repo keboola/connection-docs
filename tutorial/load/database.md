@@ -38,7 +38,7 @@ Now, set up credentials to the source database. Set
 - **Host** to `datagirls.keboola.com`,
 - **Port** to `3306`, and
 - **Username**, **Password** and **Database** to `datagirls`.
-[_Curious who are Datagirls?_](https://www.facebook.com/datagirls/)
+[_Wondering who Datagirls are?_](https://www.facebook.com/datagirls/)
 
 Test the credentials and save them.
 
