@@ -3,6 +3,8 @@ title: SQL Databases
 permalink: /extractors/database/sqldb/
 ---
 
+*All extractors for SQL databases are configured in the same way.*
+*See our [tutorial](/tutorial/load/database/) for help.*
 
 ## Database Extractor Configuration
 After creating a new configuration, and setting up database credentials, 
