@@ -1,5 +1,5 @@
 ---
-title: Database
+title: Databases
 permalink: /extractors/database/
 ---
 

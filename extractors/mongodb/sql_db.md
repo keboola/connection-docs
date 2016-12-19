@@ -3,6 +3,7 @@ title: SQL Databases
 permalink: /extractors/database/sqldb/
 ---
 
+
 ## Database Extractor Configuration
 After creating a new configuration, and setting up database credentials, 
 specify individual queries for importing data from your server into KBC Storage: 

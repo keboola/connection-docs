@@ -1,7 +1,10 @@
 items:
+  - url: /
+    title: Home
+
   - url: /overview/
     title: Kebooola Overview
-    items:
+    
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
