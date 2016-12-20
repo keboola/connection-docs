@@ -15,7 +15,7 @@ They can also connect directly to an arbitrary database, or, for instance, proce
 
 Extractors can be grouped by their primary purpose: 
 
-- Extractors for [SQL databases](/extractors/database/sqldb/) and [NoSQL MongoDB](/extractors/database/mongodb/))
+- Extractors for [SQL databases](/extractors/database/sqldb/) and [NoSQL MongoDB](/extractors/database/mongodb/)
 - Extractors supporting [communication](/extractors/communication/), [social interaction](/extractors/social/), and [marketing and sales](/extractors/marketing-sales/)
 - [Other](/extractors/other/) extractors
 
