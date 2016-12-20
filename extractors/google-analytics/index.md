@@ -1,6 +1,8 @@
 ---
 title: Google Analytics
 permalink: /extractors/marketing-sales/google-analytics/
+redirect_from:
+  - /extractors/google-analytics/
 ---
 
 * TOC

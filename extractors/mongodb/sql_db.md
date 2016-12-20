@@ -1,5 +1,5 @@
 ---
-title: SQL Databases
+title: Extractors for SQL Databases
 permalink: /extractors/database/sqldb/
 ---
 

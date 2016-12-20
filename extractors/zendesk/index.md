@@ -1,6 +1,8 @@
 ---
 title: Zendesk
 permalink: /extractors/communication/zendesk/
+redirect_from:
+  - /extractors/zendesk/
 ---
 
 * TOC
