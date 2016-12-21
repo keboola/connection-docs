@@ -15,8 +15,9 @@ They can also connect directly to an arbitrary database, or, for instance, proce
 
 Extractors can be grouped by their primary purpose: 
 
-- Extractors for [SQL databases](/extractors/database/sqldb/) and [NoSQL MongoDB](/extractors/database/mongodb/)
-- Extractors supporting [communication](/extractors/communication/), [social interaction](/extractors/social/), and [marketing and sales](/extractors/marketing-sales/)
+- Database extractors: [SQL Databases](/extractors/database/sqldb/) and [NoSQL MongoDB](/extractors/database/mongodb/)
+- Extractors supporting [Communication](/extractors/communication/), 
+[Social Interaction](/extractors/social/) and [Marketing and Sales](/extractors/marketing-sales/)
 - [Other](/extractors/other/) extractors
 
 For a definitive list of usable extractors, see your project **Extractors** section. 
@@ -40,18 +41,3 @@ Such data conversion can prove to be difficult and expensive. Extract what you n
 Some extractors have **limits inherent to their sources**. Unfortunately, there is not much we can do about it. 
 For example, the Twitter extractor will not let you access the history of a particular tweet account beyond a certain point
 because of the [limitations](http://stackoverflow.com/questions/1662151/getting-historical-data-from-twitter) of Twitter API.  
-
-
-{% comment %}
-organizace podstranek
-- related veci bych dal k sobe - treba mame dva youtube extractory (pokud teda budem povazovat za svuj ten od RT) a 
-mohli by byt podstejnou slozkou
-- alternativne bysme mohli mit neco jako
-
-extractors
-- information systems (salesforce, appanie)
-- generic databases (databazovy extractor, )
-- social services (youtube, facebook, twitter)
-- other services (generic extractor)
-
-{% endcomment %}

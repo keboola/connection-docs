@@ -8,10 +8,10 @@ Some of them support social interaction, some communication, other support marke
 
 But there are extractors that do not fall into any of the above mentioned categories:
 
-- [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom; a service for monitoring the uptime and performance of your websites and web applications
+- [Pingdom Extractor](/extractors/other/pingdom/) --- imports data from Pingdom; a service for monitoring the uptime and performance of your websites and web applications
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) --- 
 provides detailed data for locations specified by their names, address or coordinates
-- [GoogleDrive](/tutorial/load/googledrive/) --- imports data from external data sheets
-- Github
-- Generic
+- [GoogleDrive Extractor](/tutorial/load/googledrive/) --- imports data from external data sheets
+- Github Extractor
+- Generic Extractor
 
