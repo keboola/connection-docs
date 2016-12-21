@@ -4,12 +4,13 @@ permalink: /extractors/communication/
 ---
 
 Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
-The following extractors support communication: 
+The following extractors support communication systems: 
 
 - [Gmail Extractor](/extractors/communication/gmail/) 
 - [Pigeon Importer](/extractors/communication/pigeon/) 
 - [Zendesk Extractor](/extractors/communication/zendesk/) 
 - Slack Extractor 
+- and others
 
 
 

@@ -9,28 +9,27 @@ permalink: /extractors/
 Extractors are [KBC components](/overview/) used for **importing data from external sources into KBC**. 
 
 ## Types of Extractors
-Typically, extractors connect to external services [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs), 
-like Facebook, Youtube, etc. 
-They can also connect directly to an arbitrary database, or, for instance, process incoming e-mails. 
+Typically, extractors connect to [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs) 
+external services, like Facebook, Youtube, Gmail and so on. 
+They can also connect directly to an arbitrary database. 
 
 Extractors can be grouped by their primary purpose: 
 
 - Database extractors: [SQL Databases](/extractors/database/sqldb/) and [NoSQL MongoDB](/extractors/database/mongodb/)
-- Extractors supporting [Communication](/extractors/communication/), 
-[Social Interaction](/extractors/social/) and [Marketing and Sales](/extractors/marketing-sales/)
-- [Other](/extractors/other/) extractors
+- [Communication](/extractors/communication/), 
+[Social Networks](/extractors/social/) and [Marketing and Sales](/extractors/marketing-sales/) extractors
+- [Other](/extractors/other/) extractors such as Geocoding-Augmentation or GoogleDrive
 
 For a definitive list of usable extractors, see your project **Extractors** section. 
 
 ## Working with Extractors
-Since each extractor connects to a different data source, their configurations might differ greatly.
-
 Even though extractors are generally designed for **automated and repeated** data collection, 
 they can be triggered manually at any time. 
 
-- For manual import of ad-hoc data, see [Data Import in Storage](/storage/), or our tutorial on [manual data loading](/tutorial/load/).
-- Configure a [sample extractor](/tutorial/load/googledrive/). 
-- Configure a [database extractor](/tutorial/load/database/).
+- For manual import of ad-hoc data, see [Data Import in Storage](/storage/file-uploads/), or our [tutorial on manual data loading](/tutorial/load/).
+- Configure a [sample extractor](/tutorial/load/googledrive/) (GoogleDrive). 
+- Configure a [MySQL extractor](/tutorial/load/database/); 
+other SQL database extractors are configured in the exact same way. 
 
 As bringing data into KBC is the main purpose of an extractor, go the path of least resistance:
 **Get your data in first, and then convert it to what you want it to look like.** 

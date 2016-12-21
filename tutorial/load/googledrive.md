@@ -1,5 +1,5 @@
 ---
-title: Loading Data with GoogleDrive Extractor
+title: Loading Data with Google Drive Extractor
 permalink: /tutorial/load/googledrive/
 ---
 
