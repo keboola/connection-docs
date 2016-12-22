@@ -1,6 +1,8 @@
 ---
 title: Twitter
-permalink: /extractors/twitter/
+permalink: /extractors/social/twitter/
+redirect_from:
+  - /extractors/twitter/
 ---
 
 * TOC

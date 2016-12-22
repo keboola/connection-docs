@@ -1,7 +1,10 @@
 items:
+  - url: /
+    title: Home
+
   - url: /overview/
     title: Kebooola Overview
-    items:
+    
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
@@ -36,40 +39,55 @@ items:
     title: Extractors
     items:
       - url: /extractors/database/
-        title: Database
-
-      - url: /extractors/geocoding-augmentation/
-        title: Geocoding Augmentation
-
-      - url: /extractors/gmail/
-        title: Gmail
-
-      - url: /extractors/google-adwords-reports/
-        title: Google AdWords Reports
-
-      - url: /extractors/google-analytics/
-        title: Google Analytics
-
-      - url: /extractors/hubspot/
-        title: HubSpot
-
-      - url: /extractors/mongodb/
-        title: MongoDB
+        title: Databases
         items:
-          - url: /extractors/mongodb/mapping/
-            title: Mapping Examples
+        - url: /extractors/database/sqldb/
+          title: SQL Databases
 
-      - url: /extractors/pingdom/
-        title: Pingdom
+        - url: /extractors/database/mongodb/
+          title: MongoDB
+          items:
+            - url: /extractors/database/mongodb/mapping/
+              title: Mapping Examples
 
-      - url: /extractors/pigeon/
-        title: Pigeon Importer
+      - url: /extractors/communication/
+        title: Communication
+        items:
+          - url: /extractors/communication/gmail/
+            title: Gmail
 
-      - url: /extractors/twitter/
-        title: Twitter
+          - url: /extractors/communication/pigeon/
+            title: Pigeon Importer
 
-      - url: /extractors/zendesk/
-        title: Zendesk
+          - url: /extractors/communication/zendesk/
+            title: Zendesk
+
+      - url: /extractors/marketing-sales/
+        title: Marketing/Sales
+        items:
+          - url: /extractors/marketing-sales/hubspot/
+            title: HubSpot
+
+          - url: /extractors/marketing-sales/google-adwords-reports/
+            title: Google AdWords Reports
+
+          - url: /extractors/marketing-sales/google-analytics/
+            title: Google Analytics
+
+      - url: /extractors/social/
+        title: Social
+        items:
+          - url: /extractors/social/twitter/
+            title: Twitter
+
+      - url: /extractors/other/
+        title: Other
+        items:
+          - url: /extractors/other/geocoding-augmentation/
+            title: Geocoding Augmentation
+
+          - url: /extractors/other/pingdom/
+            title: Pingdom
 
   - url: /storage/
     title: Storage

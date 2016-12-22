@@ -14,7 +14,7 @@
 <body>
 
 	<div class="root">
-		<div class="container header">
+		<div class="container header nocontent">
 			<div class="inside">
 				<a href="{{ '/' | prepend: site.baseurl }}" class="logo"><img src="{{ '/assets/img/logo.png' | prepend: site.baseurl }}"></a>
 				<span class="label">USER DOCUMENTATION</span>
@@ -30,7 +30,7 @@
 			<div class="inside">
 				<div class="row">
 
-					<div class="col-md-3 sidebar">
+					<div class="col-md-3 sidebar nocontent">
 						<div class="navigation">
 						{% include navigation.html context="/" %}
 						</div>
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 
-		<div class="container footer">
+		<div class="container footer nocontent">
 			<div class="inside">
 				<p>
 					&copy; 2016 Keboola

@@ -1,6 +1,8 @@
 ---
 title: Pingdom
-permalink: /extractors/pingdom/
+permalink: /extractors/other/pingdom/
+redirect_from:
+  - /extractors/pingdom/
 ---
 
 * TOC
