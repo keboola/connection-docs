@@ -3,8 +3,8 @@
     {% assign pageUrlSplitByItemUrl = page.url | split: item.url %}
 
     {% if item.url == page.url %}
-    {% assign cssClass = 'current active' %}
-    {% elsif page.url contains item.url and pageUrlSplitByItemUrl.first.size == 0 %}
+        {% assign cssClass = 'current active' %}
+    {% elsif page.url contains item.url and pageUrlSplitByItemUrl.first.size == 0 and item.url != '/' %}
         {% assign cssClass = 'active' %}
     {% else %}
         {% assign cssClass = '' %}
