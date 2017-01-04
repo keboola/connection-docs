@@ -6,9 +6,8 @@ permalink: /storage/buckets/sharing/
 * TOC
 {:toc}
 
-Buckets sharing allows you to share data between projects.
-
-It can help speedup your data workflow and reduce your project usage totals because the data size and rows are counted only in the source project.
+This feature allows you to share data between projects giving you far greater organizational control over your data. You can now decide which projects, and therefore which users, have access to which data.
+This also helps speedup your data workflow and reduce your project usage totals because the data size and rows are counted only in the source project.
 
 - **shared bucket** --- bucket with `sharing enabled`, containing data to be available in other projects
 - **linked bucket** --- an actively shared bucket, linked from another project
