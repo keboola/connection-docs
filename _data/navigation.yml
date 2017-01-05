@@ -92,14 +92,23 @@ items:
   - url: /storage/
     title: Storage
     items:
+      - url: /storage/buckets/
+        title: Buckets
+        items:
+          - url: /storage/buckets/sharing/
+            title: Sharing Buckets
+
       - url: /storage/tables/
         title: Tables & Aliases
         items:
           - url: /storage/tables/csv-files/
             title: CSV Files
 
+          - url: /storage/tables/uploads/
+            title: Table Uploads
+
       - url: /storage/file-uploads/
-        title: File Uploads
+        title: Files
 
       - url: /storage/tokens/
         title: Tokens
@@ -155,8 +164,12 @@ items:
       - url: /management/users/
         title: Users
 
+      - url: /management/organization/
+        title: Organization
+
       - url: /management/project-export/
         title: Data Takeout
 
       - url: /management/project-delete/
         title: Project Deletion
+

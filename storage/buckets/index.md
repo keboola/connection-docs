@@ -16,9 +16,9 @@ For information on how to load data into Storage, see the corresponding part of 
 {: .image-popup}
 ![Screenshot - Create bucket](/storage/buckets/create-bucket.png)
 
-To review information about existing bucket, hover over bucket name and select *Bucket detail**:
+To review information about existing bucket, hover over bucket name and select **Bucket detail**:
 
 {: .image-popup}
-![Screenshot - Bucket information](/storage/buckets/info-bucket.png)
+![Screenshot - Bucket information](/storage/buckets/bucket-info.png)
 
 Apart from being used for organizing the tables, buckets can also be used for [sharing tables](/storage/buckets/sharing).

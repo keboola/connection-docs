@@ -17,7 +17,7 @@ Every operation done in Storage must be authorized via a [token](/storage/tokens
 ## Storage Data
 The Storage component manages all data stored in each KBC project:
 
-- [Data tables](/storage/tables/) --- organized into buckets which are further organized into in and out stages
+- [Data tables](/storage/tables/) --- organized into [buckets](/storage/buckets/)
 - [Data files](/storage/file-uploads/) --- all raw files uploaded to your project
 - [Component configurations](/storage/configurations/)
 
