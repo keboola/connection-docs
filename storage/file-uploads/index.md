@@ -1,19 +1,19 @@
 ---
-title: File Uploads
+title: Files
 permalink: /storage/file-uploads/
 ---
 
 * TOC
 {:toc}
 
-The File uploads section of Storage contains all raw files uploaded to your project.
+The Files section of Storage contains all raw files uploaded to your project.
 This serves two main purposes:
 
-1. File uploads can be used to store an arbitrary file.
-2. Every data table file is stored in File uploads before it is processed and pushed into a table.
+1. Files can be used to store an arbitrary file.
+2. Every data table file is stored in Files before it is processed and pushed into a table.
 
-## File Uploads
-To store an arbitrary file, select the File uploads tab in Storage and then click **Upload** in the top right corner.
+## Uploading file
+To store an arbitrary file, select the Files tab in Storage and then click **Upload** in the top right corner.
 
 {: .image-popup}
 ![Screenshot - File uploads](/storage/file-uploads/file-uploads.png)
@@ -32,8 +32,10 @@ files are identified by their ID assigned on upload.
 To avoid files being automatically deleted after 180 days, by default, and to keep them permanently,
 do not forget to tick the respective checkbox.
 
-Also by default, all files will be available only to project administrators (those listed in the *Users & Settings* section)
+Also by default, uploaded files are marked as *non-public*. Non-public files will be available only to project
+administrators (those listed in the *Users & Settings* section)
 and users with Storage [tokens](/storage/tokens/) who have the permission to *Read all file uploads*.
+Users without *Read all file uploads* permission can access only files themselves.
 For each file in File uploads, you can
 
 - *copy* its download link,
@@ -43,6 +45,7 @@ For each file in File uploads, you can
 {: .image-popup}
 ![Screenshot - File upload detail](/storage/file-uploads/file-uploads-download-file.png)
 
+## File Links
 If you copy a link of a non-public file, you will obtain a URL in the following format:
 
     https://s3.amazonaws.com/kbc-sapi-files/exp-180/1134/files/2016/06/12/191341241.private.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160617%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160617T174909Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=30007ae706388816aaf3bd9ad585d9a30df6ab50dcc126881efbe6423ef57909
@@ -61,27 +64,17 @@ If you copy a link to a public file, you will obtain a URL in the following form
 
 Such a URL is valid for the entire validity of the file itself (either 180 days or forever).
 
-## Table Uploads
-All tables imported to and exported from Storage go through File uploads.
-
-When a table is **imported** into Storage by any means (manually, through an extractor, or as a result of running an application),
-the CSV file is first stored in File uploads and only then imported to an actual table. This is useful mainly in the two following cases:
-
-1. [reverting table](/storage/tables/#events) content to a particular imported version
-2. analyzing how something got into a table (useful mainly for incremental loads)
-
-Every time a table is **exported** from Storage, the process is reversed: first a file is
-created in File uploads (not when exporting manually) and then it is actually downloaded from there. Beware, however, that due to the
-nature of database exports, the exported table may be sliced and require
-[substantial effort to reconstruct](http://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
-To make sure your tables are exported as merged files, always use the **Export** feature in the **Action** tab of the [table detail](/storage/tables/#export).
-
-As stated above, unless marked as permanent, each file will be automatically deleted 180 days after it has been created. This
-also applies to automatically generated files as a result of table imports and exports. Also, because the
-majority of KBC File Storage contains duplicates of your table data, the whole storage does not
-count towards your project quota.
+In some cases, the file may be **sliced**. When you encounter a *sliced file*, you will 
+obtain a [JSON](https://en.wikipedia.org/wiki/JSON) manifest file instead of the actual file. 
+This can happen for some [exported or imported tables](/storage/tables/uploads/) from Storage or files which are particularly large.
+Merging a sliced file requires a [substantial effort](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
 
 ## Limits
 Maximum allowed size of uploaded file is currently 5GB (5 368 709 120 bytes exactly). This applies to both file and table uploads. Actual
 table size may be bigger, because it is uploaded as compressed file. If you need to upload a larger file, you need to use 
 [sliced upload](https://docs.keboola.apiary.io/#reference/files/upload-file). In that case, the limit applies to the chunk size.
+
+As stated above, unless marked as permanent, each file will be automatically deleted 180 days after it has been created. This
+also applies to automatically generated files as a result of table imports and exports. Also, because the
+majority of KBC File Storage contains duplicates of your table data, the whole Files storage does not
+count towards your project quota.

@@ -7,20 +7,10 @@ permalink: /storage/tables/
 {:toc}
 
 Your project table storage is available in the **Tables** tab in the Storage section. 
-All **data tables are organized into buckets**, which are further organized into the following three **stages**:
+All data tables are organized into [buckets](/storage/buckets/). Buckets can also be 
+used to [share tables](/storage/buckets/sharing/) between projects.
 
-- **in** --- for input data (usually extractor results)
-- **out** --- for processed data (usually results of transformations or applications)
-- **sys** --- deprecated stage used for configuration of some components
-
-The distinction between the input and output stage is purely conventional differentiation between raw and processed data.
-When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#backend-properties) based on its properties.
-For information on how to load data into Storage, see the corresponding part of our [tutorial](/tutorial/load/).
-
-{: .image-popup}
-![Screenshot - Create bucket](/storage/tables/create-bucket.png)
-
-The actual data tables in the buckets are created primarily by KBC components (extractors, transformations and applications),
+The actual data tables and the buckets are created primarily by KBC components (extractors, transformations and applications),
 or they are imported from CSV files. In case you want to import data to an already **existing table**,
 the imported table must have all the columns of the old, existing table, even if it the old table is empty.
 If some columns are missing, you will receive a message like this:

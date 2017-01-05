@@ -7,8 +7,7 @@ permalink: /management/
 {:toc}
 
 Everything you do in Keboola Connection (KBC) must take place within a KBC **Project**, its basic organizational unit.
-All projects are grouped into **Organizations**, and organizations are assigned to **Maintainers**. 
-A maintainer is usually a Keboola Partner.
+All projects are grouped into [**Organizations**](/management/organization/).
 
 *Some KBC project management features related to data and users are also covered in our [**tutorial**](/tutorial/management/).*
 
