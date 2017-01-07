@@ -12,7 +12,7 @@ This serves two main purposes:
 1. Files can be used to store an arbitrary file.
 2. Every data table file is stored in Files before it is processed and pushed into a table.
 
-## Uploading file
+## Uploading File
 To store an arbitrary file, select the Files tab in Storage and then click **Upload** in the top right corner.
 
 {: .image-popup}

@@ -105,7 +105,7 @@ items:
             title: CSV Files
 
           - url: /storage/tables/uploads/
-            title: Table Uploads
+            title: Table Import/Export
 
       - url: /storage/file-uploads/
         title: Files
