@@ -74,7 +74,7 @@ Maximum allowed size of uploaded file is currently 5GB (5 368 709 120 bytes exac
 table size may be bigger, because it is uploaded as compressed file. If you need to upload a larger file, you need to use 
 [sliced upload](https://docs.keboola.apiary.io/#reference/files/upload-file). In that case, the limit applies to the chunk size.
 
-As stated above, unless marked as permanent, each file will be automatically deleted 180 days after it has been created. This
-also applies to automatically generated files as a result of table imports and exports. Also, because the
-majority of KBC File Storage contains duplicates of your table data, the whole Files storage does not
-count towards your project quota.
+As stated above, unless marked as permanent, each file is automatically deleted 180 days after it has been created. 
+This also applies to automatically generated files as a result of table imports and exports. 
+Also, because the majority of KBC File Storage contains duplicates of your table data, 
+the whole Files storage does not count towards your project quota.
