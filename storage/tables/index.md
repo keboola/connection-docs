@@ -7,12 +7,12 @@ permalink: /storage/tables/
 {:toc}
 
 Your project table storage is available in the **Tables** tab in the Storage section. 
-All data tables are organized into [buckets](/storage/buckets/). Buckets can also be 
+All data tables are organized into [buckets](/storage/buckets/) that can also be 
 used to [share tables](/storage/buckets/sharing/) between projects.
 
 The actual data tables and the buckets are created primarily by KBC components (extractors, transformations and applications),
 or they are imported from CSV files. In case you want to import data to an already **existing table**,
-the imported table must have all the columns of the old, existing table, even if it the old table is empty.
+the imported table must have all the columns of the old, existing table, even if the old table is empty.
 If some columns are missing, you will receive a message like this:
 
     Some columns are missing in the csv file. Missing columns: lat,long. Expected columns: lat,long.
@@ -26,7 +26,7 @@ Apart from actual tables, it is also possible to create aliases. They are intern
 as [database views](https://en.wikipedia.org/wiki/View_(SQL)) and inherit their basic properties.
 
 An alias does not contain any actual data; it is simply a link to some already existing data.
-Hence an alias cannot be written to and its size does not count to your project quota.
+Hence an alias cannot be written to, and its size does not count to your project quota.
 
 In addition, if you create an alias from a table, the table **cannot be deleted** without the alias being deleted as well.
 If you attempt to do so, you will receive an error message similar to this one:
@@ -39,7 +39,7 @@ See an example use of an alias in our [tutorial](/tutorial/load/googledrive/#aft
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
 
 If you select any table from any bucket in Storage, detailed information about the table will be displayed on the right side of your screen.
-This is what we refer to as a **Table detail** throughout our documentation.
+This is what we refer to as the **Table detail** throughout our documentation.
 
 Aliases cannot be chained and can be applied only between buckets with the same backend.
 An alias table can be filtered by a simple condition.
@@ -61,4 +61,4 @@ It can be used immediately to make a physical copy of the table, or later to rev
 
 Table Snapshots are useful when **experimenting** with extractors or transformations, or generally when **refactoring** your project:
 you can create a copy of your output table, experiment a little, and then compare the new output table with the original one to make sure your output remained the same.
-They can also be used as a workaround to renaming tables; it is not available yet.
+They can also be used as a workaround to renaming tables; however, this feature is not available yet.
