@@ -46,7 +46,7 @@ Then click `Enable sharing` and confirm your action.
 ![Screenshot -- Enable sharing](/storage/buckets/sharing/sharing-enable-1.png)
 
 {: .image-popup}
-![Screenshot -- Confirm action](/storage/buckets/sharing/sharing-enable-2.png)
+![Screenshot -- Confirm action](/storage/buckets/sharing/sharing-enable-2-v2.png)
 
 The bucket is now marked as `Shared to organization` and is available for other projects. 
 Remember to add (link) it to each project manually.
@@ -68,7 +68,7 @@ The buckets list is grouped by the project name, and buckets are identified by t
 This is all you need to do. The bucket is now linked into the project, and users can use its tables and data.
 
 {: .image-popup}
-![Screenshot -- Linked bucket detail](/storage/buckets/sharing/link-bucket-3.png)
+![Screenshot -- Linked bucket detail](/storage/buckets/sharing/link-bucket-3-v2.png)
 
 ### Disable Sharing / Unlink Bucket
 
