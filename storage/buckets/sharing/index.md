@@ -20,7 +20,7 @@ any tables you create in the shared bucket become immediately available in the d
 
 ## Limitations
 
-Linked buckets behave very similarly to table aliases, but there are some limitations:
+There are some limitations to how shared buckets can be used:
 
 - Source and destination projects must belong to the same organization.
 - To manage shared buckets, your user account must be an [**organization member**](/management/organization/) --- i.e. it is not enough to

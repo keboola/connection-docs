@@ -9,7 +9,7 @@ permalink: /storage/tables/csv-files/
 All data imported to and exported from Storage has to be in the CSV format.
 
 In many cases, our extractors and writers take care of the necessary conversion,
-but sometimes you have to be aware of the supported formats -- for
+but sometimes you have to be aware of the supported formats --- for
 example, when you are [loading data manually](/tutorial/load/).
 
 ## Input CSV Format
@@ -77,7 +77,7 @@ The resulting file `import-data.txt.csv` can now be imported into KBC Storage as
 ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
 
 ## Output CSV Format
-When you export a table from Storage, the same format is used as for import:
+When you export a table from Storage, the same format is used for import:
 
 - **Delimiter** is set to comma `,`.
 - **Enclosure** is set double quote `"`.

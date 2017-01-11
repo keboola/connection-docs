@@ -32,10 +32,11 @@ files are identified by their ID assigned on upload.
 To avoid files being automatically deleted after 180 days (by default) and to keep them permanently,
 do not forget to tick the respective checkbox.
 
-Also by default, uploaded files are marked as *non-public*. They are available only to project
+Also by default, uploaded files are marked as *non-public*. They are available only to the project
 administrators (those listed in the *Users & Settings* section)
 and users with Storage [tokens](/storage/tokens/) who have the permission to *Read all file uploads*.
-Users without the *Read all file uploads* permission can access only files themselves.
+Users without the *Read all file uploads* permission can access only their own files and the files
+they uploaded themselves.
 For each file in Files, you can
 
 - *copy* its download link,
