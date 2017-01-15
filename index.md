@@ -19,7 +19,11 @@ It is a safe, open and extendable cloud based environment for working with your 
 
 #### Where to Start
 
-If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out its [overview](/overview/), or see our [tutorial](/tutorial/) for some hands-on experience on using KBC.
+If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out its [overview](/overview/), 
+or see our [tutorial](/tutorial/) for some hands-on experience on using KBC. 
+
+You can also view our **short presentations** introducing [business](kbc-biz-intro.pdf) and 
+[technical](kbc-tech-intro.pdf) aspects of KBC.
 
 If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) and log in.
 
