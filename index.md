@@ -10,7 +10,7 @@ If you are working with the KBC UI as an end-user, you are at the right place.
 * TOC
 {:toc}
 
-#### What Keboola Connection Is
+#### What KBC Is
 
 KBC is a powerful data preparation platform composed of many interconnected components, 
 extracting data from various sources, 
@@ -19,11 +19,12 @@ It is a safe, open and extendable cloud based environment for working with your 
 
 #### Where to Start
 
-If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out its [overview](/overview/), 
+If you are new to KBC and want a **brief orientation** to the Keboola ecosystem, please check out our [overview](/overview/), 
 or see our [tutorial](/tutorial/) for some hands-on experience on using KBC. 
 
-You can also view our **short presentations** introducing [business](kbc-biz-intro.pdf) and 
-[technical](kbc-tech-intro.pdf) aspects of KBC.
+Another great way of familiarizing yourself with KBC is to scroll through our **short presentations** 
+introducing [business](kbc-biz-intro.pdf) and [technical](kbc-tech-intro.pdf) aspects of KBC, or to 
+watch a four minute long [**introduction video**](https://www.youtube.com/watch?v=g-VBfkV4xfc&t=62s). 
 
 If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) and log in.
 
@@ -50,7 +51,7 @@ There are three equivalent places where you can get KBC Status updates (service 
 #### Keboola's Partners Program
 
 Knowing your local environment, our partners will assist you in creating a custom product 
-specific to your unique needs. To get in touch please use the following email addresses:
+specific to your unique needs. To get in touch, please use the following email addresses:
 
 - If in Europe, write to [cz.support@keboola.com](mailto:cz.support@keboola.com).
 - If in North America, write to [support.ca@keboola.com](mailto:support.ca@keboola.com).
