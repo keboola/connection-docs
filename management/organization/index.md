@@ -30,7 +30,7 @@ Newly added members get an email confirmation and if without a KBC account,
 they are [invited to create one](/management/users/#new-user). 
 Removed members receive an email notification. 
 
-Each organization member is also allowed to do the following:
+Apart from adding and removing other members, each organization member is also allowed to do the following:
 
 - Leave the organization; there is no way back without someone else's invitation.
 - Leave and re-enter all existing projects in the organization. 

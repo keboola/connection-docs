@@ -49,7 +49,7 @@ There are three equivalent places where you can get KBC Status updates (service 
 
 #### Keboola's Partners Program
 
-Knowing your local environment, our [partners](/overview/environment/) will assist you in creating a custom product 
+Knowing your local environment, our partners will assist you in creating a custom product 
 specific to your unique needs. To get in touch please use the following email addresses:
 
 - If in Europe, write to [cz.support@keboola.com](mailto:cz.support@keboola.com).
