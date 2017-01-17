@@ -89,6 +89,15 @@ items:
           - url: /extractors/other/pingdom/
             title: Pingdom
 
+  - url: /writers/
+    title: Writers
+    items:
+      - url: /writers/tableau/
+        title: Tableau
+
+      - url: /writers/gooddata/
+        title: GoodData
+
   - url: /storage/
     title: Storage
     items:

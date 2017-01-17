@@ -17,7 +17,7 @@ This table is suitable to be loaded into [Tableau Analytics](http://www.tableau.
 If you want to try connection to Tableau Server, have credentials for that server as well. 
 As an alternative, sign up for a free trial of [Tableau Online](http://www.tableau.com/products/cloud-bi) to test it out.
 
-Writing data from KBC into a business intelligence analytics such as Tableau is very common. 
+Writing data from KBC into a business intelligence and analytics tool such as Tableau is very common. 
 Writing data to GoodData BI is covered in the following [side step](/tutorial/write/gooddata/). 
 However, keep in mind you can use the processed data in any way you wish.   
 
@@ -129,7 +129,7 @@ and set server credentials.
 {: .image-popup}
 ![Screenshot - Tableau Set Credentials](/tutorial/write/tableau-destination-intro.png)
 
-If connecting to you own Tableau instance, have the connection properties at the ready, or
+If connecting to your own Tableau instance, have the connection properties at the ready, or
 ask your server administrator. If connecting to Tableau Online, find all the necessary 
 information in the intro page URL:
 
