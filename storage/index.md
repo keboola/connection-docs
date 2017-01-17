@@ -28,13 +28,24 @@ are compared in the following table:
 Feature | MySQL | Redshift | Snowflake
 ---------- | ----------- | ---------- | -------------
 Partial Import (Deprecated) | ✓ | x | x
-Export formats | `RFC`, `ESCAPED*`, `RAW*` | `RFC`, `ESCAPED*`, `RAW*`  | `RFC`
+Export formats | `RFC`, `ESCAPED`\*, `RAW`\* | `RFC`, `ESCAPED`\*, `RAW`\*  | `RFC`
 Maximum number of columns in single table | Max. row size of 65,535 bytes | 1200 | 1200 |
 Maximum table cell size | 64kB | 64kB | 1MB |
 Sync export (Data Preview) columns limit | x | x | 110 |
 
-* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`
+\* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`
 
+### Redshift Table Size
+
+Reported size of tables on Redshift backend is sometimes inaccurate. This issue, most of the time,
+affects tables with lot of small incremental loads.
+
+Due to this issue of the Redshift itself we decided to recalculate Table Size by ourselves (automatically).
+
+Job recalculating table size is executed automatically when loading data to table and its actual table
+size is greater that 500MB.
+
+Anyway, there's an option to call mentioned job manually -- [by calling Table Optimize method in Storage API.](http://docs.keboola.apiary.io/#reference/tables/table-optimize/optimize-table)
 
 {%comment %}
 Backendy
