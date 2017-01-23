@@ -167,6 +167,9 @@ items:
       - url: /management/organization/
         title: Organization
 
+      - url: /management/support/
+        title: Keboola Support
+
       - url: /management/project-export/
         title: Data Takeout
 
