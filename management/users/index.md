@@ -158,16 +158,6 @@ You can review the state of MFA for any user in the user list:
 {: .image-popup}
 ![Screenshot -- User joined](/management/users/users-list-3.png)
 
-### Keboola Users
-When requested, Keboola employees may join your project without being formally invited by you through the *Users & Setting* page.
-They may enter your project only in response to a support ticket and they are marked by the Keboola badge:
-
-{: .image-popup}
-![Screenshot -- User joined](/management/users/users-list-5.png)
-
-Keboola Support users are always accounts that expire, they have a reason to enter the project and have MFA enabled. 
-They do not count towards the project limits.
-
 ## Authorization
 All users listed in the *Users & Settings* page are project administrators which means they can do all operations
 within that project. If you need to limit authorization to certain operations or data, there are two options:
