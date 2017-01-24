@@ -3,6 +3,9 @@ title: Storage
 permalink: /storage/
 ---
 
+* TOC
+{:toc}
+
 *See our [Getting Started](/tutorial/load/) tutorial for instructions on how to use Storage.*
 
 As the central [KBC subsystem](/overview/), *Storage* manages everything related to **storing** data and **accessing** it.
@@ -37,15 +40,15 @@ Sync export (Data Preview) columns limit | x | x | 110 |
 
 ### Redshift Table Size
 
-Reported size of tables on Redshift backend is sometimes inaccurate. This issue, most of the time,
-affects tables with lot of small incremental loads.
+The reported table size on the Redshift backend often tends to be inaccurate and 
+affects mostly tables with many small incremental loads.
 
-Due to this issue of the Redshift itself we decided to recalculate Table Size by ourselves (automatically).
+Since this is an issue of Redshift itself, we decided to **recalculate** Table Size by ourselves.
+All recalculating jobs are executed **automatically** when loading data to tables and 
+when the actual table size is greater than 500MB.
 
-Job recalculating table size is executed automatically when loading data to table and its actual table
-size is greater that 500MB.
-
-Anyway, there's an option to call mentioned job manually -- [by calling Table Optimize method in Storage API.](http://docs.keboola.apiary.io/#reference/tables/table-optimize/optimize-table)
+However, any recalculating job can be also called manually by [calling the Table 
+Optimize method in Storage API](http://docs.keboola.apiary.io/#reference/tables/table-optimize/optimize-table).
 
 {%comment %}
 Backendy
