@@ -9,7 +9,7 @@ permalink: /management/support/
 
 ### Obtaining Support
 There are multiple ways to obtain support from within your project.
-First, and foremost, in the navigation on the left is a Support link which will open a form to fill-in to create a zendesk ticket which will reach your maintainer.
+First, and foremost, in the navigation on the left is a Support link which will open a form to fill-in to create a ticket which will reach your Maintainer.
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/support-link.png)
@@ -21,7 +21,7 @@ Secondly, if you happen to trigger a server error while working with Keboola Con
 
 ### Keboola Support Users
 It may be the case that in order to solve the issue or to gain context regarding an application exception a technical support member may require access to your project.
-By default, Keboola support users may join your project when requested and they will appear in the Member's list marked by the Keboola badge:
+By default, Keboola support staff may join your project when requested and they will appear in the Member's list marked by the Keboola badge:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/users/users-list-5.png)
@@ -32,12 +32,12 @@ They also do not count towards the project limits.
 ### Require Approval for Support Access ###
 Some organizations may prefer to have a starker demarcation for their projects with regard to access by the support team.
 To facilitate this transparency we've introduced the ability to require approval for all temporary access by Keboola Support accounts.
-The setting can be found in the organization details in the accounts section
+The setting can be found in the [organization details](/management/organization/) in the accounts section:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/organization-allowAutoJoin-on.png)
 
-To disable auto-join and require approval for Support accounts, clich on the `Change` link to open the dialog and uncheck the Auto Join checkbox.
+To disable auto-join and require approval for Support accounts, click on the `Change` link to open the dialog and uncheck the Auto Join checkbox.
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/autoJoin-modal.png)
@@ -47,7 +47,7 @@ The description for Support Access will reflect the current setting.
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/organization-allowAutoJoin-off.png)
 
-With the new setting, a joining support account will require approval by an existing project member in order to gain access.
+With auto-join off, a joining support account will require approval by an existing project member in order to gain access.
 When a support member requests access each active project member will receive an email notification
 
 {: .image-popup}
