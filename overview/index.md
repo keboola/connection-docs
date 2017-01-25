@@ -83,6 +83,10 @@ In the background, behind the scenes, there is the [**Orchestrator**](/tutorial/
 (or Scheduler) component which allows everything to be fully automated.
 Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
 
+## Keboola Support
+When working with KBC, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us. 
+To solve your problem or to gain context, our support staff may join your project when requested. 
+
 ## Other Commonly Used Terms
 This section explains a few terms that are often used throughout these documentation pages.
 
@@ -105,7 +109,6 @@ After the transformation has been executed successfully, only tables and files d
 in the [output mapping](/manipulation/transformations/mappings/#output-mapping) are brought back to Storage.
 
 ## External Environment Schema
-
 KBC is a fully cloud environment heavily relaying on Amazon Services. The following chart shows the overview
 of different services and their connections:
 

@@ -27,7 +27,8 @@ our [presentation](kbc-intro.pdf) on both business and technical aspects of KBC,
 or to watch a [short video](https://www.youtube.com/watch?v=g-VBfkV4xfc&t=62s), introducing 
 all KBC components along with practical demonstrations of working with them.
 
-If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) and log in.
+If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) 
+and log in. We are available to provide [support](/management/support/) whenever needed.
 
 #### More to Read
 
