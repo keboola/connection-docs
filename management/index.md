@@ -47,3 +47,7 @@ your current limits, and the monthly trend. It helps you control your usage.
 
 ### Project Deletion
 It is possible to entirely [delete your project](/management/project-delete/).
+
+### Keboola Support
+There are multiple [ways to obtain support](/management/support/) from our technical staff. 
+To solve your problem or to gain context, they may join your project when requested.
