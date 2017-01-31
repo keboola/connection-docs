@@ -1,4 +1,4 @@
----
+/---
 title: Applications
 permalink: /manipulation/applications/
 ---
@@ -39,3 +39,6 @@ The following screenshot shows some of many KBC applications (created by both, K
 If you want to learn more about Applications or are interested in creating one, go to 
 our [Developer Documentation](https://developers.keboola.com/extend/).
 
+If you want to see a short **demo on using a 3rd party app in KBC** (analyzing text data), [click here](https://www.youtube.com/watch?v=dx03hlA7dTo). 
+The video shows how to quickly extract text data from Twitter's API, process the data through Geneea's
+natural language processing algorithm and visualise the results in Tableau.

@@ -167,6 +167,9 @@ items:
       - url: /manipulation/applications/
         title: Applications
 
+  - url: /orchestrator/
+    title: Automation
+
   - url: /management/
     title: Project Management
     items:
