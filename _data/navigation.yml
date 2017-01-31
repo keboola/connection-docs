@@ -89,6 +89,9 @@ items:
           - url: /extractors/other/pingdom/
             title: Pingdom
 
+          - url: /extractors/other/aws-s3/
+            title: AWS S3
+
   - url: /writers/
     title: Writers
     items:

@@ -11,6 +11,7 @@ extractors that do not fall into any of the above mentioned categories:
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) --- 
 provides detailed data for locations specified by their names, address or coordinates
 - [GoogleDrive Extractor](/tutorial/load/googledrive/) --- imports data from external data sheets
+- [AWS S3 Extractor](/extractors/other/aws-s3) --- imports CSV files from AWS S3 
 - Generic Extractor --- can be configured to work with virtually any API
 - GitHub Extractor
 - and others
