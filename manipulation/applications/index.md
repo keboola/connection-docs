@@ -1,4 +1,4 @@
-/---
+---
 title: Applications
 permalink: /manipulation/applications/
 ---
