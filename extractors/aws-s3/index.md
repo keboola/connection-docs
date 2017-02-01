@@ -28,6 +28,8 @@ Find AWS S3 Extractor in the list of extractors and create a new configuration. 
 In the first part of the configuration you need to specify the AWS S3 bucket and the filename (key). 
 The bucket can be in any AWS region and the key must point to a single file, unless you check the **Wildcard** checkbox.
 
+Files stored in Glacier will be ignored.
+
 ### Wildcard
 
 If the wildcard is turned on, all files in S3 with the defined Key prefix will be downloaded. 
