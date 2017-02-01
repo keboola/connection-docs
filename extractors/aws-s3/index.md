@@ -17,7 +17,7 @@ Find AWS S3 Extractor in the list of extractors and create a new configuration. 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/aws-s3/ui1.png)
 
-## Selecting files from S3
+## Selecting Files from S3
 
 {: .image-popup}
 ![Screenshot - General configuration](/extractors/aws-s3/ui2.png)
@@ -30,9 +30,10 @@ The bucket can be in any AWS region and the key must point to a single file, unl
 
 ### Wildcard
 
-If wildcard is turned on, all files in S3 with the defined Key prefix will be downloaded. All files need to have the same structure and header. 
+If the wildcard is turned on, all files in S3 with the defined Key prefix will be downloaded. 
+All files need to have the same structure and header. 
 As S3 does not provide information about folders, there must not be any folders that would match the wildcard. 
-Downloading subfolders using wildcard will return an error. 
+Downloading subfolders using the wildcard will return an error. 
 
 ## Saving to Storage
 
@@ -40,13 +41,13 @@ A table name is predefined, but you can modify it and use any other name or sele
 
 ### Incremental Load
 
-Incremental load allows you to add new data to the table without truncating it. 
+Incremental Load allows you to add new data to the table without truncating it. 
 It does not affect which files are extracted from S3, only how the data is loaded into Storage.
 
-### Primary key
+### Primary Key
 
-Primary key of an existing table cannot be modified, only new tables can set their primary keys. 
-To change primary key of an existing table, you have to go to the table detail in Storage.  
+The primary key of an existing table cannot be modified, only new tables can set their primary keys. 
+To change the primary key of an existing table, go to the table detail in Storage.  
 
 ## AWS Credentials
 
@@ -55,13 +56,13 @@ To change primary key of an existing table, you have to go to the table detail i
 
 
 Use the AWS Access Key Id and Secret Access Key with read permissions to the desired bucket and file(s). 
-Make sure that this AWS Access Key ID has correct permissions. Required permissions are
+Make sure that this AWS Access Key ID has the correct permissions. The required permissions are
  
  - `s3:GetObject` for the given key/wildcard
  - `s3:ListBucket` to access all wildcard files
- - `s3:GetBucketLocation` to determine bucket region
+ - `s3:GetBucketLocation` to determine the bucket region
  
-You can use this Policy Document to add as Inline Policy to an AWS user
+You can add the following Policy Document as an Inline Policy to an AWS user
 
 {% highlight json %}
 {
@@ -86,7 +87,7 @@ You can use this Policy Document to add as Inline Policy to an AWS user
 }
 {% endhighlight %}
 
-### Setting up a new AWS S3 Bucket
+### Setting Up a New AWS S3 Bucket
 
 Alternatively you can use our [AWS CloudFormation template](https://github.com/keboola/s3-extractor/blob/master/aws-services.json) 
 to create a new S3 bucket and a pair of users, one of which has write permissions and the other only read-only permissions. 
@@ -99,5 +100,5 @@ You will give the write permissions to the application storing files in CSV and 
 
 
 In this section you can modify the delimiter and enclosure of the CSV file. 
-The default values are based on the [RFC 4180](https://tools.ietf.org/html/rfc4180).
+The default values are based on [RFC 4180](https://tools.ietf.org/html/rfc4180).
 
