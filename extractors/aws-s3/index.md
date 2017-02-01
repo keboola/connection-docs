@@ -31,9 +31,7 @@ The bucket can be in any AWS region and the key must point to a single file, unl
 ### Wildcard
 
 If the wildcard is turned on, all files in S3 with the defined Key prefix will be downloaded. 
-All files need to have the same structure and header. 
-As S3 does not provide information about folders, there must not be any folders that would match the wildcard. 
-Downloading subfolders using the wildcard will return an error. 
+All files need to have the same header. Subfolders matching the prefix will be ignored. 
 
 ## Saving to Storage
 
