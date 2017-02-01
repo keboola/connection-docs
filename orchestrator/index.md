@@ -22,7 +22,8 @@ The order of certain tasks in the Orchestrator configuration is important; some 
 sequentially while others can run in parallel. This is the reason for using **orchestration phases**.
 Tasks in a single phase are executed in parallel, phases execute sequentially. With each task in its own 
 phase, a configuration is very defensive as it executes all tasks sequentially. You can also group tasks 
-into their own phases based on their component type and follow the common ETL scheme. 
+into their own phases based on their component type (extractor, transformation, writer) 
+and follow the common ETL scheme. 
 
 ### Notifications
 Before setting up your orchestration to run automatically at a given time, we recommend running it 
@@ -30,7 +31,7 @@ manually to make sure everything works smoothly. Also, consider setting **Notifi
 selected email addresses (error notifications are particularly useful). When an orchestration is run 
 manually, only the KBC user running it gets the notifications.
 
-### Own Automation
+### Custom Automation
 If you are not happy with our scheduling, feel free to [create your own orchestration programmatically](https://developers.keboola.com/).
 
 {%comment %}
