@@ -141,10 +141,12 @@ and use it in your MySQL client.
 
 Sequel Pro configuration:
 
+{: .image-popup}
 ![Sequel Pro Configuration Screenshot](/manipulation/transformations/sandbox/sequelpro-ssl.png)
 
 DBeaver configuration:
 
+{: .image-popup}
 ![DBeaver Configuration Screenshot](/manipulation/transformations/sandbox/dbeaver-ssl.png)
 
 #### Version
@@ -188,6 +190,9 @@ This adds another level of security and features to your transformation.
 A Redshift sandbox always uses the latest Redshift version available on the cluster.
 
 ### RStudio Sandbox
+
+**Important:** Currently, this feature is in beta and is available only on request. [Contact us on support](mailto:support@keboola.com) to enable this feature.
+
 [RStudio](https://www.rstudio.com/) sandbox is available only as a plain sandbox:
 
 {: .image-popup}
