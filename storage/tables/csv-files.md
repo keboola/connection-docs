@@ -24,7 +24,7 @@ This is basically compatible with CSV exports from OpenOffice Calc, MS Excel, an
     - Windows (CRLF -- \r\n)
     - Unix (LF -- \n)
 - File encoding is `UTF-8`.
-- File can be uncompressed, [gzipped](http://www.gzip.org/) or [zipped](https://en.wikipedia.org/wiki/Zip_(file_format).
+- File can be uncompressed or [gzipped](http://www.gzip.org/).
 
 ### Example
 
