@@ -10,6 +10,8 @@ redirect_from:
 {:toc}
 
 This extractor loads a single or multiple CSV files from AWS S3 and stores them in a table in Storage.
+After creating a new configuration, select files you want to extract from S3 and determine the way how 
+you save them to KBC Storage. You also need to set up the proper permissions on AWS.
 
 ## Create New Configuration
 Find AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
@@ -25,28 +27,30 @@ Find AWS S3 Extractor in the list of extractors and create a new configuration. 
 
 ### Bucket and Key
 
-In the first part of the configuration you need to specify the AWS S3 bucket and the filename (key). 
-The bucket can be in any AWS region and the key must point to a single file, unless you check the **Wildcard** checkbox.
+In the first part of the configuration, specify the AWS S3 bucket and the filename (key). 
+The bucket can be in any AWS region and the key must point to a single file unless you check the **Wildcard** checkbox.
 
-Files stored in Glacier will be ignored.
+All files stored in Glacier will be ignored.
 
 ### Wildcard
 
-If the wildcard is turned on, all files in S3 with the defined Key prefix will be downloaded. 
-All files need to have the same header. Subfolders matching the prefix will be ignored. 
+If the Wildcard option is turned on, all files in S3 with the defined Key prefix will be downloaded. 
+They need to have the same header. The subfolders matching the prefix will be ignored. 
 
 ## Saving to Storage
 
-A table name is predefined, but you can modify it and use any other name or select an existing table.  
+The table names are predefined. However, they can be modified, or replaced entirely. 
+You can also select an already existing table.  
 
 ### Incremental Load
 
-Incremental Load allows you to add new data to the table without truncating it. 
-It does not affect which files are extracted from S3, only how the data is loaded into Storage.
+Incremental Load allows you to add new data to a table without truncating it. 
+The files extracted from S3 stay the same.
+The only thing that changes is the way of how the data is loaded into Storage.
 
 ### Primary Key
 
-The primary key of an existing table cannot be modified, only new tables can set their primary keys. 
+The primary key of an existing table cannot be modified; only new tables can set their primary keys. 
 To change the primary key of an existing table, go to the table detail in Storage.  
 
 ## AWS Credentials
@@ -56,13 +60,13 @@ To change the primary key of an existing table, go to the table detail in Storag
 
 
 Use the AWS Access Key Id and Secret Access Key with read permissions to the desired bucket and file(s). 
-Make sure that this AWS Access Key ID has the correct permissions. The required permissions are
+Make sure that this AWS Access Key ID has the correct permissions:
  
  - `s3:GetObject` for the given key/wildcard
  - `s3:ListBucket` to access all wildcard files
  - `s3:GetBucketLocation` to determine the bucket region
  
-You can add the following Policy Document as an Inline Policy to an AWS user
+You can add the following Policy Document as an Inline Policy to an AWS user:
 
 {% highlight json %}
 {
@@ -89,9 +93,9 @@ You can add the following Policy Document as an Inline Policy to an AWS user
 
 ### Setting Up a New AWS S3 Bucket
 
-Alternatively you can use our [AWS CloudFormation template](https://github.com/keboola/s3-extractor/blob/master/aws-services.json) 
+Alternatively, you can use our [AWS CloudFormation template](https://github.com/keboola/s3-extractor/blob/master/aws-services.json) 
 to create a new S3 bucket and a pair of users, one of which has write permissions and the other only read-only permissions. 
-You will give the write permissions to the application storing files in CSV and the read-only permissions to the S3 extractor.  
+Give the write permissions to the application storing files in CSV and the read-only permissions to the S3 extractor.  
 
 ## Advanced
 
