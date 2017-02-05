@@ -7,7 +7,7 @@ permalink: /orchestrator/
 
 Bringing systems for data loading, manipulation and writing together is what makes Keboola 
 Connection (KBC) so powerful and easy to use. If you want to work with the latest data available, 
-however, all the steps must be done over and over again. Our Orchestrator (or Scheduler) is the 
+however, the whole sequence must be done over and over again. Our Orchestrator (or Scheduler) is the 
 behind-the-scenes component which **allows your large and complex projects to be fully automated**. 
 Use it to
 

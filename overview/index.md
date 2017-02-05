@@ -79,7 +79,7 @@ These may be business intelligence analytics or visualization systems, but also 
 or simply any system that can help our customers to realize the extra value KBC adds to the data.
 
 ### Full Automation
-In the background, behind the scenes, there is the [**Orchestrator**](/tutorial/automate/)
+In the background, behind the scenes, there is the [**Orchestrator**](/orchestrator/)
 (or Scheduler) component which allows everything to be fully automated.
 Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
 
