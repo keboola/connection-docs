@@ -3,7 +3,7 @@ title: Database Extractors
 permalink: /extractors/database/
 ---
 
-Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
+Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment. We recommend a [secure way](/extractors/database/connecting-to-db) to setup extractor to connect to a database.
 
 There are a number of extractors for **SQL databases**.
 
