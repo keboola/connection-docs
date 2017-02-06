@@ -43,7 +43,6 @@ items:
         items:
         - url: /extractors/database/sqldb/
           title: SQL Databases
-
         - url: /extractors/database/mongodb/
           title: MongoDB
           items:
