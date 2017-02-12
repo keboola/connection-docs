@@ -191,50 +191,54 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 
 ### RStudio Sandbox
 
-**Important:** Currently, this feature is in beta and is available only on request. [Contact us on support](mailto:support@keboola.com) to enable this feature.
+**Important:** Currently, this feature is in beta and is available only on request. 
+To enable it, [contact our support team](mailto:support@keboola.com).
 
-[RStudio](https://www.rstudio.com/) sandbox is available only as a plain sandbox:
+The [RStudio](https://www.rstudio.com/) sandbox is available only as a plain sandbox:
 
 {: .image-popup}
 ![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-1.png)
 
-Click on create sandbox button:
+Click on the **Create sandbox** button,
 
 {: .image-popup}
 ![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-1.png)
 
-And select the tables you want to load into the sandbox.
+and select the tables you want to load into the sandbox.
 
 {: .image-popup}
 ![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-2.png)
 
-Depending on the size of the input tables, the sandbox creation may take some time. You can review the progress in
-*Jobs*. When the sandbox is created, you can **Connect** to it. You will be taken to a web version of RStudio. The
-loaded tables will be available at the same locations as in [R Transformations](https://help.keboola.com/manipulation/transformations/r/#development-tutorial).
-Also the R version is the same as in [R Transformations](https://help.keboola.com/manipulation/transformations/r/#environment).
+Depending on the size of the input tables, the sandbox creation may take some time. 
+You can review its progress in *Jobs*. When the sandbox is created and you **connect** to it,
+you will be taken to a web version of RStudio. The loaded tables will be available at the same locations
+as in [R Transformations](https://help.keboola.com/manipulation/transformations/r/#development-tutorial).
+The R version is also the same as in [R Transformations](https://help.keboola.com/manipulation/transformations/r/#environment).
 
 {: .image-popup}
 ![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-3.png)
 
-#### Limitations
+The RStudio Sandbox has the following **limitations**:
+
 - HTTPS is not yet supported.
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB.
-- The UI allows loading only tables to the Sandbox. Loading input files and transformation script is supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
+- The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
+supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days.
 - Adding data to existing sandboxes is not supported yet.
 
 ### Jupyter Notebook Sandbox
-[Jupyter Notebook](http://jupyter.org/) sandbox is available only as a plain sandbox. It is created the same way as the
-[RStudio Sandbox](#rstudio-sandbox), also the same **[limitations](#limitations)** apply.
+The [Jupyter Notebook](http://jupyter.org/) sandbox is available only as a plain sandbox. 
+It is created the same way as the [RStudio Sandbox](#rstudio-sandbox) and the exact same limitations apply to it.
 
 {: .image-popup}
 ![Screenshot - Jupyter Sandbox](/manipulation/transformations/sandbox/jupyter-sandbox-1.png)
 
-The Python environment for Jupyter notebook is the same as in [Python Transformations](https://help.keboola.com/manipulation/transformations/python/#environment)
-The Jupyter notebook does not have a built-in file browser, but the loaded tables are present at the same
-locations as in [Python Transformations](https://help.keboola.com/manipulation/transformations/python/#development-tutorial). To list the
-available table data files, you can use e.g. this script:
+The Python environment for Jupyter Notebook is the same as in [Python Transformations](https://help.keboola.com/manipulation/transformations/python/#environment).
+Jupyter Notebook does not have a built-in file browser, but the loaded tables are kept at the same
+locations as in [Python Transformations](https://help.keboola.com/manipulation/transformations/python/#development-tutorial). 
+To list the available table data files, use scripts such as this one:
 
 {% highlight python %}
 from os import listdir
