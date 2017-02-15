@@ -78,6 +78,8 @@ items:
         items:
           - url: /extractors/social/twitter/
             title: Twitter
+          - url: /extractors/social/facebook/
+            title: Facebook
 
       - url: /extractors/other/
         title: Other
