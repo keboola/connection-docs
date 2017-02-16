@@ -49,7 +49,7 @@ Required string that precisely describes the data returned from the endpoint. Ty
     Each field can be parameterized by a dot following the parameter/modifier name and value in brackets. Typical parameter could be **since, until or limit** or any other parameters or modifiers that the particular endpoint offers such as **metrics** for [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights) endpoint. Example of parameterized fields: `comments.since(2 days ago).until(yesterday){message,created_time,from}` or `insights.since(1000 days ago).metric(page_views_total)`
 
 ### Pages
-Specifies Facebook page that the query will be applied to. Can be chosen from a list of selected pages after authorization. There is `All Pages` option meaning that all selected pages will be applied as well as `None` meaning that no page will be applied - this can be useful to extracted data about the authorized account itself. It is represented by Facebook Grapi API parameter `ids` that is comma separated list of page ids.
+Specifies Facebook page that the query will be applied to. Can be chosen from a list of selected pages after authorization. There is `All Pages` option meaning that all selected pages will be applied as well as `None` meaning that no page will be applied - this can be useful to extracted data about the authorized account itself. It is represented by Facebook Graph API parameter `ids` that is comma separated list of page ids.
 
 ### Since and Until (Advanced tab)
 Represents corresponding Facebook Graph API request parameters and specifies date range that will be applied to time based data retrieved by the **endpoint**, e.g. if endpoint is `feed` then all posts created within the since-until range will be retrieved. Since or Until parameter is parsed via [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified:
@@ -60,6 +60,12 @@ Represents corresponding Facebook Graph API request parameters and specifies dat
 For consistent results, specify both since and until parameters. Also, it is recommended that the time difference is a maximum of 6 months.
 
 ### Limit (Advanced Tab)
-Represents Facebook Graph API request parameter `limit` and is the maximum number of objects that may be returned in one page of the request. Default is 25 and maximum is 100. It is usefull when Facebook Graph Api returns error saying there are too many data requested, in such cases lower the limit and retry the query run.
+Represents Facebook Graph API request parameter `limit` and is the maximum number of objects that may be returned in one page of the request. Default is 25 and maximum is 100. It is useful when Facebook Graph Api returns error saying there are too many data requested, in such cases lower the limit and retry the query run.
 
 ## Output Data Description
+Output data represent tree where each node is array of objects returned from Facebook Graph API and transformed into one or more CSV tables. Each row of table represents one object. Each table has primary key auto-detected during extraction and so table data is **imported incrementally**. Columns of the output tables represent fields from the **fields** query parameter. Moreover each table will always contain the following basic set of columns:
+
+- **id** id returned by Facebook Graph API
+- **ex_account_id** Id of Facebook page corresponding to the object stored in the row
+- **fb_graph_node** describes the objects "vertical position" of the resulting tree. e.g for comments it will be `page_feed_comments`, for sub-comments (i.e. comments of comments) it will be `page_feed_comments_comments` etc
+- **parent_id** refers to **id** column of a parent object represented by some other row and/or table. For example if the row is representing a comment object then its parent is post and so parent_id is the id of the post. The parent object type can be also determined from **fb_graph_node** column as a substring from the beginning until the last occurrence of underscore, e.g. page\_feed\_comments -> page_feed. The top parent id is a Facebook page id.
