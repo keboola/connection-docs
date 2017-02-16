@@ -69,3 +69,7 @@ Output data represent tree where each node is array of objects returned from Fac
 - **ex_account_id** Id of Facebook page corresponding to the object stored in the row
 - **fb_graph_node** describes the objects "vertical position" of the resulting tree. e.g for comments it will be `page_feed_comments`, for sub-comments (i.e. comments of comments) it will be `page_feed_comments_comments` etc
 - **parent_id** refers to **id** column of a parent object represented by some other row and/or table. For example if the row is representing a comment object then its parent is post and so parent_id is the id of the post. The parent object type can be also determined from **fb_graph_node** column as a substring from the beginning until the last occurrence of underscore, e.g. page\_feed\_comments -> page_feed. The top parent id is a Facebook page id.
+
+## Facebook API Version
+You can set version of Facebook Graph API that will be applied for all request made to Facebook Graph AIP by facebook extractor.
+![Screenshot - Api Version](/extractors/facebook/apiversion.png){: .image-popup}
