@@ -89,11 +89,14 @@ in a single page of the request. Default is 25 and maximum is 100. It is useful 
 too many data requested. In such case, you can lower the limit and retry the query run.
 
 ## Output Data Description
-Output data represent tree where each node is array of objects returned from Facebook Marketing API and transformed into one or more CSV tables. Each row of table represents one object. Each table has primary key auto-detected during extraction and so table data is **imported incrementally**. Columns of the output tables represent fields from the **fields** query parameter. Moreover each table will always contain the following basic set of columns:
+Output data represent [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an array of objects returned from Facebook Graph API. The
+tree is transformed into one or more CSV tables. Each row of a table represents one object. Each table has primary key auto-detected during extraction and so
+table data is **imported incrementally**. Columns of the output tables represent fields from the `Fields` query option. Moreover each table will always
+contain the following basic set of columns:
 
-- **ex_account_id** Id of ad account corresponding to the object stored in the row
-- **fb_graph_node** describes the objects "vertical position" of the resulting tree. e.g for ads it will be `page_ads`, for ads insights it will be `page_ads_insights` etc
-- **parent_id** refers to **id** column of a parent object represented by some other row and/or table. For example if the row is representing a insight object then its parent is ad and so parent_id is the id of the ad. The parent object type can be also determined from **fb_graph_node** column as a substring from the beginning until the last occurrence of underscore, e.g. page\_ads\_insights -> page_ads. The top parent id is an ad account id.
+- `ex\_account\_id` -- Id of the ad account corresponding to the object stored in the row.
+- `fb\_graph\_node` -- Describes the "vertical position" of the object in the resulting tree. E.g. for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
+- `parent_id` --  Refers to **id** column of a parent object represented by some other row and/or table. For example if the row is representing a insight object then its parent is ad and so parent_id is the id of the ad. The parent object type can be also determined from **fb_graph_node** column as a substring from the beginning until the last occurrence of underscore, e.g. page\_ads\_insights -> page_ads. The top parent id is an ad account id.
 
 ## Facebook API Version
 You can set version of Facebook Marketing API that will be applied for all request made to Facebook Markegint API by facebook extractor. Read more about Marketing API versions [here](https://developers.facebook.com/docs/marketing-api/versions).

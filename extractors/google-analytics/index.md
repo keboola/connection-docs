@@ -58,8 +58,8 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 
  8. To store the results to Storage, click the "play" icon on the query list page.
 
- ![Screenshot - Create New Query](/extractors/google-analytics/ui_new_query.png)
- {: .image-popup}
+{: .image-popup}
+![Screenshot - Create New Query](/extractors/google-analytics/ui_new_query.png)
 
 ## Date Ranges
 A date range specifies a time window from which the data will be extracted.
