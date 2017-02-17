@@ -73,11 +73,16 @@ items:
           - url: /extractors/marketing-sales/google-analytics/
             title: Google Analytics
 
+          - url: /extractors/marketing-sales/facebook-ads/
+            title: Facebook Ads
+
       - url: /extractors/social/
         title: Social
         items:
           - url: /extractors/social/twitter/
             title: Twitter
+          - url: /extractors/social/facebook/
+            title: Facebook
 
       - url: /extractors/other/
         title: Other
