@@ -15,14 +15,11 @@ To do that, you will need a Google Analytics account. If you do not have one, cr
 Google Analytics Extractor works with the newest version of the [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/),
 and provides the following key features:
 
- - **Metric expressions**
-  The API allows you to request not only built-in metrics but also combinations of metrics expressed in mathematical operations. For example, you can use the expression ga:goal1completions/ga:sessions to request the goal completions per number of sessions.
+ - **Metric expressions** --- The API allows you to request not only built-in metrics but also combinations of metrics expressed in mathematical operations. For example, you can use the expression `ga:goal1completions/ga:sessions` to request the goal completions per number of sessions.
 
- - **Multiple date ranges**
-  The API allows you to get data in two date ranges in a single request.
+ - **Multiple date ranges** --- The API allows you to get data in two date ranges in a single request.
 
- - **Multiple segments**
-  The API enables you to get multiple segments in a single request.
+ - **Multiple segments** --- The API enables you to get multiple segments in a single request.
 
 
 ## Create New Configuration
@@ -33,7 +30,7 @@ Find Google Analytics in the list of extractors and create a new configuration. 
 
 **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google Analytics data.
 
-Select Google Analytics account and choose profiles (views) from which you would like to extract data.
+Select the desired Google Analytics account and profiles (views) from which you would like to extract data.
 
 {: .image-popup}
 ![Screenshot - Select profiles](/extractors/google-analytics/ui_profiles.png)
