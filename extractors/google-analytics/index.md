@@ -66,6 +66,21 @@ You can use any expression compatible with the [PHP strtotime() function](http:/
 Let's say you want to see Sessions by month, compared to the same month last year.
 Of course, you can download all the data from last year, but with this approach, you can download just the data you need.
 
+## Anti-Sampling
+Google Analytics API doesn't always return precise data. Under certain circumstances, the data returned are sampled.
+Read more about sampling [here](https://support.google.com/analytics/answer/2637192?hl=en).
+
+To work around this problem and get more precise results, you can choose from one of two anti-sampling algorithms - DailyWalk or Adaptive. Both are based on the same principle, to divide the wanted date range into smaller chunks.
+
+{: .image-popup}
+![Screenshot - Anti Sampling](/extractors/google-analytics/ui_anti_sampling.png)
+
+**DailyWalk** as the name suggest divides the date range by days. So the extractor needs to make as many request as there are days in the date range.
+
+**Adaptive** algorithm is using more sophisticated approach, and divides the date range into few smaller date ranges. Read in-depth explanation of the algorithm here, if you are interested. 
+
+DailyWalk algorithm might be more precise in some cases, but usually you will get the same results faster with the Adaptive algorithm.
+
 ## Filters
 Filters allow you to limit and modify the data that is included in a view. For example, you can use filters to exclude traffic from particular IP addresses, focus on a specific subdomain or directory, or convert dynamic page URLs into readable text strings.
 If interested, read more about [how to use filters](https://support.google.com/analytics/answer/1033162).
