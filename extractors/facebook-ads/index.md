@@ -98,5 +98,13 @@ contain the following basic set of columns:
 - `fb\_graph\_node` -- Describes the "vertical position" of the object in the resulting tree. E.g. for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
 - `parent_id` --  Refers to **id** column of a parent object represented by some other row and/or table. For example if the row is representing a insight object then its parent is ad and so parent_id is the id of the ad. The parent object type can be also determined from **fb_graph_node** column as a substring from the beginning until the last occurrence of underscore, e.g. page\_ads\_insights -> page_ads. The top parent id is an ad account id.
 
+### Ads Insghts Data Description
+Tables containing ads/campaigns insights data have a specific structure. Consider the following query:
+
+- Endpoint parameter: `campaigns`
+- Fields parameter: `insights.action_breakdowns(action_type).date_preset(last_28_days).time_increment(1){account_id,account_name,campaign_id,campaign_name,actions}`
+
+ The query asks for [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) data specified by [insights api field](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) `actions`. In the api response, each insights object contains an array of actions. The resulting table has each insights object copied into rows by count of all such arrays, i.e.,  [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) objects listed for each insights object in arrays. Morover, columns of the resulting insights table contain column `ads_action_name` with name of the ads action array(in this case actions) and columns from fields of [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) such as `action_type`, `action_reaction`, `value`.
+
 ## Facebook API Version
 You can set version of Facebook Marketing API that will be applied for all request made to Facebook Markegint API by facebook extractor. Read more about Marketing API versions [here](https://developers.facebook.com/docs/marketing-api/versions).
