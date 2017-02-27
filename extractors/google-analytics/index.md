@@ -67,22 +67,25 @@ Let's say you want to see Sessions by month, compared to the same month last yea
 Of course, you can download all the data from last year, but with this approach, you can download just the data you need.
 
 ## Anti-Sampling
-Google Analytics API doesn't always return precise data. Under certain circumstances, the data returned are sampled.
-Read more about sampling [here](https://support.google.com/analytics/answer/2637192?hl=en).
-
-To work around this problem and get more precise results, you can choose from one of two anti-sampling algorithms - DailyWalk or Adaptive. Both are based on the same principle, to divide the wanted date range into smaller chunks.
+The Google Analytics API does not always return precise data. Under certain circumstances, the data 
+returned is [sampled](https://support.google.com/analytics/answer/2637192?hl=en).
+To work around this problem and get more precise results, choose either the DailyWalk or Adaptive 
+anti-sampling algorithm. Both divide the wanted date range into smaller chunks.
 
 {: .image-popup}
 ![Screenshot - Anti Sampling](/extractors/google-analytics/ui_anti_sampling.png)
 
-**DailyWalk** as the name suggest divides the date range by days. So the extractor needs to make as many request as there are days in the date range.
+**DailyWalk**, as the name suggests, divides the date range by days. It means that the extractor needs to 
+make as many requests as there are days in the date range. Even though this algorithm might be more 
+precise in some cases, you usually get the same results faster with the Adaptive algorithm.
 
-**Adaptive** algorithm is using more sophisticated approach, and divides the date range into few smaller date ranges. Read in-depth explanation of the algorithm here, if you are interested. 
-
-DailyWalk algorithm might be more precise in some cases, but usually you will get the same results faster with the Adaptive algorithm.
+The **Adaptive** algorithm uses a more sophisticated approach, splitting the original date range into 
+few smaller date sections. To learn more about it, read this [in-depth explanation](http://code.markedmondson.me/anti-sampling-google-analytics-api/). 
 
 ## Filters
-Filters allow you to limit and modify the data that is included in a view. For example, you can use filters to exclude traffic from particular IP addresses, focus on a specific subdomain or directory, or convert dynamic page URLs into readable text strings.
+Filters allow you to limit and modify the data that is included in a view. For example, you can use 
+filters to exclude traffic from particular IP addresses, focus on a specific subdomain or directory, or 
+convert dynamic page URLs into readable text strings.
 If interested, read more about [how to use filters](https://support.google.com/analytics/answer/1033162).
 
 Learn how to [construct a filter expression](https://developers.google.com/analytics/devguides/reporting/core/v3/reference#filters).
