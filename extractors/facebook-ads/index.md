@@ -21,7 +21,7 @@ Find Facebook Ads in the **Extractors** section. Create a new configuration and 
 
 Authorize the Facebook account with access to the Ad Account you want to extract. 
 You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
-You can always revoke the authorization by going to 
+You can always revoke the authorization by going to the
 [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings) and removing
 `Keboola Ads Extractor` from the list.
 
@@ -60,13 +60,13 @@ The absolute URL is in the form `https://graph.facebook.com/<api_version>/<endpo
 For more info see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference/v2.8). 
 
 A typical example would be [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup). 
-If left empty, then it refers to the data of the Facebook authorized account itself.
+If left empty, it refers to the data of the Facebook authorized account itself.
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of 
 fields but it also can be used to parametrize the fields and nest more endpoints into it. If you look at 
 an [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) endpoint, it returns all 
-created ads. Each ad can contain fields such as `id`, `name`, `adset_id`. The fields parameter in such 
+created ads. Each ad can contain fields such as `id`, `name` and `adset_id`. The fields parameter in such 
 case is `id,name,adset_id`.
 
 - **Fields/Endpoint Nesting**
@@ -94,17 +94,17 @@ if the endpoint is `ads`, then all ads created within the since-until range will
 The *Since* or *Until* parameters are parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) 
 and can be specified:
 
-- **absolutely** -- as a unix timestamp or in `yyyy-mm-dd` format,
+- **absolutely** -- as a unix timestamp or in the `yyyy-mm-dd` format,
 - **relatively** -- for instance, `14 days ago` or `last month`.
 
-For consistent results, specify both `since` and `until` parameters. It is also recommended that the time 
+For consistent results, specify both *since* and *until* parameters. It is also recommended that the time 
 range does not exceed 6 months.
 
 ### Limit (Advanced Tab)
 The *limit* option represents the Facebook Marketing API request parameter `limit`; it is the maximum 
 number of objects that may be returned on a single page of the request. (The default is 25, the maximum 
 is 100.) It is useful when the Facebook Marketing Api returns an error saying there is too much data 
-requested. In such case, you can lower the limit and run the query again.
+requested. In such case, lower the limit and run the query again.
 
 ## Output Data Description
 Output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an 

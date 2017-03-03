@@ -8,20 +8,23 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows to extract data from Facebook using [Facebook Graph API](https://developers.facebook.com/docs/graph-api).
-The data involve pages [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) including comments, likes etc
-and also pages or posts [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights).
+Using the [Facebook Graph API](https://developers.facebook.com/docs/graph-api), this extractor allows you 
+to extract data from Facebook: pages [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) 
+(including comments, likes etc.) as well as pages or posts [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights).
 
 ## Create New Configuration
-Find Facebook under the **Extractors** section. Create a new configuration and name it. It can be renamed any time.
+Find Facebook in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
 
-{: .image-popup}
-![Screenshot - Create configuration](/extractors/facebook/createconfig.png)
-
-Authorize a Facebook account under which you have access to a Facebook page you want to extract. The authorization process asks for `read_insights,public_profile,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). To irrecoverably dissmiss the authorized account, then go to your [Facebook apps tab(under settings)](https://www.facebook.com/settings?tab=applications) and remove `Keboola Connection Extractor` from the list.
+Authorize the Facebook account with access to the Facebook page you want to extract. 
+You will be asked for the `read_insights,public_profile,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
+The authorization can be revoked in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) 
+(under settings) where you can remove `Keboola Connection Extractor` from the list.
 
 {: .image-popup}
 ![Screenshot - Authorize configuration](/extractors/facebook/authorizefb.png)
+{: .image-popup}
+
+![Screenshot - Create configuration](/extractors/facebook/createconfig.png)
 
 Select Facebook pages to extract from the list of fetched pages associated with the authorized account.
 
@@ -29,69 +32,80 @@ Select Facebook pages to extract from the list of fetched pages associated with 
 ![Screenshot - Select Facebook Pages](/extractors/facebook/selectpages.png)
 
 ## Create New Query
-Create new query that specifies data to extract. You can choose from a preconfigured template and all necessary fields will fill up automatically.
+Create a new query and specify what data to extract. If you choose a preconfigured template, 
+all necessary fields will fill up automatically.
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/facebook/newquery.png)
 
-The query is basically a description of a request that the extractor will send to the Facebook Graph API. All options except `name` represent a
-parameter of the [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api), so with a good knowledge of the
-API it should be easy to create a query.
+The query describes the extractor request to be sent to the Facebook Graph API. Knowing the API will make 
+creating a query easy because all options except `name` represent the [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
 ### Name
-Name describes the query and is used to prefix tables name resulting from the query. One query can produce multiple tables. If a table name produced by the query matches
-the query name or its substring trimmed after the last occurrence of underscore then the output table name will not be prefixed and the query name will be used instead.
-E.g. if the query name is `posts_insights` and the produced table name is `insights` then the output table name will be `posts_insights`. If the
-query name is `foo` and the produced table name is `likes` then the output table name will be `foo_likes`.
+The *Name* option describes the query and is used to prefix all table names resulting from the query.
+One query can produce multiple tables. If a table name produced by the query matches the query name or its substring trimmed after the last occurrence of an underscore, then the output table name will not be prefixed and the query name will be used instead. 
+
+For example, if the query name is `ads_insights` and the produced table name is `insights`, then the 
+output table name will be `posts_insights`. If the query name is `foo` and the produced table name is 
+`likes`, then the output table name will be `foo_likes`.
 
 ### Endpoint
-Endpoint is significant URL part of a request made to the Facebook Graph API. The absolute URL is in form `https://graph.facebook.com/<api_version>/<endpoint>`.
+The *Endpoint* option describes a significant URL part of the request made to the Facebook Graph API. 
+The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
 For more information see the [list of supported Facebook Graph API page endpoints](https://developers.facebook.com/docs/graph-api/reference/page/).
-Typical example could be [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed). If left empty then it references data of the Facebook
-page itself such as `insights`.
+
+A typical example would be the [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed). 
+If left empty, it references data of the Facebook page itself such as `insights`.
 
 ### Fields
-Fields precisely describe the data returned from the endpoint. Typically it is a comma-separated list of fields but it also can be used to parametrize the
-fields and also to nest more endpoints into it. If we look at a [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) endpoint it returns all
-posts created by a Facebook page. Each posts contains fields such as `caption`, `message`, `created_time`, `type`, etc. The fields parameter in such case
-is `caption,message,created_time,type`.
+The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of 
+fields but it also can be used to parametrize the fields and nest more endpoints into it. If you look at 
+a [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) endpoint, it returns all
+posts created by a Facebook page. Each post contains fields such as `caption`, `message`, `created_time`, 
+`type`, etc. The fields parameter in such case is `caption,message,created_time,type`.
 
 - **Fields/Endpoint Nesting**
-    Posts can contain comments and these can be included in fields as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list
-    in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/v2.8/comment/) field/endpoint for
-    each post (feed endpoint). This way more endpoints can be nested and basically there is no limit of the nesting level. If you want also likes of comments of posts then
+    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. 
+	The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/v2.8/comment/) field/endpoint for
+    each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you want also likes of comments of posts then
     the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
 
-- **Fields Parameterization**
-    Each field can be parameterized by a dot following the parameter/modifier name and value in brackets. Typical parameters could be `since`, `until` or `limit`
-    or modifiers that the particular endpoint offers such as `metrics` for [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights) endpoint.
-    Example of parameterized fields: `comments.since(2 days ago).until(yesterday){message,created_time,from}` or `insights.since(1000 days ago).metric(page_views_total)`
+- **Fields Parametrization**
+    Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets. 
+	Typical parameters would be `since`, `until` or `limit`,
+    or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights) endpoint.
+    An example of parametrized fields: `comments.since(2 days ago).until(yesterday){message,created_time,from}` or `insights.since(1000 days ago).metric(page_views_total)`.
 
 ### Pages
-The Pages option specifies Facebook page that the query will be applied to. Can be chosen from a list of selected pages after authorization. There is `All Pages` option meaning
-that the query will be applied to all selected pages as well as `None` meaning that query will be applied to no pages. This can be useful to extract data about the
-authorized account itself. This option is represented by Facebook Graph API parameter `ids` that is comma separated list of page ids.
+The *Pages* option specifies the Facebook page that the query will be applied to. It can be chosen from a 
+list of selected pages after authorization. There is the `All Pages` option meaning that the query will 
+be applied to all selected pages. The `None` option means that the query will be applied to no pages. 
+This can be useful when extracting data about the authorized account itself. This option is represented 
+by the Facebook Graph API parameter `ids` that is a comma separated list of page ids.
 
 ### Since and Until (Advanced tab)
-The *Since* and *Until* options represent corresponding Facebook Graph API request parameters and specifies date range that will be applied to time based data
-retrieved by the **endpoint**. E.g. if the endpoint is `feed` then all posts created within the specified since-until range will be retrieved. Since or Until parameter
-is parsed via [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified:
+The *Since* and *Until* options represent corresponding Facebook Graph API request parameters and 
+specify the date range that will be applied to the time based data retrieved by the **endpoint**. For 
+example, if the endpoint is `feed` then all posts created within the specified since-until range will be retrieved. 
 
-- **absolutely** -- as a unix timestamp or in `yyyy-mm-dd` format,
-- **relatively** -- e.g. `14 days ago` or `last month`.
+The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified:
 
-For consistent results, specify both since and until parameters. Also, it is recommended that the time span does not exceed 6 months.
+- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format,
+- **relatively** --- e.g. `14 days ago` or `last month`.
+
+For consistent results, specify both *since* and *until* parameters. It is also recommended that the time 
+range does not exceed 6 months.
 
 ### Limit (Advanced Tab)
-The *Limit* option represents Facebook Graph API request parameter `limit` and is the maximum number of objects that may be returned in one page of the request.
-Default value is 25 and maximum value is 100. It is useful when Facebook Graph API returns an error saying there are too many data requested, in such
-cases do lower the limit and retry the query run.
+The *Limit* option represents the Facebook Graph API request parameter `limit`; it is the maximum number 
+of objects that may be returned in one page of the request. (The default is 25 and the maximum is 100.) 
+It is useful when the Facebook Graph API returns an error saying there is too much data requested; in such
+cases, lower the limit and run the query again.
 
 ## Output Data Description
 Output data represent [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an array of objects returned from Facebook Graph API. The
 tree is transformed into one or more CSV tables. Each row of a table represents one object. Each table has primary key auto-detected during extraction and so
-table data is **imported incrementally**. Columns of the output tables represent fields from the `Fields` query option. Moreover each table will always
-contain the following basic set of columns:
+table data is **imported incrementally**. Columns of the output tables represent fields from the `Fields` query option. Moreover each table will always contain the following basic set of columns:
 
 - `id` -- Id returned by Facebook Graph API,
 - `ex_account_id` -- Id of Facebook page corresponding to the object stored in the row
