@@ -8,10 +8,9 @@ redirect_from:
 * TOC
 {:toc}
 
-Using the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference/v2.8), 
-this extractor allows you to extract ads data from Facebook:
-Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) including adsets, 
-campaigns, and also [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/).
+This extractor uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference/v2.8) to 
+extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) 
+(including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/).
 
 ## Create New Configuration
 Find Facebook Ads in the **Extractors** section. Create a new configuration and name it. It can be renamed any time.
@@ -57,8 +56,7 @@ output table name will be `ads_insights`. If the query name is `foo` and the pro
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Marketing API. 
 The absolute URL is in the form `https://graph.facebook.com/<api_version>/<endpoint>`. 
-For more info see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference/v2.8). 
-
+For more information, see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference/v2.8). 
 A typical example would be [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup). 
 If left empty, it refers to the data of the Facebook authorized account itself.
 
@@ -112,15 +110,16 @@ array of objects returned from the Facebook Graph API. The tree is transformed i
 tables. 
 
 Each table row represents one object. Each table has the primary key auto-detected during the 
-extraction and so table data is **imported incrementally**. Columns of the output tables represent fields 
-from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
+extraction, so table data is **imported incrementally**. The columns of the output tables represent 
+fields from the `Fields` query option. Moreover, each table will always contain the following basic set 
+of columns:
 
 - `ex_account_id` --- Id of the ad account corresponding to the object stored in the row.
 - `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example, for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
 - `parent_id` ---  Refers to the `id` column of a parent object represented by another row and/or 
-table. For instance, if the row is representing an insight object, its parent is ad and `parent_id` is the 
-id of the ad. The parent object type can be also determined from the `fb_graph_node` column as a 
-substring from the beginning until the last occurrence of the underscore, e.g. `page_ads_insights` -> 
+table. For instance, if the row is representing an insight object, its parent is an ad and `parent_id` is 
+the id of the ad. The parent object type can be also determined from the `fb_graph_node` column as a 
+substring from the beginning until the last occurrence of an underscore, e.g. `page_ads_insights` -> 
 `page_ads`. The top parent id is an ad account id.
 
 ### Ads Insights Data Description

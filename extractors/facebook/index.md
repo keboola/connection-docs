@@ -8,25 +8,25 @@ redirect_from:
 * TOC
 {:toc}
 
-Using the [Facebook Graph API](https://developers.facebook.com/docs/graph-api), this extractor allows you 
-to extract data from Facebook: pages [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) 
-(including comments, likes etc.) as well as pages or posts [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights).
+This extractor uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract Facebook pages [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) (including 
+comments, likes etc.), as well as pages or posts [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights).
 
 ## Create New Configuration
 Find Facebook in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
 
+{: .image-popup}
+![Screenshot - Create configuration](/extractors/facebook/createconfig.png)
+
 Authorize the Facebook account with access to the Facebook page you want to extract. 
 You will be asked for the `read_insights,public_profile,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
-The authorization can be revoked in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) 
-(under settings) where you can remove `Keboola Connection Extractor` from the list.
+
+You can always revoke the authorization by removing the *Keboola Connection Extractor* from the list
+in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings) .
 
 {: .image-popup}
 ![Screenshot - Authorize configuration](/extractors/facebook/authorizefb.png)
-{: .image-popup}
 
-![Screenshot - Create configuration](/extractors/facebook/createconfig.png)
-
-Select Facebook pages to extract from the list of fetched pages associated with the authorized account.
+From the list of fetched pages associated with the authorized account, select the Facebook pages you want to extract.
 
 {: .image-popup}
 ![Screenshot - Select Facebook Pages](/extractors/facebook/selectpages.png)
@@ -45,17 +45,16 @@ creating a query easy because all options except `name` represent the [Facebook 
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
 One query can produce multiple tables. If a table name produced by the query matches the query name or its substring trimmed after the last occurrence of an underscore, then the output table name will not be prefixed and the query name will be used instead. 
 
-For example, if the query name is `ads_insights` and the produced table name is `insights`, then the 
-output table name will be `posts_insights`. If the query name is `foo` and the produced table name is 
-`likes`, then the output table name will be `foo_likes`.
+For example, if the query name is `ads_insights` and the produced table name is `insights`, the output 
+table name will be `posts_insights`. If the query name is `foo` and the produced table name is `likes`, 
+the output table name will be `foo_likes`.
 
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Graph API. 
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
-For more information see the [list of supported Facebook Graph API page endpoints](https://developers.facebook.com/docs/graph-api/reference/page/).
-
+For more information, see the [list of supported Facebook Graph API page endpoints](https://developers.facebook.com/docs/graph-api/reference/page/).
 A typical example would be the [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed). 
-If left empty, it references data of the Facebook page itself such as `insights`.
+If left empty, the *Endpoint* option references data of the Facebook page itself.
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of 
@@ -103,21 +102,27 @@ It is useful when the Facebook Graph API returns an error saying there is too mu
 cases, lower the limit and run the query again.
 
 ## Output Data Description
-Output data represent [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an array of objects returned from Facebook Graph API. The
-tree is transformed into one or more CSV tables. Each row of a table represents one object. Each table has primary key auto-detected during extraction and so
-table data is **imported incrementally**. Columns of the output tables represent fields from the `Fields` query option. Moreover each table will always contain the following basic set of columns:
+Output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an 
+array of objects returned from the Facebook Graph API. The tree is transformed into one or more CSV tables. 
 
-- `id` -- Id returned by Facebook Graph API,
-- `ex_account_id` -- Id of Facebook page corresponding to the object stored in the row
-- `fb_graph_node` -- Describes the "vertical position" of the object in the resulting tree. E.g for comments it will
-be `page_feed_comments`, for sub-comments (i.e. comments of comments) it will be `page_feed_comments_comments`.
-- `parent_id` -- Refers to the `id` column of a parent object represented by some other row and table. For example if the row is representing a
-comment object then its parent is post and so parent_id is the id of the post. The parent object type can be also determined
-from `fb_graph_node` column as a substring from the beginning until the last occurrence of underscore. E.g. if `fb_graph_node` contains
-the value `page_feed_comments`, then the parent object type is `page_feed`. The top parent id is a Facebook page id.
+Each row of a table represents one object. Each table has the primary key auto-detected during the 
+extraction, so table data is **imported incrementally**. The columns of the output tables represent 
+fields from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
+
+- `id` -- Id returned by the Facebook Graph API
+- `ex_account_id` -- Id of the Facebook page corresponding to the object stored in the row
+- `fb_graph_node` -- Describes the "vertical position" of the object in the resulting tree. For example, 
+for comments it will be `page_feed_comments`, for sub-comments (i.e. comments of comments) it will be 
+`page_feed_comments_comments`.
+- `parent_id` -- Refers to the `id` column of a parent object represented by some other row and table. 
+For instance, if the row is representing a comment object, its parent is a post and so `parent_id` is the 
+id of the post. The parent object type can be also determined from the `fb_graph_node` column as a 
+substring from the beginning until the last occurrence of an underscore. To give an example, if 
+`fb_graph_node` contains the value `page_feed_comments`, the parent object type is `page_feed`. The 
+top parent id is a Facebook page id.
 
 ## Facebook API Version
-You can set version of Facebook Graph API that will be applied for all request made to the Facebook Graph API by the Facebook extractor.
+You can set the version of the Facebook Graph API that will be applied for all request made to the Facebook Graph API by the Facebook extractor.
 
 {: .image-popup}
 ![Screenshot - Api Version](/extractors/facebook/apiversion.png)
