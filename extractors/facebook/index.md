@@ -45,31 +45,29 @@ creating a query easy because all options except `name` represent the [Facebook 
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
 One query can produce multiple tables. If a table name produced by the query matches the query name or its substring trimmed after the last occurrence of an underscore, then the output table name will not be prefixed and the query name will be used instead. 
 
-For example, if the query name is `ads_insights` and the produced table name is `insights`, the output 
+For example, if the query name is `posts_insights` and the produced table name is `insights`, the output 
 table name will be `posts_insights`. If the query name is `foo` and the produced table name is `likes`, 
 the output table name will be `foo_likes`.
 
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Graph API. 
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
-For more information, see the [list of supported Facebook Graph API page endpoints](https://developers.facebook.com/docs/graph-api/reference/page/).
 A typical example would be the [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed). 
 If left empty, the *Endpoint* option references data of the Facebook page itself.
 
+For more information, see the [list of supported Facebook Graph API page endpoints](https://developers.facebook.com/docs/graph-api/reference/page/).
+
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of 
-fields but it also can be used to parametrize the fields and nest more endpoints into it. If you look at 
-a [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) endpoint, it returns all
-posts created by a Facebook page. Each post contains fields such as `caption`, `message`, `created_time`, 
-`type`, etc. The fields parameter in such case is `caption,message,created_time,type`.
+fields but it also can be used to parametrize the fields and nest more endpoints into it. 
+The [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) endpoint returns all
+posts created by a Facebook page. Each post contains fields such as `caption`, `message`, `created_time` 
+and `type`. The fields parameter in such case is `caption,message,created_time,type`.
 
-- **Fields/Endpoint Nesting**
-    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. 
-	The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/v2.8/comment/) field/endpoint for
-    each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you want also likes of comments of posts then
-    the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
+- **Fields/Endpoint Nesting** ---
+    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/v2.8/comment/) field/endpoint for each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you wanted to include likes of posts comments,the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
 
-- **Fields Parametrization**
+- **Fields Parametrization** ---
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets. 
 	Typical parameters would be `since`, `until` or `limit`,
     or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights) endpoint.
@@ -78,8 +76,8 @@ posts created by a Facebook page. Each post contains fields such as `caption`, `
 ### Pages
 The *Pages* option specifies the Facebook page that the query will be applied to. It can be chosen from a 
 list of selected pages after authorization. There is the `All Pages` option meaning that the query will 
-be applied to all selected pages. The `None` option means that the query will be applied to no pages. 
-This can be useful when extracting data about the authorized account itself. This option is represented 
+be applied to all selected pages. The `None` option means that the query will not be applied to any pages. 
+It can be useful when extracting data about the authorized account itself. This option is represented 
 by the Facebook Graph API parameter `ids` that is a comma separated list of page ids.
 
 ### Since and Until (Advanced tab)
@@ -109,20 +107,21 @@ Each row of a table represents one object. Each table has the primary key auto-d
 extraction, so table data is **imported incrementally**. The columns of the output tables represent 
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
 
-- `id` -- Id returned by the Facebook Graph API
-- `ex_account_id` -- Id of the Facebook page corresponding to the object stored in the row
-- `fb_graph_node` -- Describes the "vertical position" of the object in the resulting tree. For example, 
+- `id` --- Id returned by the Facebook Graph API
+- `ex_account_id` --- Id of the Facebook page corresponding to the object stored in the row
+- `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example, 
 for comments it will be `page_feed_comments`, for sub-comments (i.e. comments of comments) it will be 
 `page_feed_comments_comments`.
-- `parent_id` -- Refers to the `id` column of a parent object represented by some other row and table. 
-For instance, if the row is representing a comment object, its parent is a post and so `parent_id` is the 
-id of the post. The parent object type can be also determined from the `fb_graph_node` column as a 
+- `parent_id` --- Refers to the `id` column of a parent object represented by some other row and table. 
+For instance, if the row is representing a comment object, its parent is a post and `parent_id` 
+is the id of the post. The parent object type can be also determined from the `fb_graph_node` column as a 
 substring from the beginning until the last occurrence of an underscore. To give an example, if 
 `fb_graph_node` contains the value `page_feed_comments`, the parent object type is `page_feed`. The 
-top parent id is a Facebook page id.
+top parent id is the Facebook page id.
 
 ## Facebook API Version
-You can set the version of the Facebook Graph API that will be applied for all request made to the Facebook Graph API by the Facebook extractor.
+You can set the version of the Facebook Graph API that will be applied for all requests made to the API 
+by the Facebook extractor.
 
 {: .image-popup}
 ![Screenshot - Api Version](/extractors/facebook/apiversion.png)

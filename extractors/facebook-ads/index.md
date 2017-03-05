@@ -56,23 +56,25 @@ output table name will be `ads_insights`. If the query name is `foo` and the pro
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Marketing API. 
 The absolute URL is in the form `https://graph.facebook.com/<api_version>/<endpoint>`. 
-For more information, see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference/v2.8). 
 A typical example would be [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup). 
-If left empty, it refers to the data of the Facebook authorized account itself.
+If left empty, the *Endpoint* option refers to the data of the Facebook authorized account itself.
+
+For more information, see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference/v2.8). 
+
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of 
-fields but it also can be used to parametrize the fields and nest more endpoints into it. If you look at 
-an [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) endpoint, it returns all 
+fields but it also can be used to parametrize the fields and nest more endpoints into it. 
+The [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) endpoint returns all 
 created ads. Each ad can contain fields such as `id`, `name` and `adset_id`. The fields parameter in such 
 case is `id,name,adset_id`.
 
-- **Fields/Endpoint Nesting**
+- **Fields/Endpoint Nesting** ---
     Ads can contain recommendations and these can be included in the *fields* as well: `id,name,adset_id,recommendations{title,code,message}`. The comma separated list
     in between the curly brackets `{}` specifies fields of the "nested" field/endpoint
     [ad-recommendation](https://developers.facebook.com/docs/marketing-api/reference/ad-recommendation/). This way more endpoints can be nested and there is no limit of nesting levels.
 
-- **Fields Parametrization**
+- **Fields Parametrization** ---
     Each field can be parametrized by a dot followed by a modifier name and a value in brackets. 
     A typical parameter could be `since`, `until`, `limit`, or any other parameters or modifiers that the particular endpoint offers such as `date_preset` for the [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/) endpoint.
     The following is an example of parametrized fields: 	`insights.action_breakdowns(action_type).date_preset(last_month).time_increment(1){ad_id,impressions,reach,actions,clicks,spend}`
@@ -117,10 +119,10 @@ of columns:
 - `ex_account_id` --- Id of the ad account corresponding to the object stored in the row.
 - `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example, for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
 - `parent_id` ---  Refers to the `id` column of a parent object represented by another row and/or 
-table. For instance, if the row is representing an insight object, its parent is an ad and `parent_id` is 
-the id of the ad. The parent object type can be also determined from the `fb_graph_node` column as a 
+table. For instance, if the row is representing an insight object, its parent is an ad and `parent_id` 
+is the id of the ad. The parent object type can be also determined from the `fb_graph_node` column as a 
 substring from the beginning until the last occurrence of an underscore, e.g. `page_ads_insights` -> 
-`page_ads`. The top parent id is an ad account id.
+`page_ads`. The top parent id is the ad account id.
 
 ### Ads Insights Data Description
 Tables containing ads/campaigns insights data have a specific structure. Consider the following query:
@@ -139,5 +141,5 @@ Tables containing ads/campaigns insights data have a specific structure. Conside
 
 ## Facebook API Version
 You can set the version of the Facebook Marketing API that will be applied for all requests made to the 
-Facebook Marketing API by the Facebook extractor. Read more about the Marketing API versions 
+API by the Facebook Ads extractor. Read more about the Marketing API versions 
 [here](https://developers.facebook.com/docs/marketing-api/versions).
