@@ -8,8 +8,9 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract Facebook pages [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) (including
-comments, likes etc.), as well as pages or posts [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights).
+This extractor uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract 
+your Facebook pages [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) 
+(including comments, likes etc.), as well as pages or posts [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights).
 
 ## Create New Configuration
 Find Facebook in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
@@ -18,7 +19,8 @@ Find Facebook in the **Extractors** section, create a new configuration and name
 ![Screenshot - Create configuration](/extractors/facebook/createconfig.png)
 
 Authorize the Facebook account with access to the Facebook page you want to extract.
-You will be asked for the `read_insights,public_profile,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). Optionally you can use `Direct token insert` to specify manually generated access token.
+You will be asked for the `read_insights,public_profile,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
+Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
 You can always revoke the authorization by removing the *Keboola Connection Extractor* from the list
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
@@ -43,7 +45,9 @@ creating a query easy because all options except `name` represent the [Facebook 
 
 ### Name
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
-One query can produce multiple tables. If a table name produced by the query matches the query name or its substring trimmed after the last occurrence of an underscore, then the output table name will not be prefixed and the query name will be used instead.
+One query can produce multiple tables. If a table name produced by the query matches the query name or 
+its substring trimmed after the last occurrence of an underscore, then the output table name will not be 
+prefixed and the query name will be used instead.
 
 For example, if the query name is `posts_insights` and the produced table name is `insights`, the output
 table name will be `posts_insights`. If the query name is `foo` and the produced table name is `likes`,
@@ -85,13 +89,13 @@ The *Since* and *Until* options represent corresponding Facebook Graph API reque
 specify the date range that will be applied to the time based data retrieved by the **endpoint**. For
 example, if the endpoint is `feed` then all posts created within the specified since-until range will be retrieved.
 
-The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified:
+The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified
 
-- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format,
+- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
 - **relatively** --- e.g. `14 days ago` or `last month`.
 
-For consistent results, specify both *since* and *until* parameters. It is also recommended that the time
-range does not exceed 6 months.
+For consistent results, specify both the *since* and *until* parameters. It is also recommended that the 
+time range does not exceed 6 months.
 
 ### Limit (Advanced Tab)
 The *Limit* option represents the Facebook Graph API request parameter `limit`; it is the maximum number
@@ -100,11 +104,11 @@ It is useful when the Facebook Graph API returns an error saying there is too mu
 cases, lower the limit and run the query again.
 
 ## Output Data Description
-Output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an
+The output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an
 array of objects returned from the Facebook Graph API. The tree is transformed into one or more CSV tables.
 
 Each row of a table represents one object. Each table has the primary key auto-detected during the
-extraction, so table data is **imported incrementally**. The columns of the output tables represent
+extraction, so the table data is **imported incrementally**. The columns of the output tables represent
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
 
 - `id` --- Id returned by the Facebook Graph API
@@ -127,26 +131,29 @@ by the Facebook extractor.
 ![Screenshot - Api Version](/extractors/facebook/apiversion.png)
 
 ## Migration from Old Extractor
-The configuration and resulting data tables produced by both new and old extractors are too different so their migration has to be done manually in the following steps:
+The configuration and resulting data tables produced by both new and old extractors are too different; 
+that's why their migration has to be done manually by following the next seven steps:
 
-1. Create a configuration of new Facebook extractor
-2. Migrate Authorized Account(see below)
+1. Create a configuration of your new Facebook extractor
+2. Migrate your Authorized Account (see below)
 3. Add new queries to the configuration
 4. Run the configuration
-5. Preview and analyze resulting tables
-6. Update corresponding transformations and writers with new tables
-7. Update affected orchestrations
+5. Preview and analyze the resulting tables
+6. Update all corresponding transformations and writers with the new tables
+7. Update all affected orchestrations
 
 ### Migration of Authorized Account
 
-Use `Direct token insert` in the authorization modal and copy access token stored in `sys.c-ex-facebook.accounts` old sys table under column token. For each row of the sys table there has to be one configuration of the new extractor.
+Use `Direct token insert` in the authorization modal and copy the access token stored in the old 
+`sys.c-ex-facebook.accounts` sys table under the column token. For each row of the sys table, there has to 
+be one configuration of the new extractor.
 
-- Copy token from old configuration
+- Copy the token from the old configuration
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/facebook/copytoken.png)
 
-- Insert copied token
+- Insert the copied token
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/facebook/inserttoken.png)

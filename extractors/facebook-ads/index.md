@@ -19,7 +19,8 @@ Find Facebook Ads in the **Extractors** section. Create a new configuration and 
 ![Screenshot - Create configuration](/extractors/facebook-ads/createconfig.png)
 
 Authorize the Facebook account with access to the Ad Account you want to extract.
-You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). Optionally you can use `Direct token insert` to specify manually generated access token.
+You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
+Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
 You can always revoke the authorization by going to the
 [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings) and removing
@@ -47,7 +48,9 @@ request](https://developers.facebook.com/docs/graph-api/using-graph-api) paramet
 
 ### Name
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
-One query can produce multiple tables. If a table name produced by the query matches the query name or its substring trimmed after the last occurrence of an underscore, then the output table name will not be prefixed and the query name will be used instead.
+One query can produce multiple tables. If a table name produced by the query matches the query name or 
+its substring trimmed after the last occurrence of an underscore, then the output table name will not be 
+prefixed and the query name will be used instead.
 
 For example, if the query name is `ads_insights` and the produced table name is `insights`, then the
 output table name will be `ads_insights`. If the query name is `foo` and the produced table name is
@@ -92,13 +95,13 @@ specify a date range that will be applied to time based data retrieved by the **
 if the endpoint is `ads`, then all ads created within the since-until range will be retrieved.
 
 The *Since* or *Until* parameters are parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php)
-and can be specified:
+and can be specified
 
-- **absolutely** -- as a unix timestamp or in the `yyyy-mm-dd` format,
+- **absolutely** -- as a unix timestamp or in the `yyyy-mm-dd` format, or
 - **relatively** -- for instance, `14 days ago` or `last month`.
 
-For consistent results, specify both *since* and *until* parameters. It is also recommended that the time
-range does not exceed 6 months.
+For consistent results, specify both the *since* and *until* parameters. It is also recommended that the 
+time range does not exceed 6 months.
 
 ### Limit (Advanced Tab)
 The *limit* option represents the Facebook Marketing API request parameter `limit`; it is the maximum
@@ -107,12 +110,12 @@ is 100.) It is useful when the Facebook Marketing Api returns an error saying th
 requested. In such case, lower the limit and run the query again.
 
 ## Output Data Description
-Output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an
+The output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an
 array of objects returned from the Facebook Graph API. The tree is transformed into one or more CSV
 tables.
 
 Each table row represents one object. Each table has the primary key auto-detected during the
-extraction, so table data is **imported incrementally**. The columns of the output tables represent
+extraction, so the table data is **imported incrementally**. The columns of the output tables represent
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set
 of columns:
 
@@ -125,50 +128,47 @@ substring from the beginning until the last occurrence of an underscore, e.g. `p
 `page_ads`. The top parent id is the ad account id.
 
 ### Ads Insights Data Description
-Tables containing ads/campaigns insights data have a specific structure. Consider the following query:
+All tables containing ads/campaigns insights data have a specific structure. Consider the following query:
 
 - Endpoint parameter: `campaigns`
 - Fields parameter: `insights.action_breakdowns(action_type).date_preset(last_28_days).time_increment(1){account_id,account_name,campaign_id,campaign_name,actions}`
 
- The query asks for [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) data specified by the
+ The query asks for the [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) data specified by the
  [insights api field](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/)
  `actions`. In the api response, each insights object contains an array of actions. The resulting table
- has each insights object copied into rows by the count of all such arrays, i.e., [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/)
- objects listed for each insights object in arrays. Moreover, columns of the resulting insights table
- contain the column `ads_action_name` with the name of the ads action array (in this case actions) and
- columns from fields of [ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/)
- such as `action_type`, `action_reaction` and `value`.
+ has each insights object copied into rows by the count of all such arrays, i.e., ads action stats 
+ objects listed for each insights object in arrays. Moreover, the columns of the resulting insights table 
+ contain the column `ads_action_name` with the name of the ads action array (in this case actions) and 
+ columns from fields of ads action stats such as `action_type`, `action_reaction` and `value`.
 
 ## Facebook API Version
-<<<<<<< HEAD
 You can set the version of the Facebook Marketing API that will be applied for all requests made to the
 API by the Facebook Ads extractor. Read more about the Marketing API versions
 [here](https://developers.facebook.com/docs/marketing-api/versions).
-=======
-You can set version of Facebook Marketing API that will be applied for all request made to Facebook Markegint API by facebook extractor. Read more about Marketing API versions [here](https://developers.facebook.com/docs/marketing-api/versions).
 
 ## Migration from Old Extractor
-The configuration and resulting data tables produced by both new and old extractors are too different so their migration has to be done manually in the following steps:
+The configuration and resulting data tables produced by both new and old extractors are too different; 
+that's why their migration has to be done manually by following the next seven steps:
 
-1. Create a configuration of new Facebook Ads extractor
-2. Migrate Authorized Account(see below)
+1. Create a configuration of your new Facebook Ads extractor
+2. Migrate your Authorized Account (see below)
 3. Add new queries to the configuration
 4. Run the configuration
-5. Preview and analyze resulting tables
-6. Update corresponding transformations and writers with new tables
-7. Update affected orchestrations
+5. Preview and analyze the resulting tables
+6. Update all corresponding transformations and writers with the new tables
+7. Update all affected orchestrations
 
 ### Migration of Authorized Account
 
-Use `Direct token insert` in the authorization modal and copy access token stored under `access_token` attribute in old sys table configuration:
+Use `Direct token insert` in the authorization modal and copy the access token stored under the 
+`access_token` attribute in the old sys table configuration:
 
-- Copy token from old configuration
+- Copy the token from the old configuration
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/facebook-ads/copytoken.png)
 
-- Insert copied token
+- Insert the copied token
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/facebook-ads/inserttoken.png)
->>>>>>> ex-fb-(ads): manuall migration description and insert token option
