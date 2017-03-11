@@ -45,7 +45,7 @@ When they follow the link, they will be taken to the activation form:
 {: .image-popup}
 ![Screenshot -- Activation form](/management/users/register-2.png)
 
-After that, the users will be taken to the [login form](todo). They can immediately login to KBC 
+After that, the users will be taken to the [login form](/management/users/#authentication). They can immediately login to KBC 
 and see the project they have been invited to.
 In the User list, you will see their chosen screen name:
 
