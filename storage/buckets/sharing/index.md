@@ -52,7 +52,7 @@ Then click `Enable sharing` and confirm your action.
 ![Screenshot -- Enable sharing](/storage/buckets/sharing/sharing-enable-1.png)
 
 {: .image-popup}
-![Screenshot -- Confirm action](/storage/buckets/sharing/sharing-enable-2-v2.png)
+![Screenshot -- Confirm action](/storage/buckets/sharing/sharing-enable-2-v3.png)
 
 The bucket is now marked as `Shared to organization` and is available for other projects. 
 Remember to add (link) it to each project manually.
