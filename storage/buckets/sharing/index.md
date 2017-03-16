@@ -18,6 +18,12 @@ and rows are counted only in the source project.
 All changes and events in a shared bucket are propagated to its linked buckets; 
 any tables you create in the shared bucket become immediately available in the destination projects.
 
+## Sharing type
+You can specify who can link the bucket to project.
+
+- **Organization Member** - Only organization member is able to link the shared bucket to project
+- **Project Member** - Every project member is able to link the shared bucket to project.
+
 ## Limitations
 
 There are some limitations to how shared buckets can be used:
