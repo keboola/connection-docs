@@ -19,10 +19,10 @@ All changes and events in a shared bucket are propagated to its linked buckets;
 any tables you create in the shared bucket become immediately available in the destination projects.
 
 ## Sharing Type
-You can specify who can link the bucket to a project.
+You can specify who can link the bucket to a project:
 
-- **Organization Member** - Only organization members are able to link the shared bucket to a project.
-- **Project Member** - Every project member is able to link the shared bucket to a project.
+- **Organization Member** --- Only organization members are able to link the shared bucket to a project.
+- **Project Member** --- Every project member is able to link the shared bucket to a project.
 
 ## Limitations
 
