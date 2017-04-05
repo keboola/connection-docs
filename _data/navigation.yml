@@ -186,6 +186,9 @@ items:
       - url: /management/organization/
         title: Organization
 
+      - url: /management/limits/
+        title: Limits
+
       - url: /management/support/
         title: Keboola Support
 

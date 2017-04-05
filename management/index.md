@@ -13,7 +13,6 @@ All projects are grouped into [**Organizations**](/management/organization/).
 
 {% comment %}
 notifikace
-limity projektu
 {% endcomment %}
 
 ### Data Governance 
