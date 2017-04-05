@@ -6,7 +6,7 @@ permalink: /management/limits/
 * TOC
 {:toc}
 
-Each Keboola Connection Project has two kinds of limits -- **business limits** and **platform limits**. 
+Each Keboola Connection Project has two kinds of limits --- **business limits** and **platform limits**. 
 Business limits constitute your business usage of our platform. You can see them as the *size of your project*.
 Platform limits represent what our platform is technically capable of.
 
@@ -14,6 +14,7 @@ Platform limits represent what our platform is technically capable of.
 Project Business limits are defined by your contract. They do scale with your business and accommodate 
 to your needs. Business limits are shown under **Users & Settings** and the **Limits** tab:
 
+{: .image-popup}
 ![Screenshot - Limits](/management/limits/limits.png)
 
 The **Request Increase** button lets you create a support ticket for your Maintainer to request
@@ -54,6 +55,7 @@ the same amount of credits.
 
 The **Project Power** tab in **Users & Settings** shows detailed credit consumption by days and components:
 
+{: .image-popup}
 ![Screenshot - Project Power](/management/limits/project-power.png)
 
 ### Storage Size
@@ -74,7 +76,8 @@ limits to your GoodData project. These limits are again soft limits.
 The production project switch shows whether you are using a [*demo* or 
 *production* project](/writers/gooddata). Demo project is provided free of charge. 
 
-![Screenshot - Gooddata Limits](/management/limits/limits-2.png)
+{: .image-popup}
+![Screenshot - GoodData Limits](/management/limits/limits-2.png)
 
 ## Platform Limits
 Apart from the Business limits, there are limitations of what Keboola Connection platform can take. These 
@@ -87,4 +90,4 @@ For example the [Redshift backend](/storage/#backend-properties) allows maximum 
 is a hard limit and nothing can be done about it (except for using Snowflake backend). As another example,
 you should not have more than 200 tables in a single bucket. This is a soft limit related to
 how we believe the Storage component should be used. Nothing prevents you exceeding that limit, but the component
-performance may degrade. The full list of platform limit is available as a [separate document](https://docs.google.com/a/keboola.com/spreadsheets/d/1SqUE6vS5Nq0MmB6Kdw5DyuPjlbyXJ0zMDoGDU5cOfSI/edit?usp=sharing)
+performance may degrade. The full list of platform limit is available as a [separate document](https://docs.google.com/a/keboola.com/spreadsheets/d/1SqUE6vS5Nq0MmB6Kdw5DyuPjlbyXJ0zMDoGDU5cOfSI/edit?usp=sharing).
