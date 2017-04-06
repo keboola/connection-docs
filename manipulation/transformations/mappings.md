@@ -78,7 +78,7 @@ of your transformation (i.e. contents of the Output Mapping *Source* table).
 	- If this table already exists in Storage, it will be either overwritten or extended.  
 - **Incremental** --- Checking this option makes sure that in case the *Destination* table already exists, 
 it is not overwritten, but resulting data are appended to it. 
-- **Primary key** --- The primary key of the destination table; if the table already exists, 
+- **Primary key** --- The [primary key](/storage/tables/#primary-keys-and-indexes) of the destination table; if the table already exists, 
 the primary key must match. Feel free to use a multi-column primary key.
 - **Delete rows** --- Delete rows matching the criteria from the destination table before importing the data.
 
