@@ -49,10 +49,82 @@ An alias table can be filtered by a simple condition.
 
 There are the following limitations:
 
-- Filtering is enabled only on indexed columns.
+- Filtering is enabled only on [indexed columns](todo).
 - When an alias is created, the index on the filtered column of the source table cannot be removed.
 - Alias columns are automatically synchronized, by default, with the source table. Columns added to the source table will be added to the alias automatically.
 You can prevent this by disabling *Synchronize columns with source table*.
+
+## Primary Keys and Indexes
+Each table may have a **primary key** defined on one ore more columns. A primary key represents an
+identifier of each row in the table. Primary key is can be defined manually on a table or as part of 
+[Output mapping](/manipulation/transformations/mappings/#output-mapping) of 
+[Transformations](/manipulation/transformations/) and 
+[Applications](/manipulation/applications/). The settings on both places must match otherwise you will receive an
+error:
+
+    Output mapping does not match destination table: primary key '' does not match 'Id' in 'out.c-tutorial.opportunity_denorm' (check transformations Denormalize opportunities (id opportunity.denormalize-opportunities)).
+
+This means that you cannot change the primary key of a table freely. Also note that you cannot set the primary 
+table on a column which contains duplicates --- you will receive the following error: 
+
+    Cannot crate new primary key, duplicate values in primary key columns
+
+If you want to manually set a primary key on a table, you can do so in `Storage`:
+
+{: .image-popup}
+![Screenshot - Create Primary Key](/storage/tables/create-primary-key-1.png)
+
+Then select the columns you wish to add to the primary key:
+
+{: .image-popup}
+![Screenshot - Select columns](/storage/tables/create-primary-key-2.png)
+
+To remove an existing primary key, click the bin icon:
+
+{: .image-popup}
+![Screenshot - Remove Primary Key](/storage/tables/remove-primary-key.png)
+
+Note that creating and removing the primary key can take some time on large tables.
+
+Apart from the primary key, you can mark a column as indexed. Indexes do have some performance effects only
+on the deprecated MySQL backend. On the Redshfit and Snowflake backends marking a column as indexed does
+not have any effect. You can mark a column as indexed in the table detail:
+
+{: .image-popup}
+![Screenshot - Create Index](/storage/tables/create-index.png)
+
+### Primary Key Deduplication
+When a primary key is defined on column, the value of that column is guaranteed to be unique in the table.
+If you load new data into the table, the **rows with duplicate values of primary key will be ignored**. If the
+primary key is defined on multiple columns, the combination of their values must be unique. If you have the 
+following table with a primary key defined on columns `name` and `age`:
+
+|name|age|money|
+|---|---|---|
+|John|24|$43|
+|Jane|24|$41|
+|John|40|$45|
+
+And you import the following data to the table:
+
+|name|age|money|
+|---|---|---|
+|Annie|30|$50|
+|John|24|$40000|
+|Jane|40|$7000|
+
+The result table will contain:
+
+|name|age|money|
+|---|---|---|
+|John|24|$43|
+|Jane|24|$41|
+|John|40|$45|
+|Annie|30|$50|
+|Jane|40|$7000|
+
+When importing data into a table with primary key, the uniqueness is checked and data are de-duplicated. 
+The record `John,24,$40000` will be ignored, because it violates the primary key.
 
 ## Copying Tables / Table Snapshots
 If you want to physically copy a table, use the [*table snapshot*](/tutorial/management/#table-snapshots) feature.
