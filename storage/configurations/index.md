@@ -87,3 +87,30 @@ And a new configuration version is created:
 {: .image-popup}
 ![Screenshot -- Rollback](/storage/configurations/rollback-3.png)
 
+## Delete Configuration
+To delete a configuration, click the **Bin** icon in the configuration list or the **Move to Trash** button in
+configuration detail. Both of these operations move the configuration to **Trash**.
+
+{: .image-popup}
+![Screenshot -- Delete](/storage/configurations/delete.png)
+
+A configuration moved to Trash acts as deleted (is removed from orchestrations, cannot be run, is not displayed), 
+but can be recovered from the configuration Trash. The Trash is accessible in the **Users & Settings** menu:
+
+{: .image-popup}
+![Screenshot -- Configuration Trash](/storage/configurations/configuration-trash.png)
+
+The configuration Trash allows you to **restore** a configuration or permanently delete it. To find the 
+desired configuration you can use filter and search in the upper part of the page. A configuration deleted
+from the trash cannot be recovered. When a configuration is restored a new version is created, therefore
+you can see the complete history in the configuration versions:
+
+{: .image-popup}
+![Screenshot -- Configuration History](/storage/configurations/configuration-restored.png)
+
+For technical reasons, there are some components (mainly Orchestrator and GoodData Writer) whose 
+configurations cannot be restored when deleted. These configurations will still be listed as 
+deleted, but cannot be restored:
+
+{: .image-popup}
+![Screenshot -- Configuration Restore Disabled](/storage/configurations/configuration-trash-2.png)
