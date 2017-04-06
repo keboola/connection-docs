@@ -113,6 +113,35 @@ All you need to do is
 {: .image-popup}
 ![Screenshot - Sample Input Output Mapping](/manipulation/transformations/python/sample-io.png)
 
+### Events and Output
+It is possible to output informational and debug messages from the R script simply by printing them out. 
+The following R script
+
+{% highlight r %}
+
+print('doing something')
+Sys.sleep(3)
+print('doing something else')
+Sys.sleep(3)
+write('still doing something', stdout())
+Sys.sleep(3)
+write('error message', stderr())
+Sys.sleep(3)
+app$logInfo("information")
+Sys.sleep(3)
+app$logError("error")
+Sys.sleep(3)
+TRUE
+{% endhighlight %}
+
+Will produce the following events in transformation job:
+
+![Screenshot - Script Events](/manipulation/transformations/r/events-output.png)
+
+The `app$logInfo` and `app$logError` functions are internally available and can be useful if you need to
+know the precise server time of when the event occurred (the standard event timestamp in job events is the time when the event 
+was received converted to local time-zone).
+
 ### Going further
 The above steps are usually sufficient for daily development and debugging of moderately complex R transformations,
 although they do not reproduce the transformation execution environment exactly. To create a development environment
