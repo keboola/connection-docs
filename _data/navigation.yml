@@ -132,6 +132,9 @@ items:
       - url: /storage/configurations/
         title: Configurations
 
+      - url: /storage/byodb/
+        title: Bring Your Own DB
+
   - url: /manipulation/
     title: Data Manipulation
     items:

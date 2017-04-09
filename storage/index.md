@@ -36,7 +36,9 @@ Maximum number of columns in single table | Max. row size of 65,535 bytes | 1200
 Maximum table cell size | 64kB | 64kB | 1MB |
 Sync export (Data Preview) columns limit | x | x | 110 |
 
-\* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`
+\* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`.
+
+It is also possible to use [your own Redshift or Snowflake](/storage/byodb/) database with KBC.
 
 ### Redshift Table Size
 
@@ -55,6 +57,4 @@ Backendy
 - vypsat a strucne uvest jake jsou mezi nimi rozdily, odkaz na billing a na sales
 
 Jobs/Events ze je to k nicemu a lepsi jsou events u Jobu
-
-kopirovani/sdileni dat mezi projekty
 {% endcomment %}
