@@ -51,7 +51,7 @@ The following are the currently available backends:
 can be a matter of your preference or the overall performance. Projects start with Snowflake and they can be switched to Redshift on a dedicated cluster. 
 That unfortunately requires rewriting the SQL code. MySQL is slowly getting deprecated.
 
-- **Script** --- [Python](./python/), [R](./r/) or [OpenRefine](./openrefine/)? Choose according to your taste and available libraries.
+- **Script** --- [Python](./python/), [R](./r/) or [OpenRefine](./openrefine/). Choose according to your taste and available libraries.
 
 ## Versions
 Each change in the transformation configuration creates a new version of the whole bucket configuration. 
@@ -60,28 +60,30 @@ You can easily access previous versions of all transformations in a bucket and s
 ## Developing Transformations
 You can easily develop Snowflake, Redshift and MySQL transformations using [Sandbox](/manipulation/transformations/sandbox),
 a separate database storage. As a safe workspace with required data, 
-it allows you to run  and play with your arbitrary SQL scripts on the copies of your tables 
+it allows you to run and play with your arbitrary SQL scripts on the copies of your tables 
 without affecting data in your Storage, or your transformations.
 
 
 ## Deprecated Features
 
-Older projects have a slightly different UI, that has several features turned on. 
-Newly created projects does not display or allow these features. Our goal is to make the transformations more transparent 
+Older projects have a slightly different UI that has several features turned on. 
+Newly created projects do not display or allow these features. Our goal is to make the transformations more transparent 
 and easier to understand. 
 
-### Mixing backends
+### Mixing Backends
 
-It is possible to run transformations with mixed backends in a single bucket, eg. MySQL and Python.
+It is possible to run transformations with mixed backends in a single bucket, e.g., MySQL and Python.
 
 ### Phases
 
 Phases allow you to run multiple transformation steps within a single workspace, for example, a single MySQL database. 
-If multiple steps use the same input mapping (they share data), it might save a bit of processing time, but, ultimately, it makes everything less clear and isolated. 
+If multiple steps use the same input mapping (they share data), it might save a bit of processing time, but, ultimately, it 
+makes everything less clear and isolated. 
 To save time, you can run multiple orchestration tasks in parallel.
 
 ### Dependencies
 
 Dependencies allow you to chain transformation steps. A given transformation is executed after all required steps have been executed. 
 
-Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of SQL code. However, a network of nontransparent dependency trees was usually created...
+Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of 
+SQL code. However, a network of nontransparent dependency trees was usually created...
