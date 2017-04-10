@@ -6,8 +6,8 @@ permalink: /storage/file-uploads/
 * TOC
 {:toc}
 
-The Files section of Storage contains all raw files uploaded to your project.
-This serves two main purposes:
+The *File Storage* is available in the **Files** section of Storage and contains all raw files uploaded to your project.
+It also contains files with data exported from tables. These are created when you request to export a table from *Table Storage*. The *Files Storage* serves two main purposes:
 
 1. Files can be used to store an arbitrary file.
 2. Every data table file is stored in Files before it is processed and pushed into a table.
