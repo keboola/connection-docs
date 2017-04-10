@@ -13,19 +13,23 @@ It is implemented as a layer on top of various database engines that we use as o
 ([MySQL/MariaDB](https://mariadb.org/),
 [Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)).
 
-As with all other KBC components, everything that can be done through the UI can be also done programatically via
+As with all other KBC components, everything that can be done through the UI can be also done programmatically via
 the [Storage API](http://docs.keboola.apiary.io/). See our [developers' guide](https://developers.keboola.com/integrate/storage/) to learn more.
 Every operation done in Storage must be authorized via a [token](/storage/tokens/).
 
 ## Storage Data
 The Storage component manages all data stored in each KBC project:
 
-- [Data tables](/storage/tables/) --- organized into [buckets](/storage/buckets/)
-- [Data files](/storage/file-uploads/) --- all raw files uploaded to your project
+- [Data tables](/storage/tables/) (*Table Storage*) --- organized into [buckets](/storage/buckets/)
+- [Data files](/storage/file-uploads/) (*File Storage*) --- all raw files uploaded to your project
 - [Component configurations](/storage/configurations/)
 
-## Backend Properties
-Data in Storage are internally stored in a **database backend**. Specific properties of each backend
+Different storage technologies are used for the above data --- [Amazon S3 Storage](https://aws.amazon.com/s3/) for 
+[Files Storage](/storage/file-uploads/) and [Amazon Redshift](https://aws.amazon.com/redshift/) or [Snowflake](https://www.snowflake.net/product/) for [Table Storage](/storage/tables/). The database system 
+behind the Table Storage is referred to as **backend**.
+
+### Backend Properties
+Data in Table Storage are internally stored in a **database backend** (project backend). Specific properties of each backend
 are compared in the following table:
 
 Feature | MySQL | Redshift | Snowflake
@@ -36,7 +40,9 @@ Maximum number of columns in single table | Max. row size of 65,535 bytes | 1200
 Maximum table cell size | 64kB | 64kB | 1MB |
 Sync export (Data Preview) columns limit | x | x | 110 |
 
-\* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`
+\* `ESCAPED` and `RAW` formats are different for `Redshift` and `Mysql`.
+
+It is also possible to use [your own Redshift or Snowflake](/storage/byodb/) database with KBC.
 
 ### Redshift Table Size
 
@@ -55,6 +61,4 @@ Backendy
 - vypsat a strucne uvest jake jsou mezi nimi rozdily, odkaz na billing a na sales
 
 Jobs/Events ze je to k nicemu a lepsi jsou events u Jobu
-
-kopirovani/sdileni dat mezi projekty
 {% endcomment %}

@@ -6,7 +6,7 @@ permalink: /storage/tables/
 * TOC
 {:toc}
 
-Your project table storage is available in the **Tables** tab in the Storage section. 
+Your project *Table Storage* is available in the **Tables** tab in the Storage section. 
 All data tables are organized into [buckets](/storage/buckets/) that can also be 
 used to [share tables](/storage/buckets/sharing/) between projects.
 
