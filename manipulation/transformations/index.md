@@ -66,25 +66,18 @@ without affecting data in your Storage, or your transformations.
 
 ## Deprecated Features
 
-Older projects have a slightly different UI that has several features turned on. 
-Newly created projects do not display or allow these features. Our goal is to make the transformations more transparent 
-and easier to understand. 
 
 ### Mixing Backends
 
-It is possible to run transformations with mixed backends in a single bucket, e.g., MySQL and Python.
+In your older projects, transformations with mixed backends (e.g., MySQL and Python) can be run in a single bucket.
 
 ### Phases
 
-Phases allow you to run multiple transformation steps within a single workspace, for example, a single MySQL database. 
-If multiple steps use the same input mapping (they share data), it might save a bit of processing time, but, ultimately, it 
-makes everything less clear and isolated. 
-To save time, you can run multiple orchestration tasks in parallel.
+database. Multiple steps with the same input mapping (sharing data) might save a bit of processing time, but ultimately, 
+everything is less clear and isolated. To save time, run multiple orchestration tasks in parallel instead.
 
 ### Dependencies
 
-Dependencies allow you to chain transformation steps. A given transformation is executed after all required steps have been executed. 
+Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all required steps have been executed. 
 
 Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of 
-SQL code. However, a network of nontransparent dependency trees was usually created, which lead to confusion and sometimes 
-to cyclical dependencies.
