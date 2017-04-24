@@ -94,37 +94,65 @@ not have any effect. You can mark a column as indexed in the table detail:
 ![Screenshot - Create Index](/storage/tables/create-index.png)
 
 ### Primary Key Deduplication
-When a primary key is defined on column, the value of that column is guaranteed to be unique in the table.
-If you load new data into the table, the **rows with duplicate values of primary key will be ignored**. If the
-primary key is defined on multiple columns, the combination of their values must be unique. If you have the 
-following table with a primary key defined on columns `name` and `age`:
+When a primary key is defined on a column, the value of that column is guaranteed to be unique in the table.
+If you load data into the table, the **rows with duplicate values will be ignored**. If the primary key is 
+defined on multiple columns, the combination of their values must be unique. If you have a 
+table with columns `name`, `age` and `money` with a primary key defined on columns `name` and `age` and
+load the following data into it:
 
 |name|age|money|
 |---|---|---|
-|John|24|$43|
-|Jane|24|$41|
-|John|40|$45|
+|John|15|$150|
+|John|34|$340|
+|Darla|60|$600|
+|Annie|30|$500|
+|John|34|$340000|
+|Darla|60|$600000|
+
+The result table will contain only the following data:
+
+|name|age|money|
+|John|15|$150|
+|Darla|60|$600|
+|John|34|$340000|
+|Annie|30|$500|
+
+When importing data into a table with primary key, the uniqueness is checked and data are de-duplicated. 
+This means that the row `John,34,$340` row was discarded. 
+
+### Incremental Loading
+When a primary key is defined on a column, it is also possible to take advantage of incremental loads.
+If you load data into a table incrementally, new rows will be added and **existing rows will be updated**.
+No rows will be deleted. If you have a the with a primary key defined on columns `name` and `age`
+
+|name|age|money|
+|---|---|---|
+|John|15|$150|
+|John|34|$340|
+|Darla|60|$600|
 
 And you import the following data to the table:
 
 |name|age|money|
 |---|---|---|
-|Annie|30|$50|
-|John|24|$40000|
-|Jane|40|$7000|
+|Annie|30|$500|
+|John|34|$340000|
+|Darla|60|$600000|
 
 The result table will contain:
 
 |name|age|money|
 |---|---|---|
-|John|24|$43|
-|Jane|24|$41|
-|John|40|$45|
-|Annie|30|$50|
-|Jane|40|$7000|
+|John|15|$150|
+|Darla|60|$600000|
+|John|34|$340000|
+|Annie|30|$500|
 
-When importing data into a table with primary key, the uniqueness is checked and data are de-duplicated. 
-The record `John,24,$40000` will be ignored, because it violates the primary key.
+When importing data into a table with primary key, the uniqueness is checked. 
+The record `John,34,$340000` will be overwrite the row `John,34,$340`, because it has the same primary key.
+The above applies only when **incremental load** is used, when incremental is not used, the contents of the 
+target table are cleared before load. When a primary key is not defined and an incremental load is used, it
+simply appends the data to the table and does not update anything.
 
 ## Copying Tables / Table Snapshots
 If you want to physically copy a table, use the [*table snapshot*](/tutorial/management/#table-snapshots) feature.
