@@ -79,7 +79,7 @@ This is all you need to do. The bucket is now linked into the project, and users
 ### Disable Sharing / Unlink Bucket
 
 Removing a linked bucket from a project is as easy as deleting a standard bucket. Only
-the link gets deleted without affecting the shared bucket in any way.
+the linked bucket gets deleted (including all tables in it) without affecting the shared bucket in any way. 
 
 Please keep in mind that before you can **disable sharing** or **delete a shared bucket**, 
 you first have to unlink the bucket from **all projects**.
