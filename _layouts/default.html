@@ -77,22 +77,6 @@
 		callbacks: {
 		  elementParse: function(item) { item.src = item.el.attr('src'); }
 		}});
-
-		setTimeout(function () {
-			$('.sidebar .navigation').affix({
-				offset: {
-					top: function () {
-						return (this.top = $('.container.header').height());
-					},
-					bottom: function () {
-						return (this.bottom = ($('.container.footer').outerHeight(true) + 36));
-					}
-				}
-			});
-
-			$('body').trigger('click'); // fix for "affix-bottom"
-		}, 100);
-
 	});
 	</script>
 {% include analytics.html %}
