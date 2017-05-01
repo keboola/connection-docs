@@ -11,7 +11,7 @@ Common data operations like joining, sorting, or grouping are still easier and f
 
 ## Environment
 
-The Python script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/). The current Python version is 3.5.1.
+The Python script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/). The current Python version is 3.5.3.
 
 ### Memory and Processing Constraints
 
