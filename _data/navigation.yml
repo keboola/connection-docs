@@ -96,6 +96,9 @@ items:
           - url: /extractors/other/aws-s3/
             title: AWS S3
 
+          - url: /extractors/other/generic/
+            title: Generic
+
   - url: /writers/
     title: Writers
     items:
