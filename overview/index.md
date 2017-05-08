@@ -67,7 +67,7 @@ can be [extended](https://developers.keboola.com/extend/) with **arbitrary code 
 
 There are two types of extensions: [Custom Extensions](https://developers.keboola.com/extend/#custom-extensions)
 (used as extractors, applications and writers) and
-[Generic Extractor](https://developers.keboola.com/extend/generic-extractor/).
+[Generic Extractor](/extractors/other/generic/).
 They can be created by us, our customers and 3rd parties, and can be offered also to other KBC users through our AppStore.
 
 ### Writers
