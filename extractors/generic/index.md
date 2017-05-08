@@ -1,5 +1,5 @@
 ---
-title: Generic
+title: Generic Extractor
 permalink: /extractors/other/generic/
 ---
 

@@ -90,14 +90,14 @@ items:
           - url: /extractors/other/geocoding-augmentation/
             title: Geocoding Augmentation
 
+          - url: /extractors/other/generic/
+            title: Generic Extractor
+
           - url: /extractors/other/pingdom/
             title: Pingdom
 
           - url: /extractors/other/aws-s3/
             title: AWS S3
-
-          - url: /extractors/other/generic/
-            title: Generic
 
   - url: /writers/
     title: Writers
