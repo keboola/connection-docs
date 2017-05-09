@@ -49,7 +49,7 @@ An alias table can be filtered by a simple condition.
 
 There are the following limitations:
 
-- Filtering is enabled only on [indexed columns](todo).
+- Filtering is enabled only on [indexed columns](/storage/tables/#primary-keys-and-indexes).
 - When an alias is created, the index on the filtered column of the source table cannot be removed.
 - Alias columns are automatically synchronized, by default, with the source table. Columns added to the source 
 table will be added to the alias automatically.
