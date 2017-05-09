@@ -89,28 +89,30 @@ And a new configuration version is created:
 
 ## Delete Configuration
 To delete a configuration, click the **Bin** icon in the configuration list or the **Move to Trash** button in
-configuration detail. Both of these operations move the configuration to **Trash**.
+the configuration detail. Both of these operations move the configuration to **Trash**.
 
 {: .image-popup}
 ![Screenshot -- Delete](/storage/configurations/delete.png)
 
-A configuration moved to Trash acts as deleted (is removed from orchestrations, cannot be run, is not displayed), 
-but can be recovered from the configuration Trash. The Trash is accessible in the **Users & Settings** menu:
+Each configuration moved to Trash acts as deleted: it is removed from orchestrations, cannot be run and is not 
+displayed. However, it can be recovered. To find your Trash, go to the **Users & Settings** menu and select the 
+**Trash tab**:
 
 {: .image-popup}
 ![Screenshot -- Configuration Trash](/storage/configurations/configuration-trash.png)
 
-The configuration Trash allows you to **restore** a configuration or permanently delete it. To find the 
-desired configuration you can use filter and search in the upper part of the page. A configuration deleted
-from the trash cannot be recovered. When a configuration is restored a new version is created, therefore
-you can see the complete history in the configuration versions:
+There you can **restore** a configuration, or **permanently delete** it. Once deleted from Trash, no configuration 
+can be recovered. If your Trash is filled with a large number of configurations and you want to quickly find the 
+one you need to restore or permanently remove, use the filter and search options in the upper part of the page. 
+
+When you restore a configuration, its new version is created. Therefore you can see the complete history in the 
+configuration versions:
 
 {: .image-popup}
 ![Screenshot -- Configuration History](/storage/configurations/configuration-restored.png)
 
-For technical reasons, there are some components (mainly Orchestrator and GoodData Writer) whose 
-configurations cannot be restored when deleted. These configurations will still be listed as 
-deleted, but cannot be restored:
+For technical reasons, configurations of certain components cannot be restored when deleted (mainly Orchestrator 
+and GoodData Writer). They will still be shown in Trash, but cannot be restored:
 
 {: .image-popup}
 ![Screenshot -- Configuration Restore Disabled](/storage/configurations/configuration-trash-2.png)
