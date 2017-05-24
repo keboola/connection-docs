@@ -26,7 +26,14 @@ Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` fold
 
 ## Python Script Requirements
 Python is sensitive to indentation. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
-`# coding=utf-8` at the beginning of the script is not needed. Do not wrap your main function within the `if __name__ == '__main__':` block as it will not be ran. Simply calling it from withing the script is enough. A Python script to be run within our environment must meet the following requirements:
+`# coding=utf-8` at the beginning of the script is not needed. If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be ran. Simply calling it from withing the script is enough:
+
+{% highlight python %}
+def main():
+    print("Hello Keboola")
+
+main()
+{% endhighlight %}
 
 ### Packages
 You can list extra packages in the UI. These packages are installed using [pip](https://pypi.python.org/pypi/pip).
