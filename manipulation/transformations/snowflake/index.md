@@ -16,7 +16,7 @@ permalink: /manipulation/transformations/snowflake/
 
 ## Migration from Redshift to Snowflake
 
-Please [share your migration tips](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/snowflake/redshift-snowflake) with us.
+Please [share your migration tips](http://wiki.keboola.com/home/transformations/snowflake/redshift-snowflake) with us.
 
 ## Limits
 

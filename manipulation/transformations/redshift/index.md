@@ -17,7 +17,7 @@ Redshift in KBC does not support functions or stored procedures.
 
 ### Migration from MySQL
 
-If you want to **migrate a transformation** from MySQL to Redshift, use this [hint sheet](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/redshift/redshift-hints).   
+If you want to **migrate a transformation** from MySQL to Redshift, use this [hint sheet](http://wiki.keboola.com/home/transformations/redshift/redshift-hints).   
 
 ### Limits
 

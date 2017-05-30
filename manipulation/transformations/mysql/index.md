@@ -22,4 +22,4 @@ To get the most out of MySQL,
  - create plenty of intermediary or temporary tables, and
  - always try to materialize the query (use `CREATE TABLE ...` instead of `CREATE VIEW`).
 
-Examples of some common scenarios and their solutions can be found on [our wiki](http://wiki.keboola.com/home/keboola-connection/user-space/transformations/mysql). 
+Examples of some common scenarios and their solutions can be found on [our wiki](http://wiki.keboola.com/home/transformations/mysql). 
