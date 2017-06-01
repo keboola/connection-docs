@@ -15,6 +15,23 @@ and sales*, etc.), and are grouped into folders called **Transformation buckets*
 Each transformation bucket can contain any number of individual transformations. 
 It should represent a logical set of operations you want to perform together.
 
+## Overview
+The schema below shows the important components of the Transformations engine:
+
+{: .image-popup}
+![Transformations schema](/manipulation/transformations/transformations-schema.svg)
+
+Transformations are represented by various scripts (backends) (SQL, R, Python or OpenRefine) which you 
+can use to manipulate your data in an arbitrary way. To ensure safety of data in Storage, transformations
+operate in a completely separate environment provisioned separately for each transformation. When a 
+transformation runs, it takes the required data from *Storage* and copies them to the 
+*Provisioned Environment*. This process is called **Input mapping**. The transformation engine 
+then takes the *Transformation Script* and runs it in the *Provisioned Environment*. Depending 
+on the transformation backend, the input mapping represents either:
+
+- creating a new database (Snowflake, Redshift, MySQL) and importing selected tables from Storage into it,
+- or exporting selected tables from Storage to CSV files and making them available in separate filesystem workspace
+
 ## Mappings
 No transformation can be created without 
 
@@ -26,7 +43,7 @@ Mapping creates a secure workspace with data copied from the tables specified in
  tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
  
 {: .image-popup}
-![Simple input and output mapping](./mappings.png)
+![Simple input and output mapping](/manipulation/transformations/mappings.png)
 
 *When writing transformation scripts, keep in mind that the table names referenced by mappings 
 are automatically quoted by KBC. This is especially important for Snowflake, which is case sensitive.*
