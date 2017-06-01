@@ -21,16 +21,23 @@ The schema below shows the important components of the Transformations engine:
 {: .image-popup}
 ![Transformations schema](/manipulation/transformations/transformations-schema.svg)
 
-Transformations are represented by various scripts (backends) (SQL, R, Python or OpenRefine) which you 
-can use to manipulate your data in an arbitrary way. To ensure safety of data in Storage, transformations
-operate in a completely separate environment provisioned separately for each transformation. When a 
-transformation runs, it takes the required data from *Storage* and copies them to the 
-*Provisioned Environment*. This process is called **Input mapping**. The transformation engine 
-then takes the *Transformation Script* and runs it in the *Provisioned Environment*. Depending 
-on the transformation backend, the input mapping represents either:
+A transformation is represented by a *Transformation Script* (SQL, R, Python or OpenRefine [backend](#backend)) which you 
+can use to manipulate your data. To ensure safety of the data in the Storage, a transformation
+operates in a completely separate *Provisioned* **Workspace** created for each transformation. When a 
+transformation runs, it takes the required data from the *Storage* and copies them to the 
+*Provisioned Workspace*. This process is called [**Input Mapping**](#mappings). The transformation engine 
+then takes the *Transformation Script* and runs it in the *Provisioned Workspace*. Depending 
+on the transformation backend, the input mapping process is either:
 
-- creating a new database (Snowflake, Redshift, MySQL) and importing selected tables from Storage into it,
-- or exporting selected tables from Storage to CSV files and making them available in separate filesystem workspace
+- Create a new database (Snowflake, Redshift, MySQL) and import into it the selected tables from the Storage.
+- Export selected tables from the Storage to CSV files and make them available in filesystem workspace for Python, R or OpenRefine scripts.
+
+When the transformation is finished, the **Output Mapping** process moves the transformation results back to
+the designated tables in the Storage. The **Input** and **Output** mapping ensure complete safety of
+the transformation processes -- the transformation always operates in an isolated workspace.
+
+Each transformation has its own workspace. Transformation [sandbox](/manipulation/transformations/sandbox/)
+uses the same workspace as the corresponding transformation. [Plain sandbox](/manipulation/transformations/sandbox/#plain-loading) uses a separate workspace.
 
 ## Mappings
 No transformation can be created without 
@@ -80,25 +87,20 @@ a separate database storage. As a safe workspace with required data,
 it allows you to run and play with your arbitrary SQL scripts on the copies of your tables 
 without affecting data in your Storage, or your transformations.
 
-
 ## Deprecated Features
-
 Our goal is to make Transformations more transparent and understandable. That is the reason why the features below are no 
 longer available for new projects. Your older projects, however, have a slightly different UI with these features still 
 turned on.
 
 ### Mixing Backends
-
 In your older projects, transformations with mixed backends (e.g., MySQL and Python) can be run in a single bucket.
 
 ### Phases
-
 Phases in older projects allow multiple transformation steps to be run within a single workspace, for example, a single MySQL 
 database. Multiple steps with the same input mapping (sharing data) might save a bit of processing time, but ultimately, 
 everything is less clear and isolated. To save time, run multiple orchestration tasks in parallel instead.
 
 ### Dependencies
-
 Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all required steps have been executed. 
 
 Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of 
