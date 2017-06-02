@@ -1,8 +1,6 @@
 ---
 title: Pingdom
 permalink: /extractors/other/pingdom/
-redirect_from:
-  - /extractors/pingdom/
 ---
 
 * TOC

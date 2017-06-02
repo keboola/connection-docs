@@ -1,8 +1,6 @@
 ---
 title: Facebook Ads
 permalink: /extractors/marketing-sales/facebook-ads/
-redirect_from:
-  - /extractors/facebook-ads/
 ---
 
 * TOC

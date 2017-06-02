@@ -1,8 +1,6 @@
 ---
 title: Slack
 permalink: /extractors/communication/slack/
-redirect_from:
-  - /extractors/slack/
 ---
 
 Slack extractor allows you to fetch data from [Slack](https://slack.com/).

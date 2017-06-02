@@ -1,8 +1,6 @@
 ---
 title: GitHub
 permalink: /extractors/other/github/
-redirect_from:
-  - /extractors/github/
 ---
 
 GitHub extractor allows you to fetch data from [GitHub](https://github.com/).

@@ -1,8 +1,6 @@
 ---
 title: Gmail
 permalink: /extractors/communication/gmail/
-redirect_from:
-  - /extractors/gmail/
 ---
 
 * TOC

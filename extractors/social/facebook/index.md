@@ -1,8 +1,6 @@
 ---
 title: Facebook
 permalink: /extractors/social/facebook/
-redirect_from:
-  - /extractors/facebook/
 ---
 
 * TOC

@@ -1,9 +1,6 @@
 ---
 title: AWS S3
 permalink: /extractors/other/aws-s3/
-redirect_from:
-  - /extractors/s3/
-  - /extractors/aws-s3/
 ---
 
 * TOC

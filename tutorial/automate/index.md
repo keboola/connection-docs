@@ -1,8 +1,6 @@
 ---
 title: Part 4 - Automation - Setting up Orchestrator
 permalink: /tutorial/automate/
-redirect_from:
-  - /automate/
 ---
 
 So far, you have learned to use KBC to

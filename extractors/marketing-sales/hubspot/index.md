@@ -1,8 +1,6 @@
 ---
 title: HubSpot
 permalink: /extractors/marketing-sales/hubspot/
-redirect_from:
-  - /extractors/hubspot/
 ---
 
 * TOC
