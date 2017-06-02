@@ -41,6 +41,8 @@ items:
       - url: /extractors/database/
         title: Databases
         items:
+        - url: /extractors/database/ip-addresses
+          title: IP Addresses
         - url: /extractors/database/sqldb/
           title: SQL Databases
         - url: /extractors/database/mongodb/
