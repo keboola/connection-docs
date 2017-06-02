@@ -1,9 +1,6 @@
 ---
 title: Part 2 - Data Manipulation
 permalink: /tutorial/manipulate/
-redirect_from:
-  - /tutorial/manipulation/
-  - /overview/tutorial/data-manipulation/
 ---
 
 At this point, you already know how to quickly [load data into KBC](/tutorial/load/),
