@@ -17,7 +17,7 @@ There are a number of extractors for **SQL databases**.
 *See our [tutorial](/tutorial/load/database/) for help with configuring these extractors.*
 *They all are configured in the same way.*
 
-On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, requires a [different configuration](/extractors/mongodb/).
+On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, requires a [different configuration](/extractors/database/mongodb/).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, want to avoid exposing your database server to the internet,
