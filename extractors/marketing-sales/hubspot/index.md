@@ -18,38 +18,38 @@ Before you start, have a working HubSpot account and get a HubSpot API Key.
 Login to [HubSpot](http://www.hubspot.com/) and in top right corner click on the arrow next to your avatar. Then select **Integrations**.
 
 {: .image-popup}
-![HubSpot Logged Menu](/extractors/hubspot/03-logged-menu.jpg)
+![HubSpot Logged Menu](/extractors/marketing-sales/hubspot/03-logged-menu.jpg)
 
 On the following screen, click on **Get your HubSpot API Key**.
 
 {: .image-popup}
-![HubSpot Integrations](/extractors/hubspot/04-integrations.jpg)
+![HubSpot Integrations](/extractors/marketing-sales/hubspot/04-integrations.jpg)
 
 Then click on the biggest blue button in the world. It will reveal your API Key.
 
 {: .image-popup}
-![HubSpot API](/extractors/hubspot/05-key.png)
+![HubSpot API](/extractors/marketing-sales/hubspot/05-key.png)
 
 You can easily copy it to your clipboard.
 
 {: .image-popup}
-![HubSpot API](/extractors/hubspot/05-key-clipboard.png)
+![HubSpot API](/extractors/marketing-sales/hubspot/05-key-clipboard.png)
 
 ### Setup Extractor
 In the Extractors section, find HubSpot and create a new configuration.
 
 {: .image-popup}
-![HubSpot New Configuration](/extractors/hubspot/01-new-configuration.png)
+![HubSpot New Configuration](/extractors/marketing-sales/hubspot/01-new-configuration.png)
 
 Provide your **API key**.
 
 {: .image-popup}
-![HubSpot Credentials](/extractors/hubspot/02-credentials.png)
+![HubSpot Credentials](/extractors/marketing-sales/hubspot/02-credentials.png)
 
 And finally, select one of the data mapping **templates** and click on **Save configuration**.
 
 {: .image-popup}
-![HubSpot Data Mapping](/extractors/hubspot/06-template.png)
+![HubSpot Data Mapping](/extractors/marketing-sales/hubspot/06-template.png)
 
 ## Extraction Output Tables
 

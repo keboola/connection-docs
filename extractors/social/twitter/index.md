@@ -15,7 +15,7 @@ Find Twitter in the **Extractors** section. Create a new configuration, and name
 It can be renamed at any time.
 
 {: .image-popup}
-![Twitter New Configuration](/extractors/twitter/01-new-configuration.png)
+![Twitter New Configuration](/extractors/social/twitter/01-new-configuration.png)
 
 ## Authorize Twitter Account
 Select one of the two authorization methods:
@@ -24,16 +24,16 @@ Select one of the two authorization methods:
  - **External** -- Use to authorize access to an account of a non-KBC user. Generate a link to the external authorization app and send it to the user. The generated link is valid for 48 hours and will not be stored anywhere.
  
  {: .image-popup}
-![Twitter Authorization](/extractors/twitter/02-authorize.png)
+![Twitter Authorization](/extractors/social/twitter/02-authorize.png)
 
 
 {: .image-popup}
-![Twitter Authorization Selection](/extractors/twitter/03-authorize-modal.png)
+![Twitter Authorization Selection](/extractors/social/twitter/03-authorize-modal.png)
 
 When finished setting up authorization, click **Continue** to move to the next tab, and start selecting data. 
 
 {: .image-popup}
-![Twitter Data Selection](/extractors/twitter/04-authorized.png)
+![Twitter Data Selection](/extractors/social/twitter/04-authorized.png)
 
 ## Select Data
 To configure what you want to fetch from Twitter, use the other four tabs displayed in the above pop-up window.
@@ -42,7 +42,7 @@ It is okay to leave any of the steps blank.
  - **User Timeline** -- Returns a collection of the most recent Tweets posted by the user indicated by the *Screen Name*.
    
    {: .image-popup}
-![Twitter Screen Name](/extractors/twitter/05-screen-name.png)
+![Twitter Screen Name](/extractors/social/twitter/05-screen-name.png)
 
    - [Limited to last 3,200 tweets](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) 
  - **Mentions** -- Returns mentions for the authenticating user.
@@ -54,7 +54,7 @@ It is okay to leave any of the steps blank.
 When done, **Save** the configuration and **Run** the extraction job. It will start immediately.
 
 {: .image-popup}
-![Twitter Job](/extractors/twitter/06-twitter-job.png)
+![Twitter Job](/extractors/social/twitter/06-twitter-job.png)
 
 ## Extraction Output Tables
 

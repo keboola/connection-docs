@@ -18,28 +18,28 @@ you want to better organize your data. Let's say one configuration would load yo
 another one your yearly reports.
  
 {: .image-popup}
-![Screenshot - Create New Pigeon Importer Configuration](/extractors/pigeon/01-create-new-config.png)
+![Screenshot - Create New Pigeon Importer Configuration](/extractors/communication/pigeon/01-create-new-config.png)
 
 Choose a meaningful name for your configuration.
 
 {: .image-popup}
-![Screenshot - Create Name Confgiruation](/extractors/pigeon/02-choose-name-and-desc.png)
+![Screenshot - Create Name Confgiruation](/extractors/communication/pigeon/02-choose-name-and-desc.png)
 
 ## Create Email Import
 *Email Import* defines the link between an email and a table in Storage. It imports a single table into Storage.  
 
 {: .image-popup}
-![Screenshot - Create New Email Import](/extractors/pigeon/03-create-email-import.png)
+![Screenshot - Create New Email Import](/extractors/communication/pigeon/03-create-email-import.png)
 
 Select an existing table from Storage, or create a new table ID: a bucket and table name. Specify the primary 
 key and CSV options if needed.
 
 {: .image-popup}
-![Screenshot - Configure email import](/extractors/pigeon/04-table-id-and-pk.png)
+![Screenshot - Configure email import](/extractors/communication/pigeon/04-table-id-and-pk.png)
 
 ## Test Email Import
 Send an e-mail with a data attachment to the generated email address.
-Use the following [sample table](/extractors/pigeon/pigeon-importer-sample.csv):
+Use the following [sample table](/extractors/communication/pigeon/pigeon-importer-sample.csv):
 
 | date | new | lost | total |
 | --- | --- | --- | --- |
@@ -53,10 +53,10 @@ It must always adhere to the format specified in *Email Import*. It can also be 
 Click **Run email import** and confirm.
 
 {: .image-popup}
-![Screenshot - List email imports](/extractors/pigeon/05-list-email-imports.png)
+![Screenshot - List email imports](/extractors/communication/pigeon/05-list-email-imports.png)
 
 When running the import job, follow the UI instructions to check the processed data in the imported table. 
 There may be a delay between the time the email is sent, received, and picked up by the importer.
 
 {: .image-popup}
-![Screenshot - Job Detail](/extractors/pigeon/07-check-processed-data.png)
+![Screenshot - Job Detail](/extractors/communication/pigeon/07-check-processed-data.png)

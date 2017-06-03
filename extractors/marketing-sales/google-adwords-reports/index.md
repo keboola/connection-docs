@@ -16,12 +16,12 @@ If you do not have a Google AdWords account, create a [test account](https://dev
 Find Google AdWords in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/google-adwords-reports/ui_create_config.png)
+![Screenshot - Create configuration](/extractors/marketing-sales/google-adwords-reports/ui_create_config.png)
 
 Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your AdWords reports.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/google-adwords-reports/ui_authorize_config.png)
+![Screenshot - Create configuration](/extractors/marketing-sales/google-adwords-reports/ui_authorize_config.png)
 
 ## Configuration
 To run the extractor, specify your *developer token* and *customer id*. 
@@ -44,13 +44,13 @@ Use *Display Name* of the columns as defined in the [reports types documentation
 (for example, for CampaignId use Campaign_ID and for Date use Day).
 
 {: .image-popup}
-![Screenshot - Report column names](/extractors/google-adwords-reports/report_types.png)
+![Screenshot - Report column names](/extractors/marketing-sales/google-adwords-reports/report_types.png)
 
 ## Example
 To download a keyword performance report, use the following query configuration:
 
 {: .image-popup}
-![Screenshot - Query configuration](/extractors/google-adwords-reports/ui_queries.png)
+![Screenshot - Query configuration](/extractors/marketing-sales/google-adwords-reports/ui_queries.png)
 
 This downloads the report into a `keywords` table. The `Id` column is listed as `Keyword_ID` in the primary columns 
 because that is [its display name](https://developers.google.com/adwords/api/docs/appendix/reports/keywords-performance-report#id).

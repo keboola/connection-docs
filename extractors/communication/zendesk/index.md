@@ -19,23 +19,23 @@ Log in to your account on the [Zendesk](https://www.zendesk.com/) site.
 Go to **Admin / Channels / API**, and use the **add new token** link.
 
 {: .image-popup}
-![Zendesk API token list](/extractors/zendesk/01-zendesk-api.png)
+![Zendesk API token list](/extractors/communication/zendesk/01-zendesk-api.png)
 
 Fill a **label** for the new token (for example, `Keboola Zendesk Extractor`) and click the **Create** button.
 
 {: .image-popup}
-![Zendesk Token registration](/extractors/zendesk/02-zendesk-api-form.png)
+![Zendesk Token registration](/extractors/communication/zendesk/02-zendesk-api-form.png)
 
 When the registration is finished, take a note of the API Key and save it. You will need it when creating your extractor configuration in KBC.
 
 {: .image-popup}
-![Zendesk API token](/extractors/zendesk/03-zendesk-api-key.png)
+![Zendesk API token](/extractors/communication/zendesk/03-zendesk-api-key.png)
 
 ### Setup Extractor
 In the Extractors section, find Zendesk and create a new configuration.
 
 {: .image-popup}
-![Zendesk New configuration](/extractors/zendesk/04-new-configuration.png)
+![Zendesk New configuration](/extractors/communication/zendesk/04-new-configuration.png)
 
 Provide information about your Zendesk Account and API token.
 
@@ -44,7 +44,7 @@ Provide information about your Zendesk Account and API token.
 - **Token** -- Zendesk API Token
 
 {: .image-popup}
-![Zendesk Credentials](/extractors/zendesk/05-credentials.png)
+![Zendesk Credentials](/extractors/communication/zendesk/05-credentials.png)
 
 **Save** and click **Run Extraction**.
 

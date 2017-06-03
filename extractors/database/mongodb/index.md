@@ -14,7 +14,7 @@ Complete the following steps to configure it.
 Find MongoDB in the Extractors section. Create a new configuration and name it.
 
 {: .image-popup}
-![MongoDB add configuration](/extractors/mongodb/01-add-configuration.png)
+![MongoDB add configuration](/extractors/database/mongodb/01-add-configuration.png)
 
 
 ## Setup Database Credentials
@@ -23,14 +23,14 @@ Click **Setup Database Credentials** and fill in the form. Then test the new cre
 Optionally, set up an SSH tunnel.
 
 {: .image-popup}
-![MongoDB new credentials](/extractors/mongodb/02-new-credentials.png)
+![MongoDB new credentials](/extractors/database/mongodb/02-new-credentials.png)
 
 ## Configure Export(s)
 
 Click the **Add Export** button and configure your first export using the following options:
 
 {: .image-popup}
-![MongoDB new export](/extractors/mongodb/03-new-export.png)
+![MongoDB new export](/extractors/database/mongodb/03-new-export.png)
 
 - **Name** -- Identifies your export; its value has to be unique across all exports and exported tables in
 your configuration. Also, the main exported table will be named after the value of the Name field.
@@ -69,7 +69,7 @@ By defining mapping, you specify the structure and content of your output tables
 their columns and relations between them.
 
 {: .image-popup}
-![MongoDB new export filled](/extractors/mongodb/04-new-export-filled.png)
+![MongoDB new export filled](/extractors/database/mongodb/04-new-export-filled.png)
 
 ### Primary Key
 
@@ -107,7 +107,7 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
 
 ### Mapping Examples
 
-Check out [more mapping examples](/extractors/mongodb/mapping/).
+Check out [more mapping examples](/extractors/database/mongodb/mapping/).
 
 ## Raw Export Mode
 
@@ -156,6 +156,6 @@ In the raw export mode, documents are exported as plain JSON strings.
 Having successfully mapped the configuration, run the extractor by hitting the **Run Extraction** button.
 
 {: .image-popup}
-![MongoDB new export](/extractors/mongodb/05-exports-index.png)
+![MongoDB new export](/extractors/database/mongodb/05-exports-index.png)
 
 

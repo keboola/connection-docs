@@ -13,20 +13,20 @@ The Gmail extractor allows you to fetch data from your Gmail account.
 Find Gmail in the Extractors section, create a new configuration and name it.
 
 {: .image-popup}
-![Gmail - add configuration](/extractors/gmail/01-add-configuration.png)
+![Gmail - add configuration](/extractors/communication/gmail/01-add-configuration.png)
 
 Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google account. 
 **Inbox is accessed as read only.**
 
 {: .image-popup}
-![Gmail - authorize account](/extractors/gmail/02-authorize-account.png)
+![Gmail - authorize account](/extractors/communication/gmail/02-authorize-account.png)
 
 ## Configure Queries
 
 Click **Edit configuration** and fill the form to fit your needs.
 
 {: .image-popup}
-![Gmail - configure queries](/extractors/gmail/03-configure-queries.png)
+![Gmail - configure queries](/extractors/communication/gmail/03-configure-queries.png)
 
 - **Query** -- Query to filter your messages. To speed up the extraction, be as specific as possible. 
 For more detailed information about querying, follow Google's [Advanced search](https://support.google.com/mail/answer/7190?hl=en) help site.
