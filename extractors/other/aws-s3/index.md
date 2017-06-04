@@ -14,12 +14,12 @@ you save them to KBC Storage. You also need to set up the proper permissions on 
 Find AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/aws-s3/ui1.png)
+![Screenshot - Create configuration](/extractors/other/aws-s3/ui1.png)
 
 ## Selecting Files from S3
 
 {: .image-popup}
-![Screenshot - General configuration](/extractors/aws-s3/ui2.png)
+![Screenshot - General configuration](/extractors/other/aws-s3/ui2.png)
 
 
 ### Bucket and Key
@@ -53,7 +53,7 @@ To change the primary key of an existing table, go to the table detail in Storag
 ## AWS Credentials
 
 {: .image-popup}
-![Screenshot - AWS Credentials configuration](/extractors/aws-s3/ui3.png)
+![Screenshot - AWS Credentials configuration](/extractors/other/aws-s3/ui3.png)
 
 
 Use the AWS Access Key Id and Secret Access Key with read permissions to the desired bucket and file(s). 
@@ -97,7 +97,7 @@ Give the write permissions to the application storing files in CSV and the read-
 ## Advanced
 
 {: .image-popup}
-![Screenshot - Advanced configuration](/extractors/aws-s3/ui4.png)
+![Screenshot - Advanced configuration](/extractors/other/aws-s3/ui4.png)
 
 
 In this section you can modify the delimiter and enclosure of the CSV file. 

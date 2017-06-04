@@ -23,10 +23,10 @@ The schema below shows the important components of the Transformations engine:
 
 A transformation is represented by a *Transformation Script* (SQL, R, Python or OpenRefine [backend](#backend)) which you 
 can use to manipulate your data. To ensure safety of the data in the Storage, a transformation
-operates in a completely separate *Provisioned* **Workspace** created for each transformation. When a 
+operates in a completely separate provisioned **Workspace** created for each transformation. When a 
 transformation runs, it takes the required data from the *Storage* and copies them to the 
-*Provisioned Workspace*. This process is called [**Input Mapping**](#mappings). The transformation engine 
-then takes the *Transformation Script* and runs it in the *Provisioned Workspace*. Depending 
+*Workspace*. This process is called [**Input Mapping**](#mappings). The transformation engine 
+then takes the *Transformation Script* and runs it in the *Workspace*. Depending 
 on the transformation backend, the input mapping process is either:
 
 - Create a new database (Snowflake, Redshift, MySQL) and import into it the selected tables from the Storage.
@@ -42,11 +42,10 @@ uses the same workspace as the corresponding transformation. [Plain sandbox](/ma
 ## Mappings
 No transformation can be created without 
 
-1) [**Input and Output Mapping**](/manipulation/transformations/mappings/) --- makes sure your SQL code or script 
-does not harm the source tables, and separates the source data from your transformation. 
-Mapping creates a secure workspace with data copied from the tables specified in the input mappings. 
+1) [**Input and Output Mapping**](/manipulation/transformations/mappings/) --- separates the source data from your transformation. Mapping creates a secure workspace with data copied from the tables specified in the input mappings.
+Database table names and CSV file names in transformations are completely unrelated to names of tables in Storage.
 
-2) **Transformation Script** --- SQL, Python or R code: defines what happens with the data while taking the
+2) **Transformation Script** --- SQL, Python, R or OpenRefine code: defines what happens with the data while taking the
  tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
  
 {: .image-popup}

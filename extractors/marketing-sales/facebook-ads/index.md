@@ -14,7 +14,7 @@ extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing
 Find Facebook Ads in the **Extractors** section. Create a new configuration and name it. It can be renamed any time.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/facebook-ads/createconfig.png)
+![Screenshot - Create configuration](/extractors/marketing-sales/facebook-ads/createconfig.png)
 
 Authorize the Facebook account with access to the Ad Account you want to extract.
 You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
@@ -25,20 +25,20 @@ You can always revoke the authorization by going to the
 `Keboola Ads Extractor` from the list.
 
 {: .image-popup}
-![Screenshot - Authorize configuration](/extractors/facebook-ads/authorizefb.png)
+![Screenshot - Authorize configuration](/extractors/marketing-sales/facebook-ads/authorizefb.png)
 
 From the list of fetched Ad Accounts associated with the authorized account, select the Ad Accounts
 you wish to extract.
 
 {: .image-popup}
-![Screenshot - Select Facebook Pages](/extractors/facebook-ads/selectadaccounts.png)
+![Screenshot - Select Facebook Pages](/extractors/marketing-sales/facebook-ads/selectadaccounts.png)
 
 ## Create New Query
 Create a new query and specify what data to extract. If you choose a preconfigured template,
 all necessary fields will fill up automatically.
 
 {: .image-popup}
-![Screenshot - New Query](/extractors/facebook-ads/newquery.png)
+![Screenshot - New Query](/extractors/marketing-sales/facebook-ads/newquery.png)
 
 The query describes the extractor request to be sent to the Facebook Marketing API. Knowing the API will
 make creating a query easy because all options except `name` represent the [Facebook Marketing API
@@ -164,9 +164,9 @@ Use `Direct token insert` in the authorization modal and copy the access token s
 - Copy the token from the old configuration
 
 {: .image-popup}
-![Screenshot - New Query](/extractors/facebook-ads/copytoken.png)
+![Screenshot - New Query](/extractors/marketing-sales/facebook-ads/copytoken.png)
 
 - Insert the copied token
 
 {: .image-popup}
-![Screenshot - New Query](/extractors/facebook-ads/inserttoken.png)
+![Screenshot - New Query](/extractors/marketing-sales/facebook-ads/inserttoken.png)
