@@ -41,8 +41,6 @@ items:
       - url: /extractors/database/
         title: Databases
         items:
-        - url: /extractors/database/ip-addresses
-          title: IP Addresses
         - url: /extractors/database/sqldb/
           title: SQL Databases
         - url: /extractors/database/mongodb/
@@ -100,6 +98,9 @@ items:
 
           - url: /extractors/other/aws-s3/
             title: AWS S3
+
+      - url: /extractors/ip-addresses
+        title: IP Addresses
 
   - url: /writers/
     title: Writers
