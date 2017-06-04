@@ -10,34 +10,35 @@ permalink: /manipulation/transformations/
 go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform 
-(*Marketing data preaggregation*, *Tableau denormalizer*, *Integrity checker* or *Join marketing channels 
-and sales*, etc.), and are grouped into folders called **Transformation buckets**. 
+(Marketing data preaggregation, Tableau denormalizer, Integrity checker or Join marketing channels 
+and sales, etc.), and are grouped into folders called **Transformation buckets**. 
 Each transformation bucket can contain any number of individual transformations. 
 It should represent a logical set of operations you want to perform together.
 
 ## Overview
-The schema below shows the important components of the Transformations engine:
+The schema below shows the important components of the Transformation engine:
 
 {: .image-popup}
 ![Transformations schema](/manipulation/transformations/transformations-schema.svg)
 
-A transformation is represented by a *Transformation Script* (SQL, R, Python or OpenRefine [backend](#backend)) which you 
-can use to manipulate your data. To ensure safety of the data in the Storage, a transformation
-operates in a completely separate provisioned **Workspace** created for each transformation. When a 
-transformation runs, it takes the required data from the *Storage* and copies them to the 
-*Workspace*. This process is called [**Input Mapping**](#mappings). The transformation engine 
-then takes the *Transformation Script* and runs it in the *Workspace*. Depending 
-on the transformation backend, the input mapping process is either:
+A transformation is represented by a **Transformation Script** (SQL, R, Python or OpenRefine [backend](#backend)) which you 
+can use to manipulate your data. To ensure safety of the data in Storage, a transformation
+operates in a completely separate provisioned **workspace** created for each transformation. When a 
+transformation runs, it takes the required data from Storage and copies them to the 
+workspace. This process is called [**Input Mapping**](#mappings). The transformation engine 
+then takes the Transformation Script and runs it in the workspace. Depending 
+on the transformation backend, the input mapping process can do the following:
 
-- Create a new database (Snowflake, Redshift, MySQL) and import into it the selected tables from the Storage.
-- Export selected tables from the Storage to CSV files and make them available in filesystem workspace for Python, R or OpenRefine scripts.
+- Create a new database (Snowflake, Redshift, MySQL) and import the selected tables from Storage into it.
+- Export selected tables from Storage to CSV files and make them available in the workspace for Python, R or OpenRefine scripts.
 
 When the transformation is finished, the **Output Mapping** process moves the transformation results back to
-the designated tables in the Storage. The **Input** and **Output** mapping ensure complete safety of
+the designated tables in Storage. The **Input** and **Output** mappings ensure complete safety of
 the transformation processes -- the transformation always operates in an isolated workspace.
 
-Each transformation has its own workspace. Transformation [sandbox](/manipulation/transformations/sandbox/)
-uses the same workspace as the corresponding transformation. [Plain sandbox](/manipulation/transformations/sandbox/#plain-loading) uses a separate workspace.
+Each transformation has its own workspace. The transformation [sandbox](/manipulation/transformations/sandbox/)
+uses the same workspace as the corresponding transformation. The [plain sandbox](/manipulation/transformations/sandbox/#plain-loading) 
+uses a separate workspace.
 
 ## Mappings
 No transformation can be created without 
