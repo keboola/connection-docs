@@ -99,6 +99,9 @@ items:
           - url: /extractors/other/aws-s3/
             title: AWS S3
 
+      - url: /extractors/ip-addresses
+        title: IP Addresses
+
   - url: /writers/
     title: Writers
     items:
