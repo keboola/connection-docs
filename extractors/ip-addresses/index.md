@@ -37,7 +37,7 @@ We're publishing our current IP address in JSON format. To view the current IP a
     "createDate": "yyyy-mm-dd-hh-mm-ss",
     "prefixes": [
         {
-            "ip_prefix": "cidr",
+            "ipPrefix": "cidr",
             "vendor": "cloud vendor",
             "region": "cloud region",
             "service": "keboola service"
