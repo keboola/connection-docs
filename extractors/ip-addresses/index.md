@@ -22,3 +22,26 @@ For projects in the default US region (AWS region `us-east-1`), the following IP
 
 ## connection.eu-central-1.keboola.com
 For projects in the EU region (AWS region `eu-central-1`), the IP addresses are not available yet.
+
+## IP Address Ranges in JSON
+
+We're publishing our current IP address in JSON format. To view the current IP addresses, download the .json file. To determine whether there have been changes since the last time that you saved the file, check the publication time in the current file and compare it to the publication time in the last file that you saved.
+
+[IP Address Ranges](https://help.keboola.com/extractors/ip-addresses/kbc-public-ip.json).json
+
+### JSON Schema
+
+```
+{
+    "syncToken": "0123456789",
+    "createDate": "yyyy-mm-dd-hh-mm-ss",
+    "prefixes": [
+        {
+            "ip_prefix": "cidr",
+            "vendor": "cloud vendor",
+            "region": "cloud region",
+            "service": "keboola service"
+        }
+    ]
+}
+```
