@@ -29,7 +29,7 @@ We're publishing our current IP address in JSON format. To view the current IP a
 
 [IP Address Ranges](https://help.keboola.com/extractors/ip-addresses/kbc-public-ip.json)
 
-### JSON Schema
+### JSON Example
 
 {% highlight json %}
 {
