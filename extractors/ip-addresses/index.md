@@ -27,20 +27,26 @@ For projects in the EU region (AWS region `eu-central-1`), the IP addresses are 
 
 We're publishing our current IP address in JSON format. To view the current IP addresses, download the [kbc-public-ip.json](https://help.keboola.com/extractors/ip-addresses/kbc-public-ip.json) file. To determine whether there have been changes since the last time that you saved the file, check the publication time in the current file and compare it to the publication time in the last file that you saved.
 
-
-### JSON Example
+### Sample JSON
 
 {% highlight json %}
 {
-    "syncToken": "0123456789",
-    "createDate": "yyyy-mm-dd-hh-mm-ss",
+    "syncToken": "1496657320",
+    "createDate": "2017-06-05-10-08-39",
     "prefixes": [
         {
-            "ipPrefix": "cidr",
-            "vendor": "cloud vendor",
-            "region": "cloud region",
-            "service": "keboola service"
-        }
+            "ipPrefix": "34.224.0.188/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "34.200.169.177/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "syrup"
+        },
+        ...
     ]
 }
 {% endhighlight %}
