@@ -12,8 +12,10 @@ KBC uses the following IP addresses to access external systems (including your d
 firewalls to allow KBC to successfully connect to your system. This applies to all KBC components
 including all extractors and writers.
 
+**Important: the IP addresses provided below can change in the future. For your convenience, you can programmatically fetch and process the list of existing [IP addresses in JSON format](#ip-address-ranges-in -json) at [https://help.keboola.com/extractors/ip-addresses/kbc-public-ip.json](https://help.keboola.com/extractors/ip-addresses/kbc-public-ip.json).**
+
 ## connection.keboola.com
-For projects in the default US region (AWS region `us-east-1`), the following IP addresses are used:
+For projects in the default US region (AWS region `us-east-1`), the following IP addresses are currently used:
 
 - `34.224.0.188`
 - `34.200.169.177`
