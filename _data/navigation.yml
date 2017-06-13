@@ -15,7 +15,7 @@ items:
             title: Loading with GoogleDrive Extractor
 
           - url: /tutorial/load/database/
-            title: Loading with MySQL Extractor
+            title: Loading with Database Extractor
 
       - url: /tutorial/manipulate/
         title: Part 2 - Data Manipulation

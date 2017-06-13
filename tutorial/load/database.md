@@ -1,27 +1,27 @@
 ---
-title: Loading Data with MySQL Extractor
+title: Loading Data with Database Extractor
 permalink: /tutorial/load/database/
 ---
 
 So far, you have learned to load data into KBC [manually](/tutorial/load/) and
 via a [GoogleDrive extractor](/tutorial/load/googledrive/).
-Let's now load data from an external database with the help of the MySQL extractor
+Let's now load data from an external database with the help of the [Snowflake Database](https://www.snowflake.net/) extractor
 (the procedure is same for all our [database extractors](/extractors/database/).
 
-We will use our own sample MySQL database, so do not worry about having to get database credentials from anyone.
+We will use our own sample Snowflake database, so do not worry about having to get database credentials from anyone.
 
-## Configure MySQL Extractor
+## Configure Snowflake Extractor
 Start by going into the **Extractors** section of KBC and create a new extractor.
 
 {: .image-popup}
 ![Screenshot - Create a new Extractor](/tutorial/load/extractor-intro-2.png)
 
-Find **MySQL**. You can use the search feature to find it quickly.
+Find **Snowflake**. You can use the search feature to find it quickly.
 
 {: .image-popup}
 ![Screenshot - Create a new Database Extractor](/tutorial/load/extractor-intro-3.png)
 
-Similarly to the [GoogleDrive extractor](/tutorial/load/googledrive/), the MySQL extractor can
+Similarly to the [GoogleDrive extractor](/tutorial/load/googledrive/), the Snowflake extractor can
 have multiple configurations. As each configuration represents a single database connection, we only
 need one configuration. Continue with **Create New Configuration**.
 
@@ -35,10 +35,10 @@ Name the configuration.
 
 Now, set up credentials to the source database. Set
 
-- **Host** to `datagirls.keboola.com`,
-- **Port** to `3306`, and
-- **Username**, **Password** and **Database** to `datagirls`.
-[_Wondering who Datagirls are?_](https://www.facebook.com/datagirls/)
+- **Host** to `kebooladev.snowflakecomputing.com`,
+- **Port** to `443`, and
+- **Username**, **Password**, **Database** and **Schema** to `HELP_TUTORIAL`.
+- **Warehouse** to `DEV`.
 
 Test the credentials and save them.
 
@@ -57,9 +57,9 @@ Each database query needs to have a name, SQL command and a target table in Stor
 
 One by one, create and save the following three queries:
 
-- `SELECT * FROM sfdc_account;` with output table `in.c-tutorial.account`
-- `SELECT * FROM sfdc_user;` with output table `in.c-tutorial.user`
-- `SELECT * FROM sfdc_opportunity;` with output table `in.c-tutorial.opportunity`
+- `SELECT * FROM account;` with output table `in.c-tutorial.account`
+- `SELECT * FROM user;` with output table `in.c-tutorial.user`
+- `SELECT * FROM opportunity;` with output table `in.c-tutorial.opportunity`
 
 You will get the following configuration. Click on **Run Extraction** to load the data
 from the database into your tables in Storage.
@@ -80,5 +80,5 @@ Once the job is finished, click on the names of the tables to inspect their cont
 [tables manually](/tutorial/load/) before, their contents will not change at all.
 The extractor overwrites the table contents, and the manually loaded CSV files match the contents of the sample database.
 
-Now when you know how to use the MySQL extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
+Now when you know how to use the Snowflake extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
 

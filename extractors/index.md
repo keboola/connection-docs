@@ -28,7 +28,7 @@ they can be triggered manually at any time.
 
 - For manual import of ad-hoc data, see [Data Import in Storage](/storage/file-uploads/), or our [tutorial on manual data loading](/tutorial/load/).
 - Configure a [sample extractor](/tutorial/load/googledrive/) (GoogleDrive). 
-- Configure a [MySQL extractor](/tutorial/load/database/); 
+- Configure a [Database extractor](/tutorial/load/database/); 
 other SQL database extractors are configured in the exact same way. 
 
 As bringing data into KBC is the main purpose of an extractor, go the path of least resistance:
