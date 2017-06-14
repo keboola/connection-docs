@@ -6,21 +6,28 @@ permalink: /management/limits/
 * TOC
 {:toc}
 
-Each Keboola Connection Project has two kinds of limits. **Business limits** constitute your business usage of our platform and 
-can be seen as the size of your project. **Platform limits** represent what our platform is technically capable of.
+Each Keboola Connection Project has two kinds of limits:  
+
+1. **Business limits** are set in your contract and define the business usage of our platform. 
+This can be seen as the **size** of your project. Exceeding them will earn you a call from us, 
+and a possible contract update conversation. 
+
+2. **Platform limits** represent what our platform is **technically capable of**. Reaching or exceeding 
+these limits is either technically impossible, or it carries a risk of degraded performance.
 
 ## Business Limits
-Each project's business limits are defined by your contract. They scale with your business and accommodate to your needs. 
+Business Limits are set for each project upon entering into the subscription. 
 You can find them under **Users & Settings** in the **Limits** tab:
 
 {: .image-popup}
 ![Screenshot - Limits](/management/limits/limits.png)
 
-All business limits are **soft limits**. Exceeding them will not cause the project to be restricted anyhow. 
-However, if you substantially and constantly exceed the limits, you will be contacted by our Maintainer with a project upgrade. 
-You can also request an upgrade by clicking the **Request Increase** button creating a support ticket for your Maintainer. 
+All business limits are **soft limits**. Exceeding them will not cause the project to be restricted. 
+However, if you substantially and constantly exceed the limits, you will be contacted by us with a **project 
+upgrade** suggestion because you are using more than you have paid for. 
+You can also request an upgrade by clicking the **Request Increase** button creating a support ticket. 
 
-Business limits are:
+Business limits vary based on your contract (refer to it to see which ones apply in your case):
 
 - Storage rows
 - Users count
@@ -44,11 +51,12 @@ Project Power is proportional to the sum of the amount of data **consumed** (exp
 the source system. What is important is how much data it **produces** (imports) into your storage. Therefore 
 we are counting only the data that matters to you.
 
-Although proportional to the amount of data, Project Power is measured in **credits**. This is because it is
-difficult to define a universally valid size of a piece of data. Roughly 1 credit is equivalent to 0.5--1GB of data. 
+Although proportional to the amount of data, Project Power is measured in **units**. This is because it is
+difficult to define a universally valid size of a piece of data. Roughly 1 PPU (Project Power Unit) is equivalent 
+to 0.5--1GB of data. 
 Most of the transfers are efficiently compressed and most of the data *can be* efficiently compressed, which
 makes the ratio more favourable. It is important to say that the same data on the same component will always consume
-the same amount of credits.
+the same number of PPUs.
 
 The **Project Power** tab in **Users & Settings** shows detailed credit consumption by days and components:
 
@@ -67,25 +75,30 @@ across projects with different [backends](/storage/#backend-properties) (or betw
 with mixed backends).
 
 ### GoodData
-If you use [GoodData BI](https://www.gooddata.com/) provisioned by Keboola, the *Limits* page will also show
+If you use [GoodData BI](https://www.gooddata.com/) provisioned by Keboola, the **Limits** page will also show
 limits to your GoodData project. These limits are again soft limits. The production project switch shows 
-whether you are using a [*demo* or a *production* project](/writers/gooddata). The demo project is provided free of charge. 
+whether you are using a [demo or production project](/writers/gooddata). The demo project is provided free of charge. 
 
 {: .image-popup}
 ![Screenshot - GoodData Limits](/management/limits/limits-2.png)
 
 ## Platform Limits
-Apart from the business limits, there are limitations of what Keboola Connection platform can take. These 
-limits are either defined by the underlying technologies, or by what we believe is the correct use of the platform.
-The technical platform limits are non-negotiable and cannot be upgraded by upgrading the project. Nonetheless, we 
-certainly would like [to hear if you hit them](mailto:support@keboola.com). The platform limits may be soft limits or hard limits.
+Apart from the business limits, there are limitations of **what Keboola Connection platform can take**. These limits 
+are either defined by the underlying technologies, or by what we believe is the correct use of the platform. 
+The technical platform limits are **non-negotiable** and **cannot be upgraded** by updating the contract. 
+Nonetheless, we certainly would like to hear if you hit them. 
+
+The platform limits may be **soft** limits or **hard** limits. They are also likely to change (improve) over time as the 
+development continues, and often can be mitigated by a good project design. Contact us for advice if you are 
+concerned about any of them!
 
 For example, the [Redshift backend](/storage/#backend-properties) allows the maximum table cell size of 64kB. This
-is a hard limit and nothing can be done about it (except for using the Snowflake backend). 
+is a hard limit and nothing can be done about it as long as Redshift is a hard requirement (the Snowflake backend 
+can take larger cells). 
 
 As another example, you should not have more than 200 tables in a single bucket. This is a soft limit related to
-how we believe the Storage component should be used. Nothing prevents you from exceeding that limit, but the component
-performance may degrade. 
+how we believe the Storage component should be used. Nothing prevents you from exceeding that limit but the 
+component performance may degrade. 
 
-The full list of the platform limits is available as a 
+The **full list of the platform limits** is available as a 
 [separate document](https://docs.google.com/a/keboola.com/spreadsheets/d/1SqUE6vS5Nq0MmB6Kdw5DyuPjlbyXJ0zMDoGDU5cOfSI/edit?usp=sharing).
