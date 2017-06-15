@@ -15,7 +15,7 @@ all KBC components including all extractors and writers.
 **Important:** These IP addresses can change in the future! For your convenience, you can programmatically 
 fetch and process the [list of existing IP addresses in JSON format](/extractors/ip-addresses/kbc-public-ip.json).
 
-## 1) connection.keboola.com
+## connection.keboola.com
 For projects in the default US region (AWS region `us-east-1`), the following IP addresses are currently used:
 
 - `34.224.0.188`
@@ -23,7 +23,7 @@ For projects in the default US region (AWS region `us-east-1`), the following IP
 - `52.206.109.126`
 - `34.203.87.137`
 
-## 2)connection.eu-central-1.keboola.com
+## connection.eu-central-1.keboola.com
 For projects in the EU region (AWS region `eu-central-1`), no IP addresses are available yet.
 
 ## IP Address Ranges in JSON
