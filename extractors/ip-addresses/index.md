@@ -24,7 +24,10 @@ For projects in the default US region (AWS region `us-east-1`), the following IP
 - `34.203.87.137`
 
 ## connection.eu-central-1.keboola.com
-For projects in the EU region (AWS region `eu-central-1`), no IP addresses are available yet.
+For projects in the EU region (AWS region `eu-central-1`), the following IP addresses are currently used:
+
+- `35.157.170.229`
+- `35.157.93.175`
 
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
