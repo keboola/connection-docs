@@ -223,6 +223,10 @@ supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/cre
 - Adding data to existing sandboxes is not supported yet.
 
 ### Jupyter Notebook Sandbox
+
+**Important:** Currently, this feature is in beta. 
+
+
 The [Jupyter Notebook](http://jupyter.org/) sandbox is available only as a plain sandbox. 
 It is created the same way as the [RStudio Sandbox](#rstudio-sandbox) and the exact same limitations apply to it.
 
@@ -242,4 +246,14 @@ mypath = '/data/in/tables'
 onlyfiles = [f for f in listdir(mypath)]
 print(onlyfiles)
 {% endhighlight %}
+
+The Jupyter Notebook Sandbox has the following **limitations**:
+
+- HTTPS is not yet supported.
+- Sandbox disk space is limited to 10GB.
+- Memory is limited to 8GB.
+- The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
+supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
+- Sandboxes will be deleted after 5 days unless extended.
+- Adding data to existing sandboxes is not supported yet.
 
