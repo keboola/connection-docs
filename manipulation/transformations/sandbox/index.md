@@ -107,7 +107,6 @@ To access them, go to the **Transformations** section and click the **Sandbox** 
 
   - *Connect* (MySQL and Snowflake only) --- Connect to the sandbox using a web SQL client.
   - *SSL* (MySQL and Redshift only) --- Show secure connection information.
-  - *Refresh privileges* (Redshift only) --- REVOKE and GRANT privileges on tables and schemas to the current Redshift user. Because  Redshift privileges are granted on a per-table basis, tables created later than the current user are not available unless you refresh the privileges.
   - *Drop Sandbox* --- Deletes the sandbox database (and all its tables)
 
 In the same place you can also see the sandbox connection credentials. To copy & paste individual values,
@@ -157,11 +156,6 @@ MySQL sandboxes use MariaDB 5.5.44.
 
 Credentials for Redshift sandboxes are not shared between projects. Each project, including the sandbox,
 sits on a different cluster. Therefore, all your projects have their own set of credentials.
-
-For a Redshift Sandbox, there is an additional action available: *Refresh privileges*.
-It is used to REVOKE and GRANT privileges on tables and schemas to the current Redshift user.
-As Redshift privileges are granted on a per-table basis, tables created later than the current user are not
-available unless you refresh the privileges.
 
 #### Connecting to Sandbox
 
