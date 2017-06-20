@@ -28,7 +28,7 @@ Sandboxes with different backends are very similar; but there are few specifics,
 **Important:** The backend of the sandbox does not have to match the backend of the original data.
 For example, you can load data from Snowflake into a Redshift sandbox.
 
-Also, your sandbox might be deleted after 7 days of inactivity; make sure not to use it as a permanent data storage!
+Also, your sandbox might be deleted after 14 days of inactivity unless extended; make sure not to use it as a permanent data storage!
 
 ## Loading Data
 
@@ -107,7 +107,8 @@ To access them, go to the **Transformations** section and click the **Sandbox** 
 
   - *Connect* (MySQL and Snowflake only) --- Connect to the sandbox using a web SQL client.
   - *SSL* (MySQL and Redshift only) --- Show secure connection information.
-  - *Drop Sandbox* --- Deletes the sandbox database (and all its tables)
+  - *Drop Sandbox* --- Deletes the sandbox database (and all its tables).
+  - *Extend Expiration* --- Postpone the sandbox expiration date for another period (14 days for MySQL, 5 days for Jupyter and RStudio).
 
 In the same place you can also see the sandbox connection credentials. To copy & paste individual values,
 use the *copy icon*:
@@ -219,7 +220,7 @@ The RStudio Sandbox has the following **limitations**:
 - Memory is limited to 8GB.
 - The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
-- Sandboxes will be deleted after 5 days.
+- Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
 ### Jupyter Notebook Sandbox
