@@ -186,8 +186,7 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 
 ### RStudio Sandbox
 
-**Important:** Currently, this feature is in beta and is available only on request. 
-To enable it, [contact our support team](mailto:support@keboola.com).
+**Important:** Currently, this feature is in beta. 
 
 The [RStudio](https://www.rstudio.com/) sandbox is available only as a plain sandbox:
 
