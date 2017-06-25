@@ -72,6 +72,14 @@ tryCatch(
 {% endhighlight %}
 
 ## Development Tutorial
+
+> **Tip of the Day** Use the sandbox to check for naming/formatting issues.  
+Create an RStudio sandbox with the same input mapping that your transformation will use.  
+Then limit the number of rows you read in from the csv(s):  
+`mydata <- read.csv("in/tables/mydata", nrows=500)`   
+This will help catch annoying issues without having to run it with a full data load 
+
+
 To develop and debug R transformations, you can replicate the execution environment on your local machine.
 To do so, [install R](https://cloud.r-project.org/), preferably the same version as us.
 It is also helpful to use an IDE, such as [RStudio](https://www.rstudio.com/products/rstudio/#Desktop).
