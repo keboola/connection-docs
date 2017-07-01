@@ -73,15 +73,18 @@ tryCatch(
 
 ## Development Tutorial
 
-> **Tip of the Day** Use the sandbox to check for naming/formatting issues.  
-Create an RStudio sandbox with the same input mapping that your transformation will use.  
-Then limit the number of rows you read in from the csv(s):  
-`mydata <- read.csv("in/tables/mydata", nrows=500)`   
-This will help catch annoying issues without having to run it with a full data load 
+We recommend that you can create an [RStudio sandbox](/manipulation/transformations/sandbox/#rstudio-sandbox) with the same input mapping that your transformation will use. This is the fastest way to develop transformation code.
 
+**Tip:** Limit the number of rows you read in from the CSV files:
 
-To develop and debug R transformations, you can replicate the execution environment on your local machine.
-To do so, [install R](https://cloud.r-project.org/), preferably the same version as us.
+{% highlight r %}
+mydata <- read.csv("in/tables/mydata", nrows=500)
+{% endhighlight %}
+
+This will help you catch annoying issues without having to process all data. 
+
+You can also develop and debug R transformations on your local machine. 
+To do so, [install R](https://cloud.r-project.org/), preferably the same [version as us](#environment).
 It is also helpful to use an IDE, such as [RStudio](https://www.rstudio.com/products/rstudio/#Desktop).
 
 To simulate the input and output mapping, all you need to do is create the right directories with the right files.
