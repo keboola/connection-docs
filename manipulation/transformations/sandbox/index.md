@@ -212,6 +212,10 @@ The R version is also the same as in [R Transformations](https://help.keboola.co
 {: .image-popup}
 ![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-3.png)
 
+*Note: Although it is possible to upload files directly into the RStudio sandbox, we highly recommend that
+you use only input mapping to load data into the sandbox. It is more reliable nad traceacble method of
+loading data.*
+
 The RStudio Sandbox has the following **limitations**:
 
 - HTTPS is not yet supported.
