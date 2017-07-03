@@ -73,7 +73,8 @@ tryCatch(
 
 ## Development Tutorial
 
-We recommend that you can create an [RStudio sandbox](/manipulation/transformations/sandbox/#rstudio-sandbox) with the same input mapping that your transformation will use. This is the fastest way to develop transformation code.
+We recommend that you create an [RStudio sandbox](/manipulation/transformations/sandbox/#rstudio-sandbox) with the same 
+input mapping your transformation will use. This is the fastest way to develop your transformation code.
 
 **Tip:** Limit the number of rows you read in from the CSV files:
 
