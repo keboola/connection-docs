@@ -58,22 +58,21 @@ are automatically quoted by KBC. This is especially important for Snowflake, whi
 ## Backends
 A backend is the engine running the transformation script. It is either a database server 
 [MySQL](http://www.mysql.com/), [Redshift](https://aws.amazon.com/redshift/), 
-and [Snowflake](http://www.snowflake.net/), or a language interpreter ([R](https://www.r-project.org/about.html), 
-[Python](https://www.python.org/about/) or [OpenRefine](http://openrefine.org/)).
+and [Snowflake](http://www.snowflake.net/), or a language interpreter ([R](https://www.r-project.org/about.html), [Python](https://www.python.org/about/)).
 
 How to decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better 
-for joining tables, filtering data, grouping and simple aggregations. Script languages are more suitable 
+for joining tables, filtering data,grouping and simple aggregations. Script languages are more suitable 
 for processing one line at a time, raw data processing or custom analytical tasks.
 
-Each transformation within a bucket must use the backend chosen for the bucket. You can create as many buckets as you want 
-to perform the task with the most suitable tool and programming language. [Orchestrator](/orchestrator/) will help you chain 
-tasks if you need to combine multiple backends to perform one business operation. 
+Each transformation within a bucket can use a different backend to perform the task 
+with the most suitable tool and programming language. As some tasks are difficult to solve in SQL, 
+feel free to step in with Python and finish the work with SQL again. 
 
 The following are the currently available backends:
 
 - **SQL** --- Choosing between [MySQL](./mysql/), [Redshift](./redshift/) and [Snowflake](./snowflake/) 
-can be a matter of your preference or the overall performance. Projects start with Snowflake and they can be switched to Redshift on a dedicated cluster. 
-That unfortunately requires rewriting the SQL code. MySQL is slowly getting deprecated.
+can be a matter of your preference or the overall performance. Many projects start with MySQL and as they grow, 
+they are switched to Redshift on a dedicated cluster. That unfortunately requires rewriting the SQL code.
 
 - **Script** --- [Python](./python/), [R](./r/) or [OpenRefine](./openrefine/). Choose according to your taste and available libraries.
 
@@ -82,11 +81,12 @@ Each change in the transformation configuration creates a new version of the who
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
 ## Developing Transformations
-You can easily develop Snowflake, Redshift and MySQL transformations using [Sandbox](/manipulation/transformations/sandbox),
+You can easily develop MySQL and Redshift transformations using [Sandbox](/manipulation/transformations/sandbox),
 a separate database storage. As a safe workspace with required data, 
 it allows you to run and play with your arbitrary SQL scripts on the copies of your tables 
 without affecting data in your Storage, or your transformations.
 
+<<<<<<< HEAD
 ## Deprecated Features
 Our goal is to make Transformations more transparent and understandable. That is the reason why the features below are no 
 longer available for new projects. Your older projects, however, have a slightly different UI with these features still 
@@ -94,6 +94,10 @@ turned on.
 
 ### Mixing Backends
 In your older projects, transformations with mixed backends (e.g., MySQL and Python) can be run in a single bucket.
+=======
+
+## Advanced Features
+>>>>>>> parent of f90e389... fix(manipulation): simple transformations
 
 ### Phases
 Phases in older projects allow multiple transformation steps to be run within a single workspace, for example, a single MySQL 
@@ -101,8 +105,14 @@ database. Multiple steps with the same input mapping (sharing data) might save a
 everything is less clear and isolated. To save time, run multiple orchestration tasks in parallel instead.
 
 ### Dependencies
+<<<<<<< HEAD
 Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all required steps have been executed. 
 
 Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of 
 SQL code. However, a network of nontransparent dependency trees was usually created, leading to confusion and, sometimes, 
 cyclical dependencies. 
+=======
+Dependencies allow you to chain transformation steps. A given transformation is executed after all required steps have been executed. 
+
+Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of SQL code. However, a network of nontransparent dependency trees was usually created, so we have decided to abolish this feature in the near future. If possible, please do not use dependencies as it will make future migrations easier.
+>>>>>>> parent of f90e389... fix(manipulation): simple transformations
