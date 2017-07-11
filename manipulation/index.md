@@ -7,8 +7,8 @@ There are two ways how data in KBC can be manipulated: via *Transformations* (si
 (not as simple but more powerful). Both pick data from Storage, manipulate it and then store it back.
 
 - **Transformations** --- can be created by writing a free-form manipulation scripts in either SQL 
-(for MySQL, Redshift or Snowflake backend), [R](https://www.r-project.org/about.html), [Python](https://www.python.org/about/) 
-or [OpenRefine](http://openrefine.org/). 
+(for MySQL, Redshift or Snowflake backend), [R](https://www.r-project.org/about.html), 
+or [Python](https://www.python.org/about/). 
 KBC provides each user with Sandbox --- a safe environment for your experiments.
 
 - **Applications** --- Unlike the free-form Transformations, Applications are predefined blocks 
