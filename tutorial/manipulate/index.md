@@ -20,16 +20,18 @@ To start, go to the KBC **Transformations** section:
 
 Like [tables](/storage/tables/), Transformations are organized into *buckets*. 
 Each transformation bucket can contain any number of individual transformations. 
-It should represent a logical set (container) of operations you want to perform together.
-Before you start with transformations, create a bucket and call it *Opportunity*. 
+It should represent a logical set (container) of operations you want to perform together. 
+A backend is the engine running the transformation scripts in the bucket;
+ it is either a database server (MySQL, Redshift, Snowflake) or a language interpreter (R, Python, OpenRefine).
+
+Before you start with transformations, create a bucket and call it *Opportunity* and choose the *MySQL* backend. 
+ 
 
 {: .image-popup}
 ![Screenshot - Create a Transformation Bucket](/tutorial/manipulate/transformations-create-bucket.png)
 
 Then click on *Add Transformation* in the upper right corner to create an individual transformation. 
-Make sure to enter its *Name* and select *Backend*. A backend is the engine running the transformation script;
-it is either a database server (MySQL, Redshift, Snowflake) or a language interpreter (R, Python). 
-Name your transformation *Denormalize opportunities*, and choose the *MySQL* backend.
+Name your transformation *Denormalize opportunities*.
 
 {: .image-popup}
 ![Screenshot - Create a Transformation](/tutorial/manipulate/transformations-create.png)
@@ -142,7 +144,7 @@ Save the queries and then click on *Run Transformation*. This will create a back
 
 - get the specified tables from Storage,
 - put them in a transformation database, 
-- execute the queries, and 
+- execute the queries/script, and 
 - store the result in Storage again. 
 
 To see if the transformation job was successful, go to **Jobs**, or click on the small 
