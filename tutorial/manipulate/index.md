@@ -142,7 +142,7 @@ Save the queries and then click on *Run Transformation*. This will create a back
 
 - get the specified tables from Storage,
 - put them in a transformation database, 
-- execute the queries, and 
+- execute the queries/script, and 
 - store the result in Storage again. 
 
 To see if the transformation job was successful, go to **Jobs**, or click on the small 
