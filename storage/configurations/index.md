@@ -6,7 +6,7 @@ permalink: /storage/configurations/
 * TOC
 {:toc}
 
-Each KBC component (extractor, writer, etc.) has configurations which can be created through the UI.
+Each KBC component (extractor, writer, transformation bucket, etc.) has configurations which can be created through the UI.
 
 All configurations are saved into Storage. When modified, their new version is created and the old one is 
 kept in history. Most components, with the exception of a few old ones, enable you to see the configuration 
