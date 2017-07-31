@@ -218,7 +218,6 @@ loading data.*
 
 The RStudio Sandbox has the following **limitations**:
 
-- HTTPS is not yet supported.
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB.
 - The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
@@ -253,7 +252,6 @@ print(onlyfiles)
 
 The Jupyter Notebook Sandbox has the following **limitations**:
 
-- HTTPS is not yet supported.
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB.
 - The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
