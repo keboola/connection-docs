@@ -29,7 +29,7 @@ Before you start with transformations, create a bucket and call it *Opportunity*
 Then click on *Add Transformation* in the upper right corner to create an individual transformation. 
 Make sure to enter its *Name* and select *Backend*. A backend is the engine running the transformation script;
 it is either a database server (MySQL, Redshift, Snowflake) or a language interpreter (R, Python). 
-Name your transformation *Denormalize opportunities*, and choose the *MySQL* backend.
+Name your transformation *Denormalize opportunities*, and choose the **Snowflake** backend.
 
 {: .image-popup}
 ![Screenshot - Create a Transformation](/tutorial/manipulate/transformations-create.png)
@@ -95,34 +95,34 @@ The size of the `opportunity_denorm` table shows as *N/A* because the table does
 (all available options, etc.).*
 
 ### Transformation Script
-To produce that table from tables `account`, `opportunity` and `user`, click *Edit Queries* and write the transformation script. 
+To produce that table from tables `account`, `opportunity` and `user`, write the transformation script. 
 To save you some time, we have already prepared the necessary SQL queries for you:
 
 {% highlight sql %}
-CREATE TABLE tmp_level AS 
-    SELECT Name, CASE Level 
-        WHEN 'S' THEN 'Senior'
-        WHEN 'M' THEN 'Intermediate'
-        WHEN 'J' THEN 'Junior' END AS Level
-    FROM level;
+CREATE TABLE "tmp_level" AS 
+    SELECT "Name", CASE 
+        WHEN "Level" = 'S' THEN 'Senior'
+        WHEN "Level" = 'M' THEN 'Intermediate' 
+        WHEN "Level" = 'J' THEN 'Junior' END AS "Level" 
+    FROM "level"; 
 
-CREATE TABLE tmp_opportunity AS 
+CREATE TABLE "tmp_opportunity" AS 
     SELECT *, CASE 
-        WHEN Probability < 50 THEN 'Poor'
-        WHEN Probability < 70 THEN 'Good'
-        ELSE 'Excellent' END AS ProbabilityClass
-    FROM opportunity;
+        WHEN "Probability" < 50 THEN 'Poor' 
+        WHEN "Probability" < 70 THEN 'Good' 
+        ELSE 'Excellent' END AS "ProbabilityClass" 
+    FROM "opportunity";
 
-CREATE TABLE opportunity_denorm AS 
-    SELECT tmp_opportunity.*, 
-        user.Name AS UserName, user.Sales_Market AS UserSalesMarket, 
-        user.Global_Market AS UserGlobalMarket,
-        account.Name AS AccountName, account.Region AS AccountRegion, 
-        account.Status AS AccountStatus, account.FirstOrder AS AccountFirstOrder
-    FROM tmp_opportunity 
-        JOIN user ON tmp_opportunity.OwnerId = user.Id
-        JOIN account ON tmp_opportunity.accountId = account.Id
-        JOIN tmp_level ON user.Name = tmp_level.Name
+CREATE TABLE "opportunity_denorm" AS 
+    SELECT "tmp_opportunity".*, 
+        "user"."Name" AS "UserName", "user"."Sales_Market" AS "UserSalesMarket", 
+        "user"."Global_Market" AS "UserGlobalMarket", 
+        "account"."Name" AS "AccountName", "account"."Region" AS "AccountRegion", 
+        "account"."Status" AS "AccountStatus", "account"."FirstOrder" AS "AccountFirstOrder" 
+    FROM "tmp_opportunity" 
+        JOIN "user" ON "tmp_opportunity"."OwnerId" = "user"."Id" 
+        JOIN "account" ON "tmp_opportunity"."AccountId" = "account"."Id" 
+        JOIN "tmp_level" ON "user"."Name" = "tmp_level"."Name";
 {% endhighlight %}
 
 {: .image-popup}

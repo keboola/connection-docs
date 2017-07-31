@@ -30,7 +30,8 @@ For the sake of practicing, let's create a brand new transformation instead of m
 
 Apart from creating a new transformation, we also need a new transformation bucket, since the
 Tableau and Gooddata transformations are not really related. If they were more complex, we would take out the
-similar parts into another transformation. Name the new transformation bucket *Opportunity - GoodData*.
+similar parts into another transformation. Name the new transformation bucket *Opportunity - GoodData* and
+choose **Snowflake** backend.
 
 {: .image-popup}
 ![Screenshot - Transformation Bucket Create](/tutorial/write/gooddata-transformation-create-1.png)
@@ -51,28 +52,28 @@ to be stored in the `out.c-tutorial` output bucket.
 Use the following four SQL queries to create the output bucket tables. 
 
 {% highlight sql %}
-CREATE TABLE tmp_level AS
-    SELECT Name, CASE Level
+CREATE TABLE "tmp_level" AS
+    SELECT "Name", CASE "Level"
         WHEN 'S' THEN 'Senior'
         WHEN 'M' THEN 'Intermediate'
-        WHEN 'J' THEN 'Junior' END AS Level
-    FROM level;
+        WHEN 'J' THEN 'Junior' END AS "Level"
+    FROM "level";
 
-CREATE TABLE out_opportunity AS
+CREATE TABLE "out_opportunity" AS
     SELECT *, CASE
-        WHEN Probability < 50 THEN 'Poor'
-        WHEN Probability < 70 THEN 'Good'
-        ELSE 'Excellent' END AS ProbabilityClass
-    FROM opportunity;
+        WHEN "Probability" < 50 THEN 'Poor'
+        WHEN "Probability" < 70 THEN 'Good'
+        ELSE 'Excellent' END AS "ProbabilityClass"
+    FROM "opportunity";
 
-CREATE TABLE out_user AS
-    SELECT user.Name AS Name, user.Sales_Market AS UserSalesMarket,
-        user.Global_Market AS UserGlobalMarket
+CREATE TABLE "out_user" AS
+    SELECT "user"."Name" AS "Name", "user"."Sales_Market" AS "UserSalesMarket",
+        "user"."Global_Market" AS "UserGlobalMarket"
     FROM
-        user JOIN tmp_level ON user.Name = tmp_level.Name;
+        "user" JOIN "tmp_level" ON "user"."Name" = "tmp_level"."Name";
 
-CREATE TABLE out_account AS
-    SELECT * FROM account;
+CREATE TABLE "out_account" AS
+    SELECT * FROM "account";
 {% endhighlight %}
 
 {: .image-popup}
