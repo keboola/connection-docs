@@ -21,8 +21,9 @@ We strongly suggest you make a [backup of your project](/management/project-expo
 
 ## GoodData Projects
 If the KBC project has provisioned a GoodData project, that project will also be deleted. The grace 
-period for GoodData project is **5 days**. When a GoodData writer is deleted, the associated project
-is deleted after the grace period. When a KBC project is deleted (but the GoodData writer was left in it), the associated GoodData project will be deleted in 5 to 14 days from the deletion of the KBC project.
+period for a GoodData project is **5 days**. When a GoodData writer is deleted, the associated project
+is deleted after the grace period. When a KBC project is deleted (but the GoodData writer was left in it), 
+the associated GoodData project will be deleted in 5 to 14 days from the deletion of the KBC project.
 
 **Important**: Expiring projects will be deleted **automatically** when the expiration day is due. 
 You will receive a **notification** a week in advance. 
