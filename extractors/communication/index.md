@@ -9,6 +9,7 @@ The following extractors support communication systems:
 - [Gmail](/extractors/communication/gmail/) 
 - [Pigeon Importer](/extractors/communication/pigeon/) 
 - [Zendesk](/extractors/communication/zendesk/) 
+- [Intercom](/extractors/communication/intercom/) 
 - Slack 
 - and others
 
