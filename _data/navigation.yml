@@ -61,6 +61,9 @@ items:
           - url: /extractors/communication/zendesk/
             title: Zendesk
 
+          - url: /extractors/communication/zendesk/
+            title: Zendesk
+
       - url: /extractors/marketing-sales/
         title: Marketing/Sales
         items:
