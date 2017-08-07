@@ -46,6 +46,10 @@ Provide information about your Zendesk Account and API token.
 {: .image-popup}
 ![Zendesk Credentials](/extractors/communication/zendesk/05-credentials.png)
 
+You can choose between two templates --- *Tickets with Comments* and *Tickets without Comments*. The latter one will get only the initial ticket
+and not the other responses to it. It is much quicker though. Also note that some of the tables described below may not be extracted if there is
+not data for it.
+
 **Save** and click **Run Extraction**.
 
 ## Extraction Output Tables
@@ -206,7 +210,7 @@ Basic data for ticket satisfaction ratings
 
 ### 12 -- Tickets-comments
 
-List of conversation (comments) between requesters, collaborators, and agents
+List of conversation (comments) between requesters, collaborators, and agents (available only when *Tickets with Comments* template is used).
 
 | Column | Description |
 | `id` [PK] | Comment identifier |
@@ -222,7 +226,7 @@ List of conversation (comments) between requesters, collaborators, and agents
 
 ### 13 -- Tickets-comments-attachments
 
-List of uploaded comment attachments
+List of uploaded comment attachments (available only when *Tickets with Comments* template is used).
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the file |
@@ -235,7 +239,7 @@ List of uploaded comment attachments
 | `inline` | `1` if file is excluded from the attachment list |
 | `tickets_comments_pk` | Comment identifier |
 
-### 14 -- Tickets-comments-attachments-thumbnails
+### 14 -- Tickets-comments-attachments-thumbnails (available only when *Tickets with Comments* template is used).
 
 Uploaded attachment thumbnails
 
@@ -252,7 +256,7 @@ Uploaded attachment thumbnails
 
 ### 15 -- Tickets-audits
 
-Basic info about each ticket update
+Basic info about each ticket update (available only when *Tickets with Comments* template is used).
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the audit |
