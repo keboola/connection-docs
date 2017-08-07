@@ -18,7 +18,7 @@ Choose some meaningful name (you can change it anytime later) of configuration a
 
 
 {: .image-popup}
-![GitHub New Configuration](/extractors/github/01-new-configuration.png)
+![GitHub New Configuration](./01-new-configuration.png)
 
 ## Authorize GitHub Account
 Select the method of authorization:
@@ -27,13 +27,13 @@ Select the method of authorization:
  - **External** - If you need to authorize access to a service from someone who does not have account in Keboola Connection you can generate external link which will guide him through this process.
 
 {: .image-popup}
-![GitHub Authorization](/extractors/github/02-authorize.png)
+![GitHub Authorization](./02-authorize.png)
 
 
 {: .image-popup}
-![GitHub Authorization Selection](/extractors/github/03-authorize-modal.png)
+![GitHub Authorization Selection](./03-authorize-modal.png)
 
 Log in to your GitHub profile:
 
 {: .image-popup}
-![GitHub Login](/extractors/github/04-github-auth.png)
+![GitHub Login](./04-github-auth.png)
