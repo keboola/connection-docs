@@ -36,17 +36,6 @@ Downloads all
  - conversations (tables `conversations`, `conversations_attachments`, `conversations_tags`, `conversations_customers`)
  - conversation parts (tables `conversation_parts`, `conversation_parts_attachments`)
 
-#### Users and events (experimental)
-
-Downloads all
-
- - users (tables `users`, `users_tags`, `users_segments`, `users_companies`, `users_social_profiles`)
- - events (table `events`)
-
-*Note: downloading all user events often returns an application error from the Intercom API. 
-We're figuring out the reasons with the Intercom support, so until this is resolved, downloading full events 
-is considered experimental only.*
-
 ## Downloaded Tables
 
 All `custom_attributes` and `metadata` properties are stored as a serialized JSON string. 
@@ -368,17 +357,3 @@ List of all attachments for a conversation part
 | `width` | Undocumented |
 | `height` | Undocumented |
 | `conversation_parts_pk` [FK] | Conversation identifier (`conversation_parts.id`) |
-
-### events
-
-List of all [Events](https://developers.intercom.com/v2.0/reference#event-model)
-
-| Column | Description |
-| `type` | Undocumented | 
-| `id` | Your identifier for a lead or a user | 
-| `created_at` | The time the event occurred as a UTC Unix timestamp | 
-| `event_name` | The name of the event that occurred. This is presented to your App's admins when filtering and creating segments - a good event name is typically a past tense 'verb-noun' combination, to improve readability, for example updated-plan. | 
-| `user_id` | Your identifier for the user | 
-| `email` | An email address for your user. An email should only be used where your application uses email to uniquely identify users | 
-| `intercom_user_id` | Undocumented | 
-| `metadata` | 	Serialized metadata JSON for the `Event` object | 
