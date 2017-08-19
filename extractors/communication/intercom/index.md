@@ -10,20 +10,22 @@ This extractor fetches data from [Intercom](https://www.intercom.com/).
 
 ## Configuring Extractor
 
-Before you start, have a working Intercom account with a plan (trial will work as well). 
+Before you start, have a working Intercom account with a plan (a trial will work as well). 
 
-After you create the configuration and authorize it with your Intercom account, you can choose a template. 
+After you create the configuration and authorize it with your Intercom account, choose a template. 
 
 ### Configuration Templates
 
+There are two configuration templates available: `basic` and `conversations`.
+
 #### Basic
 
-Downloads all
+The `basic` template downloads all
 
- - users (tables `users`, `users_tags`, `users_segments`, `users_companies`, `users_social_profiles`)
+ - users (tables `users`, `users_tags`, `users_segments`, `users_companies` and `users_social_profiles`)
  - notes (table `notes`)
  - summary of events for each user (table `events_summary`)
- - leads (tables `leads`, `leads_tags`, `leads_segments`, `leads_companies`, `leads_social_profiles`)
+ - leads (tables `leads`, `leads_tags`, `leads_segments`, `leads_companies` and `leads_social_profiles`)
  - companies (table `companies`)
  - admins (table `admins`)
  - tags (table `tags`)
@@ -31,20 +33,21 @@ Downloads all
 
 #### Conversations
 
-Downloads all
+The `conversations` template downloads all
 
- - conversations (tables `conversations`, `conversations_attachments`, `conversations_tags`, `conversations_customers`)
- - conversation parts (tables `conversation_parts`, `conversation_parts_attachments`)
+ - conversations (tables `conversations`, `conversations_attachments`, `conversations_tags` and `conversations_customers`)
+ - conversation parts (tables `conversation_parts` and `conversation_parts_attachments`)
 
 ## Downloaded Tables
 
 All `custom_attributes` and `metadata` properties are stored as a serialized JSON string. 
 Due to the customized structure of this object we are unable to prepare a fixed structure. 
-To parse the serialized JSON you can use eg. a Snowflake transformation, that can easily parse JSON objects. 
+To parse the serialized JSON, use e.g. a Snowflake transformation that can easily parse JSON objects. 
 
 ### users
 
-List of all [Users](https://developers.intercom.com/v2.0/reference#user-model)
+The table `users` lists all [Users](https://developers.intercom.com/v2.0/reference#user-model) and 
+has the following columns:
 
 | Column | Description |
 | `type` | 	Value is `user` |
@@ -79,7 +82,7 @@ List of all [Users](https://developers.intercom.com/v2.0/reference#user-model)
 
 ### users_tags
 
-Relation between `users` and `tags`.
+This table records relations between `users` and `tags`.
 
 | Column | Description |
 | `type` | 	Value is `tag` |
@@ -88,7 +91,7 @@ Relation between `users` and `tags`.
 
 ### users_segments
 
-Relation between `users` and `segments`.
+This table records relations between `users` and `segments`.
 
 | Column | Description |
 | `type` | 	Value is `segment` |
@@ -97,7 +100,7 @@ Relation between `users` and `segments`.
 
 ### users_companies
 
-Relation between `users` and `companies`.
+This table records relations between `users` and `companies`.
 
 | Column | Description |
 | `type` | 	Value is `company` |
@@ -106,7 +109,7 @@ Relation between `users` and `companies`.
 
 ### users_social_profiles
 
-List of social profiles attached to the user.
+This table lists social profiles attached to the user.
 
 | Column | Description |
 | `type` | 	Value is `social_profile` |
@@ -118,7 +121,7 @@ List of social profiles attached to the user.
 
 ### notes
 
-List of all [Notes](https://developers.intercom.com/v2.0/reference#note-model)
+This table lists all [Notes](https://developers.intercom.com/v2.0/reference#note-model).
 
 | Column | Description |
 | `type` | 	Value is `note` |
@@ -132,7 +135,8 @@ List of all [Notes](https://developers.intercom.com/v2.0/reference#note-model)
 
 ### events_summary
 
-[Summary of Events](https://developers.intercom.com/v2.0/reference#view-user-events-summaries) for a given user
+This table lists [Event Summaries](https://developers.intercom.com/v2.0/reference#view-user-events-summaries) 
+for each user.
 
 | Column | Description |
 | `user_id` [FK] | The user id |  
@@ -144,7 +148,7 @@ List of all [Notes](https://developers.intercom.com/v2.0/reference#note-model)
 
 ### leads
 
-List of [Leads](https://developers.intercom.com/v2.0/reference#user-model)
+This table lists [Leads](https://developers.intercom.com/v2.0/reference#leads-object).
 
 | Column | Description |
 | `type` | Value is `contact` |
@@ -180,7 +184,7 @@ List of [Leads](https://developers.intercom.com/v2.0/reference#user-model)
 
 ### leads_tags
 
-Relation between `leads` and `tags`.
+This table records relations between `leads` and `tags`.
 
 | Column | Description |
 | `type` | 	Value is `tag` |
@@ -189,7 +193,7 @@ Relation between `leads` and `tags`.
 
 ### leads_segments
 
-Relation between `leads` and `segments`.
+This table records relations between `leads` and `segments`.
 
 | Column | Description |
 | `type` | 	Value is `segment` |
@@ -198,7 +202,7 @@ Relation between `leads` and `segments`.
 
 ### leads_companies
 
-Relation between `leads` and `companies`.
+This table records relations between `leads` and `companies`.
 
 | Column | Description |
 | `type` | 	Value is `company` |
@@ -207,7 +211,7 @@ Relation between `leads` and `companies`.
 
 ### leads_social_profiles
 
-List of social profiles attached to the user.
+This table lists the social profiles attached to all users.
 
 | Column | Description |
 | `type` | 	Value is `social_profile` |
@@ -219,7 +223,7 @@ List of social profiles attached to the user.
 
 ### companies
 
-List of all [Companies](https://developers.intercom.com/v2.0/reference#company-model)
+This table lists all [Companies](https://developers.intercom.com/v2.0/reference#company-model).
 
 | Column | Description |
 | `type` | 	Value is `company` |
@@ -237,7 +241,7 @@ List of all [Companies](https://developers.intercom.com/v2.0/reference#company-m
 
 ### admins
 
-List of all [Admins](https://developers.intercom.com/v2.0/reference#admin-model)
+This table lists all [Admins](https://developers.intercom.com/v2.0/reference#admin-model).
 
 
 | Column | Description |
@@ -248,7 +252,7 @@ List of all [Admins](https://developers.intercom.com/v2.0/reference#admin-model)
 
 ### tags
 
-List of all [Tags](https://developers.intercom.com/v2.0/reference#tag-model)
+This table lists all [Tags](https://developers.intercom.com/v2.0/reference#tag-model).
 
 | Column | Description |
 | `type` | 	Value is `tag` |
@@ -257,7 +261,7 @@ List of all [Tags](https://developers.intercom.com/v2.0/reference#tag-model)
 
 ### segments
 
-List of all [Segments](https://developers.intercom.com/v2.0/reference#segment-model)
+This table lists all [Segments](https://developers.intercom.com/v2.0/reference#segment-model).
 
 | Column | Description |
 | `type` | 	Value is `segment` |
@@ -270,7 +274,7 @@ List of all [Segments](https://developers.intercom.com/v2.0/reference#segment-mo
 
 ### conversations
 
-List of all [Conversations](https://developers.intercom.com/v2.0/reference#conversation-model)
+This table lists all [Conversations](https://developers.intercom.com/v2.0/reference#conversation-model).
 
 | Column | Description |
 | `type` | Value is `conversation` |
@@ -296,7 +300,7 @@ List of all [Conversations](https://developers.intercom.com/v2.0/reference#conve
 
 ### conversations_attachments
 
-List of all attachments for a conversation
+This table lists all attachments for all conversations.
 
 | Column | Description |
 | `type` | Undocumented |
@@ -310,7 +314,7 @@ List of all attachments for a conversation
 
 ### conversations_customers
 
-List of customers (users or leads) involved in a conversation.
+This table lists all customers (users or leads) involved in each conversation.
 
 | Column | Description |
 | `type` | `user` or `conversation` (lead) |
@@ -319,7 +323,7 @@ List of customers (users or leads) involved in a conversation.
 
 ### conversations_tags
 
-Relation between `conversations` and `tags`.
+This table records relations between `conversations` and `tags`.
 
 | Column | Description |
 | `type` | 	Value is `tag` |
@@ -328,7 +332,7 @@ Relation between `conversations` and `tags`.
 
 ### conversation_parts
 
-List of all [Conversation parts](https://developers.intercom.com/v2.0/reference#conversation-part-model)
+This table lists all [Conversation parts](https://developers.intercom.com/v2.0/reference#conversation-part-model).
 
 | Column | Description |
 | `type` | Value is `conversation_part` |
@@ -346,7 +350,7 @@ List of all [Conversation parts](https://developers.intercom.com/v2.0/reference#
 
 ### conversation_parts_attachments
 
-List of all attachments for a conversation part
+This table lists all attachments for each conversation part.
 
 | Column | Description |
 | `type` | Undocumented |
