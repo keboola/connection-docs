@@ -25,8 +25,8 @@ have a look at the [full Common Interface specification](https://developers.kebo
 Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with KBC.
 
 ## Python Script Requirements
-Python is sensitive to indentation. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
-`# coding=utf-8` at the beginning of the script is not needed. If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be ran. Simply calling it from withing the script is enough:
+Python is **sensitive to indentation**. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
+`# coding=utf-8` at the beginning of the script is not needed. If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be run. Simply calling it from within the script is enough:
 
 {% highlight python %}
 def main():
@@ -38,7 +38,7 @@ main()
 ### Packages
 You can list extra packages in the UI. These packages are installed using [pip](https://pypi.python.org/pypi/pip).
 Generally, any package available on [PyPI](https://pypi.python.org/pypi) can be installed. However, some packages have external dependencies, which might not be available.
-Feel free to contact us if you run into problems. When the package is installed you still need to `import` from it.
+Feel free to contact us if you run into problems. When the package is installed, you still need to `import` from it.
 
 {: .image-popup}
 ![Screenshot - Package Configuration](/manipulation/transformations/python/packages.png)

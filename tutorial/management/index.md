@@ -1,5 +1,5 @@
 ---
-title: Part 5 - Management
+title: Part 5 - Project Management
 permalink: /tutorial/management/
 ---
 
@@ -90,6 +90,8 @@ In addition to sharing sections of your data with selected users, the buckets ca
 people can send data directly to your KBC project instead of struggling with FTP or e-mail attachments.
 To revoke the access, simply delete the token.
 
+To learn more about inviting or removing a user, about manual registration, authentication and authorization,
+see [User Management](/management/users/).
 
 ## Project Status
 KBC is an open system and, as such, we want you to have all important information on your project at your disposal.

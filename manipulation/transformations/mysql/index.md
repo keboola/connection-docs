@@ -11,7 +11,7 @@ MySQL is very simple, yet powerful. However, it has its limitations:
 
 If your queries last more than 10 minutes, or transformations in your orchestration take more than an hour, please consider using Redshift or Snowflake. You can iterate faster on your development without having to wait too long for the next test run to finish. 
 
-- **Query Length** --- Queries containing comments longer than 8192 characters will segfault.
+- **Query Length** --- Queries containing comments longer than 8,192 characters will segfault.
 
 The version used by MySQL transformations is **MariaDB 5.55.34.** The server is fine-tuned for performance.  
 

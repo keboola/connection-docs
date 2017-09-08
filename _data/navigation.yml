@@ -196,7 +196,7 @@ items:
         title: Users
 
       - url: /management/organization/
-        title: Organization
+        title: Organizations
 
       - url: /management/limits/
         title: Limits

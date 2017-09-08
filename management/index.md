@@ -1,5 +1,5 @@
 ---
-title: Management
+title: Project Management
 permalink: /management/
 ---
 
