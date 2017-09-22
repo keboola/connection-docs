@@ -14,6 +14,8 @@ related to Data and User management. We take great care to ensure that everythin
 and, if possible, also recoverable.
 
 ## Data Governance
+It enables you to use your uploaded data for other tables, access previous versions of your tables, and 
+extract all your project data.
 
 ### Jobs
 Most of the things done in KBC run as background, asynchronous, jobs.
