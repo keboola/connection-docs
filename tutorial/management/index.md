@@ -14,6 +14,7 @@ related to Data and User management. We take great care to ensure that everythin
 and, if possible, also recoverable.
 
 ## Data Governance
+Everything that happens with your data in KBC at any stage of your project is recorded. 
 It enables you to use your uploaded data for other tables, access previous versions of your tables, and 
 extract all your project data.
 
