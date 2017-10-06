@@ -14,7 +14,7 @@ easier and faster to do in [SQL Transformations](/manipulation/transformations/)
 
 ## Environment
 The R script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
-The current R version is R 3.3.2.
+The current R version is R **3.4.2**.
 
 ### Memory and Processing Constraints
 
