@@ -1,5 +1,5 @@
 ---
-title: Darksky.net
+title: Dark Sky
 permalink: /extractors/other/dark-sky/
 ---
 
