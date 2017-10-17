@@ -12,6 +12,7 @@ extractors that do not fall into any of the above mentioned categories:
 provides detailed data for locations specified by their names, address or coordinates.
 - [GoogleDrive](/tutorial/load/googledrive/) --- imports data from external data sheets.
 - [AWS S3](/extractors/other/aws-s3) --- imports CSV files from AWS S3. 
+- [Dark Sky](/extractors/other/dark-sky/) --- look up the weather anywhere on the globe, returning Hour-by-hour or day-by-day observations going back decades.
 - [Generic Extractor](/extractors/other/generic/) --- can be configured to work with virtually any API.
 - GitHub
 - and others
