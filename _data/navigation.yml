@@ -102,6 +102,9 @@ items:
           - url: /extractors/other/aws-s3/
             title: AWS S3
 
+          - url: /extractors/other/dark-sky/
+            title: Dark Sky (Weather)
+
       - url: /extractors/ip-addresses
         title: IP Addresses
 
