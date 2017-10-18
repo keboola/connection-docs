@@ -49,12 +49,12 @@ You can test the extraction on this [sample file](/extractors/other/dark-sky/coo
 ## Extraction Output
 The extractor produces one table called `forecast` (even when requesting past observations) with the following columns:
 
-- `primary` - hash of latitude, longitude, date and key used for incremental saving of data
-- `latitude` - latitude of location
-- `longitude` - longitude of location
-- `date` - date and time of weather conditions validity
-- `key` - name of the weather condition (e.g., `temperature`, `windSpeed`)
-- `value` - value of weather condition
+- `primary` --- hash of the latitude, longitude, date and key used for incremental saving of data
+- `latitude` --- latitude of location
+- `longitude` --- longitude of location
+- `date` --- date and time of the weather condition
+- `key` --- name of the weather condition (e.g., `temperature`, `windSpeed`)
+- `value` --- value of the weather condition
 
 Data are always imported incrementally.
 You can find the description of all weather conditions in the [Dark Sky API Documentation](https://darksky.net/dev/docs#data-point-object).
