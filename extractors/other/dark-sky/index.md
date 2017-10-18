@@ -47,7 +47,7 @@ select the required columns in the desired order.
 You can test the extraction on this [sample file](/extractors/other/dark-sky/coords.csv).
 
 ## Extraction Output
-The extractor produces one table called `forecast` (even when requesting past observations) with the following columns:
+The extractor produces one table called `weather` with the following columns:
 
 - `primary` --- hash of the latitude, longitude, date and key used for incremental saving of data
 - `latitude` --- latitude of location
