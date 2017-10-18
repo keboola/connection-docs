@@ -50,8 +50,8 @@ You can test the extraction on this [sample file](/extractors/other/dark-sky/coo
 The extractor produces one table called `weather` with the following columns:
 
 - `primary` --- hash of the latitude, longitude, date and key used for incremental saving of data
-- `latitude` --- latitude of location
-- `longitude` --- longitude of location
+- `latitude` --- latitude of the location
+- `longitude` --- longitude of the location
 - `date` --- date and time of the weather condition
 - `key` --- name of the weather condition (e.g., `temperature`, `windSpeed`)
 - `value` --- value of the weather condition
