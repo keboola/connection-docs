@@ -3,7 +3,7 @@ title: Redshift Transformation
 permalink: /manipulation/transformations/redshift/
 ---
 
-AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. You can either have your own dedicated cluster in Keboola Connection, or "bring your own cluster" (comming soon). 
+AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. You can either have your own dedicated cluster in Keboola Connection, or bring your own cluster. 
  
  - With your own dedicated cluster, all the power is at your hands.
  - If your source data is on Redshift, there is no data transfer. 
@@ -51,3 +51,7 @@ GZIP IGNOREHEADER 1;
 
 If you do not specify any COPY options in the input mapping, `NULL AS 'NULL' ACCEPTANYDATE TRUNCATECOLUMNS` will 
 be used as default. Specifying the COPY options will overwrite the defaults.
+
+## Bring Your Own Cluster
+
+Contact [support@keboola.com](mailto:support@keboola.com) to set up your own Redshift cluster in Keboola Connection.

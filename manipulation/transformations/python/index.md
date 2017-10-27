@@ -6,7 +6,7 @@ permalink: /manipulation/transformations/python/
 * TOC
 {:toc}
 
-[Python](https://www.python.org/about/) transformations complement R and SQL transformations (MySQL or Redshift) where computations or other operations are too difficult.
+[Python](https://www.python.org/about/) transformations complement R and SQL transformations where computations or other operations are too difficult.
 Common data operations like joining, sorting, or grouping are still easier and faster to do in [SQL Transformations](/manipulation/transformations/).
 
 ## Environment

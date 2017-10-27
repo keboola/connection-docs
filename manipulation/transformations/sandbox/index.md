@@ -19,7 +19,7 @@ It automatically fills the sandbox with relevant tables and takes
 the [Input Mapping](/manipulation/transformations/mappings/#input-mapping) of the transformation into account.
 
 Each user has **one sandbox per project and [backend](/manipulation/transformations/#backend)**
-(MySQL, Snowflake and Redshift) to their disposal.
+(Snowflake, Redshift and MySQL) to their disposal.
 Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management --- see below.
 
 {: .image-popup}
@@ -105,8 +105,8 @@ Once the sandbox is ready, you will get a notification. Or, watch the progress o
 Except loading data, sandbox supports several other basic actions.
 To access them, go to the **Transformations** section and click the **Sandbox** button at the top.
 
-  - *Connect* (MySQL and Snowflake only) --- Connect to the sandbox using a web SQL client.
-  - *SSL* (MySQL and Redshift only) --- Show secure connection information.
+  - *Connect* (Snowflake and MySQL only) --- Connect to the sandbox using a web SQL client.
+  - *SSL* (Redshift and MySQL only) --- Show secure connection information.
   - *Drop Sandbox* --- Deletes the sandbox database (and all its tables).
   - *Extend Expiration* --- Postpone the sandbox expiration date for another period (14 days for MySQL, 5 days for Jupyter and RStudio).
 

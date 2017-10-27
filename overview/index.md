@@ -39,8 +39,8 @@ It has two sections: [File Storage](/storage/file-uploads/) with all raw files u
 to your project, and [Table Storage](/storage/tables/) where all data tables are organized
 into buckets which are further organized into *in* and *out* stages.
 
-Storage is implemented as a layer on top of various database engines that we use as our [backends](/manipulation/transformations/#backends) ([MySQL](https://www.mysql.com/),
-[Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)).
+Storage is implemented as a layer on top of various database engines that we use as our [backends](/manipulation/transformations/#backends) ([Snowflake](http://www.snowflake.net/),
+[Redshift](https://aws.amazon.com/redshift/), and [MySQL](https://www.mysql.com/)).
 It provides an important API (Storage API) access for other KBC components and 3rd party applications.
 Your own **remote storage** can be connected to KBC as well.
 
@@ -51,7 +51,7 @@ Both pick data from Storage, manipulate it and then store it back.
 
 #### Transformations
 [Transformations](/manipulation/transformations/) can be created by writing a **free-form script** in
-[SQL](https://en.wikipedia.org/wiki/SQL) (MySQL, Redshift), [R](https://www.r-project.org/about.html) and
+[SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, MySQL), [R](https://www.r-project.org/about.html) and
 [Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments.
 
 #### Applications

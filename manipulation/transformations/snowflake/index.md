@@ -53,10 +53,13 @@ SELECT * FROM "footable";
 {% endhighlight %}
 
 Be especially careful when setting up [input and output mappings](/manipulation/transformations/mappings/).
-In the KBC UI, it is necessary to enter all table names using the exact casing
-because all table names referenced by mappings are automatically quoted by KBC.
 
-When writing your transformation script, we recommend quoting all table names as well.
+When writing your transformation script, we quoting all table and column names is required. Snowflake converts all 
+unquoted table/column identifiers to uppercase, which won't match table/column identifiers created by Keboola Connection.
+
+{% highlight sql %}
+SELECT "barcolumn" FROM "footable";
+{% endhighlight %}
 
 ### Timestamp Columns
 By default, Snowflake uses the

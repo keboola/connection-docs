@@ -8,7 +8,7 @@ permalink: /manipulation/transformations/r/
 
 [R](https://www.r-project.org/about.html) is designed for **advanced statistical computations**.
 Apart from ready-to-use implementations of state-of-the-art algorithms, R's other great assets are vector and matrix 
-computations. R transformations complement Python and SQL transformations (MySQL or Redshift) where computations or 
+computations. R transformations complement Python and SQL transformations where computations or 
 other operations are too difficult. Common data operations like joining, sorting, and grouping, however, are still 
 easier and faster to do in [SQL Transformations](/manipulation/transformations/).
 

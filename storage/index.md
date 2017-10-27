@@ -10,8 +10,8 @@ permalink: /storage/
 
 As the central [KBC subsystem](/overview/), Storage manages everything related to **storing** data and **accessing** it.
 It is implemented as a layer on top of various database engines that we use as our backends
-([MySQL/MariaDB](https://mariadb.org/),
-[Redshift](https://aws.amazon.com/redshift/), and [Snowflake](http://www.snowflake.net/)).
+([Snowflake](http://www.snowflake.net/),
+[Redshift](https://aws.amazon.com/redshift/), and [MySQL/MariaDB](https://mariadb.org/)).
 
 As with all other KBC components, everything that can be done through the UI can be also done programmatically 
 via the [Storage API](http://docs.keboola.apiary.io/). 
