@@ -19,7 +19,7 @@ It automatically fills the sandbox with relevant tables and takes
 the [Input Mapping](/manipulation/transformations/mappings/#input-mapping) of the transformation into account.
 
 Each user has **one sandbox per project and [backend](/manipulation/transformations/#backend)**
-(MySQL, Snowflake and Redshift) to their disposal.
+(Snowflake, Redshift, RStudio for R and Jupyter for Python) to their disposal.
 Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management --- see below.
 
 {: .image-popup}
@@ -28,7 +28,7 @@ Sandboxes with different backends are very similar; but there are few specifics,
 **Important:** The backend of the sandbox does not have to match the backend of the original data.
 For example, you can load data from Snowflake into a Redshift sandbox.
 
-Also, your sandbox might be deleted after 14 days of inactivity unless extended; make sure not to use it as a permanent data storage!
+Also, your sandbox might be deleted after 14 days (5 days for RStudio and Jupyter) unless extended; make sure not to use it as a permanent data storage!
 
 ## Loading Data
 
@@ -43,7 +43,6 @@ the two ways can be combined. However, in that case, perform the plain load *aft
 because the transformation load deletes all data in the sandbox.
 
 ### Plain Loading
-
 Go to the **Transformations** section and click the **Sandbox** button in the upper right corner.
 
 {: .image-popup}
@@ -63,11 +62,10 @@ You can limit the number of rows that are loaded; this is useful for sampling a 
 The imported tables will have full tables names --- including both a bucket and table name.
 
 By default, the sandbox content is deleted before loading new data.
-Use the *Preserve existing data* option to keep its content and add new data to it.
-
+Use the *Preserve existing data* option to keep its content and add new data to it (this
+option is not available for RStudio and Jupyter sandboxes yet).
 
 ### Transformation Loading
-
 This type of loading is intended for **gradual development and debugging** of your transformation code.
 Data loaded through the transformation loading is tied to a specific transformation bucket and
 [input mapping](/manipulation/transformations/mappings/#input-mapping).
@@ -186,28 +184,16 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 
 ### RStudio Sandbox
 
-**Important:** Currently, this feature is in beta. 
+**Important:** Currently, this feature is in beta.
 
-The [RStudio](https://www.rstudio.com/) sandbox is available only as a plain sandbox:
+The [RStudio](https://www.rstudio.com/) sandbox is available as a plain sandbox or for
+[R Transformations](/manipulation/transformations/r/).
 
-{: .image-popup}
-![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-1.png)
-
-Click on the **Create sandbox** button,
-
-{: .image-popup}
-![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-1.png)
-
-and select the tables you want to load into the sandbox.
-
-{: .image-popup}
-![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-2.png)
-
-Depending on the size of the input tables, the sandbox creation may take some time. 
+Depending on the size of the input tables, the sandbox creation may take some time.
 You can review its progress in *Jobs*. When the sandbox is created and you **connect** to it,
 you will be taken to a web version of RStudio. The loaded tables will be available at the same locations
-as in [R Transformations](https://help.keboola.com/manipulation/transformations/r/#development-tutorial).
-The R version is also the same as in [R Transformations](https://help.keboola.com/manipulation/transformations/r/#environment).
+as in [R Transformations](/manipulation/transformations/r/#development-tutorial).
+The R version is also the same as in [R Transformations](/manipulation/transformations/r/#environment).
 
 {: .image-popup}
 ![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-3.png)
@@ -220,26 +206,24 @@ The RStudio Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB.
-- The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
+- The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
 ### Jupyter Notebook Sandbox
 
-**Important:** Currently, this feature is in beta. 
+**Important:** Currently, this feature is in beta.
 
-
-The [Jupyter Notebook](http://jupyter.org/) sandbox is available only as a plain sandbox. 
+The [Jupyter Notebook](http://jupyter.org/) sandbox is available as a plain sandbox or
+for [Python Transformations](/manipulation/transformations/python/).
 It is created the same way as the [RStudio Sandbox](#rstudio-sandbox) and the exact same limitations apply to it.
 
 {: .image-popup}
 ![Screenshot - Jupyter Sandbox](/manipulation/transformations/sandbox/jupyter-sandbox-1.png)
 
-The Python environment for Jupyter Notebook is the same as in [Python Transformations](https://help.keboola.com/manipulation/transformations/python/#environment).
-Jupyter Notebook does not have a built-in file browser, but the loaded tables are kept at the same
-locations as in [Python Transformations](https://help.keboola.com/manipulation/transformations/python/#development-tutorial). 
-To list the available table data files, use scripts such as this one:
+The Python environment for Jupyter Notebook is the same as in [Python Transformations](/manipulation/transformations/python/#environment).
+To list the available table data files, use the Jupyter file browser or scripts such as this one:
 
 {% highlight python %}
 from os import listdir
@@ -254,7 +238,7 @@ The Jupyter Notebook Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB.
-- The UI only allows tables to be loaded to Sandbox. Loading input files and transformation script is 
+- The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
