@@ -108,36 +108,36 @@ You can find the IDs on the Google Analytics page:
 ![Screenshot - Custom metric ID](/extractors/marketing-sales/google-analytics/ga_custom_metrics.png)
 
 ## Custom OAuth Credentials
-To avoid hitting quota limits you can use your own OAuth Client ID and Secret.
+To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
 
- - Visit [Google API Console](https://console.developers.google.com/).
- -  Select an existing or create a new Project.
+1. Visit the [Google API Console](https://console.developers.google.com/).
+2. Select an existing project or create a new one.
  
     {: .image-popup}
     ![Screenshot - Google API Console - Project](/extractors/marketing-sales/google-analytics/google_console_project.png)
 
- - Enable **Google Analytics Reporting API**.
+3. Enable the **Google Analytics Reporting API**.
  
     {: .image-popup}
     ![Screenshot - Google API Console - Enable API](/extractors/marketing-sales/google-analytics/google_console_enable.png)
     
- - Select **Credentials** section from the menu on the left, click on **Create credentials** button and select **OAuth client ID**.
+4. Select the **Credentials** section from the menu on the left, click the **Create credentials** button and select **OAuth client ID**.
   
     {: .image-popup}
     ![Screenshot - Google API Console - Create Credentials](/extractors/marketing-sales/google-analytics/google_console_credentials.png)
     
- - Choose **Web Application**. Into **Authorized redirect URIs** insert 
+5. Choose **Web Application**. Into **Authorized redirect URIs** insert 
  ```https://syrup.keboola.com/oauth-v2/authorize/keboola.ex-google-analytics-v4/callback```
     and ```https://syrup.eu-central-1.keboola.com/oauth-v2/authorize/keboola.ex-google-analytics-v4/callback```. 
     The second one is needed for the EU region.
 
- - Click on **Create** and a popup window should display your new Client ID and Client Secret credentials.
- - You can now find your credentials in the list of available credentials. After clicking on it, you should see something like this:
+6. Click **Create** and a popup window will display your new Client ID and Client Secret credentials.
+7. Find your credentials in the list of available credentials. You should see something like this:
  
     {: .image-popup}
     ![Screenshot - Google API Console - Credentials Detail](/extractors/marketing-sales/google-analytics/google_console_detail.png)
   
- - You can now use these credentials in the **Custom Authorization** tab when authorizing Google Analytics Extractor.
+8. You can now use these credentials in the **Custom Authorization** tab when authorizing the Google Analytics Extractor.
  
     {: .image-popup}
     ![Screenshot - KBC - Custom Authorization](/extractors/marketing-sales/google-analytics/kbc_authorization.png)
