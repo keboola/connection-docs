@@ -46,12 +46,12 @@ Name and **Create** the configuration.
 {: .image-popup}
 ![Screenshot - Create Tableau Writer Configuration](/tutorial/write/tableau-create-config.png)
 
-Add tables you want to send to Tableau,
+Add the tables you want to send to Tableau,
 
 {: .image-popup}
 ![Screenshot - Start configuration](/tutorial/write/tableau-config.png)
 
-select the `out.c-tutorial.opportunity_denorm` table,
+in our case, select the `out.c-tutorial.opportunity_denorm` table,
 
 {: .image-popup}
 ![Screenshot - Select table](/tutorial/write/tableau-select-table.png)
