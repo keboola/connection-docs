@@ -3,17 +3,18 @@ title: IP Addresses
 permalink: /extractors/ip-addresses/
 ---
 
-A good security practice is to **block connections from unrecognized sources** on the network level 
-using a firewall or AWS security groups. This applies especially to the production database whose 
-connections should not be publicly available. For an extra layer of security, setting up an 
+A good security practice is to **block connections from unrecognized sources** on the network level
+using a firewall or AWS security groups. This applies especially to the production database whose
+connections should not be publicly available. For an extra layer of security, setting up an
 [SSH Tunnel](https://help.keboola.com/extractors/database/#connecting-to-database) is also recommended.
 
 To access external systems (including your database), KBC uses the below IP addresses. Please **whitelist**
-these IP addresses in your firewalls to allow KBC to successfully connect to your system. This applies to 
+these IP addresses in your firewalls to allow KBC to successfully connect to your system. This applies to
 all KBC components including all extractors and writers.
 
-**Important:** These IP addresses can change in the future! For your convenience, you can programmatically 
+**Important:** These IP addresses can change in the future! For your convenience, you can programmatically
 fetch and process the [list of existing IP addresses in JSON format](/extractors/ip-addresses/kbc-public-ip.json).
+Below are listed the available [Keboola Connection Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
 
 ## connection.keboola.com
 For projects in the default US region (AWS region `us-east-1`), the following IP addresses are currently used:
@@ -31,15 +32,15 @@ For projects in the EU region (AWS region `eu-central-1`), the following IP addr
 
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
-download the [kbc-public-ip.json](/extractors/ip-addresses/kbc-public-ip.json) file. 
+download the [kbc-public-ip.json](/extractors/ip-addresses/kbc-public-ip.json) file.
 
-To determine whether there have been changes since the last time you saved the file, check the publication 
+To determine whether there have been changes since the last time you saved the file, check the publication
 time in the current file (`syncToken` attribute) and compare it to the publication time in the last file you saved.
 
 The JSON file contains an array of ranges (attribute `prefixes`), each of which has the following attributes:
 
- - `ipPrefix` — subnet mask (CIDR) 
- - `vendor` — cloud service provider 
+ - `ipPrefix` — subnet mask (CIDR)
+ - `vendor` — cloud service provider
  - `region` — cloud service region
  - `service` — Keboola application service (`syrup` for Keboola Connection components)
 
