@@ -15,8 +15,8 @@ To see the organization a project is assigned to, go to **Users & Settings** ---
 {: .image-popup}
 ![Screenshot - Organizations](/management/organization/organization-1.png)
 
-**Note:** If you do not see the `Organizations` section in your account settings, 
-you are not a member of any organization.
+*Note: If you do not see the `Organizations` section in your account settings, 
+you are not a member of any organization.*
 
 Each organization is assigned to a **Maintainer** (either Keboola or Keboola Partner), 
 who is also primarily responsible for L1 support unless agreed otherwise. 

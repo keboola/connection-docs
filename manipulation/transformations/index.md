@@ -29,7 +29,7 @@ workspace. This process is called [**Input Mapping**](#mappings). The transforma
 then takes the Transformation Script and runs it in the workspace. Depending 
 on the transformation backend, the input mapping process can do the following:
 
-- Create a new database (Snowflake, Redshift, MySQL) and import the selected tables from Storage into it.
+- Create a new database (Snowflake, optionally Redshift or MySQL) and import the selected tables from Storage into it.
 - Export selected tables from Storage to CSV files and make them available in the workspace for Python, R or OpenRefine scripts.
 
 When the transformation is finished, the **Output Mapping** process moves the transformation results back to
@@ -70,9 +70,8 @@ feel free to step in with Python and finish the work with SQL again.
 
 The following are the currently available backends:
 
-- **SQL** --- Choosing between [MySQL](./mysql/), [Redshift](./redshift/) and [Snowflake](./snowflake/) 
-can be a matter of your preference or the overall performance. Many projects start with MySQL and as they grow, 
-they are switched to Redshift on a dedicated cluster. That unfortunately requires rewriting the SQL code.
+- **SQL** --- [Snowflake](./snowflake/) is offered as the default backend, but you can apply for your own [Redshift](./redshift/) cluster.
+Only legacy projects can also use [MySQL](./mysql/). Switching between backends unfortunately requires rewriting the SQL code.
 
 - **Script** --- [Python](./python/), [R](./r/) or [OpenRefine](./openrefine/). Choose according to your taste and available libraries.
 
@@ -81,7 +80,7 @@ Each change in the transformation configuration creates a new version of the who
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
 ## Developing Transformations
-You can easily develop Snowflake, MySQL and Redshift transformations using [Sandbox](/manipulation/transformations/sandbox),
+You can easily develop Snowflake, Redshift and MySQL transformations using [Sandbox](/manipulation/transformations/sandbox),
 a separate database storage. As a safe workspace with required data, 
 it allows you to run and play with your arbitrary SQL scripts on the copies of your tables 
 without affecting data in your Storage, or your transformations.

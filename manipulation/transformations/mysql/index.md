@@ -3,6 +3,8 @@ title: MySQL Transformation
 permalink: /manipulation/transformations/mysql/
 ---
 
+*Note: MySQL transformations are deprecated. They are only available in legacy projects.* 
+
 MySQL is very simple, yet powerful. However, it has its limitations:
 
 - **Time** --- MySQL queries are limited to 3,600 seconds. Longer queries will be terminated.

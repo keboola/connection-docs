@@ -53,10 +53,13 @@ SELECT * FROM "footable";
 {% endhighlight %}
 
 Be especially careful when setting up [input and output mappings](/manipulation/transformations/mappings/).
-In the KBC UI, it is necessary to enter all table names using the exact casing
-because all table names referenced by mappings are automatically quoted by KBC.
 
-When writing your transformation script, we recommend quoting all table names as well.
+When writing your transformation script, quoting all table and column names is required. Snowflake converts all
+unquoted table/column identifiers to uppercase, which won't match table/column identifiers created by Keboola Connection.
+
+{% highlight sql %}
+SELECT "barcolumn" FROM "footable";
+{% endhighlight %}
 
 ### Timestamp Columns
 By default, Snowflake uses the
@@ -77,7 +80,7 @@ CREATE TABLE "out" AS
     (SELECT TO_CHAR("ts", 'YYYY-MM-DD HH:MI:SS') AS "ts" FROM "ts_test");
 {% endhighlight %}
 
-Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate from your transformation/sandbox session and the format may change unexpectedly. 
+Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate from your transformation/sandbox session and the format may change unexpectedly.
 
 **Important:** Snowflake works with time zones (and [Daylight Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time)),
 requiring you to distinguish between various conversion functions:
@@ -85,10 +88,10 @@ requiring you to distinguish between various conversion functions:
 {% highlight sql %}
 SELECT
     -- yields 2013-03-10 02:12:00.000 +0000
-    TO_TIMESTAMP_NTZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'), 
+    TO_TIMESTAMP_NTZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'),
     -- yields 2013-03-10 03:12:00.000 -0700
-    TO_TIMESTAMP_TZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'),  
+    TO_TIMESTAMP_TZ('10.3.2013 2:12', 'DD.MM.YYYY HH:MI'),
     -- yields 2013-03-10 03:12:00.000 -0700
-    TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');     
+    TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');
 
 {% endhighlight %}
