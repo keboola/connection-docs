@@ -90,20 +90,23 @@ items:
       - url: /extractors/other/
         title: Other
         items:
-          - url: /extractors/other/geocoding-augmentation/
-            title: Geocoding Augmentation
-
-          - url: /extractors/other/generic/
-            title: Generic Extractor
-
-          - url: /extractors/other/pingdom/
-            title: Pingdom
-
           - url: /extractors/other/aws-s3/
             title: AWS S3
 
           - url: /extractors/other/dark-sky/
             title: Dark Sky (Weather)
+
+          - url: /extractors/other/generic/
+            title: Generic Extractor
+
+          - url: /extractors/other/geocoding-augmentation/
+            title: Geocoding Augmentation
+
+          - url: /extractors/other/pingdom/
+            title: Pingdom
+
+          - url: /extractors/other/what3words/
+            title: What3words Augmentation
 
       - url: /extractors/ip-addresses
         title: IP Addresses
