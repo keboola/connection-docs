@@ -14,7 +14,7 @@ extractors that do not fall into any of the above mentioned categories:
 provides detailed data for locations specified by their names, address or coordinates.
 - [GoogleDrive](/tutorial/load/googledrive/) --- imports data from external data sheets.
 - [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom; a service for monitoring the uptime and performance of your websites and web applications.
-- [What3words](/tutorial/load/what3words/) --- converts What3words addresses to coordinates and vice versa.
+- [What3words](/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
 - GitHub
 - and others
 
