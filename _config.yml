@@ -9,16 +9,12 @@ url: "https://help.keboola.com"
 
 exclude:
   - docker-compose.yml
-  - Dockerfile
-  - Gemfile
-  - Gemfile.lock
   - README.md
-  - vendor
   - deploy.sh
 
 sass:
   style: compressed
 
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
