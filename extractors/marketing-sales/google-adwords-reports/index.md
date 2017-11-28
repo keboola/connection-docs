@@ -7,9 +7,6 @@ permalink: /extractors/marketing-sales/google-adwords-reports/
 {:toc}
 
 This extractor allows you to import data from Google AdWords reports.
-Before you start, [get a Google Adwords API developer token](https://developers.google.com/adwords/api/docs/guides/signup#token_review_team_has_approved_my_developer_token) 
-and your Google AdWords [customer ID](https://support.google.com/adwords/answer/1704344?hl=en).
-
 If you do not have a Google AdWords account, create a [test account](https://developers.google.com/adwords/api/docs/guides/first-api-call#create_test_accounts).
 
 ## Create New Configuration
@@ -24,7 +21,8 @@ Then click **Authorize Account** to be redirected to Google, and authorize the e
 ![Screenshot - Create configuration](/extractors/marketing-sales/google-adwords-reports/ui_authorize_config.png)
 
 ## Configuration
-To run the extractor, specify your *developer token* and *customer id*. 
+To run the extractor, specify your [customer ID](https://support.google.com/adwords/answer/1704344?hl=en).
+
 
 To download a report, specify an [AWQL query](https://developers.google.com/adwords/api/docs/guides/awql),
 through which you can customize the output of a [predefined report type](https://developers.google.com/adwords/api/docs/appendix/reports). 
