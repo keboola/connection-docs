@@ -62,17 +62,10 @@ You will get the following configurations.  You can edit any of these entries by
 
 Here you can select which columns to import or define a primary key 
 (Note: primary keys will appear automatically if they are set in the source database). 
-If you'd like to write your own query, you can do so by using the `Advanced Mode`.
+For now let's press `reset` to reset any changes you made, and then click on the breadcrumb to return to the main page.
 
 {: .image-popup}
 ![Screenshot - Query Edit Form](/tutorial/load/extractor-db-detail.png)
-
-In `Advanced Mode` you can write out a custom query of your choice.  
-Please do keep in mind some [best practices](/extractors/database/sqldb/#advancedMode) when defining your own queries.
-For now let's press `reset` to reset any changes you made, and then click on the breadcrumb to return to the main page. 
-
-{: .image-popup}
-![Screenshot - Advanced Mode](/tutorial/load/extractor-db-advancedMode.png)
 
 Now let's click on **Run Extraction** to load the data
 from the database into your tables in Storage.
