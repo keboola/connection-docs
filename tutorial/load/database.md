@@ -23,7 +23,7 @@ Find **Snowflake**. You can use the search feature to find it quickly.
 
 Similarly to the [GoogleDrive extractor](/tutorial/load/googledrive/), the Snowflake extractor can
 have multiple configurations. As each configuration represents a single database connection, we only
-need one configuration. Continue with **Create New Configuration**.
+need one configuration. Continue with **New Configuration**.
 
 {: .image-popup}
 ![Screenshot - New Database Extractor Configuration](/tutorial/load/extractor-db-new.png)
