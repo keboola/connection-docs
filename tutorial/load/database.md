@@ -45,27 +45,40 @@ Test the credentials and save them.
 {: .image-popup}
 ![Screenshot - Database Extractor Credentials](/tutorial/load/extractor-db-credentials.png)
 
-For extracting tables from the database, add SQL queries. Each query produces a single table in Storage.
+Now select the tables to import from the dropdown. Each selected table corresponds to a single table in Storage.
 
 {: .image-popup}
-![Screenshot - Database Extractor Introduction](/tutorial/load/extractor-db-intro-3.png)
+![Screenshot - Database Extractor Introduction](/tutorial/load/extractor-db-tableSelector.png)
 
-Each database query needs to have a name, SQL command and a target table in Storage.
+Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press "Create".
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-query-edit.png)
+![Screenshot - Add database query](/tutorial/load/extractor-db-tablesSelected.png)
 
-One by one, create and save the following three queries:
+You will get the following configurations.  You can edit any of these entries by clicking on the row. 
 
-- `SELECT * FROM account;` with output table `in.c-tutorial.account`
-- `SELECT * FROM user;` with output table `in.c-tutorial.user`
-- `SELECT * FROM opportunity;` with output table `in.c-tutorial.opportunity`
+{: .image-popup}
+![Screenshot - Add database query](/tutorial/load/extractor-db-index.png)
 
-You will get the following configuration. Click on **Run Extraction** to load the data
+Here you can select which columns to import or define a primary key 
+(Note: primary keys will appear automatically if they are set in the source database)
+
+{: .image-popup}
+![Screenshot - Add database query](/tutorial/load/detail.png)
+
+If you'd like to write your own query, you can do so by using the `Advanced Mode`.
+
+{: .image-popup}
+![Screenshot - Add database query](/tutorial/load/advancedMode.png)
+
+Press `reset` to reset any changes you made, and then click on the breadcrumb to return to the main page.
+
+{: .image-popup}
+![Screenshot - Add database query](/tutorial/load/extractor-db-index-2.png)
+
+Click on **Run Extraction** to load the data
 from the database into your tables in Storage.
 
-{: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-queries.png)
 
 Running the extractor creates a background job that
 
