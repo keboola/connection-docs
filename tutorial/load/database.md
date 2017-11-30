@@ -48,43 +48,44 @@ Test the credentials and save them.
 Now select the tables to import from the dropdown. Each selected table corresponds to a single table in Storage.
 
 {: .image-popup}
-![Screenshot - Database Extractor Introduction](/tutorial/load/extractor-db-tableSelector.png)
+![Screenshot - Quickstart](/tutorial/load/extractor-db-tableSelector.png)
 
 Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press "Create".
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-tablesSelected.png)
+![Screenshot - Database Tables Selected](/tutorial/load/extractor-db-tablesSelected.png)
 
 You will get the following configurations.  You can edit any of these entries by clicking on the row. 
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-index.png)
+![Screenshot - Configurations List](/tutorial/load/extractor-db-index.png)
 
 Here you can select which columns to import or define a primary key 
-(Note: primary keys will appear automatically if they are set in the source database)
-
-{: .image-popup}
-![Screenshot - Add database query](/tutorial/load/detail.png)
-
+(Note: primary keys will appear automatically if they are set in the source database). 
 If you'd like to write your own query, you can do so by using the `Advanced Mode`.
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/advancedMode.png)
+![Screenshot - Query Edit Form](/tutorial/load/extractor-db-detail.png)
 
-Press `reset` to reset any changes you made, and then click on the breadcrumb to return to the main page.
+In `Advanced Mode` you can write out a custom query of your choice.  
+Please do keep in mind some [best practices](/extractors/database/sqldb/#advancedMode) when defining your own queries.
+For now let's press `reset` to reset any changes you made, and then click on the breadcrumb to return to the main page. 
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-index-2.png)
+![Screenshot - Advanced Mode](/tutorial/load/extractor-db-advancedMode.png)
 
-Click on **Run Extraction** to load the data
+Now let's click on **Run Extraction** to load the data
 from the database into your tables in Storage.
+
+{: .image-popup}
+![Screenshot - Run the extraction](/tutorial/load/extractor-db-index-2.png)
 
 
 Running the extractor creates a background job that
 
 - connects to the database,
 - executes the queries, and
-- stores results of the queries in specified tables in Storage.
+- stores results in the specified tables in Storage.
 
 When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.
 Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
