@@ -55,19 +55,7 @@ Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press "Create".
 {: .image-popup}
 ![Screenshot - Database Tables Selected](/tutorial/load/extractor-db-tablesSelected.png)
 
-You will get the following configurations.  You can edit any of these entries by clicking on the row. 
-
-{: .image-popup}
-![Screenshot - Configurations List](/tutorial/load/extractor-db-index.png)
-
-Here you can select which columns to import or define a primary key 
-(Note: primary keys will appear automatically if they are set in the source database). 
-For now let's press `reset` to reset any changes you made, and then click on the breadcrumb to return to the main page.
-
-{: .image-popup}
-![Screenshot - Query Edit Form](/tutorial/load/extractor-db-detail.png)
-
-Now let's click on **Run Extraction** to load the data
+You will get the following configurations. Now let's click on **Run Extraction** to load the data
 from the database into your tables in Storage.
 
 {: .image-popup}
