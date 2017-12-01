@@ -33,13 +33,8 @@ being deleted as well. If you attempt to do so, you will receive an error messag
 
     The blog-data table cannot be deleted. Please delete its aliases first: in.c-tutorial.blog-data,in.c-my-bucket.blog-data.
 
-See an [example use of an alias](/tutorial/load/googledrive/#aftermath) in our tutorial.
-
 {: .image-popup}
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
-
-If you select any table from any bucket in Storage, detailed information about the table will be displayed 
-on the right side of your screen. This is what we refer to as the **Table detail** throughout our documentation.
 
 Aliases cannot be chained and can be applied only between buckets with the same backend.
 An alias table can be filtered by a simple condition.
@@ -47,7 +42,13 @@ An alias table can be filtered by a simple condition.
 {: .image-popup}
 ![Screenshot - Create Simple alias](/storage/tables/create-simple-alias.png)
 
-There are the following limitations:
+If you select any table from any bucket in Storage, detailed information about the table will be displayed 
+on the right side of your screen. This is what we refer to as the **Table detail** throughout our documentation.
+
+{: .image-popup}
+![Screenshot - Simple alias result](/storage/tables/create-simple-alias-result.png)
+
+There are the following limitations to aliases:
 
 - Filtering is enabled only on [indexed columns](/storage/tables/#primary-keys-and-indexes).
 - When an alias is created, the index on the filtered column of the source table cannot be removed.

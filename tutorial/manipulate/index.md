@@ -4,7 +4,7 @@ permalink: /tutorial/manipulate/
 ---
 
 At this point, you already know how to quickly [load data into KBC](/tutorial/load/),
-and your *in.c-tutorial* [table bucket](/storage/tables/) contains four new tables: 
+and your [Storage](/storage/tables/) contains four new tables: 
 *account*, *opportunity*, *level* and *user*. 
 In this part of the tutorial, we will show you how to manipulate data in Storage using [Transformations](/manipulation/transformations/). 
 Let's create a denormalized table from the input tables and do some minor modifications to it.
@@ -26,7 +26,7 @@ Before you start with transformations, create a bucket and call it *Opportunity*
 {: .image-popup}
 ![Screenshot - Create a Transformation Bucket](/tutorial/manipulate/transformations-create-bucket.png)
 
-Then click on *Add Transformation* in the upper right corner to create an individual transformation. 
+Then click on *New Transformation* button to create an individual transformation. 
 Make sure to enter its *Name* and select *Backend*. A backend is the engine running the transformation script;
 it is either a database server (Snowflake, Redshift, MySQL) or a language interpreter (R, Python). 
 Name your transformation *Denormalize opportunities*, and choose the **Snowflake** backend.
@@ -49,18 +49,26 @@ when you are manipulating your data.
 Thanks to it, there is no way to modify the wrong tables by accident. 
 The only tables which are modified by your transformation are those explicitly specified in Output Mapping.  
 
+{: .image-popup}
+![Screenshot - Empty Transformation](/tutorial/manipulate/transformations-created.png)
+
 ### Input Mapping
-Let's start with setting Input Mapping by clicking the **Add Input** button.
+Let's start with setting Input Mapping by clicking the **New Input** button.
 
 {: .image-popup}
 ![Screenshot - Add input mapping](/tutorial/manipulate/transformation-input.png)
 
-The *Source* field in the input mapping refers to Storage. Select `in.c-tutorial.account` as the source table. 
+The *Source* field in the input mapping refers to Storage. Select `in.c-csv-import.account` as the source table. 
 You can do a full text search in the select field; typing `acc` will give you the table as well. 
 In the *Destination* field, the table name `account` is automatically filled for you. 
-This is the name of the source table inside the transformation. **Create** the input mapping.
+This is the name of the source table inside the transformation. Use the **Create Input** to create 
+the input mapping.
 
-Add the remaining three tables: `opportunity`, `user` and `level`. You will get the following configuration:
+Add the remaining three tables: `opportunity`, `user` and `level`. If you took loaded data using the
+[Database extractor](/tutorial/load/database/) or [Google Drive extractor](/tutorial/load/googledrive/)
+feel free to use the tables create by them (e.g `in.c-keboola-ex-db-snowflake-334279452.ACCOUNT` or `in.c-keboola-ex-google-drive-334272278.level-level`). In either case, make sure that the desinations 
+are set to `account`, `opportunity`, `user` and `level`.
+You will get the following configuration:
 
 {: .image-popup}
 ![Screenshot - Input mapping result](/tutorial/manipulate/transformation-input-end.png)
@@ -69,7 +77,7 @@ Add the remaining three tables: `opportunity`, `user` and `level`. You will get 
 (all available options, etc.).*
 
 ### Output Mapping
-Continue with setting up Output Mapping by clicking on the **Add Output** button.
+Continue with setting up Output Mapping by clicking on the **New Output** button.
 
 {: .image-popup}
 ![Screenshot - Add output mapping](/tutorial/manipulate/transformation-output.png)

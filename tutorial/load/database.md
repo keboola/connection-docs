@@ -45,40 +45,31 @@ Test the credentials and save them.
 {: .image-popup}
 ![Screenshot - Database Extractor Credentials](/tutorial/load/extractor-db-credentials.png)
 
-For extracting tables from the database, add SQL queries. Each query produces a single table in Storage.
+Now select the tables to import from the dropdown. Each selected table corresponds to a single table in Storage.
 
 {: .image-popup}
-![Screenshot - Database Extractor Introduction](/tutorial/load/extractor-db-intro-3.png)
+![Screenshot - Quickstart](/tutorial/load/extractor-db-tableSelector.png)
 
-Each database query needs to have a name, SQL command and a target table in Storage.
+Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press "Create".
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-query-edit.png)
+![Screenshot - Database Tables Selected](/tutorial/load/extractor-db-tablesSelected.png)
 
-One by one, create and save the following three queries:
-
-- `SELECT * FROM account;` with output table `in.c-tutorial.account`
-- `SELECT * FROM user;` with output table `in.c-tutorial.user`
-- `SELECT * FROM opportunity;` with output table `in.c-tutorial.opportunity`
-
-You will get the following configuration. Click on **Run Extraction** to load the data
+You will get the following configurations. Now let's click on **Run Extraction** to load the data
 from the database into your tables in Storage.
 
 {: .image-popup}
-![Screenshot - Add database query](/tutorial/load/extractor-db-queries.png)
+![Screenshot - Run the extraction](/tutorial/load/extractor-db-index-2.png)
+
 
 Running the extractor creates a background job that
 
 - connects to the database,
 - executes the queries, and
-- stores results of the queries in specified tables in Storage.
+- stores results in the specified tables in Storage.
 
 When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.
 Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
+Once the job is finished, click on the names of the tables to inspect their contents. 
 
-Once the job is finished, click on the names of the tables to inspect their contents. In case you had loaded the
-[tables manually](/tutorial/load/) before, their contents will not change at all.
-The extractor overwrites the table contents, and the manually loaded CSV files match the contents of the sample database.
-
-Now when you know how to use the Snowflake extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
-
+Now when you know how to use a database extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
