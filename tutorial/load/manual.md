@@ -36,19 +36,19 @@ of the same type. Each configuration of **CSV Import** will point to a different
 {: .image-popup}
 ![Screenshot -- CSV Import Intro](/tutorial/load/csv-import-empty-list.png)
 
-Click on *Create new Configuration* to continue.
+Click on *New Configuration* to continue.
 
 {: .image-popup}
 ![Screenshot -- CSV New Configuration](/tutorial/load/csv-import-create-new-configuration.png)
 
-You will be creating configuration for each table, so let's name the first one *Opportunity* and click on *Create*. 
+You will be creating configuration for each table, so let's name the first one *Opportunity* and click on *Create Configuration*. 
 Each created configuration is filled with defaults; for example, *CSV format* and *destination* name of the table in
-[KBC Storage](/storage/). For this tutorial, change only the *Destination* setting by clicking on *Change settings*.
+[KBC Storage](/storage/). For this tutorial, change only the *Destination* setting by clicking on pen icon.
 
 {: .image-popup}
 ![Screenshot -- CSV Import Configuration](/tutorial/load/csv-import-default-configuration.png)
 
-Now type `in.c-tutorial.opportunity` in the *Destination* field and click on *Save Settings*.
+Now change the *Destination* field to `in.c-csv-import.opportunity` and click on *Save*.
 
 {: .image-popup}
 ![Screenshot -- Change upload settings](/tutorial/load/csv-import-change-settings.png)
@@ -66,14 +66,14 @@ repeat the process for the other three tables (create configuration, change dest
 	
 That's it. You should now have four tables with sample data stored in your KBC project:
 
-- `in.c-tutorial.opportunity`
-- `in.c-tutorial.account`
-- `in.c-tutorial.user`
-- `in.c-tutorial.level`
+- `in.c-csv-import.opportunity`
+- `in.c-csv-import.account`
+- `in.c-csv-import.user`
+- `in.c-csv-import.level`
 
 To verify that you have loaded all the tables and to peek at the data, go to [*Storage Console*](/storage/).
 All database tables stored in your project are listed in the *Tables* tab. 
-They are grouped together into *Buckets*, and the newly loaded tables can be found in the `in.c-tutorial` bucket. 
+They are grouped together into *Buckets*, and the newly loaded tables can be found in the `in.c-csv-import` bucket. 
 To see all tables in a bucket, click the arrow next to its name.
 Click a table name to see table details including *Data Sample*.
 

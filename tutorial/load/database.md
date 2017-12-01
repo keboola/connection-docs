@@ -23,7 +23,7 @@ Find **Snowflake**. You can use the search feature to find it quickly.
 
 Similarly to the [GoogleDrive extractor](/tutorial/load/googledrive/), the Snowflake extractor can
 have multiple configurations. As each configuration represents a single database connection, we only
-need one configuration. Continue with **Create New Configuration**.
+need one configuration. Continue with **New Configuration**.
 
 {: .image-popup}
 ![Screenshot - New Database Extractor Configuration](/tutorial/load/extractor-db-new.png)
@@ -70,10 +70,6 @@ Running the extractor creates a background job that
 
 When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.
 Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
+Once the job is finished, click on the names of the tables to inspect their contents. 
 
-Once the job is finished, click on the names of the tables to inspect their contents. In case you had loaded the
-[tables manually](/tutorial/load/) before, their contents will not change at all.
-The extractor overwrites the table contents, and the manually loaded CSV files match the contents of the sample database.
-
-Now when you know how to use the Snowflake extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
-
+Now when you know how to use a database extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
