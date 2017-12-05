@@ -54,7 +54,7 @@ This downloads the report into a `keywords` table. The `Id` column is listed as 
 because that is [its display name](https://developers.google.com/adwords/api/docs/appendix/reports/keywords-performance-report#id).
 
 When running the above configuration, you get three tables in the output bucket:
-`campaigns`, `customers` and `keywords`. The tables are overwritten on each run; incremental downloads are not supported.
+`campaigns`, `customers` and `keywords`. Incremental loading is turned on, so on subsequent runs, new rows are appended.
 
 ### Campaigns
 This table is created automatically and contains a list of all campaigns in the used account, for instance:
