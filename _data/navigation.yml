@@ -4,7 +4,7 @@ items:
 
   - url: /overview/
     title: Kebooola Overview
-    
+
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
@@ -34,6 +34,9 @@ items:
 
       - url: /tutorial/management/
         title: Part 5 - Management
+
+      - url: /tutorial/ad-hoc/
+        title: Part 6 - Ad-hoc data analysis
 
   - url: /extractors/
     title: Extractors

@@ -4,7 +4,7 @@ permalink: /extractors/database/
 ---
 
 Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
-There are a number of extractors for **SQL databases**.
+There are a number of extractors for [**SQL databases**](/extractors/database/sqldb/).
 
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
@@ -14,10 +14,12 @@ There are a number of extractors for **SQL databases**.
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
 
-*See our [tutorial](/tutorial/load/database/) for help with configuring these extractors.*
-*They all are configured in the same way.*
+See our [tutorial](/tutorial/load/database/) for help with configuring these extractors.
+They all are configured in the same way. All SQL extractors also have an [advanced mode](/extractors/database/sqldb/).
 
-On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, requires a [different configuration](/extractors/database/mongodb/).
+On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, requires a [different configuration](/extractors/database/mongodb/). The configuration of
+[BigQuery](https://cloud.google.com/bigquery/) extractor is covered in the
+[Tutorial](/tutorial/ad-hoc/).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, want to avoid exposing your database server to the internet,
@@ -33,8 +35,7 @@ to be accessed directly from the internet. The SSH connection is encrypted and u
 Find detailed instructions for setting up an SSH tunnel in the [developer documentation](https://developers.keboola.com/integrate/database/).
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
 
-#### Note for Azure hosted MsSql Server instances 
-
-Mssql Server hosted on Azure will normally have a host name such as `[srvName].databases.microsoft.net`  
-The `[srvName]` is not an instance name, so the instance name should be left blank.  
+### Note for Azure hosted MsSql Server instances
+Mssql Server hosted on Azure will normally have a host name such as `[srvName].databases.microsoft.net`
+The `[srvName]` is not an instance name, so the instance name should be left blank.
 But the username needs to have the suffix `@[srvName]` as in, for example `keboola@srvKeboola`

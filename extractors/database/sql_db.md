@@ -12,13 +12,12 @@ select which tables you want to import to KBC Storage.
 
 ### Advanced mode
 If you'd prefer to write your own query to extract data to KBC storage, use the advanced mode checkbox.
-Please keep the following in mind when using advanced mode: 
+Please keep the following in mind when using advanced mode:
 
 {: .image-popup}
 ![Screenshot - Advanced Mode](/extractors/database/advancedMode.png)
 
-#### Advanced Mode Best Practices
-
+### Advanced Mode Best Practices
 - Use as **simple queries** as possible. Avoid doing complex joins and aggregations.
 Keep in mind that these queries are executed on the database server you are extracting from.
 This database system might not be designed or optimized for complex SELECT queries.
