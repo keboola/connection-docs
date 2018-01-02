@@ -1,6 +1,6 @@
 ---
 title: Ad-hoc Data Analysis
-permalink: /tutorial/ad-hoc
+permalink: /tutorial/ad-hoc/
 ---
 
 This part of the tutorial will show you how you can work with arbitrary data in Python
