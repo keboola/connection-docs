@@ -51,8 +51,23 @@ Token details can be accessed and updated anytime on the token detail page.
 {: .image-popup}
 ![Screenshot - Access Tokens](/storage/tokens/access-token-detail-3.png)
 
+After the token is created, it to an arbitrary email address by clicking the **Send token** button.
 
-The token can be explored Via the [*Storage Console*](https://storage-api-console.keboola.com/).
+{: .image-popup}
+![Screenshot - Access Tokens](/storage/tokens/send-token-button.png)
+
+A message can be added to the email.
+
+{: .image-popup}
+![Screenshot - Send Token](/storage/tokens/send-token.png)
+
+The recipient will obtain an email with an invitation link leading to the following screen:
+
+{: .image-popup}
+![Screenshot - Token Welcome Screen](/storage/tokens/token-welcome.png)
+
+
+Via the [*Storage Console*](https://storage-api-console.keboola.com/), the added user can log into your project.
 
 {: .image-popup}
 ![Screenshot - Storage Console](/storage/tokens/storage-console.png)
