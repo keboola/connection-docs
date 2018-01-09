@@ -120,7 +120,7 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 Once the job is finished, click on the names of the tables to inspect their contents.
 
 ## Exploring the Data
-To explore the data go, to **Transformations** and click on **Sandbox**:
+To explore the data, go to **Transformations**, and click on **Sandbox**:
 
 {: .image-popup}
 ![Screenshot - Transformations](/tutorial/ad-hoc/transformation-1.png)
@@ -130,12 +130,12 @@ Click on **New Sandbox** next to Jupyter:
 {: .image-popup}
 ![Screenshot - Create Sandbox](/tutorial/ad-hoc/transformation-2.png)
 
-Select the unemployment rates table (`in.c-keboola-ex-google-bigquery.unemployment-rates`), click on **Create Sandbox** and wait for the process to finish:
+Select the unemployment rates table (`in.c-keboola-ex-google-bigquery.unemployment-rates`), click on **Create Sandbox**, and wait for the process to finish:
 
 {: .image-popup}
 ![Screenshot - Sandbox Configuration](/tutorial/ad-hoc/transformation-3.png)
 
-When finished, you can connect to web version of [Juypter Notebook](http://jupyter.org/) which
+When finished, you can connect to the web version of [Jupyter Notebook](http://jupyter.org/), which
 allows you to run arbitrary code by clicking the **Connect** button:
 
 {: .image-popup}
@@ -148,7 +148,7 @@ When prompted, enter the password from the Sandbox screen:
 
 You can now run arbitrary code in Python, using common data scientist tools like
 [Pandas](https://pandas.pydata.org/) or [Matplotlib](https://matplotlib.org/).
-E.g. to load the file use:
+For instance, to load the file, use:
 
 {% highlight python %}
 import pandas
@@ -157,8 +157,8 @@ df.head()
 {% endhighlight %}
 
 The path `/data/in/tables/` is the location for
-[loaded tables](/manipulation/transformations/python/#file-locations), the tables
-are loaded as simple CSV files. When the table is loaded, you can play with it:
+[loaded tables](/manipulation/transformations/python/#file-locations); the tables
+are loaded as simple CSV files. Once the table is loaded, you can play with it:
 
 {% highlight python %}
 import matplotlib.pyplot as plt
@@ -174,22 +174,22 @@ plt.show()
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-2.png)
 
 ## Adding libraries
-So, you can play with U.S unemployment data extracted from Google BigQuery (or any other data extracted in any other way). How about EU
-unemployment data? These are available from [Eurostat](http://ec.europa.eu/eurostat). The
+Now, when you can play with the U.S unemployment data extracted from Google BigQuery (or any other data extracted in any other way), what about the EU
+unemployment data? They are available from [Eurostat](http://ec.europa.eu/eurostat). The
 unemployment dataset is
 [`tgs00010`](http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tgs00010&plugin=1).
-There is a number of ways to get the data from Eurostat -- e.g. so you can download them in TSV
+There is a number of ways to get the data from Eurostat -- e.g. you can download them in TSV
 or XLS format. But what if you wanted to avoid downloading the (possibly) lengthy data to
 your hard drive? Eurostat provides a
 [REST API](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/about-this-service)
 for downloading the data. This could be processed using our
-[Generic Extractor](/extractors/other/generic/) but the data are provided in
-[JSON-stat](https://json-stat.org/) format which contains tables encoded using the
-[row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. It is possible
-to import them to KBC, but we would have to do additional processing to obtain plain tables.
+[Generic Extractor](/extractors/other/generic/), but the data are provided in
+[JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
+[row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
+to import them to KBC, we would have to do additional processing to obtain plain tables.
 
 Let's not waste time and use a tool designed for that -- [pyjstat](https://pypi.python.org/pypi/pyjstat/). pyjstat is a python library which can read
-JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html). Although this is library is not installed by default in the Jupyter Sandbox environment, nothing prevents us from installing it.
+JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html). Although this library is not installed by default in the Jupyter Sandbox environment, nothing prevents us from installing it.
 
 ### Working with Custom Libraries
 You can use the following code to download the desired data from Eurostat:
@@ -204,7 +204,7 @@ df.head()
 {% endhighlight %}
 
 The URL was built using the eurostat [Query Builder](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder)
-Also note that installing a library from within the python code must be done using `pip.main`
+Also note that installing a library from within the python code must be done using the `pip.main`
 method and not the usual `pip install`. Now that we have the data, we can start playing with it:
 
 {% highlight python %}
@@ -220,17 +220,17 @@ plt.show()
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-3.png)
 
 ## Wrap-up
-This part of the [tutorial](/tutorial/) shows how to do completely ad-hoc analysis of
+This part of the [tutorial](/tutorial/) shows how to do a completely ad-hoc analysis of
 some data-sets. It takes advantage of the
-[**Plain Sandbox**](/manipulation/transformations/sandbox/) which is automatically
+[**Plain Sandbox**](/manipulation/transformations/sandbox/), which is automatically
 provided for each user and project. The Sandbox is an isolated environment in which
 you can experiment without interfering with any production code.
 
-If you need to run the above code regularly, then you can simply copy&paste it into
+If you need to run the above code regularly, simply copy&paste it into
 a [Transformation](http://localhost:4000/tutorial/manipulate/).
 
 The above tutorial is done in [Python language](https://www.python.org/) using the
-[Jupyter Notebook](http://jupyter.org/), the same can be done in
+[Jupyter Notebook](http://jupyter.org/). The same can be done in
 [R language](https://www.r-project.org/) using [RStudio](https://www.rstudio.com/).
 For more information about sandboxes (including disk and memory limits), see the
 [corresponding documentation](/manipulation/transformations/sandbox/#rstudio-sandbox).
