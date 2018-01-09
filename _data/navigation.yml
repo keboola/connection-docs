@@ -85,10 +85,12 @@ items:
       - url: /extractors/social/
         title: Social
         items:
-          - url: /extractors/social/twitter/
-            title: Twitter
           - url: /extractors/social/facebook/
             title: Facebook
+          - url: /extractors/social/twitter/
+            title: Twitter
+          - url: /extractors/social/youtube/
+            title: YouTube
 
       - url: /extractors/other/
         title: Other
