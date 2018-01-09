@@ -34,9 +34,9 @@ A simple example is getting info about your own channel. The configuration looks
     }
   ]
 }
-{% endhighlight %} 
+{% endhighlight %}
 
-If you don't know how to find out the correct endpoint, look to the API documentation and browse e.g. for *Channels: list*. Choose one of the predefined use cases, e.g. *list (my channel)* and switch the example to CURL. The endpoint is under `# HTTP URL:` where you omit base url `https://www.googleapis.com/youtube/v3/`.
+If you don't know how to find out the correct endpoint, look to the [API documentation](https://developers.google.com/youtube/v3/docs/) and browse e.g. for *Channels: list*. Choose one of the predefined use cases, e.g. *list (my channel)* and switch the example to CURL. The endpoint is under `# HTTP URL:` where you omit base url `https://www.googleapis.com/youtube/v3/`.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/social/youtube/api_sample.png)
@@ -73,4 +73,4 @@ You can use other Generic's functionality like nesting too. This example downloa
     }
   ]
 }
-{% endhighlight %} 
+{% endhighlight %}
