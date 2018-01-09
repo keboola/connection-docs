@@ -3,8 +3,8 @@ title: Ad-hoc Data Analysis
 permalink: /tutorial/ad-hoc/
 ---
 
-This part of the tutorial will show you how you can work with arbitrary data in Python
-in a completely unrestricted way. Although the examples in this part use Python language,
+This part of the tutorial will show you how to work with arbitrary data in Python
+in a completely unrestricted way. Although the examples here use the Python language,
 the very same can be achieved using the R language.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
@@ -13,21 +13,20 @@ Before you start, you should have a basic understanding of the [Python language]
 {:toc}
 
 ## Introduction
-Let's say that you want to play with unemployment data from USA. The US unemployment data is provided by the
-[U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm). The dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
-contains unemployment rates by month. But the extraction from BLS is not trivial, the easiest way to access the data is using
-[Google Public Data](https://cloud.google.com/bigquery/public-data/) which contains a dataset
+Let's say that you want to play with the US unemployment data. It is provided by the
+[U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
+contains unemployment rates by month. However, extracting BLS data is not trivial. The easiest way to access it via
+[Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
 [Bureau of Labor Statistics Data](https://cloud.google.com/bigquery/public-data/bureau-of-labor-statistics).
 
-Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/), so we can use the BigQuery extractor to bring them
-into Keboola Connection. You can preview the table data in [Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
+Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/); use the BigQuery extractor to bring them
+into Keboola Connection. Preview the table data in [Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
 
 ## Using BigQuery Extractor
-To work with Google BigQuery, you need to create an account and [enable billing](https://cloud.google.com/bigquery/public-data/). However,
-querying public data is [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). You will also need to create a Google Storage
-Bucket so that data can be extracted from BigQuery. The bucket is used as a temporary storage for off-loading data from BigQuery.
+To work with Google BigQuery, create an account and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
+querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). Then create a Google Storage bucket as a temporary storage for off-loading data from BigQuery.
 
-*Note: If setting up BigQuery extractor seems too complicated to you can always export the query results to Google Sheets and [load them from Google Drive](/tutorial/load/googledrive/) or export them to CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
+*Note: If setting up the BigQuery extractor seems too complicated to you, you can always export the query results to Google Sheets and [load them from Google Drive](/tutorial/load/googledrive/), or export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
 ### Preparing
 To create a a Google Storage Bucket, go to [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard) and
@@ -119,8 +118,8 @@ When a job is running, a small orange circle appears under *Last runs*, along wi
 Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
 Once the job is finished, click on the names of the tables to inspect their contents.
 
-## Exploring the Data
-To explore the data, go to **Transformations**, and click on **Sandbox**:
+## Exploring Data
+To explore data, go to **Transformations**, and click on **Sandbox**:
 
 {: .image-popup}
 ![Screenshot - Transformations](/tutorial/ad-hoc/transformation-1.png)
