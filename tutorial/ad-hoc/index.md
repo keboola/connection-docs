@@ -9,6 +9,9 @@ the very same can be achieved using the R language.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
 
+* TOC
+{:toc}
+
 ## Introduction
 Let's say that you want to play with unemployment data from USA. The US unemployment data is provided by the
 [U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm). The dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
