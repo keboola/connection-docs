@@ -3,8 +3,8 @@ title: Ad-hoc Data Analysis
 permalink: /tutorial/ad-hoc/
 ---
 
-This part of the tutorial will show you how to work with arbitrary data in Python
-in a completely unrestricted way. Although the examples here use the Python language,
+This part of the tutorial shows how to work with arbitrary data in Python
+in a completely unrestricted way. Although our examples use the Python language,
 the very same can be achieved using the R language.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
@@ -13,24 +13,26 @@ Before you start, you should have a basic understanding of the [Python language]
 {:toc}
 
 ## Introduction
-Let's say that you want to play with the US unemployment data. It is provided by the
-[U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
-contains unemployment rates by month. However, extracting BLS data is not trivial. The easiest way to access it via
+Let's say you want to experiment with the US unemployment data. It is provided by the
+[U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm) (BLS), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
+contains unemployment rates by month. The easiest way to access the data is via
 [Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
 [Bureau of Labor Statistics Data](https://cloud.google.com/bigquery/public-data/bureau-of-labor-statistics).
 
-Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/); use the BigQuery extractor to bring them
-into Keboola Connection (KBC). Preview the table data in [Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
+Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola 
+Connection (KBC) with the help of our BigQuery extractor. Preview the table data in 
+[Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
 
 ## Using BigQuery Extractor
-To work with Google BigQuery, create an account and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
-querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). Then create a Google Storage bucket as a temporary storage for off-loading data from BigQuery.
+To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
+querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). Then create a Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
 
-*Note: If setting up the BigQuery extractor seems too complicated to you, you can always export the query results to Google Sheets and [load them from Google Drive](/tutorial/load/googledrive/), or export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
+*Note: If setting up the BigQuery extractor seems too complicated to you, export the query results to Google Sheets and 
+[load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
 ### Preparing
-To create a Google Storage Bucket, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard) and
-select **Storage**.
+To create a Google Storage Bucket, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
+and select **Storage**.
 
 {: .image-popup}
 ![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-1.png)
@@ -46,7 +48,7 @@ Enter the bucket's name and Storage Class (Regional is okay for our use):
 ![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-3.png)
 
 ### Extracting Data
-Now you're ready to load the data into KBC. Go to the extractor section and click **New Extractor**:
+Now you're ready to load the data into KBC. Go to the extractor section, and click **New Extractor**:
 
 {: .image-popup}
 ![Screenshot - Extractors](/tutorial/ad-hoc/bigquery-extractor-1.png)
@@ -97,7 +99,7 @@ ORDER BY date
 {% endhighlight %}
 
 The `LNS14000000` series will pick the unemployment rates only. Uncheck the `Use Legacy SQL` setting, and
-don't forget to **Save** the query configuration:
+**Save** the query configuration:
 
 {: .image-popup}
 ![Screenshot - Query Configuration](/tutorial/ad-hoc/bigquery-extractor-9.png)
@@ -181,18 +183,18 @@ dataset is called
 There are a number of ways how to get the data from Eurostat -- e.g., you can download it in TSV
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
 [REST API](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/about-this-service)
-for downloading the data. This could be processed using our
-[Generic Extractor](/extractors/other/generic/), but the data is provided in
+for downloading the data. This could be processed using the
+[Generic Extractor](/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
-to import them to KBC, we would have to do additional processing to obtain plain tables.
+to import them to KBC, it would be necessary to do additional processing to obtain plain tables.
 
 To save time, use a tool designed for that -- [pyjstat](https://pypi.python.org/pypi/pyjstat/). It is a python library which can read
 JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html). 
 Although this library is not installed by default in the Jupyter Sandbox environment, nothing prevents you from installing it.
 
 ### Working with Custom Libraries
-You can use the following code to download the desired data from Eurostat:
+Use the following code to download the desired data from Eurostat:
 
 {% highlight python %}
 import pip
@@ -220,7 +222,7 @@ plt.show()
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-3.png)
 
 ## Wrap-up
-This part of the [tutorial](/tutorial/) shows how to do a completely ad-hoc analysis of data sets. It takes advantage of the
+This part of the [tutorial](/tutorial/) shows how to do a completely ad-hoc analysis of various data sets. It takes advantage of the
 [**Plain Sandbox**](/manipulation/transformations/sandbox/), which is automatically provided for each user and project. 
 The Sandbox is an isolated environment in which you can experiment without interfering with any production code.
 
