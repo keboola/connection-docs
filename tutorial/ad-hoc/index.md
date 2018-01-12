@@ -63,12 +63,12 @@ Create a new configuration and name it, e.g., `bls-unemployment`:
 {: .image-popup}
 ![Screenshot - New Configuration](/tutorial/ad-hoc/bigquery-extractor-3.png)
 
-With the new configuration, the first thing to do is to **Authorize Account**:
+Then authorize the account:
 
 {: .image-popup}
 ![Screenshot - Big Query Configuration](/tutorial/ad-hoc/bigquery-extractor-4.png)
 
-Name the authorization and follow the on-screen instructions:
+Name the authorization, and follow the on-screen instructions:
 
 {: .image-popup}
 ![Screenshot - Big Query Authorization](/tutorial/ad-hoc/bigquery-extractor-5.png)
@@ -83,7 +83,7 @@ Select your Google Project and the bucket you have created (`bls-tutorial`) abov
 {: .image-popup}
 ![Screenshot - Big Query Configuration Detail](/tutorial/ad-hoc/bigquery-extractor-7.png)
 
-When successful, configure the actual extraction queries by clicking the *New Query* button:
+After that configure the actual extraction queries by clicking the **New Query** button:
 
 {: .image-popup}
 ![Screenshot - Big Query Bucket Configured](/tutorial/ad-hoc/bigquery-extractor-8.png)
@@ -104,7 +104,7 @@ The `LNS14000000` series will pick the unemployment rates only. Uncheck the `Use
 {: .image-popup}
 ![Screenshot - Query Configuration](/tutorial/ad-hoc/bigquery-extractor-9.png)
 
-Now, run the configuration to bring the data to KBC:
+Now run the configuration to bring the data to KBC:
 
 {: .image-popup}
 ![Screenshot - Finished Configuration](/tutorial/ad-hoc/bigquery-extractor-10.png)
@@ -121,7 +121,9 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 Once the job is finished, click on the names of the tables to inspect their contents.
 
 ## Exploring Data
-To explore the data, go to **Transformations**, and click on **Sandbox**:
+To explore the data, go to **Transformations**, and click on [**Sandbox**](/manipulation/transformations/sandbox/). 
+Provided for each user and project automatically, it is an isolated environment in which you can experiment without 
+interfering with any production code. 
 
 {: .image-popup}
 ![Screenshot - Transformations](/tutorial/ad-hoc/transformation-1.png)
@@ -222,12 +224,8 @@ plt.show()
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-3.png)
 
 ## Wrap-up
-This part of the [tutorial](/tutorial/) shows how to do a completely ad-hoc analysis of various data sets. It takes advantage of the
-[**Plain Sandbox**](/manipulation/transformations/sandbox/), which is automatically provided for each user and project. 
-The Sandbox is an isolated environment in which you can experiment without interfering with any production code.
-
-If you need to run the above code regularly, simply copy&paste it into
-a [Transformation](http://localhost:4000/tutorial/manipulate/).
+You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly, 
+simply copy&paste it into a [Transformation](http://localhost:4000/tutorial/manipulate/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](http://jupyter.org/). The same can be done in the
