@@ -1,33 +1,47 @@
 ---
 title: Tokens
-permalink: /storage/tokens/
+permalink: /management/tokens/
+redirect_from:
+    - /storage/tokens/
 ---
 
 * TOC
 {:toc}
 
-Because almost all operations in KBC may or do manipulate data in Storage, they must be **authorized** with a *Token*
-(sometimes called *Storage API Token*, *SAPI Token* or simply *Storage Token*).
+Almost all operations in KBC must be authorized. This is done using *API Tokens*
+(also called *Storage API Token*, *SAPI Token* or *Storage Token*). KBC is build
+using the [API-first approach](https://apigee.com/about/tags/api-first-0), that means that
+that almost every operation done in the KBC must is in fact an API call and uses an
+API Token.
 
-Tokens are assigned to/by KBC users in the following three situations:
+Normally, when you are using the user interface, your API token is exchaned automatically with
+the server backend. Tokens are mostly used when working with KBC programatically. To do so, please follow our 
+[Developers documentation](https://developers.keboola.com/overview/api/).
 
-1. When joining a project -- assigned automatically
-2. When creating a new configuration of a component (for example, Orchestrations) -- assigned automatically
-3. When [sharing a single table](/tutorial/management/#user-management)
-from your Storage with someone, without them having to become a project administrator.
-You can create an unlimited number of tokens with access to all or selected Storage buckets .
-
-Tokens can be managed from the *Storage* - *Tokens* page. If they belong to project
+## Working with tokens
+Tokens can be manage from the *Users & Settings* - *API Tokens* page. If they belong to project
 administrators, they are called **Master Tokens**. Their description is their user email and they cannot be modified or deleted.
 The only way to delete Master Tokens is removing the user from the project at the *Users & Settings* page.
 
+{: .image-popup}
+![Screenshot - Storage Tokens](/storage/tokens/overview.png)
+
+As mentioned above, tokens are created:
+1. automatically when joining a project (master token)
+2. automatically When creating a new configuration of certain components (for example, Orchestrations)
+3. manually when needed
+
+The typical reasons to create a new API token include:
+- you want to use the [APIs](https://developers.keboola.com/overview/api/), this includes all of the [Storage Clients](https://developers.keboola.com/integrate/storage/#storage-api-clients)
+- you need to limit access to certain data (for example share a single table) or components
+
 Every token can be *refreshed*: a new token is generated and the old token becomes immediately invalid.
-If you invalidate your Master Token, reload your Storage view in the browser.
+If you invalidate your Master Token, reload your KBC view in the browser.
+
 Because tokens allow access to data, you should refresh a token in case there is a suspicion
 that the token has leaked.
 
-{: .image-popup}
-![Screenshot - Storage Tokens](/storage/tokens/overview.png)
+[sharing a single table](/tutorial/management/#user-management)
 
 ## Using Limited Tokens
 To add users with access limited to only some of your data, create a new, temporary access token:
