@@ -7,11 +7,11 @@ permalink: /extractors/other/aws-s3/
 {:toc}
 
 This extractor loads a single or multiple CSV files from AWS S3 and stores them in a table in Storage.
-After creating a new configuration, select files you want to extract from S3 and determine the way how 
+After creating a new configuration, select the files you want to extract from S3 and determine the way how 
 you save them to KBC Storage. You also need to set up the proper permissions on AWS.
 
 ## Create New Configuration
-Find AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
+Find the AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/other/aws-s3/ui1.png)
@@ -100,6 +100,6 @@ Give the write permissions to the application storing files in CSV and the read-
 ![Screenshot - Advanced configuration](/extractors/other/aws-s3/ui4.png)
 
 
-In this section you can modify the delimiter and enclosure of the CSV file. 
+In this section, you can modify the delimiter and enclosure of the CSV file. 
 The default values are based on [RFC 4180](https://tools.ietf.org/html/rfc4180).
 
