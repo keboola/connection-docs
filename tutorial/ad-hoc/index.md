@@ -1,7 +1,12 @@
 ---
-title: Ad-hoc Data Analysis
+title: Part 5 - Ad-hoc Data Analysis
 permalink: /tutorial/ad-hoc/
 ---
+
+After you have loaded your tables, either [manually](/tutorial/load/) or
+[using an extractor](/tutorial/load/database/), [manipulated the data](/tutorial/manipulate/) in SQL,
+written it [into Tableau BI](/tutorial/write/) or [into GoodData BI](/tutorial/write/gooddata/), and
+set everything to run [automatically](/tutorial/automate/), let's take a look at some additional KBC features related to doing ad-hoc analysis.
 
 This part of the tutorial shows how to work with arbitrary data in Python
 in a completely unrestricted way. Although our examples use the Python language,
@@ -232,3 +237,11 @@ The above tutorial is done in the [Python language](https://www.python.org/) usi
 [R language](https://www.r-project.org/) using [RStudio](https://www.rstudio.com/).
 For more information about sandboxes (including disk and memory limits), see the
 [corresponding documentation](/manipulation/transformations/sandbox/#rstudio-sandbox).
+
+## Final Note
+This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things:
+Applications, Python and R transformations, Redshift and Snowflake features, to name a few.
+However, teaching you everything was not really the point of this tutorial.
+We wanted to show you how Keboola Connection can help in connecting different systems together.
+
+[Return to the beginning](/tutorial/) or [contact us](/).

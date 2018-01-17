@@ -24,28 +24,28 @@ It may be the case that in order to solve the issue or to gain context regarding
 By default, Keboola support staff may join your project when requested and they will appear in the Member's list marked by the Keboola badge:
 
 {: .image-popup}
-![Screenshot -- User joined](/management/users/users-list-5.png)
+![Screenshot -- User joined](/management/support/users.png)
 
 Keboola Support members will always have MFA enabled, are always accounts that expire, and they are required to have a reason to enter the project.
 They also do not count towards the project limits.
 
-### Require Approval for Support Access ###
+### Require Approval for Support Access
 Some organizations may prefer to have a starker demarcation for their projects with regard to access by the support team.
 To facilitate this transparency we've introduced the ability to require approval for all temporary access by Keboola Support accounts.
 The setting can be found in the [organization details](/management/organization/) in the accounts section:
 
 {: .image-popup}
-![Screenshot -- User joined](/management/support/organization-allowAutoJoin-on.png)
+![Screenshot -- User joined](/management/support/organization-allow-auto-join-on.png)
 
 To disable auto-join and require approval for Support accounts, click on the `Change` link to open the dialog and uncheck the Auto Join checkbox.
 
 {: .image-popup}
-![Screenshot -- User joined](/management/support/autoJoin-modal.png)
+![Screenshot -- User joined](/management/support/auto-join-modal.png)
 
 The description for Support Access will reflect the current setting.
 
 {: .image-popup}
-![Screenshot -- User joined](/management/support/organization-allowAutoJoin-off.png)
+![Screenshot -- User joined](/management/support/organization-allow-auto-join-off.png)
 
 With auto-join off, a joining support account will require approval by an existing project member in order to gain access.
 When a support member requests access each active project member will receive an email notification
@@ -57,5 +57,3 @@ The requesting user will appear in the user's list as shown below.  Any active p
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/approve-user-list.png)
-
-

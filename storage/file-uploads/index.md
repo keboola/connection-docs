@@ -34,7 +34,7 @@ do not forget to tick the respective checkbox.
 
 Also by default, uploaded files are marked as *non-public*. They are available only to the project
 administrators (those listed in the *Users & Settings* section)
-and users with Storage [tokens](/storage/tokens/) who have the permission to *Read all file uploads*.
+and users with Storage [tokens](/management/project/tokens/) who have the permission to *Read all file uploads*.
 Users without the *Read all file uploads* permission can access only their own files and the files
 they uploaded themselves.
 For each file in Files, you can

@@ -120,4 +120,4 @@ Your orchestration job should be finished by now. From data extraction to data w
 Any change in your [GoogleDrive sheet](/tutorial/load/googledrive/) will automatically propagate up 
 to your Tableau or GoodData project. Or both, if you set it that way.   
 
-Having mastered the automation process, proceed to the [management part](/tutorial/management/) of KBC. 
+Having mastered the automation process, you may proceed to an example of doing [ad-hoc data analysis part](/tutorial/ad-hoc/) in KBC. 

@@ -37,5 +37,4 @@ storage to run arbitrary SQL scripts on the copies of your tables without affect
 - [Writing into GoodData](/tutorial/write/gooddata/) --- write data from KBC into GoodData Analytics.
 - [Automation: Setting up Orchestrator](/tutorial/automate/) --- specify what tasks should be executed
 in what order, and configure their automatic execution.
-- [Management](/tutorial/management/) --- familiarize yourself with additional KBC features related to Data and User management.
 - [Ad-hoc data analysis](/tutorial/ad-hoc/) --- see how you can play with arbitrary data.

@@ -96,9 +96,9 @@ and executed in the background. We also call these jobs **asynchronous**. Multip
 time and you can continue your work in the meantime.
 
 ### Tokens
-Every operation done in KBC must be authorized with a [*token*](/storage/tokens/). Each KBC user is automatically assigned a token on their first login.
+Every operation done in KBC must be authorized with a [*token*](/management/project/tokens/). Each KBC user is automatically assigned a token on their first login.
 Apart from that, tokens with limited access to some KBC operations can be created (and shared with other people).
-The principle of token authorization allows you, for example, to easily [share a single table](/tutorial/management/#user-management)
+The principle of token authorization allows you, for example, to easily [share a single table](/management/project/tokens/#limited-tokens)
 from your Storage with someone without them having to register to KBC (enter email/password).
 
 ### Input / Output Mapping

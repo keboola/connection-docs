@@ -32,11 +32,8 @@ items:
       - url: /tutorial/automate/
         title: Part 4 - Automation
 
-      - url: /tutorial/management/
-        title: Part 5 - Management
-
       - url: /tutorial/ad-hoc/
-        title: Part 6 - Ad-hoc data analysis
+        title: Part 5 - Ad-hoc data analysis
 
   - url: /extractors/
     title: Extractors
@@ -146,9 +143,6 @@ items:
       - url: /storage/file-uploads/
         title: Files
 
-      - url: /storage/tokens/
-        title: Tokens
-
       - url: /storage/configurations/
         title: Configurations
 
@@ -201,23 +195,35 @@ items:
     title: Automation
 
   - url: /management/
-    title: Project Management
+    title: Management
     items:
-      - url: /management/users/
-        title: Users
-
-      - url: /management/organization/
-        title: Organizations
-
-      - url: /management/limits/
-        title: Limits
-
       - url: /management/support/
         title: Keboola Support
 
-      - url: /management/project-export/
-        title: Data Takeout
+      - url: /management/account/
+        title: Account
 
-      - url: /management/project-delete/
-        title: Project Deletion
+      - url: /management/jobs/
+        title: Jobs
+
+      - url: /management/project/
+        title: Project
+        items:
+          - url: /management/project/users/
+            title: Users
+
+          - url: /management/project/tokens/
+            title: API Tokens
+
+          - url: /management/project/limits/
+            title: Limits & Project Power
+
+          - url: /management/project/export/
+            title: Data Takeout
+
+          - url: /management/project/delete/
+            title: Project Deletion
+
+      - url: /management/organization/
+        title: Organizations
 
