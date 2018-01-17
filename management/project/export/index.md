@@ -31,10 +31,10 @@ Things to have before you start:
 
 ## Prepare Project
 We strongly recommend that you create a dedicated user with a dedicated bucket to
-prevent an accidental leak of credentials or your project management. 
+prevent an accidental leak of credentials or your project management.
 
-If you're familiar with AWS Cloud Formation, the application repository offers 
-a [CF template](https://github.com/keboola/kbc-project-backup/blob/master/s3.template.json) 
+If you're familiar with AWS Cloud Formation, the application repository offers
+a [CF template](https://github.com/keboola/kbc-project-backup/blob/master/aws-cf-template.json)
 to create all required resources.
 
 - **Create an S3 Bucket** following the [Amazon documentation](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html).

@@ -11,7 +11,7 @@ Complete the following steps to configure it:
 
 ## Create New Configuration
 
-Find Twitter in the **Extractors** section. Create a new configuration, and name it. 
+Find Twitter in the **Extractors** section. Create a new configuration, and name it.
 It can be renamed at any time.
 
 {: .image-popup}
@@ -22,7 +22,7 @@ Select one of the two authorization methods:
 
  - **Instant** -- Use if having access to a Twitter account. It will be done immediately.
  - **External** -- Use to authorize access to an account of a non-KBC user. Generate a link to the external authorization app and send it to the user. The generated link is valid for 48 hours and will not be stored anywhere.
- 
+
  {: .image-popup}
 ![Twitter Authorization](/extractors/social/twitter/02-authorize.png)
 
@@ -30,7 +30,7 @@ Select one of the two authorization methods:
 {: .image-popup}
 ![Twitter Authorization Selection](/extractors/social/twitter/03-authorize-modal.png)
 
-When finished setting up authorization, click **Continue** to move to the next tab, and start selecting data. 
+When finished setting up authorization, click **Continue** to move to the next tab, and start selecting data.
 
 {: .image-popup}
 ![Twitter Data Selection](/extractors/social/twitter/04-authorized.png)
@@ -40,11 +40,11 @@ To configure what you want to fetch from Twitter, use the other four tabs displa
 It is okay to leave any of the steps blank.
 
  - **User Timeline** -- Returns a collection of the most recent Tweets posted by the user indicated by the *Screen Name*.
-   
+
    {: .image-popup}
 ![Twitter Screen Name](/extractors/social/twitter/05-screen-name.png)
 
-   - [Limited to last 3,200 tweets](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) 
+   - [Limited to last 3,200 tweets](https://dev.twitter.com/rest/reference/get/statuses/user_timeline)
  - **Mentions** -- Returns mentions for the authenticating user.
    - [Limited to last 800 mentions of the account](https://dev.twitter.com/rest/reference/get/statuses/mentions_timeline)
  - **Followers List** -- Returns a list or users following the specified user by *Screen Name*.
@@ -58,7 +58,7 @@ When done, **Save** the configuration and **Run** the extraction job. It will st
 
 ## Extraction Output Tables
 
-The extractor output is always **incremental**, and **primary keys** are set for all tables 
+The extractor output is always **incremental**, and **primary keys** are set for all tables
 to append new rows and update the already existing ones with each execution.
 
 The following are the Twitter extractor output tables:
@@ -72,7 +72,7 @@ The Tweets table contains:
 
 The origin of a tweet is distinguished by a special `keboola_source` column with the following values for each source:
 
-  - `userTimeline` -- `User Timeline` 
+  - `userTimeline` -- `User Timeline`
   - `mentions` -- `Mentions`
   - `search` -- `Search`
 
@@ -162,4 +162,4 @@ This extractor is designed to download up to
 
 in one execution. Following executions will incrementally add newer data.
 
-These limits follow [Twitter API Rate Limits](https://dev.twitter.com/rest/public/rate-limits).
+These limits follow [Twitter API Rate Limits](https://developer.twitter.com/en/docs/basics/rate-limiting).
