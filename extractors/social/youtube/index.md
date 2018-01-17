@@ -18,13 +18,13 @@ Find **YouTube** in the list of extractors, and create a new configuration. Name
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/social/youtube/ui_new_config.png)
 
-**Authorize Account** to be redirected to Google, and authorize the extractor to access your YouTube data.
+**Authorize the account** to be redirected to Google, and authorize the extractor to access your YouTube data.
 
 ## Configuration
 Either choose one of the predefined templates, or define your own configuration directly using the JSON editor. 
 The extractor runs on [Generic Extractor](https://developers.keboola.com/extend/generic-extractor/).
 
-A simple example is getting info about your own channel. The configuration looks like this:
+To give a simple example, the configuration to get info about your own channel looks like this:
 
 {% highlight json %}
 {
@@ -38,9 +38,9 @@ A simple example is getting info about your own channel. The configuration looks
 }
 {% endhighlight %}
 
-If you don't know how to find out the correct endpoint, look to YouTube's [API documentation](https://developers.google.com/youtube/v3/docs/) and browse for, e.g., *Channels: list*. 
+If you do not know how to find out the correct endpoint, look to YouTube's [API documentation](https://developers.google.com/youtube/v3/docs/) and browse for, e.g., *Channels: list*. 
 Choose one of the predefined use cases, for instance, *list (my channel)*, and switch the example to CURL. 
-The endpoint is under `# HTTP URL:` where you omit the base url `https://www.googleapis.com/youtube/v3/`.
+The endpoint is under `# HTTP URL:`, where you omit the base url `https://www.googleapis.com/youtube/v3/`.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/social/youtube/api_sample.png)
