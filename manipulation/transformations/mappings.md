@@ -80,7 +80,7 @@ of your transformation (i.e. contents of the Output Mapping *Source* table).
 it is not overwritten, but resulting data are appended to it. 
 - **Primary key** --- The [primary key](/storage/tables/#primary-keys-and-indexes) of the destination table; if the table already exists, 
 the primary key must match. Feel free to use a multi-column primary key.
-- **Delete rows** --- Delete rows matching the criteria from the destination table before importing the data.
+- **Delete rows** --- Delete rows matching the criteria from the destination table before importing the data. Using this option makes sense when incremental is switched on.
 
 **Important:** Multiple Output Mappings can be created for your transformation.
 
