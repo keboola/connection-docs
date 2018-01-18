@@ -76,6 +76,8 @@ The resulting file `import-data.txt.csv` can now be imported into KBC Storage as
 {: .image-popup}
 ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
 
+*Note: as along your data do not contain any non-[ASCII](https://en.wikipedia.org/wiki/ASCII#Character_set) characters, you can simply save them as CSV.*
+
 ## Output CSV Format
 When you export a table from Storage, the same format is used for import:
 
@@ -94,6 +96,8 @@ when asked about the file format).
 - Import it into Google Drive without any conversion (notice, however, that you might want to
     use Google Drive Writer instead)
 - Import it into Microsoft Excel by following the below instructions.
+
+*Note: The rows are exported in random order and there is no way to specify ordering of rows in the exported file.*
 
 ### Opening in Microsoft Excel
 The easiest way to import the CSV file exported from KBC into Microsoft Excel is by starting Excel and opening 
