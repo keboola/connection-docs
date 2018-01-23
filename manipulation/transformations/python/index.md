@@ -43,7 +43,13 @@ Feel free to contact us if you run into problems. When the package is installed,
 {: .image-popup}
 ![Screenshot - Package Configuration](/manipulation/transformations/python/packages.png)
 
-The latest versions of packages are always installed.
+The latest versions of packages are always installed at the time of the release (you can check that
+[in the repository](https://github.com/keboola/docker-custom-python/releases)). In case your code relies on a specific package version, you can override the
+installed version by calling e.g.:
+
+{% highlight python %}
+pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', '--force-reinstall', 'pandas == 0.20.0'])
+{% endhighlight %}
 
 ### CSV format
 Tables from Storage are imported to the Python script from CSV files. CSV files can be read by standard Python functions
