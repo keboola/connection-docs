@@ -17,7 +17,7 @@ Find Facebook in the **Extractors** section, create a new configuration and name
 ![Screenshot - Create configuration](/extractors/social/facebook/createconfig.png)
 
 Authorize the Facebook account with access to the Facebook page you want to extract.
-You will be asked for the `read_insights,public_profile,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
+You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
 You can always revoke the authorization by removing the *Keboola Connection Extractor* from the list
