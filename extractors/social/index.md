@@ -7,7 +7,8 @@ Extractors import data from external sources and integrate it to the Keboola Con
 The following extractors allow access to data from social networks:
 
 - [Facebook](/extractors/social/facebook/)
-- [Twitter](/extractors/social/twitter/) --- watch a [short demo](https://www.youtube.com/watch?v=dx03hlA7dTo) 
+- [Instagram](/extractors/social/instagram/)
+- [Twitter](/extractors/social/twitter/) --- watch a [short demo](https://www.youtube.com/watch?v=dx03hlA7dTo)
 of data extraction from Twitter, its natural language processing and visualisation of the results in Tableau.
 - [YouTube](/extractors/social/youtube/)
 - and others
