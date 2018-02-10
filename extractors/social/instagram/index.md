@@ -6,9 +6,9 @@ permalink: /extractors/social/instagram/
 * TOC
 {:toc}
 
-This extractor uses the [Instagram Graph API](https://developers.facebook.com/docs/instagram-api)(built on the 
+This extractor uses the [Instagram Graph API](https://developers.facebook.com/docs/instagram-api) (built on the 
 [Facebook Graph API](https://developers.facebook.com/docs/graph-api)) to extract media objects, comments, insights 
-and metrics from an [Instagram Business Account](https://business.instagram.com/getting-started). 
+and metrics from [Instagram Business Accounts](https://business.instagram.com/getting-started). 
 
 In order to access a business account's data, users have to authorize a Facebook account and choose a Facebook page 
 that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
@@ -16,7 +16,7 @@ the configuration process is almost identical to configuring the [Facebook](/ext
 
 ## Create New Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
-page needs to be [connected to an Instagram Business Account](https://developers.facebook.com/docs/instagram-api/getting-started#connect).
+page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-api/getting-started#connect).
 
 Find Instagram in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
 
