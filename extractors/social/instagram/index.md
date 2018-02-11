@@ -41,13 +41,14 @@ the one you want to extract from.
 
 ## Create New Query
 Create a new query and specify what data to extract. If you choose a preconfigured template,
-all necessary fields will fill up automatically.
+all necessary fields will be filled automatically.
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/social/instagram/newquery.png)
 
-The query describes the extractor request to be sent to the Instagram Graph API that is built on Facebook Graph API. Knowing the API will make
-creating a query easy because all options except `name` represent the [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
+The query describes the extractor request to be sent to the Instagram Graph API that is built on the Facebook 
+Graph API. Knowing the API will make creating a query easy because all options except `name` represent the 
+[Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
 ### Name
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
@@ -63,17 +64,18 @@ the output table name will be `foo_insights`.
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Instagram API.
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
 A typical example would be the [media](https://developers.facebook.com/docs/instagram-api/reference/media).
-If left empty, the *Endpoint* option references data of the Instagram business Account itself which in fact refers to [user](https://developers.facebook.com/docs/instagram-api/reference/user) endpoint.
+If left empty, the *Endpoint* option references data of the Instagram Business Account itself, which in fact 
+refers to the [user](https://developers.facebook.com/docs/instagram-api/reference/user) endpoint.
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of
-fields but it also can be used to parametrize the fields and nest more endpoints into it.
+fields, but it also can be used to parametrize the fields and nest more endpoints into it.
 The [media](https://developers.facebook.com/docs/instagram-api/reference/media#metadata) endpoint returns all
-media object created by a Instagram account. Each media object contains fields such as `caption`, `comments_count`, `created_time`
+media objects created by an Instagram account. Each media object contains fields such as `caption`, `comments_count`, `created_time`
 and `like_count`. The fields parameter in such case is `caption,comments_count,created_time,like_count`.
 
 - **Fields/Endpoint Nesting** ---
-    Media can contain comments and these can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/instagram-api/reference/comment#reading) field/endpoint for each media. This way, more endpoints can be nested and there is no limit of nesting levels.
+    Media can contain comments and those can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/instagram-api/reference/comment#reading) field/endpoint for each media. This way, more endpoints can be nested, and there is no limit of nesting levels.
 
 - **Fields Parametrization** ---
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.
@@ -91,12 +93,12 @@ by the Facebook Graph API parameter `ids` that is a comma separated list of page
 ### Since and Until (Advanced tab)
 The *Since* and *Until* options represent corresponding Facebook Graph API request parameters and
 specify the date range that will be applied to the time based data retrieved by the **endpoint**. For
-example, if the endpoint is `feed` then all media objects created within the specified since-until range will be retrieved.
+example, if the endpoint is `feed`, then all media objects created within the specified since-until range will be retrieved.
 
 The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified
 
 - **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
-- **relatively** --- e.g. `14 days ago` or `last month`.
+- **relatively** --- e.g., `14 days ago` or `last month`.
 
 For consistent results, specify both the *since* and *until* parameters.
 
@@ -114,17 +116,17 @@ Each row of a table represents one object. Each table has the primary key auto-d
 extraction, so the table data is **imported incrementally**. The columns of the output tables represent
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
 
-- `id` --- Id returned by the Facebook Graph API
-- `ex_account_id` --- Id of the Instagram Business Account corresponding to the object stored in the row
-- `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example,
-for media obecjts it will be `page_media`, for comments of media it will be
+- `id` --- id returned by the Facebook Graph API
+- `ex_account_id` --- id of the Instagram Business Account corresponding to the object stored in the row
+- `fb_graph_node` --- describes the "vertical position" of the object in the resulting tree. For example,
+for media objects it will be `page_media`, for comments of media it will be
 `page_media_comments`.
-- `parent_id` --- Refers to the `id` column of a parent object represented by some other row and table.
-For instance, if the row is representing a comment object, its parent is a media object and `parent_id`
+- `parent_id` --- refers to the `id` column of a parent object represented by another row and table.
+For instance, if the row is representing a comment object, its parent is a media object, and `parent_id`
 is the id of the media object. The parent object type can be also determined from the `fb_graph_node` column as a
 substring from the beginning until the last occurrence of an underscore. To give an example, if
 `fb_graph_node` contains the value `page_media_comments`, the parent object type is `page_media`. The
-top parent is named `page` and it represents Instagram Business Account id.
+top parent is named `page`, and it represents Instagram Business Account id.
 
 
 ## Facebook API Version
