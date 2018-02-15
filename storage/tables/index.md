@@ -161,21 +161,3 @@ The above applies only when **incremental load** is used.
 When incremental is not used, the contents of the target table are cleared before the load. When a primary key 
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
-## Copying Tables / Table Snapshots
-If you want to physically copy a table, use the *table snapshot* feature. A copy of the table 
-contents at the time of creating the snapshot will be made. It can be used immediately to make
- a physical copy of the table, or later, to revert the table into its previous state.
-
-Table Snapshots are useful when **experimenting** with extractors or transformations, or 
-when **refactoring** your project: you can create a copy of your output table, experiment a 
-little, and then compare the new output table with the original one to make sure your output
-remained the same. They can also be used as a workaround to renaming tables because this 
-feature is not available yet.
-
-{: .image-popup}
-![Screenshot - Storage Snapshots](/storage/tables/snapshots.png)
-
-A table snapshot can be either used to revert the contents of that table, or to copy the table into another one.
-
-{: .image-popup}
-![Screenshot - Storage Snapshots List](/storage/tables/snapshots-list.png)

@@ -142,6 +142,9 @@ items:
           - url: /storage/tables/uploads/
             title: Table Import/Export
 
+          - url: /storage/tables/backups/
+            title: Backups and Restorations
+
       - url: /storage/file-uploads/
         title: Files
 
