@@ -33,28 +33,26 @@ following states:
 
 **waiting** --> **processing** --> **success**/**error**
 
-When a job is not finished (is waiting or processing), it can be terminated:
+Until a job is finished (i.e., it is waiting or processing), it can be terminated:
 
 {: .image-popup}
 ![Screenshot - Terminate Job](/management/jobs/terminate-job.png)
 
-Note that a job is not terminated immediately when you click the **Terminate** button. It usually takes a few
-seconds before it is terminated.
+*Note that a job is not terminated immediately upon clicking the **Terminate** button. Its termination usually takes 
+a few seconds.*
 
-In some cases, a job can have child jobs. They are identified by having their `RunId` delimited with
-a dot --- e.g., `347371952.3473719650`. This means that the job `3473719650` run is in fact a child
+In some cases, a job can have **child jobs**. They are identified by having their `RunId` delimited with
+a dot --- e.g., `347371952.3473719650`. In this case, the job `3473719650` run is in fact a child
 job to `347371952`. Terminating the parent job will automatically terminate the child job too. 
 Terminating the child job will probably cause the parent to terminate or fail.
 
 ## Waiting Jobs
-A job is always put in the waiting state when it is run. A job may be in the waiting state for two 
-reasons. Either it is waiting for our infrastructure to start executing it, or it is waiting on
-project parallelism limits. In the former case, the job is waiting until a 
-[worker](https://developers.keboola.com/integrate/jobs/) starts executing it.
-This usually takes several seconds, at most a couple of minutes. 
+When a job is run, it is always put in the waiting state to wait for our **infrastructure** --- 
+[worker](https://developers.keboola.com/integrate/jobs/) to start executing it.
+This usually takes anywhere from several seconds to a couple of minutes at most. 
 
-When a job is waiting on a project parallelism limit, it boils down to two situations. Either the 
-same configuration of the same component is already being executed, or the overall limit
+There is one more reason for a job to be in the waiting state: **project parallelism limits**. 
+Either the same configuration of the same component is already being executed, or the overall limit
 of concurrently running jobs within a project was exceeded. That means that a job will be in 
 the waiting state under the following conditions:
 
@@ -63,8 +61,8 @@ the waiting state under the following conditions:
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
 
 ## Storage Jobs
-Not only we record all jobs which were executed in your KBC project, we also record all data which were uploaded
-into your project. Go to **Storage** and click the **Jobs** tab:
+Not only we record all jobs executed in your KBC project, we also record all data that was uploaded
+into it. Go to **Storage** and click the **Jobs** tab:
 
 {: .image-popup}
 ![Screenshot - Storage Jobs](/management/jobs/storage-jobs.png)
@@ -75,7 +73,7 @@ When you click an **importTable** job, you'll see a Storage job detail:
 ![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)
 
 Clicking **File ID** will take you to the **File Uploads** tab in **Storage**,
-where all data pushed into your KBC project are stored.
+where all data pushed into your KBC project is stored.
 You can download the data and import it into other tables, or you can revert to an older table version.
 
 {: .image-popup}
