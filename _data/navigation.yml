@@ -84,6 +84,8 @@ items:
         items:
           - url: /extractors/social/facebook/
             title: Facebook
+          - url: /extractors/social/instagram/
+            title: Instagram
           - url: /extractors/social/twitter/
             title: Twitter
           - url: /extractors/social/youtube/
@@ -229,4 +231,3 @@ items:
 
       - url: /management/organization/
         title: Organizations
-

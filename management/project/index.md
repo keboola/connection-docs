@@ -17,7 +17,7 @@ The settings page shows important properties of your project, such as:
 - expiration,
 - type of project,
 - monthly fee,
-- date retention for [time travel](/storage/tables/backups/)
+- data retention for [time travel](/storage/tables/backups/)
 - region.
 
 The region of the project is the physical location of the project data. The region
