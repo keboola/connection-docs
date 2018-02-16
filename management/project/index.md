@@ -6,32 +6,28 @@ permalink: /management/project/
 * TOC
 {:toc}
 
-The project settings page shows general information about your project.
-It can be accessed from the *Users & Settings* link from the left menu:
+The project settings page provides general information about your project.
+To access it, click the **Users & Settings** link in the menu on the left:
 
 {: .image-popup}
 ![Screenshot - Project Settings](/management/project/settings.png)
 
 The settings page shows important properties of your project, such as:
 
-- expiration,
-- type of project,
-- monthly fee,
-- data retention for [time travel](/storage/tables/backups/)
-- region.
+- Expiration
+- Type of project
+- Monthly fee
+- Data retention for [time travel](/storage/tables/backups/)
+- Region -- physical location of the project data; it corresponds to an 
+[Amazon Region identifier](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions). 
+<br> Available regions: **us-east-1** (USA -- North Virginia) and **eu-central-1** (EU -- Frankfurt)
 
-The region of the project is the physical location of the project data. The region
-corresponds to an [Amazon Region identifier](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions). Currently two regions are available:
+You can also
 
-- us-east-1 (United States -- North Virginia)
-- eu-central-1 (European Union -- Frankfurt)
+- rename your project.
+- [export all project data](/management/project/export/).
+- [delete the project](/management/project/delete/).
 
-On the settings page, you can:
-
-- Rename your project
-- [Export all project data](/management/project/export/)
-- [Delete the project](/management/project/delete/)
-
-Apart the settings page, there are also [Notifications](/management/account/#notifications) which
-are collected from all of your projects and accessible from your
-[Account page](/management/account/).
+Apart from the settings page, there are also [Notifications](/management/account/#notifications) available. To access these
+important messages collected from all of your projects, go to your [Account page](/management/account/), or click the bell at 
+the top of the side bar.
