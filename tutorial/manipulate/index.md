@@ -116,21 +116,21 @@ CREATE TABLE "tmp_level" AS
 
 CREATE TABLE "tmp_opportunity" AS 
     SELECT *, CASE 
-        WHEN "Probability" < 50 THEN 'Poor' 
-        WHEN "Probability" < 70 THEN 'Good' 
+        WHEN "probability" < 50 THEN 'Poor' 
+        WHEN "probability" < 70 THEN 'Good' 
         ELSE 'Excellent' END AS "ProbabilityClass" 
     FROM "opportunity";
 
 CREATE TABLE "opportunity_denorm" AS 
     SELECT "tmp_opportunity".*, 
-        "user"."Name" AS "UserName", "user"."Sales_Market" AS "UserSalesMarket", 
-        "user"."Global_Market" AS "UserGlobalMarket", 
-        "account"."Name" AS "AccountName", "account"."Region" AS "AccountRegion", 
-        "account"."Status" AS "AccountStatus", "account"."FirstOrder" AS "AccountFirstOrder" 
+        "user"."name" AS "UserName", "user"."sales_market" AS "UserSalesMarket", 
+        "user"."global_market" AS "UserGlobalMarket", 
+        "account"."name" AS "AccountName", "account"."region" AS "AccountRegion", 
+        "account"."status" AS "AccountStatus", "account"."first_order" AS "AccountFirstOrder" 
     FROM "tmp_opportunity" 
-        JOIN "user" ON "tmp_opportunity"."OwnerId" = "user"."Id" 
-        JOIN "account" ON "tmp_opportunity"."AccountId" = "account"."Id" 
-        JOIN "tmp_level" ON "user"."Name" = "tmp_level"."Name";
+        JOIN "user" ON "tmp_opportunity"."OwnerId" = "user"."id" 
+        JOIN "account" ON "tmp_opportunity"."AccountId" = "account"."id" 
+        JOIN "tmp_level" ON "user"."name" = "tmp_level"."Name";
 {% endhighlight %}
 
 {: .image-popup}
