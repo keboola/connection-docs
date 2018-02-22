@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Each Keboola Connection Project has two kinds of limits:  
+Each Keboola Connection project has two kinds of limits:  
 
 1. **Business limits** are set in your contract and define the business usage of our platform. 
 This can be seen as the **size** of your project. Exceeding them will earn you a call from us, 
@@ -18,7 +18,7 @@ and a possible contract update conversation.
 these limits is either technically impossible, or it carries a risk of degraded performance.
 
 ## Business Limits
-Business Limits are set for each project upon entering into the subscription. 
+Business limits are set for each project upon entering into the subscription. 
 You can find them under **Users & Settings** in the **Limits** tab:
 
 {: .image-popup}
@@ -31,21 +31,15 @@ You can also request an upgrade by clicking the **Request Increase** button crea
 
 Business limits vary based on your contract (refer to it to see which ones apply in your case):
 
-- Storage rows
-- Users count
-- Orchestrations count
-- [**Project Power**](#project-power)
-- **Storage size**
-
-**Storage rows** represent the sum of all rows in all tables in [Storage](/storage/). 
+- **Storage rows** --- the sum of all rows in all tables in [Storage](/storage/); 
 [Aliases](/storage/tables/#aliases) and [Linked Buckets](/storage/buckets/sharing/#link-bucket) do 
-not count towards this number. 
-
-**Users count** is the number of [project Users](/management/project/users). 
+not count towards this number.
+- **Users count** --- the number of [project Users](/management/project/users).
 [Keboola Support Users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [Tokens](/management/project/tokens). Effectively this is the number of project administrators.
-
-**Orchestrations count** is simply the number of orchestrations (regardless of whether they are scheduled or not).
+- **Orchestrations count** --- the number of orchestrations (scheduled or not)
+- **Project Power** --- [details below](#project-power)
+- **Storage size** --- [details below](#storage-size)
 
 ### Project Power
 Project Power is proportional to the sum of the amount of data **consumed** (exported from Storage) and **produced** 
@@ -56,7 +50,7 @@ we are counting only the data that matters to you.
 Although proportional to the amount of data, Project Power is measured in **units**. This is because it is
 difficult to define a universally valid size of a piece of data. Roughly 1 PPU (Project Power Unit) is equivalent 
 to 0.5--1GB of data. 
-Most of the transfers are efficiently compressed and most of the data *can be* efficiently compressed, which
+Most of the transfers are efficiently compressed and most of the data **can be** efficiently compressed, which
 makes the ratio more favourable. It is important to say that the same data on the same component will always consume
 the same number of PPUs.
 
@@ -79,7 +73,7 @@ with mixed backends).
 ### GoodData
 If you use [GoodData BI](https://www.gooddata.com/) provisioned by Keboola, the **Limits** page will also show
 limits to your GoodData project. These limits are again soft limits. The production project switch shows 
-whether you are using a [demo or production project](/writers/gooddata). The demo project is provided free of charge. 
+whether you are using a [demo or a production project](/writers/gooddata). The demo project is provided free of charge. 
 
 {: .image-popup}
 ![Screenshot - GoodData Limits](/management/project/limits/limits-2.png)
