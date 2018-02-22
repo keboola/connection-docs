@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-To be able to work with KBC, each user needs
+To be able to work with KBC, each user needs the following:
 
 - Platform wide KBC account
 - Access to a specific project
@@ -23,7 +23,7 @@ All operations done by a user are technically done using the
 [tracing operations](/management/project/tokens/#token-events) done by that user.
 
 ## Inviting a User
-If you want to add a new user to the project, go to the **Users & Settings** page in the project and 
+If you want to add a new user to the project, go to **Users & Settings** in the project and 
 click the **Add new user** button:
 
 {: .image-popup}
@@ -67,7 +67,7 @@ If the added user already has a KBC account, you will immediately see their scre
 
 Verify the screen name if you intend to invite an existing user. 
 If you see `Not activated yet` instead of the screen name, it means that there is no KBC account associated with the email address. 
-The user can than immediately enter the project and they will also receive an email invitation:
+The user can then immediately enter the project, and they will also receive an email invitation:
 
 {: .image-popup}
 ![Screenshot -- Invitation email to create account](/management/project/users/invite-project-3.png)
@@ -91,7 +91,7 @@ You will then receive a confirmation email with a link to activate the new KBC a
 {: .image-popup}
 ![Screenshot -- Confirmation email](/management/project/users/register-3.png)
 
-If you have a Gmail account, then simply go the login page and then straight to *Sign in with Google*:
+If you have a Gmail account, go to the login page and then straight to *Sign in with Google*:
 
 {: .image-popup}
 ![Screenshot -- Login Page](/management/project/users/login-1.png)
@@ -106,7 +106,7 @@ Once you authorize KBC in your Google account, a KBC account will be created for
 ## Removing a User
 You may remove a user from a project by clicking the **Remove** button in the user list. 
 The user will receive a notification email about being removed from the project. 
-The removal is effective immediatelly. Any operations done from the moment of removal will 
+The removal is effective immediately. Any following operations will 
 be unauthorized, regardless of whether the use was currently logged in or not.
 Removing a user from a project has no effect on the data in the project; 
 everything that particular user did in the project stays untouched. 
@@ -115,15 +115,17 @@ You can also leave a project voluntarily by pressing the **Leave** button.
 **Important:** However, you will not be able to re-join the project unless someone invites you again.
 
 ## Authentication
-There are three options to KBC account authentication:
+There are three options for authenticating a KBC account:
 
-- google account
-- combination of an email address and a chosen password
-- combination of an email address and a chosen password with Multi-factor authentication
+- Google account
+- Combination of an email address and a chosen password
+- Combination of an email address and a chosen password with multi-factor authentication
 
-### Using Google Account
-If you are using Google Account (Gmail), then you can use to to authenticate to KBC. 
-Simply use the respective button on the login page
+The options are described in detail below.
+
+### Google Account
+If you have a Google Account (Gmail), you can use it to authenticate to KBC. 
+Simply click the respective button on the login page
 
 {: .image-popup}
 ![Screenshot -- Login Page](/management/project/users/login-1.png)
@@ -132,16 +134,17 @@ and follow the Google instructions to authorize KBC.
 No configuration in KBC is necessary to enable Google Account login.
 Bear in mind, however, that the Google Account email must match the email you are using in KBC.
 
-### Multi-factor Authentication (MFA)
-You can enable MFA in your [account settings](/management/account/#Mult_factor_authentication)
+### Multi-Factor Authentication 
+Enable multi-factor authentication (MFA) in your [account settings](/management/account/#multi-factor-authentication).
 You can review the state of MFA for any user in the user list:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
 ## Authorization
-All users listed in the *Users & Settings* page are project administrators which means they can do all operations
-within that project. If you need to limit authorization to certain operations or data, there are two options:
+All users listed on the **Users & Settings** page are project administrators. 
+This means they can do all operations within the project. If you need to limit authorization 
+to certain operations or data, there are two options to choose from:
 
-1. Use [Storage Tokens](/management/project/tokens/) instead, or
-2. Split the project into multiple projects.
+1. Split the project into multiple projects, or
+2. Use [Storage Tokens](/management/project/tokens/) instead of full user accounts.
