@@ -13,7 +13,7 @@ All operations in a KBC project must be authorized. This is technically done usi
 using the [API-first approach](https://apigee.com/about/tags/api-first-0); almost every operation 
 done in KBC is in fact an API call and uses an API Token. A token is 
 valid only within a single project (hence the name Storage API Token). Apart from Storage tokens, 
-there are also [manage tokens](/management/account/#tokens) which are used to perform operations outside individual projects.
+there are also [management tokens](/management/account/#tokens) which are used to perform operations outside individual projects.
 
 Normally, when you are using the user interface, your API token is exchanged automatically with
 the server backend. Therefore you need to work with tokens only when working with KBC programmatically. 
