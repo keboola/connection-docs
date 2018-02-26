@@ -6,12 +6,12 @@ permalink: /extractors/other/simple-aws-s3/
 * TOC
 {:toc}
 
-This extractor loads a single or multiple CSV files from AWS S3 and stores them in a table in Storage.
+This extractor loads a single or multiple CSV files from AWS S3 and stores them in a single table in Storage.
 After creating a new configuration, select the files you want to extract from S3 and determine the way how 
 you save them to KBC Storage. You also need to set up the proper permissions on AWS.
 
 ## Create New Configuration
-Find the AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
+Find the Simple AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/other/simple-aws-s3/ui1.png)
