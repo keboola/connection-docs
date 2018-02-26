@@ -109,6 +109,9 @@ items:
           - url: /extractors/other/pingdom/
             title: Pingdom
 
+          - url: /extractors/other/simple-aws-s3/
+            title: Simple AWS S3
+
           - url: /extractors/other/what3words/
             title: What3words Augmentation
 

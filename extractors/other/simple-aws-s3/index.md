@@ -10,6 +10,8 @@ This extractor loads a single or multiple CSV files from AWS S3 and stores them 
 After creating a new configuration, select the files you want to extract from S3 and determine the way how 
 you save them to KBC Storage. You also need to set up the proper permissions on AWS.
 
+For more complex AWS S3 extractor please see [AWS S3 Extractor](/extractors/other/aws-s3).
+
 ## Create New Configuration
 Find the Simple AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
 
