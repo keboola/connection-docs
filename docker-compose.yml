@@ -3,7 +3,7 @@ jekyll:
   tty: true
   stdin_open: true
   volumes:
-    - ./:/code
+    - ./:/code:cached
   working_dir: /code
   ports:
     - "4000:4000"
