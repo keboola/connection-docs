@@ -7,7 +7,7 @@ jekyll:
   working_dir: /code
   ports:
     - "4000:4000"
-  command: jekyll serve --watch -H 0.0.0.0 --force_polling --incremental
+  command: jekyll serve --watch -H 0.0.0.0 --force_polling
 
 aws:
   image: quay.io/keboola/aws-cli
