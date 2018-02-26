@@ -3,11 +3,11 @@ jekyll:
   tty: true
   stdin_open: true
   volumes:
-    - ./:/code
+    - ./:/code:cached
   working_dir: /code
   ports:
     - "4000:4000"
-  command: jekyll serve --watch -H 0.0.0.0 --force_polling
+  command: jekyll serve --watch -H 0.0.0.0 --force_polling --incremental
 
 aws:
   image: quay.io/keboola/aws-cli
