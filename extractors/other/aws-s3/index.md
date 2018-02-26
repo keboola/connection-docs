@@ -7,7 +7,7 @@ permalink: /extractors/other/aws-s3/
 {:toc}
 
 This extractor loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables in Storage. 
-Compared to [Simple AWS S3 extractor](/extractors/other/simple-aws-s3) this extractor offers extensive CSV postprocessing and the UI offers further flexibility.
+Compared to [Simple AWS S3 extractor](/extractors/other/simple-aws-s3) this extractor offers extensive CSV postprocessing and the UI offers more flexibility.
 
 After creating a new configuration, select the files you want to extract from AWS S3 and determine the way how 
 you save them to KBC Storage. You also need to set up the proper permissions on AWS.
@@ -63,7 +63,9 @@ You can add the following Policy Document as an Inline Policy to an AWS user:
 {: .image-popup}
 ![Screenshot - List tables](/extractors/other/aws-s3/ui9.png)
 
-The configuration can extract as many tables as you wish. The list is fully searchable and you can delete or disable each table,
+The configuration can extract as many tables as you wish. 
+Each table has different settings (key, load type, etc.), but they all share the same credentials. 
+The list is fully searchable and you can delete or disable each table,
 or you can explicitly run extraction of only one table. Also the extraction order of the tables can be changed.  
 
 ## Adding Tables
@@ -71,8 +73,6 @@ or you can explicitly run extraction of only one table. Also the extraction orde
 {: .image-popup}
 ![Screenshot - Create table](/extractors/other/aws-s3/ui3.png)
 
-You can create multiple tables from files stored in your AWS S3 bucket(s). Each table has different settings 
-(key, load type, etc.), but they all share the same credentials. 
 To create a new table click the **New Table** button and assign a name. 
 This name will be used to create the destination table name in Storage and can be modified.
  
@@ -95,7 +95,8 @@ This section allows you to set up
 
  - **Wildcard** - S3 key is used as a prefix and all available files with the prefix will be downloaded
  - **Subfolders** - Available only with **Wildcard** turned on. The extractor will also process all subfolders.
- - **New Files Only** - The extractor will keep track of downloaded files and will continue on the next run.
+ - **New Files Only** - The extractor will keep track of downloaded files and will continue with the unprocessed files 
+ on the next run.
  - **Decompress** - All downloaded files will be decompressed (currently supporting ZIP and GZIP). 
  Please note, ZIP files can contain multiple files, which can lead to ambiguity. We recommend using GZIP only.
 
@@ -104,13 +105,11 @@ This section allows you to set up
 {: .image-popup}
 ![Screenshot - Save Settings](/extractors/other/aws-s3/ui6.png)
 
-The initial value in **Table Name** is derived from the configuration name. You can change it any time, but the bucket, 
+ - The initial value in **Table Name** is derived from the configuration table name. You can change it any time, but the bucket, 
 where the table will be saved to, cannot be changed.
-
-**Incremental Load** will turn on incremental loading to Storage. Result of the incremental load depends on other settings 
+ - **Incremental Load** will turn on incremental loading to Storage. Result of the incremental load depends on other settings 
 (mainly **Primary Key**).
-
-**Delimiter** and **Enclosure** specify the CSV settings.
+ - **Delimiter** and **Enclosure** specify the CSV settings.
 
 ### Header & Primary Key
 
@@ -119,9 +118,9 @@ where the table will be saved to, cannot be changed.
 
 The table columns 
 
- - **Set manually** - This option enables the **Set Headers** settings to manually specify all columns in the table.
- - **Read from the file(s) header** - This option assumes that each file has a header as it's first line. 
- A random file will be chosen to extrat the headers and the first line in all files will be removed.
+ - **Set manually** - This option enables the **Set Headers** input to manually specify all columns in the table.
+ - **Read from the file(s) header** - This option assumes that each file has a header on the first line. 
+ A random file will be chosen to extract the header and the first line in all files will be removed.
  - **Generated automatically** - The columns will be named sequentially as `col_1`, `col_2` and so on.
 
 **Primary Key** can be used to specify Primary key in storage, which can be used with **Incremental Load** 
@@ -141,7 +140,7 @@ adds row number in the source file.
 {: .image-popup}
 ![Screenshot - Header & Primary Key](/extractors/other/aws-s3/ui10.png)
 
-For more features, you can switch configuration of each table to *Power User Mode* (use the **Open JSON editor** link).
+For more features you can switch configuration of each table to *Power User Mode* (use the **Open JSON editor** link).
 This opens an editor with the full configuration in JSON. This includes configuration of the component (all options 
 described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor)) and also the 
 processors (to learn more about processors see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
