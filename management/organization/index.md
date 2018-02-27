@@ -19,7 +19,7 @@ To see the organization a project is assigned to, go to **Users & Settings** ---
 {: .image-popup}
 ![Screenshot - Project Settings](/management/organization/project-detail.png)
 
-Each organization is assigned to a **Maintainer** (either Keboola or Keboola Partner), 
+Each organization is assigned to a **maintainer** (either Keboola or Keboola Partner), 
 who is also primarily responsible for L1 support unless agreed otherwise. 
 
 All organization members are full members and as such can **add and remove** other members. 

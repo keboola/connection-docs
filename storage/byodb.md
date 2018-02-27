@@ -37,6 +37,6 @@ If you want to **create a new project** on your own database, follow these steps
     - For Redshift --- `host`, `username`, `password` and `region` are [required](http://docs.keboolamanagementapi.apiary.io/#reference/super-storage-backends-management/storage-backend-collection/create-new-backend).
     - For Snowflake --- `user`, `warehouse` and `password` are [required](http://docs.keboolamanagementapi.apiary.io/#reference/super-storage-backends-management/storage-backend-collection/create-new-backend).
     - For S3 --- `AWSKey`, `Secret` and `name` of the bucket for storage are [required](http://docs.keboolamanagementapi.apiary.io/#reference/super-file-storage-management/file-storage-collection/create-new-storage).
-5. Contact your [Maintainer](/management/support/) or [Support](mailto:support@keboola.com), and request a new 
+5. Contact your [maintainer](/management/support/) or [support](mailto:support@keboola.com), and request a new 
 project (or project migration). Provide us with the credentials and, in case of project migration, also with the 
 project ID (or URL) and preferred maintenance window.

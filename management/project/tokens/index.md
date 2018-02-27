@@ -79,7 +79,7 @@ the token detail page. Click on the token you are interested in:
 In the **Events** tab, you can see all operations performed by that token:
 
 {: .image-popup}
-![Screenshot - Token List](/management/project/tokens/token-list.png)
+![Screenshot - Token List](/management/project/tokens/events.png)
 
 *Note: History of token operations is kept for **6 months**. If you are interested in 
 events associated with a particular storage object, view the events in [Storage](/storage/).*
