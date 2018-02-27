@@ -6,18 +6,23 @@ permalink: /management/account/
 * TOC
 {:toc}
 
-Account management allows you to configure your own account. You can reach account settings from two
-places --- either from the Keboola Connection home page:
+Account management allows you to configure your own account. 
+You can reach your account settings from two places:
+
+1. Keboola Connection home page
+2. Projects 
+
+Go to the Keboola Connection home page and select **Account Settings** in the little dropdown box on the right:
 
 {: .image-popup}
 ![Screenshot -- Account Settings](/management/account/account-setting-1.png)
 
-or from any project:
+Or, find the **Account Settings** page from any of your projects:
 
 {: .image-popup}
 ![Screenshot -- Account Settings](/management/account/account-setting-2.png)
 
-On the account settings page, you can do the following:
+On the **Account Settings** page, you can do the following:
 
 - [Change your password](#changing-password)
 - Enable or disable [multi-factor authentication](#multi-factor-authentication)
@@ -32,7 +37,7 @@ To change your password, go to your account settings --- the **Account & Securit
 {: .image-popup}
 ![Screenshot -- Account Settings](/management/account/change-password.png)
 
-First you need to enter your old password. Note that you cannot change your email address 
+First you need to enter your old password. Remember you cannot change your email address 
 because it is considered as an identifier; you have to create a new account.
 
 ## Multi-Factor Authentication
@@ -58,7 +63,7 @@ you will be prompted to enter the MFA code obtained from your device:
 ## Notifications
 Notifications are announcements sent by Keboola employees in case of important platform changes which
 are affecting any of your projects. These mostly include deprecation of old components and migration reminders.
-All of these changes are announced in advance on the [Status page](http://status.keboola.com/).
+All of these changes are announced in advance on the [status page](http://status.keboola.com/).
 Notifications are also sent when the [project limits](/management/project/limits/) are exceeded.
 
 {: .image-popup}
@@ -68,7 +73,7 @@ On the notifications page, you can mark notifications as read. Unread notificati
 red dot in the UI.
 
 ## Promo Codes
-Promo codes are promotional codes you may receive to create a new project. They are not applied to existing 
+You may receive promotional codes to create a new project. They are not applied to existing 
 projects but are typically used for ad hoc projects, hackatons, and PoCs.
 
 {: .image-popup}
@@ -79,10 +84,10 @@ On the **Access Tokens** page, you can create tokens for the [Management API](ht
 Do not confuse them with [Storage API tokens](/management/project/tokens/), which are used for operations 
 within a project. Management tokens are used for project-independent operations such as creating and moving projects, 
 creating organizations and projects monitoring. This means that the Management API offers some features which are 
-not available from the UI yet. Unless you need the features or you have other reasons to work with
-the Management API, there is no need to create a Management API token.
+not available from the UI yet. Unless you need the features or have other reasons to work with
+the Management API, there is no need to create a management token.
 
-To create a Management API token, click the **New Token** button in the **Access Tokens** section:
+To create a management token, click the **New Token** button in the **Access Tokens** section:
 
 {: .image-popup}
 ![Screenshot -- Manage Tokens](/management/account/manage-tokens.png)
@@ -92,9 +97,11 @@ Fill in an arbitrary token name and click the **Create Token** button:
 {: .image-popup}
 ![Screenshot -- Create Manage Token](/management/account/manage-token-create.png)
 
-The token will be shown to you. Be sure to note it as there is no way to retrieve a management token.
+The token will be shown to you. 
+
+**Important:** Be sure to note it --- it cannot be retrieved!
 
 {: .image-popup}
 ![Screenshot -- Manage Token Created](/management/account/manage-token-created.png)
 
-Management tokens always expire. However, we also advise you to delete any management tokens you are not using.
+Despite the fact that management tokens always expire, we advise you to delete the ones you are not using.
