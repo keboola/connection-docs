@@ -37,8 +37,3 @@ to be accessed directly from the internet. The SSH connection is encrypted and u
 
 Find detailed instructions for setting up an SSH tunnel in the [developer documentation](https://developers.keboola.com/integrate/database/).
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
-
-## Azure-hosted MS SQL Server
-A MS SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.microsoft.net`.
-The `[srvName]` is not an instance name, so the instance name should be left blank.
-But the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
