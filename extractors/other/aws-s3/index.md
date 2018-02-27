@@ -58,16 +58,6 @@ You can add the following Policy Document as an Inline Policy to an AWS user:
 }
 {% endhighlight %}
 
-## Listing Tables
-
-{: .image-popup}
-![Screenshot - List tables](/extractors/other/aws-s3/ui9.png)
-
-The configuration can extract as many tables as you wish. 
-Each table has different settings (key, load type, etc.), but they all share the same credentials. 
-The list is fully searchable and you can delete or disable each table,
-or you can explicitly run extraction of only one table. Also the extraction order of the tables can be changed.  
-
 ## Adding Tables
 
 {: .image-popup}
@@ -76,6 +66,18 @@ or you can explicitly run extraction of only one table. Also the extraction orde
 To create a new table click the **New Table** button and assign a name. 
 This name will be used to create the destination table name in Storage and can be modified.
  
+## Listing Tables
+
+{: .image-popup}
+![Screenshot - List tables](/extractors/other/aws-s3/ui9.png)
+
+The configuration can extract as many tables as you wish. 
+The list is fully searchable and you can delete or disable each table,
+or you can explicitly run extraction of only one table. Also the extraction order of the tables can be changed.  
+
+## Modifying a Table
+
+Each table has different settings (key, load type, etc.), but they all share the same AWS credentials. 
 
 ### Specifying Files to Download
 
@@ -93,7 +95,7 @@ The search key can be a path to a single file or a prefix to multiple files
 
 This section allows you to set up 
 
- - **Wildcard** - S3 key is used as a prefix and all available files with the prefix will be downloaded
+ - **Wildcard** - S3 key is used as a prefix and all available files matching the prefix will be downloaded. 
  - **Subfolders** - Available only with **Wildcard** turned on. The extractor will also process all subfolders.
  - **New Files Only** - The extractor will keep track of downloaded files and will continue with the unprocessed files 
  on the next run.
@@ -105,9 +107,9 @@ This section allows you to set up
 {: .image-popup}
 ![Screenshot - Save Settings](/extractors/other/aws-s3/ui6.png)
 
- - The initial value in **Table Name** is derived from the configuration table name. You can change it any time, but the bucket, 
+ - The initial value in **Table Name** is derived from the configuration table name. You can change it any time, but the [Storage bucket](/storage/buckets/), 
 where the table will be saved to, cannot be changed.
- - **Incremental Load** will turn on incremental loading to Storage. Result of the incremental load depends on other settings 
+ - **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). Result of the incremental load depends on other settings 
 (mainly **Primary Key**).
  - **Delimiter** and **Enclosure** specify the CSV settings.
 
@@ -153,4 +155,5 @@ to the visual form and vice versa.
 
  - The extractor can only download 1000 files at once. For downloading more files please use **New Files Only** feature 
  and run the configuration multiple times.
+ - All files stored in [AWS Glacier](https://aws.amazon.com/glacier/) are ignored.
 
