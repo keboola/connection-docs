@@ -6,11 +6,12 @@ permalink: /extractors/other/simple-aws-s3/
 * TOC
 {:toc}
 
-This extractor loads a single or multiple CSV files from AWS S3 and stores them in a single table in Storage.
+This extractor loads a single or multiple CSV files from AWS S3 and stores them in a **single table** in Storage.
 After creating a new configuration, select the files you want to extract from S3 and determine the way how 
-you save them to KBC Storage. You also need to set up the proper permissions on AWS.
+you save them to KBC Storage. You also need to set up the proper permissions in [AWS](#aws-credentials).
 
-For more complex AWS S3 extractor please see [AWS S3 Extractor](/extractors/other/aws-s3).
+For a more complex AWS S3 extractor allowing you to use multiple S3 buckets and multiple tables in Storage please 
+see [AWS S3 Extractor](/extractors/other/aws-s3).
 
 ## Create New Configuration
 Find the Simple AWS S3 Extractor in the list of extractors and create a new configuration. Name it.
@@ -29,12 +30,30 @@ Find the Simple AWS S3 Extractor in the list of extractors and create a new conf
 In the first part of the configuration, specify the AWS S3 bucket and the filename (key). 
 The bucket can be in any AWS region and the key must point to a single file unless you check the **Wildcard** checkbox.
 
-All files stored in Glacier will be ignored.
+All files stored in [AWS Glacier](https://aws.amazon.com/glacier/) are ignored.
 
 ### Wildcard
 
 If the Wildcard option is turned on, all files in S3 with the defined Key prefix will be downloaded. 
-They need to have the same header. The subfolders matching the prefix will be ignored. 
+They need to have the same header. The subfolders matching the prefix will be ignored.
+
+**Example**
+
+The following folder and file structure is stored in AWS S3 bucket.
+
+```
+/file1.csv
+/file2.csv
+/file-folder/file1.csv
+/folder/file1.csv
+``` 
+
+If you set the **Key** to `file` and check the **Wildcard** checkbox, the following files will be downloaded:
+
+```
+/file1.csv
+/file2.csv
+``` 
 
 ## Saving to Storage
 
