@@ -28,7 +28,7 @@ Find the Simple AWS S3 Extractor in the list of extractors and create a new conf
 ### Bucket and Key
 
 In the first part of the configuration, specify the AWS S3 bucket and the filename (key). 
-The bucket can be in any AWS region and the key must point to a single file unless you check the **Wildcard** checkbox.
+The S3 bucket can be in any AWS region and the key must point to a single file unless you check the **Wildcard** checkbox.
 
 All files stored in [AWS Glacier](https://aws.amazon.com/glacier/) are ignored.
 
@@ -77,12 +77,12 @@ To change the primary key of an existing table, go to the table detail in Storag
 ![Screenshot - AWS Credentials configuration](/extractors/other/simple-aws-s3/ui3.png)
 
 
-Use the AWS Access Key Id and Secret Access Key with read permissions to the desired bucket and file(s). 
+Use the AWS Access Key Id and Secret Access Key with read permissions to the desired S3 bucket and file(s). 
 Make sure that this AWS Access Key ID has the correct permissions:
  
  - `s3:GetObject` for the given key/wildcard
  - `s3:ListBucket` to access all wildcard files
- - `s3:GetBucketLocation` to determine the bucket region
+ - `s3:GetBucketLocation` to determine the S3 bucket region
  
 You can add the following Policy Document as an Inline Policy to an AWS user:
 

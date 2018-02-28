@@ -26,12 +26,12 @@ In order to access files in S3 you need to set up AWS credentials.
 {: .image-popup}
 ![Screenshot - AWS Credentials](/extractors/other/aws-s3/ui2.png)
 
-Use the AWS Access Key Id and Secret Access Key with read permissions to the desired bucket(s) and file(s). 
+Use the AWS Access Key Id and Secret Access Key with read permissions to the desired S3 bucket(s) and file(s). 
 Make sure that this AWS Access Key ID has the correct permissions:
  
  - `s3:GetObject` for the given key/wildcard
  - `s3:ListBucket` to access all wildcard files
- - `s3:GetBucketLocation` to determine the bucket(s) region
+ - `s3:GetBucketLocation` to determine the S3 bucket(s) region
  
 You can add the following Policy Document as an Inline Policy to an AWS user:
 
@@ -99,8 +99,8 @@ This section allows you to set up
  - **Subfolders** - Available only with **Wildcard** turned on. The extractor will also process all subfolders.
  - **New Files Only** - The extractor will keep track of downloaded files and will continue with the unprocessed files 
  on the next run.
- - **Decompress** - All downloaded files will be decompressed (currently supporting ZIP and GZIP). 
- Please note, ZIP files can contain multiple files, which can lead to ambiguity. We recommend using GZIP only.
+ - **Decompress** - All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives 
+ will be imported into a single Storage table.
 
 ### Save Settings
 
