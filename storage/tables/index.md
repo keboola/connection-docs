@@ -43,7 +43,7 @@ An alias table can be filtered by a simple condition.
 ![Screenshot - Create Simple alias](/storage/tables/create-simple-alias.png)
 
 If you select any table from any bucket in Storage, detailed information about the table will be displayed 
-on the right side of your screen. This is what we refer to as the **Table detail** throughout our documentation.
+on the right side of your screen. This is what we refer to as the **table detail** throughout our documentation.
 
 {: .image-popup}
 ![Screenshot - Simple alias result](/storage/tables/create-simple-alias-result.png)
