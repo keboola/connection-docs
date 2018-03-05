@@ -71,6 +71,9 @@ their columns and relations between them.
 {: .image-popup}
 ![MongoDB new export filled](/extractors/database/mongodb/04-new-export-filled.png)
 
+*Tip: Export few documents using the [Raw Export Mode](#raw-export-mode) first -- it will help you see
+document structure (in Strict Format) for which you need to write mapping.*
+
 ### Primary Key
 
 Since MongoDB identifies each document in a collection uniquely by `_id`, we recommend to set
@@ -95,8 +98,43 @@ the data import.*
 ### Other Data Types
 
 To handle MongoDB data types correctly, define mapping similarly to the following example for
-`MongoId`, `ISODate` and `NumberLong` data types:
+`MongoId`, `ISODate` and `NumberLong` data types.
 
+
+<table class="table table-bordered">
+<tr>
+<td>Document</td>
+<td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5a9d1e9b00c99bbb33c9863a"),
+    "publishedAt" : ISODate("2018-03-05T10:40:27.938Z"),
+    "views" : NumberLong(1)
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
+<td>
+{% highlight json %}
+{
+    "_id": {
+        "$oid": "5a9d1e9b00c99bbb33c9863a"
+    },
+    "publishedAt": {
+        "$date": "2018-03-05T10:40:27.938Z"
+    },
+    "views": {
+        "$numberLong": "1"
+    }
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Mapping</td>
+<td>
 {% highlight json %}
 {
     "_id.$oid": "id",
@@ -104,8 +142,9 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
     "views.$numberLong": "views"
 }
 {% endhighlight %}
-
-### Mapping Examples
+</td>
+</tr>
+</table>
 
 Check out [more mapping examples](/extractors/database/mongodb/mapping/).
 
@@ -116,6 +155,17 @@ In the raw export mode, documents are exported as plain JSON strings.
 <table class="table table-bordered">
 <tr>
 <td>Document</td>
+<td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
+    "name" : "MongoDB extractor"
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
 <td>
 {% highlight json %}
 {
@@ -148,7 +198,6 @@ In the raw export mode, documents are exported as plain JSON strings.
 
 </td>
 </tr>
-</tbody>
 </table>
 
 ## Run Extractor

@@ -12,6 +12,17 @@ permalink: /extractors/database/mongodb/mapping/
 <tr>
 <td>Document</td>
 <td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
+    "name" : "MongoDB extractor"
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
+<td>
 {% highlight json %}
 {
     "_id": {
@@ -45,7 +56,6 @@ extractors
 
 </td>
 </tr>
-</tbody>
 </table>
 
 ## Defining Primary Key
@@ -53,6 +63,16 @@ extractors
 <table class="table table-bordered">
 <tr>
 <td>Document</td>
+<td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5716054bee6e764c94fa7ddd")
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
 <td>
 {% highlight json %}
 {
@@ -91,7 +111,6 @@ extractors
 
 </td>
 </tr>
-</tbody>
 </table>
 
 ## With Nested Documents
@@ -99,6 +118,31 @@ extractors
 <table class="table table-bordered">
 <tr>
 <td>Document</td>
+<td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
+    "name" : "MongoDB extractor",
+    "revisions" : [
+        {
+            "id" : "1c6262e",
+            "desc" : "First version"
+        },
+        {
+            "id" : "68fc980",
+            "desc" : "Second version"
+        }
+    ],
+    "status" : {
+        "isActive" : 1,
+        "isDeleted" : 0
+    }
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
 <td>
 {% highlight json %}
 {
@@ -172,7 +216,6 @@ As you can see, joining those two tables will be as easy as pie.
 
 </td>
 </tr>
-</tbody>
 </table>
 
 
@@ -182,6 +225,22 @@ As you can see, joining those two tables will be as easy as pie.
 <table class="table table-bordered">
 <tr>
 <td>Document</td>
+<td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
+    "name" : "MongoDB extractor",
+    "tags" : [
+        "keboola",
+        "extractor",
+        "mongodb"
+    ]
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
 <td>
 {% highlight json %}
 {
@@ -244,7 +303,6 @@ extractors-tags
 
 </td>
 </tr>
-</tbody>
 </table>
 
 
@@ -253,6 +311,25 @@ extractors-tags
 <table class="table table-bordered">
 <tr>
 <td>Documents</td>
+<td>
+{% highlight javascript %}
+[
+    {
+        "_id" : ObjectId("764c94fa7ddd5716054bee6e"),
+        "name" : "MySQL extractor",
+        "isActive" : false
+    }
+    {
+        "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
+        "name" : "MongoDB extractor",
+        "isActive" : true
+    }
+]
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Documents in Strict Mode</td>
 <td>
 {% highlight json %}
 [
@@ -304,5 +381,4 @@ extractors
 
 </td>
 </tr>
-</tbody>
 </table>
