@@ -45,7 +45,6 @@ extractors
 
 </td>
 </tr>
-</tbody>
 </table>
 
 ## Defining Primary Key
@@ -91,7 +90,6 @@ extractors
 
 </td>
 </tr>
-</tbody>
 </table>
 
 ## With Nested Documents
@@ -172,7 +170,6 @@ As you can see, joining those two tables will be as easy as pie.
 
 </td>
 </tr>
-</tbody>
 </table>
 
 
@@ -244,7 +241,6 @@ extractors-tags
 
 </td>
 </tr>
-</tbody>
 </table>
 
 
@@ -304,5 +300,4 @@ extractors
 
 </td>
 </tr>
-</tbody>
 </table>

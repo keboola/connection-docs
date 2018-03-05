@@ -148,7 +148,6 @@ In the raw export mode, documents are exported as plain JSON strings.
 
 </td>
 </tr>
-</tbody>
 </table>
 
 ## Run Extractor
