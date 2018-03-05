@@ -9,7 +9,7 @@ can also be used instead of repeated [manual imports of CSV](/tutorial/load/) fi
 
 Tables only get imported with the extractor running. The import is **not** triggered by an email 
 being sent or received. When running, the extractor will import all emails received since its previous run. 
-Therefore it is a good idea to set up Pigeon Importer in a [**scheduled** orchestration](/orchestrator/scheduling/). 
+Therefore it is a good idea to set up Pigeon in a [**scheduled** orchestration](/orchestrator/scheduling/). 
 
 ## Create New Configuration
 Find Pigeon in the Extractors section and create a new configuration. 
@@ -18,7 +18,7 @@ you want to better organize your data. Let's say one configuration would load yo
 another one your yearly reports.
  
 {: .image-popup}
-![Screenshot - Create New Pigeon Importer Configuration](/extractors/communication/pigeon/01-create-new-config.png)
+![Screenshot - Create New Pigeon Configuration](/extractors/communication/pigeon/01-create-new-config.png)
 
 Choose a meaningful name for your configuration.
 
