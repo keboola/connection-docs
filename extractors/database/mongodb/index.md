@@ -98,7 +98,35 @@ the data import.*
 ### Other Data Types
 
 To handle MongoDB data types correctly, define mapping similarly to the following example for
-`MongoId`, `ISODate` and `NumberLong` data types:
+`MongoId`, `ISODate` and `NumberLong` data types.
+
+#### Document
+
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5a9d1e9b00c99bbb33c9863a"),
+    "publishedAt" : ISODate("2018-03-05T10:40:27.938Z"),
+    "views" : NumberLong(1)
+}
+{% endhighlight %}
+
+#### Document in Strict Mode
+
+{% highlight json %}
+{
+    "_id": {
+        "$oid": "5a9d1e9b00c99bbb33c9863a"
+    },
+    "publishedAt": {
+        "$date": "2018-03-05T10:40:27.938Z"
+    },
+    "views": {
+        "$numberLong": "1"
+    }
+}
+{% endhighlight %}
+
+#### Mapping
 
 {% highlight json %}
 {
