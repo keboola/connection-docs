@@ -71,6 +71,9 @@ their columns and relations between them.
 {: .image-popup}
 ![MongoDB new export filled](/extractors/database/mongodb/04-new-export-filled.png)
 
+*Tip: Export few documents using the [Raw Export Mode](#raw-export-mode) first -- it will help you see
+document structure (in Strict Format) for which you need to write mapping.*
+
 ### Primary Key
 
 Since MongoDB identifies each document in a collection uniquely by `_id`, we recommend to set
