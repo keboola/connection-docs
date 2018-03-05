@@ -100,8 +100,11 @@ the data import.*
 To handle MongoDB data types correctly, define mapping similarly to the following example for
 `MongoId`, `ISODate` and `NumberLong` data types.
 
-#### Document
 
+<table class="table table-bordered">
+<tr>
+<td>Document</td>
+<td>
 {% highlight javascript %}
 {
     "_id" : ObjectId("5a9d1e9b00c99bbb33c9863a"),
@@ -109,9 +112,11 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
     "views" : NumberLong(1)
 }
 {% endhighlight %}
-
-#### Document in Strict Mode
-
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
+<td>
 {% highlight json %}
 {
     "_id": {
@@ -125,9 +130,11 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
     }
 }
 {% endhighlight %}
-
-#### Mapping
-
+</td>
+</tr>
+<tr>
+<td>Mapping</td>
+<td>
 {% highlight json %}
 {
     "_id.$oid": "id",
@@ -135,8 +142,9 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
     "views.$numberLong": "views"
 }
 {% endhighlight %}
-
-### Mapping Examples
+</td>
+</tr>
+</table>
 
 Check out [more mapping examples](/extractors/database/mongodb/mapping/).
 
