@@ -13,7 +13,8 @@ Therefore it is a good idea to set up Pigeon Importer in a [**scheduled** orches
 
 ## Create New Configuration
 Find Pigeon in the Extractors section and create a new configuration. 
-One configuration can only import one table. Let's say one configuration would load your daily data, and
+As each configuration can import multiple tables, there is no need to create more than one unless 
+you want to better organize your data. Let's say one configuration would load your daily data, and
 another one your yearly reports.
  
 {: .image-popup}
