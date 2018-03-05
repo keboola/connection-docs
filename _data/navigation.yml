@@ -56,7 +56,7 @@ items:
             title: Gmail
 
           - url: /extractors/communication/pigeon/
-            title: Pigeon Importer
+            title: Pigeon
 
           - url: /extractors/communication/zendesk/
             title: Zendesk
