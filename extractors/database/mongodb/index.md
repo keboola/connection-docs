@@ -120,6 +120,17 @@ In the raw export mode, documents are exported as plain JSON strings.
 <tr>
 <td>Document</td>
 <td>
+{% highlight javascript %}
+{
+    "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
+    "name" : "MongoDB extractor"
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Document in Strict Mode</td>
+<td>
 {% highlight json %}
 {
     "_id": {
