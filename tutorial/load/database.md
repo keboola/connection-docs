@@ -50,7 +50,7 @@ Now select the tables to import from the dropdown. Each selected table correspon
 {: .image-popup}
 ![Screenshot - Quickstart](/tutorial/load/extractor-db-tableSelector.png)
 
-Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press "Create".
+Select the `accounts`, `user`, and `opportunity` tables and press "Create".
 
 {: .image-popup}
 ![Screenshot - Database Tables Selected](/tutorial/load/extractor-db-tablesSelected.png)
