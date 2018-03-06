@@ -14,7 +14,7 @@ Therefore it is a good idea to set up Pigeon in a [**scheduled** orchestration](
 ## Create New Configuration
 Find Pigeon in the Extractors section and create a new configuration. 
 As each configuration can import multiple tables, there is no need to create more than one unless 
-you want to better organize your data. Let's say one configuration would load your daily data, and
+you want to better organize your data. Let's say one configuration would load your daily data and
 another one your yearly reports.
  
 {: .image-popup}
@@ -26,12 +26,12 @@ Choose a meaningful name for your configuration.
 ![Screenshot - Create Name Confgiruation](/extractors/communication/pigeon/02-choose-name-and-desc.png)
 
 ## User Email Import
-Email address for sending attachments will be generated when the configuration is created. Use the generated address to send .csv files. 
+An email address intended for sending attachments will be generated when the configuration is created. Use it to send .csv files. 
 
 {: .image-popup}
 ![Screenshot - Create New Email Import](/extractors/communication/pigeon/03-create-email-import.png)
 
-Specify the primary key and CSV options if needed in **Import Settings**.
+If needed, specify the primary key and CSV options in **Import Settings**.
 
 {: .image-popup}
 ![Screenshot - Configure email import](/extractors/communication/pigeon/04-import-settings.png)
@@ -47,14 +47,14 @@ Use the following [sample table](/extractors/communication/pigeon/pigeon-importe
 | 2016-03-31 | 15 | 3 | 276 |
 
 With the email message content being completely arbitrary, all that matters is the attached CSV file. 
-It must always adhere to the format specified in *Import Settings*. It can also be [gzipped](http://www.gzip.org/). 
+It must always adhere to the format specified in **Import Settings**. It can also be [gzipped](http://www.gzip.org/). 
 
 Click **Run** and confirm.
 
 {: .image-popup}
 ![Screenshot - List email imports](/extractors/communication/pigeon/05-list-email-imports.png)
 
-After successful extraction you will be able to check the processed data in the imported table by clicking on the link. 
+If the extraction is successful, you will be able to check the processed data in the imported table by clicking on the link. 
 There may be a delay between the time the email is sent, received, and picked up by the importer.
 
 {: .image-popup}
