@@ -157,18 +157,20 @@ table {
         margin: 0 .5em 0 0;
       }
     }
-    form {
-      input {
-        font-weight: normal;
-        display: inline;
-      }
+    .keboola-algolia-docsearch {
+      display: inline-block;
+      line-height: 1.5em;
+      padding: .5em 0;
       @media (min-width: $screen-sm-min) {
+        padding: 1.8em 0 1.8em 1em;
         float: right;
       }
     }
     span.label {
       @include label-variant(#ccc);
       color: $gray;
+      display: inline-block;
+      margin-right: .5em;
     }
   }
 }
