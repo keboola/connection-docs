@@ -11,6 +11,7 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{ '/assets/css/style.css' | prepend: site.baseurl }}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 </head>
 <body>
 {% include gtm-body.html %}
@@ -20,10 +21,12 @@
 				<a href="{{ '/' | prepend: site.baseurl }}" class="logo"><img src="{{ '/assets/img/logo.png' | prepend: site.baseurl }}"></a>
 				<span class="label">USER DOCUMENTATION</span>
 
-				<form role="search" action="{{ '/search/' | prepend: site.baseurl }}">
-					<input name="q" size="30" type="text" class="form-control"
-						   placeholder="Search User Documentation">
-				</form>
+				<div class="keboola-algolia-docsearch">
+					<input size="30" type="text" class="form-control"
+						   id="keboola-algolia-docsearch-dropdown"
+						   placeholder="Search documentation"
+					/>
+				</div>
 			</div>
 		</div>
 
@@ -76,7 +79,7 @@
 		anchors.add();
 	</script>
 	<script src="{{ '/assets/js/magnific-popup.js' | prepend: site.baseurl }}"></script>
-	<script>	
+	<script>
 	$(document).ready(function() {
 	  $('.image-popup').magnificPopup({type:'image', delegate:'img',
 		callbacks: {
@@ -84,5 +87,16 @@
 		}});
 	});
 	</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+  apiKey: 'b7da0600dafd718c7b60406f09c566e4',
+  indexName: 'keboola_help',
+  inputSelector: '#keboola-algolia-docsearch-dropdown',
+  debug: false, // Set debug to true if you want to inspect the dropdown
+  algoliaOptions: {
+    hitsPerPage: 10
+  }
+});
+</script>
 </body>
 </html>
