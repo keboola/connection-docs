@@ -55,8 +55,8 @@ items:
           - url: /extractors/communication/gmail/
             title: Gmail
 
-          - url: /extractors/communication/pigeon/
-            title: Pigeon
+          - url: /extractors/communication/email-attachments/
+            title: Email Attachments
 
           - url: /extractors/communication/zendesk/
             title: Zendesk
