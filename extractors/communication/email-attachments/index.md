@@ -5,13 +5,13 @@ redirect_from:
     - /extractors/communication/pigeon/
 ---
 
-Email Attachments extractor allows you to import data from email attachments to KBC. 
-It extracts data from systems generating exports only as CSV files attached to an email, and
-can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
+This extractor allows you to import data from email attachments to KBC. 
+It extracts data from systems generating exports only as CSV files attached to an email. 
+It can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
 
 Tables only get imported with the extractor running. The import is **not** triggered by an email 
-being sent or received. When running, the extractor will import all emails received since its previous run. 
-Therefore it is a good idea to set up Extractor in a [**scheduled** orchestration](/orchestrator/scheduling/). 
+being sent or received. When running, the extractor imports all emails received since its previous run. 
+Therefore it is a good idea to set up the extractor in a [**scheduled** orchestration](/orchestrator/scheduling/). 
 
 ## Create New Configuration
 Find Email Attachments in the Extractors section and create a new configuration. 
@@ -50,7 +50,7 @@ It must always adhere to the format specified in **Import Settings**. It can als
 Click **Run** and confirm.
 
 If the extraction is successful, you will be able to check the processed data in the imported table by clicking on the link. 
-There may be a delay between the time the email is sent, received, and picked up by the Extractor.
+There may be a delay between the time the email is sent, received, and picked up by the extractor.
 
 {: .image-popup}
 ![Screenshot - Job Detail](/extractors/communication/email-attachments/03-check-processed-data.png)

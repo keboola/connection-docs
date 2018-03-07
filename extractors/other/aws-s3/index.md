@@ -119,15 +119,15 @@ incremental load depends on other settings (mainly **Primary Key**).
 {: .image-popup}
 ![Screenshot - Header & Primary Key](/extractors/other/aws-s3/ui7.png)
 
-The table columns 
+There are three options for determining column names: 
 
- - **Set manually** --- This option enables the **Set Headers** input to manually specify all columns in the table.
+ - **Set headers manually** --- This option enables the **Set Headers** input to manually specify all columns in the table.
  - **Read from the file(s) header** --- This option assumes that each file has a header on the first line. 
  A random file will be chosen to extract the header and the first line in all files will be removed.
  - **Generated automatically** --- The columns will be named sequentially as `col_1`, `col_2` and so on.
 
-**Primary Key** can be used to specify Primary key in storage, which can be used with **Incremental Load** 
-and **New Files Only** to create a configuration, that incrementally loads all new files into a table in Storage. 
+**Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load** 
+and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage. 
 
 
 ### Audit
@@ -143,12 +143,12 @@ adds the row number in the source file.
 {: .image-popup}
 ![Screenshot - Header & Primary Key](/extractors/other/aws-s3/ui10.png)
 
-For more features, you can switch the configuration of each table to the **Power User Mode** (use the *Open JSON editor* link).
-This opens an editor with the full configuration in JSON. This includes the configuration of the component (all options 
+For more features, switch the configuration of each table to the **Power User Mode** by clicking the *Open JSON editor* link.
+Through editing the full JSON configuration you can set up the component (all options 
 described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor)) and also the 
 processors (to learn more about processors, see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
 
-Changing the JSON configuration may render the visual form unable to represent the configuration and switching back may 
+Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may 
 be disabled. Reverting such changes will re-enable the visual form. But whenever possible, the JSON will translate back 
 to the visual form and vice versa. 
 
