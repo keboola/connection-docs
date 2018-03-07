@@ -92,7 +92,10 @@
   apiKey: 'b7da0600dafd718c7b60406f09c566e4',
   indexName: 'keboola_help',
   inputSelector: '#keboola-algolia-docsearch-dropdown',
-  debug: false // Set debug to true if you want to inspect the dropdown
+  debug: false, // Set debug to true if you want to inspect the dropdown
+  algoliaOptions: {
+    hitsPerPage: 10
+  }
 });
 </script>
 </body>
