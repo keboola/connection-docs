@@ -98,9 +98,9 @@ This section allows you to set up the following:
 
  - **Wildcard**: S3 key is used as a prefix, and all available files matching the prefix will be downloaded. 
  - **Subfolders**: Available only with **Wildcard** turned on. The extractor will also process all subfolders.
- - **New Files Only**: The extractor will keep track of the downloaded files and will continue with the unprocessed files 
- on the next run.
- - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives 
+ - **New Files Only** - The extractor will keep track of downloaded files and will continue with the unprocessed files 
+ on the next run. To reset the state, which keeps track of the progress and enables to continue with new files, use the **Reset State** button.
+ - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives >>>>>>> Stashed changes
  will be imported into a single Storage table.
 
 ### Save Settings
