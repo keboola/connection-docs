@@ -9,7 +9,7 @@ extractors that do not fall into any of the above mentioned categories:
 
 - [Simple AWS S3](/extractors/other/simple-aws-s3) --- imports CSV files from a AWS S3 bucket into a single table.
 - [AWS S3](/extractors/other/aws-s3) --- imports CSV files from multiple AWS S3 buckets into multiple tables with additional postprocessing. 
-- [Dark Sky](/extractors/other/dark-sky/) --- look up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
+- [Dark Sky](/extractors/other/dark-sky/) --- looks up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
 - [Generic Extractor](/extractors/other/generic/) --- can be configured to work with virtually any API.
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) --- 
 provides detailed data for locations specified by their names, address or coordinates.

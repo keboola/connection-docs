@@ -97,6 +97,9 @@ items:
           - url: /extractors/other/aws-s3/
             title: AWS S3
 
+          - url: /extractors/other/simple-aws-s3/
+            title: Simple AWS S3
+
           - url: /extractors/other/dark-sky/
             title: Dark Sky (Weather)
 
@@ -108,9 +111,6 @@ items:
 
           - url: /extractors/other/pingdom/
             title: Pingdom
-
-          - url: /extractors/other/simple-aws-s3/
-            title: Simple AWS S3
 
           - url: /extractors/other/what3words/
             title: What3words Augmentation
