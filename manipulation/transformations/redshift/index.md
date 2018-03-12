@@ -3,9 +3,9 @@ title: Redshift Transformation
 permalink: /manipulation/transformations/redshift/
 ---
 
-AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. You can either have your own dedicated cluster in Keboola Connection, or [bring your own cluster](/storage/byodb/).
+AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. Transformations run on
+your own dedicated cluster in Keboola Connection.
 
- - With your own dedicated cluster, all the power is at your hands.
  - If your source data is on Redshift, there is no data transfer.
  - Redshift is a columnar database -- no more indexing, nest JOINs without worries.
  - Redshift is not very friendly when it come to data types, for instance, invalid characters.
