@@ -14,6 +14,7 @@ extractors that do not fall into any of the above mentioned categories:
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) --- 
 provides detailed data for locations specified by their names, address or coordinates.
 - [GoogleDrive](/tutorial/load/googledrive/) --- imports data from external data sheets.
+- [HTTP](/extractors/other/http/) --- imports a CSV file stored on HTTP or HTTPS.
 - [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom; a service for monitoring the uptime and performance of your websites and web applications.
 - [What3words](/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
 - GitHub
