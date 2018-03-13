@@ -9,7 +9,9 @@ This tutorial will guide you through basic usage of Keboola Connection (KBC).
 
 Before you start, make sure you have **basic knowledge of** [SQL](https://en.wikipedia.org/wiki/SQL) and
 **access to a KBC project** (preferably empty). To get set up, either ask one of our partners,
-or ping us at [sales@keboola.com](mailto:sales@keboola.com).
+or ping us at [sales@keboola.com](mailto:sales@keboola.com). If you aim to develop new components for
+KBC, you will get a [development project](https://developers.keboola.com/#development-project) automatically
+when you [register as a developer](https://developers.keboola.com/extend/component/tutorial/)
 
 If developing KBC components is the only reason you need a project for, apply for a
 [development project](/#development-project).
