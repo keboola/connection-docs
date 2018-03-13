@@ -121,10 +121,10 @@ incremental load depends on other settings (mainly **Primary Key**).
 
 There are three options for determining column names: 
 
- - **Set headers manually** --- This option enables the **Set Headers** input to manually specify all columns in the table.
+ - **Set header manually** --- This option enables the **Set Header** input to manually specify all columns in the table.
  - **Read from the file(s) header** --- This option assumes that each file has a header on the first line. 
  A random file will be chosen to extract the header and the first line in all files will be removed.
- - **Generated automatically** --- The columns will be named sequentially as `col_1`, `col_2` and so on.
+ - **Generate automatically** --- The columns will be named sequentially as `col_1`, `col_2` and so on.
 
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load** 
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage. 
@@ -141,7 +141,7 @@ adds the row number in the source file.
 ## Advanced
 
 {: .image-popup}
-![Screenshot - Header & Primary Key](/extractors/other/aws-s3/ui10.png)
+![Screenshot - Advanced](/extractors/other/aws-s3/ui10.png)
 
 For more features, switch the configuration of each table to the **Power User Mode** by clicking the *Open JSON editor* link.
 Through editing the full JSON configuration you can set up the component (all options 
