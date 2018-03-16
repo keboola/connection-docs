@@ -13,7 +13,7 @@ HubSpot is inbound marketing and sales software that helps companies attract vis
 ## Create New Configuration
 Before you start, have a working HubSpot account and get a HubSpot API Key.
 
-### Application API Key
+### Get API Key
 
 Login to [HubSpot](http://www.hubspot.com/) and in top right corner click on the arrow next to your avatar. Then select **Integrations**.
 
@@ -35,7 +35,7 @@ You can easily copy it to your clipboard.
 {: .image-popup}
 ![HubSpot API](/extractors/marketing-sales/hubspot/05-key-clipboard.png)
 
-### Setup Extractor
+### Set Up Extractor
 In the Extractors section, find HubSpot and create a new configuration.
 
 {: .image-popup}

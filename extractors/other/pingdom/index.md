@@ -10,7 +10,7 @@ This extractor helps you import data from [Pingdom](https://www.pingdom.com/).
 
 Pingdom is a service for monitoring the uptime and performance of your websites and web applications.
 
-## Configuring Extractor
+## Configure Extractor
 Before you start, have a working Pingdom account and get a Pingdom API Key.
 
 ### Create New Application API Key
@@ -37,7 +37,7 @@ When registration is finished, take note of the Application Key and save it. You
 {: .image-popup}
 ![Pingdom API key](/extractors/other/pingdom/05-pingdom-api-key.png)
 
-### Setup Extractor
+### Set Up Extractor
 In the Extractors section, find Pingdom and create a new configuration.
 
 {: .image-popup}

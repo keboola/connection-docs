@@ -31,7 +31,7 @@ When the registration is finished, take a note of the API Key and save it. You w
 {: .image-popup}
 ![Zendesk API token](/extractors/communication/zendesk/03-zendesk-api-key.png)
 
-### Setup Extractor
+### Set Up Extractor
 In the Extractors section, find Zendesk and create a new configuration.
 
 {: .image-popup}

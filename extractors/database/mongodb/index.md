@@ -17,9 +17,9 @@ Find MongoDB in the Extractors section. Create a new configuration and name it.
 ![MongoDB add configuration](/extractors/database/mongodb/01-add-configuration.png)
 
 
-## Setup Database Credentials
+## Set Up Database Credentials
 
-Click **Setup Database Credentials** and fill in the form. Then test the new credentials and save them.
+Click **Set Up Database Credentials** and fill in the form. Then test the new credentials and save them.
 Optionally, set up an SSH tunnel.
 
 {: .image-popup}

@@ -6,7 +6,7 @@ permalink: /extractors/other/http/
 * TOC
 {:toc}
 
-This extractor loads a single CSV file from a HTTP/HTTPS URL and stores it Storage. 
+This extractor loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage. 
 
 ## Create New Configuration
 
@@ -15,16 +15,16 @@ Find the HTTP extractor in the list of extractors and create a new configuration
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/other/http/ui1.png)
 
-## Setting Base URL
+## Set Base URL
 
-Base URL is the prefix (eg `htttps://mydomain.com`) for all downloaded CSV files from the given website.  
+A base URL is the prefix (for example, `htttps://mydomain.com`) for all downloaded CSV files from a given website.  
 
 {: .image-popup}
 ![Screenshot - Base URL](/extractors/other/http/ui2.png)
 
-The base URL can also contain folder specification if the same folder is used for all files downloaded using this Base URL. 
+The base URL can also contain folder specification if the same folder is used for all files downloaded using this base URL. 
 
-## Adding Tables
+## Add Tables
 
 {: .image-popup}
 ![Screenshot - Create table](/extractors/other/http/ui3.png)
@@ -32,25 +32,25 @@ The base URL can also contain folder specification if the same folder is used fo
 To create a new table, click the **New Table** button and assign a name. 
 It will be used to create the destination table name in Storage and can be modified.
  
-## Listing Tables
+## List Tables
 
 {: .image-popup}
 ![Screenshot - List tables](/extractors/other/http/ui4.png)
 
 The configuration can extract as many tables as you wish. 
-The list is fully searchable, and you can delete or disable each table. In addition, you can explicitly run extraction of only one table. 
+The list is fully searchable, and you can delete or disable each table. In addition, you can explicitly run an extraction of only one table. 
 The extraction order of the tables can be changed.  
 
-## Modifying Table
+## Modify Table
 
 Each table has different settings (path, load type, etc.) but they all share the same base URL. 
 
-### Specifying File to Download
+### Specify File to Download
 
 {: .image-popup}
 ![Screenshot - S3 Settings](/extractors/other/http/ui5.png)
 
-For each table you have to specify the path. The path has lead to a single CSV file or to an archive (GZ and ZIP are supported), 
+For each table you have to specify a path that leads to a single CSV file or to an archive (GZ and ZIP are supported), 
 which will be imported into a single table in Storage.
 
 ### Save Settings
@@ -79,7 +79,7 @@ There are three options for determining column names:
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load** 
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage. 
 
-## Advanced
+## Advanced Mode
 
 {: .image-popup}
 ![Screenshot - Advanced](/extractors/other/http/ui8.png)

@@ -5,6 +5,9 @@ redirect_from:
     - /extractors/communication/pigeon/
 ---
 
+* TOC
+{:toc}
+
 This extractor allows you to import data from email attachments to KBC. 
 It extracts data from systems generating exports only as CSV files attached to an email. 
 It can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
@@ -26,7 +29,7 @@ Choose a meaningful name for your configuration.
 
 
 ## User Email Import
-An email address intended for sending attachments will be generated when the configuration is created. Use it to send .csv files. 
+An email address for sending attachments will be generated when the configuration is created. Use it to send .csv files. 
 
 {: .image-popup}
 ![Screenshot - Create New Email Import](/extractors/communication/email-attachments/02-create-email-import.png)

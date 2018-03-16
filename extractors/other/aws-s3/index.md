@@ -20,7 +20,7 @@ Find the AWS S3 extractor in the list of extractors and create a new configurati
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/other/aws-s3/ui1.png)
 
-## Setting AWS Credentials
+## Set AWS Credentials
 
 In order to access the files in S3, you need to set up AWS credentials. 
 
@@ -59,7 +59,7 @@ You can add the following policy document as an inline policy to an AWS user:
 }
 {% endhighlight %}
 
-## Adding Tables
+## Add Tables
 
 {: .image-popup}
 ![Screenshot - Create table](/extractors/other/aws-s3/ui3.png)
@@ -67,7 +67,7 @@ You can add the following policy document as an inline policy to an AWS user:
 To create a new table, click the **New Table** button and assign a name. 
 It will be used to create the destination table name in Storage and can be modified.
  
-## Listing Tables
+## List Tables
 
 {: .image-popup}
 ![Screenshot - List tables](/extractors/other/aws-s3/ui9.png)
@@ -76,11 +76,11 @@ The configuration can extract as many tables as you wish.
 The list is fully searchable, and you can delete or disable each table. In addition, you can explicitly run extraction of only one table. 
 The extraction order of the tables can be changed.  
 
-## Modifying Table
+## Modify Table
 
 Each table has different settings (key, load type, etc.) but they all share the same AWS credentials. 
 
-### Specifying Files to Download
+### Specify Files to Download
 
 {: .image-popup}
 ![Screenshot - S3 Settings](/extractors/other/aws-s3/ui4.png)
@@ -138,7 +138,7 @@ and **New Files Only** to create a configuration that incrementally loads all ne
 The extractor can optionally add audit columns to the table. `s3_filename` adds the processed file name and `s3_row_number` 
 adds the row number in the source file. 
 
-## Advanced
+## Advanced Mode
 
 {: .image-popup}
 ![Screenshot - Advanced](/extractors/other/aws-s3/ui10.png)
