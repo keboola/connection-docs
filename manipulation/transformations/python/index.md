@@ -154,7 +154,6 @@ csvdel = ','
 csvquo = '"'
 with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
     writer = csv.writer(out_file, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
-    writer.writeheader()
     lazy_lines = (line.replace('\0', '') for line in in_file)
     reader = csv.reader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
     for row in reader:
@@ -169,13 +168,13 @@ You can simplify the above code using our pre-installed KBC dialect.
 import csv
 
 with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
-    writer = csv.writer(out_file, dialect='kbc')
-    writer.writeheader()
     lazy_lines = (line.replace('\0', '') for line in in_file)
-    reader = csv.reader(lazy_lines, dialect='kbc')
+    reader = csv.DictReader(lazy_lines, dialect='kbc')
+    writer = csv.DictWriter(out_file, dialect='kbc', fieldnames=reader.fieldnames)
+    writer.writeheader()
     for row in reader:
         # do something and write row
-        writer.writerow([row[0] + 'ping', int(row[1]) * 42])
+        writer.writerow({"first": row['first'] + 'ping', "second": int(row['second']) * 42})
 {% endhighlight %}
 
 The `kbc` dialect is automatically available in the transformation environment. If you want it in your local environment,
