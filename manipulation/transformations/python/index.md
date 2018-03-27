@@ -147,6 +147,8 @@ The following piece of code reads a table with some of its columns from the **so
 It then adds *ping* to the first column and multiplies the second column by *42*. After that it saves the row to the **destination.csv** output mapping file.
 
 {% highlight python %}
+import csv
+
 csvlt = '\n'
 csvdel = ','
 csvquo = '"'
@@ -164,6 +166,8 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
 You can simplify the above code using our pre-installed KBC dialect.
 
 {% highlight python %}
+import csv
+
 with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
     writer = csv.writer(out_file, dialect='kbc')
     writer.writeheader()
