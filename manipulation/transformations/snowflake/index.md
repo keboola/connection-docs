@@ -20,7 +20,7 @@ Please [share your migration tips](http://wiki.keboola.com/home/transformations/
 
 ## Limits
 
-- Snowflake queries are **limited** to 3,600 seconds by default.
+- Snowflake queries are **limited** to 900 seconds by default.
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined, but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
