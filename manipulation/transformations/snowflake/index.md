@@ -63,7 +63,7 @@ SELECT "barcolumn" FROM "footable";
 
 ### Timestamp Columns
 By default, Snowflake uses the
-[`DY, DD MON YYYY HH24:MI:SS TZHTZM` format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
+`YYYY-MM-DD HH24:MI:SS.FF3` [format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
 when converting the timestamp column to a character string.
 
 This means that if you create a table in a transformation which uses a `timestamp` column,
@@ -72,7 +72,7 @@ This means that if you create a table in a transformation which uses a `timestam
 CREATE TABLE "ts_test" AS (SELECT CURRENT_TIMESTAMP AS "ts");
 {% endhighlight %}
 
-the table value will come out as `Wed, 19 Oct 2016 01:24:21 -0700` in Storage. If you
+the table value will come out as `2018-04-09 06:43:57.866 -0700` in Storage. If you
 want to output it in a different format, you have to cast the column to a string first, for example:
 
 {% highlight sql %}
@@ -81,6 +81,14 @@ CREATE TABLE "out" AS
 {% endhighlight %}
 
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate from your transformation/sandbox session and the format may change unexpectedly.
+
+**Important:**
+In default US KBC [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) (connection.keboola.com) there are overriden
+[Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) parameters:
+
+- [TIMESTAMP_OUTPUT_FORMAT](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-output-format) - `DY, DD MON YYYY HH24:MI:SS TZHTZM`
+- [TIMESTAMP_TYPE_MAPPING](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-type-mapping) - `TIMESTAMP_LTZ`
+- [TIMESTAMP_DAY_IS_ALWAYS_24H](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-day-is-always-24h) - `yes`
 
 **Important:** Snowflake works with time zones (and [Daylight Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time)),
 requiring you to distinguish between various conversion functions:
