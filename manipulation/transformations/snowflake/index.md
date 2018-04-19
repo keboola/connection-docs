@@ -83,8 +83,8 @@ CREATE TABLE "out" AS
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate from your transformation/sandbox session and the format may change unexpectedly.
 
 **Important:**
-In default US KBC [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) (connection.keboola.com) there are overriden
-[Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) parameters:
+In the default US KBC [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) (connection.keboola.com) the following
+[Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) parameters are overridden:
 
 - [TIMESTAMP_OUTPUT_FORMAT](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-output-format) - `DY, DD MON YYYY HH24:MI:SS TZHTZM`
 - [TIMESTAMP_TYPE_MAPPING](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-type-mapping) - `TIMESTAMP_LTZ`
