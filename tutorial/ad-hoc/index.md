@@ -24,15 +24,15 @@ contains unemployment rates by month. The easiest way to access the data is via
 [Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
 [Bureau of Labor Statistics Data](https://cloud.google.com/bigquery/public-data/bureau-of-labor-statistics).
 
-Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola 
-Connection (KBC) with the help of our BigQuery extractor. Preview the table data in 
+Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola
+Connection (KBC) with the help of our BigQuery extractor. Preview the table data in
 [Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
 
 ## Using BigQuery Extractor
 To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
 querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). Then create a Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
 
-*Note: If setting up the BigQuery extractor seems too complicated to you, export the query results to Google Sheets and 
+*Note: If setting up the BigQuery extractor seems too complicated to you, export the query results to Google Sheets and
 [load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
 ### Preparing
@@ -126,9 +126,9 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 Once the job is finished, click on the names of the tables to inspect their contents.
 
 ## Exploring Data
-To explore the data, go to **Transformations**, and click on [**Sandbox**](/manipulation/transformations/sandbox/). 
-Provided for each user and project automatically, it is an isolated environment in which you can experiment without 
-interfering with any production code. 
+To explore the data, go to **Transformations**, and click on [**Sandbox**](/manipulation/transformations/sandbox/).
+Provided for each user and project automatically, it is an isolated environment in which you can experiment without
+interfering with any production code.
 
 {: .image-popup}
 ![Screenshot - Transformations](/tutorial/ad-hoc/transformation-1.png)
@@ -143,7 +143,7 @@ Select the unemployment rates table (`in.c-keboola-ex-google-bigquery.unemployme
 {: .image-popup}
 ![Screenshot - Sandbox Configuration](/tutorial/ad-hoc/transformation-3.png)
 
-When finished, connect to the web version of the [Jupyter Notebook](http://jupyter.org/). 
+When finished, connect to the web version of the [Jupyter Notebook](http://jupyter.org/).
 It allows you to run arbitrary code by clicking the **Connect** button:
 
 {: .image-popup}
@@ -182,8 +182,8 @@ plt.show()
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-2.png)
 
 ## Adding libraries
-Now that you can experiment with the U.S. unemployment data extracted from Google BigQuery (or any other data extracted in any other way), 
-you can do the same with the EU unemployment data. Available at [Eurostat](http://ec.europa.eu/eurostat), the unemployment 
+Now that you can experiment with the U.S. unemployment data extracted from Google BigQuery (or any other data extracted in any other way),
+you can do the same with the EU unemployment data. Available at [Eurostat](http://ec.europa.eu/eurostat), the unemployment
 dataset is called
 [`tgs00010`](http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tgs00010&plugin=1).
 
@@ -197,15 +197,16 @@ for downloading the data. This could be processed using the
 to import them to KBC, it would be necessary to do additional processing to obtain plain tables.
 
 To save time, use a tool designed for that -- [pyjstat](https://pypi.python.org/pypi/pyjstat/). It is a python library which can read
-JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html). 
+JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html).
 Although this library is not installed by default in the Jupyter Sandbox environment, nothing prevents you from installing it.
 
 ### Working with Custom Libraries
 Use the following code to download the desired data from Eurostat:
 
 {% highlight python %}
-import pip
-pip.main(['install', 'pyjstat', '-q'])
+import subprocess
+import sys
+subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '-q', 'pyjstat'])
 from pyjstat import pyjstat
 dataset = pyjstat.Dataset.read('http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/tgs00010?sex=T&precision=1&unit=PC&age=Y_GE15')
 df = dataset.write('dataframe')
@@ -213,8 +214,7 @@ df.head()
 {% endhighlight %}
 
 The URL was built using the Eurostat [Query Builder](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder).
-Also note that installing a library from within the python code must be done using the `pip.main`
-method and not the usual `pip install`. Now that you have the data, feel free to play with it:
+Also note that installing a library from within the python code must be done using `pip install`. Now that you have the data, feel free to play with it:
 
 {% highlight python %}
 years = df.groupby(df['time'])['value'].mean()
@@ -229,7 +229,7 @@ plt.show()
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-3.png)
 
 ## Wrap-up
-You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly, 
+You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly,
 simply copy&paste it into a [Transformation](http://localhost:4000/tutorial/manipulate/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the

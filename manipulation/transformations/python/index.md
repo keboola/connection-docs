@@ -48,7 +48,9 @@ The latest versions of packages are always installed at the time of the release 
 installed version by calling e.g.:
 
 {% highlight python %}
-pip.main(['install', '--disable-pip-version-check', '--no-cache-dir', '--force-reinstall', 'pandas == 0.20.0'])
+import subprocess
+import sys
+subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-cache-dir', '--force-reinstall', 'pandas==0.20.0'])
 {% endhighlight %}
 
 ### CSV format
