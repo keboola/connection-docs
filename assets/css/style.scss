@@ -62,6 +62,12 @@
 
 $code-font-size: ($font-size-base - 2);
 
+.wf-active {
+  body {
+    font-family: "Lato", $font-family-sans-serif;
+  }
+}
+
 h1 {
   margin-bottom: 1em;
 }
