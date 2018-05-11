@@ -154,7 +154,5 @@ to the visual form and vice versa.
 
 ## Limitations
 
-- The extractor can only download 1,000 files at once. For downloading more files, please use the **New Files Only** feature 
-and run the configuration multiple times.
 - All files stored in [AWS Glacier](https://aws.amazon.com/glacier/) are ignored.
 
