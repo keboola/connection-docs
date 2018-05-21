@@ -71,4 +71,4 @@ Except components marked as deprecated this also covers:
 - Table Content Overview application
 
 Also projects with Redshift backend should be first migrated to Snowflake.
-Keboola support will inform you after project validation it there are any of theses issues.
+Keboola support will inform you after project validation it there are any of these issues.
