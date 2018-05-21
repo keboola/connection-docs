@@ -32,7 +32,7 @@ Input Mapping defines data you have in Storage and want to use in a transformati
 This data is made available as a table for SQL, or as a CSV file for R and Python.
 
 {: .image-popup}
-![Input mapping](/manipulation/transformations/input-mapping.png)
+![Input mapping](/manipulation/transformations/input-mapping-2.png)
 
 Any input mapping has the following options (to see all options, the *Show details* checkbox 
 above the *Source* field must be checked):
@@ -41,7 +41,8 @@ above the *Source* field must be checked):
 - **Destination** --- This is the *Source* table/file name to be used inside the transformation 
 (it fills in automatically, but can be changed); file names should end with `.csv`. 
 - **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
-- **Days** --- If you are into incremental processing, this comes in handy; import only rows changed during a given number of days (`0` downloads all).
+- **Changed in last** --- If you are into incremental processing, this comes in handy; import only rows changed or created within the selected time period.
+ Supported time dimensions are `minutes`, `hours` and `days`.
 - **Data filter** --- Download only rows that will match this single column multiple values filter.
 
 You can combine these options freely. Input mappings for Snowflake, MySQL and Redshift include more options specific to the particular backend:
