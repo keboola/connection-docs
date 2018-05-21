@@ -26,6 +26,7 @@ You can also
 
 - rename your project.
 - [export all project data](/management/project/export/).
+- [migrate project to another region](/management/project/migration/)
 - [delete the project](/management/project/delete/).
 
 Apart from the settings page, there are also [Notifications](/management/account/#notifications) available. To access these
