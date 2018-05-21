@@ -6,7 +6,7 @@ permalink: /management/project/migration/
 * TOC
 {:toc}
 
-Keboola Connection is available in multiple regions — currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com). Each region instance is a completely independent full stack of Keboola Connection services.
+Keboola Connection is available in multiple [regions](https://developers.keboola.com/overview/api/#regions-and-endpoints) — currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com). Each region instance is a completely independent full stack of Keboola Connection services.
 Project is always located in one KBC stack (region). In case you need to migrate project for whatever reason between regions you can achieve that with cooperation with [Keboola Support](/management/support/)
 
 ## Migration steps
@@ -18,7 +18,7 @@ You can proceed a migration in following steps:
 - Keboola Support will run pre-migration validation to check if project can be safely migrated
   - If there are any issues our support will help you resolve them before migrations
 - Keboola Support will migrate a source project into destination project
-  - Snapshot of source project is created and new project is created from the snapshot
+  - Snapshot of source project is created and new project is restored from the snapshot
   - Source project is unchanged and still available
 - New project is now available but it will require
   - Reauthorize all oauth component configurations
@@ -27,10 +27,9 @@ You can proceed a migration in following steps:
   - Enable orchestrations
 - When everything is done old project can be deleted
 
-
 ## What will be migrated
 
-- All projects data and metadata which covers buckets, tables columns
+- All project's data and metadata which covers buckets, tables and columns
 - Configurations of all extractors, writers and applications
 - All transformations
 - All orchestrations.
@@ -46,12 +45,14 @@ You can proceed a migration in following steps:
 ## What won't be migrated
 
 - Encrypted values
-  - Passwords, api keys, etc. stored in extractor, writers and applications configurations
+  - Passwords, API keys, etc. stored in extractor, writers and applications configurations
   - OAuth authorizations
 - Jobs execution history
 - Events and logs
 - Configurations versions
+- Trash
 - Project users
+- Project API tokens
 
 ## Migration from US to EU
 
