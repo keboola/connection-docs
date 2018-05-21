@@ -7,7 +7,7 @@ permalink: /management/project/migration/
 {:toc}
 
 Keboola Connection is available in multiple [regions](https://developers.keboola.com/overview/api/#regions-and-endpoints) — currently in the US (connection.keboola.com) and EU (connection.eu-central-1.keboola.com). Each region instance is a completely independent full stack of Keboola Connection services.
-Project is always located in one KBC stack (region). In case you need to migrate project for whatever reason between regions you can achieve that with cooperation with [Keboola Support](/management/support/)
+Project is always located in one of KBC stacks (regions). In case you need to migrate project for whatever reason between regions you can achieve that in cooperation with [Keboola Support](/management/support/).
 
 ## Migration steps
 
