@@ -21,7 +21,7 @@ You can proceed a migration in following steps:
   - Snapshot of source project is created and new project is restored from the snapshot
   - Source project is unchanged and still available
 - New project is now available but it will require
-  - Reauthorize all oauth component configurations
+  - Reauthorize all OAuth component configurations
   - Provide again encrypted value for components configurations like passwords and API keys
   - Invite users into project
   - Enable orchestrations
