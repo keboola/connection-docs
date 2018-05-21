@@ -65,7 +65,7 @@ These tables are typically derived from the tables/files in the Input mapping. I
 you can use any `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE` or `DELETE` queries to create the desired result.
 
 {: .image-popup}
-![Output mapping](/manipulation/transformations/output-mapping.png)
+![Output mapping](/manipulation/transformations/output-mapping-2.png)
 
 An output mapping has the following options (to see all options, 
 the *Show details* checkbox above the *Source* field must be checked):
