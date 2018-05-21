@@ -33,12 +33,12 @@ You can proceed a migration in following steps:
 - Configurations of all extractors, writers and applications
 - All transformations
 - All orchestrations.
-- Keboola Provisioned snowflake writers will be moved to a new region Snowflake account
-- GoodData projects will be moved to a new region Snowflake account
+- Keboola Provisioned Snowflake writers will be moved to a new region Snowflake account
+- GoodData projects will be moved to a new region GoodData account
 
 ### Important
 
-- Internal timestamp of all data rows will be set to date of migration, so if you are using incremental loads it will fetch all data on first run.
+- Internal timestamp of all data rows will be set to date of migration. So if you are using incremental loads based on [Changed in last](https://help.keboola.com/manipulation/transformations/mappings/#input-mapping) in transformations or writers it will fetch all data on first run.
 - Creation dates and authors of all configurations will be changed
 - Ids of orchestrations will be changed
 
