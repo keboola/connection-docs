@@ -32,7 +32,7 @@ Input Mapping defines data you have in Storage and want to use in a transformati
 This data is made available as a table for SQL, or as a CSV file for R and Python.
 
 {: .image-popup}
-![Input mapping](/manipulation/transformations/input-mapping-2.png)
+![Input mapping](/manipulation/transformations/input-mapping.png)
 
 Any input mapping has the following options (to see all options, the *Show details* checkbox 
 above the *Source* field must be checked):
@@ -65,7 +65,7 @@ These tables are typically derived from the tables/files in the Input mapping. I
 you can use any `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE` or `DELETE` queries to create the desired result.
 
 {: .image-popup}
-![Output mapping](/manipulation/transformations/output-mapping-2.png)
+![Output mapping](/manipulation/transformations/output-mapping.png)
 
 An output mapping has the following options (to see all options, 
 the *Show details* checkbox above the *Source* field must be checked):
