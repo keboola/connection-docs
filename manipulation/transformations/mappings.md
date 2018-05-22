@@ -41,7 +41,8 @@ above the *Source* field must be checked):
 - **Destination** --- This is the *Source* table/file name to be used inside the transformation 
 (it fills in automatically, but can be changed); file names should end with `.csv`. 
 - **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
-- **Days** --- If you are into incremental processing, this comes in handy; import only rows changed during a given number of days (`0` downloads all).
+- **Changed in last** --- If you are into incremental processing, this comes in handy; import only rows changed or created within the selected time period.
+ Supported time dimensions are `minutes`, `hours` and `days`.
 - **Data filter** --- Download only rows that will match this single column multiple values filter.
 
 You can combine these options freely. Input mappings for Snowflake, MySQL and Redshift include more options specific to the particular backend:
