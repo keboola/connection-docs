@@ -47,6 +47,7 @@ You can proceed a migration in following steps:
 - Encrypted values
   - Passwords, API keys, etc. stored in extractor, writers and applications configurations
   - OAuth authorizations
+- [Files](/storage/file-uploads/)
 - Jobs execution history
 - Events and logs
 - Configurations versions
