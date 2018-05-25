@@ -23,6 +23,8 @@ You can proceed a migration in following steps:
 - New project is now available but it will require.
   - Reauthorize all OAuth component configurations.
   - Provide again encrypted value for components configurations like passwords and API keys.
+  - Whitelist new [IP addresses](/extractors/ip-addresses/).
+  - Setup SSH tunnels for extractor and writers.
   - Invite users into project.
   - Enable orchestrations.
 - When everything is done old project can be deleted.
@@ -41,12 +43,14 @@ You can proceed a migration in following steps:
 - Internal timestamp of all data rows will be set to date of migration. So if you are using incremental loads based on [Changed in last](https://help.keboola.com/manipulation/transformations/mappings/#input-mapping) in transformations or writers it will fetch all data on first run.
 - Creation dates and authors of all configurations will be changed.
 - Ids of orchestrations will be changed.
+- Each KBC stack have different set of assigned [IP addresses](/extractors/ip-addresses/)
 
 ## What won't be migrated
 
 - Encrypted values
   - Passwords, API keys, etc. stored in extractor, writers and applications configurations
   - OAuth authorizations
+  - Extractors and writers SSH Tunnel private keys
 - [Files](/storage/file-uploads/)
 - Jobs execution history
 - Events and logs
