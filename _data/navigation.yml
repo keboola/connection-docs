@@ -229,6 +229,9 @@ items:
           - url: /management/project/export/
             title: Data Takeout
 
+          - url: /management/project/migration/
+            title: Project Migration
+
           - url: /management/project/delete/
             title: Project Deletion
 
