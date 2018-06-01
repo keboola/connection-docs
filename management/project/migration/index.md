@@ -81,7 +81,7 @@ Except components marked as deprecated this also covers:
 - Table Content Overview application
 
 Also projects with a Redshift backend should be first migrated to Snowflake.
-`MySQL` transformations should be also first migrated to Snowflake.
+Deprecated `MySQL` transformations are not supported in EU region and should be migrated to Snowlfake first.
 
 Keboola support will inform you after completing the project validation if there are any of these issues with your 
 project.
