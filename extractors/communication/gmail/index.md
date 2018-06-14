@@ -1,16 +1,16 @@
 ---
-title: Gmail
+title: Gmail Messages
 permalink: /extractors/communication/gmail/
 ---
 
 * TOC
 {:toc}
 
-The Gmail extractor allows you to fetch data from your Gmail account.
+The Gmail Messages extractor allows you to fetch data from your Gmail account.
 
 ## Create New Configuration
 
-Find Gmail in the Extractors section, create a new configuration and name it.
+Find Gmail Messages in the Extractors section, create a new configuration and name it.
 
 {: .image-popup}
 ![Gmail - add configuration](/extractors/communication/gmail/01-add-configuration.png)

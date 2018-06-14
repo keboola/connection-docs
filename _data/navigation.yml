@@ -53,7 +53,7 @@ items:
         title: Communication
         items:
           - url: /extractors/communication/gmail/
-            title: Gmail
+            title: Gmail Messages
 
           - url: /extractors/communication/email-attachments/
             title: Email Attachments
@@ -83,7 +83,7 @@ items:
         title: Social
         items:
           - url: /extractors/social/facebook/
-            title: Facebook
+            title: Facebook Pages
           - url: /extractors/social/instagram/
             title: Instagram
           - url: /extractors/social/twitter/
