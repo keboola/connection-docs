@@ -21,7 +21,12 @@ Find **YouTube** in the list of extractors, and create a new configuration. Name
 **Authorize the account** to be redirected to Google, and authorize the extractor to access your YouTube data.
 
 ## Configuration
-Either choose one of the predefined templates, or define your own configuration directly using the JSON editor. 
+To configure the extractor, choose one of the two predefined **templates**: 
+
+- Channels -- returning info about your own channels
+- Videos -- returning info about your playlists and all their videos 
+
+You can also define your **own** configuration directly using the **JSON editor**. 
 The extractor runs on [Generic Extractor](https://developers.keboola.com/extend/generic-extractor/).
 
 To give a simple example, the configuration to get info about your own channel looks like this:
