@@ -27,7 +27,7 @@ This database system might not be designed or optimized for complex SELECT queri
 Complex queries may result in timeouts, or they might produce unnecessary loads on your internal systems.
 Instead, import raw data, and then use KBC tools to give it the shape you want.
 
-- Define a **primary key** where possible. [Primary keys](/storage/tables/#primary-keys-and-indexes) substantially 
+- Define a **primary key** where possible. [Primary keys](/storage/tables/#primary-keys-and-indexes) substantially
 speed up both the data loads and further processing of the table. Also
 use [incremental loading](/storage/tables/#incremental-loading) when possible.
 
@@ -38,7 +38,7 @@ The MySQL database server also supports encrypting the whole database communicat
 [official guide](http://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) for instructions on setting it up.
 
 ### Azure-Hosted MS SQL Server
-An MS SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.microsoft.net`.
+An MS SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.windows.net`.
 The `[srvName]` is not an instance name, so the instance name should be left blank.
 But the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
 
