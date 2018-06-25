@@ -6,7 +6,7 @@ permalink: /extractors/marketing-sales/facebook-ads/
 * TOC
 {:toc}
 
-This extractor uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference/v2.8) to
+This extractor uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference/v3.0) to
 extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup)
 (including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/).
 
@@ -117,13 +117,13 @@ extraction, so the table data is **imported incrementally**. The columns of the 
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set
 of columns:
 
-- `ex_account_id` --- Id of the ad account corresponding to the object stored in the row.
+- `ex_account_id` --- ID of the ad account corresponding to the object stored in the row.
 - `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example, for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
 - `parent_id` ---  Refers to the `id` column of a parent object represented by another row and/or
 table. For instance, if the row is representing an insight object, its parent is an ad and `parent_id`
-is the id of the ad. The parent object type can be also determined from the `fb_graph_node` column as a
+is the ID of the ad. The parent object type can be also determined from the `fb_graph_node` column as a
 substring from the beginning until the last occurrence of an underscore, e.g. `page_ads_insights` ->
-`page_ads`. The top parent id is the ad account id.
+`page_ads`. The top parent ID is the ad account ID.
 
 ### Ads Insights Data Description
 All tables containing ads/campaigns insights data have a specific structure. Consider the following query:
@@ -145,7 +145,7 @@ API by the Facebook Ads extractor. Read more about the Marketing API versions
 [here](https://developers.facebook.com/docs/marketing-api/versions).
 
 ## Migration from Old Extractor
-The configuration and resulting data tables produced by both new and old extractors are too different; 
+The configuration and resulting data tables produced by both new and old extractors are very different; 
 that's why their migration has to be done manually by following the next seven steps:
 
 1. Create a configuration of your new Facebook Ads extractor
@@ -170,3 +170,4 @@ Use `Direct token insert` in the authorization modal and copy the access token s
 
 {: .image-popup}
 ![Screenshot - New Query](/extractors/marketing-sales/facebook-ads/inserttoken.png)
+

@@ -8,7 +8,7 @@ permalink: /extractors/other/pingdom/
 
 This extractor helps you import data from [Pingdom](https://www.pingdom.com/).
 
-Pingdom is a service for monitoring the uptime and performance of your websites and web applications.
+Pingdom is a service for monitoring the uptime and performance of your servers, websites and web applications.
 
 ## Configure Extractor
 Before you start, have a working Pingdom account and get a Pingdom API Key.

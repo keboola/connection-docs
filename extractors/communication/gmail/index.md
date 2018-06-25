@@ -16,14 +16,14 @@ Find Gmail Messages in the Extractors section, create a new configuration and na
 ![Gmail - add configuration](/extractors/communication/gmail/01-add-configuration.png)
 
 Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google account. 
-**Inbox is accessed as read only.**
+**Your inbox is accessed as read only.**
 
 {: .image-popup}
 ![Gmail - authorize account](/extractors/communication/gmail/02-authorize-account.png)
 
 ## Configure Queries
 
-Click **Edit configuration** and fill the form to fit your needs.
+Fill in the form to fit your needs.
 
 {: .image-popup}
 ![Gmail - configure queries](/extractors/communication/gmail/03-configure-queries.png)
@@ -32,16 +32,15 @@ Click **Edit configuration** and fill the form to fit your needs.
 For more detailed information about querying, follow Google's [Advanced search](https://support.google.com/mail/answer/7190?hl=en) help site.
 - **Headers** (optional) -- Headers you want to download. If no headers are specified, all headers will be downloaded.
 
-
 Save the configuration and **run** the extractor. For information on the extraction process, go to the **Jobs** section.
 
 ## Produced Tables
 
-The extractor produces several tables that can be joined together.
+Data are always imported incrementally. The extractor produces several tables that can be joined together.
 
 ### Queries
 
-Queries and their messages; it is good to know from which query a message came from.
+Queries and their messages; it is good to know which query a message came from.
 
 {: .table-bordered }
 | query | messageId |
