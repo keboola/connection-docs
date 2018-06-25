@@ -48,7 +48,7 @@ It is okay to leave any of the steps blank.
  - **Mentions** -- Returns mentions for the authenticating user.
    - [Limited to last 800 mentions of the account](https://dev.twitter.com/rest/reference/get/statuses/mentions_timeline)
  - **Followers List** -- Returns a list of users following the specified user by their *Screen Name*.
- - **Search** -- Searches tweets. Read [more about search queries](https://dev.twitter.com/rest/public/search).
+ - **Search** -- Searches tweets. Read [more about search queries](https://developer.twitter.com/en/docs/tweets/search/overview).
     - The Twitter Search API searches against a sampling of recent tweets published within the past 7 days.
 
 When done, **Save** the configuration and **Run** the extraction job. It will start immediately.
