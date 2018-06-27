@@ -48,7 +48,7 @@ Provide information about your Zendesk Account and API token.
 
 You can choose between two templates --- *Tickets with Comments* and *Tickets without Comments*. The latter one will get only the initial ticket
 and not the other responses to it. It is much quicker though. Also note that some of the tables described below may not be extracted if there is
-no data for it.
+no data for them.
 
 **Save** and click **Run Extraction**.
 
