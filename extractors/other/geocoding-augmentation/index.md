@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor provides detailed data for locations specified by their names, address or coordinates.
+This extractor provides detailed data for locations specified by their names, addresses, or coordinates.
 
 ## Create New Configuration
 Find Geocoding Augmentation in the list of extractors and create a new configuration. Name it.
