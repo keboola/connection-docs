@@ -115,7 +115,7 @@ items:
           - url: /extractors/other/pingdom/
             title: Pingdom
 
-          - url: /extractors/other/storage/
+          - url: /extractors/other/storage-api/
             title: Storage API
 
           - url: /extractors/other/what3words/
