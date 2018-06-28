@@ -16,6 +16,7 @@ provides detailed data for locations specified by their names, address or coordi
 - [GoogleDrive](/tutorial/load/googledrive/) --- imports data from external data sheets.
 - [HTTP](/extractors/other/http/) --- imports a CSV file stored on HTTP or HTTPS.
 - [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom; a service for monitoring the uptime and performance of your websites and web applications.
+- [Storage](/extractors/other/storage/) --- imports data from Keboola Connection Storage API, simple tool to get data from another organization or region.
 - [What3words](/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
 - GitHub
 - and others
