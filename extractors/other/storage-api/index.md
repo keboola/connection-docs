@@ -1,5 +1,5 @@
 ---
-title: Keboola Connection Storage API
+title: Keboola Connection Storage
 permalink: /extractors/other/storage-api/
 ---
 
@@ -11,7 +11,7 @@ current project. This component is an addition to the situation where [Shared Bu
 cannot apply, eg. moving data between two different [organizations](/management/organization) or regions.
 
 ## Create New Configuration
-Find the Storage extractor in the list of extractors and create a new configuration. Name it.
+Find the Keboola Connection Storage extractor in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/other/storage-api/create-configuration.png)
