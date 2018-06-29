@@ -30,7 +30,12 @@ There are some specific instructions for
 [using AWQL with reports](https://developers.google.com/adwords/api/docs/guides/awql#using_awql_with_reports) and
 [mapping of AWQL reports to the UI](https://developers.google.com/adwords/api/docs/guides/uireports).
 
-Optionally, you can specify the target *bucket* in Storage and the start (*since*) and end (*until*) dates of downloaded stats.
+Optionally, you can specify the target *bucket* in Storage and the start (*since*) and end (*until*) dates of downloaded stats. 
+The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and 
+can be specified
+
+- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
+- **relatively** --- e.g. `14 days ago` or `last month`.
 
 In each AWQL query, pick columns to download from allowed report values, and the FROM clause from allowed report types.
 You also need to specify the name of the query and destination table in Storage (in the specified bucket). 
