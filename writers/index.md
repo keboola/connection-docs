@@ -20,6 +20,9 @@ Trading desks and more.
 - **DWH/DB/Storage**: Oracle, SAP, Teradata, AWS, Informix, Dropbox, Drive, FTP, Redshift, Elastic, 
 BigQuery and more.
 
+[comment]: # - [Keboola Connection Storage](/writers/storage-api): writes data to a Keboola Connection project in a different 
+[comment]: #organization or region.
+
 For a definitive list of usable writers, see your project **Writers** section.
 
 ## Working with Writers

@@ -20,3 +20,5 @@ provides detailed data for locations specified by their names, address or coordi
 - GitHub
 - and others
 
+[comment]: # - [Keboola Connection Storage](/extractors/other/storage-api/) --- imports data from a Keboola Connection project in a different organization or region.
+
