@@ -116,7 +116,7 @@ items:
             title: Pingdom
 
           - url: /extractors/other/storage-api/
-            title: Storage API
+            title: Keboola Connection Storage
 
           - url: /extractors/other/what3words/
             title: What3words Augmentation
