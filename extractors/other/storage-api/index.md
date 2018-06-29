@@ -27,7 +27,7 @@ help you identify the token later and set the **read** access to the desired buc
 {: .image-popup}
 ![Screenshot - Create API Token](/extractors/other/storage-api/create-token.png)
 
-After creating the token, copy it somewhere safe, as you won't be able to see it again. If you lose the token,
+After creating the token copy it somewhere safe as you won't be able to see it again. If you lose the token,
 you can refresh it - the current token will be deactivated and a new token will be issued.
 
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
@@ -69,7 +69,7 @@ Each table has different settings but they are all extracted from the **same pro
 
 - **Table Name** specifies the table name in the *source project* within the bucket the token has access to. 
 As the token has access to a single bucket only, you do not need to specify the bucket.
-- **Changes Since** allows you to extract only a recent part of the data. 
+- **Changed In Last** allows you to extract only a recent part of the data. 
 
 ### Save Settings
 
