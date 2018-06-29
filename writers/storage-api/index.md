@@ -18,7 +18,7 @@ Find the Keboola Connection Storage writer in the list of writers and create a n
 
 ## Prepare API Token
 
-The writer requires an API Token with **write** access to a **single bucket** only. This limits the potential 
+The writer requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. This limits the potential 
 risks of token misuse. 
 
 To create such token, go to **Users & Settings** in the *target project* and create a new token. Use a name that will 
@@ -73,5 +73,5 @@ create a new item in the configuration.
 ### Destination
 
 - **Table Name** - table name in the *target project* and bucket.
-- **Incremental** changes the how the table is imported in the *target project*. **Primary key** setting will be 
+- **Incremental** - enables [incremental loading](https://help.keboola.com/storage/tables/#incremental-loading) in the *target project*. **Primary key** setting will be 
 used from the table in the current project.

@@ -18,7 +18,7 @@ Find the Keboola Connection Storage extractor in the list of extractors and crea
 
 ## Prepare API Token
 
-The extractor requires an API Token with **read-only** access to a **single bucket** only. This limits the potential 
+The extractor requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket** only. This limits the potential 
 risks of token misuse. 
 
 To create such token, go to **Users & Settings** in the *source project* and create a new token. Use a name that will 
@@ -73,7 +73,7 @@ As the token has access to a single bucket only, you do not need to specify the 
 
 ### Save Settings
 
-- **Incremental** changes the import in the current project. If the **Primary Key** is not set, the data is appended, 
+- **Incremental** - enables [incremental loading](https://help.keboola.com/storage/tables/#incremental-loading) in the current project. If the **Primary Key** is not set, the data is appended, 
 otherwise rows with existing primary key are updated.
 - **Primary Key** sets the primary key of the table in the current project. The primary key does not have to be the same 
 as in the *source project*. 
