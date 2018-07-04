@@ -18,7 +18,7 @@ YellowFin, SAS Visual Analytics, Chartio, Periscope, Looker and more.
 - **Marketing Solutions**: Facebook, Adwords Custom Audiences, Marketo, Mailchimp, Silverpop, 
 Trading desks and more.
 - **DWH/DB/Storage**: Oracle, SAP, Teradata, AWS, Informix, Dropbox, Drive, FTP, Redshift, Elastic, 
-BigQuery and more.
+BigQuery, [Keboola Connection Storage](/writers/storage-api/), and more.
 
 [comment]: # - [Keboola Connection Storage](/writers/storage-api): writes data to a Keboola Connection project in a different 
 [comment]: #organization or region.
