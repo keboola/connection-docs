@@ -6,9 +6,9 @@ permalink: /writers/storage-api/
 * TOC
 {:toc}
 
-This writer loads a single or multiple tables from your current project into a different Keboola Connection project. 
-This component is an addition to the situation where [Shared Buckets](/storage-api/buckets/sharing/) 
-cannot apply, eg. moving data between two different [organizations](/management/organization) or regions.
+This writer loads single or multiple tables from your current project into a different Keboola Connection project. 
+The component can be used in situations where [Shared Buckets](/storage-api/buckets/sharing/) 
+cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 
 ## Create New Configuration
 Find the Keboola Connection Storage writer in the list of writers and create a new configuration. Name it.
@@ -21,14 +21,14 @@ Find the Keboola Connection Storage writer in the list of writers and create a n
 The writer requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. This limits the potential 
 risks of token misuse. 
 
-To create such token, go to **Users & Settings** in the *target project* and create a new token. Use a name that will 
-help you identify the token later and set the **write** access to the desired bucket. 
+To create such a token, go to **Users & Settings** in the *target project* and create a new token. Use a name that will 
+help you identify the token later, and set the **write** access to the desired bucket. 
 
 {: .image-popup}
 ![Screenshot - Create API Token](/writers/storage-api/create-token.png)
 
-After creating the token copy it somewhere safe as you won't be able to see it again. If you lose the token,
-you can refresh it - the current token will be deactivated and a new token will be issued.
+After creating the token, copy it somewhere safe as you won't be able to see it again. If you lose the token,
+you can refresh it -- the current token will be deactivated and a new token will be issued.
 
 If you want to write to multiple buckets, you'll have to create multiple tokens (each with access to a single bucket only)
 and multiple configurations.
@@ -66,12 +66,12 @@ Each table has different settings but they are all written to the **same project
 
 ### Source
 
-- **Table** specifies the table in the *source project*. This value cannot be changed. If you want to write to another table
+- **Table** specifies the table in the *source project*. This value cannot be changed. If you want to write to another table,
 create a new item in the configuration. 
 - **Changed In Last** allows you to write only a recent part of the data. 
 
 ### Destination
 
-- **Table Name** - table name in the *target project* and bucket.
-- **Incremental** - enables [incremental loading](https://help.keboola.com/storage/tables/#incremental-loading) in the *target project*. **Primary key** setting will be 
-used from the table in the current project.
+- **Table Name** -- table name in the *target project* and bucket.
+- **Incremental** -- enables [incremental loading](https://help.keboola.com/storage/tables/#incremental-loading) in the *target 
+project*. The **primary key** setting will be used from the table in the current project.
