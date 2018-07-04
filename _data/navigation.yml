@@ -115,8 +115,8 @@ items:
           - url: /extractors/other/pingdom/
             title: Pingdom
 
-#          - url: /extractors/other/storage-api/
-#            title: Keboola Connection Storage
+          - url: /extractors/other/storage-api/
+            title: Keboola Connection Storage
 
           - url: /extractors/other/what3words/
             title: What3words Augmentation
@@ -133,8 +133,8 @@ items:
       - url: /writers/gooddata/
         title: GoodData
 
-#      - url: /writers/storage-api/
-#        title: Keboola Connection Storage
+      - url: /writers/storage-api/
+        title: Keboola Connection Storage
 
 
   - url: /storage/
