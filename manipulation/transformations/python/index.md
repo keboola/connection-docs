@@ -16,6 +16,7 @@ The Python script is running in an isolated [Docker environment](https://develop
 ### Memory and Processing Constraints
 
 The Docker container running the Python transformation has allocated 8GB of memory and the maximum running time is 6 hours.
+The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
 
 ### File locations
 The Python script itself will be compiled to `/data/script.py`. To access your input and output tables, use

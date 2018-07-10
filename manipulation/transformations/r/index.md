@@ -19,6 +19,7 @@ The current R version is R **3.5.0**.
 ### Memory and Processing Constraints
 
 The Docker container running the R transformation has allocated 8GB of memory and the maximum running time is 6 hours.
+The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
 
 ### File locations
 The R script itself will be compiled to `/data/script.R`. To access input and output tables, use relative
