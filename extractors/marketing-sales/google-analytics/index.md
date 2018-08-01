@@ -18,6 +18,8 @@ and provides the following key features:
  - **Multiple date ranges** --- The API allows you to get data in two date ranges in a single request.
 
  - **Multiple segments** --- The API enables you to get multiple segments in a single request.
+ 
+**Important:** Data is always imported incrementally.
 
 
 ## Create New Configuration
