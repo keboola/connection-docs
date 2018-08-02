@@ -110,7 +110,7 @@ The data takeout may take a considerable amount of time if your project is large
 ## Exported Data
 The exported project has the following general structure:
 
-- `buckets.json` --- all buckets in the project and their metadata
+- `buckets.json` --- all buckets in the project and their metadata. **Linked buckets are not exported.*
 - `tables.json` --- all tables in the project and their metadata (bucket, columns, description, etc.)
 Table aliases are not exported.
 - `configurations.json` --- all components used in the project and *main properties* of their configurations
