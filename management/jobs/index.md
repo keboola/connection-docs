@@ -23,64 +23,42 @@ The job history is virtually unlimited. Click on a job to see details on
 {: .image-popup}
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
 
-### Searching the jobs log
+## Searching the jobs log
 
 Using the search box and advanced patterns you can easily find job based on various parameters. 
 
-#### Search attributes
+### Search attributes
 
-* **Job status**  
-`status:success`
-* **User who created the job**  
-`token.description:john.doe@company.com`
-* **Component name**  
-`params.component:keboola.ex-http`
-* **Config ID**  
-`params.config:351711187`
-* **Duration**  
-`durationSeconds:>120`
-* **Time started**  
-`startTime:[2018-06-21 TO 2018-07-01]`
-* **Time finished**  
-`endTime:[2018-06-21 TO 2018-07-01]`
-* **Component type**  
-`component:transformation`  
-Possible values are `docker` (Keboola component), `transformation`, `orchestrator`
+| | Query |
+|---|---|
+| **Job status** | `status:success` |
+| **User who created the job**   | `token.description:john.doe@company.com` |
+| (Docker) **Component name**     | `params.component:keboola.ex-http` <br /> OR <br /> `component:docker params.component:keboola.ex-http` |
+| **Config ID**       | `params.config:351711187` |
+| **Duration**        | `durationSeconds:>120` |
+| **Time started**   | `startTime:[2018-06-21 TO 2018-07-01]` |
+| **Time finished**   | `endTime:[2018-06-21 TO 2018-07-01]` |
+| **Component type**    | `component:transformation` <br /> *(possible values are `docker`, `transformation` and `orchestrator`)*  |
 
-#### Modifiers 
+### Modifiers
 
-* **Exclude some results:**  
-`-status:success`  
-Note the _minus sign_ before the query
-* **Open ended time query**  
-`endTime:[2018-06-21 TO *]`
-Will show jobs after 21st June 2018.
+| | Query |
+|---|---|
+| **Exclude some results**   | `-status:success` <br /> (Note the _minus sign_ before the query) |
+| **Open ended time query**     | `endTime:[2018-06-21 TO *]` <br /> Show jobs after 21st June 2018. |
 
-#### Combining queries
+### Useful examples
+
+| | Query |
+|---|---|
+| **Failed orchestrations**  | `component:orchestrator status:error` |
+| **Long running non-successful orchestrations (more than 2 hours)**  | `component:orchestrator durationSeconds:>7200 -status:success` |
+| **Orchestrations which ended with warning**  | `component:orchestrator status:warning` |
+| **Failed transformations**  | `component:transformation status:error`  |
+| **Failed jobs from Docker component Http extractor**  | `params.component:keboola.ex-http status:error` <br />  |
+| **Jobs from either HTTP extractor or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
+| **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
-* **Combine queries**  
-`+params.component:keboola.ex-http +status:error`  
-This will show only failed jobs from ex-http
-* **Combine queries with more possible values**  
-`+params.component:(keboola.ex-http OR keboola.wr-google-sheets)`  
-This will show jobs from either HTTP or Google Sheets writer. 
-* **Query combination with modifiers**  
-`+params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success`  
-This will show all non-successful jobs from either HTTP or Google Sheets writer.
-
-#### Specific attributes for different component types
-
-##### Orchestrator
-
-* **Name**  
-`params.orchestration.name:MyOrchestrator`   
-* **Who started it**  
-`params.initiator.userAgent:"orchestrator Scheduler"`  
-This will show only orchestrations run by scheduler, not those manually launched from UI or via API. 
-* **Complex query**  
-`-params.initiator.userAgent:"orchestrator Scheduler" component:orchestrator -status:success`  
-All orchestrator jobs, that failed after they were launched manually
-
 For more technical information about background jobs, see our 
 [Developers documentation](https://developers.keboola.com/integrate/jobs/).
 
