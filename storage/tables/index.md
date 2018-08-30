@@ -158,6 +158,9 @@ When importing data into a table with a primary key, the uniqueness is checked.
 The record `John,34,$340000` will overwrite the row `John,34,$340`, because it has the same primary key.
 The above applies only when **incremental load** is used. 
 
+If an imported record does match an existing row but does not contain any change in values 
+(eg. importing `John,34,$340`) the record will not be updated. 
+
 When incremental is not used, the contents of the target table are cleared before the load. When a primary key 
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
