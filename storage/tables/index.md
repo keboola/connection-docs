@@ -119,7 +119,8 @@ their uniqueness is checked and the data are de-duplicated. The result table loo
 |John|$340000|
 |Annie|$500|
 
-The order of rows in the imported file is not important and is not kept.
+The order of rows in the imported file is not important and is not kept. That means that from each of
+the duplicate rows a randomly selected one is kept and all others are discarded.
 In our example, the rows `John,$340` and `Darla,$60000` were discarded.
 
 With a primary key defined on **multiple columns**, the combination of their values is unique.
@@ -207,17 +208,17 @@ and you import the following data to the table:
 |Peter|$340000|
 |Darla|$600000|
 
-assuming that the import was on 2010.01.02 10:00 the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
+assuming that the import was on 2010-01-02 10:00 the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
 
 |name|money|*\*updated\**
 |---|---|---|
-|John|$150|2010.1.1 10:00|
-|Darla|$600000|**2010.01.02 10:00**|
-|Peter|$340000|**2010.01.02 10:00**|
-|Annie|$500000|**2010.01.02 10:00**|
+|John|$150|2010-01-01 10:00|
+|Darla|$600000|**2010-01-02 10:00**|
+|Peter|$340000|**2010-01-02 10:00**|
+|Annie|$500000|**2010-01-02 10:00**|
 
 Therefore three rows from the table will be considered as changed (added or updated). Now when you run a component (e.g. transformation)
 with `Changed in last` option, various things can happen:
-- `Changed in last` is set to `1 day`, and the component is started anytime between `2010.01.02 10:00` and `2010.01.03 10:00` it will receive **three** rows.
-- `Changed in last` is set to `1 day`, and the component is started anytime after `2010.01.03 10:00` it will receive **no** rows.
-- `Changed in last` is set to `2 day`, and the component is started anytime between `2010.01.02 10:00` and `2010.01.03 10:00` it will receive **four** rows.
+- `Changed in last` is set to `1 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **three** rows.
+- `Changed in last` is set to `1 day`, and the component is started anytime after `2010-01-03 10:00` it will receive **no** rows.
+- `Changed in last` is set to `2 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **four** rows.
