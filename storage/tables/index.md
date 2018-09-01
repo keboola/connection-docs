@@ -96,11 +96,33 @@ not have any effect. You can mark a column as indexed in the table detail:
 
 ### Primary Key Deduplication
 When a primary key is defined on a column, the value of that column is guaranteed to be **unique** in that table.
-With a primary key defined on **multiple columns**, the combination of their values is unique.
-
 As data are loaded into the table, only one of the rows with duplicate values is preserved.
 All the other duplicates are ignored.
+Let's say you have a table with three columns: `name` and `money`.  The primary key is defined
+on the column `name`.
 
+|name|money|
+|---|---|
+|John|$150|
+|John|$340|
+|Darla|$600|
+|Annie|$500|
+|John|$340000|
+|Darla|$600000|
+
+their uniqueness is checked and the data are de-duplicated. The result table looks like this:
+
+|name|money|
+|---|---|
+|John|$150|
+|Darla|$600|
+|John|$340000|
+|Annie|$500|
+
+The order of rows in the imported file is not important and is not kept.
+In our example, the rows `John,$340` and `Darla,$60000` were discarded.
+
+With a primary key defined on **multiple columns**, the combination of their values is unique.
 Let's say you have a table with three columns: `name`, `age` and `money`.  The primary key is defined
 on two of them: `name` and `age`.
 When you load the following data into your table:
@@ -123,43 +145,40 @@ their uniqueness is checked and the data are de-duplicated. The result table loo
 |John|34|$340000|
 |Annie|30|$500|
 
-The order of rows in the imported file is not important and is not kept.
+Again, the order of rows in the imported file is not important and is not kept.
 In our example, the rows `John,34,$340` and `Darla,60,$600000` were discarded.
 
 ### Incremental Loading
 When a primary key is defined on a column, it is also possible to take advantage of incremental loads.
 If you load data into a table incrementally, new rows will be added and **existing rows will be updated**.
-No rows will be deleted. If you have a table with a primary key defined on the columns `name` and `age`:
+No rows will be deleted. If you have a table with a primary key defined on the column `name`:
 
-|name|age|money|
-|---|---|---|
-|John|15|$150|
-|John|34|$340|
-|Darla|60|$600|
+|name|money|
+|---|---|
+|John|$150|
+|John|$340|
+|Darla|$600|
 
 and you import the following data to the table:
 
-|name|age|money|
-|---|---|---|
-|Annie|30|$500000|
-|John|34|$340000|
-|Darla|60|$600000|
+|name|money|
+|---|---|
+|Annie|$500000|
+|John|$340000|
+|Darla|$600000|
 
 the result table will contain:
 
-|name|age|money|
-|---|---|---|
-|John|15|$150|
-|Darla|60|$600000|
-|John|34|$340000|
-|Annie|30|$500000|
+|name|money|
+|---|---|
+|John|$150|
+|Darla|$600000|
+|John|$340000|
+|Annie|$500000|
 
 When importing data into a table with a primary key, the uniqueness is checked.
-The record `John,34,$340000` will overwrite the row `John,34,$340`, because it has the same primary key.
+The record `John,$340000` will overwrite the row `John,$340`, because it has the same primary key value.
 The above applies only when **incremental load** is used.
-
-If an imported record does match an existing row but does not contain any change in values
-(eg. importing `John,34,$340`) the record will not be updated.
 
 When incremental is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
@@ -172,33 +191,33 @@ In input mapping, you may specify the `Changed in last` option which allows the 
 {: .image-popup}
 ![Screenshot - Incremental Processing](/storage/tables/incremental-processing.png)
 
-Extending the [above example](#incremental-loading) - if you have a table with a primary key defined on the columns `name` and `age`:
+Extending the [above example](#incremental-loading) - if you have a table with a primary key defined on the column `name`:
 
-|name|age|money|
-|---|---|---|
-|John|15|$150|
-|John|34|$340|
-|Darla|60|$600|
+|name|money|
+|---|---|
+|John|$150|
+|Peter|$340|
+|Darla|$600|
 
 and you import the following data to the table:
 
-|name|age|money|
+|name|money|
+|---|---|
+|Annie|$500000|
+|Peter|$340000|
+|Darla|$600000|
+
+assuming that the import was on 2010.01.02 10:00 the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
+
+|name|money|*\*updated\**
 |---|---|---|
-|Annie|30|$500000|
-|John|34|$340000|
-|Darla|60|$600000|
-
-assuming that the import was on 2.1.2010 10:00 the result table will contain (the *updated* column is not an actual column of the table):
-
-|name|age|money|*updated*
-|---|---|---|---|
-|John|15|$150|1.1.2020 20:10|
-|Darla|60|$600000|**2.1.2010 20:10**|
-|John|34|$340000|**2.1.2010 20:10**|
-|Annie|30|$500000|**2.1.2010 20:10**|
+|John|$150|2010.1.1 10:00|
+|Darla|$600000|**2010.01.02 10:00**|
+|Peter|$340000|**2010.01.02 10:00**|
+|Annie|$500000|**2010.01.02 10:00**|
 
 Therefore three rows from the table will be considered as changed (added or updated). Now when you run a component (e.g. transformation)
 with `Changed in last` option, various things can happen:
-- `Changed in last` is set to `1 day`, and the component is started anywhere between `2.1.2010 20:10` and `3.1.2010 20:10` it will receive **three** rows.
-- `Changed in last` is set to `1 day`, and the component is started anywhere after `3.1.2010 20:10` it will receive **no** rows.
-- `Changed in last` is set to `2 day`, and the component is started anywhere between `2.1.2010 20:10` and `3.1.2010 20:10` it will receive **four** rows.
+- `Changed in last` is set to `1 day`, and the component is started anytime between `2010.01.02 10:00` and `2010.01.03 10:00` it will receive **three** rows.
+- `Changed in last` is set to `1 day`, and the component is started anytime after `2010.01.03 10:00` it will receive **no** rows.
+- `Changed in last` is set to `2 day`, and the component is started anytime between `2010.01.02 10:00` and `2010.01.03 10:00` it will receive **four** rows.
