@@ -151,8 +151,9 @@ In our example, the rows `John,34,$340` and `Darla,60,$600000` were discarded.
 
 ### Incremental Loading
 When a primary key is defined on a column, it is also possible to take advantage of incremental loads.
-If you load data into a table incrementally, new rows will be added and **existing rows will be updated**.
-No rows will be deleted. If you have a table with a primary key defined on the column `name`:
+If you load data into a table incrementally, new rows will be added and existing rows will be updated
+unless they are completely identical to the existing rows. No rows will be deleted.
+ If you have a table with a primary key defined on the column `name`:
 
 |name|money|
 |---|---|
@@ -204,9 +205,10 @@ and you import the following data to the table:
 
 |name|money|
 |---|---|
-|Annie|$500000|
-|Peter|$340000|
 |Darla|$600000|
+|Peter|$340|
+|Annie|$500000|
+|Melanie|$900000|
 
 assuming that the import was on 2010-01-02 10:00 the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
 
@@ -214,11 +216,16 @@ assuming that the import was on 2010-01-02 10:00 the result table will contain (
 |---|---|---|
 |John|$150|2010-01-01 10:00|
 |Darla|$600000|**2010-01-02 10:00**|
-|Peter|$340000|**2010-01-02 10:00**|
+|Peter|$340|2010-01-01 10:00|
 |Annie|$500000|**2010-01-02 10:00**|
+|Melanie|$900000|**2010-01-02 10:00**|
 
 Therefore three rows from the table will be considered as changed (added or updated). Now when you run a component (e.g. transformation)
 with `Changed in last` option, various things can happen:
 - `Changed in last` is set to `1 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **three** rows.
 - `Changed in last` is set to `1 day`, and the component is started anytime after `2010-01-03 10:00` it will receive **no** rows.
-- `Changed in last` is set to `2 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **four** rows.
+- `Changed in last` is set to `2 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **five** rows.
+
+Notice that the record for *Peter* was **not updated**, because it was not changed at all (the 
+imported row was completely identical to the existing one). Therefore, 
+when using incremental processing set to `1 day`, you will not receive that row in input mapping.
