@@ -87,7 +87,7 @@ To remove an existing primary key, click the **bin** icon:
 
 Note that creating and removing the primary key can take some time on large tables.
 
-Apart from the primary key, you can mark a column as indexed. Indexes have some performance effects only
+Apart from creating a primary key, you can mark a column as indexed. Indexes have some performance effects only
 on the deprecated MySQL backend. On the Redshfit and Snowflake backends, marking a column as indexed does
 not have any effect. You can mark a column as indexed in the table detail:
 
@@ -98,7 +98,7 @@ not have any effect. You can mark a column as indexed in the table detail:
 When a primary key is defined on a column, the value of that column is guaranteed to be **unique** in that table.
 As data are loaded into the table, only one of the rows with duplicate values is preserved.
 All the other duplicates are ignored.
-Let's say you have a table with three columns: `name` and `money`.  The primary key is defined
+Let's say you have a table with two columns: `name` and `money`.  The primary key is defined
 on the column `name`.
 
 |name|money|
@@ -110,18 +110,17 @@ on the column `name`.
 |John|$340000|
 |Darla|$600000|
 
-their uniqueness is checked and the data are de-duplicated. The result table looks like this:
+Their uniqueness is checked and the data are de-duplicated. The result table looks like this:
 
 |name|money|
 |---|---|
-|John|$150|
 |Darla|$600|
 |John|$340000|
 |Annie|$500|
 
 The order of rows in the imported file is not important and is not kept. That means that from each of
 the duplicate rows a randomly selected one is kept and all others are discarded.
-In our example, the rows `John,$340` and `Darla,$60000` were discarded.
+In our example, the rows `John,$150`, `John,$340` and `Darla,$60000` were discarded.
 
 With a primary key defined on **multiple columns**, the combination of their values is unique.
 Let's say you have a table with three columns: `name`, `age` and `money`.  The primary key is defined
@@ -153,12 +152,12 @@ In our example, the rows `John,34,$340` and `Darla,60,$600000` were discarded.
 When a primary key is defined on a column, it is also possible to take advantage of incremental loads.
 If you load data into a table incrementally, new rows will be added and existing rows will be updated
 unless they are completely identical to the existing rows. No rows will be deleted.
- If you have a table with a primary key defined on the column `name`:
+If you have a table with a primary key defined on the column `name`:
 
 |name|money|
 |---|---|
 |John|$150|
-|John|$340|
+|Peter|$340|
 |Darla|$600|
 
 and you import the following data to the table:
@@ -166,7 +165,7 @@ and you import the following data to the table:
 |name|money|
 |---|---|
 |Annie|$500000|
-|John|$340000|
+|Peter|$340000|
 |Darla|$600000|
 
 the result table will contain:
@@ -175,18 +174,18 @@ the result table will contain:
 |---|---|
 |John|$150|
 |Darla|$600000|
-|John|$340000|
+|Peter|$340000|
 |Annie|$500000|
 
 When importing data into a table with a primary key, the uniqueness is checked.
-The record `John,$340000` will overwrite the row `John,$340`, because it has the same primary key value.
+The record `Peter,$340000` will overwrite the row `Peter,$340`, because it has the same primary key value.
 The above applies only when **incremental load** is used.
 
-When incremental is not used, the contents of the target table are cleared before the load. When a primary key
+When an incremental load is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
 ### Incremental Processing
-When a table is loaded incrementally the update time of each row is recorded internally. This information
+When a table is loaded incrementally, the update time of each row is recorded internally. This information
 can be later used in Input Mapping of many components (especially [Transformations](/manipulation/transformations/mappings/#input-mapping)).
 In input mapping, you may specify the `Changed in last` option which allows the component to process only an increment of the data:
 
@@ -210,7 +209,7 @@ and you import the following data to the table:
 |Annie|$500000|
 |Melanie|$900000|
 
-assuming that the import was on 2010-01-02 10:00 the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
+assuming that the import was on 2010-01-02 10:00, the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
 
 |name|money|*\*updated\**
 |---|---|---|
@@ -221,10 +220,11 @@ assuming that the import was on 2010-01-02 10:00 the result table will contain (
 |Melanie|$900000|**2010-01-02 10:00**|
 
 Therefore three rows from the table will be considered as changed (added or updated). Now when you run a component (e.g. transformation)
-with `Changed in last` option, various things can happen:
-- `Changed in last` is set to `1 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **three** rows.
-- `Changed in last` is set to `1 day`, and the component is started anytime after `2010-01-03 10:00` it will receive **no** rows.
-- `Changed in last` is set to `2 day`, and the component is started anytime between `2010-01-02 10:00` and `2010-01-03 10:00` it will receive **five** rows.
+with the `Changed in last` option, various things can happen:
+
+- `Changed in last` is set to `1 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **three** rows will be added to the table.
+- `Changed in last` is set to `1 day`, and the component is started any time after `2010-01-03 10:00` -- **no** rows will be added to the table.
+- `Changed in last` is set to `2 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **five** rows will be added to the table.
 
 Notice that the record for *Peter* was **not updated**, because it was not changed at all (the 
 imported row was completely identical to the existing one). Therefore, 
