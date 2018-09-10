@@ -40,7 +40,8 @@ for loading is not necessary then.
 {: .image-popup}
 ![Screenshot - Package Configuration](/manipulation/transformations/r/packages.png)
 
-The latest versions of packages are always installed.
+The latest versions of packages are always installed. Some packages are already installed in the environment 
+(see [full list](https://github.com/keboola/docker-custom-r/blob/master/init-2.R#L4) and their [dependencies](https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3)), these packages do not need to be listed in the transformation. 
 
 ### CSV format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.

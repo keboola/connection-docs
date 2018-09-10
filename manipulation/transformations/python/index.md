@@ -54,6 +54,9 @@ import sys
 subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-cache-dir', '--force-reinstall', 'pandas==0.20.0'])
 {% endhighlight %}
 
+Some packages are already installed in the environment 
+(see [full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L25)), these packages do not need to be listed in the transformation. 
+
 ### CSV format
 Tables from Storage are imported to the Python script from CSV files. CSV files can be read by standard Python functions
 from the [csv packages](https://docs.python.org/3/library/csv.html). It is recommended to explicitly specify the formatting options.
