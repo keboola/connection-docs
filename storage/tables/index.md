@@ -222,9 +222,9 @@ assuming that the import was on 2010-01-02 10:00, the result table will contain 
 Therefore three rows from the table will be considered as changed (added or updated). Now when you run a component (e.g. transformation)
 with the `Changed in last` option, various things can happen:
 
-- `Changed in last` is set to `1 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **three** rows will be added to the table.
-- `Changed in last` is set to `1 day`, and the component is started any time after `2010-01-03 10:00` -- **no** rows will be added to the table.
-- `Changed in last` is set to `2 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **five** rows will be added to the table.
+- `Changed in last` is set to `1 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **three** rows will be exported from the table.
+- `Changed in last` is set to `1 day`, and the component is started any time after `2010-01-03 10:00` -- **no** rows will be exported from the table.
+- `Changed in last` is set to `2 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **five** rows will be exported from the table.
 
 Notice that the record for *Peter* was **not updated**, because it was not changed at all (the 
 imported row was completely identical to the existing one). Therefore, 
