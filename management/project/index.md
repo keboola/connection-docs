@@ -18,9 +18,9 @@ The settings page shows important properties of your project, such as:
 - Type of project
 - Monthly fee
 - Data retention for [time travel](/storage/tables/backups/)
-- Region -- physical location of the project data; it corresponds to an 
-[Amazon Region identifier](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions). 
-<br> Available regions: **us-east-1** (USA -- North Virginia) and **eu-central-1** (EU -- Frankfurt)
+- Region -- physical location of the project data; it corresponds to an
+[Amazon Region identifier](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
+<br> Available regions: **us-east-1** (USA -- North Virginia), **eu-central-1** (EU -- Frankfurt) and **ap-southeast-2** (AP -- Sydney)
 
 You can also
 
