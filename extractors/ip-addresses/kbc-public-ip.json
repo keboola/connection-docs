@@ -1,6 +1,6 @@
 {
-    "syncToken": "1496657320",
-    "createDate": "2017-06-05-10-08-39",
+    "syncToken": "1496657321",
+    "createDate": "2018-09-14-10-08-39",
     "prefixes": [
         {
             "ipPrefix": "34.224.0.188/32",
@@ -24,6 +24,30 @@
             "ipPrefix": "34.203.87.137/32",
             "vendor": "aws",
             "region": "us-east-1",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "35.157.170.229/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "35.157.93.175/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "13.236.254.70/32",
+            "vendor": "aws",
+            "region": "ap-southeast-2",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "13.54.182.53/32",
+            "vendor": "aws",
+            "region": "ap-southeast-2",
             "service": "syrup"
         }
     ]
