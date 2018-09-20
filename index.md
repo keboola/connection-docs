@@ -47,7 +47,7 @@ There are three equivalent places where you can get KBC Status updates (service 
 
 ## Your Tips and Suggestions
 
-- [wishlist@keboola.com](mailto:wishlist@keboola.com) --- send us your suggestions for a new or updated project feature
+- [Feature Wishlist](https://portal.productboard.com/ltulbdlwnurf2accjn3ukkww) --- send us your suggestions for a new feature to Keboola Connection
 - [wiki.keboola.com](http://wiki.keboola.com/) --- share your tips and tricks with other KBC users 
 
 ## Keboola's Partners Program
