@@ -37,9 +37,6 @@ The R transformation can use any package available on
 its dependencies to be automatically loaded and installed, list its name in the package section. Using `library()`
 for loading is not necessary then.
 
-{: .image-popup}
-![Screenshot - Package Configuration](/manipulation/transformations/r/packages.png)
-
 The latest versions of packages are always installed. Some packages are already installed in the environment 
 (see [full list](https://github.com/keboola/docker-custom-r/blob/master/init-2.R#L4) and their [dependencies](https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3)), these packages do not need to be listed in the transformation. 
 
