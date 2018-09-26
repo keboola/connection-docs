@@ -22,7 +22,7 @@ any tables you create in the shared bucket become immediately available in the d
 You can specify who can link the bucket to a project:
 
 - **Organization Member** --- Only organization members are able to link the shared bucket to a project.
-- **Project Member** --- Every project member is able to link the shared bucket to a project.
+- **Project Member** --- Every project member in the organisation is able to link the shared bucket to a project.
 
 ## Limitations
 
@@ -56,6 +56,11 @@ Then click `Enable sharing` and confirm your action.
 
 The bucket is now marked as `Shared to organization` and is available for other projects. 
 Remember to add (link) it to each project manually.
+
+{: .image-popup}
+![Screenshot -- Confirm action](/storage/buckets/sharing/change_sharing_type.png)
+
+If you want to change who is allowed to link to your shared bucket, you can do so by clicking `Change sharing type`.
 
 ### Link Bucket
 
