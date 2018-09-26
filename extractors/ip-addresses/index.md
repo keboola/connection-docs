@@ -31,7 +31,7 @@ For projects in the EU region (AWS region `eu-central-1`), the following IP addr
 - `35.157.93.175`
 
 ## connection.ap-southeast-2.keboola.com
-For projects in the AUS region (AWS region `ap-southeast-2`), the following IP addresses are currently used:
+For projects in the AU region (AWS region `ap-southeast-2`), the following IP addresses are currently used:
 
 - `13.236.254.70`
 - `13.54.182.53`
