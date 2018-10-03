@@ -41,7 +41,6 @@ The MySQL database server also supports encrypting the whole database communicat
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
 For this reason, if you are writing advanced mode queries you should properly escape quotes in text columns that may 
 contain `"` characters as per this [Issue tracker](https://www.exasol.com/support/browse/SOL-448).   
-Also, the BCP export will fail if there is not a `;` at the end of the query.
 
 For example:  
 *Original*: `SELECT [my_varchar_column] FROM [my_table];`  
