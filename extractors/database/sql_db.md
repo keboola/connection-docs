@@ -37,6 +37,20 @@ use [incremental loading](/storage/tables/#incremental-loading) when possible.
 The MySQL database server also supports encrypting the whole database communication using SSL Certificates. See the
 [official guide](http://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) for instructions on setting it up.
 
+### MS SQL Server Advanced Mode
+The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
+For this reason,  if you are writing advanced mode queries you have to quote the values of text columns - so that the
+ selected value is `"some text"` instead of `some text`.  
+ This can be done by e.g. `SELECT char(34) + [my_text_column] + char(34)`.  
+When the extracted text itself may contain quotes, you need to escape them by replacing `"` with `""`.   
+
+Full example: `SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM 
+[my_table]`  
+
+The extractor will still work if you don't do these things, but the BCP will fail and the backup, much slower method 
+will be 
+used.
+
 ### Azure-Hosted MS SQL Server
 An MS SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.windows.net`.
 The `[srvName]` is not an instance name, so the instance name should be left blank.
