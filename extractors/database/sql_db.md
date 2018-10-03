@@ -39,9 +39,16 @@ The MySQL database server also supports encrypting the whole database communicat
 
 ### MS SQL Server Advanced Mode
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
-For this reason, if you are writing advanced mode queries you should properly escape quotes in text columns
-For example: `SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM [my_table]`
-The extractor will still work if you don't do this, but the BCP will fail and the backup, much slower method will be 
+For this reason, if you are writing advanced mode queries you should properly escape quotes in text columns that may 
+contain `"` characters as per this [MSDN answer](https://social.msdn.microsoft.com/Forums/sqlserver/en-US/747dd166-b39c-4762-a99d-5e05e73b50fd/bcp-command-to-generate-csv-file?forum=transactsql).   
+Also, the BCP export will fail if there is not a `;` at the end of the query.
+
+For example:  
+*Original*: `SELECT [my_varchar_column] FROM [my_table];`  
+*Escaped*: `SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM [my_table];`  
+
+The extractor will still work if you don't do these things, but the BCP will fail and the backup, much slower method 
+will be 
 used.
 
 ### Azure-Hosted MS SQL Server
