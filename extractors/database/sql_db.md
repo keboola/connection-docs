@@ -42,7 +42,7 @@ The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sq
 For this reason,  if you are writing advanced mode queries you have to quote the values of text columns - so that the
  selected value is `"some text"` instead of `some text`.  
  This can be done by e.g. `SELECT char(34) + [my_text_column] + char(34)`.  
-When the extracted text itself may contain quotes, you need to escape them (ie. replace `"` with `""`).   
+When the extracted text itself may contain quotes, you need to escape them by replacing `"` with `""`.   
 
 Full example: `SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM 
 [my_table]`  
