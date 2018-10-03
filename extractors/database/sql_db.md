@@ -40,7 +40,7 @@ The MySQL database server also supports encrypting the whole database communicat
 ### MS SQL Server Advanced Mode
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
 For this reason, if you are writing advanced mode queries you should properly escape quotes in text columns that may 
-contain `"` characters as per this [MSDN answer](https://social.msdn.microsoft.com/Forums/sqlserver/en-US/747dd166-b39c-4762-a99d-5e05e73b50fd/bcp-command-to-generate-csv-file?forum=transactsql).   
+contain `"` characters as per this [Issue tracker](https://www.exasol.com/support/browse/SOL-448).   
 Also, the BCP export will fail if there is not a `;` at the end of the query.
 
 For example:  
