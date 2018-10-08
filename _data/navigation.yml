@@ -109,14 +109,17 @@ items:
           - url: /extractors/other/geocoding-augmentation/
             title: Geocoding Augmentation
 
+          - url: /extractors/other/github/
+            title: GitHub
+
           - url: /extractors/other/http/
             title: HTTP
 
-          - url: /extractors/other/pingdom/
-            title: Pingdom
-
           - url: /extractors/other/storage-api/
             title: Keboola Connection Storage
+
+          - url: /extractors/other/pingdom/
+            title: Pingdom
 
           - url: /extractors/other/what3words/
             title: What3words Augmentation
