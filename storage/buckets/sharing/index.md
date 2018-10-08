@@ -7,22 +7,26 @@ permalink: /storage/buckets/sharing/
 {:toc}
 
 Bucket sharing allows you to share data between projects within an [organization](/management/organization/),
-giving you far greater organizational control over your data. 
-You can now decide which projects, and therefore which users, have access to which data. 
-This also helps speed up your data workflow and reduce your project usage totals because the data size 
+giving you far greater organizational control over your data.
+You can now decide which projects, and therefore which users, have access to which data.
+This also helps speed up your data workflow and reduce your project usage totals because the data size
 and rows are counted only in the source project.
 
 - **Shared bucket** --- source project bucket with **Sharing** enabled; it contains data to be available in other projects.
 - **Linked bucket** --- reference to a shared bucket in any of the destination projects.
 
-All changes and events in a shared bucket are propagated to its linked buckets; 
+All changes and events in a shared bucket are propagated to its linked buckets;
 any tables you create in the shared bucket become immediately available in the destination projects.
 
 ## Sharing Type
 You can specify who can link the bucket to a project:
 
-- **Organization Member** --- Only organization members are able to link the shared bucket to a project.
-- **Project Member** --- Every project member in the organisation is able to link the shared bucket to a project.
+- **Project Member** --- To be able to link the bucket to a project, a person must be a user of the destination project.
+- **Organization Member** --- To be able to link the bucket to a project, a person must be a user of the destination project
+*and also a member of that organization*.
+
+In either case the source and target project must be in the same organization. To share buckets between different organizations, use
+[Storage Extractor](/extractors/other/storage-api/) or [Storage Writer](/writers/storage-api/).
 
 ## Limitations
 
@@ -35,12 +39,12 @@ be a project member.
 - Table aliases are **not shared**.
 - Tables in linked buckets work like aliases --- i.e. all tables are **read-only** in the destination project.
 
-If your bucket is already linked in other projects, you cannot drop it. 
+If your bucket is already linked in other projects, you cannot drop it.
 Nor can you drop any of its children, tables or columns.
 
 ## Working with Shared Buckets
 
-If you want to share project data, first [share a bucket](/storage/buckets/sharing/#enable-sharing) 
+If you want to share project data, first [share a bucket](/storage/buckets/sharing/#enable-sharing)
 and then [link it](/storage/buckets/sharing/#link-bucket) into the project.
 
 ### Enable Sharing
@@ -54,7 +58,7 @@ Then click `Enable sharing` and confirm your action.
 {: .image-popup}
 ![Screenshot -- Confirm action](/storage/buckets/sharing/sharing-enable-2-v3.png)
 
-The bucket is now marked as `Shared to organization` and is available for other projects. 
+The bucket is now marked as `Shared to organization` and is available for other projects.
 Remember to add (link) it to each project manually.
 
 {: .image-popup}
@@ -64,13 +68,13 @@ If you want to change who is allowed to link to your shared bucket, you can do s
 
 ### Link Bucket
 
-Once your organization has shared buckets, the **link button** will become available in the Storage section. 
+Once your organization has shared buckets, the **link button** will become available in the Storage section.
 Click on it to link the bucket to the project.
 
 {: .image-popup}
 ![Screenshot -- Link button](/storage/buckets/sharing/link-bucket-1.png)
 
-Select `shared bucket` and specify the new bucket `name` and `stage`. 
+Select `shared bucket` and specify the new bucket `name` and `stage`.
 The buckets list is grouped by the project name, and buckets are identified by their id and description.
 
 {: .image-popup}
@@ -84,7 +88,7 @@ This is all you need to do. The bucket is now linked into the project, and users
 ### Disable Sharing / Unlink Bucket
 
 Removing a linked bucket from a project is as easy as deleting a standard bucket. Only
-the linked bucket gets deleted (including all tables in it) without affecting the shared bucket in any way. 
+the linked bucket gets deleted (including all tables in it) without affecting the shared bucket in any way.
 
-Please keep in mind that before you can **disable sharing** or **delete a shared bucket**, 
+Please keep in mind that before you can **disable sharing** or **delete a shared bucket**,
 you first have to unlink the bucket from **all projects**.
