@@ -103,6 +103,9 @@ items:
           - url: /extractors/storage/simple-aws-s3/
             title: Simple AWS S3
 
+          - url: /extractors/storage/google-drive/
+            title: Google Drive
+
           - url: /extractors/storage/http/
             title: HTTP
 
