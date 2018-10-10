@@ -84,22 +84,34 @@ items:
         items:
           - url: /extractors/social/facebook/
             title: Facebook Pages
+
           - url: /extractors/social/instagram/
             title: Instagram
+
           - url: /extractors/social/twitter/
             title: Twitter
+
           - url: /extractors/social/youtube/
             title: YouTube
+
+      - url: /extractors/storage/
+        title: Storage
+        items:
+          - url: /extractors/storage/aws-s3/
+            title: AWS S3
+
+          - url: /extractors/storage/simple-aws-s3/
+            title: Simple AWS S3
+
+          - url: /extractors/storage/http/
+            title: HTTP
+
+          - url: /extractors/storage/storage-api/
+            title: Keboola Connection Storage
 
       - url: /extractors/other/
         title: Other
         items:
-          - url: /extractors/other/aws-s3/
-            title: AWS S3
-
-          - url: /extractors/other/simple-aws-s3/
-            title: Simple AWS S3
-
           - url: /extractors/other/dark-sky/
             title: Dark Sky (Weather)
 
@@ -111,12 +123,6 @@ items:
 
           - url: /extractors/other/github/
             title: GitHub
-
-          - url: /extractors/other/http/
-            title: HTTP
-
-          - url: /extractors/other/storage-api/
-            title: Keboola Connection Storage
 
           - url: /extractors/other/pingdom/
             title: Pingdom
