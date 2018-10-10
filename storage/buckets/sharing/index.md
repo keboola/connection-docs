@@ -26,7 +26,7 @@ You can specify who can link the bucket to a project:
 *and also a member of that organization*.
 
 In either case the source and target project must be in the same organization. To share buckets between different organizations, use
-[Storage Extractor](/extractors/other/storage-api/) or [Storage Writer](/writers/storage-api/).
+[Storage Extractor](/extractors/storage/storage-api/) or [Storage Writer](/writers/storage-api/).
 
 ## Limitations
 
