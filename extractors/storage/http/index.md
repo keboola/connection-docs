@@ -40,7 +40,7 @@ Each table has different settings (path, load type, etc.) but they all share the
 ### Specify File to Download
 
 For each table you have to specify a path that leads to a single CSV file or to an archive (GZ and ZIP are supported),
-which will be imported into a single table in Storage. .
+which will be imported into a single table in Storage.
 
 {: .image-popup}
 ![Screenshot - S3 Settings](/extractors/storage/http/ui5.png)
