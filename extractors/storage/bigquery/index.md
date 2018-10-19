@@ -8,8 +8,7 @@ permalink: /extractors/storage/bigquery/
 
 The BigQuery extractor loads data from [BigQuery](https://cloud.google.com/bigquery/) and brings it into Keboola Connection (KBC). 
 
-To work with Google BigQuery, create an account and [enable billing](https://cloud.google.com/bigquery/public-data/). 
-Querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). 
+To work with Google BigQuery, create an account and [enable billing](https://cloud.google.com/billing/docs/how-to/modify-project). 
 Then create a Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
 
 ## Create Bucket
