@@ -8,7 +8,7 @@ is fairly easy. These are the tools to organize repetitive work happening in you
 *how to use those tools* to organize your project.
 
 The design decision depends on many factors - what is the purpose of the project, how big the data are, how often they update, how often they can be updated, how complicated are dependencies between operations. The approaches described below are some typical ways how projects can be organized. There are no limitations in the platform limiting how you do stuff. We highly recommend that you consult the design decisions with your
-[Maintainer](todo) or [Partner](/#keboolas-partners-program) as they may be able to provide valuable experience.
+[Maintainer](/management/organization/) or [Partner](/#keboolas-partners-program) as they may be able to provide valuable experience.
 
 ## Pipelines
 The approach we showed in the [introduction](/orchestrator/tasks/) can be described as data pipelines. This approach can be characterized as
@@ -71,8 +71,8 @@ This means: first *extract* from every used data source, then cleanup the data a
 The design can then proceed in the following path. Configure the data sources and determine what is the wanted/possible update frequency.
 Create one (giant) orchestration which has all extractors in the extractor phase, all transformations in the transformation phase and
 all writers in the writers phase. The transformation phase may need to be split up to multiple phases if there are some dependent
-transformations, or you can use nested orchestrations to handle these. The schedule of the orchestration is determined by the
-lowest data-source update frequency.
+transformations, or you can use [nested orchestrations](/orchestrator/tasks/nesting/) to handle these. The schedule of the 
+orchestration is determined by the lowest data-source update frequency.
 
 Considering once again, the more complex project schema:
 
@@ -170,5 +170,5 @@ Cons:
 ## Conclusions
 KBC platform has very few constraints on the execution of tasks. That means there is no one true way of
 doing things. Here we have outlined three possible logical approaches. Whether they are suitable for you
-or not is best determine by consulting with your [Maintainer](todo) or [Partner](/#keboolas-partners-program).
+or not is best determine by consulting with your Maintainer or Partner.
 You may of course also combine them or do things your own way.

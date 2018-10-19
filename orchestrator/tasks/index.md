@@ -8,7 +8,8 @@ permalink: /orchestrator/tasks/
 
 Before configuring the Orchestrator component, you need to already have configured the components
 (extractors, transformations, writers) you wish to work with.
-To configure the Orchestrator component, create a new *orchestration*:
+
+To configure the Orchestrator component, create a new *Orchestration*:
 
 {: .image-popup}
 ![Screenshot - Orchestration Create](/orchestrator/tasks/configuration-create.png)
@@ -34,6 +35,8 @@ After selecting a component a list of its configurations is shown, clicking the 
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Configurations](/orchestrator/tasks/tasks-list-2.png)
 
+Repeat this for all configurations you want to add into the orchestration.
+
 ## Organize Tasks
 Let's assume that you have the following configurations, you wish to orchestrate into a data pipeline:
 
@@ -47,10 +50,14 @@ When you randomly add the configurations as orchestration tasks, chances are tha
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Added](/orchestrator/tasks/tasks-2.png)
 
-Here comes an important rule: **Phases execute sequentially, tasks within phases execute in parallel**.
-This means that the order of phases is important and maintained and that a second phase will start only when the first phase is completely finished.
-On the other hand, the order of tasks within the phase is not important, they may execute in any order or in parallel. For more in-depth explanation
-see the notes about [Job execution](todo).
+Here comes an important rule: 
+
+**Orchestration Phases execute sequentially, tasks within a Phase execute in parallel**.
+
+This means that the order of phases is important and maintained and that a second phase will start only when the first 
+phase is completely finished. On the other hand, the order of tasks within the phase is not important, they may execute 
+in any order or in parallel. For more in-depth explanation see the notes about 
+[Job execution](/orchestrator/running/#orchestration-execution).
 
 When this rule is applied to the above task configuration, it leads to the following sequence of execution:
 
@@ -107,8 +114,8 @@ Which corresponds to the following execution sequence:
 {: .image-popup}
 ![Orchestration Tasks Sequence Serialized](/orchestrator/tasks/orchestration-sequence-3.png)
 
-That means that the `Campaigns` and `Email Recipient Index` configurations will execute first, when they finish
-the transformation `Campaign Performance` will run and when it finishes, the transformation `Campaign Recipient`
+That means that the `Campaigns` and `Email Recipient Index` configurations will execute first. When they both finish,
+the transformation `Campaign Performance` will run. When it finishes, the transformation `Campaign Recipient`
 will run. Lastly, the `New recipients` writer will be executed.
 
-Another way of handling dependencies is using [nested orchestrations](/orchestrator/tasks/nested/).
+Another way of handling dependencies is using [nested orchestrations](/orchestrator/tasks/nesting/).

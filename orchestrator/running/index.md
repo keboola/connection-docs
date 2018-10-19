@@ -6,7 +6,7 @@ permalink: /orchestrator/running/
 * TOC
 {:toc}
 
-When you configure orchestration tasks, you probably want to test it. You can run the orchestration manually:
+When you configure orchestrations tasks, you probably want to test it. You can run the orchestration manually:
 
 {: .image-popup}
 ![Screenshot - Orchestration Main Page Configured](/orchestrator/running/orchestration-main-1.png)
@@ -27,7 +27,7 @@ Clicking on the job row takes you to the orchestration job details:
 {: .image-popup}
 ![Screenshot - Orchestration Jobs](/orchestrator/running/orchestration-jobs.png)
 
-Here you can see which jobs were executed, which jobs failed. Notice that because the tasks within a phase run in parallel, the
+Here you can see which jobs were executed and which jobs failed. Notice that because the tasks within a phase run in parallel, the
 `Snowflake - Email recipient Index` was started at the same time as the `Adform - Campaigns` task
 (though it is displayed after it in the list). However, the orchestration did not continue to the second phase (`transformation phase`)
 because the first phase failed. You can directly retry the orchestrations failed jobs by clicking **Job Retry**:
@@ -35,12 +35,13 @@ because the first phase failed. You can directly retry the orchestrations failed
 {: .image-popup}
 ![Screenshot - Orchestration Jobs](/orchestrator/running/job-retry.png)
 
-Additional properties control the execution of tasks within orchestration:
+Only failed tasks and failed and not executed phases will be checked by default. Additional properties control
+the execution of tasks within orchestration:
 
 - Task can be marked as *Active*/inactive. Marking the task as inactive means that it won't be run with the orchestration and it is useful for temporarily skipping something.
-- Enabling *Continue on Failure* on a task means that even if that task fails, the orchestration will continue running (and will end with a `warning` state). This feature is useful when a datasource becomes temporarily unstable and you still want to try best-effort extracting it.
+- Enabling *Continue on Failure* on a task means that even if that task fails, the orchestration will continue running to following phases (and will end with a `warning` state). This feature is useful when a datasource becomes temporarily unstable and you still want to try best-effort extracting it.
 - It is also possible to set *Task Parameters*. This a low-level feature which modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#creating-and-running-a-job).
-- Action, always `run`, except for [GoodData Writer](/writers/gooddata/).
+- Action is always `run`, except for [GoodData Writer](/writers/gooddata/).
 
 ## Automation
 When you are content with the orchestration setting, it's time to automate its execution. This is done simply by setting
@@ -57,12 +58,12 @@ Keep in mind that other users may see different schedules. These may even differ
 ![Screenshot - Orchestration Schedule](/orchestrator/running/schedule.png)
 
 Before scheduling an orchestration, be sure to run it and asses a reasonable schedule. An orchestration itself is considered
-as a [component job](/management/jobs/) which means that it will not run in parallel. When you trigger
+as a component configuration which means that it will [not run in parallel](/management/jobs/). When you trigger
 an orchestration job and there is still a previous orchestration job running (some of the configured tasks are
 still running), the newly created orchestration job will be [waiting](/management/jobs/#waiting-jobs) until
-the previous one finishes. See below for more details about [orchestration execution](#orchestration-execution).
-This means that if you have an orchestration running for 1h, and you schedule it to run every 30 minutes, you'll still have your tables
-updated only every hour. Plus you'll also clog the project with waiting jobs.
+the previous one finishes. This means that if you have an orchestration running for 1h, and you schedule 
+it to run every 30 minutes, you'll still have your tables updated only every hour. Plus you'll also clog 
+the project with waiting jobs.
 
 ## Orchestration Execution
 An orchestration is designed to run unattended. That means that a new [API Token](/management/project/tokens/) is created automatically when
@@ -76,7 +77,7 @@ who triggered the orchestration) --- the notification setting is ignored. When a
 defined schedule, it is running as if the specified orchestration token triggered the execution. In that case,
 the [notifications](/orchestrator/notifications/) settings are honored.
 In either case, all the jobs created by the orchestration (extractors, writers, ...) are run using the orchestration token.
-That is true even if you trigger the orchestration manually. There is no need to know or use the orchestration token manually.
+That is true even if you trigger the orchestration manually. There is no need to know or manually use the orchestration token.
 
 **Important: Do not delete, refresh or otherwise modify the orchestration token. There is a special [API](https://developers.keboola.com/overview/api/) for that.**
 
@@ -96,9 +97,9 @@ the same configuration of the same component cannot run in parallel. This is pri
 the output data produced by that configuration. In a more technical way, we can say that
 *jobs running the same configuration are **serialized***.
 
-THe above can be added to the [basic rule of orchestrations](/orchestrator/tasks/#organize-tasks):
+The above can be added to the [basic rule of orchestrations](/orchestrator/tasks/#organize-tasks):
 
-    Phases execute sequentially, tasks within phases execute in parallel
+    Phases execute sequentially, tasks within phases execute in parallel.
 
 Which means that:
 
