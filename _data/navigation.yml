@@ -222,7 +222,22 @@ items:
         title: Applications
 
   - url: /orchestrator/
-    title: Automation
+    title: Orchestrator
+    items:
+      - url: /orchestrator/tasks/
+        title: Tasks
+        items:
+          - url: /orchestrator/tasks/nesting/
+            title: Nesting
+
+      - url: /orchestrator/running/
+        title: Running
+
+      - url: /orchestrator/notifications/
+        title: Notifications
+
+      - url: /orchestrator/design/
+        title: Design
 
   - url: /management/
     title: Management
