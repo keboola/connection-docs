@@ -17,7 +17,7 @@ Then click **Edit Notifications** and set notifications for particular situation
 {: .image-popup}
 ![Screenshot - Notification Details](/orchestrator/notifications/notifications.png)
 
-Fill in an email address and press the plus button to add it. You can set any email address (can be user of the project or an group email for
+Fill in an email address and press enter to add it. You can set any email address (can be user of the project or an group email for
 multiple persons). Notifications can be set for situations when:
 
 - the entire orchestration finishes with an **error** status,
