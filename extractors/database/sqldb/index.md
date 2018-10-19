@@ -89,8 +89,10 @@ of this feature are quite well discussed on [StackOverflow](https://stackoverflo
 
 ### MS SQL Server Advanced Mode
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
-For this reason,  if you are writing advanced mode queries you have to quote the values of non-numeric columns (text, datetime, etc.) --- so that the selected
+For this reason, if you are writing advanced mode queries you have to quote the values of non-numeric columns (text, datetime, etc.) --- so that the selected
 value is `"some text"` instead of `some text`. This can be done by e.g. `SELECT char(34) + [my_text_column] + char(34)`.
+The [`CHAR`](https://docs.microsoft.com/en-us/sql/t-sql/functions/char-transact-sql?view=sql-server-2017) function with argument `34` produces
+the double quote character `"`.
 When the extracted text itself may contain quotes, you need to escape them by replacing `"` with `""`. Full example:
 
 {% highlight sql %}
