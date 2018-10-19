@@ -15,7 +15,7 @@ Find the Google Drive extractor in the list of extractors and create a new confi
 {: .image-popup}
 ![Screenshot - Create configuration](/extractors/storage/google-drive/create-configuration.png)
 
-To continue, click on **Authorize Account**.
+To continue, click **Authorize Account**.
 
 ## Authorization
 Select one of the two authorization methods:
@@ -47,29 +47,29 @@ Click **Select spreadsheet...** to list accessible spreadsheets in your account:
 {: .image-popup}
 ![Screenshot - List sheets](/extractors/storage/google-drive/configuration-list-1.png)
 
-You may be asked once again to log-in, in that case, use the same account that you authorized in the first step of the setup.
+You may be asked once again to log-in. In that case, use the same account that you authorized in the first step of the setup.
 
 Choose the document you want to import:
 
 {: .image-popup}
 ![Screenshot - Select document](/extractors/storage/google-drive/configuration-list-2.png)
 
-The sheets of the selected document are shown, you can select which sheets you want to import:
+The sheets of the selected document are shown; you can select which sheets you want to import:
 
 {: .image-popup}
 ![Screenshot - Select sheet](/extractors/storage/google-drive/configuration-list-3.png)
 
-## Modifying the Configuration
+## Modify Configuration
 When a sheet is added to the extractor, it is displayed in the list of extracted sheets:
 
 {: .image-popup}
 ![Screenshot - Sheet list](/extractors/storage/google-drive/table-list.png)
 
-The list shows the name (and link) of the imported document and sheet, and also the name of the destination
+The list shows the name (and the link) of the imported document and sheet, and also the name of the destination
 table in [Storage](/storage/). You can modify the destination table name by editing the sheet extraction.
 
 You can extract as many sheets as you want in a single configuration. Each extracted sheet
-may be disabled which means that it won't be extracted when the entire configuration is run. It may still be extracted
+may be disabled, which means that it won't be extracted when the entire configuration is run. It may still be extracted
 using the run button within the table row.
 
 ## Advanced Configuration
@@ -88,11 +88,11 @@ The options will be demonstrated on the following table:
 |4|Associated Equipment Company|Routemaster|2|4|8400|
 |5|BMW|Isetta|2|3|2285|
 
-### Number of header rows
+### Number of Header Rows
 This option allows you to set the index of the first data row. The row before that is the header row used to import the table.
-Using this option allows you to import tables which contain some text before the actual table, tables with merged rows in
-the header or tables with some strange data in headers (e.g. pictures).
-For example when *Number of header rows* is set to `1`, the example table will be imported as this:
+Using this option allows you to import tables which contain text before the actual table, tables with merged rows in
+the header, or tables with strange data in headers (e.g. pictures).
+For example, when *Number of header rows* is set to `1`, the example table will be imported as follows:
 
 |Id|Manufacturer|Model|Axles|Wheels|Length|
 |---|---|---|---|---|---|
@@ -102,9 +102,9 @@ For example when *Number of header rows* is set to `1`, the example table will b
 |4|Associated Equipment Company|Routemaster|2|4|8400|
 |5|BMW|Isetta|2|3|2285|
 
-Data starts at row with index = 1, row before that (index = 0) is the header row.
+Data starts at the row with index = 1, the row before that (index = 0) is the header row.
 
-When set to to `4` the table import will fail, the attempted import table (available from [Files](/storage/file-uploads/))
+When set to `4`, the table import will fail, and the attempted import table (available from [Files](/storage/file-uploads/))
 will look as follows:
 
 |empty|Reliant_Motor_Company|Reliant_Robin|empty|empty|3327|
@@ -112,11 +112,11 @@ will look as follows:
 |4|Associated Equipment Company|Routemaster|2|4|8400|
 |5|BMW|Isetta|2|3|2285|
 
-Data starts at row with index = 4, row before that (index = 3) is the header row. The header row values are sanitized to acceptable
-column names. That means that numbers are turned into string `empty` and the import fails because of duplicated column names.
+Data starts at the row with index = 4, the row before that (index = 3) is the header row. The header row values are sanitized to acceptable
+column names. That means that numbers are turned into the string `empty` and the import fails because of duplicated column names.
 This can be fixed with the following option.
 
-### Header column names
+### Header Column Names
 This options allows you to specify destination table column names. This effectively means that the header row read from
 the source sheet is ignored. Using this option allows you to import partial tables, tables with some strange column names
 (where the automatic sanitization fails), tables with empty or duplicate column names, etc.
@@ -131,11 +131,11 @@ With the above setting and the sample sheet, the following destination table wil
 |4|Associated Equipment Company|Routemaster|2|4|8400|
 |5|BMW|Isetta|2|3|2285|
 
-### Transpose header row number
+### Transpose Header Row Number
 This option has no effect.
 
-### Transpose from column
-This option enables table transformation into a key-value table. For example with setting `1`, the following table will be extracted:
+### Transpose from Column
+This option enables table transformation into a key-value table. For example, with setting `1`, the following table will be extracted:
 
 |key|value|
 |---|---|
@@ -153,7 +153,8 @@ This option enables table transformation into a key-value table. For example wit
 |Length|12190|
 |...|...|
 
-This means that all rows beginning with the first one were turned into key-value pairs.
+
+This means that all columns beginning with the first one were turned into key-value pairs.
 Setting the value to `4` will produce the following table:
 
 |Id|Manufacturer|Model|key|value|
@@ -177,16 +178,19 @@ Setting the value to `4` will produce the following table:
 This means that the columns of the original table beginning with the fourth column (`Axles`) are converted to
 key-value rows.
 
-### Transposed header column name
+*Note: Rows are numbered from zero, i.e. a typical header is at the row with index = 0, and data start at the row with index = 1. 
+Columns are always numbered from 1 (there are no headers).*
+
+### Transposed Header Column Name
 When table transformation is enabled ([**Transpose from column**](#transpose-from-column) greater than `0`)
-and [**Number of header rows**](#number-of-header-rows) is greater than `1`. The transformation produces an extra column,
-[**Transposed header column name**](#transposed-header-column-name) setting is the name of this column.
+and [**Number of header rows**](#number-of-header-rows) is greater than `1`, the transformation produces an extra column. 
+The name of this column is specified in [**Transposed header column name**](#transposed-header-column-name).
 
 {: .image-popup}
 ![Screenshot - Advanced options Header row column](/extractors/storage/google-drive/advanced-options-3.png)
 
-With [**Transpose from column**](#transpose-from-column) set to `1` and [**Number of header rows**](#number-of-header-rows) set to `2` and
-[**Transposed header column name**](#transposed-header-column-name) set to `second` a table which doesn't make much sense will be produced:
+With [**Transpose from column**](#transpose-from-column) set to `1`, [**Number of header rows**](#number-of-header-rows) set to `2` and
+[**Transposed header column name**](#transposed-header-column-name) set to `second`, a table which doesn't make much sense will be produced:
 
 <details>
   <summary>Click to see the table.</summary>

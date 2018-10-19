@@ -106,6 +106,9 @@ items:
           - url: /extractors/storage/google-drive/
             title: Google Drive
 
+          - url: /extractors/storage/bigquery/
+            title: Google BigQuery
+
           - url: /extractors/storage/http/
             title: HTTP
 
