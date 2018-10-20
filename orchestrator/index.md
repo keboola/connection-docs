@@ -17,7 +17,7 @@ The Orchestrator component has two important features:
 The former feature of the Orchestrator allows you to define **dependencies** between different configured
 components. For example, it allows you to specify that a transformation must be run after an extraction
 which provides the source data for it. You can also specify that two extractions may run in parallel
-because they are independent of each other. In this way, it is possible to organize **large and complex projects** 
+because they are independent of each other. This way it is possible to organize **large and complex projects** 
 and ensure you always work with the latest data available.
 
 The latter feature of the Orchestrator allows you to fully automate the entire data pipeline. That
