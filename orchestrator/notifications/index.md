@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Notifications
 permalink: /orchestrator/notifications/
 ---
 
@@ -17,15 +17,15 @@ Then click **Edit Notifications** and set notifications for particular situation
 {: .image-popup}
 ![Screenshot - Notification Details](/orchestrator/notifications/notifications.png)
 
-Fill in an email address and press enter to add it. You can set any email address (can be a user of the project or a group email 
-address for multiple persons). Notifications can be set for the following situations:
+Fill in an email address and press enter to add it (repeat if you need more). It can be an email address of a user of the project 
+or a group email address for multiple persons. Notifications can be set for the following situations:
 
 - The entire orchestration finishes with an **error** status.
 - Some tasks in the orchestration finish with an error, so the entire orchestration finishes with a **warning** status (this requires 
 enabling [*Continue on error*](/orchestrator/running/) for the given tasks).
 - The entire orchestration runs longer than usual --- e.g. when you set the threshold to 20% and an orchestration usually runs 
 for 100 minutes, and it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as 
-running average of the last 20 executions of the orchestration.
+a running average of the last 20 executions of the orchestration.
 
 When an orchestration is triggered manually, only the user who triggered it will receive any notifications. Therefore you
 don't have to worry about spamming your colleagues with messages when running orchestrations manually.
