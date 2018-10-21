@@ -90,8 +90,10 @@ just for this purpose. The token needs only permissions for the Orchestrator com
 ![Screenshot - Orchestration Token](/orchestrator/running/token-permissions.png)
 
 Because the actual orchestration runs with the token stored within that orchestration, the trigger token needs no access to any
-buckets or tables. Note: for historical reasons, specifying the Orchestrator component in component permissions is optional. 
-I.e. the the token will work also if it has access to no components.
+buckets or tables. 
+
+*Note: for historical reasons, specifying the Orchestrator component in component permissions is optional. 
+I.e. the the token will work also if it has access to no components.*
 
 ### Parallel Jobs
 Running things in the KBC platform is designed around the concept of [background jobs](/management/jobs/). One of the key properties is 
@@ -106,7 +108,7 @@ The above can be added to the [basic rule of orchestrations](/orchestrator/tasks
 Which means that
 
 - orchestration phases are serialized (and run in a defined order),
-- jobs of the same configuration are serialized (and run in an arbitrary order),
+- jobs of the same configuration are serialized (and run in an arbitrary order), and
 - everything else runs in parallel.
 
 We use the word **Parallel** in the (usual) meaning --- **not serialized**. Task execution is queue-based and non-deterministic
@@ -116,10 +118,10 @@ a shorter job will finish before a longer job. And if it happens, there is no ce
 
 This means that you must never rely on coincidental or time synchronization of jobs, even if it works sometimes. When jobs execute in 
 parallel there is no certainty that they will execute simultaneously or in the same order, or that shorter jobs will finish before
-the longer jobs (i.e. the jobs may not start immediately --- for example, because the shorter job was already run manually).
+longer jobs (i.e. the jobs may not start immediately --- for example, because the shorter job was already run manually).
 
 If one task relies on the results of another task, it must **always** be put in another phase (be serialized). For example: It is incorrect to
 build an orchestration on the assumption that a 5minute task will be finished well before a 2h task, so the 2h task can use the result of the 5minute task
-during its execution. While this will work 99% of the time, there is no warrant that the result of the short job will become available during the long job.
+during its execution. While this will work 99% of the time, there is no guarantee that the result of the short job will become available during the long job.
 
 That being said, we do our best to execute jobs as quickly as possible and utilize the maximum allowed amount of parallel jobs.
