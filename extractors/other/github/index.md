@@ -9,8 +9,7 @@ permalink: /extractors/other/github/
 The GitHub extractor uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
 to Keboola Connection (KBC).
 
-## Create new configuration
-
+## Create New Configuration
 Find GitHub in the list of extractors and create a new configuration. Name it (you can change the name any time).
 
 {: .image-popup}
