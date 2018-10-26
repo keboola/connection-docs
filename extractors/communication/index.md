@@ -10,7 +10,7 @@ The following extractors support communication systems:
 - [Email Attachments](/extractors/communication/email-attachments/) 
 - [Zendesk](/extractors/communication/zendesk/) 
 - [Intercom](/extractors/communication/intercom/) 
-- Slack 
+- [Slack](/extractors/communication/slack/) 
 - and others
 
 

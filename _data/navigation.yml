@@ -52,23 +52,26 @@ items:
       - url: /extractors/communication/
         title: Communication
         items:
-          - url: /extractors/communication/gmail/
-            title: Gmail Messages
-
           - url: /extractors/communication/email-attachments/
             title: Email Attachments
 
-          - url: /extractors/communication/zendesk/
-            title: Zendesk
+          - url: /extractors/communication/gmail/
+            title: Gmail Messages
 
           - url: /extractors/communication/intercom/
             title: Intercom
 
+          - url: /extractors/communication/slack/
+            title: Slack
+
+          - url: /extractors/communication/zendesk/
+            title: Zendesk
+
       - url: /extractors/marketing-sales/
         title: Marketing/Sales
         items:
-          - url: /extractors/marketing-sales/hubspot/
-            title: HubSpot
+          - url: /extractors/marketing-sales/facebook-ads/
+            title: Facebook Ads
 
           - url: /extractors/marketing-sales/google-adwords-reports/
             title: Google AdWords Reports
@@ -76,8 +79,8 @@ items:
           - url: /extractors/marketing-sales/google-analytics/
             title: Google Analytics
 
-          - url: /extractors/marketing-sales/facebook-ads/
-            title: Facebook Ads
+          - url: /extractors/marketing-sales/hubspot/
+            title: HubSpot
 
       - url: /extractors/social/
         title: Social
@@ -142,15 +145,14 @@ items:
   - url: /writers/
     title: Writers
     items:
-      - url: /writers/tableau/
-        title: Tableau
-
       - url: /writers/gooddata/
         title: GoodData
 
       - url: /writers/storage-api/
         title: Keboola Connection Storage
 
+      - url: /writers/tableau/
+        title: Tableau
 
   - url: /storage/
     title: Storage
