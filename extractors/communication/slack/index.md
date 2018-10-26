@@ -6,7 +6,7 @@ permalink: /extractors/communication/slack/
 * TOC
 {:toc}
 
-The Slack extractor uses the [Slack API](api doc: https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/) 
+The Slack extractor uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/) 
 and to bring it to Keboola Connection (KBC).
 
 ## Create New Configuration
