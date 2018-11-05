@@ -11,7 +11,7 @@ Common data operations like joining, sorting, or grouping are still easier and f
 
 ## Environment
 
-The Python script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/). The current Python version is 3.6.4.
+The Python script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/). The current Python version is 3.7.1.
 
 ### Memory and Processing Constraints
 
@@ -54,8 +54,8 @@ import sys
 subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-cache-dir', '--force-reinstall', 'pandas==0.20.0'])
 {% endhighlight %}
 
-Some packages are already installed in the environment 
-(see [full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L25)), these packages do not need to be listed in the transformation. 
+Some packages are already installed in the environment
+(see [full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L25)), these packages do not need to be listed in the transformation.
 
 ### CSV format
 Tables from Storage are imported to the Python script from CSV files. CSV files can be read by standard Python functions
