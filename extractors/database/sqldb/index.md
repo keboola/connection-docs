@@ -23,7 +23,7 @@ The first step is to configure database credentials using the **Setup database c
 {: .image-popup}
 ![Screenshot - Configure Credentials Start](/extractors/database/sqldb/configure-credentials-1.png)
 
-Fill in the credentials to the database, See section [Server Specific Notes](#server-specific-notes) for description of non-standard fields.
+Fill in the credentials to the database. See section [Server Specific Notes](#server-specific-notes) for description of non-standard fields.
 After testing the credentials, **Save** them:
 
 {: .image-popup}
