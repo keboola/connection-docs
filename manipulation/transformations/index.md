@@ -96,9 +96,3 @@ everything is less clear and isolated. To save time, run multiple orchestration 
 Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all required steps have been executed. 
 
 Originally, we thought this was a cool idea; it allowed everyone to build a network of interdependent and reusable blocks of SQL code. However, a network of nontransparent dependency trees was usually created, so we have decided to abolish this feature in the near future. If possible, please do not use dependencies as it will make future migrations easier.
-
-## SQL Validation
-Transformation configuration has built-in validation.
-Validation is run each you visit the configuration page, save a query, save a mapping or edit dependencies.
-You will only be notified when there are errors in the transformation configuration.
-Tables defined in Output Mapping that does not yet exist in Storage are not validated.
