@@ -146,3 +146,8 @@ SELECT
     TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');
 
 {% endhighlight %}
+
+## SQL Validation
+Snowflake Transformations has built-in validation. You will only be notified when there are errors in the configuration.
+Validation will run everytime you visit the configuration page, save a Query, save a Input / Output Mappings or edit Required dependencies.
+Tables defined in Output Mapping that does not yet exist in Storage are not validated.
