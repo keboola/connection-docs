@@ -20,7 +20,7 @@ Without digging into details on what all these things can do, let's assume the f
 ![Task Dependencies](/orchestrator/tasks/nesting/dependencies-1.png)
 
 Let's say you have other pipelines similar to this one: perhaps you use the campaign performance results somewhere else,
-or perhaps you read the base recipient list from a different source. At the end of the day, you realize 
+or perhaps you read the base recipient list from a different source. At the end of the day, you realize
 the transformation `Campaign Performance` is pretty much locked with the `Campaigns` configuration. It expects
 its specific data tables and is not useful with any other input. On the other hand, the result of the `Campaigns`
 configuration is so complicated and cryptic that it is not used at all without the `Campaign Performance`
@@ -54,3 +54,5 @@ The execution of tasks can be visualized using the following sequence diagram:
 We showed you how to use nested orchestrations to create building blocks from extractor-transformation and transformation-writer.
 Another common example is using nested orchestrations to group transformations which must run together or in a sequence.
 This way you can split a lengthy and complex transformation into more manageable pieces and still use them as single building blocks.
+
+Warning: there is a **limit to the orchestration nesting**. It is currently set to 2 levels (one level is an orchestration running another orchestration).
