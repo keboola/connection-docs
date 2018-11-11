@@ -66,6 +66,11 @@ The value in the column contains a unix timestamp of the last change of the row,
 
 You can use this column to set up [incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
 
+## SQL Validation
+Snowflake Transformations have built-in validation of the SQL code. Validation is performed when you visit the configuration page, save a query,
+save a Input / Output Mappings or edit Required dependencies. You will only be notified when there are errors in the configuration.
+Tables defined in Output Mapping that do not exist yet in Storage are not validated.
+
 ## Best Practices
 
 ### Case Sensitivity
@@ -146,8 +151,3 @@ SELECT
     TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');
 
 {% endhighlight %}
-
-## SQL Validation
-Snowflake Transformations has built-in validation. You will only be notified when there are errors in the configuration.
-Validation will run everytime you visit the configuration page, save a Query, save a Input / Output Mappings or edit Required dependencies.
-Tables defined in Output Mapping that does not yet exist in Storage are not validated.
