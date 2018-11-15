@@ -12,7 +12,7 @@ You can reach your account settings from two places:
 1. Keboola Connection home page
 2. Projects
 
-Go to the Keboola Connection home page and select **Account Settings** in the little dropdown box on the right:
+Go to the Keboola Connection home page and select **Account Settings** in the little drop down box on the right:
 
 {: .image-popup}
 ![Screenshot -- Account Settings](/management/account/account-setting-1.png)
@@ -38,10 +38,10 @@ To change your password, go to your account settings --- the **Account & Securit
 ![Screenshot -- Account Settings](/management/account/change-password.png)
 
 First you need to enter your old password. Remember you cannot change your email address
-because it is considered as an identifier; you have to create a new account.
+because it is considered an identifier; you have to create a new account.
 
 ## Multi-Factor Authentication
-We highly recommend enabling the multi-factor authentication (MFA) on your account as it greatly increases the account security.
+We highly recommend enabling the multi-factor authentication (MFA) on your account as it greatly increases its security.
 You need to have a device with the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en) or
 a compatible MFA application (MFA using SMS is not supported). To enable MFA, go to **Account & Security** and click the **Enable MFA** button:
 
@@ -49,7 +49,7 @@ a compatible MFA application (MFA using SMS is not supported). To enable MFA, go
 ![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
 
 Set up the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en), scan the
-QR code with your camera and enter the obtained code:
+QR code with your camera, and enter the obtained code:
 
 {: .image-popup}
 ![Screenshot -- Enable MFA -- Step 2](/management/account/enable-mfa-2.png)
@@ -61,8 +61,8 @@ you will be prompted to enter the MFA code obtained from your device:
 ![Screenshot -- Login Page MFA](/management/account/login-3.png)
 
 ## Invitations
-Invitations pages shows a list or project, you have been [invited to](/management/project/users/#inviting-a-user).
-When you accept an invitation, you will become a user of the project and you'll be redirected there. When
+The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-a-user) to.
+When you accept an invitation, you'll become a user of the project and will be redirected there. When
 you decline the invitation, you'll lose the opportunity to enter the project.
 
 {: .image-popup}
@@ -104,12 +104,12 @@ Notifications are also sent when the [project limits](/management/project/limits
 {: .image-popup}
 ![Screenshot -- Notifications](/management/account/notifications.png)
 
-On the notifications page, you can mark notifications as read. Unread notification show as a bell with a
-red dot in the UI.
+On the **Notifications** page, you can mark notifications as read. Unread notifications show as a bell with a
+red dot.
 
 ## Promo Codes
 You may receive promotional codes to create a new project. They are not applied to existing
-projects but are typically used for ad hoc projects, hackatons, and PoCs.
+projects but are typically used for ad-hoc projects, hackathons, and PoCs.
 
 {: .image-popup}
 ![Screenshot -- Promo codes](/management/account/promo-codes.png)
