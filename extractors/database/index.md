@@ -7,6 +7,7 @@ permalink: /extractors/database/
 {:toc}
 
 Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
+
 There are a number of extractors for [**SQL databases**](/extractors/database/sqldb/):
 
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
@@ -17,12 +18,13 @@ There are a number of extractors for [**SQL databases**](/extractors/database/sq
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
 
-See our [tutorial](/tutorial/load/database/) for help with configuring these extractors.
-They all are configured in the same way. All SQL extractors also have an [advanced mode](/extractors/database/sqldb/).
+They are all [configured](/extractors/database/sqldb/#create-new-configuration) in the same way and 
+have an [advanced mode](/extractors/database/sqldb/). *(Their basic configuration is also part 
+of our [tutorial](/tutorial/load/database/).)* 
 
 On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, 
-requires a [different configuration](/extractors/database/mongodb/). The configuration of
-[BigQuery](https://cloud.google.com/bigquery/) extractor is covered in another [tutorial](/tutorial/ad-hoc/) of ours.
+requires a [different configuration](/extractors/database/mongodb/). 
+The configuration of [BigQuery](https://cloud.google.com/bigquery/) extractor is covered in another [tutorial](/tutorial/ad-hoc/) of ours.
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 

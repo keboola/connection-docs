@@ -6,12 +6,21 @@ permalink: /extractors/database/sqldb/
 * TOC
 {:toc}
 
-All extractors for supported SQL databases (Cloudera Impala, Firebird, IBM DB2, Microsoft SQL Server, MySQL, Oracle, PostgreSQL) are configured
-in the same way. See section [Server Specific Notes](#server-specific-notes) for a list of notable differences.
-Each extractor from SQL database allows you to extract data from selected tables or results from arbitrary SQL queries.
-See our [tutorial](/tutorial/load/database/) for quick introduction on extracting data from Snowlake Database Server.
+Each extractor from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries.
 
-## Create new configuration
+The extractors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html), 
+[Firebird](http://www.firebirdsql.org/), [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/), 
+[Microsoft SQL Server](https://www.microsoft.com/en/server-cloud/products/sql-server/), [MySQL](https://www.mysql.com/),
+[Oracle](http://www.oracle.com/index.html), [PostgreSQL](http://www.postgresql.org/)) are configured
+in the same way and have an [advanced mode](/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
+in the section [Server Specific Notes](#server-specific-notes).
+
+Before you start configuring your SQL extractor, consider securing your connection to your internal database to avoid exposing 
+your database server to the internet by [setting up an SSH Tunnel](/extractors/database/#connecting-to-database).
+
+*Note: Quick introduction to extracting data from the Snowflake Database Server is also part of our [tutorial](/tutorial/load/database/).*
+
+## Create New Configuration
 Find the extractor for the database of your choice in the list of extractors and create a new configuration. Name it (you can change the name any time).
 
 {: .image-popup}
@@ -43,7 +52,7 @@ Existing credentials can be changed using the **Database Credentials** link.
 {: .image-popup}
 ![Screenshot - Table list](/extractors/database/sqldb/table-list-1.png)
 
-## Modifying configuration
+## Modify Configuration
 If you want to modify table extraction setup, click on the corresponding row. You'll get to the table detail view:
 
 {: .image-popup}
