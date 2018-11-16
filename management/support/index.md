@@ -7,7 +7,7 @@ permalink: /management/support/
 {:toc}
 
 There are multiple ways to obtain support from within your project.
-First and foremost, there is a **Support** link in the navigation on the left. Click it and fill in a form
+First and foremost, there is the **Support** link in the navigation on the left. Click it and fill in a form
 to create a ticket, which will reach your maintainer.
 
 {: .image-popup}
@@ -41,7 +41,7 @@ Settings** page:
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/organization-allow-auto-join-on.png)
 
-To disable auto join and require approval for support accounts, click the **Change** link to modify the
+To disable Auto Join and require approval for support accounts, click the **Change** link to modify the
 settings, and uncheck the **Auto Join** checkbox.
 
 {: .image-popup}
@@ -52,7 +52,7 @@ The description for support access will reflect the current setting.
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/organization-allow-auto-join-off.png)
 
-With auto join off, a joining support account will require approval by an existing project user in
+With Auto Join off, a joining support account will require approval by an existing project user in
 order to gain access. When a support user requests access, each active project user will receive an
 email notification:
 
@@ -66,17 +66,17 @@ the links provided in the requesting user's row to either approve or reject the 
 ![Screenshot -- User request access](/management/support/approve-user-list.png)
 
 When the request is approved or rejected, the requester receives an email notification.
-If the request is approved, the requester becomes a user of the project, the list then shows both the
+If the request is approved, the requester becomes a user of the project. The list then shows both the
 reason stated in the request and also which project user approved the request.
 
 {: .image-popup}
 ![Screenshot -- User approved](/management/support/approve-user-list-2.png)
 
 ### Organization Changes
-When the [auto-join](#require-approval-for-support-access) is disabled it limits
+When [Auto Join](#require-approval-for-support-access) is disabled, it limits
 [who can access the projects](/management/project/users/#who-can-access-a-project) in the organization. It also means
 that neither [the maintainer](/management/organization/), nor Keboola Support can join the organization itself.
 
-In other words, when auto-join is turned off for an organization, only the organization users and project users may
+In other words, when Auto Join is turned off for an organization, only the organization users and project users may
 access its projects. Every new user of the organization must be explicitly invited. Every new user of any of its projects
 must either be explicitly invited or be a user of the organization.

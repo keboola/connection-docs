@@ -10,7 +10,7 @@ redirect_from:
 
 To be able to work with KBC, each user needs the following:
 
-- Platform wide KBC account
+- Platform-wide KBC account
 - Access to a specific project
 
 Once users can access a project, they gain full administrative access to that project.
@@ -44,7 +44,7 @@ the invitation, they will never become a member of the project.
 When an invitation is sent to a user, the next steps are slightly different for new and existing users.
 
 ### New User
-If the user does not yet have a platform wide KBC account, their user list names will be shown as
+If the user does not yet have a platform-wide KBC account, their user list names will be shown as
 `Not activated yet`:
 
 {: .image-popup}
@@ -73,7 +73,7 @@ If the added user already has a KBC account, you will immediately see their scre
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-2.png)
 
-It is a good idea to verify the screen name if you intended to invite an existing user.
+It is a good idea to verify the screen name if you intend to invite an existing user.
 If you see `Not activated yet` instead of the screen name, it means that there is no KBC account associated with the email address.
 The user will receive an email invitation:
 
@@ -85,17 +85,17 @@ The link leads to the [account settings](/management/account/) where the user ca
 {: .image-popup}
 ![Screenshot -- Invitations on account settings](/management/project/users/invitation-2.png)
 
-Invitation are also shown in the welcome screen with project list:
+Invitations are also shown on the welcome screen with the project list:
 
 {: .image-popup}
 ![Screenshot -- Invitations on project list](/management/project/users/invitation-1.png)
 
-Before the user accepts the invitation, they are not allowed to enter the project:
+Until the user accepts the invitation, they are not allowed to enter the project:
 
 {: .image-popup}
 ![Screenshot -- Project access denied](/management/project/users/invitation-3.png)
 
-Until the user accepts the invitation, they are not able to enter the project. Once the invitation is accepted, the user becomes member of the project:
+Once the invitation is accepted, the user becomes a member of the project:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
@@ -133,23 +133,23 @@ Once you authorize KBC in your Google account, a KBC account will be created for
 You may remove a user from a project by clicking the **Remove** button in the user list.
 The user will receive a notification email about being removed from the project.
 The removal is effective immediately. Any following operations will
-be unauthorized, regardless of whether the use was currently logged in or not.
-Removing a user from a project has no effect on the data in the project;
-everything that particular user did in the project stays untouched.
+be unauthorized, regardless of whether the user will be logged in at the moment or not.
+Removing a user from a project has no effect on the data in it;
+everything the particular user did there stays untouched.
 You can also leave a project voluntarily by pressing the **Leave** button.
 
 **Important:** However, you will not be able to re-join the project unless
 someone invites you again or unless you are a member of the project [organization](/management/organization/).
 
-## Who can access a project
+## Who Can Access a Project
 It is important to understand the concept of [organizations](/management/organization/) to asses what persons might be able to
-access a specific projects. For a quick overview, here is a complete list of persons able to access a given project:
+access a specific project. For a quick overview, here is a complete list of persons able to access a given project:
 
-- active users of the project (listed on the *Users* tab of the *Settings* page),
-- users invited to the project (listed on the *Users* tab of the *Settings* page with the note **Invited**),
-- users of the [organization](/management/organization/) to which the project belongs,
-- users of the [maintainer](/management/organization/) to which the project organization belongs, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**.
-- Keboola support staff, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**.
+- Active users of the project (listed on the *Users* tab of the *Settings* page)
+- Users invited to the project (listed on the *Users* tab of the *Settings* page with the note **Invited**)
+- Users of the [organization](/management/organization/) to which the project belongs
+- Users of the [maintainer](/management/organization/) to which the project organization belongs, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
+- Keboola support staff, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
 
 In all other cases, the user cannot enter the project. If Auto Join is disabled, maintainers users and Keboola Support staff can
 see the name of the project and request access which must be approved by a current member of the project.

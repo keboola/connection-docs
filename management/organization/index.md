@@ -11,12 +11,12 @@ and maintainers are therefore organized into a hierarchy:
 {: .image-popup}
 ![Screenshot - Project Hierarchy](/management/organization/organizations-maintainers.png)
 
-Although project, organizations and maintainers form a hierarchy, their users do not. Each unit has a completely
+Although projects, organizations and maintainers form a hierarchy, their users do not. Each unit has a completely
 independent set of users. That means organization users are not automatically users of the projects
-within organizations and - vice-versa - project users are not automatically users of the organization.
-This distinction is important for example when [sharing buckets](/storage/buckets/sharing/#sharing-type).
+within organizations and -- vice-versa -- project users are not automatically users of the organization.
+This distinction is important, for example when [sharing buckets](/storage/buckets/sharing/#sharing-type).
 
-Depending on your contract details and permissions, the organizations feature may or may not be available to you.
+Depending on your contract details and permissions, the `Organizations` feature may or may not be available to you.
 
 {: .image-popup}
 ![Screenshot - Organizations](/management/organization/organization-1.png)
