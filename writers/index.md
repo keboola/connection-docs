@@ -15,10 +15,12 @@ Writers can be grouped by their primary purpose:
 
 - **Business Intelligence**: [Tableau](/writers/tableau/), [GoodData](/writers/gooddata/), 
 YellowFin, SAS Visual Analytics, Chartio, Periscope, Looker and more.
-- **Marketing Solutions**: Facebook, Adwords Custom Audiences, Marketo, Mailchimp, Silverpop, 
-Trading desks and more.
-- **DWH/DB/Storage**: Oracle, SAP, Teradata, AWS, Informix, Dropbox, Drive, FTP, Redshift, Elastic, 
+- **Databases**: Oracle, SAP, Teradata, AWS, Informix, Dropbox, Drive, FTP, Redshift, Elastic, 
 BigQuery, [Keboola Connection Storage](/writers/storage-api/), and more.
+- **Generic Storage**: Oracle, SAP, Teradata, AWS, Informix, Dropbox, Drive, FTP, Redshift, Elastic, 
+BigQuery, [Keboola Connection Storage](/writers/storage-api/), and more.
+- **Other**: Facebook, Adwords Custom Audiences, Marketo, Mailchimp, Silverpop, 
+Trading desks and more.
 
 [comment]: # - [Keboola Connection Storage](/writers/storage-api): writes data to a Keboola Connection project in a different 
 [comment]: #organization or region.

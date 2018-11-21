@@ -24,10 +24,23 @@ Please [share your migration tips](http://wiki.keboola.com/home/transformations/
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined, but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
-## SQL Validation
-Snowflake Transformations have built-in validation of the SQL code. Validation is performed when you visit the configuration page, save a query,
-save a Input / Output Mappings or edit Required dependencies. You will only be notified when there are errors in the configuration.
-Tables defined in Output Mapping that do not exist yet in Storage are not validated.
+## Validation
+Snowflake transformations have built-in validation of the transformation code. The transformation validation checks:
+
+- syntax correctness of the SQL code,
+- transformation script data lineage,
+- input and output mapping data lineage.
+
+Data lineage validation means that each query in the SQL code is analyzed and the origin of each column is checked. It is
+particularly helpful in detecting typos and incomplete table structure changes as it can detect when a column is missing from
+the source table. This validation is also applied to input and output mapping, with one exception -- tables defined in
+the output mapping that do not exist yet in the Storage are not validated.
+
+Validation is performed when you visit the configuration page, save the SQL code, change Input or Output Mapping, or
+edit Required dependencies. You will only be notified when there are errors in the configuration.
+
+{: .image-popup}
+![Screenshot - Transformation validation](/manipulation/transformations/snowflake/validation-errors.png)
 
 ## Best Practices
 
