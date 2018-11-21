@@ -66,10 +66,23 @@ The value in the column contains a unix timestamp of the last change of the row,
 
 You can use this column to set up [incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
 
-## SQL Validation
-Snowflake Transformations have built-in validation of the SQL code. Validation is performed when you visit the configuration page, save a query,
-save a Input / Output Mappings or edit Required dependencies. You will only be notified when there are errors in the configuration.
-Tables defined in Output Mapping that do not exist yet in Storage are not validated.
+## Validation
+Snowflake transformations have built-in validation of the transformation code. The transformation validation checks:
+
+- syntax correctness of the SQL code,
+- transformation script data lineage,
+- input and output mapping data lineage.
+
+Data lineage validation means that each query in the SQL code is analyzed and the origin of each column is checked. It is
+particularly helpful in detecting typos and incomplete table structure changes as it can detect when a column is missing from
+the source table. This validation is also applied to input and output mapping, with one exception -- tables defined in
+the output mapping that do not exist yet in the Storage are not validated.
+
+Validation is performed when you visit the configuration page, save the SQL code, change Input or Output Mapping, or
+edit Required dependencies. You will only be notified when there are errors in the configuration.
+
+{: .image-popup}
+![Screenshot - Transformation validation](/manipulation/transformations/snowflake/validation-errors.png)
 
 ## Best Practices
 
