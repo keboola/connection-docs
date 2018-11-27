@@ -15,7 +15,7 @@ Before you start, have a working HubSpot account and get a HubSpot API Key.
 
 ### Get API Key
 
-Login to [HubSpot](http://www.hubspot.com/) and in top right corner click on the arrow next to your avatar. Then select **Integrations**.
+Login to [HubSpot](http://www.hubspot.com/) and in the top right corner click on the arrow next to your avatar. Then select **Integrations**.
 
 {: .image-popup}
 ![HubSpot Logged Menu](/extractors/marketing-sales/hubspot/03-logged-menu.jpg)

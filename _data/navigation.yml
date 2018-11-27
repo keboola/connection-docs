@@ -82,6 +82,9 @@ items:
           - url: /extractors/marketing-sales/hubspot/
             title: HubSpot
 
+          - url: /extractors/marketing-sales/sklik/
+            title: Sklik
+
       - url: /extractors/social/
         title: Social
         items:
