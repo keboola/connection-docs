@@ -37,7 +37,8 @@ the source table. This validation is also applied to input and output mapping, w
 the output mapping that do not exist yet in the Storage are not validated.
 
 Validation is performed when you visit the configuration page, save the SQL code, change Input or Output Mapping, or
-edit Required dependencies. You will only be notified when there are errors in the configuration.
+edit Required dependencies. You will only be notified when there are errors in the configuration. The validation is
+implemented using the [SQLDep](https://sqldep.com/) service.
 
 {: .image-popup}
 ![Screenshot - Transformation validation](/manipulation/transformations/snowflake/validation-errors.png)
