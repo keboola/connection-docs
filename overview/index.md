@@ -51,7 +51,7 @@ Both pick data from Storage, manipulate it and then store it back.
 
 #### Transformations
 [Transformations](/manipulation/transformations/) can be created by writing a **free-form script** in
-[SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, MySQL), [R](https://www.r-project.org/about.html) and
+[SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [R](https://www.r-project.org/about.html) and
 [Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments.
 
 #### Applications
@@ -84,8 +84,8 @@ In the background, behind the scenes, there is the [**Orchestrator**](/orchestra
 Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
 
 ## Keboola Support
-When working with KBC, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us. 
-To solve your problem or to gain context, our support staff may join your project when requested. 
+When working with KBC, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.
+To solve your problem or to gain context, our support staff may join your project when requested.
 
 ## Other Commonly Used Terms
 This section explains a few terms that are often used throughout these documentation pages.

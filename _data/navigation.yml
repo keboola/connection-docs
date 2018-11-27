@@ -223,9 +223,6 @@ items:
           - url: /manipulation/transformations/sandbox/
             title: Sandbox
 
-          - url: /manipulation/transformations/mysql/
-            title: MySQL Transformations
-
           - url: /manipulation/transformations/redshift/
             title: Redshift Transformations
 

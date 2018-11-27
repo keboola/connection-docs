@@ -28,7 +28,7 @@ Before you start with transformations, create a bucket and call it *Opportunity*
 
 Then click on *New Transformation* button to create an individual transformation.
 Make sure to enter its *Name* and select *Backend*. A backend is the engine running the transformation script;
-it is either a database server (Snowflake, Redshift, MySQL) or a language interpreter (R, Python).
+it is either a database server (Snowflake, Redshift) or a language interpreter (R, Python).
 Name your transformation *Denormalize opportunities*, and choose the **Snowflake** backend.
 
 {: .image-popup}

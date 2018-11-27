@@ -19,7 +19,7 @@ It automatically fills the sandbox with relevant tables and takes
 the [Input Mapping](/manipulation/transformations/mappings/#input-mapping) of the transformation into account.
 
 Each user has **one sandbox per project and [backend](/manipulation/transformations/#backend)**
-(Snowflake, Redshift, MySQL, RStudio for R and Jupyter for Python) to their disposal.
+(Snowflake, Redshift, RStudio for R and Jupyter for Python) to their disposal.
 Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management --- see below.
 
 {: .image-popup}
@@ -57,7 +57,7 @@ Then click the **Load data** button to load tables or whole buckets into the san
 You can limit the number of rows that are loaded; this is useful for sampling a large table.
 
 {: .image-popup}
-![MySQL sandbox](/manipulation/transformations/sandbox/sandbox-mysql-load-data.png)
+![Screenshot - Load data into Sandbox](/manipulation/transformations/sandbox/sandbox-load-data.png)
 
 The imported tables will have full tables names --- including both a bucket and table name.
 
@@ -103,10 +103,10 @@ Once the sandbox is ready, you will get a notification. Or, watch the progress o
 Except loading data, sandbox supports several other basic actions.
 To access them, go to the **Transformations** section and click the **Sandbox** button at the top.
 
-  - *Connect* (Snowflake and MySQL only) --- Connect to the sandbox using a web SQL client.
-  - *SSL* (Redshift and MySQL only) --- Show secure connection information.
+  - *Connect* (Snowflake only) --- Connect to the sandbox using a web SQL client.
+  - *SSL* (Redshift only) --- Show secure connection information.
   - *Drop Sandbox* --- Deletes the sandbox database (and all its tables).
-  - *Extend Expiration* --- Postpone the sandbox expiration date for another period (14 days for MySQL, 5 days for Jupyter and RStudio).
+  - *Extend Expiration* --- Postpone the sandbox expiration date for another period (5 days for Jupyter and RStudio).
 
 In the same place you can also see the sandbox connection credentials. To copy & paste individual values,
 use the *copy icon*:
@@ -118,38 +118,6 @@ use the *copy icon*:
 
 Even though sandboxes with different backends are very similar, let's take a look at a few specifics
 that are mostly related to access management.
-
-### MySQL Sandbox
-
-For a single user, MySQL credentials are shared within all projects.
-Each project sandbox is represented as a database assigned to the user.
-The user and password remain the same until you delete all MySQL sandboxes in all your projects.
-
-For instance, `user_4` can have assigned the `sand_232_3800`, `sand_258_3849` and `sand_1067_46400` databases.
-These are sandboxes in projects `232`, `258` and `1067`. You can easily switch between them in your favorite MySQL client.
-
-
-#### Connecting to Sandbox
-
-To connect to a MySQL sandbox, use any MySQL client; for instance, [Sequel Pro](http://www.sequelpro.com/) or
-[DBeaver](http://dbeaver.jkiss.org/download/).
-We recommend using an SSL secure connection.
-To use a secure connection, download the [SSL certificate](https://d3iz2gfan5zufq.cloudfront.net/files/sh-tapi.ca.pem)
-and use it in your MySQL client.
-
-Sequel Pro configuration:
-
-{: .image-popup}
-![Sequel Pro Configuration Screenshot](/manipulation/transformations/sandbox/sequelpro-ssl.png)
-
-DBeaver configuration:
-
-{: .image-popup}
-![DBeaver Configuration Screenshot](/manipulation/transformations/sandbox/dbeaver-ssl.png)
-
-#### Version
-
-MySQL sandboxes use MariaDB 5.5.44.
 
 ### Redshift Sandbox
 
