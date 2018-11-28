@@ -17,7 +17,7 @@ also (de)select individual tasks to exclude:
 {: .image-popup}
 ![Screenshot - Run Orchestration](/orchestrator/running/orchestration-run.png)
 
-Each execution of the orchestration is shown in the Jobs section of the orchestration:
+Each execution of the orchestration is shown in the Last Runs section of the orchestration:
 
 {: .image-popup}
 ![Screenshot - Orchestration Jobs](/orchestrator/running/orchestration-main-2.png)
