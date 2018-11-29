@@ -114,7 +114,7 @@ job events.
 
 ### Azure-Hosted MS SQL Server
 An SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.windows.net`.
-If the hostname is provided as IP address e.g. `40.68.37.158` the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
+If the hostname is provided as IP address e.g. `123.123.123.123` the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
 
 ### Snowflake
 When extracting data from a Snowflake database, the permissions must be set to allow the
