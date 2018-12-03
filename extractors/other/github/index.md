@@ -38,7 +38,7 @@ Then log in to your GitHub profile:
 ## Configuration Templates
 Select the template you wish to use. There are two configuration templates available:
 
-- `Smart Mode` -- always gets missing data only
+- `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/#incremental-loading)
 - `Full Mode` -- always gets everything
 
 You can download:

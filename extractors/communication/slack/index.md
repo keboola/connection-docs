@@ -6,7 +6,7 @@ permalink: /extractors/communication/slack/
 * TOC
 {:toc}
 
-The Slack extractor uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/) 
+The Slack extractor uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/)
 and to bring it to Keboola Connection (KBC).
 
 ## Create New Configuration
@@ -31,15 +31,15 @@ Select one of the two authorization methods:
  you can generate an external link, which will guide them through this process.
 
 ## Configuration Templates
-To configure what data you want to extract, you can either select one of the configuration templates or switch to the JSON editor 
-for advanced extractions. 
+To configure what data you want to extract, you can either select one of the configuration templates or switch to the JSON editor
+for advanced extractions.
 
 {: .image-popup}
 ![Slack Configuration Templates](/extractors/communication/slack/04-templates.png)
 
-Select the template you wish to use: 
+Select the template you wish to use:
 
-- Smart Mode -- using this mode you always get just missing data (recommended)
+- Smart Mode -- using this mode you always get just missing data (recommended), loads data [incrementally](/storage/tables/#incremental-loading)
 - Full Mode -- using this mode you always get everything
 
 You can download:
