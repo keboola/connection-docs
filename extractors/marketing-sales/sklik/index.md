@@ -6,14 +6,14 @@ permalink: /extractors/marketing-sales/sklik/
 * TOC
 {:toc}
 
-The Sklik extractor fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts. 
+The Sklik extractor fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
 
 ## Create New Configuration
-Before you start, have a working [Sklik](https://www.sklik.cz/) account, 
+Before you start, have a working [Sklik](https://www.sklik.cz/) account,
 and get an Sklik API [key](https://www.sklik.cz/generateToken).
 
 ### Get API Key
-Log in to [Sklik](https://www.sklik.cz/) and select Settings from the drop-down menu next to your account name 
+Log in to [Sklik](https://www.sklik.cz/) and select Settings from the drop-down menu next to your account name
 in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
 ### Set Up Extractor
@@ -27,7 +27,7 @@ Then provide your API key:
 {: .image-popup}
 ![Sklik API Key](/extractors/marketing-sales/sklik/02-api-key.png)
 
-The extractor gets a list of all accessible accounts unless you restrict them explicitly. 
+The extractor gets a list of all accessible accounts unless you restrict them explicitly.
 
 ### Configure Reports
 Now configure your report/-s:
@@ -52,22 +52,22 @@ Now configure your report/-s:
   - Column `id` as identifier of the resource is downloaded every time.
 
 ***Warning:**
-The main account used for access to the API is queried for campaigns and stats too. It is also saved to the table accounts 
+The main account used for access to the API is queried for campaigns and stats too. It is also saved to the table accounts
 but has the columns access, relationName,relationStatus and relationType empty.
 Prices are in halers so you need to divide by 100 to get prices in CZK.*
 
 ## API Limits
-The current listing limit supported by the Sklik API is 100. A problem appears when `statGranularity` is added to `displayOptions`. 
-If you define `daily` granularity, the limit is divided by the number of days in the specified interval. 
+The current listing limit supported by the Sklik API is 100. A problem appears when `statGranularity` is added to `displayOptions`.
+If you define `daily` granularity, the limit is divided by the number of days in the specified interval.
 It means the interval between `dateFrom` and `dateTo` must not exceed 100 days.
 
 ## Report Tables
 
-Each report creates two tables: one with metadata and one with actual stats by date. 
+Each report creates two tables: one with metadata and one with actual stats by date.
 
 The metadata table named after the report has a primary key `id` (the column `id` is added to `displayColumns` automatically). Dots (`.`) in nested values will be replaced with underscores (`_`). The table is complemented with the column `accountId` with the id of the account.
 
-The stats table is also named after the report with the suffix `-stats` and has a primary key comprised of `id` and `date`. 
+The stats table is also named after the report with the suffix `-stats` and has a primary key comprised of `id` and `date`.
 
 For instance, if you configure to download the columns `name, clicks, impressions` from the resource `campaigns` and call the report `report1`, you will get the table `report1` with the columns `id, name` and the table `report1-stats` with the columns `id, date, impressions, clicks`.
 
@@ -83,18 +83,16 @@ Let's say we want to download daily stats for campaigns. The report will look li
 
 The extractor will create the table `report1` which will look like:
 
-```
-"id","accountId","name"
-"15001","123","Keboola.com - content"
-"15002","123","Keboola.com - search"
-```
+|id|accountId|name|
+|---|---|---|
+|15001|123|Keboola.com - content|
+|15002|123|Keboola.com - search|
 
 And the table `report1-stats`:
 
-```
-"id","clicks","date","impressions"
-"15001","0","","0"
-"15002","5","20180701","26"
-"15002","0","20180702","10"
-"15002","0","20180703","2"
-```  	
+|id|clicks|date|impressions|
+|---|---|---|---|
+|15001|0||0|
+|15002|5|20180701|26|
+|15002|0|20180702|10|
+|15002|0|20180703|2|
