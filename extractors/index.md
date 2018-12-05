@@ -20,7 +20,8 @@ Extractors can be grouped by their primary purpose:
 [Social Networks](/extractors/social/) and [Marketing and Sales](/extractors/marketing-sales/) extractors
 - [Other](/extractors/other/) extractors such as Geocoding-Augmentation or Weather Forecast
 
-For a definitive list of usable extractors, see your project **Extractors** section.
+For a definitive list of usable extractors, see your project **Extractors** section or the
+[public list of components](https://components.keboola.com/components).
 
 ## Working with Extractors
 Even though extractors are generally designed for **automated and repeated** data collection,
