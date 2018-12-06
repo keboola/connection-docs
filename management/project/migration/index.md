@@ -59,6 +59,8 @@ transformations or writers it will fetch all data on the first run.
 - Job execution history
 - Events and logs
 - Configuration versions
+- Configuration descriptions
+- Table descriptions
 - Trash
 - Project users
 - Project API tokens
