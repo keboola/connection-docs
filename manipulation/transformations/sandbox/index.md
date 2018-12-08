@@ -205,11 +205,29 @@ loading data.*
 The RStudio Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
-- Memory is limited to 8GB.
+- Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/r/#memory-and-processing-constraints)).
 - The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
+
+When your R script exceeds the memory limit, it may freeze or crash with the following message:
+
+    The previous R session was abnormally terminated due to an unexpected crash.
+
+If it freezes, use the *Stop* button to stop it:
+
+{: .image-popup}
+![Screenshot - R Restart](/manipulation/transformations/sandbox/restart-r.png)
+
+You can then restart the R session from the menu **Session** -- **Restart R**. To verify that your script is crashing
+on the amount of used memory, you can use the `mem_used()` function:
+
+{% highlight r %}
+install.packages('pryr')
+library('pryr')
+print(mem_used())
+{% endhighlight %}
 
 ### Jupyter Notebook Sandbox
 
@@ -237,9 +255,27 @@ print(onlyfiles)
 The Jupyter Notebook Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
-- Memory is limited to 8GB.
+- Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/python/#memory-and-processing-constraints)).
 - The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
+When your Python script exceeds the memory limit, it may crash with the following message:
+
+    The kernel appears to have died. It will restart automatically.
+
+You'll then see **Dead kernel** warning in the top right corner:
+
+{: .image-popup}
+![Screenshot - Python Restart](/manipulation/transformations/sandbox/restart-python.png)
+
+If the warning does not go away, you can then restart the kernel manually from the menu **Kernel** -- **Restart**.
+To verify that your script is crashing on the amount of used memory, you can use the `memory_info()` function:
+
+{% highlight python %}
+import os
+import psutil
+process = psutil.Process(os.getpid())
+print(process.memory_info().rss)
+{% endhighlight %}
