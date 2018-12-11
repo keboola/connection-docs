@@ -24,6 +24,35 @@ Please [share your migration tips](http://wiki.keboola.com/home/transformations/
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined, but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
+## Clone Table Load Type
+
+{: .image-popup}
+![Output mapping](/manipulation/transformations/snowflake/clone-table.png)
+
+By switching Load Type to `Clone Table` the input mapping will utilize the Snowflake 
+[`CLONE` command](https://docs.snowflake.net/manuals/sql-reference/sql/create-clone.html). 
+
+The `CLONE` command will execute the input mapping almost instantly for a table of any size as it physically does not move any data. 
+As the `CLONE` command has no further options all other input mapping options will be disabled 
+(except for `Source` and `Destination` of course). 
+ 
+`Clone Table` is useful when
+
+ - your table is very large and the `Copy Table` load type is slow
+ - you need more complex input mapping filters (eg. filtering by a date column in your data)
+
+### `_timestamp` System Column
+
+Table loaded using `Copy Table` will contain all columns of the original table and a new `_timestamp` column.
+This column is used internally by Keboola Connection to compare with the value of the `Changed in last` filter. 
+
+The value in the column contains a unix timestamp of the last change of the row which is
+
+ - when the row was added to the table, or
+ - when any of the cells was modified using an incremental load
+
+You can use this column to set up incremental processing.
+
 ## Best Practices
 
 ### Case Sensitivity
