@@ -32,7 +32,6 @@ Please [share your migration tips](http://wiki.keboola.com/home/transformations/
 By switching Load Type to `Clone Table` the input mapping will utilize the Snowflake 
 [`CLONE` command](https://docs.snowflake.net/manuals/sql-reference/sql/create-clone.html). 
 
-The `CLONE` command will execute the input mapping almost instantly for a table of any size as it physically does not move any data. 
 As the `CLONE` command has no further options all other input mapping options will be disabled 
 (except for `Source` and `Destination` of course). 
  
@@ -40,6 +39,11 @@ As the `CLONE` command has no further options all other input mapping options wi
 
  - your table is very large and the `Copy Table` load type is slow
  - you need more complex input mapping filters (eg. filtering by a date column in your data)
+
+### Performance
+
+The `CLONE` command will execute the input mapping almost instantly  for a table of any size (typically under 10 seconds) 
+as it physically does not move any data. 
 
 ### `_timestamp` System Column
 
