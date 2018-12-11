@@ -40,8 +40,7 @@ Any input mapping has the following options (to see all options, click on the *S
 - **Destination** --- This is the *Source* table/file name to be used inside the transformation 
 (it fills in automatically, but can be changed); file names should end with `.csv`.
 - **Load Type** --- Available only in Snowflake transformations. This parameter can switch the input mapping to use 
-the internal [`CLONE` command](https://docs.snowflake.net/manuals/sql-reference/sql/create-clone.html). 
-Read more in the [Clone Table Load Type](/manipulation/transformations/snowflake#clone-table-load-type) section. 
+the faster internal [`CLONE` command](/manipulation/transformations/snowflake#load-type). 
 - **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
 - **Changed in last** --- If you are into incremental processing, this comes in handy; import only rows changed or created within the selected time period.
  Supported time dimensions are `minutes`, `hours` and `days`.

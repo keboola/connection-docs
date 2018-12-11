@@ -24,38 +24,47 @@ Please [share your migration tips](http://wiki.keboola.com/home/transformations/
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined, but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
-## Clone Table Load Type
+## Load Type
+
+You can select two types of loading the table into your workspace - *Copy Table* and *Clone Table*.
 
 {: .image-popup}
-![Output mapping](/manipulation/transformations/snowflake/clone-table.png)
+![Load Type](/manipulation/transformations/snowflake/load-type.png)
+ 
+*Copy Table* is the default option and it physically copies the table from our storage to your workspace. 
+Using *Copy Table* allows you to refine the input mapping using various filters.
 
-By switching Load Type to `Clone Table` the input mapping will utilize the Snowflake 
+*Clone Table* avoids physical transfer of the data and clones the table from storage without any processing. 
+
+### Clone Table
+
+By switching Load Type to *Clone Table* the input mapping will utilize the Snowflake 
 [`CLONE` command](https://docs.snowflake.net/manuals/sql-reference/sql/create-clone.html). 
 
 As the `CLONE` command has no further options all other input mapping options will be disabled 
-(except for `Source` and `Destination` of course). 
+(except for *Source* and *Destination* of course). 
  
-`Clone Table` is useful when
+`Clone Table` is useful when 
 
- - your table is very large and the `Copy Table` load type is slow
- - you need more complex input mapping filters (eg. filtering by a date column in your data)
+ - your table is very large and the *Copy Table* load type is slow
+ - you need more complex input mapping filters (eg. filtering using a range)
 
-### Performance
+#### Performance
 
 The `CLONE` command will execute the input mapping almost instantly  for a table of any size (typically under 10 seconds) 
 as it physically does not move any data. 
 
-### `_timestamp` System Column
+#### `_timestamp` System Column
 
-Table loaded using `Copy Table` will contain all columns of the original table and a new `_timestamp` column.
-This column is used internally by Keboola Connection to compare with the value of the `Changed in last` filter. 
+Table loaded using *Copy Table* will contain all columns of the original table and a new `_timestamp` column.
+This column is used internally by Keboola Connection to compare with the value of the *Changed in last* filter. 
 
 The value in the column contains a unix timestamp of the last change of the row which is
 
  - when the row was added to the table, or
  - when any of the cells was modified using an incremental load
 
-You can use this column to set up incremental processing.
+You can use this column to set up [incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
 
 ## Best Practices
 
