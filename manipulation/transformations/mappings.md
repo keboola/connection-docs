@@ -34,12 +34,13 @@ This data is made available as a table for SQL, or as a CSV file for R and Pytho
 {: .image-popup}
 ![Input mapping](/manipulation/transformations/input-mapping.png)
 
-Any input mapping has the following options (to see all options, the *Show details* checkbox 
-above the *Source* field must be checked):
+Any input mapping has the following options (to see all options, click on the *Show details* button):
 
 - **Source** --- Select a table in Storage as the source table for your transformation.
 - **Destination** --- This is the *Source* table/file name to be used inside the transformation 
-(it fills in automatically, but can be changed); file names should end with `.csv`. 
+(it fills in automatically, but can be changed); file names should end with `.csv`.
+- **Load Type** --- Available only in Snowflake transformations. This parameter can switch the input mapping to use 
+the faster internal [`CLONE` command](/manipulation/transformations/snowflake#load-type). 
 - **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
 - **Changed in last** --- If you are into incremental processing, this comes in handy; import only rows changed or created within the selected time period.
  Supported time dimensions are `minutes`, `hours` and `days`.
@@ -56,6 +57,7 @@ You can combine these options freely. Input mappings for Snowflake, MySQL and Re
 **Important:** You can create Input Mappings for as many tables as you need for your transformation.
 
 *See an example of [setting up Input Mapping](/tutorial/manipulate/#input-mapping) in our tutorial.*
+
 
 ### Output Mapping
 
