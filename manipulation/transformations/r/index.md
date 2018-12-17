@@ -37,8 +37,8 @@ The R transformation can use any package available on
 its dependencies to be automatically loaded and installed, list its name in the package section. Using `library()`
 for loading is not necessary then.
 
-The latest versions of packages are always installed. Some packages are already installed in the environment 
-(see [full list](https://github.com/keboola/docker-custom-r/blob/master/init-2.R#L4) and their [dependencies](https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3)), these packages do not need to be listed in the transformation. 
+The latest versions of packages are always installed. Some packages are already installed in the environment
+(see [full list](https://github.com/keboola/docker-custom-r/blob/master/init-2.R#L4) and their [dependencies](https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3)), these packages do not need to be listed in the transformation.
 
 ### CSV format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.
@@ -59,6 +59,13 @@ write.csv(data, file="out/tables/out.csv", row.names=FALSE)
 {% endhighlight %}
 
 The row index produces a new unnamed column in the CSV file which cannot be imported to [Storage](/storage/).
+If the row names contain valuable data and you need to keep them, you have to convert them to a separate column first.
+
+{% highlight r %}
+df <- data.frame(first = c('a', 'b'), second = c('x', 'y'))
+data <- cbind(rownames(df), df)
+write.csv(data, file="/data/out/tables/out.csv", row.names=FALSE)
+{% endhighlight %}
 
 ### Errors and Warnings
 We have set up our environment to be a little zealous; all warnings are converted to errors and they cause the
