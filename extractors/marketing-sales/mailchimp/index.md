@@ -35,7 +35,9 @@ Then name the **storage bucket** where you will find your results.
 {: .image-popup}
 ![Mailchimp Output Bucket](/extractors/marketing-sales/mailchimp/03-output-bucket.png)
 
-Finally, select a **template** you want to use. 
+To configure what data you want to extract, select the **configuration template** you want to use. 
+Or [switch to the JSON editor](https://help.keboola.com/extractors/marketing-sales/mailchimp/#advanced-mode)
+for advanced extractions.
 
 {: .image-popup}
 ![Mailchimp Templates](/extractors/marketing-sales/mailchimp/04-templates.png)
