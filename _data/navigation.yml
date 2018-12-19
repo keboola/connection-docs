@@ -121,6 +121,9 @@ items:
           - url: /extractors/storage/storage-api/
             title: Keboola Connection Storage
 
+          - url: /extractors/storage/ftp/
+            title: FTP
+
       - url: /extractors/other/
         title: Other
         items:
