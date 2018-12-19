@@ -11,7 +11,7 @@ Each extractor from an SQL database allows you to extract data from selected tab
 The extractors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html), 
 [Firebird](http://www.firebirdsql.org/), [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/), 
 [Microsoft SQL Server](https://www.microsoft.com/en/server-cloud/products/sql-server/), [MySQL](https://www.mysql.com/),
-[Oracle](http://www.oracle.com/index.html), [PostgreSQL](http://www.postgresql.org/)) are configured
+[Oracle](http://www.oracle.com/index.html), [PostgreSQL](http://www.postgresql.org/), [Teradata](http://www.teradata.com)) are configured
 in the same way and have an [advanced mode](/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
 in the section [Server Specific Notes](#server-specific-notes).
 

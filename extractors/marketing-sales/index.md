@@ -10,6 +10,7 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Google Analytics](/extractors/marketing-sales/google-analytics/) 
 - [HubSpot](/extractors/marketing-sales/hubspot/) 
 - [Facebook Ads](/extractors/marketing-sales/facebook-ads/)
+- [Mailchimp](/extractors/marketing-sales/mailchimp/)
 - Salesforce --- watch our [salesforce integration video](https://www.youtube.com/watch?v=BVghRK2xrQo). 
 - [Sklik](/extractors/marketing-sales/sklik/)
 - Adform
