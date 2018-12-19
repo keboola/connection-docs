@@ -30,7 +30,7 @@ Fill in the **data center** for your account, your account **username** and the 
 {: .image-popup}
 ![Mailchimp API Key](/extractors/marketing-sales/mailchimp/02-api-key.png)
 
-Then name the **storage bucket** where you will find your results.
+Then name the **storage bucket** where your results will be stored.
 
 {: .image-popup}
 ![Mailchimp Output Bucket](/extractors/marketing-sales/mailchimp/03-output-bucket.png)
@@ -44,7 +44,7 @@ for advanced extractions.
 
 Available templates:
 
-- List and members - get lists and their members.
+- List and members -- get lists and their members.
 - Campaigns -- get campaign and their feedback.
 - Automations -- get automations and the associated emails.
 - Reports -- get reports and domain performance.
