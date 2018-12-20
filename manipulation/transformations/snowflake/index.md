@@ -22,54 +22,54 @@ Please [share your migration tips](http://wiki.keboola.com/home/transformations/
 
 - Snowflake queries are **limited** to 900 seconds by default.
 - Queries containing comments longer than 8,192 characters will segfault.
-- Constraints (like PRIMARY KEY or UNIQUE) are defined, but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
+- Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
 ## Load Type
 
-You can select two types of loading the table into your workspace - *Copy Table* and *Clone Table*.
+There are two types of loading tables into your workspace. You can select either *Copy Table* or *Clone Table*.
 
 {: .image-popup}
 ![Load Type](/manipulation/transformations/snowflake/load-type.png)
  
-*Copy Table* is the default option and it physically copies the table from our storage to your workspace. 
+*Copy Table* is the default option, and it physically copies the table from our Storage to your workspace. 
 Using *Copy Table* allows you to refine the input mapping using various filters.
 
-*Clone Table* avoids physical transfer of the data and clones the table from storage without any processing. 
+*Clone Table* avoids physical transfer of the data and clones the table from Storage without any processing. 
 
 ### Clone Table
 
 By switching Load Type to *Clone Table* the input mapping will utilize the Snowflake 
 [`CLONE` command](https://docs.snowflake.net/manuals/sql-reference/sql/create-clone.html). 
 
-As the `CLONE` command has no further options all other input mapping options will be disabled 
+As the `CLONE` command has no further options, all other input mapping options will be disabled 
 (except for *Source* and *Destination* of course). 
  
 `Clone Table` is useful when 
 
- - your table is very large and the *Copy Table* load type is slow
- - you need more complex input mapping filters (eg. filtering using a range)
+ - your table is very large and the *Copy Table* load type is slow.
+ - you need more complex input mapping filters (e.g. filtering using a range).
 
 #### Performance
 
-The `CLONE` command will execute the input mapping almost instantly  for a table of any size (typically under 10 seconds) 
+The `CLONE` command will execute the input mapping almost instantly for a table of any size (typically under 10 seconds) 
 as it physically does not move any data. 
 
-#### `_timestamp` System Column
+#### `_timestamp` system column
 
-Table loaded using *Clone Table* will contain all columns of the original table and a new `_timestamp` column.
+A table loaded using *Clone Table* will contain all columns of the original table plus a new `_timestamp` column.
 This column is used internally by Keboola Connection to compare with the value of the *Changed in last* filter. 
 
-The value in the column contains a unix timestamp of the last change of the row which is
+The value in the column contains a unix timestamp of the last change of the row, which is
 
  - when the row was added to the table, or
- - when any of the cells was modified using an incremental load
+ - when any of the cells was modified using an incremental load.
 
 You can use this column to set up [incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
 
 ## Best Practices
 
 ### Case Sensitivity
-Unlike Redshift or MySQL, Snowflake is case sensitive. All unquoted table/column names are converted to upper case
+Unlike Redshift or MySQL, Snowflake is case sensitive. All unquoted table/column names are converted to uppercase
 while quoted names keep their case.
 
 So if you want to create the following table,
@@ -106,7 +106,7 @@ SELECT "barcolumn" FROM "footable";
 ### Timestamp Columns
 By default, Snowflake uses the
 `YYYY-MM-DD HH24:MI:SS.FF3` [format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
-when converting the timestamp column to a character string.
+when converting the `timestamp` column to a character string.
 
 This means that if you create a table in a transformation which uses a `timestamp` column,
 
@@ -122,15 +122,16 @@ CREATE TABLE "out" AS
     (SELECT TO_CHAR("ts", 'YYYY-MM-DD HH:MI:SS') AS "ts" FROM "ts_test");
 {% endhighlight %}
 
-Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate from your transformation/sandbox session and the format may change unexpectedly.
+Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate 
+from your transformation/sandbox session and the format may change unexpectedly.
 
-**Important:**
-In the default US KBC [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) (connection.keboola.com) the following
-[Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) parameters are overridden:
+**Important:** In the default US KBC [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
+(connection.keboola.com), the following [Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) 
+parameters are overridden:
 
-- [TIMESTAMP_OUTPUT_FORMAT](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-output-format) - `DY, DD MON YYYY HH24:MI:SS TZHTZM`
-- [TIMESTAMP_TYPE_MAPPING](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-type-mapping) - `TIMESTAMP_LTZ`
-- [TIMESTAMP_DAY_IS_ALWAYS_24H](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-day-is-always-24h) - `yes`
+- [TIMESTAMP_OUTPUT_FORMAT](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-output-format) -- `DY, DD MON YYYY HH24:MI:SS TZHTZM`
+- [TIMESTAMP_TYPE_MAPPING](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-type-mapping) -- `TIMESTAMP_LTZ`
+- [TIMESTAMP_DAY_IS_ALWAYS_24H](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-day-is-always-24h) -- `yes`
 
 **Important:** Snowflake works with time zones (and [Daylight Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time)),
 requiring you to distinguish between various conversion functions:
