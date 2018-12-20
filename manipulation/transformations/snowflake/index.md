@@ -57,7 +57,7 @@ as it physically does not move any data.
 #### `_timestamp` system column
 
 A table loaded using *Clone Table* will contain all columns of the original table plus a new `_timestamp` column.
-This column is used internally by Keboola Connection to compare with the value of the *Changed in last* filter. 
+This column is used internally by Keboola Connection for comparison with the value of the *Changed in last* filter. 
 
 The value in the column contains a unix timestamp of the last change of the row, which is
 
