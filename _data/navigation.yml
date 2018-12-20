@@ -58,6 +58,9 @@ items:
           - url: /extractors/communication/gmail/
             title: Gmail Messages
 
+          - url: /extractors/communication/google-calendar/
+            title: Google Calendar
+
           - url: /extractors/communication/intercom/
             title: Intercom
 
