@@ -6,11 +6,9 @@ permalink: /extractors/storage/ftp/
 * TOC
 {:toc}
 
-## FTP
+The FTP extractor can extract multiple CSV files from FTP, FTPS or SFTP server.
 
-FTP extractor can extracts multiple CSV files from FTP, FTPS of SFTP server.
-
-After creating a new configuration, select files you want to extract. Then 
+After creating a new configuration, select files you want to extract. Then
 determine the way how to save data into KBC Storage.
 
 ## Create New Configuration
@@ -26,9 +24,9 @@ In order to access the files on FTP, you need to set up access credentials.
 {: .image-popup}
 ![Screenshot - FTP extractor server configuration](/extractors/storage/ftp/ftp-ex-2.png)
 
-For **SFTP** type of connection you can use private key. If you fill private key 
-extractor will use it for login instead of using password. You can also change 
-port. Default port for **FTP(S)** is **21** and for **SFTP** is **22**. 
+You can use a private key for the **SFTP** connection type. If you fill the private key,
+the extractor will use it for login instead of the password. You can also change
+the port for each connection method. Default port for **FTP** and **FTPS** is **21** and for **SFTP** is **22**.
 
 
 ## Add Tables
@@ -36,7 +34,7 @@ port. Default port for **FTP(S)** is **21** and for **SFTP** is **22**.
 {: .image-popup}
 ![Screenshot - FTP extractor create table](/extractors/storage/ftp/ftp-ex-3.png)
 
-To create a new table, click the **New Table** button and assign a name. It will 
+To create a new table, click the **New Table** button and assign a name. It will
 be used to create the destination table name in Storage and can be modified.
 
 ## List Tables
@@ -45,14 +43,14 @@ be used to create the destination table name in Storage and can be modified.
 ![Screenshot - FTP extractor list tables](/extractors/storage/ftp/ftp-ex-4.png)
 
 
-The configuration can extract as many tables as you wish. The list is fully 
-searchable, and you can delete or disable each table. In addition, you can 
-explicitly run extraction of only one table. The extraction order of the tables 
+The configuration can extract as many tables as you wish. The list is fully
+searchable, and you can delete or disable each table. In addition, you can
+explicitly run extraction of only one table. The extraction order of the tables
 can be changed.
 
 ## Modify Table
 
-Each table has different setting, but they share same credentials to the server. 
+Each table has different setting, but they share same credentials to the server.
 
 ### Specify Files to Download
 
@@ -64,9 +62,9 @@ you can use glob syntax (for testing glob path you can use [Glob tester](http://
 
 - **New Files Only** - The extractor will keep track of downloaded files and will continue with the unprocessed files
  on the next run.
- - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives >>>>>>> Stashed changes
+ - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives
  will be imported into a single Storage table.
- 
+
 ### Save Settings
 
 {: .image-popup}
