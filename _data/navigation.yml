@@ -121,6 +121,9 @@ items:
           - url: /extractors/storage/bigquery/
             title: Google BigQuery
 
+          - url: /extractors/storage/ftp/
+            title: FTP
+
           - url: /extractors/storage/http/
             title: HTTP
 
