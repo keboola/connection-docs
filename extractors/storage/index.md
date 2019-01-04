@@ -11,7 +11,7 @@ The following extractors allow access to data from generic storage services:
 - [Google BigQuery](/extractors/storage/bigquery) --- imports data from a Google Storage Bucket to Keboola Connection (also part of
 the [Tutorial](/tutorial/ad-hoc/#using-bigquery-extractor)).
 - [GoogleDrive](/extractors/storage/google-drive/) --- imports data from external data sheets (also part of the [Tutorial](/tutorial/load/googledrive/)).
-- [FTP](/extractors/storage/ftp) --- imports CSV files from FTP, FTPS and SFTP server.
+- [FTP](/extractors/storage/ftp) --- imports CSV files from the FTP, FTPS, and SFTP servers.
 - [HTTP](/extractors/storage/http/) --- imports CSV files stored on HTTP or HTTPS.
 - [Keboola Connection Storage](/extractors/storage/storage-api/) --- loads single or multiple tables from a Keboola Connection project and
 stores them in a bucket in your current project; can be used where [Share Buckets](/storage/buckets/sharing/) cannot.
