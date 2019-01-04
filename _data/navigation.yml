@@ -76,6 +76,9 @@ items:
           - url: /extractors/marketing-sales/facebook-ads/
             title: Facebook Ads
 
+          - url: /extractors/marketing-sales/gooddata-reports/
+            title: GoodData Reports
+
           - url: /extractors/marketing-sales/google-adwords-reports/
             title: Google AdWords Reports
 
