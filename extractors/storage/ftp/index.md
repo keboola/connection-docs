@@ -6,7 +6,7 @@ permalink: /extractors/storage/ftp/
 * TOC
 {:toc}
 
-The FTP extractor can extract a single, or multiple CSV files from the FTP, FTPS or SFTP servers.
+The FTP extractor loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Connection Storage.
 
 ## Create New Configuration
 Find the FTP extractor in the list of extractors and create a new configuration.
@@ -57,7 +57,7 @@ use the glob syntax (for testing the glob path you can use the [Glob tester](htt
  will be imported into a single Storage table.
 
 ### Save Settings
-Now determine how to save the data into Keboola Connection (KBC) Storage.
+Now determine how to save the data in Storage.
 
 {: .image-popup}
 ![Screenshot - FTP extractor save settings](/extractors/storage/ftp/ftp-ex-6.png)
@@ -74,9 +74,9 @@ There are three options for determining column names:
 {: .image-popup}
 ![Screenshot - FTP extractor header & primary key](/extractors/storage/ftp/ftp-ex-7.png)
 
- - **Set header manually** --- enables the **Set Header** input to manually specify all columns in the table.
- - **Read from the file(s) header** --- assumes that each file has a header in the first row.
+ - **Read Header** --- assumes that each file has a header in the first row.
  A random file will be chosen to extract the header, and the first row in all files will be removed.
+ - **Set Header** --- enables to manually specify all columns in the table.
  - **Generate automatically** --- names the columns sequentially as `col_1`, `col_2`, and so on.
 
 **Primary Key** can be used to specify the primary key in Storage. It can be used with **Incremental Load**
