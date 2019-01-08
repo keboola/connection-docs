@@ -33,15 +33,9 @@ for [Files Storage](/storage/file-uploads/) and [Amazon Redshift](https://aws.am
 [Snowflake](https://www.snowflake.net/product/) for [Table Storage](/storage/tables/). The database system
 behind the Table Storage is referred to as a **backend**.
 
-### Backend Properties
-Data in Table Storage are internally stored in a **database backend** (project backend). Specific properties of
-each backend are compared in the following table:
-
-Feature | Redshift | Snowflake
----------- | ---------- | -------------
-Export formats | `RFC`  | `RFC`
-Maximum number of columns in single table | 1200 | 1200 |
-Maximum table cell size |  64kB | 1MB |
+Data in Table Storage are internally stored in a **database backend** (project backend). From the point of
+view of the KBC user, the only notable difference is that Snowflake allows 1MB table cell size while
+Redshift is limited to 64kB table cell size.
 
 ### Redshift Table Size
 The table size reported on the Redshift backend often tends to be inaccurate, especially for tables with
