@@ -39,7 +39,7 @@ each backend are compared in the following table:
 
 Feature | Redshift | Snowflake
 ---------- | ---------- | -------------
-Export formats | `RFC`, `ESCAPED`, `RAW`  | `RFC`
+Export formats | `RFC`  | `RFC`
 Maximum number of columns in single table | 1200 | 1200 |
 Maximum table cell size |  64kB | 1MB |
 
