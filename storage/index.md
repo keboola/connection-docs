@@ -42,7 +42,6 @@ Feature | Redshift | Snowflake
 Export formats | `RFC`, `ESCAPED`, `RAW`  | `RFC`
 Maximum number of columns in single table | 1200 | 1200 |
 Maximum table cell size |  64kB | 1MB |
-Sync export (Data Preview) columns limit | x | 110 |
 
 ### Redshift Table Size
 The table size reported on the Redshift backend often tends to be inaccurate, especially for tables with
