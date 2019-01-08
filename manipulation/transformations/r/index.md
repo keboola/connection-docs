@@ -14,7 +14,21 @@ easier and faster to do in [SQL Transformations](/manipulation/transformations/)
 
 ## Environment
 The R script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
-The current R version is R **3.5.0**.
+The current R version is R **3.5.2**. The R version is updated regularly, few weeks after the official release.
+The update is always announced on the [status page](http://status.keboola.com/).
+
+When we update the R version, we offer --- for a limited time --- the option to switch to the previous version. You can
+switch the version in the transformation detail by clicking on the `R` label:
+
+{: .image-popup}
+![Screenshot - Transformations Versions](/manipulation/transformations/r/versions.png)
+
+This feature is intended to help you 'postpone' the update to a more convenient time for you in case there are
+any problems with the new version. You should update the transformation code to the new version soon, as the old
+version is considered unsupported.
+
+If the `R` label is not editable, there is no previous version offered. It is still possible to change the version
+via the [API](https://developers.keboola.com/integrate/storage/api/configurations/) though.
 
 ### Memory and Processing Constraints
 
