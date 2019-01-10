@@ -54,7 +54,13 @@ QR code with your camera, and enter the obtained code:
 {: .image-popup}
 ![Screenshot -- Enable MFA -- Step 2](/management/account/enable-mfa-2.png)
 
-Once you click the **Activate** button, the MFA will be enabled. Every time you login with your email and password,
+Once you click the **Activate** button, the MFA will be enabled. You can then download the MFA
+**Recovery Codes** or reconfigure the MFA to another device:
+
+{: .image-popup}
+![Screenshot -- MFA Enabled](/management/account/enable-mfa-3.png)
+
+Every time you login with your email and password,
 you will be prompted to enter the MFA code obtained from your device:
 
 {: .image-popup}
