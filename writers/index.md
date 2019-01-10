@@ -14,11 +14,11 @@ there are **no limitations** to how and where you can send your data.
 Writers can be grouped by their primary purpose:
 
 - **Business Intelligence**: [Tableau](/writers/tableau/), [GoodData](/writers/gooddata/),
-YellowFin, SAS Visual Analytics, Chartio, Periscope, Looker and more.
+YellowFin, SAS Visual Analytics, Chartio, Periscope, Looker, and more.
 - **Databases**: BigQuery, [Keboola Connection Storage](/writers/storage-api/), and more.
 - **Generic Storage**: [AWS S3](/writers/storage/aws-s3/), [Dropbox](/writers/storage/dropbox/), [Google Drive](/writers/storage/google-drive/),
 [Google Sheets](/writers/storage/google-sheets/), [Keboola Connection Storage](/writers/storage/storage-api/), and more.
-- **Other**: Adwords Custom Audiences, Mailchimp and more.
+- **Other**: Adwords Custom Audiences, Mailchimp, and more.
 
 For a definitive list of usable writers, see your project **Writers** section.
 

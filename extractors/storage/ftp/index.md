@@ -75,7 +75,7 @@ There are three options for determining column names:
 ![Screenshot - FTP extractor header & primary key](/extractors/storage/ftp/ftp-ex-7.png)
 
 - **Set header manually** -- enables the Set Header input to manually specify all columns in the table.
-- **Read from the file(s) header** -- assumes that each file has a header in the first row. A random file will be chosen to extract the header, and the first row in all files will be removed.
+- **Read from the file header** -- assumes that each file has a header in the first row. A random file will be chosen to extract the header, and the first row in all files will be removed.
 - **Generate automatically** -- names the columns sequentially as col_1, col_2, and so on.
 
 **Primary Key** can be used to specify the primary key in Storage. It can be used with **Incremental Load**
