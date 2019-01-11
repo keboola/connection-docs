@@ -71,7 +71,7 @@ Each table has different settings but they are all written to the **same project
 ### Source
 - **Table** specifies the table in the *source project*. This value cannot be changed. If you want to write another table,
 create a new item in the configuration.
-- **Changed In Last** allows you to use [incremental processing](/storage/tables/#incremental-processing) to write only a recent part of the data.
+- **Changed In Last** allows you to use [incremental processing](/storage/tables/#incremental-processing) to write only the recent part of the data.
 
 ### Destination
 - **Table Name** -- table name in the *target project* and bucket.

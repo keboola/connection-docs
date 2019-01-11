@@ -9,7 +9,7 @@ permalink: /writers/storage/google-sheets/
 This writer sends tables as worksheets into a single [Google Sheets](https://www.google.com/sheets/about/) account.
 It allows you to write tables into individual sheets of a spreadsheet document and append rows into an existing sheet.
 Be aware that Google sheets have [strict limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/)
-on the size of the document. If you are getting close to them, use the [Google Drive Writer](/writers/storage/google-drive/) to avoid failed writes.
+on the size of the document. If you are getting close to them, use the [Google Drive writer](/writers/storage/google-drive/) to avoid failed writes.
 
 ## Create New Configuration
 Find the Google Sheets writer in the list of writers and create a new configuration. Name it.
@@ -22,8 +22,8 @@ As the next step, click the **Authorize Account** button. Select one of the two 
 {: .image-popup}
 ![Screenshot - Authorize account](/writers/storage/google-sheets/ui2.png)
 
-- **Instant** -– Use this if you have access to the Google Drive account; the authorization will be done immediately.
-- **External** –- If you need to authorize access to the service from someone who does not have an account in KBC, you can 
+- **Instant** -- Use this if you have access to the Google Drive account; the authorization will be done immediately.
+- **External** -- If you need to authorize access to the service from someone who does not have an account in KBC, you can 
 generate an external link, which will guide them through this process.
 
 ## Configure Tables
@@ -33,7 +33,7 @@ Click the **New Table** button to add a new table:
 ![Screenshot - Add Table Step 1](/writers/storage/google-sheets/ui3.png)
 
 Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/#incremental-processing).
-All options may be modified later. Click next to select whether to create a new file or write to an existing one:
+All options may be modified later. Click **Next** to select whether to create a new file or write to an existing one:
 
 {: .image-popup}
 ![Screenshot - Add Table Step 2](/writers/storage/google-sheets/ui4.png)
