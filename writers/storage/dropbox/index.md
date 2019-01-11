@@ -6,7 +6,7 @@ permalink: /writers/storage/dropbox/
 * TOC
 {:toc}
 
-This extractor writes tables as CSV or other files into a single [Dropbox](https://www.dropbox.com/) account.
+This writer sends tables as CSV or other files into a single [Dropbox](https://www.dropbox.com/) account.
 
 ## Create New Configuration
 Find the Dropbox writer in the list of writers and create a new configuration. Name it.
@@ -26,7 +26,7 @@ you can generate an external link, which will guide them through this process.
 ## Add Input
 You may specify Storage [tables](/storage/tables/) or [files](/storage/file-uploads/) to be written to the target Dropbox account. 
 To specify tables, click the **New Table Input** button, and select the table you want to send to Dropbox. 
-*Filename* is the name of the destination file, directory `/data/in/tables/` is ignored.
+*Filename* is the name of the destination file, the directory `/data/in/tables/` is ignored.
 To specify files, click **New File Input** and specify a file tag or [Elastic Query string](https://www.elastic.co/guide/en/elasticsearch/reference/6.6/query-dsl-query-string-query.html#query-string-syntax).
 
 {: .image-popup}

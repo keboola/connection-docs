@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer loads single or multiple tables from your current project into a different Keboola Connection project.
+This writer loads single or multiple tables from your current project into a different Keboola Connection (KBC) project.
 The component can be used in situations where [Shared Buckets](/storage-api/buckets/sharing/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 
@@ -19,8 +19,8 @@ Find the Keboola Connection Storage writer in the list of writers and create a n
 ![Screenshot - Create configuration](/writers/storage/storage-api/create-configuration.png)
 
 ## Prepare API Token
-The writer requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. This limits the potential
-risks of token misuse.
+The writer requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. 
+This limits the potential risks of token misuse.
 
 To create such a token, go to **Users & Settings** in the *target project* and create a new token. Use a name that will
 help you identify the token later, and set the **write** access to the desired bucket.
