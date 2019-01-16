@@ -34,7 +34,7 @@ for [Files Storage](/storage/file-uploads/) and [Amazon Redshift](https://aws.am
 behind the Table Storage is referred to as a **backend**.
 
 Data in Table Storage are internally stored in a **database backend** (project backend). From the point of
-view of the KBC user, the only notable difference is that Snowflake allows 1MB table cell size while
+view of the KBC user, the only notable difference is that Snowflake allows 16MB table cell size while
 Redshift is limited to 64kB table cell size.
 
 ### Redshift Table Size
