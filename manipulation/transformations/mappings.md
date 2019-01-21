@@ -42,7 +42,7 @@ Any input mapping has the following options (to see all options, click on the *S
 - **Load Type** --- Available only in Snowflake transformations. This parameter can switch the input mapping to use 
 the faster internal [`CLONE` command](/manipulation/transformations/snowflake#load-type). 
 - **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
-- **Changed in last** --- If you are into incremental processing, this comes in handy; import only rows changed or created within the selected time period.
+- **Changed in last** --- If you are into [incremental processing](/storage/tables/#incremental-processing), this comes in handy; import only rows changed or created within the selected time period.
  Supported time dimensions are `minutes`, `hours` and `days`.
 - **Data filter** --- Download only rows that will match this single column multiple values filter.
 
