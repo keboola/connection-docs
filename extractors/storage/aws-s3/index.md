@@ -82,63 +82,62 @@ The extraction order of the tables can be changed.
 
 Each table has different settings (key, load type, etc.) but they all share the same AWS credentials.
 
-### Specify Files to Download
+### Source
 
 {: .image-popup}
 ![Screenshot - S3 Settings](/extractors/storage/aws-s3/ui4.png)
 
-For each table you have to specify the AWS S3 bucket and a search key.
-The search key can be a path to a single file or a prefix to multiple files
+For each table you have to specify the AWS **S3 Bucket** and a **Search Key**.
+The **Search Key** can be a path to a single file or a prefix to multiple files
 (omit the wildcard character and use the **Wildcard** checkbox instead).
 
-### Download Settings
+The **additional source settings** section allows you to set up the following:
 
-{: .image-popup}
-![Screenshot - Download Settings](/extractors/storage/aws-s3/ui5.png)
-
-This section allows you to set up the following:
-
- - **Wildcard**: S3 key is used as a prefix, and all available files matching the prefix will be downloaded.
+ - **New Files Only**: The extractor will keep track of downloaded files and will continue with the unprocessed files
+ on the next run. To reset the state, which keeps track of the progress and enables to continue with new files, 
+ use the **Reset State** button.
+ - **Wildcard**: **Search Key** is used as a prefix, and all available files matching the prefix will be downloaded.
  - **Subfolders**: Available only with **Wildcard** turned on. The extractor will also process all subfolders.
- - **New Files Only** - The extractor will keep track of downloaded files and will continue with the unprocessed files
- on the next run. To reset the state, which keeps track of the progress and enables to continue with new files, use the **Reset State** button.
- - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives >>>>>>> Stashed changes
- will be imported into a single Storage table.
+ 
 
-### Save Settings
+### CSV Settings
 
 {: .image-popup}
-![Screenshot - Save Settings](/extractors/storage/aws-s3/ui6.png)
+![Screenshot - CSV Settings](/extractors/storage/aws-s3/ui5.png)
 
-- The initial value in **Table Name** is derived from the configuration table name. You can change it at any time; however,
+- **Delimiter** and **Enclosure** specify the CSV format settings.
+- **Header** specifies how the destination table column names are obtained
+  - **CSV file(s) contain(s) a header row**: All downloaded files contain a row with the CSV header. The extractor obtains 
+  the header from a randomly selected downloaded file. 
+  - **Set column names manually**: None of the downloaded files does contain a header row and you will use the **Column Names**
+  input to specify the headers manually.
+  - **Generate column names as col_1, col_2, ...**: None of the downloaded files does contain a header row and 
+  the extractor will generate the column names automatically as a sequential number with a `col_` prefix.
+                 
+### Destination
+
+{: .image-popup}
+![Screenshot - Destination](/extractors/storage/aws-s3/ui6.png)
+
+
+- The initial value in **Storage Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved to cannot be changed.
 - **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
-- **Delimiter** and **Enclosure** specify the CSV settings.
-
-### Header & Primary Key
-
-{: .image-popup}
-![Screenshot - Header & Primary Key](/extractors/storage/aws-s3/ui7.png)
-
-There are three options for determining column names:
-
- - **Set header manually** --- This option enables the **Set Header** input to manually specify all columns in the table.
- - **Read from the file(s) header** --- This option assumes that each file has a header on the first line.
- A random file will be chosen to extract the header and the first line in all files will be removed.
- - **Generate automatically** --- The columns will be named sequentially as `col_1`, `col_2` and so on.
-
-**Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**
+- **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.
 
-
-### Audit
+## Processing Settings
 
 {: .image-popup}
-![Screenshot - Audit](/extractors/storage/aws-s3/ui8.png)
+![Screenshot - Processing Settings](/extractors/storage/aws-s3/ui7.png)
 
-The extractor can optionally add audit columns to the table. `s3_filename` adds the processed file name and `s3_row_number`
-adds the row number in the source file.
+ - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives
+ will be imported into a single Storage table.
+ - **Add Filename Column**: A new column `s3_filename` is added to the table and will contain the original filename 
+ including relative path to the **Search Key**.
+ - **Add Row Number Column**: A new column `s3_row_filename` is added to the table and will contain the row number in each 
+ of downloaded files.
 
 ## Advanced Mode
 
