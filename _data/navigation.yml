@@ -139,6 +139,9 @@ items:
           - url: /extractors/other/dark-sky/
             title: Dark Sky (Weather)
 
+          - url: /extractors/other/currency-rates/
+            title: ECB Currency Rates
+
           - url: /extractors/other/generic/
             title: Generic Extractor
 
