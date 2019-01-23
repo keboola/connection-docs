@@ -8,7 +8,7 @@ Apart from extractors for social networks, communication, storage, and marketing
 extractors that do not fall into any of the above mentioned categories:
 
 - [Dark Sky](/extractors/other/dark-sky/) --- looks up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
-- [ECB Currency Rates](/extractors/other/currency-rates) --- imports currency exchange rates as published by the European Central Bank
+- [ECB Currency Rates](/extractors/other/currency-rates) --- imports currency exchange rates as published by the European Central Bank.
 - [Generic Extractor](/extractors/other/generic/) --- can be configured to work with virtually any API.
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) ---
 provides detailed data for locations specified by their names, address or coordinates.
