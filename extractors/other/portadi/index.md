@@ -38,13 +38,13 @@ For more features, switch the configuration to the Power User Mode by clicking t
 JSON configuration uses the [Generic extractor](https://developers.keboola.com/extend/generic-extractor/) format.
 
 {: .image-popup}
-![Screenshot - Portadi](/extractors/other/portadi/04-advanced-mode.png)
+![Screenshot - Portadi Advanced Mode](/extractors/other/portadi/04-advanced-mode.png)
 
 If you select a template and want to specify more details using the advanced mode, don't forget to click
 **Save** first. The code will be pre-filled based on that particular template.
 
 {: .image-popup}
-![Screenshot - Portadi JSON pre-filled](/extractors/other/portadi/05-prefilled-json.png)
+![Screenshot - Portadi JSON pre-filled](/extractors/other/portadi/05-json-prefilled.png)
 
 When finished, **save** the configuration again and then run the extraction.
 
