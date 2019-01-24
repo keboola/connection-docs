@@ -17,7 +17,7 @@ Find Portadi in the list of extractors and create a new configuration. Name it.
 
 ## Provide API Token
 To configure this extractor, you need to provide an admin [API token](https://app.portadi.com/#!/settings).
-You can get it by clicking the *Get API Key* link. 
+You can get it by clicking the *Get your API Key* link. 
 
 {: .image-popup}
 ![Screenshot - Portadi API Token](/extractors/other/portadi/02-token.png)
@@ -44,7 +44,7 @@ If you select a template and want to specify more details using the advanced mod
 **Save** first. The code will be pre-filled based on that particular template.
 
 {: .image-popup}
-![Screenshot JSON pre-filled](/extractors/other/portadi/05-prefilled-json.png)
+![Screenshot - JSON pre-filled](/extractors/other/portadi/05-prefilled-json.png)
 
 When finished, **save** the configuration again and then run the extraction.
 
