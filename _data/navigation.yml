@@ -160,6 +160,9 @@ items:
           - url: /extractors/other/portadi/
             title: Portadi
 
+          - url: /extractors/other/stripe/
+            title: Stripe
+
           - url: /extractors/other/what3words/
             title: What3words Augmentation
 

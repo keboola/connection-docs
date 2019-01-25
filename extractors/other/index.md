@@ -12,8 +12,9 @@ extractors that do not fall into any of the above mentioned categories:
 - [Generic Extractor](/extractors/other/generic/) --- can be configured to work with virtually any API.
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) ---
 provides detailed data for locations specified by their names, address or coordinates.
-- [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom; a service for monitoring the uptime and performance of your websites and web applications.
+- [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom, a service for monitoring the uptime and performance of your websites and web applications.
 - [Portadi](/extractors/other/portadi/) --- downloads every single activity from your Portadi profile.
+- [Stripe](/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.
 - [What3words](/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
-- [GitHub](/extractors/other/github/) --- imports data from GitHub; a software development platform.
+- [GitHub](/extractors/other/github/) --- imports data from GitHub, a software development platform.
 - and others
