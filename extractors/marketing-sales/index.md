@@ -7,6 +7,7 @@ Extractors import data from external sources and integrate it to the Keboola Con
 Keboola Connection provides the following marketing and sales extractors:
 
 - Adform
+- [Babelforce](/extractors/marketing-sales/babelforce/)
 - BingAds
 - [Facebook Ads](/extractors/marketing-sales/facebook-ads/)
 - [GoodData Reports](/extractors/marketing-sales/gooddata-reports/)

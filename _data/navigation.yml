@@ -73,6 +73,9 @@ items:
       - url: /extractors/marketing-sales/
         title: Marketing/Sales
         items:
+          - url: /extractors/marketing-sales/babelforce/
+            title: Babelforce
+
           - url: /extractors/marketing-sales/facebook-ads/
             title: Facebook Ads
 
