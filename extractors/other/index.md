@@ -12,6 +12,7 @@ extractors that do not fall into any of the above mentioned categories:
 - [Generic Extractor](/extractors/other/generic/) --- can be configured to work with virtually any API.
 - [Geocoding-Augmentation](/extractors/other/geocoding-augmentation) ---
 provides detailed data for locations specified by their names, address or coordinates.
+- [Papertrail](/extractors/other/papertrail/) --- imports data from Papertrail (log management).
 - [Pingdom](/extractors/other/pingdom/) --- imports data from Pingdom, a service for monitoring the uptime and performance of your websites and web applications.
 - [Portadi](/extractors/other/portadi/) --- downloads every single activity from your Portadi profile.
 - [Stripe](/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.

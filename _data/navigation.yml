@@ -154,6 +154,9 @@ items:
           - url: /extractors/other/github/
             title: GitHub
 
+          - url: /extractors/other/papertrail/
+            title: Papertrail
+
           - url: /extractors/other/pingdom/
             title: Pingdom
 
