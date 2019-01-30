@@ -94,6 +94,9 @@ items:
           - url: /extractors/marketing-sales/mailchimp/
             title: Mailchimp
 
+          - url: /extractors/marketing-sales/pipedrive/
+            title: Pipedrive
+
           - url: /extractors/marketing-sales/sklik/
             title: Sklik
 

@@ -8,10 +8,6 @@ permalink: /extractors/marketing-sales/babelforce/
 
 This extractor uses the babelforce [REST API](https://www.babelforce.com/rest-api-power/) to import data from [babelforce](http://babelforce.com/), a cloud call center platform.
 
-{: .image-popup}
-![Screenshot - New Configuration](/extractors/marketing-sales/babelforce/01-new_configuration.png)
-
-
 ## Create New Configuration
 Find babelforce in the list of extractors and create a new configuration. Name it.
 
