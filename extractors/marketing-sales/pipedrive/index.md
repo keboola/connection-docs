@@ -7,7 +7,7 @@ permalink: /extractors/marketing-sales/pipedrive/
 {:toc}
 
 This extractor uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1/) to import data 
-from [Pipedrive](https://www.pipedrive.com/):
+from [Pipedrive](https://www.pipedrive.com/).
 
 ## Create New Configuration
 Find Pipedrive in the list of extractors and create a new configuration. Name it.
@@ -17,7 +17,7 @@ Find Pipedrive in the list of extractors and create a new configuration. Name it
 
 ## Provide API Token
 To configure this extractor, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
-Enter your **company domain** as well.
+Then enter your **company domain**.
 
 {: .image-popup}
 ![Screenshot - API token](/extractors/marketing-sales/pipedrive/02-token.png)

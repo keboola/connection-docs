@@ -16,7 +16,7 @@ Find Stripe in the list of extractors and create a new configuration. Name it.
 
 ## Provide API Token
 To configure this extractor, you need to provide an [API token](https://stripe.com/docs/api#authentication).
-You can get it in the Stripe dashboard. 
+You can get it in the [Stripe dashboard](https://dashboard.stripe.com/login?redirect=%2Faccount%2Fapikeys). 
 
 {: .image-popup}
 ![Screenshot - API Token](/extractors/other/stripe/02-token.png)
