@@ -13,15 +13,8 @@ your own dedicated cluster in Keboola Connection.
  [distribution styles](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html) and
  [column compression](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html).
 
-### No User-Defined Functions
-
-Redshift in KBC does not support functions or stored procedures.
-
-### Migration from MySQL
-
-If you want to **migrate a transformation** from MySQL to Redshift, use this [hint sheet](http://wiki.keboola.com/home/transformations/redshift/redshift-hints).
-
 ### Limits
+Redshift in KBC does not support functions or stored procedures.
 
 There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redshift cluster to a
 larger size, these limits can be increased.

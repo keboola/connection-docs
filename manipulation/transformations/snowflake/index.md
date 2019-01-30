@@ -69,7 +69,7 @@ You can use this column to set up [incremental processing](https://help.keboola.
 ## Best Practices
 
 ### Case Sensitivity
-Unlike Redshift or MySQL, Snowflake is case sensitive. All unquoted table/column names are converted to uppercase
+Unlike Redshift, Snowflake is case sensitive. All unquoted table/column names are converted to upper case
 while quoted names keep their case.
 
 So if you want to create the following table,
