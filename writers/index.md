@@ -13,21 +13,17 @@ there are **no limitations** to how and where you can send your data.
 
 Writers can be grouped by their primary purpose:
 
-- **Business Intelligence**: [Tableau](/writers/tableau/), [GoodData](/writers/gooddata/),
-YellowFin, SAS Visual Analytics, Chartio, Periscope, Looker, and more.
-- **Databases**: BigQuery, [Keboola Connection Storage](/writers/storage-api/), and more.
+- **Business Intelligence**: [Tableau](/writers/bi-tools/tableau/), [GoodData](/writers/bi-tools/gooddata/), Looker, and more.
+- **Databases**: [Oracle](/writers/database/oracle/), [Snowflake](/writers/database/snowflake/), [MySQL](/writers/database/mysql/), [PostgreSQL](/writers/database/postgresql/) and more.
 - **Generic Storage**: [AWS S3](/writers/storage/aws-s3/), [Dropbox](/writers/storage/dropbox/), [Google Drive](/writers/storage/google-drive/),
 [Google Sheets](/writers/storage/google-sheets/), [Keboola Connection Storage](/writers/storage/storage-api/), and more.
-- **Other**: Adwords Custom Audiences, Mailchimp, and more.
 
 For a definitive list of usable writers, see your project **Writers** section.
 
 ## Working with Writers
-Each writer can have multiple configurations.
-Each configuration represents a combination of data and destination.
+Each writer can have multiple configurations. Each configuration usually represents a single destination (database account, BI project, ...).
 
-We provide tutorials on [writing into GoodData](/tutorial/write/gooddata/) and
-[writing into Tableau](/tutorial/write/).
+We provide tutorials on [writing into GoodData](/tutorial/write/gooddata/) and [writing into Tableau](/tutorial/write/).
 
 You can also watch the following videos:
 
