@@ -6,7 +6,7 @@ permalink: /extractors/marketing-sales/
 Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
 Keboola Connection provides the following marketing and sales extractors:
 
-- Adform
+- [Adform](/extractors/marketing-sales/adform/)
 - [Babelforce](/extractors/marketing-sales/babelforce/)
 - BingAds
 - [Facebook Ads](/extractors/marketing-sales/facebook-ads/)
