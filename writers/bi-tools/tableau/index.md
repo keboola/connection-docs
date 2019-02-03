@@ -14,7 +14,8 @@ files and optionally uploads them them to a destination (Tableau Server,
 [Dropbox](https://www.dropbox.com/), [Google Drive](https://www.google.com/drive/)). As such it is more suitable
 for using together with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Server](https://www.tableau.com/products/server). An alternative approach is to send data using the
-**[Snowflake writer](/writers/database/snowflake/)** through a Keboola provisioned database. This is more suitable for using
+**[Snowflake writer](/writers/database/snowflake/)** through a
+[Keboola provisioned database](/writers/database/snowflake/#using-keboola-provisioned-database). That is more suitable for using
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
@@ -40,8 +41,7 @@ then configure only the differing columns.
 {: .image-popup}
 ![Screenshot - Table Configuration Start](/writers/bi-tools/tableau/table-config-start.png)
 
-When you start configuring a table, it is possible to set all columns to the prevailing data type, e.g. `string` and
-then configure only the differing columns. For each column you may select one of the data types supported by
+For each column you may select one of the data types supported by
 TDE (`string`, `boolean`, `number`, `decimal`, `date`, `datetime`) or `IGNORE` which means that the column will not
 be part od the TDE file. When configuring the data types, use the *Preview* icon to peek at the data. For `date` and
 `datetime` columns, you also have to specify the format in which dates are present in the table.
