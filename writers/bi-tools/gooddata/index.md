@@ -60,9 +60,6 @@ from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.
 {: .image-popup}
 ![Screenshot - Access Project](/writers/bi-tools/gooddata/access-project.png)
 
-You can also disconnect the writer from the GoodData project and connect it to another project. However, we recommend that
-before doing so, you consult this with support.
-
 ## Date Dimension
 [Date dimension](https://help.gooddata.com/display/doc/Dates+and+Times) is an important concept of the GoodData LDM.
 It is the question of the LDM design to determine for which columns a date dimension should be created. One rule of thumb
@@ -97,8 +94,9 @@ the GoodData project (you can change the title later if needed). The next step i
 Setting the table columns involves configuration of three things:
 
 - **Title** of the column which is displayed in GoodData project.
-- **Data Type** of the column. You can choose from `INT`, `BIGINT`, `DECIMAL` for numbers, `VARCHAR` for texts and `DATE` for dates.
-Consult the [GoodData documentation](https://help.gooddata.com/display/doc/MAQL+DDL#MAQLDDL-SpecifyaDATATYPE) for the limits of each data type.
+- **Data Type** of the column. You can choose from `INT`, `BIGINT`, `DECIMAL` for numbers, `VARCHAR` for texts.
+Consult the [GoodData documentation](https://help.gooddata.com/display/doc/MAQL+DDL#MAQLDDL-SpecifyaDATATYPE) for
+the limits of each data type.
 
 - **Type** of the column which defines the role of the column in LDM. Column types are:
     - `IGNORE` --- The column is excluded from the load and will not be created in GoodData project.

@@ -1,9 +1,9 @@
 ---
-title: Business Intelligence Writers
+title: Business Intelligence
 permalink: /writers/bi-tools/
 ---
 
-Writers export data from Keboola Connection (KBC) to external systems. The following extractors
+Writers export data from Keboola Connection (KBC) to external systems. The following writers
 allow to push data to various business intelligence platforms:
 
 - [GoodData](/writers/bi-tools/gooddata/) --- writes tables to [GoodData](https://www.gooddata.com/) and optionally also manages the GoodData project LDM.
@@ -14,3 +14,6 @@ allow to push data to various business intelligence platforms:
 - ThoughtSpot
 - SAS
 - and others
+
+A number of BI and Analytics tools is also accessible using the [Snowflake writer](/writers/database/snowflake/) using the
+[Keboola Provisioned Database](/writers/database/snowflake/#using-keboola-provisioned-database).
