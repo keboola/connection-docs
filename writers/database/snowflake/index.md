@@ -31,12 +31,12 @@ There are two modes of operation of the writer:
 ![Screenshot - Credential types](/writers/database/snowflake/credentials.png)
 
 ### Own Snowflake database
-You need to provide *host name* (account name), *user name*, *password*, *database name* and *schema*.
+You need to provide *host name* (account name), *user name*, *password*, *database name*, *schema* and *[Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
 
 {: .image-popup}
 ![Screenshot - Own Credentials](/writers/database/snowflake/own-credentials.png)
 
-We highly recommend that you create a dedicated user for the writer in your snowflake database. You can use the following SQL code to get started:
+We highly recommend that you create a dedicated user for the writer in your Snowflake database. You can use the following SQL code to get started:
 
 {% highlight sql %}
 CREATE ROLE WRITER_SAMPLE;
@@ -54,7 +54,7 @@ GRANT ROLE WRITER_SAMPLE TO USER WRITER_SAMPLE;
 
 You need to provide the user with access to a Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
 Keep in mind that Snowflake is case sensitive and if identifiers are not quoted, they are converted to upper case. So if you run for example a
-query `CREATE SCHEMA john.doe;`, you need to enter it the schema name as `DOE` in the writer configuration.
+query `CREATE SCHEMA john.doe;`, you need to enter the schema name as `DOE` in the writer configuration.
 
 ### Keboola Snowflake database
 Keboola Snowflake database is crated by the writer and the credentials are provisioned for you:
@@ -62,9 +62,10 @@ Keboola Snowflake database is crated by the writer and the credentials are provi
 {: .image-popup}
 ![Screenshot - Provisioned Credentials](/writers/database/snowflake/provisioned-credentials.png)
 
-You can share the credentials with whatever service needs to access your data --- for example with [Tableau Online](https://www.tableau.com/products/cloud-bi).
-Note that the database is provided solely for the purpose of **sharing your existing data** with outside world. This means that it must not be receiving any data (outside those provided by the writer itself of course). This is a contractual limitation.
-Also note that the number of provisioned snowflake databases is part of [Project limits](/management/project/limits/).
+You can share the credentials with whatever service needs to access your data.
+Note that the database is provided solely for the purpose of **sharing your existing data** with outside world.
+This means that it must not be receiving any data (outside those provided by the writer itself, of course). This is a contractual limitation.
+Also note that the number of provisioned Snowflake databases is part of [Project limits](/management/project/limits/).
 
 ## Table configuration
 Regardless of the credentials used, the next step is to configure the tables to write. Click the **Add new table** button:
@@ -89,10 +90,10 @@ Use the **preview** icon to peek at the column contents.
 
 For each column you can specify:
 
-- name in the destination database; You can also use the select box in the table header to bulk convert the case of all names.
-- data type (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); You can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
-- nullable; When checked, empty values will be converted to `NULL`. Use this for non-string columns with missing data.
-- default value; The provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in target table.
+- **name** in the destination database; You can also use the select box in the table header to bulk convert the case of all names.
+- **data type** (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); You can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
+- **nullable**; When checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
+- **default value**; The provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in target table.
 
 The Snowflake writer can take advantage of the [Column metadata](/storage/tables/metadata/). If they are available, the
 columns types are pre-filled automatically. Make sure to verify the suggested types however. These data types are taken
