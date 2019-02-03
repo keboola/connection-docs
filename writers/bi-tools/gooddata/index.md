@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-*Note: This GoodData writer described on this page is in Beta version.*
+*Note: The GoodData writer described on this page is in Beta version.*
 
 This extractor writes tables into a [GoodData](https://www.gooddata.com/) project. The writer can be used with
 either your own GoodData account or with account provided by Keboola. Before configuring the GoodData writer, it
