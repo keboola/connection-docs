@@ -181,11 +181,11 @@ items:
           - url: /writers/database/mysql/
             title: MySQL
 
-          - url: /writers/database/postgresql/
-            title: PostgreSQL
-
           - url: /writers/database/oracle/
             title: Oracle
+
+          - url: /writers/database/postgresql/
+            title: PostgreSQL
 
           - url: /writers/database/redshift/
             title: Redshift

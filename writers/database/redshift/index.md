@@ -12,7 +12,7 @@ for sharing your data in form of an SQL database with some service. For example,
 data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
 
 ## Create New Configuration
-Find the Tableau writer in the list of writers and create a new configuration. Name it.
+Find the Redshift writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
 ![Screenshot - Create configuration](/writers/database/redshift/ui1.png)

@@ -14,7 +14,7 @@ there are **no limitations** to how and where you can send your data.
 Writers can be grouped by their primary purpose:
 
 - **Business Intelligence**: [Tableau](/writers/bi-tools/tableau/), [GoodData](/writers/bi-tools/gooddata/), Looker, and more.
-- **Databases**: [Oracle](/writers/database/oracle/), [Snowflake](/writers/database/snowflake/), [MySQL](/writers/database/mysql/), [PostgreSQL](/writers/database/postgresql/) and more.
+- **Databases**: [MySQL](/writers/database/mysql/), [Oracle](/writers/database/oracle/), [PostgreSQL](/writers/database/postgresql/), [Amazon Redshift](/writers/database/redshift/), [Snowflake](/writers/database/snowflake/), and more.
 - **Generic Storage**: [AWS S3](/writers/storage/aws-s3/), [Dropbox](/writers/storage/dropbox/), [Google Drive](/writers/storage/google-drive/),
 [Google Sheets](/writers/storage/google-sheets/), [Keboola Connection Storage](/writers/storage/storage-api/), and more.
 
