@@ -48,15 +48,11 @@ on the right side of your screen. This is what we refer to as the **table detail
 {: .image-popup}
 ![Screenshot - Simple alias result](/storage/tables/create-simple-alias-result.png)
 
-There are the following limitations to aliases:
-
-- Filtering is enabled only on [indexed columns](/storage/tables/#primary-keys-and-indexes).
-- When an alias is created, the index on the filtered column of the source table cannot be removed.
-- Alias columns are automatically synchronized, by default, with the source table. Columns added to the source
+Alias columns are automatically synchronized, by default, with the source table. Columns added to the source
 table will be added to the alias automatically.
 You can prevent this by disabling *Synchronize columns with source table*.
 
-## Primary Keys and Indexes
+## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
 [Output Mapping](/manipulation/transformations/mappings/#output-mapping) of
