@@ -110,7 +110,8 @@ can write data to tables --- **Full load** mode and **Incremental** mode.
 
 In the **Incremental** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
-will not be modified. If the target table doesn't exist, it will be created.
+will not be modified. If the target table doesn't exist, it will be created. If a primary key is defined on the table, the
+data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data is inserted.
 
 In the **Full load** mode, the table is completely overwritten including the table structure. The table is overwritten
 using the [`ALTER SWAP`](https://docs.snowflake.net/manuals/sql-reference/sql/alter-table.html#parameters) command which ensures
