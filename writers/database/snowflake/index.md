@@ -95,7 +95,7 @@ For each column you can specify:
 - **nullable**; When checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
 - **default value**; The provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in target table.
 
-The Snowflake writer can take advantage of the [Column metadata](/storage/tables/metadata/). If they are available, the
+The Snowflake writer can take advantage of the [Column metadata](/storage/tables/#metadata). If they are available, the
 columns types are pre-filled automatically. Make sure to verify the suggested types however. These data types are taken
 from the data source and may not be the best choice for the data destination.
 
