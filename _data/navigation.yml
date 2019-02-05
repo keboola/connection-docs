@@ -73,6 +73,12 @@ items:
       - url: /extractors/marketing-sales/
         title: Marketing/Sales
         items:
+          - url: /extractors/marketing-sales/adform/
+            title: Adform
+            
+          - url: /extractors/marketing-sales/babelforce/
+            title: Babelforce
+
           - url: /extractors/marketing-sales/facebook-ads/
             title: Facebook Ads
 
@@ -90,6 +96,9 @@ items:
 
           - url: /extractors/marketing-sales/mailchimp/
             title: Mailchimp
+
+          - url: /extractors/marketing-sales/pipedrive/
+            title: Pipedrive
 
           - url: /extractors/marketing-sales/sklik/
             title: Sklik
@@ -151,11 +160,17 @@ items:
           - url: /extractors/other/github/
             title: GitHub
 
+          - url: /extractors/other/papertrail/
+            title: Papertrail
+
           - url: /extractors/other/pingdom/
             title: Pingdom
 
           - url: /extractors/other/portadi/
             title: Portadi
+
+          - url: /extractors/other/stripe/
+            title: Stripe
 
           - url: /extractors/other/what3words/
             title: What3words Augmentation
@@ -255,9 +270,6 @@ items:
 
           - url: /manipulation/transformations/sandbox/
             title: Sandbox
-
-          - url: /manipulation/transformations/mysql/
-            title: MySQL Transformations
 
           - url: /manipulation/transformations/redshift/
             title: Redshift Transformations

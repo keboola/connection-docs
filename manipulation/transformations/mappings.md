@@ -46,10 +46,9 @@ the faster internal [`CLONE` command](/manipulation/transformations/snowflake#lo
  Supported time dimensions are `minutes`, `hours` and `days`.
 - **Data filter** --- Download only rows that will match this single column multiple values filter.
 
-You can combine these options freely. Input mappings for Snowflake, MySQL and Redshift include more options specific to the particular backend:
+You can combine these options freely. Input mappings for Snowflake and Redshift include more options specific to the particular backend:
 
-- **Data types** (MySQL, Redshift, Snowflake) --- Data type for each column (Redshift allows to set a [column compression type](http://docs.aws.amazon.com/redshift/latest/dg/t_Compressing_data_on_disk.html) as well).
-- **Indexes** (MySQL) --- Create indexes on the destination table.
+- **Data types** (Redshift, Snowflake) --- Data type for each column (Redshift allows to set a [column compression type](http://docs.aws.amazon.com/redshift/latest/dg/t_Compressing_data_on_disk.html) as well).
 - **Sort key** (Redshift) --- Table [sort key](http://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html)
 - **Dist key** (Redshift) --- Table [distribution key](http://docs.aws.amazon.com/redshift/latest/dg/t_Distributing_data.html) and  [distribution style](http://docs.aws.amazon.com/redshift/latest/dg/c_choosing_dist_sort.html)
 - **COPY options** (Redshift) --- Specifies options for the Redshift [COPY command](http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html).
