@@ -41,7 +41,7 @@ Select an existing table from Storage:
 The next step is to specify table configuration. Click the **Edit Columns** button to configure table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/writers/bi-tools/thought-spot/configure-table.png)
+![Screenshot - Configure Table](/writers/bi-tools/thoughtspot/configure-table.png)
 
 Use the **preview** icon to peek at the column contents.
 
