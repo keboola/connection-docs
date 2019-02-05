@@ -73,6 +73,9 @@ items:
       - url: /extractors/marketing-sales/
         title: Marketing/Sales
         items:
+          - url: /extractors/marketing-sales/adform/
+            title: Adform
+            
           - url: /extractors/marketing-sales/babelforce/
             title: Babelforce
 
@@ -178,14 +181,56 @@ items:
   - url: /writers/
     title: Writers
     items:
-      - url: /writers/gooddata/
-        title: GoodData
+      - url: /writers/bi-tools/
+        title: Business Intelligence
+        items:
+          - url: /writers/bi-tools/gooddata/
+            title: Gooddata
 
-      - url: /writers/storage-api/
-        title: Keboola Connection Storage
+          - url: /writers/bi-tools/tableau/
+            title: Tableau
 
-      - url: /writers/tableau/
-        title: Tableau
+          - url: /writers/bi-tools/thoughtspot/
+            title: ThoughtSpot
+
+      - url: /writers/database/
+        title: Database
+        items:
+          - url: /writers/database/mysql/
+            title: MySQL
+
+          - url: /writers/database/oracle/
+            title: Oracle
+
+          - url: /writers/database/postgresql/
+            title: PostgreSQL
+
+          - url: /writers/database/redshift/
+            title: Redshift
+
+          - url: /writers/database/snowflake/
+            title: Snowflake
+
+          - url: /writers/database/mssql/
+            title: SQL Server
+
+      - url: /writers/storage/
+        title: Storage
+        items:
+          - url: /writers/storage/aws-s3/
+            title: AWS S3
+
+          - url: /writers/storage/dropbox/
+            title: Dropbox
+
+          - url: /writers/storage/google-drive/
+            title: Google Drive
+
+          - url: /writers/storage/google-sheets/
+            title: Google Sheets
+
+          - url: /writers/storage/storage-api/
+            title: Keboola Connection Storage
 
   - url: /storage/
     title: Storage

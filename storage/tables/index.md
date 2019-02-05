@@ -48,15 +48,39 @@ on the right side of your screen. This is what we refer to as the **table detail
 {: .image-popup}
 ![Screenshot - Simple alias result](/storage/tables/create-simple-alias-result.png)
 
-There are the following limitations to aliases:
-
-- Filtering is enabled only on [indexed columns](/storage/tables/#primary-keys-and-indexes).
-- When an alias is created, the index on the filtered column of the source table cannot be removed.
-- Alias columns are automatically synchronized, by default, with the source table. Columns added to the source
+Alias columns are automatically synchronized, by default, with the source table. Columns added to the source
 table will be added to the alias automatically.
 You can prevent this by disabling *Synchronize columns with source table*.
 
-## Primary Keys and Indexes
+## Metadata
+Each object of the [Table Storage](/storage/) (Bucket, Table, Column) has an associated key-value
+store. This can be used to store arbitrary metadata (information about the data itself). Apart from
+arbitrary user-defined metadata, there are also some information stored automatically. For example,
+each bucket and table has information about which configuration of which component created them.
+
+### Data Types
+Some extractors store metadata about the table columns. For example, when a [DB Extractor](/extractors/database/sqldb/)
+loads a table from the source database, it also records the physical column types from that table.
+These are stored with each table column and can be used later on when working with the table. For
+example the transformation [`COPY` mapping](/manipulation/transformations/snowflake/#load-type), allows you to set data types for the tables inside
+the transformations. Also some writers, e.g. [Snowflake writer](/writers/database/snowflake/) use
+the table metadata to [pre-fill the table columns](/writers/database/snowflake/#table-configuration) configuration for you.
+
+Even if data type is available for a column, that column is always stored as a text --- keep this in mind
+especially in [Transformations](/manipulation/transformations/mappings/#output-mapping) where the output is always cast to a text. The basic idea behind
+this is that a text type has the best interoperability, so this avoids many issues (e.g. some date values stored in MySQL
+database might not be accepted by Snowflake database and vice-versa).
+
+Data types from source are mapped to destination using a **Base Type**. The current base types are
+`STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE`, `TIMESTAMP`. This means that for example a MySQL extractor
+may store the value `BIGINT` as a type of a column; that type maps to `INTEGER` general type. When the Snowflake writer consumes this value, it will
+read the general type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
+This logic is again designed to ensure high interoperability between the components.
+
+Note: Currently data types for Storage objects can be viewed and modified only via
+the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata)
+
+## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
 [Output Mapping](/manipulation/transformations/mappings/#output-mapping) of
@@ -226,6 +250,6 @@ with the `Changed in last` option, various things can happen:
 - `Changed in last` is set to `1 day`, and the component is started any time after `2010-01-03 10:00` -- **no** rows will be exported from the table.
 - `Changed in last` is set to `2 day`, and the component is started any time between `2010-01-02 10:00` and `2010-01-03 10:00` -- **five** rows will be exported from the table.
 
-Notice that the record for *Peter* was **not updated**, because it was not changed at all (the 
-imported row was completely identical to the existing one). Therefore, 
+Notice that the record for *Peter* was **not updated**, because it was not changed at all (the
+imported row was completely identical to the existing one). Therefore,
 when using incremental processing set to `1 day`, you will not receive that row in input mapping.
