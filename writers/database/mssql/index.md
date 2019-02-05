@@ -84,7 +84,7 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key
 
 In the **Full load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-table-transact-sql) command and recreated. The
-`DROP` command needs to acquire a [table-level lock]().
+`DROP` command needs to acquire a [table-level lock](https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide).
 This means that if the database is used by other applications which acquire table-level locks, the writer may
 freeze waiting for the locks to be released.
 

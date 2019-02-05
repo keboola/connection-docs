@@ -127,6 +127,28 @@ The database can be queried in real time, but is still completely isolated from 
 limited so that the data can be only read from the database and that the query execution time is limited to
 900 seconds (15 minutes).
 
+### Connect to Looker
+It is possible to use the Snowflake writer to share data with [Looker](https://looker.com/).
+To share data between your KBC project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
+connect the Looker data sources. Follow the official [instructions](https://docs.looker.com/setup-and-management/connecting-to-db).
+There are also some [Snowflake specific settings](https://docs.looker.com/setup-and-management/database-config/snowflake#adding_the_connection). Note that you
+can skip a number of steps because a dedicated user is already created for you.
+
+### Connect to Power BI Desktop
+It is possible to use the Snowflake writer to share data with [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
+To share data between your KBC project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
+connect the Power BI data sources. Follow the official [instructions for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/desktop-connect-snowflake).
+
+### Connect to Qlik
+It is possible to use the Snowflake writer to share data with [Qlik Sense](https://www.qlik.com/us/products/qlik-sense)
+and [QlikView](https://www.qlik.com/us/products/qlikview).
+To share data between your KBC project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
+connect the Qlik data sources. Follow the Qlik community
+[integration guide](https://community.qlik.com/t5/Technology-Partners-Ecosystem/Qlik-Snowflake-Integration-How-to-guide/ta-p/1529261).
+
 ### Connect to Tableau
 It is possible to use the Snowflake writer to share data with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Online](https://www.tableau.com/products/cloud-bi). This is usually more efficient and
@@ -138,10 +160,3 @@ The writer will create a dedicated database for you and give you credentials. Ru
 connect the Tableau data sources. Follow the official [instructions for Tableau Desktop](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
 or for [Tableau Online](https://onlinehelp.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password
 authentication method.
-
-### Connect to Power BI Desktop
-It is possible to use the Snowflake writer to share data with [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) or
-[Tableau Online](https://www.tableau.com/products/cloud-bi).
-To share data between your KBC project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
-The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
-connect the Power BI data sources. Follow the official [instructions for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/desktop-connect-snowflake).

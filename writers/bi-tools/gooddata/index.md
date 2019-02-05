@@ -10,7 +10,7 @@ redirect_from:
 
 *Note: The GoodData writer described on this page is in Beta version.*
 
-This extractor writes tables into a [GoodData](https://www.gooddata.com/) project. The writer can be used with
+This writer sends tables into a [GoodData](https://www.gooddata.com/) project. The writer can be used with
 either your own GoodData account or with account provided by Keboola. Before configuring the GoodData writer, it
 is important to understand that GoodData analytics relies on a
 [Logical Data Model (LDM)](https://help.gooddata.com/display/doc/Data+Modeling+and+Logical+Data+Model) of your dataset.

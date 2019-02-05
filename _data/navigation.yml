@@ -175,6 +175,9 @@ items:
           - url: /writers/bi-tools/tableau/
             title: Tableau
 
+          - url: /writers/bi-tools/thoughtspot/
+            title: ThoughtSpot
+
       - url: /writers/database/
         title: Database
         items:
