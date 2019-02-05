@@ -193,6 +193,9 @@ items:
           - url: /writers/database/snowflake/
             title: Snowflake
 
+          - url: /writers/database/mssql/
+            title: SQL Server
+
       - url: /writers/storage/
         title: Storage
         items:
