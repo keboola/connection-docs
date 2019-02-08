@@ -1,5 +1,5 @@
 ---
-title: Thoughtspot
+title: ThoughtSpot
 permalink: /writers/bi-tools/thoughtspot/
 ---
 
@@ -27,7 +27,7 @@ These commands are executed on the server through SSH connection. Therefore the
 {: .image-popup}
 ![Screenshot - Credentials](/writers/bi-tools/thoughtspot/credentials.png)
 
-## Table configuration
+## Table Configuration
 The next step is to configure the tables to write. Click the **Add new table** button:
 
 {: .image-popup}
