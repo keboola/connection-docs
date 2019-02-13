@@ -47,12 +47,12 @@ project can have up to 2 demo GoodData projects.
 - create a **production** project. This is full GoodData production project, which is proxied by Keboola.
 That means we take care of the contract and billing with GoodData. Contact Keboola support or your maintainer
 to enable this type of production GoodData project in your KBC project.
-- create a **custom** project. Use this, when you have your own contract with GoodData. In that case, you should
+- create a **custom** project. Use this when you have your own contract with GoodData. In that case, you should
 have received your [Project Authorization Token](https://help.gooddata.com/display/doc/GoodData+Token+Types#GoodDataTokenTypes-ProjectAuthorizationtokens)
 which allows you to create GoodData projects. The writer will then create the project for you.
 - use an **existing GoodData project**. Either the project should be empty, or you should take extra care when setting
-up the writer. Either use the **Load data only** update mode, or be sure to understand what are the consequences
-of changing your LDM.
+up the writer. Either use the **Load data only** update mode, or be sure to understand what the consequences
+of changing your LDM are.
 
 After you set up the project, you should **Enable Access to Project**. This will allow you to login to the GoodData project
 from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.com/display/doc/Single+Sign-On+Overview).
@@ -63,7 +63,7 @@ from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.
 ## Date Dimension
 [Date dimension](https://help.gooddata.com/display/doc/Dates+and+Times) is an important concept of the GoodData LDM.
 It is the question of the LDM design to determine for which columns a date dimension should be created. One rule of thumb
-is that different date columns in a single table should have different date dimensions. On the other hand you might want
+is that different date columns in a single table should have different date dimensions. On the other hand, you might want
 to share a date dimension between different tables --- a *main* date representing an event of something.
 It is also possible to have different date dimensions representing e.g.
 a calendar year and a fiscal year.
@@ -73,9 +73,9 @@ a calendar year and a fiscal year.
 
 When creating a date dimension, you have to enter the dimension name and a dimension template. The available templates are:
 
-- Standard GoodData date dimension.
-- Keboola date dimension which is extended with a 'floating' week (which lets you analyze data as if the week starts e.g. on Wednesday)
-- Custom date dimension. This can be either a date dimension created for you directly by GoodData or a [Self service calendar](https://help.gooddata.com/display/doc/Custom+Calendars+-+Self+Service). In the former case, you'll have the dimension URN in form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
+- Standard GoodData date dimension
+- Keboola date dimension, which is extended with a 'floating' week (which lets you analyze data as if the week starts e.g. on Wednesday).
+- Custom date dimension -- this can be either a date dimension created for you directly by GoodData, or a [Self service calendar](https://help.gooddata.com/display/doc/Custom+Calendars+-+Self+Service). In the former case, you'll have the dimension URN in form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
 
 ## Configure Tables
 Click the **New Table** button to add a new table to the writer:
@@ -100,27 +100,31 @@ the limits of each data type.
 
 - **Type** of the column which defines the role of the column in LDM. Column types are:
     - `IGNORE` --- The column is excluded from the load and will not be created in the GoodData project.
-    - `FACT` --- The [Fact component](https://help.gooddata.com/display/doc/GoodData+Modeling+Concepts#GoodDataModelingConcepts-LDMComponents) --- a numerical piece of with arbitrary data used to define metrics, e.g. *Price* column.
+    - `FACT` --- The [Fact component](https://help.gooddata.com/display/doc/GoodData+Modeling+Concepts#GoodDataModelingConcepts-LDMComponents) --- a numerical piece of arbitrary data used to define metrics, e.g. *Price* column.
     - `ATTRIBUTE` --- The [Attribute component](https://help.gooddata.com/display/doc/GoodData+Modeling+Concepts#GoodDataModelingConcepts-LDMComponents) of the LDM model --- a discrete set of alphanumeric or numeric data, e.g. *Eye Color* column containing values *Blue*, *Brown* and *Green*.
     - `CONNECTION_POINT` --- The [Connection point component](https://help.gooddata.com/display/doc/Connection+Point) --- acts like a primary key, i.e. it is used to identify the rows of the table.
     - `REFERENCE` --- A column which defines a [Relation](https://help.gooddata.com/display/doc/GoodData+Modeling+Concepts#GoodDataModelingConcepts-LDMComponents) between tables. You have to select a **Reference** column as a target to which the relation points to. The target must be a `CONNECTION_POINT` already defined in another table.
-    - `DATE` --- A date column; you have to select a corresponding [date dimension](#date-dimension) for it.
+    - `DATE` --- A date column --- you have to select a corresponding [date dimension](#date-dimension) for it.
     - `LABEL` --- A [Label attribute](https://help.gooddata.com/display/doc/Notes+on+Labels) which allows you to display alternative values for a column. You have to select a **Reference** column, which is the name of an attribute column in the same table. The label column is used as a secondary view of the reference column in the GoodData UI. For example, you can create a reference column `FullName` and add a label column `Surname`. You can define multiple labels for a single attribute.
-    - `HYPERLINK` --- An [Hyperlink attribute](https://help.gooddata.com/display/doc/Hyperlink) which acts as a link in the reports. You have to select a **Reference** which is the name of an attribute column in the same table. The reference column is the one which will be used as a label, the hyperlink column is the one which is expected to contain the address.
+    - `HYPERLINK` --- A [Hyperlink attribute](https://help.gooddata.com/display/doc/Hyperlink), which acts as a link in the reports. You have to select a **Reference** which is the name of an attribute column in the same table. The reference column is the one which will be used as a label, the hyperlink column is the one which is expected to contain the address.
 
 {: .image-popup}
 ![Screenshot - Hyperlink configuration](/writers/bi-tools/gooddata/hyperlink.png)
+
+**Save** your configuration.
 
 ### Additional Table Options
 
 {: .image-popup}
 ![Screenshot - Hyperlink configuration](/writers/bi-tools/gooddata/incremental.png)
 
-Load mode can be either *Full Load*, which is the default, or *Incremental Load*. Incremental load will keep the existing data in the GoodData project.
-It can be much faster, but the source data needs to be correctly prepared. The incremental load relies on two features:
+You can also select a load type: either **Full Load** (the default), or **Incremental Load**. 
+Incremental load will keep the existing data in the GoodData project.
+It can be much faster, but the source data needs to be correctly prepared. 
+The incremental load relies on the following two features:
 
-- [incremental processing](/storage/tables/#incremental-processing) in Storage and
-- identity in GoodData; this can be either a `CONNECTION_POINT` column (which acts as database primary key), or a [Fact Grain](https://help.gooddata.com/display/doc/Set+the+Grain+of+a+Fact+Table+to+Avoid+Duplicate) (which acts as a compound unique key). Fact Grain can be used when there is no single identifying column (i.e. there is no `CONNECTION_POINT`) and there is a combination of columns which can be used to identify rows. If there is no such combination, then incremental loading can't be used.
+- [Incremental processing](/storage/tables/#incremental-processing) in Storage, and
+- Identity in GoodData; this can be either a `CONNECTION_POINT` column (which acts as a database primary key), or a [Fact Grain](https://help.gooddata.com/display/doc/Set+the+Grain+of+a+Fact+Table+to+Avoid+Duplicate) (which acts as a compound unique key). Fact Grain can be used when there is no single identifying column (i.e. there is no `CONNECTION_POINT`) and there is a combination of columns which can be used to identify rows. If there is no such combination, then incremental loading can't be used.
 
 From the table configuration page, you can also **Run** a load of a single table. However, if the table has relations to other
 tables, it will fail with the message: `Schema reference of column 'X' of dataset Y is invalid.`
@@ -145,17 +149,17 @@ of your project, either of them may be faster.
 Since the project is partially managed by the writer, there are some things you should be aware of.
 
 The writer manages the LDM in the project. If you make changes to the LDM using other tools, they will be overwritten by the writer 
---- unless it is used solely in the **Load data only** mode. You can review the LDM in the GoodData project management:
+--- unless it is used solely in **Load data only** mode. You can review the LDM in the GoodData project management:
 
 {: .image-popup}
 ![Screenshot - GoodData Logical Data Model](/writers/bi-tools/gooddata/gooddata-model.png)
 
 The writer creates service users which are used to update the LDM and manage the SSO (`Keboola GoodData` and `provisioning (KBC)`). 
 You should not disable those users or change their role. Any KBC project user can enter the GoodData project using 
-the [SSO](https://help.gooddata.com/display/doc/Single+Sign-On+Overview). Once they activate the SSO, a new user in the GoodData project 
-will be created for them (these users have `(KBC)` suffix and `@kbc.keboola.com` login).
+the [SSO](https://help.gooddata.com/display/doc/Single+Sign-On+Overview). Once they activate the SSO, a new user will be created 
+for them in the GoodData project (these users have `(KBC)` suffix and `@kbc.keboola.com` login).
 
 {: .image-popup}
 ![Screenshot - GoodData project users](/writers/bi-tools/gooddata/gooddata-users.png)
 
-When you delete a writer that created a GoodData project, that project will also be deleted after the [grace period](/management/project/delete/#gooddata-projects). When you delete a writer that was connected to an existing project, it won't be deleted.
+When you delete a writer that created a GoodData project, that project will also be deleted after a [grace period](/management/project/delete/#gooddata-projects). When you delete a writer that was connected to an existing project, it won't be deleted.

@@ -185,7 +185,7 @@ items:
         title: Business Intelligence
         items:
           - url: /writers/bi-tools/gooddata/
-            title: Gooddata
+            title: GoodData
 
           - url: /writers/bi-tools/tableau/
             title: Tableau
