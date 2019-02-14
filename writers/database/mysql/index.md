@@ -14,17 +14,17 @@ Find the MySQL writer in the list of writers and create a new configuration. Nam
 {: .image-popup}
 ![Screenshot - Create configuration](/writers/database/mysql/ui1.png)
 
-The first step is to **Setup Credentials**:
+The first step is to **Set Up Credentials**:
 
 {: .image-popup}
 ![Screenshot - Main page](/writers/database/mysql/intro-page.png)
 
-You need to provide *host name*, *user name*, *password*, *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
+You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
 
 {: .image-popup}
 ![Screenshot - Credentials](/writers/database/mysql/credentials.png)
 
-We highly recommend that you create a dedicated credentials for the writer in your database. You can use the following SQL code to get started:
+We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
 
 {% highlight sql %}
 CREATE DATABASE writer_sample;
@@ -33,10 +33,10 @@ GRANT CREATE TEMPORARY TABLES, CREATE, DROP, SELECT, INSERT, UPDATE ON writer_sa
     TO writer_sample;
 {% endhighlight %}
 
-It is also possible to secure the connection using a [SSH Tunnel](/extractors/database/#connecting-to-database).
+It is also possible to secure the connection using an [SSH Tunnel](/extractors/database/#connecting-to-database).
 
-## Table configuration
-The next step is to configure the tables to write. Click the **Add new table** button:
+## Table Configuration
+The next step is to configure the tables you want to write. Click **Add New Table**:
 
 {: .image-popup}
 ![Screenshot - Add Table](/writers/database/mysql/add-table.png)
@@ -46,7 +46,7 @@ Select an existing table from Storage:
 {: .image-popup}
 ![Screenshot - Select Table](/writers/database/mysql/select-table.png)
 
-The next step is to specify table configuration. Click the **Edit Columns** button to configure table columns:
+The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
 ![Screenshot - Configure Table](/writers/database/mysql/configure-table.png)
@@ -56,32 +56,32 @@ Use the **preview** icon to peek at the column contents.
 {: .image-popup}
 ![Screenshot - Table Columns](/writers/database/mysql/table-columns.png)
 
-For each column you can specify:
+For each column you can specify its
 
-- **name** in the destination database; You can also use the select box in the table header to bulk convert the case of all names.
-- **data type** (one of [MySQL data types](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)); You can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
-- **nullable**; When checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
-- **default value**; The provided value will be set as the [default value of the column](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html) in target table.
+- **name** in the destination database; you can also use the select box in the table header to bulk convert the case of all names.
+- **data type** (one of [MySQL data types](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that the column will not be present in the destination table.
+- **nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
+- **default value**; the provided value will be set as the [default value of the column](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html) in the target table.
 
-When done configuring the columns, don't forget to **Save** the settings.
+When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main options how the writer
-can write data to tables --- **Full load** mode and **Incremental** mode.
+can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
 ![Screenshot - Table Options](/writers/database/mysql/table-options.png)
 
-In the **Incremental** mode, the data are bulk inserted into
+In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
 will not be modified. If the target table doesn't exist, it will be created. If a primary key is defined on the table, the
 data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data is inserted.
 
-In the **Full load** mode, the table is completely overwritten including the table structure. The table is removed
+In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://dev.mysql.com/doc/refman/8.0/en/drop-table.html) command and recreated. The
 `DROP` command needs to acquire a [table-level lock](https://dev.mysql.com/doc/refman/8.0/en/lock-tables.html).
 This means that if the database is used by other applications which acquire table-level locks, the writer may
 freeze waiting for the locks to be released.
 
-Additionally, you can specify a **Primary key** of the table a simple column **Data filter** and a filter for
+Additionally, you can specify a **primary key** of the table, a simple column **data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).

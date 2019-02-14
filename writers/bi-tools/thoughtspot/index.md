@@ -77,5 +77,5 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://docs.thoughtspot.com/5.0/admin/loading/check-dependencies-tql.html) command and recreated.
 
-Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
+Additionally, you can specify a **Ppimary key** of the table, a simple column **data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).

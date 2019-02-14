@@ -93,7 +93,7 @@ For writing to Tableau Server, you need to enter the credentials:
 {: .image-popup}
 ![Screenshot - Tableau Server Authorization](/writers/bi-tools/tableau/tableau-server-auth.png)
 
-To activate the table upload, click the **Enable instant upload** link. Only when **Instant Upload** is enabled, the
+To activate the table upload, click the *Enable instant upload* link. Only when **Instant Upload** is enabled, the
 TDE files will be written to the selected destination.
 
 {: .image-popup}
