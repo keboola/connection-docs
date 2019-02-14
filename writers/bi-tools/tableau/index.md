@@ -8,14 +8,14 @@ redirect_from:
 * TOC
 {:toc}
 
-There is a wide range of options for sending data to the Tableau ecosystem. This writers creates
+There is a wide range of options for sending data to the Tableau ecosystem. This writer creates
 [Tableau Data Extract (TDE)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
-files and optionally uploads them them to a destination (Tableau Server,
+files and optionally uploads them to a destination (Tableau Server,
 [Dropbox](https://www.dropbox.com/), [Google Drive](https://www.google.com/drive/)). As such it is more suitable
-for using together with [Tableau Desktop](https://www.tableau.com/products/desktop) or
+to be used together with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Server](https://www.tableau.com/products/server). An alternative approach is to send data using the
 **[Snowflake writer](/writers/database/snowflake/)** through a
-[Keboola provisioned database](/writers/database/snowflake/#using-keboola-provisioned-database). That is more suitable for using
+[Keboola provisioned database](/writers/database/snowflake/#using-keboola-provisioned-database). That is more suitable to be used
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
@@ -30,7 +30,7 @@ Find the Tableau writer in the list of writers and create a new configuration. N
 
 ## Configure Tables
 Create a new table configuration by clicking the **New Table** button. Select a table
-from the [Storage](/storage/tables/).
+from [Storage](/storage/tables/).
 
 {: .image-popup}
 ![Screenshot - Select Table](/writers/bi-tools/tableau/select-table.png)
@@ -42,7 +42,7 @@ then configure only the differing columns.
 ![Screenshot - Table Configuration Start](/writers/bi-tools/tableau/table-config-start.png)
 
 For each column you may select one of the data types supported by
-TDE (`string`, `boolean`, `number`, `decimal`, `date`, `datetime`) or `IGNORE` which means that the column will not
+TDE (`string`, `boolean`, `number`, `decimal`, `date`, `datetime`) or `IGNORE`, which means that the column will not
 be part od the TDE file. When configuring the data types, use the *Preview* icon to peek at the data. For `date` and
 `datetime` columns, you also have to specify the format in which dates are present in the table.
 
@@ -50,7 +50,7 @@ be part od the TDE file. When configuring the data types, use the *Preview* icon
 ![Screenshot - Table Configuration Columns](/writers/bi-tools/tableau/table-config-columns.png)
 
 As optional last steps in table configuration, you can configure the name of the TDE file (useful for uploading to Dropbox or Google Drive)
-and *Table data filter*. The table data filter allows you to set a simple filer for one column or
+and *Table data filter*. The table data filter allows you to set a simple file for one column or
 take advantage of [Incremental processing](https://help.keboola.com/storage/tables/#incremental-processing) by writing only
 recently modified data.
 
@@ -68,7 +68,7 @@ which you can download the TDE file to your computer.
 ![Screenshot - TDE Download](/writers/bi-tools/tableau/tde-download.png)
 
 ## Uploading the TDE file
-Apart from downloading the TDE files to your computer, you can also upload them to Tableau Server, Google Drive or Dropbox.
+Apart from downloading the TDE files to your computer, you can also upload them to Tableau Server, Google Drive, or Dropbox.
 Start the upload configuration by clicking on the **Upload Setup** link:
 
 {: .image-popup}
@@ -93,7 +93,7 @@ For writing to Tableau Server, you need to enter the credentials:
 {: .image-popup}
 ![Screenshot - Tableau Server Authorization](/writers/bi-tools/tableau/tableau-server-auth.png)
 
-To activate the table upload click the **Enable instant upload** link. Only when **Instant Upload** is enabled, the
+To activate the table upload, click the **Enable instant upload** link. Only when **Instant Upload** is enabled, the
 TDE files will be written to the selected destination.
 
 {: .image-popup}
