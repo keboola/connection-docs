@@ -59,7 +59,7 @@ recently modified data.
 
 When done with configuring the table, don't forget to **Save** the settings.
 
-## Downloading the TDE file
+## Downloading TDE File
 You can configure as many tables as you want for the writer. Each table produces a separate TDE file, however. To download
 the TDE file, you have to **Run** the entire writer or a single table. Then the TDE file name will turn into a link through
 which you can download the TDE file to your computer.
@@ -67,7 +67,7 @@ which you can download the TDE file to your computer.
 {: .image-popup}
 ![Screenshot - TDE Download](/writers/bi-tools/tableau/tde-download.png)
 
-## Uploading the TDE file
+## Uploading TDE File
 Apart from downloading the TDE files to your computer, you can also upload them to Tableau Server, Google Drive, or Dropbox.
 Start the upload configuration by clicking on the **Upload Setup** link:
 

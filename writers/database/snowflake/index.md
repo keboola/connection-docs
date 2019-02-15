@@ -17,21 +17,21 @@ Find the Snowflake writer in the list of writers and create a new configuration.
 {: .image-popup}
 ![Screenshot - Create configuration](/writers/database/snowflake/ui1.png)
 
-The first step is to **Setup Credentials**:
+The first step is to **Set Up Credentials**:
 
 {: .image-popup}
 ![Screenshot - Main page](/writers/database/snowflake/ui2.png)
 
 There are two modes of operation of the writer:
 
-- **Own Snowflake database** --- Use this when you have your own Snowflake database - i.e you have a contract with Snowflake, or someone gave you credentials of a database to write to.
+- **Own Snowflake database** --- Use this when you have your own Snowflake database -- i.e. you have a contract with Snowflake, or someone gave you credentials of a database to write to.
 - **Keboola Snowflake database** --- In this mode, the writer will create a new database for you and **give you credentials** to it.
 
 {: .image-popup}
 ![Screenshot - Credential types](/writers/database/snowflake/credentials.png)
 
-### Own Snowflake database
-You need to provide *host name* (account name), *user name*, *password*, *database name*, *schema* and *[Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
+### Own Snowflake Database
+You need to provide a *host name* (account name), *user name*, *password*, *database name*, *schema*, and *[Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
 
 {: .image-popup}
 ![Screenshot - Own Credentials](/writers/database/snowflake/own-credentials.png)
@@ -53,22 +53,22 @@ GRANT ROLE WRITER_SAMPLE TO USER WRITER_SAMPLE;
 {% endhighlight %}
 
 You need to provide the user with access to a Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
-Keep in mind that Snowflake is case sensitive and if identifiers are not quoted, they are converted to upper case. So if you run for example a
+Keep in mind that Snowflake is case sensitive and if identifiers are not quoted, they are converted to upper case. So if you run, for example, a
 query `CREATE SCHEMA john.doe;`, you need to enter the schema name as `DOE` in the writer configuration.
 
-### Keboola Snowflake database
-Keboola Snowflake database is crated by the writer and the credentials are provisioned for you:
+### Keboola Snowflake Database
+A Keboola Snowflake database is created by the writer and the credentials are provisioned for you:
 
 {: .image-popup}
 ![Screenshot - Provisioned Credentials](/writers/database/snowflake/provisioned-credentials.png)
 
-You can share the credentials with whatever service needs to access your data.
-Note that the database is provided solely for the purpose of **sharing your existing data** with outside world.
+You can share the credentials with whatever service that needs to access your data.
+Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world.
 This means that it must not be receiving any data (outside those provided by the writer itself, of course). This is a contractual limitation.
 Also note that the number of provisioned Snowflake databases is part of [Project limits](/management/project/limits/).
 
-## Table configuration
-Regardless of the credentials used, the next step is to configure the tables to write. Click the **Add new table** button:
+## Table Configuration
+Regardless of the credentials used, the next step is to configure the tables to write. Click **Add New Table**:
 
 {: .image-popup}
 ![Screenshot - Add Table](/writers/database/snowflake/add-table.png)
@@ -78,7 +78,7 @@ Select an existing table from Storage:
 {: .image-popup}
 ![Screenshot - Select Table](/writers/database/snowflake/select-table.png)
 
-The next step is to specify table configuration. Click the **Edit Columns** button to configure table columns:
+The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
 ![Screenshot - Configure Table](/writers/database/snowflake/configure-table.png)
@@ -88,39 +88,39 @@ Use the **preview** icon to peek at the column contents.
 {: .image-popup}
 ![Screenshot - Table Columns](/writers/database/snowflake/table-columns.png)
 
-For each column you can specify:
+For each column you can specify its
 
-- **name** in the destination database; You can also use the select box in the table header to bulk convert the case of all names.
-- **data type** (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); You can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
-- **nullable**; When checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
-- **default value**; The provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in target table.
+- **name** in the destination database; you can also use the select box in the table header to bulk convert the case of all names.
+- **data type** (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
+- **nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
+- **default value**; the provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in the target table.
 
-The Snowflake writer can take advantage of the [Column metadata](/storage/tables/#metadata). If they are available, the
-columns types are pre-filled automatically. Make sure to verify the suggested types however. These data types are taken
+The Snowflake writer can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
+column types are pre-filled automatically. Make sure to verify the suggested types, however. These data types are taken
 from the data source and may not be the best choice for the data destination.
 
-When done configuring the columns, don't forget to **Save** the settings.
+When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main options how the writer
-can write data to tables --- **Full load** mode and **Incremental** mode.
+can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
 ![Screenshot - Table Options](/writers/database/snowflake/table-options.png)
 
-In the **Incremental** mode, the data are bulk inserted into
+In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
 will not be modified. If the target table doesn't exist, it will be created. If a primary key is defined on the table, the
 data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data is inserted.
 
-In the **Full load** mode, the table is completely overwritten including the table structure. The table is overwritten
-using the [`ALTER SWAP`](https://docs.snowflake.net/manuals/sql-reference/sql/alter-table.html#parameters) command which ensures
+In the **Full Load** mode, the table is completely overwritten including the table structure. The table is overwritten
+using the [`ALTER SWAP`](https://docs.snowflake.net/manuals/sql-reference/sql/alter-table.html#parameters) command, which ensures
 the shortest unavailability of the target table. However, this operation still drops the table.
 
-Additionally, you can specify a **Primary key** of the table a simple column **Data filter** and a filter for
+Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).
 
-## Using Keboola provisioned database
+## Using Keboola Provisioned Database
 The writer offers the option to create a [Keboola Provisioned database](#keboola-snowflake-database) for you. You can
 use this database to connect KBC to a wide range of consumers --- especially Business Intelligence tools and Analytics.
 The database can be queried in real time, but is still completely isolated from your project Storage. The database is
@@ -152,7 +152,7 @@ connect the Qlik data sources. Follow the Qlik community
 ### Connect to Tableau
 It is possible to use the Snowflake writer to share data with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Online](https://www.tableau.com/products/cloud-bi). This is usually more efficient and
-faster then loading data through [TDE files](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
+faster than loading data through [TDE files](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
 with the [TDE writer](/writers/bi-tools/tableau/).
 
 To share data between your KBC project and Tableau, choose **Keboola Snowflake Database** when configuring the credentials.

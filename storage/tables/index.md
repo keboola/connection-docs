@@ -55,7 +55,7 @@ You can prevent this by disabling *Synchronize columns with source table*.
 ## Metadata
 Each object of the [Table Storage](/storage/) (Bucket, Table, Column) has an associated key-value
 store. This can be used to store arbitrary metadata (information about the data itself). Apart from
-arbitrary user-defined metadata, there are also some information stored automatically. For example,
+arbitrary user-defined metadata, there is also some information stored automatically. For example,
 each bucket and table has information about which configuration of which component created them.
 
 ### Data Types
