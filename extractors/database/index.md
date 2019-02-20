@@ -10,6 +10,8 @@ Extractors import data from external sources and integrate it to the Keboola Con
 
 There are a number of extractors for [**SQL databases**](/extractors/database/sqldb/):
 
+- [Google BigQuery](/extractors/database/bigquery) (also part of
+our [tutorial](/tutorial/ad-hoc/#using-bigquery-extractor))
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
 - [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/)

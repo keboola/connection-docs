@@ -41,13 +41,17 @@ items:
       - url: /extractors/database/
         title: Databases
         items:
-        - url: /extractors/database/sqldb/
-          title: SQL Databases
-        - url: /extractors/database/mongodb/
-          title: MongoDB
-          items:
-            - url: /extractors/database/mongodb/mapping/
-              title: Mapping Examples
+          - url: /extractors/database/sqldb/
+            title: SQL Databases
+
+          - url: /extractors/database/mongodb/
+            title: MongoDB
+            items:
+              - url: /extractors/database/mongodb/mapping/
+                title: Mapping Examples
+
+          - url: /extractors/database/bigquery/
+            title: Google BigQuery
 
       - url: /extractors/communication/
         title: Communication
@@ -129,9 +133,6 @@ items:
 
           - url: /extractors/storage/google-drive/
             title: Google Drive
-
-          - url: /extractors/storage/bigquery/
-            title: Google BigQuery
 
           - url: /extractors/storage/ftp/
             title: FTP

@@ -1,6 +1,6 @@
 ---
 title: Google BigQuery
-permalink: /extractors/storage/bigquery/
+permalink: /extractors/database/bigquery/
 ---
 
 * TOC
@@ -16,23 +16,23 @@ To create a Google Storage Bucket, go to the [Google Cloud Platform console](htt
 and select **Storage**.
 
 {: .image-popup}
-![Screenshot - Google Cloud Platform](/extractors/storage/bigquery/cloud-platform-1.png)
+![Screenshot - Google Cloud Platform](/extractors/database/bigquery/cloud-platform-1.png)
 
 Create a new bucket:
 
 {: .image-popup}
-![Screenshot - Google Cloud Storage](/extractors/storage/bigquery/cloud-platform-2.png)
+![Screenshot - Google Cloud Storage](/extractors/database/bigquery/cloud-platform-2.png)
 
 Enter the bucket's name and Storage Class:
 
 {: .image-popup}
-![Screenshot - Create Bucket](/extractors/storage/bigquery/cloud-platform-3.png)
+![Screenshot - Create Bucket](/extractors/database/bigquery/cloud-platform-3.png)
 
 ## Create New Configuration 
 Find Google Analytics in the list of extractors. Create a new configuration and name it. 
 
 {: .image-popup}
-![Screenshot - Big Query Authorization](/extractors/storage/bigquery/bigquery-extractor-1.png)
+![Screenshot - Big Query Authorization](/extractors/database/bigquery/bigquery-extractor-1.png)
 
 Then authorize the account. 
 
@@ -42,7 +42,7 @@ Select one of the two authorization methods:
 - **External** – If you need to authorize access to the service from someone who does not have an account in KBC, you can generate an external link, which will guide them through this process.
 
 {: .image-popup}
-![Screenshot - Big Query Authorization](/extractors/storage/bigquery/bigquery-extractor-3.png)
+![Screenshot - Big Query Authorization](/extractors/database/bigquery/bigquery-extractor-3.png)
 
 Name the authorization, and follow the on-screen instructions. 
 
@@ -51,27 +51,27 @@ Name the authorization, and follow the on-screen instructions.
 Start by clicking the green **Configure** button.
 
 {: .image-popup}
-![Screenshot - Big Query Bucket Configured](/extractors/storage/bigquery/bigquery-extractor-4.png)
+![Screenshot - Big Query Bucket Configured](/extractors/database/bigquery/bigquery-extractor-4.png)
 
 Select your Google Project and the bucket you created at the beginning. 
 
 {: .image-popup}
-![Screenshot - Big Query Configuration Detail](/extractors/storage/bigquery/bigquery-extractor-5.png)
+![Screenshot - Big Query Configuration Detail](/extractors/database/bigquery/bigquery-extractor-5.png)
 
 Then configure the actual extraction queries by clicking the **New Query** button. 
 
 {: .image-popup}
-![Screenshot - Query Configuration](/extractors/storage/bigquery/bigquery-extractor-6.png)
+![Screenshot - Query Configuration](/extractors/database/bigquery/bigquery-extractor-6.png)
 
 Name the query, and specify your requirements in the `SQL query` field. Save the query configuration.
 
 {: .image-popup}
-![Screenshot - Finished Configuration](/extractors/storage/bigquery/bigquery-extractor-7.png)
+![Screenshot - Finished Configuration](/extractors/database/bigquery/bigquery-extractor-7.png)
 
 Now run the configuration to bring the data to KBC.
 
 {: .image-popup}
-![Screenshot - Query Configuration](/extractors/storage/bigquery/bigquery-extractor-8.png)
+![Screenshot - Query Configuration](/extractors/database/bigquery/bigquery-extractor-8.png)
 
 Running the extractor creates a background job that
 

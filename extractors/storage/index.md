@@ -8,8 +8,6 @@ The following extractors allow access to data from generic storage services:
 
 - [Simple AWS S3](/extractors/storage/simple-aws-s3) --- imports CSV files from a AWS S3 bucket into a single table.
 - [AWS S3](/extractors/storage/aws-s3) --- imports CSV files from multiple AWS S3 buckets into multiple tables with additional postprocessing.
-- [Google BigQuery](/extractors/storage/bigquery) --- imports data from a Google Storage Bucket to Keboola Connection (also part of
-the [Tutorial](/tutorial/ad-hoc/#using-bigquery-extractor)).
 - [GoogleDrive](/extractors/storage/google-drive/) --- imports data from external data sheets (also part of the [Tutorial](/tutorial/load/googledrive/)).
 - [FTP](/extractors/storage/ftp) --- imports CSV files from the FTP, FTPS, and SFTP servers.
 - [HTTP](/extractors/storage/http/) --- imports CSV files stored on HTTP or HTTPS.
