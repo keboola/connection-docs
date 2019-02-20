@@ -1,6 +1,8 @@
 ---
 title: Google BigQuery
 permalink: /extractors/database/bigquery/
+redirect_from:
+    - /extractors/storage/bigquery/
 ---
 
 * TOC

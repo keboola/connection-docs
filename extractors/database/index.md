@@ -10,8 +10,6 @@ Extractors import data from external sources and integrate it to the Keboola Con
 
 There are a number of extractors for [**SQL databases**](/extractors/database/sqldb/):
 
-- [Google BigQuery](/extractors/database/bigquery) (also part of
-our [tutorial](/tutorial/ad-hoc/#using-bigquery-extractor))
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
 - [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/)
@@ -27,7 +25,7 @@ of our [tutorial](/tutorial/load/database/).)*
 
 On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, 
 requires a [different configuration](/extractors/database/mongodb/). 
-The configuration of [BigQuery](https://cloud.google.com/bigquery/) extractor is covered in another [tutorial](/tutorial/ad-hoc/) of ours.
+[Configuration](/extractors/database/bigquery/) of the [BigQuery](https://cloud.google.com/bigquery/) extractor is also covered in another [tutorial](/tutorial/ad-hoc/) of ours.
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 
