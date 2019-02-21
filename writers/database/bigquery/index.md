@@ -63,7 +63,7 @@ The key can be deleted or replaced by a new one at any time.
 
 There is one more thing to do before you can start adding tables. Specify the Google BigQuery Dataset and click on the **Save** button.
 All tables in this configuration will be written to this dataset. 
-The dataset must exist, the writer does not have permissions to create the dataset.
+If the dataset does not exist the roles assigned to the Google Service Account will allow the writer to create it.
 
 ## Add Tables
 
