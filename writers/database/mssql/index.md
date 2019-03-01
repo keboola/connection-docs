@@ -38,7 +38,7 @@ GRANT ALTER, SELECT, INSERT, UPDATE, DELETE ON SCHEMA :: writer_sample_schema TO
 ALTER ROLE writer_sample_role ADD MEMBER writer_sample;
 {% endhighlight %}
 
-It is also possible to secure the connection using an [SSH Tunnel](/extractors/database/#connecting-to-database).
+It is also possible to secure the connection using an [SSH tunnel](/extractors/database/#connecting-to-database).
 
 ## Table Configuration
 The next step is to configure the tables to write. Click the **Add new table** button:

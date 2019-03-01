@@ -9,7 +9,7 @@ permalink: /writers/database/redshift/
 This writer sends data to a [Redshift](https://aws.amazon.com/redshift/) database. It can either write data
 to an existing Redshift database, or to a new database it provisions to you. The latter case is useful
 for sharing your data in form of an SQL database with some service. For example, you can use it to send
-data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
+data to [Tableau](https://www.tableau.com/) or [PowerBI](https://powerbi.microsoft.com/en-us/).
 
 ## Create New Configuration
 Find the Redshift writer in the list of writers and create a new configuration. Name it.
@@ -48,7 +48,7 @@ ALTER USER writer_sample SET search_path TO writer_sample;
 ALTER GROUP writer_sample ADD USER writer_sample;
 {% endhighlight %}
 
-It is also possible to secure the connection using an [SSH Tunnel](/extractors/database/#connecting-to-database).
+It is also possible to secure the connection using an [SSH tunnel](/extractors/database/#connecting-to-database).
 
 ### Keboola Redshift Database
 A Keboola Redshift database is created by the writer and the credentials are provisioned for you:

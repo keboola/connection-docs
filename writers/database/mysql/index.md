@@ -33,7 +33,7 @@ GRANT CREATE TEMPORARY TABLES, CREATE, DROP, SELECT, INSERT, UPDATE ON writer_sa
     TO writer_sample;
 {% endhighlight %}
 
-It is also possible to secure the connection using an [SSH Tunnel](/extractors/database/#connecting-to-database).
+It is also possible to secure the connection using an [SSH tunnel](/extractors/database/#connecting-to-database).
 
 ## Table Configuration
 The next step is to configure the tables you want to write. Click **Add New Table**:
@@ -46,7 +46,7 @@ Select an existing table from Storage:
 {: .image-popup}
 ![Screenshot - Select Table](/writers/database/mysql/select-table.png)
 
-The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
+Then specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
 ![Screenshot - Configure Table](/writers/database/mysql/configure-table.png)
