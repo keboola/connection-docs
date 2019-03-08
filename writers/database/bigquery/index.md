@@ -26,7 +26,7 @@ To access and write to your BigQuery dataset you need to set up a Google Service
 {: .image-popup}
 ![Screenshot - Create service account](/writers/database/bigquery/serviceaccount1.png)
 
-- In the next step add `BigQuery User` and `BigQuery Job User` roles
+- In the next step add `BigQuery Data Editor` and `BigQuery Job User` roles
 
 {: .image-popup}
 ![Screenshot - Create service account](/writers/database/bigquery/serviceaccount2.png)
