@@ -23,9 +23,9 @@ If you are new to KBC and want a **brief orientation** to the Keboola ecosystem,
 or see our [tutorial](/tutorial/) for some hands-on experience on using KBC. 
 
 Another great way of familiarizing yourself with KBC is to scroll through 
-our [presentation](kbc-intro.pdf) on both business and technical aspects of KBC, 
-or to watch a [short video](https://www.youtube.com/watch?v=g-VBfkV4xfc&t=62s), introducing 
-all KBC components along with practical demonstrations of working with them.
+our [presentation](kbc-intro.pdf) covering both business and technical aspects of KBC, 
+or to watch one of our short introductory videos ([video 1](https://www.youtube.com/watch?v=QW09kyEjrJA&amp=&t=4s), 
+[video 2](https://www.youtube.com/watch?v=g-VBfkV4xfc&t=62s) -- includes practical demonstration of working with KBC components.
 
 If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) 
 and log in. We are available to provide [support](/management/support/) whenever needed.
