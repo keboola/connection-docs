@@ -79,7 +79,7 @@ items:
         items:
           - url: /extractors/marketing-sales/adform/
             title: Adform
-            
+
           - url: /extractors/marketing-sales/babelforce/
             title: Babelforce
 
@@ -197,6 +197,9 @@ items:
       - url: /writers/database/
         title: Database
         items:
+          - url: /writers/database/bigquery/
+            title: BigQuery
+
           - url: /writers/database/mysql/
             title: MySQL
 
