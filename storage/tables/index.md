@@ -253,3 +253,17 @@ with the `Changed in last` option, various things can happen:
 Notice that the record for *Peter* was **not updated**, because it was not changed at all (the
 imported row was completely identical to the existing one). Therefore,
 when using incremental processing set to `1 day`, you will not receive that row in input mapping.
+
+
+#### Adaptive Incremental Processing
+
+Writer components have an additional option in the `Changed in last` dropdown, `Since last successful run`. 
+
+{: .image-popup}
+![Screenshot - Adaptive Incremental Processing](/storage/tables/adaptive.png)
+
+
+Using this option you will make sure the writer only gets the data added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
+If there are no rows added (or updated) since the last successful run, an empty table will be passed to the writer.  
+
+This option works best with incremental configurations even without a primary key.
