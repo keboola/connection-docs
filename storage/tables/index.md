@@ -216,7 +216,7 @@ In input mapping, you may specify the `Changed in last` option which allows the 
 {: .image-popup}
 ![Screenshot - Incremental Processing](/storage/tables/incremental-processing.png)
 
-Extending the [above example](#incremental-loading) - if you have a table with a primary key defined on the column `name`:
+Extending the [above example](#incremental-loading) --- if you have a table with a primary key defined on the column `name`:
 
 |name|money|
 |---|---|
@@ -257,13 +257,13 @@ when using incremental processing set to `1 day`, you will not receive that row 
 
 #### Adaptive Incremental Processing
 
-Writer components have an additional option in the `Changed in last` dropdown, `Since last successful run`. 
+Writer components have an additional option in the `Changed in last` dropdown: `Since last successful run`. 
 
 {: .image-popup}
 ![Screenshot - Adaptive Incremental Processing](/storage/tables/adaptive.png)
 
 
-Using this option you will make sure the writer only gets the data added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
+When you select this option, your writer will use only the data that has been added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
 If there are no rows added (or updated) since the last successful run, an empty table will be passed to the writer.  
 
-This option works best with incremental configurations even without a primary key.
+This option works best with incremental configurations, even without a primary key.
