@@ -36,7 +36,6 @@ being deleted as well. If you attempt to do so, you will receive an error messag
 {: .image-popup}
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
 
-Aliases cannot be chained and can be applied only between buckets with the same backend.
 An alias table can be filtered by a simple condition.
 
 {: .image-popup}
@@ -51,6 +50,9 @@ on the right side of your screen. This is what we refer to as the **table detail
 Alias columns are automatically synchronized, by default, with the source table. Columns added to the source
 table will be added to the alias automatically.
 You can prevent this by disabling *Synchronize columns with source table*.
+
+Aliases with automatically synchronized columns and without filter can be chained.
+
 
 ## Metadata
 Each object of the [Table Storage](/storage/) (Bucket, Table, Column) has an associated key-value
