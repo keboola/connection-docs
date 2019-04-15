@@ -36,7 +36,7 @@ There are some limitations to how shared buckets can be used:
 - Source and destination projects must belong to the same organization.
 - To manage shared buckets, your user account must be an [**organization member**](/management/organization/) --- i.e. it is not enough to
 be a project member.
-- Table and bucket attributes are **not shared**.
+- Table and bucket metadata are **not shared**.
 - Table aliases filtered by condition are **not shared**.
 - Table aliases without automatically synchronized columns are **not shared**.
 - Tables in linked buckets work like aliases --- i.e. all tables are **read-only** in the destination project.
