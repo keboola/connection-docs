@@ -113,13 +113,6 @@ To remove an existing primary key, click the **bin** icon:
 
 Note that creating and removing the primary key can take some time on large tables.
 
-Apart from creating a primary key, you can mark a column as indexed. Indexes have some performance effects only
-on the deprecated MySQL backend. On the Redshfit and Snowflake backends, marking a column as indexed does
-not have any effect. You can mark a column as indexed in the table detail:
-
-{: .image-popup}
-![Screenshot - Create Index](/storage/tables/create-index.png)
-
 ### Primary Key Deduplication
 When a primary key is defined on a column, the value of that column is guaranteed to be **unique** in that table.
 As data are loaded into the table, only one of the rows with duplicate values is preserved.
