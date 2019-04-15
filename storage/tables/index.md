@@ -255,9 +255,9 @@ imported row was completely identical to the existing one). Therefore,
 when using incremental processing set to `1 day`, you will not receive that row in input mapping.
 
 
-#### Adaptive Incremental Processing
+#### Automatic Incremental Load
 
-Writer components have an additional option in the `Changed in last` dropdown: `Since last successful run`. 
+Some of the writer components have an additional option in the input mapping. 
 
 {: .image-popup}
 ![Screenshot - Adaptive Incremental Processing](/storage/tables/adaptive.png)
@@ -265,5 +265,3 @@ Writer components have an additional option in the `Changed in last` dropdown: `
 
 When you select this option, your writer will use only the data that has been added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
 If there are no rows added (or updated) since the last successful run, an empty table will be passed to the writer.  
-
-This option works best with incremental configurations, even without a primary key.
