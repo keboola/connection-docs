@@ -37,7 +37,8 @@ There are some limitations to how shared buckets can be used:
 - To manage shared buckets, your user account must be an [**organization member**](/management/organization/) --- i.e. it is not enough to
 be a project member.
 - Table and bucket attributes are **not shared**.
-- Table aliases are **not shared**.
+- Table aliases filtered by condition are **not shared**.
+- Table aliases without automatically synchronized columns are **not shared**.
 - Tables in linked buckets work like aliases --- i.e. all tables are **read-only** in the destination project.
 
 If your bucket is already linked in other projects, you cannot drop it.
