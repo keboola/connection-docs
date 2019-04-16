@@ -208,21 +208,73 @@ The above applies only when **incremental load** is used.
 When an incremental load is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
-#### Automatic Incremental Processing
-
-Some of the writer components have an additional option in the input mapping. 
-
-{: .image-popup}
-![Screenshot - Automatic Incremental Load](/storage/tables/adaptive.png)
-
-
-When you select this option, your writer will use only the data that has been added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
-If there are no rows added (or updated) since the last successful run, an empty table will be passed to the writer.
-
-### Manual Incremental Processing
+### Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
 can be later used in Input Mapping of many components (especially [Transformations](/manipulation/transformations/mappings/#input-mapping)).
-In input mapping, you may specify the `Changed in last` option which allows the component to process only an increment of the data:
+Incremental processing is available in two flavors --- *automatic* and *manual*. Incremental processing makes sense only for
+components reading data from the Storage (e.g. transformations and writers). Note that it is not supported for all components yet.
+
+#### Automatic Incremental Processing
+With automatic incremental processing, the component will receive only data modified from the last **successful** run of that component.
+Extending the [above example](#incremental-loading) --- if you have a table with a primary key defined on the column `name`:
+
+|name|money|
+|---|---|
+|John|$150|
+|Peter|$340|
+|Darla|$600|
+
+and you import the following data to the table:
+
+|name|money|
+|---|---|
+|Darla|$600000|
+|Peter|$340|
+|Annie|$500000|
+|Melanie|$900000|
+
+the result table will contain:
+
+|name|money|
+|---|---|
+|John|$150|
+|**Darla**|**$600000**|
+|Peter|$340|
+|**Annie**|**$500000**|
+|**Melanie**|**$900000**|
+
+Notice that the record for *Peter* was **not updated**, because it was not changed at all (the
+imported row was completely identical to the existing one). Therefore,
+when using incremental processing, that row will not be loaded in input mapping.
+
+The component (e.g. writer) will receive only the highlighted rows. If there are no added or updated rows since the last successful run,
+an empty table will be passed to the component. The image below shows setting of Automatic Incremental Processing for
+the [Snowflake writer](/writers/database/snowflake/):
+
+{: .image-popup}
+![Screenshot - Automatic Incremental Processing](/storage/tables/adaptive-1.png)
+
+{: .image-popup}
+![Screenshot - Automatic Incremental Processing Detail](/storage/tables/adaptive-2.png)
+
+Automatic incremental processing offers the most efficient way of processing data, but is less transparent than processing the full tables.
+The date used to identify newly arrived data is stored internally and can be reset via the **Reset** button. This will cause the
+component to process the entire input table on the next run.
+
+You can always verify the load date used in a particular job using the [Job events](/management/jobs/). Search for an event *Exported table X*:
+
+{: .image-popup}
+![Screenshot - Automatic Incremental Processing Events](/storage/tables/adaptive-events-1.png)
+
+Click the event to show its detail, the `changedSince` parameter shows the date used to select the added and updated data:
+
+{: .image-popup}
+![Screenshot - Automatic Incremental Processing Event Detail](/storage/tables/adaptive-events-2.png)
+
+#### Manual Incremental Processing
+When the [Automatic Incremental Processing](#automatic-incremental-processing) feature is not available, or you
+need greater control of the processing, you may specify the `Changed in last` option.
+This enables the component to process only a specified increment of the data:
 
 {: .image-popup}
 ![Screenshot - Incremental Processing](/storage/tables/incremental-processing.png)
@@ -264,4 +316,3 @@ with the `Changed in last` option, various things can happen:
 Notice that the record for *Peter* was **not updated**, because it was not changed at all (the
 imported row was completely identical to the existing one). Therefore,
 when using incremental processing set to `1 day`, you will not receive that row in input mapping.
-  
