@@ -255,12 +255,12 @@ imported row was completely identical to the existing one). Therefore,
 when using incremental processing set to `1 day`, you will not receive that row in input mapping.
 
 
-#### Automatic Incremental Load
+#### Automatic Incremental Processing
 
 Some of the writer components have an additional option in the input mapping. 
 
 {: .image-popup}
-![Screenshot - Adaptive Incremental Processing](/storage/tables/adaptive.png)
+![Screenshot - Automatic Incremental Load](/storage/tables/adaptive.png)
 
 
 When you select this option, your writer will use only the data that has been added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
