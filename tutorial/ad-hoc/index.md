@@ -30,70 +30,104 @@ Connection (KBC) with the help of our BigQuery extractor. Preview the table data
 
 ## Using BigQuery Extractor
 To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
-querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/). Then create a Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
+querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/).
+
+Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) which will be used for authetinaction of BigQuery extractor and create a Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
 
 *Note: If setting up the BigQuery extractor seems too complicated to you, export the query results to Google Sheets and
 [load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
 ### Preparing
+
+#### Service account
+To create a Google Service Account, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
+and select **IAM & admin / Service accounts**.
+
+{: .image-popup}
+![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-service-account-1.png)
+
+Create a new service account:
+
+{: .image-popup}
+![Screenshot - Google Service Account](/tutorial/ad-hoc/cloud-platform-service-account-2.png)
+
+Name the service account:
+
+{: .image-popup}
+![Screenshot - Google Service Account Detail](/tutorial/ad-hoc/cloud-platform-service-account-3.png)
+
+Grant roles **BigQuery Data Editor**, **BigQuery Job User** and **Storage Object Admin** to your service account:
+
+{: .image-popup}
+![Screenshot - Google Service Account Permissions](/tutorial/ad-hoc/cloud-platform-service-account-4.png)
+
+Finally, create a new JSON key and download it to your computer:
+
+{: .image-popup}
+![Screenshot - Google Service Account Download](/tutorial/ad-hoc/cloud-platform-service-account-5.png)
+
+#### Google Storage Bucket
 To create a Google Storage Bucket, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
 and select **Storage**.
 
 {: .image-popup}
-![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-1.png)
+![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-storage-1.png)
 
 Create a new bucket:
 
 {: .image-popup}
-![Screenshot - Google Cloud Storage](/tutorial/ad-hoc/cloud-platform-2.png)
+![Screenshot - Google Cloud Storage](/tutorial/ad-hoc/cloud-platform-storage-2.png)
 
 Enter the bucket's name and Storage Class (Regional is okay for our use):
 
 {: .image-popup}
-![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-3.png)
+![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-storage-3.png)
 
 ### Extracting Data
 Now you're ready to load the data into KBC. Go to the extractor section, and click **New Extractor**:
 
 {: .image-popup}
-![Screenshot - Extractors](/tutorial/ad-hoc/bigquery-extractor-1.png)
+![Screenshot - Extractors](/tutorial/ad-hoc/ex-bigquery-1.png)
 
 Use the search and find the BigQuery extractor:
 
 {: .image-popup}
-![Screenshot - BigQuery Extractor](/tutorial/ad-hoc/bigquery-extractor-2.png)
+![Screenshot - BigQuery Extractor](/tutorial/ad-hoc/ex-bigquery-2.png)
+
+{: .image-popup}
+![Screenshot - New Configuration](/tutorial/ad-hoc/ex-bigquery-3.png)
 
 Create a new configuration and name it, e.g., `bls-unemployment`:
 
 {: .image-popup}
-![Screenshot - New Configuration](/tutorial/ad-hoc/bigquery-extractor-3.png)
+![Screenshot - New Configuration Name](/tutorial/ad-hoc/ex-bigquery-4.png)
 
-Then authorize the account:
-
-{: .image-popup}
-![Screenshot - Big Query Configuration](/tutorial/ad-hoc/bigquery-extractor-4.png)
-
-Name the authorization, and follow the on-screen instructions:
+Then set Service Account key:
 
 {: .image-popup}
-![Screenshot - Big Query Authorization](/tutorial/ad-hoc/bigquery-extractor-5.png)
+![Screenshot - Big Query Authorization](/tutorial/ad-hoc/ex-bigquery-5.png)
 
-If the authorization is successful, configure the extraction:
-
-{: .image-popup}
-![Screenshot - Big Query Authorized](/tutorial/ad-hoc/bigquery-extractor-6.png)
-
-Select your Google Project and the bucket you have created (`bls-tutorial`) above:
+Open the downloaded key you have created above in a text editor, copy & paste it in the input field, click **Submit** and then **Save**.
 
 {: .image-popup}
-![Screenshot - Big Query Configuration Detail](/tutorial/ad-hoc/bigquery-extractor-7.png)
+![Screenshot - Service Account Copy](/tutorial/ad-hoc/ex-bigquery-6.png)
 
-After that configure the actual extraction queries by clicking the **New Query** button:
+Fill the bucket you have created above:
 
 {: .image-popup}
-![Screenshot - Big Query Bucket Configured](/tutorial/ad-hoc/bigquery-extractor-8.png)
+![Screenshot - Big Query Unload](/tutorial/ad-hoc/ex-bigquery-7.png)
 
-Name the query, e.g., `unemployment rates` and paste the following in the `SQL query` field:
+After that configure the actual extraction queries by clicking the **Add Query** button:
+
+{: .image-popup}
+![Screenshot - Big Query Configured](/tutorial/ad-hoc/ex-bigquery-8.png)
+
+Name the query, e.g., `unemployment rates`:
+
+{: .image-popup}
+![Screenshot - New Query Name](/tutorial/ad-hoc/ex-bigquery-9.png)
+
+Uncheck the `Use Legacy SQL` setting and  paste the following in the `SQL Query` field:
 
 {% highlight sql %}
 SELECT * FROM
@@ -103,16 +137,17 @@ WHERE
 ORDER BY date
 {% endhighlight %}
 
-The `LNS14000000` series will pick the unemployment rates only. Uncheck the `Use Legacy SQL` setting, and
-**Save** the query configuration:
+The `LNS14000000` series will pick the unemployment rates only.
+
+Then **Save** the query configuration.
 
 {: .image-popup}
-![Screenshot - Query Configuration](/tutorial/ad-hoc/bigquery-extractor-9.png)
+![Screenshot - Query Configuration](/tutorial/ad-hoc/ex-bigquery-10.png)
 
 Now run the configuration to bring the data to KBC:
 
 {: .image-popup}
-![Screenshot - Finished Configuration](/tutorial/ad-hoc/bigquery-extractor-10.png)
+![Screenshot - Finished Configuration](/tutorial/ad-hoc/ex-bigquery-11.png)
 
 Running the extractor creates a background job that
 
