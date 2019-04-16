@@ -208,7 +208,18 @@ The above applies only when **incremental load** is used.
 When an incremental load is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
-### Incremental Processing
+#### Automatic Incremental Processing
+
+Some of the writer components have an additional option in the input mapping. 
+
+{: .image-popup}
+![Screenshot - Automatic Incremental Load](/storage/tables/adaptive.png)
+
+
+When you select this option, your writer will use only the data that has been added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
+If there are no rows added (or updated) since the last successful run, an empty table will be passed to the writer.
+
+### Manual Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
 can be later used in Input Mapping of many components (especially [Transformations](/manipulation/transformations/mappings/#input-mapping)).
 In input mapping, you may specify the `Changed in last` option which allows the component to process only an increment of the data:
@@ -253,15 +264,4 @@ with the `Changed in last` option, various things can happen:
 Notice that the record for *Peter* was **not updated**, because it was not changed at all (the
 imported row was completely identical to the existing one). Therefore,
 when using incremental processing set to `1 day`, you will not receive that row in input mapping.
-
-
-#### Automatic Incremental Processing
-
-Some of the writer components have an additional option in the input mapping. 
-
-{: .image-popup}
-![Screenshot - Automatic Incremental Load](/storage/tables/adaptive.png)
-
-
-When you select this option, your writer will use only the data that has been added to (or updated in) the source table in Storage since the last **successful** run of this configuration. 
-If there are no rows added (or updated) since the last successful run, an empty table will be passed to the writer.  
+  
