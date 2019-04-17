@@ -40,7 +40,7 @@ To access and extract data from your BigQuery dataset, you need to set up a Goog
 {: .image-popup}
 ![Screenshot - Create service account](/extractors/database/bigquery/serviceaccount3.png)
 
-- Go back to your BigQuery writer configuration.
+- Go back to your BigQuery extractor configuration.
 - In the **Google Service Account Key** section click **Set Service Account Key**.
 
 {: .image-popup}
