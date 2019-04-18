@@ -15,8 +15,8 @@ and applications), or they are imported from CSV files. In case you want to impo
 **existing table**, the imported table must have all the columns of the old, existing table, even if the old
 table is empty. If some columns are missing, you will receive a message like this:
 
-    Some columns are missing in the csv file. Missing columns: lat,long. Expected columns: lat,long.
-    Please check if the expected "," delimiter is used in the csv file.
+    Some columns are missing in the CSV file. Missing columns: lat,long. Expected columns: lat,long.
+    Please check if the expected "," delimiter is used in the CSV file.
 
 Also note that the imported file **may** contain additional columns not present in the existing
 table. In that case, the columns from the imported table will be added to the existing table.
@@ -51,7 +51,7 @@ Alias columns are automatically synchronized, by default, with the source table.
 table will be added to the alias automatically.
 You can prevent this by disabling *Synchronize columns with source table*.
 
-Aliases with automatically synchronized columns and without filter can be chained.
+Aliases with automatically synchronized columns and without a filter can be chained.
 
 
 ## Metadata
