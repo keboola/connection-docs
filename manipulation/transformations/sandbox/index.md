@@ -247,3 +247,29 @@ import psutil
 process = psutil.Process(os.getpid())
 print(process.memory_info().rss)
 {% endhighlight %}
+
+## Code Templates
+For [Jupyter](#jupyter-notebook-sandbox) and [RStudio](#rstudio-sandbox) sandboxes, code templates 
+can be defined. Code templates can be set for a given **user** or for the entire **project**.
+A Jupyter template is a notebook file (.ipynb). An RStudio template is a simple text file.
+If a sandbox is loaded from transformation, the transformation code will be appended after the
+template code.
+
+To create a **project template**, go to [Storage - Files](/storage/file-uploads/) and upload the template with
+the tag `_python_sandbox_template_` or `_r_sandbox_template_`. Don't forget to mark the file
+as permanent. Before uploading the template, make sure that it doesn't contain any sensitive data 
+(*Kernel* -- *Restart & Clear Output* might be a good idea). The file name is arbitrary.
+
+{: .image-popup}
+![Screenshot - Project Template](/manipulation/transformations/sandbox/template-project.png)
+
+To create a **user template**, upload a file with the tag
+`_python_sandbox_template_` or `_r_sandbox_template_` and add another tag with the value of 
+the [user email](/management/project/users/).
+
+{: .image-popup}
+![Screenshot - User Template](/manipulation/transformations/sandbox/template-user.png)
+
+If there are multiple templates, the newest one is used. User template always takes precedence over the 
+project template for the given user. If you have both project and a user template for a given user and you update the 
+project template, the user won't see the update until his user template is removed.
