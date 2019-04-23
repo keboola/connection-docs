@@ -320,6 +320,9 @@ items:
       - url: /orchestrator/design/
         title: Design
 
+      - url: /orchestrator/automate/
+        title: Single task Orchestration
+
   - url: /management/
     title: Management
     items:
