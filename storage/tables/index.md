@@ -57,7 +57,7 @@ Aliases with automatically synchronized columns and without a filter can be chai
 ## Metadata
 Each object of the [Table Storage](/storage/) (Bucket, Table, Column) has an associated key-value
 store. This can be used to store arbitrary metadata (information about the data itself). Apart from
-arbitrary user-defined metadata, there are also some information stored automatically. For example,
+arbitrary user-defined metadata, there is also some information stored automatically. For example,
 each bucket and table has information about which configuration of which component created them.
 
 ### Data Types
@@ -68,8 +68,8 @@ example, the transformation [`COPY` mapping](/manipulation/transformations/snowf
 the transformations. Also, some writers, e.g., the [Snowflake writer](/writers/database/snowflake/) use
 the table metadata to [pre-fill the table columns](/writers/database/snowflake/#table-configuration) configuration for you.
 
-Even if a data type is available for a column, that column is always stored as a text --- keep this in mind
-especially in [Transformations](/manipulation/transformations/mappings/#output-mapping) where the output is always cast to a text. The basic idea behind
+Even if a data type is available for a column, that column is always stored as text --- keep this in mind
+especially in [Transformations](/manipulation/transformations/mappings/#output-mapping), where the output is always cast to text. The basic idea behind
 this is that a text type has the best interoperability, so this averts many issues (e.g., some date values stored in a MySQL
 database might not be accepted by a Snowflake database and vice-versa).
 
@@ -115,7 +115,7 @@ Note that creating and removing the primary key can take some time on large tabl
 
 ### Primary Key Deduplication
 When a primary key is defined on a column, the value of that column is guaranteed to be **unique** in that table.
-As data are loaded into the table, only one of the rows with duplicate values is preserved.
+As data is loaded into the table, only one of the rows with duplicate values is preserved.
 All the other duplicates are ignored.
 Let's say you have a table with two columns: `name` and `money`.  The primary key is defined
 on the column `name`.
@@ -243,7 +243,7 @@ imported row was completely identical to the existing one). Therefore,
 when using incremental processing, that row will not be loaded in input mapping.
 
 The component (e.g. writer) will receive only the highlighted rows. If there are no added or updated rows since the last successful run,
-an empty table will be passed to the component. The image below shows setting of Automatic Incremental Processing for
+an empty table will be passed to the component. The image below shows the setting of Automatic Incremental Processing for
 the [Snowflake writer](/writers/database/snowflake/):
 
 {: .image-popup}
@@ -261,7 +261,7 @@ You can always verify the load date used in a particular job using the [Job even
 {: .image-popup}
 ![Screenshot - Automatic Incremental Processing Events](/storage/tables/adaptive-events-1.png)
 
-Click the event to show its detail, the `changedSince` parameter shows the date used to select the added and updated data:
+Click the event to show its detail; the `changedSince` parameter shows the date used to select the added and updated data:
 
 {: .image-popup}
 ![Screenshot - Automatic Incremental Processing Event Detail](/storage/tables/adaptive-events-2.png)

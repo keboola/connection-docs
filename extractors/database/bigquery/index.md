@@ -30,7 +30,7 @@ To access and extract data from your BigQuery dataset, you need to set up a Goog
 {: .image-popup}
 ![Screenshot - Create service account](/extractors/database/bigquery/serviceaccount1.png)
 
-- Then add the `BigQuery Data Editor`, `BigQuery Job User` adn `Storage Object Admin` roles.
+- Then add the `BigQuery Data Editor`, `BigQuery Job User` and `Storage Object Admin` roles.
 
 {: .image-popup}
 ![Screenshot - Create service account](/extractors/database/bigquery/serviceaccount2.png)
@@ -41,7 +41,7 @@ To access and extract data from your BigQuery dataset, you need to set up a Goog
 ![Screenshot - Create service account](/extractors/database/bigquery/serviceaccount3.png)
 
 - Go back to your BigQuery extractor configuration.
-- In the **Google Service Account Key** section click **Set Service Account Key**.
+- In the **Google Service Account Key** section, click **Set Service Account Key**.
 
 {: .image-popup}
 ![Screenshot - Set Service Account Key](/extractors/database/bigquery/ui2.png)
@@ -59,7 +59,7 @@ The key can be deleted or replaced by a new one at any time.
 
 ### Bucket
 
-Extractor uses Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
+The extractor uses Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
 
 - Go to the [**Google Cloud Platform Console > Storage > Browser**](https://console.cloud.google.com/storage/browser)
 - Click **+ Create Bucket**.
@@ -69,7 +69,7 @@ Extractor uses Google Storage Bucket as a temporary storage for off-loading the 
 ![Screenshot - Google Cloud Platform](/extractors/database/bigquery/ui5.png)
 
 - Go back to your BigQuery extractor configuration.
-- In the **Unload Configuration** section fill **Cloud Storage Bucket Name** you have created and select the correct **Dataset Location**.
+- In the **Unload Configuration** section, fill **Cloud Storage Bucket Name** you have created, and select the correct **Dataset Location**.
 - Click **Save**.
 
 {: .image-popup}
@@ -82,7 +82,7 @@ Start by clicking the green **+ Add Query** button.
 {: .image-popup}
 ![Screenshot - Big Query Bucket Configured](/extractors/database/bigquery/ui7.png)
 
-Name the query and click Create  
+Name the query and click **Create**.  
 
 {: .image-popup}
 ![Screenshot - Big Query Bucket Configured](/extractors/database/bigquery/ui8.png)
@@ -99,9 +99,9 @@ Now run the configuration to bring the data to KBC.
 
 Running the extractor creates a background job that
 
-- Executes the queries in Google BigQuery.
-- Saves the results to Google Cloud Storage.
-- Exports the results from Google Cloud Storage and stores them in specified tables in Keboola Connection Storage.
-- Removes the results from Google Cloud Storage.
+- executes the queries in Google BigQuery.
+- saves the results to Google Cloud Storage.
+- exports the results from Google Cloud Storage and stores them in specified tables in Keboola Connection Storage.
+- removes the results from Google Cloud Storage.
 
-*Note: Using Google BigQuery extractor is also described in our [Getting Started Tutorial](https://help.keboola.com/tutorial/ad-hoc/#using-bigquery-extractor).*
+*Note: Using the Google BigQuery extractor is also described in our [Getting Started Tutorial](https://help.keboola.com/tutorial/ad-hoc/#using-bigquery-extractor).*
