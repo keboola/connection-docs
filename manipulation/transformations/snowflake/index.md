@@ -14,10 +14,6 @@ permalink: /manipulation/transformations/snowflake/
 - Simple data types
 - Amazing processing power and data throughput
 
-## Migration from Redshift to Snowflake
-
-Please [share your migration tips](http://wiki.keboola.com/home/transformations/snowflake/redshift-snowflake) with us.
-
 ## Limits
 
 - Snowflake queries are **limited** to 900 seconds by default.

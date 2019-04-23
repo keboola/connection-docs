@@ -46,9 +46,11 @@ There are three equivalent places where you can get KBC Status updates (service 
 - [Twitter](https://twitter.com/keboola_support)
 
 ## Your Tips and Suggestions
+Use the *Feature Wishlist* in the project menu to send us your suggestions for new features or improvements.
 
-- [Feature Wishlist](https://portal.productboard.com/ltulbdlwnurf2accjn3ukkww) --- send us your suggestions for a new feature to Keboola Connection
-- [wiki.keboola.com](http://wiki.keboola.com/) --- share your tips and tricks with other KBC users 
+{: .image-popup}
+![Screenshot - Wishlist](/wishlist.png)
+
 
 ## Keboola's Partners Program
 
