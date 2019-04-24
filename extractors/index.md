@@ -24,7 +24,7 @@ For a definitive list of usable extractors, see your project **Extractors** sect
 [public list of components](https://components.keboola.com/components).
 
 ## Working with Extractors
-Even though extractors are generally designed for **automated and repeated** data collection,
+Even though extractors are generally designed for [**automated and repeated**](/orchestrator/) data collection,
 they can be triggered manually at any time.
 
 - For manual import of ad-hoc data, see [Data Import in Storage](/storage/file-uploads/), or our [tutorial on manual data loading](/tutorial/load/).
