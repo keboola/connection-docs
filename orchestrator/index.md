@@ -34,15 +34,15 @@ at the configuration page:
 {: .image-popup}
 ![Automate modal](/orchestrator/automate.png)
 
-You have to specify the orchestration name and schedule:
+Specify the orchestration name and schedule:
 
 {: .image-popup}
 ![Automate modal](/orchestrator/automate-modal.png)
 
-If any of the predefined scheduled options do not fit your needs, you can select **Custom schedule** to be able to set up an individual schedule.
+If any of the predefined scheduled options do not fit your needs, select **Custom schedule** to set up an individual schedule.
 
 {: .image-popup}
 ![Automate custom schedule](/orchestrator/automate-modal-custom.png)
 
-Wen you done, click the **Automate** button to create a new Orchestration containing the configuration as its only task.
+When done, click the **Automate** button to create a new Orchestration containing the configuration as its only task.
 The orchestration has no special properties, so you can further modify it as any other orchestration.
