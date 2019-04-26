@@ -32,15 +32,16 @@ Connection (KBC) with the help of our BigQuery extractor. Preview the table data
 To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
 querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/).
 
-Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) which will be used for authetinaction of BigQuery extractor and create a Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
+Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) which will be used for authentication of the Google BigQuery extractor, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
-*Note: If setting up the BigQuery extractor seems too complicated to you, export the query results to Google Sheets and
+*Note: If setting up the Google BigQuery extractor seems too complicated to you, export the query results to Google Sheets and
 [load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
-### Preparing
+### Prepare
+Before you start, have a Google service account and a Google Storage bucket ready.
 
 #### Service account
-To create a Google Service Account, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
+To create a Google service account, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
 and select **IAM & admin / Service accounts**.
 
 {: .image-popup}
@@ -66,8 +67,8 @@ Finally, create a new JSON key and download it to your computer:
 {: .image-popup}
 ![Screenshot - Google Service Account Download](/tutorial/ad-hoc/cloud-platform-service-account-5.png)
 
-#### Google Storage Bucket
-To create a Google Storage Bucket, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
+#### Google Storage bucket
+To create a Google Storage bucket, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
 and select **Storage**.
 
 {: .image-popup}
@@ -78,18 +79,18 @@ Create a new bucket:
 {: .image-popup}
 ![Screenshot - Google Cloud Storage](/tutorial/ad-hoc/cloud-platform-storage-2.png)
 
-Enter the bucket's name and Storage Class (Regional is okay for our use):
+Enter the bucket's name and storage class (Regional is okay for our use):
 
 {: .image-popup}
 ![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-storage-3.png)
 
-### Extracting Data
-Now you're ready to load the data into KBC. Go to the extractor section, and click **New Extractor**:
+### Extract Data
+Now you're ready to load the data into KBC. Go to the Extractor section, and click **New Extractor**:
 
 {: .image-popup}
 ![Screenshot - Extractors](/tutorial/ad-hoc/ex-bigquery-1.png)
 
-Use the search and find the BigQuery extractor:
+Use the search and find the Google BigQuery extractor:
 
 {: .image-popup}
 ![Screenshot - BigQuery Extractor](/tutorial/ad-hoc/ex-bigquery-2.png)
@@ -102,7 +103,7 @@ Create a new configuration and name it, e.g., `bls-unemployment`:
 {: .image-popup}
 ![Screenshot - New Configuration Name](/tutorial/ad-hoc/ex-bigquery-4.png)
 
-Then set Service Account key:
+Then set the service account key:
 
 {: .image-popup}
 ![Screenshot - Big Query Authorization](/tutorial/ad-hoc/ex-bigquery-5.png)
@@ -216,7 +217,7 @@ plt.show()
 {: .image-popup}
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-2.png)
 
-## Adding libraries
+## Adding Libraries
 Now that you can experiment with the U.S. unemployment data extracted from Google BigQuery (or any other data extracted in any other way),
 you can do the same with the EU unemployment data. Available at [Eurostat](http://ec.europa.eu/eurostat), the unemployment
 dataset is called
@@ -231,7 +232,7 @@ for downloading the data. This could be processed using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
 to import them to KBC, it would be necessary to do additional processing to obtain plain tables.
 
-To save time, use a tool designed for that -- [pyjstat](https://pypi.python.org/pypi/pyjstat/). It is a python library which can read
+To save time, use a tool designed for that -- [pyjstat](https://pypi.python.org/pypi/pyjstat/). It is a Python library which can read
 JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html).
 Although this library is not installed by default in the Jupyter Sandbox environment, nothing prevents you from installing it.
 
@@ -249,7 +250,7 @@ df.head()
 {% endhighlight %}
 
 The URL was built using the Eurostat [Query Builder](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder).
-Also note that installing a library from within the python code must be done using `pip install`. Now that you have the data, feel free to play with it:
+Also note that installing a library from within the Python code must be done using `pip install`. Now that you have the data, feel free to play with it:
 
 {% highlight python %}
 years = df.groupby(df['time'])['value'].mean()
@@ -263,7 +264,7 @@ plt.show()
 {: .image-popup}
 ![Screenshot - Sandbox Result](/tutorial/ad-hoc/sandbox-3.png)
 
-## Wrap-up
+## Wrap Up
 You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly,
 simply copy&paste it into a [Transformation](http://localhost:4000/tutorial/manipulate/).
 
