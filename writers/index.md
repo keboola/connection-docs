@@ -22,6 +22,8 @@ For a definitive list of usable writers, see your project **Writers** section.
 
 ## Working with Writers
 Each writer can have multiple configurations. Each configuration usually represents a single destination (database account, BI project, ...).
+Even though writers are generally designed for [**automated and repeated**](/orchestrator/) data collection,
+they can be triggered manually at any time.
 
 We provide tutorials on [writing into GoodData](/tutorial/write/gooddata/) and [writing into Tableau](/tutorial/write/).
 

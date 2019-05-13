@@ -45,8 +45,10 @@ can be changed.
 Each table has a different setting, but all tables share the same credentials to the server.
 
 ### Specify Files to Download
-For each table you have to specify a path. Use the path to a specific file, or
-use the glob syntax (for testing the glob path you can use the [Glob tester](http://www.globtester.com/)).
+For each table, you have to specify a path. Use the path to a specific file, or
+use the glob syntax (for testing the glob path, you can use the [Glob tester](http://www.globtester.com/)).
+If you want to list inside subdirectories (e.g., `/dir/**/*.csv`), please make sure that your FTP server
+supports a recursive list of directories.
 
 {: .image-popup}
 ![Screenshot - FTP extractor download settings](/extractors/storage/ftp/ftp-ex-5.png)

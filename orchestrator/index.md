@@ -26,3 +26,23 @@ available data, without any user intervention. Every change to your entry data
 will **automatically propagate up** to your dashboard or visualisation project.
 
 See the corresponding part of our [tutorial](/tutorial/automate/) to quickly set up an example Orchestration.
+
+## Single Task Orchestrations
+In case you want to automate a single configuration, the quickest option is to use the **Automate** button 
+at the configuration page:
+
+{: .image-popup}
+![Automate modal](/orchestrator/automate.png)
+
+Specify the orchestration name and schedule:
+
+{: .image-popup}
+![Automate modal](/orchestrator/automate-modal.png)
+
+If any of the predefined scheduled options do not fit your needs, select **Custom schedule** to set up an individual schedule.
+
+{: .image-popup}
+![Automate custom schedule](/orchestrator/automate-modal-custom.png)
+
+When done, click the **Automate** button to create a new Orchestration containing the configuration as its only task.
+The orchestration has no special properties, so you can further modify it as any other orchestration.

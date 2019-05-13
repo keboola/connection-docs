@@ -6,7 +6,7 @@ permalink: /manipulation/transformations/sandbox/
 * TOC
 {:toc}
 
-*To create your first Sandbox, and to see how it is an integral part of the KBC workflow in our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
+*To create your first Sandbox and see how it is an integral part of the KBC workflow, go to our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
 
 A sandbox is a **safe environment** for you to
 
@@ -250,14 +250,14 @@ print(process.memory_info().rss)
 
 ## Code Templates
 For [Jupyter](#jupyter-notebook-sandbox) and [RStudio](#rstudio-sandbox) sandboxes, code templates 
-can be defined. Code templates can be set for a given **user** or for the entire **project**.
+can be defined. They can be set for a given **user** or for the entire **project**.
 A Jupyter template is a notebook file (.ipynb). An RStudio template is a simple text file.
-If a sandbox is loaded from transformation, the transformation code will be appended after the
+If a sandbox is loaded from a transformation, the transformation code will be appended after the
 template code.
 
-To create a **project template**, go to [Storage - Files](/storage/file-uploads/) and upload the template with
+To create a **project template**, go to [Storage -- Files](/storage/file-uploads/) and upload the template with
 the tag `_python_sandbox_template_` or `_r_sandbox_template_`. Don't forget to mark the file
-as permanent. Before uploading the template, make sure that it doesn't contain any sensitive data 
+as permanent. Before uploading the template, make sure it doesn't contain any sensitive data 
 (*Kernel* -- *Restart & Clear Output* might be a good idea). The file name is arbitrary.
 
 {: .image-popup}
@@ -270,6 +270,6 @@ the [user email](/management/project/users/).
 {: .image-popup}
 ![Screenshot - User Template](/manipulation/transformations/sandbox/template-user.png)
 
-If there are multiple templates, the newest one is used. User template always takes precedence over the 
-project template for the given user. If you have both project and a user template for a given user and you update the 
-project template, the user won't see the update until his user template is removed.
+If there are multiple templates, the newest one is used. A user template always takes precedence over the 
+project template for the given user. If you have both a project and a user template for a given user and you update the 
+project template, the user won't see the update until their user template is removed.
