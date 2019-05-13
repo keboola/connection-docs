@@ -18,3 +18,4 @@ A number of BI and Analytics tools are also accessible via the [Snowflake writer
  - [PowerBI](/writers/database/snowflake/#connect-to-power-bi-desktop)
  - [Qlik](/writers/database/snowflake/#connect-to-qlik)
  - [Tableau](/writers/database/snowflake/#connect-to-tableau)
+- and [others](https://components.keboola.com/components)

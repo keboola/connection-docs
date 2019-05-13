@@ -18,4 +18,4 @@ provides detailed data for locations specified by their names, address or coordi
 - [Stripe](/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.
 - [What3words](/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
 - [GitHub](/extractors/other/github/) --- imports data from GitHub, a software development platform.
-- and others
+- and [others](https://components.keboola.com/components)

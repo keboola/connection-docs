@@ -12,9 +12,4 @@ The following extractors support communication systems:
 - [Intercom](/extractors/communication/intercom/) 
 - [Slack](/extractors/communication/slack/) 
 - [Zendesk](/extractors/communication/zendesk/) 
-
-- and others
-
-
-
-
+- and [others](https://components.keboola.com/components)

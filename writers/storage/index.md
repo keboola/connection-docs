@@ -11,4 +11,5 @@ allow to push data to generic storage services:
 - [Google Drive](/writers/storage/google-drive/) --- writes tables as CSV files or entire Google Sheet files.
 - [Google Sheets](/writers/storage/google-sheets/) --- writes tables as individual sheets of a Google Sheet file, or appends rows to an existing sheet.
 - [Keboola Connection Storage](/writers/storage/storage-api/) --- writes tables to a different Keboola Connection project; can be used where [Share Buckets](/storage/buckets/sharing/) cannot.
-- and others
+- and [others](https://components.keboola.com/components)
+

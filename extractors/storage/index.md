@@ -13,4 +13,4 @@ The following extractors allow access to data from generic storage services:
 - [HTTP](/extractors/storage/http/) --- imports CSV files stored on HTTP or HTTPS.
 - [Keboola Connection Storage](/extractors/storage/storage-api/) --- loads single or multiple tables from a Keboola Connection project and
 stores them in a bucket in your current project; can be used where [Share Buckets](/storage/buckets/sharing/) cannot.
-- and others
+- and [others](https://components.keboola.com/components)
