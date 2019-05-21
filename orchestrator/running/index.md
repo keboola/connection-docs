@@ -87,9 +87,9 @@ be ignored (can't execute orchestration) inside this period.
 For example if your tables are updated every 10 minutes and you are good with 1 hour old data set cool down period to 50 minutes and
 your data will be approximately update every 50-60 minutes instead of every 10 minutes.
 
-The best advantage of **Event Trigger** orchestration is using this type of scheduling inside projects, where you use data from shared buckets.
-You don't need to know when data in shared buckets are going to be updated (like you need to know in **Time Schedule**) and you can just simply
-wait for update event on tables inside shared bucket and as soon as they are update you can run your own orchestrations. 
+The best advantage of **Event Trigger** orchestration is using this type of scheduling inside projects, where you use data from [shared buckets](/storage/buckets/sharing/) .
+You don't need to know when data in [shared bucket](/storage/buckets/sharing/) are going to be updated (like you need to know in **[Time Schedule](/orchestrator/running/#1-time-schedule)**) and you can just simply
+wait for update event on tables inside [shared bucket](/storage/buckets/sharing/)  and as soon as they are update you can run your own orchestrations. 
 
 
 ## Orchestration Execution
