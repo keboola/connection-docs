@@ -30,13 +30,13 @@ Clicking on the job row takes you to the orchestration job details:
 Here you can see which jobs were executed and which jobs failed. Notice that because the tasks within a phase run in parallel, the
 `Snowflake - Email recipient Index` was started at the same time as the `Adform - Campaigns` task
 (though it is displayed after it in the list). However, the orchestration did not continue to the second phase (`transformation phase`)
-because the first phase failed. You can directly retry the failed orchestration jobs by clicking **Job Retry**:
+because the first phase had failed. You can directly retry the failed orchestration jobs by clicking **Job Retry**:
 
 {: .image-popup}
 ![Screenshot - Orchestration Jobs](/orchestrator/running/job-retry.png)
 
 Only failed tasks and failed and not executed phases will be checked by default. Additional properties control
-the execution of tasks within orchestration:
+the execution of tasks within an orchestration:
 
 - Task can be marked as *Active*/Inactive. Marking the task as inactive means that it won't be run with the orchestration. 
 It is useful for temporarily skipping something.
@@ -52,44 +52,48 @@ the orchestration **Schedule**:
 {: .image-popup}
 ![Screenshot - Orchestration Schedule](/orchestrator/running/orchestration-main-3.png)
 
-You can select from 2 types of scheduling:
+You can select from two types of scheduling:
 
-### 1 Time schedule
+ - Time schedule
+ - Event trigger
+
+### Time Schedule
 
 The orchestration schedule is set in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
 so that the orchestration always runs in a single unambiguous point in time. For clarity, the schedule is displayed in your local time.
-Keep in mind that other users may see different schedules. These may even differ during the year because of [DST](https://en.wikipedia.org/wiki/Daylight_saving_time).
+Keep in mind that other users may see different schedules. These may even differ throughout the year because of [DST](https://en.wikipedia.org/wiki/Daylight_saving_time).
 
 {: .image-popup}
 ![Screenshot - Orchestration Schedule](/orchestrator/running/schedule.png)
 
-Before scheduling an orchestration, be sure to run it and asses a reasonable schedule. An orchestration itself is considered
-a component configuration which means that it will [not run in parallel](/management/jobs/). When you trigger
+Before scheduling an orchestration, be sure to run it and assess a reasonable schedule. An orchestration itself is considered
+a component configuration; this means that it will [not run in parallel](/management/jobs/). When you trigger
 an orchestration job and there is still a previous orchestration job running (some of the configured tasks are
 still running), the newly created orchestration job will be [waiting](/management/jobs/#waiting-jobs) until
 the previous one finishes. This means that if you have an orchestration running for one hour, and you schedule 
-it to run every 30 minutes, you'll still have your tables updated only every hour. Plus you'll also clog 
+it to run every 30 minutes, you'll still have your tables updated only once in an hour. Plus, you'll also clog 
 the project with waiting jobs.
 
-### 2 Event trigger
+### Event Trigger
 
-Instead of time basing your orchestration execution on exact time, you can watch for a set of table and execute the orchestration
-after the set of table is updated.
+Instead of setting your orchestration execution for an exact time, you can wait for a table to be updated and execute the orchestration
+after it happens.
 
 {: .image-popup}
 ![Screenshot - Event Trigger](/orchestrator/running/event-trigger.png)
 
-When the watched table is updated, then scheduler check other watched tables if they have been also updated
-since last orchestration run. If all tables have been update since last orchestration execution, then orchestration will be executed. 
-If your tables are updated very often you can use cool down period to avoid too often execution and all updates events will 
-be ignored (can't execute orchestration) inside this period.
+When your selected table is updated, the scheduler checks other selected tables for updates. 
+Once all tables are updated since the last orchestration execution, the orchestration will run again. 
+If your tables get updated very often, use a cool down period to avoid too frequent executions. All updates will 
+be ignored (can't execute an orchestration) within this period.
 
-For example if your tables are updated every 10 minutes and you are good with 1 hour old data set cool down period to 50 minutes and
-your data will be approximately update every 50-60 minutes instead of every 10 minutes.
+For example, if your tables are updated every 10 minutes and you are good with 1 hour old data, set the cool down period to 50 minutes 
+and your data will be updated approximately every 50-60 minutes instead of every 10 minutes.
 
-The best advantage of **Event Trigger** orchestration is using this type of scheduling inside projects, where you use data from [shared buckets](/storage/buckets/sharing/) .
-You don't need to know when data in [shared bucket](/storage/buckets/sharing/) are going to be updated (like you need to know in **[Time Schedule](/orchestrator/running/#1-time-schedule)**) and you can just simply
-wait for update event on tables inside [shared bucket](/storage/buckets/sharing/)  and as soon as they are update you can run your own orchestrations. 
+The biggest advantage of the **Event Trigger** orchestration is that this type of scheduling can be used inside projects where you use data from [shared buckets](/storage/buckets/sharing/).
+You don't need to know when data in a [shared bucket](/storage/buckets/sharing/) is going to be updated (like you need to know in 
+**[Time Schedule](/orchestrator/running/#1-time-schedule)**) and you can just wait for an update event on tables inside a [shared 
+bucket](/storage/buckets/sharing/), and as soon as they are updated, you can run your own orchestrations. 
 
 
 ## Orchestration Execution
