@@ -21,6 +21,12 @@
             "service": "syrup"
         },
         {
+            "ipPrefix": "149.72.196.5/32",
+            "vendor": "sendgrid",
+            "region": "us-east-1",
+            "service": "syrup"
+        },        
+        {
             "ipPrefix": "34.203.87.137/32",
             "vendor": "aws",
             "region": "us-east-1",
