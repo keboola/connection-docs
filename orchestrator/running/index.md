@@ -54,47 +54,44 @@ the orchestration **Schedule**:
 
 You can select from two types of scheduling:
 
- - Time schedule
- - Event trigger
+ - Time Schedule
+ - Event Trigger
 
 ### Time Schedule
-
 The orchestration schedule is set in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
 so that the orchestration always runs in a single unambiguous point in time. For clarity, the schedule is displayed in your local time.
-Keep in mind that other users may see different schedules. These may even differ throughout the year because of [DST](https://en.wikipedia.org/wiki/Daylight_saving_time).
+Keep in mind that other users may see different schedules. These may even differ throughout the year because of Daylight Saving Time [DST](https://en.wikipedia.org/wiki/Daylight_saving_time).
 
 {: .image-popup}
 ![Screenshot - Orchestration Schedule](/orchestrator/running/schedule.png)
 
-Before scheduling an orchestration, be sure to run it and assess a reasonable schedule. An orchestration itself is considered
-a component configuration; this means that it will [not run in parallel](/management/jobs/). When you trigger
-an orchestration job and there is still a previous orchestration job running (some of the configured tasks are
-still running), the newly created orchestration job will be [waiting](/management/jobs/#waiting-jobs) until
-the previous one finishes. This means that if you have an orchestration running for one hour, and you schedule 
-it to run every 30 minutes, you'll still have your tables updated only once in an hour. Plus, you'll also clog 
-the project with waiting jobs.
+Before scheduling an orchestration, be sure to run it first to see what schedule would work best. 
+An orchestration itself is considered a component configuration and it will [not run in parallel](/management/jobs/). 
+When you trigger an orchestration job while the previous orchestration job is still running (some of the configured tasks), 
+the new job will be [waiting](/management/jobs/#waiting-jobs) until the previous one finishes. This means that 
+if your orchestration runs for one hour and you schedule it to run every 30 minutes, you'll still have your tables updated 
+only once in an hour. Plus, you'll also clog the project with waiting jobs.
 
 ### Event Trigger
-
-Instead of setting your orchestration execution for an exact time, you can wait for a table to be updated and execute the orchestration
-after it happens.
+Instead of setting your orchestration execution for an exact time, you can wait for selected tables to be updated and 
+run the orchestration after it happens.
 
 {: .image-popup}
 ![Screenshot - Event Trigger](/orchestrator/running/event-trigger.png)
 
-When your selected table is updated, the scheduler checks other selected tables for updates. 
-Once all tables are updated since the last orchestration execution, the orchestration will run again. 
-If your tables get updated very often, use a cool down period to avoid too frequent executions. All updates will 
-be ignored (can't execute an orchestration) within this period.
+When a selected table is updated, the scheduler checks all other selected tables for updates. 
+Once all selected tables are updated since the last orchestration execution, the orchestration will run again. 
 
-For example, if your tables are updated every 10 minutes and you are good with 1 hour old data, set the cool down period to 50 minutes 
-and your data will be updated approximately every 50-60 minutes instead of every 10 minutes.
+If your tables get updated very often, use a **cool-down period** to avoid too frequent executions. All updates 
+will be ignored and won't trigger an orchestration job within this period. For example, if your tables are updated 
+every 10 minutes and you are good with 1 hour old data, set the cool-down period to 50 minutes. Your data will be 
+updated approximately every 50-60 minutes instead of every 10 minutes.
 
-The biggest advantage of the **Event Trigger** orchestration is that this type of scheduling can be used inside projects where you use data from [shared buckets](/storage/buckets/sharing/).
-You don't need to know when data in a [shared bucket](/storage/buckets/sharing/) is going to be updated (like you need to know in 
-**[Time Schedule](/orchestrator/running/#1-time-schedule)**) and you can just wait for an update event on tables inside a [shared 
-bucket](/storage/buckets/sharing/), and as soon as they are updated, you can run your own orchestrations. 
-
+The biggest advantage of the **Event Trigger** scheduling is that it can be used inside projects where you use data 
+from [shared buckets](/storage/buckets/sharing/). There is no need to know when data in a [shared bucket](/storage/buckets/sharing/) 
+is going to be updated (unlike with **[Time Schedule](/orchestrator/running/#1-time-schedule)**). You can just wait 
+for an update of the tables inside a [shared bucket](/storage/buckets/sharing/), and as soon as they are updated, 
+you can run your own orchestrations. 
 
 ## Orchestration Execution
 An orchestration is designed to run unattended. That means that a new [API Token](/management/project/tokens/) is created automatically when
