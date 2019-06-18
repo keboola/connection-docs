@@ -72,8 +72,7 @@ There are three options for determining column names:
  A random file will be chosen to extract the header and the first line in all files will be removed.
  - **Generate automatically** --- The columns will be named sequentially as `col_1`, `col_2` and so on.
 
-**Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**
-and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.
+**Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**. 
 
 ## List of Tables
 
