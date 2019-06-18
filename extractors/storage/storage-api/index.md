@@ -19,9 +19,8 @@ Find the Keboola Connection Storage extractor in the list of extractors and crea
 ![Screenshot - Create configuration](/extractors/storage/storage-api/create-configuration.png)
 
 ## Prepare API Token
-
-The extractor requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. This limits the potential
-risks of token misuse.
+The extractor requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. 
+This limits the potential risks of token misuse.
 
 To create such a token, go to **Users & Settings** in the *source project* and create a new token. Use a name that will
 help you identify the token later, and set the **read** access to the desired bucket.
@@ -35,7 +34,6 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
 
 ## Specify Source Project
-
 Select the region of the *source project*, and paste the token you generated in the *source project*.
 
 {: .image-popup}
@@ -46,10 +44,10 @@ Select the region of the *source project*, and paste the token you generated in 
 {: .image-popup}
 ![Screenshot - Create table](/extractors/storage/storage-api/add-tables.png)
 
-To create a new table, click the **New Table** button and assign a name.
-It will be used to create the source table name in Storage and can be modified.
+To copy a table from the source project to the current project, click **New Table**. 
+Then assign the table a name that will be used in your project.
 
-## List Tables
+## List Extracted Tables
 
 {: .image-popup}
 ![Screenshot - List tables](/extractors/storage/storage-api/list-tables.png)
@@ -60,22 +58,20 @@ of only one table.
 The extraction order of the tables can be changed.
 
 ## Modify Table
-
 Each table has different settings but they are all extracted from the **same project and bucket**.
 
 {: .image-popup}
 ![Screenshot - List tables](/extractors/storage/storage-api/configuration.png)
 
-
 ### Source
 
-- **Table Name** specifies the table name in the *source project* within the bucket the token has access to.
+- **Table Name** specifies the table name in the *source project* within the bucket to which the token has access.
 As the token has access to a single bucket only, you do not need to specify the bucket.
 - **Changed In Last** allows you to extract only a recent part of the data.
 
 ### Save Settings
 
-- **Incremental** -- enables [incremental loading](/storage/tables/#incremental-loading) in the current project. If the **Primary Key** is not set, the data is appended,
-otherwise the rows with an existing primary key are updated.
+- **Incremental** -- enables [incremental loading](/storage/tables/#incremental-loading) in the current project. If the **Primary Key** is not set, the data is appended. 
+Otherwise the rows with an existing primary key are updated.
 - **Primary Key** -- sets the primary key of the table in the current project. The primary key does not have to be the same
 as in the *source project*.
