@@ -54,7 +54,8 @@ supports a recursive list of directories.
 ![Screenshot - FTP extractor download settings](/extractors/storage/ftp/ftp-ex-5.png)
 
 - **New Files Only**: The extractor will keep track of downloaded files and will continue with the unprocessed files
- on the next run.
+ on the next run. To reset the state which keeps track of the progress and enables to continue with new files, 
+ use the **Reset State** button or uncheck the **New Files Only** option and run the extractor again.
  - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives
  will be imported into a single Storage table.
 
