@@ -40,7 +40,7 @@ The output table contains the following columns:
 - **fromCurrency** ('USD', 'EUR', or 'GBP', depending on what you selected)
 - **toCurrency** -- code of the destination currency (available destination currencies: AED, AUD, BGN, BRL, CAD, CHF, CNY, CYP, CZK, DKK,
  EEK, GBP, HKD, HRK, HUF, IDR, ILS, INR, ISK, JPY, KRW, LTL, LVL, MTL, MXN, MYR, NOK,
- NZD, PHP, PLN, ROL, RON, RUB, SEK, SGD, SIT, SKK, THB, TRL, TRY, USD, ZAR and UAH)
+ NZD, PHP, PLN, ROL, RON, RUB, SEK, SGD, SIT, SKK, THB, TRL, TRY, UAH, USD and ZAR)
 - **rate** -- exchange rate
 - **source** -- always 'ECB'
 
