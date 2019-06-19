@@ -165,12 +165,26 @@ Only the buckets you made accessible will be accessible by the token. If you set
 it will get deleted automatically after the specified period. In addition to sharing sections of 
 your data with selected users, the buckets can be also used for writing;
 people can send data directly to your KBC project instead of struggling with FTP or e-mail attachments.
-To revoke the access, simply delete the token.
+To revoke the access, simply delete or refresh the token.
 
 The token can then be used with the [Storage API](https://developers.keboola.com/integrate/) 
-or [other APIs](https://developers.keboola.com/overview/api/). It is also possible to 
-use the [**Storage console**](https://storage-api-console.keboola.com/) to upload or download
-tables or files to the project.
+or [other APIs](https://developers.keboola.com/overview/api/). 
+
+### Storage Console
+Typical usecase of sharing a token with someone is giving them a partial access to your project storage. The 
+project can be accessed via a **Storage API Console**. All that it needed to enter the console is 
+a valid Token.
+
+{: .image-popup}
+![Screenshot - Storage Console Login](/management/project/tokens/storage-console-login.png)
+
+The Storage Console allows some basic operations with the project [Storage](/storage/) -- upload and download tables or files.
 
 {: .image-popup}
 ![Screenshot - Storage Console](/management/project/tokens/storage-console.png)
+
+The link to the Storage API Console is available at the token retrieval page as it is different for each 
+[region](https://developers.keboola.com/overview/api/):
+
+- [US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
+- [EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)

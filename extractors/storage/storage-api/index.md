@@ -45,7 +45,11 @@ Select the region of the *source project*, and paste the token you generated in 
 ![Screenshot - Create table](/extractors/storage/storage-api/add-tables.png)
 
 To copy a table from the source project to the current project, click **New Table**. 
-Then assign the table a name that will be used in your project.
+Then assign the table a name that will be used in your project. If the table name is not same in the source and destination 
+project, you can change the source table name on the next page.
+
+{: .image-popup}
+![Screenshot - Set up table](/extractors/storage/storage-api/add-tables-2.png)
 
 ## List Extracted Tables
 
@@ -57,7 +61,7 @@ The list is fully searchable, and you can delete or disable each table. In addit
 of only one table.
 The extraction order of the tables can be changed.
 
-## Modify Table
+## Modify Table Extraction Settings
 Each table has different settings but they are all extracted from the **same project and bucket**.
 
 {: .image-popup}
