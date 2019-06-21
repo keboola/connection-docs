@@ -41,11 +41,11 @@ Continue by providing your own GoodData **credentials**.
 {: .image-popup}
 ![Screenshot - GoodData Credentials](/extractors/marketing-sales/gooddata-reports/04-credentials.png)
 
-You can also choose an existing GoodData **writer** and use its credentials. The ID of an existing GoodData writer is
-in its configuration URL -- e.g. `https://connection.keboola.com/admin/projects/123/writers/gooddata-writer/WRITER_ID`.
+You can also choose an id of **GoodData Project** provisoned in one of the existing GoodData Writer configurations and use its credentials. The project id(pid) of the provisioned project can be found in a GoodData writer configuration.
+
 
 {: .image-popup}
-![Screenshot - GoodData Writer Credentials](/extractors/marketing-sales/gooddata-reports/05-writer-credentials.png)
+![Screenshot - Provisioned GoodData Project Id](/extractors/marketing-sales/gooddata-reports/05-writer-pid.png)
 
 When finished, remember to **save** the configuration before you run the extraction. The extractor will download the report contents as a
 CSV file and store it as a table in KBC Storage.
