@@ -45,7 +45,7 @@ Select the region of the *source project*, and paste the token you generated in 
 ![Screenshot - Create table](/extractors/storage/storage-api/add-tables.png)
 
 To copy a table from the source project to the current project, click **New Table**. 
-Then assign the table a name that will be used in your project. If the table name is not same in the source and destination 
+Then assign the table a name that will be used in your project. If the table name is not same in the source and in the destination 
 project, you can change the source table name on the next page.
 
 {: .image-popup}
@@ -71,7 +71,7 @@ Each table has different settings but they are all extracted from the **same pro
 
 - **Table Name** specifies the table name in the *source project* within the bucket to which the token has access.
 As the token has access to a single bucket only, you do not need to specify the bucket.
-- **Changed In Last** allows you to extract only a recent part of the data.
+- **Changed In Last** allows you to extract only the recent part of the data.
 
 ### Save Settings
 

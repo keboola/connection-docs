@@ -6,7 +6,8 @@ permalink: /orchestrator/running/
 * TOC
 {:toc}
 
-When done with your configuration of the orchestration tasks, you probably want to test it. You can run the orchestration manually:
+When you're done with your configuration of the orchestration tasks, you probably want to test it. 
+You can run the orchestration manually:
 
 {: .image-popup}
 ![Screenshot - Orchestration Main Page Configured](/orchestrator/running/orchestration-main-1.png)
@@ -41,8 +42,8 @@ the execution of tasks within an orchestration:
 - Task can be marked as *Active*/Inactive. Marking the task as inactive means that it won't be run with the orchestration. 
 It is useful for temporarily skipping something.
 - Enabling *Continue on Failure* on a task means that even if that task fails, the orchestration will continue running to the following 
-phases (and will end with a `warning` state). This feature is useful when a data source becomes temporarily unstable and you still want to try your best effort to extract it.
-- It is also possible to set *Task Parameters*. This a low-level feature which modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#creating-and-running-a-job).
+phases (and will end with a `warning` state). This feature is useful when a data source becomes temporarily unstable and you still want to try your best to extract it.
+- It is also possible to set *Task Parameters*. This is a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#creating-and-running-a-job).
 - Action is always `run`, except for [GoodData Writer](/writers/gooddata/).
 
 ## Automation
@@ -118,8 +119,8 @@ just for this purpose. The token needs only permissions for the Orchestrator com
 Because the actual orchestration runs with the token stored within that orchestration, the trigger token needs no access to any
 buckets or tables. 
 
-*Note: for historical reasons, specifying the Orchestrator component in component permissions is optional. 
-I.e. the the token will work also if it has access to no components.*
+*Note: For historical reasons, specifying the Orchestrator component in component permissions is optional. 
+It means that the token will also work if it has access to no components.*
 
 ### Parallel Jobs
 Running things in the KBC platform is designed around the concept of [background jobs](/management/jobs/). One of the key properties is 
@@ -137,17 +138,16 @@ Which means that
 - jobs of the same configuration are serialized (and run in an arbitrary order), and
 - everything else runs in parallel.
 
-We use the word **Parallel** in the (usual) meaning --- **not serialized**. Task execution is queue-based and non-deterministic
-and depends on other things happening in the project. When you run two jobs of different configurations at the same time, they
-will run in parallel. There is no certainty that they will start executing at the same time. There is no certainty that
-a shorter job will finish before a longer job. And if it happens, there is no certainty that it will happen every time.
+We use the word **Parallel** in its (usual) meaning --- **not serialized**. Task execution is queue-based, non-deterministic,
+and it depends on other things happening in the project. When you run two jobs of different configurations at the same time, they
+will run in parallel. There is no guarantee that they will execute simultaneously or in the same order, or that shorter jobs will finish 
+before longer jobs (i.e. the jobs may not start immediately --- for example, because the shorter job was already run 
+manually). If that happens, it does not imply that it is going to be like that every time. Never rely on coincidental or time
+synchronization of jobs, even if it works sometimes. 
 
-This means that you must never rely on coincidental or time synchronization of jobs, even if it works sometimes. When jobs execute in 
-parallel there is no certainty that they will execute simultaneously or in the same order, or that shorter jobs will finish before
-longer jobs (i.e. the jobs may not start immediately --- for example, because the shorter job was already run manually).
-
-If one task relies on the results of another task, it must **always** be put in another phase (be serialized). For example: It is incorrect to
-build an orchestration on the assumption that a 5minute task will be finished well before a 2h task, so the 2h task can use the result of the 5minute task
-during its execution. While this will work 99% of the time, there is no guarantee that the result of the short job will become available during the long job.
+If one task relies on the results of another task, it must **always** be put in another phase (be serialized). For example, it is
+incorrect to build an orchestration on the assumption that a 5 minute task finishes well before a 2 hour task, so the 2 hour task 
+can use the result of the 5 minute task during its execution. While this will work 99% of the time, there is no guarantee that 
+the result of the short job will become available during the long job.
 
 That being said, we do our best to execute jobs as quickly as possible and utilize the maximum allowed amount of parallel jobs.
