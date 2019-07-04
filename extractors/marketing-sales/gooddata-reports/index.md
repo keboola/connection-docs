@@ -43,6 +43,8 @@ Continue by providing your own GoodData **credentials**.
 
 You can also choose an id of **GoodData Project** provisoned in one of the existing GoodData Writer configurations and use its credentials. The project id(pid) of the provisioned project can be found in a GoodData writer configuration.
 
+{: .image-popup}
+![Screenshot - GoodData Writer Config with Provisioned Project](/extractors/marketing-sales/gooddata-reports/wrgdconfigwithpid.png)
 
 {: .image-popup}
 ![Screenshot - Provisioned GoodData Project Id](/extractors/marketing-sales/gooddata-reports/05-writer-pid.png)
