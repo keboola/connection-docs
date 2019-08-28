@@ -13,7 +13,7 @@ There are a number of extractors for [**SQL databases**](/extractors/database/sq
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
 - [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/)
-- [Microsoft SQL Server](https://www.microsoft.com/en/server-cloud/products/sql-server/)
+- [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [MySQL](https://www.mysql.com/)
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
