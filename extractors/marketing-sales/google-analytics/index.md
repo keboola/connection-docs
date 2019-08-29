@@ -129,8 +129,8 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
     ![Screenshot - Google API Console - Create Credentials](/extractors/marketing-sales/google-analytics/google_console_credentials.png)
     
 5. Choose **Web Application**. Into **Authorized redirect URIs** insert 
- ```https://syrup.keboola.com/oauth-v2/authorize/keboola.ex-google-analytics-v4/callback```
-    and ```https://syrup.eu-central-1.keboola.com/oauth-v2/authorize/keboola.ex-google-analytics-v4/callback```. 
+ ```https://oauth.keboola.com/authorize/keboola.ex-google-analytics-v4/callback```
+    and ```https://oauth.eu-central-1.keboola.com/authorize/keboola.ex-google-analytics-v4/callback```. 
     The second one is needed for the EU region.
 
 6. Click **Create** and a popup window will display your new Client ID and Client Secret credentials.
