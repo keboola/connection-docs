@@ -42,17 +42,91 @@ because it is considered an identifier; you have to create a new account.
 
 ## Multi-Factor Authentication
 We highly recommend enabling the multi-factor authentication (MFA) on your account as it greatly increases its security.
+You can use a phone or other device as a virtual multi-factor authentication (TOTP) device to do this click [here](#totp-multi-factor-authentication).
+For using Security keys use the [FIDO U2F](https://fidoalliance.org/) standard, please click [here](#u2f-multi-factor-authentication).
+
+### U2F Multi-Factor Authentication
+U2F is **a hardware device** that can be used as your second factor of authentication.
+Currently works on all modern browsers, except Safari. For more information on supported browsers, see [Supported Browsers](#u2f-multi-factor-authentication-supported-browsers).
+When signing in, you press a button on the device rather than typing a verification code.
+Security keys use the [FIDO U2F](https://fidoalliance.org/) standard.
+
+To enable U2F, go to **Account & Security** and click the **Enable MFA** button:
+
+{: .image-popup}
+![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
+
+Then click the **Enable U2F** button:
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 2](/management/account/enable-u2f-1.png)
+
+**Enter a name for U2F device** and click the **Add**: 
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 3](/management/account/enable-u2f-2.png)
+
+After click **Add** activate your security key, following your security key's documentation(e.g. pressing button):
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 4](/management/account/enable-u2f-3.png)
+
+After redirect you can see notification **The new u2f device "my-u2f-device" was added.** And info about **Multi-factor authentication is enabled.**,
+ and **You have configured 1 device.**:
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 5](/management/account/enable-u2f-4.png)
+
+When you click on **View or change settings**, you can manage your **U2F devices**:
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 6](/management/account/enable-u2f-5.png)
+
+Every time you login with your email and password,
+you will be prompted to your security key, following your security key's documentation(e.g. pressing button):
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
+
+#### U2F Multi-Factor Authentication Supported Browsers
+<table>
+  <tr>
+    <td>Browser:</td>
+    <td>Chrome</td>
+    <td>Firefox</td>
+    <td>Opera</td>
+    <td>Safari</td>
+    <td>Edge</td>
+    <td>IE</td>
+  </tr>
+  <tr>
+    <td>Supported version:</td>
+    <td> >= 41 </td>
+    <td> >= 67 </td>
+    <td> >= 42 </td>
+    <td> Not Supported </td>
+    <td> Not Supported </td>
+    <td> Not Supported </td>
+  </tr>
+</table>
+
+### TOTP Multi-Factor Authentication
 You need to have a device with the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en) or
 a compatible MFA application (MFA using SMS is not supported). To enable MFA, go to **Account & Security** and click the **Enable MFA** button:
 
 {: .image-popup}
 ![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
 
+Then click on **Enable TOTP**:
+
+{: .image-popup}
+![Screenshot -- Enable MFA -- Step 2](/management/account/enable-totp-1.png)
+
 Set up the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en), scan the
 QR code with your camera, and enter the obtained code:
 
 {: .image-popup}
-![Screenshot -- Enable MFA -- Step 2](/management/account/enable-mfa-2.png)
+![Screenshot -- Enable MFA -- Step 3](/management/account/enable-mfa-2.png)
 
 Once you click the **Activate** button, the MFA will be enabled. You can then download the MFA
 **Recovery Codes** or reconfigure the MFA to another device:
