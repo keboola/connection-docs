@@ -42,11 +42,18 @@ because it is considered an identifier; you have to create a new account.
 
 ## Multi-Factor Authentication
 We highly recommend enabling the multi-factor authentication (MFA) on your account as it greatly increases its security.
+
+We supported two types of MFA: 
+* TOTP is **software-based authentication**. When logging into a site supporting TOTP,
+the authenticator app generates a six digit one-time password which users must enter in addition to their usual login details.
 You can use a phone or other device as a virtual multi-factor authentication (TOTP) device to do this click [here](#totp-multi-factor-authentication).
+
+* U2F is **a hardware device**. When signing in activate your security key,
+following your security key's documentation(e.g. pressing button) rather than typing a verification code.
 For using Security keys use the [FIDO U2F](https://fidoalliance.org/) standard, please click [here](#u2f-multi-factor-authentication).
 
 ### U2F Multi-Factor Authentication
-U2F is **a hardware device** that can be used as your second factor of authentication.
+U2F is **a hardware device** that can be used as your second factor of authentication. [For more details](https://en.wikipedia.org/wiki/Universal_2nd_Factor).
 Currently works on all modern browsers, except Safari. For more information on supported browsers, see [Supported Browsers](#u2f-multi-factor-authentication-supported-browsers).
 When signing in, you press a button on the device rather than typing a verification code.
 Security keys use the [FIDO U2F](https://fidoalliance.org/) standard.
@@ -71,8 +78,8 @@ After click **Add** activate your security key, following your security key's do
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 4](/management/account/enable-u2f-3.png)
 
-After redirect you can see notification **The new u2f device "my-u2f-device" was added.** And info about **Multi-factor authentication is enabled.**,
- and **You have configured 1 device.**:
+After redirect you can see notification `The new u2f device "my-u2f-device" was added.` And info about `Multi-factor authentication is enabled.`,
+ and `You have configured 1 device.`:
 
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 5](/management/account/enable-u2f-4.png)
@@ -112,7 +119,7 @@ you will be prompted to your security key, following your security key's documen
 
 ### TOTP Multi-Factor Authentication
 You need to have a device with the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en) or
-a compatible MFA application (MFA using SMS is not supported). To enable MFA, go to **Account & Security** and click the **Enable MFA** button:
+a compatible MFA application (MFA using SMS is not supported). [For more details](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm). To enable MFA, go to **Account & Security** and click the **Enable MFA** button:
 
 {: .image-popup}
 ![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
