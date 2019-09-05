@@ -1,6 +1,6 @@
 ---
 title: Keboola Connection Overview
-permalink: /overview/google-data-policy
+permalink: /overview/google-data-policy/
 ---
 
 ## Google Data Usage Policy
