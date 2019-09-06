@@ -16,7 +16,7 @@ The components working directly with Google APIs and services are divided into t
 Extractors are components of our platform --- small apps that download data for our users from APIs of various Google services: 
 Gmail, Google Drive, Google Analytics, Google BigQuery, etc.
 All the data that extractors obtain from the APIs is then imported into our Storage.
-The data (in Storage) can only be accessed only by those users who are in the KBC project that downloaded the data.
+The data (in Storage) can be accessed only by those users who are in the KBC project that downloaded the data.
 Other users cannot download, see or edit data or another user’s documents. Collaborators within a KBC project are only able to run 
 the extraction of the data or document that the authorized user has selected. The collaborators can work with the data downloaded into Storage.
 
