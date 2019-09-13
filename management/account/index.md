@@ -41,21 +41,22 @@ First you need to enter your old password. Remember you cannot change your email
 because it is considered an identifier; you have to create a new account.
 
 ## Multi-Factor Authentication
-We highly recommend enabling the multi-factor authentication (MFA) on your account as it greatly increases its security.
+We highly recommend enabling the multi-factor authentication (MFA) on your account, as it greatly increases its security.
 
 We support two types of MFA: 
 
-1- Time-based one-time password (TOTP) --- a **software-based authentication** technique. When logging into a site supporting TOTP,
+1. **Time-based one-time password** (TOTP) --- a **software**-based authentication technique. When logging into a site supporting TOTP,
 the authenticator app generates a six-digit one-time password that you must enter in addition to your usual login details.
 You can use a phone or another device as a virtual multi-factor authentication (TOTP) device. 
 Follow the [instructions](#totp-multi-factor-authentication). 
 
-2- Universal 2nd Factor (U2F) --- a **hardware device**. When signing in, activate your security key following 
-your security key's documentation (e.g., pressing a button) rather than typing a verification code.
+2. **Universal 2nd Factor** (U2F) --- a **hardware** device. When signing in, activate your security key following 
+your security key's documentation (e.g., pressing a button) rather than typing in a verification code.
 For using security keys, use the [FIDO U2F](https://fidoalliance.org/) standard. Follow the [instructions](#u2f-multi-factor-authentication).
 
-### TOTP Multi-Factor Authentication
-[TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm) is **software-based authentication**. 
+### TOTP 
+[TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)
+is **software-based authentication**. 
 You need to have a device with the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en) or
 a compatible MFA application (MFA using SMS is not supported). To enable MFA, go to **Account & Security** and 
 click the **Enable MFA** button:
@@ -86,50 +87,9 @@ you will be prompted to enter the MFA code obtained from your device:
 {: .image-popup}
 ![Screenshot -- Login Page MFA](/management/account/login-3.png)
 
-### U2F Multi-Factor Authentication
-[U2F](https://en.wikipedia.org/wiki/Universal_2nd_Factor) is **a hardware device** that can be used as your second factor of authentication.
-It currently works on all modern browsers, except Safari. For more information on supported browsers, see [Supported Browsers](#u2f-multi-factor-authentication-supported-browsers).
-When signing in, press the button on the device rather than typing a verification code.
-Security keys use the [FIDO U2F](https://fidoalliance.org/) standard.
-
-To enable U2F, go to **Account & Security** and click the **Enable MFA** button:
-
-{: .image-popup}
-![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
-
-Then click the **Enable U2F** button:
-
-{: .image-popup}
-![Screenshot -- Enable U2F -- Step 2](/management/account/enable-u2f-1.png)
-
-**Enter a name for U2F device** and click the **Add**: 
-
-{: .image-popup}
-![Screenshot -- Enable U2F -- Step 3](/management/account/enable-u2f-2.png)
-
-Then activate your security key, following your security key's documentation (e.g., pressing a button):
-
-{: .image-popup}
-![Screenshot -- Enable U2F -- Step 4](/management/account/enable-u2f-3.png)
-
-Once you are redirected, you will get the following notification: `The new u2f device "my-u2f-device" was added.` 
-You will also see that `Multi-factor authentication is enabled` and that `You have configured 1 device`:
-
-{: .image-popup}
-![Screenshot -- Enable U2F -- Step 5](/management/account/enable-u2f-4.png)
-
-When you click on **View or change settings**, you can manage your **U2F devices**:
-
-{: .image-popup}
-![Screenshot -- Enable U2F -- Step 6](/management/account/enable-u2f-5.png)
-
-Every time you login with your email and password, 
-you will be prompted to your security key, following your security key's documentation (e.g., pressing a button):
-
-{: .image-popup}
-![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
-
-#### U2F multi-factor authentication supported browsers
+### U2F 
+[U2F](https://en.wikipedia.org/wiki/Universal_2nd_Factor) is **a hardware device** that can be used as your second factor 
+of authentication. Except Safari, it currently works on all modern browsers:
 <table>
   <tr>
     <td>Browser:</td>
@@ -151,6 +111,45 @@ you will be prompted to your security key, following your security key's documen
   </tr>
 </table>
 
+When signing in, press the button on the device rather than typing in a verification code.
+Security keys use the [FIDO U2F](https://fidoalliance.org/) standard.
+
+To enable U2F, go to **Account & Security** and click the **Enable MFA** button:
+
+{: .image-popup}
+![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
+
+Then click the **Enable U2F** button:
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 2](/management/account/enable-u2f-1.png)
+
+Enter a **name** for your U2F device and click **Add**: 
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 3](/management/account/enable-u2f-2.png)
+
+Then activate your security key following your security key's documentation (e.g., pressing a button):
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 4](/management/account/enable-u2f-3.png)
+
+Once you are redirected, you will get the following notification: `The new u2f device "my-u2f-device" was added.` 
+You will also see that `Multi-factor authentication is enabled` and that `You have configured 1 device`:
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 5](/management/account/enable-u2f-4.png)
+
+You can manage your **U2F devices** when clicking on **View or change settings**:
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 6](/management/account/enable-u2f-5.png)
+
+Every time you login with your email and password, 
+you will be prompted to your security key following your security key's documentation (e.g., pressing a button):
+
+{: .image-popup}
+![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
 
 ## Invitations
 The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-a-user) to.
