@@ -45,14 +45,15 @@ We highly recommend enabling the multi-factor authentication (MFA) on your accou
 
 We support two types of MFA: 
 
-1. **Time-based one-time password** (TOTP) --- a **software**-based authentication technique. When logging into a site supporting TOTP,
-the authenticator app generates a six-digit one-time password that you must enter in addition to your usual login details.
-You can use a phone or another device as a virtual multi-factor authentication (TOTP) device. 
-Follow the [instructions](#totp-multi-factor-authentication). 
+1. **Time-based one-time password** (TOTP) --- a **software**-based authentication technique. 
+When logging into a site supporting TOTP, the authenticator app generates a six-digit one-time password 
+that you must enter in addition to your usual login details. You can use a phone or another device 
+as a virtual multi-factor authentication (TOTP) device. Follow the [instructions](#totp-multi-factor-authentication). 
 
 2. **Universal 2nd Factor** (U2F) --- a **hardware** device. When signing in, activate your security key following 
 your security key's documentation (e.g., pressing a button) rather than typing in a verification code.
-For using security keys, use the [FIDO U2F](https://fidoalliance.org/) standard. Follow the [instructions](#u2f-multi-factor-authentication).
+For using security keys, use the [FIDO U2F](https://fidoalliance.org/) standard. 
+Follow the [instructions](#u2f-multi-factor-authentication).
 
 ### TOTP 
 [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)
@@ -81,7 +82,7 @@ Once you click the **Activate** button, the MFA will be enabled. You can then do
 {: .image-popup}
 ![Screenshot -- MFA Enabled](/management/account/enable-mfa-3.png)
 
-Every time you login with your email and password,
+Every time you log in with your email and password,
 you will be prompted to enter the MFA code obtained from your device:
 
 {: .image-popup}
@@ -89,7 +90,7 @@ you will be prompted to enter the MFA code obtained from your device:
 
 ### U2F 
 [U2F](https://en.wikipedia.org/wiki/Universal_2nd_Factor) is **a hardware device** that can be used as your second factor 
-of authentication. Except Safari, it currently works on all modern browsers:
+of authentication. It currently works on most modern browsers:
 <table>
   <tr>
     <td>Browser:</td>
@@ -145,8 +146,8 @@ You can manage your **U2F devices** when clicking on **View or change settings**
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 6](/management/account/enable-u2f-5.png)
 
-Every time you login with your email and password, 
-you will be prompted to your security key following your security key's documentation (e.g., pressing a button):
+Every time you log in with your email and password, you will be prompted to your security key 
+following your security key's documentation (e.g., pressing a button):
 
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
