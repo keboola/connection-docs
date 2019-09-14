@@ -100,35 +100,6 @@ Once the invitation is accepted, the user becomes a member of the project:
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
-## Registering Manually
-It is also possible to create a KBC account manually by following the [Sign Up](https://connection.keboola.com/admin/auth/register) link
-from the login page:
-
-{: .image-popup}
-![Screenshot -- Registration link](/management/project/users/register-0.png)
-
-Then fill the registration form:
-
-{: .image-popup}
-![Screenshot -- Registration form](/management/project/users/register-1.png)
-
-You will then receive a confirmation email with a link to activate the new KBC account.
-
-{: .image-popup}
-![Screenshot -- Confirmation email](/management/project/users/register-3.png)
-
-If you have a Gmail account, go to the login page and then straight to *Sign in with Google*:
-
-{: .image-popup}
-![Screenshot -- Login Page](/management/project/users/login-1.png)
-
-Once you authorize KBC in your Google account, a KBC account will be created for you automatically.
-
-**Important:** If you register to KBC manually, you cannot actually do anything unless someone invites you to a project.
-
-{: .image-popup}
-![Screenshot -- Project list](/management/project/users/project-list.png)
-
 ## Removing a User
 You may remove a user from a project by clicking the **Remove** button in the user list.
 The user will receive a notification email about being removed from the project.
