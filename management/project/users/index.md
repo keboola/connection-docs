@@ -13,7 +13,6 @@ To be able to work with KBC, each user needs the following:
 - Platform-wide KBC account
 - Access to a specific project
 
-Once users can access a project, they gain full administrative access to that project.
 Each user is, system-wide, **identified by their email address**.
 This means that you need to enter correct email addresses for existing users.
 Be especially careful about company aliases; from KBC's point of view, they are different users.
@@ -22,6 +21,26 @@ All operations done by a user are technically done using the
 [master token](/management/project/tokens/#master-tokens). This is important for
 [tracing operations](/management/project/tokens/#token-events) done by that user.
 
+## User Roles
+
+The following user roles are available:
+
+- **Admin**
+
+  User have full administrative access to that project.
+- **Guest**
+   
+   User can access project data, but have some restricted permissions.
+   
+   User **cannot**:
+    - Change project settings _(name, description, etc.)_
+    - Delete a project
+    - Manage users
+    - Manage API tokens
+    - Permanently remove configurations in Trash
+    - Create a new orchestration
+    - Change name, schedule and disabled status of existing orchestrations
+
 ## Inviting a User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
 click the **Invite User** button:
@@ -29,7 +48,7 @@ click the **Invite User** button:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/users-list-1.png)
 
-Enter the user's email:
+Enter the user's email and grant role in project:
 
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
