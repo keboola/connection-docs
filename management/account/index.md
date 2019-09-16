@@ -50,9 +50,9 @@ When logging into a site supporting TOTP, the authenticator app generates a six-
 that you must enter in addition to your usual login details. You can use a phone or another device 
 as a virtual multi-factor authentication (TOTP) device. Follow the [instructions](#totp-multi-factor-authentication). 
 
-2. **Universal 2nd Factor** (U2F) --- a **hardware** device. When signing in, activate your security key following 
-your security key's documentation (e.g., pressing a button) rather than typing in a verification code.
-For using security keys, use the [FIDO U2F](https://fidoalliance.org/) standard. 
+2. **Universal 2nd Factor** (U2F) --- a **hardware** device. When signing in, activate your security key as suggested in 
+its documentation (e.g., by pressing a button) rather than typing in a verification code.
+For using security keys, use the [FIDO U2F](https://fidoalliance.org/) standard.
 Follow the [instructions](#u2f-multi-factor-authentication).
 
 ### TOTP 
@@ -130,7 +130,7 @@ Enter a **name** for your U2F device and click **Add**:
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 3](/management/account/enable-u2f-2.png)
 
-Then activate your security key following your security key's documentation (e.g., pressing a button):
+Then activate your security key as recommended in its documentation (e.g., press the button):
 
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 4](/management/account/enable-u2f-3.png)
@@ -146,16 +146,16 @@ You can manage your **U2F devices** when clicking on **View or change settings**
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 6](/management/account/enable-u2f-5.png)
 
-Every time you log in with your email and password, you will be prompted to your security key 
-following your security key's documentation (e.g., pressing a button):
+Every time you log in with your email and password, you will be asked to activate your security key.
+To do that, follow the key's documentation (e.g., press the button):
 
 {: .image-popup}
 ![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
 
 ## Invitations
 The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-a-user) to.
-When you accept an invitation, you'll become a user of the project and will be redirected there. When
-you decline the invitation, you'll lose the opportunity to enter the project.
+When you accept an invitation, you'll become a user of the project and will be redirected there. 
+When you decline the invitation, you'll lose the opportunity to enter the project.
 
 {: .image-popup}
 ![Screenshot -- Promo codes](/management/account/invitations.png)
