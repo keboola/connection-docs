@@ -150,7 +150,7 @@ This adds another level of security and features to your transformation.
 
 A Redshift sandbox always uses the latest Redshift version available on the cluster.
 
-### RStudio Sandbox
+### R Sandbox (RStudio)
 
 **Important:** Currently, this feature is in beta.
 
@@ -197,7 +197,7 @@ library('pryr')
 print(mem_used())
 {% endhighlight %}
 
-### Jupyter Notebook Sandbox
+### Python Sandbox (Jupyter Notebook)
 
 **Important:** Currently, this feature is in beta.
 
@@ -248,6 +248,34 @@ process = psutil.Process(os.getpid())
 print(process.memory_info().rss)
 {% endhighlight %}
 
+### Julia Sandbox (Jupyter Notebook)
+
+**Important:** Currently, this feature is in beta.
+
+The [Jupyter Notebook](http://jupyter.org/) sandbox with Julia kernel is available as a plain sandbox or
+for [Julia Transformations](/manipulation/transformations/julia/).
+It is created the same way as the [RStudio Sandbox](#rstudio-sandbox) and the exact same limitations apply to it.
+
+{: .image-popup}
+![Screenshot - Julia Sandbox](/manipulation/transformations/sandbox/julia-sandbox-1.png)
+
+The Julia environment for Jupyter Notebook is the same as in [Julia Transformations](/manipulation/transformations/julia/#environment).
+To list the available table data files, use the Jupyter file browser or scripts such as this one:
+
+{% highlight julia %}
+println(readdir("in/tables/"))
+println(readdir("in/files/"))
+{% endhighlight %}
+
+The Julia Jupyter Notebook Sandbox has the following **limitations**:
+
+- Sandbox disk space is limited to 10GB.
+- Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/julia/#memory-and-processing-constraints)).
+- The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
+supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
+- Sandboxes will be deleted after 5 days unless extended.
+- Adding data to existing sandboxes is not supported yet.
+
 ## Code Templates
 For [Jupyter](#jupyter-notebook-sandbox) and [RStudio](#rstudio-sandbox) sandboxes, code templates 
 can be defined. They can be set for a given **user** or for the entire **project**.
@@ -256,7 +284,7 @@ If a sandbox is loaded from a transformation, the transformation code will be ap
 template code.
 
 To create a **project template**, go to [Storage -- Files](/storage/file-uploads/) and upload the template with
-the tag `_python_sandbox_template_` or `_r_sandbox_template_`. Don't forget to mark the file
+the tag `_python_sandbox_template_`, `_r_sandbox_template_` or `_julia_sandbox_template`. Don't forget to mark the file
 as permanent. Before uploading the template, make sure it doesn't contain any sensitive data 
 (*Kernel* -- *Restart & Clear Output* might be a good idea). The file name is arbitrary.
 
@@ -264,7 +292,7 @@ as permanent. Before uploading the template, make sure it doesn't contain any se
 ![Screenshot - Project Template](/manipulation/transformations/sandbox/template-project.png)
 
 To create a **user template**, upload a file with the tag
-`_python_sandbox_template_` or `_r_sandbox_template_` and add another tag with the value of 
+`_python_sandbox_template_`, `_r_sandbox_template_` or `_julia_sandbox_template_` and add another tag with the value of 
 the [user email](/management/project/users/).
 
 {: .image-popup}

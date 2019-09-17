@@ -299,6 +299,9 @@ items:
           - url: /manipulation/transformations/openrefine/
             title: OpenRefine Transformations
 
+          - url: /manipulation/transformations/julia/
+            title: Julia Transformations
+
       - url: /manipulation/applications/
         title: Applications
 

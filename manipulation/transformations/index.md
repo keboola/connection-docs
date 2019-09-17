@@ -72,7 +72,7 @@ The following are the currently available backends:
 - **SQL** --- [Snowflake](./snowflake/) is offered as the default backend, but you can apply for your own [Redshift](./redshift/) cluster.
 Switching between backends unfortunately requires rewriting the SQL code.
 
-- **Script** --- [Python](./python/), [R](./r/) or [OpenRefine](./openrefine/). Choose according to your taste and available libraries.
+- **Script** --- [Python](./python/), [R](./r/), [OpenRefine](./openrefine/) or [Julia](./julia/). Choose according to your taste and available libraries.
 
 ## Versions
 Each change in the transformation configuration creates a new version of the whole bucket configuration.
