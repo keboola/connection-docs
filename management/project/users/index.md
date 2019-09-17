@@ -13,7 +13,6 @@ To be able to work with KBC, each user needs the following:
 - Platform-wide KBC account
 - Access to a specific project
 
-Once users can access a project, they gain full administrative access to that project.
 Each user is, system-wide, **identified by their email address**.
 This means that you need to enter correct email addresses for existing users.
 Be especially careful about company aliases; from KBC's point of view, they are different users.
@@ -22,6 +21,20 @@ All operations done by a user are technically done using the
 [master token](/management/project/tokens/#master-tokens). This is important for
 [tracing operations](/management/project/tokens/#token-events) done by that user.
 
+## User Roles
+
+The following user roles are available:
+
+- **Admin** -- The user has full administrative access to the project.
+- **Guest** -- The user can access all project data, but **cannot**:
+    - Change project settings _(name, description, etc.)_
+    - Delete the project
+    - Manage users
+    - Manage [API tokens](/management/project/tokens/)
+    - Permanently remove configurations in [Trash](/storage/configurations/#delete-configuration)
+    - Create a new [orchestration](/orchestrator/)
+    - Change name, schedule and disabled status of an existing orchestration
+
 ## Inviting a User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
 click the **Invite User** button:
@@ -29,12 +42,13 @@ click the **Invite User** button:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/users-list-1.png)
 
-Enter the user's email:
+Enter the user's email and grant role in project:
 
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
 
-The user is listed among the project users with a pending invitation:
+The user is listed among the project users with a pending invitation. Users with the `Guest` badge have the Guest role, users 
+without a badge have the Admin role:
 
 {: .image-popup}
 ![Screenshot -- User list with invitation](/management/project/users/users-list-2.png)
@@ -99,35 +113,6 @@ Once the invitation is accepted, the user becomes a member of the project:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
-
-## Registering Manually
-It is also possible to create a KBC account manually by following the [Sign Up](https://connection.keboola.com/admin/auth/register) link
-from the login page:
-
-{: .image-popup}
-![Screenshot -- Registration link](/management/project/users/register-0.png)
-
-Then fill the registration form:
-
-{: .image-popup}
-![Screenshot -- Registration form](/management/project/users/register-1.png)
-
-You will then receive a confirmation email with a link to activate the new KBC account.
-
-{: .image-popup}
-![Screenshot -- Confirmation email](/management/project/users/register-3.png)
-
-If you have a Gmail account, go to the login page and then straight to *Sign in with Google*:
-
-{: .image-popup}
-![Screenshot -- Login Page](/management/project/users/login-1.png)
-
-Once you authorize KBC in your Google account, a KBC account will be created for you automatically.
-
-**Important:** If you register to KBC manually, you cannot actually do anything unless someone invites you to a project.
-
-{: .image-popup}
-![Screenshot -- Project list](/management/project/users/project-list.png)
 
 ## Removing a User
 You may remove a user from a project by clicking the **Remove** button in the user list.
