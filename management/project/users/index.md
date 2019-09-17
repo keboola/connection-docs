@@ -25,21 +25,15 @@ All operations done by a user are technically done using the
 
 The following user roles are available:
 
-- **Admin**
-
-  User have full administrative access to that project.
-- **Guest**
-   
-   User can access project data, but have some restricted permissions.
-   
-   User **cannot**:
+- **Admin** -- The user has full administrative access to the project.
+- **Guest** -- The user can access all project data, but **cannot**:
     - Change project settings _(name, description, etc.)_
-    - Delete a project
+    - Delete the project
     - Manage users
-    - Manage API tokens
-    - Permanently remove configurations in Trash
-    - Create a new orchestration
-    - Change name, schedule and disabled status of existing orchestrations
+    - Manage [API tokens](/management/project/tokens/)
+    - Permanently remove configurations in [Trash](/storage/configurations/#delete-configuration)
+    - Create a new [orchestration](/orchestrator/)
+    - Change name, schedule and disabled status of an existing orchestration
 
 ## Inviting a User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
@@ -53,7 +47,8 @@ Enter the user's email and grant role in project:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
 
-The user is listed among the project users with a pending invitation:
+The user is listed among the project users with a pending invitation. Users with the `Guest` badge have the Guest role, users 
+without a badge have the Admin role:
 
 {: .image-popup}
 ![Screenshot -- User list with invitation](/management/project/users/users-list-2.png)
