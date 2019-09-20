@@ -44,7 +44,7 @@ and neither do [Tokens](/management/project/tokens). Effectively this is the num
 ### Project Power
 Project Power is proportional to the sum of the amount of data **consumed** (exported from Storage) and **produced** 
 (imported to Storage) by each component. This means that it does not matter how much data an extractor downloads from 
-the source system. What is important is how much data it **produces** (imports) into your storage. Therefore 
+the source system. What is important is how much data it **produces** (imports) into your storage (i.e. when an extractor download 1GB of raw data and imports only 200MB of data into Storage table, the 200MB is counted in Project Power). Therefore 
 we are counting only the data that matters to you.
 
 Although proportional to the amount of data, Project Power is measured in **units**. This is because it is
