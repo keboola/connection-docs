@@ -17,6 +17,8 @@ There are a number of extractors for [**SQL databases**](/extractors/database/sq
 - [MySQL](https://www.mysql.com/)
 - [Oracle](http://www.oracle.com/index.html)
 - [PostgreSQL](http://www.postgresql.org/)
+- [Redshift](https://aws.amazon.com/redshift/)
+- [Snowflake](https://www.snowflake.com/)
 - [Teradata](http://www.teradata.com)
 
 They are all [configured](/extractors/database/sqldb/#create-new-configuration) in the same way and 
