@@ -44,8 +44,9 @@ and neither do [Tokens](/management/project/tokens). Effectively this is the num
 ### Project Power
 Project Power is proportional to the sum of the amount of data **consumed** (exported from Storage) and **produced** 
 (imported to Storage) by each component. This means that it does not matter how much data an extractor downloads from 
-the source system. What is important is how much data it **produces** (imports) into your storage (i.e. when an extractor download 1GB of raw data and imports only 200MB of data into Storage table, the 200MB is counted in Project Power). Therefore 
-we are counting only the data that matters to you.
+the source system. What is important is how much data it **produces** (imports) into your storage (i.e., 
+when an extractor downloads 1GB of raw data and imports only 200MB of data into a Storage table, the 200MB is counted in Project Power). 
+Therefore we are counting only the data that matters to you.
 
 Although proportional to the amount of data, Project Power is measured in **units**. This is because it is
 difficult to define a universally valid size of a piece of data. Roughly 1 PPU (Project Power Unit) is equivalent 
@@ -85,7 +86,7 @@ The technical platform limits are **non-negotiable** and **cannot be upgraded** 
 Nonetheless, we certainly would like to hear if you hit them. 
 
 The platform limits may be **soft** limits or **hard** limits. They are also likely to change (improve) over time as the 
-development continues, and often can be mitigated by a good project design. Contact us for advice if you are 
+development continues and often can be mitigated by a good project design. Contact us for advice if you are 
 concerned about any of them!
 
 For example, the [Redshift backend](/storage/#backend-properties) allows the maximum table cell size of 64kB. This

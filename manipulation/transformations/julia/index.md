@@ -9,14 +9,14 @@ permalink: /manipulation/transformations/julia/
 *Note: This feature is in preview and available on request via our support.*
 
 [Julia](https://julialang.org/) transformations complement the R and SQL transformations where computations or other operations are too difficult.
-Common data operations like joining, sorting, or grouping are still easier and faster to do in [SQL Transformations](/manipulation/transformations/).
+Common data operations like joining, sorting, or grouping are still easier and faster to do in the [SQL Transformations](/manipulation/transformations/).
 
 ## Environment
 The Julia script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
-The current Julia version is **1.2.0**. The Julia version is updated regularly, few weeks after the official release.
-The update is always announced on the [status page](http://status.keboola.com/).
+The current Julia version is **1.2.0**. We release updates regularly, few weeks after the official release, announcing them
+on our [status page](http://status.keboola.com/).
 
-When we update the Julia version, we offer --- for a limited time --- the option to switch to the previous version. You can
+When we update a Julia version, we offer --- for a limited time --- the option to switch to the previous version. You can
 switch the version in the transformation detail by clicking on the `Julia` label:
 
 {: .image-popup}
@@ -30,7 +30,7 @@ If the `Julia` label is not editable, there is no previous version offered. It i
 via the [API](https://developers.keboola.com/integrate/storage/api/configurations/) though.
 
 ### Memory and Processing Constraints
-The Docker container running the Julia transformation has 8GB of allocated memory and the maximum running time is 6 hours.
+The Docker container running the Julia transformation has 8GB of allocated memory, and the maximum running time is 6 hours.
 The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
 
 ### File Locations
@@ -38,19 +38,19 @@ The Julia script itself will be compiled to `/data/script.jl`. To access your in
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/files/` or `/data/in/files/` path. If you want to dig really deep,
 have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
-Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with KBC.
+Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola Connection (KBC).
 
 ### Packages
-You can list extra packages in the UI. These packages are installed using [General Package Registry](https://github.com/JuliaRegistries/General).
-Generally, any [listed package](https://github.com/JuliaRegistries/General) can be installed. However, some packages have external dependencies, which might not be available.
-Feel free to contact us if you run into problems. When the package is installed, you still need to have a `using` or `import` statement in your script.
+You can list extra packages in the UI. These packages are installed using the [General package registry](https://github.com/JuliaRegistries/General).
+Normally, any [listed package](https://github.com/JuliaRegistries/General) can be installed. However, some packages have external dependencies that might not be available.
+Feel free to contact us if you run into problems. When a package is installed, you still need to have a `using` or `import` statement in your script.
 
 {: .image-popup}
 ![Screenshot - Package Configuration](/manipulation/transformations/julia/packages.png)
 
 The latest versions of packages are always installed at the time of the release (you can check that
-[in the repository](https://github.com/keboola/docker-custom-julia/releases)). In case your code relies on a specific package version, you can override the
-installed version by calling, e.g.:
+[in the repository](https://github.com/keboola/docker-custom-julia/releases)). In case your code relies on a specific package version, 
+you can override the installed version by calling, e.g.:
 
 {% highlight julia %}
 using Pkg
@@ -58,13 +58,14 @@ Pkg.add(PackageSpec(name="Example", version="0.3"))
 {% endhighlight %}
 
 Some packages are already installed in the environment
-(see the [full list](https://github.com/keboola/docker-custom-julia/blob/master/install.jl)); they do not need to be listed in the transformation.
+(see the [full list](https://github.com/keboola/docker-custom-julia/blob/master/install.jl)); 
+they do not need to be listed in the transformation.
 
 ### CSV Format
 Tables from Storage are imported to the Julia script from CSV files. CSV files can be read by functions
 from the [CSV package](https://juliadata.github.io/CSV.jl/stable/).
 You can read CSV files either to vectors (numbered columns), or to dictionaries (named columns).
-Your input tables are stored as CSV files in `in/tables/` and your output tables in `out/tables/`.
+Your input tables are stored as CSV files in `in/tables/` and your output tables are stored in `out/tables/`.
 
 If you can process the file line-by-line, then the most effective way is to read each line, process it and write
 it immediately. The following two examples show two ways of reading and manipulating a CSV file.
