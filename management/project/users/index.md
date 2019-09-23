@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-To be able to work with KBC, each user needs the following:
+To be able to work with Keboola Connection (KBC), each user needs the following:
 
 - Platform-wide KBC account
 - Access to a specific project
@@ -33,7 +33,7 @@ The following user roles are available:
     - Manage [API tokens](/management/project/tokens/)
     - Permanently remove configurations in [Trash](/storage/configurations/#delete-configuration)
     - Create a new [orchestration](/orchestrator/)
-    - Change name, schedule and disabled status of an existing orchestration
+    - Change the name, the schedule and the disabled status of an existing orchestration
 
 ## Inviting a User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
@@ -42,7 +42,7 @@ click the **Invite User** button:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/users-list-1.png)
 
-Enter the user's email and grant role in project:
+Enter the user's email and grant them a role in the project:
 
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
@@ -136,7 +136,7 @@ access a specific project. For a quick overview, here is a complete list of pers
 - Users of the [maintainer](/management/organization/) to which the project organization belongs, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
 - Keboola support staff, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
 
-In all other cases, the user cannot enter the project. If Auto Join is disabled, maintainers users and Keboola Support staff can
+In all other cases, the user cannot enter the project. If Auto Join is disabled, maintainer users and Keboola Support staff can
 see the name of the project and request access which must be approved by a current member of the project.
 
 ## Authentication
