@@ -68,29 +68,7 @@ You can read CSV files either to vectors (numbered columns), or to dictionaries 
 Your input tables are stored as CSV files in `in/tables/` and your output tables are stored in `out/tables/`.
 
 If you can process the file line-by-line, then the most effective way is to read each line, process it and write
-it immediately. The following two examples show two ways of reading and manipulating a CSV file.
-
-## Local Development Tutorial
-To develop and debug Julia transformations, we recommend that you use the [Sandbox](/manipulation/transformations/sandbox/) feature, which gives you an environment very similar to the transformations out of the box.
-
-If you want to develop the transformation code on your local machine, you can do so by replicating the execution environment.
-To do so, you need to have [Julia installed](https://julialang.org/downloads/), preferably the same version as us.
-
-All you need to do to simulate the input and output mapping is create the right directories with the right files.
-The following image shows the directory structure:
-
-{: .image-popup}
-![Screenshot - Data folder structure](/manipulation/transformations/julia/tree.png)
-
-The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a Julia transformation which takes a [sample CSV file](/manipulation/transformations/julia/source.csv) locally, take the following steps:
-
-- Put the Julia code into a file, for example, script.jl, in the working directory.
-- Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
-- If using binary files, place them inside the `in/user` subdirectory of the working directory, and make sure that their name is without any extension.
-- Store the result CSV files inside the `out/tables` subdirectory.
-
-Use this sample script:
+it immediately. The following example shows how to read and manipulate a CSV file:
 
 {% highlight julia %}
 using CSV
@@ -106,8 +84,29 @@ for row in CSV.File(infile)
 end
 {% endhighlight %}
 
-A finished example of the above is attached below in [data.zip](/manipulation/transformations/julia/data.zip).
-Download it and test the script in your local Julia installation. The `destination.csv` output file will be created.
+## Local Development Tutorial
+To develop and debug Julia transformations, we recommend that you use the [Sandbox](/manipulation/transformations/sandbox/) feature. 
+It gives you an environment very similar to the transformations out of the box.
+
+If you want to develop the transformation code on your local machine, you can do so by replicating the execution environment.
+You just need to have [Julia installed](https://julialang.org/downloads/), preferably the same version as us.
+
+All you need to do to simulate the input and output mapping is create the right directories with the right files.
+The following image shows the directory structure:
+
+{: .image-popup}
+![Screenshot - Data folder structure](/manipulation/transformations/julia/tree.png)
+
+The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
+so that you can move the script to a KBC transformation with no changes. To develop a Julia transformation that takes a [sample CSV file](/manipulation/transformations/julia/source.csv) locally, follow these steps:
+
+- Put the Julia code into a file, for example, script.jl, in the working directory.
+- Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
+- If using binary files, place them inside the `in/user` subdirectory of the working directory, and make sure that their name has no extension.
+- Store the result CSV files inside the `out/tables` subdirectory.
+
+Use the above [sample script](/manipulation/transformations/julia/#csv-format/). A finished example of the script is attached below in [data.zip](/manipulation/transformations/julia/data.zip).
+Download it and test the script in your local Julia installation. The output file `destination.csv` will be created.
 This script can be used in your transformations without any modifications. All you need to do is
 
 - upload the [sample CSV file](/manipulation/transformations/julia/source.csv) into your storage,
