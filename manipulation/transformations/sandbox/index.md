@@ -252,9 +252,9 @@ print(process.memory_info().rss)
 
 **Important:** Currently, this feature is in beta.
 
-The [Jupyter Notebook](http://jupyter.org/) sandbox with Julia kernel is available as a plain sandbox or
+The [Jupyter Notebook](http://jupyter.org/) sandbox with Julia kernel is available as a plain sandbox or as a sandbox
 for [Julia Transformations](/manipulation/transformations/julia/).
-It is created the same way as the [RStudio Sandbox](#rstudio-sandbox) and the exact same limitations apply to it.
+It is created the same way as the [RStudio Sandbox](#rstudio-sandbox), and the exact same limitations apply to it.
 
 {: .image-popup}
 ![Screenshot - Julia Sandbox](/manipulation/transformations/sandbox/julia-sandbox-1.png)
@@ -271,7 +271,7 @@ The Julia Jupyter Notebook Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/julia/#memory-and-processing-constraints)).
-- The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
+- The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
@@ -285,7 +285,7 @@ template code.
 
 To create a **project template**, go to [Storage -- Files](/storage/file-uploads/) and upload the template with
 the tag `_python_sandbox_template_`, `_r_sandbox_template_` or `_julia_sandbox_template`. Don't forget to mark the file
-as permanent. Before uploading the template, make sure it doesn't contain any sensitive data 
+as permanent. Before uploading the template, make sure it does not contain any sensitive data 
 (*Kernel* -- *Restart & Clear Output* might be a good idea). The file name is arbitrary.
 
 {: .image-popup}
@@ -300,4 +300,4 @@ the [user email](/management/project/users/).
 
 If there are multiple templates, the newest one is used. A user template always takes precedence over the 
 project template for the given user. If you have both a project and a user template for a given user and you update the 
-project template, the user won't see the update until their user template is removed.
+project template, the user will not see the update until their user template is removed.

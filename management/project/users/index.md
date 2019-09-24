@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-To be able to work with Keboola Connection (KBC), each user needs the following:
+To be able to work with Keboola Connection (KBC), each user needs to have the following:
 
 - Platform-wide KBC account
 - Access to a specific project
@@ -23,19 +23,19 @@ All operations done by a user are technically done using the
 
 ## User Roles
 
-The following user roles are available:
+There are two user roles available:
 
-- **Admin** -- The user has full administrative access to the project.
-- **Guest** -- The user can access all project data, but **cannot**:
-    - Change project settings _(name, description, etc.)_
-    - Delete the project
-    - Manage users
-    - Manage [API tokens](/management/project/tokens/)
-    - Permanently remove configurations in [Trash](/storage/configurations/#delete-configuration)
-    - Create a new [orchestration](/orchestrator/)
-    - Change the name, the schedule and the disabled status of an existing orchestration
+- **Admin** -- the user has full administrative access to the project.
+- **Guest** -- the user can access all project data, but **cannot** 
+    - change project settings _(name, description, etc.)_,
+    - delete the project,
+    - manage users,
+    - manage [API tokens](/management/project/tokens/),
+    - permanently remove configurations in [Trash](/storage/configurations/#delete-configuration),
+    - create a new [orchestration](/orchestrator/), and
+    - change the name, the schedule and the disabled status of an existing orchestration.
 
-## Inviting a User
+## Inviting User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
 click the **Invite User** button:
 
@@ -47,54 +47,55 @@ Enter the user's email and grant them a role in the project:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
 
-The user is listed among the project users with a pending invitation. Users with the `Guest` badge have the Guest role, users 
-without a badge have the Admin role:
+The user is listed among the project users with a pending invitation. The users with the `Guest` badge have the Guest role, the users 
+without this badge have the Admin role:
 
 {: .image-popup}
 ![Screenshot -- User list with invitation](/management/project/users/users-list-2.png)
 
-If you delete an invitation before it is accepted by the invitee or if the invitee declines
-the invitation, they will never become a member of the project.
-When an invitation is sent to a user, the next steps are slightly different for new and existing users.
+If you delete an invitation before it is accepted by the invitee or if the invitee declines it, 
+they will never become a member of the project.
+The steps that follow an invitation differ depending on whether the user already exists or is new.
 
 ### New User
-If the user does not yet have a platform-wide KBC account, their user list names will be shown as
+If the user does not have a platform-wide KBC account yet, their name in the user list will be labeled as
 `Not activated yet`:
 
 {: .image-popup}
 ![Screenshot -- User invited](/management/project/users/users-list-4.png)
 
-And they will receive an invitation email:
+They will receive an invitation email:
 
 {: .image-popup}
 ![Screenshot -- Invitation email to create account](/management/project/users/invite-project-2.png)
 
-When they follow the link, they will be taken to the activation form:
+When they click the **Activate Your Account** button, they will be taken to the activation form:
 
 {: .image-popup}
 ![Screenshot -- Activation form](/management/project/users/register-2.png)
 
-After that, the users will be taken to the [login form](/management/project/users/#authentication).
-They can immediately login to KBC and see invitation to the project they have been invited to.
+After filling it in, the [login form](/management/project/users/#authentication) appears.
+They can immediately login to KBC and see their invitation to the project they have been invited to.
 Once they accept it, you will see their chosen screen name in the user list:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
 ### Existing User
-If the added user already has a KBC account, you will immediately see their screen name in the user list:
+If the added user already has a KBC account, you will see their screen name in the user list right away:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-2.png)
 
-It is a good idea to verify the screen name if you intend to invite an existing user.
-If you see `Not activated yet` instead of the screen name, it means that there is no KBC account associated with the email address.
+*Note: If you intend to invite an existing user, it is a good idea to verify the screen name.
+If you see `Not activated yet` instead of the screen name, it means that there is no KBC account associated with the email address.*
+
 The user will receive an email invitation:
 
 {: .image-popup}
 ![Screenshot -- Invitation email to create account](/management/project/users/invite-project-3.png)
 
-The link leads to the [account settings](/management/account/) where the user can see pending invitations:
+The link leads to the [account settings](/management/account/) where the user can see their pending invitations:
 
 {: .image-popup}
 ![Screenshot -- Invitations on account settings](/management/project/users/invitation-2.png)
@@ -136,26 +137,26 @@ access a specific project. For a quick overview, here is a complete list of pers
 - Users of the [maintainer](/management/organization/) to which the project organization belongs, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
 - Keboola support staff, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
 
-In all other cases, the user cannot enter the project. If Auto Join is disabled, maintainer users and Keboola Support staff can
+No other user can enter the project. If Auto Join is disabled, maintainer users and Keboola Support staff can
 see the name of the project and request access which must be approved by a current member of the project.
 
 ## Authentication
 There are three options for authenticating a KBC account:
 
 - Google account
-- Combination of an email address and a chosen password
-- Combination of an email address and a chosen password with multi-factor authentication
+- Combination of an email address and the associated password
+- Combination of an email address and the associated password with multi-factor authentication
 
 The options are described in detail below.
 
 ### Google Account
 If you have a Google Account (Gmail), you can use it to authenticate to KBC.
-Simply click the respective button on the login page
+Click the respective button on the login page:
 
 {: .image-popup}
 ![Screenshot -- Login Page](/management/project/users/login-1.png)
 
-and follow the Google instructions to authorize KBC.
+Then follow the Google instructions to authorize KBC.
 No configuration in KBC is necessary to enable Google Account login.
 Bear in mind, however, that the Google Account email must match the email you are using in KBC.
 
@@ -168,8 +169,8 @@ You can review the state of MFA for any user in the user list:
 
 ## Authorization
 All users listed on the **Users & Settings** page are project administrators.
-This means they can do all operations within the project. If you need to limit authorization
+This means they can perform all operations within the project. If you need to limit authorization
 to certain operations or data, there are two options to choose from:
 
-1. Split the project into multiple projects, or
+1. Split the project into multiple projects.
 2. Use [Storage Tokens](/management/project/tokens/) instead of full user accounts.
