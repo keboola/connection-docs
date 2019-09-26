@@ -18,9 +18,8 @@ Therefore it is a good idea to set up the extractor in a [**scheduled** orchestr
 
 ## Create New Configuration
 Find Email Attachments in the Extractors section and create a new configuration. Choose a meaningful
-name for your configuration. Each configuration corresponds to a single table to which all emails
-and their attachments are imported. If you need to import emails into more tables, you need to create
-more configurations.
+name for your configuration. Each configuration corresponds to a single target email address. If you need 
+to import emails into different tables, it is advisable to create more configurations.
 
 {: .image-popup}
 ![Screenshot - Create Name Confgiruation](/extractors/communication/email-attachments/01-choose-name-and-desc.png)
@@ -45,8 +44,12 @@ Use the following [sample table](/extractors/communication/email-attachments/sam
 | 2016-03-30 | 9 | 1 | 264 |
 | 2016-03-31 | 15 | 3 | 276 |
 
-With the email message content being completely arbitrary, all that matters is the attached CSV file.
-It must always adhere to the format specified in **Import Settings**. It can also be [gzipped](http://www.gzip.org/).
+With the email message content being completely arbitrary, all that matters is the attached files. The 
+following conditions have to be met:
+
+- Each e-mail must contain only one attachment.
+- The attachment must by a CSV file.
+- The attachment must always adhere to the format specified in **Import Settings**.
 
 Click **Run** and confirm.
 
@@ -55,3 +58,5 @@ There may be a delay between the time the email is sent, received, and picked up
 
 {: .image-popup}
 ![Screenshot - Job Detail](/extractors/communication/email-attachments/03-check-processed-data.png)
+
+*Notice:* When multiple valid e-mails are received between the extractor runs, they are imported into separate tables (`data1` -- `dataN`). IF the behavior is undesired, you have to take care in timing the e-mail sending and extractor orchestration to make sure only one e-mail is proccessed at a time.
