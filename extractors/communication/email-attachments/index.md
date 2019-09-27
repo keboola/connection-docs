@@ -8,17 +8,17 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to import data from email attachments to KBC.
+This extractor allows you to import data from email attachments to Keboola Connection (KBC).
 It extracts data from systems generating exports only as CSV files attached to an email.
 It can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
 
 Tables only get imported with the extractor running. The import is **not** triggered by an email
 being sent or received. When running, the extractor imports all emails received since its previous run.
-Therefore it is a good idea to set up the extractor in a [**scheduled** orchestration](/orchestrator/scheduling/).
+Therefore, it is a good idea to set up the extractor in a [**scheduled** orchestration](/orchestrator/running/#time-schedule).
 
 ## Create New Configuration
-Find Email Attachments in the Extractors section and create a new configuration. Choose a meaningful
-name for your configuration. Each configuration corresponds to a single target email address. If you need 
+Find Email Attachments in the Extractors section, and create a new configuration. Choose a meaningful
+name for it. Each configuration corresponds to a single target email address. If you need 
 to import emails into different tables, it is advisable to create more configurations.
 
 {: .image-popup}
@@ -44,11 +44,11 @@ Use the following [sample table](/extractors/communication/email-attachments/sam
 | 2016-03-30 | 9 | 1 | 264 |
 | 2016-03-31 | 15 | 3 | 276 |
 
-With the email message content being completely arbitrary, all that matters is the attached files. The 
-following conditions have to be met:
+With the email message content being completely arbitrary, all that matters are the attached files. 
+The following conditions must be met:
 
-- Each e-mail must contain only one attachment.
-- The attachment must by a CSV file.
+- Each email must contain only one attachment.
+- The attachment must be a CSV file.
 - The attachment must always adhere to the format specified in **Import Settings**.
 
 Click **Run** and confirm.
@@ -59,4 +59,6 @@ There may be a delay between the time the email is sent, received, and picked up
 {: .image-popup}
 ![Screenshot - Job Detail](/extractors/communication/email-attachments/03-check-processed-data.png)
 
-*Notice:* When multiple valid e-mails are received between the extractor runs, they are imported into separate tables (`data1` -- `dataN`). IF the behavior is undesired, you have to take care in timing the e-mail sending and extractor orchestration to make sure only one e-mail is proccessed at a time.
+*Note: When multiple valid emails are received between the extractor runs, they are imported into separate tables 
+(`data1` -- `dataN`). If this is not desired, time the sending of the emails and configure the extractor orchestration 
+to make sure only one email is processed at a time.*
