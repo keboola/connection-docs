@@ -77,8 +77,6 @@ items:
       - url: /extractors/marketing-sales/
         title: Marketing/Sales
         items:
-          - url: /extractors/marketing-sales/adform/
-            title: Adform
 
           - url: /extractors/marketing-sales/babelforce/
             title: Babelforce
