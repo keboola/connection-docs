@@ -52,7 +52,10 @@ its dependencies to be automatically loaded and installed, list its name in the 
 for loading is not necessary then.
 
 The latest versions of packages are always installed. Some packages are already installed in the environment
-(see [full list] (https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3)), these packages do not need to be listed in the transformation.
+(see [list 1](https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3) and 
+[list 2](https://github.com/keboola/docker-base-r/blob/master/init-1.R#L3). The listed packages are installed with 
+their dependencies, therefore to get an authoriatative list of installed packages use the `installed.packages()` function. 
+These pre-installed packages do not need to be listed in the transformation. It does no harm if you list them, but the trasnformation and sandbox start is slower.
 
 ### CSV format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.
