@@ -17,7 +17,7 @@ be able to provide valuable experience.
 The approach we showed in the [introduction](/orchestrator/tasks/) can be described as data pipelines and characterized as
 result driven. Once again let's assume we have the following configurations in a project:
 
-- Adform extractor with the `Campaigns` configuration,
+- Google Analytics extractor with the `Campaigns` configuration,
 - Snowflake extractor with the `Email recipient index` configuration,
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`, and
 - Mailchimp writer with the `New recipients` configuration.
@@ -31,7 +31,7 @@ This should actually be read from the very end. Our ultimate goal is to update a
 To get to that goal we need to prepare the list in a required format using the `Campaign Recipient` transformation.
 This requires `Email recipient index` and evaluated campaign performance. Because computing the campaign performance is
 non-trivial, it is separated into the `Campaign Performance` transformation. That transformation requires the source `Campaigns` from
-the Adform extractor.
+the Google Analytics extractor.
 
 This means that each orchestration corresponds to a single data **destination**. The schedule of the orchestration is determined
 by the desired frequency of the destination updates. This is a pretty straightforward approach,
