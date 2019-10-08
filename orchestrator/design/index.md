@@ -90,7 +90,7 @@ destinations. All this is finished before the work shift starts, so that everyon
 this is a perfect solution, but it can be improved.
 
 There is a `Subsidiary Verification` transformation which checks for consistency errors between two otherwise disconnected information
-systems (Main IS and Subsidiary IS). Let's say that this produces some tables in the Subsidiary IS with errors which has
+systems (Main IS and Subsidiary IS). Let's say that this produces some tables in the Subsidiary IS with errors which have
 to be corrected manually. If this table is loaded once a day, the inconsistencies are fixed in the next day load. So you would be stuck with
 incorrect data for a whole day.
 
@@ -98,7 +98,7 @@ incorrect data for a whole day.
 ![Complex Configuration Dependencies + Pipeline](/orchestrator/design/dependencies-3.png)
 
 The above can be solved by turning the highlighted sequence of configurations into a [data pipeline](#pipelines) (see above).
-This means creating a second orchestration with the highlighted operations. This orchestration can be run e.g. every hour
+This means creating a second orchestration with the highlighted operations. This orchestration can be run (e.g., every hour)
 so that the consistency errors are reported reasonably quickly. This is probably okay as long as this is the only such case.
 When there are more hidden pipelines like this one and more orchestrations overlapping each other, the Good Old ETL scheme
 slowly turns into a mess.
@@ -128,13 +128,13 @@ Taking the above example, you may find out that
 
 - `Email recipient index` takes about 3 seconds, so it can run at any schedule.
 - `Campaigns` takes about 2-3 minutes, so it should probably run with a 5 minute schedule.
-- `Page Comments` takes almost 30 minutes to finish, so a 30 minutes schedule is the fastest it can run.
+- `Page Comments` takes almost 30 minutes to finish, so a 30 minute schedule is the fastest it can run.
 - `Subsidiary IS Additional` can only run once a day at 2am, otherwise it overloads the server.
-- `Subsidiary IS Main` can run every hour, same reason.
+- `Subsidiary IS Main` can run every hour for the same reason.
 - `Internal IS Main` may run only every 2 hours because the IT department said so.
 - `IS Auxiliary Tables` takes about 20 seconds, so it can run at any schedule.
 
-This way we'll end up with 7 orchestrations for extractors and 4 more orchestrations for the
+This way we will end up with 7 orchestrations for extractors and 4 more orchestrations for the
 remaining pipelines:
 
 {: .image-popup}
@@ -143,7 +143,7 @@ remaining pipelines:
 *Note: The orchestrations `O8` to `O11` of course contain the entire colored pipeline, not just the writer.
 Now you can run the `Consistency Errors` configuration and its pipeline at any schedule, without affecting the rest of
 the project or causing unnecessary loads. Obviously, it's no good running it faster than hourly, because we can't
-get the source data faster. With this setup, you may now realize that it's tempting to run `Reporting Main` pipeline
+get the source data faster. With this setup, you may now realize that it's tempting to run the `Reporting Main` pipeline
 faster than on a daily schedule.*
 
 If the nature of the data permits it (and your transformations can cope with it), it may be perfectly okay to see
@@ -172,7 +172,7 @@ Cons:
 - Needs organization of Storage to clearly mark read-to-use data.
 
 ## Conclusions
-KBC platform has very few constraints on the execution of tasks. That means there is no one true way of
+The KBC platform has very few constraints on the execution of tasks. That means there is no one true way of
 doing things. Here we have outlined three possible logical approaches. Whether they are suitable for you
 or not is best determined by consulting your Maintainer or Partner.
 You may of course combine the approaches as well, or do things your own way.
