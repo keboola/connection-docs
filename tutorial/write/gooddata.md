@@ -109,18 +109,34 @@ of data loaded into a single GoodData project. **Create New Configuration** to c
 {: .image-popup}
 ![Screenshot - New GoodData Writer](/tutorial/write/gooddata-writer-intro-3.png)
 
-When creating a new configuration, name it and select properties of the GoodData project.
-KBC automatically creates a free Demo GoodData project for you. However, it expires in one
+And choose its name:
+
+{: .image-popup}
+![Screenshot - New GoodData Writer](/tutorial/write/gooddata-writer-intro-4.png)
+
+**Setup GoodData Project** to continue:
+
+{: .image-popup}
+![Screenshot - Setup GoodData Project](/tutorial/write/gooddata-writer-intro-setup-project.png)
+
+KBC can create a free Demo GoodData project for you. However, it expires in one
 month from the date it has been created.
 
 {: .image-popup}
-![Screenshot - Create GoodData Writer Configuration](/tutorial/write/gooddata-writer-create-config.png)
+![Screenshot - Create GoodData Project](/tutorial/write/gooddata-writer-create-demo-project.png)
 
-Whilst the configuration is being created, you'll see a warning message saying that the project is being prepared and
-cannot be accessed yet. In the meantime, let's configure the tables that are to be loaded to the project.
+Let's create a [*Date Dimension*](https://help.gooddata.com/display/doc/Dates+and+Times).
 
 {: .image-popup}
-![Screenshot - Add Tables to GoodData Writer](/tutorial/write/gooddata-configuration-intro.png)
+![Screenshot - Create a date dimension](/tutorial/write/gooddata-writer-date-button.png)
+
+{: .image-popup}
+![Screenshot - GoodData Writer Date Dimension](/tutorial/write/gooddata-writer-date-dimension.png)
+
+Now let's configure the tables that are to be loaded to the project.
+
+{: .image-popup}
+![Screenshot - Add Tables to GoodData Writer](/tutorial/write/gooddata-writer-new-table-button.png)
 
 Add the `account` table from the `out.c-tutorial` bucket. When adding a table,
 simplify the table title to just the table name (we have only few tables).
@@ -137,70 +153,58 @@ Configure the type of each column. Mark
 
 Do not set the Data Type column.
 
+Set the previously created date dimension `first_order` to the `FirstOrder` column.
+
 {: .image-popup}
 ![Screenshot - GoodData Writer Table Configuration Part 1](/tutorial/write/gooddata-writer-table-config.png)
-
-The new `DATE` column will be marked in red because a
-[*Date Dimension*](https://help.gooddata.com/display/doc/Dates+and+Times) has to be added.
-Click on *Add* and create a new date dimension:
-
-{: .image-popup}
-![Screenshot - GoodData Writer Date Dimension](/tutorial/write/gooddata-writer-date-dimension.png)
-
-The configuration is now valid (`FirstOrder` column is not red anymore) and can be saved:
-
-{: .image-popup}
-![Screenshot - GoodData Writer Table Configuration Part 2](/tutorial/write/gooddata-writer-table-config-2.png)
 
 Then go back to the writer configuration, and add the `out.c-tutorial.user` table.
 
 {: .image-popup}
-![Screenshot - GoodData Writer Table Configuration Part 2](/tutorial/write/gooddata-writer-intro-4.png)
+![Screenshot - GoodData Writer Table Configuration Part 2](/tutorial/write/gooddata-writer-intro-5.png)
 
 Name the table *user* and set the columns in the following way:
 
 {: .image-popup}
-![Screenshot - GoodData Writer User Table Configuration](/tutorial/write/gooddata-writer-table-config-3.png)
+![Screenshot - GoodData Writer User Table Configuration](/tutorial/write/gooddata-writer-table-config-2.png)
 
-Save the table configuration, and go back to the writer configuration. Add the third table called
-`out.c-tutorial.opportunity`. Name it *opportunity* and set the columns as follows:
+Save the table configuration, and go back to the writer configuration. 
+
+Add four other date dimensions called `created_date`, `close_date`, `start_date` and `end_date`. In case of `created_date`, tick the **Include Time** checkbox when creating the date dimension. The result should look like this:
+
+{: .image-popup}
+![Screenshot - GoodData Writer User Table Configuration](/tutorial/write/gooddata-writer-date-list.png)
+
+Add the third table called
+`out.c-tutorial.out_opportunity`. Name it *opportunity* and set the columns as follows:
 
 - *Amount* and *Probability* to `FACT`,
-- *AccountId* and *OwnerId* to `REFERENCE`,
-- *CreatedDate*, *CloseDate*, *Start_Date* and *End_Date* to `DATE`,
+- *AccountId* and *OwnerId* to `REFERENCE` and connect them to tables `account` and `user`,
+- *CreatedDate*, *CloseDate*, *Start_Date* and *End_Date* to `DATE` and connect them to the previously created date dimensions,
 - *Id* to `IGNORE` (we won't be needing it any more), and
 - everything else to `ATTRIBUTE`.
 
 You should obtain the following result:
 
 {: .image-popup}
-![Screenshot - GoodData Writer Opportunity Table Configuration](/tutorial/write/gooddata-writer-table-config-4.png)
+![Screenshot - GoodData Writer Opportunity Table Configuration](/tutorial/write/gooddata-writer-table-config-3.png)
 
-Specify `account` and `user` as a referenced table for the `REFERENCE` columns.
-Also, add a date dimension for each date column. In case of `CreatedDate`, tick the **Include Time** checkbox
-when creating the date dimension. The result should look like this:
+Save the table configuration, and go back to configuring the writer.
 
-{: .image-popup}
-![Screenshot - GoodData Writer Opportunity Table Configuration Final](/tutorial/write/gooddata-writer-table-config-5.png)
-
-Save the table configuration, and go back to configuring the writer. The warning message about GoodData project
-being prepared should be gone by now. If not, refresh the page in a few moments.
-
-Once the project is ready, add all three tables to the project upload by ticking the check right of their names.
-With all three tables marked, click on **Upload project** to push them to GoodData:
+Now click on **Run** to push the tables to GoodData:
 
 {: .image-popup}
-![Screenshot - GoodData Writer Tables Finished](/tutorial/write/gooddata-writer-intro-5.png)
+![Screenshot - GoodData Writer Tables Finished](/tutorial/write/gooddata-writer-intro-6.png)
 
 The tables will be written into GoodData by a background job. When a job is running, a small orange circle appears
 under *Last runs*, along with RunId and other info on the job. Green is for success, red for failure.
 Click on the indicator, or the info next to it for more details.
 
-In the mean time, click on **Enable Access To Project**. This will give the current KBC user, you,
+In the mean time, click on **GoodData Project** to reveal other options and **Go To Project**. This will give the current KBC user, you,
 access to the GoodData project referenced in the Writer configuration.
 
 {: .image-popup}
-![Screenshot - GoodData Writer Access Project](/tutorial/write/gooddata-writer-intro-6.png)
+![Screenshot - GoodData Writer Access Project](/tutorial/write/gooddata-writer-intro-7.png)
 
 Clicking the **GoodData Project** link will take you directly to GoodData BI and automatically log you in.
 Then create your report:
