@@ -8,8 +8,6 @@ redirect_from:
 * TOC
 {:toc}
 
-*Note: The GoodData writer described on this page is in Beta version.*
-
 This writer sends tables into a [GoodData](https://www.gooddata.com/) project and can be used with
 either your own GoodData account or with an account provided by Keboola. Before configuring the GoodData writer, it
 is important to understand that GoodData analytics relies on a
@@ -54,8 +52,8 @@ which allows you to create GoodData projects. The writer will then create the pr
 up the writer. Either use the **Load data only** update mode, or be sure to understand what the consequences
 of changing your LDM are.
 
-After you set up the project, you should **Enable Access to Project**. This will allow you to login to the GoodData project
-from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.com/display/doc/Single+Sign-On+Overview).
+After you set up the project, you can see the **Go To Project** button. This will allow you to login to the GoodData project
+from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.com/display/doc/Single+Sign-On+Overview). (SSO access works only for projects provisioned by Keboola. If you used an existing project, you will have to login on your own.)
 
 {: .image-popup}
 ![Screenshot - Access Project](/writers/bi-tools/gooddata/access-project.png)
@@ -118,7 +116,7 @@ the limits of each data type.
 {: .image-popup}
 ![Screenshot - Hyperlink configuration](/writers/bi-tools/gooddata/incremental.png)
 
-You can also select a load type: either **Full Load** (the default), or **Incremental Load**. 
+You can also select a load type: **Full Load** (the default), **Automatic Incremental Load** or **Manual Incremental Load**. 
 Incremental load will keep the existing data in the GoodData project.
 It can be much faster, but the source data needs to be correctly prepared. 
 The incremental load relies on the following two features:
