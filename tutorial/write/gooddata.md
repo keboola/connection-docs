@@ -29,7 +29,7 @@ For the sake of practicing, let's create a brand new transformation instead of m
 ![Screenshot - Transformation Intro](/tutorial/write/gooddata-transformation-intro.png)
 
 Apart from creating a new transformation, we also need a new transformation bucket, since the
-Tableau and Gooddata transformations are not really related. If they were more complex, we would take out the
+Tableau and GoodData transformations are not really related. If they were more complex, we would take out the
 similar parts into another transformation. Name the new transformation bucket *Opportunity - GoodData* and
 choose **Snowflake** backend.
 
