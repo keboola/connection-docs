@@ -205,3 +205,14 @@ projects but are typically used for ad-hoc projects, hackathons, and PoCs.
 
 {: .image-popup}
 ![Screenshot -- Promo codes](/management/account/promo-codes.png)
+
+## User Sessions
+After each sign in to KBC a user session is created.
+The session is closed after explicit sign out or automatically after **48 hours** of inactivity.
+
+You are able sign in into your account multiple times from different devices.
+All your devices that have logged into your account are listed and you can revoke any of these sessions. 
+You should revoke your sessions in situations like lost phone or left yourself logged in on a public computer.
+
+{: .image-popup}
+![Screenshot -- User Sessions](/management/account/user-sessions-1.png)
