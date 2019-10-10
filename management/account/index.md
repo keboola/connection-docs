@@ -205,3 +205,16 @@ projects but are typically used for ad-hoc projects, hackathons, and PoCs.
 
 {: .image-popup}
 ![Screenshot -- Promo codes](/management/account/promo-codes.png)
+
+## User Sessions
+After each sign in to Keboola Connection user interface a *user session* is created.
+The session is closed after explicit log out or automatically after **48 hours** of inactivity.
+
+You can sign in into your account multiple times from different devices (or browser windows).
+All devices that you have used to log into your account are listed in the **User Sessions** page. 
+
+{: .image-popup}
+![Screenshot -- User Sessions](/management/account/user-sessions-1.png)
+
+You can revoke any of these sessions. Revoking the session is the equivalent of logging out from the UI.
+You should revoke your sessions if you forgot to logout on a computer you don't have access to, lost a computer or if you detect any suspicious activity.
