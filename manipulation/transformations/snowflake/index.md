@@ -87,7 +87,10 @@ This example will set the `ABORT_TRANSFORMATION` variable value to `'Integrity c
 contains one or more records where `RESULT` columns equals to value `'failed'`.
 
 Transformation engine checks the `ABORT_TRANSFORMATION` after each successfully executed query and returns the value
-of the variable as an user error.  
+of the variable as an user error, `Transformation aborted: Integrity check failed.` in this case.
+
+{: .image-popup}
+![Transformation aborted](/manipulation/transformations/snowflake/abort.png)
 
 ## Best Practices
 
