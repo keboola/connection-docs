@@ -62,6 +62,36 @@ The value in the column contains a unix timestamp of the last change of the row,
 
 You can use this column to set up [incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
 
+## Aborting Transformation Execution
+
+*This feature is currently in public beta and is enabled for each project separately. To enable this feature contact us using the 
+support button in your project.*
+
+In some cases you may need to abort the transformation execution and exit with an error message. 
+To abort the execution set the `ABORT_TRANSFORMATION` variable to any nonempty value. 
+
+{% highlight sql %}
+SET ABORT_TRANSFORMATION = (
+  SELECT 
+      CASE
+          WHEN COUNT = 0 THEN ''
+          ELSE 'Integrity check failed'
+      END
+  FROM (
+    SELECT COUNT(*) AS COUNT FROM INTEGRITY_CHECK WHERE RESULT = 'failed'
+  )   
+);
+{% endhighlight %}
+
+This example will set the `ABORT_TRANSFORMATION` variable value to `'Integrity check failed'` if the `INTEGRITY_CHECK` table
+contains one or more records where `RESULT` columns equals to value `'failed'`.
+
+Transformation engine checks the `ABORT_TRANSFORMATION` after each successfully executed query and returns the value
+of the variable as an user error, `Transformation aborted: Integrity check failed.` in this case.
+
+{: .image-popup}
+![Transformation aborted](/manipulation/transformations/snowflake/abort.png)
+
 ## Best Practices
 
 ### Case Sensitivity
