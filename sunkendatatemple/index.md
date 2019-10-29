@@ -105,6 +105,6 @@ Scroll almost all the way down. There you go. Easy, no?
 
 ## Dive 3
 
-
+*Coming soon.*
 
 
