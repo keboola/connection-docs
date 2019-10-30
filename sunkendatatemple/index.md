@@ -100,7 +100,7 @@ didn’t actually run the extractor, it will bite you later. Just sayin’...)*
 Now, this is an easy one. Not sure why you are on the help page for this, but anyway… 
 All we are asking you to do is to go read a blog… Once you do, the secret should be pretty obvious. 
 It actually says “This is the secret for the Sunken Data Temple game…”. 
-The link is [here](https://blog.keboola.com/data%20ops%20and%20automation). 
+The link is [here](https://blog.keboola.com/data-ops-and-automation). 
 Scroll almost all the way down. There you go. Easy, no?
 
 ## Dive 3
