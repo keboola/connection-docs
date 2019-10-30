@@ -105,6 +105,93 @@ Scroll almost all the way down. There you go. Easy, no?
 
 ## Dive 3
 
-*Coming soon.*
+OK, transformations. Similar to the first puzzle, you will need to use your Keboola device to retrieve the secret from data. 
+This time you are using the Transformations engine to join two tables and get the secret from the result. 
+The puzzle itself is a broken SQL code that you need to fix. Here is how to go about it. Go to Transformations, 
+then select the <Sunken Data Temple> transformation bucket and the <Dive 3> transformation itself:
+
+{: .image-popup}
+![Screenshot - Select new transformation](/sunkendatatemple/13-select-transformation.png)
+
+The description of the transformation will give you further hints, but here it goes as well. 
+Scroll down on the next page to see the SQL query:
+
+{: .image-popup}
+![Screenshot - Scroll down to see SQL query](/sunkendatatemple/14-scroll-down.png)
+
+The query is the culprit, it’s not doing what it is supposed to.
+
+{: .image-popup}
+![Screenshot - Incorrect SQL query](/sunkendatatemple/15-query.png)
+
+Once you fix it, just save and run the transformation:
+
+{: .image-popup}
+![Screenshot - Fix SQL query](/sunkendatatemple/16-fix-query.png)
+
+Then you need to find the output table (just click on it in the “output mapping” section), go to Data Sample and read the secret. 
+No, we won’t just write it here. If you can’t get it out of the transformation, you can go into Google Translate and type the word
+“**spisovatel**”. It should recognize it as a Czech word and its English translation just happens to be the 3rd secret. 
+So back to the Sunken Data Temple app, enter the secret and run it again!
+
+## Dive 4
+Not sure how to help here. The task is pretty straightforward --- 
+go to [https://get.keboola.com/join-looker-2019](https://get.keboola.com/join-looker-2019), 
+and you’ll find a “Get The Keboola JOIN 2019 App” button on it. Get the app on your phone or tablet:
+
+{: .image-popup}
+![Screenshot - Get The Keboola JOIN 2019 App](/sunkendatatemple/17-get-app.png)
+
+{: .image-popup}
+![Screenshot - Get The Keboola JOIN 2019 App](/sunkendatatemple/18-get-app.png)
+
+{: .image-popup}
+![Screenshot - Get The Keboola JOIN 2019 App](/sunkendatatemple/19-get-app.png)
+
+Find a “Freebies” section:
+
+{: .image-popup}
+![Screenshot - Find Freebies section](/sunkendatatemple/20-freebies.png)
+
+Once in there, the secret should be pretty obvious.
+
+In case you ran into any trouble and you need to get the secret without the app, well… Google the text **“is the study or practice of writing music for an orchestra”**:
+
+{: .image-popup}
+![Screenshot - Google text](/sunkendatatemple/21-google-text.png)
+
+The title of the Wikipedia page that pops up is the secret.
+
+## Dive 5
+For this puzzle you’ll need to use Keboola again --- this time it’s “bucket sharing” feature. 
+Its job is to simplify sharing data between different projects or teams within the organization. 
+It’s pretty straightforward. Go to the “Storage” section, and click on the “link shared bucket” button:
+
+{: .image-popup}
+![Screenshot - Go to Storage click link](/sunkendatatemple/22-storage.png)
+
+From the selection of buckets, pick the one called “room number 5 ”. There is a table in it. Check its content and there is the secret!
+
+Trouble still? Well, it’s a synonym of the word “pail”, which is frequently used together with the word “list”. 
+There’s even a great movie with that title. Morgan Freeman and Jack Nicholson are in it. Enough hints?
+
+## Dive 6
+Here we come! The Last Dive! Come on, you got this far and NOW you need help? OK. 
+When you sign up for our webinar --- link is [HERE](https://keboola.zoom.us/webinar/register/WN_fVv4mF18QZu7unjUWFVX1g) 
+--- the confirmation email will have the secret in it.
+
+Does that not work for you for whatever reason? Don’t despair. There was a lady, famous for French cooking 
+(wrote a book and had a TV show!). Last name? Child. First name? That’s the secret. 
+Also a programming language, getting more and more popular with data scientists. A new transformation backend in Keboola. Good now?
+
+## Dive 7
+Now for something completely different! We’re in Looker dashboard now. The task is still pretty simple though 
+--- just pick the last three secrets from the game correctly from the filters on top of the dashboard, click on RUN and 
+you’re off to the races! Then scroll down for your prize code. See you at JOIN2019! And if you are not coming, 
+just e-mail us with your code and we’ll find a way to get it to you. 
+
+Thanks for playing!
+
+
 
 
