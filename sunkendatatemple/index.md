@@ -9,9 +9,8 @@ If you’re reading this page in disbelief, as you have no idea what we are talk
 well, you may want to visit [THIS PAGE](https://get.keboola.com/sunkendatatemple/) to find out.
 
 ## Scanning Device Setup
-In order to play the game you need to get a Keboola Connection project (nothing is stopping you from playing in your own 
-if you are already a user, but the game generates components and configurations you probably don’t want in your live environment). 
-In order to create the sandbox project, go to [https://get.keboola.com](https://get.keboola.com) and use the Promo Code “Kassandra”.
+In order to play the game you need to get a fresh Keboola Connection project that is part of the game organization. 
+In order to create the sandbox project, go to [https://get.keboola.com](https://get.keboola.com) and use the Promo Code “KASSANDRA”.
 
 You will receive an invitation via email, and after registration, you will get access to your new project. After opening it, 
 you will arrive to this page (will look slightly differently on mobile or based on your screen size, but you get the gist):
@@ -155,7 +154,8 @@ Find a “Freebies” section:
 
 Once in there, the secret should be pretty obvious.
 
-In case you ran into any trouble and you need to get the secret without the app, well… Google the text **“is the study or practice of writing music for an orchestra”**:
+In case you ran into any trouble and you need to get the secret without the app, well… 
+Google the text **“is the study or practice of writing music for an orchestra”**:
 
 {: .image-popup}
 ![Screenshot - Google text](/sunkendatatemple/21-google-text.png)
@@ -170,7 +170,8 @@ It’s pretty straightforward. Go to the “Storage” section, and click on the
 {: .image-popup}
 ![Screenshot - Go to Storage click link](/sunkendatatemple/22-storage.png)
 
-From the selection of buckets, pick the one called “room number 5 ”. There is a table in it. Check its content and there is the secret!
+From the selection of buckets, pick the one called “sunken-data-temple”. There is a table “room_number_5” in it. 
+Check its content and there is the secret!
 
 Trouble still? Well, it’s a synonym of the word “pail”, which is frequently used together with the word “list”. 
 There’s even a great movie with that title. Morgan Freeman and Jack Nicholson are in it. Enough hints?
