@@ -137,7 +137,7 @@ So back to the Sunken Data Temple app, enter the secret and run it again!
 Not sure how to help here. The task is pretty straightforward --- you can either scan this QR code:
 
 {: .image-popup}
-![Screenshot - Scan QR code](/sunkendatatemple/qrcode.png)
+![Screenshot - Scan QR code](/sunkendatatemple/qrcode-app.png)
 
 or go to [https://get.keboola.com/join-looker-2019](https://get.keboola.com/join-looker-2019), 
 and you’ll find a “Get The Keboola JOIN 2019 App” button on it. Get the app on your phone or tablet:
