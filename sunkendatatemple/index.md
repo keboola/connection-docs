@@ -100,7 +100,7 @@ Now, this is an easy one. Not sure why you are on the help page for this, but an
 All we are asking you to do is to go read a blog… Once you do, the secret should be pretty obvious. 
 It actually says “This is the secret for the Sunken Data Temple game…”. 
 The link is [here](https://blog.keboola.com/data-ops-and-automation). 
-Scroll almost all the way down. There you go. Easy, no?
+Scroll almost all the way down. There you go. Easy, right?
 
 ## Dive 3
 
@@ -190,7 +190,7 @@ Does that not work for you for whatever reason? Don’t despair. There was a lad
 Also a programming language, getting more and more popular with data scientists. A new transformation backend in Keboola. Good now?
 
 ## Dive 7
-Now for something completely different! We’re in [Looker dashboard](https://keboolablocks.looker.com/embed/dashboards/1) now. 
+Now for something completely different! We’re in a [Looker dashboard](https://keboolablocks.looker.com/embed/dashboards/1) now. 
 The task is still pretty simple though --- just pick the last three secrets from the game correctly from the filters 
 on top of the dashboard, click on RUN and you’re off to the races! Then scroll down for your prize code. See you at JOIN2019! 
 And if you are not coming, just e-mail us with your code and we’ll find a way to get it to you. 
