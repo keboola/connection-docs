@@ -134,8 +134,12 @@ No, we won’t just write it here. If you can’t get it out of the transformati
 So back to the Sunken Data Temple app, enter the secret and run it again!
 
 ## Dive 4
-Not sure how to help here. The task is pretty straightforward --- 
-go to [https://get.keboola.com/join-looker-2019](https://get.keboola.com/join-looker-2019), 
+Not sure how to help here. The task is pretty straightforward --- you can either scan this QR code:
+
+{: .image-popup}
+![Screenshot - Scan QR code](/sunkendatatemple/QRcode.png)
+
+or go to [https://get.keboola.com/join-looker-2019](https://get.keboola.com/join-looker-2019), 
 and you’ll find a “Get The Keboola JOIN 2019 App” button on it. Get the app on your phone or tablet:
 
 {: .image-popup}
@@ -186,10 +190,10 @@ Does that not work for you for whatever reason? Don’t despair. There was a lad
 Also a programming language, getting more and more popular with data scientists. A new transformation backend in Keboola. Good now?
 
 ## Dive 7
-Now for something completely different! We’re in Looker dashboard now. The task is still pretty simple though 
---- just pick the last three secrets from the game correctly from the filters on top of the dashboard, click on RUN and 
-you’re off to the races! Then scroll down for your prize code. See you at JOIN2019! And if you are not coming, 
-just e-mail us with your code and we’ll find a way to get it to you. 
+Now for something completely different! We’re in [Looker dashboard](https://keboolablocks.looker.com/embed/dashboards/1) now. 
+The task is still pretty simple though --- just pick the last three secrets from the game correctly from the filters 
+on top of the dashboard, click on RUN and you’re off to the races! Then scroll down for your prize code. See you at JOIN2019! 
+And if you are not coming, just e-mail us with your code and we’ll find a way to get it to you. 
 
 Thanks for playing!
 
