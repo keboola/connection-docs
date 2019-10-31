@@ -137,7 +137,7 @@ So back to the Sunken Data Temple app, enter the secret and run it again!
 Not sure how to help here. The task is pretty straightforward --- you can either scan this QR code:
 
 {: .image-popup}
-![Screenshot - Scan QR code](/sunkendatatemple/QRcode.png)
+![Screenshot - Scan QR code](/sunkendatatemple/qrcode.png)
 
 or go to [https://get.keboola.com/join-looker-2019](https://get.keboola.com/join-looker-2019), 
 and you’ll find a “Get The Keboola JOIN 2019 App” button on it. Get the app on your phone or tablet:
@@ -182,8 +182,11 @@ There’s even a great movie with that title. Morgan Freeman and Jack Nicholson 
 
 ## Dive 6
 Here we come! The Last Dive! Come on, you got this far and NOW you need help? OK. 
-When you sign up for our webinar --- link is [HERE](https://keboola.zoom.us/webinar/register/WN_fVv4mF18QZu7unjUWFVX1g) 
---- the confirmation email will have the secret in it.
+When you sign up for our webinar, the confirmation email will have the secret in it. To sign up, 
+use the link [HERE](https://keboola.zoom.us/webinar/register/WN_fVv4mF18QZu7unjUWFVX1g) or scan this QR code: 
+
+{: .image-popup}
+![Screenshot - Webinar QR code](/sunkendatatemple/qrcode-power-hour.png)
 
 Does that not work for you for whatever reason? Don’t despair. There was a lady, famous for French cooking 
 (wrote a book and had a TV show!). Last name? Child. First name? That’s the secret. 
