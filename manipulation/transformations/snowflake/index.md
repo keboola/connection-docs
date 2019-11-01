@@ -64,11 +64,11 @@ You can use this column to set up [incremental processing](https://help.keboola.
 
 ## Aborting Transformation Execution
 
-*This feature is currently in public beta and is enabled for each project separately. To enable this feature contact us using the 
-support button in your project.*
+*This feature is currently in public beta and is enabled for each project separately. To enable this feature, 
+contact us using the support button in your project.*
 
-In some cases you may need to abort the transformation execution and exit with an error message. 
-To abort the execution set the `ABORT_TRANSFORMATION` variable to any nonempty value. 
+In some cases, you may need to abort the transformation execution and exit with an error message. 
+To abort the execution, set the `ABORT_TRANSFORMATION` variable to any nonempty value. 
 
 {% highlight sql %}
 SET ABORT_TRANSFORMATION = (
@@ -84,10 +84,10 @@ SET ABORT_TRANSFORMATION = (
 {% endhighlight %}
 
 This example will set the `ABORT_TRANSFORMATION` variable value to `'Integrity check failed'` if the `INTEGRITY_CHECK` table
-contains one or more records where `RESULT` columns equals to value `'failed'`.
+contains one or more records with the `RESULT` column equal to the value `'failed'`.
 
-Transformation engine checks the `ABORT_TRANSFORMATION` after each successfully executed query and returns the value
-of the variable as an user error, `Transformation aborted: Integrity check failed.` in this case.
+The transformation engine checks the `ABORT_TRANSFORMATION` after each successfully executed query and returns the value
+of the variable as a user error, `Transformation aborted: Integrity check failed.` in this case.
 
 {: .image-popup}
 ![Transformation aborted](/manipulation/transformations/snowflake/abort.png)
