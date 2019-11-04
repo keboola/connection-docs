@@ -9,7 +9,7 @@ redirect_from:
 A good security practice is to **block connections from unrecognized sources** on the network level
 using a firewall or AWS security groups. This applies especially to the production database whose
 connections should not be publicly available. For an extra layer of security, setting up an
-[SSH Tunnel](https://help.keboola.com/components/extractors/database/#connecting-to-database) is also recommended.
+[SSH Tunnel](/components/extractors/database/#connecting-to-database) is also recommended.
 
 To access external systems (including your database), KBC uses the below IP addresses. Please **whitelist**
 these IP addresses in your firewalls to allow KBC to successfully connect to your system. This applies to

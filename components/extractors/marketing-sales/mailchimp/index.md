@@ -39,7 +39,7 @@ Then name the **storage bucket** where your results will be stored.
 ![Mailchimp Output Bucket](/components/extractors/marketing-sales/mailchimp/03-output-bucket.png)
 
 To configure what data you want to extract, select the **configuration template** you want to use.
-Or [switch to the JSON editor](https://help.keboola.com/components/extractors/marketing-sales/mailchimp/#advanced-mode)
+Or [switch to the JSON editor](/components/extractors/marketing-sales/mailchimp/#advanced-mode)
 for advanced extractions.
 
 {: .image-popup}
