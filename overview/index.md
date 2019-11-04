@@ -50,7 +50,7 @@ Your own **remote storage** can be connected to Keboola Connection as well.
 [Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). KBC provides each user with [Sandbox](/transformations/sandbox/) --- a safe environment for your experiments.
 
 ### Applications
-Unlike the free-form Transformations, [Applications](/manipulation/applications/) are **predefined blocks**, which
+Unlike the free-form Transformations, [Applications](/components/applications/) are **predefined blocks**, which
 can be used to do some pretty advanced stuff like sentiment analysis, association discovery, or histogram grouping.
 Applications can also augment data (for example, add Weather or Exchange Rates) by calling on *3rd party services*
 to bring in additional data.

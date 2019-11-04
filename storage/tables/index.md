@@ -86,7 +86,7 @@ the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata).*
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
 [Output Mapping](/transformations/mappings/#output-mapping) of
-[Transformations](/transformations/) and [Applications](/manipulation/applications/).
+[Transformations](/transformations/) and [Applications](/components/applications/).
 The settings on both places must match, otherwise you will receive an error:
 
     Output mapping does not match destination table: primary key '' does not match 'Id' in 'out.c-tutorial.opportunity_denorm' (check transformations Denormalize opportunities (id opportunity.denormalize-opportunities)).
