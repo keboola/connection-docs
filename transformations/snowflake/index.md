@@ -1,6 +1,9 @@
 ---
 title: Snowflake Transformation
-permalink: /manipulation/transformations/snowflake/
+permalink: /transformations/snowflake/
+redirect_from:
+    - /manipulation/transformations/snowflake/
+
 ---
 
 * TOC
@@ -25,7 +28,7 @@ permalink: /manipulation/transformations/snowflake/
 There are two types of loading tables into your workspace. You can select either *Copy Table* or *Clone Table*.
 
 {: .image-popup}
-![Load Type](/manipulation/transformations/snowflake/load-type.png)
+![Load Type](/transformations/snowflake/load-type.png)
  
 *Copy Table* is the default option, and it physically copies the table from our Storage to your workspace. 
 Using *Copy Table* allows you to refine the input mapping using various filters.
@@ -90,7 +93,7 @@ The transformation engine checks the `ABORT_TRANSFORMATION` after each successfu
 of the variable as a user error, `Transformation aborted: Integrity check failed.` in this case.
 
 {: .image-popup}
-![Transformation aborted](/manipulation/transformations/snowflake/abort.png)
+![Transformation aborted](/transformations/snowflake/abort.png)
 
 ## Best Practices
 
@@ -120,7 +123,7 @@ while this one will not:
 SELECT * FROM "footable";
 {% endhighlight %}
 
-Be especially careful when setting up [input and output mappings](/manipulation/transformations/mappings/).
+Be especially careful when setting up [input and output mappings](/transformations/mappings/).
 
 When writing your transformation script, quoting all table and column names is required. Snowflake converts all
 unquoted table/column identifiers to uppercase, which won't match table/column identifiers created by Keboola Connection.

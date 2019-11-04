@@ -1,6 +1,9 @@
 ---
 title: Input and Output Mapping
-permalink: /manipulation/transformations/mappings/
+permalink: /transformations/mappings/
+redirect_from:
+    - /manipulation/transformations/mappings/
+
 ---
 
 *To configure input and output mappings in the process of creating a transformation, 
@@ -22,7 +25,7 @@ tables not mentioned in *Output Mapping* are never modified nor permanently stor
 They are deleted from the transformation workspace when the execution finishes. 
 
 {: .image-popup}
-![Simple input and output mapping](/manipulation/transformations/mappings.png)
+![Simple input and output mapping](/transformations/mappings.png)
 
 *Table names referenced by mappings are automatically quoted by KBC. 
 This is especially important for Snowflake, which is case sensitive.*
@@ -32,7 +35,7 @@ Input Mapping defines data you have in Storage and want to use in a transformati
 This data is made available as a table for SQL, or as a CSV file for R and Python.
 
 {: .image-popup}
-![Input mapping](/manipulation/transformations/input-mapping.png)
+![Input mapping](/transformations/input-mapping.png)
 
 Any input mapping has the following options (to see all options, click on the *Show details* button):
 
@@ -40,7 +43,7 @@ Any input mapping has the following options (to see all options, click on the *S
 - **Destination** --- This is the *Source* table/file name to be used inside the transformation 
 (it fills in automatically, but can be changed); file names should end with `.csv`.
 - **Load Type** --- Available only in Snowflake transformations. This parameter can switch the input mapping to use 
-the faster internal [`CLONE` command](/manipulation/transformations/snowflake#load-type). 
+the faster internal [`CLONE` command](/transformations/snowflake#load-type). 
 - **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
 - **Changed in last** --- If you are into [incremental processing](/storage/tables/#incremental-processing), this comes in handy; import only rows changed or created within the selected time period.
  Supported time dimensions are `minutes`, `hours` and `days`.
@@ -66,7 +69,7 @@ These tables are typically derived from the tables/files in the Input mapping. I
 you can use any `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE` or `DELETE` queries to create the desired result.
 
 {: .image-popup}
-![Output mapping](/manipulation/transformations/output-mapping.png)
+![Output mapping](/transformations/output-mapping.png)
 
 An output mapping has the following options (to see all options, 
 the *Show details* checkbox above the *Source* field must be checked):

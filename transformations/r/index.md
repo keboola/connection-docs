@@ -1,6 +1,9 @@
 ---
 title: R Transformation
-permalink: /manipulation/transformations/r/
+permalink: /transformations/r/
+redirect_from:
+    - /manipulation/transformations/r/
+
 ---
 
 * TOC
@@ -10,7 +13,7 @@ permalink: /manipulation/transformations/r/
 Apart from ready-to-use implementations of state-of-the-art algorithms, R's other great assets are vector and matrix
 computations. R transformations complement Python and SQL transformations where computations or
 other operations are too difficult. Common data operations like joining, sorting, and grouping, however, are still
-easier and faster to do in [SQL Transformations](/manipulation/transformations/).
+easier and faster to do in [SQL Transformations](/transformations/).
 
 ## Environment
 The R script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
@@ -21,7 +24,7 @@ When we update the R version, we offer --- for a limited time --- the option to 
 switch the version in the transformation detail by clicking on the `R` label:
 
 {: .image-popup}
-![Screenshot - Transformations Versions](/manipulation/transformations/r/versions.png)
+![Screenshot - Transformations Versions](/transformations/r/versions.png)
 
 This feature is intended to help you 'postpone' the update to a more convenient time for you in case there are
 any problems with the new version. You should update the transformation code to the new version soon, as the old
@@ -98,7 +101,7 @@ tryCatch(
 
 ## Development Tutorial
 
-We recommend that you create an [RStudio sandbox](/manipulation/transformations/sandbox/#rstudio-sandbox) with the same
+We recommend that you create an [RStudio sandbox](/transformations/sandbox/#rstudio-sandbox) with the same
 input mapping your transformation will use. This is the fastest way to develop your transformation code.
 
 **Tip:** Limit the number of rows you read in from the CSV files:
@@ -117,11 +120,11 @@ To simulate the input and output mapping, all you need to do is create the right
 The following image shows the directory structure:
 
 {: .image-popup}
-![Screenshot - Data folder structure](/manipulation/transformations/r/tree.png)
+![Screenshot - Data folder structure](/transformations/r/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
 so that you can move the script to a KBC transformation with no changes. To develop a Python transformation which takes
-a [sample CSV file](/manipulation/transformations/r/source.csv) locally, take the following steps:
+a [sample CSV file](/transformations/r/source.csv) locally, take the following steps:
 
 - Put the R code into a file, for instance, script.R in the working directory.
 - Put all tables from the input mapping inside the `in/tables` subdirectory of the working directory.
@@ -140,19 +143,19 @@ df <- data.frame(
 write.csv(df, file = "out/tables/result.csv", row.names = FALSE)
 {% endhighlight %}
 
-A complete example of the above is attached below in [data.zip](/manipulation/transformations/r/data.zip).
+A complete example of the above is attached below in [data.zip](/transformations/r/data.zip).
 Download it and test the script in your local R installation. The `result.csv` output file will be created.
 This script can be used in your transformations without any modifications.
 All you need to do is
 
-- upload the [sample CSV file](/manipulation/transformations/r/source.csv) into your Storage,
+- upload the [sample CSV file](/transformations/r/source.csv) into your Storage,
 - set the input mapping from that table to `source.csv` (expected by the R script),
 - set the output mapping from `result.csv` (produced by the R script) to a new table in your Storage,
 - copy & paste the script into the transformation, and finally,
 - run the transformation.
 
 {: .image-popup}
-![Screenshot - Sample Input Output Mapping](/manipulation/transformations/python/sample-io.png)
+![Screenshot - Sample Input Output Mapping](/transformations/python/sample-io.png)
 
 ### Events and Output
 It is possible to output informational and debug messages from the R script simply by printing them out.
@@ -177,7 +180,7 @@ TRUE
 
 produces the following events in the transformation job:
 
-![Screenshot - Script Events](/manipulation/transformations/r/events-output.png)
+![Screenshot - Script Events](/transformations/r/events-output.png)
 
 The `app$logInfo` and `app$logError` functions are internally available; they can be useful if you need to know the precise
 server time of when an event occurred. The standard event timestamp in job events is the time when the event was received
@@ -191,6 +194,6 @@ with the exact same configuration as the transformation environment, use [our Do
 ## Examples
 There are more in-depth examples dealing with
 
-- [array splitting](/manipulation/transformations/r/array-splitter/),
-- [plotting charts & graphs](/manipulation/transformations/r/plots/), and
-- [using trained models and binary files](/manipulation/transformations/r/binary/).
+- [array splitting](/transformations/r/array-splitter/),
+- [plotting charts & graphs](/transformations/r/plots/), and
+- [using trained models and binary files](/transformations/r/binary/).

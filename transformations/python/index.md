@@ -1,13 +1,16 @@
 ---
 title: Python Transformation
-permalink: /manipulation/transformations/python/
+permalink: /transformations/python/
+redirect_from:
+    - /manipulation/transformations/python/
+
 ---
 
 * TOC
 {:toc}
 
 [Python](https://www.python.org/about/) transformations complement R and SQL transformations where computations or other operations are too difficult.
-Common data operations like joining, sorting, or grouping are still easier and faster to do in [SQL Transformations](/manipulation/transformations/).
+Common data operations like joining, sorting, or grouping are still easier and faster to do in [SQL Transformations](/transformations/).
 
 ## Environment
 
@@ -19,7 +22,7 @@ When we update the Python version, we offer --- for a limited time --- the optio
 switch the version in the transformation detail by clicking on the `Python` label:
 
 {: .image-popup}
-![Screenshot - Transformations Versions](/manipulation/transformations/python/versions.png)
+![Screenshot - Transformations Versions](/transformations/python/versions.png)
 
 This feature is intended to help you 'postpone' the update to a more convenient time for you in case there are
 any problems with the new version. You should update the transformation code to the new version soon, as the old
@@ -57,7 +60,7 @@ Generally, any package available on [PyPI](https://pypi.python.org/pypi) can be 
 Feel free to contact us if you run into problems. When the package is installed, you still need to `import` from it.
 
 {: .image-popup}
-![Screenshot - Package Configuration](/manipulation/transformations/python/packages.png)
+![Screenshot - Package Configuration](/transformations/python/packages.png)
 
 The latest versions of packages are always installed at the time of the release (you can check that
 [in the repository](https://github.com/keboola/docker-custom-python/releases)). In case your code relies on a specific package version, you can override the
@@ -89,10 +92,10 @@ To simulate the input and output mapping, all you need to do is create the right
 The following image shows the directory structure:
 
 {: .image-popup}
-![Screenshot - Data folder structure](/manipulation/transformations/python/tree.png)
+![Screenshot - Data folder structure](/transformations/python/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a Python transformation which takes a [sample CSV file](/manipulation/transformations/python/source.csv) locally, take the following steps:
+so that you can move the script to a KBC transformation with no changes. To develop a Python transformation which takes a [sample CSV file](/transformations/python/source.csv) locally, take the following steps:
 
 - Put the Python code into a file, for example script.py, in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
@@ -118,18 +121,18 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
         writer.writerow({'col1': row['first'] + 'ping', 'col2': int(row['second']) * 42})
 {% endhighlight %}
 
-A finished example of the above is attached below in [data.zip](/manipulation/transformations/python/data.zip).
+A finished example of the above is attached below in [data.zip](/transformations/python/data.zip).
 Download it and test the script in your local Python installation. The `destination.csv` output file will be created.
 This script can be used in your transformations without any modifications. All you need to do is
 
-- upload the [sample CSV file](/manipulation/transformations/python/source.csv) into your storage,
+- upload the [sample CSV file](/transformations/python/source.csv) into your storage,
 - set the input mapping from that table to `source.csv` (expected by the Python script),
 - set the output mapping from `destination.csv` (produced by the Python script) to a new table in your Storage,
 - copy & paste the script into the transformation, and, finally,
 - run the transformation.
 
 {: .image-popup}
-![Screenshot - Sample Input Output Mapping](/manipulation/transformations/python/sample-io.png)
+![Screenshot - Sample Input Output Mapping](/transformations/python/sample-io.png)
 
 ### Going further
 The above steps are usually sufficient for daily development and debugging of moderately complex Python transformations,

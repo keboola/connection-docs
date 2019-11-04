@@ -6,7 +6,7 @@ permalink: /manipulation/applications/
 * TOC
 {:toc}
 
-Applications are without any doubt more powerful than [Transformations](/manipulation/transformations/). 
+Applications are without any doubt more powerful than [Transformations](/transformations/). 
 They further enrich your data, and add value to it in new ways. 
 At the same time, they are more difficult to create. 
 

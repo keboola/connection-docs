@@ -1,6 +1,9 @@
 ---
 title: Sandbox
-permalink: /manipulation/transformations/sandbox/
+permalink: /transformations/sandbox/
+redirect_from:
+    - /manipulation/transformations/sandbox/
+
 ---
 
 * TOC
@@ -16,14 +19,14 @@ A sandbox is a **safe environment** for you to
 You can fill a sandbox with any data from Storage. However, to simplify transformation development,
 KBC provides a specific loader for your transformations.
 It automatically fills the sandbox with relevant tables and takes
-the [Input Mapping](/manipulation/transformations/mappings/#input-mapping) of the transformation into account.
+the [Input Mapping](/transformations/mappings/#input-mapping) of the transformation into account.
 
-Each user has **one sandbox per project and [backend](/manipulation/transformations/#backend)**
+Each user has **one sandbox per project and [backend](/transformations/#backend)**
 (Snowflake, Redshift, RStudio for R and Jupyter for Python) to their disposal.
 Sandboxes with different backends are very similar; but there are few specifics, mostly related to access management --- see below.
 
 {: .image-popup}
-![Sandbox credentials](/manipulation/transformations/sandbox/sandbox-credentials.png)
+![Sandbox credentials](/transformations/sandbox/sandbox-credentials.png)
 
 **Important:** The backend of the sandbox does not have to match the backend of the original data.
 For example, you can load data from Snowflake into a Redshift sandbox.
@@ -46,18 +49,18 @@ because the transformation load deletes all data in the sandbox.
 Go to the **Transformations** section and click the **Sandbox** button in the upper right corner.
 
 {: .image-popup}
-![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-1.png)
+![Screenshot - Plain Sandbox](/transformations/sandbox/howto-plain-sandbox-1.png)
 
 If no sandbox exists, create it first by clicking **Create Sandbox** for the desired backend:
 
 {: .image-popup}
-![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-2.png)
+![Screenshot - Plain Sandbox](/transformations/sandbox/howto-plain-sandbox-2.png)
 
 Then click the **Load data** button to load tables or whole buckets into the sandbox.
 You can limit the number of rows that are loaded; this is useful for sampling a large table.
 
 {: .image-popup}
-![Screenshot - Load data into Sandbox](/manipulation/transformations/sandbox/sandbox-load-data.png)
+![Screenshot - Load data into Sandbox](/transformations/sandbox/sandbox-load-data.png)
 
 The imported tables will have full tables names --- including both a bucket and table name.
 
@@ -68,30 +71,30 @@ option is not available for RStudio and Jupyter sandboxes yet).
 ### Transformation Loading
 This type of loading is intended for **gradual development and debugging** of your transformation code.
 Data loaded through the transformation loading is tied to a specific transformation bucket and
-[input mapping](/manipulation/transformations/mappings/#input-mapping).
+[input mapping](/transformations/mappings/#input-mapping).
 Only data specified in the input mapping is loaded into your transformation sandbox.
 You can choose whether the transformation itself is performed on the load or not.
 
 To create a sandbox for a specific transformation, go to the **Transformations** section and select the respective transformation:
 
 {: .image-popup}
-![Screenshot - Transformation Sandbox](/manipulation/transformations/sandbox/howto-transformation-sandbox-1.png)
+![Screenshot - Transformation Sandbox](/transformations/sandbox/howto-transformation-sandbox-1.png)
 
 The Sandbox backend is defined by the transformation backend. In the transformation detail,
 click the **Create Sandbox** button:
 
 {: .image-popup}
-![Screenshot - Transformation Sandbox](/manipulation/transformations/sandbox/howto-transformation-sandbox-2.png)
+![Screenshot - Transformation Sandbox](/transformations/sandbox/howto-transformation-sandbox-2.png)
 
 Clicking the **Create** button will get you the connection credentials:
 
 {: .image-popup}
-![Screenshot - Transformation Sandbox](/manipulation/transformations/sandbox/transformation-sandbox.png)
+![Screenshot - Transformation Sandbox](/transformations/sandbox/transformation-sandbox.png)
 
 Choose how the data will be loaded and processed:
 
  - *Load input tables only* --- load the tables specified in the input mapping;
- - *Prepare transformation* --- execute [transformation dependencies](/manipulation/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies); and
+ - *Prepare transformation* --- execute [transformation dependencies](/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies); and
  - *Execute transformation without writing to Storage API* --- this is a dry-run for validation.
 
 Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page.
@@ -112,7 +115,7 @@ In the same place you can also see the sandbox connection credentials. To copy &
 use the *copy icon*:
 
 {: .image-popup}
-![Screenshot - Plain Sandbox](/manipulation/transformations/sandbox/howto-plain-sandbox-3.png)
+![Screenshot - Plain Sandbox](/transformations/sandbox/howto-plain-sandbox-3.png)
 
 ## Backend Specifics
 
@@ -155,16 +158,16 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 **Important:** Currently, this feature is in beta.
 
 The [RStudio](https://www.rstudio.com/) sandbox is available as a plain sandbox or for
-[R Transformations](/manipulation/transformations/r/).
+[R Transformations](/transformations/r/).
 
 Depending on the size of the input tables, the sandbox creation may take some time.
 You can review its progress in *Jobs*. When the sandbox is created and you **connect** to it,
 you will be taken to a web version of RStudio. The loaded tables will be available at the same locations
-as in [R Transformations](/manipulation/transformations/r/#development-tutorial).
-The R version is also the same as in [R Transformations](/manipulation/transformations/r/#environment).
+as in [R Transformations](/transformations/r/#development-tutorial).
+The R version is also the same as in [R Transformations](/transformations/r/#environment).
 
 {: .image-popup}
-![Screenshot - RStudio Sandbox](/manipulation/transformations/sandbox/rstudio-sandbox-3.png)
+![Screenshot - RStudio Sandbox](/transformations/sandbox/rstudio-sandbox-3.png)
 
 *Note: Although it is possible to upload files directly into the RStudio sandbox, we highly recommend that
 you use only input mapping to load data into the sandbox. It is a more reliable and traceable method of
@@ -173,7 +176,7 @@ loading data.*
 The RStudio Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
-- Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/r/#memory-and-processing-constraints)).
+- Memory is limited to 8GB (same as in [transformations](/transformations/r/#memory-and-processing-constraints)).
 - The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
@@ -186,7 +189,7 @@ When your R script exceeds the memory limit, it may freeze or crash with the fol
 If it freezes, use the *Stop* button to stop it:
 
 {: .image-popup}
-![Screenshot - R Restart](/manipulation/transformations/sandbox/restart-r.png)
+![Screenshot - R Restart](/transformations/sandbox/restart-r.png)
 
 You can then restart the R session from the menu **Session** -- **Restart R**. To verify that your script is crashing
 on the amount of used memory, you can use the `mem_used()` function:
@@ -202,13 +205,13 @@ print(mem_used())
 **Important:** Currently, this feature is in beta.
 
 The [Jupyter Notebook](http://jupyter.org/) sandbox is available as a plain sandbox or
-for [Python Transformations](/manipulation/transformations/python/).
+for [Python Transformations](/transformations/python/).
 It is created the same way as the [RStudio Sandbox](#rstudio-sandbox) and the exact same limitations apply to it.
 
 {: .image-popup}
-![Screenshot - Jupyter Sandbox](/manipulation/transformations/sandbox/jupyter-sandbox-1.png)
+![Screenshot - Jupyter Sandbox](/transformations/sandbox/jupyter-sandbox-1.png)
 
-The Python environment for Jupyter Notebook is the same as in [Python Transformations](/manipulation/transformations/python/#environment).
+The Python environment for Jupyter Notebook is the same as in [Python Transformations](/transformations/python/#environment).
 To list the available table data files, use the Jupyter file browser or scripts such as this one:
 
 {% highlight python %}
@@ -223,7 +226,7 @@ print(onlyfiles)
 The Jupyter Notebook Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
-- Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/python/#memory-and-processing-constraints)).
+- Memory is limited to 8GB (same as in [transformations](/transformations/python/#memory-and-processing-constraints)).
 - The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
@@ -236,7 +239,7 @@ When your Python script exceeds the memory limit, it may crash with the followin
 You'll then see **Dead kernel** warning in the top right corner:
 
 {: .image-popup}
-![Screenshot - Python Restart](/manipulation/transformations/sandbox/restart-python.png)
+![Screenshot - Python Restart](/transformations/sandbox/restart-python.png)
 
 If the warning does not go away, you can then restart the kernel manually from the menu **Kernel** -- **Restart**.
 To verify that your script is crashing on the amount of used memory, you can use the `memory_info()` function:
@@ -253,13 +256,13 @@ print(process.memory_info().rss)
 **Important:** Currently, this feature is in beta.
 
 The [Jupyter Notebook](http://jupyter.org/) sandbox with Julia kernel is available as a plain sandbox or as a sandbox
-for [Julia Transformations](/manipulation/transformations/julia/).
+for [Julia Transformations](/transformations/julia/).
 It is created the same way as the [RStudio Sandbox](#rstudio-sandbox), and the exact same limitations apply to it.
 
 {: .image-popup}
-![Screenshot - Julia Sandbox](/manipulation/transformations/sandbox/julia-sandbox-1.png)
+![Screenshot - Julia Sandbox](/transformations/sandbox/julia-sandbox-1.png)
 
-The Julia environment for Jupyter Notebook is the same as in [Julia Transformations](/manipulation/transformations/julia/#environment).
+The Julia environment for Jupyter Notebook is the same as in [Julia Transformations](/transformations/julia/#environment).
 To list the available table data files, use the Jupyter file browser or scripts such as this one:
 
 {% highlight julia %}
@@ -270,7 +273,7 @@ println(readdir("in/files/"))
 The Julia Jupyter Notebook Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
-- Memory is limited to 8GB (same as in [transformations](/manipulation/transformations/julia/#memory-and-processing-constraints)).
+- Memory is limited to 8GB (same as in [transformations](/transformations/julia/#memory-and-processing-constraints)).
 - The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
@@ -289,14 +292,14 @@ as permanent. Before uploading the template, make sure it does not contain any s
 (*Kernel* -- *Restart & Clear Output* might be a good idea). The file name is arbitrary.
 
 {: .image-popup}
-![Screenshot - Project Template](/manipulation/transformations/sandbox/template-project.png)
+![Screenshot - Project Template](/transformations/sandbox/template-project.png)
 
 To create a **user template**, upload a file with the tag
 `_python_sandbox_template_`, `_r_sandbox_template_` or `_julia_sandbox_template_` and add another tag with the value of 
 the [user email](/management/project/users/).
 
 {: .image-popup}
-![Screenshot - User Template](/manipulation/transformations/sandbox/template-user.png)
+![Screenshot - User Template](/transformations/sandbox/template-user.png)
 
 If there are multiple templates, the newest one is used. A user template always takes precedence over the 
 project template for the given user. If you have both a project and a user template for a given user and you update the 

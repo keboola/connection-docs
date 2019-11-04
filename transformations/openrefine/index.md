@@ -1,6 +1,9 @@
 ---
 title: OpenRefine Transformation
-permalink: /manipulation/transformations/openrefine/
+permalink: /transformations/openrefine/
+redirect_from:
+    - /manipulation/transformations/openrefine/
+
 ---
 
 * TOC
@@ -27,7 +30,7 @@ The maximum running time is 6 hours.
 ### Inputs/Outputs
 
 As OpenRefine uses only one dataset as its input, and produces one dataset as its result,
-the [input and output mapping](/manipulation/transformations/mappings/) is limited to exactly one input/output.
+the [input and output mapping](/transformations/mappings/) is limited to exactly one input/output.
 
 ## Development Tutorial
 
@@ -35,23 +38,23 @@ To develop and debug OpenRefine transformations, you can replicate the execution
 To do so, have [OpenRefine installed](http://openrefine.org/download.html) (preferably the same version as us).
 
 {: .image-popup}
-![Screenshot - OpenRefine Welcome Screen](/manipulation/transformations/openrefine/screen.png)
+![Screenshot - OpenRefine Welcome Screen](/transformations/openrefine/screen.png)
 
-To simulate the [input and output mapping](/manipulation/transformations/mappings/),
+To simulate the [input and output mapping](/transformations/mappings/),
 all you need to do is create a project with the desired CSV file.
 
 {: .image-popup}
-![Screenshot - OpenRefine CSV Load](/manipulation/transformations/openrefine/loadcsv.png)
+![Screenshot - OpenRefine CSV Load](/transformations/openrefine/loadcsv.png)
 
 Then use the UI to modify the file according to your needs, and click the **Extract** button in the **Undo/Redo** tab.
 
 {: .image-popup}
-![Screenshot - OpenRefine Operation History](/manipulation/transformations/openrefine/operationhistory.png)
+![Screenshot - OpenRefine Operation History](/transformations/openrefine/operationhistory.png)
 
 And finally, copy the Operation History JSON to the transformation script.
 
 {: .image-popup}
-![Screenshot - OpenRefine Extract Operation History](/manipulation/transformations/openrefine/operationhistoryextract.png)
+![Screenshot - OpenRefine Extract Operation History](/transformations/openrefine/operationhistoryextract.png)
 
 ### OpenRefine Sandbox
 

@@ -9,7 +9,7 @@ To make writing of these scripts easier for you, we provide the *Sandbox* functi
 
 As a separate database storage, Sandbox allows you to run arbitrary SQL scripts on the
 **copies** of your tables without affecting data in your Storage, or your transformations.
-Learn more about Sandbox [here](/manipulation/transformations/sandbox/). 
+Learn more about Sandbox [here](/transformations/sandbox/). 
 
 Let's create a Sandbox from the Transformations page by clicking the **New Sandbox** link:
 

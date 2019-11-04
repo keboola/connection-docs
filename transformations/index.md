@@ -1,6 +1,8 @@
 ---
 title: Transformations
-permalink: /manipulation/transformations/
+permalink: /transformations/
+redirect_from:
+    - /manipulation/transformations/
 ---
 
 * TOC
@@ -19,7 +21,7 @@ It should represent a logical set of operations you want to perform together.
 The schema below shows the important components of the Transformation engine:
 
 {: .image-popup}
-![Transformations schema](/manipulation/transformations/transformations-schema.svg)
+![Transformations schema](/transformations/transformations-schema.svg)
 
 A transformation is represented by a **Transformation Script** (SQL, R, Python or OpenRefine [backend](#backend)) which you
 can use to manipulate your data. To ensure safety of the data in Storage, a transformation
@@ -36,21 +38,21 @@ When the transformation is finished, the **Output Mapping** process moves the tr
 the designated tables in Storage. The **Input** and **Output** mappings ensure complete safety of
 the transformation processes -- the transformation always operates in an isolated workspace.
 
-Each transformation has its own workspace. The transformation [sandbox](/manipulation/transformations/sandbox/)
-uses the same workspace as the corresponding transformation. The [plain sandbox](/manipulation/transformations/sandbox/#plain-loading)
+Each transformation has its own workspace. The transformation [sandbox](/transformations/sandbox/)
+uses the same workspace as the corresponding transformation. The [plain sandbox](/transformations/sandbox/#plain-loading)
 uses a separate workspace.
 
 ## Mappings
 No transformation can be created without
 
-1) [**Input and Output Mapping**](/manipulation/transformations/mappings/) --- separates the source data from your transformation. Mapping creates a secure workspace with data copied from the tables specified in the input mappings.
+1) [**Input and Output Mapping**](/transformations/mappings/) --- separates the source data from your transformation. Mapping creates a secure workspace with data copied from the tables specified in the input mappings.
 Database table names and CSV file names in transformations are completely unrelated to names of tables in Storage.
 
 2) **Transformation Script** --- SQL, Python, R or OpenRefine code: defines what happens with the data while taking the
  tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
 
 {: .image-popup}
-![Simple input and output mapping](/manipulation/transformations/mappings.png)
+![Simple input and output mapping](/transformations/mappings.png)
 
 *When writing transformation scripts, keep in mind that the table names referenced by mappings
 are automatically quoted by KBC. This is especially important for Snowflake, which is case sensitive.*
@@ -79,7 +81,7 @@ Each change in the transformation configuration creates a new version of the who
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
 ## Developing Transformations
-You can easily develop Snowflake, Redshift transformations using [Sandbox](/manipulation/transformations/sandbox),
+You can easily develop Snowflake, Redshift transformations using [Sandbox](/transformations/sandbox),
 a separate database storage. As a safe workspace with required data,
 it allows you to run and play with your arbitrary SQL scripts on the copies of your tables
 without affecting data in your Storage, or your transformations.

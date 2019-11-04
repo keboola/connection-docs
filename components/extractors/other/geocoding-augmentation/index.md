@@ -21,11 +21,11 @@ In this case, specify the location. The extractor will fetch its geographical la
 using a specified [provider](#providers).
 Specify one or more tables which have exactly one column with textual specification of the location. 
 If the source table does not meet these requirements, 
-edit the [input mapping](/manipulation/transformations/mappings/#input-mapping) details accordingly. 
+edit the [input mapping](/transformations/mappings/#input-mapping) details accordingly. 
 
 You can test the extraction on this [sample file](/extractors/other/geocoding-augmentation/locations.csv). 
 Upload it to the 'in.c-main' bucket in Storage first and call it *locations*.
-Specify a single table in the [output mapping](/manipulation/transformations/mappings/#output-mapping) 
+Specify a single table in the [output mapping](/transformations/mappings/#output-mapping) 
 and select the **geocode** method in the configuration.
 (The names of the input and CSV files are arbitrary, and so are the names of the columns.)
 
@@ -36,10 +36,10 @@ and select the **geocode** method in the configuration.
 In this mode of operation, specify the geographical latitude and longitude. The extractor
 will then fetch information about the closest place found on the map of the given [provider](#providers).
 Specify one or more tables which have exactly two columns; the first column with a latitude, the second 
-one with a longitude. If the source table does not meet these requirements, edit the [input mapping](/manipulation/transformations/mappings/#input-mapping) details accordingly. 
+one with a longitude. If the source table does not meet these requirements, edit the [input mapping](/transformations/mappings/#input-mapping) details accordingly. 
 
 You can test the extraction on this [sample file](/extractors/other/geocoding-augmentation/coords.csv). 
-Specify a single table in the [output mapping](/manipulation/transformations/mappings/#output-mapping), 
+Specify a single table in the [output mapping](/transformations/mappings/#output-mapping), 
 and select the **reverse** method in the configuration.
 (The names of the input and CSV files are arbitrary, so are the names of the columns.) 
 

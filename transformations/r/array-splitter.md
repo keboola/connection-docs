@@ -1,6 +1,9 @@
 ---
 title: Array Splitting
-permalink: /manipulation/transformations/r/array-splitter/
+permalink: /transformations/r/array-splitter/
+redirect_from:
+    - /manipulation/transformations/r/array-splitter/
+
 ---
 
 Array splitting is what you do if you have a list of values in a single cell delimited by a character (a comma, semi-colon, etc.), 
@@ -25,11 +28,11 @@ and produce a table like
 | 2        | 3         | sixth     |
 
 ## Prepare 
-Use the [sample table](/manipulation/transformations/r/array-source.csv) shown above and import it into your *Storage*. 
+Use the [sample table](/transformations/r/array-source.csv) shown above and import it into your *Storage*. 
 Then set the input and output mapping for your transformation.
 
 {: .image-popup}
-![Screenshot - Input/Output mapping](/manipulation/transformations/r/array-split-io.png)
+![Screenshot - Input/Output mapping](/transformations/r/array-split-io.png)
 
 ## Use the Script
 The following script will take each row of the source table, and split the column, the name of which is specified in the

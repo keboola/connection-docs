@@ -1,6 +1,9 @@
 ---
 title: Redshift Transformation
-permalink: /manipulation/transformations/redshift/
+permalink: /transformations/redshift/
+redirect_from:
+    - /manipulation/transformations/redshift/
+
 ---
 
 AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. Transformations run on

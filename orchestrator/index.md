@@ -5,7 +5,7 @@ permalink: /orchestrator/
 
 Bringing systems for data loading, manipulation and writing together is what makes
 [Keboola Connection](/overview/) so powerful and easy to use. With [extractors](/extractors/), you can fetch
-data from data sources into [Storage](/storage/). With [transformations](/manipulation/transformations/) and
+data from data sources into [Storage](/storage/). With [transformations](/transformations/) and
 [applications](/manipulation/applications/), you can modify the data. With [writers](/writers/), you can
 send it to destination systems.
 

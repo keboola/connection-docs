@@ -1,6 +1,9 @@
 ---
 title: Julia Transformation
-permalink: /manipulation/transformations/julia/
+permalink: /transformations/julia/
+redirect_from:
+    - /manipulation/transformations/julia/
+
 ---
 
 * TOC
@@ -9,7 +12,7 @@ permalink: /manipulation/transformations/julia/
 *Note: This feature is in preview and available on request via our support.*
 
 [Julia](https://julialang.org/) transformations complement the R and SQL transformations where computations or other operations are too difficult.
-Common data operations like joining, sorting, or grouping are still easier and faster to do in the [SQL Transformations](/manipulation/transformations/).
+Common data operations like joining, sorting, or grouping are still easier and faster to do in the [SQL Transformations](/transformations/).
 
 ## Environment
 The Julia script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
@@ -20,7 +23,7 @@ When we update a Julia version, we offer --- for a limited time --- the option t
 switch the version in the transformation detail by clicking on the `Julia` label:
 
 {: .image-popup}
-![Screenshot - Transformations Versions](/manipulation/transformations/julia/versions.png)
+![Screenshot - Transformations Versions](/transformations/julia/versions.png)
 
 This feature is intended to help you 'postpone' the update to a more convenient time for you in case there are
 any problems with the new version. You should update the transformation code to the new version soon, as the old
@@ -46,7 +49,7 @@ Normally, any [listed package](https://github.com/JuliaRegistries/General) can b
 Feel free to contact us if you run into problems. When a package is installed, you still need to have a `using` or `import` statement in your script.
 
 {: .image-popup}
-![Screenshot - Package Configuration](/manipulation/transformations/julia/packages.png)
+![Screenshot - Package Configuration](/transformations/julia/packages.png)
 
 The latest versions of packages are always installed at the time of the release (you can check that
 [in the repository](https://github.com/keboola/docker-custom-julia/releases)). In case your code relies on a specific package version, 
@@ -85,7 +88,7 @@ end
 {% endhighlight %}
 
 ## Local Development Tutorial
-To develop and debug Julia transformations, we recommend that you use the [Sandbox](/manipulation/transformations/sandbox/) feature. 
+To develop and debug Julia transformations, we recommend that you use the [Sandbox](/transformations/sandbox/) feature. 
 It gives you an environment very similar to the transformations out of the box.
 
 If you want to develop the transformation code on your local machine, you can do so by replicating the execution environment.
@@ -95,28 +98,28 @@ All you need to do to simulate the input and output mapping is create the right 
 The following image shows the directory structure:
 
 {: .image-popup}
-![Screenshot - Data folder structure](/manipulation/transformations/julia/tree.png)
+![Screenshot - Data folder structure](/transformations/julia/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a Julia transformation that takes a [sample CSV file](/manipulation/transformations/julia/source.csv) locally, follow these steps:
+so that you can move the script to a KBC transformation with no changes. To develop a Julia transformation that takes a [sample CSV file](/transformations/julia/source.csv) locally, follow these steps:
 
 - Put the Julia code into a file, for example, script.jl, in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
 - If using binary files, place them inside the `in/user` subdirectory of the working directory, and make sure that their name has no extension.
 - Store the result CSV files inside the `out/tables` subdirectory.
 
-Use the above [sample script](/manipulation/transformations/julia/#csv-format/). A finished example of the script is attached below in [data.zip](/manipulation/transformations/julia/data.zip).
+Use the above [sample script](/transformations/julia/#csv-format/). A finished example of the script is attached below in [data.zip](/transformations/julia/data.zip).
 Download it and test the script in your local Julia installation. The output file `destination.csv` will be created.
 This script can be used in your transformations without any modifications. All you need to do is
 
-- upload the [sample CSV file](/manipulation/transformations/julia/source.csv) into your storage,
+- upload the [sample CSV file](/transformations/julia/source.csv) into your storage,
 - set the input mapping from that table to `source.csv` (expected by the Julia script),
 - set the output mapping from `destination.csv` (produced by the Julia script) to a new table in your Storage,
 - copy & paste the script into the transformation, and, finally,
 - run the transformation.
 
 {: .image-popup}
-![Screenshot - Sample Input Output Mapping](/manipulation/transformations/julia/sample-io.png)
+![Screenshot - Sample Input Output Mapping](/transformations/julia/sample-io.png)
 
 ### Going Further
 The above steps are usually sufficient for daily development and the debugging of moderately complex Julia transformations,

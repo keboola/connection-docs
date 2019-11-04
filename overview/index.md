@@ -40,14 +40,14 @@ It has two sections: [File Storage](/storage/file-uploads/) with all raw files u
 to your project, and [Table Storage](/storage/tables/) where all data tables are organized
 into buckets which are further organized into *in* and *out* stages.
 
-Storage is implemented as a layer on top of various database engines that we use as our [backends](/manipulation/transformations/#backends) ([Snowflake](http://www.snowflake.net/) and [Redshift](https://aws.amazon.com/redshift/)).
+Storage is implemented as a layer on top of various database engines that we use as our [backends](/transformations/#backends) ([Snowflake](http://www.snowflake.net/) and [Redshift](https://aws.amazon.com/redshift/)).
 It provides an important API (Storage API) access for other components and 3rd party applications.
 Your own **remote storage** can be connected to Keboola Connection as well.
 
 ### Transformations
-[Transformations](/manipulation/transformations/) are components which allow the end-user can be created by writing a **free-form script** in
+[Transformations](/transformations/) are components which allow the end-user can be created by writing a **free-form script** in
 [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [Julia](https://julialang.org/),
-[Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments.
+[Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). KBC provides each user with [Sandbox](/transformations/sandbox/) --- a safe environment for your experiments.
 
 ### Applications
 Unlike the free-form Transformations, [Applications](/manipulation/applications/) are **predefined blocks**, which
@@ -99,11 +99,11 @@ The principle of token authorization allows you, for example, to easily [share a
 from your Storage with someone without them having to register to KBC (enter email/password).
 
 ### Input / Output Mapping
-To make sure your transformation does not harm data in Storage, [mapping](/manipulation/transformations/mappings)
+To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings)
 separates source data from your script. A secure workspace is created with data copied from the tables specified
-in the [input mapping](/manipulation/transformations/mappings/#input-mapping).
+in the [input mapping](/transformations/mappings/#input-mapping).
 After the transformation has been executed successfully, only tables and files defined
-in the [output mapping](/manipulation/transformations/mappings/#output-mapping) are brought back to Storage.
+in the [output mapping](/transformations/mappings/#output-mapping) are brought back to Storage.
 
 ## External Environment Schema
 KBC is a fully cloud environment heavily relaying on Amazon Services. The following chart shows the overview

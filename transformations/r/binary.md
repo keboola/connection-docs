@@ -1,6 +1,9 @@
 ---
 title: Using Binary Files
-permalink: /manipulation/transformations/r/binary/
+permalink: /transformations/r/binary/
+redirect_from:
+    - /manipulation/transformations/r/binary/
+
 ---
 
 * TOC
@@ -15,12 +18,12 @@ or, you want to verify the results before using them in production.
 - The model is provided by a 3rd party.
 
 In either case, it is possible to use a pre-computed model in an R transformation using standard R `save()` and `load()` functions. 
-You can also [download a sample package](/manipulation/transformations/r/data.zip) 
-for [local development](/manipulation/transformations/r/#development-tutorial). 
+You can also [download a sample package](/transformations/r/data.zip) 
+for [local development](/transformations/r/#development-tutorial). 
 
 ## Prepare
 To show you how it works, let's use an example in which we have a `cashier-data` table with the following data 
-([full table](/manipulation/transformations/r/cashier-data.csv)):
+([full table](/transformations/r/cashier-data.csv)):
 
 | number_of_items  |  time_spent_in_shop   |  ...  |
 |------------------|-----------------------|-------|
@@ -30,7 +33,7 @@ To show you how it works, let's use an example in which we have a `cashier-data`
 |  ...             |                       |       |
  
 The table contains some observed values of customers who visited the shop. Now, let's find out how much time 
-a customer with 40 items in their basket will spend in the shop. Create another table (`cashier-data-predict`) like the following ([full table](/manipulation/transformations/r/cashier-data-predict.csv)):
+a customer with 40 items in their basket will spend in the shop. Create another table (`cashier-data-predict`) like the following ([full table](/transformations/r/cashier-data-predict.csv)):
 
 | number_of_items  |
 |------------------|
@@ -53,7 +56,7 @@ save(lm, file = "time_model.rda")
 
 After executing the script, you get the `time_model.rda` binary file with a very simple model of dependency 
 of the **time_spent_in_shop** column on the **number_of_items** column in the data 
-([cashier-data.csv](/manipulation/transformations/r/cashier-data.csv)):
+([cashier-data.csv](/transformations/r/cashier-data.csv)):
  
 ## Step 2 - Save the model to KBC
 
@@ -61,7 +64,7 @@ The second step is to save the model file to KBC. For that go to **Storage** -- 
 the file should be marked as *permanent* and a tag must be assigned to it.
 
 {: .image-popup}
-![Screenshot - Upload file](/manipulation/transformations/r/file-import.png)
+![Screenshot - Upload file](/transformations/r/file-import.png)
 
 In the sample above, we decided to give the file a tag `predictionModel`.
 
@@ -71,7 +74,7 @@ Finally, write the actual transformation. Create an R transformation, set the in
 and add the (`predictionModel`) tag to select stored files.
 
 {: .image-popup}
-![Screenshot - Transformation Setup](/manipulation/transformations/r/binary-transformation.png)
+![Screenshot - Transformation Setup](/transformations/r/binary-transformation.png)
 
 **Important:** In the transformation, you reference only the file tag, not the actual uploaded file. 
 The rules for transforming a tag to a file are following: 
@@ -110,7 +113,7 @@ obtained from the (very simple linear) model that was created outside KBC in the
 binary files can also be used for other purposes as they can contain virtually any R code or data.
 
 ## Running & Debugging Locally
-When attempting to run the above [transformation locally](/manipulation/transformations/r/#development-tutorial),
+When attempting to run the above [transformation locally](/transformations/r/#development-tutorial),
 make sure to
 
 - Put the R code in the working directory in a file, for example, `script.R`.

@@ -162,7 +162,7 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 Once the job is finished, click on the names of the tables to inspect their contents.
 
 ## Exploring Data
-To explore the data, go to **Transformations**, and click on [**Sandbox**](/manipulation/transformations/sandbox/).
+To explore the data, go to **Transformations**, and click on [**Sandbox**](/transformations/sandbox/).
 Provided for each user and project automatically, it is an isolated environment in which you can experiment without
 interfering with any production code.
 
@@ -201,7 +201,7 @@ df.head()
 {% endhighlight %}
 
 The path `/data/in/tables/` is the location for
-[loaded tables](/manipulation/transformations/python/#file-locations); they
+[loaded tables](/transformations/python/#file-locations); they
 are loaded as simple CSV files. Once your table is loaded, you can play with it:
 
 {% highlight python %}
@@ -272,7 +272,7 @@ The above tutorial is done in the [Python language](https://www.python.org/) usi
 [Jupyter Notebook](http://jupyter.org/). The same can be done in the
 [R language](https://www.r-project.org/) using [RStudio](https://www.rstudio.com/).
 For more information about sandboxes (including disk and memory limits), see the
-[corresponding documentation](/manipulation/transformations/sandbox/#rstudio-sandbox).
+[corresponding documentation](/transformations/sandbox/#rstudio-sandbox).
 
 ## Final Note
 This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things:

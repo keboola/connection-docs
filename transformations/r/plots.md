@@ -1,6 +1,9 @@
 ---
 title: Plots & Graphs
-permalink: /manipulation/transformations/r/plots/
+permalink: /transformations/r/plots/
+redirect_from:
+    - /manipulation/transformations/r/plots/
+
 ---
 
 * TOC
@@ -18,10 +21,10 @@ app$writeFileManifest = function(fileName, fileTags = vector(), isPublic = FALSE
 
 Remember to use the `out/files/` directory for plots. And note that the `rDocker` tag will be automatically added to all files with manifests.
 
-In the following **examples**, use the sample [graph-source.csv](/manipulation/transformations/r/graph-source.csv) data file. Create a new bucket in Storage and upload the table to it.
+In the following **examples**, use the sample [graph-source.csv](/transformations/r/graph-source.csv) data file. Create a new bucket in Storage and upload the table to it.
 
 {: .image-popup}
-![Screenshot - Upload table](/manipulation/transformations/r/graph-source.png)
+![Screenshot - Upload table](/transformations/r/graph-source.png)
 
 ## Example 1 -- Output of a single file
 
@@ -29,7 +32,7 @@ Create a [new R transformation](/tutorial/manipulate/), and add the **graph-sour
 in the input mapping. There is no output mapping.
 
 {: .image-popup}
-![Screenshot - Configure transformations](/manipulation/transformations/r/graph-source-2.png)
+![Screenshot - Configure transformations](/transformations/r/graph-source-2.png)
 
 Then use the following R script in the transformation and run it.
 
@@ -51,13 +54,13 @@ app$writeFileManifest("/data/out/files/graph-2x2.png", c("regression", "all-in-o
 Once the transformation finishes, a file will be added to File uploads:
 
 {: .image-popup}
-![Screenshot - File Uploads](/manipulation/transformations/r/plot-file-uploads.png)
+![Screenshot - File Uploads](/transformations/r/plot-file-uploads.png)
 
 Because the `lm.plot` function produces multiple plots, the above example plots all four graphs to a
 single image using a 2x2 grid.
 
 {: .image-popup}
-![Result linear model plots](/manipulation/transformations/r/graph_2x2.png)
+![Result linear model plots](/transformations/r/graph_2x2.png)
 
 ## Example 2 -- Output of multiple files
 Use the following script the same way as in Example 1. The only difference is that this script

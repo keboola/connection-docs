@@ -264,40 +264,40 @@ items:
   - url: /manipulation/
     title: Data Manipulation
     items:
-      - url: /manipulation/transformations/
+      - url: /transformations/
         title: Transformations
         items:
-          - url: /manipulation/transformations/mappings/
+          - url: /transformations/mappings/
             title: Mappings
 
-          - url: /manipulation/transformations/sandbox/
+          - url: /transformations/sandbox/
             title: Sandbox
 
-          - url: /manipulation/transformations/redshift/
+          - url: /transformations/redshift/
             title: Redshift Transformations
 
-          - url: /manipulation/transformations/snowflake/
+          - url: /transformations/snowflake/
             title: Snowflake Transformations
 
-          - url: /manipulation/transformations/python/
+          - url: /transformations/python/
             title: Python Transformations
 
-          - url: /manipulation/transformations/r/
+          - url: /transformations/r/
             title: R Transformations
             items:
-              - url: /manipulation/transformations/r/array-splitter/
+              - url: /transformations/r/array-splitter/
                 title: Array Splitting
 
-              - url: /manipulation/transformations/r/plots/
+              - url: /transformations/r/plots/
                 title: Graphs & Charts
 
-              - url: /manipulation/transformations/r/binary/
+              - url: /transformations/r/binary/
                 title: Using binary files
 
-          - url: /manipulation/transformations/openrefine/
+          - url: /transformations/openrefine/
             title: OpenRefine Transformations
 
-          - url: /manipulation/transformations/julia/
+          - url: /transformations/julia/
             title: Julia Transformations
 
       - url: /manipulation/applications/
