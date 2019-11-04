@@ -57,7 +57,7 @@ to bring in additional data.
 
 ### Writers
 [Writers](/components/writers/) are components delivering output data from Keboola Connection into the systems 
-and applications where the data gets used/consumed. These can be commonly used [relational databases](/components/components/writers/database/) or various [BI, reporting and analytics](/components/components/writers/bi-tools) tools.
+and applications where the data gets used/consumed. These can be commonly used [relational databases](/components/writers/database/) or various [BI, reporting and analytics](/components/writers/bi-tools/) tools.
 
 ### Data Consumption
 *Data Consumption* is represented by 3rd party systems that accept (or extract) data from KBC and use it further.

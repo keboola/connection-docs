@@ -44,7 +44,7 @@ It is useful for temporarily skipping something.
 - Enabling *Continue on Failure* on a task means that even if that task fails, the orchestration will continue running to the following 
 phases (and will end with a `warning` state). This feature is useful when a data source becomes temporarily unstable and you still want to try your best to extract it.
 - It is also possible to set *Task Parameters*. This is a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#creating-and-running-a-job).
-- Action is always `run`, except for [GoodData Writer](/components/writers/gooddata/).
+- Action is always `run`.
 
 ## Automation
 When you are content with the orchestration setting, it's time to automate its execution. This is done simply by setting

@@ -74,7 +74,7 @@ with mixed backends).
 ### GoodData
 If you use [GoodData BI](https://www.gooddata.com/) provisioned by Keboola, the **Limits** page will also show
 limits to your GoodData project. These limits are again soft limits. The production project switch shows 
-whether you are using a [demo or a production project](/components/writers/gooddata). The demo project is provided free of charge. 
+whether you are using a [demo or a production project](/components/writers/bi-tools/gooddata/). The demo project is provided free of charge. 
 
 {: .image-popup}
 ![Screenshot - GoodData Limits](/management/project/limits/limits-2.png)
