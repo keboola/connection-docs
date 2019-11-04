@@ -26,8 +26,8 @@ You can specify who can link the bucket to a project:
 *and also a member of that organization*.
 
 In either case, the source and the target project must be in the same organization. To share buckets between different 
-organizations, use the [Keboola Connection Storage extractor](/extractors/storage/storage-api/) or 
-[Keboola Connection Storage writer](/writers/storage-api/).
+organizations, use the [Keboola Connection Storage extractor](/components/extractors/storage/storage-api/) or 
+[Keboola Connection Storage writer](/components/writers/storage/storage-api/).
 
 ## Limitations
 

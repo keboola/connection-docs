@@ -61,15 +61,15 @@ arbitrary user-defined metadata, there is also some information stored automatic
 each bucket and table has information about which configuration of which component created them.
 
 ### Data Types
-Some extractors store metadata about the table columns. For example, when a [DB extractor](/extractors/database/sqldb/)
+Some extractors store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
 loads a table from the source database, it also records the physical column types from that table.
 These are stored with each table column and can be used later on when working with the table. For
-example, the transformation [`COPY` mapping](/manipulation/transformations/snowflake/#load-type) allows you to set data types for the tables inside
-the transformations. Also, some writers, e.g., the [Snowflake writer](/writers/database/snowflake/) use
-the table metadata to [pre-fill the table columns](/writers/database/snowflake/#table-configuration) configuration for you.
+example, the transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside
+the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
+the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
 Even if a data type is available for a column, that column is always stored as text --- keep this in mind
-especially in [Transformations](/manipulation/transformations/mappings/#output-mapping), where the output is always cast to text. The basic idea behind
+especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. The basic idea behind
 this is that a text type has the best interoperability, so this averts many issues (e.g., some date values stored in a MySQL
 database might not be accepted by a Snowflake database and vice-versa).
 
@@ -85,8 +85,8 @@ the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata).*
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
-[Output Mapping](/manipulation/transformations/mappings/#output-mapping) of
-[Transformations](/manipulation/transformations/) and [Applications](/manipulation/applications/).
+[Output Mapping](/transformations/mappings/#output-mapping) of
+[Transformations](/transformations/) and [Applications](/components/applications/).
 The settings on both places must match, otherwise you will receive an error:
 
     Output mapping does not match destination table: primary key '' does not match 'Id' in 'out.c-tutorial.opportunity_denorm' (check transformations Denormalize opportunities (id opportunity.denormalize-opportunities)).
@@ -205,7 +205,7 @@ is not defined and an incremental load is used, it simply appends the data to th
 
 ### Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
-can be later used in Input Mapping of many components (especially [Transformations](/manipulation/transformations/mappings/#input-mapping)).
+can be later used in Input Mapping of many components (especially [Transformations](/transformations/mappings/#input-mapping)).
 Incremental processing is available in two flavors --- *automatic* and *manual*. Incremental processing makes sense only for
 components reading data from the Storage (e.g. transformations and writers). Note that it is not supported for all components yet.
 
@@ -244,7 +244,7 @@ when using incremental processing, that row will not be loaded in input mapping.
 
 The component (e.g. writer) will receive only the highlighted rows. If there are no added or updated rows since the last successful run,
 an empty table will be passed to the component. The image below shows the setting of Automatic Incremental Processing for
-the [Snowflake writer](/writers/database/snowflake/):
+the [Snowflake writer](/components/writers/database/snowflake/):
 
 {: .image-popup}
 ![Screenshot - Automatic Incremental Processing](/storage/tables/adaptive-1.png)

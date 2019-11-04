@@ -5,7 +5,7 @@ permalink: /tutorial/load/
 There are multiple ways to load data into KBC. When you are starting with a project or doing any kind of 
 [POC](https://en.wikipedia.org/wiki/Proof_of_concept), it is usually fastest to **load data manually**. 
 If everything goes well and the project goes to production, you will later switch to **automatic
-data loading** using [extractors](/extractors/); in our tutorial, you can load data with 
+data loading** using [extractors](/components/extractors/); in our tutorial, you can load data with 
 the [GoogleDrive](/tutorial/load/googledrive/) and [Database extractors](/tutorial/load/database/).
 
 ## Manually Loading Data

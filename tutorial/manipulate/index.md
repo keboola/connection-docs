@@ -6,7 +6,7 @@ permalink: /tutorial/manipulate/
 At this point, you already know how to quickly [load data into KBC](/tutorial/load/),
 and your [Storage](/storage/tables/) contains four new tables:
 *account*, *opportunity*, *level* and *user*.
-In this part of the tutorial, we will show you how to manipulate data in Storage using [Transformations](/manipulation/transformations/).
+In this part of the tutorial, we will show you how to manipulate data in Storage using [Transformations](/transformations/).
 Let's create a denormalized table from the input tables and do some minor modifications to it.
 
 * TOC
@@ -36,15 +36,15 @@ Name your transformation *Denormalize opportunities*, and choose the **Snowflake
 
 When you create a transformation, you need to set up
 
-1. [**Input Mapping**](/manipulation/transformations/mappings/#input-mapping) — what tables will be used in your transformation;
+1. [**Input Mapping**](/transformations/mappings/#input-mapping) — what tables will be used in your transformation;
 tables not mentioned in Input Mapping cannot be used in the transformation.
-2. [**Output Mapping**](/manipulation/transformations/#output-mapping) — what tables will be written into Storage;
+2. [**Output Mapping**](/transformations/#output-mapping) — what tables will be written into Storage;
 tables not mentioned in Output Mapping will never be modified nor permanently stored (i.e. they are temporary).
 3. [**Transformation Script**](/tutorial/manipulate/#transformation-script) — SQL queries defining
 what will happen with the data; it takes the tables from Input Mapping, modifies them
 and produces the tables referenced in Output Mapping.
 
-The concept of [**mapping**](/manipulation/transformations/mappings) is an important safeguard
+The concept of [**mapping**](/transformations/mappings) is an important safeguard
 when you are manipulating your data.
 Thanks to it, there is no way to modify the wrong tables by accident.
 The only tables which are modified by your transformation are those explicitly specified in Output Mapping.
@@ -73,7 +73,7 @@ You will get the following configuration:
 {: .image-popup}
 ![Screenshot - Input mapping result](/tutorial/manipulate/transformation-input-end.png)
 
-*See additional information about [Input Mapping](/manipulation/transformations/mappings/#input-mapping)
+*See additional information about [Input Mapping](/transformations/mappings/#input-mapping)
 (all available options, etc.).*
 
 ### Output Mapping
@@ -99,7 +99,7 @@ After you finish Output Mapping, you will see this:
 
 The size of the `opportunity_denorm` table shows as *N/A* because the table does not exist yet.
 
-*See additional information about [Output Mapping](/manipulation/transformations/mappings/#output-mapping)
+*See additional information about [Output Mapping](/transformations/mappings/#output-mapping)
 (all available options, etc.).*
 
 ### Transformation Script
