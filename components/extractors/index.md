@@ -1,6 +1,9 @@
 ---
 title: Extractors
 permalink: /components/extractors/
+redirect_from:
+    - /extractors/
+
 ---
 
 * TOC
