@@ -19,59 +19,45 @@ in order to create reports and analyze your customers' behavior.
 
 ## Keboola Connection Architecture
 
-The following chart shows how KBC is structured. All KBC parts are briefly described below.
+The following chart shows how Kebooa Connection platform is structured. The platform is composed of many components which
+are structured into categories described below.
 
 ![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
 
 ### Data Sources
-Data sources are systems containing data you wish to [bring into KBC](/tutorial/load/).
-They can be pretty much anything from GoogleAnalytics, Facebook, SalesForce to on-premise databases,
-legacy systems or even appliances and IoT devices. Data sources are not part of KBC.
+Data sources are systems containing data you wish to [bring into Keboola Connection](/tutorial/load/).
+They can be pretty much anything from Google Analytics, Facebook, SalesForce to on-premise databases,
+legacy systems or even appliances and IoT devices. Data sources are not part of Keboola Connection.
 
 ### Extractors
-[Extractors](/extractors/) are KBC components used for gathering data from sources.
+[Extractors](/extractors/) are Keboola Connection components used for gathering data from sources.
 Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
 services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
 
 ### Storage
-[Storage](/storage/) is the central KBC component managing everything related to storing data and accessing it.
+[Storage](/storage/) is the central Keboola Connection component managing everything related to storing data and accessing it.
 It has two sections: [File Storage](/storage/file-uploads/) with all raw files uploaded
 to your project, and [Table Storage](/storage/tables/) where all data tables are organized
 into buckets which are further organized into *in* and *out* stages.
 
-Storage is implemented as a layer on top of various database engines that we use as our [backends](/manipulation/transformations/#backends) ([Snowflake](http://www.snowflake.net/),
-[Redshift](https://aws.amazon.com/redshift/), and [MySQL](https://www.mysql.com/)).
-It provides an important API (Storage API) access for other KBC components and 3rd party applications.
-Your own **remote storage** can be connected to KBC as well.
+Storage is implemented as a layer on top of various database engines that we use as our [backends](/manipulation/transformations/#backends) ([Snowflake](http://www.snowflake.net/) and [Redshift](https://aws.amazon.com/redshift/)).
+It provides an important API (Storage API) access for other components and 3rd party applications.
+Your own **remote storage** can be connected to Keboola Connection as well.
 
-### Data Manipulation
-There are two ways how data in KBC can be [manipulated](/manipulation/): via **Transformations** (simpler)
-and **Applications** (not as simple but more powerful).
-Both pick data from Storage, manipulate it and then store it back.
+### Transformations
+[Transformations](/manipulation/transformations/) are components which allow the end-user can be created by writing a **free-form script** in
+[SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [Julia](https://julialang.org/),
+[Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments.
 
-#### Transformations
-[Transformations](/manipulation/transformations/) can be created by writing a **free-form script** in
-[SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [R](https://www.r-project.org/about.html) and
-[Python](https://www.python.org/about/). KBC provides each user with [Sandbox](/manipulation/transformations/sandbox/) --- a safe environment for your experiments.
-
-#### Applications
+### Applications
 Unlike the free-form Transformations, [Applications](/manipulation/applications/) are **predefined blocks**, which
 can be used to do some pretty advanced stuff like sentiment analysis, association discovery, or histogram grouping.
 Applications can also augment data (for example, add Weather or Exchange Rates) by calling on *3rd party services*
 to bring in additional data.
-All applications are **implemented as extensions** (see below) and as such can be completely created by 3rd party developers.
-
-### Extensions
-KBC, as an open environment consisting of many built-in interoperating components (Storage, Transformations, Readers etc.),
-can be [extended](https://developers.keboola.com/extend/) with **arbitrary code to extract, manipulate or write data**.
-
-There are two types of extensions: [Custom Extensions](https://developers.keboola.com/extend/#custom-extensions)
-(used as extractors, applications and writers) and
-[Generic Extractor](/extractors/other/generic/).
-They can be created by us, our customers and 3rd parties, and can be offered also to other KBC users through our AppStore.
 
 ### Writers
-[Writers](/writers/) are KBC components delivering output data from KBC into the systems and applications where the data gets used/consumed.
+[Writers](/writers/) are components delivering output data from Keboola Connection into the systems 
+and applications where the data gets used/consumed. These can be commonly used [relational databases](/components/writers/database/) or various [BI, reporting and analytics](/components/writers/bi-tools) tools.
 
 ### Data Consumption
 *Data Consumption* is represented by 3rd party systems that accept (or extract) data from KBC and use it further.
@@ -82,6 +68,17 @@ or simply any system that can help our customers to realize the extra value KBC 
 In the background, behind the scenes, there is the [**Orchestrator**](/orchestrator/)
 (or Scheduler) component which allows everything to be fully automated.
 Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
+
+### Components
+Keboola Connection, as an open environment consisting of many built-in interoperating components (Storage, 
+Transformations, Extractors etc.), can be [extended](https://developers.keboola.com/extend/) with
+ **arbitrary code to extract, transform or write data**.
+
+There are two ways of extending the platform: creating [Components](https://developers.keboola.com/extend/#component)
+(used as extractors, applications and writers) and creating components based on
+[Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
+All components can be created by us, our customers and 3rd parties, and can be kept private or offered to 
+other Keboola Connection users.
 
 ## Keboola Support
 When working with KBC, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.
