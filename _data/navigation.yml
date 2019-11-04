@@ -35,204 +35,210 @@ items:
       - url: /tutorial/ad-hoc/
         title: Part 5 - Ad-hoc data analysis
 
-  - url: /components/extractors/
-    title: Extractors
+  - url: /components/
+    title: Components
     items:
-      - url: /components/extractors/database/
-        title: Databases
+      - url: /components/extractors/
+        title: Extractors
         items:
-          - url: /components/extractors/database/sqldb/
-            title: SQL Databases
-
-          - url: /components/extractors/database/mongodb/
-            title: MongoDB
+          - url: /components/extractors/database/
+            title: Databases
             items:
-              - url: /components/extractors/database/mongodb/mapping/
-                title: Mapping Examples
+              - url: /components/extractors/database/sqldb/
+                title: SQL Databases
 
-          - url: /components/extractors/database/bigquery/
-            title: Google BigQuery
+              - url: /components/extractors/database/mongodb/
+                title: MongoDB
+                items:
+                  - url: /components/extractors/database/mongodb/mapping/
+                    title: Mapping Examples
 
-      - url: /components/extractors/communication/
-        title: Communication
+              - url: /components/extractors/database/bigquery/
+                title: Google BigQuery
+
+          - url: /components/extractors/communication/
+            title: Communication
+            items:
+              - url: /components/extractors/communication/email-attachments/
+                title: Email Attachments
+
+              - url: /components/extractors/communication/gmail/
+                title: Gmail Messages
+
+              - url: /components/extractors/communication/google-calendar/
+                title: Google Calendar
+
+              - url: /components/extractors/communication/intercom/
+                title: Intercom
+
+              - url: /components/extractors/communication/slack/
+                title: Slack
+
+              - url: /components/extractors/communication/zendesk/
+                title: Zendesk
+
+          - url: /components/extractors/marketing-sales/
+            title: Marketing/Sales
+            items:
+
+              - url: /components/extractors/marketing-sales/babelforce/
+                title: Babelforce
+
+              - url: /components/extractors/marketing-sales/facebook-ads/
+                title: Facebook Ads
+
+              - url: /components/extractors/marketing-sales/gooddata-reports/
+                title: GoodData Reports
+
+              - url: /components/extractors/marketing-sales/google-adwords-reports/
+                title: Google AdWords Reports
+
+              - url: /components/extractors/marketing-sales/google-analytics/
+                title: Google Analytics
+
+              - url: /components/extractors/marketing-sales/hubspot/
+                title: HubSpot
+
+              - url: /components/extractors/marketing-sales/mailchimp/
+                title: Mailchimp
+
+              - url: /components/extractors/marketing-sales/pipedrive/
+                title: Pipedrive
+
+              - url: /components/extractors/marketing-sales/sklik/
+                title: Sklik
+
+          - url: /components/extractors/social/
+            title: Social
+            items:
+              - url: /components/extractors/social/facebook/
+                title: Facebook Pages
+
+              - url: /components/extractors/social/instagram/
+                title: Instagram
+
+              - url: /components/extractors/social/twitter/
+                title: Twitter
+
+              - url: /components/extractors/social/youtube/
+                title: YouTube
+
+          - url: /components/extractors/storage/
+            title: Storage
+            items:
+              - url: /components/extractors/storage/aws-s3/
+                title: AWS S3
+
+              - url: /components/extractors/storage/simple-aws-s3/
+                title: Simple AWS S3
+
+              - url: /components/extractors/storage/google-drive/
+                title: Google Drive
+
+              - url: /components/extractors/storage/ftp/
+                title: FTP
+
+              - url: /components/extractors/storage/http/
+                title: HTTP
+
+              - url: /components/extractors/storage/storage-api/
+                title: Keboola Connection Storage
+
+          - url: /components/extractors/other/
+            title: Other
+            items:
+              - url: /components/extractors/other/dark-sky/
+                title: Dark Sky (Weather)
+
+              - url: /components/extractors/other/currency-rates/
+                title: ECB Currency Rates
+
+              - url: /components/extractors/other/generic/
+                title: Generic Extractor
+
+              - url: /components/extractors/other/geocoding-augmentation/
+                title: Geocoding Augmentation
+
+              - url: /components/extractors/other/github/
+                title: GitHub
+
+              - url: /components/extractors/other/papertrail/
+                title: Papertrail
+
+              - url: /components/extractors/other/pingdom/
+                title: Pingdom
+
+              - url: /components/extractors/other/portadi/
+                title: Portadi
+
+              - url: /components/extractors/other/stripe/
+                title: Stripe
+
+              - url: /components/extractors/other/what3words/
+                title: What3words Augmentation
+
+          - url: /components/extractors/ip-addresses
+            title: IP Addresses
+
+      - url: /components/writers/
+        title: Writers
         items:
-          - url: /components/extractors/communication/email-attachments/
-            title: Email Attachments
+          - url: /components/writers/bi-tools/
+            title: Business Intelligence
+            items:
+              - url: /components/writers/bi-tools/gooddata/
+                title: GoodData
 
-          - url: /components/extractors/communication/gmail/
-            title: Gmail Messages
+              - url: /components/writers/bi-tools/tableau/
+                title: Tableau
 
-          - url: /components/extractors/communication/google-calendar/
-            title: Google Calendar
+              - url: /components/writers/bi-tools/thoughtspot/
+                title: ThoughtSpot
 
-          - url: /components/extractors/communication/intercom/
-            title: Intercom
+          - url: /components/writers/database/
+            title: Database
+            items:
+              - url: /components/writers/database/bigquery/
+                title: BigQuery
 
-          - url: /components/extractors/communication/slack/
-            title: Slack
+              - url: /components/writers/database/mysql/
+                title: MySQL
 
-          - url: /components/extractors/communication/zendesk/
-            title: Zendesk
+              - url: /components/writers/database/oracle/
+                title: Oracle
 
-      - url: /components/extractors/marketing-sales/
-        title: Marketing/Sales
-        items:
+              - url: /components/writers/database/postgresql/
+                title: PostgreSQL
 
-          - url: /components/extractors/marketing-sales/babelforce/
-            title: Babelforce
+              - url: /components/writers/database/redshift/
+                title: Redshift
 
-          - url: /components/extractors/marketing-sales/facebook-ads/
-            title: Facebook Ads
+              - url: /components/writers/database/snowflake/
+                title: Snowflake
 
-          - url: /components/extractors/marketing-sales/gooddata-reports/
-            title: GoodData Reports
+              - url: /components/writers/database/mssql/
+                title: SQL Server
 
-          - url: /components/extractors/marketing-sales/google-adwords-reports/
-            title: Google AdWords Reports
+          - url: /components/writers/storage/
+            title: Storage
+            items:
+              - url: /components/writers/storage/aws-s3/
+                title: AWS S3
 
-          - url: /components/extractors/marketing-sales/google-analytics/
-            title: Google Analytics
+              - url: /components/writers/storage/dropbox/
+                title: Dropbox
 
-          - url: /components/extractors/marketing-sales/hubspot/
-            title: HubSpot
+              - url: /components/writers/storage/google-drive/
+                title: Google Drive
 
-          - url: /components/extractors/marketing-sales/mailchimp/
-            title: Mailchimp
+              - url: /components/writers/storage/google-sheets/
+                title: Google Sheets
 
-          - url: /components/extractors/marketing-sales/pipedrive/
-            title: Pipedrive
+              - url: /components/writers/storage/storage-api/
+                title: Keboola Connection Storage
 
-          - url: /components/extractors/marketing-sales/sklik/
-            title: Sklik
-
-      - url: /components/extractors/social/
-        title: Social
-        items:
-          - url: /components/extractors/social/facebook/
-            title: Facebook Pages
-
-          - url: /components/extractors/social/instagram/
-            title: Instagram
-
-          - url: /components/extractors/social/twitter/
-            title: Twitter
-
-          - url: /components/extractors/social/youtube/
-            title: YouTube
-
-      - url: /components/extractors/storage/
-        title: Storage
-        items:
-          - url: /components/extractors/storage/aws-s3/
-            title: AWS S3
-
-          - url: /components/extractors/storage/simple-aws-s3/
-            title: Simple AWS S3
-
-          - url: /components/extractors/storage/google-drive/
-            title: Google Drive
-
-          - url: /components/extractors/storage/ftp/
-            title: FTP
-
-          - url: /components/extractors/storage/http/
-            title: HTTP
-
-          - url: /components/extractors/storage/storage-api/
-            title: Keboola Connection Storage
-
-      - url: /components/extractors/other/
-        title: Other
-        items:
-          - url: /components/extractors/other/dark-sky/
-            title: Dark Sky (Weather)
-
-          - url: /components/extractors/other/currency-rates/
-            title: ECB Currency Rates
-
-          - url: /components/extractors/other/generic/
-            title: Generic Extractor
-
-          - url: /components/extractors/other/geocoding-augmentation/
-            title: Geocoding Augmentation
-
-          - url: /components/extractors/other/github/
-            title: GitHub
-
-          - url: /components/extractors/other/papertrail/
-            title: Papertrail
-
-          - url: /components/extractors/other/pingdom/
-            title: Pingdom
-
-          - url: /components/extractors/other/portadi/
-            title: Portadi
-
-          - url: /components/extractors/other/stripe/
-            title: Stripe
-
-          - url: /components/extractors/other/what3words/
-            title: What3words Augmentation
-
-      - url: /components/extractors/ip-addresses
-        title: IP Addresses
-
-  - url: /components/writers/
-    title: Writers
-    items:
-      - url: /components/writers/bi-tools/
-        title: Business Intelligence
-        items:
-          - url: /components/writers/bi-tools/gooddata/
-            title: GoodData
-
-          - url: /components/writers/bi-tools/tableau/
-            title: Tableau
-
-          - url: /components/writers/bi-tools/thoughtspot/
-            title: ThoughtSpot
-
-      - url: /components/writers/database/
-        title: Database
-        items:
-          - url: /components/writers/database/bigquery/
-            title: BigQuery
-
-          - url: /components/writers/database/mysql/
-            title: MySQL
-
-          - url: /components/writers/database/oracle/
-            title: Oracle
-
-          - url: /components/writers/database/postgresql/
-            title: PostgreSQL
-
-          - url: /components/writers/database/redshift/
-            title: Redshift
-
-          - url: /components/writers/database/snowflake/
-            title: Snowflake
-
-          - url: /components/writers/database/mssql/
-            title: SQL Server
-
-      - url: /components/writers/storage/
-        title: Storage
-        items:
-          - url: /components/writers/storage/aws-s3/
-            title: AWS S3
-
-          - url: /components/writers/storage/dropbox/
-            title: Dropbox
-
-          - url: /components/writers/storage/google-drive/
-            title: Google Drive
-
-          - url: /components/writers/storage/google-sheets/
-            title: Google Sheets
-
-          - url: /components/writers/storage/storage-api/
-            title: Keboola Connection Storage
+      - url: /components/applications/
+        title: Applications
 
   - url: /storage/
     title: Storage
@@ -261,50 +267,8 @@ items:
       - url: /storage/configurations/
         title: Configurations
 
-  - url: /manipulation/
-    title: Data Manipulation
-    items:
-      - url: /transformations/
-        title: Transformations
-        items:
-          - url: /transformations/mappings/
-            title: Mappings
-
-          - url: /transformations/sandbox/
-            title: Sandbox
-
-          - url: /transformations/redshift/
-            title: Redshift Transformations
-
-          - url: /transformations/snowflake/
-            title: Snowflake Transformations
-
-          - url: /transformations/python/
-            title: Python Transformations
-
-          - url: /transformations/r/
-            title: R Transformations
-            items:
-              - url: /transformations/r/array-splitter/
-                title: Array Splitting
-
-              - url: /transformations/r/plots/
-                title: Graphs & Charts
-
-              - url: /transformations/r/binary/
-                title: Using binary files
-
-          - url: /transformations/openrefine/
-            title: OpenRefine Transformations
-
-          - url: /transformations/julia/
-            title: Julia Transformations
-
-      - url: /components/applications/
-        title: Applications
-
   - url: /orchestrator/
-    title: Orchestrator
+    title: Orchestrations
     items:
       - url: /orchestrator/tasks/
         title: Tasks
@@ -320,6 +284,42 @@ items:
 
       - url: /orchestrator/design/
         title: Design
+
+  - url: /transformations/
+    title: Transformations
+    items:
+      - url: /transformations/mappings/
+        title: Mappings
+
+      - url: /transformations/sandbox/
+        title: Sandbox
+
+      - url: /transformations/redshift/
+        title: Redshift Transformations
+
+      - url: /transformations/snowflake/
+        title: Snowflake Transformations
+
+      - url: /transformations/python/
+        title: Python Transformations
+
+      - url: /transformations/r/
+        title: R Transformations
+        items:
+          - url: /transformations/r/array-splitter/
+            title: Array Splitting
+
+          - url: /transformations/r/plots/
+            title: Graphs & Charts
+
+          - url: /transformations/r/binary/
+            title: Using binary files
+
+      - url: /transformations/openrefine/
+        title: OpenRefine Transformations
+
+      - url: /transformations/julia/
+        title: Julia Transformations
 
   - url: /management/
     title: Management
