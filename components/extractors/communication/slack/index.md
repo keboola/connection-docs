@@ -1,6 +1,9 @@
 ---
 title: Slack
-permalink: /extractors/communication/slack/
+permalink: /components/extractors/communication/slack/
+redirect_from:
+    - /extractors/communication/slack/
+
 ---
 
 * TOC
@@ -13,18 +16,18 @@ and to bring it to Keboola Connection (KBC).
 Find Slack in the list of extractors and create a new configuration. Name it (you can change the name any time).
 
 {: .image-popup}
-![Slack New Configuration](/extractors/communication/slack/01-new-configuration.png)
+![Slack New Configuration](/components/extractors/communication/slack/01-new-configuration.png)
 
 ## Authorize Slack Account
 Click **Authorize Account** to be redirected to Slack, and authorize the extractor to access a Slack account.
 
 {: .image-popup}
-![Slack Authorization](/extractors/communication/slack/02-authorization.png)
+![Slack Authorization](/components/extractors/communication/slack/02-authorization.png)
 
 Select one of the two authorization methods:
 
 {: .image-popup}
-![Slack Authorization Types](/extractors/communication/slack/03-authorization.png)
+![Slack Authorization Types](/components/extractors/communication/slack/03-authorization.png)
 
  - **Instant** -- Use this if you have access to a Slack account; the authorization will be done immediately.
  - **External** -- If you need to authorize access to the service from someone who does not have an account in KBC,
@@ -35,7 +38,7 @@ To configure what data you want to extract, you can either select one of the con
 for advanced extractions.
 
 {: .image-popup}
-![Slack Configuration Templates](/extractors/communication/slack/04-templates.png)
+![Slack Configuration Templates](/components/extractors/communication/slack/04-templates.png)
 
 Select the template you wish to use:
 
@@ -55,5 +58,5 @@ For more features, switch the configuration to the Power User Mode by clicking t
 JSON configuration uses the [Generic extractor](https://developers.keboola.com/extend/generic-extractor/) format.
 
 {: .image-popup}
-![Slack Switch to JSON](/extractors/communication/slack/05-json.png)
+![Slack Switch to JSON](/components/extractors/communication/slack/05-json.png)
 

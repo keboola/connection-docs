@@ -1,6 +1,9 @@
 ---
 title: GoodData Reports
-permalink: /extractors/marketing-sales/gooddata-reports/
+permalink: /components/extractors/marketing-sales/gooddata-reports/
+redirect_from:
+    - /extractors/marketing-sales/gooddata-reports/
+
 ---
 
 * TOC
@@ -13,7 +16,7 @@ reports from the [GoodData](https://www.gooddata.com/) business intelligence pla
 Find GoodData Reports in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/marketing-sales/gooddata-reports/01-new-configuration.png)
+![Screenshot - Create configuration](/components/extractors/marketing-sales/gooddata-reports/01-new-configuration.png)
 
 
 ## Configuration
@@ -21,13 +24,13 @@ First, type in your GoodData host: secure.gooddata.com, keboola.eu.gooddata.com,
 by opening the report you wish to extract.
 
 {: .image-popup}
-![Screenshot - GoodData Host](/extractors/marketing-sales/gooddata-reports/02-host.png)
+![Screenshot - GoodData Host](/components/extractors/marketing-sales/gooddata-reports/02-host.png)
 
 ### Reports
 To select which reports to download, set one or multiple Uniform Resource Identifiers (URI).
 
 {: .image-popup}
-![Screenshot - GoodData URI](/extractors/marketing-sales/gooddata-reports/03-uri.png)
+![Screenshot - GoodData URI](/components/extractors/marketing-sales/gooddata-reports/03-uri.png)
 
 When you open a report in your browser, the URL in the address field will look similar to:
 
@@ -39,15 +42,15 @@ The part in form `/gdc/md/zggxxxxxxxxxxxxxxxxxxxxxxxxxmox/obj/71` is the report 
 Continue by providing your own GoodData **credentials**.
 
 {: .image-popup}
-![Screenshot - GoodData Credentials](/extractors/marketing-sales/gooddata-reports/04-credentials.png)
+![Screenshot - GoodData Credentials](/components/extractors/marketing-sales/gooddata-reports/04-credentials.png)
 
 You can also choose an id of **GoodData Project** provisoned in one of the existing GoodData Writer configurations and use its credentials. The project id(pid) of the provisioned project can be found in a GoodData writer configuration.
 
 {: .image-popup}
-![Screenshot - GoodData Writer Config with Provisioned Project](/extractors/marketing-sales/gooddata-reports/wrgdconfigwithpid.png)
+![Screenshot - GoodData Writer Config with Provisioned Project](/components/extractors/marketing-sales/gooddata-reports/wrgdconfigwithpid.png)
 
 {: .image-popup}
-![Screenshot - Provisioned GoodData Project Id](/extractors/marketing-sales/gooddata-reports/05-writer-pid.png)
+![Screenshot - Provisioned GoodData Project Id](/components/extractors/marketing-sales/gooddata-reports/05-writer-pid.png)
 
 When finished, remember to **save** the configuration before you run the extraction. The extractor will download the report contents as a
 CSV file and store it as a table in KBC Storage.

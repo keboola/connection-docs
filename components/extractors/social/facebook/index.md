@@ -1,6 +1,9 @@
 ---
 title: Facebook Pages
-permalink: /extractors/social/facebook/
+permalink: /components/extractors/social/facebook/
+redirect_from:
+    - /extractors/social/facebook/
+
 ---
 
 * TOC
@@ -14,7 +17,7 @@ your Facebook Pages [feed](https://developers.facebook.com/docs/graph-api/refere
 Find Facebook Pages in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/social/facebook/createconfig.png)
+![Screenshot - Create configuration](/components/extractors/social/facebook/createconfig.png)
 
 Authorize the Facebook account with access to the Facebook Page you want to extract.
 You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
@@ -24,19 +27,19 @@ You can always revoke the authorization by removing the *Keboola Connection Extr
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}
-![Screenshot - Authorize configuration](/extractors/social/facebook/authorizefb.png)
+![Screenshot - Authorize configuration](/components/extractors/social/facebook/authorizefb.png)
 
 From the list of fetched pages associated with the authorized account, select the Facebook pages you want to extract.
 
 {: .image-popup}
-![Screenshot - Select Facebook Pages](/extractors/social/facebook/selectpages.png)
+![Screenshot - Select Facebook Pages](/components/extractors/social/facebook/selectpages.png)
 
 ## Create New Query
 Create a new query and specify what data to extract. If you choose a preconfigured template,
 all necessary fields will fill up automatically.
 
 {: .image-popup}
-![Screenshot - New Query](/extractors/social/facebook/newquery.png)
+![Screenshot - New Query](/components/extractors/social/facebook/newquery.png)
 
 The query describes the extractor request to be sent to the Facebook Graph API. Knowing the API will make
 creating a query easy because all options except `name` represent the [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
@@ -126,7 +129,7 @@ You can set the version of the Facebook Graph API that will be applied for all r
 by the Facebook Pages extractor.
 
 {: .image-popup}
-![Screenshot - Api Version](/extractors/social/facebook/apiversion.png)
+![Screenshot - Api Version](/components/extractors/social/facebook/apiversion.png)
 
 ## Migration from Old Extractor
 The configuration and resulting data tables produced by both the new and old extractor are very different; 
@@ -149,9 +152,9 @@ be one configuration of the new extractor.
 - Copy the token from the old configuration
 
 {: .image-popup}
-![Screenshot - New Query](/extractors/social/facebook/copytoken.png)
+![Screenshot - New Query](/components/extractors/social/facebook/copytoken.png)
 
 - Insert the copied token
 
 {: .image-popup}
-![Screenshot - New Query](/extractors/social/facebook/inserttoken.png)
+![Screenshot - New Query](/components/extractors/social/facebook/inserttoken.png)

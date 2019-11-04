@@ -1,6 +1,9 @@
 ---
 title: Intercom
-permalink: /extractors/communication/intercom/
+permalink: /components/extractors/communication/intercom/
+redirect_from:
+    - /extractors/communication/intercom/
+
 ---
 
 * TOC

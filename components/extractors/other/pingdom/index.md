@@ -1,6 +1,9 @@
 ---
 title: Pingdom
-permalink: /extractors/other/pingdom/
+permalink: /components/extractors/other/pingdom/
+redirect_from:
+    - /extractors/other/pingdom/
+
 ---
 
 * TOC
@@ -20,7 +23,7 @@ Log in to your account on the [Pingdom](https://www.pingdom.com/) site.
 Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys), and use the **Register Application** button.
 
 {: .image-popup}
-![Pingdom Api key list](/extractors/other/pingdom/03-pingdom-api.png)
+![Pingdom Api key list](/components/extractors/other/pingdom/03-pingdom-api.png)
 
 Fill the required fields of the registration form.
 
@@ -30,18 +33,18 @@ Fill the required fields of the registration form.
 - **Platform** -- Select the `Server` option
 
 {: .image-popup}
-![Pingdom API registration](/extractors/other/pingdom/04-pingdom-api-form.png)
+![Pingdom API registration](/components/extractors/other/pingdom/04-pingdom-api-form.png)
 
 When registration is finished, take note of the Application Key and save it. You will need it when creating your extractor configuration in KBC.
 
 {: .image-popup}
-![Pingdom API key](/extractors/other/pingdom/05-pingdom-api-key.png)
+![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
 
 ### Set Up Extractor
 In the Extractors section, find Pingdom and create a new configuration.
 
 {: .image-popup}
-![Pingdom New Configuration](/extractors/other/pingdom/01-new-configuration.png)
+![Pingdom New Configuration](/components/extractors/other/pingdom/01-new-configuration.png)
 
 Provide credentials of your Pingdom account and Application Key.
 
@@ -50,7 +53,7 @@ Provide credentials of your Pingdom account and Application Key.
 - **Application API key**
 
 {: .image-popup}
-![Pingdom Credentials](/extractors/other/pingdom/02-credentials.png)
+![Pingdom Credentials](/components/extractors/other/pingdom/02-credentials.png)
 
 ### Select Data
 
@@ -62,7 +65,7 @@ Choose the **period** you want to fetch data for.
 And finally, select one of the data mapping **templates** and click on **Save configuration**.
 
 {: .image-popup}
-![Pingdom Data Mapping](/extractors/other/pingdom/06-template.png)
+![Pingdom Data Mapping](/components/extractors/other/pingdom/06-template.png)
 
 
 ## Extraction Output Tables

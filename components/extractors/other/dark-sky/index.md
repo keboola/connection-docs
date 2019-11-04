@@ -1,6 +1,9 @@
 ---
 title: Dark Sky
-permalink: /extractors/other/dark-sky/
+permalink: /components/extractors/other/dark-sky/
+redirect_from:
+    - /extractors/other/dark-sky/
+
 ---
 
 * TOC
@@ -19,7 +22,7 @@ Before you start, please create an account in the [Dark Sky API](https://darksky
 Dark Sky offers 1,000 API calls a day for free.
 
 {: .image-popup}
-![Screenshot - Dark Sky API key](/extractors/other/dark-sky/dark-sky-token.png)
+![Screenshot - Dark Sky API key](/components/extractors/other/dark-sky/dark-sky-token.png)
 
 
 ### Source Data Input Mapping
@@ -35,7 +38,7 @@ If you have a table with more columns, or the order of your columns is different
 select the required columns in the desired order.
 
 {: .image-popup}
-![Screenshot - Advanced Input Mapping](/extractors/other/dark-sky/input-mapping.png)
+![Screenshot - Advanced Input Mapping](/components/extractors/other/dark-sky/input-mapping.png)
 
 #### Sample input table
 
@@ -44,7 +47,7 @@ select the required columns in the desired order.
 |50.0939141|14.45694|
 |49.2577142|-123.194115|
 
-You can test the extraction on this [sample file](/extractors/other/dark-sky/coords.csv).
+You can test the extraction on this [sample file](/components/extractors/other/dark-sky/coords.csv).
 
 ## Extraction Output
 The extractor produces one table called `weather` with the following columns:

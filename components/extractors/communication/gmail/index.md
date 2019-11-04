@@ -1,6 +1,9 @@
 ---
 title: Gmail Messages
-permalink: /extractors/communication/gmail/
+permalink: /components/extractors/communication/gmail/
+redirect_from:
+    - /extractors/communication/gmail/
+
 ---
 
 * TOC
@@ -13,20 +16,20 @@ The Gmail Messages extractor allows you to fetch data from your Gmail account.
 Find Gmail Messages in the Extractors section, create a new configuration and name it.
 
 {: .image-popup}
-![Gmail - add configuration](/extractors/communication/gmail/01-add-configuration.png)
+![Gmail - add configuration](/components/extractors/communication/gmail/01-add-configuration.png)
 
 Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google account. 
 **Your inbox is accessed as read only.**
 
 {: .image-popup}
-![Gmail - authorize account](/extractors/communication/gmail/02-authorize-account.png)
+![Gmail - authorize account](/components/extractors/communication/gmail/02-authorize-account.png)
 
 ## Configure Queries
 
 Fill in the form to fit your needs.
 
 {: .image-popup}
-![Gmail - configure queries](/extractors/communication/gmail/03-configure-queries.png)
+![Gmail - configure queries](/components/extractors/communication/gmail/03-configure-queries.png)
 
 - **Query** -- Query to filter your messages. To speed up the extraction, be as specific as possible. 
 For more detailed information about querying, follow Google's [Advanced search](https://support.google.com/mail/answer/7190?hl=en) help site.

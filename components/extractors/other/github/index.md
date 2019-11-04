@@ -1,6 +1,9 @@
 ---
 title: GitHub
-permalink: /extractors/other/github/
+permalink: /components/extractors/other/github/
+redirect_from:
+    - /extractors/other/github/
+
 ---
 
 * TOC

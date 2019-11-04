@@ -1,6 +1,9 @@
 ---
 title: Sklik
-permalink: /extractors/marketing-sales/sklik/
+permalink: /components/extractors/marketing-sales/sklik/
+redirect_from:
+    - /extractors/marketing-sales/sklik/
+
 ---
 
 * TOC
@@ -20,12 +23,12 @@ in the top right corner of the screen. The API key is on the bottom of the Accou
 In the Extractors section, find Sklik and create a new configuration. Name it.
 
 {: .image-popup}
-![Sklik New Configuration](/extractors/marketing-sales/sklik/01-new-configuration.png)
+![Sklik New Configuration](/components/extractors/marketing-sales/sklik/01-new-configuration.png)
 
 Then provide your API key:
 
 {: .image-popup}
-![Sklik API Key](/extractors/marketing-sales/sklik/02-api-key.png)
+![Sklik API Key](/components/extractors/marketing-sales/sklik/02-api-key.png)
 
 The extractor gets a list of all accessible accounts unless you restrict them explicitly.
 
@@ -33,7 +36,7 @@ The extractor gets a list of all accessible accounts unless you restrict them ex
 Now configure your report/-s:
 
 {: .image-popup}
-![Sklik Report](/extractors/marketing-sales/sklik/03-report.png)
+![Sklik Report](/components/extractors/marketing-sales/sklik/03-report.png)
 
 - **name** -- your name for the report; it will be used for the name of the table in Storage. *(Note that `accounts` is a reserved name thus it cannot be used as a report name.)*
 - **resource** -- name of the resource on which you want the report to be created. Supported resources are all from [https://api.sklik.cz/drak](https://api.sklik.cz/drak) which support the `createReport` and `readReport` methods (see [https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak](https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak) for more information):

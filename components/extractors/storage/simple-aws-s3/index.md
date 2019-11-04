@@ -1,8 +1,8 @@
 ---
 title: Simple AWS S3
-permalink: /extractors/storage/simple-aws-s3/
+permalink: /components/extractors/storage/simple-aws-s3/
 redirect_from:
-    - /extractors/other/simple-aws-s3/
+    - /extractors/storage/simple-aws-s3/
 ---
 
 * TOC
@@ -13,20 +13,20 @@ After creating a new configuration, select the files you want to extract from S3
 you save them to KBC Storage. You also need to set up the proper permissions in [AWS](#aws-credentials).
 
 For a more complex AWS S3 extractor allowing you to use multiple S3 buckets and multiple tables in Storage, please
-see the [AWS S3 extractor](/extractors/storage/aws-s3).
+see the [AWS S3 extractor](/components/extractors/storage/aws-s3).
 
 ## Create New Configuration
 Find the Simple AWS S3 extractor in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/storage/simple-aws-s3/ui1.png)
+![Screenshot - Create configuration](/components/extractors/storage/simple-aws-s3/ui1.png)
 
 ## Specify Source and Destination
 
 In the **General** tab, specify the S3 files you want to import and the resulting destination tables in Storage.
 
 {: .image-popup}
-![Screenshot - General configuration](/extractors/storage/simple-aws-s3/ui2.png)
+![Screenshot - General configuration](/components/extractors/storage/simple-aws-s3/ui2.png)
 
 ### Specify Source Files
 
@@ -72,7 +72,7 @@ To change the primary key of an existing table, go to the table detail in Storag
 ## AWS Credentials
 
 {: .image-popup}
-![Screenshot - AWS Credentials configuration](/extractors/storage/simple-aws-s3/ui3.png)
+![Screenshot - AWS Credentials configuration](/components/extractors/storage/simple-aws-s3/ui3.png)
 
 
 Use the AWS Access Key Id and Secret Access Key with read permissions to the desired S3 bucket and file(s).
@@ -116,7 +116,7 @@ Give the write permissions to the application storing files in CSV and the read-
 ## Advanced Options
 
 {: .image-popup}
-![Screenshot - Advanced configuration](/extractors/storage/simple-aws-s3/ui4.png)
+![Screenshot - Advanced configuration](/components/extractors/storage/simple-aws-s3/ui4.png)
 
 In this section, you can modify the delimiter and enclosure of the CSV file.
 The default values are based on [RFC 4180](https://tools.ietf.org/html/rfc4180).

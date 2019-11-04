@@ -1,6 +1,9 @@
 ---
 title: YouTube
-permalink: /extractors/social/youtube/
+permalink: /components/extractors/social/youtube/
+redirect_from:
+    - /extractors/social/youtube/
+
 ---
 
 * TOC
@@ -9,14 +12,14 @@ permalink: /extractors/social/youtube/
 This extractor uses the [YouTube Data API](https://developers.google.com/youtube/v3/docs/) to extract data
 about your YouTube channels or your YouTube activity.
 
-For analytics and reporting, use the [Google Analytics extractor](/extractors/marketing-sales/google-analytics/) or the 
+For analytics and reporting, use the [Google Analytics extractor](/components/extractors/marketing-sales/google-analytics/) or the 
 [YouTube Reporting extractor](https://github.com/blueskydigital/keboola-ex-youtube-reporting/blob/master/README.md).
 
 ## Create New Configuration
 Find **YouTube** in the list of extractors, and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/social/youtube/ui_new_config.png)
+![Screenshot - Create configuration](/components/extractors/social/youtube/ui_new_config.png)
 
 **Authorize the account** to be redirected to Google, and authorize the extractor to access your YouTube data.
 
@@ -48,7 +51,7 @@ Choose one of the predefined use cases, for instance, *list (my channel)*, and s
 The endpoint is under `# HTTP URL:`, where you omit the base url `https://www.googleapis.com/youtube/v3/`.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/social/youtube/api_sample.png)
+![Screenshot - Create configuration](/components/extractors/social/youtube/api_sample.png)
 
 You can use other Generic Extractor's functionality too, including nesting. This example downloads your channel, iterates through its playlists and gets all their videos:
 

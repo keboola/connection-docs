@@ -61,7 +61,7 @@ arbitrary user-defined metadata, there is also some information stored automatic
 each bucket and table has information about which configuration of which component created them.
 
 ### Data Types
-Some extractors store metadata about the table columns. For example, when a [DB extractor](/extractors/database/sqldb/)
+Some extractors store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
 loads a table from the source database, it also records the physical column types from that table.
 These are stored with each table column and can be used later on when working with the table. For
 example, the transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside

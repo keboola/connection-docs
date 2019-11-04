@@ -227,7 +227,7 @@ There are a number of ways how to get the data from Eurostat -- e.g., you can do
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
 [REST API](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/about-this-service)
 for downloading the data. This could be processed using the
-[Generic Extractor](/extractors/other/generic/). However, the data is provided in
+[Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
 to import them to KBC, it would be necessary to do additional processing to obtain plain tables.

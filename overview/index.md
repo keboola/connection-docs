@@ -30,7 +30,7 @@ They can be pretty much anything from Google Analytics, Facebook, SalesForce to 
 legacy systems or even appliances and IoT devices. Data sources are not part of Keboola Connection.
 
 ### Extractors
-[Extractors](/extractors/) are Keboola Connection components used for gathering data from sources.
+[Extractors](/components/extractors/) are Keboola Connection components used for gathering data from sources.
 Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
 services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
 

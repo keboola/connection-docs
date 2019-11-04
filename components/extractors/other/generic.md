@@ -1,6 +1,9 @@
 ---
 title: Generic Extractor
-permalink: /extractors/other/generic/
+permalink: /components/extractors/other/generic/
+redirect_from:
+    - /extractors/other/generic/
+
 ---
 
 Generic Extractor is quite a special component. As its name suggests, it can **extract data from many APIs**:

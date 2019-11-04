@@ -1,6 +1,6 @@
 ---
 title: Extractors
-permalink: /extractors/
+permalink: /components/extractors/
 ---
 
 * TOC
@@ -15,10 +15,10 @@ They can also connect directly to an arbitrary database.
 
 Extractors can be grouped by their primary purpose:
 
-- Database extractors: [SQL Databases](/extractors/database/sqldb/) and [NoSQL MongoDB](/extractors/database/mongodb/) and extractors from generic [Storage services](/extractors/storage/)
-- [Communication](/extractors/communication/),
-[Social Networks](/extractors/social/) and [Marketing and Sales](/extractors/marketing-sales/) extractors
-- [Other](/extractors/other/) extractors such as Geocoding-Augmentation or Weather Forecast
+- Database extractors: [SQL Databases](/components/extractors/database/sqldb/) and [NoSQL MongoDB](/components/extractors/database/mongodb/) and extractors from generic [Storage services](/components/extractors/storage/)
+- [Communication](/components/extractors/communication/),
+[Social Networks](/components/extractors/social/) and [Marketing and Sales](/components/extractors/marketing-sales/) extractors
+- [Other](/components/extractors/other/) extractors such as Geocoding-Augmentation or Weather Forecast
 
 For a definitive list of usable extractors, see your project **Extractors** section or the
 [public list of components](https://components.keboola.com/components).

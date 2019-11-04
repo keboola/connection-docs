@@ -1,6 +1,9 @@
 ---
 title: Google Drive
-permalink: /extractors/storage/google-drive/
+permalink: /components/extractors/storage/google-drive/
+redirect_from:
+    - /extractors/storage/google-drive/
+
 ---
 
 * TOC
@@ -13,7 +16,7 @@ current project.
 Find the Google Drive extractor in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/storage/google-drive/create-configuration.png)
+![Screenshot - Create configuration](/components/extractors/storage/google-drive/create-configuration.png)
 
 To continue, click **Authorize Account**.
 
@@ -24,46 +27,46 @@ Select one of the two authorization methods:
 - **External** – If you need to authorize access to the service from someone who does not have an account in KBC, you can generate an external link, which will guide them through this process.
 
 {: .image-popup}
-![Screenshot - Create authorization](/extractors/storage/google-drive/authorization-create.png)
+![Screenshot - Create authorization](/components/extractors/storage/google-drive/authorization-create.png)
 
 Then login with your Google account:
 
 {: .image-popup}
-![Screenshot - Authorization login](/extractors/storage/google-drive/authorization-continue.png)
+![Screenshot - Authorization login](/components/extractors/storage/google-drive/authorization-continue.png)
 
 And allow the extractor to access your spreadsheets:
 
 {: .image-popup}
-![Screenshot - Allow Scopes](/extractors/storage/google-drive/authorization-scopes.png)
+![Screenshot - Allow Scopes](/components/extractors/storage/google-drive/authorization-scopes.png)
 
 ## Configuration
 Click **New Sheet** to configure extraction:
 
 {: .image-popup}
-![Screenshot - Empty configuration](/extractors/storage/google-drive/configuration-empty.png)
+![Screenshot - Empty configuration](/components/extractors/storage/google-drive/configuration-empty.png)
 
 Click **Select spreadsheet...** to list accessible spreadsheets in your account:
 
 {: .image-popup}
-![Screenshot - List sheets](/extractors/storage/google-drive/configuration-list-1.png)
+![Screenshot - List sheets](/components/extractors/storage/google-drive/configuration-list-1.png)
 
 You may be asked once again to log-in. In that case, use the same account that you authorized in the first step of the setup.
 
 Choose the document you want to import:
 
 {: .image-popup}
-![Screenshot - Select document](/extractors/storage/google-drive/configuration-list-2.png)
+![Screenshot - Select document](/components/extractors/storage/google-drive/configuration-list-2.png)
 
 The sheets of the selected document are shown; you can select which sheets you want to import:
 
 {: .image-popup}
-![Screenshot - Select sheet](/extractors/storage/google-drive/configuration-list-3.png)
+![Screenshot - Select sheet](/components/extractors/storage/google-drive/configuration-list-3.png)
 
 ## Modify Configuration
 When a sheet is added to the extractor, it is displayed in the list of extracted sheets:
 
 {: .image-popup}
-![Screenshot - Sheet list](/extractors/storage/google-drive/table-list.png)
+![Screenshot - Sheet list](/components/extractors/storage/google-drive/table-list.png)
 
 The list shows the name (and the link) of the imported document and sheet, and also the name of the destination
 table in [Storage](/storage/). You can modify the destination table name by editing the sheet extraction.
@@ -76,7 +79,7 @@ using the run button within the table row.
 When editing the sheet extraction configuration, you may **Enable Output Processor** for advanced options:
 
 {: .image-popup}
-![Screenshot - Advanced options](/extractors/storage/google-drive/advanced-options-1.png)
+![Screenshot - Advanced options](/components/extractors/storage/google-drive/advanced-options-1.png)
 
 The options will be demonstrated on the following table:
 
@@ -122,7 +125,7 @@ the source sheet is ignored. Using this option allows you to import partial tabl
 (where the automatic sanitization fails), tables with empty or duplicate column names, etc.
 
 {: .image-popup}
-![Screenshot - Advanced options - Headers](/extractors/storage/google-drive/advanced-options-2.png)
+![Screenshot - Advanced options - Headers](/components/extractors/storage/google-drive/advanced-options-2.png)
 
 With the above setting and the sample sheet, the following destination table will be created:
 
@@ -187,7 +190,7 @@ and [**Number of header rows**](#number-of-header-rows) is greater than `1`, the
 The name of this column is specified in [**Transposed header column name**](#transposed-header-column-name).
 
 {: .image-popup}
-![Screenshot - Advanced options Header row column](/extractors/storage/google-drive/advanced-options-3.png)
+![Screenshot - Advanced options Header row column](/components/extractors/storage/google-drive/advanced-options-3.png)
 
 With [**Transpose from column**](#transpose-from-column) set to `1`, [**Number of header rows**](#number-of-header-rows) set to `2` and
 [**Transposed header column name**](#transposed-header-column-name) set to `second`, a table which doesn't make much sense will be produced:

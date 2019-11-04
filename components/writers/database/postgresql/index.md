@@ -34,7 +34,7 @@ ALTER SCHEMA writer_sample OWNER TO writer_sample;
 ALTER USER writer_sample SET search_path TO writer_sample;
 {% endhighlight %}
 
-It is also possible to secure the connection using an [SSH tunnel](/extractors/database/#connecting-to-database).
+It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 ## Table Configuration
 The next step is to configure the tables you want to write. Click **Add New Table**:

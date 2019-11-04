@@ -1,6 +1,9 @@
 ---
 title: FTP extractor
-permalink: /extractors/storage/ftp/
+permalink: /components/extractors/storage/ftp/
+redirect_from:
+    - /extractors/storage/ftp/
+
 ---
 
 * TOC
@@ -13,13 +16,13 @@ Find the FTP extractor in the list of extractors and create a new configuration.
 Name it.
 
 {: .image-popup}
-![Screenshot - FTP extractor create](/extractors/storage/ftp/ftp-ex-1.png)
+![Screenshot - FTP extractor create](/components/extractors/storage/ftp/ftp-ex-1.png)
 
 ## Set Credentials
 To access the files on FTP, you need to set up access credentials.
 
 {: .image-popup}
-![Screenshot - FTP extractor server configuration](/extractors/storage/ftp/ftp-ex-2.png)
+![Screenshot - FTP extractor server configuration](/components/extractors/storage/ftp/ftp-ex-2.png)
 
 You can use a private key for the **SFTP** connection type. If you fill in the private key,
 the extractor will use it for login instead of the password. You can also change
@@ -30,7 +33,7 @@ To create a new table, click the **New Table** button and assign a name. It will
 be used to create the destination table name in Storage and can be modified.
 
 {: .image-popup}
-![Screenshot - FTP extractor create table](/extractors/storage/ftp/ftp-ex-3.png)
+![Screenshot - FTP extractor create table](/components/extractors/storage/ftp/ftp-ex-3.png)
 
 ## List Tables
 The configuration can extract as many tables as you wish. The list is fully
@@ -39,7 +42,7 @@ explicitly run extraction of only one table. The extraction order of the tables
 can be changed.
 
 {: .image-popup}
-![Screenshot - FTP extractor list tables](/extractors/storage/ftp/ftp-ex-4.png)
+![Screenshot - FTP extractor list tables](/components/extractors/storage/ftp/ftp-ex-4.png)
 
 ## Modify Table
 Each table has a different setting, but all tables share the same credentials to the server.
@@ -51,7 +54,7 @@ If you want to list inside subdirectories (e.g., `/dir/**/*.csv`), please make s
 supports a recursive list of directories.
 
 {: .image-popup}
-![Screenshot - FTP extractor download settings](/extractors/storage/ftp/ftp-ex-5.png)
+![Screenshot - FTP extractor download settings](/components/extractors/storage/ftp/ftp-ex-5.png)
 
 - **New Files Only**: The extractor will keep track of downloaded files and will continue with the unprocessed files
  on the next run. To reset the state which keeps track of the progress and enables to continue with new files, 
@@ -63,7 +66,7 @@ supports a recursive list of directories.
 Now determine how to save the data in Storage.
 
 {: .image-popup}
-![Screenshot - FTP extractor save settings](/extractors/storage/ftp/ftp-ex-6.png)
+![Screenshot - FTP extractor save settings](/components/extractors/storage/ftp/ftp-ex-6.png)
 
 - The initial value in **Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved cannot be changed.
@@ -75,7 +78,7 @@ incremental load depends on other settings (mainly **Primary Key**).
 There are three options for determining column names:
 
 {: .image-popup}
-![Screenshot - FTP extractor header & primary key](/extractors/storage/ftp/ftp-ex-7.png)
+![Screenshot - FTP extractor header & primary key](/components/extractors/storage/ftp/ftp-ex-7.png)
 
 - **Set header manually** -- enables the Set Header input to manually specify all columns in the table.
 - **Read from the file header** -- assumes that each file has a header in the first row. A random file will be chosen to extract the header, and the first row in all files will be removed.
@@ -89,13 +92,13 @@ The extractor can optionally add audit columns to the table. `ftp_filename` adds
 adds the row number in the source file.
 
 {: .image-popup}
-![Screenshot - FTP extractor audit](/extractors/storage/ftp/ftp-ex-8.png)
+![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-ex-8.png)
 
 ## Advanced Mode
 For more features, switch the configuration of each table to the **Power User Mode** by clicking the *Open JSON editor* link.
 
 {: .image-popup}
-![Screenshot - FTP extractor audit](/extractors/storage/ftp/ftp-ex-9.png)
+![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-ex-9.png)
 
 Through editing the full JSON configuration, you can set up 
 

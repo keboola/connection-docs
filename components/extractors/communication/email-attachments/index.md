@@ -1,8 +1,8 @@
 ---
 title: Email Attachments
-permalink: /extractors/communication/email-attachments/
+permalink: /components/extractors/communication/email-attachments/
 redirect_from:
-    - /extractors/communication/pigeon/
+    - /extractors/communication/email-attachments/
 ---
 
 * TOC
@@ -22,21 +22,21 @@ name for it. Each configuration corresponds to a single target email address. If
 to import emails into different tables, it is advisable to create more configurations.
 
 {: .image-popup}
-![Screenshot - Create Name Confgiruation](/extractors/communication/email-attachments/01-choose-name-and-desc.png)
+![Screenshot - Create Name Confgiruation](/components/extractors/communication/email-attachments/01-choose-name-and-desc.png)
 
 
 ## User Email Import
 An email address for sending attachments will be generated when the configuration is created. Use it to send .csv files.
 
 {: .image-popup}
-![Screenshot - Create New Email Import](/extractors/communication/email-attachments/02-create-email-import.png)
+![Screenshot - Create New Email Import](/components/extractors/communication/email-attachments/02-create-email-import.png)
 
 If needed, specify the primary key and CSV options under **Import Settings**.
 
 
 ## Test Email Import
 Send an email with a data attachment to the generated email address.
-Use the following [sample table](/extractors/communication/email-attachments/sample.csv):
+Use the following [sample table](/components/extractors/communication/email-attachments/sample.csv):
 
 | date | new | lost | total |
 | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ If the extraction is successful, you will be able to check the processed data in
 There may be a delay between the time the email is sent, received, and picked up by the extractor.
 
 {: .image-popup}
-![Screenshot - Job Detail](/extractors/communication/email-attachments/03-check-processed-data.png)
+![Screenshot - Job Detail](/components/extractors/communication/email-attachments/03-check-processed-data.png)
 
 *Note: When multiple valid emails are received between the extractor runs, they are imported into separate tables 
 (`data1` -- `dataN`). If this is not desired, time the sending of the emails and configure the extractor orchestration 

@@ -35,146 +35,146 @@ items:
       - url: /tutorial/ad-hoc/
         title: Part 5 - Ad-hoc data analysis
 
-  - url: /extractors/
+  - url: /components/extractors/
     title: Extractors
     items:
-      - url: /extractors/database/
+      - url: /components/extractors/database/
         title: Databases
         items:
-          - url: /extractors/database/sqldb/
+          - url: /components/extractors/database/sqldb/
             title: SQL Databases
 
-          - url: /extractors/database/mongodb/
+          - url: /components/extractors/database/mongodb/
             title: MongoDB
             items:
-              - url: /extractors/database/mongodb/mapping/
+              - url: /components/extractors/database/mongodb/mapping/
                 title: Mapping Examples
 
-          - url: /extractors/database/bigquery/
+          - url: /components/extractors/database/bigquery/
             title: Google BigQuery
 
-      - url: /extractors/communication/
+      - url: /components/extractors/communication/
         title: Communication
         items:
-          - url: /extractors/communication/email-attachments/
+          - url: /components/extractors/communication/email-attachments/
             title: Email Attachments
 
-          - url: /extractors/communication/gmail/
+          - url: /components/extractors/communication/gmail/
             title: Gmail Messages
 
-          - url: /extractors/communication/google-calendar/
+          - url: /components/extractors/communication/google-calendar/
             title: Google Calendar
 
-          - url: /extractors/communication/intercom/
+          - url: /components/extractors/communication/intercom/
             title: Intercom
 
-          - url: /extractors/communication/slack/
+          - url: /components/extractors/communication/slack/
             title: Slack
 
-          - url: /extractors/communication/zendesk/
+          - url: /components/extractors/communication/zendesk/
             title: Zendesk
 
-      - url: /extractors/marketing-sales/
+      - url: /components/extractors/marketing-sales/
         title: Marketing/Sales
         items:
 
-          - url: /extractors/marketing-sales/babelforce/
+          - url: /components/extractors/marketing-sales/babelforce/
             title: Babelforce
 
-          - url: /extractors/marketing-sales/facebook-ads/
+          - url: /components/extractors/marketing-sales/facebook-ads/
             title: Facebook Ads
 
-          - url: /extractors/marketing-sales/gooddata-reports/
+          - url: /components/extractors/marketing-sales/gooddata-reports/
             title: GoodData Reports
 
-          - url: /extractors/marketing-sales/google-adwords-reports/
+          - url: /components/extractors/marketing-sales/google-adwords-reports/
             title: Google AdWords Reports
 
-          - url: /extractors/marketing-sales/google-analytics/
+          - url: /components/extractors/marketing-sales/google-analytics/
             title: Google Analytics
 
-          - url: /extractors/marketing-sales/hubspot/
+          - url: /components/extractors/marketing-sales/hubspot/
             title: HubSpot
 
-          - url: /extractors/marketing-sales/mailchimp/
+          - url: /components/extractors/marketing-sales/mailchimp/
             title: Mailchimp
 
-          - url: /extractors/marketing-sales/pipedrive/
+          - url: /components/extractors/marketing-sales/pipedrive/
             title: Pipedrive
 
-          - url: /extractors/marketing-sales/sklik/
+          - url: /components/extractors/marketing-sales/sklik/
             title: Sklik
 
-      - url: /extractors/social/
+      - url: /components/extractors/social/
         title: Social
         items:
-          - url: /extractors/social/facebook/
+          - url: /components/extractors/social/facebook/
             title: Facebook Pages
 
-          - url: /extractors/social/instagram/
+          - url: /components/extractors/social/instagram/
             title: Instagram
 
-          - url: /extractors/social/twitter/
+          - url: /components/extractors/social/twitter/
             title: Twitter
 
-          - url: /extractors/social/youtube/
+          - url: /components/extractors/social/youtube/
             title: YouTube
 
-      - url: /extractors/storage/
+      - url: /components/extractors/storage/
         title: Storage
         items:
-          - url: /extractors/storage/aws-s3/
+          - url: /components/extractors/storage/aws-s3/
             title: AWS S3
 
-          - url: /extractors/storage/simple-aws-s3/
+          - url: /components/extractors/storage/simple-aws-s3/
             title: Simple AWS S3
 
-          - url: /extractors/storage/google-drive/
+          - url: /components/extractors/storage/google-drive/
             title: Google Drive
 
-          - url: /extractors/storage/ftp/
+          - url: /components/extractors/storage/ftp/
             title: FTP
 
-          - url: /extractors/storage/http/
+          - url: /components/extractors/storage/http/
             title: HTTP
 
-          - url: /extractors/storage/storage-api/
+          - url: /components/extractors/storage/storage-api/
             title: Keboola Connection Storage
 
-      - url: /extractors/other/
+      - url: /components/extractors/other/
         title: Other
         items:
-          - url: /extractors/other/dark-sky/
+          - url: /components/extractors/other/dark-sky/
             title: Dark Sky (Weather)
 
-          - url: /extractors/other/currency-rates/
+          - url: /components/extractors/other/currency-rates/
             title: ECB Currency Rates
 
-          - url: /extractors/other/generic/
+          - url: /components/extractors/other/generic/
             title: Generic Extractor
 
-          - url: /extractors/other/geocoding-augmentation/
+          - url: /components/extractors/other/geocoding-augmentation/
             title: Geocoding Augmentation
 
-          - url: /extractors/other/github/
+          - url: /components/extractors/other/github/
             title: GitHub
 
-          - url: /extractors/other/papertrail/
+          - url: /components/extractors/other/papertrail/
             title: Papertrail
 
-          - url: /extractors/other/pingdom/
+          - url: /components/extractors/other/pingdom/
             title: Pingdom
 
-          - url: /extractors/other/portadi/
+          - url: /components/extractors/other/portadi/
             title: Portadi
 
-          - url: /extractors/other/stripe/
+          - url: /components/extractors/other/stripe/
             title: Stripe
 
-          - url: /extractors/other/what3words/
+          - url: /components/extractors/other/what3words/
             title: What3words Augmentation
 
-      - url: /extractors/ip-addresses
+      - url: /components/extractors/ip-addresses
         title: IP Addresses
 
   - url: /writers/

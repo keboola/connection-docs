@@ -1,6 +1,9 @@
 ---
 title: Google Analytics
-permalink: /extractors/marketing-sales/google-analytics/
+permalink: /components/extractors/marketing-sales/google-analytics/
+redirect_from:
+    - /extractors/marketing-sales/google-analytics/
+
 ---
 
 * TOC
@@ -26,14 +29,14 @@ and provides the following key features:
 Find Google Analytics in the list of extractors and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/extractors/marketing-sales/google-analytics/ui_new_config.png)
+![Screenshot - Create configuration](/components/extractors/marketing-sales/google-analytics/ui_new_config.png)
 
 **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google Analytics data.
 
 Select the desired Google Analytics account and profiles (views) from which you would like to extract data.
 
 {: .image-popup}
-![Screenshot - Select profiles](/extractors/marketing-sales/google-analytics/ui_profiles.png)
+![Screenshot - Select profiles](/components/extractors/marketing-sales/google-analytics/ui_profiles.png)
 
 ## Create New Query
 Each query consists of metrics, dimensions and a date range. Optionally, it can be filtered by a filter expression or segment.
@@ -56,7 +59,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
  8. To store the results to Storage, click the "play" icon on the query list page.
 
 {: .image-popup}
-![Screenshot - Create New Query](/extractors/marketing-sales/google-analytics/ui_new_query.png)
+![Screenshot - Create New Query](/components/extractors/marketing-sales/google-analytics/ui_new_query.png)
 
 ## Date Ranges
 A date range specifies a time window from which the data will be extracted.
@@ -73,7 +76,7 @@ To work around this problem and get more precise results, choose either the Dail
 anti-sampling algorithm. Both divide the wanted date range into smaller chunks.
 
 {: .image-popup}
-![Screenshot - Anti Sampling](/extractors/marketing-sales/google-analytics/ui_anti_sampling.png)
+![Screenshot - Anti Sampling](/components/extractors/marketing-sales/google-analytics/ui_anti_sampling.png)
 
 **DailyWalk**, as the name suggests, divides the date range by days. It means that the extractor needs to 
 make as many requests as there are days in the date range. Even though this algorithm might be more 
@@ -107,7 +110,7 @@ Insert the dimension or metric ID in the format of `ga:metricXX` or `ga:dimensio
 You can find the IDs on the Google Analytics page:
 
 {: .image-popup}
-![Screenshot - Custom metric ID](/extractors/marketing-sales/google-analytics/ga_custom_metrics.png)
+![Screenshot - Custom metric ID](/components/extractors/marketing-sales/google-analytics/ga_custom_metrics.png)
 
 ## Custom OAuth Credentials
 To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
@@ -116,17 +119,17 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
 2. Select an existing project or create a new one.
  
     {: .image-popup}
-    ![Screenshot - Google API Console - Project](/extractors/marketing-sales/google-analytics/google_console_project.png)
+    ![Screenshot - Google API Console - Project](/components/extractors/marketing-sales/google-analytics/google_console_project.png)
 
 3. Enable the **Google Analytics Reporting API**.
  
     {: .image-popup}
-    ![Screenshot - Google API Console - Enable API](/extractors/marketing-sales/google-analytics/google_console_enable.png)
+    ![Screenshot - Google API Console - Enable API](/components/extractors/marketing-sales/google-analytics/google_console_enable.png)
     
 4. Select the **Credentials** section from the menu on the left, click the **Create credentials** button and select **OAuth client ID**.
   
     {: .image-popup}
-    ![Screenshot - Google API Console - Create Credentials](/extractors/marketing-sales/google-analytics/google_console_credentials.png)
+    ![Screenshot - Google API Console - Create Credentials](/components/extractors/marketing-sales/google-analytics/google_console_credentials.png)
     
 5. Choose **Web Application**. Into **Authorized redirect URIs** insert 
  ```https://oauth.keboola.com/authorize/keboola.ex-google-analytics-v4/callback```
@@ -137,9 +140,9 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
 7. Find your credentials in the list of available credentials. You should see something like this:
  
     {: .image-popup}
-    ![Screenshot - Google API Console - Credentials Detail](/extractors/marketing-sales/google-analytics/google_console_detail.png)
+    ![Screenshot - Google API Console - Credentials Detail](/components/extractors/marketing-sales/google-analytics/google_console_detail.png)
   
 8. You can now use these credentials in the **Custom Authorization** tab when authorizing the Google Analytics Extractor.
  
     {: .image-popup}
-    ![Screenshot - KBC - Custom Authorization](/extractors/marketing-sales/google-analytics/kbc_authorization.png)
+    ![Screenshot - KBC - Custom Authorization](/components/extractors/marketing-sales/google-analytics/kbc_authorization.png)

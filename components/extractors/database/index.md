@@ -1,6 +1,9 @@
 ---
 title: Database Extractors
-permalink: /extractors/database/
+permalink: /components/extractors/database/
+redirect_from:
+    - /extractors/database/
+
 ---
 
 * TOC
@@ -8,7 +11,7 @@ permalink: /extractors/database/
 
 Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
 
-There are a number of extractors for [**SQL databases**](/extractors/database/sqldb/):
+There are a number of extractors for [**SQL databases**](/components/extractors/database/sqldb/):
 
 - [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
@@ -21,20 +24,20 @@ There are a number of extractors for [**SQL databases**](/extractors/database/sq
 - [Snowflake](https://www.snowflake.com/)
 - [Teradata](http://www.teradata.com)
 
-They are all [configured](/extractors/database/sqldb/#create-new-configuration) in the same way and 
-have an [advanced mode](/extractors/database/sqldb/). *(Their basic configuration is also part 
+They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
+have an [advanced mode](/components/extractors/database/sqldb/). *(Their basic configuration is also part 
 of our [tutorial](/tutorial/load/database/).)* 
 
 On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, 
-requires a [different configuration](/extractors/database/mongodb/). 
-[Configuration](/extractors/database/bigquery/) of the [BigQuery](https://cloud.google.com/bigquery/) extractor is also covered in another [tutorial](/tutorial/ad-hoc/) of ours.
+requires a [different configuration](/components/extractors/database/mongodb/). 
+[Configuration](/components/extractors/database/bigquery/) of the [BigQuery](https://cloud.google.com/bigquery/) extractor is also covered in another [tutorial](/tutorial/ad-hoc/) of ours.
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 
 want to avoid exposing your database server to the internet, we highly recommend setting up an SSH Tunnel for the connection.
 
 {: .image-popup}
-![Schema - SSH tunnel](/extractors/database/ssh-tunnel.jpg)
+![Schema - SSH tunnel](/components/extractors/database/ssh-tunnel.jpg)
 
 A [Secure Shell (SSH)](https://en.wikipedia.org/wiki/Secure_Shell) [tunnel](https://en.wikipedia.org/wiki/Tunneling_protocol) consists of an encrypted connection created
 through an SSH protocol connection. You can set up this tunnel to connect to your database server located in your private network that you do not want

@@ -25,7 +25,7 @@ destination project
 - The new project is then available but it will still require the following:
   - Re-authorization of all OAuth component configurations.
   - All encrypted values for components configurations (like passwords and API keys) must be re-entered.
-  - Alter the whitelist the appropriate new [IP addresses](/extractors/ip-addresses/).
+  - Alter the whitelist the appropriate new [IP addresses](/components/extractors/ip-addresses/).
   - Setup any SSH tunnels for extractors and writers.
   - Invite users to the project.
   - And enable orchestrations.
@@ -47,7 +47,7 @@ based on [Changed in last](https://help.keboola.com/transformations/mappings/#in
 transformations or writers it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.
-- Each KBC stack has a different set of assigned [IP addresses](/extractors/ip-addresses/)
+- Each KBC stack has a different set of assigned [IP addresses](/components/extractors/ip-addresses/)
 
 ## What won't be migrated
 

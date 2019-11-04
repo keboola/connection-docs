@@ -1,6 +1,9 @@
 ---
 title: Extractors for SQL Databases
-permalink: /extractors/database/sqldb/
+permalink: /components/extractors/database/sqldb/
+redirect_from:
+    - /extractors/database/sqldb/
+
 ---
 
 * TOC
@@ -12,11 +15,11 @@ The extractors for supported SQL databases ([Cloudera Impala](https://www.cloude
 [Firebird](http://www.firebirdsql.org/), [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/), 
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), [MySQL](https://www.mysql.com/),
 [Oracle](http://www.oracle.com/index.html), [PostgreSQL](http://www.postgresql.org/), [Teradata](http://www.teradata.com)) are configured
-in the same way and have an [advanced mode](/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
+in the same way and have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
 in the section [Server Specific Notes](#server-specific-notes).
 
 Before you start configuring your SQL extractor, consider securing your connection to your internal database to avoid exposing 
-your database server to the internet by [setting up an SSH Tunnel](/extractors/database/#connecting-to-database).
+your database server to the internet by [setting up an SSH Tunnel](/components/extractors/database/#connecting-to-database).
 
 *Note: Quick introduction to extracting data from the Snowflake Database Server is also part of our [tutorial](/tutorial/load/database/).*
 
@@ -24,25 +27,25 @@ your database server to the internet by [setting up an SSH Tunnel](/extractors/d
 Find the extractor for the database of your choice in the list of extractors and create a new configuration. Name it (you can change the name any time).
 
 {: .image-popup}
-![Screenshot - Create Configuration](/extractors/database/sqldb/create-configuration.png)
+![Screenshot - Create Configuration](/components/extractors/database/sqldb/create-configuration.png)
 
 ## Initial Setup
 The first step is to configure database credentials using the **Setup database credentials** button:
 
 {: .image-popup}
-![Screenshot - Configure Credentials Start](/extractors/database/sqldb/configure-credentials-1.png)
+![Screenshot - Configure Credentials Start](/components/extractors/database/sqldb/configure-credentials-1.png)
 
 Fill in the credentials to the database. See section [Server Specific Notes](#server-specific-notes) for description of non-standard fields.
 After testing the credentials, **Save** them:
 
 {: .image-popup}
-![Screenshot - Configure Credentials](/extractors/database/sqldb/configure-credentials-2.png)
+![Screenshot - Configure Credentials](/components/extractors/database/sqldb/configure-credentials-2.png)
 
 After saving the credentials, the extractor will automatically fetch the list of database tables accessible by the provided credentials.
 Select the tables you want to extract and click the **Create** button:
 
 {: .image-popup}
-![Screenshot - Select Tables](/extractors/database/sqldb/select-tables-1.png)
+![Screenshot - Select Tables](/components/extractors/database/sqldb/select-tables-1.png)
 
 The selected tables are configured. You can use the **Run Extraction** to load data from the server into [Storage](/storage/).
 You can also modify the configured tables by clicking on the appropriate row, or add new tables via the **New Table** button.
@@ -50,13 +53,13 @@ Each table may be also extracted individually, or it may be disabled so that it 
 Existing credentials can be changed using the **Database Credentials** link.
 
 {: .image-popup}
-![Screenshot - Table list](/extractors/database/sqldb/table-list-1.png)
+![Screenshot - Table list](/components/extractors/database/sqldb/table-list-1.png)
 
 ## Modify Configuration
 If you want to modify table extraction setup, click on the corresponding row. You'll get to the table detail view:
 
 {: .image-popup}
-![Screenshot - Table Detail](/extractors/database/sqldb/table-detail-1.png)
+![Screenshot - Table Detail](/components/extractors/database/sqldb/table-detail-1.png)
 
 Here you can modify the source table, limit the extraction to specific columns or change the destination table name in
 [Storage](/storage/). The table details also allows you to define [**Primary Key**](/storage/tables/#primary-keys)
@@ -70,7 +73,7 @@ Both options require knowledge of the source table, so don't turn them on blindl
 The table detail also allows you to switch to **Advanced mode**:
 
 {: .image-popup}
-![Screenshot - Table Detail Advanced](/extractors/database/sqldb/table-detail-2.png)
+![Screenshot - Table Detail Advanced](/components/extractors/database/sqldb/table-detail-2.png)
 
 In advanced mode, you can write an arbitrary `SELECT` query, the result of that query will be imported to a
 [Storage](/storage/) table. The SQL query is executed on the source server without any processing, that means that
