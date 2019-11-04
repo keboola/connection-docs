@@ -177,61 +177,61 @@ items:
       - url: /components/extractors/ip-addresses
         title: IP Addresses
 
-  - url: /writers/
+  - url: /components/writers/
     title: Writers
     items:
-      - url: /writers/bi-tools/
+      - url: /components/writers/bi-tools/
         title: Business Intelligence
         items:
-          - url: /writers/bi-tools/gooddata/
+          - url: /components/writers/bi-tools/gooddata/
             title: GoodData
 
-          - url: /writers/bi-tools/tableau/
+          - url: /components/writers/bi-tools/tableau/
             title: Tableau
 
-          - url: /writers/bi-tools/thoughtspot/
+          - url: /components/writers/bi-tools/thoughtspot/
             title: ThoughtSpot
 
-      - url: /writers/database/
+      - url: /components/writers/database/
         title: Database
         items:
-          - url: /writers/database/bigquery/
+          - url: /components/writers/database/bigquery/
             title: BigQuery
 
-          - url: /writers/database/mysql/
+          - url: /components/writers/database/mysql/
             title: MySQL
 
-          - url: /writers/database/oracle/
+          - url: /components/writers/database/oracle/
             title: Oracle
 
-          - url: /writers/database/postgresql/
+          - url: /components/writers/database/postgresql/
             title: PostgreSQL
 
-          - url: /writers/database/redshift/
+          - url: /components/writers/database/redshift/
             title: Redshift
 
-          - url: /writers/database/snowflake/
+          - url: /components/writers/database/snowflake/
             title: Snowflake
 
-          - url: /writers/database/mssql/
+          - url: /components/writers/database/mssql/
             title: SQL Server
 
-      - url: /writers/storage/
+      - url: /components/writers/storage/
         title: Storage
         items:
-          - url: /writers/storage/aws-s3/
+          - url: /components/writers/storage/aws-s3/
             title: AWS S3
 
-          - url: /writers/storage/dropbox/
+          - url: /components/writers/storage/dropbox/
             title: Dropbox
 
-          - url: /writers/storage/google-drive/
+          - url: /components/writers/storage/google-drive/
             title: Google Drive
 
-          - url: /writers/storage/google-sheets/
+          - url: /components/writers/storage/google-sheets/
             title: Google Sheets
 
-          - url: /writers/storage/storage-api/
+          - url: /components/writers/storage/storage-api/
             title: Keboola Connection Storage
 
   - url: /storage/

@@ -1,6 +1,9 @@
 ---
 title: Snowflake
-permalink: /writers/database/snowflake/
+permalink: /components/writers/database/snowflake/
+redirect_from:
+    - /writers/database/snowflake/
+
 ---
 
 * TOC
@@ -15,12 +18,12 @@ data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft
 Find the Snowflake writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/writers/database/snowflake/ui1.png)
+![Screenshot - Create configuration](/components/writers/database/snowflake/ui1.png)
 
 The first step is to **Set Up Credentials**:
 
 {: .image-popup}
-![Screenshot - Main page](/writers/database/snowflake/ui2.png)
+![Screenshot - Main page](/components/writers/database/snowflake/ui2.png)
 
 There are two modes of operation of the writer:
 
@@ -28,13 +31,13 @@ There are two modes of operation of the writer:
 - **Keboola Snowflake database** --- In this mode, the writer will create a new database for you and **give you credentials** to it.
 
 {: .image-popup}
-![Screenshot - Credential types](/writers/database/snowflake/credentials.png)
+![Screenshot - Credential types](/components/writers/database/snowflake/credentials.png)
 
 ### Own Snowflake Database
 You need to provide a *host name* (account name), *user name*, *password*, *database name*, *schema*, and *[Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
 
 {: .image-popup}
-![Screenshot - Own Credentials](/writers/database/snowflake/own-credentials.png)
+![Screenshot - Own Credentials](/components/writers/database/snowflake/own-credentials.png)
 
 We highly recommend that you create a dedicated user for the writer in your Snowflake database. You can use the following SQL code to get started:
 
@@ -60,7 +63,7 @@ query `CREATE SCHEMA john.doe;`, you need to enter the schema name as `DOE` in t
 A Keboola Snowflake database is created by the writer and the credentials are provisioned for you:
 
 {: .image-popup}
-![Screenshot - Provisioned Credentials](/writers/database/snowflake/provisioned-credentials.png)
+![Screenshot - Provisioned Credentials](/components/writers/database/snowflake/provisioned-credentials.png)
 
 You can share the credentials with whatever service that needs to access your data.
 Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world.
@@ -71,22 +74,22 @@ Also note that the number of provisioned Snowflake databases is part of [Project
 Regardless of the credentials used, the next step is to configure the tables to write. Click **Add New Table**:
 
 {: .image-popup}
-![Screenshot - Add Table](/writers/database/snowflake/add-table.png)
+![Screenshot - Add Table](/components/writers/database/snowflake/add-table.png)
 
 Select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Select Table](/writers/database/snowflake/select-table.png)
+![Screenshot - Select Table](/components/writers/database/snowflake/select-table.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/writers/database/snowflake/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/snowflake/configure-table.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/writers/database/snowflake/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/snowflake/table-columns.png)
 
 For each column you can specify its
 
@@ -106,7 +109,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/writers/database/snowflake/table-options.png)
+![Screenshot - Table Options](/components/writers/database/snowflake/table-options.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
@@ -153,7 +156,7 @@ connect the Qlik data sources. Follow the Qlik community
 It is possible to use the Snowflake writer to share data with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Online](https://www.tableau.com/products/cloud-bi). This is usually more efficient and
 faster than loading data through [TDE files](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
-with the [TDE writer](/writers/bi-tools/tableau/).
+with the [TDE writer](/components/writers/bi-tools/tableau/).
 
 To share data between your KBC project and Tableau, choose **Keboola Snowflake Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can

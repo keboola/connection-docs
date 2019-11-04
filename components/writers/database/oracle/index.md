@@ -1,6 +1,9 @@
 ---
 title: Oracle
-permalink: /writers/database/oracle/
+permalink: /components/writers/database/oracle/
+redirect_from:
+    - /writers/database/oracle/
+
 ---
 
 * TOC
@@ -12,17 +15,17 @@ This writer sends data to an [Oracle](https://www.oracle.com/database/) database
 Find the Oracle writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/writers/database/oracle/ui1.png)
+![Screenshot - Create configuration](/components/writers/database/oracle/ui1.png)
 
 The first step is to **Set Up Credentials**:
 
 {: .image-popup}
-![Screenshot - Main page](/writers/database/oracle/intro-page.png)
+![Screenshot - Main page](/components/writers/database/oracle/intro-page.png)
 
 You need to provide a *host name*, *user name*, *password*, and a *service name*.
 
 {: .image-popup}
-![Screenshot - Credentials](/writers/database/oracle/credentials.png)
+![Screenshot - Credentials](/components/writers/database/oracle/credentials.png)
 
 We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
 
@@ -39,22 +42,22 @@ It is also possible to secure the connection using an [SSH tunnel](/components/e
 The next step is to configure the tables you want to write. Click **Add New Table**:
 
 {: .image-popup}
-![Screenshot - Add Table](/writers/database/oracle/add-table.png)
+![Screenshot - Add Table](/components/writers/database/oracle/add-table.png)
 
 Select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Select Table](/writers/database/oracle/select-table.png)
+![Screenshot - Select Table](/components/writers/database/oracle/select-table.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/writers/database/oracle/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/oracle/configure-table.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/writers/database/oracle/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/oracle/table-columns.png)
 
 For each column you can specify its
 
@@ -70,7 +73,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/writers/database/oracle/table-options.png)
+![Screenshot - Table Options](/components/writers/database/oracle/table-options.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table

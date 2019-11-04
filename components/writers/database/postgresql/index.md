@@ -1,6 +1,9 @@
 ---
 title: PostgreSQL
-permalink: /writers/database/postgresql/
+permalink: /components/writers/database/postgresql/
+redirect_from:
+    - /writers/database/postgresql/
+
 ---
 
 * TOC
@@ -12,17 +15,17 @@ This writer sends data to a [PostgreSQL](https://www.postgresql.org/) database.
 Find the PostgreSQL writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/writers/database/postgresql/ui1.png)
+![Screenshot - Create configuration](/components/writers/database/postgresql/ui1.png)
 
 The first step is to **Set Up Credentials**:
 
 {: .image-popup}
-![Screenshot - Main page](/writers/database/postgresql/intro-page.png)
+![Screenshot - Main page](/components/writers/database/postgresql/intro-page.png)
 
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
 
 {: .image-popup}
-![Screenshot - Credentials](/writers/database/postgresql/credentials.png)
+![Screenshot - Credentials](/components/writers/database/postgresql/credentials.png)
 
 We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
 
@@ -40,22 +43,22 @@ It is also possible to secure the connection using an [SSH tunnel](/components/e
 The next step is to configure the tables you want to write. Click **Add New Table**:
 
 {: .image-popup}
-![Screenshot - Add Table](/writers/database/postgresql/add-table.png)
+![Screenshot - Add Table](/components/writers/database/postgresql/add-table.png)
 
 Select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Select Table](/writers/database/postgresql/select-table.png)
+![Screenshot - Select Table](/components/writers/database/postgresql/select-table.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/writers/database/postgresql/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/postgresql/configure-table.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/writers/database/postgresql/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/postgresql/table-columns.png)
 
 For each column you can specify its
 
@@ -71,7 +74,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/writers/database/postgresql/table-options.png)
+![Screenshot - Table Options](/components/writers/database/postgresql/table-options.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table

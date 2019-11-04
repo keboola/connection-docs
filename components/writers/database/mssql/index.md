@@ -1,6 +1,9 @@
 ---
 title: SQL Server
-permalink: /writers/database/mssql/
+permalink: /components/writers/database/mssql/
+redirect_from:
+    - /writers/database/mssql/
+
 ---
 
 * TOC
@@ -12,17 +15,17 @@ This writer sends data to a [Microsoft SQL Server](https://www.microsoft.com/en-
 Find the SQL Server writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/writers/database/mssql/ui1.png)
+![Screenshot - Create configuration](/components/writers/database/mssql/ui1.png)
 
 The first step is to **Set Up Credentials**:
 
 {: .image-popup}
-![Screenshot - Main page](/writers/database/mssql/intro-page.png)
+![Screenshot - Main page](/components/writers/database/mssql/intro-page.png)
 
 You need to provide a *host name*, *user name*, *password*, *database name*, and SQL Server version; optionally, an *instance name* if needed for the connection.
 
 {: .image-popup}
-![Screenshot - Credentials](/writers/database/mssql/credentials.png)
+![Screenshot - Credentials](/components/writers/database/mssql/credentials.png)
 
 We highly recommend that you create a dedicated credentials for the writer in your database. You can use the following SQL code to get started:
 
@@ -44,22 +47,22 @@ It is also possible to secure the connection using an [SSH tunnel](/components/e
 The next step is to configure the tables to write. Click the **Add new table** button:
 
 {: .image-popup}
-![Screenshot - Add Table](/writers/database/mssql/add-table.png)
+![Screenshot - Add Table](/components/writers/database/mssql/add-table.png)
 
 Select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Select Table](/writers/database/mssql/select-table.png)
+![Screenshot - Select Table](/components/writers/database/mssql/select-table.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/writers/database/mssql/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/mssql/configure-table.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/writers/database/mssql/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/mssql/table-columns.png)
 
 For each column you can specify its
 
@@ -75,7 +78,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/writers/database/mssql/table-options.png)
+![Screenshot - Table Options](/components/writers/database/mssql/table-options.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table

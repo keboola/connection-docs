@@ -65,8 +65,8 @@ Some extractors store metadata about the table columns. For example, when a [DB 
 loads a table from the source database, it also records the physical column types from that table.
 These are stored with each table column and can be used later on when working with the table. For
 example, the transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside
-the transformations. Also, some writers, e.g., the [Snowflake writer](/writers/database/snowflake/) use
-the table metadata to [pre-fill the table columns](/writers/database/snowflake/#table-configuration) configuration for you.
+the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
+the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
 Even if a data type is available for a column, that column is always stored as text --- keep this in mind
 especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. The basic idea behind
@@ -244,7 +244,7 @@ when using incremental processing, that row will not be loaded in input mapping.
 
 The component (e.g. writer) will receive only the highlighted rows. If there are no added or updated rows since the last successful run,
 an empty table will be passed to the component. The image below shows the setting of Automatic Incremental Processing for
-the [Snowflake writer](/writers/database/snowflake/):
+the [Snowflake writer](/components/writers/database/snowflake/):
 
 {: .image-popup}
 ![Screenshot - Automatic Incremental Processing](/storage/tables/adaptive-1.png)

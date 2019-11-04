@@ -1,6 +1,9 @@
 ---
 title: Redshift
-permalink: /writers/database/redshift/
+permalink: /components/writers/database/redshift/
+redirect_from:
+    - /writers/database/redshift/
+
 ---
 
 * TOC
@@ -15,12 +18,12 @@ data to [Tableau](https://www.tableau.com/) or [PowerBI](https://powerbi.microso
 Find the Redshift writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/writers/database/redshift/ui1.png)
+![Screenshot - Create configuration](/components/writers/database/redshift/ui1.png)
 
 The first step is to **Set Up Credentials**:
 
 {: .image-popup}
-![Screenshot - Main page](/writers/database/redshift/intro-page.png)
+![Screenshot - Main page](/components/writers/database/redshift/intro-page.png)
 
 There are two modes of operation of the writer:
 
@@ -28,13 +31,13 @@ There are two modes of operation of the writer:
 - **Keboola Redshift database** --- In this mode, the writer will create a new database for you and **give you credentials** to it.
 
 {: .image-popup}
-![Screenshot - Credential types](/writers/database/redshift/credentials.png)
+![Screenshot - Credential types](/components/writers/database/redshift/credentials.png)
 
 ### Own Redshift Database
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
 
 {: .image-popup}
-![Screenshot - Own Credentials](/writers/database/redshift/own-credentials.png)
+![Screenshot - Own Credentials](/components/writers/database/redshift/own-credentials.png)
 
 We highly recommend that you create dedicated credentials for the writer in your Redshift database. You can use the following SQL code to get started:
 
@@ -54,7 +57,7 @@ It is also possible to secure the connection using an [SSH tunnel](/components/e
 A Keboola Redshift database is created by the writer and the credentials are provisioned for you:
 
 {: .image-popup}
-![Screenshot - Provisioned Credentials](/writers/database/redshift/provisioned-credentials.png)
+![Screenshot - Provisioned Credentials](/components/writers/database/redshift/provisioned-credentials.png)
 
 You can share the credentials with whatever service that needs to access your data --- for example, with [Tableau Online](https://www.tableau.com/products/cloud-bi).
 Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world. This means that it must not be receiving
@@ -62,28 +65,28 @@ any data (outside those provided by the writer itself, of course). This is a con
 Also note that the number of provisioned Redshift databases is part of [project limits](/management/project/limits/).
 
 *Note: This feature is available only for projects with the Redshift [Storage backend](/storage/#storage-data). If you need a provisioned database in non-Redshift
-projects, use the [Snowflake writer](/writers/database/snowflake/#keboola-snowflake-database) for the purpose.*
+projects, use the [Snowflake writer](/components/writers/database/snowflake/#keboola-snowflake-database) for the purpose.*
 
 ## Table Configuration
 Regardless of the credentials used, the next step is to configure the tables to write. Click **Add New Table**:
 
 {: .image-popup}
-![Screenshot - Add Table](/writers/database/redshift/add-table.png)
+![Screenshot - Add Table](/components/writers/database/redshift/add-table.png)
 
 Select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Select Table](/writers/database/redshift/select-table.png)
+![Screenshot - Select Table](/components/writers/database/redshift/select-table.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/writers/database/redshift/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/redshift/configure-table.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/writers/database/redshift/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/redshift/table-columns.png)
 
 For each column you can specify its
 
@@ -99,7 +102,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/writers/database/redshift/table-options.png)
+![Screenshot - Table Options](/components/writers/database/redshift/table-options.png)
 
 In the **Incremental Load**, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
@@ -147,7 +150,7 @@ connect the Qlik data sources. Follow the Qlik official [integration guide](http
 It is possible to use the Redshift writer to share data with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Online](https://www.tableau.com/products/cloud-bi). This is usually more efficient and
 faster than loading data through [TDE files](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
-with the [TDE writer](/writers/bi-tools/tableau/).
+with the [TDE writer](/components/writers/bi-tools/tableau/).
 
 To share data between your KBC project and Tableau, choose **Keboola Redshift Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can

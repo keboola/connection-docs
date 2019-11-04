@@ -1,8 +1,8 @@
 ---
 title: GoodData
-permalink: /writers/bi-tools/gooddata/
+permalink: /components/writers/bi-tools/gooddata/
 redirect_from:
-    - /writers/gooddata/
+    - /writers/bi-tools/gooddata/
 ---
 
 * TOC
@@ -24,18 +24,18 @@ in our Getting Started tutorial. You can also watch our [GoodData Writer Demo](h
 Find the GoodData writer in the list of writers and create a new configuration. Name it.
 
 {: .image-popup}
-![Screenshot - Create configuration](/writers/bi-tools/gooddata/ui1.png)
+![Screenshot - Create configuration](/components/writers/bi-tools/gooddata/ui1.png)
 
 The first step is to configure the GoodData project that will be used for writing:
 
 {: .image-popup}
-![Screenshot - Main Page](/writers/bi-tools/gooddata/ui2.png)
+![Screenshot - Main Page](/components/writers/bi-tools/gooddata/ui2.png)
 
 ## Project Setup
 There are several options in the configuration dialog:
 
 {: .image-popup}
-![Screenshot - Project Setup](/writers/bi-tools/gooddata/ui3.png)
+![Screenshot - Project Setup](/components/writers/bi-tools/gooddata/ui3.png)
 
 Here you need to enter a project name and choose the type of the project. You can 
 
@@ -56,7 +56,7 @@ After you set up the project, you can see the **Go To Project** button. This wil
 from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.com/display/doc/Single+Sign-On+Overview). (SSO access works only for projects provisioned by Keboola. If you used an existing project, you will have to login on your own.)
 
 {: .image-popup}
-![Screenshot - Access Project](/writers/bi-tools/gooddata/access-project.png)
+![Screenshot - Access Project](/components/writers/bi-tools/gooddata/access-project.png)
 
 ## Date Dimension
 [Date dimension](https://help.gooddata.com/display/doc/Dates+and+Times) is an important concept of the GoodData LDM.
@@ -67,7 +67,7 @@ It is also possible to have different date dimensions representing e.g.
 a calendar year and a fiscal year.
 
 {: .image-popup}
-![Screenshot - Add Date Dimension](/writers/bi-tools/gooddata/ui4.png)
+![Screenshot - Add Date Dimension](/components/writers/bi-tools/gooddata/ui4.png)
 
 When creating a date dimension, you have to enter the dimension name and a dimension template. The available templates are:
 
@@ -79,7 +79,7 @@ When creating a date dimension, you have to enter the dimension name and a dimen
 Click the **New Table** button to add a new table to the writer:
 
 {: .image-popup}
-![Screenshot - Add Table](/writers/bi-tools/gooddata/ui5.png)
+![Screenshot - Add Table](/components/writers/bi-tools/gooddata/ui5.png)
 
 Select an existing table from the [Storage](/storage/tables/) and enter a *Title* which will be used for the table in
 the GoodData project (you can change the title later if needed). The next step is to configure the table columns.
@@ -87,7 +87,7 @@ the GoodData project (you can change the title later if needed). The next step i
 ### Table Columns
 
 {: .image-popup}
-![Screenshot - Configure Columns](/writers/bi-tools/gooddata/ui6.png)
+![Screenshot - Configure Columns](/components/writers/bi-tools/gooddata/ui6.png)
 
 Setting the table columns involves configuration of three things:
 
@@ -107,14 +107,14 @@ the limits of each data type.
     - `HYPERLINK` --- A [Hyperlink attribute](https://help.gooddata.com/display/doc/Hyperlink), which acts as a link in the reports. You have to select a **Reference** which is the name of an attribute column in the same table. The reference column is the one which will be used as a label, the hyperlink column is the one which is expected to contain the address.
 
 {: .image-popup}
-![Screenshot - Hyperlink configuration](/writers/bi-tools/gooddata/hyperlink.png)
+![Screenshot - Hyperlink configuration](/components/writers/bi-tools/gooddata/hyperlink.png)
 
 **Save** your configuration.
 
 ### Additional Table Options
 
 {: .image-popup}
-![Screenshot - Hyperlink configuration](/writers/bi-tools/gooddata/incremental.png)
+![Screenshot - Hyperlink configuration](/components/writers/bi-tools/gooddata/incremental.png)
 
 You can also select a load type: **Full Load** (the default), **Automatic Incremental Load** or **Manual Incremental Load**. 
 Incremental load will keep the existing data in the GoodData project.
@@ -131,7 +131,7 @@ tables, it will fail with the message: `Schema reference of column 'X' of datase
 There are multiple options how you can write data to a GoodData project:
 
 {: .image-popup}
-![Screenshot - Table Load Settings](/writers/bi-tools/gooddata/table-load-settings.png)
+![Screenshot - Table Load Settings](/components/writers/bi-tools/gooddata/table-load-settings.png)
 
 By default, the LDM is updated with each run of the writer. If your project structure settled down and does not
 change often, you may wish to switch to **Load data only** mode. This saves some time from each run and also
@@ -150,7 +150,7 @@ The writer manages the LDM in the project. If you make changes to the LDM using 
 --- unless it is used solely in **Load data only** mode. You can review the LDM in the GoodData project management:
 
 {: .image-popup}
-![Screenshot - GoodData Logical Data Model](/writers/bi-tools/gooddata/gooddata-model.png)
+![Screenshot - GoodData Logical Data Model](/components/writers/bi-tools/gooddata/gooddata-model.png)
 
 The writer creates service users which are used to update the LDM and manage the SSO (`Keboola GoodData` and `provisioning (KBC)`). 
 You should not disable those users or change their role. Any KBC project user can enter the GoodData project using 
@@ -158,6 +158,6 @@ the [SSO](https://help.gooddata.com/display/doc/Single+Sign-On+Overview). Once t
 for them in the GoodData project (these users have `(KBC)` suffix and `@kbc.keboola.com` login).
 
 {: .image-popup}
-![Screenshot - GoodData project users](/writers/bi-tools/gooddata/gooddata-users.png)
+![Screenshot - GoodData project users](/components/writers/bi-tools/gooddata/gooddata-users.png)
 
 When you delete a writer that created a GoodData project, that project will also be deleted after a [grace period](/management/project/delete/#gooddata-projects). When you delete a writer that was connected to an existing project, it won't be deleted.

@@ -1,6 +1,9 @@
 ---
 title: Writers
-permalink: /writers/
+permalink: /components/writers/
+redirect_from:
+    - /writers/
+
 ---
 
 Writers are [KBC components](/overview/) that take transformed and processed **output data from KBC**
@@ -13,10 +16,10 @@ there are **no limitations** to how and where you can send your data.
 
 Writers can be grouped by their primary purpose:
 
-- **Business Intelligence**: [Tableau](/writers/bi-tools/tableau/), [GoodData](/writers/bi-tools/gooddata/), Looker, and more.
-- **Databases**: [MySQL](/writers/database/mysql/), [Oracle](/writers/database/oracle/), [PostgreSQL](/writers/database/postgresql/), [Amazon Redshift](/writers/database/redshift/), [Snowflake](/writers/database/snowflake/), and more.
-- **Generic Storage**: [AWS S3](/writers/storage/aws-s3/), [Dropbox](/writers/storage/dropbox/), [Google Drive](/writers/storage/google-drive/),
-[Google Sheets](/writers/storage/google-sheets/), [Keboola Connection Storage](/writers/storage/storage-api/), and more.
+- **Business Intelligence**: [Tableau](/components/writers/bi-tools/tableau/), [GoodData](/components/writers/bi-tools/gooddata/), Looker, and more.
+- **Databases**: [MySQL](/components/writers/database/mysql/), [Oracle](/components/writers/database/oracle/), [PostgreSQL](/components/writers/database/postgresql/), [Amazon Redshift](/components/writers/database/redshift/), [Snowflake](/components/writers/database/snowflake/), and more.
+- **Generic Storage**: [AWS S3](/components/writers/storage/aws-s3/), [Dropbox](/components/writers/storage/dropbox/), [Google Drive](/components/writers/storage/google-drive/),
+[Google Sheets](/components/writers/storage/google-sheets/), [Keboola Connection Storage](/components/writers/storage/storage-api/), and more.
 
 For a definitive list of usable writers, see your project **Writers** section.
 
