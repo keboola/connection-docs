@@ -9,7 +9,7 @@ If you’re reading this page in disbelief, as you have no idea what we are talk
 well, you may want to visit [THIS PAGE](https://get.keboola.com/sunkendatatemple/) to find out.
 
 ## Scanning Device Setup
-In order to play the game you need to get a fresh Keboola Connection project that is part of the game organization. 
+In order to play the game, you need to get a fresh Keboola Connection project that is part of the game organization. 
 In order to create the sandbox project, go to [https://get.keboola.com](https://get.keboola.com) and use the Promo Code “KASSANDRA”.
 
 You will receive an invitation via email, and after registration, you will get access to your new project. After opening it, 
@@ -38,7 +38,8 @@ That’s it. You’re ready for your first dive.
 ## Dives
 Each “dive” is a run of the game application. Based on how many “secrets” are entered, the application knows how far in the game you are.
 
-The first dive is “free” — no secret needs to be entered. Just click the “Run” button on the right (or below if you’re on mobile):
+The first dive is “free” — no secret needs to be entered. Just click the “RUN COMPONENT” button on the right 
+(or below if you’re on mobile):
 
 {: .image-popup}
 ![Screenshot - Free dive](/sunkendatatemple/05-free-dive.png)
@@ -74,7 +75,7 @@ Then click the “Create” button and you’re done:
 {: .image-popup}
 ![Screenshot - Create new config of MySQL extractor](/sunkendatatemple/09-create-mysql-extractor.png)
 
-Then just run the extractor (same as the game application, the now-familiar “Run” button on the right):
+Then just run the extractor (same as the game application, the “RUN EXTRACTION” button on the right):
 
 {: .image-popup}
 ![Screenshot - Run MySQL extractor](/sunkendatatemple/10-run-mysql-extractor.png)
@@ -126,7 +127,7 @@ The query is the culprit, it’s not doing what it is supposed to.
 Once you fix it, just save and run the transformation:
 
 {: .image-popup}
-![Screenshot - Fix SQL query](/sunkendatatemple/16-fix-query.png)
+![Screenshot - Run Transformation with fixed query](/sunkendatatemple/16-run-transformation.png)
 
 Then you need to find the output table (just click on it in the “output mapping” section), go to Data Sample and read the secret. 
 No, we won’t just write it here. If you can’t get it out of the transformation, you can go into Google Translate and type the word
@@ -167,7 +168,7 @@ Google the text **“is the study or practice of writing music for an orchestra�
 The title of the Wikipedia page that pops up is the secret.
 
 ## Dive 5
-For this puzzle you’ll need to use Keboola again --- this time it’s “bucket sharing” feature. 
+For this puzzle you’ll need to use Keboola again --- this time its “bucket sharing” feature. 
 Its job is to simplify sharing data between different projects or teams within the organization. 
 It’s pretty straightforward. Go to the “Storage” section, and click on the “link shared bucket” button:
 
