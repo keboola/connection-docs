@@ -14,3 +14,11 @@ All components, regardless of their category, behave the same way. To use the co
 create a **Configuration** first. A configuration is used to set the necessary parameters for each 
 component (e.g. credentials and other specification of what to do). A configuration can then be run
 -- which creates a **Job** and does the actual work.
+
+## Creating Component Configuration
+To create a new component configuration, select *Components* from the top navigation and select the
+component category (extractor, writer, application):
+
+![Screenshot - Create Configuration](/components/configuration-1.png)
+
+
