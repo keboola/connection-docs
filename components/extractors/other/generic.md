@@ -3,7 +3,6 @@ title: Generic Extractor
 permalink: /components/extractors/other/generic/
 redirect_from:
     - /extractors/other/generic/
-
 ---
 
 Generic Extractor is quite a special component. As its name suggests, it can **extract data from many APIs**:
@@ -24,3 +23,19 @@ tutorial](https://developers.keboola.com/extend/generic-extractor/tutorial/).
 
 To understand what specific parts of an existing configuration do, check the 
 [Configuration Map](https://developers.keboola.com/extend/generic-extractor/map/).
+
+## Template Mode
+Generic extractor is used as the base for many extractors. These components allows you to select pre-defined configurations 
+-- templates -- without the need to configure Generic extractor manually.
+
+{: .image-popup}
+![Generic Extractor - template](/components/extractors/other/generic-1.png)
+
+These components can be heavily customized simply be using the **Switch to JSON editor** button.
+If you select the template and want to specify more details using the advanced mode, don’t forget to click Save first. 
+The code will be pre-filled for you based on that template.
+
+{: .image-popup}
+![Generic Extractor - template](/components/extractors/other/generic-2.png)
+
+When finished editing, save the configuration. You can also always switch back to templates, but you'll lose your customizations.
