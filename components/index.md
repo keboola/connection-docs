@@ -4,6 +4,10 @@ permalink: /components/
 ---
 
 In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
+* TOC
+{:toc}
+
+In Keboola Connection platform most of the data processing functions are implemented in **Components**. 
 Components are divided into three main categories:
 
 - [**Extractors**](/components/extractors/) -- bring data into a Keboola Connection project.
@@ -111,3 +115,84 @@ You can customize the name of the configuration copy:
 
 The copy of the configuration is created as a new isolated configuration -- i.e., there is no link 
 between the original configuration and the copy, and the changes to one have no effect on the other.
+The copy of the configuration is created as a new isolated configuration -- i.e. there is no link 
+between the original configuration and the copy and changes to one have no effect on the other.
+
+## Authorization
+Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user)
+it means that the service does not require entering credentials (username, password, token, etc.). Instead you are 
+redirected to the service itself where you authorize the Keboola Connection component. Then you are redirected back to 
+Keboola Connection and you can set other parameters and run the configuration. 
+
+The OAuth authorization process begins with the **Authorize** button (in this example the
+[Google calendar extractor](/components/extractors/communication/google-calendar/) is shown):
+
+{: .image-popup}
+![Screenshot - Authorization](/components/authorization-1.png)
+
+In the next step, you can choose authorization method:
+
+- **Instant**: Use this method if you have direct access to the account; the authorization will be done immediately.
+- **External**: If you need to authorize access to the service from someone who does not have an account in Keboola Connection, you can generate an external link, which will guide them through this process.
+
+OAuth authorization is a very secure authorization method in which you don't have to hand over the 
+credentials to your account. The consumer -- Keboola Connection component -- obtains only the minimal required 
+access.  The authorization is only valid for the configuration in which it was created and for its **copies**.
+
+### Instant Authorization
+Instant authorization requires that you are can actually login to the service you want to use.
+With instant authorization, you have to enter a name describing the account, you're going to use:
+
+{: .image-popup}
+![Screenshot - Instant Authorization](/components/authorization-1.png)
+
+Next, you are taken to the actual authorization screen. This is provided by the service itself and varies a lot. 
+In the example below, the authorization for Google calendar is shown.
+
+{: .image-popup}
+![Screenshot - Service Authorization](/components/authorization-3.png)
+
+### External Authorization
+External account can be used in cases where you do not have direct access to the service and the 
+service *account owner* can't share the credentials with you. For example 
+they can belong to a different company or department, or sharing the credentials would leak some permissions.
+In such cases you can ask the account owner to authorize the component configuration for you.
+
+The first step is to generate the authorization link:
+
+{: .image-popup}
+![Screenshot - Generate link](/components/authorization-4.png)
+
+Then you can copy the link and send it to the account owner. The link is valid for 48 hours, if it expires you have to 
+regenerate it and resend it to the account owner.
+
+{: .image-popup}
+![Screenshot - Copy link](/components/authorization-5.png)
+
+When the *account owner* clicks the link they're taken to a special page. There they can confirm what
+are they authorizing and who requested the action, then they can click on the **Authorize Account** to proceed:
+
+{: .image-popup}
+![Screenshot - External Authorization page](/components/authorization-6.png)
+
+In the next step, the account owner has to enter the account name:
+
+{: .image-popup}
+![Screenshot - External Authorization](/components/authorization-7.png)
+
+Then they are taken to the actual authorization screen. This is provided by the service itself and varies a lot. 
+In the example below, the authorization for Google calendar is shown.
+
+{: .image-popup}
+![Screenshot - Service Authorization](/components/authorization-3.png)
+
+### Resetting authorization
+You can reset an existing authorization using the **Reset** button.
+
+{: .image-popup}
+![Screenshot - Reset Authorization](/components/authorization-8.png)
+
+This invalidates the authorization obtained from the service and allows you to reauthorize the configuration.
+Note that if you reset the authorization of a configuration which was copied, all the copies will lose the authorization.
+The authorization can also be revoked from within the service, in that case the configuration will stop working
+and you have to reset and reauthorize the configuration.

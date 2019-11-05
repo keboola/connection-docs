@@ -12,7 +12,7 @@ The Gmail Messages extractor allows you to fetch data from your Gmail account.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Gmail Messages** extractor.
-Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google account. 
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 **Your inbox is accessed as read only.**
 
 {: .image-popup}
