@@ -87,6 +87,23 @@ To solve your problem or to gain context, our support staff may join your projec
 ## Other Commonly Used Terms
 This section explains a few terms that are often used throughout these documentation pages.
 
+### Regions
+Keboola Connection is available in multiple regions — currently in:
+
+- US AWS -- [connection.keboola.com](https://connection.keboola.com), 
+- EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
+- US Azure -- [connection.east-us-2.azure.keboola.com](https://connection.east-us-2.azure.keboola.com). 
+
+A **Region** instance is a combination of a datacenter location and a cloud provider. Currently supported
+cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/).
+Each region instance is a completely independent full stack of Keboola Connection services. That means that 
+if you have projects in multiple regions, you need to have multiple Keboola Connection accounts.
+
+Each region uses a different network, which means different settings if you 
+employ [IP address](/components/ip-addresses/) filtering.
+The [Developer documentations](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes in 
+more details how to handle regions when working with the API.
+
 ### Jobs
 Most things in KBC are done using the batch approach; when you do some operation, a job is created
 and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same
@@ -104,12 +121,3 @@ separates source data from your script. A secure workspace is created with data 
 in the [input mapping](/transformations/mappings/#input-mapping).
 After the transformation has been executed successfully, only tables and files defined
 in the [output mapping](/transformations/mappings/#output-mapping) are brought back to Storage.
-
-## External Environment Schema
-KBC is a fully cloud environment heavily relaying on Amazon Services. The following chart shows the overview
-of different services and their connections:
-
-![External Environment Schema](/overview/kbc_environment.png){: .img-responsive}
-
-In place of *Data Consumption*, the GoodData Business Intelligence Analytics platform is shown.
-

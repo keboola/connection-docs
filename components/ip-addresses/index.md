@@ -1,6 +1,6 @@
 ---
 title: IP Addresses
-permalink: /components/extractors/ip-addresses/
+permalink: /components/ip-addresses/
 redirect_from:
     - /extractors/ip-addresses/
 
@@ -11,17 +11,21 @@ using a firewall or AWS security groups. This applies especially to the producti
 connections should not be publicly available. For an extra layer of security, setting up an
 [SSH Tunnel](/components/extractors/database/#connecting-to-database) is also recommended.
 
-To access external systems (including your database), KBC uses the below IP addresses. Please **whitelist**
-these IP addresses in your firewalls to allow KBC to successfully connect to your system. This applies to
-all KBC components including all extractors and writers.
+To access external systems (including your database), Keboola Connection uses the below 
+IP addresses. Please **whitelist** these IP addresses in your firewalls to allow Keboola Connection 
+to successfully connect to your system. This applies to all components including all extractors and writers.
 
 **Important:** These IP addresses can change in the future! For your convenience, you can programmatically
-fetch and process the [list of existing IP addresses in JSON format](/components/extractors/ip-addresses/kbc-public-ip.json).
+fetch and process the [list of existing IP addresses in JSON format](/components/ip-addresses/kbc-public-ip.json).
 Below are listed the available [Keboola Connection Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
 
 ## connection.keboola.com
-For projects in the default US region (AWS region `us-east-1`), the following IP addresses are currently used:
+For projects in the default US [region](/overview/#regions) (AWS region `us-east-1`), 
+the following IP addresses are currently used:
 
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
 - `34.224.0.188`
 - `34.200.169.177`
 - `52.206.109.126`
@@ -29,22 +33,21 @@ For projects in the default US region (AWS region `us-east-1`), the following IP
 - `149.72.196.5`
 
 ## connection.eu-central-1.keboola.com
-For projects in the EU region (AWS region `eu-central-1`), the following IP addresses are currently used:
+For projects in the EU [region](/overview/#regions) (AWS region `eu-central-1`), 
+the following IP addresses are currently used:
 
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
 - `35.157.170.229`
 - `35.157.93.175`
 - `149.72.196.5`
 
-## connection.ap-southeast-2.keboola.com
-For projects in the AU region (AWS region `ap-southeast-2`), the following IP addresses are currently used:
-
-- `13.236.254.70`
-- `13.54.182.53`
-
+## connection.east-us-2.azure.keboola.com
 
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
-download the [kbc-public-ip.json](/components/extractors/ip-addresses/kbc-public-ip.json) file.
+download the [kbc-public-ip.json](/components/ip-addresses/kbc-public-ip.json) file.
 
 To determine whether there have been changes since the last time you saved the file, check the publication
 time in the current file (`syncToken` attribute) and compare it to the publication time in the last file you saved.
