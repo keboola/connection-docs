@@ -27,7 +27,7 @@ Fill in the form to fit your needs.
 For more detailed information about querying, follow Google's [Advanced search](https://support.google.com/mail/answer/7190?hl=en) help site.
 - **Headers** (optional) -- Headers you want to download. If no headers are specified, all headers will be downloaded.
 
-Save the configuration and **run** the extractor. For information on the extraction process, go to the **Jobs** section.
+Don't forget to **Save** the configuration.
 
 ## Produced Tables
 Data are always imported incrementally. The extractor produces several tables that can be joined together.
