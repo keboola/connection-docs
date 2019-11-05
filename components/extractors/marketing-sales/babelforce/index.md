@@ -3,7 +3,6 @@ title: Babelforce
 permalink: /components/extractors/marketing-sales/babelforce/
 redirect_from:
     - /extractors/makreting-sales/babelforce/
-
 ---
 
 * TOC
