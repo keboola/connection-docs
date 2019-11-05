@@ -39,14 +39,13 @@ and log in. We are available to provide [support](/management/support/) whenever
 
 ## KBC Status Updates
 
-There are three equivalent places where you can get KBC Status updates (service status and changelog):
+There are two equivalent places where you can get KBC Status updates (service status and changelog):
 
 - [status.keboola.com](http://status.keboola.com/) --- we recommend subscribing to the feed
-- Slack channel
 - [Twitter](https://twitter.com/keboola_support)
 
 ## Your Tips and Suggestions
-Use the *Feature Wishlist* in the project menu to send us your suggestions for new features or improvements.
+Use the *Feature Wishlist* in the *Settings* menu to send us your suggestions for new features or improvements.
 
 {: .image-popup}
 ![Screenshot - Wishlist](/wishlist.png)
