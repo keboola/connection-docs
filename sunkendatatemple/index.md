@@ -170,7 +170,7 @@ The title of the Wikipedia page that pops up is the secret.
 ## Dive 5
 For this puzzle you’ll need to use Keboola again --- this time its “bucket sharing” feature. 
 Its job is to simplify sharing data between different projects or teams within the organization. 
-It’s pretty straightforward. Go to the “Storage” section, and click on the “link shared bucket” button:
+It’s pretty straightforward. Go to the “Data Catalog” section, and click on the “USE THIS” button:
 
 {: .image-popup}
 ![Screenshot - Go to Storage click link](/sunkendatatemple/22-storage.png)
