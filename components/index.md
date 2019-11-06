@@ -77,7 +77,7 @@ with an indication of their status:
 You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and 
 the tables it produced in your project.
 
-## Configuration Versions
+### Configuration Versions
 Configuration parameters can be changed at any time. Every change to a configuration is recorded 
 in the history of **versions**. You can also change the name and description of the configuration at any time. 
 The configuration description supports rich text formatting using [Markdown](https://ghost.org/blog/markdown/).
@@ -117,6 +117,14 @@ The copy of the configuration is created as a new isolated configuration -- i.e.
 between the original configuration and the copy, and the changes to one have no effect on the other.
 The copy of the configuration is created as a new isolated configuration -- i.e. there is no link 
 between the original configuration and the copy and changes to one have no effect on the other.
+
+### Configuration Rows
+Some components support the concept of multiple configurations sharing some parameters in common. A typical
+example are database extractors, where multiple tables are extracted and they all share the same database credentials.
+In such components, the configuration itself contains only the credentials and tables are stored in **configuration rows**.
+The *configuration* acts as an envelope for the *configuration rows*.
+
+
 
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user)
