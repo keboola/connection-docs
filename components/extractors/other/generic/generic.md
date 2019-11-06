@@ -29,13 +29,13 @@ Generic extractor is used as the base for many extractors. These components allo
 -- templates -- without the need to configure Generic extractor manually.
 
 {: .image-popup}
-![Generic Extractor - template](/components/extractors/other/generic-1.png)
+![Generic Extractor - template](/components/extractors/other/generic/generic-1.png)
 
 These components can be heavily customized simply be using the **Switch to JSON editor** button.
 If you select the template and want to specify more details using the advanced mode, don’t forget to click Save first. 
 The code will be pre-filled for you based on that template.
 
 {: .image-popup}
-![Generic Extractor - template](/components/extractors/other/generic-2.png)
+![Generic Extractor - template](/components/extractors/other/generic/generic-2.png)
 
 When finished editing, save the configuration. You can also always switch back to templates, but you'll lose your customizations.
