@@ -17,7 +17,6 @@ extractors that do not fall into any of the above mentioned categories:
 provides detailed data for locations specified by their names, address or coordinates.
 - [Papertrail](/components/extractors/other/papertrail/) --- imports data from Papertrail (log management).
 - [Pingdom](/components/extractors/other/pingdom/) --- imports data from Pingdom, a service for monitoring the uptime and performance of your websites and web applications.
-- [Portadi](/components/extractors/other/portadi/) --- downloads every single activity from your Portadi profile.
 - [Stripe](/components/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.
 - [What3words](/components/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
 - [GitHub](/components/extractors/other/github/) --- imports data from GitHub, a software development platform.
