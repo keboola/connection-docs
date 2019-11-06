@@ -24,23 +24,23 @@ and provides the following key features:
  
 **Important:** Data is always imported incrementally.
 
-
-## Create New Configuration
-Find Google Analytics in the list of extractors and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/marketing-sales/google-analytics/ui_new_config.png)
-
-**Authorize Account** to be redirected to Google, and authorize the extractor to access your Google Analytics data.
-
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 Select the desired Google Analytics account and profiles (views) from which you would like to extract data.
 
 {: .image-popup}
-![Screenshot - Select profiles](/components/extractors/marketing-sales/google-analytics/ui_profiles.png)
+![Screenshot - Intro Page](/components/extractors/marketing-sales/google-analytics/google-analytics-1.png)
+
+{: .image-popup}
+![Screenshot - Select Profiles](/components/extractors/marketing-sales/google-analytics/google-analytics-2.png)
 
 ## Create New Query
 Each query consists of metrics, dimensions and a date range. Optionally, it can be filtered by a filter expression or segment.
 Let's create a simple query with some basic metrics such as Sessions, Users and Pageviews.
+
+{: .image-popup}
+![Screenshot - Create New Query](/components/extractors/marketing-sales/google-analytics/google-analytics-3.png)
 
  1. Name your query, for example "Audience".
 
@@ -48,7 +48,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 
  3. From the dimensions selector, choose the `ga:date` dimension.
 
- 4. Leave the date range on default (last 5 days).
+ 4. Leave the date range on default (last 4 days).
 
  5. See the query results by hitting the `Test query` button.
 
@@ -59,7 +59,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
  8. To store the results to Storage, click the "play" icon on the query list page.
 
 {: .image-popup}
-![Screenshot - Create New Query](/components/extractors/marketing-sales/google-analytics/ui_new_query.png)
+![Screenshot - Query Details](/components/extractors/marketing-sales/google-analytics/google-analytics-4.png)
 
 ## Date Ranges
 A date range specifies a time window from which the data will be extracted.
@@ -73,10 +73,11 @@ Of course, you can download all the data from last year, but with this approach,
 The Google Analytics API does not always return precise data. Under certain circumstances, the data 
 returned is [sampled](https://support.google.com/analytics/answer/2637192?hl=en).
 To work around this problem and get more precise results, choose either the DailyWalk or Adaptive 
-anti-sampling algorithm. Both divide the wanted date range into smaller chunks.
+anti-sampling algorithm. Both divide the wanted date range into smaller chunks. You can configure
+anti-sampling in the query detail
 
 {: .image-popup}
-![Screenshot - Anti Sampling](/components/extractors/marketing-sales/google-analytics/ui_anti_sampling.png)
+![Screenshot - Anti Sampling](/components/extractors/marketing-sales/google-analytics/google-analytics-5.png)
 
 **DailyWalk**, as the name suggests, divides the date range by days. It means that the extractor needs to 
 make as many requests as there are days in the date range. Even though this algorithm might be more 
@@ -110,7 +111,7 @@ Insert the dimension or metric ID in the format of `ga:metricXX` or `ga:dimensio
 You can find the IDs on the Google Analytics page:
 
 {: .image-popup}
-![Screenshot - Custom metric ID](/components/extractors/marketing-sales/google-analytics/ga_custom_metrics.png)
+![Screenshot - Custom metric ID](/components/extractors/marketing-sales/google-analytics/google_console_metrics.png)
 
 ## Custom OAuth Credentials
 To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
@@ -145,4 +146,4 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
 8. You can now use these credentials in the **Custom Authorization** tab when authorizing the Google Analytics Extractor.
  
     {: .image-popup}
-    ![Screenshot - KBC - Custom Authorization](/components/extractors/marketing-sales/google-analytics/kbc_authorization.png)
+    ![Screenshot - KBC - Custom Authorization](/components/extractors/marketing-sales/google-analytics/google-analytics-6.png)
