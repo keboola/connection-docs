@@ -28,7 +28,7 @@ Optionally name the **storage bucket** where your results will be stored.
 To configure what data you want to extract, select the **configuration template** you want to use.
 
 {: .image-popup}
-![Mailchimp Templates](/components/extractors/marketing-sales/mailchimp/mailchimp-1.png)
+![Mailchimp Configuration](/components/extractors/marketing-sales/mailchimp/mailchimp-1.png)
 
 Available templates:
 
