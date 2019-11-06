@@ -143,31 +143,3 @@ All tables containing ads/campaigns insights data have a specific structure. Con
 You can set the version of the Facebook Marketing API that will be applied for all requests made to the
 API by the Facebook Ads extractor. Read more about the Marketing API versions
 [here](https://developers.facebook.com/docs/marketing-api/versions).
-
-## Migration from Old Extractor
-The configuration and resulting data tables produced by both new and old extractors are very different; 
-that's why their migration has to be done manually by following the next seven steps:
-
-1. Create a configuration of your new Facebook Ads extractor
-2. Migrate your Authorized Account (see below)
-3. Add new queries to the configuration
-4. Run the configuration
-5. Preview and analyze the resulting tables
-6. Update all corresponding transformations and writers with the new tables
-7. Update all affected orchestrations
-
-### Migration of Authorized Account
-
-Use `Direct token insert` in the authorization modal and copy the access token stored under the 
-`access_token` attribute in the old sys table configuration:
-
-- Copy the token from the old configuration
-
-{: .image-popup}
-![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/copytoken.png)
-
-- Insert the copied token
-
-{: .image-popup}
-![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/inserttoken.png)
-
