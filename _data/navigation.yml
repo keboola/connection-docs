@@ -96,9 +96,6 @@ items:
               - url: /components/extractors/marketing-sales/google-analytics/
                 title: Google Analytics
 
-              - url: /components/extractors/marketing-sales/hubspot/
-                title: HubSpot
-
               - url: /components/extractors/marketing-sales/mailchimp/
                 title: Mailchimp
 
