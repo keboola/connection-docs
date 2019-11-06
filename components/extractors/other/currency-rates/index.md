@@ -3,7 +3,6 @@ title: ECB Currency Rates
 permalink: /components/extractors/other/currency-rates/
 redirect_from:
     - /extractors/other/currency-rates/
-
 ---
 
 * TOC
@@ -14,17 +13,13 @@ the European Central Bank (ECB).
 
 The exchange rates are available from a base currency to 42 destination currencies for all **working days** from 4th January 1999. 
 
-## Create New Configuration
-Find ECB Currency Rates in the list of extractors and create a new configuration. Name it.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **ECB Currency Rates** extractor.
 
-{: .image-popup}
-![Screenshot - Currency Rates New Configuration](/components/extractors/other/currency-rates/01-new_configuration.png)
-
-## Select Source Currency
 From the dropdown list, select the source currency you wish to use. It is the only thing you need to do to configure this extractor. 
 
 {: .image-popup}
-![Screenshot - Currency Rates Source Currency](/components/extractors/other/currency-rates/02-source-currency.png)
+![Screenshot - Currency Rates Source Currency](/components/extractors/other/currency-rates/currency-rates-1.png)
 
 There are three major currencies available to choose from: 
 
@@ -48,7 +43,7 @@ The output table contains the following columns:
 - **source** -- always 'ECB'
 
 {: .image-popup}
-![Screenshot - Currency Rates Output Table](/components/extractors/other/currency-rates/03-output-table.png)
+![Screenshot - Currency Rates Output Table](/components/extractors/other/currency-rates/currency-rates-2.png)
 
 ***Note:** The reference rates are usually updated around 16:00 CET on every working day, except on TARGET closing days. 
 They are based on a regular daily concertation procedure between central banks across Europe, which normally takes place at 14:15 CET.*
