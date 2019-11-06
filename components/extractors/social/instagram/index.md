@@ -3,7 +3,6 @@ title: Instagram
 permalink: /components/extractors/social/instagram/
 redirect_from:
     - /extractors/social/instagram/
-
 ---
 
 * TOC
@@ -17,16 +16,13 @@ In order to access a business account's data, users have to authorize a Facebook
 that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
 the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) extractor.
 
-## Create New Configuration
+## Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
 page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-api/getting-started#connect).
 
-Find Instagram in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/social/instagram/createconfig.png)
-
-Authorize the Facebook account with access to the Facebook page you have the Instagram Business Account connected to.
+[Create a new configuration](/components/#creating-component-configuration) of the **Instagram** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with a Facebook account 
+with access to the Facebook page you have the Instagram Business Account connected to.
 You will be asked for the `instagram_basic,instagram_manage_insights,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
@@ -34,20 +30,20 @@ You can always revoke the authorization by removing the **Keboola IG Extractor**
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}
-![Screenshot - Authorize configuration](/components/extractors/social/instagram/authorizefb.png)
+![Screenshot - Authorize configuration](/components/extractors/social/instagram/instagram-1.png)
 
 From the list of fetched Instagram Business Accounts associated with the authorized Facebook account, select 
 the one you want to extract from.
 
 {: .image-popup}
-![Screenshot - Select Instagram business Account](/components/extractors/social/instagram/selectpages.png)
+![Screenshot - Select Instagram business Account](/components/extractors/social/instagram/instagram-2.png)
 
 ## Create New Query
 Create a new query and specify what data to extract. If you choose a preconfigured template,
 all necessary fields will be filled automatically.
 
 {: .image-popup}
-![Screenshot - New Query](/components/extractors/social/instagram/newquery.png)
+![Screenshot - New Query](/components/extractors/social/instagram/instagram-3.png)
 
 The query describes the extractor request to be sent to the Instagram Graph API that is built on the Facebook 
 Graph API. Knowing the API will make creating a query easy because all options except `name` represent the 
@@ -137,4 +133,4 @@ Instagram Graph API versioning follows Facebook Graph API versioning. You can se
 by the Instagram extractor.
 
 {: .image-popup}
-![Screenshot - Api Version](/components/extractors/social/facebook/apiversion.png)
+![Screenshot - Api Version](/components/extractors/social/instagram/instagram-4.png)
