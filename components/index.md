@@ -237,3 +237,16 @@ This invalidates the authorization obtained from the service and allows you to r
 Note that if you reset the authorization of a configuration which was copied, all the copies will lose the authorization.
 The authorization can also be revoked from within the service, in that case the configuration will stop working
 and you have to reset and reauthorize the configuration.
+
+## Advanced Mode
+For more features, switch the configuration of each table to the **Power User Mode** by clicking the *JSON editor* link.
+Through editing the full JSON configuration you can set up the component (all options are
+described in the component repository) and also the processors (to learn more about processors, 
+see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
+
+{: .image-popup}
+![Screenshot - Advanced](/components/configuration-17.png)
+
+Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may
+be disabled. Reverting such changes will re-enable the visual form. But whenever possible, the JSON will translate back
+to the visual form and vice versa.

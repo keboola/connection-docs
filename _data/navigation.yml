@@ -126,11 +126,11 @@ items:
               - url: /components/extractors/storage/aws-s3/
                 title: AWS S3
 
-              - url: /components/extractors/storage/google-drive/
-                title: Google Drive
-
               - url: /components/extractors/storage/ftp/
                 title: FTP
+
+              - url: /components/extractors/storage/google-drive/
+                title: Google Drive
 
               - url: /components/extractors/storage/http/
                 title: HTTP

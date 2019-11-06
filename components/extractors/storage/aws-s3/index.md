@@ -120,20 +120,8 @@ and **New Files Only** to create a configuration that incrementally loads all ne
  - **Add Row Number Column**: A new column `s3_row_filename` is added to the table and will contain the row number in each 
  of the downloaded files.
 
-## Advanced Mode
-
-For more features, switch the configuration of each table to the **Power User Mode** by clicking the *JSON editor* link.
-Through editing the full JSON configuration you can set up the component (all options are
-described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor)) and also the
-processors (to learn more about processors, see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
-
-{: .image-popup}
-![Screenshot - Advanced](/components/extractors/storage/aws-s3/aws-s3-7.png)
-
-Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may
-be disabled. Reverting such changes will re-enable the visual form. But whenever possible, the JSON will translate back
-to the visual form and vice versa.
+The extractor also supports [Advanced mode](/components/#advanced-mode), all supported
+parameters are described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor).
 
 ## Limitations
-
 All files stored in [AWS Glacier](https://aws.amazon.com/glacier/) are ignored.
