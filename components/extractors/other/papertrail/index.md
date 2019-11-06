@@ -13,55 +13,25 @@ This extractor uses the Papertrail [Search API](https://help.papertrailapp.com/k
 to import events matching the specified query from [Papertrail](https://papertrailapp.com/) 
 (logs from apps, servers, and cloud services).
 
-## Create New Configuration
-Find Papertrail in the list of extractors and create a new configuration. Name it.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Twitter** extractor.
 
-{: .image-popup}
-![Screenshot - New configuration](/components/extractors/other/papertrail/01-new_configuration.png)
-
-## Configure Extractor
 To configure the extractor, you need to provide a Papertrail API token, enter a search query and select a retention period.
 Then select data you wish to extract.
 
-### Get API Key
 First, provide a Papertrail [API token](https://help.papertrailapp.com/kb/how-it-works/http-api#authentication).
 You can get it in your [profile](https://papertrailapp.com/account/profile).
 
-{: .image-popup}
-![Screenshot - API token](/components/extractors/other/papertrail/02-token.png)
-
-### Enter Search Query
 Then enter your [search query](https://help.papertrailapp.com/kb/how-it-works/search-syntax/#quick-reference). 
 And finally, select a desired **retention period** from the dropdown menu (from 1 day to 1 month).
 
-{: .image-popup}
-![Screenshot - Search query](/components/extractors/other/papertrail/03-query.png)
-
-### Select Data
-To configure what data you want to extract, you can either select one of the configuration templates, 
-or you can [switch to the JSON editor](/components/extractors/other/papertrail/#advanced-mode) for advanced extractions.  
-
-{: .image-popup}
-![Screenshot - Template](/components/extractors/other/papertrail/04-template.png)
-
-The only template available at the moment is **Basic**. 
+To configure what data you want to extract, select the configuration template. The only template available at the moment is **Basic**. 
 This option downloads all records matching the query within the retention period. It incrementally adds new records each run.
 
-When done, **save** the configuration and **run** it.
-
-## Advanced Mode 
-For more features, switch the configuration to the Power User Mode by clicking the *Switch to JSON editor* link.
-JSON configuration uses the [Generic extractor](https://developers.keboola.com/extend/generic-extractor/) format.
-
 {: .image-popup}
-![Screenshot - Advanced mode](/components/extractors/other/papertrail/05-advanced-mode.png)
+![Screenshot - Papertrail configuration](/components/extractors/other/papertrail/papertrail-1.png)
 
-If you select the template and want to specify more details using the advanced mode, don't forget to click
-**Save** first. The code will be pre-filled for you based on that particular template, search query and selected retention period.
-
-{: .image-popup}
-![Screenshot - Pre-filled JSON](/components/extractors/other/papertrail/06-prefilled-json.png)
-
-When finished, **save** the configuration again and then run the extraction.
+When done, **Save** the configuration.
+You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
 **Important:** Data are always imported incrementally.
