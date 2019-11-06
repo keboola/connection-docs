@@ -3,7 +3,6 @@ title: Sklik
 permalink: /components/extractors/marketing-sales/sklik/
 redirect_from:
     - /extractors/marketing-sales/sklik/
-
 ---
 
 * TOC
@@ -11,32 +10,25 @@ redirect_from:
 
 The Sklik extractor fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
 
-## Create New Configuration
-Before you start, have a working [Sklik](https://www.sklik.cz/) account,
-and get an Sklik API [key](https://www.sklik.cz/generateToken).
-
-### Get API Key
-Log in to [Sklik](https://www.sklik.cz/) and select Settings from the drop-down menu next to your account name
+Before you start, have a working [Sklik](https://www.sklik.cz/) account, and get an Sklik 
+API [key](https://www.sklik.cz/generateToken). Select Settings from the drop-down menu next to your account name
 in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
-### Set Up Extractor
-In the Extractors section, find Sklik and create a new configuration. Name it.
-
-{: .image-popup}
-![Sklik New Configuration](/components/extractors/marketing-sales/sklik/01-new-configuration.png)
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Sklik** extractor.
 
 Then provide your API key:
 
 {: .image-popup}
-![Sklik API Key](/components/extractors/marketing-sales/sklik/02-api-key.png)
+![Sklik API Key](/components/extractors/marketing-sales/sklik/sklik-1.png)
 
 The extractor gets a list of all accessible accounts unless you restrict them explicitly.
 
 ### Configure Reports
-Now configure your report/-s:
+Now configure your reports:
 
 {: .image-popup}
-![Sklik Report](/components/extractors/marketing-sales/sklik/03-report.png)
+![Sklik Report](/components/extractors/marketing-sales/sklik/sklik-2.png)
 
 - **name** -- your name for the report; it will be used for the name of the table in Storage. *(Note that `accounts` is a reserved name thus it cannot be used as a report name.)*
 - **resource** -- name of the resource on which you want the report to be created. Supported resources are all from [https://api.sklik.cz/drak](https://api.sklik.cz/drak) which support the `createReport` and `readReport` methods (see [https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak](https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak) for more information):
