@@ -13,13 +13,9 @@ This extractor uses the [Facebook Graph API](https://developers.facebook.com/doc
 your Facebook Pages [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) 
 (including comments, likes, etc.), as well as Page or Page post [Insights](https://developers.facebook.com/docs/graph-api/reference/v3.0/insights).
 
-## Create New Configuration
-Find Facebook Pages in the **Extractors** section, create a new configuration and name it. It can be renamed any time.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/social/facebook/createconfig.png)
-
-Authorize the Facebook account with access to the Facebook Page you want to extract.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Pages** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Facebook Page you want to extract.
 You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
@@ -27,19 +23,19 @@ You can always revoke the authorization by removing the *Keboola Connection Extr
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}
-![Screenshot - Authorize configuration](/components/extractors/social/facebook/authorizefb.png)
+![Screenshot - Authorize configuration](/components/extractors/social/facebook/facebook-1.png)
 
 From the list of fetched pages associated with the authorized account, select the Facebook pages you want to extract.
 
 {: .image-popup}
-![Screenshot - Select Facebook Pages](/components/extractors/social/facebook/selectpages.png)
+![Screenshot - Select Facebook Pages](/components/extractors/social/facebook/facebook-2.png)
 
 ## Create New Query
-Create a new query and specify what data to extract. If you choose a preconfigured template,
+Click the **New Query** button and specify what data to extract. If you choose a preconfigured template,
 all necessary fields will fill up automatically.
 
 {: .image-popup}
-![Screenshot - New Query](/components/extractors/social/facebook/newquery.png)
+![Screenshot - New Query](/components/extractors/social/facebook/facebook-3.png)
 
 The query describes the extractor request to be sent to the Facebook Graph API. Knowing the API will make
 creating a query easy because all options except `name` represent the [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
@@ -129,32 +125,4 @@ You can set the version of the Facebook Graph API that will be applied for all r
 by the Facebook Pages extractor.
 
 {: .image-popup}
-![Screenshot - Api Version](/components/extractors/social/facebook/apiversion.png)
-
-## Migration from Old Extractor
-The configuration and resulting data tables produced by both the new and old extractor are very different; 
-that's why their migration has to be done manually by following the next seven steps:
-
-1. Create a configuration of your new Facebook Pages extractor
-2. Migrate your Authorized Account (see below)
-3. Add new queries to the configuration
-4. Run the configuration
-5. Preview and analyze the resulting tables
-6. Update all corresponding transformations and writers with the new tables
-7. Update all affected orchestrations
-
-### Migration of Authorized Account
-
-Use `Direct token insert` in the authorization modal and copy the access token stored in the old 
-`sys.c-ex-facebook.accounts` sys table under the column token. For each row of the sys table, there has to 
-be one configuration of the new extractor.
-
-- Copy the token from the old configuration
-
-{: .image-popup}
-![Screenshot - New Query](/components/extractors/social/facebook/copytoken.png)
-
-- Insert the copied token
-
-{: .image-popup}
-![Screenshot - New Query](/components/extractors/social/facebook/inserttoken.png)
+![Screenshot - Api Version](/components/extractors/social/facebook/facebook-4.png)
