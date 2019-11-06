@@ -126,9 +126,6 @@ items:
               - url: /components/extractors/storage/aws-s3/
                 title: AWS S3
 
-              - url: /components/extractors/storage/simple-aws-s3/
-                title: Simple AWS S3
-
               - url: /components/extractors/storage/google-drive/
                 title: Google Drive
 

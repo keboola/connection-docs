@@ -10,8 +10,6 @@ redirect_from:
 
 This extractor loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables 
 in Keboola Connection (KBC) Storage.
-Compared to the [Simple AWS S3 extractor](/components/extractors/storage/simple-aws-s3), it offers extensive CSV postprocessing
-and its UI gives you more flexibility.
 
 After creating a new configuration, select the files you want to extract from AWS S3 and determine the way how
 you save them to KBC Storage. You also need to set up the proper permissions on AWS.
