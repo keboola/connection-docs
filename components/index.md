@@ -124,7 +124,40 @@ example are database extractors, where multiple tables are extracted and they al
 In such components, the configuration itself contains only the credentials and tables are stored in **configuration rows**.
 The *configuration* acts as an envelope for the *configuration rows*.
 
+The following example shows a configuration of [AWS S3 extractor](/components/extractors/storage/aws-s3/)
+with three configuration rows:
 
+{: .image-popup}
+![Screenshot - Configuration Rows](/components/configuration-14.png)
+
+Each row can individually be modified or deleted. You can also disable a row which means that if the entire 
+configuration is ran, the row will be skipped. You can also run a single row explicitly. Jobs which run only
+a single row have the label **partial**. Therefore, you can for
+example create a configuration which on a scheduled run extracts all the enable tables and also contains some tables, which 
+share the same credentials but are updated manually (or in a different orchestration).
+
+You can add as many rows as you like, the list of configuration rows is fully searchable. You can also change the order of the
+rows. The order is maintained during processing, so you can use this to for example extract the large tables first. The
+order of rows has no effect on your project, because a Job is finished only after each row has been processed.
+
+### Configuration Rows Versions
+Changes to configuration rows are part of the [configuration versioning](#configuration-versions). The following image shows that
+the versions in th configuration page list changes to the configuration rows -- both that a table was added and that it was modified.
+
+{: .image-popup}
+![Screenshot - Configuration Rows All Versions](/components/configuration-15.png)
+
+That means that each configuration version contains a complete set of its rows. This is important when copying or rolling back a 
+version -- you can do these operations safely without worrying about rows.
+
+When you edit a configuration row, there is a also a list of **row versions**. Row versions show changes only to the single
+row. You can rollback a row to a previous version without interacting with the other rows.
+
+{: .image-popup}
+![Screenshot - Rows Versions](/components/configuration-16.png)
+
+Note that you cannot copy a configuration row to a new configuration. You always have to copy the entire
+configuration.
 
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user)
