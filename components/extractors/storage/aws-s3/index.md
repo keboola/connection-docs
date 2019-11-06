@@ -61,6 +61,7 @@ It will be used to create the destination table name in Storage and can be modif
 {: .image-popup}
 ![Screenshot - Create table](/components/extractors/storage/aws-s3/aws-s3-2.png)
 
+Configured tables are stored as [configuration rows](/components/#configuration-rows).
 Each table has different settings (key, load type, etc.) but they all share the same AWS credentials.
 
 ### Source
