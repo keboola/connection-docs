@@ -12,12 +12,6 @@ This writer loads single or multiple tables from your current project into a dif
 The component can be used in situations where [Shared Buckets](/storage/buckets/sharing/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 
-## Create New Configuration
-Find the Keboola Connection Storage writer in the list of writers and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/writers/storage/storage-api/create-configuration.png)
-
 ## Prepare API Token
 The writer requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. 
 This limits the potential risks of token misuse.
@@ -26,7 +20,7 @@ To create such a token, go to **Users & Settings** in the *target project* and c
 help you identify the token later, and set the **write** access to the desired bucket.
 
 {: .image-popup}
-![Screenshot - Create API Token](/components/writers/storage/storage-api/create-token.png)
+![Screenshot - Create API Token](/components/writers/storage/storage-api/storage-api-1.png)
 
 After creating the token, copy it somewhere safe as you won't be able to see it again. If you lose the token,
 you can refresh it -- the current token will be deactivated and a new token will be issued.
@@ -34,39 +28,28 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to write to multiple buckets, you'll have to create multiple tokens (each with access to a single bucket only)
 and multiple configurations.
 
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** writer.
+
 ## Specify Target Project
-Select the region of the *target project* and paste the token you generated in the *target project*.
+Select the region of the *target project* and paste the token [you generated](#prepare-api-token) in the *target project*.
 
 {: .image-popup}
-![Screenshot - Target Project](/components/writers/storage/storage-api/target-project-1.png)
+![Screenshot - Target Project](/components/writers/storage/storage-api/storage-api-2.png)
 
 You can review the name of the target project and bucket in the *Target project* configuration section.
 
 {: .image-popup}
-![Screenshot - Target Project](/components/writers/storage/storage-api/target-project-2.png)
+![Screenshot - Target Project](/components/writers/storage/storage-api/storage-api-3.png)
 
 ## Add Tables
-
-{: .image-popup}
-![Screenshot - Create table](/components/writers/storage/storage-api/add-tables.png)
-
 To create a new table, click the **New Table** button and select a table you want to write to the *target project*.
 
-## List Tables
-
 {: .image-popup}
-![Screenshot - List tables](/components/writers/storage/storage-api/list-tables.png)
+![Screenshot - Create table](/components/writers/storage/storage-api/storage-api-4.png)
 
-The configuration can write as many tables as you wish.
-The list is fully searchable, and you can delete or disable each table. In addition, you can explicitly write one table
-only. The write order of the tables can be changed.
-
-## Modify Table
-
+Configured tables are stored as [configuration rows](/components/#configuration-rows).
 Each table has different settings but they are all written to the **same project and bucket**.
-
-{: .image-popup}
-![Screenshot - List tables](/components/writers/storage/storage-api/configuration.png)
 
 ### Source
 - **Table** specifies the table in the *source project*. This value cannot be changed. If you want to write another table,
@@ -75,5 +58,11 @@ create a new item in the configuration.
 
 ### Destination
 - **Table Name** -- table name in the *target project* and bucket.
-- **Incremental** -- enables [incremental loading](/storage/tables/#incremental-loading) in the *target project*.
-The **primary key** setting will be used from the table in the current project.
+- **Mode** -- One of `Update`, `Replace` or `Recreate`. The update mode enables [incremental loading](/storage/tables/#incremental-loading) 
+in the *target project*. The **primary key** setting will be used from the table in the current project. The replace mode replaces all data
+in the target table, but keeps the table structure. The Recreate mode drops and creates the target table. Note that the
+Recreate mode creates a brief moments where the target table does not exist. This can create problems for example when an orchestration
+reading the table runs very often -- it may fail occasionally.
+
+{: .image-popup}
+![Screenshot - Table detail](/components/writers/storage/storage-api/storage-api-5.png)
