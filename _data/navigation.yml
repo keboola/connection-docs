@@ -231,10 +231,6 @@ items:
       - url: /components/ip-addresses
         title: IP Addresses
 
-#  - url: /catalog/
-#    title: Data Catalog
-#    items:      
-
   - url: /storage/
     title: Storage
     items:
@@ -258,9 +254,6 @@ items:
 
       - url: /storage/file-uploads/
         title: Files
-
-      - url: /storage/configurations/
-        title: Configurations
 
   - url: /orchestrator/
     title: Orchestrations

@@ -3,7 +3,6 @@ title: Other Extractors
 permalink: /components/extractors/other/
 redirect_from:
     - /extractors/other/
-
 ---
 
 Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
