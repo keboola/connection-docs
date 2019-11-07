@@ -3,7 +3,6 @@ title: ThoughtSpot
 permalink: /components/writers/bi-tools/thoughtspot/
 redirect_from:
     - /writers/bi-tools/thoughtspot/
-
 ---
 
 * TOC
@@ -11,45 +10,31 @@ redirect_from:
 
 This writer sends data to a [ThoughtSpot](https://www.thoughtspot.com/product) platform.
 
-## Create New Configuration
-Find the ThoughtSpot writer in the list of writers and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/writers/bi-tools/thoughtspot/ui1.png)
-
-The first step is to **Set Up Credentials**:
-
-{: .image-popup}
-![Screenshot - Main page](/components/writers/bi-tools/thoughtspot/intro-page.png)
-
-You need to provide a [*host name*](https://docs.thoughtspot.com/5.0/data-integrate/clients/use-jdbc-driver.html), *user name*, *password*, *database name*, *schema* and *SSH user* and *SSH password*.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** writer.
+Then **Set Up Credentials**. You need to provide a [*host name*](https://docs.thoughtspot.com/5.0/data-integrate/clients/use-jdbc-driver.html), *user name*, *password*, *database name*, *schema* and *SSH user* and *SSH password*.
 The writer uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/5.0/admin/loading/use-data-importer.html#) and TQL commands to load that data.
 These commands are executed on the server through an SSH connection. Therefore the
 [SSH credentials](https://docs.thoughtspot.com/4.4/app-integrate/introduction/logins.html) are needed to connect to the server instance.
 
 {: .image-popup}
-![Screenshot - Credentials](/components/writers/bi-tools/thoughtspot/credentials.png)
+![Screenshot - Credentials](/components/writers/bi-tools/thoughtspot/thoughtspot-1.png)
 
 ## Table Configuration
-The next step is to configure the tables you want to write. Click the **Add New Table** button:
+The next step is to configure the tables you want to write. Click the **Add New Table** button and select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Add Table](/components/writers/bi-tools/thoughtspot/add-table.png)
-
-Select an existing table from Storage:
-
-{: .image-popup}
-![Screenshot - Select Table](/components/writers/bi-tools/thoughtspot/select-table.png)
+![Screenshot - Select Table](/components/writers/bi-tools/thoughtspot/thoughtspot-2.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/components/writers/bi-tools/thoughtspot/configure-table.png)
+![Screenshot - Configure Table](/components/writers/bi-tools/thoughtspot/thoughtspot-3.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/components/writers/bi-tools/thoughtspot/table-columns.png)
+![Screenshot - Table Columns](/components/writers/bi-tools/thoughtspot/thoughtspot-4.png)
 
 For each column you can specify its
 
@@ -65,12 +50,12 @@ about schema design or the [official guide](https://docs.thoughtspot.com/5.0/adm
 more details on designing the data schema.
 
 {: .image-popup}
-![Screenshot - Table Type](/components/writers/bi-tools/thoughtspot/table-type.png)
+![Screenshot - Table Type](/components/writers/bi-tools/thoughtspot/thoughtspot-5.png)
 
 There are two main options how the writer can write data to tables --- **Full Load** mode and **Incremental Load** mode.
 
 {: .image-popup}
-![Screenshot - Table Options](/components/writers/bi-tools/thoughtspot/table-options.png)
+![Screenshot - Table Options](/components/writers/bi-tools/thoughtspot/thoughtspot-6.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
@@ -80,5 +65,5 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://docs.thoughtspot.com/5.0/admin/loading/check-dependencies-tql.html) command and recreated.
 
-Additionally, you can specify a **Ppimary key** of the table, a simple column **data filter**, and a filter for
+Additionally, you can specify a **Primary key** of the table, a simple column **data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).
