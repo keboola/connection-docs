@@ -3,7 +3,6 @@ title: Snowflake
 permalink: /components/writers/database/snowflake/
 redirect_from:
     - /writers/database/snowflake/
-
 ---
 
 * TOC
@@ -14,30 +13,24 @@ to an existing Snowflake database, or to a new database it provisions to you. Th
 for sharing your data in form of an SQL database with some service. For example, you can use it to send
 data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
 
-## Create New Configuration
-Find the Snowflake writer in the list of writers and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/writers/database/snowflake/ui1.png)
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Redshift** writer.
 
 The first step is to **Set Up Credentials**:
 
 {: .image-popup}
-![Screenshot - Main page](/components/writers/database/snowflake/ui2.png)
+![Screenshot - Main page](/components/writers/database/snowflake/snowflake-1.png)
 
 There are two modes of operation of the writer:
 
 - **Own Snowflake database** --- Use this when you have your own Snowflake database -- i.e. you have a contract with Snowflake, or someone gave you credentials of a database to write to.
 - **Keboola Snowflake database** --- In this mode, the writer will create a new database for you and **give you credentials** to it.
 
-{: .image-popup}
-![Screenshot - Credential types](/components/writers/database/snowflake/credentials.png)
-
 ### Own Snowflake Database
 You need to provide a *host name* (account name), *user name*, *password*, *database name*, *schema*, and *[Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
 
 {: .image-popup}
-![Screenshot - Own Credentials](/components/writers/database/snowflake/own-credentials.png)
+![Screenshot - Own Credentials](/components/writers/database/snowflake/snowflake-2.png)
 
 We highly recommend that you create a dedicated user for the writer in your Snowflake database. You can use the following SQL code to get started:
 
@@ -63,7 +56,7 @@ query `CREATE SCHEMA john.doe;`, you need to enter the schema name as `DOE` in t
 A Keboola Snowflake database is created by the writer and the credentials are provisioned for you:
 
 {: .image-popup}
-![Screenshot - Provisioned Credentials](/components/writers/database/snowflake/provisioned-credentials.png)
+![Screenshot - Provisioned Credentials](/components/writers/database/snowflake/snowflake-3.png)
 
 You can share the credentials with whatever service that needs to access your data.
 Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world.
@@ -71,25 +64,20 @@ This means that it must not be receiving any data (outside those provided by the
 Also note that the number of provisioned Snowflake databases is part of [Project limits](/management/project/limits/).
 
 ## Table Configuration
-Regardless of the credentials used, the next step is to configure the tables to write. Click **Add New Table**:
+The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Add Table](/components/writers/database/snowflake/add-table.png)
-
-Select an existing table from Storage:
-
-{: .image-popup}
-![Screenshot - Select Table](/components/writers/database/snowflake/select-table.png)
+![Screenshot - Select Table](/components/writers/database/snowflake/snowflake-4.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/components/writers/database/snowflake/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/snowflake/snowflake-5.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/components/writers/database/snowflake/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/snowflake/snowflake-6.png)
 
 For each column you can specify its
 
@@ -109,7 +97,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/components/writers/database/snowflake/table-options.png)
+![Screenshot - Table Options](/components/writers/database/snowflake/snowflake-7.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
