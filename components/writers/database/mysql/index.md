@@ -11,21 +11,18 @@ redirect_from:
 
 This writer sends data to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.
 
-## Create New Configuration
-Find the MySQL writer in the list of writers and create a new configuration. Name it.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **MySQL** writer.
+
+The first step is to **Set Up Database Credentials**:
 
 {: .image-popup}
-![Screenshot - Create configuration](/components/writers/database/mysql/ui1.png)
-
-The first step is to **Set Up Credentials**:
-
-{: .image-popup}
-![Screenshot - Main page](/components/writers/database/mysql/intro-page.png)
+![Screenshot - Main page](/components/writers/database/mysql/mysql-1.png)
 
 You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
 
 {: .image-popup}
-![Screenshot - Credentials](/components/writers/database/mysql/credentials.png)
+![Screenshot - Credentials](/components/writers/database/mysql/mysql-2.png)
 
 We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
 
@@ -39,25 +36,20 @@ GRANT CREATE TEMPORARY TABLES, CREATE, DROP, SELECT, INSERT, UPDATE ON writer_sa
 It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 ## Table Configuration
-The next step is to configure the tables you want to write. Click **Add New Table**:
+The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Add Table](/components/writers/database/mysql/add-table.png)
-
-Select an existing table from Storage:
-
-{: .image-popup}
-![Screenshot - Select Table](/components/writers/database/mysql/select-table.png)
+![Screenshot - Select Table](/components/writers/database/mysql/mysql-3.png)
 
 Then specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/components/writers/database/mysql/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/mysql/mysql-4.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/components/writers/database/mysql/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/mysql/mysql-5.png)
 
 For each column you can specify its
 
@@ -73,7 +65,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/components/writers/database/mysql/table-options.png)
+![Screenshot - Table Options](/components/writers/database/mysql/mysql-6.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
