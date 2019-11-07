@@ -12,7 +12,7 @@ redirect_from:
 This writer sends data to a [PostgreSQL](https://www.postgresql.org/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Oracle** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **PostgreSQL** writer.
 
 The first step is to **Set Up Database Credentials**:
 
