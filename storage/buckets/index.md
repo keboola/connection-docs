@@ -3,11 +3,10 @@ title: Buckets
 permalink: /storage/buckets/
 ---
 
-Buckets are containers for tables in Storage. They are further organized into the following three **stages**:
+Buckets are containers for tables in Storage. They are further organized into the following two **stages**:
 
 1. **in** --- for input data (usually extractor results)
 2. **out** --- for processed data (usually results of transformations or applications)
-3. **sys** --- deprecated stage used for configuration of some components
 
 The distinction between the input and output stage is purely conventional differentiation between raw and processed data.
 When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#backend-properties) based on its properties.

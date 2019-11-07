@@ -231,6 +231,10 @@ items:
       - url: /components/ip-addresses
         title: IP Addresses
 
+#  - url: /catalog/
+#    title: Data Catalog
+#    items:      
+
   - url: /storage/
     title: Storage
     items:

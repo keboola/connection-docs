@@ -35,6 +35,9 @@ little, and then compare the new output table with the original one to make sure
 remained the same. They can also be used as a workaround to renaming tables because this
 feature is not available yet.
 
+{: .image-popup}
+![Screenshot - Create Snapshot](/storage/tables/snapshot-create.png)
+
 New tables can be created from any snapshot.
 
 {: .image-popup}
