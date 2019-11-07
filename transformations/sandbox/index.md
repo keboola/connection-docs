@@ -51,7 +51,7 @@ Go to the **Transformations** section and click the **Sandbox** button in the up
 {: .image-popup}
 ![Screenshot - Plain Sandbox](/transformations/sandbox/howto-plain-sandbox-1.png)
 
-If no sandbox exists, create it first by clicking **Create Sandbox** for the desired backend:
+If no sandbox exists, create it first by clicking **New Sandbox** for the desired backend:
 
 {: .image-popup}
 ![Screenshot - Plain Sandbox](/transformations/sandbox/howto-plain-sandbox-2.png)
@@ -81,12 +81,12 @@ To create a sandbox for a specific transformation, go to the **Transformations**
 ![Screenshot - Transformation Sandbox](/transformations/sandbox/howto-transformation-sandbox-1.png)
 
 The Sandbox backend is defined by the transformation backend. In the transformation detail,
-click the **Create Sandbox** button:
+click the **New Sandbox** button:
 
 {: .image-popup}
 ![Screenshot - Transformation Sandbox](/transformations/sandbox/howto-transformation-sandbox-2.png)
 
-Clicking the **Create** button will get you the connection credentials:
+Clicking the **Create** button will load the data into the sandbox:
 
 {: .image-popup}
 ![Screenshot - Transformation Sandbox](/transformations/sandbox/transformation-sandbox.png)
