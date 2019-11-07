@@ -11,21 +11,18 @@ redirect_from:
 
 This writer sends data to a [PostgreSQL](https://www.postgresql.org/) database.
 
-## Create New Configuration
-Find the PostgreSQL writer in the list of writers and create a new configuration. Name it.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Oracle** writer.
+
+The first step is to **Set Up Database Credentials**:
 
 {: .image-popup}
-![Screenshot - Create configuration](/components/writers/database/postgresql/ui1.png)
-
-The first step is to **Set Up Credentials**:
-
-{: .image-popup}
-![Screenshot - Main page](/components/writers/database/postgresql/intro-page.png)
+![Screenshot - Main page](/components/writers/database/postgresql/postgre-1.png)
 
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
 
 {: .image-popup}
-![Screenshot - Credentials](/components/writers/database/postgresql/credentials.png)
+![Screenshot - Credentials](/components/writers/database/postgresql/postgre-2.png)
 
 We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
 
@@ -40,25 +37,20 @@ ALTER USER writer_sample SET search_path TO writer_sample;
 It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 ## Table Configuration
-The next step is to configure the tables you want to write. Click **Add New Table**:
+The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
 
 {: .image-popup}
-![Screenshot - Add Table](/components/writers/database/postgresql/add-table.png)
-
-Select an existing table from Storage:
-
-{: .image-popup}
-![Screenshot - Select Table](/components/writers/database/postgresql/select-table.png)
+![Screenshot - Select Table](/components/writers/database/postgresql/postgre-3.png)
 
 The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
 
 {: .image-popup}
-![Screenshot - Configure Table](/components/writers/database/postgresql/configure-table.png)
+![Screenshot - Configure Table](/components/writers/database/postgresql/postgre-4.png)
 
 Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/components/writers/database/postgresql/table-columns.png)
+![Screenshot - Table Columns](/components/writers/database/postgresql/postgre-5.png)
 
 For each column you can specify its
 
@@ -74,7 +66,7 @@ At the top of the page, you can specify the target table name and additional loa
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/components/writers/database/postgresql/table-options.png)
+![Screenshot - Table Options](/components/writers/database/postgresql/postgre-6.png)
 
 In the **Incremental Load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
@@ -88,7 +80,6 @@ This means that if the database is used by other applications which acquire tabl
 freeze waiting for the locks to be released. This will be recorded in the writer logs with a message similar to this:
 
     Table "account" is locked by 1 transactions, waiting for them to finish
-
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).
