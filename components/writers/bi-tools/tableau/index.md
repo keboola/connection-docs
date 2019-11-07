@@ -23,7 +23,7 @@ Our Getting Started tutorial will guide you through the process of [writing data
 from KBC to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Mailchimp** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Tableau** writer.
 
 Then create a new table configuration by clicking the **New Table** button. Select a table
 from [Storage](/storage/tables/).
