@@ -37,7 +37,7 @@ selected buckets, sending data directly to your KBC project. The access can be r
 ### Project Status
 All important information on your project status can be found in the following places:
 
-- [**Notifications**](/management/account/#notifications) --- click the bell at the top of the side bar for
+- [**Notifications**](/management/account/#notifications) --- click the bell at the right of the top menu for
 notifications and highly important messages, such as expiring projects and component migration. The channel is user specific and as such shows each user all notifications for all their projects.
 - **Overview** --- check this section for basic status information about your project.
 - [**Limits tab**](/management/project/limits/) in *Users & Settings* --- check all your measured billable
