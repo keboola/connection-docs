@@ -94,7 +94,7 @@ Keboola Connection is available in multiple regions — currently in:
 - EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
 - US Azure -- [connection.east-us-2.azure.keboola.com](https://connection.east-us-2.azure.keboola.com). 
 
-A **Region** instance is a combination of a datacenter location and a cloud provider. Currently supported
+A **Region** instance is a combination of a datacenter location and a cloud provider. The currently supported
 cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/).
 Each region instance is a completely independent full stack of Keboola Connection services. That means that 
 if you have projects in multiple regions, you need to have multiple Keboola Connection accounts.
@@ -102,7 +102,7 @@ if you have projects in multiple regions, you need to have multiple Keboola Conn
 Each region uses a different network, which means different settings if you 
 employ [IP address](/components/ip-addresses/) filtering.
 The [Developer documentations](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes in 
-more details how to handle regions when working with the API.
+more detail how to handle regions when working with the API.
 
 ### Jobs
 Most things in KBC are done using the batch approach; when you do some operation, a job is created
