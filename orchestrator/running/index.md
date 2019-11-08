@@ -13,7 +13,7 @@ You can run the orchestration manually:
 ![Screenshot - Orchestration Main Page Configured](/orchestrator/running/orchestration-main-1.png)
 
 Before running the orchestration, you can review what tasks (configured components) will be executed. You can
-also (de)select individual tasks to exclude:
+also (de)select individual tasks to exclude:    
 
 {: .image-popup}
 ![Screenshot - Run Orchestration](/orchestrator/running/orchestration-run.png)

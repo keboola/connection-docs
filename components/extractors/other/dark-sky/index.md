@@ -12,20 +12,18 @@ redirect_from:
 This extractor allows you to look up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
 Data are provided by the [Dark Sky API](https://darksky.net/dev).
 
-## Configuring Extractor
-
 To configure the extractor, you need to provide tables with locations, your Dark Sky API key, units to use and a desired forecast granularity.
 
-### API Secret Key
-
+## API Secret Key
 Before you start, please create an account in the [Dark Sky API](https://darksky.net/dev). Log in and get your API Secret key.
 Dark Sky offers 1,000 API calls a day for free.
 
 {: .image-popup}
 ![Screenshot - Dark Sky API key](/components/extractors/other/dark-sky/dark-sky-token.png)
 
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Dark Sky** extractor.
 
-### Source Data Input Mapping
 The extractor fetches weather conditions for locations provided by you in one or more tables.
 Each table must contain the following columns in this particular order:
 
@@ -40,7 +38,7 @@ select the required columns in the desired order.
 {: .image-popup}
 ![Screenshot - Advanced Input Mapping](/components/extractors/other/dark-sky/input-mapping.png)
 
-#### Sample input table
+### Sample input table
 
 |latitude|longitude|
 |-----|----|

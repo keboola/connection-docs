@@ -9,94 +9,6 @@ redirect_from:
 {:toc}
 
 The BigQuery extractor loads data from [BigQuery](https://cloud.google.com/bigquery/) and brings it into Keboola Connection (KBC). 
-
-## Create New Configuration 
-Find Google Analytics in the list of extractors. Create a new configuration and name it. 
-
-{: .image-popup}
-![Screenshot - Big Query Authorization](/components/extractors/database/bigquery/ui1.png)
-
-## Initial Setup
-
-### Service Account
-
-To access and extract data from your BigQuery dataset, you need to set up a Google Service Account. 
-
-- Go to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
-- Select the project you want the extractor to have access to
-- Click **+ Create Service Account**
-- Select an appropriate **Service account name** (e.g. `Keboola Connection BigQuery Extractor`)
-
-{: .image-popup}
-![Screenshot - Create service account](/components/extractors/database/bigquery/serviceaccount1.png)
-
-- Then add the `BigQuery Data Editor`, `BigQuery Job User` and `Storage Object Admin` roles.
-
-{: .image-popup}
-![Screenshot - Create service account](/components/extractors/database/bigquery/serviceaccount2.png)
-
-- Finally, create a new JSON key (click **+ Create key**) and download it to your computer (click **Create**).
-
-{: .image-popup}
-![Screenshot - Create service account](/components/extractors/database/bigquery/serviceaccount3.png)
-
-- Go back to your BigQuery extractor configuration.
-- In the **Google Service Account Key** section, click **Set Service Account Key**.
-
-{: .image-popup}
-![Screenshot - Set Service Account Key](/components/extractors/database/bigquery/ui2.png)
-
-- Open the downloaded key in a text editor, copy & paste it in the input field, click **Submit** and then **Save**. 
-
-{: .image-popup}
-![Screenshot - Copy & Paste Service Account Key](/components/extractors/database/bigquery/ui3.png)
-
-**Important:** The private key is stored in an **encrypted** form and only the non-sensitive parts are visible in the UI for your verification. 
-The key can be deleted or replaced by a new one at any time.
-
-{: .image-popup}
-![Screenshot - Copy & Paste Service Account Key](/components/extractors/database/bigquery/ui4.png)
-
-### Bucket
-
-The extractor uses Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
-
-- Go to the [**Google Cloud Platform Console > Storage > Browser**](https://console.cloud.google.com/storage/browser)
-- Click **+ Create Bucket**.
-- **Name** your bucket and select **Location**. (The location must be the same as of your dataset.)
-
-{: .image-popup}
-![Screenshot - Google Cloud Platform](/components/extractors/database/bigquery/ui5.png)
-
-- Go back to your BigQuery extractor configuration.
-- In the **Unload Configuration** section, fill **Cloud Storage Bucket Name** you have created, and select the correct **Dataset Location**.
-- Click **Save**.
-
-{: .image-popup}
-![Screenshot - Google Cloud Platform](/components/extractors/database/bigquery/ui6.png)
-
-## Configure Extraction
-
-Start by clicking the green **+ Add Query** button.
-
-{: .image-popup}
-![Screenshot - Big Query Bucket Configured](/components/extractors/database/bigquery/ui7.png)
-
-Name the query and click **Create**.  
-
-{: .image-popup}
-![Screenshot - Big Query Bucket Configured](/components/extractors/database/bigquery/ui8.png)
-
-Specify your requirements in the `SQL Query` field and **Save** the query configuration.
-
-{: .image-popup}
-![Screenshot - Finished Configuration](/components/extractors/database/bigquery/ui9.png)
-
-Now run the configuration to bring the data to KBC.
-
-{: .image-popup}
-![Screenshot - Finished Configuration](/components/extractors/database/bigquery/ui10.png)
-
 Running the extractor creates a background job that
 
 - executes the queries in Google BigQuery.
@@ -105,3 +17,78 @@ Running the extractor creates a background job that
 - removes the results from Google Cloud Storage.
 
 *Note: Using the Google BigQuery extractor is also described in our [Getting Started Tutorial](https://help.keboola.com/tutorial/ad-hoc/#using-bigquery-extractor).*
+
+## Initial Setup
+
+### Service Account
+To access and extract data from your BigQuery dataset, you need to set up a Google Service Account. Go 
+to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
+and select the project you want the extractor to have access to. Click **Create Service Account**
+amd enter a **Service account name** (e.g. `Keboola Connection BigQuery Extractor`).
+
+{: .image-popup}
+![Screenshot - Create service account](/components/extractors/database/bigquery/googlecloud-1.png)
+
+Then add the `BigQuery Data Editor`, `BigQuery Job User` and `Storage Object Admin` roles.
+
+{: .image-popup}
+![Screenshot - Set admin roles](/components/extractors/database/bigquery/googlecloud-2.png)
+
+Finally, create a new JSON key (click **+ Create key**) and download it to your computer (click **Create**).
+
+{: .image-popup}
+![Screenshot - Create JSON key](/components/extractors/database/bigquery/googlecloud-3.png)
+
+### Bucket
+The extractor uses Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
+Go to the [**Google Cloud Platform Console > Storage > Browser**](https://console.cloud.google.com/storage/browser)
+and click **Create Bucket**. Enter **Name** of your bucket and select **Location** (must be the same as of your dataset).
+
+{: .image-popup}
+![Screenshot - Google Cloud Platform](/components/extractors/database/bigquery/googlecloud-4.png)
+
+## Configure Extraction
+[Create a new configuration](/components/#creating-component-configuration) of the BigQuery extractor.
+Click the **Set Service Account Key** button.
+
+{: .image-popup}
+![Screenshot - Set Service Account Key](/components/extractors/database/bigquery/bigquery-1.png)
+
+- Open the downloaded key in a text editor, copy & paste it in the input field, click **Submit**. 
+
+{: .image-popup}
+![Screenshot - Copy & Paste Service Account Key](/components/extractors/database/bigquery/bigquery-2.png)
+
+Click on the **Save** button to store the credentials.
+**Important:** The private key is stored in an **encrypted** form and only the non-sensitive parts are visible in the UI for your verification. 
+The key can be deleted or replaced by a new one at any time.
+
+{: .image-popup}
+![Screenshot - Save Service Account Key](/components/extractors/database/bigquery/bigquery-3.png)
+
+In the **Unload Configuration** section, fill **Cloud Storage Bucket Name** as the name of the bucket 
+you [have created earlier](#bucket), and select the correct **Dataset Location**. Click **Save**.
+
+{: .image-popup}
+![Screenshot - Configure Bucket](/components/extractors/database/bigquery/bigquery-4.png)
+
+### Configure Queries
+Start by clicking the **Add Query** button.
+
+{: .image-popup}
+![Screenshot - Add Query](/components/extractors/database/bigquery/bigquery-5.png)
+
+Name the query and click **Create**.  
+
+{: .image-popup}
+![Screenshot - Name Query](/components/extractors/database/bigquery/bigquery-6.png)
+
+Specify the SQL code in the **SQL Query** field and **Save** the query configuration.
+In the example below a public dataset to test the extractor was used:
+
+{% highlight sql %}
+SELECT * FROM `bigquery-public-data.utility_us.country_code_iso` LIMIT 10;
+{% endhighlight %}
+
+{: .image-popup}
+![Screenshot - Configure Query](/components/extractors/database/bigquery/bigquery-7.png)

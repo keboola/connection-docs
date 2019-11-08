@@ -7,7 +7,7 @@ permalink: /management/project/
 {:toc}
 
 The project settings page provides general information about your project.
-To access it, click the **Users & Settings** link in the menu on the left:
+To access it, click the **Users & Settings** link in the top menu:
 
 {: .image-popup}
 ![Screenshot - Project Settings](/management/project/settings.png)
@@ -20,7 +20,7 @@ The settings page shows important properties of your project, such as:
 - Data retention for [time travel](/storage/tables/backups/)
 - Region -- physical location of the project data; it corresponds to an
 [Amazon Region identifier](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
-<br> Available regions: **us-east-1** (USA -- North Virginia), **eu-central-1** (EU -- Frankfurt) and **ap-southeast-2** (AU -- Sydney)
+<br> Available regions: **us-east-1** (USA -- North Virginia), **eu-central-1** (EU -- Frankfurt)
 
 You can also
 
@@ -30,5 +30,5 @@ You can also
 - [delete the project](/management/project/delete/).
 
 Apart from the settings page, there are also [Notifications](/management/account/#notifications) available. To access these
-important messages collected from all of your projects, go to your [Account page](/management/account/), or click the bell at 
-the top of the side bar.
+important messages collected from all of your projects, go to your [Account page](/management/account/), or click the bell on
+the right of top menu.

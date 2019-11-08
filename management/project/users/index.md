@@ -31,7 +31,7 @@ There are two user roles available:
     - delete the project,
     - manage users,
     - manage [API tokens](/management/project/tokens/),
-    - permanently remove configurations in [Trash](/storage/configurations/#delete-configuration),
+    - permanently remove configurations in [Trash](/components/#delete-configuration),
     - create a new [orchestration](/orchestrator/), and
     - change the name, the schedule and the disabled status of an existing orchestration.
 

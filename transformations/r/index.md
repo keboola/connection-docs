@@ -123,7 +123,7 @@ The following image shows the directory structure:
 ![Screenshot - Data folder structure](/transformations/r/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a Python transformation which takes
+so that you can move the script to a KBC transformation with no changes. To develop a R transformation which takes
 a [sample CSV file](/transformations/r/source.csv) locally, take the following steps:
 
 - Put the R code into a file, for instance, script.R in the working directory.
@@ -155,7 +155,7 @@ All you need to do is
 - run the transformation.
 
 {: .image-popup}
-![Screenshot - Sample Input Output Mapping](/transformations/python/sample-io.png)
+![Screenshot - Sample Input Output Mapping](/transformations/r/sample-io.png)
 
 ### Events and Output
 It is possible to output informational and debug messages from the R script simply by printing them out.

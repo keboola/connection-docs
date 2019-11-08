@@ -6,11 +6,12 @@ permalink: /tutorial/ad-hoc/
 After you have loaded your tables, either [manually](/tutorial/load/) or
 [using an extractor](/tutorial/load/database/), [manipulated the data](/tutorial/manipulate/) in SQL,
 written it [into Tableau BI](/tutorial/write/) or [into GoodData BI](/tutorial/write/gooddata/), and
-set everything to run [automatically](/tutorial/automate/), let's take a look at some additional KBC features related to doing ad-hoc analysis.
+set everything to run [automatically](/tutorial/automate/), let's take a look at some additional Keboola 
+Connection features related to doing ad-hoc analysis.
 
 This part of the tutorial shows how to work with arbitrary data in Python
 in a completely unrestricted way. Although our examples use the Python language,
-the very same can be achieved using the R language.
+the very same can be achieved using the R or Julia language.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
 
@@ -41,16 +42,12 @@ Then create a [service account](https://cloud.google.com/bigquery/docs/authentic
 Before you start, have a Google service account and a Google Storage bucket ready.
 
 #### Service account
-To create a Google service account, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
-and select **IAM & admin / Service accounts**.
+To create a Google service account, go to the 
+[**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
+and create a new service account:
 
 {: .image-popup}
-![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-service-account-1.png)
-
-Create a new service account:
-
-{: .image-popup}
-![Screenshot - Google Service Account](/tutorial/ad-hoc/cloud-platform-service-account-2.png)
+![Screenshot - Google Service Account](/tutorial/ad-hoc/cloud-platform-service-account-1.png)
 
 Name the service account:
 
@@ -68,16 +65,11 @@ Finally, create a new JSON key and download it to your computer:
 ![Screenshot - Google Service Account Download](/tutorial/ad-hoc/cloud-platform-service-account-5.png)
 
 #### Google Storage bucket
-To create a Google Storage bucket, go to the [Google Cloud Platform console](https://console.cloud.google.com/home/dashboard)
-and select **Storage**.
+To create a Google Storage bucket, go to the [**Google Cloud Platform console > Storage**](https://console.cloud.google.com/storage/browser)
+And create a new bucket:
 
 {: .image-popup}
 ![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-storage-1.png)
-
-Create a new bucket:
-
-{: .image-popup}
-![Screenshot - Google Cloud Storage](/tutorial/ad-hoc/cloud-platform-storage-2.png)
 
 Enter the bucket's name and storage class (Regional is okay for our use):
 
@@ -85,7 +77,8 @@ Enter the bucket's name and storage class (Regional is okay for our use):
 ![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-storage-3.png)
 
 ### Extract Data
-Now you're ready to load the data into KBC. Go to the Extractor section, and click **New Extractor**:
+Now you're ready to load the data into Keboola Connection. Go to the *Components -- Extractor* section, 
+and click **Add New Extractor**:
 
 {: .image-popup}
 ![Screenshot - Extractors](/tutorial/ad-hoc/ex-bigquery-1.png)
@@ -95,10 +88,12 @@ Use the search and find the Google BigQuery extractor:
 {: .image-popup}
 ![Screenshot - BigQuery Extractor](/tutorial/ad-hoc/ex-bigquery-2.png)
 
+Click the extractor: 
+
 {: .image-popup}
 ![Screenshot - New Configuration](/tutorial/ad-hoc/ex-bigquery-3.png)
 
-Create a new configuration and name it, e.g., `bls-unemployment`:
+Create a new configuration and name it, e.g., `Bls Unemployment`:
 
 {: .image-popup}
 ![Screenshot - New Configuration Name](/tutorial/ad-hoc/ex-bigquery-4.png)
@@ -123,12 +118,12 @@ After that configure the actual extraction queries by clicking the **Add Query**
 {: .image-popup}
 ![Screenshot - Big Query Configured](/tutorial/ad-hoc/ex-bigquery-8.png)
 
-Name the query, e.g., `unemployment rates`:
+Name the query, e.g., `Unemployment rates`:
 
 {: .image-popup}
 ![Screenshot - New Query Name](/tutorial/ad-hoc/ex-bigquery-9.png)
 
-Uncheck the `Use Legacy SQL` setting and  paste the following in the `SQL Query` field:
+Uncheck the *Use Legacy SQL* setting and  paste the following in the *SQL Query* field:
 
 {% highlight sql %}
 SELECT * FROM
@@ -145,7 +140,7 @@ Then **Save** the query configuration.
 {: .image-popup}
 ![Screenshot - Query Configuration](/tutorial/ad-hoc/ex-bigquery-10.png)
 
-Now run the configuration to bring the data to KBC:
+Now run the configuration to bring the data to Keboola Connection:
 
 {: .image-popup}
 ![Screenshot - Finished Configuration](/tutorial/ad-hoc/ex-bigquery-11.png)
@@ -169,12 +164,13 @@ interfering with any production code.
 {: .image-popup}
 ![Screenshot - Transformations](/tutorial/ad-hoc/transformation-1.png)
 
-Click on **New Sandbox** next to Jupyter:
+Click on **New Sandbox** next to Python (Jupyter):
 
 {: .image-popup}
 ![Screenshot - Create Sandbox](/tutorial/ad-hoc/transformation-2.png)
 
-Select the unemployment rates table (`in.c-keboola-ex-google-bigquery.unemployment-rates`), click on **Create Sandbox**. Wait for the process to finish:
+Select the unemployment rates table (`in.c-keboola-ex-google-bigquery-v2-548939034.unemployment-rates` in this case), 
+click on **Create Sandbox**. Wait for the process to finish:
 
 {: .image-popup}
 ![Screenshot - Sandbox Configuration](/tutorial/ad-hoc/transformation-3.png)
@@ -192,11 +188,11 @@ When prompted, enter the password from the Sandbox screen:
 
 You can now run arbitrary code in Python, using common data scientist tools like
 [Pandas](https://pandas.pydata.org/) or [Matplotlib](https://matplotlib.org/).
-For instance, to load the file, use:
+For instance, to load the file, use (make sure to use the correct filename):
 
 {% highlight python %}
 import pandas
-df = pandas.read_csv("/data/in/tables/in.c-keboola-ex-google-bigquery.unemployment-rates.csv",sep=',')
+df = pandas.read_csv("/data/in/tables/in.c-keboola-ex-google-bigquery-v2-548939034.unemployment-rates.csv",sep=',')
 df.head()
 {% endhighlight %}
 
@@ -270,13 +266,14 @@ simply copy&paste it into a [Transformation](http://localhost:4000/tutorial/mani
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](http://jupyter.org/). The same can be done in the
-[R language](https://www.r-project.org/) using [RStudio](https://www.rstudio.com/).
+[R language](https://www.r-project.org/) using [RStudio](https://www.rstudio.com/)
+or [Julia language](https://julialang.org/) using [Jupyter Notebook](http://jupyter.org/).
 For more information about sandboxes (including disk and memory limits), see the
-[corresponding documentation](/transformations/sandbox/#rstudio-sandbox).
+[corresponding documentation](/transformations/sandbox/).
 
 ## Final Note
 This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things:
-Applications, Python and R transformations, Redshift and Snowflake features, to name a few.
+Applications, Python, R and Julia transformations, Redshift and Snowflake features, to name a few.
 However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola Connection can help in connecting different systems together.
 

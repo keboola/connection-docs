@@ -3,7 +3,6 @@ title: AWS S3
 permalink: /components/writers/storage/aws-s3/
 redirect_from:
     - /writers/storage/aws-s3/
-
 ---
 
 * TOC
@@ -13,13 +12,7 @@ This writer allows you to write CSV files into a single AWS S3 bucket. After cre
 you want to write to AWS S3. You also need to set up the proper permissions on AWS.
 The writer supports additional [processor configuration](https://developers.keboola.com/extend/component/processors/) via the JSON editor.
 
-## Create New Configuration
-Find the AWS S3 writer in the list of writers and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/writers/storage/aws-s3/ui1.png)
-
-In the next step, provide the target S3 bucket and AWS credentials with write permissions to it.
+## Obtain AWS Credentials
 We strongly recommend that you create a dedicated user for the writer. To do so, create a new user in [AWS IAM](https://aws.amazon.com/iam/)
 and enable programmatic access:
 
@@ -53,20 +46,19 @@ Or, if you prefer configuration via JSON:
 }
 {% endhighlight %}
 
-When you finish creating the user, you'll obtain the **Access key ID** and **Secret access key**. Enter them
-to the extractor configuration together with the destination bucket name:
+When you finish creating the user, you'll obtain the **Access key ID** and **Secret access key**. 
+
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** writer.
+In the next step, provide the target S3 bucket and [AWS credentials](#obtain-aws-credentials) with write permissions to it.
 
 {: .image-popup}
-![Screenshot - Configure credentials](/components/writers/storage/aws-s3/ui2.png)
+![Screenshot - Configure credentials](/components/writers/storage/aws-s3/aws-s3-1.png)
 
-**Save** the credentials.
-
-## Configure Tables
-To configure tables, click the **Add Table** button and search for the table you want to upload:
+**Save** the credentials and configure tables by clicking the **Add Table** button and search for the table you want to upload:
 
 {: .image-popup}
-![Screenshot - Select table](/components/writers/storage/aws-s3/ui3.png)
+![Screenshot - Select table](/components/writers/storage/aws-s3/aws-s3-2.png)
 
 Then you can modify the table destination path, write the table, or go back to the configuration to add additional tables to the writer.
-The configuration can write as many tables as you wish. The list is fully searchable, and you can delete or disable each table. 
-In addition, you can explicitly write one table only. The write order of the tables can be changed.
+Configured tables are stored as [configuration rows](/components/#configuration-rows).

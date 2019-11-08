@@ -3,7 +3,6 @@ title: Pipedrive
 permalink: /components/extractors/marketing-sales/pipedrive/
 redirect_from:
     - /extractors/marketing-sales/pipedrive/
-
 ---
 
 * TOC
@@ -12,44 +11,21 @@ redirect_from:
 This extractor uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1/) to import data 
 from [Pipedrive](https://www.pipedrive.com/).
 
-## Create New Configuration
-Find Pipedrive in the list of extractors and create a new configuration. Name it.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** extractor.
 
-{: .image-popup}
-![Screenshot - New configuration](/components/extractors/marketing-sales/pipedrive/01-new_configuration.png)
-
-## Provide API Token
 To configure this extractor, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
 Then enter your **company domain**.
 
 {: .image-popup}
-![Screenshot - API token](/components/extractors/marketing-sales/pipedrive/02-token.png)
+![Screenshot - Pipedrive configuration](/components/extractors/marketing-sales/pipedrive/pipedrive-1.png)
 
-## Select Data
-To configure what data you want to extract, you can either select one of the configuration templates, 
-or [switch to the JSON editor](/components/extractors/marketing-sales/pipedrive/#advanced-mode) for advanced extractions.  
+To configure what data you want to extract, select one of the configuration templates. 
+Available templates are:
 
-{: .image-popup}
-![Screenshot - Template](/components/extractors/marketing-sales/pipedrive/03-template.png)
+- **Basic** -- downloads organizations, persons, users, pipelines, activities, stages, etc.
+- **Extended** -- downloads also deals and additional fields to the above
 
-The only template available at the moment is **Basic**. This option downloads organizations, persons, users, pipelines, 
-activities, stages, etc.
-
-When done, **save** the configuration and **run** it.
-
-## Advanced Mode 
-For more features, switch the configuration to the Power User Mode by clicking the *Switch to JSON editor* link.
-JSON configuration uses the [Generic extractor](https://developers.keboola.com/extend/generic-extractor/) format.
-
-{: .image-popup}
-![Screenshot - Advanced mode](/components/extractors/marketing-sales/pipedrive/04-advanced-mode.png)
-
-If you select the template and want to specify more details using the advanced mode, don't forget to click
-**Save** first. The code will be pre-filled based on that particular template.
-
-{: .image-popup}
-![Screenshot - Pre-filled JSON](/components/extractors/marketing-sales/pipedrive/05-prefilled-json.png)
-
-When finished, **save** the configuration again and then run the extraction.
+When done, **Save** the configuration. You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
 **Important:** Data are always imported incrementally.

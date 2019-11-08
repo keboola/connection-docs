@@ -3,7 +3,7 @@ title: Part 4 - Automation - Setting up Orchestrator
 permalink: /tutorial/automate/
 ---
 
-So far, you have learned to use KBC to
+So far, you have learned to use Keboola Connection to
 
 - load tables [manually](/tutorial/load/) or [using an extractor](/tutorial/load/database/), 
 - [manipulate data in SQL](/tutorial/manipulate/), and
@@ -12,17 +12,17 @@ So far, you have learned to use KBC to
 Connecting various systems together alone makes Keboola Connection a powerful and easy-to-use tool. 
 However, the above steps must be done repeatedly to bring in the newest data available. 
 
-Use KBC **Orchestrator**  
+Use **Orchestrator**  
 
 - to specify what tasks should be executed in what order (orchestrate tasks) and
 - to configure the automatic execution (schedule orchestrated tasks).
 
-Go to the **Orchestrations** section of KBC, and
+Go to the **Orchestrations** section of Keboola Connection, and
 
 {: .image-popup}
 ![Screenshot - Orchestrations Introduction](/tutorial/automate/orchestrator-intro.png)
 
-click on **Get Started Now** to create a new orchestration. Assign it a name:
+click on **New Orchestration** to create a new orchestration. Assign it a name *Opportunities*:
 
 {: .image-popup}
 ![Screenshot - Create new Orchestration](/tutorial/automate/orchestrator-create-new.png)
@@ -32,7 +32,7 @@ To configure the orchestration, first add some tasks to it:
 {: .image-popup}
 ![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-1.png)
 
-Continue with **Add Task**:
+Continue with **New Task**:
 
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Introduction](/tutorial/automate/orchestration-tasks-1.png)
@@ -47,13 +47,13 @@ Then these are the available steps:
 - [write data into Tableau BI](/tutorial/write/)
 - [write data into GoodData BI](/tutorial/write/gooddata/)
 
-First, select GoogleDrive and then click on the User levels table.
+First, select GoogleDrive and then click on the *User levels* configuration.
 
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Editing](/tutorial/automate/orchestration-tasks-2.png)
 
 Continue adding all the tasks you want. The following configuration will extract data from the database 
-and Google Drive sheet. After being transformed for Tableau, the data will be written to Tableau Server.
+and Google Drive sheet. After being transformed for Tableau, the data will be written to Tableau.
 
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Setup for Tableau](/tutorial/automate/orchestration-tasks-setup-1.png)
@@ -64,7 +64,8 @@ transform it for GoodData, and write it to a GoodData project.
 {: .image-popup}
 ![Screenshot - Orchestration Tasks Setup for GoodData](/tutorial/automate/orchestration-tasks-setup-2.png)
 
-The order of certain tasks is important; some must run sequentially and others can run in parallel. 
+The order of certain [tasks](/orchestrator/tasks/) is important; some must run sequentially and others can run 
+in [parallel](/orchestrator/running/#parallel-jobs). 
 That is what **orchestration phases** are for. Tasks in a single phase are executed in parallel, 
 phases execute sequentially. 
 
@@ -89,20 +90,21 @@ When done configuring the tasks, go back to the orchestration setting.
 ![Screenshot - Orchestration Tasks Setup End](/tutorial/automate/orchestration-tasks-setup-4.png)
 
 In the orchestration detail, you can now see some tasks configured. Run the orchestration manually 
-to test everything works smoothly; click on the **Play** button in the top right corner and select the tasks you want to run.
-This creates a background job which executes all the tasks specified in the orchestration. 
+to test everything works smoothly; click on the **Run Orchestration** button in the top right corner and select the tasks you want to run.
+This creates a background [job](/orchestrator/running/) which executes all the tasks specified in the orchestration. 
 Continue setting up the orchestration in the meantime.
 
 {: .image-popup}
 ![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-2.png)
 
-By clicking on **Edit schedule**, set the orchestration to run automatically at a given time. 
+By clicking on edit icon next to schedule, set the orchestration to run 
+[automatically](/orchestrator/running/#automation) at a given time. 
 
 {: .image-popup}
 ![Screenshot - Orchestration Schedule](/tutorial/automate/orchestration-schedule.png)
 
 It is recommended to also set up notifications. 
-Click on **Configure Notifications** and then on **Edit Notifications** in the upper-right corner:
+Click on **Configure Notifications** button:
 
 {: .image-popup}
 ![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-3.png)
@@ -120,4 +122,7 @@ Your orchestration job should be finished by now. From data extraction to data w
 Any change in your [GoogleDrive sheet](/tutorial/load/googledrive/) will automatically propagate up 
 to your Tableau or GoodData project. Or both, if you set it that way.   
 
-Having mastered the automation process, you may proceed to an example of doing [ad-hoc data analysis part](/tutorial/ad-hoc/) in KBC. 
+{: .image-popup}
+![Screenshot - Orchestration Jobs](/tutorial/automate/orchestration-detail-4.png)
+
+Having mastered the automation process, you may proceed to an example of doing [ad-hoc data analysis part](/tutorial/ad-hoc/) in Keboola Connection. 

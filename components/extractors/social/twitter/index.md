@@ -3,40 +3,20 @@ title: Twitter
 permalink: /components/extractors/social/twitter/
 redirect_from:
     - /extractors/social/twitter/
-
 ---
 
 * TOC
 {:toc}
 
 The Twitter extractor, as the name implies, fetches data from [Twitter](https://twitter.com/).
-Complete the following steps to configure it:
 
-## Create New Configuration
-
-Find Twitter in the **Extractors** section. Create a new configuration, and name it.
-It can be renamed at any time.
-
-{: .image-popup}
-![Twitter New Configuration](/components/extractors/social/twitter/01-new-configuration.png)
-
-## Authorize Twitter Account
-Select one of the two authorization methods:
-
- - **Instant** -- Use if you have access to a Twitter account. It will be done immediately.
- - **External** -- Use to authorize access to an account of a non-KBC user. Generate a link to the external authorization app and send it to the user. The generated link is valid for 48 hours and will not be stored anywhere.
-
- {: .image-popup}
-![Twitter Authorization](/components/extractors/social/twitter/02-authorize.png)
-
-
-{: .image-popup}
-![Twitter Authorization Selection](/components/extractors/social/twitter/03-authorize-modal.png)
-
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Twitter** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 When finished setting up authorization, click **Continue** to move to the next tab, and start selecting data.
 
 {: .image-popup}
-![Twitter Data Selection](/components/extractors/social/twitter/04-authorized.png)
+![Twitter Data Selection](/components/extractors/social/twitter/twitter-1.png)
 
 ## Select Data
 To configure what you want to fetch from Twitter, use the other four tabs displayed in the above pop-up window.
@@ -45,7 +25,7 @@ It is okay to leave any of the steps blank.
  - **User Timeline** -- Returns a collection of the most recent tweets posted by the user indicated by the *Screen Name*.
 
    {: .image-popup}
-![Twitter Screen Name](/components/extractors/social/twitter/05-screen-name.png)
+![Twitter Screen Name](/components/extractors/social/twitter/screen-name.png)
 
    - [Limited to last 3,200 tweets](https://dev.twitter.com/rest/reference/get/statuses/user_timeline)
  - **Mentions** -- Returns mentions for the authenticating user.
@@ -53,11 +33,6 @@ It is okay to leave any of the steps blank.
  - **Followers List** -- Returns a list of users following the specified user by their *Screen Name*.
  - **Search** -- Searches tweets. Read [more about search queries](https://developer.twitter.com/en/docs/tweets/search/overview).
     - The Twitter Search API searches against a sampling of recent tweets published within the past 7 days.
-
-When done, **Save** the configuration and **Run** the extraction job. It will start immediately.
-
-{: .image-popup}
-![Twitter Job](/components/extractors/social/twitter/06-twitter-job.png)
 
 ## Extraction Output Tables
 

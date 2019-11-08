@@ -3,7 +3,6 @@ title: Intercom
 permalink: /components/extractors/communication/intercom/
 redirect_from:
     - /extractors/communication/intercom/
-
 ---
 
 * TOC
@@ -11,17 +10,18 @@ redirect_from:
 
 This extractor fetches data from [Intercom](https://www.intercom.com/).
 
-## Configuring Extractor
-
+## Configuration
 Before you start, have a working Intercom account with a plan (a trial will work as well). 
+[Create a new configuration](/components/#creating-component-configuration) of the **Intercom** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
-After you create the configuration and authorize it with your Intercom account, choose a template. 
+Choose one of the configuration templates available: **Basic** or **Conversations** and **Save** the configuration.
+You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
-### Configuration Templates
+{: .image-popup}
+![Screenshot - Intercom configuration](/components/extractors/communication/intercom/intercom-1.png)
 
-There are two configuration templates available: `basic` and `conversations`.
-
-#### Basic
+### Basic
 
 The `basic` template downloads all
 
@@ -34,7 +34,7 @@ The `basic` template downloads all
  - tags (table `tags`)
  - segments (table `segments`)
 
-#### Conversations
+### Conversations
 
 The `conversations` template downloads all
 
@@ -42,13 +42,11 @@ The `conversations` template downloads all
  - conversation parts (tables `conversation_parts` and `conversation_parts_attachments`)
 
 ## Downloaded Tables
-
 All `custom_attributes` and `metadata` properties are stored as a serialized JSON string. 
 Due to the customized structure of this object we are unable to prepare a fixed structure. 
 To parse the serialized JSON, use e.g. a Snowflake transformation that can easily parse JSON objects. 
 
 ### users
-
 The table `users` lists all [Users](https://developers.intercom.com/v2.0/reference#user-model) and 
 has the following columns:
 

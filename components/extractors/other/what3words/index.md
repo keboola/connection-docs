@@ -3,7 +3,6 @@ title: What3words Augmentation
 permalink: /components/extractors/other/what3words/
 redirect_from:
     - /extractors/other/what3words/
-
 ---
 
 * TOC
@@ -13,11 +12,8 @@ This extractor allows you to translate [what3words](https://what3words.com/) add
 Before using the extractor, you need to [obtain a what3words API key](https://docs.what3words.com/api/v2/#overview).
 Notice that each translated address requires one API call.
 
-## Create New Configuration
-Find the what3words augmentation in the list of extractors, and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/other/what3words/ui1.png)
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** extractor.
 
 ## Augment What3words Address
 In this mode of operation, you identify [what3words](https://what3words.com/about/) addresses, and the extractor
@@ -33,7 +29,7 @@ and select the **forward** method in the configuration.
 (The names of the columns and the csv file in the input mapping are not important, use any names you like.)
 
 {: .image-popup}
-![Screenshot - Add coordinates to w3w address](/components/extractors/other/what3words/ui2.png)
+![Screenshot - Add coordinates to w3w address](/components/extractors/other/what3words/what3words-1.png)
 
 ## Augment Coordinates
 In this case, you specify geographical latitude and longitude coordinates, and the extractor fetches their what3words addresses.
@@ -48,4 +44,4 @@ and select the **reverse** method in the configuration.
 (The names of the columns and the csv file in the input mapping are not important, use any name you like.)
 
 {: .image-popup}
-![Screenshot - Add w3w address to coordinates](/components/extractors/other/what3words/ui3.png)
+![Screenshot - Add w3w address to coordinates](/components/extractors/other/what3words/what3words-2.png)

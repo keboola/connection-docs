@@ -14,7 +14,6 @@ Keboola Connection provides the following marketing and sales extractors:
 - [GoodData Reports](/components/extractors/marketing-sales/gooddata-reports/)
 - [Google-adwords-reports](/components/extractors/marketing-sales/google-adwords-reports/) 
 - [Google Analytics](/components/extractors/marketing-sales/google-analytics/) 
-- [HubSpot](/components/extractors/marketing-sales/hubspot/) 
 - [Mailchimp](/components/extractors/marketing-sales/mailchimp/)
 - [Pipedrive](/components/extractors/marketing-sales/pipedrive/)
 - Salesforce --- watch our [salesforce integration video](https://www.youtube.com/watch?v=BVghRK2xrQo). 

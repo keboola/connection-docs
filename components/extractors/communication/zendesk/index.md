@@ -3,57 +3,46 @@ title: Zendesk
 permalink: /components/extractors/communication/zendesk/
 redirect_from:
     - /extractors/communication/zendesk/
-
 ---
 
 * TOC
 {:toc}
 
 This extractor fetches data from [Zendesk](https://www.zendesk.com/).
-
-
-## Configuring Extractor
 Before you start, have a working Zendesk account and get an API Token.
 
-### Create New Application API Token
+## Create New Application API Token
 
 Log in to your account on the [Zendesk](https://www.zendesk.com/) site.
 
-Go to **Admin / Channels / API**, and use the **add new token** link.
+Go to **Admin / Channels / API**, and [create a new token](https://developer.zendesk.com/rest_api/docs/support/introduction#api-token).
 
 {: .image-popup}
-![Zendesk API token list](/components/extractors/communication/zendesk/01-zendesk-api.png)
+![Zendesk API token list](/components/extractors/communication/zendesk/zendesk-1.png)
 
-Fill a **label** for the new token (for example, `Keboola Zendesk Extractor`) and click the **Create** button.
+Fill a description for the new token (for example, `Keboola Zendesk Extractor`) **Copy** the token and click the **Save** button.
 
 {: .image-popup}
-![Zendesk Token registration](/components/extractors/communication/zendesk/02-zendesk-api-form.png)
+![Zendesk Token copy](/components/extractors/communication/zendesk/zendesk-2.png)
 
 When the registration is finished, take a note of the API Key and save it. You will need it when creating your extractor configuration in KBC.
 
-{: .image-popup}
-![Zendesk API token](/components/extractors/communication/zendesk/03-zendesk-api-key.png)
-
-### Set Up Extractor
-In the Extractors section, find Zendesk and create a new configuration.
-
-{: .image-popup}
-![Zendesk New configuration](/components/extractors/communication/zendesk/04-new-configuration.png)
-
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Zendesk** extractor.
 Provide information about your Zendesk Account and API token.
 
 - **Your Zendesk domain**
 - **User Email** -- your Zendesk user email
-- **Token** -- Zendesk API Token
+- **Token** -- Zendesk API Token created in the previous step
+
+Choose one of the two templates --- *Tickets with Comments* and *Tickets without Comments*. The latter one will get only the initial ticket
+and not the other responses to it. It is much quicker though. Also note that some of the tables described below may not be extracted if there is
+no data for them. Don't forget to **Save** your configuration.
 
 {: .image-popup}
-![Zendesk Credentials](/components/extractors/communication/zendesk/05-credentials.png)
+![Zendesk Configuration](/components/extractors/communication/zendesk/zendesk-3.png)
 
-You can choose between two templates --- *Tickets with Comments* and *Tickets without Comments*. The latter one will get only the initial ticket
-and not the other responses to it. It is much quicker though. Also note that some of the tables described below may not be extracted if there is
-no data for them.
-
-**Save** and click **Run Extraction**.
+You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
 ## Extraction Output Tables
 

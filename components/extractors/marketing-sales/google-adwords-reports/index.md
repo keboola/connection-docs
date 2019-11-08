@@ -12,20 +12,14 @@ redirect_from:
 This extractor allows you to import data from Google AdWords reports.
 If you do not have a Google AdWords account, create a [test account](https://developers.google.com/adwords/api/docs/guides/first-api-call#create_test_accounts).
 
-## Create New Configuration
-Find Google AdWords in the list of extractors and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/marketing-sales/google-adwords-reports/ui_create_config.png)
-
-Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your AdWords reports.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/marketing-sales/google-adwords-reports/ui_authorize_config.png)
-
 ## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Google AdWords Reports** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+
 To run the extractor, specify your [customer ID](https://support.google.com/adwords/answer/1704344?hl=en).
 
+{: .image-popup}
+![Screenshot - Customer configuration](/components/extractors/marketing-sales/google-adwords-reports/google-adwords-reports-1.png)
 
 To download a report, specify an [AWQL query](https://developers.google.com/adwords/api/docs/guides/awql),
 through which you can customize the output of a [predefined report type](https://developers.google.com/adwords/api/docs/appendix/reports). 
@@ -53,10 +47,10 @@ Use *Display Name* of the columns as defined in the [reports types documentation
 ![Screenshot - Report column names](/components/extractors/marketing-sales/google-adwords-reports/report_types.png)
 
 ## Example
-To download a keyword performance report, use the following query configuration:
+To download a keyword performance report, use the following query `SELECT Id, Criteria, AdGroupName FROM KEYWORDS_PERFORMANCE_REPORT` configuration:
 
 {: .image-popup}
-![Screenshot - Query configuration](/components/extractors/marketing-sales/google-adwords-reports/ui_queries.png)
+![Screenshot - Query configuration](/components/extractors/marketing-sales/google-adwords-reports/google-adwords-reports-2.png)
 
 This downloads the report into a `keywords` table. The `Id` column is listed as `Keyword_ID` in the primary columns 
 because that is [its display name](https://developers.google.com/adwords/api/docs/appendix/reports/keywords-performance-report#id).

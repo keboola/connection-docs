@@ -15,23 +15,21 @@ about your YouTube channels or your YouTube activity.
 For analytics and reporting, use the [Google Analytics extractor](/components/extractors/marketing-sales/google-analytics/) or the 
 [YouTube Reporting extractor](https://github.com/blueskydigital/keboola-ex-youtube-reporting/blob/master/README.md).
 
-## Create New Configuration
-Find **YouTube** in the list of extractors, and create a new configuration. Name it.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/social/youtube/ui_new_config.png)
-
-**Authorize the account** to be redirected to Google, and authorize the extractor to access your YouTube data.
-
 ## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **YouTube** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+
 To configure the extractor, choose one of the two predefined **templates**: 
 
 - Channels -- returning info about your own channels
 - Videos -- returning info about your playlists and all their videos 
 
-You can also define your **own** configuration directly using the **JSON editor**. 
-The extractor runs on [Generic Extractor](https://developers.keboola.com/extend/generic-extractor/).
+{: .image-popup}
+![Screenshot - Create configuration](/components/extractors/social/youtube/youtube-1.png)
 
+You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+
+### Advanced Configuration
 To give a simple example, the configuration to get info about your own channel looks like this:
 
 {% highlight json %}
@@ -51,9 +49,9 @@ Choose one of the predefined use cases, for instance, *list (my channel)*, and s
 The endpoint is under `# HTTP URL:`, where you omit the base url `https://www.googleapis.com/youtube/v3/`.
 
 {: .image-popup}
-![Screenshot - Create configuration](/components/extractors/social/youtube/api_sample.png)
+![Screenshot - YouTube API](/components/extractors/social/youtube/api_sample.png)
 
-You can use other Generic Extractor's functionality too, including nesting. This example downloads your channel, iterates through its playlists and gets all their videos:
+You can use other [Generic Extractor's](/components/extractors/other/generic/) functionality too, including nesting. This example downloads your channel, iterates through its playlists and gets all their videos:
 
 {% highlight json %}
 {

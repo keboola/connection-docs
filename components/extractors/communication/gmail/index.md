@@ -3,7 +3,6 @@ title: Gmail Messages
 permalink: /components/extractors/communication/gmail/
 redirect_from:
     - /extractors/communication/gmail/
-
 ---
 
 * TOC
@@ -11,38 +10,29 @@ redirect_from:
 
 The Gmail Messages extractor allows you to fetch data from your Gmail account.
 
-## Create New Configuration
-
-Find Gmail Messages in the Extractors section, create a new configuration and name it.
-
-{: .image-popup}
-![Gmail - add configuration](/components/extractors/communication/gmail/01-add-configuration.png)
-
-Then click **Authorize Account** to be redirected to Google, and authorize the extractor to access your Google account. 
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Gmail Messages** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 **Your inbox is accessed as read only.**
 
 {: .image-popup}
-![Gmail - authorize account](/components/extractors/communication/gmail/02-authorize-account.png)
-
-## Configure Queries
+![Gmail - authorize account](/components/extractors/communication/gmail/gmail-1.png)
 
 Fill in the form to fit your needs.
 
 {: .image-popup}
-![Gmail - configure queries](/components/extractors/communication/gmail/03-configure-queries.png)
+![Gmail - configure queries](/components/extractors/communication/gmail/gmail-2.png)
 
 - **Query** -- Query to filter your messages. To speed up the extraction, be as specific as possible. 
 For more detailed information about querying, follow Google's [Advanced search](https://support.google.com/mail/answer/7190?hl=en) help site.
 - **Headers** (optional) -- Headers you want to download. If no headers are specified, all headers will be downloaded.
 
-Save the configuration and **run** the extractor. For information on the extraction process, go to the **Jobs** section.
+Don't forget to **Save** the configuration.
 
 ## Produced Tables
-
 Data are always imported incrementally. The extractor produces several tables that can be joined together.
 
 ### Queries
-
 Queries and their messages; it is good to know which query a message came from.
 
 {: .table-bordered }
@@ -51,9 +41,7 @@ Queries and their messages; it is good to know which query a message came from.
 | `from:some.address@example.com` | `9876cbd54bd215a6` |
 | `from:another.address@example.com` | `1234abcd2ffdc1d6` |
 
-
 ### Messages
-
 A base table of messages:
 
 {: .table-bordered }
@@ -65,7 +53,6 @@ A base table of messages:
 *Tip: You can group your messages to conversations with `GROUP BY threadId`*.
 
 ### Headers
-
 All downloaded headers:
 
 {: .table-bordered }
@@ -75,7 +62,6 @@ All downloaded headers:
 | `1234abcd2ffdc1d6` | `Subject` | `Trending News` |
 
 ### Parts
-
 All downloaded message parts:
 
 {: .table-bordered }

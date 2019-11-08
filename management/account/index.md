@@ -12,7 +12,7 @@ You can reach your account settings from two places:
 1. Keboola Connection home page
 2. Projects
 
-Go to the Keboola Connection home page and select **Account Settings** in the little drop down box on the right:
+Go to the Keboola Connection home page and select **Account Settings** in the little drop down box on the top:
 
 {: .image-popup}
 ![Screenshot -- Account Settings](/management/account/account-setting-1.png)

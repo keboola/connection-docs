@@ -25,7 +25,7 @@ which were uploaded/downloaded into your project.
 to an earlier version (either revert the contents of a table or copy the table into another one).
 - [**Data Takeout**](/management/project/export/) --- allows you to get your data back from us; in KBC, you are
 always the sole owner of your data. Data Takeout is especially useful for proof-of-concept projects.
-- [**Trash tab**](/storage/configurations/#delete-configuration) --- allows you to list and restore deleted configurations.
+- [**Trash tab**](/components/#delete-configuration) --- allows you to list and restore deleted configurations.
 
 ### User Management
 There are two types of [KBC project users](/management/project/users/):
@@ -37,7 +37,7 @@ selected buckets, sending data directly to your KBC project. The access can be r
 ### Project Status
 All important information on your project status can be found in the following places:
 
-- [**Notifications**](/management/account/#notifications) --- click the bell at the top of the side bar for
+- [**Notifications**](/management/account/#notifications) --- click the bell at the right of the top menu for
 notifications and highly important messages, such as expiring projects and component migration. The channel is user specific and as such shows each user all notifications for all their projects.
 - **Overview** --- check this section for basic status information about your project.
 - [**Limits tab**](/management/project/limits/) in *Users & Settings* --- check all your measured billable

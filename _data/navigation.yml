@@ -96,9 +96,6 @@ items:
               - url: /components/extractors/marketing-sales/google-analytics/
                 title: Google Analytics
 
-              - url: /components/extractors/marketing-sales/hubspot/
-                title: HubSpot
-
               - url: /components/extractors/marketing-sales/mailchimp/
                 title: Mailchimp
 
@@ -129,14 +126,11 @@ items:
               - url: /components/extractors/storage/aws-s3/
                 title: AWS S3
 
-              - url: /components/extractors/storage/simple-aws-s3/
-                title: Simple AWS S3
+              - url: /components/extractors/storage/ftp/
+                title: FTP
 
               - url: /components/extractors/storage/google-drive/
                 title: Google Drive
-
-              - url: /components/extractors/storage/ftp/
-                title: FTP
 
               - url: /components/extractors/storage/http/
                 title: HTTP
@@ -167,9 +161,6 @@ items:
 
               - url: /components/extractors/other/pingdom/
                 title: Pingdom
-
-              - url: /components/extractors/other/portadi/
-                title: Portadi
 
               - url: /components/extractors/other/stripe/
                 title: Stripe
@@ -263,9 +254,6 @@ items:
 
       - url: /storage/file-uploads/
         title: Files
-
-      - url: /storage/configurations/
-        title: Configurations
 
   - url: /orchestrator/
     title: Orchestrations

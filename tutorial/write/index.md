@@ -6,8 +6,8 @@ permalink: /tutorial/write/
 * TOC
 {:toc}
 
-This part of our tutorial will guide you through the process of writing data from KBC. 
-You have learned to [manipulate data](/tutorial/manipulate/) in KBC using SQL, 
+This part of our tutorial will guide you through the process of writing data from Keboola Connection. 
+You have learned to [manipulate data](/tutorial/manipulate/) in Keboola Connection using SQL, 
 and have a denormalized table called `opportunity_denorm` ready in the `out.c-tutorial` storage bucket. 
 This table is suitable to be loaded into [Tableau Analytics](http://www.tableau.com/). 
 
@@ -17,164 +17,133 @@ This table is suitable to be loaded into [Tableau Analytics](http://www.tableau.
 If you want to try connection to Tableau Server, have credentials for that server as well. 
 As an alternative, sign up for a free trial of [Tableau Online](http://www.tableau.com/products/cloud-bi) to test it out.
 
-Writing data from KBC into a business intelligence and analytics tool such as Tableau is very common. 
+Writing data from Keboola Connection into a business intelligence and analytics tool such as Tableau is very common. 
 Writing data to GoodData BI is covered in the following [side step](/tutorial/write/gooddata/). 
 However, keep in mind you can use the processed data in any way you wish.   
 
-There are two options how to load the `opportunity_denorm` table into Tableau:
+There are three options how to load the `opportunity_denorm` table into Tableau:
 
+- Writing data to a provisioned Snowflake/Redshift database, or
 - Generating a [Tableau Data Extract (TDE)](http://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1) 
 and loading it manually into Tableau Desktop, or
 - Generating a TDE and loading it into Tableau Server, either manually or automatically.
 
-In both cases, you need the Tableau writer in the **Writers** section of KBC. 
+In either case, you need a writer component from the **Components -- Writers** menu. 
 
 {: .image-popup}
 ![Screenshot - Writers](/tutorial/write/writers-intro.png)
+
+In this tutorial, we'll go with the first option -- using the **Snowflake Writer** as it is the easiest and fastest way. 
+The description of the [Tableau TDE writer](/components/writers/bi-tools/tableau/) is part of the [writers](/components/writers/) 
+documentation. Click **Add New Writer**, find the Snowflake writer and click it.
+
+{: .image-popup}
+![Screenshot - Snowflake Writer](/tutorial/write/writers-intro-2.png)
 
 Each writer can have multiple **configurations**. Each configuration represents a combination of data and destination. 
 To give an example, you only need a single configuration to write multiple tables into a single Tableau server. 
 However, two configurations are needed when you want to write data to two servers, or 
 have a set of data loaded manually and a different set automatically. 
-Continue with **Create New Configuration**.
+Continue with **New Configuration**.
 
 {: .image-popup}
-![Screenshot - Tableau Writer](/tutorial/write/tableau-intro.png)
+![Screenshot - Snowflake Writer](/tutorial/write/snowflake-intro.png)
 
-Name and **Create** the configuration.
-
-{: .image-popup}
-![Screenshot - Create Tableau Writer Configuration](/tutorial/write/tableau-create-config.png)
-
-Add the tables you want to send to Tableau,
+Name the configuration and click **Create Configuration**.
 
 {: .image-popup}
-![Screenshot - Start configuration](/tutorial/write/tableau-config.png)
+![Screenshot - Create Snowflake Writer Configuration](/tutorial/write/snowflake-create-config.png)
 
-in our case, select the `out.c-tutorial.opportunity_denorm` table,
+At this moment, you're probably wondering why are we using Snowflake database and where and how you are going to
+get credentials to it. The answer is near -- click the **Set up credentials** button:
+
+{: .image-popup}
+![Screenshot - Snowflake Configuration Intro](/tutorial/write/snowflake-config.png)
+
+As part of the Keboola Connection platform we offer a 
+[dedicated database workspace](/components/writers/database/snowflake/#keboola-snowflake-database) which you can use to connect
+[external tools](/components/writers/database/snowflake/#using-keboola-provisioned-database). Simply click
+on **Keboola Snowflake Database**:
+
+{: .image-popup}
+![Screenshot - Snowflake Credentials](/tutorial/write/snowflake-credentials.png)
+
+You will obtain a dedicated database and credentials to it. Use the lock icon to display 
+the password if you wish. Go back to the Snowflake writer configuration.
+
+{: .image-popup}
+![Screenshot - Snowflake Credentials](/tutorial/write/snowflake-credentials-2.png)
+
+The next step is to add tables -- click the **Add Table** button.
 
 {: .image-popup}
 ![Screenshot - Select table](/tutorial/write/tableau-select-table.png)
 
-and specify a data type for each of its columns. 
-The [data types](https://onlinehelp.tableau.com/current/pro/online/mac/en-us/datafields_typesandroles_datatypes.html)
-represent the type of values stored in the columns. If you `IGNORE` a column, it won't be loaded
-into Tableau at all.
+Select the table `out.c-opportunity.opportunity_denorm` and click **Add Table**:
 
-Since most columns in the `opportunity_denorm` table are strings (characters), start 
+{: .image-popup}
+![Screenshot - Select table](/tutorial/write/tableau-select-table-2.png)
+
+In the next step, you can specify properties of the columns in the target database like name and datatype.
+Use the preview column to peek at the column data. Click the **Edit Columns** button to change settings.
+
+{: .image-popup}
+![Screenshot - Snowflake View Columns](/tutorial/write/snowflake-columns.png)
+
+Most columns in the `opportunity_denorm` table are strings (characters), start 
 with `Set All Types to:` and select `string` to set them quickly. 
 Then **Preview** the content of each column and set its type accordingly.
+For the purpose of this tutorial, it is enough to set the `amount` column to `number` type.
+Don't forget to **Save** the settings.
 
 {: .image-popup}
-![Screenshot - Table configuration](/tutorial/write/tableau-table-config-1.png)
+![Screenshot - Snowflake Edit Columns](/tutorial/write/snowflake-columns-2.png)
 
-If you are not sure how to set up the data types, consult the following screenshots:
- 
-{: .image-popup}
-![Screenshot - Table configuration - Column types Part 1](/tutorial/write/tableau-table-config-2.png)
+When done, go back to the configuration and click on **Run Component** to write the 
+data to the provisioned database.
 
 {: .image-popup}
-![Screenshot - Table configuration - Column types Part 2](/tutorial/write/tableau-table-config-3.png)
+![Screenshot - Snowflake Run Configuration](/tutorial/write/snowflake-run.png)
 
-Save the configuration.
-
-## Loading Data into Tableau Desktop 
-
-Click on **Export tables to TDE** to export the data set, a single table so far, into a TDE file.
+## Connecting with Tableau
+Now that you have prepared the data source, you can connect to it from Tableau. Login to Tableau online
+and **Create Workbook**:
 
 {: .image-popup}
-![Screenshot - Tableau Writer - TDE](/tutorial/write/tableau-intro-2.png)
+![Screenshot - Tableau Intro](/tutorial/write/tableau-1.png)
 
-The TDE file will be generated by a background job. When a job is running, a small orange circle appears
-under *Last runs*, along with RunId and other info on the job. Green is for success, red for failure. 
-Click on the indicator, or the info next to it for more details.
-
-Download the latest version of the Tableau Data Export to your local computer 
-by clicking on the `out.c_tutorial.opportunity_denorm.tde` link. Then load it into Tableau Desktop.
+A connection to a datasource will be requested. Choose *Connectors* and *Snowflake*:
 
 {: .image-popup}
-![Screenshot - Tableau Desktop Load](/tutorial/write/tableau-desktop-intro.png)
+![Screenshot - Tableau Connectors](/tutorial/write/tableau-2.png)
 
-The data table gets loaded.
-
-{: .image-popup}
-![Screenshot - Tableau Desktop Loaded Data](/tutorial/write/tableau-desktop-data.png)
-
-Create reports to your liking. For instance, use the precomputed opportunity probability class.
+Enter the credentials from the Snowflake writer configuration (you can always review them by
+clicking on the **Database Credentials** button in the right menu).
 
 {: .image-popup}
-![Screenshot - Tableau Desktop Sample Chart](/tutorial/write/tableau-desktop-sample.png)
+![Screenshot - Tableau Credentials](/tutorial/write/tableau-3.png)
 
-## Loading Data into Tableau Server
-
-For multiple users and for automated processing, it is better to load your data into Tableau Server.
-It can be done with your own server instance, as well as with the [Tableau Online server](http://www.tableau.com/products/cloud-bi). 
-To connect to Tableau Server, **Setup Upload**:
-
-{: .image-popup}
-![Screenshot - Tableau Setup Upload](/tutorial/write/tableau-intro-3.png)
-
-Set a new destination, 
+Select *Warehouse*, *Database* and *Schema* -- there is only one option because the database is completely
+isolated and created just for the purpose of your writer configuration. If in doubt, however, you can 
+always check the database credentials in the Snowflake writer configuration.
+You will see the *opportunity_denorm* table.
 
 {: .image-popup}
-![Screenshot - Tableau Set Destination](/tutorial/write/tableau-destination.png)
+![Screenshot - Tableau Database](/tutorial/write/tableau-4.png)
 
-then select **Tableau Server**,
-
-{: .image-popup}
-![Screenshot - Tableau Use Server](/tutorial/write/tableau-destination-server.png)
-
-and set server credentials.
+You can now work with the data in Tableau. 
+You can also check that the *amount* column was converted to numeric.
 
 {: .image-popup}
-![Screenshot - Tableau Set Credentials](/tutorial/write/tableau-destination-intro.png)
-
-If connecting to your own Tableau instance, have the connection properties at the ready, or
-ask your server administrator. If connecting to Tableau Online, find all the necessary 
-information in the intro page URL:
-
-{: .image-popup}
-![Screenshot - Tableau Server Credentials](/tutorial/write/tableau-online-intro.png)
-
-From the above Tableau Online page, extract the **Server URL** -- `https://10ay.online.tableau.com/`,
-and the **Site** -- `odinovo`. Use an existing Tableau project, or create a new one.   
-
-{: .image-popup}
-![Screenshot - Tableau Use Server](/tutorial/write/tableau-credentials.png)
-
-After setting up the credentials, click on **Enable instant upload**. The TDE files are automatically
-pushed to Tableau Server every time they are generated. 
-
-{: .image-popup}
-![Screenshot - Tableau Set Instant Upload](/tutorial/write/tableau-destination-final.png)
-
-Then go back to the **Write to Server** configuration and click on **Export Tables to TDE** one more time.
- 
-{: .image-popup}
-![Screenshot - Tableau Load Data to Server](/tutorial/write/tableau-intro-4.png)
-
-Again, a background job will be created, taking the `out.c-tutorial.opportunity_denorm` table from Storage,
-converting it to a TDE file, and loading that file to your server. If the job finishes successfully, 
-you will see a new data source added to the project:
- 
-{: .image-popup}
-![Screenshot - Tableau Online DataSource](/tutorial/write/tableau-online-datasource.png)
-
-You, and everyone else in your organization, can then use that data source from Tableau 
-Desktop by connecting to your server.
-
-{: .image-popup}
-![Screenshot - Tableau Desktop Connect to Server](/tutorial/write/tableau-desktop-server.png)
-
-See your data source here:
-
-{: .image-popup}
-![Screenshot - Tableau Desktop Datasource](/tutorial/write/tableau-desktop-datasource.png)
+![Screenshot - Tableau Table](/tutorial/write/tableau-5.png)
 
 Create charts and reports as usual, and publish them to other people. 
 
+{: .image-popup}
+![Screenshot - Tableau Report](/tutorial/write/tableau-6.png)
+
 ## Semi-final Note
-This concludes the main steps of the KBC tutorial. You have learned to load data into **Storage**, 
+This concludes the main steps of the Keboola Connection tutorial. You have learned to load data into **Storage**, 
 manipulate it using **Transformations**, and load it into the target system using **Writers**. 
 
 At this point, you can

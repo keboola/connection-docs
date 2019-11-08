@@ -3,21 +3,15 @@ title: Pingdom
 permalink: /components/extractors/other/pingdom/
 redirect_from:
     - /extractors/other/pingdom/
-
 ---
 
 * TOC
 {:toc}
 
 This extractor helps you import data from [Pingdom](https://www.pingdom.com/).
-
 Pingdom is a service for monitoring the uptime and performance of your servers, websites and web applications.
 
-## Configure Extractor
-Before you start, have a working Pingdom account and get a Pingdom API Key.
-
-### Create New Application API Key
-
+## Create New Application API Key
 Log in to your account on the [Pingdom](https://www.pingdom.com/) site.
 
 Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys), and use the **Register Application** button.
@@ -40,12 +34,8 @@ When registration is finished, take note of the Application Key and save it. You
 {: .image-popup}
 ![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
 
-### Set Up Extractor
-In the Extractors section, find Pingdom and create a new configuration.
-
-{: .image-popup}
-![Pingdom New Configuration](/components/extractors/other/pingdom/01-new-configuration.png)
-
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Pingdom** extractor.
 Provide credentials of your Pingdom account and Application Key.
 
 - **Email address** -- your account login name
@@ -53,20 +43,15 @@ Provide credentials of your Pingdom account and Application Key.
 - **Application API key**
 
 {: .image-popup}
-![Pingdom Credentials](/components/extractors/other/pingdom/02-credentials.png)
-
-### Select Data
+![Screenshot - Pingdom Configuration](/components/extractors/other/pingdom/pingdom-1.png)
 
 Choose the **period** you want to fetch data for.
 
 - `Last 24 hours`
 - `Last 3O days` -- *Pingdom API provides history only for up to 30 days before the current day*
 
-And finally, select one of the data mapping **templates** and click on **Save configuration**.
-
-{: .image-popup}
-![Pingdom Data Mapping](/components/extractors/other/pingdom/06-template.png)
-
+And finally, select the data **Basic** template and click on **Save**.
+You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
 ## Extraction Output Tables
 

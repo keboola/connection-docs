@@ -3,7 +3,6 @@ title: Facebook Ads
 permalink: /components/extractors/marketing-sales/facebook-ads/
 redirect_from:
     - /extractors/marketing-sales/facebook-ads/
-
 ---
 
 * TOC
@@ -13,13 +12,9 @@ This extractor uses the [Facebook Marketing API](https://developers.facebook.com
 extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup)
 (including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/).
 
-## Create New Configuration
-Find Facebook Ads in the **Extractors** section. Create a new configuration and name it. It can be renamed any time.
-
-{: .image-popup}
-![Screenshot - Create configuration](/components/extractors/marketing-sales/facebook-ads/createconfig.png)
-
-Authorize the Facebook account with access to the Ad Account you want to extract.
+## Configuration
+[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Ad Account you want to extract.
 You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
@@ -27,21 +22,23 @@ You can always revoke the authorization by going to the
 [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings) and removing
 `Keboola Ads Extractor` from the list.
 
+Click on **Select Ad accounts** to load list of Ad accounts associated with the authorization.
+
 {: .image-popup}
-![Screenshot - Authorize configuration](/components/extractors/marketing-sales/facebook-ads/authorizefb.png)
+![Screenshot - Facebook Accounts](/components/extractors/marketing-sales/facebook-ads/facebook-ads-1.png)
 
 From the list of fetched Ad Accounts associated with the authorized account, select the Ad Accounts
 you wish to extract.
 
 {: .image-popup}
-![Screenshot - Select Facebook Pages](/components/extractors/marketing-sales/facebook-ads/selectadaccounts.png)
+![Screenshot - Select Facebook Pages](/components/extractors/marketing-sales/facebook-ads/facebook-ads-2.png)
 
 ## Create New Query
-Create a new query and specify what data to extract. If you choose a preconfigured template,
+Click on the **Create new query** button and specify what data to extract. If you choose a preconfigured template,
 all necessary fields will fill up automatically.
 
 {: .image-popup}
-![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/newquery.png)
+![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/facebook-ads-3.png)
 
 The query describes the extractor request to be sent to the Facebook Marketing API. Knowing the API will
 make creating a query easy because all options except `name` represent the [Facebook Marketing API
@@ -146,31 +143,3 @@ All tables containing ads/campaigns insights data have a specific structure. Con
 You can set the version of the Facebook Marketing API that will be applied for all requests made to the
 API by the Facebook Ads extractor. Read more about the Marketing API versions
 [here](https://developers.facebook.com/docs/marketing-api/versions).
-
-## Migration from Old Extractor
-The configuration and resulting data tables produced by both new and old extractors are very different; 
-that's why their migration has to be done manually by following the next seven steps:
-
-1. Create a configuration of your new Facebook Ads extractor
-2. Migrate your Authorized Account (see below)
-3. Add new queries to the configuration
-4. Run the configuration
-5. Preview and analyze the resulting tables
-6. Update all corresponding transformations and writers with the new tables
-7. Update all affected orchestrations
-
-### Migration of Authorized Account
-
-Use `Direct token insert` in the authorization modal and copy the access token stored under the 
-`access_token` attribute in the old sys table configuration:
-
-- Copy the token from the old configuration
-
-{: .image-popup}
-![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/copytoken.png)
-
-- Insert the copied token
-
-{: .image-popup}
-![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/inserttoken.png)
-

@@ -15,7 +15,7 @@ there is **no need to have a GoodData account** before you start.
 Writing data to GoodData is very similar to writing data to Tableau, although
 there are some changes due to the fundamental differences in both platforms.
 The GoodData platform uses the concept of
-[Logical Models](https://help.gooddata.com/display/doc/Tutorial+-+Creating+Your+First+Data+Model)
+[Logical Models](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model/working-with-your-data-model-in-cloudconnect-logical-data-modeler/learning-data-modeling-by-doing/creating-your-first-data-model)
 where multiple tables are loaded into the platform together with their logical connection model (schema).
 KBC will assist you in creating the model.
 
@@ -41,15 +41,19 @@ Then add a new transformation and name it.
 {: .image-popup}
 ![Screenshot - Transformation Create](/tutorial/write/gooddata-transformation-create-2.png)
 
-Now set the transformation input mapping. Include the following tables from the `in.c-tutorial` storage bucket:
+Now set the transformation input mapping. Include the following tables from the `in.c-csv-import` storage bucket:
 `opportunity`, `account`, `level`, and `user`.
+If you loaded data using the
+[Database extractor](/tutorial/load/database/) or [Google Drive extractor](/tutorial/load/googledrive/)
+feel free to use the tables create by them (e.g `in.c-keboola-ex-db-snowflake-548904898.account` or `in.c-keboola-ex-google-drive-548902224.level-level`). In either case, make sure that the destinations
+are set to `account`, `opportunity`, `user` and `level`.
 Then create the output mapping for the `out_opportunity`, `out_user`, and `out_account` tables
-to be stored in the `out.c-tutorial` output bucket.
+to be stored in the `out.c-opportunity-gooddata` output bucket.
 
 {: .image-popup}
 ![Screenshot - Transformation Input & Output Mapping](/tutorial/write/gooddata-transformation-mapping.png)
 
-Use the following four SQL queries to create the output bucket tables.
+Use the following four SQL queries to create the output tables.
 
 {% highlight sql %}
 CREATE TABLE "tmp_level" AS
@@ -88,23 +92,19 @@ This will create a background job which will
 
 - take the four tables in the transformation input mapping from Storage,
 - modify them with the SQL queries of the Transformation script, and
-- create three new tables in the `out.c-tutorial` output bucket in Storage.
+- create three new tables in the `out.c-opportunity-gooddata` output bucket in Storage.
 
 To see if the transformation job has finished, go to **Jobs**, or click on the little **Transformations job has been scheduled** window
 that pops up after a transformation starts running. When finished, or while waiting for the job to end, continue configuring the GoodData writer.
-Start by creating a new writer in the **Writers** section:
+
+## Configure Writer
+Start by creating a new writer in the **Components -- Writers** section:
 
 {: .image-popup}
 ![Screenshot - New Writer](/tutorial/write/gooddata-writer-intro-1.png)
 
-## Configure Writer
-Find the GoodData writer:
-
-{: .image-popup}
-![Screenshot - New Writer](/tutorial/write/gooddata-writer-intro-2.png)
-
 GoodData writer can have multiple configurations (as any other writer or extractor). Each configuration represents a set
-of data loaded into a single GoodData project. **Create New Configuration** to continue:
+of data loaded into a single GoodData project. **New Configuration** to continue:
 
 {: .image-popup}
 ![Screenshot - New GoodData Writer](/tutorial/write/gooddata-writer-intro-3.png)
@@ -119,7 +119,7 @@ And choose its name:
 {: .image-popup}
 ![Screenshot - Setup GoodData Project](/tutorial/write/gooddata-writer-intro-setup-project.png)
 
-KBC can create a free Demo GoodData project for you. However, it expires in one
+Keboola Connection can create a free Demo GoodData project for you. However, it expires in one
 month from the date it has been created.
 
 {: .image-popup}
@@ -130,6 +130,8 @@ Let's create a [*Date Dimension*](https://help.gooddata.com/display/doc/Dates+an
 {: .image-popup}
 ![Screenshot - Create a date dimension](/tutorial/write/gooddata-writer-date-button.png)
 
+Name the dimension `first_order`:
+
 {: .image-popup}
 ![Screenshot - GoodData Writer Date Dimension](/tutorial/write/gooddata-writer-date-dimension.png)
 
@@ -138,7 +140,7 @@ Now let's configure the tables that are to be loaded to the project.
 {: .image-popup}
 ![Screenshot - Add Tables to GoodData Writer](/tutorial/write/gooddata-writer-new-table-button.png)
 
-Add the `account` table from the `out.c-tutorial` bucket. When adding a table,
+Add the `account` table from the `out.c-opportunity-gooddata` bucket. When adding a table,
 simplify the table title to just the table name (we have only few tables).
 
 {: .image-popup}
@@ -158,12 +160,17 @@ Set the previously created date dimension `first_order` to the `FirstOrder` colu
 {: .image-popup}
 ![Screenshot - GoodData Writer Table Configuration Part 1](/tutorial/write/gooddata-writer-table-config.png)
 
-Then go back to the writer configuration, and add the `out.c-tutorial.user` table.
+**Save** the column settings.
+
+{: .image-popup}
+![Screenshot - GoodData Writer Table Configuration Part 1 Save](/tutorial/write/gooddata-writer-table-config-1.png)
+
+Then go back to the writer configuration, and add the `out.c-opportunity-gooddata.user` table.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Table Configuration Part 2](/tutorial/write/gooddata-writer-intro-5.png)
 
-Name the table *user* and set the columns in the following way:
+Name the table *user* and set the *Name* column to `CONNECTION_POINT` and everything else to `ATTRIBUTE`.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer User Table Configuration](/tutorial/write/gooddata-writer-table-config-2.png)
@@ -176,7 +183,7 @@ Add four other date dimensions called `created_date`, `close_date`, `start_date`
 ![Screenshot - GoodData Writer User Table Configuration](/tutorial/write/gooddata-writer-date-list.png)
 
 Add the third table called
-`out.c-tutorial.out_opportunity`. Name it *opportunity* and set the columns as follows:
+`out.c-opportunity-gooddata.out_opportunity`. Name it *opportunity* and set the columns as follows:
 
 - *Amount* and *Probability* to `FACT`,
 - *AccountId* and *OwnerId* to `REFERENCE` and connect them to tables `account` and `user`,
@@ -189,9 +196,15 @@ You should obtain the following result:
 {: .image-popup}
 ![Screenshot - GoodData Writer Opportunity Table Configuration](/tutorial/write/gooddata-writer-table-config-3.png)
 
+{: .image-popup}
+![Screenshot - GoodData Writer Opportunity Table Configuration](/tutorial/write/gooddata-writer-table-config-3a.png)
+
+{: .image-popup}
+![Screenshot - GoodData Writer Opportunity Table Configuration](/tutorial/write/gooddata-writer-table-config-3b.png)
+
 Save the table configuration, and go back to configuring the writer.
 
-Now click on **Run** to push the tables to GoodData:
+Now click on **Run Component** to push the tables to GoodData:
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Tables Finished](/tutorial/write/gooddata-writer-intro-6.png)
@@ -200,8 +213,8 @@ The tables will be written into GoodData by a background job. When a job is runn
 under *Last runs*, along with RunId and other info on the job. Green is for success, red for failure.
 Click on the indicator, or the info next to it for more details.
 
-In the mean time, click on **GoodData Project** to reveal other options and **Go To Project**. This will give the current KBC user, you,
-access to the GoodData project referenced in the Writer configuration.
+In the mean time, click on **GoodData Project** to reveal other options and **Go To Project**. This will give the current 
+Keboola Connection user, you, access to the GoodData project referenced in the Writer configuration.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Access Project](/tutorial/write/gooddata-writer-intro-7.png)

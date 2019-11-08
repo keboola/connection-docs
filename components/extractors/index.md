@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Extractors are [KBC components](/overview/) used for **importing data from external sources into KBC**.
+Extractors are [KBC components](/components/) used for **importing data from external sources into KBC**.
 
 ## Types of Extractors
 Typically, extractors connect to [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs)

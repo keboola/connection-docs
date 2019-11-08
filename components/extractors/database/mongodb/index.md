@@ -3,7 +3,6 @@ title: MongoDB
 permalink: /components/extractors/database/mongodb/
 redirect_from:
     - /extractors/database/mongodb/
-
 ---
 
 * TOC
@@ -12,28 +11,18 @@ redirect_from:
 The MongoDB extractor allows you to fetch data from the NoSQL [MongoDB database](https://www.mongodb.com/).
 Complete the following steps to configure it.
 
-## Create New Configuration
-
-Find MongoDB in the Extractors section. Create a new configuration and name it.
-
-{: .image-popup}
-![MongoDB add configuration](/components/extractors/database/mongodb/01-add-configuration.png)
-
-
 ## Set Up Database Credentials
-
-Click **Set Up Database Credentials** and fill in the form. Then test the new credentials and save them.
-Optionally, set up an SSH tunnel.
-
-{: .image-popup}
-![MongoDB new credentials](/components/extractors/database/mongodb/02-new-credentials.png)
-
-## Configure Export(s)
-
-Click the **Add Export** button and configure your first export using the following options:
+[Create a new configuration](/components/#creating-component-configuration) and click **Set Up Database Credentials** and fill in the form. 
+Then test the new credentials and save them. Optionally, set up an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 {: .image-popup}
-![MongoDB new export](/components/extractors/database/mongodb/03-new-export.png)
+![MongoDB new credentials](/components/extractors/database/mongodb/mongodb-1.png)
+
+## Configure Exports
+Click the **New Export** button and configure your first export using the following options:
+
+{: .image-popup}
+![MongoDB new export](/components/extractors/database/mongodb/mongodb-2.png)
 
 - **Name** -- Identifies your export; its value has to be unique across all exports and exported tables in
 your configuration. Also, the main exported table will be named after the value of the Name field.
@@ -50,7 +39,8 @@ Must be specified in a [strict format](#strict-format).
 
 - **Incremental** -- Loads data to your tables incrementally.
 
-- **Mode** -- Specifies the export mode: *Mapping* or *Raw*.
+- **Mode** -- Specifies the export mode: *Mapping* or *Raw*. Start by exporting few documents using the 
+[Raw mode](#raw-export-mode) first -- it will help you see document structure for which you need to write mapping.
 
 - **Mapping** -- This is the most important section in case you have selected the *Mapping* mode; 
 it defines [how documents in the collection are mapped](#configure-mapping) to the output tables.
@@ -60,25 +50,22 @@ It, too, has to be valid JSON.
 only a document with specific ID) while playing with the mapping section to prevent a full collection export.*
 
 ### Strict Format
-
 A strict format means standard valid JSON must be used, and you cannot use MongoDB objects as in the
 [JavaScript shell interface](https://docs.mongodb.com/v3.2/reference/program/mongo/#bin.mongo).
 Thus using objects such as *ObjectId*, *Date* or *NumberLong* is not allowed until you specify them
 in the strict format. Read more on the [strict format](https://docs.mongodb.com/v3.2/reference/mongodb-extended-json/).
 
 ## Configure Mapping
-
 By defining mapping, you specify the structure and content of your output tables, 
 their columns and relations between them.
 
 {: .image-popup}
-![MongoDB new export filled](/components/extractors/database/mongodb/04-new-export-filled.png)
+![MongoDB new export filled](/components/extractors/database/mongodb/mongodb-3.png)
 
 *Tip: Export few documents using the [Raw Export Mode](#raw-export-mode) first -- it will help you see
 document structure (in Strict Format) for which you need to write mapping.*
 
 ### Primary Key
-
 Since MongoDB identifies each document in a collection uniquely by `_id`, we recommend to set
 a primary key to this field by defining the first item in a mapping section:
 
@@ -97,12 +84,9 @@ a primary key to this field by defining the first item in a mapping section:
 *Note: The destination column with the primary key should be named `id` not `_id` to prevent problems with
 the data import.*
 
-
 ### Other Data Types
-
 To handle MongoDB data types correctly, define mapping similarly to the following example for
 `MongoId`, `ISODate` and `NumberLong` data types.
-
 
 <table class="table table-bordered">
 <tr>
@@ -152,7 +136,6 @@ To handle MongoDB data types correctly, define mapping similarly to the followin
 Check out [more mapping examples](/components/extractors/database/mongodb/mapping/).
 
 ## Raw Export Mode
-
 In the raw export mode, documents are exported as plain JSON strings.
 
 <table class="table table-bordered">
@@ -202,12 +185,3 @@ In the raw export mode, documents are exported as plain JSON strings.
 </td>
 </tr>
 </table>
-
-## Run Extractor
-
-Having successfully mapped the configuration, run the extractor by hitting the **Run Extraction** button.
-
-{: .image-popup}
-![MongoDB new export](/components/extractors/database/mongodb/05-exports-index.png)
-
-
