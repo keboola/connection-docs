@@ -5,11 +5,10 @@ redirect_from:
     - /storage/configurations/
 ---
 
-In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
 * TOC
 {:toc}
 
-In Keboola Connection platform most of the data processing functions are implemented in **Components**. 
+In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
 Components are divided into three main categories:
 
 - [**Extractors**](/components/extractors/) -- bring data into a Keboola Connection project.
@@ -71,17 +70,13 @@ When you set the parameters and **Save** them, you can actually run the componen
 
 When you run a component, a [Job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs
 with an indication of their status:
-When you run a component a [Job](/management/jobs/) is created and subsequently executed. 
-When running the configuration, its active version (the one with the green tick-mark) will be used.
-The right panel shows last executed jobs
-with indication of their status:
 
 - yellow -- running
 - red -- failed
 - green -- successful
 
 You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and 
-the tables it produced in your project.
+the tables it produced in your project. When running the configuration, its active version (the one with the green tick-mark) will be used.
 
 ### Configuration Versions
 Configuration parameters can be changed at any time. Every change to a configuration is recorded 
@@ -123,6 +118,7 @@ When you compare two versions, a difference of the raw JSON configurations is sh
 When you rollback a configuration, a new version is created. This means that you never lose any version of
 a configuration and there is always an option to get back to it. Configuration versions are also created when 
 the configurations are manipulated programmatically using [the API](https://developers.keboola.com/overview/api/).
+
 ### Rollback Version
 If you need to return to an older version of the configuration, you can also rollback to it (the other option is to make its copy).
 Rolling back a configuration version actually means that a new configuration version is created (and marked as active) 
@@ -151,8 +147,6 @@ You can customize the name of the configuration copy:
 
 The copy of the configuration is created as a new isolated configuration -- i.e., there is no link 
 between the original configuration and the copy, and the changes to one have no effect on the other.
-The copy of the configuration is created as a new isolated configuration -- i.e. there is no link 
-between the original configuration and the copy and changes to one have no effect on the other.
 The new configuration is completely independent on the old one. You may modify or delete 
 either of them without affecting the other one.
 
