@@ -90,7 +90,7 @@ To add users with access limited to only some of your data, create a new token:
 {: .image-popup}
 ![Screenshot - Access Tokens](/management/project/tokens/access-tokens.png)
 
-Limit access of that token to a single Storage bucket, for instance, 'in.c-csv-import'.
+Limit access of that token to a single Storage bucket, for instance, `in.c-csv-import`.
 You can also limit the token validity.
 
 {: .image-popup}
