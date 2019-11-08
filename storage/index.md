@@ -26,7 +26,7 @@ The Storage component manages all data stored in each KBC project:
 
 - [Data tables](/storage/tables/) (Table Storage) --- organized into [buckets](/storage/buckets/)
 - [Data files](/storage/file-uploads/) (File Storage) --- all raw files uploaded to your project
-- [Component configurations](/storage/configurations/)
+- [Component configurations](/components/)
 
 Different storage technologies are used for the above data --- [Amazon S3 Storage](https://aws.amazon.com/s3/)
 for [Files Storage](/storage/file-uploads/) and [Amazon Redshift](https://aws.amazon.com/redshift/) or

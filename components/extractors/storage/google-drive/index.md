@@ -93,7 +93,7 @@ the source sheet is ignored. Using this option allows you to import partial tabl
 (where the automatic sanitization fails), tables with empty or duplicate column names, etc.
 
 {: .image-popup}
-![Screenshot - Advanced options - Headers](/components/extractors/storage/google-drive/google-drive-7.png)
+![Screenshot - Advanced options - Headers](/components/extractors/storage/google-drive/google-drive-6.png)
 
 With the above setting and the sample sheet, the following destination table will be created:
 
@@ -158,7 +158,7 @@ and [**Number of header rows**](#number-of-header-rows) is greater than `1`, the
 The name of this column is specified in [**Transposed header column name**](#transposed-header-column-name).
 
 {: .image-popup}
-![Screenshot - Advanced options Header row column](/components/extractors/storage/google-drive/advanced-options-3.png)
+![Screenshot - Advanced options Header row column](/components/extractors/storage/google-drive/google-drive-7.png)
 
 With [**Transpose from column**](#transpose-from-column) set to `1`, [**Number of header rows**](#number-of-header-rows) set to `2` and
 [**Transposed header column name**](#transposed-header-column-name) set to `second`, a table which doesn't make much sense will be produced:

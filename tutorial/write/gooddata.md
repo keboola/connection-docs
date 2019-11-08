@@ -15,7 +15,7 @@ there is **no need to have a GoodData account** before you start.
 Writing data to GoodData is very similar to writing data to Tableau, although
 there are some changes due to the fundamental differences in both platforms.
 The GoodData platform uses the concept of
-[Logical Models](https://help.gooddata.com/display/doc/Tutorial+-+Creating+Your+First+Data+Model)
+[Logical Models](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model/working-with-your-data-model-in-cloudconnect-logical-data-modeler/learning-data-modeling-by-doing/creating-your-first-data-model)
 where multiple tables are loaded into the platform together with their logical connection model (schema).
 KBC will assist you in creating the model.
 
