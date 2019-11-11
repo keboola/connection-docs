@@ -10,7 +10,7 @@ to organize your project.
 The design decision depends on many factors -- what the purpose of the project is, how big the data is, how often it updates, 
 and how complicated dependencies between operations are. The approaches described below are some of the typical
 ways how projects can be organized. There are no restrictions in the platform limiting how you do stuff. We highly recommend that you 
-consult the design decisions with your [Maintainer](/management/organization/) or [Partner](/#keboolas-partners-program) as they may 
+consult the design decisions with your [Maintainer](/management/organization/) as they may 
 be able to provide valuable experience.
 
 ## Pipelines

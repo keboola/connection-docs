@@ -27,8 +27,14 @@ our [presentation](kbc-intro.pdf) covering both business and technical aspects o
 or to watch one of our short introductory videos ([video 1](https://www.youtube.com/watch?v=QW09kyEjrJA&amp=&t=4s), 
 [video 2](https://www.youtube.com/watch?v=g-VBfkV4xfc&t=62s) -- includes practical demonstration of working with KBC components.
 
-If you are already familiar with how KBC works, go directly to [connection.keboola.com](https://connection.keboola.com) 
-and log in. We are available to provide [support](/management/support/) whenever needed.
+If you are already familiar with how Keboola Connection works, go directly 
+to [connection.keboola.com](https://connection.keboola.com) and log in. If your project is not in the default US region, use the
+region selector to choose appropriate region. 
+
+We are available to provide [support](/management/support/) whenever needed. In case you don't have an access 
+to a Keboola Connection project you can write an email to [support@keboola.com](mailto:support@keboola.com). 
+Please note that we prefer when you use the [support form](/management/support/) inside a project as that provides 
+us with valuable context.
 
 ## More to Read
 
@@ -49,17 +55,3 @@ Use the *Feature Wishlist* in the *Settings* menu to send us your suggestions fo
 
 {: .image-popup}
 ![Screenshot - Wishlist](/wishlist.png)
-
-
-## Keboola's Partners Program
-
-Knowing your local environment, our partners will assist you in creating a custom product 
-specific to your unique needs. To get in touch, please use the following email addresses:
-
-- If in Europe, write to [cz.support@keboola.com](mailto:cz.support@keboola.com).
-- If in North America, write to [support.ca@keboola.com](mailto:support.ca@keboola.com).
-- If in Asia, write to [apac.support@keboola.com](mailto:apac.support@keboola.com).
-
-
-
-
