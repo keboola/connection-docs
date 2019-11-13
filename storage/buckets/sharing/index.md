@@ -24,6 +24,8 @@ You can specify who can link the bucket to a project:
 - **Project Member** --- To be able to link the bucket to a project, a person must be a user of the destination project.
 - **Organization Member** --- To be able to link the bucket to a project, a person must be a user of the destination project
 *and also a member of that organization*.
+- **Specific Projects** --- To be able to link the bucket to a project, a person must be a user who is member of one of 
+the targeted projects *and also a member of that organization*.
 
 In either case, the source and the target project must be in the same organization. To share buckets between different 
 organizations, use the [Keboola Connection Storage extractor](/components/extractors/storage/storage-api/) or 
