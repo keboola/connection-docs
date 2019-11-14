@@ -8,7 +8,7 @@ permalink: /storage/tables/
 
 Your project *Table Storage* is available in the **Tables** tab in the Storage section.
 All data tables are organized into [buckets](/storage/buckets/) that can also be
-used to [share tables](/storage/buckets/sharing/) between projects.
+used to [share tables](/catalog/) between projects.
 
 The actual data tables and the buckets are created primarily by KBC components (extractors, transformations
 and applications), or they are imported from CSV files. In case you want to import data to an already
@@ -22,8 +22,8 @@ Also note that the imported file **may** contain additional columns not present 
 table. In that case, the columns from the imported table will be added to the existing table.
 
 ## Aliases
-Apart from actual tables, it is also possible to create aliases. They are internally implemented
-as [database views](https://en.wikipedia.org/wiki/View_(SQL)) and inherit their basic properties.
+Apart from actual tables, it is also possible to create aliases. They behave similar to 
+[database views](https://en.wikipedia.org/wiki/View_(SQL)).
 
 An alias does not contain any actual data; it is simply a link to some already existing data.
 Hence an alias cannot be written to, and its size does not count to your project quota.
