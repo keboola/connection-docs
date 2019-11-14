@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 This writer loads single or multiple tables from your current project into a different Keboola Connection (KBC) project.
-The component can be used in situations where [Shared Buckets](/storage/buckets/sharing/)
+The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 
 ## Prepare API Token

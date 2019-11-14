@@ -32,7 +32,7 @@ You can also request an upgrade by clicking the **Request Increase** button crea
 Business limits vary based on your contract (refer to it to see which ones apply in your case):
 
 - **Storage rows** --- the sum of all rows in all tables in [Storage](/storage/); 
-[Aliases](/storage/tables/#aliases) and [Linked Buckets](/storage/buckets/sharing/#link-bucket) do 
+[Aliases](/storage/tables/#aliases) and [Linked Buckets](/catalog/) do 
 not count towards this number.
 - **Users count** --- the number of [project Users](/management/project/users).
 [Keboola Support Users](/management/support/#keboola-support-users) do not count towards this number, 
@@ -62,7 +62,7 @@ The **Project Power** tab in **Users & Settings** shows detailed credit consumpt
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [Table Storage](/storage/). 
-[Aliases](/storage/tables/#aliases) and [Linked Buckets](/storage/buckets/sharing/#link-bucket) do 
+[Aliases](/storage/tables/#aliases) and [Linked Buckets](/catalog/) do 
 not count towards this number, and neither do [Files](/storage/file-uploads).
 
 The table storage size is measured as it is reported by the underlying [backend](/storage/#backend-properties). 

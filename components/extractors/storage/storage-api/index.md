@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 This extractor loads single or multiple tables from a Keboola Connection project and stores them in a bucket in your
-current project. The component can be used in situations where [Shared Buckets](/storage/buckets/sharing/)
+current project. The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g. when moving data between two different [organizations](/management/organization) or regions.
 
 ## Prepare API Token

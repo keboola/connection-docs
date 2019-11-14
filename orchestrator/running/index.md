@@ -89,9 +89,9 @@ every 10 minutes and you are good with 1 hour old data, set the cool-down period
 updated approximately every 50-60 minutes instead of every 10 minutes.
 
 The biggest advantage of the **Event Trigger** scheduling is that it can be used inside projects where you use data 
-from [shared buckets](/storage/buckets/sharing/). There is no need to know when data in a [shared bucket](/storage/buckets/sharing/) 
+from [shared buckets](/catalog/). There is no need to know when data in a [shared bucket](/catalog/) 
 is going to be updated (unlike with **[Time Schedule](/orchestrator/running/#1-time-schedule)**). You can just wait 
-for an update of the tables inside a [shared bucket](/storage/buckets/sharing/), and as soon as they are updated, 
+for an update of the tables inside a [shared bucket](/catalog/), and as soon as they are updated, 
 you can run your own orchestrations. 
 
 ## Orchestration Execution

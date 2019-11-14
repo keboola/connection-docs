@@ -14,7 +14,7 @@ and maintainers are therefore organized into a hierarchy:
 Although projects, organizations and maintainers form a hierarchy, their users do not. Each unit has a completely
 independent set of users. That means organization users are not automatically users of the projects
 within organizations and -- vice-versa -- project users are not automatically users of the organization.
-This distinction is important, for example when [sharing buckets](/storage/buckets/sharing/#sharing-type).
+This distinction is important, for example when [sharing buckets](/catalog/#sharing-types).
 
 Depending on your contract details and permissions, the `Organizations` feature may or may not be available to you.
 
@@ -48,7 +48,7 @@ Apart from adding and removing other members, each organization member is also a
 - Leave the organization; there is no way back without someone else's invitation.
 - Leave and re-enter all existing projects in the organization.
 - View and edit billing details.
-- Manage [shared buckets](/storage/buckets/sharing/).
+- Manage [shared buckets](/catalog/#sharing-types).
 - Create new projects.
 - Allow [Keboola Support](/management/support/#require-approval-for-support-access) to join your projects.
 

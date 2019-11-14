@@ -231,15 +231,18 @@ items:
       - url: /components/ip-addresses
         title: IP Addresses
 
+  - url: /catalog/
+    title: Data Catalog
+    items:  
+      - url: /catalog/multi-project/
+        title: Multi-project Architecture
+
   - url: /storage/
     title: Storage
     items:
       - url: /storage/buckets/
         title: Buckets
-        items:
-          - url: /storage/buckets/sharing/
-            title: Sharing Buckets
-
+              
       - url: /storage/tables/
         title: Tables & Aliases
         items:
