@@ -44,7 +44,7 @@ The `conversations` template downloads all
 ## Downloaded Tables
 All `custom_attributes` and `metadata` properties are stored as a serialized JSON string. 
 Due to the customized structure of this object we are unable to prepare a fixed structure. 
-To parse the serialized JSON, use e.g. a Snowflake transformation that can easily parse JSON objects. 
+To parse the serialized JSON, use, for example, a Snowflake transformation that can easily parse JSON objects. 
 
 ### users
 The table `users` lists all [Users](https://developers.intercom.com/intercom-api-reference/reference#user-model) and 

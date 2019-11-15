@@ -3,7 +3,7 @@ title: Part 2 - Data Manipulation
 permalink: /tutorial/manipulate/
 ---
 
-At this point, you already know how to quickly [load data into KBC](/tutorial/load/),
+At this point, you already know how to quickly [load data into Keboola Connection](/tutorial/load/),
 and your [Storage](/storage/tables/) contains four new tables:
 *account*, *opportunity*, *level* and *user*.
 In this part of the tutorial, we will show you how to manipulate data in Storage using [Transformations](/transformations/).
@@ -13,7 +13,7 @@ Let's create a denormalized table from the input tables and do some minor modifi
 {:toc}
 
 ## Creating Transformation
-To start, go to the KBC **Transformations** section:
+To start, go to the Keboola Connection **Transformations** section:
 
 {: .image-popup}
 ![Screenshot - Transformations Console](/tutorial/manipulate/transformations-intro.png)
@@ -26,10 +26,10 @@ Before you start with transformations, create a bucket and call it *Opportunity*
 {: .image-popup}
 ![Screenshot - Create a Transformation Bucket](/tutorial/manipulate/transformations-create-bucket.png)
 
-Then click on **New Transformation** button to create an individual transformation.
-Make sure to enter its *Name* and select *Backend*. A backend is the engine running the transformation script;
-it is either a database server (Snowflake, Redshift) or a language interpreter (R, Python, Julia).
-Name your transformation *Denormalize opportunities*, and choose the **Snowflake** backend.
+Then click on the **New Transformation** button to create an individual transformation.
+Enter *Denormalize opportunities* as its *Name* and select **Snowflake** as its *Backend*. 
+A backend is the engine running the transformation script; it is either a database server (Snowflake, Redshift) 
+or a language interpreter (R, Python, Julia).
 
 {: .image-popup}
 ![Screenshot - Create a Transformation](/tutorial/manipulate/transformations-create.png)
@@ -61,13 +61,14 @@ Let's start with setting Input Mapping by clicking the **New Input** button.
 The *Source* field in the input mapping refers to Storage. Select `in.c-csv-import.account` as the source table.
 You can do a full text search in the select field; typing `acc` will give you the table as well.
 In the *Destination* field, the table name `account` is automatically filled for you.
-This is the name of the source table inside the transformation. Use the **Create Input** to create
+This is the name of the source table inside the transformation. Use the **Create Input** button to create
 the input mapping.
 
 Add the remaining three tables: `opportunity`, `user` and `level`. If you loaded data using the
-[Database extractor](/tutorial/load/database/) or [Google Drive extractor](/tutorial/load/googledrive/)
-feel free to use the tables create by them (e.g `in.c-keboola-ex-db-snowflake-548904898.account` or `in.c-keboola-ex-google-drive-548902224.level-level`). In either case, make sure that the destinations
-are set to `account`, `opportunity`, `user` and `level`.
+[Database extractor](/tutorial/load/database/) or the [Google Drive extractor](/tutorial/load/googledrive/),
+feel free to use the tables created by them (e.g., `in.c-keboola-ex-db-snowflake-548904898.account` or
+`in.c-keboola-ex-google-drive-548902224.level-level`). In either case, make sure that the destinations
+are set to `account`, `opportunity`, `user`, and `level`.
 You will get the following configuration:
 
 {: .image-popup}
@@ -87,9 +88,9 @@ the *Source* field refers to the transformation. This table does not exist yet.
 We will create it in the transformation.
 
 The *Destination* field refers to the name of the output table in Storage.
-It will be auto-generated to `out.c-opportunity.opportunity_denorm` which is 
+It will be auto-generated to `out.c-opportunity.opportunity_denorm`, which is 
 perfectly fine. It will create the `opportunity_denorm` table in the `opportunity` [bucket in the output stage](/storage/tables/)
-in Storage. Neither the table nor the bucket does exist, but they will be created once the transformation runs.
+in Storage. Neither the table nor the bucket exist, but they will be created once the transformation runs.
 
 After you finish Output Mapping, you will see this:
 
@@ -102,7 +103,7 @@ The size of the `opportunity_denorm` table shows as *N/A* because the table does
 (all available options, etc.).*
 
 ### Transformation Script
-To produce that table from tables `account`, `opportunity` and `user`, write the transformation script.
+To produce that table from the tables `account`, `opportunity` and `user`, write a transformation script.
 To save you some time, we have already prepared the necessary SQL queries for you:
 
 {% highlight sql %}

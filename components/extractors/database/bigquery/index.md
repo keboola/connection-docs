@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The BigQuery extractor loads data from [BigQuery](https://cloud.google.com/bigquery/) and brings it into Keboola Connection (KBC). 
+The BigQuery extractor loads data from [BigQuery](https://cloud.google.com/bigquery/) and brings it into Keboola Connection. 
 Running the extractor creates a background job that
 
 - executes the queries in Google BigQuery.
@@ -24,7 +24,7 @@ Running the extractor creates a background job that
 To access and extract data from your BigQuery dataset, you need to set up a Google Service Account. Go 
 to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
 and select the project you want the extractor to have access to. Click **Create Service Account**
-amd enter a **Service account name** (e.g. `Keboola Connection BigQuery Extractor`).
+and enter a **Service account name** (e.g., `Keboola Connection BigQuery Extractor`).
 
 {: .image-popup}
 ![Screenshot - Create service account](/components/extractors/database/bigquery/googlecloud-1.png)
@@ -42,7 +42,7 @@ Finally, create a new JSON key (click **+ Create key**) and download it to your 
 ### Bucket
 The extractor uses Google Storage Bucket as a temporary storage for off-loading the data from BigQuery.
 Go to the [**Google Cloud Platform Console > Storage > Browser**](https://console.cloud.google.com/storage/browser)
-and click **Create Bucket**. Enter **Name** of your bucket and select **Location** (must be the same as of your dataset).
+and click **Create Bucket**. Enter the **Name** of your bucket and select its **Location** (must be the same as of your dataset).
 
 {: .image-popup}
 ![Screenshot - Google Cloud Platform](/components/extractors/database/bigquery/googlecloud-4.png)

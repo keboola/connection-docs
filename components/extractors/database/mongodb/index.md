@@ -40,7 +40,7 @@ Must be specified in a [strict format](#strict-format).
 - **Incremental** -- Loads data to your tables incrementally.
 
 - **Mode** -- Specifies the export mode: *Mapping* or *Raw*. Start by exporting few documents using the 
-[Raw mode](#raw-export-mode) first -- it will help you see document structure for which you need to write mapping.
+[Raw mode](#raw-export-mode) first -- it will help you see the document structure for which you need to write mapping.
 
 - **Mapping** -- This is the most important section in case you have selected the *Mapping* mode; 
 it defines [how documents in the collection are mapped](#configure-mapping) to the output tables.
@@ -63,7 +63,7 @@ their columns and relations between them.
 ![MongoDB new export filled](/components/extractors/database/mongodb/mongodb-3.png)
 
 *Tip: Export few documents using the [Raw Export Mode](#raw-export-mode) first -- it will help you see
-document structure (in Strict Format) for which you need to write mapping.*
+the document structure (in Strict Format) for which you need to write mapping.*
 
 ### Primary Key
 Since MongoDB identifies each document in a collection uniquely by `_id`, we recommend to set
@@ -86,7 +86,7 @@ the data import.*
 
 ### Other Data Types
 To handle MongoDB data types correctly, define mapping similarly to the following example for
-`MongoId`, `ISODate` and `NumberLong` data types.
+`MongoId`, `ISODate`, and `NumberLong` data types.
 
 <table class="table table-bordered">
 <tr>

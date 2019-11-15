@@ -23,7 +23,7 @@ component (e.g., credentials and other specification of what to do). Then it can
 
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the
-component categories (extractor, writer, or application):
+component categories (Extractors, Writers, or Applications):
 
 {: .image-popup}
 ![Screenshot - Create Configuration](/components/configuration-1.png)
@@ -35,8 +35,8 @@ use the **Directory** or the **Add New Extractor** button.
 {: .image-popup}
 ![Screenshot - Extractors List](/components/configuration-2.png)
 
-Use the search field to find the component you want to use and click the component tile to 
-add a new component (Currency Rates extractor in this case):
+Use the search field to find the component you want to use (the Currency Rates extractor in this case) and 
+then click the component tile to add it:
 
 {: .image-popup}
 ![Screenshot - Search Component](/components/configuration-3.png)
@@ -90,10 +90,10 @@ The configuration description supports rich text formatting using [Markdown](htt
 The bottom right panel shows a list of the configuration versions. To see their full list, use the links. 
 The version list is complete and allows you to compare adjacent versions or revert to any previous version.
 The bottom right panel shows list of the configuration versions. You can use the links to see full list of 
-the configuration versions. Use the version list to:
+the configuration versions. Use the version list to
 
-- copy any version,
-- compare any two successive versions, or just
+- copy any version.
+- compare any two successive versions.
 - rollback to an older version.
 
 All of the operations can be [accessed via API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
@@ -106,7 +106,7 @@ programmatically using [the API](https://developers.keboola.com/overview/api/). 
 to modify a configuration without the changes being recorded.
 
 ### Compare Versions
-You can compare adjacent version using the compare button:
+You can compare adjacent versions by clicking the *compare* icon:
 
 {: .image-popup}
 ![Screenshot - Version List](/components/configuration-8.png)
@@ -117,15 +117,15 @@ When you compare two versions, a difference of the raw JSON configurations is sh
 ![Screenshot - Version Differences](/components/configuration-9.png)
 
 When you rollback a configuration, a new version is created. This means that you never lose any version of
-a configuration and there is always an option to get back to it. Configuration versions are also created when 
-the configurations are manipulated programmatically using [the API](https://developers.keboola.com/overview/api/).
+a configuration and that there is always an option to get back to it. Configuration versions are also created when 
+the configurations are manipulated programmatically via [the API](https://developers.keboola.com/overview/api/).
 
 ### Rollback Version
 If you need to return to an older version of the configuration, you can also rollback to it (the other option is to make its copy).
 Rolling back a configuration version actually means that a new configuration version is created (and marked as active) 
-with the contents of the selected version. Rollback is therefore quite a safe operation.
+with the contents of the selected version. A rollback is therefore quite a safe operation.
 
-Click the Rollback button next to the version you want to return to:
+Click the *rollback* icon next to the version you want to return to:
 
 {: .image-popup}
 ![Screenshot - Version List](/components/configuration-18.png)
@@ -152,20 +152,22 @@ The new configuration is completely independent on the old one. You may modify o
 either of them without affecting the other one.
 
 ### Delete Configuration
-To delete a configuration, click the bin icon in the configuration list or the Move to Trash button in the configuration detail. 
-They both move the configuration to Trash.
+To delete a configuration and move it to Trash, click the *bin* icon in the configuration list 
+or the **Move to Trash** button in the configuration detail. 
 
 {: .image-popup}
 ![Screenshot - Delete](/components/configuration-19.png)
 
 Each configuration moved to Trash acts as deleted: it is removed from orchestrations, cannot be run and is not displayed.
-You can undo the delete operation immediately after the delete operation, or restore the configuration from Trash accessible from 
+You can undo the delete operation immediately, or you can restore the configuration from Trash accessible from 
 the main menu.
 
 {: .image-popup}
 ![Screenshot - Configuration Trash](/components/configuration-20.png)
 
-There you can restore a deleted configuration, or permanently remove it. Once deleted from Trash, no configuration can be recovered. If your Trash is filled with a large number of configurations and you want to quickly find the one you need to restore or permanently remove, use the filter and search options in the upper part of the page.
+There you can restore a deleted configuration, or permanently remove it. Once deleted from Trash, no configuration can be recovered. 
+If your Trash is filled with a large number of configurations and you want to quickly find the one you need to restore or permanently remove, 
+use the filter and search options in the upper part of the page.
 
 {: .image-popup}
 ![Screenshot - Configuration Restore](/components/configuration-21.png)
@@ -175,36 +177,37 @@ When you restore a configuration, its new version is created. Therefore you can 
 {: .image-popup}
 ![Screenshot - Configuration History](/components/configuration-22.png)
 
-For technical reasons, configurations of the Orchestrator component cannot be restored when deleted. They will still be shown in Trash, but cannot be restored:
+For technical reasons, configurations of the Orchestrator component cannot be restored when deleted. They will still be shown in Trash,
+but cannot be restored:
 
 {: .image-popup}
 ![Screenshot - Orchestration in Trash](/components/configuration-23.png)
 
 ### Configuration Rows
-Some components support the concept of multiple configurations sharing some parameters in common. A typical
+There are components that support the concept of multiple configurations sharing some of their parameters. A typical
 example are database extractors, where multiple tables are extracted and they all share the same database credentials.
 In such components, the configuration itself contains only the credentials and tables are stored in **configuration rows**.
 The *configuration* acts as an envelope for the *configuration rows*.
 
-The following example shows a configuration of [AWS S3 extractor](/components/extractors/storage/aws-s3/)
+The following example shows a configuration of the [AWS S3 extractor](/components/extractors/storage/aws-s3/)
 with three configuration rows:
 
 {: .image-popup}
 ![Screenshot - Configuration Rows](/components/configuration-14.png)
 
 Each row can individually be modified or deleted. You can also disable a row which means that if the entire 
-configuration is ran, the row will be skipped. You can also run a single row explicitly. Jobs which run only
-a single row have the label **partial**. Therefore, you can for
-example create a configuration which on a scheduled run extracts all the enable tables and also contains some tables, which 
+configuration is run, the row will be skipped. You can also run a single row explicitly. Jobs which run only
+a single row have the label **partial**. Therefore, you can, for example, create a configuration 
+that on a scheduled run extracts all the enabled tables and also contains tables that
 share the same credentials but are updated manually (or in a different orchestration).
 
 You can add as many rows as you like, the list of configuration rows is fully searchable. You can also change the order of the
-rows. The order is maintained during processing, so you can use this to for example extract the large tables first. The
-order of rows has no effect on your project, because a Job is finished only after each row has been processed.
+rows. The order is maintained during processing, so you can use this to, for instance, extract the large tables first. The
+order of rows has no effect on your project, because a Job is finished only after each row is processed.
 
 ### Configuration Rows Versions
 Changes to configuration rows are part of the [configuration versioning](#configuration-versions). The following image shows that
-the versions in th configuration page list changes to the configuration rows -- both that a table was added and that it was modified.
+the versions in the configuration page list changes to the configuration rows -- both that a table was added and that it was modified.
 
 {: .image-popup}
 ![Screenshot - Configuration Rows All Versions](/components/configuration-15.png)
@@ -218,8 +221,8 @@ row. You can rollback a row to a previous version without interacting with the o
 {: .image-popup}
 ![Screenshot - Rows Versions](/components/configuration-16.png)
 
-Note that you cannot copy a configuration row to a new configuration. You always have to copy the entire
-configuration.
+*Note: You cannot copy a configuration row to a new configuration. You always have to copy the entire
+configuration.*
 
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user)
@@ -233,7 +236,7 @@ The OAuth authorization process begins with the **Authorize** button (in this ex
 {: .image-popup}
 ![Screenshot - Authorization](/components/authorization-1.png)
 
-In the next step, you can choose authorization method:
+In the next step, you can choose the authorization method:
 
 - **Instant**: Use this method if you have direct access to the account; the authorization will be done immediately.
 - **External**: If you need to authorize access to the service from someone who does not have an account in Keboola Connection, you can generate an external link, which will guide them through this process.
@@ -243,8 +246,8 @@ credentials to your account. The consumer -- Keboola Connection component -- obt
 access.  The authorization is only valid for the configuration in which it was created and for its **copies**.
 
 ### Instant Authorization
-Instant authorization requires that you are can actually login to the service you want to use.
-With instant authorization, you have to enter a name describing the account, you're going to use:
+Instant authorization requires that you can actually login to the service you want to use.
+With instant authorization, you have to enter a name describing the account you're going to use:
 
 {: .image-popup}
 ![Screenshot - Instant Authorization](/components/authorization-1.png)
@@ -256,8 +259,8 @@ In the example below, the authorization for Google calendar is shown.
 ![Screenshot - Service Authorization](/components/authorization-3.png)
 
 ### External Authorization
-External account can be used in cases where you do not have direct access to the service and the 
-service *account owner* can't share the credentials with you. For example 
+An external account can be used in cases where you do not have direct access to the service and the 
+service *account owner* can't share the credentials with you. For example, 
 they can belong to a different company or department, or sharing the credentials would leak some permissions.
 In such cases you can ask the account owner to authorize the component configuration for you.
 
@@ -266,14 +269,14 @@ The first step is to generate the authorization link:
 {: .image-popup}
 ![Screenshot - Generate link](/components/authorization-4.png)
 
-Then you can copy the link and send it to the account owner. The link is valid for 48 hours, if it expires you have to 
+Then you can copy the link and send it to the account owner. The link is valid for 48 hours. If it expires, you have to 
 regenerate it and resend it to the account owner.
 
 {: .image-popup}
 ![Screenshot - Copy link](/components/authorization-5.png)
 
-When the *account owner* clicks the link they're taken to a special page. There they can confirm what
-are they authorizing and who requested the action, then they can click on the **Authorize Account** to proceed:
+When the *account owner* clicks the link, they're taken to a special page. There they can confirm what
+they are authorizing and who requested the action. Then they can click **Authorize Account** to proceed:
 
 {: .image-popup}
 ![Screenshot - External Authorization page](/components/authorization-6.png)
@@ -289,8 +292,8 @@ In the example below, the authorization for Google calendar is shown.
 {: .image-popup}
 ![Screenshot - Service Authorization](/components/authorization-3.png)
 
-### Resetting authorization
-You can reset an existing authorization using the **Reset** button.
+### Resetting Authorization
+You can reset an existing authorization by clicking the **Reset** button.
 
 {: .image-popup}
 ![Screenshot - Reset Authorization](/components/authorization-8.png)

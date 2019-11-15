@@ -23,17 +23,17 @@ However, keep in mind you can use the processed data in any way you wish.
 
 There are three options how to load the `opportunity_denorm` table into Tableau:
 
-- Writing data to a provisioned Snowflake/Redshift database, or
+- Writing data to a provisioned Snowflake/Redshift database
 - Generating a [Tableau Data Extract (TDE)](http://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1) 
-and loading it manually into Tableau Desktop, or
-- Generating a TDE and loading it into Tableau Server, either manually or automatically.
+and loading it manually into Tableau Desktop
+- Generating a TDE and loading it into Tableau Server, either manually or automatically
 
 In either case, you need a writer component from the **Components -- Writers** menu. 
 
 {: .image-popup}
 ![Screenshot - Writers](/tutorial/write/writers-intro.png)
 
-In this tutorial, we'll go with the first option -- using the **Snowflake Writer** as it is the easiest and fastest way. 
+In this tutorial, we'll go with the first option -- configuring the **Snowflake writer** as it is the easiest and fastest to use. 
 The description of the [Tableau TDE writer](/components/writers/bi-tools/tableau/) is part of the [writers](/components/writers/) 
 documentation. Click **Add New Writer**, find the Snowflake writer and click it.
 
@@ -54,14 +54,14 @@ Name the configuration and click **Create Configuration**.
 {: .image-popup}
 ![Screenshot - Create Snowflake Writer Configuration](/tutorial/write/snowflake-create-config.png)
 
-At this moment, you're probably wondering why are we using Snowflake database and where and how you are going to
+At this moment, you're probably wondering why we are using the Snowflake database and where and how you are going to
 get credentials to it. The answer is near -- click the **Set up credentials** button:
 
 {: .image-popup}
 ![Screenshot - Snowflake Configuration Intro](/tutorial/write/snowflake-config.png)
 
 As part of the Keboola Connection platform we offer a 
-[dedicated database workspace](/components/writers/database/snowflake/#keboola-snowflake-database) which you can use to connect
+[dedicated database workspace](/components/writers/database/snowflake/#keboola-snowflake-database) that you can use to connect
 [external tools](/components/writers/database/snowflake/#using-keboola-provisioned-database). Simply click
 on **Keboola Snowflake Database**:
 
@@ -84,16 +84,16 @@ Select the table `out.c-opportunity.opportunity_denorm` and click **Add Table**:
 {: .image-popup}
 ![Screenshot - Select table](/tutorial/write/tableau-select-table-2.png)
 
-In the next step, you can specify properties of the columns in the target database like name and datatype.
+In the next step, you can specify properties of the columns in the target database, like `Name` and `Data Type`.
 Use the preview column to peek at the column data. Click the **Edit Columns** button to change settings.
 
 {: .image-popup}
 ![Screenshot - Snowflake View Columns](/tutorial/write/snowflake-columns.png)
 
-Most columns in the `opportunity_denorm` table are strings (characters), start 
+Most columns in the `opportunity_denorm` table are strings (characters). Start 
 with `Set All Types to:` and select `string` to set them quickly. 
 Then **Preview** the content of each column and set its type accordingly.
-For the purpose of this tutorial, it is enough to set the `amount` column to `number` type.
+For the purpose of this tutorial, it is enough to set the *Amount* column to the type `number`.
 Don't forget to **Save** the settings.
 
 {: .image-popup}
@@ -148,7 +148,7 @@ manipulate it using **Transformations**, and load it into the target system usin
 
 At this point, you can
 
-- [return to the tutorial index](/tutorial/) for additional steps, or 
-- take a brief side-step on how to set up a [writer to GoodData BI](/tutorial/write/gooddata/), or
+- [return to the tutorial index](/tutorial/) for additional steps, 
+- take a brief side-step on how to set up a [writer to GoodData BI](/tutorial/write/gooddata/),
 - continue to [Setting up Automation](/tutorial/automate/), or just
 - [talk to us](/).

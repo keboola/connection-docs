@@ -21,7 +21,7 @@ Therefore, it is a good idea to set up the extractor in a [**scheduled** orchest
 Each configuration corresponds to a single target email address. If you need 
 to import emails into different tables, it is advisable to create more configurations.
 An email address for sending attachments will be generated when the configuration is created. Use it to send 
-files with `.csv` extension.
+files with the extension `.csv`.
 
 {: .image-popup}
 ![Screenshot - Configuration](/components/extractors/communication/email-attachments/email-attachments-1.png)

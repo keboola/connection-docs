@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
+Extractors import data from external sources and integrate it to the Keboola Connection environment.
 
 There are a number of extractors for [**SQL databases**](/components/extractors/database/sqldb/):
 

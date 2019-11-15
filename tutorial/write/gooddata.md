@@ -9,7 +9,7 @@ permalink: /tutorial/write/gooddata/
 After [manipulating data in SQL](/tutorial/manipulate/)
 and [writing data to Tableau](/tutorial/write/),
 let's now write data to [GoodData Analytics](http://www.gooddata.com/).
-As KBC creates GoodData testing projects for you automatically,
+As Keboola Connection creates GoodData testing projects for you automatically,
 there is **no need to have a GoodData account** before you start.
 
 Writing data to GoodData is very similar to writing data to Tableau, although
@@ -17,7 +17,7 @@ there are some changes due to the fundamental differences in both platforms.
 The GoodData platform uses the concept of
 [Logical Models](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model/working-with-your-data-model-in-cloudconnect-logical-data-modeler/learning-data-modeling-by-doing/creating-your-first-data-model)
 where multiple tables are loaded into the platform together with their logical connection model (schema).
-KBC will assist you in creating the model.
+Keboola Connection will assist you in creating the model.
 
 ## Prepare Data for Writer
 
@@ -31,7 +31,7 @@ For the sake of practicing, let's create a brand new transformation instead of m
 Apart from creating a new transformation, we also need a new transformation bucket, since the
 Tableau and GoodData transformations are not really related. If they were more complex, we would take out the
 similar parts into another transformation. Name the new transformation bucket *Opportunity - GoodData* and
-choose **Snowflake** backend.
+choose the **Snowflake** backend.
 
 {: .image-popup}
 ![Screenshot - Transformation Bucket Create](/tutorial/write/gooddata-transformation-create-1.png)
@@ -44,8 +44,8 @@ Then add a new transformation and name it.
 Now set the transformation input mapping. Include the following tables from the `in.c-csv-import` storage bucket:
 `opportunity`, `account`, `level`, and `user`.
 If you loaded data using the
-[Database extractor](/tutorial/load/database/) or [Google Drive extractor](/tutorial/load/googledrive/)
-feel free to use the tables create by them (e.g `in.c-keboola-ex-db-snowflake-548904898.account` or `in.c-keboola-ex-google-drive-548902224.level-level`). In either case, make sure that the destinations
+[Database extractor](/tutorial/load/database/) or [Google Drive extractor](/tutorial/load/googledrive/),
+feel free to use the tables created by them (e.g., `in.c-keboola-ex-db-snowflake-548904898.account` or `in.c-keboola-ex-google-drive-548902224.level-level`). In either case, make sure that the destinations
 are set to `account`, `opportunity`, `user` and `level`.
 Then create the output mapping for the `out_opportunity`, `out_user`, and `out_account` tables
 to be stored in the `out.c-opportunity-gooddata` output bucket.
@@ -103,7 +103,7 @@ Start by creating a new writer in the **Components -- Writers** section:
 {: .image-popup}
 ![Screenshot - New Writer](/tutorial/write/gooddata-writer-intro-1.png)
 
-GoodData writer can have multiple configurations (as any other writer or extractor). Each configuration represents a set
+The GoodData writer can have multiple configurations (as any other writer or extractor). Each configuration represents a set
 of data loaded into a single GoodData project. **New Configuration** to continue:
 
 {: .image-popup}
@@ -114,13 +114,13 @@ And choose its name:
 {: .image-popup}
 ![Screenshot - New GoodData Writer](/tutorial/write/gooddata-writer-intro-4.png)
 
-**Setup GoodData Project** to continue:
+**Set Up GoodData Project** to continue:
 
 {: .image-popup}
 ![Screenshot - Setup GoodData Project](/tutorial/write/gooddata-writer-intro-setup-project.png)
 
 Keboola Connection can create a free Demo GoodData project for you. However, it expires in one
-month from the date it has been created.
+month from the date it was created.
 
 {: .image-popup}
 ![Screenshot - Create GoodData Project](/tutorial/write/gooddata-writer-create-demo-project.png)
@@ -153,9 +153,9 @@ Configure the type of each column. Mark
 - all other columns used for slicing and filtering as `ATTRIBUTE`, and
 - date/datetime columns, being an exception, as `DATE`.
 
-Do not set the Data Type column.
+Do not set the *Data Type* column.
 
-Set the previously created date dimension `first_order` to the `FirstOrder` column.
+Set the previously created date dimension `first_order` to the *FirstOrder* column.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Table Configuration Part 1](/tutorial/write/gooddata-writer-table-config.png)
@@ -214,7 +214,7 @@ under *Last runs*, along with RunId and other info on the job. Green is for succ
 Click on the indicator, or the info next to it for more details.
 
 In the mean time, click on **GoodData Project** to reveal other options and **Go To Project**. This will give the current 
-Keboola Connection user, you, access to the GoodData project referenced in the Writer configuration.
+Keboola Connection user, you, access to the GoodData project referenced in the writer configuration.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Access Project](/tutorial/write/gooddata-writer-intro-7.png)
@@ -226,8 +226,8 @@ Then create your report:
 ![Screenshot - GoodData Introduction](/tutorial/write/gooddata-intro.png)
 
 First, specify a metric. It can be computed from columns we marked as `FACT`
-when setting up the writer (those are `amount` and `probability`).
-Let's add a metric for `SUM` of `Amount`,
+when setting up the writer (those are *Amount* and *Probability*).
+Let's add a metric for `SUM` of *Amount*,
 
 {: .image-popup}
 ![Screenshot - GoodData Create Metric](/tutorial/write/gooddata-dashboard-1.png)
@@ -238,7 +238,7 @@ Then specify how this metric should be sliced in the **How** section. Let's slic
 {: .image-popup}
 ![Screenshot - GoodData Slice Metric](/tutorial/write/gooddata-dashboard-2.png)
 
-Additional slices, or filters can be added in the dashboard wizard. To close the wizard, click done and the
+Additional slices or filters can be added in the dashboard wizard. To close the wizard, click **Done** and the
 result will be shown to you as a table. To change the view, use the appropriate icon in the
 top right corner.
 
@@ -247,5 +247,5 @@ top right corner.
 
 This will give you the same chart we produced in the [Tableau Example](/tutorial/write/).
 
-The tutorial on writing data to GoodData BI platform using KBC ends here.
+The tutorial on writing data to GoodData BI platform using Keboola Connection ends here.
 Continue to [Setting up Automation](/tutorial/automate/).

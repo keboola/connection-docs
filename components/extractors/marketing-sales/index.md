@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Extractors import data from external sources and integrate it to the Keboola Connection (KBC) environment.
+Extractors import data from external sources and integrate it to the Keboola Connection environment.
 Keboola Connection provides the following marketing and sales extractors:
 
 - [Babelforce](/components/extractors/marketing-sales/babelforce/)

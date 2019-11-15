@@ -24,12 +24,12 @@ your database server to the internet by [setting up an SSH Tunnel](/components/e
 *Note: Quick introduction to extracting data from the Snowflake Database Server is also part of our [tutorial](/tutorial/load/database/).*
 
 ## Initial Setup
-After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Setup credentials first** button:
+After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Set up credentials first** button:
 
 {: .image-popup}
 ![Screenshot - Configure Credentials Start](/components/extractors/database/sqldb/sqldb-1.png)
 
-Fill in the credentials to the database. See section [Server Specific Notes](#server-specific-notes) for description of non-standard fields.
+Fill in the credentials to the database. See the section [Server Specific Notes](#server-specific-notes) for a description of non-standard fields.
 After testing the credentials, **Save** them:
 
 {: .image-popup}
@@ -49,7 +49,7 @@ Existing credentials can be changed using the **Database Credentials** link.
 ![Screenshot - Table list](/components/extractors/database/sqldb/sqldb-4.png)
 
 ## Modify Configuration
-If you want to modify table extraction setup, click on the corresponding row. You'll get to the table detail view:
+If you want to modify the table extraction setup, click on the corresponding row. You'll get to the table detail view:
 
 {: .image-popup}
 ![Screenshot - Table Detail](/components/extractors/database/sqldb/sqldb-5.png)
@@ -68,7 +68,7 @@ The table detail also allows you to switch to **Advanced mode**:
 {: .image-popup}
 ![Screenshot - Table Detail Advanced](/components/extractors/database/sqldb/sqldb-6.png)
 
-In advanced mode, you can write an arbitrary `SELECT` query, the result of that query will be imported to a
+In advanced mode, you can write an arbitrary `SELECT` query. Its result will be imported to a
 [Storage](/storage/) table. The SQL query is executed on the source server without any processing, that means that
 you have to follow the SQL dialect of the particular server you're working with.
 Please keep the following in mind when using the advanced mode:
@@ -80,7 +80,7 @@ Avoid doing complex joins and aggregations in SQL queries.
 Remember that these queries are executed on the database server you are extracting from.
 This database system might not be designed or optimized for complex SELECT queries.
 Complex queries may result in timeouts, or they might produce unnecessary loads on your internal systems.
-Instead, import raw data, and then use KBC tools to give it the shape you want.
+Instead, import raw data, and then use Keboola Connection tools to give it the shape you want.
 
 ## Server Specific Notes
 
@@ -104,20 +104,20 @@ When the extracted text itself may contain quotes, you need to escape them by re
 SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM [my_table]
 {% endhighlight %}
 
-The extractor will still work if you don't do these things, but the BCP will fail and the backup, much slower method
-will be used. In that case the message  `BCP command failed: ... Attempting export using pdo_sqlsrv` will be logged in the extraction
+The extractor will still work if you don't do these things, but the BCP will fail and the backup, a much slower method
+will be used. In that case the message `BCP command failed: ... Attempting export using pdo_sqlsrv` will be logged in the extraction
 job events.
 
 ### Azure-Hosted MS SQL Server
 An SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.windows.net`.
-If the hostname is provided as IP address e.g. `123.123.123.123` the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
+If the hostname is provided as an IP address, for example, `123.123.123.123`, the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
 
 ### Snowflake
 When extracting data from a Snowflake database, the permissions must be set to allow the
 specified user to use the specified warehouse.
 
 The following SQL code creates the role and user `KEBOOLA_SNOWFLAKE_EXTRACTOR` and grants them access
-to `MY_WAREHOUSE` warehouse, `MY_DATA` database, and `MY_SCHEMA` schema.
+to the warehouse `MY_WAREHOUSE`, the database `MY_DATA`, and the schema `MY_SCHEMA`.
 
 {% highlight sql %}
 CREATE ROLE KEBOOLA_SNOWFLAKE_EXTRACTOR;

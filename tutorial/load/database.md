@@ -35,8 +35,8 @@ Name the configuration.
 
 Now, click on **Set up credentials** to configure the source database. Set
 
-- **Host** to `kebooladev.snowflakecomputing.com`,
-- **Port** to `443`, and
+- **Host Name** to `kebooladev.snowflakecomputing.com`.
+- **Port** to `443`.
 - **Username**, **Password**, **Database** and **Schema** to `HELP_TUTORIAL`.
 - **Warehouse** to `DEV`.
 
@@ -55,7 +55,7 @@ Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press **Create**.
 {: .image-popup}
 ![Screenshot - Database Tables Selected](/tutorial/load/extractor-db-tablesSelected.png)
 
-You will get the following configurations. Now let's click on **Run Extraction** to load the data
+You will get the following configurations. Click on **Run Extraction** to load the data
 from the database into your tables in Storage.
 
 {: .image-popup}

@@ -24,12 +24,12 @@ Go to [Google Spreadsheets](https://www.google.com/sheets/about) and *Start a ne
 
 ## Configure Google Drive Extractor
 
-Go to **Components -- Extractors** in Keboola Connection and click the **Add New extractor** button:
+Go to **Components -- Extractors** in Keboola Connection and click the **Add New Extractor** button:
 
 {: .image-popup}
 ![Extractors Overview Screenshot](/tutorial/load/extractor-intro-0.png)
 
-Use the search box to find the *Google Drive* extractor and click on it.
+Use the search box to find the *Google Drive* extractor. Once you find it, click on it.
 
 {: .image-popup}
 ![Extractors Overview Screenshot](/tutorial/load/extractor-intro.png)
@@ -81,8 +81,8 @@ It will appear on the right side of the screen as one of the *Selected sheets to
 {: .image-popup}
 ![Google Drive Selected Documents](/tutorial/load/extractor-google-drive-select-sheets.png)
 
-When you **Add Sheet**, you should obtain a result like the one below. Then, click on the **Run Extraction** command on the right.
-This will create a background [job](/management/jobs/) extracting the selected sheet from the Google Drive document
+When you **Add Sheet**, you should obtain a result like the one below. Then click on the **Run Extraction** command on the right.
+This will create a background [job](/management/jobs/), extracting the selected sheet from the Google Drive document
 and loading it into Storage.
 
 When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.

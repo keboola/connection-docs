@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Extractors are [KBC components](/components/) used for **importing data from external sources into KBC**.
+Extractors are [Keboola Connection components](/components/) used for **importing data from external sources into Keboola Connection**.
 
 ## Types of Extractors
 Typically, extractors connect to [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs)
@@ -35,10 +35,10 @@ they can be triggered manually at any time.
 - Configure a [Database extractor](/tutorial/load/database/);
 other SQL database extractors are configured in the exact same way.
 
-As bringing data into KBC is the main purpose of an extractor, go the path of least resistance:
+As bringing data into Keboola Connection is the main purpose of an extractor, go the path of least resistance:
 **Get your data in first, and then convert it to what you want it to look like.**
 To give an example, when connecting to existing information systems, do not modify the data in them.
-Such data conversion can prove to be difficult and expensive. Extract what you need and shape it in KBC.
+Such data conversion can prove to be difficult and expensive. Extract what you need and shape it in Keboola Connection.
 
 ## Limitations
 Some extractors have **limits inherent to their sources**. Unfortunately, there is not much we can do about it.
