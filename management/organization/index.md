@@ -31,13 +31,14 @@ To see the organization a project is assigned to, go to **Users & Settings** ---
 {: .image-popup}
 ![Screenshot - Project Settings](/management/organization/project-detail.png)
 
+## Manage Members
 All organization members are full members and as such can **add and remove** other members.
 As mentioned above, being a member of a project in an organization does not make you automatically
 a member of the organization. That means each organization member has to be added or removed manually.
 The same goes for maintainers.
 
 {: .image-popup}
-![Screenshot - Organizations](/management/organization/organization-2.png)
+![Screenshot - Organizations Users](/management/organization/organization-2.png)
 
 Newly added organization members get an email confirmation, and if without a KBC account,
 they are [invited to create one](/management/project/users/#new-user).
@@ -49,11 +50,47 @@ Apart from adding and removing other members, each organization member is also a
 - Leave and re-enter all existing projects in the organization.
 - View and edit billing details.
 - Manage [shared buckets](/catalog/#sharing-types).
-- Create new projects.
+- Create [new projects](#manage-projects).
+- Change [organization settings](#organization-settings)
 - Allow [Keboola Support](/management/support/#require-approval-for-support-access) to join your projects.
 
+## Manage Projects
 To create a new project, click the **New Project** button, enter the project's name and select a **project template**.
 Project templates differ mainly in the project expiration time. Some may be subject to billing.
 
 {: .image-popup}
-![Screenshot - Organizations](/management/organization/organization-3.png)
+![Screenshot - Organizations Projects](/management/organization/organization-3.png)
+
+## Organization Settings
+
+### Auto Join
+Some organizations may prefer to explicitly approve [access](/management/project/users/#who-can-access-a-project) 
+to their project by the [support team](/management/support/#require-approval-for-support-access). 
+To disable Auto Join and require approval for support accounts, click the **Change** link to modify the settings:
+
+{: .image-popup}
+![Screenshot -- Auto Join On](/management/organization/organization-4.png)
+
+Uncheck the **Auto Join** checkbox and **Update** the settings.
+
+{: .image-popup}
+![Screenshot -- Auto Join Change](/management/organization/organization-5.png)
+
+The description for support access will reflect the current setting.
+
+{: .image-popup}
+![Screenshot -- Auto Join Off](/management/organization/organization-6.png)
+
+### Require MFA
+It is possible to set [Multi-factor Authentication](/management/account/#multi-factor-authentication) requirement
+for all projects in the organization. When MFA is required for entire organization, users without MFA enabled
+can still log in to Keboola Connection, but they cannot access any projects in the organization. The list of users
+without MFA is shown when enabling MFA requirement for entire organization.
+
+{: .image-popup}
+![Screenshot -- Require MFA](/management/organization/organization-7.png)
+
+The organization page will show that MFA is required:
+
+{: .image-popup}
+![Screenshot -- MFA Required](/management/organization/organization-8.png)

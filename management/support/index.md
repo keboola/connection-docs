@@ -35,22 +35,11 @@ required to have a reason to enter the project. They also do not count towards t
 Some organizations may prefer to have a starker demarcation for their projects with regard to access by
 the support team. To facilitate this transparency, we have introduced the option to require approval for
 all temporary access by Keboola support accounts and maintainers.
-The setting can be found in the [organization details](/management/organization/) on the **Account
-Settings** page:
+The setting can be found in the [organization settings](/management/organization/#organization-settings) 
+on the **Account Settings** page:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/organization-allow-auto-join-on.png)
-
-To disable Auto Join and require approval for support accounts, click the **Change** link to modify the
-settings, and uncheck the **Auto Join** checkbox.
-
-{: .image-popup}
-![Screenshot -- User joined](/management/support/auto-join-change.png)
-
-The description for support access will reflect the current setting.
-
-{: .image-popup}
-![Screenshot -- User joined](/management/support/organization-allow-auto-join-off.png)
 
 With Auto Join off, a joining support account will require approval by an existing project user in
 order to gain access. When a support user requests access, each active project user will receive an
