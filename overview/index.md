@@ -99,8 +99,7 @@ cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](
 Each region instance is a completely independent full stack of Keboola Connection services. That means that 
 if you have projects in multiple regions, you need to have multiple Keboola Connection accounts.
 
-Each region uses a different network, which means different settings if you 
-employ [IP address](/components/ip-addresses/) filtering.
+Each region uses a different network with a different set of **dedicated [IP addresses](/components/ip-addresses/)**.
 The [Developer documentations](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes in 
 more detail how to handle regions when working with the API.
 
