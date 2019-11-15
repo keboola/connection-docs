@@ -228,6 +228,9 @@ items:
       - url: /components/applications/
         title: Applications
 
+      - url: /components/scaffolds/
+        title: Scaffolds
+
       - url: /components/ip-addresses
         title: IP Addresses
 
