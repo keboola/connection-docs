@@ -70,7 +70,7 @@ limited in any way, neither are any charges associated with them. Therefore, eve
 someone with a KBC token, create a new one.
 
 ## Token Events
-KBC also tracks all operations performed by each token. You can view the list of events from 
+Keboola Connection also tracks all operations performed by each token. You can view the list of events from 
 the token detail page. Click on the token you are interested in:
 
 {: .image-popup}
@@ -80,6 +80,8 @@ In the **Events** tab, you can see all operations performed by that token:
 
 {: .image-popup}
 ![Screenshot - Token List](/management/project/tokens/events.png)
+
+You can also see changes to the token itself (e.g. permission changes).
 
 *Note: History of token operations is kept for **6 months**. If you are interested in 
 events associated with a particular storage object, view the events in [Storage](/storage/).*
@@ -122,6 +124,9 @@ You can then [share the token](#sharing-a-token) to the person responsible for t
 sure that they can use only that particular component in that particular bucket. They will be even able to 
 reconfigure it --- e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.
+
+You can also specify if a token is allowed to delete configurations in [Trash](/components/#delete-configuration) by 
+selecting **Full Access** for Trash. This is rarely needed.
 
 ## Refreshing a Token
 Every token can be **refreshed**: a new token value (token string) is generated, and the old token becomes 
