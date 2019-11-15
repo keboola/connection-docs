@@ -109,7 +109,11 @@ To access them, go to the **Transformations** section and click the **Sandbox** 
   - *Connect* (Snowflake only) --- Connect to the sandbox using a web SQL client.
   - *SSL* (Redshift only) --- Show secure connection information.
   - *Drop Sandbox* --- Deletes the sandbox database (and all its tables).
-  - *Extend Expiration* --- Postpone the sandbox expiration date for another period (5 days for Jupyter and RStudio).
+  - *Extend Expiration* --- Postpone the sandbox expiration date for another period (for Jupyter and RStudio only, 5 days by default). Note that the extension 
+  may be unavailable in case system updates have to be applied. In that case an warning message will be shown:
+  `Security Updates have to be applied to the sandbox environment and it needs to be restarted. Please save your work and recreate the sandbox to be able to extend it.`
+  You can still use the sandbox to finish or save your work. This happens only when critical security issues are discovered in any system component used in 
+  the sandbox environment. While not predictable, this happens only few times in a year.
 
 In the same place you can also see the sandbox connection credentials. To copy & paste individual values,
 use the *copy icon*:
