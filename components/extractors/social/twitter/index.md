@@ -27,9 +27,9 @@ It is okay to leave any of the steps blank.
    {: .image-popup}
 ![Twitter Screen Name](/components/extractors/social/twitter/screen-name.png)
 
-   - [Limited to last 3,200 tweets](https://dev.twitter.com/rest/reference/get/statuses/user_timeline)
+   - [Limited to last 3,200 tweets](https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline)
  - **Mentions** -- Returns mentions for the authenticating user.
-   - [Limited to last 800 mentions of the account](https://dev.twitter.com/rest/reference/get/statuses/mentions_timeline)
+   - [Limited to last 800 mentions of the account](https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline)
  - **Followers List** -- Returns a list of users following the specified user by their *Screen Name*.
  - **Search** -- Searches tweets. Read [more about search queries](https://developer.twitter.com/en/docs/tweets/search/overview).
     - The Twitter Search API searches against a sampling of recent tweets published within the past 7 days.
@@ -54,7 +54,7 @@ The origin of a tweet is distinguished by a special `keboola_source` column with
   - `mentions` -- `Mentions`
   - `search` -- `Search`
 
-The table columns mirror [the structure of the Twitter Tweet entity](https://dev.twitter.com/overview/api/tweets):
+The table columns mirror [the structure of the Twitter Tweet entity](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object):
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for the tweet. |
@@ -86,7 +86,7 @@ The origin of a user is distinguished by a special `keboola_source` column with 
   - `Followers List` - `followersList`
   - `userTimeline`, `mentions`, `search` - Derived from associated tweet
 
-The table columns mirror [the structure of Twitter User entity](https://dev.twitter.com/overview/api/users):
+The table columns mirror [the structure of Twitter User entity](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object):
 
 | Column | Description |
 | `id` [PK] | The integer representation of the unique identifier for this User. |

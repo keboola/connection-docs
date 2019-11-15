@@ -144,5 +144,5 @@ with the [TDE writer](/components/writers/bi-tools/tableau/).
 To share data between your KBC project and Tableau, choose **Keboola Redshift Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
 connect the Tableau data sources. Follow the official
-[instructions for Tableau Desktop](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_amazonredshift.htm)
-or for [Tableau Online](https://onlinehelp.tableau.com/current/online/en-us/to_connect_live_sql.htm).
+[instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_amazonredshift.htm)
+or for [Tableau Online](https://help.tableau.com/current/online/en-us/to_connect_live_sql.htm).

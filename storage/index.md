@@ -15,7 +15,7 @@ By default all projects use the Snowflake backend as it is faster and more scala
 reason, you need to use the Redshift backend, contact our [support](/management/support).
 
 As with all other KBC components, everything that can be done through the UI can be also done programmatically
-via the [Storage API](http://docs.keboola.apiary.io/).
+via the [Storage API](https://keboola.docs.apiary.io/).
 See our [developers guide](https://developers.keboola.com/integrate/storage/) to learn more.
 Every Storage operation must be authorized via a [token](/management/project/tokens/).
 It is also recorded in [Events](/management/project/tokens/#token-events) and
@@ -46,4 +46,4 @@ All recalculating jobs are executed **automatically** when loading data to table
 when the actual table size is greater than 500MB.
 
 However, any recalculating job can be also invoked manually by [calling the Table
-Optimize method in Storage API](http://docs.keboola.apiary.io/#reference/tables/table-optimize/optimize-table).
+Optimize method in Storage API](https://keboola.docs.apiary.io/#reference/tables/table-optimize/optimize-table).

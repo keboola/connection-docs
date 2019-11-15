@@ -11,7 +11,7 @@ redirect_from:
 This writer sends tables into a [GoodData](https://www.gooddata.com/) project and can be used with
 either your own GoodData account or with an account provided by Keboola. Before configuring the GoodData writer, it
 is important to understand that GoodData analytics relies on a
-[Logical Data Model (LDM)](https://help.gooddata.com/display/doc/Data+Modeling+and+Logical+Data+Model) of your dataset.
+[Logical Data Model (LDM)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model) of your dataset.
 The GoodData writer creates the LDM for you, so that you don't have to use CloudConnect or other tools
 provided by GoodData. However, you need to provide all the required information in the configuration. This makes
 the configuration non-trivial, and you should have the data model designed before you start configuring

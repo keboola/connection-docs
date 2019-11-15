@@ -86,7 +86,7 @@ The *Since* and *Until* options represent corresponding Facebook Graph API reque
 specify the date range that will be applied to the time based data retrieved by the **endpoint**. For
 example, if the endpoint is `feed`, then all posts created within the specified since-until range will be retrieved.
 
-The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and can be specified
+The *Since*/*Until* parameter is parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php) and can be specified
 
 - **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
 - **relatively** --- e.g. `14 days ago` or `last month`.

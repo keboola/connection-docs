@@ -37,8 +37,8 @@ us with valuable context.
 
 ## More to Read
 
-- [www.keboola.com](http://www.keboola.com/) --- our main web page
-- [blog.keboola.com](http://blog.keboola.com/) --- something to read for data analysts
+- [www.keboola.com](https://www.keboola.com/) --- our main web page
+- [blog.keboola.com](https://blog.keboola.com/) --- something to read for data analysts
 - [500.keboola.com](https://500.keboola.com/) --- something to read for tech geeks
 - [developers.keboola.com](https://developers.keboola.com) --- documentation for extending or integrating KBC
 
@@ -46,7 +46,7 @@ us with valuable context.
 
 There are two equivalent places where you can get KBC Status updates (service status and changelog):
 
-- [status.keboola.com](http://status.keboola.com/) --- we recommend subscribing to the feed
+- [status.keboola.com](https://status.keboola.com/) --- we recommend subscribing to the feed
 - [Twitter](https://twitter.com/keboola_support)
 
 ## Your Tips and Suggestions

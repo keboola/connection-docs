@@ -10,7 +10,7 @@ redirect_from:
 {:toc}
 
 This extractor allows you to integrate your Google Analytics data into the KBC environment.
-To do that, you will need a Google Analytics account. If you do not have one, create it [here](https://analytics.google.com).
+To do that, you will need a [Google Analytics account](https://analytics.google.com/analytics/web/).
 
 ## Features
 Google Analytics Extractor works with the newest version of the [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/),
@@ -63,7 +63,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 
 ## Date Ranges
 A date range specifies a time window from which the data will be extracted.
-You can use any expression compatible with the [PHP strtotime() function](http://php.net/manual/en/datetime.formats.php).
+You can use any expression compatible with the [PHP strtotime() function](https://www.php.net/manual/en/datetime.formats.php).
 
 **Multiple date ranges** are useful, for example, when you want to compare metric performance to the previous date range.
 Let's say you want to see Sessions by month, compared to the same month last year.

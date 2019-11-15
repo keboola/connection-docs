@@ -8,15 +8,15 @@ redirect_from:
 * TOC
 {:toc}
 
-The Mailchimp extractor uses the [Mailchimp API](http://developer.mailchimp.com/documentation/mailchimp/) to extract data from
-mailing lists sent by the [Mailchimp](https://www.mailchimp.com/) service. It downloads configured reports for all specified accounts,
+The Mailchimp extractor uses the [Mailchimp API](https://mailchimp.com/developer/) to extract data from
+mailing lists sent by the [Mailchimp](https://mailchimp.com/) service. It downloads configured reports for all specified accounts,
 importing data such as list and members, campaigns, automations, reports, reports with click details, member activity, etc.
 
 Before you start, have a working [Mailchimp](https://login.mailchimp.com/signup/) account filled with [data](https://us13.admin.mailchimp.com/campaigns/)
 and an API key.
 
 ## Get API Key
-To gain access to the Mailchimp API, log in to [Mailchimp](https://www.mailchimp.com/), go to your Account detail, and under Extras find the option to [generate your API Key](http://kb.mailchimp.com/integrations/api-integrations/about-api-keys#Find-or-Generate-Your-API-Key).
+To gain access to the Mailchimp API, log in to [Mailchimp](https://mailchimp.com/), go to your Account detail, and under Extras find the option to [generate your API Key](https://mailchimp.com/help/about-api-keys/).
 It will look like this: c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13.
 
 ## Configuration

@@ -134,13 +134,13 @@ sits on a different cluster. Therefore, all your projects have their own set of 
 #### Connecting to Sandbox
 
 Almost any PostgreSQL client can connect to an AWS Redshift cluster. We have tested Navicat and DBeaver (free), and
-they work fine. You can use both a [Redshift driver](http://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html)
+they work fine. You can use both a [Redshift driver](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html)
 and a PostgreSQL driver.
 
 If using the PostgreSQL driver, do not forget to change the connection port to 5439.
-For an SSL secure connection, follow [this guide](http://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html).
+For an SSL secure connection, follow [this guide](https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html).
 To establish a secure connection to a Redshift sandbox, follow the
-[official instructions from Amazon](http://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html).
+[official instructions from Amazon](https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html).
 
 #### Direct Access to Storage Tables
 
@@ -161,7 +161,7 @@ A Redshift sandbox always uses the latest Redshift version available on the clus
 
 **Important:** Currently, this feature is in beta.
 
-The [RStudio](https://www.rstudio.com/) sandbox is available as a plain sandbox or for
+The [RStudio](https://rstudio.com/) sandbox is available as a plain sandbox or for
 [R Transformations](/transformations/r/).
 
 Depending on the size of the input tables, the sandbox creation may take some time.

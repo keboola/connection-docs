@@ -125,7 +125,7 @@ month from the date it has been created.
 {: .image-popup}
 ![Screenshot - Create GoodData Project](/tutorial/write/gooddata-writer-create-demo-project.png)
 
-Let's create a [*Date Dimension*](https://help.gooddata.com/display/doc/Dates+and+Times).
+Let's create a [*Date Dimension*](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times).
 
 {: .image-popup}
 ![Screenshot - Create a date dimension](/tutorial/write/gooddata-writer-date-button.png)

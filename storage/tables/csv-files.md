@@ -13,7 +13,7 @@ but sometimes you have to be aware of the supported formats --- for
 example, when you are [loading data manually](/tutorial/load/).
 
 ## Input CSV Format
-Storage accepts CSV files in the format defined by [RFC 4180 Specification](http://tools.ietf.org/html/rfc4180).
+Storage accepts CSV files in the format defined by [RFC 4180 Specification](https://tools.ietf.org/html/rfc4180).
 This is basically compatible with CSV exports from OpenOffice Calc, MS Excel, and Google Drive.
 
 - **Delimiter** can be specified by a parameter, defaults to comma `,`.
@@ -118,4 +118,4 @@ On the next screen, make sure that *only* the **comma** delimiter is selected:
 ![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-3.png)
 
 However, using this method, Excel is not able to import new lines contained in table cells. 
-If you need that, you have to use a more [complicated approach](http://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).
+If you need that, you have to use a more [complicated approach](https://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).
