@@ -28,11 +28,15 @@ always the sole owner of your data. Data Takeout is especially useful for proof-
 - [**Trash tab**](/components/#delete-configuration) --- allows you to list and restore deleted configurations.
 
 ### User Management
-There are two types of [KBC project users](/management/project/users/):
+There are three types of Keboola Connection [project users](/management/project/users/):
 
-- **Standard users/Administrators** --- are all equal as most KBC operations generally require access to most of the data and functions. These are full-fledged trusted users that also count against your project quota.
-- **Users with [limited access](/management/project/tokens/#limited-tokens)** --- can only read or write to
-selected buckets, sending data directly to your KBC project. The access can be revoked.
+- **Administrators** --- are all equal as most KBC operations generally require access to most of the data and functions. These are full-
+fledged trusted users that count against your project quota.
+- **Guest Users** --- with full access to the project data and [limited access](/management/project/users/#user-roles) to project functions. These users 
+count against your project quota.
+- **Tokens/Service Users** --- with [limited access](/management/project/tokens/#limited-tokens) to project data. They can only read or write to
+selected buckets, sending data directly to your KBC project. These users have only [API tokens](/management/project/tokens/). They can't use the UI and they do not
+ count against your project quota.
 
 ### Project Status
 All important information on your project status can be found in the following places:
