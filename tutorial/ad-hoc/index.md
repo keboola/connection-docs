@@ -76,6 +76,8 @@ Enter the bucket's name and storage class (Regional is okay for our use):
 {: .image-popup}
 ![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-storage-3.png)
 
+Do not set a Retention Policy on the bucket. The bucket contains only temporary data and no retention is needed.
+
 ### Extract Data
 Now you're ready to load the data into Keboola Connection. Go to the *Components -- Extractor* section, 
 and click **Add New Extractor**:

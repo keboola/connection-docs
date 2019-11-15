@@ -47,6 +47,8 @@ and click **Create Bucket**. Enter **Name** of your bucket and select **Location
 {: .image-popup}
 ![Screenshot - Google Cloud Platform](/components/extractors/database/bigquery/googlecloud-4.png)
 
+Do not set a Retention Policy on the bucket. The bucket contains only temporary data and no retention is needed.
+
 ## Configure Extraction
 [Create a new configuration](/components/#creating-component-configuration) of the BigQuery extractor.
 Click the **Set Service Account Key** button.
