@@ -3,6 +3,9 @@ title: Organizations
 permalink: /management/organization/
 ---
 
+* TOC
+{:toc}
+
 KBC projects are grouped into **organizations**. Each organization is assigned to a **maintainer** (either Keboola or
 Keboola Partner), who is also primarily responsible for L1 support unless agreed otherwise.
 [KBC projects](/management/#project-status), organizations
