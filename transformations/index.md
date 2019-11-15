@@ -77,14 +77,23 @@ Switching between backends unfortunately requires rewriting the SQL code.
 - **Script** --- [Python](./python/), [R](./r/), [OpenRefine](./openrefine/) or [Julia](./julia/). Choose according to your taste and available libraries.
 
 ## Versions
-Each change in the transformation configuration creates a new version of the whole bucket configuration.
+Each change in the transformation configuration creates a new [version](/components/#configuration-versions) of the whole transformation bucket.
 You can easily access previous versions of all transformations in a bucket and see what has changed.
+
+## Copy Transformation
+You can copy an individual transformation into a transformation bucket (either the same or different one).
+
+{: .image-popup}
+![Screenshot - Copy transformation](/transformations/copy.png)
+
+The copied transformation is independent of the original transformation.
 
 ## Developing Transformations
 You can easily develop Snowflake, Redshift transformations using [Sandbox](/transformations/sandbox),
 a separate database storage. As a safe workspace with required data,
 it allows you to run and play with your arbitrary SQL scripts on the copies of your tables
-without affecting data in your Storage, or your transformations.
+without affecting data in your Storage, or your transformations. For Julia, Python and R transformations,
+you can also use a [Sandbox](/transformations/sandbox) represented by an isolated [Jupyter](https://jupyter.org/) notebook.
 
 ## Advanced Features
 
