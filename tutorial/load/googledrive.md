@@ -16,7 +16,7 @@ For our purposes, create a Google spreadsheet from the [level.csv](/tutorial/lev
 Let's pretend someone shared the *level* table with you through Google Drive.
 
 ## Prepare
-Go to [Google Spreadsheets](https://docs.google.com/spreadsheets/) and *Start a new Blank Spreadsheet*. Then go to
+Go to [Google Spreadsheets](https://www.google.com/sheets/about) and *Start a new Blank Spreadsheet*. Then go to
 *File* - *Open* and Upload the [level.csv](/tutorial/level.csv) file.
 
 {: .image-popup}

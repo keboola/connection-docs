@@ -47,7 +47,7 @@ Due to the customized structure of this object we are unable to prepare a fixed 
 To parse the serialized JSON, use e.g. a Snowflake transformation that can easily parse JSON objects. 
 
 ### users
-The table `users` lists all [Users](https://developers.intercom.com/v2.0/reference#user-model) and 
+The table `users` lists all [Users](https://developers.intercom.com/intercom-api-reference/reference#user-model) and 
 has the following columns:
 
 | Column | Description |
@@ -122,7 +122,7 @@ This table lists social profiles attached to the user.
 
 ### notes
 
-This table lists all [Notes](https://developers.intercom.com/v2.0/reference#note-model).
+This table lists all [Notes](https://developers.intercom.com/intercom-api-reference/reference#note-model).
 
 | Column | Description |
 | `type` | 	Value is `note` |
@@ -136,7 +136,7 @@ This table lists all [Notes](https://developers.intercom.com/v2.0/reference#note
 
 ### events_summary
 
-This table lists [Event Summaries](https://developers.intercom.com/v2.0/reference#view-user-events-summaries) 
+This table lists [Event Summaries](https://developers.intercom.com/intercom-api-reference/reference#events) 
 for each user.
 
 | Column | Description |
@@ -149,7 +149,7 @@ for each user.
 
 ### leads
 
-This table lists [Leads](https://developers.intercom.com/v2.0/reference#leads-object).
+This table lists [Leads](https://developers.intercom.com/intercom-api-reference/reference#leads-object).
 
 | Column | Description |
 | `type` | Value is `contact` |
@@ -224,7 +224,7 @@ This table lists the social profiles attached to all users.
 
 ### companies
 
-This table lists all [Companies](https://developers.intercom.com/v2.0/reference#company-model).
+This table lists all [Companies](https://developers.intercom.com/intercom-api-reference/reference#company-model).
 
 | Column | Description |
 | `type` | 	Value is `company` |
@@ -242,7 +242,7 @@ This table lists all [Companies](https://developers.intercom.com/v2.0/reference#
 
 ### admins
 
-This table lists all [Admins](https://developers.intercom.com/v2.0/reference#admin-model).
+This table lists all [Admins](https://developers.intercom.com/intercom-api-reference/reference#admin-model).
 
 
 | Column | Description |
@@ -253,7 +253,7 @@ This table lists all [Admins](https://developers.intercom.com/v2.0/reference#adm
 
 ### tags
 
-This table lists all [Tags](https://developers.intercom.com/v2.0/reference#tag-model).
+This table lists all [Tags](https://developers.intercom.com/intercom-api-reference/reference#tag-model).
 
 | Column | Description |
 | `type` | 	Value is `tag` |
@@ -262,7 +262,7 @@ This table lists all [Tags](https://developers.intercom.com/v2.0/reference#tag-m
 
 ### segments
 
-This table lists all [Segments](https://developers.intercom.com/v2.0/reference#segment-model).
+This table lists all [Segments](https://developers.intercom.com/intercom-api-reference/reference#segment-model).
 
 | Column | Description |
 | `type` | 	Value is `segment` |
@@ -275,7 +275,7 @@ This table lists all [Segments](https://developers.intercom.com/v2.0/reference#s
 
 ### conversations
 
-This table lists all [Conversations](https://developers.intercom.com/v2.0/reference#conversation-model).
+This table lists all [Conversations](https://developers.intercom.com/intercom-api-reference/reference#conversation-model).
 
 | Column | Description |
 | `type` | Value is `conversation` |
@@ -333,7 +333,7 @@ This table records relations between `conversations` and `tags`.
 
 ### conversation_parts
 
-This table lists all [Conversation parts](https://developers.intercom.com/v2.0/reference#conversation-part-model).
+This table lists all [Conversation parts](https://developers.intercom.com/intercom-api-reference/reference#conversation-part-model).
 
 | Column | Description |
 | `type` | Value is `conversation_part` |

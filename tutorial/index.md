@@ -33,7 +33,7 @@ If you want to try more of KBC features, follow some of the following side steps
 	- [Loading data: GoogleDrive Extractor](/tutorial/load/googledrive/) --- load data from an external
 	data sheet using the GoogleDrive extractor.
 	- [Loading data: Database Extractor](/tutorial/load/database/) --- load data from an external database
-using the [Snowflake Database](https://www.snowflake.net/) extractor (the procedure is the same for [all our database extractors](/components/extractors/database/)).
+using the [Snowflake Database](https://www.snowflake.com/) extractor (the procedure is the same for [all our database extractors](/components/extractors/database/)).
 - Data Manipulation: [Creating and using Sandbox](/tutorial/manipulate/sandbox/) --- create a separate database
 storage to run arbitrary SQL scripts on the copies of your tables without affecting data in your Storage, or your transformations.
 - [Writing into GoodData](/tutorial/write/gooddata/) --- write data from KBC into GoodData Analytics.

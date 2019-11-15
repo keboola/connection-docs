@@ -114,7 +114,7 @@ This will help you catch annoying issues without having to process all data.
 
 You can also develop and debug R transformations on your local machine.
 To do so, [install R](https://cloud.r-project.org/), preferably the same [version as us](#environment).
-It is also helpful to use an IDE, such as [RStudio](https://www.rstudio.com/products/rstudio/#Desktop).
+It is also helpful to use an IDE, such as [RStudio](https://rstudio.com/products/rstudio/#Desktop).
 
 To simulate the input and output mapping, all you need to do is create the right directories with the right files.
 The following image shows the directory structure:

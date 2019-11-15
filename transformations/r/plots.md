@@ -85,7 +85,7 @@ A manifest is written for each file individually.
 
 ## Example 3 -- Using ggplot
 
-If you want to use the [ggplot](http://docs.ggplot2.org/current/) package, use a different function for saving a file in your script.
+If you want to use the [ggplot](https://ggplot2.tidyverse.org/reference/) package, use a different function for saving a file in your script.
 The rest remains the same as in the previous examples.
 
 {% highlight r %}

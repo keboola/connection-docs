@@ -137,8 +137,8 @@ It is possible to use the Snowflake writer to share data with [Qlik Sense](https
 and [QlikView](https://www.qlik.com/us/products/qlikview).
 To share data between your KBC project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
-connect the Qlik data sources. Follow the Qlik community
-[integration guide](https://community.qlik.com/t5/Technology-Partners-Ecosystem/Qlik-Snowflake-Integration-How-to-guide/ta-p/1529261).
+connect the Qlik data sources. Follow the Qlik official
+[integration guide](https://help.qlik.com/en-US/connectors/Subsystems/ODBC_connector_help/Content/Connectors_ODBC/Snowflake/Create-Snowflake-connection.htm).
 
 ### Connect to Tableau
 It is possible to use the Snowflake writer to share data with [Tableau Desktop](https://www.tableau.com/products/desktop) or
@@ -148,6 +148,6 @@ with the [TDE writer](/components/writers/bi-tools/tableau/).
 
 To share data between your KBC project and Tableau, choose **Keboola Snowflake Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
-connect the Tableau data sources. Follow the official [instructions for Tableau Desktop](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
-or for [Tableau Online](https://onlinehelp.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password
+connect the Tableau data sources. Follow the official [instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
+or for [Tableau Online](https://help.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password
 authentication method.

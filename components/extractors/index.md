@@ -43,4 +43,4 @@ Such data conversion can prove to be difficult and expensive. Extract what you n
 ## Limitations
 Some extractors have **limits inherent to their sources**. Unfortunately, there is not much we can do about it.
 For example, the Twitter extractor will not let you access the history of a particular tweet account beyond a certain point
-because of the [limitations](http://stackoverflow.com/questions/1662151/getting-historical-data-from-twitter) of Twitter API.
+because of the [limitations](https://stackoverflow.com/questions/1662151/getting-historical-data-from-twitter) of Twitter API.

@@ -3,13 +3,12 @@ title: Snowflake Transformation
 permalink: /transformations/snowflake/
 redirect_from:
     - /manipulation/transformations/snowflake/
-
 ---
 
 * TOC
 {:toc}
 
-[Snowflake](http://www.snowflake.net/) has many advantages:
+[Snowflake](https://www.snowflake.com/) has many advantages:
 
 - No database administration
 - No indexes, sort keys, distribution styles, or column compressions

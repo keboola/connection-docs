@@ -55,8 +55,8 @@ main()
 {% endhighlight %}
 
 ### Packages
-You can list extra packages in the UI. These packages are installed using [pip](https://pypi.python.org/pypi/pip).
-Generally, any package available on [PyPI](https://pypi.python.org/pypi) can be installed. However, some packages have external dependencies, which might not be available.
+You can list extra packages in the UI. These packages are installed using [pip](https://pypi.org/project/pip/).
+Generally, any package available on [PyPI](https://pypi.org/) can be installed. However, some packages have external dependencies, which might not be available.
 Feel free to contact us if you run into problems. When the package is installed, you still need to `import` from it.
 
 {: .image-popup}

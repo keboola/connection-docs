@@ -92,7 +92,7 @@ The *Since* and *Until* options represent the corresponding Facebook Marketing A
 specify a date range that will be applied to time based data retrieved by the **endpoint**. For example,
 if the endpoint is `ads`, then all ads created within the since-until range will be retrieved.
 
-The *Since* or *Until* parameters are parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php)
+The *Since* or *Until* parameters are parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php)
 and can be specified
 
 - **absolutely** -- as a unix timestamp or in the `yyyy-mm-dd` format, or

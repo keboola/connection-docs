@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the Babelforce [REST API](https://www.babelforce.com/rest-api-power/) to import data from [Babelforce](http://babelforce.com/), a cloud call center platform.
+This extractor uses the Babelforce [REST API](https://www.babelforce.com/rest-api-power/) to import data from [Babelforce](https://www.babelforce.com/), a cloud call center platform.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Babelforce** extractor.

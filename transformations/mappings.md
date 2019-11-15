@@ -51,10 +51,10 @@ the faster internal [`CLONE` command](/transformations/snowflake#load-type).
 
 You can combine these options freely. Input mappings for Snowflake and Redshift include more options specific to the particular backend:
 
-- **Data types** (Redshift, Snowflake) --- Data type for each column (Redshift allows to set a [column compression type](http://docs.aws.amazon.com/redshift/latest/dg/t_Compressing_data_on_disk.html) as well).
-- **Sort key** (Redshift) --- Table [sort key](http://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html)
-- **Dist key** (Redshift) --- Table [distribution key](http://docs.aws.amazon.com/redshift/latest/dg/t_Distributing_data.html) and  [distribution style](http://docs.aws.amazon.com/redshift/latest/dg/c_choosing_dist_sort.html)
-- **COPY options** (Redshift) --- Specifies options for the Redshift [COPY command](http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html).
+- **Data types** (Redshift, Snowflake) --- Data type for each column (Redshift allows to set a [column compression type](https://docs.aws.amazon.com/redshift/latest/dg/t_Compressing_data_on_disk.html) as well).
+- **Sort key** (Redshift) --- Table [sort key](https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html)
+- **Dist key** (Redshift) --- Table [distribution key](https://docs.aws.amazon.com/redshift/latest/dg/t_Distributing_data.html) and  [distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_choosing_dist_sort.html)
+- **COPY options** (Redshift) --- Specifies options for the Redshift [COPY command](https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html).
 
 **Important:** You can create Input Mappings for as many tables as you need for your transformation.
 

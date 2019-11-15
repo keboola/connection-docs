@@ -13,16 +13,16 @@ Extractors import data from external sources and integrate it to the Keboola Con
 
 There are a number of extractors for [**SQL databases**](/components/extractors/database/sqldb/):
 
-- [Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html)
+- [Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
-- [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/)
+- [IBM DB2](https://www.ibm.com/analytics/us/en/technology/db2/)
 - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [MySQL](https://www.mysql.com/)
-- [Oracle](http://www.oracle.com/index.html)
-- [PostgreSQL](http://www.postgresql.org/)
+- [Oracle](https://www.oracle.com/index.html)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Redshift](https://aws.amazon.com/redshift/)
 - [Snowflake](https://www.snowflake.com/)
-- [Teradata](http://www.teradata.com)
+- [Teradata](https://www.teradata.com/)
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). *(Their basic configuration is also part 

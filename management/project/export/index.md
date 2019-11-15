@@ -32,11 +32,11 @@ If you are familiar with AWS Cloud Formation, the application repository offers
 a [CF template](https://github.com/keboola/kbc-project-backup/blob/master/aws-cf-template.json)
 to create all required resources.
 
-- **Create an S3 Bucket** following the [Amazon documentation](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html).
+- **Create an S3 Bucket** following the [Amazon documentation](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html).
 Name it *keboola-data-takeout*, for example, and choose a region compatible with your Amazon subscription.
 If unsure, choose *US Standard (N. Virginia)*.
 
-- **Create an IAM User** (Identity and Access Management) following the [Amazon documentation](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+- **Create an IAM User** (Identity and Access Management) following the [Amazon documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
 You get an *Access Key ID* and *Secret Access Key* with the new user. You can always regenerate them in the IAM Management Console:
 
 {: .image-popup}

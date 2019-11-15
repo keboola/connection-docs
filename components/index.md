@@ -96,7 +96,7 @@ the configuration versions. Use the version list to:
 - compare any two successive versions, or just
 - rollback to an older version.
 
-All of the operations can be [accessed via API](http://docs.keboola.apiary.io/#reference/component-configurations/create-config).
+All of the operations can be [accessed via API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
 For working with configurations, see the [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/).
 
 **Important**: Component configurations do not count towards your project quota.

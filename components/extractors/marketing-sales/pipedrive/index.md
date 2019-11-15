@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 This extractor uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1/) to import data 
-from [Pipedrive](https://www.pipedrive.com/).
+from [Pipedrive](https://www.pipedrive.com/en-gb).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** extractor.

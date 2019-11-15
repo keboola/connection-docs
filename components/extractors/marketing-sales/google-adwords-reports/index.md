@@ -28,7 +28,7 @@ There are some specific instructions for
 [mapping of AWQL reports to the UI](https://developers.google.com/adwords/api/docs/guides/uireports).
 
 Optionally, you can specify the target *bucket* in Storage and the start (*since*) and end (*until*) dates of downloaded stats. 
-The *Since*/*Until* parameter is parsed via the [strtotime function](http://php.net/manual/en/function.strtotime.php) and 
+The *Since*/*Until* parameter is parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php) and 
 can be specified
 
 - **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or

@@ -40,7 +40,7 @@ It has two sections: [File Storage](/storage/file-uploads/) with all raw files u
 to your project, and [Table Storage](/storage/tables/) where all data tables are organized
 into buckets which are further organized into *in* and *out* stages.
 
-Storage is implemented as a layer on top of various database engines that we use as our [backends](/transformations/#backends) ([Snowflake](http://www.snowflake.net/) and [Redshift](https://aws.amazon.com/redshift/)).
+Storage is implemented as a layer on top of various database engines that we use as our [backends](/transformations/#backends) ([Snowflake](https://www.snowflake.com/) and [Redshift](https://aws.amazon.com/redshift/)).
 It provides an important API (Storage API) access for other components and 3rd party applications.
 Your own **remote storage** can be connected to Keboola Connection as well.
 

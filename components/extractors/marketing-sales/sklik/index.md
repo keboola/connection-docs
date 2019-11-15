@@ -31,7 +31,7 @@ Now configure your reports:
 ![Sklik Report](/components/extractors/marketing-sales/sklik/sklik-2.png)
 
 - **name** -- your name for the report; it will be used for the name of the table in Storage. *(Note that `accounts` is a reserved name thus it cannot be used as a report name.)*
-- **resource** -- name of the resource on which you want the report to be created. Supported resources are all from [https://api.sklik.cz/drak](https://api.sklik.cz/drak) which support the `createReport` and `readReport` methods (see [https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak](https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak) for more information):
+- **resource** -- name of the resource on which you want the report to be created. Supported resources are all from [api.sklik.cz/drak](https://api.sklik.cz/drak/) which support the `createReport` and `readReport` methods (see [Blog post](https://blog.seznam.cz/2017/12/spravne-pouzivat-limit-offset-metodach-statisticke-reporty-api-drak/) for more information):
   - `ads`
   - `banners`
   - `campaigns`
@@ -41,7 +41,7 @@ Now configure your reports:
   - etc.
 - **restrictionFilter** -- Json object of the restriction filter configuration for the `createReport` API call.
   - `dateFrom` and `dateTo` are required values. If omitted, yesterday's and today's dates will be used.
-  - the extractor allows you to use relative days in [these supported formats](http://php.net/manual/en/datetime.formats.relative.php).
+  - the extractor allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.relative.php).
 - **displayOptions** -- Json object of the display options configuration for the `createReport` API call.
 - **displayColumns** -- array of columns to get.
   - Column `id` as identifier of the resource is downloaded every time.

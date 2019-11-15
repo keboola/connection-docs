@@ -217,21 +217,21 @@ plt.show()
 
 ## Adding Libraries
 Now that you can experiment with the U.S. unemployment data extracted from Google BigQuery (or any other data extracted in any other way),
-you can do the same with the EU unemployment data. Available at [Eurostat](http://ec.europa.eu/eurostat), the unemployment
+you can do the same with the EU unemployment data. Available at [Eurostat](https://ec.europa.eu/eurostat/), the unemployment
 dataset is called
-[`tgs00010`](http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tgs00010&plugin=1).
+[`tgs00010`](https://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tgs00010&plugin=1).
 
 There are a number of ways how to get the data from Eurostat -- e.g., you can download it in TSV
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
-[REST API](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/about-this-service)
+[REST API](https://ec.europa.eu/eurostat/web/json-and-unicode-web-services/about-this-service)
 for downloading the data. This could be processed using the
 [Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
 to import them to KBC, it would be necessary to do additional processing to obtain plain tables.
 
-To save time, use a tool designed for that -- [pyjstat](https://pypi.python.org/pypi/pyjstat/). It is a Python library which can read
-JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html).
+To save time, use a tool designed for that -- [pyjstat](https://pypi.org/project/pyjstat/). It is a Python library which can read
+JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
 Although this library is not installed by default in the Jupyter Sandbox environment, nothing prevents you from installing it.
 
 ### Working with Custom Libraries
@@ -247,7 +247,7 @@ df = dataset.write('dataframe')
 df.head()
 {% endhighlight %}
 
-The URL was built using the Eurostat [Query Builder](http://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder).
+The URL was built using the Eurostat [Query Builder](https://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder).
 Also note that installing a library from within the Python code must be done using `pip install`. Now that you have the data, feel free to play with it:
 
 {% highlight python %}
@@ -264,12 +264,12 @@ plt.show()
 
 ## Wrap Up
 You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly,
-simply copy&paste it into a [Transformation](http://localhost:4000/tutorial/manipulate/).
+simply copy&paste it into a [Transformation](/tutorial/manipulate/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
-[Jupyter Notebook](http://jupyter.org/). The same can be done in the
-[R language](https://www.r-project.org/) using [RStudio](https://www.rstudio.com/)
-or [Julia language](https://julialang.org/) using [Jupyter Notebook](http://jupyter.org/).
+[Jupyter Notebook](https://jupyter.org/). The same can be done in the
+[R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/)
+or [Julia language](https://julialang.org/) using [Jupyter Notebook](https://jupyter.org/).
 For more information about sandboxes (including disk and memory limits), see the
 [corresponding documentation](/transformations/sandbox/).
 

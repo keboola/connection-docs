@@ -11,10 +11,10 @@ redirect_from:
 
 Each extractor from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries.
 
-The extractors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/apache-hadoop/impala.html), 
-[Firebird](http://www.firebirdsql.org/), [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/), 
+The extractors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html), 
+[Firebird](http://www.firebirdsql.org/), [IBM DB2](https://www.ibm.com/analytics/us/en/technology/db2/), 
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), [MySQL](https://www.mysql.com/),
-[Oracle](http://www.oracle.com/index.html), [PostgreSQL](http://www.postgresql.org/), [Teradata](http://www.teradata.com)) are configured
+[Oracle](https://www.oracle.com/index.html), [PostgreSQL](https://www.postgresql.org/), [Teradata](https://www.teradata.com/)) are configured
 in the same way and have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
 in the section [Server Specific Notes](#server-specific-notes).
 

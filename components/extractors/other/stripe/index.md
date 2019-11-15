@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Stripe API](https://stripe.com/docs/api) to import almost all data from [Stripe](https://www.stripe.com/).
+This extractor uses the [Stripe API](https://stripe.com/docs/api) to import almost all data from [Stripe](https://stripe.com/).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Stripe** extractor.

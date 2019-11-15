@@ -9,14 +9,14 @@ redirect_from:
 {:toc}
 
 This extractor allows you to translate [what3words](https://what3words.com/) addresses to coordinates and vice versa.
-Before using the extractor, you need to [obtain a what3words API key](https://docs.what3words.com/api/v2/#overview).
+Before using the extractor, you need to [obtain a what3words API key](https://developer.what3words.com/public-api/docsv2#overview).
 Notice that each translated address requires one API call.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** extractor.
 
 ## Augment What3words Address
-In this mode of operation, you identify [what3words](https://what3words.com/about/) addresses, and the extractor
+In this mode of operation, you identify [what3words](https://what3words.com/about-us/) addresses, and the extractor
 then fetches the geographical latitude and longitude coordinates for the places. 
 Specify a single table which has exactly one column with what3words addresses.
 If the source table does not meet this requirement, 

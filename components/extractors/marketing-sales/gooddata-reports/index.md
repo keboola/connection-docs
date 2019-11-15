@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The GoodData Reports extractor uses the [GoodData API](https://help.gooddata.com/display/doc/API+Reference#/reference/dashboards-and-reporting/export-a-large-report/export-a-raw-report) to import
+The GoodData Reports extractor uses the [GoodData API](https://help.gooddata.com/display/API/API+Reference#/reference/dashboards-and-reporting/export-a-large-report/export-a-raw-report) to import
 reports from the [GoodData](https://www.gooddata.com/) business intelligence platform and stores the data in Keboola Connection Storage.
 
 ## Configuration
