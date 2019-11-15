@@ -77,10 +77,12 @@ you have chosen. It is good idea to describe the bucket so that others can see w
 {: .image-popup}
 ![Screenshot -- View sharing](/catalog/catalog-4.png)
 
-You'll be taken to [Storage](/storage/) where you can add description to the bucket. The description supports [Markdown](https://ghost.org/blog/markdown/) formatting.
+You'll be taken to [Storage](/storage/) where you can add description to the bucket. The description supports [Markdown](https://www.markdownguide.org/cheat-sheet/) formatting.
 
 {: .image-popup}
 ![Screenshot -- Set Description](/catalog/catalog-5.png)
+
+To change sharing type, share the existing bucket again, the new sharing type will overwrite the old sharing type.
 
 ### Share a new bucket
 Choose the **Select tables** option:
@@ -102,6 +104,8 @@ A new bucket will be created for you, the selected tables will be linked to it u
 
 {: .image-popup}
 ![Screenshot -- Bucket Result](/catalog/catalog-10.png)
+
+To change sharing type, share the newly [created bucket again](#share-an-existing-bucket), the new sharing type will overwrite the old sharing type.
 
 ## Link Bucket
 You can link a shared bucket into your project from the **Shared with you page**:

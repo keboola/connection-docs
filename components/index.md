@@ -81,7 +81,7 @@ the tables it produced in your project. When running the configuration, its acti
 ### Configuration Versions
 Configuration parameters can be changed at any time. Every change to a configuration is recorded 
 in the history of **versions**. You can also change the name and description of the configuration at any time. 
-The configuration description supports rich text formatting using [Markdown](https://ghost.org/blog/markdown/).
+The configuration description supports rich text formatting using [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
 {: .image-popup}
 ![Screenshot - Configuration Name and Description](/components/configuration-13.png)
