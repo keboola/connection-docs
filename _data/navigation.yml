@@ -258,6 +258,12 @@ items:
       - url: /storage/file-uploads/
         title: Files
 
+      - url: /storage/jobs/
+        title: Jobs
+
+      - url: /storage/documentation/
+        title: Documentation
+
   - url: /orchestrator/
     title: Orchestrations
     items:
