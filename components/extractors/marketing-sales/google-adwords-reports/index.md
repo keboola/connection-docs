@@ -10,7 +10,7 @@ redirect_from:
 {:toc}
 
 This extractor allows you to import data from Google AdWords reports.
-If you do not have a Google AdWords account, create a [test account](https://developers.google.com/adwords/api/docs/guides/first-api-call#create_test_accounts).
+If you do not have a Google Ads manager account, follow this [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google AdWords Reports** extractor.
