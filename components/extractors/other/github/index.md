@@ -13,11 +13,11 @@ to Keboola Connection.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **GitHub** extractor.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
-Then select the template you wish to use. There are two configuration templates available:
+Then click **Authorize Account** to [authorize the configuration](/components/#authorization), and
+select the template you wish to use. There are two configuration templates available:
 
-- `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/#incremental-loading)
-- `Full Mode` -- always gets everything
+- `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/#incremental-loading).
+- `Full Mode` -- always gets everything.
 
 {: .image-popup}
 ![Screenshot - GitHub configuration](/components/extractors/other/github/github-1.png)
@@ -31,5 +31,5 @@ You can download:
 - Repository Issues
 - Repository Commits
 
-After you select the template, remember to save the configuration.
+After you select the template, remember to **save** the configuration.
 You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).

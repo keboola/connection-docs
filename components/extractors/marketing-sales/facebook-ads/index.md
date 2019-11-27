@@ -22,7 +22,7 @@ You can always revoke the authorization by going to the
 [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings) and removing
 `Keboola Ads Extractor` from the list.
 
-Click on **Select Ad accounts** to load list of Ad accounts associated with the authorization.
+Click on **Select Ad accounts** to load a list of Ad accounts associated with the authorization.
 
 {: .image-popup}
 ![Screenshot - Facebook Accounts](/components/extractors/marketing-sales/facebook-ads/facebook-ads-1.png)
@@ -35,7 +35,7 @@ you wish to extract.
 
 ## Create New Query
 Click on the **Create new query** button and specify what data to extract. If you choose a preconfigured template,
-all necessary fields will fill up automatically.
+all necessary fields will fill in automatically.
 
 {: .image-popup}
 ![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/facebook-ads-3.png)

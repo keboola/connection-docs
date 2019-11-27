@@ -32,7 +32,7 @@ From the list of fetched pages associated with the authorized account, select th
 
 ## Create New Query
 Click the **New Query** button and specify what data to extract. If you choose a preconfigured template,
-all necessary fields will fill up automatically.
+all necessary fields will fill in automatically.
 
 {: .image-popup}
 ![Screenshot - New Query](/components/extractors/social/facebook/facebook-3.png)

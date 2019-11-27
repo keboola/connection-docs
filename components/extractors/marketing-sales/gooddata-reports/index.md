@@ -25,7 +25,7 @@ To select which reports to download, set one or multiple Uniform Resource Identi
 {: .image-popup}
 ![Screenshot - GoodData URI](/components/extractors/marketing-sales/gooddata-reports/gooddata-reports-2.png)
 
-When you open a report in your browser, the URL in the address field will look similar to:
+When you open a report in your browser, the URL in the address field will look similar to this:
 
     https://secure.gooddata.com/#s=/gdc/projects/wasxxxxxxxxxxxxxxxxxxxxxxxxxmox|analysisPage|head|/gdc/md/zggxxxxxxxxxxxxxxxxxxxxxxxxxmox/obj/71
 
@@ -37,15 +37,16 @@ Continue by providing your own GoodData **credentials**.
 {: .image-popup}
 ![Screenshot - GoodData Credentials](/components/extractors/marketing-sales/gooddata-reports/gooddata-reports-3.png)
 
-You can also choose an id of **GoodData Project** provisioned in one of the existing GoodData Writer configurations and use its credentials. The project id(pid) of the provisioned project can be found in a GoodData writer configuration.
+You can also choose an ID of the **GoodData Project** provisioned in one of the existing GoodData Writer configurations 
+and use its credentials. The project ID (PID) of the provisioned project can be found in a GoodData writer configuration.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Config with Provisioned Project](/components/extractors/marketing-sales/gooddata-reports/gooddata-writer-1.png)
 
-Copy the project id from the writer to the extractor:
+Copy the project ID from the writer to the extractor:
 
 {: .image-popup}
 ![Screenshot - Provisioned GoodData Project Id](/components/extractors/marketing-sales/gooddata-reports/gooddata-reports-4.png)
 
 When finished, remember to **Save** the configuration before you run the extraction. The extractor will download the report contents as a
-CSV file and store it as a table in KBC Storage.
+CSV file and store it as a table in Keboola Connection Storage.

@@ -10,7 +10,7 @@ redirect_from:
 
 This extractor loads single or multiple tables from a Keboola Connection project and stores them in a bucket in your
 current project. The component can be used in situations where [Data Catalog](/catalog/)
-cannot, e.g. when moving data between two different [organizations](/management/organization) or regions.
+cannot, e.g., when moving data between two different [organizations](/management/organization) or regions.
 
 ## Prepare API Token
 The extractor requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. 
@@ -40,7 +40,7 @@ Select the region of the *source project*, and paste the token you generated in 
 ![Screenshot - Create table](/components/extractors/storage/storage-api/storage-api-3.png)
 
 To copy a table from the source project to the current project, click **Add Table**. 
-Then assign the table a name that will be used in your project. If the table name is not same in the source and in the destination 
+Then assign the table a name that will be used in your project. If the table name is not the same in the source and in the destination 
 project, you can change the source table name on the next page.
 
 {: .image-popup}

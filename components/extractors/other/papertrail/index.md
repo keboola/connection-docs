@@ -17,7 +17,7 @@ to import events matching the specified query from [Papertrail](https://papertra
 [Create a new configuration](/components/#creating-component-configuration) of the **Twitter** extractor.
 
 To configure the extractor, you need to provide a Papertrail API token, enter a search query and select a retention period.
-Then select data you wish to extract.
+Then select the data you wish to extract.
 
 First, provide a Papertrail [API token](https://help.papertrailapp.com/kb/how-it-works/http-api#authentication).
 You can get it in your [profile](https://papertrailapp.com/account/profile).
@@ -34,4 +34,4 @@ This option downloads all records matching the query within the retention period
 When done, **Save** the configuration.
 You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
-**Important:** Data are always imported incrementally.
+**Important:** Data is always imported incrementally.

@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Writers are [KBC components](/overview/) that take transformed and processed **output data from KBC**
+Writers are [Keboola Connection components](/overview/) that take transformed and processed **output data from Keboola Connection**
 and deliver it **into its final destination:** the systems and applications where the data gets used/**consumed**.
 
 ## Types of Writers

@@ -41,10 +41,10 @@ Now configure your reports:
   - etc.
 - **restrictionFilter** -- Json object of the restriction filter configuration for the `createReport` API call.
   - `dateFrom` and `dateTo` are required values. If omitted, yesterday's and today's dates will be used.
-  - the extractor allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.relative.php).
-- **displayOptions** -- Json object of the display options configuration for the `createReport` API call.
-- **displayColumns** -- array of columns to get.
-  - Column `id` as identifier of the resource is downloaded every time.
+  - The extractor allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.relative.php).
+- **displayOptions** -- Json object of the display options configuration for the `createReport` API call
+- **displayColumns** -- array of columns to get
+  - Column `id` as the identifier of the resource is downloaded every time.
 
 ***Warning:**
 The main account used for access to the API is queried for campaigns and stats too. It is also saved to the table accounts

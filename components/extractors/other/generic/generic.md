@@ -25,17 +25,17 @@ To understand what specific parts of an existing configuration do, check the
 [Configuration Map](https://developers.keboola.com/extend/generic-extractor/map/).
 
 ## Template Mode
-Generic extractor is used as the base for many extractors. These components allows you to select pre-defined configurations 
+Generic Extractor is used as the base for many extractors. These components allow you to select pre-defined configurations 
 -- templates -- without the need to configure Generic extractor manually.
 
 {: .image-popup}
 ![Generic Extractor - template](/components/extractors/other/generic/generic-1.png)
 
-These components can be heavily customized simply be using the **Switch to JSON editor** button.
-If you select the template and want to specify more details using the advanced mode, don’t forget to click Save first. 
+The components can be heavily customized simply by using the **Switch to JSON editor** button.
+If you select the template and want to specify more details using the advanced mode, don’t forget to click **Save** first. 
 The code will be pre-filled for you based on that template.
 
 {: .image-popup}
 ![Generic Extractor - template](/components/extractors/other/generic/generic-2.png)
 
-When finished editing, save the configuration. You can also always switch back to templates, but you'll lose your customizations.
+When finished editing, save the configuration. You can also always switch back to the templates, but you'll lose your customizations.

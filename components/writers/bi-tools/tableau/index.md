@@ -20,7 +20,7 @@ together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and al
 Both approaches are interchangeable though.
 
 Our Getting Started tutorial will guide you through the process of [writing data
-from KBC to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
+from Keboola Connection to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Tableau** writer.
@@ -31,7 +31,7 @@ from [Storage](/storage/tables/).
 {: .image-popup}
 ![Screenshot - Select Table](/components/writers/bi-tools/tableau/tableau-1.png)
 
-When you start configuring a table, it is possible to set all columns to the prevailing data type, e.g. `string` and
+When you start configuring a table, it is possible to set all columns to the prevailing data type, e.g., `string` and
 then configure only the differing columns.
 
 {: .image-popup}
@@ -65,7 +65,7 @@ which you can download the TDE file to your computer.
 
 ## Uploading TDE File
 Apart from downloading the TDE files to your computer, you can also upload them to Tableau Server, Google Drive, or Dropbox.
-Start the upload configuration by clicking on the **Setup Upload** link:
+Start the upload configuration by clicking on the **Set up Upload** link:
 
 {: .image-popup}
 ![Screenshot - Upload Setup](/components/writers/bi-tools/tableau/tableau-6.png)
@@ -81,7 +81,7 @@ For [Dropbox](https://www.dropbox.com/) and [Google Drive](https://www.google.co
 
 For Google Drive, you may also select the destination
 folder. For Dropbox, the destination folder is always `Apps\Keboola Connection Writer V2\`.
-For writing to Tableau Server, you need to enter the credentials using the **Setup Credentials** button:
+For writing to Tableau Server, you need to enter the credentials using the **Set up Credentials** button:
 
 {: .image-popup}
 ![Screenshot - Tableau Server Authorization](/components/writers/bi-tools/tableau/tableau-8.png)

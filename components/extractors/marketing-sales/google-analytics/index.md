@@ -9,11 +9,11 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to integrate your Google Analytics data into the KBC environment.
+This extractor allows you to integrate your Google Analytics data into the Keboola Connection environment.
 To do that, you will need a [Google Analytics account](https://analytics.google.com/analytics/web/).
 
 ## Features
-Google Analytics Extractor works with the newest version of the [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/),
+The Google Analytics extractor works with the newest version of the [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/)
 and provides the following key features:
 
  - **Metric expressions** --- The API allows you to request not only built-in metrics but also combinations of metrics expressed in mathematical operations. For example, you can use the expression `ga:goal1completions/ga:sessions` to request the goal completions per number of sessions.
@@ -36,13 +36,13 @@ Select the desired Google Analytics account and profiles (views) from which you 
 ![Screenshot - Select Profiles](/components/extractors/marketing-sales/google-analytics/google-analytics-2.png)
 
 ## Create New Query
-Each query consists of metrics, dimensions and a date range. Optionally, it can be filtered by a filter expression or segment.
+Each query consists of metrics, dimensions and a date range. Optionally, it can be filtered by a filter expression or a segment.
 Let's create a simple query with some basic metrics such as Sessions, Users and Pageviews.
 
 {: .image-popup}
 ![Screenshot - Create New Query](/components/extractors/marketing-sales/google-analytics/google-analytics-3.png)
 
- 1. Name your query, for example "Audience".
+ 1. Name your query, for example, "Audience".
 
  2. From the metrics selector, choose the following metrics: `ga:sessions`, `ga:users`, `ga:pageviews`.
 
@@ -52,7 +52,7 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 
  5. See the query results by hitting the `Test query` button.
 
- 6. Now you see sessions, users and pageviews of the last five days sliced by date.
+ 6. Now you see sessions, users, and pageviews of the last five days sliced by date.
 
  7. When you are happy with the results, save your query.
 
@@ -74,7 +74,7 @@ The Google Analytics API does not always return precise data. Under certain circ
 returned is [sampled](https://support.google.com/analytics/answer/2637192?hl=en).
 To work around this problem and get more precise results, choose either the DailyWalk or Adaptive 
 anti-sampling algorithm. Both divide the wanted date range into smaller chunks. You can configure
-anti-sampling in the query detail
+anti-sampling in the query detail.
 
 {: .image-popup}
 ![Screenshot - Anti Sampling](/components/extractors/marketing-sales/google-analytics/google-analytics-5.png)

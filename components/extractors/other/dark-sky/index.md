@@ -12,7 +12,7 @@ redirect_from:
 This extractor allows you to look up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
 Data are provided by the [Dark Sky API](https://darksky.net/dev).
 
-To configure the extractor, you need to provide tables with locations, your Dark Sky API key, units to use and a desired forecast granularity.
+To configure the extractor, you need to provide tables with locations, your Dark Sky API key, units to use, and a desired forecast granularity.
 
 ## API Secret Key
 Before you start, please create an account in the [Dark Sky API](https://darksky.net/dev). Log in and get your API Secret key.

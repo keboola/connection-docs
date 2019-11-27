@@ -11,7 +11,7 @@ Connection features related to doing ad-hoc analysis.
 
 This part of the tutorial shows how to work with arbitrary data in Python
 in a completely unrestricted way. Although our examples use the Python language,
-the very same can be achieved using the R or Julia language.
+the very same can be achieved using R or Julia.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
 
@@ -26,14 +26,15 @@ contains unemployment rates by month. The easiest way to access the data is via
 [Bureau of Labor Statistics Data](https://cloud.google.com/bigquery/public-data/bureau-of-labor-statistics).
 
 Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola
-Connection (KBC) with the help of our BigQuery extractor. Preview the table data in
+Connection with the help of our BigQuery extractor. Preview the table data in
 [Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
 
 ## Using BigQuery Extractor
 To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
 querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/).
 
-Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) which will be used for authentication of the Google BigQuery extractor, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) for authentication 
+of the Google BigQuery extractor, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 *Note: If setting up the Google BigQuery extractor seems too complicated to you, export the query results to Google Sheets and
 [load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
@@ -54,7 +55,7 @@ Name the service account:
 {: .image-popup}
 ![Screenshot - Google Service Account Detail](/tutorial/ad-hoc/cloud-platform-service-account-3.png)
 
-Grant roles **BigQuery Data Editor**, **BigQuery Job User** and **Storage Object Admin** to your service account:
+Grant the roles **BigQuery Data Editor**, **BigQuery Job User** and **Storage Object Admin** to your service account:
 
 {: .image-popup}
 ![Screenshot - Google Service Account Permissions](/tutorial/ad-hoc/cloud-platform-service-account-4.png)
@@ -66,12 +67,12 @@ Finally, create a new JSON key and download it to your computer:
 
 #### Google Storage bucket
 To create a Google Storage bucket, go to the [**Google Cloud Platform console > Storage**](https://console.cloud.google.com/storage/browser)
-And create a new bucket:
+and create a new bucket:
 
 {: .image-popup}
 ![Screenshot - Google Cloud Platform](/tutorial/ad-hoc/cloud-platform-storage-1.png)
 
-Enter the bucket's name and storage class (Regional is okay for our use):
+Enter the bucket's name and choose where to store your data (the location type *Region* is okay for our purpose):
 
 {: .image-popup}
 ![Screenshot - Create Bucket](/tutorial/ad-hoc/cloud-platform-storage-3.png)
@@ -79,13 +80,13 @@ Enter the bucket's name and storage class (Regional is okay for our use):
 Do not set a Retention Policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ### Extract Data
-Now you're ready to load the data into Keboola Connection. Go to the *Components -- Extractor* section, 
+Now you're ready to load the data into Keboola Connection. Go to the section *Components -- Extractor*, 
 and click **Add New Extractor**:
 
 {: .image-popup}
 ![Screenshot - Extractors](/tutorial/ad-hoc/ex-bigquery-1.png)
 
-Use the search and find the Google BigQuery extractor:
+Use the search to find the Google BigQuery extractor:
 
 {: .image-popup}
 ![Screenshot - BigQuery Extractor](/tutorial/ad-hoc/ex-bigquery-2.png)
@@ -125,7 +126,7 @@ Name the query, e.g., `Unemployment rates`:
 {: .image-popup}
 ![Screenshot - New Query Name](/tutorial/ad-hoc/ex-bigquery-9.png)
 
-Uncheck the *Use Legacy SQL* setting and  paste the following in the *SQL Query* field:
+Uncheck the *Use Legacy SQL* setting and paste the following in the *SQL Query* field:
 
 {% highlight sql %}
 SELECT * FROM
@@ -228,7 +229,7 @@ for downloading the data. This could be processed using the
 [Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
-to import them to KBC, it would be necessary to do additional processing to obtain plain tables.
+to import them to Keboola Connection, it would be necessary to do additional processing to obtain plain tables.
 
 To save time, use a tool designed for that -- [pyjstat](https://pypi.org/project/pyjstat/). It is a Python library which can read
 JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
@@ -248,7 +249,8 @@ df.head()
 {% endhighlight %}
 
 The URL was built using the Eurostat [Query Builder](https://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder).
-Also note that installing a library from within the Python code must be done using `pip install`. Now that you have the data, feel free to play with it:
+Also note that installing a library from within the Python code must be done using `pip install`. Now that you have the data, 
+feel free to play with it:
 
 {% highlight python %}
 years = df.groupby(df['time'])['value'].mean()
@@ -268,8 +270,8 @@ simply copy&paste it into a [Transformation](/tutorial/manipulate/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](https://jupyter.org/). The same can be done in the
-[R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/)
-or [Julia language](https://julialang.org/) using [Jupyter Notebook](https://jupyter.org/).
+[R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/),
+or in [Julia](https://julialang.org/) using [Jupyter Notebook](https://jupyter.org/).
 For more information about sandboxes (including disk and memory limits), see the
 [corresponding documentation](/transformations/sandbox/).
 

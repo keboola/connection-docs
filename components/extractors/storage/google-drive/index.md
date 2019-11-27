@@ -22,7 +22,7 @@ in your account:
 {: .image-popup}
 ![Screenshot - Empty configuration](/components/extractors/storage/google-drive/google-drive-1.png)
 
-You may be asked once again to log-in. In that case, use the same account that you authorized in the first step of the setup.
+You may be asked once again to log in. In that case, use the same account in which you authorized the first step of the setup.
 Choose the document you want to import:
 
 {: .image-popup}
@@ -51,7 +51,7 @@ When editing the sheet extraction configuration, you may **Enable Output Process
 
 The options will be demonstrated on the following table:
 
-|Id|Manufacturer|Model|Axles|Wheels|Length|
+|ID|Manufacturer|Model|Axles|Wheels|Length|
 |---|---|---|---|---|---|
 |1|British Motor Corporation|Mini|2|4|3054|
 |2|General Motors|PD-4501 Scenicruiser|3|10|12190|
@@ -62,10 +62,10 @@ The options will be demonstrated on the following table:
 ### Number of Header Rows
 This option allows you to set the index of the first data row. The row before that is the header row used to import the table.
 Using this option allows you to import tables which contain text before the actual table, tables with merged rows in
-the header, or tables with strange data in headers (e.g. pictures).
+the header, or tables with strange data in headers (e.g., pictures).
 For example, when *Number of header rows* is set to `1`, the example table will be imported as follows:
 
-|Id|Manufacturer|Model|Axles|Wheels|Length|
+|ID|Manufacturer|Model|Axles|Wheels|Length|
 |---|---|---|---|---|---|
 |1|British Motor Corporation|Mini|2|4|3054|
 |2|General Motors|PD-4501 Scenicruiser|3|10|12190|
@@ -97,7 +97,7 @@ the source sheet is ignored. Using this option allows you to import partial tabl
 
 With the above setting and the sample sheet, the following destination table will be created:
 
-|id|manufacturer|model|number_of_axles|number_of_wheels|length_mm|
+|ID|Manufacturer|Model|Number_of_axles|Number_of_wheels|Length_mm|
 |---|---|---|---|---|---|
 |4|Associated Equipment Company|Routemaster|2|4|8400|
 |5|BMW|Isetta|2|3|2285|
@@ -110,13 +110,13 @@ This option enables table transformation into a key-value table. For example, wi
 
 |key|value|
 |---|---|
-|Id|1|
+|ID|1|
 |Manufacturer|British Motor Corporation|
 |Model|Mini|
 |Axles|2|
 |Wheels|4|
 |Length|3054|
-|Id|2|
+|ID|2|
 |Manufacturer|General Motors|
 |Model|PD-4501 Scenicruiser|
 |Axles|3|
@@ -128,7 +128,7 @@ This option enables table transformation into a key-value table. For example, wi
 This means that all columns beginning with the first one were turned into key-value pairs.
 Setting the value to `4` will produce the following table:
 
-|Id|Manufacturer|Model|key|value|
+|ID|Manufacturer|Model|key|value|
 |---|---|---|---|---|---|
 |1|British Motor Corporation|Mini|Axles|2|
 |1|British Motor Corporation|Mini|Wheels|4|
@@ -149,7 +149,7 @@ Setting the value to `4` will produce the following table:
 This means that the columns of the original table beginning with the fourth column (`Axles`) are converted to
 key-value rows.
 
-*Note: Rows are numbered from zero, i.e. a typical header is at the row with index = 0, and data start at the row with index = 1. 
+*Note: Rows are numbered from zero, i.e., a typical header is at the row with index = 0, and data start at the row with index = 1. 
 Columns are always numbered from 1 (there are no headers).*
 
 ### Transposed Header Column Name
@@ -210,7 +210,7 @@ Let's consider a table modified to have two header rows:
 |5|BMW|Isetta|2|3|2285|
 
 The `second` column now contains the row preceding the actual header row which was transformed into the `key`
-column, i.e. the column class.
+column, i.e., the column class.
 
 |key|value|second|
 |---|---|---|
@@ -223,10 +223,10 @@ column, i.e. the column class.
 |Name|BMW|Manufacturer|
 |Length|2285|Car|
 |Model|Mini|Manufacturer|
-|Id|2|Car|
+|ID|2|Car|
 |Wheels|10|Car|
 |Model|Reliant Robin|Manufacturer|
-|Id|4|Car|
+|ID|4|Car|
 |Wheels|4|Car|
 |Model|Isetta|Manufacturer|
 |Axles|2|Car|
@@ -236,11 +236,11 @@ column, i.e. the column class.
 |Name|Associated Equipment Company|Manufacturer|
 |Length|8400|Car|
 |Axles|2|Car|
-|Id|1|Car|
+|ID|1|Car|
 |Wheels|4|Car|
 |Model|PD-4501 Scenicruiser|Manufacturer|
-|Id|3|Car|
+|ID|3|Car|
 |Wheels|3|Car|
 |Model|Routemaster|Manufacturer|
-|Id|5|Car|
+|ID|5|Car|
 |Wheels|3|Car|

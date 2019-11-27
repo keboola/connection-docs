@@ -14,10 +14,10 @@ This writer sends data to a [Google BigQuery](https://cloud.google.com/bigquery/
 ## Create Service Account
 To access and write to your BigQuery dataset, you need to set up a Google Service Account. 
 
-- Go to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
-- Select the project you want the writer to have access to
-- Click **Create Service Account**
-- Select an appropriate **Service account name** (e.g. `Keboola Connection BigQuery Writer`)
+- Go to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts).
+- Select the project you want the writer to have access to.
+- Click **Create Service Account**.
+- Select an appropriate **Service account name** (e.g., `Keboola Connection BigQuery Writer`).
 
 {: .image-popup}
 ![Screenshot - Create service account](/components/writers/database/bigquery/google-1.png)
@@ -32,11 +32,11 @@ Finally, create a new JSON key (click **+ Create key**) and download it to your 
 {: .image-popup}
 ![Screenshot - Create service account](/components/writers/database/bigquery/google-3.png)
 
-You can now close the Google Cloud Platform Console and go back to writer configuration.
+You can now close the Google Cloud Platform Console and go back to configuring the writer.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **BigQuery** writer.
-Click on the **Set Service Account Key** button
+Click on the **Set Service Account Key** button. 
 Open the [downloaded key](#create-service-account) in a text editor, copy & paste it in the input field, click **Submit** and then **Save**. 
 
 {: .image-popup}

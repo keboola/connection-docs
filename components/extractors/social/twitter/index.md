@@ -66,7 +66,7 @@ The table columns mirror [the structure of the Twitter Tweet entity](https://dev
 | `lang` | When present, it indicates a BCP 47 language identifier corresponding to the machine-detected language of the tweet text, or “und” if no language could be detected. |
 | `quoted_status_id` | This field only surfaces when the tweet is a quote tweet. This field contains the integer value tweet ID of the quoted tweet. |
 | `retweet_count` | Number of times this tweet has been retweeted. This field is no longer capped at 99 and will not turn into a string for “100+” |
-| `retweeted_status_id` | Id of the original tweet. Referenced tweet should be also in this table. |
+| `retweeted_status_id` | ID of the original tweet. Referenced tweet should be also in this table. |
 | `source` | Utility used to post the tweet as an HTML-formatted string. |
 | `text` | The actual UTF-8 text of the status update. |
 | `truncated` | Indicates whether the value of the text parameter was truncated, for example, as a result of a retweet exceeding the 280 character tweet length. Truncated text will end in ellipsis, like this ... Since Twitter now rejects long tweets vs truncating them, the large majority of tweets will have this set to false. |
@@ -106,8 +106,8 @@ The table columns mirror [the structure of Twitter User entity](https://develope
 This table contains the users mentioned in tweets.
 
 | Column | Description |
-| `user_id` [PK] | Id of [user](#table---users) |
-| `tweets_pk` [PK] |  Id of [tweet](#table---tweets) |
+| `user_id` [PK] | ID of [user](#table---users) |
+| `tweets_pk` [PK] |  ID of [tweet](#table---tweets) |
 | `name` | The name of the user, as they’ve defined it. Not necessarily a person’s name. Typically capped at 20 characters, but subject to change. |
 | `screen_name` | The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use id_str as a user identifier whenever possible. Typically a maximum of 15 characters long, but some historical accounts may exist with longer names.  |
 
@@ -116,7 +116,7 @@ This table contains the users mentioned in tweets.
 This table contains the URLs included in the text of a tweet.
 
 | Column | Description |
-| `tweets_pk` [PK] |  Id of [tweet](#table---tweets) |
+| `tweets_pk` [PK] |  ID of [tweet](#table---tweets) |
 | `url` [PK] | Wrapped URL, corresponding to the value embedded directly into the raw tweet text. |
 | `display_url` | Version of the URL to display to clients. |
 | `expanded_url` | Expanded version of display_url. |
@@ -126,7 +126,7 @@ This table contains the URLs included in the text of a tweet.
 This table contains the hashtags present in tweets.
 
 | Column | Description |
-| `tweets_pk` [PK] |  Id of [tweet](#table---tweets) |
+| `tweets_pk` [PK] |  ID of [tweet](#table---tweets) |
 | `text` [PK] | Name of the hashtag, minus the leading ‘#’ character. |
 
 ## Usage Limits

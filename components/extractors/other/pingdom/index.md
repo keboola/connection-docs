@@ -21,22 +21,23 @@ Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/accoun
 
 Fill the required fields of the registration form.
 
-- **Application name** -- Name your application -- for example, `Keboola Pingdom Extractor`
-- **Description** -- Enter description 
-- **Application type** -- Select the `Public` option
-- **Platform** -- Select the `Server` option
+- **Application name** -- Name your application -- for example, `Keboola Pingdom Extractor`.
+- **Description** -- Enter a description.
+- **Application type** -- Select the `Public` option.
+- **Platform** -- Select the `Server` option.
 
 {: .image-popup}
 ![Pingdom API registration](/components/extractors/other/pingdom/04-pingdom-api-form.png)
 
-When registration is finished, take note of the Application Key and save it. You will need it when creating your extractor configuration in KBC.
+When registration is finished, copy the Application Key and save it. You will need it when creating your extractor configuration 
+in Keboola Connection.
 
 {: .image-popup}
 ![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Pingdom** extractor.
-Provide credentials of your Pingdom account and Application Key.
+Provide credentials of your Pingdom account and the Application Key.
 
 - **Email address** -- your account login name
 - **Password**

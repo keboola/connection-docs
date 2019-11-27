@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Writers export data from Keboola Connection (KBC) to SQL databases:
+Writers export data from Keboola Connection to SQL databases:
 
 - [Google BigQuery](/components/writers/database/bigquery/) --- sends tables to a [Google BigQuery](https://cloud.google.com/bigquery/) dataset.
 - [MySQL](/components/writers/database/mysql/) --- sends tables to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.

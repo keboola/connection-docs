@@ -37,11 +37,11 @@ There are several options in the configuration dialog:
 Here you need to enter a project name and choose the type of the project. You can 
 
 - create a **demo** project. This is provided for free by Keboola and expires in 1 month. Extension is not
-possible, but the GoodData project may be transferred to production through a support request. Each KBC
+possible, but the GoodData project may be transferred to production through a support request. Each Keboola Connection
 project can have up to 2 demo GoodData projects.
 - create a **production** project. This is full GoodData production project, which is proxied by Keboola.
 That means we take care of the contract and billing with GoodData. Contact Keboola support or your maintainer
-to enable this type of production GoodData project in your KBC project.
+to enable this type of production GoodData project in your Keboola Connection project.
 - create a **custom** project. Use this when you have your own contract with GoodData. In that case, you should
 have received your [Project Authorization Token](https://help.gooddata.com/doc/en/building-on-gooddata-platform/gooddata-integration-into-your-application/set-up-user-authentication-and-sso/gooddata-token-types#GoodDataTokenTypes-ProjectAuthorizationtokens)
 which allows you to create GoodData projects. The writer will then create the project for you.
@@ -50,7 +50,7 @@ up the writer. Either use the **Load data only** update mode, or be sure to unde
 of changing your LDM are.
 
 After you set up the project, you can see the **Go To Project** button. This will allow you to login to the GoodData project
-from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/gooddata-integration-into-your-application/set-up-user-authentication-and-sso/single-sign-on-overview). (SSO access works only for projects provisioned by Keboola. If you used an existing project, you will have to login on your own.)
+from within your Keboola Connection project using [Single Sign-On (SSO)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/gooddata-integration-into-your-application/set-up-user-authentication-and-sso/single-sign-on-overview). (SSO access works only for projects provisioned by Keboola. If you used an existing project, you will have to login on your own.)
 
 {: .image-popup}
 ![Screenshot - Access Project](/components/writers/bi-tools/gooddata/gooddata-3.png)
@@ -60,7 +60,7 @@ from within your KBC project using [Single Sign-On (SSO)](https://help.gooddata.
 It is the question of the LDM design to determine for which columns a date dimension should be created. One rule of thumb
 is that different date columns in a single table should have different date dimensions. On the other hand, you might want
 to share a date dimension between different tables --- a *main* date representing an event of something.
-It is also possible to have different date dimensions representing e.g.
+It is also possible to have different date dimensions representing, e.g.,
 a calendar year and a fiscal year.
 
 {: .image-popup}
@@ -69,8 +69,8 @@ a calendar year and a fiscal year.
 When creating a date dimension, you have to enter the dimension name and a dimension template. The available templates are:
 
 - Standard GoodData date dimension
-- Keboola date dimension, which is extended with a 'floating' week (which lets you analyze data as if the week starts e.g. on Wednesday).
-- Custom date dimension -- this can be either a date dimension created for you directly by GoodData, or a [Self service calendar](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times/custom-calendars-self-service). In the former case, you'll have the dimension URN in form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
+- Keboola date dimension, which is extended with a 'floating' week (it lets you analyze data as if the week starts, e.g., on Wednesday).
+- Custom date dimension -- this can be either a date dimension created for you directly by GoodData, or a [Self service calendar](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times/custom-calendars-self-service). In the former case, you'll have the dimension URN in the form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
 
 ## Configure Tables
 Click the **New Table** button to add a new table to the writer:
@@ -88,12 +88,12 @@ the GoodData project (you can change the title later if needed). The next step i
 
 Setting the table columns involves configuration of three things:
 
-- **Title** of the column which is displayed in the GoodData project.
+- **Title** of the column that is displayed in the GoodData project.
 - **Data Type** of the column. You can choose from `INT`, `BIGINT`, `DECIMAL` for numbers, `VARCHAR` for texts.
 Consult the [GoodData documentation](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model/xae-product-introduction/maql-ddl#MAQLDDL-SpecifyaDATATYPE) for
 the limits of each data type.
 
-- **Type** of the column which defines the role of the column in LDM. Column types are:
+- **Type** of the column that defines the role of the column in LDM. The column types are:
     - `IGNORE` --- The column is excluded from the load and will not be created in the GoodData project.
     - `FACT` --- The [Fact component](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model/gooddata-modeling-concepts#GoodDataModelingConcepts-LDMComponents) --- a numerical piece of arbitrary data used to define metrics, e.g. *Price* column.
     - `ATTRIBUTE` --- The [Attribute component](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-and-logical-data-model/gooddata-modeling-concepts#GoodDataModelingConcepts-LDMComponents) of the LDM model --- a discrete set of alphanumeric or numeric data, e.g. *Eye Color* column containing values *Blue*, *Brown* and *Green*.
