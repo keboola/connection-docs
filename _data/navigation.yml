@@ -231,7 +231,7 @@ items:
       - url: /components/scaffolds/
         title: Scaffolds
 
-      - url: /components/ip-addresses
+      - url: /components/ip-addresses/
         title: IP Addresses
 
   - url: /catalog/
