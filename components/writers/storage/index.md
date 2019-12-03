@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Writers export data from Keboola Connection (KBC) to external systems. The following extractors
+Writers export data from Keboola Connection to external systems. The following extractors
 allow to push data to generic storage services:
 
 - [AWS S3](/components/writers/storage/aws-s3/) --- writes CSV files to a single AWS S3 bucket with additional postprocessing.

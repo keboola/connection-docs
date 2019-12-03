@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer loads single or multiple tables from your current project into a different Keboola Connection (KBC) project.
+This writer loads single or multiple tables from your current project into a different Keboola Connection project.
 The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 
@@ -43,7 +43,7 @@ You can review the name of the target project and bucket in the *Target project*
 ![Screenshot - Target Project](/components/writers/storage/storage-api/storage-api-3.png)
 
 ## Add Tables
-To create a new table, click the **New Table** button and select a table you want to write to the *target project*.
+To create a new table, click the **New Table** button and select the table you want to write to the *target project*.
 
 {: .image-popup}
 ![Screenshot - Create table](/components/writers/storage/storage-api/storage-api-4.png)

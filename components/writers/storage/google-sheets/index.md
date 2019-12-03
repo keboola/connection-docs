@@ -10,7 +10,7 @@ redirect_from:
 
 This writer sends tables as worksheets into a single [Google Sheets](https://www.google.com/sheets/about/) account.
 It allows you to write tables into individual sheets of a spreadsheet document and append rows into an existing sheet.
-Be aware that Google sheets have [strict limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/)
+Be aware that Google Sheets have [strict limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/)
 on the size of the document. If you are getting close to them, use the [Google Drive writer](/components/writers/storage/google-drive/) to avoid failed writes.
 
 ## Configuration

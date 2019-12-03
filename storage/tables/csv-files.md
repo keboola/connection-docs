@@ -50,7 +50,7 @@ Imported file:
 
 A CSV file in this format can be exported from
 
-- OpenOffice / LibreOffice Calc, where you simply save the file in Text CSV file and select *Unicode (UTF-8)* encoding.
+- OpenOffice / LibreOffice Calc, where you simply save the file in a Text CSV file and select *Unicode (UTF-8)* encoding.
 - Google Drive, where it is the default output format (note, however, that you might
     prefer to use the [Google Drive Extractor](/tutorial/load/googledrive/) instead).
 - Microsoft Excel by following the below instructions.
@@ -71,12 +71,12 @@ Notepad. Simply open the file, and without making any modifications, save it wit
 {: .image-popup}
 ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
 
-The resulting file `import-data.txt.csv` can now be imported into KBC Storage as a tab delimited file.
+The resulting file `import-data.txt.csv` can now be imported into Keboola Connection Storage as a tab delimited file.
 
 {: .image-popup}
 ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
 
-*Note: as along your data do not contain any non-[ASCII](https://en.wikipedia.org/wiki/ASCII#Character_set) characters, you can simply save them as CSV.*
+*Note: as long as your data does not contain any non-[ASCII](https://en.wikipedia.org/wiki/ASCII#Character_set) characters, you can simply save them as CSV.*
 
 ## Output CSV Format
 When you export a table from Storage, the same format is used for import:
@@ -91,23 +91,22 @@ When you export a table from Storage, the same format is used for import:
 
 The above format is again compatible with many applications; you can
 
-- Open it in OpenOffice / LibreOffice Calc without any conversion (just make sure you use only comma as a delimiter 
+- open it in OpenOffice / LibreOffice Calc without any conversion (just make sure you use only comma as a delimiter 
 when asked about the file format).
-- Import it into Google Drive without any conversion (notice, however, that you might want to
-    use Google Drive Writer instead)
-- Import it into Microsoft Excel by following the below instructions.
+- import it into Google Drive without any conversion (notice, however, that you might want to
+    use the Google Drive Writer instead)
+- import it into Microsoft Excel by following the below instructions.
 
 *Note: The rows are exported in random order and there is no way to specify ordering of rows in the exported file.*
 
 ### Opening in Microsoft Excel
-The easiest way to import the CSV file exported from KBC into Microsoft Excel is by starting Excel and opening 
+The easiest way to import the CSV file exported from Keboola Connection into Microsoft Excel is by starting Excel and opening 
 a **blank workbook**. Then use the **Data** -- **From Text** function and select the exported file:
 
 {: .image-popup}
 ![Screenshot -- Excel Import -- Select file](/storage/tables/excel-import-1.png)
 
-An import wizard will start. On its first screen, make sure you have selected the **delimited** file
-and **Unicode UTF-8** encoding:
+An import wizard will start. On its first screen, select the **delimited** file and **Unicode UTF-8** encoding:
 
 {: .image-popup}
 ![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-2.png)
@@ -118,4 +117,4 @@ On the next screen, make sure that *only* the **comma** delimiter is selected:
 ![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-3.png)
 
 However, using this method, Excel is not able to import new lines contained in table cells. 
-If you need that, you have to use a more [complicated approach](https://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).
+If you need to do that, you have to use a more [complicated approach](https://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).

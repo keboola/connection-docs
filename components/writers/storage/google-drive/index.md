@@ -11,7 +11,7 @@ redirect_from:
 This writer sends tables as CSV files into a single [Google Drive](https://www.google.com/drive/) account.
 It allows you to write entire tables as CSV files, or Google Sheets files. To write tables as partial modifications
 to an existing sheet, use the [Google Sheets writer](/components/writers/storage/google-sheets/). Writing tables as CSV files
-is not bound by [Google Sheet limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/).
+is not bound by [Google Sheets limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** writer.

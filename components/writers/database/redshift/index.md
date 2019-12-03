@@ -53,7 +53,7 @@ A Keboola Redshift database is created by the writer and the credentials are pro
 {: .image-popup}
 ![Screenshot - Provisioned Credentials](/components/writers/database/redshift/redshift-3.png)
 
-You can share the credentials with whatever service that needs to access your data --- for example, with [Tableau Online](https://www.tableau.com/products/cloud-bi).
+You can share the credentials with services that need to access your data --- for example, with [Tableau Online](https://www.tableau.com/products/cloud-bi).
 Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world. This means that it must not be receiving
 any data (outside those provided by the writer itself, of course). This is a contractual limitation.
 Also note that the number of provisioned Redshift databases is part of [project limits](/management/project/limits/).
@@ -110,12 +110,12 @@ Additionally, you can specify a **Primary key** of the table, a simple column **
 
 ## Using Keboola Provisioned Database
 The writer offers the option to create a [Keboola Provisioned database](#keboola-redshift-database) for you. You can
-use this database to connect KBC to a wide range of consumers --- especially Business Intelligence tools and Analytics.
+use this database to connect Keboola Connection to a wide range of consumers --- especially Business Intelligence tools and Analytics.
 The database can be queried in real time but is still completely isolated from your project Storage.
 
 ### Connect to Looker
 It is possible to use the Redshift writer to share data with [Looker](https://looker.com/).
-To share data between your KBC project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
+To share data between your Keboola Connection project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
 connect the Looker data sources. Follow the official
 [instructions](https://docs.looker.com/setup-and-management/connecting-to-db). Note that you
@@ -124,14 +124,14 @@ can skip a number of steps because a dedicated user is already created for you.
 ### Connect to Power BI Desktop
 It is possible to use the Redshift writer to share data with [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) or
 [Tableau Online](https://www.tableau.com/products/cloud-bi).
-To share data between your KBC project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
+To share data between your Keboola Connection project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
 connect the Power BI data sources. Follow the official [instructions for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/desktop-connect-redshift).
 
 ### Connect to Qlik
 It is possible to use the Redshift writer to share data with [Qlik Sense](https://www.qlik.com/us/products/qlik-sense)
 and [QlikView](https://www.qlik.com/us/products/qlikview).
-To share data between your KBC project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
+To share data between your Keboola Connection project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
 connect the Qlik data sources. Follow the Qlik official [integration guide](https://help.qlik.com/en-US/connectors/Subsystems/ODBC_connector_help/Content/Connectors_ODBC/Redshift/Create-Redshift-connection.htm).
 
@@ -141,7 +141,7 @@ It is possible to use the Redshift writer to share data with [Tableau Desktop](h
 faster than loading data through [TDE files](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
 with the [TDE writer](/components/writers/bi-tools/tableau/).
 
-To share data between your KBC project and Tableau, choose **Keboola Redshift Database** when configuring the credentials.
+To share data between your Keboola Connection project and Tableau, choose **Keboola Redshift Database** when configuring the credentials.
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
 connect the Tableau data sources. Follow the official
 [instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_amazonredshift.htm)
