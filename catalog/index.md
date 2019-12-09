@@ -47,9 +47,10 @@ There are some constraints to how shared buckets can be used:
 
 ### Sharing Types
 There are several options how you can share data:
-- **Project Members** -- To the **entire [organization](/management/organization/)**. Any user of any project **in the organization** can use the data bucket.
-- **Organization Members** -- To **administrators of the organization**. Any user of any project **in the organization** can use the data bucket provided that they are also an administrator of the organization.
-- **Selected Projects** -- To **specified projects**. Any user of the listed projects **in the organization** can use the data bucket.
+- **Project Members** -- To the **entire [organization](/management/organization/)**. Any user of any project **in the organization** can link the data bucket.
+- **Organization Members** -- To **administrators of the organization**. Any user of any project **in the organization** can link the data bucket provided that they are also an administrator of the organization.
+- **Selected Projects** -- To **specified projects**. Any user of the listed projects **in the organization** can link the data bucket.
+- **Selected Users** -- To **specified users**. Any listed users **in the organization** can link the data bucket.
 
 ## Enable Sharing
 To share data outside of your project, go to *Catalog* a click **Share a bucket**.
