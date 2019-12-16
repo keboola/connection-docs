@@ -13,7 +13,7 @@ It also contains files with data exported from tables. These are created when yo
 2. Every data table file is stored in Files before it is processed and pushed into a table.
 
 ## Uploading File
-To store an arbitrary file, select the Files tab in Storage and then click **Upload** in the top right corner.
+To store an arbitrary file, select the Files tab in Storage and then click **Upload File** in the top right corner.
 
 {: .image-popup}
 ![Screenshot - File uploads](/storage/file-uploads/file-uploads.png)
@@ -55,7 +55,7 @@ Such a URL is valid for only one hour from the time of its generation --- the ti
 was shown to you, not when you clicked the link.
 
 **Important:** The URL itself does not require any other authorization.
-That is, you can send a link to non-public files to people without access to your KBC project and they
+That is, you can send a link to non-public files to people without access to your Keboola Connection project and they
 will be able to download that file via the direct link. However, they will not be able to generate 
 or guess the link themselves.
 
@@ -80,5 +80,5 @@ In that case, the limit applies to the chunk size.
 
 As stated above, unless marked as permanent, each file is automatically deleted 180 days after it has been created. 
 This also applies to automatically generated files as a result of table imports and exports. 
-Also, because the majority of KBC File Storage contains duplicates of your table data, 
+Also, because the majority of Keboola Connection File Storage contains duplicates of your table data, 
 the whole Files storage does not count towards your project quota.

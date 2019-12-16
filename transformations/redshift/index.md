@@ -11,13 +11,13 @@ your own dedicated cluster in Keboola Connection.
 
  - If your source data is on Redshift, there is no data transfer.
  - Redshift is a columnar database -- no more indexing, nest JOINs without worries.
- - Redshift is not very friendly when it come to data types, for instance, invalid characters.
+ - Redshift is not very friendly when it comes to data types, for instance, invalid characters.
  - If a query gets slow, dive into [sort keys](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html),
  [distribution styles](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html) and
  [column compression](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html).
 
 ### Limits
-Redshift in KBC does not support functions or stored procedures.
+Redshift in Keboola Connection does not support functions or stored procedures.
 
 There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redshift cluster to a
 larger size, these limits can be increased.

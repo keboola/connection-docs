@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-*To create your first Sandbox and see how it is an integral part of the KBC workflow, go to our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
+*To create your first Sandbox and see how it is an integral part of the Keboola Connection workflow, go to our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
 
 A sandbox is a **safe environment** for you to
 
@@ -17,7 +17,7 @@ A sandbox is a **safe environment** for you to
 - test, troubleshoot and develop transformations without modifying any Storage data.
 
 You can fill a sandbox with any data from Storage. However, to simplify transformation development,
-KBC provides a specific loader for your transformations.
+Keboola Connection provides a specific loader for your transformations.
 It automatically fills the sandbox with relevant tables and takes
 the [Input Mapping](/transformations/mappings/#input-mapping) of the transformation into account.
 
@@ -39,7 +39,7 @@ Data can be loaded into your sandbox in two different ways:
 
 - Plain loading --- Copying any tables from Storage into a Sandbox database.
 - Transformation loading --- Loading specifically tailored for transformation development.
-Select a transformation and all relevant tables based on the transformation input mapping are automatically loaded.
+Select a transformation, and all relevant tables based on the transformation input mapping will be automatically loaded.
 
 If you, while developing your transformation, need to add data to the tables already specified in the input mapping,
 the two ways can be combined. However, in that case, perform the plain load *after* the transformation load,
@@ -62,7 +62,7 @@ You can limit the number of rows that are loaded; this is useful for sampling a 
 {: .image-popup}
 ![Screenshot - Load data into Sandbox](/transformations/sandbox/sandbox-load-data.png)
 
-The imported tables will have full tables names --- including both a bucket and table name.
+The imported tables will have full table names --- including both a bucket and a table name.
 
 By default, the sandbox content is deleted before loading new data.
 Use the *Preserve existing data* option to keep its content and add new data to it (this
@@ -93,8 +93,8 @@ Clicking the **Create** button will load the data into the sandbox:
 
 Choose how the data will be loaded and processed:
 
- - *Load input tables only* --- load the tables specified in the input mapping;
- - *Prepare transformation* --- execute [transformation dependencies](/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies); and
+ - *Load input tables only* --- load the tables specified in the input mapping.
+ - *Prepare transformation* --- execute [transformation dependencies](/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies).
  - *Execute transformation without writing to Storage API* --- this is a dry-run for validation.
 
 Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page.
@@ -108,14 +108,14 @@ To access them, go to the **Transformations** section and click the **Sandbox** 
 
   - *Connect* (Snowflake only) --- Connect to the sandbox using a web SQL client.
   - *SSL* (Redshift only) --- Show secure connection information.
-  - *Drop Sandbox* --- Deletes the sandbox database (and all its tables).
+  - *Drop Sandbox* --- Delete the sandbox database (and all its tables).
   - *Extend Expiration* --- Postpone the sandbox expiration date for another period (for Jupyter and RStudio only, 5 days by default). Note that the extension 
-  may be unavailable in case system updates have to be applied. In that case an warning message will be shown:
+  may be unavailable when system updates have to be applied. In that case a warning message will be shown:
   `Security Updates have to be applied to the sandbox environment and it needs to be restarted. Please save your work and recreate the sandbox to be able to extend it.`
   You can still use the sandbox to finish or save your work. This happens only when critical security issues are discovered in any system component used in 
-  the sandbox environment. While not predictable, this happens only few times in a year.
+  the sandbox environment. While not predictable, this happens only a few times a year.
 
-In the same place you can also see the sandbox connection credentials. To copy & paste individual values,
+In the same place, you can also see the sandbox connection credentials. To copy & paste individual values,
 use the *copy icon*:
 
 {: .image-popup}
@@ -181,7 +181,7 @@ The RStudio Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB (same as in [transformations](/transformations/r/#memory-and-processing-constraints)).
-- The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
+- The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
@@ -190,7 +190,7 @@ When your R script exceeds the memory limit, it may freeze or crash with the fol
 
     The previous R session was abnormally terminated due to an unexpected crash.
 
-If it freezes, use the *Stop* button to stop it:
+If it freezes, use the **Stop** button to stop it:
 
 {: .image-popup}
 ![Screenshot - R Restart](/transformations/sandbox/restart-r.png)
@@ -231,7 +231,7 @@ The Jupyter Notebook Sandbox has the following **limitations**:
 
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB (same as in [transformations](/transformations/python/#memory-and-processing-constraints)).
-- The UI for plain sandbox only allows tables to be loaded to Sandbox. Loading input files to plain sandbox is
+- The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
 supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.

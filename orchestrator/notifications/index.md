@@ -23,8 +23,8 @@ or a group email address for multiple persons. Notifications can be set for the 
 - The entire orchestration finishes with an **error** status.
 - Some tasks in the orchestration finish with an error, so the entire orchestration finishes with a **warning** status (this requires 
 enabling [*Continue on error*](/orchestrator/running/) for the given tasks).
-- The entire orchestration runs longer than usual --- e.g. when you set the threshold to 20% and an orchestration usually runs 
-for 100 minutes, and it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as 
+- The entire orchestration runs longer than usual --- e.g., when you set the threshold to 20% and an orchestration usually runs 
+for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as 
 a running average of the last 20 executions of the orchestration.
 
 When an orchestration is triggered manually, only the user who triggered it will receive any notifications. Therefore you

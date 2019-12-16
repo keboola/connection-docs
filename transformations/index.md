@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-*To create your first transformation, and to see how Transformations are an integral part of the KBC workflow,
+*To create your first transformation, and to see how Transformations are an integral part of the Keboola Connection workflow,
 go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
@@ -55,7 +55,7 @@ Database table names and CSV file names in transformations are completely unrela
 ![Simple input and output mapping](/transformations/mappings.png)
 
 *When writing transformation scripts, keep in mind that the table names referenced by mappings
-are automatically quoted by KBC. This is especially important for Snowflake, which is case sensitive.*
+are automatically quoted by Keboola Connection. This is especially important for Snowflake, which is case sensitive.*
 
 ## Backends
 A backend is the engine running the transformation script. It is either a database server
@@ -81,7 +81,7 @@ Each change in the transformation configuration creates a new [version](/compone
 You can easily access previous versions of all transformations in a bucket and see what has changed.
 
 ## Copy Transformation
-You can copy an individual transformation into a transformation bucket (either the same or different one).
+You can copy an individual transformation into a transformation bucket (either the same or a different one).
 
 {: .image-popup}
 ![Screenshot - Copy transformation](/transformations/copy.png)

@@ -41,7 +41,7 @@ The Python script itself will be compiled to `/data/script.py`. To access your i
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/user/tag` or `/data/in/user/tag` path. If you want to dig really deep,
 have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
-Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with KBC.
+Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola Connection.
 
 ## Python Script Requirements
 Python is **sensitive to indentation**. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
@@ -64,7 +64,7 @@ Feel free to contact us if you run into problems. When the package is installed,
 
 The latest versions of packages are always installed at the time of the release (you can check that
 [in the repository](https://github.com/keboola/docker-custom-python/releases)). In case your code relies on a specific package version, you can override the
-installed version by calling e.g.:
+installed version by calling, e.g.:
 
 {% highlight python %}
 import subprocess
@@ -73,7 +73,7 @@ subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-
 {% endhighlight %}
 
 Some packages are already installed in the environment
-(see [full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L25)), these packages do not need to be listed in the transformation.
+(see [their full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L25)), and they do not need to be listed in the transformation.
 
 ### CSV format
 Tables from Storage are imported to the Python script from CSV files. CSV files can be read by standard Python functions
@@ -95,7 +95,7 @@ The following image shows the directory structure:
 ![Screenshot - Data folder structure](/transformations/python/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a Python transformation which takes a [sample CSV file](/transformations/python/source.csv) locally, take the following steps:
+so that you can move the script to a Keboola Connection transformation with no changes. To develop a Python transformation which takes a [sample CSV file](/transformations/python/source.csv) locally, take the following steps:
 
 - Put the Python code into a file, for example script.py, in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
@@ -129,7 +129,7 @@ This script can be used in your transformations without any modifications. All y
 - set the input mapping from that table to `source.csv` (expected by the Python script),
 - set the output mapping from `destination.csv` (produced by the Python script) to a new table in your Storage,
 - copy & paste the script into the transformation, and, finally,
-- run the transformation.
+- save and run the transformation.
 
 {: .image-popup}
 ![Screenshot - Sample Input Output Mapping](/transformations/python/sample-io.png)
@@ -186,7 +186,7 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
 {% endhighlight %}
 
 ## Example 3 -- Using CSV dialect
-You can simplify the above code using our pre-installed KBC dialect.
+You can simplify the above code using our pre-installed Keboola Connection (KBC) dialect.
 
 {% highlight python %}
 import csv

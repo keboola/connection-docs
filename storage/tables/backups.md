@@ -17,7 +17,7 @@ There are two methods available for backing up and restoring data:
 ## Time Travel Restore
 Every project with a Snowflake backend has the ability to create an exact replica of a table
 at any point in time up to the [limit set](/management/project/) for the project.
-To create a replica, use the calendar to select the time from which to replicate your table,
+To create a replica, use the calendar to select the time from which you want to replicate your table,
 select which bucket to use for the newly created table, and give it a name.
 
 {: .image-popup}
