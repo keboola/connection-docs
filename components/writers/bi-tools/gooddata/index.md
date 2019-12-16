@@ -81,6 +81,10 @@ Click the **New Table** button to add a new table to the writer:
 Select an existing table from the [Storage](/storage/tables/) and enter a *Title* which will be used for the table in
 the GoodData project (you can change the title later if needed). The next step is to configure the table columns.
 
+*Important: There is a **hard limit** on the GoodData interface ([Workspace loading limit](https://support.gooddata.com/hc/en-us/articles/215858108#WorkspaceLoading); link requires authentication) which allows to load only **25 GB** of CSV data in a single load of a single table. 
+If you're nearing this limit, we suggest you split the table into chunks and load it incrementally. Feel free to contact our [support](/management/support/) 
+for more help.*
+
 ### Table Columns
 
 {: .image-popup}
