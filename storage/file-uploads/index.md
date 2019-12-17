@@ -75,7 +75,7 @@ The maximum allowed size of an uploaded file is currently 5GB (5,368,709,120 byt
 This applies to both file and table uploads. 
 The actual table size may be bigger, because it is uploaded as a compressed file. 
 If you need to upload a larger file, you need to use 
-[sliced upload](https://docs.keboola.apiary.io/#reference/files/upload-file). 
+[sliced upload](https://keboola.docs.apiary.io/#reference/files). 
 In that case, the limit applies to the chunk size.
 
 As stated above, unless marked as permanent, each file is automatically deleted 180 days after it has been created. 

@@ -15,7 +15,7 @@ There are a number of extractors for [**SQL databases**](/components/extractors/
 
 - [Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
-- [IBM DB2](https://www.ibm.com/analytics/us/en/technology/db2/)
+- [IBM DB2](https://www.ibm.com/analytics/db2)
 - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [MySQL](https://www.mysql.com/)
 - [Oracle](https://www.oracle.com/index.html)

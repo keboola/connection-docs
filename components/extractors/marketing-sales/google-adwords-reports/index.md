@@ -16,7 +16,7 @@ If you do not have a Google Ads manager account, follow this [guide](https://sup
 [Create a new configuration](/components/#creating-component-configuration) of the **Google AdWords Reports** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
-To run the extractor, specify your [customer ID](https://support.google.com/adwords/answer/1704344?hl=en).
+To run the extractor, specify your [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en).
 
 {: .image-popup}
 ![Screenshot - Customer configuration](/components/extractors/marketing-sales/google-adwords-reports/google-adwords-reports-1.png)

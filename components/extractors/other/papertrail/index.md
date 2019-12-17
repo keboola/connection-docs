@@ -10,7 +10,7 @@ redirect_from:
 {:toc}
 
 This extractor uses the Papertrail [Search API](https://help.papertrailapp.com/kb/how-it-works/search-api)
-to import events matching the specified query from [Papertrail](https://papertrailapp.com/) 
+to import events matching the specified query from [Papertrail](https://www.papertrail.com/) 
 (logs from apps, servers, and cloud services).
 
 ## Configuration

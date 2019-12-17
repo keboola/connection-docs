@@ -58,7 +58,7 @@ A CSV file in this format can be exported from
 ### Exporting from Microsoft Excel
 Because Microsoft Excel does not support UTF-8 encoding very well, it is a bit tricky to
 export data correctly. There are a
-[number of options](http://stackoverflow.com/questions/4221176/excel-to-csv-with-utf8-encoding),
+[number of options](https://stackoverflow.com/questions/4221176/excel-to-csv-with-utf8-encoding),
 but without using any non-standard Windows tools, the quickest is to save the Excel sheet as `Unicode Text (*.txt)`
 format:
 

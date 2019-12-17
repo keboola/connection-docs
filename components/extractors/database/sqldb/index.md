@@ -12,7 +12,7 @@ redirect_from:
 Each extractor from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries.
 
 The extractors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html), 
-[Firebird](http://www.firebirdsql.org/), [IBM DB2](https://www.ibm.com/analytics/us/en/technology/db2/), 
+[Firebird](http://www.firebirdsql.org/), [IBM DB2](https://www.ibm.com/analytics/db2), 
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), [MySQL](https://www.mysql.com/),
 [Oracle](https://www.oracle.com/index.html), [PostgreSQL](https://www.postgresql.org/), [Teradata](https://www.teradata.com/)) are configured
 in the same way and have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
@@ -86,7 +86,7 @@ Instead, import raw data, and then use Keboola Connection tools to give it the s
 
 ### MySQL Encryption
 The MySQL database server also supports encrypting the whole database communication using SSL Certificates. See the
-[official guide](http://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) for instructions on setting it up.
+[official guide](https://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) for instructions on setting it up.
 
 ### MySQL Network Compression
 Enables [MySQL Network Compression](https://dev.mysql.com/doc/refman/5.7/en/group-replication-message-compression.html). Pros and cons
