@@ -182,7 +182,7 @@ The RStudio Sandbox has the following **limitations**:
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB (same as in [transformations](/transformations/r/#memory-and-processing-constraints)).
 - The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
-supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
+supported only by the [API](https://provisioningapi.docs.apiary.io/#reference/credentials-async-actions/plain-sandbox-credentials-async/create-credentials).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
@@ -232,7 +232,7 @@ The Jupyter Notebook Sandbox has the following **limitations**:
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB (same as in [transformations](/transformations/python/#memory-and-processing-constraints)).
 - The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
-supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
+supported only by the [API](https://provisioningapi.docs.apiary.io/#reference/credentials-async-actions/plain-sandbox-credentials-async/create-credentials).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
@@ -279,7 +279,7 @@ The Julia Jupyter Notebook Sandbox has the following **limitations**:
 - Sandbox disk space is limited to 10GB.
 - Memory is limited to 8GB (same as in [transformations](/transformations/julia/#memory-and-processing-constraints)).
 - The UI for a plain sandbox only allows tables to be loaded to Sandbox. Loading input files to a plain sandbox is
-supported only by the [API](http://docs.provisioningapi.apiary.io/#reference/credentials-async-actions/create-credentials-async).
+supported only by the [API](https://provisioningapi.docs.apiary.io/#reference/credentials-async-actions/plain-sandbox-credentials-async/create-credentials).
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 

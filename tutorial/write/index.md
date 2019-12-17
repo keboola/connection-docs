@@ -9,13 +9,13 @@ permalink: /tutorial/write/
 This part of our tutorial will guide you through the process of writing data from Keboola Connection. 
 You have learned to [manipulate data](/tutorial/manipulate/) in Keboola Connection using SQL, 
 and have a denormalized table called `opportunity_denorm` ready in the `out.c-tutorial` storage bucket. 
-This table is suitable to be loaded into [Tableau Analytics](http://www.tableau.com/). 
+This table is suitable to be loaded into [Tableau Analytics](https://www.tableau.com/). 
 
 ## Getting Started
 
-**Before you proceed, have [Tableau Desktop](http://www.tableau.com/products/desktop) installed**.
+**Before you proceed, have [Tableau Desktop](https://www.tableau.com/products/desktop) installed**.
 If you want to try connection to Tableau Server, have credentials for that server as well. 
-As an alternative, sign up for a free trial of [Tableau Online](http://www.tableau.com/products/cloud-bi) to test it out.
+As an alternative, sign up for a free trial of [Tableau Online](https://www.tableau.com/products/cloud-bi) to test it out.
 
 Writing data from Keboola Connection into a business intelligence and analytics tool such as Tableau is very common. 
 Writing data to GoodData BI is covered in the following [side step](/tutorial/write/gooddata/). 
@@ -24,7 +24,7 @@ However, keep in mind you can use the processed data in any way you wish.
 There are three options how to load the `opportunity_denorm` table into Tableau:
 
 - Writing data to a provisioned Snowflake/Redshift database
-- Generating a [Tableau Data Extract (TDE)](http://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1) 
+- Generating a [Tableau Data Extract (TDE)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1) 
 and loading it manually into Tableau Desktop
 - Generating a TDE and loading it into Tableau Server, either manually or automatically
 

@@ -95,7 +95,7 @@ Keboola Connection is available in multiple regions — currently in:
 - US Azure -- [connection.east-us-2.azure.keboola.com](https://connection.east-us-2.azure.keboola.com). 
 
 A **Region** instance is a combination of a datacenter location and a cloud provider. The currently supported
-cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/).
+cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/en-us/).
 Each region instance is a completely independent full stack of Keboola Connection services. That means that 
 if you have projects in multiple regions, you need to have multiple Keboola Connection accounts.
 
