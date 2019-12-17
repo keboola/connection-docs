@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Inside an R transformation, pre-computed models can be used. These models of your data behaviour are great for predictions, for example.
+Inside an R transformation, pre-computed models can be used. These models of your data behaviour are great for predictions, among other things.
 The following are some of the reasons for using a pre-computed model inside an R transformation:
 
 - Too many resources are required to compute the model, memory-wise and time-wise, and it is therefore impractical to compute it inside a (daily) business transformation.
@@ -43,10 +43,10 @@ a customer with 40 items in their basket will spend in the shop. Create another 
 Only the second table will be used in the actual R transformation. Upload that table to your **Storage**. 
 
 
-## Step 1 - Create the model
+## Step 1 - Create Model
 
 First, it is necessary to get a file with the R model. To create and save a very simple model, use a script similar to the following one. 
-It is supposed to be executed **outside KBC**, for example on your local machine.
+It is supposed to be executed **outside Keboola Connection**, for example, on your local machine.
 
 {% highlight r %}
 data <- read.csv("cashier-data.csv")
@@ -58,10 +58,10 @@ After executing the script, you get the `time_model.rda` binary file with a very
 of the **time_spent_in_shop** column on the **number_of_items** column in the data 
 ([cashier-data.csv](/transformations/r/cashier-data.csv)):
  
-## Step 2 - Save the model to KBC
+## Step 2 - Save Model to Keboola Connection
 
-The second step is to save the model file to KBC. For that go to **Storage** -- [**File uploads**](/storage/file-uploads/) and upload the obtained file (`time_model.rda`), 
-the file should be marked as *permanent* and a tag must be assigned to it.
+The second step is to save the model file to Keboola Connection. For that, go to **Storage** -- [**File uploads**](/storage/file-uploads/) and upload the obtained file (`time_model.rda`); 
+it should be marked as *permanent* and a tag must be assigned to it.
 
 {: .image-popup}
 ![Screenshot - Upload file](/transformations/r/file-import.png)
@@ -77,7 +77,7 @@ and add the (`predictionModel`) tag to select stored files.
 ![Screenshot - Transformation Setup](/transformations/r/binary-transformation.png)
 
 **Important:** In the transformation, you reference only the file tag, not the actual uploaded file. 
-The rules for transforming a tag to a file are following: 
+The rules for transforming a tag to a file are as follows: 
 
 - Only a single file will always be present in the R transformation (removes ambiguity).
 - If multiple files with the same tag are present in File uploads, only the latest one will be copied to the R 
@@ -109,17 +109,17 @@ The result table will be stored according to the output mapping setting and will
 |  ...             |       |       |       |
 
 This contains the predicted value and lower and upper bound of the confidence interval. The predicted value was 
-obtained from the (very simple linear) model that was created outside KBC in the first step. This technique with 
+obtained from the (very simple linear) model that was created outside Keboola Connection in the first step. This technique with 
 binary files can also be used for other purposes as they can contain virtually any R code or data.
 
 ## Running & Debugging Locally
 When attempting to run the above [transformation locally](/transformations/r/#development-tutorial),
 make sure to
 
-- Put the R code in the working directory in a file, for example, `script.R`.
-- Download the table `in.c-r-transformations.cashier-data-predict` from the input mapping and place it inside the `in/tables` 
+- put the R code in the working directory in a file, for example, `script.R`.
+- download the table `in.c-r-transformations.cashier-data-predict` from the input mapping, and place it inside the `in/tables` 
 subdirectory of the working directory into the `cashier-data-predict.csv` file.
-- Download a file with the `predictionModel` tag from Storage File Uploads and place that
+- download a file with the `predictionModel` tag from Storage File Uploads and place that
 file inside the `in/user` subdirectory of the working directory in the `predictionModel` file. Make sure the
  downloaded file has **no extension**.
-- Store the result R `data.frame` inside the `out/tables` subdirectory in `data-predicted.csv`.
+- store the result R `data.frame` inside the `out/tables` subdirectory in `data-predicted.csv`.

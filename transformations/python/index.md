@@ -24,7 +24,7 @@ switch the version in the transformation detail by clicking on the `Python` labe
 {: .image-popup}
 ![Screenshot - Transformations Versions](/transformations/python/versions.png)
 
-This feature is intended to help you 'postpone' the update to a more convenient time for you in case there are
+This feature is intended to help you **postpone** the update to a more convenient time for you in case there are
 any problems with the new version. You should update the transformation code to the new version soon, as the old
 version is considered unsupported.
 
@@ -33,7 +33,7 @@ via the [API](https://developers.keboola.com/integrate/storage/api/configuration
 
 ### Memory and Processing Constraints
 
-The Docker container running the Python transformation has allocated 8GB of memory and the maximum running time is 6 hours.
+The Docker container running the Python transformation has 8GB of allocated memory and the maximum running time is 6 hours.
 The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
 
 ### File locations
@@ -41,11 +41,12 @@ The Python script itself will be compiled to `/data/script.py`. To access your i
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/user/tag` or `/data/in/user/tag` path. If you want to dig really deep,
 have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
-Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola Connection.
+Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola Connection.
 
 ## Python Script Requirements
 Python is **sensitive to indentation**. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
-`# coding=utf-8` at the beginning of the script is not needed. If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be run. Simply calling it from within the script is enough:
+`# coding=utf-8` at the beginning of the script is not needed. If you define a main function, 
+do not wrap it within the `if __name__ == '__main__':` block as it will not be run. Simply calling it from within the script is enough:
 
 {% highlight python %}
 def main():
@@ -63,8 +64,8 @@ Feel free to contact us if you run into problems. When the package is installed,
 ![Screenshot - Package Configuration](/transformations/python/packages.png)
 
 The latest versions of packages are always installed at the time of the release (you can check that
-[in the repository](https://github.com/keboola/docker-custom-python/releases)). In case your code relies on a specific package version, you can override the
-installed version by calling, e.g.:
+[in the repository](https://github.com/keboola/docker-custom-python/releases)). In case your code relies on a specific package version,
+you can override the installed version by calling, e.g.:
 
 {% highlight python %}
 import subprocess
@@ -95,7 +96,8 @@ The following image shows the directory structure:
 ![Screenshot - Data folder structure](/transformations/python/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a Keboola Connection transformation with no changes. To develop a Python transformation which takes a [sample CSV file](/transformations/python/source.csv) locally, take the following steps:
+so that you can move the script to a Keboola Connection transformation with no changes. To develop a Python transformation 
+which takes a [sample CSV file](/transformations/python/source.csv) locally, take the following steps:
 
 - Put the Python code into a file, for example script.py, in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
@@ -134,7 +136,7 @@ This script can be used in your transformations without any modifications. All y
 {: .image-popup}
 ![Screenshot - Sample Input Output Mapping](/transformations/python/sample-io.png)
 
-### Going further
+### Going Further
 The above steps are usually sufficient for daily development and debugging of moderately complex Python transformations,
 although they do not reproduce the transformation execution environment exactly. To create a development environment
 with the exact same configuration as the transformation environment, use [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
@@ -168,7 +170,7 @@ It is also important to use `encoding='utf-8'` when reading and writing files.
 ## Example 2 -- Using lists
 
 The following piece of code reads a table with some of its columns from the **source.csv** input mapping file into the `row` list of strings.
-It then adds *ping* to the first column and multiplies the second column by *42*. After that it saves the row to the **destination.csv** output mapping file.
+It then adds *ping* to the first column and multiplies the second column by *42*. After that, it saves the row to the **destination.csv** output mapping file.
 
 {% highlight python %}
 import csv

@@ -26,7 +26,7 @@ switch the version in the transformation detail by clicking on the `R` label:
 {: .image-popup}
 ![Screenshot - Transformations Versions](/transformations/r/versions.png)
 
-This feature is intended to help you 'postpone' the update to a more convenient time for you in case there are
+This feature is intended to help you **postpone** the update to a more convenient time for you in case there are
 any problems with the new version. You should update the transformation code to the new version soon, as the old
 version is considered unsupported.
 
@@ -35,7 +35,7 @@ via the [API](https://developers.keboola.com/integrate/storage/api/configuration
 
 ### Memory and Processing Constraints
 
-The Docker container running the R transformation has allocated 8GB of memory and the maximum running time is 6 hours.
+The Docker container running the R transformation has 8GB of allocated memory and the maximum running time is 6 hours.
 The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
 
 ### File locations
@@ -43,7 +43,7 @@ The R script itself will be compiled to `/data/script.R`. To access input and ou
 (`in/tables/file.csv`, `out/tables/file.csv`), or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/user/tag` or `/data/in/user/tag` path. If you want to dig really deep, have a look
 at the full [Common Interface Specification](https://developers.keboola.com/extend/common-interface/). Temporary files can
-be written to the `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with KBC.
+be written to the `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola Connection.
 
 ## R Script Requirements
 The R script to be run within our environment must meet the following requirements:
@@ -57,8 +57,8 @@ for loading is not necessary then.
 The latest versions of packages are always installed. Some packages are already installed in the environment
 (see [list 1](https://github.com/keboola/docker-custom-r/blob/master/init-1.R#L3) and 
 [list 2](https://github.com/keboola/docker-base-r/blob/master/init-1.R#L3). The listed packages are installed with 
-their dependencies, therefore to get an authoriatative list of installed packages use the `installed.packages()` function. 
-These pre-installed packages do not need to be listed in the transformation. It does no harm if you list them, but the trasnformation and sandbox start is slower.
+their dependencies, therefore to get an authoritative list of installed packages use the `installed.packages()` function. 
+These pre-installed packages do not need to be listed in the transformation. It does no harm if you list them, but the transformation and sandbox start is slower.
 
 ### CSV format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.
@@ -123,13 +123,13 @@ The following image shows the directory structure:
 ![Screenshot - Data folder structure](/transformations/r/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a R transformation which takes
+so that you can move the script to a Keboola Connection transformation with no changes. To develop an R transformation which takes
 a [sample CSV file](/transformations/r/source.csv) locally, take the following steps:
 
 - Put the R code into a file, for instance, script.R in the working directory.
 - Put all tables from the input mapping inside the `in/tables` subdirectory of the working directory.
 - Place the binary files (if using any) inside the `in/user` subdirectory of the working directory, and make sure
-that their name is without any extension.
+that their name has no extension.
 - Store the result CSV files inside the `out/tables` subdirectory.
 
 Use this sample script:
@@ -187,8 +187,8 @@ server time of when an event occurred. The standard event timestamp in job event
 converted to the local time-zone.
 
 ### Going Further
-The above steps are usually sufficient for daily development and debugging of moderately complex R transformations.
-Although they do not reproduce the transformation execution environment exactly. To create a development environment
+The above steps are usually sufficient for daily development and debugging of moderately complex R transformations, 
+although they do not reproduce the transformation execution environment exactly. To create a development environment
 with the exact same configuration as the transformation environment, use [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
 
 ## Examples

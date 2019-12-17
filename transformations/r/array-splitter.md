@@ -35,9 +35,9 @@ Then set the input and output mapping for your transformation.
 ![Screenshot - Input/Output mapping](/transformations/r/array-split-io.png)
 
 ## Use the Script
-The following script will take each row of the source table, and split the column, the name of which is specified in the
+The following script will take each row of the source table, and split the column whose name is specified in the
 `splitCol` variable by the character specified in the `splitChar` variable. The resulting values will be put 
-together with their id specified in the `idCol` variable, and they will also be assigned a new sequential id
+together with their ID specified in the `idCol` variable, and they will also be assigned a new sequential ID
 in the `globalPos` column.   
 
 {% highlight r %}
