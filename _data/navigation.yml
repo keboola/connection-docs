@@ -177,6 +177,9 @@ items:
               - url: /components/writers/bi-tools/gooddata/
                 title: GoodData
 
+              - url: /components/writers/bi-tools/looker/
+                title: Looker
+
               - url: /components/writers/bi-tools/tableau/
                 title: Tableau
 
@@ -236,7 +239,7 @@ items:
 
   - url: /catalog/
     title: Data Catalog
-    items:  
+    items:
       - url: /catalog/multi-project/
         title: Multi-project Architecture
 
@@ -245,7 +248,7 @@ items:
     items:
       - url: /storage/buckets/
         title: Buckets
-              
+
       - url: /storage/tables/
         title: Tables & Aliases
         items:

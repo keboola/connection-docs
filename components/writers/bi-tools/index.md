@@ -10,6 +10,7 @@ Writers export data from Keboola Connection to external systems. The following w
 allow to push data to various business intelligence platforms:
 
 - [GoodData](/components/writers/bi-tools/gooddata/) --- writes tables to [GoodData](https://www.gooddata.com/) and optionally also manages the GoodData project LDM.
+- [Looker](/components/writers/bi-tools/looker/) --- writes tables to [Looker](https://looker.com/)
 - [Tableau](/components/writers/bi-tools/tableau/) --- writes tables to [Tableau](https://www.tableau.com/) TDE files, which can be downloaded or uploaded to Dropbox, Google Drive or Tableau Server. You can also use the [Snowflake writer](/components/writers/database/snowflake/) to send data into Tableau.
 - [ThoughtSpot](/components/writers/bi-tools/thoughtspot) --- writes tables to [ThoughtSpot](https://www.thoughtspot.com/product).
 - and others
