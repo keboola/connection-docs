@@ -34,14 +34,14 @@ via the [API](https://developers.keboola.com/integrate/storage/api/configuration
 
 ### Memory and Processing Constraints
 The Docker container running the Julia transformation has 8GB of allocated memory, and the maximum running time is 6 hours.
-The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
+The container is also limited to the **equivalent** of two Intel Broadwell 2.3 GHz processors.
 
 ### File Locations
 The Julia script itself will be compiled to `/data/script.jl`. To access your input and output tables, use
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/files/` or `/data/in/files/` path. If you want to dig really deep,
 have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
-Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola Connection (KBC).
+Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola Connection.
 
 ### Packages
 You can list extra packages in the UI. These packages are installed using the [General package registry](https://github.com/JuliaRegistries/General).
@@ -100,8 +100,8 @@ The following image shows the directory structure:
 {: .image-popup}
 ![Screenshot - Data folder structure](/transformations/julia/tree.png)
 
-The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a KBC transformation with no changes. To develop a Julia transformation that takes a [sample CSV file](/transformations/julia/source.csv) locally, follow these steps:
+The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories
+so that you can move the script to a  transformation with no changes. To develop a Julia transformation that takes a [sample CSV file](/transformations/julia/source.csv) locally, follow these steps:
 
 - Put the Julia code into a file, for example, script.jl, in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.

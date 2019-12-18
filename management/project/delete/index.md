@@ -25,10 +25,10 @@ will be gone for good.
 Again, we strongly suggest you [**export your project**](/management/project/export/) before deleting it.
 
 ## GoodData Projects
-If the KBC project has provisioned a GoodData project, that project will also be deleted. The grace
+If the Keboola Connection project has provisioned a GoodData project, that project will also be deleted. The grace
 period for a GoodData project is **5 days**. When a GoodData writer is deleted, the associated **provisioned** GoodData project
-is deleted after the grace period. When a KBC project is deleted (but the GoodData writer was left in it),
-the associated GoodData project will be deleted in 5 to 14 days from the deletion of the KBC project.
+is deleted after the grace period. When a Keboola Connection project is deleted (but the GoodData writer was left in it),
+the associated GoodData project will be deleted in 5 to 14 days from the deletion of the Keboola Connection project.
 
 **Important**: Expiring projects will be deleted **automatically** when the expiration day is due.
 You will receive a **notification** a week in advance.

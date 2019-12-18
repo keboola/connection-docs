@@ -17,7 +17,7 @@ This can come in handy when
 - leaving us.
 
 **Important**: Do not confuse this feature with the project backup.
-Takeout data **cannot** be automatically imported into KBC (recovering a project must be done by KBC Support).
+Takeout data **cannot** be automatically imported into Keboola Connection (recovering a project must be done by Keboola Connection Support).
 
 Things to have before you start:
 
@@ -84,7 +84,7 @@ Make sure to replace *keboola-data-takeout* in the above document with the true 
 Having your S3 bucket named and its region set, along with the *Access Key ID* and *Secret Access Key* of the IAM user, you are ready to export the project.
 
 ## Export Project
-Go to KBC and select **Users & Settings**. In the **Settings** tab, click the **Data Takeout** button:
+Go to Keboola Connection and select **Users & Settings**. In the **Settings** tab, click the **Data Takeout** button:
 
 {: .image-popup}
 ![Screenshot - Data Takeout](/management/project/export/data-takeout-project-settings.png)

@@ -6,7 +6,7 @@ permalink: /management/jobs/
 * TOC
 {:toc}
 
-Most of the things done in KBC run as background, asynchronous jobs.
+Most of the things done in Keboola Connection run as background, asynchronous jobs.
 For an overview of all jobs, running and finished, go to the **Jobs** section:
 
 {: .image-popup}
@@ -97,7 +97,7 @@ the waiting state under the following conditions:
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
 
 ## Storage Jobs
-Not only we record all jobs executed in your KBC project, we also record all data that was uploaded
+Not only we record all jobs executed in your Keboola Connection project, we also record all data that was uploaded
 into it. Go to **Storage** and click the **Jobs** tab:
 
 {: .image-popup}
@@ -109,7 +109,7 @@ When you click an **importTable** job, you'll see a Storage job detail:
 ![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)
 
 Clicking **File ID** will take you to the **File Uploads** tab in **Storage**,
-where all data pushed into your KBC project is stored.
+where all data pushed into your Keboola Connection project is stored.
 You can download the data and import it into other tables, or you can revert to an older table version.
 
 {: .image-popup}

@@ -6,9 +6,9 @@ permalink: /management/organization/
 * TOC
 {:toc}
 
-KBC projects are grouped into **organizations**. Each organization is assigned to a **maintainer** (either Keboola or
+Keboola Connection projects are grouped into **organizations**. Each organization is assigned to a **maintainer** (either Keboola or
 Keboola Partner), who is also primarily responsible for L1 support unless agreed otherwise.
-[KBC projects](/management/#project-status), organizations
+[Keboola Connection projects](/management/#project-status), organizations
 and maintainers are therefore organized into a hierarchy:
 
 {: .image-popup}
@@ -43,7 +43,7 @@ The same goes for maintainers.
 {: .image-popup}
 ![Screenshot - Organizations Users](/management/organization/organization-2.png)
 
-Newly added organization members get an email confirmation, and if without a KBC account,
+Newly added organization members get an email confirmation, and if without a Keboola Connection account,
 they are [invited to create one](/management/project/users/#new-user).
 Removed members receive an email notification.
 

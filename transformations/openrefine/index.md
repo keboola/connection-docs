@@ -20,7 +20,7 @@ The installed OpenRefine version is `2.6-rc.2`.
 
 ### Memory and Processing Constraints
 
-The Docker container running the OpenRefine server and transformation has allocated 8GB of memory.
+The Docker container running the OpenRefine server and transformation has 8GB of allocated memory.
 7GB of that is allocated directly to OpenRefine.
 
 In our experience, this memory limit is enough to process ~2M rows or 0.5GB of raw CSV data.

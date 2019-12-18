@@ -100,4 +100,4 @@ ggsave(filename = "/data/out/files/graph2.png", width = 10, height = 10, units =
 app$writeFileManifest("/data/out/files/graph2.png", c("regression", "ggplot"))
 {% endhighlight %}
 
-Do not forget to list `ggplot2` in the packages section of the transformation.
+Do not forget to list `ggplot2` in the package section of the transformation.

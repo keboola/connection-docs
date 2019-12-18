@@ -8,18 +8,18 @@ redirect_from:
 * TOC
 {:toc}
 
-All operations in a KBC project must be authorized. This is technically done using **API tokens**
+All operations in a Keboola Connection project must be authorized. This is technically done using **API tokens**
 (also called **Storage API tokens**, **SAPI tokens**, and **Storage tokens**). 
 
-KBC is built using the [API-first approach](https://apigee.com/about/tags/api-first-0); almost every 
-operation done in KBC is in fact an API call and uses an API token. A token is valid only within 
+Keboola Connection is built using the [API-first approach](https://apigee.com/about/tags/api-first-0); almost every 
+operation done in Keboola Connection is in fact an API call and uses an API token. A token is valid only within 
 a **single project** (hence the name Storage API token). 
 
 Apart from API tokens, there are also [management tokens](/management/account/#tokens), which are used 
 to perform operations outside individual projects.
 
 Normally, when you are using the user interface, your API token is exchanged automatically with
-the server backend. Therefore you need to work with tokens only when working with KBC programmatically 
+the server backend. Therefore you need to work with tokens only when working with Keboola Connection programmatically 
 (or if you need to limit a user's authorization to certain operations or data). 
 To learn more about all the available programmatic approaches, please follow our 
 [developers documentation](https://developers.keboola.com/overview/api/).
@@ -37,7 +37,7 @@ from the project on the **Users & Settings** --- **Users** page.
 
 A single user has only a single master token. In addition, master tokens are the only ones which can be 
 used to create other tokens. A master token has always access to all components, so having it allows you 
-to do everything that can be otherwise done via the KBC Administration UI.
+to do everything that can be otherwise done via the Keboola Connection Administration UI.
 
 ## Working with Tokens
 API tokens are created
@@ -51,15 +51,15 @@ Typical reasons to manually create a new API token are:
 - You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
 - You need to limit access to certain data (for example, share a single table) or components.
 
-Although tokens cannot be used to directly login to the KBC UI, they do allow executing almost all 
-operations in a KBC project. As such, they must be treated as secret. Therefore the token 
+Although tokens cannot be used to directly login to the Keboola Connection UI, they do allow executing almost all 
+operations in a Keboola Connection project. As such, they must be treated as secret. Therefore the token 
 string is shown only when the token is created and it is not accessible later. You should 
 immediately [refresh a token](#refreshing-a-token) in case there is a suspicion that the 
 token string was revealed to unauthorized persons.
 
 When creating a new token, the following rules apply:
 
-- Tokens by default give **no access** to any of the KBC components.
+- Tokens by default give **no access** to any of the Keboola Connection components.
 - Token bearers can only access **permitted** Storage buckets via the [Storage API](http://developers.keboola.com/integrate/storage/) or
 [Storage console](https://storage-api-console.keboola.com/). 
 - Tokens **cannot** be used to run any actions in your project.
@@ -67,7 +67,7 @@ When creating a new token, the following rules apply:
 
 You should never share the same token in multiple applications. The number of tokens is not 
 limited in any way, neither are any charges associated with them. Therefore, every time you need to provide
-someone with a KBC token, create a new one.
+someone with a Keboola Connection token, create a new one.
 
 ## Token Events
 Keboola Connection also tracks all operations performed by each token. You can view the list of events from 
@@ -131,7 +131,7 @@ selecting **Full Access** for Trash. This is rarely needed.
 ## Refreshing a Token
 Every token can be **refreshed**: a new token value (token string) is generated, and the old token becomes 
 immediately invalid. That means you have to update all places where the token was used. If you 
-invalidate your own master token, you have to reload your KBC view in the browser.
+invalidate your own master token, you have to reload your Keboola Connection view in the browser.
 
 {: .image-popup}
 ![Screenshot - Refresh Token Button](/management/project/tokens/refresh-token.png)
@@ -169,7 +169,7 @@ The recipient will obtain an email with an invitation link leading to the follow
 Only the buckets you made accessible will be accessible by the token. If you set the token to expire, 
 it will get deleted automatically after the specified period. In addition to sharing sections of 
 your data with selected users, the buckets can be also used for writing;
-people can send data directly to your KBC project instead of struggling with FTP or e-mail attachments.
+people can send data directly to your Keboola Connection project instead of struggling with FTP or e-mail attachments.
 To revoke the access, simply delete or refresh the token.
 
 The token can then be used with the [Storage API](https://developers.keboola.com/integrate/) 

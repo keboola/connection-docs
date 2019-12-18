@@ -8,14 +8,14 @@ redirect_from:
 * TOC
 {:toc}
 
-To be able to work with Keboola Connection (KBC), each user needs to have the following:
+To be able to work with Keboola Connection, each user needs to have the following:
 
-- Platform-wide KBC account
+- Platform-wide Keboola Connection account
 - Access to a specific project
 
 Each user is, system-wide, **identified by their email address**.
 This means that you need to enter correct email addresses for existing users.
-Be especially careful about company aliases; from KBC's point of view, they are different users.
+Be especially careful about company aliases; from Keboola Connection's point of view, they are different users.
 
 All operations done by a user are technically done using the
 [master token](/management/project/tokens/#master-tokens). This is important for
@@ -58,7 +58,7 @@ they will never become a member of the project.
 The steps that follow an invitation differ depending on whether the user already exists or is new.
 
 ### New User
-If the user does not have a platform-wide KBC account yet, their name in the user list will be labeled as
+If the user does not have a platform-wide Keboola Connection account yet, their name in the user list will be labeled as
 `Not activated yet`:
 
 {: .image-popup}
@@ -75,20 +75,20 @@ When they click the **Activate Your Account** button, they will be taken to the 
 ![Screenshot -- Activation form](/management/project/users/register-2.png)
 
 After filling it in, the [login form](/management/project/users/#authentication) appears.
-They can immediately login to KBC and see their invitation to the project they have been invited to.
+They can immediately login to Keboola Connection and see their invitation to the project they have been invited to.
 Once they accept it, you will see their chosen screen name in the user list:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
 ### Existing User
-If the added user already has a KBC account, you will see their screen name in the user list right away:
+If the added user already has a Keboola Connection account, you will see their screen name in the user list right away:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-2.png)
 
 *Note: If you intend to invite an existing user, it is a good idea to verify the screen name.
-If you see `Not activated yet` instead of the screen name, it means that there is no KBC account associated with the email address.*
+If you see `Not activated yet` instead of the screen name, it means that there is no Keboola Connection account associated with the email address.*
 
 The user will receive an email invitation:
 
@@ -141,7 +141,7 @@ No other user can enter the project. If Auto Join is disabled, maintainer users 
 see the name of the project and request access which must be approved by a current member of the project.
 
 ## Authentication
-There are three options for authenticating a KBC account:
+There are three options for authenticating a Keboola Connection account:
 
 - Google account
 - Combination of an email address and the associated password
@@ -150,15 +150,15 @@ There are three options for authenticating a KBC account:
 The options are described in detail below.
 
 ### Google Account
-If you have a Google Account (Gmail), you can use it to authenticate to KBC.
+If you have a Google Account (Gmail), you can use it to authenticate to Keboola Connection.
 Click the respective button on the login page:
 
 {: .image-popup}
 ![Screenshot -- Login Page](/management/project/users/login-1.png)
 
-Then follow the Google instructions to authorize KBC.
-No configuration in KBC is necessary to enable Google Account login.
-Bear in mind, however, that the Google Account email must match the email you are using in KBC.
+Then follow the Google instructions to authorize Keboola Connection.
+No configuration in Keboola Connection is necessary to enable Google Account login.
+Bear in mind, however, that the Google Account email must match the email you are using in Keboola Connection.
 
 ### Multi-Factor Authentication
 Enable multi-factor authentication (MFA) in your [account settings](/management/account/#multi-factor-authentication).

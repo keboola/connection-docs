@@ -33,7 +33,7 @@ To show you how it works, let's use an example in which we have a `cashier-data`
 |  ...             |                       |       |
  
 The table contains some observed values of customers who visited the shop. Now, let's find out how much time 
-a customer with 40 items in their basket will spend in the shop. Create another table (`cashier-data-predict`) like the following ([full table](/transformations/r/cashier-data-predict.csv)):
+a customer with 40 items in their basket will spend in the shop. Create another table (`cashier-data-predict`) like the following one ([full table](/transformations/r/cashier-data-predict.csv)):
 
 | number_of_items  |
 |------------------|
@@ -66,7 +66,7 @@ it should be marked as *permanent* and a tag must be assigned to it.
 {: .image-popup}
 ![Screenshot - Upload file](/transformations/r/file-import.png)
 
-In the sample above, we decided to give the file a tag `predictionModel`.
+In the sample above, we decided to give the file the tag `predictionModel`.
 
 ## Step 3 - Create R Transformation
 
@@ -80,10 +80,10 @@ and add the (`predictionModel`) tag to select stored files.
 The rules for transforming a tag to a file are as follows: 
 
 - Only a single file will always be present in the R transformation (removes ambiguity).
-- If multiple files with the same tag are present in File uploads, only the latest one will be copied to the R 
+- If multiple files with the same tag are present in File Uploads, only the latest one will be copied to the R 
 transformation (it allows easy updates; if you need to rollback, just delete the new file, or re-upload an old one).
 - If you need multiple files in your R transformation, each one must have a different tag (it forces clarity).
-- If there is no file with a given tag in File uploads, the transformation will fail.
+- If there is no file with a given tag in File Uploads, the transformation will fail.
 
 The following sample script demonstrates the use of the pre-computed model. The `lm` variable is loaded from the `predictionModel` file.
 

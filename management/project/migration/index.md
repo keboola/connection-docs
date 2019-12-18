@@ -47,7 +47,7 @@ based on [Changed in last](/transformations/mappings/#input-mapping) in
 transformations or writers it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.
-- Each KBC stack has a different set of assigned [IP addresses](/components/ip-addresses/)
+- Each Keboola Connection stack has a different set of assigned [IP addresses](/components/ip-addresses/)
 
 ## What won't be migrated
 
