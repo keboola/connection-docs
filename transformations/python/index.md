@@ -15,7 +15,7 @@ Common data operations like joining, sorting, or grouping are still easier and f
 ## Environment
 
 The Python script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
-The current Python version is **3.7.3**. The Python version is updated regularly, few weeks after the official release.
+The current Python version is **3.7.5**. The Python version is updated regularly, few weeks after the official release.
 The update is always announced on the [status page](http://status.keboola.com/).
 
 When we update the Python version, we offer --- for a limited time --- the option to switch to the previous version. You can
