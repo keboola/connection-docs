@@ -45,3 +45,42 @@ to be accessed directly from the internet. The SSH connection is encrypted and u
 
 Find detailed instructions for setting up an SSH tunnel in the [developer documentation](https://developers.keboola.com/integrate/database/).
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
+
+## Incremental Fetching
+Some database extractors support the feature of **Incremental Fetching**. Incremental fetching allows to dramatically 
+reduce the amount of data loaded from the source database server if the nature of the database permits. Incremental fetching
+can be used when the source table contains an ordering (ordinal) column and no rows are deleted (or the deletions are not important).
+There are two typical scenarios:
+
+- A table to which rows are only added and the rows have numeric and raising ID.
+- A table in which rows are added and modified and it contains a column with last modification time.
+
+To enable incremental fetching, you have to specify the ordering column. When incremental fetching is 
+enabled, the rows in the table are extracted in the order specified by the ordering column. The last
+fetched value is recorded in the configuration state. When the extraction runs again, only new rows 
+are fetched from the sourced database. To configure incremental fetching, go to table details:
+
+{: .image-popup}
+![Screenshot - Configuration Detail](/components/extractors/database/db-detail.png)
+
+Then select the ordering column:
+
+{: .image-popup}
+![Screenshot - Incremental Fetching](/components/extractors/database/incremental-fetching-1.png)
+
+The last fetched value is displayed in the configuration:
+
+{: .image-popup}
+![Screenshot - Incremental Fetching](/components/extractors/database/incremental-fetching-2.png)
+
+The rows are fetched from the source table including the last fetched value. Therefore it is
+ideal to have the ordering column set as primary key so that you don't receive duplicated rows in 
+the Storage table. In case you need to fetch the entire table, you can clear the stored value.
+
+This incremental fetching feature is related to [**Incremental Loading**](/storage/tables/#incremental-loading).
+While not required, it is recommended to turn on incremental loading when fetching data incrementally, otherwise
+the table in Storage will contain only the newly added rows. This may sound like a good idea when you want to
+process only newly added rows. In that case however, you should be do so using 
+[**Incremental Processing**](/storage/tables/#incremental-processing). The advantage of using incremental processing over 
+having only newly added rows in Storage table is in that the table contains all loaded data and also it is not necessary 
+to synchronize extraction and processing.
