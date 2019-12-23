@@ -17,7 +17,7 @@ easier and faster to do in [SQL Transformations](/transformations/).
 
 ## Environment
 The R script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
-The current R version is R **3.6.1**. The R version is updated regularly, few weeks after the official release.
+The current R version is R **3.6.2**. The R version is updated regularly, few weeks after the official release.
 The update is always announced on the [status page](http://status.keboola.com/).
 
 When we update the R version, we offer --- for a limited time --- the option to switch to the previous version. You can
