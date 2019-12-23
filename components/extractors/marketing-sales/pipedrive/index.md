@@ -15,7 +15,7 @@ from [Pipedrive](https://www.pipedrive.com/en-gb).
 [Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** extractor.
 
 To configure this extractor, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
-Then enter your **company domain**.
+Then enter your **company domain** (if your Pipedrive is at https://keboola.pipedrive.com, than your company domain is **keboola**).
 
 {: .image-popup}
 ![Screenshot - Pipedrive configuration](/components/extractors/marketing-sales/pipedrive/pipedrive-1.png)
