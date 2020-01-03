@@ -55,7 +55,7 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **Long running non-successful orchestrations (more than 2 hours)**  | `component:orchestrator durationSeconds:>7200 -status:success` |
 | **Orchestrations which ended with warning**  | `component:orchestrator status:warning` |
 | **Failed transformations**  | `component:transformation status:error`  |
-| **Failed jobs from Docker component Http extractor**  | `params.component:keboola.ex-http status:error` <br />  |
+| **Failed jobs from Docker component HTTP extractor**  | `params.component:keboola.ex-http status:error` <br />  |
 | **Jobs from either HTTP extractor or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
@@ -103,7 +103,7 @@ into it. Go to **Storage** and click the **Jobs** tab:
 {: .image-popup}
 ![Screenshot - Storage Jobs](/management/jobs/storage-jobs.png)
 
-When you click an **importTable** job, you'll see a Storage job detail:
+When you click an **importTable** job, you'll see the Storage job detail:
 
 {: .image-popup}
 ![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)

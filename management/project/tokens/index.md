@@ -37,7 +37,7 @@ from the project on the **Users & Settings** --- **Users** page.
 
 A single user has only a single master token. In addition, master tokens are the only ones which can be 
 used to create other tokens. A master token has always access to all components, so having it allows you 
-to do everything that can be otherwise done via the Keboola Connection Administration UI.
+to do everything that can be otherwise done via the Keboola Connection administration user interface.
 
 ## Working with Tokens
 API tokens are created
@@ -46,13 +46,13 @@ API tokens are created
 2. automatically when creating a new configuration of certain components (for example, Orchestrations).
 3. manually when needed.
 
-Typical reasons to manually create a new API token are:
+These are the typical reasons to manually create a new API token:
 
 - You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
 - You need to limit access to certain data (for example, share a single table) or components.
 
-Although tokens cannot be used to directly login to the Keboola Connection UI, they do allow executing almost all 
-operations in a Keboola Connection project. As such, they must be treated as secret. Therefore the token 
+Although tokens cannot be used to directly login to the Keboola Connection user interface, they do allow executing almost all 
+operations in a Keboola Connection project. As such, they must be treated as a secret. Therefore the token 
 string is shown only when the token is created and it is not accessible later. You should 
 immediately [refresh a token](#refreshing-a-token) in case there is a suspicion that the 
 token string was revealed to unauthorized persons.
@@ -66,7 +66,7 @@ When creating a new token, the following rules apply:
 - Tokens **cannot** be used to create other tokens (only a master token can be used to create new tokens).
 
 You should never share the same token in multiple applications. The number of tokens is not 
-limited in any way, neither are any charges associated with them. Therefore, every time you need to provide
+limited in any way, and there are no charges associated with them. Therefore, every time you need to provide
 someone with a Keboola Connection token, create a new one.
 
 ## Token Events
@@ -81,9 +81,9 @@ In the **Events** tab, you can see all operations performed by that token:
 {: .image-popup}
 ![Screenshot - Token List](/management/project/tokens/events.png)
 
-You can also see changes to the token itself (e.g. permission changes).
+You can also see changes to the token itself (e.g., permission changes).
 
-*Note: History of token operations is kept for **6 months**. If you are interested in 
+*Note: The history of token operations is kept for **6 months**. If you are interested in 
 events associated with a particular storage object, view the events in [Storage](/storage/).*
 
 ## Limited Tokens
@@ -114,7 +114,7 @@ For production use, it is recommended not to give away your master token but to 
 different uses. This also simplifies refreshing tokens as it is clear for what each token is used.
 
 For example, suppose that you need to trigger data extraction from a MySQL database from within your own environment.
-You would then create a token which is authorized for running the **MySQL database extractor** (`keboola.ex-db-mysql` component) and
+You would then create a token that is authorized for running the **MySQL database extractor** (`keboola.ex-db-mysql` component) and
 **write** access to the `in.c-csv-import` bucket (which is used as a destination in the particular configuration you want to run).
 
 {: .image-popup}
@@ -128,7 +128,7 @@ Also, writing to a limited set of buckets is a good way of preventing accidental
 You can also specify if a token is allowed to delete configurations in [Trash](/components/#delete-configuration) by 
 selecting **Full Access** for Trash. This is rarely needed.
 
-## Refreshing a Token
+## Refreshing Token
 Every token can be **refreshed**: a new token value (token string) is generated, and the old token becomes 
 immediately invalid. That means you have to update all places where the token was used. If you 
 invalidate your own master token, you have to reload your Keboola Connection view in the browser.
@@ -146,7 +146,7 @@ A new token is generated. Now you can copy it or send it to someone.
 {: .image-popup}
 ![Screenshot - Refresh Token Done](/management/project/tokens/refresh-token-done.png)
 
-## Sharing a Token
+## Sharing Token
 An existing token can be shared to an arbitrary email address (including yours). You can
 share a token by clicking the **Send token** button. Note that master tokens cannot be shared. 
 
@@ -177,13 +177,13 @@ or [other APIs](https://developers.keboola.com/overview/api/).
 
 ### Storage Console
 Typical usecase of sharing a token with someone is giving them a partial access to your project storage. The 
-project can be accessed via a **Storage API Console**. All that it needed to enter the console is 
+project can be accessed via a **Storage API Console**. All that is needed to enter the console is 
 a valid Token.
 
 {: .image-popup}
 ![Screenshot - Storage Console Login](/management/project/tokens/storage-console-login.png)
 
-The Storage Console allows some basic operations with the project [Storage](/storage/) -- upload and download tables or files.
+The Storage Console allows some basic operations with the project [Storage](/storage/) such as table or file uploads and downloads.
 
 {: .image-popup}
 ![Screenshot - Storage Console](/management/project/tokens/storage-console.png)

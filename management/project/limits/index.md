@@ -11,7 +11,7 @@ redirect_from:
 Each Keboola Connection project has two kinds of limits:  
 
 1. **Business limits** are set in your contract and define the business usage of our platform. 
-This can be seen as the **size** of your project. Exceeding them will earn you a call from us, 
+This can be seen as the **size** of your project. Exceeding them will earn you a call from us 
 and a possible contract update conversation. 
 
 2. **Platform limits** represent what our platform is **technically capable of**. Reaching or exceeding 
@@ -34,7 +34,7 @@ Business limits vary based on your contract (refer to it to see which ones apply
 - **Storage rows** --- the sum of all rows in all tables in [Storage](/storage/); 
 [Aliases](/storage/tables/#aliases) and [Linked Buckets](/catalog/) do 
 not count towards this number.
-- **Users count** --- the number of [project Users](/management/project/users).
+- **Users count** --- the number of [project users](/management/project/users).
 [Keboola Support Users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [Tokens](/management/project/tokens). Effectively this is the number of project administrators.
 - **Orchestrations count** --- the number of orchestrations (scheduled or not)
@@ -76,8 +76,8 @@ If you use [GoodData BI](https://www.gooddata.com/) provisioned by Keboola, the 
 whether you are using a [demo or a production project](/components/writers/bi-tools/gooddata/). The demo project is provided free of charge. 
 
 ## Platform Limits
-Apart from the business limits, there are limitations of **what Keboola Connection platform can take**. These limits 
-are either defined by the underlying technologies, or by what we believe is the correct use of the platform. 
+Apart from the business limits, there are limitations to **what the Keboola Connection platform can take**. These limits 
+are either defined by the underlying technologies or by what we believe is the correct use of the platform. 
 The technical platform limits are **non-negotiable** and **cannot be upgraded** by updating the contract. 
 Nonetheless, we certainly would like to hear if you hit them. 
 

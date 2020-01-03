@@ -89,7 +89,7 @@ Go to Keboola Connection and select **Users & Settings**. In the **Settings** ta
 {: .image-popup}
 ![Screenshot - Data Takeout](/management/project/export/data-takeout-project-settings.png)
 
-Now fill the *Access Key ID*, *Secret Access Key*, *S3 Region* and *S3 Bucket name*:
+Now fill in the *Access Key ID*, *Secret Access Key*, *S3 Region*, and the *S3 Bucket name*:
 
 {: .image-popup}
 ![Screenshot - Data Takeout](/management/project/export/data-takeout-settings.png)
@@ -116,7 +116,7 @@ Table aliases are not exported.
 - `configurations.json` --- all components used in the project and *main properties* of their configurations
 - `/in/`, `/out/` and `/sys/` folders --- all project tables in the CSV format (compressed with
 [gzip](http://www.gzip.org/)). **Important**: `sys` tables contain only configuration of older components and may not be present in your project.
-- /configurations/ --- all configurations created in the project organized by component names into folder.
+- /configurations/ --- all configurations created in the project organized by component names into a folder.
 Each configuration lists *all properties* (including configuration rows) and *all versions* of each configuration.
 These also contain definitions of all your transformation queries.
 

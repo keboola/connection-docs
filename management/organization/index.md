@@ -8,16 +8,16 @@ permalink: /management/organization/
 
 Keboola Connection projects are grouped into **organizations**. Each organization is assigned to a **maintainer** (either Keboola or
 Keboola Partner), who is also primarily responsible for L1 support unless agreed otherwise.
-[Keboola Connection projects](/management/#project-status), organizations
+[Keboola Connection projects](/management/#project-status), organizations,
 and maintainers are therefore organized into a hierarchy:
 
 {: .image-popup}
 ![Screenshot - Project Hierarchy](/management/organization/organizations-maintainers.png)
 
-Although projects, organizations and maintainers form a hierarchy, their users do not. Each unit has a completely
+Although projects, organizations, and maintainers form a hierarchy, their users do not. Each unit has a completely
 independent set of users. That means organization users are not automatically users of the projects
 within organizations and -- vice-versa -- project users are not automatically users of the organization.
-This distinction is important, for example when [sharing buckets](/catalog/#sharing-types).
+This distinction is important, for example, when [sharing buckets](/catalog/#sharing-types).
 
 Depending on your contract details and permissions, the `Organizations` feature may or may not be available to you.
 
@@ -54,7 +54,7 @@ Apart from adding and removing other members, each organization member is also a
 - View and edit billing details.
 - Manage [shared buckets](/catalog/#sharing-types).
 - Create [new projects](#manage-projects).
-- Change [organization settings](#organization-settings)
+- Change [organization settings](#organization-settings).
 - Allow [Keboola Support](/management/support/#require-approval-for-support-access) to join your projects.
 
 ## Manage Projects
@@ -85,10 +85,10 @@ The description for support access will reflect the current setting.
 ![Screenshot -- Auto Join Off](/management/organization/organization-6.png)
 
 ### Require MFA
-It is possible to set [Multi-factor Authentication](/management/account/#multi-factor-authentication) requirement
-for all projects in the organization. When MFA is required for entire organization, users without MFA enabled
+It is possible to set the [Multi-factor Authentication](/management/account/#multi-factor-authentication) (MFA) requirement
+for all projects in the organization. When MFA is required for an entire organization, users without MFA enabled
 can still log in to Keboola Connection, but they cannot access any projects in the organization. The list of users
-without MFA is shown when enabling MFA requirement for entire organization.
+without MFA is shown when enabling the MFA requirement for the entire organization.
 
 {: .image-popup}
 ![Screenshot -- Require MFA](/management/organization/organization-7.png)

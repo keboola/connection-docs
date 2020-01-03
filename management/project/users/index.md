@@ -115,7 +115,7 @@ Once the invitation is accepted, the user becomes a member of the project:
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
-## Removing a User
+## Removing User
 You may remove a user from a project by clicking the **Remove** button in the user list.
 The user will receive a notification email about being removed from the project.
 The removal is effective immediately. Any following operations will
@@ -127,15 +127,15 @@ You can also leave a project voluntarily by pressing the **Leave** button.
 **Important:** However, you will not be able to re-join the project unless
 someone invites you again or unless you are a member of the project [organization](/management/organization/).
 
-## Who Can Access a Project
+## Who Can Access Project
 It is important to understand the concept of [organizations](/management/organization/) to asses what persons might be able to
 access a specific project. For a quick overview, here is a complete list of persons able to access a given project:
 
 - Active users of the project (listed on the *Users* tab of the *Settings* page)
 - Users invited to the project (listed on the *Users* tab of the *Settings* page with the note **Invited**)
 - Users of the [organization](/management/organization/) to which the project belongs
-- Users of the [maintainer](/management/organization/) to which the project organization belongs, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
-- Keboola support staff, provided that [**Auto join**](/management/support/#require-approval-for-support-access) is **enabled**
+- Users of the [maintainer](/management/organization/) to which the project organization belongs, provided that [**Auto Join**](/management/support/#require-approval-for-support-access) is **enabled**
+- Keboola support staff, provided that [**Auto Join**](/management/support/#require-approval-for-support-access) is **enabled**
 
 No other user can enter the project. If Auto Join is disabled, maintainer users and Keboola Support staff can
 see the name of the project and request access which must be approved by a current member of the project.
