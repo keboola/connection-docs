@@ -15,17 +15,17 @@ from [Pipedrive](https://www.pipedrive.com/en-gb).
 [Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** extractor.
 
 To configure this extractor, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
-Then enter your **company domain** (if your Pipedrive is at https://keboola.pipedrive.com, than your company domain is **keboola**).
+Then enter your **company domain** (if your Pipedrive is at https://keboola.pipedrive.com, your company domain is **keboola**).
 
 {: .image-popup}
 ![Screenshot - Pipedrive configuration](/components/extractors/marketing-sales/pipedrive/pipedrive-1.png)
 
 To configure what data you want to extract, select one of the configuration templates. 
-Available templates are:
+There are two templates available:
 
 - **Basic** -- downloads organizations, persons, users, pipelines, activities, stages, etc.
 - **Extended** -- downloads also deals and additional fields to the above.
 
-When done, **Save** the configuration. You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+When done, **save** the configuration. You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
 
-**Important:** Data are always imported incrementally.
+**Important:** Data is always imported incrementally.

@@ -74,13 +74,13 @@ The last fetched value is displayed in the configuration:
 ![Screenshot - Incremental Fetching](/components/extractors/database/incremental-fetching-2.png)
 
 The rows are fetched from the source table including the last fetched value. Therefore it is
-ideal to have the ordering column set as primary key so that you don't receive duplicated rows in 
+ideal to have the ordering column set as a primary key so that you don't receive duplicated rows in 
 the Storage table. In case you need to fetch the entire table, you can clear the stored value.
 
 This incremental fetching feature is related to [**Incremental Loading**](/storage/tables/#incremental-loading).
 While not required, it is recommended to turn on incremental loading when fetching data incrementally, otherwise
-the table in Storage will contain only the newly added rows. This may sound like a good idea when you want to
-process only newly added rows. In that case however, you should be do so using 
+the table in Storage will contain only newly added rows. This may sound like a good idea when you want to
+process only the newly added rows. In that case, however, you should do so using 
 [**Incremental Processing**](/storage/tables/#incremental-processing). The advantage of using incremental processing over 
-having only newly added rows in Storage table is in that the table contains all loaded data and also it is not necessary 
+having only newly added rows in a Storage table is that the table contains all loaded data and it is not necessary 
 to synchronize extraction and processing.
