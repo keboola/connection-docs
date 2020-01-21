@@ -267,9 +267,6 @@ items:
       - url: /storage/jobs/
         title: Jobs
 
-      - url: /storage/documentation/
-        title: Documentation
-
   - url: /orchestrator/
     title: Orchestrations
     items:
