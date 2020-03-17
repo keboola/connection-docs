@@ -29,7 +29,7 @@ This feature is intended to help you 'postpone' the update to a more convenient 
 any problems with the new version. You should update the transformation code to the new version soon, as the old
 version is considered unsupported.
 
-If the `Julia` label is not editable, there is no previous version offered. It is still possible to change the version
+If the `Julia` label is not displayed, there is no previous version offered. It is still possible to change the version
 via the [API](https://developers.keboola.com/integrate/storage/api/configurations/) though.
 
 ### Memory and Processing Constraints
