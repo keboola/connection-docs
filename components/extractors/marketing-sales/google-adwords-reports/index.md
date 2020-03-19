@@ -59,7 +59,8 @@ When running the above configuration, you get three tables in the output bucket:
 `campaigns`, `customers` and `keywords`. Incremental loading is turned on, so on subsequent runs, new rows are appended.
 
 ### Campaigns
-This table is created automatically and contains a list of all campaigns in the used account, for instance:
+This table is created automatically and contains a list of all campaigns (except video campaigns, which are not 
+supported by the [API](https://developers.google.com/adwords/api/docs/reference/v201809/CampaignService)) in the used account, for instance:
 
 | customerId | id        | name        | status  | servingStatus | startDate |
 |------------|-----------|-------------|---------|---------------|-----------|
