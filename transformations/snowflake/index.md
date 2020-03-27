@@ -17,13 +17,14 @@ redirect_from:
 - Amazing processing power and data throughput
 
 ## Limits
-
-- Snowflake queries are **limited** to 900 seconds by default.
+- Snowflake queries are **limited** to 900 seconds by default (unless you use time-based billing).
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
-## Load Type
+Snowflake is a cloud database, which among other things means continuos updates. This means continuous updates and behavioral changes, if you are 
+interested in those changes, please follow the official [Snowflake change log](https://community.snowflake.com/s/article/Pending-Behavior-Change-Log).
 
+## Load Type
 There are two types of loading tables into your workspace. You can select either *Copy Table* or *Clone Table*.
 
 {: .image-popup}
@@ -130,6 +131,82 @@ unquoted table/column identifiers to uppercase, which won't match table/column i
 {% highlight sql %}
 SELECT "barcolumn" FROM "footable";
 {% endhighlight %}
+
+### Working With Data Types
+Storage [Tables](/storage/tables/) store data in character types. When you create a table used on output mapping,
+you can rely on implicit casting to char:
+
+{% highlight sql %}
+CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM TIMESTAMP, NUM NUMERIC);
+
+INSERT INTO "test" (ID, TM, NUM)
+SELECT 'first', CURRENT_TIMESTAMP, 12.5;
+{% endhighlight %}
+
+or you can create the table directly with character columns (and rely on implicit casting to char):
+
+{% highlight sql %}
+CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM VARCHAR, NUM VARCHAR);
+
+INSERT INTO "test" (ID, TM, NUM)
+SELECT 'first', CURRENT_TIMESTAMP, 12.5;
+{% endhighlight %}
+
+or you explicitly cast the columns to char:
+
+{% highlight sql %}
+CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM VARCHAR, NUM VARCHAR);
+
+INSERT INTO "test" (ID, TM, NUM)
+SELECT 
+    TO_CHAR('first'), 
+    TO_CHAR(CURRENT_TIMESTAMP), 
+    TO_CHAR(12.5)
+;
+{% endhighlight %}
+
+When using an [unstructured data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured.html), you 
+always **have to** use the explicit cast:
+
+{% highlight sql %}
+CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM VARCHAR, NUM VARCHAR, OBJ VARCHAR);
+
+INSERT INTO "test" (ID, TM, NUM, OBJ)
+SELECT
+    'first',
+    CURRENT_TIMESTAMP,
+    12.5,
+    TO_CHAR( --  <- required!
+        OBJECT_CONSTRUCT( 
+            'NAME','name',
+            'CIN','123'
+        )
+    )
+;
+{% endhighlight %}
+
+The implicit cast doesn't not work for `ARRAY`, `OBJECT` and `VARIANT` types, so the following code:
+
+{% highlight sql %}
+CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM TIMESTAMP, NUM NUMERIC, OBJ OBJECT);
+
+INSERT INTO "test" (ID, TM, NUM, OBJ)
+SELECT
+    'first',
+    CURRENT_TIMESTAMP,
+    12.5,
+    OBJECT_CONSTRUCT(
+        'NAME','name',
+        'CIN','123'
+    )
+;
+{% endhighlight %}
+
+will lead to an error:
+
+```
+Expression type does not match column data type, expecting VARCHAR(16777216) but got OBJECT for column OBJ, SQL state 22000
+```
 
 ### Timestamp Columns
 By default, Snowflake uses the
