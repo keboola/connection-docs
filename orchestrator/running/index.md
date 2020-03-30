@@ -59,12 +59,29 @@ You can select from two types of scheduling:
  - Event Trigger
 
 ### Time Schedule
-The orchestration schedule is set in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
-so that the orchestration always runs in a single unambiguous point in time. For clarity, the schedule is displayed in your local time.
-Keep in mind that other users may see different schedules. These may even differ throughout the year because of Daylight Saving Time [DST](https://en.wikipedia.org/wiki/Daylight_saving_time).
+
+Orchestration always runs in a single unambiguous point in time. By default, the orchestration
+schedule is set in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
 {: .image-popup}
 ![Screenshot - Orchestration Schedule](/orchestrator/running/schedule.png)
+
+#### Custom Schedule
+
+If you didn't find predefined options useful, you can select custom schedule.
+
+{: .image-popup}
+![Screenshot - Event Trigger](/orchestrator/running/schedule-custom.png)
+
+#### Custom Time Zone
+
+You can also set the specific time zone which will be used for scheduling your orchestration. There
+are always two predefined time zones you can choose: UTC and Your local time zone. Keep in mind that
+other users may see different time zones. If these don't fit your needs, there's an option to select
+custom timezone.
+
+{: .image-popup}
+![Screenshot - Event Trigger](/orchestrator/running/time-zone.png)
 
 Before scheduling an orchestration, be sure to run it first to see what schedule would work best. 
 An orchestration itself is considered a component configuration and it will [not run in parallel](/management/jobs/). 
@@ -74,6 +91,7 @@ if your orchestration runs for one hour and you schedule it to run every 30 minu
 only once in an hour. Plus, you'll also clog the project with waiting jobs.
 
 ### Event Trigger
+
 Instead of setting your orchestration execution for an exact time, you can wait for selected tables to be updated and 
 run the orchestration after it happens.
 
