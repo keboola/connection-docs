@@ -38,10 +38,10 @@ not count towards this number.
 [Keboola Support Users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [Tokens](/management/project/tokens). Effectively this is the number of project administrators.
 - **Orchestrations count** --- the number of orchestrations (scheduled or not)
-- **Project Power** --- [Volume Credits](#project-power-----volume-credits) and [Time Credits](#project-power-----time-credits)
+- **Project Power** --- [Volume Credits](#project-power---volume-credits) and [Time Credits](#project-power---time-credits)
 - **Storage size** --- [details below](#storage-size)
 
-### Project Power --- Volume Credits
+### Project Power - Volume Credits
 Project Power is proportional to the sum of the amount of data **consumed** (exported from Storage) and **produced** 
 (imported to Storage) by each component. This means that it does not matter how much data an extractor downloads from 
 the source system. What is important is how much data it **produces** (imports) into your storage (i.e., 
@@ -62,11 +62,11 @@ The **Project Power** tab in **Users & Settings** shows detailed credit consumpt
 {: .image-popup}
 ![Screenshot - Project Power](/management/project/limits/project-power.png)
 
-*Note: Volume Credits are being replaced by the [time credit measurement](#project-power-----time-credits).*
+*Note: Volume Credits are being replaced by the [time credit measurement](#project-power---time-credits).*
 
-### Project Power --- Time Credits
+### Project Power - Time Credits
 Keboola has introduced a new way to measure your consumption. Time Credits will gradually replace the 
-metrics of [Volume Credits](#project-power-----volume-credits). If you are not sure which consumption measurement 
+metrics of [Volume Credits](#project-power---volume-credits). If you are not sure which consumption measurement 
 your subscription is running on, please reach out to your CSM for more information.
 
 Project Power is measured in units. A Project Power Unit is proportional to the sum of the elapsed time of all jobs 
