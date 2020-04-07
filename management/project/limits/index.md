@@ -65,7 +65,7 @@ The **Project Power** tab in **Users & Settings** shows detailed credit consumpt
 *Note: Volume Credits are being replaced by the [time credit measurement](#project-power-----time-credits).*
 
 ### Project Power --- Time Credits
-Recently, Keboola has introduced a new way to measure your consumption. Time Credits will gradually replace the 
+Keboola has introduced a new way to measure your consumption. Time Credits will gradually replace the 
 metrics of [Volume Credits](#project-power-----volume-credits). If you are not sure which consumption measurement 
 your subscription is running on, please reach out to your CSM for more information.
 
