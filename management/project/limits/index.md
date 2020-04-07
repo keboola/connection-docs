@@ -70,14 +70,13 @@ metrics of [Volume Credits](#project-power-----volume-credits). If you are not s
 your subscription is running on, please reach out to your CSM for more information.
 
 Project Power is measured in units. A Project Power Unit is proportional to the sum of the elapsed time of all jobs 
-executed in Keboola Connection. It's measured in seconds and presented in hours (1 hour = 3,600 seconds). 
-Every job consumes a different amount of Project Power Units based on the job's **duration** (length in seconds), **type*** 
-(Sandbox, SQL transformation, Python transformation, etc.), and **backend performance*** (small, medium, and large).
+executed in Keboola Connection (Extractor and Writer component jobs are excluded). It's measured in seconds and presented in hours (1 hour = 3,600 seconds). 
+Every job consumes a different amount of Project Power Units based on the job's **duration** (length in seconds), **type** 
+(Sandbox, SQL transformation, Python transformation, etc.), and **backend performance** (small, medium, and large).
 
-Keboola Connection doesn’t count time on extractors (data in) and writers (data out). These jobs are measured based 
+Keboola Connection doesn’t count time on extractors (data in) and writers (data out). Writer jobs are measured based 
 on data volume.
 
-#### Type of jobs - Time Credits
 Below you will find an overview of time credits consumed by individual Keboola Connection job types. 
 If you need more information, please contact your CSM.
 
