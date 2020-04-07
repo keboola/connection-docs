@@ -38,27 +38,71 @@ not count towards this number.
 [Keboola Support Users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [Tokens](/management/project/tokens). Effectively this is the number of project administrators.
 - **Orchestrations count** --- the number of orchestrations (scheduled or not)
-- **Project Power** --- [details below](#project-power)
+- **Project Power** --- [Volume Credits](#project-power-----volume-credits) and [Time Credits](#project-power-----time-credits)
 - **Storage size** --- [details below](#storage-size)
 
-### Project Power
+### Project Power --- Volume Credits
 Project Power is proportional to the sum of the amount of data **consumed** (exported from Storage) and **produced** 
 (imported to Storage) by each component. This means that it does not matter how much data an extractor downloads from 
 the source system. What is important is how much data it **produces** (imports) into your storage (i.e., 
-when an extractor downloads 1GB of raw data and imports only 200MB of data into a Storage table, the 200MB is counted in Project Power). 
+when an extractor downloads 1GB of raw data and imports only 200MB of data into a Storage table, 
+the 200MB is counted in Project Power). 
 Therefore we are counting only the data that matters to you.
 
 Although proportional to the amount of data, Project Power is measured in **units**. This is because it is
 difficult to define a universally valid size of a piece of data. Roughly 1 PPU (Project Power Unit) is equivalent 
 to 0.5--1GB of data. 
+
 Most of the transfers are efficiently compressed and most of the data **can be** efficiently compressed, which
 makes the ratio more favourable. It is important to say that the same data on the same component will always consume
-the same number of PPUs.
+the same number of PPUs. 
 
 The **Project Power** tab in **Users & Settings** shows detailed credit consumption by days and components:
 
 {: .image-popup}
 ![Screenshot - Project Power](/management/project/limits/project-power.png)
+
+*Note: Volume Credits are being replaced by the [time credit measurement](#project-power-----time-credits).*
+
+### Project Power --- Time Credits
+Recently, Keboola has introduced a new way to measure your consumption. Time Credits will gradually replace the 
+metrics of [Volume Credits](#project-power-----volume-credits). If you are not sure which consumption measurement 
+your subscription is running on, please reach out to your CSM for more information.
+
+Project Power is measured in units. A Project Power Unit is proportional to the sum of the elapsed time of all jobs 
+executed in Keboola Connection. It's measured in seconds and presented in hours (1 hour = 3,600 seconds). 
+Every job consumes a different amount of Project Power Units based on the job's **duration** (length in seconds), **type*** 
+(Sandbox, SQL transformation, Python transformation, etc.), and **backend performance*** (small, medium, and large).
+
+Keboola Connection doesn’t count time on extractors (data in) and writers (data out). These jobs are measured based 
+on data volume.
+
+#### Type of jobs - Time Credits
+Below you will find an overview of time credits consumed by individual Keboola Connection job types. 
+If you need more information, please contact your CSM.
+
+| Types of jobs in Keboola Connection   | Base job                | Time credits          |
+|---------------------------------------|-------------------------|-----------------------|
+| Extractor                             | 1 GB in                 | 0                     |
+| Writer                                | 1 GB out                | 0.2                   |  
+| SQL Sandbox small performance         | 1 hour                  | 6                     |
+| SQL Sandbox medium performance        | 1 hour                  | 12                    |
+| SQL Sandbox large performance         | 1 hour                  | 26                    |
+| SQL Transformation small performance  | 1 hour                  | 6                     |
+| SQL Transformation medium performance | 1 hour                  | 12                    |
+| SQL Transformation large performance  | 1 hour                  | 26                    |
+| DS Sandbox small performance          | 1 hour                  | 1                     |
+| DS Sandbox medium performance         | 1 hour                  | 2                     |
+| DS Sandbox large performance          | 1 hour                  | 6                     |
+| DS Sandbox GPU                        | 1 hour                  | 30                    |
+| DS Transformation small               | 1 hour                  | 1                     |
+| DS Transformation medium              | 1 hour                  | 2                     |
+| DS Transformation large               | 1 hour                  | 6                     |
+| DS Transformation GPU                 | 1 hour                  | 30                    |
+| DWH Direct query small                | 1 hour                  | 8                     |
+| DWH Direct query medium               | 1 hour                  | 16                    |
+| DWH Direct query large                | 1 hour                  | 32                    |
+| AppStore Apps                         | 1 hour                  | 1                     |
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [Table Storage](/storage/). 
