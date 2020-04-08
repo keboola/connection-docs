@@ -83,8 +83,8 @@ a custom time zone.
 {: .image-popup}
 ![Screenshot - Event Trigger](/orchestrator/running/time-zone.png)
 
-Before scheduling an orchestration, be sure to run it first to see what schedule would work best. 
-An orchestration itself is considered a component configuration and it will [not run in parallel](/management/jobs/). 
+Before scheduling an orchestration, be sure to run it first to see what schedule would work best. An orchestration 
+itself is considered a component configuration and it will [not run in parallel](/orchestrator/running/#parallel-jobs). 
 When you trigger an orchestration job while the previous orchestration job is still running (some of the configured tasks), 
 the new job will be [waiting](/management/jobs/#waiting-jobs) until the previous one finishes. This means that 
 if your orchestration runs for one hour and you schedule it to run every 30 minutes, you'll still have your tables updated 
