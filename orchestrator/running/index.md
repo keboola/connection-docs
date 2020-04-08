@@ -68,17 +68,17 @@ schedule is set in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/w
 
 #### Custom Schedule
 
-If you didn't find predefined options useful, you can select custom schedule.
+If you don't find the predefined options useful, select a custom schedule.
 
 {: .image-popup}
 ![Screenshot - Event Trigger](/orchestrator/running/schedule-custom.png)
 
 #### Custom Time Zone
 
-You can also set the specific time zone which will be used for scheduling your orchestration. There
-are always two predefined time zones you can choose: UTC and Your local time zone. Keep in mind that
-other users may see different time zones. If these don't fit your needs, there's an option to select
-custom timezone.
+You can also set a specific time zone to be used for scheduling your orchestration. There
+are always two predefined time zones you can choose from: UTC and your local time zone. Keep in mind that
+other users may see different time zones. If the predefined options don't fit your needs, select 
+a custom time zone.
 
 {: .image-popup}
 ![Screenshot - Event Trigger](/orchestrator/running/time-zone.png)
