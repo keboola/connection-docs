@@ -33,7 +33,7 @@ Each table has a different setting, but all tables share the same credentials to
 
 ### Specify Files to Download
 For each table, you have to specify a path. Use the path to a specific file, or
-use the glob syntax (for testing the glob path, you can use the [Glob tester](http://www.globtester.com/)).
+use the glob syntax (for testing the glob path, you can use the [Glob tester](https://www.digitalocean.com/community/tools/glob)).
 If you want to list inside subdirectories (e.g., `/dir/**/*.csv`), please make sure that your FTP server
 supports a recursive list of directories.
 
