@@ -21,7 +21,7 @@ redirect_from:
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
-Snowflake is a cloud database, which among other things means continuos updates. This means continuous updates and behavioral changes, if you are 
+Snowflake is a cloud database and as such brings continuous updates and behavioral changes. If you are 
 interested in those changes, please follow the official [Snowflake change log](https://community.snowflake.com/s/article/Pending-Behavior-Change-Log).
 
 ## Load Type
@@ -31,7 +31,7 @@ There are two types of loading tables into your workspace. You can select either
 ![Load Type](/transformations/snowflake/load-type.png)
  
 *Copy Table* is the default option, and it physically copies the table from our Storage to your workspace. 
-Using *Copy Table* allows you to refine the input mapping using various filters.
+This option allows you to refine the input mapping using various filters.
 
 *Clone Table* avoids physical transfer of the data and clones the table from Storage without any processing. 
 
@@ -133,7 +133,7 @@ SELECT "barcolumn" FROM "footable";
 {% endhighlight %}
 
 ### Working With Data Types
-Storage [Tables](/storage/tables/) store data in character types. When you create a table used on output mapping,
+Storage [tables](/storage/tables/) store data in character types. When you create a table used on output mapping,
 you can rely on implicit casting to char:
 
 {% highlight sql %}
@@ -143,7 +143,7 @@ INSERT INTO "test" (ID, TM, NUM)
 SELECT 'first', CURRENT_TIMESTAMP, 12.5;
 {% endhighlight %}
 
-or you can create the table directly with character columns (and rely on implicit casting to char):
+Or, you can create the table directly with character columns (and rely on implicit casting to char):
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM VARCHAR, NUM VARCHAR);
@@ -152,7 +152,7 @@ INSERT INTO "test" (ID, TM, NUM)
 SELECT 'first', CURRENT_TIMESTAMP, 12.5;
 {% endhighlight %}
 
-or you explicitly cast the columns to char:
+You can also explicitly cast the columns to char:
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM VARCHAR, NUM VARCHAR);
@@ -185,7 +185,7 @@ SELECT
 ;
 {% endhighlight %}
 
-The implicit cast doesn't not work for `ARRAY`, `OBJECT` and `VARIANT` types, so the following code:
+The implicit cast does not work for the `ARRAY`, `OBJECT` and `VARIANT` types, so the following code:
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM TIMESTAMP, NUM NUMERIC, OBJ OBJECT);
