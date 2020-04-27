@@ -21,6 +21,9 @@ It is a safe, open and extendable cloud based environment for working with your 
 If you are new to Keboola Connection and want a **brief orientation** to the Keboola ecosystem, please check out our [overview](/overview/), 
 or see our [tutorial](/tutorial/) for some hands-on experience on using Keboola Connection. 
 
+Another great way of familiarizing yourself with Keboola Connection is to watch our short 
+([introductory video](https://www.youtube.com/watch?v=yaA7_N5Ymmc&feature=youtu.be).
+
 If you are already familiar with how Keboola Connection works, go directly 
 to [connection.keboola.com](https://connection.keboola.com) and log in. If your project is not in the default US region, use the
 region selector to choose the appropriate region. 
