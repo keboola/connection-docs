@@ -18,15 +18,12 @@ It is a safe, open and extendable cloud based environment for working with your 
 
 ## Where to Start
 
-If you are new to Keboola Connection and want a **brief orientation** to the Keboola ecosystem, please check out our [overview](/overview/), 
-or see our [tutorial](/tutorial/) for some hands-on experience on using Keboola Connection. 
+If you are new to Keboola Connection and want a **brief orientation** to the Keboola ecosystem, 
+please check out our [overview](/overview/), or watch a short [introductory video](https://www.youtube.com/watch?v=yaA7_N5Ymmc&feature=youtu.be).
+For some hands-on experience, see our [tutorial](/tutorial/). 
 
-Another great way of familiarizing yourself with Keboola Connection is to watch our short 
-([introductory video](https://www.youtube.com/watch?v=yaA7_N5Ymmc&feature=youtu.be).
-
-If you are already familiar with how Keboola Connection works, go directly 
-to [connection.keboola.com](https://connection.keboola.com) and log in. If your project is not in the default US region, use the
-region selector to choose the appropriate region. 
+If you are already familiar with how Keboola Connection works, go directly to [connection.keboola.com](https://connection.keboola.com) 
+and log in. If your project is not in the default US region, use the region selector to choose the appropriate region. 
 
 We are available to provide [support](/management/support/) whenever needed. In case you don't have access 
 to a Keboola Connection project, you can write an email to [support@keboola.com](mailto:support@keboola.com). 
