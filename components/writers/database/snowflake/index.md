@@ -69,12 +69,7 @@ The next step is to configure the tables you want to write. Click **Add New Tabl
 {: .image-popup}
 ![Screenshot - Select Table](/components/writers/database/snowflake/snowflake-4.png)
 
-The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
-
-{: .image-popup}
-![Screenshot - Configure Table](/components/writers/database/snowflake/snowflake-5.png)
-
-Use the **preview** icon to peek at the column contents.
+The next step is to specify table configuration. Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
 ![Screenshot - Table Columns](/components/writers/database/snowflake/snowflake-6.png)
