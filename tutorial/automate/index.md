@@ -104,7 +104,7 @@ By clicking on the edit icon next to **Schedule**, set the orchestration to run
 ![Screenshot - Orchestration Schedule](/tutorial/automate/orchestration-schedule.png)
 
 It is recommended to also set up notifications. 
-Click on the **Configure Notifications** button:
+Click on the **Notifications** edit button:
 
 {: .image-popup}
 ![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-3.png)
