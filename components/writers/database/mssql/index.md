@@ -13,11 +13,7 @@ This writer sends data to a [Microsoft SQL Server](https://www.microsoft.com/en-
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **SQL Server** writer.
 
-The first step is to **Set Up Database Credentials**:
-
-{: .image-popup}
-![Screenshot - Credentials](/components/writers/database/mssql/mssql-1.png)
-
+The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, *database name*, and SQL Server version; optionally, an *instance name* if needed for the connection.
 
 {: .image-popup}
@@ -45,12 +41,7 @@ The next step is to configure the tables to write. Click the **Add new table** b
 {: .image-popup}
 ![Screenshot - Select Table](/components/writers/database/mssql/mssql-3.png)
 
-The next step is to specify table configuration. Click the **Edit Columns** button to configure table columns:
-
-{: .image-popup}
-![Screenshot - Configure Table](/components/writers/database/mssql/mssql-4.png)
-
-Use the **preview** icon to peek at the column contents.
+The next step is to specify table configuration. Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
 ![Screenshot - Table Columns](/components/writers/database/mssql/mssql-5.png)

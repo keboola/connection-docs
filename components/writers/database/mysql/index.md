@@ -14,11 +14,7 @@ This writer sends data to a [MySQL](https://www.mysql.com/products/) or [MariaDB
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **MySQL** writer.
 
-The first step is to **Set Up Database Credentials**:
-
-{: .image-popup}
-![Screenshot - Main page](/components/writers/database/mysql/mysql-1.png)
-
+The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
 
 {: .image-popup}
@@ -41,12 +37,7 @@ The next step is to configure the tables you want to write. Click **Add New Tabl
 {: .image-popup}
 ![Screenshot - Select Table](/components/writers/database/mysql/mysql-3.png)
 
-Then specify table configuration. Click the **Edit Columns** button to configure the table columns:
-
-{: .image-popup}
-![Screenshot - Configure Table](/components/writers/database/mysql/mysql-4.png)
-
-Use the **preview** icon to peek at the column contents.
+Then specify table configuration. Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
 ![Screenshot - Table Columns](/components/writers/database/mysql/mysql-5.png)

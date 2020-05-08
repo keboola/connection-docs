@@ -85,19 +85,14 @@ Select the table `out.c-opportunity.opportunity_denorm` and click **Add Table**:
 ![Screenshot - Select table](/tutorial/write/tableau-select-table-2.png)
 
 In the next step, you can specify properties of the columns in the target database, like `Name` and `Data Type`.
-Use the preview column to peek at the column data. Click the **Edit Columns** button to change settings.
-
-{: .image-popup}
-![Screenshot - Snowflake View Columns](/tutorial/write/snowflake-columns.png)
-
-Most columns in the `opportunity_denorm` table are strings (characters). Start 
-with `Set All Types to:` and select `string` to set them quickly. 
+Use the preview column to peek at the column data. Most columns in the `opportunity_denorm` table are strings (characters).
+Start with `Set All Columns to:` and select `string` to set them quickly. 
 Then **Preview** the content of each column and set its type accordingly.
 For the purpose of this tutorial, it is enough to set the *Amount* column to the type `number`.
 Don't forget to **Save** the settings.
 
 {: .image-popup}
-![Screenshot - Snowflake Edit Columns](/tutorial/write/snowflake-columns-2.png)
+![Screenshot - Snowflake Edit Columns](/tutorial/write/snowflake-columns.png)
 
 When done, go back to the configuration and click on **Run Component** to write the 
 data to the provisioned database.

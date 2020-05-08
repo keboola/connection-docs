@@ -26,12 +26,7 @@ The next step is to configure the tables you want to write. Click the **Add New 
 {: .image-popup}
 ![Screenshot - Select Table](/components/writers/bi-tools/thoughtspot/thoughtspot-2.png)
 
-The next step is to specify table configuration. Click the **Edit Columns** button to configure the table columns:
-
-{: .image-popup}
-![Screenshot - Configure Table](/components/writers/bi-tools/thoughtspot/thoughtspot-3.png)
-
-Use the **preview** icon to peek at the column contents.
+The next step is to specify table configuration. Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
 ![Screenshot - Table Columns](/components/writers/bi-tools/thoughtspot/thoughtspot-4.png)
