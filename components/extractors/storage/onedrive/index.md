@@ -57,7 +57,7 @@ The worksheet is specified by **Worksheet ID**. It is automatically filled in.
 **Worksheet Name** is for your information only and its change doesn't affect functionality.
 
 {: .image-popup}
-![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-08.png)
+![Screenshot - Save](/components/extractors/storage/onedrive/onedrive-08.png)
 
 Output **Table Name** is automatically filled in with worksheet name.  
 You can manually change it to suit your needs.
