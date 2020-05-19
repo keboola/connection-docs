@@ -228,6 +228,9 @@ items:
               - url: /components/writers/storage/google-sheets/
                 title: Google Sheets
 
+              - url: /components/writers/storage/onedrive/
+                title: OneDrive
+
               - url: /components/writers/storage/storage-api/
                 title: Keboola Connection Storage
 
