@@ -6,10 +6,14 @@ permalink: /components/extractors/storage/onedrive/
 * TOC
 {:toc}
 
-This extractor loads Excel sheets from Microsoft OneDrive and stores them as tables in a bucket in your
-current project.
+This extractor loads Excel sheets from 
+**[Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)**
+and stores them as tables in a bucket in your current project.
 
-**Microsoft OneDrive** cloud storage integrates **Ofice365** and **SharePoint** sites, 
+**[Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)**
+cloud storage integrates
+**[Office365](https://www.office.com/)**
+and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)** sites,
 so with this extractor you have access to all your Excel sheets on your personal or business account.
 
 ## Configuration
