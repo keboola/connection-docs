@@ -6,9 +6,13 @@ permalink: /components/writers/storage/onedrive/
 * TOC
 {:toc}
 
-This writer exports tables from your Storage tables as Excel sheets to Microsoft OneDrive.
+This writer exports tables from your [Storage tables](/storage/tables) as Excel sheets to 
+[Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage).
 
-**Microsoft OneDrive** cloud storage integrates **Ofice365** and **SharePoint** sites, 
+**[Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)**
+cloud storage integrates
+**[Office365](https://www.office.com/)**
+and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)** sites,
 so with this writer you can write to any Excel sheet on your personal or business account.
 
 The contents of the sheet can be overwritten or new lines can be added at the end.
