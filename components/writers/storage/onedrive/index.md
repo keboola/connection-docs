@@ -6,7 +6,7 @@ permalink: /components/writers/storage/onedrive/
 * TOC
 {:toc}
 
-This writer exports tables from your buckets as Excel sheets to Microsoft OneDrive.
+This writer exports tables from your Storage tables as Excel sheets to Microsoft OneDrive.
 
 **Microsoft OneDrive** cloud storage integrates **Ofice365** and **SharePoint** sites, 
 so with this writer you can write to any Excel sheet on your personal or business account.
@@ -34,7 +34,7 @@ Alternatively, you can [Create a new workbook](#create-a-new-workbook).
 {: .image-popup}
 ![Screenshot - Use file picker](/components/writers/storage/onedrive/onedrive-03.png)
 
-Go through the list and select file. Click **Open** to confirm the file you want to import.
+Go through the list and select file. Click **Open** to confirm the file you want to write to.
 
 {: .image-popup}
 ![Screenshot - Select file](/components/writers/storage/onedrive/onedrive-04.png)
@@ -60,7 +60,7 @@ The worksheet is specified by **Worksheet ID**. It is automatically filled in.
 **Worksheet Name** is for your information only and its change doesn't affect functionality.
 
 You can check **Append** checkbox to append new rows after the existing ones,  
-otherwise will be content of the worksheet overwritten.
+otherwise the contents of the worksheet will be overwritten.
 
 {: .image-popup}
 ![Screenshot - Select worksheet](/components/writers/storage/onedrive/onedrive-08.png)
