@@ -10,7 +10,7 @@ The following extractors allow access to data from generic storage services:
 
 - [AWS S3](/components/extractors/storage/aws-s3) --- imports CSV files from multiple AWS S3 buckets into multiple tables with additional postprocessing.
 - [GoogleDrive](/components/extractors/storage/google-drive/) --- imports data from Google Drive sheets (also part of the [Tutorial](/tutorial/load/googledrive/)).
-- [OneDrive](/components/extractors/storage/onedrive/) --- imports data from OneDrive Excel sheets
+- [OneDrive](/components/extractors/storage/onedrive/) --- imports data from OneDrive Excel sheets.
 - [FTP](/components/extractors/storage/ftp) --- imports CSV files from the FTP, FTPS, and SFTP servers.
 - [HTTP](/components/extractors/storage/http/) --- imports CSV files stored on HTTP or HTTPS.
 - [Keboola Connection Storage](/components/extractors/storage/storage-api/) --- loads single or multiple tables from a Keboola Connection project and

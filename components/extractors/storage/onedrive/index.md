@@ -14,7 +14,7 @@ and stores them as tables in a bucket in your current project.
 cloud storage integrates
 **[Office365](https://www.office.com/)**
 and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)** sites,
-so with this extractor you have access to all your Excel sheets on your personal or business account.
+so with this extractor, you have access to all your Excel sheets in your personal account or in your business account.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Excel Sheets** extractor.  
@@ -25,47 +25,46 @@ Click **Add Table** to configure extraction.
 {: .image-popup}
 ![Screenshot - Empty configuration](/components/extractors/storage/onedrive/onedrive-01.png)
 
-Fill the **Name** and optionally the **Description**. Then click to **Add table**.  
+Fill in the **name** and, optionally, the **description**. Then click **Add Table**.  
 These values will help you easily identify the extraction later.
 
 {: .image-popup}
 ![Screenshot - Add table popup](/components/extractors/storage/onedrive/onedrive-02.png)
 
-**Use file picker** to list accessible Excel files - workbooks.
+**Use the file picker** to list accessible Excel files -- workbooks.
 
 {: .image-popup}
 ![Screenshot - Use file picker](/components/extractors/storage/onedrive/onedrive-03.png)
 
-Go through the list and select file. Click **Open** to confirm the file you want to import.
+Go through the list and select a file. Click **Open** to confirm the file you want to import.
 
 {: .image-popup}
 ![Screenshot - Select file](/components/extractors/storage/onedrive/onedrive-04.png)
 
-The file is specified by **Drive ID** and **File ID**. They are automatically filled in.   
-**File Name** is for your information only and its change doesn't affect functionality.
+The file is specified by a **Drive ID** and by a **File ID**. They are automatically filled in.   
+The **file name** is for your information only and changing it doesn't affect functionality.
 
 {: .image-popup}
 ![Screenshot - Workbook config](/components/extractors/storage/onedrive/onedrive-05.png)
 
-Click **Load worksheets** to select worksheet from the workbook configured in the previous step.
+Click **Load Worksheets** to select a worksheet from the workbook you configured in the previous step.
 
 {: .image-popup}
 ![Screenshot - Empty worksheet config](/components/extractors/storage/onedrive/onedrive-06.png)
 
-In the list that appeared, **click to the name** of the worksheet you want to import.
+In the list that appeared, **click on the name** of the worksheet you want to import.
 
 {: .image-popup}
 ![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-07.png)
 
-The worksheet is specified by **Worksheet ID**. It is automatically filled in.   
-**Worksheet Name** is for your information only and its change doesn't affect functionality.
+The worksheet is specified by a **Worksheet ID**. It is automatically filled in.   
+The **worksheet name** is for your information only and changing it doesn't affect functionality.
 
 {: .image-popup}
 ![Screenshot - Save](/components/extractors/storage/onedrive/onedrive-08.png)
 
-Output **Table Name** is automatically filled in with worksheet name.  
-You can manually change it to suit your needs.
-If the table doesn't exist, it will be created. 
+The output **table name** is automatically filled in with the worksheet name.  
+You can manually change it to suit your needs. If the table doesn't exist, it will be created. 
 
 {: .image-popup}
 ![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-09.png)
@@ -83,8 +82,8 @@ Configured tables are stored as [configuration rows](/components/#configuration-
 {: .image-popup}
 ![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-11.png)
 
-Each table has a different setting, but all tables share the same authorization to OneDrive account.
+Each table has a different setting, but all tables share the same authorization to your OneDrive account.
 
-The list shows the row name, and the destination table in [Storage](/storage/).
+The list shows the row name and the destination table in [Storage](/storage/).
 
-You can **click to the row to modify** the configuration.
+You can **click on the row to modify** the configuration.
