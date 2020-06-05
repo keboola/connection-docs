@@ -113,7 +113,7 @@ If you need more information, please contact your CSM.
 | SMALL DS                              | r5d.large (16 GB RAM, 2 CPU cores, 75 GB SSD)   |
 | MEDIUM DS                             | r5d.xlarge (32 GB RAM, 4 CPU cores, 150 GB SSD) |
 | LARGE DS                              | r5d.4xlarge (128 GB RAM, 16 CPU cores, 2x300 GB SSD)|
-| DS GPU                                | p3.8xlarge (244 GB RAM, 64 GB GPI-J memory, 4x TeslaV1OO 32 CPU cores, 2x500GB SSD)|
+| DS GPU                                | p3.8xlarge (244 GB RAM, 64 GB GPI-J memory, 4x TeslaV1OO 32 CPU cores, 2x500 GB SSD)|
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [Table Storage](/storage/). 
