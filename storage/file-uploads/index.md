@@ -29,7 +29,7 @@ separating individual tags by pressing Enter. The tags can be used for filtering
 **Important:** The name of an uploaded file does not have to be unique because
 files are identified by their ID assigned on upload.
 
-To avoid files being automatically deleted after 180 days (by default) and to keep them permanently,
+To avoid files being automatically deleted after 15 days (by default) and to keep them permanently,
 do not forget to tick the respective checkbox.
 
 Also by default, uploaded files are marked as *non-public*. They are available only to the project
@@ -49,7 +49,7 @@ For each file in Files, you can
 ## File Links
 If you copy a link of a non-public file, you will obtain a URL in the following format:
 
-    https://s3.amazonaws.com/kbc-sapi-files/exp-180/1134/files/2016/06/12/191341241.private.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160617%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160617T174909Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=30007ae706388816aaf3bd9ad585d9a30df6ab50dcc126881efbe6423ef57909
+    https://s3.amazonaws.com/kbc-sapi-files/exp-15/1134/files/2016/06/12/191341241.private.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160617%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160617T174909Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=30007ae706388816aaf3bd9ad585d9a30df6ab50dcc126881efbe6423ef57909
 
 Such a URL is valid for only one hour from the time of its generation --- the time when the File upload list 
 was shown to you, not when you clicked the link.
@@ -61,9 +61,9 @@ or guess the link themselves.
 
 If you copy a link to a public file, you will obtain a URL in the following format:
 
-    https://s3.amazonaws.com/kbc-sapi-files/exp-180/1134/files/2016/06/17/192119408.public.csv
+    https://s3.amazonaws.com/kbc-sapi-files/exp-15/1134/files/2016/06/17/192119408.public.csv
 
-Such a URL is valid for the entire validity of the file itself (either 180 days or forever).
+Such a URL is valid for the entire validity of the file itself (either 15 days or forever).
 
 In some cases, the file may be **sliced**. When you encounter a *sliced file*, you will 
 obtain a [JSON](https://en.wikipedia.org/wiki/JSON) manifest file instead of the actual file. 
@@ -78,7 +78,7 @@ If you need to upload a larger file, you need to use
 [sliced upload](https://keboola.docs.apiary.io/#reference/files). 
 In that case, the limit applies to the chunk size.
 
-As stated above, unless marked as permanent, each file is automatically deleted 180 days after it has been created. 
+As stated above, unless marked as permanent, each file is automatically deleted 15 days after it has been created. 
 This also applies to automatically generated files as a result of table imports and exports. 
 Also, because the majority of Keboola Connection File Storage contains duplicates of your table data, 
 the whole Files storage does not count towards your project quota.
