@@ -35,7 +35,7 @@ This option allows you to refine the input mapping using various filters.
 
 *Clone Table* avoids physical transfer of the data and clones the table from Storage without any processing.
 
-*Clone Table* is pre-selected if the selected table is bigger that 100 MB.
+*Clone Table* is pre-selected if the selected table is bigger than 100 MB.
 
 ### Clone Table
 
