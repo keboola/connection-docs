@@ -93,6 +93,7 @@ Enables [MySQL Network Compression](https://dev.mysql.com/doc/refman/5.7/en/grou
 of this feature are quite well discussed on [StackOverflow](https://stackoverflow.com/questions/2506460/when-should-i-use-mysql-compressed-protocol).
 
 ### MS SQL Server Advanced Mode
+
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
 For this reason, if you are writing advanced mode queries you have to quote the values of non-numeric columns (text, datetime, etc.) --- so that the selected
 value is `"some text"` instead of `some text`. This can be done by e.g. `SELECT char(34) + [my_text_column] + char(34)`.
@@ -107,6 +108,22 @@ SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + 
 The extractor will still work if you don't do these things, but the BCP will fail and the backup, a much slower method
 will be used. In that case the message `BCP command failed: ... Attempting export using pdo_sqlsrv` will be logged in the extraction
 job events.
+
+#### Null characters
+
+You can remove null characters (`\u0000`) from text by using `REPLACE` function
+`REPLACE([column_name] COLLATE Latin1_General_BIN, char(0), '')`.
+
+In the context of previous example, the query will look like:
+
+{% highlight sql %}
+SELECT char(34) + REPLACE(
+  REPLACE([column_name] COLLATE Latin1_General_BIN, char(0), ''),
+  char(34),
+  char(34) + char(34)
+) + char(34)
+FROM [my_table]
+{% endhighlight %}
 
 ### Azure-Hosted MS SQL Server
 An SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.windows.net`.
