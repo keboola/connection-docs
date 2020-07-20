@@ -35,7 +35,7 @@ This option allows you to refine the input mapping using various filters.
 
 *Clone Table* avoids physical transfer of the data and clones the table from Storage without any processing.
 
-*Clone Table* is pre-selected if selected table is bigger that 100MB.
+*Clone Table* is pre-selected if the selected table is bigger that 100 MB.
 
 ### Clone Table
 
@@ -48,7 +48,7 @@ As the `CLONE` command has no further options, all other input mapping options w
 `Clone Table` is useful when 
 
  - your table is very large and the *Copy Table* load type is slow.
- - you need more complex input mapping filters (e.g. filtering using a range).
+ - you need more complex input mapping filters (e.g., filtering using a range).
 
 #### Performance
 
