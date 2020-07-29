@@ -35,14 +35,14 @@ After testing the credentials, **Save** them:
 {: .image-popup}
 ![Screenshot - Configure Credentials](/components/extractors/database/sqldb/sqldb-2.png)
 
-After saving the credentials, the extractor will automatically fetch the list of database tables accessible by the provided credentials.
+After you save the credentials, the extractor will automatically fetch the list of all database tables accessible by the provided credentials.
 Select the tables you want to extract and click the **Create** button:
 
 {: .image-popup}
 ![Screenshot - Select Tables](/components/extractors/database/sqldb/sqldb-3.png)
 
 You can modify the configured tables by clicking on the appropriate row, or add new tables via the **New Table** button.
-Each table may be also extracted individually, or it may be disabled so that it is not extracted when the entire configuration is run.
+Each table may also be extracted individually, or it may be disabled so that it is not extracted when the entire configuration is run.
 Existing credentials can be changed using the **Database Credentials** link.
 
 {: .image-popup}
@@ -54,22 +54,22 @@ If you want to modify the table extraction setup, click on the corresponding row
 {: .image-popup}
 ![Screenshot - Table Detail](/components/extractors/database/sqldb/sqldb-5.png)
 
-Here you can modify the source table, limit the extraction to specific columns or change the destination table name in
-[Storage](/storage/). The table details also allows you to define [**Primary Key**](/storage/tables/#primary-keys)
+Here you can modify the source table, limit the extraction to specific columns, or change the destination table name in
+[Storage](/storage/). The table detail also allows you to define [**Primary Key**](/storage/tables/#primary-keys)
 and [**Incremental Loading**](/storage/tables/#incremental-loading).
 We highly recommend you define a **primary key** where possible. [Primary keys](/storage/tables/#primary-keys) substantially
-speed up both the data loads and further processing of the table. Also
-use [incremental loading](/storage/tables/#incremental-loading) when possible --- again that speeds up the data loads considerably.
+speed up both the data loads and further processing of the table. Also,
+use [incremental loading](/storage/tables/#incremental-loading) when possible --- again, that speeds up the data loads considerably.
 Both options require knowledge of the source table, so don't turn them on blindly.
 
 ### Advanced Mode
-The table detail also allows you to switch to **Advanced mode**:
+The table detail also allows you to switch to the **Advanced mode**:
 
 {: .image-popup}
 ![Screenshot - Table Detail Advanced](/components/extractors/database/sqldb/sqldb-6.png)
 
-In advanced mode, you can write an arbitrary `SELECT` query. Its result will be imported to a
-[Storage](/storage/) table. The SQL query is executed on the source server without any processing, that means that
+In the advanced mode, you can write an arbitrary `SELECT` query. Its result will be imported to a
+[Storage](/storage/) table. The SQL query is executed on the source server without any processing. That means that
 you have to follow the SQL dialect of the particular server you're working with.
 Please keep the following in mind when using the advanced mode:
 
@@ -89,32 +89,31 @@ The MySQL database server also supports encrypting the whole database communicat
 [official guide](https://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) for instructions on setting it up.
 
 ### MySQL Network Compression
-Enables [MySQL Network Compression](https://dev.mysql.com/doc/refman/5.7/en/group-replication-message-compression.html). Pros and cons
+The MySQL database server enables [MySQL Network Compression](https://dev.mysql.com/doc/refman/5.7/en/group-replication-message-compression.html). Pros and cons
 of this feature are quite well discussed on [StackOverflow](https://stackoverflow.com/questions/2506460/when-should-i-use-mysql-compressed-protocol).
 
 ### MS SQL Server Advanced Mode
-
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
-For this reason, if you are writing advanced mode queries you have to quote the values of non-numeric columns (text, datetime, etc.) --- so that the selected
-value is `"some text"` instead of `some text`. This can be done by e.g. `SELECT char(34) + [my_text_column] + char(34)`.
+For this reason, if you are writing advanced mode queries, you have to quote the values of non-numeric columns (text, datetime, etc.), so that the selected
+value is `"some text"` instead of `some text`. This can be done by, e.g., `SELECT char(34) + [my_text_column] + char(34)`.
 The [`CHAR`](https://docs.microsoft.com/en-us/sql/t-sql/functions/char-transact-sql?view=sql-server-2017) function with argument `34` produces
 the double quote character `"`.
-When the extracted text itself may contain quotes, you need to escape them by replacing `"` with `""`. Full example:
+When the extracted text itself may contain quotes, you need to escape them by replacing `"` with `""`. A full example:
 
 {% highlight sql %}
 SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM [my_table]
 {% endhighlight %}
 
-The extractor will still work if you don't do these things, but the BCP will fail and the backup, a much slower method
-will be used. In that case the message `BCP command failed: ... Attempting export using pdo_sqlsrv` will be logged in the extraction
+The extractor will still work if you don't do these things, but the BCP will fail, and the backup, a much slower method,
+will be used. In that case, the message `BCP command failed: ... Attempting export using pdo_sqlsrv` will be logged in the extraction
 job events.
 
 #### Null characters
 
-You can remove null characters (`\u0000`) from text by using `REPLACE` function
+You can remove null characters (`\u0000`) from text by using the `REPLACE` function
 `REPLACE([column_name] COLLATE Latin1_General_BIN, char(0), '')`.
 
-In the context of previous example, the query will look like:
+In the context of the previous example, the query will look like this:
 
 {% highlight sql %}
 SELECT char(34) + REPLACE(
@@ -126,14 +125,14 @@ FROM [my_table]
 {% endhighlight %}
 
 ### Azure-Hosted MS SQL Server
-An SQL Server instance hosted on Azure will normally have a host name such as `[srvName].databases.windows.net`.
-If the hostname is provided as an IP address, for example, `123.123.123.123`, the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
+An SQL Server instance hosted on Azure will normally have a hostname, such as `[srvName].databases.windows.net`.
+If the host name is provided as an IP address, for example, `123.123.123.123`, the username needs to have the suffix `@[srvName]` as in, for example, `keboola@srvKeboola`.
 
 ### Snowflake
-When extracting data from a Snowflake database, the permissions must be set to allow the
+When extracting data from a Snowflake database, permissions must be set to allow the
 specified user to use the specified warehouse.
 
-The following SQL code creates the role and user `KEBOOLA_SNOWFLAKE_EXTRACTOR` and grants them access
+The following SQL code creates the role and the user `KEBOOLA_SNOWFLAKE_EXTRACTOR` and grants them access
 to the warehouse `MY_WAREHOUSE`, the database `MY_DATA`, and the schema `MY_SCHEMA`.
 
 {% highlight sql %}
