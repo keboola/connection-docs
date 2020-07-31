@@ -21,7 +21,7 @@ All applications are **implemented as [components](https://developers.keboola.co
 and as such can be completely created by 3rd party developers. 
 You can even create your own application. 
 Applications can be created either for a particular end-user, or they may be offered 
-to all Keboola Connection customers; in that case they have to be registered in Keboola Connection App Store.
+to all Keboola Connection customers; in that case they have to be registered in Keboola Connection [Developer Portal](https://components.keboola.com/).
 
 Applications may
 
