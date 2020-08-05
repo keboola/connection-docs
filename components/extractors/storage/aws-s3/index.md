@@ -17,12 +17,14 @@ you save them to KBC Storage. You also need to set up the proper permissions on 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** extractor.
 
-In order to access the files in S3, you need to set up AWS credentials.
+In order to access the files in S3, you need to set up AWS credentials or create AWS role.
+
+### Configuration with AWS credentials
 
 {: .image-popup}
 ![Screenshot - AWS Credentials](/components/extractors/storage/aws-s3/aws-s3-1.png)
 
-Use the AWS Access Key ID and the Secret Access Key with read permissions to the desired S3 bucket(s) and file(s).
+Select `Login type` option `credentials`. Use the AWS Access Key ID and the Secret Access Key with read permissions to the desired S3 bucket(s) and file(s).
 Make sure this AWS Access Key ID has the correct permissions:
 
  - `s3:GetObject` for the given key/wildcard
@@ -54,12 +56,55 @@ You can add the following policy document as an inline policy to an AWS user:
 }
 {% endhighlight %}
 
+### Configuration with AWS role
+
+{: .image-popup}
+![Screenshot - AWS Credentials](/components/extractors/storage/aws-s3/aws-s3-2.png)
+
+Select `Login type` option `credentials`. In your AWS account create role like this:
+
+ - go to [IAM Console](https://console.aws.amazon.com/iam/home?#/roles), click `Create role`, then click `Another AWS account`
+ - For `Account ID` use `147946154733`
+ - For `External ID`, enter value from your project
+ - **Do not enable the setting to Require MFA (multi-factor authentication)**
+ - On the next page attach the policy:
+    - `s3:GetObject` for the given key/wildcard
+    - `s3:ListBucket` to access all wildcard files
+    - `s3:GetBucketLocation` to determine the region of the S3 bucket(s)
+ - or you can create new inline policy:
+ 
+{% highlight json %}
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::mybucket/*"
+        },
+        {
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::mybucket"
+        }
+    ]
+}
+{% endhighlight %}
+ - On the last page set `Role name` and click `Create role`
+ 
+In your project fill up your `Account Id` and `Role name`
+
 ## Add Tables
 To create a new table, click the **New Table** button and assign a name.
 It will be used to create the destination table name in Storage and can be modified.
 
 {: .image-popup}
-![Screenshot - Create table](/components/extractors/storage/aws-s3/aws-s3-2.png)
+![Screenshot - Create table](/components/extractors/storage/aws-s3/aws-s3-3.png)
 
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
 Each table has different settings (key, load type, etc.) but they all share the same AWS credentials.
@@ -67,7 +112,7 @@ Each table has different settings (key, load type, etc.) but they all share the 
 ### Source
 
 {: .image-popup}
-![Screenshot - S3 Settings](/components/extractors/storage/aws-s3/aws-s3-3.png)
+![Screenshot - S3 Settings](/components/extractors/storage/aws-s3/aws-s3-4.png)
 
 For each table you have to specify an AWS **S3 Bucket** and a **Search Key**.
 The **Search Key** can be a path to a single file or a prefix to multiple files
@@ -85,7 +130,7 @@ The **additional source settings** section allows you to set up the following:
 ### CSV Settings
 
 {: .image-popup}
-![Screenshot - CSV Settings](/components/extractors/storage/aws-s3/aws-s3-4.png)
+![Screenshot - CSV Settings](/components/extractors/storage/aws-s3/aws-s3-5.png)
 
 - **Delimiter** and **Enclosure** specify the CSV format settings.
 - **Header** specifies how the destination table column names are obtained:
@@ -99,7 +144,7 @@ The **additional source settings** section allows you to set up the following:
 ### Destination
 
 {: .image-popup}
-![Screenshot - Destination](/components/extractors/storage/aws-s3/aws-s3-5.png)
+![Screenshot - Destination](/components/extractors/storage/aws-s3/aws-s3-6.png)
 
 - The initial value in **Storage Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved cannot be changed.
@@ -111,7 +156,7 @@ and **New Files Only** to create a configuration that incrementally loads all ne
 ## Processing Settings
 
 {: .image-popup}
-![Screenshot - Processing Settings](/components/extractors/storage/aws-s3/aws-s3-6.png)
+![Screenshot - Processing Settings](/components/extractors/storage/aws-s3/aws-s3-7.png)
 
  - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives
  will be imported into a single Storage table.
