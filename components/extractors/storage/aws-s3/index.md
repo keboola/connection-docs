@@ -19,12 +19,12 @@ you save them to KBC Storage. You also need to set up the proper permissions on 
 
 In order to access the files in S3, you need to set up AWS credentials or create AWS role.
 
-### Configuration with AWS credentials
+### Authentication with AWS credentials
 
 {: .image-popup}
 ![Screenshot - AWS Credentials](/components/extractors/storage/aws-s3/aws-s3-1.png)
 
-Select `Login type` option `credentials`. Use the AWS Access Key ID and the Secret Access Key with read permissions to the desired S3 bucket(s) and file(s).
+Select **Login type** option **Credentials**. Use the AWS Access Key ID and the Secret Access Key with read permissions to the desired S3 bucket(s) and file(s).
 Make sure this AWS Access Key ID has the correct permissions:
 
  - `s3:GetObject` for the given key/wildcard
@@ -56,16 +56,16 @@ You can add the following policy document as an inline policy to an AWS user:
 }
 {% endhighlight %}
 
-### Configuration with AWS role
+### Authentication with AWS role
 
 {: .image-popup}
 ![Screenshot - AWS Credentials](/components/extractors/storage/aws-s3/aws-s3-2.png)
 
-Select `Login type` option `credentials`. In your AWS account create role like this:
+Select **Login type** option **Role**. In your AWS account create role like this:
 
- - go to [IAM Console](https://console.aws.amazon.com/iam/home?#/roles), click `Create role`, then click `Another AWS account`
- - For `Account ID` use `147946154733`
- - For `External ID`, enter value from your project
+ - go to [IAM Console](https://console.aws.amazon.com/iam/home?#/roles), click **Create role**, then click **Another AWS account**
+ - For **Account ID** use `147946154733`
+ - For **External ID**, enter value from your project
  - **Do not enable the setting to Require MFA (multi-factor authentication)**
  - On the next page attach the policy:
     - `s3:GetObject` for the given key/wildcard
