@@ -96,7 +96,7 @@ of this feature are quite well discussed on [StackOverflow](https://stackoverflo
 The PostgreSQL database server also supports encrypting the whole database communication using SSL Certificates. See the
 [official guide](http://www.postgresql.cn/docs/9.5/ssl-tcp.html) for instructions on setting it up.
 
-### MS SQL Encryption
+### MS SQL Server Encryption
 The MS SQL database server also supports encrypting the whole database communication using SSL Certificates. See the
 [official guide](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/enable-encrypted-connections-to-the-database-engine) for instructions on setting it up.
 
