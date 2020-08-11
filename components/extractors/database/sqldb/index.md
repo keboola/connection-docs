@@ -96,6 +96,10 @@ of this feature are quite well discussed on [StackOverflow](https://stackoverflo
 The PostgreSQL database server also supports encrypting the whole database communication using SSL Certificates. See the
 [official guide](http://www.postgresql.cn/docs/9.5/ssl-tcp.html) for instructions on setting it up.
 
+### MS SQL Server Encryption
+The MS SQL database server also supports encrypting the whole database communication using SSL Certificates. See the
+[official guide](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/enable-encrypted-connections-to-the-database-engine) for instructions on setting it up.
+
 ### MS SQL Server Advanced Mode
 The SQL Server export uses the [BCP utility](https://docs.microsoft.com/en-us/sql/tools/bcp-utility?view=sql-server-2017) to export data.
 For this reason, if you are writing advanced mode queries, you have to quote the values of non-numeric columns (text, datetime, etc.), so that the selected
