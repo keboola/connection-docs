@@ -49,3 +49,4 @@ Use the *Feature Wishlist* in the *Settings* menu to send us your suggestions fo
 
 {: .image-popup}
 ![Screenshot - Wishlist](/wishlist.png)
+
