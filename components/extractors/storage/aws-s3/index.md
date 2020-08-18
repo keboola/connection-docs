@@ -11,20 +11,20 @@ redirect_from:
 This extractor loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables 
 in Keboola Connection (KBC) Storage.
 
-After creating a new configuration, select the files you want to extract from AWS S3 and determine the way how
-you save them to KBC Storage. You also need to set up the proper permissions on AWS.
+After creating a new configuration, select the files you want to extract from AWS S3 and determine how
+you save them to KBC Storage. You also need to set up proper permissions on AWS.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** extractor.
 
-In order to access the files in S3, you need to set up AWS credentials or create AWS role.
+In order to access the files in S3, you need to set up AWS credentials or create an AWS role.
 
 ### Authentication with AWS credentials
 
 {: .image-popup}
 ![Screenshot - AWS Credentials](/components/extractors/storage/aws-s3/aws-s3-1.png)
 
-Select **Login type** option **Credentials**. Use the AWS Access Key ID and the Secret Access Key with read permissions to the desired S3 bucket(s) and file(s).
+Select `Credentials` as the **Login Type**. Use the AWS Access Key ID and the Secret Access Key with read permissions to the desired S3 bucket(s) and file(s).
 Make sure this AWS Access Key ID has the correct permissions:
 
  - `s3:GetObject` for the given key/wildcard
@@ -61,17 +61,17 @@ You can add the following policy document as an inline policy to an AWS user:
 {: .image-popup}
 ![Screenshot - AWS Credentials](/components/extractors/storage/aws-s3/aws-s3-2.png)
 
-Select **Login type** option **Role**. In your AWS account create role like this:
+Select `Role` as the **Login Type**. Create a role in your AWS account using the following steps:
 
- - go to [IAM Console](https://console.aws.amazon.com/iam/home?#/roles), click **Create role**, then click **Another AWS account**
- - For **Account ID** use `147946154733`
- - For **External ID**, enter value from your project
- - **Do not enable the setting to Require MFA (multi-factor authentication)**
- - On the next page attach the policy:
+ - Go to the [IAM Console](https://console.aws.amazon.com/iam/home?#/roles) and click **Create role**. Then click **Another AWS account**.
+ - For **Account ID**, use `147946154733`.
+ - For **External ID**, enter the value from your project.
+ - **Do not enable the setting to Require MFA (multi-factor authentication)**.
+ - On the next page, attach the policy:
     - `s3:GetObject` for the given key/wildcard
     - `s3:ListBucket` to access all wildcard files
     - `s3:GetBucketLocation` to determine the region of the S3 bucket(s)
- - or you can create new inline policy:
+ - Or, you can create a new inline policy:
  
 {% highlight json %}
 {
@@ -95,12 +95,12 @@ Select **Login type** option **Role**. In your AWS account create role like this
     ]
 }
 {% endhighlight %}
- - On the last page set `Role name` and click `Create role`
+ - On the last page, set the **Role name** and click **Create role**.
  
-In your project fill up your `Account Id` and `Role name`
+In your project, fill in your **Account ID** and **Role Name**.
 
 ## Add Tables
-To create a new table, click the **New Table** button and assign a name.
+To create a new table, click the **New Table** button and assign it a name.
 It will be used to create the destination table name in Storage and can be modified.
 
 {: .image-popup}
