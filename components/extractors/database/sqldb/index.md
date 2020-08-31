@@ -164,3 +164,6 @@ You will either have to use a more permissive role or reset the permissions by c
 GRANT SELECT ON ALL TABLES IN SCHEMA MY_DATA.MY_SCHEMA TO ROLE KEBOOLA_SNOWFLAKE_EXTRACTOR;
 GRANT SELECT ON ALL VIEWS IN SCHEMA MY_DATA.MY_SCHEMA TO ROLE KEBOOLA_SNOWFLAKE_EXTRACTOR;
 {% endhighlight %}
+
+### Oracle tnsnames.ora file
+The Oracle database server also supports tnsnames.ora configuration file instead host name and port number. See the [oficial guide](https://docs.oracle.com/database/121/NETRF/tnsnames.htm#NETRF261) for instructions on setting it up.
