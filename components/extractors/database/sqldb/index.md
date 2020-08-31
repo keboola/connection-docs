@@ -92,6 +92,9 @@ The MySQL database server also supports encrypting the whole database communicat
 The MySQL database server enables [MySQL Network Compression](https://dev.mysql.com/doc/refman/5.7/en/group-replication-message-compression.html). Pros and cons
 of this feature are quite well discussed on [StackOverflow](https://stackoverflow.com/questions/2506460/when-should-i-use-mysql-compressed-protocol).
 
+### MySQL Transaction isolation level
+The MySQL database server enables [Transaction isolation level](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html).
+
 ### PostgreSQL Encryption
 The PostgreSQL database server also supports encrypting the whole database communication using SSL Certificates. See the
 [official guide](http://www.postgresql.cn/docs/9.5/ssl-tcp.html) for instructions on setting it up.
