@@ -19,7 +19,7 @@ in order to create reports and analyze your customers' behavior.
 
 ## Keboola Connection Architecture
 
-The following chart shows how Kebooa Connection platform is structured. The platform is composed of many components which
+The following chart shows how Keboola Connection platform is structured. The platform is composed of many components which
 are structured into categories described below.
 
 ![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
@@ -45,7 +45,7 @@ It provides an important API (Storage API) access for other components and 3rd p
 Your own **remote storage** can be connected to Keboola Connection as well.
 
 ### Transformations
-[Transformations](/transformations/) are components which allow the end-user can be created by writing a **free-form script** in
+[Transformations](/transformations/) are components which end-users can create by writing a **free-form script** in
 [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [Julia](https://julialang.org/),
 [Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). Keboola Connection provides each user with [Sandbox](/transformations/sandbox/) --- a safe environment for your experiments.
 
