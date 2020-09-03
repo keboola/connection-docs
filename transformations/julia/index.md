@@ -16,7 +16,7 @@ Common data operations like joining, sorting, or grouping are still easier and f
 
 ## Environment
 The Julia script is running in an isolated [Docker environment](https://developers.keboola.com/integrate/docker-bundle/).
-The current Julia version is **1.4.0**. We release updates regularly, few weeks after the official release, announcing them
+The current Julia version is **1.5.0**. We release updates regularly, few weeks after the official release, announcing them
 on our [status page](http://status.keboola.com/).
 
 When we update a Julia version, we offer --- for a limited time --- the option to switch to the previous version. You can
