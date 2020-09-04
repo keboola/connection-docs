@@ -104,7 +104,7 @@ The [Developer documentations](https://developers.keboola.com/overview/api/#regi
 more detail how to handle regions when working with the API.
 
 ### Jobs
-Most things in Keboola Connection are done using the batch approach; when you do some operation, a job is created
+Most things in Keboola Connection are done using the batch approach; when you do some operation, a [job](https://help.keboola.com/management/jobs/) is created
 and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same
 time and you can continue your work in the meantime.
 
