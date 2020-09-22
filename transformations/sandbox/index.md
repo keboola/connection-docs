@@ -204,7 +204,11 @@ library('pryr')
 print(mem_used())
 {% endhighlight %}
 
-### Python Sandbox (Jupyter Notebook)
+### Jupyter-Based Sandboxes
+
+Keboola Connection provides Jupyter Notebook sandboxes for Python and Julia. Both features are in beta.
+
+#### Python Sandbox
 
 **Important:** Currently, this feature is in beta.
 
@@ -255,7 +259,8 @@ process = psutil.Process(os.getpid())
 print(process.memory_info().rss)
 {% endhighlight %}
 
-### Julia Sandbox (Jupyter Notebook)
+
+#### Julia Sandbox
 
 **Important:** Currently, this feature is in beta.
 
@@ -283,8 +288,17 @@ supported only by the [API](https://provisioningapi.docs.apiary.io/#reference/cr
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
+
+#### 1-Click Model Ops
+
+Jupyter sanboxes fully support MLflow for the ML life-cycle management. 
+So data scientists have easy access to shared experiment tracking, artifact store, model store, and model 
+deployment through built-in functions and MLflow’s user interface.
+
+
 ## Code Templates
-For [Jupyter](#jupyter-notebook-sandbox) and [RStudio](#rstudio-sandbox) sandboxes, code templates 
+
+For [Jupyter](#jupyter-based-sandbox) and [RStudio](#r-sandbox-rstudio) sandboxes, code templates 
 can be defined. They can be set for a given **user** or for the entire **project**.
 A Jupyter template is a notebook file (.ipynb). An RStudio template is a simple text file.
 If a sandbox is loaded from a transformation, the transformation code will be appended after the

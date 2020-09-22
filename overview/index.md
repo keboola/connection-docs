@@ -69,16 +69,45 @@ In the background, behind the scenes, there is the [**Orchestrator**](/orchestra
 (or Scheduler) component which allows everything to be fully automated.
 Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
 
+### Operational Metadata
+
+Keboola Connection collects all kinds of [operational metadata](/management/jobs/#search-attributes), 
+describing user activity, job activity, data flow, 
+schema evolution, data pipeline performance, compliance with a client’s security rules, etc. 
+All project metadata is accessible from within the client’s Keboola Connection environment to perform any kind of analysis, audit, or event action.
+
+Based on the metadata, we are able to build **data lineage** on the fly and automatically. 
+This makes it possible to understand where the data is coming from and how it is used, both for analytical and regulatory purposes.
+
 ### Components
+
 Keboola Connection, as an open environment consisting of many built-in interoperating components (Storage, 
 Transformations, Extractors etc.), can be [extended](https://developers.keboola.com/extend/) with
  **arbitrary code to extract, transform or write data**.
 
-There are two ways of extending the platform: creating [Components](https://developers.keboola.com/extend/#component)
-(used as extractors, applications and writers) and creating components based on
-[Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
-All components can be created by us, our customers and 3rd parties, and can be kept private or offered to 
-other Keboola Connection users.
+There are two ways of extending the platform: 
+creating [Components](https://developers.keboola.com/extend/#component) (used as extractors, applications and writers) and 
+creating components based on [Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
+
+All components can be created by us, your in-house teams or 3rd parties.
+They can easily use already existing data, ETL processes, and workflows. 
+The development platform provides you with automation of infrastructure, user management, data management, and essential services like 
+[data catalogue](https://help.keboola.com/catalog/), operational metadata, full governance, and 
+reverse billing per job. 
+The components can be kept private or offered to other Keboola Connection users.
+Our market place consists of hundreds of applications that are developed mainly by 3rd 
+parties and can be natively used as part of the workflows you are creating. 
+This provides a great way for our users to really manage their environment and create a composable enterprise.
+
+Components can be run as standard pieces of our [orchestrations](https://help.keboola.com/orchestrator/), 
+obtaining the full support and services (a link to your [components](https://components.keboola.com/components), 
+[logs, etc.](https://developers.keboola.com/extend/common-interface/)).
+
+## On premise offload – production jobs
+
+When finishing your innovation cycle in the cloud, your data pipeline processes can be compiled and executed 
+in the cloud within your secure Keboola Connection environment. Or, you can utilise your existing hardware inside 
+your private cloud infrastructure.
 
 ## Keboola Support
 When working with Keboola Connection, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.
