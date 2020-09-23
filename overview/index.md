@@ -47,7 +47,8 @@ Your own **remote storage** can be connected to Keboola Connection as well.
 ### Transformations
 [Transformations](/transformations/) are components which end-users can create by writing a **free-form script** in
 [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [Julia](https://julialang.org/),
-[Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). Keboola Connection provides each user with [Sandbox](/transformations/sandbox/) --- a safe environment for your experiments.
+[Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). 
+Keboola Connection provides each user with [Sandbox](/transformations/sandbox/) --- a safe environment for your experiments.
 
 ### Applications
 Unlike the free-form Transformations, [Applications](/components/applications/) are **predefined blocks**, which
