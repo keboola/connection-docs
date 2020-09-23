@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Each Keboola Connection project has two kinds of limits:  
+Each Keboola Connection standard project has two kinds of limits:  
 
 1. **Business limits** are set in your contract and define the business usage of our platform. 
 This can be seen as the **size** of your project. Exceeding them will earn you a call from us 

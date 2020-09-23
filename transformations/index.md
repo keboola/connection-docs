@@ -41,6 +41,8 @@ the transformation processes -- the transformation always operates in an isolate
 Each transformation has its own workspace. The transformation [sandbox](/transformations/sandbox/)
 uses the same workspace as the corresponding transformation. The [plain sandbox](/transformations/sandbox/#plain-loading)
 uses a separate workspace.
+Component and analytical workspaces have live access to production data integrated by other data pipeline flows. 
+Always use fresh data in your data science workspaces for experiments and modelling.
 
 ## Mappings
 No transformation can be created without
@@ -59,7 +61,16 @@ are automatically quoted by Keboola Connection. This is especially important for
 
 ## Backends
 A backend is the engine running the transformation script. It is either a database server
-[Redshift](https://aws.amazon.com/redshift/) and [Snowflake](https://www.snowflake.com/), or a language interpreter ([R](https://www.r-project.org/about.html), [Python](https://www.python.org/about/)).
+([Redshift](https://aws.amazon.com/redshift/),
+[Snowflake](https://www.snowflake.com/), 
+[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
+or a language interpreter 
+([Julia](https://julialang.org/), 
+[Matlab](https://www.mathworks.com/products/matlab.html)
+[OpenRefine](https://openrefine.org/),
+[Python](https://www.python.org/about/),
+[R](https://www.r-project.org/about.html), 
+[Spark](https://spark.apache.org/)).
 
 How to decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better
 for joining tables, filtering data, grouping and simple aggregations. Script languages are more suitable
@@ -75,6 +86,8 @@ The following are the currently available backends:
 Switching between backends unfortunately requires rewriting the SQL code.
 
 - **Script** --- [Python](./python/), [R](./r/), [OpenRefine](./openrefine/) or [Julia](./julia/). Choose according to your taste and available libraries.
+
+- **Analytics engine** --- Apache Spark, and [Microsoft Synapse](./synapse/) on Azure Stack.
 
 ## Versions
 Each change in the transformation configuration creates a new [version](/components/#configuration-versions) of the whole transformation bucket.

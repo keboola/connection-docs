@@ -327,6 +327,9 @@ items:
       - url: /transformations/julia/
         title: Julia Transformations
 
+      - url: /transformations/synapse/
+        title: Synapse Transformations
+
   - url: /management/
     title: Management
     items:
@@ -359,6 +362,6 @@ items:
 
           - url: /management/project/delete/
             title: Project Deletion
-
+       
       - url: /management/organization/
         title: Organizations
