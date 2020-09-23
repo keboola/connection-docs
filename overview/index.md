@@ -79,8 +79,8 @@ or simply any system that can help our customers to realize the extra value Kebo
 
 In the background, behind the scenes, there is the [**Orchestrator**](/orchestrator/)
 (or Scheduler) component which allows everything to be fully automated.
-Orchestrator enables to specify what components should be executed in what order and when  
-(specified intervals, specified times of the day, etc.)
+Orchestrator enables to specify what components should be executed in what order and when 
+(specified intervals, specified times of the day, etc.).
 
 The whole warehouse or data lake cycle can be fully automated via [API](https://developers.keboola.com/automate/#automation).
 The end-to-end serverless solution automatically enables you to connect data sources, automatically store data 
