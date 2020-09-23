@@ -24,6 +24,16 @@ are structured into categories described below.
 
 ![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
 
+### Configurations
+
+Typically, Keboola Connection is fully managed by Keboola. 
+However, it also supports multi-, hybrid- and private cloud deployments.  
+
+When finishing your innovation cycle in the cloud, 
+your data pipeline processes can be compiled and executed in the cloud within your secure Keboola Connection environment. 
+However, you can also do an on-premise offload utilising your existing hardware inside your private cloud infrastructure. 
+
+
 ### Data Sources
 Data sources are systems containing data you wish to [bring into Keboola Connection](/tutorial/load/).
 They can be pretty much anything from Google Analytics, Facebook, SalesForce to on-premise databases,
@@ -66,9 +76,22 @@ These may be business intelligence analytics or visualization systems, but also 
 or simply any system that can help our customers to realize the extra value Keboola Connection adds to the data.
 
 ### Full Automation
+
 In the background, behind the scenes, there is the [**Orchestrator**](/orchestrator/)
 (or Scheduler) component which allows everything to be fully automated.
-Orchestrator enables to run any component (for example, data extraction) in specified intervals or at specified times of the day.
+Orchestrator enables to specify what components should be executed in what order and when  
+(specified intervals, specified times of the day, etc.)
+
+The whole warehouse or data lake cycle can be fully automated via [API](https://developers.keboola.com/automate/#automation).
+The end-to-end serverless solution automatically enables you to connect data sources, automatically store data 
+in the correct format, check for format inconsistencies, and choose different metadata providers based on the
+operation you wish to perform on the data. The platform scales the needed resources automatically across various 
+types of data (structured, semi-structured, and non-structured) and processes.
+
+The whole environment tracks all the [operational metadata](#operational-metadata) and 
+can be accessed without a server via [APIs](https://developers.keboola.com/overview/api/). 
+This is useful when automating development, testing and production run of data jobs with automatic controls of 
+[pipelines](https://keboola.docs.apiary.io/#reference/development-branches).
 
 ### Operational Metadata
 
@@ -103,12 +126,6 @@ This provides a great way for our users to really manage their environment and c
 Components can be run as standard pieces of our [orchestrations](https://help.keboola.com/orchestrator/), 
 obtaining the full support and services (a link to your [components](https://components.keboola.com/components), 
 [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
-
-## On premise offload – production jobs
-
-When finishing your innovation cycle in the cloud, your data pipeline processes can be compiled and executed 
-in the cloud within your secure Keboola Connection environment. Or, you can utilise your existing hardware inside 
-your private cloud infrastructure.
 
 ## Keboola Support
 When working with Keboola Connection, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.

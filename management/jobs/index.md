@@ -12,7 +12,7 @@ For an overview of all jobs, running and finished, go to the **Jobs** section:
 {: .image-popup}
 ![Screenshot - Jobs](/management/jobs/jobs.png)
 
-The job history is virtually unlimited. Click on a job to see details on 
+All jobs are logged and their tracked history is virtually unlimited. Click on a job to see details on 
 
 - what tables were imported (created by the job and imported into your Storage).
 - what tables were exported (read from your Storage by the job).
