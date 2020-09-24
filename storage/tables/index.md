@@ -53,34 +53,12 @@ You can prevent this by disabling *Synchronize columns with source table*.
 
 Aliases with automatically synchronized columns and without a filter can be chained.
 
-
 ## Metadata
 Each object of the [Table Storage](/storage/) (Bucket, Table, Column) has an associated key-value
 store. This can be used to store arbitrary metadata (information about the data itself). Apart from
 arbitrary user-defined metadata, there is also some information stored automatically. For example,
 each bucket and table has information about which configuration of which component created them.
-
-### Data Types
-Some extractors store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
-loads a table from the source database, it also records the physical column types from that table.
-These are stored with each table column and can be used later on when working with the table. For
-example, the transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside
-the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
-the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
-
-Even if a data type is available for a column, that column is always stored as text --- keep this in mind
-especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. The basic idea behind
-this is that a text type has the best interoperability, so this averts many issues (e.g., some date values stored in a MySQL
-database might not be accepted by a Snowflake database and vice-versa).
-
-Data types from a source are mapped to a destination using a **Base Type**. The current base types are
-`STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. This means that, for example, a MySQL extractor
-may store the value `BIGINT` as a type of a column; that type maps to the `INTEGER` general type. When the Snowflake writer consumes this value, it will
-read the general type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
-This logic is again designed to ensure high interoperability between the components.
-
-*Note: Currently, data types for Storage objects can be viewed and modified only via
-the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata).*
+One important use case of metadata is [Column Data Types](/storage/tables/data-types/).
 
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
