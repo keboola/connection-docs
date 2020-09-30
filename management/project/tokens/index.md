@@ -44,8 +44,11 @@ API tokens are created
 
 1. automatically when joining a project (master token).
 2. automatically when creating a new configuration of certain components (for example, Orchestrations).
-3. manually when needed.
+3. automatically when running a JuypterLab Workspace.
+4. automatically when using [external OAuth](https://help.keboola.com/components/#external-authorization) authorization.
+5. manually when needed.
 
+Automatically created tokens have lowest possible permissions for their task and also set expiration if possible.
 These are the typical reasons to manually create a new API token:
 
 - You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
@@ -59,10 +62,10 @@ token string was revealed to unauthorized persons.
 
 When creating a new token, the following rules apply:
 
-- Tokens by default give **no access** to any of the Keboola Connection components.
+- Tokens by default give **no access** to any of the Keboola Connection components configurations.
 - Token bearers can only access **permitted** Storage buckets via the [Storage API](http://developers.keboola.com/integrate/storage/) or
 [Storage console](https://storage-api-console.keboola.com/). 
-- Tokens **cannot** be used to run any actions in your project.
+- Tokens **cannot** be used to run any actions in your project. They can trigger orchestrations however.
 - Tokens **cannot** be used to create other tokens (only a master token can be used to create new tokens).
 
 You should never share the same token in multiple applications. The number of tokens is not 
@@ -119,6 +122,9 @@ You would then create a token that is authorized for running the **MySQL databas
 
 {: .image-popup}
 ![Screenshot - Component limited token](/management/project/tokens/component-limited.png)
+
+*Note: For historical reasons, specifying the Orchestrator component in component permissions is optional. 
+It means that the token will also work if it has access to no components.*
 
 You can then [share the token](#sharing-a-token) to the person responsible for the database process and be 
 sure that they can use only that particular component in that particular bucket. They will be even able to 
