@@ -1,6 +1,6 @@
 ---
 title: Data Types
-permalink: /storage/tables/data-types
+permalink: /storage/tables/data-types/
 ---
 
 Some components (especially extractors) store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
