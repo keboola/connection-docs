@@ -258,6 +258,9 @@ items:
       - url: /storage/tables/
         title: Tables & Aliases
         items:
+          - url: /storage/tables/data-types/
+            title: Data Types
+
           - url: /storage/tables/csv-files/
             title: CSV Files
 
