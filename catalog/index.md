@@ -67,34 +67,32 @@ Choose the **Share existing bucket** option:
 {: .image-popup}
 ![Screenshot -- Enable sharing](/catalog/catalog-2.png)
 
-Then, select the bucket and a [sharing type](#sharing-types):
+Then, select the bucket and a [sharing type](#sharing-types). Optionally, provide a description of the bucket so others know what to expect.
 
 {: .image-popup}
 ![Screenshot -- Finish sharing](/catalog/catalog-3.png)
 
 The bucket is shared and instantly available to other projects in the organization depending on the [sharing type](#sharing-types) 
-you have chosen. Provide a description of the bucket so others know what to expect. To enter your description, click on the bucket:
+you have chosen.
 
 {: .image-popup}
 ![Screenshot -- View sharing](/catalog/catalog-4.png)
 
-You'll be taken to [Storage](/storage/) where you can add your description to the bucket. The description supports [Markdown](https://www.markdownguide.org/cheat-sheet/) formatting.
+To change a sharing type, go to the bucket detail page and click the Edit sharing button:
 
 {: .image-popup}
-![Screenshot -- Set Description](/catalog/catalog-5.png)
-
-To change a sharing type, share the existing bucket again. The newly selected sharing type will overwrite the old one.
+![Screenshot -- Edit sharing](/catalog/catalog-5.png)
 
 ### Share a New bucket
 Choose the **Select tables** option:
 
 {: .image-popup}
-![Screenshot -- Enable Sharing Tables](/catalog/catalog-7.png)
+![Screenshot -- Enable Sharing Tables](/catalog/catalog-6.png)
 
 Select the tables and/or buckets you want to share:
 
 {: .image-popup}
-![Screenshot -- Select Tables](/catalog/catalog-8.png)
+![Screenshot -- Select Tables](/catalog/catalog-7.png)
 
 Enter the bucket name and a [sharing type](#sharing-type). Optionally, enter the description:
 
@@ -104,7 +102,7 @@ Enter the bucket name and a [sharing type](#sharing-type). Optionally, enter the
 A new bucket will be created for you, the selected tables will be linked to it using [aliases](/storage/tables/#aliases).
 
 {: .image-popup}
-![Screenshot -- Bucket Result](/catalog/catalog-10.png)
+![Screenshot -- Bucket Result](/catalog/catalog-9.png)
 
 To change a sharing type, share the newly [created bucket again](#share-an-existing-bucket). The newly selected sharing type will overwrite the old one.
 
@@ -112,7 +110,7 @@ To change a sharing type, share the newly [created bucket again](#share-an-exist
 You can link a shared bucket into your project from **Shared with you page**:
 
 {: .image-popup}
-![Screenshot -- Link Bucket Start](/catalog/catalog-6.png)
+![Screenshot -- Link Bucket Start](/catalog/catalog-10.png)
 
 Enter a name of the bucket as you'd like to see it in the current project and **Link** the bucket:
 
@@ -124,34 +122,14 @@ You'll see that the bucket is available in your project:
 {: .image-popup}
 ![Screenshot -- Link Bucket Result](/catalog/catalog-12.png)
 
-You can see the contents of the shared bucket in [Storage](/storage/), with a link to the source project (if you have access to it). 
+You can see the detail of the shared bucket in with a link to the source project (if you have access to it). 
 
 {: .image-popup}
 ![Screenshot -- Link Bucket Tables](/catalog/catalog-13.png)
 
-The detail of the shared bucket in Storage also shows the linked buckets:
-
-{: .image-popup}
-![Screenshot -- Shared Bucket Detail](/catalog/catalog-14.png)
-
-You can see the history of when and how a bucket was shared in the Bucket events:
-
-{: .image-popup}
-![Screenshot -- Bucket events](/catalog/catalog-15.png)
-
 ## Stop Sharing a Bucket
+
 To stop sharing a bucket, go to *Data Catalog* and **Disable** sharing:
 
 {: .image-popup}
-![Screenshot -- Disable Sharing](/catalog/catalog-16.png)
-
-*Note: you can only disable sharing if the bucket is not linked to any project. To unlink a bucket, you have to go
-to the destination project and unlink it from the Catalog section:*
-
-{: .image-popup}
-![Screenshot -- Unlink Bucket](/catalog/catalog-17.png)
-
-Or, you can unlink the bucket from Storage:
-
-{: .image-popup}
-![Screenshot -- Unlink Bucket Storage](/catalog/catalog-18.png)
+![Screenshot -- Disable Sharing](/catalog/catalog-14.png)
