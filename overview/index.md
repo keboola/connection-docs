@@ -46,7 +46,7 @@ services. But they can also connect directly to an arbitrary database, or proces
 
 ### Storage
 [Storage](/storage/) is the central Keboola Connection component managing everything related to storing data and accessing it.
-It has two sections: [File Storage](/storage/file-uploads/) with all raw files uploaded
+It has two sections: [File Storage](/storage/files/) with all raw files uploaded
 to your project, and [Table Storage](/storage/tables/) where all data tables are organized
 into buckets which are further organized into *in* and *out* stages.
 
@@ -116,14 +116,14 @@ creating components based on [Generic Extractor](https://developers.keboola.com/
 All components can be created by us, your in-house teams or 3rd parties.
 They can easily use already existing data, ETL processes, and workflows. 
 The development platform provides you with automation of infrastructure, user management, data management, and essential services like 
-[data catalogue](https://help.keboola.com/catalog/), operational metadata, full governance, and 
+[data catalogue](/catalog/), operational metadata, full governance, and 
 reverse billing per job. 
 The components can be kept private or offered to other Keboola Connection users.
 Our market place consists of hundreds of applications that are developed mainly by 3rd 
 parties and can be natively used as part of the workflows you are creating. 
 This provides a great way for our users to really manage their environment and create a composable enterprise.
 
-Components can be run as standard pieces of our [orchestrations](https://help.keboola.com/orchestrator/), 
+Components can be run as standard pieces of our [orchestrations](/orchestrator/), 
 obtaining the full support and services (a link to your [components](https://components.keboola.com/components), 
 [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
 
@@ -134,24 +134,28 @@ To solve your problem or to gain context, our support staff may join your projec
 ## Other Commonly Used Terms
 This section explains a few terms that are often used throughout these documentation pages.
 
-### Regions
-Keboola Connection is available in multiple regions — currently in:
+### Stacks
+Keboola Connection is available in multiple stacks, these can be either multi-tenant
+or single-tenant. Current multi-tenant stacks are:
 
 - US AWS -- [connection.keboola.com](https://connection.keboola.com), 
 - EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
-- US Azure -- [connection.east-us-2.azure.keboola.com](https://connection.east-us-2.azure.keboola.com). 
+- US Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
 
-A **Region** instance is a combination of a datacenter location and a cloud provider. The currently supported
+A **Stack** is a combination of a datacenter location (region) and a cloud provider, stack is identified by
+its domain (URL). The currently supported
 cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/en-us/).
-Each region instance is a completely independent full stack of Keboola Connection services. That means that 
-if you have projects in multiple regions, you need to have multiple Keboola Connection accounts.
+Stack is a completely independent full instance of Keboola Connection services. That means that 
+if you have projects in multiple stacks, you need to have multiple Keboola Connection accounts.
 
-Each region uses a different network with a different set of **dedicated [IP addresses](/components/ip-addresses/)**.
+Each stack uses a different network with a different set of **dedicated [IP addresses](/components/ip-addresses/)**.
 The [Developer documentations](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes in 
-more detail how to handle regions when working with the API.
+more detail how to handle multiple stacks when working with the API.
+
+Single-tenant stacks are available for a single enterprise customer with a domain name in form `connection.CUSTOMER_NAME.keboola.com`.
 
 ### Jobs
-Most things in Keboola Connection are done using the batch approach; when you do some operation, a [job](https://help.keboola.com/management/jobs/) is created
+Most things in Keboola Connection are done using the batch approach; when you do some operation, a [job](/management/jobs/) is created
 and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same
 time and you can continue your work in the meantime.
 

@@ -22,7 +22,7 @@ You can export a snapshot of the current state of Storage using the **Create Sna
 {: .image-popup}
 ![Screenshot - Enter Description](/storage/documentation/documentation-1.png)
 
-This will create a single markdown file in the [Storage Files](/storage/file-uploads/) which will contain the descriptions of
+This will create a single markdown file in the [Storage Files](/storage/files/) which will contain the descriptions of
 all your buckets and tables in Storage. You can view a list of all generated documentations using the **Show All Snapshots** button:
 
 {: .image-popup}

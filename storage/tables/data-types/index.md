@@ -1,7 +1,10 @@
 ---
 title: Data Types
-permalink: /storage/tables/data-types
+permalink: /storage/tables/data-types/
 ---
+
+* TOC
+{:toc}
 
 Some components (especially extractors) store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
 loads a table from the source database, it also records the physical column types from that table.
@@ -24,7 +27,7 @@ may store the value `BIGINT` as a type of a column; that type maps to the `INTEG
 read the general type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
 This logic is again designed to ensure high interoperability between the components. See the [conversion table below](#data-type-conversions).
 
-You view the extracted data types in the [Storage Table](https://help.keboola.com/storage/tables/) detail:
+You view the extracted data types in the [Storage Table](/storage/tables/) detail:
 
 {: .image-popup}
 ![Screenshot - View Column Data Type](/storage/tables/data-types/column-data-type.png)
@@ -657,7 +660,7 @@ The `BOOLEAN` base type represents a true/false values.
 <tr>
     <th rowspan='2'>Generic</th>
     <td>bool</td>
-    <td rowspan='13'>STRING</td>
+    <td rowspan='13'>BOOLEAN</td>
     <td rowspan='2' colspan='2'></td>    
 </tr>
 <tr>
@@ -740,8 +743,9 @@ The `DATE` base type represents a date value without a time portion.
 <tr>
     <th>Generic</th>
     <td>date</td>
+    <td rowspan='10'>DATE</td>
     <td>DATE</td>
-    <td colspan='2'></td>    
+    <td colspan='2'></td>
 </tr>
 <tr>
     <td colspan='2'></td>

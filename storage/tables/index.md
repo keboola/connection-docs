@@ -269,9 +269,9 @@ and you import the following data to the table:
 |Annie|$500000|
 |Melanie|$900000|
 
-assuming that the import was on 2010-01-02 10:00, the result table will contain (the *\*updated\** column is not an actual column of the table, it is just displayed here for illustration purposes):
+assuming that the import was on 2010-01-02 10:00, the result table will contain (the *\*_timestamp\** column is not an actual column of the table, it is just displayed here for illustration purposes):
 
-|name|money|*\*updated\**
+|name|money|*\*_timestamp\**
 |---|---|---|
 |John|$150|2010-01-01 10:00|
 |Darla|$600000|**2010-01-02 10:00**|

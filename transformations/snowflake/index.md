@@ -65,7 +65,7 @@ The value in the column contains a unix timestamp of the last change of the row,
  - when the row was added to the table, or
  - when any of the cells was modified using an incremental load.
 
-You can use this column to set up [incremental processing](https://help.keboola.com/storage/tables/#incremental-processing).
+You can use this column to set up [incremental processing](/storage/tables/#incremental-processing).
 
 ## Aborting Transformation Execution
 

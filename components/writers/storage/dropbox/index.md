@@ -14,7 +14,7 @@ This writer sends tables as CSV or other files into a single [Dropbox](https://w
 [Create a new configuration](/components/#creating-component-configuration) of the **Dropbox** writer.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
-You may specify Storage [tables](/storage/tables/) or [files](/storage/file-uploads/) to be written to the target Dropbox account. 
+You may specify Storage [tables](/storage/tables/) or [files](/storage/files/) to be written to the target Dropbox account. 
 
 - To specify tables, click the **New Table Input** button, and select the table you want to send to Dropbox. 
 *Filename* is the name of the destination file, the directory `/data/in/tables/` is ignored.
