@@ -75,7 +75,7 @@ For example, when *Number of header rows* is set to `1`, the example table will 
 
 Data starts at the row with index = 1, the row before that (index = 0) is the header row.
 
-When set to `4`, the table import will fail, and the attempted import table (available from [Files](/storage/file-uploads/))
+When set to `4`, the table import will fail, and the attempted import table (available from [Files](/storage/files/))
 will look as follows:
 
 |empty|Reliant_Motor_Company|Reliant_Robin|empty|empty|3327|

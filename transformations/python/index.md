@@ -97,7 +97,7 @@ The following image shows the directory structure:
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
 so that you can move the script to a Keboola Connection transformation with no changes. To develop a Python transformation 
-which takes a [sample CSV file](/transformations/python/source.csv) locally, take the following steps:
+which takes a [sample CSV file](/transformations/source.csv) locally, take the following steps:
 
 - Put the Python code into a file, for example script.py, in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
@@ -127,7 +127,7 @@ A finished example of the above is attached below in [data.zip](/transformations
 Download it and test the script in your local Python installation. The `destination.csv` output file will be created.
 This script can be used in your transformations without any modifications. All you need to do is
 
-- upload the [sample CSV file](/transformations/python/source.csv) into your storage,
+- upload the [sample CSV file](/transformations/source.csv) into your storage,
 - set the input mapping from that table to `source.csv` (expected by the Python script),
 - set the output mapping from `destination.csv` (produced by the Python script) to a new table in your Storage,
 - copy & paste the script into the transformation, and, finally,

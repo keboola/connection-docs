@@ -47,7 +47,7 @@ be part od the TDE file. When configuring the data types, use the *Preview* icon
 
 As optional last steps in table configuration, you can configure the name of the TDE file (useful for uploading to Dropbox or Google Drive)
 and *Table data filter*. The table data filter allows you to set a simple file for one column or
-take advantage of [Incremental processing](https://help.keboola.com/storage/tables/#incremental-processing) by writing only
+take advantage of [Incremental processing](/storage/tables/#incremental-processing) by writing only
 recently modified data.
 
 {: .image-popup}

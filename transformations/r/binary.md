@@ -60,7 +60,7 @@ of the **time_spent_in_shop** column on the **number_of_items** column in the da
  
 ## Step 2 - Save Model to Keboola Connection
 
-The second step is to save the model file to Keboola Connection. For that, go to **Storage** -- [**File uploads**](/storage/file-uploads/) and upload the obtained file (`time_model.rda`); 
+The second step is to save the model file to Keboola Connection. For that, go to **Storage** -- [**File uploads**](/storage/files/) and upload the obtained file (`time_model.rda`); 
 it should be marked as *permanent* and a tag must be assigned to it.
 
 {: .image-popup}

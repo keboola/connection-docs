@@ -27,7 +27,7 @@ may store the value `BIGINT` as a type of a column; that type maps to the `INTEG
 read the general type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
 This logic is again designed to ensure high interoperability between the components. See the [conversion table below](#data-type-conversions).
 
-You view the extracted data types in the [Storage Table](https://help.keboola.com/storage/tables/) detail:
+You view the extracted data types in the [Storage Table](/storage/tables/) detail:
 
 {: .image-popup}
 ![Screenshot - View Column Data Type](/storage/tables/data-types/column-data-type.png)

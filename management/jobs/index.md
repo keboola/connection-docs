@@ -108,9 +108,9 @@ When you click an **importTable** job, you'll see the Storage job detail:
 {: .image-popup}
 ![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)
 
-Clicking **File ID** will take you to the **File Uploads** tab in **Storage**,
+Clicking **File ID** will take you to the **Files** section in **Storage**,
 where all data pushed into your Keboola Connection project is stored.
 You can download the data and import it into other tables, or you can revert to an older table version.
 
 {: .image-popup}
-![Screenshot - File uploads](/management/jobs/storage-file-uploads.png)
+![Screenshot - Files](/management/jobs/storage-file-uploads.png)
