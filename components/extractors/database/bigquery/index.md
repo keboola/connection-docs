@@ -16,7 +16,7 @@ Running the extractor creates a background job that
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Connection Storage.
 - removes the results from Google Cloud Storage.
 
-*Note: Using the Google BigQuery extractor is also described in our [Getting Started Tutorial](https://help.keboola.com/tutorial/ad-hoc/#using-bigquery-extractor).*
+*Note: Using the Google BigQuery extractor is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-extractor).*
 
 ## Initial Setup
 

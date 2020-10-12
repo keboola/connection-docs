@@ -1,22 +1,21 @@
 ---
-title: Migration between regions
+title: Migration between stacks
 permalink: /management/project/migration/
 ---
 
 * TOC
 {:toc}
 
-Keboola Connection is available in multiple [regions](https://developers.keboola.com/overview/api/#regions-and-endpoints) — 
-currently in the US (connection.keboola.com) and in the EU (connection.eu-central-1.keboola.com). Each region instance is a 
-completely independent full stack of Keboola Connection services.
-Each project is fully contained within one of these stacks (regions). In case you need to migrate a project between 
-regions for whatever reason, you can accomplish that in cooperation with [Keboola Support](/management/support/).
+Keboola Connection is available in multiple [stacks](/overview/#stacks). Each stack instance 
+is completely independent set of Keboola Connection services. Each project is fully contained within one of these stacks. 
+In case you need to migrate a project between stacks for whatever reason, you can accomplish that in cooperation 
+with [Keboola Support](/management/support/).
 
 ## Migration Steps
 
 The project migration process is as follows:
 
-- First you must obtain a new empty project in the destination region.
+- First you must obtain a new empty project in the destination stack.
 - Then contact Keboola Support using the support link in your source project and provide the name and ID of your 
 destination project.
 - Keboola Support will then run a pre-migration validation to check if your project can be safely migrated.
@@ -39,11 +38,10 @@ destination project.
 - Configurations for all extractors, writers, and applications
 - All transformations
 - All orchestrations
-- Keboola Provisioned Snowflake writers will be moved to the new region's Snowflake account.
-- GoodData projects will be moved to the new region's GoodData account.
+- Keboola Provisioned Snowflake writers will be moved to the new stack's Snowflake account.
+- GoodData projects will be moved to the new stack's GoodData account.
 
 ### Important
-
 - The internal timestamp for all data rows will be set to the date of the migration. So, if you are using incremental loads 
 based on [Changed in last](/transformations/mappings/#input-mapping) in 
 transformations or writers, it will fetch all data on the first run.
@@ -52,12 +50,11 @@ transformations or writers, it will fetch all data on the first run.
 - Each Keboola Connection stack has a different set of assigned [IP addresses](/components/ip-addresses/).
 
 ## What Won't Be Migrated
-
 - Encrypted values
   - Passwords, API keys, etc., stored in the extractor, writer and application configurations
   - OAuth authorizations
   - Extractors and writers SSH Tunnel private keys
-- [Files](/storage/file-uploads/)
+- [Files](/storage/files/)
 - Job execution history
 - Events and logs
 - Configuration versions
@@ -65,25 +62,9 @@ transformations or writers, it will fetch all data on the first run.
 - Project users
 - Project API tokens
 
-## Migration from US to EU
-
-There are some legacy and deprecated components in the US region that are not available in the EU region. 
-These have to be removed from projects or migrated to new versions before migration. 
-
-Except components marked as deprecated, this also covers:
-- Rest Box extractor
-- Anomaly detection application
-- Basket analysis application
-- Correlations application
-- Data Type Assistant application
-- Grouped histogram application
-- Linear dependency finder application
-- Next event application
-- Segmentation application
-- Table Content Overview application
-
-Also, projects with a Redshift backend should be migrated to Snowflake first.
-Deprecated `MySQL` transformations are not supported in the EU region and should be migrated to Snowflake first as well.
+There may be some deprecated components in the source stack that are not available in the destination stack. 
+These have to be removed from projects or migrated to new versions before migration. Also, the project backends 
+must match (e.g. both projects must have Snowflake backend).
 
 Following your project validation, Keboola Support will inform you if they find any of the above issues in your 
 project.

@@ -20,4 +20,4 @@ To review information about an existing bucket, hover over the bucket name and s
 {: .image-popup}
 ![Screenshot - Bucket information](/storage/buckets/bucket-info.png)
 
-Apart from being used for organizing tables, buckets can also be used for [sharing tables](/storage/buckets/sharing).
+Apart from being used for organizing tables, buckets can also be used for [sharing tables](/catalog/).

@@ -94,7 +94,7 @@ Clicking the **Create** button will load the data into the sandbox:
 Choose how the data will be loaded and processed:
 
  - *Load input tables only* --- load the tables specified in the input mapping.
- - *Prepare transformation* --- execute [transformation dependencies](/transformations/#dependencies), that means the sandbox workspace is prepared for the current transformation (use only if there are any dependencies).
+ - *Prepare transformation* --- execute [transformation dependencies](/transformations/#dependencies), that means the sandbox is prepared for the current transformation (use only if there are any dependencies).
  - *Execute transformation without writing to Storage API* --- this is a dry-run for validation.
 
 Once the sandbox is ready, you will get a notification. Or, watch the progress on the Jobs page.
@@ -288,23 +288,14 @@ supported only by the [API](https://provisioningapi.docs.apiary.io/#reference/cr
 - Sandboxes will be deleted after 5 days unless extended.
 - Adding data to existing sandboxes is not supported yet.
 
-
-#### 1-Click Model Ops
-
-Jupyter sanboxes fully support MLflow for the ML life-cycle management. 
-So data scientists have easy access to shared experiment tracking, artifact store, model store, and model 
-deployment through built-in functions and MLflow’s user interface.
-
-
 ## Code Templates
-
 For [Jupyter](#jupyter-based-sandbox) and [RStudio](#r-sandbox-rstudio) sandboxes, code templates 
 can be defined. They can be set for a given **user** or for the entire **project**.
 A Jupyter template is a notebook file (.ipynb). An RStudio template is a simple text file.
 If a sandbox is loaded from a transformation, the transformation code will be appended after the
 template code.
 
-To create a **project template**, go to [Storage -- Files](/storage/file-uploads/) and upload the template with
+To create a **project template**, go to [Storage -- Files](/storage/files/) and upload the template with
 the tag `_python_sandbox_template_`, `_r_sandbox_template_` or `_julia_sandbox_template`. Don't forget to mark the file
 as permanent. Before uploading the template, make sure it does not contain any sensitive data 
 (*Kernel* -- *Restart & Clear Output* might be a good idea). The file name is arbitrary.

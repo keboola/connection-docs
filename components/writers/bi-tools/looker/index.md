@@ -12,7 +12,7 @@ This writer pushes data to your Looker instance. It currently uses Snowflake as 
 
 To connect Keboola to your Looker account you need API credentials. You can obtain them in Looker administration. Exact steps required are described in [Looker docs](https://docs.looker.com/reference/api-and-integration/api-auth#authentication_with_a_sdk). You will need `Client ID` and `Client secret` to authenticate Keboola with Looker. 
 
-Create [new **Looker writer** configuration](https://help.keboola.com/components/#creating-component-configuration) in your project. 
+Create [new **Looker writer** configuration](/components/#creating-component-configuration) in your project. 
 
 Continue by setting up a Snowflake workspace to use with Looker. You can either supply your own or use Keboola generated workspace. 
 

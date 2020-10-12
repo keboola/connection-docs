@@ -45,7 +45,7 @@ API tokens are created
 1. automatically when joining a project (master token).
 2. automatically when creating a new configuration of certain components (for example, Orchestrations).
 3. automatically when running a JuypterLab Workspace.
-4. automatically when using [external OAuth](https://help.keboola.com/components/#external-authorization) authorization.
+4. automatically when using [external OAuth](/components/#external-authorization) authorization.
 5. manually when needed.
 
 Automatically created tokens have lowest possible permissions for their task and also set expiration if possible.
@@ -136,8 +136,7 @@ selecting **Full Access** for Trash. This is rarely needed.
 
 ## Refreshing Token
 Every token can be **refreshed**: a new token value (token string) is generated, and the old token becomes 
-immediately invalid. That means you have to update all places where the token was used. If you 
-invalidate your own master token, you have to reload your Keboola Connection view in the browser.
+immediately invalid. That means you have to update all places where the token was used.
 
 {: .image-popup}
 ![Screenshot - Refresh Token Button](/management/project/tokens/refresh-token.png)

@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Generating plots in R is supported through [Storage file uploads](/storage/file-uploads/). To upload a plot to Storage,
+Generating plots in R is supported through [Storage file uploads](/storage/files/). To upload a plot to Storage,
 save the file in the output directory for files (`out/files/`). Each file in that directory will be automatically saved into Storage File Uploads.
 
 To make file handling a bit easier, it is possible to write a *manifest*, which describes the file. This can be used to set *file tags*

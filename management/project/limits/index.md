@@ -118,7 +118,7 @@ If you need more information, please contact your CSM.
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [Table Storage](/storage/). 
 [Aliases](/storage/tables/#aliases) and [Linked Buckets](/catalog/) do 
-not count towards this number, and neither do [Files](/storage/file-uploads).
+not count towards this number, and neither do [Files](/storage/files/).
 
 The table storage size is measured as it is reported by the underlying [backend](/storage/#backend-properties). 
 This means that the reported size is substantially smaller than the size of imported raw CSV files, thanks to 
