@@ -26,7 +26,6 @@ On the **Account Settings** page, you can do the following:
 
 - [Change your password](#changing-password)
 - Enable or disable [multi-factor authentication](#multi-factor-authentication)
-- Review [notifications](#notifications)
 - Use [promo codes](#promo-codes)
 - Create management [tokens](#tokens)
 - Work with [organizations and maintainers](/management/organization/)
@@ -186,18 +185,6 @@ The token will be shown to you.
 ![Screenshot -- Manage Token Created](/management/account/manage-token-created.png)
 
 Despite the fact that management tokens always expire, we advise you to delete the ones you are not using.
-
-## Notifications
-Notifications are announcements sent by Keboola employees in case of important platform changes which
-are affecting any of your projects. These mostly include deprecation of old components and migration reminders.
-All of these changes are announced in advance on the [status page](http://status.keboola.com/).
-Notifications are also sent when the [project limits](/management/project/limits/) are exceeded.
-
-{: .image-popup}
-![Screenshot -- Notifications](/management/account/notifications.png)
-
-On the **Notifications** page, you can mark notifications as read. Unread notifications show as a bell with a
-red dot.
 
 ## Promo Codes
 You may receive promotional codes to create a new project. They are not applied to existing
