@@ -136,16 +136,16 @@ This section explains a few terms that are often used throughout these documenta
 
 ### Stacks
 Keboola Connection is available in multiple stacks, these can be either multi-tenant
-or single-tenant. Current multi-tenant stacks are:
+or single-tenant. The current multi-tenant stacks are:
 
 - US AWS -- [connection.keboola.com](https://connection.keboola.com), 
 - EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
 - US Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
 
-A **Stack** is a combination of a datacenter location (region) and a cloud provider, stack is identified by
+A **stack** is a combination of a datacenter location (region) and a cloud provider, and is identified by
 its domain (URL). The currently supported
 cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/en-us/).
-Stack is a completely independent full instance of Keboola Connection services. That means that 
+A stack is a completely independent full instance of Keboola Connection services. That means that 
 if you have projects in multiple stacks, you need to have multiple Keboola Connection accounts.
 
 Each stack uses a different network with a different set of **dedicated [IP addresses](/components/ip-addresses/)**.
@@ -155,7 +155,7 @@ more detail how to handle multiple stacks when working with the API.
 Single-tenant stacks are available for a single enterprise customer with a domain name in form `connection.CUSTOMER_NAME.keboola.com`.
 
 ### Jobs
-Most things in Keboola Connection are done using the batch approach; when you do some operation, a [job](/management/jobs/) is created
+Most things in Keboola Connection are done using the batch approach; when you perform an operation, a [job](/management/jobs/) is created
 and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same
 time and you can continue your work in the meantime.
 

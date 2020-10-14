@@ -34,7 +34,7 @@ destination project.
 
 ## What Will Be Migrated
 
-- All project data and metadata for buckets, tables and columns
+- All project data and metadata for buckets, tables, and columns
 - Configurations for all extractors, writers, and applications
 - All transformations
 - All orchestrations
@@ -53,7 +53,7 @@ transformations or writers, it will fetch all data on the first run.
 - Encrypted values
   - Passwords, API keys, etc., stored in the extractor, writer and application configurations
   - OAuth authorizations
-  - Extractors and writers SSH Tunnel private keys
+  - Extractor and writer SSH Tunnel private keys
 - [Files](/storage/files/)
 - Job execution history
 - Events and logs
@@ -64,7 +64,7 @@ transformations or writers, it will fetch all data on the first run.
 
 There may be some deprecated components in the source stack that are not available in the destination stack. 
 These have to be removed from projects or migrated to new versions before migration. Also, the project backends 
-must match (e.g. both projects must have Snowflake backend).
+must match (e.g., both projects must have a Snowflake backend).
 
 Following your project validation, Keboola Support will inform you if they find any of the above issues in your 
 project.

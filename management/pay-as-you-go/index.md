@@ -1,38 +1,34 @@
 ---
-title: Pay-As-You-Go Project
+title: Free Plan (Pay-As-You-Go)
 permalink: /management/payg-project/
 ---
 
 * TOC
 {:toc}
 
-As an alternative to a [standard Keboola Connection project](/management/project/), Keboola added the option to create a pay-as-you-go project (PAYG).
+You can now start working with Keboola Connection for free and without a contract. 
+Simply signing up on the website starts a project under the Free Plan.
 
-##Platform Limits
+## Platform Limits
+Pay-as-you-go (PAYG) projects have the following limits, which differ from the limits for standard projects.
 
-Pay-as-you-go projects have the following limits, which are different from the limits of standard projects:
+- **Single project:** each Free Plan account is limited to one project, so it is not feasible for multi-project architecture and there is no data catalog.
+- **Features:** apart from the absent data catalog, and transformations being limited to SQL and Python, all features are available to Free Plan account holders. There is no limit to the number of sources, orchestrations, etc.
+- **Performance:** a Keboola Connection project in PAYG is limited to an xsmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
+- **Storage:** a Free Plan project is limited to 250 GB of data storage.
+- **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
 
-- **Single project:** 
-Anyone can sign up for a PAYG project. 
-The project is part of an Organization, where client has no admin access. 
-If the client signs up for another project, a new Organization is created.
-Anyone can sign up for any number of projects, but those projects are not connected in any way (no sharing, no data catalog, etc.).
-
-- **Performance:** 
-A Keboola project in PAYG is limited to xsmall DWH (twice slower than standard projects).
-
-- **Support:** 
-Except for the trial period, PAYG projects are not Zendesk supported. 
-If you need help, you must pay for professional services or rely on community support. 
-
-##DWH Backend
-
-Users can choose between a Keboola-managed and their own Snowflake backend.
+## DWH Backend
+Users can choose between a Keboola-managed backend or their own Snowflake backend.
 
 ## Pricing & Credits
+Each Free Plan project receives up to 300 minutes of free runtime per month for free in the form of credits 
+(one credit equals 60 minutes). Additional credits can be purchased within the platform by using a credit card.
+There is no contract apart from the Free Plan Terms of Services. If a project runs out of credits, 
+the jobs cease executing until more credits are purchased or free credits are topped up.
 
-For a pay-as-you-go project, you need to buy credits with a credit card.
-You can run any number of jobs, but for each hour of job execution, one credit is used. 
-A job is started only if there is remaining credit balance.
-Once it starts, it is allowed to finish even if it consumes more credits than available. 
-When that happens, you will receive a notification reminding you to top up the balance. 
+Unused Free credits don’t roll over from one month to the next. Purchased credits don’t expire during the life of the project.
+
+Any Free Plan project can be migrated to a  [standard Keboola Connection project](/management/project/) 
+upon execution of our standard order form under the Master Software Subscription Agreement (MSSA).
+
