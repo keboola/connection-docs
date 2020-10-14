@@ -28,7 +28,3 @@ You can also
 - [export all project data](/management/project/export/).
 - [migrate project to another region](/management/project/migration/)
 - [delete the project](/management/project/delete/).
-
-Apart from the settings page, there are also [Notifications](/management/account/#notifications) available. To access these
-important messages collected from all of your projects, go to your [Account page](/management/account/), or click the bell on
-the right of the top menu.
