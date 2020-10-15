@@ -17,6 +17,8 @@ and a possible contract update conversation.
 2. **Platform limits** represent what our platform is **technically capable of**. Reaching or exceeding 
 these limits is either technically impossible, or it carries a risk of degraded performance.
 
+**Note:** These limits apply to standard Keboola Connection projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
+
 ## Business Limits
 Business limits are set for each project upon entering into the subscription. 
 You can find them under **Users & Settings** in the **Limits** tab:

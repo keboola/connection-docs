@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 The *File Storage* is available in the **Files** section of Storage and contains all raw files uploaded to your project.
-It also contains files with data exported from tables. These are created when you request to export a table from *Table Storage*. The *Files Storage* serves two main purposes:
+It also contains files with data exported from tables. These are created when you request to export a table from *Table Storage*. The *File Storage* serves two main purposes:
 
 1. Files can be used to store an arbitrary file.
 2. Every data table file is stored in Files before it is processed and pushed into a table.
@@ -73,14 +73,14 @@ This can happen for some [exported or imported tables](/storage/tables/uploads/)
 Merging a sliced file requires a [substantial effort](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
 
 ## Limits
-The maximum allowed size of an uploaded file is currently 5GB (5,368,709,120 bytes exactly). 
+The maximum allowed size of an uploaded file is currently 5 GB (5,368,709,120 bytes exactly). 
 This applies to both file and table uploads. 
-The actual table size may be bigger, because it is uploaded as a compressed file. 
+The actual table size may be bigger, because the table is uploaded as a compressed file. 
 If you need to upload a larger file, you need to use 
 [sliced upload](https://keboola.docs.apiary.io/#reference/files). 
 In that case, the limit applies to the chunk size.
 
-As stated above, unless marked as permanent, each file is automatically deleted 15 days after it has been created. 
+As stated above, unless marked as permanent, each file will be automatically deleted 15 days after its creation. 
 This also applies to automatically generated files as a result of table imports and exports. 
-Also, because the majority of Keboola Connection File Storage contains duplicates of your table data, 
+In addition, because the majority of Keboola Connection File Storage contains duplicates of your table data, 
 the whole Files storage does not count towards your project quota.
