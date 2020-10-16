@@ -20,7 +20,7 @@ fetch and process the [list of existing IP addresses in JSON format](/components
 Below are listed the available [Keboola Connection Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
 
 ## connection.keboola.com
-For projects in the default US [region](/overview/#regions) (AWS region `us-east-1`), 
+For projects in the default AWS US [region](/overview/#regions) (AWS region `us-east-1`), 
 the following IP addresses are currently used:
 
 {% comment %}
@@ -33,7 +33,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `149.72.196.5`
 
 ## connection.eu-central-1.keboola.com
-For projects in the EU [region](/overview/#regions) (AWS region `eu-central-1`), 
+For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`), 
 the following IP addresses are currently used:
 
 {% comment %}
@@ -43,7 +43,15 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `35.157.93.175`
 - `149.72.196.5`
 
-## connection.east-us-2.azure.keboola.com
+## connection.north-europe.azure.keboola.com
+For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
+the following IP addresses are currently used:
+
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
+- `40.127.144.42`
+
 
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,

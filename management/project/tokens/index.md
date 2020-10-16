@@ -196,5 +196,6 @@ The Storage Console allows some basic operations with the project [Storage](/sto
 The link to the Storage API Console is available at the token retrieval page as it is different for each 
 [region](https://developers.keboola.com/overview/api/):
 
-- [US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
-- [EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)
+- [AWS US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
+- [AWS EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)
+- [Azure EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.north-europe.azure.keboola.com)

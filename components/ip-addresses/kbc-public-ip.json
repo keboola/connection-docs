@@ -61,6 +61,12 @@
             "vendor": "aws",
             "region": "ap-southeast-2",
             "service": "syrup"
+        },
+        {
+            "ipPrefix": "40.127.144.42/32",
+            "vendor": "azure",
+            "region": "north-europe",
+            "service": "syrup"
         }
     ]
 }
