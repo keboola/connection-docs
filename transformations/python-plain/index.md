@@ -45,6 +45,8 @@ def main():
 main()
 {% endhighlight %}
 
+You can organize the script into [blocks](/transformations/#writing-scripts).
+
 ### Packages
 You can list extra packages in the UI. These packages are installed using [pip](https://pypi.org/project/pip/).
 Generally, any package available on [PyPI](https://pypi.org/) can be installed. However, some packages have external dependencies, which might not be available. Feel free to [contact us]/management/support/) if you run into problems. When the 
