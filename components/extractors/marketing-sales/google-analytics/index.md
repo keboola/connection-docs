@@ -122,7 +122,8 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
     {: .image-popup}
     ![Screenshot - Google API Console - Project](/components/extractors/marketing-sales/google-analytics/google_console_project.png)
 
-3. Enable the **Google Analytics Reporting API**.
+3. Enable the [**Google Analytics Reporting API**](https://console.developers.google.com/apis/library/analyticsreporting.googleapis.com). 
+If you plan to use the [Multi-Channel Funnels API](https://developers.google.com/analytics/devguides/reporting/mcf/v3), you also need to enable **[Google Analytcics API](https://console.developers.google.com/apis/library/analytics.googleapis.com)**.
  
     {: .image-popup}
     ![Screenshot - Google API Console - Enable API](/components/extractors/marketing-sales/google-analytics/google_console_enable.png)

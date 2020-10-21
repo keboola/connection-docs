@@ -285,6 +285,20 @@ Apart from that new transformation come with [Workspaces](/transformations/works
 which many new features -- such as loading and unloading data with a running workspace, 
 resuming the workspace, Spark and MLflow support.
 
+#### Writing Scripts
+The transformation script can be organized into pieces which we call **code** and these can be
+further organized into **blocks**. This allows you to somehow structure lengthy scripts.
+The structure provides **no executional isolation** --- all code pieces execute sequentially
+in the same context in a top-down left-to-right direction. You can assign custom names to 
+individual blocks and code pieces. You can reorder both the code elements and blocks by dragging them:
+
+{: .image-popup}
+![Code](/transformations/code.png)
+
+The above setup therefore executes: Company, Contact, Employee, Opportunity & Auxiliary, Activities, 
+Opportunity & Contact as if it were a single script (SQL in this case). Splitting the code into
+scripts is in no way required, you can put your whole script in a single block and code. 
+
 ### Legacy Transformations
 Legacy transformations is the current version of transformations available in most projects
 in US and EU stacks. Each transformation bucket can contain any number of individual transformations.

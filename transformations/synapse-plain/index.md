@@ -26,3 +26,5 @@ CREATE TABLE "result" WITH (DISTRIBUTION = ROUND_ROBIN) AS
 
 {: .image-popup}
 ![Screenshot - Sample Transformation](/transformations/synapse-plain/sample-transformation.png)
+
+You can organize the script into [blocks](/transformations/#writing-scripts).

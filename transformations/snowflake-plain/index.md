@@ -68,6 +68,8 @@ CREATE OR REPLACE TABLE "result" AS
 {: .image-popup}
 ![Screenshot - Sample Transformation](/transformations/snowflake-plain/sample-transformation.png)
 
+You can organize the script into [blocks](/transformations/#writing-scripts).
+
 ## Best Practices
 
 ### Case Sensitivity
