@@ -8,8 +8,8 @@ redirect_from:
 * TOC
 {:toc}
 
-*To create your first transformation, and to see how Transformations are an integral part of the Keboola Connection workflow,
-go to our [Getting Started tutorial](/tutorial/manipulate/).*
+*To create your first transformation, and to see how Transformations are an integral part of the Keboola Connection 
+workflow, go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
 (Marketing data preaggregation, Tableau denormalizer, Integrity checker or Join marketing channels
@@ -42,22 +42,22 @@ the transformation processes -- the transformation always operates in an isolate
 
 ## Mapping
 [**Input and Output Mapping**](/transformations/mappings/) --- separates the source data from your transformation. 
-Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the input mappings.
-Database table names and CSV file names in transformations are completely unrelated to names of tables in Storage.
-This means for example that you can rename tables in storage and it won't break any of your transformations.
+Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the 
+input mappings. Database table names and CSV file names in transformations are completely unrelated to names of tables 
+in Storage. This means, for example, that you can rename tables in storage and it won't break any of your transformations.
 
 {: .image-popup}
 ![Simple input and output mapping](/transformations/mappings.png)
 
-There are number of staging options which also influences the transformation script code. 
-Typically you will create a SQL transformation with works with data in a Snowflake database, or a Python script which works with 
-CSV files on a "local" disk (local from the perspective of the script). But it is possible to have a Python script which 
-works with data in a Synapse database or with data on an Azure Blob Storage (ABS).
+There are a number of staging options that influence the transformation script code, too. 
+Typically, you will create an SQL transformation that works with data in a Snowflake database, or a Python script 
+that works with CSV files on a "local" disk (local from the perspective of the script). But it is possible to have 
+a Python script that works with data in a Synapse database or with data on an Azure Blob Storage (ABS).
 The transformations are very flexible, though all the combinations might not be available in all projects at all times.
 
 ## Backends
 The  **Transformation Script** is a code that defines what happens with the data while taking the
- tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
+tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
 
 A backend is the engine running the transformation script. It is either a database server
 ([Amazon Redshift](https://aws.amazon.com/redshift/),
@@ -99,27 +99,29 @@ transformation.
 
 You can easily develop transformations using the [Workspace](/transformations/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on the copies of your tables
-without affecting data in your Storage, or your transformations. You can convert a workspace to a transformations 
+without affecting data in your Storage, or your transformations. You can convert a workspace to a transformation 
 and vice-versa.
 
 For Redshift and Synapse, you'll get a separate database
 to which the data from input mapping can be loaded. You'll obtain database credentials which you can
-use with a database client of your choice. For Snowflake you can do the same, in addition we also provide access
-to [Snowflake web interface](https://docs.snowflake.com/en/user-guide/ui-using.html). Therefore you can
+use with a database client of your choice. For Snowflake you can do the same. In addition, we provide access
+to the [Snowflake web interface](https://docs.snowflake.com/en/user-guide/ui-using.html). Therefore you can
 develop transformations without the necessity to download and install a database client.
 
 For Julia, Python and R transformations, you can also use a workspace represented 
 by an isolated [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) instance.
 
 ## Transformation Versions & Features
-The current and most-used transformations are now marked as legacy, they receive important updates (e.g. Python, R, Julia updates) 
-but won't receive any new features. *Legacy transformations* will be available together with *New transformations* for a long period 
-of time to ensure smooth migration (which will start once all features from Legacy Transformations are available in New Transformations
-and there is migration path).
-New transformations are not available in all projects currently, therefore it's perfectly ok to use the legacy transformations for day-to-day work.
+The current and most-used transformations are now marked as legacy, they receive important updates 
+(e.g., Python, R, Julia updates) but won't receive any new features. *Legacy Transformations* will be available 
+together with *New Transformations* for a long period of time to ensure smooth migration (which will start 
+once all features from Legacy Transformations are available in New Transformations and there is a migration path).
+New transformations are not available in all projects at the moment, therefore it's perfectly okay to use the Legacy 
+Transformations for day-to-day work.
 
-Some feature of the legacy transformations are not yet available in the new transformations and some feature will never be available in the new transformations. The following table shows the feature status as of **October 2020**.
-New transformations are generally available on Azure based [stacks](/overview/#stacks).
+Some features of legacy transformations are not yet available in new transformations and some features will 
+never be available in new transformations. The following table shows the feature status as of **October 2020**.
+New transformations are generally available on Azure-based [stacks](/overview/#stacks).
 
 <table>
 <tr>
@@ -251,42 +253,43 @@ New transformations are generally available on Azure based [stacks](/overview/#s
 </table>
 
 #### Which Version Am I Using?
-In transformation overview, if you are seeing workspaces and shared code, you're using *new transformations*:
+In the transformation overview, if you are seeing workspaces and shared code, you're using *new transformations*:
 
 {: .image-popup}
 ![New Transformations Overview](/transformations/new-transformations-1.png)
 
-In transformation detail, if you're seeing variables and shared code, you're using *new transformations*:
+In the transformation detail, if you're seeing variables and shared code, you're using *new transformations*:
 
 {: .image-popup}
 ![New Transformations Detail](/transformations/new-transformations-1.png)
 
-In transformation detail, if you're seeing buckets and sandboxes, you're using *legacy transformations*:
+In the transformation detail, if you're seeing buckets and sandboxes, you're using *legacy transformations*:
 
 {: .image-popup}
 ![Legacy Transformations Overview](/transformations/legacy-transformations-1.png)
 
-In transformation detail, if you're seeing dependent transformations, phases and sandbox you're using *legacy transformations*:
+In the transformation detail, if you're seeing dependent transformations, phases and sandbox you're using 
+*legacy transformations*:
 
 {: .image-popup}
 ![Legacy Transformations Overview](/transformations/legacy-transformations-1.png)
 
 ### New Transformations
-New transformations behave like any other [Component](/components/). This means that they use the 
+New transformations behave like any other [component](/components/). This means that they use the 
 standard [API](https://developers.keboola.com/integrate/storage/api/configurations/) to manipulate
-and run configurations and also that it is possible to create your own 
+and run configurations and that it is possible to create your own 
 [transformation components](https://developers.keboola.com/extend/component/).
 
-New transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
+New Transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
 encouraging users to create reusable blocks of code. They also support 
-[Variables](/transformations/variables/#variables) which can be used to parametrize transformations.
+[Variables](/transformations/variables/#variables) that can be used to parametrize transformations.
 
-Apart from that new transformation come with [Workspaces](/transformations/workspace/) (previously named Sandboxes)
-which many new features -- such as loading and unloading data with a running workspace, 
+Apart from that, new transformations come with [Workspaces](/transformations/workspace/) (previously named Sandboxes)
+which have many new features -- such as loading and unloading data with a running workspace, 
 resuming the workspace, Spark and MLflow support.
 
 #### Writing Scripts
-The transformation script can be organized into pieces which we call **code** and these can be
+The transformation script can be organized into pieces that we call **code**, and these can be
 further organized into **blocks**. This allows you to somehow structure lengthy scripts.
 The structure provides **no executional isolation** --- all code pieces execute sequentially
 in the same context in a top-down left-to-right direction. You can assign custom names to 
@@ -300,14 +303,15 @@ Opportunity & Contact as if it were a single script (SQL in this case). Splittin
 scripts is in no way required, you can put your whole script in a single block and code. 
 
 ### Legacy Transformations
-Legacy transformations is the current version of transformations available in most projects
-in US and EU stacks. Each transformation bucket can contain any number of individual transformations.
+Legacy Transformations are the current version of transformations available in most projects
+in the US and EU stacks. Each transformation bucket can contain any number of individual transformations.
 It should represent a logical set of operations you want to perform together.
 
-Though marked as legacy they are perfectly ok to be used for daily work, since they still receive updates, just no new features.
-Legacy transformations are grouped into folders called **Transformation buckets**.
+Though marked as legacy, they are perfectly okay to be used for daily work, since they still receive updates, 
+just no new features. Legacy Transformations are grouped into folders called **Transformation buckets**.
 
-If you want to maintain the best forward compatibility we recommend not to make complicated structures of phases and dependencies.
+If you want to maintain the best forward compatibility, we recommend not to make complicated structures of phases 
+and dependencies.
 
 #### Phases
 Phases in older projects allow multiple transformation steps to be run within a single workspace.
@@ -315,4 +319,5 @@ Multiple steps with the same input mapping (sharing data) might save a bit of pr
 everything is less clear and isolated. To save time, run multiple orchestration tasks in parallel instead.
 
 #### Dependencies
-Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all required steps have been executed.
+Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all 
+required steps have been executed.

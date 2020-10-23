@@ -7,19 +7,19 @@ permalink: /transformations/variables/
 {:toc}
 
 Variables allow you to parametrize transformations. This is useful when you have similar transformations
-which differ in only a limited number of values. You can have for example a transformation which
-processes all orders from the the Meals department and with variables you can modify to work also for the
-Drinks department.
+which differ in only a limited number of values. You can have, for example, a transformation that
+processes all orders from the Meals department. With variables, you can modify it to work for the
+Drinks department, too.
 
 ## Variables
-Transformation variables are unrelated to the transformation code itself. I.e. they do not manifest themselves
+Transformation variables are unrelated to the transformation code itself. It means that they do not manifest themselves
 as SQL or Python variables. Transformation variables are evaluated before the transformation is run and
-are valid for entire configuration (all code blocks, shared code, mapping, etc.). Variables are referenced
+are valid for the entire configuration (all code blocks, shared code, mapping, etc.). Variables are referenced
 in the configuration using the 
 [Moustache Variable syntax](https://scalate.github.io/scalate/documentation/mustache.html#Variables).
 
 All variables referenced in the code must be defined in the variables section. All defined variables 
-have to have assigned values.
+must have assigned values.
 
 ### Example
 Consider the following transformation:
@@ -36,7 +36,7 @@ CREATE OR REPLACE TABLE "result" AS
 	SELECT "first", "second" * {{multiplier}} AS "larger_second" FROM "source";
 {% endhighlight %}
 
-When you define variable, you have to provide default value:
+When you define a variable, you have to provide its default value:
 
 {: .image-popup}
 ![Screenshot - Variables Configuration](/transformations/variables/variables-setting.png)
@@ -46,7 +46,7 @@ When you run a transformation, you can provide a runtime override of the default
 {: .image-popup}
 ![Screenshot - Running Transformation](/transformations/variables/variables-run.png)
 
-When a variable is referenced in the code but not defined, or its values is missing, 
+When a variable is referenced in the code but not defined, or its value is missing, 
 you'll get an error:
 
     Missing values for placeholders: "multiplier"
@@ -70,7 +70,7 @@ There you can set variable values override:
 ![Screenshot - Task Parameters](/transformations/variables/task-parameters.png)
 
 In the [above example](/transformations/variables/#example), you can override the default 
-value by **adding** the following to the configuration json:
+value by **adding** the following code to the configuration json:
 
 {% highlight json %}
 	"variableValuesData": {
@@ -100,7 +100,7 @@ The resulting configuration will look similar to this:
 {% endhighlight %}
 
 ## Shared Code
-Shared code i slightly related to variables in that it is another option how to make the
+Shared code is slightly related to variables in that it is another option how to make the
 transformation code more dynamic. Shared code allows you to share pieces of code between
 otherwise unrelated transformations. Like with the variables, the shared code is evaluated
 before the transformation runs. This means that it does not interfere with your
@@ -116,15 +116,15 @@ Or from an existing transformation code:
 {: .image-popup}
 ![Screenshot - Create Shared Code from Transformation](/transformations/variables/shared-code-2.png)
 
-You have to enter name for the shared code and optionally you can also specify 
+You have to enter the name for the shared code and, optionally, also specify 
 [variables](/transformations/variables/#variables) for the shared code. When you share an 
-existing piece of transformation code, the code and code type is filled automatically.
+existing piece of transformation code, the code and code type are filled in automatically.
 
 {: .image-popup}
 ![Screenshot - Shared Code Detail](/transformations/variables/shared-code-detail.png)
 
 ### Using Shared Code
-You can use Shared code when editing a transformation:
+You can use shared code when editing a transformation:
 
 {: .image-popup}
 ![Screenshot - Shared Code Use](/transformations/variables/shared-code-use-1.png)
@@ -134,7 +134,7 @@ Select the shared code you want to use. There are two options how you can use it
 - **Use Inline** --- This will make a copy of the shared code in the transformation you're editing. There 
 won't be any link between the transformation and the shared code.
 - **Use as Shared Code** --- This will link the shared code with the transformation. When you modify the
-shared code, it will modify in all linked transformations.
+shared code, it will affect all linked transformations.
 
 {: .image-popup}
 ![Screenshot - Shared Code Use](/transformations/variables/shared-code-use-2.png)
@@ -154,21 +154,21 @@ When a shared code is linked to transformations, you can review its usage in the
 {: .image-popup}
 ![Screenshot - Shared Code List](/transformations/variables/shared-code-edit.png)
 
-You'll se a list of transformations to which the shared code is linked. The transformations
-in which the shared code was used inline are not listed, because there is not link.
+You'll see a list of transformations to which the shared code is linked. The transformations
+in which the shared code was used inline are not listed, because there is no link.
 
 {: .image-popup}
 ![Screenshot - Shared Code Usage](/transformations/variables/shared-code-usage.png)
 
-When you attempt to edit a shared code, you'll also see the list of transformation in 
+When you attempt to edit a shared code, you'll also see the list of the transformations in 
 which it is used. You can either change the code --- which has the potential to break
-the transformations in which it is used. Or you can create a copy and use that in 
+the transformations in which it is used, or you can create a copy and use it in the
 transformations.
 
 {: .image-popup}
 ![Screenshot - Shared Code Edit](/transformations/variables/shared-code-edit-2.png)
 
-Also when you try to delete a shared code, you'll see the list of transformations which use it.
+In addition, when you try to delete a shared code, you'll see a list of the transformations which use it.
 When you delete a shared code that is used, the transformations using it will stop working.
 
 {: .image-popup}
@@ -179,8 +179,11 @@ Transformations referencing a deleted shared code fail with a message similar to
     Shared code configuration cannot be read: Row 10433 not found
 
 ### Example Using Shared Code
-Let's say that you have a lot of SQL transformations which have one table in
-input mapping. You have several transformations, e.g:
+
+Let's say that you have a lot of SQL transformations with a table in input mapping 
+that requires some preparation.
+
+For example:
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "result" AS
@@ -188,20 +191,21 @@ CREATE OR REPLACE TABLE "result" AS
 {% endhighlight %}
 
 Because of [Clone mapping](/transformations/mappings/#snowflake-loading-type), you have 
-to drop the `_timestamp` column from the source by executing query:
+to drop the `_timestamp` column from the source by executing this query:
 
 {% highlight sql %}
 ALTER TABLE "source" DROP COLUMN "_timestamp";
 {% endhighlight %}
 
-You can create the following shared code:
+If you have many transformations that require the table to be prepared in the same way, 
+you can create the following shared code:
 
 {: .image-popup}
 ![Screenshot - Create Shared Code](/transformations/variables/shared-code-drop-1.png)
 
-*Note: When defining Shared code for Snowflake, the Shared code can contain only one query*
+*Note: When defining shared code for Snowflake, the shared code can contain only one query.*
 
-**Important: the SQL query must end with semicolon `;`**
+**Important: The SQL query must end with a semicolon `;`**
 
 Add the shared code to the transformation. Drag & Drop it before the main transformation code:
 
@@ -215,21 +219,23 @@ CREATE OR REPLACE TABLE "result" AS
 	SELECT "first", "second" * 42 AS "larger_second" FROM "source";
 {% endhighlight %}
 
-When you run the transformation, you can see in the events, what code has been executed: 
+When you run the transformation, you can see in the events what code has been executed: 
 
 {: .image-popup}
 ![Screenshot - Use Code](/transformations/variables/shared-code-events.png)
 
 ### Example Shared Code with Variables
-You can also define variables for shared code. To extend the 
-[above example](/transformations/variables/#example-using-shared-code), let's 
-say that you want to parameterize the name of the table from which the `_timestamp` 
-column is dropped.
+You can also define variables for shared code. 
+For example, we can extend the 
+[above example](/transformations/variables/#example-using-shared-code)
+and parametrize the name of the table from which the `_timestamp` column is dropped.
 
-You can modify the shared code to:
+Modify the shared code to:
 
 {% highlight sql %}
-ALTER TABLE "{{source}}" DROP COLUMN "_timestamp";
+{% raw %}
+ALTER TABLE "{{source}}" DROP COLUMN "_timestamp"; 
+{% endraw %}
 {% endhighlight %}
 
 And add the `source` variable:
@@ -248,7 +254,7 @@ table in the *Table Input Mapping* (`source-table` in this case):
 {: .image-popup}
 ![Screenshot - Shared Code with set Variables](/transformations/variables/shared-code-variables-3.png)
 
-When you run the transformation, you can verify the executed queries in the job events, there
+When you run the transformation, you can verify the executed queries in the job events. There
 you can see that the shared code query manipulated the `source-table`:
 
 {: .image-popup}

@@ -31,16 +31,16 @@ This is especially important for Snowflake, which is case sensitive.*
 
 ## Overview
 The concept of mapping helps to make the transformations repeatable and protect the project [Storage](/storage/). 
-You can always rely on:
-- having an empty staging storage (no need to the cleanup before transformations)
-- having an isolated staging storage (no need to worry about interference with other transformations)
-- having stateless transformation (no need to worry about having left-over variables and settings from something else)
-- resource cleanup (no need to worry about cleaning up temporary data after yourself)
-- resource conflict (no need to worry about naming data in the staging storage)
+You can always rely on the following:
+- Having an empty staging storage (no need to clean up before transformations)
+- Having an isolated staging storage (no need to worry about interference with other transformations)
+- Having a stateless transformation (no need to worry about having left-over variables and settings from something else)
+- Resource cleanup (no need to worry about cleaning up temporary data after yourself)
+- Resource conflict (no need to worry about naming data in the staging storage)
 
 While this makes some operations seemingly unnecessarily complicated, it ensures that transformations
 are repeatable and you can't inadvertently overwrite data in project Storage. For ad-hoc
-operations we recommend you use **[Workspaces](/transformations/workspace/)** and for 
+operations, we recommend you use **[Workspaces](/transformations/workspace/)**. For 
 bulk operations, consider taking advantage of **[Variables](/transformations/variables/)**
 and [programmatic automation](https://developers.keboola.com/automate/).
 
@@ -51,16 +51,16 @@ Table input mapping is the common first choice.
 ### Table Input Mapping
 Depending on the transformation backend, the table input mapping process can do the following:
 
-- In case of **Database Staging** --- Copy the selected tables to *tables* into a newly created *database* schema.
-- In case of **File Staging** --- Export selected tables to *CSV files* and copy them to a designated staging *storage* 
+- In case of **Database Staging** --- copy the selected tables to *tables* into a newly created *database* schema.
+- In case of **File Staging** --- export selected tables to *CSV files* and copy them to a designated staging *storage* 
 (not to be confused with [File Mapping](/transformations/mappings/#file-mapping), we're still working with tables).
 
 Depending on the transformation types you can either build your transformations working 
-with database tables or with CSV files. Furthermore the CSV files can be placed locally with the transformation
-script or they can be placed on a remote storage such as such [Amazon S3](https://aws.amazon.com/s3/) or 
+with database tables or with CSV files. Furthermore, the CSV files can be placed locally with the transformation
+script or they can be placed on a remote storage such as [Amazon S3](https://aws.amazon.com/s3/) or 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
 The supported database types are [Snowflake](https://www.snowflake.com/), 
-[Redshift](https://aws.amazon.com/redshift/), [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/).
+[Redshift](https://aws.amazon.com/redshift/), and [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/).
 
 {: .image-popup}
 ![Table Input mapping](/transformations/mappings/table-input-mapping.png)
@@ -68,20 +68,22 @@ The supported database types are [Snowflake](https://www.snowflake.com/),
 *See an example of [setting up Input Mapping](/tutorial/manipulate/#input-mapping) in our tutorial.*
 
 #### Options
-- **Source** --- Select a table or bucket in Storage as the source table for your transformation. In case you select a bucket, it is
-the equivalent of selecting all tables currently present in the bucket. It does not automatically add future tables to the
-selection.
-- **File name** / **Table Name** --- Destination name of the mapping that is the is the *Source* table/file name to be used inside 
-the transformation. This is an arbitrary name you'd like to use as a reference for the table inside the transformation script.
-(it fills in automatically, but can be changed). For **File Staging** it is a good idea to add `.csv` extension. 
-For **Database Staging** the table name is automatically quoted, which means you can use arbitrary name. It also means that they 
-may be case sensitive e.g. if the destination is in Snowflake staging.
-- **Columns** --- Select specific columns if you do not want to import them all; this saves processing time for larger tables.
-- **Changed in last** --- If you are into [incremental processing](/storage/tables/#incremental-processing), this comes in 
-handy; import only rows changed or created within the selected time period. Supported time dimensions are `minutes`, `hours` and `days`.
-- **Data filter** --- Filter source rows only rows that will match this single column multiple values filter. When used together 
-with *Changed in last* the returned rows must match both conditions.
-- **Data types** --- Configures [Data types](#data-types).
+- **Source** --- Select a table or a bucket in Storage as the source table for your transformation. In case you select 
+a bucket, it is the equivalent of selecting all tables currently present in the bucket. It does not automatically 
+add future tables to the selection.
+- **File name** / **Table Name** --- Enter the destination name of the mapping that is the is the *Source* table/file 
+name to be used inside the transformation. This is an arbitrary name you'd like to use as a reference for the table 
+inside the transformation script (it fills in automatically, but it can be changed). For **File Staging**, it is a good 
+idea to add the `.csv` extension. For **Database Staging**, the table name is automatically quoted, which means you can 
+use an arbitrary name. It also means that they may be case sensitive, for instance, if the destination is in Snowflake staging.
+- **Columns** --- Select specific columns if you do not want to import them all; 
+this saves processing time for larger tables.
+- **Changed in last** --- If you are into [incremental processing](/storage/tables/#incremental-processing), 
+this comes in handy; import only rows changed or created within the selected time period. 
+The supported time dimensions are `minutes`, `hours`, and `days`.
+- **Data filter** --- Filter source rows to the rows that match this single-column multiple-values filter. 
+When used together with *Changed in last*, the returned rows must match both conditions.
+- **Data types** --- Configure [Data types](#data-types).
 
 If the terms *source* and *destination* look confusing, consult the image below. We always use them in a specific
 context. That means input mapping destination is the same file as the source for a transformation script.
@@ -95,28 +97,28 @@ for destinations in **database staging**. Select *User defined* to configure dat
 are pre-configured with data types stored in the [table metadata](/storage/tables/data-types/). The **Type**, **Length** 
 and **Nullable** options define the destination table structure in the staging database. 
 
-The option **Convert empty values to null** adds
-additional processing which is particularly important for non-string columns. All data in Storage tables are stored in string 
-columns and empty (be it true `NULL` values, or empty strings) values are stored as empty strings. When converting such values back
-to for example to `INTEGER` or `TIMESTAMP` they have to be converted to true SQL `NULL` values to be successfully inserted.
+The option **Convert empty values to null** adds additional processing which is particularly important for non-string columns. 
+All data in Storage tables are stored in string columns, and empty values (be it true `NULL` values, or empty strings) are stored 
+as empty strings. When converting such values back to, for example, `INTEGER` or `TIMESTAMP`, they have to be converted to true 
+SQL `NULL` values to be successfully inserted.
 
 {: .image-popup}
 ![Data Types Setting](/transformations/mappings/data-types.png)
 
 The pre-set data types are only suggestions, you can change them to your liking. You can also use the three dots menu to bulk set 
-the types. Beware however that if a columns contains values not matching the type, the entire load (and transformation) will 
-fail. In such case it's reasonable to revert to `VARCHAR` types -- e.g. by setting **Data types** to **None**. 
+the types. Beware, however, that if a column contains values not matching the type, the entire load (and transformation) will 
+fail. In such case, it's reasonable to revert to `VARCHAR` types -- for example, by setting **Data types** to **None**. 
 
 #### Snowflake Loading Type
 When working with large tables, it may become important to understand how the tables are loaded into a Snowflake staging 
 database. We use two loading options `COPY` and `CLONE`. The clone copy type is a highly optimized operation which 
-allows loading arbitrary large table in near constant time. There is a limitation however that the clone type can't be used 
+allows loading an arbitrary large table in near-constant time. There is a limitation, however, that the clone type can't be used 
 together with any filters or data type configurations. 
 
 This might present a dilemma when loading huge tables. A logical approach when trying to speed up loading a large table would
-be setting data types and adding filters to copy only the necessary. You might find out however that at some point, it's 
-actually faster to remove the filters and data types and take advantage of the `CLONE` loading type and apply the filters
-inside the transformation. Also when you need more complex filters (filtering by multiple columns or ranges), it's best to
+be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's 
+actually faster to remove the filters and data types, take advantage of the `CLONE` loading type and apply the filters
+inside the transformation. Also, when you need more complex filters (filtering by multiple columns or ranges), it's best to
 remove the filter completely from input mapping, take advantage of the clone loading and do the filtering inside of the
 transformation.
 
@@ -138,10 +140,10 @@ A table loaded using `CLONE` will contain all columns of the original table plus
 This column is used internally by Keboola Connection for comparison with the value of the *Changed in last* filter. 
 
 The value in the column contains a unix timestamp of the [last change of the row](/storage/tables/#manual-incremental-processing). 
-You can use this column to set up [incremental processing](/storage/tables/#incremental-processing)
-i.e. to replace the role of the **Changed in Last** filter in input mapping (which you can't use with clone mapping).
+You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),
+i.e., to replace the role of the **Changed in Last** filter in input mapping (which you can't use with clone mapping).
 
-**Important: the _timestamp column cannot be imported back to storage** 
+**Important: The _timestamp column cannot be imported back to storage.** 
 
 When you attempt to do so, you'll get the following error:
 
@@ -149,7 +151,7 @@ When you attempt to do so, you'll get the following error:
 	Invalid columns: _timestamp: Only alphanumeric characters and underscores are allowed in column name. 
 	Underscore is not allowed on the beginning.
 
-If you are not using the `_timestamp` column in your transformation, you have to drop it - e.g.:
+If you are not using the `_timestamp` column in your transformation, you have to drop it - for example:
 
 	`ALTER TABLE "my-table" DROP COLUMN "_timestamp";`
 
@@ -157,29 +159,29 @@ The `_timestamp` column is not present on tables loaded using the copy method.
 
 ### File Input Mapping
 The file input mapping process exports the selected files from [File Storage](/storage/files/) and copies them to the 
-staging storage. Depending on the transformation this can be either a drive local to the transformation
-or a remote storage such [Amazon S3](https://aws.amazon.com/s3/) or 
+staging storage. Depending on the transformation, this can be either a drive local to the transformation
+or a remote storage such as [Amazon S3](https://aws.amazon.com/s3/) or 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/). File input mapping cannot operate 
 with Storage tables, but it comes in handy for processing files that cannot be converted to tables (binary files, 
-malformed files, etc.) or for example to work with pre-trained models which you can use in a transformation.
+malformed files, etc.) or, for example, to work with pre-trained models that you can use in a transformation.
 
 {: .image-popup}
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
 #### Options
-- **Tags** --- Specify [tags](/storage/files/#uploading-file) which 
+- **Tags** --- specify [tags](/storage/files/#uploading-file) which 
 will be used to select files.
-- **Query** --- In case selecting files by tags is not precise enough, you can use 
+- **Query** --- in case selecting files by tags is not precise enough, you can use 
 [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax)
 to refine the search. If you combine *query* with *tags*, both conditions must be met.
-- **Processed Tags** --- Specify tags, which will be assigned to the input files once the transformation is finished.
+- **Processed Tags** --- specify tags which will be assigned to the input files once the transformation is finished.
 This allows you to process Storage files in an incremental fashion. You can combine this setting with the *query* 
 option to omit already processed files in recurring transformations.
 
 ## Output Mapping
 The output mapping takes results (tables and files) from your transformation and stores them back in Storage. 
 It can create, overwrite, and append any table. 
-These tables are typically derived from the tables/files in the Input mapping. In SQL transformations, 
+These tables are typically derived from the tables/files in the input mapping. In SQL transformations, 
 you can use any `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE` or `DELETE` queries to create the desired result.
 
 The result of output mapping can be both [Storage Tables](/storage/tables/) and [Storage Files](/storage/files/).
@@ -189,19 +191,19 @@ simplify the transformation script implementation (no need to worry about cleanu
 
 Keep in mind that every table or file specified in output mapping must be physically present in the staging area. 
 A missing source table for the output mapping is an error. This is important when the results of a transformation are 
-empty --- you have to ensure that an empty table or empty file (with header or 
-[manifest](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
+empty --- you have to ensure that an empty table or an empty file (with a header or 
+a [manifest](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
 
 ### Table Output Mapping
 Depending on the transformation backend, the table output mapping process can do the following:
 
-- In case of **Database Staging** --- Copy the specified tables from the staging *database* into 
+- In case of **Database Staging** --- copy the specified tables from the staging *database* into 
 the project [Storage Tables](/storage/tables/).
-- In case of **File Staging** --- Import the specified *CSV files* into project [Storage Tables](/storage/tables/).
+- In case of **File Staging** --- import the specified *CSV files* into project [Storage Tables](/storage/tables/).
 
-The supported staging database types are [Snowflake](https://www.snowflake.com/), 
-[Redshift](https://aws.amazon.com/redshift/), [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/). 
-The supported  staging for CSV files is storage local to the transformation.
+The supported staging database types are as follows: [Snowflake](https://www.snowflake.com/), 
+[Redshift](https://aws.amazon.com/redshift/), and [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/). 
+The supported  staging for CSV files is a storage local to the transformation.
 
 {: .image-popup}
 ![Table Output Mapping](/transformations/mappings/table-output-mapping.png)
@@ -209,9 +211,9 @@ The supported  staging for CSV files is storage local to the transformation.
 *See an example of [setting up Output Mapping](/tutorial/manipulate/#output-mapping) in our tutorial.*
 
 #### Options
-- **Table** --- Enter the name of a table that should be created in the transformation. 
-- **Destination** --- Select or type in the name of the [Storage](/storage/tables/) output table that will contain the results 
-of your transformation (i.e., contents of the Output Mapping *Source* table). 
+- **Table** --- Enter the name of the table that should be created in the transformation. 
+- **Destination** --- Select or type in the name of the [Storage](/storage/tables/) output table that will contain 
+the results of your transformation (i.e., contents of the Output Mapping *Source* table). 
 	- If this table does not exist yet, it will be created once the transformation runs. 
 	- If this table already exists in Storage, the source table must match the structure of the destination table (all 
 	columns must be present, new columns will be added automatically).  
@@ -228,17 +230,17 @@ enabled only when *Incremental* is switched on.
 
 ### File Output Mapping
 File Output mapping is used to store files produced by the transformation as [Storage Files](/storage/files/). 
-If you want to store CSV files as [Storage Tables](/storage/tables/) use 
+If you want to store CSV files as [Storage Tables](/storage/tables/), use 
 [Table Output Mapping](/transformations/mappings/#table-output-mapping).
 
-File output mapping can be useful when your transformation produces for example trained models, which 
+File output mapping can be useful when your transformation produces, for example, trained models that 
 are to be used in another transformation.
 
 {: .image-popup}
 ![File Output Mapping](/transformations/mappings/file-output-mapping.png)
 
 #### Options
-- **Source** --- Name of the source file for mapping.
+- **Source** --- Name of the source file for mapping
 - **Tag** --- Tags which will be applied to the target file uploaded in [Storage](/storage/tables/)
-- **Permanent** - Makes the file stay in the File Storage, until you delete it manually. If unchecked, 
-the target file will be deleted after 15 days.
+- **Permanent** - This option makes the file stay in the File Storage, until you delete it manually. 
+If unchecked, the target file will be deleted after 15 days.
