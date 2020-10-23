@@ -19,11 +19,11 @@ permalink: /transformations/snowflake-plain/
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
-Snowflake is a cloud database and as such brings continuous updates and behavioral changes. If you are 
+Snowflake is a cloud database and, as such, brings continuous updates and behavioral changes. If you are 
 interested in those changes, please follow the official [Snowflake change log](https://community.snowflake.com/s/article/Pending-Behavior-Change-Log).
 
 When loading data to a Snowflake transformation, beware that there are two different
-methods [copy and clone](/transformations/mappings/#snowflake-loading-type).
+methods: [copy and clone](/transformations/mappings/#snowflake-loading-type).
 
 ## Aborting Transformation Execution
 In some cases, you may need to abort the transformation execution and exit with an error message. 
@@ -76,7 +76,7 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 Snowflake is [case sensitive](https://docs.snowflake.com/en/sql-reference/identifiers-syntax.html#label-identifier-casing). 
 All unquoted table/column names are converted to upper case while quoted names keep their case.
 
-So if you want to create the following table,
+So, if you want to create the following table,
 
 {% highlight sql %}
 -- creates table FOOTABLE
@@ -141,8 +141,8 @@ SELECT
 ;
 {% endhighlight %}
 
-When using an [unstructured data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured.html), you 
-always **have to** use the explicit cast:
+When using an [unstructured data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured.html), 
+you always **have to** use the explicit cast:
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "test" (ID VARCHAR, TM VARCHAR, NUM VARCHAR, OBJ VARCHAR);
@@ -189,7 +189,7 @@ By default, Snowflake uses the
 `YYYY-MM-DD HH24:MI:SS.FF3` [format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
 when converting the `timestamp` column to a character string.
 
-This means that if you create a table in a transformation which uses a `timestamp` column,
+This means that if you create a table in a transformation that uses a `timestamp` column,
 
 {% highlight sql %}
 CREATE TABLE "ts_test" AS (SELECT CURRENT_TIMESTAMP AS "ts");

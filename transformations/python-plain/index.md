@@ -16,10 +16,10 @@ The current Python version is **3.8.5**. The Python version is updated regularly
 The update is always announced on the [status page](https://status.keboola.com/).
 
 ### Memory and Processing Constraints
-A python transformation has a limit of 8GB of allocated memory and the maximum running time is 6 hours.
+A Python transformation has a limit of 8GB of allocated memory and the maximum running time is 6 hours.
 The CPU is limited to the **equivalent** of two 2.3 GHz processors.
 
-### File locations
+### File Locations
 The Python script itself will be compiled to `/data/script.py`. To access your 
 [mapped input and output](/transformations/mappings/) tables, use
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
@@ -30,13 +30,14 @@ Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` fold
 ## Python Script Requirements
 Python is **sensitive to indentation**. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
 `# coding=utf-8` at the beginning of the script is not needed. You don't need to have
-any main function, e.g. this is a valid script:
+any main function, e.g., this is a valid script:
 
 {% highlight python %}
 print("Hello Keboola")
 {% endhighlight %}
 
-If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be run. Simply calling it from within the script is enough:
+If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be run. 
+Simply calling it from within the script is enough:
 
 {% highlight python %}
 def main():
@@ -49,7 +50,8 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 
 ### Packages
 You can list extra packages in the UI. These packages are installed using [pip](https://pypi.org/project/pip/).
-Generally, any package available on [PyPI](https://pypi.org/) can be installed. However, some packages have external dependencies, which might not be available. Feel free to [contact us]/management/support/) if you run into problems. When the 
+Generally, any package available on [PyPI](https://pypi.org/) can be installed. However, some packages have external dependencies, 
+which might not be available. Feel free to [contact us]/management/support/) if you run into problems. When the 
 package is installed, you still need to `import` from it.
 
 {: .image-popup}
@@ -66,11 +68,12 @@ subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-
 {% endhighlight %}
 
 Some packages are already installed in the environment
-(see [their full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L33)), and they do not need to be listed in the transformation.
+(see [their full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L33)), 
+and they do not need to be listed in the transformation.
 
-### CSV format
+### CSV Format
 Tables from Storage are imported to the Python script from CSV files. CSV files can be read by standard Python functions
-from the [csv packages](https://docs.python.org/3/library/csv.html). It is recommended to explicitly specify the formatting options.
+from the [CSV packages](https://docs.python.org/3/library/csv.html). It is recommended to explicitly specify the formatting options.
 You can read CSV files either to vectors (numbered columns), or to dictionaries (named columns).
 Your input tables are stored as CSV files in `in/tables/`, and your output tables in `out/tables/`.
 
@@ -78,19 +81,19 @@ If you can process the file line-by-line, then the most effective way is to read
 it immediately. The following two examples show two ways of reading and manipulating a CSV file.
 
 ## Development Tutorial
-To develop and debug Python transformations, you can use [Python Workspace](/transformations/workspace/) or 
+To develop and debug Python transformations, you can use a [Python workspace](/transformations/workspace/) or 
 you can develop the transformation script locally. 
 
 {: .image-popup}
 ![Screenshot - Data folder structure](/transformations/python-plain/tree.png)
 
 The script itself is expected to be in the `data` directory. The script name is arbitrary. The `data` directory name
-is also arbitrary, we use that as general reference to the above folder structure. It is possible to use relative 
+is also arbitrary, we use it as general reference to the above folder structure. It is possible to use relative 
 directories --- the current directory of the transformation is always the `data` directory. That means you can move 
-the script to Keboola Connection transformation with no changes. To develop a Python transformation 
-which takes a [sample CSV file](/transformations/python-plain/source.csv) locally, take the following steps:
+the script to a Keboola Connection transformation with no changes. To develop a Python transformation 
+that takes a [sample CSV file](/transformations/python-plain/source.csv) locally, follow these steps:
 
-- Put the Python code into a file, for example script.py, in the working directory.
+- Put the Python code into a file, for example, script.py in the working directory.
 - Put all the input mapping tables inside the `in/tables` subdirectory of the working directory.
 - Store the result CSV files inside the `out/tables` subdirectory.
 
@@ -114,19 +117,19 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
 {% endhighlight %}
 
 ### Development Using Workspace
-To develop a transformation using [workspace](/transformations/workspace/), configure the input (and optionally output) mapping.
-**Load Data** and **Connect** to the Workspace:
+To develop a transformation using a [workspace](/transformations/workspace/), configure the input (and optionally output) mapping.
+**Load Data** and **Connect** to the workspace:
 
 {: .image-popup}
 ![Screenshot - Input & Output](/transformations/python-plain/input-output.png)
 
-When you connect to the workspace, you can paste the above sample script in the prepared notebook, the 
-directory structure and input files will be already prepared in the JupyterLab environment:
+When you connect to the workspace, you can paste the above sample script in the prepared notebook. 
+The directory structure and input files will be already prepared in the JupyterLab environment:
 
 {: .image-popup}
 ![Screenshot - Workspace](/transformations/python-plain/workspace.png)
 
-You can run the script and optionally, you can also **Unload Data** from the Workspace to get the results 
+You can run the script and, optionally, also **Unload Data** from the workspace to get the results 
 immediately into project Storage. You can also **Create Transformation** to prepare a transformation 
 skeleton with the configured input and output mapping into which you can paste the transformation script.
 
@@ -134,7 +137,8 @@ skeleton with the configured input and output mapping into which you can paste t
 ![Screenshot - Create Transformation](/transformations/python-plain/create-transformation.png)
 
 ### Local Development 
-If you want to replicate the execution environment on your local machine, you need to have [Python installed](https://www.python.org/downloads/), preferably the [same version as us](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L1).
+If you want to replicate the execution environment on your local machine, you need to have 
+[Python installed](https://www.python.org/downloads/), preferably the [same version as us](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L1).
 
 To simulate the input and output mapping, all you need to do is create the right directories with the right files.
 You can get a finished example of the [above script](/transformations/python-plain/#development-tutorial) 
@@ -155,9 +159,11 @@ The above steps are usually sufficient for daily development and debugging of mo
 although they do not reproduce the transformation execution environment exactly. You can also create a development environment
 with the exact same configuration using [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
 
-## Example 1 -- Using dictionaries
-The following piece of code reads a table with two columns, named **first** and **second**, from the **source.csv** input mapping file into the `row` dictionary using `csvReader`.
-It then adds *ping* to the first column and multiplies the second column by *42*. After that, it saves the row to the **destination.csv** output mapping file.
+## Example 1 -- Using Dictionaries
+The following piece of code reads a table with two columns, named **first** and **second**, 
+from the **source.csv** input mapping file into the `row` dictionary using `csvReader`.
+It then adds *ping* to the first column and multiplies the second column by *42*. 
+After that, it saves the row to the **destination.csv** output mapping file.
 
 {% highlight python %}
 import csv
@@ -176,12 +182,14 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
         writer.writerow({'col1': row['first'] + 'ping', 'col2': int(row['second']) * 42})
 {% endhighlight %}
 
-The above example shows how to process the file line-by-line; this is the most memory-efficient way which allows you to process data files of any size.
-The expression `lazy_lines = (line.replace('\0', '') for line in in_file)` is a [Generator](https://wiki.python.org/moin/Generators) which makes sure that
+The above example shows how to process the file line-by-line; this is the most memory-efficient way 
+which allows you to process data files of any size.
+The expression `lazy_lines = (line.replace('\0', '') for line in in_file)` 
+is a [Generator](https://wiki.python.org/moin/Generators) which makes sure that
 [Null characters](https://en.wikipedia.org/wiki/Null_character) are properly handled.
 It is also important to use `encoding='utf-8'` when reading and writing files.
 
-## Example 2 -- Using lists
+## Example 2 -- Using Lists
 The following piece of code reads a table with some of its columns from the **source.csv** input mapping file into the `row` list of strings.
 It then adds *ping* to the first column and multiplies the second column by *42*. After that, it saves the row to the **destination.csv** output mapping file.
 
@@ -200,7 +208,7 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
         writer.writerow([row[0] + 'ping', int(row[1]) * 42])
 {% endhighlight %}
 
-## Example 3 -- Using CSV dialect
+## Example 3 -- Using CSV Dialect
 You can simplify the above code using our pre-installed Keboola Connection (KBC) dialect.
 
 {% highlight python %}
