@@ -78,7 +78,7 @@ If the database client does not have Synapse Driver, look for *Azure SQL Server*
 When a workspace is created, it enters the **Active** state and can be used. 
 
 - Database (Snowflake, Redshift, and Synapse) workspaces are billed by the runtime of queries executed in them. As such, we leave them in active state until you delete them. 
-- JupyterLab workspaces are billed by their running time. JupyterLab workspaces can be terminated and resumed, in order to reduce running time while preserving your work. 
+- JupyterLab workspaces are billed by their running time. They can be terminated and resumed, in order to reduce running time while preserving your work. 
 
 {: .image-popup}
 ![Workspace - States](/transformations/workspace/workspace-states.svg)
