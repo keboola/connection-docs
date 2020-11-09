@@ -45,7 +45,8 @@ There are two equivalent places where you can get Keboola Connection Status upda
 - [Twitter](https://twitter.com/keboola_support)
 
 ## Your Tips and Suggestions
-Use the *Feature Wishlist* in the *Settings* menu to send us your suggestions for new features or improvements.
+Use the *Feature Wishlist* in the *Settings* menu or [ideas.keboola.com](https://ideas.keboola.com/)
+to send us your suggestions for new features or improvements.
 
 {: .image-popup}
 ![Screenshot - Wishlist](/wishlist.png)
