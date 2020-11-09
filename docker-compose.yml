@@ -6,7 +6,7 @@ jekyll:
     - ./:/code:cached
   working_dir: /code
   ports:
-    - "4000:4000"
+    - "5000:4000"
   command: jekyll serve --watch -H 0.0.0.0 --force_polling
 
 aws:

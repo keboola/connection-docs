@@ -317,7 +317,10 @@ items:
 
       - url: /transformations/synapse-plain/
         title: Synapse Transformations
-        
+
+      - url: /transformations/code-patterns/
+        title: Code Patterns
+
       - url: /transformations/julia/
         title: Legacy Julia Transformations
 
@@ -344,7 +347,7 @@ items:
 
       - url: /transformations/snowflake/
         title: Legacy Snowflake Transformations
-          
+
   - url: /management/
     title: Management
     items:
@@ -377,9 +380,9 @@ items:
 
           - url: /management/project/delete/
             title: Project Deletion
-      
+
       - url: /management/payg-project/
         title: Free Plan
-        
+
       - url: /management/organization/
         title: Organizations
