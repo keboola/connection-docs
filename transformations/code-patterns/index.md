@@ -7,8 +7,8 @@ permalink: /transformations/code-patterns/
 {:toc}
 
 Code Pattern is a special type of the [Component](/components/).
-Their task is to generate code based on parameters.
-It can be used in the user interface of the [New Transformations](/transformations/#new-transformations).
+- It generates code based on [parameters](#parameters-form).
+- It can be used in the user interface of the [New Transformations](/transformations/#new-transformations).
 
 
 ## List of the Code Patterns
