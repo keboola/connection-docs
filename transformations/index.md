@@ -210,7 +210,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>Preview</td>
 </tr>
 <tr>
-    <th rowspan='8'>Other features</th>
+    <th rowspan='9'>Other features</th>
     <th>Transformations buckets</th> 
     <td>✓</td>
     <td>Not available</td>
@@ -247,6 +247,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th><a href='/transformations/variables/#variables'>Variables</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/code-patterns'>Code patterns</a></th> 
     <td>Not available</td>
     <td>✓</td>
 </tr>
