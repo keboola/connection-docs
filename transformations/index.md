@@ -128,7 +128,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <th colspan='2'>Feature</th><th>Legacy Transformations</th><th>New Transformations</th>
 </tr>
 <tr>
-    <th rowspan='7'>Backend</th>
+    <th rowspan='8'>Backend</th>
     <th><a href='/transformations/julia/'>Julia Transformations</a>)</th> 
     <td>✓</td>
     <td>Planned</td>
@@ -160,6 +160,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th><a href='/transformations/synapse-plain/'>Synapse Transformations</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/oracle/'>Oracle Transformations</a></th> 
     <td>Not available</td>
     <td>✓</td>
 </tr>
