@@ -42,3 +42,5 @@ CREATE TABLE "result" AS SELECT * FROM "SOURCE";
 ![Screenshot - Sample Transformation](/transformations/oracle/sample-transformation.png)
 
 You can organize the script into [blocks](/transformations/#writing-scripts).
+
+Please keep in mind, unlike the other transformation, this transformation runs on your Oracle Database server (is not provisioned by Keboola) and you must ensure flawless course.
