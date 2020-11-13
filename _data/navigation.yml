@@ -318,6 +318,9 @@ items:
       - url: /transformations/synapse-plain/
         title: Synapse Transformations
 
+      - url: /transformations/oracle/
+        title: Oracle Transformations
+
       - url: /transformations/code-patterns/
         title: Code Patterns
 
