@@ -14,6 +14,15 @@ After you create a configuration, the first step is to configure database creden
 {: .image-popup}
 ![Screenshot - Credentials link](/transformations/oracle/navigate-to-credentials.png)
 
+The following SQL code creates user and schema `KEBOOLA_TRANSFORMATION` and grants privileges read/write only to this schema.
+
+{% highlight sql %}
+CREATE USER KEBOOLA_TRANSFORMATION IDENTIFIED BY "secretPassword20" QUOTA UNLIMITED ON USERS;
+
+GRANT CREATE SESSION TO KEBOOLA_TRANSFORMATION;
+GRANT CREATE TABLE TO KEBOOLA_TRANSFORMATION;
+{% endhighlight %}
+ 
 Fill in the credentials to the database. After testing the credentials, Save them:
 
 {: .image-popup}
