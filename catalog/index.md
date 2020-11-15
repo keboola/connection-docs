@@ -38,7 +38,7 @@ All changes and events in a shared bucket are propagated to its linked buckets; 
 There are some constraints to how shared buckets can be used:
 
 - Source and destination projects must belong to the same organization (and region).
-- To manage shared buckets, your user account must be an [organization member](/management/organization/) — i.e., it is not enough to be a project administrator.
+- To manage shared buckets, your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned.
 - [Table aliases](/storage/tables/#aliases) filtered by a condition are not shared.
 - [Table aliases](/storage/tables/#aliases) without automatically synchronized columns are not shared.
 - Tables in linked buckets work like [aliases](/storage/tables/#aliases) — i.e., all tables are read-only in the destination project.
