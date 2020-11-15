@@ -23,8 +23,10 @@ All operations done by a user are technically done using the
 
 ## User Roles
 
-There are two user roles available:
+There are four user roles available:
 
+- **Share** -- the user has full administrative access to the project, including sharing data in the [Data Catalog](/catalog/).
+    _Note: The Share role can only be granted by an [organization member](/management/organization/)._
 - **Admin** -- the user has full administrative access to the project.
 - **Guest** -- the user can access all project data, but **cannot** 
     - change project settings _(name, description, etc.)_,
@@ -34,6 +36,18 @@ There are two user roles available:
     - permanently remove configurations in [Trash](/components/#delete-configuration),
     - create a new [orchestration](/orchestrator/), and
     - change the name, the schedule and the disabled status of an existing orchestration.
+- **ReadOnly** -- the user can view all project data, but **cannot** do any of the following:
+    - create, modify or delete configurations of [components](/components/), [orchestrations](/orchestrator/) and [transformations](/transformations/),
+    - run any components, orchestrations and transformations,
+    - import and modify data in the [storage](/storage/),
+    - use [Data Catalog](/catalog/),
+    - change project settings _(name, description, etc.)_,
+    - delete the project,
+    - manage users and
+    - manage [API tokens](/management/project/tokens/).
+
+    _Note: The ReadOnly role is currently only available in the [Azure stack](https://help.keboola.com/overview/#stacks)
+
 
 ## Inviting User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
@@ -47,8 +61,7 @@ Enter the user's email and grant them a role in the project:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
 
-The user is listed among the project users with a pending invitation. The users with the `Guest` badge have the Guest role, the users 
-without this badge have the Admin role:
+The user is listed among the project users with a pending invitation.
 
 {: .image-popup}
 ![Screenshot -- User list with invitation](/management/project/users/users-list-2.png)
