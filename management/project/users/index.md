@@ -60,8 +60,7 @@ Enter the user's email and grant them a role in the project:
 {: .image-popup}
 ![Screenshot -- User list](/management/project/users/invite-project-1.png)
 
-The user is listed among the project users with a pending invitation. The users with the `Guest` badge have the Guest role, the users 
-without this badge have the Admin role:
+The user is listed among the project users with a pending invitation.
 
 {: .image-popup}
 ![Screenshot -- User list with invitation](/management/project/users/users-list-2.png)
