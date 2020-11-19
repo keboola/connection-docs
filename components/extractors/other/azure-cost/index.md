@@ -35,7 +35,7 @@ In the [Configuration Row](/components/#configuration-rows) fill in
 ![Screenshot - Configuration Row](/components/extractors/other/azure-cost/row.png)
 
 If the **Incremental** option is set to true, the new data will be appended to the old ones. 
-In this way you can import new data, e.g. from today, but you have available the whole history, you have imported before.
+In this way you can import new data, e.g. from today, but you have available the all history imported before.
 
 ## Output Table
 
