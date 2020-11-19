@@ -171,6 +171,9 @@ items:
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
 
+              - url: /components/extractors/other/azure-cost/
+                title: Azure Cost Management
+
       - url: /components/writers/
         title: Writers
         items:

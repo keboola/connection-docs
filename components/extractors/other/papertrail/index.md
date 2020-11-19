@@ -14,7 +14,7 @@ to import events matching the specified query from [Papertrail](https://www.pape
 (logs from apps, servers, and cloud services).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Twitter** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Papertrail** extractor.
 
 To configure the extractor, you need to provide a Papertrail API token, enter a search query and select a retention period.
 Then select the data you wish to extract.
