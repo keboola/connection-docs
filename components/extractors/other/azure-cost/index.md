@@ -34,7 +34,7 @@ In the [Configuration Row](/components/#configuration-rows) fill in
 {: .image-popup}
 ![Screenshot - Configuration Row](/components/extractors/other/azure-cost/row.png)
 
-If the **Incremental** option is set to true, the new data will be appended to the old ones. 
+If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones. 
 In this way you can import new data, e.g. from today, but you have available the all history imported before.
 
 ## Output Table
