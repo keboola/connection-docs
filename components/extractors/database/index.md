@@ -25,12 +25,13 @@ There are a number of extractors for [**SQL databases**](/components/extractors/
 - [Teradata](https://www.teradata.com/)
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
-have an [advanced mode](/components/extractors/database/sqldb/). *(Their basic configuration is also part 
-of our [tutorial](/tutorial/load/database/).)* 
+have an [advanced mode](/components/extractors/database/sqldb/). 
+- Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/) 
 
-On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, 
-requires a [different configuration](/components/extractors/database/mongodb/). 
-[Configuration](/components/extractors/database/bigquery/) of the [BigQuery](https://cloud.google.com/bigquery/) extractor is also covered in another [tutorial](/tutorial/ad-hoc/) of ours.
+On the other hand, the extractor for a **NoSQL database**, requires a different configuration:
+- [MongoDB Configuration](/components/extractors/database/mongodb/)
+- [CosmosDB Configuration](/components/extractors/database/cosmosdb/)  
+- [BigQuery Configuration](/components/extractors/database/bigquery/), it is also covered in the [Tutorial - Ad-hoc Data Analysis](/tutorial/ad-hoc/).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 
