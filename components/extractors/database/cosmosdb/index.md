@@ -38,8 +38,8 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
 
 - **`containerId`** - string (required): Id of the Cosmos DB container.
 - **`output`** - string (required): Name of the output table in your bucket.
-- **`incremental`** - boolean (optional): Enables [Incremental Loading](https://help.keboola.com/storage/tables/#incremental-loading). Default `false`.
-- **`incrementalFetchingKey`** - string (optional): Name of key for [Incremental Fetching](https://help.keboola.com/components/extractors/database/#incremental-fetching), eg. `c.id`.
+- **`incremental`** - boolean (optional): Enables [Incremental Loading](/storage/tables/#incremental-loading). Default `false`.
+- **`incrementalFetchingKey`** - string (optional): Name of key for [Incremental Fetching](/components/extractors/database/#incremental-fetching), eg. `c.id`.
 - **`mode`** - enum (optional)
     - `mapping` (default) - Items are exported using specified `mapping`.
     - `raw` - Items are exported as plain JSON strings. Table will contain `id` and `data` columns.
