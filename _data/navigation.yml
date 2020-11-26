@@ -53,6 +53,9 @@ items:
                   - url: /components/extractors/database/mongodb/mapping/
                     title: Mapping Examples
 
+              - url: /components/extractors/database/cosmosdb/
+                title: CosmosDB
+
               - url: /components/extractors/database/bigquery/
                 title: Google BigQuery
 

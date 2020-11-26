@@ -11,6 +11,8 @@ redirect_from:
 
 Extractors import data from external sources and integrate it to the Keboola Connection environment.
 
+## SQL databases
+
 There are a number of extractors for [**SQL databases**](/components/extractors/database/sqldb/):
 
 - [Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html)
@@ -25,12 +27,16 @@ There are a number of extractors for [**SQL databases**](/components/extractors/
 - [Teradata](https://www.teradata.com/)
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
-have an [advanced mode](/components/extractors/database/sqldb/). *(Their basic configuration is also part 
-of our [tutorial](/tutorial/load/database/).)* 
+have an [advanced mode](/components/extractors/database/sqldb/). 
+- Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/) 
 
-On the other hand, the extractor for [MongoDB](https://www.mongodb.com/), a **NoSQL database**, 
-requires a [different configuration](/components/extractors/database/mongodb/). 
-[Configuration](/components/extractors/database/bigquery/) of the [BigQuery](https://cloud.google.com/bigquery/) extractor is also covered in another [tutorial](/tutorial/ad-hoc/) of ours.
+## NoSQL databases
+
+Unlike SQL databases, the extractors for a **NoSQL databases**, require a different configuration, see:
+- [MongoDB Extractor](/components/extractors/database/mongodb/) for [MongoDB](https://www.mongodb.com/) database.
+- [CosmosDB Extractor](/components/extractors/database/cosmosdb/)  for [CosmosDB](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction) database.
+- [BigQuery Extractor](/components/extractors/database/bigquery/) for [BigQuery](https://cloud.google.com/bigquery/) database.
+    - It is also covered in the [Tutorial - Ad-hoc Data Analysis](/tutorial/ad-hoc/).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 
