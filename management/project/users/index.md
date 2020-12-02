@@ -17,7 +17,7 @@ Each user is, system-wide, **identified by their email address**.
 This means that you need to enter correct email addresses for existing users.
 Be especially careful about company aliases; from Keboola Connection's point of view, they are different users.
 
-All operations done by a user are technically done using the
+All operations performed by a user are technically done using the
 [master token](/management/project/tokens/#master-tokens). This is important for
 [tracing operations](/management/project/tokens/#token-events) done by that user.
 
@@ -36,17 +36,17 @@ There are four user roles available:
     - permanently remove configurations in [Trash](/components/#delete-configuration),
     - create a new [orchestration](/orchestrator/), and
     - change the name, the schedule and the disabled status of an existing orchestration.
-- **ReadOnly** -- the user can view all project data, but **cannot** do any of the following:
+- **ReadOnly** -- the user can view all project data, but **cannot**
     - create, modify or delete configurations of [components](/components/), [orchestrations](/orchestrator/) and [transformations](/transformations/),
     - run any components, orchestrations and transformations,
-    - import and modify data in the [storage](/storage/),
+    - import and modify data in [Storage](/storage/),
     - use [Data Catalog](/catalog/),
     - change project settings _(name, description, etc.)_,
     - delete the project,
-    - manage users and
+    - manage users, and
     - manage [API tokens](/management/project/tokens/).
 
-    _Note: The ReadOnly role is currently only available in the [Azure stack](https://help.keboola.com/overview/#stacks)_
+    _Note: The ReadOnly role is currently only available in the [Azure stack](https://help.keboola.com/overview/#stacks).
 
 
 ## Inviting User
@@ -71,8 +71,8 @@ they will never become a member of the project.
 The steps that follow an invitation differ depending on whether the user already exists or is new.
 
 ### New User
-If the user does not have a platform-wide Keboola Connection account yet, their name in the user list will be labeled as
-`Not activated yet`:
+If the user does not have a platform-wide Keboola Connection account yet, their name in the user list will be
+labelled as `Not activated yet`:
 
 {: .image-popup}
 ![Screenshot -- User invited](/management/project/users/users-list-4.png)
