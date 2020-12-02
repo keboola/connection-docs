@@ -17,7 +17,7 @@ Ephemeral transformation workspaces are not visible in the transformation UI, he
 called [sandboxes](/transformations/sandbox/) and behave considerably differently.**
 
 ## Working with Workspaces
-You can create a Workspace on the Transformations page:
+You can create a Workspace on the Workspaces page:
 
 {: .image-popup}
 ![Workspace Introduction](/transformations/workspace/workspace-intro.png)
@@ -36,6 +36,9 @@ Name and optionally describe the workspace:
 
 {: .image-popup}
 ![Workspace - Name workspace](/transformations/workspace/workspace-create-2.png)
+
+Optionally, you can share workspace with all projects members. Read more about
+[Shared Workspaces](/transformations/workspace/#shared-workspaces).
 
 Creating the workspace takes a few seconds, so it will take a while before it appears:
 
@@ -133,6 +136,27 @@ or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or bot
 
 Unloading data is useful, for example, when your ad-hoc analysis leads to
 valuable results, or when you trained a new model which you'd like to use in transformations.
+
+### Shared Workspaces
+
+Every member of a project can share his workspace with all project members. If you share workspace
+with other project members, then every member of a project can use your workspace, load data to it,
+restore it, etc.
+
+However, the others cannot stop sharing of your workspace or delete it completely.
+
+List of workspaces shows also information about shared workspaces:
+
+{: .image-popup}
+![Workspace - List of workspaces with shared workspace](/transformations/workspace/shared-workspaces-1.png)
+
+There are 3 possible values:
+
+- `Yours` - You are the owner of the workspace and your workspace is not shared
+- `Yours, Shared` - You are the owner of the workspace and your workspace is shared with all project
+members
+- `Shared` - You are not the owner of a workspace and the workspace is shared by other project
+member
 
 ## Developing Transformations
 Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
