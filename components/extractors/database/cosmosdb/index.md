@@ -23,12 +23,12 @@ Click **Add Row** to add one or more [Configuration Rows](/components/#configura
 {: .image-popup}
 ![Screenshot - Extractor configuration](/components/extractors/database/cosmosdb/add-row.png)
 
-Fill in the **name**,  and optionally the **description**. Then click **Add Row**.
+Fill in the **name**, and optionally the **description**. Then click **Add Row**.
 
 {: .image-popup}
 ![Screenshot - Extractor configuration](/components/extractors/database/cosmosdb/add-row-modal.png)
 
-In the [Configuration Row](/components/#configuration-rows) fill in 
+In the [Configuration Row](/components/#configuration-rows), fill in 
 the [**Configuration Parameters**](#configuration-parameters). Then click **Save**. 
 
 {: .image-popup}
@@ -36,37 +36,37 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
 
 ### Configuration Parameters
 
-- **`containerId`** - string (required): Id of the Cosmos DB container.
-- **`output`** - string (required): Name of the output table in your bucket.
-- **`incremental`** - boolean (optional): Enables [Incremental Loading](/storage/tables/#incremental-loading). Default `false`.
-- **`incrementalFetchingKey`** - string (optional): Name of key for [Incremental Fetching](/components/extractors/database/#incremental-fetching), eg. `c.id`.
-- **`mode`** - enum (optional)
-    - `mapping` (default) - Items are exported using specified `mapping`.
-    - `raw` - Items are exported as plain JSON strings. Table will contain `id` and `data` columns.
-- **`mapping`** - string - required for `mode` = `mapping`.
+- **`containerId`**: string (required); the ID of the Cosmos DB container
+- **`output`**: string (required); the name of the output table in your bucket
+- **`incremental`**: boolean (optional); enables [incremental loading](/storage/tables/#incremental-loading); the default is `false`
+- **`incrementalFetchingKey`**: string (optional); the name of the key for [incremental fetching](/components/extractors/database/#incremental-fetching), e.g., `c.id`
+- **`mode`**: enum (optional)
+    - `mapping` (default) -- items are exported using specified `mapping`
+    - `raw` - items are exported as plain JSON strings; the table will contain `id` and `data` columns
+- **`mapping`**: string; required for `mode` = `mapping`
     - It is used to map the CosmosDB JSON item to one or more tables.
     - The same format is used as in the [MongoDB - configure-mapping](/components/extractors/database/mongodb/#configure-mapping).
     - See examples in the [MongoDB - Mapping Examples](/components/extractors/database/mongodb/mapping/).
-    - For the details see [keboola/php-csvmap](https://github.com/keboola/php-csvmap) library.
-- **`maxTries`**- integer (optional): Number of the max tries if an error occurred. Default `5`.
-- **`ignoredKeys`**- array (optional): 
+    - For the details see the [keboola/php-csvmap](https://github.com/keboola/php-csvmap) library.
+- **`maxTries`**: integer (optional); the max number of tries if an error occurs; the default is `5`
+- **`ignoredKeys`**: array (optional) 
     - CosmosDB automatically adds some metadata keys when the item is inserted.
-    - By default, these keys are ignored: `["_rid", "_self", "_etag", "_attachments", "_ts"]`
-    
+    - By default, the following keys are ignored: `["_rid", "_self", "_etag", "_attachments", "_ts"]`    
 
-By default, extractor exports all documents, using **the generated SQL query**.
-- Default query is `SELECT * FROM c`     
-- Query can be modified with these parameters:
-- **`select`** - string (optional), eg. `c.name, c.date`, default `*`, [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-select).
-   - For `raw` mode must be `id` field present in the query results.
-- **`from`** - string (optional), eg. `Families f`, default `c`, [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-from).
-- **`sort`** - string (optional), eg. `c.date`, [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-order-by).
-- **`limit`** - integer (optional), eg. `500`, [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-offset-limit).
-    
-Or you can set **a custom query** using parameter:
-- **`query`** - string (optional), eg. `SELECT f.name FROM Families f`
+By default, the extractor exports all documents using **the generated SQL query**. 
+The default query is `SELECT * FROM c`. The query can be modified with the following parameters:
 
-#### Examples
+- **`select`**: string (optional), e.g., `c.name, c.date`; the default is `*`; [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-select)
+   - For `raw` mode the `id` field must be present in the query results.
+- **`from`**: string (optional), e.g., `Families f`; the default is `c`; [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-from)
+- **`sort`**: string (optional), e.g., `c.date`; [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-order-by)
+- **`limit`**: integer (optional), e.g., `500`; [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-offset-limit)
+    
+Or you can set **a custom query** using the following parameter:
+
+- **`query`**: string (optional), e.g., `SELECT f.name FROM Families f`
+
+#### Examples 
 
 Raw mode -- full load:
 ```json

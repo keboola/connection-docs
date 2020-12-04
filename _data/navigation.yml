@@ -83,10 +83,27 @@ items:
               - url: /components/extractors/communication/zendesk/
                 title: Zendesk
 
+          - url: /components/extractors/database/
+            title: Databases
+            items:
+              - url: /components/extractors/database/cosmosdb/
+                title: CosmosDB
+
+              - url: /components/extractors/database/bigquery/
+                title: Google BigQuery
+
+              - url: /components/extractors/database/mongodb/
+                title: MongoDB
+                items:
+                  - url: /components/extractors/database/mongodb/mapping/
+                    title: Mapping Examples
+
+              - url: /components/extractors/database/sqldb/
+                title: SQL Databases
+
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
             items:
-
               - url: /components/extractors/marketing-sales/babelforce/
                 title: Babelforce
 
@@ -138,18 +155,21 @@ items:
               - url: /components/extractors/storage/google-drive/
                 title: Google Drive
 
-              - url: /components/extractors/storage/onedrive/
-                title: OneDrive
-
               - url: /components/extractors/storage/http/
                 title: HTTP
 
               - url: /components/extractors/storage/storage-api/
                 title: Keboola Connection Storage
 
+              - url: /components/extractors/storage/onedrive/
+                title: OneDrive
+
           - url: /components/extractors/other/
             title: Other
             items:
+              - url: /components/extractors/other/azure-cost/
+                title: Azure Cost Management
+                
               - url: /components/extractors/other/dark-sky/
                 title: Dark Sky (Weather)
 
@@ -176,9 +196,6 @@ items:
 
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
-
-              - url: /components/extractors/other/azure-cost/
-                title: Azure Cost Management
 
       - url: /components/writers/
         title: Writers
@@ -237,11 +254,11 @@ items:
               - url: /components/writers/storage/google-sheets/
                 title: Google Sheets
 
-              - url: /components/writers/storage/onedrive/
-                title: OneDrive
-
               - url: /components/writers/storage/storage-api/
                 title: Keboola Connection Storage
+                
+              - url: /components/writers/storage/onedrive/
+                title: OneDrive
 
       - url: /components/applications/
         title: Applications

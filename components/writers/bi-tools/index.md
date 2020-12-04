@@ -13,7 +13,7 @@ allow to push data to various business intelligence platforms:
 - [Looker](/components/writers/bi-tools/looker/) --- writes tables to [Looker](https://looker.com/)
 - [Tableau](/components/writers/bi-tools/tableau/) --- writes tables to [Tableau](https://www.tableau.com/) TDE files, which can be downloaded or uploaded to Dropbox, Google Drive or Tableau Server. You can also use the [Snowflake writer](/components/writers/database/snowflake/) to send data into Tableau.
 - [ThoughtSpot](/components/writers/bi-tools/thoughtspot) --- writes tables to [ThoughtSpot](https://www.thoughtspot.com/product).
-- and others
+- And more
 
 A number of BI and Analytics tools are also accessible via the [Snowflake writer](/components/writers/database/snowflake/) using the
 [Keboola Provisioned Database](/components/writers/database/snowflake/#using-keboola-provisioned-database), for example:
