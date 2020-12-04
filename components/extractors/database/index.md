@@ -28,7 +28,7 @@ There are a number of extractors for [**SQL databases**](/components/extractors/
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
-- Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/) 
+- Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
 
 ## NoSQL databases
 

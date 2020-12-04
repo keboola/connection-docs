@@ -18,4 +18,4 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Pipedrive](/components/extractors/marketing-sales/pipedrive/)
 - Salesforce --- watch our [salesforce integration video](https://www.youtube.com/watch?v=BVghRK2xrQo). 
 - [Sklik](/components/extractors/marketing-sales/sklik/)
-- and [others](https://components.keboola.com/components)
+- And [more](https://components.keboola.com/components)
