@@ -56,6 +56,9 @@ items:
               - url: /components/extractors/database/cosmosdb/
                 title: CosmosDB
 
+              - url: /components/extractors/database/azure-storage-table/
+                title: Azure Storage Table
+
               - url: /components/extractors/database/bigquery/
                 title: Google BigQuery
 
