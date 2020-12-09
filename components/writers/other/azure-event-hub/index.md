@@ -32,7 +32,8 @@ Fill in the **Name**, and optionally the **Description**. Then click **Add Row**
 {: .image-popup}
 ![Screenshot - Extractor configuration](/components/extractors/database/cosmosdb/add-row-modal.png)
 
-Click **New Table Input** to add one table to the [Input Mapping](https://help.keboola.com/transformations/mappings/).
+Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
+
 
 {: .image-popup}
 ![Screenshot - Configuration Row](/components/writers/other/azure-event-hub/add-table.png)
@@ -50,4 +51,3 @@ Then click **Save**.
 
 {: .image-popup}
 ![Screenshot - Configuration Row](/components/writers/other/azure-event-hub/row-save.png)
-
