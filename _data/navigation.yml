@@ -151,7 +151,7 @@ items:
             items:
               - url: /components/extractors/other/azure-cost/
                 title: Azure Cost Management
-                
+
               - url: /components/extractors/other/dark-sky/
                 title: Dark Sky (Weather)
 
@@ -238,9 +238,15 @@ items:
 
               - url: /components/writers/storage/storage-api/
                 title: Keboola Connection Storage
-                
+
               - url: /components/writers/storage/onedrive/
                 title: OneDrive
+
+          - url: /components/writers/other/
+            title: Other
+            items:
+              - url: /components/writers/other/azure-event-hub/
+                title: Azure Event Hub
 
       - url: /components/applications/
         title: Applications
