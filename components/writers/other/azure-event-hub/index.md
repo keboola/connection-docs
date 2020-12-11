@@ -10,10 +10,10 @@ This writer allows you to publish events to the [Azure Event Hubs](https://azure
 
 ## Mapping Mode
 
-There are two **Mapping Modes**:
- - **`row_as_json` mode**:  message is table's row in the JSON format.
- - **`column_value_mode` mode**: message is value of the specified column, from the table's row.
-
+There are two **mapping modes**:
+ - **`row_as_json` mode**: message is the table's row in JSON format
+ - **`column_value` mode**: message is the value of the specified column, from the table's row
+ 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Azure Event Hub** writer.
 
@@ -27,25 +27,24 @@ Click **Add Row** to add one or more [configuration rows](/components/#configura
 {: .image-popup}
 ![Screenshot - Extractor configuration](/components/writers/other/azure-event-hub/add-row.png)
 
-Fill in the **Name**, and optionally the **Description**. Then click **Add Row**.
+Fill in the **Name**, and, optionally, the **Description**. Then click **Add Row**.
 
 {: .image-popup}
 ![Screenshot - Extractor configuration](/components/extractors/database/cosmosdb/add-row-modal.png)
 
 Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
-
 {: .image-popup}
 ![Screenshot - Configuration Row](/components/writers/other/azure-event-hub/add-table.png)
 
-Fill in **Source** table. You can also fill in other fields. Then click **Add Input**.
+Fill in the **Source** table. You can also fill in other fields. Then click **Add Input**.
 
 {: .image-popup}
 ![Screenshot - Configuration Row](/components/writers/other/azure-event-hub/add-table-modal.png)
 
-In the [Configuration Row](/components/#configuration-rows) fill in the [**Mapping Mode**](#mapping-mode).
+In the [Configuration Row](/components/#configuration-rows), fill in the [**Mapping Mode**](#mapping-mode).
 
-For **`column_value`** mapping mode, also fill in the **Message Column**.
+For the **`column_value`** mapping mode, also fill in the **Message Column**.
 
 Then click **Save**.
 
