@@ -16,15 +16,16 @@ there are **no limitations** to how and where you can send your data.
 
 Writers can be grouped by their primary purpose:
 
-- **Business Intelligence**: [Tableau](/components/writers/bi-tools/tableau/), [GoodData](/components/writers/bi-tools/gooddata/), [Looker](/components/writers/bi-tools/looker/), and more.
-- **Databases**: [MySQL](/components/writers/database/mysql/), [Oracle](/components/writers/database/oracle/), [PostgreSQL](/components/writers/database/postgresql/), [Amazon Redshift](/components/writers/database/redshift/), [Snowflake](/components/writers/database/snowflake/), and more.
+- **Business Intelligence**: [Tableau](/components/writers/bi-tools/tableau/), [GoodData](/components/writers/bi-tools/gooddata/), [Looker](/components/writers/bi-tools/looker/), and more
+- **Databases**: [MySQL](/components/writers/database/mysql/), [Oracle](/components/writers/database/oracle/), [PostgreSQL](/components/writers/database/postgresql/), [Amazon Redshift](/components/writers/database/redshift/), [Snowflake](/components/writers/database/snowflake/), and more
 - **Generic Storage**: [AWS S3](/components/writers/storage/aws-s3/), [Dropbox](/components/writers/storage/dropbox/), [Google Drive](/components/writers/storage/google-drive/),
-[Google Sheets](/components/writers/storage/google-sheets/), [Keboola Connection Storage](/components/writers/storage/storage-api/), and more.
+[Google Sheets](/components/writers/storage/google-sheets/), [Keboola Connection Storage](/components/writers/storage/storage-api/), and more
+- [Other](/components/writers/other/) writers such as Azure Event Hub
 
 For a definitive list of usable writers, see your project **Writers** section.
 
 ## Working with Writers
-Each writer can have multiple configurations. Each configuration usually represents a single destination (database account, BI project, ...).
+Each writer can have multiple configurations. Each configuration usually represents a single destination (database account, BI project, etc.).
 Even though writers are generally designed for [**automated and repeated**](/orchestrator/) data collection,
 they can be triggered manually at any time.
 
