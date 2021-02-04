@@ -14,9 +14,9 @@ for sharing your data in form of an SQL database with some service. For example,
 data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Redshift** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Snowflake** writer.
 
-The first step is to **Set Up Credentials**:
+The first step is to **set up credentials**:
 
 {: .image-popup}
 ![Screenshot - Main page](/components/writers/database/snowflake/snowflake-1.png)
@@ -27,7 +27,7 @@ There are two modes of operation of the writer:
 - **Keboola Snowflake database** --- In this mode, the writer will create a new database for you and **give you credentials** to it.
 
 ### Own Snowflake Database
-You need to provide a *host name* (account name), *user name*, *password*, *database name*, *schema*, and *[Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
+You need to provide a *host name* (account name), *user name*, *password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
 
 {: .image-popup}
 ![Screenshot - Own Credentials](/components/writers/database/snowflake/snowflake-2.png)
@@ -106,8 +106,8 @@ the shortest unavailability of the target table. However, this operation still d
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).
 
-## Using Keboola Provisioned Database
-The writer offers the option to create a [Keboola Provisioned database](#keboola-snowflake-database) for you. You can
+## Using Keboola-Provisioned Database
+The writer offers the option to create a [Keboola-provisioned database](#keboola-snowflake-database) for you. You can
 use this database to connect Keboola Connection to a wide range of consumers --- especially Business Intelligence tools and Analytics.
 The database can be queried in real time, but is still completely isolated from your project Storage. The database is
 limited so that the data can be only read from the database and that the query execution time is limited to
@@ -115,24 +115,23 @@ limited so that the data can be only read from the database and that the query e
 
 ### Connect to Looker
 It is possible to use the Snowflake writer to share data with [Looker](https://looker.com/).
-To share data between your Keboola Connection project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
-The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
+To share data between your Keboola Connection project and PowerBI, choose the **Keboola Snowflake database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, 
 connect the Looker data sources. Follow the official [instructions](https://docs.looker.com/setup-and-management/connecting-to-db).
 There are also some [Snowflake specific settings](https://docs.looker.com/setup-and-management/database-config/snowflake#adding_the_connection). Note that you
 can skip a number of steps because a dedicated user is already created for you.
 
 ### Connect to Power BI Desktop
 It is possible to use the Snowflake writer to share data with [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
-To share data between your Keboola Connection project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
-The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
-connect the Power BI data sources. Follow the official [instructions for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/desktop-connect-snowflake).
+To share data between your Keboola Connection project and PowerBI, choose the **Keboola Snowflake database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, connect the Power BI data sources. Follow the official 
+[instructions for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/desktop-connect-snowflake).
 
 ### Connect to Qlik
 It is possible to use the Snowflake writer to share data with [Qlik Sense](https://www.qlik.com/us/products/qlik-sense)
 and [QlikView](https://www.qlik.com/us/products/qlikview).
-To share data between your Keboola Connection project and PowerBI, choose **Keboola Snowflake Database** when configuring the credentials.
-The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
-connect the Qlik data sources. Follow the Qlik official
+To share data between your Keboola Connection project and PowerBI, choose the **Keboola Snowflake database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, connect the Qlik data sources. Follow the Qlik official
 [integration guide](https://help.qlik.com/en-US/connectors/Subsystems/ODBC_connector_help/Content/Connectors_ODBC/Snowflake/Create-Snowflake-connection.htm).
 
 ### Connect to Tableau
@@ -141,8 +140,7 @@ It is possible to use the Snowflake writer to share data with [Tableau Desktop](
 faster than loading data through [TDE files](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
 with the [TDE writer](/components/writers/bi-tools/tableau/).
 
-To share data between your Keboola Connection project and Tableau, choose **Keboola Snowflake Database** when configuring the credentials.
-The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, you can
-connect the Tableau data sources. Follow the official [instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
-or for [Tableau Online](https://help.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password
-authentication method.
+To share data between your Keboola Connection project and Tableau, choose the **Keboola Snowflake database** when configuring the credentials.
+The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, connect the Tableau data sources. Follow the official 
+[instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
+or for [Tableau Online](https://help.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password authentication method.
