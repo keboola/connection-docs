@@ -1,5 +1,5 @@
 ---
-title: Free Plan (Pay-As-You-Go)
+title: Free Plan (Pay As You Go)
 permalink: /management/payg-project/
 ---
 
@@ -10,7 +10,7 @@ You can now start working with Keboola Connection for free and without a contrac
 Simply signing up on the website starts a project under the Free Plan.
 
 ## Platform Limits
-Pay-as-you-go (PAYG) projects have the following limits, which differ from the [limits for standard projects](/management/project/limits/).
+Pay-as-you-go (PAYG) projects have the following limits, which differ from the [limits for standard projects](/management/project/limits/):
 
 - **Single project:** each Free Plan account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/) and there is no [data catalog](/catalog/).
 - **Features:** apart from the absent data catalog, and transformations being limited to [SQL](/transformations/snowflake-plain/) and [Python](/transformations/python-plain/), all features are available to Free Plan account holders. There is no limit to the number of sources, orchestrations, etc.
@@ -28,7 +28,7 @@ or SQL queries in Keboola-managed DWH). Additional credits can be purchased with
 a credit card. There is no contract apart from the Free Plan Terms of Services. If a project runs out of credits, 
 the jobs cease executing until more credits are purchased or free credits are topped up.
 
-Unused Free credits don’t roll over from one month to the next. Purchased credits don’t expire during the life of the project.
+Unused free credits don’t roll over from one month to the next. Purchased credits don’t expire during the life of the project.
 
-Any Free Plan project can be migrated to a  [standard Keboola Connection project](/management/project/) 
-upon execution of our standard order form under the Master Software Subscription Agreement (MSSA).
+Any Free Plan project can be migrated to a [standard Keboola Connection project](/management/project/) 
+upon the execution of our standard order form under the Master Software Subscription Agreement (MSSA).
