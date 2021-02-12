@@ -9,7 +9,8 @@ redirect_from:
 * TOC
 {:toc}
 
-The Telemetry Data extractor allows you to retrieve data about your project or about your whole organization. 
+The Telemetry Data extractor allows you to retrieve data about your project or 
+about your whole [organization](/management/organization/). 
 It helps you monitor activities and usage of your Keboola Connection projects. It also helps Keboola calculate your project consumption.
 
 ## Configuration
@@ -20,11 +21,14 @@ To configure the extractor, select one of the following modes:
 to a single target project that must be set via your Keboola Connection Success Manager.
 
 ## Data Model
-The model below helps you better understand relations between individual tables extracted by this component.
+The model below helps you better understand relations between individual tables extracted by this component. 
+It is also available in [full resolution](https://dbdiagram.io/d/602629a380d742080a3a406a).
 
 *Note: The tables `contact_limit_monthly`, `kbc_organization`, and `usage_metric` are extracted only in **Organization** mode.*
 
-<iframe width="100%" height="400" src='https://dbdiagram.io/embed/602629a380d742080a3a406a'> </iframe>
+{: .image-popup}
+![Screenshot - Telemetry data model](/components/extractors/other/telemetry-data/telemetry-data-model.png)
+
 
 ## Extracted Tables
 The extracted tables provide you with information about your buckets, configurations, jobs, sandboxes,
@@ -47,7 +51,8 @@ This table shows snapshots of the buckets in Storage.
 
 
 ### kbc_component_configuration
-This table lists the configurations of the components (e.g., a configuration of the AWS S3 extractor).
+This table lists the [configurations of the components](/components/#creating-component-configuration) 
+(e.g., a configuration of the AWS S3 extractor).
 
 | **Column** | **Description** | **Example** |  
 | `kbc_component_configuration_id` (PK) | Component configuration identifier | `580_us-east-1_aws_keboola.python- transformation-v2-610931033` |
@@ -64,7 +69,8 @@ This table lists the configurations of the components (e.g., a configuration of 
 
 
 ### kbc_component_configuration_version
-This table shows the version history of the component configuration.
+This table shows the [version history](/components/#configuration-versions) 
+of the component configuration.
 
 | **Column** | **Description** | **Example** | 
 | `kbc_component_configuration_id` (PK) | Component configuration identifier | `6610_us-east-1_aws_orchestrator-583757303` |
@@ -77,7 +83,8 @@ This table shows the version history of the component configuration.
 
 
 ### kbc_data_science_sandbox
-This table lists Python/R sandboxes and their consumption.
+This table lists Python/R [workspaces](/transformations/workspace/)
+/[sandboxes](/transformations/sandbox/) and their consumption.
 
 | **Column** | **Description** | **Example** | 
 | `kbc_data_science_sandbox_resume_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox) | `10910_eu-central-1_aws_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
@@ -97,8 +104,10 @@ This table lists Python/R sandboxes and their consumption.
 | `time_credits_used` | Number of the time credits consumed by the sandbox on the particular date | `2.413333` |
 | `billed_credits_used` | Number of the actually billed credits | `2.413333` |
 
+
 ### kbc_job
-This table lists the Keboola Connection jobs (e.g., an extractor job or a transformation).
+This table lists the Keboola Connection [jobs](/management/jobs/) 
+(e.g., an extractor job or a transformation).
 
 | **Column** | **Description** | **Example** | 
 | `kbc_job_id` (PK) | KBC job identifier | `117644387_eu-central-1_aws` |
@@ -124,7 +133,7 @@ This table lists the Keboola Connection jobs (e.g., an extractor job or a transf
 
 
 ### kbc_organization
-This table shows data about Keboola Connection organizations.
+This table shows data about Keboola Connection [organizations[(/management/organization/).
 
 *Note: The table is available in **Organization** mode only.*
 
@@ -143,7 +152,8 @@ This table shows data about Keboola Connection organizations.
 
 
 ### kbc_project
-This table shows data about Keboola Connection projects belonging to an organization.
+This table shows data about Keboola Connection [projects](/management/project/) 
+belonging to an organization.
 
 | **Column** | **Description** | **Example** | 
 | `kbc_project_id` (PK) | KBC project identifier | `1944_us-east-1_aws` |
@@ -172,7 +182,8 @@ This table shows snapshots of the projects to track their size changes.
 
 
 ### kbc_project_user
-This table shows snapshots capturing the projects' admins. The snapshots are taken multiple times a day.
+This table shows snapshots capturing the projects' [admins](/management/project/users/).
+The snapshots are taken multiple times a day.
 
 | **Column** | **Description** | **Example** | 
 | `kbc_project_id` (PK) | Foreign key to the KBC project | `409_eu-west-1_azure` |
@@ -203,7 +214,7 @@ This table shows information about Snowflake usage.
 
 
 ### kbc_table_snapshot
-This table shows Storage table snapshots.
+This table shows [Storage table](/storage/tables/) snapshots.
 
 | **Column** | **Description** | **Example** | 
 | `table_id` (PK) | Storage table identifier | `in.c-GDU_Management.status` |
@@ -225,9 +236,10 @@ This table shows Storage table snapshots.
 
 
 ### kbc_usage_metrics_values
-This table shows aggregated values of all metrics that may be part of the contract, for example, consumed credits,
-data in storage, and the number of users. This combines data from different data sources (jobs, Snowflake stats,
-etc.), so it is possible to use it for consumption overview.
+This table shows aggregated values of all [metrics](/management/project/limits/#business-limits) 
+that may be part of the contract, for example, consumed credits, data in storage, and the number of users. 
+This combines data from different data sources (jobs, Snowflake stats, etc.), so it is possible to use it 
+for consumption overview.
 
 *Note: `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
@@ -247,8 +259,9 @@ You need data for all projects.*
 
 
 ### security_event
-This table lists security events, such as project logins or token creations. The events might be related directly
-to the project, to its organization, or to the Keboola Connection platform itself.
+This table lists [security events](/management/project/tokens/#token-events), 
+such as project logins or token creations. The events might be related directly to the project, to its
+organization, or to the Keboola Connection platform itself.
 
 | **Column** | **Description** | **Example** | 
 | `security_event_id` (PK) | Security event identifier | `2080005325_us-east-1_aws` | 
@@ -259,12 +272,60 @@ to the project, to its organization, or to the Keboola Connection platform itsel
 | `admin_email` | Email of the user participating in the event | `martin.matejka@keboola.com` |
 | `admin_name` | Name of the user participating in the event | `Martin Matejka` |
 | `admin_ip` | IP address from which the event was triggered | `34.200.169.177` |
-| `operation` | Type of the event operation. Possible values: <br> `operation` <br> `adminLog.admin.organizationInvitation.accepted` <br> `adminLog.organization.adminsInProjectsListed` <br> `adminLog.organization.adminsListed` <br> `adminLog.organization.detail` <br> `adminLog.organization.invitationCreated` <br> `adminLog.organization.invitationsListed` <br> `adminLog.organization.projectCreated` <br> `adminLog.organization.projectsListed` <br> `adminLog.promoCode.applied` <br> `auditLog.admin.addNewU2fDevice` <br> `auditLog.admin.changePassword` <br> `auditLog.admin.disableMfa` <br> `auditLog.admin.enableTotpMfa` <br> `auditLog.admin.enableU2fMfa` <br> `auditLog.admin.failedLogin` <br> `auditLog.admin.login` <br> `auditLog.admin.loginWithTotp` <br> `auditLog.admin.loginWithTotpViaRecoveryCode` <br> `auditLog.admin.loginWithU2f` <br> `auditLog.admin.logout` <br> `auditLog.admin.lostPassword` <br> `auditLog.admin.organizationInvitation.accepted` <br> `auditLog.admin.projectInvitation.accepted` <br> `auditLog.admin.projectInvitation.rejected` <br> `auditLog.admin.reauthorizeCurrentUserTotp` <br> `auditLog.admin.regenerateRecoveryCodes` <br> `auditLog.admin.removeU2fDevice` <br> `auditLog.admin.showRecoveryCodes` <br> `auditLog.admin.sudo` <br> `auditLog.deletedProjectsListed` <br> `auditLog.maintainers.created` <br> `auditLog.maintainers.organizationCreated` <br> `auditLog.organization.adminAdded` <br> `auditLog.organization.adminRemoved` <br> `auditLog.organization.adminsInProjectsListed` <br> `auditLog.organization.adminsListed` <br> `auditLog.organization.deleted` <br> `auditLog.organization.detail` <br> `auditLog.organization.invitationCreated` <br> `auditLog.organization.invitationDeleted` <br> `auditLog.organization.invitationsListed` <br> `auditLog.organization.projectCreated` <br> `auditLog.organization.projectsListed` <br> `auditLog.organization.updated` <br> `auditLog.payAsYouGo.marketingData` <br> `auditLog.project.addedToOrganization` <br> `auditLog.project.adminAdded` <br> `auditLog.project.adminRemoved` <br> `auditLog.project.adminsListed` <br> `auditLog.project.deleted` <br> `auditLog.project.deletedDetail` <br> `auditLog.project.detail` <br> `auditLog.project.featureAdded` <br> `auditLog.project.featureRemoved` <br> `auditLog.project.fileStorageAssigned` <br> `auditLog.project.invitationCreated` <br> `auditLog.project.invitationDeleted` <br> `auditLog.project.invitationsListed` <br> `auditLog.project.joinRequest.approved` <br> `auditLog.project.joinRequest.rejected` <br> `auditLog.project.joinRequestsListed` <br> `auditLog.project.limitAdded` <br> `auditLog.project.limitRemoved` <br> `auditLog.project.removedFromOrganization` <br> `auditLog.project.requestAccess` <br> `auditLog.project.setEnabledStatus` <br> `auditLog.project.storageBackendAssigned` <br> `auditLog.project.storageBackendRemoved` <br> `auditLog.project.storageTokenCreated` <br> `auditLog.project.undeleted` <br> `auditLog.project.updated` <br> `auditLog.promoCode.applied` <br> `auditLog.promoCode.created` |`auditLog.project.adminsListed` |
-| `operation_params` | Additional operation parameters. Possible values: `demo`, `poc`, `poc15Days`, `poc15DaysGuideMode`, `poc30Days`, `poc6months`, `production` – for updating the project type, `payAsYouGo` – for logging into a PAYG project, `googleLogin` – for logging into the project via Google SSO, `password` – for password-related operations (including login via credentials) | `password` |
+| `operation` | Type of the event operation. Possible values are listed in the table [Security event operations](#security-event-operations) below. | `auditLog.project.adminsListed` |
+| `operation_params` | Additional operation parameters. Possible values are listed in the table [Operation parameters](#operation-parameters) below. | `password` |
 | `token_id` | Token identifier if it’s a part of the event (e.g., token creation) | `47949` |
 | `token_description` | Token description if it’s a part of the event (e.g., token creation) | `token for linking shared bucket to project` |
 | `context_admin_email` | Email of the user in the context with the event (e.g., invitation or admin removal) | `martin.matejka@keboola.com` |
 | `context_admin_name` | Name of the user in the context with the event (e.g., invitation or admin removal) | `Martin Matejka` |
+
+#### Security event operations
+
+| `operation` | `adminLog.admin.organizationInvitation.accepted` | 
+| `adminLog.organization.adminsInProjectsListed` | `adminLog.organization.adminsListed`| 
+| `adminLog.organization.detail`| `adminLog.organization.invitationCreated`| 
+| `adminLog.organization.invitationsListed`| `adminLog.organization.projectCreated`|  
+| `adminLog.organization.projectsListed`| `adminLog.promoCode.applied`| 
+| `auditLog.admin.addNewU2fDevice`| `auditLog.admin.changePassword`| 
+| `auditLog.admin.disableMfa`| `auditLog.admin.enableTotpMfa`| 
+| `auditLog.admin.enableU2fMfa`| `auditLog.admin.failedLogin`| 
+| `auditLog.admin.login`| `auditLog.admin.loginWithTotp`| 
+| `auditLog.admin.loginWithTotpViaRecoveryCode`| `auditLog.admin.loginWithU2f`| 
+| `auditLog.admin.logout`| `auditLog.admin.lostPassword`| 
+| `auditLog.admin.organizationInvitation.accepted`| `auditLog.admin.projectInvitation.accepted`| 
+| `auditLog.admin.projectInvitation.rejected`| `auditLog.admin.reauthorizeCurrentUserTotp`| 
+| `auditLog.admin.regenerateRecoveryCodes`| `auditLog.admin.removeU2fDevice`| 
+| `auditLog.admin.showRecoveryCodes`| `auditLog.admin.sudo`| 
+| `auditLog.deletedProjectsListed`| `auditLog.maintainers.created`| 
+| `auditLog.maintainers.organizationCreated`| `auditLog.organization.adminAdded`|  
+| `auditLog.organization.adminRemoved`| `auditLog.organization.adminsInProjectsListed`| 
+| `auditLog.organization.adminsListed`| `auditLog.organization.deleted`| 
+| `auditLog.organization.detail`| `auditLog.organization.invitationCreated`| 
+| `auditLog.organization.invitationDeleted`| `auditLog.organization.invitationsListed`| 
+| `auditLog.organization.projectCreated`| `auditLog.organization.projectsListed`| 
+| `auditLog.organization.updated`| `auditLog.payAsYouGo.marketingData`| 
+| `auditLog.project.addedToOrganization`| `auditLog.project.adminAdded`| 
+| `auditLog.project.adminRemoved`| `auditLog.project.adminsListed`| 
+| `auditLog.project.deleted`| `auditLog.project.deletedDetail`| 
+| `auditLog.project.detail`| `auditLog.project.featureAdded`| 
+| `auditLog.project.featureRemoved`| `auditLog.project.fileStorageAssigned`| 
+| `auditLog.project.invitationCreated`| `auditLog.project.invitationDeleted`| 
+| `auditLog.project.invitationsListed`| `auditLog.project.joinRequest.approved`| 
+| `auditLog.project.joinRequest.rejected`| `auditLog.project.joinRequestsListed`| 
+| `auditLog.project.limitAdded`|  `auditLog.project.limitRemoved`| 
+| `auditLog.project.removedFromOrganization`| `auditLog.project.requestAccess`|  
+| `auditLog.project.setEnabledStatus`| `auditLog.project.storageBackendAssigned`| 
+| `auditLog.project.storageBackendRemoved`| `auditLog.project.storageTokenCreated`| 
+| `auditLog.project.undeleted`| `auditLog.project.updated`| 
+| `auditLog.promoCode.applied`| `auditLog.promoCode.created` | 
+| `auditLog.project.adminsListed` | |
+
+#### Operation parameters
+
+| Updating project type: | `demo`, `poc`, `poc15Days`, `poc15DaysGuideMode`, `poc30Days`, `poc6months`, `production` |
+| Logging into [pay-as-you-go project](/management/payg-project/) (PAYG): | `payAsYouGo` | 
+| Logging into project via Google SSO: | `googleLogin` | 
+| Password-related operations (incl. login via credentials): | `password` |
 
 
 ### contract_limit_monthly
@@ -290,3 +351,4 @@ This table shows metrics related to your contracts.
 | usage_metric_id | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_ppu`
 | usage_metric | Name of the metric | `2019-08-01` |
 | metric_type | Defines if metric is calculated cumulatively over period of time (like PPU) or if it has actual total value on particular date (like Projects). <br> Possible values: <br> `cumulative`, `standard` | `cumulative` |
+
