@@ -176,6 +176,9 @@ items:
               - url: /components/extractors/other/stripe/
                 title: Stripe
 
+              - url: /components/extractors/other/telemetry-data/
+                title: Telemetry Data
+
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
 
