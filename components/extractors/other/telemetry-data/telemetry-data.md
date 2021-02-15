@@ -22,13 +22,12 @@ to a single target project that must be set via your Keboola Connection Success 
 
 ## Data Model
 The model below helps you better understand relations between individual tables extracted by this component. 
-It is also available in [full resolution](https://dbdiagram.io/d/602629a380d742080a3a406a).
-
-*Note: The tables `contact_limit_monthly`, `kbc_organization`, and `usage_metric` are extracted only in **Organization** mode.*
+Keep in mind that the tables *contact_limit_monthly*, *kbc_organization*, and *usage_metric* are extracted only in **Organization** mode.
 
 {: .image-popup}
 ![Screenshot - Telemetry data model](/components/extractors/other/telemetry-data/telemetry-data-model.png)
 
+*Note: You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
 
 ## Extracted Tables
 The extracted tables provide you with information about your buckets, configurations, jobs, sandboxes,
@@ -83,8 +82,8 @@ of the component configuration.
 
 
 ### kbc_data_science_sandbox
-This table lists Python/R [workspaces](/transformations/workspace/)
-/[sandboxes](/transformations/sandbox/) and their consumption.
+This table lists Python/R [workspaces](/transformations/workspace/)/[sandboxes](/transformations/sandbox/) 
+and their consumption.
 
 | **Column** | **Description** | **Example** | 
 | `kbc_data_science_sandbox_resume_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox) | `10910_eu-central-1_aws_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
@@ -133,7 +132,7 @@ This table lists the Keboola Connection [jobs](/management/jobs/)
 
 
 ### kbc_organization
-This table shows data about Keboola Connection [organizations[(/management/organization/).
+This table shows data about Keboola Connection [organizations](/management/organization/).
 
 *Note: The table is available in **Organization** mode only.*
 
@@ -195,7 +194,7 @@ The snapshots are taken multiple times a day.
 
 
 ### kbc_snowflake_stats
-This table shows information about Snowflake usage.
+This table shows information about queries using Snowflake, including transformations and sandboxes.
 
 | **Column** | **Description** | **Example** |
 | `kbc_project_id` (PK) | Foreign key to the KBC project | `458_eu-central-1_aws` |
