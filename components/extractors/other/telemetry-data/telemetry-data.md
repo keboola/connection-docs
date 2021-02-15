@@ -280,44 +280,43 @@ organization, or to the Keboola Connection platform itself.
 
 #### Security event operations
 
-| `operation` | `adminLog.admin.organizationInvitation.accepted` | 
-| `adminLog.organization.adminsInProjectsListed` | `adminLog.organization.adminsListed`| 
-| `adminLog.organization.detail`| `adminLog.organization.invitationCreated`| 
-| `adminLog.organization.invitationsListed`| `adminLog.organization.projectCreated`|  
-| `adminLog.organization.projectsListed`| `adminLog.promoCode.applied`| 
-| `auditLog.admin.addNewU2fDevice`| `auditLog.admin.changePassword`| 
-| `auditLog.admin.disableMfa`| `auditLog.admin.enableTotpMfa`| 
-| `auditLog.admin.enableU2fMfa`| `auditLog.admin.failedLogin`| 
-| `auditLog.admin.login`| `auditLog.admin.loginWithTotp`| 
-| `auditLog.admin.loginWithTotpViaRecoveryCode`| `auditLog.admin.loginWithU2f`| 
-| `auditLog.admin.logout`| `auditLog.admin.lostPassword`| 
-| `auditLog.admin.organizationInvitation.accepted`| `auditLog.admin.projectInvitation.accepted`| 
-| `auditLog.admin.projectInvitation.rejected`| `auditLog.admin.reauthorizeCurrentUserTotp`| 
-| `auditLog.admin.regenerateRecoveryCodes`| `auditLog.admin.removeU2fDevice`| 
-| `auditLog.admin.showRecoveryCodes`| `auditLog.admin.sudo`| 
-| `auditLog.deletedProjectsListed`| `auditLog.maintainers.created`| 
-| `auditLog.maintainers.organizationCreated`| `auditLog.organization.adminAdded`|  
-| `auditLog.organization.adminRemoved`| `auditLog.organization.adminsInProjectsListed`| 
-| `auditLog.organization.adminsListed`| `auditLog.organization.deleted`| 
-| `auditLog.organization.detail`| `auditLog.organization.invitationCreated`| 
-| `auditLog.organization.invitationDeleted`| `auditLog.organization.invitationsListed`| 
-| `auditLog.organization.projectCreated`| `auditLog.organization.projectsListed`| 
-| `auditLog.organization.updated`| `auditLog.payAsYouGo.marketingData`| 
-| `auditLog.project.addedToOrganization`| `auditLog.project.adminAdded`| 
-| `auditLog.project.adminRemoved`| `auditLog.project.adminsListed`| 
-| `auditLog.project.deleted`| `auditLog.project.deletedDetail`| 
-| `auditLog.project.detail`| `auditLog.project.featureAdded`| 
-| `auditLog.project.featureRemoved`| `auditLog.project.fileStorageAssigned`| 
-| `auditLog.project.invitationCreated`| `auditLog.project.invitationDeleted`| 
-| `auditLog.project.invitationsListed`| `auditLog.project.joinRequest.approved`| 
-| `auditLog.project.joinRequest.rejected`| `auditLog.project.joinRequestsListed`| 
-| `auditLog.project.limitAdded`|  `auditLog.project.limitRemoved`| 
-| `auditLog.project.removedFromOrganization`| `auditLog.project.requestAccess`|  
-| `auditLog.project.setEnabledStatus`| `auditLog.project.storageBackendAssigned`| 
-| `auditLog.project.storageBackendRemoved`| `auditLog.project.storageTokenCreated`| 
-| `auditLog.project.undeleted`| `auditLog.project.updated`| 
-| `auditLog.promoCode.applied`| `auditLog.promoCode.created` | 
-| `auditLog.project.adminsListed` | |
+| `adminLog.admin.organizationInvitation.accepted` | `adminLog.organization.adminsInProjectsListed` | 
+| `adminLog.organization.adminsListed`| `adminLog.organization.detail`| 
+| `adminLog.organization.invitationCreated`| `adminLog.organization.invitationsListed`| 
+| `adminLog.organization.projectCreated`| `adminLog.organization.projectsListed`| 
+| `adminLog.promoCode.applied`| `auditLog.admin.addNewU2fDevice`| 
+| `auditLog.admin.changePassword`| `auditLog.admin.disableMfa`| 
+| `auditLog.admin.enableTotpMfa`| `auditLog.admin.enableU2fMfa`| 
+| `auditLog.admin.failedLogin`| `auditLog.admin.login`| 
+| `auditLog.admin.loginWithTotp`| `auditLog.admin.loginWithTotpViaRecoveryCode`|
+| `auditLog.admin.loginWithU2f`| `auditLog.admin.logout`| 
+| `auditLog.admin.lostPassword`| `auditLog.admin.organizationInvitation.accepted`| 
+| `auditLog.admin.projectInvitation.accepted`| `auditLog.admin.projectInvitation.rejected`| 
+| `auditLog.admin.reauthorizeCurrentUserTotp`| `auditLog.admin.regenerateRecoveryCodes`|  
+| `auditLog.admin.removeU2fDevice`| `auditLog.admin.showRecoveryCodes`| 
+| `auditLog.admin.sudo`| `auditLog.deletedProjectsListed`| 
+| `auditLog.maintainers.created`| `auditLog.maintainers.organizationCreated`| 
+| `auditLog.organization.adminAdded`| `auditLog.organization.adminRemoved`| 
+| `auditLog.organization.adminsInProjectsListed`| `auditLog.organization.adminsListed`| 
+| `auditLog.organization.deleted`| `auditLog.organization.detail`| 
+| `auditLog.organization.invitationCreated`| `auditLog.organization.invitationDeleted`| 
+| `auditLog.organization.invitationsListed`| `auditLog.organization.projectCreated`| 
+|`auditLog.organization.projectsListed`| `auditLog.organization.updated`| 
+| `auditLog.payAsYouGo.marketingData`| `auditLog.project.addedToOrganization`| 
+| `auditLog.project.adminAdded`| `auditLog.project.adminRemoved`| 
+| `auditLog.project.adminsListed`| `auditLog.project.deleted`| 
+| `auditLog.project.deletedDetail`| `auditLog.project.detail`| 
+| `auditLog.project.featureAdded`| `auditLog.project.featureRemoved`| 
+| `auditLog.project.fileStorageAssigned`| `auditLog.project.invitationCreated`| 
+| `auditLog.project.invitationDeleted`| `auditLog.project.invitationsListed`| 
+| `auditLog.project.joinRequest.approved`| `auditLog.project.joinRequest.rejected`| 
+|`auditLog.project.joinRequestsListed`| `auditLog.project.limitAdded`| 
+| `auditLog.project.limitRemoved`| `auditLog.project.removedFromOrganization`| 
+| `auditLog.project.requestAccess`| `auditLog.project.setEnabledStatus`| 
+| `auditLog.project.storageBackendAssigned`| `auditLog.project.storageBackendRemoved`| 
+| `auditLog.project.storageTokenCreated`| `auditLog.project.undeleted`| 
+| `auditLog.project.updated`| `auditLog.promoCode.applied`| 
+| `auditLog.promoCode.created` | `auditLog.project.adminsListed` |
 
 #### Operation parameters
 
@@ -347,7 +346,7 @@ This table shows metrics related to your contracts.
 *Note: The table is available in **Organization** mode only.*
 
 | **Column** | **Description** | **Example** | 
-| usage_metric_id | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_ppu`
-| usage_metric | Name of the metric | `2019-08-01` |
-| metric_type | Defines if metric is calculated cumulatively over period of time (like PPU) or if it has actual total value on particular date (like Projects). <br> Possible values: <br> `cumulative`, `standard` | `cumulative` |
+| `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_ppu`
+| `usage_metric` | Name of the metric | `2019-08-01` |
+| `metric_type` | Defines if metric is calculated cumulatively over period of time (like PPU) or if it has actual total value on particular date (like Projects). <br> Possible values: <br> `cumulative`, `standard` | `cumulative` |
 
