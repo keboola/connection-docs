@@ -235,10 +235,9 @@ This table shows [Storage table](/storage/tables/) snapshots.
 
 
 ### kbc_usage_metrics_values
-This table shows aggregated values of all [metrics](/management/project/limits/#business-limits) 
-that may be part of the contract, for example, consumed credits, data in storage, and the number of users. 
-This combines data from different data sources (jobs, Snowflake stats, etc.), so it is possible to use it 
-for consumption overview.
+This table shows aggregated values of all metrics that may be part of the contract, for example, consumed credits, 
+data in storage, and the number of users. This combines data from different data sources (jobs, Snowflake stats, 
+etc.), so it is possible to use it for consumption overview.
 
 *Note: `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
