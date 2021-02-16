@@ -85,12 +85,4 @@ Name the query and click **Create**.
 {: .image-popup}
 ![Screenshot - Name Query](/components/extractors/database/bigquery/bigquery-6.png)
 
-Specify the SQL code in the **SQL Query** field and **Save** the query configuration.
-In the example below a public dataset to test the extractor was used:
-
-{% highlight sql %}
-SELECT * FROM `bigquery-public-data.utility_us.country_code_iso` LIMIT 10;
-{% endhighlight %}
-
-{: .image-popup}
-![Screenshot - Configure Query](/components/extractors/database/bigquery/bigquery-7.png)
+How to modify your configuration you can read in the [SQL databases section](/components/extractors/database/sqldb/#modify-configuration).
