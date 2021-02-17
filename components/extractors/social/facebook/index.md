@@ -11,7 +11,7 @@ redirect_from:
 
 This extractor uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract 
 your Facebook Pages [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) 
-(including comments, likes, etc.), as well as Page or Page post [Insights](https://developers.facebook.com/docs/graph-api/reference/v3.0/insights).
+(including comments, likes, etc.), as well as Page or Page post [Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Facebook Pages** extractor.
@@ -53,25 +53,25 @@ the output table name will be `foo_likes`.
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Graph API.
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
-A typical example would be the [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed).
+A typical example would be the [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed).
 If left empty, the *Endpoint* option references data of the Facebook Page itself.
 
-For more information, see the [list of supported Facebook Graph API Page endpoints](https://developers.facebook.com/docs/graph-api/reference/page/).
+For more information, see the [list of supported Facebook Graph API Page endpoints](https://developers.facebook.com/docs/graph-api/reference/page).
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of
 fields but it also can be used to parametrize the fields and nest more endpoints into it.
-The [feed](https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed) endpoint returns all
+The [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) endpoint returns all
 posts created by a Facebook Page. Each post contains fields such as `caption`, `message`, `created_time`
 and `type`. The fields parameter in such case is `caption,message,created_time,type`.
 
 - **Fields/Endpoint Nesting** ---
-    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/v2.8/comment/) field/endpoint for each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you wanted to include likes of posts comments,the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
+    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/comment) field/endpoint for each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you wanted to include likes of posts comments,the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
 
 - **Fields Parametrization** ---
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.
     Typical parameters would be `since`, `until` or `limit`,
-    or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/graph-api/reference/v2.8/insights) endpoint.
+    or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/graph-api/reference/insights) endpoint.
     An example of parametrized fields: `comments.since(2 days ago).until(yesterday){message,created_time,from}` or `insights.since(1000 days ago).metric(page_views_total)`.
 
 ### Pages
@@ -122,7 +122,7 @@ top parent ID is the Facebook Page ID.
 
 ## Facebook API Version
 You can set the version of the Facebook Graph API that will be applied for all requests made to the API
-by the Facebook Pages extractor.
+by the Facebook Pages extractor. Read more about the Graph API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
 
 {: .image-popup}
 ![Screenshot - Api Version](/components/extractors/social/facebook/facebook-4.png)
