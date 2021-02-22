@@ -16,14 +16,10 @@ a branch looks like, and what you need to do before you can start.
 
 ## Private Beta Warning
 Development/Production Mode is currently in private beta. Some features may not work as expected. Please bear 
-with us while we polish all necessities. Any feedback is welcome at ideas@keboola.com.
+with us while we polish all necessities. Any feedback is welcome at https://ideas.keboola.com/.
 
 ## Before You Start
-Before you start using Development/Production Mode, you need to create a testing project under 
-the [Free Plan](/management/payg-project/) (available on our [website](https://www.keboola.com/)). 
-Send your request for testing this beta feature to Keboola Support with the project URL/ID, for example,
-`https://connection.north-europe.azure.keboola.com/admin/projects/1255/dashboard`, and we will give 
-you access.
+To request to be a beta tester for this feature please ask via the support button in your project.
 
 In the next steps, we will create and configure a transformation to demonstrate the modes on.
 
