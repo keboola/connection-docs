@@ -16,7 +16,7 @@ a branch looks like, and what you need to do before you can start.
 
 ## Private Beta Warning
 Development/Production Mode is currently in private beta. Some features may not work as expected. Please bear 
-with us while we polish all necessities. Any feedback is welcome at https://ideas.keboola.com/.
+with us while we polish all necessities. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
 
 ## Before You Start
 To request to be a beta tester for this feature please ask via the support button in your project.
