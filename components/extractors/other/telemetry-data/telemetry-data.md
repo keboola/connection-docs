@@ -18,7 +18,7 @@ To configure the extractor, select one of the following modes:
  
 1. **Project mode** --- extracts data from a selected Keboola Connection project only.
 2. **Organization mode** --- extracts data from all projects of your organization. The data is extracted 
-to a single target project that must be set via your Keboola Connection Success Manager.
+to a single target project that must be set via your Keboola Customer Success Manager.
 
 ## Data Model
 The model below helps you better understand relations between individual tables extracted by this component. 
