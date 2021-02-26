@@ -19,7 +19,7 @@ Development/Production Mode is currently in private beta. Some features may not 
 with us while we polish all necessities. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
 
 ## Before You Start
-To request to be a beta tester for this feature please ask via the support button in your project.
+To request to be a beta tester for this feature, please ask via the support button in your project.
 
 In the next steps, we will create and configure a transformation to demonstrate the modes on.
 

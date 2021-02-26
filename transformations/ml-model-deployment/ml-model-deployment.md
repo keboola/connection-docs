@@ -9,18 +9,18 @@ permalink: /transformations/ml-model-deployment/
 In this tutorial, we will show you how to use Machine Learning Model Deployment.
 
 ## Private Beta Warning
-Machine Learning (ML) Model Deployment is currently in private beta. Some features may not work as expected. Please bear with us 
-while we polish all necessities. Any feedback is welcome using the feedback button directly in the platform or 
-through the [feedback portal](https://ideas.keboola.com).
+Machine Learning (ML) Model Deployment is currently in private beta. Some features may not work as 
+expected. Please bear with us while we polish all necessities. Any feedback is welcome using the feedback 
+button directly in the platform or through the [feedback portal](https://ideas.keboola.com).
 
 ## Before You Start
-To request to be a beta tester for this feature please ask via the support button in your project.
+To request to be a beta tester for this feature, please ask via the support button in your project.
 
 ## Deployment Options
-In the next steps, we will walk you through the process of deploying a model in your project. The model is 
-deployed through and integration with [MLflow platform](https://mlflow.org/docs/latest/index.html). You can encounter 
-two situations, depending on whether you need to create and register a new model, or whether you already have 
-an existing model you can use. 
+In the next steps, we will walk you through the process of deploying a model in your project. The model 
+is deployed through an integration with the [MLflow platform](https://mlflow.org/docs/latest/index.html). 
+You can encounter two situations, depending on whether you need to create and register a new model, or 
+whether you already have an existing model you can use. 
 
 ### New ML Model
 Let’s assume that you have just started exploring this feature and your ML/AI section and that no model 
@@ -29,7 +29,7 @@ has been created yet. You will see this empty screen.
 {: .image-popup}
 ![Screenshot - No Model Yet](/transformations/ml-model-deployment/01-no-model.png)
 
-This means that you must create an [MLFlow workspace](/transformations/workspace/); continue on to the tab **Workspaces**.
+This means that you must create an [MLflow workspace](/transformations/workspace/); continue on to the tab **Workspaces**.
 
 {: .image-popup}
 ![Screenshot - Tab Workspaces](/transformations/ml-model-deployment/02-no-workspace.png)
@@ -40,21 +40,21 @@ and select the Python MLflow workspace.
 {: .image-popup}
 ![Screenshot - New Workspace](/transformations/ml-model-deployment/03-python-mlflow.png)
 
-Name it, e.g., *My test workspace*, and select its backend power: *small/medium/large*. Then click the button 
-**Create Workspace**.
+Name it, e.g., *My test workspace*, and select its backend power: *small/medium/large*. Then click 
+the button **Create Workspace**.
 
 {: .image-popup}
 ![Screenshot - Name Workspace](/transformations/ml-model-deployment/04-name-workspace.png)
 
-After a while a workspace is created. You can connect to it using the generated credentials. JupyterLab will open, 
-and you should find an empty Jupyter notebook, where you can place your code to use the MLFlow server for training 
-and registering the model. 
+After a while a workspace is created. You can connect to it using the generated credentials. 
+JupyterLab will open, and you should find an empty Jupyter notebook, where you can place your code to use 
+the MLflow server for training and registering the model. 
 
 #### Sample code
 The following code uses the [MLflow Python API](https://mlflow.org/docs/latest/python_api/mlflow.html#module-mlflow)
 to fit an [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html) 
-regression model using [scikit-learn](https://sklearn.org/). At the end of the sample code, the model is registered
-to the MLflow server.
+regression model using [scikit-learn](https://sklearn.org/). At the end of the sample code, 
+the model is registered to the MLflow server.
 
 {% highlight python %}
 # The data set used in this example is from http://archive.ics.uci.edu/ml/datasets/Wine+Quality
@@ -149,24 +149,25 @@ if __name__ == "__main__":
 {: .image-popup}
 ![Screenshot - Sample Code](/transformations/ml-model-deployment/05-sample-code.png)
 
-Once you train your model and run the first experiment, you can go to back to Keboola Connection UI and
-from there open the MLFlow UI and check the results.
+Once you train your model and run the first experiment, you can go back to the Keboola Connection UI, 
+open the MLflow UI from there, and check the results.
 
 {: .image-popup}
-![Screenshot - Open MLFlow](/transformations/ml-model-deployment/06-open-mlflow.png)
+![Screenshot - Open MLflow](/transformations/ml-model-deployment/06-open-mlflow.png)
 
 If you are satisfied, you can use a registered model for deployment. You can set the stage. 
 MLflow provides [predefined stages](https://mlflow.org/docs/latest/model-registry.html#transitioning-an-mlflow-models-stage) 
-for common use-cases such as Staging, Production, or Archived. 
+for common use cases such as Staging, Production, or Archived. 
 You can transition a model version from one stage to another stage.
 
-Once ready, go back to tab **ML/AI services** tab in Keboola Connection UI and deploy the model. 
+Once ready, go back to the tab **ML/AI services** in the Keboola Connection UI and deploy the model. 
 
 ### Existing ML Model
-If someone before you had already created a model that you could use, you would simply go to the tab 
-**ML/AI Services**, click the button **Deploy Model**, select one of the already created models, and use it. 
+If there are already any models available (perhaps created by someone else before you), simply go to 
+the tab **ML/AI Services**, click the button **Deploy Model**, select one of the already created models, 
+and use it. 
 
-The model will be deployed and a unique endpoint URL, which you can use for sending requests, will be generated.
+The model will be deployed, and a unique endpoint URL, which you can use for sending requests, will be generated.
 
 {: .image-popup}
 ![Screenshot - Deploy Model](/transformations/ml-model-deployment/07-deploy-model.png)
