@@ -1,34 +1,35 @@
 ---
-title: ML Model Deployment Tutorial
+title: Machine Learning Models Tutorial
 permalink: /transformations/ml-model-deployment/
 ---
 
 * TOC
 {:toc}
 
-In this tutorial, we will show you how to use ML Model Deployment.
+In this tutorial, we will show you how to use Machine Learning Model Deployment.
 
 ## Private Beta Warning
-ML Model Deployment Mode is currently in private beta. Some features may not work as expected. Please bear with us 
+Machine Learning (ML) Model Deployment is currently in private beta. Some features may not work as expected. Please bear with us 
 while we polish all necessities. Any feedback is welcome using the feedback button directly in the platform or 
-through the portal at [https://ideas.keboola.com](https://ideas.keboola.com).
+through the [feedback portal](https://ideas.keboola.com).
 
 ## Before You Start
 To request to be a beta tester for this feature please ask via the support button in your project.
 
 ## Deployment Options
-In the next steps, we will walk you through the process of deploying a model in your project. You can encounter 
-two situations, depending on whether you already have an existing model you can use, or whether you need to create 
-and register a new one. 
+In the next steps, we will walk you through the process of deploying a model in your project. The model is 
+deployed through and integration with [MLflow platform](https://mlflow.org/docs/latest/index.html). You can encounter 
+two situations, depending on whether you need to create and register a new model, or whether you already have 
+an existing model you can use. 
 
-### 1 – No ML Model
+### New ML Model
 Let’s assume that you have just started exploring this feature and your ML/AI section and that no model 
 has been created yet. You will see this empty screen.
 
 {: .image-popup}
 ![Screenshot - No Model Yet](/transformations/ml-model-deployment/01-no-model.png)
 
-This means that you must continue on to the tab **Workspaces**.
+This means that you must create an [MLFlow workspace](/transformations/workspace/); continue on to the tab **Workspaces**.
 
 {: .image-popup}
 ![Screenshot - Tab Workspaces](/transformations/ml-model-deployment/02-no-workspace.png)
@@ -50,8 +51,12 @@ and you should find an empty Jupyter notebook, where you can place your code to 
 and registering the model. 
 
 #### Sample code
+The following code uses the [MLflow Python API](https://mlflow.org/docs/latest/python_api/mlflow.html#module-mlflow)
+to fit an [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html) 
+regression model using [scikit-learn](https://sklearn.org/). At the end of the sample code, the model is registered
+to the MLflow server.
 
-{% highlight sql %}
+{% highlight python %}
 # The data set used in this example is from http://archive.ics.uci.edu/ml/datasets/Wine+Quality
 # P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
 # Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 2009.
@@ -144,18 +149,20 @@ if __name__ == "__main__":
 {: .image-popup}
 ![Screenshot - Sample Code](/transformations/ml-model-deployment/05-sample-code.png)
 
-Once you train your model and run the first experiment, you can go to MLFlow UI and check the results.
+Once you train your model and run the first experiment, you can go to back to Keboola Connection UI and
+from there open the MLFlow UI and check the results.
 
 {: .image-popup}
 ![Screenshot - Open MLFlow](/transformations/ml-model-deployment/06-open-mlflow.png)
 
 If you are satisfied, you can use a registered model for deployment. You can set the stage. 
-MLflow provides predefined stages for common use-cases such as Staging, Production, or Archived. 
+MLflow provides [predefined stages](https://mlflow.org/docs/latest/model-registry.html#transitioning-an-mlflow-models-stage) 
+for common use-cases such as Staging, Production, or Archived. 
 You can transition a model version from one stage to another stage.
 
-Once ready, go back to tab **ML/AI services** and deploy the model. 
+Once ready, go back to tab **ML/AI services** tab in Keboola Connection UI and deploy the model. 
 
-### 2 - Existing ML Model
+### Existing ML Model
 If someone before you had already created a model that you could use, you would simply go to the tab 
 **ML/AI Services**, click the button **Deploy Model**, select one of the already created models, and use it. 
 
@@ -168,6 +175,5 @@ A successfully deployed model should look like this:
 
 {: .image-popup}
 ![Screenshot - Model Deployed](/transformations/ml-model-deployment/08-model-deployed.png)
-
 
 Happy experimenting!
