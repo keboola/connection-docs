@@ -19,7 +19,7 @@ Development/Production Mode is currently in private beta. Some features may not 
 with us while we polish all necessities. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
 
 ## Before You Start
-To request to be a beta tester for this feature please ask via the support button in your project.
+To request to be a beta tester for this feature, please ask via the support button in your project.
 
 In the next steps, we will create and configure a transformation to demonstrate the modes on.
 
@@ -42,7 +42,7 @@ f.write("{{outFileContent}}")
 f.close ()
 {% endhighlight %}
 
-Finally, enter two out variables `outFile`, `outFileContent`, and click **CREATE SHARED CODE**. 
+Finally, enter two out variables `outFile`, `outFileContent`, and click **Create Share Code**. 
 
 {: .image-popup}
 ![Screenshot - New Shared Code](/transformations/dev-prod-mode/02-new-shared-code.png)
@@ -50,7 +50,7 @@ Finally, enter two out variables `outFile`, `outFileContent`, and click **CREATE
 ### Add Shared Code to Transformation
 To add the new shared code to your transformation, go to your new transformation, scroll down to 
 **Scripts -- Block 1**. Click **Select Shared Code** and select the code you have just created. 
-Click **USE AS SHARED CODE**.
+Click **Use as Shared Code**.
 
 {: .image-popup}
 ![Screenshot - Add Shared Code](/transformations/dev-prod-mode/03-add-shared-code.png)
@@ -66,7 +66,7 @@ Click to **initialize the variables** with empty values.
 ### Set Output Mapping
 Now go to the section **File Output Mapping** and click **New File Output**. And because the output of the 
 transformation will be the file `demoFile.txt`, let’s set it as *Source* and `demoOutput` as *Tags*. This means 
-that the output will be stored in Storage as `demoFile.txt` with the tag `demoOutput`. Click **ADD FILE OUTPUT**.
+that the output will be stored in Storage as `demoFile.txt` with the tag `demoOutput`. Click **Add File Output**.
 
 {: .image-popup}
 ![Screenshot - Set Output Mapping](/transformations/dev-prod-mode/05-output-mapping.png)
@@ -91,13 +91,13 @@ Development/Production Mode comes in, giving you the option to test the changes 
 production. 
 
 To create a new branch, click on your project’s name at the top of the screen (for the purposes of this tutorial, 
-the production project is called *Dev branches demo*). Then click on the green icon **NEW** displayed next to 
+the production project is called *Dev branches demo*). Then click on the green icon **New** displayed next to 
 your project’s name. 
 
 {: .image-popup}
 ![Screenshot - Create Development Branch](/transformations/dev-prod-mode/08-create-dev-branch.png)
 
-Name your new development branch, for example, *My dev branch*, and click **CREATE DEVELOPMENT BRANCH**  to open it.
+Name your new development branch, for example, *My dev branch*, and click **Create Development Branch**  to open it.
 
 {: .image-popup}
 ![Screenshot - Name Development Branch](/transformations/dev-prod-mode/09-name-dev-branch.png)
@@ -127,8 +127,8 @@ the files that were created in the production environment.
 
 ### Change Configuration
 Now it’s time to make the changes to the transformation and test them. Let’s add a bit of code first. Go to 
-**Transformations** and in **Shared Codes**, select *Create a file*. Then click **EDIT CODE** and **LET’S CHANGE 
-THE SHARED CODE**.
+**Transformations** and in **Shared Codes**, select *Create a file*. Then click **Edit Code** and **Let’s Change
+the Shared Code**.
 
 {% highlight sql %}
 f = open("out/files/{{ outFile }}", "a")
@@ -159,7 +159,7 @@ Now change the name of the output file. To do that, go to your transformation an
 ![Screenshot - Edit Variable in Development Branch](/transformations/dev-prod-mode/15-edit-var-in-dev.png)
 
 ### Show Project Diff
-Go to the dashboard and click the button **SHOW PROJECT DIFF** on the right. There you can see the things you’ve 
+Go to the dashboard and click the button **Show Project Diff** on the right. There you can see the things you’ve 
 changed (the shared code and the definition of one variable for the Python transformation). 
 
 {: .image-popup}
