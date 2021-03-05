@@ -32,12 +32,11 @@ have an [advanced mode](/components/extractors/database/sqldb/).
 
 ## NoSQL databases
 
-Unlike SQL databases, the extractors for a **NoSQL databases**, require a different configuration, see:
+Unlike SQL databases, the extractors for a **NoSQL databases**, require a different configuration (except [BigQuery Extractor](/components/extractors/database/bigquery/) for [BigQuery](https://cloud.google.com/bigquery/) database which is quite similar to SQL databases, also support [advanced mode](/components/extractors/database/sqldb/)), see:
+
 - [MongoDB Extractor](/components/extractors/database/mongodb/) for [MongoDB](https://www.mongodb.com/) database and [CosmosDB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
-- [CosmosDB Extractor](/components/extractors/database/cosmosdb/)  for [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
-- [Azure Storage Table Extractor](/components/extractors/database/cosmosdb/)  for [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
-- [BigQuery Extractor](/components/extractors/database/bigquery/) for [BigQuery](https://cloud.google.com/bigquery/) database.
-    - It is also covered in the [Tutorial - Ad-hoc Data Analysis](/tutorial/ad-hoc/).
+- [CosmosDB Extractor](/components/extractors/database/cosmosdb/) for [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
+- [Azure Storage Table Extractor](/components/extractors/database/cosmosdb/) for [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 
