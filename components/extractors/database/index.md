@@ -35,7 +35,7 @@ have an [advanced mode](/components/extractors/database/sqldb/).
 Unlike the extractor for SQL databases, extractors for **NoSQL databases** require a different configuration (except the [BigQuery Extractor](/components/extractors/database/bigquery/) for the [BigQuery](https://cloud.google.com/bigquery/) database, which is quite similar to SQL databases and also supports the [advanced mode](/components/extractors/database/sqldb/)):
 
 - [MongoDB extractor](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
-- [CosmosDB Extractor](/components/extractors/database/cosmosdb/) for [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
+- [CosmosDB extractor](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
 - [Azure Storage Table Extractor](/components/extractors/database/cosmosdb/) for [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
