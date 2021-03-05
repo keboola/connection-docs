@@ -126,7 +126,8 @@ Name the query, e.g., `Unemployment rates`:
 {: .image-popup}
 ![Screenshot - New Query Name](/tutorial/ad-hoc/ex-bigquery-9.png)
 
-Check the *Create your own query using an SQL editor* and uncheck the *Use Legacy SQL* setting and paste the following in the *SQL Query* field:
+Check *Create your own query using an SQL editor*, uncheck the *Use Legacy SQL* setting, and paste the following code in the *SQL Query* field:
+
 
 {% highlight sql %}
 SELECT * FROM
