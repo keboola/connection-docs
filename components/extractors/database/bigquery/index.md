@@ -85,4 +85,4 @@ Name the query and click **Create**.
 {: .image-popup}
 ![Screenshot - Name Query](/components/extractors/database/bigquery/bigquery-6.png)
 
-How to modify your configuration you can read in the [SQL databases section](/components/extractors/database/sqldb/#modify-configuration).
+To learn how to modify your configuration, go to the [SQL databases section](/components/extractors/database/sqldb/#modify-configuration).
