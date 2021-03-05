@@ -36,7 +36,7 @@ Unlike the extractor for SQL databases, extractors for **NoSQL databases** requi
 
 - [MongoDB extractor](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 - [CosmosDB extractor](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
-- [Azure Storage Table Extractor](/components/extractors/database/cosmosdb/) for [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+- [Azure Storage Table extractor](/components/extractors/database/cosmosdb/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator, 
