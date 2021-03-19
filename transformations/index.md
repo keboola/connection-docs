@@ -151,7 +151,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 <tr>
     <th><a href='/transformations/redshift/'>Redshift Transformations</a></th> 
     <td>✓</td>
-    <td>Planned</td>
+    <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/snowflake-plain/'>Snowflake Transformations</a></th> 
