@@ -6,7 +6,7 @@ permalink: /transformations/redshift-plain/
 * TOC
 {:toc}
 
-AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. Transformations run on your own dedicated cluster in Keboola Connection.
+[AWS Redshift](https://aws.amazon.com/redshift/) is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. Transformations run on your own dedicated cluster in Keboola Connection.
 
 ## Example
 
