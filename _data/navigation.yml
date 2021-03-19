@@ -224,6 +224,9 @@ items:
               - url: /components/writers/database/mssql/
                 title: SQL Server
 
+              - url: /components/writers/database/synapse/
+                title: Synapse
+
           - url: /components/writers/storage/
             title: Storage
             items:
