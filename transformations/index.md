@@ -149,7 +149,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>Planned</td>
 </tr>
 <tr>
-    <th><a href='/transformations/redshift/'>Redshift Transformations</a></th> 
+    <th><a href='/transformations/redshift-plain/'>Redshift Transformations</a></th> 
     <td>✓</td>
     <td>✓</td>
 </tr>

@@ -335,6 +335,9 @@ items:
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
 
+      - url: /transformations/redshift-plain/
+        title: Redshift Transformations
+
       - url: /transformations/synapse-plain/
         title: Synapse Transformations
 
