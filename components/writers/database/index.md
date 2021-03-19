@@ -16,4 +16,5 @@ Writers export data from Keboola Connection to SQL databases:
 - [Snowflake](/components/writers/database/snowflake/) --- sends tables to a [Snowflake](https://www.snowflake.com/) database. It can also be used as a proxy
 to send data to [Tableau Desktop](https://www.tableau.com/products/desktop) or [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
 - [SQL Server](/components/writers/database/mssql/) --- sends tables to a [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) database.
+- [Synapse](/components/writers/database/synapse/) --- sends tables to a [Azure Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) database.
 - And [more](https://components.keboola.com/components)
