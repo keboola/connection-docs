@@ -44,13 +44,3 @@ larger size, these limits can be increased.
 **Case sensitivity** -- Redshift is case insensitive and stores all column and table names in lower case. However,
 Storage is case sensitive (be careful when migrating transformations to Redshift, letter case could cause problems
 in the output mapping).
-
-**COPY Options** -- The default COPY command looks like this:
-
-{% highlight sql %}
-COPY "table FROM 's3://bucket/file'
-CREDENTIALS 'aws_access_key_id=key;aws_secret_access_key=secret'"
-NULL AS 'NULL' ACCEPTANYDATE TRUNCATECOLUMNS
-DELIMITER ',' CSV QUOTE '"'
-GZIP IGNOREHEADER 1;
-{% endhighlight %}
