@@ -245,6 +245,9 @@ items:
               - url: /components/writers/storage/onedrive/
                 title: OneDrive
 
+              - url: /components/writers/storage/sftp/
+                title: SFTP
+
           - url: /components/writers/other/
             title: Other
             items:
