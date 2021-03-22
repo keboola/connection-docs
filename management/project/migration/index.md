@@ -64,6 +64,7 @@ transformations or writers, it will fetch all data on the first run.
 - Transformations between AWS and AZURE stacks
 - VPN connections
 - Data catalog
+- Google Drive extractor configurations with Transpose option
 
 There may be some deprecated components in the source stack that are not available in the destination stack. 
 These have to be removed from projects or migrated to new versions before migration. Also, the project backends 
