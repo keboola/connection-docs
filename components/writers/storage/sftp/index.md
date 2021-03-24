@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
   
 
-This writer allows you to write tables and files from to an SFTP server.
+This writer allows you to write tables and files to a remote SFTP server.
 
 ## Configuration
 
