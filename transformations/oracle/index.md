@@ -39,7 +39,7 @@ After you save the credentials, follow these steps to create a simple Oracle tra
 - Save and run the transformation.
  
 {% highlight sql %}
-CREATE TABLE "result" AS SELECT * FROM "SOURCE";
+CREATE TABLE "result" AS SELECT * FROM "source";
 {% endhighlight %}
 
 {: .image-popup}
