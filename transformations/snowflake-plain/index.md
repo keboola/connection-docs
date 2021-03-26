@@ -54,11 +54,11 @@ of the variable as a user error, `Transformation aborted: Integrity check failed
 ## Example
 To create a simple Snowflake transformation, follow these steps:
 
-- upload the [sample CSV file](/transformations/source.csv) into your storage,
-- set the input mapping from that table to `source` (expected by the Snowflake script),
-- set the output mapping for `destination` table (produced by the Snowflake script) to a new table in your Storage,
-- copy & paste the below script into the transformation code, and, finally,
-- save and run the transformation.
+- Create a table in Storage by uploading the [sample CSV file](/transformations/source.csv).
+- Create an input mapping from that table, setting its destination to `source` (as expected by the Snowflake script).
+- Create an output mapping, setting its destination to a new table in your Storage.
+- Copy & paste the below script into the transformation code.
+- Save and run the transformation.
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "result" AS

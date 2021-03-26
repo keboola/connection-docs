@@ -34,11 +34,10 @@ If the `R` label is not displayed, there is no previous version offered. It is s
 via the [API](https://developers.keboola.com/integrate/storage/api/configurations/) though.
 
 ### Memory and Processing Constraints
-
 The Docker container running the R transformation has 8GB of allocated memory and the maximum running time is 6 hours.
 The container is also limited to the **equivalent** of 2 Intel Broadwell 2.3 GHz processors.
 
-### File locations
+### File Locations
 The R script itself will be compiled to `/data/script.R`. To access input and output tables, use relative
 (`in/tables/file.csv`, `out/tables/file.csv`), or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/user/tag` or `/data/in/user/tag` path. If you want to dig really deep, have a look
@@ -59,7 +58,7 @@ The latest versions of packages are always installed. Some packages are already 
 their dependencies, therefore to get an authoritative list of installed packages use the `installed.packages()` function. 
 These pre-installed packages do not need to be listed in the transformation. It does no harm if you list them, but the transformation and sandbox start is slower.
 
-### CSV format
+### CSV Format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.
 Generally, the table can be read with default R settings. In case R gets confused, use the exact format
 specification `sep=",", quote="\""`. For example:
@@ -99,7 +98,6 @@ tryCatch(
 {% endhighlight %}
 
 ## Development Tutorial
-
 We recommend that you create an [RStudio sandbox](/transformations/sandbox/#rstudio-sandbox) with the same
 input mapping your transformation will use. This is the fastest way to develop your transformation code.
 
@@ -147,11 +145,11 @@ Download it and test the script in your local R installation. The `result.csv` o
 This script can be used in your transformations without any modifications.
 All you need to do is
 
-- upload the [sample CSV file](/transformations/r/source.csv) into your Storage,
-- set the input mapping from that table to `source.csv` (expected by the R script),
-- set the output mapping from `result.csv` (produced by the R script) to a new table in your Storage,
-- copy & paste the script into the transformation, and finally,
-- run the transformation.
+- create a table in Storage by uploading the [sample CSV file](/transformations/r/source.csv),
+- create an input mapping from that table, setting its destination to `source` (as expected by the R script),
+- create an output mapping from `result.csv` (produced by the R script) to a new table in your Storage,
+- copy & paste the above script into the transformation code, and finally,
+- save and run the transformation.
 
 {: .image-popup}
 ![Screenshot - Sample Input Output Mapping](/transformations/r/sample-io.png)
@@ -183,7 +181,7 @@ produces the following events in the transformation job:
 
 The `app$logInfo` and `app$logError` functions are internally available; they can be useful if you need to know the precise
 server time of when an event occurred. The standard event timestamp in job events is the time when the event was received
-converted to the local time-zone.
+converted to the local time zone.
 
 ### Going Further
 The above steps are usually sufficient for daily development and debugging of moderately complex R transformations, 
