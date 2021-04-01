@@ -99,5 +99,25 @@
   }
 });
 </script>
+
+{% if page.datatable == true %}
+<!-- datatables used in telemetry page or anywhere else. See https://idratherbewriting.com/documentation-theme-jekyll/mydoc_tables.html -->
+<!-- Include the standard DataTables bits -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+	$(document).ready(function () {
+		$('div.datatable-begin').nextUntil('div.datatable-end', 'table').addClass('display');
+		$('table.display').DataTable({
+			paging: true,
+			searching: true,
+			pageLength: 50,
+			scrollX: true
+		});
+	});
+</script>
+{% endif %}
+
 </body>
 </html>

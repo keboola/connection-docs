@@ -3,7 +3,7 @@ title: Telemetry Data
 permalink: /components/extractors/other/telemetry-data/
 redirect_from:
     - /extractors/other/telemetry-data/
-
+datatable: true
 ---
 
 * TOC
@@ -278,43 +278,98 @@ organization, or to the Keboola Connection platform itself.
 
 #### Security event operations
 
-| `adminLog.admin.organizationInvitation.accepted` | `adminLog.organization.adminsInProjectsListed` | 
-| `adminLog.organization.adminsListed`| `adminLog.organization.detail`| 
-| `adminLog.organization.invitationCreated`| `adminLog.organization.invitationsListed`| 
-| `adminLog.organization.projectCreated`| `adminLog.organization.projectsListed`| 
-| `adminLog.promoCode.applied`| `auditLog.admin.addNewU2fDevice`| 
-| `auditLog.admin.changePassword`| `auditLog.admin.disableMfa`| 
-| `auditLog.admin.enableTotpMfa`| `auditLog.admin.enableU2fMfa`| 
-| `auditLog.admin.failedLogin`| `auditLog.admin.login`| 
-| `auditLog.admin.loginWithTotp`| `auditLog.admin.loginWithTotpViaRecoveryCode`|
-| `auditLog.admin.loginWithU2f`| `auditLog.admin.logout`| 
-| `auditLog.admin.lostPassword`| `auditLog.admin.organizationInvitation.accepted`| 
-| `auditLog.admin.projectInvitation.accepted`| `auditLog.admin.projectInvitation.rejected`| 
-| `auditLog.admin.reauthorizeCurrentUserTotp`| `auditLog.admin.regenerateRecoveryCodes`|  
-| `auditLog.admin.removeU2fDevice`| `auditLog.admin.showRecoveryCodes`| 
-| `auditLog.admin.sudo`| `auditLog.deletedProjectsListed`| 
-| `auditLog.maintainers.created`| `auditLog.maintainers.organizationCreated`| 
-| `auditLog.organization.adminAdded`| `auditLog.organization.adminRemoved`| 
-| `auditLog.organization.adminsInProjectsListed`| `auditLog.organization.adminsListed`| 
-| `auditLog.organization.deleted`| `auditLog.organization.detail`| 
-| `auditLog.organization.invitationCreated`| `auditLog.organization.invitationDeleted`| 
-| `auditLog.organization.invitationsListed`| `auditLog.organization.projectCreated`| 
-|`auditLog.organization.projectsListed`| `auditLog.organization.updated`| 
-| `auditLog.payAsYouGo.marketingData`| `auditLog.project.addedToOrganization`| 
-| `auditLog.project.adminAdded`| `auditLog.project.adminRemoved`| 
-| `auditLog.project.adminsListed`| `auditLog.project.deleted`| 
-| `auditLog.project.deletedDetail`| `auditLog.project.detail`| 
-| `auditLog.project.featureAdded`| `auditLog.project.featureRemoved`| 
-| `auditLog.project.fileStorageAssigned`| `auditLog.project.invitationCreated`| 
-| `auditLog.project.invitationDeleted`| `auditLog.project.invitationsListed`| 
-| `auditLog.project.joinRequest.approved`| `auditLog.project.joinRequest.rejected`| 
-|`auditLog.project.joinRequestsListed`| `auditLog.project.limitAdded`| 
-| `auditLog.project.limitRemoved`| `auditLog.project.removedFromOrganization`| 
-| `auditLog.project.requestAccess`| `auditLog.project.setEnabledStatus`| 
-| `auditLog.project.storageBackendAssigned`| `auditLog.project.storageBackendRemoved`| 
-| `auditLog.project.storageTokenCreated`| `auditLog.project.undeleted`| 
-| `auditLog.project.updated`| `auditLog.promoCode.applied`| 
-| `auditLog.promoCode.created` | `auditLog.project.adminsListed` |
+**Note:** all events are prefixed with `auditLog.` -> `organization.detail` = `auditLog.organization.detail`. Prefix is removed just because of horizontal space
+<div class="datatable-begin"></div>
+
+| Event | Description | Context | Params |
+| --- | --- | --- | --- |
+| `admin.sudo` | Sudo mode enabled. Manually on secured action or automatically after login into KBC via password | - | enum: [password] |
+| `admin.projectInvitation.accepted` | Admin accepted his invitation to project | project | - |
+| `admin.loginWithTotp` | Admin logged into KBC using One Time Password (Google Authenticator) as multi-factor authentication | - | enum: [googleLogin, password] |
+| `admin.showRecoveryCodes` | Admin listed his own TOTP recovery codes | - | - |
+| `admin.loginWithU2f` | Admin logged into Keboola Connection using Universal 2nd Factor (Yubikey) as multi-factor authentication | - | enum: [googleLogin, password] |
+| `admin.organizationInvitation.accepted` |  - | - |  - |
+| `admin.enableTotpMfa` |  - | - |  - |
+| `admin.login` | Admin logged into Keboola Connection without multi-factor authentication | - | enum: [googleLogin, password] |
+| `admin.logout` | Admin clicked on “Logout” button and has been logged out of Keboola Connection | - | - |
+| `admin.regenerateRecoveryCodes` |  - | - |  - |
+| `admin.changePassword` |  - | - |  - |
+| `admin.loginWithTotpViaRecoveryCode` | Admin logged into Keboola Connection with one of his recovery codes as multi-factor authentication | - | enum: [googleLogin, password] |
+| `admin.reauthorizeCurrentUserTotp` | Admin authorized new One Time Password device for multi-factor authentication. The old one was removed. | - | - |
+| `deletedProjectsListed` | Listed deleted (non-purged) projects | - | - |
+| `organization.adminsInProjectsListed` | List of all administrators which are members in at least one project of organization | organization | - |
+| `organization.projectsListed` | Listed projects from an organization | organization | - |
+| `organization.adminsListed` | Listed members (organization admins) of an organization | organization | - |
+| `organization.projectCreated` | New project created | organization, project | - |
+| `organization.adminAdded` |  - | - |  - |
+| `organization.invitationCreated` |  - | - |  - |
+| `organization.updated` |  - | - |  - |
+| `organization.invitationsListed` |  - | - |  - |
+| `organization.detail` |  - | - |  - |
+| `project.storageTokenCreated` | New Storage Api token created | project, token | - |
+| `project.deletedDetail` | Viewed detail of deleted (non-purged) project | project | - |
+| `project.adminRemoved` | Removed an project admin(member) | project, admin | - |
+| `project.joinRequest.approved` |  - | - |  - |
+| `project.limitAdded` |  - | - |  - |
+| `project.detail` |  - | - |  - |
+| `project.adminsListed` |  - | - |  - |
+| `project.invitationsListed` |  - | - |  - |
+| `project.invitationCreated` |  - | - |  - |
+| `project.adminAdded` |  - | - |  - |
+| `project.invitationDeleted` |  - | - |  - |
+| `project.joinRequestsListed` |  - | - |  - |
+| `project.undeleted` |  - | - |  - |
+| `project.requestAccess` |  - | - |  - |
+| `project.deleted` |  - | - |  - |
+| `project.updated` |  - | - |  - |
+| `project.metadataSet` |  - | project, provider (enum [system, user]), metadata (key of new metadata) | value of new metadata item |
+| `project.metadataDeleted` |  - | project, provider (enum [system, user]), metadata (key of new metadata) | - |
+| `project.metadataListed` |  - | project | - |
+| `promoCode.applied` | An organization promoCode (not from try.keboola.com) was used to create a new project | promoCode, project | - |
+| `maintainers.listed` | All maintainers were listed to the user | - | - |
+| `maintainers.created` | A maitainer was created | maintainer | - |
+| `maintainers.deleted` | A maitainer was deleted | maintainer | - |
+| `maintainers.detail` | Single maintainer was detailed (displayed all the info) | maintainer | - |
+| `maintainers.updated` | Maintainer was updated by admin | maintainer (before updated) | params (new data) |
+| `maintainer.invitationsListed` | Admin displayed all sent invitations of a maintainer | maintainer | - |
+| `maintainer.invitationCreated` | Admin created an invitation to a maintainer = Invited an admin to a maintainer | maintainer, admin | - |
+| `maintainer.invitationDetail` | Admin displayed all the informations about an invitation | maintainer, admin | - |
+| `maintainer.invitationDeleted` | Invitation was deleted by admin. | maintainer, admin | - |
+| `maintainer.adminRemoved` | Admin was removed from maintainer | maintainer, admin | - |
+| `admin.maintainer.invitationsListed` | Admin listed all his/her invitations to maintainers | - | - |
+| `admin.maintainerInvitation.accepted` | Admin accepted an invitation. | maintainer | - |
+| `admin.maintainerInvitation.rejected` | Admin rejected an invitation. | maintainer | - |
+| `admin.maintainerInvitation.detail` | Admin displayed an invitation. | maintainer | - |
+| `maintainer.adminsListed` | Maintainer listed all the admins | maintainer | - |
+| `maintainer.adminAdded` | Maintainer added an admin | maintainer, admin | - |
+| `maintainer.adminRemoved` | Maintainer removed an admin | maintainer, admin | - |
+| `maintainer.promoCodesListed` | Promocodes of maintainer were listed | maintainer | - |
+
+Keywords referenced in **Context** and **Params** columns are names of JSON objects described in following subsection.
+
+<div class="datatable-end"></div>
+
+##### Context References List
+
+Folllowing o
+- **organization** - Keboola Connection Organization
+  - id - organization ID
+  - name - organization name
+- **project** - Keboola Connection Project
+  - id - project ID
+  - name - project name
+- **token** - Storage Api Token
+  - id - token ID
+  - description - token description
+- **admin** - Admin account in Keboola Connection
+  - id - admin ID
+  - name - admin name
+  - email - admin email/login
+- **promoCode** - Promo Code what allows create  a new project
+  - code - promo code
+- **maintainer** - object  of Maintainer
+  - id
+  - name
 
 #### Operation parameters
 
