@@ -21,8 +21,9 @@ The process of isolating data is called [**mapping**](/transformations/mappings/
 The mapping process copies input data from permanent project Storage into a 
 [**staging**](/transformations/mappings/#table-input-mapping) area which represents an ephemeral storage for 
 the purpose of running the transformation **script**. The transformation script is executed by a transformation
-[**backend**](/transformations/#backends). To ease the development of the transformation script, you can use 
-a **workspace** which provides a copy of the environment and can be run interactively.
+[**backend**](/transformations/#backends). To ease the [development](/transformations/#developing-transformations) 
+of the transformation script, all transformations are automatically versioned, and you can use a **workspace**
+which provides a copy of the environment and can be run interactively.
 
 ## Overview
 The schema below shows a high-level overview of transformations:
@@ -91,11 +92,10 @@ Choose according to your taste and available libraries.
 *Note:* Switching between SQL backends requires updating the code into the corresponding SQL dialect.
 
 ## Developing Transformations
-Transformation scripts are stored in [configurations](/components/#creating-component-configuration) 
-and as such they share the common properties and functions. Particularly important is that all changes are 
+Transformation scripts are stored in [configurations](/components/#creating-component-configuration) and as such 
+they share the common properties and functions. Particularly important is that all changes are automatically
 [versioned](/components/#configuration-versions) and you can always [rollback](/components/#rollback-version) 
-a configuration or [copy](/components/#copy-configuration) a version to a new 
-transformation.
+a configuration or [copy](/components/#copy-configuration) a version to a new transformation.
 
 You can easily develop transformations using the [Workspace](/transformations/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on the copies of your tables
