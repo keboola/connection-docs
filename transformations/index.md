@@ -22,7 +22,7 @@ The mapping process copies input data from permanent project Storage into a
 [**staging**](/transformations/mappings/#table-input-mapping) area which represents an ephemeral storage for 
 the purpose of running the transformation **script**. The transformation script is executed by a transformation
 [**backend**](/transformations/#backends). To ease the [development](/transformations/#developing-transformations) 
-of the transformation script, all transformations are automatically versioned, and you can use a **workspace**
+of the transformation script, all transformations are **automatically versioned**, and you can use a **workspace**
 which provides a copy of the environment and can be run interactively.
 
 ## Overview
