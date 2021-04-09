@@ -105,7 +105,7 @@ import csv
 csvlt = '\n'
 csvdel = ','
 csvquo = '"'
-with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
+with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/result.csv', mode='wt', encoding='utf-8') as out_file:
     writer = csv.DictWriter(out_file, fieldnames=['col1', 'col2'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
     writer.writeheader()
 
@@ -143,14 +143,14 @@ If you want to replicate the execution environment on your local machine, you ne
 To simulate the input and output mapping, all you need to do is create the right directories with the right files.
 You can get a finished example of the [above script](/transformations/python-plain/#development-tutorial) 
 setup in [data.zip](/transformations/python/data.zip).
-Download it and test the script in your local Python installation. The `destination.csv` output file will be created
+Download it and test the script in your local Python installation. The `result.csv` output file will be created
 in the output folder. This script can be used in your transformations without any modifications. All you need to do is
 
-- upload the [sample CSV file](/transformations/source.csv) into your storage,
-- set the input mapping from that table to `source.csv` (expected by the Python script),
-- set the output mapping from `destination.csv` (produced by the Python script) to a new table in your Storage,
-- copy & paste the script into the transformation code, and, finally,
-- save and run the transformation.
+- Create a table in Storage by uploading the [sample CSV file](/transformations/source.csv).
+- Create an input mapping from that table, setting its destination to `source` (as expected by the Python script).
+- Create an output mapping from `result.csv` (produced by the Python script) to a new table in your Storage,
+- Copy & paste the script into the transformation code.
+- Save and run the transformation.
 
 {: .image-popup}
 ![Screenshot - Sample Input Output Mapping](/transformations/python-plain/sample-io.png)
@@ -163,7 +163,7 @@ with the exact same configuration using [our Docker image](https://developers.ke
 The following piece of code reads a table with two columns, named **first** and **second**, 
 from the **source.csv** input mapping file into the `row` dictionary using `csvReader`.
 It then adds *ping* to the first column and multiplies the second column by *42*. 
-After that, it saves the row to the **destination.csv** output mapping file.
+After that, it saves the row to the **result.csv** output mapping file.
 
 {% highlight python %}
 import csv
@@ -171,7 +171,7 @@ import csv
 csvlt = '\n'
 csvdel = ','
 csvquo = '"'
-with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
+with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/result.csv', mode='wt', encoding='utf-8') as out_file:
     writer = csv.DictWriter(out_file, fieldnames=['col1', 'col2'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
     writer.writeheader()
 
@@ -191,7 +191,7 @@ It is also important to use `encoding='utf-8'` when reading and writing files.
 
 ## Example 2 -- Using Lists
 The following piece of code reads a table with some of its columns from the **source.csv** input mapping file into the `row` list of strings.
-It then adds *ping* to the first column and multiplies the second column by *42*. After that, it saves the row to the **destination.csv** output mapping file.
+It then adds *ping* to the first column and multiplies the second column by *42*. After that, it saves the row to the **result.csv** output mapping file.
 
 {% highlight python %}
 import csv
@@ -199,7 +199,7 @@ import csv
 csvlt = '\n'
 csvdel = ','
 csvquo = '"'
-with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
+with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/result.csv', mode='wt', encoding='utf-8') as out_file:
     writer = csv.writer(out_file, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
     lazy_lines = (line.replace('\0', '') for line in in_file)
     reader = csv.reader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
@@ -214,7 +214,7 @@ You can simplify the above code using our pre-installed Keboola Connection (KBC)
 {% highlight python %}
 import csv
 
-with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/destination.csv', mode='wt', encoding='utf-8') as out_file:
+with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open('/data/out/tables/result.csv', mode='wt', encoding='utf-8') as out_file:
     lazy_lines = (line.replace('\0', '') for line in in_file)
     reader = csv.DictReader(lazy_lines, dialect='kbc')
     writer = csv.DictWriter(out_file, dialect='kbc', fieldnames=reader.fieldnames)

@@ -78,7 +78,7 @@ using CSV
 using DataFrames
 
 infile = "in/tables/source.csv"
-outfile = "out/tables/destination.csv"
+outfile = "out/tables/result.csv"
 CSV.write(outfile, DataFrame(column1 = String[], column2 = String[]), writeheader = true)
 for row in CSV.File(infile)
     # do something with row.column and write a new row
@@ -109,14 +109,14 @@ so that you can move the script to a  transformation with no changes. To develop
 - Store the result CSV files inside the `out/tables` subdirectory.
 
 Use the above [sample script](/transformations/julia/#csv-format/). A finished example of the script is attached below in [data.zip](/transformations/julia/data.zip).
-Download it and test the script in your local Julia installation. The output file `destination.csv` will be created.
+Download it and test the script in your local Julia installation. The output file `result.csv` will be created.
 This script can be used in your transformations without any modifications. All you need to do is
 
-- upload the [sample CSV file](/transformations/julia/source.csv) into your storage,
-- set the input mapping from that table to `source.csv` (expected by the Julia script),
-- set the output mapping from `destination.csv` (produced by the Julia script) to a new table in your Storage,
-- copy & paste the script into the transformation, and, finally,
-- run the transformation.
+- create a table in Storage by uploading the [sample CSV file](/transformations/julia/source.csv)),
+- create an input mapping from that table, setting its destination to `source.csv` (as expected by the Julia script),
+- create an output mapping from `result.csv` (produced by the Julia script) to a new table in your Storage,
+- copy & paste the above script into the transformation code, and finally,
+- save and run the transformation.
 
 {: .image-popup}
 ![Screenshot - Sample Input Output Mapping](/transformations/julia/sample-io.png)
