@@ -12,23 +12,21 @@ to extract customers, campaigns, segments and activites from your [Customer.io a
 Before you start, have a working [Mailchimp](https://login.mailchimp.com/signup/) account filled with [data](https://us13.admin.mailchimp.com/campaigns/)
 and an API key.
 
-## Get API Key
+## Configuration
 
 You can generate a bearer token, known as an App API Key, with a defined scope in [your account settings](https://fly.customer.io/settings/api_credentials?keyType=app)
 . [Learn more about bearer authorization in Customer.io.](https://customer.io/docs/managing-credentials)
 
 
-## Configuration
+### Authorization
 
-## Authorization
-
-**API key** - Your API key that you generated in [previous step.](/components/extractors/marketing-sales/customerio/#get-api-key)
+**API key** - Your API key that you generated in [previous step.](/components/extractors/marketing-sales/customerio/#configuration)
 
 
 {: .image-popup}
 ![API Key](/components/extractors/marketing-sales/customerio/api_key.png)
 
-## Load type
+### Load type
 
 If set to Incremental update, the result tables will be updated based on primary key consisting of all selected dimensions. Full load overwrites the destination table each time, with no primary keys.
 
@@ -40,7 +38,7 @@ will be different. If set to full load, **no primary key** is set.
 {: .image-popup}
 ![Load type](/components/extractors/marketing-sales/customerio/load_type.png)
 
-## Incremental loading
+### Incremental loading
 
 Some of the datasets allow `Continue since last run` option. When checked, only the new messages that had appeared since last run are downloaded. 
 
@@ -50,8 +48,8 @@ To backfill without changing this attribute, click the `Reset State` button.
 {: .image-popup}
 ![Load type](/components/extractors/marketing-sales/customerio/incremental.png)
 
-
-## Campaigns
+## Output Data
+### Campaigns
 
 Downloads campaigns dataset. Note that columns `actions` and `tags` contain JSON and Array object in textual form.
 
@@ -76,7 +74,7 @@ Downloads campaigns dataset. Note that columns `actions` and `tags` contain JSON
 | tags           | [‘Sample’]                                               |
 | timezone       |                                                          |
 
-## Segments
+### Segments
 
 Segments are groups of people, subsets of your audience. You get get information about segments and the customers contained by a segment. 
 
@@ -88,7 +86,7 @@ Segments are groups of people, subsets of your audience. You get get information
 | 26582936:15:00 | Anyone associated with active customer account.                                                                                                                           | 13 | Active Customers |          | finished |      | dynamic |
 
 
-## Messages
+### Messages
 
 List metadata about messages. You may choose which types of messages you wish.  
 Allowable values are `email`, `webhook`, `twilio`, `urban_airship`, `slack`, `push`.
@@ -97,9 +95,9 @@ Allowable values are `email`, `webhook`, `twilio`, `urban_airship`, `slack`, `pu
 
 
 
-## Customers
+### Customers
 
-### Attributes
+#### Attributes
 
 Comma separated list of required customer attributes. 
 Each customer may have different set of columns, this is to limit only to attributes you need. All attributes are downloaded if left empty.
@@ -108,7 +106,7 @@ Each customer may have different set of columns, this is to limit only to attrib
 or `Last name` and `last_name` are considered the same after conversion to supported Storage format. 
 You may use appropriate [processors](https://developers.keboola.com/extend/component/processors/) to deal with this situation.
 
-### Filter
+#### Filter
 
 An additional filter condition in JSON format. The filter language is defined [here](https://customer.io/docs/documentation/api-triggered-data-format.html#general-syntax)
 
@@ -118,12 +116,12 @@ An additional filter condition in JSON format. The filter language is defined [h
 - `Find the first 10 unsubscribed customers` =>: `{"attribute":{"field":"unsubscribed","operator":"eq","value":"true"}}}`
 
 
-## Activities 
+### Activities 
  
  Return information about activities. Activities are cards in campaigns, broadcasts, etc. They might be messages, webhooks, attribute changes, etc.
 
 
-### Mode of result parsing
+#### Mode of result parsing
 
 Each activity type may have different columns and table structure, for this reason the extractor allows fetching data in two modes:
 
