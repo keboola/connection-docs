@@ -89,6 +89,9 @@ items:
               - url: /components/extractors/marketing-sales/babelforce/
                 title: Babelforce
 
+              - url: /components/extractors/marketing-sales/customerio/
+                title: Customer IO
+
               - url: /components/extractors/marketing-sales/facebook-ads/
                 title: Facebook Ads
 
