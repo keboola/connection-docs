@@ -152,6 +152,9 @@ items:
           - url: /components/extractors/other/
             title: Other
             items:
+              - url: /components/extractors/other/aws-cur-reports/
+                title: AWS CUR Reports
+
               - url: /components/extractors/other/azure-cost/
                 title: Azure Cost Management
 
