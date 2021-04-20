@@ -1,12 +1,12 @@
 ---
-title: AWS CUR Reports
-permalink: /components/extractors/other/aws-cur-reports/
+title: AWS Cost Usage Reports
+permalink: /components/extractors/other/aws-cu-reports/
 ---
 
 * TOC
 {:toc}
 
-This extractor downloads [AWS CUR reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) exported to S3 in CSV format.
+This extractor downloads [AWS Cost Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) exported to S3 in CSV format.
 
 ## Configuration
 
@@ -66,7 +66,7 @@ This way you can import new data, e.g., from today, without deleting the data im
 
 ## Output table
 
-The output schema is described [here](https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html)
+The output schema is described [in the official docs](https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html)
 
 
 **IMPORTANT NOTE** The result column names are modified to match the KBC Storage column name requirements:
@@ -74,7 +74,7 @@ The output schema is described [here](https://docs.aws.amazon.com/cur/latest/use
 - Categories are separated by `__`. e.g.`bill/BillingPeriodEndDate` is converted to `bill__billingPeriodEndDate`
 - Any characters that are not alphanumeric or `_` underscores are replaced by underscore. 
 E.g. `resourceTags/user:owner` is converted to `resourceTags__user_owner`
-- The KBC Storage is case insesitive so the above may lead to duplicate names. In such case the names are deduplicated by adding an index. 
+- The KBC Storage is case insensitive so the above may lead to duplicate names. In such case the names are deduplicated by adding an index. 
 e.g `resourceTags/user:name` and `resourceTags/user:Name` lead to `resourceTags__user_Name` and `resourcetags__user_name_1` 
 columns respectively
 
