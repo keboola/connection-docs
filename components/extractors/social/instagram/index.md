@@ -62,24 +62,24 @@ the output table name will be `foo_insights`.
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Instagram API.
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
-A typical example would be the [media](https://developers.facebook.com/docs/instagram-api/reference/media).
+A typical example would be the [media](https://developers.facebook.com/docs/graph-api/reference/instagram-media).
 If left empty, the *Endpoint* option references data of the Instagram Business Account itself, which in fact 
-refers to the [user](https://developers.facebook.com/docs/instagram-api/reference/user) endpoint.
+refers to the [user](https://developers.facebook.com/docs/graph-api/reference/instagram-user) endpoint.
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of
 fields, but it also can be used to parametrize the fields and nest more endpoints into it.
-The [media](https://developers.facebook.com/docs/instagram-api/reference/media#metadata) endpoint returns all
+The [media](https://developers.facebook.com/docs/graph-api/reference/instagram-media) endpoint returns all
 media objects created by an Instagram account. Each media object contains fields such as `caption`, `comments_count`, `created_time`
 and `like_count`. The fields parameter in such case is `caption,comments_count,created_time,like_count`.
 
 - **Fields/Endpoint Nesting** ---
-    Media can contain comments and those can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/instagram-api/reference/comment#reading) field/endpoint for each media. This way, more endpoints can be nested, and there is no limit of nesting levels.
+    Media can contain comments and those can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/instagram-comment) field/endpoint for each media. This way, more endpoints can be nested, and there is no limit of nesting levels.
 
 - **Fields Parametrization** ---
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.
     Typical parameters would be `since`, `until` or `limit`,
-    or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/instagram-api/reference/user/insights) endpoint.
+    or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/instagram-api/guides/insights) endpoint.
     An example of parametrized fields: `comments.limit(10){text,like_count}` or `insights.period(lifetime).since(5 days ago).until(today).metric(impressions)`.
 
 ### Instagram Business Account
@@ -130,7 +130,7 @@ top parent is named `page`, and it represents Instagram Business Account id.
 
 ## Facebook API Version
 Instagram Graph API versioning follows Facebook Graph API versioning. You can set the version of the Facebook Graph API that will be applied for all requests made to the API
-by the Instagram extractor.
+by the Instagram extractor. Read more about the Graph API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
 
 {: .image-popup}
 ![Screenshot - Api Version](/components/extractors/social/instagram/instagram-4.png)
