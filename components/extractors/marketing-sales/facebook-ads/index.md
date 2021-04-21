@@ -8,9 +8,9 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference/v3.0) to
+This extractor uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference) to
 extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup)
-(including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/).
+(including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** extractor.
@@ -60,8 +60,7 @@ The absolute URL is in the form `https://graph.facebook.com/<api_version>/<endpo
 A typical example would be [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup).
 If left empty, the *Endpoint* option refers to the data of the Facebook authorized account itself.
 
-For more information, see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference/v2.8).
-
+For more information, see the [list of supported Facebook Marketing API endpoints](https://developers.facebook.com/docs/marketing-api/reference).
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of
@@ -73,11 +72,11 @@ case is `id,name,adset_id`.
 - **Fields/Endpoint Nesting** ---
     Ads can contain recommendations and these can be included in the *fields* as well: `id,name,adset_id,recommendations{title,code,message}`. The comma separated list
     in between the curly brackets `{}` specifies fields of the "nested" field/endpoint
-    [ad-recommendation](https://developers.facebook.com/docs/marketing-api/reference/ad-recommendation/). This way more endpoints can be nested and there is no limit of nesting levels.
+    [ad-recommendation](https://developers.facebook.com/docs/marketing-api/reference/ad-recommendation). This way more endpoints can be nested and there is no limit of nesting levels.
 
 - **Fields Parametrization** ---
     Each field can be parametrized by a dot followed by a modifier name and a value in brackets.
-    A typical parameter could be `since`, `until`, `limit`, or any other parameters or modifiers that the particular endpoint offers such as `date_preset` for the [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/) endpoint.
+    A typical parameter could be `since`, `until`, `limit`, or any other parameters or modifiers that the particular endpoint offers such as `date_preset` for the [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights) endpoint.
     The following is an example of parametrized fields:     `insights.action_breakdowns(action_type).date_preset(last_month).time_increment(1){ad_id,impressions,reach,actions,clicks,spend}`
 
 ### Ad Accounts
@@ -141,5 +140,7 @@ All tables containing ads/campaigns insights data have a specific structure. Con
 
 ## Facebook API Version
 You can set the version of the Facebook Marketing API that will be applied for all requests made to the
-API by the Facebook Ads extractor. Read more about the Marketing API versions
-[here](https://developers.facebook.com/docs/marketing-api/versions).
+API by the Facebook Ads extractor. Read more about the Marketing API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
+
+{: .image-popup}
+![Screenshot - Api Version](/components/extractors/marketing-sales/facebook-ads/facebook-ads-4.png)
