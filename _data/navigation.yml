@@ -341,6 +341,9 @@ items:
       - url: /transformations/python-plain/
         title: Python Transformations
 
+      - url: /transformations/r-plain/
+        title: R Transformations
+
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
 
