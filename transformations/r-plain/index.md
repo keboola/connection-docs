@@ -91,58 +91,6 @@ warning = function(w) {}
 )
 {% endhighlight %}
 
-Python is **sensitive to indentation**. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
-`# coding=utf-8` at the beginning of the script is not needed. You don't need to have
-any main function, e.g., this is a valid script:
-
-{% highlight python %}
-print("Hello Keboola")
-{% endhighlight %}
-
-If you define a main function, do not wrap it within the `if __name__ == '__main__':` block as it will not be run.
-Simply calling it from within the script is enough:
-
-{% highlight python %}
-def main():
-print("Hello Keboola")
-
-main()
-{% endhighlight %}
-
-
-
-### Packages
-You can list extra packages in the UI. These packages are installed using [pip](https://pypi.org/project/pip/).
-Generally, any package available on [PyPI](https://pypi.org/) can be installed. However, some packages have external dependencies,
-which might not be available. Feel free to [contact us]/management/support/) if you run into problems. When the
-package is installed, you still need to `import` from it.
-
-{: .image-popup}
-![Screenshot - Package Configuration](/transformations/python-plain/packages.png)
-
-The latest versions of packages are always installed at the time of the release (you can check that
-[in the repository](https://github.com/keboola/docker-custom-python/releases)). In case your code relies on a specific package version,
-you can override the installed version by calling, e.g.:
-
-{% highlight python %}
-import subprocess
-import sys
-subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-cache-dir', '--force-reinstall', 'pandas==0.20.0'])
-{% endhighlight %}
-
-Some packages are already installed in the environment
-(see [their full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L33)),
-and they do not need to be listed in the transformation.
-
-### CSV Format
-Tables from Storage are imported to the Python script from CSV files. CSV files can be read by standard Python functions
-from the [CSV packages](https://docs.python.org/3/library/csv.html). It is recommended to explicitly specify the formatting options.
-You can read CSV files either to vectors (numbered columns), or to dictionaries (named columns).
-Your input tables are stored as CSV files in `in/tables/`, and your output tables in `out/tables/`.
-
-If you can process the file line-by-line, then the most effective way is to read each line, process it and write
-it immediately. The following two examples show two ways of reading and manipulating a CSV file.
-
 ## Development Tutorial
 We recommend that you create an [R Workspace](/transformations/workspace) with the same
 input mapping your transformation will use. This is the fastest way to develop your transformation code.
