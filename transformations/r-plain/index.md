@@ -21,6 +21,7 @@ The current R version is **3.6.3**, however it is possible to switch your config
 
 {: .image-popup}
 ![Screenshot - Version List](/transformations/r-plain/version-list.png)
+
 Any updates to the R version is always announced in the Keboola [changelog](https://changelog.keboola.com/).
 
 ### Memory and Processing Constraints
