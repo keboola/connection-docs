@@ -9,8 +9,6 @@ permalink: /components/extractors/marketing-sales/customerio/
 The Customer IO extractor uses the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) 
 to extract customers, campaigns, segments and activites from your [Customer.io account](https://customer.io/). 
 
-Before you start, have a working [Mailchimp](https://login.mailchimp.com/signup/) account filled with [data](https://us13.admin.mailchimp.com/campaigns/)
-and an API key.
 
 ## Configuration
 
