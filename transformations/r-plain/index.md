@@ -4,7 +4,7 @@ permalink: /transformations/r-plain/
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
 [R](https://cran.r-project.org/) transformations are for **advanced statistical computations**.
 Apart from ready-to-use implementations of state-of-the-art algorithms, R's other great assets are vector and matrix
