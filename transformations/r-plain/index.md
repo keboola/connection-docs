@@ -168,6 +168,7 @@ TRUE
 
 produces the following events in the transformation job:
 
+{: .image-popup}
 ![Screenshot - Script Events](/transformations/r-plain/events.png)
 
 The `app$logInfo` and `app$logError` functions are also internally available; they can be useful if you need to know 
