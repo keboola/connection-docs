@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/keboola/connection-docs.svg?branch=master)](https://travis-ci.com/keboola/connection-docs)
 
-How to write documentation [https://keboola.atlassian.net/wiki/spaces/KB/pages/82935879/Public+documentation](https://keboola.atlassian.net/wiki/spaces/KB/pages/82935879/Public+documentation)
+[How to write documentation](https://keboola.atlassian.net/wiki/spaces/KB/pages/82935879/Public+documentation)
 
 ## Documentation Development
 
