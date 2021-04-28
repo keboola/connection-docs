@@ -284,44 +284,44 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.admin.enableTotpMfa`|`auditLog.organization.invitationsListed`|
 |`auditLog.admin.enableU2fMfa`|`auditLog.organization.metadataListed`|
 |`auditLog.admin.failedLogin`|`auditLog.organization.metadataSet`|
-|`auditLog.admin.login`|`auditLog.organization.projectCreated`|
-|`auditLog.admin.loginWithTotp`|`auditLog.organization.projectsListed`|
-|`auditLog.admin.loginWithTotpViaRecoveryCode`|`auditLog.organization.updated`|
-|`auditLog.admin.loginWithU2f`|`auditLog.payAsYouGo.marketingData`|
-|`auditLog.admin.logout`|`auditLog.project.addedToOrganization`|
-|`auditLog.admin.lostPassword`|`auditLog.project.adminAdded`|
-|`auditLog.admin.maintainerInvitation.accepted`|`auditLog.project.adminRemoved`|
-|`auditLog.admin.maintainerInvitation.detail`|`auditLog.project.adminsListed`|
-|`auditLog.admin.maintainerInvitation.rejected`|`auditLog.project.adminUpdated`|
-|`auditLog.admin.organizationInvitation.accepted`|`auditLog.project.deleted`|
-|`auditLog.admin.projectInvitation.accepted`|`auditLog.project.deletedDetail`|
-|`auditLog.admin.projectInvitation.rejected`|`auditLog.project.detail`|
-|`auditLog.admin.reauthorizeCurrentUserTotp`|`auditLog.project.featureAdded`|
-|`auditLog.admin.regenerateRecoveryCodes`|`auditLog.project.featureRemoved`|
-|`auditLog.admin.removeU2fDevice`|`auditLog.project.fileStorageAssigned`|
-|`auditLog.admin.showRecoveryCodes`|`auditLog.project.invitationCreated`|
-|`auditLog.admin.sudo`|`auditLog.project.invitationDeleted`|
-|`auditLog.deletedProjectsListed`|`auditLog.project.invitationsListed`|
-|`auditLog.maintainer.adminAdded`|`auditLog.project.joinRequest.approved`|
-|`auditLog.maintainer.adminRemoved`|`auditLog.project.joinRequest.rejected`|
+|`auditLog.admin.login`|`auditLog.organization.metadataDeleted`|
+|`auditLog.admin.loginWithTotp`|`auditLog.organization.projectCreated`|
+|`auditLog.admin.loginWithTotpViaRecoveryCode`|`auditLog.organization.projectsListed`|
+|`auditLog.admin.loginWithU2f`|`auditLog.organization.updated`|
+|`auditLog.admin.logout`|`auditLog.payAsYouGo.marketingData`|
+|`auditLog.admin.lostPassword`|`auditLog.project.addedToOrganization`|
+|`auditLog.admin.maintainerInvitation.accepted`|`auditLog.project.adminAdded`|
+|`auditLog.admin.maintainerInvitation.detail`|`auditLog.project.adminRemoved`|
+|`auditLog.admin.maintainerInvitation.rejected`|`auditLog.project.adminsListed`|
+|`auditLog.admin.organizationInvitation.accepted`|`auditLog.project.adminUpdated`|
+|`auditLog.admin.projectInvitation.accepted`|`auditLog.project.deleted`|
+|`auditLog.admin.projectInvitation.rejected`|`auditLog.project.deletedDetail`|
+|`auditLog.admin.reauthorizeCurrentUserTotp`|`auditLog.project.detail`|
+|`auditLog.admin.regenerateRecoveryCodes`|`auditLog.project.featureAdded`|
+|`auditLog.admin.removeU2fDevice`|`auditLog.project.featureRemoved`|
+|`auditLog.admin.showRecoveryCodes`|`auditLog.project.fileStorageAssigned`|
+|`auditLog.admin.sudo`|`auditLog.project.invitationCreated`|
+|`auditLog.deletedProjectsListed`|`auditLog.project.invitationDeleted`|
+|`auditLog.maintainer.adminAdded`|`auditLog.project.invitationsListed`|
+|`auditLog.maintainer.adminRemoved`|`auditLog.project.joinRequest.approved`|
 |`auditLog.maintainer.adminsListed`|`auditLog.project.joinRequest.rejected`|
-|`auditLog.maintainer.invitationCreated`|`auditLog.project.joinRequestsListed`|
-|`auditLog.maintainer.invitationDeleted`|`auditLog.project.limitAdded`|
-|`auditLog.maintainer.invitationDetail`|`auditLog.project.limitRemoved`|
-|`auditLog.maintainer.invitationsListed`|`auditLog.project.metadataDeleted`|
-|`auditLog.maintainer.promoCodesListed`|`auditLog.project.metadataListed`|
-|`auditLog.maintainers.created`|`auditLog.project.metadataSet`|
-|`auditLog.maintainers.deleted`|`auditLog.project.removedFromOrganization`|
-|`auditLog.maintainers.detail`|`auditLog.project.requestAccess`|
-|`auditLog.maintainers.listed`|`auditLog.project.setEnabledStatus`|
-|`auditLog.maintainers.organizationCreated`|`auditLog.project.storageBackendAssigned`|
-|`auditLog.maintainers.updated`|`auditLog.project.storageBackendRemoved`|
-|`auditLog.organization.adminAdded`|`auditLog.project.storageTokenCreated`|
-|`auditLog.organization.adminRemoved`|`auditLog.project.undeleted`|
-|`auditLog.organization.adminsInProjectsListed`|`auditLog.project.updated`|
-|`auditLog.organization.adminsListed`|`auditLog.promoCode.applied`|
-|`auditLog.organization.deleted`|`auditLog.promoCode.created`|
-|`auditLog.organization.detail`| |
+|`auditLog.maintainer.invitationCreated`|`auditLog.project.joinRequest.rejected`|
+|`auditLog.maintainer.invitationDeleted`|`auditLog.project.joinRequestsListed`|
+|`auditLog.maintainer.invitationDetail`|`auditLog.project.limitAdded`|
+|`auditLog.maintainer.invitationsListed`|`auditLog.project.limitRemoved`|
+|`auditLog.maintainer.promoCodesListed`|`auditLog.project.metadataDeleted`|
+|`auditLog.maintainers.created`|`auditLog.project.metadataListed`|
+|`auditLog.maintainers.deleted`|`auditLog.project.metadataSet`|
+|`auditLog.maintainers.detail`|`auditLog.project.removedFromOrganization`|
+|`auditLog.maintainers.listed`|`auditLog.project.requestAccess`|
+|`auditLog.maintainers.organizationCreated`|`auditLog.project.setEnabledStatus`|
+|`auditLog.maintainers.updated`|`auditLog.project.storageBackendAssigned`|
+|`auditLog.organization.adminAdded`|`auditLog.project.storageBackendRemoved`|
+|`auditLog.organization.adminRemoved`|`auditLog.project.storageTokenCreated`|
+|`auditLog.organization.adminsInProjectsListed`|`auditLog.project.undeleted`|
+|`auditLog.organization.adminsListed`|`auditLog.project.updated`|
+|`auditLog.organization.deleted`|`auditLog.promoCode.applied`|
+|`auditLog.organization.detail`|`auditLog.promoCode.created`|
 
 
 
@@ -339,7 +339,7 @@ This table lists the limits set in contracts to be compared with actual consumpt
 *Note: The table is available in **Organization** mode only.*
 
 | **Column** | **Description** | **Example** | 
-| `contract_limit_monthly_idPK`	(PK) | Identifier of the monthly limit of the usage metric (combination of the contract ID, usage metric ID, month and limit type) | `8011t000002V7W7AAK kbc_ppu 2019-08-01 contract` |
+| `contract_limit_monthly_idPK``|`(PK) | Identifier of the monthly limit of the usage metric (combination of the contract ID, usage metric ID, month and limit type) | `8011t000002V7W7AAK kbc_ppu 2019-08-01 contract` |
 | `contract_id` | Identifier of the contract - there can be multiple active contracts at once | `8011t000002V7W7AAK` |
 | `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_ppu` |
 | `date` | Month of the limit value | `2019-08-01` |
