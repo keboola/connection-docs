@@ -91,8 +91,9 @@ last saved version of all notebooks in the home directory (`/data`). We also loa
 On a restored workspace, you'll get
 
 - all notebook files with their results,
-- the current version of input mapping sources (beware that these might have changed in the mean time), and a
-- new password.
+- the current version of input mapping sources (beware that these might have changed in the mean time)
+- new password
+- Git configuration (if it was initialized before the termination)
 
 Terminating and restoring a workspace means that you'll loose
 
