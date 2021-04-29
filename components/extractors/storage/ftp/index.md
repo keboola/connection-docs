@@ -1,5 +1,5 @@
 ---
-title: FTP extractor
+title: FTP 
 permalink: /components/extractors/storage/ftp/
 redirect_from:
     - /extractors/storage/ftp/
