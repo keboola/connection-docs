@@ -138,7 +138,7 @@ valuable results, or when you trained a new model which you'd like to use in tra
 ## Developing Transformations
 Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
 and develop a script in JupyterLab, you can use the **Create Transformation** button to 
-deploy the notebook into a transformation.
+deploy the notebook into a transformation. Please note that only input/output mapping without the actual script is copied when creating transformation from a workspace
 
 {: .image-popup}
 ![Workspace - Create Transformation](/transformations/workspace/create-transformation-1.png)
