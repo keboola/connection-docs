@@ -75,3 +75,12 @@ freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).
+
+## Binary types
+
+For binary types `binary`, `varbinary`, `image`, the following rules apply:
+- If value **starts with `0x`** and **length of the value is even number**, then it is a HEX value according to the [MsSQL specification (style 1)](https://docs.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?redirectedfrom=MSDN&view=sql-server-ver15#binary-styles).
+    - Example: `"0xabcdef"` is converted to binary value `0xabcdef`.
+- Else, the value is a string. MsSQL adds separator `\0` after each char code, when storing string as the binary type.
+    - Example: `"0xabcde"` is converted to binary value `0\0x\0a\0b\0c\0d\0e`.
+    - Example: `"dog"` is converted to binary value `d\0o\0g\0`.

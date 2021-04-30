@@ -35,6 +35,28 @@ items:
       - url: /tutorial/ad-hoc/
         title: Part 5 - Ad-hoc data analysis
 
+      - url: /tutorial/branches/
+        title: Part 6 - Development branches
+        items:
+
+          - url: /tutorial/branches/prepare-tables/
+            title: Prepare tables
+
+          - url: /tutorial/branches/prepare-files/
+            title: Prepare files
+
+          - title: Tables in branch
+            url: /tutorial/branches/tables-in-branch/
+
+          - title: Files in branch
+            url: /tutorial/branches/files-in-branch/
+
+          - url: /tutorial/branches/project-diff/
+            title: Project diff
+
+          - title: Merge to production
+            url: /tutorial/branches/merge-to-production/
+
   - url: /components/
     title: Components
     items:
@@ -268,6 +290,9 @@ items:
 
       - url: /components/scaffolds/
         title: Scaffolds
+
+      - url: /components/branches/
+        title: Development Branches
 
       - url: /components/ip-addresses/
         title: IP Addresses
