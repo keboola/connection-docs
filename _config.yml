@@ -11,6 +11,7 @@ exclude:
   - docker-compose.yml
   - README.md
   - deploy.sh
+  - .idea
 
 sass:
   style: compressed
