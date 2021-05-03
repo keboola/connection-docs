@@ -83,8 +83,7 @@ This table contains metadata about messages. You may filter the messages by thei
 
 Learn [more](https://customer.io/docs/api/#apibeta-apimessagesmessages_list). 
 
-#### Incremental loading
-Some of the datasets allow the **Continue since last run** option. When checked, only those messages 
+You can select the **Continue since last run** option. When checked, only those messages 
 that appeared since the last run will be downloaded. 
 
 To backfill without changing this attribute, click the **Reset State** button.
