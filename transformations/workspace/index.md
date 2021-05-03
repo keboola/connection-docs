@@ -91,8 +91,9 @@ last saved version of all notebooks in the home directory (`/data`). We also loa
 On a restored workspace, you'll get
 
 - all notebook files with their results,
-- the current version of input mapping sources (beware that these might have changed in the mean time), and a
-- new password.
+- the current version of input mapping sources (beware that these might have changed in the mean time)
+- new password
+- Git configuration (if it was initialized before the termination)
 
 Terminating and restoring a workspace means that you'll loose
 
@@ -137,7 +138,7 @@ valuable results, or when you trained a new model which you'd like to use in tra
 ## Developing Transformations
 Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
 and develop a script in JupyterLab, you can use the **Create Transformation** button to 
-deploy the notebook into a transformation.
+deploy the notebook into a transformation. Please note that only input/output mapping without the actual script is copied when creating transformation from a workspace
 
 {: .image-popup}
 ![Workspace - Create Transformation](/transformations/workspace/create-transformation-1.png)
