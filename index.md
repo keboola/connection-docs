@@ -9,7 +9,7 @@ If you are working with the Keboola Connection UI as an end-user, you are at the
 * TOC
 {:toc}
 
-## What Keboola Connection Is
+## What is Keboola Connection?
 
 Keboola Connection is a powerful data preparation platform composed of many interconnected components, 
 extracting data from various sources, 
