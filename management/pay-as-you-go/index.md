@@ -22,11 +22,12 @@ Pay-as-you-go (PAYG) projects have the following limits, which differ from the [
 Users can choose between a Keboola-managed backend or their own Snowflake backend.
 
 ## Pricing & Credits
-Each Free Plan project receives up to 300 minutes of free runtime per month in the form of credits (one credit
-equals 60 minutes of running of any process - for example, a component job, an active Python workspace, 
-or SQL queries in Keboola-managed DWH). Additional credits can be purchased within the platform by using 
-a credit card. There is no contract apart from the Free Plan Terms of Services. If a project runs out of credits, 
-the jobs cease executing until more credits are purchased or free credits are topped up.
+Each Free Plan project receives up to 300 minutes of free runtime per month in the form of credits. One credit 
+equals 60 minutes of running of any process (a component job, an active Python workspace, SQL queries 
+in Keboola-managed DWH, etc.). The only exception are orchestration jobs, which are not consuming any credits. 
+Additional credits can be purchased within the platform by using a credit card. There is no contract apart 
+from the Free Plan Terms of Services. If a project runs out of credits, the jobs cease executing until more credits 
+are purchased or free credits are topped up.
 
 Unused free credits don’t roll over from one month to the next. Purchased credits don’t expire during the life of the project.
 
