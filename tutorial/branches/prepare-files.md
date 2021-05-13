@@ -1,25 +1,23 @@
 ---
-title: Prepare file manipulating configurations
+title: Prepare File Manipulating Configurations
 permalink: /tutorial/branches/prepare-files/
 ---
 
 * TOC
 {:toc}
 
-In the [previous section](/tutorial/branches/prepare-tables/) you prepared production configurations that manipulate tables. In this section you'll create the production configurations that work with [files](/storage/files/). 
+In the [previous part](/tutorial/branches/prepare-tables/) of our tutorial on using development branches, you prepared 
+production configurations that manipulate tables. Now you will create the production configurations that work 
+with [files](/storage/files/). 
 
-## Prepare the production configurations
-You'll create a production Python transformation with a code that works with files. 
-
-You'll create a production Python transformation with a simple code first. 
-
-##  Create Transformation
-In your testing project, create a new **Python** transformation and name it `Sample Python transformation`.
+## Create Transformation
+Let's create a production Python transformation with a simple code first. In your testing project, 
+create a new **Python** transformation and name it `Sample Python transformation`.
 
 {: .image-popup}
 ![Screenshot - Create Transformation](/tutorial/branches/figures/01-new-transformation.png)
 
-Add a new code in `Block 1` named `Hello world`, insert the following code and save it. 
+Add a new code in `Block 1` named `Hello world`, insert the following code, and save it. 
 
 {% highlight python %}
 {% raw %}
@@ -32,8 +30,8 @@ f.close ()
 {: .image-popup}
 ![Screenshot - New codeblock](/tutorial/branches/figures/python-new-codeblock.png)
 
-### Set Output Mapping
-Now go to the section **File Output Mapping** and click **New File Output**. And because the output of the
+## Set Output Mapping
+Now go to the section **File Output Mapping** and click **New File Output**. Because the output of the
 transformation will be the file `demoFile.txt`, let’s set it as *Source* and `demoOutput` as *Tags*. This means
 that the output will be stored in Storage as `demoFile.txt` with the tag `demoOutput`. Click **Add File Output**.
 
@@ -46,11 +44,14 @@ Here is the finished transformation.
 ![Screenshot - Python transformation overview](/tutorial/branches/figures/python-prod-overview.png)
 
 ## Run Transformation
-Let’s run the component.
-
-After the job is finished, go to **Storage -- Files**, where you can see the file `demoFile.txt` generated.
+Now run the component. After the job is finished, go to **Storage -- Files**, where you can see 
+the file `demoFile.txt` generated.
 
 {: .image-popup}
 ![Screenshot - Generated File](/tutorial/branches/figures/07-generated-file.png)
 
-Now you have everything ready, you created production configurations for both tables and files. You can proceed to the next step - [working with tables in a branch](/tutorial/branches/tables-in-branch/) where you first learn how tables work in branches. Then in the following section you'll learn [how files work in branch](/tutorial/branches/files-in-branch/).   
+At this point, you have everything ready. You created production configurations for both tables and files. 
+It is time to take the next step:
+
+- Learn how [tables](/tutorial/branches/tables-in-branch/) work in branches.
+- Learn how [files](/tutorial/branches/files-in-branch/) work in branches.    

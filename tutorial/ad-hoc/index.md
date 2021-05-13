@@ -1,5 +1,5 @@
 ---
-title: Part 5 - Ad-hoc Data Analysis
+title: Part 5 - Ad-Hoc Data Analysis
 permalink: /tutorial/ad-hoc/
 ---
 
