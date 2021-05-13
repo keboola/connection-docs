@@ -46,8 +46,8 @@ You can end your branch's lifecycle in two ways:
 of the project.
 
 ## Private Beta Warning
-This feature is currently in private beta. It may not always work as expected. Please bear with us 
-while we polish all necessities. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
+This feature is currently in private beta. It may not always work as expected. Please bear with us as we continue to fix any 
+bugs. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
 
 To enable the feature, please ask via the [support button](/management/support/) in your project.
 

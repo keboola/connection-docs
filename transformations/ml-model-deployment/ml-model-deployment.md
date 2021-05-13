@@ -10,7 +10,7 @@ In this tutorial, we will show you how to use Machine Learning Model Deployment.
 
 ## Private Beta Warning
 Machine Learning (ML) Model Deployment is currently in private beta. Some features may not work as 
-expected. Please bear with us while we polish all necessities. Any feedback is welcome using the feedback 
+expected. Please bear with us and provide feedback using the feedback 
 button directly in the platform or through the [feedback portal](https://ideas.keboola.com).
 
 ## Before You Start

@@ -9,8 +9,6 @@ permalink: /tutorial/branches/
 The feature Development Branches allows you to modify [component configurations](/components/) 
 without interfering with the running configurations or entire [orchestrated pipelines](/orchestrator/).
 
-{% include branches-beta-warning.html %}
-
 ## Tutorial
 First, learn how development branches [work in general](/components/branches/).
 
@@ -26,3 +24,10 @@ various components that demonstrate the different aspects of branches.
 * Part 3 -- Merging branches:
   * [Project diff](/tutorial/branches/project-diff/)
   * [Merge to production](/tutorial/branches/merge-to-production/)
+
+## Private Beta Warning
+This feature is currently in private beta. It may not always work as expected. Please bear with us as we continue to fix any 
+bugs. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
+
+**To request to be a beta tester for this feature, please ask via the [support button](/management/support/) 
+in your project.**
