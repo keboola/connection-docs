@@ -33,6 +33,18 @@
             "service": "syrup"
         },
         {
+            "ipPrefix": "52.7.83.136/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "job-queue"
+        },
+        {
+            "ipPrefix": "52.20.72.254/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "job-queue"
+        },
+        {
             "ipPrefix": "35.157.170.229/32",
             "vendor": "aws",
             "region": "eu-central-1",
@@ -43,6 +55,18 @@
             "vendor": "aws",
             "region": "eu-central-1",
             "service": "syrup"
+        },
+        {
+            "ipPrefix": "3.66.248.180/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "job-queue"
+        },
+        {
+            "ipPrefix": "3.64.150.30/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "job-queue"
         },
         {
             "ipPrefix": "149.72.196.5/32",
