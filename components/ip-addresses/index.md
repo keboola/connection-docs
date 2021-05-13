@@ -31,6 +31,8 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `52.206.109.126`
 - `34.203.87.137`
 - `149.72.196.5`
+- `52.7.83.136`
+- `52.20.72.254`
 
 ## connection.eu-central-1.keboola.com
 For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`), 
@@ -42,6 +44,8 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `35.157.170.229`
 - `35.157.93.175`
 - `149.72.196.5`
+- `3.66.248.180`
+- `3.64.150.30`
 
 ## connection.north-europe.azure.keboola.com
 For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
