@@ -62,4 +62,4 @@ Stay tuned for more information and, meanwhile, use OpenRefine locally.
 ## Public Beta Warning
 
 OpenRefine transformations are currently in public beta. Some features may not work as expected.
-Please bear with us while we polish all necessities. Any feedback is welcomed at [support@keboola.com](mailto:support@keboola.com).
+Please bear with us and provide feedback at [support@keboola.com](mailto:support@keboola.com).

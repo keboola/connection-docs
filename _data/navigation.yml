@@ -33,28 +33,28 @@ items:
         title: Part 4 - Automation
 
       - url: /tutorial/ad-hoc/
-        title: Part 5 - Ad-hoc data analysis
+        title: Part 5 - Ad-Hoc Data Analysis
 
       - url: /tutorial/branches/
-        title: Part 6 - Development branches
+        title: Part 6 - Development Branches
         items:
 
           - url: /tutorial/branches/prepare-tables/
-            title: Prepare tables
+            title: Prepare Tables
 
           - url: /tutorial/branches/prepare-files/
-            title: Prepare files
+            title: Prepare Files
 
-          - title: Tables in branch
+          - title: Tables in Branch
             url: /tutorial/branches/tables-in-branch/
 
-          - title: Files in branch
+          - title: Files in Branch
             url: /tutorial/branches/files-in-branch/
 
           - url: /tutorial/branches/project-diff/
-            title: Project diff
+            title: Project Diff
 
-          - title: Merge to production
+          - title: Merge to Production
             url: /tutorial/branches/merge-to-production/
 
   - url: /components/

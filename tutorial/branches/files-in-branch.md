@@ -1,16 +1,16 @@
 ---
-title: Working with files in branch
+title: Working with Files in Branch
 permalink: /tutorial/branches/files-in-branch/
 ---
 
 * TOC
 {:toc}
 
-In the [previous section](/tutorial/branches/tables-in-branch/) you created a branch from configurations in production and you tested how tables behave in branches. In this section you'll learn how [files](/storage/files/) behave in development branches. 
+Now that you have created a branch from configurations in production and tested how 
+[tables behave in development branches](/tutorial/branches/tables-in-branch/), let's do the same with
+[files](/storage/files/). 
 
-In the `Sample branch` run the same Python transformation you prepared in the production earlier.
-
-## Run the transformation in development branch 
+## Run Transformation in Branch 
 
 In your development branch, go to **Transformations**, select the transformation `Sample Python transformation` and run it.
 
@@ -27,8 +27,8 @@ the files that were created in the production environment.
 ![Screenshot - Development Branch Output](/tutorial/branches/figures/12-dev-branch-output.png)
 
 ## Change Configuration
-Now it’s time to make the changes to the transformation and test them. Go to
-**Transformations** find `Sample Python transformation` and change the *Hello world* code in `Block 1`. 
+Now it is time to make the changes to the transformation and test them. Go to **Transformations**, find `Sample Python 
+transformation` and change the *Hello world* code in `Block 1` as follows:
 
 {% highlight python %}
 {% raw %}
@@ -43,10 +43,8 @@ print("Output written to demoFile.txt")
 {: .image-popup}
 ![Screenshot - Edit Code Block](/tutorial/branches/figures/python-branch-change-code.png)
 
-The transformation will do exactly the same as before, but it will add `Output written to demoFile.txt` to
-the output log. Save the code block and run the transformation again.
-
-You can see in the job log that it did indeed output the log message. 
+The transformation will do exactly the same as before, but it will add `Output written to demoFile.txt` message to
+the output log. Save the code block and run the transformation again. You can see in the job log that it did indeed output the log message. 
 
 {: .image-popup}
 ![Screenshot - Job Log](/tutorial/branches/figures/14-jobs-log.png)
@@ -70,4 +68,5 @@ tag `demoOutput` without any prefix.
 {: .image-popup}
 ![Screenshot - Storage File in Production](/tutorial/branches/figures/21-storage-files-prod.png)
 
-This concludes the file manipulation part of this tutorial. You examined how files behave in branches. You can continue to the next part - [examining the changes made in branch](/tutorial/branches/project-diff). 
+This concludes the file manipulation part of this tutorial. You examined how files behave in branches. Now you can 
+examine the [changes you have made in the branch](/tutorial/branches/project-diff). 
