@@ -15,6 +15,7 @@ allow to push data to generic storage services:
 - [Google Sheets](/components/writers/storage/google-sheets/) --- writes tables as individual sheets of a Google Sheet file, or appends rows to an existing sheet.
 - [Keboola Connection Storage](/components/writers/storage/storage-api/) --- writes tables to a different Keboola Connection project; can be used where [Data Catalog](/catalog/) cannot.
 - [OneDrive](/components/writers/storage/onedrive/) --- writes tables as individual sheets of a OneDrive Excel file, or appends rows to an existing sheet.
+- [Google Cloud Storage](/components/writers/storage/google-cloud-storage/) --- writes tables and files to Google Cloud Storage
 - [SFTP](/components/writers/storage/sftp/) --- writes tables and files to a remote SFTP server.
 - And [more](https://components.keboola.com/components)
 
