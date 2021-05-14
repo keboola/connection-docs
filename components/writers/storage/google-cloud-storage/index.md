@@ -24,13 +24,19 @@ The Service account login is the recommended way of authorizing this component.
 To create a service account go to your Google Cloud Platform console
 [Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) page.
 There, click the **create service account** button, provide a name to the account, eg. keboola-cloud-storage, and click 
-the **create** button. In the "Grant this service account access to project" section select the **Storage Object Admin** role
-and click the **continue** button. You can keep the "Grant users access to this service account" blank and press the **done** button.
+the **create** button. 
+
+In the "Grant this service account access to project" section select the **Storage Object Admin** role
+and click the **continue** button. 
+
+You can keep the "Grant users access to this service account" blank and press the **done** button.
 Once you see your newly created service account in the service account list, click the 3 dots in the actions column and
 select **manage keys**. Then click the **add key** button and select **create new key**. Select the JSON key and press 
-the **create** button, the key should be automatically downloaded to your computer. Locate the JSON key file and copy
+the **create** button, the key should be automatically downloaded to your computer. 
+
+Locate the JSON key file and copy
 and paste the whole JSON to the Service Account Key field in the Google Cloud Storage Service Account login and press 
-the **save** button. It might take up to 10 minutes for the service account scope rights will be granted to the service account.
+the **save** button. It might take up to 10 minutes for the service account scope rights to be granted to the service account.
 
 ### Row configuration
 
