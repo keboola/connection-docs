@@ -264,6 +264,9 @@ items:
               - url: /components/writers/storage/dropbox/
                 title: Dropbox
 
+              - url: /components/writers/storage/google-cloud-storage/
+                title: Google Cloud Storage
+
               - url: /components/writers/storage/google-drive/
                 title: Google Drive
 
