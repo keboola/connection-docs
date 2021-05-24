@@ -20,11 +20,8 @@ these limits is either technically impossible, or it carries a risk of degraded 
 **Note:** These limits apply to standard Keboola Connection projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
 
 ## Business Limits
-Business limits are set for each project upon entering into the subscription. 
-You can find them under **Users & Settings** in the **Limits** tab:
 
-{: .image-popup}
-![Screenshot - Limits](/management/project/limits/limits.png)
+Business limits are set for each project upon entering into the subscription. 
 
 All business limits are **soft limits**. Exceeding them will not cause the project to be restricted. 
 However, if you substantially and constantly exceed the limits, you will be contacted by us with a **project 
@@ -44,6 +41,7 @@ and neither do [Tokens](/management/project/tokens). Effectively this is the num
 - **Storage size** --- [details below](#storage-size)
 
 ### Project Power - Volume Credits
+
 Project Power is proportional to the sum of the amount of data **consumed** (exported from Storage) and **produced** 
 (imported to Storage) by each component. This means that it does not matter how much data an extractor downloads from 
 the source system. What is important is how much data it **produces** (imports) into your storage (i.e., 
@@ -59,14 +57,10 @@ Most of the transfers are efficiently compressed and most of the data **can be**
 makes the ratio more favourable. It is important to say that the same data on the same component will always consume
 the same number of PPUs. 
 
-The **Project Power** tab in **Users & Settings** shows detailed credit consumption by days and components:
-
-{: .image-popup}
-![Screenshot - Project Power](/management/project/limits/project-power.png)
-
 *Note: Volume Credits are going to be replaced by the [time credit measurement](#project-power---time-credits).*
 
 ### Project Power - Time Credits
+
 Keboola has introduced a new way to measure your consumption. Time Credits will gradually replace the 
 metrics of [Volume Credits](#project-power---volume-credits). If you are not sure which consumption measurement 
 your subscription is running on, please reach out to your CSM for more information.
