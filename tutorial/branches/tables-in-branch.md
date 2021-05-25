@@ -58,7 +58,7 @@ ALTER TABLE "top_prices" DROP COLUMN "_timestamp";
 {% endhighlight %}
     
 {: .image-popup}
-![Screenshot - Change to code](/tutorial/branches/figures/tranformation-branch-change-top-5.png)
+![Screenshot - Change to code](/tutorial/branches/figures/transformation-branch-change-top-5.png)
 
 If you want, check that the original transformation did not change. You can do so by switching back to the project in 
 the top menu. The production transformation still contains `LIMIT 5`. Now that you have verified that a branch transformation 
@@ -189,5 +189,5 @@ the data in the tables to see that you indeed created a list of transactions wit
 
 The second part of your task is done as well. You changed the table-manipulating production configurations in a branch. 
 You verified that the none of the changes affected the original project configurations or the project production
-data. Next you will run the [file-manipulating configuration in a branch](tutorial/branches/files-in-branch/) and 
+data. Next you will run the [file-manipulating configuration in a branch](/tutorial/branches/files-in-branch/) and 
 examine how files work there.
