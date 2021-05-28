@@ -61,6 +61,14 @@ The latest versions of packages are always installed. Some packages are already 
 their dependencies, therefore to get an authoritative list of installed packages use the `installed.packages()` function. 
 These pre-installed packages do not need to be listed in the transformation. It does no harm if you list them, but the transformation and sandbox start is slower.
 
+In case your code relies on a specific package version, you can override the installed version by calling, e. g.:
+
+{% highlight r %}
+require(devtools)
+install_version("data.table", "1.12.8")
+require(data.table)
+{% endhighlight %}
+
 ### CSV Format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.
 Generally, the table can be read with default R settings. In case R gets confused, use the exact format
