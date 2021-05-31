@@ -9,10 +9,10 @@ permalink: /transformations/migration/
 Current transformations will be fully deprecated 1.9.2021 on US AWS and EU AWS [Stacks](/overview/#stacks).
 All transformations must be migrated by this date. 
 
-## Migration step
+## Migration steps
 The transformation migration process is as follows:
 - go to the detail of the transformation bucket
-- start migration process by clicked to the "Proceed to migration" button
+- start migration process by clicking to the "Proceed to migration" button
 
 {: .image-popup}
 ![Screenshot - Migration overview](/transformations/migration/migration-overview.png)
