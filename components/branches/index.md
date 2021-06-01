@@ -45,11 +45,9 @@ You can end your branch's lifecycle in two ways:
 **Important:** All this happens in a same project, allowing you to collaborate on the modifications with other members 
 of the project.
 
-## Private Beta Warning
-This feature is currently in private beta. It may not always work as expected. Please bear with us as we continue to fix any 
-bugs. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
-
-To enable the feature, please ask via the [support button](/management/support/) in your project.
+## Public Beta Warning
+This feature is currently in public beta. It may not always work as expected. Please bear with us and provide feedback 
+at [https://ideas.keboola.com](https://ideas.keboola.com).
 
 ## Tutorial
 To see how you can take advantage of branches, please follow the [tutorial](/tutorial/branches/).

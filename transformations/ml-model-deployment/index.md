@@ -8,13 +8,10 @@ permalink: /transformations/ml-model-deployment/
 
 In this tutorial, we will show you how to use Machine Learning Model Deployment.
 
-## Private Beta Warning
-Machine Learning (ML) Model Deployment is currently in private beta. Some features may not work as 
+## Public Beta Warning
+Machine Learning (ML) Model Deployment is currently in public beta. Some features may not work as 
 expected. Please bear with us and provide feedback using the feedback 
 button directly in the platform or through the [feedback portal](https://ideas.keboola.com).
-
-## Before You Start
-To request to be a beta tester for this feature, please ask via the support button in your project.
 
 ## Deployment Options
 In the next steps, we will walk you through the process of deploying a model in your project. The model 
