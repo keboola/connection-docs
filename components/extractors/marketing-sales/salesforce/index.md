@@ -8,8 +8,8 @@ redirect_from:
 * TOC
 {:toc}
   
-This extractor allows you to import data from Salesforce via the Bulk API. Data can can be fetched in two ways; by running
-a specified SOQL query, or by selecting a salesforce object and getting all data from that object.
+This extractor allows you to import data from Salesforce via the Bulk API. Data can be fetched in two ways; by running
+a specified SOQL query, or by selecting a Salesforce object and getting all data from that object.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Salesforce V2** extractor.
@@ -26,8 +26,10 @@ After this you can configure individual queries or objects in the [row based con
 ![Screenshot - Row configuration](/components/extractors/marketing-sales/salesforce/row_config.png)
 
 In the row configuration select either Query or Object and use the corresponding text input to input a single query or 
-object. Then select if you wish to fetch deleted records as well. Finally, set the loading type to either Full or Incremental based
-on your use case.
+object. Then select if you wish to fetch deleted records by checking the checkbox. Finally, set the loading type to either Full or Incremental based
+on your use case. In the incremental update, you can also set the incremental fetching option. Incremental fetching allows you
+to select a field in Salesforce for example LastModifiedDate and fetch records that have been modified since the
+last run of the component. LastModifiedDate is the default field, but you can also specify any field in salesforce containing a timestamp.
 
 ### Load Type
 Select one of the following two load types: 
