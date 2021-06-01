@@ -107,6 +107,9 @@ items:
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
 
+              - url: /components/extractors/marketing-sales/salesforce/
+                title: Salesforce
+
               - url: /components/extractors/marketing-sales/sklik/
                 title: Sklik
 
