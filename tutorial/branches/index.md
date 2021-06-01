@@ -25,9 +25,6 @@ various components that demonstrate the different aspects of branches.
   * [Project diff](/tutorial/branches/project-diff/)
   * [Merge to production](/tutorial/branches/merge-to-production/)
 
-## Private Beta Warning
-This feature is currently in private beta. It may not always work as expected. Please bear with us as we continue to fix any 
-bugs. Any feedback is welcome at [https://ideas.keboola.com](https://ideas.keboola.com).
-
-**To request to be a beta tester for this feature, please ask via the [support button](/management/support/) 
-in your project.**
+## Public Beta Warning
+This feature is currently in public beta. It may not always work as expected. Please bear with us and provide feedback 
+at [https://ideas.keboola.com](https://ideas.keboola.com).
