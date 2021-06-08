@@ -6,36 +6,37 @@ permalink: /transformations/migration/
 * TOC
 {:toc}
 
-Current transformations will be fully deprecated 1.9.2021 on US AWS and EU AWS [Stacks](/overview/#stacks).
+Current transformations will be fully deprecated on the US AWS and the EU AWS [stacks](/overview/#stacks) on September 1, 2021.
 All transformations must be migrated by this date. 
 
-## Migration steps
+## Migration Steps
 The transformation migration process is as follows:
-- go to the detail of the transformation bucket
-- start migration process by clicking to the "Proceed to migration" button
+- Go to the detail of the transformation bucket.
+- Start the migration process by clicking the button "Proceed to Migration".
 
 {: .image-popup}
 ![Screenshot - Migration overview](/transformations/migration/migration-overview.png)
 
-- after successfully migration process, the old transformation will be marked as "Migrated"
+- Once the migration process finishes successfully, the old transformation will be marked as "Migrated".
 
 {: .image-popup}
 ![Screenshot - Migrated transformation](/transformations/migration/migrated.png)
 
-- check and modify orchastration [tasks](orchestrator/tasks/) that used the migrated transformations
+- Check and modify the orchestration [tasks](orchestrator/tasks/) that used the migrated transformations.
 
 {: .image-popup}
 ![Screenshot - Modify orchastration](/transformations/migration/modify-orchastration.png)
 
-- after modified all orchestrations, you can remove the old transformation bucket
+- Once all orchestrations are modified, you can remove the old transformation bucket.
 
 ## What Will Be Migrated
-All transformations, that have in the transformation bucket:
-- one [phase](/transformations/#phases) and one [transformation backend](/transformations/#backends)
-- one [phase](/transformations/#phases) and multiple [transformation backends](/transformations/#backends)
-- multiple [phases](/transformations/#phases) and one [transformation backend](/transformations/#backends)
+All transformations that meet the following conditions will be migrated. They must be in a transformation bucket with:
+- One [phase](/transformations/#phases) and one [transformation backend](/transformations/#backends).
+- One [phase](/transformations/#phases) and multiple [transformation backends](/transformations/#backends).
+- Multiple [phases](/transformations/#phases) and one [transformation backend](/transformations/#backends).
 
-## What Won't Be Migrated
-- disabled transformations in the bucket (migration process skip these transformations)
-- transformations, which have more different transformation [backends](/transformations/#backends) and [phases](/transformations/#phases)
-  - in this case you must split the transformation bucket on transformations with one phase or backend. If you don't know how, please contact Keboola Support.
+## What Will Not Be Migrated
+The migration process will skip the following transformations and they will not be migrated:
+- Disabled transformations in the bucket 
+- Transformations that have both multiple [phases](/transformations/#phases) and multiple transformation [backends](/transformations/#backends)
+  - In this case, you must split the bucket, so that each of the resulting buckets have either one phase or one backend. If you are not sure how to do that, please contact our support.
