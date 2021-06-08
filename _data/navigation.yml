@@ -417,6 +417,9 @@ items:
       - url: /transformations/snowflake/
         title: Legacy Snowflake Transformations
 
+      - url: /transformations/migration/
+        title: Transformation Migration
+
   - url: /management/
     title: Management
     items:
