@@ -12,12 +12,12 @@ All transformations must be migrated by this date.
 ## Migration Steps
 The transformation migration process is as follows:
 - Go to the detail of the transformation bucket.
-- Start the migration process by clicking the button "Proceed to Migration".
+- Start the migration by clicking the button **Proceed to Migration**.
 
 {: .image-popup}
 ![Screenshot - Migration overview](/transformations/migration/migration-overview.png)
 
-- Once the migration process finishes successfully, the old transformation will be marked as "Migrated".
+- Once the migration finishes successfully, the old transformation will be marked as *Migrated*.
 
 {: .image-popup}
 ![Screenshot - Migrated transformation](/transformations/migration/migrated.png)
@@ -36,7 +36,6 @@ All transformations that meet the following conditions will be migrated. They mu
 - Multiple [phases](/transformations/#phases) and one [transformation backend](/transformations/#backends).
 
 ## What Will Not Be Migrated
-The migration process will skip the following transformations and they will not be migrated:
+The following transformations will be skipped over in the migration process. They will not be migrated:
 - Disabled transformations in the bucket 
-- Transformations that have both multiple [phases](/transformations/#phases) and multiple transformation [backends](/transformations/#backends)
-  - In this case, you must split the bucket, so that each of the resulting buckets have either one phase or one backend. If you are not sure how to do that, please contact our support.
+- Transformations that have both multiple [phases](/transformations/#phases) and multiple transformation [backends](/transformations/#backends); in this case, you must split the bucket, so that each of the resulting buckets have either one phase or one backend. If you are not sure how to do that, please contact our support.
