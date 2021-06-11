@@ -278,51 +278,52 @@ organization, or to the Keboola Connection platform itself.
 
 #### Security event operations
 
-|`auditLog.admin.addNewU2fDevice`|`auditLog.organization.invitationCreated`|
-|`auditLog.admin.changePassword`|`auditLog.organization.invitationDeleted`|
-|`auditLog.admin.disableMfa`|`auditLog.organization.invitationDetail`|
-|`auditLog.admin.enableTotpMfa`|`auditLog.organization.invitationsListed`|
-|`auditLog.admin.enableU2fMfa`|`auditLog.organization.metadataListed`|
-|`auditLog.admin.failedLogin`|`auditLog.organization.metadataSet`|
-|`auditLog.admin.login`|`auditLog.organization.metadataDeleted`|
-|`auditLog.admin.loginWithTotp`|`auditLog.organization.projectCreated`|
-|`auditLog.admin.loginWithTotpViaRecoveryCode`|`auditLog.organization.projectsListed`|
-|`auditLog.admin.loginWithU2f`|`auditLog.organization.updated`|
-|`auditLog.admin.logout`|`auditLog.payAsYouGo.marketingData`|
-|`auditLog.admin.lostPassword`|`auditLog.project.addedToOrganization`|
-|`auditLog.admin.maintainerInvitation.accepted`|`auditLog.project.adminAdded`|
-|`auditLog.admin.maintainerInvitation.detail`|`auditLog.project.adminRemoved`|
-|`auditLog.admin.maintainerInvitation.rejected`|`auditLog.project.adminsListed`|
-|`auditLog.admin.organizationInvitation.accepted`|`auditLog.project.adminUpdated`|
-|`auditLog.admin.projectInvitation.accepted`|`auditLog.project.deleted`|
-|`auditLog.admin.projectInvitation.rejected`|`auditLog.project.deletedDetail`|
-|`auditLog.admin.reauthorizeCurrentUserTotp`|`auditLog.project.detail`|
-|`auditLog.admin.regenerateRecoveryCodes`|`auditLog.project.featureAdded`|
-|`auditLog.admin.removeU2fDevice`|`auditLog.project.featureRemoved`|
-|`auditLog.admin.showRecoveryCodes`|`auditLog.project.fileStorageAssigned`|
-|`auditLog.admin.sudo`|`auditLog.project.invitationCreated`|
-|`auditLog.deletedProjectsListed`|`auditLog.project.invitationDeleted`|
-|`auditLog.maintainer.adminAdded`|`auditLog.project.invitationsListed`|
-|`auditLog.maintainer.adminRemoved`|`auditLog.project.joinRequest.approved`|
-|`auditLog.maintainer.adminsListed`|`auditLog.project.joinRequest.rejected`|
-|`auditLog.maintainer.invitationCreated`|`auditLog.project.joinRequest.rejected`|
-|`auditLog.maintainer.invitationDeleted`|`auditLog.project.joinRequestsListed`|
-|`auditLog.maintainer.invitationDetail`|`auditLog.project.limitAdded`|
-|`auditLog.maintainer.invitationsListed`|`auditLog.project.limitRemoved`|
-|`auditLog.maintainer.promoCodesListed`|`auditLog.project.metadataDeleted`|
-|`auditLog.maintainers.created`|`auditLog.project.metadataListed`|
-|`auditLog.maintainers.deleted`|`auditLog.project.metadataSet`|
-|`auditLog.maintainers.detail`|`auditLog.project.removedFromOrganization`|
-|`auditLog.maintainers.listed`|`auditLog.project.requestAccess`|
-|`auditLog.maintainers.organizationCreated`|`auditLog.project.setEnabledStatus`|
-|`auditLog.maintainers.updated`|`auditLog.project.storageBackendAssigned`|
-|`auditLog.organization.adminAdded`|`auditLog.project.storageBackendRemoved`|
-|`auditLog.organization.adminRemoved`|`auditLog.project.storageTokenCreated`|
-|`auditLog.organization.adminsInProjectsListed`|`auditLog.project.undeleted`|
-|`auditLog.organization.adminsListed`|`auditLog.project.updated`|
-|`auditLog.organization.deleted`|`auditLog.promoCode.applied`|
-|`auditLog.organization.detail`|`auditLog.promoCode.created`|
-
+|`auditLog.admin.addNewU2fDevice`                |`auditLog.organization.detail`
+|`auditLog.admin.changePassword`                 |`auditLog.organization.invitationCreated`
+|`auditLog.admin.disableMfa`                     |`auditLog.organization.invitationDeleted`
+|`auditLog.admin.enableTotpMfa`                  |`auditLog.organization.invitationDetail`
+|`auditLog.admin.enableU2fMfa`                   |`auditLog.organization.invitationsListed`
+|`auditLog.admin.failedLogin`                    |`auditLog.organization.metadataListed`
+|`auditLog.admin.login`                          |`auditLog.organization.metadataSet`
+|`auditLog.admin.loginWithTotp`                  |`auditLog.organization.metadataDeleted`
+|`auditLog.admin.loginWithTotpViaRecoveryCode`   |`auditLog.organization.projectCreated`
+|`auditLog.admin.loginWithU2f`                   |`auditLog.organization.projectsListed`
+|`auditLog.admin.logout`                         |`auditLog.organization.updated`
+|`auditLog.admin.lostPassword`                   |`auditLog.payAsYouGo.marketingData`
+|`auditLog.admin.maintainerInvitation.accepted`  |`auditLog.project.addedToOrganization`
+|`auditLog.admin.maintainerInvitation.detail`    |`auditLog.project.adminAdded`
+|`auditLog.admin.maintainerInvitation.rejected`  |`auditLog.project.adminRemoved`
+|`auditLog.admin.organizationInvitation.accepted`|`auditLog.project.adminsListed`
+|`auditLog.admin.projectInvitation.accepted`     |`auditLog.project.adminUpdated`
+|`auditLog.admin.projectInvitation.rejected`     |`auditLog.project.deleted`
+|`auditLog.admin.reauthorizeCurrentUserTotp`     |`auditLog.project.deletedDetail`
+|`auditLog.admin.regenerateRecoveryCodes`        |`auditLog.project.detail`
+|`auditLog.admin.removeU2fDevice`                |`auditLog.project.featureAdded`
+|`auditLog.admin.showRecoveryCodes`              |`auditLog.project.featureRemoved`
+|`auditLog.admin.sudo`                           |`auditLog.project.fileStorageAssigned`
+|`auditLog.deletedProjectsListed`                |`auditLog.project.invitationCreated`
+|`auditLog.maintainer.adminAdded`                |`auditLog.project.invitationDeleted`
+|`auditLog.maintainer.adminRemoved`              |`auditLog.project.invitationsListed`
+|`auditLog.maintainer.adminsListed`              |`auditLog.project.joinRequest.approved`
+|`auditLog.maintainer.invitationCreated`         |`auditLog.project.joinRequest.rejected`
+|`auditLog.maintainer.invitationDeleted`         |`auditLog.project.joinRequest.rejected`
+|`auditLog.maintainer.invitationDetail`          |`auditLog.project.joinRequestsListed`
+|`auditLog.maintainer.invitationsListed`         |`auditLog.project.limitAdded`
+|`auditLog.maintainer.metadataDeleted`           |`auditLog.project.limitRemoved`
+|`auditLog.maintainer.metadataListed`            |`auditLog.project.metadataDeleted`
+|`auditLog.maintainer.metadataSet`               |`auditLog.project.metadataListed`
+|`auditLog.maintainer.promoCodesListed`          |`auditLog.project.metadataSet`
+|`auditLog.maintainers.created`                  |`auditLog.project.removedFromOrganization`
+|`auditLog.maintainers.deleted`                  |`auditLog.project.requestAccess`
+|`auditLog.maintainers.detail`                   |`auditLog.project.setEnabledStatus`
+|`auditLog.maintainers.listed`                   |`auditLog.project.storageBackendAssigned`
+|`auditLog.maintainers.organizationCreated`      |`auditLog.project.storageBackendRemoved`
+|`auditLog.maintainers.updated`                  |`auditLog.project.storageTokenCreated`
+|`auditLog.organization.adminAdded`              |`auditLog.project.undeleted`
+|`auditLog.organization.adminRemoved`            |`auditLog.project.updated`
+|`auditLog.organization.adminsInProjectsListed`  |`auditLog.promoCode.applied`
+|`auditLog.organization.adminsListed`            |`auditLog.promoCode.created`
+|`auditLog.organization.deleted`                 |
 
 
 #### Operation parameters
@@ -356,4 +357,3 @@ This table shows metrics related to your contracts.
 | `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_ppu`
 | `usage_metric` | Name of the metric | `2019-08-01` |
 | `metric_type` | Defines if metric is calculated cumulatively over period of time (like PPU) or if it has actual total value on particular date (like Projects). <br> Possible values: <br> `cumulative`, `standard` | `cumulative` |
-
