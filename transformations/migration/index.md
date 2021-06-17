@@ -39,3 +39,15 @@ All transformations that meet the following conditions will be migrated. They mu
 The following transformations will be skipped over in the migration process. They will not be migrated:
 - Disabled transformations in the bucket 
 - Transformations that have both multiple [phases](/transformations/#phases) and multiple transformation [backends](/transformations/#backends); in this case, you must split the bucket, so that each of the resulting buckets have either one phase or one backend. If you are not sure how to do that, please contact our support.
+
+## What happens during migration:
+- We do check automatically if the transformation is eligible for migration
+- The name and the description is transferred in a way that:
+    - Mixed backends
+        -  Transformation bucket = New transformation name (transformation names are lost)
+    - Single backends
+        - Multiple e.g. Snowflake transformation in one bucket results in one Snowflake transformation with code blocks inside new transformation
+        - Mappings are merged
+        - Transformation bucket = New transformation name
+        - Transformation name = Code block name
+        - Each transformation within a bucket = Code snippet name 
