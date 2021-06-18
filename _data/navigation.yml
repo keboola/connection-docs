@@ -256,6 +256,9 @@ items:
 
       - url: /components/applications/
         title: Applications
+        items:
+          - url: /components/applications/email-validator/
+            title: Email validator
 
       - url: /components/scaffolds/
         title: Scaffolds

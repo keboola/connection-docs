@@ -1,4 +1,4 @@
----
+git ---
 title: Writers
 permalink: /components/writers/
 redirect_from:
