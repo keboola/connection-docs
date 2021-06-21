@@ -41,7 +41,7 @@ The following transformations will be skipped over in the migration process. The
 - Transformations that have both multiple [phases](/transformations/#phases) and multiple transformation [backends](/transformations/#backends); in this case, you must split the bucket, so that each of the resulting buckets have either one phase or one backend. If you are not sure how to do that, please contact our support.
 
 ## What Happens During Migration
-We check automatically if the transformation is eligible for migration.
+We check automatically if the transformation is suitable for migration.
 The names (and the associated descriptions) are transferred in the following way:
 
 For mixed backends:
