@@ -39,3 +39,17 @@ All transformations that meet the following conditions will be migrated. They mu
 The following transformations will be skipped over in the migration process. They will not be migrated:
 - Disabled transformations in the bucket 
 - Transformations that have both multiple [phases](/transformations/#phases) and multiple transformation [backends](/transformations/#backends); in this case, you must split the bucket, so that each of the resulting buckets have either one phase or one backend. If you are not sure how to do that, please contact our support.
+
+## What Happens During Migration
+We check automatically if the transformation is suitable for migration.
+The names (and the associated descriptions) are transferred in the following way:
+
+For mixed backends:
+  - Transformation bucket → New transformation name (names of individual transformations are lost)
+
+For single backends:
+  - Multiple transformations in one bucket result in a single new transformation with code blocks corresponding to the old transformations
+  - Mappings are merged
+  - Transformation bucket → new transformation name
+  - Transformation name → code block name
+  - Each transformation within a bucket → code snippet name 
