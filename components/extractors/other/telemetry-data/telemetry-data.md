@@ -323,7 +323,9 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.organization.adminRemoved`            |`auditLog.project.updated`
 |`auditLog.organization.adminsInProjectsListed`  |`auditLog.promoCode.applied`
 |`auditLog.organization.adminsListed`            |`auditLog.promoCode.created`
-|`auditLog.organization.deleted`                 |
+|`auditLog.organization.deleted`                 |`auditLog.storageBackendConnection.listed`
+|`auditLog.storageBackendConnection.created`     |`auditLog.storageBackendConnection.deleted`
+|`auditLog.storageBackendConnection.updated`
 
 
 #### Operation parameters
