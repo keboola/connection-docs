@@ -33,7 +33,7 @@ To parametrize the multiplier value (42), you can change it to a variable `{{ "{
 
 {% highlight sql %}
 CREATE OR REPLACE TABLE "result" AS
-	SELECT "first", "second" * {{multiplier}} AS "larger_second" FROM "source";
+	SELECT "first", "second" * {% raw %}{{ multiplier }}{% endraw %} AS "larger_second" FROM "source";
 {% endhighlight %}
 
 When you define a variable, you have to provide its default value:
