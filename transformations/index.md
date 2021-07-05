@@ -287,7 +287,7 @@ In the transformation detail, if you're seeing dependent transformations, phases
 *legacy transformations*:
 
 {: .image-popup}
-![Legacy Transformations Overview](/transformations/legacy-transformations-1.png)
+![Legacy Transformations Overview](/transformations/legacy-transformations-2.png)
 
 ### New Transformations
 New transformations behave like any other [component](/components/). This means that they use the 
