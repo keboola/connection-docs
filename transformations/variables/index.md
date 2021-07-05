@@ -106,7 +106,7 @@ otherwise unrelated transformations. Like with the variables, the shared code is
 before the transformation runs. This means that it does not interfere with your
 transformation code.
 
-There are two ways how to create shared code --- from the main transformation page:
+There are two ways how to create shared code --- from the **Shared Codes** page:
 
 {: .image-popup}
 ![Screenshot - Create Shared Code](/transformations/variables/shared-code.png)
