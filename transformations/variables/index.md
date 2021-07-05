@@ -73,29 +73,29 @@ In the [above example](/transformations/variables/#example), you can override th
 value by **adding** the following code to the configuration json:
 
 {% highlight json %}
-	"variableValuesData": {
-		"values": [
-			{
-				"name": "multiplier",
-				"value": "1000"
-			}
-		]
-	}
+    "variableValuesData": {
+        "values": [
+            {
+                "name": "multiplier",
+                "value": "1000"
+            }
+        ]
+    }
 {% endhighlight %}
 
 The resulting configuration will look similar to this:
 
 {% highlight json %}
 {
-	"config": "6939",
-	"variableValuesData": {
-		"values": [
-			{
-				"name": "multiplier",
-				"value": "1000"
-			}
-		]
-	}
+    "config": "6939",
+    "variableValuesData": {
+        "values": [
+            {
+                "name": "multiplier",
+                "value": "1000"
+            }
+        ]
+    }
 }
 {% endhighlight %}
 
