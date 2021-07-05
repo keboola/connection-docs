@@ -25,7 +25,7 @@ The transformation migration process is as follows:
 - Check and modify the orchestration [tasks](orchestrator/tasks/) that used the migrated transformations.
 
 {: .image-popup}
-![Screenshot - Modify orchastration](/transformations/migration/modify-orchastration.png)
+![Screenshot - Modify orchastration](/transformations/migration/modify-orchestration.png)
 
 - Once all orchestrations are modified, you can remove the old transformation bucket.
 
