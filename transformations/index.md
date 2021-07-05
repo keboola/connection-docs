@@ -276,7 +276,7 @@ In the transformation overview, if you are seeing workspaces and shared code, yo
 In the transformation detail, if you're seeing variables and shared code, you're using *new transformations*:
 
 {: .image-popup}
-![New Transformations Detail](/transformations/new-transformations-1.png)
+![New Transformations Detail](/transformations/new-transformations-2.png)
 
 In the transformation detail, if you're seeing buckets and sandboxes, you're using *legacy transformations*:
 
