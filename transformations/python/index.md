@@ -19,7 +19,7 @@ The current Python version is **3.8.5**. The Python version is updated regularly
 The update is always announced on the [status page](http://status.keboola.com/).
 
 When we update the Python version, we offer --- for a limited time --- the option to switch to the previous version. You can
-switch the version in the transformation detail by clicking on the `Python` label:
+switch the version in the transformation detail by clicking on the `Change Backend` label:
 
 {: .image-popup}
 ![Screenshot - Transformations Versions](/transformations/python/versions.png)

@@ -362,9 +362,6 @@ items:
 
       - url: /transformations/workspace/
         title: Workspace
-        items:
-          - url: /transformations/sandbox/
-            title: Sandbox
 
       - url: /transformations/variables/
         title: Variables & Shared Code
@@ -389,6 +386,9 @@ items:
 
       - url: /transformations/code-patterns/
         title: Code Patterns
+
+      - url: /transformations/sandbox/
+        title: Legacy Sandbox
 
       - url: /transformations/julia/
         title: Legacy Julia Transformations

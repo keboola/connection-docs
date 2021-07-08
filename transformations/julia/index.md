@@ -20,7 +20,7 @@ The current Julia version is **1.5.0**. We release updates regularly, few weeks 
 on our [status page](http://status.keboola.com/).
 
 When we update a Julia version, we offer --- for a limited time --- the option to switch to the previous version. You can
-switch the version in the transformation detail by clicking on the `Julia` label:
+switch the version in the transformation detail by clicking on the `Backend Version` label:
 
 {: .image-popup}
 ![Screenshot - Transformations Versions](/transformations/julia/versions.png)

@@ -21,7 +21,7 @@ The current R version is R **3.6.3**. The R version is updated regularly, few we
 The update is always announced on the [status page](http://status.keboola.com/).
 
 When we update the R version, we offer --- for a limited time --- the option to switch to the previous version. You can
-switch the version in the transformation detail by clicking on the `R` label:
+switch the version in the transformation detail by clicking on the `Change Backend` label:
 
 {: .image-popup}
 ![Screenshot - Transformations Versions](/transformations/r/versions.png)
@@ -188,6 +188,7 @@ TRUE
 
 produces the following events in the transformation job:
 
+{: .image-popup}
 ![Screenshot - Script Events](/transformations/r/events-output.png)
 
 The `app$logInfo` and `app$logError` functions are internally available; they can be useful if you need to know the precise

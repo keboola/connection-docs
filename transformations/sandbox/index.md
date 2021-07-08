@@ -86,7 +86,7 @@ click the **New Sandbox** button:
 {: .image-popup}
 ![Screenshot - Transformation Sandbox](/transformations/sandbox/howto-transformation-sandbox-2.png)
 
-Clicking the **Create** button will load the data into the sandbox:
+Clicking the **Load Data** button will load the data into the sandbox:
 
 {: .image-popup}
 ![Screenshot - Transformation Sandbox](/transformations/sandbox/transformation-sandbox.png)
