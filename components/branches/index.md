@@ -6,6 +6,9 @@ permalink: /components/branches/
 * TOC
 {:toc}
 
+*If you already know how development branches work in general and want to create and start using your first branch, 
+go to our [Getting Started tutorial](/tutorial/branches/).*
+
 Development Branches allow you to modify [component configurations](/components/) without interfering with running 
 configurations or entire [orchestrated pipelines](/orchestrator/). They are ideal to use when making bigger changes 
 to a project or when you need to be extra careful about performing your changes safely. 
@@ -36,6 +39,28 @@ branch output data. When you run an extractor on which the transformation depend
 output data. When you run the transformation again, it will use the output of the branch extractor and write branch output 
 data.
 
+## Creating a Branch
+If you have [table](/tutorial/branches/prepare-tables/) or [file](/tutorial/branches/prepare-files/) manipulating
+configurations ready in production and want to create a branch to test some changes, click on your project’s name 
+at the top of the screen. Then click on the green icon **New** displayed next to your project’s name.
+
+{: .image-popup}
+![Screenshot - Create Development Branch](/tutorial/branches/figures/08-create-dev-branch.png)
+
+Name your new development branch and click **Create Development Branch** to open it.
+
+{: .image-popup}
+![Screenshot - Name Development Branch](/tutorial/branches/figures/09-name-dev-branch.png)
+
+The new branch will appear right below the name of your production project.
+
+{: .image-popup}
+![Screenshot - Created Development Branch](/tutorial/branches/figures/10-dev-branch-created.png).
+
+You can then start manipulating your configurations, run them, and analyze the results. When finished, [close the 
+branch](/components/branches/#closing-a-branch). If you want to learn more about working in a branch, follow our 
+[tutorial](/tutorial/branches/).
+
 ## Closing a Branch
 You can end your branch's lifecycle in two ways:
 
@@ -49,5 +74,3 @@ of the project.
 This feature is currently in public beta. It may not always work as expected. Please bear with us and provide feedback 
 at [https://ideas.keboola.com](https://ideas.keboola.com).
 
-## Tutorial
-To see how you can take advantage of branches, please follow the [tutorial](/tutorial/branches/).
