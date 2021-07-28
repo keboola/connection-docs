@@ -35,6 +35,13 @@ All transformations that meet the following conditions will be migrated. They mu
 - One [phase](/transformations/#phases) and multiple [transformation backends](/transformations/#backends).
 - Multiple [phases](/transformations/#phases) and one [transformation backend](/transformations/#backends).
 
+### Migration of transformation with multiple phases
+In order to successfully migrate transformation bucket with same backend but multiple phases you need to put all transformation into 1 phase (e.g. as shown on the picture we need to change phase 3 to phase 1).
+If you want to keep it together otherwise it will be split into multiple individual transformations.
+
+{: .image-popup}
+![Screenshot - Migration overview](/transformations/migration/migration-multiple-phases.png)
+
 ## What Will Not Be Migrated
 The following transformations will be skipped over in the migration process. They will not be migrated:
 - Disabled transformations in the bucket 
