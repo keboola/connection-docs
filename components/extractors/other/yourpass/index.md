@@ -19,10 +19,10 @@ to Keboola Connection.
 ### Authorization configuration
 
 Fill in the required authorization parameters:
-- Username (username) - [REQ] your YourPass username/email
-- Password (#password) - [REQ] your YourPass password
-- Client Id (client_id) - [REQ] your YourPass client Id
-- Client secret (#client_secret) - [OPT] your YourPass client secret, If not specified, can be left empty
+- `Username`: string (required); your YourPass username/email
+- `Password`: string (required); your YourPass password
+- `Client Id`: string (required); your YourPass client Id
+- `Client secret`: string (optional); your YourPass client secret, If not specified, can be left empty
 
 Then you can toggle between sandbox mode and production mode using the checkbox. When the checkbox is checked, the sandbox mode is set.
 
