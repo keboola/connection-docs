@@ -120,8 +120,8 @@ items:
               - url: /components/extractors/marketing-sales/gooddata-reports/
                 title: GoodData Reports
 
-              - url: /components/extractors/marketing-sales/google-adwords-reports/
-                title: Google AdWords Reports
+              - url: /components/extractors/marketing-sales/google-ads/
+                title: Google Ads
 
               - url: /components/extractors/marketing-sales/google-analytics/
                 title: Google Analytics

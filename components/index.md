@@ -58,7 +58,7 @@ the names should meaningfully distinguish one configuration from another.
 The next page shows a form for configuring the component, this varies heavily between different components.
 Component configuration can range from trivial (as in the case of the 
 [Currency extractor](/components/extractors/other/currency-rates/)) to very complex
-ones (e.g., [Adwords extractor](/components/extractors/marketing-sales/google-adwords-reports/)). The configuration
+ones (e.g., [Adwords extractor](/components/extractors/marketing-sales/google-ads/)). The configuration
 complexity badge shown in the component list gives you a rough idea of what to expect.
 
 {: .image-popup}
