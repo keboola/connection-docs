@@ -1,25 +1,26 @@
 ---
-title: Google AdWords Reports
-permalink: /components/extractors/marketing-sales/google-adwords-reports/
+title: Google Ads
+permalink: /components/extractors/marketing-sales/google-ads/
 redirect_from:
     - /extractors/marketing-sales/google-adwords-reports/
+    - /components/extractors/marketing-sales/google-adwords-reports/
 
 ---
 
 * TOC
 {:toc}
 
-This extractor allows you to import data from Google AdWords reports.
+This extractor allows you to import data from Google Ads.
 If you do not have a Google Ads manager account, follow this [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google AdWords Reports** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Ads** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 To run the extractor, specify your [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en).
 
 {: .image-popup}
-![Screenshot - Customer configuration](/components/extractors/marketing-sales/google-adwords-reports/google-adwords-reports-1.png)
+![Screenshot - Customer configuration](/components/extractors/marketing-sales/google-ads/google-ads-1.png)
 
 To download a report, specify an [AWQL query](https://developers.google.com/adwords/api/docs/guides/awql),
 through which you can customize the output of a [predefined report type](https://developers.google.com/adwords/api/docs/appendix/reports). 
@@ -44,13 +45,13 @@ Use *Display Name* of the columns as defined in the [reports types documentation
 (for example, for CampaignId use Campaign_ID and for Date use Day).
 
 {: .image-popup}
-![Screenshot - Report column names](/components/extractors/marketing-sales/google-adwords-reports/report_types.png)
+![Screenshot - Report column names](/components/extractors/marketing-sales/google-ads/report_types.png)
 
 ## Example
 To download a keyword performance report, use the following query `SELECT Id, Criteria, AdGroupName FROM KEYWORDS_PERFORMANCE_REPORT` configuration:
 
 {: .image-popup}
-![Screenshot - Query configuration](/components/extractors/marketing-sales/google-adwords-reports/google-adwords-reports-2.png)
+![Screenshot - Query configuration](/components/extractors/marketing-sales/google-ads/google-ads-2.png)
 
 This downloads the report into a `keywords` table. The `Id` column is listed as `Keyword_ID` in the primary columns 
 because that is [its display name](https://developers.google.com/adwords/api/docs/appendix/reports/keywords-performance-report#id).

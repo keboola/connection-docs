@@ -13,7 +13,7 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Customer IO](/components/extractors/marketing-sales/customerio/)
 - [Facebook Ads](/components/extractors/marketing-sales/facebook-ads/)
 - [GoodData Reports](/components/extractors/marketing-sales/gooddata-reports/)
-- [Google-adwords-reports](/components/extractors/marketing-sales/google-adwords-reports/) 
+- [Google-ads](/components/extractors/marketing-sales/google-ads/) 
 - [Google Analytics](/components/extractors/marketing-sales/google-analytics/) 
 - [Mailchimp](/components/extractors/marketing-sales/mailchimp/)
 - [Pipedrive](/components/extractors/marketing-sales/pipedrive/)
