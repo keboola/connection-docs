@@ -195,7 +195,7 @@ projects but are typically used for ad-hoc projects, hackathons, and PoCs.
 
 ## User Sessions
 Each time you sign in to the Keboola Connection user interface, a *user session* is created.
-The session is closed after an explicit logout or after **48 hours** of inactivity.
+The session is closed after an explicit logout, after **48 hours** of inactivity or when the browser is closed.
 
 You can sign in to your account multiple times from different devices (or browser windows).
 All devices that you have used to log into your account are listed on the **User Sessions** page. 
