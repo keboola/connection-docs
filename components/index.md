@@ -9,17 +9,19 @@ redirect_from:
 {:toc}
 
 In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
-Components are divided into four main categories:
+Components are divided into three main categories:
 
-- [**Extractors**](/components/extractors/) -- bring data into a Keboola Connection project.
-- [**Writers**](/components/writers/) -- send processed data into a target system.
-- [**Applications**](/components/applications/) -- process complex data.
-- [**Scaffolds**](/components/scaffolds/) -- are pre-defined sets of configurations.
+- **Directory** -- the place where you can find all available components:
+	- [Data sources (extractors)](/components/extractors/) -- bring data into a Keboola Connection project.
+	- [Data destinations (writers)](/components/writers/) -- send processed data into a target system.
+	- [Applications](/components/applications/) -- process complex data.
+- [**Data Templates**](/components/data-templates/) -- are pre-defined sets of component configurations, from which you can select the ones that suit you best.
+- **My Configurations** –- all of your configured data sources (extractors), data destinations (writers), and applications.
 
 All components, regardless of their category, behave the same way. To use a component, you have to 
 create a **configuration** first. A configuration is used to set the necessary parameters for each 
 component (e.g., credentials and other specification of what to do). Then it can be run
---- a **Job** is created and does the actual work.
+--- a **job** is created and does the actual work.
 
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the
