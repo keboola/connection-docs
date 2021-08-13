@@ -1,6 +1,6 @@
 ---
 title: Shoptet data template
-permalink: /components/scaffolds/e-commerce-shoptet
+permalink: /components/scaffolds/e-commerce-shoptet/
 ---
 
 * TOC
