@@ -19,7 +19,7 @@ Stáhnete si data ze svého Shoptetu a z účtů Sklik, Google Ads a Facebook Ad
 
 1. Založte si zdarma účet v Power BI. [https://app.powerbi.com/signupredirect?pbi_source=web](https://app.powerbi.com/signupredirect?pbi_source=web)
 
-1. Stáhněte si Power BI template pro svoji platformu (Windows/Mac). ## Chybí odkazi##
+1. Stáhněte si Power BI template pro svoji platformu (Windows/Mac). ## Chybí odkazy##
 
 ### Získání dat ze Shoptetu
 
