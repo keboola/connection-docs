@@ -19,7 +19,7 @@ Stáhnete si data ze svého Shoptetu a z účtů Sklik, Google Ads a Facebook Ad
 
 1. Založte si zdarma účet v Power BI. [https://app.powerbi.com/signupredirect?pbi_source=web](https://app.powerbi.com/signupredirect?pbi_source=web)
 
-1. Stáhněte si Power BI template pro svoji platformu (Windows/Mac). ## Chybí odkazy##
+1. Stáhněte si Power BI template pro svoji platformu ([Windows - .pbit](missingurl) / [Mac - .pbix]([pbix](https://www.google.com/url?q=https://drive.google.com/file/d/1NJaGk1-RWnATQPV2kPYzMugJTcxVjYrE/view?usp%3Dsharing&sa=D&source=editors&ust=1628788625872000&usg=AOvVaw1ukH98f5E71y26S5lHyLGq))). ## Chybí odkazy##
 
 ### Získání dat ze Shoptetu
 
@@ -239,7 +239,9 @@ Z Keboola Connection zkopírujte následující údaje do Power BI
   
 #### Power BI pro uživatele Mac
 
-Stáhněte si mac powerbi pbix. [https://www.google.com/url?q=https://drive.google.com/file/d/1NJaGk1-RWnATQPV2kPYzMugJTcxVjYrE/view?usp%3Dsharing&sa=D&source=editors&ust=1628788625872000&usg=AOvVaw1ukH98f5E71y26S5lHyLGq](https://www.google.com/url?q=https://drive.google.com/file/d/1NJaGk1-RWnATQPV2kPYzMugJTcxVjYrE/view?usp%3Dsharing&sa=D&source=editors&ust=1628788625872000&usg=AOvVaw1ukH98f5E71y26S5lHyLGq)
+Stáhněte si mac powerbi [pbix](https://www.google.com/url?q=https://drive.google.com/file/d/1NJaGk1-RWnATQPV2kPYzMugJTcxVjYrE/view?usp%3Dsharing&sa=D&source=editors&ust=1628788625872000&usg=AOvVaw1ukH98f5E71y26S5lHyLGq).
+
+Pokud nemáte Microsoft Office, stáhněte si i [fonty](https://ben.lobaugh.net/blog/204750/how-to-fix-missing-calibri-and-cambria-fonts-on-mac) od [Microsoftu](https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-browsers). 
 
 Přihlaste se do webového rozhraní Power BI. [https://app.powerbi.com](https://app.powerbi.com)
 
