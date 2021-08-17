@@ -34,7 +34,7 @@ V Exportu skladu najdete URL, které od vás bude chtít Keboola Connection Shop
 
 #### Export zákazníků
 
-V Exportu zákazníků vyberte typ exportu CSV a odšrtněte omezení IP adres. URL bude vypadat přibližně následovně: `https://www.obchod.cz/export/customers.csv?hash=ec68bf384acee0ec68bf384acee0ec68bf384acee0ec68bf384acee0f384acee0`
+V Exportu zákazníků vyberte typ exportu CSV a nastavte IP adresu Keboola Connection - `40.127.144.42` ([více o IP adresách Keboola Connection](/components/ip-addresses/)). URL bude vypadat přibližně následovně: `https://www.obchod.cz/export/customers.csv?ip=40.127.144.42&hash=ec68bf384acee0ec68bf384acee0ec68bf384acee0ec68bf384acee0f384acee0`
 
 {: .image-popup}
 ![Screenshot - Ukázka získání odkazu](/components/scaffolds/e-commerce-shoptet/shoptet-2.png)
@@ -76,7 +76,7 @@ Vytvořený vlastní export si nahoře na stránce pojmenujte (např. Keboola �
 {: .image-popup}
 ![Screenshot - vytvoření vlastního exportu](/components/scaffolds/e-commerce-shoptet/shoptet-9.png)
 
-Po návratu do Exportu objednávek svůj export (Keboola – Extended) vyberte a zkopírujte jeho URL. Předtím ověřte, že přístup není dovolen jen z konkrétní IP adresy. Adresa bude vypadat přibližně takto: `https://www.obchod.cz/export/orders.csv?patternId=90&hash=ec68bf384acee0ec68bf384acee0ec68bf384acee0ec68bf384acee0f384ac`
+Po návratu do Exportu objednávek na svůj export (Keboola – Extended) nastavte IP adresu pro Keboola Connection - `40.127.144.42` ([více o IP adresách Keboola Connection](/components/ip-addresses/)).  Poté vyberte a zkopírujte jeho URL. Adresa bude vypadat přibližně takto: `https://www.obchod.cz/export/orders.csv?patternId=90&ip=40.127.144.42&hash=ec68bf384acee0ec68bf384acee0ec68bf384acee0ec68bf384acee0f384ac`
 
 {: .image-popup}
 ![Screenshot - získání odkazu exportu](/components/scaffolds/e-commerce-shoptet/shoptet-10.png)
@@ -86,7 +86,7 @@ Po návratu do Exportu objednávek svůj export (Keboola – Extended) vyberte a
 
 Export produktů je také nutné přizpůsobit. Vytvořte vlastní typ exportu a v něm vyberte všechny položky. Nejjednodušší je u každé sekce kliknout na **Označit vše**. Výsledné nastavení uložte např. pod názvem Keboola produkty.
 
-Po návratu do exportu produktů vyberte svůj export (zase bude poslední), formát CSV a dole zkopírujte URL adresu exportu. Bude vypadat přibližně takto: `https://www.obchod.cz/export/products.csv?patternId=111&hash=ec68bf384acee0ec68bf384acee0ec68bf384acee0ec68bf384acee0f384ac`
+Po návratu do exportu produktů vyberte svůj export (zase bude poslední), formát CSV, nastavte IP adresu pro Keboola Connection - `40.127.144.42` ([více o IP adresách Keboola Connection](/components/ip-addresses/)) a dole zkopírujte URL adresu exportu. Bude vypadat přibližně takto: `https://www.obchod.cz/export/products.csv?patternId=111&ip=40.127.144.42&hash=ec68bf384acee0ec68bf384acee0ec68bf384acee0ec68bf384acee0f384ac`
 
 {: .image-popup}
 ![Screenshot - získání odkazu exportu](/components/scaffolds/e-commerce-shoptet/shoptet-11.png)
