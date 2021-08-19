@@ -3,12 +3,11 @@ title: Shoptet data template
 permalink: /components/scaffolds/e-commerce-shoptet/
 ---
 
+{: .alert.alert-warning}
+Note: This page is temporarly available only in  Czech language as far as Shoptet data template is mainly focused on CZ and SK markets. English version will follow soon. 
+
 * TOC
 {:toc}
-
-```note
-Note: This page is temporarly available only in  Czech language as far as Shoptet data template is mainly focused on CZ and SK markets. English version will follow soon. 
-```
 
 Stáhnete si data ze svého Shoptetu a z účtů Sklik, Google Ads a Facebook Ads. V Keboola Connection na nich provedete transformace a následně si je budete moci prohlédnout v aplikaci Power BI.
 
