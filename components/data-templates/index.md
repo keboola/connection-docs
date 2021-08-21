@@ -2,7 +2,7 @@
 title: Data Templates
 permalink: /components/data-templates/
 redirect_from:
-    - /component/scaffolds/
+    - /components/scaffolds/
 
 ---
 
