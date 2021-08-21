@@ -18,7 +18,7 @@ the configuration non-trivial, and you should have the data model designed befor
 the writer.
 
 Check out the section on [writing into GoodData](/tutorial/write/gooddata/) available for you
-in our Getting Started tutorial. You can also watch our [GoodData Writer Demo](https://www.youtube.com/watch?v=h46t0_nOtyI) video.
+in our Getting Started tutorial.
 
 ## Configuration
 
