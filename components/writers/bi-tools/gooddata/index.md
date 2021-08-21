@@ -8,9 +8,9 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends tables into a [GoodData](https://www.gooddata.com/) project and can be used with
-either your own GoodData account or with an account provided by Keboola. Before configuring the GoodData writer, it
-is important to understand that GoodData analytics relies on a
+This writer sends tables into a [GoodData](https://www.gooddata.com/) project.
+
+Before configuring the GoodData writer, it is important to understand that GoodData relies on a
 [Logical Data Model (LDM)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata) of your dataset.
 The GoodData writer creates the LDM for you, so that you don't have to use CloudConnect or other tools
 provided by GoodData. However, you need to provide all the required information in the configuration. This makes
@@ -18,10 +18,11 @@ the configuration non-trivial, and you should have the data model designed befor
 the writer.
 
 Check out the section on [writing into GoodData](/tutorial/write/gooddata/) available for you
-in our Getting Started tutorial. You can also watch our [GoodData Writer Demo](https://www.youtube.com/watch?v=h46t0_nOtyI) video.
+in our Getting Started tutorial.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** extractor.
+
+[Create a new configuration](/components/#creating-component-configuration) of the **GoodData** writer.
 
 The first step is to configure the GoodData project that will be used for writing:
 
@@ -29,33 +30,23 @@ The first step is to configure the GoodData project that will be used for writin
 ![Screenshot - Main Page](/components/writers/bi-tools/gooddata/gooddata-1.png)
 
 ## Project Setup
+
 There are several options in the configuration dialog:
 
 {: .image-popup}
 ![Screenshot - Project Setup](/components/writers/bi-tools/gooddata/gooddata-2.png)
 
-Here you need to enter a project name and choose the type of the project. You can 
-
-- create a **demo** project. This is provided for free by Keboola and expires in 1 month. Extension is not
-possible, but the GoodData project may be transferred to production through a support request. Each Keboola Connection
-project can have up to 2 demo GoodData projects.
-- create a **production** project. This is full GoodData production project, which is proxied by Keboola.
-That means we take care of the contract and billing with GoodData. Contact Keboola support or your maintainer
-to enable this type of production GoodData project in your Keboola Connection project.
-- create a **custom** project. Use this when you have your own contract with GoodData. In that case, you should
-have received your [Project Authorization Token](https://help.gooddata.com/doc/en/building-on-gooddata-platform/gooddata-integration-into-your-application/set-up-user-authentication-and-sso/gooddata-token-types#GoodDataTokenTypes-ProjectAuthorizationtokens)
-which allows you to create GoodData projects. The writer will then create the project for you.
-- use an **existing GoodData project**. Either the project should be empty, or you should take extra care when setting
+When using an **existing GoodData project**, the project should be empty, or you should take extra care when setting
 up the writer. Either use the **Load data only** update mode, or be sure to understand what the consequences
 of changing your LDM are.
 
-After you set up the project, you can see the **Go To Project** button. This will allow you to login to the GoodData project
-from within your Keboola Connection project using [Single Sign-On (SSO)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/gooddata-integration-into-your-application/set-up-user-authentication-and-sso/single-sign-on-overview). (SSO access works only for projects provisioned by Keboola. If you used an existing project, you will have to login on your own.)
+After you set up the project, you can see the **Go To Project** button.
 
 {: .image-popup}
 ![Screenshot - Access Project](/components/writers/bi-tools/gooddata/gooddata-3.png)
 
 ## Date Dimension
+
 [Date dimension](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times) is an important concept of the GoodData LDM.
 It is the question of the LDM design to determine for which columns a date dimension should be created. One rule of thumb
 is that different date columns in a single table should have different date dimensions. On the other hand, you might want
@@ -73,6 +64,7 @@ When creating a date dimension, you have to enter the dimension name and a dimen
 - Custom date dimension -- this can be either a date dimension created for you directly by GoodData, or a [Self service calendar](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times/custom-calendars-self-service). In the former case, you'll have the dimension URN in the form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
 
 ## Configure Tables
+
 Click the **New Table** button to add a new table to the writer:
 
 {: .image-popup}
@@ -145,6 +137,7 @@ Another option is to switch between **Separate load** and
 of your project, either of them may be faster.
 
 ### GoodData Project
+
 Since the project is partially managed by the writer, there are some things you should be aware of.
 
 The writer manages the LDM in the project. If you make changes to the LDM using other tools, they will be overwritten by the writer 
@@ -152,13 +145,3 @@ The writer manages the LDM in the project. If you make changes to the LDM using 
 
 {: .image-popup}
 ![Screenshot - GoodData Logical Data Model](/components/writers/bi-tools/gooddata/gooddata-model.png)
-
-The writer creates service users which are used to update the LDM and manage the SSO (`Keboola GoodData` and `provisioning (KBC)`). 
-You should not disable those users or change their role. Any KBC project user can enter the GoodData project using 
-the [SSO](https://help.gooddata.com/doc/en/building-on-gooddata-platform/gooddata-integration-into-your-application/set-up-user-authentication-and-sso/single-sign-on-overview). Once they activate the SSO, a new user will be created 
-for them in the GoodData project (these users have `(KBC)` suffix and `@kbc.keboola.com` login).
-
-{: .image-popup}
-![Screenshot - GoodData project users](/components/writers/bi-tools/gooddata/gooddata-users.png)
-
-When you delete a writer that created a GoodData project, that project will also be deleted after a [grace period](/management/project/delete/#gooddata-projects). When you delete a writer that was connected to an existing project, it won't be deleted.
