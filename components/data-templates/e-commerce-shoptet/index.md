@@ -1,6 +1,8 @@
 ---
 title: Shoptet data template
-permalink: /components/scaffolds/e-commerce-shoptet/
+permalink: /components/data-templates/e-commerce-shoptet/
+redirect_from:
+    - /components/scaffolds/e-commerce-shoptet/
 ---
 
 {: .alert.alert-warning}
