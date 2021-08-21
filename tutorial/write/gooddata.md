@@ -6,11 +6,10 @@ permalink: /tutorial/write/gooddata/
 * TOC
 {:toc}
 
-After [manipulating data in SQL](/tutorial/manipulate/)
-and [writing data to Tableau](/tutorial/write/),
-let's now write data to [GoodData Analytics](http://www.gooddata.com/).
-As Keboola Connection creates GoodData testing projects for you automatically,
-there is **no need to have a GoodData account** before you start.
+After [manipulating data in SQL](/tutorial/manipulate/) and [writing data to Tableau](/tutorial/write/),
+let's now write data to [GoodData](http://www.gooddata.com/).
+
+**You need to have a GoodData account** before you start.
 
 Writing data to GoodData is very similar to writing data to Tableau, although
 there are some changes due to the fundamental differences in both platforms.
@@ -213,13 +212,11 @@ The tables will be written into GoodData by a background job. When a job is runn
 under *Last runs*, along with RunId and other info on the job. Green is for success, red for failure.
 Click on the indicator, or the info next to it for more details.
 
-In the mean time, click on **GoodData Project** to reveal other options and **Go To Project**. This will give the current 
-Keboola Connection user, you, access to the GoodData project referenced in the writer configuration.
+In the meantime, click on **GoodData Project** to reveal other options and **Go To Project**.
 
 {: .image-popup}
 ![Screenshot - GoodData Writer Access Project](/tutorial/write/gooddata-writer-intro-7.png)
 
-Clicking the **GoodData Project** link will take you directly to GoodData BI and automatically log you in.
 Then create your report:
 
 {: .image-popup}
