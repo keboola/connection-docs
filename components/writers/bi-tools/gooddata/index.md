@@ -10,7 +10,7 @@ redirect_from:
 
 This writer sends tables into a [GoodData](https://www.gooddata.com/) project.
 
-Before configuring the GoodData writer, it is important to understand that GoodData analytics relies on a
+Before configuring the GoodData writer, it is important to understand that GoodData relies on a
 [Logical Data Model (LDM)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata) of your dataset.
 The GoodData writer creates the LDM for you, so that you don't have to use CloudConnect or other tools
 provided by GoodData. However, you need to provide all the required information in the configuration. This makes
