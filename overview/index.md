@@ -34,8 +34,8 @@ your data pipeline processes can be compiled and executed in the cloud within yo
 However, you can also do an on-premise offload utilising your existing hardware inside your private cloud infrastructure. 
 
 
-### Source Systems
-Source systems contain data you wish to [bring into Keboola Connection](/tutorial/load/).
+### Data Sources
+Data sources are systems containing data you wish to [bring into Keboola Connection](/tutorial/load/).
 They can be pretty much anything from Google Analytics, Facebook, SalesForce to on-premise databases,
 legacy systems or even appliances and IoT devices. Data sources are not part of Keboola Connection.
 
