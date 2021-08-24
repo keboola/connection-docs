@@ -1,16 +1,17 @@
-jekyll:
-  image: quay.io/keboola/docs-jekyll
-  tty: true
-  stdin_open: true
-  volumes:
-    - ./:/code:cached
-  working_dir: /code
-  ports:
-    - "4000:4000"
-  command: jekyll serve --watch -H 0.0.0.0 --force_polling
+services:
+  jekyll:
+    image: quay.io/keboola/docs-jekyll
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/code:cached
+    working_dir: /code
+    ports:
+      - "4000:4000"
+    command: jekyll serve --watch -H 0.0.0.0 --force_polling
 
-aws:
-  image: quay.io/keboola/aws-cli
-  volumes:
-    - ./:/code
-  working_dir: /code
+  aws:
+    image: quay.io/keboola/aws-cli
+    volumes:
+      - ./:/code
+    working_dir: /code

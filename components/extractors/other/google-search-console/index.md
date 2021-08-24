@@ -30,14 +30,25 @@ Add a row to the configuration to extract a specific report.
 To extract a search analytics report select the "Search analytics" endpoint.
 
 {: .image-popup}
-![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/row_config_search_analytics.png)
+![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/search_analytics_main.png)
 
 - Fill in the domain to extract data from, it should not contain "https://www." before the name of the domain.
 - Fill in the dimensions you wish extract data from. Possible dimensions are; country, device, page, query,searchAppearance (searchAppearance cannot be combined with other fields)
 - Select a date range to extract data from, either set dynamic date ranges; last week or last month, or a set custom date range where you specify a date from and a date to. Custom dates can be filled in with :
     - Relative dates like: '1 min ago', '2 weeks ago', '3 months, 1 week and 1 day ago', 'in 2 days', 'tomorrow'.
     - Exact dates like: 'August 14, 2015 EST', 'July 4, 2013 PST', '21 July 2013 10:15 pm +0500'
-- Fill in the output table name. The name should only contain alphanumeric characters and underscores    
+- Fill in the output table name. The name should only contain alphanumeric characters and underscores
+- Next you can add filters to the data using the Filters section
+  - Filters are managed with filter groups, filters within a group work with AND, therefore all statements must be true. While filter groups work with OR, therefore at least one filter group must be true to return data
+- To create a new filter group click the **Add Filter Group** button 
+  
+{: .image-popup}
+![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/filter1.png)
+
+- To create a new filter within a filter group click the **Add Filter** button and specify the dimension, operator and expression
+
+{: .image-popup}
+![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/filter2.png)
 
 Click save and run the configuration.
 
