@@ -297,8 +297,8 @@ items:
       - url: /components/applications/
         title: Applications
 
-      - url: /components/scaffolds/
-        title: Scaffolds
+      - url: /components/data-templates/
+        title: Data Templates
 
       - url: /components/branches/
         title: Development Branches
