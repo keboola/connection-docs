@@ -10,6 +10,7 @@ Extractors import data from external sources and integrate it to the Keboola Con
 Keboola Connection provides the following marketing and sales extractors:
 
 - [Babelforce](/components/extractors/marketing-sales/babelforce/)
+- [Criteo](/components/extractors/marketing-sales/criteo/)
 - [Customer IO](/components/extractors/marketing-sales/customerio/)
 - [Facebook Ads](/components/extractors/marketing-sales/facebook-ads/)
 - [GoodData Reports](/components/extractors/marketing-sales/gooddata-reports/)
