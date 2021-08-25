@@ -25,17 +25,34 @@ After this you can configure individual queries or objects in the [row based con
 {: .image-popup}
 ![Screenshot - Row configuration](/components/extractors/marketing-sales/salesforce/row_config.png)
 
-In the row configuration select either Query or Object and use the corresponding text input to input a single query or 
+In the row configuration select either `Query` or `Object` and use the corresponding text input to input a single query or 
 object. Then select if you wish to fetch deleted records by checking the checkbox. Finally, set the loading type to either Full or Incremental based
-on your use case. In the incremental update, you can also set the incremental fetching option. Incremental fetching allows you
-to select a field in Salesforce for example LastModifiedDate and fetch records that have been modified since the
-last run of the component. LastModifiedDate is the default field, but you can also specify any field in salesforce containing a timestamp.
+on your use case. In the incremental update, you can also set the `incremental fetching` option. Incremental fetching allows you
+to select a field in Salesforce for example `LastModifiedDate` and fetch records that have been modified since the
+last run of the component. `LastModifiedDate` is the default field, but you can also specify any field in salesforce containing a timestamp.
 
 ### Load Type
 Select one of the following two load types: 
 
 - `Incremental Update` -- updates the result tables based on the primary key set in the configuration
 - `Full Load` -- overwrites the destination table each time
+
+#### Incremental Fetching
+
+Option available in `Incremental Update` mode allows you to fetch records that have been modified since the
+last run of the component. You need to specify a date field in Salesforce that will be used for this (by default `LastModifiedDate`).
+
+The `LastModifiedDate` matches most of the Salesforce objects but there are some objects such as `*History` that do not contain this field 
+and only the `CreatedDate` field may be used. This also varies per custom Salesforce setup.
+
+{: .image-popup}
+![Screenshot - Incremental fetching](/components/extractors/marketing-sales/salesforce/incremental_fetching.png)
+
+#### Primary Key
+
+Primary key can be defined to enable deduplication and "upserts" while importing to storage. It defaults to `Id` which 
+will be valid in vast majority in cases, however, if your custom implementation does not define this column or you would 
+like to have your destination table without any, you can modify it.
 
 ## Limitations
 
