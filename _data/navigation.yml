@@ -387,6 +387,9 @@ items:
       - url: /transformations/synapse-plain/
         title: Synapse Transformations
 
+      - url: /transformations/exasol/
+        title: Exasol Transformations
+
       - url: /transformations/oracle/
         title: Oracle Transformations
 
