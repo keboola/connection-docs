@@ -7,7 +7,7 @@ redirect_from:
 
 It is possible to entirely delete your project. However, consider [exporting the project](/management/project/export/) first.
 
-To delete your project, go to **Settings** and select the **Project** tab. Then click the **Delete project**
+To delete your project, go to **Settings** and select the **Project** tab. Then click the **Delete Project**
 button. This marks your project for deletion, and, for some time, nothing else happens.
 
 {: .image-popup}
