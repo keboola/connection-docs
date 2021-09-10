@@ -678,7 +678,7 @@ The `BOOLEAN` base type represents a true/false values.
 <tr>
     <th rowspan='2'>Generic</th>
     <td>bool</td>
-    <td rowspan='16'>BOOLEAN</td>
+    <td rowspan='14'>BOOLEAN</td>
     <td rowspan='2' colspan='2'></td>    
 </tr>
 <tr>
@@ -767,7 +767,7 @@ The `DATE` base type represents a date value without a time portion.
 <tr>
     <th>Generic</th>
     <td>date</td>
-    <td rowspan='12'>DATE</td>
+    <td rowspan='11'>DATE</td>
     <td>DATE</td>
     <td colspan='2'></td>
 </tr>
