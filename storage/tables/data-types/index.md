@@ -180,7 +180,7 @@ other unknown types are converted to string as well.
 <tr>
     <th rowspan='6'>Synapse</th>
     <td>BINARY</td>
-    <td rowspan='6'>VARCHAR</td>
+    <td rowspan='6'>NVARCHAR</td>
     <th rowspan='6'>Synapse</th>
 </tr>
 <tr>
@@ -361,7 +361,7 @@ The `INTEGER` base type represents data types for whole numbers.
 <tr>
     <th rowspan='4'>Synapse</th>
     <td>BIGINT</td>
-    <td rowspan='4'>N/A</td>
+    <td rowspan='4'>INT</td>
     <th rowspan='4'>Synapse</th>
 </tr>
 <tr>
@@ -376,7 +376,7 @@ The `INTEGER` base type represents data types for whole numbers.
 <tr>
     <td colspan='2'></td>
     <td>INT</td>
-    <th>ThoughtSpot</th>
+    <th>Thoughtspot</th>
 </tr>
 <tr>
     <th>Source</th>
@@ -402,7 +402,7 @@ The `NUMERIC` base type represents [fixed-point](https://en.wikipedia.org/wiki/F
 <tr>
     <th rowspan='7'>Generic</th>
     <td>dec</td>
-    <td rowspan='23'>NUMERIC</td>
+    <td rowspan='25'>NUMERIC</td>
     <td rowspan='7' colspan='2'></td>    
 </tr>
 <tr>
@@ -490,6 +490,15 @@ The `NUMERIC` base type represents [fixed-point](https://en.wikipedia.org/wiki/F
     <td>NUMERIC</td>
 </tr>
 <tr>
+    <th rowspan='2'>Synapse</th>
+    <td>NUMERIC</td>
+    <td rowspan='2'>NUMERIC</td>
+    <th rowspan='2'>Synapse</th>
+</tr>
+<tr>
+    <td>DECIMAL</td>
+</tr>
+<tr>
     <td colspan='2'></td>
     <td>N/A</td>
     <th>Thoughtspot</th>
@@ -518,7 +527,7 @@ The `FLOAT` base type represents [floating-point](https://en.wikipedia.org/wiki/
 <tr>
     <th rowspan='10'>Generic</th>
     <td>binary_double</td>
-    <td rowspan='32'>FLOAT</td>
+    <td rowspan='34'>FLOAT</td>
     <td rowspan='10' colspan='2'></td>    
 </tr>
 <tr>
@@ -633,6 +642,15 @@ The `FLOAT` base type represents [floating-point](https://en.wikipedia.org/wiki/
     <td>REAL</td>
 </tr>
 <tr>
+    <th rowspan='2'>Synapse</th>
+    <td>FLOAT</td>
+    <td rowspan='2'>FLOAT</td>
+    <th rowspan='2'>Synapse</th>
+</tr>
+<tr>
+    <td>REAL</td>
+</tr>
+<tr>
     <td colspan='2'></td>
     <td>FLOAT</td>
     <th>Thoughtspot</th>
@@ -660,7 +678,7 @@ The `BOOLEAN` base type represents a true/false values.
 <tr>
     <th rowspan='2'>Generic</th>
     <td>bool</td>
-    <td rowspan='13'>BOOLEAN</td>
+    <td rowspan='16'>BOOLEAN</td>
     <td rowspan='2' colspan='2'></td>    
 </tr>
 <tr>
@@ -716,6 +734,12 @@ The `BOOLEAN` base type represents a true/false values.
     <th>Snowflake</th>
 </tr>
 <tr>
+    <th>Synapse</th>
+    <td>BIT</td>
+    <td>BIT</td>
+    <th>Synapse</th>
+</tr>
+<tr>
     <td colspan='2'></td>
     <td>BOOL</td>
     <th>Thoughtspot</th>
@@ -743,7 +767,7 @@ The `DATE` base type represents a date value without a time portion.
 <tr>
     <th>Generic</th>
     <td>date</td>
-    <td rowspan='10'>DATE</td>
+    <td rowspan='12'>DATE</td>
     <td>DATE</td>
     <td colspan='2'></td>
 </tr>
@@ -796,6 +820,12 @@ The `DATE` base type represents a date value without a time portion.
     <th>Snowflake</th>
 </tr>
 <tr>
+    <th>Synapse</th>
+    <td>DATE</td>
+    <td>DATE</td>
+    <th>Synapse</th>
+</tr>
+<tr>
     <td colspan='2'></td>
     <td>DATE</td>
     <th>Thoughtspot</th>
@@ -823,7 +853,7 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 <tr>
     <th rowspan='12'>Generic</th>
     <td>datetime</td>
-    <td rowspan='30'>TIMESTAMP</td>
+    <td rowspan='31'>TIMESTAMP</td>
     <td rowspan='12' colspan='2'></td>    
 </tr>
 <tr>
@@ -930,6 +960,12 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 </tr>
 <tr>
     <td>TIMESTAMP_TZ</td>
+</tr>
+<tr>
+    <th>Synapse</th>
+    <td>DATETIMEOFFSET</td>
+    <td>DATETIMEOFFSET</td>
+    <th>Synapse</th>
 </tr>
 <tr>
     <td colspan='2'></td>
