@@ -22,5 +22,5 @@ provides detailed data for locations specified by their names, address or coordi
 - [Stripe](/components/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.
 - [Telemetry Data](/components/extractors/other/telemetry-data/) --- retrieves data about your project or the whole organization; helps Keboola calculate your project consumption.
 - [What3words](/components/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
-- [YourPass](/components/extractors/other/yourpass/) --- imports data about passes from YourPass
+- [YourPass](/components/extractors/other/yourpass/) --- imports data about passes from YourPass.
 - And [more](https://components.keboola.com/components)
