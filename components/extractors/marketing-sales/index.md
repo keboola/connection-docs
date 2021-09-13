@@ -20,5 +20,6 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Mailchimp](/components/extractors/marketing-sales/mailchimp/)
 - [Pipedrive](/components/extractors/marketing-sales/pipedrive/)
 - [Salesforce](/components/extractors/marketing-sales/salesforce/). 
+- [Shoptet](/components/extractors/marketing-sales/shoptet/)
 - [Sklik](/components/extractors/marketing-sales/sklik/)
 - And [more](https://components.keboola.com/components)
