@@ -962,10 +962,22 @@ The `TIMESTAMP` base type represents a date value with a time portion.
     <td>TIMESTAMP_TZ</td>
 </tr>
 <tr>
-    <th>Synapse</th>
+    <th rowspan='5'>Synapse</th>
     <td>DATETIMEOFFSET</td>
-    <td>DATETIMEOFFSET</td>
-    <th>Synapse</th>
+    <td rowspan='5'>DATETIMEOFFSET</td>
+    <th rowspan='5'>Synapse</th>
+</tr>
+<tr>
+    <td>DATETIME</td>
+</tr>
+<tr>
+    <td>DATETIME2</td>
+</tr>
+<tr>
+    <td>SMALLDATETIME</td>
+</tr>
+<tr>
+    <td>TIME</td>
 </tr>
 <tr>
     <td colspan='2'></td>
