@@ -62,7 +62,8 @@ tables from Input Mapping, modifying them and producing the tables referenced in
 
 A backend is the engine running the transformation script. It is either a database server
 ([Amazon Redshift](https://aws.amazon.com/redshift/),
-[Snowflake](https://www.snowflake.com/), 
+[Snowflake](https://www.snowflake.com/),
+[Exasol](https://www.exasol.com/),
 [Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
 or a language interpreter 
 ([Julia](https://julialang.org/), 
@@ -128,7 +129,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <th colspan='2'>Feature</th><th>Legacy Transformations</th><th>New Transformations</th>
 </tr>
 <tr>
-    <th rowspan='8'>Backend</th>
+    <th rowspan='10'>Backend</th>
     <th><a href='/transformations/julia/'>Julia Transformations</a>)</th> 
     <td>✓</td>
     <td>Planned</td>
@@ -165,6 +166,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th><a href='/transformations/synapse-plain/'>Synapse Transformations</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/exasol/'>Exasol Transformations</a></th> 
     <td>Not available</td>
     <td>✓</td>
 </tr>
