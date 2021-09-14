@@ -6,14 +6,13 @@ permalink: /transformations/exasol/
 * TOC
 {:toc}
 
-[Exasol](https://www.exasol.com/) is the high-performance, in-memory MPP(Massively Parallel Processing) database specifically designed for analytics. From business-critical data applications to advanced analytics, Exasol helps you analyze large volumes of data.
-
-
+[Exasol](https://www.exasol.com/) is a high-performance, in-memory MPP (Massively Parallel Processing) database specifically 
+designed for analytics. From business-critical data applications to advanced analytics, Exasol helps you analyze large volumes of data.
 
 ## Example
 To create a simple Exasol transformation, follow these steps:
 
-- Create a table in Storage by uploading the [sample CSV file](/transformations/source.csv).
+- Create a table in Storage by uploading this [sample CSV file](/transformations/source.csv).
 - Create an input mapping from that table, setting its destination to `source` (as expected by the Snowflake script).
 - Create an output mapping, setting its destination to a new table in your Storage.
 - Copy & paste the below script into the transformation code.
