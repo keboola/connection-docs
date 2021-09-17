@@ -767,7 +767,7 @@ The `DATE` base type represents a date value without a time portion.
 <tr>
     <th>Generic</th>
     <td>date</td>
-    <td rowspan='11'>DATE</td>
+    <td rowspan='12'>DATE</td>
     <td>DATE</td>
     <td colspan='2'></td>
 </tr>
@@ -853,7 +853,7 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 <tr>
     <th rowspan='12'>Generic</th>
     <td>datetime</td>
-    <td rowspan='31'>TIMESTAMP</td>
+    <td rowspan='35'>TIMESTAMP</td>
     <td rowspan='12' colspan='2'></td>    
 </tr>
 <tr>
