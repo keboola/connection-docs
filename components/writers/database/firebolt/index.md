@@ -15,20 +15,13 @@ This writer sends data to a [Firebolt](https://www.firebolt.io/) database.
 
 The first step is to **set up credentials**:
 
-empty credentials to set up
 {: .image-popup}
 ![Screenshot - Credentials page](/components/writers/database/firebolt/firebolt-1.png)
 
-filling out credentials
+Fill in your Firebolt **Username**, **Password**, and **Database name**. To use the Writer you will need to fill in credentials for a S3 bucket, which will be used for staging. The writer will push data to the bucket and firebolt will download the data from that bucket.
+
 {: .image-popup}
 ![Screenshot - Main page](/components/writers/database/firebolt/firebolt-creds.png)
-
-
-
-
-
-
-
 
 
 ## Table Configuration
@@ -40,7 +33,7 @@ The next step is to configure the tables you want to write. Click **Add New Tabl
 The next step is to specify table configuration. Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Main page](/components/writers/database/firebolt/firebolt-whole-config.png)
+![Screenshot - Main page](/components/writers/database/firebolt/firebolt-cols.png)
 
 For each column you can specify its
 
@@ -81,7 +74,7 @@ You can set the type of load for the output to firebolt. You can use **Full Load
 
 **Full Load** replaces all the data in the table with data sent from the input table settings. If the table does not exist, it creates it.
 
-**Append** just appends data to an exisiting table. If the table does not exist, it creates it.
+**Append** mode appends data to an exisiting table. If the table does not exist, it creates it.
 
 {: .image-popup}
 ![Screenshot - setting load settings on the firebolt side](/components/writers/database/firebolt/firebolt-load-type.png)

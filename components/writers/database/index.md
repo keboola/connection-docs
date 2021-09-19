@@ -9,6 +9,7 @@ redirect_from:
 Writers export data from Keboola Connection to SQL databases:
 
 - [Google BigQuery](/components/writers/database/bigquery/) --- sends tables to a [Google BigQuery](https://cloud.google.com/bigquery/) dataset.
+- [Firebolt](/components/writers/database/firebolt/) --- sends tables to a [Firebolt](https://www.firebolt.io) database.
 - [MySQL](/components/writers/database/mysql/) --- sends tables to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.
 - [Oracle](/components/writers/database/oracle/) --- sends tables to an [Oracle](https://www.oracle.com/database/) database.
 - [PostgreSQL](/components/writers/database/postgresql/) --- sends tables to a [PostgreSQL](https://www.postgresql.org/) database.
