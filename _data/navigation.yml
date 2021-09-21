@@ -251,6 +251,9 @@ items:
             items:
               - url: /components/writers/database/bigquery/
                 title: BigQuery
+              
+              - url: /components/writers/database/firebolt/
+                title: Firebolt
 
               - url: /components/writers/database/mysql/
                 title: MySQL
