@@ -116,8 +116,7 @@ Or from an existing transformation code:
 {: .image-popup}
 ![Screenshot - Create Shared Code from Transformation](/transformations/variables/shared-code-2.png)
 
-You have to enter the name for the shared code and, optionally, also specify 
-[variables](/transformations/variables/#variables) for the shared code. When you share an 
+You have to enter the name for the shared code when creating a new one. When you share an 
 existing piece of transformation code, the code and code type are filled in automatically.
 
 {: .image-popup}
@@ -149,7 +148,9 @@ from the shared code by selecting **Use as Inline Code** from the dots menu:
 ![Screenshot - Shared Code Use](/transformations/variables/shared-code-use-4.png)
 
 ### Modifying Shared Code
-When a shared code is linked to transformations, you can review its usage in the dots menu:
+
+When a shared code is linked to transformations, you can review its usage in the
+Usage section on the shared code detail page:
 
 {: .image-popup}
 ![Screenshot - Shared Code List](/transformations/variables/shared-code-edit.png)
@@ -157,18 +158,13 @@ When a shared code is linked to transformations, you can review its usage in the
 You'll see a list of transformations to which the shared code is linked. The transformations
 in which the shared code was used inline are not listed, because there is no link.
 
-{: .image-popup}
-![Screenshot - Shared Code Usage](/transformations/variables/shared-code-usage.png)
-
-When you attempt to edit a shared code, you'll also see the list of the transformations in 
-which it is used. You can either change the code --- which has the potential to break
-the transformations in which it is used, or you can create a copy and use it in the
-transformations.
+When you attempt to edit a shared code, you'll see a warning that there's a potential
+to break the transformations in which it is used.
 
 {: .image-popup}
 ![Screenshot - Shared Code Edit](/transformations/variables/shared-code-edit-2.png)
 
-In addition, when you try to delete a shared code, you'll see a list of the transformations which use it.
+When you try to delete a shared code, you'll see a list of the transformations which use it.
 When you delete a shared code that is used, the transformations using it will stop working.
 
 {: .image-popup}
@@ -230,15 +226,13 @@ For example, we can extend the
 [above example](/transformations/variables/#example-using-shared-code)
 and parametrize the name of the table from which the `_timestamp` column is dropped.
 
-Modify the shared code to:
+Add the `source` variable and modify the shared code to:
 
 {% highlight sql %}
 {% raw %}
 ALTER TABLE "{{source}}" DROP COLUMN "_timestamp"; 
 {% endraw %}
 {% endhighlight %}
-
-And add the `source` variable:
 
 {: .image-popup}
 ![Screenshot - Shared Code with Variables](/transformations/variables/shared-code-variables-1.png)
