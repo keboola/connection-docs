@@ -165,6 +165,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>7200s (configurable per transformation)</td>
 </tr>
 <tr>
+    <th><a href='/transformations/snowflake-plain/#dynamic-backends'>Snowflake Transformations Dynamic Backend</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
     <th><a href='/transformations/synapse-plain/'>Synapse Transformations</a></th> 
     <td>Not available</td>
     <td>✓</td>

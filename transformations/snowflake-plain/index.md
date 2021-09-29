@@ -15,7 +15,7 @@ permalink: /transformations/snowflake-plain/
 - Amazing processing power and data throughput
 
 ## Limits
-- Snowflake queries are **limited** to 900 seconds by default.
+- Snowflake queries are **limited** to 7200 seconds by default.
 - Queries containing comments longer than 8,192 characters will segfault.
 - Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
 
@@ -50,6 +50,22 @@ of the variable as a user error, `Transformation aborted: Integrity check failed
 
 {: .image-popup}
 ![Screenshot - Transformation aborted](/transformations/snowflake-plain/abort.png)
+
+## Dynamic Backends
+
+If you have a large amount of data in databases and complex queries, transformation can run for a couple of hours.
+
+You have option to speed up your transformation by changing backned size in the configuration. Snowflake transformations suports the following sizes:
+- Small _(Default)_
+- Medium
+- Large
+
+{: .image-popup}
+![Screenshot - Backend size configuration](/transformations/snowflake-plain/backend-size.png)
+
+Scaling up backend size allocates more resources to speedup your transformation.
+
+**Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).**
 
 ## Example
 To create a simple Snowflake transformation, follow these steps:
