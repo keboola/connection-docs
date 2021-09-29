@@ -65,7 +65,9 @@ You have option to speed up your transformation by changing backned size in the 
 
 Scaling up backend size allocates more resources to speedup your transformation.
 
-**Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).**
+**This feauter is currently in public beta. Please bear with us and provide feedback
+at [https://ideas.keboola.com](https://ideas.keboola.com).\
+Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).**
 
 ## Example
 To create a simple Snowflake transformation, follow these steps:
