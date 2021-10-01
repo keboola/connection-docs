@@ -81,7 +81,7 @@ You can set the type of load for the output to firebolt. You can use **Full Load
 
 ## Firebolt indexes
 
-Using this writer you can also setup Firebolt Indexes for your specific table. More information about each index can be found in the following index sections or on the [Firebolt documentation page](https://docs.firebolt.io/concepts/get-instant-query-response-time). To set the indexes click on the pencil icon on either the Primary index or join/aggregation index. Join indexes are available for Dimension tables and aggregation indexes are available for Fact tables.
+Using this writer you can also setup Firebolt Indexes for your specific table. More information about each index can be found in the following index sections or on the [Firebolt documentation page](https://docs.firebolt.io/concepts/get-instant-query-response-time). To set the indexes click on the pencil icon on either the Primary index or join/aggregating index. Join indexes are available for Dimension tables and aggregating indexes are available for Fact tables.
 
 {: .image-popup}
 ![Screenshot - Index settings](/components/writers/database/firebolt/firebolt-index-settings.png)
@@ -101,7 +101,7 @@ Firebolt supports accelerating your joins by creating join indexes. Queries with
 
 You should consider implementing join indexes as best practice in Firebolt to speed up any query which performs a join with a dimension table. This reduces the additional overhead of performing the join to the minimum with the benefit of fast query response times while keeping your cloud bill low.
 
-### Aggregation index
+### Aggregating index
 
 Firebolt incorporates many building blocks to guarantee fast query response times. One of these building blocks is a type of index called an aggregating index.
 The aggregating index enables you to take a subset of a table's columns and configure aggregations on top of those columns. Many aggregations are supported from the simple sum, max, min to more complex ones such as count and count (distinct). The index is automatically updated and aggregating as new data streams into the table without having to scan the entire table every time since the index is stateful and consistent.
