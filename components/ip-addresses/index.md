@@ -55,7 +55,9 @@ the following IP addresses are currently used:
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
 - `40.127.144.42`
-
+- `20.82.252.94`
+- `20.82.252.129`
+- `20.82.252.124`
 
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
