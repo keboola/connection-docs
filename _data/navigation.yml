@@ -309,6 +309,9 @@ items:
               - url: /components/writers/other/azure-event-hub/
                 title: Azure Event Hub
 
+              - url: /components/writers/other/yourpass/
+                title: YourPass
+
       - url: /components/applications/
         title: Applications
 
