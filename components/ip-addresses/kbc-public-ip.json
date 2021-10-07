@@ -79,6 +79,24 @@
             "vendor": "azure",
             "region": "north-europe",
             "service": "syrup"
+        },
+        {
+            "ipPrefix": "20.82.252.94/32",
+            "vendor": "azure",
+            "region": "north-europe",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "20.82.252.129/32",
+            "vendor": "azure",
+            "region": "north-europe",
+            "service": "syrup"
+        },
+        {
+            "ipPrefix": "20.82.252.124/32",
+            "vendor": "azure",
+            "region": "north-europe",
+            "service": "syrup"
         }
     ]
 }
