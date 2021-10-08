@@ -19,6 +19,9 @@ endpoint.
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
 
+{: .image-popup}
+![Screenshot - Component Config](/components/extractors/other/google-search-console/auth.png)
+
 ## Row configuration
 
 Add a row to the configuration to extract a specific report.
@@ -30,7 +33,7 @@ Add a row to the configuration to extract a specific report.
 To extract a search analytics report select the "Search analytics" endpoint.
 
 {: .image-popup}
-![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/search_analytics_main.png)
+![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/row_config.png)
 
 - Fill in the domain to extract data from, it should not contain "https://www." before the name of the domain.
 - Fill in the dimensions you wish extract data from. Possible dimensions are; country, device, page, query,searchAppearance (searchAppearance cannot be combined with other fields)
@@ -41,14 +44,28 @@ To extract a search analytics report select the "Search analytics" endpoint.
 - Next you can add filters to the data using the Filters section
   - Filters are managed with filter groups, filters within a group work with AND, therefore all statements must be true. While filter groups work with OR, therefore at least one filter group must be true to return data
 - To create a new filter group click the **Add Filter Group** button 
+
+{: .image-popup}
+![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/filters.png)
   
 {: .image-popup}
 ![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/filter1.png)
 
-- To create a new filter within a filter group click the **Add Filter** button and specify the dimension, operator and expression
+- To create a new filter within a filter group click the **Add Filter** button and specify the dimension, operator and expression.
+
+When using filters make sure to use the Incremental load option, otherwise there are possibilities for duplicate data.
 
 {: .image-popup}
 ![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/filter2.png)
+
+#### Loading options
+
+There is an option to select a load type, **Full load** is set by default meaning the table in storage is overwritten
+every time. **Incremental** appends new data and updates existing rows in the table using a primary key. The primary key is always set as the 
+dimensions set in the configuration.
+
+{: .image-popup}
+![Screenshot - Sitemaps Config](/components/extractors/other/google-search-console/loading_options.png)
 
 Click save and run the configuration.
 
