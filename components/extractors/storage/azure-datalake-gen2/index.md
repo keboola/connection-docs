@@ -31,6 +31,9 @@ Fill in the Account name, key and file system you wish to retrieve data from.
 To create a new table, click the **New Table** button and assign it a name.
 It will be used to create the destination table name in Storage and can be modified.
 
+{: .image-popup}
+![Screenshot - Create table](/components/extractors/storage/azure-datalake-gen2/new_table.png)
+
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
 Each table has different settings (key, load type, etc.) but they all share the same credentials.
 
