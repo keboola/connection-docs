@@ -1,11 +1,11 @@
 ---
-title: Available metrics
+title: Available Metrics
 permalink: /components/extractors/marketing-sales/adform-dsp-reports/available-metrics
 ---
 
 
 
-Note that this list can be retrieved also via [API call](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats/metrics)
+Note that this list can be retrieved also via this [API call](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats/metrics):
 
 
 ```json

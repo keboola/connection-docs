@@ -108,6 +108,9 @@ items:
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
             items:
+              - url: /components/extractors/marketing-sales/adform-dsp-reports/
+                title: Adform DSP Reports
+            
               - url: /components/extractors/marketing-sales/babelforce/
                 title: Babelforce
 
@@ -146,9 +149,6 @@ items:
 
               - url: /components/extractors/marketing-sales/sklik/
                 title: Sklik
-
-              - url: /components/extractors/marketing-sales/adform-dsp-reports/
-                title: Adform DSP Reports
 
           - url: /components/extractors/social/
             title: Social

@@ -1,11 +1,11 @@
 ---
-title: Available dimensions
+title: Available Dimensions
 permalink: /components/extractors/marketing-sales/adform-dsp-reports/available-dimensions
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/available-dimensions
 ---
 
-Note that this list can be retrieved also via [API call](https://api.adform.com/help/references/buyer-solutions/reporting/metadata/dimensions) 
+Note that this list can be retrieved also via this [API call](https://api.adform.com/help/references/buyer-solutions/reporting/metadata/dimensions): 
 
 ```json
 [
