@@ -1,7 +1,7 @@
 ---
 title: YourPass
 permalink: /components/writers/other/yourpass/ 
----c
+---
 
 * TOC
 {:toc}
