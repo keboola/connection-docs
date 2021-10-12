@@ -9,6 +9,7 @@ redirect_from:
 Extractors import data from external sources and integrate it to the Keboola Connection environment.
 Keboola Connection provides the following marketing and sales extractors:
 
+- [Adform DSP Reports](/components/extractors/marketing-sales/adform-dsp-reports/)
 - [Babelforce](/components/extractors/marketing-sales/babelforce/)
 - [Criteo](/components/extractors/marketing-sales/criteo/)
 - [Customer IO](/components/extractors/marketing-sales/customerio/)
