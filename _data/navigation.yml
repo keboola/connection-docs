@@ -171,6 +171,9 @@ items:
               - url: /components/extractors/storage/aws-s3/
                 title: AWS S3
 
+              - url: /components/extractors/storage/azure-datalake-gen2/
+                title: Azure Datalake Gen 2
+
               - url: /components/extractors/storage/ftp/
                 title: FTP
 
