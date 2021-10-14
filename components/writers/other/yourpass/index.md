@@ -32,23 +32,73 @@ sandbox mode is set.
 
 **Save** the configuration and then click **Add Row** to create a new row configuration.
 
-### Row Configuration
+## Row Configuration
 
-#### Input table mapping
+### Endpoints
+
+In the row configuration select the Pass endpoint to modify Pass data (only the pass endpoints are currently
+supported by the writer). Then select the exact action you want to perform :
+
+- Create  : create a new pass
+- Delete  : delete an existing pass based on an ID
+- Update  : update an existing pass
+
+For each action there are specific requirements for the input tables, these are explained in the [Input file properties](#input-file-properties) section.
+
+Once all configurations are set, click **save** to save the configuration.
+
+{: .image-popup}
+![Screenshot - Input mapping](/components/writers/other/yourpass/row.png)
+
+
+### Input table mapping
 
 Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
 {: .image-popup}
 ![Screenshot - Input mapping](/components/writers/other/yourpass/inputmapping.png)
 
-#### Input file properties
+### Input file properties
 
-Each action on the pass requires different input data in a specific format. All dynamic data and images should be
+Each action (create/delete/update) on the pass requires different input data in a specific format, with headers of a specific name.
+The header names of the data in the input table should be in line with the header names
+of [YourPass properties](https://doc.yourpass.eu/#pass) (case-sensitive).
+
+#### Create
+
+To create passes, add a table into the input mapping with the following columns:
+
+- `templateId` (required) 
+- `expirationDate` (optional) -  in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm]Z ex.: "2021-10-30T14:00:00.000000Z"
+- `dynamicData` (optional)  - flattened with an underscore as described in [Adding dynamic data and dynamic images](#adding-dynamic-data-and-dynamic-images)
+- `dynamicImages` (optional) - flattened with an underscore as described in [Adding dynamic data and dynamic images](#adding-dynamic-data-and-dynamic-images)
+
+#### Delete
+
+To delete passes, add a table into the input mapping with the following columns:
+
+- `id` (required)
+
+#### Update
+
+To update passes, add a table into the input mapping with the following columns:
+
+- `id` (required) 
+- `templateId` (required) 
+- `expirationDate` (optional) -  in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm]Z ex.: "2021-10-30T14:00:00.000000Z"
+- `dynamicData` (optional)  - flattened with an underscore as described in [Adding dynamic data and dynamic images](#### Adding dynamic data and dynamic images)
+- `dynamicImages` (optional) - flattened with an underscore as described in [Adding dynamic data and dynamic images](#### Adding dynamic data and dynamic images)
+- `voided` (optional) - is a boolean value : "True" or "False"
+
+
+#### Adding dynamic data and dynamic images
+
+All dynamic data and images should be
 flattened with an underscore.
 
 ```json
  {
-  "id": "1101",
+  "templateId": "1101",
   "dynamicData": {
     "lastName": "Jedno",
     "fistName": "Tomáš"
@@ -67,7 +117,7 @@ Will be
 
 ```json
  {
-  "id": "1101",
+  "templateId": "1101",
   "dynamicData_lastName": "Jedno",
   "dynamicData_fistName": "Tomáš"
   "dynamicImages_logo": "id-of-logo-image",
@@ -75,25 +125,3 @@ Will be
 }
 ```
 
-The header names of the data in the input table should be in line with the header names
-of [YourPass properties](https://doc.yourpass.eu/#pass) (case-sensitive).
-
-- To create a pass the input file should contain the templateId and optionally the expirationDate, dynamicData, and
-  dynamicImages
-- To Delete a pass the input file should ony contain the pass Id
-- To update passes the input file should contain the pass Id and templateId, optionally the dynamicData, dynamicImages,
-  expirationDate, and voided.
-
-#### Endpoint and action setting
-
-In the row configuration select the pass endpoint to create/delete/update pass data (only the pass endpoint is currently
-supported by the writer). Then select the exact action you want to perform :
-
-- Create  : create a new pass
-- Delete  : delete an existing pass based on an ID
-- Update  : update an existing pass
-
-Once all configurations are set click **save** to save the configuration.
-
-{: .image-popup}
-![Screenshot - Input mapping](/components/writers/other/yourpass/row.png)
