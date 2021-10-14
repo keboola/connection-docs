@@ -17,6 +17,7 @@ extractors that do not fall into any of the above mentioned categories:
 - [Geocoding-Augmentation](/components/extractors/other/geocoding-augmentation) ---
 provides detailed data for locations specified by their names, address or coordinates.
 - [GitHub](/components/extractors/other/github/) --- imports data from GitHub, a software development platform.
+- [Google Search Console](/components/extractors/other/google-search-console/) --- imports data from Google Search Console, a web service by Google which allows webmasters to check indexing status and optimize visibility of their websites.
 - [Papertrail](/components/extractors/other/papertrail/) --- imports data from Papertrail (log management).
 - [Pingdom](/components/extractors/other/pingdom/) --- imports data from Pingdom, a service for monitoring the uptime and performance of your websites and web applications.
 - [Stripe](/components/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.
