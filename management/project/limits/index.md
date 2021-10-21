@@ -76,8 +76,8 @@ If you need more information, please contact your CSM.
 | SMALL SQL                             | Snowflake SMALL DWH or equivalent               |
 | MEDIUM SQL                            | Snowflake MEDIUM DWH                            |
 | LARGE SQL                             | Snowflake LARGE DWH                             |
-| SMALL DS                              | 16 GB RAM, 2 CPU cores, 1TB GB SSD shared   |
-| MEDIUM DS                             | 32 GB RAM, 4 CPU cores, 1TB GB SSD shared |
+| SMALL DS                              | 16 GB RAM, 2 CPU cores, 1TB SSD shared   |
+| MEDIUM DS                             | 32 GB RAM, 4 CPU cores, 1TB SSD shared |
 | LARGE DS                              | 120 GB RAM, 14 CPU cores, 1TB dedicated |
 
 ### Storage Size
