@@ -21,6 +21,10 @@ The first step is to **set up credentials**:
 Fill in your Firebolt **Username**, **Password**, and **Database Name**. To use the writer, you must fill in credentials for an S3 
 bucket, which will be used for staging. The writer will push data to the bucket and Firebolt will download the data from it.
 
+
+> **_NOTE:_**  The S3 bucket must be in the same region as your Firebolt database.
+
+
 {: .image-popup}
 ![Screenshot - Main page](/components/writers/database/firebolt/firebolt-creds.png)
 
