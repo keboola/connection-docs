@@ -90,6 +90,17 @@ pre {
   }
 }
 
+dl {
+    margin-left: 2em;
+    dt {
+        margin-top: 1em;
+    }
+    dd {
+        padding: 0 1em;
+        margin-bottom: 1em;
+    }
+}
+
 // Baseline styles
 table {
   width: 100%;
