@@ -127,6 +127,10 @@ Components can be run as standard pieces of our [orchestrations](/orchestrator/)
 obtaining the full support and services (a link to your [components](https://components.keboola.com/components), 
 [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
 
+## Keboola CLI
+[Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands to operate your cloud 
+data pipeline. It is available to install in Windows, macOS, and Linux environments.
+
 ## Keboola Support
 When working with Keboola Connection, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.
 To solve your problem or to gain context, our support staff may join your project when requested.
