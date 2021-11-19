@@ -35,7 +35,7 @@ When you [create a configuration](/cli/commands/create-config/) of MySQL extract
 
 Plan for "push" operation:
   + C main/extractor/keboola.ex-db-mysql/7511990/invoices
-  + R main/extractor/keboola.ex-db-mysql/7511990/invoices/rows/7511991-customer
+  + R main/extractor/keboola.ex-db-mysql/7511990/invoices/rows/customer
 Dry run, nothing changed.
 Push done.
 ```

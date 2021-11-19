@@ -496,8 +496,8 @@ items:
         title: Installation
       - url: /cli/getting-started/
         title: Getting Started
-      - url: /cli/configuration/
-        title: Configuration
+      - url: /cli/structure/
+        title: Structure
       - url: /cli/commands/
         title: Commands
         items:

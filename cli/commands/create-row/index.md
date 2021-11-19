@@ -39,12 +39,12 @@ be prompted for name, branch, and component ID.
 ? Select the target branch Main (4908)
 
 ? Select the target config invoices (7475544)
-Created new config row "main/extractor/keboola.ex-db-mysql/7475544-invoices/rows/7475594-customer"
+Created new config row "main/extractor/keboola.ex-db-mysql/invoices/rows/customer"
 ```
 
 ```
 ➜ kbc create config -n customer -b main -c invoices
-Created new config row "main/extractor/keboola.ex-db-mysql/7475544-invoices/rows/7475594-customer"
+Created new config row "main/extractor/keboola.ex-db-mysql/invoices/rows/customer"
 ```
 
 ## Next Steps

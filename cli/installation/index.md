@@ -14,11 +14,10 @@ Otherwise, they can be installed from a platform-specific repository or built fr
 Installation on macOS is managed by Homebrew. If you don't have Homebrew available on your system,
 [install it](https://docs.brew.sh/Installation.html) before continuing.
 
-You can install the KBC CLI on macOS by updating your brew repository information and running the install command:
+You can install the Keboola CLI on macOS by updating your brew repository information and running the install command:
 
 ```bash
-brew tap keboola/homebrew-tap
-brew install keboola-as-code
+brew install keboola/keboola-cli/keboola-cli
 kbc --version
 ```
 
@@ -28,7 +27,7 @@ kbc --version
 sudo wget -P /etc/apt/trusted.gpg.d https://cli-dist.keboola.com/deb/keboola.gpg
 echo "deb https://cli-dist.keboola.com/deb /" | sudo tee /etc/apt/sources.list.d/keboola.list
 sudo apt-get update
-sudo apt-get install kbc
+sudo apt-get install keboola-cli
 kbc --version
 ```
 
@@ -43,7 +42,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://cli-dist.keboola.com/rpm/keboola.gpg
 " | sudo tee /etc/yum.repos.d/keboola.repo
-sudo dnf install kbc
+sudo dnf install keboola-cli
 kbc --version
 ```
 
@@ -53,7 +52,7 @@ kbc --version
 echo "https://cli-dist.keboola.com/apk" | sudo tee -a /etc/apk/repositories
 sudo wget -P /etc/apk/keys/ https://cli-dist.keboola.com/apk/keboola.rsa.pub
 sudo apk update
-sudo apk add kbc
+sudo apk add keboola-cli
 kbc --version
 ```
 

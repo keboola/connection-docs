@@ -40,7 +40,7 @@ The preview will look like this:
 ```
 ➜ kbc encrypt --dry-run
 Plan for "encrypt" operation:
-  C main/extractor/keboola.ex-db-mysql/7475544-invoices
+  C main/extractor/keboola.ex-db-mysql/invoices
     parameters.#password
 Dry run, nothing changed.
 ```
@@ -50,7 +50,7 @@ The actual encrypt command:
 ```
 ➜ kbc encrypt
 Plan for "encrypt" operation:
-  C main/extractor/keboola.ex-db-mysql/7475544-invoices
+  C main/extractor/keboola.ex-db-mysql/invoices
     parameters.#password
 Encrypt done.
 ```

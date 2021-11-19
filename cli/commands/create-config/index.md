@@ -40,12 +40,12 @@ command.*
 ? Select the target branch Main (4908)
 
 ? Select the target component MySQL extractor (keboola.ex-db-mysql)
-Created new config "main/extractor/keboola.ex-db-mysql/7475544-invoices"
+Created new config "main/extractor/keboola.ex-db-mysql/invoices"
 ```
 
 ```
 ➜ kbc create config -n invoices -b main -c keboola.ex-db-mysql
-Created new config "main/extractor/keboola.ex-db-mysql/7475544-invoices"
+Created new config "main/extractor/keboola.ex-db-mysql/invoices"
 ```
 
 ## Next Steps

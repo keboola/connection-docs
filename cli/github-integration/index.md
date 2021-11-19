@@ -26,6 +26,11 @@ depending on the current GitHub Actions workload.
 {: .image-popup}
 ![Screenshot -- A commit by Pull action](/cli/github-integration/pull-commit.jpg)
 
+The commit contains description of the change:
+
+{: .image-popup}
+![Screenshot -- A change description by Pull action](/cli/github-integration/pull-description.jpg)
+
 ## Push
 
 The Push workflow is triggered by push to the GitHub repository to [push](/cli/commands/push/) the changes from

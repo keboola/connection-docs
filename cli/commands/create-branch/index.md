@@ -31,7 +31,7 @@ cannot be created locally and pushed to the project.
 The branch was successfully created.
 Pulling objects to the local directory.
 Plan for "pull" operation:
-  * C main/extractor/keboola.ex-google-drive/7241051-my-google-drive-data-source | changed: configuration
+  * C main/extractor/keboola.ex-google-drive/my-google-drive-data-source | changed: configuration
 Pull done.
 Created new branch "try1".
 ```

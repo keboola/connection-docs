@@ -16,6 +16,10 @@ If the command is run without options it will start interactive dialog asking fo
 you want to use, [Master token](/management/project/tokens/#master-tokens) to your project, allowed branches to work 
 with, and will offer you to create GitHub Actions workflows in the directory.
 
+You can choose if the directories will contain object IDs or not. Example:
+- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/734333057-power-bi/rows/734333064-orders
+- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
+
 ## Options
 
 `-b, --allowed-branches <string>`
@@ -52,29 +56,37 @@ Please enter Keboola Storage API token. The value will be hidden.
 Please select which project's branches you want to use with this CLI.
 The other branches will still exist, but they will be invisible in the CLI.
 ? Allowed project's branches: only main branch
-Set allowed branches: "__main__"
+
+The directory structure can optionally contain object IDs. Example:
+- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
+- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
+? Do you want to include object IDs in directory structure? No
 Created metadata directory ".keboola".
 Created manifest file ".keboola/manifest.json".
 Created file ".env.local" - it contains the API token, keep it local and secret.
 Created file ".env.dist" - an ".env.local" template.
 Created file ".gitignore" - to keep ".env.local" local.
 
+The directory structure can optionally contain object IDs. Example:
+- path with IDs:    83065-dev-branch/writer/keboola.wr-db-snowflake/734333057-power-bi/rows/734333064-orders
+- path without IDs: dev-branch/writer/keboola.wr-db-snowflake/power-bi/rows/orders
+? Do you want to include object IDs in directory structure? No
 ? Generate workflows files for GitHub Actions? No
 
 Init done. Running pull.
 Plan for "pull" operation:
 + B main
-+ C main/extractor/ex-generic-v2/7122721-empty
-+ C main/extractor/keboola.ex-aws-s3/7241111-my-aws-s-3-data-source
-+ R main/extractor/keboola.ex-aws-s3/7241111-my-aws-s-3-data-source/rows/7241227-share-cities
-+ C main/extractor/keboola.ex-google-drive/7241051-my-google-drive-data-source
-+ C main/extractor/keboola.ex-google-drive/7241051-my-google-drive-data-source/schedules/7277240-scheduler-for-7243915
-+ C main/other/keboola.orchestrator/7243915-daily
-+ C main/other/keboola.orchestrator/7243915-daily/schedules/7243938-scheduler-for-7243915
-+ C main/other/keboola.sandboxes/7241673-address
-+ C main/transformation/keboola.snowflake-transformation/7241628-address
-+ C main/transformation/keboola.snowflake-transformation/7241628-address/variables
-+ R main/transformation/keboola.snowflake-transformation/7241628-address/variables/values/default
++ C main/extractor/ex-generic-v2/empty
++ C main/extractor/keboola.ex-aws-s3/my-aws-s-3-data-source
++ R main/extractor/keboola.ex-aws-s3/my-aws-s-3-data-source/rows/share-cities
++ C main/extractor/keboola.ex-google-drive/my-google-drive-data-source
++ C main/extractor/keboola.ex-google-drive/my-google-drive-data-source/schedules/scheduler-for-7243915
++ C main/other/keboola.orchestrator/daily
++ C main/other/keboola.orchestrator/daily/schedules/scheduler-for-7243915
++ C main/other/keboola.sandboxes/address
++ C main/transformation/keboola.snowflake-transformation/address
++ C main/transformation/keboola.snowflake-transformation/address/variables
++ R main/transformation/keboola.snowflake-transformation/address/variables/values/default
 Pull done.
 ```
 

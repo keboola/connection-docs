@@ -31,9 +31,9 @@ in [Google Drive Extractor](/components/extractors/storage/google-drive/)) the o
 + local state
 
 Diff:
-* R main/extractor/keboola.ex-aws-s3/7241111-my-aws-s-3-data-source/rows/7241227-share-cities-2 | changed: configuration
-+ C main/extractor/keboola.ex-db-mysql/7475544-invoices
-+ R main/extractor/keboola.ex-db-mysql/7475544-invoices/rows/7475594-customer
+* R main/extractor/keboola.ex-aws-s3/my-aws-s-3-data-source/rows/share-cities-2 | changed: configuration
++ C main/extractor/keboola.ex-db-mysql/invoices
++ R main/extractor/keboola.ex-db-mysql/invoices/rows/customer
 
 Use --details flag to list the changed fields.
 ```
@@ -47,13 +47,13 @@ If you want more details:
 + local state
 
 Diff:
-* R main/extractor/keboola.ex-aws-s3/7241111-my-aws-s-3-data-source/rows/7241227-jakubm-share-cities-2
+* R main/extractor/keboola.ex-aws-s3/my-aws-s-3-data-source/rows/jakubm-share-cities-2
   configuration:
     parameters.key:
       - cities2.csv
       + cities.csv
-+ C main/extractor/keboola.ex-db-mysql/7475544-invoices
-+ R main/extractor/keboola.ex-db-mysql/7475544-invoices/rows/7475594-customer
++ C main/extractor/keboola.ex-db-mysql/invoices
++ R main/extractor/keboola.ex-db-mysql/invoices/rows/customer
 ```
 
 ## Next Steps

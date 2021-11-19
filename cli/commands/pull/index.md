@@ -32,7 +32,7 @@ If your local state is invalid the command will fail unless you use `--force` fl
 Pulling objects to the local directory.
 Plan for "pull" operation:
   × C main/extractor/keboola.ex-db-mysql/7511990/invoices
-  × R main/extractor/keboola.ex-db-mysql/7511990/invoices/rows/7511991-customer
+  × R main/extractor/keboola.ex-db-mysql/7511990/invoices/rows/customer
 Pull done.
 ```
 

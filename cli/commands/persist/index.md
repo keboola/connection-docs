@@ -29,8 +29,8 @@ When you copy & paste directory of a MySQL extractor configuration the command w
 ```
 ➜ kbc persist --dry-run
 Plan for "persist" operation:
-  + C main/extractor/keboola.ex-db-mysql/7475544-invoices 2
-  + R main/extractor/keboola.ex-db-mysql/7475544-invoices 2/rows/7475594-customer
+  + C main/extractor/keboola.ex-db-mysql/invoices 2
+  + R main/extractor/keboola.ex-db-mysql/invoices 2/rows/customer
 Dry run, nothing changed.
 Persist done.
 ```
