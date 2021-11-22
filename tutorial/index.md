@@ -41,3 +41,4 @@ storage to run arbitrary SQL scripts on the copies of your tables without affect
 in what order, and configure their automatic execution.
 - [Ad-hoc data analysis](/tutorial/ad-hoc/) --- see how you can play with arbitrary data.
 - [Development Branches](/tutorial/branches/) --- see how you can safely modify a running project.
+- [CLI](https://developers.keboola.com/cli/) --- see how you can operate a project using our command-line tool.
