@@ -128,8 +128,8 @@ obtaining the full support and services (a link to your [components](https://com
 [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
 
 ## Keboola CLI
-[Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands to operate your cloud 
-data pipeline. It is available to install in Windows, macOS, and Linux environments.
+[Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands for operating your cloud 
+data pipeline. It is available to install in the Windows, macOS, and Linux environments.
 
 ## Keboola Support
 When working with Keboola Connection, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.
