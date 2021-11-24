@@ -110,7 +110,7 @@ items:
             items:
               - url: /components/extractors/marketing-sales/adform-dsp-reports/
                 title: Adform DSP Reports
-            
+
               - url: /components/extractors/marketing-sales/babelforce/
                 title: Babelforce
 
@@ -257,7 +257,7 @@ items:
             items:
               - url: /components/writers/database/bigquery/
                 title: BigQuery
-              
+
               - url: /components/writers/database/firebolt/
                 title: Firebolt
 
