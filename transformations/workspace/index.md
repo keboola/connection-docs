@@ -83,7 +83,7 @@ When a workspace is created, it enters the **Active** state and can be used.
 {: .image-popup}
 ![Workspace - States](/transformations/workspace/workspace-states.svg)
 
-Workspace termination can be done manually or it is done automatically after 1 hour period of inactivity. 
+Workspace termination can be done manually or it is done automatically after 1 hour period of inactivity (if auto sleep feature is supported and enabled). 
 Inactivity is measured from the last save of any notebook in JupyterLab. When a workspace is terminated, it is switched off
 and consumes no credits. A terminated workspace can be resumed. Resuming a workspace means that we restore the
 last saved version of all notebooks in the home directory (`/data`). We also load the current data from Input Mapping.

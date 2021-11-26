@@ -198,7 +198,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 <tr>
     <th>Lifecycle</th> 
     <td>Terminates after 5 days, can be extended manually</td>
-    <td>Sleeps after 1 hour of inactivity, can be resumed</td>
+    <td>Sleeps after 1 hour of inactivity, can be resumed (if auto sleep feature is supported and enabled)</td>
 </tr>
 <tr>
     <th>Resume</th> 
