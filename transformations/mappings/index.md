@@ -236,6 +236,9 @@ If you want to store CSV files as [Storage Tables](/storage/tables/), use
 File output mapping can be useful when your transformation produces, for example, trained models that 
 are to be used in another transformation.
 
+Only files stored directly in the `out/files/` directory can be mapped, subdirectories are not supported
+(`out/files/file.txt` will work, `out/files/subdir/file.txt` won't).
+
 {: .image-popup}
 ![File Output Mapping](/transformations/mappings/file-output-mapping.png)
 
