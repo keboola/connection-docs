@@ -258,6 +258,9 @@ items:
               - url: /components/writers/database/bigquery/
                 title: BigQuery
 
+              - url: /components/writers/database/exasol/
+                title: Exasol
+
               - url: /components/writers/database/firebolt/
                 title: Firebolt
 
