@@ -56,5 +56,6 @@ For single backends:
   - Multiple transformations in one bucket result in a single new transformation with code blocks corresponding to the old transformations
   - Mappings are merged
   - Transformation bucket → new transformation name
+  - Transformation bucket → folder name
   - Transformation name → code block name
   - Each transformation within a bucket → code snippet name 
