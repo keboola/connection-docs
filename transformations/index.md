@@ -130,7 +130,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th rowspan='11'>Backend</th>
-    <th><a href='/transformations/julia/'>Julia Transformations</a>)</th> 
+    <th><a href='/transformations/julia/'>Julia Transformations</a></th> 
     <td>✓</td>
     <td>Planned</td>
 </tr>
@@ -165,6 +165,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>7200s (configurable per transformation)</td>
 </tr>
 <tr>
+    <th><a href='/transformations/snowflake-plain/#dynamic-backends'>Snowflake Transformations Dynamic Backend</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
     <th><a href='/transformations/synapse-plain/'>Synapse Transformations</a></th> 
     <td>Not available</td>
     <td>✓</td>
@@ -192,8 +197,8 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th>Lifecycle</th> 
-    <td>Terminates after 5 days, can be extended manually</td>
-    <td>Sleeps after 1 hour of inactivity, can be resumed</td>
+    <td>Terminates after 5 days; can be extended manually</td>
+    <td>Sleeps after 1 hour of inactivity; can be resumed (if auto sleep feature is supported and enabled)</td>
 </tr>
 <tr>
     <th>Resume</th> 
