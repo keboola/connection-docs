@@ -19,6 +19,7 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Google Ad Manager](/components/extractors/marketing-sales/google-ad-manager/) 
 - [Google Analytics](/components/extractors/marketing-sales/google-analytics/) 
 - [Mailchimp](/components/extractors/marketing-sales/mailchimp/)
+- [Market Vision](/components/extractors/marketing-sales/market-vision/)
 - [Pipedrive](/components/extractors/marketing-sales/pipedrive/)
 - [Salesforce](/components/extractors/marketing-sales/salesforce/). 
 - [Shoptet](/components/extractors/marketing-sales/shoptet/)
