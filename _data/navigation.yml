@@ -138,6 +138,9 @@ items:
               - url: /components/extractors/marketing-sales/mailchimp/
                 title: Mailchimp
 
+              - url: /components/extractors/marketing-sales/market-vision/
+                title: Market Vision
+
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
 
