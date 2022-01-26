@@ -219,6 +219,39 @@ As you can see, joining those two tables will be as easy as pie.
 
 </td>
 </tr>
+<tr>
+<td>Mapping (Single table)</td>
+<td>
+{% highlight json %}
+{
+    "_id.$oid": {
+        "type": "column",
+        "mapping": {
+            "destination": "id",
+            "primaryKey": true
+        }
+    },
+    "name": "name",
+    "status.isActive": "isActive",
+    "status.isDeleted": "isDeleted",
+    "revisions.0.desc": "revision0",
+    "revisions.1.desc": "revision1"
+}
+{% endhighlight %}
+</td>
+</tr>
+<tr>
+<td>Output (Single table)</td>
+<td>
+
+extractors
+<table>
+<tr><th>id (marked as PK)</th><th>name</th><th>isActive</th><th>isDeleted</th><th>revision0</th><th>revision1</th></tr>
+<tr><td>5716054bee6e764c94fa7ddd</td><td>MongoDB extractor</td><td>1</td><td>0</td><td>First version</td><td>Second version</td></tr>
+</table>
+
+</td>
+</tr>
 </table>
 
 
