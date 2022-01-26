@@ -299,7 +299,7 @@ As you can see, joining those two tables will be as easy as pie.
 }
 {% endhighlight %}
 
-Numbers after "revision" array define position of the object in the array. 0 is the first position.
+The numbers after the "revision" array define the position of the object in the array. 0 is the first position.
 </td>    
 </tr>
 <tr>
@@ -312,7 +312,7 @@ extractors
 <tr><td>5716054bee6e764c94fa7ddd</td><td>MongoDB extractor</td><td>1</td><td>0</td><td>First version</td><td>Second version</td></tr>
 </table>
 
-As you can see, values from the "revisions" array are stored in the columns of the "extractors" table.
+As you can see, the values from the "revisions" array are stored in the columns of the "extractors" table.
 
 </td>
 </tr>
@@ -406,7 +406,7 @@ extractors-tags
 </table>
 
 
-## Boolean values
+## Boolean Values
 
 <table class="table table-bordered">
 <tr>
