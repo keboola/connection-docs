@@ -21,6 +21,10 @@ table is empty. If some columns are missing, you will receive a message like thi
 Also note that the imported file **may** contain additional columns not present in the existing
 table. In that case, the columns from the imported table will be added to the existing table.
 
+Table and column names are limited to contain only alphanumeric characters. Dash and 
+underscores are allowed. Column names must not start or end with dash `-` or underscore 
+character `_`.
+
 ## Aliases
 Apart from actual tables, it is also possible to create aliases. They behave similar to 
 [database views](https://en.wikipedia.org/wiki/View_(SQL)).
