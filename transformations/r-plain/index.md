@@ -14,7 +14,7 @@ faster to do in [SQL Transformations](/transformations/#backends).
 
 ## Environment
 The R script is executed in an isolated [environment](https://developers.keboola.com/extend/#component).
-The current R version is **3.6.3**, however it is possible to switch your configuration to run on version **4.0.4**.
+The current R version is **4.0.5**, however it is possible to switch your configuration to run on other versions if available.
 
 {: .image-popup}
 ![Screenshot - Change Backend](/transformations/r-plain/change-backend.png)
