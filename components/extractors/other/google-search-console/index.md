@@ -9,10 +9,10 @@ redirect_from:
 {:toc}
 
 This component allows you to extract statistics and site data of domains that are linked to your Google account. Using
-the [Google Search Console API](https://developers.google.com/webmaster-tools/search-console-api-original).
+the [Google Search Console API](https://developers.google.com/webmaster-tools/v1/api_reference_index).
 The component supports the
-[Search Analytics](https://developers.google.com/webmaster-tools/search-console-api-original/v3/searchanalytics) 
-endpoint and the [Sitemaps](https://developers.google.com/webmaster-tools/search-console-api-original/v3/sitemaps)
+[Search Analytics](https://developers.google.com/webmaster-tools/v1/searchanalytics/query) 
+endpoint and the [Sitemaps](https://developers.google.com/webmaster-tools/v1/sitemaps)
 endpoint.
 
 ## Configuration
