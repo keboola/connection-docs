@@ -66,6 +66,9 @@ items:
           - url: /components/extractors/communication/
             title: Communication
             items:
+              - url: /components/extractors/communication/email-imap/
+                title: IMAP Email Contents and Attachments
+
               - url: /components/extractors/communication/email-attachments/
                 title: Email Attachments
 
