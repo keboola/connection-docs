@@ -69,7 +69,7 @@ by the Subject and Sender, e.g. `(FROM "sender-email@example.com" SUBJECT "the s
 Refer to the [query syntax](query-syntax) for more examples. 
 
 {: .image-popup}
-![Screenshot - Row configuration](/components/extractors/marketing-sales/criteo/row.png)
+![Screenshot - Row configuration](/components/extractors/communication/email-imap/row.png)
 
 ### Period from date
 
