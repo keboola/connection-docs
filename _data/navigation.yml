@@ -329,6 +329,13 @@ items:
 
       - url: /components/applications/
         title: Applications
+        items:
+          - url: /components/applications/triggers/
+            title: Triggers
+            items:
+              - url: /components/applications/triggers/exasol-cluster-starter/
+                title: Exasol Cluster Starter
+
 
       - url: /components/data-templates/
         title: Data Templates
