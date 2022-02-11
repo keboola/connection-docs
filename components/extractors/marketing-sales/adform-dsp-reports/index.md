@@ -58,7 +58,7 @@ Continue by setting up the report filter.
 
 ### Dimensions 
 
-Then select your report dimensions from the provided list. For a full list of dimensions and their descriptions, [refer here](/components/extractors/marketing-sales/adform-dsp-reports/available-dimensions). 
+Then select your report dimensions from the provided list. For a full list of dimensions and their descriptions, [refer here](/components/extractors/marketing-sales/adform-dsp-reports/available_dimensions). 
 The list can be also retrieved using this [API call](https://api.adform.com/help/references/buyer-solutions/reporting/metadata/dimensions). 
 
 **Note**: Please keep in mind that some combinations of metrics and/or dimensions are not supported. 
@@ -69,7 +69,7 @@ And finally, select your desired report metrics from the provided list. You are 
 definition consists of a **metric name** and additional filtering possibilities (`Specs Metadata`) for individual metric. If no value 
 is specified in the `Specs Metadata`, the default metric is used.
 
-For a full list of available metrics and specs, [see here](/components/extractors/marketing-sales/adform-dsp-reports/available-metrics).
+For a full list of available metrics and specs, [see here](/components/extractors/marketing-sales/adform-dsp-reports/available_metrics).
 It can be also retrieved using this [API call](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats/metrics).
 
 **Note**: Please keep in mind that some combinations of metrics and/or dimensions are not supported. 
