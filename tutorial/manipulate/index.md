@@ -126,7 +126,7 @@ CREATE TABLE "opportunity_denorm" AS
         "user"."Name" AS "UserName", "user"."Sales_Market" AS "UserSalesMarket",
         "user"."Global_Market" AS "UserGlobalMarket",
         "account"."Name" AS "AccountName", "account"."Region" AS "AccountRegion",
-        "account"."Status" AS "AccountStatus", "account"."First_Order" AS "AccountFirstOrder"
+        "account"."Status" AS "AccountStatus", "account"."FirstOrder" AS "AccountFirstOrder"
     FROM "tmp_opportunity"
         JOIN "user" ON "tmp_opportunity"."OwnerId" = "user"."Id"
         JOIN "account" ON "tmp_opportunity"."AccountId" = "account"."Id"
