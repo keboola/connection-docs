@@ -1,6 +1,6 @@
 ---
 title: Available Metrics
-permalink: /components/extractors/marketing-sales/adform-dsp-reports/available-metrics
+permalink: /components/extractors/marketing-sales/adform-dsp-reports/available-metrics/
 ---
 
 
