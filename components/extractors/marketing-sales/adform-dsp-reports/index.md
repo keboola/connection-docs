@@ -69,7 +69,7 @@ And finally, select your desired report metrics from the provided list. You are 
 definition consists of a **metric name** and additional filtering possibilities (`Specs Metadata`) for individual metric. If no value 
 is specified in the `Specs Metadata`, the default metric is used.
 
-For a full list of available metrics and specs, [see here](/components/extractors/marketing-sales/adform-dsp-reports/available_metrics).
+For a full list of available metrics and specs, [see here](/components/extractors/marketing-sales/adform-dsp-reports/available-metrics/).
 It can be also retrieved using this [API call](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats/metrics).
 
 **Note**: Please keep in mind that some combinations of metrics and/or dimensions are not supported. 
