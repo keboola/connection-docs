@@ -24,7 +24,7 @@ You can get a Personal Access Token for authorization by going to the cluster yo
 on the right of the cluster name, clicking **Connect via tools** and going to the 3rd step. 
 There you can generate a Personal Access Token and also view the host of the cluster.
 
-## Fucntionality notes
+## Functionality notes
 
 If the cluster you wish to start is not the main cluster of the database, the application will first start the main cluster and after 
 that the cluster that you entered. This is necessary as the main cluster must be started before you start any other clusters.
