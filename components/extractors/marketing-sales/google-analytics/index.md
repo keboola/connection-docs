@@ -133,10 +133,10 @@ If you plan to use the [Multi-Channel Funnels API](https://developers.google.com
     {: .image-popup}
     ![Screenshot - Google API Console - Create Credentials](/components/extractors/marketing-sales/google-analytics/google_console_credentials.png)
     
-5. Choose **Web Application**. Into **Authorized redirect URIs** insert 
- ```https://oauth.keboola.com/authorize/keboola.ex-google-analytics-v4/callback```
-    and ```https://oauth.eu-central-1.keboola.com/authorize/keboola.ex-google-analytics-v4/callback```. 
-    The second one is needed for the EU region.
+5. Choose **Web Application**. Into **Authorized redirect URIs** insert:
+    - `https://oauth.keboola.com/authorize/keboola.ex-google-analytics-v4/callback`
+    - or `https://oauth.eu-central-1.keboola.com/authorize/keboola.ex-google-analytics-v4/callback`
+    - or `https://oauth.north-europe.azure.keboola.com/authorize/keboola.ex-google-analytics-v4/callback`
 
 6. Click **Create** and a popup window will display your new Client ID and Client Secret credentials.
 7. Find your credentials in the list of available credentials. You should see something like this:
