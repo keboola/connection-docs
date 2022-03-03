@@ -45,6 +45,18 @@
             "service": "queue"
         },
         {
+            "ipPrefix": "3.222.3.15/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "storage"
+        },
+        {
+            "ipPrefix": "34.206.78.206/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "storage"
+        },
+        {
             "ipPrefix": "35.157.170.229/32",
             "vendor": "aws",
             "region": "eu-central-1",
@@ -73,6 +85,18 @@
             "vendor": "sendgrid",
             "region": "eu-central-1",
             "service": "syrup"
+        },
+        {
+            "ipPrefix": "35.157.62.225/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "storage"
+        },
+        {
+            "ipPrefix": "3.71.156.204/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "storage"
         },
         {
             "ipPrefix": "40.127.144.42/32",
