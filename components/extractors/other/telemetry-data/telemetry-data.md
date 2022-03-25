@@ -296,36 +296,36 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.admin.organizationInvitation.accepted`|`auditLog.project.adminsListed`
 |`auditLog.admin.projectInvitation.accepted`     |`auditLog.project.adminUpdated`
 |`auditLog.admin.projectInvitation.rejected`     |`auditLog.project.deleted`
-|`auditLog.admin.reauthorizeCurrentUserTotp`     |`auditLog.project.deletedDetail`
-|`auditLog.admin.regenerateRecoveryCodes`        |`auditLog.project.detail`
-|`auditLog.admin.removeU2fDevice`                |`auditLog.project.featureAdded`
-|`auditLog.admin.showRecoveryCodes`              |`auditLog.project.featureRemoved`
-|`auditLog.admin.sudo`                           |`auditLog.project.fileStorageAssigned`
-|`auditLog.deletedProjectsListed`                |`auditLog.project.invitationCreated`
-|`auditLog.maintainer.adminAdded`                |`auditLog.project.invitationDeleted`
-|`auditLog.maintainer.adminRemoved`              |`auditLog.project.invitationsListed`
-|`auditLog.maintainer.adminsListed`              |`auditLog.project.joinRequest.approved`
-|`auditLog.maintainer.invitationCreated`         |`auditLog.project.joinRequest.rejected`
+|`auditLog.admin.reauthorizeCurrentUserTotp`     |`auditLog.project.purged`
+|`auditLog.admin.regenerateRecoveryCodes`        |`auditLog.project.deletedDetail`
+|`auditLog.admin.removeU2fDevice`                |`auditLog.project.detail`
+|`auditLog.admin.showRecoveryCodes`              |`auditLog.project.featureAdded`
+|`auditLog.admin.sudo`                           |`auditLog.project.featureRemoved`
+|`auditLog.deletedProjectsListed`                |`auditLog.project.fileStorageAssigned`
+|`auditLog.maintainer.adminAdded`                |`auditLog.project.invitationCreated`
+|`auditLog.maintainer.adminRemoved`              |`auditLog.project.invitationDeleted`
+|`auditLog.maintainer.adminsListed`              |`auditLog.project.invitationsListed`
+|`auditLog.maintainer.invitationCreated`         |`auditLog.project.joinRequest.approved`
 |`auditLog.maintainer.invitationDeleted`         |`auditLog.project.joinRequest.rejected`
-|`auditLog.maintainer.invitationDetail`          |`auditLog.project.joinRequestsListed`
-|`auditLog.maintainer.invitationsListed`         |`auditLog.project.limitAdded`
-|`auditLog.maintainer.metadataDeleted`           |`auditLog.project.limitRemoved`
-|`auditLog.maintainer.metadataListed`            |`auditLog.project.metadataDeleted`
-|`auditLog.maintainer.metadataSet`               |`auditLog.project.metadataListed`
-|`auditLog.maintainer.promoCodesListed`          |`auditLog.project.metadataSet`
-|`auditLog.maintainers.created`                  |`auditLog.project.removedFromOrganization`
-|`auditLog.maintainers.deleted`                  |`auditLog.project.requestAccess`
-|`auditLog.maintainers.detail`                   |`auditLog.project.setEnabledStatus`
-|`auditLog.maintainers.listed`                   |`auditLog.project.storageBackendAssigned`
-|`auditLog.maintainers.organizationCreated`      |`auditLog.project.storageBackendRemoved`
-|`auditLog.maintainers.updated`                  |`auditLog.project.storageTokenCreated`
-|`auditLog.organization.adminAdded`              |`auditLog.project.undeleted`
-|`auditLog.organization.adminRemoved`            |`auditLog.project.updated`
-|`auditLog.organization.adminsInProjectsListed`  |`auditLog.promoCode.applied`
-|`auditLog.organization.adminsListed`            |`auditLog.promoCode.created`
-|`auditLog.organization.deleted`                 |`auditLog.storageBackendConnection.listed`
-|`auditLog.storageBackendConnection.created`     |`auditLog.storageBackendConnection.deleted`
-|`auditLog.storageBackendConnection.updated`
+|`auditLog.maintainer.invitationDetail`          |`auditLog.project.joinRequest.rejected`
+|`auditLog.maintainer.invitationsListed`         |`auditLog.project.joinRequestsListed`
+|`auditLog.maintainer.metadataDeleted`           |`auditLog.project.limitAdded`
+|`auditLog.maintainer.metadataListed`            |`auditLog.project.limitRemoved`
+|`auditLog.maintainer.metadataSet`               |`auditLog.project.metadataDeleted`
+|`auditLog.maintainer.promoCodesListed`          |`auditLog.project.metadataListed`
+|`auditLog.maintainers.created`                  |`auditLog.project.metadataSet`
+|`auditLog.maintainers.deleted`                  |`auditLog.project.removedFromOrganization`
+|`auditLog.maintainers.detail`                   |`auditLog.project.requestAccess`
+|`auditLog.maintainers.listed`                   |`auditLog.project.setEnabledStatus`
+|`auditLog.maintainers.organizationCreated`      |`auditLog.project.storageBackendAssigned`
+|`auditLog.maintainers.updated`                  |`auditLog.project.storageBackendRemoved`
+|`auditLog.organization.adminAdded`              |`auditLog.project.storageTokenCreated`
+|`auditLog.organization.adminRemoved`            |`auditLog.project.undeleted`
+|`auditLog.organization.adminsInProjectsListed`  |`auditLog.project.updated`
+|`auditLog.organization.adminsListed`            |`auditLog.promoCode.applied`
+|`auditLog.organization.deleted`                 |`auditLog.promoCode.created`
+|`auditLog.storageBackendConnection.created`     |`auditLog.storageBackendConnection.listed`
+|`auditLog.storageBackendConnection.updated`     |`auditLog.storageBackendConnection.deleted`
 
 
 #### Operation parameters
