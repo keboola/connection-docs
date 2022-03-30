@@ -20,7 +20,7 @@ Once marked, the project enters a **60-day grace period** during which
 - a request for **undeleting** the project can be sent to our [support team](mailto:support@keboola.com).
 
 After the grace period expires, the deletion becomes **irreversible**, and the project along with any associated data
-will be gone for good.
+will be purged and gone for good.
 
 Again, we strongly suggest you [**export your project**](/management/project/export/) before deleting it.
 

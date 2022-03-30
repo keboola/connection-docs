@@ -306,13 +306,13 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.maintainer.adminRemoved`              |`auditLog.project.invitationsListed`
 |`auditLog.maintainer.adminsListed`              |`auditLog.project.joinRequest.approved`
 |`auditLog.maintainer.invitationCreated`         |`auditLog.project.joinRequest.rejected`
-|`auditLog.maintainer.invitationDeleted`         |`auditLog.project.joinRequest.rejected`
-|`auditLog.maintainer.invitationDetail`          |`auditLog.project.joinRequestsListed`
-|`auditLog.maintainer.invitationsListed`         |`auditLog.project.limitAdded`
-|`auditLog.maintainer.metadataDeleted`           |`auditLog.project.limitRemoved`
-|`auditLog.maintainer.metadataListed`            |`auditLog.project.metadataDeleted`
-|`auditLog.maintainer.metadataSet`               |`auditLog.project.metadataListed`
-|`auditLog.maintainer.promoCodesListed`          |`auditLog.project.metadataSet`
+|`auditLog.maintainer.invitationDeleted`         |`auditLog.project.joinRequestsListed`
+|`auditLog.maintainer.invitationDetail`          |`auditLog.project.limitAdded`
+|`auditLog.maintainer.invitationsListed`         |`auditLog.project.limitRemoved`
+|`auditLog.maintainer.metadataDeleted`           |`auditLog.project.metadataDeleted`
+|`auditLog.maintainer.metadataListed`            |`auditLog.project.metadataListed`
+|`auditLog.maintainer.metadataSet`               |`auditLog.project.metadataSet`
+|`auditLog.maintainer.promoCodesListed`          |`auditLog.project.purged`
 |`auditLog.maintainers.created`                  |`auditLog.project.removedFromOrganization`
 |`auditLog.maintainers.deleted`                  |`auditLog.project.requestAccess`
 |`auditLog.maintainers.detail`                   |`auditLog.project.setEnabledStatus`
@@ -325,7 +325,7 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.organization.adminsListed`            |`auditLog.promoCode.created`
 |`auditLog.organization.deleted`                 |`auditLog.storageBackendConnection.listed`
 |`auditLog.storageBackendConnection.created`     |`auditLog.storageBackendConnection.deleted`
-|`auditLog.storageBackendConnection.updated`
+|`auditLog.storageBackendConnection.updated`     
 
 
 #### Operation parameters
