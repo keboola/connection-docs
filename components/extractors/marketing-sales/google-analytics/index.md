@@ -14,7 +14,9 @@ To do that, you will need a [Google Analytics account](https://analytics.google.
 
 ## Features
 The Google Analytics extractor works with the newest version of the [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/)
-and provides the following key features:
+and [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1).
+
+These APIs provides the following key features:
 
  - **Metric expressions** --- The API allows you to request not only built-in metrics but also combinations of metrics expressed in mathematical operations. For example, you can use the expression `ga:goal1completions/ga:sessions` to request the goal completions per number of sessions.
 
@@ -27,7 +29,7 @@ and provides the following key features:
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
-Select the desired Google Analytics account and profiles (views) from which you would like to extract data.
+Select the desired Google Analytics account and profiles (Reporting API view) or properties (Data API view) from which you would like to extract data.
 
 {: .image-popup}
 ![Screenshot - Intro Page](/components/extractors/marketing-sales/google-analytics/google-analytics-1.png)
@@ -42,21 +44,23 @@ Let's create a simple query with some basic metrics such as Sessions, Users and 
 {: .image-popup}
 ![Screenshot - Create New Query](/components/extractors/marketing-sales/google-analytics/google-analytics-3.png)
 
- 1. Name your query, for example, "Audience".
+ 1. From API selector choose `Reporting API`.
 
- 2. From the metrics selector, choose the following metrics: `ga:sessions`, `ga:users`, `ga:pageviews`.
+ 2. Name your table in the storage, for example, `tutorialTable`.
 
- 3. From the dimensions selector, choose the `ga:date` dimension.
+ 3. From the metrics selector, choose the following metrics: `ga:sessions`, `ga:users`, `ga:pageviews`.
 
- 4. Leave the date range on default (last 4 days).
+ 4. From the dimensions selector, choose the `ga:date` dimension.
 
- 5. See the query results by hitting the `Test query` button.
+ 5. Leave the date range on default (last 4 days).
 
- 6. Now you see sessions, users, and pageviews of the last five days sliced by date.
+ 6. See the query results by hitting the `Test query` button.
 
- 7. When you are happy with the results, save your query.
+ 7. Now you see sessions, users, and pageviews of the last five days sliced by date.
 
- 8. To store the results to Storage, click the "play" icon on the query list page.
+ 8. When you are happy with the results, save your query.
+
+ 9. To store the results to Storage, click the "play" icon on the query list page.
 
 {: .image-popup}
 ![Screenshot - Query Details](/components/extractors/marketing-sales/google-analytics/google-analytics-4.png)
@@ -68,6 +72,10 @@ You can use any expression compatible with the [PHP strtotime() function](https:
 **Multiple date ranges** are useful, for example, when you want to compare metric performance to the previous date range.
 Let's say you want to see Sessions by month, compared to the same month last year.
 Of course, you can download all the data from last year, but with this approach, you can download just the data you need.
+
+**Incremental load**, when you want download data from the previous job.
+
+Notice: **Multiple date ranges** and **Incremental load** cannot use together.
 
 ## Anti-Sampling
 The Google Analytics API does not always return precise data. Under certain circumstances, the data 
@@ -123,7 +131,7 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
     ![Screenshot - Google API Console - Project](/components/extractors/marketing-sales/google-analytics/google_console_project.png)
 
 3. Enable the [**Google Analytics Reporting API**](https://console.developers.google.com/apis/library/analyticsreporting.googleapis.com). 
-If you plan to use the [Multi-Channel Funnels API](https://developers.google.com/analytics/devguides/reporting/mcf/v3), you also need to enable **[Google Analytcics API](https://console.developers.google.com/apis/library/analytics.googleapis.com)**.
+If you plan to use the [Multi-Channel Funnels API](https://developers.google.com/analytics/devguides/reporting/mcf/v3) or [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1), you also need to enable **[Google Analytcics API](https://console.developers.google.com/apis/library/analytics.googleapis.com)**.
  
     {: .image-popup}
     ![Screenshot - Google API Console - Enable API](/components/extractors/marketing-sales/google-analytics/google_console_enable.png)
