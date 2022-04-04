@@ -75,7 +75,7 @@ Of course, you can download all the data from last year, but with this approach,
 
 **Incremental load**, when you want download data from the previous job.
 
-Notice: **Multiple date ranges** and **Incremental load** cannot use together.
+Notice: **Multiple date ranges** and **Incremental load** cannot be uses together.
 
 ## Anti-Sampling
 The Google Analytics API does not always return precise data. Under certain circumstances, the data 
