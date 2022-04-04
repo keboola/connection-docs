@@ -19,6 +19,8 @@ and ideally, also perform a dry run to check that the data in the target system 
 that runs, e.g., every ten minutes, is difficult without an outage of the pipeline. Development Branches are designed 
 to help in such situations.
 
+{% include branches-beta-warning.html %}
+
 ## How Branches Work
 When you create a development branch in your project, you obtain an exact copy of the project and all its current 
 configurations. You can then modify these configurations without ever touching the original ones in production, 
@@ -29,15 +31,26 @@ from the Storage as if it were a normal configuration. However, when your branch
 (tables or files) to Storage, it is stored separately and does not overwrite the original production data and interfere
 with the running configurations. There is no need to duplicate your project's data when creating a new branch. 
 
-## Configuration Chains
-To be able to run chains of configurations in a branch, e.g., an extractor followed by a transformation, the following rules
-apply: 
+### Data pipelines
 
-If you run a branch configuration and branch data is available, it is used. Only if the branch data is not present, 
-the production data is used. Therefore, when you run a branch transformation, it will read the production data and write 
-branch output data. When you run an extractor on which the transformation depends in the branch, it too will create branch 
-output data. When you run the transformation again, it will use the output of the branch extractor and write branch output 
-data.
+When you create an extractor and then transform the data it produces using transformation it behaves the following way in branches: 
+
+In production, you created an extractor that extracts your website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes the data from `in.c-requests` and transforms it into aggregated visits to a bucket named `out.c-visits`. You've already executed the pipeline multiple times, so both buckets have production data in them.
+
+Now when you switch to a new branch, and run the transformation. It will load the input data from `in.c-requests` and transform it. When it's about to write it back to storage, it will automatically prefix the output bucket with an ID of the branch - `out.c-1234-visits`. Your production data is left intact in `out.c-visits`.
+
+<div class="alert alert-info" markdown="1">
+Bucket name is automatically prefixed with branch numeric ID when a job writes to storage in development branch.
+</div>
+
+Now you run the extractor in the branch. It stores the data in a bucket prefixed with branch ID - `in.c-1234-requests`. You production data is again left intact in `in.c-requests`.
+But when you now run the transformation, it will automatically check if you have branch version of the source bucket `in.c-requests`. Because you do have `in.c-1234-requests`, it will load the data from there.
+
+<div class="alert alert-info" markdown="1">
+When a job reads from storage in development branch it checks if there is a branch version of the bucket and uses it. If there is none, it will fallback to reading from production bucket instead.
+</div>
+
+This allows you to test the whole pipeline from start to finish with actual data in a complete isolation from your production data. Also, you don't need to re-run all you production jobs to get the data to the branch.
 
 ## Creating a Branch
 If you have your configurations ready in production and want to create a branch to test some changes, click on your project’s name 
@@ -71,6 +84,18 @@ You can end your branch's lifecycle in two ways:
 **Important:** All this happens in a same project, allowing you to collaborate on the modifications with other members 
 of the project.
 
-## Public Beta Warning
-This feature is currently in public beta. It may not always work as expected. Please bear with us and provide feedback using in-platform feedback button.
+## Component considerations
 
+Certain components are not allowed to run in development branches. There are following special cases where components' functionality is limited in the development branches.
+
+### Working with external resources
+
+Some components, like writers, can write to a destination that is external to Keboola Connection. Those components'
+configs are first marked as *unsafe* in development branch.
+
+You will not be able to run an unsafe config. You need to first observe the config and verify that it's either OK to
+write to the destination, or change the destination accordingly.
+
+### OAuth authorized components
+
+Components using OAuth does not allow authorizing nor changing the OAuth in development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.
