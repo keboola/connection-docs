@@ -45,7 +45,7 @@ make creating a query easy because all options except `name` represent the [Face
 request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
 ### Async Insights Query
-The *Async Insights Query* option specify the way extractor requests the data. If it is checked then data will be extracted asynchronously, the extractor will make an initial request, then by polling fb api waits for the result and once ready extracts it. This allows for bigger amount of data to be extracted especially when the synchronous extraction ends up with error `Please reduce the amount of data you're asking for`. Note that only insights data of the [ads objects](https://developers.facebook.com/docs/marketing-api/insights/parameters/) can be extracted asynchronously.
+The *Async Insights Query* option specify the way extractor requests the data. If it is checked then data will be extracted asynchronously, the extractor will make an initial request, then by polling fb api waits for the result and once ready extracts it. This allows for bigger amount of data to be extracted especially when the synchronous extraction ends up with error `Please reduce the amount of data you're asking for`. Note that only data of the [ads objects (Ad Account, Ad Campaign, Ad Set and Ad)](https://developers.facebook.com/docs/marketing-api/insights/parameters/) can be extracted asynchronously.
 
 ### Name
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
