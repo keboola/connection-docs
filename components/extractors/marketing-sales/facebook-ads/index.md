@@ -44,10 +44,13 @@ The query describes the extractor request to be sent to the Facebook Marketing A
 make creating a query easy because all options except `name` represent the [Facebook Marketing API
 request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
+### Async Insights Query
+The *Async Insights Query* option specify the way extractor requests the data. If it is checked then data will be extracted asynchronously, the extractor will make an initial request, then by polling fb api waits for the result and once ready extracts it. This allows for bigger amount of data to be extracted especially when the synchronous extraction ends up with error `Please reduce the amount of data you're asking for`. Note that only data of the [ads objects (Ad Account, Ad Campaign, Ad Set and Ad)](https://developers.facebook.com/docs/marketing-api/insights/parameters/) can be extracted asynchronously.
+
 ### Name
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
-One query can produce multiple tables. If a table name produced by the query matches the query name or 
-its substring trimmed after the last occurrence of an underscore, then the output table name will not be 
+One query can produce multiple tables. If a table name produced by the query matches the query name or
+its substring trimmed after the last occurrence of an underscore, then the output table name will not be
 prefixed and the query name will be used instead.
 
 For example, if the query name is `ads_insights` and the produced table name is `insights`, then the
@@ -78,6 +81,11 @@ case is `id,name,adset_id`.
     Each field can be parametrized by a dot followed by a modifier name and a value in brackets.
     A typical parameter could be `since`, `until`, `limit`, or any other parameters or modifiers that the particular endpoint offers such as `date_preset` for the [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights) endpoint.
     The following is an example of parametrized fields:     `insights.action_breakdowns(action_type).date_preset(last_month).time_increment(1){ad_id,impressions,reach,actions,clicks,spend}`
+
+
+### Parameters
+The *Parameters* options is the only input beside name for *Async Insights Query* extraction. It represents parameters of [ads objects](https://developers.facebook.com/docs/marketing-api/insights/parameters) of which insights will be extracted asynchronously. The parameters is in query string format, where each `key=value` pair is separated by an ampersand(`&`).
+For example `fields=ad_id,actions&level=ad&action_breakdowns=action_type&date_preset=last_month&time_increment=1`.
 
 ### Ad Accounts
 This option specifies the Ad Accounts that the query will be applied to. Accounts can be chosen from a
