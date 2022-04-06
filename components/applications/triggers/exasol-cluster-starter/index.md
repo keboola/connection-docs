@@ -1,8 +1,6 @@
 ---
 title: Exasol Cluster Starter
 permalink: /components/applications/triggers/exasol-cluster-starter/
-redirect_from:
-    - /triggers/exasol-cluster-starter/
 ---
 
 * TOC
@@ -19,10 +17,37 @@ action you wish to perform on the cluster; either **Start** or **Stop**. Then sa
 ![Exasol CLuster Starter - Configuration](/components/applications/triggers/exasol-cluster-starter/exas_config.png)
 
 ## Getting a Personal Access Token
+You can get a Personal Access Token for authorization by going to top right side of cloud.exasol.com and clicking the icon with your initials.
 
-You can get a Personal Access Token for authorization by going to the cluster you wish to start, clicking the three dots
+{: .image-popup}
+![Exasol CLuster Starter - Getting a token pt1](/components/applications/triggers/exasol-cluster-starter/go_to_icon.png)
+
+Then click **Personal access tokens**. 
+
+{: .image-popup}
+![Exasol CLuster Starter - Getting a token pt2](/components/applications/triggers/exasol-cluster-starter/go_to_pat.png)
+
+Once on the Personal access token site, click **Create token**.
+
+{: .image-popup}
+![Exasol CLuster Starter - Getting a token pt3](/components/applications/triggers/exasol-cluster-starter/pat_screen.png)
+
+Fill in the Token name with a descriptive name, select the **use & operate scope for Database**, click **Generate**. 
+
+{: .image-popup}
+![Exasol CLuster Starter - Getting a token pt4](/components/applications/triggers/exasol-cluster-starter/filled_in_token_settings.png)
+
+Now just save the token to a secure location or just to the component configuration.
+
+{: .image-popup}
+![Exasol CLuster Starter - Getting a token pt4](/components/applications/triggers/exasol-cluster-starter/token_generated.png)
+
+
+## Getting the cluster host
+
+You can get the host of the cluster you wish to start by clicking the three dots
 on the right of the cluster name, clicking **Connect via tools** and going to the 3rd step. 
-There you can generate a Personal Access Token and also view the host of the cluster.
+There you can see the host of the cluster.
 
 ## Functionality notes
 
