@@ -1,6 +1,6 @@
 # Keboola Connection Documentation
 
-[![Build Status](https://travis-ci.com/keboola/connection-docs.svg?branch=master)](https://travis-ci.com/keboola/connection-docs)
+[![Build and deploy](https://github.com/keboola/connection-docs/actions/workflows/main.yml/badge.svg)](https://github.com/keboola/connection-docs/actions/workflows/main.yml)
 
 [How to write documentation](https://keboola.atlassian.net/wiki/spaces/KB/pages/82935879/Public+documentation)
 
