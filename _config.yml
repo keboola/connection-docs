@@ -10,8 +10,8 @@ url: "https://help.keboola.com"
 exclude:
   - docker-compose.yml
   - README.md
-  - deploy.sh
   - .idea
+  - .github
 
 sass:
   style: compressed
