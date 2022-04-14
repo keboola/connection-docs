@@ -11,6 +11,7 @@ extractors that do not fall into any of the above mentioned categories:
 
 - [AWS CUR](/components/extractors/other/aws-cu-reports/) --- imports cost and usage report data of an AWS subscription.
 - [Azure Cost Management](/components/extractors/other/azure-cost/) --- imports cost and usage data of an Azure subscription.
+- [Ceps](/components/extractors/other/ceps/) --- imports data of the electricity transmission system in the Czech Republic (CEPS).
 - [Dark Sky](/components/extractors/other/dark-sky/) --- looks up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
 - [ECB Currency Rates](/components/extractors/other/currency-rates) --- imports currency exchange rates as published by the European Central Bank.
 - [Generic Extractor](/components/extractors/other/generic/) --- can be configured to work with virtually any API.
