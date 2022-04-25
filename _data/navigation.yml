@@ -204,6 +204,9 @@ items:
               - url: /components/extractors/other/azure-cost/
                 title: Azure Cost Management
 
+              - url: /components/extractors/other/ceps/
+                title: Ceps
+
               - url: /components/extractors/other/dark-sky/
                 title: Dark Sky (Weather)
 
