@@ -338,6 +338,8 @@ items:
             items:
               - url: /components/applications/triggers/exasol-cluster-starter/
                 title: Exasol Cluster Starter
+              - url: /components/applications/triggers/orchestration-trigger-queue-v2/
+                title: Orchestration Trigger V2
 
 
       - url: /components/data-templates/
