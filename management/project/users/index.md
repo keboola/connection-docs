@@ -43,6 +43,7 @@ There are four user roles available:
     - import and modify data in [Storage](/storage/),
     - use [Data Catalog](/catalog/),
     - change project settings _(name, description, etc.)_,
+    - create an external authorization link,
     - delete the project,
     - manage users, and
     - manage [API tokens](/management/project/tokens/).
