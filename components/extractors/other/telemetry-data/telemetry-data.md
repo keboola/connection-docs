@@ -260,7 +260,7 @@ You need data for all projects.*
 | `kbc_project_id` | Foreign key to the KBC project | `779_kbc-eu-central-1` |
 | `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
 | `date` | Date of the value | `2019-11-01` |
-| `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down to Writers, Applications and Transformations. | `KBC TB` |
+| `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down to Writers, Applications and Transformations. | `DWH Direct Query` |
 | `is_sandbox` | Flag determining if the value is for sandbox | `true` |
 | `value` | Value of the metric (always related to the particular metric, key-value pairs) | `4.150657` |
 | `organization_value` | Organization value of the metric (used for KBC users, where we’re assigning distinct users to the single org project, so we’re not calculating users more than once when looking at organization value – a single user can be in multiple projects) | `15` |
