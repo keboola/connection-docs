@@ -53,23 +53,24 @@ Writer jobs are measured based on data volume.
 Below you will find an overview of time credits consumed by individual Keboola Connection job types. 
 If you need more information, please contact your CSM.
 
-| Types of jobs in Keboola Connection   | Base job                | Time credits          |
-|---------------------------------------|-------------------------|-----------------------|
-| **Extractor job**                     | 1 GB in                 | **0**                 |
-| **Writer job**                        | 1 GB out                | **0.2**               |  
-| **SQL job / Workspace**               |                         |                       |
-| Small                                 | 1 hour                  | **6**                 |
-| Medium                                | 1 hour                  | **12**                |
-| Large                                 | 1 hour                  | **26**                |
-| **Data Science job / Workspace**      |                         |                       |
-| Small                                 | 1 hour                  | **1**                 |
-| Medium                                | 1 hour                  | **2**                 |
-| Large                                 | 1 hour                  | **6**                 |
-| **DWH Direct query**                  |                         |                       |
-| Small                                 | 1 hour                  | **8**                 |
-| Medium                                | 1 hour                  | **16**                |
-| Large                                 | 1 hour                  | **32**                |
-| **AppStore Apps**                     | 1 hour                  | **1**                 |
+| Types of jobs in Keboola                            | Base job                | Time credits          |
+|-----------------------------------------------------|-------------------------|-----------------------|
+| **Extractor job**                                   | 1 GB in                 | **0**                 |
+| **Writer job**                                      | 1 GB out                | **0.2**               |  
+| **SQL job / Workspace**                             |                         |                       |
+| Small                                               | 1 hour                  | **6**                 |
+| Medium                                              | 1 hour                  | **12**                |
+| Large                                               | 1 hour                  | **26**                |
+| **Transformations / Data Science job / Workspace**  |                         |                       |
+| Small                                               | 1 hour                  | **1**                 |
+| Medium                                              | 1 hour                  | **2**                 |
+| Large                                               | 1 hour                  | **6**                 |
+| XLarge                                              | 1 hour                  | **?**                 |
+| **DWH Direct query**                                |                         |                       |
+| Small                                               | 1 hour                  | **8**                 |
+| Medium                                              | 1 hour                  | **16**                |
+| Large                                               | 1 hour                  | **32**                |
+| **AppStore Apps**                                   | 1 hour                  | **1**                 |
 
 **Types of backends used for jobs**
 
