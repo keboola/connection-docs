@@ -34,7 +34,8 @@ There are four user roles available:
     - manage users,
     - manage [API tokens](/management/project/tokens/),
     - permanently remove configurations in [Trash](/components/#delete-configuration),
-    - create a new [orchestration](/orchestrator/), and
+    - create a new [orchestration](/orchestrator/), 
+    - create an external authorization link, and
     - change the name, the schedule and the disabled status of an existing orchestration.
 - **ReadOnly** -- the user can view all project data, but **cannot**
     - create, modify or delete configurations of [components](/components/), [orchestrations](/orchestrator/) and [transformations](/transformations/),
