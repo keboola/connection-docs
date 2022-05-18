@@ -71,14 +71,15 @@ If you need more information, please contact your CSM.
 | Large                                 | 1 hour                  | **32**                |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
 
-**Types of backends used for jobs**
+**Types of backend sizes used for jobs**
 
-| SMALL SQL                             | Snowflake SMALL DWH or equivalent               |
-| MEDIUM SQL                            | Snowflake MEDIUM DWH                            |
-| LARGE SQL                             | Snowflake LARGE DWH                             |
-| SMALL DS                              | 16 GB RAM, 2 CPU cores, 1TB SSD shared   |
-| MEDIUM DS                             | 32 GB RAM, 4 CPU cores, 1TB SSD shared |
-| LARGE DS                              | 120 GB RAM, 14 CPU cores, 1TB dedicated |
+| SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
+| MEDIUM (SQL                           | Snowflake MEDIUM DWH                            |
+| LARGE (SQL)                           | Snowflake LARGE DWH                             |
+| SMALL (Python,R, Components)          | 8 GB RAM, 1 CPU cores, 10GB SSD, shared         |
+| MEDIUM (Python,R, Components)         | 16 GB RAM, 2 CPU cores, 75GB SSD, shared        |
+| LARGE (Python,R, Components)          | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
+| XLARGE (Python,R, Components)         | 128 GB RAM, 16 CPU cores, 2x300GB SSD, dedicated|
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
