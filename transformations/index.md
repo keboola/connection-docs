@@ -64,6 +64,7 @@ A backend is the engine running the transformation script. It is either a databa
 ([Amazon Redshift](https://aws.amazon.com/redshift/),
 [Snowflake](https://www.snowflake.com/),
 [Exasol](https://www.exasol.com/),
+[Teradata](https://www.teradata.com/),
 [Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
 or a language interpreter 
 ([Julia](https://julialang.org/), 
@@ -129,7 +130,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <th colspan='2'>Feature</th><th>Legacy Transformations</th><th>New Transformations</th>
 </tr>
 <tr>
-    <th rowspan='11'>Backend</th>
+    <th rowspan='12'>Backend</th>
     <th><a href='/transformations/julia/'>Julia Transformations</a></th> 
     <td>✓</td>
     <td>Planned</td>
@@ -176,6 +177,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th><a href='/transformations/exasol/'>Exasol Transformations</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/teradata/'>Teradata Transformations</a></th> 
     <td>Not available</td>
     <td>✓</td>
 </tr>

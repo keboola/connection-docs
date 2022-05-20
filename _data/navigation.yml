@@ -474,6 +474,9 @@ items:
       - url: /transformations/exasol/
         title: Exasol Transformations
 
+      - url: /transformations/teradata/
+        title: Teradata Transformations
+
       - url: /transformations/oracle/
         title: Oracle Transformations
 
