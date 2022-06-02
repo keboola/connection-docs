@@ -1,11 +1,13 @@
 ---
-title: Bring Your Own Database
+title: Bring Your Own Database (BYODB)
 permalink: /storage/backends/byodb/
 ---
 
 ## Snowflake
 
-In certain cases you are able to use your own Snowflake account to host the data from Keboola Connection. The underlying database is only accessed using the Storage API. This allows Keboola to perform better audit logging, assert access control and generally implement features that the backend itself does not provide.
+In certain cases you are able to use your own Snowflake account to host the data from Keboola Connection. The underlying database is only accessed using the [Storage API](https://keboola.docs.apiary.io/). This allows Keboola to perform better audit logging, assert access control and generally implement features that the backend itself does not provide.
+
+For the integration to work, your Snowflake account needs to be accessible from a subset of [our IP addresses](/components/ip-addresses/).   
 
 ### When it's a good idea to connect your own Snowflake
 
