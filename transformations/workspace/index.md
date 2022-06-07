@@ -135,6 +135,24 @@ or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or bot
 Unloading data is useful, for example, when your ad-hoc analysis leads to
 valuable results, or when you trained a new model which you'd like to use in transformations.
 
+### Data Persistency (beta)
+When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.
+
+Once this feature is activated, we will automatically back up all the data in newly created workspaces up to the limits defined by your selected workspace size. More specifically:
+- Small (50 GB), medium (100 GB), and large (150 GB)
+- Everything in the /data folder will be kept.
+- Auto-save (backup) of notebooks is disabled.
+- Input-mapping is performed automatically only once, when the workspace is created, not when a workspace resumes.
+
+Nothing changes for workspaces created before the feature was activated. Your data will be lost upon leaving the workspace. 
+Workspaces created following the feature's deactivation will not keep their data when you leave.
+However, if a workspace is created while the feature is activated, it will keep its data even after the feature is deactivated. Your data will be kept until the workspace is deleted.
+
+Provisioning of persistent storage takes some time, usually 2–3 minutes after the feature is activated. To prevent workspaces that are begun in the meantime from becoming broken, we block their initiation until the storage is ready to be used.
+
+Pricing:
+Curently for FREE in public beta. When it is generaly available, additional charges will apply. 
+
 ## Developing Transformations
 Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
 and develop a script in JupyterLab, you can use the **Create Transformation** button to 
