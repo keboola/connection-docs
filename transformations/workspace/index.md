@@ -136,20 +136,22 @@ Unloading data is useful, for example, when your ad-hoc analysis leads to
 valuable results, or when you trained a new model which you'd like to use in transformations.
 
 ### Data Persistency (beta)
-When enabled on project your data in workspaces can be kept so when you return you can start from where you left off without losing data or time by having to import the data again or having to execute scripts to get to the right stage.
+When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.
 
-Once activated, we will automatically back up all the data in newly created workspaces up to the limits defined by your selected workspace size. More specifically:
-- Small (50 GB), Medium (100 GB), Large (150 GB)
-- Everything in the /data folder will be kept
-- Auto-save (backup) of notebooks is disabled
-- Input-mapping is performed automatically only once when the workspace is created, not when a workspace resumes
+Once this feature is activated, we will automatically back up all the data in newly created workspaces up to the limits defined by your selected workspace size. More specifically:
+- Small (50 GB), medium (100 GB), and large (150 GB)
+- Everything in the /data folder will be kept.
+- Auto-save (backup) of notebooks is disabled.
+- Input-mapping is performed automatically only once, when the workspace is created, not when a workspace resumes.
 
-Previously created workspaces dont change. The same once deactivated, newly created workspaces wount have data persistency but already cerated workspaces will keep the persistency until deleted. 
+Nothing changes for workspaces created before the feature was activated. Your data will be lost upon leaving the workspace. 
+Workspaces created following the feature's deactivation will not keep their data when you leave.
+However, if a workspace is created while the feature is activated, it will keep its data even after the feature is deactivated. Your data will be kept until the workspace is deleted.
 
-Provisioning of persistent storage takes some time, usually 2-3 minutes after the feature is activated. To prevent workspaces that start in the meantime from becoming broken, we block their start until the storage is ready to be used.
+Provisioning of persistent storage takes some time, usually 2–3 minutes after the feature is activated. To prevent workspaces that are begun in the meantime from becoming broken, we block their initiation until the storage is ready to be used.
 
 Pricing:
-Curently for FREE in public beta. When generaly available additional charges will apply 
+Curently for FREE in public beta. When it is generaly available, additional charges will apply. 
 
 ## Developing Transformations
 Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
