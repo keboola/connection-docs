@@ -373,3 +373,11 @@ This table shows metrics related to your contracts.
 | `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_ppu`
 | `usage_metric` | Name of the metric | `2019-08-01` |
 | `metric_type` | Defines if metric is calculated cumulatively over period of time (like PPU) or if it has actual total value on particular date (like Projects). <br> Possible values: <br> `cumulative`, `standard` | `cumulative` |
+
+## dst_ Columns
+Columns with **dst_** prefix are system columns used in the Telemetry Data extractor executions. They are **not** related to the data itself.
+
+## Data Recency
+You can get up to approx. 3 hours old data about telemetry of your project when running the extractor.
+
+*Note: This is not guaranteed, as the raw data are being processed before reaching the extractor's source, hence delays in the processing might occur.*
