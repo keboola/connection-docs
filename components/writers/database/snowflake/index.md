@@ -144,3 +144,7 @@ To share data between your Keboola Connection project and Tableau, choose the **
 The writer will create a dedicated database for you and give you credentials. Run the writer and when it is finished, connect the Tableau data sources. Follow the official 
 [instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
 or for [Tableau Online](https://help.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password authentication method.
+
+
+### Connect to Retool
+It is possible to use the Snowflake writer to share data with [Retool](https://retool.com/). Retool requires specifying the User Role when creating the resource. The user role will always be the same as the USERNAME provided by the **Keboola Snowflake database** credentials. [Read more about connecting Snowflake to Retool](https://docs.retool.com/docs/snowflake-integration)
