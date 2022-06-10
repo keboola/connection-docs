@@ -3,29 +3,29 @@ title: Bring Your Own Database (BYODB)
 permalink: /storage/backends/byodb/
 ---
 
+In certain cases you are able to use your own Snowflake account to host the data from Keboola Connection. Currently, we only support this for Snowflake backend.  
+
 ## Snowflake
 
-In certain cases you are able to use your own Snowflake account to host the data from Keboola Connection. The underlying database is only accessed using the [Storage API](https://keboola.docs.apiary.io/). This allows Keboola to perform better audit logging, assert access control and generally implement features that the backend itself does not provide.
+For the integration to work, your Snowflake account needs to be accessible from a subset of [our IP addresses](/components/ip-addresses/).
 
-For the integration to work, your Snowflake account needs to be accessible from a subset of [our IP addresses](/components/ip-addresses/).   
+We don't support [SCIM](https://docs.snowflake.com/en/user-guide/scim.html) authentication (AAD, Okta). 
 
-### When it's a good idea to connect your own Snowflake
+### Accessing data in Keboola Connection from outside
 
-Very good reason to do this is economy. If you already use Snowflake in your business, you already pay for the account. Connecting your own Snowflake decouples Snowflake payments from your Keboola usage. Your queries run on your account, so they are never influenced by queries ran by other clients. 
+Because Keboola Connection manages access to the data, you need to only use the provided roles and not grant any grants on Keboola-managed resources. 
 
-Another good reason is preventing vendor lock-in. We'll never lock you out of your data and offer robust [Data Takeout](/management/project/export/) functionality. Still you might rather have your data in your own account. That is fine as long as you don't want to access the data from outside while still using Keboola Connection. 
+#### Read-only access to project storage
 
-### When it's not a good idea to connect your own Snowflake
+If the project has Read-only Input Mapping feature enabled, you are provided with a role `KEBOOLA_$PROJECTID_RO` for each project. This role has read-only access to all the schemas and tables in the project. You can grant this role to any of your own roles or users to give it access to the project's storage.
 
-Having direct access to the data stored in Snowflake from outside Keboola is not a good reason to have your own Snowflake. As mentioned earlier, the underlying database is accessed only through Storage API. The API also enriches the backend tables and buckets with metadata. Storing metadata outside the storage backend allows us faster access, features like automatic incremental loading, renaming in metadata (instead of renaming the actual tables and refactoring all the queries where they are used) and others. 
+##### Read-only access without granting roles in snowflake
 
-Writing data to Snowflake directly to be accessed from within Keboola is also not a good reason. As mentioned the table metadata needs to be in sync to allow for advanced functions to work.
+You can use the in-built functionality of [transformation workspaces](/transformations/workspace/). The user created for the workspace has the abovementioned role granted automatically. This workflow works even if you *don't* use your own SNFLK account.
 
-Generally, directly accessing projects Storage is not a good idea, because there are a lot of assumptions in the API that depend on the fact that the Storage is only accessed via Storage API and is never in inconsistent state. Also, seemingly harmless activities, like giving some role read only access to a bucket by granting future grants on tables in schema may have unintended consequences.   
+### Dynamic backends size for BYODB Snowflake
 
-#### Granting access to data managed by Keboola
-
-The access control model set by Keboola in Snowflake is somewhat intricate and offers Snowflake-level isolation of data access. The model is set up in a way that one project or workspace cannot access other projects data even if there is a bug in Keboola Connection code. Those are different users in Snowflake altogether. This level of data security comes at a price though - it's complex and hard to work with manually.
+  Dynamic backends feature requires you to have one Snowflake warehouse for each backend size. The actual sizes of warehouses are independent of the representation in Keboola (Small, Medium, Large). You can have XSmall, Small and XLarge. We recommend that the warehouses are set up with [aggressive AUTO_SUSPEND value](https://docs.snowflake.com/en/user-guide/warehouses-considerations.html#automating-warehouse-suspension), even as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/alter-warehouse.html). 
 
 ### Rules of accessing Snowflake objects created by Keboola Connection
 
