@@ -62,9 +62,10 @@ If you need more information, please contact your CSM.
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |
 | **Data Science job / Workspace**      |                         |                       |
+| XSmall                                | 1 hour                  | **0.5**               |
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |
-| Large                                 | 1 hour                  | **6**                 |
+| Large                                 | 1 hour                  | **8**                 |
 | **DWH Direct query**                  |                         |                       |
 | Small                                 | 1 hour                  | **8**                 |
 | Medium                                | 1 hour                  | **16**                |
@@ -76,10 +77,10 @@ If you need more information, please contact your CSM.
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
 | MEDIUM (SQL                           | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
-| SMALL (Python,R, Components)          | 8 GB RAM, 1 CPU cores, 10GB SSD, shared         |
-| MEDIUM (Python,R, Components)         | 16 GB RAM, 2 CPU cores, 75GB SSD, shared        |
-| LARGE (Python,R, Components)          | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
-| XLARGE (Python,R, Components)         | 128 GB RAM, 16 CPU cores, 2x300GB SSD, dedicated|
+| XSMALL (Python,R, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared        |
+| SMALL (Python,R, Components)          | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
+| MEDIUM (Python,R, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
+| LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated|
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
