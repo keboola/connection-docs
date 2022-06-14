@@ -62,23 +62,25 @@ If you need more information, please contact your CSM.
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |
 | **Data Science job / Workspace**      |                         |                       |
+| XSmall                                | 1 hour                  | **0.5**               |
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |
-| Large                                 | 1 hour                  | **6**                 |
+| Large                                 | 1 hour                  | **8**                 |
 | **DWH Direct query**                  |                         |                       |
 | Small                                 | 1 hour                  | **8**                 |
 | Medium                                | 1 hour                  | **16**                |
 | Large                                 | 1 hour                  | **32**                |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
 
-**Types of backends used for jobs**
+**Types of backend sizes used for jobs**
 
-| SMALL SQL                             | Snowflake SMALL DWH or equivalent               |
-| MEDIUM SQL                            | Snowflake MEDIUM DWH                            |
-| LARGE SQL                             | Snowflake LARGE DWH                             |
-| SMALL DS                              | 16 GB RAM, 2 CPU cores, 1TB SSD shared   |
-| MEDIUM DS                             | 32 GB RAM, 4 CPU cores, 1TB SSD shared |
-| LARGE DS                              | 120 GB RAM, 14 CPU cores, 1TB dedicated |
+| SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
+| MEDIUM (SQL                           | Snowflake MEDIUM DWH                            |
+| LARGE (SQL)                           | Snowflake LARGE DWH                             |
+| XSMALL (Python,R, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared        |
+| SMALL (Python,R, Components)          | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
+| MEDIUM (Python,R, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
+| LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated|
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
