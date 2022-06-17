@@ -24,10 +24,12 @@ Free Plan projects have the following limits:
 Users can choose between a Keboola-managed backend or their own Snowflake backend.
 
 ## Pricing & Purchasing Aditional Minutes
-Each Free Plan project receives 300 minutes of free runtime per month. Minutes are used for running of any process (a component job, an active Python workspace, SQL queries 
-in Keboola-managed DWH, etc.). The only exception are orchestration jobs, which are not consuming any minutes. 
+Each Free Plan project receives 300 minutes of free runtime per month. Minutes are used for running of any process 
+(a component job, an active Python workspace, SQL queries in Keboola-managed DWH, etc.). The only exception are orchestration jobs,
+which are not consuming any minutes. 
 
-Additional minutes can be purchased within the platform by using a credit card to prevent your jobs being blocked after you have used all your free minutes. There is no contract apart from the Free Plan Terms of Services. 
+Additional minutes can be purchased within the platform by using a credit card to prevent your jobs being blocked after you have used
+all your free minutes. There is no contract apart from the Free Plan Terms of Services. 
 
 Unused free minutes do not roll over from one month to the next. Purchased minutes do not expire during the life of the project.
 
@@ -48,4 +50,16 @@ If your credit card is declined when purchasing more minutes, possible reasons i
 - The transaction exceeds the credit card’s maximum transaction amount.
 
 ## Free Plan Project Upgrade
-Any Free Plan project can be upgraded to a [standard Keboola Connection project](/management/project/) upon the execution of our standard order form under the Master Software Subscription Agreement (MSSA).
+Any Free Plan project can be upgraded to a [standard Keboola Connection project](/management/project/) upon the execution 
+of our standard order form under the Master Software Subscription Agreement (MSSA).
+
+## Project Deletion
+
+If your project does not use any credits for 30 days, we will mark it as inactive and scheduled for deletion. 
+We will inform you about that, and send you several warning emails.
+
+Next, 45 days after marking your project as inactive, we will check it one more time, to make sure that it is still inactive 
+and that you have not requested the deletion to be canceled.
+
+If, during those 45 days, there has been no new activity in your project and we have not received a request from you to cancel 
+the deletion, we will then permanently delete the project.
