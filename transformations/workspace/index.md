@@ -151,7 +151,7 @@ However, if a workspace is created while the feature is activated, it will keep 
 Provisioning of persistent storage takes some time, usually 2–3 minutes after the feature is activated. To prevent workspaces that are begun in the meantime from becoming broken, we block their initiation until the storage is ready to be used.
 
 Pricing:
-Curently for FREE in public beta. When it is generaly available, additional charges will apply. 
+Curently for FREE in public beta. When it is generally available, additional charges will apply. 
 
 ## Developing Transformations
 Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
