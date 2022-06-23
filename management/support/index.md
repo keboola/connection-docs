@@ -7,7 +7,7 @@ permalink: /management/support/
 {:toc}
 
 There are multiple ways to obtain support from within your project.
-First and foremost, there is the **Support** link in settings in the top menu. Click it and fill in a form
+First and foremost, there is a button at the bottom right of your project. Click it, select **Support / Chat**, and fill in the form
 to create a ticket, which will reach your maintainer.
 
 {: .image-popup}
