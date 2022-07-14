@@ -73,7 +73,7 @@ This can happen for some [exported or imported tables](/storage/tables/uploads/)
 Merging a sliced file requires a [substantial effort](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
 
 ## Limits
-The maximum allowed size of an uploaded file is currently 5 GB (5,368,709,120 bytes exactly). 
+The maximum allowed size of an uploaded file is currently 2 GB (2,048,000,000 bytes exactly). 
 This applies to both file and table uploads. 
 The actual table size may be bigger, because the table is uploaded as a compressed file. 
 If you need to upload a larger file, you need to use 
