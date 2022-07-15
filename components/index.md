@@ -14,7 +14,6 @@ Components are divided into four main categories:
 - [**Extractors**](/components/extractors/) -- bring data into a Keboola Connection project.
 - [**Writers**](/components/writers/) -- send processed data into a target system.
 - [**Applications**](/components/applications/) -- process complex data.
-- [**Data Templates**](/components/data-templates/) -- are pre-defined sets of configurations.
 
 All components, regardless of their category, behave the same way. To use a component, you have to 
 create a **configuration** first. A configuration is used to set the necessary parameters for each 
