@@ -342,9 +342,6 @@ items:
                 title: Orchestration Trigger V2
 
 
-      - url: /components/data-templates/
-        title: Data Templates
-
       - url: /components/branches/
         title: Development Branches
 
