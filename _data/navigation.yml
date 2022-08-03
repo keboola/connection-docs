@@ -111,6 +111,12 @@ items:
               - url: /components/extractors/database/sqldb/
                 title: SQL Databases
 
+          - url: /components/extractors/erp/
+            title: ERP
+            items:
+              - url: /components/extractors/erp/k2/
+                title: K2
+
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
             items:
