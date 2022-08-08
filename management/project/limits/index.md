@@ -66,6 +66,7 @@ If you need more information, please contact your CSM.
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |
 | Large                                 | 1 hour                  | **8**                 |
+| Deployed & running ML model (BETA)    | 1 hour                  | **0.1**               |
 | **DWH Direct query**                  |                         |                       |
 | Small                                 | 1 hour                  | **8**                 |
 | Medium                                | 1 hour                  | **16**                |
