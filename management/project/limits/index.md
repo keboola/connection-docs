@@ -55,7 +55,7 @@ If you need more information, please contact your CSM.
 
 | Types of jobs in Keboola Connection   | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
-| **Extractor job**                     | 1 GB in                 | **0**                 |
+| **Extractor job**                     | 1 GB in                 | **Per contract**                 |
 | **Writer job**                        | 1 GB out                | **0.2**               |  
 | **SQL job / Workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
