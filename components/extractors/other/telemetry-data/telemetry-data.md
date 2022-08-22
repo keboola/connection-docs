@@ -130,6 +130,8 @@ This table lists the Keboola Connection [jobs](/management/jobs/)
 | `job_start_at` | Datetime of when the job started | `2020-03-15 11:59:39` |
 | `job_created_at` | Datetime of when the job was created | `2020-03-15 11:59:38` |
 | `job_status` | Status of the job (`success`, `error`, `terminated`, `processing`) | `success` |
+| `error_type` | Type of the error of the unsuccessful job (`user`, `application`) | `user` |
+| `error_message` | Message propagated in the error job event | `Transformation aborted with message...` |
 | `job_run_type` | Determines if the job was run by an orchestration or manually (`orchestration`, `manual`) | `orchestration` |
 | `token_id` | Identifier of the token that ran this job | `145062` |
 | `token_name` | Name of the token that ran this job | `Orchestrator GDrive` |
