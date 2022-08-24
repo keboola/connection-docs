@@ -13,7 +13,7 @@ example, the transformation [`COPY` mapping](/transformations/snowflake/#load-ty
 the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
 the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
-Even if a data type is available for a column, that column is always stored as text --- keep this in mind
+Even if a data type is available for a column, that column is always stored as text (unless [native datatypes](#native-datatypes) feature is enabled) --- keep this in mind
 especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. 
 The non-text column type is used only during a component (transformation or writer) execution.
 The basic idea behind this is that a text type has the best interoperability, so this averts many issues (e.g., some 
@@ -992,3 +992,19 @@ The `TIMESTAMP` base type represents a date value with a time portion.
     <th>Target</th>
 </tr>
 </table>
+
+### Native datatypes
+
+As mentioned above, Keboola stores data in storage as text by default. Native datatypes feature breaks this paradigm. If this feature is enabled, data in storage are stored in columns which have datatypes as described in Keboola metadata. 
+
+There are two options how typed tables can be created
+1. manually using [tables-definition enpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) and then loaded with data in output mapping. Datatypes used in this endpoint have to correspond with the storage backend which your project uses. Or you can use [BASETYPES](#base-types).
+2. by a component which can provide information about datatypes of data which it produces - mostly database extractors and transformations. Other components will create non-typed table, where all columns have text type.
+
+#### Pros and cons
+- **Pros**
+  - Manipulation with such data is easier and un/loading can be faster.
+  - There is no need for casting when using [Read-only IM](/storage/backends/byodb/#read-only-access-to-project-storage)
+- **Cons**
+  - Datatypes in typed tables are given and there is no way how it can be altered (neither UI nor API)
+  - Load to such tables is more sensitive, because provided data have to fit to defined types.
