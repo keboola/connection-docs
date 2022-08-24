@@ -13,9 +13,8 @@ example, the transformation [`COPY` mapping](/transformations/snowflake/#load-ty
 the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
 the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
-Even if a data type is available for a column, storage always creates internally all columns for table as text not null and null-able values are converted to empty strings (except for Exasol where everything is null). 
-This behavior can be changed in certain cases with feature [native datatypes](#native-datatypes). Keep this in mind
-especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. 
+Even if a data type is available for a column, storage always creates internally all columns for table as text not null and null-able values are converted to empty strings (except for Exasol where everything is null). Keep this in mind
+especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. This behavior can be changed in certain cases with feature [native datatypes](#native-datatypes).
 The non-text column type is used only during a component (transformation or writer) execution.
 The basic idea behind this is that a text type has the best interoperability, so this averts many issues (e.g., some 
 date values stored in a MySQL database might not be accepted by a Snowflake database and vice-versa). 
@@ -1015,3 +1014,8 @@ There are two options how typed tables can be created
   - There is no need for casting when using [Read-only IM](/storage/backends/byodb/#read-only-access-to-project-storage)
 - **Cons**
   - Datatypes in typed tables are given and there is no way how it can be altered (neither UI nor API)
+
+Table with native datatypes is labeled in UI with a badge:
+
+{: .image-popup}
+![Screenshot - Table with native datatypes](/storage/tables/data-types/typed-table.png)
