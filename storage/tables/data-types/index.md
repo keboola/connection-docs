@@ -13,8 +13,8 @@ example, the transformation [`COPY` mapping](/transformations/snowflake/#load-ty
 the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
 the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
-Even if a data type is available for a column, that column is always stored as text --- keep this in mind
-especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. 
+Even if a data type is available for a column, storage always creates internally all columns for table as text not null and null-able values are converted to empty strings (except for Exasol where everything is null). Keep this in mind
+especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. This behavior can be changed in certain cases with feature [native datatypes](#native-datatypes).
 The non-text column type is used only during a component (transformation or writer) execution.
 The basic idea behind this is that a text type has the best interoperability, so this averts many issues (e.g., some 
 date values stored in a MySQL database might not be accepted by a Snowflake database and vice-versa). 
@@ -992,3 +992,30 @@ The `TIMESTAMP` base type represents a date value with a time portion.
     <th>Target</th>
 </tr>
 </table>
+
+### Native datatypes
+
+As mentioned above, Keboola stores data in storage as text by default. Native datatypes feature breaks this paradigm. If this feature is enabled, data in storage are stored in columns which have datatypes as described in Keboola metadata. 
+
+There are two options how typed tables can be created
+1. manually using [tables-definition enpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) and then loaded with data in output mapping. Datatypes used in this endpoint have to correspond with the storage backend which your project uses. Or you can use [BASETYPES](#base-types).
+2. by a component which can provide information about columns datatypes
+  - database extractors and transformations matching storage backend will create storage tables with same types
+  - database extractors and transformations not matching backend will create storage tables using [BASETYPES](#base-types)
+  - Other components will create non-typed table, where all columns have text type.
+
+   **_NOTE:_**  Not all database extractors and transformations can produce basetypes.
+
+   **_NOTE:_**  Some components may produce basetypes for columns and thus produce typed tables
+
+#### Pros and cons
+- **Pros**
+  - Manipulation with such data is easier and un/loading can be faster.
+  - There is no need for casting when using [Read-only IM](/storage/backends/byodb/#read-only-access-to-project-storage)
+- **Cons**
+  - Datatypes in typed tables are given and there is no way how it can be altered (neither UI nor API)
+
+Table with native datatypes is labeled in UI with a badge:
+
+{: .image-popup}
+![Screenshot - Table with native datatypes](/storage/tables/data-types/typed-table.png)
