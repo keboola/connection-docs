@@ -330,6 +330,9 @@ scripts is in no way required, you can put your whole script in a single block a
 
 #### Autocompletion
 
+{: .image-popup}
+![Autocompletion](/transformations/autocompletion.png)
+
 To improve code editing we support autocompletion in the editor.
 
 Currently, it supports autocompletion of:
