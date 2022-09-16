@@ -328,6 +328,30 @@ The above setup therefore executes: Company, Contact, Employee, Opportunity & Au
 Opportunity & Contact as if it were a single script (SQL in this case). Splitting the code into
 scripts is in no way required, you can put your whole script in a single block and code. 
 
+#### Autocompletion
+
+{: .image-popup}
+![Autocompletion](/transformations/autocompletion.png)
+
+To improve code editing we support autocompletion in the editor.
+
+Currently, it supports autocompletion of:
+
+- Language specific reserved words
+- `SELECT`, `UPDATE`, etc. in SQL transformations
+- `import`, `while`, etc. in Python transformations
+- Tables you added to Input Mapping or Output Mapping
+- When working with Python or R transformations, a relative path will be suggested (e.g., `in/tables/cars.csv`).
+- Variables you defined in your transformation (also with values)
+
+To trigger autocompletion, use `Ctrl+Space` or `Option+Space` as you would in your favourite IDE/editor.
+
+When triggered
+
+- after typing `"`, it will suggest available tables.
+- after typing `{% raw %}{{{% endraw %}`, it will suggest available variables.
+- in other cases, it will suggest everything (see the screenshot above).
+
 ### Legacy Transformations
 Legacy Transformations are the current version of transformations available in most projects
 in the US and EU stacks. Each transformation bucket can contain any number of individual transformations.
