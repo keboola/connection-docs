@@ -251,8 +251,20 @@ This table shows [Storage table](/storage/tables/) snapshots.
 
 ### kbc_usage_metrics_values
 This table shows aggregated values of all metrics that may be part of the contract, for example, consumed credits, 
-data in storage, and the number of users. This combines data from different data sources (jobs, Snowflake stats, 
-etc.), so it is possible to use it for consumption overview.
+data in storage, and the number of users. This combines data from different data sources (tables), so it is possible to use it for consumption overview.
+
+`usage_breakdown` data sources (which tables are source for the results):
+* `Applications` - `kbc_job` (jobs with **application** *component_type*)
+* `Data Science` - `kbc_job` (jobs with **R/Python** *transformation_type*)
+* `Data Science Sandbox` - `kbc_data_science_sandbox` (aggregation of *sandbox_runtime_hours*)
+* `DWH Direct Query` - `kbc_snowflake_stats` (records with **writer/dwhm** *snowflake_job_type*)
+* `Extractor` - `kbc_job` (jobs with **extractor** *component_type*)
+* `KBC Users` - `kbc_project_user` (Active/Inactive state is defined based on users' activity in last 3 days)
+* `KBC Projects` - `kbc_project` (existing projects per particular date)
+* `KBC TB` - `kbc_project_snapshot` (aggregation of *bytes*)
+* `Snowflake Sandbox` - `kbc_snowflake_stats` (records with **sandbox** *snowflake_job_type*)
+* `Transfromations` - `kbc_job` (jobs with **SQL** *transformation_type*)
+* `Writers` - `kbc_job` (jobs with **writer** *component_type*)
 
 *Note: `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
