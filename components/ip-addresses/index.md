@@ -34,6 +34,10 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `52.7.83.136`
 - `52.20.72.254`
 
+Storage workers outbound IPs for [Bring Your Own Database Backed (BYODB)](/storage/backends/byodb/):
+- `3.222.3.15`
+- `34.206.78.206`
+
 ## connection.eu-central-1.keboola.com
 For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`), 
 the following IP addresses are currently used:
@@ -47,6 +51,9 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `3.66.248.180`
 - `3.64.150.30`
 
+Storage workers outbound IPs for [Bring Your Own Database Backed (BYODB)](/storage/backends/byodb/):
+- `35.157.62.225`
+- `3.71.156.204`
 
 ## connection.north-europe.azure.keboola.com
 For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
