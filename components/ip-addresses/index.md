@@ -34,7 +34,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `52.7.83.136`
 - `52.20.72.254`
 
-Storage workers outbound IPs for [Bring Your Own Database Backed (BYODB)](/storage/backends/byodb/):
+Following IP addresses are still owned by Keboola but not used by Keboola Connection anymore. You can safely remove them from your firewalls:
 - `3.222.3.15`
 - `34.206.78.206`
 
@@ -51,7 +51,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `3.66.248.180`
 - `3.64.150.30`
 
-Storage workers outbound IPs for [Bring Your Own Database Backed (BYODB)](/storage/backends/byodb/):
+Following IP addresses are still owned by Keboola but not used by Keboola Connection anymore. You can safely remove them from your firewalls:
 - `35.157.62.225`
 - `3.71.156.204`
 
