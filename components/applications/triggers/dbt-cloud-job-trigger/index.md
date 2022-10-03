@@ -17,12 +17,12 @@ If you check the **Wait for result** option, the component waits for the job to 
 
 {: .image-popup}
 ![dbt Cloud Job Trigger - Configuration](/components/applications/triggers/dbt-cloud-job-trigger/dbt_trigger_config.png)
-* Fill in ```Account ID```
-* Fill in ```Job ID```
-* Fill in ```API key```
-* You can use the ```Cause``` field to enter custom Cause message to be sent when triggering Cloud job.
-* If you want the component to wait until the job finishes and store results of [getRunById](https://docs.getdbt.com/dbt-cloud/api-v2#tag/Runs/operation/getRunById) along with all available artifacts into the artifacts storage, select the ```Wait for result``` option.
-* Select the maximum time the component waits for results using ```Max wait time``` field.
+* Fill in **Account ID**
+* Fill in **Job ID**
+* Fill in **API key**
+* You can use the Cause field to enter custom Cause message to be sent when triggering Cloud job.
+* If you want the component to wait until the job finishes and store results of [getRunById](https://docs.getdbt.com/dbt-cloud/api-v2#tag/Runs/operation/getRunById) along with all available artifacts into the artifacts storage, select the **Wait for result** option.
+* Select the maximum time the component waits for results using **Max wait time** field.
 
 ## Getting a Service account token
 You can find out how to get a service account token in [dbt Cloud documentation](https://docs.getdbt.com/docs/dbt-cloud/dbt-cloud-api/service-tokens).
