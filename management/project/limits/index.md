@@ -47,9 +47,6 @@ based on
 - type of the job (sandbox, SQL transformation, Python transformation), and 
 - performance of the backend used for the job (templates basic, medium, and large).
 
-**Important:** Keboola Connection doesn’t count time on extractors and writers, they are excluded. 
-Writer jobs are measured based on data volume.
-
 Below you will find an overview of time credits consumed by individual Keboola Connection job types. 
 If you need more information, please contact your CSM.
 
