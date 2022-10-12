@@ -420,6 +420,18 @@ items:
       - url: /transformations/variables/
         title: Variables & Shared Code
 
+      - url: /transformations/dbt/
+        title: dbt Transformation
+        items:
+          - url: /transformations/dbt/cli/
+            title: CLI
+
+          - url: /transformations/dbt/transformation/
+            title: Transformation configuration
+
+          - url: /transformations/dbt/cloud/
+            title: dbt Cloud support
+
       - url: /transformations/python-plain/
         title: Python Transformations
 
