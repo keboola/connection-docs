@@ -25,7 +25,7 @@ brew upgrade keboola-cli
 kbc --version
 ```
 
-<img src="imgs/2772467715.png" width="100%">
+![](imgs/2772467715.jpg){: width="100%" }
 
 **You will have then the access to dbt-related commands within kbc CLI!**
 
@@ -84,18 +84,19 @@ dbt debug -t beer_demo --profiles-dir .
 *   We are using local profiles, those are using environmental variables stored before.
 
 
-![](imgs/2769649699.png?width=442){: width="100%" }
+![](imgs/2769649699.png){: width="100%" }
 
 User should see green in all steps:
 
-![](imgs/2770239505.png?width=612){: width="100%" }
+![](imgs/2770239505.png){: width="100%" }
 
 dbt Run
 -------
 
 For the script alteration, the only check/change user has to make with off-the-shelf scripts is to alter source definitions to match sources:
 
-![](imgs/2769879073.png?width=374)![](imgs/2770042889.png?width=374){: width="100%" }
+![](imgs/2769879073.png){: width="100%" }
+![](imgs/2770042889.png){: width="100%" }
 
 To execute the dbt:
 
