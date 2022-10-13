@@ -1,6 +1,6 @@
 ---
 title: dbt Cloud
-permalink: /transformations/dbt/cloud
+permalink: /transformations/dbt/cloud/
 ---
 
 dbt Cloud is supported via dedicated components. Users can find them in “components” menu section:

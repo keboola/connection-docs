@@ -432,6 +432,9 @@ items:
           - url: /transformations/dbt/cloud/
             title: dbt Cloud support
 
+          - url: /transformations/dbt/flows/
+            title: Usage in Flows
+
       - url: /transformations/python-plain/
         title: Python Transformations
 

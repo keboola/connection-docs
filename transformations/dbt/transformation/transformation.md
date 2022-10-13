@@ -1,6 +1,6 @@
 ---
 title: dbt transformation
-permalink: /transformations/dbt/transformation
+permalink: /transformations/dbt/transformation/
 ---
 
 ## Configuration
