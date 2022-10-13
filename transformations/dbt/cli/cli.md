@@ -25,7 +25,7 @@ brew upgrade keboola-cli
 kbc --version
 ```
 
-![](imgs/2772467715.jpg){: width="100%" }
+![](imgs/2772467715.png){: width="100%" }
 
 **You will have then the access to dbt-related commands within kbc CLI!**
 
@@ -96,6 +96,8 @@ dbt Run
 For the script alteration, the only check/change user has to make with off-the-shelf scripts is to alter source definitions to match sources:
 
 ![](imgs/2769879073.png){: width="100%" }
+
+
 ![](imgs/2770042889.png){: width="100%" }
 
 To execute the dbt:

@@ -51,7 +51,7 @@ Note: You can control threads for the execution as a part of this settings.
 
 ## Run debug job
 
-![](imgs/2776563940.png){: width="100%" }
+![](imgs/2776563940.png){: width="50%" }
 
 To test if you are using correct credentials and if the overall project is correct, you can run a debug job. This is the same as running `dbt debug` from the command prompt.
 
@@ -85,7 +85,8 @@ When a user runs dbt transformation manually, a new job is being triggered with 
 You can also access all configuration jobs from configuration screen and jobs menu section.
 
 ![](imgs/2776563958.png){: width="100%" }
-![](imgs/2776563964.png){: width="100%" }
+
+![](imgs/2776563964.png){: width="50%" }
 
 ## Discover
 
@@ -97,7 +98,7 @@ The Discover tab is designed to provide more information about the run. Keboola 
 
 When a user adds a dbt docs generate execution step, job generates necessary files within artifacts to power documentation. dbt docs are then accessible on the button from the main configuration screen.
 
-![](imgs/2777710870.png){: width="100%" }
+![](imgs/2777710870.png){: width="50%" }
 
 The button performs synchronous action to generate docs in the popup:
 
