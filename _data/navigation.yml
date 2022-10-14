@@ -361,7 +361,7 @@ items:
     title: Data Catalog
     items:
       - url: /catalog/multi-project/
-        title: Multi-project Architecture
+        title: Multi-Project Architecture
 
   - url: /storage/
     title: Storage
@@ -427,10 +427,10 @@ items:
             title: CLI
 
           - url: /transformations/dbt/transformation/
-            title: Transformation configuration
+            title: Transformation Configuration
 
           - url: /transformations/dbt/cloud/
-            title: dbt Cloud support
+            title: dbt Cloud Support
 
           - url: /transformations/dbt/flows/
             title: Usage in Flows
@@ -481,7 +481,7 @@ items:
             title: Graphs & Charts
 
           - url: /transformations/r/binary/
-            title: Using binary files
+            title: Using Binary Files
 
       - url: /transformations/redshift/
         title: Legacy Redshift Transformations
