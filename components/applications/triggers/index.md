@@ -13,4 +13,5 @@ The following applications support triggering:
 
 - [Exasol Cluster Starter](/components/applications/triggers/exasol-cluster-starter/)
 - [Orchestration Trigger V2](/components/applications/triggers/orchestration-trigger-queue-v2/) - Trigger to start a Keboola Orchestration V2
+- [dbt Cloud Job Trigger](/components/applications/triggers/dbt-cloud-job-trigger/)
 - And [more](https://components.keboola.com/components)
