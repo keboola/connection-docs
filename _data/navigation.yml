@@ -362,7 +362,7 @@ items:
     title: Data Catalog
     items:
       - url: /catalog/multi-project/
-        title: Multi-project Architecture
+        title: Multi-Project Architecture
 
   - url: /storage/
     title: Storage
@@ -421,6 +421,21 @@ items:
       - url: /transformations/variables/
         title: Variables & Shared Code
 
+      - url: /transformations/dbt/
+        title: dbt Transformation
+        items:
+          - url: /transformations/dbt/cli/
+            title: CLI
+
+          - url: /transformations/dbt/transformation/
+            title: Transformation Configuration
+
+          - url: /transformations/dbt/cloud/
+            title: dbt Cloud Support
+
+          - url: /transformations/dbt/flows/
+            title: Usage in Flows
+
       - url: /transformations/python-plain/
         title: Python Transformations
 
@@ -467,7 +482,7 @@ items:
             title: Graphs & Charts
 
           - url: /transformations/r/binary/
-            title: Using binary files
+            title: Using Binary Files
 
       - url: /transformations/redshift/
         title: Legacy Redshift Transformations
