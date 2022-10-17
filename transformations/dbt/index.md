@@ -6,14 +6,14 @@ permalink: /transformations/dbt/
 * TOC
 {:toc}
 
-[dbt™](https://www.getdbt.com/) is a transformation workflow that lets teams quickly and collaboratively deploy analytics code following software engineering best practices like modularity, portability, CI/CD, and documentation. 
+[dbt™](https://www.getdbt.com/) is a transformation workflow that lets teams quickly and collaboratively deploy analytics code. It follows software engineering best practices like modularity, portability, CI/CD, and documentation. 
 Now anyone who knows SQL can build production-grade data pipelines.
 
 Keboola brings dbt components to define, control, execute and schedule dbt in the context of the full data pipeline. This means that users can use dbt the same way as they use other components. They are versioned, can be manually run and/or scheduled, controlled via CLI and all actions are captured in the metadata layer.
 
 ## Prerequisites
 
-Users can either start with their existing dbt code project in repository (private or public), or start with Keboola CLI to create development environment for creating dbt project from the scratch.
+Users can either start with their existing dbt code project in a repository (private or public), or start with Keboola CLI to create development environment for creating dbt project from the scratch.
 
 *   All **new PAYG projects** will have those features activated by default.
 
