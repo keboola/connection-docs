@@ -40,9 +40,9 @@ Search by tag (component type or configuration ID):
 
 ![](imgs/2776269036.png){: width="100%" }
 
-*Note: Those files can be also easily [retrieved externally via the API](https://keboola.docs.apiary.io/#reference/files/list-files/list-files) or from an integrated Jupyter workspace for further analysis.*
+**Tip:**: Those files can be also easily [retrieved externally via the API](https://keboola.docs.apiary.io/#reference/files/list-files/list-files) or from an integrated Jupyter workspace for further analysis.
 
-**Tip:** please mind the base URL of API call, which depends on the stack you are using (US vs. Azure EU vs. EU central)
+*Note: Please keep in mind that the base URL of the API call depends on the stack you are using: US vs. Azure EU vs. EU central.*
 
 ## dbt Cloud API Source Component
 
