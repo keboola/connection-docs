@@ -33,7 +33,7 @@ kbc --version
 
 **initial setup**
 
-The user has a KBC project, a cloned git repository with a dbt project and the dbt binary installed.
+You must have a KBC project, a cloned git repository with a dbt project, and the dbt binary installed.
 
 The user is in the folder with the cloned dbt project and can run the following commands.
 
@@ -58,17 +58,17 @@ The user is in the folder with the cloned dbt project and can run the following 
 Store credentials to your zsh env profile (or your respective environment):
 ---------------------------------------------------------------------------
 
-File is located (Unix) in `~/.zshrc`
+The file is located (Unix) in `~/.zshrc`
 
 ![](imgs/2770206732.png){: width="100%" }
 
-User is then able to run dbt locally against project storage, safely develop and test code.
+Then you can run dbt locally against the project storage, safely develop and test your code.
 
-As a part of init command, CLI will create all sources from the storage buckets. A storage bucket = source file with tables within:
+As part of the init command, CLI will create all sources from storage buckets. A storage bucket is a source file containing tables:
 
 ![](imgs/2777448699.png){: width="100%" }
 
-Please note that `_timestamp` is automatically filled, alongside `primary keys` and corresponding `tests` for primary keys (`unique` and `not_null` tests).
+*Note: Please note that `_timestamp` is automatically filled, alongside `primary keys` and corresponding `tests` for primary keys (`unique` and `not_null` tests).*
 
 ### Run Test Debug
 
@@ -81,19 +81,19 @@ dbt debug -t beer_demo --profiles-dir .
 *   `beer_demo` is the target name used in the prior step and visible in profiles.yml
 
 
-*   We are using local profiles, those are using environmental variables stored before.
+*   We are using local profiles; they are using environmental variables stored before.
 
 
 ![](imgs/2769649699.png){: width="100%" }
 
-User should see green in all steps:
+You should see green in all steps:
 
 ![](imgs/2770239505.png){: width="100%" }
 
 dbt Run
 -------
 
-For the script alteration, the only check/change user has to make with off-the-shelf scripts is to alter source definitions to match sources:
+For the script alteration, the only check/change you have to make with off-the-shelf scripts is to alter source definitions to match sources:
 
 ![](imgs/2769879073.png){: width="100%" }
 
@@ -131,7 +131,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   Generates only `sources.yml`.
 
-*   It lists all tables in the default branch from Storage API and generates source files to `models/_sources`. Tables from each bucket are in a separate file.
+*   Lists all tables in the default branch from the Storage API and generates source files to `models/_sources`. Tables from each bucket are stored in a separate file.
 
 *   **Example** (non-interactive mode)
 
@@ -150,14 +150,14 @@ dbt run -t beer_demo  --profiles-dir .
 
 ### Workspaces Support
 
-*   Universal support to manage workspaces.
+*   Universal support to manage workspaces
 
 *   Hide `keboola.sandboxes` configurations from the KBC project folder structure.
 
 
 ### `kbc remote workspace create`
 
-*   Supports parameters `name`, `type`, and `size` (for `python` and `r`).
+*   Supports parameter `name`, `type`, and `size` (for `python` and `r`).
 
 *   **Example** (non-interactive mode)
 
