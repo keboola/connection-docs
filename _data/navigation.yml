@@ -351,6 +351,8 @@ items:
                 title: Orchestration Trigger V2
               - url: /components/applications/triggers/dbt-cloud-job-trigger/
                 title: dbt Cloud Job Trigger
+              - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
+                title: Deepnote Notebook Execution Trigger
 
       - url: /components/branches/
         title: Development Branches
