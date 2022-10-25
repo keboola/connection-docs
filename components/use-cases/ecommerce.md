@@ -68,47 +68,43 @@ The following data destinations will be coming soon:
 - [Tableau](https://www.tableau.com/)
 - [Redshift database](https://aws.amazon.com/redshift/)
 - [Google Drive](https://www.google.com/drive/) 
-- [Amazon S3](https://www.aws.amazon.com/)0
+- [Amazon S3](https://www.aws.amazon.com/)
 
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
-First you must decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Use Case** tab in your Keboola connection project. 
-
-When you are done, click **+ Use Template**. 
+First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Use Case** tab in your Keboola connection project. When you are done, click **+ Use Template**. 
 
 {: .image-popup}
 ![Add New Use Case](/components/use-cases/ecommerce/------------------.png)
 
-This is the template’s page with information about the template. Click **+ Use Template** again.
+This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
 ![Add New Use Case - Shopify to Keboola DWH](/components/use-cases/ecommerce/----------------------.png)
 
-You’ll be asked to enter a name for the template instance you are about to create so you can use the template as many times as you want. It’s important to keep things organized. 
+Now enter a name for the template instance that you are about to create. This way you can use the template as many times as you want. It’s important to keep things organized. 
 
 {: .image-popup}
 ![Shopify to Keboola DWH - Template Name](/components/use-cases/ecommerce/----------------------.png)
 
-After clicking :arrow_right: **Next Step**, you’ll see the template’s builder. Then you must fill in all needed credentials and perform the required OAuth authorizations. 
+After clicking :arrow_right: **Next Step**, you’ll see the template builder. Fill in all needed credentials and perform the required OAuth authorizations. 
 
-> It’s important to follow all those steps properly so the newly created flow won’t fail on any user authorization problems. 
-If you are struggling with this, check out the section “Authorization of sources” below.
+It’s important to follow all the steps properly so the newly created flow won’t fail because of any user authorization problems. 
+If you are struggling with this part, go to the section [Authorizing Destinations](/components/use-cases/ecommerce/authorizing-destinations/) below.
 
-Follow the steps one by one and authorize the data sources. An Ecommerce data source is required. In this case, it’s Shopify.
+Follow the steps one by one and authorize your data sources. An Ecommerce data source is required. In this case, it’s Shopify.
 
-> The other marketing source are optional. You can, but you don’t have to enrich your ecommerce data with marketing statistics like costs, impressions and clicks.
+Using additional marketing sources is optional. You can (but you don’t have to) enrich your eCommerce data with marketing statistics like costs, impressions, and clicks.
 
-Finally, the destination has to be authorized as well. 
+Finally, the destination must be authorized as well. 
 
-> Please, read carefully the instructions within this step. If you are struggling with this, go to the section [Authorizing Destinations](/components/use-cases/ecommerce/authorizing-destinations/) below.*
+Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section [Authorizing Destinations](/components/use-cases/ecommerce/authorizing-destinations/) below.
 
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database](/components/use-cases/ecommerce/-----------------------.png)
 
-When you are finished, click **Save** in the top right corner. 
-
-The template builder will create your new configuration and when it’s done, you’ll be redirected to Use Case Catalogue and you’ll see the newly created flow. 
+When you are finished, click **Save** in the top right corner. The template builder will create your new configuration and when it’s done, you’ll be redirected to Use Case Catalogue and see the newly created flow. 
 
 Click :arrow_forward: **Run Use Case** and start building your visualizations a few minutes after. 
 
@@ -116,18 +112,19 @@ Click :arrow_forward: **Run Use Case** and start building your visualizations a 
 ![Shopify Analytics to Keboola Provided Snowflake Database - Flows](/components/use-cases/ecommerce/----------------------.png)
 
 ## Authorizing eCommerce Data Sources
-To use a selected data source component, you must first authorize the data source.
+To use a selected data source component, you must first authorize the data source. 
+
+At least one data source must be used in order to create a working flow.
 
 ### Shopify Analytics
-Exactly 1 source is required
 
 {: .image-popup}
 ![Shopify Source](/components/use-cases/ecommerce/--------------------.png)
 
-To enable this application you need to:
+To enable this application, you must:
 
 - [Enable private app development)(https://help.shopify.com/en/manual/apps/private-apps#enable-private-app-development-from-the-shopify-admin) for your store.
-- Create a private application
+- Create a private application.
 - Enable `Read access` ADMIN API PERMISSIONS for the following following objects:
     - `Orders`
     - `Products`
@@ -138,12 +135,14 @@ Additional documentation is available [here](https://bitbucket.org/kds_consultin
 
 ### Shoptet Analytics
 
+This extractor allows you to download data from Shoptet permalinks. 
+
 {: .image-popup}
 ![Shoptet Data Source](/components/use-cases/ecommerce/---------------.png)
 
-This extractor allows you to download data from Shoptet permalinks. Find all links in your Shoptet account. 
+Find all links in your Shoptet account. 
 
-Example: Go to customers and click on Export. On the bottom you’ll see a link looking like this: https://www.yourshopaddress.domain/export/customers.xml?ip=11.111.111.1111&hash=somehash
+Example: Go to Customers and click **Export**. On the bottom you’ll see a link looking like this: https://www.yourshopaddress.domain/export/customers.xml?ip=11.111.111.1111&hash=somehash
 
 - Set the shop name.
 - Set the Base URL of the store.
@@ -158,7 +157,7 @@ TODO
 
 ## Authorizing Marketing Data Sources
 
-All the listed marketind data sources are optional. Select the ones you wish to use.
+Using the following marketing data sources is optional. Select the ones you wish to use.
 
 ### Facebook Ads
 
@@ -167,14 +166,14 @@ All the listed marketind data sources are optional. Select the ones you wish to 
 
 Log into Facebook with redirection from this step and allow Keboola to see the data. 
 
-Then a list of accounts will appear. Select those accounts from which you want to download the data.
+From the list of accounts select the accounts from which you want to download data.
 
 ### Google Ads
 
 {: .image-popup}
 ![Google Ads Data Source](/components/use-cases/ecommerce/-------------------------------.png)
 
-Authorize your Google Account and then select the account you want to get the data from. The list will automatically appear after authorization. 
+Authorize your Google Account and then select the account from which you want to get data. The list will automatically appear after authorization. 
 
 ### Sklik
 
@@ -182,6 +181,7 @@ Authorize your Google Account and then select the account you want to get the da
 ![Sklik Data Source](/components/use-cases/ecommerce/-------------------------.png)
 
 The component uses the [Sklik API](https://api.sklik.cz/drak/) to import data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
+
 To configure this source component, you need to have a working
 
 - [Sklik](https://www.sklik.cz/) account, and an
@@ -190,7 +190,7 @@ To configure this source component, you need to have a working
 The current listing limit supported by the Sklik API is 100.
 
 ## Authorizing Destinations
-Exactly one source is required.
+To create a working flow, you must select at least one data destination.
 
 ### BigQuery Database
 
@@ -199,7 +199,7 @@ Exactly one source is required.
 
 To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
-Detailed guide is [here](https://help.keboola.com/components/writers/database/bigquery/).
+A detailed guide is available [here](https://help.keboola.com/components/writers/database/bigquery/).
 
 ### Google Sheets
 
@@ -208,7 +208,7 @@ Detailed guide is [here](https://help.keboola.com/components/writers/database/bi
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It’s needed for correct mapping in your duplicated Google sheet. 
+Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It’s needed for correct mapping in your duplicated Google sheet. 
 
 *Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself, we will do that for you.*
 
@@ -249,7 +249,7 @@ a query CREATE SCHEMA john.doe;, you need to enter the schema name as DOE in the
 
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
-## Most common errors
+## Most Common Errors
 Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
 
 ### Missing Credentials to Snowflake Database 
