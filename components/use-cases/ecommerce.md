@@ -27,285 +27,241 @@ The ecommerce source component, all data manipulations and analyses, and the des
 
 ## Tables Description
 
-| | |
+| Name | Description |
 |---|---|
 | PRODUCTS | contains list of products including product type, product manufacturer and product price |
 | ORDERS | contains list of customer orders including order date, purchase, price and taxes |
-| CUSTOMERS | contains list of customers including email, customer billing and shipping information and orders count |
-| SHOP | contains informations about your shop such as url and name |
+| CUSTOMERS | contains list of customers, incl. email, customer billing and shipping information, and orders count |
+| SHOP | contains information about your shop such as url and name |
 | BILLING TYPE | enumeration for billing types |
 | SHIPPING TYPE | enumeration for shipping types |
-| ORDER LINES | contains individual items to the orders including order date, amount of bought items and item prices |
-| PRODUCT MARGIN OVER TIME | it’s a separate table, contains product margin over time, used for check how margin on each product is changing in time |
-| CAMPAIGN COSTS | it’s a separate table, contains daily marketing campaign costs and clicks |
-| | |
-CAMPAIGN COSTS MONTHLY
-it’s a separate table 
-
-contains monthly marketing campaign costs and clicks
-|||
-RFM
-describes analysis of customer value (RFM)
-
-showing actual group of a customer as well as prediction for moving from loyal customer to frozen customer
-|||
-ANALYZE CLV BY TIME FROM PREVIOUS ORDER
-contains analysis of customer lifetime value by time
-|||
-ANALYZE CLV BY ORDER COUNT
-contains analysis of customer lifetime value by number of orders
-|||
+| ORDER LINES | contains individual items to orders, incl. order date, amount of bought items and item prices |
+| PRODUCT MARGIN OVER TIME | contains product margin over time, used to check how margin on each product changes in time |
+| CAMPAIGN COSTS | contains daily marketing campaign costs and clicks |
+| CAMPAIGN COSTS MONTHLY | contains monthly marketing campaign costs and clicks |
+| RFM | describes analysis of customer value (RFM), showing actual group of customer as well as prediction for moving from loyal customer to frozen customer |
+| ANALYZE CLV BY TIME FROM PREVIOUS ORDER | contains analysis of customer lifetime value by time |
+| ANALYZE CLV BY ORDER COUNT | contains analysis of customer lifetime value by number of orders |
 
 ## Data Sources
 
-Available in Public Beta
+Available in Public Beta: 
 
-Coming soon
+- [Shopify](https://www.shopify.com/)
+
+Coming soon: 
+
+- [WooCommerce Analytics](https://woocommerce.com/) 
+- [Shoptet Analytics](https://www.shoptet.cz/)
 
 ## Data Destinations
-Available in Public Beta
 
-Coming soon
+Available in Public Beta: 
 
-## How to use this template
+- [Snowflake database provided by Keboola](/components/writers/database/snowflake/)
+- [Snowflake database](https://www.snowflake.com/)
+- [Google BigQuery database](https://cloud.google.com/bigquery/) 
+- [Google Sheets](https://www.google.com/sheets/about/)
+
+Coming soon: 
+- [GoodData](https://www.gooddata.com/)
+- [Tableau](https://www.tableau.com/)
+- [Redshift database](https://aws.amazon.com/redshift/)
+- [Google Drive](https://www.google.com/drive/) 
+- [Amazon S3](https://www.aws.amazon.com/)0
+
+## How to Use the Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
-First of all, you have to decide which Data Source and Data Destination you want to use. Based on your decision, select such template from Use Case tab in your Keboola connection project. 
-Then click on + USE TEMPLATE. 
+First you have to decide which Data Source and Data Destination you want to use. Based on your decision, select such template from Use Case tab in your Keboola connection project. 
 
+Then click on **+ Use Template**. 
 
-You’ll appear on template’s page with some information about the template. Look at the page and then click on + USE TEMPLATE again.
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
+You’ll see the template’s page with information about the template. Look at the page and then click **+ Use Template** again.
 
-You’ll be asked to write a name for the template instance you are about to create. Why? You can use a template as many times as you want so it’s important to have it organized. 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
+You’ll be asked to enter a name for the template instance you are about to create so you can use the template as many times as you want. It’s important to keep things organized. 
 
-After clicking on :arrow_right: NEXT STEP, you’ll see template’s builder, which will ask you to insert all needed credentials and make required OAuth authorizations. 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
-It’s important to do all those steps properly so the newly created flow won’t fail on some user’s authorizations problems. 
-If you are struggling with this. Check out section “Authorization of sources” below.
+After clicking :arrow_right: **Next Step**, you’ll see the template’s builder. Then you must fill in all needed credentials and perform the required OAuth authorizations. 
 
-Go step by step and authorize Data Sources. Ecommerce Data Source is required. In this case it’s Shopify.
+> It’s important to follow all those steps properly so the newly created flow won’t fail on any user authorization problems. 
+If you are struggling with this, check out the section “Authorization of sources” below.
 
-The other marketing source are optional. You can, but you don’t have to enrich your ecommerce data with marketing statistics like costs, impressions and clicks. 
+Follow the steps one by one and authorize the data sources. An Ecommerce data source is required. In this case, it’s Shopify.
+
+> The other marketing source are optional. You can, but you don’t have to enrich your ecommerce data with marketing statistics like costs, impressions and clicks.
 
 Finally, the destination has to be authorized as well. 
 
-Please, read carefully the instructions within this step. 
-If you are struggling with this. Check out section “Authorization of destinations” below.
+> Please, read carefully the instructions within this step. If you are struggling with this, go to the section [Authorizing Destinations](/components/use-cases/ecommerce/authorizing-destinations/) below.*
 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
-After authorizations, click on SAVE in the right corner on the top. 
+When you are finished, click **Save** in the top right corner. 
 
-The template builder will create your new configuration
+The template builder will create your new configuration and when it’s done, you’ll be redirected to Use Case Catalogue and you’ll see the newly created flow. 
 
-s and when it’s done, you’ll be redirected to Use Case Catalogue and you’ll see the newly created flow. 
+Click on :arrow_forward: **Run Use Case** and start building your visualizations a few minutes after. 
 
-Click on :arrow_forward: RUN USE CASE and start building your visualizations a few minutes after. 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
+## Authorizing eCommerce Data Sources
+To use a selected data source component, you must first authorize the data source.
 
-Authorizations
-Ecommerce Data Sources
-exactly 1 source is required
+### Shopify Analytics
+Exactly 1 source is required
 
-Shopify Analytics
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
 To enable this application you need to:
 
-enable private app development for your store.
+- [Enable private app development)(https://help.shopify.com/en/manual/apps/private-apps#enable-private-app-development-from-the-shopify-admin) for your store.
+- Create a private application
+- Enable `Read access` ADMIN API PERMISSIONS for the following following objects:
+    - `Orders`
+    - `Products`
+    - `Inventory`
+    - `Customers`
 
-Create a private application
+Additional documentation is available [here](https://bitbucket.org/kds_consulting_team/kds-team.ex-shopify/src/master/README.md).
 
-Enable Read access ADMIN API PERMISSIONS for following following objects:
+### Shoptet Analytics
 
-Orders
-
-Products
-
-Inventory
-
-Customers
-
-Additional documentation is available here.
-
- 
-
-Shoptet Analytics
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
 This extractor allows you to download data from Shoptet permalinks. Find all links in your Shoptet account. 
 
 Example: Go to customers and click on Export. On the bottom you’ll see a link looking like this: https://www.yourshopaddress.domain/export/customers.xml?ip=11.111.111.1111&hash=somehash
 
-Set the shop name.
+- Set the shop name.
+- Set the Base URL of the store.
+- Set the Orders URL so that it contains the pattern ID and hash in the URL.
+- Set the Products URL so that it contains the pattern ID and hash in the URL.
+- Set the Customers URL so that it contains the hash in the URL.
+- Set the Stock URL so that it contains the hash in the URL.
 
-Set the Base URL of the store.
+### WooCommerce
 
-Set the Orders URL so that it contains the pattern ID and hash in the URL.
+TODO
 
-Set the Products URL so that it contains the pattern ID and hash in the URL.
+## Authorizing Marketing Data Sources
 
-Set the Customers URL so that it contains the hash in the URL.
+All the listed marketind data sources are optional. Select the ones you wish to use.
 
-Set the Stock URL so that it contains the hash in the URL.
+### Facebook Ads
 
- 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
- 
+Log into Facebook with redirection from this step and allow Keboola to see the data. 
 
- 
+Then a list of accounts will appear. Select those accounts from which you want to download the data.
 
- 
+### Google Ads
 
-WooCommerce
-Marketing Data Sources
-optional sources
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
-Facebook Ads
+Authorize your Google Account and then select the account you want to get the data from. The list will automatically appear after authorization. 
 
-Log into facebook with redirection from this step and allow Keboola to see the data. 
+### Sklik
 
-Then list of accounts will appear, so select those accounts you want to download the data from.
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
- 
+The component uses the [Sklik API](https://api.sklik.cz/drak/) to import data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
+To configure this source component, you need to have a working
 
- 
-
- 
-
- 
-
- 
-
- 
-
-Google Ads
-
-Authorize google Account and then select the account you want to get the data from. The list will automatically appear after authorization. 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
-Sklik
-
-The component uses the Sklik API to import data from Sklik. It downloads configured reports for all specified accounts.
-
-To configure this extractor, you need to have a working
-
-Sklik account, and an
-
-Sklik API token.
+- [Sklik](https://www.sklik.cz/) account, and an
+- Sklik API [token](https://www.sklik.cz/generateToken).
 
 The current listing limit supported by the Sklik API is 100.
 
- 
+## Authorizing Destinations
+Exactly one source is required.
 
- 
+### Big Query Database
 
- 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
- 
+To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
-Destinations
-exactly 1 source is required
+Detailed guide is [here](https://help.keboola.com/components/writers/database/bigquery/).
 
-Big Query Database
+### Google Sheets
 
-To configure the writer, you need to set up a Google Service Account and create a new JSON key.
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
-Detailed guide is here.
+Authorize your Google account.
 
- 
+Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It’s needed for correct mapping in your duplicated Google sheet. 
 
- 
+*Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself, we will do that for you.*
 
- 
+### Snowflake Database Provided by Keboola
 
- 
+If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
- 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
- 
+After clicking **Save**, the template will be used in your project. You’ll see a flow. Go there and click on **Snowflake Data Destination**. 
+You’ll be redirected to the data destination configuration and asked to set up the database. 
 
- 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
- 
+Select **Keboola Snowflake database**. 
 
- 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
-Google Sheet
-
-Authorize your google account.
-
-Duplicate the sheet into your Google Drive and paste the file ID back to the Keboola. It’s needed for correct mapping in your duplicated google sheet. 
-
-Don’t worry, we are working on automatization. In the future, you want have to duplicate the sheet by yourself, but we will do that for you. 
-
- 
-
-Snowflake Database provided by Keboola
-
-Don’t have your own data warehouse? Don’t worry, we got you covered. 
-
-Just follow the instruction and we will create a database for you. 
-
-After clicking on SAVE, the template will be used in your project. You’ll see a flow. Go there and click on Snowflake Data Destination. 
-
-You’ll be redirected to data destination configuration and you’ll be asked to set up the database. 
-
-Select Keboola Snowflake Database. 
-
-Then go back to flow and RUN the flow. 
+Then go back to the flow and click **Run**. 
 
 Everything is set up.
 
- 
+### Snowflake Database
 
- 
+If you want to use your own Snowflake database, you need to provide the host name (account name), user name, password, database name, schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
 
- 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
- 
+We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide the user with access 
+to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
 
-Snowflake Database
+**Warning:** Keep in mind that Snowflake is **case sensitive** and if identifiers are not quoted, they are converted to upper case. So if you run, for example, 
+a query CREATE SCHEMA john.doe;, you need to enter the schema name as DOE in the destination component configuration.
 
-You need to provide a host name (account name), user name, password, database name, schema, and warehouse.
+More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
-We highly recommend that you create a dedicated user for the writer in your Snowflake database.
+## Most common errors
+Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
 
-You need to provide the user with access to a Snowflake Warehouse. Keep in mind that Snowflake is case sensitive and if identifiers are not quoted, they are converted to upper case. So if you run, for example, a query CREATE SCHEMA john.doe;, you need to enter the schema name as DOE in the writer configuration.
-
-More info here.
-
- 
-
- 
-
- 
-
- 
-
- 
-
-Most common errors
-check if your error is a common problem and can be solved without Keboola support
-
-Credentials to Snowflake Database are missing
+### Missing Credentials to Snowflake Database 
 Do you see this error below?
 
 You probably forgot to set up Snowflake database. Click on the text under Configuration in the left corner. 
 
-It will redirect you to Snowflake Database component. Now follow the “Snowflake Database provided by Keboola” on this page Authorizations/destinations. 
+It will redirect you to the Snowflake Database component. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
 
-Then RUN the flow again. You’ll find it in Jobs tab. 
+Then go to the **Jobs** tab and **Run** the flow again.  
 
+{: .image-popup}
+![Business Data Model](/components/use-cases/ecommerce/business_data_model.png){: .img-responsive}
 
  
