@@ -161,7 +161,6 @@ From the list of accounts select the accounts from which you want to download da
 
 ### Google Ads
 
-{: .image-popup}
 ![Google Ads Data Source](/components/use-cases/ecommerce/google-ads-data-source.png)
 
 Authorize your Google Account and then select the account from which you want to get data. The list will automatically appear after authorization. 
