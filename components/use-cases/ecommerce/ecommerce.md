@@ -23,7 +23,7 @@ The ecommerce source component, all data manipulations and analyses, and the des
 ## Business Data Model
 
 {: .image-popup}
-![Business Data Model](/components/use-cases/image.png)
+![Business Data Model](/components/use-cases/ecommerce/business-data-model.png)
 
 ## Table Description
 
