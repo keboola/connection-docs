@@ -183,7 +183,7 @@ To create a working flow, you must select at least one data destination.
 
 ### BigQuery Database
 
-![BigQuery Destination](/components/use-cases/ecommerce/----------------------.png)
+![BigQuery Destination](/components/use-cases/ecommerce/bigquery-destination.png)
 
 To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
@@ -191,7 +191,7 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 ### Google Sheets
 
-![Google Sheets Destination](/components/use-cases/ecommerce/-----------------------------.png)
+![Google Sheets Destination](/components/use-cases/ecommerce/google-sheets-destination.png)
 
 Authorize your Google account.
 
@@ -203,16 +203,16 @@ Duplicate the sheet into your Google Drive and paste the file ID back to Keboola
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-![DWH Provided by Keboola](/components/use-cases/ecommerce/----------------------------.png)
+![DWH Provided by Keboola](/components/use-cases/ecommerce/dwh-provided-by-keboola.png)
 
 After clicking **Save**, the template will be used in your project. You will see a flow. Go there and click on **Snowflake Data Destination**. 
 You will be redirected to the data destination configuration and asked to set up the database. 
 
-![Connect Database](/components/use-cases/ecommerce/---------------------.png)
+![Connect Database](/components/use-cases/ecommerce/connect-database.png)
 
 Select **Keboola Snowflake database**. 
 
-![Choose Which Database to Use](/components/use-cases/ecommerce/-------------------.png)
+![Choose Which Database to Use](/components/use-cases/ecommerce/select-database.png)
 
 Then go back to the flow and click **Run**. 
 
@@ -222,7 +222,7 @@ Everything is set up.
 
 If you want to use your own Snowflake database, you must provide the host name (account name), user name, password, database name, schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
 
-![Snowflake Destination](/components/use-cases/ecommerce/------------------.png)
+![Snowflake Destination](/components/use-cases/ecommerce/snowflake-destination.png)
 
 We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide the user with access 
 to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
@@ -242,6 +242,6 @@ Click on the highlighted text under Configuration in the top left corner. This w
 
 Then go to the **Jobs** tab and **Run** the flow again.  
 
-![Job - Snowflake](/components/use-cases/ecommerce/-----------------------.png)
+![Job - Snowflake](/components/use-cases/ecommerce/snowflake-job.png)
 
  
