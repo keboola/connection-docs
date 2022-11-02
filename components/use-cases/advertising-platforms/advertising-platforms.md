@@ -25,7 +25,7 @@ After all the necessary tasks are performed on the data, you load the results in
 
 ## Business Data Model
 
-![Business Data Model](/components/use-cases/advertising-platforms/business-data-model.jpg)
+![Business Data Model](/components/use-cases/advertising-platforms/business-data-model.png)
 
 ## Table Description
 
