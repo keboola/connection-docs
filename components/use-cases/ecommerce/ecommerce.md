@@ -155,7 +155,7 @@ Using the following marketing data sources is optional. Select the ones you wish
 
 ![Facebook Ads Data Source](/components/use-cases/ecommerce/facebook-ads-data-source.png)
 
-Log into Facebook with redirection from this step and allow Keboola to see the data. 
+Log in into Facebook with redirection from this step and allow Keboola to see the data. 
 
 From the list of accounts select the accounts from which you want to download data.
 
@@ -203,18 +203,12 @@ Duplicate the sheet into your Google Drive and paste the file ID back to Keboola
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
+1. After clicking **Save**, the template will be used in your project. You will see a flow. 
+2. Go there and click on **Snowflake Data Destination**. You will be redirected to the data destination configuration and asked to set up the database. 
+3. Select **Keboola Snowflake database**. 
+4. Then go back to the flow and click **Run**. 
+
 ![DWH Provided by Keboola](/components/use-cases/ecommerce/dwh-provided-by-keboola.png)
-
-After clicking **Save**, the template will be used in your project. You will see a flow. Go there and click on **Snowflake Data Destination**. 
-You will be redirected to the data destination configuration and asked to set up the database. 
-
-![Connect Database](/components/use-cases/ecommerce/connect-database.png)
-
-Select **Keboola Snowflake database**. 
-
-![Choose Which Database to Use](/components/use-cases/ecommerce/select-database.png)
-
-Then go back to the flow and click **Run**. 
 
 Everything is set up.
 
