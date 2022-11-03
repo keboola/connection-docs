@@ -105,7 +105,7 @@ when it is done, you will be redirected to Use Case Catalogue and see the newly 
 
 Click :arrow_forward: **Run Use Case** and start building your visualizations a few minutes after. 
 
-![Ad Platforms to Google Sheets - Flows](/components/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-flows.png)
+![Ad Platforms to Google Sheets - Flows](/components/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-flow.png)
 
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source. 
@@ -154,7 +154,7 @@ To create a working flow, you must select at least one data destination.
 
 ### BigQuery Database
 
-![BigQuery Destination](/components/use-cases/advertising-platforms/big-querry-destination.png)
+![BigQuery Destination](/components/use-cases/advertising-platforms/bigquery-destination.png)
 
 To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
@@ -175,18 +175,12 @@ in your duplicated Google sheet.
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-![DWH Provided by Keboola](/components/use-cases/advertising-platforms/dmw-provided-by-keboola.png)
+1. After clicking **Save**, the template will be used in your project. You will see a flow. 
+2. Go there and click on **Snowflake Data Destination**. You will be redirected to the data destination configuration and asked to set up the database. 
+3. Select **Keboola Snowflake database**. 
+4. Then go back to the flow and click **Run**. 
 
-After clicking **Save**, the template will be used in your project. You will see a flow. Go there and click on **Snowflake Data 
-Destination**. You will be redirected to the data destination configuration and asked to set up the database. 
-
-![Connect Database](/components/use-cases/advertising-platforms/connect-database.png)
-
-Select **Keboola Snowflake database**. 
-
-![Choose Which Database to Use](/components/use-cases/advertising-platforms/select-database.png)
-
-Then go back to the flow and click **Run**. 
+![DWH Provided by Keboola](/components/use-cases/advertising-platforms/dwh-provided-by-keboola.png)
 
 Everything is set up.
 
