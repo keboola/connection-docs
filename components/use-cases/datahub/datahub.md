@@ -13,7 +13,7 @@ properties, or tags from the DataHub writer.
 
 **The flow, in a nutshell:**
 
-pic
+![DataHub Flow](/components/use-cases/datahub/datahub-flow.png)
 
 - First, the Metadata and Telemetry extractors will collect the data from your project or organization
     - The Telemetry Data extractor allows you to retrieve data about your project or about your whole organization. It helps you monitor activities and usage of your Keboola Connection projects. It also helps Keboola calculate your project consumption.
@@ -27,4 +27,5 @@ pic
 
 Template/Component Variations:
 
-pic
+![Variations](/components/use-cases/datahub/datahub-variations.png)
+
