@@ -103,7 +103,7 @@ When you are finished, click **Save** in the top right corner. The template buil
 
 Click :arrow_forward: **Run Use Case** and start building your visualizations a few minutes after. 
 
-![Shopify Analytics to Keboola Provided Snowflake Database - Flows](/components/use-cases/ecommerce/----------------------.png)
+![Shopify Analytics to Keboola Provided Snowflake Database - Flows](/components/use-cases/ecommerce/shopify-to-keboola-provided-snowflake-database-flows.png)
 
 ## Authorizing eCommerce Data Sources
 To use a selected data source component, you must first authorize the data source. 
