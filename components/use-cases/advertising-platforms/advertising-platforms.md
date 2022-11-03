@@ -105,7 +105,7 @@ when it is done, you will be redirected to Use Case Catalogue and see the newly 
 
 Click :arrow_forward: **Run Use Case** and start building your visualizations a few minutes after. 
 
-![Ad Platforms to Google Sheets - Flows](/components/use-cases/advertising-platforms/----------------------.png)
+![Ad Platforms to Google Sheets - Flows](/components/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-flows.png)
 
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source. 
