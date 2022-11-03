@@ -189,7 +189,7 @@ Everything is set up.
 If you want to use your own Snowflake database, you must provide the host name (account name), user name, password, database name, 
 schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
 
-![Snowflake Destination](/components/use-cases/ecommerce/advertising-platforms/snowflake-destination.png)
+![Snowflake Destination](/components/use-cases/advertising-platforms/snowflake-destination.png)
 
 We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide 
 the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
