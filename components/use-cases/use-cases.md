@@ -26,18 +26,21 @@ On the data template detail page you can see a detailed description and a list o
 Apply the template by clicking the **+ Use Template** button:
 
 {: .image-popup}
-![Screenshot - Data Templates Detail](/components/data-templates/templates-2.png)
+![Screenshot - Data Templates Detail](/components/use-cases/3.png)
+![Screenshot - Data Templates Detail](/components/use-cases/4.png)
 
 A list of configurations that will be created is shown. Some configurations require that you enter parameters for them – 
 in this case the `Salesforce to Snowflake` configuration:
 
 {: .image-popup}
-![Screenshot - Configure Data Template](/components/data-templates/templates-3.png)
+![Screenshot - Configure Data Template](/components/use-cases/5.png)
+![Screenshot - Configure Data Template](/components/use-cases/6.png)
 
 Enter the required parameters and **Save** the configuration**:
 
 {: .image-popup}
-![Screenshot - Configure Salesforce](/components/data-templates/templates-4.png)
+![Screenshot - Configure Salesforce](/components/use-cases/7.png)
+![Screenshot - Configure Salesforce](/components/use-cases/8.png)
 
 When all components are properly configured, you can click on **+ Save**, otherwise the save option won't be allowed:
 
@@ -48,7 +51,7 @@ When the creation is complete, you'll see the configured template. If you click 
 with all created configurations. Run the flow to see the data template in action.
 
 {: .image-popup}
-![Screenshot - Use Data Template](/components/data-templates/templates-6.png)
+![Screenshot - Use Data Template](/components/use-cases/9.png)
 
 ## Creating Data Template
 Creating your own data template is possible. You will need to install Keboola CLI. You can store template definitions locally
