@@ -16,10 +16,12 @@ lthough they are pre-defined sets of configurations, the created configurations 
 can be modified like any other configuration you have [created manually](/components/#creating-component-configuration).
 
 ## Using Data Template
-To use a data template, go to the **Use Cases** section. Search for a template that interests you, and click on it to see more details:
+To use a data template, go to the **Use Cases** section. 
 
-{: .image-popup}
 ![Screenshot - Data Templates Intro](/components/use-cases/1.png)
+
+Search for a template that interests you, and click on it to see more details:
+
 ![Screenshot - Data Templates Intro](/components/use-cases/2.png)
 
 On the data template detail page you can see a detailed description and a list of all components the template will use. 
