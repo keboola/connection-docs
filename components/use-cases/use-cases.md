@@ -34,7 +34,6 @@ in this case the `Salesforce to Snowflake` configuration:
 
 {: .image-popup}
 ![Screenshot - Configure Data Template](/components/use-cases/5.png)
-![Screenshot - Configure Data Template](/components/use-cases/6.png)
 
 Enter the required parameters and **Save** the configuration**:
 
