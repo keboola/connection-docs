@@ -19,7 +19,8 @@ can be modified like any other configuration you have [created manually](/compon
 To use a data template, go to the **Use Cases** section. Search for a template that interests you, and click on it to see more details:
 
 {: .image-popup}
-![Screenshot - Data Templates Intro](/components/data-templates/templates-1.png)
+![Screenshot - Data Templates Intro](/components/use-cases/1.png)
+![Screenshot - Data Templates Intro](/components/use-cases/2.png)
 
 On the data template detail page you can see a detailed description and a list of all components the template will use. 
 Apply the template by clicking the **+ Use Template** button:
