@@ -39,12 +39,11 @@ Enter the required parameters and **Save** the configuration**:
 
 {: .image-popup}
 ![Screenshot - Configure Salesforce](/components/use-cases/7.png)
-![Screenshot - Configure Salesforce](/components/use-cases/8.png)
 
 When all components are properly configured, you can click on **+ Save**, otherwise the save option won't be allowed:
 
 {: .image-popup}
-![Screenshot - Use Data Template](/components/data-templates/templates-5.png)
+![Screenshot - Use Template when all is Configured](/components/use-cases/8.png)
 
 When the creation is complete, you'll see the configured template. If you click on it, you will be in a flow 
 with all created configurations. Run the flow to see the data template in action.
