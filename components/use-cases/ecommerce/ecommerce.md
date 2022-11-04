@@ -57,7 +57,7 @@ The following data sources will be coming soon:
 
 These data destinations are available in Public Beta: 
 
-- [Snowflake database provided by Keboola](/components/writers/database/snowflake/)
+- [Snowflake database provided by Keboola](https://help.keboola.com/components/writers/database/snowflake/)
 - [Snowflake database](https://www.snowflake.com/)
 - [Google BigQuery database](https://cloud.google.com/bigquery/) 
 - [Google Sheets](https://www.google.com/sheets/about/)
@@ -145,7 +145,18 @@ Example: Go to Customers and click **Export**. At the bottom you will see a link
 
 ### WooCommerce
 
-TODO
+To download data form [WooCommerce](https://bitbucket.org/kds_consulting_team/kds-team.ex-woocommerce/src/master/README.md) we need to configure:
+
+- Store_url: Website Domain name where WooCommerce is hosted. e.g. https://myshop.com
+
+- consumer_key: Rest API Consumer Key from WooCommerce Admin panel
+
+- consumer_secret: Rest API Consumer Secret from WooCommerce Admin panel
+
+- date_from: Inclusive Date in YYYY-MM-DD format or a string i.e. 5 days ago, 1 month ago, yesterday, etc.
+
+- date_to: Exclusive Date in YYYY-MM-DD format or a string i.e. 5 days ago, 1 month ago, yesterday, etc.
+
 
 ## Authorizing Marketing Data Sources
 
