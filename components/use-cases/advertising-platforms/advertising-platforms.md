@@ -42,22 +42,22 @@ These data sources are available in Public Beta:
 
 - [Bing Ads](https://ads.microsoft.com/)
 - [LinkedIn Ads](https://business.linkedin.com/marketing-solutions/)
-- [Facebook Ads](https://www.facebook.com/business/tools/)
+- [Facebook Ads](https://www.facebook.com/business/)
 - [Google Analytics](https://analytics.google.com/analytics/web/)
 - [Google Ads](https://ads.google.com/)
 
 The following data sources will be coming soon: 
 
 - [Twitter Analytics](https://analytics.twitter.com/about/)
-- [YouTube Analytics]()
-- [TicToc Analytics]()
+- [YouTube Analytics](https://developers.google.com/youtube/reporting)
+- [TicToc Analytics](https://ads.tiktok.com/help/)
 - [Instagram Advertising](https://www.facebook.com/business/tools/ads-manager/)
 
 ## Data Destinations
 
 These data destinations are available in Public Beta: 
 
-- [Snowflake database provided by Keboola](/components/writers/database/snowflake/)
+- [Snowflake database provided by Keboola](https://help.keboola.com/components/writers/database/snowflake/)
 - [Snowflake database](https://www.snowflake.com/)
 - [Google BigQuery database](https://cloud.google.com/bigquery/) 
 - [Google Sheets](https://www.google.com/sheets/about/)
