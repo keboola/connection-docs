@@ -238,6 +238,7 @@ If you do not have your own data warehouse, follow the instructions and we will 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 
 
+{: .image-popup}
 ![DWH Provided by Keboola](/use-cases/ecommerce/dwh-provided-by-keboola.png)
 
 Everything is set up.
