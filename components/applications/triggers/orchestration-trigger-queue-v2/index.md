@@ -10,9 +10,13 @@ Trigger to start a Keboola Orchestration V2 across different Keboola Connection 
 
 ## Authorization
 
-Authorization is done with a [KBC Storage API token](https://help.keboola.com/management/project/tokens/#limited-tokens).
-Generate a dedicated [Limited Access SAPI Token](https://help.keboola.com/management/project/tokens/#limited-access-to-components) 
-with restricted access and custom access to the **Orchestrator** component.
+Authorization is done with a [KBC Storage API token](https://help.keboola.com/management/project/tokens).
+Generate a dedicated API token with either:
+
+* Full access to all buckets and components.
+* Limited access to the Flow component and every single component in the flow and the buckets those components interact with
+
+If the second option is chosen, you must create a new token with further permissions everytime you add a new component or use a new bucket in the flow.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Orchestration Trigger Queue V2** Application.
@@ -20,7 +24,7 @@ with restricted access and custom access to the **Orchestrator** component.
 {: .image-popup}
 ![Screenshot - Incremental fetching](/components/applications/triggers/orchestration-trigger-queue-v2/config.png)
 
-* Fill in the KBC Storage API token with the Limited Access SAPI token. 
+* Fill in the KBC Storage API token. 
 * Fill in the KBC stack based on your stack, you can find this out from the link to your keboola project
 * Fill in the Orchestration ID 
 * Check or uncheck the checkbox for "Wait for job finish and check jobs status". 
