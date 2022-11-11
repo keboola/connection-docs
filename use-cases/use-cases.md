@@ -11,8 +11,8 @@ by an [orchestration](/orchestrator/) and [metadata](/storage/tables/#metadata).
 solving a specific problem. 
 
 Keboola Connection is a very open [platform](/overview), which may be overwhelming in many cases. 
-The ambition of data templates is to ease the configuration of repeated (or repeatable) solutions. A
-lthough they are pre-defined sets of configurations, the created configurations have no special properties and 
+The ambition of data templates is to ease the configuration of repeated (or repeatable) solutions. 
+Although they are pre-defined sets of configurations, the created configurations have no special properties and 
 can be modified like any other configuration you have [created manually](/components/#creating-component-configuration).
 
 ## Using Data Template
