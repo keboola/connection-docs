@@ -1,6 +1,6 @@
 ---
 title: Advertising Platforms
-permalink: /components/use-cases/advertising-platforms/
+permalink: /use-cases/advertising-platforms/
 ---
 
 * TOC
