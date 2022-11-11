@@ -6,7 +6,7 @@ permalink: /components/use-cases/advertising-platforms/
 * TOC
 {:toc}
 
-With this end-to-end flow you can bring into Keboola Connection data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, and Bing Ads). 
+With this end-to-end template you can bring into Keboola Connection data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, and Bing Ads). 
 After all the necessary tasks are performed on the data, you load the results into BigQuery. You can also enrich the data with Google Analytics.
  
 **The flow, in a nutshell:**
@@ -25,16 +25,17 @@ After all the necessary tasks are performed on the data, you load the results in
 
 ## Business Data Model
 
-![Business Data Model](/components/use-cases/advertising-platforms/business-data-model.png)
+{: .image-popup}
+![Business Data Model](/use-cases/advertising-platforms/business-data-model.png)
 
-## Table Description
+### Table Description
 
 | Name | Description |
 |---|---|
+| ONLINE MARKETING | contains data about impressions, clicks, costs per clicks, and costs per conversions |
 | ONLINE MARKETING TRANSACTIONS | contains a list of campaigns of each account |
 | ONLINE MARKETING TRAFFIC | contains data about sessions, pageviews, bounces, and cpc of each campaign per day |
 | KEYWORDS ADGROUP | contains a list of keywords and ad groups|
-| ONLINE MARKETING | contains data about impressions, clicks, costs per clicks, and costs per conversions |
 
 ## Data Sources
 
@@ -46,13 +47,15 @@ These data sources are available in Public Beta:
 - [Google Analytics](https://analytics.google.com/analytics/web/)
 - [Google Ads](https://ads.google.com/)
 
+<!-- 
 The following data sources will be coming soon: 
 
 - [Twitter Analytics](https://analytics.twitter.com/about/)
 - [YouTube Analytics](https://developers.google.com/youtube/reporting)
 - [TicToc Analytics](https://ads.tiktok.com/help/)
 - [Instagram Advertising](https://www.facebook.com/business/tools/ads-manager/)
-
+ -->
+ 
 ## Data Destinations
 
 These data destinations are available in Public Beta: 
@@ -62,31 +65,36 @@ These data destinations are available in Public Beta:
 - [Google BigQuery database](https://cloud.google.com/bigquery/) 
 - [Google Sheets](https://www.google.com/sheets/about/)
 
+<!-- 
 The following data destinations will be coming soon: 
 - [GoodData](https://www.gooddata.com/)
 - [Tableau](https://www.tableau.com/)
 - [Redshift database](https://aws.amazon.com/redshift/)
 - [Google Drive](https://www.google.com/drive/) 
 - [Amazon S3](https://www.aws.amazon.com/)
-
+ -->
+ 
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
 from the **Use Case** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
 
-![Add New Use Case](/components/use-cases/advertising-platforms/add-new-use-case.png)
+{: .image-popup}
+![Add New Use Case](/use-cases/advertising-platforms/add-new-use-case.png)
 
 This page contains information about the template. Click **+ Use Template** again.
 
-![Add Ad Platforms to Google Sheets](/components/use-cases/advertising-platforms/ad-platforms-to-google-sheets.png)
+{: .image-popup}
+![Add Ad Platforms to Google Sheets](/use-cases/advertising-platforms/ad-platforms-to-google-sheets.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
 
-![Ad Platforms to Google Sheets - Template Name](/components/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-name.png)
+{: .image-popup}
+![Ad Platforms to Google Sheets - Template Name](/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-name.png)
 
-After clicking :arrow_right: **Next Step**, you will see the template builder. Fill in all needed credentials and 
+After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow failing because of any user 
@@ -96,16 +104,18 @@ cases/ecommerce/authorizing-destinations/) below.
 Follow the steps one by one and authorize your data sources. Finally, the destination must be authorized as well. 
 
 > Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section 
-> [Authorizing Destinations](/components/use-cases/advertising-platforms/authorizing-destinations/) below.
+> [Authorizing Destinations](/use-cases/advertising-platforms/authorizing-destinations/) below.
 
-![Ad Platforms to Google Sheets](/components/use-cases/advertising-platforms/advertising-platforms-to-google-sheets.png)
+{: .image-popup}
+![Ad Platforms to Google Sheets](/use-cases/advertising-platforms/advertising-platforms-to-google-sheets.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
-when it is done, you will be redirected to Use Case Catalogue and see the newly created flow. 
+when it is done, you will see the newly created flow. 
 
-Click :arrow_forward: **Run Use Case** and start building your visualizations a few minutes after. 
+Click **Run Use Case** and start building your visualizations a few minutes after. 
 
-![Ad Platforms to Google Sheets - Flows](/components/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-flow.png)
+{: .image-popup}
+![Ad Platforms to Google Sheets - Flows](/use-cases/advertising-platforms/advertising-platforms-to-google-sheets-flow.png)
 
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source. 
@@ -116,36 +126,41 @@ Using at least one data source is required. Google Analytics can be used in addi
 
 ### Facebook Ads
 
-![Facebook Ads Data Source](/components/use-cases/advertising-platforms/facebook-ads-data-source.png)
+{: .image-popup}
+![Facebook Ads Data Source](/use-cases/advertising-platforms/facebook-ads-data-source.png)
 
-Log into Facebook with redirection from this step and allow Keboola to see the data. 
+Log into Facebook with redirection from this step and allow Keboola Connection to access the data. 
 
 From the list of accounts select the accounts from which you want to download data.
 
 ### Bing Ads
 
-![Bing Ads Data Source](/components/use-cases/advertising-platforms/bing-ads-data-source.png)
+{: .image-popup}
+![Bing Ads Data Source](/use-cases/advertising-platforms/bing-ads-data-source.png)
 
-First, authorize your Google account. To configure this source component, you must also have a Microsoft account 
-where you find the Developer Token (Developer Account).
+First, authorize your Google account. To configure this source component, you must also have a Microsoft account
+where you find the [Developer Token]](https://learn.microsoft.com/en-us/) (Developer Account).
 
 The Account ID (aid) and Customer ID (cid) can be found in the URL of your campaign (https://ui.ads.microsoft.com/campaign/vnext/campaigns?aid=XXXXXXXXX&cid=XXXXXXXXX&uid=XXXXXXXXX).
 
 ### LinkedIn Ads
 
-![LinkedIn Ads Data Source](/components/use-cases/advertising-platforms/linkedin-ads-data-source.png)
+{: .image-popup}
+![LinkedIn Ads Data Source](/use-cases/advertising-platforms/linkedin-ads-data-source.png)
 
 Authorize your Google account and then fill in the start and end dates according to the example.
 
 ### Google Ads
 
-![Google Ads Data Source](/components/use-cases/advertising-platforms/google-ads-data-source.png)
+{: .image-popup}
+![Google Ads Data Source](/use-cases/advertising-platforms/google-ads-data-source.png)
 
 Authorize your Google account and select the period for extracting the data.
 
 ### Google Analytics
 
-![Google Analytics Data Source](/components/use-cases/advertising-platforms/google-analytics-data-source.png)
+{: .image-popup}
+![Google Analytics Data Source](/use-cases/advertising-platforms/google-analytics-data-source.png)
 
 Authorize your Google account and select the period for extracting the data.
 
@@ -154,7 +169,8 @@ To create a working flow, you must select at least one data destination.
 
 ### BigQuery Database
 
-![BigQuery Destination](/components/use-cases/advertising-platforms/bigquery-destination.png)
+{: .image-popup}
+![BigQuery Destination](/use-cases/advertising-platforms/bigquery-destination.png)
 
 To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
@@ -162,14 +178,17 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 ### Google Sheets
 
-![Google Sheets Destination](/components/use-cases/advertising-platforms/google-sheets-destination.png)
+{: .image-popup}
+![Google Sheets Destination](/use-cases/advertising-platforms/google-sheets-destination.png)
 
 Authorize your Google account.
 
 Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
 in your duplicated Google sheet. 
 
+<!-- 
 *Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself, we will do that for you.*
+ -->
 
 ### Snowflake Database Provided by Keboola
 
@@ -180,7 +199,8 @@ If you do not have your own data warehouse, follow the instructions and we will 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 
 
-![DWH Provided by Keboola](/components/use-cases/advertising-platforms/dwh-provided-by-keboola.png)
+{: .image-popup}
+![DWH Provided by Keboola](/use-cases/advertising-platforms/dwh-provided-by-keboola.png)
 
 Everything is set up.
 
@@ -189,7 +209,8 @@ Everything is set up.
 If you want to use your own Snowflake database, you must provide the host name (account name), user name, password, database name, 
 schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
 
-![Snowflake Destination](/components/use-cases/advertising-platforms/snowflake-destination.png)
+{: .image-popup}
+![Snowflake Destination](/use-cases/advertising-platforms/snowflake-destination.png)
 
 We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide 
 the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
@@ -205,11 +226,12 @@ Before turning to the Keboola support team for help, make sure your error is not
 ### Missing Credentials to Snowflake Database 
 If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
 
-Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database component.
+Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database component.
 Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
 
-Then go to the **Jobs** tab and **Run** the flow again.  
+Then go to the **Flows** tab and **Run** the flow again.  
 
-![Job - Snowflake](/components/use-cases/advertising-platforms/snowflake-job.png)
+{: .image-popup}
+![Job - Snowflake](/use-cases/advertising-platforms/snowflake-job.png)
 
  
