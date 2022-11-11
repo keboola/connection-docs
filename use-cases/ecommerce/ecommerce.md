@@ -96,7 +96,7 @@ Now enter a name for the template instance that you are about to create. This wa
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow failing because of any user authorization problems. 
-If you are struggling with this part, go to the section [Authorizing Destinations](/components/use-cases/ecommerce/authorizing-destinations/) below.
+If you are struggling with this part, go to the section [Authorizing Destinations](/use-cases/ecommerce/authorizing-destinations/) below.
 
 Follow the steps one by one and authorize your data sources. An Ecommerce data source is required. In this case, it is Shopify.
 
@@ -104,7 +104,7 @@ Follow the steps one by one and authorize your data sources. An Ecommerce data s
 
 Finally, the destination must be authorized as well. 
 
-> Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section [Authorizing Destinations](/use-cases/ecommerce/authorizing-destinations/) below.
+*Note: Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section [Authorizing Destinations](/use-cases/ecommerce/authorizing-destinations/) below.*
 
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database](/use-cases/ecommerce/shopify-to-keboola-snowflake.png)
