@@ -1,19 +1,20 @@
 ---
 title: DataHub
-permalink: /components/use-cases/datahub/
+permalink: /use-cases/datahub/
 ---
 
 * TOC
 {:toc}
 
-The DataHub use case template provides a one-click setup of an end-to-end flow for populating Keboola metadata 
+The [DataHub](https://datahub.io/) use case template provides a one-click setup of an end-to-end flow for populating Keboola metadata 
 into a DataHub data catalog. This includes extracting data from both the Telemetry and Metadata extractors 
 before transforming the data to calculate table properties and lineage. You can choose whether or not to include schemas, 
-properties, or tags from the DataHub writer.
+properties, or tags from the DataHub destination component.
 
 **The flow, in a nutshell:**
 
-![DataHub Flow](/components/use-cases/datahub/datahub-flow.png)
+{: .image-popup}
+![DataHub Flow](/use-cases/datahub/datahub-flow.png)
 
 - First, the Metadata and Telemetry extractors will collect the data from your project or organization
     - The Telemetry Data extractor allows you to retrieve data about your project or about your whole organization. It helps you monitor activities and usage of your Keboola Connection projects. It also helps Keboola calculate your project consumption.
@@ -27,5 +28,6 @@ properties, or tags from the DataHub writer.
 
 Template/Component Variations:
 
-![Variations](/components/use-cases/datahub/datahub-variations.png)
+{: .image-popup}
+![Variations](/use-cases/datahub/datahub-variations.png)
 
