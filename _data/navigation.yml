@@ -357,13 +357,25 @@ items:
 
       - url: /components/ip-addresses/
         title: IP Addresses
-
+  
+  - url: /use-cases/
+    title: Use Cases
+    items:
+      - url: /use-cases/advertising-platforms/
+        title: Advertising Platforms
+        
+      - url: /use-cases/datahub/
+        title: DataHub
+        
+      - url: /use-cases/ecommerce/
+        title: eCommerce
+        
   - url: /catalog/
     title: Data Catalog
     items:
       - url: /catalog/multi-project/
         title: Multi-Project Architecture
-
+  
   - url: /storage/
     title: Storage
     items:
