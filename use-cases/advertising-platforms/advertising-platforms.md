@@ -11,7 +11,7 @@ After all the necessary tasks are performed on the data, you load the results in
  
 **The flow, in a nutshell:**
 {: .image-popup}
-![DataHub Flow](/use-cases/advertising-platforms/flow-advertising-platforms.png)
+![DataHub Flow](/use-cases/advertising-platforms/advertising-platforms-flow.png)
 
 - First, you will select one or multiple data source components that will provide all your available data about your campaigns.
  
