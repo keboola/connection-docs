@@ -234,7 +234,7 @@ Duplicate the sheet into your Google Drive and paste the file ID back to Keboola
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
 1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination**. You will be redirected to the data destination configuration and asked to set up the database. 
+2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up the credentials. 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 
 
