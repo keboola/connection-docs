@@ -10,7 +10,7 @@ With this end-to-end template you can bring into Keboola Connection data from on
 After all the necessary tasks are performed on the data, you load the results into BigQuery. You can also enrich the data with Google Analytics.
  
 **The flow, in a nutshell:**
-
+{: .image-popup}
 ![DataHub Flow](/use-cases/advertising-platforms/flow-advertising-platforms.png)
 
 - First, you will select one or multiple data source components that will provide all your available data about your campaigns.
@@ -197,12 +197,15 @@ in your duplicated Google sheet.
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
 1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination**. You will be redirected to the data destination configuration and asked to set up the database. 
+2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up the credentials. 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 
 
 {: .image-popup}
-![DWH Provided by Keboola](/use-cases/advertising-platforms/dwh-provided-by-keboola.png)
+![DWH Provided by Keboola](/use-cases/advertising-platforms/keboola-dwh-instructions1.png)
+![DWH Provided by Keboola](/use-cases/advertising-platforms/keboola-dwh-instructions2.png)
+![DWH Provided by Keboola](/use-cases/advertising-platforms/keboola-dwh-instructions3.png)
+![DWH Provided by Keboola](/use-cases/advertising-platforms/keboola-dwh-instructions4.png)
 
 Everything is set up.
 
