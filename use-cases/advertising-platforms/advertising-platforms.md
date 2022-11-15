@@ -11,6 +11,8 @@ After all the necessary tasks are performed on the data, you load the results in
  
 **The flow, in a nutshell:**
 
+![DataHub Flow](/use-cases/advertising-platforms/flow-advertising-platforms.png)
+
 - First, you will select one or multiple data source components that will provide all your available data about your campaigns.
  
 - To enrich the marketing model with keywords, ad groups, and marketing transactions, you can also bring in your Google Analytics data (data about basic sessions and transactions).
