@@ -239,7 +239,10 @@ If you do not have your own data warehouse, follow the instructions and we will 
 4. Then go back to the flow and click **Run**. 
 
 {: .image-popup}
-![DWH Provided by Keboola](/use-cases/ecommerce/dwh-provided-by-keboola.png)
+![DWH Provided by Keboola](/use-cases/ecommerce/keboola-dwh-instructions1.png)
+![DWH Provided by Keboola](/use-cases/ecommerce/keboola-dwh-instructions2.png)
+![DWH Provided by Keboola](/use-cases/ecommerce/keboola-dwh-instructions3.png)
+![DWH Provided by Keboola](/use-cases/ecommerce/keboola-dwh-instructions4.png)
 
 Everything is set up.
 
