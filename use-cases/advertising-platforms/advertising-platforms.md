@@ -25,7 +25,8 @@ After all the necessary tasks are performed on the data, you load the results in
 
 - Finally, you will return the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected source components, all data manipulations, and the Google Sheets destination component, will be processed.
 
-## Business Data Model
+## Entity Relationship Diagram
+An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
 ![Business Data Model](/use-cases/advertising-platforms/business-data-model.png)
