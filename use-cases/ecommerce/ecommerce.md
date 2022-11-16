@@ -25,7 +25,7 @@ The ecommerce source component, all data manipulations and analyses, and the des
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
-![Business Data Model](/use-cases/ecommerce/business-data-model-ecommerce.jpg)
+![Business Data Model](/use-cases/ecommerce/ShopifyAnalytics.png)
 
 ## Table Description
 
