@@ -150,12 +150,12 @@ Find all links in your Shoptet account.
 
 Example: Go to Customers and click **Export**. At the bottom you will see a link looking like this: https://www.yourshopaddress.domain/export/customers.xml?ip=11.111.111.1111&hash=somehash
 
-- Set the shop name.
-- Set the Base URL of the store.
-- Set the Orders URL so that it contains the pattern ID and hash in the URL.
-- Set the Products URL so that it contains the pattern ID and hash in the URL.
-- Set the Customers URL so that it contains the hash in the URL.
-- Set the Stock URL so that it contains the hash in the URL.
+- Set the shop name. (e.g. myshop)
+- Set the Base URL of the store.(e.g. https://www.myshop.cz)
+- Set the Orders URL so that it contains the pattern ID and hash in the URL.(e.g. https://www.myshop.cz/export/orders.csv?hash=XXXXX)
+- Set the Products URL so that it contains the pattern ID and hash in the URL.(e.g. https://www.myshop.cz/export/products.csv?hash=XXXXX)
+- Set the Customers URL so that it contains the hash in the URL.(e.g. https://www.myshop.cz/export/customers.csv?hash=XXXXX)
+- Set the Stock URL so that it contains the hash in the URL. (e.g. https://www.myshop.cz/export/stockStatistics.csv?hash=XXXXX)
 
 <!-- 
 ### WooCommerce
