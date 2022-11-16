@@ -104,7 +104,7 @@ perform the required OAuth authorizations.
 authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/components/use-
 cases/ecommerce/authorizing-destinations/) below.
 
-Follow the steps one by one and authorize your data sources. Finally, the destination must be authorized as well. 
+Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
 > Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section 
 > [Authorizing Destinations](/use-cases/advertising-platforms/authorizing-destinations/) below.
