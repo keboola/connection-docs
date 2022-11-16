@@ -21,7 +21,8 @@ You can also bring in marketing data from your marketing channels like [Facebook
 - Finally, you will run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
 The ecommerce source component, all data manipulations and analyses, and the destination component of your choice, will be processed.
 
-## Business Data Model
+## Entity Relationship Diagram
+An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
 ![Business Data Model](/use-cases/ecommerce/business-data-model-ecommerce.jpg)
