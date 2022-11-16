@@ -14,7 +14,7 @@ After all the necessary tasks are performed on the data, you can transform the r
 You can also bring in marketing data from your marketing channels like [Facebook Ads](https://www.facebook.com/business/tools/ads-manager/), 
 [Google Ads](https://ads.google.com/), and/or [Sklik](https://www.sklik.cz/) accounts.
 
-- We then create the output tables. We add NULL values if any columns are missing. We also check the data, and perform an RFM analysis.
+- We then create the output tables. We add NULL values if any columns are missing. We also check the data, and perform an [RFM analysis](https://clevertap.com/blog/rfm-analysis/).
 
 - The data is then written into your selected destination, for example to Snowflake database via the Snowflake destination component.
 
