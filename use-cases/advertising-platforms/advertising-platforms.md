@@ -151,7 +151,7 @@ The Account ID (aid) and Customer ID (cid) can be found in the URL of your campa
 {: .image-popup}
 ![LinkedIn Ads Data Source](/use-cases/advertising-platforms/linkedin-ads-data-source.png)
 
-Authorize your Google account and then fill in the start and end dates according to the example.
+Authorize your LinkedIn account and then fill in the start and end dates according to the example.
 
 ### Google Ads
 
