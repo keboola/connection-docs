@@ -99,7 +99,7 @@ After clicking **Next Step**, you will see the template builder. Fill in all nee
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow failing because of any user authorization problems. 
 If you are struggling with this part, go to the section [Authorizing Destinations](/use-cases/ecommerce/authorizing-destinations/) below.
 
-Follow the steps one by one and authorize your data sources. An Ecommerce data source is required. In this case, it is Shopify.
+Follow the steps one by one and authorize your data sources. An Ecommerce data source is required. In this case, it is Shopify. The marketing data sources are optional. 
 
 *Note: Using additional marketing sources is optional. You can (but you do not have to) enrich your eCommerce data with marketing statistics like costs, impressions, and clicks.*
 
