@@ -16,7 +16,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 {: .image-popup}
 ![DataHub Flow](/templates/marketing-platforms/advertising-platforms-flow.png)
 
-- First, you will select one or multiple data source components that will provide all your available data about your campaigns.
+- First, you will select one or multiple data source components (extractors) that will provide all your available data about your campaigns.
  
 - To enrich the marketing model with keywords, ad groups, and marketing transactions, you can also bring in your Google Analytics data (data about basic sessions and transactions).
  
@@ -24,7 +24,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
  
 - Then, optionally, Google Analytics session (new and returns), page views, and bounces will be added to the output table, and two new tables will be created for transactions and keyword ad groups.
  
-- The data will be written into a selected destinations, for example Google Sheets account via the  Google Sheets destination component.
+- The data will be written into a selected destinations, for example, your Google Sheets account via the Google Sheets destination component (writer).
 
 - Finally, you will return the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected source components, all data manipulations, and the Google Sheets destination component, will be processed.
 
@@ -235,7 +235,7 @@ Before turning to the Keboola support team for help, make sure your error is not
 If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
 
 Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database component.
-Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
+Now follow the **Snowflake Database provided by Keboola** on the page **Authorizations/destinations**. 
 
 Then go to the **Flows** tab and **Run** the flow again.  
 
