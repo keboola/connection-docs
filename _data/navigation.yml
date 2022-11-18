@@ -358,16 +358,16 @@ items:
       - url: /components/ip-addresses/
         title: IP Addresses
   
-  - url: /use-cases/
-    title: Use Cases
+  - url: /templates/
+    title: Templates
     items:
-      - url: /use-cases/advertising-platforms/
+      - url: /templates/marketing-platforms/
         title: Advertising Platforms
         
-      - url: /use-cases/datahub/
+      - url: /templates/datahub/
         title: DataHub
         
-      - url: /use-cases/ecommerce/
+      - url: /templates/ecommerce/
         title: eCommerce
         
   - url: /catalog/
