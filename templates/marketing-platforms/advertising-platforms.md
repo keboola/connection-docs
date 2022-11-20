@@ -6,11 +6,11 @@ permalink: /templates/marketing-platforms/
 * TOC
 {:toc}
 
-Using this template will give you an overview of the costs of all your campaigns in the marketing channels you use. All data will be stored in one table 
+Using one of the advertising platform templates will give you an overview of the costs of all your campaigns in the marketing channels you use. All data will be stored in one table 
 and one location. That means that you won't have to go to multiple systems and collect data manually anymore. Keboola Connection will do it for you.
 
 With this end-to-end flow you can bring into Keboola Connection data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, 
-and Bing Ads). After all the necessary tasks are performed on the data, you load the results into BigQuery. You can also enrich the data with Google Analytics.
+and Bing Ads). After all the necessary tasks are performed on the data, you load the results into Snowflake, Google BigQuery or Google Sheets. You can also enrich the data with Google Analytics.
 
 **The flow, in a nutshell:**
 {: .image-popup}
