@@ -13,6 +13,7 @@ With this end-to-end flow you can bring into Keboola Connection data from one or
 and Bing Ads). After all the necessary tasks are performed on the data, you load the results into Snowflake, Google BigQuery or Google Sheets. You can also enrich the data with Google Analytics.
 
 **The flow, in a nutshell:**
+
 {: .image-popup}
 ![Flow](/templates/marketing-platforms/adplatforms-flow.png)
 
@@ -141,7 +142,7 @@ From the list of accounts select the accounts from which you want to download da
 First, authorize your Google account. To configure this source component, you must also have a Microsoft account
 where you find the [Developer Token]](https://learn.microsoft.com/en-us/) (Developer Account).
 
-The Account ID (aid) and Customer ID (cid) can be found in the URL of your campaign (https://ui.ads.microsoft.com/campaign/vnext/campaigns?aid=XXXXXXXXX&cid=XXXXXXXXX&uid=XXXXXXXXX).
+The Account ID (aid) and Customer ID (cid) can be found in the URL of your campaign `https://ui.ads.microsoft.com/campaign/vnext/campaigns?aid=XXXXXXXXX&cid=XXXXXXXXX&uid=XXXXXXXXX`.
 
 ### LinkedIn Ads
 
@@ -236,5 +237,3 @@ Then go to the **Flows** tab and **Run** the flow again.
 
 {: .image-popup}
 ![Job - Snowflake](/templates/marketing-platforms/snowflake-job.png)
-
- 

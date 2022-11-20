@@ -30,4 +30,3 @@ Template/Component Variations:
 
 {: .image-popup}
 ![Variations](/templates/datahub/datahub-variations.png)
-

@@ -274,5 +274,3 @@ Then go to the **Jobs** tab and **Run** the flow again.
 
 {: .image-popup}
 ![Job - Snowflake](/templates/ecommerce/snowflake-job.png)
-
- 
