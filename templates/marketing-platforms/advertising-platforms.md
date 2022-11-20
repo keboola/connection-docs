@@ -14,7 +14,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 
 **The flow, in a nutshell:**
 {: .image-popup}
-![DataHub Flow](/templates/marketing-platforms/adplatforms-flow.png)
+![Flow](/templates/marketing-platforms/adplatforms-flow.png)
 
 - First, you will select one or multiple data source components (extractors) that will provide all your available data about your campaigns.
  
