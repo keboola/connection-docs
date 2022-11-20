@@ -14,7 +14,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 
 **The flow, in a nutshell:**
 {: .image-popup}
-![DataHub Flow](/templates/marketing-platforms/advertising-platforms-flow.png)
+![DataHub Flow](/templates/marketing-platforms/adplatforms-flow.png)
 
 - First, you will select one or multiple data source components (extractors) that will provide all your available data about your campaigns.
  
@@ -92,13 +92,13 @@ from the **Use Case** tab in your Keboola Connection project. When you are done,
 This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
-![Add Ad Platforms to Google Sheets](/templates/marketing-platforms/ad-platforms-to-google-sheets.png)
+![Add Ad Platforms to Google Sheets](/templates/marketing-platforms/add-adplatforms-to-google-sheets.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Template Name](/templates/marketing-platforms/advertising-platforms-to-google-sheets-name.png)
+![Ad Platforms to Google Sheets - Template Name](/templates/marketing-platforms/adplatforms-to-google-sheets-name.png)
 
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
@@ -112,7 +112,7 @@ Follow the steps one by one and authorize at least one data source from the list
 > [Authorizing Destinations](/templates/marketing-platforms/authorizing-destinations/) below.
 
 {: .image-popup}
-![Ad Platforms to Google Sheets](/templates/marketing-platforms/advertising-platforms-to-google-sheets.png)
+![Ad Platforms to Google Sheets](/templates/marketing-platforms/adplatforms-to-google-sheets.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
@@ -120,7 +120,7 @@ when it is done, you will see the newly created flow.
 Click **Run Use Case** and start building your visualizations a few minutes after. 
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/advertising-platforms-to-google-sheets-flow.png)
+![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/adplatforms-to-google-sheets-flow.png)
 
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source. 
