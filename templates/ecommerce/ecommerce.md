@@ -125,7 +125,7 @@ At least one data source must be used in order to create a working flow.
 ### Shopify Analytics
 
 {: .image-popup}
-![Shopify Source](templates/ecommerce/shopify-source.png)
+![Shopify Source](/templates/ecommerce/shopify-source.png)
 
 To enable this application, you must:
 
