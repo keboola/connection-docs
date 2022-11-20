@@ -108,9 +108,6 @@ authorization problems. If you are struggling with this part, go to the section 
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
-> Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section 
-> [Authorizing Destinations](/templates/marketing-platforms/authorizing-destinations/) below.
-
 {: .image-popup}
 ![Ad Platforms to Google Sheets](/templates/marketing-platforms/adplatforms-to-google-sheets.png)
 
@@ -123,11 +120,9 @@ Click **Run Use Case** and start building your visualizations a few minutes afte
 ![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/adplatforms-to-google-sheets-flow.png)
 
 ## Authorizing Data Sources
+
 To use a selected data source component, you must first authorize the data source. 
-
-Using at least one data source is required. Google Analytics can be used in addition to your selected data source/-s.
-
-*Note: Using the following marketing data sources is optional. Select the ones you wish to use.*
+You need to use at least one of the following marketing data sources. In addition, Google Analytics can be used to enrich the data.
 
 ### Facebook Ads
 
