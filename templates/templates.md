@@ -8,10 +8,10 @@ permalink: /templates/
 
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
 by an [orchestration](/orchestrator/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
-solving a specific problem. 
+that solves a specific problem. 
 
 Keboola Connection is a very open [platform](/overview), which may be overwhelming in many cases. 
-The ambition of data templates is to ease the configuration of repeated (or repeatable) solutions. 
+The goal of data templates is to make the configuration of repeated (or repeatable) solutions easy. 
 Although they are pre-defined sets of configurations, the created configurations have no special properties and 
 can be modified like any other configuration you have [created manually](/components/#creating-component-configuration).
 
@@ -48,7 +48,7 @@ Enter the required parameters and **Save** the configuration:
 {: .image-popup}
 ![Screenshot - Configure Salesforce](/templates/7.png)
 
-When all components are properly configured, you can click on **Save**, otherwise the save option won't be allowed:
+When all components are properly configured, you can click on **Save**; otherwise the save option won't be allowed:
 
 {: .image-popup}
 ![Screenshot - Use Template when all is Configured](/templates/8.png)
