@@ -140,7 +140,7 @@ From the list of accounts select the accounts from which you want to download da
 ![Bing Ads Data Source](/templates/marketing-platforms/bing-ads-data-source.png)
 
 First, authorize your Google account. To configure this source component, you must also have a Microsoft account,
-where you can find the [Developer Token]](https://learn.microsoft.com/en-us/) (Developer Account).
+where you can find the [Developer Token](https://learn.microsoft.com/en-us/) (Developer Account).
 
 The Account ID (aid) and Customer ID (cid) can be found in the URL of your campaign `https://ui.ads.microsoft.com/campaign/vnext/campaigns?aid=XXXXXXXXX&cid=XXXXXXXXX&uid=XXXXXXXXX`.
 
