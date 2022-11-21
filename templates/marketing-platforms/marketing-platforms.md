@@ -6,7 +6,7 @@ permalink: /templates/marketing-platforms/
 * TOC
 {:toc}
 
-Using one of the advertising platform templates will give you an overview of the costs of all your campaigns in the marketing channels you use. All data will be stored in one table 
+Using one of the advertising platform templates will give you an overview of the costs of all of your campaigns in the marketing channels you use. All data will be stored in one table 
 and one location. That means that you won't have to go to multiple systems and collect data manually anymore. Keboola Connection will do it for you.
 
 With this end-to-end flow you can bring into Keboola Connection data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, 
@@ -25,7 +25,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
  
 - Then, optionally, Google Analytics session (new and returns), page views, and bounces will be added to the output table, and two new tables will be created for transactions and keyword ad groups.
  
-- The data will be written into a selected destinations, for example, your Google Sheets account via the Google Sheets destination component (writer).
+- The data will be written into a selected destination, for example, your Google Sheets account via the Google Sheets destination component (writer).
 
 - Finally, you will return the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected source components, all data manipulations, and the Google Sheets destination component, will be processed.
 
@@ -104,7 +104,7 @@ and still keep everything organized.
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
-**Important:** Make sure to follow all the steps very carefully to prevent the newly created flow failing because of any user 
+**Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
 authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/templates/marketing-platforms/authorizing-destinations/) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
@@ -115,7 +115,7 @@ Follow the steps one by one and authorize at least one data source from the list
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
 
-Click **Run Use Case** and start building your visualizations a few minutes after. 
+Click **Run Use Case** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
 ![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/adplatforms-to-google-sheets-flow.png)
@@ -139,8 +139,8 @@ From the list of accounts select the accounts from which you want to download da
 {: .image-popup}
 ![Bing Ads Data Source](/templates/marketing-platforms/bing-ads-data-source.png)
 
-First, authorize your Google account. To configure this source component, you must also have a Microsoft account
-where you find the [Developer Token]](https://learn.microsoft.com/en-us/) (Developer Account).
+First, authorize your Google account. To configure this source component, you must also have a Microsoft account,
+where you can find the [Developer Token]](https://learn.microsoft.com/en-us/) (Developer Account).
 
 The Account ID (aid) and Customer ID (cid) can be found in the URL of your campaign `https://ui.ads.microsoft.com/campaign/vnext/campaigns?aid=XXXXXXXXX&cid=XXXXXXXXX&uid=XXXXXXXXX`.
 
@@ -149,7 +149,7 @@ The Account ID (aid) and Customer ID (cid) can be found in the URL of your campa
 {: .image-popup}
 ![LinkedIn Ads Data Source](/templates/marketing-platforms/linkedin-ads-data-source.png)
 
-Authorize your LinkedIn account and then fill in the start and end dates according to the example.
+Authorize your LinkedIn account and then fill in the start and end dates following the example.
 
 ### Google Ads
 
@@ -196,7 +196,7 @@ in your duplicated Google sheet.
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
 1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up the credentials. 
+2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 
 
