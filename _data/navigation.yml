@@ -359,13 +359,25 @@ items:
 
       - url: /components/ip-addresses/
         title: IP Addresses
-
+  
+  - url: /templates/
+    title: Templates
+    items:
+      - url: /templates/marketing-platforms/
+        title: Advertising Platforms
+        
+      - url: /templates/datahub/
+        title: DataHub
+        
+      - url: /templates/ecommerce/
+        title: eCommerce
+        
   - url: /catalog/
     title: Data Catalog
     items:
       - url: /catalog/multi-project/
         title: Multi-Project Architecture
-
+  
   - url: /storage/
     title: Storage
     items:
