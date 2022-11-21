@@ -34,14 +34,14 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 | PRODUCTS | contains list of products including product type, product manufacturer and product price |
 | ORDERS | contains list of customer orders including order date, purchase, price and taxes |
 | CUSTOMERS | contains list of customers, incl. email, customer billing and shipping information, and orders count |
-| SHOP | contains information about your shop such as url and name |
+| SHOP | contains information about your shop such as URL and name |
 | BILLING TYPE | enumeration for billing types |
 | SHIPPING TYPE | enumeration for shipping types |
 | ORDER LINES | contains individual items to orders, incl. order date, amount of bought items and item prices |
 | PRODUCT MARGIN OVER TIME | contains product margin over time, used to check how margin on each product changes in time |
 | CAMPAIGN COSTS | contains daily marketing campaign costs and clicks |
 | CAMPAIGN COSTS MONTHLY | contains monthly marketing campaign costs and clicks |
-| RFM | describes analysis of customer value (RFM), showing actual group of customer as well as prediction for moving from loyal customer to frozen customer |
+| RFM | describes analysis of customer value (RFM), showing actual group of customers as well as prediction for moving from loyal customer to frozen customer |
 | ANALYZE CLV BY TIME FROM PREVIOUS ORDER | contains analysis of customer lifetime value by time |
 | ANALYZE CLV BY ORDER COUNT | contains analysis of customer lifetime value by number of orders |
 
@@ -89,17 +89,17 @@ This page contains information about the template. Click **+ Use Template** agai
 {: .image-popup}
 ![Add New Use Case - Shopify to Keboola DWH](/templates/ecommerce/add-shopify-to-keboola-dwh.png)
 
-Now enter a name for the template instance that you are about to create. This way you can use the template as many times as you want. It is important to keep things organized. 
+Now enter a name for the template instance that you are about to create. This allows you to use the template as many times as you want. It is important to keep things organized. 
 
 {: .image-popup}
 ![Shopify to Keboola DWH - Template Name](/templates/ecommerce/shopify-to-keboola-dwh-name.png)
 
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and perform the required OAuth authorizations. 
 
-**Important:** Make sure to follow all the steps very carefully to prevent the newly created flow failing because of any user authorization problems. 
+**Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user authorization problems. 
 If you are struggling with this part, go to the section [Authorizing Destinations](/templates/ecommerce/authorizing-destinations/) below.
 
-Follow the steps one by one and authorize your data sources. An Ecommerce data source is required. In this case, it is Shopify. The marketing data sources are optional. 
+Follow the steps one by one and authorize your data sources. An eCommerce data source is required. In this case, it is Shopify. The marketing data sources are optional. 
 
 *Note: Using additional marketing sources is optional. You can (but you do not have to) enrich your eCommerce data with marketing statistics like costs, impressions, and clicks.*
 
@@ -110,9 +110,9 @@ Finally, the destination must be authorized as well.
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database](/templates/ecommerce/shopify-to-keboola-snowflake.png)
 
-When you are finished, click **Save** in the top right corner. The template builder will create your new configuration and when it is done, you will be redirected to Use Case Catalogue and see the newly created flow. 
+When you are finished, click **Save** in the top right corner. The template builder will create your new configuration and when it is done, you will be redirected to the Use Case Catalogue where you can see the newly created flow. 
 
-Click **Run Use Case** and start building your visualizations a few minutes after. 
+Click **Run Use Case** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database - Flows](/templates/ecommerce/shopify-to-keboola-provided-snowflake-database-flows.png)
@@ -131,7 +131,7 @@ To enable this application, you must:
 
 - [Enable private app development](https://help.shopify.com/en/manual/apps/private-apps#enable-private-app-development-from-the-shopify-admin) for your store.
 - Create a private application.
-- Enable `Read access` ADMIN API PERMISSIONS for the following following objects:
+- Enable `Read access` ADMIN API PERMISSIONS for the following objects:
     - `Orders`
     - `Products`
     - `Inventory`
@@ -148,7 +148,7 @@ This extractor allows you to download data from Shoptet permalinks.
 
 Find all links in your Shoptet account. 
 
-Example: Go to Customers and click **Export**. At the bottom you will see a link looking like this: https://www.yourshopaddress.domain/export/customers.xml?ip=11.111.111.1111&hash=somehash
+Example: Go to Customers and click **Export**. At the bottom you will see a link that looks like this: https://www.yourshopaddress.domain/export/customers.xml?ip=11.111.111.1111&hash=somehash
 
 - Set the shop name, e.g., myshop
 - Set the Base URL of the store, e.g., https://www.myshop.cz
@@ -182,7 +182,7 @@ Using the following marketing data sources is optional. Select the ones you wish
 {: .image-popup}
 ![Facebook Ads Data Source](/templates/ecommerce/facebook-ads-data-source.png)
 
-Log in into Facebook with redirection from this step and allow Keboola Connection to access the data. 
+Log into Facebook with redirection from this step and allow Keboola Connection to access the data. 
 
 From the list of accounts select the accounts from which you want to download data.
 
@@ -191,7 +191,7 @@ From the list of accounts select the accounts from which you want to download da
 {: .image-popup}
 ![Google Ads Data Source](/templates/ecommerce/google-ads-data-source.png)
 
-Authorize your Google Account and then select the account from which you want to get data. The list will automatically appear after authorization. 
+Authorize your Google Account and then select the account from which you want to obtain data. The list will automatically appear after authorization. 
 
 ### Sklik
 
@@ -226,16 +226,16 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping in your duplicated Google sheet. 
+Duplicate the sheet into your Google Drive and paste the file ID back into Keboola Connection. This is needed to achieve correct mapping in your duplicated Google sheet. 
 
-*Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself, we will do that for you.*
+<!-- *Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself---we will do that for you.* -->
 
 ### Snowflake Database Provided by Keboola
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
 1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up the credentials. 
+2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 
 
