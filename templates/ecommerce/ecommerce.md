@@ -79,10 +79,10 @@ The following data destinations will be coming soon:
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
-First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Use Case** tab in your Keboola Connection project. When you are done, click **+ Use Template**. 
+First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**. 
 
 {: .image-popup}
-![Add New Use Case](/templates/ecommerce/add-new-use-case.png)
+![Add New Use Case](/templates/ecommerce/add-new-template.png)
 
 This page contains information about the template. Click **+ Use Template** again.
 
@@ -110,9 +110,9 @@ Finally, the destination must be authorized as well.
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database](/templates/ecommerce/shopify-to-keboola-snowflake.png)
 
-When you are finished, click **Save** in the top right corner. The template builder will create your new configuration and when it is done, you will be redirected to the Use Case Catalogue where you can see the newly created flow. 
+When you are finished, click **Save** in the top right corner. The template builder will create your new configuration and when it is done, you will be redirected to the Template Catalogue where you can see the newly created flow. 
 
-Click **Run Use Case** and start building your visualizations a few minutes later. 
+Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database - Flows](/templates/ecommerce/shopify-to-keboola-provided-snowflake-database-flows.png)
