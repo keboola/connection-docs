@@ -85,10 +85,10 @@ The following data destinations will be coming soon:
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
-from the **Use Case** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
-![Add New Use Case](/templates/marketing-platforms/add-new-use-case.png)
+![Add New Template](/templates/marketing-platforms/add-new-template.png)
 
 This page contains information about the template. Click **+ Use Template** again.
 
@@ -115,7 +115,7 @@ Follow the steps one by one and authorize at least one data source from the list
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
 
-Click **Run Use Case** and start building your visualizations a few minutes later. 
+Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
 ![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/adplatforms-to-google-sheets-flow.png)
