@@ -105,8 +105,6 @@ Follow the steps one by one and authorize your data sources. An eCommerce data s
 
 Finally, the destination must be authorized as well. 
 
-*Note: Please, read carefully the instructions within this step. If you encounter any difficulties, go to the section [Authorizing Destinations](/templates/ecommerce/authorizing-destinations/) below.*
-
 {: .image-popup}
 ![Shopify Analytics to Keboola Provided Snowflake Database](/templates/ecommerce/shopify-to-keboola-snowflake.png)
 
