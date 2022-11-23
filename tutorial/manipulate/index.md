@@ -140,7 +140,7 @@ In the first query, we change the user level descriptions into something more cl
 
 In the second query, we compute the quality level for each deal opportunity based on the estimated probability
 of closing the deal.  Note that here we are excluding the system column "_timestamp" 
-which appears in [cloned snowflake tables](/transformations/snowflake/#_timestamp-system-column). 
+which appears in [cloned tables on Snowflake backend](/transformations/snowflake/#_timestamp-system-column). 
 
 In the third query, we denormalize all four tables into a single one.
 We have prepared the single table so that it will load nicely into Tableau.
