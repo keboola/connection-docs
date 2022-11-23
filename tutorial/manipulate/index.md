@@ -115,7 +115,7 @@ CREATE TABLE "tmp_level" AS
     FROM "level";
 
 CREATE TABLE "tmp_opportunity" AS
-    SELECT *, CASE
+    SELECT * EXCEPT ("_timestamp"), CASE
         WHEN "Probability" < 50 THEN 'Poor'
         WHEN "Probability" < 70 THEN 'Good'
         ELSE 'Excellent' END AS "ProbabilityClass"
@@ -137,8 +137,11 @@ CREATE TABLE "opportunity_denorm" AS
 ![Screenshot - Transformation Queries](/tutorial/manipulate/transformation-queries.png)
 
 In the first query, we change the user level descriptions into something more clear.
+
 In the second query, we compute the quality level for each deal opportunity based on the estimated probability
-of closing the deal.
+of closing the deal.  Note that here we are excluding the system column "_timestamp" 
+which appears in [cloned tables on Snowflake backend](/transformations/snowflake/#_timestamp-system-column). 
+
 In the third query, we denormalize all four tables into a single one.
 We have prepared the single table so that it will load nicely into Tableau.
 
