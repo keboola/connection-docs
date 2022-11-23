@@ -115,7 +115,7 @@ CREATE TABLE "tmp_level" AS
     FROM "level";
 
 CREATE TABLE "tmp_opportunity" AS
-    SELECT *, CASE
+    SELECT * EXCEPT ("_timestamp"), CASE
         WHEN "Probability" < 50 THEN 'Poor'
         WHEN "Probability" < 70 THEN 'Good'
         ELSE 'Excellent' END AS "ProbabilityClass"
