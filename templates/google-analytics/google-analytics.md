@@ -24,7 +24,7 @@ The Google Analytics or Google Search Console source components (if selected), a
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
-![Business Data Model](/templates/google-analytics/business-data-model.png)
+![Business Data Model](/templates/google-analytics/erd-google-analytics.png)
 
 ### Table Description
 
@@ -70,18 +70,18 @@ You’ll be asked to write a name for the template instance you are about to cre
 and still keep everything organized.
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Template Name](/templates/marketing-platforms/adplatforms-to-google-sheets-name.png)
+![Google Analytics to Snowflake - Template Name](/templates/google-analytics/google-analytics-to-snowflake-name.png)
 
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
-authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/templates/marketing-platforms/authorizing-destinations/) below.
+authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/templates/google-analytics/authorizing-destinations/) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
 {: .image-popup}
-![Ad Platforms to Google Sheets](/templates/marketing-platforms/adplatforms-to-google-sheets.png)
+![Google Analytics to Snowflake](/templates/google-analytics/google-analytics-to-snowflake-steps.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
@@ -89,7 +89,7 @@ when it is done, you will see the newly created flow.
 Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/adplatforms-to-google-sheets-flow.png)
+![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/google-analytics-to-snowflake-flow.png)
 
 ## Authorizing Data Sources
 
