@@ -89,7 +89,7 @@ when it is done, you will see the newly created flow.
 Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/google-analytics-to-snowflake-flow.png)
+![Ad Platforms to Google Sheets - Flows](/templates/google-analytics/google-analytics-to-snowflake-flow.png)
 
 ## Authorizing Data Sources
 
@@ -99,7 +99,7 @@ In addition to Google Analytics, you can also add data from the Google Search Co
 ### Google Analytics
 
 {: .image-popup}
-![Google Analytics Data Source](/templates/marketing-platforms/google-analytics-data-source.png)
+![Google Analytics Data Source](/templates/google-analytics/google-analytics-data-source.png)
 
 Authorize your Google account and select the period for extracting the data. The list will automatically appear after authorization.
 
@@ -107,10 +107,9 @@ Authorize your Google account and select the period for extracting the data. The
 Using this data source is optional.
 
 {: .image-popup}
-![Google Analytics Data Source](/templates/marketing-platforms/google-analytics-data-source.png)
+![Google  Data Search Console Data Source](/templates/google-analytics/google-search-console-data-source.png)
 
 Authorize your Google Account and then fill in your domain.
-
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
