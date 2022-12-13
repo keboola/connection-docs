@@ -219,7 +219,7 @@ This table shows information about queries using Snowflake, including transforma
 | `snowflake_database` (PK) | DB name | `KEBOOLA_391` |
 | `snowflake_schema` (PK) | Schema name | `WORKSPACE_146192784` |
 | `snowflake_user` (PK) | User running the queries | `KEBOOLA_WORKSPACE_146192784` |
-| `snowflake_job_type` (PK) | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against Keboola-provisioned DB, `sapi` - queries related to project's Storage, `platform_management` - system queries related to management of the project | `writer` |
+| `snowflake_job_type` (PK) | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project | `writer` |
 | `snowflake_job_result` (PK) | Result of the queries (`Success`, `Error`) | `Success` |
 | `snowflake_queries` | Number of the queries aggregated by the primary key | `19` |
 | `snowflake_queries_length_s` | Length of the queries in seconds aggregated by the primary key | `205.214000` |
