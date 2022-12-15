@@ -129,7 +129,7 @@ This table lists the Keboola Connection [jobs](/management/jobs/)
 | `job_run_id` | Run ID of the job – more jobs can be run under the same Run ID | `117643429.117644388` |
 | `job_start_at` | Datetime of when the job started | `2020-03-15 11:59:39` |
 | `job_created_at` | Datetime of when the job was created | `2020-03-15 11:59:38` |
-| `job_status` | Status of the job (`success`, `error`, `terminated`, `processing`) | `success` |
+| `job_status` | Status of the job (`success`, `error`, `terminated`, `processing`, `cancelled`, `warning`) | `success` |
 | `error_type` | Type of the error of the unsuccessful job (`user`, `application`) | `user` |
 | `error_message` | Message propagated in the error job event | `Transformation aborted with message...` |
 | `job_run_type` | Determines if the job was run by an orchestration or manually (`orchestration`, `manual`) | `orchestration` |
@@ -219,7 +219,7 @@ This table shows information about queries using Snowflake, including transforma
 | `snowflake_database` (PK) | DB name | `KEBOOLA_391` |
 | `snowflake_schema` (PK) | Schema name | `WORKSPACE_146192784` |
 | `snowflake_user` (PK) | User running the queries | `KEBOOLA_WORKSPACE_146192784` |
-| `snowflake_job_type` (PK) | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against Keboola-provisioned DB | `writer` |
+| `snowflake_job_type` (PK) | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project | `writer` |
 | `snowflake_job_result` (PK) | Result of the queries (`Success`, `Error`) | `Success` |
 | `snowflake_queries` | Number of the queries aggregated by the primary key | `19` |
 | `snowflake_queries_length_s` | Length of the queries in seconds aggregated by the primary key | `205.214000` |
