@@ -6,9 +6,9 @@ permalink: /templates/google-analytics/
 * TOC
 {:toc}
 
-With this end-to-end flow you can extract your updated data from Google Analytics and bring it into Keboola Connection. 
-You can also import your Google Search Console data. After all the necessary tasks are performed on the data, you can transform the results into visualizations 
-in any BI tool of your choice.
+Using one of the Google Analytics templates will provide you insights into site activities such as length of visits, number of pages seen per visit, bounce rate and many other statistics, which you can see in time or by traffic source. You can also enrich google analytics data with Google Search Console data, that will show you the average rank of your page in time.
+
+After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 
 **The flow, in a nutshell:**
 
@@ -101,7 +101,7 @@ In addition to Google Analytics, you can also add data from the Google Search Co
 {: .image-popup}
 ![Google Analytics Data Source](/templates/google-analytics/google-analytics-data-source.png)
 
-Authorize your Google account and select the period for extracting the data. The list will automatically appear after authorization.
+Authorize your Google account and select the period for extracting the data. The list of Google Analytics Profiles will automatically appear after the authorization.
 
 ### Google Search Console
 Using this data source is optional.
