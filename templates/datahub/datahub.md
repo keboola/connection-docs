@@ -17,13 +17,13 @@ Before you start, have a working instance of DataHub and get an API token.
 ### Deploy DataHub
 In order to get started, you must have a working (and secure!) instance of DataHub deployed somewhere. There are detailed deployment docs for the following platforms and technologies:
 
-[Deploying to AWS | DataHub](https://datahubproject.io/docs/deploy/aws)
+[Deploying to AWS - DataHub](https://datahubproject.io/docs/deploy/aws)
 
-[Deploying to GCP | DataHub](https://datahubproject.io/docs/deploy/gcp)
+[Deploying to GCP - DataHub](https://datahubproject.io/docs/deploy/gcp)
 
-[Deploying with Docker | DataHub](https://datahubproject.io/docs/docker)
+[Deploying with Docker - DataHub](https://datahubproject.io/docs/docker)
 
-[Deploying with Kubernetes | DataHub](https://datahubproject.io/docs/deploy/kubernetes)
+[Deploying with Kubernetes - DataHub](https://datahubproject.io/docs/deploy/kubernetes)
 
 ***Warning:** Please ensure that you/the client have either removed or changed the credentials for the DataHub root user (default is datahub/datahub). Otherwise, you will get emails from “ethical security researchers” :-).* 
 
