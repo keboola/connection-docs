@@ -371,6 +371,9 @@ items:
         
       - url: /templates/ecommerce/
         title: eCommerce
+      
+      - url: /templates/google-analytics/
+        title: Google Analytics
         
   - url: /catalog/
     title: Data Catalog
