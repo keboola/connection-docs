@@ -12,6 +12,7 @@ before transforming the data in order to calculate table properties and lineage.
 properties, or tags from the DataHub destination component (writer).
 
 ## Prerequisites
+Before you start, have a working instance of DataHub and get an API token.
 
 ### Deploy DataHub
 In order to get started, you must have a working (and secure!) instance of DataHub deployed somewhere. There are detailed deployment docs for the following platforms and technologies:
@@ -52,13 +53,13 @@ Make sure that you replace the username and duration above. Copy the token that 
 {: .image-popup}
 ![DataHub Flow](/templates/datahub/datahub-flow.png)
 
-- First, the Metadata and Telemetry source components (extractors) will collect the data from your project or organization
+- First, the Metadata and Telemetry source components (extractors) will collect the data from your project or organization.
     - The Telemetry extractor allows you to retrieve data pertaining to project or your entire organization. It helps you monitor the activities and usage of your Keboola Connection projects. It also helps Keboola calculate your project consumption.
     - The Metadata extractor downloads information from Keboola's APIs pertaining to various objects, users, etc. The metadata obtained by this source component can be used in addition with the default telemetry data pertaining to Keboola Connection projects to provide even more insights into the telemetry of your organization.
 
 - In the transformations,  a single metadata table is created for transmitting information to DataHub. Lineage is also calculated by parsing component configurations. 
 
-- In the final step, data will be pushed from storage to DataHub using the DataHub destination component. You will enter an API token and endpoint for your GMS (DataHub Metadata Service) server, as well as select the information you want to be included (e.g., properties, schemas, tags, etc.).
+- In the final step, data will be pushed from storage to DataHub using the DataHub destination component (writer). You will enter an API token and endpoint for your GMS (DataHub Metadata Service) server, as well as select the information you want to be included (e.g., properties, schemas, tags, etc.).
 
 - Finally, you will run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The Metadata and Telemetry source components, all data manipulations and analyses, and the DataHub destination component, will be processed.
 
@@ -69,7 +70,7 @@ There is a bit of ambiguity here, so please take it with a grain of salt.
 ![Variations](/templates/datahub/datahub-variations.png)
 
 ## Transformation Details
-There are currently two transformations that are a part of this template (with at least one more planned to be added in the near future). The purpose of both is to bring together multiple pieces of metadata & telemetry for the purpose of emitting to DataHub. 
+There are currently two transformations that are a part of this template. The purpose of both is to bring together multiple pieces of metadata & telemetry for the purpose of emitting to DataHub. 
 
 ### Transformation 1: Table-Level Metadata
 The transformation below does the following: 
