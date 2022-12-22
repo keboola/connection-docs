@@ -6,7 +6,9 @@ permalink: /templates/google-analytics/
 * TOC
 {:toc}
 
-Using one of the Google Analytics templates will provide you insights into site activities such as length of visits, number of pages seen per visit, bounce rate and many other statistics, which you can see in time or by traffic source. You can also enrich google analytics data with Google Search Console data, that will show you the average rank of your page in time.
+Using one of the Google Analytics templates will provide you with insights into site activities: the length of visits, the number of pages seen per visit, the 
+bounce rate, and many other statistics, which you can see in time or by the traffic source. You can also enrich your Google Analytics data with 
+Google Search Console data. This will show you the average rank of your page in time.
 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 
@@ -30,12 +32,12 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 
 | Name | Description |
 |---|---|
-| GA AD ANALYTICS | contains data about impressions, clicks, costs, sessions, bounces, pageviews of each campaign per day |
-| GA DEMOGRAPHIC AUDIENCE | contains high level age/gender focused view of traffic (session) data |
-| GA GEO AUDIENCE | contains geographical data that tells you who are your visitors coming to website and where are they coming from |
-| GA PAGE BEHAVIOUR | contains data about visitors behaviour on the pages - pageviews, sessions, entrances and time spent on page |
-| GA SITE STATISTICS | contains data about site statistics contains sessions, pageviews and also average time data (page load time, download time, redirection time, server connection time) per day |
-| GA TRAFFIC SOURCE | contains data about traffic sources of each campaign and source per day (sessions, bounces, users, session duration and pageviews) |
+| GA AD ANALYTICS | contains data about impressions, clicks, costs, sessions, bounces, and pageviews of each campaign per day |
+| GA DEMOGRAPHIC AUDIENCE | contains a high-level age/gender focused view of traffic (session) data |
+| GA GEO AUDIENCE | contains geographical data that tells you who your visitors coming to website are and where they are coming from |
+| GA PAGE BEHAVIOUR | contains data about visitor behaviour on the pages - pageviews, sessions, entrances, and time spent on a page |
+| GA SITE STATISTICS | contains data about site statistics: sessions, pageviews, and average time data (page load time, download time, redirection time, and server connection time) per day |
+| GA TRAFFIC SOURCE | contains data about traffic sources of each campaign and source per day (sessions, bounces, users, session duration, and pageviews) |
 | GSC RANKING | contains data about average ranking of each page per day |
 
 ## Data Sources
