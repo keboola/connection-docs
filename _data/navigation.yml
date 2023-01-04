@@ -219,6 +219,9 @@ items:
               - url: /components/extractors/other/dark-sky/
                 title: Dark Sky (Weather)
 
+              - url: /components/extractors/other/dynamodb-streams/
+                title: DynamoDB Streams
+
               - url: /components/extractors/other/currency-rates/
                 title: ECB Currency Rates
 
