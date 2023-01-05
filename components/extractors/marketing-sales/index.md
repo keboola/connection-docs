@@ -24,4 +24,5 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Salesforce](/components/extractors/marketing-sales/salesforce/). 
 - [Shoptet](/components/extractors/marketing-sales/shoptet/)
 - [Sklik](/components/extractors/marketing-sales/sklik/)
+- [Zboží.cz](/components/extractors/marketing-sales/zbozi.cz/)
 - And [more](https://components.keboola.com/components)
