@@ -12,7 +12,7 @@ permalink: /transformations/teradata/
 To create a simple Teradata transformation, follow these steps:
 
 - Create a table in Storage by uploading this [sample CSV file](/transformations/source.csv).
-- Created table will be available in your transformation (or Workspace) via [Read-only Input-mapping](), so there is no option to specify standard Input mapping.
+- Created table will be available in your transformation (or Workspace) via [Read-only Input-mapping](/transformations/#read-only-input-mapping), so there is no option to specify standard Input mapping.
 - Create an output mapping, setting its destination to a new table in your Storage.
 - Copy & paste the below script into the transformation code.
 - Save and run the transformation.
