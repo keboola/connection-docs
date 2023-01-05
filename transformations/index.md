@@ -377,3 +377,9 @@ everything is less clear and isolated. To save time, run multiple orchestration 
 #### Dependencies
 Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all 
 required steps have been executed.
+
+## Read-only Input mapping
+
+With Read-only input-mapping feature you can access all buckets (your own or linked) in transformations. Your transformation user
+has read only access on buckets (and their tables) so you can access such data. So there is no need to specify standard input mapping 
+for your transformations.
