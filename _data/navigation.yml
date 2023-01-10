@@ -152,6 +152,15 @@ items:
 
               - url: /components/extractors/marketing-sales/market-vision/
                 title: Market Vision
+              
+              - url: /components/extractors/marketing-sales/bing-ads/
+                title: Microsoft Advertising (Bing Ads)
+                items:
+                  - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
+                    title: Columns and primary key of report configuration presets
+
+                  - url: /components/extractors/marketing-sales/bing-ads/reports-available-columns/
+                    title: Possible columns for each report type
 
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
