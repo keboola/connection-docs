@@ -52,7 +52,7 @@ If you need more information, please contact your CSM.
 
 | Types of jobs in Keboola Connection   | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
-| **Extractor job**                     | 1 GB in                 | **Per contract**                 |
+| **Extractor job**                     | 1 GB in                 | **Per contract**      |
 | **Writer job**                        | 1 GB out                | **0.2**               |  
 | **SQL job / Workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
@@ -64,6 +64,9 @@ If you need more information, please contact your CSM.
 | Medium                                | 1 hour                  | **2**                 |
 | Large                                 | 1 hour                  | **8**                 |
 | Deployed & running ML model (BETA)    | 1 hour                  | **0.1**               |
+| **dbt job**                           |                         |                       |
+| Small                                 | 1 hour                  | **6**                 |
+| Remote                                | 1 hour                  | **2**                 |
 | **DWH Direct query**                  |                         |                       |
 | Small                                 | 1 hour                  | **8**                 |
 | Medium                                | 1 hour                  | **16**                |
@@ -73,12 +76,14 @@ If you need more information, please contact your CSM.
 **Types of backend sizes used for jobs**
 
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
-| MEDIUM (SQL                           | Snowflake MEDIUM DWH                            |
+| MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
 | XSMALL (Python,R, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared        |
 | SMALL (Python,R, Components)          | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
 | MEDIUM (Python,R, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
-| LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated|
+| LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated    |
+| SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
+| REMOTE (dbt)                          | Using user's remote DWH                         |
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
