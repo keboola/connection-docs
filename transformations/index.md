@@ -382,4 +382,4 @@ required steps have been executed.
 
 With Read-only input-mapping feature you can access all buckets (your own or linked) in transformations. Your transformation user
 has read only access on buckets (and their tables) so you can access such data. So there is no need to specify standard input mapping 
-for your transformations.
+for your transformations. Name of backend object (database, schema...) depends on the backend you use, and it contains bucket ID (not bucket name). 

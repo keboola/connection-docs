@@ -31,3 +31,7 @@ INSERT INTO "transformationTable" ("id", "name") VALUES (2, 'doe');
 ![Screenshot - Sample Transformation](/transformations/teradata/sample-transformation.png)
 
 You can organize the script into [blocks](/transformations/#writing-scripts).
+
+## Object name
+
+Teradata organizes tables in databases. Each bucket in Keboola is represented by a separated database, which usually follow this naming pattern: `SAPI_<projectID>_<bucketID>` (where `bucketID` has replaced `.` by `_`). 
