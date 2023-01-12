@@ -173,6 +173,9 @@ items:
 
               - url: /components/extractors/social/instagram/
                 title: Instagram
+              
+              - url: /components/extractors/social/linkedin-pages/
+                title: LinkedIn Pages
 
               - url: /components/extractors/social/twitter/
                 title: Twitter
