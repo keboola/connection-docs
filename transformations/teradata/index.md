@@ -6,7 +6,7 @@ permalink: /transformations/teradata/
 * TOC
 {:toc}
 
-[Teradata Vantage™](https://www.teradata.com/) is the connected multi-cloud data platform for enterprise analytics that unifies everything—data lakes, data warehouses, analytics, and new data sources and types. Latest version 17.10 is currently supported.
+[Teradata Vantage™](https://www.teradata.com/) is the connected multi-cloud data platform for enterprise analytics that unifies everything — data lakes, data warehouses, analytics, and new data sources and types. Latest version 17.10 is currently supported.
 
 ## Example
 To create a simple Teradata transformation, follow these steps:
