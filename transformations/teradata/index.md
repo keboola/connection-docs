@@ -32,15 +32,15 @@ INSERT INTO "transformationTable" ("id", "name") VALUES (2, 'doe');
 
 You can organize the script into [blocks](/transformations/#writing-scripts).
 
-## Bucket databases for Read-only input mapping
+## Bucket objects for Read-only input mapping
 
 Teradata organizes tables in databases. Each bucket in Keboola is represented by a separated database, which usually follow this naming pattern: `<stackPrefix>_<projectID>_<bucketID>`
-- `stackPrefix` depends on keboola stack which you use
+- `stackPrefix` - depends on keboola stack which you use
   - https://connection.keboola.com/ - `SAPI`
   - https://connection.eu-central-1.keboola.com/ - `KEBOOLA`
   - https://connection.north-europe.azure.keboola.com/ - `KEBOOLA`
 - `projectID` - ID of your project, which you can find in URL
-- `bucketID` which you can find in detail of your bucket (field ID, not name). This value is in form where `.` is replaced by `_` 
+- `bucketID` - you can find this string ID in detail of your bucket (field ID, not name). This value is in form where `.` is replaced by `_` 
 
 **Example**:
 Bucket with ID `in.c-bucketOutOfTransformation` in project `9435` in `connection.keboola.com` is represented by database `SAPI_9435-in_c-bucketOutOfTransformation`
