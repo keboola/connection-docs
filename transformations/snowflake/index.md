@@ -253,3 +253,8 @@ SELECT
     TO_TIMESTAMP('10.3.2013 2:12', 'DD.MM.YYYY HH:MI');
 
 {% endhighlight %}
+
+
+## Bucket objects for Read-only input mapping
+
+Buckets in Snowflake are represented by schemas. You can find all available schemas for your account by calling `SHOW SCHEMAS IN ACCOUNT;`. Each schema represents a bucket.
