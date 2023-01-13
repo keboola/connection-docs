@@ -64,6 +64,7 @@ A backend is the engine running the transformation script. It is either a databa
 ([Amazon Redshift](https://aws.amazon.com/redshift/),
 [Snowflake](https://www.snowflake.com/),
 [Exasol](https://www.exasol.com/),
+[Teradata](https://www.teradata.com/),
 [Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
 or a language interpreter 
 ([Julia](https://julialang.org/), 
@@ -129,7 +130,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <th colspan='2'>Feature</th><th>Legacy Transformations</th><th>New Transformations</th>
 </tr>
 <tr>
-    <th rowspan='11'>Backend</th>
+    <th rowspan='12'>Backend</th>
     <th><a href='/transformations/julia/'>Julia Transformations</a></th> 
     <td>✓</td>
     <td>Planned</td>
@@ -176,6 +177,11 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th><a href='/transformations/exasol/'>Exasol Transformations</a></th> 
+    <td>Not available</td>
+    <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/teradata/'>Teradata Transformations</a></th> 
     <td>Not available</td>
     <td>✓</td>
 </tr>
@@ -371,3 +377,9 @@ everything is less clear and isolated. To save time, run multiple orchestration 
 #### Dependencies
 Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all 
 required steps have been executed.
+
+## Read-only Input mapping
+
+With Read-only input-mapping feature you can access all buckets (your own or linked) in transformations. Your transformation user
+has read only access on buckets (and their tables) so you can access such data. So there is no need to specify standard input mapping 
+for your transformations. Name of backend object (database, schema...) depends on the backend you use, and it contains bucket ID (not bucket name). 
