@@ -45,7 +45,3 @@ to a larger size, these limits can be increased.
 **Case sensitivity**: Redshift is case insensitive and stores all column and table names in lower case. However,
 Storage is case sensitive (be careful when migrating transformations to Redshift, letter case could cause problems
 in the output mapping).
-
-## Bucket objects for Read-only input mapping
-
-Buckets in Snowflake are represented by schemas. You can find all available schemas for your account by calling `SHOW SCHEMAS IN ACCOUNT;`. Each schema represents a bucket.
