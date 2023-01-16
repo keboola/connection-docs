@@ -126,6 +126,9 @@ items:
               - url: /components/extractors/marketing-sales/babelforce/
                 title: Babelforce
 
+              - url: /components/extractors/marketing-sales/bigcommerce/
+                title: BigCommerce
+
               - url: /components/extractors/marketing-sales/criteo/
                 title: Criteo
 
