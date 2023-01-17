@@ -3,6 +3,8 @@ title: TikTok Ads
 permalink: /components/extractors/marketing-sales/tiktok-ads/
 ---
 
+* TOC
+{:toc}
 
 This extractor uses the [TikTok Marketing Reports API](https://ads.tiktok.com/marketing_api/docs?id=1740302665828417) to extract 
 reports on performance of ads. Depending on the data you need to extract, 
