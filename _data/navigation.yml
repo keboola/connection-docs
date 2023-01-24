@@ -249,6 +249,9 @@ items:
               - url: /components/extractors/other/telemetry-data/
                 title: Telemetry Data
 
+              - url: /components/extractors/other/time-doctor-2
+                title: Time Doctor 2
+
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
 
