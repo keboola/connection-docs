@@ -141,11 +141,17 @@ table {
 }
 
 .root {
+  overflow: auto;
+
   .container {
     &.main {
       background-color: $keboola-gray;
     }
   }
+}
+
+img {
+  max-width: 100% !important;
 }
 
 .header {
