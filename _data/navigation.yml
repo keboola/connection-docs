@@ -243,6 +243,9 @@ items:
               - url: /components/extractors/other/pingdom/
                 title: Pingdom
 
+              - url: /components/extractors/other/servicenow/
+                title: ServiceNow
+
               - url: /components/extractors/other/stripe/
                 title: Stripe
 
