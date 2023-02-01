@@ -368,6 +368,9 @@ items:
     items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
+      
+      - url: /templates/customer-relationship-management/
+        title: Customer Relationship Management
         
       - url: /templates/datahub/
         title: DataHub
