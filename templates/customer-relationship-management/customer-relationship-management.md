@@ -65,7 +65,7 @@ First decide which data source and which data destination you want to use. Then 
 This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
-![Add CRMcustomer-relationship-managementtemplatescrmrelationship-management/add-crm-to-snowflake.png)
+![Add CRM to Snowflake(/templates/customer-relationship-management/add-crm-to-snowflake.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
@@ -95,23 +95,24 @@ Click **Run Template** and start building your visualizations a few minutes late
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source.
 
-Hubspot
+### HubSpot
+{: .image-popup}
+![HubSpot Data Source](/templates/customer-relationship-management/hubspot-data-source.png)
 
+TODO Insert the HubSpot Private App Token and then select a period from date you want to extract data.
+
+### Salesforce
+
+{: .image-popup}
+![Salesforce Data Source](/templates/customer-relationship-management/salesforce-data-source.png)
  
+TODO Fill your Salesforce login name, password and security token.
 
-Insert Hubspot Private App Token and then select period from date you want to extract data.
+### Pipedrive
+{: .image-popup}
+![Pipedrive Data Source](/templates/customer-relationship-management/pipedrive-data-source.png)
 
-Salesforce
-
- 
-
-Fill your Salesforce login name, password and security token.
-
-Pipedrive
-
- 
-
-Fill your company domain and API token that you can find here: Settings > Personal preferences > API.
+TODO Fill your company domain and API token that you can find here: Settings > Personal preferences > API.
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
