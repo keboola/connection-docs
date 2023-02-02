@@ -8,6 +8,7 @@ permalink: /templates/repository/
 
 With this end-to-end flow you can extract your updated data from your repository tool (GitHub) and bring it into Keboola Connection. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
+
 By using our repository template, you will get an overview of your repositories and the activity in them.
 
 **The flow, in a nutshell:**
