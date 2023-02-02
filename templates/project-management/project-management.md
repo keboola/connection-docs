@@ -34,7 +34,7 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 | PROJECT | data about each project, its owner and due date |
 | PROJECT SNAPSHOT | history of the project table and its changes |
 | PROJECT USER | tables PROJECT and USER combined |
-| TASK | list of tasks and information such as date of creation, due date, assignee; each task can be linked to a project |
+| TASK | list of tasks and information such as the date of creation, due date, assignee; each task can be linked to a project |
 | TASK CUSTOM FIELD | custom fields value |
 | TASK EVENT | changes made to tasks |
 | TASK SNAPSHOT | history of the tasks table and its changes |
