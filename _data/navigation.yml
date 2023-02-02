@@ -375,6 +375,9 @@ items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
         
+      - url: /templates/customer-relationship-management/
+        title: Customer Relationship Management
+        
       - url: /templates/datahub/
         title: DataHub
         
@@ -384,6 +387,15 @@ items:
       - url: /templates/google-analytics/
         title: Google Analytics
         
+      - url: /templates/project-management/
+        title: Project Management
+      
+      - url: /templates/repository/
+        title: Repository
+        
+      - url: /templates/surveys/
+        title: Surveys
+              
   - url: /catalog/
     title: Data Catalog
     items:
