@@ -31,9 +31,9 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 
 | Name | Description |
 |---|---|
-| EVENT | data on repository events |
-| ISSUE | data on issues, their repository, user, and priority; other details |
-| ISSUE COMMENT | data on comments of each issue |
+| EVENT | repository events |
+| ISSUE | issues, their repository, user, and priority; other details |
+| ISSUE COMMENT | comments for each issue |
 | ORGANIZATION | list of organizations |
 | ORGANIZATION USER | data on organizations and users combined |
 | PULL REQUEST | list of pull-request commits and information on who created them and when |
