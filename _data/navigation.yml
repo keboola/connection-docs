@@ -380,6 +380,9 @@ items:
       
       - url: /templates/google-analytics/
         title: Google Analytics
+      
+      - url: /templates/project-management/
+        title: Project Management
         
   - url: /catalog/
     title: Data Catalog
