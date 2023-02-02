@@ -380,6 +380,9 @@ items:
         
       - url: /templates/datahub/
         title: DataHub
+      
+      - url: /templates/data-quality/
+        title: Data Quality
         
       - url: /templates/ecommerce/
         title: eCommerce
