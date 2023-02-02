@@ -149,3 +149,16 @@ the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/man
 So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the destination component configuration.
 
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
+
+## Most Common Errors
+Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
+
+### Missing Credentials to Snowflake Database 
+If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
+
+Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database component. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
+
+Then go to the **Jobs** tab and **Run** the flow again.  
+
+{: .image-popup}
+![Job - Snowflake](/templates/ecommerce/snowflake-job.png)
