@@ -105,7 +105,7 @@ After clicking **Next Step**, you will see the template builder. Fill in all nee
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
-authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/templates/marketing-platforms/authorizing-destinations/) below.
+authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/marketing-platforms/#authorizing-data-destinations/) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
