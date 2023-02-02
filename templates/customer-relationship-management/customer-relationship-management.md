@@ -33,7 +33,7 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 |---|---|
 | ACTIVITY | data about activities of employees |
 | COMPANY | list of companies and their websites |
-| CONTACT| list of contacts |
+| CONTACT | list of contacts |
 | EMPLOYEE | list of employees associated with the deal |
 | OPPORTUNITY | data about companies and employees associated with the deal |
 | OPPORTUNITY CONTACT | combined data about opportunities and contacts |
