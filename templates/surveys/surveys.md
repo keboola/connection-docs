@@ -12,11 +12,11 @@ By using our survey template, you will get an overview of all your surveys, ques
 
 **The flow, in a nutshell:**
 
-- First, the survey source component will collect data from your account: lists of forms, questions, and responses, and basic form statistics.
+- First, the Survey source component (extractor) will collect data from your account: lists of forms, questions, and responses, and basic form statistics.
 
-- Then we prepare four tables (surveys, questions, answer options, and responses) that can be used to visualize survey results.
+- We will then prepare four tables (surveys, questions, answer options, and responses) that can be used to visualize survey results.
 
-- The data is then written into a Snowflake database via the Snowflake destination component.
+- The data will be written into a Snowflake database via the Snowflake destination component (writer).
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The survey source component, all data manipulations, and the Snowflake destination component, will be processed.
 
