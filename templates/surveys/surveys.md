@@ -8,6 +8,7 @@ permalink: /templates/surveys/
 
 With this end-to-end flow you can extract your updated data from your project survey tool (Typeform) and bring it into Keboola Connection. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
+
 By using our survey template, you will get an overview of all your surveys, questions and responses.
 
 **The flow, in a nutshell:**
