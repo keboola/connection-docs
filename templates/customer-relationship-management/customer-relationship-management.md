@@ -13,11 +13,11 @@ By using our CRM template, you will get an overview about your customers, activi
 
 **The flow, in a nutshell:**
 
-- First, the CRM source component will collect data from your account (companies, deals, activities, lists, owners, contacts, and pipelines).
+- First, the CRM source component (extractor) will collect data from your account (companies, deals, activities, lists, owners, contacts, and pipelines).
 
 - We then add NULL values if any columns are missing, and create an output CRM data model (a set of output tables).
 
-- The data will be written into a Snowflake database via the Snowflake destination component.
+- The data will be written into a Snowflake database via the Snowflake destination component (writer).
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The CRM source component, all data manipulations, and the Snowflake destination component, will be processed.
 
@@ -99,20 +99,20 @@ To use a selected data source component, you must first authorize the data sourc
 {: .image-popup}
 ![HubSpot Data Source](/templates/customer-relationship-management/hubspot-data-source.png)
 
-TODO Insert the HubSpot Private App Token and then select a period from date you want to extract data.
+Insert the HubSpot Private App Token and then select the period for extracting the data.
 
 ### Salesforce
 
 {: .image-popup}
 ![Salesforce Data Source](/templates/customer-relationship-management/salesforce-data-source.png)
  
-TODO Fill your Salesforce login name, password and security token.
+Fill in your Salesforce login name, password, and security token.
 
 ### Pipedrive
 {: .image-popup}
 ![Pipedrive Data Source](/templates/customer-relationship-management/pipedrive-data-source.png)
 
-TODO Fill your company domain and API token that you can find here: Settings > Personal preferences > API.
+Fill in your company domain and the API token. You can find it in Settings > Personal preferences > API.
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
@@ -135,10 +135,6 @@ Authorize your Google account.
 
 Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
 in your duplicated Google sheet. 
-
-<!-- 
-*Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself, we will do that for you.*
- -->
 
 ### Snowflake Database Provided by Keboola
 
