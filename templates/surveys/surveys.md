@@ -6,7 +6,6 @@ permalink: /templates/surveys/
 * TOC
 {:toc}
 
-
 With this end-to-end flow you can extract your updated data from your project survey tool (Typeform) and bring it into Keboola Connection. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 By using our survey template, you will get an overview of all your surveys, questions and responses.
@@ -72,7 +71,7 @@ After clicking **Next Step**, you will see the template builder. Fill in all nee
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
-authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/project-management/#authorizing-data-destinations/) below.
+authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/surveys/#authorizing-data-destinations/) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
@@ -90,8 +89,8 @@ Click **Run Template** and start building your visualizations a few minutes late
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source.
 
-### Asana
-Insert the Asana API Key. You can generate a personal access token from the Asana developer console.
+### Typeform
+Insert your Typeform API token.
 
 {: .image-popup}
 ![Typeform Data Source](/templates/surveys/typeform-data-source.png)
