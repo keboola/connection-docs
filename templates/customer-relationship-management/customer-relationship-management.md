@@ -7,7 +7,7 @@ permalink: /templates/customer-relationship-management/
 {:toc}
 
 
-With this end-to-end flow you can extract your updated data from your CRM tool (Hubspot, Salesforce, PipeDrive) and bring it into Keboola Connection. 
+With this end-to-end flow you can extract your updated data from your CRM tool (HubSpot, Salesforce, PipeDrive) and bring it into Keboola Connection. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 By using our CRM template, you will get an overview about your customers, activities, and opportunities for potential sales across the pipeline.
 
@@ -31,13 +31,13 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 
 | Name | Description |
 |---|---|
-| ACTIVITY | contains data about activities of employees |
-| COMPANY | contains the list of companies and their websites |
-| CONTACT| contains the list of contacts |
-| EMPLOYEE | contains the list of employees that are associated with a deal |
-| OPPORTUNITY | contains data about companies and employees that are associated with a deal |
-| OPPORTUNITY CONTACT | contains combined data about opportunities and contacts |
-| OPPORTUNITY SNAPSHOT | contains the history of the opportunity table and its changes |
+| ACTIVITY | data about activities of employees |
+| COMPANY | list of companies and their websites |
+| CONTACT| list of contacts |
+| EMPLOYEE | list of employees associated with the deal |
+| OPPORTUNITY | data about companies and employees associated with the deal |
+| OPPORTUNITY CONTACT | combined data about opportunities and contacts |
+| OPPORTUNITY SNAPSHOT | history of the opportunity table and its changes |
 
 ## Data Sources
 These data sources are available in Public Beta:
@@ -65,7 +65,7 @@ First decide which data source and which data destination you want to use. Then 
 This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
-![Add CRM to Snowflake(/templates/customer-relationship-management/add-crm-to-snowflake.png)
+![Add CRM to Snowflake](/templates/customer-relationship-management/add-crm-to-snowflake.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
@@ -96,23 +96,22 @@ Click **Run Template** and start building your visualizations a few minutes late
 To use a selected data source component, you must first authorize the data source.
 
 ### HubSpot
+Insert the HubSpot Private App Token and then select the period for extracting the data.
+
 {: .image-popup}
 ![HubSpot Data Source](/templates/customer-relationship-management/hubspot-data-source.png)
 
-Insert the HubSpot Private App Token and then select the period for extracting the data.
-
 ### Salesforce
+Fill in your Salesforce login name, password, and security token.
 
 {: .image-popup}
 ![Salesforce Data Source](/templates/customer-relationship-management/salesforce-data-source.png)
  
-Fill in your Salesforce login name, password, and security token.
-
 ### Pipedrive
+Fill in your company domain and the API token. You can find it in Settings > Personal preferences > API.
+
 {: .image-popup}
 ![Pipedrive Data Source](/templates/customer-relationship-management/pipedrive-data-source.png)
-
-Fill in your company domain and the API token. You can find it in Settings > Personal preferences > API.
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
