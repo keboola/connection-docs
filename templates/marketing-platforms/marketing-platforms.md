@@ -35,7 +35,7 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 {: .image-popup}
 ![Business Data Model](/templates/marketing-platforms/business-data-model.png)
 
-### Table Description
+## Table Description
 
 | Name | Description |
 |---|---|
