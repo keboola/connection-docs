@@ -6,13 +6,13 @@ permalink: /templates/data-quality/
 * TOC
 {:toc}
 
-This flow brings you a set of Snowflake SQL procedures for data quality testing and monitoring.
+This flow brings you a set of Snowflake SQL procedures for **data quality testing and monitoring**.
 
 **The flow, in a nutshell:**
 
 - First we will create a set of Shared Codes – Snowflake SQL procedures for data quality tests and test result logging.
 
-- A Python transformation will then create dummy datasets.
+- We will then create dummy datasets using a Python transformation.
 
 - Snowflake SQL transformations will use the generated dummy datasets to demonstrate how to use the SQL procedures in your Snowflake SQL transformations.
 
@@ -77,12 +77,12 @@ You will find a new transformation *Data Quality Core - Full Example* which show
 {: .image-popup}
 ![Data Quality Core Full Example](/templates/data-quality/dq-core-full-example.png)
 
-The transformation creates new table in your Storage named DQ_RESULTS_LOG.
+The transformation creates a new table in your Storage named DQ_RESULTS_LOG.
 
 **Important:** Add the DQ_RESULT_LOG table to output mappings of each transformation where you use the Data Quality Core shared code.   
 
 You will also find a transformation named *Data Quality Core - ABORT/FAIL Example* which demonstrates how to use the FAIL level of tests to ABORT a transformation 
-in case such test fails. It also uses the write_always parameter of output mapping in order to write the output even on Transformation error.
+in case such a test fails. It also uses the write_always parameter of output mapping in order to write the output even on Transformation error.
 
 {: .image-popup}
 ![Data Quality Core Full Example](/templates/data-quality/dq-core-abort-example.png)
