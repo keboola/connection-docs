@@ -17,9 +17,9 @@ By using our repository template, you will get an overview of your repositories 
 
 - We will then prepare tables containing organizations and users, and use them to create the output tables.
 
-- The data will be written into a Google BigQuery database via the BigQuery destination component (writer).
+- The data will be written into a Google BigQuery database, Snowflake database or Google sheet via destination component (writer).
 
-- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The GitHub source component, all data manipulations, and the BigQuery destination component, will be processed.
+- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The GitHub source component, all data manipulations, and the data destination component, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
