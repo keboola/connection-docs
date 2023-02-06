@@ -7,7 +7,7 @@ permalink: /templates/customer-relationship-management/
 {:toc}
 
 
-With this end-to-end flow you can extract your updated data from your CRM tool (HubSpot, Salesforce, PipeDrive) and bring it into Keboola Connection. 
+With this end-to-end flow you can extract your updated data from your CRM tool (Salesforce, PipeDrive) and bring it into Keboola Connection. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 By using our CRM template, you will get an overview about your customers, activities, and opportunities for potential sales across the pipeline.
 
@@ -42,7 +42,6 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 ## Data Sources
 These data sources are available in Public Beta:
 
-- [HubSpot](https://www.hubspot.com/)
 - [Pipedrive](https://www.pipedrive.com/)
 - [Salesforce](https://www.salesforce.com/eu/?ir=1)
 
@@ -94,12 +93,6 @@ Click **Run Template** and start building your visualizations a few minutes late
 
 ## Authorizing Data Sources
 To use a selected data source component, you must first authorize the data source.
-
-### HubSpot
-Insert the HubSpot Private App Token and then select the period for extracting the data.
-
-{: .image-popup}
-![HubSpot Data Source](/templates/customer-relationship-management/hubspot-data-source.png)
 
 ### Salesforce
 Fill in your Salesforce login name, password, and security token.
