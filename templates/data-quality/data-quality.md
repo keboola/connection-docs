@@ -23,6 +23,8 @@ The set of procedures includes one that can conditionally [ABORT](https://help.k
 - Finally, data quality tests will produce a result log output table to be used for continuous monitoring of the results.
 
 ## Available tests
+{: .image-popup}
+![Data Quality Shared Codes](/templates/data-quality/shared_code_1.png)
 |ID|DESCRIPTION|
 |:---|---:|
 |TEST_COLUMN_NULL_OR_EMPTY|Tests for presence of Null (or empty string) values in a given column in given table. Fails when there is more than 0 null values.|
