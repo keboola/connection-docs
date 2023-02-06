@@ -97,7 +97,7 @@ Now enter a name for the template instance that you are about to create. This al
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user authorization problems. 
-If you are struggling with this part, go to the section [Authorizing Destinations](/templates/ecommerce/authorizing-destinations/) below.
+If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/ecommerce/#authorizing-data-destinations/) below.
 
 Follow the steps one by one and authorize your data sources. An eCommerce data source is required. In this case, it is Shopify. The marketing data sources are optional. 
 
@@ -205,7 +205,7 @@ To configure this source component, you need to have a working
 
 The current listing limit supported by the Sklik API is 100.
 
-## Authorizing Destinations
+## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
 
 ### BigQuery Database

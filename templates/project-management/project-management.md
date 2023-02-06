@@ -1,50 +1,51 @@
 ---
-title: Google Analytics
-permalink: /templates/google-analytics/
+title: Project Management
+permalink: /templates/project-management/
 ---
 
 * TOC
 {:toc}
 
-Using one of the Google Analytics templates will provide you with insights into site activities: the length of visits, the number of pages seen per visit, the 
-bounce rate, and many other statistics, which you can see in time or by the traffic source. You can also enrich your Google Analytics data with 
-Google Search Console data. This will show you the average rank of your page in time.
 
+With this end-to-end flow you can extract your updated data from your project management tool and bring it into Keboola Connection. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
+By using our project management template, you will get an overview across all projects, their epics, tasks, users, and their actions.
 
 **The flow, in a nutshell:**
 
-- First, the Google Analytics source component (extractor) will collect data from your Google Analytics account, and the Google Search Console source component (if selected) 
-will get your Google Search Console data.
+- First, the Project Management source component (extractor) will collect data from your account about projects and tasks.
 
-- Then we will put your data into the requested shape, and the Snowflake destination component (writer) will load the results into a Snowflake database.
+- We then create the output tables and snapshots.
 
-- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
-The Google Analytics or Google Search Console source components (if selected), all data manipulations, and the Snowflake destination component, will be processed.
+- The data will be written into a selected data destination via one of the following destination components (writers): BigQuery, Snowflake, and Google Sheets.
+
+- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The source component, all data manipulations, and the data destination component, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
-![Business Data Model](/templates/google-analytics/erd-google-analytics.png)
-
+![Business Data Model](/templates/project-management/business-data-model.png)
+ 
 ## Table Description
 
 | Name | Description |
 |---|---|
-| GA AD ANALYTICS | contains data about impressions, clicks, costs, sessions, bounces, and pageviews of each campaign per day |
-| GA DEMOGRAPHIC AUDIENCE | contains a high-level age/gender focused view of traffic (session) data |
-| GA GEO AUDIENCE | contains geographical data that tells you who your visitors coming to website are and where they are coming from |
-| GA PAGE BEHAVIOUR | contains data about visitor behaviour on the pages - pageviews, sessions, entrances, and time spent on a page |
-| GA SITE STATISTICS | contains data about site statistics: sessions, pageviews, and average time data (page load time, download time, redirection time, and server connection time) per day |
-| GA TRAFFIC SOURCE | contains data about traffic sources of each campaign and source per day (sessions, bounces, users, session duration, and pageviews) |
-| GSC RANKING | contains data about average ranking of each page per day |
+| PROJECT | data about each project, its owner and due date |
+| PROJECT SNAPSHOT | history of the project table and its changes |
+| PROJECT USER | tables PROJECT and USER combined |
+| TASK | list of tasks and information such as the date of creation, due date, assignee; each task can be linked to a project |
+| TASK CUSTOM FIELD | custom fields value |
+| TASK EVENT | changes made to tasks |
+| TASK SNAPSHOT | history of the tasks table and its changes |
+| TASK TAG | list of tasks and their tags |
+| TASK USER | tables TASK and USER combined |
+| USER | list of users |
 
 ## Data Sources
 These data sources are available in Public Beta:
 
-- [Google Analytics](https://analytics.google.com/analytics/web/)
-- [Google Search Console](https://search.google.com/search-console/about)
+- [Asana](https://asana.com/)
 
 ## Data Destinations
 These data destinations are available in Public Beta:
@@ -57,33 +58,32 @@ These data destinations are available in Public Beta:
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
-First decide which data source and which data destination you want to use. Then select the corresponding template 
-from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
-![Add New Template](/templates/google-analytics/add-new-template.png)
+![Add New Template](/templates/project-management/add-new-template.png)
 
 This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
-![Add Google Analytics to Snowflake](/templates/google-analytics/add-google-analytics-to-snowflake.png)
+![Add PM to Snowflake](/templates/project-management/add-pm-to-snowflake.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
 
 {: .image-popup}
-![Google Analytics to Snowflake - Template Name](/templates/google-analytics/google-analytics-to-snowflake-name.png)
+![PM to Snowflake - Template Name](/templates/project-management/pm-to-snowflake-name.png)
 
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
-authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/google-analytics/#authorizing-data-destinations/) below.
+authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/project-management/#authorizing-data-destinations/) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
 {: .image-popup}
-![Google Analytics to Snowflake](/templates/google-analytics/google-analytics-to-snowflake-steps.png)
+![PM to Snowflake](/templates/project-management/pm-to-snowflake-steps.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
@@ -91,27 +91,16 @@ when it is done, you will see the newly created flow.
 Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Flows](/templates/google-analytics/google-analytics-to-snowflake-flow.png)
+![PM to Google Sheets - Flows](/templates/project-management/pm-to-snowflake-flow.png)
 
 ## Authorizing Data Sources
+To use a selected data source component, you must first authorize the data source.
 
-To use a selected data source component, you must first authorize the data source. 
-In addition to Google Analytics, you can also add data from the Google Search Console. 
-
-### Google Analytics
-
-{: .image-popup}
-![Google Analytics Data Source](/templates/google-analytics/google-analytics-data-source.png)
-
-Authorize your Google account and select the period for extracting the data. The list of Google Analytics Profiles will automatically appear after the authorization.
-
-### Google Search Console
-Using this data source is optional.
+### Asana
+Insert the Asana API Key. You can generate a personal access token from the Asana developer console.
 
 {: .image-popup}
-![Google  Data Search Console Data Source](/templates/google-analytics/google-search-console-data-source.png)
-
-Authorize your Google Account and then fill in your domain.
+![Asana Data Source](/templates/project-management/asana-data-source.png)
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
@@ -134,10 +123,6 @@ Authorize your Google account.
 
 Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
 in your duplicated Google sheet. 
-
-<!-- 
-*Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself, we will do that for you.*
- -->
 
 ### Snowflake Database Provided by Keboola
 
@@ -175,10 +160,12 @@ More info [here](https://help.keboola.com/components/writers/database/snowflake/
 ## Most Common Errors
 Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
 
-Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database component.
-Now follow the **Snowflake Database provided by Keboola** on the page **Authorizations/destinations**. 
+### Missing Credentials to Snowflake Database 
+If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
 
-Then go to the **Flows** tab and **Run** the flow again.  
+Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database component. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
+
+Then go to the **Jobs** tab and **Run** the flow again.  
 
 {: .image-popup}
-![Job - Snowflake](/templates/marketing-platforms/snowflake-job.png)
+![Job - Snowflake](/templates/ecommerce/snowflake-job.png)
