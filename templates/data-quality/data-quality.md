@@ -6,7 +6,7 @@ permalink: /templates/data-quality/
 * TOC
 {:toc}
 
-This flow brings you a set of Snowflake SQL procedures for **data quality testing and monitoring**.
+This data flow template brings you a set of Snowflake SQL procedures for **data quality testing and monitoring**.
 
 **The flow, in a nutshell:**
 
