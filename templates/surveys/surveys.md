@@ -17,9 +17,9 @@ By using our survey template, you will get an overview of all your surveys, ques
 
 - We will then prepare four tables (surveys, questions, answer options, and responses) that can be used to visualize survey results.
 
-- The data will be written into a Snowflake database via the Snowflake destination component (writer).
+- The data will be written into a Snowflake database, Big Query database or google sheet via destination component (writer).
 
-- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The survey source component, all data manipulations, and the Snowflake destination component, will be processed.
+- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The survey source component, all data manipulations, and the destination component of your choice, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
