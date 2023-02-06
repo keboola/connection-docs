@@ -70,9 +70,9 @@ Click **Run Template**.
 ![Data Quality to Google Sheets - Flows](/templates/data-quality/dq-to-snowflake-flow.png)
 
 ## Navigate to Transformations
-You will find the newly added shared codes under the **Shared Codes** tab. The key shared code is the *Data Quality Core*.
+Go to the tab **Transformations**. You will find the newly added shared codes under the **Shared Codes** tab. The key shared code is the *Data Quality Core*.
 
-You will find a new transformation *Data Quality Core - Full Example* which shows how the Shared Codes can be used. 
+You will also find a new transformation *Data Quality Core - Full Example*, which shows how the Shared Codes can be used. 
 
 {: .image-popup}
 ![Data Quality Core Full Example](/templates/data-quality/dq-core-full-example.png)
@@ -81,8 +81,8 @@ The transformation creates a new table in your Storage named DQ_RESULTS_LOG.
 
 **Important:** Add the DQ_RESULT_LOG table to output mappings of each transformation where you use the Data Quality Core shared code.   
 
-You will also find a transformation named *Data Quality Core - ABORT/FAIL Example* which demonstrates how to use the FAIL level of tests to ABORT a transformation 
-in case such a test fails. It also uses the write_always parameter of output mapping in order to write the output even on Transformation error.
+You will also find a transformation named *Data Quality Core - ABORT/FAIL Example*, which demonstrates how to use the FAIL level of tests to ABORT a transformation 
+in case such a test fails. It also uses the write_always parameter of output mapping in order to write the output even on transformation error.
 
 {: .image-popup}
 ![Data Quality Core Full Example](/templates/data-quality/dq-core-abort-example.png)
