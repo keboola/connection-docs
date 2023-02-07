@@ -34,9 +34,6 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `52.7.83.136`
 - `52.20.72.254`
 
-Following IP addresses are still owned by Keboola but not used by Keboola Connection anymore. You can safely remove them from your firewalls:
-- `3.222.3.15`
-- `34.206.78.206`
 
 ## connection.eu-central-1.keboola.com
 For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`), 
@@ -51,9 +48,6 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `3.66.248.180`
 - `3.64.150.30`
 
-Following IP addresses are still owned by Keboola but not used by Keboola Connection anymore. You can safely remove them from your firewalls:
-- `35.157.62.225`
-- `3.71.156.204`
 
 ## connection.north-europe.azure.keboola.com
 For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
