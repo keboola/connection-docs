@@ -81,7 +81,7 @@ The JSON file contains an array of ranges (attribute `prefixes`), each of which 
  - `ipPrefix` — subnet mask (CIDR)
  - `vendor` — cloud service provider
  - `region` — cloud service region
- - `service` — Keboola application service (`syrup` for Keboola Connection components)
+ - `service` — Keboola application service (`queue` for Keboola Connection components, `syrup` for Keboola Connection components using legacy Queue V1)
 
 ### Sample JSON
 
@@ -94,13 +94,13 @@ The JSON file contains an array of ranges (attribute `prefixes`), each of which 
             "ipPrefix": "34.224.0.188/32",
             "vendor": "aws",
             "region": "us-east-1",
-            "service": "syrup"
+            "service": "queue"
         },
         {
             "ipPrefix": "34.200.169.177/32",
             "vendor": "aws",
             "region": "us-east-1",
-            "service": "syrup"
+            "service": "queue"
         },
         ...
     ]
