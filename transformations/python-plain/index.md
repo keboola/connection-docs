@@ -51,7 +51,7 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 ### Packages
 You can list extra packages in the UI. These packages are installed using [pip](https://pypi.org/project/pip/).
 Generally, any package available on [PyPI](https://pypi.org/) can be installed. However, some packages have external dependencies, 
-which might not be available. Feel free to [contact us]/management/support/) if you run into problems. When the 
+which might not be available. Feel free to [contact us](/management/support/) if you run into problems. When the 
 package is installed, you still need to `import` from it.
 
 {: .image-popup}
@@ -68,7 +68,7 @@ subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-
 {% endhighlight %}
 
 Some packages are already installed in the environment
-(see [their full list](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L33)), 
+(see [their full list](https://github.com/keboola/docker-custom-python/blob/master/python-3.10/Dockerfile#L47)), 
 and they do not need to be listed in the transformation.
 
 ### CSV Format
