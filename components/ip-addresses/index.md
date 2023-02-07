@@ -21,7 +21,7 @@ Below are listed the available [Keboola Connection Stack endpoints](https://deve
 
 ## connection.keboola.com
 For projects in the default AWS US [region](/overview/#regions) (AWS region `us-east-1`), 
-the following IP addresses are currently for all new projects used:
+the following IP addresses are currently used for all new projects:
 
 {% comment %}
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
@@ -40,8 +40,8 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.eu-central-1.keboola.com
-For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`), 
-the following IP addresses are currently used:
+For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`),
+the following IP addresses are currently used for all new projects:
 
 {% comment %}
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
