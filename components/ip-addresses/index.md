@@ -27,12 +27,12 @@ the following IP addresses are currently for all new projects used:
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
 
-- `149.72.196.5`
+- `149.72.196.5` - Used only for email delivery.
 - `52.7.83.136`
 - `52.20.72.254`
 
 For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
-- `149.72.196.5`
+- `149.72.196.5` - Used only for email delivery.
 - `34.224.0.188`
 - `34.200.169.177`
 - `52.206.109.126`
@@ -46,12 +46,12 @@ the following IP addresses are currently used:
 {% comment %}
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
-- `149.72.196.5`
+- `149.72.196.5` - Used only for email delivery.
 - `3.66.248.180`
 - `3.64.150.30`
 
 For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
-- `149.72.196.5`
+- `149.72.196.5` - Used only for email delivery.
 - `35.157.170.229`
 - `35.157.93.175`
 
@@ -63,6 +63,7 @@ the following IP addresses are currently used:
 {% comment %}
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
+- `149.72.196.5` - Used only for email delivery.
 - `40.127.144.42`
 - `20.82.252.94`
 - `20.82.252.129`
