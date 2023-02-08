@@ -27,16 +27,16 @@ the following IP addresses are currently used for all new projects:
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
 
-- `149.72.196.5` - Used only for email delivery.
 - `52.7.83.136`
 - `52.20.72.254`
+- `149.72.196.5` - Used only for email delivery.
 
 For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
-- `149.72.196.5` - Used only for email delivery.
 - `34.224.0.188`
 - `34.200.169.177`
 - `52.206.109.126`
 - `34.203.87.137`
+- `149.72.196.5` - Used only for email delivery.
 
 
 ## connection.eu-central-1.keboola.com
@@ -46,14 +46,14 @@ the following IP addresses are currently used for all new projects:
 {% comment %}
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
-- `149.72.196.5` - Used only for email delivery.
 - `3.66.248.180`
 - `3.64.150.30`
+- `149.72.196.5` - Used only for email delivery.
 
 For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
-- `149.72.196.5` - Used only for email delivery.
 - `35.157.170.229`
 - `35.157.93.175`
+- `149.72.196.5` - Used only for email delivery.
 
 
 ## connection.north-europe.azure.keboola.com
@@ -63,11 +63,11 @@ the following IP addresses are currently used:
 {% comment %}
 ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
 {% endcomment %}
-- `149.72.196.5` - Used only for email delivery.
 - `40.127.144.42`
 - `20.82.252.94`
 - `20.82.252.129`
 - `20.82.252.124`
+- `149.72.196.5` - Used only for email delivery.
 
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
@@ -81,7 +81,10 @@ The JSON file contains an array of ranges (attribute `prefixes`), each of which 
  - `ipPrefix` — subnet mask (CIDR)
  - `vendor` — cloud service provider
  - `region` — cloud service region
- - `service` — Keboola application service (`queue` for Keboola Connection components, `syrup` for Keboola Connection components using legacy Queue V1)
+ - `service` — Keboola application service
+   - `queue` - for Keboola Connection components
+   - `syrup` - for Keboola Connection components using legacy Queue V1
+   - `email-delivery` - for outbound emails
 
 ### Sample JSON
 
