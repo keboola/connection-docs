@@ -29,6 +29,14 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 
 - `52.7.83.136`
 - `52.20.72.254`
+- `3.213.250.110`
+- `107.22.113.103`
+- `54.144.9.113`
+- `54.204.61.145`
+- `34.239.7.70`
+- `3.217.232.144`
+- `3.222.3.15`
+- `34.206.78.206`
 - `149.72.196.5` - Used only for email delivery.
 
 For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
@@ -48,6 +56,14 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 {% endcomment %}
 - `3.66.248.180`
 - `3.64.150.30`
+- `3.74.28.187`
+- `18.158.155.128`
+- `35.157.208.189`
+- `3.72.243.47`
+- `18.193.225.37`
+- `3.127.158.56`
+- `35.157.62.225`
+- `3.71.156.204`
 - `149.72.196.5` - Used only for email delivery.
 
 For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
