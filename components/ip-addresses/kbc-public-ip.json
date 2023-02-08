@@ -1,6 +1,6 @@
 {
-    "syncToken": "1496657321",
-    "createDate": "2018-09-14-10-08-39",
+    "syncToken": "1675843081",
+    "createDate": "2023-02-08",
     "prefixes": [
         {
             "ipPrefix": "34.224.0.188/32",
@@ -22,9 +22,9 @@
         },
         {
             "ipPrefix": "149.72.196.5/32",
-            "vendor": "sendgrid",
+            "vendor": "aws",
             "region": "us-east-1",
-            "service": "syrup"
+            "service": "email-delivery"
         },
         {
             "ipPrefix": "34.203.87.137/32",
@@ -40,6 +40,54 @@
         },
         {
             "ipPrefix": "52.20.72.254/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "3.213.250.110/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "107.22.113.103/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "54.144.9.113/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "54.204.61.145/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.239.7.70/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "3.217.232.144/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "3.222.3.15/32",
+            "vendor": "aws",
+            "region": "us-east-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.206.78.206/32",
             "vendor": "aws",
             "region": "us-east-1",
             "service": "queue"
@@ -69,39 +117,63 @@
             "service": "queue"
         },
         {
-            "ipPrefix": "149.72.196.5/32",
-            "vendor": "sendgrid",
+            "ipPrefix": "3.74.28.187/32",
+            "vendor": "aws",
             "region": "eu-central-1",
-            "service": "syrup"
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "18.158.155.128/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.157.208.189/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "3.72.243.47/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "18.193.225.37/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "3.127.158.56/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.157.62.225/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "3.71.156.204/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "149.72.196.5/32",
+            "vendor": "aws",
+            "region": "eu-central-1",
+            "service": "email-delivery"
         },
         {
             "ipPrefix": "40.127.144.42/32",
             "vendor": "azure",
             "region": "north-europe",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "20.82.252.94/32",
-            "vendor": "azure",
-            "region": "north-europe",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "20.82.252.129/32",
-            "vendor": "azure",
-            "region": "north-europe",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "20.82.252.124/32",
-            "vendor": "azure",
-            "region": "north-europe",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "40.127.144.42/32",
-            "vendor": "azure",
-            "region": "north-europe",
             "service": "queue"
         },
         {
@@ -121,6 +193,12 @@
             "vendor": "azure",
             "region": "north-europe",
             "service": "queue"
+        },
+        {
+            "ipPrefix": "149.72.196.5/32",
+            "vendor": "azure",
+            "region": "north-europe",
+            "service": "email-delivery"
         }
     ]
 }
