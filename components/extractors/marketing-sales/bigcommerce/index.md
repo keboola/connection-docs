@@ -28,6 +28,8 @@ Here you must provide you **API Path** and **Access Token**.
 {: .image-popup}
 ![API Path and Access Token entry](/components/extractors/marketing-sales/bigcommerce/global_config.png)
 
+Validate the connection using the `TEST CONNECTION` button.
+
 Don't forget to **Save**.
 
 ### Configuration rows
@@ -43,8 +45,8 @@ First you must select one of the **Endpoints** to select the data you wish to do
 - `Products` to download [data about products](https://developer.bigcommerce.com/api-reference/4101d472a814d-get-all-products#response-body) (in your entire catalogue).
 
 If you are extracting *time bound* data (i.e. anything **except** `Brands`), you must specify the **Sync Options** as well:
-- **Date From** - Date from which data is downloaded (i.e. only data last modified after this are downloaded). Either date in `YYYY-MM-DD` format or dateparser string i.e. `5 days ago`, `1 month ago`, `yesterday`, etc. You can also set this as `last run`, which will fetch data from the last run of the component; if no previous successful run exists, all data up to specified **Date To** will be downloaded.
-- **Date To** - Date to which data is downloaded (i.e. only data last modified before this are downloaded). Either date in `YYYY-MM-DD` format or dateparser string i.e. `5 days ago`, `1 week ago`, `today`, etc.
+- **Date From** - Date from which data is downloaded (i.e. only data last modified after this are downloaded). Either date in `YYYY-MM-DD` format or a string i.e. `5 days ago`, `1 month ago`, `yesterday`, etc. You can also set this as `last run`, which will fetch data from the last run of the component; if no previous successful run exists, all data up to specified **Date To** will be downloaded.
+- **Date To** - Date to which data is downloaded (i.e. only data last modified before this are downloaded). Either date in `YYYY-MM-DD` format or a string i.e. `5 days ago`, `1 week ago`, `today`, etc.
 
 Finally, in the **Destination** part of the row configuration, you must choose the **Load Type**, i. e. whether you want to use [incremental loading](/storage/tables/#incremental-loading) (by selecting `Incremental Load`) or full loading (by selecting `Full Load`).
 
