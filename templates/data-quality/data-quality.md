@@ -64,19 +64,19 @@ These are the available tests:
 
 | Column Name | Description | Sample Value | 
 |---|---|---|
-| ID | Unique identifier of performed test | 1d8fb4e8c486829db3387e429e0cb8a0 |
-| EXECUTION_TIME | Timestamp of executed test | Mon, 23 Jan 2023 13:58:34 +0100 |
+| ID | Unique identifier of a performed test | 1d8fb4e8c486829db3387e429e0cb8a0 |
+| EXECUTION_TIME | Timestamp of an executed test | Mon, 23 Jan 2023 13:58:34 +0100 |
 | COMPONENT_ID | Component identifier | keboola.snowflake-transformation |
-| CONFIGURATION_ID | Unique identifier of component configuration | 943845068 |
+| CONFIGURATION_ID | Unique identifier of a component configuration | 943845068 |
 | RUN_ID | Run ID (from job log) | 943845595 |
 | JOB_URL | Job URL | https://connection.keboola.com/admin/projects/9389/queue/943845595 |
-| TEST_ID | Identifier of test | TEST_COLUMN_FOREIGN_REF |
-| TEST_QUERY | Particular test query showing which attributes were used for test | TEST_COLUMN_FOREIGN_REF('orders', 'customers', 'order_id', 'pk');.... |
-| TEST_NAME | Name of test | TEST_COLUMN_FOREIGN_REF |
-| TEST_RESULT_VALUE | Result value - present if test fails. Shows what values offended test. | [{"OCCURENCES":0,"OFFENDER":"61"} |
+| TEST_ID | Identifier of a test | TEST_COLUMN_FOREIGN_REF |
+| TEST_QUERY | Particular test query showing which attributes were used for a test | TEST_COLUMN_FOREIGN_REF('orders', 'customers', 'order_id', 'pk');.... |
+| TEST_NAME | Name of a test | TEST_COLUMN_FOREIGN_REF |
+| TEST_RESULT_VALUE | Result value - present if a test fails. Shows what values caused the test to fail. | [{"OCCURENCES":0,"OFFENDER":"61"} |
 | TEST_PARAMETERS | Detail of TEST_QUERY parameters | {"TABLE_NAME_MAIN" :"orders", "COLUMN_NAME": "order_id", "TABLE_NAME_REF": "customers", "COLUMN_NAME_REF": "pk"} |
-| TEST_RESULT | Result of test (success/error) |  error |
-| TEST_LEVEL | Level of test (WARNING/FAIL). Fail test level should be used for aborting transformation/flow right after such error fails. | WARNING |
+| TEST_RESULT | Result of a test (success/error) |  error |
+| TEST_LEVEL | Level of a test (WARNING/FAIL). Fail test level should be used for aborting a transformation/flow right after such error fails. | WARNING |
 
 ## How to Use Template
 The process is simple. You don't need to configure anything. Just add the template to your project and then run it. Shared codes will be added to your project, and all steps of the flow will be executed in order to generate a sample SQL transformation, using the data tests and generating the result log table. 
