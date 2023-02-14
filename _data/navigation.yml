@@ -378,8 +378,14 @@ items:
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
         
+      - url: /templates/customer-relationship-management/
+        title: Customer Relationship Management
+        
       - url: /templates/datahub/
         title: DataHub
+      
+      - url: /templates/data-quality/
+        title: Data Quality
         
       - url: /templates/ecommerce/
         title: eCommerce
@@ -390,6 +396,15 @@ items:
       - url: /templates/project-management/
         title: Project Management
         
+      - url: /templates/project-management/
+        title: Project Management
+      
+      - url: /templates/repository/
+        title: Repository
+        
+      - url: /templates/surveys/
+        title: Surveys
+              
   - url: /catalog/
     title: Data Catalog
     items:
