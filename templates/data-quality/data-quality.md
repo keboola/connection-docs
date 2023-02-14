@@ -39,7 +39,7 @@ These are the available tests:
 | TEST_TIME_SERIES_COMPLETE_RANGE | Tests whether there are more than X records in a table for each datepart (day, hour, …) in time series defined by date column in a  provided range. Fails when there are dates with fewer records than expected. |
 | TEST_COLUMN_FOREIGN_REF | Tests whether each record’s reference key in a table matched a reference record in a given reference table. Fails when there are more than 0 records with no match. |
 | TEST_SUM_IN_GROUPS_EQUAL | Tests whether the sum of values in a given column in a group (optional) in a table is the same in two tables (groups in both tables can differ). Fails when the sum differs by more than 0. |
-| TEST_ANOMALY_NUMERIC | Tests anomalies in numeric columns based on a formula (mean() - value) > 2.5 * std())| |In words - if a value in a column differs from the “average” value by more than a standard deviation, it’s an anomaly. |
+| TEST_ANOMALY_NUMERIC | Tests anomalies in numeric columns based on a formula (mean() - value) > 2.5 * std()). In words - if a value in a column differs from the “average” value by more than a standard deviation, it’s an anomaly. |
 | TEST_COLUMN_DATA_TYPE | Tests whether a data type of a given column in a given table is of an expected data type |
 | TEST_COLUMN_VALUE_DATA_TYPE | Tests whether values in a given column in a given table are of an expected data type. Returns values that don’t match an expected data type. Useful for tables without defined data types. |
 | TEST_VALUE_CONTAIN | Tests whether a value in a given column in a given table contains a given string. Fails when a value doesn’t contain a given string. |
