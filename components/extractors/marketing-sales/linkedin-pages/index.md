@@ -16,7 +16,7 @@ This extractor downloads data from the [LinkedIn Pages API](https://learn.micros
 ### Global Configuration
 To configure this extractor, you need to authenticate with a **LinkedIn Profile** using OAuth. More info on this topic can be found in [LinkedIn API Documentation](https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access).
 
- - **Organization IDs (organizations)** - [OPT] Comma separated list of organization IDs you wish to fetch data from, e.g., 123, 234. If left empty, data from all organizations will be fetched.
+ - **Organization IDs (organizations)** - [OPT] Comma-separated list of organization IDs you wish to fetch data from, e.g., 123, 234. If left empty, data from all organizations will be fetched.
 
 ### Row Configuration
  - **Endpoints** (endpoints) - [REQ] Select the data you wish to download. Lifetime statistics provide current totals. Time-bound statistics retrieve data about the specified time range with daily granularity. This must be one of these:
