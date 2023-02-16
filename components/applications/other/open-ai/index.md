@@ -11,7 +11,7 @@ This OpenAI app enables you to query [OpenAI Text Completion service](https://pl
 ## Create New Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **OpenAI** application.
 - Get your API key from [OpenAI platform settings](https://platform.openai.com/account/api-keys), then fill in your API Key in the API key field in the Extracor Configuration field.
-- Click **ADD ROW** button and select a name for the row configuration. This name server for identification purposes only.
+- Click **ADD ROW** button and select a name for the row configuration. This name serves for identification purposes only.
 
 {: .image-popup}
 ![OpenAI Extractor Configuration - 1](/components/applications/other/open-ai/1.png)
