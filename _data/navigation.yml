@@ -157,10 +157,7 @@ items:
                 title: Microsoft Advertising (Bing Ads)
                 items:
                   - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
-                    title: Columns and primary key of report configuration presets
-
-                  - url: /components/extractors/marketing-sales/bing-ads/reports-available-columns/
-                    title: Possible columns for each report type
+                    title: Columns and primary keys of report presets
 
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
