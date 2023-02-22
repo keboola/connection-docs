@@ -16,9 +16,9 @@ You need a V2/V3 API access token with read-only OAuth scope and know your API p
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **BigCommerce** extractor.
 
-### General Configuration
+### Global Configuration
 
-First open the general configuration:
+First open the global configuration:
 
 {: .image-popup}
 ![Global Configuration opening](/components/extractors/marketing-sales/bigcommerce/global_config_collapsed.png)
