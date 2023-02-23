@@ -12,8 +12,8 @@ faster to do in [SQL Transformations](/transformations/#backends).
 
 ## Environment
 The Python script is running in an isolated [environment](https://developers.keboola.com/extend/#component).
-The current Python version is **3.8.5**. The Python version is updated regularly, few weeks after the official release.
-The update is always announced on the [status page](https://status.keboola.com/).
+The Python version is updated regularly, few weeks after the official release. The update is always announced on the
+[status page](https://status.keboola.com/).
 
 ### Memory and Processing Constraints
 A Python transformation has a limit of 8GB of allocated memory and the maximum running time is 6 hours.
