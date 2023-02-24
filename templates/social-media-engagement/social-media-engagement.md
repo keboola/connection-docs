@@ -126,20 +126,20 @@ To use a selected data source component, you must first authorize the data sourc
 
 ### Facebook Pages
 For the Facebook Page component, log in with Facebook and choose the page from which you want to get data. You can set the period 
-from which you want to obtain datathe, or keep the default 30 days. Continue by saving the configuration.
+from which you want to obtain data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
 ![Facebook Pages Data Source](/templates/social-media-engagement/facebook-pages-data-source.png)
 
 ### Instagram Page
 To access the data from Instagram, you must have an Instagram Business Account connected to the Facebook page used for authorization. 
-You can set the period from which you want to obtain data, or keep the default 30 days. Continue by saving the configuration.
+You can set the period for which you want to obtain data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
 ![Instagram Page Data Source](/templates/social-media-engagement/instagram-pages-data-source.png)
 
 ### LinkedIn Page
-For LinkedIn Page source component, just authorize access with your account and select the page from which you would like to obtain data. 
+For the LinkedIn Page source component, authorize access with your account and select the page from which you would like to extract data. 
 You can set the period from which you want to extract data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
@@ -152,7 +152,7 @@ To access your data from Twitter, authorize the account and fill in the user nam
 ![Twitter Page Data Source](/templates/social-media-engagement/twitter-page-data-source.png)
 
 ### YouTube Channel
-To access data from your YouTube Channel, authorize it via Open Authentication and save the configuration.
+To access data from your YouTube Channel, authorize access via Open Authentication and save the configuration.
 
 {: .image-popup}
 ![YouTube Channel Data Source](/templates/social-media-engagement/youtube-channel-data-source.png)
