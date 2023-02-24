@@ -24,28 +24,26 @@ containing daily metrics for each social media platform and the second is posts_
 - Finally, the combined data will be exported to the destination tables.
 
 ## Output Tables
+You will obtain the following two tables:
 
 {: .image-popup}
 ![Output Tables](/templates/social-media-engagement/output-table-1.png)
 
-**Output table: pages_engagement**
-
-Table containing daily overall engagement metrics for whole page from selected social media. Primary keys are date and social network.
+### Output Table: pages_engagement
+This table contains daily overall engagement metrics for the whole page from selected social media. The primary keys are: date and social network.
 
 | metric | Facebook | Instagram | LinkedIn | Twitter | YouTube |  
-|---|---|---|---|---|---|
+|:---|:---:|:---:|:---:|:---:|:---:|
 | page_followers | ✅ | ✅ | ✅ | ✅ | :x: |
 | page_posts_impressions | ✅ | ✅ | ✅ | :x: | :x: |
 | page_views_total | ✅ | ✅ | ✅ | :x: | :x: |
 
-
-**Output table: posts_engagement**
-
-Table containing engagement data for all posts from selected social media. 
-Primary key is a uid composed from date, source social media and id of post withing the social media.
+### Output Table: posts_engagement
+This table contains engagement data for all posts from selected social media. 
+The primary key is a UID composed of a date, source social media and the ID of a post within the social media platform.
 
 | metric | Facebook | Instagram | LinkedIn | Twitter | YouTube |  
-| --- | --- | --- | --- | --- | --- |
+|:---|:---:|:---:|:---:|:---:|:---:|
 | likes | ✅ | ✅ | ✅ | ✅ | ✅ |
 | comments | :x: | ✅ | :x: | :x: | ✅ |
 | shares | ✅ | :x: | :x: | ✅ | :x: |
@@ -119,37 +117,37 @@ Click **Run Template** and start building your visualizations a few minutes late
 ![Social Media Engagement - Flows](/templates/social-media-engagement/socmed-eng-flow.png)
 
 ## Authorizing Data Sources
-
 To use a selected data source component, you must first authorize the data source. 
 
 ### Facebook Pages
 For the Facebook Page component, log in with Facebook and choose the page from which you want to get data. You can set the period 
-from which you want to get data or keep the default 30 days. Continue by saving the configuration.
+from which you want to obtain datathe, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
 ![Facebook Pages Data Source](/templates/social-media-engagement/facebook-pages-data-source.png)
 
 ### Instagram Page
-To access the data from Instagram, you need to have Instagram Business Account connected to the Facebook page used for authorization. 
-You can set the period from which you want to get data or keep the default 30 days. Continue by saving the configuration.
+To access the data from Instagram, you must have an Instagram Business Account connected to the Facebook page used for authorization. 
+You can set the period from which you want to obtain data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
 ![Instagram Page Data Source](/templates/social-media-engagement/instagram-pages-data-source.png)
 
 ### LinkedIn Page
-For LinkedIn Page component just authorize access with your account and select the page from which you would like to obtain data. You can set the period from which you want to get data, or keep the default 30 days. Continue by saving configuration.
+For LinkedIn Page source component, just authorize access with your account and select the page from which you would like to obtain data. 
+You can set the period from which you want to extract data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
 ![LinkedIn Pages Data Source](/templates/social-media-engagement/linkedin-pages-data-source.png)
 
 ### Twitter Page
-To access data from Twitter authorize the account and fill the user name.
+To access your data from Twitter, authorize the account and fill in the user name.
 
 {: .image-popup}
 ![Twitter Page Data Source](/templates/social-media-engagement/twitter-page-data-source.png)
 
 ### YouTube Channel
-To access data from YouTube Channel, just authorize by Open Authentication and save the configuration.
+To access data from your YouTube Channel, authorize it via Open Authentication and save the configuration.
 
 {: .image-popup}
 ![YouTube Channel Data Source](/templates/social-media-engagement/youtube-channel-data-source.png)
