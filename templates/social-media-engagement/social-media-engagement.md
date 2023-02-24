@@ -26,10 +26,7 @@ containing daily metrics for each social media platform and the second is posts_
 ## Output Tables
 
 {: .image-popup}
-![Output Table 1](/templates/social-media-engagement/output-table-1.png)
-
-{: .image-popup}
-![Output Table 2](/templates/social-media-engagement/output-table-2.png)
+![Output Tables](/templates/social-media-engagement/output-table-1.png)
 
 **Output table: pages_engagement**
 
@@ -124,7 +121,6 @@ Click **Run Template** and start building your visualizations a few minutes late
 ## Authorizing Data Sources
 
 To use a selected data source component, you must first authorize the data source. 
-You need to use at least one of the following marketing data sources. In addition, Google Analytics can be used to enrich the data.
 
 ### Facebook Pages
 For the Facebook Page component, log in with Facebook and choose the page from which you want to get data. You can set the period 
