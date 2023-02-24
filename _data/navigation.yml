@@ -401,6 +401,9 @@ items:
             
       - url: /templates/repository/
         title: Repository
+            
+      - url: /templates/social-media-engagement/
+        title: Social Media Engagement
         
       - url: /templates/surveys/
         title: Surveys
