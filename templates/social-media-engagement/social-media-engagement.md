@@ -105,6 +105,11 @@ and still keep everything organized.
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
+**Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user authorization problems. 
+If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/social-media-engagement/#authorizing-data-destinations) below.
+
+Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
+
 {: .image-popup}
 ![Social Media Engagement - Steps](/templates/social-media-engagement/socmed-eng-steps.png)
 
@@ -117,7 +122,7 @@ Click **Run Template** and start building your visualizations a few minutes late
 ![Social Media Engagement - Flows](/templates/social-media-engagement/socmed-eng-flow.png)
 
 ## Authorizing Data Sources
-To use a selected data source component, you must first authorize the data source. 
+To use a selected data source component, you must first authorize the data source. You need to use at least one of the following socia-media-engagement data sources.
 
 ### Facebook Pages
 For the Facebook Page component, log in with Facebook and choose the page from which you want to get data. You can set the period 
