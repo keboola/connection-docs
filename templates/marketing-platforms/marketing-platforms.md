@@ -17,7 +17,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 {: .image-popup}
 ![Flow](/templates/marketing-platforms/adplatforms-flow.png)
 
-- First, you will select one or multiple data source components (extractors) that will provide all your available data about your campaigns.
+- First, you will select one or multiple data sources (extractors) that will provide all your available data about your campaigns.
  
 - To enrich the marketing model with keywords, ad groups, and marketing transactions, you can also bring in your Google Analytics data (data about basic sessions and transactions).
  
@@ -27,7 +27,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
  
 - The data will be written into a selected destination, for example, your Google Sheets account via the Google Sheets destination component (writer).
 
-- Finally, you will return the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected source components, all data manipulations, and the Google Sheets destination component, will be processed.
+- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected source components, all data manipulations, and the Google Sheets destination component, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
