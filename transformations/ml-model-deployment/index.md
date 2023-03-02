@@ -53,9 +53,9 @@ to fit an [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn
 regression model using [scikit-learn](https://sklearn.org/). At the end of the sample code, 
 the model is registered to the MLflow server.
 
-Please note that due to the Beta status of the feature, we currently only support MLflow version 1.24. We have recently
+Please note that due to the beta status of the feature, we are currently supporting only MLflow version 1.24. We have recently
 encountered some incompatibilities with newer libraries. To ensure full compatibility, use `mlflow==1.24` and
-`numpy==1.23.4` to train models.
+`numpy==1.23.4` when training models.
 
 {% highlight python %}
 # The data set used in this example is from http://archive.ics.uci.edu/ml/datasets/Wine+Quality
