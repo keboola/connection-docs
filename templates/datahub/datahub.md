@@ -31,6 +31,7 @@ In order to get started, you must have a working (and secure!) instance of DataH
 For now, in order to generate the API token, you must make a graphQL call. This can be done by navigating to the dropdown menu in the upper righthand corner of DataHub. From there, open up GraphiQL and execute this mutation: 
 
 ```
+{% raw %}
 mutation {
   createAccessToken(input: {type: PERSONAL, 
                             actorUrn: "urn:li:corpuser:{{YOUR USERNAME}}}", 
@@ -45,6 +46,7 @@ mutation {
     }
   }
 }
+{% endraw %}
 ```
 Make sure that you replace the username and duration above. Copy the token that is returned and store it securely until later, when it will be entered into Keboola. 
 
