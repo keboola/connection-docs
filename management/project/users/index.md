@@ -48,7 +48,8 @@ There are four user roles available:
     - manage users, and
     - manage [API tokens](/management/project/tokens/).
 
-    _Note: The ReadOnly role is currently only available in the [Azure stack](https://help.keboola.com/overview/#stacks).
+    _Note: The ReadOnly role is currently available on all stacks for projects with feature `queuev2`_
+
 
 
 ## Inviting User
