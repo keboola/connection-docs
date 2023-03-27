@@ -420,9 +420,6 @@ items:
   - url: /storage/
     title: Storage
     items:
-      - url: /storage/byodb/
-        title: Bring Your Own Database
-          
       - url: /storage/buckets/
         title: Buckets
 
@@ -446,6 +443,9 @@ items:
 
       - url: /storage/jobs/
         title: Jobs
+
+      - url: /storage/byodb/
+        title: Bring Your Own Database
 
   - url: /orchestrator/
     title: Orchestrations
