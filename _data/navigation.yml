@@ -444,6 +444,9 @@ items:
       - url: /storage/jobs/
         title: Jobs
 
+      - url: /storage/byodb/
+        title: Bring Your Own Database
+
   - url: /orchestrator/
     title: Orchestrations
     items:

@@ -1,6 +1,6 @@
 ---
 title: Bring Your Own Database (BYODB)
-permalink: /storage/backends/byodb/
+permalink: /storage/byodb/
 ---
 
 In certain cases you are able to use your own Snowflake account to host the data from Keboola Connection. Currently, we only support this for Snowflake backend.  
