@@ -124,6 +124,22 @@ When loading data into a workspace, you can specify entire buckets, which can be
 useful when you are not sure what tables you'll need in your work. You can also take
 advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
 
+### Read-Only Input Mapping
+Workspace also support **Read-Only Input Mapping** as it is written in the [mapping section](/transformations/mappings/#read-only-input-mapping), 
+with the difference that this function needs to be manually enabled when creating the workspace. 
+
+{: .image-popup}
+![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
+
+So if I enabled this feature when I created workspace, I can now access individual tables in the workspace,
+without a need to define tables in input mapping.
+
+{: .image-popup}
+![Example - Empty Input Mapping](/transformations/workspace/example-of-empty-im.png)
+
+{: .image-popup}
+![Example - Table in workspace](/transformations/workspace/table-in-ws.png)
+
 ### Unloading Data
 You can also unload data from the workspace. To unload data, configure 
 [Table Output Mapping](/transformations/mappings/#table-output-mapping)
