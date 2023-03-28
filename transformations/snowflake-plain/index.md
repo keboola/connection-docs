@@ -246,4 +246,5 @@ SELECT
 
 ## Bucket objects for Read-only input mapping
 
+For more information on how **Read-Only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
 Buckets in Snowflake are represented by schemas. You can find all available schemas for your account by calling `SHOW SCHEMAS IN ACCOUNT;`. Each schema represents a bucket.

@@ -17,8 +17,11 @@ single [component](/components/).
 
 There are two types of mapping that have to be set up before running a transformation:
 
-1. **Input Mapping** --- what Storage tables are used in your transformation; 
-tables not mentioned in *Input Mapping* cannot be used. 
+1. **Input Mapping** --- what Storage tables are used in your transformation;
+Depending on whether you use [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping), it differs whether you have to add tables to the input mapping or not.
+In transformation, [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) is automatically enabled and for workspace you can select this option when you create a new workspace.
+   2. When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets). However, you can still manually add tables to Input Mapping.
+   3. With **Read-Only Input Mapping** disabled, tables not mentioned in Input Mapping cannot be used.
 2. **Output Mapping** --- what tables are written into Storage after running the transformation; 
 tables not mentioned in *Output Mapping* are never modified nor permanently stored (i.e., they are temporary). 
 They are deleted from the transformation staging area when the execution finishes. 
@@ -51,7 +54,8 @@ Table input mapping is the common first choice.
 ### Table Input Mapping
 Depending on the transformation backend, the table input mapping process can do the following:
 
-- In case of **Database Staging** --- copy the selected tables to *tables* into a newly created *database* schema.
+- In case of **Database Staging** --- copy the selected tables to *tables* into a newly created *database* schema, 
+  or in case you have not selected any tables and [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) is enabled, you can access them automatically in Workspace and no copying is done.
 - In case of **File Staging** --- export selected tables to *CSV files* and copy them to a designated staging *storage* 
 (not to be confused with [File Mapping](/transformations/mappings/#file-mapping), we're still working with tables).
 
@@ -133,7 +137,32 @@ Clone table:
 ![Table Clone](/transformations/mappings/table-clone.png)
 
 The `CLONE` mapping will execute almost instantly for a table of any size (typically under 10 seconds) 
-as it physically does not move any data. 
+as it physically does not move any data.
+
+On the other hand, you can use [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) which makes available all buckets and tables with read access,
+so there is no need to clone the tables into a new schema, you can simply read from these buckets and tables in the trace.
+This function is automatically enabled in the transformations.
+
+##### Read-Only Input Mapping
+For using **Read-Only Input Mapping** there is no need to set anything else and for transformations, tables are automatically accessible in transformation. 
+
+{: .image-popup}
+![Storage](/transformations/mappings/storage.png)
+
+The way it works is that you have read access to all tables that exist in the storage in your project.
+
+{: .image-popup}
+![Read Only Input Mapping in transformation](/transformations/mappings/read-only-transformation.png)
+
+In the transformation (Snowflake) code I select from the table **"in.c-main"."users"** and create a new table  `create table "cities" as select "city" from "in.c-main"."users";`.
+Depending on the backend, access to tables is different, how to access individual tables depending on the backend is then explained directly in the documentation of individual backends.
+
+This is all thanks to **Read-Only Input Mapping** which allows me to use the table created in the storage directly to read in the transformation.
+
+{: .image-popup}
+![Read Only Input Mapping Storage](/transformations/mappings/read-only-trasnformation-storage.png)
+
+
 
 #### _timestamp system column
 A table loaded using `CLONE` will contain all columns of the original table plus a new `_timestamp` column.

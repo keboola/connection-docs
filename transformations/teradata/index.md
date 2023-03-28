@@ -33,6 +33,7 @@ INSERT INTO "transformationTable" ("id", "name") VALUES (2, 'doe');
 You can organize the script into [blocks](/transformations/#writing-scripts).
 
 ## Bucket objects for Read-only input mapping
+For more information on how **Read-Only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
 
 Teradata organizes tables in databases. Each bucket in Keboola is represented by a separated database, which usually follow this naming pattern: `<stackPrefix>_<projectID>-<bucketID>`
 - `stackPrefix` - depends on keboola stack which you use
