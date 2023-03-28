@@ -248,3 +248,4 @@ SELECT
 
 For more information on how **Read-Only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
 Buckets in Snowflake are represented by schemas. You can find all available schemas for your account by calling `SHOW SCHEMAS IN ACCOUNT;`. Each schema represents a bucket.
+In the case of a linked bucket, the schema is available in another database, i.e. to access this linked bucket you have to include the database name of the project from which the bucket is linked.

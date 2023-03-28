@@ -20,8 +20,8 @@ There are two types of mapping that have to be set up before running a transform
 1. **Input Mapping** --- what Storage tables are used in your transformation;
 Depending on whether you use [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping), it differs whether you have to add tables to the input mapping or not.
 In transformation, [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) is automatically enabled and for workspace you can select this option when you create a new workspace.
-   2. When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets). However, you can still manually add tables to Input Mapping.
-   3. With **Read-Only Input Mapping** disabled, tables not mentioned in Input Mapping cannot be used.
+   1. When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets). However, you can still manually add tables to Input Mapping.
+   2. With **Read-Only Input Mapping** disabled, tables not mentioned in Input Mapping cannot be used.
 2. **Output Mapping** --- what tables are written into Storage after running the transformation; 
 tables not mentioned in *Output Mapping* are never modified nor permanently stored (i.e., they are temporary). 
 They are deleted from the transformation staging area when the execution finishes. 
@@ -144,12 +144,14 @@ so there is no need to clone the tables into a new schema, you can simply read f
 This function is automatically enabled in the transformations.
 
 ##### Read-Only Input Mapping
-For using **Read-Only Input Mapping** there is no need to set anything else and for transformations, tables are automatically accessible in transformation. 
+For using **Read-Only Input Mapping** there is no need to set anything else and for transformations, tables are automatically accessible in transformation.
+This also applies to linked buckets. Here you have to pay attention to the fact that buckets and tables belong
+to another project, so you have to access e.g. the database of another project in dependence on the backend.
 
 {: .image-popup}
 ![Storage](/transformations/mappings/storage.png)
 
-The way it works is that you have read access to all tables that exist in the storage in your project.
+The way how it works is that you have read access to all tables that exist in the storage in your project.
 
 {: .image-popup}
 ![Read Only Input Mapping in transformation](/transformations/mappings/read-only-transformation.png)

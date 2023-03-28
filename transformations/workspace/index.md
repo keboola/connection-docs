@@ -132,7 +132,9 @@ with the difference that this function needs to be manually enabled when creatin
 ![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
 
 So if I enabled this feature when I created workspace, I can now access individual tables in the workspace,
-without a need to define tables in input mapping.
+without a need to define tables in input mapping. 
+This also applies to linked buckets. Here you have to pay attention to the fact that buckets and tables belong 
+to another project, so you have to access e.g. the database of another project in dependence on the backend.
 
 {: .image-popup}
 ![Example - Empty Input Mapping](/transformations/workspace/example-of-empty-im.png)
