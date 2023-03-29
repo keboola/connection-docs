@@ -57,7 +57,7 @@ In the workspace detail, you can
 {: .image-popup}
 ![Workspace - Running](/transformations/workspace/workspace-detail-1.png)
 
-#### Connecting to Workspace
+### Connecting to Workspace
 To connect to a [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) workspace with the associated kernel 
 (Python, R, Julia), use the URL and the password provided in the **Credentials** link. Use the **Connect** button 
 to directly open the JupyterLab interface:
@@ -123,6 +123,35 @@ To load arbitrary data into the workspace, configure
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
 advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
+
+### Read-Only Storage
+When input and output mapping are not fitting well your use case, read-only storage offers a straightforward access to data, drastically reducing the execution time. 
+Use it in the following scenarios:
+- Slow transformations where a clone is not used (input mapping)
+- Complex orchestrations to just get data from a data source to the workspace where it is accessed via other apps (OM)
+- Complex cases where users must choose tables in both input and output mapping
+- Cases where updating data in Storage via output mapping causes multiple data movement operations
+
+*Note: You must be using [New Transformations](/transformations/#new-transformations).* 
+
+When an SQL transformation starts, SQL code is being executed immediately. All tables from Storage are RO accessible from within the transformation. 
+Transformations are able to use some sort of persistent workspace & write directly to defined tables in Storage.
+
+For each workspace or Snowflake writer (data destination) configuration, users can choose if read-only Storage will be used or not. 
+For each transformation, the read-only access is enabled by default and users can directly work with the data without manually defining input mapping.
+
+When read-only access is enabled, the workspace will get automatically access to all data in Storage.
+
+**User workspace**
+
+{: .image-popup}
+![Read-Only Storage](/transformations/workspace/read-only-storage1.png)
+
+**Snowflake data destination**
+
+{: .image-popup}
+![Read-Only Storage](/transformations/workspace/read-only-storage2.png)
+
 
 ### Unloading Data
 You can also unload data from the workspace. To unload data, configure 
