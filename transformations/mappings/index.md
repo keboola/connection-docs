@@ -140,7 +140,7 @@ The `CLONE` mapping will execute almost instantly for a table of any size (typic
 as it physically does not move any data.
 
 On the other hand, you can use [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) which makes all buckets and tables available with read access,
-so there is no need to clone the tables into a new schema, you can simply read from these buckets and tables in the trace.
+so there is no need to clone the tables into a new schema, you can simply read from these buckets and tables in the transformation.
 This function is automatically enabled in transformations.
 
 ##### Read-Only Input Mapping
