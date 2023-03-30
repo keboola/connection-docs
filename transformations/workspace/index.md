@@ -125,22 +125,22 @@ useful when you are not sure what tables you'll need in your work. You can also 
 advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
 
 ### Read-Only Storage
-When input and output mapping are not fitting well your use case, read-only storage offers a straightforward access to data, drastically reducing the execution time. 
-Use it in the following scenarios:
+In case input and output mapping are not fitting well your use case, read-only Storage offers a straightforward access to data, drastically reducing the execution time. 
+This feature is useful in the following scenarios:
 - Slow transformations where a clone is not used (input mapping)
 - Complex orchestrations to just get data from a data source to the workspace where it is accessed via other apps (output mapping)
 - Complex cases where users must choose tables in both input and output mapping
 - Cases where updating data in Storage via output mapping causes multiple data movement operations
 
-When an SQL transformation starts, SQL code is being executed immediately. All tables from Storage are RO accessible from within the transformation. 
-Transformations are able to use some sort of persistent workspace & write directly to defined tables in Storage.
+When an SQL transformation starts, SQL code is being executed immediately. All tables from Storage are read-only accessible from within the transformation. 
+Transformations are able to use a somewhat persistent workspace and write directly to defined tables in Storage.
 
 *Note: You must be using [New Transformations](/transformations/#new-transformations) in order to see this feature.* 
 
 For each workspace or Snowflake writer (data destination) configuration, users can choose whether the read-only Storage will be used or not. 
 For each transformation, the read-only access is enabled by default and users can directly work with the data without manually defining input mapping.
 
-When read-only access is enabled, the workspace will get automatically access to all data in Storage.
+When read-only access is enabled, the workspace will get automatic access to all data in Storage.
 
 **User workspace**
 
