@@ -17,7 +17,7 @@ Because Keboola Connection manages access to the data, you need to only use the 
 
 #### Read-only access to project storage
 
-If the project has Read-only Input Mapping feature enabled, you are provided with a role `KEBOOLA_$PROJECTID_RO` for each project. This role has read-only access to all the schemas and tables in the project. You can grant this role to any of your own roles or users to give it access to the project's storage.
+If the project has [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) feature enabled, you are provided with a role `KEBOOLA_$PROJECTID_RO` for each project. This role has read-only access to all the schemas and tables in the project. You can grant this role to any of your own roles or users to give it access to the project's storage.
 
 ##### Read-only access without granting roles in snowflake
 
