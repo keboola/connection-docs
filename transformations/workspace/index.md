@@ -125,8 +125,9 @@ useful when you are not sure what tables you'll need in your work. You can also 
 advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
 
 ### Read-Only Input Mapping
-Workspace also support **Read-Only Input Mapping** as it is written in the [mapping section](/transformations/mappings/#read-only-input-mapping), 
-with the difference that this function needs to be manually enabled when creating the workspace. 
+Workspace also support **Read-Only Input Mapping** as described in the [mapping section](/transformations/mappings/#read-only-input-mapping). 
+This function needs to be manually enabled when creating the workspace thought. 
+This addresses the situation where you want to share the workspace with a third party. In that case you probably don't want them to have access to the whole Storage. 
 
 {: .image-popup}
 ![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
@@ -135,6 +136,7 @@ So if I enabled this feature when I created workspace, I can now access individu
 without a need to define tables in input mapping. 
 This also applies to linked buckets. Here you have to pay attention to the fact that buckets and tables belong 
 to another project, so you have to access e.g. the database of another project in dependence on the backend.
+For example your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. For transformation code development, it's easiest to create a workspace with **Read-Only input mapping** enabled and check in the database directly to find the correct database and schema names. 
 
 {: .image-popup}
 ![Example - Empty Input Mapping](/transformations/workspace/example-of-empty-im.png)
