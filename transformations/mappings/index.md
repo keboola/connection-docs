@@ -18,10 +18,11 @@ single [component](/components/).
 There are two types of mapping that have to be set up before running a transformation:
 
 1. **Input Mapping** --- what Storage tables are used in your transformation;
-If your project has [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) enabled, you don't have to add tables to the input mapping. 
-In transformation, [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) is automatically enabled and for workspace you can select this option when you create a new workspace.
-   1. When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets). However, you can still manually add tables to Input Mapping. Note that **there are security implications**. If you enable **Read-Only Input Mapping** for workspace, it has access to all data in project. You may not want to share workspace credentials with other people unless it's fine for them to see all the data in project. If limited access is required, do not enable **Read-Only Input Mapping** for the workspace. 
-   2. With **Read-Only Input Mapping** disabled, only tables mentioned in Input Mapping are available.
+In case input mapping are not fitting well your use case, [Read-Only Input Mapping](/transformations/mappings/#read-only-input-mapping) offers a straightforward access to data, drastically reducing the execution time.
+This feature is useful in the following scenarios:
+   - Slow transformations where a clone is not used (input mapping)
+   - Complex orchestrations to just get data from a data source to the workspace where it is accessed via other apps
+   - Cases where updating data in Storage via output mapping causes multiple data movement operations
 2. **Output Mapping** --- what tables are written into Storage after running the transformation; 
 tables not mentioned in *Output Mapping* are never modified nor permanently stored (i.e., they are temporary). 
 They are deleted from the transformation staging area when the execution finishes. 
@@ -144,6 +145,12 @@ so there is no need to clone the tables into a new schema, you can simply read f
 This function is automatically enabled in transformations.
 
 ##### Read-Only Input Mapping
+
+*Note: You must be using [New Transformations](/transformations/#new-transformations) in order to see this feature.*
+
+When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets). 
+However, you can still manually add tables to Input Mapping.
+   
 To use **Read-Only Input Mapping** there is no need to set anything. For transformations, all tables in Storage are automatically accessible in transformation.
 This also applies to linked buckets. Pay attention to the fact that buckets and tables belong
 to another project, so you need to access the tables using the fully qualified identifier including database and schema in the source project. 

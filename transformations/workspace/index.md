@@ -125,9 +125,16 @@ useful when you are not sure what tables you'll need in your work. You can also 
 advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
 
 ### Read-Only Input Mapping
-Workspace also support **Read-Only Input Mapping** as described in the [mapping section](/transformations/mappings/#read-only-input-mapping). 
-This function needs to be manually enabled when creating the workspace thought. 
-This addresses the situation where you want to share the workspace with a third party. In that case you probably don't want them to have access to the whole Storage. 
+
+*Note: You must be using [New Transformations](/transformations/#new-transformations) in order to see this feature.*
+
+Workspace also support **Read-Only Input Mapping** as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
+For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether the **Read-Only Input Mapping** will be used or not.
+
+Note that **there are security implications**. If you enable **Read-Only Input Mapping** for workspace, it has access to all data in project. 
+You may not want to share workspace credentials with other people unless it's fine for them to see all the data in project. If limited access is required, do not enable **Read-Only Input Mapping** for the workspace.
+
+With **Read-Only Input Mapping** disabled, only tables mentioned in Input Mapping are available.
 
 {: .image-popup}
 ![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
