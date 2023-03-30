@@ -157,7 +157,7 @@ You have read access to all tables that exist in your project's Storage directly
 ![Read Only Input Mapping in transformation](/transformations/mappings/read-only-transformation.png)
 
 In the transformation (Snowflake) code I select from the table **"in.c-main"."users"** and create a new table  `create table "cities" as select "city" from "in.c-main"."users";`.
-Depending on the backend, the SQL format is different. More info regarding access to individual tables depending on the backend can be found in the documentation of those individual backends.
+Depending on the backend, the SQL format is different. More info regarding access to individual tables depending on the backend can be found in the documentation of those individual backends ( [Snowflake](/transformations/snowflake-plain/#bucket-objects-for-read-only-input-mapping), [Teradata](/transformations/teradata/#bucket-objects-for-read-only-input-mapping) ).
 
 As you can see, **Read-Only Input Mapping** allows you to read the table created in the storage directly in the transformation.
 
