@@ -11,6 +11,7 @@ You can now start working with Keboola for free. Simply [sign up](https://connec
 ## Free Plan Limits
 Free Plan projects have the following limits:
 
+- **Azure North Europe**: Project is located in Europe, deployed in Microsoft Azure cloud. Read more about stack [here](/overview/#stacks).
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to [SQL](/transformations/snowflake-plain/) and [Python](/transformations/python-plain/).
