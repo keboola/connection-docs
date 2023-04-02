@@ -148,8 +148,8 @@ This function is automatically enabled in transformations.
 
 *Note: You must be using [New Transformations](/transformations/#new-transformations) in order to see this feature.*
 
-When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets). 
-However, you can still manually add tables to Input Mapping.
+When **Read-Only Input Mapping** is enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
+However, **Read-Only Input Mapping** do not access alias tables, because technically it is just a reference to an existing schema. However, you can still manually add tables to Input Mapping.
    
 To use **Read-Only Input Mapping** there is no need to set anything. For transformations, all tables in Storage are automatically accessible in transformation.
 This also applies to linked buckets. Pay attention to the fact that buckets and tables belong

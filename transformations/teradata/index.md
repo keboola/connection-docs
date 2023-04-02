@@ -42,6 +42,7 @@ Teradata organizes tables in databases. Each bucket in Keboola is represented by
 - `projectID` - ID of your project, which you can find in URL
 - `bucketID` - you can find this string ID in detail of your bucket (field ID, not name). This value is in form where `.` is replaced by `_` 
 
+However, **Read-Only Input Mapping** do not access alias tables, because technically it is just a reference to an existing schema.
 Especially when you want to access a bucket that is linked from another project, you need to use the id of the source project from where the bucket is linked.
 
 **Example**:

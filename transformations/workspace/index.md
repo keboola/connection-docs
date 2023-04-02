@@ -140,7 +140,7 @@ With **Read-Only Input Mapping** disabled, only tables mentioned in Input Mappin
 ![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
 
 So if I enabled this feature when I created workspace, I can now access individual tables in the workspace,
-without a need to define tables in input mapping. 
+without a need to define tables in input mapping. However, **Read-Only Input Mapping** do not access alias tables, because technically it is just a reference to an existing schema.
 This also applies to linked buckets. Here you have to pay attention to the fact that buckets and tables belong 
 to another project, so you have to access e.g. the database of another project in dependence on the backend.
 For example your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. For transformation code development, it's easiest to create a workspace with **Read-Only input mapping** enabled and check in the database directly to find the correct database and schema names. 
