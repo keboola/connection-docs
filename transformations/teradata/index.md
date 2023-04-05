@@ -32,18 +32,18 @@ INSERT INTO "transformationTable" ("id", "name") VALUES (2, 'doe');
 
 You can organize the script into [blocks](/transformations/#writing-scripts).
 
-## Bucket objects for Read-only input mapping
-For more information on how **Read-Only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
+## Bucket Objects for Read-Only Input Mapping
+For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
 
 Teradata organizes tables in databases. Each bucket in Keboola is represented by a separated database, which usually follow this naming pattern: `<stackPrefix>_<projectID>-<bucketID>`
-- `stackPrefix` - depends on keboola stack which you use
+- `stackPrefix` – depends on the Keboola stack you use
   - `SAPI` on https://connection.keboola.com/
   - `KEBOOLA` everywhere else
-- `projectID` - ID of your project, which you can find in URL
-- `bucketID` - you can find this string ID in detail of your bucket (field ID, not name). This value is in form where `.` is replaced by `_` 
+- `projectID` – ID of your project, which you can find in the URL
+- `bucketID` – you can find this string ID in the detail of your bucket (field ID, not the name). This value is in form where `.` is replaced by `_` 
 
-However, **Read-Only Input Mapping** do not access alias tables, because technically it is just a reference to an existing schema.
-Especially when you want to access a bucket that is linked from another project, you need to use the id of the source project from where the bucket is linked.
+However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema.
+Especially when you want to access a bucket that is linked from another project, you need to use the ID of the source project from which the bucket is linked.
 
 **Example**:
 Bucket with ID `in.c-bucketOutOfTransformation` in project `9435` on `connection.keboola.com` is represented by database `SAPI_9435-in_c-bucketOutOfTransformation`
