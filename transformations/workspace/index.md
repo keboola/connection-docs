@@ -22,7 +22,7 @@ You can create a Workspace on the Transformations page:
 {: .image-popup}
 ![Workspace Introduction](/transformations/workspace/workspace-intro.png)
 
-Select a workspace type - not all workspace types are supported in all project workspaces. 
+Select a workspace type; not all workspace types are supported in all project workspaces. 
 Workspace types match available transformation types. For scripting languages ([Python](https://www.python.org/), 
 [R](https://www.r-project.org/), and [Julia](https://julialang.org/)), we provide [JupyterLab](https://jupyter.org/) with 
 the matching [kernel](https://jupyter.readthedocs.io/en/latest/projects/kernels.html).
@@ -57,7 +57,7 @@ In the workspace detail, you can
 {: .image-popup}
 ![Workspace - Running](/transformations/workspace/workspace-detail-1.png)
 
-#### Connecting to Workspace
+### Connecting to Workspace
 To connect to a [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) workspace with the associated kernel 
 (Python, R, Julia), use the URL and the password provided in the **Credentials** link. Use the **Connect** button 
 to directly open the JupyterLab interface:
@@ -113,9 +113,9 @@ If you see this error, please go to the list of workspaces in Keboola Connection
 and reconnect from there.
 
 ### Loading Data
-To load arbitrary data into the workspace, configure 
-[Table Input Mapping](/transformations/mappings/#table-input-mapping) or
-[File Input Mapping](/transformations/mappings/#file-input-mapping) (or both) and click the **Load Data** button.
+To load arbitrary data into the workspace, configure a
+[table input mapping](/transformations/mappings/#table-input-mapping) or
+[file input mapping](/transformations/mappings/#file-input-mapping) (or both) and click the **Load Data** button.
 
 {: .image-popup}
 ![Workspace - Load Data](/transformations/workspace/load-data.png)
@@ -123,6 +123,32 @@ To load arbitrary data into the workspace, configure
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
 advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
+
+### Read-Only Input Mapping
+
+*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+
+The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
+For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
+
+Note that **there are security implications**. If you enable a **read-only input mapping** for a workspace, then it has access to all the data in the project. 
+You may not want to share workspace credentials with other people unless it's acceptable for them to see all the data in the project. If limited access is required, do not enable **read-only input mappings** for the workspace.
+
+With **read-only input mappings** disabled, only tables listed in the input mapping are accessible.
+
+{: .image-popup}
+![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
+
+So, if we enable this feature when we create a workspace, we can access individual tables in the workspace,
+without needing to define any tables in the input mapping. However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema.
+This also applies to linked buckets. *Note that buckets and tables belong to another project, so you must access, for example, the database of another project depending on the backend.
+For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. When developing transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the database to find the correct database and schema names. 
+
+{: .image-popup}
+![Example - Empty Input Mapping](/transformations/workspace/example-of-empty-im.png)
+
+{: .image-popup}
+![Example - Table in workspace](/transformations/workspace/table-in-ws.png)
 
 ### Unloading Data
 You can also unload data from the workspace. To unload data, configure 
