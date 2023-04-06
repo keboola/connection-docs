@@ -195,6 +195,12 @@
             "service": "queue"
         },
         {
+            "ipPrefix": "20.67.181.161/32",
+            "vendor": "azure",
+            "region": "north-europe",
+            "service": "queue"
+        },
+        {
             "ipPrefix": "149.72.196.5/32",
             "vendor": "azure",
             "region": "north-europe",

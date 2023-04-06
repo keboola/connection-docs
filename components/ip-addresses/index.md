@@ -83,6 +83,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `20.82.252.94`
 - `20.82.252.129`
 - `20.82.252.124`
+- `20.67.181.161`
 - `149.72.196.5` - Used only for email delivery.
 
 ## IP Address Ranges in JSON
