@@ -44,7 +44,6 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 - `34.200.169.177`
 - `52.206.109.126`
 - `34.203.87.137`
-- `20.67.181.161`
 - `149.72.196.5` - Used only for email delivery.
 
 
@@ -84,6 +83,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `20.82.252.94`
 - `20.82.252.129`
 - `20.82.252.124`
+- `20.67.181.161`
 - `149.72.196.5` - Used only for email delivery.
 
 ## IP Address Ranges in JSON
