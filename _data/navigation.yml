@@ -374,6 +374,12 @@ items:
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
                 title: Deepnote Notebook Execution Trigger
+          - url: /components/applications/ai/
+            title: AI
+            items:
+              - url: /components/applications/ai/open-ai/
+                title: OpenAI
+        
 
       - url: /components/branches/
         title: Development Branches
