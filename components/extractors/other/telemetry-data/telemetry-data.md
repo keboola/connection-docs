@@ -306,6 +306,7 @@ organization, or to the Keboola Connection platform itself.
 
 #### Security event operations
 
+|`auditLog.admin.activation`                     |`auditLog.storageBackendConnection.updated`     
 |`auditLog.admin.addNewU2fDevice`                |`auditLog.organization.detail`
 |`auditLog.admin.changePassword`                 |`auditLog.organization.invitationCreated`
 |`auditLog.admin.disableMfa`                     |`auditLog.organization.invitationDeleted`
@@ -352,8 +353,7 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.organization.adminsInProjectsListed`  |`auditLog.promoCode.applied`
 |`auditLog.organization.adminsListed`            |`auditLog.promoCode.created`
 |`auditLog.organization.deleted`                 |`auditLog.storageBackendConnection.listed`
-|`auditLog.storageBackendConnection.created`     |`auditLog.storageBackendConnection.deleted`
-|`auditLog.storageBackendConnection.updated`     
+|`auditLog.storageBackendConnection.created`     |`auditLog.storageBackendConnection.deleted` 
 
 
 #### Operation parameters
