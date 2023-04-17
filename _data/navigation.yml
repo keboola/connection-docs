@@ -249,6 +249,9 @@ items:
               - url: /components/extractors/other/google-search-console/
                 title: Google Search Console
 
+              - url: /components/extractors/other/okta/
+                title: Okta
+
               - url: /components/extractors/other/papertrail/
                 title: Papertrail
 
