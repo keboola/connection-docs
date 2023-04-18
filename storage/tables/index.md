@@ -191,7 +191,8 @@ There is significant change when loading incrementally into table with native da
 datatypes during incremental load, the `_timestamp` column is updated based on the primary key only when any value in
 the row is changed.
 In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported.
-This behavior has an impact on [incremental Processing](/storage/tables/#Incremental Processing), as when rows with
+This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with
+
 duplicate primary keys are imported into tables with native types, they are considered as new rows.
 
 Example:
