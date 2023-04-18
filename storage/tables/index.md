@@ -233,7 +233,8 @@ Example:
 
 - Result of inc import A2
 
-**Here we can see a significant change in the incremental load, the `_timestamp' column is updated for row id:5, this would not happen with
+**Here we can see a significant change in the incremental load, the `_timestamp` column is updated for row id:5, this would not happen
+
 for tables without native types**.
 
 |                                      |ID|NAME|SKU|VALUE|DATE| _timestamp     |
