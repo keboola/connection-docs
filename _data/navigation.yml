@@ -176,6 +176,9 @@ items:
 
               - url: /components/extractors/marketing-sales/sklik/
                 title: Sklik
+              
+              - url: /components/extractors/marketing-sales/zbozi.cz/
+                title: Zboží.cz
 
           - url: /components/extractors/social/
             title: Social
