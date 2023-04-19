@@ -185,6 +185,96 @@ The above applies only when **incremental load** is used.
 When an incremental load is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
+#### Difference between tables with [native datatypes](/storage/tables/data-types/#native-datatypes) and string tables
+
+There is significant change when loading incrementally into table with native datatypes on. If table doesn't have native
+datatypes during incremental load, the `_timestamp` column is updated based on the primary key only when any value in
+the row is changed.
+In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported.
+This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with
+
+duplicate primary keys are imported into tables with native types, they are considered as new rows.
+
+Example:
+
+- Keboola Storage table newly created at **Tue Nov 22 2022 15:37:19 GMT+0000 (1669131439)**
+
+|ID|NAME|SKU|VALUE|DATE|_timestamp|
+|---|---|---|---|---|---|
+|1|John|CD-CZ-01|9247|2005-12-11|1669131439|
+|2|Jack|CE-CA-22|3544|2012-10-14|1669131439|
+|3|Jim|ED-BT-13|5262|2001-04-20|1669131439|
+|4|Jil|BA-AB-11|5278|2014-12-14|1669131439|
+
+- Incremental import A1 at **Wed Nov 23 2022 16:41:20 GMT+0000 (1669221680)**
+
+|            | ID | NAME | SKU      | VALUE | DATE       |
+|------------|----|------|----------|-------|------------|
+| new row => | 5  | Andy | AB-CF-48 | 7081  | 2003-07-05 |
+| new row => | 6  | Beth | HH-FR-14 | 7541  | 2002-04-01 |
+
+- Result of inc import A1
+
+|                                   |ID|NAME|SKU|VALUE|DATE| _timestamp     |
+|-----------------------------------|---|---|---|---|---|----------------|
+|                                   |1|John|CD-CZ-01|9247|2005-12-11| 1669131439     |
+|                                   |2|Jack|CE-CA-22|3544|2012-10-14| 1669131439     |
+|                                   |3|Jim|ED-BT-13|5262|2001-04-20| 1669131439     |
+|                                   |4|Jil|BA-AB-11|5278|2014-12-14| 1669131439     |
+| added row = new _timestamp => |5|Andy|AB-CF-48|7081|2003-07-05| **1669221680** |
+| added row = new _timestamp => |6|Beth|HH-FR-14|7541|2002-04-01| **1669221680** |
+
+- Incremental import A2 at **Wed Nov 23 2022 16:42:42 GMT+0000 (1669221762)**
+
+|                                  | ID |NAME|SKU|VALUE|DATE|
+|----------------------------------|---|---|---|---|---|
+| existing row, no new values =>   |5|Andy|AB-CF-48|7081|2003-07-05|
+| new row =>                       |7|Edith|ED-BT-13|9471|1996-12-18|
+
+- Result of inc import A2
+
+**Here we can see a significant change in the incremental load, the `_timestamp` column is updated for row id:5, this would not happen
+
+for tables without native types**.
+
+|                                      |ID|NAME|SKU|VALUE|DATE| _timestamp     |
+|--------------------------------------|---|---|---|---|---|----------------|
+|                                      | 1 |John|CD-CZ-01|9247|2005-12-11| 1669131439     |
+|                                      | 2 |Jack|CE-CA-22|3544|2012-10-14| 1669131439     |
+|                                      | 3 |Jim|ED-BT-13|5262|2001-04-20| 1669131439     |
+|                                      | 4 |Jil|BA-AB-11|5278|2014-12-14| 1669131439     |
+| **updating row = new _timestamp =>** | 5 |Andy|AB-CF-48|7081|2003-07-05| **1669221762** |
+|                                      | 6 |Beth|HH-FR-14|7541|2002-04-01| 1669221680     |
+| added row = new _timestamp =>        | 7 |Edith|ED-BT-13|9471|1996-12-18| **1669221762** |
+
+- Import A3 at **Wed Nov 23 2022 16:44:34 GMT+0000 (1669221874)**
+
+|                                 | ID |NAME|SKU| VALUE          |DATE|
+|---------------------------------|---|---|---|----------------|---|
+| existing row, with new value => |5|Andy|AB-CF-48| **6081**       |2003-07-05|
+| existing row, no new values =>  |7|Edith|ED-BT-13| 9471           |1996-12-18|
+| new row =>                      |8|Kate|CD-CZ-01| 5282           |2008-06-07|
+| new row =>                      |9|Josh|BA-AB-11| 6624           |2004-10-04|
+| new row =>                      |10|Arthur|EE-FF-66| 596	2021-04-06 |
+
+- Result of inc import A3
+
+- **Here we can see another change that occurs only for tables with native types: the `_timestamp` column for row id:7 is
+but there was no change in it**.
+
+|                                      | ID |NAME|SKU| VALUE    |DATE| _timestamp     |
+|--------------------------------------|-|---|---|----------|---|----------------|
+|                                      |1|John|CD-CZ-01| 9247     |2005-12-11| 1669131439     |
+|                                      |2|Jack|CE-CA-22| 3544     |2012-10-14| 1669131439     |
+|                                      |3|Jim|ED-BT-13| 5262     |2001-04-20| 1669131439     |
+|                                      |4|Jil|BA-AB-11| 5278     |2014-12-14| 1669131439     |
+| updating row = new _timestamp =>     |5|Andy|AB-CF-48| **6081** |2003-07-05| 1669221874     |
+|                                      |6| Beth |HH-FR-14| 7541     |2002-04-01| 1669221680     |
+| **updating row = new _timestamp =>** |7|Edith|ED-BT-13| 9471     |1996-12-18| **1669221874** |
+| added row = new _timestamp =>        |8|Kate|CD-CZ-01| 5282     |2008-06-07| **1669221874** |
+| added row = new _timestamp =>        |9|Josh|BA-AB-11| 6624     |2004-10-04| **1669221874** |
+| added row = new _timestamp =>        |10|Arthur|EE-FF-66| 596      |2021-04-06| **1669221874** |
+
 ### Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
 can be later used in Input Mapping of many components (especially [Transformations](/transformations/mappings/#input-mapping)).
