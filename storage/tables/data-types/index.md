@@ -993,29 +993,111 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 </tr>
 </table>
 
-### Native datatypes
+## Native datatypes
 
-As mentioned above, Keboola stores data in storage as text by default. Native datatypes feature breaks this paradigm. If this feature is enabled, data in storage are stored in columns which have datatypes as described in Keboola metadata. 
-
-There are two options how typed tables can be created
-1. manually using [tables-definition enpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) and then loaded with data in output mapping. Datatypes used in this endpoint have to correspond with the storage backend which your project uses. Or you can use [BASETYPES](#base-types).
-2. by a component which can provide information about columns datatypes
-  - database extractors and transformations matching storage backend will create storage tables with same types
-  - database extractors and transformations not matching backend will create storage tables using [BASETYPES](#base-types)
-  - Other components will create non-typed table, where all columns have text type.
-
-   **_NOTE:_**  Not all database extractors and transformations can produce basetypes.
-
-   **_NOTE:_**  Some components may produce basetypes for columns and thus produce typed tables
-
-#### Pros and cons
-- **Pros**
-  - Manipulation with such data is easier and un/loading can be faster.
-  - There is no need for casting when using [Read-only IM](/storage/backends/byodb/#read-only-access-to-project-storage)
-- **Cons**
-  - Datatypes in typed tables are given and there is no way how it can be altered (neither UI nor API)
+As mentioned above, Keboola stores data in Storage as text by default. Native datatypes feature breaks this paradigm. If this feature is enabled, data in Storage are stored in columns with datatypes based on Keboola metadata. 
 
 Table with native datatypes is labeled in UI with a badge:
 
 {: .image-popup}
 ![Screenshot - Table with native datatypes](/storage/tables/data-types/typed-table.png)
+
+### How to create a typed table?
+
+#### Manually via API
+
+Table with type definition is created using [tables-definition enpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) and data is then loaded into it. Datatypes used in this endpoint have to correspond with the Storage backend which your project uses. Alternatively, you can use [BASETYPES](#base-types).
+
+#### Output mapping of a component
+
+A component may provide information about columns datatypes in its data manifest. Database extractors and transformations matching storage backend (e.g. Snowflake SQL transformation on Snowflake storage backend) will create storage tables with same types. Database extractors and transformations NOT matching backend will create storage tables using [BASETYPES](#base-types). 
+
+For example, this is how you can create typed tables in Snowflake SQL transformation, that will be imported to Storage as typed tables: 
+
+```sql
+-- create a table with datatypes
+CREATE OR REPLACE TABLE "typed_table" (
+    "id" NUMBER,
+    "name" VARCHAR(255),
+    "created_at" TIMESTAMP_NTZ
+);
+
+-- insert some data
+INSERT INTO "typed_table"
+VALUES
+    (1, '75', '2020-01-01 00:00:00');
+
+-- create a table with different datatypes from an existing table
+CREATE OR REPLACE TABLE "typed_table_2" AS
+SELECT
+    "id"::varchar AS "string_id",
+    "name"::number AS "numeric_name",
+    "created_at"::date AS "typed_date"
+FROM
+    "typed_table";
+```
+
+***Note:** The datatype hinting is components' responsibility, so all components need to be updated by their respective authors to support this. This is why most components don't produce basetypes for columns yet and thus produce tables without types. Not even all database extractors and transformations produce basetypes yet. There is no list of components that support this feature. You may check the component's documentation to see if it supports native datatypes.* 
+
+### How to define datatypes?
+
+#### Using actual datatypes of the storage backend
+
+For example in case of Snowflake, you can create column of type `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This allows you to specify all the details of the datatype including precision and scale for example. But it's tied to the specific storage backend, and thus it's not portable.
+
+Example of such column definition in table-definition API endpoint call is as follows:
+
+```json
+{
+  "name": "id",
+  "definition": {
+    "type": "DECIMAL",
+      "length": "20,2",
+      "nullable": false,
+      "default": "999"
+  }
+}
+```
+
+#### Using Keboola provided [BASETYPES](#base-types)
+
+Using basetypes allows you to specify only the general type of the column, that is supported across various storage backends. For that reason it's ideal for components, which are storage backend agnostic. However, it can be used for the table-definition API endpoint as well. The definition is as follows:
+
+```json
+{
+  "name": "id",
+  "basetype": "NUMERIC"
+}
+```
+
+### Changing types of exising typed columns
+
+**You can't change type of column of a typed table once it's created.** There are multiple ways to work around this. 
+
+First, if the table is loaded using full load, you can drop the table and create new table with the correct types and load the data there. 
+
+If the table is loaded incrementally, you have to create a new column and copy the data from the old one.
+
+* you have column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`
+* you first add a new column `date_timestamp` of type `TIMESTAMP` to the table
+* then you change all the jobs filling the table to fill the new column as well as the old one
+* then you run an ad-hoc transformation which will copy data from `date` to `date_timestamp` for existing rows 
+* then you can slowly change all the places where `date` is used to use `date_timestamp` instead
+* when you only use the new column, the old one can be removed
+
+In both cases, make sure to check all the downstream configurations, so that you don't get any schema mismatch. This is especially important for data destinations, where there is already an existing table in the destination.
+
+### Incremental loading
+
+When you load data incrementally, there is a difference between typed and non-typed tables. Typed tables only compare the columns of table's primary key, while non-typed tables compare the whole row, only updating rows where any value in the row changed. This is decribed in detail in [Incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables) documentation.
+
+### Pros and cons
+
+- **Pros**
+  - load to workspace is significantly faster in comparison to table without native datatypes, because there is no need to cast the data when loading to workspace
+  - when table is accessed in workspace via [Read-only IM](https://help.keboola.com/transformations/workspace/#read-only-input-mapping) it already has typed columns
+  - data types are strictly enforced, so you can be sure your number column will contain only numbers for example
+- **Cons**
+  - changing column type is complicated, see [Changing types of typed columns](#changing-types-of-typed-columns)
+  - Keboola won't do any type conversion when loading, so your data must match the type of column in the table in Storage exactly
+  - any load of data with incompatible types will fail
