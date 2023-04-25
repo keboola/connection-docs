@@ -13,8 +13,8 @@ This extractor allows you to integrate your Google Analytics data into the Keboo
 To do that, you will need a [Google Analytics account](https://analytics.google.com/analytics/web/).
 
 ## Features
-The Google Analytics extractor works with the newest version of the [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/)
-and [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1).
+The Google Analytics extractor works with the newest version of the [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1) 
+and [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/).
 
 These APIs provides the following key features:
 
