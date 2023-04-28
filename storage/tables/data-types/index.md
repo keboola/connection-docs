@@ -1039,7 +1039,7 @@ FROM
     "typed_table";
 ```
 
-***Note:** The datatype hinting is components' responsibility, so all components need to be updated by their respective authors to support this. This is why most components don't produce basetypes for columns yet and thus produce tables without types. Not even all database extractors and transformations produce basetypes yet. There is no list of components that support this feature. You may check the component's documentation to see if it supports native datatypes.* 
+***Note:** The datatype hinting is components' responsibility, so components need to be updated by their respective authors to support this. Database extractors maintained by Keboola already provide datatypes.  There is no list of components that support this feature. You may check the component's documentation to see if it supports native datatypes.* 
 
 ### How to define datatypes?
 
