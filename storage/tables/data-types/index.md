@@ -995,7 +995,7 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 
 ## Native datatypes
 
-Specific behavior depends on the Backend of your project. We'll be using Snowflake backend as an example.
+Specific behavior depends on the [Backend of your project](/storage/#storage-data). We'll be using Snowflake backend as an example.
 
 As mentioned above, Keboola stores data in Storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata. 
 
