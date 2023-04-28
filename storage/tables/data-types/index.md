@@ -995,9 +995,9 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 
 ## Native datatypes
 
-As mentioned above, Keboola stores data in Storage as text by default. Native datatypes feature breaks this paradigm. If this feature is enabled, data in Storage are stored in columns with datatypes based on Keboola metadata. 
+As mentioned above, Keboola stores data in Storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata.
 
-Table with native datatypes is labeled in UI with a badge:
+Tables with native datatypes are labeled in UI with a badge:
 
 {: .image-popup}
 ![Screenshot - Table with native datatypes](/storage/tables/data-types/typed-table.png)
@@ -1090,6 +1090,20 @@ In both cases, make sure to check all the downstream configurations, so that you
 ### Incremental loading
 
 When you load data incrementally, there is a difference between typed and non-typed tables. Typed tables only compare the columns of table's primary key, while non-typed tables compare the whole row, only updating rows where any value in the row changed. This is decribed in detail in [Incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables) documentation.
+
+### Handling NULLs
+
+Columns without native types are always `VARCHAR NOT NULL` this means you don't need to care about specific NULL behavior. This changes with typed columns. In most databases, NULL does not equal NULL (`NULL == NULL` is not `TRUE`, but `NULL`). This breaks the incremental loading flow where columns are compared against each other.
+
+For this reason, you need to make sure that your primary key columns are not nullable. This is most relevant in CTAS queries, where columns are nullable by default. To work around this, you can specify the columns as part of the CTAS expression. For example:
+
+```sql
+CREATE TABLE "ctas_table" (
+    "id" NUMBER NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMP_NTZ NOT NULL
+) AS SELECT * FROM "typed_table";
+```
 
 ### Pros and cons
 
