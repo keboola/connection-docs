@@ -995,7 +995,9 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 
 ## Native datatypes
 
-As mentioned above, Keboola stores data in Storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata.
+Specific behavior depends on the Backend of your project. We'll be using Snowflake backend as an example.
+
+As mentioned above, Keboola stores data in Storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata. 
 
 Tables with native datatypes are labeled in UI with a badge:
 
@@ -1027,7 +1029,7 @@ INSERT INTO "typed_table"
 VALUES
     (1, '75', '2020-01-01 00:00:00');
 
--- create a table with different datatypes from an existing table
+-- create another table with datatypes based on an existing table
 CREATE OR REPLACE TABLE "typed_table_2" AS
 SELECT
     "id"::varchar AS "string_id",
