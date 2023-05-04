@@ -6,15 +6,15 @@ permalink: /storage/tables/data-types/
 * TOC
 {:toc}
 
-Some components (especially extractors) store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
-loads a table from the source database, it also records the physical column types from that table.
+Some components, especially extractors (data sources), store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
+loads a table from a source database, it also records the physical column types from that table.
 These are stored with each table column and can be used later on when working with the table. For
-example, the transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside
-the transformations. Also, some writers, e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
+instance, the transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside
+the transformations. Also, some writers (data destinations), e.g., the [Snowflake writer](/components/writers/database/snowflake/) use
 the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
-Even if a data type is available for a column, storage always creates internally all columns for table as text not null and null-able values are converted to empty strings (except for Exasol where everything is null). Keep this in mind
-especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. This behavior can be changed in certain cases with feature [native datatypes](#native-datatypes).
+Even if a data type is available for a column, storage always creates internally all columns for the table as text not null, and nullable values are converted to empty strings (except for Exasol where everything is null). Keep this in mind
+especially in [Transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. This behavior can be changed in certain cases with the [native data types](#native-data-types) feature.
 The non-text column type is used only during a component (transformation or writer) execution.
 The basic idea behind this is that a text type has the best interoperability, so this averts many issues (e.g., some 
 date values stored in a MySQL database might not be accepted by a Snowflake database and vice-versa). 
@@ -23,11 +23,11 @@ date values stored in a MySQL database might not be accepted by a Snowflake data
 Data types from a source are mapped to a destination using a **Base Type**. The current base types are
 [`STRING`](#string), [`INTEGER`](#integer), [`NUMERIC`](#numeric), [`FLOAT`](#float), [`BOOLEAN`](#boolean), 
 [`DATE`](#date), and [`TIMESTAMP`](#timestamp). This means that, for example, a MySQL extractor
-may store the value `BIGINT` as a type of a column; that type maps to the `INTEGER` general type. When the Snowflake writer consumes this value, it will
+may store the value `BIGINT` as a type of column; that type maps to the `INTEGER` general type. When the Snowflake writer consumes this value, it will
 read the general type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
-This logic is again designed to ensure high interoperability between the components. See the [conversion table below](#data-type-conversions).
+This ensures high interoperability between the components. See the [conversion table below](#data-type-conversions).
 
-You view the extracted data types in the [Storage Table](/storage/tables/) detail:
+View the extracted data types in the [storage table](/storage/tables/) detail:
 
 {: .image-popup}
 ![Screenshot - View Column Data Type](/storage/tables/data-types/column-data-type.png)
@@ -37,29 +37,29 @@ You can also override the data type:
 {: .image-popup}
 ![Screenshot - Set Column Data Type](/storage/tables/data-types/column-data-type-override.png)
 
-When you use the table (e.g. in [Snowflake writer](/components/writers/database/snowflake/)), you'll see the data type you configured:
+When you use the table (e.g., in the [Snowflake writer](/components/writers/database/snowflake/)), you'll see the data type you have configured:
 
 {: .image-popup}
 ![Screenshot - Set Column Data Type](/storage/tables/data-types/column-data-type-use.png)
 
-Note that the column type setting is in all cases only a metadata setting. It has no effect on the actual 
-stored data. The data is converted only at the point of writing/copying (e.g to transformation or writer). 
-That means that you can extract an *integer* column, mark it as *timestamp* in Storage and write it as 
+Note that the column type setting is, in all cases, only a metadata setting. It has no effect on the actual 
+stored data. The data is converted only at the point of writing or copying (e.g., to a transformation or a writer). 
+That means that you can extract an *integer* column, mark it as *timestamp* in storage and write it as 
 *integer* into a target database (though you'll be offered to write it as timestamp).
 
-Through the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata)
+Through the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata),
 you access both the source and base type metadata.
 
 ## Data Type Conversions
 As described above, the **source data type** is converted to a **base data type** which is stored in metadata storage. The base type is then converted to the **target data type**. The following tables show mappings for each base type. The mapping 
-causes possible information loss (e.g. assigning `SMALLINT` to `INTEGER`). To minimize this, we also keep track of the data type 
-size and transfer that if possible. For example that a `SMALLINT` column would be stored as base type `INTEGER` with size `2`. If the target database supports integer sizes, you will be offered to set the type in the target database as `INTEGER(2)`. 
+causes possible information loss (e.g., assigning `SMALLINT` to `INTEGER`). To minimize this, we also keep track of the data type 
+size, and transfer that if possible. For example, a `SMALLINT` column would be stored as base type `INTEGER` with size `2`. If the target database supports integer sizes, you will be offered to set the type in the target database as `INTEGER(2)`. 
 
 ### STRING
-Base type `STRING` represents any textual type - both `CHARACTER VARYING` (or `VARCHAR`) and `TEXT` types are included.
-Also the string base type is used for any other unrecognized type on input. That means in the following table the 
-*source type* column is **not an exhaustive list**. It's a list of reasonable string types which are converted to string, all 
-other unknown types are converted to string as well.
+Base type `STRING` represents any textual type; both `CHARACTER VARYING` (or `VARCHAR`) and `TEXT` types are included.
+Also, the string base type is used for any other unrecognized type on input. It means that in the following table, the 
+*source type* column is **not an exhaustive list**. It's a list of reasonable string types which are converted to a string. All 
+other unknown types are converted to a string as well.
 
 <table>
 <tr>
@@ -665,7 +665,7 @@ The `FLOAT` base type represents [floating-point](https://en.wikipedia.org/wiki/
 </table>
 
 ### BOOLEAN
-The `BOOLEAN` base type represents a true/false values.
+The `BOOLEAN` base type represents a true or false values.
 
 <table>
 <tr>
@@ -993,28 +993,28 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 </tr>
 </table>
 
-## Native datatypes
+## Native Data Types
 
-Specific behavior depends on the [Backend of your project](/storage/#storage-data). We'll be using Snowflake backend as an example.
+Specific behavior depends on the [backend of your project](/storage/#storage-data). We'll be using the Snowflake backend as an example.
 
-As mentioned above, Keboola stores data in Storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata. 
+As mentioned above, Keboola stores data in storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata. 
 
-Tables with native datatypes are labeled in UI with a badge:
+Tables with native data types are labeled in the user interface with a badge:
 
 {: .image-popup}
 ![Screenshot - Table with native datatypes](/storage/tables/data-types/typed-table.png)
 
-### How to create a typed table?
+### How to Create a Typed Table
 
-#### Manually via API
+#### Manually via an API
 
-Table with type definition is created using [tables-definition enpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) and data is then loaded into it. Datatypes used in this endpoint have to correspond with the Storage backend which your project uses. Alternatively, you can use [BASETYPES](#base-types).
+A table with a type definition is created using the [tables-definition enpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) and data is then loaded into it. Data types used in this endpoint have to correspond with the storage backend which your project uses. Alternatively, you can use [BASETYPES](#base-types).
 
 #### Output mapping of a component
 
-A component may provide information about columns datatypes in its data manifest. Database extractors and transformations matching storage backend (e.g. Snowflake SQL transformation on Snowflake storage backend) will create storage tables with same types. Database extractors and transformations NOT matching backend will create storage tables using [BASETYPES](#base-types). 
+A component may provide information about column data types in its data manifest. Database extractors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database extractors and transformations that do NOT match the backend will create storage tables using [BASETYPES](#base-types). 
 
-For example, this is how you can create typed tables in Snowflake SQL transformation, that will be imported to Storage as typed tables: 
+For example, this is how you can create typed tables in a Snowflake SQL transformation that will be imported to storage as typed tables: 
 
 ```sql
 -- create a table with datatypes
@@ -1039,15 +1039,15 @@ FROM
     "typed_table";
 ```
 
-***Note:** The datatype hinting is components' responsibility, so components need to be updated by their respective authors to support this. Database extractors maintained by Keboola already provide datatypes.  There is no list of components that support this feature. You may check the component's documentation to see if it supports native datatypes.* 
+***Note:** The data type hinting is components' responsibility, so components must be updated by their respective authors to support this. The database extractors that are maintained by Keboola already provide datatypes.  There is no list of components that support this feature. You may check the component's documentation to see if it supports native data types.* 
 
-### How to define datatypes?
+### How to Define Data Types
 
-#### Using actual datatypes of the storage backend
+#### Using actual data types of the storage backend
 
-For example in case of Snowflake, you can create column of type `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This allows you to specify all the details of the datatype including precision and scale for example. But it's tied to the specific storage backend, and thus it's not portable.
+For example, in case of Snowflake, you can create a column of type `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This allows you to specify all the details of the datatype including precision and scale, for instance. But it's tied to the specific storage backend, and thus it's not portable.
 
-Example of such column definition in table-definition API endpoint call is as follows:
+An example of such a column definition in a table-definition API endpoint call is as follows:
 
 ```json
 {
@@ -1061,9 +1061,9 @@ Example of such column definition in table-definition API endpoint call is as fo
 }
 ```
 
-#### Using Keboola provided [BASETYPES](#base-types)
+#### Using Keboola-provided [BASE TYPES](#base-types)
 
-Using basetypes allows you to specify only the general type of the column, that is supported across various storage backends. For that reason it's ideal for components, which are storage backend agnostic. However, it can be used for the table-definition API endpoint as well. The definition is as follows:
+Using base types allows you to specify only the general type of a column. It is supported across various storage backends. For that reason it's ideal for components that are storage backend agnostic. However, it can be used for the table-definition API endpoint as well. The definition is as follows:
 
 ```json
 {
@@ -1072,30 +1072,30 @@ Using basetypes allows you to specify only the general type of the column, that 
 }
 ```
 
-### Changing types of exising typed columns
+### Changing Types of Existing Typed Columns
 
-**You can't change type of column of a typed table once it's created.** There are multiple ways to work around this. 
+**You can't change the type of column of a typed table once it has been created.** There are multiple ways to work around this. 
 
-First, if the table is loaded using full load, you can drop the table and create new table with the correct types and load the data there. 
+First, if the table is loaded using full load, you can drop the table and create a new table with the correct types and load the data there. 
 
 If the table is loaded incrementally, you have to create a new column and copy the data from the old one.
 
-* you have column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`
-* you first add a new column `date_timestamp` of type `TIMESTAMP` to the table
-* then you change all the jobs filling the table to fill the new column as well as the old one
-* then you run an ad-hoc transformation which will copy data from `date` to `date_timestamp` for existing rows 
-* then you can slowly change all the places where `date` is used to use `date_timestamp` instead
-* when you only use the new column, the old one can be removed
+* You have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
+* You first add a new column `date_timestamp` of type `TIMESTAMP` to the table.
+* Then you change all the jobs filling the table to fill the new column as well as the old one.
+* Then you run an ad-hoc transformation, which will copy data from `date` to `date_timestamp` for existing rows.
+* Then you can slowly change all the places where `date` is used to use `date_timestamp` instead.
+* When you only use the new column, the old one can be removed.
 
-In both cases, make sure to check all the downstream configurations, so that you don't get any schema mismatch. This is especially important for data destinations, where there is already an existing table in the destination.
+In both cases, make sure to check all the downstream configurations so that you don't get any schema mismatch. This is especially important for data destinations, where there is already an existing table in the destination.
 
-### Incremental loading
+### Incremental Loading
 
-When you load data incrementally, there is a difference between typed and non-typed tables. Typed tables only compare the columns of table's primary key, while non-typed tables compare the whole row, only updating rows where any value in the row changed. This is decribed in detail in [Incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables) documentation.
+When you load data incrementally, there is a difference between typed and non-typed tables. Typed tables only compare the columns of the table's primary key, while non-typed tables compare the whole row, only updating rows where any value in the row changed. This is decribed in detail in our documentation on [incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables).
 
 ### Handling NULLs
 
-Columns without native types are always `VARCHAR NOT NULL` this means you don't need to care about specific NULL behavior. This changes with typed columns. In most databases, NULL does not equal NULL (`NULL == NULL` is not `TRUE`, but `NULL`). This breaks the incremental loading flow where columns are compared against each other.
+Columns without native types are always `VARCHAR NOT NULL`. This means you don't need to care about a specific NULL behavior. This changes with typed columns. In most databases, NULL does not equal NULL (`NULL == NULL` is not `TRUE`, but `NULL`). This breaks the incremental loading flow where columns are compared against each other.
 
 For this reason, you need to make sure that your primary key columns are not nullable. This is most relevant in CTAS queries, where columns are nullable by default. To work around this, you can specify the columns as part of the CTAS expression. For example:
 
@@ -1107,13 +1107,13 @@ CREATE TABLE "ctas_table" (
 ) AS SELECT * FROM "typed_table";
 ```
 
-### Pros and cons
+### Pros and Cons
 
 - **Pros**
-  - load to workspace is significantly faster in comparison to table without native datatypes, because there is no need to cast the data when loading to workspace
-  - when table is accessed in workspace via [Read-only IM](https://help.keboola.com/transformations/workspace/#read-only-input-mapping) it already has typed columns
-  - data types are strictly enforced, so you can be sure your number column will contain only numbers for example
+  - Loading to a workspace is significantly faster in comparison to loading to a table without native datatypes. There is no need to cast the data when loading to a workspace.
+  - When a table is accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping), it already has typed columns.
+  - Data types are strictly enforced so you can be sure your number column will contain only numbers, for example.
 - **Cons**
-  - changing column type is complicated, see [Changing types of typed columns](#changing-types-of-typed-columns)
-  - Keboola won't do any type conversion when loading, so your data must match the type of column in the table in Storage exactly
-  - any load of data with incompatible types will fail
+  - Changing a column type is complicated, see [Changing Types of Typed Columns](#changing-types-of-typed-columns).
+  - Keboola won't do any type conversion when loading. Your data must match the type of column in the table in storage exactly.
+  - Any load of data with incompatible types will fail.
