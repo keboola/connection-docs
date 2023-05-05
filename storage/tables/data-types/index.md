@@ -1062,7 +1062,7 @@ An example of such a column definition in a table-definition API endpoint call i
 
 #### Using Keboola-provided [BASE TYPES](#base-types)
 
-Using base types allows you to specify only the general type of a column. It is supported across various storage backends. For that reason, it's ideal for components that are storage backend agnostic. However, it can be used for the table-definition API endpoint as well. The definition is as follows:
+Specifying native types using [BASETYPES](#base-types) is ideal for component provided types as they are storage backend agnostic. However, they can be used for the table-definition API endpoint as well. The definition is as follows:
 
 ```json
 {
