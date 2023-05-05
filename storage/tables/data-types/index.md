@@ -1095,9 +1095,24 @@ When you load data incrementally, there is a difference between typed and non-ty
 ### Handling NULLs
 
 Columns without native types are always `VARCHAR NOT NULL`. This means you don't need to care about a specific NULL behavior. This changes with typed columns. In most databases, NULL does not equal NULL (`NULL == NULL` is not `TRUE`, but `NULL`). This breaks the incremental loading flow where columns are compared against each other.
-A table accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping) already has typed columns.
-  - Data types are strictly enforced, so you can be sure your number column will contain only numbers, for example.
+
+For this reason, you need to make sure that your primary key columns are not nullable. This is most relevant in CTAS queries, where columns are nullable by default. To work around this, you can specify the columns as part of the CTAS expression. For example:
+
+```sql
+CREATE TABLE "ctas_table" (
+    "id" NUMBER NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMP_NTZ NOT NULL
+) AS SELECT * FROM "typed_table";
+```
+
+### Pros and Cons
+
+- **Pros**
+  - Loading to a workspace is significantly faster in comparison to loading to a table without native datatypes. There is no need to cast the data when loading to a workspace.
+  - When a table is accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping), it already has typed columns.
+  - Data types are strictly enforced so you can be sure your number column will contain only numbers, for example.
 - **Cons**
-  - Changing a column type is complicated; see [Changing Types of Typed Columns](#changing-types-of-typed-columns).
-  - Keboola won't do any type conversion when loading. Your data must match the column type in the table in storage exactly.
+  - Changing a column type is complicated, see [Changing Types of Typed Columns](#changing-types-of-exising-typed-columns).
+  - Keboola won't do any type conversion when loading. Your data must match the type of column in the table in storage exactly.
   - Any load of data with incompatible types will fail.
