@@ -20,11 +20,11 @@ The basic idea behind this is that a text type has the best interoperability, so
 date values stored in a MySQL database might not be accepted by a Snowflake database and vice-versa). 
 
 ## Base Types
-Source data types are mapped to a destination using a **Base Type**. The current base types are
+Source data types are mapped to a destination using a **base type**. The current base types are
 [`STRING`](#string), [`INTEGER`](#integer), [`NUMERIC`](#numeric), [`FLOAT`](#float), [`BOOLEAN`](#boolean), 
 [`DATE`](#date), and [`TIMESTAMP`](#timestamp). This means that, for example, a MySQL extractor
-may store the value `BIGINT` as a type of column; that type maps to the `INTEGER` general type. When the Snowflake writer consumes this value, it will
-read the general type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
+may store the value `BIGINT` as a type of column; that type maps to the `INTEGER` base type. When the Snowflake writer consumes this value, it will
+read the base type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
 This ensures high interoperability between the components. Please take a look at the [conversion table below](#data-type-conversions).
 
 View the extracted data types in the [storage table](/storage/tables/) detail:
@@ -996,7 +996,7 @@ The `TIMESTAMP` base type represents a date value with a time portion.
 
 Specific behavior depends on the [backend of your project](/storage/#storage-data). We'll be using the Snowflake backend as an example.
 
-As mentioned above, Keboola stores data in storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual datatype (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata. 
+As mentioned above, Keboola stores data in Storage as text (`VARCHAR NOT NULL`) by default. With native types, data is stored in columns with an actual data type (`DATETIME`, `BOOLEAN`, `DOUBLE`, etc.) based on Keboola metadata. 
 
 Tables with native data types are labeled in the user interface with a badge:
 
@@ -1007,11 +1007,11 @@ Tables with native data types are labeled in the user interface with a badge:
 
 #### Manually via an API
 
-A table with a type definition is created using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), and data is loaded into it. Data types used in this endpoint have to correspond with the storage backend which your project uses. Alternatively, you can use [BASETYPES](#base-types).
+A table with a type definition is created using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), and data is loaded into it. Data types used in this endpoint have to correspond with the storage backend which your project uses. Alternatively, you can use [base types](#base-types).
 
 #### Output mapping of a component
 
-A component may provide information about column data types in its data manifest. Database extractors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database extractors and transformations that do NOT match the backend will create storage tables using [BASETYPES](#base-types). 
+A component may provide information about column data types in its data manifest. Database extractors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database extractors and transformations that do NOT match the backend will create storage tables using [base types](#base-types). 
 
 For example, this is how you can create typed tables in a Snowflake SQL transformation that will be imported to storage as typed tables: 
 
@@ -1038,13 +1038,13 @@ FROM
     "typed_table";
 ```
 
-***Note:** The data type hinting is the components' responsibility, so components must be updated by their respective authors to support this. The database extractors that are maintained by Keboola already provide datatypes.  There is no list of components that support this feature. You may check the component's documentation to see if it supports native data types.* 
+***Note:** The data type hinting is the components' responsibility, so components must be updated by their respective authors to support this. The database extractors that are maintained by Keboola already provide data types. There is no list of components that support this feature. You may check the component's documentation to see if it supports native data types.* 
 
 ### How to Define Data Types
 
 #### Using actual data types of the storage backend
 
-For example, in the case of Snowflake, you can create a column of type `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This allows you to specify all the data type details, including precision and scale, for instance. But it's tied to the specific storage backend, and thus it's not portable.
+For example, in the case of Snowflake, you can create a column of type `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This allows you to specify all the data type details, for instance, including precision and scale. But it's tied to the specific storage backend, and thus it's not portable.
 
 An example of such a column definition in a table-definition API endpoint call is as follows:
 
@@ -1060,9 +1060,9 @@ An example of such a column definition in a table-definition API endpoint call i
 }
 ```
 
-#### Using Keboola-provided [BASE TYPES](#base-types)
+#### Using Keboola-provided [base types](#base-types)
 
-Specifying native types using [BASETYPES](#base-types) is ideal for component provided types as they are storage backend agnostic. However, they can be used for the table-definition API endpoint as well. The definition is as follows:
+Specifying native types using [base types](#base-types) is ideal for component-provided types as they are storage backend agnostic. However, they can be used for the table-definition API endpoint as well. The definition is as follows:
 
 ```json
 {
@@ -1086,7 +1086,7 @@ If the table is loaded incrementally, you must create a new column and copy the 
 * Then you can slowly change all the places where `date` is used to use `date_timestamp` instead.
 * When you only use the new column, the old one can be removed.
 
-In both cases, check all the other configurations using the table so that you don't get any schema mismatch. This is especially important for data destination components (writers), where there is already an existing table in the destination.
+In both cases, check all the other configurations using the table to avoid any schema mismatch. This is especially important for data destination components (writers), where a table exists in the destination.
 
 ### Incremental Loading
 
@@ -1096,12 +1096,12 @@ When you load data incrementally, there is a difference between typed and non-ty
 
 Columns without native types are always `VARCHAR NOT NULL`. This means you don't need to care about a specific NULL behavior. This changes with typed columns. In most databases, NULL does not equal NULL (`NULL == NULL` is not `TRUE`, but `NULL`). This breaks the incremental loading flow where columns are compared against each other.
 
-For this reason, you need to make sure that your primary key columns are not nullable. This is most relevant in CTAS queries, where columns are nullable by default. To work around this, you can specify the columns as part of the CTAS expression. For example:
+For this reason, please make sure that your primary key columns are not nullable. This is most relevant in CTAS queries, where columns are nullable by default. To work around this, specify the columns as part of the CTAS expression. For example:
 
 ```sql
 CREATE TABLE "ctas_table" (
     "id" NUMBER NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
+    "nYou don't need to just cast NOT NULL,
     "created_at" TIMESTAMP_NTZ NOT NULL
 ) AS SELECT * FROM "typed_table";
 ```
@@ -1109,10 +1109,10 @@ CREATE TABLE "ctas_table" (
 ### Pros and Cons
 
 - **Pros**
-  - Loading to a workspace is significantly faster in comparison to loading to a table without native datatypes. There is no need to cast the data when loading to a workspace.
-  - When a table is accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping), it already has typed columns.
-  - Data types are strictly enforced so you can be sure your number column will contain only numbers, for example.
+  - Loading to a workspace is significantly faster than loading to a table without native data types. You don't need just to cast the data when loading to a workspace.
+  - A table accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping) already has typed columns.
+  - Data types are strictly enforced, so you can be sure your number column will contain only numbers, for example.
 - **Cons**
-  - Changing a column type is complicated, see [Changing Types of Typed Columns](#changing-types-of-exising-typed-columns).
-  - Keboola won't do any type conversion when loading. Your data must match the type of column in the table in storage exactly.
+  - Changing a column type is complicated; see [Changing Types of Typed Columns](#changing-types-of-exising-typed-columns).
+  - Keboola won't do any type conversion when loading. Your data must match the column type in the table in Storage exactly.
   - Any load of data with incompatible types will fail.
