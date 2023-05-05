@@ -1087,7 +1087,7 @@ If the table is loaded incrementally, you have to create a new column and copy t
 * Then you can slowly change all the places where `date` is used to use `date_timestamp` instead.
 * When you only use the new column, the old one can be removed.
 
-In both cases, make sure to check all the downstream configurations so that you don't get any schema mismatch. This is especially important for data destinations, where there is already an existing table in the destination.
+In both cases, make sure to check all the downstream configurations so that you don't get any schema mismatch. This is especially important for data destination components (writers), where there is already an existing table in the destination.
 
 ### Incremental Loading
 
