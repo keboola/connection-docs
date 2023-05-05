@@ -1101,7 +1101,7 @@ For this reason, please make sure that your primary key columns are not nullable
 ```sql
 CREATE TABLE "ctas_table" (
     "id" NUMBER NOT NULL,
-    "nYou don't need to just cast NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
     "created_at" TIMESTAMP_NTZ NOT NULL
 ) AS SELECT * FROM "typed_table";
 ```
