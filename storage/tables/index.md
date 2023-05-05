@@ -187,15 +187,9 @@ is not defined and an incremental load is used, it simply appends the data to th
 
 #### Difference between tables with [native datatypes](/storage/tables/data-types/#native-datatypes) and string tables
 
-There is significant change when loading incrementally into table with native datatypes on. If table doesn't have native
-datatypes during incremental load, the `_timestamp` column is updated based on the primary key only when any value in
-the row is changed.
-In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported.
-This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with
+There is significant change when loading incrementally into table with native datatypes on. If table doesn't have native datatypes during incremental load, the `_timestamp` column is updated based on the primary key only when any value in the row is changed. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are considered as new rows. 
 
-duplicate primary keys are imported into tables with native types, they are considered as new rows.
-
-Example:
+**Example:**
 
 - Keboola Storage table newly created at **Tue Nov 22 2022 15:37:19 GMT+0000 (1669131439)**
 
@@ -213,7 +207,7 @@ Example:
 | new row => | 5  | Andy | AB-CF-48 | 7081  | 2003-07-05 |
 | new row => | 6  | Beth | HH-FR-14 | 7541  | 2002-04-01 |
 
-- Result of inc import A1
+- Result of incremental import A1
 
 |                                   |ID|NAME|SKU|VALUE|DATE| _timestamp     |
 |-----------------------------------|---|---|---|---|---|----------------|
@@ -231,11 +225,9 @@ Example:
 | existing row, no new values =>   |5|Andy|AB-CF-48|7081|2003-07-05|
 | new row =>                       |7|Edith|ED-BT-13|9471|1996-12-18|
 
-- Result of inc import A2
+- Result of incremental import A2
 
-**Here we can see a significant change in the incremental load, the `_timestamp` column is updated for row id:5, this would not happen
-
-for tables without native types**.
+Here we can see a **significant change in the incremental load**. The `_timestamp` column is updated for row `id:5`. For tables without native types, the row would not have the new value of `_timestamp`.
 
 |                                      |ID|NAME|SKU|VALUE|DATE| _timestamp     |
 |--------------------------------------|---|---|---|---|---|----------------|
@@ -257,10 +249,9 @@ for tables without native types**.
 | new row =>                      |9|Josh|BA-AB-11| 6624           |2004-10-04|
 | new row =>                      |10|Arthur|EE-FF-66| 596	2021-04-06 |
 
-- Result of inc import A3
+- Result of incremental import A3
 
-- **Here we can see another change that occurs only for tables with native types: the `_timestamp` column for row id:7 is
-but there was no change in it**.
+- Here we can see **another change that occurs only for tables with native types**. The `_timestamp` column for row `id:7` is updated but there was no change in it.
 
 |                                      | ID |NAME|SKU| VALUE    |DATE| _timestamp     |
 |--------------------------------------|-|---|---|----------|---|----------------|
@@ -268,7 +259,7 @@ but there was no change in it**.
 |                                      |2|Jack|CE-CA-22| 3544     |2012-10-14| 1669131439     |
 |                                      |3|Jim|ED-BT-13| 5262     |2001-04-20| 1669131439     |
 |                                      |4|Jil|BA-AB-11| 5278     |2014-12-14| 1669131439     |
-| updating row = new _timestamp =>     |5|Andy|AB-CF-48| **6081** |2003-07-05| 1669221874     |
+| updating row = new _timestamp =>     |5|Andy|AB-CF-48| **6081** |2003-07-05| **1669221874** |
 |                                      |6| Beth |HH-FR-14| 7541     |2002-04-01| 1669221680     |
 | **updating row = new _timestamp =>** |7|Edith|ED-BT-13| 9471     |1996-12-18| **1669221874** |
 | added row = new _timestamp =>        |8|Kate|CD-CZ-01| 5282     |2008-06-07| **1669221874** |
