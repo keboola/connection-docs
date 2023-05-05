@@ -1114,6 +1114,6 @@ CREATE TABLE "ctas_table" (
   - When a table is accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping), it already has typed columns.
   - Data types are strictly enforced so you can be sure your number column will contain only numbers, for example.
 - **Cons**
-  - Changing a column type is complicated, see [Changing Types of Typed Columns](#changing-types-of-typed-columns).
+  - Changing a column type is complicated, see [Changing Types of Typed Columns](#changing-types-of-exising-typed-columns).
   - Keboola won't do any type conversion when loading. Your data must match the type of column in the table in storage exactly.
   - Any load of data with incompatible types will fail.
