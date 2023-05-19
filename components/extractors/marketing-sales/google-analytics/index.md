@@ -130,8 +130,7 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
     {: .image-popup}
     ![Screenshot - Google API Console - Project](/components/extractors/marketing-sales/google-analytics/google_console_project.png)
 
-3. Enable the [**Google Analytics Reporting API**](https://console.developers.google.com/apis/library/analyticsreporting.googleapis.com). 
-If you plan to use the [Multi-Channel Funnels API](https://developers.google.com/analytics/devguides/reporting/mcf/v3) or [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1), you also need to enable **[Google Analytcics API](https://console.developers.google.com/apis/library/analytics.googleapis.com)**.
+3. Enable the [Google Analytics Data API](https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com) and [Google Analytics Admin API](https://console.cloud.google.com/apis/library/analyticsadmin.googleapis.com) if you plan to use [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1) or enable the [Google Analytics Reporting API](https://console.developers.google.com/apis/library/analyticsreporting.googleapis.com) if you plan to use the [Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v4) or [Multi-Channel Funnels API](https://developers.google.com/analytics/devguides/reporting/mcf/v3). You also need to enable [Google Analytcics API](https://console.developers.google.com/apis/library/analytics.googleapis.com).
  
     {: .image-popup}
     ![Screenshot - Google API Console - Enable API](/components/extractors/marketing-sales/google-analytics/google_console_enable.png)
