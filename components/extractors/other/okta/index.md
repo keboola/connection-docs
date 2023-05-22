@@ -35,4 +35,3 @@ You can find out how to obtain the API token in [Okta docs](https://developer.ok
  - **Load Type** (load_type) - [REQ] If Full load is used, the destination table will be overwritten every run. If incremental load is used, data will be upserted into the destination table. Tables with a primary key will have rows updated, tables without a primary key will have rows appended.
 
 When done, **save** the configuration. 
-
