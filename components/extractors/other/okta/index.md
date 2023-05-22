@@ -25,7 +25,7 @@ You can find out how to obtain the API token in [Okta docs](https://developer.ok
 ## General Configuration
  - **Organization url** (org_url) - [REQ] Example: keboola.okta.com
  - **API Token** (#api_token) - [REQ] API Key to Authenticate the connection with Octa.
-myd
+
 
 ## Row Configuration
  - **Endpoint** (endpoint) - [REQ] Endpoint of Octa from which data will be fetched.
