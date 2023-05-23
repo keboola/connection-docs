@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The MongoDB extractor allows you to fetch data from the NoSQL [MongoDB database](https://www.mongodb.com/).
+The MongoDB extractor allows you to fetch data from the NoSQL [MongoDB database](https://www.mongodb.com/). Supported MongoDB versions are from 4.4 to latest (6.0). 4.2 could work also, but not guaranteed. Lower version are not supported by version of mongoexport.
 Complete the following steps to configure it.
 
 ## Set Up Database Credentials

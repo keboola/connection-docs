@@ -244,6 +244,11 @@ SELECT
 
 {% endhighlight %}
 
-## Bucket objects for Read-only input mapping
+## Bucket Objects for Read-Only Input Mapping
 
+For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
 Buckets in Snowflake are represented by schemas. You can find all available schemas for your account by calling `SHOW SCHEMAS IN ACCOUNT;`. Each schema represents a bucket.
+However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema.
+For a linked bucket, the schema is available in another database. That is, to access this linked bucket you have to include the database name of the project from which the bucket is linked. 
+For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. 
+When developing the transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the database to find the correct database and schema names. 

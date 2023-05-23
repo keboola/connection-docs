@@ -126,6 +126,9 @@ items:
               - url: /components/extractors/marketing-sales/babelforce/
                 title: Babelforce
 
+              - url: /components/extractors/marketing-sales/bigcommerce/
+                title: BigCommerce
+
               - url: /components/extractors/marketing-sales/criteo/
                 title: Criteo
 
@@ -147,11 +150,20 @@ items:
               - url: /components/extractors/marketing-sales/google-analytics/
                 title: Google Analytics
 
+              - url: /components/extractors/marketing-sales/linkedin-pages/
+                title: Linkedin Pages              
+
               - url: /components/extractors/marketing-sales/mailchimp/
                 title: Mailchimp
 
               - url: /components/extractors/marketing-sales/market-vision/
                 title: Market Vision
+              
+              - url: /components/extractors/marketing-sales/bing-ads/
+                title: Microsoft Advertising (Bing Ads)
+                items:
+                  - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
+                    title: Columns and primary keys of report presets
 
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
@@ -246,11 +258,17 @@ items:
               - url: /components/extractors/other/pingdom/
                 title: Pingdom
 
+              - url: /components/extractors/other/servicenow/
+                title: ServiceNow
+
               - url: /components/extractors/other/stripe/
                 title: Stripe
 
               - url: /components/extractors/other/telemetry-data/
                 title: Telemetry Data
+
+              - url: /components/extractors/other/time-doctor-2
+                title: Time Doctor 2
 
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
@@ -359,6 +377,12 @@ items:
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
                 title: Deepnote Notebook Execution Trigger
+          - url: /components/applications/ai/
+            title: AI
+            items:
+              - url: /components/applications/ai/open-ai/
+                title: OpenAI
+        
 
       - url: /components/branches/
         title: Development Branches
@@ -371,16 +395,31 @@ items:
     items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
+      
+      - url: /templates/customer-relationship-management/
+        title: Customer Relationship Management
         
       - url: /templates/datahub/
         title: DataHub
+      
+      - url: /templates/data-quality/
+        title: Data Quality
         
       - url: /templates/ecommerce/
         title: eCommerce
       
       - url: /templates/google-analytics/
         title: Google Analytics
+      
+      - url: /templates/project-management/
+        title: Project Management
+            
+      - url: /templates/repository/
+        title: Repository
         
+      - url: /templates/surveys/
+        title: Surveys
+              
   - url: /catalog/
     title: Data Catalog
     items:
@@ -413,6 +452,9 @@ items:
 
       - url: /storage/jobs/
         title: Jobs
+
+      - url: /storage/byodb/
+        title: Bring Your Own Database
 
   - url: /orchestrator/
     title: Orchestrations

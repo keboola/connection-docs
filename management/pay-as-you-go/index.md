@@ -11,11 +11,12 @@ You can now start working with Keboola for free. Simply [sign up](https://connec
 ## Free Plan Limits
 Free Plan projects have the following limits:
 
+- **Azure North Europe**: Project is located in Europe, deployed in Microsoft Azure cloud. Read more about stack [here](/overview/#stacks).
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to [SQL](/transformations/snowflake-plain/) and [Python](/transformations/python-plain/).
 - **DataScience:** training and deploying [ML models](transformations/ml-model-deployment/) is not available.
-- **Dynamic backend scaling:** possibility to choose the [backend size] (/transformations/snowflake-plain/) for each transformation is not available. 
+- **Dynamic backend scaling:** possibility to choose the [backend size](/transformations/snowflake-plain/) for each transformation is not available. 
 - **Performance:** is limited to an xsmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
 - **Storage:** is limited to 250 GB of data storage.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
@@ -24,7 +25,7 @@ Free Plan projects have the following limits:
 Users can choose between a Keboola-managed backend or their own Snowflake backend.
 
 ## Pricing & Purchasing Aditional Minutes
-Each Free Plan project receives 300 minutes of free runtime per month. Minutes are used for running of any process 
+Each Free Plan project receives 60 minutes of free runtime per month. Minutes are used for running of any process 
 (a component job, an active Python workspace, SQL queries in Keboola-managed DWH, etc.). The only exception are orchestration jobs,
 which are not consuming any minutes. 
 

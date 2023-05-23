@@ -14,10 +14,10 @@ After all the necessary tasks are performed on the data, you can transform the r
 
 **The flow, in a nutshell:**
 
-- First, the Google Analytics source component will collect data from your Google Analytics account, and the Google Search Console source component (if selected) 
+- First, the Google Analytics source component (extractor) will collect data from your Google Analytics account, and the Google Search Console source component (if selected) 
 will get your Google Search Console data.
 
-- Then we will put your data into the requested shape, and the Snowflake destination component will load the results into a Snowflake database.
+- Then we will put your data into the requested shape, and the Snowflake destination component (writer) will load the results into a Snowflake database.
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
 The Google Analytics or Google Search Console source components (if selected), all data manipulations, and the Snowflake destination component, will be processed.
@@ -28,7 +28,7 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 {: .image-popup}
 ![Business Data Model](/templates/google-analytics/erd-google-analytics.png)
 
-### Table Description
+## Table Description
 
 | Name | Description |
 |---|---|
@@ -78,7 +78,7 @@ After clicking **Next Step**, you will see the template builder. Fill in all nee
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
-authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/templates/google-analytics/authorizing-destinations/) below.
+authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/google-analytics/#authorizing-data-destinations) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
