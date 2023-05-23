@@ -14,22 +14,13 @@ there are [four report types](https://ads.tiktok.com/marketing_api/docs?id=17388
 [Create a new configuration](/components/#creating-component-configuration) of the **TikTok Ads** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Ad Account you want to extract.
 
-{: .image-popup}
-![Screenshot - TikTok Auth](/components/extractors/marketing-sales/tiktok-ads/tiktok_auth.png)
-
-Once the component is authorized, click **Add Row** in order to create a new report to download.
-
-{: .image-popup}
-![Screenshot - TikTok Auth](/components/extractors/marketing-sales/tiktok-ads/tiktok_add_row.png)
+Once the component is authorized, click **Add Row** in order to create a new report to download. Each report you will download will be a [configuration row](https://help.keboola.com/components/#configuration-rows).
 
 Name the row with a descriptive name of the report and click **Create**.
 
-{: .image-popup}
-![Screenshot - TikTok Auth](/components/extractors/marketing-sales/tiktok-ads/tiktok_name_row.png)
-
 Once the new row configuration is created, you can start filling in the necessary fields. 
-First fill in the Advertiser ID field if you wish to only download data of specific Advertiser IDs. 
-Multiple Advertiser IDs should be input as a comma-separated list. If the Advertiser ID field is left empty, data of all Advertiser IDs will be downloaded.
+First fill in the Advertiser IDs field if you wish to only download data of specific Advertiser IDs. To load all the possible Advertiser IDs, click the **Re-load Advertiser IDs** button
+and select which ones you want to download data from. You can select multiple Advertiser IDs. If you leave the field empty, all Advertiser IDs will be downloaded.
 
 Fill in the report settings based on what you require from the report:
 * Select the report type from the list of available report types.
@@ -45,16 +36,10 @@ The exact descriptions of the four report types can be found in their correspond
 * [Playable Material report](https://ads.tiktok.com/marketing_api/docs?id=1738864940608513)
 * [Catalog report](https://ads.tiktok.com/marketing_api/docs?id=1738864960144385)
 
-{: .image-popup}
-![Screenshot - TikTok Auth](/components/extractors/marketing-sales/tiktok-ads/tiktok_report_settings_1.png)
-
-Finally, fill in the destination settings in the Destination section below the Report Settings section:
+Finally, fill in the destination settings in the Destination section below the Report settings section:
 * Fill in the name of the report in the Storage Table Name; this will be the name of the table you will see in Keboola storage.
 * Decide if you want to use incremental load or not. If incremental load is selected, the report data will append new data and update existing records in the table using a primary key (the dimensions columns).
 If incremental load is not selected, full load will be used. It will overwrite the table every run, if such a table already exists in storage.
-
-{: .image-popup}
-![Screenshot - TikTok Auth](/components/extractors/marketing-sales/tiktok-ads/tiktok_report_settings_2.png)
 
 Once all the settings are configured, click **Save** and run the configuration.
 
