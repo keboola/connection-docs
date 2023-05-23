@@ -27,4 +27,5 @@ Keboola Connection provides the following marketing and sales extractors:
 - [Salesforce](/components/extractors/marketing-sales/salesforce/). 
 - [Shoptet](/components/extractors/marketing-sales/shoptet/)
 - [Sklik](/components/extractors/marketing-sales/sklik/)
+- [TikTok Ads](/components/extractors/marketing-sales/tiktok-ads/)
 - And [more](https://components.keboola.com/components)

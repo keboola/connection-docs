@@ -177,6 +177,9 @@ items:
               - url: /components/extractors/marketing-sales/sklik/
                 title: Sklik
 
+              - url: /components/extractors/marketing-sales/tiktok-ads/
+                title: TikTok Ads
+
           - url: /components/extractors/social/
             title: Social
             items:
