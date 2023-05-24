@@ -66,6 +66,14 @@ install_version("data.table", "1.12.8")
 require(data.table)
 {% endhighlight %}
 
+If you need to load a package that is on Github, but not on CRAN, then you can use the devtools::install_github method
+
+{% highlight r %}
+library(devtools)
+install_github("myGithub/myRlib")
+library(myRlib)
+{% endhighlight %}
+
 ### CSV Format
 Tables from Storage are imported to the R script from CSV files. The CSV files can be read by standard R functions.
 Generally, the table can be read with default R settings. In case R gets confused, use the exact format
