@@ -18,7 +18,7 @@ Storage in Keboola Connection is organized in [buckets](/storage/buckets/). **Ex
 
 First, you need locate the source data in your warehouse. In Snowflake that means `database` and `schema` where the data resides. Then you need to register the schema as an external bucket in Keboola Connection. You can do that in the Storage section of the project. Click on the **Register External Data** button and select. Fill in the name of the new bucket, database name and schema name. Then continue to the next step, where we'll provide you with a guide on how to correctly grant Keboola access to the schema in Snowflake. Once you grant the access, click **Register bucket** and you can start using it.
 
-When a database schema is registered as external bucket we analyse the metadata of the schema and tabular data within and register all tables and views in the schema as tables in the bucket. If you later add additional objects to the schema, you need to manually refresh using the **Refresh** action in bucket detail to make them visible in Keboola Connection. 
+When a database schema is registered as external bucket we analyse the metadata of the schema and tabular data within and register all tables and views in the schema as tables in the bucket. If you later add additional objects to the schema, you need to manually refresh it using the **Refresh** action in bucket detail to make them visible in Keboola Connection. 
 
 ## How to use an external bucket
 
