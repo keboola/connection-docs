@@ -19,6 +19,10 @@ to successfully connect to your system. This applies to all components including
 fetch and process the [list of existing IP addresses in JSON format](/components/ip-addresses/kbc-public-ip.json).
 Below are listed the available [Keboola Connection Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
 
+For ease of identification, our outbound IP addresses on AWS stacks (except for legacy services) now have reverse DNS records. 
+Each IP addresses a unique name like `outbound-if-issue-contact-support-at-keboola-com.keboola.com`, embedding a reference for support email. 
+This enhancement aids in promptly tackling network issues or unauthorized access. 
+
 ## connection.keboola.com
 For projects in the default AWS US [region](/overview/#regions) (AWS region `us-east-1`), 
 the following IP addresses are currently used for all new projects:
