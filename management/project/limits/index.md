@@ -72,6 +72,8 @@ If you need more information, please contact your CSM.
 | Medium                                | 1 hour                  | **16**                |
 | Large                                 | 1 hour                  | **32**                |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
+| **DataApps (BETA)**                   |                         |                       |
+| Small                                 | 1 hour                  | **8**                 |
 
 **Types of backend sizes used for jobs**
 
@@ -79,7 +81,7 @@ If you need more information, please contact your CSM.
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
 | XSMALL (Python,R, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared        |
-| SMALL (Python,R, Components)          | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
+| SMALL (Python,R, Components, DataApp) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
 | MEDIUM (Python,R, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
 | LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated    |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
