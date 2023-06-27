@@ -46,14 +46,16 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 These data sources are available in Public Beta:
 
 - [Asana](https://asana.com/)
+- [Jira](https://www.atlassian.com/software/jira)
 
 ## Data Destinations
 These data destinations are available in Public Beta:
 
-- [Snowflake database provided by Keboola](https://help.keboola.com/components/writers/database/snowflake/)
-- [Snowflake database](https://www.snowflake.com/)
 - [Google BigQuery database](https://cloud.google.com/bigquery/) 
 - [Google Sheets](https://www.google.com/sheets/about/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Snowflake database](https://www.snowflake.com/)
+- [Snowflake database provided by Keboola](https://help.keboola.com/components/writers/database/snowflake/)
 
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
