@@ -1,5 +1,5 @@
 ---
-title: Google Analytics
+title: Google Analytics (UA, GA4)
 permalink: /components/extractors/marketing-sales/google-analytics/
 redirect_from:
     - /extractors/marketing-sales/google-analytics/
@@ -12,9 +12,11 @@ redirect_from:
 This extractor allows you to integrate your Google Analytics data into the Keboola Connection environment.
 To do that, you will need a [Google Analytics account](https://analytics.google.com/analytics/web/).
 
+**Note:** This component supports both Google Analytics 4 (GA4) and old Universal Analytics (UA).
+
 ## Features
-The Google Analytics extractor works with the newest version of the [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1) 
-and [Google Analytics Reporting API - V4](https://developers.google.com/analytics/devguides/reporting/core/v4/).
+The Google Analytics extractor works with the newest version of the [Google Analytics 4 (GA4)](https://developers.google.com/analytics/devguides/reporting/data/v1) (Google Analytics Data API)
+and [Universal Analytics](https://developers.google.com/analytics/devguides/reporting/core/v4/) (Google Analytics Reporting API - V4).
 
 These APIs provides the following key features:
 
@@ -29,7 +31,7 @@ These APIs provides the following key features:
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
-Select the desired Google Analytics account and profiles (Reporting API view) or properties (Data API view) from which you would like to extract data.
+Select the desired Google Analytics account and profiles (Reporting API view) or GA4 properties (Data API view) from which you would like to extract data.
 
 {: .image-popup}
 ![Screenshot - Intro Page](/components/extractors/marketing-sales/google-analytics/google-analytics-1.png)
