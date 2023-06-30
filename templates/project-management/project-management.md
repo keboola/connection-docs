@@ -104,6 +104,17 @@ Insert the Asana API Key. You can generate a personal access token from the Asan
 {: .image-popup}
 ![Asana Data Source](/templates/project-management/asana-data-source.png)
 
+### Jira
+To authorize the Jira data source, enter the following information:
+
+- A username to Atlassian Cloud; usually an email
+- An API token to Atlassian Cloud. The token can be generated in the Manage Your Account section.
+- The ID of the organization for which the data will be downloaded. It can be found in the first part of the URL, i.e., https://<organization_id>.atlassian.net.
+- The URL that will be used to download data from your organization.
+
+{: .image-popup}
+![Jira Data Source](/templates/project-management/jira-data-source.png)
+
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
 
@@ -126,22 +137,11 @@ Authorize your Google account.
 Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
 in your duplicated Google sheet. 
 
-### Snowflake Database Provided by Keboola
-
-If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
-
-1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
-3. Select **Keboola Snowflake database**. 
-4. Then go back to the flow and click **Run**. 
+### PostgreSQL Database
+If you want to use your own PostgreSQL database, you must provide the host name (account name), user name, password, database name, and a schema.
 
 {: .image-popup}
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions1.png)
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions2.png)
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions3.png)
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions4.png)
-
-Everything is set up.
+![PostgreSQL Data Destination](/templates/project-management/postgresql-data-destination.png)
 
 ### Snowflake Database
 
@@ -158,6 +158,23 @@ the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/man
 So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the destination component configuration.
 
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
+
+### Snowflake Database Provided by Keboola
+
+If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
+
+1. After clicking **Save**, the template will be used in your project. You will see a flow. 
+2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
+3. Select **Keboola Snowflake database**. 
+4. Then go back to the flow and click **Run**. 
+
+{: .image-popup}
+![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions1.png)
+![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions2.png)
+![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions3.png)
+![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions4.png)
+
+Everything is set up.
 
 ## Most Common Errors
 Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
