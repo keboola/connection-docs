@@ -36,7 +36,7 @@ organizations, projects, users, security events, and contract limits.
 This table shows snapshots of the buckets in Storage.
 
 | **Column** | **Description** | **Example** | 
-| `bucket_id` (PK) | Storage bucket identifier | `in.c-instagram` |
+| `bucket_id` (PK) | Storage bucket identifier | `1147628` |
 | `kbc_project_id` (PK) | Foreign key to a KBC project | `866_kbc-eu-central-1` |
 | `snapshot_date` (PK) | Date of the data snapshot | `2020-06-30` |
 | `stage` | Storage stage of the bucket | `in` |
@@ -54,10 +54,11 @@ This table shows main and development [branches](/components/branches/) in the p
 | `kbc_branch_id` (PK) | KBC Branch identifier | `3419_kbc-eu-central-1` |
 | `kbc_project_id` | Foreign key to a KBC project | `866_kbc-eu-central-1` |
 | `kbc_branch` | Name of the branch | `My dev branch` |
-| `kbc_branch_created_at` | Datetime of the branch creation | `2022-05-18T06:13:45Z` |
+| `kbc_branch_created_at` | Datetime of the branch creation | `2022-05-18 06:13:45` |
 | `is_default` | Determines if the branch is the main (default) branch (`true`, `false`) | `false` |
 | `token_id` | Identifier of the token that created this branch | `241247` |
 | `token_name` | Name of the token that created this branch | `martin.matejka@keboola.com` |
+| `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
 
 
 ### kbc_component_configuration
@@ -72,10 +73,13 @@ This table lists the [configurations of the components](/components/#creating-co
 | `kbc_component` | Name of the component | `Generic` |
 | `configuration_id_num` | Numeric identifier of the configuration | `610931033` |
 | `kbc_component_configuration` | Name of the configuration | `Sample data from Dynamics` |
+| `configuration_created` | Datetime of the configuration creation | `2022-07-20 18:45:17` |
 | `kbc_configuration_version` | Current version of the configuration | `5` |
 | `kbc_configuration_is_deleted` | Flag determining if the configuration is deleted (`true`, `false`) | `false` |
+| `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
 | `token_id` | Identifier of the token that created this version of the configuration | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `martin.matejka@keboola.com` |
+| `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
 
 
 ### kbc_component_configuration_version
@@ -91,6 +95,27 @@ of the component configuration.
 | `last_version` | Flag determining if this is the last version of the configuration (`true`, `false`) | `false` |
 | `token_id` | Identifier of the token that created this version of the configuration | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `martin.matejka@keboola.com` |
+| `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
+
+
+### kbc_component_configuration_row
+This table lists rows of the [configurations of the components](/components/#creating-component-configuration) 
+(e.g., a configuration of a single table of the Snowflake writer).
+
+| **Column** | **Description** | **Example** |  
+| `kbc_component_configuration_row_id` (PK) | Component configuration row identifier | `8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150` |
+| `kbc_component_configuration_id` | Foreign key to the KBC Component Configuration | `8765_kbc-us-east-1_keboola.ex-db-mysql_844500148` |
+| `kbc_project_id` | Foreign key to the KBC project | `8765_kbc-us-east-1` |
+| `kbc_component_id` | Identifier of the component | `keboola.ex-db-mysql_kbc-us-east-1` |
+| `configuration_row_id_num` | Numeric identifier of the configuration row | `844500150` |
+| `kbc_component_configuration_row` | Name of the configuration row | `test_view` |
+| `configuration_row_created` | Datetime of the configuration row creation | `2022-04-25 11:59:42` |
+| `kbc_configuration_row_version` | Current version of the configuration row | `1` |
+| `kbc_configuration_is_disabled` | Flag determining if the configuration is disabled (`true`, `false`) | `false` |
+| `configuration_row_json` | Complete JSON configuration row of the component | `{"parameters":{"incremental":false}}` |
+| `token_id` | Identifier of the token that created this version of the configuration row | `241247` |
+| `token_name` | Name of the token that created this version of the configuration | `martin.matejka@keboola.com` |
+| `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
 
 
 ### kbc_data_science_sandbox
@@ -135,6 +160,7 @@ This table lists the Keboola Connection [jobs](/management/jobs/)
 | `job_run_type` | Determines if the job was run by an orchestration or manually (`orchestration`, `manual`) | `orchestration` |
 | `token_id` | Identifier of the token that ran this job | `145062` |
 | `token_name` | Name of the token that ran this job | `Orchestrator GDrive` |
+| `kbc_token_id` | Unique identifier of the token containing stack identification | `145062_kbc-eu-central-1` |
 | `job_time_credits_used` | Number of the time credits consumed by the job | `0.001218890000` |
 | `job_billed_credits_used` | Number of the actually billed credits | `0.001218890000` |
 | `job_total_time_sec` | Total time of the job in seconds (since the job’s initial trigger; its start might be delayed) | `63` |
@@ -234,6 +260,7 @@ This table shows [Storage table](/storage/tables/) snapshots.
 | `table_id` (PK) | Storage table identifier | `in.c-GDU_Management.status` |
 | `kbc_project_id` (PK) | Foreign key to the KBC project | `239_kbc-eu-central-1` |
 | `snapshot_date` (PK) | Date of the data snapshot | `2020-07-02` |
+| `bucket_id` | Foreign key to the KBC Bucket | `1695` |
 | `created` | Datetime the table was created | `2020-07-02 08:27:03` |
 | `last_import` | Datetime of the last import to the table | `2020-07-02 08:33:39` |
 | `table_name` | Name of the Storage table | `status` |
@@ -301,6 +328,7 @@ organization, or to the Keboola Connection platform itself.
 | `operation_params` | Additional operation parameters. Possible values are listed in the table [Operation parameters](#operation-parameters) below. | `password` |
 | `token_id` | Token identifier if it’s a part of the event (e.g., token creation) | `47949` |
 | `token_description` | Token description if it’s a part of the event (e.g., token creation) | `token for linking shared bucket to project` |
+| `kbc_token_id` | Unique identifier of the token containing stack identification | `47949_kbc-us-east-1` |
 | `context_admin_email` | Email of the user in the context with the event (e.g., invitation or admin removal) | `martin.matejka@keboola.com` |
 | `context_admin_name` | Name of the user in the context with the event (e.g., invitation or admin removal) | `Martin Matejka` |
 
