@@ -151,14 +151,14 @@ items:
                 title: Google Analytics  (UA, GA4)
 
               - url: /components/extractors/marketing-sales/linkedin-pages/
-                title: Linkedin Pages              
+                title: Linkedin Pages
 
               - url: /components/extractors/marketing-sales/mailchimp/
                 title: Mailchimp
 
               - url: /components/extractors/marketing-sales/market-vision/
                 title: Market Vision
-              
+
               - url: /components/extractors/marketing-sales/bing-ads/
                 title: Microsoft Advertising (Bing Ads)
                 items:
@@ -382,53 +382,55 @@ items:
             items:
               - url: /components/applications/ai/open-ai/
                 title: OpenAI
-        
+
+      - url: /components/data-apps/
+        title: Data Apps
 
       - url: /components/branches/
         title: Development Branches
 
       - url: /components/ip-addresses/
         title: IP Addresses
-  
+
   - url: /templates/
     title: Templates
     items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
-      
+
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
-        
+
       - url: /templates/datahub/
         title: DataHub
-      
+
       - url: /templates/data-quality/
         title: Data Quality
-        
+
       - url: /templates/ecommerce/
         title: eCommerce
-      
+
       - url: /templates/google-analytics/
         title: Google Analytics
-      
+
       - url: /templates/project-management/
         title: Project Management
-            
+
       - url: /templates/repository/
         title: Repository
-            
+
       - url: /templates/social-media-engagement/
         title: Social Media Engagement
-        
+
       - url: /templates/surveys/
         title: Surveys
-              
+
   - url: /catalog/
     title: Data Catalog
     items:
       - url: /catalog/multi-project/
         title: Multi-Project Architecture
-  
+
   - url: /storage/
     title: Storage
     items:

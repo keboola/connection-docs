@@ -70,6 +70,12 @@ to bring in additional data.
 [Writers](/components/writers/) are components delivering output data from Keboola Connection into the systems 
 and applications where the data gets used/consumed. These can be commonly used [relational databases](/components/writers/database/) or various [BI, reporting and analytics](/components/writers/bi-tools/) tools.
 
+### Data Apps
+[Data Apps](/components/data-apps/) are simple, interactive web applications that use data to deliver insight or automatically take action.
+This type of application is usually custom tailored to tackle a specific problem and entails a dynamic, purpose-built user experience.
+Some examples of data apps could be recommendation engines, interactive segmentation, AI integration, data visualization,
+customized internal reporting tools for business teams, financial app to get insights on your spend patterns etc.
+
 ### Data Consumption
 *Data Consumption* is represented by 3rd party systems that accept (or extract) data from Keboola Connection and use it further.
 These may be business intelligence analytics or visualization systems, but also e-mail marketing, CRM,
