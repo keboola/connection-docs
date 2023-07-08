@@ -90,7 +90,7 @@ must set these options:
   all the data has been processed and is available. If checked and the requested data are (partially) incomplete or
   unavailable, an error will be raised.
 - **Columns** (columns) – List of columns to use for the report. To reload the list of columns available for the
-  selected report, click the `RE-LOAD AVAILABLE COLUMNS` button.
+  selected report, click the **Re-Load Available Columns** button.
 - **Primary Key Columns** (primary_key) – List of columns to be used as the primary key. The list will contain only columns
   that have been selected in the `columns` field. We recommend using dimension columns only and using ID columns
   where possible to avoid ambiguity in case the dimension name is changed.
@@ -124,7 +124,7 @@ may be more convenient to include entity related columns in the report itself.
 To download entities, select `Entity` **Object Type** and configure the following options:
 
 - **Entities** – List of entities (or rather entity types) to download. To load a full list of entities available, click
-  the `RE-LOAD AVAILABLE ENTITIES` button. Currently, only the extraction of entities within the `EntityData` data scope
+  the **Re-Load Available Entities** button. Currently, only the extraction of entities within the `EntityData` data scope
   is supported. More information is available in
   the [official documentation](https://learn.microsoft.com/en-us/advertising/bulk-service/downloadentity?view=bingads-13#values)
   .
