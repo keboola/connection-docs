@@ -3,8 +3,7 @@ title: Data Apps
 permalink: /components/data-apps/
 ---
 
-{% include warning.html content="This feature is in public BETA. All Data Apps are terminated on midnight. <br /> 
-Please provide feedback using the feedback button in your project." %}
+{% include warning.html content="This feature is in public BETA. All Data Apps are terminated on midnight." %}
 
 * TOC
 {:toc}
@@ -33,7 +32,7 @@ There are two ways how to create a Data App in Keboola. Choose deployment type w
 
 ### Code
 For a simple use-cases, where your Streamlit code fits into a one page, paste the code directly into a textarea. 
-Ideal for very simple apps or testing things. Try it immediately with [this example from Streamlit docs](- https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
+Ideal for very simple apps or testing things. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/45663441) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
 {: .image-popup}
 ![Code - code](/components/data-apps/data apps - hello world - code.png)
@@ -45,7 +44,7 @@ To use additional packages, which are not already in our [Streamlit Base Image](
 ![Packages](/components/data-apps/data apps - packages.png)
 
 ### Git repository
-{% include warning.html content="In BETA we only support Github repositories." %}
+{% include warning.html content="In BETA we only support Github repositories. <br />Also, we only support MAIN as the main branch, not MASTER." %}
 
 Please provide feedback using the feedback button in your project." %}
 If you have a complex application, you can push your app sources into Github and link the repository in this section.
@@ -62,15 +61,24 @@ These secrets will be injected into the secrets.toml file upon deployment of the
 {: .image-popup}
 ![Secrets](/components/data-apps/data apps - secrets.png)
 
-## Data loading
+## Loading data from Storage
 To load Data into the app, you can either use [Input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section, which will load data from Keboola project Storage into the app.
+Just select your table into input mapping section and navigate to that by /data/in/table/your_data.csv or /data/in/files/fileID_FileName.* in your code.
 (Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.)
+<br />
 Or you can use [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
+See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
+
+## Writing back to Storage
+For writing data back to Keboola Project Storage, use our [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).
 See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App management
 
 {% include warning.html content="Once the Data App is deployed it's url will be publicly available! Keboola does not provide authorization to Data Apps out of the box yet." %}
+
+### Authorization
+We recommend implementing some sort of authorization into your app. You can use for example Streamlit authenticator. Check out [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
 
 ### Base Image
 When the app is deployed, the code specified in one of the deployment method will be injected into our [base Streamlit docker image](https://github.com/keboola/sandbox-streamlit/blob/main/Dockerfile). 
@@ -92,6 +100,12 @@ For example a conflict of the specified packages:
 ![Secrets](/components/data-apps/data apps - job error log.png)
 
 ## Example Data Apps
+
+### Titanic Demo App
+Author: Monika Feigler
+
+Take a look at our demo data app to see how to create a data app with Streamlit Python code and how to incorporate data and files from an input mapping into your code. This data app allows users to explore and analyze the Titanic dataset using interactive visualizations and filters.
+- [configuration](https://demo.keboola.com/app/data-apps/45663441)
 
 ### Customer Segmentation
 Author: Kritiga Ravishankar
