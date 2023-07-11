@@ -28,20 +28,20 @@ There are two ways to create a data app in Keboola Connection. Select a deployme
 - **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications.
 
 {: .image-popup}
-![Code - main menu](/components/data-apps/data apps - main menu.png)
+![Code - main menu](/components/data-apps/data_apps-main_menu.png)
 
 ### Code
 For simple use cases, where your Streamlit code fits into one page, paste the code directly into a text area. 
 This deployment type is ideal for very simple apps or for testing. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/45663441) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
 {: .image-popup}
-![Code - code](/components/data-apps/data apps - hello world - code.png)
+![Code - code](/components/data-apps/data_apps-hello_world-code.png)
 
 #### Packages
 To use additional packages that are not already in our [Streamlit Base Image](#base-image), enter them into the field Packages.
 
 {: .image-popup}
-![Packages](/components/data-apps/data apps - packages.png)
+![Packages](/components/data-apps/data_apps-packages.png)
 
 ### Git Repository
 **Warning:** In BETA, we only support GitHub repositories. Also, we only support MAIN as the main branch, not MASTER.
@@ -51,7 +51,7 @@ If you have a complex application, push your app sources into GitHub and link th
 Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
 {: .image-popup}
-![Git repository](/components/data-apps/data apps - git repository.png)
+![Git repository](/components/data-apps/data_apps-git_repository.png)
 
 ## Secrets
 To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key value pairs in the section Secrets.
@@ -59,7 +59,7 @@ These secrets will be injected into the secrets.toml file upon deployment of the
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
 {: .image-popup}
-![Secrets](/components/data-apps/data apps - secrets.png)
+![Secrets](/components/data-apps/data_apps-secrets.png)
 
 ## Loading Data from Storage
 To load data from the storage of a Keboola Connection project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
@@ -84,6 +84,8 @@ When the app is deployed, the code specified in one of the deployment methods wi
 This image already has Streamlit and a few other basic packages pre-installed.
 
 ### Actions Menu
+{: .image-popup}
+![Secrets](/components/data-apps/data_apps-manage-redeploy.png)
 
 - **Deploy Data App** – starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
 - **Open Data App** – opens a new window with your data app.
@@ -96,7 +98,7 @@ If the data app's deployment job fails, you can see the logs from its container 
 For example, a conflict of the specified packages:
 
 {: .image-popup}
-![Secrets](/components/data-apps/data apps - job error log.png)
+![Secrets](/components/data-apps/data_apps-job_error_log.png)
 
 ## Example Data Apps
 
