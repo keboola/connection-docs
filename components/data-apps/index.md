@@ -3,27 +3,27 @@ title: Data Apps
 permalink: /components/data-apps/
 ---
 
-{% include warning.html content="This feature is in public beta. All Data Apps are terminated at midnight." %}
-
 * TOC
 {:toc}
+
+{% include warning.html content="This feature is in public beta. All data apps are terminated at midnight." %}
 
 ## Overview
 Data apps are simple, interactive web applications that use data to deliver insight or automatically take action.
 They are usually custom-tailored to tackle a specific problem and enable a dynamic, purpose-built user experience.
 
-Some examples of data apps could be recommendation engines, interactive segmentation, AI integration, data visualization, 
-customized internal reporting tools for business teams, financial app to get insights on your spend patterns etc.
+Examples of data apps include recommendation engines, interactive segmentation, AI integration, data visualization, 
+customized internal reporting tools for business teams, financial apps to get insights on your spend patterns, etc.
 
-Data apps could be written in any language. However, for now Keboola only supports apps written in [Streamlit](https://streamlit.io/), 
+Data apps may be written in any language. However, for now Keboola only supports apps written in [Streamlit](https://streamlit.io/), 
 which is a Python framework for rapid development of such applications.
 
 As mentioned above, a data app is a simple web application, which can be deployed inside a Keboola Connection project 
-and can be publicly accessed also from the outside of the project. 
+and also publicly accessed from outside the project. 
 It means that the users that will access your data app don't need access to a Keboola Connection project.
 
 ## Create a Data App
-There are two ways how to create a data app in Keboola Connection. Select a deployment type that will suit your needs:
+There are two ways to create a data app in Keboola Connection. Select a deployment type that will suit your needs:
 - **Code** – Just paste a Streamlit code to create a simple data app. 
 - **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications.
 
@@ -38,7 +38,7 @@ This deployment type is ideal for very simple apps or for testing. Check out our
 ![Code - code](/components/data-apps/data apps - hello world - code.png)
 
 #### Packages
-To use additional packages, which are not already in our [Streamlit Base Image](#Base Image), enter them into the field Packages.
+To use additional packages that are not already in our [Streamlit Base Image](#Base Image), enter them into the field Packages.
 
 {: .image-popup}
 ![Packages](/components/data-apps/data apps - packages.png)
@@ -46,15 +46,15 @@ To use additional packages, which are not already in our [Streamlit Base Image](
 ### Git Repository
 {% include warning.html content="In BETA, we only support GitHub repositories. <br />Also, we only support MAIN as the main branch, not MASTER." %}
 
-Please provide feedback using the feedback button in your project.
-If you have a complex application, you can push your app sources into GitHub and link the repository in this section.
+To provide feedback, use the feedback button in your project.
+If you have a complex application, push your app sources into GitHub and link the repository in this section.
 Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
 {: .image-popup}
 ![Git repository](/components/data-apps/data apps - git repository.png)
 
 ## Secrets
-To provide your app with environment variables or sensitive information like credentials, API keys etc, enter them as key value pairs in the section Secrets.
+To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key value pairs in the section Secrets.
 These secrets will be injected into the secrets.toml file upon deployment of the app. 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
@@ -62,11 +62,11 @@ These secrets will be injected into the secrets.toml file upon deployment of the
 ![Secrets](/components/data-apps/data apps - secrets.png)
 
 ## Loading Data from Storage
-To load data into the app, you can use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section, which will load data from the storage of a Keboola Connection project into the app.
+To load data from the storage of a Keboola Connection project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
 Just select your table in the input mapping section and navigate to that by /data/in/table/your_data.csv or /data/in/files/fileID_FileName.* in your code.
 (Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.)
 <br />
-Or, you can use [Keboola Connection Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
+Or you can use [Keboola Connection Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Writing Back to Storage
@@ -78,11 +78,11 @@ See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
 {% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet." %}
 
 ### Authorization
-We recommend implementing some sort of authorization into your app. You can use, for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+We recommend incorporating some sort of authorization into your app—for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
 
 ### Base Image
-When the app is deployed, the code specified in one of the deployment method will be injected into our [base Streamlit docker image](https://github.com/keboola/sandbox-streamlit/blob/main/Dockerfile). 
-This image already has Streamlit and few other basic packages pre-installed.
+When the app is deployed, the code specified in one of the deployment methods will be injected into our [base Streamlit docker image](https://github.com/keboola/sandbox-streamlit/blob/main/Dockerfile). 
+This image already has Streamlit and a few other basic packages pre-installed.
 
 ### Actions Menu
 
