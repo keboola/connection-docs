@@ -6,7 +6,7 @@ permalink: /components/data-apps/
 * TOC
 {:toc}
 
-{% include warning.html content="This feature is in public beta. All data apps are terminated at midnight." %}
+**Warning:** This feature is in public beta. All data apps are terminated at midnight.
 
 ## Overview
 Data apps are simple, interactive web applications that use data to deliver insight or automatically take action.
@@ -38,13 +38,13 @@ This deployment type is ideal for very simple apps or for testing. Check out our
 ![Code - code](/components/data-apps/data apps - hello world - code.png)
 
 #### Packages
-To use additional packages that are not already in our [Streamlit Base Image](#Base Image), enter them into the field Packages.
+To use additional packages that are not already in our [Streamlit Base Image](#base-image), enter them into the field Packages.
 
 {: .image-popup}
 ![Packages](/components/data-apps/data apps - packages.png)
 
 ### Git Repository
-{% include warning.html content="In BETA, we only support GitHub repositories. <br />Also, we only support MAIN as the main branch, not MASTER." %}
+**Warning:** In BETA, we only support GitHub repositories. Also, we only support MAIN as the main branch, not MASTER.
 
 To provide feedback, use the feedback button in your project.
 If you have a complex application, push your app sources into GitHub and link the repository in this section.
@@ -64,8 +64,7 @@ These secrets will be injected into the secrets.toml file upon deployment of the
 ## Loading Data from Storage
 To load data from the storage of a Keboola Connection project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
 Just select your table in the input mapping section and navigate to that by /data/in/table/your_data.csv or /data/in/files/fileID_FileName.* in your code.
-(Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.)
-<br />
+Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.
 Or you can use [Keboola Connection Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
@@ -75,7 +74,7 @@ See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App Management
 
-{% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet." %}
+**Warning:** Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet.
 
 ### Authorization
 We recommend incorporating some sort of authorization into your app—for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
