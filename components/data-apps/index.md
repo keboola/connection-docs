@@ -3,10 +3,10 @@ title: Data Apps
 permalink: /components/data-apps/
 ---
 
+{% include warning.html content="This feature is in public beta. All data apps are terminated at midnight." %}
+
 * TOC
 {:toc}
-
-**Warning:** This feature is in public beta. All data apps are terminated at midnight.
 
 ## Overview
 Data apps are simple, interactive web applications that use data to deliver insight or automatically take action.
@@ -44,7 +44,7 @@ To use additional packages that are not already in our [Streamlit Base Image](#b
 ![Packages](/components/data-apps/data_apps-packages.png)
 
 ### Git Repository
-**Warning:** In BETA, we only support GitHub repositories. Also, we only support MAIN as the main branch, not MASTER.
+{% include warning.html content="In BETA, we only support GitHub repositories. Also, we only support MAIN as the main branch, not MASTER." %}
 
 To provide feedback, use the feedback button in your project.
 If you have a complex application, push your app sources into GitHub and link the repository in this section.
@@ -73,8 +73,7 @@ For writing data back to Keboola Connection Project Storage, use our [Keboola Co
 See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App Management
-
-**Warning:** Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet.
+{% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet." %}
 
 ### Authorization
 We recommend incorporating some sort of authorization into your app—for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
