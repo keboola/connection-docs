@@ -150,9 +150,11 @@ This function is automatically enabled in transformations.
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
 However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema. However, you can still manually add tables to an input mapping.
    
-There is no need to set anything for a **read-only input mapping**. For transformations, all tables in Storage are automatically accessible in the transformation.
+There is no need to set anything for a **read-only input mapping** in **transformations**, all tables in Storage are automatically accessible in the transformation.
 This also applies to linked buckets. *Note that buckets and tables belong
 to another project, so you need to access the tables using the fully qualified identifier, including the database and schema, in the source project.*
+
+Users can enable or disable read-only access to the storage in **user workspaces** and the **Snowflake data destination**. If read-only access is disabled, users must define an input mapping as they typically do.
 
 {: .image-popup}
 ![Storage](/transformations/mappings/storage.png)
