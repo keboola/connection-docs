@@ -225,6 +225,9 @@ items:
           - url: /components/extractors/other/
             title: Other
             items:
+              - url: /components/extractors/other/airtable/
+                title: Airtable
+
               - url: /components/extractors/other/aws-cu-reports/
                 title: AWS Cost Usage Reports
 
