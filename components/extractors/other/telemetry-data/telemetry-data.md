@@ -380,6 +380,8 @@ organization, or to the Keboola Connection platform itself.
 |`auditLog.maintainers.listed`
 |`auditLog.maintainers.organizationCreated`
 |`auditLog.maintainers.updated`
+|`auditLog.mergeRequest.created`
+|`auditLog.mergeRequest.stateChanged`
 |`auditLog.organization.adminAdded`
 |`auditLog.organization.adminRemoved`
 |`auditLog.organization.adminsInProjectsListed`
