@@ -79,8 +79,104 @@ See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
 We recommend incorporating some sort of authorization into your app—for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
 
 ### Base Image
-When the app is deployed, the code specified in one of the deployment methods will be injected into our [base Streamlit docker image](https://github.com/keboola/sandbox-streamlit/blob/main/Dockerfile). 
-This image already has Streamlit and a few other basic packages pre-installed.
+When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
+This image already has Streamlit and a few other basic packages pre-installed:
+
+```
+# Dockerfile
+
+FROM python:3.8-slim
+
+RUN groupadd --gid 1000 appuser \
+    && useradd --uid 1000 --gid 1000 -ms /bin/bash appuser
+    
+RUN pip3 install --no-cache-dir --upgrade \
+    pip \
+    virtualenv
+    
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    software-properties-common \
+    git \
+    jq \
+    vim
+
+RUN mkdir -m 777 /data
+USER appuser
+WORKDIR /home/appuser
+
+ENV VIRTUAL_ENV=/home/appuser/venv
+RUN virtualenv ${VIRTUAL_ENV}
+
+ENV STREAMLIT_SERVER_PORT=8888
+EXPOSE 8888
+
+COPY run.sh /home/appuser
+ENTRYPOINT ["./run.sh"]
+```
+
+```
+# pip list
+
+Package                   Version
+------------------------- -----------
+altair                    5.0.1
+attrs                     23.1.0
+backports.zoneinfo        0.2.1
+blinker                   1.6.2
+cachetools                5.3.1
+certifi                   2023.7.22
+charset-normalizer        3.2.0
+click                     8.1.6
+decorator                 5.1.1
+gitdb                     4.0.10
+GitPython                 3.1.32
+idna                      3.4
+importlib-metadata        6.8.0
+importlib-resources       6.0.0
+Jinja2                    3.1.2
+jsonschema                4.18.4
+jsonschema-specifications 2023.7.1
+markdown-it-py            3.0.0
+MarkupSafe                2.1.3
+mdurl                     0.1.2
+numpy                     1.24.4
+packaging                 23.1
+pandas                    2.0.3
+Pillow                    9.5.0
+pip                       23.1.2
+pkgutil_resolve_name      1.3.10
+protobuf                  4.23.4
+pyarrow                   12.0.1
+pydeck                    0.8.0
+Pygments                  2.15.1
+Pympler                   1.0.1
+python-dateutil           2.8.2
+pytz                      2023.3
+pytz-deprecation-shim     0.1.0.post0
+referencing               0.30.0
+requests                  2.31.0
+rich                      13.4.2
+rpds-py                   0.9.2
+setuptools                67.7.2
+six                       1.16.0
+smmap                     5.0.0
+streamlit                 1.25.0
+tenacity                  8.2.2
+toml                      0.10.2
+toolz                     0.12.0
+tornado                   6.3.2
+typing_extensions         4.7.1
+tzdata                    2023.3
+tzlocal                   4.3.1
+urllib3                   2.0.4
+validators                0.20.0
+watchdog                  3.0.0
+wheel                     0.40.0
+zipp                      3.16.2
+```
+
+Please note that the versions of these packages might change as the newest version of the Streamlit package is used upon deployed if not specified explicitly in Packages field.
 
 ### Actions Menu
 {: .image-popup}
