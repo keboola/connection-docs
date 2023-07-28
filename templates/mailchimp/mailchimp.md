@@ -57,7 +57,7 @@ authorization problems. If you are struggling with this part, go to the section 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
 {: .image-popup}
-![MailChimp to Snowflake](/templates/maillchimp/mailchimp-to-snowflake-steps.png)
+![MailChimp to Snowflake](/templates/mailchimp/mailchimp-to-snowflake-steps.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will be redirected to the Template Catalogue where you can see the newly created flow. 
