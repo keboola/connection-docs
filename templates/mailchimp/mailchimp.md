@@ -89,4 +89,4 @@ To use a selected data source component, you must first authorize the data sourc
 {: .image-popup}
 ![MailChimp Data Source](/templates/mailchimp/mailchimp-data-source.png)
 
-Insert your MailChimp API Token and data center (the last part of the API key after the dash. Then fill in your account user name.
+Insert your MailChimp API Token and data center (the last part of the API key after the dash). Then fill in your account user name.
