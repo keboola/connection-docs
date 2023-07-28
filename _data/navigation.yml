@@ -419,6 +419,9 @@ items:
       - url: /templates/google-analytics/
         title: Google Analytics
 
+      - url: /templates/mailchimp/
+        title: MailChimp
+
       - url: /templates/project-management/
         title: Project Management
 
