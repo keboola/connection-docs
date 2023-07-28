@@ -6,11 +6,11 @@ permalink: /templates/mailchimp/
 * TOC
 {:toc}
 
-By using this end-to-end flow you can extract data from MailChimp and transform it into visualizations in your BI tool or anywhere else you prefer.
+With this end-to-end flow you can extract data from MailChimp and transform it into visualizations in any BI tool of your choice.
 
 **The flow, in a nutshell:**
 
-- First, the Mailchimp source component will collect data from your account: lists of campaigns, members and lists. 
+- First, the MailChimp source component will collect data from your account: lists of campaigns, members and lists. 
 
 - Then we prepare five tables (campaign, campaign-event, customer, list, list-member) that can be used to visualize results. 
 
@@ -22,7 +22,7 @@ By using this end-to-end flow you can extract data from MailChimp and transform 
 
 | Name | Description |
 |---|---|
-| CAMPAIGN | the list of campaigns (campaign is any distributed content, that's created and measured in Mailchimp) and metrics |
+| CAMPAIGN | the list of campaigns (campaign is any distributed content, that's created and measured in MailChimp) and metrics |
 | CAMPAIGN-EVENT | information about campaign events such as type or created date |
 | CUSTOMER | the list of customers and theirs email addresses |
 | LIST | the list of lists of contacts |
@@ -89,7 +89,7 @@ To use a selected data source component, you must first authorize the data sourc
 {: .image-popup}
 ![MailChimp Data Source](/templates/mailchimp/mailchimp-data-source.png)
 
-Insert your MailChimp API Token and data center (the last part of the API key after the dash). Then fill in your account user name.
+Insert your MailChimp API token and data center (the last part of the API key after the dash). Then fill in your account user name.
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
