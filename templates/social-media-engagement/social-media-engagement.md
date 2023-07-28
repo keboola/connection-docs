@@ -34,9 +34,9 @@ This table contains daily overall engagement metrics for the whole page from sel
 
 | metric | Facebook | Instagram | LinkedIn | Twitter | YouTube |  
 |:--- | --- | --- | --- | --- | --- |
-| page_followers | ✅ | ✅ | ✅ | ✅ | &cross; |
-| page_posts_impressions | ✅ | ✅ | ✅ | &cross; | &cross; |
-| page_views_total | ✅ | ✅ | ✅ | &cross; | &cross; |
+| page_followers | &check; | &check; | &check; | &check; | &cross; |
+| page_posts_impressions | &check; | &check; | &check; | &cross; | &cross; |
+| page_views_total | &check; | &check; | &check; | &cross; | &cross; |
 
 ### Output Table: posts_engagement
 This table contains engagement data for all posts from selected social media. 
@@ -44,10 +44,10 @@ The primary key is a UID composed of a date, source social media and the ID of a
 
 | metric | Facebook | Instagram | LinkedIn | Twitter | YouTube |  
 |:--- | --- | --- | --- | --- | --- |
-| likes | ✅ | ✅ | ✅ | ✅ | ✅ |
-| comments | &cross; | ✅ | &cross; | &cross; | ✅ |
-| shares | ✅ | &cross; | &cross; | ✅ | &cross; |
-| views | &cross; | &cross; | &cross; | &cross; | ✅ |
+| likes | &check; | &check; | &check; | &check; | &check; |
+| comments | &cross; | &check; | &cross; | &cross; | &check; |
+| shares | &check; | &cross; | &cross; | &check; | &cross; |
+| views | &cross; | &cross; | &cross; | &cross; | &check; |
 | all_reactions | likes <br> shares | likes <br> comments | likes | likes <br> shares | likes <br> comments <br> favourites |
 
 ## Availability of Historical Data
@@ -216,13 +216,21 @@ So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
 ## MySQL Database
-You need to provide a host name, user name, password, and a database name (MySQL [schema](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)). We highly recommend that you create dedicated credentials for the writer in your database. More info [here](https://help.keboola.com/components/writers/database/mysql/).
+You need to provide a host name, user name, password, and a database name (MySQL [schema](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)). 
+
+We highly recommend that you create dedicated credentials for the writer in your database. 
+
+More info [here](https://help.keboola.com/components/writers/database/mysql/).
 
 {: .image-popup}
 ![MySQL Destination](/templates/social-media-engagement/mysql-destination.png)
 
 ## PostgreSQL Database
-You need to provide a host name, driver, port number, user name, password, database name and schema. We highly recommend that you create dedicated credentials for the writer in your database. More info [here](https://help.keboola.com/components/writers/database/postgresql/).
+You need to provide a host name, driver, port number, user name, password, database name, and a schema. 
+
+We highly recommend that you create dedicated credentials for the writer in your database. 
+
+More info [here](https://help.keboola.com/components/writers/database/postgresql/).
 
 {: .image-popup}
 ![PostgreSQL Destination](/templates/social-media-engagement/postgresql-data-destination.png)
