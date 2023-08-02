@@ -114,26 +114,35 @@ If your attachments are in csv format you can use this combination of processors
   "before": [],
   "after": [
     {
-        "definition": {
-          "component": "keboola.processor-move-files"
-        },
-        "parameters": {
-          "direction": "tables",
-          "folder": "result_table"
-        }
+      "definition": {
+        "component": "keboola.processor-move-files"
       },
-      {
-        "definition": {
-          "component": "keboola.processor-create-manifest"
-        },
-        "parameters": {
-          "delimiter": ",",
-          "enclosure": "\"",
-          "incremental": false,
-          "primary_key": [],
-          "columns_from": "header"
-        }
-      }]
+      "parameters": {
+        "direction": "tables",
+        "folder": "result_table"
+      }
+    },
+    {
+      "definition": {
+        "component": "keboola.processor-create-manifest"
+      },
+      "parameters": {
+        "delimiter": ",",
+        "enclosure": "\"",
+        "incremental": false,
+        "primary_key": [],
+        "columns_from": "header"
+      }
+    },
+    {
+      "definition": {
+        "component": "keboola.processor-skip-lines"
+      },
+      "parameters": {
+        "lines": 1
+      }
+    }
+  ]
 }
 ```
 
