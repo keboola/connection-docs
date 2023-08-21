@@ -73,7 +73,7 @@ If you need more information, please contact your CSM.
 | Large                                 | 1 hour                  | **32**                |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
 | **DataApps (BETA)**                   |                         |                       |
-| Small                                 | 1 hour                  | **8**                 |
+| Small                                 | 1 hour                  | **1**                 |
 
 **Types of backend sizes used for jobs**
 
