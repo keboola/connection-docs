@@ -64,7 +64,7 @@ This way you can import new data, e.g., from today, without deleting the data im
 
 ## Output Table
 
-The output schema is described in our [official documentation](https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html).
+The output schema follows the structure described in the [official AWS documentation](https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html).
 
 Keep in mind that **the result column names are modified to match the KBC Storage column name requirements**:
 
