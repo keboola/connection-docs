@@ -13,6 +13,7 @@ The following extractors support communication systems:
 - [Gmail Messages](/components/extractors/communication/gmail/) 
 - [Google Calendar](/components/extractors/communication/google-calendar)
 - [Intercom](/components/extractors/communication/intercom/) 
+- [MS Outlook (Ofiice 365)](/components/extractors/communication/ms-outlook/)
 - [Slack](/components/extractors/communication/slack/) 
 - [Zendesk](/components/extractors/communication/zendesk/) 
 - And [more](https://components.keboola.com/components)

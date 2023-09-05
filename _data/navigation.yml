@@ -81,6 +81,9 @@ items:
               - url: /components/extractors/communication/intercom/
                 title: Intercom
 
+              - url: /components/extractors/communication/ms-outlook/
+                title: MS Outlook (Office 365)
+
               - url: /components/extractors/communication/slack/
                 title: Slack
 
