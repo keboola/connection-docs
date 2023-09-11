@@ -100,5 +100,24 @@
   }
 });
 </script>
+<!-- Begin KAI chatbot -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+		project-id="keboola-ai"
+		agent-id="4fd56a6c-9b07-481d-ab61-318817c093d1"
+		language-code="en">
+	<df-messenger-chat-bubble
+			chat-title="Kai">
+	</df-messenger-chat-bubble>
+</df-messenger>
+<style>
+	df-messenger {
+		z-index: 999;
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+	}
+</style>
+<!-- End KAI chatbot -->
 </body>
 </html>
