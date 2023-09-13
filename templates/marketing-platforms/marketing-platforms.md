@@ -126,7 +126,7 @@ and then click **Use Template**. This will guide you to a page where all the det
 From here, click **Use Template** once more, give it a name, and click **Next Step**.
 
 {: .image-popup}
-![Name Template Instance](/templates/marketing-platforms/templates-instance-name.png)
+![Name Template Instance](/templates/marketing-platforms/template-instance-name.png)
 
 This will take you to the page where you can set up the template containing the Data App configuration. 
 Here, you will need to provide credentials for the data sources and data destinations you want to use. 
