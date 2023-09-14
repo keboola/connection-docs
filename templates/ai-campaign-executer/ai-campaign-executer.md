@@ -45,9 +45,13 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 | PRODUCT |	contains data about individual products offered, their description, product images, etc. |
 
 ## Data Sources
+The following data sources are available:
+
 [Shopify](https://www.shopify.com/online)
 
 ## Data Destinations
+The following data destinations are available:
+
 [Twilio](https://www.twilio.com/login)
 
 ## How to Use Template
