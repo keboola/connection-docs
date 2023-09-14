@@ -16,7 +16,7 @@ to editing and managing data. The flow consists of only one component – the Da
 {: .image-popup}
 ![The Flow](/templates/interactive-keboola-sheets/flow.png)
 
-## How to Set Up Data App
+## Setting Up the Data App
 
 {: .image-popup}
 ![Data Editor](/templates/interactive-keboola-sheets/data-editor.png)
@@ -29,7 +29,7 @@ In the **Secrets** section, insert the token(s) of the bucket(s) you want to mak
 - Within the data app, business users can select a table for editing.
 - After completing the edits, click **Save Changes**, and the changes will instantly be saved back into the table in Keboola Connection Storage.
 
-## How to Use Template
+## How to Use the Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab 
