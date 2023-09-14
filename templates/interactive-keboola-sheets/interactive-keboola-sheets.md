@@ -51,14 +51,14 @@ You can use the template as many times as you want and still keep everything org
 
 After clicking **Next Step**, you will see the template builder. Fill in all required fields and start using the template and the data app.
 
-## How Data App Works
+## How the Data App Works
 This web application is designed to help you easily edit and manage your tabular data stored in a Keboola environment. 
 Whether you are a data analyst, scientist, or anyone working with data, this tool simplifies the process of making changes to your datasets.
 
-- Select your table: After logging in, you will see a menu on the left. Click on **Data Editor** to begin. The app will then fetch the list of tables available in your Keboola bucket.
-- Choose a table: From the list of tables, select the one you want to work with. The app will then load the data from your selected table.
-- Edit your data: Once your table is loaded, you will see it displayed in an editable table format. You can easily make changes, add new data, or remove rows.
-- Save your changes: When you are satisfied with your edits, simply click the **Send to Keboola** button. Your changes will then be saved, and the updated data will be sent back to your Keboola Storage.
+- **Open the editor:** After logging in, you will see a menu on the left. Click on **Data Editor** to begin. The app will then fetch the list of tables available in your Keboola bucket.
+- **Choose a table:** From the list of tables, select the one you want to work with. The app will then load the data from your selected table.
+- **Edit your data:** Once your table is loaded, you will see it displayed in an editable table format. You can easily make changes, add new data, or remove rows.
+- **Save your changes:** When you are satisfied with your edits, simply click the **Send to Keboola** button. Your changes will then be saved, and the updated data will be sent back to your Keboola Storage.
 
 It is that simple! This app streamlines the process of editing and managing your data in Keboola Connection. Whether you need to clean, transform, or update your datasets, this tool helps you do it efficiently. Happy data editing!
 
