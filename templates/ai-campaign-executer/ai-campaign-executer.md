@@ -145,7 +145,10 @@ All tables are required to have the following columns:
 - message
 
 ### Configuration Parameters
-1. Account SID – Can be found in the Console.
-2. Authentication Token – Can be found in the Console.
-3. Messaging Service SID – Can be created via Messaging Service in the Console; the purpose of this service is to define the service identity.
-4. Output Log – Users have the options to output a log of the list of messages and targets sent out using this application.
+
+| Name | Description |
+|---|---|
+| Account SID | can be found in the console |
+| Authentication Token | can be found in the console |
+| Messaging Service SID | can be created via Messaging Service in the console; the purpose of this service is to define the service identity |
+| Output Log | users have the option to output a log of the list of messages and targets sent out using this application |
