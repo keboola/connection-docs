@@ -43,7 +43,7 @@ This page contains information about the template. Click **+ Use Template** agai
 {: .image-popup}
 ![New Template](/templates/interactive-keboola-sheets/int-keb-sheets.png)
 
-You’ll be asked to write a name for the template instance you are about to create. 
+You will be asked to write a name for the template instance you are about to create. 
 You can use the template as many times as you want and still keep everything organized.
 
 {: .image-popup}
