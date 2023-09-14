@@ -120,7 +120,7 @@ Click **Run Template** and start building your visualizations a few minutes late
 {: .image-popup}
 ![Ad Platforms to Google Sheets - Flows](/templates/marketing-platforms/adplatforms-to-google-sheets-flow.png)
 
-### Use Data App with Advertising Platforms Template
+### Use Data App with Template
 If you want to vizualize the data from this template via a predefined data app, simply select this template from the list, 
 and then click **Use Template**. This will guide you to a page where all the details related to this template are described. 
 From here, click **Use Template** once more, give it a name, and click **Next Step**.
@@ -129,19 +129,20 @@ From here, click **Use Template** once more, give it a name, and click **Next St
 ![Name Template Instance](/templates/marketing-platforms/template-instance-name.png)
 
 This will take you to the page where you can set up the template containing the data app configuration. 
-Here, you will need to provide credentials for the data sources and data destinations you want to use. 
-Once you have completed this step, you can launch your data app using this template.
+Here, you will need to provide credentials for the data sources (extractors) and data destinations (writers) you want to use. 
 
 {: .image-popup}
 ![Build Data App](/templates/marketing-platforms/build-data-app.png)
 
-A data app has been created. You can also find its details in the section **Components – Data Apps**, where you can always edit the data apps you have created.
-
-Below, you can see a screenshot of the data app created from the Advertising Platforms template. Don’t worry, when configuring the app for the Advertising
-Platforms Template, you only need to select the checkbox **Let’s do it** and save the configuration.
+Once you have completed this step, you can launch your data app. To do so, select the checkbox **Let’s do it** in the **Online Marketing Report** application 
+and save the configuration. 
 
 {: .image-popup}
 ![Online Marketing Report](/templates/marketing-platforms/online-marketing-report.png)
+
+A data app has been created. You can also find its details in the section **Components – Data Apps**, where you can always edit the data apps you have created.
+
+Below, you can see a screenshot of the data app created from the Advertising Platforms template.
 
 {: .image-popup}
 ![Online Marketing Dashboard](/templates/marketing-platforms/online-marketing-dashboard.png)
