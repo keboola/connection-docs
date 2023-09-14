@@ -10,7 +10,7 @@ Revamp your marketing strategy with our template, seamlessly utilizing Shopify d
 Our AI crafts customized SMS messages sent via Twilio, effectively engaging your customers and elevating your marketing with AI precision. 
 The template consists of two flows, where the first flow can be considered a data preparation phase, while the second serves as the execution phase.
 
-**Flow 1, in a nutshell:**
+## Flow 1 – Preparation
 
 {: .image-popup}
 ![Flow 1](/templates/ai-campaign-executer/flow1.png)
@@ -21,7 +21,7 @@ The template consists of two flows, where the first flow can be considered a dat
 - The transformation then creates two new tables from an existing table, with some column renaming and the addition of an 'approved' column in the second table, which is initialized with a value of `'false'` for all rows.
 - Data is sent into the data app, where the user can review the messages generated and approve the ones for campaign execution. 
 
-**Flow 2, in a nutshell:**
+## Flow 2 – Execution
 
 {: .image-popup}
 ![Flow 2](/templates/ai-campaign-executer/flow2.png)
@@ -30,7 +30,7 @@ Once you have selected the messages for sending and clicked the **Upload to Kebo
 flow 2 is triggered automatically to send the data to Twilio.
 
 ## Entity Relationship Diagram
-An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination. LINK NA DIAGRAM
+An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
 ![Entity Relationship Diagram](/templates/ai-campaign-executer/entity-rel-diagram.png)
