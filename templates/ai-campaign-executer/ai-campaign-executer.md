@@ -6,7 +6,7 @@ permalink: /templates/ai-campaign-executer/
 * TOC
 {:toc}
 
-your marketing strategy with our template, seamlessly utilizing Shopify data to create personalized campaigns. 
+Revamp your marketing strategy with our template, seamlessly utilizing Shopify data to create personalized campaigns. 
 Our AI crafts customized SMS messages sent via Twilio, effectively engaging your customers and elevating your marketing with AI precision. 
 The template consists of two flows, where the first flow can be considered a data preparation phase, while the second serves as the execution phase.
 
@@ -16,17 +16,17 @@ The template consists of two flows, where the first flow can be considered a dat
 ![Flow 1](/templates/ai-campaign-executer/flow1.png)
 
 - First you will set up a component that extracts data from your Shopify account. You only need to provide login credentials for your Shopify account, and the component will handle the extraction of all necessary data.
-- The Transformation is already pre-defined for you and will create a dataset containing customer contact information and products to be recommended to each of them.
+- The transformation is already pre-defined for you and will create a dataset containing customer contact information and products to be recommended to each of them.
 - The AI app utilizes the data created by the above mentioned transformation and generates a customized SMS message for them.
-- The Transformation second creates two new tables from an existing table, with some column renaming and the addition of an "approved" column in the second table, which is initialized with a value of "false" for all rows.
-- Data is sent into the Data App, where the user can review the messages generated and approve the ones for campaign execution. 
+- The transformation then creates two new tables from an existing table, with some column renaming and the addition of an 'approved' column in the second table, which is initialized with a value of `'false'` for all rows.
+- Data is sent into the data app, where the user can review the messages generated and approve the ones for campaign execution. 
 
 **Flow 2, in a nutshell:**
 
 {: .image-popup}
 ![Flow 2](/templates/ai-campaign-executer/flow2.png)
 
-Once the user has selected the messages for sending and clicked on **Upload to Keboola** button within the data app, 
+Once you have selected the messages for sending and clicked the **Upload to Keboola** button in the data app, 
 flow 2 is triggered automatically to send the data to Twilio.
 
 ## Entity Relationship Diagram
@@ -39,10 +39,10 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 
 | Name | Description |
 |---|---|
-| ORDER	| Contains data about fulfilled orders of the customers and details of the orders etc. |
-| CUSTOMER |Contains contact details of individual customers, their marketing preferences, total spent etc. |
-| LINE-ITEM	| Contains data about individual items on stock, their prices, stock availability etc. |
-| PRODUCT |	Contains data about individual products offered, their description, product images etc. |
+| ORDER	| contains data about fulfilled orders of the customers and details of the orders, etc. |
+| CUSTOMER | contains contact details of individual customers, their marketing preferences, total spent, etc. |
+| LINE-ITEM	| contains data about individual items on stock, their prices, stock availability, etc. |
+| PRODUCT |	contains data about individual products offered, their description, product images, etc. |
 
 ## Data Sources
 [Shopify](https://www.shopify.com/online)
@@ -69,19 +69,39 @@ You’ll be asked to write a name for the template instance you are about to cre
 {: .image-popup}
 ![Name the template](/templates/ai-campaign-executer/name-template.png)
 
-## Component Descriptions
+## Component Description
 
-**Shopify extractor** – The component is set up to extract all the data tables, such as: [customer], [inventory-items], [inventory-levels], [line-item], [locations], [order], [product], [product-images], [product-options], [product-variant].
+### Shopify Extractor
+The component is set up to extract all the data tables: 
+`customer`, `inventory-items`, `inventory-levels`, `line-item`, `locations`, `order`, `product`, `product-images`, `product-options`, and `product-variant`.
 
-**SQL transformation** – The transformation is configured to create a table with following columns [customer_id], [name] (equals to first name of the customer), [phone] (equals to a phone number of the customer), [count] (equals to number of products purchased), [title] (equals to the name of the product), [body_html] (equals to description of the product). The data will be prepared for further step of the process - personalized AI-generated messages to the customers on specific products.
+### SQL Transformation 
+The transformation is configured to create a table with following columns: 
 
-**Generative AI personalize SMS campaign** – Once authenticated to your AI provider, the component utilizes AI to generate a short and informal email campaign tailored for users of the online store. It dynamically incorporates the user's name ([[Customer_Name]]) and recommends a selection of products ([[Product_1]], [[Product_2]], [[Product_3]], [[Product_4]], [[Product_5]]), all while adding emoticons to create a personalized and engaging message for each recipient.
+- `customer_id`
+- `name` (equals to first name of the customer)
+- `phone` (equals to a phone number of the customer)
+- `count` (equals to number of products purchased)
+- `title` (equals to the name of the product)
+- `body_html` (equals to description of the product).
 
-**Twilio Campaign Maker** – The component connects to the Twilio service and sends data from the storage, where personalized text messages were generated by an AI and added to the contact information of the customers. 
+The data will be prepared for the next step of the process – personalized AI-generated messages to the customers on specific products.
 
-The component utilizes AI to generate a short and informal email campaign tailored for users of the Kopr online store. It dynamically incorporates the user's name ([[Customer_Name]]) and recommends a selection of products ([[Product_1]], [[Product_2]], [[Product_3]], [[Product_4]], [[Product_5]]), all while adding emoticons to create a personalized and engaging message for each recipient.
+### Generative AI Personalize SMS Campaign
+Once authenticated to your AI provider, the component utilizes AI to generate a short and informal email campaign
+tailored for users of the online store. It dynamically incorporates the user's name (`Customer_Name`) and recommends a selection of products (`Product_1`, 
+`Product_2`, `Product_3`, `Product_4`, and `Product_5`), all while adding emoticons to create a personalized and engaging message for each recipient.
 
-In order to authorize the component, you will need to input an Account SID, Authentication Token, Messaging Service SID and whether or not you wish to generate a log after sending the messages (true/false).
+### Twilio Campaign Maker 
+The component connects to the Twilio service and sends data from the storage, where personalized text messages were generated 
+by an AI and added to the contact information of the customers. 
+
+The component utilizes AI to generate a short and informal email campaign tailored for users of the Kopr online store. It dynamically incorporates 
+the user's name (`Customer_Name`) and recommends a selection of products (`Product_1`, `Product_2`, `Product_3`, `Product_4`, and `Product_5`), all while adding
+emoticons to create a personalized and engaging message for each recipient.  
+
+In order to authorize the component, you will need to input an Account SID, Authentication Token, Messaging Service SID, 
+and whether or not you wish to generate a log after sending the messages (true/false).
 
 ## Authorizing Data Sources
 To use the selected data source component, you must authorize it first. 
