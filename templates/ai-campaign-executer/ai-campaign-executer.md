@@ -8,6 +8,7 @@ permalink: /templates/ai-campaign-executer/
 
 Revamp your marketing strategy with our template, seamlessly utilizing Shopify data to create personalized campaigns. 
 Our AI crafts customized SMS messages sent via Twilio, effectively engaging your customers and elevating your marketing with AI precision. 
+
 The template consists of two flows, where the first flow can be considered a data preparation phase, while the second serves as the execution phase.
 
 ## Flow 1 – Preparation
