@@ -11,7 +11,9 @@ This data app eliminates the need to export data to external tools, allowing bus
 
 By centralizing data editing, the app enhances collaboration, reduces errors, and streamlines your data management processes. 
 Replace manual data manipulation with a seamless data editing solution. Utilizing this template will provide you with a more efficient and user-friendly approach 
-to editing and managing data. The flow consists of only one component – the Data App itself; no complex flow configuration is needed.
+to editing and managing data. 
+
+The flow consists of only one component – the data pp itself; no complex flow configuration is needed.
 
 {: .image-popup}
 ![The Flow](/templates/interactive-keboola-sheets/flow.png)
