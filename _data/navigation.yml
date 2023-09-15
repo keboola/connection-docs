@@ -404,6 +404,9 @@ items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
 
+      - url: /templates/ai-campaign-executer/
+        title: AI Campaign Executer
+        
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
 
@@ -419,6 +422,9 @@ items:
       - url: /templates/google-analytics/
         title: Google Analytics
 
+      - url: /templates/interactive-keboola-sheets/
+        title: Interactive Keboola Sheets
+        
       - url: /templates/mailchimp/
         title: MailChimp
 
