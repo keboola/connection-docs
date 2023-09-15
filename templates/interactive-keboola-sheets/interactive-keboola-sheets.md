@@ -13,7 +13,7 @@ By centralizing data editing, the app enhances collaboration, reduces errors, an
 Replace manual data manipulation with a seamless data editing solution. Utilizing this template will provide you with a more efficient and user-friendly approach 
 to editing and managing data. 
 
-The flow consists of only one component – the data pp itself; no complex flow configuration is needed.
+The flow consists of only one component – the data app itself; no complex flow configuration is needed.
 
 {: .image-popup}
 ![The Flow](/templates/interactive-keboola-sheets/flow.png)
