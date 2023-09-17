@@ -35,7 +35,7 @@ After testing the credentials, **Save** them:
 {: .image-popup}
 ![Screenshot - Configure Credentials](/components/extractors/database/sqldb/sqldb-2.png)
 
-After you save the credentials, the connector will automatically fetch the list of all database tables accessible by the provided credentials.
+After you save the credentials, the extractor will automatically fetch the list of all database tables accessible by the provided credentials.
 Select the tables you want to extract and click the **Create** button:
 
 {: .image-popup}
