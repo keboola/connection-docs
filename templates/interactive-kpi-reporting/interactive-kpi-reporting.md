@@ -20,7 +20,8 @@ thanks to the automated capabilities of Keboola Connection. Simplify your data m
 
 **The flow in a nutshell:**
 
-*Note: The template consists of two separate flows. The first flow is for building interactive dashboards based on transformed data extracted from Shopify. The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then it takes over.*
+*Note: The template consists of two separate flows. The first flow is for building interactive dashboards based on transformed data extracted from Shopify. 
+The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then it takes over.*
 
 - First, you will authorize the data source component (extractor) to extract data from your Shopify account. 
 - An SQL transformation will then prepare the data and create a table needed for the data app.
