@@ -33,24 +33,22 @@ Click **Use Template** to start. Name the template and click **Next Step**.
 {: .image-popup}
 ![Name Template](/templates/media-cashflow/name-template.png)
 
-Now it's time to configure the template.
+Then you will configure the template:
 
 {: .image-popup}
 ![Flow](/templates/media-cashflow/flow.png)
 
-1. **Data extractions** – in the first section, you will select one or multiple data sources (extractors) that will provide all available data. See more details in the section [Data Sources](/templates/media-cashflow/#data-sources) below.
+1. **Data extractions** – First, you will select one or multiple data sources (extractors) that will provide all available data.
+See more details in the section [Data Sources](/templates/media-cashflow/#data-sources) below.
 
-2. **Snowflake SQL** – prepares all data to be sent to the data app.
+3. **Snowflake SQL** – Then the data will be repared so it can be sent to the data app.
 
-3. **Data app deployment** – This data app (third section) visualizes the campaign spending across various advertising platforms. 
-It displays both the total budget and the budget spend per client on different advertising platforms. Additionally,
-the app provides users with the capability to input or modify budgets for specific clients and choose the advertising platforms 
-for which the specific budget will be applied. These changes are promptly saved to storage and become accessible for subsequent data refreshes 
-from advertising campaigns.
-
-After authorising at least one data source, click **Configure** in the **Data App** box to run it. You will need to provide your Keboola Token to do so. 
-Once you enter, you can save the configuration and start using the app.
-
+4. **Data app deployment**
+   - After authorising at least one data source, click **Configure** in the **Data App** box. You will need to provide your Keboola Token to do so.
+   - Once you enter, **save** the configuration and start using the app.
+   - The data app will visualize the campaign spending across various advertising platforms. It will display both the total budget and the budget spend per client on different advertising platforms. Additionally, the app will provide you with the capability to input or modify budgets for specific clients and choose the advertising platforms for which the specific budget will be applied.
+   - These changes will be promptly saved to storage and become accessible for subsequent data refreshes from advertising campaigns.
+   
 {: .image-popup}
 ![Configure Data App](/templates/media-cashflow/configure-data-app.png)
 
