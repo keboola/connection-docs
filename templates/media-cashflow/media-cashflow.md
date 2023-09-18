@@ -106,17 +106,18 @@ To access data from your TikTok account, authorize your account and define rows 
 {: .image-popup}
 ![Setting Up Data App](/templates/media-cashflow/setting-up-app.png)
 
-**Deployment Type** - Git repository is used for this data app
+**Deployment type** – A git repository is used for this data app.
 
-**Data App Repository** – To run the App from the Template, just use the Git repository - you can use the one which is used as an example or you can use your own Git repository. In order to run the App successfully you need to fill in all necessary fields (Project URL, Username, Access Token, Branch, Main File Path). 
+**Data app repository** – To run the app from the template, use the Git repository - you can use the one which is used as an example 
+or you can use your own Git repository. In order to run the App successfully you need to fill in all necessary fields (Project URL, Username, Access Token, Branch, Main File Path). 
 
 **Secrets** – To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key value pairs in the section **Secrets**. These secrets will be injected into the secrets.toml file upon deployment of the app.
 
-**Table/File Input Mapping** – Select a table or files in the input mapping section
+**Table/file input mapping** – Select a table or files in the input mapping section
 
 **(Re)deploy the data app** – Once everything is set up, just click **Deploy Data App** (or **Redeploy Data App**).
 
-When you need to go back to modify or view the data app, you can find it under **Components > Data App**. 
+To **modify or view the data app**, you can find the app under **Components > Data App**. 
 
 ## Using Data App
 
