@@ -19,17 +19,19 @@ thanks to the automated capabilities of Keboola Connection. Simplify your data m
 ![Required Configuration](/templates/interactive-kpi-reporting/required-config.png)
 
 **The flow in a nutshell:**
-Be aware, the template consists of two separate flows. First flow serves for building the interactive dashboards based on data extracted and transformed from Shopify. The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then the second flow takes over.
-First you will authorize the component to extract data from your Shopify account. 
-To prepare the data, an SQL transformation is ready to take over and create a table needed for the Data App
-The data is then sent into the Data App, where it will be available to the users for viewing and date filtering.
-Last but not least you will need to authorize the Data Destination component that will be sending the outputs to Slack once the user decides to send any data from the dashboards.
-Flow 1:
+*Note: The template consists of two separate flows. The first flow serves for building the interactive dashboards based on data extracted and transformed from Shopify. The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then it takes over.*
+
+- First you will authorize the component to extract data from your Shopify account. 
+- To prepare the data, an SQL transformation is ready to take over and create a table needed for the Data App
+- The data is then sent into the Data App, where it will be available to the users for viewing and date filtering.
+- Last but not least you will need to authorize the Data Destination component that will be sending the outputs to Slack once the user decides to send any data from the dashboards.
+
+### Flow 1:
 
 {: .image-popup}
 ![Flow 1](/templates/interactive-kpi-reporting/flow1.png)
 
-Flow 2:
+### Flow 2:
 
 {: .image-popup}
 ![Flow 2](/templates/interactive-kpi-reporting/flow2.png)
@@ -41,9 +43,11 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 ![Entity Relationship Diagram](/templates/interactive-kpi-reporting/entity-rel-diagram.png)
 
 ## Table Description
-Name / Description
-ORDER - contains data about the orders, such as the last update, current price of the order and a financial status of the given order (paid/refunded etc.).
-CUSTOMER - contains data of the last id of the last order (last_order_id) and a date stamp of the last update (updated_at).
+
+| Name | Description |
+|---|---|
+| ORDER | contains data about the orders, such as the last update, current price of the order and a financial status of the given order (paid/refunded, etc.) |
+| CUSTOMER | contains data of the last id of the last order (last_order_id) and a date stamp of the last update (updated_at) |
 
 ## Data Sources
 This data source is available:
@@ -57,12 +61,14 @@ The following data destination is available:
 
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
-First decide which data source and which data destination you want to use. Then select the corresponding template from the Templates tab in your Keboola Connection project. When you are done, click + Use Template.
+
+First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab 
+in your Keboola Connection project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/interactive-kpi-reporting/add-new-template.png)
 
-This page contains information about the template. Click + Use Template again.
+This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
 ![Interactive KPI Report Template](/templates/interactive-kpi-reporting/int-kpi-report.png)
