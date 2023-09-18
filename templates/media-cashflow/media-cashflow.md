@@ -7,7 +7,7 @@ permalink: /templates/media-cashflow/
 {:toc}
 
 The Media Cashflow template combines data from various platforms, such as ECB currency rates, Meta, Google Ads, LinkedIn, TikTok, and Sklik. 
-It then transforms this data and consolidates it into a single data model for further deployment in a data app. In this app, users can vies and filter 
+It then transforms this data and consolidates it into a single data model for further deployment in a data app. In this app, users can view and filter 
 expenses by client, identify upcoming payments, or change budgets for campaigns.
 
 We will guide you through the process of building the Media Cashflow app using a predefined template. 
@@ -44,7 +44,7 @@ For more details, see the section [Data Sources](/templates/media-cashflow/#data
 2. **Snowflake SQL** – Then the data will be prepared so it can be sent to the data app.
 
 3. **Data app deployment**
-   - After authorizing at least one data source, click **Configure** in the **Data App** box. To do so, you will need to provide your Keboola Token.
+   - After authorizing at least one data source, click **Configure** in the **Data App** box. To do so, you will need to provide your Keboola token.
    - Once you enter, **save** the configuration and start using the app.
    - The data app will visualize the campaign spending across various advertising platforms. It will display both the total budget and the budget spent per client on different advertising platforms. Additionally, the app will provide you with the capability to input or modify budgets for specific clients and choose the advertising platforms to which the specific budget will apply.
    - These changes will be promptly saved to storage and will become accessible for subsequent data refreshes from advertising campaigns.
@@ -115,9 +115,9 @@ or utilize your own Git repository. In order to run the app successfully, you ne
 
 **Table/File Input Mapping** – Select a table or files in the input mapping section
 
-**(Re)deploy the Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
+**(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
 
-To **modify or view the data app**, you can find the app under **Components > Data App**. 
+To **modify or view the data app**, you can find it under **Components > Data App**. 
 
 ## Using Data App
 
