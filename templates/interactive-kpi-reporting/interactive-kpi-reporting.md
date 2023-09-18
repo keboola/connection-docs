@@ -94,7 +94,7 @@ you will see the newly created flow. Click **Run Template** and start building y
 ## Use Data App with Interactive KPI Reporting
 To fully utilize this template, set up the pre-defined data app for data visualization. 
 
-To gets started, follow these steps:
+To get started, follow these steps:
 
 1. Select this template from the list.
 2. Click **Use Template**. This will direct you to a page with detailed information about the template.
