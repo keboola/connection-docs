@@ -14,10 +14,11 @@ In this section, we will provide you with instructions on how to build the Media
 please refer to [this page](https://help.keboola.com/templates/). For more information on how data apps function and how to set them up, 
 please refer to [this page](https://help.keboola.com/components/data-apps/).
 
+## How to Use Template
 To begin, click on **Templates** in the top menu and then select **Add Template**.
 
 {: .image-popup}
-![Add New Template](/templates/dedia-cashflow/add-template.png)
+![Add New Template](/templates/media-cashflow/add-template.png)
 
 This will take you to the list of all available templates. Among the various categories available, we will focus on the Data App templates for our case. 
 To do this, check the category for data app templates and obtain the list. From this list, select `**Marketing Cashflow** and click on **Use Template**.
@@ -33,23 +34,21 @@ Click **Use Template** to start. Name the template and click **Next Step**.
 
 Now it's time to configure the template.
 
-## How to Configure Template 
-
 {: .image-popup}
 ![Flow](/templates/media-cashflow/flow.png)
 
-**Data extractions** - in the first section, you will select one or multiple data sources (extractors) that will provide all available data. See more details in the section “Data Sources” below.
+1. **Data extractions** – in the first section, you will select one or multiple data sources (extractors) that will provide all available data. See more details in the section **Data Sources** below.
 
-**Snowflake SQL** - prepares all data to be sent to the Data App.
+2. **Snowflake SQL** – prepares all data to be sent to the Data App.
 
-**Data app deployment** - This Data App (third section) visualizes the campaign spending across various advertising platforms. 
-It displays both the total budget and the budget spend per client on different advertising platforms. 
-Additionally, the app provides users with the capability to input or modify budgets for specific clients and choose the advertising platforms 
+3. **Data app deployment** – This data app (third section) visualizes the campaign spending across various advertising platforms. 
+It displays both the total budget and the budget spend per client on different advertising platforms. Additionally,
+the app provides users with the capability to input or modify budgets for specific clients and choose the advertising platforms 
 for which the specific budget will be applied. These changes are promptly saved to storage and become accessible for subsequent data refreshes 
 from advertising campaigns.
 
-Once you authorise at least one data source, click “Configure” in the Data App box to run it. You will need to provide your Keboola Token to do so. 
-Once you enter it, you can save the configuration which will allow you to use the app itself.
+After authorising at least one data source, click **Configure** in the **Data App** box to run it. You will need to provide your Keboola Token to do so. 
+Once you enter, you can save the configuration and start using the app.
 
 {: .image-popup}
 ![Configure Data App](/templates/media-cashflow/configure-data-app.png)
@@ -103,9 +102,7 @@ Authorize the Sklik account using the Sklik Api token and define a list of accou
 
 To access data from your TikTok account, authorize your account and define rows you want to use. Find more details in the [documentation](https://bitbucket.org/kds_consulting_team/kds-team.ex-tiktok-ads/src/master/README.md). 
 
-## How to Use Data App
-
-### Setting Up Data App
+## Setting Up Data App
 
 {: .image-popup}
 ![Setting Up Data App](/templates/media-cashflow/setting-up-app.png)
@@ -121,7 +118,7 @@ To access data from your TikTok account, authorize your account and define rows 
 
 When you need to go back to modify or view the data app, you can find it under **Components** > **Data App**. Simply search for your data app.
 
-### Using Data App
+## Using Data App
 
 {: .image-popup}
 ![Using Data App](/templates/media-cashflow/using-data-app.png)
