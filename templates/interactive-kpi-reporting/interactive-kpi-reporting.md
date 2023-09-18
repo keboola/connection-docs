@@ -6,10 +6,10 @@ permalink: /templates/interactive-kpi-reporting/
 * TOC
 {:toc}
 
-Utilizing the Interactive KPI Reports powered by Shopify data provides a comprehensive overview of critical financial metrics, including turnover, 
+Utilizing Interactive KPI Reports powered by Shopify data provides a comprehensive overview of critical financial metrics, including turnover, 
 orders, and customer data. These insights are presented through a pre-defined data app dashboard equipped with a date filter for your convenience. 
 
-The dashboards show a comparison of planned numbers and actual situation. Moreover, the data app facilitates effortless parameter sharing, enabling seamless
+The dashboards display a comparison between planned numbers and the actual situation. Moreover, the data app facilitates effortless parameter sharing, enabling seamless
 integration with Slack for quick communication. 
 
 With all your data centralized in a single table and location, the need for manual data collection across multiple systems is eliminated, 
@@ -19,12 +19,13 @@ thanks to the automated capabilities of Keboola Connection. Simplify your data m
 ![Required Configuration](/templates/interactive-kpi-reporting/required-config.png)
 
 **The flow in a nutshell:**
-*Note: The template consists of two separate flows. The first flow serves for building the interactive dashboards based on data extracted and transformed from Shopify. The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then it takes over.*
 
-- First you will authorize the component to extract data from your Shopify account. 
-- To prepare the data, an SQL transformation is ready to take over and create a table needed for the Data App
-- The data is then sent into the Data App, where it will be available to the users for viewing and date filtering.
-- Last but not least you will need to authorize the Data Destination component that will be sending the outputs to Slack once the user decides to send any data from the dashboards.
+*Note: The template consists of two separate flows. The first flow is for building interactive dashboards based on transformed data extracted from Shopify. The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then it takes over.*
+
+- First, you will authorize the data source component (extractor) to extract data from your Shopify account. 
+- An SQL transformation will then prepare the data and create a table needed for the data app.
+- The data will then be sent into the data app, where users can view and filter it by date.
+- Finally, you will authorize the data destination component (writer), which will send outputs to Slack when users decide to share data from the dashboards.
 
 ### Flow 1:
 
@@ -46,8 +47,8 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 
 | Name | Description |
 |---|---|
-| ORDER | contains data about the orders, such as the last update, current price of the order and a financial status of the given order (paid/refunded, etc.) |
-| CUSTOMER | contains data of the last id of the last order (last_order_id) and a date stamp of the last update (updated_at) |
+| ORDER | contains data about orders, such as the last update, current price of the order, and a financial status of the given order (paid/refunded, etc.) |
+| CUSTOMER | contains the ID of the last order (last_order_id) and a date stamp of the last update (updated_at) |
 
 ## Data Sources
 This data source is available:
@@ -90,23 +91,27 @@ you will see the newly created flow. Click **Run Template** and start building y
 ![Flow 1 Interactive KPI Report](/templates/interactive-kpi-reporting/flow1-report.png)
 
 ## Use Data App with Interactive KPI Reporting
-To utilize this template fully, you’ll want to set up also the data app, which visualizes the data. The app is already pre-defined. 
+To fully utilize this template, set up the pre-defined data app for data visualization. 
 
-In order to start, simply select this template from the list, and then click **Use Template**. This will guide you to a page where all the details 
-related to this template are described. From here, click **Use Template** once more, give it a name, and click **Next Step**.
+To gets started, follow these steps:
+
+1. Select this template from the list.
+2. Click **Use Template**. This will direct you to a page with detailed information about the template.
+3. Click **Use Template** once more, assign it a name, and proceed to the **Next Step**.
 
 {: .image-popup}
 ![Name Interactive KPI Report](/templates/interactive-kpi-reporting/name-int-kpi-report.png)
 
-This will take you to the page where you can set up the template containing the data app configuration. Here, you will need to provide credentials for the data sources and data destinations you want to use. Once you have completed this step, you can launch your data app using this template.
+This will take you to the page where you can configure the data app template. Here, you will need to provide credentials for the data sources 
+and data destinations you intend to use. Once you have completed this step, you can launch your data app using this template.
 
 {: .image-popup}
 ![Interactive KPI Report PS](/templates/interactive-kpi-reporting/int-kpi-report-ps.png)
 
-A data app has been created. You can also find its details in the section **Components – Data Apps**, where you can always edit the data apps you have created.
+A data app has been created. You can find its details in the **Components – Data Apps** section, where you can edit the apps you have created.
 
-Below, you can see a screenshot of the data app created from the Interactive KPI Report template. Don’t worry, when configuring the app 
-for the Interactive KPI Report, you only need to insert the Keboola Token in the dialog box displayed on the screenshot below and save the configuration.
+Below, you can see a screenshot of the data app created using the Interactive KPI Report template. When configuring the app 
+for the Interactive KPI Report, simply insert the Keboola Token in the dialog box shown in the screenshot below and save the configuration.
 
 {: .image-popup}
 ![Interactive KPI Report – Keboola Token](/templates/interactive-kpi-reporting/keboola-token.png)
@@ -114,10 +119,10 @@ for the Interactive KPI Report, you only need to insert the Keboola Token in the
 {: .image-popup}
 ![Performance Indicators](/templates/interactive-kpi-reporting/performance-indicators.png)
 
-Now you are ready to go. The template is up and running and the interactive dashboards are ready for the users. 
-The URL of the data app can be found in the section **Components > Data Apps** where you can look up the app according to the name you have named it. 
+Now, you are ready to go. The template is operational, and the interactive dashboards are prepared for users. 
+The URL of the data app is located in the **Components > Data Apps** section, where you can search for the app by the name you assigned to it. 
 
-After opening the data app, you can see the link to its UI on the right side of the screen. 
+Upon opening the data app, you will find the link to its user interface on the right side of the screen. 
 
 {: .image-popup}
 ![Opening Data App](/templates/interactive-kpi-reporting/opening-app.png)
@@ -130,14 +135,13 @@ To use a selected data source component, you must first authorize the data sourc
 {: .image-popup}
 ![Shopify Data Source](/templates/interactive-kpi-reporting/shopify-source.png)
 
-You will be asked to fill a few details from your Shopify account in order to authorize the connection between Keboola and Shopify. 
+You will be asked to provide a few details from your Shopify account to authorize the connection between Keboola and Shopify. 
 
-First, you will need the Admin API access token. 
-You can generate it easily using 
-the [Shopify documentation](https://www.shopify.com/partners/blog/17056443-how-to-generate-a-shopify-api-token). 
-The shop name can be found in the Account Settings after signing up to your Shopify account. 
+First, you will need the Admin API access token, which you can easily generate using 
+[Shopify's documentation](https://www.shopify.com/partners/blog/17056443-how-to-generate-a-shopify-api-token). 
+The shop name can be found in the Account Settings after signing in to your Shopify account. 
 
-You can also customize the date coverage you wish to extract into Keboola. For more details related to setting up the Shopify account, 
+Additionally, you have the option to customize the date range you wish to extract into Keboola. For more information on setting up your Shopify account, 
 please refer to the [component documentation](https://components.keboola.com/components/kds-team.ex-shopify).
 
 ## Authorizing Data Destinations
