@@ -425,8 +425,14 @@ items:
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
         
+      - url: /templates/interactive-kpi-reporting/
+        title: Interactive KPI Reporting
+        
       - url: /templates/mailchimp/
         title: MailChimp
+        
+      - url: /templates/media-cashflow/
+        title: Media Cashflow
 
       - url: /templates/project-management/
         title: Project Management
