@@ -10,6 +10,7 @@ The Google Analytics comparison template is designed to provide a quick and comp
 by Google's Universal Analytics (UA) and Google Analytics 4 (GA4). 
 
 We will guide you through the process of building the UA and GA4 Comparison app using a predefined template. 
+
 To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
 For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
@@ -19,13 +20,14 @@ To begin, click on **Templates** in the top menu, and then select **Add Template
 {: .image-popup}
 ![Add New Template](/templates/ua-and-ga4-comparison/add-template.png)
 
-This will take you to the list of all available templates. Among the various categories available, we will focus on the data app templates for our case. 
-To do so, check the box for data app templates and view the list that appears. From this list, select **UA and GA4 Comparison** and click on **Use Template**.
+This will take you to the list of all available templates. Check the box for data app templates and view the list that appears. 
+From this list, select **UA and GA4 Comparison** and click on **Use Template**.
 
 {: .image-popup}
 ![New Template – Data Apps](/templates/ua-and-ga4-comparison/new-template-data-apps.png)
 
-You will then be directed to the main **Template** page, where all the components used are listed. Here, you can also find a general description of the Template. 
+You will then be directed to the main **Template** page, where all the components used are listed. Here, you can also find a general description of the template. 
+
 Click **Use Template** to begin. Name the template, and click **Next Step**.
 
 {: .image-popup}
@@ -36,7 +38,7 @@ Then you will configure the template:
 {: .image-popup}
 ![Flow 2](/templates/ua-and-ga4-comparison/required-configurations2.png)
 
-1. **Data extractions** – First, you will authorize the Universal Analytics data source (extractor) and at least one of the following two sources: GA4 API and/or GA4 from the BigQuery database. They will provide all available data. For more details, see the [Data Sources](/templates/ua-and-ga4-comparison/#authorizing-data-sources) section below.
+1. **Data extractions** – First, you will authorize the Universal Analytics data source (extractor) and at least one of the following two sources: GA4 API and/or GA4 from the BigQuery database. They will provide all available data. For more details, see the [Authorizing Data Sources](/templates/ua-and-ga4-comparison/#authorizing-data-sources) section below.
 
 2. **Snowflake SQL** – Then, the data will be prepared so that it can be sent to the data app.
 
