@@ -12,10 +12,7 @@ and translates your requests into precise SQL commands.
 Ideal for both SQL novices and experts, this app revolutionizes the way you interact with your data and replaces traditional querying methods with **real-time, 
 AI-assisted data insights**. You can now dive into your Snowflake data with ease and efficiency like never before.
 
-We will guide you through the process of building the UA and GA4 Comparison app using a predefined template. 
-
-To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
-For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
+We will guide you through the process of building the UA and GA4 Comparison app using a predefined template.
 
 ## How to Use Template
 To begin, click on **Templates** in the top menu, and then select **Add Template**.
@@ -48,6 +45,8 @@ Click **Configure** and provide all the necessary information. Refer to the scre
 
 Once you have entered all required credentials, click **Save** to run the data app.
 
+To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
+
 ## Setting Up Data App
 {: .image-popup}
 ![Setting Up Data App](/templates/kai-sql-bot/configuring-app.png)
@@ -65,7 +64,9 @@ in the section **Secrets**. These secrets will be injected into the `secrets.tom
 
 **(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
 
-To **modify or view the data app**, you can find it under **Components > Data App**. 
+To modify or view the data app, you can find it under **Components > Data App**. 
+
+For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
 ## Using Data App
 
