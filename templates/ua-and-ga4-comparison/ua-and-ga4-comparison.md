@@ -6,7 +6,7 @@ permalink: /templates/ua-and-ga4-comparison/
 * TOC
 {:toc}
 
-The Google Analytics comparison template is designed to provide a quick and comprehensive overview of the differences between data gathered 
+The Google Analytics comparison template is designed to provide a **quick and comprehensive overview of the differences** between data gathered 
 by Google's Universal Analytics (UA) and Google Analytics 4 (GA4). 
 
 We will guide you through the process of building the UA and GA4 Comparison app using a predefined template. 
