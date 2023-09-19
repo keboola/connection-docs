@@ -93,7 +93,7 @@ Branch, and Main File Path.
 **Secrets** – To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key-value pairs 
 in the section **Secrets**. These secrets will be injected into the `secrets.toml` file upon deployment of the app.
 
-**Table/File Input Mapping** – Select a table or files in the input mapping section
+**Table/File Input Mapping** – Select a table or files in the input mapping section.
 
 **(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
 
