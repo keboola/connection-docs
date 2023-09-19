@@ -452,7 +452,7 @@ items:
       - url: /templates/surveys/
         title: Surveys
 
-      - url: /templates/ua-an-ga4-comparison/
+      - url: /templates/ua-and-ga4-comparison/
         title: UA and GA4 Comparison
 
   - url: /catalog/
