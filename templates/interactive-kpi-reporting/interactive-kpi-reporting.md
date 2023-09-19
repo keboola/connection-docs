@@ -31,7 +31,7 @@ The first flow is for **building interactive dashboards** based on transformed d
 {: .image-popup}
 ![Flow 1](/templates/interactive-kpi-reporting/flow1.png)
 
-### Sending Data to Slack
+### Sending Data into Slack
 The second flow is triggered once the user wants to send any of the data from the interactive dashboard **into Slack**. Then it takes over.
 
 You will authorize the data destination component (writer), which will send outputs to Slack when users decide to share data from the dashboards.
