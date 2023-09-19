@@ -6,15 +6,16 @@ permalink: /templates/kai-promptlab/
 * TOC
 {:toc}
 
-PromptLab is a one-stop solution for enhancing AI interactions. Designed with Streamlit, this application empowers you to automatically refine prompts 
+PromptLab is a one-stop solution for enhancing AI interactions. Designed with Streamlit, this application empowers you to **refine prompts automatically** 
 for optimal clarity and precision. 
 
-Beyond simple improvements, you can also test and compare the outcomes of multiple prompts side-by-side. By leveraging PromptLab's intuitive interface, 
+Beyond mere improvements, you can also **test and compare** the outcomes of multiple prompts side by side. By leveraging PromptLab's intuitive interface, 
 users can quickly identify which prompts yield the best results, streamlining their workflows.
 
 **The flow, in a nutshell:**
+
 The template contains one flow only. It consists of a single component, a data app that serves as an interface for the user. The app is connected to 
-a specific bucket/table within Keboola via an API and provides the possibility for query tuning.
+a specific bucket/table within Keboola Connection via an API and provides the option for query tuning.
 
 ## How to Use Template
 The process is simple. We will guide you through it. 
