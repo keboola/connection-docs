@@ -11,9 +11,6 @@ by Google's Universal Analytics (UA) and Google Analytics 4 (GA4).
 
 We will guide you through the process of building the UA and GA4 Comparison app using a predefined template. 
 
-To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
-For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
-
 ## How to Use Template
 To begin, click on **Templates** in the top menu, and then select **Add Template**.
 
@@ -49,6 +46,8 @@ Once you have authorized the Universal Analytics data source and at least one GA
 
 {: .image-popup}
 ![Configure Data App](/templates/ua-and-ga4-comparison/save-config.png)
+
+To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
 
 ## Authorizing Data Sources
 The following data sources are available:
@@ -97,7 +96,9 @@ in the section **Secrets**. These secrets will be injected into the `secrets.tom
 
 **(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
 
-To **modify or view the data app**, you can find it under **Components > Data App**. 
+To modify or view the data app, you can find it under **Components > Data App**. 
+
+For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
 ## Using Data App
 
