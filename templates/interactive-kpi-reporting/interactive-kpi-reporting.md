@@ -6,11 +6,11 @@ permalink: /templates/interactive-kpi-reporting/
 * TOC
 {:toc}
 
-Utilizing Interactive KPI Reports powered by Shopify data provides a comprehensive overview of critical financial metrics, including turnover, 
-orders, and customer data. These insights are presented through a pre-defined data app dashboard equipped with a date filter for your convenience. 
+Utilizing Interactive KPI Reports powered by Shopify data provides a comprehensive **overview of critical financial metrics**, including turnover, 
+orders, and customer data. These insights are presented through a **pre-defined data app dashboard** equipped with a date filter for your convenience. 
 
-The dashboards display a comparison between planned numbers and the actual situation. Moreover, the data app facilitates effortless parameter sharing, enabling seamless
-integration with Slack for quick communication. 
+The dashboards display a comparison between planned numbers and the actual situation. Moreover, the data app facilitates effortless parameter sharing, 
+enabling **seamless integration with Slack** for quick communication. 
 
 With all your data centralized in a single table and location, the need for manual data collection across multiple systems is eliminated, 
 thanks to the automated capabilities of Keboola Connection. Simplify your data management with ease.
@@ -18,22 +18,23 @@ thanks to the automated capabilities of Keboola Connection. Simplify your data m
 {: .image-popup}
 ![Required Configuration](/templates/interactive-kpi-reporting/required-config.png)
 
-**The flow in a nutshell:**
+## Flows
+The template consists of two separate flows, one for building interactive dashboards and the other for sending data into Slack.
 
-*Note: The template consists of two separate flows. The first flow is for building interactive dashboards based on transformed data extracted from Shopify. 
-The second flow is triggered once the user wants to send any of the data from the interactive dashboard into the Slack. Then it takes over.*
+### Building Dashboards
+The first flow is for **building interactive dashboards** based on transformed data extracted from Shopify:
 
-- First, you will authorize the data source component (extractor) to extract data from your Shopify account. 
-- An SQL transformation will then prepare the data and create a table needed for the data app.
-- The data will then be sent into the data app, where users can view and filter it by date.
-- Finally, you will authorize the data destination component (writer), which will send outputs to Slack when users decide to share data from the dashboards.
-
-### Flow 1:
+  - First, you will authorize the data source component (extractor) to extract data from your Shopify account. 
+  - An SQL transformation will then prepare the data and create a table needed for the data app.
+  - The data will then be sent into the data app, where users can view and filter it by date.
 
 {: .image-popup}
 ![Flow 1](/templates/interactive-kpi-reporting/flow1.png)
 
-### Flow 2:
+### Sending Data into Slack
+The second flow is triggered once the user wants to send any of the data from the interactive dashboard **into Slack**. Then it takes over.
+
+You will authorize the data destination component (writer), which will send outputs to Slack when users decide to share data from the dashboards.
 
 {: .image-popup}
 ![Flow 2](/templates/interactive-kpi-reporting/flow2.png)
@@ -91,7 +92,7 @@ you will see the newly created flow. Click **Run Template** and start building y
 {: .image-popup}
 ![Flow 1 Interactive KPI Report](/templates/interactive-kpi-reporting/flow1-report.png)
 
-## Use Data App with Interactive KPI Reporting
+## How to Use Data App
 To fully utilize this template, set up the pre-defined data app for data visualization. 
 
 To get started, follow these steps:

@@ -6,14 +6,12 @@ permalink: /templates/media-cashflow/
 * TOC
 {:toc}
 
-The Media Cashflow template combines data from various platforms, such as ECB currency rates, Meta, Google Ads, LinkedIn, TikTok, and Sklik. 
-It then transforms this data and consolidates it into a single data model for further deployment in a data app. In this app, users can view and filter 
-expenses by client, identify upcoming payments, or change budgets for campaigns.
+The Media Cashflow template **combines data from various platforms**, such as ECB currency rates, Meta, Google Ads, LinkedIn, TikTok, and Sklik. 
+It then transforms this data and consolidates it into a single data model for **further deployment in a data app**. 
+
+In this app, users can view and filter expenses by client, identify upcoming payments, or change budgets for campaigns.
 
 We will guide you through the process of building the Media Cashflow app using a predefined template. 
-
-To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
-For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
 ## How to Use Template
 To begin, click on **Templates** in the top menu, and then select **Add Template**.
@@ -51,6 +49,8 @@ For more details, see the section [Data Sources](/templates/media-cashflow/#data
    
 {: .image-popup}
 ![Configure Data App](/templates/media-cashflow/configure-data-app.png)
+
+To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/).
 
 ## Data Sources
 The following data sources are available:
@@ -117,7 +117,9 @@ or utilize your own Git repository. In order to run the app successfully, you ne
 
 **(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
 
-To **modify or view the data app**, you can find it under **Components > Data App**. 
+To modify or view the data app, you can find it under **Components > Data App**. 
+
+For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
 ## Using Data App
 

@@ -427,6 +427,12 @@ items:
         
       - url: /templates/interactive-kpi-reporting/
         title: Interactive KPI Reporting
+
+      - url: /templates/kai-promptlab/
+        title: Kai PromptLab
+
+      - url: /templates/kai-sql-bot/
+        title: Kai SQL Bot
         
       - url: /templates/mailchimp/
         title: MailChimp
@@ -445,6 +451,9 @@ items:
 
       - url: /templates/surveys/
         title: Surveys
+
+      - url: /templates/ua-an-ga4-comparison/
+        title: UA and GA4 Comparison
 
   - url: /catalog/
     title: Data Catalog

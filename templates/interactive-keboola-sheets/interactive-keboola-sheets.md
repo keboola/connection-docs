@@ -6,12 +6,12 @@ permalink: /templates/interactive-keboola-sheets/
 * TOC
 {:toc}
 
-Simplify data editing and management within your company using the **Interactive Keboola Sheets** template. 
-This data app eliminates the need to export data to external tools, allowing business users to directly access and edit tables stored in Keboola Connection Storage.
+This template will help you simplify data editing and management within your company. 
+The data app eliminates the need to export data to external tools, allowing business users to **directly access and edit tables stored in Keboola Connection Storage**.
 
 By centralizing data editing, the app enhances collaboration, reduces errors, and streamlines your data management processes. 
-Replace manual data manipulation with a seamless data editing solution. Utilizing this template will provide you with a more efficient and user-friendly approach 
-to editing and managing data. 
+Replace manual data manipulation with a seamless data editing solution. Utilizing this template will provide you with a **more efficient** and **user-friendly** 
+approach to editing and managing data. 
 
 The flow consists of only one component – the data app itself; no complex flow configuration is needed.
 
