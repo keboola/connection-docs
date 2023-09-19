@@ -6,9 +6,10 @@ permalink: /templates/media-cashflow/
 * TOC
 {:toc}
 
-The Media Cashflow template combines data from various platforms, such as ECB currency rates, Meta, Google Ads, LinkedIn, TikTok, and Sklik. 
-It then transforms this data and consolidates it into a single data model for further deployment in a data app. In this app, users can view and filter 
-expenses by client, identify upcoming payments, or change budgets for campaigns.
+The Media Cashflow template **combines data from various platforms**, such as ECB currency rates, Meta, Google Ads, LinkedIn, TikTok, and Sklik. 
+It then transforms this data and consolidates it into a single data model for **further deployment in a data app**. 
+
+In this app, users can view and filter expenses by client, identify upcoming payments, or change budgets for campaigns.
 
 We will guide you through the process of building the Media Cashflow app using a predefined template. 
 
