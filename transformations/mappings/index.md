@@ -72,6 +72,10 @@ The supported database types are [Snowflake](https://www.snowflake.com/),
 *See an example of [setting up an input mapping](/tutorial/manipulate/#input-mapping) in our tutorial.*
 
 #### Options
+
+{% include warning.html content="When using table with native data types, following options will not be available." %}
+
+
 - **Source** --- Select a table or a bucket in Storage as the source table for your transformation. If you select 
 a bucket, it is the equivalent of selecting all tables currently present in the bucket. It does not automatically 
 add future tables to the selection.
