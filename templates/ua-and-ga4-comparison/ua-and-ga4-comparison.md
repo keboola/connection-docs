@@ -6,8 +6,8 @@ permalink: /templates/ua-and-ga4-comparison/
 * TOC
 {:toc}
 
-The Google Analytics comparison template is designed to give a quick and comprehensive overview of the differences 
-between data gathered by the Universal Analytics (UA) tool by Google compared to the new Google Analytics 4 (GA4). 
+The Google Analytics comparison template is designed to provide a quick and comprehensive overview of the differences between data gathered 
+by Google's Universal Analytics (UA) and Google Analytics 4 (GA4). 
 
 We will guide you through the process of building the UA and GA4 Comparison app using a predefined template. 
 To learn more about how templates work, please refer to [this page](https://help.keboola.com/templates/). 
@@ -36,14 +36,14 @@ Then you will configure the template:
 {: .image-popup}
 ![Flow 2](/templates/ua-and-ga4-comparison/required-configurations2.png)
 
-1. **Data extractions** – First, you will authorize the Universal Analytics data source (extractor) and at least one of the following two sources: GA4 API and/or GA4 from the Big Query database. They will provide all available data. For more details, see the section [Data Sources](/templates/ua-and-ga4-comparison/#authorizing-data-sources) below.
+1. **Data extractions** – First, you will authorize the Universal Analytics data source (extractor) and at least one of the following two sources: GA4 API and/or GA4 from the BigQuery database. They will provide all available data. For more details, see the [Data Sources](/templates/ua-and-ga4-comparison/#authorizing-data-sources) section below.
 
-2. **Snowflake SQL** – Then the data will be prepared so it can be sent to the data app.
+2. **Snowflake SQL** – Then, the data will be prepared so that it can be sent to the data app.
 
-3. **Data app deployment** – The data app will download data from Universal Analytics and one or two additional data sources, and it will integrate it.
+3. **Data app deployment** – The data app will download data from Universal Analytics and one or two additional sources, integrating them thereafter.
 
-Once you authorize the Universal Analytics data source and at least one GA4 data source, click **Configure** in the data app. Then tick the checkbox 
-**Let’s do it** to run the app.
+Once you have authorized the Universal Analytics data source and at least one GA4 data source, click **Configure** in the data app. Then, tick the checkbox 
+**Let’s Do It** to run the app.
 
 {: .image-popup}
 ![Configure Data App](/templates/ua-and-ga4-comparison/save-config.png)
@@ -58,10 +58,10 @@ The following data sources are available:
 Apart from Universal Analytics, you must authorize at least more data source.
 
 **Important:** We use the Google Analytics component for both Universal Analytics (formerly GA3) and Google Analytics 4. 
-Therefore, it's essential to be cautious about which component you are authorizing.
+Therefore, it's essential to exercise caution when determining which component you are authorizing.
 
 ### Universal Analytics
-Please authorize your Universal Analytics account (formerly GA3), and select the period for extracting the data..
+Please authorize your Universal Analytics account (formerly known as GA3), and select the period for data extraction.
 
 {: .image-popup}
 ![Authorize Data Source](/templates/ua-and-ga4-comparison/universal-analytics.png)
@@ -112,10 +112,10 @@ that recalculates specific GA4 metrics to align with the GA UA methodology.
 Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
 
 ### Authorizing AU instead of GA4
-**Important:** As mentioned above, we curently use the Google Analytics component for both Universal Analytics (formerly GA 3) and Google Analytics 4. 
-Therefore, it's essential to be cautious about which component you are authorizing.
+**Important:** As mentioned above, we currently use the Google Analytics component for both Universal Analytics (formerly known as GA 3) and Google Analytics 4. 
+Therefore, it's essential to exercise caution when determining which component you are authorizing.
 
-If you happen to authorize Google Analytics 4 with a Universal Analytics (formerly GA 3) account by mistake, you will see the following error message:
+If you accidentally authorize Google Analytics 4 with a Universal Analytics (formerly GA 3) account by mistake, you will see the following error message:
 
 {: .image-popup}
 ![Error Message](/templates/ua-and-ga4-comparison/job-error.png)
