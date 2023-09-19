@@ -21,8 +21,8 @@ thanks to the automated capabilities of Keboola Connection. Simplify your data m
 ## Flows
 The template consists of two separate flows, one for building interactive dashboards and the other for sending data into Slack.
 
-### Flow 1
-This flow is for **building interactive dashboards** based on transformed data extracted from Shopify:
+### Building Dashboards
+The first flow is for **building interactive dashboards** based on transformed data extracted from Shopify:
 
   - First, you will authorize the data source component (extractor) to extract data from your Shopify account. 
   - An SQL transformation will then prepare the data and create a table needed for the data app.
@@ -31,8 +31,8 @@ This flow is for **building interactive dashboards** based on transformed data e
 {: .image-popup}
 ![Flow 1](/templates/interactive-kpi-reporting/flow1.png)
 
-### Flow 2  
-The second flow is triggered once the user wants to send any of the data from the interactive dashboard **into the Slack**. Then it takes over.
+### Sending Data to Slack
+The second flow is triggered once the user wants to send any of the data from the interactive dashboard **into Slack**. Then it takes over.
 
 You will authorize the data destination component (writer), which will send outputs to Slack when users decide to share data from the dashboards.
 
@@ -92,7 +92,7 @@ you will see the newly created flow. Click **Run Template** and start building y
 {: .image-popup}
 ![Flow 1 Interactive KPI Report](/templates/interactive-kpi-reporting/flow1-report.png)
 
-## Use Data App with Interactive KPI Reporting
+## How to Use Data App
 To fully utilize this template, set up the pre-defined data app for data visualization. 
 
 To get started, follow these steps:
