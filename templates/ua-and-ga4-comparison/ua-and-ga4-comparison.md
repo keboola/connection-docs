@@ -61,7 +61,7 @@ Apart from Universal Analytics, you must authorize at least more data source.
 Therefore, it's essential to be cautious about which component you are authorizing.
 
 ### Universal Analytics
-Please authorize your Universal Analytics account (formerly GA3).
+Please authorize your Universal Analytics account (formerly GA3), and select the period for extracting the data..
 
 {: .image-popup}
 ![Authorize Data Source](/templates/ua-and-ga4-comparison/universal-analytics.png)
@@ -73,14 +73,14 @@ Please authorize your Google Analytics 4 account.
 ![Authorize Data Source GA4](/templates/ua-and-ga4-comparison/ga4.png)
 
 ### Google BigQuery
-Please authorize your Google BigQuery account. 
+Please authorize your Google BigQuery account. To create a new JSON key, follow this [guide](https://help.keboola.com/components/writers/database/bigquery/).
 
 {: .image-popup}
 ![Authorize Data Source BigQuery](/templates/ua-and-ga4-comparison/bigquery.png)
 
 ## Setting Up Data App
 {: .image-popup}
-![Setting Up Data App](/templates/ua-and-ga4-comparison/setting-up-app.png)
+![Setting Up Data App](/templates/ua-and-ga4-comparison/configuring-app.png)
 
 **Deployment Type** – A Git repository is used for this data app.
 
@@ -100,7 +100,7 @@ To **modify or view the data app**, you can find it under **Components > Data Ap
 ## Using Data App
 
 {: .image-popup}
-![Using Data App](/templates/ua-and-ga4-comparison/using-data-app.png)
+![Using Data App](/templates/ua-and-ga4-comparison/using-app.png)
 
 This data application enables business users to compare the performance of Google Universal Analytics (GA UA) and Google Analytics 4 (GA4). 
 
