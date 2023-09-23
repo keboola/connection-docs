@@ -107,6 +107,9 @@ items:
           - url: /components/extractors/database/
             title: Databases
             items:
+              - url: /components/extractors/database/mysql/
+                title: MySql
+
               - url: /components/extractors/database/azure-storage-table/
                 title: Azure Storage Table
 

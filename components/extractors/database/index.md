@@ -29,7 +29,7 @@ There are a number of connectors for [**SQL databases**](/components/extractors/
 There may exist several variants of connectors for each database type, depending on the strategy used. 
 In general there are be two types of connectors:
 
-### Relational Sync Connectors
+### Query Based Connectors
 
 These connectors work on a relational level, meaning they perform queries against the source database in order to sync data. 
 This is the simplest approach suitable for most use cases, allowing for Timestamp-based CDC replication.
@@ -90,11 +90,12 @@ There may be different approaches to the CDC. Keboola database connectors suppor
 - **Log-based** - Reading the database low-level proprietary transaction log directly to replicate the changes.
 
 
-| CDC Type            | Pros                                                                          | Cons                                                                                                                                                         | Keboola Implementation                       |
-|---------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
-| **Timestamp-based** | - low cost<br/>-simple to use                                                 | - may increase load on the database<br/>- Can only process soft-deletes not DELETE statements<br/>- the source tables must have appropriate column available | Incremental Fetching                         |
-| **Trigger-based**   | - can capture DELETES<br/>- customizable                                      | - executional overhead and higher load on the production<br/>- Implementation overhead<br/>- events may need to be replicated in downstream logic            | SQL Server CDC                               |
-| **Log-based**       | - no computational overhead on production<br/>- can detect hard DELETEs<br/>- | - higher costs<br/>- may be overkill for small use-cases                                                                                                     | Binlog type extractors like MySql Binlog CDC |
+
+| CDC Type                                                                     | Pros                                                                               | Cons                                                                                                                                                         | Keboola Implementation                                                                 |
+|------------------------------------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| [**Timestamp-based**](/components/extractors/database/#incremental-fetching) | - low cost<br/>-simple to use                                                      | - may increase load on the database<br/>- Can only process soft-deletes not DELETE statements<br/>- the source tables must have appropriate column available | Incremental Fetching                                                                   |
+| **Trigger-based**                                                            | - can capture DELETES<br/>- customizable                                           | - executional overhead and higher load on the production<br/>- Implementation overhead<br/>- events may need to be replicated in downstream logic            | Using standard [DB Extractors](/components/extractors/database/sqldb/)                 |
+| [**Log-based**](/components/extractors/database/#log-based-replication)      | - no computational overhead on production<br/>- can detect hard DELETEs<br/>- Fast | - higher costs<br/>- may be overkill for small use-cases                                                                                                     | Binlog type extractors like [MySql Binlog CDC](/components/extractors/database/mysql/) |
 
 
 
@@ -157,4 +158,4 @@ In general the log-based connectors function in this way:
 
 The currently supported log based connectors:
 
-- MySql Binlog CDC
+- [MySql Binlog CDC](/components/extractors/database/mysql/)

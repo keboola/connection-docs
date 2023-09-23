@@ -1,5 +1,5 @@
 ---
-title: Data Source Connectors for SQL Databases
+title: Relational Sync Extractors for SQL Databases
 permalink: /components/extractors/database/sqldb/
 redirect_from:
     - /extractors/database/sqldb/
@@ -9,7 +9,9 @@ redirect_from:
 * TOC
 {:toc}
 
-Each data source connector from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries.
+Each data source connector from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries. 
+This category of DB Extractors performs direct queries against the source system. 
+Enabling the [_Time-stamp based_]((/components/extractors/database/#incremental-fetching)) CDC replication.
 
 The connectors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html), 
 [Firebird](http://www.firebirdsql.org/), [IBM DB2](https://www.ibm.com/analytics/db2), 
