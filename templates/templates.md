@@ -74,4 +74,4 @@ Make any desired changes, and then click **Save**. This will update the specific
 to the Template overview. From there, you can run the template with the new configuration.
 
 {: .image-popup}
-![Screenshot - Save Configuration](/templates/save.png)
+![Save Configuration](/templates/save.png)
