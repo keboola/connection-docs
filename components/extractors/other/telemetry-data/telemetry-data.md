@@ -17,7 +17,7 @@ To configure the extractor, select one of the following modes:
  
 1. [**Project mode**](#project-mode-tables): Extracts data only from a selected Keboola Connection project.
 2. [**Organization mode**](#organization-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This must be set up by Keboola. After configuring the extractor, contact your Keboola Account Manager or our [support team](/management/support/).
-3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contact and also must be set up by Keboola. After configuring the extractor, contact your Keboola Account Manager or our [support team](/management/support/).
+3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contract and also must be set up by Keboola. After configuring the extractor, contact your Keboola Account Manager or our [support team](/management/support/).
 
 ## Data Model
 The model below helps you better understand relations between individual tables extracted by this component. 
