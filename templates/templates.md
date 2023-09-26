@@ -19,45 +19,45 @@ can be modified like any other configuration you have [created manually](/compon
 To use a data template, go to the **Templates** section. 
 
 {: .image-popup}
-![Data Templates Intro](/templates/1.png)
+![Screenshot - Data Templates Intro](/templates/1.png)
 
 Search for a template that interests you, and click on it to see more details:
 
 {: .image-popup}
-![Data Templates Intro](/templates/2.png)
+![Screenshot - Data Templates Intro](/templates/2.png)
 
 On the data template detail page you can see a detailed description and a list of all components that the template will use. 
 Apply the template by clicking the **Use Template** button:
 
 {: .image-popup}
-![Data Templates Detail](/templates/3.png)
+![Screenshot - Data Templates Detail](/templates/3.png)
 
 Name the template.
 
 {: .image-popup}
-![Data Templates Detail](/templates/4.png)
+![Screenshot - Data Templates Detail](/templates/4.png)
 
 A list of configurations that will be created is shown. Some configurations require that you enter parameters for them – 
 in this case the `Salesforce to Snowflake` configuration:
 
 {: .image-popup}
-![Configure Data Template](/templates/5.png)
+![Screenshot - Configure Data Template](/templates/5.png)
 
 Enter the required parameters and **Save** the configuration:
 
 {: .image-popup}
-![Configure Salesforce](/templates/7.png)
+![Screenshot - Configure Salesforce](/templates/7.png)
 
 When all components are properly configured, you can click on **Save**; otherwise the save option won't be allowed:
 
 {: .image-popup}
-![Use Template when all is Configured](/templates/8.png)
+![Screenshot - Use Template when all is Configured](/templates/8.png)
 
 When the creation is complete, you'll see the configured template. Clicking on it will show you the flow 
 with all created configurations. Run the flow to see the data template in action.
 
 {: .image-popup}
-![Use Data Template](/templates/9.png)
+![Screenshot - Use Data Template](/templates/9.png)
 
 ## Creating Data Template
 Creating your own data template is possible. You will need to install [Keboola CLI](https://developers.keboola.com/cli/). You can store template definitions locally
@@ -68,10 +68,10 @@ Once your data template is configured, you can update it at any time. To edit an
 and click on it. In the top menu, click **Edit Template Instance**.
 
 {: .image-popup}
-![Edit Template Instance](/templates/edit-template-instance.png)
+![Screenshot - Edit Template Instance](/templates/edit-template-instance.png)
 
 Make any desired changes, and then click **Save**. This will update the specific template you've selected. Afterward, you will be redirected back 
 to the Template overview. From there, you can run the template with the new configuration.
 
 {: .image-popup}
-![Save Configuration](/templates/save.png)
+![Screenshot - Save Configuration](/templates/save.png)
