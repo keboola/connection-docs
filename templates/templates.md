@@ -62,3 +62,16 @@ with all created configurations. Run the flow to see the data template in action
 ## Creating Data Template
 Creating your own data template is possible. You will need to install [Keboola CLI](https://developers.keboola.com/cli/). You can store template definitions locally
 on your computer or in the GitHub repository. We currently support only public repositories. 
+
+## Updating Data Template
+Once your data template is configured, you can update it at any time. To edit an existing template, navigate to **Templates**, search for your template, 
+and click on it. In the top menu, click **Edit Template Instance**.
+
+{: .image-popup}
+![Screenshot - Edit Template Instance](/templates/edit-template-instance.png)
+
+Make any desired changes, and then click **Save**. This will update the specific template you've selected. Afterward, you will be redirected back 
+to the Template overview. From there, you can run the template with the new configuration.
+
+{: .image-popup}
+![Screenshot - Save Configuration](/templates/save.png)
