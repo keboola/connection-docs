@@ -1013,6 +1013,8 @@ A table with a type definition is created using the [tables-definition endpoint]
 
 A component may provide information about column data types in its data manifest. Database extractors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database extractors and transformations that do NOT match the backend will create storage tables using [base types](#base-types). 
 
+_**Note:** When a table is created from base types, it uses default lengths and precisions of the target backend. For example, in Snowflake, this means, that the NUMBER base type is created as NUMBER(38,0), which might be unexpected if the source database column is NUMBER(10,2)._  
+
 For example, this is how you can create typed tables in a Snowflake SQL transformation that will be imported to storage as typed tables: 
 
 ```sql
