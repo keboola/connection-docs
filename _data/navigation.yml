@@ -168,6 +168,9 @@ items:
                   - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
                     title: Columns and primary keys of report presets
 
+              - url: /components/extractors/marketing-sales/pinterest-ads/
+                title: Pinterest Ads
+
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
 
