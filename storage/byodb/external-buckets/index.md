@@ -6,7 +6,7 @@ permalink: /storage/byodb/external-buckets/
 * TOC
 {:toc}
 
-If you operate Keboola in <abbr title="Bring Your Own Database">BYODB</abbr> mode on top of you own data warehouse, the data residing in the warehouse is not automatically visible or accessible from inside Keboola. We're addressing this by providing the external buckets feature.
+If you operate Keboola in Bring Your Own Database (BYODB)  mode on top of your own data warehouse, the data residing in the warehouse is not automatically visible or accessible from inside Keboola. We're addressing this by providing the **External Buckets** feature.
 
 The exact implementation of external buckets depends on the database backend you use. It can be database, schema, or some other concept. Unless stated otherwise, we'll describe the implementation for Snowflake.
 
