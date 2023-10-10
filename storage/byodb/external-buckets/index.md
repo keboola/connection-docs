@@ -6,7 +6,7 @@ permalink: /storage/byodb/external-buckets/
 * TOC
 {:toc}
 
-If you operate Keboola in <abbr title="Bring Your Own Database">BYODB</abbr> mode on top of you own data warehouse, the data residing in the warehouse is not automatically visible or accessible from inside Keboola. We're addressing this by providing external buckets feature.
+If you operate Keboola in <abbr title="Bring Your Own Database">BYODB</abbr> mode on top of you own data warehouse, the data residing in the warehouse is not automatically visible or accessible from inside Keboola. We're addressing this by providing the external buckets feature.
 
 The exact implementation of external buckets depends on the database backend you use. It can be database, schema, or some other concept. Unless stated otherwise, we'll describe the implementation for Snowflake.
 
@@ -16,9 +16,47 @@ Storage in Keboola Connection is organized in [buckets](/storage/buckets/). **Ex
 
 ## How to create an external bucket
 
-First, you need locate the source data in your warehouse. In Snowflake that means `database` and `schema` where the data resides. Then you need to register the schema as an external bucket in Keboola Connection. You can do that in the Storage section of the project. Click on the **Register External Data** button and select. Fill in the name of the new bucket, database name and schema name. Then continue to the next step, where we'll provide you with a guide on how to correctly grant Keboola access to the schema in Snowflake. Once you grant the access, click **Register bucket** and you can start using it.
+External bucket can be created in the Storage section of the project. 
 
-When a database schema is registered as external bucket we analyse the metadata of the schema and tabular data within and register all tables and views in the schema as tables in the bucket. If you later add additional objects to the schema, you need to manually refresh it using the **Refresh** action in bucket detail to make them visible in Keboola Connection. 
+{: .image-popup}
+![Register external data button](/storage/byodb/external-buckets/figures/1.png)
+
+Click on the **Register External Data** button. The dialog differs based on backend you are using. 
+
+### Snowflake
+
+Fill in the name of the new bucket, database name and schema name. 
+
+{: .image-popup}
+![Register external data popup - Snowflake](/storage/byodb/external-buckets/figures/2-snflk.png)
+
+Then continue to the next step, where we'll provide you with a guide on how to correctly grant Keboola access to the schema in Snowflake.
+
+{: .image-popup}
+![Register external data popup step 2 - Snowflake](/storage/byodb/external-buckets/figures/3-snflk.png)
+
+Once you grant the access, click **Register bucket** and you can start using it.
+
+### BigQuery
+
+Fill in the name of the new bucket and dataset name. 
+
+{: .image-popup}
+![Register external data popup - BigQuery](/storage/byodb/external-buckets/figures/2-bq.png)
+
+Then continue to the next step, where we'll provide you with a guide on how to correctly grant Keboola access to the dataset in BigQuery.
+
+{: .image-popup}
+![Register external data popup step 2 - BigQuery](/storage/byodb/external-buckets/figures/3-bq.png)
+
+Once you are done, click **Register bucket** and you can start using it.
+
+### Considerations
+
+When you register an external bucket we analyse the metadata of objects in it and register all tables and views as tables in the bucket in Keboola Connection. If you later add additional tables or views, you need to manually refresh the external bucket using the **Refresh** action in bucket detail to make them visible in Keboola Connection. 
+
+{: .image-popup}
+![Bucket refresh](/storage/byodb/external-buckets/figures/4.png)
 
 ## How to use an external bucket
 
@@ -28,14 +66,18 @@ External buckets are not part of normal [Input Mapping](transformations/mappings
 
 Because external buckets are not part of normal [Input Mapping](transformations/mappings/#input-mapping), they are not copied into your transformation workspace. You need to refrence them in you transformation using fully-qualified name.
 
-In the following example, you created an external bucket called `accounting_emea`, that references schema `emea_schema` in database `accounting_db`. The schema contains table `invoices`. You want to create a new table `EMEA_INVOICES_UNPAID` that contains only unpaid invoices. You can do that using the following SQL:
+In the following example, you created an external bucket called `emea_sales`, that references schema `sales_emea` in database `REPORTING`. The schema contains table `users`. You want to create a new table `MQL_USERS` that contains only users sourced from marketing qualified leads. You can do that using the following SQL:
 
 ```sql
-CREATE TABLE "EMEA_INVOICES_UNPAID" AS SELECT * 
-FROM "accounting_db"."emea_schema"."invoices"
-WHERE "status" = 'unpaid';
+CREATE TABLE "MQL_USERS" AS SELECT * 
+FROM "REPORTING"."sales_emea"."users"
+WHERE "source" = 'mql';
 ```
-Note, how the query uses the fully-qualified name of the table in the `FROM` clause.
+Note, how the query uses the **fully-qualified name** of the table in the `FROM` clause.
+
+### Using external bucket in BigQuery SQL transformation
+
+In BigQuery the external bucket is mapped to an actual dataset `emea_sales` (name you filled in the dialog) in your project - in this case project `sapi-9752`. You can reference the contents of the dataset in your SQL transformation using fully-qualified name. Notice that the dataset name is _the one you filled in the dialog_, **not** the one of the original dataset that was created in BigQuery. There is no technical limitation though, they can have the same name. 
 
 ## How to remove an external bucket
 
