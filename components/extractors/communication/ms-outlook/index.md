@@ -20,9 +20,6 @@ To configure the connection, please specify following parameters in IMAP Setting
 #### User Name
 Your email address, for example: data@keboola.onmicrosoft.com
 
-#### Password 
-Leave this field empty. The component will use oAuth 2.0 for authentication.
-
 #### IMAP Host
 Address of the IMAP server. Use outlook.office365.com for Office 365. 
 
