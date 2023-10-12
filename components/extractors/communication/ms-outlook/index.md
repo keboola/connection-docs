@@ -10,6 +10,8 @@ redirect_from:
 
 Microsoft Outlook extractor for Office 365
 
+This extractor is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
+
 ## Authorization
 [Create a new configuration](/components/#creating-component-configuration) of the **MS Outlook** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
