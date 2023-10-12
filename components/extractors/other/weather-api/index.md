@@ -47,7 +47,7 @@ Each row in the input table represents a single API request.
 ## Output
 There are four output tables:
 
-- `weather_astronomical.csv`: Contains daily astronomical future and historical forecasts.
-- `weather_daily.csv`: Contains daily future and historical forecasts.
-- `weather_hourly.csv`: Contains hourly future and historical forecasts.
+- `weather_astronomical.csv`: Contains daily historical and future astronomical data.
+- `weather_daily.csv`: Contains daily forecasts and historical data.
+- `weather_hourly.csv`: Contains hourly forecasts and historical data.
 - `failed_fetches.csv`: If the 'continue on failure' parameter is set to `true`, this table will record any errors that occurr during data fetching.
