@@ -13,9 +13,7 @@ The exact implementation of external buckets depends on the database backend you
 
 ## What Is an External Bucket?
 
-Storage in Keboola Connection is organized into [buckets](/storage/buckets/). An **external bucket** is a special type of bucket wherein the contents of the bucket are not managed by Keboola. 
-It can be located anywhere in your data warehouse and is a virtual bucket created atop a Snowflake schema. All table-like objects (such as tables, views, and external tables) inside the schema 
-are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola Connection. A single schema can be registered with multiple projects in Keboola Connection simultaneously.
+Storage in Keboola Connection is organized into [buckets](/storage/buckets/). An **external bucket** is a special type of bucket wherein the contents of the bucket are not managed by Keboola. It can be located _anywhere in the storage backend used by your Keboola Connection project_ (Snowflake or BigQuery) and is a virtual bucket created atop a Snowflake schema or BigQuery dataset respectively. All table-like objects (such as tables, views, and external tables) inside the schema are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola Connection. A single schema can be registered with multiple projects in Keboola Connection simultaneously.
 
 ## Creating an External Bucket
 
@@ -98,8 +96,8 @@ If you wish to remove the schema, you will need to do so manually in your wareho
 
 * Use external buckets to consume data in your warehouse produced by 3rd-party tools outside of Keboola.
 * Use external buckets to access data in table-like structures that are not directly supported by Keboola (e.g., views or external tables).
-* **Do not** use external buckets to load data into Keboola Connnection from services that already have an existing component.
+* **It's discouraged** to use external buckets to load data into Keboola Connnection from services that already have an existing component. Consider the following limitations of such approach:
     * You would have to orchestrate, maintain, and monitor the external pipeline, which is normally done by Keboola for you.
     * Manipulation with the data will not be tracked in the Keboola Connection audit trail.
-    * Event-driven triggering is not supported for external buckets, so you would need to synchronize the pipelines manually based on time.
+    * Event-driven triggering is not supported for external buckets, so you would need to synchronize the external and Keboola pipelines manually based on time.
 * While there are legitimate uses of external tools, keep in mind that by having data pipelines outside Keboola, you lose the main benefit of Keboola Connection – the ability to orchestrate, maintain, monitor, and audit the pipelines in one place.
