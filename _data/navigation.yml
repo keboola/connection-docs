@@ -502,6 +502,9 @@ items:
 
       - url: /storage/byodb/
         title: Bring Your Own Database
+        items:
+          - url: /storage/byodb/external-buckets/
+            title: External Buckets
 
   - url: /orchestrator/
     title: Orchestrations
