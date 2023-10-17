@@ -43,6 +43,9 @@ Then continue to the next step, where we will provide you with a guide on how to
 {: .image-popup}
 ![Register external data popup step 2 - Snowflake](/storage/byodb/external-buckets/figures/3-snflk.png)
 
+{: .alert.alert-info}
+Note: This set of permissions grants the Keboola service account read-only access to the data.
+
 Once you are done, click **Register Bucket**, and you can start using it.
 
 ### BigQuery
@@ -56,6 +59,9 @@ Then continue to the next step, where we will provide you with a guide on how to
 
 {: .image-popup}
 ![Register external data popup step 2 - BigQuery](/storage/byodb/external-buckets/figures/3-bq.png)
+
+{: .alert.alert-info}
+Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
 
 Once you are done, click **Register Bucket**, and you can start using it.
 
