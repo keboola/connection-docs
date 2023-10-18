@@ -11,6 +11,13 @@ We address this by providing the **External Buckets** feature.
 
 The exact implementation of external buckets depends on the database backend you use; it could be a database, schema, or another concept. Unless stated otherwise, we will describe the implementation for Snowflake.
 
+<div class="clearfix"></div>
+
+{: .alert.alert-info}
+External buckets feature is available only in the BYODB mode. To enable it, please contact [support](/management/support).
+
+{% include public-beta-warning.html %}
+
 ## What Is an External Bucket?
 
 Storage in Keboola Connection is organized into [buckets](/storage/buckets/). An **external bucket** is a special type of bucket wherein the contents of the bucket are not managed by Keboola. It can be located _anywhere in the storage backend used by your Keboola Connection project_ (Snowflake or BigQuery) and is a virtual bucket created atop a Snowflake schema or BigQuery dataset respectively. All table-like objects (such as tables, views, and external tables) inside the schema are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola Connection. A single schema can be registered with multiple projects in Keboola Connection simultaneously.
@@ -36,6 +43,9 @@ Then continue to the next step, where we will provide you with a guide on how to
 {: .image-popup}
 ![Register external data popup step 2 - Snowflake](/storage/byodb/external-buckets/figures/3-snflk.png)
 
+{: .alert.alert-info}
+Note: This set of permissions grants the Keboola service account read-only access to the data.
+
 Once you are done, click **Register Bucket**, and you can start using it.
 
 ### BigQuery
@@ -49,6 +59,9 @@ Then continue to the next step, where we will provide you with a guide on how to
 
 {: .image-popup}
 ![Register external data popup step 2 - BigQuery](/storage/byodb/external-buckets/figures/3-bq.png)
+
+{: .alert.alert-info}
+Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
 
 Once you are done, click **Register Bucket**, and you can start using it.
 
@@ -70,22 +83,29 @@ Keep in mind that external buckets cannot be used in an [output mapping](transfo
 Because external buckets are not part of a normal [input mapping](transformations/mappings/#input-mapping), they are not copied into your transformation workspace. 
 You need to reference them in you transformation using a fully-qualified name.
 
-In the following example, you will create an external bucket called `emea_sales` that references the `sales_emea`schema in the database `REPORTING`. The schema contains a table called `users`. 
-You want to create a new table `MQL_USERS` that contains only users sourced from marketing qualified leads. You can do that using the following SQL:
+In the following example, you've created an external bucket called `users-reporting` that references the `sales_emea` schema in the database `REPORTING`. The schema contains a table called `users`. You want to create a new table `MQL_USERS` that contains only users sourced from marketing qualified leads. You can do that using the following SQL:
 
 ```sql
 CREATE TABLE "MQL_USERS" AS SELECT * 
 FROM "REPORTING"."sales_emea"."users"
 WHERE "source" = 'mql';
 ```
+
 *Note: The query uses the **fully-qualified name** of the table in the `FROM` clause.*
 
 ### External Bucket in a BigQuery SQL Transformation
 
-In BigQuery, the external bucket is mapped to an actual dataset, `emea_sales` (the name you filled in the dialog), in your project – in this case, project `sapi-9752`. 
+In BigQuery, the external bucket is mapped to an actual dataset, `users-reporting` (the name you filled in the dialog), in your project – in this case, project `sapi-9752`. 
 You can reference the contents of the dataset in your SQL transformation using a fully-qualified name. 
 
-*Note: The dataset name is _the one you provided in the dialog_, **not** that of the original dataset created in BigQuery. However, there are no technical limitations; they can have the same name.* 
+```bigquery
+CREATE TABLE `MQL_USERS` AS SELECT *
+FROM `users-reporting`.`users`
+WHERE `source` = "mql";
+```
+
+{: .alert.alert-warning}
+The dataset name is **the name of bucket you provided in the dialog** (`users-reporting`), **not** that of the original dataset created in BigQuery (`sales_emea`). However, there are no technical limitations; they can have the same name. 
 
 ## Removing an External Bucket
 
