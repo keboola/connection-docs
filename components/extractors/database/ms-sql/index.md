@@ -6,53 +6,49 @@ permalink: /components/extractors/database/microsoft-sql/
 * TOC
 {:toc}
 
-[MS SQL](https://www.microsoft.com/en-us/sql-server/) is a relational database management system stores and retrieves data as requested by other software applications. 
+[MS SQL](https://www.microsoft.com/en-us/sql-server/) is a relational database management system that stores and retrieves data as requested by other software applications. 
 
-This connector supports most recent versions of the SQL Server and Azure SQL deployments.
-
-
+This connector supports the most recent versions of both SQL Server and Azure SQL deployments.
 
 ## Default Functionality
 
-This is [standard SQL Database connector](/components/extractors/database/sqldb) that performs queries against the source database in order to sync data. 
-This is the simplest approach suitable for most use cases, allowing for [Time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
+This [standard SQL database connector](/components/extractors/database/sqldb) performs queries against the source database to synchronize data. 
+It offers a straightforward approach suitable for most use cases, enabling [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-All SQL Database connectors are [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and have an [advanced mode](/components/extractors/database/sqldb/). 
+All SQL database connectors are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and offer an [advanced mode](/components/extractors/database/sqldb/). 
 
-To guide you through the basic configuration, you may follow the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database Extractor](/tutorial/load/database/). 
 
-## CDC (Change Data Capture) mode
+## CDC (Change Data Capture) Mode
 
-This connector supports incremental syncs using the MS SQL native [Change Data Capture (CDC)](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server) functionality.
+This connector facilitates incremental syncs using the MS SQL's native [Change Data Capture (CDC)](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server) functionality.
 
-This mode of [Incremental Fetching](/components/extractors/database/#incremental-fetching) is available only for tables for which the CDC is enabled in your server. See the [official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/enable-and-disable-change-data-capture-sql-server?view=sql-server-ver16) 
-for more information on the setup on the server side.
+This mode of [incremental fetching](/components/extractors/database/#incremental-fetching) is available only for tables with CDC enabled on your server. For more details on the server-side setup, 
+refer to the [official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/enable-and-disable-change-data-capture-sql-server?view=sql-server-ver16).
 
 ### Setup
 
-The tables that have CDC enabled are marked in the `Table` dropdown with `[CDC]` prefix. 
+Tables with CDC enabled are indicated in the `Table` dropdown with a `[CDC]` prefix. 
 
 {: .image-popup}
 ![Screenshot - CDC Table Detail](/components/extractors/database/ms-sql/cdc_table.png)
 
-Once you select the CDC enabled table, the option `CDC Mode` will appear in the `Incremental Fetching` box. Check it to enable the CDC syncing of the table.
+Upon selecting a CDC-enabled table, the `CDC Mode` option will become visible in the `Incremental Fetching` box. Check this option to activate the CDC syncing for that table.
 
 ### Functionality
 
-Once you enable the `CDC mode` the component will sync the new increments using the system function [`cdc_get_net_changes](https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-net-changes-capture-instance-transact-sql?view=sql-server-ver16) with dynamic boundaries based on component state, 
-this will ensure that only recent changes will be pulled. The biggest advantage of this approach is that it can capture quickly all changes **including deletes**.
+Once you activate the `CDC mode`, the component will synchronize new increments using the system function [`cdc_get_net_changes](https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-net-changes-capture-instance-transact-sql?view=sql-server-ver16). 
+This utilizes dynamic boundaries based on the component state, ensuring that only the most recent changes are retrieved. The primary advantage of this method is its ability to swiftly capture all modifications, **including deletions**.
 
-Initial load of the table will perform a Full Sync just like the standard  [Incremental Fetching](/components/extractors/database/#incremental-fetching) mode. After the initial load, CDC tables will be used and the result table will contain the following additional system column:
+The table's initial load will undergo a full sync, similar to the standard [incremental fetching](/components/extractors/database/#incremental-fetching) mode. After the initial load, CDC tables come to play.
+The resulting table will contain an additional system column:
 
-- `KBC__DELETED` -> [0,1] flag marking if the row was deleted. `0` -> not deleted. `1` -> deleted.
+- `KBC__DELETED` -> [0,1] 
+This flag indicates whether the row was deleted. `0` indicates it was not deleted, and `1` indicates deletion.
 
 ### Limitations
 
-- The schema (DDL) changes are not supported and will not be reflected to the table after the CDC is set up. If the DDL is destructive the sync may fail with various [errors](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16#handling-changes-to-source-table)
-- The retention window of changes available in the CDC tables may differ per [setup](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/administer-and-monitor-change-data-capture-sql-server?view=sql-server-ver16#structure-of-the-cleanup-job).
-  If the configuration is executed after the CDC table rolls out (e.g. some events would be missing), the component automatically falls back to a full sync and reloads the entire table. Which may cause longer execution. Note that this behaviour is configurable.
-
-
-
-
-
+- Schema (DDL) changes are not supported. Any alterations post-CDC setup will not reflect in the table. Destructive DDL may lead to synchronization failures with various [errors](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver16#handling-changes-to-source-table).
+- The retention window for changes in the CDC tables can vary per [setup](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/administer-and-monitor-change-data-capture-sql-server?view=sql-server-ver16#structure-of-the-cleanup-job).
+  If the configuration runs after a period longer than the CDC retention window (i.e., some older change events might have been already dropped from the CDC table), the component will do a full sync, reloading the entire table. This could prolong execution times.
+  <br>***Note:** This behavior can be adjusted.*
