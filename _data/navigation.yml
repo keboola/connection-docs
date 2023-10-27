@@ -123,6 +123,9 @@ items:
               - url: /components/extractors/erp/k2/
                 title: K2
 
+              - url: /components/extractors/erp/netsuite/
+                title: NetSuite
+
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
             items:
