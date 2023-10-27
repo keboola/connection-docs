@@ -102,6 +102,9 @@ items:
               - url: /components/extractors/database/bigquery/
                 title: Google BigQuery
 
+              - url: /components/extractors/database/microsoft-sql/
+                title: Microsoft SQL
+
               - url: /components/extractors/database/mongodb/
                 title: MongoDB
                 items:
