@@ -20,6 +20,45 @@ create a **configuration** first. A configuration is used to set the necessary p
 component (e.g., credentials and other specification of what to do). Then it can be run
 --- a **job** is created and does the actual work.
 
+## Component Release Grades
+
+Our components are released with different grades to indicate the level of quality and production readiness. We strive to deliver the highest quality components and unlock as many interesting integrations as possible for the benefit of all our customers. The component release grades allow us to manage the release process effectively and align expectations accurately.
+
+|                           | Alpha (experimental)                                                                                                                                             | Beta                                                                                                                                                                               | Production (GA)                                                                                                |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Availability**          | Available per request - user explicitly agrees to use it.                                                                                                        | Listed in official component list and available to all customers.                                                                                                                  | Listed in official component list and available to all customers.                                              |
+| **Support & SLA**         | No or limited SLA.                                                                                                                                               | Officially supported by Keboola.<br>Standard SLA - in active development.                                                                                                          | Officially supported by Keboola.<br>Standard SLA.                                                              |
+| **Production ready**      | Functional, but only for limited use-cases.<br/><br>Experimental component, not advisable for business critical processes.<br/><br>May not move to Beta/GA.      | Yes - with limitations.<br/><br>Will eventually move to GA.<br>(e.g. still in process of fine tuning, tested on fewer production use-cases, may contain less robust documentation) | Yes.<br/><br>Stable version, tested on many production use-cases.<br/><br>Fully documented.                    |
+| **Updates & Maintenance** | Breaking changed may be introduced (It is still possible to fix certain version to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated. | Monitored via standard processes.<br/><br>Always backward compatible changes.<br/><br>In active development.                                                                       | Monitored via standard processes.<br/><br>Always backward compatible changes, announced via standard channels. |
+
+### Production (GA)
+
+Accessible to all customers, these components are usually in the early stages of development and may be subject to rapid iteration. 
+Any potential component updates are backward compatible.
+
+### Beta
+
+Components are available to all customers. These components are usually early additions and may still be in rapid development.
+
+All changes are backward compatible. 
+
+
+**Limitations:**
+
+- Being in the early stages, these components are used in fewer projects. Minor bugs, though promptly fixed within the standard SLA, may appear more frequently.
+- The range of features might not be exhaustive and is likely to expand through backward-compatible updates.
+- Documentation may be less comprehensive than in the GA version, often given in the form of README.md files.
+- These components may pose certain limitations like pending Google verification, verification status-related rate limits, and more.
+
+
+### Alpha (Experimental)
+
+Developed for specific use-cases and untested in various scenarios, these components are highly experimental yet functional. They can contain undiscovered bugs when used in untested scenarios and might encounter other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
+
+Alpha components may not progress to the Beta and GA stages.
+
+Nevertheless, these components can address obscure use-cases and deliver unique integrations. As their code is public, they can serve as a foundation for custom forks, which could also include Generic Extractor configurations.
+
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the
 component categories:
