@@ -404,8 +404,8 @@ items:
           - url: /components/applications/ai/
             title: AI
             items:
-              - url: /components/applications/ai/open-ai/
-                title: OpenAI
+              - url: /components/applications/ai/generative-ai/
+                title: Generative AI
 
       - url: /components/data-apps/
         title: Data Apps
