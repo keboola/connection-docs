@@ -1,6 +1,8 @@
 ---
 title: Generative AI
 permalink: /components/applications/ai/generative-ai/
+redirect_from:
+    - /components/applications/ai/open-ai/
 ---
 
 * TOC
