@@ -1,6 +1,6 @@
 ---
-title: AI Campaign Executer
-permalink: /templates/ai-campaign-executer/
+title: AI SMS Campaign
+permalink: /templates/ai-sms-campaign/
 ---
 
 * TOC
