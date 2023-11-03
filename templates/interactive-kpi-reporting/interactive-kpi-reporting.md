@@ -1,12 +1,12 @@
 ---
-title: Interactive KPI Reporting
-permalink: /templates/interactive-kpi-reporting/
+title: E-comm KPI Dashboard
+permalink: /templates/ecomm-kpi-dashboard
 ---
 
 * TOC
 {:toc}
 
-Utilizing Interactive KPI Reports powered by Shopify data provides a comprehensive **overview of critical financial metrics**, including turnover, 
+Utilizing E-comm KPI Dashboard powered by Shopify data provides a comprehensive **overview of critical financial metrics**, including turnover, 
 orders, and customer data. These insights are presented through a **pre-defined data app dashboard** equipped with a date filter for your convenience. 
 
 The dashboards display a comparison between planned numbers and the actual situation. Moreover, the data app facilitates effortless parameter sharing, 
