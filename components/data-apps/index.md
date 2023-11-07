@@ -70,7 +70,7 @@ See the [examples](#Examples) below for usage of the Keboola Storage Python Clie
 
 ## Writing Back to Storage
 For writing data back to Keboola Connection Project Storage, use our [Keboola Connection Storage Python Client](https://github.com/keboola/sapi-python-client).
-See [Examples](#Examples) below for usage of the Keboola Storage Python Client.
+See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App Management
 {% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet." %}
@@ -201,10 +201,14 @@ For example, a conflict of the specified packages:
 Author: Monika Feigler
 
 Our demo data app shows how to create a data app with Streamlit Python code and how to incorporate data and files from an input mapping into your code. This data app allows users to explore and analyze the Titanic dataset using interactive visualizations and filters.
-#### Deployed from a code
+
+#### Deployed from code
+
 - [Configuration](https://demo.keboola.com/app/data-apps/45663441)
 - [Live App](https://sandbox.north-europe.azure.keboola.com/45663474/)
-#### Deployed from a github repository
+  
+#### Deployed from a GitHub repository
+
 - [Configuration](https://demo.keboola.com/app/data-apps/49752130)
 - [Source](https://github.com/keboola/titanic-data-app)
 
@@ -212,40 +216,45 @@ Our demo data app shows how to create a data app with Streamlit Python code and 
 Author: Petr Huňka
 
 Our demo app offers a cutting-edge solution that leverages Shopify data to supercharge your campaigns. By harnessing the power of artificial intelligence (AI), we create tailor-made SMS messages and deliver them through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
+
 - [Configuration](https://demo.keboola.com/app/data-apps/51362322)
 - [Documentation](https://help.keboola.com/templates/ai-campaign-executer/)
 - [Source](https://github.com/keboola/ai_campaign_executer)
-- This Data App with whole flow can be used from a template AI SMS Campaign
+  
+This data app, along with the complete workflow, can be implemented using the AI SMS Campaign template.
 
 ### Interactive Keboola Sheets
 Author: Petr Huňka
 
 Simplify data editing and management within your company. The data app eliminates the need to export data to external tools, allowing business users to directly access and edit tables stored in Keboola Connection Storage.
-- [Live App](https://sandbox.north-europe.azure.keboola.com/51814820/)
+- [Live app](https://sandbox.north-europe.azure.keboola.com/51814820/)
 - [Configuration](https://demo.keboola.com/app/data-apps/51359967)
 - [Documentation](https://help.keboola.com/templates/interactive-keboola-sheets/)
 - [Source](https://github.com/keboola/planning-sheets-data-app/)
-- This Data App with whole flow can be used from a template Interactive Keboola Sheets
 
-### E-comm KPI Dashboard
+This data app, along with the complete workflow, can be implemented using the Interactive Keboola Sheets template.
+
+### eCommerce KPI Dashboard
 Author: Ondřej Svoboda
 
-This app provides an interactive display of several business metrics with integrated Slack notifications.
-- [Live App](https://sandbox.north-europe.azure.keboola.com/51814781/)
+This data app provides an interactive display of several business metrics with integrated Slack notifications.
+- [Live app](https://sandbox.north-europe.azure.keboola.com/51814781/)
 - [Configuration](https://demo.keboola.com/app/data-apps/51361334)
 - [Documentation](https://help.keboola.com/templates/interactive-kpi-reporting/)
 - [Source](https://github.com/keboola/interactive-kpi-reporting)
-- This Data App with whole flow can be used from a template E-comm KPI Dashboard
+
+This app, along with the complete workflow, can be implemented using the eCommerce KPI Dashboard template.
 
 ### Online Marketing Dashboard
 Author: Monika Feigler
 
-Our demo app is showing an overview of the costs of all of campaigns in the marketing channels. 
-- [Live App](https://sandbox.north-europe.azure.keboola.com/49569899/)
+Our demo app provides an overview of the costs for all campaigns across marketing channels. 
+- [Live app](https://sandbox.north-europe.azure.keboola.com/49569899/)
 - [Configuration](https://demo.keboola.com/app/data-apps/49567241)
 - [Documentation](https://help.keboola.com/templates/marketing-platforms/)
 - [Source](https://github.com/keboola/marketing-dashboard-data-app)
-- This Data App with whole flow can be used from a template Advertising Platform
+
+This data app, along with the complete workflow, can be implemented using the Advertising Platform template.
 
 ### UA and GA4 Data Comparison
 Author: Marketing BI and Keboola
@@ -254,7 +263,8 @@ This data app is designed to provide a quick and comprehensive overview of the d
 - [Configuration](https://demo.keboola.com/app/data-apps/51525772)
 - [Documentation](https://help.keboola.com/templates/ua-and-ga4-comparison/)
 - [Source](https://github.com/keboola/ua-ga4-comparison)
-- This Data App with whole flow can be used from a template UA and GA4 Comparison
+
+This app, along with the complete workflow, can be implemented using the UA and GA4 Comparison template.
 
 ### Kai PromptLab
 Author: Jordan Burger and Pavel Chocholouš
@@ -262,12 +272,14 @@ Author: Jordan Burger and Pavel Chocholouš
 Streamline your AI prompting process! Use this Streamlit app to refine, test, and compare multiple prompts, ensuring optimal results. Dive into AI with enhanced efficiency!
 - [Documentation](https://help.keboola.com/templates/kai-promptlab/)
 - [Source](https://github.com/keboola/kai-promptlab)
-- This Data App with whole flow can be used from a template Kai PromptLab
 
-### Kai SQL bot
+This data app, along with the complete workflow, can be implemented using the Kai PromptLab template.
+
+### Kai SQL Bot
 Author: Jordan Burger and Pavel Chocholouš
 
 The SQL Bot data app is a dialogue-based AI interface tailored for Snowflake database queries. It allows you to engage in natural conversations and translates your requests into precise SQL commands.
 - [Documentation](https://help.keboola.com/templates/kai-sql-bot/)
 - [Source](https://github.com/keboola/Kai-SQL-bot)
-- This Data App with whole flow can be used from a template Kai SQL bot
+
+This app, along with the complete workflow, can be implemented using the Kai SQL Bot template.
