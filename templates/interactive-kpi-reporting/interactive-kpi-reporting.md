@@ -1,12 +1,12 @@
 ---
-title: E-comm KPI Dashboard
+title: eCommerce KPI Dashboard
 permalink: /templates/ecomm-kpi-dashboard
 ---
 
 * TOC
 {:toc}
 
-Utilizing E-comm KPI Dashboard powered by Shopify data provides a comprehensive **overview of critical financial metrics**, including turnover, 
+Utilizing eCommerce KPI dashboards powered by Shopify data provides a comprehensive **overview of critical financial metrics**, including turnover, 
 orders, and customer data. These insights are presented through a **pre-defined data app dashboard** equipped with a date filter for your convenience. 
 
 The dashboards display a comparison between planned numbers and the actual situation. Moreover, the data app facilitates effortless parameter sharing, 
