@@ -1118,3 +1118,4 @@ CREATE TABLE "ctas_table" (
   - Changing a column type is complicated; see [Changing Types of Typed Columns](#changing-types-of-exising-typed-columns).
   - Keboola won't do any type conversion when loading. Your data must match the column type in the table in Storage exactly.
   - Any load of data with incompatible types will fail.
+  - Filtering option in the input mapping section is not available for tables with defined data types. If filtering is essential for your workflow, consider using a SQL, Python or even No-code transformation to filter the data and create a new filtered table.
