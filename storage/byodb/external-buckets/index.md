@@ -61,11 +61,10 @@ Then continue to the next step, where we will provide you with a guide on how to
 ![Register external data popup step 2 - BigQuery](/storage/byodb/external-buckets/figures/3-bq.png)
 
 {: .alert.alert-info}
-<ul>
-  Notes:
-  <li>By adding the Keboola service account as a subscriber, you enable read-only access to the data.</li>
-  <li><a href="https://cloud.google.com/bigquery/docs/external-data-cloud-storage">External tables</a> are not supported, and if the shared dataset contains such tables, they will be ignored.</li>
-</ul>
+Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
+
+{: .alert.alert-warning}
+[External tables](https://cloud.google.com/bigquery/docs/external-data-cloud-storage) are not supported, and if the shared dataset contains such tables, they will be ignored.
 
 Once you are done, click **Register Bucket**, and you can start using it.
 
