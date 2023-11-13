@@ -103,11 +103,13 @@
 <!-- Begin KAI chatbot -->
 <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 <df-messenger
+		location="us-central1"
 		project-id="keboola-ai"
-		agent-id="4fd56a6c-9b07-481d-ab61-318817c093d1"
-		language-code="en">
-	<df-messenger-chat-bubble
-			chat-title="Kai">
+		agent-id="2400cda3-8b20-435d-8770-11569a61ced0"
+		language-code="en"
+		intent=WELCOME>
+		<df-messenger-chat-bubble
+			chat-title="Kai Documentation Chatbot (Beta)">
 	</df-messenger-chat-bubble>
 </df-messenger>
 <style>
@@ -116,7 +118,14 @@
 		position: fixed;
 		bottom: 16px;
 		right: 16px;
-	}
+		--df-messenger-chat-border-radius: 6px;
+		--df-messenger-chat-window-box-shadow: 0px 0px 59px 0px rgba(0, 0, 0, 0.25);
+		--df-messenger-titlebar-title-font-size: 16px;
+		--df-messenger-send-icon-color: #a2aab8;
+		--df-messenger-send-icon-color-active: #0B57D0;
+		--df-messenger-send-icon-color-hover: #0B57D0;
+		--df-messenger-input-padding: 8px 0 8px 16px;
+ 	}
 </style>
 <!-- End KAI chatbot -->
 </body>
