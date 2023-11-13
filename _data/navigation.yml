@@ -81,6 +81,9 @@ items:
               - url: /components/extractors/communication/intercom/
                 title: Intercom
 
+              - url: /components/extractors/communication/ms-outlook/
+                title: MS Outlook (Office 365)
+
               - url: /components/extractors/communication/slack/
                 title: Slack
 
@@ -99,6 +102,9 @@ items:
               - url: /components/extractors/database/bigquery/
                 title: Google BigQuery
 
+              - url: /components/extractors/database/microsoft-sql/
+                title: Microsoft SQL
+
               - url: /components/extractors/database/mongodb/
                 title: MongoDB
                 items:
@@ -116,6 +122,9 @@ items:
             items:
               - url: /components/extractors/erp/k2/
                 title: K2
+
+              - url: /components/extractors/erp/netsuite/
+                title: NetSuite
 
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
@@ -167,6 +176,9 @@ items:
                 items:
                   - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
                     title: Columns and primary keys of report presets
+
+              - url: /components/extractors/marketing-sales/pinterest-ads/
+                title: Pinterest Ads
 
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
@@ -258,6 +270,9 @@ items:
               - url: /components/extractors/other/google-search-console/
                 title: Google Search Console
 
+              - url: /components/extractors/other/hibob/
+                title: HiBob
+
               - url: /components/extractors/other/papertrail/
                 title: Papertrail
 
@@ -275,6 +290,9 @@ items:
 
               - url: /components/extractors/other/time-doctor-2
                 title: Time Doctor 2
+
+              - url: /components/extractors/other/weather-api
+                title: Weather API
 
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
@@ -386,8 +404,8 @@ items:
           - url: /components/applications/ai/
             title: AI
             items:
-              - url: /components/applications/ai/open-ai/
-                title: OpenAI
+              - url: /components/applications/ai/generative-ai/
+                title: Generative AI
 
       - url: /components/data-apps/
         title: Data Apps
@@ -404,6 +422,9 @@ items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
 
+      - url: /templates/ai-campaign-executer/
+        title: AI Campaign Executer
+        
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
 
@@ -419,6 +440,24 @@ items:
       - url: /templates/google-analytics/
         title: Google Analytics
 
+      - url: /templates/interactive-keboola-sheets/
+        title: Interactive Keboola Sheets
+        
+      - url: /templates/interactive-kpi-reporting/
+        title: Interactive KPI Reporting
+
+      - url: /templates/kai-promptlab/
+        title: Kai PromptLab
+
+      - url: /templates/kai-sql-bot/
+        title: Kai SQL Bot
+        
+      - url: /templates/mailchimp/
+        title: MailChimp
+        
+      - url: /templates/media-cashflow/
+        title: Media Cashflow
+
       - url: /templates/project-management/
         title: Project Management
 
@@ -430,6 +469,9 @@ items:
 
       - url: /templates/surveys/
         title: Surveys
+
+      - url: /templates/ua-and-ga4-comparison/
+        title: UA and GA4 Comparison
 
   - url: /catalog/
     title: Data Catalog
@@ -466,6 +508,9 @@ items:
 
       - url: /storage/byodb/
         title: Bring Your Own Database
+        items:
+          - url: /storage/byodb/external-buckets/
+            title: External Buckets
 
   - url: /orchestrator/
     title: Orchestrations

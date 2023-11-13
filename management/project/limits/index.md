@@ -62,7 +62,7 @@ If you need more information, please contact your CSM.
 | XSmall                                | 1 hour                  | **0.5**               |
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |
-| Large                                 | 1 hour                  | **8**                 |
+| Large                                 | 1 hour                  | **6**                 |
 | Deployed & running ML model (BETA)    | 1 hour                  | **0.1**               |
 | **dbt job**                           |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
