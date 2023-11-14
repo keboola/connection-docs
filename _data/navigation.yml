@@ -436,15 +436,15 @@ items:
 
       - url: /templates/ecommerce/
         title: eCommerce
+        
+      - url: /templates/ecomm-kpi-dashboard/
+        title: eCommerce KPI Dashboard
 
       - url: /templates/google-analytics/
         title: Google Analytics
 
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
-        
-      - url: /templates/ecomm-kpi-dashboard/
-        title: eCommerce KPI Dashboard
 
       - url: /templates/kai-promptlab/
         title: Kai PromptLab
