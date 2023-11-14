@@ -14,7 +14,7 @@ The template consists of two flows, where the first flow can be considered a dat
 ## Flow 1 – Preparation
 
 {: .image-popup}
-![Flow 1](/templates/ai-campaign-executer/flow1.png)
+![Flow 1](/templates/ai-sms-campaign/flow1.png)
 
 - First you set up a component to extract data from your Shopify account. You only need to provide your Shopify login credentials; the component will handle the extraction of all necessary data.
 - The transformation is pre-defined and will create a dataset containing customer contact information and recommended products for each customer.
@@ -25,7 +25,7 @@ The template consists of two flows, where the first flow can be considered a dat
 ## Flow 2 – Execution
 
 {: .image-popup}
-![Flow 2](/templates/ai-campaign-executer/flow2.png)
+![Flow 2](/templates/ai-sms-campaign/flow2.png)
 
 Once you have selected the messages for sending and clicked the **Upload to Keboola** button in the data app, 
 flow 2 is triggered automatically to send the data to Twilio.
@@ -34,7 +34,7 @@ flow 2 is triggered automatically to send the data to Twilio.
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
-![Entity Relationship Diagram](/templates/ai-campaign-executer/entity-rel-diagram.png)
+![Entity Relationship Diagram](/templates/ai-sms-campaign/entity-rel-diagram.png)
 
 ## Table Description
 
@@ -62,17 +62,17 @@ First decide which data source and which data destination you want to use. Then 
 from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
-![Add New Template](/templates/ai-campaign-executer/add-new-template.png)
+![Add New Template](/templates/ai-sms-campaign/add-new-template.png)
 
 This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
-![AI Campaign Executer](/templates/ai-campaign-executer/ai-campaign-executer.png)
+![AI Campaign Executer](/templates/ai-sms-campaign/ai-campaign-executer.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want and still keep everything organized.
 
 {: .image-popup}
-![Name the template](/templates/ai-campaign-executer/name-template.png)
+![Name the template](/templates/ai-sms-campaign/name-template.png)
 
 ## Component Description
 
@@ -114,7 +114,7 @@ To use the selected data source component, you must authorize it first.
 ### Shopify 
 
 {: .image-popup}
-![Shopify Data Source](/templates/ai-campaign-executer/shopify-data-source.png)
+![Shopify Data Source](/templates/ai-sms-campaign/shopify-data-source.png)
 
 To enable this application, you must:
 
@@ -131,14 +131,14 @@ Additional documentation is available [here](https://bitbucket.org/kds_consultin
 ## Authorizing Application
 
 {: .image-popup}
-![Authorizing Application](/templates/ai-campaign-executer/authorizing-application.png)
+![Authorizing Application](/templates/ai-sms-campaign/authorizing-application.png)
 
 Choose your AI service provider and enter your API key.
 
 ## Authorizing Data Destination
 
 {: .image-popup}
-![Twilio Data Destination](/templates/ai-campaign-executer/twilio-data-destination.png)
+![Twilio Data Destination](/templates/ai-sms-campaign/twilio-data-destination.png)
 
 The component is required to have at least one table in the input table mapping. If more than one table is configured in the input table mapping, 
 the component will loop through all of the input tables and process all the rows, sending out the configured messages to the assigned numbers.
