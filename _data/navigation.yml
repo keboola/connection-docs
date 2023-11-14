@@ -422,8 +422,8 @@ items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
 
-      - url: /templates/ai-campaign-executer/
-        title: AI Campaign Executer
+      - url: /templates/ai-sms-campaign/
+        title: AI SMS Campaign
         
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
@@ -443,8 +443,8 @@ items:
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
         
-      - url: /templates/interactive-kpi-reporting/
-        title: Interactive KPI Reporting
+      - url: /templates/ecomm-kpi-dashboard/
+        title: eCommerce KPI Dashboard
 
       - url: /templates/kai-promptlab/
         title: Kai PromptLab
