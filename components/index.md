@@ -53,11 +53,20 @@ All changes are backward compatible.
 
 ### Experimental
 
-Developed for specific use-cases and untested in various scenarios, these components are highly experimental yet functional. They can contain undiscovered bugs when used in untested scenarios and might encounter other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
+Developed for specific use-cases but not tested in various scenarios, these components are highly experimental but functional. They may contain undiscovered bugs when used in untested scenarios and might impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
 
 Experimental components may not progress to the Beta and GA stages.
 
 Nevertheless, these components can address obscure use-cases and deliver unique integrations. As their code is public, they can serve as a foundation for custom forks, which could also include Generic Extractor configurations.
+
+Many of these components also serves for our internal purposes, and we decided to share them publicly for the benefit of our community.
+
+### Private / Unlisted
+
+Some components are still unlisted for various reasons. The full list of components available in each stack is accessible via the public [Storage API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
+Many of these are 3rd party components. Even though any user can add these components via their ID, there is no guarantee of their functionality. 
+
+We may share our pre-release versions that exist in private beta with our test user groups. In such case, you will receive a component ID via which the configuration can be created. These components will eventually transition to a public Beta.
 
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the
