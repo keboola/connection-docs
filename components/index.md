@@ -25,10 +25,10 @@ and align expectations accurately.
 
 |   | Experimental | Beta | Production (GA) |
 |---|---|---|---|
-| **Availability** | Available either in the UI or per request | Listed in official component list and available to all customers | Listed in official component list and available to all customers |
-| **Support & SLA** | No or limited SLA | Officially supported by Keboola<br>Standard SLA – in active development | Officially supported by Keboola<br>Standard SLA |
-| **Production ready** | Functional, but only for limited use cases<br/><br>Experimental component, not advisable for business critical processes<br/><br>May not ever move to Beta/GA | Yes – with limitations<br/><br>Will eventually move to GA<br>(e.g., still in process of fine tuning, tested on fewer production use-cases, may contain less robust documentation) | Yes<br/><br>Stable version, tested on many production use-cases<br/><br>Fully documented |
-| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain version to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes<br/><br>Always backward compatible changes<br/><br>In active development | Monitored via standard processes<br/><br>Always backward compatible changes, announced via standard channels |
+| **Availability** | Available either in the UI or per request | Listed in the official component list and available to all customers | Listed in the  official component list and available to all customers |
+| **Support & SLA** | No or limited SLA | Officially supported by Keboola's Standard SLA – in active development | Officially supported by Keboola's Standard SLA |
+| **Production ready** | Functional, but only for limited use cases<br/><br>Experimental component, not advisable for business critical processes<br/><br>May not ever move to Beta/GA | Yes – with limitations<br/><br>Will eventually move to GA<br>(e.g., still in the process of fine-tuning, tested on fewer production use cases, may contain less robust documentation) | Yes<br/><br>Stable version, tested on many production use cases<br/><br>Fully documented |
+| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain versions to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes<br/><br>Always backward compatible changes<br/><br>In active development | Monitored via standard processes<br/><br>Always backward compatible changes, announced via standard channels |
 
 ### Production (GA)
 Accessible to all customers, these components are usually in the early stages of development and may be subject to rapid iteration. Any potential component updates are backward compatible.
@@ -69,7 +69,7 @@ To create a new component configuration, select *Components* from the top naviga
 {: .image-popup}
 ![Screenshot - Create Configuration](/components/configuration-1.png)
 
-The following page shows a list of the currently existing configurations (extractors in this example) in the project. To create a new configuration of a new component, 
+The following page lists the current configurations (e.g., extractors) in the project. To create a new configuration of a new component, 
 use the **Directory** or the **Add New Extractor** button.
 
 {: .image-popup}
@@ -105,9 +105,9 @@ When you set the parameters and **Save** them, you can actually run the componen
 
 When you run a component, a [job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
 
-- yellow – running
-- red – failed
-- green – successful
+- Yellow – Running
+- Red – Failed
+- Green – Successful
 
 You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and 
 the tables it produced in your project. When running the configuration, its active version (the one with the green tick-mark) will be used.
@@ -126,7 +126,7 @@ The bottom right panel shows a list of the configuration versions. Use the list 
 - compare any two successive versions.
 - roll back to an older version.
 
-All of the operations can be [accessed via API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
+All of the operations can be [accessed via an API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
 For working with configurations, see the [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/).
 
 **Important**: Component configurations do not count towards your project quota.
@@ -140,7 +140,7 @@ You can compare adjacent versions by clicking the *compare* icon:
 {: .image-popup}
 ![Screenshot - Version List](/components/configuration-8.png)
 
-When you compare two versions, a difference of the raw JSON configurations is shown. 
+When you compare two versions, the differences between the raw JSON configurations are displayed. 
 
 {: .image-popup}
 ![Screenshot - Version Differences](/components/configuration-9.png)
@@ -236,16 +236,16 @@ order of rows has no effect on your project, because a Job is finished only afte
 
 ### Configuration Rows Versions
 Changes to configuration rows are part of the [configuration versioning](#configuration-versions). The following image shows that
-the versions in the configuration page list changes to the configuration rows -- both that a table was added and that it was modified.
+the versions in the configuration page list changes to the configuration rows – both that a table was added and that it was modified.
 
 {: .image-popup}
 ![Screenshot - Configuration Rows All Versions](/components/configuration-15.png)
 
 That means that each configuration version contains a complete set of its rows. This is important when copying or rolling back a 
-version -- you can do these operations safely without worrying about rows.
+version – you can do these operations safely without worrying about rows.
 
 When you edit a configuration row, there is a also a list of **row versions**. Row versions show changes only to the single
-row. You can rollback a row to a previous version without interacting with the other rows.
+row. You can roll back a row to a previous version without interacting with the other rows.
 
 {: .image-popup}
 ![Screenshot - Rows Versions](/components/configuration-16.png)
