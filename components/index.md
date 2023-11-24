@@ -11,23 +11,24 @@ redirect_from:
 In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
 Components are divided into the following categories:
 
-- [**Data sources (extractors)**](/components/extractors/) -- bring data into a Keboola Connection project.
-- [**Data destinations (writers)**](/components/writers/) -- send processed data into a target system.
-- [**Applications**](/components/applications/) -- process complex data.
+- [**Data sources (extractors)**](/components/extractors/) – bring data into a Keboola Connection project.
+- [**Data destinations (writers)**](/components/writers/) – send processed data into a target system.
+- [**Applications**](/components/applications/) – process complex data.
 
 All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration is used to set the necessary parameters for each 
-component (e.g., credentials and other specification of what to do). Then it can be run --- a **job** is created and does the actual work.
+component (e.g., credentials and other specification of what to do). Then it can be run — a **job** is created and does the actual work.
 
 ## Component Release Stages
-Our components are released with different grades to indicate the level of quality and production readiness. We strive to deliver the highest quality components and unlock as many interesting integrations 
-as possible for the benefit of all our customers. The component release grades allow us to manage the release process effectively and align expectations accurately.
+Our components are released at different stages and are assigned labels to indicate the level of quality and production readiness. We strive to deliver the highest quality components. 
+Our goal is to unlock as many interesting integrations as possible, benefiting all our customers. The component release grades allow us to manage the release process effectively 
+and align expectations accurately.
 
 |   | Experimental | Beta | Production (GA) |
 |---|---|---|---|
 | **Availability** | Available either in the UI or per request | Listed in official component list and available to all customers | Listed in official component list and available to all customers |
 | **Support & SLA** | No or limited SLA | Officially supported by Keboola<br>Standard SLA – in active development | Officially supported by Keboola<br>Standard SLA |
 | **Production ready** | Functional, but only for limited use cases<br/><br>Experimental component, not advisable for business critical processes<br/><br>May not ever move to Beta/GA | Yes – with limitations<br/><br>Will eventually move to GA<br>(e.g., still in process of fine tuning, tested on fewer production use-cases, may contain less robust documentation) | Yes<br/><br>Stable version, tested on many production use-cases<br/><br>Fully documented |
-| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain version to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes.<br/><br>Always backward compatible changes.<br/><br>In active development | Monitored via standard processes.<br/><br>Always backward compatible changes, announced via standard channels |
+| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain version to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes<br/><br>Always backward compatible changes<br/><br>In active development | Monitored via standard processes<br/><br>Always backward compatible changes, announced via standard channels |
 
 ### Production (GA)
 Accessible to all customers, these components are usually in the early stages of development and may be subject to rapid iteration. Any potential component updates are backward compatible.
