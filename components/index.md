@@ -9,39 +9,33 @@ redirect_from:
 {:toc}
 
 In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
-Components are divided into four main categories:
+Components are divided into the following categories:
 
-- [**Extractors**](/components/extractors/) -- bring data into a Keboola Connection project.
-- [**Writers**](/components/writers/) -- send processed data into a target system.
+- [**Data sources (extractors)**](/components/extractors/) -- bring data into a Keboola Connection project.
+- [**Data destinations (writers)**](/components/writers/) -- send processed data into a target system.
 - [**Applications**](/components/applications/) -- process complex data.
 
-All components, regardless of their category, behave the same way. To use a component, you have to 
-create a **configuration** first. A configuration is used to set the necessary parameters for each 
-component (e.g., credentials and other specification of what to do). Then it can be run
---- a **job** is created and does the actual work.
+All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration is used to set the necessary parameters for each 
+component (e.g., credentials and other specification of what to do). Then it can be run --- a **job** is created and does the actual work.
 
 ## Component Release Stages
+Our components are released with different grades to indicate the level of quality and production readiness. We strive to deliver the highest quality components and unlock as many interesting integrations 
+as possible for the benefit of all our customers. The component release grades allow us to manage the release process effectively and align expectations accurately.
 
-Our components are released with different grades to indicate the level of quality and production readiness. We strive to deliver the highest quality components and unlock as many interesting integrations as possible for the benefit of all our customers. The component release grades allow us to manage the release process effectively and align expectations accurately.
-
-|                           | Experimental                                                                                                                                                     | Beta                                                                                                                                                                               | Production (GA)                                                                                                |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Availability**          | Available either in the UI or per request.                                                                                                                       | Listed in official component list and available to all customers.                                                                                                                  | Listed in official component list and available to all customers.                                              |
-| **Support & SLA**         | No or limited SLA.                                                                                                                                               | Officially supported by Keboola.<br>Standard SLA - in active development.                                                                                                          | Officially supported by Keboola.<br>Standard SLA.                                                              |
-| **Production ready**      | Functional, but only for limited use-cases.<br/><br>Experimental component, not advisable for business critical processes.<br/><br>May not ever move to Beta/GA. | Yes - with limitations.<br/><br>Will eventually move to GA.<br>(e.g. still in process of fine tuning, tested on fewer production use-cases, may contain less robust documentation) | Yes.<br/><br>Stable version, tested on many production use-cases.<br/><br>Fully documented.                    |
-| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain version to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated. | Monitored via standard processes.<br/><br>Always backward compatible changes.<br/><br>In active development.                                                                       | Monitored via standard processes.<br/><br>Always backward compatible changes, announced via standard channels. |
+|   | Experimental | Beta | Production (GA) |
+|---|---|---|---|
+| **Availability** | Available either in the UI or per request | Listed in official component list and available to all customers | Listed in official component list and available to all customers |
+| **Support & SLA** | No or limited SLA | Officially supported by Keboola<br>Standard SLA – in active development | Officially supported by Keboola<br>Standard SLA |
+| **Production ready** | Functional, but only for limited use cases<br/><br>Experimental component, not advisable for business critical processes<br/><br>May not ever move to Beta/GA | Yes – with limitations<br/><br>Will eventually move to GA<br>(e.g., still in process of fine tuning, tested on fewer production use-cases, may contain less robust documentation) | Yes<br/><br>Stable version, tested on many production use-cases<br/><br>Fully documented |
+| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain version to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes.<br/><br>Always backward compatible changes.<br/><br>In active development | Monitored via standard processes.<br/><br>Always backward compatible changes, announced via standard channels |
 
 ### Production (GA)
-
-Accessible to all customers, these components are usually in the early stages of development and may be subject to rapid iteration. 
-Any potential component updates are backward compatible.
+Accessible to all customers, these components are usually in the early stages of development and may be subject to rapid iteration. Any potential component updates are backward compatible.
 
 ### Beta
-
 Components are available to all customers. These components are usually early additions and may still be in rapid development.
 
 All changes are backward compatible. 
-
 
 **Limitations:**
 
@@ -50,63 +44,55 @@ All changes are backward compatible.
 - Documentation may be less comprehensive than in the GA version, often given in the form of README.md files.
 - These components may pose certain limitations like pending Google verification, verification status-related rate limits, and more.
 
-
 ### Experimental
-
-Developed for specific use-cases but not tested in various scenarios, these components are highly experimental but functional. They may contain undiscovered bugs when used in untested scenarios and might impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
+Developed for specific use-cases but not tested in various scenarios, these components are highly experimental but functional. They may contain undiscovered bugs when used in untested scenarios 
+and might impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
 
 Experimental components may not progress to the Beta and GA stages.
 
-Nevertheless, these components can address obscure use-cases and deliver unique integrations. As their code is public, they can serve as a foundation for custom forks, which could also include Generic Extractor configurations.
+Nevertheless, these components can address obscure use-cases and deliver unique integrations. As their code is public, they can serve as a foundation for custom forks, 
+which could also include Generic Extractor configurations.
 
 Many of these components also serves for our internal purposes, and we decided to share them publicly for the benefit of our community.
 
 ### Private / Unlisted
-
 Some components are still unlisted for various reasons. The full list of components available in each stack is accessible via the public [Storage API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
 Many of these are 3rd party components. Even though any user can add these components via their ID, there is no guarantee of their functionality. 
 
-We may share our pre-release versions that exist in private beta with our test user groups. In such case, you will receive a component ID via which the configuration can be created. These components will eventually transition to a public Beta.
+We may share our pre-release versions that exist in private beta with our test user groups. In such case, you will receive a component ID via which the configuration can be created. 
+These components will eventually transition to a public Beta.
 
 ## Creating Component Configuration
-To create a new component configuration, select *Components* from the top navigation and then select one of the
-component categories:
+To create a new component configuration, select *Components* from the top navigation and then select one of the component categories:
 
 {: .image-popup}
 ![Screenshot - Create Configuration](/components/configuration-1.png)
 
-The following page shows a list of the currently existing configurations (extractors in this example)
-in the project. To create a new configuration of a new component, 
+The following page shows a list of the currently existing configurations (extractors in this example) in the project. To create a new configuration of a new component, 
 use the **Directory** or the **Add New Extractor** button.
 
 {: .image-popup}
 ![Screenshot - Extractors List](/components/configuration-2.png)
 
-Use the search field to find the component you want to use (the Currency Rates extractor in this case) and 
-then click the component tile to add it:
+Use the search field to find the component you want to use (the Currency Rates extractor in this case) and then click the component tile to add it:
 
 {: .image-popup}
 ![Screenshot - Search Component](/components/configuration-3.png)
 
-The following page describes in detail what the component does and allows you to create a new configuration 
-using the **New Configuration** button.
+The following page describes in detail what the component does and allows you to create a new configuration using the **New Configuration** button.
 
 {: .image-popup}
 ![Screenshot - Component Detail](/components/configuration-4.png)
 
-In the dialog, enter a name for the configuration. If a component has a single configuration in your project, 
-the name is not that important. However, for components with multiple configurations 
-(e.g., configured with different credentials) 
-the names should meaningfully distinguish one configuration from another.
+In the dialog, enter a name for the configuration. If a component has a single configuration in your project, the name is not that important. However, for components with multiple configurations 
+(e.g., configured with different credentials) the names should meaningfully distinguish one configuration from another.
 
 {: .image-popup}
 ![Screenshot - Create Configuration](/components/configuration-5.png)
 
 The next page shows a form for configuring the component, this varies heavily between different components.
-Component configuration can range from trivial (as in the case of the 
-[Currency extractor](/components/extractors/other/currency-rates/)) to very complex
-ones (e.g., [Google Ads extractor](/components/extractors/marketing-sales/google-ads/)). The configuration
-complexity badge shown in the component list gives you a rough idea of what to expect.
+Component configuration can range from trivial (as in the case of the [Currency extractor](/components/extractors/other/currency-rates/)) to very complex ones 
+(e.g., [Google Ads extractor](/components/extractors/marketing-sales/google-ads/)). The configuration complexity badge shown in the component list gives you a rough idea of what to expect.
 
 {: .image-popup}
 ![Screenshot - Set Parameters](/components/configuration-6.png)
@@ -116,8 +102,7 @@ When you set the parameters and **Save** them, you can actually run the componen
 {: .image-popup}
 ![Screenshot - Run Configuration](/components/configuration-7.png)
 
-When you run a component, a [Job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs
-with an indication of their status:
+When you run a component, a [Job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
 
 - yellow -- running
 - red -- failed
