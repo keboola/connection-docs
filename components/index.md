@@ -46,21 +46,21 @@ All changes are backward compatible.
 - These components may pose certain limitations like pending Google verification, verification status-related rate limits, and more.
 
 ### Experimental
-Developed for specific use-cases but not tested in various scenarios, these components are highly experimental but functional. They may contain undiscovered bugs when used in untested scenarios 
+Developed for specific use cases but not tested in various scenarios, these components are highly experimental but functional. They may contain undiscovered bugs when used in untested scenarios 
 and might impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
 
 Experimental components may not progress to the Beta and GA stages.
 
-Nevertheless, these components can address obscure use-cases and deliver unique integrations. As their code is public, they can serve as a foundation for custom forks, 
+Nevertheless, these components can address obscure use cases and deliver unique integrations. As their code is public, they can serve as a foundation for custom forks, 
 which could also include Generic Extractor configurations.
 
-Many of these components also serves for our internal purposes, and we decided to share them publicly for the benefit of our community.
+Many of these components also serve for our internal purposes, and we decided to share them publicly for the benefit of our community.
 
 ### Private / Unlisted
 Some components are still unlisted for various reasons. The full list of components available in each stack is accessible via the public [Storage API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
-Many of these are 3rd party components. Even though any user can add these components via their ID, there is no guarantee of their functionality. 
+Many of these are 3rd-party components. Users can add these components via their ID, but we cannot guarantee their functionality. 
 
-We may share our pre-release versions that exist in private beta with our test user groups. In such case, you will receive a component ID via which the configuration can be created. 
+We may share our pre-release versions that exist in private Beta with our test user groups. In such case, you will receive a component ID via which the configuration can be created. 
 These components will eventually transition to a public Beta.
 
 ## Creating Component Configuration
@@ -103,11 +103,11 @@ When you set the parameters and **Save** them, you can actually run the componen
 {: .image-popup}
 ![Screenshot - Run Configuration](/components/configuration-7.png)
 
-When you run a component, a [Job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
+When you run a component, a [job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
 
-- yellow -- running
-- red -- failed
-- green -- successful
+- yellow – running
+- red – failed
+- green – successful
 
 You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and 
 the tables it produced in your project. When running the configuration, its active version (the one with the green tick-mark) will be used.
@@ -120,14 +120,11 @@ The configuration description supports rich text formatting using [Markdown](htt
 {: .image-popup}
 ![Screenshot - Configuration Name and Description](/components/configuration-13.png)
 
-The bottom right panel shows a list of the configuration versions. To see their full list, use the links. 
-The version list is complete and allows you to compare adjacent versions or revert to any previous version.
-The bottom right panel shows list of the configuration versions. You can use the links to see full list of 
-the configuration versions. Use the version list to
+The bottom right panel shows a list of the configuration versions. Use the list to
 
 - copy any version.
 - compare any two successive versions.
-- rollback to an older version.
+- roll back to an older version.
 
 All of the operations can be [accessed via API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
 For working with configurations, see the [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/).
@@ -135,8 +132,7 @@ For working with configurations, see the [developer guide](https://developers.ke
 **Important**: Component configurations do not count towards your project quota.
 
 The version list is unlimited. Configuration versions are also created when the configurations are manipulated 
-programmatically using [the API](https://developers.keboola.com/overview/api/). In other words, there is no way 
-to modify a configuration without the changes being recorded.
+programmatically using [the API](https://developers.keboola.com/overview/api/). In other words, all configuration modifications are recorded.
 
 ### Compare Versions
 You can compare adjacent versions by clicking the *compare* icon:
@@ -149,16 +145,16 @@ When you compare two versions, a difference of the raw JSON configurations is sh
 {: .image-popup}
 ![Screenshot - Version Differences](/components/configuration-9.png)
 
-When you rollback a configuration, a new version is created. This means that you never lose any version of
+When you roll back a configuration, a new version is created. This means that you never lose any version of
 a configuration and that there is always an option to get back to it. Configuration versions are also created when 
 the configurations are manipulated programmatically via [the API](https://developers.keboola.com/overview/api/).
 
 ### Rollback Version
-If you need to return to an older version of the configuration, you can also rollback to it (the other option is to make its copy).
+If you need to return to an older version of the configuration, you can also roll back to it (the other option is to make its copy).
 Rolling back a configuration version actually means that a new configuration version is created (and marked as active) 
 with the contents of the selected version. A rollback is therefore quite a safe operation.
 
-Click the *rollback* icon next to the version you want to return to:
+Click the **rollback* icon next to the version you want to return to:
 
 {: .image-popup}
 ![Screenshot - Version List](/components/configuration-18.png)
