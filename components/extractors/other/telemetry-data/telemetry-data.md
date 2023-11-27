@@ -165,7 +165,7 @@ This table lists Keboola Connection [jobs](/management/jobs/)
 | `error_type` | Type of error for unsuccessful jobs (`user`, `application`) | `user` |
 | `error_message` | Message propagated in the error job event | `Transformation aborted with message...` |
 | `job_run_type` | Specifies if the job was run by orchestration or manually (`orchestration`, `manual`) | `orchestration` |
-| `job_type` | Specifies if the job is standard or a container one which encapsulates another job (like Flow). Only `standard` jobs are consuming credits (`standard`, `container`, `orchestrationContainer`, `phaseContainer`) | `orchestration` |
+| `job_type` | Indicates whether the job is a standard job or a container job, which encapsulates another job (such as Flow). Only `standard` jobs consume credits (`standard`, `container`, `orchestrationContainer`, `phaseContainer`) | `orchestration` |
 | `token_id` | Identifier of the token that initiated the job | `145062` |
 | `token_name` | Name of the token that initiated the job | `Orchestrator GDrive` |
 | `kbc_token_id` | Unique identifier of the token with stack identification | `145062_kbc-eu-central-1` |
