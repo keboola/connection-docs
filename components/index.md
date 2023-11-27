@@ -31,7 +31,10 @@ and align expectations accurately.
 | **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain versions to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes<br/><br>Always backward compatible changes<br/><br>In active development | Monitored via standard processes<br/><br>Always backward compatible changes, announced via standard channels |
 
 ### Production (GA)
-Accessible to all customers, these components are usually in the early stages of development and may be subject to rapid iteration. Any potential component updates are backward compatible.
+This version is stable and has been well-tested in many production scenarios by numerous customers. GA (General Availability) versions feature comprehensive documentation 
+and components with a low error rate, making them suitable for mission-critical production use cases. 
+
+All potential updates to the component are guaranteed to be backward compatible.
 
 ### Beta
 Components are available to all customers. These components are usually early additions and may still be in rapid development.
@@ -46,7 +49,7 @@ All changes are backward compatible.
 - These components may pose certain limitations like pending Google verification, verification status-related rate limits, and more.
 
 ### Experimental
-Developed for specific use cases but not tested in various scenarios, these components are highly experimental but functional. They may contain undiscovered bugs when used in untested scenarios 
+Developed for specific use cases but not tested in various scenarios, these components, while highly experimental, are functional. They may contain undiscovered bugs when used in untested scenarios 
 and might impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping), and others.
 
 Experimental components may not progress to the Beta and GA stages.
@@ -60,7 +63,7 @@ Many of these components also serve for our internal purposes, and we decided to
 Some components are still unlisted for various reasons. The full list of components available in each stack is accessible via the public [Storage API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
 Many of these are 3rd-party components. Users can add these components via their ID, but we cannot guarantee their functionality. 
 
-We may share our pre-release versions that exist in private Beta with our test user groups. In such case, you will receive a component ID via which the configuration can be created. 
+We may share our pre-release versions that exist in private Beta with our test user groups. In such case, you will receive a component ID, using which you can create the configuration. 
 These components will eventually transition to a public Beta.
 
 ## Creating Component Configuration
@@ -165,7 +168,7 @@ Confirm the rollback and see the result:
 ![Screenshot - Configuration Rollback](/components/configuration-10.png)
 
 ### Copy Configuration
-You can also use the version list to create a **Copy of the configuration**:
+You can also use the version list to create a **copy of the configuration**:
 
 {: .image-popup}
 ![Screenshot - Configuration Copy](/components/configuration-11.png)
@@ -175,7 +178,7 @@ You can customize the name of the configuration copy:
 {: .image-popup}
 ![Screenshot - Configuration Create Copy](/components/configuration-12.png)
 
-The copy of the configuration is created as a new isolated configuration -- i.e., there is no link 
+The copy of the configuration is created as a new isolated configuration – i.e., there is no link 
 between the original configuration and the copy, and the changes to one have no effect on the other.
 The new configuration is completely independent on the old one. You may modify or delete 
 either of them without affecting the other one.
