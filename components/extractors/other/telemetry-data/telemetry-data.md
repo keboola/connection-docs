@@ -327,6 +327,11 @@ organization, or the Keboola Connection platform itself.
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `47949_kbc-us-east-1` |
 | `context_admin_email` | Email of the user in the context with the event (e.g., invitation or admin removal) | `john.doe@keboola.com` |
 | `context_admin_name` | Name of the user in the context with the event (e.g., invitation or admin removal) | `Martin Matejka` |
+| `context_merge_request_id` | ID of the merge request (related to branch merge request events in SOX projects) | `42` |
+| `context_merge_request_name` | Name of the merge request (related to branch merge request events in SOX projects) | `Update of my configuration` |
+| `context_operation` | Type of the merge request operation (`request_review`, `finish_review`, `approve`, `merge`, `publish`) | `request_review` |
+| `context_state_from` | Original state of the merge request operation (`development`, `in_review`, `approved`, `in_merge`) | `in_review` |
+| `context_state_to` | End state of the merge request operation (`in_review`, `approved`, `in_merge`, `published`) | `approved` |
 
 #### Security event operations
 
@@ -436,6 +441,8 @@ organization, or the Keboola Connection platform itself.
 |`auditLog.storageBackendConnection.deleted`
 |`auditLog.storageBackendConnection.listed`
 |`auditLog.storageBackendConnection.updated`
+|`auditLog.mergeRequest.created`
+|`auditLog.mergeRequest.stateChanged`
 
 #### Operation parameters
 
