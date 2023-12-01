@@ -65,7 +65,7 @@ _Note: The ReadOnly role is currently available on all stacks for projects with 
 
 _Note: The Developer, Reviewer and Production Manager roles are currently only available when the feature of Governed Change Management is active._
 
-_Note: If the production manager is also an organization admin, they can invite new members to the project and assign them the production manager role._
+_Note: If the Production Manager is also an Organization Admin, they can invite new members to the project and assign them the Production Manager role._
 
 
 ## Inviting User
