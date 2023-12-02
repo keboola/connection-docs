@@ -1111,10 +1111,11 @@ CREATE TABLE "ctas_table" (
 ### Pros and Cons
 
 - **Pros**
-  - Loading to a workspace is significantly faster than loading to a table without native data types. You don't need just to cast the data when loading to a workspace.
+  - Loading into a workspace is significantly faster than loading into a table without native data types. Casting data is not necessary when loading into a workspace.
   - A table accessed in a workspace via the [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping) already has typed columns.
-  - Data types are strictly enforced, so you can be sure your number column will contain only numbers, for example.
+  - Data types are strictly enforced, ensuring that data in a specific column (like a number column) is consistent with its type.
 - **Cons**
-  - Changing a column type is complicated; see [Changing Types of Typed Columns](#changing-types-of-exising-typed-columns).
-  - Keboola won't do any type conversion when loading. Your data must match the column type in the table in Storage exactly.
+  - Changing a column type is complicated; see [How to Change Column Types](#changing-types-of-existing-typed-columns).
+  - Keboola does not perform any type conversion during loading. Your data must exactly match the column type in the table in Storage.
   - Any load of data with incompatible types will fail.
+  - The filtering option in the input mapping section is unavailable for tables with defined data types. If filtering is crucial for your workflow, consider using SQL, Python, or even no-code transformations to filter the data and create a new filtered table.
