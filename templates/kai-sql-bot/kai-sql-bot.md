@@ -12,7 +12,7 @@ and translates your requests into precise SQL commands.
 Ideal for both SQL novices and experts, this app revolutionizes the way you interact with your data and replaces traditional querying methods with **real-time, 
 AI-assisted data insights**. You can now dive into your Snowflake data with ease and efficiency like never before.
 
-We will guide you through the process of building the UA and GA4 Comparison app using a predefined template.
+We will guide you through the process of building the Kai SQL Bot app using a predefined template.
 
 ## How to Use Template
 To begin, click on **Templates** in the top menu, and then select **Add Template**.
@@ -21,7 +21,7 @@ To begin, click on **Templates** in the top menu, and then select **Add Template
 ![Add New Template](/templates/kai-sql-bot/add-template.png)
 
 This will take you to the list of all available templates. Check the box for data app templates and view the list that appears. 
-From this list, select **UA and GA4 Comparison** and click on **Use Template**.
+From this list, select **KAI SQL Bot** and click on **Use Template**.
 
 {: .image-popup}
 ![New Template – Data Apps](/templates/kai-sql-bot/new-template-data-apps.png)
