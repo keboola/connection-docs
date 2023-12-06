@@ -585,7 +585,7 @@ This table shows data about all input tables of the job.
 | `kbc_job_id` (PK) | KBC flow task identifier | `963416992_kbc-us-east-1` |
 | `kbc_project_id` | Foreign key to the KBC project | `7880_kbc-us-east-1` |
 | `table_id` | Identifier of the table | `in.c-in_sh_kbc_internal.kbc_project` |
-| `kbc_project_table_id` (PK) | Foreign key to the Keboola Connection (KBC) table | `7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_project` |
+| `kbc_project_table_id` (PK) | Foreign key to the KBC Table | `7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_project` |
 | `table_name` | Name of the table | `kbc_project` |
 | `mappings` | Number of times the table was used in the job input (i.e., one table can be used multiple times in the input mapping of the transformation) | `1` |
 
@@ -597,7 +597,7 @@ This table shows data about all output tables of the job.
 | `kbc_job_id` (PK) | KBC flow task identifier | `909588277_kbc-us-east-1` |
 | `kbc_project_id` | Foreign key to the KBC project | `7880_kbc-us-east-1` |
 | `table_id` | Identifier of the table | `out.c-kbc_billing.kbc_event` |
-| `kbc_project_table_id` (PK) | Foreign key to the KBC table | `7880_kbc-us-east-1_out.c-kbc_billing.kbc_event` |
+| `kbc_project_table_id` (PK) | Foreign key to the KBC Table | `7880_kbc-us-east-1_out.c-kbc_billing.kbc_event` |
 | `table_name` | Name of the table | `kbc_event` |
 | `mappings` | Number of times the table was used in the job output (i.e., one table can be written multiple times to the storage in the output mapping of the transformation) | `1` |
 
