@@ -56,7 +56,7 @@ There are following user roles available:
     - **manage** production credentials (in variable storre);
     - **manage** triggers;
     - **run** jobs;
-    - **manage** notifications (for flows). However, they
+    - **manage** notifications (for flows). 
     - **cannot make changes** in development branches (edit configurations, etc.).
 
 **Notes:**<br />*The ReadOnly role is currently available on all stacks for projects with feature `queuev2`.*<br />*The Developer, Reviewer and Production Manager roles are currently only available when the feature of Governed Change Management is active.*<br />*If the Production Manager is also an Organization Admin, they can invite new members to the project and assign them the Production Manager role.*
