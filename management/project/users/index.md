@@ -23,7 +23,7 @@ All operations performed by a user are technically done using the
 
 ## User Roles
 
-There are four user roles available:
+There are following user roles available:
 
 - **Share** -- the user has full administrative access to the project, including sharing data in the [Data Catalog](/catalog/).
     _Note: The Share role can only be granted by an [organization member](/management/organization/)._
@@ -47,10 +47,19 @@ There are four user roles available:
     - delete the project,
     - manage users, and
     - manage [API tokens](/management/project/tokens/).
+- **Developer** –- the user can write to any development branch but **cannot edit** the production branch.
+- **Reviewer** –- the user extends the Developer role with the right to **approve** merge requests (except for their own requests).
+- **Production Manager** -– the user has the right to
+    - **merge** the merge requests;
+    - **manage** configuration state in the production branch;
+    - **link/unlink**  a bucket;
+    - **manage** production credentials (in variable storre);
+    - **manage** triggers;
+    - **run** jobs;
+    - **manage** notifications (for flows). However, they
+    - **cannot make changes** in development branches (edit configurations, etc.).
 
-_Note: The ReadOnly role is currently available on all stacks for projects with feature `queuev2`_
-
-
+**Notes:**<br />*The ReadOnly role is currently available on all stacks for projects with feature `queuev2`.*<br />*The Developer, Reviewer and Production Manager roles are currently only available when the feature of Governed Change Management is active.*<br />*If the Production Manager is also an Organization Admin, they can invite new members to the project and assign them the Production Manager role.*
 
 ## Inviting User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
