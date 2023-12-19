@@ -2,6 +2,9 @@ items:
   - url: /
     title: Home
 
+  - url: /onboarding/
+    title: Onboarding
+
   - url: /overview/
     title: Keboola Overview
 
