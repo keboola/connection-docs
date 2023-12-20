@@ -35,7 +35,7 @@ This step is fully **optional**.
 - Use our [MPA guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/2523430919) for assistance.
 - Multi-project architecture involves dividing data processing pipelines among multiple blocks represented by individual Keboola projects.
 
-### Business Data Model Methodology
+#### Business Data Model Methodology
    - Explore Keboola’s Business Data Model (BDM) methodology, detailed in our [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3139600519/Business+Data+Model+BDM+Guide).
    - The BDM aligns seamlessly with multi-project architecture, ensuring flexibility and efficiency in accommodating changes in source systems.
 
