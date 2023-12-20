@@ -67,22 +67,22 @@ from a tool-centric solution to a fully-fledged data platform.
 
 Key benefits of multi-project architecture include:
 
-1. **Separation of Responsibilities and Access Rights:**  
+1. **Separation of Responsibilities and Access Rights**  
 Ideal for organizations with diverse use cases, users, and personas, MPA facilitates the distinct allocation of responsibilities
 and access rights based on functional requirements.
-3. **Functional Designation of Projects:**  
+3. **Functional Designation of Projects**  
 Projects can be designated for specific functions such as stable data pipelines, experimental projects, consumption projects, etc.,
 providing clarity in their purpose.
-4. **Clear Separation of Logical Pipeline Steps:**  
+4. **Clear Separation of Logical Pipeline Steps**  
 Each project delineates a logical step in the data pipeline, contributing to a clear and organized structure of data processing.
-5. **Team Assignment to Projects:**  
+5. **Team Assignment to Projects**  
 Different teams can be assigned to different projects, promoting collaboration and specialization. For instance, the marketing team may operate
 on a dedicated marketing project.
-6. **Flexibility of the Infrastructure:**  
+6. **Flexibility of the Infrastructure**  
  MPA allows for flexibility in configuring the infrastructure to match the evolving needs of the organization.
-7. **Readiness for Future Expansions:**  
+7. **Readiness for Future Expansions**  
  The architectural design of MPA is conducive to future expansions, ensuring scalability and adaptability as the organization grows.
-8. **Mitigation of Unknowns in Architecture Design:**  
+8. **Mitigation of Unknowns in Architecture Design**  
 MPA simplifies the process of adjusting the architecture to changing conditions or scope, offering agility in responding to evolving requirements.
 
 In summary, multi-project architecture is a strategic evolution that optimizes the Keboola Platform. It provides a structured and scalable framework 
@@ -132,7 +132,7 @@ and organizational structure. While there is no one-size-fits-all solution, the 
 
 1. **Nature of data/business:**  
 Understand the characteristics of the data and business operations to identify related domains and objects.
-2. **Organizational structure:**
+2. **Organizational structure:**  
 Consider the internal organizational structure, including the roles and responsibilities of data teams within the company.
 3. **Data source variety and separation:**  
 Evaluate the variety and separation of data sources to determine if specific projects are needed for different types of sources.
@@ -240,15 +240,15 @@ Each department or entity operates independently, taking care of its entire data
 Infrastructure is driven by specific use cases, ensuring that each department's data needs are addressed within its designated project.
 
 **Horizontal split design example:**
-1. **Sales and CRM:**
+1. **Sales and CRM**
    - Data extractions from Salesforce and part of MySQL database.
    - Full data processing, including eventual data testing.
    - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
-2. **Marketing:**
+2. **Marketing**
    - Data extractions from Google Analytics, Exponea, and part of MySQL database.
    - Full data processing, including eventual data testing.
    - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
-3. **Operations:**
+3. **Operations**
    - Data extractions from Zendesk and part of MySQL database.
    - Full data processing, including eventual data testing.
    - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
