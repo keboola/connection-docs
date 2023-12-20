@@ -74,3 +74,42 @@ there’s no editing or arguing, only adding.
 Use “Yes, and…” every time. The outcome of this stage is a LOT of stickies, go until no one can think of anything else – while of course staying 
 within the boundaries laid out in Step 0. If you’re struggling to get going at this stage, following sample probing questions can help you get fired up:
 
+### Step 2 – Edit & Define
+Bring on the whiteboard. Hopefully it’s clean by this point. Start putting things on. First, the location doesn’t matter, but with practice you will recognize
+patterns (and you’ll put “customer-like” objects to the left, “transaction-like” objects to the right, which will save time later. Every time when putting 
+a new stickie on the board, go through these three steps:
+
+#### Group
+Does this stickie belong to some that is already there? (examples - “customer” versus “person” or “account”). Are they really all different things (then keep them separate) or different names for the same thing (then put them on top of each other).
+
+#### Classify & demote
+Is this an object (going to the left) or “transaction” (going to the right). The signs of transaction are usually presence of a date and/or time, 
+and possibly a numerical value. Transaction is not an object, it is an interaction between a few (“order” is an object – it exists on its own. 
+
+“Order receipt” is a transaction, an event, something that happened to/with the “order” object (we received it). Some objects will lose that status in this step. 
+For example, if you have an “eye color” stickie because it came out of the Storming stage - is it really an object, or is it a property of one? Or “Price”, 
+is that an object or a value?
+
+This is when the two other colors of the post-its become handy. Use one for “properties” and one for “key values”. When demoting an object to a property or value, 
+just rewrite the name on a stickie of the appropriate color, discard the original, and place the new one on the board near the object it is related to – property 
+on the left, value on the right of it.
+
+#### Rename & clarify
+Except for very simple use cases and very small teams, inevitably there will be different names/post-its for the same object, and disagreements 
+on what a particular object actually is. Our favourite example is a “customer”, which most often suffers from both problems.
+
+We may have post-its saying “customer”, or “contact”, or “person”, or “subscriber”, or “e-mail”. They may or may not be the same thing. 
+Can a “person” have more “e-mails”? Is “customer” only a “type” or a “status” of a person?. The nuances depend on the particular business and its habits 
+and terminology, but chances are all this can (and should) be reduced into one or two objects and perhaps a property.
+
+The second issue is a definition. Who is a customer? Someone who is in our system? Someone who placed an order? Someone who paid us? Someone who took a delivery?
+Often, every department has its own understanding of some terms. This is the time to clarify and define. 
+
+One of the major benefits of having completed a BDM exercise is that it helps to unify the language within a business and amongst the stakeholders.
+When we say “customer”, we mean “X”. Time to take notes to start building our dictionary. 
+
+**IMPORTANT:** It is imperative to confirm everything with the whole group at this stage. Do not make assumptions based on experiences or 
+point of views – it is very easy to “steamroll” the participants and insert one’s own opinions rather than learning what the customer truly thinks.
+
+At the end of this step, we have clear groups and well defined objects on the board. Well, the reality is – very often we find out during this step 
+(and any of the following one) that we forgot an object. Can we add it? Absolutely. Go ahead. More is better.
