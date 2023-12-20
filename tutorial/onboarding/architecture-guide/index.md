@@ -105,3 +105,30 @@ Assess the level of complexity introduced by regional or country-specific differ
 Consider the need to keep sensitive data separate for security reasons or to facilitate separate team management, and assess whether data masking is necessary at the L0 and L1 levels.
 
 By addressing these questions, you can gain valuable insights into whether multi-project architecture aligns with your organizational structure, data processing requirements, and collaboration dynamics, ensuring a strategic and effective implementation of Keboola projects.
+
+## How to Design the MPA
+Designing a multi-project architecture is a nuanced process, and each design is inherently unique, tailored to the specific environment, business needs, and organizational structure. While there is no one-size-fits-all solution, the following factors play a crucial role in determining the optimal architecture:
+
+1. **Nature of Data/Business:**  
+Understand the characteristics of the data and business operations to identify related domains and objects.
+2. **Organizational Structure:**
+Consider the internal organizational structure, including the roles and responsibilities of data teams within the company.
+3. **Data Source Variety and Separation:**  
+Evaluate the variety and separation of data sources to determine if specific projects are needed for different types of sources.
+4. **Security Aspects:**  
+Address security considerations, including geo-locations, data ownership, and compliance requirements.
+5. **Volume of Data and Complexity:**  
+Assess the volume and complexity of data within particular domains to inform the architecture.
+
+> [!TIP]
+> One precursor which should serve as a starting point is a defined **Business Data Model (BDM)**.
+> This exercise helps you to understand the business in terms of data and discover domains that are related to each other. 
+
+Generally speaking, the objects defined in the BDM should live closely together within the MPA -> e.g., Customer object related logic (and any closely related objects) should live in one project, it may be valid that multiple sources are contributing to this object, eventually coming from multiple L0 level projects but there should be always a single point of consolidation of this object as soon as possible (e.g., in L1/2). 
+
+See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-guide/) for more information.
+
+### Standard MPA designs
+This chapter describes the most typical MPA designs and demonstrates those in simple examples. In general we have defined two main strategies - vertical and horizontal - of splitting the projects that may be combined together into a so-called hybrid design.
+
+As you embark on the design process, keep in mind the dynamic and evolving nature of your organization. Regularly revisit and adjust the MPA design to accommodate changes in business priorities, data landscape, and organizational structure. The goal is to create an architecture that enhances collaboration, efficiency, and scalability across your data projects.
