@@ -36,7 +36,8 @@ By default, every Keboola project encompasses essential building blocks, includi
 5. **Governance layer**
    - Metadata, telemetry, identity management, access control, etc. 
 
-![Keboola Overview](/tutorial/onboarding/architecture-guide/pic1.png){: .img-responsive}
+{: .image-popup}
+![Keboola Overview](/tutorial/onboarding/architecture-guide/pic1.png)
 
 Many organizations find a single Keboola project sufficient for an extended period, or even indefinitely. It offers all the tools 
 integrated into an advanced, modern data stack, allowing users to integrate data sources, develop transformations, orchestrate pipelines, 
@@ -155,7 +156,9 @@ This chapter describes the most typical MPA designs and demonstrates those in si
 
 As you embark on the design process, keep in mind the dynamic and evolving nature of your organization. Regularly revisit and adjust the MPA design to accommodate changes in business priorities, data landscape, and organizational structure. The goal is to create an architecture that enhances collaboration, efficiency, and scalability across your data projects.
 
-![Vertical and Horizontal Split Design](/tutorial/onboarding/architecture-guide/split-design.png){: .img-responsive}
+{: .image-popup}
+![Vertical and Horizontal Split Design](/tutorial/onboarding/architecture-guide/split-design.png)
+<div align="center">Vertical and Horizontal Split Design</div>
 
 #### Vertical split design
 The vertical split design strategy involves dedicating different pipeline steps to different teams, often aligning with the transition 
@@ -198,7 +201,9 @@ Regularly evaluate the effectiveness of the Vertical Split Design and make adjus
 ***Note:** This design is particularly well-suited for environments where a centralized approach to data management and processing is effective, 
 and individual data consumers primarily interact with curated datasets provided by the data team.*
 
-![Vertical Split Design](/tutorial/onboarding/architecture-guide/vertical-design.png){: .img-responsive}
+{: .image-popup}
+![Vertical Split Design](/tutorial/onboarding/architecture-guide/vertical-design.png)
+<div align="center">Vertical Split Design Example</div>
 
 **L0 – Data acquisition**
 - All data extractions (from Salesforce, Zendesk, MySQL database, Google Analytics and Exponea)
@@ -248,14 +253,16 @@ Infrastructure is driven by specific use cases, ensuring that each department's 
    - Full data processing, including eventual data testing.
    - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
 
-![Horizontal Split Design](/tutorial/onboarding/architecture-guide/horizontal-design.png){: .img-responsive}
+{: .image-popup}
+![Horizontal Split Design](/tutorial/onboarding/architecture-guide/horizontal-design.png)
+<div align="center">Horizontal Split Design Example</div>
 
 **Benefits:**
 1. **Departmental autonomy**  
 Each department or entity enjoys autonomy in managing its specific data-related processes, fostering independence and flexibility.
 2. **Use-case customization**  
 Infrastructure is customized based on specific use cases, ensuring that each entity's data processing aligns with its unique requirements.
-3. **Domain Knowledge utilization**  
+3. **Domain knowledge utilization**  
 Departments leverage their domain knowledge to curate and manage their respective data catalogs, optimizing for accuracy and relevance.
 
 **Considerations for implementation:**  
@@ -275,7 +282,7 @@ This design is often the most typical and practical solution for organizations. 
 and integrations from processing and consumption. Simultaneously, it recognizes the necessity to horizontally split one or more of these vertical layers, 
 dedicating isolated environments to individual business units, departments, or teams.
 
-**Hybrid Split Design is suitable when:**
+**Hybrid split design is suitable when:**
 1. **Need for vertical and horizontal separation**  
 There is a requirement to separate data extractions and integrations (vertical split) from processing and consumption, and simultaneously,
 there is a need to horizontally split these vertical layers to cater to specific business units, departments, or teams.
@@ -285,7 +292,7 @@ The organization seeks a balance between providing independence to different ent
 **Key considerations:**
 1. **Combination of vertical and horizontal splits**  
 Integrates both vertical and horizontal splits to create a nuanced and adaptable data architecture.
-2. **Isolation for Business Units or Teams**  
+2. **Isolation for business units or teams**  
 Allocates isolated environments to individual business units, departments, or teams based on their unique data processing needs.
 
 **Benefits:**
@@ -302,10 +309,12 @@ Align horizontal splits with specific business units, departments, or teams, ens
 3. **Collaboration channels**  
 Establish channels for collaboration and information sharing where needed, fostering effective communication between different entities.
 4. **Scalability and adaptability**  
-Assess the scalability and adaptability of the Hybrid Split Design to accommodate future growth, changes in data landscape, and evolving business needs.
+Assess the scalability and adaptability of the hybrid split design to accommodate future growth, changes in data landscape, and evolving business needs.
 
-***Note:** The Hybrid split design recognizes the complexity of organizational data requirements and strives to provide a flexible, adaptable, 
+***Note:** The hybrid split design recognizes the complexity of organizational data requirements and strives to provide a flexible, adaptable, 
 and balanced solution. It allows organizations to leverage the benefits of both vertical and horizontal splits, tailoring the data architecture 
 to meet diverse and evolving needs.*
 
-![Hybrid Split Design](/tutorial/onboarding/architecture-guide/hybrid-design.png){: .img-responsive}
+{: .image-popup}
+![Hybrid Split Design](/tutorial/onboarding/architecture-guide/hybrid-design.png)
+<div align="center">Hybrid Split Design Example</div>
