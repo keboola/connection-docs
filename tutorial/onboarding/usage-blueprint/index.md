@@ -55,7 +55,7 @@ To request access to any of our existing Keboola projects, please contact the Pr
 > *Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin/)
 > AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
 > AWS US: [https://connection.keboola.com/admin](https://connection.keboola.com/admin)
-> GCP EU: [TODO: Please insert the link for GCP EU]
+> GCP EU: [TODO Please insert the link for GCP EU]
 > Single tenant stack: All relevant information is available within your Production Design document.*
 
 Navigate to the login site of our Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
@@ -72,7 +72,7 @@ If you wish to develop your own use-cases in Keboola, please reach out to one of
 
 #### Processing user termination
 Terminated users must be manually removed from all projects they are members of. Keboola Organization administrators can leverage Telemetry data 
-(refer to the [**Keboola Governance** guide](/tutorial/onboarding/governance-guide/) for more details) to identify the projects and 
+(refer to the [**Keboola Governance Guide**](/tutorial/onboarding/governance-guide/) for more details) to identify the projects and 
 subsequently remove users from individual projects.
 
 Alternatively, Project Owners can take the responsibility to remove terminated users from their respective projects.
@@ -80,3 +80,21 @@ Alternatively, Project Owners can take the responsibility to remove terminated u
 It's important to note that removing a user from a project will not affect any configurations created by them. Configurations will still remain usable 
 and functional after the user is removed.
 
+### Project Naming Conventions
+> *It is advisable to establish and uphold naming conventions for project names. The chosen names should be clear and indicative of the project's purpose.
+> Below, we suggest some of the typical conventions. Please refer to the [Multi-Project Architecture Guide](/tutorial/onboarding/architecture-guide/)
+> for details about different project levels/stages etc.*
+>
+> *In the following example, numerical codes such as 00, 10, 20 are used for project levels, but they can also be represented as L0, L1, L2, or other variations.*
+
+All projects within our organization adhere to a specific naming convention:
+
+`[STAGE]{Domain - optional}[Region - optional] Project Name`
+
+For the **Project Name** part, the convention dictates capitalizing the initial letter of each word, except for conjunctions like "and" and "or."
+
+Here are examples of project names:
+
+- `[10]{Sales}[EU] Financial Reporting`
+- `[00]{Sales} Corporate Rrofiling`
+- `[20]{HR}[GLOBAL] Compensation and Benefits Planning`
