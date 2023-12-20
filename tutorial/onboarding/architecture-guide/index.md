@@ -20,7 +20,7 @@ Conceptually, a Keboola project serves as a logical construct, providing isolati
 and embedded processes. This segregation facilitates the distributed allocation of access and responsibilities among individuals and teams 
 while maintaining comprehensive control over the data governance layer.
 
-By default, every Keboola project encompasses essential building blocks, including:
+By default, every **Keboola project** encompasses essential building blocks, including:
 1. **Storage**
    - Relational databases such as Snowflake, Redshift, Synapse, Exasol, and others
    - Object storage options like S3 or Azure Blob Storage
