@@ -98,3 +98,58 @@ Here are examples of project names:
 - `[10]{Sales}[EU] Financial Reporting`
 - `[00]{Sales} Corporate Rrofiling`
 - `[20]{HR}[GLOBAL] Compensation and Benefits Planning`
+
+## Keboola Project Rules and Principles
+### Managing Project Users
+> *As we mentioned in the previous chapters it’s typical to identify a Project Owner who is mainly responsible for managing project users.
+> Keboola identifies several project user roles.*
+
+The Project Owner bears the responsibility of ensuring that users are invited into their projects with the suitable roles. 
+Keboola user roles are documented [here](https://help.keboola.com/management/project/users/#user-roles). 
+It's essential to understand that the status of Project Owner is purely a formal role and 
+doesn't directly correspond to specific Keboola project roles and privileges. In most cases, users are invited under a project admin role 
+(or a share role) unless there is a specific requirement for a different role.
+
+To invite or remove a user from your project, please refer to the official steps outlined in the Keboola documentation [here](https://help.keboola.com/management/project/users/#inviting-user).
+
+### Naming Conventions
+> *Implementing naming conventions for all components in Keboola is recommended. This ensures that the project remains organized, comprehensible,
+> and simpler to manage and navigate. Keep in mind that the following is just a suggestion, as there is no universally recognized best practice
+> for naming conventions.*
+
+All configurations for Keboola components, including data source and data destination connectors, Transformations, Workspaces, Flows, and others, along with any Storage objects created, are required to adhere to the standard naming conventions outlined below.
+
+#### Component configurations
+The name of each component (data source/data destination connector or application) should include a use case/category (if possible), a domain (if applicable), 
+and the configuration name should follow the convention of capitalizing the first letter.
+
+`{Domain}[USECASE - optional] Configuration Name`
+
+Examples:
+- `{Sales}[REPORTING] Payments and Invoices`
+- `{Operations}[PLANNING] Workloads and Plan`
+
+Certain components, particularly data source connectors, may incorporate configuration rows. For example, in a database configuration, 
+a configuration row signifies a connection to a specific individual table. In this scenario, it is recommended to maintain the specific source object name 
+as the configuration row's name. If it's an API or service connector, the name should represent a distinct endpoint or domain.
+
+#### Transformations
+For transformations and optional transformation folders, employ a systematic approach such as `[USECASE - optional] Transformation Name` to categorize 
+and distinguish different transformations.
+
+Examples:
+- `[REPORTING] Payment Data Preprocessing`
+- `[REPORTING] Invoices Denormalization`
+
+If it's anticipated that individual transformations are components of a larger process and will consistently be executed together in a specific order, 
+consider incorporating a stage sign, like:
+
+- `[REPORTING][00] Payment Data Preprocessing`
+- `[REPORTING][01] Invoices Denormalization`
+- `[REPORTING][02] Main Report Calculation`
+
+Transformations can be further grouped in Transformation Folders. Naming of such folders should follow a convention of `[USECASE] Transformation Folder Name`.
+
+Example:
+- `[REPORTING] Financial Reporting`
+
