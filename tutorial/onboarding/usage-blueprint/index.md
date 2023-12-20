@@ -197,3 +197,29 @@ For Storage buckets, tables, and columns, use the following rules:
 > It's important to note that certain Data Sources connector components might create Storage buckets that are not editable in the component configuration.
 > In general, it is recommended not to impose the same naming conventions on ingested objects. Instead, maintain the original names from the data source
 > and apply preferred naming conventions to layers created above them for consistency and simplicity.
+
+### Descriptions
+Every component configuration, transformation or a flow should contain at least two or three general sentences about its function in the dataflow in broad terms.
+
+1. The deeper in the description, the more detail should be provided, e.g., any implementation specifics, caveats.
+2. Make use of MarkDown formatting to highlight important sections.
+3. Leverage HTML links to reference some related objects or other parts of the project, e.g., *“Keep in sync with  [original transformation](https://connection.eu-central-1.keboola.com/admin/projects/xx/transformations/bucket/1234/transformation/1)".*
+4. Consider stating the original owner of the configuration in the description, even though this might be redundant and can be seen clearly from the version history.
+
+### Sharing Data via Data Catalog
+> *The following depends on your implemented multi-project architecture. The suggestion below expects the implementation of multiple project layers.*
+
+Bucket sharing is done solely by those with `organization admin` or `share` role permissions. 
+
+A general rule is that data shouldn’t be shared from an upper to a lower stage/layer, and sharing data across the same stage/layer should be limited if it’s not necessary.
+
+**Sharing from level 00**
+- In most cases, sharing is done to 10 projects only.
+- Only buckets in `OUT` stage are shared. In some cases, when there is no transformation needed, tables should be shared via aliases into the output buckets.
+
+**Sharing from 1+ stages**
+- Shared output buckets (may be prefixed with `SHARED` keyword)
+- Buckets are shared only from the `OUT` stage.
+
+**Linking buckets**
+- Buckets linked from another project are always in the `IN` stage and prefixed with the `SHARED` keyword and a reference to the input project.
