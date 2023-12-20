@@ -75,7 +75,7 @@ Use “Yes, and…” every time. The outcome of this stage is a LOT of post-its
 within the boundaries laid out in Step 0. If you’re struggling to get going at this stage, following sample probing questions can help you get fired up:
 
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![Brain Storming](/tutorial/onboarding/architecture-guide/bdm-guide/desk.png)
 
 - What do you sell?
 - What “words” pop up in your mind about your business? [Own internal business lingo]
@@ -126,7 +126,7 @@ At the end of this step, we have clear groups and well defined objects on the bo
 
 ### Step 3 – Organize
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![Organize](/tutorial/onboarding/architecture-guide/bdm-guide/post-its-step3.png)
 
 OK, so at this point we have more or less logically arranged groups of post-its on the whiteboard. The goal of this step is to get from more or less logically arranged to true model - something highly arranged. Which really means just moving the groups around a bit and drawing arrows between them. Take a higher-altitude view, ignore the properties and values for a moment. How do the major objects relate to each other?
 
@@ -146,7 +146,7 @@ Sometimes we get stuck with a relationship that is 1:M, all good, but there’s 
 
 ### Step 4 – Test
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![Test](/tutorial/onboarding/architecture-guide/bdm-guide/post-its-step4.png)
 
 Testing the BDM (congrats, you have the version 0.1 on the board by now) is purely language and mental exercise. Throw business questions at it, and answer them using the language on the board, while pointing to the objects you are using. What are the sales by product category? That’s a total of Price times Quantity on Order Lines that refer to Products that are Attributed to that Category. If you’re missing an object, something is wrong. If you’re not following an arrow (against the direction is permissible) at any given point, something is wrong. Question it and drill in.
 
@@ -161,22 +161,22 @@ What follows is a section of templates or patterns that have tendency to repeat 
 Most survey systems and their API suffer from the age of excel. The data coming out is not very useful in terms of structure and requires heavy transformation, even though the BDM is rather simple. It’s questions and answers, right? As such, it creates a great example of usefulness of BDM - we would design ourselves in the corner very quickly trying to work with the data as is.
 
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![Survey Data](/tutorial/onboarding/architecture-guide/bdm-guide/bdm-survey.png)
 
 ### Subscription (Recurring Revenue) Business
 Regardless of what is the service or widget, there is benefit in looking at the majority of businesses through the lens of “recurring revenue”. This basic template works in most subscription contexts (think Software as a Service, magazine subscription, gym membership and everything in between).
 
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![BDM Subscription](/tutorial/onboarding/architecture-guide/bdm-guide/bdm-subscription.png)
 
 ### Customer Relationship Management
 That title looked better than “CRM”, but that’s what it means. Various CRM systems are notorious in how they take simple concepts and make the data very complicated. Again, that means trap and future headache if you try to take the data as-is, without a bit of thought given to it beforehand (looking at you, Tableau SFDC connector!)
 
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![CRM](/tutorial/onboarding/architecture-guide/bdm-guide/crm-bdm.png)
 
 ### e-Commerce – Marketing Side
 An e-Commerce operation is almost by definition a data-heavy affair. As mentioned in the text of this guide, we can carve out the orders, or the marketing, or the logistics side - each of them is a project of its own. This one is looking at the marketing side.
 
 {: .image-popup}
-![Automate modal](/orchestrator/automate.png)
+![eCommerce](/tutorial/onboarding/architecture-guide/bdm-guide/bdm-ecommerce-marketing.png)
