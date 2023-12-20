@@ -239,3 +239,24 @@ Components like data source connectors, applications, or transformations should 
 before merging changes into production.
 
 Caution must be exercised with data destination components, as even from the development branch, there is a risk of overwriting data in the production data destination.
+
+## Security Principles
+> *This section should encompass any particular security principles adhered to by your organization.
+> While some principles may not be enforceable through platform settings, Organization admins can monitor them using Telemetry data.*
+>
+> *Below, we suggest some of the commonly followed principles.*
+
+- Only project owners can invite users to their projects.
+- Each user must have an MFA (multi-factor authentication) enabled.
+- Development of any changes must be performed in a development branch only.
+- No credentials such as passwords, tokens or keys should be stored in plain text of configurations (e.g., you must not use a python Transformation for integration with an API that requires a token authentication).
+- Always consult with a project owner before using data destination components to write data out of projects.
+  
+### Admin Project
+> *In many organizations, especially those with multiple projects, creating a dedicated Admin project is a common practice.
+> This Admin project serves as a centralized hub for Organization administrators to effectively manage and analyze the Organization's Telemetry data.
+> For a more detailed understanding, refer to the [Keboola Governance Guide](/tutorial/onboarding/governance-guide/).*
+
+Our Admin project link – [https://connection.keboola.com/admin/projects/XXX](https://connection.keboola.com/admin/projects/)
+
+The project is used to extract organization telemetry data and prepare it for visualization and reporting.
