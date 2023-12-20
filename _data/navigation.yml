@@ -12,7 +12,7 @@ items:
       title: Keboola Onboarding
       items:
         - url: /tutorial/onboarding/usage-blueprint/
-        title: Usage Blueprint
+        title: Keboola Platform Usage Blueprint
 
         - url: /tutorial/onboarding/architecture-guide/
          title: Multi-Project Architecture Guide
