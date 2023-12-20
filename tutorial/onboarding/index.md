@@ -11,7 +11,7 @@ Whether you've completed your proof of concept project or graduated beyond the [
 If you're looking for a comprehensive overview of the Keboola platform, you can find it [here](https://help.keboola.com/overview/). Let's embark on this onboarding adventure together!
 
 ## Build a Solid Foundation
-While the excitement of implementing your use case is perceptible, we recommend starting your journey with thoughtful planning. 
+While it's exciting to start working on your project, we suggest beginning with careful planning. 
 Establishing fundamental building blocks early on will be a sturdy foundation throughout your entire Keboola platform experience. 
 Depending on the scale of your contract, some points may not be applicable—especially if you've opted for just one or two Keboola projects. 
 Some of the following steps can be skipped in such situations:
