@@ -223,3 +223,19 @@ A general rule is that data shouldn’t be shared from an upper to a lower stage
 
 **Linking buckets**
 - Buckets linked from another project are always in the `IN` stage and prefixed with the `SHARED` keyword and a reference to the input project.
+
+### Using Development Branches
+> *[Development branches](/components/branches/) serve as distinct entities dedicated to developing new configurations or modifying existing configurations
+> within the confined scope of a specific use-case. Each development branch operates independently, and any changes made within a branch become
+> accessible to other branches or projects only after they are merged into the production environment.*
+>
+> *Note that some users only use development branches for implementing changes and develop new configurations in the production branch directly.
+> There are also users who may not use branches at all – this depends on internal standards and requirements.*
+
+To create or modify configurations, users are required to utilize a development branch. The naming convention for a development branch should be
+`{Owner}[USE-CASE] Branch Name`, to provide clarity on the branch's purpose. For instance, `{Jane}[FINANCIAL REPORTING] New MSSQL data integration`.
+
+Components like data source connectors, applications, or transformations should always be executed in the development branch to ensure successful execution
+before merging changes into production.
+
+Caution must be exercised with data destination components, as even from the development branch, there is a risk of overwriting data in the production data destination.
