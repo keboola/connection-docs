@@ -2,15 +2,30 @@ items:
   - url: /
     title: Home
 
-  - url: /onboarding/
-    title: Onboarding
-
   - url: /overview/
     title: Keboola Overview
 
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
+      - url: /tutorial/onboarding/
+      title: Keboola Onboarding
+      items:
+        - url: /tutorial/onboarding/usage-blueprint/
+        title: Usage Blueprint
+
+        - url: /tutorial/onboarding/architecture-guide/
+         title: Multi-Project Architecture Guide
+         items:
+           - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+           title: Business Data Model Guide
+
+        - url: /tutorial/onboarding/cheat-sheet/
+        title: Cheat Sheet: Best Practices
+
+        - url: /tutorial/onboarding/governance-guide/
+         title: Keboola Governance Guide
+           
       - url: /tutorial/load/
         title: Part 1 - Loading Data
         items:
@@ -41,7 +56,6 @@ items:
       - url: /tutorial/branches/
         title: Part 6 - Development Branches
         items:
-
           - url: /tutorial/branches/prepare-tables/
             title: Prepare Tables
 
