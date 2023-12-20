@@ -22,19 +22,19 @@ while maintaining comprehensive control over the data governance layer.
 
 By default, every Keboola project encompasses essential building blocks, including:
 1. **Storage**
-  - Relational databases such as Snowflake, Redshift, Synapse, Exasol, and others
-  - Object storage options like S3 or Azure Blob Storage
+   - Relational databases such as Snowflake, Redshift, Synapse, Exasol, and others
+   - Object storage options like S3 or Azure Blob Storage
 2. **Components**
-  - Data sources: Connectors to pull data from various sources into the Keboola storage
-  - Data destinations: Facilitating reverse ETL to push processed data from Keboola to databases, services, or applications.
-  - Applications: Advanced components for tasks like data quality checks, natural language processing (NLP), and more.
-  - Data templates: Predefined packages of components for streamlined pipeline setup.
+   - Data sources: Connectors to pull data from various sources into the Keboola storage
+   - Data destinations: Facilitating reverse ETL to push processed data from Keboola to databases, services, or applications.
+   - Applications: Advanced components for tasks like data quality checks, natural language processing (NLP), and more.
+   - Data templates: Predefined packages of components for streamlined pipeline setup.
 3. **Transformations** (SQL, Python, R)
-  - Transformations give you the ability to transform your data into the desired format and structures for further usage and consumption.
+   - Transformations give you the ability to transform your data into the desired format and structures for further usage and consumption.
 4. **Flows**
-  - Flows bring everything together. A flow is a set of tasks organized in a workflow that has an assigned schedule of execution.
+   - Flows bring everything together. A flow is a set of tasks organized in a workflow that has an assigned schedule of execution.
 5. **Governance layer**
-  - Metadata, telemetry, identity management, access control, etc. 
+   - Metadata, telemetry, identity management, access control, etc. 
 
 ![Keboola Overview](/tutorial/onboarding/architecture-guide/pic1.png){: .img-responsive}
 
@@ -144,43 +144,89 @@ where IT teams design logical blocks of infrastructure, represented as projects 
 L1, L2, and so on. Each layer corresponds to different data processing stages, from acquisition to transformation and blending, to data consumption projects.
 
 **Vertical split design is suitable when:**
-1. **Dedicated Isolation Isn't Necessary:**  
+1. **Dedicated isolation isn't necessary**  
 There's no need to dedicate isolated projects to individual data consumers or business users. Instead, the focus is on logically splitting the data processing into distinct layers.
-2. **Managed by BI/Data/IT Teams:**  
+2. **Managed by BI/data/IT teams**  
 BI, data, or IT teams manage the full data environment of the organization. In such cases, these teams are responsible for orchestrating data processing and making datasets available for consumption.
-3. **Centralized Data Access:**  
+3. **Centralized data access**  
 Individual data consumers only access datasets provided by the data team or consume data via a visualization tool connected to a dedicated part of the underlying database.
 
-**Key Considerations**
-1. **Logical Layering:**  
+**Key considerations:**
+1. **Logical layering**  
 The design is structured based on logical layers, allowing each team to focus on specific aspects of data processing without overlapping responsibilities.
-2. **Data Team Ownership:**
+2. **Data team ownership**
 The data team has a central role in managing the full data environment and orchestrating data processing activities across different layers.
-3. **Data Access Control:**
+3. **Data access control**
 Data consumers access datasets made available by the data team or utilize data via visualization tools connected to specific sections of the underlying database.
 
-**Benefits**
-1. **Efficient Collaboration:**  
+**Benefits:**
+1. **Efficient collaboration**  
 Teams can efficiently collaborate within their designated pipeline steps, leading to streamlined processes and enhanced efficiency.
-2. **Clear Responsibilities:**  
+2. **Clear responsibilities**  
 Responsibilities are clearly defined for each team based on the logical layers, avoiding confusion and promoting focused efforts.
-3. **Centralized Management:**  
+3. **Centralized management**  
 Centralized data management by BI, data, or IT teams ensures a structured and organized approach to data processing.
 
-**Considerations for Implementation**
-1. **Team Alignment:**  
+**Considerations for implementation:**
+1. **Team alignment**  
 Ensure that team structures align with the logical layers of data processing, allowing each team to specialize in their designated stage.
-2. **Communication Channels:**  
+2. **Communication channels**  
 Establish clear communication channels between teams to facilitate collaboration and information sharing across different stages of data processing.
-3. **Continuous Evaluation:**
+3. **Continuous evaluation**  
 Regularly evaluate the effectiveness of the Vertical Split Design and make adjustments as needed based on evolving business needs and data requirements.
 
 ***Note:** This design is particularly well-suited for environments where a centralized approach to data management and processing is effective, 
 and individual data consumers primarily interact with curated datasets provided by the data team.*
 
-
-
 ![Vertical Split Design](/tutorial/onboarding/architecture-guide/vertical-design.png){: .img-responsive}
+
+**L0 – Data acquisition**
+- All data extractions (from Salesforce, Zendesk, MySQL database, Google Analytics and Exponea)
+- Basic data quality checks - to make sure that extracted data is in expected shape and quality
+
+**L1 – Core**
+- The core layer of data preparation and processing - data from L0 are combined into a unified data model
+- Data cleaning
+- Data processing
+
+**L2 – Data-marts**
+- One or more L2 projects that serve for data-mart creation
+- Built datasets are consumed by business/other data consumers 
+- Objects in this projects are made accessible from visualization/reporting tools
+
+**LX – Telemetry and governance**
+- Typically we would recommend to keep a separate project for consumption of Keboola’s telemetry data and other metadata that describe overall platform usage and serve for organization’s admins as a detailed monitoring 
+
+#### Horizontal split design
+The Horizontal Split Design involves dividing data pipelines and infrastructure based on departments, circles, or other entities within an organization. 
+This approach tailors data processing to specific use cases and allows individual entities to independently manage their entire data-related workflow. 
+For example, a marketing data catalog can be exclusively maintained by the marketing department, leveraging their domain knowledge.
+
+**Horizontal split design is suitable when:**
+1. **Entities operate independently**  
+Individual entities operate as clearly standalone units and are capable of independently handling the entire data-related workflow.
+2. **Use-case-driven infrastructure**  
+Infrastructure is designed based on specific use cases, allowing each entity to manage data pipelines aligned with their unique requirements.
+
+**Key considerations:**  
+1. **Departmental independence**  
+Each department or entity operates independently, taking care of its entire data-related work, from data extractions to full data processing.
+2. **Use-case-driven**  
+Infrastructure is driven by specific use cases, ensuring that each department's data needs are addressed within its designated project.
+
+**Horizontal split design example:**
+1. **Sales and CRM:**
+   - Data extractions from Salesforce and part of MySQL database.
+   - Full data processing, including eventual data testing.
+   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+2. **Marketing:**
+   - Data extractions from Google Analytics, Exponea, and part of MySQL database.
+   - Full data processing, including eventual data testing.
+   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+3. **Operations:**
+   - Data extractions from Zendesk and part of MySQL database.
+   - Full data processing, including eventual data testing.
+   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
 
 ![Horizontal Split Design](/tutorial/onboarding/architecture-guide/horizontal-design.png){: .img-responsive}
 
