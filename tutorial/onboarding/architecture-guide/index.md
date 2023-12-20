@@ -123,12 +123,65 @@ Assess the volume and complexity of data within particular domains to inform the
 > [!TIP]
 > One precursor which should serve as a starting point is a defined **Business Data Model (BDM)**.
 > This exercise helps you to understand the business in terms of data and discover domains that are related to each other. 
-
-Generally speaking, the objects defined in the BDM should live closely together within the MPA -> e.g., Customer object related logic (and any closely related objects) should live in one project, it may be valid that multiple sources are contributing to this object, eventually coming from multiple L0 level projects but there should be always a single point of consolidation of this object as soon as possible (e.g., in L1/2). 
-
-See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-guide/) for more information.
+> 
+> Generally speaking, the objects defined in the BDM should be grouped closely within the MPA. For instance, all logic related to a Customer object
+> (and any closely related objects) should be in one project. It's common for multiple sources to contribute to this object, possibly coming from
+> multiple L0 level projects. However, there should always be a single point of consolidation for this object as soon as possible (e.g., in L1/2). 
+>
+> See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-guide/) for more information.
 
 ### Standard MPA designs
 This chapter describes the most typical MPA designs and demonstrates those in simple examples. In general we have defined two main strategies - vertical and horizontal - of splitting the projects that may be combined together into a so-called hybrid design.
 
 As you embark on the design process, keep in mind the dynamic and evolving nature of your organization. Regularly revisit and adjust the MPA design to accommodate changes in business priorities, data landscape, and organizational structure. The goal is to create an architecture that enhances collaboration, efficiency, and scalability across your data projects.
+
+![Vertical and Horizontal Split Design](/tutorial/onboarding/architecture-guide/split-design.png){: .img-responsive}
+
+#### Vertical split design
+The vertical split design strategy involves dedicating different pipeline steps to different teams, often aligning with the transition 
+between core engineering/IT and business functions within an organization. This approach is commonly observed in enterprise environments, 
+where IT teams design logical blocks of infrastructure, represented as projects in Keboola's terminology, vertically into L0 (data acquisition projects), 
+L1, L2, and so on. Each layer corresponds to different data processing stages, from acquisition to transformation and blending, to data consumption projects.
+
+**Vertical split design is suitable when:**
+1. **Dedicated Isolation Isn't Necessary:**  
+There's no need to dedicate isolated projects to individual data consumers or business users. Instead, the focus is on logically splitting the data processing into distinct layers.
+2. **Managed by BI/Data/IT Teams:**  
+BI, data, or IT teams manage the full data environment of the organization. In such cases, these teams are responsible for orchestrating data processing and making datasets available for consumption.
+3. **Centralized Data Access:**  
+Individual data consumers only access datasets provided by the data team or consume data via a visualization tool connected to a dedicated part of the underlying database.
+
+**Key Considerations**
+1. **Logical Layering:**  
+The design is structured based on logical layers, allowing each team to focus on specific aspects of data processing without overlapping responsibilities.
+2. **Data Team Ownership:**
+The data team has a central role in managing the full data environment and orchestrating data processing activities across different layers.
+3. **Data Access Control:**
+Data consumers access datasets made available by the data team or utilize data via visualization tools connected to specific sections of the underlying database.
+
+**Benefits**
+1. **Efficient Collaboration:**  
+Teams can efficiently collaborate within their designated pipeline steps, leading to streamlined processes and enhanced efficiency.
+2. **Clear Responsibilities:**  
+Responsibilities are clearly defined for each team based on the logical layers, avoiding confusion and promoting focused efforts.
+3. **Centralized Management:**  
+Centralized data management by BI, data, or IT teams ensures a structured and organized approach to data processing.
+
+**Considerations for Implementation**
+1. **Team Alignment:**  
+Ensure that team structures align with the logical layers of data processing, allowing each team to specialize in their designated stage.
+2. **Communication Channels:**  
+Establish clear communication channels between teams to facilitate collaboration and information sharing across different stages of data processing.
+3. **Continuous Evaluation:**
+Regularly evaluate the effectiveness of the Vertical Split Design and make adjustments as needed based on evolving business needs and data requirements.
+
+***Note:** This design is particularly well-suited for environments where a centralized approach to data management and processing is effective, 
+and individual data consumers primarily interact with curated datasets provided by the data team.*
+
+
+
+![Vertical Split Design](/tutorial/onboarding/architecture-guide/vertical-design.png){: .img-responsive}
+
+![Horizontal Split Design](/tutorial/onboarding/architecture-guide/horizontal-design.png){: .img-responsive}
+
+![Hybrid Split Design](/tutorial/onboarding/architecture-guide/hybrid-design.png){: .img-responsive}
