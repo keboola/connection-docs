@@ -12,74 +12,67 @@ Welcome to the Keboola Governance Guide! Governance, in the context of our platf
 
 ## Understanding Platform Activity
 ### Leveraging Telemetry Data
-The Keboola platform captures metadata for every operation within its ecosystem. This encompasses the configuration of each component, user interactions, and the execution of every job. In the background, Keboola systematically processes the raw metadata, transforming it into a well-documented Telemetry data model [LINK]. Accessing this Telemetry data for your project is facilitated through a dedicated Telemetry data source component.
+The Keboola platform captures metadata for every operation within its ecosystem. This encompasses the configuration of each component, user interactions, 
+and the execution of every job. In the background, Keboola systematically processes the raw metadata, transforming it into a well-documented
+[telemetry data model](/components/extractors/other/telemetry-data). Accessing this telemetry data for your project is facilitated through a dedicated data source 
+connector called Telemetry Data.
 
-For optimal governance, it is advisable to establish a distinct Admin project, wherein the Organization mode of the Telemetry data source component can be employed. In instances where organizations operate with a limited number of projects, a straightforward approach involves integrating the Telemetry data component within one of the existing projects.Enabling Organization Mode in Telemetry Data Source
+For optimal governance, it is advisable to establish a distinct Admin project, wherein the Organization mode of the Telemetry Data connector can be 
+employed. In instances where organizations operate with a limited number of projects, a straightforward approach involves integrating the Telemetry Data connector 
+within one of the existing projects. 
 
-To activate the Organization mode within the Telemetry data source, kindly reach out to our Support team or directly contact your Account Manager. They will ensure that this specific option is enabled for your account, allowing you to leverage Telemetry data in an organizational context.
+**Enabling Organization Mode in Telemetry Data Source:**  
+To activate the Organization mode within the Telemetry data source, kindly reach out to our Support team or directly contact your Account Manager. They will 
+ensure that this specific option is enabled for your account, allowing you to leverage Telemetry data in an organizational context.
 
-#### Activity Center
-The Activity Center represents an advanced feature within the Telemetry data source component, accessible to customers with the Activity Center add-on included in their contract. This mode offers a more comprehensive view, providing intricate details about individual components. It includes additional information such as detailed metadata for storage and other objects, user activities, and specifics regarding job inputs and outputs. This detailed insight is particularly valuable for robust data lineage tracking and advanced usage analysis.
+#### Activity center
+The activity center represents an advanced feature within the Telemetry Data connector, accessible to customers with the Activity Center add-on included in their 
+contract. This mode offers a more comprehensive view, providing intricate details about individual components. It includes additional information such as 
+**detailed metadata** for storage and other objects, user **activities**, and **specifics regarding job** inputs and outputs. This detailed insight is 
+particularly valuable for robust data lineage tracking and advanced usage analysis.
 
 ### Monitoring and Analysis
-For comprehensive oversight, basic metrics are readily available in the form of a project dashboard on the Project Consumption page. These fundamental metrics include:
+For comprehensive oversight, basic metrics are readily available in the form of a project dashboard on the **Project Consumption** page. 
+These fundamental metrics include:
+- Consumed credits
+- Number of executed jobs
+- Error job ratio
+- Active flows
+- Active component configurations
+- Active transformations
 
-Consumed credits
+Organizations managing multiple projects can utilize the **Organization Usage** page to monitor these metrics across all projects. This broader view encompasses:
+- Total credit consumption
+- Number of projects
+- Number of users
+- Size of data in Storage
 
-Number of executed jobs
+All metrics are accompanied by a comparison to contractual limits. Furthermore, the usage is graphically represented over time and categorized by individual 
+component types, providing a comprehensive analysis.
 
-Error job ratio
-
-Active flows
-
-Active component configurations
-
-Active transformations
-
-Organizations managing multiple projects can utilize the Organization Usage page to monitor these metrics across all projects. This broader view encompasses:
-
-Total credit consumption
-
-Number of projects
-
-Number of users
-
-Size of data in Storage
-
-All metrics are accompanied by a comparison to contractual limits. Furthermore, the usage is graphically represented over time and categorized by individual component types, providing a comprehensive analysis.
-
-The platform also highlights the top consuming projects within your organization, along with insights into the most resource-intensive component configurations in terms of credit consumption. This detailed monitoring and analysis functionality offer valuable insights for efficient resource management and optimization.
+The platform also highlights the top consuming projects within your organization, along with insights into the most resource-intensive component configurations in 
+terms of credit consumption. This detailed monitoring and analysis functionality offer valuable insights for efficient resource management and optimization.
 
 #### Custom metrics
-In addition to the foundational metrics mentioned earlier, organizations often create more detailed dashboards to visualize custom metrics tailored to their specific needs. Whether utilizing Tableau, PowerBI, Looker, or other tools, it is possible to establish a direct connection between these tools and the Keboola Storage backend, enabling the visualization of Telemetry data.
+In addition to the foundational metrics mentioned earlier, organizations often create more detailed dashboards to visualize custom metrics tailored to their 
+specific needs. Whether utilizing Tableau, PowerBI, Looker, or other tools, it is possible to establish a direct connection between these tools and the Keboola 
+Storage backend, enabling the visualization of telemetry data.
 
-While certain metrics may require the development of additional SQL queries, many typical metrics can be easily derived from the Telemetry data itself. Some examples of these custom metrics include:
-
-Detailed, Multi-Dimensional View of Consumed Credits over Time:
-
-Per project, user, component, configuration, etc.
-
-Detailed View of Executed Jobs and Error Rates:
-
-This helps identify users with a high rate of error jobs, indicating a potential need for further assistance or education.
-
-Monitoring Outliers:
-
-Keep track of weekly, monthly, or other periodic changes in the activity of individual projects, users, or specific configurations. This aids in identifying sudden increases in project activity or specific transformations that may require optimization.
-
-Configuration Health Metrics:
-
-Monitor whether created flows have assigned schedules and notifications.
-
-Ensure that configurations have descriptions and adhere to naming conventions specified in the Platform Usage Blueprint [LINK].
-
-User 360:
-
-Verify whether users have Multi-Factor Authentication (MFA) enabled.
-
-Identify the projects to which users have access.
-
-Track the credit consumption, executed jobs, error rates, number of created and updated configurations, and API tokens created by each user.
+While certain metrics may require the development of additional SQL queries, many typical metrics can be easily derived from the Telemetry data itself. 
+Some examples of these custom metrics include:
+1. **Detailed, Multi-Dimensional View of Consumed Credits over Time**
+  - Per project, user, component, configuration, etc.
+2. **Detailed View of Executed Jobs and Error Rates**
+  - This helps identify users with a high rate of error jobs, indicating a potential need for further assistance or education.
+3. **Monitoring Outliers**
+  - Keep track of weekly, monthly, or other periodic changes in the activity of individual projects, users, or specific configurations. This aids in identifying sudden increases in project activity or specific transformations that may require optimization.
+4. **Configuration Health Metrics**
+  - Monitor whether created flows have assigned schedules and notifications.
+  - Ensure that configurations have descriptions and adhere to naming conventions specified in the [**Platform Usage Blueprint**](/tutorial/onboarding/usage/blueprint/).
+5. **User 360**
+  - Verify whether users have multi-factor authentication (MFA) enabled.
+  - Identify the projects to which users have access.
+  - Track the credit consumption, executed jobs, error rates, number of created and updated configurations, and API tokens created by each user.
 
 By incorporating these custom metrics into your monitoring and analysis strategy, you can gain deeper insights into the performance, health, and compliance aspects of your data platform, facilitating informed decision-making and proactive management.
 
