@@ -3,12 +3,12 @@ title: Keboola Governance Guide
 permalink: /tutorial/onboarding/governance-guide/
 ---
 
-* TOC
-{:toc}
-
 Welcome to the Keboola Governance Guide! Governance, in the context of our platform, encompasses a spectrum of activities related to tracking, understanding usage, cost management, and maintaining adherence to security and other principles outlined in your [Keboola Platform Usage Blueprint](/tutorial/onboarding/usage-blueprint/).
 
 **If you have any questions or need further assistance, feel free to reach out to our support team.**
+
+* TOC
+{:toc}
 
 ## Understanding Platform Activity
 ### Leveraging Telemetry Data
