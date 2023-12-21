@@ -78,7 +78,7 @@ items:
     title: Components
     items:
       - url: /components/extractors/
-        title: Extractors
+        title: Data Source Connectors
         items:
           - url: /components/extractors/communication/
             title: Communication
@@ -318,7 +318,7 @@ items:
                 title: YourPass
 
       - url: /components/writers/
-        title: Writers
+        title: Data Destination Connectors
         items:
           - url: /components/writers/bi-tools/
             title: Business Intelligence
