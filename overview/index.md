@@ -59,23 +59,87 @@ for interactions with the data, facilitating communication with other components
 
 ### Transformations
 [Transformations](/transformations/) allow end-users to create custom scripts in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, BigQuery, and 
-more), dbt, [Julia](https://julialang.org/), [Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). 
+more), dbt, [Julia](https://julialang.org/), [Python](https://www.python.org/about/), and [R](https://www.r-project.org/about.html). 
 Keboola provides Workspaces, offering a safe environment for experimentation, analytics and transformation development.
 
-[Workspaces](/transformations/workspace/) are managed environments for code development. SQL workspaces are accessible through the database provider's IDE or your preferred SQL IDE. Python, R, or Julia workspaces are available through Keboola's hosted and managed Jupyter Lab environment. These workspaces can be shared with other users to facilitate collaboration.
+[Workspaces](/transformations/workspace/) are managed environments for code development. SQL workspaces are accessible through the database provider's IDE or your 
+preferred SQL IDE. Python, R, or Julia workspaces are available through Keboola's hosted and managed Jupyter Lab environment. These workspaces can be shared with 
+other users to facilitate collaboration.
 
 ### Data Destination Connectors
-Data destination connectors [LINK], formerly known as Writers, are components responsible for output data delivery from Keboola to the systems and applications where the data gets used or consumed. These connectors often interface with relational databases, BI, reporting and analytics platforms, tools or applications.
+[Data destination connectors](/components/writers/), formerly known as [writers](/components/writers/), are components responsible
+for output data delivery from Keboola to the systems and applications where the data gets used or consumed. These connectors often interface 
+with [relational databases](/components/writers/database/), BI, [reporting and analytics](/components/writers/bi-tools/) platforms, tools or applications.
 
 ### Full Automation
-Keboola provides the Flows [LINK] component, formerly known as Orchestrator, to fully automate end-to-end processes. With Flows, you can specify the execution order of individual connectors, transformations, and other components, along with setting up parallelization. By adding a schedule or trigger [LINK][link to scheduler], you can automate processes at specified intervals or times of the day.
+Keboola provides the [Flows](https://help.keboola.com/orchestrator/) component, formerly known as [Orchestrator](https://help.keboola.com/orchestrator/), 
+to fully automate end-to-end processes. With flows, you can specify the execution order of individual connectors, transformations, and other components, 
+along with setting up parallelization. By adding a **schedule** or trigger, you can [automate](/orchestrator/) processes at specified intervals or times 
+of the day.
 
 The platform automatically scales resources for to facilitate the automated processes.
 
 ### Applications
-Unlike the free-form Transformations, Applications are predefined blocks, that enable users to perform advanced tasks such as sentiment analysis, association discovery, or histogram grouping. They can also enhance data, for example, by incorporating external data like Weather or Exchange Rates through third-party services.
+Unlike the free-form transformations, [applications](/components/applications/) are **predefined blocks**, that enable users to perform advanced tasks such as 
+sentiment analysis, association discovery, or histogram grouping. They can also enhance data, for example, by incorporating external data like weather or exchange 
+rates through third-party services.
 
 ### Data Apps
-Data Apps are user-friendly, interactive web applications designed to leverage data for insights or automated actions. These applications are typically custom-built to address specific challenges, providing users with dynamic, purpose-built experiences. Examples of Data Apps include recommendation engines, interactive segmentation tools, AI integration solutions, data visualization platforms, custom internal reporting tools for business teams, and financial apps for gaining insights into spending patterns.
+[Data apps](/components/data-apps/) are user-friendly, interactive web applications designed to leverage data for insights or automated actions. These applications 
+are typically custom-built to address specific challenges, providing users with dynamic, purpose-built experiences. Examples of data apps include recommendation 
+engines, interactive segmentation tools, AI integration solutions, data visualization platforms, custom internal reporting tools for business teams, and financial 
+apps for gaining insights into spending patterns.
 
+Keboola Governance
+Operational Metadata
+Keboola diligently collects a diverse array of operational metadata, encompassing user activity, job status, data flow, schema evolution, data pipeline performance, and adherence to a client's security rules. All project metadata is readily accessible within the client's Keboola environment, empowering users to conduct in-depth analyses, audits, or event-driven actions.
 
+Leveraging this metadata, we dynamically and automatically construct data lineage, providing a real-time understanding of data origin and usage. This capability serves both analytical and regulatory purposes, offering invaluable insights into the journey and utilization of data within the platform."
+
+Cost Monitoring
+Keboola meticulously gathers and organizes telemetry data encompassing every job execution and user activity. Within each job detail, information regarding consumed credit units is available, allowing for the precise calculation of the associated dollar amount, effectively quantifying the cost of the process. This granular level of detail enables the attribution of costs to specific departments, teams, use-cases, and individual users, providing comprehensive insights into resource utilization.
+
+Identity and Access management
+Effortlessly oversee user accounts within your organization, regulating their access to specific Keboola projects and datasets. Streamline data sharing across your organization, ensuring a comprehensive understanding of each user's access privileges and fostering a transparent overview of data accessibility.
+
+Extending the platform 
+The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, Transformations, Data source connectors etc.), can be extended with arbitrary code to extract, transform or write data.
+
+There are two ways of extending the platform: creating Components (used as Data destination connectors, applications and Data source connectors) and creating components based on Generic Extractor.
+
+All components can be created by us, your in-house teams or 3rd parties. They can easily use already existing data, ETL processes, and workflows. The development platform provides you with automation of infrastructure, user management, data management, and essential services like data catalogue, operational metadata, full governance, and reverse billing per job. The components can be kept private or offered to other Keboola users. Our market place consists of hundreds of applications that are developed mainly by 3rd parties and can be natively used as part of the workflows you are creating. This provides a great way for our users to really manage their environment and create a composable enterprise.
+
+Components can be run as standard pieces of our Flows [LINK], obtaining the full support and services (a link to your components, logs, etc.).
+
+Keboola CLI
+Keboola CLI (Command Line Interface) is a set of commands for operating your cloud data pipeline. It is available to install in the Windows, macOS, and Linux environments.
+
+Keboola Support
+When working with Keboola platform, you are never on your own and there are multiple ways to obtain support from us. To solve your problem or to gain context, our support staff may join your project when requested.
+
+Other Commonly Used Terms
+This section explains a few terms that are often used throughout these documentation pages.
+
+Stacks
+The Keboola platform is available in multiple stacks, these can be either multi-tenant or single-tenant. The current multi-tenant stacks are:
+
+US AWS – connection.keboola.com,
+
+EU AWS – connection.eu-central-1.keboola.com,
+
+EU Azure – connection.north-europe.azure.keboola.com.
+
+A stack is a combination of a datacenter location (region) and a cloud provider, and is identified by its domain (URL). The currently supported cloud providers are Amazon AWS and Microsoft Azure. A stack is a completely independent full instance of Keboola platform services. That means that if you have projects in multiple stacks, you need to have multiple Keboola accounts.
+
+Each stack uses a different network with a different set of dedicated IP addresses. The Developer documentation describes in more detail how to handle multiple stacks when working with the API.
+
+Single-tenant stacks are available for a single enterprise customer with a domain name in form connection.CUSTOMER_NAME.keboola.com.
+
+Jobs
+Most things in Keboola platform are done using the batch approach; when you perform an operation, a job is created and executed in the background. We also call these jobs asynchronous. Multiple jobs can be running at the same time and you can continue your work in the meantime.
+
+Tokens
+Every operation done within the Keboola platform must be authorized with a token. Each Keboola user is automatically assigned a token on their first login. Apart from that, tokens with limited access to some Keboola platform operations can be created (and shared with other people). The principle of token authorization allows you, for example, to easily share a single table from your Storage with someone without them having to register to the Keboola platform (enter email/password).
+
+Input / Output Mapping
+To make sure your transformation does not harm data in Storage, mapping separates source data from your script. A secure workspace is created with data copied from the tables specified in the input mapping. After the transformation has been executed successfully, only tables and files defined in the output mapping are brought back to Storage.
