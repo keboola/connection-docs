@@ -11,7 +11,7 @@ the ins and outs of Keboola.
 {:toc}
 
 ## Where to Start
-If you are new to Keboola and **seeking a quick orientation** to the Keboola ecosystem, explore our comprehensive [overview](/overview/). 
+If you are new to Keboola and **would like a quick orientation** to the Keboola ecosystem, explore our comprehensive [overview](/overview/). 
 
 Ready to take the next step? Grab your free trial and set up your account [here](https://connection.north-europe.azure.keboola.com/wizard), 
 or connect with our team directly through [this link](https://www.keboola.com/contact).
@@ -45,6 +45,6 @@ FAQ/Troubleshooting [LINK]
 
 ## We Highly Appreciate Your Input!
 Feel free to utilize the support form within your Keboola project to share feedback, request new features or components, 
-or simply engage in a conversation with us. Your insights are valuable, and we're here to listen and collaborate.
+or engage in a conversation with us. Your insights are valuable, and we're here to listen and collaborate.
 
 [Community link]()
