@@ -168,25 +168,38 @@ unnecessary complications in your output data.
 >
 > For all development tasks, whether adding new components, editing existing configurations, or refining transformations, maximize safety by making use of
 > Development branches. This strategic approach ensures a secure and controlled environment for your development efforts. For detailed guidance on utilizing
-> Development branches effectively, refer to the documentation here. This practice not only enhances the safety of your development processes but also provides a
-> structured and organized approach to managing changes in your Keboola environment.
+> Development branches effectively, refer to the documentation [here](https://chat.openai.com/c/3f2f2a1f-c67f-4c9d-8992-0071adb4ca58#link-to-documentation).
+> This practice not only enhances the safety of your development processes but also provides a structured and organized approach to managing changes in your
+> Keboola environment.
 
 ## Automating Your Flow
-#1 Optimize Workflow with Parallel Execution
-In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, enhancing overall efficiency. Subsequent steps (phases) will commence only after the completion of all tasks within the preceding step.
+### Optimize Workflow with Parallel Execution
+In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, 
+enhancing overall efficiency. Subsequent steps (phases) will commence only after the completion of all tasks within the preceding step.
 
-#2 Utilize the Continue on Failure Setting
-Every individual task within your Flow features a Continue on Failure setting. By default, this setting is disabled, meaning an error in any single task will halt the entire Flow execution, resulting in an error status. Enabling Continue on Failure permits the Flow to persist even if a single task encounters an issue. 
+### Utilize the Continue on Failure Setting
+Every individual task within your flow features a **Continue on Failure** setting. By default, this setting is *disabled*, meaning an error in any single task 
+will halt the entire flow execution, resulting in an error status. Enabling **Continue on Failure** permits the flow to persist even if a single task encounters 
+an issue. 
 
-This is beneficial for tasks that may regularly fail due to specific conditions, with the expectation that they will be executed successfully in subsequent runs. Alternatively, it is suitable for independent tasks whose failure does not impact the rest of the Flow. However, monitoring execution statuses becomes crucial to promptly address potential errors and implement necessary fixes.
+This is beneficial for tasks that may regularly fail due to specific conditions, with the expectation that they will be executed successfully in subsequent runs. 
+Alternatively, it is suitable for independent tasks whose failure does not impact the rest of the flow. However, monitoring execution statuses becomes crucial to 
+promptly address potential errors and implement necessary fixes.
 
-#3 Set Up Notifications for Insightful Monitoring
-For a seamless execution of your use-cases, staying informed about errors or unusual execution times in your Flows is crucial. Configure notifications within your Flow to receive timely updates. Teams often opt to configure a group mailbox for specific user groups, ensuring that all team members receive notifications regarding errors, warnings, or instances where the Flow runs longer than the expected duration. This proactive approach enhances awareness and facilitates prompt responses to any issues that may arise. 
+### Set Up Notifications for Insightful Monitoring
+For a seamless execution of your use-cases, staying informed about errors or unusual execution times in your flows is crucial. Configure **notifications** 
+within your flow to receive timely updates. Teams often opt to configure a group mailbox for specific user groups, ensuring that all team members receive 
+notifications regarding errors, warnings, or instances where the flow runs longer than the expected duration. This proactive approach enhances awareness and 
+facilitates prompt responses to any issues that may arise. 
 
-#4 Automate Your Flows with Scheduled Execution
-Date & Time Schedule: The most common setup for automating Flows involves scheduling them to run at specific time slots. In a multi-tenant stack, it's advisable to avoid peak time slots, such as midnight, to optimize resource availability. A simple adjustment, like scheduling your Flow for 0:15 am, can positively impact execution, minimizing competition for resources within the multi-tenant environment.
+### Automate Your Flows with Scheduled Execution
+**Date & Time Schedule:** The most common setup for automating flows involves scheduling them to run at specific time slots. In a multi-tenant stack, it's 
+advisable to avoid peak time slots, such as midnight, to optimize resource availability. A simple adjustment, like scheduling your flow for 0:15 am, can 
+positively impact execution, minimizing competition for resources within the multi-tenant environment.
 
-Triggered Execution: A triggered Flow is configured to monitor specific tables in the Storage. Once there are updates in the selected Storage table, the Flow is automatically executed. This setup is particularly useful in multi-project scenarios where one project's Flow relies on processes in another project. By linking tables through a Data Catalog and scheduling a Flow on Trigger, dependencies between projects are efficiently managed.
+**Triggered Execution:** A triggered flow is configured to monitor specific tables in the Storage. Once there are updates in the selected Storage table, the flow 
+is automatically executed. This setup is particularly useful in multi-project scenarios where one project's flow relies on processes in another project. By 
+linking tables through a data catalog and scheduling a flow on trigger, dependencies between projects are efficiently managed.
 
 ## Writing Data to a Destination
 While some practices overlap with those for extracting data from sources—specifically, #1 Use Proper User Credentials, #2 Understand Accessibility of Your Data Sources, and #5 Optimizing with Parallelization—additional considerations come into play when writing data from Keboola to a destination.
