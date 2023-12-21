@@ -29,11 +29,11 @@ items:
       - url: /tutorial/load/
         title: Part 1 - Loading Data
         items:
-          - url: /tutorial/load/googledrive/
-            title: Loading with GoogleDrive Extractor
+          - url: /tutorial/load/googlesheets/
+            title: Loading with Google Sheets Data Source
 
           - url: /tutorial/load/database/
-            title: Loading with Database Extractor
+            title: Loading with Database Data Source
 
       - url: /tutorial/manipulate/
         title: Part 2 - Data Manipulation
