@@ -17,7 +17,7 @@ automating the entire data pipeline for enhanced efficiency and consistency. Thi
 If you are new to Keboola, we recommend exploring our comprehensive [platform overview](/overviews/). 
 This resource will help you become acquainted with commonly used terms and gain a solid understanding of the Keboola ecosystem.
 
-To get started, ensure you have access to a Keboola project. If you haven’t got one yet, reach out to us at {sales@keboola.com](sales@keboola.com), 
+To get started, ensure you have access to a Keboola project. If you haven’t got one yet, reach out to us at [sales@keboola.com](sales@keboola.com), 
 or create a free project [here](https://connection.north-europe.azure.keboola.com/wizard) instantly.
 
 If you are a developer looking to contribute new components to the Keboola platform, your [development project](https://developers.keboola.com/#development-project) 
@@ -46,9 +46,9 @@ For a deeper exploration of Keboola features, aligning with real-world usage, co
    - [Database Data Source](/tutorial/load/database/): Load data from an external database utilizing the [Snowflake Database data source connector](/tutorial/load/database/) (applicable to all Keboola-supported [database data sources](/components/extractors/database/)).
 2. [**Data Manipulation: Creating and Using a Workspace**](/tutorial/manipulate/sandbox/)
    - Create and utilize a workspace, a secure development and analytical environment. It enables you to interact with data and develop transformation code on a copy of your production data.
-3. [**Automation: Setting up a Flow**](/tutorial/automate/)
+3. [**Automation: Setting Up a Flow**](/tutorial/automate/)
    - Specify task sequences and configure their automatic execution through the setup of a flow.
-4. [**Ad-hoc Data Analysis**](/tutorial/ad-hoc/)
+4. [**Ad-Hoc Data Analysis**](/tutorial/ad-hoc/)
    - Explore how to perform ad-hoc data analysis, allowing flexibility in interacting with arbitrary data.
 5. [**Development Branches**](/tutorial/branches/)
    - Learn how to safely modify a running project using development branches.
