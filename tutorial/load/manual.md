@@ -30,26 +30,48 @@ is purely coincidental.*
 ### Steps to Follow
 1. Before proceeding, ensure you are logged into your Keboola project (refer to the tutorial [Prerequisites](/tutorial/#prerequisites) 
 if you need to acquire a project).
-2. Navigate to the **Components** section and use the search box to find **'CSV Import'**.
-3. 
+2. Navigate to the **Components** section and use the search box to find **CSV Import**.
+
 {: .image-popup}
 ![Screenshot -- Extractors](/tutorial/load/picture1.png)
 
-{: .image-popup}
-![Screenshot -- CSV Import Intro](/tutorial/load/picture2.png)
+4. Click the**Add Component** button, then select **Connect To My Data**.
 
 {: .image-popup}
-![Screenshot -- CSV New Configuration](/tutorial/load/picture3.png)
+![Screenshot -- Extractors](/tutorial/load/picture2.png)
+
+4. Enter a **name and description** for your configuration, and click **Create Configuration**.
+   
+{: .image-popup}
+![Screenshot -- CSV Import Intro](/tutorial/load/picture3.png)
+
+***Note:** You can create multiple configurations for each connector, and maintaining clear naming conventions contributes to a clean and organized project. 
+Check our [best practices guide](/tutorial/onboarding/cheat-sheet/) for suggestions on this topic.*
+
+Adding a description is a beneficial practice for both you and your colleagues, aiding in understanding the purpose of your configuration."
+
+In this tutorial, we will create four configurations for this data source connector, dedicating one configuration to each source CSV file.
+
+Name the first configuration **[TUTORIAL] Opportunity**.
+
+5. In the **CSV File** section, click **Select file** and choose the [opportunity.csv](/tutorial/opportunity.csv) file you downloaded.
+   
+{: .image-popup}
+![Screenshot -- CSV New Configuration](/tutorial/load/picture4.png)
+
+6. In the **Upload Settings** section, modify the *Destination* setting by clicking the **pen icon** next to the *Destination* name. Set the name of the table that will be created in your Keboola Storage to `in.c-csv-import.opportunity` and click **Save**.
 
 {: .image-popup}
-![Screenshot -- CSV Import Configuration](/tutorial/load/picture4.png)
+![Screenshot -- CSV Import Configuration](/tutorial/load/picture5.png)
+
+7. Click **Upload**.
 
 {: .image-popup}
-![Screenshot -- Change upload settings](/tutorial/load/picture5.png)
+![Screenshot -- Change upload settings](/tutorial/load/picture6.png)
 
-{: .image-popup}
-![Screenshot -- Upload CSV file progress](/tutorial/load/picture6.png)
-	
+After the upload is complete, repeat the process for the remaining three tables—create a configuration, change the destination, 
+and upload the respective file as requested.
+
 That's it. You should now have four tables containing sample data stored in your Keboola Storage:
 
 - `in.c-csv-import.opportunity`
@@ -57,21 +79,21 @@ That's it. You should now have four tables containing sample data stored in your
 - `in.c-csv-import.user`
 - `in.c-csv-import.level`
 
+To confirm the successful loading of all tables and review the data, navigate to the [Storage](/storage/) section. Data is organized into **buckets**, 
+and each bucket can contain multiple **tables**.
+
+Expand each bucket to view its tables, and click a table name to access details, including the 'Data Sample' for that table.
+
 {: .image-popup}
-![Screenshot -- Storage preview](/tutorial/load/picture7.png)
+![Screenshot -- Upload CSV file progress](/tutorial/load/picture7.png)
 
 {: .image-popup}
 ![Screenshot -- Storage preview](/tutorial/load/picture8.png)
 
-## What’s next
+## What’s Next
 Proceed to [Data Manipulation](/tutorial/manipulate/) for the next step in the tutorial. Alternatively, take a brief side step to explore 
-[Loading data with Google Sheets data source connectore](/tutorial/load/googledrive/) 
-and/or [Loading data with Database data source connector](/tutorial/load/database/). 
+[Loading Data with Google Sheets Data Source Connector](/tutorial/load/googledrive/) 
+and/or [Loading Data with Database Data Source Connector](/tutorial/load/database/). 
 
 ## If You Need Help
-Feel free to reach out to our Support team [LINK] if there’s anything we can help with.
-You can now take
-
-- the next step --- [Data Manipulation](/tutorial/manipulate/), or
-- a brief side step to [Loading data with GoogleDrive Extractor](/tutorial/load/googledrive/), or
-- a brief side step to [Loading data with Database Extractor](/tutorial/load/database/).
+Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
