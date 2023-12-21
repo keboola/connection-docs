@@ -21,9 +21,9 @@ For optimal governance, it is advisable to establish a distinct Admin project, w
 employed. In instances where organizations operate with a limited number of projects, a straightforward approach involves integrating the Telemetry Data connector 
 within one of the existing projects. 
 
-**Enabling Organization Mode in Telemetry Data Source:**  
-To activate the Organization mode within the Telemetry data source, kindly reach out to our Support team or directly contact your Account Manager. They will 
-ensure that this specific option is enabled for your account, allowing you to leverage Telemetry data in an organizational context.
+**Enabling Organization mode in the Telemetry Data data source connector:**  
+To activate the Organization mode within the Telemetry Data connector, kindly reach out to our Support team or directly contact your account manager. 
+They will ensure that this specific option is enabled for your account, allowing you to leverage telemetry data in an organizational context.
 
 #### Activity center
 The activity center represents an advanced feature within the Telemetry Data connector, accessible to customers with the Activity Center add-on included in their 
@@ -60,13 +60,13 @@ Storage backend, enabling the visualization of telemetry data.
 
 While certain metrics may require the development of additional SQL queries, many typical metrics can be easily derived from the Telemetry data itself. 
 Some examples of these custom metrics include:
-1. **Detailed, Multi-Dimensional View of Consumed Credits over Time**
+1. **Detailed, multi-dimensional view of consumed credits over time**
    - Per project, user, component, configuration, etc.
-2. **Detailed View of Executed Jobs and Error Rates**
+2. **Detailed view of executed jobs and error rates**
    - This helps identify users with a high rate of error jobs, indicating a potential need for further assistance or education.
-3. **Monitoring Outliers**
+3. **Monitoring outliers**
    - Keep track of weekly, monthly, or other periodic changes in the activity of individual projects, users, or specific configurations. This aids in identifying sudden increases in project activity or specific transformations that may require optimization.
-4. **Configuration Health Metrics**
+4. **Configuration health metrics**
    - Monitor whether created flows have assigned schedules and notifications.
    - Ensure that configurations have descriptions and adhere to naming conventions specified in the [**Platform Usage Blueprint**](/tutorial/onboarding/usage/blueprint/).
 5. **User 360**
