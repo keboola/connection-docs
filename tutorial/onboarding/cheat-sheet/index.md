@@ -11,29 +11,29 @@ processing through Flows or configuring components like data sources, data desti
 essential best practices. Regardless of the intricacies of your project, these recommendations aim to optimize your workflow and ensure a smooth experience with the 
 core building blocks of a standard use case in Keboola.
 
-## Extracting data from sources
-### Use Proper User Credentials
+## Extracting Data from Sources
+### Proper User Credentials
 When working with data source components in Keboola, proper authorization is crucial. This involves providing credentials and connection details for source 
 databases or relevant tokens and API keys for extracting data from services. It is advisable to use technical user credentials created specifically for Keboola 
 integrations, as using the credentials of a real person may present challenges related to permissions, potential changes or terminations, and password resets.
 
-### Understand Accessibility of Your Data Sources
+### Accessibility of Your Data Sources
 Ensure that the data sources you intend to integrate are accessible from the Keboola platform. Internal databases running on on-premise servers or private clouds 
 may not be accessible by default. In such cases, consider whitelisting Keboola's IP addresses, establishing an SSH tunnel (if supported by the Keboola component), 
 or requesting Keboola to set up a VPN server. Collaboration with administrators or owners of the data source on your side, coupled with support from the Keboola 
 team, will help address any accessibility issues.
 
-### Know What You're Extracting
+### What You're Extracting
 When integrating typical data sources such as MS SQL Server, PostgreSQL, MySQL, or services like Google Analytics and Facebook Ads, resist the temptation to 
 extract everything without evaluating necessity. This approach can lead to unnecessary credit spending. It is recommended to initially extract a limited batch of 
 data to verify its relevance before proceeding with a full replication of the entire data history from the source.
 
-### Utilize Incremental Fetching and Incremental Loading
-**Incremental Fetching:** Keboola's ability to read data from the source in increments, either through specific parameters or Keboola's incremental fetching 
+### Incremental Fetching and Incremental Loading
+**Incremental fetching:** Keboola's ability to read data from the source in increments, either through specific parameters or Keboola's incremental fetching 
 options in database connectors, is beneficial for larger datasets. This setup is particularly useful when the full extraction time exceeds that of extracting 
 increments only.
 
-**Incremental Loading:** Concurrently, incremental loading involves incrementally loading the extracted data into Keboola Storage. Setting a primary key for the 
+**Incremental loading:** Concurrently, incremental loading involves incrementally loading the extracted data into Keboola Storage. Setting a primary key for the 
 Keboola Storage table allows for efficient incremental loading, as it processes upsert operations—appending new records and updating existing ones based on 
 matching primary key values. Incremental load without a primary key set would always perform an append operation.
 
@@ -43,10 +43,11 @@ This information is usually highlighted in the configuration UI, providing users
 ### Optimizing with Parallelization 
 To optimize the overall runtime of your pipeline, consider employing parallelization to execute multiple configurations simultaneously. It's essential to recognize that while parallelization can significantly reduce the total runtime, each individual job consumes credits independently. Therefore, parallelization is a tool for optimizing the execution timeline rather than cost.
 
-**Where to Apply Parallelization:**
+**Where to apply parallelization:**
 
-1. **Flow Level:** Within a Flow, tasks can be organized into phases for parallel execution.
-2. **Components:** For [row-based components](/components/#configuration-rows), you can set parallelization. Examples include database e extractors (data sources), where multiple tables share the same credentials. Configuration rows allow for parallel execution, and this can be configured in the 
+1. **Flow level:** Within a flow, tasks can be organized into phases for parallel execution.
+2. **Components:** For [row-based components](/components/#configuration-rows), you can set parallelization. Examples include database e extractors (data
+sources), where multiple tables share the same credentials. Configuration rows allow for parallel execution, and this can be configured in the 
 component UI.
 
 > [!TIP]
@@ -66,12 +67,12 @@ but there is a limit on the maximum parallel Storage jobs in a project. In multi
 slots, potentially extending the overall runtime. The default limit for parallel Storage jobs is 10, but it can be increased through Keboola Support.
 
 ## Developing a Transformation
-### Use a Workspace for Development
+### Using a Workspace for Development
 It's common for users to directly dive into the Transformations section of the UI to set up and test scripts. However, this approach may not be optimal. Executing a transformation component, whether it involves Python, R, or SQL transformations, always incurs some overhead from the component execution layered on top of the script execution. This can result in unnecessary credit consumption during code debugging.
 
 Our recommendation is to start by creating a Workspace for development purposes. Develop and test your code within the Workspace environment. Once your script is functioning correctly, you can then transfer it to a Transformation configuration and execute it, ensuring more efficient credit usage.
 
-### Grasp the Significance of Input and Output Mapping in a Transformation
+### Input and Output Mapping in a Transformation
 Every transformation operates within its designated, temporary transformation workspace. When a Transformation is executed, it establishes this distinct 
 workspace, which is isolated from the primary Keboola Storage. Consequently, within your code, you cannot directly access all Storage Objects; instead, you must 
 load selected Storage objects into your transformation using an input mapping.
@@ -111,7 +112,7 @@ into your input mapping, it is imperative to employ double quotes when referenci
 For instance, using `FROM MyInputTable` would be interpreted by Snowflake as `FROM MYINPUTTABLE`, resulting in a non-existent object and causing the script to 
 fail. Therefore, it is essential to use `FROM "MyInputTable"` to ensure proper referencing in a Snowflake environment.
 
-### Optimizing by Incremental Processing
+### Incremental Processing
 Similar to leveraging incremental fetching and loading with data source components, you can optimize your transformation through incremental processing.
 
 **Increments in the input mapping:** You can configure your transformation to process increments of data each time it runs. This requires the input tables 
@@ -126,7 +127,7 @@ Subsequently, you can define the processed increment using a WHERE condition in 
 **Increments in the output mapping:** This is analogous to the incremental loading setup of data source components. You can choose to implement incremental 
 loading with or without a primary key, resulting in either upserting or appending data, respectively.
 
-### Use Variables
+### Using Variables
 Keboola transformations offer the convenience of Variables. A Variable is an element designed to store a value that can be repeatedly utilized in your 
 transformation script. This becomes particularly handy when employing a filtering condition in various sections of your script. By setting it as a variable, you 
 simplify the process of updating the value. If a change is needed, you can modify it in one place rather than across multiple instances. For more information on 
@@ -134,13 +135,13 @@ variables, refer to [this](/transformations/variables/).
 
 It's important to highlight that in more advanced setups, Variables can also be dynamically provided via API calls during the execution of components.
 
-### Implement Shared Codes for Repeated Tasks
+### Shared Codes for Repeated Tasks
 Frequently, there are coding patterns or functions that need to be replicated across multiple Transformations. These could be recurring script segments that serve 
 a specific purpose. To streamline this process, you can create what is known as [shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code). 
 Shared codes allow you to define and maintain these common script segments in one centralized location. Any modifications made to the shared code are 
 automatically reflected in all transformations utilizing it. This ensures consistency and simplifies maintenance across your projects.
 
-### Optimize Performance with Dynamic Backends
+### Optimizing Performance with Dynamic Backends
 For **Snowflake SQL transformations**, users have the flexibility to choose between Small (default), Medium, or Large Snowflake Warehouses. While larger warehouses 
 generally offer improved performance, they also incur higher costs. The detailed impact on costs is available [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
 
@@ -155,7 +156,7 @@ For **Python and R transformations**, the backend size primarily influences avai
 commonly opt for a larger backend when their Transformation fails due to memory constraints, rather than exploring larger backends to assess potential performance 
 improvements.
 
-### Avoid Using SELECT *
+### Avoiding Using SELECT *
 Resist the temptation to use `SELECT *` in your queries. Opt for a more precise approach by explicitly listing all the columns you intend to select. When you 
 employ `SELECT *`, you risk potential issues if new columns are added, existing ones are removed, or if there are any changes in column names. 
 
@@ -173,11 +174,11 @@ unnecessary complications in your output data.
 > Keboola environment.
 
 ## Automating Your Flow
-### Optimize Workflow with Parallel Execution
+### Workflow with Parallel Execution
 In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, 
 enhancing overall efficiency. Subsequent steps (phases) will commence only after the completion of all tasks within the preceding step.
 
-### Utilize the Continue on Failure Setting
+### Continue on Failure
 Every individual task within your flow features a **Continue on Failure** setting. By default, this setting is *disabled*, meaning an error in any single task 
 will halt the entire flow execution, resulting in an error status. Enabling **Continue on Failure** permits the flow to persist even if a single task encounters 
 an issue. 
@@ -186,13 +187,13 @@ This is beneficial for tasks that may regularly fail due to specific conditions,
 Alternatively, it is suitable for independent tasks whose failure does not impact the rest of the flow. However, monitoring execution statuses becomes crucial to 
 promptly address potential errors and implement necessary fixes.
 
-### Set Up Notifications for Insightful Monitoring
+### Notifications for Insightful Monitoring
 For a seamless execution of your use-cases, staying informed about errors or unusual execution times in your flows is crucial. Configure **notifications** 
 within your flow to receive timely updates. Teams often opt to configure a group mailbox for specific user groups, ensuring that all team members receive 
 notifications regarding errors, warnings, or instances where the flow runs longer than the expected duration. This proactive approach enhances awareness and 
 facilitates prompt responses to any issues that may arise. 
 
-### Automate Your Flows with Scheduled Execution
+### Automating Flows with Scheduled Execution
 **Date & Time Schedule:** The most common setup for automating flows involves scheduling them to run at specific time slots. In a multi-tenant stack, it's 
 advisable to avoid peak time slots, such as midnight, to optimize resource availability. A simple adjustment, like scheduling your flow for 0:15 am, can 
 positively impact execution, minimizing competition for resources within the multi-tenant environment.
@@ -202,52 +203,91 @@ is automatically executed. This setup is particularly useful in multi-project sc
 linking tables through a data catalog and scheduling a flow on trigger, dependencies between projects are efficiently managed.
 
 ## Writing Data to a Destination
-While some practices overlap with those for extracting data from sources—specifically, #1 Use Proper User Credentials, #2 Understand Accessibility of Your Data Sources, and #5 Optimizing with Parallelization—additional considerations come into play when writing data from Keboola to a destination.
+While some practices overlap with those for extracting data from sources — specifically, [Proper User Credentials](#proper-user-credentials), 
+[Accessibility of Your Data Sources](#accessibility-of-your-data-sources), and 
+[Optimizing with Parallelization](#optimizing-with-parallelization) — additional considerations come into play when writing data from Keboola to a destination.
 
-#1 Verify Adequate Permissions
-This builds upon the importance emphasized in the #1 Use Proper User Credentials aspect discussed in the Extracting data from sources chapter. It underscores the necessity of ensuring you possess the requisite permissions when attempting to write data to a destination. Frequently, specific privileges are essential for this task, and they may not be automatically granted to a broad spectrum of users within an organization. Insufficient permissions often manifest as errors when writing data to a destination. In such cases, Keboola Support is available to assist in identifying the specific permissions required for a particular component.
+### Verifying Adequate Permissions
+This builds upon the importance emphasized in the [Proper User Credentials](#proper-user-credentials) aspect discussed in the 
+[Extracting Data from Sources](extracting-data-from-sources) chapter. It underscores the necessity of ensuring you possess the requisite permissions when 
+attempting to write data to a destination. Frequently, specific privileges are essential for this task, and they may not be automatically granted to a broad 
+spectrum of users within an organization. Insufficient permissions often manifest as errors when writing data to a destination. In such cases, Keboola Support is 
+available to assist in identifying the specific permissions required for a particular component.
 
-#2 Be Aware Of Who You’re Providing Access to the Data
-In the Keboola project, you have a precise understanding of who can access the integrated data. However, when writing data to a destination, whether it's a database, object storage, or an API/service, you are essentially extending access to those data to users who have privileges for that specific destination. It is crucial to be vigilant and ensure that you do not inadvertently share your data with unintended recipients.
+### Who You’re Providing Access to Data
+In the Keboola project, you have a precise understanding of who can access the integrated data. However, when writing data to a destination, whether it's a 
+database, object storage, or an API/service, you are essentially extending access to those data to users who have privileges for that specific destination. It is 
+crucial to be vigilant and ensure that you do not inadvertently share your data with unintended recipients.
 
-#3 Implement Incremental Processing
-To optimize the efficiency of your data writing operations, consider incorporating incremental processing, a strategy analogous to that used in data extraction or transformation processes described earlier. This optimization is particularly beneficial in Keboola, where it enables the selective writing of data that has changed in Keboola Storage since the last successful execution, ensuring a more streamlined and resource-efficient process.
+### Incremental Processing
+To optimize the efficiency of your data writing operations, consider incorporating incremental processing, a strategy analogous to that used in data extraction or 
+transformation processes described earlier. This optimization is particularly beneficial in Keboola, where it enables the selective writing of data that has 
+changed in Keboola Storage since the last successful execution, ensuring a more streamlined and resource-efficient process.
 
-For certain components, especially those designed for database data destinations, an additional advantage is the presence of an Automatic Incremental Load feature. This feature involves the component maintaining an internal state file within its configuration, recording the timestamp of its last successful execution. Keboola utilizes this information to identify and capture only the data that has been added or modified in Keboola Storage since the last execution. On the destination side, the component facilitates an upsert operation, intelligently inserting new data and updating existing records, rather than opting for a complete rewrite or simple append-only approach.
+For certain components, especially those designed for database data destinations, an additional advantage is the presence of an **Automatic Incremental Load**
+feature. This feature involves the component maintaining an internal state file within its configuration, recording the timestamp of its last successful 
+execution. Keboola utilizes this information to identify and capture only the data that has been added or modified in Keboola Storage since the last execution. On 
+the destination side, the component facilitates an upsert operation, intelligently inserting new data and updating existing records, rather than opting for a 
+complete rewrite or simple append-only approach.
 
-In scenarios where certain APIs or services lack built-in mechanisms for efficient data updates, leveraging the incremental feature of the respective component becomes even more critical. Many data destination components share the Input Mapping logic with transformations, allowing the application of similar principles. Some components go a step further by incorporating sophisticated mechanisms, as mentioned earlier, to enhance the incremental processing capabilities.
+In scenarios where certain APIs or services lack built-in mechanisms for efficient data updates, leveraging the incremental feature of the respective component 
+becomes even more critical. Many data destination components share the input mapping logic with transformations, allowing the application of similar principles. 
+Some components go a step further by incorporating sophisticated mechanisms, as mentioned earlier, to enhance the incremental processing capabilities.
 
-By adopting incremental processing, you not only optimize the performance of data writing operations but also ensure a more resource-efficient and intelligent handling of data updates, tailored to the specific requirements of the destination.
+By adopting incremental processing, you not only optimize the performance of data writing operations but also ensure a more resource-efficient and intelligent 
+handling of data updates, tailored to the specific requirements of the destination.
 
-#4 Exercise Caution Before Data Writing
+### Caution Before Data Writing
 To be straightforward, it's crucial to thoroughly understand the implications of your actions. While Keboola offers a straightforward process for restoring data in case of accidental corruption, this may not hold true for the destination where you intend to write your data. The restoration of data in such destinations can be challenging, and in certain instances, it might even be impossible. Therefore, exercising heightened caution is strongly advised. Make sure you are well-informed and deliberate in your decisions when it comes to writing data, recognizing that the ease of recovery in Keboola may not necessarily extend to all destinations.
 
 ## Understanding Job Log and Troubleshooting
 Whether you're a seasoned data engineer or just starting out, encountering errors during development is inevitable. 
 Here are some tips for effectively troubleshooting errors.
 
-#1 Understand the Job Log
-The job log is a valuable resource providing insights into the execution of a job, including the entity or process that executed it, the timestamp of its execution, and the duration it took.
+### Job Log
+The job log is a valuable resource providing insights into the execution of a job, including the entity or process that executed it, the timestamp 
+of its execution, and the duration it took.
 
-Mapping Section: The log incorporates a Mapping section that delineates the tables involved in the process. In extraction operations, the Output section enumerates all tables extracted from the source and loaded into Keboola Storage, essentially representing the job's output. In the context of transformations, both Input and Output sections are typically present, revealing the tables used in the Input and Output mappings of that transformation—clarifying the tables loaded and produced.
+**Mapping section:** The log incorporates a mapping section that delineates the tables involved in the process. In extraction operations, the output section 
+enumerates all tables extracted from the source and loaded into Keboola Storage, essentially representing the job's output. In the context of transformations, 
+both input and output sections are typically present, revealing the tables used in the Input and Output mappings of that transformation—clarifying the tables 
+loaded and produced.
 
-When writing data to a destination using a data destination component, the Input section lists the tables used for the writing operation. However, as the writing operation doesn't generate new tables in Keboola, the Output section remains empty.
+When writing data to a destination using a data destination component, the input section lists the tables used for the writing operation. However, as the writing 
+operation doesn't generate new tables in Keboola, the output section remains empty.
 
-Log: The Job Log further includes a detailed account of individual actions taken during the job execution. This initial section is particularly valuable for debugging, providing a chronological overview of actions performed. Identifying the step at which the processing failed can offer crucial insights into what to investigate during the debugging process.
+**Log:** The job log further includes a detailed account of individual actions taken during the job execution. This initial section is particularly valuable for 
+debugging, providing a chronological overview of actions performed. Identifying the step at which the processing failed can offer crucial insights into what to 
+investigate during the debugging process.
 
-By delving into the Job Log, you gain a comprehensive understanding of the job's execution, aiding in the identification and resolution of errors encountered during development.
+By delving into the job log, you gain a comprehensive understanding of the job's execution, aiding in the identification and resolution of errors encountered 
+during development.
 
-#2 Enable AI Error Explanation
-In your Project Settings, take advantage of the AI Error Explanation feature to enhance your error troubleshooting capabilities. This feature utilizes artificial intelligence to translate potentially complex error messages into a more user-friendly format. By enabling this feature, Keboola aims to provide helpful suggestions on what specific aspects to investigate as a user.
+### AI Error Explanation
+In your project settings, take advantage of the **AI Error Explanation** feature to enhance your error troubleshooting capabilities. This feature utilizes 
+artificial intelligence to translate potentially complex error messages into a more user-friendly format. By enabling this feature, Keboola aims to provide 
+helpful suggestions on what specific aspects to investigate as a user.
 
-#3 Handling Internal or Application Errors
-If you encounter an error message indicating "Internal" or "Application Error," you should reach out to Keboola Support. These errors typically signify unexpected issues occurring beneath the surface, and our Support engineers will thoroughly examine detailed platform logs to assist you in resolving the problem.
+### Internal or Application Errors
+If you encounter an error message indicating "Internal" or "Application Error," you should reach out to the Keboola support team. These errors typically signify 
+unexpected issues occurring beneath the surface, and our support engineers will thoroughly examine detailed platform logs to assist you in resolving the problem.
 
-#2 Explore the Debug Job Feature
-Nearly every Keboola Job involves interactions with Keboola Storage tables, whether it's loading data during extraction or reading (and producing) data during a transformation. Many components utilize the Keboola Storage API to exchange data in the form of files. For example, when extracting data using a data source component, the component builds a CSV file, providing it to Keboola Storage along with loading instructions.
+### Debug Job Feature
+Nearly every Keboola job involves interactions with Keboola Storage tables, whether it's loading data during extraction or reading (and producing) data during 
+a transformation. Many components utilize the Keboola Storage API to exchange data in the form of files. For example, when extracting data using a data source 
+component, the component builds a CSV file, providing it to Keboola Storage along with loading instructions.
 
-To aid in troubleshooting errors, users can activate the Debug Mode feature in their user settings (User Features section). This unlocks a new UI element in component configurations, allowing the execution of a Debug Job. This feature is particularly useful when extracting data into Keboola and encountering errors. The Debug Job replicates standard processing steps but halts before loading data into Keboola Storage. This allows users to review each step without the risk of data corruption. The Debug Job generates a zip file containing all files produced during each processing step, accessible in Keboola File Storage. This enables users to delve into the files for further debugging. For instance, unexpected data encoding on the source or formatting issues leading to extraction failure can be identified by exploring these files, facilitating a more precise understanding of the problem and its resolution.
+To aid in troubleshooting errors, users can activate the **Debug Mode** feature in their user settings (the User Features section). This unlocks a new UI element 
+in component configurations, allowing the execution of a debug job. This feature is particularly useful when extracting data into Keboola and encountering errors. 
+The **debug job** replicates standard processing steps but halts before loading data into Keboola Storage. This allows users to review each step without the risk 
+of data corruption. The debug job generates a zip file containing all files produced during each processing step, accessible in **Keboola File Storage**. This 
+enables users to delve into the files for further debugging. For instance, unexpected data encoding on the source or formatting issues leading to extraction 
+failure can be identified by exploring these files, facilitating a more precise understanding of the problem and its resolution.
 
-Pro Tip: Unlock the /raw Mode
-
-Discover a powerful feature in Keboola: the ability to access and edit the raw JSON of every configuration, be it a component or transformation, using the Debug Mode. If you prefer a direct route, simply add /raw to the end of the URL address. This advanced capability proves invaluable for performing intricate settings, such as utilizing processors, offering a flexible and efficient way to tailor configurations to your specific needs. Explore the /raw mode to unlock a deeper level of control in your Keboola projects.
+>[!TIP]
+> **Unlock the /raw mode**
+>
+> Discover a powerful feature in Keboola: the ability to access and edit the raw JSON of every configuration, be it a component or transformation, using
+> the Debug Mode. If you prefer a direct route, simply add /raw to the end of the URL address. This advanced capability proves invaluable for performing intricate
+> settings, such as utilizing processors, offering a flexible and efficient way to tailor configurations to your specific needs. Explore the /raw mode to unlock a
+> deeper level of control in your Keboola projects.
