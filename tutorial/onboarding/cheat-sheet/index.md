@@ -3,13 +3,13 @@ title: "Cheat Sheet: Best Practices"
 permalink: /tutorial/onboarding/cheat-sheet/
 ---
 
-* TOC
-{:toc}
-
 In the diverse landscape of Keboola, the nature and design of your use-case may vary widely. Whether you are orchestrating the automation of your data pipeline 
 processing through Flows or configuring components like data sources, data destinations, applications, or transformations, this document serves as a guide to 
-essential best practices. Regardless of the intricacies of your project, these recommendations aim to optimize your workflow and ensure a smooth experience with the 
-core building blocks of a standard use case in Keboola.
+essential best practices. Regardless of the intricacies of your project, these recommendations aim to optimize your workflow and ensure a smooth experience with 
+the core building blocks of a standard use case in Keboola.
+
+* TOC
+{:toc}
 
 ## Extracting Data from Sources
 ### Proper User Credentials
