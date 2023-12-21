@@ -3,9 +3,6 @@ title: Keboola Platform Usage Blueprint
 permalink: /tutorial/onboarding/usage-blueprint/
 ---
 
-* TOC
-{:toc}
-
 > Welcome to your personalized Keboola Platform Usage Blueprint Document! 
 > 
 > *This comprehensive guide is designed to serve as a foundation for crafting your customized documentation. 
@@ -13,6 +10,9 @@ permalink: /tutorial/onboarding/usage-blueprint/
 > and details. As you navigate through this document, notes formatted for guidance will accompany you, ensuring a seamless and
 > straightforward customization process. Feel free to delete these notes once you've incorporated your unique insights and details into your personalized
 > blueprint. Let's embark on this journey of building a tailored documentation resource that aligns perfectly with your organization's needs and practices.*
+
+* TOC
+{:toc}
 
 ## Getting Access to the Keboola Platform 
 ### Keboola Administration
