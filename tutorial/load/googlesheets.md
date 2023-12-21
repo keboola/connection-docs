@@ -84,4 +84,4 @@ Proceed to [Data Manipulation](/tutorial/manipulate/) for the next step in the t
 Alternatively, take another brief side step to explore loading data with the [Database data source connector](/tutorial/load/database/).
 
 ## If You Need Help
-Feel free to reach out to our Support team [LINK] if there’s anything we can help with.
+Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
