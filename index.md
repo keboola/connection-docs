@@ -21,16 +21,16 @@ For some hands-on experience, dive into our Getting Started [tutorial](/tutorial
 Rest assured, we're here to support you whenever needed. Reach out via email at [support@keboola.com](support@keboola.com) or use the [support form](https://help.keboola.com/management/support/) directly within your project.  
 
 ## Manage Keboola
-[User management](/management/#user-management)
-[Account administration](/management/account/)
-[Data governance](/management/account/)
+- [User management](/management/#user-management)
+- [Account administration](/management/account/)
+- [Data governance](/management/account/)
 
 ## Reference
-[API reference](https://developers.keboola.com/overview/api/)
-[Release notes](https://changelog.keboola.com/) 
+- [API reference](https://developers.keboola.com/overview/api/)
+- [Release notes](https://changelog.keboola.com/) 
 
 ## Resources
-[status.keboola.com](http://status.keboola.com/) --- get Keboola status updates (we recommend subscribing to the feed)
+- [status.keboola.com](http://status.keboola.com/) --- get Keboola status updates (we recommend subscribing to the feed)
 - [www.keboola.com](https://www.keboola.com/) --- our main web page
 - [blog.keboola.com](https://blog.keboola.com/) --- something to read for data analysts
 - [500.keboola.com](https://500.keboola.com/) --- something to read for tech geeks
