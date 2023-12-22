@@ -28,7 +28,7 @@ Start by going into the **Components** section and click **Add Component**.
 4. Enter a name and a description and click **Create Configuration**.
 
 {: .image-popup}
-![Create New Configuration](/tutorial/load/db-picture4.png
+![Create New Configuration](/tutorial/load/db-picture4.png)
 
 Similarly to other components, the Snowflake data source connector can have multiple configurations. 
 As each configuration represents a single database connection, we only need one configuration. 
