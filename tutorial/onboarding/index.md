@@ -1,6 +1,6 @@
 ---
 title: Keboola Platform Onboarding
-permalink: /onboarding/
+permalink: /tutorial/onboarding/
 ---
 
 * TOC
