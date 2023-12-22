@@ -38,8 +38,8 @@ items:
       - url: /tutorial/manipulate/
         title: Part 2 - Data Manipulation
         items:
-          - url: /tutorial/manipulate/sandbox/
-            title: Using Sandbox
+          - url: /tutorial/manipulate/workspace/
+            title: Using Workspace
 
       - url: /tutorial/write/
         title: Part 3 - Writing Data
