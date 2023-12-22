@@ -9,7 +9,7 @@ items:
     title: Getting Started Tutorial
     items:
       - url: /tutorial/onboarding/
-      title: Onboarding
+      title: Keboola Platform Onboarding
       items:
         - url: /tutorial/onboarding/usage-blueprint/
         title: Usage Blueprint
@@ -27,7 +27,7 @@ items:
          title: Governance Guide
            
       - url: /tutorial/load/
-        title: Loading Data
+        title: Part 1 - Loading Data
         items:
           - url: /tutorial/load/googlesheets/
             title: Loading with Google Sheets Data Source
@@ -36,22 +36,22 @@ items:
             title: Loading with Database Data Source
 
       - url: /tutorial/manipulate/
-        title: Data Manipulation
+        title: Part 2 - Data Manipulation
         items:
           - url: /tutorial/manipulate/workspace/
             title: Using Workspace
 
       - url: /tutorial/write/
-        title: Writing Data
+        title: Part 3 - Writing Data
 
       - url: /tutorial/automate/
-        title: Flow Automation
+        title: Part 4 - Flow Automation
 
       - url: /tutorial/ad-hoc/
-        title: Ad-Hoc Data Analysis
+        title: Part 5 - Ad-Hoc Data Analysis
 
       - url: /tutorial/branches/
-        title: Development Branches
+        title: Part 6 - Development Branches
         items:
           - url: /tutorial/branches/prepare-tables/
             title: Prepare Tables
