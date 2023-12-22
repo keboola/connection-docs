@@ -1,56 +1,88 @@
 ---
-title: Part 2 - Data Manipulation
+title: Data Manipulation
 permalink: /tutorial/manipulate/
 ---
 
-At this point, you already know how to quickly [load data into Keboola Connection](/tutorial/load/),
-and your [Storage](/storage/tables/) contains four new tables:
-*account*, *opportunity*, *level* and *user*.
-In this part of the tutorial, we will show you how to manipulate data in Storage using [Transformations](/transformations/).
-Let's create a denormalized table from the input tables and do some minor modifications to it.
+At this juncture, you're acquainted with the swift process of loading data into Keboola, resulting in four new tables in your Storage: 
+`account, opportunity, level`, and `user`. 
+
+In this segment of the tutorial, we'll guide you through data manipulation in [Storage](/storage/tables/) using [Transformations](/transformations/). 
+Our objective is to create a denormalized table from the input tables and make some minor modifications to it.
 
 * TOC
 {:toc}
 
 ## Creating Transformation
-To start, go to the Keboola Connection **Transformations** section:
+1. To start, navigate to the Keboola **Transformations** section.
 
 {: .image-popup}
 ![Screenshot - Transformations Console](/tutorial/manipulate/transformations-intro.png)
 
-Like [tables](/storage/tables/), [Transformations](/transformations/) are organized into *buckets*.
-Each transformation bucket can contain any number of individual transformations.
-It should represent a logical set (container) of operations you want to perform together.
-Before you start with transformations, create a bucket and call it *Opportunity*.
+2. Next, click the **Create Transformation** button and choose **Snowflake SQL Transformation** (or another SQL transformation, depending on your project's backend).
 
 {: .image-popup}
-![Screenshot - Create a Transformation Bucket](/tutorial/manipulate/transformations-create-bucket.png)
+![Screenshot - Create Transformation](/tutorial/manipulate/create-transformation.png)
 
-Then click on the **New Transformation** button to create an individual transformation.
-Enter *Denormalize opportunities* as its *Name* and select **Snowflake** as its *Backend*. 
-A backend is the engine running the transformation script; it is either a database server (Snowflake, Redshift) 
-or a language interpreter (R, Python, Julia).
+3. Enter `Denormalize opportunities` as its name, and remember to provide a description. Transformations can be organized into folders;
+you can either add it to a folder during creation or move it to any folder later. Now, enter `Opportunity` as the folder name.
 
 {: .image-popup}
-![Screenshot - Create a Transformation](/tutorial/manipulate/transformations-create.png)
+![Screenshot - Name Transformation](/tutorial/manipulate/name-transformation.png)
 
-When you create a transformation, you need to set up
+Keboola transformations operate on a few fundamental building blocks. It's crucial to note that the transformation process occurs in a dedicated database schema,
+meaning queries are not executed directly against your Storage tables. Instead, the system clones selected tables into the dedicated transformation schema, 
+executes queries, and finally unloads created/modified objects back to the Storage.
 
-1. [**Input Mapping**](/transformations/mappings/#input-mapping) — what tables will be used in your transformation;
-tables not mentioned in Input Mapping cannot be used in the transformation.
-2. [**Output Mapping**](/transformations/#output-mapping) — what tables will be written into Storage;
-tables not mentioned in Output Mapping will never be modified nor permanently stored (i.e. they are temporary).
-3. [**Transformation Script**](/tutorial/manipulate/#transformation-script) — SQL queries defining
-what will happen with the data; it takes the tables from Input Mapping, modifies them
-and produces the tables referenced in Output Mapping.
+1. [**Input Mapping**](/transformations/mappings/#input-mapping): This is where you specify the tables to be used in your transformation. In the default setup, tables not mentioned in Input Mapping cannot be used in the transformation.
+2. [**Output Mapping**](/transformations/#output-mapping): This section deals with tables created or modified within your transformation. Here, you specify the tables that will be written into Storage after the successful execution of the transformation. Tables not mentioned in Output Mapping will neither be modified nor permanently stored; they are considered temporary.
+3. [**Queries**](/tutorial/manipulate/#transformation-script): SQL queries define what will happen with the data. These queries take the tables from Input Mapping, modify them, and produce the tables referenced in Output Mapping. To enhance clarity, queries can be further organized into blocks.
+
+The mapping concept serves as a crucial safeguard when manipulating your data. It ensures that there is no accidental modification of the wrong tables. The only 
+tables modified by your transformation are those explicitly specified in the Output Mapping. Additionally, this concept plays a vital role in maintaining a 
+detailed data lineage across your project.
+
+{: .image-popup}
+![Screenshot - Mapping](/tutorial/manipulate/mapping.png)
+
+### Input Mapping
+Let’s start with setting Input Mapping by clicking the **New Input** button.
+
+{: .image-popup}
+![Screenshot - Input Mapping](/tutorial/manipulate/input-mapping1.png)
+
+The *Source* field in the input mapping refers to Storage. Select `in.c-csv-import.account` as the source table. You can do a full text search in the select 
+field; typing `acc` will give you the table as well. In the *Table name* field, the table name `account` is automatically filled for you. This is the name of the 
+source table inside the transformation. Use the **Add Input** button to create the input mapping.
+
+Please note that there are additional settings you can configure, such as the *Changed in Last* filter, which aids in incremental processing of large tables. 
+However, for the purpose of our tutorial, we won't delve into those details. See additional information about [input mapping](/transformations/mappings/#input-mapping) 
+(all available options, etc.).
+
+Add the remaining three tables: opportunity, user and level. You can add multiple tables at once:
+
+{: .image-popup}
+![Screenshot - Input Mapping Add Tables](/tutorial/manipulate/IM-add-tables.png)
+
+You will get to the following configuration:
+
+{: .image-popup}
+![Screenshot - Input Mapping Add Tables](/tutorial/manipulate/IM-add-tables.png)
+
+
+
+
+
+
+
+
+
+
+
 
 The concept of [**mapping**](/transformations/mappings) is an important safeguard
 when you are manipulating your data.
 Thanks to it, there is no way to modify the wrong tables by accident.
 The only tables which are modified by your transformation are those explicitly specified in Output Mapping.
-
-{: .image-popup}
-![Screenshot - Empty Transformation](/tutorial/manipulate/transformations-created.png)
 
 ### Input Mapping
 Let's start with setting Input Mapping by clicking the **New Input** button.
