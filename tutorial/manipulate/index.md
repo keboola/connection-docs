@@ -13,17 +13,17 @@ Our objective is to create a denormalized table from the input tables and make s
 {:toc}
 
 ## Creating Transformation
-1. To start, navigate to the Keboola **Transformations** section.
+To start, navigate to the Keboola **Transformations** section.
 
 {: .image-popup}
 ![Screenshot - Transformations Console](/tutorial/manipulate/transformations-intro.png)
 
-2. Next, click the **Create Transformation** button and choose **Snowflake SQL Transformation** (or another SQL transformation, depending on your project's backend).
+Next, click the **Create Transformation** button and choose **Snowflake SQL Transformation** (or another SQL transformation, depending on your project's backend).
 
 {: .image-popup}
 ![Screenshot - Create Transformation](/tutorial/manipulate/create-transformation.png)
 
-3. Enter `Denormalize opportunities` as its name, and remember to provide a description. Transformations can be organized into folders;
+Enter `Denormalize opportunities` as its name, and remember to provide a description. Transformations can be organized into folders;
 you can either add it to a folder during creation or move it to any folder later. Now, enter `Opportunity` as the folder name.
 
 {: .image-popup}
