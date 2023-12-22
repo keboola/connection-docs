@@ -8,29 +8,44 @@ items:
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
+      - url: /tutorial/onboarding/
+        title: Keboola Platform Onboarding
+        items:
+        - url: /tutorial/onboarding/usage-blueprint/
+          title: Usage Blueprint
+
+        - url: /tutorial/onboarding/architecture-guide/
+          title: Multi-Project Architecture
+          items:
+            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+              title: Business Data Model
+
+        - url: /tutorial/onboarding/cheat-sheet/
+          title: Best Practices
+
+        - url: /tutorial/onboarding/governance-guide/
+          title: Governance Guide
+           
       - url: /tutorial/load/
         title: Part 1 - Loading Data
         items:
-          - url: /tutorial/load/googledrive/
-            title: Loading with GoogleDrive Extractor
+          - url: /tutorial/load/googlesheets/
+            title: Loading with Google Sheets Data Source
 
           - url: /tutorial/load/database/
-            title: Loading with Database Extractor
+            title: Loading with Database Data Source
 
       - url: /tutorial/manipulate/
         title: Part 2 - Data Manipulation
         items:
-          - url: /tutorial/manipulate/sandbox/
-            title: Using Sandbox
+          - url: /tutorial/manipulate/workspace/
+            title: Using Workspace
 
       - url: /tutorial/write/
         title: Part 3 - Writing Data
-        items:
-          - url: /tutorial/write/gooddata/
-            title: Writing to GoodData
 
       - url: /tutorial/automate/
-        title: Part 4 - Automation
+        title: Part 4 - Flow Automation
 
       - url: /tutorial/ad-hoc/
         title: Part 5 - Ad-Hoc Data Analysis
@@ -38,7 +53,6 @@ items:
       - url: /tutorial/branches/
         title: Part 6 - Development Branches
         items:
-
           - url: /tutorial/branches/prepare-tables/
             title: Prepare Tables
 
@@ -61,7 +75,7 @@ items:
     title: Components
     items:
       - url: /components/extractors/
-        title: Extractors
+        title: Data Source Connectors
         items:
           - url: /components/extractors/communication/
             title: Communication
@@ -301,7 +315,7 @@ items:
                 title: YourPass
 
       - url: /components/writers/
-        title: Writers
+        title: Data Destination Connectors
         items:
           - url: /components/writers/bi-tools/
             title: Business Intelligence

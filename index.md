@@ -1,53 +1,41 @@
 ---
-title: Keboola Connection User Documentation
+title: Keboola User Documentation
 permalink: /
 ---
 
-Welcome to the Keboola Connection Manual pages.
-If you are working with the Keboola Connection UI as an end-user, you are at the right place.
+Welcome to the Keboola documentation—a comprehensive resource offering step-by-step guidance and reference information to help users 
+seamlessly navigate the platform. Whether you're a newcomer or an experienced user, this documentation is your go-to companion for mastering 
+the ins and outs of Keboola.
 
 * TOC
 {:toc}
 
-## What is Keboola Connection?
-
-Keboola Connection is a powerful data preparation platform composed of many interconnected components, 
-extracting data from various sources, 
-manipulating and enriching the data, and writing the results to desired Business Intelligence tools. 
-It is a safe, open and extendable cloud based environment for working with your data.
-
 ## Where to Start
+If you are new to Keboola and **would like a quick orientation** to the Keboola ecosystem, explore our comprehensive [overview](/overview/). 
 
-If you are new to Keboola Connection and want a **brief orientation** to the Keboola ecosystem, 
-please check out our [overview](/overview/), or watch a short [introductory video](https://www.youtube.com/watch?v=yaA7_N5Ymmc&feature=youtu.be).
-For some hands-on experience, see our [tutorial](/tutorial/). 
+Ready to take the next step? Grab your free trial and set up your account [here](https://connection.north-europe.azure.keboola.com/wizard), 
+or connect with our team directly through [this link](https://www.keboola.com/contact).
 
-If you are already familiar with how Keboola Connection works, go directly to [connection.keboola.com](https://connection.keboola.com) 
-and log in. If your project is not in the default US region, use the region selector to choose the appropriate region. 
+For some hands-on experience, dive into our Getting Started [tutorial](/tutorial/).
 
-We are available to provide [support](/management/support/) whenever needed. In case you don't have access 
-to a Keboola Connection project, you can write an email to [support@keboola.com](mailto:support@keboola.com). 
-Please use the [support form](/management/support/) inside your project as that provides 
-us with valuable context.
+Rest assured, we're here to support you whenever needed. Reach out via email at [support@keboola.com](support@keboola.com) or use the [support form](https://help.keboola.com/management/support/) directly within your project.  
 
-## More to Read
+## Manage Keboola
+- [User management](/management/#user-management)
+- [Account administration](/management/account/)
+- [Data governance](/management/account/)
 
-- [www.keboola.com](https://www.keboola.com/) --- our main web page
-- [blog.keboola.com](https://blog.keboola.com/) --- something to read for data analysts
-- [500.keboola.com](https://500.keboola.com/) --- something to read for tech geeks
-- [developers.keboola.com](https://developers.keboola.com) --- documentation for extending or integrating Keboola Connection
+## Reference
+- [API reference](https://developers.keboola.com/overview/api/)
+- [Release notes](https://changelog.keboola.com/) 
 
-## Keboola Connection Status Updates
+## Resources
+- [status.keboola.com](http://status.keboola.com/) – get Keboola status updates (we recommend subscribing to the feed)
+- [www.keboola.com](https://www.keboola.com/) – our main web page
+- [blog.keboola.com](https://blog.keboola.com/) – something to read for data analysts
+- [500.keboola.com](https://500.keboola.com/) – something to read for tech geeks
+- [developers.keboola.com](https://developers.keboola.com) – documentation for extending or integrating Keboola Connection
 
-There are two equivalent places where you can get Keboola Connection Status updates (service status and changelog):
-
-- [status.keboola.com](https://status.keboola.com/) --- we recommend subscribing to the feed
-- [Twitter](https://twitter.com/keboola_support)
-
-## Your Tips and Suggestions
-Use the *Feature Wishlist* in the *Settings* menu or [ideas.keboola.com](https://ideas.keboola.com/)
-to send us your suggestions for new features or improvements.
-
-{: .image-popup}
-![Screenshot - Wishlist](/wishlist.png)
-
+## We Highly Appreciate Your Input!
+Feel free to utilize the support form within your Keboola project to share feedback, request new features or components, 
+or engage in a conversation with us. Your insights are valuable, and we're here to listen and collaborate.

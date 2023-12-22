@@ -2,86 +2,98 @@
 title: Loading Data
 permalink: /tutorial/load/
 ---
-There are multiple ways to load data into Keboola Connection. When you are starting with a project or doing any kind of 
-[POC](https://en.wikipedia.org/wiki/Proof_of_concept), it is usually fastest to **load data manually**. 
-If everything goes well and the project goes to production, you will later switch to **automatic
-data loading** using [extractors](/components/extractors/); in our tutorial, you can load data with 
-the [GoogleDrive](/tutorial/load/googledrive/) and [Database extractors](/tutorial/load/database/).
 
-## Manually Loading Data
-In this part of our tutorial, you will load four tables into Keboola Connection Storage.
-The tables represent business opportunities, their associated users and accounts.
-Additionally, company levels for each user are specified.
-For our tutorial, we have prepared the tables as CSV files:
+* TOC
+{:toc}
 
-- opportunity (business opportunities) --- [https://help.keboola.com/tutorial/opportunity.csv](/tutorial/opportunity.csv)
-- account (associated accounts) --- [https://help.keboola.com/tutorial/account.csv](/tutorial/account.csv)
-- user (associated users) --- [https://help.keboola.com/tutorial/user.csv](/tutorial/user.csv)
-- level (company levels) --- [https://help.keboola.com/tutorial/level.csv](/tutorial/level.csv)
+Keboola offers various methods to load data, providing flexibility to suit different project stages. When initiating a project or conducting a Proof of Concept 
+(POC), the quickest approach is typically **manual data loading**. As the project advances to production, you may transition to **automatic data loading** using 
+data sources connectors. 
 
-Download the files to your computer (they are very small) and start loading data.
+In our tutorial, we demonstrate manual loading, and as you progress, we delve into automated data loading using connectors, specifically the Google Sheets 
+and Database data source connectors.
 
-**Important**: All characters appearing in this data are fictitious.
-Any resemblance to real persons, living or dead or undead or unborn or otherwise semi-existent is purely coincidental.
+## Manual Data Loading
+### Get Ready
+In this section of the tutorial, you will load four tables into the Keboola Storage. These tables represent business opportunities, associated users and accounts, and specified company levels for each user. The tables are available as CSV files for download:
 
-To manually load data, go to the **Components -- Extractors** section and use the search box to find **CSV Import**:
+- [Opportunity (business opportunities)](/tutorial/opportunity.csv)
+- [Account (associated accounts)](/tutorial/account.csv)
+- [User (associated users)](/tutorial/user.csv)
+- [Level (company levels)](/tutorial/level.csv)
 
-{: .image-popup}
-![Screenshot -- Extractors](/tutorial/load/extractor-intro-1.png)
+Download these small files to your computer and proceed with loading the data.
 
-Click on the **CSV Import** tile to see more details. Here you can store predefined import configurations.
-Each Keboola Connection extractor can have multiple [*configurations*](/components/). This concept allows you to extract data from multiple sources
-of the same type. Each configuration of **CSV Import** will point to a different table and will allow you to reuse it quickly later.
+***Note:** All characters in this data are fictitious, and any resemblance to real persons, living, dead, undead, unborn, or otherwise semi-existent 
+is purely coincidental.*
 
-{: .image-popup}
-![Screenshot -- CSV Import Intro](/tutorial/load/csv-import-empty-list.png)
-
-Click on **New Configuration** to continue.
+### Steps to Follow
+1. Before proceeding, ensure you are logged into your Keboola project (refer to the tutorial [Prerequisites](/tutorial/#prerequisites) 
+if you need to acquire a project).
+2. Navigate to the **Components** section and use the search box to find **CSV Import**.
 
 {: .image-popup}
-![Screenshot -- CSV New Configuration](/tutorial/load/csv-import-create-new-configuration.png)
+![Screenshot -- Extractors](/tutorial/load/picture1.png)
 
-You will be creating configuration for each table, so let's name the first one *Opportunity* and click on **Create Configuration**. 
-Each created configuration is filled with defaults; for example, the *CSV format* and the *destination* name of the table in
-[KBC Storage](/storage/). For this tutorial, change only the *Destination* setting by clicking the pen icon.
+4. Click the**Add Component** button, then select **Connect To My Data**.
 
 {: .image-popup}
-![Screenshot -- CSV Import Configuration](/tutorial/load/csv-import-default-configuration.png)
+![Screenshot -- Extractors](/tutorial/load/picture2.png)
 
-Now change the *Destination* field to `in.c-csv-import.opportunity` and click **Save**.
+4. Enter a **name and description** for your configuration, and click **Create Configuration**.
+   
+{: .image-popup}
+![Screenshot -- CSV Import Intro](/tutorial/load/picture3.png)
+
+***Note:** You can create multiple configurations for each connector, and maintaining clear naming conventions contributes to a clean and organized project. 
+Check our [best practices guide](/tutorial/onboarding/cheat-sheet/) for suggestions on this topic.*
+
+Adding a description is a beneficial practice for both you and your colleagues, aiding in understanding the purpose of your configuration."
+
+In this tutorial, we will create four configurations for this data source connector, dedicating one configuration to each source CSV file.
+
+Name the first configuration **[TUTORIAL] Opportunity**.
+
+5. In the **CSV File** section, click **Select file** and choose the [opportunity.csv](/tutorial/opportunity.csv) file you downloaded.
+   
+{: .image-popup}
+![Screenshot -- CSV New Configuration](/tutorial/load/picture4.png)
+
+6. In the **Upload Settings** section, modify the *Destination* setting by clicking the **pen icon** next to the *Destination* name. Set the name of the table that will be created in your Keboola Storage to `in.c-csv-import.opportunity` and click **Save**.
 
 {: .image-popup}
-![Screenshot -- Change upload settings](/tutorial/load/csv-import-change-settings.png)
+![Screenshot -- CSV Import Configuration](/tutorial/load/picture5.png)
 
-Now you can start uploading. Select the downloaded `opportunity.csv` file from your computer and hit the **Upload** button.
-
-{: .image-popup}
-![Screenshot -- Upload CSV file](/tutorial/load/csv-import-upload-before.png)
-
-Once the upload is finished (you will get a notification), go back to the *CSV import* (you can use navigation on the top) and
-repeat the process for the other three tables (create a configuration, change the destination, upload the requested file).
+7. Click **Upload**.
 
 {: .image-popup}
-![Screenshot -- Upload CSV file progress](/tutorial/load/csv-import-upload.png)
-	
-That's it. You should now have four tables with sample data stored in your Keboola Connection project:
+![Screenshot -- Change upload settings](/tutorial/load/picture6.png)
+
+After the upload is complete, repeat the process for the remaining three tables—create a configuration, change the destination, 
+and upload the respective file as requested.
+
+That's it. You should now have four tables containing sample data stored in your Keboola Storage:
 
 - `in.c-csv-import.opportunity`
 - `in.c-csv-import.account`
 - `in.c-csv-import.user`
 - `in.c-csv-import.level`
 
-To verify that you have loaded all the tables and to peek at the data, go to [**Storage**](/storage/).
-All database tables stored in your project are listed in the *Tables* tab. 
-They are grouped together into *Buckets*, and the newly loaded tables can be found in the `in.c-csv-import` bucket. 
-To see all tables in a bucket, click the bucket title.
-Click individual table names to see the table details, including *Data Sample*.
+To confirm the successful loading of all tables and review the data, navigate to the [Storage](/storage/) section. Data is organized into **buckets**, 
+and each bucket can contain multiple **tables**.
+
+Expand each bucket to view its tables, and click a table name to access details, including the 'Data Sample' for that table.
 
 {: .image-popup}
-![Screenshot -- Storage preview](/tutorial/load/csv-import-storage.png)
+![Screenshot -- Upload CSV file progress](/tutorial/load/picture7.png)
 
-You can now take
+{: .image-popup}
+![Screenshot -- Storage preview](/tutorial/load/picture8.png)
 
-- the next step --- [Data Manipulation](/tutorial/manipulate/), or
-- a brief side step to [Loading data with GoogleDrive Extractor](/tutorial/load/googledrive/), or
-- a brief side step to [Loading data with Database Extractor](/tutorial/load/database/).
+## What’s Next
+Proceed to [Data Manipulation](/tutorial/manipulate/) for the next step in the tutorial. Alternatively, take a brief side step to explore 
+[Loading Data with Google Sheets Data Source Connector](/tutorial/load/googlesheets/) 
+and/or [Loading Data with Database Data Source Connector](/tutorial/load/database/). 
+
+## If You Need Help
+Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
