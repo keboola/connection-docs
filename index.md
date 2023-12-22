@@ -20,11 +20,6 @@ For some hands-on experience, dive into our Getting Started [tutorial](/tutorial
 
 Rest assured, we're here to support you whenever needed. Reach out via email at [support@keboola.com](support@keboola.com) or use the [support form](https://help.keboola.com/management/support/) directly within your project.  
 
-## What Do You Want to Do?
-1. **Integrate Data** [LINK] "Connect to Data Sources" 
-2. **Analyze/Interact with Data** [LINK] "Explore Data Workspaces" 
-3. **Automate My Process/Pipeline** [LINK] "Link to Flow Automation" 
-
 ## Manage Keboola
 [User management](/management/#user-management)
 [Account administration](/management/account/)
@@ -33,7 +28,6 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 ## Reference
 [API reference](https://developers.keboola.com/overview/api/)
 [Release notes](https://changelog.keboola.com/) 
-FAQ/Troubleshooting [LINK]
 
 ## Resources
 [status.keboola.com](http://status.keboola.com/) --- get Keboola status updates (we recommend subscribing to the feed)
@@ -46,5 +40,3 @@ FAQ/Troubleshooting [LINK]
 ## We Highly Appreciate Your Input!
 Feel free to utilize the support form within your Keboola project to share feedback, request new features or components, 
 or engage in a conversation with us. Your insights are valuable, and we're here to listen and collaborate.
-
-[Community link]()
