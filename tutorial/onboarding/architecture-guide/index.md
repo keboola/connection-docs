@@ -141,7 +141,7 @@ Address security considerations, including geo-locations, data ownership, and co
 5. **Volume of data and complexity:**  
 Assess the volume and complexity of data within particular domains to inform the architecture.
 
-> [!TIP]
+> [!TIP]  
 > One precursor which should serve as a starting point is a defined **business data model (BDM)**.
 > This exercise helps you to understand the business in terms of data and discover domains that are related to each other. 
 > 
