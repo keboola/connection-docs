@@ -6,7 +6,7 @@ permalink: /tutorial/manipulate/
 At this juncture, you're acquainted with the swift process of loading data into Keboola, resulting in four new tables in your Storage: 
 `account, opportunity, level`, and `user`. 
 
-In this segment of the tutorial, we'll guide you through data manipulation in [Storage](/storage/tables/) using [Transformations](/transformations/). 
+In this segment of the tutorial, we'll guide you through data manipulation in [Storage](/storage/tables/) using [transformations](/transformations/). 
 Our objective is to create a denormalized table from the input tables and make some minor modifications to it.
 
 * TOC
