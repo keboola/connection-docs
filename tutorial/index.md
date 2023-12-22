@@ -35,24 +35,24 @@ Upon completing this tutorial, you will gain confidence in:
 To expedite your onboarding, we've organized the tutorial into basic and advanced steps.
 
 ### Basic Steps
-1. [**Loading Data Manually**](/tutorial/load/): Load four CSV files into Keboola Storage tables.
-2. [**Data Manipulation**](/tutorial/manipulate/): Utilize transformations to create a denormalized table from the input tables and make minor modifications.
-3. [**Writing Data into Tableau**](/tutorial/write/): Write the transformed data to Tableau Analytics.
+1. [**Loading data manually**](/tutorial/load/): Load four CSV files into Keboola Storage tables.
+2. [**Data manipulation**](/tutorial/manipulate/): Utilize transformations to create a denormalized table from the input tables and make minor modifications.
+3. [**Writing data into Google Sheets**](/tutorial/write/): Write the transformed data to Google Sheets.
 
 ### Advanced Steps
 For a deeper exploration of Keboola features, aligning with real-world usage, consider the following advanced steps:
-1. **Loading Data Using Data Source Connectors**
-   - [Google Sheets Data Source](/tutorial/load/googledrive/): Load data from an external spreadsheet using the Google Sheets data source connector.
-   - [Database Data Source](/tutorial/load/database/): Load data from an external database utilizing the [Snowflake Database data source connector](/tutorial/load/database/) (applicable to all Keboola-supported [database data sources](/components/extractors/database/)).
-2. [**Data Manipulation: Creating and Using a Workspace**](/tutorial/manipulate/sandbox/)
+1. **Loading data using data source connectors**
+   - [Google Sheets data source](/tutorial/load/googlesheets/): Load data from an external spreadsheet using the Google Sheets data source connector.
+   - [Database data source](/tutorial/load/database/): Load data from an external database utilizing the [Snowflake Database data source connector](/tutorial/load/database/) (applicable to all Keboola-supported [database data sources](/components/extractors/database/)).
+2. [**Data manipulation: creating and using a workspace**](/tutorial/manipulate/workspace/)
    - Create and utilize a workspace, a secure development and analytical environment. It enables you to interact with data and develop transformation code on a copy of your production data.
-3. [**Automation: Setting Up a Flow**](/tutorial/automate/)
+3. [**Automation: setting up a flow**](/tutorial/automate/)
    - Specify task sequences and configure their automatic execution through the setup of a flow.
-4. [**Ad-Hoc Data Analysis**](/tutorial/ad-hoc/)
+4. [**Ad-hoc data analysis**](/tutorial/ad-hoc/)
    - Explore how to perform ad-hoc data analysis, allowing flexibility in interacting with arbitrary data.
-5. [**Development Branches**](/tutorial/branches/)
+5. [**Development branches**](/tutorial/branches/)
    - Learn how to safely modify a running project using development branches.
-6. [**Command-Line Interface (CLI)**](https://developers.keboola.com/cli/)
+6. [**Command-line interface (CLI)**](https://developers.keboola.com/cli/)
    - Operate a project efficiently using the Keboola command-line tool.
 
 These advanced steps will provide you with a comprehensive understanding of Keboola's capabilities and their practical application in real-world scenarios.
