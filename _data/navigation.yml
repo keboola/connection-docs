@@ -9,22 +9,22 @@ items:
     title: Getting Started Tutorial
     items:
       - url: /tutorial/onboarding/
-      title: Keboola Platform Onboarding
-      items:
+        title: Keboola Platform Onboarding
+        items:
         - url: /tutorial/onboarding/usage-blueprint/
-        title: Usage Blueprint
+          title: Usage Blueprint
 
         - url: /tutorial/onboarding/architecture-guide/
-         title: Multi-Project Architecture
-         items:
-           - url: /tutorial/onboarding/architecture-guide/bdm-guide/
-           title: Business Data Model
+          title: Multi-Project Architecture
+          items:
+            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+              title: Business Data Model
 
         - url: /tutorial/onboarding/cheat-sheet/
-        title: Best Practices
+          title: Best Practices
 
         - url: /tutorial/onboarding/governance-guide/
-         title: Governance Guide
+          title: Governance Guide
            
       - url: /tutorial/load/
         title: Part 1 - Loading Data
