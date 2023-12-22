@@ -1,75 +1,72 @@
 ---
-title: Loading Data with Database Extractor
+title: Loading Data with Database Data Source Connector
 permalink: /tutorial/load/database/
 ---
 
-So far, you have learned to load data into Keboola Connection [manually](/tutorial/load/) and
-via a [GoogleDrive extractor](/tutorial/load/googledrive/).
-Let's now load data from an external database with the help of the [Snowflake Database](https://www.snowflake.com/) extractor
-(the procedure is same for all our [database extractors](/components/extractors/database/).
+So far, you have learned to load data into Keboola [manually](/tutorial/load/) and
+via a [Google Sheets data source connector](/tutorial/load/googlesheets/).
 
+Now, let's explore loading data from an external database using the Snowflake Database data source (the procedure is the same for all our database data sources).
 We will use our own sample Snowflake database, so do not worry about having to get database credentials from anyone.
 
-## Configure Snowflake Extractor
-Start by going into the **Components -- Extractors** section and create a new extractor.
+## Configure Snowflake Data Source Connector
+Start by going into the **Components** section and click **Add Component**.
 
 {: .image-popup}
-![Screenshot - Create a new Extractor](/tutorial/load/extractor-intro-2.png)
+![Add Data Source](/tutorial/load/db-picture1.png)
 
-Find **Snowflake**. You can use the search feature to find it quickly.
-
-{: .image-popup}
-![Screenshot - Create a new Database Extractor](/tutorial/load/extractor-intro-3.png)
-
-Similarly to the [GoogleDrive extractor](/tutorial/load/googledrive/), the Snowflake extractor can
-have multiple configurations. As each configuration represents a single database connection, we only
-need one configuration. Continue with **New Configuration**.
+2. Use the search box to find the **Snowflake data source**.
 
 {: .image-popup}
-![Screenshot - New Database Extractor Configuration](/tutorial/load/extractor-db-new.png)
+![Find Snowflake Data Source](/tutorial/load/db-picture2.png)
 
-Name the configuration.
+3. Click **Add Component** and select **Connect To My Data**.
 
 {: .image-popup}
-![Screenshot - Create a new Database Extractor Configuration](/tutorial/load/extractor-db-create.png)
+![Connect to Data](/tutorial/load/db-picture3.png)
 
-Now, click on **Set up credentials** to configure the source database. Set
+4. Enter a name and a description and click **Create Configuration**.
 
+{: .image-popup}
+![Create New Configuration](/tutorial/load/db-picture4.png
+
+Similarly to other components, the Snowflake data source connector can have multiple configurations. 
+As each configuration represents a single database connection, we only need one configuration. 
+
+5. Enter the following credentials:
 - **Host Name** to `kebooladev.snowflakecomputing.com`.
-- **Port** to `443`.
-- **Username**, **Password**, **Database** and **Schema** to `HELP_TUTORIAL`.
+- **Username**, **Password**, **Database**, and **Schema** to `HELP_TUTORIAL`.
 - **Warehouse** to `DEV`.
 
-Test the credentials and save them.
+6. Click **Test Connection and Load Available Sources**.
 
 {: .image-popup}
-![Screenshot - Database Extractor Credentials](/tutorial/load/extractor-db-credentials.png)
+![Database Data Source Credentials](/tutorial/load/db-picture5.png)
 
-Now select the tables to import from the dropdown. Each selected table corresponds to a single table in Storage.
-
-{: .image-popup}
-![Screenshot - Quickstart](/tutorial/load/extractor-db-tableSelector.png)
-
-Select the `ACCOUNTS`, `USER`, and `OPPORTUNITY` tables and press **Create**.
+7. Under **Select sources**, use the dropdown menu to select the `OPPORTUNITY`, `ACCOUNT`, and `USER` tables. 
 
 {: .image-popup}
-![Screenshot - Database Tables Selected](/tutorial/load/extractor-db-tablesSelected.png)
+![Select Sources](/tutorial/load/db-picture6.png)
 
-You will get the following configurations. Click on **Run Extraction** to load the data
-from the database into your tables in Storage.
+8. After selecting all the required tables, click **Save and Run Configuration**.
+This action will execute the data extraction, generating three new tables in your Storage.
 
 {: .image-popup}
-![Screenshot - Run the extraction](/tutorial/load/extractor-db-index-2.png)
+![Database Tables Selected](/tutorial/load/db-picture7.png)
 
-
-Running the extractor creates a background job that
-
+Running the component creates a background job that
 - connects to the database,
 - executes the queries, and
 - stores results in the specified tables in Storage.
 
-When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.
-Green is for success, red for failure. Click on the indicator, or the info next to it, for more details.
-Once the job is finished, click on the names of the tables to inspect their contents. 
+For more advanced configuration options, such as incremental fetch, incremental load, or advanced SQL query mode, 
+please navigate to Advanced Mode. Note that we will not cover the advanced mode options in this tutorial.
 
-Now when you know how to use a database extractor, continue with the [rest of the tutorial](/tutorial/manipulate/).
+{: .image-popup}
+![Advanced Mode](/tutorial/load/db-picture8.png)
+
+## What's Next
+Proceed to [Data Manipulation](/tutorial/manipulate/).
+
+## If You Need Help
+Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
