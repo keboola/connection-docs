@@ -30,11 +30,11 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 - [Release notes](https://changelog.keboola.com/) 
 
 ## Resources
-- [status.keboola.com](http://status.keboola.com/) --- get Keboola status updates (we recommend subscribing to the feed)
-- [www.keboola.com](https://www.keboola.com/) --- our main web page
-- [blog.keboola.com](https://blog.keboola.com/) --- something to read for data analysts
-- [500.keboola.com](https://500.keboola.com/) --- something to read for tech geeks
-- [developers.keboola.com](https://developers.keboola.com) --- documentation for extending or integrating Keboola Connection
+- [status.keboola.com](http://status.keboola.com/) – get Keboola status updates (we recommend subscribing to the feed)
+- [www.keboola.com](https://www.keboola.com/) – our main web page
+- [blog.keboola.com](https://blog.keboola.com/) – something to read for data analysts
+- [500.keboola.com](https://500.keboola.com/) – something to read for tech geeks
+- [developers.keboola.com](https://developers.keboola.com) – documentation for extending or integrating Keboola Connection
 
 ## We Highly Appreciate Your Input!
 Feel free to utilize the support form within your Keboola project to share feedback, request new features or components, 
