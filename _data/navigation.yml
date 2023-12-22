@@ -27,7 +27,7 @@ items:
          title: Governance Guide
            
       - url: /tutorial/load/
-        title: Part 1 - Loading Data
+        title: Loading Data
         items:
           - url: /tutorial/load/googlesheets/
             title: Loading with Google Sheets Data Source
@@ -36,25 +36,22 @@ items:
             title: Loading with Database Data Source
 
       - url: /tutorial/manipulate/
-        title: Part 2 - Data Manipulation
+        title: Data Manipulation
         items:
           - url: /tutorial/manipulate/workspace/
             title: Using Workspace
 
       - url: /tutorial/write/
-        title: Part 3 - Writing Data
-        items:
-          - url: /tutorial/write/gooddata/
-            title: Writing to GoodData
+        title: Writing Data
 
       - url: /tutorial/automate/
-        title: Part 4 - Automation
+        title: Flow Automation
 
       - url: /tutorial/ad-hoc/
-        title: Part 5 - Ad-Hoc Data Analysis
+        title: Ad-Hoc Data Analysis
 
       - url: /tutorial/branches/
-        title: Part 6 - Development Branches
+        title: Development Branches
         items:
           - url: /tutorial/branches/prepare-tables/
             title: Prepare Tables
