@@ -92,7 +92,7 @@ Expand each bucket to view its tables, and click a table name to access details,
 
 ## What’s Next
 Proceed to [Data Manipulation](/tutorial/manipulate/) for the next step in the tutorial. Alternatively, take a brief side step to explore 
-[Loading Data with Google Sheets Data Source Connector](/tutorial/load/googledrive/) 
+[Loading Data with Google Sheets Data Source Connector](/tutorial/load/googlesheets/) 
 and/or [Loading Data with Database Data Source Connector](/tutorial/load/database/). 
 
 ## If You Need Help
