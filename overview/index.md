@@ -54,7 +54,7 @@ further categorized into in and out stages.
 
 This component operates as an abstraction layer on top of various [backend](/transformations/#backends) database engines 
 including [Snowflake](https://www.snowflake.com/), [Redshift](https://aws.amazon.com/redshift/), [BigQuery](https://cloud.google.com/bigquery/),
-[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) and more. It offers a vital API [Storage API]()[LINK] 
+[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) and more. It offers a vital API Storage API 
 for interactions with the data, facilitating communication with other components and third-party applications.
 
 ### Transformations
