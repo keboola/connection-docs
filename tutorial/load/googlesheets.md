@@ -24,60 +24,60 @@ Go to [Google Spreadsheets](https://www.google.com/sheets/about/) and start a ne
 ## Configure Google Sheets Data Source Connector
 1. Navigate to **Components** section in Keboola and click the **Add Component** button:
 
-{: .image-popup}
-![Data Source Overview Screenshot](/tutorial/load/source-intro-0.png)
+   {: .image-popup}
+   ![Data Source Overview Screenshot](/tutorial/load/source-intro-0.png)
 
 2. Utilize the search box to locate the *Google Sheets data source connector*. Once found, click on it.
 
-{: .image-popup}
-![Data Source Overview Screenshot](/tutorial/load/source-intro.png)
+   {: .image-popup}
+   ![Data Source Overview Screenshot](/tutorial/load/source-intro.png)
 
 3. Click **Connect To My Data**. The 'Use With Demo Data' option will extract datasets prepared by Keboola for your experimentation outside of this tutorial, and it can be found across all commonly used connectors.
 4. Enter a name and description and click **Create Configuration**. 
 
-{: .image-popup}
-![Create Google Sheets Configuration](/tutorial/load/google-sheets-create.png)
+   {: .image-popup}
+   ![Create Google Sheets Configuration](/tutorial/load/google-sheets-create.png)
 
-Each Keboola component (data source, data destination, or application) can support multiple [*configurations*](/components/).
-This concept enables you to, for instance, extract data from multiple Google accounts.
+   Each Keboola component (data source, data destination, or application) can support multiple [*configurations*](/components/).
+   This concept enables you to, for instance, extract data from multiple Google accounts.
 
 5. Authorize the connector to access the spreadsheet by clicking the **Sign in with Google** button.
   
-{: .image-popup}
-![Sign in with Google](/tutorial/load/sign-in-with-google.png)
+   {: .image-popup}
+   ![Sign in with Google](/tutorial/load/sign-in-with-google.png)
   
 6. On the following screen, click **Allow**.
 
-{: .image-popup}
-![Access Google Account](/tutorial/load/allow.png)
+   {: .image-popup}
+   ![Access Google Account](/tutorial/load/allow.png)
 
  7. Now you want to select the Google Drive files to import.
 
-{: .image-popup}
-![Select Google Drive Files](/tutorial/load/select-files.png)
+   {: .image-popup}
+   ![Select Google Drive Files](/tutorial/load/select-files.png)
 
 8. In step 5, you authorized Keboola to use your account to access the Drive. In this step, you will be asked to grant access specifically to spreadsheets.
 Click **'Select all'** and then proceed by clicking **'Continue'** on the following screen.
 
-{: .image-popup}
-![Get Access to Spreadsheets](/tutorial/load/access-to-spreadsheets.png)
+   {: .image-popup}
+   ![Get Access to Spreadsheets](/tutorial/load/access-to-spreadsheets.png)
 
 9. Use the search box to find your **Level** spreadsheet. Select it and click the **Select** button.
 
-{: .image-popup}
-![Find Spreadsheet](/tutorial/load/find-spreadsheet.png)
+   {: .image-popup}
+   ![Find Spreadsheet](/tutorial/load/find-spreadsheet.png)
 
 10. Keboola has automatically detected all sheets from within your spreadsheet and will now allow you to select the one you want to load.
 11. Select the sheet and click **Save and Run Configuration**. A job will be executed, and once completed, you will see a new table created. 
 
-{: .image-popup}
-![Save and Run Configuration](/tutorial/load/save-and-run.png)
+   {: .image-popup}
+   ![Save and Run Configuration](/tutorial/load/save-and-run.png)
 
 12. The Google Sheets data source automatically generates an output bucket and table. Click on the name of the output table to check its contents,
 or navigate directly to the **Storage** section to explore the data.
 
-{: .image-popup}
-![Go to Storage](/tutorial/load/storage.png)
+   {: .image-popup}
+   ![Go to Storage](/tutorial/load/storage.png)
 
 ## What’s Next
 Proceed to [Data Manipulation](/tutorial/manipulate/) for the next step in the tutorial. 
