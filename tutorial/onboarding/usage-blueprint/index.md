@@ -197,7 +197,7 @@ For Storage buckets, tables, and columns, use the following rules:
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> It's important to note that certain Data Sources connector components might create Storage buckets that are not editable in the component configuration.
+    <strong>Important:</strong> It's important to note that certain data source connectors might create Storage buckets that are not editable in the component configuration.
 In general, it is recommended not to impose the same naming conventions on ingested objects. Instead, maintain the original names from the data source
 and apply preferred naming conventions to layers created above them for consistency and simplicity.
 </div>
