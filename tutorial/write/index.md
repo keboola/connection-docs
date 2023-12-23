@@ -1,5 +1,5 @@
 ---
-title: Part 3 - Writing Data
+title: "Part 3: Writing Data"
 permalink: /tutorial/write/
 ---
 
@@ -61,15 +61,15 @@ to authorize their accounts. Please note that this authorization will only allow
  
 10. Enter a name of your sheet, select **Update rows** and click **Save Sheet**. This will create a new empty spreadsheet under the authorized account. 
 
-   {: .image-popup}
-   ![Name and Save a Spreadsheet](/tutorial/write/writing10.png)
+    {: .image-popup}
+    ![Name and Save a Spreadsheet](/tutorial/write/writing10.png)
 
 11. To load the data into the created spreadsheet, click the **Run Component** button.
 
 12. After the job is executed, you can click the spreadsheet name to open the Google Drive spreadsheet (assuming you have access to the spreadsheet).
 
-   {: .image-popup}
-   ![Open the Spreadsheet](/tutorial/write/writing11.png)
+    {: .image-popup}
+    ![Open the Spreadsheet](/tutorial/write/writing11.png)
 
 ## What’s Next
 Proceed to [Flow Automation](/tutorial/automate/) for the next step in the tutorial. 

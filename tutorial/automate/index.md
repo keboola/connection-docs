@@ -1,5 +1,5 @@
 ---
-title: Flow Automation
+title: "Part 4: Flow Automation"
 permalink: /tutorial/automate/
 ---
 
