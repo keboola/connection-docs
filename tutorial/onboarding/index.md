@@ -7,7 +7,9 @@ permalink: /tutorial/onboarding/
 {:toc}
 
 Welcome to the Keboola onboarding guide, your go-to resource for navigating the initial stages of your journey with our platform. 
-Whether you've completed your proof of concept project or graduated beyond the [free tier](https://connection.north-europe.azure.keboola.com/wizard), this guide is designed to be your compass. 
+Whether you've completed your proof of concept project or graduated beyond the [free tier](https://connection.north-europe.azure.keboola.com/wizard), 
+this guide is designed to be your compass. 
+
 If you're looking for a comprehensive overview of the Keboola platform, you can find it [here](https://help.keboola.com/overview/). Let's embark on this onboarding adventure together!
 
 ## Build a Solid Foundation
@@ -58,7 +60,7 @@ our platform caters to analysts, data engineers, advanced analysts, and develope
 
 Here are links to valuable resources tailored for your journey:
 - Start with a comprehensive [Keboola Introduction](https://academy.keboola.com/courses/introduction-2023)
-- Follow up with [general best practices](https://academy.keboola.com/courses/best-practices-2023) 
+- Follow up with [General Best Practices](https://academy.keboola.com/courses/best-practices-2023) 
 - Troubleshoot, debug and find support through our [Debugging Techniques lesson](https://academy.keboola.com/courses/debug-techniques)
 - For those interested in extending the platform by developing new components, check out this [short video](https://www.youtube.com/watch?v=IhET2hDD_1w) and [related documentation](https://developers.keboola.com/extend/). Learn the fundamentals of Keboola Components in respective [academy lessons here](https://academy.keboola.com/courses/common-components-and-processors).
 
