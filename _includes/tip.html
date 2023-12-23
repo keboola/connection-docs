@@ -1,0 +1,11 @@
+<div class="clearfix"></div>
+<div class="alert alert-info" role="alert">
+    <i class="fa fa-info"></i>
+	{% if include.title %} 
+		{% capture title %}{{"&#9432;&nbsp; **Tip: " | append: include.title | append: "**"}}{% endcapture %} 
+	{% else %} 
+		{% capture title %}&#9432;&nbsp; **Tip**{% endcapture %} 
+	{% endif  %}
+    {{ title | markdownify}}
+    {{include.content | markdownify}} 
+</div>

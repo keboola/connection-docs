@@ -30,44 +30,45 @@ is purely coincidental.*
 ### Steps to Follow
 1. Before proceeding, ensure you are logged into your Keboola project (refer to the tutorial [Prerequisites](/tutorial/#prerequisites) 
 if you need to acquire a project).
+
 2. Navigate to the **Components** section and use the search box to find **CSV Import**.
 
-{: .image-popup}
-![Screenshot -- Extractors](/tutorial/load/picture1.png)
+   {: .image-popup}
+   ![Screenshot -- Extractors](/tutorial/load/picture1.png)
 
-4. Click the**Add Component** button, then select **Connect To My Data**.
+3. Click the**Add Component** button, then select **Connect To My Data**.
 
-{: .image-popup}
-![Screenshot -- Extractors](/tutorial/load/picture2.png)
+   {: .image-popup}
+   ![Screenshot -- Extractors](/tutorial/load/picture2.png)
 
 4. Enter a **name and description** for your configuration, and click **Create Configuration**.
    
-{: .image-popup}
-![Screenshot -- CSV Import Intro](/tutorial/load/picture3.png)
+   {: .image-popup}
+   ![Screenshot -- CSV Import Intro](/tutorial/load/picture3.png)
 
-***Note:** You can create multiple configurations for each connector, and maintaining clear naming conventions contributes to a clean and organized project. 
-Check our [best practices guide](/tutorial/onboarding/cheat-sheet/) for suggestions on this topic.*
+   ***Note:** You can create multiple configurations for each connector, and maintaining clear naming conventions contributes to a clean and organized project. 
+   Check our [best practices guide](/tutorial/onboarding/cheat-sheet/) for suggestions on this topic.*
 
-Adding a description is a beneficial practice for both you and your colleagues, aiding in understanding the purpose of your configuration."
+   Adding a description is a beneficial practice for both you and your colleagues, aiding in understanding the purpose of your configuration."
 
-In this tutorial, we will create four configurations for this data source connector, dedicating one configuration to each source CSV file.
+   In this tutorial, we will create four configurations for this data source connector, dedicating one configuration to each source CSV file.
 
-Name the first configuration **[TUTORIAL] Opportunity**.
+   Name the first configuration **[TUTORIAL] Opportunity**.
 
 5. In the **CSV File** section, click **Select file** and choose the [opportunity.csv](/tutorial/opportunity.csv) file you downloaded.
    
-{: .image-popup}
-![Screenshot -- CSV New Configuration](/tutorial/load/picture4.png)
+   {: .image-popup}
+   ![Screenshot -- CSV New Configuration](/tutorial/load/picture4.png)
 
 6. In the **Upload Settings** section, modify the *Destination* setting by clicking the **pen icon** next to the *Destination* name. Set the name of the table that will be created in your Keboola Storage to `in.c-csv-import.opportunity` and click **Save**.
 
-{: .image-popup}
-![Screenshot -- CSV Import Configuration](/tutorial/load/picture5.png)
+   {: .image-popup}
+   ![Screenshot -- CSV Import Configuration](/tutorial/load/picture5.png)
 
 7. Click **Upload**.
 
-{: .image-popup}
-![Screenshot -- Change upload settings](/tutorial/load/picture6.png)
+   {: .image-popup}
+   ![Screenshot -- Change upload settings](/tutorial/load/picture6.png)
 
 After the upload is complete, repeat the process for the remaining three tables—create a configuration, change the destination, 
 and upload the respective file as requested.

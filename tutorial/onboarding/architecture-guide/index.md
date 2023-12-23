@@ -141,15 +141,17 @@ Address security considerations, including geo-locations, data ownership, and co
 5. **Volume of data and complexity:**  
 Assess the volume and complexity of data within particular domains to inform the architecture.
 
-> [!TIP]  
-> One precursor which should serve as a starting point is a defined **business data model (BDM)**.
-> This exercise helps you to understand the business in terms of data and discover domains that are related to each other. 
-> 
-> Generally speaking, the objects defined in the BDM should be grouped closely within the MPA. For instance, all logic related to a Customer object
-> (and any closely related objects) should be in one project. It's common for multiple sources to contribute to this object, possibly coming from
-> multiple L0 level projects. However, there should always be a single point of consolidation for this object as soon as possible (e.g., in L1/2). 
->
-> See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-guide/) for more information.
+{% include tip.html content="
+One precursor which should serve as a starting point is a defined **business data model (BDM)**.
+This exercise helps you to understand the business in terms of data and discover domains that are related to each other. 
+
+Generally speaking, the objects defined in the BDM should be grouped closely within the MPA. For instance, all logic related to a Customer object
+(and any closely related objects) should be in one project. It's common for multiple sources to contribute to this object, possibly coming from
+multiple L0 level projects. However, there should always be a single point of consolidation for this object as soon as possible (e.g., in L1/2). 
+
+See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-guide/) for more information.
+" 
+%}
 
 ### Standard MPA designs
 This chapter describes the most typical MPA designs and demonstrates those in simple examples. In general we have defined two main strategies - vertical and horizontal - of splitting the projects that may be combined together into a so-called hybrid design.
