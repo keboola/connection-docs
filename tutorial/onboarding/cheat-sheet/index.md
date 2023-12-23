@@ -50,14 +50,13 @@ To optimize the overall runtime of your pipeline, consider employing paralleliza
 sources), where multiple tables share the same credentials. Configuration rows allow for parallel execution, and this can be configured in the 
 component UI.
 
-> [!TIP]
-> **Execute Individual Configurations**
->
-> Enhance your workflow efficiency by executing individual configurations separately in Keboola Flow automation. In advanced settings, edit parameters to
-> selectively run specific rows, providing nuanced control over your data processing.
->
-> Additionally, in the user interface, utilize the three-dotted menu next to each configuration row for a quick and convenient way to execute only the needed
-> configurations. This feature streamlines your workflow, saving time and resources while maintaining precision in your data operations.
+{% include tip.html title="Execute Individual Configurations" content="
+Enhance your workflow efficiency by executing individual configurations separately in Keboola Flow automation. In advanced settings, edit parameters to
+selectively run specific rows, providing nuanced control over your data processing.
+
+Additionally, in the user interface, utilize the three-dotted menu next to each configuration row for a quick and convenient way to execute only the needed
+configurations. This feature streamlines your workflow, saving time and resources while maintaining precision in your data operations.
+" %}
 
 **Storage jobs vs. component jobs:** 
 
@@ -164,14 +163,14 @@ This practice not only enhances the safety of your queries but also improves rea
 making it evident which columns you are selecting from the table. Even if you end up including all columns, the verbatim list ensures transparency and avoids 
 unnecessary complications in your output data.
 
-> [!TIP]
-> **Leverage Development Branches**
->
-> For all development tasks, whether adding new components, editing existing configurations, or refining transformations, maximize safety by making use of
-> Development branches. This strategic approach ensures a secure and controlled environment for your development efforts. For detailed guidance on utilizing
-> Development branches effectively, refer to the documentation [here](https://chat.openai.com/c/3f2f2a1f-c67f-4c9d-8992-0071adb4ca58#link-to-documentation).
-> This practice not only enhances the safety of your development processes but also provides a structured and organized approach to managing changes in your
-> Keboola environment.
+{% include tip.html title="Leverage Development Branches" content="
+For all development tasks, whether adding new components, editing existing configurations, or refining transformations, maximize safety by making use of
+Development branches. This strategic approach ensures a secure and controlled environment for your development efforts. For detailed guidance on utilizing
+Development branches effectively, refer to the documentation [here](https://help.keboola.com/tutorial/branches/).
+This practice not only enhances the safety of your development processes but also provides a structured and organized approach to managing changes in your
+Keboola environment.
+" %}
+
 
 ## Automating Your Flow
 ### Workflow with Parallel Execution
@@ -284,10 +283,9 @@ of data corruption. The debug job generates a zip file containing all files prod
 enables users to delve into the files for further debugging. For instance, unexpected data encoding on the source or formatting issues leading to extraction 
 failure can be identified by exploring these files, facilitating a more precise understanding of the problem and its resolution.
 
->[!TIP]
-> **Unlock the /raw mode**
->
-> Discover a powerful feature in Keboola: the ability to access and edit the raw JSON of every configuration, be it a component or transformation, using
-> the Debug Mode. If you prefer a direct route, simply add /raw to the end of the URL address. This advanced capability proves invaluable for performing intricate
-> settings, such as utilizing processors, offering a flexible and efficient way to tailor configurations to your specific needs. Explore the /raw mode to unlock a
-> deeper level of control in your Keboola projects.
+{% include tip.html title="Unlock the /raw mode" content="
+Discover a powerful feature in Keboola: the ability to access and edit the raw JSON of every configuration, be it a component or transformation, using
+the Debug Mode. If you prefer a direct route, simply add /raw to the end of the URL address. This advanced capability proves invaluable for performing intricate
+settings, such as utilizing processors, offering a flexible and efficient way to tailor configurations to your specific needs. Explore the /raw mode to unlock a
+deeper level of control in your Keboola projects.
+" %}

@@ -193,10 +193,15 @@ For Storage buckets, tables, and columns, use the following rules:
       - Processed, output data that is ready for outputting outside – to BI tools, Snowflake, other projects.
 6. Set “_PK” and “_ID” columns within each table to clearly define primary and foreign keys.
 
-> [!IMPORTANT]
-> It's important to note that certain Data Sources connector components might create Storage buckets that are not editable in the component configuration.
-> In general, it is recommended not to impose the same naming conventions on ingested objects. Instead, maintain the original names from the data source
-> and apply preferred naming conventions to layers created above them for consistency and simplicity.
+
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> It's important to note that certain data source connectors might create Storage buckets that are not editable in the component configuration.
+In general, it is recommended not to impose the same naming conventions on ingested objects. Instead, maintain the original names from the data source
+and apply preferred naming conventions to layers created above them for consistency and simplicity.
+</div>
+
 
 ### Descriptions
 Every component configuration, transformation or a flow should contain at least two or three general sentences about its function in the dataflow in broad terms.
