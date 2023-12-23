@@ -70,19 +70,19 @@ Key benefits of multi-project architecture include:
 1. **Separation of Responsibilities and Access Rights**  
 Ideal for organizations with diverse use cases, users, and personas, MPA facilitates the distinct allocation of responsibilities
 and access rights based on functional requirements.
-3. **Functional Designation of Projects**  
+2. **Functional Designation of Projects**  
 Projects can be designated for specific functions such as stable data pipelines, experimental projects, consumption projects, etc.,
 providing clarity in their purpose.
-4. **Clear Separation of Logical Pipeline Steps**  
+3. **Clear Separation of Logical Pipeline Steps**  
 Each project delineates a logical step in the data pipeline, contributing to a clear and organized structure of data processing.
-5. **Team Assignment to Projects**  
+4. **Team Assignment to Projects**  
 Different teams can be assigned to different projects, promoting collaboration and specialization. For instance, the marketing team may operate
 on a dedicated marketing project.
-6. **Flexibility of the Infrastructure**  
+5. **Flexibility of the Infrastructure**  
  MPA allows for flexibility in configuring the infrastructure to match the evolving needs of the organization.
-7. **Readiness for Future Expansions**  
+6. **Readiness for Future Expansions**  
  The architectural design of MPA is conducive to future expansions, ensuring scalability and adaptability as the organization grows.
-8. **Mitigation of Unknowns in Architecture Design**  
+7. **Mitigation of Unknowns in Architecture Design**  
 MPA simplifies the process of adjusting the architecture to changing conditions or scope, offering agility in responding to evolving requirements.
 
 In summary, multi-project architecture is a strategic evolution that optimizes the Keboola Platform. It provides a structured and scalable framework 
@@ -96,30 +96,30 @@ with the specific dynamics and needs of your organization:
 1. **Do you want to separate data extraction?**  
 Consider dedicating a separate project to data acquisition (e.g., L0 or Staging project) to streamline the setup of connectors and scheduling
 without encumbering data processing. This separation facilitates collaboration among engineers, data source owners, analysts, and other team members.
-3. **Do you have many data sources of various types?**  
+2. **Do you have many data sources of various types?**  
 Evaluate whether distinct groups of data sources (e.g., marketing, CRM, sales, accounting) could benefit from processing in separate projects,
 thereby maintaining clarity in responsibilities and access permissions.
-5. **Do you have multiple teams/branches/countries with specific needs?**  
+3. **Do you have multiple teams/branches/countries with specific needs?**  
 Assess whether different teams, branches, or countries possess unique data sources, use cases, and requirements,
 making the case for dedicated isolated projects to cater to specific needs.
-6. **Do you have a team of specialists and data consumers?**  
+4. **Do you have a team of specialists and data consumers?**  
 Explore whether a team of specialists (e.g., BI team, data analysts) can manage core data preparation in one project,
 while data consumers access selected data assets via their dedicated projects, facilitating a balance between specialization and accessibility.
-7. **Do you work with external vendors?**  
+5. **Do you work with external vendors?**  
 If external vendors require managed access to specific data subsets, consider creating a separate project for them to ensure controlled access
 and comprehensive logging.
-8. **What does your organizational structure look like?**  
+6. **What does your organizational structure look like?**  
 Align project split with existing company domains, following the Data Mesh philosophy, to embrace decentralized data ownership, self-service,
 and federated management of computing resources.
-9. **Is your team small and collaborative?**  
+7. **Is your team small and collaborative?**  
 For small, collaborative teams working on multiple sources, consider minimizing the number of projects and perhaps only splitting the L0 layer
 by source/domain to reduce cognitive complexity.
-10. **How will you respond to failures?**  
+8. **How will you respond to failures?**  
 Ensure that each project is isolated with a clear owner, facilitating swift responses in the event of failures or issues.
-11. **Are there differences between regions/countries?**  
+9. **Are there differences between regions/countries?**  
 Assess the level of complexity introduced by regional or country-specific differences, and evaluate whether maintaining the split on L1 layer and merging
 at L2 level provides a balanced approach.
-12. **Do you have sensitive data?**  
+10. **Do you have sensitive data?**  
 Consider the need to keep sensitive data separate for security reasons or to facilitate separate team management, and assess whether data masking is necessary
 at the L0 and L1 levels.
 
