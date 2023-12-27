@@ -8,50 +8,32 @@ items:
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
-      - url: /tutorial/onboarding/
-        title: Keboola Platform Onboarding
-        items:
-        - url: /tutorial/onboarding/usage-blueprint/
-          title: Usage Blueprint
-
-        - url: /tutorial/onboarding/architecture-guide/
-          title: Multi-Project Architecture
-          items:
-            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
-              title: Business Data Model
-
-        - url: /tutorial/onboarding/cheat-sheet/
-          title: Best Practices
-
-        - url: /tutorial/onboarding/governance-guide/
-          title: Governance Guide
-           
       - url: /tutorial/load/
-        title: Part 1 - Loading Data
+        title: "Part 1: Loading Data"
         items:
           - url: /tutorial/load/googlesheets/
-            title: Loading with Google Sheets Data Source
+            title: Loading Data from Google Sheets
 
           - url: /tutorial/load/database/
-            title: Loading with Database Data Source
+            title: Loading Data from Database
 
       - url: /tutorial/manipulate/
-        title: Part 2 - Data Manipulation
+        title: "Part 2: Data Manipulation"
         items:
           - url: /tutorial/manipulate/workspace/
             title: Using Workspace
 
       - url: /tutorial/write/
-        title: Part 3 - Writing Data
+        title: "Part 3: Writing Data"
 
       - url: /tutorial/automate/
-        title: Part 4 - Flow Automation
+        title: "Part 4: Flow Automation"
 
       - url: /tutorial/ad-hoc/
-        title: Part 5 - Ad-Hoc Data Analysis
+        title: "Part 5: Ad-Hoc Data Analysis"
 
       - url: /tutorial/branches/
-        title: Part 6 - Development Branches
+        title: "Part 6: Development Branches"
         items:
           - url: /tutorial/branches/prepare-tables/
             title: Prepare Tables
@@ -70,6 +52,24 @@ items:
 
           - title: Merge to Production
             url: /tutorial/branches/merge-to-production/
+
+      - url: /tutorial/onboarding/
+        title: Keboola Platform Onboarding
+        items:
+        - url: /tutorial/onboarding/usage-blueprint/
+          title: Usage Blueprint
+
+        - url: /tutorial/onboarding/architecture-guide/
+          title: Multi-Project Architecture
+          items:
+            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+              title: Business Data Model
+
+        - url: /tutorial/onboarding/cheat-sheet/
+          title: Best Practices
+
+        - url: /tutorial/onboarding/governance-guide/
+          title: Governance Guide
 
   - url: /components/
     title: Components

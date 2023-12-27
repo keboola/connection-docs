@@ -1,5 +1,5 @@
 ---
-title: Data Manipulation
+title: "Part 2: Data Manipulation"
 permalink: /tutorial/manipulate/
 ---
 

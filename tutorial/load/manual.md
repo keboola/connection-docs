@@ -1,5 +1,5 @@
 ---
-title: Loading Data
+title: "Part 1: Loading Data"
 permalink: /tutorial/load/
 ---
 

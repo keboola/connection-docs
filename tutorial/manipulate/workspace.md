@@ -30,7 +30,7 @@ Click **Create Workspace**.
    {: .image-popup}
    ![Creating Job](/tutorial/manipulate/workspaces4.png)
 
-5.Click the workspace name to access the details.
+5. Click the workspace name to access the details.
 
    {: .image-popup}
    ![Access Details of the Job](/tutorial/manipulate/workspaces5.png)

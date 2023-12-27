@@ -1,5 +1,5 @@
 ---
-title: Loading Data with Database Data Source Connector
+title: Loading Data from Database
 permalink: /tutorial/load/database/
 ---
 
