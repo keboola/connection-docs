@@ -1,128 +1,109 @@
 ---
-title: Part 4 - Automation - Setting up Orchestrator
+title: "Part 4: Flow Automation"
 permalink: /tutorial/automate/
 ---
 
-So far, you have learned to use Keboola Connection to
+So far, you have learned to use Keboola to
 
-- load tables [manually](/tutorial/load/) or [using an extractor](/tutorial/load/database/), 
+- load tables [manually](/tutorial/load/) or [using a data source connector](/tutorial/load/database/), 
 - [manipulate data in SQL](/tutorial/manipulate/), and
-- write data [into Tableau BI](/tutorial/write/) or [into GoodData BI](/tutorial/write/gooddata/).
+- write data [into a Google Spreadsheet using a data destination connector](/tutorial/write/).
  
-Connecting various systems together alone makes Keboola Connection a powerful and easy-to-use tool. 
-However, the above steps must be done repeatedly to bring in the newest data available. 
+While connecting various systems together alone makes Keboola a powerful and easy-to-use tool, 
+the above steps must be done repeatedly to bring in the newest data available.
 
-Use **Orchestrator**  
+This is where our flows come in:
+- Specify what tasks should be executed in what order (orchestrate tasks) and
+- Configure the automatic execution (schedule flow tasks).
 
-- to specify what tasks should be executed in what order (orchestrate tasks) and
-- to configure the automatic execution (schedule orchestrated tasks).
+1. Navigate to the **Flows** section of Keboola.
 
-Go to the **Orchestrations** section of Keboola Connection, and
+   {: .image-popup}
+   ![Go to Flows](/tutorial/automate/automate1.png)
 
-{: .image-popup}
-![Screenshot - Orchestrations Introduction](/tutorial/automate/orchestrator-intro.png)
+2. Click **Create Flow**.
 
-click on **New Orchestration** to create a new orchestration. Assign it the name *Opportunities*:
+3. Enter a *Name* and *Description* for your flow. Similar to creating a transformation, you can organize flows into folders.
+You can specify the folder name when creating a flow or assign it under a folder later. Click **Create Flow**.
 
-{: .image-popup}
-![Screenshot - Create new Orchestration](/tutorial/automate/orchestrator-create-new.png)
+   {: .image-popup}
+   ![Name the Flow](/tutorial/automate/automate2.png)
 
-To configure the orchestration, first add some tasks to it:
+4. Click **Select First Step**.
 
-{: .image-popup}
-![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-1.png)
+   {: .image-popup}
+   ![Select First Step](/tutorial/automate/automate3.png)
 
-Click **New Task**:
+5. Click the **Google Sheets Data Source** component. We extracted the *Levels* table from this data source and we’ll want to extract this data automatically in our flow.
 
-{: .image-popup}
-![Screenshot - Orchestration Tasks Introduction](/tutorial/automate/orchestration-tasks-1.png)
+   {: .image-popup}
+   ![Select Google Sheets Data Source](/tutorial/automate/automate4.png)
 
-The automation tasks are displayed based on what steps of the tutorial you have taken.
-It is not possible to automate the [manual upload](/tutorial/load/). If you haven't gone through all parts of the tutorial,
-these are the available steps:
+6. Use the drop down menu to select a particular configuration of this component.
 
-- [load data using GoogleDrive Extractor](/tutorial/load/googledrive/)
-- [load data using Database Extractor](/tutorial/load/database/)
-- [manipulate data using Transformations](/tutorial/manipulate/)
-- [write data into Tableau BI](/tutorial/write/)
-- [write data into GoodData BI](/tutorial/write/gooddata/)
+   {: .image-popup}
+   ![Select Configuration](/tutorial/automate/automate5.png)
 
-First, select GoogleDrive and then click on the configuration *User levels*.
+7. Now use the plus icon to add additional steps. Select the **Snowflake data source** component we used to extract the *User, Opportunity*, and *Account* tables.
+Then select the configuration we created.
 
-{: .image-popup}
-![Screenshot - Orchestration Tasks Editing](/tutorial/automate/orchestration-tasks-2.png)
+   {: .image-popup}
+   ![Additional Steps](/tutorial/automate/automate6.png)
 
-Continue adding all the tasks you want. The following configuration will extract data from the database 
-and from the Google Drive sheet. After being transformed for Tableau, the data will be written to Tableau.
+8. Extractions of the data are not dependent tasks and, thus, can be executed in parallel.
+You can accomplish this by simply dragging and dropping the second task into the Step 1 box.
 
-{: .image-popup}
-![Screenshot - Orchestration Tasks Setup for Tableau](/tutorial/automate/orchestration-tasks-setup-1.png)
+   {: .image-popup}
+   ![Extraction 1](/tutorial/automate/automate7.png)
 
-Or, use the next configuration to extract data from the database and the Google Drive sheet,
-transform it for GoodData, and write it to a GoodData project.
+   {: .image-popup}
+   ![Extraction 2](/tutorial/automate/automate8.png)
 
-{: .image-popup}
-![Screenshot - Orchestration Tasks Setup for GoodData](/tutorial/automate/orchestration-tasks-setup-2.png)
+   {: .image-popup}
+   ![Extraction 3](/tutorial/automate/automate9.png)
 
-The order of certain [tasks](/orchestrator/tasks/) is important; some must run sequentially and others can run 
-in [parallel](/orchestrator/running/#parallel-jobs). 
-That is what **orchestration phases** are for. Tasks in a single phase are executed in parallel, 
-phases execute sequentially. 
+9. Continue to add the **SQL Transformation** step and the **Google Sheets Data Destination** steps. You should now have a flow looking like this
 
-To order the phases, grab the triple bar icon on their left. 
-To move a task to a different phase, tick the checkbox on the left. Then go to **Actions**, select 
-**Move selected tasks between phases** and assign the desired phase.
+   {: .image-popup}
+   ![Add SQL Transformation](/tutorial/automate/automate10.png)
 
-In the above configuration, each task is in its own phase.
-Therefore, this is a very defensive configuration which executes all tasks sequentially.
 
-It can be better arranged by using the action *Group tasks into phases by component type*:
+When configuring the **transformation** in the [Data Manipulation](/tutorial/manipulate/) step of this tutorial, 
+we used the input tables we loaded manually into Keboola. Now, we need to adjust the **input mapping** of our transformation to use the tables extracted 
+from **Google Sheets** and **Snowflake data sources**.
+
+You can get to the configuration by selecting the step and clicking **Edit Configuration**.
 
 {: .image-popup}
-![Screenshot - Orchestration Phases](/tutorial/automate/orchestration-tasks-setup-3.png)
+![Edit Configuration](/tutorial/automate/automate11.png)
 
-This will group each of the extractors, transformations and writers into their own phase to follow the common
-ETL scheme. Then **Save** the orchestration. If you do not have all the tasks set up at the moment, 
-it does not matter. You can safely continue with the next steps.
-When done configuring the tasks, go back to the orchestration setting.
+Remove the current **input mapping** tables and add the ones from the Google Sheet and Snowflake data sources. 
+Make sure you edit the *Table name* parameter because those are the names we use in our query to reference those tables.
 
 {: .image-popup}
-![Screenshot - Orchestration Tasks Setup End](/tutorial/automate/orchestration-tasks-setup-4.png)
+![Replace Input Mapping](/tutorial/automate/automate12.png)
 
-In the orchestration detail, you can now see some tasks configured. Run the orchestration manually to test 
-if everything works smoothly; click on the **Run Orchestration** button in the top right corner and select the tasks you want to run.
-This creates a background [job](/orchestrator/running/) which executes all the tasks specified in the orchestration. 
-Continue setting up the orchestration in the meantime.
+## Set a Schedule
+1. Click **Set Schedule**.
 
-{: .image-popup}
-![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-2.png)
+   {: .image-popup}
+   ![Set Schedule](/tutorial/automate/automate13.png)
 
-By clicking on the edit icon next to **Schedule**, set the orchestration to run 
-[automatically](/orchestrator/running/#automation) at a given time. 
+2. Set the schedule to 6:15am UTC daily execution and click **Set Up Schedule**.
 
-{: .image-popup}
-![Screenshot - Orchestration Schedule](/tutorial/automate/orchestration-schedule.png)
+   {: .image-popup}
+   ![Set Schedule 1](/tutorial/automate/automate14.png)
 
-It is recommended to also set up notifications. 
-Click on the **Notifications** edit button:
+## Notifications
+To ensure that responsible persons are notified when the flow fails or runs into warnings, it’s always a good idea to set up **notifications**.
 
-{: .image-popup}
-![Screenshot - Orchestration Detail](/tutorial/automate/orchestration-detail-3.png)
+Navigate to the **Notifications** tab and enter/select email addresses of those that should be notified on success/warning/error or processing.
 
-Notifications are sent to selected email addresses. Set at least the error notification: enter your email address and 
-click on the plus sign next to it. Repeat if you want to add another email address. Then click **Save**.
+   {: .image-popup}
+   ![Set Up Notifications](/tutorial/automate/automate15.png)
 
-When an orchestration is run manually, notifications will be sent only to the Keboola Connection user who
-runs the orchestration, not to those specified in Notifications.
+## What’s Next
+Having mastered the automation process, you may proceed to the [Development Branches](/tutorial/branches/) part of the tutorial.
 
-{: .image-popup}
-![Screenshot - Orchestration Notifications](/tutorial/automate/orchestration-notifications.png)
-
-Your orchestration job should be finished by now. From data extraction to data writing, you have set up the full pipeline. 
-Any change in your [GoogleDrive sheet](/tutorial/load/googledrive/) will automatically propagate up 
-to your Tableau or GoodData project. Or both if you set it that way.   
-
-{: .image-popup}
-![Screenshot - Orchestration Jobs](/tutorial/automate/orchestration-detail-4.png)
-
-Having mastered the automation process, you may proceed to the [ad-hoc data analysis](/tutorial/ad-hoc/) part of the Keboola Connection tutorial. 
+## If You Need Help
+Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.

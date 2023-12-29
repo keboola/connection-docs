@@ -8,11 +8,11 @@ redirect_from:
 * TOC
 {:toc}
 
-In the Keboola Connection platform, most of the data processing functions are implemented in **Components**. 
+In the Keboola platform, most of the data processing functions are implemented in **Components**. 
 Components are divided into the following categories:
 
-- [**Data sources (extractors)**](/components/extractors/) – bring data into a Keboola Connection project.
-- [**Data destinations (writers)**](/components/writers/) – send processed data into a target system.
+- [**Data source connectors (extractors)**](/components/extractors/) – bring data into a Keboola project.
+- [**Data destination connectors (writers)**](/components/writers/) – send processed data into a target system.
 - [**Applications**](/components/applications/) – process complex data.
 
 All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration is used to set the necessary parameters for each 
@@ -73,7 +73,7 @@ To create a new component configuration, select *Components* from the top naviga
 ![Screenshot - Create Configuration](/components/configuration-1.png)
 
 The following page lists the current configurations (e.g., extractors) in the project. To create a new configuration of a new component, 
-use the **Directory** or the **Add New Extractor** button.
+use the **Directory** or the **Add New Data Source** button.
 
 {: .image-popup}
 ![Screenshot - Extractors List](/components/configuration-2.png)
@@ -259,8 +259,8 @@ configuration.*
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user)
 it means that the service does not require entering credentials (username, password, token, etc.). Instead you are 
-redirected to the service itself where you authorize the Keboola Connection component. Then you are redirected back to 
-Keboola Connection and you can set other parameters and run the configuration. 
+redirected to the service itself where you authorize the Keboola component. Then you are redirected back to 
+Keboola and you can set other parameters and run the configuration. 
 
 The OAuth authorization process begins with the **Authorize** button (in this example the
 [Google calendar extractor](/components/extractors/communication/google-calendar/) is shown):
@@ -271,10 +271,10 @@ The OAuth authorization process begins with the **Authorize** button (in this ex
 In the next step, you can choose the authorization method:
 
 - **Instant**: Use this method if you have direct access to the account; the authorization will be done immediately.
-- **External**: If you need to authorize access to the service from someone who does not have an account in Keboola Connection, you can generate an external link, which will guide them through this process.
+- **External**: If you need to authorize access to the service from someone who does not have an account in Keboola, you can generate an external link, which will guide them through this process.
 
 OAuth authorization is a very secure authorization method in which you don't have to hand over the 
-credentials to your account. The consumer -- Keboola Connection component -- obtains only the minimal required 
+credentials to your account. The consumer -- Keboola component -- obtains only the minimal required 
 access.  The authorization is only valid for the configuration in which it was created and for its **copies**.
 
 ### Instant Authorization

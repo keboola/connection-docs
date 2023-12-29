@@ -286,6 +286,8 @@ data in storage, and the number of users. This combines data from different data
 * `Snowflake Sandbox` - `kbc_snowflake_stats` (records with **sandbox** *snowflake_job_type*)
 * `Transfromations` - `kbc_job` (jobs with **SQL** *transformation_type*)
 * `Writers` - `kbc_job` (jobs with **writer** *component_type*)
+* `BAPI Messages` - Buffer API (data streams) usage; only aggregated values available
+* `BAPI Receiver` - Buffer API endpoints used; only aggregated values available
 
 *Note: `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
