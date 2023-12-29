@@ -3,7 +3,7 @@ title: Keboola Platform Usage Blueprint
 permalink: /tutorial/onboarding/usage-blueprint/
 ---
 
-> Welcome to your personalized Keboola Platform Usage Blueprint Document! 
+> Welcome to your personalized [Keboola Platform Usage Blueprint Document](/tutorial/onboarding/keboola-platform-usage-document.pdf)! 
 > 
 > *This comprehensive guide is designed to serve as a foundation for crafting your customized documentation. 
 > Each section outlines its purpose and recommends content, providing you with a framework that can be tailored to your organization's specific principles
