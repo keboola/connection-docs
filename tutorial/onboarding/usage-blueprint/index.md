@@ -26,14 +26,14 @@ permalink: /tutorial/onboarding/usage-blueprint/
 - Manage [shared buckets](/catalog/#sharing-types).
 - Create [new projects](/management/organization/#manage-projects).
 - Change [organization settings](/management/organization/#organization-settings).
-- Allow [Keboola Support team](/management/support/#require-approval-for-support-access) to join your projects.
+- Allow [Keboola support team](/management/support/#require-approval-for-support-access) to join your projects.
 
 Our Keboola organization administrators are:
 - Name, [email@company.com](email@company.com)
 - Name, [email2@company.com](email2@company.com)
 - Name, [email3@company.com](email3@company.com)
 
-#### User requesting access to a Keboola project
+#### User requesting access to a project
 > *Usually, Keboola Administrators maintain a list of current projects, including the project owner or lead project engineer.
 > Users are directed to this list to contact the project owner directly. The project owner can then follow the guide in our public documentation
 > to invite the user into a project.*
@@ -61,7 +61,7 @@ To request access to any of our existing Keboola projects, please contact the Pr
 Navigate to the login site of our Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
 After you log in, you'll see a list of projects you have access to. Click on the selected project name to access the project environment.
 
-#### Requesting a new Keboola project
+#### Requesting a new project
 If you wish to develop your own use-cases in Keboola, please reach out to one of the Organization administrators mentioned above to create a project for you.
 
 > *To request the creation of a new project, the requester should get in touch with a Keboola Administrator.
@@ -70,7 +70,7 @@ If you wish to develop your own use-cases in Keboola, please reach out to one of
 > *The specific process may vary for each organization. In larger organizations, it is common to implement a questionnaire or form that users can use
 > to request a project. This form often provides administrators with additional details they may need for the project creation process.*
 
-#### Processing user termination
+#### User termination
 Terminated users must be manually removed from all projects they are members of. Keboola Organization administrators can leverage Telemetry data 
 (refer to the [**Keboola Governance Guide**](/tutorial/onboarding/governance-guide/) for more details) to identify the projects and 
 subsequently remove users from individual projects.
