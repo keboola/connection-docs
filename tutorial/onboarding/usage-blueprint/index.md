@@ -75,19 +75,19 @@ Or, project owners can remove the terminated user themselves.
 All their configurations will remain usable and functional after the user is removed.*
 
 ### Project Naming Conventions
-> *It is advisable to establish and uphold naming conventions for project names. The chosen names should be clear and indicative of the project's purpose.
-> Below, we suggest some of the typical conventions. Please refer to the [Multi-Project Architecture Guide](/tutorial/onboarding/architecture-guide/)
-> for details about different project levels/stages etc.*
+> *It is a good idea to establish and follow a convention for creating project names so they are clear and show what the project is about.
+> We suggest some of the typical conventions below. See the [Multi-Project Architecture Guide](/tutorial/onboarding/architecture-guide/)
+> for more on how to name different project levels, stages, etc.*
 >
-> *In the following example, numerical codes such as 00, 10, 20 are used for project levels, but they can also be represented as L0, L1, L2, or other variations.*
+> *In the following example, we use numerical codes like 00, 10, and 20 to show project levels, but you can also use L0, L1, L2, or other styles.*
 
-All projects within our organization adhere to a specific naming convention:
+All projects in our company follow this naming convention:
 
 `[STAGE]{Domain - optional}[Region - optional] Project Name`
 
-For the **Project Name** part, the convention dictates capitalizing the initial letter of each word, except for conjunctions like "and" and "or."
+In the **Project Name**, we capitalize the first letter of each word, except for conjunctions like "and" and "or."
 
-Here are examples of project names:
+Here are examples of how we name projects:
 
 - `[10]{Sales}[EU] Financial Reporting`
 - `[00]{Sales} Corporate Rrofiling`
@@ -95,21 +95,17 @@ Here are examples of project names:
 
 ## Keboola Project Rules and Principles
 ### Managing Project Users
-> *As we mentioned in the previous chapters it’s typical to identify a Project Owner who is mainly responsible for managing project users.
-> Keboola identifies several project user roles.*
+> *As mentioned before, a project owner is mainly responsible for managing project users. Keboola has different roles for project users.*
 
-The Project Owner bears the responsibility of ensuring that users are invited into their projects with the suitable roles. 
-Keboola user roles are documented [here](https://help.keboola.com/management/project/users/#user-roles). 
-It's essential to understand that the status of Project Owner is purely a formal role and 
-doesn't directly correspond to specific Keboola project roles and privileges. In most cases, users are invited under a project admin role 
-(or a share role) unless there is a specific requirement for a different role.
+The project owner needs to ensure users are added with the right roles. Keboola user roles are documented [here](https://help.keboola.com/management/project/users/#user-roles). 
+Remember, being a project owner is a formal role and doesn’t directly correspond to specific Keboola project roles and privileges. 
+Usually, users are invited as project admins or with a sharing role unless they need a different one.
 
-To invite or remove a user from your project, please refer to the official steps outlined in the Keboola documentation [here](https://help.keboola.com/management/project/users/#inviting-user).
+To invite or remove a user from your project, follow the steps in the [Keboola documentation](https://help.keboola.com/management/project/users/#inviting-user).
 
 ### Naming Conventions
-> *Implementing naming conventions for all components in Keboola is recommended. This ensures that the project remains organized, comprehensible,
-> and simpler to manage and navigate. Keep in mind that the following is just a suggestion, as there is no universally recognized best practice
-> for naming conventions.*
+> *Using naming conventions for all Keboola components is recommended to keep your project well organized, comprehensible, and simpler to manage and navigate.
+> The guidelines below are just suggestions, as there is no universally recognized best practice for naming.*
 
 All configurations for Keboola components, including data source and data destination connectors, transformations, workspaces, flows, and others, 
 along with any Storage objects created, are required to adhere to the standard naming conventions outlined below.
