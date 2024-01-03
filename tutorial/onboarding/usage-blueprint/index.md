@@ -48,11 +48,11 @@ To join an existing Keboola project, reach out to the **project owner** directly
 > or GCP (Europe region) stack, or a dedicated single-tenant stack. The location of the stack determines the base URL that’ll take you to the platform’s UI.
 > Check below for the link that matches your stack:*
 >
-> *Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin/)
-> AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
-> AWS US: [https://connection.keboola.com/admin](https://connection.keboola.com/admin)
-> GCP EU: [TODO Please insert the link for GCP EU]
-> Single tenant stack: All relevant information is available within your Production Design document.*
+> - Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin/)
+> - AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
+> - AWS US: [https://connection.keboola.com/admin](https://connection.keboola.com/admin)
+> - GCP EU: [TODO Please insert the link for GCP EU]
+> - Single tenant stack: All relevant information is available within your Production Design document.
 
 Navigate to the login site of the Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
 After you log in, you'll see a list of projects you can access. Click on the selected project name to access the project environment.
@@ -62,7 +62,7 @@ If you wish to develop your own use cases in Keboola, reach out to one of the Or
 
 > *To have a new project created, contact a Keboola administrator. Organization administrators are the only ones who can set up Keboola projects.*
 >
-> *TThe way to request a new project might vary based on the company size. In larger companies, using a form or questionnaire for project requests is common.
+> *The way to request a new project might vary based on the company size. In larger companies, using a form or questionnaire for project requests is common.
 > This helps give the administrators the extra information they need to create the project.*
 
 #### User termination
@@ -107,12 +107,12 @@ To invite or remove a user from your project, follow the steps in the [Keboola d
 > *Using naming conventions for all Keboola components is recommended to keep your project well organized, comprehensible, and simpler to manage and navigate.
 > The guidelines below are just suggestions, as there is no universally recognized best practice for naming.*
 
-All configurations for Keboola components, including data source and data destination connectors, transformations, workspaces, flows, and others, 
-along with any Storage objects created, are required to adhere to the standard naming conventions outlined below.
+Make sure to apply the naming rules below to all configurations of Keboola components, including data source and data destination connectors, 
+transformations, workspaces, flows, and any other Storage objects you create.
 
 #### Component configurations
-The name of each component (data source/data destination connector or application) should include a use case/category (if possible), a domain (if applicable), 
-and the configuration name should follow the convention of capitalizing the first letter.
+When naming a component (like a data connector or application), include its use case or category and, if relevant, its domain. 
+Start each word in the configuration name with a capital letter.
 
 `{Domain}[USECASE - optional] Configuration Name`
 
@@ -120,139 +120,129 @@ Examples:
 - `{Sales}[REPORTING] Payments and Invoices`
 - `{Operations}[PLANNING] Workloads and Plan`
 
-Certain components, particularly data source connectors, may incorporate configuration rows. For example, in a database configuration, 
-a configuration row signifies a connection to a specific individual table. In this scenario, it is recommended to maintain the specific source object name 
-as the configuration row's name. If it's an API or service connector, the name should represent a distinct endpoint or domain.
+For components with configuration rows, like connectors loading data from a database, name each row after the specific table it connects to. 
+The name should reflect the specific endpoint or domain if it's an API or service connector.
 
 #### Transformations
-For transformations and optional transformation folders, employ a systematic approach such as `[USECASE - optional] Transformation Name` to categorize 
-and distinguish different transformations.
+When naming transformations or optional folders, use a format like `[USECASE - optional] Transformation Name` to keep them organized.
 
 Examples:
 - `[REPORTING] Payment Data Preprocessing`
 - `[REPORTING] Invoices Denormalization`
 
-If it's anticipated that individual transformations are components of a larger process and will consistently be executed together in a specific order, 
-consider incorporating a stage sign, like:
+If transformations are part of a bigger process and run in a set order, add a number to show the sequence:
 
 - `[REPORTING][00] Payment Data Preprocessing`
 - `[REPORTING][01] Invoices Denormalization`
 - `[REPORTING][02] Main Report Calculation`
 
-Transformations can be further grouped in Transformation Folders. Naming of such folders should follow a convention of `[USECASE] Transformation Folder Name`.
+Transformations can also be grouped into transformation folders. Name such folders using the following format: `[USECASE] Transformation Folder Name`.
 
 Example:
 - `[REPORTING] Financial Reporting`
 
 #### Workspaces
-Names of private workspaces are completely up to the user. For shared workspaces, please follow the convention of `[USECASE]{Owner-optional} Workspace Name`.
+You can name private workspaces however you like. For shared workspaces, use `[USECASE]{Owner-optional} Workspace Name`.
 
 Example:
 - `[REPORTING]{Jane} ML Model Development`
 
 #### Flows
-Flow names should clearly articulate their purpose and use case. If there are dependencies between flows within one project, you can replicate the stage signs 
-as suggested in the Transformations section above. Also, you can introduce a Domain unless the Domain is given by the project directly. 
-The convention is `[USECASE]{Domain}[STAGE] Flow Name`.
+Flow names need to state their purpose and use case. If flows depend on each other in a project, use the stage signs like in the Transformations section. 
+You can add a domain if it’s not part of the project. The convention is `[USECASE]{Domain}[STAGE] Flow Name`.
 
 Examples:
 - `[REPORTING]{Sales} Main Reporting Calculations`
 - `[PLANNING][00] Data extractions`
 - `[PLANNING][01] Data normalization`
 
-Flows can be further grouped in Flows Folders. Naming of such folders should follow a convention of `{Group} Flow Folder Name`. 
-The `{Group}` can be for example the `Domain` or `STAGE` or simply anything you’d like to group your flows by.
+Flows can also be grouped into flow folders. Name such folders using the following format: `{Group} Flow Folder Name`. 
+The `{Group}` can be, for example, the `Domain` or `STAGE` or simply anything that helps to organize your flows.
 
 Example:
 - `{Sales} Financial Reporting`
 
 #### Storage
-Please be aware that certain objects, specifically Storage bucket names and Storage table names, are automatically generated by Keboola data source connectors.
-The conventions outlined below are applicable solely to objects created through configurations, where users have the ability to set the object names.
+Keep in mind that Storage bucket and table names are automatically created by Keboola data source connectors. 
+The following naming conventions are for objects you create yourself.
 
-For Storage buckets, tables, and columns, use the following rules:
-1. Use uppercase `SNAKE_CASE` type of naming convention.
-2. Avoid using `OUT` buckets for temporary tables, by putting something in an out bucket you're de facto declaring "these are processed and validated data that are ready for consumption". Please refer to Keboola official documentation for details about IN and OUT stages of Storage Buckets [here](/storage/buckets/).
-3. Buckets linked to your project from [Data Catalog](/catalog/) should be marked with a `SHARED` keyword, e.g., `SHARED_REPORTING_FINANCIAL` for a bucket that’s named `REPORTING_FINANCIAL` in the source project.
-4. Avoid using too general words like `MAIN` and rather choose something a bit more descriptive `SALES_METRICS`. Even if it is a final output bucket from a domain specific project `Sales` it should be named as `SALES_MAIN` rather than just `MAIN`.
-5. Clearly differentiate between storage stages IN/OUT:
-   - IN stage
-      - Anything that comes to the project from the outside, before it is processed
-      - Raw data from data source components, shared buckets
-      - Tabular configurations for other components
-   - OUT stage
-      - Processed, output data that is ready for outputting outside – to BI tools, Snowflake, other projects.
-6. Set “_PK” and “_ID” columns within each table to clearly define primary and foreign keys.
+For Storage buckets, tables, and columns:
+1. Use uppercase `SNAKE_CASE` naming.
+2. Don't use `OUT` buckets for temporary tables. `OUT` buckets should only have data that's ready to use. See Keboola's documentation for more on IN and OUT Storage buckets [here](/storage/buckets/).
+3. Marke buckets from the [Data Catalog](/catalog/) as `SHARED`, like `SHARED_REPORTING_FINANCIAL`.
+4. Be specific with names. Instead of `MAIN`, use something descriptive like `SALES_METRICS`. Even in specific projects, use `SALES_MAIN` rather than just `MAIN`.
+5. Clearly separate IN/OUT Storage stages:
+   - IN stage: Incoming data, like raw data or shared buckets 
+   - OUT stage: Processed data ready to be used elsewhere (in BI tools, Snowflake, other projects).
+6. Set “_PK” and “_ID” columns within each table to mark primary and foreign keys.
 
 
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> It's important to note that certain data source connectors might create Storage buckets that are not editable in the component configuration.
-In general, it is recommended not to impose the same naming conventions on ingested objects. Instead, maintain the original names from the data source
-and apply preferred naming conventions to layers created above them for consistency and simplicity.
+    <strong>Important:</strong> Some data source connectors create Storage buckets you cannot rename. 
+   Generally, don’t apply the same naming conventions on anything loaded into Keboola via a data source connector (e.g., a table, CSV file, and JSON). 
+   Keep their original names and use these naming conventions only for the layers you add on top for consistency and simplicity.
 </div>
 
 
 ### Descriptions
-Every component configuration, transformation or a flow should contain at least two or three general sentences about its function in the dataflow in broad terms.
+Every component configuration, transformation, or flow should briefly explain (in two or three sentences) its role in the data flow.
+Here are some tips:
 
-1. The deeper in the description, the more detail should be provided, e.g., any implementation specifics, caveats.
-2. Make use of MarkDown formatting to highlight important sections.
-3. Leverage HTML links to reference some related objects or other parts of the project, e.g., *“Keep in sync with  [original transformation](https://connection.eu-central-1.keboola.com/admin/projects/xx/transformations/bucket/1234/transformation/1)".*
-4. Consider stating the original owner of the configuration in the description, even though this might be redundant and can be seen clearly from the version history.
+1. Add more details further into the description, like any implementation specifics or important points to note.
+2. Use Markdown to highlight important sections.
+3. Include links to related objects or other parts of the project, e.g., `Keep in sync with the [original transformation](https://connection.keboola.com/admin/projects/xx/transformations/bucket/1234/transformation/1)`.
+4. Consider mentioning the original owner of the configuration, even though this can be seen in the version history.
 
 ### Sharing Data via Data Catalog
-> *The following depends on your implemented multi-project architecture. The suggestion below expects the implementation of multiple project layers.*
+> *This depends on your multi-project architecture. Here’s a guide for a system with multiple project layers.*
 
-Bucket sharing is done solely by those with `organization admin` or `share` role permissions. 
+Only users with `organization admin` or `share` role permissions can share buckets. 
 
-A general rule is that data shouldn’t be shared from an upper to a lower stage/layer, and sharing data across the same stage/layer should be limited if it’s not necessary.
+As a rule, avoid sharing data from higher to lower stages/layers. Limit sharing within the same stage/layer unless necessary.
 
 **Sharing from level 00**
-- In most cases, sharing is done to 10 projects only.
-- Only buckets in `OUT` stage are shared. In some cases, when there is no transformation needed, tables should be shared via aliases into the output buckets.
+- Share only with 10-level projects.
+- Share only `OUT` stage buckets. Share tables into the output buckets using aliases if no transformation is needed.
 
 **Sharing from 1+ stages**
-- Shared output buckets (may be prefixed with `SHARED` keyword)
-- Buckets are shared only from the `OUT` stage.
+- Use `SHARED` as a prefix for shared output buckets.
+- Share buckets only from the `OUT` stage.
 
 **Linking buckets**
-- Buckets linked from another project are always in the `IN` stage and prefixed with the `SHARED` keyword and a reference to the input project.
+- Buckets from other projects are always in the `IN` stage, prefixed with `SHARED` and a reference to the input project.
 
 ### Using Development Branches
-> *[Development branches](/components/branches/) serve as distinct entities dedicated to developing new configurations or modifying existing configurations
-> within the confined scope of a specific use-case. Each development branch operates independently, and any changes made within a branch become
-> accessible to other branches or projects only after they are merged into the production environment.*
+> *[Development branches](/components/branches/) are separate areas for independently developing or modifying configurations for a specific purpose.
+> Changes made within a branch become accessible to other branches or projects only after they are merged into production.*
 >
-> *Note that some users only use development branches for implementing changes and develop new configurations in the production branch directly.
-> There are also users who may not use branches at all – this depends on internal standards and requirements.*
+> *Some users implement changes in development branches but create new configurations directly in the production branch. Others might not use branches,
+> depending on their internal rules.*
 
-To create or modify configurations, users are required to utilize a development branch. The naming convention for a development branch should be
-`{Owner}[USE-CASE] Branch Name`, to provide clarity on the branch's purpose. For instance, `{Jane}[FINANCIAL REPORTING] New MSSQL data integration`.
+When creating or modifying configurations, use a development branch. Name it `{Owner}[USE-CASE] Branch Name` to show its purpose, like 
+`{Jane}[FINANCIAL REPORTING] New MSSQL data integration`.
 
-Components like data source connectors, applications, or transformations should always be executed in the development branch to ensure successful execution
-before merging changes into production.
+Run components like data source connectors, applications, and transformations in the development branch first to test them.
 
-Caution must be exercised with data destination components, as even from the development branch, there is a risk of overwriting data in the production data destination.
+Be careful with data destination connectors, as they can still overwrite production data.
 
 ## Security Principles
-> *This section should encompass any particular security principles adhered to by your organization.
-> While some principles may not be enforceable through platform settings, Organization admins can monitor them using Telemetry data.*
+> *Include your organization’s specific security principles here. The platform might not directly enforce some,
+> but Organization admins can monitor them using telemetry data.*
 >
-> *Below, we suggest some of the commonly followed principles.*
+> *Here are some of the commonly followed principles:*
 
-- Only project owners can invite users to their projects.
-- Each user must have an MFA (multi-factor authentication) enabled.
-- Development of any changes must be performed in a development branch only.
-- No credentials such as passwords, tokens or keys should be stored in plain text of configurations (e.g., you must not use a python Transformation for integration with an API that requires a token authentication).
-- Always consult with a project owner before using data destination components to write data out of projects.
+- Only project owners invite users to their projects.
+- Every user must enable an MFA (multi-factor authentication).
+- All changes should be made in a development branch.
+- Don’t store sensitive information like passwords, tokens, or keys in plain text in configurations (e.g., don’t use a Python transformation for integration with an API that requires a token authentication).
+- Consult the project owner before using data destination components to write data out of projects.
   
 ### Admin Project
-> *In many organizations, especially those with multiple projects, creating a dedicated Admin project is a common practice.
-> This Admin project serves as a centralized hub for Organization administrators to effectively manage and analyze the Organization's Telemetry data.
-> For a more detailed understanding, refer to the [Keboola Governance Guide](/tutorial/onboarding/governance-guide/).*
+> *For organizations with multiple projects, creating a dedicated admin project is helpful. This is a central hub for administrators to manage
+> and analyze telemetry data. Find more details in the [Keboola Governance Guide](/tutorial/onboarding/governance-guide/).*
 
-Our Admin project link – [https://connection.keboola.com/admin/projects/XXX](https://connection.keboola.com/admin/projects/)
+Our admin project link: [https://connection.keboola.com/admin/projects/XXX](https://connection.keboola.com/admin/projects/)
 
-The project is used to extract organization telemetry data and prepare it for visualization and reporting.
+The project extracts the organization's telemetry data and prepares it for visualization and reporting.
