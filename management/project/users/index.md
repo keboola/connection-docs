@@ -23,7 +23,7 @@ All operations performed by a user are technically done using the
 
 ## User Roles
 
-There are four user roles available:
+There are the following user roles available:
 
 - **Share** – the user has full administrative access to the project, including sharing data in the [Data Catalog](/catalog/).
     _Note: The Share role can only be granted by an [organization member](/management/organization/)._
