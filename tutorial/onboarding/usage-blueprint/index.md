@@ -5,20 +5,17 @@ permalink: /tutorial/onboarding/usage-blueprint/
 
 > Welcome to your personalized [Keboola Platform Usage Blueprint Document](/tutorial/onboarding/keboola-platform-usage-blueprint-document.pdf)! 
 > 
-> *This comprehensive guide is designed to serve as a foundation for crafting your customized documentation. 
-> Each section outlines its purpose and recommends content, providing you with a framework that can be tailored to your organization's specific principles
-> and details. As you navigate through this document, notes formatted for guidance will accompany you, ensuring a seamless and
-> straightforward customization process. Feel free to delete these notes once you've incorporated your unique insights and details into your personalized
-> blueprint. Let's embark on this journey of building a tailored documentation resource that aligns perfectly with your organization's needs and practices.*
+> *This detailed guide helps you create your own documentation, explaining each part and what to include.
+> It's designed to fit your organization's specific needs and values. You'll find helpful notes throughout to make customization easy.
+> Once you've added your own details, you can remove these notes. Let's start creating documentation that matches your organization's unique requirements!*
 
 * TOC
 {:toc}
 
 ## Getting Access to the Keboola Platform 
 ### Keboola Administration
-> *In the initial stages, you'll need to identify your Keboola Organization administrators who will have the authority to create new Keboola projects
-> and invite initial users. It is generally recommended to keep the number of Organization administrators limited, typically ranging from 2 to 4,
-> based on the organization's size.*
+> *At the start, choose a few people (usually 2 to 4, depending on how big your organization is) to be your Keboola Organization administrators.
+> They'll have the power to set up new Keboola projects and add the first users. It's best to keep this group small.*
 
 **Keboola Organization admin** is a role with permissions to:
 - Leave and re-enter all existing projects in the organization.
@@ -34,23 +31,22 @@ Our Keboola organization administrators are:
 - Name, [email3@company.com](email3@company.com)
 
 #### User requesting access to a project
-> *Usually, Keboola Administrators maintain a list of current projects, including the project owner or lead project engineer.
-> Users are directed to this list to contact the project owner directly. The project owner can then follow the guide in our public documentation
-> to invite the user into a project.*
+> *Usually, Keboola administrators keep a list of all current projects, project owners, and lead project engineers.
+> If you want access to a project, find the project leader on this list and ask them directly. They can use our public guide to add you to the project.*
 >
-> *It's important to note that if you are using a single-tenant Keboola deployment with customized identity and access management, such as Active Directory,
-> this process may not apply to you. In such cases, you should describe your organization's specific process for users to follow.*
+> *Keep in mind, if you use a single-tenant Keboola deployment with customized identity and access management, such as Active Directory,
+> this process may not apply to you. In that case, describe your organization's own process.*
 
-To request access to any of our existing Keboola projects, please contact the Project Owner directly to invite you to the project. Below is a list of our existing Keboola projects.
+To join an existing Keboola project, reach out to the **project owner** directly to invite you to the project. We’ve listed all our current projects below.
 
 | Project ID | Name | Description | Owner |
 |---|---|---|---|
 | 111 | [PROD] Marketing | Production project for marketing campaign automation | Jane Doe; jane@company.com |
 
 #### Member accessing a project
-> *Depending on your selection, you might be operating in a multi-tenant Azure (North Europe region), AWS (US or EU regions), or a GCP (Europe region) stack,
-> or in your dedicated single-tenant stack. The location of the deployment determines the root URL that'll take you to the platform's UI.
-> Please find the relevant link for your deployment:*
+> *Depending on your selection, you might be operating in a multi-tenant Azure (North Europe region), AWS (US or EU regions),
+> or GCP (Europe region) stack, or a dedicated single-tenant stack. The location of the stack determines the base URL that’ll take you to the platform’s UI.
+> Check below for the link that matches your stack:*
 >
 > *Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin/)
 > AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
@@ -58,27 +54,25 @@ To request access to any of our existing Keboola projects, please contact the Pr
 > GCP EU: [TODO Please insert the link for GCP EU]
 > Single tenant stack: All relevant information is available within your Production Design document.*
 
-Navigate to the login site of our Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
-After you log in, you'll see a list of projects you have access to. Click on the selected project name to access the project environment.
+Navigate to the login site of the Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
+After you log in, you'll see a list of projects you can access. Click on the selected project name to access the project environment.
 
 #### Requesting a new project
-If you wish to develop your own use-cases in Keboola, please reach out to one of the Organization administrators mentioned above to create a project for you.
+If you wish to develop your own use cases in Keboola, reach out to one of the Organization administrators mentioned above to create a project for you.
 
-> *To request the creation of a new project, the requester should get in touch with a Keboola Administrator.
-> The Organization Administrator holds the exclusive role of managing Keboola projects.*
+> *To have a new project created, contact a Keboola administrator. Organization administrators are the only ones who can set up Keboola projects.*
 >
-> *The specific process may vary for each organization. In larger organizations, it is common to implement a questionnaire or form that users can use
-> to request a project. This form often provides administrators with additional details they may need for the project creation process.*
+> *TThe way to request a new project might vary based on the company size. In larger companies, using a form or questionnaire for project requests is common.
+> This helps give the administrators the extra information they need to create the project.*
 
 #### User termination
-Terminated users must be manually removed from all projects they are members of. Keboola Organization administrators can leverage Telemetry data 
-(refer to the [**Keboola Governance Guide**](/tutorial/onboarding/governance-guide/) for more details) to identify the projects and 
-subsequently remove users from individual projects.
+Terminated users must be manually removed from all projects they are members of. Keboola Organization administrators can use telemetry data 
+(see the [**Keboola Governance Guide**](/tutorial/onboarding/governance-guide/) for more details) to determine which projects to remove them from.
 
-Alternatively, Project Owners can take the responsibility to remove terminated users from their respective projects.
+Or, project owners can remove the terminated user themselves.
 
-It's important to note that removing a user from a project will not affect any configurations created by them. Configurations will still remain usable 
-and functional after the user is removed.
+***Note:** Removing a user from a project will not affect any configurations they set up. 
+All their configurations will remain usable and functional after the user is removed.*
 
 ### Project Naming Conventions
 > *It is advisable to establish and uphold naming conventions for project names. The chosen names should be clear and indicative of the project's purpose.
@@ -117,7 +111,8 @@ To invite or remove a user from your project, please refer to the official steps
 > and simpler to manage and navigate. Keep in mind that the following is just a suggestion, as there is no universally recognized best practice
 > for naming conventions.*
 
-All configurations for Keboola components, including data source and data destination connectors, Transformations, Workspaces, Flows, and others, along with any Storage objects created, are required to adhere to the standard naming conventions outlined below.
+All configurations for Keboola components, including data source and data destination connectors, transformations, workspaces, flows, and others, 
+along with any Storage objects created, are required to adhere to the standard naming conventions outlined below.
 
 #### Component configurations
 The name of each component (data source/data destination connector or application) should include a use case/category (if possible), a domain (if applicable), 
