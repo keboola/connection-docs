@@ -68,7 +68,7 @@ Some examples of these custom metrics include:
    - Keep track of weekly, monthly, or other periodic changes in the activity of individual projects, users, or specific configurations. This aids in identifying sudden increases in project activity or specific transformations that may require optimization.
 4. **Configuration health metrics**
    - Monitor whether created flows have assigned schedules and notifications.
-   - Ensure that configurations have descriptions and adhere to naming conventions specified in the [**Platform Usage Blueprint**](/tutorial/onboarding/usage/blueprint/).
+   - Ensure that configurations have descriptions and adhere to naming conventions specified in the [**Platform Usage Blueprint**](/tutorial/onboarding/usage-blueprint/).
 5. **User 360**
    - Verify whether users have multi-factor authentication (MFA) enabled.
    - Identify the projects to which users have access.
