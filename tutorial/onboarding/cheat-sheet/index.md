@@ -12,12 +12,12 @@ the core building blocks of a standard use case in Keboola.
 {:toc}
 
 ## Extracting Data from Sources
-### Proper User Credentials
+### User Credentials
 When working with data source components in Keboola, proper authorization is crucial. This involves providing credentials and connection details for source 
 databases or relevant tokens and API keys for extracting data from services. It is advisable to use technical user credentials created specifically for Keboola 
 integrations, as using the credentials of a real person may present challenges related to permissions, potential changes or terminations, and password resets.
 
-### Accessibility of Your Data Sources
+### Accessibility of Data Sources
 Ensure that the data sources you intend to integrate are accessible from the Keboola platform. Internal databases running on on-premise servers or private clouds 
 may not be accessible by default. In such cases, consider whitelisting Keboola's IP addresses, establishing an SSH tunnel (if supported by the Keboola component), 
 or requesting Keboola to set up a VPN server. Collaboration with administrators or owners of the data source on your side, coupled with support from the Keboola 
@@ -28,7 +28,7 @@ When integrating typical data sources such as MS SQL Server, PostgreSQL, MySQL, 
 extract everything without evaluating necessity. This approach can lead to unnecessary credit spending. It is recommended to initially extract a limited batch of 
 data to verify its relevance before proceeding with a full replication of the entire data history from the source.
 
-### Incremental Fetching and Incremental Loading
+### Incremental Fetching and Loading
 **Incremental fetching:** Keboola's ability to read data from the source in increments, either through specific parameters or Keboola's incremental fetching 
 options in database connectors, is beneficial for larger datasets. This setup is particularly useful when the full extraction time exceeds that of extracting 
 increments only.
@@ -40,7 +40,7 @@ matching primary key values. Incremental load without a primary key set would al
 It's important to note that certain connectors may automatically implement both incremental fetching and loading without requiring manual setup by users. 
 This information is usually highlighted in the configuration UI, providing users with transparency about the implemented behaviour.
 
-### Optimizing with Parallelization 
+### Optimize with Parallelization 
 To optimize the overall runtime of your pipeline, consider employing parallelization to execute multiple configurations simultaneously. It's essential to recognize that while parallelization can significantly reduce the total runtime, each individual job consumes credits independently. Therefore, parallelization is a tool for optimizing the execution timeline rather than cost.
 
 **Where to apply parallelization:**
@@ -66,12 +66,12 @@ but there is a limit on the maximum parallel Storage jobs in a project. In multi
 slots, potentially extending the overall runtime. The default limit for parallel Storage jobs is 10, but it can be increased through Keboola Support.
 
 ## Developing a Transformation
-### Using a Workspace for Development
+### Using a Workspace
 It's common for users to directly dive into the Transformations section of the UI to set up and test scripts. However, this approach may not be optimal. Executing a transformation component, whether it involves Python, R, or SQL transformations, always incurs some overhead from the component execution layered on top of the script execution. This can result in unnecessary credit consumption during code debugging.
 
 Our recommendation is to start by creating a Workspace for development purposes. Develop and test your code within the Workspace environment. Once your script is functioning correctly, you can then transfer it to a Transformation configuration and execute it, ensuring more efficient credit usage.
 
-### Input and Output Mapping in a Transformation
+### Input and Output Mapping
 Every transformation operates within its designated, temporary transformation workspace. When a Transformation is executed, it establishes this distinct 
 workspace, which is isolated from the primary Keboola Storage. Consequently, within your code, you cannot directly access all Storage Objects; instead, you must 
 load selected Storage objects into your transformation using an input mapping.
@@ -186,13 +186,13 @@ This is beneficial for tasks that may regularly fail due to specific conditions,
 Alternatively, it is suitable for independent tasks whose failure does not impact the rest of the flow. However, monitoring execution statuses becomes crucial to 
 promptly address potential errors and implement necessary fixes.
 
-### Notifications for Insightful Monitoring
+### Notifications for Monitoring
 For a seamless execution of your use-cases, staying informed about errors or unusual execution times in your flows is crucial. Configure **notifications** 
 within your flow to receive timely updates. Teams often opt to configure a group mailbox for specific user groups, ensuring that all team members receive 
 notifications regarding errors, warnings, or instances where the flow runs longer than the expected duration. This proactive approach enhances awareness and 
 facilitates prompt responses to any issues that may arise. 
 
-### Automating Flows with Scheduled Execution
+### Automating Flows
 **Date & Time Schedule:** The most common setup for automating flows involves scheduling them to run at specific time slots. In a multi-tenant stack, it's 
 advisable to avoid peak time slots, such as midnight, to optimize resource availability. A simple adjustment, like scheduling your flow for 0:15 am, can 
 positively impact execution, minimizing competition for resources within the multi-tenant environment.
@@ -213,7 +213,7 @@ attempting to write data to a destination. Frequently, specific privileges are e
 spectrum of users within an organization. Insufficient permissions often manifest as errors when writing data to a destination. In such cases, Keboola Support is 
 available to assist in identifying the specific permissions required for a particular component.
 
-### Who You’re Providing Access to Data
+### Who Gets Access to Data
 In the Keboola project, you have a precise understanding of who can access the integrated data. However, when writing data to a destination, whether it's a 
 database, object storage, or an API/service, you are essentially extending access to those data to users who have privileges for that specific destination. It is 
 crucial to be vigilant and ensure that you do not inadvertently share your data with unintended recipients.
@@ -239,7 +239,7 @@ handling of data updates, tailored to the specific requirements of the destinati
 ### Caution Before Data Writing
 To be straightforward, it's crucial to thoroughly understand the implications of your actions. While Keboola offers a straightforward process for restoring data in case of accidental corruption, this may not hold true for the destination where you intend to write your data. The restoration of data in such destinations can be challenging, and in certain instances, it might even be impossible. Therefore, exercising heightened caution is strongly advised. Make sure you are well-informed and deliberate in your decisions when it comes to writing data, recognizing that the ease of recovery in Keboola may not necessarily extend to all destinations.
 
-## Understanding Job Log and Troubleshooting
+## Job Log and Troubleshooting
 Whether you're a seasoned data engineer or just starting out, encountering errors during development is inevitable. 
 Here are some tips for effectively troubleshooting errors.
 
