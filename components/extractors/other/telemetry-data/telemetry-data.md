@@ -286,6 +286,8 @@ data in storage, and the number of users. This combines data from different data
 * `Snowflake Sandbox` - `kbc_snowflake_stats` (records with **sandbox** *snowflake_job_type*)
 * `Transfromations` - `kbc_job` (jobs with **SQL** *transformation_type*)
 * `Writers` - `kbc_job` (jobs with **writer** *component_type*)
+* `BAPI Messages` - Buffer API (data streams) usage; only aggregated values available
+* `BAPI Receiver` - Buffer API endpoints used; only aggregated values available
 
 *Note: `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
@@ -327,6 +329,11 @@ organization, or the Keboola Connection platform itself.
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `47949_kbc-us-east-1` |
 | `context_admin_email` | Email of the user in the context with the event (e.g., invitation or admin removal) | `john.doe@keboola.com` |
 | `context_admin_name` | Name of the user in the context with the event (e.g., invitation or admin removal) | `Martin Matejka` |
+| `context_merge_request_id` | ID of the merge request (related to branch merge request events in SOX projects) | `42` |
+| `context_merge_request_name` | Name of the merge request (related to branch merge request events in SOX projects) | `Update of my configuration` |
+| `context_operation` | Type of the merge request operation (`request_review`, `finish_review`, `approve`, `merge`, `publish`) | `request_review` |
+| `context_state_from` | Original state of the merge request operation (`development`, `in_review`, `approved`, `in_merge`) | `in_review` |
+| `context_state_to` | End state of the merge request operation (`in_review`, `approved`, `in_merge`, `published`) | `approved` |
 
 #### Security event operations
 
@@ -436,6 +443,8 @@ organization, or the Keboola Connection platform itself.
 |`auditLog.storageBackendConnection.deleted`
 |`auditLog.storageBackendConnection.listed`
 |`auditLog.storageBackendConnection.updated`
+|`auditLog.mergeRequest.created`
+|`auditLog.mergeRequest.stateChanged`
 
 #### Operation parameters
 
@@ -569,6 +578,30 @@ This table shows data about flow tasks.
 | `task_configuration_id_num` | Numeric identifier of the task configuration | `952663182` |
 | `task_kbc_component_id` | Unique KBC component identifier | `keboola.wr-db-snowflake_kbc-us-east-1` |
 | `task_kbc_component_configuration_id` | Foreign key to the flow component configuration | `7880_kbc-us-east-1_keboola.wr-db-snowflake_952663182` |
+
+### kbc_job_input_table
+This table shows data about all input tables of the job.
+
+| **Column** | **Description** | **Example** | 
+|---|---|---|
+| `kbc_job_id` (PK) | KBC flow task identifier | `963416992_kbc-us-east-1` |
+| `kbc_project_id` | Foreign key to the KBC project | `7880_kbc-us-east-1` |
+| `table_id` | Identifier of the table | `in.c-in_sh_kbc_internal.kbc_project` |
+| `kbc_project_table_id` (PK) | Foreign key to the KBC Table | `7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_project` |
+| `table_name` | Name of the table | `kbc_project` |
+| `mappings` | Number of times the table was used in the job input (i.e., one table can be used multiple times in the input mapping of the transformation) | `1` |
+
+### kbc_job_output_table
+This table shows data about all output tables of the job.
+
+| **Column** | **Description** | **Example** | 
+|---|---|---|
+| `kbc_job_id` (PK) | KBC flow task identifier | `909588277_kbc-us-east-1` |
+| `kbc_project_id` | Foreign key to the KBC project | `7880_kbc-us-east-1` |
+| `table_id` | Identifier of the table | `out.c-kbc_billing.kbc_event` |
+| `kbc_project_table_id` (PK) | Foreign key to the KBC Table | `7880_kbc-us-east-1_out.c-kbc_billing.kbc_event` |
+| `table_name` | Name of the table | `kbc_event` |
+| `mappings` | Number of times the table was used in the job output (i.e., one table can be written multiple times to the storage in the output mapping of the transformation) | `1` |
 
 ### kbc_notification_subscription
 This table shows data subscriptions to notifications sent by Keboola Connection (mostly flow notifications).

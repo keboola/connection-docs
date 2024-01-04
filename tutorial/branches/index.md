@@ -1,5 +1,5 @@
 ---
-title: Development Branches
+title: "Part 6: Development Branches"
 permalink: /tutorial/branches/
 ---
 
