@@ -3,7 +3,7 @@ title: Keboola Platform Usage Blueprint
 permalink: /tutorial/onboarding/usage-blueprint/
 ---
 
-> Welcome to your personalized [Keboola Platform Usage Blueprint Document](/tutorial/onboarding/keboola-platform-usage-blueprint-document.pdf)! 
+> Welcome to your personalized Keboola Platform Usage Blueprint Document! 
 > 
 > *This detailed guide helps you create your own documentation, explaining each part and what to include.
 > It's designed to fit your organization's specific needs and values. You'll find helpful notes throughout to make customization easy.
@@ -14,10 +14,10 @@ permalink: /tutorial/onboarding/usage-blueprint/
 
 ## Getting Access to the Keboola Platform 
 ### Keboola Administration
-> *At the start, choose a few people (usually 2 to 4, depending on how big your organization is) to be your Keboola Organization administrators.
+> *At the start, choose a few people (usually 2 to 4, depending on how big your organization is) to be your Keboola organization administrators.
 > They'll have the power to set up new Keboola projects and add the first users. It's best to keep this group small.*
 
-**Keboola Organization admin** is a role with permissions to:
+**Keboola organization admin** is a role with permissions to:
 - Leave and re-enter all existing projects in the organization.
 - View and edit billing details.
 - Manage [shared buckets](/catalog/#sharing-types).
@@ -58,7 +58,7 @@ Navigate to the login site of the Keboola platform here: [https://connection.keb
 After you log in, you'll see a list of projects you can access. Click on the selected project name to access the project environment.
 
 #### Requesting a new project
-If you wish to develop your own use cases in Keboola, reach out to one of the Organization administrators mentioned above to create a project for you.
+If you wish to develop your own use cases in Keboola, reach out to one of the organization administrators mentioned above to create a project for you.
 
 > *To have a new project created, contact a Keboola administrator. Organization administrators are the only ones who can set up Keboola projects.*
 >
@@ -66,7 +66,7 @@ If you wish to develop your own use cases in Keboola, reach out to one of the Or
 > This helps give the administrators the extra information they need to create the project.*
 
 #### User termination
-Terminated users must be manually removed from all projects they are members of. Keboola Organization administrators can use telemetry data 
+Terminated users must be manually removed from all projects they are members of. Keboola organization administrators can use telemetry data 
 (see the [**Keboola Governance Guide**](/tutorial/onboarding/governance-guide/) for more details) to determine which projects to remove them from.
 
 Or, project owners can remove the terminated user themselves.
@@ -81,7 +81,7 @@ All their configurations will remain usable and functional after the user is rem
 >
 > *In the following example, we use numerical codes like 00, 10, and 20 to show project levels, but you can also use L0, L1, L2, or other styles.*
 
-All projects in our company follow this naming convention:
+All projects in our organizaation follow this naming convention:
 
 `[STAGE]{Domain - optional}[Region - optional] Project Name`
 
