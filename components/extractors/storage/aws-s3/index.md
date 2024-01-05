@@ -64,7 +64,9 @@ You can add the following policy document as an inline policy to an AWS user:
 Select `Role` as the **Login Type**. Create a role in your AWS account using the following steps:
 
  - Go to the [IAM Console](https://console.aws.amazon.com/iam/home?#/roles) and click **Create role**. Then click **Another AWS account**.
- - For **Account ID**, use `147946154733`.
+ - For **Account ID**
+   - use `206948715642` for stack `connection.europe-west3.gcp.keboola.com` 
+   - use `147946154733` for all other stacks
  - For **External ID**, enter the value from your project.
  - **Do not enable the setting to Require MFA (multi-factor authentication)**.
  - On the next page, attach the policy:
