@@ -7,9 +7,9 @@ permalink: /tutorial/onboarding/usage-blueprint/
 > 
 > *This detailed guide helps you create your own documentation, explaining each part and what to include.
 > It's designed to fit your organization's specific needs and values. You'll find helpful notes throughout to make customization easy.
-> Once you've added your own details, you can remove these notes. Download the file and let's start creating documentation that matches your organization's unique requirements!*
+> Once you've added your details, you can remove these notes. Download [this file](/tutorial/onboarding/usage-blueprint/), and start creating documentation matching your organization's unique requirements!*
 >
-> You can view a sample of the content from the Platform Usage Blueprint document below.
+> *You can view a sample of the content from the Platform Usage Blueprint document below.*
 
 * TOC
 {:toc}
@@ -204,7 +204,7 @@ Only users with `organization admin` or `share` role permissions can share bucke
 
 As a rule, avoid sharing data from higher to lower stages/layers. Limit sharing within the same stage/layer unless necessary.
 
-In the example below we use levels 00, 10, 15, 20 as an equivalent to L0, L1, L15 and L2.
+In the example below, we use levels 00, 10, 15, and 20 as equivalents to L0, L1, L15, and L2.
 
 **Sharing from level 00**
 - Share only with 10-level projects.
@@ -216,7 +216,7 @@ In the example below we use levels 00, 10, 15, 20 as an equivalent to L0, L1, L1
 - Share only `OUT` stage buckets. Share tables into the output buckets using table aliases if no transformation is needed.
 
 **Sharing from level 20**
-- Do not share with 00 or 10/15 level projects.
+- Do not share with 00- or 10- or 15-level projects.
 - The outputs of level 20 projects typically consist of data products that are ready for consumption in BI tools, applications, or other contexts.
 
 **Linking buckets**
