@@ -90,6 +90,31 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `20.67.181.161`
 - `149.72.196.5` - Used only for email delivery.
 
+## connection.europe-west3.gcp.keboola.com
+For projects in the GCP EU Frankfurt [region](/overview/#regions) (GCP region `europe-west3`),
+the following IP addresses are currently used:
+
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
+- `35.234.119.197`
+- `34.141.46.49`
+- `35.246.230.46`
+- `34.107.122.61`
+- `34.141.48.196`
+- `34.159.107.55`
+- `35.198.95.119`
+- `34.141.105.82`
+- `34.159.221.111`
+- `34.141.110.244`
+- `34.159.45.34`
+- `34.159.249.35`
+- `34.141.102.89`
+- `34.141.53.119`
+- `34.107.117.166`
+- `34.89.161.253`
+- `149.72.196.5` - Used only for email delivery.
+
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
 download the [kbc-public-ip.json](/components/ip-addresses/kbc-public-ip.json) file.
