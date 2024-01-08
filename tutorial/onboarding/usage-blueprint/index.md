@@ -7,7 +7,9 @@ permalink: /tutorial/onboarding/usage-blueprint/
 > 
 > *This detailed guide helps you create your own documentation, explaining each part and what to include.
 > It's designed to fit your organization's specific needs and values. You'll find helpful notes throughout to make customization easy.
-> Once you've added your own details, you can remove these notes. Let's start creating documentation that matches your organization's unique requirements!*
+> Once you've added your own details, you can remove these notes. Download the file and let's start creating documentation that matches your organization's unique requirements!*
+>
+> You can view a sample of the content from the Platform Usage Blueprint document below.
 
 * TOC
 {:toc}
@@ -51,7 +53,7 @@ To join an existing Keboola project, reach out to the **project owner** directly
 > - Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin/)
 > - AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
 > - AWS US: [https://connection.keboola.com/admin](https://connection.keboola.com/admin)
-> - GCP EU: [TODO Please insert the link for GCP EU]
+> - GCP EU: [https://connection.europe-west2.gcp.keboola.com](https://connection.europe-west2.gcp.keboola.com)
 > - Single tenant stack: All relevant information is available within your Production Design document.
 
 Navigate to the login site of the Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
@@ -81,7 +83,7 @@ All their configurations will remain usable and functional after the user is rem
 >
 > *In the following example, we use numerical codes like 00, 10, and 20 to show project levels, but you can also use L0, L1, L2, or other styles.*
 
-All projects in our organizaation follow this naming convention:
+All projects in our organization follow this naming convention:
 
 `[STAGE]{Domain - optional}[Region - optional] Project Name`
 
@@ -169,7 +171,7 @@ The following naming conventions are for objects you create yourself.
 For Storage buckets, tables, and columns:
 1. Use uppercase `SNAKE_CASE` naming.
 2. Don't use `OUT` buckets for temporary tables. `OUT` buckets should only have data that's ready to use. See Keboola's documentation for more on IN and OUT Storage buckets [here](/storage/buckets/).
-3. Marke buckets from the [Data Catalog](/catalog/) as `SHARED`, like `SHARED_REPORTING_FINANCIAL`.
+3. Mark buckets from the [Data Catalog](/catalog/) as `SHARED`, like `SHARED_REPORTING_FINANCIAL`.
 4. Be specific with names. Instead of `MAIN`, use something descriptive like `SALES_METRICS`. Even in specific projects, use `SALES_MAIN` rather than just `MAIN`.
 5. Clearly separate IN/OUT Storage stages:
    - IN stage: Incoming data, like raw data or shared buckets 
@@ -202,13 +204,20 @@ Only users with `organization admin` or `share` role permissions can share bucke
 
 As a rule, avoid sharing data from higher to lower stages/layers. Limit sharing within the same stage/layer unless necessary.
 
+In the example below we use levels 00, 10, 15, 20 as an equivalent to L0, L1, L15 and L2.
+
 **Sharing from level 00**
 - Share only with 10-level projects.
-- Share only `OUT` stage buckets. Share tables into the output buckets using aliases if no transformation is needed.
+- Share only `OUT` stage buckets. Share tables into the output buckets using table aliases if no transformation is needed.
 
-**Sharing from 1+ stages**
-- Use `SHARED` as a prefix for shared output buckets.
-- Share buckets only from the `OUT` stage.
+**Sharing from level 1+**
+- Do not share with 00-level projects.
+- Try to limit sharing to other level 10 projects if possible.
+- Share only `OUT` stage buckets. Share tables into the output buckets using table aliases if no transformation is needed.
+
+**Sharing from level 20**
+- Do not share with 00 or 10/15 level projects.
+- The outputs of level 20 projects typically consist of data products that are ready for consumption in BI tools, applications, or other contexts.
 
 **Linking buckets**
 - Buckets from other projects are always in the `IN` stage, prefixed with `SHARED` and a reference to the input project.
