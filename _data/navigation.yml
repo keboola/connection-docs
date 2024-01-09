@@ -173,6 +173,9 @@ items:
               - url: /components/extractors/marketing-sales/google-analytics/
                 title: Google Analytics  (UA, GA4)
 
+              - url: /components/extractors/marketing-sales/google-dv360/
+                title: Google Display & Video 360
+
               - url: /components/extractors/marketing-sales/google-my-business/
                 title: Google My Business
 
