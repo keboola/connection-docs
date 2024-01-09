@@ -24,7 +24,7 @@ Each IP address has a unique name like `outbound-if-issue-contact-support-at-keb
 This enhancement helps us promptly tackle network issues or unauthorized access. 
 
 ## connection.keboola.com
-For projects in the default AWS US [region](/overview/#regions) (AWS region `us-east-1`), 
+For projects in the default AWS US [region](/overview/#stacks) (AWS region `us-east-1`), 
 the following IP addresses are currently used for all new projects:
 
 {% comment %}
@@ -52,7 +52,7 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.eu-central-1.keboola.com
-For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`),
+For projects in the AWS EU [region](/overview/#stacks) (AWS region `eu-central-1`),
 the following IP addresses are currently used for all new projects:
 
 {% comment %}
@@ -77,7 +77,7 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.north-europe.azure.keboola.com
-For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
+For projects in the Azure EU [region](/overview/#stacks) (Azure region `north-europe`), 
 the following IP addresses are currently used:
 
 {% comment %}
@@ -91,7 +91,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `149.72.196.5` - Used only for email delivery.
 
 ## connection.europe-west3.gcp.keboola.com
-For projects in the GCP EU Frankfurt [region](/overview/#regions) (GCP region `europe-west3`),
+For projects in the GCP EU Frankfurt [region](/overview/#stacks) (GCP region `europe-west3`),
 the following IP addresses are currently used:
 
 {% comment %}
