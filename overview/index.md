@@ -136,12 +136,13 @@ This section explains a few terms that are often used throughout these documenta
 ### Stacks
 The Keboola platform is available in multiple stacks, these can be either multi-tenant or single-tenant. The current multi-tenant stacks are:
 
-- US AWS – [connection.keboola.com](https://connection.keboola.com/),
-- EU AWS – [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com/),
-- EU Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/).
+- US Virginia AWS – [connection.keboola.com](https://connection.keboola.com/),
+- EU Frankfurt AWS – [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com/).
+- EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/).
+- EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
 A **stack** is a combination of a datacenter location (region) and a cloud provider, and is identified by its domain (URL). The currently supported cloud 
-providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/en-us/). A stack is a completely independent full instance 
+providers are [Amazon AWS](https://aws.amazon.com/), [Microsoft Azure](https://azure.microsoft.com/en-us/) and [Google Cloud](https://cloud.google.com/). A stack is a completely independent full instance 
 of Keboola platform services. That means that if you have projects in multiple stacks, you need to have multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 

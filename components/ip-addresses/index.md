@@ -24,7 +24,7 @@ Each IP address has a unique name like `outbound-if-issue-contact-support-at-keb
 This enhancement helps us promptly tackle network issues or unauthorized access. 
 
 ## connection.keboola.com
-For projects in the default AWS US [region](/overview/#regions) (AWS region `us-east-1`), 
+For projects in the default AWS US [region](/overview/#stacks) (AWS region `us-east-1`), 
 the following IP addresses are currently used for all new projects:
 
 {% comment %}
@@ -52,7 +52,7 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.eu-central-1.keboola.com
-For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`),
+For projects in the AWS EU [region](/overview/#stacks) (AWS region `eu-central-1`),
 the following IP addresses are currently used for all new projects:
 
 {% comment %}
@@ -77,7 +77,7 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.north-europe.azure.keboola.com
-For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
+For projects in the Azure EU [region](/overview/#stacks) (Azure region `north-europe`), 
 the following IP addresses are currently used:
 
 {% comment %}
@@ -88,6 +88,31 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `20.82.252.129`
 - `20.82.252.124`
 - `20.67.181.161`
+- `149.72.196.5` - Used only for email delivery.
+
+## connection.europe-west3.gcp.keboola.com
+For projects in the GCP EU Frankfurt [region](/overview/#stacks) (GCP region `europe-west3`),
+the following IP addresses are currently used:
+
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
+- `35.234.119.197`
+- `34.141.46.49`
+- `35.246.230.46`
+- `34.107.122.61`
+- `34.141.48.196`
+- `34.159.107.55`
+- `35.198.95.119`
+- `34.141.105.82`
+- `34.159.221.111`
+- `34.141.110.244`
+- `34.159.45.34`
+- `34.159.249.35`
+- `34.141.102.89`
+- `34.141.53.119`
+- `34.107.117.166`
+- `34.89.161.253`
 - `149.72.196.5` - Used only for email delivery.
 
 ## IP Address Ranges in JSON
