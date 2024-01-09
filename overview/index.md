@@ -142,7 +142,7 @@ The Keboola platform is available in multiple stacks, these can be either multi-
 - EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
 A **stack** is a combination of a datacenter location (region) and a cloud provider, and is identified by its domain (URL). The currently supported cloud 
-providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/en-us/). A stack is a completely independent full instance 
+providers are [Amazon AWS](https://aws.amazon.com/), [Microsoft Azure](https://azure.microsoft.com/en-us/) and [Google Cloud](https://cloud.google.com/). A stack is a completely independent full instance 
 of Keboola platform services. That means that if you have projects in multiple stacks, you need to have multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
