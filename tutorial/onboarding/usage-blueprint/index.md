@@ -7,7 +7,7 @@ permalink: /tutorial/onboarding/usage-blueprint/
 > 
 > *This detailed guide helps you create your own documentation, explaining each part and what to include.
 > It's designed to fit your organization's specific needs and values. You'll find helpful notes throughout to make customization easy.
-> Once you've added your details, you can remove these notes. Download [this file](/tutorial/onboarding/usage-blueprint/), and start creating documentation matching your organization's unique requirements!*
+> Once you've added your details, you can remove these notes. Download [this file](/tutorial/onboarding/usage-blueprint/keboola-platform-usage-blueprint-document.docx), and start creating documentation matching your organization's unique requirements!*
 >
 > *You can view a sample of the content from the Platform Usage Blueprint document below.*
 
