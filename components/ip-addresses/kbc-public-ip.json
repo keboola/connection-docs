@@ -205,6 +205,108 @@
             "vendor": "azure",
             "region": "north-europe",
             "service": "email-delivery"
+        },
+        {
+            "ipPrefix": "35.234.119.197/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.141.46.49/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.246.230.46/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.107.122.61/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.141.48.196/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.159.107.55/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.198.95.119/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.141.105.82/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.159.221.111/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.141.110.244/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.159.45.34/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.159.249.35/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.141.102.89/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.141.53.119/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.107.117.166/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.89.161.253/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "149.72.196.5/32",
+            "vendor": "gcp",
+            "region": "europe-west3",
+            "service": "email-delivery"
         }
     ]
 }

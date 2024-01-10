@@ -176,6 +176,9 @@ items:
               - url: /components/extractors/marketing-sales/google-cm360/
                 title: Google Campaign Manager 360
 
+              - url: /components/extractors/marketing-sales/google-dv360/
+                title: Google Display & Video 360
+
               - url: /components/extractors/marketing-sales/google-my-business/
                 title: Google My Business
 
