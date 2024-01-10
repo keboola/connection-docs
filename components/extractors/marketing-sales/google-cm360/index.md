@@ -9,7 +9,7 @@ permalink: /components/extractors/marketing-sales/google-cm360/
 [Google Campaign Manager 360](https://support.google.com/campaignmanager/answer/2709362?hl=en) orchestrates digital advertising campaigns, offering precise ad placements across multiple
 channels. 
 
-This connector enables easy retrieval of Campaign Manager 360 reports **from multiple Ad Accounts** and provides versatile report management functionalities:
+This connector enables easy retrieval of Campaign Manager 360 reports **from multiple ad accounts** and provides versatile report management functionalities:
 
 1. Define customized reports directly in the UI, tailoring data extraction to specific requirements.
 2. Easily select multiple reports with identical structures across different accounts, streamlining data aggregation.
@@ -27,7 +27,7 @@ The connector supports three modes:
 1. **Template-Based Report Execution:** Use an existing report definition as a template and execute it across selected accounts.
    - It's ideal if you need to define a complex report in the [CM360 Report Builder](https://www.google.com/analytics/dfa/) and use it across multiple accounts. 
    - The selected report is left untouched, and its copy is created in all selected accounts. The resulting reports are linked to the configuration. Naming convention: `keboola_generated_{PROJECT_ID}_{CONFIG_ID}_{ROWID}`
-2. **Running and Downloading Existing Report Definitions**: Suitable for multiple identical reports across required Ad Accounts, previously defined using the [CM360 Report Builder](https://support.google.com/campaignmanager/answer/2823849?sjid=16894252783161215189-EU&visit_id=638403222303021904-3691116343&rd=1).
+2. **Running and Downloading Existing Report Definitions**: Suitable for multiple identical reports across required ad accounts, previously defined using the [CM360 Report Builder](https://support.google.com/campaignmanager/answer/2823849?sjid=16894252783161215189-EU&visit_id=638403222303021904-3691116343&rd=1).
 3. **Direct UI Report Definition:** Define simple report definition directly in the configuration UI, automatically creating an offline report in the [CM360 Report Builder](https://www.google.com/analytics/dfa/) that will be linked to the configuration. Naming convention: `keboola_generated_{PROJECT_ID}_{CONFIG_ID}_{ROWID}`
 
 ### Creating and Running Reports from Existing Report Definitions
@@ -47,7 +47,7 @@ To use an existing report as a template, follow these steps:
 
 ### Running Existing Reports
 
-This option is suitable when you already have multiple identical reports defined across required Ad Accounts.
+This option is suitable when you already have multiple identical reports defined across required ad accounts.
 
 To run an existing report, follow these steps:
 1. Define your report in the [CM360 Report Builder](https://www.google.com/analytics/dfa/) (see the official [documentation](https://support.google.com/campaignmanager/answer/2823849?sjid=16894252783161215189-EU&visit_id=638403222303021904-3691116343&rd=1)).
