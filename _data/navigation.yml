@@ -228,7 +228,10 @@ items:
                 title: Twitter
 
               - url: /components/extractors/social/youtube/
-                title: YouTube
+                title: YouTube Data API
+
+              - url: /components/extractors/social/youtube-reporting/
+                title: YouTube Reporting
 
           - url: /components/extractors/storage/
             title: Storage

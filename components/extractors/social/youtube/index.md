@@ -1,5 +1,5 @@
 ---
-title: YouTube
+title: YouTube Data API
 permalink: /components/extractors/social/youtube/
 redirect_from:
     - /extractors/social/youtube/
@@ -10,10 +10,11 @@ redirect_from:
 {:toc}
 
 This extractor uses the [YouTube Data API](https://developers.google.com/youtube/v3/docs/) to extract data
-about your YouTube channels or your YouTube activity.
+about your YouTube channels or your YouTube activity. It is suitable to get basic information about your channels, playlists, and videos.
 
-For analytics and reporting, use the [Google Analytics extractor](/components/extractors/marketing-sales/google-analytics/) or the 
-[YouTube Reporting extractor](https://github.com/blueskydigital/keboola-ex-youtube-reporting/blob/master/README.md).
+**NOTE** This extractor is not suitable for analytics and reporting, for that purpose use the
+[YouTube Reporting extractor](/components/extractors/social/youtube-reporting/) or,
+alternatively [Google Analytics extractor](/components/extractors/marketing-sales/google-analytics/).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **YouTube** extractor.
