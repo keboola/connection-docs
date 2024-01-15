@@ -37,8 +37,8 @@ To define the parameters, use the [Isochrone API Playground](https://docs.mapbox
 |---|---|
 | Routing profile | Profile used for calculating travel time or distance |
 | Source coordinate columns | Names of columns in the input table with [decimal degree](https://en.wikipedia.org/wiki/Decimal_degrees) coordinates |
-| Contours type | Choose time or distance for isochrone calculations | 
-| Contours value | Specify one or multiple values and separate them by commas (in minutes for time, meters for distance). Maximum values are 60 minutes or 100,000 meters, respectively |
+| Contour type | Choose time or distance for isochrone calculations | 
+| Contour value | Specify one or multiple values and separate them by commas (in minutes for time, meters for distance). Maximum values are 60 minutes or 100,000 meters, respectively |
 | Generalize | A positive floating point value in meters for Douglas-Peucker generalization |
 | Polygons | Choose true for GeoJSON polygons or false for lines |
 | Destination table name (optional) | Name of the output table, defaults to configuration ID + endpoint name if not specified |
