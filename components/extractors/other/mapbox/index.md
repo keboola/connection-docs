@@ -6,7 +6,7 @@ permalink: /components/extractors/other/mapbox/
 * TOC
 {:toc}
 
-This data source connector enriches input data using outputs from the Mapbox API and currently supports two endpoints: Isochrone and Matrix.
+This data source connector enriches input data using outputs from the [Mapbox API](https://docs.mapbox.com/api/overview/) and currently supports two endpoints: Isochrone and Matrix.
 The first computes areas accessible within the same travel time and distance; the latter endpoint provides travel times or distances between numerous points.
 
 ## Prerequisites
