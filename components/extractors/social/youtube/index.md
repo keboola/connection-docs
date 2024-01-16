@@ -9,29 +9,28 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [YouTube Data API](https://developers.google.com/youtube/v3/docs/) to extract data
-about your YouTube channels or your YouTube activity. It is suitable to get basic information about your channels, playlists, and videos.
+The YouTube Data API source connector uses the [YouTube Data API](https://developers.google.com/youtube/v3/docs/) to extract data
+about your YouTube channels or your YouTube activity. It is ideal for obtaining basic information about your channels, playlists, and videos.
 
-**NOTE** This extractor is not suitable for analytics and reporting, for that purpose use the
-[YouTube Reporting extractor](/components/extractors/social/youtube-reporting/) or,
-alternatively [Google Analytics extractor](/components/extractors/marketing-sales/google-analytics/).
+***NOTE:** This extractor is not designed for analytics and reporting. Use the
+[YouTube Reporting](/components/extractors/social/youtube-reporting/) or the [Google Analytics](/components/extractors/marketing-sales/google-analytics/) data source connectors for such purposes.*
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **YouTube** extractor.
+To begin, [create a new configuration](/components/#creating-component-configuration) for the **YouTube** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
-To configure the extractor, choose one of the two predefined **templates**: 
+Select one of the two available **templates**: 
 
-- Channels -- returning info about your own channels
-- Videos -- returning info about your playlists and all their videos 
+- Channels: Provides information about your channels.
+- Videos: Offers details about your playlists and their associated videos. 
 
 {: .image-popup}
 ![Screenshot - Create configuration](/components/extractors/social/youtube/youtube-1.png)
 
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can [switch to the JSON editor](/components/extractors/other/generic/#template-mode) for more advanced configurations.
 
 ### Advanced Configuration
-To give a simple example, the configuration to get info about your own channel looks like this:
+To give a simple example, the configuration for details about your channel looks like this:
 
 {% highlight json %}
 {
@@ -45,14 +44,14 @@ To give a simple example, the configuration to get info about your own channel l
 }
 {% endhighlight %}
 
-If you do not know how to find out the correct endpoint, look to YouTube's [API documentation](https://developers.google.com/youtube/v3/docs/) and browse for, e.g., *Channels: list*. 
+To learn what is the correct endpoint, look to YouTube's [API documentation](https://developers.google.com/youtube/v3/docs/) and browse for, e.g., *Channels: list*. 
 Choose one of the predefined use cases, for instance, *list (my channel)*, and switch the example to CURL. 
-The endpoint is under `# HTTP URL:`, where you omit the base url `https://www.googleapis.com/youtube/v3/`.
+The endpoint is under `# HTTP URL:`, where you omit the base URL `https://www.googleapis.com/youtube/v3/`.
 
 {: .image-popup}
 ![Screenshot - YouTube API](/components/extractors/social/youtube/api_sample.png)
 
-You can use other [Generic Extractor's](/components/extractors/other/generic/) functionality too, including nesting. This example downloads your channel, iterates through its playlists and gets all their videos:
+You can use other [Generic Extractor's](/components/extractors/other/generic/) functionality, too, including nesting. This example downloads your channel, iterates through its playlists, and gets all their videos:
 
 {% highlight json %}
 {
