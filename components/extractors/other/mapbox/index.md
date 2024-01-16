@@ -28,6 +28,8 @@ Set a table input mapping, select the endpoint, and define specific parameters f
 
 Optionally, specify the output table name.
 
+When done, **save** the configuration.
+
 ### Isochrone Parameters
 For more information on the Isochrone API, see the official [Isochrone API documentation](https://docs.mapbox.com/api/navigation/isochrone/).
 
