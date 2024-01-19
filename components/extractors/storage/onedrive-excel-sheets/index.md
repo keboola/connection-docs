@@ -1,6 +1,6 @@
 ---
 title: OneDrive Excel Sheets
-permalink: /components/extractors/storage/onedrive/
+permalink: /components/extractors/storage/onedrive-excel-sheets/
 ---
 
 * TOC
@@ -23,18 +23,18 @@ Then click **Authorize Account** to [authorize the configuration](/components/#a
 Click **Add Table** to configure extraction.
 
 {: .image-popup}
-![Screenshot - Empty configuration](/components/extractors/storage/onedrive/onedrive-01.png)
+![Screenshot - Empty configuration](/components/extractors/storage/onedrive-excel-sheets/onedrive-01.png)
 
 Fill in the **name** and, optionally, the **description**. Then click **Add Table**.  
 These values will help you easily identify the extraction later.
 
 {: .image-popup}
-![Screenshot - Add table popup](/components/extractors/storage/onedrive/onedrive-02.png)
+![Screenshot - Add table popup](/components/extractors/storage/onedrive-excel-sheets/onedrive-02.png)
 
 **Use the file picker** to list accessible Excel files -- workbooks.
 
 {: .image-popup}
-![Screenshot - Use file picker](/components/extractors/storage/onedrive/onedrive-03.png)
+![Screenshot - Use file picker](/components/extractors/storage/onedrive-excel-sheets/onedrive-03.png)
 
 Go through the list and select a file. Click **Open** to confirm the file you want to import.
 
@@ -45,7 +45,7 @@ The file is specified by a **Drive ID** and by a **File ID**. They are automatic
 The **file name** is for your information only and changing it doesn't affect functionality.
 
 {: .image-popup}
-![Screenshot - Workbook config](/components/extractors/storage/onedrive/onedrive-05.png)
+![Screenshot - Workbook config](/components/extractors/storage/onedrive-excel-sheets/onedrive-05.png)
 
 Click **Load Worksheets** to select a worksheet from the workbook you configured in the previous step.
 
@@ -55,24 +55,24 @@ Click **Load Worksheets** to select a worksheet from the workbook you configured
 In the list that appeared, **click on the name** of the worksheet you want to import.
 
 {: .image-popup}
-![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-07.png)
+![Screenshot - Select worksheet](/components/extractors/storage/onedrive-excel-sheets/onedrive-07.png)
 
 The worksheet is specified by a **Worksheet ID**. It is automatically filled in.   
 The **worksheet name** is for your information only and changing it doesn't affect functionality.
 
 {: .image-popup}
-![Screenshot - Save](/components/extractors/storage/onedrive/onedrive-08.png)
+![Screenshot - Save](/components/extractors/storage/onedrive-excel-sheets/onedrive-08.png)
 
 The output **table name** is automatically filled in with the worksheet name.  
 You can manually change it to suit your needs. If the table doesn't exist, it will be created. 
 
 {: .image-popup}
-![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-09.png)
+![Screenshot - Select worksheet](/components/extractors/storage/onedrive-excel-sheets/onedrive-09.png)
 
 Click **Save** when you're done.
 
 {: .image-popup}
-![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-10.png)
+![Screenshot - Select worksheet](/components/extractors/storage/onedrive-excel-sheets/onedrive-10.png)
 
 ## Modify Configuration
 When a table is added to the extractor, it is displayed in the list of tables. 
@@ -80,7 +80,7 @@ When a table is added to the extractor, it is displayed in the list of tables.
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
 
 {: .image-popup}
-![Screenshot - Select worksheet](/components/extractors/storage/onedrive/onedrive-11.png)
+![Screenshot - Select worksheet](/components/extractors/storage/onedrive-excel-sheets/onedrive-11.png)
 
 Each table has a different setting, but all tables share the same authorization to your OneDrive account.
 
