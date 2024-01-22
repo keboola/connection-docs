@@ -3,7 +3,7 @@ title: Bring Your Own Database (BYODB)
 permalink: /storage/byodb/
 ---
 
-In certain cases you are able to use your own Snowflake account to host the data from Keboola Connection. Currently, we only support this for the Snowflake backend.  
+In certain cases you are able to use your own Snowflake/BigQuery account to host the data from Keboola Connection. Currently, we only support this for the Snowflake and BigQuery backend.  
 
 ## Snowflake
 
@@ -52,3 +52,29 @@ The dynamic backends feature requires you to have one Snowflake warehouse for ea
 
 {: .image-popup}
 ![Snowflake account schema](schema.png)
+
+## BigQuery
+
+
+## BigQuery limitations
+
+Google Cloud Computing services, which include BigQuery, have introduced several limitations on their services. The following limitations are significant from the perspective of Keboola, particularly for owners of Keboola storage accounts. These limitations directly impact Keboola services and require management.
+
+Some of these limits are flexible (soft limits), depending on your contract with Google. This determines if the limit can be adjusted and by how much.
+
+**Number of Projects**
+
+Upon reaching **20** projects, you need to submit a ticket on GCP. Based on this submission, the number of projects can either be increased or the request may be denied.
+
+The Keboola application generates one project in GCP for each project within Keboola. Additionally, there is one main project overseeing all others. Therefore, you can have 19 projects in the Keboola application (+1 reserved for management).
+
+**Number of Service Accounts**
+
+Service accounts serve various purposes. Each project contains at least one service user. For instance, each user is created per workspace/sandbox, which technically limits the creation of more than 99 workspaces simultaneously. [Workspaces](https://help.keboola.com/transformations/workspace/) are employed for numerous tasks in Keboola, such as requiring a dedicated workspace for each transformation.
+
+By default, each project can have up to **100** service accounts to control access to resources. You may request an increase in this quota if needed. For more information, see: Create service accounts  |  IAM Documentation  |  Google Cloud.
+
+----
+
+Additional BigQuery backend limits can be found here: Quotas and Limits  |  BigQuery  |  Google Cloud 
+
