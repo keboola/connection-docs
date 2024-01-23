@@ -56,7 +56,7 @@ of our standard order form under the Master Software Subscription Agreement (MSS
 
 ## Project Deletion
 
-If your project does not use any credits for 30 days, we will mark it as inactive and scheduled for deletion. 
+If your project does not use any minutes for 30 days, we will mark it as inactive and scheduled for deletion. 
 We will inform you about that, and send you several warning emails.
 
 Next, 45 days after marking your project as inactive, we will check it one more time, to make sure that it is still inactive 
