@@ -26,7 +26,7 @@ To obtain your API key, follow these steps in your ChartMogul web app:
 
 - Go to your **Profile** at the bottom left corner of the platform screen.
 - Select **Admin**.
-- Click on the user you wish to authorize as.
+- Click on the user you wish to authorize.
 - Then, select **API Keys**.
 
 ## Configuration
