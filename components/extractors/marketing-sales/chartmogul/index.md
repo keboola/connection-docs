@@ -38,23 +38,23 @@ Select the **endpoint** from which you want to get the data.
 
 ### Individual Endpoint Parameters
 
-- **Start date**: required for `key_metrics`, optional for `activities`
-    - Start date of the request (e.g., 2021-01-01, 1 day ago, 2 weeks ago)
-
-- **End date**: required for `key_metrics`, optional for `activities`
-    - End date of the request (e.g., 2021-01-01, 1 day ago, 2 weeks ago)
-    - Note: If an end date is specified for `activities`, a start date is also required.
+- **Start date**: Start date of the request (e.g., 2021-01-01, 1 day ago, 2 weeks ago)
+    -  Required for `key_metrics`, optional for `activities`
+      
+- **End date**: End date of the request (e.g., 2021-01-01, 1 day ago, 2 weeks ago)
+    - Required for `key_metrics`, optional for `activities`
+    - **Note:** If an end date is specified for `activities`, a start date is also required.
   
-- **Interval**: required for `key_metrics`
+- **Interval**: Required for `key_metrics`
     - day
     - week
     - month
      
-- **Geo**: optional for `key_metrics`
-    - A comma-separated list of ISO 3166-1 Alpha-2 formatted country codes to filter the results (e.g., US, GB, DE).
-  
-- **Plans**: optional for `key_metrics`
-    - A comma-separated list of plan names (as configured in your ChartMogul account) to filter the results.
-    - Note: Spaces must be URL-encoded, and the names are case-sensitive.
+- **Geo**: A comma-separated list of ISO 3166-1 Alpha-2 formatted country codes to filter the results (e.g., US, GB, DE)
+    - Optional for `key_metrics`
+        
+- **Plans**: A comma-separated list of plan names (as configured in your ChartMogul account) to filter the results
+    - Optional for `key_metrics`
+    - **Note:** Spaces must be URL-encoded, and the names are case-sensitive.
 
 Click **Save** when you’re done.
