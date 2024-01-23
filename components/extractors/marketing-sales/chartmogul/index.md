@@ -20,7 +20,7 @@ With this connector, you can quickly obtain the following data:
 - Key metrics for deeper insights
 
 ## Prerequisites
-To use this component, ensure you have an `Active` API key with `Read-only` access level.
+To use this component, ensure you have an `Active` API key with `Read` access level.
 
 To obtain your API key, follow these steps in your ChartMogul web app:
 
