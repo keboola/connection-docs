@@ -15,7 +15,7 @@ permalink: /transformations/bigquery/
 - Integrates with Google's data analytics ecosystem
 
 ## Limits
-- Individual queries have a [maximum run time](https://cloud.google.com/bigquery/quotas#query_jobs) of 2 hours by default, but you can adjust this by *Query timeout* parameter.
+- By default, individual queries have a [maximum run time](https://cloud.google.com/bigquery/quotas#query_jobs) of 2 hours, but you can adjust this using the *Query timeout* parameter.
 - There is a [limit on the number of tables](https://cloud.google.com/bigquery/quotas#tables) referenced by a single query.
 - While table updates are possible, BigQuery favors an append-only model where mutations are [generally discouraged](https://cloud.google.com/bigquery/docs/best-practices-costs#avoid_using_dml).
 
@@ -24,7 +24,7 @@ BigQuery is designed for flexibility and ease of use. Its integration with other
 
 ## Aborting Transformation Execution
 In some cases, you may need to abort the transformation execution and exit with an error message. 
-To abort the execution, set the `ABORT_TRANSFORMATION` variable to any nonempty string value. Variable is already declared internally, so you only need to set its value.
+To abort the execution, set the `ABORT_TRANSFORMATION` variable to any nonempty string value. The variable is already declared internally, so you only need to set its value.
 
 {% highlight sql %}
 SET ABORT_TRANSFORMATION = (
@@ -37,13 +37,14 @@ SET ABORT_TRANSFORMATION = (
 This example will set the `ABORT_TRANSFORMATION` variable value to `'Integrity check failed'` if the `INTEGRITY_CHECK` table
 contains one or more records with the `RESULT` column equal to the value `'failed'`.
 
-The transformation engine checks the `ABORT_TRANSFORMATION` after each successfully executed query and returns the value
-of the variable as a user error, `Transformation aborted: Integrity check failed.` in this case.
+The transformation engine checks `ABORT_TRANSFORMATION` after each successfully executed query and returns the variable's value
+as a user error, `Transformation aborted: Integrity check failed.` in this case.
 
 {: .image-popup}
 ![Screenshot - Transformation aborted](/transformations/bigquery/abort.png)
 
 [file.json](..%2F..%2F..%2F..%2FDownloads%2Ffile.json)
+
 ## Example
 To create a simple BigQuery transformation, follow these steps:
 
