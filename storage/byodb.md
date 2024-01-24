@@ -58,7 +58,7 @@ The dynamic backends feature requires you to have one Snowflake warehouse for ea
 
 ## BigQuery limitations
 
-Google Cloud Computing services, which include BigQuery, have introduced several limitations on their services. The following limitations are significant from the perspective of Keboola, particularly for owners of Keboola storage accounts. These limitations directly impact Keboola services and require management.
+Google Cloud Computing services, which include BigQuery, have introduced several limitations on their services. The following limitations are significant from the perspective of Keboola, particularly for customers that are using their own BigQuery or Google Cloud Storage as storage backends. These limitations directly impact Keboola services and require management.
 
 Some of these limits are flexible (soft limits), depending on your contract with Google. This determines if the limit can be adjusted and by how much.
 
@@ -70,7 +70,7 @@ The Keboola application generates one project in GCP for each project within Keb
 
 **Number of Service Accounts**
 
-Service accounts serve various purposes. Each project contains at least one service user. For instance, each user is created per workspace/sandbox, which technically limits the creation of more than 99 workspaces simultaneously. [Workspaces](https://help.keboola.com/transformations/workspace/) are employed for numerous tasks in Keboola, such as requiring a dedicated workspace for each transformation.
+Service accounts serve various purposes. Each project contains at least one service user. For instance, there is a user created per workspace/sandbox. This technically limits the existence of more than 99 workspaces at one time. [Workspaces](https://help.keboola.com/transformations/workspace/) are used for numerous tasks in Keboola. For example a dedicated workspace is created for each transformation. Note that it's deleted afterwards, so it counts toward the limit only during the runtime of the transformation job. 
 
 By default, each project can have up to **100** service accounts to control access to resources. You may request an increase in this quota if needed. For more information, see: [Create service accounts  |  IAM Documentation  |  Google Cloud](https://cloud.google.com/iam/docs/service-accounts-create#:~:text=By%20default%2C%20each%20project%20can,a%20quota%20increase%20if%20necessary.).
 
