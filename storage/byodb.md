@@ -64,7 +64,7 @@ Some of these limits are flexible (soft limits), depending on your contract with
 
 **Number of Projects**
 
-Upon reaching **20** projects, you need to submit a ticket on GCP. Based on this submission, the number of projects can either be increased or the request may be denied.
+Upon reaching **20** projects, you need to submit a ticket to Google Support. Based on this submission, the number of projects can either be increased or they may choose to deny the request.
 
 The Keboola application generates one project in GCP for each project within Keboola. Additionally, there is one main project overseeing all others. Therefore, you can have 19 projects in the Keboola application (+1 reserved for management).
 
