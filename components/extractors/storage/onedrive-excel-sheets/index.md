@@ -1,6 +1,8 @@
 ---
 title: OneDrive Excel Sheets
 permalink: /components/extractors/storage/onedrive-excel-sheets/
+redirect_from:
+    - /components/extractors/storage/onedrive/
 ---
 
 * TOC
