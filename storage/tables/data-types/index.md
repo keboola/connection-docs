@@ -1015,6 +1015,8 @@ A component may provide information about column data types in its data manifest
 
 _**Note:** When a table is created from base types, it uses default lengths and precisions of the target backend. For example, in Snowflake, this means, that the NUMBER base type is created as NUMBER(38,0), which might be unexpected if the source database column is NUMBER(10,2)._  
 
+_To work around this limitation, you can create the table in advance manually using [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) with the correct precisions. Subsequent jobs will write data to this table respecting your defintion as long as the structure matches. You will need to keep this in mind in case you need to drop and recreate the table. If you let a job create it, it will again use the incorrect type from the basetype._ 
+
 For example, this is how you can create typed tables in a Snowflake SQL transformation that will be imported to storage as typed tables: 
 
 ```sql
