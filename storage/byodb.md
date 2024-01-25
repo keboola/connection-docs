@@ -28,7 +28,7 @@ possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/al
 
 ### Rules for Accessing Snowflake Objects Created by Keboola
 * Do not modify grants of any resource prefixed with `KEBOOLA_` (`SAPI_` for `https://connection.keboola.com` stack), unless explicitly approved by Keboola on a case-by-case basis. 
-* Do not modify the root role, warehouse, or user created when registering the backend.
+* Do not modify the root role created when registering the backend.
 * Do not modify the warehouse created when registering the backend.
 * Do not modify the user created when registering the backend.
 * Do not modify the project databases (`KEBOOLA_$PROJECTID`).
