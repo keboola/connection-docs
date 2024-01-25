@@ -592,6 +592,9 @@ items:
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
 
+      - url: /transformations/bigquery/
+        title: BigQuery Transformations
+
       - url: /transformations/redshift-plain/
         title: Redshift Transformations
 
