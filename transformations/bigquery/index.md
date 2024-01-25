@@ -44,8 +44,6 @@ as a user error, `Transformation aborted: Integrity check failed.` in this case.
 {: .image-popup}
 ![Screenshot - Transformation aborted](/transformations/bigquery/abort.png)
 
-[file.json](..%2F..%2F..%2F..%2FDownloads%2Ffile.json)
-
 ## Example
 To create a simple BigQuery transformation, follow these steps:
 
