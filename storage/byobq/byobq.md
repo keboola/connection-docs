@@ -25,7 +25,7 @@ permalink: /storage/byobq/
 2.	Set the **Project name** to “Keboola Main”.
 3.	In **Location**, choose the previously created folder. Click **Create**.
 4.	Once the project is created, select it by clicking **Select Project** in the notification or find the project using the selector in the top left corner of the Google console.
-5.	Ensure that **billing is enabled** for your Google Cloud project ([Verify billing enabled[(https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console)).
+5.	Ensure that **billing is enabled** for your Google Cloud project ([Verify billing enabled](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console)).
 
 ## Enable API Services 
 [Learn more](https://cloud.google.com/endpoints/docs/openapi/enable-api#enabling_an_api)
@@ -48,25 +48,45 @@ permalink: /storage/byobq/
     - In the **Keys** tab, click **Add Key** and select **Create New Key**.
     - Choose JSON as the key type and click **Create**. The key file will be downloaded to your system. This file is needed for the Keboola BigQuery registration form.
 4.	Assign roles to the service account:
-  a.	Assign **Project Roles** to the service account.
-    - Go to **IAM & Admin -> IAM** in the project.
-    - Click **Grant Access** and copy the service account’s email address into the **New principal** field.
-    - Select the role **Basic -> Owner**.
-    - Click **Save**.
-  b.	Assign **Folder Roles** to the service account:
-    - Paste your folder name or ID into the search bar and select it.
-    - In the **IAM & Admin** section, go to **IAM**.
-    - Click **Grant Access** and enter the service account’s email address.
-    - Select the role **Basic -> Browser**.
-    - Click **Add Another Role**.
-    - Select the role **Resource manager -> Project Creator**.
-    - Click **Save**.
-c.	Assign **Billing Roles** to the service account:
-•	Open the **Billing** section from the navigation menu in your project.
-•	In the **Overview** section, find the card with the **Billing account** with your billing account name and its ID.
-•	Click on the **Manage** link.
-•	Click **Add Principal**.
-•	Paste the principal email address of the service account created earlier.
-•	Select the role **Billing → Billing Account User**.
-•	Click **Save**.
+    - Assign **Project Roles** to the service account.
+        - Go to **IAM & Admin -> IAM** in the project.
+        - Click **Grant Access** and copy the service account’s email address into the **New principal** field.
+        - Select the role **Basic -> Owner**.
+        - Click **Save**.
+    - Assign **Folder Roles** to the service account:
+        - Paste your folder name or ID into the search bar and select it.
+        - In the **IAM & Admin** section, go to **IAM**.
+        - Click **Grant Access** and enter the service account’s email address.
+        - Select the role **Basic -> Browser**.
+        - Click **Add Another Role**.
+        - Select the role **Resource manager -> Project Creator**.
+        - Click **Save**.
+    - Assign **Billing Roles** to the service account:
+        - Open the **Billing** section from the navigation menu in your project.
+        - In the **Overview** section, find the card with the **Billing account** with your billing account name and its ID.
+        - Click on the **Manage** link.
+        - Click **Add Principal**.
+        - Paste the principal email address of the service account created earlier.
+        - Select the role **Billing → Billing Account User**.
+        - Click **Save**.
 
+## Create a Google Cloud Storage Bucket 
+[Learn more](https://cloud.google.com/storage/docs/creating-buckets#create_a_new_bucket)
+
+1.	Navigate to **Cloud Storage => Buckets**. Click **Create Bucket**.
+2.	**Name the bucket**, e.g., “keboola-yourorganization-files”. The bucket name must be globally unique, so choose a custom name.
+3.	**Choose the region** where your data will be store. IMPORTANT: The bucket must be set in the EU region; otherwise, the registration of the BigQuery backend in Keboola will be rejected.
+4.	Set **other options** as desired. We recommend checking _Enforce public access prevention on this bucket_. Click **Create**.
+5.	Once the bucket is created, select the **Lifecycle** tab and click **Add Rule**.
+    - Select the action **Delete Object**.
+        - Click **Continue**.
+    - Under **Select object condition => Set Rule Scopes**, select **Object Name Matches Prefix**. 
+        - Set the prefix to `exp-2/`.
+    - Under **Select object condition => Set Conditions**, select `Age`. 
+        - Set the age to `2 days`.
+        - Click **Create**.
+    - Repeat the previous steps for the prefix `exp-15/` with an age of `15 days`.
+6.	Select the **Permissions** tab and click **Grant Access**.
+    - Paste the principal email address of the service account created earlier.
+    - Under **Select a Role**, choose **Cloud Storage -> Storage Object Admin**.
+        - Click **Save**.
