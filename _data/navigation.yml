@@ -544,6 +544,9 @@ items:
           - url: /storage/byodb/external-buckets/
             title: External Buckets
 
+      - url: /storage/byobq/
+        title: Bring Your Own BigQuery
+
   - url: /orchestrator/
     title: Orchestrations
     items:
