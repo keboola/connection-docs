@@ -152,6 +152,9 @@ items:
               - url: /components/extractors/marketing-sales/bigcommerce/
                 title: BigCommerce
 
+              - url: /components/extractors/marketing-sales/chartmogul/
+                title: ChartMogul
+
               - url: /components/extractors/marketing-sales/criteo/
                 title: Criteo
 
@@ -254,8 +257,11 @@ items:
               - url: /components/extractors/storage/storage-api/
                 title: Keboola Connection Storage
 
-              - url: /components/extractors/storage/onedrive/
-                title: OneDrive
+              - url: /components/extractors/storage/onedrive-excel-sheets/
+                title: OneDrive Excel Sheets
+
+              - url: /components/extractors/storage/onedrive-files/
+                title: OneDrive Files
 
           - url: /components/extractors/other/
             title: Other
