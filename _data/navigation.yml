@@ -152,6 +152,9 @@ items:
               - url: /components/extractors/marketing-sales/bigcommerce/
                 title: BigCommerce
 
+              - url: /components/extractors/marketing-sales/chartmogul/
+                title: ChartMogul
+
               - url: /components/extractors/marketing-sales/criteo/
                 title: Criteo
 
@@ -228,7 +231,10 @@ items:
                 title: Twitter
 
               - url: /components/extractors/social/youtube/
-                title: YouTube
+                title: YouTube Data API
+
+              - url: /components/extractors/social/youtube-reporting/
+                title: YouTube Reporting
 
           - url: /components/extractors/storage/
             title: Storage
@@ -591,6 +597,9 @@ items:
 
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
+
+      - url: /transformations/bigquery/
+        title: BigQuery Transformations
 
       - url: /transformations/redshift-plain/
         title: Redshift Transformations
