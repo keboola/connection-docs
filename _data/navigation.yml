@@ -152,6 +152,9 @@ items:
               - url: /components/extractors/marketing-sales/bigcommerce/
                 title: BigCommerce
 
+              - url: /components/extractors/marketing-sales/chartmogul/
+                title: ChartMogul
+
               - url: /components/extractors/marketing-sales/criteo/
                 title: Criteo
 
