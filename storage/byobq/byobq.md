@@ -6,6 +6,9 @@ permalink: /storage/byobq/
 * TOC
 {:toc}
 
+This guide is designed to walk you through the essential processes of setting up and configuring various Google Cloud resources for connecting your BigQuery 
+and related services to your Keboola project. From creating a dedicated folder in your Google organization to creating a project and a service account, 
+each section is tailored to ensure a smooth and efficient setup.
 
 {: .image-popup}
 ![How to connect BigQuery](/storage/byobq/pic.png)
@@ -19,13 +22,13 @@ permalink: /storage/byobq/
 4.	On the **Resource Manager** page, uncollapse the organization, locate your created folder, and copy its ID to the Keboola BigQuery registration form.
 
 ## Create a Project 
-[**Learn more**](https://cloud.google.com/resource-manager/docs/creating-managing-folders)
+[**Learn more**](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project)
 
 1.	In the Resource Manager, click **Create Project**.
 2.	Set the **Project name** to “Keboola Main”.
 3.	In **Location**, choose the previously created folder. Click **Create**.
 4.	Once the project is created, select it by clicking **Select project** in the notification or find the project using the selector in the top left corner of the Google console.
-5.	Ensure that **billing is enabled** for your Google Cloud project ([Verify billing enabled](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console)).
+5.	Ensure that **billing is enabled** for your Google Cloud project ([verify that billing is enabled](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console)).
 
 ## Enable API Services 
 [**Learn more**](https://cloud.google.com/endpoints/docs/openapi/enable-api#enabling_an_api)
@@ -74,7 +77,7 @@ permalink: /storage/byobq/
 
 1.	Navigate to **Cloud Storage > Buckets**. Click **Create Bucket**.
 2.	**Name the bucket**, e.g., “keboola-yourorganization-files”. The bucket name must be globally unique, so choose a custom name.
-3.	**Choose the region** where your data will be stored. IMPORTANT: The bucket must be set in the EU region; otherwise, the registration of the BigQuery backend in Keboola will be rejected.
+3.	**Choose the region** where your data will be stored. **Important**: The bucket must be set in the EU region; otherwise, the registration of the BigQuery backend in Keboola will be rejected.
 4.	Set **other options** as desired. We recommend checking _Enforce public access prevention on this bucket_. Click **Create**.
 5.	Once the bucket is created, select the **Lifecycle** tab and click **Add rule**.
     - Select the action **Delete object** and click **Continue**.
