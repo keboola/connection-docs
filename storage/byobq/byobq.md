@@ -73,7 +73,7 @@ each section is tailored to ensure a smooth and efficient setup.
         - Paste the principal email address of the service account created earlier.
         - Select the role **Billing > Billing Account User** and click **Save**.
 
-## Create a Google Cloud Storage Bucket 
+## Create a Google Storage Bucket 
 [**Learn more**](https://cloud.google.com/storage/docs/creating-buckets#create_a_new_bucket)
 
 1.	Navigate to **Cloud Storage > Buckets**. Click **Create Bucket**.
