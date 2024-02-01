@@ -3,33 +3,29 @@ title: Keboola Governance Guide
 permalink: /tutorial/onboarding/governance-guide/
 ---
 
-Welcome to the Keboola Governance Guide! Governance, in the context of our platform, encompasses a spectrum of activities related to tracking, understanding usage, cost management, and maintaining adherence to security and other principles outlined in your [Keboola Platform Usage Blueprint](/tutorial/onboarding/usage-blueprint/).
+Welcome to the Keboola Governance Guide! Here, we cover everything you need to know about managing and monitoring your use of our platform, 
+including keeping track of usage, managing costs, and adhering to security and other rules you've set in your [Keboola Platform Usage Blueprint](/tutorial/onboarding/usage-blueprint/).
 
-**If you have any questions or need further assistance, feel free to reach out to our support team.**
+**If you have any questions or need further assistance, our support team is here for you.**
 
 * TOC
 {:toc}
 
 ## Understanding Platform Activity
-### Leveraging Telemetry Data
-The Keboola platform captures metadata for every operation within its ecosystem. This encompasses the configuration of each component, user interactions, 
-and the execution of every job. In the background, Keboola systematically processes the raw metadata, transforming it into a well-documented
-[telemetry data model](/components/extractors/other/telemetry-data). Accessing this telemetry data for your project is facilitated through a dedicated data source 
+### Using Telemetry Data
+Keboola collects metadata about every operation happening on the platform, including how components are set up, how users interact, and every job that runs.
+This metadata is processed into a user-friendly [telemetry data model](/components/extractors/other/telemetry-data) that you can check out through a special 
 connector called Telemetry Data.
 
-For optimal governance, it is advisable to establish a distinct Admin project, wherein the Organization mode of the Telemetry Data connector can be 
-employed. In instances where organizations operate with a limited number of projects, a straightforward approach involves integrating the Telemetry Data connector 
-within one of the existing projects. 
+We recommend creating a separate Admin project to use the Organization mode of the Telemetry Data connector.
+If you're working with just a few projects, you can simply add the Telemetry Data connector to one of them.
 
-**Enabling Organization mode in the Telemetry Data data source connector:**  
-To activate the Organization mode within the Telemetry Data connector, kindly reach out to our Support team or directly contact your account manager. 
-They will ensure that this specific option is enabled for your account, allowing you to leverage telemetry data in an organizational context.
+**To turn on Organization mode in the Telemetry Data connector:**  
+Get in touch with our support team or your account manager. They'll switch on this feature for your account, helping you get a comprehensive view of your project's telemetry data.
 
 #### Activity center
-The activity center represents an advanced feature within the Telemetry Data connector, accessible to customers with the Activity Center add-on included in their 
-contract. This mode offers a more comprehensive view, providing intricate details about individual components. It includes additional information such as 
-**detailed metadata** for storage and other objects, user **activities**, and **specifics regarding job** inputs and outputs. This detailed insight is 
-particularly valuable for robust data lineage tracking and advanced usage analysis.
+The Activity Center add-on represents an advanced feature within the Telemetry Data connector for those who have it included in their contract. 
+It give a deeper look into your data, showing **detailed metadata** about each component, like storage details, user **activities**, and **specifics regarding job** inputs and outputs. This extra detail is great for closely tracking your data's journey and advanced usage analysis.
 
 ### Monitoring and Analysis
 For comprehensive oversight, basic metrics are readily available in the form of a project dashboard on the **Project Consumption** page. 
