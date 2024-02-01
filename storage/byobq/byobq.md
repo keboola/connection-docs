@@ -54,7 +54,8 @@ each section is tailored to ensure a smooth and efficient setup.
     1. Assign **Project Roles** to the service account.
         - Go to **IAM & Admin > IAM** in the project.
         - Click **Grant access** and copy the service account’s email address into the **New principal** field.
-        - Select the role **Basic > Owner**.
+        - Select the role **Basic > Owner**. Click **Save**.
+        - Click **Add another role** and select **Cloud Storage > Storage Object Admin**.
         - Click **Save**.
     2. Assign **Folder Roles** to the service account:
         - Paste your folder name or ID into the search bar and select it.
@@ -62,7 +63,7 @@ each section is tailored to ensure a smooth and efficient setup.
         - Click **Grant access** and enter the service account’s email address.
         - Select the role **Basic > Browser**.
         - Click **Add another role**.
-        - Select the role **Resource Manager -> Project Creator**.
+        - Select the role **Resource Manager > Project Creator**.
         - Click **Save**.
     3. Assign **Billing Roles** to the service account:
         - Open the **Billing** section from the navigation menu in your project.
@@ -72,7 +73,7 @@ each section is tailored to ensure a smooth and efficient setup.
         - Paste the principal email address of the service account created earlier.
         - Select the role **Billing > Billing Account User** and click **Save**.
 
-## Create a Google Cloud Storage Bucket 
+## Create a Google Storage Bucket 
 [**Learn more**](https://cloud.google.com/storage/docs/creating-buckets#create_a_new_bucket)
 
 1.	Navigate to **Cloud Storage > Buckets**. Click **Create Bucket**.
@@ -84,6 +85,3 @@ each section is tailored to ensure a smooth and efficient setup.
     - Under **Select object condition > Set rule scopes**, select **Object Name Matches Prefix** and set the prefix to `exp-2/`.
     - Under **Select object condition > Set conditions**, select `Age`. Set the age to `2 days`and click **Create**.
     - Repeat the previous steps for the prefix `exp-15/` with an age of `15 days`.
-6.	Select the **Permissions** tab and click **Grant access**.
-    - Paste the principal email address of the service account created earlier.
-    - Under **Select a role**, choose **Cloud Storage > Storage Object Admin** and click **Save**.
