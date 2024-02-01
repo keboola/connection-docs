@@ -6,68 +6,57 @@ permalink: /tutorial/onboarding/
 * TOC
 {:toc}
 
-Welcome to the Keboola onboarding guide, your go-to resource for navigating the initial stages of your journey with our platform. 
-Whether you've completed your proof of concept project or graduated beyond the [free tier](https://connection.north-europe.azure.keboola.com/wizard), 
-this guide is designed to be your compass. 
+Welcome to the Keboola onboarding guide! Whether you've completed your proof of concept project or are stepping up 
+from the [free tier](https://connection.north-europe.azure.keboola.com/wizard), this guide will help you navigate through. 
 
-If you're looking for a comprehensive overview of the Keboola platform, you can find it [here](https://help.keboola.com/overview/). Let's embark on this onboarding adventure together!
+Check out the complete overview of the Keboola platform [here](https://help.keboola.com/overview/).
 
 ## Build a Solid Foundation
-While it's exciting to start working on your project, we suggest beginning with careful planning. 
-Establishing fundamental building blocks early on will be a sturdy foundation throughout your entire Keboola platform experience. 
-Depending on the scale of your contract, some points may not be applicable—especially if you've opted for just one or two Keboola projects. 
-Some of the following steps can be skipped in such situations:
+We recommend starting with a good plan. It will give you a good foundation for your further work with Keboola. If your plan is smaller, 
+covering maybe one or two Keboola projects, you might not need all these steps. Here's what you might skip if that's the case:
 
 1. [Create a Keboola Platform Usage Blueprint](#create-a-keboola-platform-usage-blueprint)
-2. [Optional: Design a Multi-Project Architecture](#design-a-multi-project-architecture)
+2. [Design a Multi-Project Architecture](#design-a-multi-project-architecture) (optional)
 3. [Business Data Model Methodology](#business-data-model-methodology)
 4. [Keboola Governance Details](#keboola-governance-details)
    
 ### Create a Keboola Platform Usage Blueprint
-Utilize our [template](https://keboola.atlassian.net/wiki/spaces/KB/pages/3130458213) to design a blueprint tailored to your organization's needs.
+Use our [template](https://keboola.atlassian.net/wiki/spaces/KB/pages/3130458213) to create a blueprint that fits your company. This includes:
 
-- Identify organization administrators.
-- Establish rules for project access requests, considering the need for an approval process.
-- Identify key contact points.
-- Define ground rules, including naming conventions and security principles.
+- Selecting organization administrators.
+- Setting up a project access request system, possibly with approval steps.
+- Choosing main contacts.
+- Laying down basic rules, including naming and security guidelines.
 
 ### Design a Multi-Project Architecture
 This step is fully **optional**.
 
-- Use our [MPA guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/2523430919) for assistance.
-- Multi-project architecture involves dividing data processing pipelines among multiple blocks represented by individual Keboola projects.
+Check out our guide for creating a [multi-project setup](https://keboola.atlassian.net/wiki/spaces/KB/pages/2523430919), which helps organize 
+data tasks across several Keboola projects.
 
-#### Business Data Model Methodology
-   - Explore Keboola’s Business Data Model (BDM) methodology, detailed in our [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3139600519/Business+Data+Model+BDM+Guide).
-   - The BDM aligns seamlessly with multi-project architecture, ensuring flexibility and efficiency in accommodating changes in source systems.
-
+### Business Data Model Methodology
+Our Business Data Model [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3139600519/Business+Data+Model+BDM+Guide)
+helps you to keep your data flexible and efficient, especially useful with multiple projects.
+ 
 ### Keboola Governance Details
-- Consult our [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3138420748) for insights into Keboola governance.
-- Learn how to leverage Keboola telemetry data for monitoring platform usage, including cost monitoring.
-- Understand different levels of security-related monitoring, incorporating best practices.
-
-Embark on your Keboola journey with a well-thought-out plan, setting the stage for a successful and streamlined experience.
+Our governance [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3138420748) teaches you to monitor usage and costs, plus enhance security.
 
 ## Get Your Hands On!
-It's time to roll up your sleeves and dive into the practical implementation! The hands-on experience with the platform is crucial, 
-and we're here to guide you through it effectively. Recognizing that different user roles demand varying levels of understanding, 
-our platform caters to analysts, data engineers, advanced analysts, and developers alike.
+It's time to get practical:
 
-- **Analysts:** Benefit from data ready for analysis in Keboola.
-- **Data Engineers:** Utilize all Keboola features for pipeline development and automation.
-- **Advanced Analysts:** Leverage Keboola's secure analytical workspaces for a range of exercises, from data analytics to developing machine learning models.
-- **Developers:** Explore extending the platform by creating new components or integrating Keboola APIs.
+- **Analysts:** Get you data analysis-ready.
+- **Data Engineers:** Use Keboola's full range of features for pipeline development and automation.
+- **Advanced Analysts:** Use our secure analytical workspaces for everything from analytics to machine learning.
+- **Developers:** Add to the platform with new components or API integration.
 
-Here are links to valuable resources tailored for your journey:
-- Start with a comprehensive [Keboola Introduction](https://academy.keboola.com/courses/introduction-2023)
-- Follow up with [General Best Practices](https://academy.keboola.com/courses/best-practices-2023) 
-- Troubleshoot, debug and find support through our [Debugging Techniques lesson](https://academy.keboola.com/courses/debug-techniques)
-- For those interested in extending the platform by developing new components, check out this [short video](https://www.youtube.com/watch?v=IhET2hDD_1w) and [related documentation](https://developers.keboola.com/extend/). Learn the fundamentals of Keboola Components in respective [academy lessons here](https://academy.keboola.com/courses/common-components-and-processors).
+### Helpful Resources 
+- Start with our [Keboola Introduction](https://academy.keboola.com/courses/introduction-2023).
+- Check out [General Best Practices](https://academy.keboola.com/courses/best-practices-2023). 
+- Solve probles with our [Debugging Techniques](https://academy.keboola.com/courses/debug-techniques).
+- Developers, see this [video](https://www.youtube.com/watch?v=IhET2hDD_1w) and [documentation](https://developers.keboola.com/extend/) on making new components. Learn more in our [academy lessons](https://academy.keboola.com/courses/common-components-and-processors).
 
 ## Cheat Sheet: Embracing Best Practices
-Navigating the expansive landscape of the Keboola platform involves mastering numerous features and functionalities. 
-While encapsulating all the best practices in a single document can be challenging, we've compiled a cheat sheet with key points to guide you 
-through the process of configuring components, developing transformations, automating flows, and running jobs in Keboola. 
-Access your cheat sheet [here](https://keboola.atlassian.net/wiki/spaces/KB/pages/3136978980/Cheat+Sheet+Embracing+Best+Practices).
+Mastering Keboola means knowing how to set up components, automate workflows, and more. 
+Here’s a [cheat sheet](https://keboola.atlassian.net/wiki/spaces/KB/pages/3136978980/Cheat+Sheet+Embracing+Best+Practices) to help you along.
 
-Now, let's get hands-on and make the most of your Keboola experience!
+Enjoy exploring Keboola!
