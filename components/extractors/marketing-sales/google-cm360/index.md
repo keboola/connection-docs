@@ -34,7 +34,7 @@ The connector supports three modes:
 This option is helpful if you need to define a complex report in the [CM360 Report Builder](https://www.google.com/analytics/dfa/) and use it across multiple accounts. 
 The selected report is left untouched, and its copy is created in all selected accounts. The resulting reports are linked to the configuration.
 
-The naming convention of the created report is: `keboola_generated_{PROJECT_ID}_{CONFIG_ID}_{ROWID}
+The naming convention of the created report is: `keboola_generated_{PROJECT_ID}_{CONFIG_ID}_{ROWID}`
 
 All results are downloaded into a single table.
 
