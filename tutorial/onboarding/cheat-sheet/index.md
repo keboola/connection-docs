@@ -1,32 +1,27 @@
----
+--
 title: "Cheat Sheet: Best Practices"
 permalink: /tutorial/onboarding/cheat-sheet/
 ---
 
-In the diverse landscape of Keboola, the nature and design of your use-case may vary widely. Whether you are orchestrating the automation of your data pipeline 
-processing through Flows or configuring components like data sources, data destinations, applications, or transformations, this document serves as a guide to 
-essential best practices. Regardless of the intricacies of your project, these recommendations aim to optimize your workflow and ensure a smooth experience with 
-the core building blocks of a standard use case in Keboola.
+How you use Keboola can differ significantly. From setting up automated data pipelines with Flows to managing components such as data sources, destinations, 
+apps, or transformations, this guide outlines key best practices to improve your workflow and enhance your experience, no matter the complexity of your project.
 
 * TOC
 {:toc}
 
-## Extracting Data from Sources
-### User Credentials
-When working with data source components in Keboola, proper authorization is crucial. This involves providing credentials and connection details for source 
-databases or relevant tokens and API keys for extracting data from services. It is advisable to use technical user credentials created specifically for Keboola 
-integrations, as using the credentials of a real person may present challenges related to permissions, potential changes or terminations, and password resets.
+## Data Source Extraction
+### Using the Right Credentials
+When using Keboola's source connectors, correct authorization is important: credentials and connection details for source databases, or tokens and API keys for 
+services. It's best to use technical user credentials made just for Keboola integrations to provent problems with permission, account changes, or password resets 
+that personal credentials might cause.
 
-### Accessibility of Data Sources
-Ensure that the data sources you intend to integrate are accessible from the Keboola platform. Internal databases running on on-premise servers or private clouds 
-may not be accessible by default. In such cases, consider whitelisting Keboola's IP addresses, establishing an SSH tunnel (if supported by the Keboola component), 
-or requesting Keboola to set up a VPN server. Collaboration with administrators or owners of the data source on your side, coupled with support from the Keboola 
-team, will help address any accessibility issues.
+### Making Data Sources Available
+Make sure Keboola can reach the data sources you want to use. Databases on internal servers or in private clouds might not be accessible by default. In such 
+cases, whitelist Keboola's IP addresses, establish an SSH tunnel (if supported by the Keboola component), or request Keboola to set up a VPN server. Your data 
+source's administrators or owners along with Keboola's support team can solve any access problems.
 
-### What You're Extracting
-When integrating typical data sources such as MS SQL Server, PostgreSQL, MySQL, or services like Google Analytics and Facebook Ads, resist the temptation to 
-extract everything without evaluating necessity. This approach can lead to unnecessary credit spending. It is recommended to initially extract a limited batch of 
-data to verify its relevance before proceeding with a full replication of the entire data history from the source.
+### Choosing What to Extract
+Before pulling data from sources like MS SQL Server, PostgreSQL, MySQL, Google Analytics, or Facebook Ads, think carefully about what you really need. Don't waste credits. Start with a small batch to check its usefulness before fully replicating your data source's history.
 
 ### Incremental Fetching and Loading
 **Incremental fetching:** Keboola's ability to read data from the source in increments, either through specific parameters or Keboola's incremental fetching 
