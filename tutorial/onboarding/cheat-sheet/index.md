@@ -110,40 +110,25 @@ By defining a value as a variable, you can easily update it in one spot, rather 
 ***Note:** For complex setups, you can even set variables dynamically through API calls when running components.*
 
 ### Reusing Code with Shared Codes
-Often, you'll find certain code patterns or functions repeated in various transformations for specific tasks. 
-To simplify this, use [shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code), a feature that lets you store and manage these common
-script segments in one place. Changes to shared codes automatically update in every transformation that uses them, keeping your projects consistent and easier 
-to manage.
+Often, you'll find certain code patterns or functions repeated in various transformations for specific tasks. To simplify this, use
+[shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code), a feature that lets you store and manage these common
+script segments in one place. Changes to shared codes automatically update in every transformation that uses them, keeping your projects 
+consistent and easier to manage.
 
 ### Choosing the Right Backend Size
-For **Snowflake SQL transformations**, users have the flexibility to choose between Small (default), Medium, or Large Snowflake Warehouses. While larger warehouses 
-generally offer improved performance, they also incur higher costs. The detailed impact on costs is available [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
+**Snowflake SQL transformations:** Users can choose between small (default), medium, or large Snowflake warehouses, balancing performance against cost. 
+Performance generally scales up with size, but costs do too. 
 
-In Snowflake, the performance of larger warehouses tends to exhibit a linear increase, with a transformation executed on Medium potentially being twice as fast as 
-on Small. However, the actual impact depends on the specific queries. There is no universal rule for determining whether a larger warehouse will optimize time and 
-costs, so the best approach is to experiment and measure the results.
+The impact varies by query, so testing and evaluating outcomes is advised. Sometimes, a larger warehouse might be more cost-effective if it significantly 
+reduces runtime. More details on costs can be found [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
 
-It's worth noting that executing on a larger backend can sometimes be significantly faster, resulting in a lower cost for the Transformation compared to running 
-it on a Small backend.
-
-For **Python and R transformations**, the backend size primarily influences available memory, enabling the processing of larger datasets in your scripts. Users 
-commonly opt for a larger backend when their Transformation fails due to memory constraints, rather than exploring larger backends to assess potential performance 
-improvements.
+**Python and R transformations:** The choice of backend size affects the memory available for processing data. A larger backend is often necessary for handling larger datasets or when memory limits are reached, rather than for potential speed gains.
 
 ### Selecting Columns Carefully
-Resist the temptation to use `SELECT *` in your queries. Opt for a more precise approach by explicitly listing all the columns you intend to select. When you 
-employ `SELECT *`, you risk potential issues if new columns are added, existing ones are removed, or if there are any changes in column names. 
-
-This practice not only enhances the safety of your queries but also improves readability. By specifying each column explicitly, you maintain clarity in your code, 
-making it evident which columns you are selecting from the table. Even if you end up including all columns, the verbatim list ensures transparency and avoids 
-unnecessary complications in your output data.
+Avoid using `SELECT *` in your queries. Instead, list out the columns you need. Using SELECT * could lead to problems if columns in the database change. Listing columns enhances your query's safety and readability, ensuring you're clear about which data you're using and avoiding issues with your results.
 
 {% include tip.html title="Safe Development Practices" content="
-For all development tasks, whether adding new components, editing existing configurations, or refining transformations, maximize safety by making use of
-Development branches. This strategic approach ensures a secure and controlled environment for your development efforts. For detailed guidance on utilizing
-Development branches effectively, refer to the documentation [here](https://help.keboola.com/tutorial/branches/).
-This practice not only enhances the safety of your development processes but also provides a structured and organized approach to managing changes in your
-Keboola environment.
+Use Development branches for any changes or new additions to ensure a controlled and safe development environment. This method keeps your work organized and secure. For more on Development branches, see this [guide](https://help.keboola.com/tutorial/branches/).
 " %}
 
 ## Automating Your Flow
