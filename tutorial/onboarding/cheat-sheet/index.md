@@ -21,12 +21,15 @@ cases, whitelist Keboola's IP addresses, establish an SSH tunnel (if supported b
 source's administrators or owners along with Keboola's support team can solve any access problems.
 
 ### Choosing What to Extract
-Before pulling data from sources like MS SQL Server, PostgreSQL, MySQL, Google Analytics, or Facebook Ads, think carefully about what you really need. Don't waste credits. Start with a small batch to check its usefulness before fully replicating your data source's history.
+Before pulling data from sources like MS SQL Server, PostgreSQL, MySQL, Google Analytics, or Facebook Ads, think carefully about what you really need. Don't waste 
+credits. Start with a small batch to check its usefulness before fully replicating your data source's history.
 
 ### Incremental Fetching and Loading
-**Incremental fetching:** Keboola allows data to be fetched in increments, which is useful for large datasets to save time compared to full extractions. This can be done through specific parameters or Keboola’s database connectors.
+**Incremental fetching:** Keboola allows data to be fetched in increments, which is useful for large datasets to save time compared to full extractions. This can 
+be done through specific parameters or Keboola’s database connectors.
 
-**Incremental loading:** This involves adding the fetched data to Keboola Storage bit by bit. Using a primary key helps efficiently update existing records and add new ones. Without a primary key, data is simply appended.
+**Incremental loading:** This involves adding the fetched data to Keboola Storage bit by bit. Using a primary key helps efficiently update existing records and 
+add new ones. Without a primary key, data is simply appended.
 
 ***Note:** Some connectors handle incremental fetching and loading automatically; it is typically indicated in their configuration UI.*
 
@@ -40,31 +43,26 @@ to speed up execution rather than save costs, as each job uses credits independe
 2. **Among Components:** Set up parallelization for [row-based components](/components/#configuration-rows) like database data sources (extractors) using the same credentials to run multiple tables concurrently. This setup can be done directly in the component's UI.
 
 {% include tip.html title="Execute Individual Configurations" content="
-Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater control.
+Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater 
+control.
 
 Use the menu next to each configuration row in the UI for executing specific configurations as needed, optimizing time and resources.
 " %}
 
 **Storage vs. component jobs:** 
 
-While component jobs often interact with Keboola Storage, it's important to note the difference in parallel limits. Component jobs don't have a strict parallel limit, but [Storage jobs](/storage/jobs/) do, typically capped at 10 parallel jobs but adjustable through Keboola Support. In environments with many users, component jobs may queue for Storage job availability, affecting runtime.
+While component jobs often interact with Keboola Storage, it's important to note the difference in parallel limits. Component jobs don't have a strict parallel 
+limit, but [Storage jobs](/storage/jobs/) do, typically capped at 10 parallel jobs but adjustable through Keboola Support. In environments with many users, 
+component jobs may queue for Storage job availability, affecting runtime.
 
 ## Developing a Transformation
 ### Setting up Workspaces
-It's common for users to directly dive into the Transformations section of the UI to set up and test scripts. However, this approach may not be optimal. Executing a transformation component, whether it involves Python, R, or SQL transformations, always incurs some overhead from the component execution layered on top of the script execution. This can result in unnecessary credit consumption during code debugging.
-
-Our recommendation is to start by creating a Workspace for development purposes. Develop and test your code within the Workspace environment. Once your script is functioning correctly, you can then transfer it to a Transformation configuration and execute it, ensuring more efficient credit usage.
+Jumping straight into coding within the transformations UI might not be the most efficient approach due to execution overhead. Instead, start with a workspace to 
+develop and test your scripts, moving them to a transformation configuration only when they're ready. This strategy helps optimize credit usage.
 
 ### Handling Inputs and Outputs
-Every transformation operates within its designated, temporary transformation workspace. When a Transformation is executed, it establishes this distinct 
-workspace, which is isolated from the primary Keboola Storage. Consequently, within your code, you cannot directly access all Storage Objects; instead, you must 
-load selected Storage objects into your transformation using an input mapping.
-
-Upon execution, a transformation initially processes the configured input mapping, loading the specified datasets into the transformation workspace. 
-Subsequently, your script is executed. Towards the end of the transformation, it processes the configured output mapping. Only objects specified in the output 
-mapping section will be loaded back into Storage upon completion of the transformation execution.
-
-Let’s consider a hypothetical scenario where your transformation script, developed in your workspace, looks like this:
+Transformations are executed in isolated workspaces, requiring you to use input mappings to access Keboola Storage data. After running your script, output 
+mappings determine which data returns to Storage. For instance, to run a simple SQL script like:
 
 ```
 SELECT 
@@ -74,10 +72,10 @@ SELECT
 FROM "MyInputTable";
 ```
 
-To successfully execute this code in a Transformation, you would need to make three essential edits:
+You need to:
 
-1. **Adding** `MyInputTable` **to an input mapping:** Ensure that `MyInputTable` is included in the input mapping of your transformation.
-2. **Creating an object within your script for output mapping:** Include the following statement in your script to create an object that can be processed by output mapping:
+1. Add `MyInputTable` to your input mapping.
+2. Modify your script to output to a new table for output mapping.
 ```
 CREATE TABLE MY_NEW_TABLE AS
 SELECT 
@@ -86,43 +84,36 @@ SELECT
   "Amount" AS AMOUNT
 FROM "MyInputTable";
 ```
-3. **Adding** `MY_NEW_TABLE` **to the output mapping:** Include `MY_NEW_TABLE` in the output mapping so that it is loaded into Storage after the transformation is executed.
+3. Ensure the new table is included in your output mapping and can be loaded into Storage after the transformation runs.
 
 ### Case Sensitivity in Snowflake
-This is a frequent challenge for new users and is specific to projects utilizing a Snowflake Storage backend. When incorporating a table named “MyInputTable” 
-into your input mapping, it is imperative to employ double quotes when referencing that table in your code.
-
-For instance, using `FROM MyInputTable` would be interpreted by Snowflake as `FROM MYINPUTTABLE`, resulting in a non-existent object and causing the script to 
-fail. Therefore, it is essential to use `FROM "MyInputTable"` to ensure proper referencing in a Snowflake environment.
+Remember, Snowflake treats table names as case-sensitive. Use **double quotes** to avoid errors, like FROM "MyInputTable" instead of FROM MyInputTable.
 
 ### Incremental Processing
-Similar to using incremental fetching and loading with data source components, you can optimize your transformation through incremental processing.
+Use incremental processing in both input and output mappings to handle data more efficiently, similar to how you manage data in source components.
 
-**Increments in the input mapping:** You can configure your transformation to process increments of data each time it runs. This requires the input tables 
-to be generated by a component (data source connector or another transformation) using incremental loading. This setup generates a concealed technical column 
-named `_timestamp` in Keboola Storage, which is then utilized by the input mapping. Here, you can configure the `Data Changed in the Last` filter, automatically 
-detecting records added/changed within the selected timeframe. Consequently, your Transformation Workspace operates solely on that increment, eliminating the need 
-to address it in your script.
+**Input mapping increments:** To have your transformation handle data in increments, you need input tables generated using incremental loading. This approach
+uses a hidden `_timestamp` column in Keboola Storage and allows the input mapping's the `Data Changed in the Last` filter to process only newly added or changed 
+records, streamlining your transformation workspace. 
 
-Alternatively, if you need to identify your increment based on multiple conditions, you can allow the Transformation to clone the entire input table.
-Subsequently, you can define the processed increment using a WHERE condition in your SQL script or an equivalent logic in Python or R.
+If your increments need specific conditions, you can clone the entire input table and specify the increments using a WHERE clause in SQL or similar logic in 
+Python or R.
 
-**Increments in the output mapping:** This is analogous to the incremental loading setup of data source components. You can choose to implement incremental 
-loading with or without a primary key, resulting in either upserting or appending data, respectively.
+**Output mapping increments:** Similar to data source components, you can opt for incremental loading in the output mapping, with or without a primary key. This 
+choice allows for either updating existing records (upserting) or simply adding new records (appending).
 
 ### Using Variables
-Keboola transformations offer the convenience of Variables. A Variable is an element designed to store a value that can be repeatedly utilized in your 
-transformation script. This becomes particularly handy when employing a filtering condition in various sections of your script. By setting it as a variable, you 
-simplify the process of updating the value. If a change is needed, you can modify it in one place rather than across multiple instances. For more information on 
-variables, refer to [this](/transformations/variables/).
+Variables are placeholders for values you frequently use in your transformation scripts, especially useful for common filter conditions.
+By defining a value as a variable, you can easily update it in one spot, rather than changing it everywhere it appears. Check out more details on using variables 
+[here](/transformations/variables/).
 
-***Important:** In more advanced setups, variables can also be dynamically provided via API calls during the execution of components.*
+***Note:** For complex setups, you can even set variables dynamically through API calls when running components.*
 
 ### Reusing Code with Shared Codes
-Frequently, there are coding patterns or functions that need to be replicated across multiple Transformations. These could be recurring script segments that serve 
-a specific purpose. To streamline this process, you can create what is known as [shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code). 
-Shared codes allow you to define and maintain these common script segments in one centralized location. Any modifications made to the shared code are 
-automatically reflected in all transformations utilizing it. This ensures consistency and simplifies maintenance across your projects.
+Often, you'll find certain code patterns or functions repeated in various transformations for specific tasks. 
+To simplify this, use [shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code), a feature that lets you store and manage these common
+script segments in one place. Changes to shared codes automatically update in every transformation that uses them, keeping your projects consistent and easier 
+to manage.
 
 ### Choosing the Right Backend Size
 For **Snowflake SQL transformations**, users have the flexibility to choose between Small (default), Medium, or Large Snowflake Warehouses. While larger warehouses 
