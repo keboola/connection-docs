@@ -77,7 +77,7 @@ each section is tailored to ensure a smooth and efficient setup.
 
 1.	Navigate to **Cloud Storage > Buckets**. Click **Create Bucket**.
 2.	**Name the bucket**, e.g., “keboola-yourorganization-files”. The bucket name must be globally unique, so choose a custom name.
-3.	**Choose the region** where your data will be stored. **Important**: The bucket must be set in the EU region; otherwise, the registration of the BigQuery backend in Keboola will be rejected.
+3.	**Choose the region** where your data will be stored. <br/>**Important**: The bucket must be set in the same region as the product bought through the marketplace. For example, if you buy a Keboola EU product, select the EU region; otherwise, the registration of the BigQuery backend in Keboola will be rejected.
 4.	Set **other options** as desired. We recommend checking _Enforce public access prevention on this bucket_. Click **Create**.
 5.	Once the bucket is created, select the **Lifecycle** tab and click **Add rule**.
     - Select the action **Delete object** and click **Continue**.
@@ -87,3 +87,5 @@ each section is tailored to ensure a smooth and efficient setup.
 6.	Select the **Permissions** tab and click **Grant access**.
     - Paste the principal email address of the service account created earlier.
     - Under **Select a role**, choose **Cloud Storage > Storage Object Admin** and click **Save**.
+
+***Note:** If you want to see your BigQuery tables directly in the BigQuery console, go to your folder and add a BigQuery Data Viewer or higher role.*
