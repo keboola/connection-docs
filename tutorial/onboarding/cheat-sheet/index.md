@@ -31,37 +31,31 @@ Before pulling data from sources like MS SQL Server, PostgreSQL, MySQL, Google A
 ***Note:** Some connectors handle incremental fetching and loading automatically; it is typically indicated in their configuration UI.*
 
 ### Optimizing with Parallelization 
-To optimize the overall runtime of your pipeline, consider employing parallelization to execute multiple configurations simultaneously. It's essential to recognize that while parallelization can significantly reduce the total runtime, each individual job consumes credits independently. Therefore, parallelization is a tool for optimizing the execution timeline rather than cost.
+To improve your pipeline's runtime, consider using parallelization to run multiple configurations at the same time. Keep in mind that parallelization aims 
+to speed up execution rather than save costs, as each job uses credits independently.
 
-**Where to apply parallelization:**
+**Parallelization opportunities:**
 
-1. **Flow level:** Within a flow, tasks can be organized into phases for parallel execution.
-2. **Components:** For [row-based components](/components/#configuration-rows), you can set parallelization. Examples include database e extractors (data
-sources), where multiple tables share the same credentials. Configuration rows allow for parallel execution, and this can be configured in the 
-component UI.
+1. **At the Flow Level:** Organize tasks into phases within a flow for simultaneous execution.
+2. **Among Components:** Set up parallelization for [row-based components](/components/#configuration-rows) like database data sources (extractors) using the same credentials to run multiple tables concurrently. This setup can be done directly in the component's UI.
 
 {% include tip.html title="Execute Individual Configurations" content="
-Enhance your workflow efficiency by executing individual configurations separately in Keboola Flow automation. In advanced settings, edit parameters to
-selectively run specific rows, providing nuanced control over your data processing.
+Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater control.
 
-Additionally, in the user interface, utilize the three-dotted menu next to each configuration row for a quick and convenient way to execute only the needed
-configurations. This feature streamlines your workflow, saving time and resources while maintaining precision in your data operations.
+Use the menu next to each configuration row in the UI for executing specific configurations as needed, optimizing time and resources.
 " %}
 
-**Storage jobs vs. component jobs:** 
+**Storage vs. component jobs:** 
 
-Most Keboola components interact with Keboola Storage during execution. Data source components first extract data from the source and then trigger 
-a [Storage job](/storage/jobs/) to import the data into Keboola Storage. It's crucial to understand that there is no strict limit on parallel component jobs, 
-but there is a limit on the maximum parallel Storage jobs in a project. In multi-tenant deployments, multiple component jobs might wait for available Storage job 
-slots, potentially extending the overall runtime. The default limit for parallel Storage jobs is 10, but it can be increased through Keboola Support.
+While component jobs often interact with Keboola Storage, it's important to note the difference in parallel limits. Component jobs don't have a strict parallel limit, but [Storage jobs](/storage/jobs/) do, typically capped at 10 parallel jobs but adjustable through Keboola Support. In environments with many users, component jobs may queue for Storage job availability, affecting runtime.
 
 ## Developing a Transformation
-### Using a Workspace
+### Setting up Workspaces
 It's common for users to directly dive into the Transformations section of the UI to set up and test scripts. However, this approach may not be optimal. Executing a transformation component, whether it involves Python, R, or SQL transformations, always incurs some overhead from the component execution layered on top of the script execution. This can result in unnecessary credit consumption during code debugging.
 
 Our recommendation is to start by creating a Workspace for development purposes. Develop and test your code within the Workspace environment. Once your script is functioning correctly, you can then transfer it to a Transformation configuration and execute it, ensuring more efficient credit usage.
 
-### Input and Output Mapping
+### Handling Inputs and Outputs
 Every transformation operates within its designated, temporary transformation workspace. When a Transformation is executed, it establishes this distinct 
 workspace, which is isolated from the primary Keboola Storage. Consequently, within your code, you cannot directly access all Storage Objects; instead, you must 
 load selected Storage objects into your transformation using an input mapping.
@@ -94,7 +88,7 @@ FROM "MyInputTable";
 ```
 3. **Adding** `MY_NEW_TABLE` **to the output mapping:** Include `MY_NEW_TABLE` in the output mapping so that it is loaded into Storage after the transformation is executed.
 
-### Snowflake is Case Sensitive
+### Case Sensitivity in Snowflake
 This is a frequent challenge for new users and is specific to projects utilizing a Snowflake Storage backend. When incorporating a table named “MyInputTable” 
 into your input mapping, it is imperative to employ double quotes when referencing that table in your code.
 
@@ -124,13 +118,13 @@ variables, refer to [this](/transformations/variables/).
 
 ***Important:** In more advanced setups, variables can also be dynamically provided via API calls during the execution of components.*
 
-### Shared Codes for Repeated Tasks
+### Reusing Code with Shared Codes
 Frequently, there are coding patterns or functions that need to be replicated across multiple Transformations. These could be recurring script segments that serve 
 a specific purpose. To streamline this process, you can create what is known as [shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code). 
 Shared codes allow you to define and maintain these common script segments in one centralized location. Any modifications made to the shared code are 
 automatically reflected in all transformations utilizing it. This ensures consistency and simplifies maintenance across your projects.
 
-### Optimizing Performance with Dynamic Backends
+### Choosing the Right Backend Size
 For **Snowflake SQL transformations**, users have the flexibility to choose between Small (default), Medium, or Large Snowflake Warehouses. While larger warehouses 
 generally offer improved performance, they also incur higher costs. The detailed impact on costs is available [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
 
@@ -145,7 +139,7 @@ For **Python and R transformations**, the backend size primarily influences avai
 commonly opt for a larger backend when their Transformation fails due to memory constraints, rather than exploring larger backends to assess potential performance 
 improvements.
 
-### Avoiding Using SELECT *
+### Selecting Columns Carefully
 Resist the temptation to use `SELECT *` in your queries. Opt for a more precise approach by explicitly listing all the columns you intend to select. When you 
 employ `SELECT *`, you risk potential issues if new columns are added, existing ones are removed, or if there are any changes in column names. 
 
@@ -153,14 +147,13 @@ This practice not only enhances the safety of your queries but also improves rea
 making it evident which columns you are selecting from the table. Even if you end up including all columns, the verbatim list ensures transparency and avoids 
 unnecessary complications in your output data.
 
-{% include tip.html title="Leverage Development Branches" content="
+{% include tip.html title="Safe Development Practices" content="
 For all development tasks, whether adding new components, editing existing configurations, or refining transformations, maximize safety by making use of
 Development branches. This strategic approach ensures a secure and controlled environment for your development efforts. For detailed guidance on utilizing
 Development branches effectively, refer to the documentation [here](https://help.keboola.com/tutorial/branches/).
 This practice not only enhances the safety of your development processes but also provides a structured and organized approach to managing changes in your
 Keboola environment.
 " %}
-
 
 ## Automating Your Flow
 ### Workflow with Parallel Execution
@@ -261,7 +254,7 @@ helpful suggestions on what specific aspects to investigate as a user.
 If you encounter an error message indicating "Internal" or "Application Error," you should reach out to the Keboola support team. These errors typically signify 
 unexpected issues occurring beneath the surface, and our support engineers will thoroughly examine detailed platform logs to assist you in resolving the problem.
 
-### Debug Job Feature
+### Debugging Keboola Jobs
 Keboola jobs, from data extraction to transformations, often involve moving data to and from Keboola Storage, usually through files like CSVs. To help pinpoint 
 errors, you can turn on Debug Mode in your user settings. This adds an option in component settings for running a debug job, which goes through the job's steps 
 but stops before loading data into Keboola Storage, preventing data mishaps.
