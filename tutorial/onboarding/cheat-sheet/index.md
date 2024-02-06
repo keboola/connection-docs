@@ -177,37 +177,27 @@ track changes and perform upsert operations intelligently.
 Understand the impact of writing data to a destination. While Keboola can easily restore data in case of issues, the same may not be true for the destination. 
 Restoring data at the destination can be difficult or impossible, so proceed with caution to avoid irreversible data loss.
 
-## Job Log and Troubleshooting
-Whether you're a seasoned data engineer or just starting out, encountering errors during development is inevitable. 
-Here are some tips for effectively troubleshooting errors.
+## Job Logs and Error Troubleshooting
+Errors are a common part of development, whether you're experienced or new. Here are some tips for effectively troubleshooting errors.
 
-### Job Log
-The job log is a valuable resource providing insights into the execution of a job, including the entity or process that executed it, the timestamp 
-of its execution, and the duration it took.
+### Understanding Job Logs
+Job logs offer crucial details on job executions, such as who ran the job, when it was run, and how long it took.
 
-**Mapping section:** The log incorporates a mapping section that delineates the tables involved in the process. In extraction operations, the output section 
-enumerates all tables extracted from the source and loaded into Keboola Storage, essentially representing the job's output. In the context of transformations, 
-both input and output sections are typically present, revealing the tables used in the Input and Output mappings of that transformation—clarifying the tables 
-loaded and produced.
+**Mapping section:** 
+This part shows the tables involved in the job. For extractions, it lists the tables taken from the source to Keboola Storage. For transformations, it shows both 
+input and output tables, clarifying what was loaded and produced. Data writing jobs will list input tables, but have no output tables listed, as the writing 
+operation doesn't generate new tables in Keboola.
 
-When writing data to a destination using a data destination component, the input section lists the tables used for the writing operation. However, as the writing 
-operation doesn't generate new tables in Keboola, the output section remains empty.
-
-**Log:** The job log further includes a detailed account of individual actions taken during the job execution. This initial section is particularly valuable for 
-debugging, providing a chronological overview of actions performed. Identifying the step at which the processing failed can offer crucial insights into what to 
-investigate during the debugging process.
-
-By delving into the job log, you gain a comprehensive understanding of the job's execution, aiding in the identification and resolution of errors encountered 
-during development.
+**Log details:** 
+This section breaks down each action in the job, helping pinpoint where failures occurred for easier debugging.
 
 ### AI Error Explanation
-In your project settings, take advantage of the **AI Error Explanation** feature to enhance your error troubleshooting capabilities. This feature utilizes 
-artificial intelligence to translate potentially complex error messages into a more user-friendly format. By enabling this feature, Keboola aims to provide 
-helpful suggestions on what specific aspects to investigate as a user.
+Enable **AI Error Explanation** in project settings for a clearer understanding of errors. It uses AI to simplify error messages, offering direct insights 
+on what to fix.
 
 ### Internal or Application Errors
-If you encounter an error message indicating "Internal" or "Application Error," you should reach out to the Keboola support team. These errors typically signify 
-unexpected issues occurring beneath the surface, and our support engineers will thoroughly examine detailed platform logs to assist you in resolving the problem.
+If you see "Internal" or "Application Error" messages, contact Keboola support team. These errors mean there are deeper issues, and our support team will dig into 
+platform logs to help solve them.
 
 ### Debugging Keboola Jobs
 Keboola jobs, from data extraction to transformations, often involve moving data to and from Keboola Storage, usually through files like CSVs. To help pinpoint 
