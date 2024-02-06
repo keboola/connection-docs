@@ -11,14 +11,14 @@ apps, or transformations, this guide outlines key best practices to improve your
 
 ## Extracting Data from Sources
 ### Using the Right Credentials
-When using Keboola's source connectors, correct authorization is important: credentials and connection details for source databases, or tokens and API keys for 
-services. It's best to use technical user credentials made just for Keboola integrations to provent problems with permission, account changes, or password resets 
+When using Keboola's source connectors, correct authorization is important: credentials and connection details for source databases or tokens and API keys for 
+services. It's best to use technical user credentials made just for Keboola integrations to prevent problems with permission, account changes, or password resets 
 that personal credentials might cause.
 
 ### Making Data Sources Available
 Make sure Keboola can reach the data sources you want to use. Databases on internal servers or in private clouds might not be accessible by default. In such 
-cases, whitelist Keboola's IP addresses, establish an SSH tunnel (if supported by the Keboola component), or request Keboola to set up a VPN server. Your data 
-source's administrators or owners along with Keboola's support team can solve any access problems.
+cases, whitelist Keboola's IP addresses, establish an SSH tunnel (if supported by the Keboola component), or request that Keboola set up a VPN server. Your data 
+source's administrators, owners, and Keboola's support team can solve any access problems.
 
 ### Choosing What to Extract
 Before pulling data from sources like MS SQL Server, PostgreSQL, MySQL, Google Analytics, or Facebook Ads, think carefully about what you really need. Don't waste 
@@ -46,7 +46,7 @@ to speed up execution rather than save costs, as each job uses credits independe
 Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater 
 control.
 
-Use the menu next to each configuration row in the UI for executing specific configurations as needed, optimizing time and resources.
+Use the menu next to each configuration row in the UI to execute specific configurations as needed, optimizing time and resources.
 " %}
 
 **Storage vs. component jobs:** 
@@ -87,13 +87,13 @@ FROM "MyInputTable";
 3. Ensure the new table is included in your output mapping and can be loaded into Storage after the transformation runs.
 
 ### Case Sensitivity in Snowflake
-Remember, Snowflake treats table names as case-sensitive. Use **double quotes** to avoid errors, like FROM "MyInputTable" instead of FROM MyInputTable.
+Remember, Snowflake treats table names as case-sensitive. Use **double-quotes** to avoid errors, like FROM "MyInputTable" instead of FROM MyInputTable.
 
 ### Incremental Processing
 Use incremental processing in both input and output mappings to handle data more efficiently, similar to how you manage data in source components.
 
 **Input mapping increments:** To have your transformation handle data in increments, you need input tables generated using incremental loading. This approach
-uses a hidden `_timestamp` column in Keboola Storage and allows the input mapping's the `Data Changed in the Last` filter to process only newly added or changed 
+uses a hidden `_timestamp` column in Keboola Storage and allows the input mapping's `Data Changed in the Last` filter to process only newly added or changed 
 records, streamlining your transformation workspace. 
 
 If your increments need specific conditions, you can clone the entire input table and specify the increments using a WHERE clause in SQL or similar logic in 
@@ -103,8 +103,8 @@ Python or R.
 choice allows for either updating existing records (upserting) or simply adding new records (appending).
 
 ### Using Variables
-Variables are placeholders for values you frequently use in your transformation scripts, especially useful for common filter conditions.
-By defining a value as a variable, you can easily update it in one spot, rather than changing it everywhere it appears. Check out more details on using variables 
+Variables are placeholders for values frequently used in your transformation scripts, especially useful for common filter conditions.
+By defining a value as a variable, you can easily update it in one spot rather than changing it everywhere it appears. Check out more details on using variables
 [here](/transformations/variables/).
 
 ***Note:** For complex setups, you can even set variables dynamically through API calls when running components.*
@@ -117,17 +117,17 @@ consistent and easier to manage.
 
 ### Choosing the Right Backend Size
 **Snowflake SQL transformations:** Users can choose between small (default), medium, or large Snowflake warehouses, balancing performance against cost. 
-Performance generally scales up with size, but costs do too. 
+Performance generally scales up with size, but costs do, too. 
 
 The impact varies by query, so testing and evaluating outcomes is advised. Sometimes, a larger warehouse might be more cost-effective if it significantly 
 reduces runtime. More details on costs can be found [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
 
 **Python and R transformations:** The choice of backend size affects the memory available for processing data. A larger backend is often necessary for handling 
-larger datasets or when memory limits are reached, rather than for potential speed gains.
+larger datasets or when memory limits are reached rather than for potential speed gains.
 
 ### Selecting Columns Carefully
-Avoid using `SELECT *` in your queries. Instead, list out the columns you need. Using SELECT * could lead to problems if columns in the database change. Listing 
-columns enhances your query's safety and readability, ensuring you're clear about which data you're using and avoiding issues with your results.
+Avoid using `SELECT *` in your queries. Instead, list out the columns you need. Using SELECT * could lead to problems if columns in the database change. 
+Listing columns enhances your query's safety and readability, ensuring you're clear about which data you're using and avoiding issues with your results.
 
 {% include tip.html title="Safe Development Practices" content="
 Use development branches for any changes or new additions to ensure a controlled and safe development environment. This method keeps your work organized and
@@ -140,7 +140,7 @@ In your Flows, you can streamline processing by grouping multiple tasks within o
 enhancing overall efficiency. Each subsequent phase starts only after the previous one completes all its tasks.
 
 ### Option to Continue Despite Failures
-Tasks have a Continue on Failure option, off by default. Turning it on allows the flow to continue even if a task fails, useful for non-critical tasks or 
+Tasks have a Continue on Failure option, which is off by default. Turning it on allows the flow to continue even if a task fails, useful for non-critical tasks or 
 those expected to succeed later. Keep an eye on task statuses to quickly fix any issues.
 
 ### Setting Up Notifications
@@ -151,8 +151,8 @@ and responsive to any issues.
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak, 
 like at 0:15 am, for smoother execution.
 
-**Triggers:** Set flows to automatically start when certain Storage tables are updated, ideal for managing dependencies across projects. This ensures your 
-projects stay in sync and run efficiently.
+**Triggers:** Set flows to automatically start when certain Storage tables are updated, which is ideal for managing dependencies across projects. This ensures 
+your projects stay in sync and run efficiently.
 
 ## Data Writing Considerations
 Writing data to a destination shares some common practices with data extraction, such as [using the right credentials](#user-credentials), 
@@ -162,7 +162,7 @@ However, additional factors are crucial in this context.
 ### Ensuring Proper Permissions
 Similar to [extracting data](#extracting-data-from-sources), writing data requires having the right [permissions](#using-the-right-credentials). 
 Often, specific rights are needed, which may not be widely available to all organization members. Errors during data write operations usually 
-indicate permission issues. Keboola support team is ready to help identify the needed permissions.
+indicate permission issues. The Keboola support team is ready to help identify the needed permissions.
 
 ### Managing Data Access
 When data is written to a destination, you're extending access to users with rights to that destination. It's vital to carefully manage who gets access to ensure 
@@ -185,18 +185,18 @@ Job logs offer crucial details on job executions, such as who ran the job, when 
 
 **Mapping section:** 
 This part shows the tables involved in the job. For extractions, it lists the tables taken from the source to Keboola Storage. For transformations, it shows both 
-input and output tables, clarifying what was loaded and produced. Data writing jobs will list input tables, but have no output tables listed, as the writing 
+input and output tables, clarifying what was loaded and produced. Data writing jobs will list input tables but have no output tables listed, as the writing 
 operation doesn't generate new tables in Keboola.
 
 **Log details:** 
 This section breaks down each action in the job, helping pinpoint where failures occurred for easier debugging.
 
 ### AI Error Explanation
-Enable **AI Error Explanation** in project settings for a clearer understanding of errors. It uses AI to simplify error messages, offering direct insights 
+Enable **AI Error Explanation** in project settings to understand errors better. It uses AI to simplify error messages, offering direct insights 
 on what to fix.
 
 ### Internal or Application Errors
-If you see "Internal" or "Application Error" messages, contact Keboola support team. These errors mean there are deeper issues, and our support team will dig into 
+If you see "Internal" or "Application Error" messages, contact the Keboola support team. These errors mean there are deeper issues, and our support team will dig into 
 platform logs to help solve them.
 
 ### Debugging Keboola Jobs
@@ -204,7 +204,7 @@ Keboola jobs, from data extraction to transformations, often involve moving data
 errors, you can turn on Debug Mode in your user settings. This adds an option in component settings for running a debug job, which goes through the job's steps 
 but stops before loading data into Keboola Storage, preventing data mishaps.
 
-The debug job creates a zip file of all generated files during the job, stored in **Keboola File Storage**, for detailed inspection. This is handy for uncovering 
+The debug job creates a zip file of all files generated during the job, stored in **Keboola File Storage**, for detailed inspection. This is handy for uncovering 
 issues like incorrect data encoding or formatting errors that cause extraction problems, making it easier to diagnose and fix errors.
 
 {% include tip.html title="Unlock the /raw mode" content="
