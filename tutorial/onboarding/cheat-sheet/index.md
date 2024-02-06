@@ -9,7 +9,7 @@ apps, or transformations, this guide outlines key best practices to improve your
 * TOC
 {:toc}
 
-## Data Source Extraction
+## Extracting Data from Sources
 ### Using the Right Credentials
 When using Keboola's source connectors, correct authorization is important: credentials and connection details for source databases, or tokens and API keys for 
 services. It's best to use technical user credentials made just for Keboola integrations to provent problems with permission, account changes, or password resets 
@@ -122,81 +122,60 @@ Performance generally scales up with size, but costs do too.
 The impact varies by query, so testing and evaluating outcomes is advised. Sometimes, a larger warehouse might be more cost-effective if it significantly 
 reduces runtime. More details on costs can be found [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
 
-**Python and R transformations:** The choice of backend size affects the memory available for processing data. A larger backend is often necessary for handling larger datasets or when memory limits are reached, rather than for potential speed gains.
+**Python and R transformations:** The choice of backend size affects the memory available for processing data. A larger backend is often necessary for handling 
+larger datasets or when memory limits are reached, rather than for potential speed gains.
 
 ### Selecting Columns Carefully
-Avoid using `SELECT *` in your queries. Instead, list out the columns you need. Using SELECT * could lead to problems if columns in the database change. Listing columns enhances your query's safety and readability, ensuring you're clear about which data you're using and avoiding issues with your results.
+Avoid using `SELECT *` in your queries. Instead, list out the columns you need. Using SELECT * could lead to problems if columns in the database change. Listing 
+columns enhances your query's safety and readability, ensuring you're clear about which data you're using and avoiding issues with your results.
 
 {% include tip.html title="Safe Development Practices" content="
-Use Development branches for any changes or new additions to ensure a controlled and safe development environment. This method keeps your work organized and secure. For more on Development branches, see this [guide](https://help.keboola.com/tutorial/branches/).
+Use development branches for any changes or new additions to ensure a controlled and safe development environment. This method keeps your work organized and
+secure. For more on development branches, see this [guide](https://help.keboola.com/tutorial/branches/).
 " %}
 
 ## Automating Your Flow
-### Workflow with Parallel Execution
+### Parallel Task Execution
 In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, 
-enhancing overall efficiency. Subsequent steps (phases) will commence only after the completion of all tasks within the preceding step.
+enhancing overall efficiency. Each subsequent phase starts only after the previous one completes all its tasks.
 
-### Continue on Failure
-Every individual task within your flow features a **Continue on Failure** setting. By default, this setting is *disabled*, meaning an error in any single task 
-will halt the entire flow execution, resulting in an error status. Enabling **Continue on Failure** permits the flow to persist even if a single task encounters 
-an issue. 
+### Option to Continue Despite Failures
+Tasks have a Continue on Failure option, off by default. Turning it on allows the flow to continue even if a task fails, useful for non-critical tasks or 
+those expected to succeed later. Keep an eye on task statuses to quickly fix any issues.
 
-This is beneficial for tasks that may regularly fail due to specific conditions, with the expectation that they will be executed successfully in subsequent runs. 
-Alternatively, it is suitable for independent tasks whose failure does not impact the rest of the flow. However, monitoring execution statuses becomes crucial to 
-promptly address potential errors and implement necessary fixes.
+### Setting Up Notifications
+Stay on top of your flow's performance by setting up notifications for errors or long run times. Consider using a group email to keep the whole team informed 
+and responsive to any issues.
 
-### Notifications for Monitoring
-For a seamless execution of your use-cases, staying informed about errors or unusual execution times in your flows is crucial. Configure **notifications** 
-within your flow to receive timely updates. Teams often opt to configure a group mailbox for specific user groups, ensuring that all team members receive 
-notifications regarding errors, warnings, or instances where the flow runs longer than the expected duration. This proactive approach enhances awareness and 
-facilitates prompt responses to any issues that may arise. 
+### Automating Execution
+**Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak, 
+like at 0:15 am, for smoother execution.
 
-### Automating Flows
-**Date & Time Schedule:** The most common setup for automating flows involves scheduling them to run at specific time slots. In a multi-tenant stack, it's 
-advisable to avoid peak time slots, such as midnight, to optimize resource availability. A simple adjustment, like scheduling your flow for 0:15 am, can 
-positively impact execution, minimizing competition for resources within the multi-tenant environment.
+**Triggers:** Set flows to automatically start when certain Storage tables are updated, ideal for managing dependencies across projects. This ensures your 
+projects stay in sync and run efficiently.
 
-**Triggered Execution:** A triggered flow is configured to monitor specific tables in the Storage. Once there are updates in the selected Storage table, the flow 
-is automatically executed. This setup is particularly useful in multi-project scenarios where one project's flow relies on processes in another project. By 
-linking tables through a data catalog and scheduling a flow on trigger, dependencies between projects are efficiently managed.
+## Data Writing Considerations
+Writing data to a destination shares some common practices with data extraction, such as [using the right credentials](#user-credentials), 
+ensuring [data source accessibility](#making-data-sources-available), and [using parallelization](#optimizing-with-parallelization).
+However, additional factors are crucial in this context.
 
-## Writing Data to a Destination
-While some practices overlap with those for extracting data from sources — specifically, [Proper User Credentials](#proper-user-credentials), 
-[Accessibility of Your Data Sources](#accessibility-of-your-data-sources), and 
-[Optimizing with Parallelization](#optimizing-with-parallelization) — additional considerations come into play when writing data from Keboola to a destination.
+### Ensuring Proper Permissions
+Similar to [extracting data](#extracting-data-from-sources), writing data requires having the right [permissions](#using-the-right-credentials). 
+Often, specific rights are needed, which may not be widely available to all organization members. Errors during data write operations usually 
+indicate permission issues. Keboola support team is ready to help identify the needed permissions.
 
-### Verifying Adequate Permissions
-This builds upon the importance emphasized in the [Proper User Credentials](#proper-user-credentials) aspect discussed in the 
-[Extracting Data from Sources](extracting-data-from-sources) chapter. It underscores the necessity of ensuring you possess the requisite permissions when 
-attempting to write data to a destination. Frequently, specific privileges are essential for this task, and they may not be automatically granted to a broad 
-spectrum of users within an organization. Insufficient permissions often manifest as errors when writing data to a destination. In such cases, Keboola Support is 
-available to assist in identifying the specific permissions required for a particular component.
+### Managing Data Access
+When data is written to a destination, you're extending access to users with rights to that destination. It's vital to carefully manage who gets access to ensure 
+data isn't shared with unintended parties.
 
-### Who Gets Access to Data
-In the Keboola project, you have a precise understanding of who can access the integrated data. However, when writing data to a destination, whether it's a 
-database, object storage, or an API/service, you are essentially extending access to those data to users who have privileges for that specific destination. It is 
-crucial to be vigilant and ensure that you do not inadvertently share your data with unintended recipients.
+### Using Incremental Processing
+Incremental processing, which writes only the changed data since the last execution, is key to efficient data writing. This method is especially useful in Keboola 
+for maintaining performance and resource efficiency. Some database components offer an **Automatic Incremental Load** feature, using an internal state file to 
+track changes and perform upsert operations intelligently.
 
-### Incremental Processing
-To optimize the efficiency of your data writing operations, consider incorporating incremental processing, a strategy analogous to that used in data extraction or 
-transformation processes described earlier. This optimization is particularly beneficial in Keboola, where it enables the selective writing of data that has 
-changed in Keboola Storage since the last successful execution, ensuring a more streamlined and resource-efficient process.
-
-For certain components, especially those designed for database data destinations, an additional advantage is the presence of an **Automatic Incremental Load**
-feature. This feature involves the component maintaining an internal state file within its configuration, recording the timestamp of its last successful 
-execution. Keboola utilizes this information to identify and capture only the data that has been added or modified in Keboola Storage since the last execution. On 
-the destination side, the component facilitates an upsert operation, intelligently inserting new data and updating existing records, rather than opting for a 
-complete rewrite or simple append-only approach.
-
-In scenarios where certain APIs or services lack built-in mechanisms for efficient data updates, leveraging the incremental feature of the respective component 
-becomes even more critical. Many data destination components share the input mapping logic with transformations, allowing the application of similar principles. 
-Some components go a step further by incorporating sophisticated mechanisms, as mentioned earlier, to enhance the incremental processing capabilities.
-
-By adopting incremental processing, you not only optimize the performance of data writing operations but also ensure a more resource-efficient and intelligent 
-handling of data updates, tailored to the specific requirements of the destination.
-
-### Caution Before Data Writing
-To be straightforward, it's crucial to thoroughly understand the implications of your actions. While Keboola offers a straightforward process for restoring data in case of accidental corruption, this may not hold true for the destination where you intend to write your data. The restoration of data in such destinations can be challenging, and in certain instances, it might even be impossible. Therefore, exercising heightened caution is strongly advised. Make sure you are well-informed and deliberate in your decisions when it comes to writing data, recognizing that the ease of recovery in Keboola may not necessarily extend to all destinations.
+### Being Cautious with Data Writing
+Understand the impact of writing data to a destination. While Keboola can easily restore data in case of issues, the same may not be true for the destination. 
+Restoring data at the destination can be difficult or impossible, so proceed with caution to avoid irreversible data loss.
 
 ## Job Log and Troubleshooting
 Whether you're a seasoned data engineer or just starting out, encountering errors during development is inevitable. 
