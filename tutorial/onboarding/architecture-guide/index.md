@@ -8,10 +8,8 @@ permalink: /tutorial/onboarding/architecture-guide/
 
 Welcome to the Multi-Project Architecture Guide!
 
-This guide is designed to assist you in strategically organizing your Keboola projects, offering insights into standard architectures 
-that have proven successful for clients of varying sizes. By delving into this resource, you will gain a deeper understanding of the diverse project structures 
-that align with different organizational needs and requirements. Whether you're a small team or a large enterprise, this guide aims to empower you 
-with the knowledge needed to make informed decisions on how best to configure your Keboola projects for optimal efficiency and effectiveness.
+This guide helps you effectively organize your Keboola projects, sharing successful strategies for clients of all sizes. You'll learn about various project 
+setups that meet your organizational needs and gain insights to tailor your Keboola projects for maximum efficiency and success.
 
 ## Single Keboola Project 
 The foundation of implementing and utilizing the **Keboola Platform** begins with the establishment of the initial **Keboola project**. 
