@@ -118,13 +118,13 @@ through transformation and blending, to consumption.
 2. **Managed by BI/data/IT teams:** These teams oversee the entire data landscape, orchestrating processing and datasets availability for consumption.
 3. **Centralized data access:** Individual data consumers access datasets provided by the data team or via visualization tools linked to a specific database segment.
 
-**Considerations for implementation:**
+**Key considerations:**
 1. **Layer-based structure:** The architecture is organized into logical layers, with each team handling data processing tasks without overlap.
 2. **Ownership by data team:** The data team plays a pivotal role in managing and coordinating data across all layers.
 3. **Managed data access:** Access to data is regulated, with datasets either distributed by the data team or accessed via visualization tools connected to specific database parts.
 
 **Benefits:**
-1. **Efficient collaboration:** Teams collaborate efficiently within their designated pipeline steps, leading to streamlined processes and enhanced efficiency.
+1. **Efficient collaboration:** Teams collaborate efficiently within their designated pipeline steps, streamlining processes and enhancing efficiency.
 2. **Clear responsibilities:** Responsibilities are clearly defined based on the logical layers, **preventing confusion** and promoting focused efforts.
 3. **Centralized management:** Centralized data management by BI, data, or IT teams ensures a **structured and organized** approach to data processing.
 
@@ -140,82 +140,68 @@ by the data team.*
 ![Vertical Split Design](/tutorial/onboarding/architecture-guide/vertical-design.png)
 <div align="center">Vertical Split Design Example</div>
 
-**L0 – Data acquisition**
-- All data extractions (from Salesforce, Zendesk, MySQL database, Google Analytics and Exponea)
-- Basic data quality checks - to make sure that extracted data is in expected shape and quality
+**L0 – Acquisition**
+- Extracts data from sources like Salesforce, Zendesk, MySQL database, Google Analytics, and Exponea.
+- Performs initial data quality checks to ensure that extracted data is in the expected shape and quality.
 
-**L1 – Core**
-- The core layer of data preparation and processing - data from L0 are combined into a unified data model
-- Data cleaning
-- Data processing
+**L1 – Core Processing**
+- Integrates L0 data into a single data model for further preparation and processing.
+- Cleans and processes data for analysis.
 
-**L2 – Data-marts**
-- One or more L2 projects that serve for data-mart creation
-- Built datasets are consumed by business/other data consumers 
-- Objects in this projects are made accessible from visualization/reporting tools
+**L2 – Data Marts**
+- Hosts projects for creating data marts, used by business and other users.
+- Makes data accessible through visualization and reporting tools.
 
-**LX – Telemetry and governance**
-- Typically we would recommend to keep a separate project for consumption of Keboola’s telemetry data and other metadata that describe overall platform usage and serve for organization’s admins as a detailed monitoring 
+**LX – Telemetry & Governance**
+- Maintains a dedicated project for analyzing Keboola’s telemetry and metadata to have a comprehensive platform management and oversight.
 
 #### Horizontal split design
-The Horizontal Split Design involves dividing data pipelines and infrastructure based on departments, circles, or other entities within an organization. 
-This approach tailors data processing to specific use cases and allows individual entities to independently manage their entire data-related workflow. 
-For example, a marketing data catalog can be exclusively maintained by the marketing department, leveraging their domain knowledge.
+The horizontal split design segments data pipelines and infrastructure by organizational units, such as departments and circles, enabling tailored data processing 
+for distinct use cases. This setup allows each unit to independently oversee its data workflow, using specialized knowledge.
+For example, a marketing data catalog can be exclusively maintained by the marketing department, taking advantage of their domain knowledge.
 
-**Horizontal split design is suitable when:**
-1. **Entities operate independently**  
-Individual entities operate as clearly standalone units and are capable of independently handling the entire data-related workflow.
-2. **Use-case-driven infrastructure**  
-Infrastructure is designed based on specific use cases, allowing each entity to manage data pipelines aligned with their unique requirements.
+**Horizontal split design is ideal when:**
+1. **Entities operate independently:** Suitable for units functioning autonomously with complete control over their data workflows.
+2. **Use-case specific infrastructure:** Designed around unique needs, allowing units to tailor data pipelines to their requirements.
 
 **Key considerations:**  
-1. **Departmental independence**  
-Each department or entity operates independently, taking care of its entire data-related work, from data extractions to full data processing.
-2. **Use-case-driven**  
-Infrastructure is driven by specific use cases, ensuring that each department's data needs are addressed within its designated project.
+1. **Departmental autonomy:** Units manage their data tasks, from extraction to processing, independently.
+2. **Tailored to use cases:** Infrastructure adapts to the specific data needs of each unit.
 
-**Horizontal split design example:**
+**Examples:**
 1. **Sales and CRM**
-   - Data extractions from Salesforce and part of MySQL database.
-   - Full data processing, including eventual data testing.
-   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+   - Data extraction from Salesforce and a part of the MySQL database
+   - Full data processing, including eventual data testing
+   - Consumers access data directly in this project or via visualization and reporting tools connected to this project.
 2. **Marketing**
-   - Data extractions from Google Analytics, Exponea, and part of MySQL database.
-   - Full data processing, including eventual data testing.
-   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+   - Data extraction from Google Analytics, Exponea, and a part of the MySQL database
+   - Full data processing, including eventual data testing
+   - Consumers access data directly in this project or via visualization and reporting tools connected to this project.
 3. **Operations**
-   - Data extractions from Zendesk and part of MySQL database.
-   - Full data processing, including eventual data testing.
-   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+   - Data extractions from Zendesk and a part of the MySQL database
+   - Full data processing, including eventual data testing
+   - Consumers access data directly in this project or via visualization and reporting tools connected to this project.
 
 {: .image-popup}
 ![Horizontal Split Design](/tutorial/onboarding/architecture-guide/horizontal-design.png)
 <div align="center">Horizontal Split Design Example</div>
 
 **Benefits:**
-1. **Departmental autonomy**  
-Each department or entity enjoys autonomy in managing its specific data-related processes, fostering independence and flexibility.
-2. **Use-case customization**  
-Infrastructure is customized based on specific use cases, ensuring that each entity's data processing aligns with its unique requirements.
-3. **Domain knowledge utilization**  
-Departments leverage their domain knowledge to curate and manage their respective data catalogs, optimizing for accuracy and relevance.
+1. **Autonomy for departments:** Empowers each unit with control over its data processes, enhancing flexibility.
+2. **Customized infrastructure:** Infrastructure is customized based on specific use cases of each unit, ensuring precise data processing.
+3. **Use of expertise:** Deparments apply their domain knowledge for optimal data management, accuracy, and relevance.
 
 **Considerations for implementation:**  
-1. **Departmental collaboration**  
-While entities operate independently, establish communication channels for collaboration and information sharing where needed.
-2. **Data governance**  
-Implement data governance practices to ensure consistency and adherence to standards across different horizontal splits.
-3. **Scalability**  
-Evaluate the scalability of each horizontal split to accommodate future growth and changing data processing needs within individual departments.
+1. **Foster collaboration:** Despite autonomy, promote inter-departmental communication for shared insights.
+2. **Enforce data governance:** Maintain consistency and standards across all units through governance practices.
+3. **Plan for Scalability:** Ensure the design can grow with the department's expanding data needs.
 
-***Note**: This design is effective when entities operate as self-contained units and can manage their entire data workflow independently, 
-aligning well with specific departmental requirements and domain knowledge.*
+***Note**: This approach excels when units can independently handle their data, aligning with specific departmental requirements and domain knowledge.*
 
 #### Hybrid split design
-The Hybrid Split Design is a comprehensive approach that combines both vertical and horizontal splits within the data environment. 
-This design is often the most typical and practical solution for organizations. It acknowledges the need to vertically separate data extractions 
-and integrations from processing and consumption. Simultaneously, it recognizes the necessity to horizontally split one or more of these vertical layers, 
-dedicating isolated environments to individual business units, departments, or teams.
+The hybrid split design combines vertical and horizontal approaches to structure the data architecture, offering a versatile solution for organizations.
+It enables vertical segregation of data extraction and integration from processing and consumption, while also allowing to horizontally split one or more of 
+vertical layers to create isolated environments for individual business units, departments, or teams.
 
 **Hybrid split design is suitable when:**
 1. **Need for vertical and horizontal separation**  
