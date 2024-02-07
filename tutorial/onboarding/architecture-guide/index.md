@@ -98,14 +98,14 @@ See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-
 " 
 %}
 
-### MPA Design Strategies
-MPA designs typically follow vertical, horizontal, or a hybrid approach:
+## MPA Design Strategies
+MPA designs typically follow a vertical, horizontal, or hybrid approach:
 
 {: .image-popup}
 ![Vertical and Horizontal Split Design](/tutorial/onboarding/architecture-guide/split-design.png)
 <div align="center">Vertical and Horizontal Split Design</div>
 
-#### Vertical split design
+### Vertical Split Design
 The vertical split design assigns distinct pipeline stages to specific teams, typically reflecting the shift from core engineering/IT to business functions 
 within an organization. 
 
@@ -155,7 +155,7 @@ by the data team.*
 **LX – Telemetry & Governance**
 - Maintains a dedicated project for analyzing Keboola’s telemetry and metadata for a comprehensive platform management and oversight.
 
-#### Horizontal split design
+### Horizontal Split Design
 The horizontal split design segments data pipelines and infrastructure by organizational units, such as departments and circles, enabling tailored data processing 
 for distinct use cases. This setup allows each unit to oversee its data workflow independently using specialized knowledge.
 For example, the marketing departement can exclusively maintain a marketing data catalog, taking advantage of their domain knowledge.
@@ -198,7 +198,7 @@ For example, the marketing departement can exclusively maintain a marketing data
 
 ***Note**: This approach excels when units can independently handle their data, aligning with specific departmental requirements and domain knowledge.*
 
-#### Hybrid split design
+### Hybrid Split Design
 The hybrid split design combines vertical and horizontal approaches within the data environment, offering a versatile solution for organizations.
 It enables vertical segregation of data extraction and integration from processing and consumption while also allowing the horizontal split of one or more 
 vertical layers to create isolated environments for individual business units, departments, or teams.
