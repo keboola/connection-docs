@@ -199,42 +199,29 @@ For example, a marketing data catalog can be exclusively maintained by the marke
 ***Note**: This approach excels when units can independently handle their data, aligning with specific departmental requirements and domain knowledge.*
 
 #### Hybrid split design
-The hybrid split design combines vertical and horizontal approaches to structure the data architecture, offering a versatile solution for organizations.
+The hybrid split design combines vertical and horizontal approaches within the data environment, offering a versatile solution for organizations.
 It enables vertical segregation of data extraction and integration from processing and consumption, while also allowing to horizontally split one or more of 
 vertical layers to create isolated environments for individual business units, departments, or teams.
 
-**Hybrid split design is suitable when:**
-1. **Need for vertical and horizontal separation**  
-There is a requirement to separate data extractions and integrations (vertical split) from processing and consumption, and simultaneously,
-there is a need to horizontally split these vertical layers to cater to specific business units, departments, or teams.
-2. **Balance of independence and collaboration**  
-The organization seeks a balance between providing independence to different entities for their specific data workflows while fostering collaboration where needed.
+**Hybrid split design is ideal when:**
+1. **Combined separation needs:** Essential for separating data operations vertically and catering to specific business units, departments, or teams horizontally.
+2. **Mix of autonomy and teamwork:** Aims for a balance between independent workflows for various entities and collaborative efforts as required.
 
 **Key considerations:**
-1. **Combination of vertical and horizontal splits**  
-Integrates both vertical and horizontal splits to create a nuanced and adaptable data architecture.
-2. **Isolation for business units or teams**  
-Allocates isolated environments to individual business units, departments, or teams based on their unique data processing needs.
+1. **Combination of splits:** Merges vertical and horizontal splits to create a nuanced and adaptable data architecture.
+2. **Dedicated spaces:** Provides individual business units, departments, and teams with their unique data environments.
 
 **Benefits:**
-1. **Balanced independence**  
-Achieves a balance between providing independence to different entities for their specific data workflows (vertical split) and facilitating collaboration (horizontal split).
-2. **Customization for entities**  
-Allows customization of data processing environments based on specific business unit or team requirements.
+1. **Balanced independence:** Balances individual data management needs (vertical split) with opportunities for cross-entity cooperation (horizontal split).
+2. **Tailored environments:** Customizes data processing environments to meet the requirements of each business unit or team.
 
 **Considerations for implementation:**
-1. **Vertical split Clarity**  
-Clearly define the vertical split, ensuring a clear separation between data extractions/integrations and processing/consumption layers.
-2. **Horizontal split alignment**  
-Align horizontal splits with specific business units, departments, or teams, ensuring that each entity has an isolated environment.
-3. **Collaboration channels**  
-Establish channels for collaboration and information sharing where needed, fostering effective communication between different entities.
-4. **Scalability and adaptability**  
-Assess the scalability and adaptability of the hybrid split design to accommodate future growth, changes in data landscape, and evolving business needs.
+1. **Define vertical layers:** Ensure clear separation between the data extraction/integration and processing/consumption layers.
+2. **Align horizontal splits:** Match horizontal splits with specific business units, departments, or teams, ensuring that each has an isolated environment.
+3. **Enable collaboration:** Set up channels for smooth interactions accros entities.
+4. **Ensure flexibility and growth:** Plan for the design's scalability and flexibility to adapt to future organizational changes.
 
-***Note:** The hybrid split design recognizes the complexity of organizational data requirements and strives to provide a flexible, adaptable, 
-and balanced solution. It allows organizations to leverage the benefits of both vertical and horizontal splits, tailoring the data architecture 
-to meet diverse and evolving needs.*
+***Note:** The hybrid split design adapts to the complex needs of organizations, blending the strengths of both vertical and horizontal structuring to create a dynamic, scalable data architecture.*
 
 {: .image-popup}
 ![Hybrid Split Design](/tutorial/onboarding/architecture-guide/hybrid-design.png)
