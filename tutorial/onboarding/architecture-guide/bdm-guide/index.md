@@ -40,7 +40,7 @@ as essential at the end of the day.
 
 Beyond that, it’s just a whiteboard, Post-its (it's good to have three different colors), and a few markers. Then, you’re good to go.
 
-While we always digitize the model once it’s at least initially laid out, and it's possible to do this completely digitally and remotelly 
+While we always digitize the model once it’s at least initially laid out, and it's possible to do this completely digitally and remotely 
 (Google Drawings are a good start despite its simplicity as multiple people can be working on it at once), we always find it more effective and 
 engaging in person. Often, the first workshop happens on-site, and we follow up with one or two rounds that can be remote, 
 using the digital drawing to collaborate.
