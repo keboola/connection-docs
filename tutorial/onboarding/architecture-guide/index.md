@@ -8,314 +8,220 @@ permalink: /tutorial/onboarding/architecture-guide/
 
 Welcome to the Multi-Project Architecture Guide!
 
-This guide is designed to assist you in strategically organizing your Keboola projects, offering insights into standard architectures 
-that have proven successful for clients of varying sizes. By delving into this resource, you will gain a deeper understanding of the diverse project structures 
-that align with different organizational needs and requirements. Whether you're a small team or a large enterprise, this guide aims to empower you 
-with the knowledge needed to make informed decisions on how best to configure your Keboola projects for optimal efficiency and effectiveness.
+This guide helps you effectively organize your Keboola projects, sharing successful strategies for clients of all sizes. You'll learn about various project 
+setups that meet your organizational needs and gain insights to tailor your Keboola projects for maximum efficiency and success.
 
 ## Single Keboola Project 
-The foundation of implementing and utilizing the **Keboola Platform** begins with the establishment of the initial **Keboola project**. 
+A **Keboola project** is the starting point for using the **Keboola Platform**, acting as a self-contained environment for managing access, data pipelines, 
+storage, and processes. It provides a structured framework for distributing tasks and access across teams, ensuring efficient data governance.
 
-Conceptually, a Keboola project serves as a logical construct, providing isolation for access rights, responsibilities, data pipelines, storage, 
-and embedded processes. This segregation facilitates the distributed allocation of access and responsibilities among individuals and teams 
-while maintaining comprehensive control over the data governance layer.
+Each project includes the following key components:
 
-By default, every **Keboola project** encompasses essential building blocks, including:
 1. **Storage**
    - Relational databases such as Snowflake, Redshift, Synapse, Exasol, and others
    - Object storage options like S3 or Azure Blob Storage
 2. **Components**
-   - Data sources: Connectors to pull data from various sources into the Keboola storage
-   - Data destinations: Facilitating reverse ETL to push processed data from Keboola to databases, services, or applications.
-   - Applications: Advanced components for tasks like data quality checks, natural language processing (NLP), and more.
-   - Data templates: Predefined packages of components for streamlined pipeline setup.
-3. **Transformations** (SQL, Python, R)
-   - Transformations give you the ability to transform your data into the desired format and structures for further usage and consumption.
-4. **Flows**
-   - Flows bring everything together. A flow is a set of tasks organized in a workflow that has an assigned schedule of execution.
-5. **Governance layer**
-   - Metadata, telemetry, identity management, access control, etc. 
+   - Data sources and destinations for loading data into Keboola Storage and exporting to databases, services, or applications
+   - Applications for specialized tasks (data quality checks, NLP, etc.)
+   - Data templates for easy pipeline setup
+3. **Transformations** allow you to manipulate data for further use and consumption (SQL, Python, and R).
+4. **Flows** bring everything together as sets of tasks organized in workflows with assigned execution schedules.
+5. **Governance layer** covers metadata, telemetry, identity management, access control, etc. 
 
 {: .image-popup}
 ![Keboola Overview](/tutorial/onboarding/architecture-guide/pic1.png)
 
-Many organizations find a single Keboola project sufficient for an extended period, or even indefinitely. It offers all the tools 
-integrated into an advanced, modern data stack, allowing users to integrate data sources, develop transformations, orchestrate pipelines, 
-and use the project as an analytical environment. Direct interaction with data is possible through SQL, Python, R, or visualization tools 
-like Tableau, PowerBI, ThoughtSpot, Qlik, and more.
+For many organizations, a single Keboola project suffices indefinitely, supporting a comprehensive data stack for integration, transformation, pipeline 
+orchestration, and analysis through SQL, Python, R, and visualization tools (e.g., Tableau, PowerBI, ThoughtSpot, and Qlik).
 
-However, as an organization grows or matures, several reasons may arise for transitioning from using individual data tools to adopting 
-a comprehensive data platform. This evolution is encapsulated in the **multi-project architecture (MPA)** within Keboola, signifying the strategic move to split 
-the ecosystem into multiple projects. This shift accommodates the evolving needs of a maturing organization and transforms the Keboola Platform 
-into a more sophisticated and scalable data solution.
+Organizations may transition to a **multi-project architecture** within Keboola as they evolve. This advanced structure allows for a scalable and 
+sophisticated data solution by splitting responsibilities across multiple projects. This approach aligns with modern data management strategies, such as data mesh 
+and democratization, by maintaining integrated yet isolated environments to avoid bottlenecks typically encountered with centralized BI teams.
 
-> *"What’s the difference? Proper data platform allows you to fully benefit from the modern approach of data mesh and data democratization.
-> Splitting responsibilities and artifacts into multiple isolated environments while keeping them well integrated and managed is
-> what’ll allow you to move forward with your business use-cases without creating the bottleneck which typically happens
-> as centralized BI teams get overloaded rather sooner than later."*
+## Multi-Project Architecture (MPA)
+MPS is a design strategy that divides data processing tasks among multiple function-specific Keboola projects. It transforms a single-project focus on Extract, Transform, and Load (ETL) processes into a structured data platform, enhancing organizational data management. This approach clarifies the role, simplifies access control, and supports tailored data usage and governance.
 
-## What Is MPA?
-Multi-project architecture is a strategic approach that involves the partitioning of data processing pipelines across distinct blocks represented 
-by individual Keboola projects. In this framework, each project assumes a specific function, serving as a dedicated entity responsible for delivering a portion of 
-the "data catalog." This catalog can then be utilized by any other project, allowing users to subscribe to it or catering to specific use cases within the 
-organization.
+These are the key benefits of MPA:
 
-Essentially, MPA marks a transition from a single project, typically focused on Extract, Transform, Load (ETL) processes, to a comprehensive data platform. 
-Beyond simplifying the cognitive complexity of the project, MPA enables the clear separation of responsibilities and access rights within each segment of the data 
-ecosystem. It offers a systematic organization and management of data usage across the entire organization, supporting the transformation of the Keboola Platform 
-from a tool-centric solution to a fully-fledged data platform.
-
-Key benefits of multi-project architecture include:
-
-1. **Separation of Responsibilities and Access Rights**  
-Ideal for organizations with diverse use cases, users, and personas, MPA facilitates the distinct allocation of responsibilities
-and access rights based on functional requirements.
-2. **Functional Designation of Projects**  
-Projects can be designated for specific functions such as stable data pipelines, experimental projects, consumption projects, etc.,
-providing clarity in their purpose.
-3. **Clear Separation of Logical Pipeline Steps**  
-Each project delineates a logical step in the data pipeline, contributing to a clear and organized structure of data processing.
-4. **Team Assignment to Projects**  
-Different teams can be assigned to different projects, promoting collaboration and specialization. For instance, the marketing team may operate
+1. **Defined Roles and Access:** Facilitates role-specific access and responsibilities, ideal for diverse organizational needs.
+2. **Purpose-Specific Projects:** Assigns projects to specific functions like stable pipelines or experimental projects for clarity.
+3. **Organized Data Processing:** Segregates data pipeline stages into distinct projects for better structure.
+4. **Team Collaboration:** Allows team-specific project assignments, enhancing focus and collaboration. For instance, your marketing team may operate
 on a dedicated marketing project.
-5. **Flexibility of the Infrastructure**  
- MPA allows for flexibility in configuring the infrastructure to match the evolving needs of the organization.
-6. **Readiness for Future Expansions**  
- The architectural design of MPA is conducive to future expansions, ensuring scalability and adaptability as the organization grows.
-7. **Mitigation of Unknowns in Architecture Design**  
-MPA simplifies the process of adjusting the architecture to changing conditions or scope, offering agility in responding to evolving requirements.
-
-In summary, multi-project architecture is a strategic evolution that optimizes the Keboola Platform. It provides a structured and scalable framework 
-to accommodate the complex and dynamic needs of organizations engaged in diverse data processing and analytics activities.
-
-### Determining the Need for Multi-Project Architecture (MPA)
-If you find yourself contemplating the implementation of multi-project architecture (MPA) within your Keboola Organization, 
-the following set of questions can serve as a valuable guide to assess whether the transition to multiple isolated projects aligns 
-with the specific dynamics and needs of your organization:
+5. **Adaptable Infrastructure:** Offers flexibility to meet changing organizational needs.
+6. **Scalability and Future Growth:** Prepares the architecture for scalable expansion and adaptability.   
+7. **Responsive Architecture Design:** Enables agile adjustments to evolving data management requirements.
+   
+### Assessing MPA Necessity
+To determine if MPA suits your organization, consider the following:
 
 1. **Do you want to separate data extraction?**  
-Consider dedicating a separate project to data acquisition (e.g., L0 or Staging project) to streamline the setup of connectors and scheduling
-without encumbering data processing. This separation facilitates collaboration among engineers, data source owners, analysts, and other team members.
-2. **Do you have many data sources of various types?**  
-Evaluate whether distinct groups of data sources (e.g., marketing, CRM, sales, accounting) could benefit from processing in separate projects,
-thereby maintaining clarity in responsibilities and access permissions.
-3. **Do you have multiple teams/branches/countries with specific needs?**  
-Assess whether different teams, branches, or countries possess unique data sources, use cases, and requirements,
-making the case for dedicated isolated projects to cater to specific needs.
-4. **Do you have a team of specialists and data consumers?**  
-Explore whether a team of specialists (e.g., BI team, data analysts) can manage core data preparation in one project,
-while data consumers access selected data assets via their dedicated projects, facilitating a balance between specialization and accessibility.
-5. **Do you work with external vendors?**  
-If external vendors require managed access to specific data subsets, consider creating a separate project for them to ensure controlled access
-and comprehensive logging.
-6. **What does your organizational structure look like?**  
-Align project split with existing company domains, following the Data Mesh philosophy, to embrace decentralized data ownership, self-service,
-and federated management of computing resources.
-7. **Is your team small and collaborative?**  
-For small, collaborative teams working on multiple sources, consider minimizing the number of projects and perhaps only splitting the L0 layer
-by source/domain to reduce cognitive complexity.
-8. **How will you respond to failures?**  
-Ensure that each project is isolated with a clear owner, facilitating swift responses in the event of failures or issues.
-9. **Are there differences between regions/countries?**  
-Assess the level of complexity introduced by regional or country-specific differences, and evaluate whether maintaining the split on L1 layer and merging
-at L2 level provides a balanced approach.
-10. **Do you have sensitive data?**  
-Consider the need to keep sensitive data separate for security reasons or to facilitate separate team management, and assess whether data masking is necessary
-at the L0 and L1 levels.
+Streamline data acquisition with a dedicated project (e.g., L0 or Staging project) to enhance collaboration.
+2. **Do you have diverse data sources?**  ne
+Process varying data sources (e.g., marketing, CRM, sales, accounting) in distinct projects for clearer management.
+3. **Do you have unique team requirements?**  
+Cater to different teams, branches, or country-specific needs with isolated projects.
+4. **Do you have specialist and consumer teams?**  
+Can your team of specialists (e.g., BI team, data analysts) prepare core data in one project while data consumers access selected data assets via their dedicated projects? Balance data preparation and access between specialist and consumer projects.
+5. **Do you collaborate with external vendors?**  
+Control data access for external vendors through dedicated projects.
+6. **What is your organizational structure?**  
+Align projects with company domains, adopting a decentralized data management approach.
+7. **What is your team size?**  
+For small, collaborative teams, minimize project numbers and focus on essential separations (perhaps only splitting the L0 layer by source/domain).
+8. **How to respond to failures?**  
+Ensure that each project is isolated with a clear owner to resolve issues quickly.
+9. **Are there differences between regions/countries?**
+Consider splitting projects based on regional differences to manage complexity. Evaluate whether maintaining the split on the L1 layer and merging at the L2 level provides a balanced approach.
+10. **Do you use sensitive data?**  
+Keep sensitive data separate for security reasons and to facilitate team management. Assess whether data masking is necessary at the L0 and L1 levels.
 
 By addressing these questions, you can gain valuable insights into whether multi-project architecture aligns with your organizational structure, 
 data processing requirements, and collaboration dynamics, ensuring a strategic and effective implementation of Keboola projects.
 
-## How to Design the MPA
-Designing a multi-project architecture is a nuanced process, and each design is inherently unique, tailored to the specific environment, business needs, 
-and organizational structure. While there is no one-size-fits-all solution, the following factors play a crucial role in determining the optimal architecture:
+## Designing MPA
+Designing an MPA involves tailoring the architecture to fit the organization's unique needs, data characteristics, and business operations.
 
-1. **Nature of data/business:**  
-Understand the characteristics of the data and business operations to identify related domains and objects.
-2. **Organizational structure:**  
-Consider the internal organizational structure, including the roles and responsibilities of data teams within the company.
-3. **Data source variety and separation:**  
-Evaluate the variety and separation of data sources to determine if specific projects are needed for different types of sources.
-4. **Security aspects:**  
-Address security considerations, including geo-locations, data ownership, and compliance requirements.
-5. **Volume of data and complexity:**  
-Assess the volume and complexity of data within particular domains to inform the architecture.
+Determine the optimal architecture based on the following:
+
+1. **Data and business nature:** Understand the data and business operations to identify domains and objects.
+2. **Organizational structure:** Align with the organization's structure, focusing on data team roles and responsibilities.
+3. **Data source diversity:** Assess the need for project separation based on data source variety.
+4. **Security:** Consider data security, ownership, and compliance.
+5. **Data volume and complexity:** Evaluate the data's volume and complexity to guide the design.
 
 {% include tip.html content="
-One precursor which should serve as a starting point is a defined **business data model (BDM)**.
-This exercise helps you to understand the business in terms of data and discover domains that are related to each other. 
-
-Generally speaking, the objects defined in the BDM should be grouped closely within the MPA. For instance, all logic related to a Customer object
-(and any closely related objects) should be in one project. It's common for multiple sources to contribute to this object, possibly coming from
-multiple L0 level projects. However, there should always be a single point of consolidation for this object as soon as possible (e.g., in L1/2). 
+A **business data model (BDM)** serves as the foundation, helping to group related objects within the MPA. It facilitates understanding business data and 
+organizing projects around key domains, ensuring consolidation at appropriate levels (e.g., in L1/2). 
 
 See our [**BDM methodology guide**](/tutorial/onboarding/architecture-guide/bdm-guide/) for more information.
 " 
 %}
 
-### Standard MPA designs
-This chapter describes the most typical MPA designs and demonstrates those in simple examples. In general we have defined two main strategies - vertical and horizontal - of splitting the projects that may be combined together into a so-called hybrid design.
-
-As you embark on the design process, keep in mind the dynamic and evolving nature of your organization. Regularly revisit and adjust the MPA design to accommodate changes in business priorities, data landscape, and organizational structure. The goal is to create an architecture that enhances collaboration, efficiency, and scalability across your data projects.
+## MPA Design Strategies
+MPA designs typically follow a vertical, horizontal, or hybrid approach:
 
 {: .image-popup}
 ![Vertical and Horizontal Split Design](/tutorial/onboarding/architecture-guide/split-design.png)
 <div align="center">Vertical and Horizontal Split Design</div>
 
-#### Vertical split design
-The vertical split design strategy involves dedicating different pipeline steps to different teams, often aligning with the transition 
-between core engineering/IT and business functions within an organization. This approach is commonly observed in enterprise environments, 
-where IT teams design logical blocks of infrastructure, represented as projects in Keboola's terminology, vertically into L0 (data acquisition projects), 
-L1, L2, and so on. Each layer corresponds to different data processing stages, from acquisition to transformation and blending, to data consumption projects.
+### Vertical Split Design
+The vertical split design assigns distinct pipeline stages to specific teams, typically reflecting the shift from core engineering/IT to business functions 
+within an organization. 
 
-**Vertical split design is suitable when:**
-1. **Dedicated isolation isn't necessary**  
-There's no need to dedicate isolated projects to individual data consumers or business users. Instead, the focus is on logically splitting the data processing into distinct layers.
-2. **Managed by BI/data/IT teams**  
-BI, data, or IT teams manage the full data environment of the organization. In such cases, these teams are responsible for orchestrating data processing and making datasets available for consumption.
-3. **Centralized data access**  
-Individual data consumers only access datasets provided by the data team or consume data via a visualization tool connected to a dedicated part of the underlying database.
+This strategy is common in enterprise settings, where IT teams design logical blocks of infrastructure (projects) into vertical projects, such as L0 
+for data acquisition, followed by L1, L2, etc., in Keboola's framework. Each level represents a stage in data processing, ranging from acquisition, 
+transformation, and blending to consumption.
+
+**Vertical split design is ideal when:**
+1. **Isolation isn't required:** No need for projects isolated to each data consumer or business user; the emphasis is on dividing data processing logically into separate layers.
+2. **Managed by BI/data/IT teams:** These teams oversee the entire data landscape, orchestrating processing and dataset availability for consumption.
+3. **Centralized data access:** Individual data consumers access datasets provided by the data team or via visualization tools linked to a specific database segment.
 
 **Key considerations:**
-1. **Logical layering**  
-The design is structured based on logical layers, allowing each team to focus on specific aspects of data processing without overlapping responsibilities.
-2. **Data team ownership**
-The data team has a central role in managing the full data environment and orchestrating data processing activities across different layers.
-3. **Data access control**
-Data consumers access datasets made available by the data team or utilize data via visualization tools connected to specific sections of the underlying database.
+1. **Layer-based structure:** The architecture is organized into logical layers, with each team handling data processing tasks without overlap.
+2. **Ownership by data team:** The data team plays a pivotal role in managing and coordinating data across all layers.
+3. **Managed data access:** Access to data is regulated, with datasets either distributed by the data team or accessed via visualization tools connected to specific database parts.
 
 **Benefits:**
-1. **Efficient collaboration**  
-Teams can efficiently collaborate within their designated pipeline steps, leading to streamlined processes and enhanced efficiency.
-2. **Clear responsibilities**  
-Responsibilities are clearly defined for each team based on the logical layers, avoiding confusion and promoting focused efforts.
-3. **Centralized management**  
-Centralized data management by BI, data, or IT teams ensures a structured and organized approach to data processing.
+1. **Efficient collaboration:** Teams collaborate efficiently within their designated pipeline steps, streamlining processes and enhancing efficiency.
+2. **Clear responsibilities:** Responsibilities are clearly defined based on the logical layers, **preventing confusion** and promoting focused efforts.
+3. **Centralized management:** Centralized data management by BI, data, or IT teams ensures a **structured and organized** approach to data processing.
 
 **Considerations for implementation:**
-1. **Team alignment**  
-Ensure that team structures align with the logical layers of data processing, allowing each team to specialize in their designated stage.
-2. **Communication channels**  
-Establish clear communication channels between teams to facilitate collaboration and information sharing across different stages of data processing.
-3. **Continuous evaluation**  
-Regularly evaluate the effectiveness of the Vertical Split Design and make adjustments as needed based on evolving business needs and data requirements.
+1. **Team alignment:** Match team structures with data processing layers to enable specialization in their designated stage.
+2. **Open communication:** Create defined channels for team communication to enhance collaboration and information sharing.
+3. **Continuous evaluation:** Regularly assess and adjust the vertical split design to address changing business and data needs.
 
-***Note:** This design is particularly well-suited for environments where a centralized approach to data management and processing is effective, 
-and individual data consumers primarily interact with curated datasets provided by the data team.*
+***Note:** This strategy excels in settings that benefit from centralized data management, where individual data consumers mainly interact with datasets curated
+by the data team.*
 
 {: .image-popup}
 ![Vertical Split Design](/tutorial/onboarding/architecture-guide/vertical-design.png)
 <div align="center">Vertical Split Design Example</div>
 
-**L0 – Data acquisition**
-- All data extractions (from Salesforce, Zendesk, MySQL database, Google Analytics and Exponea)
-- Basic data quality checks - to make sure that extracted data is in expected shape and quality
+**L0 – Acquisition**
+- Extracts data from Salesforce, Zendesk, MySQL database, Google Analytics, and Exponea.
+- Performs initial data quality checks to ensure that extracted data is in the expected shape and quality.
 
-**L1 – Core**
-- The core layer of data preparation and processing - data from L0 are combined into a unified data model
-- Data cleaning
-- Data processing
+**L1 – Core Processing**
+- Integrates L0 data into a single model for further preparation and processing.
+- Cleans and processes data for analysis.
 
-**L2 – Data-marts**
-- One or more L2 projects that serve for data-mart creation
-- Built datasets are consumed by business/other data consumers 
-- Objects in this projects are made accessible from visualization/reporting tools
+**L2 – Data Marts**
+- Hosts projects for creating data marts used by businesses and other users.
+- Makes data accessible through visualization and reporting tools.
 
-**LX – Telemetry and governance**
-- Typically we would recommend to keep a separate project for consumption of Keboola’s telemetry data and other metadata that describe overall platform usage and serve for organization’s admins as a detailed monitoring 
+**LX – Telemetry & Governance**
+- Maintains a dedicated project for analyzing Keboola’s telemetry and metadata for a comprehensive platform management and oversight.
 
-#### Horizontal split design
-The Horizontal Split Design involves dividing data pipelines and infrastructure based on departments, circles, or other entities within an organization. 
-This approach tailors data processing to specific use cases and allows individual entities to independently manage their entire data-related workflow. 
-For example, a marketing data catalog can be exclusively maintained by the marketing department, leveraging their domain knowledge.
+### Horizontal Split Design
+The horizontal split design segments data pipelines and infrastructure by organizational units, such as departments and circles, enabling tailored data processing 
+for distinct use cases. This setup allows each unit to oversee its data workflow independently using specialized knowledge.
+For example, the marketing departement can exclusively maintain a marketing data catalog, taking advantage of their domain knowledge.
 
-**Horizontal split design is suitable when:**
-1. **Entities operate independently**  
-Individual entities operate as clearly standalone units and are capable of independently handling the entire data-related workflow.
-2. **Use-case-driven infrastructure**  
-Infrastructure is designed based on specific use cases, allowing each entity to manage data pipelines aligned with their unique requirements.
+**Horizontal split design is ideal when:**
+1. **Entities operate independently:** Suitable for units functioning autonomously with complete control over their data workflows.
+2. **Use-case-specific infrastructure:** Designed around unique needs, allowing units to tailor data pipelines to their requirements.
 
 **Key considerations:**  
-1. **Departmental independence**  
-Each department or entity operates independently, taking care of its entire data-related work, from data extractions to full data processing.
-2. **Use-case-driven**  
-Infrastructure is driven by specific use cases, ensuring that each department's data needs are addressed within its designated project.
+1. **Departmental autonomy:** Units independently manage their data tasks, from extraction to processing.
+2. **Tailored to use cases:** Infrastructure adapts to the specific data needs of each unit.
 
-**Horizontal split design example:**
+**Examples:**
 1. **Sales and CRM**
-   - Data extractions from Salesforce and part of MySQL database.
-   - Full data processing, including eventual data testing.
-   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+   - Data extraction from Salesforce and a part of the MySQL database
+   - Full data processing, including eventual data testing
+   - Consumers access data directly in this project or via visualization and reporting tools connected to this project.
 2. **Marketing**
-   - Data extractions from Google Analytics, Exponea, and part of MySQL database.
-   - Full data processing, including eventual data testing.
-   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+   - Data extraction from Google Analytics, Exponea, and a part of the MySQL database
+   - Full data processing, including eventual data testing
+   - Consumers access data directly in this project or via visualization and reporting tools connected to this project.
 3. **Operations**
-   - Data extractions from Zendesk and part of MySQL database.
-   - Full data processing, including eventual data testing.
-   - Consumers access data directly in this project or via a visualization/reporting tool connected to this project.
+   - Data extractions from Zendesk and a part of the MySQL database
+   - Full data processing, including eventual data testing
+   - Consumers access data directly in this project or via visualization and reporting tools connected to this project.
 
 {: .image-popup}
 ![Horizontal Split Design](/tutorial/onboarding/architecture-guide/horizontal-design.png)
 <div align="center">Horizontal Split Design Example</div>
 
 **Benefits:**
-1. **Departmental autonomy**  
-Each department or entity enjoys autonomy in managing its specific data-related processes, fostering independence and flexibility.
-2. **Use-case customization**  
-Infrastructure is customized based on specific use cases, ensuring that each entity's data processing aligns with its unique requirements.
-3. **Domain knowledge utilization**  
-Departments leverage their domain knowledge to curate and manage their respective data catalogs, optimizing for accuracy and relevance.
+1. **Autonomy for departments:** Empowers each unit with control over its data processes, enhancing flexibility.
+2. **Customized infrastructure:** Infrastructure is customized based on specific use cases of each unit, ensuring precise data processing.
+3. **Use of expertise:** Departments apply their domain knowledge for optimal data management, accuracy, and relevance.
 
 **Considerations for implementation:**  
-1. **Departmental collaboration**  
-While entities operate independently, establish communication channels for collaboration and information sharing where needed.
-2. **Data governance**  
-Implement data governance practices to ensure consistency and adherence to standards across different horizontal splits.
-3. **Scalability**  
-Evaluate the scalability of each horizontal split to accommodate future growth and changing data processing needs within individual departments.
+1. **Foster collaboration:** Despite autonomy, promote inter-departmental communication for shared insights.
+2. **Enforce data governance:** Maintain consistency and standards across all units through governance practices.
+3. **Plan for Scalability:** Ensure the design can grow with the department's expanding data needs.
 
-***Note**: This design is effective when entities operate as self-contained units and can manage their entire data workflow independently, 
-aligning well with specific departmental requirements and domain knowledge.*
+***Note**: This approach excels when units can independently handle their data, aligning with specific departmental requirements and domain knowledge.*
 
-#### Hybrid split design
-The Hybrid Split Design is a comprehensive approach that combines both vertical and horizontal splits within the data environment. 
-This design is often the most typical and practical solution for organizations. It acknowledges the need to vertically separate data extractions 
-and integrations from processing and consumption. Simultaneously, it recognizes the necessity to horizontally split one or more of these vertical layers, 
-dedicating isolated environments to individual business units, departments, or teams.
+### Hybrid Split Design
+The hybrid split design combines vertical and horizontal approaches within the data environment, offering a versatile solution for organizations.
+It enables vertical segregation of data extraction and integration from processing and consumption while also allowing the horizontal split of one or more 
+vertical layers to create isolated environments for individual business units, departments, or teams.
 
-**Hybrid split design is suitable when:**
-1. **Need for vertical and horizontal separation**  
-There is a requirement to separate data extractions and integrations (vertical split) from processing and consumption, and simultaneously,
-there is a need to horizontally split these vertical layers to cater to specific business units, departments, or teams.
-2. **Balance of independence and collaboration**  
-The organization seeks a balance between providing independence to different entities for their specific data workflows while fostering collaboration where needed.
+**Hybrid split design is ideal when:**
+1. **Combined separation needs:** Essential for separating data operations vertically and catering to specific business units, departments, or teams horizontally.
+2. **Mix of autonomy and teamwork:** Aims to balance independent workflows for various entities and collaborative efforts as required.
 
 **Key considerations:**
-1. **Combination of vertical and horizontal splits**  
-Integrates both vertical and horizontal splits to create a nuanced and adaptable data architecture.
-2. **Isolation for business units or teams**  
-Allocates isolated environments to individual business units, departments, or teams based on their unique data processing needs.
+1. **Combination of splits:** Merges vertical and horizontal splits to create a nuanced and adaptable data architecture.
+2. **Dedicated spaces:** Provides individual business units, departments, and teams with unique data environments.
 
 **Benefits:**
-1. **Balanced independence**  
-Achieves a balance between providing independence to different entities for their specific data workflows (vertical split) and facilitating collaboration (horizontal split).
-2. **Customization for entities**  
-Allows customization of data processing environments based on specific business unit or team requirements.
+1. **Balanced independence:** Balances individual data management needs (vertical split) with opportunities for cross-entity cooperation (horizontal split).
+2. **Tailored environments:** Customizes data processing environments to meet the requirements of each business unit or team.
 
 **Considerations for implementation:**
-1. **Vertical split Clarity**  
-Clearly define the vertical split, ensuring a clear separation between data extractions/integrations and processing/consumption layers.
-2. **Horizontal split alignment**  
-Align horizontal splits with specific business units, departments, or teams, ensuring that each entity has an isolated environment.
-3. **Collaboration channels**  
-Establish channels for collaboration and information sharing where needed, fostering effective communication between different entities.
-4. **Scalability and adaptability**  
-Assess the scalability and adaptability of the hybrid split design to accommodate future growth, changes in data landscape, and evolving business needs.
+1. **Define vertical layers:** Ensure clear separation between the data extraction/integration and processing/consumption layers.
+2. **Align horizontal splits:** Match horizontal splits with specific business units, departments, or teams, ensuring that each has an isolated environment.
+3. **Enable collaboration:** Set up channels for smooth entity interactions.
+4. **Ensure flexibility and growth:** Plan for the design's scalability and flexibility to adapt to future organizational changes.
 
-***Note:** The hybrid split design recognizes the complexity of organizational data requirements and strives to provide a flexible, adaptable, 
-and balanced solution. It allows organizations to leverage the benefits of both vertical and horizontal splits, tailoring the data architecture 
-to meet diverse and evolving needs.*
+***Note:** The hybrid split design adapts to the complex needs of organizations, blending the strengths of both vertical and horizontal structuring to create a dynamic, scalable data architecture.*
 
 {: .image-popup}
 ![Hybrid Split Design](/tutorial/onboarding/architecture-guide/hybrid-design.png)
