@@ -13,7 +13,7 @@ instance, transformation [`COPY` mapping](/transformations/snowflake/#load-type)
 the transformations. Also, some writers (data destinations), e.g., the [Snowflake writer](/components/writers/database/snowflake/), use
 the table metadata to [pre-fill the table columns](/components/writers/database/snowflake/#table-configuration) configuration for you.
 
-Even if a data type is available for a column, storage always internally creates all table columns as text, not null, and nullable values are converted to empty strings (except for Exasol, where everything is null). Remember this,
+Even if a data type is available for a column, Storage always internally creates all table columns as text, not null, and nullable values are converted to empty strings (except for Exasol, where everything is null). Remember this,
 especially in [transformations](/transformations/mappings/#output-mapping), where the output is always cast to text. This behavior can sometimes be changed with the [native data types](#native-data-types) feature.
 The non-text column type is used only during a component (transformation or writer) execution.
 The basic idea behind this is that a text type has the best interoperability, so this averts many issues (e.g., some 
@@ -44,7 +44,7 @@ When you use the table (e.g., in the [Snowflake writer](/components/writers/data
 
 Note that the column type setting is, in all cases, only a metadata setting. It does not affect the actual 
 stored data. The data is converted only when writing or copying (e.g., to a transformation or a writer). 
-That means that you can extract an *integer* column, mark it as a *timestamp* in storage and write it as 
+That means that you can extract an *integer* column, mark it as a *timestamp* in Storage and write it as 
 an *integer* into a target database (though you'll be offered to write it as a timestamp).
 
 You access both the source and base type metadata through the corresponding [API](https://keboola.docs.apiary.io/#reference/metadata). 
@@ -1013,9 +1013,11 @@ A table with a type definition is created using the [tables-definition endpoint]
 
 A component may provide information about column data types in its data manifest. Database extractors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database extractors and transformations that do NOT match the backend will create storage tables using [base types](#base-types). 
 
-_**Note:** When a table is created from base types, it uses default lengths and precisions of the target backend. For example, in Snowflake, this means, that the NUMBER base type is created as NUMBER(38,0), which might be unexpected if the source database column is NUMBER(10,2)._  
+_**Note:** When a table is created from base types, it defaults to the lengths and precisions of the target backend. For instance, in Snowflake, the NUMBER base type is created as NUMBER(38,0), which may be unexpected if the source database column is NUMBER(10,2)._  
 
-For example, this is how you can create typed tables in a Snowflake SQL transformation that will be imported to storage as typed tables: 
+_To avoid this limitation, you can manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) with the correct precisions. When subsequent jobs write data to this table, they will respect your definition as long as it matches. Remember this when dropping and recreating tables. If a job creates a table, it will default to the incorrect type based on the base type._ 
+
+For example, here's how to create typed tables in a Snowflake SQL transformation, ensuring they are imported to Storage as typed tables: 
 
 ```sql
 -- create a table with datatypes
