@@ -39,7 +39,7 @@ sophisticated data solution by splitting responsibilities across multiple projec
 and democratization, by maintaining integrated yet isolated environments to avoid bottlenecks typically encountered with centralized BI teams.
 
 ## Multi-Project Architecture (MPA)
-MPS is a design strategy that divides data processing tasks among multiple function-specific Keboola projects. It transforms a single-project focus on Extract, Transform, and Load (ETL) processes into a structured data platform, enhancing organizational data management. This approach clarifies the role, simplifies access control, and supports tailored data usage and governance.
+MPA is a design strategy that divides data processing tasks among multiple function-specific Keboola projects. It transforms a single-project focus on Extract, Transform, and Load (ETL) processes into a structured data platform, enhancing organizational data management. This approach clarifies the role, simplifies access control, and supports tailored data usage and governance.
 
 These are the key benefits of MPA:
 
