@@ -21,7 +21,7 @@ covering one or two Keboola projects, you may not need all these steps. Here's w
 4. [Keboola Governance Details](#keboola-governance-details)
    
 ### Create a Keboola Platform Usage Blueprint
-Use our [template](https://keboola.atlassian.net/wiki/spaces/KB/pages/3130458213) to create a blueprint that fits your company. This includes:
+Use our [template](https://help.keboola.com/tutorial/onboarding/usage-blueprint/) to create a blueprint that fits your company. This includes:
 
 - Selecting organization administrators
 - Setting up a project access request system, possibly with approval steps
@@ -31,15 +31,15 @@ Use our [template](https://keboola.atlassian.net/wiki/spaces/KB/pages/3130458213
 ### Design a Multi-Project Architecture
 This step is entirely **optional**.
 
-Check out our guide for creating a [multi-project setup](https://keboola.atlassian.net/wiki/spaces/KB/pages/2523430919), which helps organize 
+Check out our guide for creating a [multi-project setup](https://help.keboola.com/tutorial/onboarding/architecture-guide/), which helps organize 
 data tasks across several Keboola projects.
 
 ### Business Data Model Methodology
-Our Business Data Model [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3139600519/Business+Data+Model+BDM+Guide)
+Our Business Data Model [guide](https://help.keboola.com/tutorial/onboarding/architecture-guide/bdm-guide/)
 helps you to keep your data flexible and efficient, which is especially useful with multiple projects.
  
 ### Keboola Governance Details
-Our governance [guide](https://keboola.atlassian.net/wiki/spaces/KB/pages/3138420748) teaches you to monitor usage and costs, plus enhance security.
+Our governance [guide](https://help.keboola.com/tutorial/onboarding/governance-guide/) teaches you to monitor usage and costs, plus enhance security.
 
 ## Get Your Hands On!
 It's time to get practical:
@@ -57,6 +57,6 @@ It's time to get practical:
 
 ## Cheat Sheet: Embracing Best Practices
 Mastering Keboola means knowing how to set up components, automate workflows, and more. 
-Here’s a [cheat sheet](https://keboola.atlassian.net/wiki/spaces/KB/pages/3136978980/Cheat+Sheet+Embracing+Best+Practices) to help you along.
+Here’s a [cheat sheet](https://help.keboola.com/tutorial/onboarding/cheat-sheet/) to help you along.
 
 Enjoy exploring Keboola!
