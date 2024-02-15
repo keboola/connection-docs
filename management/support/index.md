@@ -13,7 +13,7 @@ to create a ticket, which will reach your maintainer.
 {: .image-popup}
 ![Screenshot -- User joined](/management/support/help-support-new-widget.png)
 
-Secondly, if you happen to trigger a server error while working with Keboola Connection, there will be
+Secondly, if you happen to trigger a server error while working with Keboola, there will be
 a button to contact our support in the error alert message.
 
 {: .image-popup}
