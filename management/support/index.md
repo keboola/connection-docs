@@ -7,13 +7,13 @@ permalink: /management/support/
 {:toc}
 
 There are multiple ways to obtain support from within your project.
-First and foremost, there is a button at the bottom right of your project. Click it, select **Support / Chat**, and fill in the form
+First and foremost, there is a button at the bottom right of your project. Click it, select **Support**, and fill in the form
 to create a ticket, which will reach your maintainer.
 
 {: .image-popup}
-![Screenshot -- User joined](/management/support/support-link.png)
+![Screenshot -- User joined](/management/support/help-support-new-widget.png)
 
-Secondly, if you happen to trigger a server error while working with Keboola Connection, there will be
+Secondly, if you happen to trigger a server error while working with Keboola, there will be
 a button to contact our support in the error alert message.
 
 {: .image-popup}
