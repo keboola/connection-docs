@@ -11,7 +11,7 @@ First and foremost, there is a button at the bottom right of your project. Click
 to create a ticket, which will reach your maintainer.
 
 {: .image-popup}
-![Screenshot -- User joined](/management/support/support-link.png)
+![Screenshot -- User joined](/management/support/help-support-new-widget.png)
 
 Secondly, if you happen to trigger a server error while working with Keboola Connection, there will be
 a button to contact our support in the error alert message.
