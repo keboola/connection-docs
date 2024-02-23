@@ -255,7 +255,7 @@ items:
                 title: HTTP
 
               - url: /components/extractors/storage/storage-api/
-                title: Keboola Storage
+                title: Keboola Connection Storage
 
               - url: /components/extractors/storage/onedrive-excel-sheets/
                 title: OneDrive Excel Sheets
@@ -402,7 +402,7 @@ items:
                 title: Google Sheets
 
               - url: /components/writers/storage/storage-api/
-                title: Keboola Storage
+                title: Keboola Connection Storage
 
               - url: /components/writers/storage/onedrive/
                 title: OneDrive
