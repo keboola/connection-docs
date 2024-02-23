@@ -21,18 +21,18 @@ All applications are **implemented as [components](https://developers.keboola.co
 and as such can be completely created by 3rd party developers. 
 You can even create your own application. 
 Applications can be created either for a particular end-user, or they may be offered 
-to all Keboola Connection customers; in that case they have to be registered in Keboola Connection [Developer Portal](https://components.keboola.com/).
+to all Keboola customers; in that case they have to be registered in Keboola [Developer Portal](https://components.keboola.com/).
 
 Applications may
 
 - vary in terms and conditions.
 - be billed extra; some are for free.
-- send your data to 3rd party services outside of Keboola Connection.
+- send your data to 3rd party services outside of Keboola.
 - extract data from outside sources.
 - be created by you, Keboola, or third parties. 
 - have support provided by their author. 
 
-The following screenshot shows some of many Keboola Connection applications (created by both, Keboola and 3rd parties): 
+The following screenshot shows some of many Keboola applications (created by both, Keboola and 3rd parties): 
 
 {: .image-popup}
 ![Keboola and 3rd parties Applications in KBC](/components/applications/applications.png)
@@ -40,7 +40,7 @@ The following screenshot shows some of many Keboola Connection applications (cre
 If you want to learn more about Applications or are interested in creating one, go to 
 our [Developer Documentation](https://developers.keboola.com/extend/).
 
-If you want to see a short **demo on using a 3rd party app in Keboola Connection** (analyzing text data), [click here](https://www.youtube.com/watch?v=dx03hlA7dTo). 
+If you want to see a short **demo on using a 3rd party app in Keboola** (analyzing text data), [click here](https://www.youtube.com/watch?v=dx03hlA7dTo). 
 The video shows how to quickly extract text data from Twitter's API, process the data through Geneea's
 natural language processing algorithm and visualise the results in Tableau.
 
@@ -52,16 +52,16 @@ Application and Transformations share many common properties. However, they diff
 - Both Transformations and Applications can be used in your orchestrations in exactly the same way.
 - The code of most R and Python Transformations can be used in Applications and vice versa, with none or
 very few modifications.
-- The Keboola Connection programming interfaces for Applications and Transformations are highly similar.
+- The Keboola programming interfaces for Applications and Transformations are highly similar.
 
 **Differences:**
 
-- The code in Transformations is visible to everyone in the Keboola Connection project. The application code can be hidden.
+- The code in Transformations is visible to everyone in the Keboola project. The application code can be hidden.
 - The Transformation code is tied to a specific project. To share the code across different projects,
 use Application.
-- Transformations are versioned as changes in the configuration in the Keboola Connection project.
+- Transformations are versioned as changes in the configuration in the Keboola project.
 Applications are versioned externally.
-- Applications can be created for you by 3rd parties, with some or even no access to your Keboola Connection project.
+- Applications can be created for you by 3rd parties, with some or even no access to your Keboola project.
 - There are also some [technical differences](https://developers.keboola.com/extend/custom-science/#technical-differences) between the two.
 
 When deciding between the two, consider your capabilities, available resources and the
