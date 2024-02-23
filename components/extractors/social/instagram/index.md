@@ -26,7 +26,7 @@ with access to the Facebook page you have the Instagram Business Account connect
 You will be asked for the `instagram_basic,instagram_manage_insights,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
-You can always revoke the authorization by removing the **Keboola IG Extractor** from the list
+You can always revoke the authorization by removing the **Keboola IG data source** from the list
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}

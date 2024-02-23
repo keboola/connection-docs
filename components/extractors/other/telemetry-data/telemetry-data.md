@@ -843,7 +843,7 @@ This table shows data about tables used to [trigger](/components/applications/tr
 | `kbc_trigger_table_id` (PK) | Unique Keboola trigger table identifier | `5700_kbc-us-east-1` |
 | `kbc_trigger_id` | Foreign key to the Keboola trigger | `1773_kbc-us-east-1` |
 | `kbc_project_id` | Foreign key to the Keboola project | `7874_kbc-us-east-1` |
-| `kbc_project_table_id` | Foreign key to Keboola table triggering the job | `7874_kbc-us-east-1_out.c-kbc_billing.trigger` |
+| `kbc_project_table_id` | Foreign key to the Keboola table triggering the job | `7874_kbc-us-east-1_out.c-kbc_billing.trigger` |
 | `table_id` | Identifier of the storage table triggering the job | `out.c-kbc_billing.trigger` |
 
 ### kbc_user_activity
@@ -851,7 +851,7 @@ This table shows data about basic activity of project users (job runs and config
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
-| `kbc_user_id` (PK) | Keboola user email (activity can be tracked across stacks) | `john.doe@keboola.com` |
+| `kbc_user_id` (PK) | Keboola user email address (activity can be tracked across stacks) | `john.doe@keboola.com` |
 | `kbc_project_id` (PK) | Foreign key to the Keboola project related to the activity | `7880_kbc-us-east-1` |
 | `kbc_component_id` (PK) | Identifier of the Keboola component related to the activity  | `keboola.wr-db-snowflake_kbc-us-east-1` |
 | `date` (PK) | Date the activity occurred | `2023-08-14` |

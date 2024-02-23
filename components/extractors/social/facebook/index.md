@@ -19,7 +19,7 @@ Then click **Authorize Account** to [authorize the configuration](/components/#a
 You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
-You can always revoke the authorization by removing the *Keboola extractor* from the list
+You can always revoke the authorization by removing the *Keboola data source* from the list
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}
