@@ -35,7 +35,7 @@ Applications may
 The following screenshot shows some of many Keboola applications (created by both, Keboola and 3rd parties): 
 
 {: .image-popup}
-![Keboola and 3rd parties Applications in KBC](/components/applications/applications.png)
+![Keboola and 3rd parties Applications in Keboola](/components/applications/applications.png)
 
 If you want to learn more about Applications or are interested in creating one, go to 
 our [Developer Documentation](https://developers.keboola.com/extend/).

@@ -10,7 +10,7 @@ Data templates are pre-defined sets of [component configurations](/components/).
 by an [orchestration](/orchestrator/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
 that solves a specific problem. 
 
-Keboola Connection is a very open [platform](/overview), which may be overwhelming in many cases. 
+Keboola is a very open [platform](/overview), which may be overwhelming in many cases. 
 The goal of data templates is to make the configuration of repeated (or repeatable) solutions easy. 
 Although they are pre-defined sets of configurations, the created configurations have no special properties and 
 can be modified like any other configuration you have [created manually](/components/#creating-component-configuration).

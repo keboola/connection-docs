@@ -58,7 +58,7 @@ as it physically does not move any data.
 #### `_timestamp` system column
 
 A table loaded using *Clone Table* will contain all columns of the original table plus a new `_timestamp` column.
-This column is used internally by Keboola Connection for comparison with the value of the *Changed in last* filter. 
+This column is used internally by Keboola for comparison with the value of the *Changed in last* filter. 
 
 The value in the column contains a unix timestamp of the last change of the row, which is
 
@@ -128,7 +128,7 @@ SELECT * FROM "footable";
 Be especially careful when setting up [input and output mappings](/transformations/mappings/).
 
 When writing your transformation script, quoting all table and column names is required. Snowflake converts all
-unquoted table/column identifiers to uppercase, which won't match table/column identifiers created by Keboola Connection.
+unquoted table/column identifiers to uppercase, which won't match table/column identifiers created by Keboola.
 
 {% highlight sql %}
 SELECT "barcolumn" FROM "footable";
@@ -232,7 +232,7 @@ CREATE TABLE "out" AS
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate 
 from your transformation/sandbox session and the format may change unexpectedly.
 
-**Important:** In the default US Keboola Connection [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
+**Important:** In the default US Keboola [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
 (connection.keboola.com), the following [Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) 
 parameters are overridden:
 

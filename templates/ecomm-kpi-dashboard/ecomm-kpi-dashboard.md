@@ -13,7 +13,7 @@ The dashboards display a comparison between planned numbers and the actual situa
 enabling **seamless integration with Slack** for quick communication. 
 
 With all your data centralized in a single table and location, the need for manual data collection across multiple systems is eliminated, 
-thanks to the automated capabilities of Keboola Connection. Simplify your data management with ease.
+thanks to the automated capabilities of Keboola. Simplify your data management with ease.
 
 {: .image-popup}
 ![Required Configuration](/templates/ecomm-kpi-dashboard/required-config.png)
@@ -66,7 +66,7 @@ The following data destination is available:
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the source and destination components.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab 
-in your Keboola Connection project. When you are done, click **+ Use Template**.
+in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/ecomm-kpi-dashboard/add-new-template.png)

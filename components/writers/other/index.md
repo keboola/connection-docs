@@ -3,7 +3,7 @@ title: Other Writers
 permalink: /components/writers/other/
 ---
 
-Writers export data from Keboola Connection to external systems.
+Writers export data from Keboola to external systems.
 Apart from writers for business intelligence platforms, databases and storage, there are
 writers that do not fall into any of the above mentioned categories:
 

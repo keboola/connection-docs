@@ -6,7 +6,7 @@ permalink: /catalog/multi-project/
 * TOC
 {:toc}
 
-Keboola Connection is a very versatile platform and can be used in many different ways. When you deal with a larger number of source 
+Keboola is a very versatile platform and can be used in many different ways. When you deal with a larger number of source 
 and destination systems, or when some of them are very complex or difficult to set up, you might consider splitting the
 traditional extract-load process into isolated projects.
 
@@ -22,12 +22,12 @@ over again.
 - etc.
 
 The multi project architecture is a solution to these kinds of problems. It is not really any sort of architecture, it is 
-only a *usage pattern* of the Keboola Connection platform. The idea is to create separate projects for receiving,
+only a *usage pattern* of the Keboola platform. The idea is to create separate projects for receiving,
 analyzing and writing data. The projects structure can follow the organization structure, technological structure, or
 anything else really.
 
 ## Example Scenario
-Let's say that you have an existing Keboola Connection project that contains:
+Let's say that you have an existing Keboola project that contains:
 
 - Oracle database extractor with the following configurations:
     - `ora-history` -- The source database is over 2TB; the largest table is `op_history`, which can be easily loaded [incrementally](/storage/tables/#incremental-loading) as records are only added; it is updated every 10 minutes.
@@ -80,7 +80,7 @@ working immediately. If the word "everyone" in the above statement is undesired,
 anything in the database schema, they can do that in an unlimited number of arbitrarily sized steps, provided that the shared data 
 remains same. For that they can use the entire power of SQL, Python, R and Julia transformations combined. This is a much more flexible 
 solution then the traditional way of creating views. Then there is, of course, the advantage that you can work with the Oracle data 
-even when the server is down; but that's integral part of Keboola Connection.
+even when the server is down; but that's integral part of Keboola.
 
 On a very high level, the following schema represents a single project setup:
 

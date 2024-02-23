@@ -15,12 +15,12 @@ users can quickly identify which prompts yield the best results, streamlining th
 **The flow, in a nutshell:**
 
 The template contains one flow only. It consists of a single component, a data app that serves as an interface for the user. The app is connected to 
-a specific bucket/table within Keboola Connection via an API and provides the option for query tuning.
+a specific bucket/table within Keboola via an API and provides the option for query tuning.
 
 ## How to Use Template
 The process is simple. We will guide you through it. 
 
-First, select the corresponding template (Kay PromptLab) from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template.**
+First, select the corresponding template (Kay PromptLab) from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template.**
 
 {: .image-popup}
 ![Add New Template](/templates/kai-promptlab/add-new-template.png)
@@ -55,7 +55,7 @@ by clicking the **Open Data App** button.
 ![Add Data App](/templates/kai-promptlab/add-data-app.png)
 
 Upon launching the data app, you will be prompted to enter the OpenAI API Key, which you can generate in your OpenAI account. 
-To authenticate, you will also need to enter your Keboola API token, which can be found in your **Account Settings** in the Keboola Connection platform. 
+To authenticate, you will also need to enter your Keboola API token, which can be found in your **Account Settings** in the Keboola platform. 
 
 For more information about Keboola API tokens, please refer to the [documentation](https://help.keboola.com/management/project/tokens/). 
 Once you have entered both required API tokens, click **Connect**. 

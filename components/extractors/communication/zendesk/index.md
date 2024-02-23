@@ -25,7 +25,7 @@ Fill in a description for the new token (for example, `Keboola Zendesk Extractor
 {: .image-popup}
 ![Zendesk Token copy](/components/extractors/communication/zendesk/zendesk-2.png)
 
-When the registration is finished, take a note of the API Key and save it. You will need it when creating your extractor configuration in Keboola Connection.
+When the registration is finished, take a note of the API Key and save it. You will need it when creating your extractor configuration in Keboola.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Zendesk** extractor.

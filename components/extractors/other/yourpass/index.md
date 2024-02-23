@@ -11,7 +11,7 @@ redirect_from:
 YourPass enables users to create passes for mobile wallets; e.g., for boarding passes, loyalty points, or tickets.
 
 The YourPass extractor uses the [YourPass API](https://doc.yourpass.eu/) to import data from [YourPass](https://www.yourpass.eu/)
-to Keboola Connection.
+to Keboola.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **YourPasss** extractor.

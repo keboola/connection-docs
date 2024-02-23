@@ -39,7 +39,7 @@ that the companies endpoint will return.
 
 ### Additional Settings
 
- - `users` - [OPT] If set to false, the component will truncate data in the existing Keboola Connection tables.
+ - `users` - [OPT] If set to false, the component will truncate data in the existing Keboola tables.
 
 {: .image-popup}
 ![Screenshot - Time Doctor 2 Configuration](/components/extractors/other/time-doctor-2/time-doctor-2.png)

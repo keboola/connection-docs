@@ -109,7 +109,7 @@ you'll see the following error:
     Server Connection Error
     A connection to the Jupyter server could not be established. JupyterLab will continue trying to reconnect. Check your network connection or Jupyter server configuration.
 
-If you see this error, please go to the list of workspaces in Keboola Connection, resume the workspace
+If you see this error, please go to the list of workspaces in Keboola, resume the workspace
 and reconnect from there.
 
 ### Loading Data

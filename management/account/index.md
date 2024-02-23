@@ -9,10 +9,10 @@ permalink: /management/account/
 Account management allows you to configure your own account.
 You can reach your account settings from two places:
 
-1. Keboola Connection home page
+1. Keboola home page
 2. Projects
 
-Go to the Keboola Connection home page and select **Account Settings** in the little drop down box at the top:
+Go to the Keboola home page and select **Account Settings** in the little drop down box at the top:
 
 {: .image-popup}
 ![Screenshot -- Account Settings](/management/account/account-setting-1.png)
@@ -194,7 +194,7 @@ projects but are typically used for ad-hoc projects, hackathons, and PoCs.
 ![Screenshot -- Promo codes](/management/account/promo-codes.png)
 
 ## User Sessions
-Each time you sign in to the Keboola Connection user interface, a *user session* is created.
+Each time you sign in to the Keboola user interface, a *user session* is created.
 The session is closed after an explicit logout, after **48 hours** of inactivity or when the browser is closed.
 
 You can sign in to your account multiple times from different devices (or browser windows).

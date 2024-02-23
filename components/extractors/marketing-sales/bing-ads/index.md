@@ -26,7 +26,7 @@ extractor.
 
 ### Global Configuration
 
-First log into your account using the **Authorize Account** button in the Keboola Connection interface.
+First log into your account using the **Authorize Account** button in the Keboola interface.
 
 {: .image-popup}
 ![OAuth Authorization](/components/extractors/marketing-sales/bing-ads/config_oauth.png)

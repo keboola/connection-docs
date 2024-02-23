@@ -7,9 +7,9 @@ permalink: /templates/marketing-platforms/
 {:toc}
 
 Using one of the advertising platform templates will give you an overview of the costs of all of your campaigns in the marketing channels you use. All data will be stored in one table 
-and one location. That means that you won't have to go to multiple systems and collect data manually anymore. Keboola Connection will do it for you.
+and one location. That means that you won't have to go to multiple systems and collect data manually anymore. Keboola will do it for you.
 
-With this end-to-end flow you can bring into Keboola Connection data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, 
+With this end-to-end flow you can bring into Keboola data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, 
 and Bing Ads). After all the necessary tasks are performed on the data, you load the results into Snowflake, Google BigQuery or Google Sheets. You can also enrich the data with Google Analytics.
 
 **The flow, in a nutshell:**
@@ -85,7 +85,7 @@ The following data destinations will be coming soon:
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
-from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/marketing-platforms/add-new-template.png)
@@ -157,7 +157,7 @@ You need to use at least one of the following marketing data sources. In additio
 {: .image-popup}
 ![Facebook Ads Data Source](/templates/marketing-platforms/facebook-ads-data-source.png)
 
-Log into Facebook with redirection from this step and allow Keboola Connection to access the data. 
+Log into Facebook with redirection from this step and allow Keboola to access the data. 
 
 From the list of accounts select the accounts from which you want to download data.
 
@@ -211,7 +211,7 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
+Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It is needed for correct mapping 
 in your duplicated Google sheet. 
 
 <!-- 

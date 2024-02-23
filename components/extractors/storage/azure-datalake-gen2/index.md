@@ -9,10 +9,10 @@ redirect_from:
 {:toc}
 
 This extractor loads a single or multiple CSV files from a filesystem in Azure Datalake Gen2 and stores them in tables 
-in Keboola Connection (KBC) Storage.
+in Keboola Storage.
 
 After creating a new configuration, select the files you want to extract from Azure Datalake Gen 2 and determine how
-you save them to KBC Storage. 
+you save them to Keboola Storage. 
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Azure Datalake Gen 2** extractor.

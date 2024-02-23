@@ -6,8 +6,8 @@ permalink: /management/project/migration/
 * TOC
 {:toc}
 
-Keboola Connection is available in multiple [stacks](/overview/#stacks). Each stack instance 
-is completely independent set of Keboola Connection services. Each project is fully contained within one of these stacks. 
+Keboola is available in multiple [stacks](/overview/#stacks). Each stack instance 
+is completely independent set of Keboola services. Each project is fully contained within one of these stacks. 
 In case you need to migrate a project between stacks for whatever reason, you can accomplish that in cooperation 
 with [Keboola Support](/management/support/).
 
@@ -47,7 +47,7 @@ based on [Changed in last](/transformations/mappings/#input-mapping) in
 transformations or writers, it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.
-- Each Keboola Connection stack has a different set of assigned [IP addresses](/components/ip-addresses/).
+- Each Keboola stack has a different set of assigned [IP addresses](/components/ip-addresses/).
 
 ## What Won't Be Migrated
 - Encrypted values

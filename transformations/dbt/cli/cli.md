@@ -8,7 +8,7 @@ Video:
 
 ## Local Development
 
-Let's set up the local development with [Keboola Connection CLI](https://developers.keboola.com/cli/).
+Let's set up the local development with [Keboola CLI](https://developers.keboola.com/cli/).
 
 It is easy on Mac with [homebrew](https://docs.brew.sh/Installation.html) support (other platforms covered in the [documentation](https://developers.keboola.com/cli/installation/)):
 
@@ -27,13 +27,13 @@ kbc --version
 
 ![](imgs/2772467715.png){: width="100%" }
 
-**You will then gain access to dbt-related commands within Keboola Connection (KBC) CLI!**
+**You will then gain access to dbt-related commands within Keboola CLI!**
 
 ### Steps
 
 **initial setup**
 
-You must have a KBC project, a cloned git repository with a dbt project, and the dbt binary installed.
+You must have a Keboola project, a cloned git repository with a dbt project, and the dbt binary installed.
 
 The user is in the folder with the cloned dbt project and can run the following commands.
 
@@ -152,7 +152,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   Universal support to manage workspaces
 
-*   Hide `keboola.sandboxes` configurations from the KBC project folder structure.
+*   Hide `keboola.sandboxes` configurations from the Keboola project folder structure.
 
 
 ### `kbc remote workspace create`

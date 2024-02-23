@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to integrate your Google Analytics data into the Keboola Connection environment.
+This extractor allows you to integrate your Google Analytics data into the Keboola environment.
 To do that, you will need a [Google Analytics account](https://analytics.google.com/analytics/web/).
 
 **Note:** This component supports both Google Analytics 4 (GA4) and old Universal Analytics (UA).

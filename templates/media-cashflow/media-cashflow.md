@@ -70,7 +70,7 @@ To use a selected data source component, you must first authorize the data sourc
 {: .image-popup}
 ![Facebook Ads Data Source](/templates/media-cashflow/fb-ads-source.png)
 
-Log in to Facebook with redirection from this step, and allow Keboola Connection to access the data.
+Log in to Facebook with redirection from this step, and allow Keboola to access the data.
 From the list of accounts, select the accounts from which you want to download data.
 
 ### Google Ads

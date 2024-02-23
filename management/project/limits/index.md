@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Each Keboola Connection standard project has two kinds of limits:  
+Each Keboola standard project has two kinds of limits:  
 
 1. **Business limits** are set in your contract and define the business usage of our platform. 
 This can be seen as the **size** of your project. Exceeding them will earn you a call from us 
@@ -17,7 +17,7 @@ and a possible contract update conversation.
 2. **Platform limits** represent what our platform is **technically capable of**. Reaching or exceeding 
 these limits is either technically impossible, or it carries a risk of degraded performance.
 
-**Note:** These limits apply to standard Keboola Connection projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
+**Note:** These limits apply to standard Keboola projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
 
 ## Business Limits
 
@@ -39,7 +39,7 @@ and neither do [tokens](/management/project/tokens).
 
 ### Project Power -- Time Credits
 
-Project Power Credits is proportional to the sum of the elapsed time of all jobs executed in Keboola Connection. 
+Project Power Credits is proportional to the sum of the elapsed time of all jobs executed in Keboola. 
 Measured in milliseconds, presented in hours (1 hour = 3,600 seconds). Every job consumes different amount of Project Power Credits,
 based on 
 
@@ -47,10 +47,10 @@ based on
 - type of the job (sandbox, SQL transformation, Python transformation), and 
 - performance of the backend used for the job (templates basic, medium, and large).
 
-Below you will find an overview of time credits consumed by individual Keboola Connection job types. 
+Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
 
-| Types of jobs in Keboola Connection   | Base job                | Time credits          |
+| Types of jobs in Keboola              | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
 | **Extractor job**                     | 1 hour                  | **2**                 |
 | **Writer job**                        | 1 GB out                | **0.2**               |  
@@ -99,7 +99,7 @@ across projects with different [backends](/storage/#backend-properties) (or betw
 with mixed backends).
 
 ## Platform Limits
-Apart from the business limits, there are limitations to **what the Keboola Connection platform can take**. These limits 
+Apart from the business limits, there are limitations to **what the Keboola platform can take**. These limits 
 are either defined by the underlying technologies or by what we believe is the correct use of the platform. 
 The technical platform limits are **non-negotiable** and **cannot be upgraded** by updating the contract. 
 Nonetheless, we certainly would like to hear if you hit them. 

@@ -71,7 +71,7 @@ Notepad. Simply open the file, and without making any modifications, save it wit
 {: .image-popup}
 ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
 
-The resulting file `import-data.txt.csv` can now be imported into Keboola Connection Storage as a tab delimited file.
+The resulting file `import-data.txt.csv` can now be imported into Keboola Storage as a tab delimited file.
 
 {: .image-popup}
 ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
@@ -100,7 +100,7 @@ when asked about the file format).
 *Note: The rows are exported in random order and there is no way to specify ordering of rows in the exported file.*
 
 ### Opening in Microsoft Excel
-The easiest way to import the CSV file exported from Keboola Connection into Microsoft Excel is by starting Excel and opening 
+The easiest way to import the CSV file exported from Keboola into Microsoft Excel is by starting Excel and opening 
 a **blank workbook**. Then use the **Data** -- **From Text** function and select the exported file:
 
 {: .image-popup}

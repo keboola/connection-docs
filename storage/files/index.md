@@ -57,7 +57,7 @@ Such a URL is valid for only one hour from the time of its generation --- the ti
 was shown to you, not when you clicked the link.
 
 **Important:** The URL itself does not require any other authorization.
-That is, you can send a link to non-public files to people without access to your Keboola Connection project and they
+That is, you can send a link to non-public files to people without access to your Keboola project and they
 will be able to download that file via the direct link. However, they will not be able to generate 
 or guess the link themselves.
 
@@ -82,5 +82,5 @@ In that case, the limit applies to the chunk size.
 
 As stated above, unless marked as permanent, each file will be automatically deleted 15 days after its creation. 
 This also applies to automatically generated files as a result of table imports and exports. 
-In addition, because the majority of Keboola Connection File Storage contains duplicates of your table data, 
+In addition, because the majority of Keboola File Storage contains duplicates of your table data, 
 the whole Files storage does not count towards your project quota.

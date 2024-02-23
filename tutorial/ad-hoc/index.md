@@ -80,7 +80,7 @@ Enter the bucket's name and choose where to store your data (the location type *
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ### Extract Data
-Now you're ready to load the data into Keboola Connection. Go to the section **Components -- Extractors**, 
+Now you're ready to load the data into Keboola. Go to the section **Components -- Extractors**, 
 and click **Add New Extractor**:
 
 {: .image-popup}
@@ -144,7 +144,7 @@ Then **Save** the query configuration.
 {: .image-popup}
 ![Screenshot - Query Configuration](/tutorial/ad-hoc/ex-bigquery-10.png)
 
-Now run the configuration to bring the data to Keboola Connection:
+Now run the configuration to bring the data to Keboola:
 
 {: .image-popup}
 ![Screenshot - Finished Configuration](/tutorial/ad-hoc/ex-bigquery-11.png)
@@ -153,7 +153,7 @@ Running the extractor creates a background job that
 
 - executes the queries in Google BigQuery.
 - saves the results to Google Cloud Storage.
-- exports the results from Google Cloud Storage and stores them in specified tables in Keboola Connection Storage.
+- exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
 
 When a job is running, a small orange circle appears under *Last runs*, along with RunId and other info on the job.
@@ -230,7 +230,7 @@ for downloading the data. This could be processed using the
 [Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
-to import them to Keboola Connection, it would be necessary to do additional processing to obtain plain tables.
+to import them to Keboola, it would be necessary to do additional processing to obtain plain tables.
 
 To save time, use a tool designed for that -- [pyjstat](https://pypi.org/project/pyjstat/). It is a Python library which can read
 JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
@@ -277,9 +277,9 @@ For more information about sandboxes (including disk and memory limits), see the
 [corresponding documentation](/transformations/sandbox/).
 
 ## Final Note
-This is the end of our stroll around Keboola Connection. On our walk, we missed quite a few things:
+This is the end of our stroll around Keboola. On our walk, we missed quite a few things:
 Applications, Python, R and Julia transformations, Redshift and Snowflake features, to name a few.
 However, teaching you everything was not really the point of this tutorial.
-We wanted to show you how Keboola Connection can help in connecting different systems together.
+We wanted to show you how Keboola can help in connecting different systems together.
 
 [Return to the beginning](/tutorial/) or [contact us](/).

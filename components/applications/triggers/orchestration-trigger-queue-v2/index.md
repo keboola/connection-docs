@@ -6,11 +6,11 @@ permalink: /components/applications/triggers/orchestration-trigger-queue-v2/
 * TOC
 {:toc}
 
-Trigger to start a Keboola Orchestration V2 across different Keboola Connection projects.
+Trigger to start a Keboola Orchestration V2 across different Keboola projects.
 
 ## Authorization
 
-Authorization is done with a [KBC Storage API token](https://help.keboola.com/management/project/tokens).
+Authorization is done with a [Keboola Storage API token](https://help.keboola.com/management/project/tokens).
 Generate a dedicated API token with either:
 
 * Full access to all buckets and components.
@@ -24,8 +24,8 @@ If the second option is chosen, you must create a new token with further permiss
 {: .image-popup}
 ![Screenshot - Incremental fetching](/components/applications/triggers/orchestration-trigger-queue-v2/config.png)
 
-* Fill in the KBC Storage API token. 
-* Fill in the KBC stack based on your stack, you can find this out from the link to your keboola project
+* Fill in the Keboola Storage API token. 
+* Fill in the Keboola stack based on your stack, you can find this out from the link to your keboola project
 * Fill in the Orchestration ID 
 * Check or uncheck the checkbox for "Wait for job finish and check jobs status". 
   If checked, the job of the trigger will only finish when 

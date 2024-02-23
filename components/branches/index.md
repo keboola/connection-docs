@@ -31,7 +31,7 @@ from the Storage as if it were a normal configuration. However, when your branch
 (tables or files) to Storage, it is stored separately and does not overwrite the original production data and interfere
 with the running configurations. There is no need to duplicate your project's data when creating a new branch. 
 
-### Data pipelines
+### Data Pipelines
 
 When you create an extractor and then transform the data it produces using transformation it behaves the following way in branches: 
 
@@ -84,18 +84,18 @@ You can end your branch's lifecycle in two ways:
 **Important:** All this happens in a same project, allowing you to collaborate on the modifications with other members 
 of the project.
 
-## Component considerations
+## Component Considerations
 
 Certain components are not allowed to run in development branches. There are following special cases where components' functionality is limited in the development branches.
 
-### Working with external resources
+### Working with External Resources
 
-Some components, like writers, can write to a destination that is external to Keboola Connection. Those components'
+Some components, like writers, can write to a destination that is external to Keboola. Those components'
 configs are first marked as *unsafe* in development branch.
 
 You will not be able to run an unsafe config. You need to first observe the config and verify that it's either OK to
 write to the destination, or change the destination accordingly.
 
-### OAuth authorized components
+### OAuth Authorized Components
 
 Components using OAuth does not allow authorizing nor changing the OAuth in development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.

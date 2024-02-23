@@ -46,7 +46,7 @@ Only the second table will be used in the actual R transformation. Upload that t
 ## Step 1 - Create Model
 
 First, it is necessary to get a file with the R model. To create and save a very simple model, use a script similar to the following one. 
-It is supposed to be executed **outside Keboola Connection**, for example, on your local machine.
+It is supposed to be executed **outside Keboola**, for example, on your local machine.
 
 {% highlight r %}
 data <- read.csv("cashier-data.csv")
@@ -58,9 +58,9 @@ After executing the script, you get the `time_model.rda` binary file with a very
 of the **time_spent_in_shop** column on the **number_of_items** column in the data 
 ([cashier-data.csv](/transformations/r/cashier-data.csv)):
  
-## Step 2 - Save Model to Keboola Connection
+## Step 2 - Save Model to Keboola
 
-The second step is to save the model file to Keboola Connection. For that, go to **Storage** -- [**File uploads**](/storage/files/) and upload the obtained file (`time_model.rda`); 
+The second step is to save the model file to Keboola. For that, go to **Storage** -- [**File uploads**](/storage/files/) and upload the obtained file (`time_model.rda`); 
 it should be marked as *permanent* and a tag must be assigned to it.
 
 {: .image-popup}
@@ -109,7 +109,7 @@ The result table will be stored according to the output mapping setting and will
 |  ...             |       |       |       |
 
 This contains the predicted value and lower and upper bound of the confidence interval. The predicted value was 
-obtained from the (very simple linear) model that was created outside Keboola Connection in the first step. This technique with 
+obtained from the (very simple linear) model that was created outside Keboola in the first step. This technique with 
 binary files can also be used for other purposes as they can contain virtually any R code or data.
 
 ## Running & Debugging Locally

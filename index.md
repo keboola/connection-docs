@@ -34,8 +34,8 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 - [www.keboola.com](https://www.keboola.com/) – our main web page
 - [blog.keboola.com](https://blog.keboola.com/) – something to read for data analysts
 - [500.keboola.com](https://500.keboola.com/) – something to read for tech geeks
-- [developers.keboola.com](https://developers.keboola.com) – documentation for extending or integrating Keboola Connection
+- [developers.keboola.com](https://developers.keboola.com) – documentation for extending or integrating Keboola
 
 ## We Highly Appreciate Your Input!
-Feel free to utilize the support form within your Keboola project to share feedback, request new features or components, 
+Feel free to use the support form within your Keboola project to share feedback, request new features or components, 
 or engage in a conversation with us. Your insights are valuable, and we're here to listen and collaborate.

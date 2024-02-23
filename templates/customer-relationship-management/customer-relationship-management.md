@@ -7,7 +7,7 @@ permalink: /templates/customer-relationship-management/
 {:toc}
 
 
-With this end-to-end flow you can extract your updated data from your CRM tool (Salesforce, PipeDrive) and bring it into Keboola Connection. 
+With this end-to-end flow you can extract your updated data from your CRM tool (Salesforce, PipeDrive) and bring it into Keboola. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 By using our CRM template, you will get an overview about your customers, activities, and opportunities for potential sales across the pipeline.
 
@@ -56,7 +56,7 @@ These data destinations are available in Public Beta:
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
-First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/customer-relationship-management/add-new-template.png)
@@ -125,7 +125,7 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
+Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It is needed for correct mapping 
 in your duplicated Google sheet. 
 
 ### Snowflake Database Provided by Keboola

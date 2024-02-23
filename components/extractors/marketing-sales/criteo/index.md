@@ -42,7 +42,7 @@ to create a new report to download.
 ## Row Configuration
 
 In the configuration parameters, do the following:
-- Fill in the output name. It will be the name of the output table in Keboola Connection.
+- Fill in the output name. It will be the name of the output table in Keboola.
 - Fill in the [dimension](https://developers.criteo.com/marketing-solutions/docs/dimensions) for the report.
 - Fill in the [metrics](https://developers.criteo.com/marketing-solutions/docs/metrics) for the report.
 - Fill in the [currency](https://developers.criteo.com/marketing-solutions/docs/currencies-supported) of the report.

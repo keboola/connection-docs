@@ -6,7 +6,7 @@ permalink: /templates/ecommerce/
 * TOC
 {:toc}
 
-With this end-to-end flow you can extract your updated data from an eCommerce platform and bring it into Keboola Connection. 
+With this end-to-end flow you can extract your updated data from an eCommerce platform and bring it into Keboola. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 
 **The flow, in a nutshell:**
@@ -79,7 +79,7 @@ The following data destinations will be coming soon:
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
-First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**. 
+First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**. 
 
 {: .image-popup}
 ![Add New Use Case](/templates/ecommerce/add-new-template.png)
@@ -180,7 +180,7 @@ Using the following marketing data sources is optional. Select the ones you wish
 {: .image-popup}
 ![Facebook Ads Data Source](/templates/ecommerce/facebook-ads-data-source.png)
 
-Log into Facebook with redirection from this step and allow Keboola Connection to access the data. 
+Log into Facebook with redirection from this step and allow Keboola to access the data. 
 
 From the list of accounts select the accounts from which you want to download data.
 
@@ -224,7 +224,7 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back into Keboola Connection. This is needed to achieve correct mapping in your duplicated Google sheet. 
+Duplicate the sheet into your Google Drive and paste the file ID back into Keboola. This is needed to achieve correct mapping in your duplicated Google sheet. 
 
 <!-- *Note: We are working on automatization. In the future, you won't have to duplicate the sheet by yourself---we will do that for you.* -->
 

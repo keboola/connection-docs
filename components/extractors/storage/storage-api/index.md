@@ -1,5 +1,5 @@
 ---
-title: Keboola Connection Storage
+title: Keboola Storage
 permalink: /components/extractors/storage/storage-api/
 redirect_from:
     - /extractors/storage/storage-api/
@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor loads single or multiple tables from a Keboola Connection project and stores them in a bucket in your
+This extractor loads single or multiple tables from a Keboola project and stores them in a bucket in your
 current project. The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., when moving data between two different [organizations](/management/organization) or regions.
 
@@ -28,7 +28,7 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** extractor.
 Select the region of the *source project*, and paste the token you generated in the *source project*.
 
 {: .image-popup}
