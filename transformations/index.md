@@ -8,14 +8,14 @@ redirect_from:
 * TOC
 {:toc}
 
-*To create your first transformation, and to see how Transformations are an integral part of the Keboola Connection 
-workflow, go to our [Getting Started tutorial](/tutorial/manipulate/).*
+*To create your first transformation, and to see how transformations are an integral part of the Keboola workflow, 
+go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
 (Marketing data preaggregation, Tableau denormalizer, Integrity checker or Join marketing channels
 and sales, etc.). 
 
-In Keboola Connection all Transformations operate on a copy of the data from Storage
+In Keboola all Transformations operate on a copy of the data from Storage
 in a safe and isolated environment. This improves safety, repeatability and traceability of all data operations.
 The process of isolating data is called [**mapping**](/transformations/mappings/).
 The mapping process copies input data from permanent project Storage into a 
