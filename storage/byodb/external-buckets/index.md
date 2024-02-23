@@ -124,3 +124,8 @@ If you wish to remove the schema, you will need to do so manually in your wareho
     * Manipulation of the data will not be tracked in the Keboola Connection audit trail.
     * Event-driven triggering is not supported for external buckets, so you would need to synchronize the external and Keboola pipelines manually based on time.
 * While there are legitimate uses of external tools, keep in mind that by having data pipelines outside Keboola, you lose the main benefit of Keboola Connection – the ability to orchestrate, maintain, monitor, and audit the pipelines in one place.
+
+
+## Limitations
+
+* Table names in the external buckets can't be longer than **92 characters** and can contain only **alphanumeric** characters **dash** and **underscores**. Tables that do not meet these requirements **will be ignored**.
