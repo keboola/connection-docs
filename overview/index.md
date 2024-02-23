@@ -1,5 +1,5 @@
 ---
-title: Keboola Connection Overview
+title: Keboola Overview
 permalink: /overview/
 ---
 
