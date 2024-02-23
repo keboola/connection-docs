@@ -12,7 +12,7 @@ Designed for data engineers, analysts, and scientists, Keboola **simplifies data
 Key features of Keboola:
 - **Data Integration:** Effortlessly extract data from various sources like databases, cloud services, and APIs. Load it seamlessly into destinations of your choice for comprehensive analysis.
 - **Data Storage:** Use Keboola's robust data warehousing (Snowflake, BigQuery, Redshift, Synapse, etc.) for secure and accessible data storage. 
-- **Data Manipulation:** With our extensive toolset, clean, enrich, and transform your data using SQL, Python, R, and more, directly within Keboola.
+- **Data Manipulation:** With our extensive toolset, clean, enrich, and transform your data using SQL, Python, R, and more directly within Keboola.
 - **Automation:**  Automate your data workflows end-to-end with Keboola's intuitive Flows, saving time and reducing manual errors.
 
 ## Deployment Options
@@ -34,7 +34,7 @@ The following diagram illustrates the structure of a single Keboola project, com
 ![Keboola Architecture 1](/overview/project-structure1.png)
 
 ### Data Source Connectors
-[Data sources connectors](/components/extractors/), formerly known as [extractors](/components/extractors/), are Keboola components used 
+[Data sources connectors](/components/extractors/), formerly known as extractors, are Keboola components used 
 to gather data from various sources. They can connect to APIs of external services, databases, applications, object storage, and many others.
 
 ### Storage
@@ -58,17 +58,25 @@ analyses and experimentation. Workspaces support collaborations and can be share
 
 - **SQL workspaces** are accessible through the database provider's IDE or your preferred SQL IDE.
 - **Python, R, or Julia workspaces** are available through Keboola's hosted and managed Jupyter Lab environment.
-  
+
+### Applications
+Unlike free-form transformations, [applications](/components/applications/) are **predefined blocks** that enable users to perform advanced tasks such as 
+sentiment analysis, association discovery, or histogram grouping. They can also enhance data, for example, by incorporating external data like weather or exchange 
+rates through third-party services.
+
+### Data Apps
+[Data apps](/components/data-apps/) are simple web applications that can be deployed inside Keboola projects and also publicly accessed from outside the projects. 
+They are usually custom-built to address specific challenges, for example, recommendation engines, interactive segmentation tools, AI integration solutions, data 
+visualization platforms, custom internal reporting tools for business teams, and financial apps for gaining insights into spending patterns.
+
 ### Data Destination Connectors
-[Data destination connectors](/components/writers/), formerly known as [writers](/components/writers/), are components responsible
-for output data delivery from Keboola to the systems and applications where the data gets used or consumed. These connectors often interface 
-with [relational databases](/components/writers/database/), BI, [reporting and analytics](/components/writers/bi-tools/) platforms, tools, or applications.
+[Data destination connectors](/components/writers/), formerly known as writers, are components responsible
+for output data delivery from Keboola to the systems and applications where the data gets used or consumed ([relational databases](/components/writers/database/), BI, [reporting and analytics](/components/writers/bi-tools/) platforms, tools, or applications).
 
 ### Full Automation
-Keboola provides the [Flows](https://help.keboola.com/orchestrator/) component, formerly known as [Orchestrator](/orchestrator/), 
-to fully automate end-to-end processes. With flows, you can specify the execution order of individual connectors, transformations, and other components and
-set up parallelization. By adding a **schedule** or trigger, you can [automate](/orchestrator/) processes at specified intervals or times 
-of the day.
+The [Flows](https://help.keboola.com/orchestrator/) component, formerly known as Orchestrator, helps you to fully automate end-to-end processes. 
+You can specify the order in which individual connectors, transformations, and other components will be run and set up parallelization. By adding
+a **schedule** or trigger, you can [automate](/orchestrator/) processes at specified intervals or times of the day.
 
 The platform automatically scales resources to facilitate the automated processes.
 
@@ -77,35 +85,22 @@ The [Development Branches](/components/branches/) feature enables you to modify 
 entire orchestrated workflows. It's particularly useful for implementing significant project changes or when you need to be extra careful 
 about performing your changes safely.
 
-### Applications
-Unlike free-form transformations, [applications](/components/applications/) are **predefined blocks** that enable users to perform advanced tasks such as 
-sentiment analysis, association discovery, or histogram grouping. They can also enhance data, for example, by incorporating external data like weather or exchange 
-rates through third-party services.
-
-### Data Apps
-[Data apps](/components/data-apps/) are user-friendly, interactive web applications that use data for insights or automated actions. These applications 
-are typically custom-built to address specific challenges, providing users with dynamic, purpose-built experiences. Examples of data apps include recommendation 
-engines, interactive segmentation tools, AI integration solutions, data visualization platforms, custom internal reporting tools for business teams, and financial 
-apps for gaining insights into spending patterns.
-
 ## Keboola Governance
 ### Operational Metadata
-Keboola diligently collects diverse [operational metadata](/management/jobs/#search-attributes), including user activity, job status, data flow, 
-schema evolution, data pipeline performance, and adherence to a client's security rules. All project metadata is readily accessible within the client's Keboola 
-environment, empowering users to conduct in-depth analyses, audits, or event-driven actions.
+Keboola collects diverse [operational metadata](/management/jobs/#search-attributes), including user activity, job status, data flow, 
+schema evolution, data pipeline performance, and adherence to a client's security rules. All project metadata is accessible in your project and enables you 
+to perform in-depth analyses, audits, or event-driven actions.
 
-Using this metadata, we dynamically and automatically construct data lineage, providing a real-time understanding of data origin and usage. This capability 
-serves analytical and regulatory purposes, offering invaluable insights into the journey and utilization of data within the platform."
+This metadata enables us to automatically create data lineage, offering real-time insights into data origin and usage for analytical and regulatory needs and
+highlighting the data's journey and usage on the platform.
 
 ### Cost Monitoring
-Keboola gathers and organizes telemetry data including every job execution and user activity. Within each job detail, information regarding 
-consumed credit units is available, allowing for the precise calculation of the associated dollar amount, effectively quantifying the cost of the process. This 
-granular level of detail enables the attribution of costs to specific departments, teams, use cases, and individual users, providing comprehensive insights into 
-resource utilization.
+Keboola collects telemetry data on job executions and user activities, detailing credit units used per job for exact cost calculations. This allows costs to be 
+attributed to specific departments, teams, use cases, and users, offering detailed insights into resource use.
 
 ### Identity and Access management
-Effortlessly oversee user accounts within your organization, regulating their access to specific Keboola projects and datasets. Streamline data sharing across 
-your organization, ensuring a comprehensive understanding of each user's access privileges and fostering a transparent overview of data accessibility.
+Manage user accounts in your organization, controlling their access to specific Keboola projects and datasets. Simplify data sharing within your 
+organization, keep track of individual access rights, and promote clear visibility of data access.
 
 ## Extending the Platform 
 The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
@@ -116,10 +111,10 @@ You can extend the platform by creating
 - [components](https://developers.keboola.com/extend/#component) (used as data source and destination connectors and applications).
 - components based on the [Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
 
-Keboola, your in-house teams, or 3rd parties can create all components. They can use already existing data, ETL processes, and workflows. 
-The platform automates infrastructure, user and data management, offering services like [data catalog](/catalog/), operational metadata, governance, 
+Keboola, your in-house teams, or 3rd parties can create all components while using already existing data, ETL processes, and workflows. 
+The platform automates infrastructure, user, and data management, offering services like [data catalog](/catalog/), operational metadata, governance, 
 and reverse billing. Components can be private or shared with Keboola users via our marketplace featuring applications mainly from 3rd parties 
-to enhace workflows and support a composable enterprise.
+to enhance workflows and support a composable enterprise.
 
 Components can be run as standard pieces of our Flows [/tutorial/automate/#main-header], obtaining the full support and services (a link to your
 [components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
@@ -156,14 +151,15 @@ Single-tenant stacks are available for a single enterprise customer with a domai
 
 ### Jobs
 Most things in the Keboola platform are done using the batch approach; when you perform an action, a [job](/management/jobs/) is created and executed 
-in the background. We also call these jobs **asynchronous**. Multiple jobs can run simultaneously and you can continue your work in the meantime.
+in the background. We also call these jobs **asynchronous**. Multiple jobs can run simultaneously, and you can continue your work in the meantime.
 
 ### Tokens
 In Keboola, every action requires a [token](/management/project/tokens/) for authorization, automatically assigned to users at first login. Additionally, 
-tokens for restricted access can be created and shared. This token system enables easy [sharing of specific resources](/management/project/tokens/#limited-tokens), 
-like tables, without requiring platform registration.
+tokens for restricted access can be created and shared. 
+This token system enables easy [sharing of specific resources](/management/project/tokens/#limited-tokens), like tables, without requiring platform registration.
 
 ### Input and Output Mapping
-To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. A secure workspace 
-is created with data copied from the tables specified in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed 
-successfully, only tables and files defined in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.
+To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. 
+A secure [workspace](https://help.keboola.com/transformations/workspace/#main-header) is created with data copied from the tables specified 
+in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed successfully, only tables and files defined
+in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.
