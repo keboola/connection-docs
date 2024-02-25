@@ -15,7 +15,7 @@ go to our [Getting Started tutorial](/tutorial/manipulate/).*
 (Marketing data preaggregation, Tableau denormalizer, Integrity checker or Join marketing channels
 and sales, etc.). 
 
-In Keboola all Transformations operate on a copy of the data from Storage
+In Keboola all transformations operate on a copy of the data from Storage
 in a safe and isolated environment. This improves safety, repeatability and traceability of all data operations.
 The process of isolating data is called [**mapping**](/transformations/mappings/).
 The mapping process copies input data from permanent project Storage into a 
@@ -35,14 +35,14 @@ A transformation is represented by a **Transformation Script** (SQL, Julia, Open
 can use to manipulate your data. To ensure safety of the data in Storage, a transformation
 operates in a completely separate **staging storage** created for each transformation. When a
 transformation [job](/management/jobs/) runs, it takes the required data from the project [Storage](/storage/tables/) 
-and copies them to a temporary staging storage. This process is called [**Input Mapping**](/transformations/mappings/). 
+and copies them to a temporary staging storage. This process is called [**input mapping**](/transformations/mappings/). 
 The transformation job then runs the transformation script operating on the staging storage.
-When the transformation is finished, the **Output Mapping** process moves the transformation results back to
-the designated tables in Storage. The **Input** and **Output** mappings ensure complete safety of
+When the transformation is finished, the **output mapping** process moves the transformation results back to
+the designated tables in Storage. The **input** and **output** mappings ensure complete safety of
 the transformation processes -- the transformation always operates in an isolated workspace.
 
 ## Mapping
-[**Input and Output Mapping**](/transformations/mappings/) --- separates the source data from your transformation. 
+[**Input and output mapping**](/transformations/mappings/) --- separates the source data from your transformation. 
 Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the 
 input mappings. Database table names and CSV file names in transformations are completely unrelated to names of tables 
 in Storage. This means, for example, that you can rename tables in storage and it won't break any of your transformations.
@@ -58,7 +58,7 @@ The transformations are very flexible, though all the combinations might not be 
 
 ## Backends
 The  **Transformation Script** is a code that defines what happens with the data while taking the
-tables from Input Mapping, modifying them and producing the tables referenced in Output Mapping.
+tables from input mapping, modifying them and producing the tables referenced in output mapping.
 
 A backend is the engine running the transformation script. It is either a database server
 ([Amazon Redshift](https://aws.amazon.com/redshift/),
@@ -312,7 +312,7 @@ standard [API](https://developers.keboola.com/integrate/storage/api/configuratio
 and run configurations and that it is possible to create your own 
 [transformation components](https://developers.keboola.com/extend/component/).
 
-New Transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
+New transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
 encouraging users to create reusable blocks of code. They also support 
 [Variables](/transformations/variables/#variables) that can be used to parametrize transformations.
 
@@ -346,7 +346,7 @@ Currently, it supports autocompletion of:
 - Language specific reserved words
 - `SELECT`, `UPDATE`, etc. in SQL transformations
 - `import`, `while`, etc. in Python transformations
-- Tables you added to Input Mapping or Output Mapping
+- Tables you added to input mapping or output mapping
 - When working with Python or R transformations, a relative path will be suggested (e.g., `in/tables/cars.csv`).
 - Variables you defined in your transformation (also with values)
 
@@ -359,12 +359,12 @@ When triggered
 - in other cases, it will suggest everything (see the screenshot above).
 
 ### Legacy Transformations
-Legacy Transformations are the current version of transformations available in most projects
+Legacy transformations are the current version of transformations available in most projects
 in the US and EU stacks. Each transformation bucket can contain any number of individual transformations.
 It should represent a logical set of operations you want to perform together.
 
 Though marked as legacy, they are perfectly okay to be used for daily work, since they still receive updates, 
-just no new features. Legacy Transformations are grouped into folders called **Transformation buckets**.
+just no new features. Legacy transformations are grouped into folders called **transformation buckets**.
 
 If you want to maintain the best forward compatibility, we recommend not to make complicated structures of phases 
 and dependencies.
