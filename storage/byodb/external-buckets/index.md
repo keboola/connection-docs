@@ -6,7 +6,7 @@ permalink: /storage/byodb/external-buckets/
 * TOC
 {:toc}
 
-If you operate Keboola in Bring Your Own Database (BYODB) mode atop your own data warehouse, the data residing in the warehouse will not automatically be visible or accessible from inside Keboola. 
+If you operate Keboola Connection in Bring Your Own Database (BYODB) mode atop your own data warehouse, the data residing in the warehouse will not automatically be visible or accessible from inside Keboola Connection. 
 We address this by providing the **External Buckets** feature.
 
 The exact implementation of external buckets depends on the database backend you use; it could be a database, schema, or another concept. Unless stated otherwise, we will describe the implementation for Snowflake.
@@ -20,7 +20,7 @@ External buckets feature is available only in the BYODB mode. To enable it, plea
 
 ## What Is an External Bucket?
 
-Storage in Keboola is organized into [buckets](/storage/buckets/). An **external bucket** is a special type of bucket wherein the contents of the bucket are not managed by Keboola. It can be located _anywhere in the storage backend used by your Keboola project_ (Snowflake or BigQuery) and is a virtual bucket created atop a Snowflake schema or BigQuery dataset respectively. All table-like objects (such as tables, views, and external tables) inside the schema are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola. A single schema can be registered with multiple projects in Keboola simultaneously.
+Storage in Keboola Connection is organized into [buckets](/storage/buckets/). An **external bucket** is a special type of bucket wherein the contents of the bucket are not managed by Keboola. It can be located _anywhere in the storage backend used by your Keboola Connection project_ (Snowflake or BigQuery) and is a virtual bucket created atop a Snowflake schema or BigQuery dataset respectively. All table-like objects (such as tables, views, and external tables) inside the schema are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola Connection. A single schema can be registered with multiple projects in Keboola Connection simultaneously.
 
 ## Creating an External Bucket
 
@@ -70,8 +70,8 @@ Once you are done, click **Register Bucket**, and you can start using it.
 
 ### Considerations
 
-When you register an external bucket, we analyze the metadata of objects in it and register all tables and views as tables in the bucket in Keboola. 
-If you later add additional tables or views, you will need to manually refresh the external bucket using the **Refresh** action in the bucket detail to make them visible in Keboola. 
+When you register an external bucket, we analyze the metadata of objects in it and register all tables and views as tables in the bucket in Keboola Connection. 
+If you later add additional tables or views, you will need to manually refresh the external bucket using the **Refresh** action in the bucket detail to make them visible in Keboola Connection. 
 
 {: .image-popup}
 ![Bucket refresh](/storage/byodb/external-buckets/figures/4.png)
@@ -113,14 +113,14 @@ The dataset name is **the name of bucket you provided in the dialog** (`users-re
 ## Removing an External Bucket
 
 Removing an external bucket is as simple as removing any other bucket. Simply delete it in the UI or via API. The bucket will be removed from the project, but the schema in the database will remain untouched. 
-If you wish to remove the schema, you will need to do so manually in your warehouse. You may want to revoke the grants to Keboola to ensure that Keboola no longer has access to it.
+If you wish to remove the schema, you will need to do so manually in your warehouse. You may want to revoke the grants to Keboola Connection to ensure that Keboola no longer has access to it.
 
 ## Usage Recommendations
 
 * Use external buckets to consume data in your warehouse produced by 3rd-party tools outside of Keboola.
 * Use external buckets to access data in table-like structures that are not directly supported by Keboola (e.g., views or external tables).
-* **It's discouraged** to use external buckets to load data into Keboola from services that already have an existing component. Consider the following limitations of such an approach:
+* **It's discouraged** to use external buckets to load data into Keboola Connection from services that already have an existing component. Consider the following limitations of such an approach:
     * You would have to orchestrate, maintain, and monitor the external pipeline, which is normally done by Keboola for you.
-    * Manipulation of the data will not be tracked in the Keboola audit trail.
+    * Manipulation of the data will not be tracked in the Keboola Connection audit trail.
     * Event-driven triggering is not supported for external buckets, so you would need to synchronize the external and Keboola pipelines manually based on time.
-* While there are legitimate uses of external tools, keep in mind that by having data pipelines outside Keboola, you lose the main benefit of Keboola – the ability to orchestrate, maintain, monitor, and audit the pipelines in one place.
+* While there are legitimate uses of external tools, keep in mind that by having data pipelines outside Keboola, you lose the main benefit of Keboola Connection – the ability to orchestrate, maintain, monitor, and audit the pipelines in one place.
