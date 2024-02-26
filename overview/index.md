@@ -15,6 +15,9 @@ Key features of Keboola:
 - **Data Manipulation:** With our extensive toolset, clean, enrich, and transform your data using SQL, Python, R, and more directly within Keboola.
 - **Automation:**  Automate your data workflows end-to-end with Keboola's intuitive Flows, saving time and reducing manual errors.
 
+***Note:** In the early days, we called the Keboola platform **Keboola Connection (KBC)**.  Although the platform's name is **Keboola** now, you will probably see 
+the word Connection or the abbreviation 'KBC' occasionally in table names, column names, etc.*  
+
 ## Deployment Options
 Keboola supports various deployment models to suit your specific needs:
 
