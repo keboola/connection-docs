@@ -11,13 +11,13 @@ using a firewall or AWS security groups. This applies especially to the producti
 connections should not be publicly available. For an extra layer of security, setting up an
 [SSH Tunnel](/components/extractors/database/#connecting-to-database) is also recommended.
 
-To access external systems (including your database), Keboola Connection uses the below 
-IP addresses. Please **whitelist** these IP addresses in your firewalls to allow Keboola Connection 
+To access external systems (including your database), Keboola uses the below 
+IP addresses. Please **whitelist** these IP addresses in your firewalls to allow Keboola 
 to successfully connect to your system. This applies to all components including all extractors and writers.
 
 **Important:** These IP addresses can change in the future! For your convenience, you can programmatically
 fetch and process the [list of existing IP addresses in JSON format](/components/ip-addresses/kbc-public-ip.json).
-Below are listed the available [Keboola Connection Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
+Below are listed the available [Keboola Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
 
 For ease of identification, our outbound IP addresses on AWS stacks (except for legacy services) now have reverse DNS records. 
 Each IP address has a unique name like `outbound-if-issue-contact-support-at-keboola-com.keboola.com`, embedding a reference for a support email. 
@@ -128,8 +128,8 @@ The JSON file contains an array of ranges (attribute `prefixes`), each of which 
  - `vendor` — cloud service provider
  - `region` — cloud service region
  - `service` — Keboola application service
-   - `queue` - for Keboola Connection components
-   - `syrup` - for Keboola Connection components using legacy Queue V1
+   - `queue` - for Keboola components
+   - `syrup` - for Keboola components using legacy Queue V1
    - `email-delivery` - for outbound emails
 
 ### Sample JSON

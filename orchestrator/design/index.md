@@ -118,9 +118,9 @@ Cons:
 
 ## Mirroring
 A third approach is *Mirroring* and it is in a way a mix of the previous two.
-It can be described as *"Bring the most current data in Keboola Connection, then do whatever you like"*. That means
+It can be described as *"Bring the most current data in Keboola, then do whatever you like"*. That means
 you set up a separate orchestration for every single data source and schedule them
-to run as fast possible. Then you can assume that the data you have in Keboola Connection is always current, and you
+to run as fast possible. Then you can assume that the data you have in Keboola is always current, and you
 can build [pipelines](#pipelines) on top of that. The core difference is that the pipelines no longer contain the
 extraction phase.
 
@@ -172,7 +172,7 @@ Cons:
 - Needs organization of Storage to clearly mark read-to-use data.
 
 ## Conclusions
-The Keboola Connection platform has very few constraints on the execution of tasks. That means there is no one true way of
+The Keboola platform has very few constraints on the execution of tasks. That means there is no one true way of
 doing things. Here we have outlined three possible logical approaches. Whether they are suitable for you
 or not is best determined by consulting your Maintainer or Partner.
 You may of course combine the approaches as well, or do things your own way.

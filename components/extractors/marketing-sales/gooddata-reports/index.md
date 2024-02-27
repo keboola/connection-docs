@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 The GoodData Reports extractor uses the [GoodData API](https://help.gooddata.com/display/API/API+Reference#/reference/dashboards-and-reporting/export-a-large-report/export-a-raw-report) to import
-reports from the [GoodData](https://www.gooddata.com/) business intelligence platform and stores the data in Keboola Connection Storage.
+reports from the [GoodData](https://www.gooddata.com/) business intelligence platform and stores the data in Keboola Storage.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **GoodData Reports** extractor.
@@ -49,4 +49,4 @@ Copy the project ID from the writer to the extractor:
 ![Screenshot - Provisioned GoodData Project Id](/components/extractors/marketing-sales/gooddata-reports/gooddata-reports-4.png)
 
 When finished, remember to **Save** the configuration before you run the extraction. The extractor will download the report contents as a
-CSV file and store it as a table in Keboola Connection Storage.
+CSV file and store it as a table in Keboola Storage.

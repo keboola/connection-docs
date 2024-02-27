@@ -18,12 +18,12 @@ customized internal reporting tools for business teams, financial apps to get in
 Data apps may be written in any language. However, for now Keboola only supports apps written in [Streamlit](https://streamlit.io/), 
 which is a Python framework for rapid development of such applications.
 
-As mentioned above, a data app is a simple web application, which can be deployed inside a Keboola Connection project 
+As mentioned above, a data app is a simple web application, which can be deployed inside a Keboola project 
 and also publicly accessed from outside the project. 
-It means that the users that will access your data app don't need access to a Keboola Connection project.
+It means that the users that will access your data app don't need access to a Keboola project.
 
 ## Create a Data App
-There are two ways to create a data app in Keboola Connection. Select a deployment type that will suit your needs:
+There are two ways to create a data app in Keboola. Select a deployment type that will suit your needs:
 - **Code** – Just paste a Streamlit code to create a simple data app. 
 - **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications.
 
@@ -62,14 +62,14 @@ These secrets will be injected into the secrets.toml file upon deployment of the
 ![Secrets](/components/data-apps/data_apps-secrets.png)
 
 ## Loading Data from Storage
-To load data from the storage of a Keboola Connection project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
+To load data from the storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
 Just select your table in the input mapping section and navigate to that by /data/in/table/your_data.csv or /data/in/files/fileID_FileName.* in your code.
 Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.
-Or you can use [Keboola Connection Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
+Or you can use [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Writing Back to Storage
-For writing data back to Keboola Connection Project Storage, use our [Keboola Connection Storage Python Client](https://github.com/keboola/sapi-python-client).
+For writing data back to Keboola Project Storage, use our [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App Management
@@ -226,7 +226,7 @@ This data app, along with the complete workflow, can be implemented using the AI
 ### Interactive Keboola Sheets
 Author: Petr Huňka
 
-Simplify data editing and management within your company. The data app eliminates the need to export data to external tools, allowing business users to directly access and edit tables stored in Keboola Connection Storage.
+Simplify data editing and management within your company. The data app eliminates the need to export data to external tools, allowing business users to directly access and edit tables stored in Keboola Storage.
 - [Live app](https://sandbox.north-europe.azure.keboola.com/51814820/)
 - [Configuration](https://demo.keboola.com/app/data-apps/51359967)
 - [Documentation](https://help.keboola.com/templates/interactive-keboola-sheets/)

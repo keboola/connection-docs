@@ -20,7 +20,7 @@ together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and al
 Both approaches are interchangeable though.
 
 Our Getting Started tutorial will guide you through the process of [writing data
-from Keboola Connection to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
+from Keboola to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Tableau** writer.

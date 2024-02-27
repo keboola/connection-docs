@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 The Slack extractor uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/)
-and to bring it to Keboola Connection.
+and to bring it to Keboola.
 
 ## Create New Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Slack** extractor.

@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-*To create your first Sandbox and see how it is an integral part of the Keboola Connection workflow, go to our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
+*To create your first Sandbox and see how it is an integral part of the Keboola workflow, go to our [Getting Started tutorial](/tutorial/manipulate/sandbox/).*
 
 A sandbox is a **safe environment** for you to
 
@@ -17,7 +17,7 @@ A sandbox is a **safe environment** for you to
 - test, troubleshoot and develop transformations without modifying any Storage data.
 
 You can fill a sandbox with any data from Storage. However, to simplify transformation development,
-Keboola Connection provides a specific loader for your transformations.
+Keboola provides a specific loader for your transformations.
 It automatically fills the sandbox with relevant tables and takes
 the [Input Mapping](/transformations/mappings/#input-mapping) of the transformation into account.
 
@@ -206,7 +206,7 @@ print(mem_used())
 
 ### Jupyter-Based Sandboxes
 
-Keboola Connection provides Jupyter Notebook sandboxes for Python and Julia. Both features are in beta.
+Keboola provides Jupyter Notebook sandboxes for Python and Julia. Both features are in beta.
 
 #### Python Sandbox
 

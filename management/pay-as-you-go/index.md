@@ -51,7 +51,7 @@ If your credit card is declined when purchasing more minutes, possible reasons i
 - The transaction exceeds the credit card’s maximum transaction amount.
 
 ## Free Plan Project Upgrade
-Any Free Plan project can be upgraded to a [standard Keboola Connection project](/management/project/) upon the execution 
+Any Free Plan project can be upgraded to a [standard Keboola project](/management/project/) upon the execution 
 of our standard order form under the Master Software Subscription Agreement (MSSA).
 
 ## Project Deletion

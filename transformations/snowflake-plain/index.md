@@ -118,7 +118,7 @@ Be especially careful when setting up [input and output mappings](/transformatio
 
 When writing your transformation script, quoting all table and column names is highly recommended. 
 Snowflake converts all unquoted table/column identifiers to uppercase, which won't match table/column 
-identifiers created by Keboola Connection (unless they happen to be all uppercase).
+identifiers created by Keboola (unless they happen to be all uppercase).
 
 {% highlight sql %}
 SELECT "barcolumn" FROM "footable";
@@ -222,7 +222,7 @@ CREATE TABLE "out" AS
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate 
 from your transformation/sandbox session and the format may change unexpectedly.
 
-**Important:** In the AWS US Keboola Connection [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
+**Important:** In the AWS US Keboola [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
 (connection.keboola.com), the following [Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) 
 parameters are overridden:
 

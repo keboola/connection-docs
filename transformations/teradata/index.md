@@ -35,7 +35,7 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 ## Bucket Objects for Read-Only Input Mapping
 For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
 
-Teradata organizes tables in databases. Each bucket in Keboola Connection is represented by a separate database, usually following this naming pattern: `<stackPrefix>_<projectID>-<bucketID>`
+Teradata organizes tables in databases. Each bucket in Keboola is represented by a separate database, usually following this naming pattern: `<stackPrefix>_<projectID>-<bucketID>`
 - `stackPrefix` – depends on which Keboola stack you are using
   - `SAPI` on https://connection.keboola.com/
   - `KEBOOLA` everywhere else

@@ -56,8 +56,8 @@ Make sure that you replace the username and duration above. Copy the token that 
 ![DataHub Flow](/templates/datahub/datahub-flow.png)
 
 - First, the Metadata and Telemetry source components (extractors) will collect the data from your project or organization.
-    - The Telemetry extractor allows you to retrieve data pertaining to project or your entire organization. It helps you monitor the activities and usage of your Keboola Connection projects. It also helps Keboola calculate your project consumption.
-    - The Metadata extractor downloads information from Keboola's APIs pertaining to various objects, users, etc. The metadata obtained by this source component can be used in addition with the default telemetry data pertaining to Keboola Connection projects to provide even more insights into the telemetry of your organization.
+    - The Telemetry extractor allows you to retrieve data pertaining to project or your entire organization. It helps you monitor the activities and usage of your Keboola projects. It also helps Keboola calculate your project consumption.
+    - The Metadata extractor downloads information from Keboola's APIs pertaining to various objects, users, etc. The metadata obtained by this source component can be used in addition with the default telemetry data pertaining to Keboola projects to provide even more insights into the telemetry of your organization.
 
 - In the transformations,  a single metadata table is created for transmitting information to DataHub. Lineage is also calculated by parsing component configurations. 
 

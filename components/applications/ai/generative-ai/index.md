@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The Generative AI application allows you to query both [OpenAI](https://platform.openai.com/docs) and [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) models using data from your Keboola Connection project.
+The Generative AI application allows you to query both [OpenAI](https://platform.openai.com/docs) and [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) models using data from your Keboola project.
 
 ## Create New Configuration
 

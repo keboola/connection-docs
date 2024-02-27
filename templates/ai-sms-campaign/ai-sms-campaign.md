@@ -59,7 +59,7 @@ The following data destinations are available:
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
-from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/ai-sms-campaign/add-new-template.png)

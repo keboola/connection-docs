@@ -73,7 +73,7 @@ Navigate to the transformation and run it. Examine the **Mapping** section in th
 {: .image-popup}
 ![Mapping in branch](/tutorial/branches/figures/mapping-in-branch-2.png)
 
-Notice how the **Input** section shows the data loaded from the `bitcoin_price` table, even though you did not run the extractor in this branch. When a branch version of a table does not exist, Keboola Connection uses the production version as a fall back. 
+Notice how the **Input** section shows the data loaded from the `bitcoin_price` table, even though you did not run the extractor in this branch. When a branch version of a table does not exist, Keboola uses the production version as a fall back. 
 
 Also notice that **Output** shows the small yellow branch icon, and the name of the bucket is prefixed with a number -- 
 `1835-bitcoin`. When you run a component in a branch and the component wants to write to Storage, the outputs do not 
@@ -129,7 +129,7 @@ and verify that the `bitcoin_prices` table from the branch was used as input.
 {: .image-popup}
 ![Input mapping from branch data](/tutorial/branches/figures/input-mapping-from-branch.png)
 
-What happened is that Keboola Connection checked whether a branch version of the bucket existed and since it did 
+What happened is that Keboola checked whether a branch version of the bucket existed and since it did 
 (you ran the branch version of the HTTP extractor), it was used in the transformation.
 
 ## Extend Transformation

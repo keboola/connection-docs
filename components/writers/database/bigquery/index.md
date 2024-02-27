@@ -17,7 +17,7 @@ To access and write to your BigQuery dataset, you need to set up a Google Servic
 - Go to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts).
 - Select the project you want the writer to have access to.
 - Click **Create Service Account**.
-- Select an appropriate **Service account name** (e.g., `Keboola Connection BigQuery Writer`).
+- Select an appropriate **Service account name** (e.g., `Keboola BigQuery data source`).
 
 {: .image-popup}
 ![Screenshot - Create service account](/components/writers/database/bigquery/google-1.png)

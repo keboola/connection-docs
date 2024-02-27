@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 AWS Redshift is based on PostgreSQL 8.0 where AWS added powerful scaling and made it available in cloud. Transformations run on
-your own dedicated cluster in Keboola Connection.
+your own dedicated cluster in Keboola.
 
  - If your source data is on Redshift, there is no data transfer.
  - Redshift is a columnar database -- no more indexing, nest JOINs without worries.
@@ -17,7 +17,7 @@ your own dedicated cluster in Keboola Connection.
  [column compression](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-use-auto-compression.html).
 
 ### Limits
-Redshift in Keboola Connection does not support functions or stored procedures.
+Redshift in Keboola does not support functions or stored procedures.
 
 There are basic constrains set to keep your Redshift cluster healthy. By upgrading your Redshift cluster to a
 larger size, these limits can be increased.

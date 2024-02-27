@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-Everything you do in Keboola Connection must take place within a Keboola Connection **Project**, its basic organizational unit.
+Everything you do in Keboola must take place within a Keboola **Project**, its basic organizational unit.
 All projects are grouped into [**Organizations**](/management/organization/).
 
 ### Data Governance
-Everything that happens with your data in Keboola Connection at any stage of your project is recorded.
+Everything that happens with your data in Keboola at any stage of your project is recorded.
 It enables you to use your uploaded data for other tables, access previous versions of your tables, and
-extract all your project data. Everything done in Keboola Connection is traceable, and if possible, also recoverable.
+extract all your project data. Everything done in Keboola is traceable, and if possible, also recoverable.
 
 - [**Jobs**](/management/jobs/#jobs) --- give you an overview of all your jobs,
 running and finished (what tables were modified, how much data was transferred and
@@ -23,19 +23,19 @@ what events occurred during the job execution).
 which were uploaded/downloaded into your project.
 - [**Table Snapshots**](/storage/tables/backups/#table-snapshots) --- allow you to revert data
 to an earlier version (either revert the contents of a table or copy the table into another one).
-- [**Data Takeout**](/management/project/export/) --- allows you to get your data back from us; in Keboola Connection, you are
+- [**Data Takeout**](/management/project/export/) --- allows you to get your data back from us; in Keboola, you are
 always the sole owner of your data. Data Takeout is especially useful for proof-of-concept projects.
 - [**Trash tab**](/components/#delete-configuration) --- allows you to list and restore deleted configurations.
 
 ### User Management
-There are three types of Keboola Connection [project users](/management/project/users/):
+There are three types of Keboola [project users](/management/project/users/):
 
-- **Administrators** --- are all equal as most Keboola Connection operations generally require access to most of the data and functions. These are full-
+- **Administrators** --- are all equal as most Keboola operations generally require access to most of the data and functions. These are full-
 fledged trusted users that count against your project quota.
 - **Guest Users** --- with full access to the project data and [limited access](/management/project/users/#user-roles) to project functions. These users 
 count against your project quota.
 - **Tokens/Service Users** --- with [limited access](/management/project/tokens/#limited-tokens) to project data. They can only read or write to
-selected buckets, sending data directly to your Keboola Connection project. These users have only [API tokens](/management/project/tokens/). They can't use the UI and they do not
+selected buckets, sending data directly to your Keboola project. These users have only [API tokens](/management/project/tokens/). They can't use the UI and they do not
  count against your project quota.
 
 ### Project Status

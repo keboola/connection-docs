@@ -80,7 +80,7 @@ Avoid doing complex joins and aggregations in SQL queries.
 Remember that these queries are executed on the database server you are extracting from.
 This database system might not be designed or optimized for complex SELECT queries.
 Complex queries may result in timeouts, or they might produce unnecessary loads on your internal systems.
-Instead, import raw data, and then use Keboola Connection tools to give it the shape you want.
+Instead, import raw data, and then use Keboola tools to give it the shape you want.
 
 ## Server Specific Notes
 

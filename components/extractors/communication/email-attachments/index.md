@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to import data from email attachments to Keboola Connection.
+This extractor allows you to import data from email attachments to Keboola.
 It extracts data from systems generating exports only as CSV files attached to an email.
 It can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
 

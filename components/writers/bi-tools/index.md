@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Writers export data from Keboola Connection to external systems. The following writers
+Writers export data from Keboola to external systems. The following writers
 allow to push data to various business intelligence platforms:
 
 - [GoodData](/components/writers/bi-tools/gooddata/) --- writes tables to [GoodData](https://www.gooddata.com/) and optionally also manages the GoodData project LDM.

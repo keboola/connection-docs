@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Writers export data from Keboola Connection to SQL databases:
+Writers export data from Keboola to SQL databases:
 
 - [Google BigQuery](/components/writers/database/bigquery/) --- sends tables to a [Google BigQuery](https://cloud.google.com/bigquery/) dataset.
 - [Exasol](/components/writers/database/exasol/) --- sends tables to a [Exasol](https://www.exasol.com) database.

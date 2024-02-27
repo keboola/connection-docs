@@ -5,7 +5,7 @@ redirect_from:
     - /extractors/other/
 ---
 
-Extractors import data from external sources and integrate it to the Keboola Connection environment.
+Extractors import data from external sources and integrate it to the Keboola environment.
 Apart from extractors for social networks, communication, storage, and marketing and sales, there are
 extractors that do not fall into any of the above mentioned categories:
 

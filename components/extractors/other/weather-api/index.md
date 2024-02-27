@@ -8,7 +8,7 @@ permalink: /components/extractors/other/weather-api/
 
 [Weather API](https://weatherapi.com) is a free service that offers information on forecasted, real-time, and historical weather, including marine weather.
 
-This component enables users to load data from [Weather API](https://weatherapi.com) and bring it into Keboola Connection.
+This component enables users to load data from [Weather API](https://weatherapi.com) and bring it into Keboola.
 
 ## Prerequisites
 

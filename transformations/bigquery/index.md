@@ -21,7 +21,7 @@ permalink: /transformations/bigquery/
 
 BigQuery is designed for flexibility and ease of use. Its integration with other Google Cloud services provides a robust platform for analytics at scale. To keep up with the latest improvements and updates, it's a good idea to monitor the [BigQuery release notes](https://cloud.google.com/bigquery/docs/release-notes).
 
-For information on BigQuery limitations within Keboola Connection, refer to the [BigQuery Limitations](/storage/byodb/#bigquery-limitations) section.
+For information on BigQuery limitations within Keboola, refer to the [BigQuery Limitations](/storage/byodb/#bigquery-limitations) section.
 
 ## Aborting Transformation Execution
 In some cases, you may need to abort the transformation execution and exit with an error message. 

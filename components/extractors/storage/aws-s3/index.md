@@ -9,10 +9,10 @@ redirect_from:
 {:toc}
 
 This extractor loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables 
-in Keboola Connection (KBC) Storage.
+in Keboola Storage.
 
 After creating a new configuration, select the files you want to extract from AWS S3 and determine how
-you save them to KBC Storage. You also need to set up proper permissions on AWS.
+you save them to Keboola Storage. You also need to set up proper permissions on AWS.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** extractor.

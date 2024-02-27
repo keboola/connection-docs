@@ -19,7 +19,7 @@ Data destination connectors can be grouped by their primary purpose:
 - **Business Intelligence**: [Tableau](/components/writers/bi-tools/tableau/), [GoodData](/components/writers/bi-tools/gooddata/), [Looker](/components/writers/bi-tools/looker/), and more
 - **Databases**: [MySQL](/components/writers/database/mysql/), [Oracle](/components/writers/database/oracle/), [PostgreSQL](/components/writers/database/postgresql/), [Amazon Redshift](/components/writers/database/redshift/), [Snowflake](/components/writers/database/snowflake/), [Synapse](/components/writers/database/synapse/), and more
 - **Generic Storage**: [AWS S3](/components/writers/storage/aws-s3/), [Dropbox](/components/writers/storage/dropbox/), [Google Drive](/components/writers/storage/google-drive/),
-[Google Sheets](/components/writers/storage/google-sheets/), [Keboola Connection Storage](/components/writers/storage/storage-api/), and more
+[Google Sheets](/components/writers/storage/google-sheets/), [Keboola Storage](/components/writers/storage/storage-api/), and more
 - [Other](/components/writers/other/) data destination connectors such as Azure Event Hub
 
 For a definitive list of usable data destination connectors, see your project **Data Destinations** section.

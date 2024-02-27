@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer loads single or multiple tables from your current project into a different Keboola Connection project.
+This writer loads single or multiple tables from your current project into a different Keboola project.
 The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 

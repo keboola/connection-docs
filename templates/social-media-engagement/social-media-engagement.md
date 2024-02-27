@@ -85,7 +85,7 @@ These data destinations are available (click the links for detailed documentatio
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
-from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/social-media-engagement/add-new-template.png)
@@ -175,7 +175,7 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
+Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It is needed for correct mapping 
 in your duplicated Google sheet. 
 
 <!-- 

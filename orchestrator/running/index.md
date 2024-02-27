@@ -141,7 +141,7 @@ buckets or tables.
 It means that the token will also work if it has access to no components.*
 
 ### Parallel Jobs
-Running things in the Keboola Connection platform is designed around the concept of [background jobs](/management/jobs/). One of the key properties is 
+Running things in the Keboola platform is designed around the concept of [background jobs](/management/jobs/). One of the key properties is 
 that the same configuration of the same component cannot run in parallel. This is primarily a safety measure to maintain consistency of
 the output data produced by that configuration. In a more technical way, we can say that
 *jobs running the same configuration are **serialized***.

@@ -30,7 +30,7 @@ They are deleted from the transformation staging area when the execution finishe
 {: .image-popup}
 ![Simple input and output mapping](/transformations/mappings/mappings.png)
 
-*Table names referenced by mappings are automatically quoted by Keboola Connection. 
+*Table names referenced by mappings are automatically quoted by Keboola. 
 This is especially important for Snowflake, which is case sensitive.*
 
 ## Overview
@@ -180,7 +180,7 @@ As you can see, a **read-only input mapping** allows you to read a table created
 
 #### _timestamp system column
 A table loaded using `CLONE` will contain all columns of the original table plus a new `_timestamp` column.
-This column is used internally by Keboola Connection for comparison with the value of the *Changed in last* filter. 
+This column is used internally by Keboola for comparison with the value of the *Changed in last* filter. 
 
 The value in the column contains a unix timestamp of the [last change of the row](/storage/tables/#manual-incremental-processing). 
 You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),

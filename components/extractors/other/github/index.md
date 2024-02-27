@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 The GitHub extractor uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
-to Keboola Connection.
+to Keboola.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **GitHub** extractor.

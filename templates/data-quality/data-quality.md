@@ -81,7 +81,7 @@ These are the available tests:
 ## How to Use Template
 The process is simple. You don't need to configure anything. Just add the template to your project and then run it. Shared codes will be added to your project, and all steps of the flow will be executed in order to generate a sample SQL transformation, using the data tests and generating the result log table. 
 
-Select the corresponding template from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+Select the corresponding template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/data-quality/add-new-template.png)

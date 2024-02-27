@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The FTP extractor loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Connection Storage.
+The FTP extractor loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Storage.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **FTP** extractor.

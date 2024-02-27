@@ -30,7 +30,7 @@ Fill the required fields of the registration form.
 ![Pingdom API registration](/components/extractors/other/pingdom/04-pingdom-api-form.png)
 
 When registration is finished, copy the Application Key and save it. You will need it when creating your extractor configuration 
-in Keboola Connection.
+in Keboola.
 
 {: .image-popup}
 ![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
