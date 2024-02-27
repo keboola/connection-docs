@@ -218,6 +218,9 @@ items:
               - url: /components/extractors/marketing-sales/tiktok-ads/
                 title: TikTok Ads
 
+              - url: /components/extractors/marketing-sales/zoho/
+                title: Zoho
+
           - url: /components/extractors/social/
             title: Social
             items:
