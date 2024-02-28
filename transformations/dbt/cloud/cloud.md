@@ -67,4 +67,4 @@ You can access the data from the storage, or directly from the job detail screen
 
 ![](imgs/2777710857.png){: width="100%" }
 
-*Note: The source component utilizes our powerful Generic extractor. In case you want to customize the extraction, select just some endpoints, etc. You can switch to the JSON schema and edit the configuration manually.*
+*Note: The source component utilizes our powerful Generic Extractor. In case you want to customize the extraction, select just some endpoints, etc. You can switch to the JSON schema and edit the configuration manually.*

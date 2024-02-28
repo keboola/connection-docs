@@ -12,11 +12,11 @@ redirect_from:
 The YouTube Data API source connector uses the [YouTube Data API](https://developers.google.com/youtube/v3/docs/) to extract data
 about your YouTube channels or your YouTube activity. It is ideal for obtaining basic information about your channels, playlists, and videos.
 
-***NOTE:** This extractor is not designed for analytics and reporting. Use the
+***NOTE:** This connector is not designed for analytics and reporting. Use the
 [YouTube Reporting](/components/extractors/social/youtube-reporting/) or the [Google Analytics](/components/extractors/marketing-sales/google-analytics/) data source connectors for such purposes.*
 
 ## Configuration
-To begin, [create a new configuration](/components/#creating-component-configuration) for the **YouTube** extractor.
+To begin, [create a new configuration](/components/#creating-component-configuration) for the **YouTube** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Select one of the two available **templates**: 

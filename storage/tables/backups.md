@@ -37,7 +37,7 @@ That will be correctly interpreted as `2023-03-23 01:00 +0200`, which is equival
 To physically copy a table, utilize the **Create Snapshot** feature. This feature creates a copy of the table contents at the time the snapshot is created, 
 which can be used immediately to produce a physical copy of the table or later, to revert the table to its previous state.
 
-Table snapshots are useful when **experimenting** with extractors and transformations, or when **refactoring** your project. You can create a copy of your output table, conduct experiments, 
+Table snapshots are useful when **experimenting** with data source connectors and transformations, or when **refactoring** your project. You can create a copy of your output table, conduct experiments, 
 and then compare the new output table with the original to ensure your output remains consistent. They can also be used as a workaround to renaming tables because this feature is not available yet.
 
 {: .image-popup}

@@ -41,8 +41,8 @@ Repeat this for all configurations you want to add into the orchestration.
 ## Organize Tasks
 Let's assume you have the following configurations and wish to orchestrate them into a data pipeline:
 
-- Adform extractor with the `Campaigns` configuration
-- Snowflake extractor with the `Email recipient index` configuration
+- Adform data source connector with the `Campaigns` configuration
+- Snowflake data source connector with the `Email recipient index` configuration
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`
 - Mailchimp writer with the `New recipients` configuration
 
@@ -65,9 +65,9 @@ When this rule is applied to the above task configuration, it leads to the follo
 {: .image-popup}
 ![Orchestration Tasks Sequence](/orchestrator/tasks/orchestration-sequence-1.png)
 
-That means both transformations and the Mailchimp writer will run in parallel, and when they finish, the Adform extractor will be run.
-When it is finished, the Snowflake extractor will run.
-*Surely, this is not right.* The extractors must run before the transformations and the transformations must run before the writer. 
+That means both transformations and the Mailchimp writer will run in parallel, and when they finish, the Adform data source connector will be run.
+When it is finished, the Snowflake data source connector will run.
+*Surely, this is not right.* The data source connectors must run before the transformations and the transformations must run before the writer. 
 Because this is a typical scenario, there is a feature to do just this --- **Group tasks by component type**:
 
 {: .image-popup}
@@ -83,7 +83,7 @@ The above will lead to the following execution sequence:
 {: .image-popup}
 ![Orchestration Tasks Sequence Organized](/orchestrator/tasks/orchestration-sequence-2.png)
 
-First, the two extractors are run in parallel, then both transformations are run in parallel, and last the writer sends the results 
+First, the two data source connectors are run in parallel, then both transformations are run in parallel, and last the writer sends the results 
 to the consumer (Mailchimp service in this case). The configurations will be executed in the order in which they depend on each other.
 
 ## Handling Dependencies

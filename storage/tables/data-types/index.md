@@ -6,7 +6,7 @@ permalink: /storage/tables/data-types/
 * TOC
 {:toc}
 
-Some components, especially extractors (data sources), store metadata about the table columns. For example, when a [DB extractor](/components/extractors/database/sqldb/)
+Some components, especially data source connectors (extractors), store metadata about the table columns. For example, when a [DB data source connector](/components/extractors/database/sqldb/)
 loads a table from a source database, it also records the physical column types from that table.
 These are stored with each table column and can be used later when working with the table. For
 instance, transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside
@@ -22,7 +22,7 @@ date values stored in a MySQL database might not be accepted by a Snowflake data
 ## Base Types
 Source data types are mapped to a destination using a **base type**. The current base types are
 [`STRING`](#string), [`INTEGER`](#integer), [`NUMERIC`](#numeric), [`FLOAT`](#float), [`BOOLEAN`](#boolean), 
-[`DATE`](#date), and [`TIMESTAMP`](#timestamp). This means that, for example, a MySQL extractor
+[`DATE`](#date), and [`TIMESTAMP`](#timestamp). This means that, for example, a MySQL data source connector
 may store the value `BIGINT` as a type of column; that type maps to the `INTEGER` base type. When the Snowflake writer consumes this value, it will
 read the base type `INTEGER` and choose a corresponding type for Snowflake, which happens to be also `INTEGER`.
 This ensures high interoperability between the components. Please take a look at the [conversion table below](#data-type-conversions).
@@ -1011,7 +1011,7 @@ A table with a type definition is created using the [tables-definition endpoint]
 
 #### Output mapping of a component
 
-A component may provide information about column data types in its data manifest. Database extractors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database extractors and transformations that do NOT match the backend will create storage tables using [base types](#base-types). 
+A component may provide information about column data types in its data manifest. Database data source connectors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database data source connectors and transformations that do NOT match the backend will create storage tables using [base types](#base-types). 
 
 _**Note:** When a table is created from base types, it defaults to the lengths and precisions of the target backend. For instance, in Snowflake, the NUMBER base type is created as NUMBER(38,0), which may be unexpected if the source database column is NUMBER(10,2)._  
 
@@ -1042,7 +1042,7 @@ FROM
     "typed_table";
 ```
 
-***Note:** The data type hinting is the components' responsibility, so components must be updated by their respective authors to support this. The database extractors that are maintained by Keboola already provide data types. There is no list of components that support this feature. You may check the component's documentation to see if it supports native data types.* 
+***Note:** The data type hinting is the components' responsibility, so components must be updated by their respective authors to support this. The database data source connectors that are maintained by Keboola already provide data types. There is no list of components that support this feature. You may check the component's documentation to see if it supports native data types.* 
 
 ### How to Define Data Types
 

@@ -8,15 +8,15 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to translate [what3words](https://what3words.com/) addresses to coordinates and vice versa.
-Before using the extractor, you need to [obtain a what3words API key](https://developer.what3words.com/public-api/docsv2#overview).
+This data source connector allows you to translate [what3words](https://what3words.com/) addresses to coordinates and vice versa.
+Before using the connector, you need to [obtain a what3words API key](https://developer.what3words.com/public-api/docsv2#overview).
 Notice that each translated address requires one API call.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** connector.
 
 ## Augment What3words Address
-In this mode of operation, you identify [what3words](https://what3words.com/about-us/) addresses, and the extractor
+In this mode of operation, you identify [what3words](https://what3words.com/about-us/) addresses, and the connector
 then fetches the geographical latitude and longitude coordinates for the places. 
 Specify a single table which has exactly one column with what3words addresses.
 If the source table does not meet this requirement, 
@@ -32,7 +32,7 @@ and select the **forward** method in the configuration.
 ![Screenshot - Add coordinates to w3w address](/components/extractors/other/what3words/what3words-1.png)
 
 ## Augment Coordinates
-In this case, you specify geographical latitude and longitude coordinates, and the extractor fetches their what3words addresses.
+In this case, you specify geographical latitude and longitude coordinates, and the edata source connector fetches their what3words addresses.
 Select one or more tables which have exactly two columns: the first column with a latitude, the second one with a longitude. 
 If the source table does not meet these requirements, edit the [input mapping](/transformations/mappings/#input-mapping) 
 details accordingly. 

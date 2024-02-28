@@ -17,8 +17,8 @@ be able to provide valuable experience.
 The approach we showed in the [introduction](/orchestrator/tasks/) can be described as data pipelines and characterized as
 result driven. Once again let's assume we have the following configurations in a project:
 
-- Google Analytics extractor with the `Campaigns` configuration,
-- Snowflake extractor with the `Email recipient index` configuration,
+- Google Analytics data source connector with the `Campaigns` configuration,
+- Snowflake data source connector with the `Email recipient index` configuration,
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`, and
 - Mailchimp writer with the `New recipients` configuration.
 
@@ -31,17 +31,17 @@ This should actually be read from the very end. Our ultimate goal is to update a
 To get to that goal we need to prepare the list in a required format using the `Campaign Recipient` transformation.
 This requires `Email recipient index` and evaluated campaign performance. Because computing the campaign performance is
 non-trivial, it is separated into the `Campaign Performance` transformation. That transformation requires the source `Campaigns` from
-the Google Analytics extractor.
+the Google Analytics data source connector.
 
 This means that each orchestration corresponds to a single data **destination**. The schedule of the orchestration is determined
 by the desired frequency of the destination updates. This is a pretty straightforward approach,
 which should be easy to grasp by project newcomers. It is suitable when there is a limited number of data destinations and
 the destinations require a (mostly) divisional set of operations. Taking the above example --- if we add to that project
-a Facebook extractor and some transformations determining the sentiment of the comments and rating products by that sentiment --- that
+a Facebook data source connector and some transformations determining the sentiment of the comments and rating products by that sentiment --- that
 would be an entirely independent data pipeline.
 
 On the other hand, if the pipelines share a configuration, that may cause unnecessary queuing of jobs (multiple jobs of the same 
-configuration are serialized). In case of extractors, this may also cause unnecessary extractions when data didn't change because 
+configuration are serialized). In case of data source connectors, this may also cause unnecessary extractions when data didn't change because 
 a second pipeline is not aware that the source data was already extracted.
 This can pose a problem especially if the extractions take very long to run. Consider what would happen if the following were the
 actual project schema:
@@ -72,8 +72,8 @@ This means: first *extract* from every used data source, then clean up the data 
 *transform*ations and lastly --- *load* the data into destination systems using writers.
 
 The design can then proceed in the following path. Configure the data sources and determine what is the wanted/possible update frequency.
-Create one (giant) orchestration which has all extractors in the extractor phase, all transformations in the transformation phase and
-all writers in the writers phase. The transformation phase may need to be split up to multiple phases if there are some dependent
+Create one (giant) orchestration which has all data source connectors in the data source phase, all transformations in the transformation phase and
+all data destination connectors in the data destination phase. The transformation phase may need to be split up to multiple phases if there are some dependent
 transformations, or you can use [nested orchestrations](/orchestrator/tasks/nesting/) to handle these. The schedule of the 
 orchestration is determined by the lowest data-source update frequency.
 
@@ -82,7 +82,7 @@ Considering once again the more complex project schema:
 {: .image-popup}
 ![Complex Configuration Dependencies](/orchestrator/design/dependencies-2.png)
 
-There are a couple of DB extractors from some information systems. Let's imagine that the `Subsidiary IS Additional` configuration exports
+There are a couple of DB source connectors from some information systems. Let's imagine that the `Subsidiary IS Additional` configuration exports
 large data from a MySQL server which has really poor performance. To avoid affecting other systems, the extraction is allowed to run only
 once a day at 2am. By putting everything into one (giant) orchestration, we're effectively limited to run this orchestration once a day at 2am.
 When all the extractions are finished, the transformations will run, and when they are finished, the processed data will be sent to their
@@ -134,7 +134,7 @@ Taking the above example, you may find out that
 - `Internal IS Main` may run only every 2 hours because the IT department said so.
 - `IS Auxiliary Tables` takes about 20 seconds, so it can run at any schedule.
 
-This way we will end up with 7 orchestrations for extractors and 4 more orchestrations for the
+This way we will end up with 7 orchestrations for data source connectors and 4 more orchestrations for the
 remaining pipelines:
 
 {: .image-popup}

@@ -76,7 +76,7 @@ You’ll be asked to write a name for the template instance you are about to cre
 
 ## Component Description
 
-### Shopify Extractor
+### Shopify Data Source Connector
 The component is set up to extract all the data tables: 
 `customer`, `inventory-items`, `inventory-levels`, `line-item`, `locations`, `order`, `product`, `product-images`, `product-options`, and `product-variant`.
 

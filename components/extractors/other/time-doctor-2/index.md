@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Time Doctor 2 API](https://api2.timedoctor.com/) to import data from Time Doctor 2.
+This data source connector uses the [Time Doctor 2 API](https://api2.timedoctor.com/) to import data from Time Doctor 2.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Time Doctor 2** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Time Doctor 2** connector.
 You need to provide an email address and the password of a user with appropriate access rights.
 
 To configure what data you want to extract, you can use the following parameters:

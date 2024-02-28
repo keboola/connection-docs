@@ -4,10 +4,10 @@ permalink: /tutorial/ad-hoc/
 ---
 
 After you have loaded your tables, either [manually](/tutorial/load/) or
-[using an extractor](/tutorial/load/database/), [manipulated the data](/tutorial/manipulate/) in SQL,
+[using a data source connector](/tutorial/load/database/), [manipulated the data](/tutorial/manipulate/) in SQL,
 written it [into Tableau BI](/tutorial/write/) or [into GoodData BI](/tutorial/write/gooddata/), and
 set everything to run [automatically](/tutorial/automate/), let's take a look at some additional Keboola 
-Connection features related to doing ad-hoc analysis.
+features related to doing ad-hoc analysis.
 
 This part of the tutorial shows how to work with arbitrary data in Python
 in a completely unrestricted way. Although our examples use the Python language,
@@ -26,17 +26,17 @@ contains unemployment rates by month. The easiest way to access the data is via
 [Bureau of Labor Statistics Data](https://cloud.google.com/bigquery/public-data/bureau-of-labor-statistics).
 
 Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola
-Connection with the help of our BigQuery extractor. Preview the table data in
+with the help of our BigQuery data source connector. Preview the table data in
 [Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
 
-## Using BigQuery Extractor
+## Using BigQuery Connector
 To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
 querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/).
 
 Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) for authentication 
-of the Google BigQuery extractor, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
-*Note: If setting up the Google BigQuery extractor seems too complicated to you, export the query results to Google Sheets and
+*Note: If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
 [load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
 ### Prepare
@@ -80,23 +80,23 @@ Enter the bucket's name and choose where to store your data (the location type *
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ### Extract Data
-Now you're ready to load the data into Keboola. Go to the section **Components -- Extractors**, 
-and click **Add New Extractor**:
+Now you're ready to load the data into Keboola. Go to the section **Components**, 
+and click the green button **Add Component**:
 
 {: .image-popup}
 ![Screenshot - Extractors](/tutorial/ad-hoc/ex-bigquery-1.png)
 
-Use the search to find the Google BigQuery extractor:
+Use the search to find the Google BigQuery data source:
 
 {: .image-popup}
 ![Screenshot - BigQuery Extractor](/tutorial/ad-hoc/ex-bigquery-2.png)
 
-Click the extractor: 
+Click **+ Add Component** and then **Connect to My Data**: 
 
 {: .image-popup}
 ![Screenshot - New Configuration](/tutorial/ad-hoc/ex-bigquery-3.png)
 
-Create a new configuration and name it, e.g., `Bls Unemployment`:
+Name the configuration (e.g., 'Bls Unemployment') and describe it if you want. Then, click **Create Configuration**:
 
 {: .image-popup}
 ![Screenshot - New Configuration Name](/tutorial/ad-hoc/ex-bigquery-4.png)
@@ -149,7 +149,7 @@ Now run the configuration to bring the data to Keboola:
 {: .image-popup}
 ![Screenshot - Finished Configuration](/tutorial/ad-hoc/ex-bigquery-11.png)
 
-Running the extractor creates a background job that
+Running the data source connector creates a background job that
 
 - executes the queries in Google BigQuery.
 - saves the results to Google Cloud Storage.

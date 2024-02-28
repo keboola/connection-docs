@@ -10,7 +10,7 @@ With this end-to-end flow you can extract your updated data from an eCommerce pl
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 
 **The flow, in a nutshell:**
-- First, the eCommerce source component (extractor) will collect data from your account (data about orders, products, inventory, and customers). 
+- First, the eCommerce data source component will collect data from your account (data about orders, products, inventory, and customers). 
 You can also bring in marketing data from your marketing channels like [Facebook Ads](https://www.facebook.com/business/tools/ads-manager/), 
 [Google Ads](https://ads.google.com/), and/or [Sklik](https://www.sklik.cz/) accounts.
 
@@ -139,7 +139,7 @@ Additional documentation is available [here](https://bitbucket.org/kds_consultin
 
 ### Shoptet Analytics
 
-This extractor allows you to download data from Shoptet permalinks. 
+This data source connector allows you to download data from Shoptet permalinks. 
 
 {: .image-popup}
 ![Shoptet Data Source](/templates/ecommerce/shoptet-source.png)

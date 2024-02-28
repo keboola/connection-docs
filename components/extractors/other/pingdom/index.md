@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This data source connector (extractor) helps you import data from [Pingdom](https://www.pingdom.com/).
+This data source connector helps you import data from [Pingdom](https://www.pingdom.com/).
 
 Pingdom is a service for monitoring the uptime and performance of your servers, websites, and web applications.
 
@@ -22,7 +22,7 @@ Then, continue to the **Integrations > The Pingdom Api** [section](https://my.pi
 
 Fill in the required fields of the registration form.
 
-- **Application name** -- Name your application -- for example, `Keboola Pingdom Extractor`.
+- **Application name** -- Name your application -- for example, `Keboola Pingdom Connector`.
 - **Description** -- Enter a description.
 - **Application type** -- Select the `Public` option.
 - **Platform** -- Select the `Server` option.

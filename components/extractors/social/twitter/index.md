@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-The Twitter extractor, as the name implies, fetches data from [Twitter](https://twitter.com/).
+The Twitter data source connector, as the name implies, fetches data from [Twitter](https://twitter.com/).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Twitter** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Twitter** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 When finished setting up authorization, click **Continue** to move to the next tab, and start selecting data.
 
@@ -36,10 +36,10 @@ It is okay to leave any of the steps blank.
 
 ## Extraction Output Tables
 
-The extractor output is always **incremental**, and **primary keys** are set for all tables
+The connector output is always **incremental**, and **primary keys** are set for all tables
 to append new rows and update the already existing ones with each execution.
 
-The following are the Twitter extractor output tables:
+The following are the Twitter connector output tables:
 
 ### 1 -- Tweets
 
@@ -131,7 +131,7 @@ This table contains the hashtags present in tweets.
 
 ## Usage Limits
 
-This extractor is designed to download up to
+This data source connector is designed to download up to
 
 - 3,200 most recent user tweets (User Timeline)
 -  800 mentions (Mentions)

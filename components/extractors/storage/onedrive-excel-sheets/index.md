@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor loads Excel sheets from 
+This data source connector loads Excel sheets from 
 **[Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)**
 and stores them as tables in a bucket in your current project.
 
@@ -16,10 +16,10 @@ and stores them as tables in a bucket in your current project.
 cloud storage integrates
 **[Office365](https://www.office.com/)**
 and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)** sites,
-so with this extractor, you have access to all your Excel sheets in your personal account or in your business account.
+so with this connector, you have access to all your Excel sheets in your personal account or in your business account.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Excel Sheets** extractor.  
+[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Excel Sheets** connector.  
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Click **Add Table** to configure extraction.
@@ -77,7 +77,7 @@ Click **Save** when you're done.
 ![Screenshot - Select worksheet](/components/extractors/storage/onedrive-excel-sheets/onedrive-10.png)
 
 ## Modify Configuration
-When a table is added to the extractor, it is displayed in the list of tables. 
+When a table is added to the connector, it is displayed in the list of tables. 
 
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
 
