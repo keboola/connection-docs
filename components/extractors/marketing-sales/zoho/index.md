@@ -32,7 +32,7 @@ Each report you download will be a [configuration row](https://help.keboola.com/
 After that, set up the **Module records download configuration (`module_records_download_config`)**. This step is required.  
 Then, set up the job configuration:
   - **Module name (`module_name`)** – The API name of the Zoho CRM module you want to extract records from *[required]*. 
-  - **Field names (`field_names`)** – API names of the module records' fields you want to extract. Can be left empty or omitted to download all available fields *[optional]*. 
+  - **Field names (`field_names`)** – API names of the module record fields you want to extract. Leave it empty if you want to download all available fields *[optional]*. 
 
 ### Sync Options
 Next, select one of the **Sync Options (`sync_options`)**. This step is required. There are three modes available: 
@@ -60,5 +60,5 @@ Finally, fill in the **Destination settings** to determine what happens in Keboo
 Once everything is configured, click **Save** and run the configuration.
 
 ## Output
-All output tables contain the `Id` column containing the record's unique ID. It is always used as the output tables primary key in Keboola Storage. 
-Other fields depend on the module from which you are extracting the records and the field names specified in the configuration.
+All output tables contain the `Id` column containing the record's unique ID. It is always used as the output table's primary key in Keboola Storage. 
+Other fields depend on the module from which you extract the records and the field names specified in the configuration.
