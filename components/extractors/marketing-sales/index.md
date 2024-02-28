@@ -1,5 +1,5 @@
 ---
-title: Marketing/Sales Extractors 
+title: Marketing/Sales Data Source Connectors 
 permalink: /components/extractors/marketing-sales/
 redirect_from:
     - /extractors/marketing-sales/
@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 Extractors import data from external sources and integrate it to the Keboola environment.
-Keboola provides the following marketing and sales extractors:
+Keboola provides the following marketing and sales connectors:
 
 - [Adform DSP Reports](/components/extractors/marketing-sales/adform-dsp-reports/)
 - [Babelforce](/components/extractors/marketing-sales/babelforce/)

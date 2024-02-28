@@ -8,11 +8,11 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor fetches data from [Intercom](https://www.intercom.com/).
+This data source connector fetches data from [Intercom](https://www.intercom.com/).
 
 ## Configuration
 Before you start, have a working Intercom account with a plan (a trial will work as well). 
-[Create a new configuration](/components/#creating-component-configuration) of the **Intercom** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Intercom** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Choose one of the configuration templates available: **Basic** or **Conversations** and **Save** the configuration.
@@ -343,8 +343,8 @@ This table lists all [Conversation parts](https://developers.intercom.com/interc
 | `created_at` | The time the conversation part was created |
 | `updated_at` | The last time the conversation part was updated |
 | `notified_at` | The time the user was notified with the conversation part |
-| `assigned_to_type` | The tyoe of the admin that the conversation is assigned to |
-| `assigned_to_id` | The id of the admin that the conversation is assigned to (not null only when part_type: assignment) |
+| `assigned_to_type` | The type of the admin that the conversation is assigned to |
+| `assigned_to_id` | The ID of the admin that the conversation is assigned to (not null only when part_type: assignment) |
 | `author_type` | The user or admin type that created the part |
 | `author_id` | The user or admin id that created the part |
 | `external_id` | Undocumented |

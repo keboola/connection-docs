@@ -72,13 +72,13 @@ To create a new component configuration, select *Components* from the top naviga
 {: .image-popup}
 ![Screenshot - Create Configuration](/components/configuration-1.png)
 
-The following page lists the current configurations (e.g., extractors) in the project. To create a new configuration of a new component, 
+The following page lists the current configurations (e.g., data source connectors) in the project. To create a new configuration of a new component, 
 use the **Directory** or the **Add New Data Source** button.
 
 {: .image-popup}
 ![Screenshot - Extractors List](/components/configuration-2.png)
 
-Use the search field to find the component you want to use (the Currency Rates extractor in this case) and then click the component tile to add it:
+Use the search field to find the component you want to use (the Currency Rates data source connector in this case) and then click the component tile to add it:
 
 {: .image-popup}
 ![Screenshot - Search Component](/components/configuration-3.png)
@@ -95,8 +95,8 @@ In the dialog, enter a name for the configuration. If a component has a single c
 ![Screenshot - Create Configuration](/components/configuration-5.png)
 
 The next page shows a form for configuring the component, this varies heavily between different components.
-Component configuration can range from trivial (as in the case of the [Currency extractor](/components/extractors/other/currency-rates/)) to very complex ones 
-(e.g., [Google Ads extractor](/components/extractors/marketing-sales/google-ads/)). The configuration complexity badge shown in the component list gives you a rough idea of what to expect.
+Component configuration can range from trivial (as in the case of the [Currency data source connector](/components/extractors/other/currency-rates/)) to very complex ones 
+(e.g., [Google Ads data source connector](/components/extractors/marketing-sales/google-ads/)). The configuration complexity badge shown in the component list gives you a rough idea of what to expect.
 
 {: .image-popup}
 ![Screenshot - Set Parameters](/components/configuration-6.png)
@@ -217,11 +217,11 @@ but cannot be restored:
 
 ### Configuration Rows
 There are components that support the concept of multiple configurations sharing some of their parameters. A typical
-example are database extractors, where multiple tables are extracted and they all share the same database credentials.
+example are database data source connectors, where multiple tables are extracted and they all share the same database credentials.
 In such components, the configuration itself contains only the credentials and tables are stored in **configuration rows**.
 The *configuration* acts as an envelope for the *configuration rows*.
 
-The following example shows a configuration of the [AWS S3 extractor](/components/extractors/storage/aws-s3/)
+The following example shows a configuration of the [AWS S3 data source connector](/components/extractors/storage/aws-s3/)
 with three configuration rows:
 
 {: .image-popup}
@@ -262,8 +262,8 @@ it means that the service does not require entering credentials (username, passw
 redirected to the service itself where you authorize the Keboola component. Then you are redirected back to 
 Keboola and you can set other parameters and run the configuration. 
 
-The OAuth authorization process begins with the **Authorize** button (in this example the
-[Google calendar extractor](/components/extractors/communication/google-calendar/) is shown):
+The OAuth authorization process begins with the **Authorize** button (in this example, the
+[Google Calendar data source connector](/components/extractors/communication/google-calendar/) is shown):
 
 {: .image-popup}
 ![Screenshot - Authorization](/components/authorization-1.png)

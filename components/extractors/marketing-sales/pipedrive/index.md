@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1/) to import data 
+This data source connector uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1/) to import data 
 from [Pipedrive](https://www.pipedrive.com/en-gb).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** connector.
 
-To configure this extractor, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
+To configure this connector, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
 Then enter your **company domain** (if your Pipedrive is at https://keboola.pipedrive.com, your company domain is **keboola**).
 
 {: .image-popup}

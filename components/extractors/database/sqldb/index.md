@@ -1,5 +1,5 @@
 ---
-title: Extractors for SQL Databases
+title: Data source connectors for SQL Databases
 permalink: /components/extractors/database/sqldb/
 redirect_from:
     - /extractors/database/sqldb/
@@ -9,16 +9,16 @@ redirect_from:
 * TOC
 {:toc}
 
-Each extractor from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries.
+Each data source connector from an SQL database allows you to extract data from selected tables, or results from arbitrary SQL queries.
 
-The extractors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html), 
+The connectors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html), 
 [Firebird](http://www.firebirdsql.org/), [IBM DB2](https://www.ibm.com/analytics/db2), 
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), [MySQL](https://www.mysql.com/),
 [Oracle](https://www.oracle.com/index.html), [PostgreSQL](https://www.postgresql.org/), [Teradata](https://www.teradata.com/)) are configured
 in the same way and have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
 in the section [Server Specific Notes](#server-specific-notes).
 
-Before you start configuring your SQL extractor, consider securing your connection to your internal database to avoid exposing 
+Before you start configuring your SQL data source connector, consider securing your connection to your internal database to avoid exposing 
 your database server to the internet by [setting up an SSH Tunnel](/components/extractors/database/#connecting-to-database).
 
 *Note: Quick introduction to extracting data from the Snowflake Database Server is also part of our [tutorial](/tutorial/load/database/).*
@@ -35,7 +35,7 @@ After testing the credentials, **Save** them:
 {: .image-popup}
 ![Screenshot - Configure Credentials](/components/extractors/database/sqldb/sqldb-2.png)
 
-After you save the credentials, the extractor will automatically fetch the list of all database tables accessible by the provided credentials.
+After you save the credentials, the connector will automatically fetch the list of all database tables accessible by the provided credentials.
 Select the tables you want to extract and click the **Create** button:
 
 {: .image-popup}
@@ -115,7 +115,7 @@ When the extracted text itself may contain quotes, you need to escape them by re
 SELECT char(34) + REPLACE([my_varchar_column], char(34), char(34) + char(34)) + char(34) FROM [my_table]
 {% endhighlight %}
 
-The extractor will still work if you don't do these things, but the BCP will fail, and the backup, a much slower method,
+The data source connector will still work if you don't do these things, but the BCP will fail, and the backup, a much slower method,
 will be used. In that case, the message `BCP command failed: ... Attempting export using pdo_sqlsrv` will be logged in the extraction
 job events.
 

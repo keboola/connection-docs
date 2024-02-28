@@ -15,7 +15,7 @@ Because you have to write it yourself, we made the
 [Generic Extractor guide](https://developers.keboola.com/extend/generic-extractor/) a part of our [Developers 
 Documentation](https://developers.keboola.com/extend/). 
 
-No other programming or software engineering skills are necessary. Even though configuring the extractor may seem quite 
+No other programming or software engineering skills are necessary. Even though configuring the Generic Extractor may seem quite 
 complex at first, once you understand the concept, you will be able to extract desired data within (tens of) minutes. 
 
 We strongly recommend you configure your first Generic Extractor using [our 
@@ -25,8 +25,8 @@ To understand what specific parts of an existing configuration do, check the
 [Configuration Map](https://developers.keboola.com/extend/generic-extractor/map/).
 
 ## Template Mode
-Generic Extractor is used as the base for many extractors. These components allow you to select pre-defined configurations 
--- templates -- without the need to configure Generic extractor manually.
+Generic Extractor is used as the base for many data source connectors (extractors). These components allow you to select pre-defined configurations 
+-- templates -- without the need to configure Generic Extractor manually.
 
 {: .image-popup}
 ![Generic Extractor - template](/components/extractors/other/generic/generic-1.png)

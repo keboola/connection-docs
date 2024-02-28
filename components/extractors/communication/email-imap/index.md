@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to automatically retrieve email contents and/or it's attachments via the [IMAP protocol](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol). 
+This data source connector allows you to automatically retrieve email contents and/or it's attachments via the [IMAP protocol](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol). 
 It supports incremental loads and IMAP query to define specific criteria. 
 
 The IMAP protocol provides several advantages:
@@ -33,7 +33,7 @@ The IMAP protocol provides several advantages:
 | Processors support         | Use processor to modify the outputs before saving to storage, e.g. process attachments to be stored in the Tabular Storage |
 
 
-## Getting started
+## Getting Started
 
 
 Have IMAP service enabled on your Email account. You will need the IMAP credentials (name, password) and the hostname and port information of the IMAP server.
@@ -43,7 +43,7 @@ Please refer to your email provider for more information.
 Note that the app fetches emails from the root `INBOX` folder. If you use labels and filters in Gmail for instance, that move the messages to a different folder, 
 please set the `imap_folder` configuration parameter.
 
-### Example Using GMAIL account
+### Example Using GMAIL Account
 
 - Enable and create [App Password](https://support.google.com/accounts/answer/185833?hl=en) that will be specific for your integration. Name it for instance as `Keboola Extractor`
 - Fill in your email address in the `Username` field.
@@ -65,7 +65,7 @@ Fill in the `Username`, `Password` and the `Hostname` and `Port` of your provide
 
 Click the `Add Row` button and name the row accordingly.
 
-### Search query
+### Search Query
 
 Fill in a `Search query` to filter only the emails you want. By default all emails are downloaded. The most common usecase would be to filter the emails 
 by the Subject and Sender, e.g. `(FROM "sender-email@example.com" SUBJECT "the subject")`. You can create much more complex queries if needed. 
@@ -78,11 +78,11 @@ Refer to the [query syntax](query-syntax) for more examples.
 
 Folder to get the emails from. Defaults to the root folder `INBOX`. For example a label name in GMAIL = folder.
 
-### Mark seen
+### Mark as Seen
 
 When checked, emails that have been extracted will be marked as seen in the inbox.
 
-### Period from date
+### Period from Date
 
 Use this field to filter only emails received since the specified date. This field supports fixed dates in a format `YYYY-MM-DD` as well as 
 relative date period e.g. `yesterday`, `1 month ago`, `2 days ago`, etc. We recommend setting this to cover some safety interval, for example `2 days ago` when 
@@ -92,7 +92,7 @@ scheduled to run every day. The data is always upserted incrementally, so there 
 
 Check this option to download email content.
 
-### Download attachments
+### Download Attachments
 
 When set to true, also the attachments will be downloaded. You may use regex pattern to filter only attachments that are matching your definition. 
 

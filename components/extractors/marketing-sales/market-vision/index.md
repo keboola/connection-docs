@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Market Vision API](https://reporting.marketvision-spring.com/api/v1/documentation) to
+This data source connector uses the [Market Vision API](https://reporting.marketvision-spring.com/api/v1/documentation) to
 extract Market Vision [projects](https://reporting.marketvision-spring.com/api/v1/documentation#List_of_Projects_150)
 and their corresponding Forms, Questions, Categories, and Fieldsets.
 
@@ -17,7 +17,7 @@ The component has backfill implemented, meaning that if not all data could be fe
 amounts of data, it will be fetched in the following runs.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Market Vision** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Market Vision** connector.
 Then fill in the **Access/API Token** to authorize the configuration. The process to get the Access Token is 
 done via an [API request](https://reporting.marketvision-spring.com/api/v1/documentation#Generate_token_18).
 

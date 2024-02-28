@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The Mailchimp extractor uses the [Mailchimp API](https://mailchimp.com/developer/) to extract data from
+The Mailchimp data source connector uses the [Mailchimp API](https://mailchimp.com/developer/) to extract data from
 mailing lists sent by the [Mailchimp](https://mailchimp.com/) service. It downloads configured reports for all specified accounts,
 importing data such as list and members, campaigns, automations, reports, reports with click details, member activity, etc.
 
@@ -20,7 +20,7 @@ To gain access to the Mailchimp API, log in to [Mailchimp](https://mailchimp.com
 It will look like this: c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Mailchimp** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Mailchimp** connector.
 
 Fill in the **data center** for your account, your account **username** and the **API key**:
 Optionally name the **storage bucket** where your results will be stored.

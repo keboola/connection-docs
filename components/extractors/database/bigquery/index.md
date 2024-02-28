@@ -8,23 +8,23 @@ redirect_from:
 * TOC
 {:toc}
 
-The BigQuery extractor loads data from [BigQuery](https://cloud.google.com/bigquery/) and brings it into Keboola. 
-Running the extractor creates a background job that
+The BigQuery data source connector loads data from [BigQuery](https://cloud.google.com/bigquery/) and brings it into Keboola. 
+Running the connector creates a background job that
 
 - executes the queries in Google BigQuery.
 - saves the results to Google Cloud Storage.
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
 
-***Note:** Using the Google BigQuery extractor is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-extractor).*
+***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-extractor).*
 
 ## Initial Setup
 
 ### Service Account
 To access and extract data from your BigQuery dataset, you need to set up a Google service account. Go 
 to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
-and select the project you want the extractor to have access to. Click **Create Service Account**
-and enter a *Service account name* (e.g., `Keboola BigQuery extractor`).
+and select the project you want the data source connector to have access to. Click **Create Service Account**
+and enter a *Service account name* (e.g., `Keboola BigQuery connector`).
 
 {: .image-popup}
 ![Screenshot - Create service account](/components/extractors/database/bigquery/googlecloud-1.png)
@@ -40,7 +40,7 @@ Finally, click **+ Create Key** to create a new JSON key, and then click **Creat
 ![Screenshot - Create JSON key](/components/extractors/database/bigquery/googlecloud-3.png)
 
 ### Bucket
-The extractor uses a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+The data source connector uses a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 Go to the [**Google Cloud Platform Console > Storage >  Cloud Storage > Browser**](https://console.cloud.google.com/storage/browser)
 and click **Create Bucket**. **Name** the bucket and select its **location** (must be the same as of your dataset).
 
@@ -50,7 +50,7 @@ and click **Create Bucket**. **Name** the bucket and select its **location** (mu
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ## Configure Extraction
-[Create a new configuration](/components/#creating-component-configuration) of the BigQuery extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the BigQuery connector.
 Click **Set Service Account Key**.
 
 {: .image-popup}

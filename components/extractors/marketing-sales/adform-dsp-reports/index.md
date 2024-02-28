@@ -8,8 +8,8 @@ redirect_from:
 * TOC
 {:toc}
   
-This extractor retrieves Buy-Side report data from the [Reporting Stats API](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats).
-It may be used to retrieve similar data as via the [MasterData extractor](https://components.keboola.com/components/ex-adform-masterdata) 
+This data source connector retrieves Buy-Side report data from the [Reporting Stats API](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats).
+It may be used to retrieve similar data as via the [MasterData source connector](https://components.keboola.com/components/ex-adform-masterdata) 
 if the Master Data service is not enabled in your account.
 
 Reporting Stats API returns report data consisting of statistics derived from the data collected by the Adform tracking code. 
@@ -32,7 +32,7 @@ You will then receive your **client secret** and **client ID**. They will be use
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the Adform DSP Reports extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the Adform DSP Reports connector.
 
 First insert the **API client secret** and **API client ID** that you obtained from Adform (Adform client credentials for a registered 
 app with the `Client credentials flow` enabled).

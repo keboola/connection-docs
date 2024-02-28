@@ -8,7 +8,7 @@ permalink: /components/extractors/other/airtable/
 
 Airtable is an easy-to-use yet powerful database service that allows you to quickly create, organize, and collaborate on any project.
 
-This extractor allows you to fetch data from any Airtable base tables.
+This data source connector allows you to fetch data from any Airtable base tables.
 
 ## Prerequisites
 
