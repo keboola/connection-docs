@@ -7,7 +7,7 @@ permalink: /templates/datahub/
 {:toc}
 
 The [DataHub](https://datahub.io/) template provides a one-click setup of an end-to-end flow for populating Keboola metadata 
-into a DataHub data catalog. This includes extracting data from both the Telemetry and Metadata data source connector before transforming the data in order to calculate table properties and lineage. You can choose whether or not to include schemas, 
+into a DataHub data catalog. This includes extracting data from the Telemetry and Metadata data source connectors before transforming the data to calculate table properties and lineage. You can choose whether or not to include schemas, 
 properties, or tags from the DataHub data destination connector.
 
 ## Prerequisites
