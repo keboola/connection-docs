@@ -38,20 +38,20 @@ destination project.
 - Configurations for all data source and destination connectors, and applications
 - All transformations
 - All orchestrations
-- Keboola Provisioned Snowflake writers will be moved to the new stack's Snowflake account.
+- Keboola-Provisioned Snowflake data destination connectors will be moved to the new stack's Snowflake account.
 - GoodData projects will be moved to the new stack's GoodData account.
 
 ### Important
 - The internal timestamp for all data rows will be set to the date of the migration. So, if you are using incremental loads 
 based on [Changed in last](/transformations/mappings/#input-mapping) in 
-transformations or writers, it will fetch all data on the first run.
+transformations or data destination connectors, it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.
 - Each Keboola stack has a different set of assigned [IP addresses](/components/ip-addresses/).
 
 ## What Won't Be Migrated
 - Encrypted values
-  - Passwords, API keys, etc., stored in the data source connector, writer and application configurations
+  - Passwords, API keys, etc., stored in the data source and destination connectors and application configurations
   - OAuth authorizations
   - Data source and destination connector SSH Tunnel private keys
 - [Files](/storage/files/)

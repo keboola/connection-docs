@@ -218,7 +218,7 @@ More info [here](https://help.keboola.com/components/writers/database/snowflake/
 ## MySQL Database
 You need to provide a host name, user name, password, and a database name (MySQL [schema](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)). 
 
-We highly recommend that you create dedicated credentials for the writer in your database. 
+We highly recommend that you create dedicated credentials for the data destination connector in your database. 
 
 More info [here](https://help.keboola.com/components/writers/database/mysql/).
 
@@ -228,7 +228,7 @@ More info [here](https://help.keboola.com/components/writers/database/mysql/).
 ## PostgreSQL Database
 You need to provide a host name, driver, port number, user name, password, database name, and a schema. 
 
-We highly recommend that you create dedicated credentials for the writer in your database. 
+We highly recommend that you create dedicated credentials for the data destination connector in your database. 
 
 More info [here](https://help.keboola.com/components/writers/database/postgresql/).
 

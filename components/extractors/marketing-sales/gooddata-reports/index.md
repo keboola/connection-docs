@@ -37,11 +37,11 @@ Continue by providing your own GoodData **credentials**.
 {: .image-popup}
 ![Screenshot - GoodData Credentials](/components/extractors/marketing-sales/gooddata-reports/gooddata-reports-3.png)
 
-You can also choose an ID of the **GoodData Project** provisioned in one of the existing GoodData Writer configurations 
+You can also choose an ID of the **GoodData Project** provisioned in one of the existing GoodData data destination connector configurations 
 and use its credentials. The project ID (PID) of the provisioned project can be found in a GoodData data destination connector configuration.
 
 {: .image-popup}
-![Screenshot - GoodData Writer Config with Provisioned Project](/components/extractors/marketing-sales/gooddata-reports/gooddata-writer-1.png)
+![Screenshot - GoodData Data Destination Config with Provisioned Project](/components/extractors/marketing-sales/gooddata-reports/gooddata-writer-1.png)
 
 Copy the project ID from the data destination connector to the data source connector:
 

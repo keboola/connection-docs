@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to the [ThoughtSpot](https://www.thoughtspot.com/product) platform.
+This data destination connector sends data to the [ThoughtSpot](https://www.thoughtspot.com/product) platform.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** data destination connector.
 Then **Set Up Credentials**. You need to provide a [*host name*](https://docs.thoughtspot.com/5.0/data-integrate/clients/use-jdbc-driver.html), 
 *user name*, *password*, *database name*, *schema*, *SSH user*, and *SSH password*.
-The writer uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/5.0/admin/loading/use-data-importer.html#) 
+The connector uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/5.0/admin/loading/use-data-importer.html#) 
 and TQL commands to load that data. These commands are executed on the server through an SSH connection. 
 Therefore the [SSH credentials](https://docs.thoughtspot.com/4.4/app-integrate/introduction/logins.html) are 
 needed to connect to the server instance.
@@ -50,7 +50,7 @@ more details on designing the data schema.
 {: .image-popup}
 ![Screenshot - Table Type](/components/writers/bi-tools/thoughtspot/thoughtspot-5.png)
 
-There are two main options how the writer can write data to tables --- **Full Load** mode and **Incremental Load** mode.
+There are two main options how the data destination connector can write data to tables --- **Full Load** mode and **Incremental Load** mode.
 
 {: .image-popup}
 ![Screenshot - Table Options](/components/writers/bi-tools/thoughtspot/thoughtspot-6.png)

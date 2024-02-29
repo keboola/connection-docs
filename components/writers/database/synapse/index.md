@@ -6,18 +6,18 @@ permalink: /components/writers/database/synapse/
 * TOC
 {:toc}
 
-This writer sends data to an [Azure Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) 
+This data destination connector sends data to an [Azure Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) 
 database and is **only available on the Azure [Keboola stacks](/overview/#stacks).**
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Synapse** writer. Start
+[Create a new configuration](/components/#creating-component-configuration) of the **Synapse** data destination connector. Start
 with **setting up database credentials** and provide a *host name*, *port*, *user name*, *password*, *database
 name*, and a *schema*.
 
 {: .image-popup}
 ![Screenshot - Save Credentials](/components/writers/database/synapse/synapse-1.png)
 
-We highly recommend that you create dedicated credentials for the writer.
+We highly recommend that you create dedicated credentials for the connector.
 
 First, create a login in the **`master`** database:
 
@@ -76,7 +76,7 @@ When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main 
-options how the writer can write data to tables --- **Full Load** and **Incremental Load**.
+options how the connector can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
 ![Screenshot - Table Options](/components/writers/database/synapse/synapse-5.png)
@@ -90,7 +90,7 @@ In the **Full Load** mode, the table is completely overwritten including the tab
 using the [`DROP`](https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-table-transact-sql) command 
 and is recreated. The `DROP` command needs to acquire 
 a [table-level lock](https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide).
-This means that if the database is used by other applications which acquire table-level locks, the writer may
+This means that if the database is used by other applications which acquire table-level locks, the connector may
 freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for

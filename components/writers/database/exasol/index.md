@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to a [Exasol](https://www.exasol.com/) database.
+This data destination connector sends data to a [Exasol](https://www.exasol.com/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Exasol** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Exasol** data destination connector.
 
 The first step is to **set up credentials**:
 
@@ -44,7 +44,7 @@ For each column you can specify its
 - **data type** (one of [Exasol data types](https://docs.exasol.com/sql_references/data_types/datatypesoverview.htm)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that the column will not be present in the destination table.
 - **nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
 
-The Exasol writer can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
+The Exasol connector can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
 column types are pre-filled automatically. Make sure to verify the suggested types, however. These data types are taken
 from the data source and may not be the best choice for the data destination.
 

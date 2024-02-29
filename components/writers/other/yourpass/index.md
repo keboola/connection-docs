@@ -8,12 +8,12 @@ permalink: /components/writers/other/yourpass/
   
 YourPass enables users to create passes for mobile wallets; e.g., for boarding passes, loyalty points, or tickets.
 
-The YourPass writer uses the [YourPass API](https://doc.yourpass.eu/) to
+The YourPass data destination connector uses the [YourPass API](https://doc.yourpass.eu/) to
 create/delete/update [YourPass](https://www.yourpass.eu/) passes.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **YourPass** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **YourPass** data destination connector.
 
 ### Authorization Configuration
 
@@ -37,7 +37,7 @@ sandbox mode is set.
 ### Endpoints
 
 In the row configuration select the Pass endpoint to modify Pass data (only the pass endpoints are currently
-supported by the writer). Then select the exact action you want to perform :
+supported by the connector). Then select the exact action you want to perform :
 
 - Create  : create a new pass
 - Delete  : delete an existing pass based on an ID

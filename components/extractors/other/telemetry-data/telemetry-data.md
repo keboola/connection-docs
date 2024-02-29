@@ -104,7 +104,7 @@ of the component configuration.
 
 ### kbc_component_configuration_row
 This table lists rows of the [configurations for the components](/components/#creating-component-configuration) 
-(e.g., a configuration for a single table in the Snowflake writer).
+(e.g., a configuration for a single table in the Snowflake data destination connector).
 
 | **Column** | **Description** | **Example** |  
 |---|---|---|
@@ -173,7 +173,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `job_billed_credits_used` | Number of actually billed credits | `0.001218890000` |
 | `job_total_time_sec` | Total time of the job in seconds (from initial trigger; start may be delayed) | `63` |
 | `job_run_time_sec` | Runtime of the job in seconds (from the time the job started) | `62` |
-| `job_network_mb` | Data transferred via the network in MB – used for writer billing | `6.094449` |
+| `job_network_mb` | Data transferred via the network in MB – used for data destination billing | `6.094449` |
 | `ds_backend_size` | Backend used for data science transformations (`Small`, `Medium`, `Large`) | `Small` |
 | `dwh_small_ratio` | Ratio of Small DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH) | `0.75` |
 | `dwh_medium_ratio` | Ratio of Medium DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH) | `0.25` |
@@ -298,7 +298,7 @@ You need data for all projects.*
 | `kbc_project_id` | Foreign key to the Keboola project | `779_kbc-eu-central-1` |
 | `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
 | `date` | Date of the value | `2019-11-01` |
-| `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into writers, applications, and transformations. | `DWH Direct Query` |
+| `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into data destination connectors, applications, and transformations. | `DWH Direct Query` |
 | `is_sandbox` | Flag determining if the value is for sandbox | `true` |
 | `value` | Value of the metric (always related to the particular metric, key-value pairs) | `4.150657` |
 | `organization_value` | Organization value of the metric (used for Keboola users, where we’re assigning distinct users to the single org project, so we’re not calculating users more than once when looking at organization value – a single user can be in multiple projects) | `15` |

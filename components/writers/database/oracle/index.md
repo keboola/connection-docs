@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to an [Oracle](https://www.oracle.com/database/) database.
+This data destination connector sends data to an [Oracle](https://www.oracle.com/database/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Oracle** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Oracle** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *service name*.
@@ -19,7 +19,7 @@ You need to provide a *host name*, *user name*, *password*, and a *service name*
 {: .image-popup}
 ![Screenshot - Credentials](/components/writers/database/oracle/oracle-2.png)
 
-We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
+We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
 {% highlight sql %}
 CREATE USER writer_sample IDENTIFIED BY Writer_sample1;
@@ -51,7 +51,7 @@ For each column you can specify its
 When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
-At the top of the page, you can specify the target table name and additional load options. There are two main options how the writer
+At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
@@ -66,7 +66,7 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)) using the
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9003.htm) command and recreated. The
 `DROP` command needs to acquire a [table-level lock](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9015.htm).
-This means that if the database is used by other applications which acquire table-level locks, the writer may
+This means that if the database is used by other applications which acquire table-level locks, the connector may
 fail with the following message:
 
     Query failed: 'ORA-00955: name is already used by an existing object

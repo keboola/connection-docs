@@ -12,7 +12,7 @@ with the following tasks:
 - Adform data source connector with the `Campaigns` configuration
 - Snowflake data source connector with the `Email recipient index` configuration
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`
-- Mailchimp writer with the `New recipients` configuration
+- Mailchimp data destination connector with the `New recipients` configuration
 
 Without digging into details on what all these things can do, let's assume the following dependencies:
 

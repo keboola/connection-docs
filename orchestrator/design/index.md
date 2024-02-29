@@ -20,14 +20,14 @@ result driven. Once again let's assume we have the following configurations in a
 - Google Analytics data source connector with the `Campaigns` configuration,
 - Snowflake data source connector with the `Email recipient index` configuration,
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`, and
-- Mailchimp writer with the `New recipients` configuration.
+- Mailchimp data destination connector with the `New recipients` configuration.
 
 Let the dependencies between the configurations be the following:
 
 {: .image-popup}
 ![Configuration Dependencies](/orchestrator/design/dependencies-1.png)
 
-This should actually be read from the very end. Our ultimate goal is to update a recipient list using the Mailchimp writer.
+This should actually be read from the very end. Our ultimate goal is to update a recipient list using the Mailchimp connector.
 To get to that goal we need to prepare the list in a required format using the `Campaign Recipient` transformation.
 This requires `Email recipient index` and evaluated campaign performance. Because computing the campaign performance is
 non-trivial, it is separated into the `Campaign Performance` transformation. That transformation requires the source `Campaigns` from
@@ -69,7 +69,7 @@ Cons:
 ## Good Old ETL
 Another approach is to build the project orchestrations around the concept of [ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load).
 This means: first *extract* from every used data source, then clean up the data and convert it into destination shape using
-*transform*ations and lastly --- *load* the data into destination systems using writers.
+*transform*ations and lastly --- *load* the data into destination systems using data destination connectors.
 
 The design can then proceed in the following path. Configure the data sources and determine what is the wanted/possible update frequency.
 Create one (giant) orchestration which has all data source connectors in the data source phase, all transformations in the transformation phase and
@@ -140,7 +140,7 @@ remaining pipelines:
 {: .image-popup}
 ![Mirroring Orchestrations](/orchestrator/design/dependencies-4.png)
 
-*Note: The orchestrations `O8` to `O11` of course contain the entire colored pipeline, not just the writer.
+***Note:** The orchestrations `O8` to `O11` of course contain the entire colored pipeline, not just the data destination connector.
 Now you can run the `Consistency Errors` configuration and its pipeline at any schedule, without affecting the rest of
 the project or causing unnecessary loads. Obviously, it's no good running it faster than hourly, because we can't
 get the source data faster. With this setup, you may now realize that it's tempting to run the `Reporting Main` pipeline

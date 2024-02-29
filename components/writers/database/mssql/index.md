@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to a [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) database.
+This data destination connector sends data to a [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **SQL Server** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **SQL Server** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, *database name*, and SQL Server version; optionally, an *instance name* if needed for the connection.
@@ -19,7 +19,7 @@ You need to provide a *host name*, *user name*, *password*, *database name*, and
 {: .image-popup}
 ![Screenshot - Save Credentials](/components/writers/database/mssql/mssql-2.png)
 
-We highly recommend that you create a dedicated credentials for the writer in your database. You can use the following SQL code to get started:
+We highly recommend that you create a dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
 {% highlight sql %}
 CREATE LOGIN writer_sample WITH PASSWORD = 'Writer_sample1';
@@ -56,7 +56,7 @@ For each column you can specify its
 When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
-At the top of the page, you can specify the target table name and additional load options. There are two main options how the writer
+At the top of the page, you can specify the target table name and additional load options. There are two main options how the data destination connector
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
@@ -70,7 +70,7 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://docs.microsoft.com/en-us/sql/t-sql/statements/drop-table-transact-sql) command and recreated. The
 `DROP` command needs to acquire a [table-level lock](https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide).
-This means that if the database is used by other applications which acquire table-level locks, the writer may
+This means that if the database is used by other applications which acquire table-level locks, the connector may
 freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for

@@ -34,4 +34,4 @@ We provide tutorials on [writing into GoodData](/tutorial/write/gooddata/) and [
 You can also watch the following videos:
 
 - [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ)
-- [GoodData Writer Demo](https://www.youtube.com/watch?v=h46t0_nOtyI)
+- [GoodData Data Destination Demo](https://www.youtube.com/watch?v=h46t0_nOtyI)

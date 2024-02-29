@@ -8,18 +8,18 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to a [Firebolt](https://www.firebolt.io/) database.
+This data destination connector sends data to a [Firebolt](https://www.firebolt.io/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Firebolt** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Firebolt** data destination connector.
 
 The first step is to **set up credentials**:
 
 {: .image-popup}
 ![Screenshot - Credentials page](/components/writers/database/firebolt/firebolt-1.png)
 
-Fill in your Firebolt **Username**, **Password**, and **Database Name**. To use the writer, you must fill in credentials for an S3 
-bucket, which will be used for staging. The writer will push data to the bucket and Firebolt will download the data from it.
+Fill in your Firebolt **Username**, **Password**, and **Database Name**. To use the connector, you must fill in credentials for an S3 
+bucket, which will be used for staging. The data destination connector will push data to the bucket and Firebolt will download the data from it.
 
 
 > **_NOTE:_**  The S3 bucket must be in the same region as your Firebolt database.
@@ -45,7 +45,7 @@ For each column you can specify its
 - **data type** (one of [Firebolt data types](https://docs.firebolt.io/general-reference/data-types)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that the column will not be present in the destination table.
 - **nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
 
-The Firebolt writer can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
+The Firebolt connector can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
 column types are pre-filled automatically. Make sure to verify the suggested types, however. These data types are taken
 from the data source and may not be the best choice for the data destination.
 
@@ -89,7 +89,7 @@ You can set the type of load for the output to Firebolt using **Full Load** or *
 
 ## Firebolt Indexes
 
-Using this writer you can also set up Firebolt Indexes for your specific table. More information about each index can be found in the
+Using this data destination connector you can also set up Firebolt Indexes for your specific table. More information about each index can be found in the
 following index sections or on the [Firebolt documentation page](https://docs.firebolt.io/concepts/get-instant-query-response-time). 
 To set the indexes, click on the pencil icon on either the primary index or join/aggregation index. Join indexes are available for 
 dimension tables and aggregation indexes are available for fact tables.
