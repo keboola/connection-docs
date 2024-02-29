@@ -32,7 +32,7 @@ and select the **forward** method in the configuration.
 ![Screenshot - Add coordinates to w3w address](/components/extractors/other/what3words/what3words-1.png)
 
 ## Augment Coordinates
-In this case, you specify geographical latitude and longitude coordinates, and the edata source connector fetches their what3words addresses.
+In this case, you specify geographical latitude and longitude coordinates, and the data source connector fetches their what3words addresses.
 Select one or more tables which have exactly two columns: the first column with a latitude, the second one with a longitude. 
 If the source table does not meet these requirements, edit the [input mapping](/transformations/mappings/#input-mapping) 
 details accordingly. 
