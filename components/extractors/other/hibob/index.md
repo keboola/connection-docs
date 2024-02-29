@@ -10,7 +10,7 @@ permalink: /components/extractors/other/hibob/
 
 HiBob is an HR management platform that offers a wide range of features to support talent management. These features include onboarding administration, task management, payroll reporting, time tracking, and a manager dashboard for tracking employee performance.
 
-The HiBob  data source connector enables you to retrieve data from the HiBob HR platform.
+The HiBob data source connector enables you to retrieve data from the HiBob HR platform.
 
 ## Prerequisites
 
