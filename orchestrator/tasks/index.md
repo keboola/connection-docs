@@ -83,7 +83,7 @@ The above will lead to the following execution sequence:
 {: .image-popup}
 ![Orchestration Tasks Sequence Organized](/orchestrator/tasks/orchestration-sequence-2.png)
 
-First, the two data source connectors are run in parallel, then both transformations are run in parallel, and last the connector sends the results 
+First, the two data source connectors are run in parallel, then both transformations are run in parallel, and last the data destination connector sends the results 
 to the consumer (Mailchimp service in this case). The configurations will be executed in the order in which they depend on each other.
 
 ## Handling Dependencies
@@ -117,6 +117,6 @@ Which corresponds to the following execution sequence:
 
 That means that the `Campaigns` and `Email Recipient Index` configurations will execute first. When they both finish,
 the transformation `Campaign Performance` will run. When it finishes, the transformation `Campaign Recipient`
-will run. Lastly, the `New recipients` connector will be executed.
+will run. Lastly, the `New recipients` data destination connector will be executed.
 
 Another way of handling dependencies is using [nested orchestrations](/orchestrator/tasks/nesting/).
