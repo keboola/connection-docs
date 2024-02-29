@@ -1,5 +1,5 @@
 ---
-title: Data source connectors for SQL Databases
+title: Data Source Connectors for SQL Databases
 permalink: /components/extractors/database/sqldb/
 redirect_from:
     - /extractors/database/sqldb/
