@@ -73,7 +73,7 @@ Navigate to the transformation and run it. Examine the **Mapping** section in th
 {: .image-popup}
 ![Mapping in branch](/tutorial/branches/figures/mapping-in-branch-2.png)
 
-Notice how the **Input** section shows the data loaded from the `bitcoin_price` table, even though you did not run the extractor in this branch. When a branch version of a table does not exist, Keboola uses the production version as a fall back. 
+Notice how the **Input** section shows the data loaded from the `bitcoin_price` table, even though you did not run the data source connector in this branch. When a branch version of a table does not exist, Keboola uses the production version as a fall back. 
 
 Also notice that **Output** shows the small yellow branch icon, and the name of the bucket is prefixed with a number -- 
 `1835-bitcoin`. When you run a component in a branch and the component wants to write to Storage, the outputs do not 
@@ -89,8 +89,8 @@ This part of your task is done. Let's get to the second part.
 The second objective is to produce a list of transactions showing the amount in both BTC and USD. You need to extract
 the account data first. Use the [prepared CSV file](/tutorial/branches/bitcoin_transactions.csv) with sample transactions.
 
-In the branch, navigate to your existing HTTP extractor configuration and add a new table named `bitcoin_transactions`. 
-Fill in **Path** with `/tutorial/branches/bitcoin_transactions.csv`. Save and run the extractor.
+In the branch, navigate to your existing HTTP connector configuration and add a new table named `bitcoin_transactions`. 
+Fill in **Path** with `/tutorial/branches/bitcoin_transactions.csv`. Save and run the connector.
 
 {: .image-popup}
 ![Extractor for transactions](/tutorial/branches/figures/extractor-transactions.png)
@@ -130,7 +130,7 @@ and verify that the `bitcoin_prices` table from the branch was used as input.
 ![Input mapping from branch data](/tutorial/branches/figures/input-mapping-from-branch.png)
 
 What happened is that Keboola checked whether a branch version of the bucket existed and since it did 
-(you ran the branch version of the HTTP extractor), it was used in the transformation.
+(you ran the branch version of the HTTP connector), it was used in the transformation.
 
 ## Extend Transformation
 
@@ -183,7 +183,7 @@ Run the updated transformation and examine the results.
 {: .image-popup}
 ![Changed transformation output](/tutorial/branches/figures/transformation-branch-output.png)
 
-As you can see, this run of the transformation only accessed branch buckets. It loaded the data from the HTTP extractor 
+As you can see, this run of the transformation only accessed branch buckets. It loaded the data from the HTTP connector 
 from the branch bucket as input and stored the output in two tables in another branch bucket. You can also examine 
 the data in the tables to see that you indeed created a list of transactions with their dollar amounts.
 

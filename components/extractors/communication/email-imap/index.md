@@ -45,7 +45,7 @@ please set the `imap_folder` configuration parameter.
 
 ### Example Using GMAIL Account
 
-- Enable and create [App Password](https://support.google.com/accounts/answer/185833?hl=en) that will be specific for your integration. Name it for instance as `Keboola Extractor`
+- Enable and create [App Password](https://support.google.com/accounts/answer/185833?hl=en) that will be specific for your integration. Name it for instance as `Keboola data source connector`
 - Fill in your email address in the `Username` field.
 - Fill in your generated App Password in the `Password` field.
 - Fill in the Gmail imap address: `imap.gmail.com` in the `IMAP host field`

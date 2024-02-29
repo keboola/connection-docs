@@ -13,7 +13,7 @@ By using our project management template, you will get an overview across all pr
 
 **The flow, in a nutshell:**
 
-- First, the Project Management source component (extractor) will collect data from your account about projects and tasks.
+- First, the Project Management data source connector will collect data from your account about projects and tasks.
 
 - We then create the output tables and snapshots.
 

@@ -9,7 +9,7 @@ redirect_from:
 * TOC
 {:toc}
 
-Data source connectors (formerly known as Extractors) are [Keboola components](/components/) used for **importing data from external sources into Keboola**.
+Data source connectors (formerly known as extractors) are [Keboola components](/components/) used for **importing data from external sources into Keboola**.
 
 ## Types of Data Source Connectors
 Typically, data source connectors connect to [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs)
@@ -41,6 +41,6 @@ To give an example, when connecting to existing information systems, do not modi
 Such data conversion can prove to be difficult and expensive. Extract what you need and shape it in Keboola.
 
 ## Limitations
-Some extractors have **limits inherent to their sources**. Unfortunately, there is not much we can do about it.
+Some data source connectors have **limits inherent to their sources**. Unfortunately, there is not much we can do about it.
 For example, the Twitter data source connectors will not let you access the history of a particular tweet account beyond a certain point
 because of the [limitations](https://stackoverflow.com/questions/1662151/getting-historical-data-from-twitter) of Twitter API.

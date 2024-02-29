@@ -6,7 +6,7 @@ permalink: /storage/tables/data-types/
 * TOC
 {:toc}
 
-Some components, especially data source connectors (extractors), store metadata about the table columns. For example, when a [DB data source connector](/components/extractors/database/sqldb/)
+Some components, especially data source connectors, store metadata about the table columns. For example, when a [DB data source connector](/components/extractors/database/sqldb/)
 loads a table from a source database, it also records the physical column types from that table.
 These are stored with each table column and can be used later when working with the table. For
 instance, transformation [`COPY` mapping](/transformations/snowflake/#load-type) allows you to set data types for the tables inside

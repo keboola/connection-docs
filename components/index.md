@@ -11,8 +11,8 @@ redirect_from:
 In the Keboola platform, most of the data processing functions are implemented in **Components**. 
 Components are divided into the following categories:
 
-- [**Data source connectors (extractors)**](/components/extractors/) – bring data into a Keboola project.
-- [**Data destination connectors (writers)**](/components/writers/) – send processed data into a target system.
+- [**Data source connectors** (formerly known as extractors)](/components/extractors/) – bring data into a Keboola project.
+- [**Data destination connectors** (formerly known as writers)](/components/writers/) – send processed data into a target system.
 - [**Applications**](/components/applications/) – process complex data.
 
 All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration is used to set the necessary parameters for each 

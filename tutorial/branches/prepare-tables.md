@@ -18,12 +18,12 @@ branches in a non-empty project.
 Let's start with a data pipeline that pulls data about bitcoin prices and creates a list of top five days when the price 
 was the highest. You will prepare the production configurations, so that you can try working with branches later.
 
-Start by pulling the bitcoin data. To simplify this, you can download a [prepared CSV file](/tutorial/branches/bitcoin_price.csv) using the [HTTP extractor](/components/extractors/storage/http/).
+Start by pulling the bitcoin data. To simplify this, you can download a [prepared CSV file](/tutorial/branches/bitcoin_price.csv) using the [HTTP data source connector](/components/extractors/storage/http/).
 
-### Set Up Extractor
+### Set Up Connector
 
-Create a new [HTTP extractor](/components/extractors/storage/http/) configuration. Fill in **Base URL** 
-to `https://help.keboola.com`. Then add a new table to the extractor, named `bitcoin_price`, and fill in the **Path** 
+Create a new [HTTP connector](/components/extractors/storage/http/) configuration. Fill in **Base URL** 
+to `https://help.keboola.com`. Then add a new table to the connector, named `bitcoin_price`, and fill in the **Path** 
 to `/tutorial/branches/bitcoin_price.csv`. **Table Name** should be `bitcoin_price`.
 
 {: .image-popup}
@@ -32,7 +32,7 @@ to `/tutorial/branches/bitcoin_price.csv`. **Table Name** should be `bitcoin_pri
 {: .image-popup}
 ![Prepared HTTP extractor](/tutorial/branches/figures/http-ex-prod-set-up.png)
 
-Run the extractor, and verify that a new table `in.c-keboola-ex-http-682373219.bitcoin_price` was created.
+Run the connector, and verify that a new table `in.c-keboola-ex-http-682373219.bitcoin_price` was created.
 
 ***Note:** The number in your bucket name represents the configuration's ID and will be different from what you see 
 on the screenshot.*
@@ -43,7 +43,7 @@ Create a new [Snowflake transformation](/transformations/snowflake-plain/) named
 {: .image-popup}
 ![New snowflake transformation](/tutorial/branches/figures/new-snflk.png)
 
-In the **Table Input Mapping** section, fill in the table `bitcoin_price` that you created by running the HTTP extractor. 
+In the **Table Input Mapping** section, fill in the table `bitcoin_price` that you created by running the HTTP connector. 
 
 {: .image-popup}
 ![Snowflake input mapping](/tutorial/branches/figures/snflk-prod-im.png)

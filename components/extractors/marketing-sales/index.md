@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Extractors import data from external sources and integrate it to the Keboola environment.
+Data source connectors import data from external sources and integrate it to the Keboola environment.
 Keboola provides the following marketing and sales connectors:
 
 - [Adform DSP Reports](/components/extractors/marketing-sales/adform-dsp-reports/)

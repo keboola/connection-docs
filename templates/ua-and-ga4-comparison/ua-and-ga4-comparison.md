@@ -35,7 +35,7 @@ Then you will configure the template:
 {: .image-popup}
 ![Flow 2](/templates/ua-and-ga4-comparison/required-configurations2.png)
 
-1. **Data extractions** – First, you will authorize the Universal Analytics data source (extractor) and at least one of the following two sources: GA4 API and/or GA4 from the BigQuery database. They will provide all available data. For more details, see the [Authorizing Data Sources](/templates/ua-and-ga4-comparison/#authorizing-data-sources) section below.
+1. **Data extractions** – First, you will authorize the Universal Analytics data source connector and at least one of the following two sources: GA4 API and/or GA4 from the BigQuery database. They will provide all available data. For more details, see the [Authorizing Data Sources](/templates/ua-and-ga4-comparison/#authorizing-data-sources) section below.
 
 2. **Snowflake SQL** – Then, the data will be prepared so that it can be sent to the data app.
 

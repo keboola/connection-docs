@@ -11,7 +11,7 @@ This component fetches defined data objects from the K2 API.
 
 ## Authorization Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **K2** Data Source (Extractor).
+[Create a new configuration](/components/#creating-component-configuration) of the **K2** data source connector.
 Once you have a new configuration of the K2 component, start by authorizing the component. To authorize the component
 open the K2 authorization configuration settings.
 

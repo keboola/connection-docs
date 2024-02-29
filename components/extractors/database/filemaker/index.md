@@ -12,7 +12,7 @@ Extract layout data from [FileMaker](https://www.claris.com/filemaker/) relation
 
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FileMaker** Data Source (Extractor).
+[Create a new configuration](/components/#creating-component-configuration) of the **FileMaker** data source connector.
 
 
 ### Prepare the FileMaker database 

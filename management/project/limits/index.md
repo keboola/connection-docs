@@ -52,13 +52,13 @@ If you need more information, please contact your CSM.
 
 | Types of jobs in Keboola              | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
-| **Extractor job**                     | 1 hour                  | **2**                 |
-| **Writer job**                        | 1 GB out                | **0.2**               |  
-| **SQL job / Workspace**               |                         |                       |
+| **Data souce job**                    | 1 hour                  | **2**                 |
+| **Data destination job**              | 1 GB out                | **0.2**               |  
+| **SQL job / workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |
-| **Data Science job / Workspace**      |                         |                       |
+| **Data Science job / workspace**      |                         |                       |
 | XSmall                                | 1 hour                  | **0.5**               |
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |

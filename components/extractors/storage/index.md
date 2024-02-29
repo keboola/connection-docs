@@ -5,7 +5,7 @@ redirect_from:
     - /extractors/storage/
 ---
 
-Extractors import data from external sources and integrate it to the Keboola environment.
+Data source connectors import data from external sources and integrate it to the Keboola environment.
 The following data source connectors allow access to data from generic storage services:
 
 - [AWS S3](/components/extractors/storage/aws-s3) --- imports CSV files from multiple AWS S3 buckets into multiple tables with additional postprocessing.

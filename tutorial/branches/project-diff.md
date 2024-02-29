@@ -40,7 +40,7 @@ unless you run the configurations that created them, and no data will be transfe
 For example, the table `bitcoin_transactions` which you 
 [created in branch](/tutorial/branches/tables-in-branch/#extend-the-transformation) will not be transferred to production, 
 and if the branch is deleted after the merge, the branch version of the table will be discarded as well. The table 
-`bitcoin_transactions` will be created by running the HTTP extractor in production after you merge it.
+`bitcoin_transactions` will be created by running the HTTP data source connector in production after you merge it.
 
 Also, if you want to drop a column from a table in the branch, you need to drop that column from the production table as well after you merge the branch. 
 

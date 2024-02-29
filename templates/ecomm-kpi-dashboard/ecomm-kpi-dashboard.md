@@ -24,7 +24,7 @@ The template consists of two separate flows, one for building interactive dashbo
 ### Building Dashboards
 The first flow is for **building interactive dashboards** based on transformed data extracted from Shopify:
 
-  - First, you will authorize the data source component (extractor) to extract data from your Shopify account. 
+  - First, you will authorize the data source connector to extract data from your Shopify account. 
   - An SQL transformation will then prepare the data and create a table needed for the data app.
   - The data will then be sent into the data app, where users can view and filter it by date.
 

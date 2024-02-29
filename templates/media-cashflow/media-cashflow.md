@@ -36,7 +36,7 @@ Then you will configure the template:
 {: .image-popup}
 ![Flow](/templates/media-cashflow/flow.png)
 
-1. **Data extractions** – First, you will select one or multiple data sources (extractors) that will provide all available data.
+1. **Data extractions** – First, you will select one or multiple data source connectors that will provide all available data.
 For more details, see the section [Data Sources](/templates/media-cashflow/#data-sources) below.
 
 2. **Snowflake SQL** – Then the data will be prepared so it can be sent to the data app.

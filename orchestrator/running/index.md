@@ -123,7 +123,7 @@ When you run an orchestration manually, the [notifications](/orchestrator/notifi
 who triggered the orchestration) --- the notification setting is ignored. When an orchestration runs unattended by the
 defined schedule, it runs as if the specified orchestration token triggered the execution. In that case,
 the [notifications](/orchestrator/notifications/) settings are honored.
-In either case, all the jobs created by the orchestration (extractors, writers, ...) are run using the orchestration token.
+In either case, all the jobs created by the orchestration (data source and destination connectors, etc.) are run using the orchestration token.
 That is true even if you trigger the orchestration manually. There is no need to know or manually use the orchestration token.
 
 **Important: Do not delete, refresh or otherwise modify the orchestration token. There is a special [API](https://developers.keboola.com/overview/api/) for that.**

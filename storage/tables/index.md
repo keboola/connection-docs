@@ -10,7 +10,7 @@ Your project *Table Storage* is available in the **Tables** tab in the Storage s
 All data tables are organized into [buckets](/storage/buckets/) that can also be
 used to [share tables](/catalog/) between projects.
 
-The actual data tables and the buckets are created primarily by Keboola components (extractors, transformations
+The actual data tables and the buckets are created primarily by Keboola components (data source connectors, transformations
 and applications), or they are imported from CSV files. In case you want to import data to an already
 **existing table**, the imported table must have all the columns of the old, existing table, even if the old
 table is empty. If some columns are missing, you will receive a message like this:

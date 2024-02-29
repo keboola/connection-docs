@@ -17,7 +17,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 {: .image-popup}
 ![Flow](/templates/marketing-platforms/adplatforms-flow.png)
 
-- First, you will select one or multiple data sources (extractors) that will provide all your available data about your campaigns.
+- First, you will select one or multiple data source connectors that will provide all your available data about your campaigns.
  
 - To enrich the marketing model with keywords, ad groups, and marketing transactions, you can also bring in your Google Analytics data (data about basic sessions and transactions).
  
@@ -129,7 +129,7 @@ From here, click **Use Template** once more, give it a name, and click **Next St
 ![Name Template Instance](/templates/marketing-platforms/template-instance-name.png)
 
 This will take you to the page where you can set up the template containing the data app configuration. 
-Here, you will need to provide credentials for the data sources (extractors) and data destinations (writers) you want to use. 
+Here, you will need to provide credentials for the data source and destination connectors you want to use. 
 
 {: .image-popup}
 ![Build Data App](/templates/marketing-platforms/build-data-app.png)

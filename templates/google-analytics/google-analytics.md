@@ -14,7 +14,7 @@ After all the necessary tasks are performed on the data, you can transform the r
 
 **The flow, in a nutshell:**
 
-- First, the Google Analytics source component (extractor) will collect data from your Google Analytics account, and the Google Search Console source component (if selected) 
+- First, the Google Analytics data source connector will collect data from your Google Analytics account, and the Google Search Console source component (if selected) 
 will get your Google Search Console data.
 
 - Then we will put your data into the requested shape, and the Snowflake destination component (writer) will load the results into a Snowflake database.

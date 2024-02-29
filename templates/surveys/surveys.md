@@ -13,7 +13,7 @@ By using our survey template, you will get an overview of all your surveys, ques
 
 **The flow, in a nutshell:**
 
-- First, the Survey source component (extractor) will collect data from your account: lists of forms, questions, and responses, and basic form statistics.
+- First, the Survey data source connector will collect data from your account: lists of forms, questions, and responses, and basic form statistics.
 
 - We will then prepare four tables (surveys, questions, answer options, and responses) that can be used to visualize survey results.
 

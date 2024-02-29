@@ -1,13 +1,13 @@
 ---
-title: Communication Extractors
+title: Communication Data Source Connectors
 permalink: /components/extractors/communication/
 redirect_from:
     - /extractors/communication/
 
 ---
 
-Extractors import data from external sources and integrate it to the Keboola environment.
-The following extractors support communication systems: 
+Data source connectors import data from external sources and integrate it to the Keboola environment.
+The following data source connectors support communication systems: 
 
 - [Email Attachments](/components/extractors/communication/email-attachments/) 
 - [Gmail Messages](/components/extractors/communication/gmail/) 

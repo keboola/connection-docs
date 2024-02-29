@@ -13,7 +13,7 @@ By using our CRM template, you will get an overview about your customers, activi
 
 **The flow, in a nutshell:**
 
-- First, the CRM source component (extractor) will collect data from your account (companies, deals, activities, lists, owners, contacts, and pipelines).
+- First, the CRM source component will collect data from your account (companies, deals, activities, lists, owners, contacts, and pipelines).
 
 - We then add NULL values if any columns are missing, and create an output CRM data model (a set of output tables).
 

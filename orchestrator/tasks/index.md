@@ -7,7 +7,7 @@ permalink: /orchestrator/tasks/
 {:toc}
 
 Before configuring the Orchestrator component, have all the components
-(extractors, transformations, and writers) you wish to work with configured and ready.
+(data source connectors, transformations, and data destination connectors) you wish to work with configured and ready.
 
 To configure the Orchestrator component, create a new *Orchestration*:
 

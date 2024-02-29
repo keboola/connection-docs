@@ -6,7 +6,7 @@ redirect_from:
 
 ---
 
-Extractors import data from external sources and integrate it to the Keboola environment.
+Data source connectors import data from external sources and integrate it to the Keboola environment.
 The following data source connectors allow access to data from social networks:
 
 - [Facebook Pages](/components/extractors/social/facebook/)

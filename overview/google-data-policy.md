@@ -13,7 +13,7 @@ The components working directly with Google APIs and services are divided into t
 
 
 ### Data Source Connectors
-Extractors are components of our platform --- small apps that download data for our users from APIs of various Google services: 
+Data source connectors are components of our platform --- small apps that download data for our users from APIs of various Google services: 
 Gmail, Google Drive, Google Analytics, Google BigQuery, etc.
 All the data that data source connectors obtain from the APIs is then imported into our Storage.
 The data (in Storage) can be accessed only by those users who are in the Keboola project that downloaded the data.

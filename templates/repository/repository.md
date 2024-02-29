@@ -13,7 +13,7 @@ By using our repository template, you will get an overview of your repositories 
 
 **The flow, in a nutshell:**
 
-- First, the GitHub source component (extractor) will collect data from your GitHub account (organizations, teams, members, repositories, commits, issues, and pull requests).
+- First, the GitHub data source connector will collect data from your GitHub account (organizations, teams, members, repositories, commits, issues, and pull requests).
 
 - We will then prepare tables containing organizations and users, and use them to create the output tables.
 
