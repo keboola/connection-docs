@@ -13,7 +13,7 @@ connections should not be publicly available. For an extra layer of security, se
 
 To access external systems (including your database), Keboola uses the below 
 IP addresses. Please **whitelist** these IP addresses in your firewalls to allow Keboola 
-to successfully connect to your system. This applies to all components including all data source connectors and data destination connectors.
+to successfully connect to your system. This applies to all components including all data source and destination connectors.
 
 **Important:** These IP addresses can change in the future! For your convenience, you can programmatically
 fetch and process the [list of existing IP addresses in JSON format](/components/ip-addresses/kbc-public-ip.json).
