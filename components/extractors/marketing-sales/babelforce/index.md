@@ -13,7 +13,7 @@ This data source connector uses the Babelforce [REST API](https://www.babelforce
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Babelforce** connector.
 
-To configure this connecotr, you need to provide an API **Access ID**, and an **API token**.
+To configure this connector, you need to provide an API **Access ID**, and an **API token**.
 Select the **configuration template** and save the configuration. 
 There is only one Google Calendar template available so far -- *Basic*. This option downloads all call data from your Babelforce profile
 You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
