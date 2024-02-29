@@ -34,7 +34,7 @@ The first flow is for **building interactive dashboards** based on transformed d
 ### Sending Data into Slack
 The second flow is triggered once the user wants to send any of the data from the interactive dashboard **into Slack**. Then it takes over.
 
-You will authorize the data destination component (writer), which will send outputs to Slack when users decide to share data from the dashboards.
+You will authorize the data destination connector, which will send outputs to Slack when users decide to share data from the dashboards.
 
 {: .image-popup}
 ![Flow 2](/templates/ecomm-kpi-dashboard/flow2.png)
@@ -63,7 +63,7 @@ The following data destination is available:
 [Slack](https://slack.com/)
 
 ## How to Use Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the source and destination components.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data source and destination connectors.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab 
 in your Keboola project. When you are done, click **+ Use Template**.
@@ -130,7 +130,7 @@ Upon opening the data app, you will find the link to its user interface on the r
 ![Opening Data App](/templates/ecomm-kpi-dashboard/opening-app.png)
 
 ## Authorizing Data Sources
-To use a selected data source component, you must first authorize the data source. 
+To use a selected data source connector, you must first authorize the data source. 
 
 ### Shopify
 

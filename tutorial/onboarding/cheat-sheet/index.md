@@ -90,7 +90,7 @@ FROM "MyInputTable";
 Remember, Snowflake treats table names as case-sensitive. Use **double-quotes** to avoid errors, like FROM "MyInputTable" instead of FROM MyInputTable.
 
 ### Process Incrementally
-Use incremental processing in both input and output mappings to handle data more efficiently, similar to how you manage data in source components.
+Use incremental processing in both input and output mappings to handle data more efficiently, similar to how you manage data in data source connectors.
 
 **Input mapping increments:** To have your transformation handle data in increments, you need input tables generated using incremental loading. This approach
 uses a hidden `_timestamp` column in Keboola Storage and allows the input mapping's `Data Changed in the Last` filter to process only newly added or changed 
@@ -99,7 +99,7 @@ records, streamlining your transformation workspace.
 If your increments need specific conditions, you can clone the entire input table and specify the increments using a WHERE clause in SQL or similar logic in 
 Python or R.
 
-**Output mapping increments:** Similar to data source components, you can opt for incremental loading in the output mapping, with or without a primary key. This 
+**Output mapping increments:** Similar to data source connectors, you can opt for incremental loading in the output mapping, with or without a primary key. This 
 choice allows for either updating existing records (upserting) or simply adding new records (appending).
 
 ### Use Variables

@@ -1,12 +1,12 @@
 ---
-title: Storage Cata Destination Connectors
+title: Storage Data Destination Connectors
 permalink: /components/writers/storage/
 redirect_from:
     - /writers/storage/
 
 ---
 
-Data destination connectors (writers) export data from Keboola to external systems. The following data destination connectors
+Data destination connectors export data from Keboola to external systems. The following data destination connectors
 allow to push data to generic storage services:
 
 - [AWS S3](/components/writers/storage/aws-s3/) --- writes CSV files to a single AWS S3 bucket with additional postprocessing.

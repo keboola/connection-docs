@@ -46,7 +46,7 @@ Search by tag (component type or configuration ID):
 
 ## dbt Cloud API Source Component
 
-The purpose of this source component is to extract and store the [dbt Cloud API](https://docs.getdbt.com/dbt-cloud/api-v2) information (data is stored incrementally) for the following endpoints:
+The purpose of this data source connector is to extract and store the [dbt Cloud API](https://docs.getdbt.com/dbt-cloud/api-v2) information (data is stored incrementally) for the following endpoints:
 
 *   accounts
 
@@ -59,12 +59,12 @@ The purpose of this source component is to extract and store the [dbt Cloud API]
 *   run\_artifacts
 
 
-To configure the source component, enter the API token and select a default configuration:
+To configure the source connector, enter the API token and select a default configuration:
 
 ![](imgs/2777448752.png){: width="100%" }
 
-You can access the data from the storage, or directly from the job detail screen:
+You can access the data from Storage, or directly from the job detail screen:
 
 ![](imgs/2777710857.png){: width="100%" }
 
-*Note: The source component utilizes our powerful Generic Extractor. In case you want to customize the extraction, select just some endpoints, etc. You can switch to the JSON schema and edit the configuration manually.*
+***Note:** The data source connector utilizes our powerful Generic Extractor. In case you want to customize the extraction, select just some endpoints, etc. You can switch to the JSON schema and edit the configuration manually.*

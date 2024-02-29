@@ -32,7 +32,7 @@ In the **Secrets** section, insert the token(s) of the bucket(s) you want to mak
 - After completing the edits, click **Save Changes**, and the changes will instantly be saved back into the table in Keboola Storage.
 
 ## How to Use the Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab 
 in your Keboola project. When you are done, click **+ Use Template**.

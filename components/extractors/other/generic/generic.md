@@ -25,7 +25,7 @@ To understand what specific parts of an existing configuration do, check the
 [Configuration Map](https://developers.keboola.com/extend/generic-extractor/map/).
 
 ## Template Mode
-Generic Extractor is used as the base for many data source connectors (extractors). These components allow you to select pre-defined configurations 
+Generic Extractor is used as the base for many data source connectors. These components allow you to select pre-defined configurations 
 -- templates -- without the need to configure Generic Extractor manually.
 
 {: .image-popup}

@@ -10,16 +10,16 @@ With this end-to-end flow you can extract your updated data from an eCommerce pl
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 
 **The flow, in a nutshell:**
-- First, the eCommerce data source component will collect data from your account (data about orders, products, inventory, and customers). 
+- First, the eCommerce data source connector will collect data from your account (data about orders, products, inventory, and customers). 
 You can also bring in marketing data from your marketing channels like [Facebook Ads](https://www.facebook.com/business/tools/ads-manager/), 
 [Google Ads](https://ads.google.com/), and/or [Sklik](https://www.sklik.cz/) accounts.
 
 - We then create the output tables. We add NULL values if any columns are missing. We also check the data, and perform an [RFM analysis](https://clevertap.com/blog/rfm-analysis/).
 
-- The data is then written into your selected destination, for example to Snowflake database via the Snowflake destination component (writer).
+- The data is then written into your selected destination, for example to Snowflake database via the Snowflake data destination connector.
 
 - Finally, you will run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
-The eCommerce source component, all data manipulations and analyses, and the destination component of your choice, will be processed.
+The eCommerce data source connector, all data manipulations and analyses, and the data destination connector of your choice, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
@@ -77,7 +77,7 @@ The following data destinations will be coming soon:
  -->
  
 ## How to Use Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
 First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**. 
 
@@ -116,7 +116,7 @@ Click **Run Template** and start building your visualizations a few minutes late
 ![Shopify Analytics to Keboola Provided Snowflake Database - Flows](/templates/ecommerce/shopify-to-keboola-provided-snowflake-database-flows.png)
 
 ## Authorizing eCommerce Data Sources
-To use a selected data source component, you must first authorize the data source. 
+To use a selected data source connector, you must first authorize the data source. 
 
 At least one data source must be used in order to create a working flow.
 
@@ -196,9 +196,9 @@ Authorize your Google Account and then select the account from which you want to
 {: .image-popup}
 ![Sklik Data Source](/templates/ecommerce/sklik-data-source.png)
 
-The component uses the [Sklik API](https://api.sklik.cz/drak/) to import data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
+The data source connector uses the [Sklik API](https://api.sklik.cz/drak/) to import data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
 
-To configure this source component, you need to have a working
+To configure this connector, you need to have a working
 
 - [Sklik](https://www.sklik.cz/) account, and an
 - Sklik API [token](https://www.sklik.cz/generateToken).
@@ -213,7 +213,7 @@ To create a working flow, you must select at least one data destination.
 {: .image-popup}
 ![BigQuery Destination](/templates/ecommerce/bigquery-destination.png)
 
-To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
+To configure the data destination connector, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
 A detailed guide is available [here](https://help.keboola.com/components/writers/database/bigquery/).
 
@@ -252,11 +252,11 @@ If you want to use your own Snowflake database, you must provide the host name (
 {: .image-popup}
 ![Snowflake Destination](/templates/ecommerce/snowflake-destination.png)
 
-We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide the user with access 
+We highly recommend that you create a dedicated user for the data destination connector in your Snowflake database. Then you must provide the user with access 
 to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
 
 **Warning:** Keep in mind that Snowflake is **case sensitive** and if identifiers are not quoted, they are converted to upper case. So if you run, for example, 
-a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the destination component configuration.
+a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the data destination connector configuration.
 
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
@@ -266,7 +266,7 @@ Before turning to the Keboola support team for help, make sure your error is not
 ### Missing Credentials to Snowflake Database 
 If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
 
-Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database component. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
+Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database connector. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
 
 Then go to the **Jobs** tab and **Run** the flow again.  
 

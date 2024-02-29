@@ -14,13 +14,13 @@ After all the necessary tasks are performed on the data, you can transform the r
 
 **The flow, in a nutshell:**
 
-- First, the Google Analytics data source connector will collect data from your Google Analytics account, and the Google Search Console source component (if selected) 
+- First, the Google Analytics data source connector will collect data from your Google Analytics account, and the Google Search Console data source connector (if selected) 
 will get your Google Search Console data.
 
-- Then we will put your data into the requested shape, and the Snowflake destination component (writer) will load the results into a Snowflake database.
+- Then we will put your data into the requested shape, and the Snowflake data destination connector will load the results into a Snowflake database.
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
-The Google Analytics or Google Search Console source components (if selected), all data manipulations, and the Snowflake destination component, will be processed.
+The Google Analytics or Google Search Console data source connectors (if selected), all data manipulations, and the Snowflake data destination connector, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
@@ -55,7 +55,7 @@ These data destinations are available in Public Beta:
 - [Google Sheets](https://www.google.com/sheets/about/)
 
 ## How to Use Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
 from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
@@ -95,7 +95,7 @@ Click **Run Template** and start building your visualizations a few minutes late
 
 ## Authorizing Data Sources
 
-To use a selected data source component, you must first authorize the data source. 
+To use a selected data source connector, you must first authorize the data source. 
 In addition to Google Analytics, you can also add data from the Google Search Console. 
 
 ### Google Analytics
@@ -121,7 +121,7 @@ To create a working flow, you must select at least one data destination.
 {: .image-popup}
 ![BigQuery Destination](/templates/marketing-platforms/bigquery-destination.png)
 
-To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
+To configure the data destination connector, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
 A detailed guide is available [here](https://help.keboola.com/components/writers/database/bigquery/).
 
@@ -164,18 +164,18 @@ schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehous
 {: .image-popup}
 ![Snowflake Destination](/templates/marketing-platforms/snowflake-destination.png)
 
-We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide 
+We highly recommend that you create a dedicated user for the data destination connector in your Snowflake database. Then you must provide 
 the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
 
 **Warning:** Keep in mind that Snowflake is **case sensitive** and if identifiers are not quoted, they are converted to upper case. 
-So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the destination component configuration.
+So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the data destination connector configuration.
 
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
 ## Most Common Errors
 Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
 
-Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database component.
+Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database connector.
 Now follow the **Snowflake Database provided by Keboola** on the page **Authorizations/destinations**. 
 
 Then go to the **Flows** tab and **Run** the flow again.  

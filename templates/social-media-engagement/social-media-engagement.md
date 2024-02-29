@@ -11,7 +11,7 @@ containing daily metrics for each social media platform and the second is posts_
 
 **The flow, in a nutshell:**
 
-- First, the Social Media Engagement source components will collect data from your selected social networks. Currently, these networks are available:
+- First, the Social Media Engagement source connectors will collect data from your selected social networks. Currently, these networks are available:
     
     - Facebook
     - Instagram
@@ -57,7 +57,7 @@ Each social network allows access to the history of page engagement differently:
 - Facebook – maximum 93 days ago
 - Instagram – maximum 30 days ago
 - LinkedIn – without known limit
-- Twitter – since the first run of a component 
+- Twitter – since the first run of the connector 
 - YouTube – currently not available in this template
 
 ## Data Sources
@@ -82,7 +82,7 @@ These data destinations are available (click the links for detailed documentatio
 - [Google Sheets](https://www.google.com/sheets/about/)
 
 ## How to Use Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
 from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
@@ -121,10 +121,10 @@ Click **Run Template** and start building your visualizations a few minutes late
 ![Social Media Engagement - Flows](/templates/social-media-engagement/socmed-eng-flow.png)
 
 ## Authorizing Data Sources
-To use a selected data source component, you must first authorize the data source. You need to use at least one of the following socia-media-engagement data sources.
+To use a selected data source connector, you must first authorize the data source. You need to use at least one of the following socia-media-engagement data sources.
 
 ### Facebook Pages
-For the Facebook Page component, log in with Facebook and choose the page from which you want to get data. You can set the period 
+For the Facebook Page data source connector, log in with Facebook and choose the page from which you want to get data. You can set the period 
 from which you want to obtain data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
@@ -138,7 +138,7 @@ You can set the period for which you want to obtain data, or keep the default 30
 ![Instagram Page Data Source](/templates/social-media-engagement/instagram-pages-data-source.png)
 
 ### LinkedIn Page
-For the LinkedIn Page source component, authorize access with your account and select the page from which you would like to extract data. 
+For the LinkedIn Page data source connector, authorize access with your account and select the page from which you would like to extract data. 
 You can set the period from which you want to extract data, or keep the default 30 days. Continue by saving the configuration.
 
 {: .image-popup}
@@ -164,7 +164,7 @@ To create a working flow, you must select at least one data destination.
 {: .image-popup}
 ![BigQuery Destination](/templates/marketing-platforms/bigquery-destination.png)
 
-To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
+To configure the data destination connector, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
 A detailed guide is available [here](https://help.keboola.com/components/writers/database/bigquery/).
 
@@ -207,11 +207,11 @@ schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehous
 {: .image-popup}
 ![Snowflake Destination](/templates/marketing-platforms/snowflake-destination.png)
 
-We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide 
+We highly recommend that you create a dedicated user for the data destination connector in your Snowflake database. Then you must provide 
 the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
 
 **Warning:** Keep in mind that Snowflake is **case sensitive** and if identifiers are not quoted, they are converted to upper case. 
-So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the destination component configuration.
+So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the data destination connector configuration.
 
 More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
@@ -241,7 +241,7 @@ Before turning to the Keboola support team for help, make sure your error is not
 ### Missing Credentials to Snowflake Database 
 If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
 
-Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database component.
+Click on the text under Configuration in the top left corner. This will redirect you to the Snowflake Database connector.
 Now follow the **Snowflake Database provided by Keboola** on the page **Authorizations/destinations**. 
 
 Then go to the **Flows** tab and **Run** the flow again.  

@@ -7,8 +7,8 @@ permalink: /templates/datahub/
 {:toc}
 
 The [DataHub](https://datahub.io/) template provides a one-click setup of an end-to-end flow for populating Keboola metadata 
-into a DataHub data catalog. This includes extracting data from both the Telemetry and Metadata source components before transforming the data in order to calculate table properties and lineage. You can choose whether or not to include schemas, 
-properties, or tags from the DataHub destination component (writer).
+into a DataHub data catalog. This includes extracting data from both the Telemetry and Metadata data source connector before transforming the data in order to calculate table properties and lineage. You can choose whether or not to include schemas, 
+properties, or tags from the DataHub data destination connector.
 
 ## Prerequisites
 Before you start, have a working instance of DataHub and get an API token.
@@ -54,15 +54,15 @@ Make sure that you replace the username and duration above. Copy the token that 
 {: .image-popup}
 ![DataHub Flow](/templates/datahub/datahub-flow.png)
 
-- First, the Metadata and Telemetry source components will collect the data from your project or organization.
+- First, the Metadata and Telemetry source connectors will collect the data from your project or organization.
     - The Telemetry data source connector allows you to retrieve data pertaining to project or your entire organization. It helps you monitor the activities and usage of your Keboola projects. It also helps Keboola calculate your project consumption.
-    - The Metadata data source connector downloads information from Keboola's APIs pertaining to various objects, users, etc. The metadata obtained by this source component can be used in addition with the default telemetry data pertaining to Keboola projects to provide even more insights into the telemetry of your organization.
+    - The Metadata data source connector downloads information from Keboola's APIs pertaining to various objects, users, etc. The metadata obtained by this source connector can be used in addition with the default telemetry data pertaining to Keboola projects to provide even more insights into the telemetry of your organization.
 
 - In the transformations,  a single metadata table is created for transmitting information to DataHub. Lineage is also calculated by parsing component configurations. 
 
-- In the final step, data will be pushed from storage to DataHub using the DataHub destination component (writer). You will enter an API token and endpoint for your GMS (DataHub Metadata Service) server, as well as select the information you want to be included (e.g., properties, schemas, tags, etc.).
+- In the final step, data will be pushed from storage to DataHub using the DataHub data destination connector. You will enter an API token and endpoint for your GMS (DataHub Metadata Service) server, as well as select the information you want to be included (e.g., properties, schemas, tags, etc.).
 
-- Finally, you will run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The Metadata and Telemetry source components, all data manipulations and analyses, and the DataHub destination component, will be processed.
+- Finally, you will run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The Metadata and Telemetry data source connectors, all data manipulations and analyses, and the DataHub data destination connector, will be processed.
 
 ## Template/Component Variations
 There is a bit of ambiguity here, so please take it with a grain of salt.

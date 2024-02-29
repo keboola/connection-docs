@@ -63,7 +63,7 @@ The following data sources are available:
 - [TikTok Ads](https://business-api.tiktok.com/portal/docs?id=1740302848100353)
 
 ## Authorizing Data Sources
-To use a selected data source component, you must first authorize the data source. You need to use at least one of the following marketing data sources.
+To use a selected data source connector, you must first authorize the data source. You need to use at least one of the following marketing data sources.
 
 ### Facebook Ads
 
