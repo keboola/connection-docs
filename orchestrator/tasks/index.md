@@ -67,7 +67,7 @@ When this rule is applied to the above task configuration, it leads to the follo
 
 That means both transformations and the Mailchimp data destination connector will run in parallel, and when they finish, the Adform data source connector will be run.
 When it is finished, the Snowflake data source connector will run.
-*Surely, this is not right.* The data source connectors must run before the transformations and the transformations must run before the connector. 
+*Surely, this is not right.* The data source connectors must run before the transformations and the transformations must run before the data destination connector. 
 Because this is a typical scenario, there is a feature to do just this --- **Group tasks by component type**:
 
 {: .image-popup}
