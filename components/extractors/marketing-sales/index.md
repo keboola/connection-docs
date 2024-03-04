@@ -30,4 +30,5 @@ Keboola provides the following marketing and sales connectors:
 - [Shoptet](/components/extractors/marketing-sales/shoptet/)
 - [Sklik](/components/extractors/marketing-sales/sklik/)
 - [TikTok Ads](/components/extractors/marketing-sales/tiktok-ads/)
+- [Zoho](/components/extractors/marketing-sales/zoho/)
 - And [more](https://components.keboola.com/components)
