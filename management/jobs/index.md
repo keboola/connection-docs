@@ -55,8 +55,8 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **Long running non-successful orchestrations (more than 2 hours)**  | `component:orchestrator durationSeconds:>7200 -status:success` |
 | **Orchestrations which ended with warning**  | `component:orchestrator status:warning` |
 | **Failed transformations**  | `component:transformation status:error`  |
-| **Failed jobs from Docker component HTTP extractor**  | `params.component:keboola.ex-http status:error` <br />  |
-| **Jobs from either HTTP extractor or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
+| **Failed jobs from Docker component HTTP data source connector**  | `params.component:keboola.ex-http status:error` <br />  |
+| **Jobs from either HTTP data source or Google Sheets data destination connector** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
 For more technical information about background jobs, see our 

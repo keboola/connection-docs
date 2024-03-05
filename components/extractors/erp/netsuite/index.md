@@ -8,7 +8,7 @@ permalink: /components/extractors/erp/netsuite/
 
 The data source for NetSuite enables users to download data from NetSuite using
 the [SuiteAnalytics Connect Service](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_3963845427.html). 
-Leveraging the ODBC driver, this extractor provides the same capabilities as other Keboola database extractors, including incremental fetching.
+Leveraging the ODBC driver, this data source connector provides the same capabilities as other Keboola database data source connectors, including incremental fetching.
 
 ## Prerequisites
 

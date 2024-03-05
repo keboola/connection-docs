@@ -9,10 +9,10 @@ permalink: /orchestrator/tasks/nesting/
 In the [basic configuration description](/orchestrator/tasks/), we used an example orchestration
 with the following tasks:
 
-- Adform extractor with the `Campaigns` configuration
-- Snowflake extractor with the `Email recipient index` configuration
+- Adform data source connector with the `Campaigns` configuration
+- Snowflake data source connector with the `Email recipient index` configuration
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`
-- Mailchimp writer with the `New recipients` configuration
+- Mailchimp data destination connector with the `New recipients` configuration
 
 Without digging into details on what all these things can do, let's assume the following dependencies:
 
@@ -51,7 +51,7 @@ The execution of tasks can be visualized using the following sequence diagram:
 {: .image-popup}
 ![Screenshot - Orchestration Update Campaign Recipient list](/orchestrator/tasks/nesting/orchestration-sequence-1.png)
 
-We showed you how to use nested orchestrations to create building blocks from extractor-transformation and transformation-writer.
+We showed you how to use nested orchestrations to create building blocks from data source-transformation and transformation-data destination.
 Another common example is using nested orchestrations to group transformations which must run together or in a sequence.
 This way you can split a lengthy and complex transformation into more manageable pieces and still use them as single building blocks.
 

@@ -6,9 +6,9 @@ permalink: /components/writers/bi-tools/looker/
 * TOC
 {:toc}
 
-This writer pushes data to your Looker instance where it creates a new LookML project.
+This data destination connector pushes data to your Looker instance where it creates a new LookML project.
 The column names are changed so that Looker can automatically understand data relations.
-The writer currently uses Snowflake as its backend. 
+The connector currently uses Snowflake as its backend. 
 
 ## Configuration
 
@@ -16,7 +16,7 @@ To connect Keboola to your Looker account, you need API credentials from Looker 
 The exact required steps are described in the [Looker documentation](https://docs.looker.com/reference/api-and-integration/api-auth#authentication_with_a_sdk). 
 You need `Client ID` and `Client secret` to authenticate Keboola with Looker. 
 
-Create a [new **Looker writer** configuration](/components/#creating-component-configuration) in your project. 
+Create a [new **Looker data destination connector** configuration](/components/#creating-component-configuration) in your project. 
 
 Continue by setting up a Snowflake workspace to use with Looker. You can either supply your own or use 
 a Keboola generated workspace. 
@@ -36,7 +36,7 @@ Fill in the client ID and the client secret you obtained from Looker.
 
 Now the preparation phase is done and it's time to set up the data you want to make available to your Looker 
 project. Add tables to the configuration as needed. For further information, refer 
-to the [Snowflake writer documentation](/components/writers/database/snowflake/#table-configuration). 
+to the [Snowflake data destination documentation](/components/writers/database/snowflake/#table-configuration). 
 
 {: .image-popup}
 ![New configuration](/components/writers/bi-tools/looker/05.png)

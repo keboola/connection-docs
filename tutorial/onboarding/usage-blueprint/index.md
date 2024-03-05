@@ -246,7 +246,7 @@ Be careful with data destination connectors, as they can still overwrite product
 - Every user must enable an MFA (multi-factor authentication).
 - All changes should be made in a development branch.
 - Don’t store sensitive information like passwords, tokens, or keys in plain text in configurations (e.g., don’t use a Python transformation for integration with an API that requires a token authentication).
-- Consult the project owner before using data destination components to write data out of projects.
+- Consult the project owner before using data destination connectors to write data out of projects.
   
 ### Admin Project
 > *For organizations with multiple projects, creating a dedicated admin project is helpful. This is a central hub for administrators to manage

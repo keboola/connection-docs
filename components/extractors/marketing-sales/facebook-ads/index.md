@@ -8,19 +8,19 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference) to
+This data source connector uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference) to
 extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup)
 (including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Ad Account you want to extract.
 You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
 You can always revoke the authorization by going to the
 [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings) and removing
-`Keboola Ads Extractor` from the list.
+`Keboola Ads Data Source` from the list.
 
 Click on **Select Ad accounts** to load a list of Ad accounts associated with the authorization.
 
@@ -40,12 +40,12 @@ all necessary fields will fill in automatically.
 {: .image-popup}
 ![Screenshot - New Query](/components/extractors/marketing-sales/facebook-ads/facebook-ads-3.png)
 
-The query describes the extractor request to be sent to the Facebook Marketing API. Knowing the API will
+The query describes the connector request to be sent to the Facebook Marketing API. Knowing the API will
 make creating a query easy because all options except `name` represent the [Facebook Marketing API
 request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
 ### Async Insights Query
-The *Async Insights Query* option specify the way extractor requests the data. If it is checked then data will be extracted asynchronously, the extractor will make an initial request, then by polling fb api waits for the result and once ready extracts it. This allows for bigger amount of data to be extracted especially when the synchronous extraction ends up with error `Please reduce the amount of data you're asking for`. Note that only data of the [ads objects (Ad Account, Ad Campaign, Ad Set and Ad)](https://developers.facebook.com/docs/marketing-api/insights/parameters/) can be extracted asynchronously.
+The *Async Insights Query* option specify the way the connector requests data. If it is checked then data will be extracted asynchronously, the connector will make an initial request, then by polling fb api waits for the result and once ready extracts it. This allows for bigger amount of data to be extracted especially when the synchronous extraction ends up with error `Please reduce the amount of data you're asking for`. Note that only data of the [ads objects (Ad Account, Ad Campaign, Ad Set and Ad)](https://developers.facebook.com/docs/marketing-api/insights/parameters/) can be extracted asynchronously.
 
 ### Name
 The *Name* option describes the query and is used to prefix all table names resulting from the query.
@@ -148,7 +148,7 @@ All tables containing ads/campaigns insights data have a specific structure. Con
 
 ## Facebook API Version
 You can set the version of the Facebook Marketing API that will be applied for all requests made to the
-API by the Facebook Ads extractor. Read more about the Marketing API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
+API by the Facebook Ads connector. Read more about the Marketing API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
 
 {: .image-popup}
 ![Screenshot - Api Version](/components/extractors/marketing-sales/facebook-ads/facebook-ads-4.png)

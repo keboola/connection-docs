@@ -1,13 +1,13 @@
 ---
-title: Other Extractors
+title: Other Data Source Connectors
 permalink: /components/extractors/other/
 redirect_from:
     - /extractors/other/
 ---
 
-Extractors import data from external sources and integrate it to the Keboola environment.
-Apart from extractors for social networks, communication, storage, and marketing and sales, there are
-extractors that do not fall into any of the above mentioned categories:
+Data source connectors import data from external sources and integrate it to the Keboola environment.
+Apart from connectors for social networks, communication, storage, and marketing and sales, there are
+connectors that do not fall into any of the above mentioned categories:
 
 - [AWS CUR](/components/extractors/other/aws-cu-reports/) --- imports cost and usage report data of an AWS subscription.
 - [Azure Cost Management](/components/extractors/other/azure-cost/) --- imports cost and usage data of an Azure subscription.

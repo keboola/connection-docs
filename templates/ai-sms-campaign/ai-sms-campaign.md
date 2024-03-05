@@ -56,7 +56,7 @@ The following data destinations are available:
 [Twilio](https://www.twilio.com/login)
 
 ## How to Use Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
 First decide which data source and which data destination you want to use. Then select the corresponding template 
 from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
@@ -76,7 +76,7 @@ You’ll be asked to write a name for the template instance you are about to cre
 
 ## Component Description
 
-### Shopify Extractor
+### Shopify Data Source Connector
 The component is set up to extract all the data tables: 
 `customer`, `inventory-items`, `inventory-levels`, `line-item`, `locations`, `order`, `product`, `product-images`, `product-options`, and `product-variant`.
 
@@ -109,7 +109,7 @@ To authorize the component, you will need to input an Account SID, Authenticatio
 and specify whether you wish to generate a log after sending the messages (true/false).
 
 ## Authorizing Data Sources
-To use the selected data source component, you must authorize it first. 
+To use the selected data source connector, you must authorize it first. 
 
 ### Shopify 
 

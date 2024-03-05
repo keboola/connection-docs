@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-The MongoDB extractor allows you to fetch data from the NoSQL [MongoDB database](https://www.mongodb.com/). Supported MongoDB versions are from 4.4 to latest (6.0). 4.2 could work also, but not guaranteed. Lower version are not supported by version of mongoexport.
+The MongoDB data source connector allows you to fetch data from the NoSQL [MongoDB database](https://www.mongodb.com/). Supported MongoDB versions are from 4.4 to latest (6.0). 4.2 could work also, but not guaranteed. Lower version are not supported by version of mongoexport.
 Complete the following steps to configure it.
 
 ## Set Up Database Credentials
@@ -145,7 +145,7 @@ In the raw export mode, documents are exported as plain JSON strings.
 {% highlight javascript %}
 {
     "_id" : ObjectId("5716054bee6e764c94fa7ddd"),
-    "name" : "MongoDB extractor"
+    "name" : "MongoDB connector"
 }
 {% endhighlight %}
 </td>
@@ -158,7 +158,7 @@ In the raw export mode, documents are exported as plain JSON strings.
     "_id": {
         "$oid" : "5716054bee6e764c94fa7ddd"
     },
-    "name": "MongoDB extractor"
+    "name": "MongoDB connector"
 }
 {% endhighlight %}
 </td>
@@ -176,7 +176,7 @@ In the raw export mode, documents are exported as plain JSON strings.
     "_id": {
         "$oid" : "5716054bee6e764c94fa7ddd"
     },
-    "name": "MongoDB extractor"
+    "name": "MongoDB connector"
 }
 </td>
 </tr>

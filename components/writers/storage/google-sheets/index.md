@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends tables as worksheets into a single [Google Sheets](https://www.google.com/sheets/about/) account.
+This data destination connector sends tables as worksheets into a single [Google Sheets](https://www.google.com/sheets/about/) account.
 It allows you to write tables into individual sheets of a spreadsheet document and append rows into an existing sheet.
 Be aware that Google Sheets have [strict limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/)
-on the size of the document. If you are getting close to them, use the [Google Drive writer](/components/writers/storage/google-drive/) to avoid failed writes.
+on the size of the document. If you are getting close to them, use the [Google Drive data destination connector](/components/writers/storage/google-drive/) to avoid failed writes.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Sheets** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Sheets** data destination connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 Then click the **New Table** button to add a new table:
 

@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor downloads data from the [LinkedIn Pages API](https://learn.microsoft.com/en-us/linkedin/marketing) related to organizations, their posts, and statistics about performance of their pages, as well as tables of enumerated types used therein.
+This data source connector downloads data from the [LinkedIn Pages API](https://learn.microsoft.com/en-us/linkedin/marketing) related to organizations, their posts, and statistics about performance of their pages, as well as tables of enumerated types used therein.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **LinkedIn Pages** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **LinkedIn Pages** connector.
 
 ### Global Configuration
-To configure this extractor, you need to authenticate with a **LinkedIn Profile** using OAuth. More info on this topic can be found in [LinkedIn API Documentation](https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access).
+To configure this connector, you need to authenticate with a **LinkedIn Profile** using OAuth. More info on this topic can be found in [LinkedIn API Documentation](https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access).
 
  - **Organization IDs (organizations)** - [OPT] Comma-separated list of organization IDs you wish to fetch data from, e.g., 123, 234. If left empty, data from all organizations will be fetched.
 

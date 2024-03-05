@@ -8,20 +8,21 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor helps you import data from [Pingdom](https://www.pingdom.com/).
-Pingdom is a service for monitoring the uptime and performance of your servers, websites and web applications.
+This data source connector helps you import data from [Pingdom](https://www.pingdom.com/).
 
-## Create New Application API Key
-Log in to your account on the [Pingdom](https://www.pingdom.com/) site.
+Pingdom is a service for monitoring the uptime and performance of your servers, websites, and web applications.
 
-Go to **Integrations / The Pingdom Api** [section](https://my.pingdom.com/account/appkeys), and use the **Register Application** button.
+## Create a New Application API Key
+Before you can start configuring your Pingdom connector, you must obtain an application key. To do that, log in to your account on the [Pingdom](https://www.pingdom.com/) site.
+
+Then, continue to the **Integrations > The Pingdom Api** [section](https://my.pingdom.com/account/appkeys) and click the **Register Application** button.
 
 {: .image-popup}
 ![Pingdom Api key list](/components/extractors/other/pingdom/03-pingdom-api.png)
 
-Fill the required fields of the registration form.
+Fill in the required fields of the registration form.
 
-- **Application name** -- Name your application -- for example, `Keboola Pingdom Extractor`.
+- **Application name** -- Name your application -- for example, `Keboola Pingdom Connector`.
 - **Description** -- Enter a description.
 - **Application type** -- Select the `Public` option.
 - **Platform** -- Select the `Server` option.
@@ -29,14 +30,14 @@ Fill the required fields of the registration form.
 {: .image-popup}
 ![Pingdom API registration](/components/extractors/other/pingdom/04-pingdom-api-form.png)
 
-When registration is finished, copy the Application Key and save it. You will need it when creating your extractor configuration 
+When registration is finished, copy the Application Key and save it. You will need it when creating your connector configuration 
 in Keboola.
 
 {: .image-popup}
 ![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Pingdom** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Pingdom** data source.
 Provide credentials of your Pingdom account and the Application Key.
 
 - **Email address** -- your account login name

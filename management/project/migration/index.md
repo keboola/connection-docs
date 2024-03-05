@@ -27,7 +27,7 @@ destination project.
   - Re-authorization of all OAuth component configurations.
   - All encrypted values for components configurations (like passwords and API keys) must be re-entered.
   - Alter the whitelist using the appropriate new [IP addresses](/components/ip-addresses/).
-  - Set up any SSH tunnels for extractors and writers.
+  - Set up any SSH tunnels for data source and destination connectors.
   - Invite users to the project.
   - Enable orchestrations.
 - When everything is done, the old project can be safely deleted.
@@ -35,25 +35,25 @@ destination project.
 ## What Will Be Migrated
 
 - All project data and metadata for buckets, tables, and columns
-- Configurations for all extractors, writers, and applications
+- Configurations for all data source and destination connectors, and applications
 - All transformations
 - All orchestrations
-- Keboola Provisioned Snowflake writers will be moved to the new stack's Snowflake account.
+- Keboola-Provisioned Snowflake data destination connectors will be moved to the new stack's Snowflake account.
 - GoodData projects will be moved to the new stack's GoodData account.
 
 ### Important
 - The internal timestamp for all data rows will be set to the date of the migration. So, if you are using incremental loads 
 based on [Changed in last](/transformations/mappings/#input-mapping) in 
-transformations or writers, it will fetch all data on the first run.
+transformations or data destination connectors, it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.
 - Each Keboola stack has a different set of assigned [IP addresses](/components/ip-addresses/).
 
 ## What Won't Be Migrated
 - Encrypted values
-  - Passwords, API keys, etc., stored in the extractor, writer and application configurations
+  - Passwords, API keys, etc., stored in the data source and destination connectors and application configurations
   - OAuth authorizations
-  - Extractor and writer SSH Tunnel private keys
+  - Data source and destination connector SSH Tunnel private keys
 - [Files](/storage/files/)
 - Job execution history
 - Events and logs
@@ -64,7 +64,7 @@ transformations or writers, it will fetch all data on the first run.
 - Transformations between AWS and AZURE stacks
 - VPN connections
 - Data catalog
-- Google Drive extractor configurations with Transpose option
+- Google Drive data source connector configurations with the Transpose option
 
 There may be some deprecated components in the source stack that are not available in the destination stack. 
 These have to be removed from projects or migrated to new versions before migration. Also, the project backends 

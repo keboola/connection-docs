@@ -34,31 +34,31 @@ Business limits vary based on your contract (refer to it to see which ones apply
 - **Users** --- the number of [project users](/management/project/users).
 [Keboola support users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [tokens](/management/project/tokens). 
-- **Project Power** --- measured in [Time Credits](#project-power---time-credits)
+- **Project Power** --- measured in [Time Credits/Units](#project-power---time-credits)
 - **Storage size** --- the sum of the sizes of the tables in your [Table Storage](/storage)
 
 ### Project Power -- Time Credits
 
-Project Power Credits is proportional to the sum of the elapsed time of all jobs executed in Keboola. 
-Measured in milliseconds, presented in hours (1 hour = 3,600 seconds). Every job consumes different amount of Project Power Credits,
+**PPUs** (project power units, also known as credits) are proportional to the sum of the elapsed time of all jobs executed in Keboola. 
+Measured in milliseconds, presented in hours (1 hour = 3,600 seconds). Every job consumes different amount of Project Power Units,
 based on 
 
 - elapsed time of the job (in seconds), 
-- type of the job (sandbox, SQL transformation, Python transformation), and 
-- performance of the backend used for the job (templates basic, medium, and large).
+- types of jobs (workspace, SQL, Python, and R transformations), and 
+- backend performance: Xsmall, Small, Medium, Large.
 
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
 
 | Types of jobs in Keboola              | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
-| **Extractor job**                     | 1 hour                  | **2**                 |
-| **Writer job**                        | 1 GB out                | **0.2**               |  
-| **SQL job / Workspace**               |                         |                       |
+| **Data souce job**                    | 1 hour                  | **2**                 |
+| **Data destination job**              | 1 GB out                | **0.2**               |  
+| **SQL job / workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |
-| **Data Science job / Workspace**      |                         |                       |
+| **Data Science job / workspace**      |                         |                       |
 | XSmall                                | 1 hour                  | **0.5**               |
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |

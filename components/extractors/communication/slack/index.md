@@ -8,11 +8,11 @@ redirect_from:
 * TOC
 {:toc}
 
-The Slack extractor uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/)
+The Slack data source connector uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/)
 and to bring it to Keboola.
 
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Slack** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Slack** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Select the template you wish to use:

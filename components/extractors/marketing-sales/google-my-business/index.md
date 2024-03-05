@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to collect daily metrics, reviews, media and questions for your businesses that have a [Google Business profile](https://www.google.com/business/).
+This data source connector allows you to collect daily metrics, reviews, media and questions for your businesses that have a [Google Business profile](https://www.google.com/business/).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google My Business** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google My Business** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Please ensure that your account has the right to access the locations you are interested in. For a list of available locations for your Google Account, please visit [business.google.com/locations](https://business.google.com/locations).

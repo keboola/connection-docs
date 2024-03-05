@@ -37,7 +37,7 @@ The following diagram illustrates the structure of a single Keboola project, com
 ![Keboola Architecture 1](/overview/project-structure1.png)
 
 ### Data Source Connectors
-[Data sources connectors](/components/extractors/), formerly known as extractors, are Keboola components used 
+[Data source connectors](/components/extractors/), formerly known as extractors, are Keboola components used 
 to gather data from various sources. They can connect to APIs of external services, databases, applications, object storage, and many others.
 
 ### Storage

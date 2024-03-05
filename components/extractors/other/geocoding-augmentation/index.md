@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor provides detailed data for locations specified by their names, addresses, or coordinates.
+This data source connector provides detailed data for locations specified by their names, addresses, or coordinates.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Geocoding Augmentation** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Geocoding Augmentation** connector.
 
 ### Augment Locations
-In this case, specify the location. The extractor will fetch its geographical latitude and longitude 
+In this case, specify the location. The data source connector will fetch its geographical latitude and longitude 
 using a specified [provider](#providers).
 Specify one or more tables which have exactly one column with textual specification of the location. 
 If the source table does not meet these requirements, 
@@ -30,7 +30,7 @@ and select the **geocode** method in the configuration. You can use the `openstr
 ![Screenshot - Add coordinates to locations](/components/extractors/other/geocoding-augmentation/geocoding-1.png)
 
 ### Augment Coordinates
-In this mode of operation, specify the geographical latitude and longitude. The extractor
+In this mode of operation, specify the geographical latitude and longitude. The connector
 will then fetch information about the closest place found on the map of the given [provider](#providers).
 Specify one or more tables which have exactly two columns; the first column with a latitude, the second 
 one with a longitude. If the source table does not meet these requirements, edit the [input mapping](/transformations/mappings/#input-mapping) details accordingly. 

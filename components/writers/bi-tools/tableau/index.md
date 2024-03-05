@@ -8,14 +8,14 @@ redirect_from:
 * TOC
 {:toc}
 
-There is a wide range of options for sending data to the Tableau ecosystem. This writer creates
+There is a wide range of options for sending data to the Tableau ecosystem. This data destination connector creates
 [Tableau Data Extract (TDE)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1)
 files and optionally uploads them to a destination (Tableau Server,
 [Dropbox](https://www.dropbox.com/), [Google Drive](https://www.google.com/drive/)). As such it is more suitable
 to be used together with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Server](https://www.tableau.com/products/server). An alternative approach is to send data using the
-**[Snowflake writer](/components/writers/database/snowflake/)** through a
-[Keboola provisioned database](/components/writers/database/snowflake/#using-keboola-provisioned-database). That is more suitable to be used
+**[Snowflake data destination connector](/components/writers/database/snowflake/)** through a
+[Keboola-provisioned database](/components/writers/database/snowflake/#using-keboola-provisioned-database). That is more suitable to be used
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
@@ -23,7 +23,7 @@ Our Getting Started tutorial will guide you through the process of [writing data
 from Keboola to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Tableau** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Tableau** connector.
 
 Then create a new table configuration by clicking the **New Table** button. Select a table
 from [Storage](/storage/tables/).
@@ -56,8 +56,8 @@ recently modified data.
 When done with configuring the table, don't forget to **Save** the settings.
 
 ## Downloading TDE File
-You can configure as many tables as you want for the writer. Each table produces a separate TDE file, however. To download
-the TDE file, you have to **Run** the entire writer or a single table. Then the TDE file name will turn into a link through
+You can configure as many tables as you want for the data destination connector. Each table produces a separate TDE file, however. To download
+the TDE file, you have to **Run** the entire connector or a single table. Then the TDE file name will turn into a link through
 which you can download the TDE file to your computer.
 
 {: .image-popup}
@@ -71,7 +71,7 @@ Start the upload configuration by clicking on the **Set up Upload** link:
 ![Screenshot - Upload Setup](/components/writers/bi-tools/tableau/tableau-6.png)
 
 Then click **Choose Destination** and select the destination service. You can change the destination later, 
-but only one destination can be used for one writer configuration.
+but only one destination can be used for one connector configuration.
 
 {: .image-popup}
 ![Screenshot - Upload Destination](/components/writers/bi-tools/tableau/tableau-7.png)

@@ -9,10 +9,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to a [PostgreSQL](https://www.postgresql.org/) database.
+This data destination connector sends data to a [PostgreSQL](https://www.postgresql.org/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **PostgreSQL** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **PostgreSQL** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
@@ -20,7 +20,7 @@ You need to provide a *host name*, *user name*, *password*, *database name*, and
 {: .image-popup}
 ![Screenshot - Credentials](/components/writers/database/postgresql/postgre-2.png)
 
-We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
+We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
 {% highlight sql %}
 CREATE SCHEMA writer_sample;
@@ -53,7 +53,7 @@ For each column you can specify its
 When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
-At the top of the page, you can specify the target table name and additional load options. There are two main options how the writer
+At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
@@ -67,8 +67,8 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://www.postgresql.org/docs/11/sql-droptable.html) command and recreated. The
 `DROP` command needs to acquire a [table-level lock](https://www.postgresql.org/docs/current/explicit-locking.html).
-This means that if the database is used by other applications which acquire table-level locks, the writer may
-freeze waiting for the locks to be released. This will be recorded in the writer logs with a message similar to this:
+This means that if the database is used by other applications which acquire table-level locks, the connector may
+freeze waiting for the locks to be released. This will be recorded in the connector logs with a message similar to this:
 
     Table "account" is locked by 1 transactions, waiting for them to finish
 

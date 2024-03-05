@@ -7,7 +7,7 @@ permalink: /orchestrator/tasks/
 {:toc}
 
 Before configuring the Orchestrator component, have all the components
-(extractors, transformations, and writers) you wish to work with configured and ready.
+(data source connectors, transformations, and data destination connectors) you wish to work with configured and ready.
 
 To configure the Orchestrator component, create a new *Orchestration*:
 
@@ -41,10 +41,10 @@ Repeat this for all configurations you want to add into the orchestration.
 ## Organize Tasks
 Let's assume you have the following configurations and wish to orchestrate them into a data pipeline:
 
-- Adform extractor with the `Campaigns` configuration
-- Snowflake extractor with the `Email recipient index` configuration
+- Adform data source connector with the `Campaigns` configuration
+- Snowflake data source connector with the `Email recipient index` configuration
 - Transformations with the configurations `Campaign Performance` and `Campaign Recipient`
-- Mailchimp writer with the `New recipients` configuration
+- Mailchimp data destination connector with the `New recipients` configuration
 
 When you randomly add the configurations as orchestration tasks, chances are that you'll end up with something similar to this:
 
@@ -65,9 +65,9 @@ When this rule is applied to the above task configuration, it leads to the follo
 {: .image-popup}
 ![Orchestration Tasks Sequence](/orchestrator/tasks/orchestration-sequence-1.png)
 
-That means both transformations and the Mailchimp writer will run in parallel, and when they finish, the Adform extractor will be run.
-When it is finished, the Snowflake extractor will run.
-*Surely, this is not right.* The extractors must run before the transformations and the transformations must run before the writer. 
+That means both transformations and the Mailchimp data destination connector will run in parallel, and when they finish, the Adform data source connector will be run.
+When it is finished, the Snowflake data source connector will run.
+*Surely, this is not right.* The data source connectors must run before the transformations and the transformations must run before the data destination connector. 
 Because this is a typical scenario, there is a feature to do just this --- **Group tasks by component type**:
 
 {: .image-popup}
@@ -83,7 +83,7 @@ The above will lead to the following execution sequence:
 {: .image-popup}
 ![Orchestration Tasks Sequence Organized](/orchestrator/tasks/orchestration-sequence-2.png)
 
-First, the two extractors are run in parallel, then both transformations are run in parallel, and last the writer sends the results 
+First, the two data source connectors are run in parallel, then both transformations are run in parallel, and last the data destination connector sends the results 
 to the consumer (Mailchimp service in this case). The configurations will be executed in the order in which they depend on each other.
 
 ## Handling Dependencies
@@ -100,7 +100,7 @@ Type `Second Transformation Phase` to create a new orchestration phase:
 ![Screenshot - Add Phase](/orchestrator/tasks/phase-name.png)
 
 The phase is created and it contains the `Campaign Recipients` transformation. Now move the phase so that it executes after the phase
-containing `Campaign Performance` and before the phase containing the `New recipients` writer:
+containing `Campaign Performance` and before the phase containing the `New recipients` data destination connector:
 
 {: .image-popup}
 ![Screenshot - Move Phase](/orchestrator/tasks/tasks-6.png)
@@ -117,6 +117,6 @@ Which corresponds to the following execution sequence:
 
 That means that the `Campaigns` and `Email Recipient Index` configurations will execute first. When they both finish,
 the transformation `Campaign Performance` will run. When it finishes, the transformation `Campaign Recipient`
-will run. Lastly, the `New recipients` writer will be executed.
+will run. Lastly, the `New recipients` data destination connector will be executed.
 
 Another way of handling dependencies is using [nested orchestrations](/orchestrator/tasks/nesting/).

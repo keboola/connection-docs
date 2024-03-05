@@ -8,12 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-Microsoft Outlook extractor for Office 365
-
-This extractor is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
+Microsoft Outlook data source connector for Office 365 is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
 
 ## Authorization
-[Create a new configuration](/components/#creating-component-configuration) of the **MS Outlook** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **MS Outlook** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
 
 ## IMAP Settings

@@ -9,13 +9,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to integrate your Google Analytics data into the Keboola environment.
+This data source connector allows you to integrate your Google Analytics data into the Keboola environment.
 To do that, you will need a [Google Analytics account](https://analytics.google.com/analytics/web/).
 
 **Note:** This component supports both Google Analytics 4 (GA4) and old Universal Analytics (UA).
 
 ## Features
-The Google Analytics extractor works with the newest version of the [Google Analytics 4 (GA4)](https://developers.google.com/analytics/devguides/reporting/data/v1) (Google Analytics Data API)
+The Google Analytics connector works with the newest version of the [Google Analytics 4 (GA4)](https://developers.google.com/analytics/devguides/reporting/data/v1) (Google Analytics Data API)
 and [Universal Analytics](https://developers.google.com/analytics/devguides/reporting/core/v4/) (Google Analytics Reporting API - V4).
 
 These APIs provides the following key features:
@@ -29,7 +29,7 @@ These APIs provides the following key features:
 **Important:** Data is always imported incrementally.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 Select the desired Google Analytics account and profiles (Reporting API view) or GA4 properties (Data API view) from which you would like to extract data.
 
@@ -89,7 +89,7 @@ anti-sampling in the query detail.
 {: .image-popup}
 ![Screenshot - Anti Sampling](/components/extractors/marketing-sales/google-analytics/google-analytics-5.png)
 
-**DailyWalk**, as the name suggests, divides the date range by days. It means that the extractor needs to 
+**DailyWalk**, as the name suggests, divides the date range by days. It means that the data source connector needs to 
 make as many requests as there are days in the date range. Even though this algorithm might be more 
 precise in some cases, you usually get the same results faster with the Adaptive algorithm.
 
@@ -153,7 +153,7 @@ To avoid hitting quota limits, you can use your own OAuth Client ID and Secret:
     {: .image-popup}
     ![Screenshot - Google API Console - Credentials Detail](/components/extractors/marketing-sales/google-analytics/google_console_detail.png)
   
-8. You can now use these credentials in the **Custom Authorization** tab when authorizing the Google Analytics Extractor.
+8. You can now use these credentials in the **Custom Authorization** tab when authorizing the Google Analytics data source connector.
  
     {: .image-popup}
     ![Screenshot - KBC - Custom Authorization](/components/extractors/marketing-sales/google-analytics/google-analytics-6.png)

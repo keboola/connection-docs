@@ -9,7 +9,7 @@ permalink: /components/extractors/marketing-sales/pinterest-ads/
 [Pinterest](https://www.pinterest.com/) is a social media platform and a visual discovery engine that allows users to discover, save, and share creative
 ideas and inspirations through images and links.
 
-The Pinterest Ads extractor is a powerful component that automates the retrieval of [ad analytics reports](https://help.pinterest.com/en/business/article/create-edit-and-review-custom-reports), 
+The Pinterest Ads data source connector is a powerful component that automates the retrieval of [ad analytics reports](https://help.pinterest.com/en/business/article/create-edit-and-review-custom-reports), 
 enabling users to schedule and download predefined reports effortlessly. This component streamlines the data collection process by allowing you to fetch reports from multiple ad accounts simultaneously.
 
 Users can select the granularity and the relative period for incremental data fetching. This component empowers marketers with comprehensive insights into their Pinterest ad campaigns.
@@ -23,7 +23,7 @@ To get Pinterest Ad Analytics reports, have
 *Note: Remember, it may take some time for your ads to start running and for data to accumulate in your analytics reports.* 
 
 ## Configuration
-First, [create a new configuration](https://help.keboola.com/components/#creating-component-configuration) of the Pinterest Ads extractor.
+First, [create a new configuration](https://help.keboola.com/components/#creating-component-configuration) of the Pinterest Ads connector.
 Then, click the **Authorize Account** button and log in with your Pinterest business account.
 
 Now, you can define reports to download:

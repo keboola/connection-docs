@@ -9,10 +9,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends data to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.
+This data destination connector sends data to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **MySQL** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **MySQL** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
@@ -20,7 +20,7 @@ You need to provide a *host name*, *user name*, *password*, and a *database name
 {: .image-popup}
 ![Screenshot - Credentials](/components/writers/database/mysql/mysql-2.png)
 
-We highly recommend that you create dedicated credentials for the writer in your database. You can use the following SQL code to get started:
+We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
 {% highlight sql %}
 CREATE DATABASE writer_sample;
@@ -52,7 +52,7 @@ For each column you can specify its
 When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
-At the top of the page, you can specify the target table name and additional load options. There are two main options how the writer
+At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
@@ -66,7 +66,7 @@ data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
 using the [`DROP`](https://dev.mysql.com/doc/refman/8.0/en/drop-table.html) command and recreated. The
 `DROP` command needs to acquire a [table-level lock](https://dev.mysql.com/doc/refman/8.0/en/lock-tables.html).
-This means that if the database is used by other applications which acquire table-level locks, the writer may
+This means that if the database is used by other applications which acquire table-level locks, the connector may
 freeze waiting for the locks to be released.
 
 Additionally, you can specify a **primary key** of the table, a simple column **data filter**, and a filter for

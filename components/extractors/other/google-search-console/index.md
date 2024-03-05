@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This component allows you to extract statistics and site data of domains linked to your Google account using
+This data source connector allows you to extract statistics and site data of domains linked to your Google account using
 the [Google Search Console API](https://developers.google.com/webmaster-tools/v1/api_reference_index).
 The component supports the
 [Search Analytics](https://developers.google.com/webmaster-tools/v1/searchanalytics/query) 
@@ -16,7 +16,7 @@ endpoint and the [Sitemaps](https://developers.google.com/webmaster-tools/v1/sit
 endpoint.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
 
 {: .image-popup}

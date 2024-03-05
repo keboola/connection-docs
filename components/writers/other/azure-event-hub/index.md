@@ -6,7 +6,7 @@ permalink: /components/writers/other/azure-event-hub/
 * TOC
 {:toc}
 
-This writer allows you to publish events to the [Azure Event Hubs](https://azure.microsoft.com/en-us/services/event-hubs/).
+This data destination connector allows you to publish events to the [Azure Event Hubs](https://azure.microsoft.com/en-us/services/event-hubs/).
 
 ## Mapping Mode
 
@@ -15,7 +15,7 @@ There are two **mapping modes**:
  - **`column_value` mode**: message is the value of the specified column, from the table's row
  
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Event Hub** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Azure Event Hub** connector.
 
 Fill in the **Connection String** and **Event Hub Name**. Then click **Save**.
 

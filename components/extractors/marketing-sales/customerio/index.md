@@ -6,16 +6,16 @@ permalink: /components/extractors/marketing-sales/customerio/
 * TOC
 {:toc}
 
-The Customer IO extractor uses the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) 
+The Customer IO data source connector uses the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) 
 to extract customers, campaigns, segments, and activities from your [Customer.io account](https://customer.io/). 
 
 ## Get API Key
-To use this extractor, you need a bearer token, known as an App API Key from Customer.io. You can generate a key with 
+To use this connector, you need a bearer token, known as an App API Key from Customer.io. You can generate a key with 
 a defined scope in [your account settings](https://fly.customer.io/settings/api_credentials?keyType=app).
 Learn more about [bearer authorization in Customer.io](https://customer.io/docs/managing-credentials).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Customer IO** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Customer IO** connector.
 
 Then insert the **API key** you obtained from Customer.io.
 
@@ -117,7 +117,7 @@ You can select the **activity types** you are interested in. Also, there are **t
 available to choose from. When done, remember to **save** your configuration before you run it.
 
 #### Result parsing
-Each activity type may have different columns and table structure. For this reason, the extractor allows fetching data 
+Each activity type may have different columns and table structure. For this reason, the data source connector allows fetching data 
 in **two modes**: `PARSED_DATA` and `SINGLE_TABLE`.
 
 1) **`PARSED_DATA`** will generate structured table for each activity type. E.g., the type `event` will generate the table `activity_event`:

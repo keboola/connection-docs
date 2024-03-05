@@ -1,5 +1,5 @@
 ---
-title: ServiceNow Extractor
+title: ServiceNow Data Source Connector
 permalink: /components/extractors/other/servicenow/
 redirect_from:
     - /extractors/other/servicenow/
@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor fetches data from ServiceNow tables. It supports backfill mode and also incremental fetching.
+This data source connector fetches data from ServiceNow tables. It supports backfill mode and also incremental fetching.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ The user is authenticated using:
  - **Username** (user) - [REQ] Username used to log in to ServiceNow.
  - **Password** (#password) - [REQ] Password associated with the username.
  - **Server** (server) - [REQ] ServiceNow server address. Example: https://keboola.service-now.com
- - **Threads** (threads) - [OPT] Integer that specifies the number of threads used to call the ServiceNow API for a single row. Keep in mind that setting this to a high number and combining it with parallel row execution can lead to overload of the source system. This can further lead to the API returning 5** status codes, which will force the extractor to use backoff strategy and lead to increased component run times. The default number of threads is 8.
+ - **Threads** (threads) - [OPT] Integer that specifies the number of threads used to call the ServiceNow API for a single row. Keep in mind that setting this to a high number and combining it with parallel row execution can lead to overload of the source system. This can further lead to the API returning 5** status codes, which will force the connector to use backoff strategy and lead to increased component run times. The default number of threads is 8.
  - **Output Bucket** (output_bucket) - [OPT] Name of the output bucket. If the bucket with the specified name does not exist, it will be created automatically.
 
 

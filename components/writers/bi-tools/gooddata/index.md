@@ -8,21 +8,21 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer sends tables into a [GoodData](https://www.gooddata.com/) project.
+This data destination connector sends tables into a [GoodData](https://www.gooddata.com/) project.
 
-Before configuring the GoodData writer, it is important to understand that GoodData relies on a
+Before configuring the GoodData connector, it is important to understand that GoodData relies on a
 [Logical Data Model (LDM)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata) of your dataset.
-The GoodData writer creates the LDM for you so that you don't have to use CloudConnect or other tools
+The GoodData data destination connector creates the LDM for you so that you don't have to use CloudConnect or other tools
 provided by GoodData. However, you need to provide all the required information in the configuration. This makes
 the configuration non-trivial, and you should have the data model designed before you start configuring
-the writer.
+the connector.
 
 Check out the section on [writing into GoodData](/tutorial/write/gooddata/) available for you
 in our Getting Started tutorial.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **GoodData** connector.
 
 The first step is to configure the GoodData project that will be used for writing:
 
@@ -37,7 +37,7 @@ There are several options in the configuration dialog:
 ![Screenshot - Project Setup](/components/writers/bi-tools/gooddata/gooddata-2.png)
 
 When using an **existing** GoodData project, the project should be empty, or you should take extra care when setting
-up the writer. Either use **Load data only** update mode, or be sure to understand what the consequences
+up the data destination connector. Either use **Load data only** update mode, or be sure to understand what the consequences
 of changing your LDM are.
 
 After you set up the project, you will see the **Go To Project** button.
@@ -64,7 +64,7 @@ When creating a date dimension, you have to enter the dimension name and a dimen
 
 ## Configure Tables
 
-Click the **New Table** button to add a new table to the writer:
+Click the **New Table** button to add a new table to the connector:
 
 {: .image-popup}
 ![Screenshot - Add Table](/components/writers/bi-tools/gooddata/gooddata-5.png)
@@ -125,9 +125,9 @@ There are multiple options how you can write data to a GoodData project:
 {: .image-popup}
 ![Screenshot - Table Load Settings](/components/writers/bi-tools/gooddata/gooddata-9.png)
 
-By default, the LDM is updated with each run of the writer. If your project structure settled down and does not
+By default, the LDM is updated with each run of the data destination connector. If your project structure settled down and does not
 change often, you may wish to switch to **Load data only** mode. This saves some time from each run and also
-is somewhat safer against inadvertent changes of the model. When you change the LDM definition in the writer and load data
+is somewhat safer against inadvertent changes of the model. When you change the LDM definition in the connector and load data
 without updating the model, you are likely to receive an error similar to this: `"The object identifier "XY" mentioned in the manifest
 does not represent a valid object. Adjust the manifest or create the object."`.
 
@@ -136,9 +136,9 @@ GoodData, and depending on the size and nature of your project, either of them m
 
 ### GoodData Project
 
-Since the project is partially managed by the writer, there are some things you should be aware of.
+Since the project is partially managed by the data destination connector, there are some things you should be aware of.
 
-The writer manages the LDM in the project. If you make changes to the LDM using other tools, they will be overwritten by the writer 
+The connector manages the LDM in the project. If you make changes to the LDM using other tools, they will be overwritten by the connector 
 --- unless it is used solely in **Load data only** mode. You can review the LDM in the GoodData project management:
 
 {: .image-popup}

@@ -9,11 +9,11 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor loads sheets from Google Drive Sheets and stores them as tables in a bucket in your
+This data source connector loads sheets from Google Drive Sheets and stores them as tables in a bucket in your
 current project.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Click **New Sheet** to configure extraction and **Select spreadsheet** to list accessible spreadsheets 
@@ -34,7 +34,7 @@ The sheets of the selected document are shown; you can select which sheets you w
 ![Screenshot - Select sheet](/components/extractors/storage/google-drive/google-drive-3.png)
 
 ## Modify Configuration
-When a sheet is added to the extractor, it is displayed in the list of extracted sheets:
+When a sheet is added to the connector, it is displayed in the list of extracted sheets:
 
 {: .image-popup}
 ![Screenshot - Sheet list](/components/extractors/storage/google-drive/google-drive-4.png)

@@ -9,7 +9,7 @@ redirect_from:
 * TOC 
 {:toc}
 
-The [Microsoft Advertising (Bing Ads)](https://ads.microsoft.com/) extractor supports extracting either campaign entity data or various types of
+The [Microsoft Advertising (Bing Ads)](https://ads.microsoft.com/) data source connector supports extracting either campaign entity data or various types of
 available reports. In the case of reports, you can specify your own set of columns and the primary key to use in Keboola Storage,
 but there are also presets of columns and appropriate primary keys available.
 
@@ -22,7 +22,7 @@ Both should be numbers in the form of `391827251`.
 ## Configuration
 
 [Create a new configuration](/components/#creating-component-configuration) of the **Microsoft Advertising (Bing Ads)**
-extractor.
+connector.
 
 ### Global Configuration
 

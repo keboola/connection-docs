@@ -33,9 +33,9 @@ with the running configurations. There is no need to duplicate your project's da
 
 ### Data Pipelines
 
-When you create an extractor and then transform the data it produces using transformation it behaves the following way in branches: 
+When you create a data source connector and then transform the data it produces using transformation it behaves the following way in branches: 
 
-In production, you created an extractor that extracts your website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes the data from `in.c-requests` and transforms it into aggregated visits to a bucket named `out.c-visits`. You've already executed the pipeline multiple times, so both buckets have production data in them.
+In production, you created a data source connector that extracts your website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes the data from `in.c-requests` and transforms it into aggregated visits to a bucket named `out.c-visits`. You've already executed the pipeline multiple times, so both buckets have production data in them.
 
 Now when you switch to a new branch, and run the transformation. It will load the input data from `in.c-requests` and transform it. When it's about to write it back to storage, it will automatically prefix the output bucket with an ID of the branch - `out.c-1234-visits`. Your production data is left intact in `out.c-visits`.
 
@@ -43,7 +43,7 @@ Now when you switch to a new branch, and run the transformation. It will load th
 Bucket name is automatically prefixed with branch numeric ID when a job writes to storage in development branch.
 </div>
 
-Now you run the extractor in the branch. It stores the data in a bucket prefixed with branch ID - `in.c-1234-requests`. You production data is again left intact in `in.c-requests`.
+Now you run the data source connector in the branch. It stores the data in a bucket prefixed with branch ID - `in.c-1234-requests`. You production data is again left intact in `in.c-requests`.
 But when you now run the transformation, it will automatically check if you have branch version of the source bucket `in.c-requests`. Because you do have `in.c-1234-requests`, it will load the data from there.
 
 <div class="alert alert-info" markdown="1">

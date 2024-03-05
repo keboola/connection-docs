@@ -1,5 +1,5 @@
 ---
-title: Database Extractors
+title: Database Data Source Connectors
 permalink: /components/extractors/database/
 redirect_from:
     - /extractors/database/
@@ -9,11 +9,11 @@ redirect_from:
 * TOC
 {:toc}
 
-Extractors import data from external sources and integrate it to the Keboola environment.
+Data source connectors import data from external sources and integrate it to the Keboola environment.
 
 ## SQL Databases
 
-There are a number of extractors for [**SQL databases**](/components/extractors/database/sqldb/):
+There are a number of connectors for [**SQL databases**](/components/extractors/database/sqldb/):
 
 - [Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
@@ -29,17 +29,17 @@ There are a number of extractors for [**SQL databases**](/components/extractors/
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/). 
 
 ## NoSQL Databases
 
-Unlike the extractors for SQL databases, extractors for **NoSQL databases** require a different configuration (except the
-[BigQuery extractor](/components/extractors/database/bigquery/) for the [BigQuery](https://cloud.google.com/bigquery/) 
+Unlike the connectors for SQL databases, connectors for **NoSQL databases** require a different configuration (except the
+[BigQuery data source connector](/components/extractors/database/bigquery/) for the [BigQuery](https://cloud.google.com/bigquery/) 
 database, which is quite similar to SQL databases and also supports the [advanced mode](/components/extractors/database/sqldb/)):
 
-- [MongoDB extractor](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
-- [CosmosDB extractor](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
-- [Azure Storage Table extractor](/components/extractors/database/cosmosdb/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+- [MongoDB connector](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
+- [CosmosDB connector](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
+- [Azure Storage Table connector](/components/extractors/database/cosmosdb/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
 The connection to your internal database must be well secured. If you, or your system administrator,
@@ -57,7 +57,7 @@ Find detailed instructions for setting up an SSH tunnel in the [developer docume
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
 
 ## Incremental Fetching
-Some database extractors support the feature of **Incremental Fetching**. Incremental fetching allows to dramatically 
+Some database connectors support the feature of **Incremental Fetching**. Incremental fetching allows to dramatically 
 reduce the amount of data loaded from the source database server if the nature of the database permits. Incremental fetching
 can be used when the source table contains an ordering (ordinal) column and no rows are deleted (or the deletions are not important).
 There are two typical scenarios:

@@ -6,12 +6,12 @@ permalink: /components/extractors/database/cosmosdb/
 * TOC
 {:toc}
 
-The Cosmos DB extractor allows you to fetch data from the NoSQL [Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction)
+The Cosmos DB data source connector allows you to fetch data from the NoSQL [Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction)
 using the [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api). 
-If your CosmosDB instance uses the [MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), you should use the [MongoDB extractor](/components/extractors/database/mongodb/) instead.
+If your CosmosDB instance uses the [MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), you should use the [MongoDB data source connector](/components/extractors/database/mongodb/) instead.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **CosmosDB** extractor.  
+[Create a new configuration](/components/#creating-component-configuration) of the **CosmosDB** data source connector.  
 
 Fill in the **Endpoint**, **Database ID** and **Key**. Then click **Save**.
 
@@ -53,7 +53,7 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
     - CosmosDB automatically adds some metadata keys when the item is inserted.
     - By default, the following keys are ignored: `["_rid", "_self", "_etag", "_attachments", "_ts"]`    
 
-By default, the extractor exports all documents using **the generated SQL query**. 
+By default, the connector exports all documents using **the generated SQL query**. 
 The default query is `SELECT * FROM c`. The query can be modified with the following parameters:
 
 - **`select`**: string (optional), e.g., `c.name, c.date`; the default is `*`; [read more](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-select)

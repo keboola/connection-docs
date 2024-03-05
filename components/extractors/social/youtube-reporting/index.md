@@ -10,7 +10,7 @@ redirect_from:
 {:toc}
 
 
-This data source component uses the [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reports/) 
+This data source connector uses the [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reports/) 
 to create and run reports that provide insights into the performance of your YouTube
 content. It enables the automation of data retrieval from [YouTube Analytics](https://developers.google.com/youtube/analytics/).
 

@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor downloads data from DynamoDB Streams. It supports back-fill mode and incremental fetching.
+This data source connector downloads data from DynamoDB Streams. It supports back-fill mode and incremental fetching.
 To fetch data in increments, it uses a state file.
 
 ## Prerequisites

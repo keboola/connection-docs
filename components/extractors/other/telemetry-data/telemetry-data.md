@@ -9,15 +9,15 @@ redirect_from:
 * TOC
 {:toc}
 
-The Telemetry Data extractor allows you to retrieve data about your project or your entire [organization](/management/organization/). 
+The Telemetry Data connector allows you to retrieve data about your project or your entire [organization](/management/organization/). 
 It helps you monitor activities and usage in your Keboola projects. It also aids Keboola in calculating your project's consumption.
 
 ## Configuration
-To configure the extractor, select one of the following modes:
+To configure the data source connector, select one of the following modes:
  
 1. [**Project mode**](#project-mode-tables): Extracts data only from a selected Keboola project.
-2. [**Organization mode**](#organization-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This must be set up by Keboola. After configuring the extractor, contact your Keboola Account Manager or our [support team](/management/support/).
-3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contract and also must be set up by Keboola. After configuring the extractor, contact your Keboola Account Manager or our [support team](/management/support/).
+2. [**Organization mode**](#organization-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
+3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contract and also must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
 
 ## Data Model
 The model below helps you better understand relations between individual tables extracted by this component. 
@@ -64,7 +64,7 @@ This table shows main and development [branches](/components/branches/) in the p
 
 ### kbc_component_configuration
 This table lists the [configurations of components](/components/#creating-component-configuration) 
-(e.g., a configuration of the AWS S3 extractor).
+(e.g., a configuration of the AWS S3 data source connector).
 
 *Note: The table is always extracted in full.*
 
@@ -104,7 +104,7 @@ of the component configuration.
 
 ### kbc_component_configuration_row
 This table lists rows of the [configurations for the components](/components/#creating-component-configuration) 
-(e.g., a configuration for a single table in the Snowflake writer).
+(e.g., a configuration for a single table in the Snowflake data destination connector).
 
 | **Column** | **Description** | **Example** |  
 |---|---|---|
@@ -149,7 +149,7 @@ and their consumption metrics.
 
 ### kbc_job
 This table lists Keboola [jobs](/management/jobs/) 
-(e.g., an extractor job or a transformation).
+(e.g., a connector job or a transformation).
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
@@ -173,7 +173,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `job_billed_credits_used` | Number of actually billed credits | `0.001218890000` |
 | `job_total_time_sec` | Total time of the job in seconds (from initial trigger; start may be delayed) | `63` |
 | `job_run_time_sec` | Runtime of the job in seconds (from the time the job started) | `62` |
-| `job_network_mb` | Data transferred via the network in MB – used for writer billing | `6.094449` |
+| `job_network_mb` | Data transferred via the network in MB – used for data destination billing | `6.094449` |
 | `ds_backend_size` | Backend used for data science transformations (`Small`, `Medium`, `Large`) | `Small` |
 | `dwh_small_ratio` | Ratio of Small DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH) | `0.75` |
 | `dwh_medium_ratio` | Ratio of Medium DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH) | `0.25` |
@@ -279,13 +279,13 @@ data in storage, and the number of users. This combines data from different data
 * `Data Science` - `kbc_job` (jobs with **R/Python** *transformation_type*)
 * `Data Science Sandbox` - `kbc_data_science_sandbox` (aggregation of *sandbox_runtime_hours*)
 * `DWH Direct Query` - `kbc_snowflake_stats` (records with **writer/dwhm** *snowflake_job_type*)
-* `Extractor` - `kbc_job` (jobs with **extractor** *component_type*)
+* `Extractor` - `kbc_job` (jobs with **data source** *component_type*)
 * `KBC Users` - `kbc_project_user` (Active/Inactive state is defined based on users' activity in the last 3 days)
 * `KBC Projects` - `kbc_project` (existing projects per particular date)
 * `KBC TB` - `kbc_project_snapshot` (aggregation of *bytes*)
 * `Snowflake Sandbox` - `kbc_snowflake_stats` (records with **sandbox** *snowflake_job_type*)
 * `Transfromations` - `kbc_job` (jobs with **SQL** *transformation_type*)
-* `Writers` - `kbc_job` (jobs with **writer** *component_type*)
+* `Writers` - `kbc_job` (jobs with **data destination** *component_type*)
 * `BAPI Messages` - Buffer API (data streams) usage; only aggregated values available
 * `BAPI Receiver` - Buffer API endpoints used; only aggregated values available
 
@@ -298,7 +298,7 @@ You need data for all projects.*
 | `kbc_project_id` | Foreign key to the Keboola project | `779_kbc-eu-central-1` |
 | `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
 | `date` | Date of the value | `2019-11-01` |
-| `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into writers, applications, and transformations. | `DWH Direct Query` |
+| `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into data destination connectors, applications, and transformations. | `DWH Direct Query` |
 | `is_sandbox` | Flag determining if the value is for sandbox | `true` |
 | `value` | Value of the metric (always related to the particular metric, key-value pairs) | `4.150657` |
 | `organization_value` | Organization value of the metric (used for Keboola users, where we’re assigning distinct users to the single org project, so we’re not calculating users more than once when looking at organization value – a single user can be in multiple projects) | `15` |
@@ -898,10 +898,10 @@ This table shows data about [workspace](/transformations/workspace/) events.
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ## dst_ Columns
-Columns with the **dst_** prefix are system columns used in Telemetry Data extractor executions. They are **not** related to the data itself.
+Columns with the **dst_** prefix are system columns used in Telemetry Data connector executions. They are **not** related to the data itself.
 
 ## Data Recency
-You can obtain telemetry data for your project that is approximately 3 hours old when running the extractor.
+You can obtain telemetry data for your project that is approximately 3 hours old when running the connector.
 
-*Note: This is not guaranteed, as the raw data is processed before reaching the extractor's source; therefore delays in processing might occur.*
+*Note: This is not guaranteed, as the raw data is processed before reaching the connector's source; therefore delays in processing might occur.*
  

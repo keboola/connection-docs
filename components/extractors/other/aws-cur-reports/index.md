@@ -6,7 +6,7 @@ permalink: /components/extractors/other/aws-cu-reports/
 * TOC
 {:toc}
 
-This extractor downloads [AWS Cost Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) 
+This data source connector downloads [AWS Cost Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) 
 exported to S3 in CSV format.
 
 ## Configuration
@@ -29,7 +29,7 @@ Export setup:
 
 ### Component Setup
 
-[Create a new configuration](/components/#creating-component-configuration) of the **AWS Cost Usage Reports** extractor.  
+[Create a new configuration](/components/#creating-component-configuration) of the **AWS Cost Usage Reports** connector.  
 
 Fill in the **AWS config** containing your S3 bucket details and credentials as set up in the AWS console.
 

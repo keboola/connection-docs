@@ -36,7 +36,7 @@ Then you will configure the template:
 {: .image-popup}
 ![Flow](/templates/media-cashflow/flow.png)
 
-1. **Data extractions** – First, you will select one or multiple data sources (extractors) that will provide all available data.
+1. **Data extractions** – First, you will select one or multiple data source connectors that will provide all available data.
 For more details, see the section [Data Sources](/templates/media-cashflow/#data-sources) below.
 
 2. **Snowflake SQL** – Then the data will be prepared so it can be sent to the data app.
@@ -63,7 +63,7 @@ The following data sources are available:
 - [TikTok Ads](https://business-api.tiktok.com/portal/docs?id=1740302848100353)
 
 ## Authorizing Data Sources
-To use a selected data source component, you must first authorize the data source. You need to use at least one of the following marketing data sources.
+To use a selected data source connector, you must first authorize the data source. You need to use at least one of the following marketing data sources.
 
 ### Facebook Ads
 

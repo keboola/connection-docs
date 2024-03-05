@@ -65,7 +65,7 @@ to show development branch buckets. However, they cannot be used by the producti
 
 Switch back to `Sample branch`. Go to **Project diff**. Make sure that all the remaining configurations have their
 respective checkboxes checked. Then click **Merge to production**. Make sure that the checkbox *Delete current development 
-branch after merge.* is checked. Fill in the merge message: `Merge Bitcoin transformation and HTTP extractor`. Then click 
+branch after merge.* is checked. Fill in the merge message: `Merge the Bitcoin transformation and HTTP data source connector`. Then click 
 **Merge**. 
 
 {: .image-popup}
@@ -84,10 +84,10 @@ The table `dollar_btc_transactions` is missing even though you had it in your br
 ![Screenshot - Production storage after branch is deleted](/tutorial/branches/figures/branch-deleted-storage.png)
 
 This is expected. Branch storage is completely isolated and no data are merged back to production, only configurations. 
-You need to run the extractor in production to get the data into production **Storage**. Also, notice that the branch 
+You need to run the connector in production to get the data into production **Storage**. Also, notice that the branch 
 bucket switch is disabled as there are no more branch buckets. They were deleted along with the branch. 
 
-Examine the merged configurations. Run the HTTP extractor to get the source tables first, then run the Snowflake 
+Examine the merged configurations. Run the HTTP connector to get the source tables first, then run the Snowflake 
 transformation. Examine the results. 
 
 ## You Did It! 🎉 
