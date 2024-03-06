@@ -1013,7 +1013,8 @@ A table with a type definition is created using the [tables-definition endpoint]
 
 A component may provide information about column data types in its data manifest. Database data source connectors and transformations matching the storage backend (e.g., Snowflake SQL transformation on the Snowflake storage backend) will create storage tables with the same types. The database data source connectors and transformations that do NOT match the backend will create storage tables using [base types](#base-types). 
 
-_**Note:** When a table is created from base types, it defaults to the lengths and precisions of the target backend. For instance, in Snowflake, the NUMBER base type is created as NUMBER(38,9), which may be unexpected if the source database column is NUMBER(10,2)._  
+_**Note:** When a table is created from base types, it defaults to the lengths and precisions specific for each Storage backend. For instance, in Snowflake, the NUMBER base type is created as NUMBER(38,9), which may be unexpected if the source database column is NUMBER(10,2)._  
+
 
 _To avoid this limitation, you can manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition) with the correct precisions. When subsequent jobs write data to this table, they will respect your definition as long as it matches. Remember this when dropping and recreating tables. If a job creates a table, it will default to the incorrect type based on the base type._ 
 
