@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 This data destination connector allows you to write CSV files into a single AWS S3 bucket. After creating a new configuration, select the files
-you want to write to AWS S3. You also need to set up the proper permissions on AWS.
+you want to write to AWS S3. You also need to set up the proper permissions on AWS. You can set up AWS credentials or create an AWS role.
 The connector supports additional [processor configuration](https://developers.keboola.com/extend/component/processors/) via the JSON editor.
 
 ## Obtain AWS Credentials
@@ -47,6 +47,45 @@ Or, if you prefer configuration via JSON:
 {% endhighlight %}
 
 When you finish creating the user, you'll obtain the **Access key ID** and **Secret access key**. 
+
+## Authentication with AWS role
+
+{: .image-popup}
+![Screenshot - AWS Credentials](/components/writers/storage/aws-s3/aws-s3-3.png)
+
+Select `Role` as the **Login Type**. Create a role in your AWS account using the following steps:
+
+- Go to the [IAM Console](https://console.aws.amazon.com/iam/home?#/roles) and click **Create role**. Then click **Another AWS account**.
+- For **Account ID**, enter `206948715642`.
+- For **External ID**, enter the value from your project.
+- **Do not enable the setting to Require MFA (multi-factor authentication)**.
+- On the next page, attach the policy:
+    - `s3:PutObject` for desired S3 bucket(s) and paths
+    - `s3:GetBucketLocation` to determine the region of the S3 bucket(s)
+- Or, you can create a new inline policy:
+
+{% highlight json %}
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "BucketWrite",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::writer-sample/*",
+                "arn:aws:s3:::writer-sample"
+            ]
+        }
+    ]
+}
+{% endhighlight %}
+- On the last page, set the **Role name** and click **Create role**.
+
+In your project, fill in your **Account ID** and **Role Name**.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** connector.
