@@ -46,6 +46,9 @@ Then continue to the next step, where we will provide you with a guide on how to
 {: .alert.alert-info}
 Note: This set of permissions grants the Keboola service account read-only access to the data.
 
+{: .alert.alert-warning}
+[Data shared via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
+
 Once you are done, click **Register Bucket**, and you can start using it.
 
 ### BigQuery
