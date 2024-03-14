@@ -101,12 +101,12 @@ WHERE "source" = 'mql';
 
 ### External Bucket in a BigQuery SQL Transformation
 
-In BigQuery, the external bucket is mapped to an actual dataset, `users-reporting` (the name you filled in the dialog), in your project – in this case, project `sapi-9752`. 
+In BigQuery, the external bucket is mapped to an actual dataset, `users_reporting` (the name you filled in the dialog), in your project – in this case, project `sapi-9752`. 
 You can reference the contents of the dataset in your SQL transformation using a fully-qualified name. 
 
 ```bigquery
 CREATE TABLE `MQL_USERS` AS SELECT *
-FROM `users-reporting`.`users`
+FROM `users_reporting`.`users`
 WHERE `source` = "mql";
 ```
 
