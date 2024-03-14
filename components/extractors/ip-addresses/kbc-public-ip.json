@@ -307,6 +307,108 @@
             "vendor": "gcp",
             "region": "europe-west3",
             "service": "email-delivery"
+        },
+        {
+            "ipPrefix": "35.245.113.124/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.186.177.208/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.48.52.58/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.145.229.110/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.48.69.223/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.245.169.222/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.236.206.220/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.221.29.130/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.245.146.94/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.85.153.249/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.48.67.21/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.245.10.93/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "34.86.101.13/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.199.50.163/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.245.139.246/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "35.245.222.156/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "queue"
+        },
+        {
+            "ipPrefix": "149.72.196.5/32",
+            "vendor": "gcp",
+            "region": "us-east4",
+            "service": "email-delivery"
         }
     ]
 }

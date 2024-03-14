@@ -115,6 +115,31 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `34.89.161.253`
 - `149.72.196.5` - Used only for email delivery.
 
+## connection.us-east4.gcp.keboola.com
+For projects in the GCP US Virginia [region](/overview/#stacks) (GCP region `us-east4`),
+the following IP addresses are currently used:
+
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
+- `35.245.113.124`
+- `35.186.177.208`
+- `34.48.52.58`
+- `34.145.229.110`
+- `34.48.69.223`
+- `35.245.169.222`
+- `35.236.206.220`
+- `35.221.29.130`
+- `35.245.146.94`
+- `34.85.153.249`
+- `34.48.67.21`
+- `35.245.10.93`
+- `34.86.101.13`
+- `35.199.50.163`
+- `35.245.139.246`
+- `35.245.222.156`
+- `149.72.196.5` - Used only for email delivery.
+
 ## IP Address Ranges in JSON
 We are publishing our current IP addresses in JSON format. To view them,
 download the [kbc-public-ip.json](/components/ip-addresses/kbc-public-ip.json) file.
