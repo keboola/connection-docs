@@ -137,8 +137,9 @@ This section explains a few terms often used throughout these documentation page
 The Keboola platform is available in multiple stacks, either multi-tenant or single-tenant. The current multi-tenant stacks are:
 
 - US Virginia AWS – [connection.keboola.com](https://connection.keboola.com/),
-- EU Frankfurt AWS – [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com/).
-- EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/).
+- US Virginia GCP - [connection.us-east4.gcp.keboola.com](https://connection.us-east4.gcp.keboola.com/)
+- EU Frankfurt AWS – [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com/)
+- EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/)
 - EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
 A **stack** combines a datacenter location (region) and a cloud provider and is identified by its domain (URL). The currently supported cloud 
