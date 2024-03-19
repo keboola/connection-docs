@@ -32,3 +32,5 @@ The configuration concepts are the same as for standard [SQL DB data sources](ht
 
 You may select specific columns and tables to be downloaded, or switch to `Advanced mode` to provide a custom query. Data may be imported incrementally using the `incremental fetching` feature, 
 allowing the user to retrieve only new or updated data from their NetSuite account.
+
+Custom query notice: *"Due to Oracle SQL syntax working internally with NetSuite Analytics, you should use Oracle SQL syntax when creating SuiteQL queries. Although SuiteQL supports ANSI SQL-92, there is a risk of critical performance issues, such as time outs that are not operationally remediable, that may occur if a SuiteQL is converted to SQL. This approach helps avoid the worst performance scenario, regardless of other factors."* [Netsuite documentation](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0824094533.html#SuiteQL-Performance-and-Best-Practices)
