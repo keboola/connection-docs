@@ -49,6 +49,18 @@ Note: This set of permissions grants the Keboola service account read-only acces
 {: .alert.alert-warning}
 [Data shared via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
 
+{: .alert.alert-warning}
+**Read-only input mapping with external buckets has a limitation:** if you delete and recreate a registered table in the source schema, 
+our [read-only input mapping](https://help.keboola.com/transformations/workspace/#read-only-input-mapping) will lose access to this table. 
+This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas.
+**However, manually refreshing the bucket addresses this issue.**
+<br /><br />
+To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables as illustrated below:
+<br />
+`GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO`
+<br /><br />
+Ensure the role name follows the pattern in the picture, suffixed with `_RO`.
+
 Once you are done, click **Register Bucket**, and you can start using it.
 
 ### BigQuery
