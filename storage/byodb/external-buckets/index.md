@@ -148,3 +148,4 @@ If you wish to remove the schema, you must do so manually in your warehouse. You
 
 * Table names in the external buckets can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
 * Table names are not case-sensitive. You cannot create two tables with the same name that differ only in letter case.
+* [Creating snapshots](https://keboola.docs.apiary.io/#reference/table-snapshotting/create-or-list-snapshots/create-table-snapshot) from tables in external buckets is not supported.
