@@ -52,7 +52,7 @@ If you need more information, please contact your CSM.
 
 | Types of jobs in Keboola              | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
-| **Data souce job**                    | 1 hour                  | **2**                 |
+| **Data source job**                    | 1 hour                  | **2**                 |
 | **Data destination job**              | 1 GB out                | **0.2**               |  
 | **SQL job / workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
