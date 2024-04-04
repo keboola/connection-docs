@@ -51,7 +51,7 @@ The following are the available providers that will be queried for the data:
 - **google_maps** - [Google Maps](https://developers.google.com/maps/documentation/geocoding/intro) provider, needs parameter **apiKey** with your access key to the API (you need "Server" type of key).
 - **google_maps_business** - [Google Maps](https://developers.google.com/maps/premium/faq#getting_started) for Business provider, needs parameters **clientId** and **privateKey**.
 - **bing_maps** - [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/spatial-data-services/geocode-dataflow-api/?redirectedfrom=MSDN) provider, needs attribute **apiKey**.
-- **yandex** - [Yandex](https://tech.yandex.com/maps/geocoder/doc/desc/concepts/about-docpage/) provider, does not need any API key, locale parameter may be one of these values: uk-UA, be-BY, en-US, en-BR, tr-TR.
+- **yandex** - [Yandex](https://tech.yandex.com/maps/geocoder/doc/desc/concepts/about-docpage/) provider, needs attribute apiKey; locale parameter may be one of these values: uk-UA, be-BY, en-US, en-BR, tr-TR.
 - **map_quest** - [MapQuest](https://developer.mapquest.com/documentation/geocoding-api/) provider, needs parameter **apiKey**.
 - **tomtom** - [TomTom](https://www.programmableweb.com/api/tomtom-geocoding) provider, needs parameter **apiKey**, parameter locale may have one of these values: de, es, fr, it, nl, pl, pt, sv.
 - **opencage**: [OpenCage](https://opencagedata.com/) provider, needs parameter **apiKey**.
