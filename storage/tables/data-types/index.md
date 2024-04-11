@@ -1122,3 +1122,40 @@ CREATE TABLE "ctas_table" (
   - Keboola does not perform any type conversion during loading. Your data must exactly match the column type in the table in Storage.
   - Any load of data with incompatible types will fail.
   - The filtering option in the input mapping section is unavailable for tables with defined data types. If filtering is crucial for your workflow, consider using SQL, Python, or even no-code transformations to filter the data and create a new filtered table.
+
+
+### How to Create a Typed Table Based on a Non-typed Table
+
+For example, we have a non-typed table `non_typed_table` with the following definition:
+
+{: .image-popup}
+![Non-typed table schema](/storage/tables/data-types/non-typed-table-schema.png)
+
+To create typed table based on `non_typed_table` create new transformation, choose table input mapping `non_typed_table` and choose table output mapping `typed_table`. The output table must not exist, otherwise it will not become a typed table.
+
+{: .image-popup}
+![Create transformation](/storage/tables/data-types/create-transformation.png)
+
+In a queries section add sql query transforming columns types:
+
+```sql
+CREATE TABLE "typed_table" AS
+    SELECT 
+        CAST(ntt."id" AS VARCHAR(64)) AS "id",
+        CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
+        CAST(ntt."date" AS DATETIME) AS "date",
+        CAST(ntt."amount" AS INTEGER) AS "amount"
+    FROM "non_typed_table" AS ntt;
+```
+
+Run the transformation and wait until it finishes. Go to the storage and check the `typed_table` schema, what should look like this:
+
+{: .image-popup}
+![Typed table schema](/storage/tables/data-types/typed-table-schema.png)
+
+You can see the `NATIVE TYPES` label after the table name, which means that the table is typed. Table columns should have the same data types as in the transformation query.
+
+If the destination table already exists, and you want to keep the same name, you must first rename the original table (e.g. `non_typed_table_bkp`), then create a new table using the transformation described above.
+
+Note Incremental loading can not be used in this case.
+
