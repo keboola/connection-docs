@@ -1143,12 +1143,16 @@ CREATE TABLE "typed_table" AS
     SELECT 
         CAST(ntt."id" AS VARCHAR(64)) AS "id",
         CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
-        CAST(ntt."date" AS DATETIME) AS "date",
+        CAST(ntt."date" AS TIMESTAMP_NTZ) AS "date",
         CAST(ntt."amount" AS INTEGER) AS "amount"
     FROM "non_typed_table" AS ntt;
 ```
 
-Run the transformation and wait until it finishes. Go to the storage and check the `typed_table` schema, what should look like this:
+Run the transformation and wait until it finishes.
+
+Note when creating a new table, the link from the transformation works even after refreshing the page. Or you can go to the storage and find the table there.
+
+The newly created table `typed_table` schema should look like this:
 
 {: .image-popup}
 ![Typed table schema](/storage/tables/data-types/typed-table-schema.png)
@@ -1157,5 +1161,5 @@ You can see the `NATIVE TYPES` label after the table name, which means that the 
 
 If the destination table already exists, and you want to keep the same name, you must first rename the original table (e.g. `non_typed_table_bkp`), then create a new table using the transformation described above.
 
-Note Incremental loading can not be used in this case.
+Note [Incremental loading](https://help.keboola.com/storage/tables/#incremental-loading) can not be used in this case.
 
