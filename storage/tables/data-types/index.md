@@ -1131,6 +1131,11 @@ For example, we have a non-typed table `non_typed_table` with the following defi
 {: .image-popup}
 ![Non-typed table schema](/storage/tables/data-types/non-typed-table-schema.png)
 
+with sample data:
+
+{: .image-popup}
+![Sample data](/storage/tables/data-types/sample-data.png)
+
 To create typed table based on `non_typed_table` create new transformation, choose table input mapping `non_typed_table` and choose table output mapping `typed_table`. The output table must not exist, otherwise it will not become a typed table.
 
 {: .image-popup}
@@ -1143,7 +1148,7 @@ CREATE TABLE "typed_table" AS
     SELECT 
         CAST(ntt."id" AS VARCHAR(64)) AS "id",
         CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
-        CAST(ntt."date" AS TIMESTAMP_NTZ) AS "date",
+        TO_TIMESTAMP(ntt."date", 'DD.MM.YYYY"T"HH24:MI:SS') AS "date",
         CAST(ntt."amount" AS INTEGER) AS "amount"
     FROM "non_typed_table" AS ntt;
 ```
