@@ -48,7 +48,7 @@ to gather data from various sources. They can connect to APIs of external servic
 
 This component acts as a middle layer that works with various [backend](/transformations/#backends) database systems like 
 [Snowflake](https://www.snowflake.com/), [Redshift](https://aws.amazon.com/redshift/), [BigQuery](https://cloud.google.com/bigquery/),
-[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/), and others. It provides a key Storage API for working with data, 
+[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/), [and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
 making it easier to connect with other parts of the system and third-party applications.
 
 ### Transformations & Workspaces

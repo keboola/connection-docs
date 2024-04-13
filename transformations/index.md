@@ -130,7 +130,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <th colspan='2'>Feature</th><th>Legacy Transformations</th><th>New Transformations</th>
 </tr>
 <tr>
-    <th rowspan='12'>Backend</th>
+    <th rowspan='13'>Backend</th>
     <th><a href='/transformations/julia/'>Julia Transformations</a></th> 
     <td>✓</td>
     <td>Planned</td>
@@ -155,9 +155,14 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>✓</td>
     <td>✓</td>
 </tr>
-<tr>
+    <tr>
     <th><a href='/transformations/snowflake-plain/'>Snowflake Transformations</a></th> 
     <td>✓</td>
+    <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/bigquery/'>Google BigQuery</a></th> 
+    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
@@ -165,7 +170,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>900s (configurable per project via Support)</td>
     <td>7200s (configurable per transformation)</td>
 </tr>
-<tr>
+    <tr>
     <th><a href='/transformations/snowflake-plain/#dynamic-backends'>Snowflake Transformations Dynamic Backend</a></th> 
     <td>Not available</td>
     <td>✓</td>
