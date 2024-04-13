@@ -82,7 +82,7 @@ Then continue to the next step, where we will provide you with a guide on correc
 Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
 
 {: .alert.alert-warning}
-[External tables](https://cloud.google.com/bigquery/docs/external-data-cloud-storage) are not supported, and if the shared dataset contains such tables, they will be ignored.
+We only support [BigLake external tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). Please ensure the table you are using is of this type. External tables of other types not work in transformations and workspaces.
 
 Once you are done, click **Register Bucket** to start using it.
 
