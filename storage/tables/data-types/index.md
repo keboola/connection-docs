@@ -1124,24 +1124,24 @@ CREATE TABLE "ctas_table" (
   - The filtering option in the input mapping section is unavailable for tables with defined data types. If filtering is crucial for your workflow, consider using SQL, Python, or even no-code transformations to filter the data and create a new filtered table.
 
 
-### How to Create a Typed Table Based on a Non-typed Table
+### How to create a Typed table based on a Non-typed table
 
 For example, we have a non-typed table `non_typed_table` with the following definition:
 
 {: .image-popup}
 ![Non-typed table schema](/storage/tables/data-types/non-typed-table-schema.png)
 
-with sample data:
+and with following data:
 
 {: .image-popup}
 ![Sample data](/storage/tables/data-types/sample-data.png)
 
-To create typed table based on `non_typed_table` create new transformation, choose table input mapping `non_typed_table` and choose table output mapping `typed_table`. The output table must not exist, otherwise it will not become a typed table.
+To create typed table based on `non_typed_table`, create new transformation, choose table input mapping `non_typed_table` (or you can rely on [read-only input mapping](https://help.keboola.com/transformations/#read-only-input-mapping)) and choose table output mapping `typed_table`. The output table must not exist, otherwise it will not become a typed table.
 
 {: .image-popup}
 ![Create transformation](/storage/tables/data-types/create-transformation.png)
 
-In a queries section add sql query transforming columns types:
+In a queries section, add SQL query transforming columns types. In this step, you should provide proper casting for your data. In the following example, you can see custom formatting of date.
 
 ```sql
 CREATE TABLE "typed_table" AS
@@ -1155,7 +1155,6 @@ CREATE TABLE "typed_table" AS
 
 Run the transformation and wait until it finishes.
 
-Note when creating a new table, the link from the transformation works even after refreshing the page. Or you can go to the storage and find the table there.
 
 The newly created table `typed_table` schema should look like this:
 
