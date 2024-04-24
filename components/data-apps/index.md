@@ -3,7 +3,7 @@ title: Data Apps
 permalink: /components/data-apps/
 ---
 
-{% include warning.html content="This feature is in public beta. All data apps are terminated at midnight." %}
+{% include warning.html content="This feature is in public beta." %}
 
 * TOC
 {:toc}
@@ -25,7 +25,7 @@ It means that the users that will access your data app don't need access to a Ke
 ## Create a Data App
 There are two ways to create a data app in Keboola. Select a deployment type that will suit your needs:
 - **Code** – Just paste a Streamlit code to create a simple data app. 
-- **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications.
+- **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications. You will need to provide your GitHub username and private access token for repository authentication.
 
 {: .image-popup}
 ![Code - main menu](/components/data-apps/data_apps-main_menu.png)
@@ -38,27 +38,53 @@ This deployment type is ideal for very simple apps or for testing. Check out our
 ![Code - code](/components/data-apps/data_apps-hello_world-code.png)
 
 #### Packages
-To use additional packages that are not already in our [Streamlit Base Image](#base-image), enter them into the field Packages.
+To use additional Python packages that are not already in our [Streamlit Base Image](#base-image), enter them into the field Packages.
 
 {: .image-popup}
 ![Packages](/components/data-apps/data_apps-packages.png)
 
 ### Git Repository
-{% include warning.html content="In BETA, we only support GitHub repositories. Also, we only support MAIN as the main branch, not MASTER." %}
+{% include warning.html content="In BETA, we only support GitHub repositories." %}
 
 To provide feedback, use the feedback button in your project.
 If you have a complex application, push your app sources into GitHub and link the repository in this section.
 Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
 {: .image-popup}
-![Git repository](/components/data-apps/data_apps-git_repository.png)
+![Git repository](/components/data-apps/data_apps-git_repository_public.png)
+
+If you are using a private repository, you will need to authenticate with your GitHub username and private access token. Follow these steps to authenticate:
+
+1. Generate a personal access token on GitHub. You can do this by going to your GitHub account settings, selecting "Developer settings", then "Personal access tokens", and clicking on "Generate new token". Make sure to give the token appropriate permissions for accessing the repository.
+
+2. In the Keboola, navigate to the `Data App Repository` in your Data App Configuration, check the `Private` and enter your GitHub username and the personal access token you generated in step 1.
+
+3. Click on "Save" to authenticate with the private repository.
+
+Now you can deploy your data app from the private repository and access it within your Keboola project.
+
+
+{: .image-popup}
+![Git repository](/components/data-apps/data_apps-git_repository_private.png)
 
 ## Secrets
 To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key value pairs in the section Secrets.
 These secrets will be injected into the secrets.toml file upon deployment of the app. 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
-{: .image-popup}
+### Default Secrets
+By default, the Keboola Streamlit Docker image provides two secrets without the need for explicit specification:
+
+- `kbc_url`: Represents the URL of the current Keboola project.
+- `kbc_token`: Represents the storage token with full read-write access to Keboola Storage.
+
+These secrets can be accessed within your Streamlit data app code using the following example, which is used for initializing the Keboola storage token:
+```
+token = st.secrets["kbc_storage_token"]
+url = st.secrets["kbc_url"]
+client = Client(url, token)
+```
+
 ![Secrets](/components/data-apps/data_apps-secrets.png)
 
 ## Loading Data from Storage
@@ -73,10 +99,27 @@ For writing data back to Keboola Project Storage, use our [Keboola Storage Pytho
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App Management
-{% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet." %}
+{% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does provide two authorization methods." %}
 
 ### Authorization
-We recommend incorporating some sort of authorization into your app—for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+We recommend to use authorization methods provided by Keboola.
+
+1. **Simple Authorization**: This method allows you to authenticate one user using a username and password. 
+
+2. **SSO (Single Sign-On) Authorization**: This method enables users to log in to your app using your SSO without the need of having their own existing Keboola accounts. 
+
+Alternatively, you can use Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+
+Choose the authorization method that best suits your app's requirements and security needs.
+
+#### Simple Authorization
+TBD
+
+#### SSO (Single Sign-On) Authorization
+TBD
+
+## Sleep and resume
+TBD
 
 ### Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
