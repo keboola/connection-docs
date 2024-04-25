@@ -15,12 +15,11 @@ go to our [Getting Started tutorial](/tutorial/manipulate/).*
 (Marketing data preaggregation, Tableau denormalizer, Integrity checker or Join marketing channels
 and sales, etc.). 
 
-In Keboola all transformations operate on a copy of the data from Storage
-in a safe and isolated environment. This improves safety, repeatability and traceability of all data operations.
+In Keboola, all transformations operate on a copy of the data from Storage
+in a safe and isolated environment. This improves the safety, repeatability, and traceability of all data operations.
 The process of isolating data is called [**mapping**](/transformations/mappings/).
 The mapping process copies input data from permanent project Storage into a 
-[**staging**](/transformations/mappings/#table-input-mapping) area which represents an ephemeral storage for 
-the purpose of running the transformation **script**. The transformation script is executed by a transformation
+[**staging**](/transformations/mappings/#table-input-mapping) area, which represents ephemeral storage to run the transformation **script**. The transformation script is executed by a transformation
 [**backend**](/transformations/#backends). To ease the [development](/transformations/#developing-transformations) 
 of the transformation script, all transformations are **automatically versioned**, and you can use a **workspace**
 which provides a copy of the environment and can be run interactively.
@@ -208,8 +207,8 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th>Lifecycle</th> 
-    <td>Terminates after 5 days; can be extended manually</td>
-    <td>Sleeps after 1 hour of inactivity; can be resumed (if auto sleep feature is supported and enabled)</td>
+    <td>Terminates after five days; can be extended manually</td>
+    <td>Sleeps after 1 hour of inactivity; can be resumed (if the auto-sleep feature is supported and enabled)</td>
 </tr>
 <tr>
     <th>Resume</th> 
@@ -228,7 +227,7 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
 </tr>
 <tr>
     <th>IDE</th> 
-    <td>Jupyer Notebook or RStudio</td>
+    <td>Jupyter Notebook or RStudio</td>
     <td>JupyterLab</td>
 </tr>
 <tr>
@@ -383,8 +382,7 @@ everything is less clear and isolated. To save time, run multiple orchestration 
 Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all 
 required steps have been executed.
 
-## Read-only Input mapping
-
-With Read-only input-mapping feature you can access all buckets (your own or linked) in transformations. Your transformation user
-has read only access on buckets (and their tables) so you can access such data. So there is no need to specify standard input mapping 
-for your transformations. Name of backend object (database, schema...) depends on the backend you use, and it contains bucket ID (not bucket name). 
+## Read-Only Input Mapping
+With the read-only input mapping feature, you can access all buckets (your own or linked) in transformations. Your transformation user
+has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
+for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name). 
