@@ -43,7 +43,7 @@ the designated tables in Storage. The **input** and **output** mappings ensure c
 the transformation processes -- the transformation always operates in an isolated workspace.
 
 ## Mapping
-[**Input and output mapping**](/transformations/mappings/) --- separate the source data from your transformation. 
+[**Input and output mapping**](/transformations/mappings/) --- separates the source data from your transformation. 
 Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the 
 input mappings. Database table names and CSV file names in transformations are completely unrelated to names of tables 
 in Storage. This means, for example, that you can rename tables in Storage without breaking any of your transformations.
@@ -100,7 +100,7 @@ they share common properties and functions. Particularly important is that all c
 [versioned](/components/#configuration-versions), and you can always [roll back](/components/#rollback-version) 
 a configuration or [copy](/components/#copy-configuration) a version to a new transformation.
 
-You can easily develop transformations using the [Workspace](/transformations/workspace/). It allows you to run 
+You can easily develop transformations using the [workspace](/transformations/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on copies of your tables
 without affecting data in your Storage or your transformations. You can convert a workspace to a transformation 
 and vice versa.
@@ -116,11 +116,11 @@ Python, and R transformations.
 
 ## Transformation Versions & Features
 The current and most-used transformations are now marked as legacy. They receive important updates 
-(e.g., Python, R, Julia updates) but won't receive any new features. *Legacy Transformations* will be available 
-together with *New Transformations* for a long period to ensure smooth migration (which will start 
-once all features from Legacy Transformations are available in New Transformations and there is a migration path).
-New transformations are not available in all projects at the moment. Therefore, using the Legacy 
-Transformations for day-to-day work is perfectly okay.
+(e.g., Python, R, Julia updates) but won't receive any new features. *Legacy transformations* will be available 
+together with *new transformations* for a long period to ensure smooth migration (which will start 
+once all features from legacy transformations are available in new transformations and there is a migration path).
+New transformations are not available in all projects at the moment. Therefore, using the legacy 
+transformations for day-to-day work is perfectly okay.
 
 Some features of legacy transformations are not yet available in new transformations, and some will 
 never be available in new transformations. The following table shows the feature status as of **October 2020**.
@@ -320,9 +320,9 @@ and run configurations and that creating your own
 
 New transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
 encouraging users to create reusable blocks of code. They also support 
-[Variables](/transformations/variables/#variables) that can be used to parametrize transformations.
+[variables](/transformations/variables/#variables) that can be used to parametrize transformations.
 
-Apart from that, new transformations come with [Workspaces](/transformations/workspace/) (previously named Sandboxes),
+Apart from that, new transformations come with [workspaces](/transformations/workspace/) (previously named Sandboxes),
 which have many new features, such as loading and unloading data with a running workspace, 
 resuming the workspace, Spark, and MLflow support.
 
@@ -383,6 +383,6 @@ Dependencies allow you to chain transformation steps in older projects. A given 
 required steps have been executed.
 
 ## Read-Only Input Mapping
-With the read-only input mapping feature, you can access all buckets (your own or linked) in transformations. Your transformation user
+With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
 for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name). 
