@@ -12,7 +12,7 @@ redirect_from:
 go to our [Getting Started tutorial](/tutorial/manipulate/).*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
-(Marketing data preaggregation, Tableau denormalizer, Integrity checker or Join marketing channels
+(marketing data preaggregation, Tableau denormalizer, integrity checker, joining marketing channels
 and sales, etc.). 
 
 In Keboola, all transformations operate on a copy of the data from Storage
@@ -22,7 +22,7 @@ The mapping process copies input data from permanent project Storage into a
 [**staging**](/transformations/mappings/#table-input-mapping) area, which represents ephemeral storage to run the transformation **script**. The transformation script is executed by a transformation
 [**backend**](/transformations/#backends). To ease the [development](/transformations/#developing-transformations) 
 of the transformation script, all transformations are **automatically versioned**, and you can use a **workspace**
-which provides a copy of the environment and can be run interactively.
+that provides a copy of the environment and can be run interactively.
 
 ## Overview
 The schema below shows a high-level overview of transformations:
@@ -30,8 +30,8 @@ The schema below shows a high-level overview of transformations:
 {: .image-popup}
 ![Transformations schema](/transformations/transformations-schema.svg)
 
-A transformation is represented by a **Transformation Script** (SQL, Julia, OpenRefine, Python, R) which you
-can use to manipulate your data. To ensure safety of the data in Storage, a transformation
+A transformation is represented by a **Transformation Script** (SQL, Julia, OpenRefine, Python, R), which you
+can use to manipulate your data. To ensure the safety of the data in Storage, a transformation
 operates in a completely separate **staging storage** created for each transformation. When a
 transformation [job](/management/jobs/) runs, it takes the required data from the project [Storage](/storage/tables/) 
 and copies them to a temporary staging storage. This process is called [**input mapping**](/transformations/mappings/). 
@@ -44,27 +44,27 @@ the transformation processes -- the transformation always operates in an isolate
 [**Input and output mapping**](/transformations/mappings/) --- separates the source data from your transformation. 
 Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the 
 input mappings. Database table names and CSV file names in transformations are completely unrelated to names of tables 
-in Storage. This means, for example, that you can rename tables in storage and it won't break any of your transformations.
+in Storage. This means, for example, that you can rename tables in Storage without breaking any of your transformations.
 
 {: .image-popup}
 ![Simple input and output mapping](/transformations/mappings.png)
 
 There are a number of staging options that influence the transformation script code, too. 
-Typically, you will create an SQL transformation that works with data in a Snowflake database, or a Python script 
-that works with CSV files on a "local" disk (local from the perspective of the script). But it is possible to have 
-a Python script that works with data in a Synapse database or with data on an Azure Blob Storage (ABS).
+Typically, you will create an SQL transformation that works with data in a Snowflake database or a Python script 
+that works with CSV files on a "local" disk (local from the perspective of the script). However, it is possible to have 
+a Python script that works with data in a Synapse database or with data on Azure Blob Storage (ABS).
 The transformations are very flexible, though all the combinations might not be available in all projects at all times.
 
 ## Backends
-The  **Transformation Script** is a code that defines what happens with the data while taking the
-tables from input mapping, modifying them and producing the tables referenced in output mapping.
+The  **Transformation Script** is code that defines what happens with the data when the
+tables from the input mapping are taken, modified, and produced into the tables referenced in the output mapping.
 
 A backend is the engine running the transformation script. It is either a database server
 ([Amazon Redshift](https://aws.amazon.com/redshift/),
 [Snowflake](https://www.snowflake.com/),
 [Exasol](https://www.exasol.com/),
 [Teradata](https://www.teradata.com/),
-[Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
+[Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack) 
 or a language interpreter 
 ([Julia](https://julialang.org/), 
 [OpenRefine](https://openrefine.org/),
@@ -72,9 +72,9 @@ or a language interpreter
 [R](https://www.r-project.org/about.html), 
 [Spark](https://spark.apache.org/)).
 
-How to decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better
-for joining tables, filtering data, grouping and simple aggregations. Script languages are more suitable
-for processing one line at a time, raw data processing or custom analytical tasks. You're free to use 
+How do you decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better
+for joining tables, filtering data, grouping, and simple aggregations. Script languages are more suitable
+for processing one line at a time, raw data processing, or custom analytical tasks. You're free to use 
 the tools that suit you best.
 
 Each transformation within can use a different backend to perform the task
@@ -87,10 +87,10 @@ The following are the currently available backends:
 you can apply for your own [Redshift](/transformations/redshift/) cluster. You can also use 
 [Microsoft Synapse](/transformations/synapse-plain/) if it is enabled for your project.
 - **Script** --- [Julia](/transformations/julia/), [OpenRefine](/transformations/openrefine/), 
-[Python](/transformations/python-plain/) or [R](/transformations/r/).
+[Python](/transformations/python-plain/), or [R](/transformations/r/).
 Choose according to your taste and available libraries.
 
-*Note:* Switching between SQL backends requires updating the code into the corresponding SQL dialect.
+***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
 
 ## Developing Transformations
 Transformation scripts are stored in [configurations](/components/#creating-component-configuration) and as such 
