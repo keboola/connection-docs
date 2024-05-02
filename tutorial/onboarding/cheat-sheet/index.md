@@ -139,6 +139,10 @@ secure. For more on development branches, see this [guide](https://help.keboola.
 In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, 
 enhancing overall efficiency. Each subsequent phase starts only after the previous one completes all its tasks.
 
+**Important Note for Multi-Tenant Environment Users:**
+
+Please be aware of the interaction between Storage and component jobs mentioned [here](https://help.keboola.com/tutorial/onboarding/cheat-sheet/#optimize-with-parallelization). If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your Flow’s execution. It is recommended to limit the number of concurrent component jobs to 10 to avoid reaching storage capacity limits. You can of course configure your Flows to execute more jobs in parallel. Keboola will then execute the jobs to the maximum extent possible concurrently, based on available resources.
+
 ### Continue Despite Failures
 Tasks have a **Continue on Failure** option, which is off by default. Turning it on allows the flow to continue even if a task fails, useful for non-critical 
 tasks or those expected to succeed later. Keep an eye on task statuses to quickly fix any issues.
