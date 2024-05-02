@@ -65,7 +65,7 @@ Select `Role` as the **Login Type**. Create a role in your AWS account using the
 
  - Go to the [IAM Console](https://console.aws.amazon.com/iam/home?#/roles) and click **Create role**. Then click **Another AWS account**.
  - For **Account ID**
-   - use `147946154733` for stacks `connection.keboola.com`, `connection.eu-central-1.keboola.com`, `https://connection.north-europe.azure.keboola.com/`.
+   - use `147946154733` for stacks `connection.keboola.com`, `connection.eu-central-1.keboola.com`, `connection.north-europe.azure.keboola.com`.
    - use `206948715642` for all other stacks.
  - For **External ID**, enter the value from your project.
  - **Do not enable the setting to Require MFA (multi-factor authentication)**.
