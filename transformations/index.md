@@ -66,7 +66,8 @@ A backend is the engine running the transformation script. It is a database serv
 [Snowflake](https://www.snowflake.com/),
 [Exasol](https://www.exasol.com/),
 [Teradata](https://www.teradata.com/),
-[Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack) 
+[Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
+[BigQuery](https://cloud.google.com/bigquery), 
 or a language interpreter 
 ([Julia](https://julialang.org/), 
 [OpenRefine](https://openrefine.org/),
@@ -87,7 +88,7 @@ The following are the currently available backends:
 
 - **SQL** --- [Snowflake](/transformations/snowflake-plain/) is offered as the default backend, but 
 you can apply for your own [Redshift](/transformations/redshift/) cluster. You can also use 
-[Microsoft Synapse](/transformations/synapse-plain/) if it is enabled for your project.
+[Microsoft Synapse](/transformations/synapse-plain/), or [Google BigQuery](/transformations/bigquery/) if it is enabled for your project.
 - **Script** --- [Julia](/transformations/julia/), [OpenRefine](/transformations/openrefine/), 
 [Python](/transformations/python-plain/), or [R](/transformations/r/).
 Choose according to your taste and available libraries.
