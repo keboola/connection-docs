@@ -69,3 +69,7 @@ that neither [the maintainer](/management/organization/), nor Keboola Support ca
 In other words, when Auto Join is turned off for an organization, only the organization users and project users may
 access its projects. Every new user of the organization must be explicitly invited. Every new user of any of its projects
 must either be explicitly invited or be a user of the organization.
+
+## Logged Out of Keboola?
+If you happen to be logged out of Keboola and need to contact Keboola Support, please email [support@keboola.com](https://help.keboola.com/support@keboola.com) 
+or use the **support form** available at the [Keboola Support Portal](https://keboola.atlassian.net/servicedesk/customer/portal/9).

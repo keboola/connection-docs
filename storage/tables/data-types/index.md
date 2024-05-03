@@ -1122,3 +1122,47 @@ CREATE TABLE "ctas_table" (
   - Keboola does not perform any type conversion during loading. Your data must exactly match the column type in the table in Storage.
   - Any load of data with incompatible types will fail.
   - The filtering option in the input mapping section is unavailable for tables with defined data types. If filtering is crucial for your workflow, consider using SQL, Python, or even no-code transformations to filter the data and create a new filtered table.
+
+
+### How to Create a Typed Table Based on a Non-Typed Table
+
+For example, we have a non-typed table `non_typed_table` with the following definition:
+
+{: .image-popup}
+![Non-typed table schema](/storage/tables/data-types/non-typed-table-schema.png)
+
+And with the following data:
+
+{: .image-popup}
+![Sample data](/storage/tables/data-types/sample-data.png)
+
+To create a typed table based on `non_typed_table`, create a new transformation, choose table input mapping `non_typed_table` (or you can rely on [read-only input mapping](https://help.keboola.com/transformations/#read-only-input-mapping)) and choose table output mapping `typed_table`. The output table must not exist; otherwise, it will not be a typed table.
+
+{: .image-popup}
+![Create transformation](/storage/tables/data-types/create-transformation.png)
+
+In a queries section, add an SQL query transforming column types. In this step, you should provide proper casting for your data. In the following example, you can see the custom formatting of the date.
+
+```sql
+CREATE TABLE "typed_table" AS
+    SELECT 
+        CAST(ntt."id" AS VARCHAR(64)) AS "id",
+        CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
+        TO_TIMESTAMP(ntt."date", 'DD.MM.YYYY"T"HH24:MI:SS') AS "date",
+        CAST(ntt."amount" AS INTEGER) AS "amount"
+    FROM "non_typed_table" AS ntt;
+```
+
+Run the transformation and wait until it finishes.
+
+The newly created table `typed_table` schema should look like this:
+
+{: .image-popup}
+![Typed table schema](/storage/tables/data-types/typed-table-schema.png)
+
+You can see the `NATIVE TYPES` label after the table name, which means that the table is typed. Table columns should have the same data types as in the transformation query.
+
+If the destination table already exists, and you want to keep the same name, you must first rename the original table (e.g., `non_typed_table_bkp`). Then, create a new table using the transformation described above.
+
+Note that [incremental loading](https://help.keboola.com/storage/tables/#incremental-loading) cannot be used in this case.
+

@@ -120,6 +120,50 @@ CREATE TABLE "opportunity_denorm" AS
         JOIN "tmp_level" ON "user"."Name" = "tmp_level"."Name";
 {% endhighlight %}
 
+For BigQuery, the query will look like this:
+
+{% highlight sql %}
+WITH tmp_level AS (
+    SELECT 
+        Name, 
+        CASE
+            WHEN Levelz = 'S' THEN 'Senior'
+            WHEN Levelz = 'M' THEN 'Intermediate'
+            WHEN Levelz = 'J' THEN 'Junior' 
+        END AS Level
+    FROM 
+        in_c_csv_import.levelx
+),
+tmp_opportunity AS (
+    SELECT 
+        * EXCEPT (_timestamp), 
+        CASE
+            WHEN CAST(Probability as INT64) < 50 THEN 'Poor'
+            WHEN CAST(Probability as INT64) < 70 THEN 'Good'
+            ELSE 'Excellent' 
+        END AS ProbabilityClass
+    FROM 
+        in_c_csv_import.opportunity
+)
+SELECT 
+    tmp_opportunity.*,
+    user.Name AS UserName, 
+    user.Sales_Market AS UserSalesMarket,
+    user.Global_Market AS UserGlobalMarket,
+    account.Name AS AccountName, 
+    account.Region AS AccountRegion,
+    account.Status AS AccountStatus, 
+    account.FirstOrder AS AccountFirstOrder 
+FROM 
+    tmp_opportunity
+JOIN 
+    in_c_csv_import.`user` ON tmp_opportunity.OwnerId = user.Id
+JOIN 
+    in_c_csv_import.account ON tmp_opportunity.AccountId = account.Id 
+JOIN 
+    tmp_level ON user.Name = tmp_level.Name;
+{% endhighlight %}
+
 Click the **New Code** button. Begin by entering a query name – input *Opportunity denorm*. Next, paste the queries into the editor, and then click **Save**.
 
 {: .image-popup}
