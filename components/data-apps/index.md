@@ -23,6 +23,12 @@ and also publicly accessed from outside the project.
 It means that the users that will access your data app don't need access to a Keboola project.
 
 ## Create a Data App
+
+First of all, enter a custom prefix for your data app, which you will later share with your app users.
+
+{: .image-popup}
+![Code - main menu](/components/data-apps/data_apps-custom-data-app-url.png)
+
 There are two ways to create a data app in Keboola. Select a deployment type that will suit your needs:
 - **Code** – Just paste a Streamlit code to create a simple data app. 
 - **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications. You will need to provide your GitHub username and private access token for repository authentication.
@@ -34,6 +40,8 @@ There are two ways to create a data app in Keboola. Select a deployment type tha
 For simple use cases, where your Streamlit code fits into one page, paste the code directly into a text area. 
 This deployment type is ideal for very simple apps or for testing. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/45663441) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-development-type-code.png)
 {: .image-popup}
 ![Code - code](/components/data-apps/data_apps-hello_world-code.png)
 
@@ -50,6 +58,8 @@ To provide feedback, use the feedback button in your project.
 If you have a complex application, push your app sources into GitHub and link the repository in this section.
 Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-development-type-github.png)
 {: .image-popup}
 ![Git repository](/components/data-apps/data_apps-git_repository_public.png)
 
@@ -104,22 +114,52 @@ See the [examples](#Examples) below for usage of the Keboola Storage Python Clie
 ### Authorization
 We recommend to use authorization methods provided by Keboola.
 
-1. **Simple Authorization**: This method allows you to authenticate one user using a username and password. 
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication.png)
 
-2. **SSO (Single Sign-On) Authorization**: This method enables users to log in to your app using your SSO without the need of having their own existing Keboola accounts. 
+1. **Simple Authorization**: This method allows you to authenticate one user using a username and password.
 
-Alternatively, you can use Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication-basic.png)
+
+2. **OIDC (OpenID Connect) Authorization**: This method enables users to log in to your app using your SSO providers without the need of having their own existing Keboola accounts. 
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication-oidc.png)
+
+If you enter an app with OIDC, you'll be asked to select an `Authentication Provider` and sign in.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-select-oidc-provider.png)
+
+3. **None**: Alternatively, you can implement your own authorization method within your streamlit data app, for example, you can use Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication-none.png)
 
 Choose the authorization method that best suits your app's requirements and security needs.
 
-#### Simple Authorization
-TBD
-
-#### SSO (Single Sign-On) Authorization
-TBD
-
 ## Sleep and resume
-TBD
+Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after an hour of inactivity. Here's how it works:
+
+**Activity Monitoring**: The app monitors for HTTP requests. If no activity is detected for 1 hour, the app automatically suspends.
+
+**Automatic Resumption**: As soon as a new request is made to the app, it wakes up and resumes operation. This resume process is designed to be smooth, although the first request upon waking may take slightly longer to complete.
+
+**Cost Efficiency**: For example, if your app is active for 2 hours and then experiences no further activity, it will go to sleep after an additional hour. This means you'll only be billed for the 3 hours when the app was active and waiting to suspend.
+
+This feature is not only efficient but also smart—ensuring you pay only for what you use while keeping the app ready for when you need it next.
+
+If you enter the URL of an app that is sleeping, it will trigger its wakeup, and you'll see a `waking up page`.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-proxy-wakeup.png)
+
+If anything unexpected happens, you'll see a `wakeup error page`, and you can click on `Show More` to see the error details.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-proxy-wakeup.png)
+
 
 ### Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
