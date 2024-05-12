@@ -12,10 +12,12 @@ redirect_from:
 The Telemetry Data connector allows you to retrieve data about your project or your entire [organization](/management/organization/). 
 It helps you monitor activities and usage in your Keboola projects. It also aids Keboola in calculating your project's consumption.
 
+If you don't need to work directly with the data or you would like to see the data in graphical form in Keboola, you can check the [Telemetry Dashboards](/management/telemetry/telemetry-dashboards).
+
 ## Configuration
 To configure the data source connector, select one of the following modes:
  
-1. [**Project mode**](#project-mode-tables): Extracts data only from a selected Keboola project.
+1. [**Project mode**](#project-mode-tables): Extracts data only from a selected Keboola project. 
 2. [**Organization mode**](#organization-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
 3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contract and also must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
 
