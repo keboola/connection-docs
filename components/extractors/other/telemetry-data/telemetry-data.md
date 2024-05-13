@@ -12,7 +12,7 @@ redirect_from:
 The Telemetry Data connector allows you to retrieve data about your project or your entire [organization](/management/organization/). 
 It helps you monitor activities and usage in your Keboola projects. It also aids Keboola in calculating your project's consumption.
 
-If you don't need to work directly with the data or you would like to see the data in graphical form in Keboola, you can check the [Telemetry Dashboards](/management/telemetry/telemetry-dashboards).
+If you don't need to work directly with the data or would like to see it in graphical form in Keboola, you can check the [Telemetry Dashboards](/management/telemetry/telemetry-dashboards).
 
 ## Configuration
 To configure the data source connector, select one of the following modes:
@@ -28,7 +28,7 @@ Keep in mind that the tables *contact_limit_monthly*, *kbc_organization*, and *u
 {: .image-popup}
 ![Screenshot - Telemetry data model](/components/extractors/other/telemetry-data/telemetry-data-model.png)
 
-*Note: You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
+***Note:** You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
 
 ## Project Mode Tables
 The extracted tables provide you with information about your buckets, configurations, branches, jobs, sandboxes, projects, users, and security events.
