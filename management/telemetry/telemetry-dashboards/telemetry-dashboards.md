@@ -71,32 +71,34 @@ it will be visible to people with access to the target project.
 {: .image-popup}
 ![Screenshot - Activity Centre in KBC](/management/telemetry/telemetry-dashboards/activity-centre-kbc.png)
 
-Once this is clicked, the *Activity Center* opens. It consists of five tabs, each focused on a different part of consumption monitoring. These tabs are available by default for all projects in the organization 
-but can be filtered for specific ones. It also allows filtering for dates. This is the default setup for the last three months (it takes two months back and the current, any day in May it takes data from 1st 
-March until today), except *Jobs Monitoring*, which provides detailed information on individual jobs, so it is only showing yesterday's data by default. All of these filters can be changed. Some visuals provide 
-a drill to see what the one-level lower detail is. It is visible when hovering over in the case of graphical representation, and in the case of one number, the drill is available when it is understriked. Each 
-visual has a question mark in the top right corner when hovering over it. When this question mark is clicked on, it will describe the visual (e.g., which filters apply to this and the logic behind the 
-calculation).
+Once you select this option, the *Activity Center* opens. It consists of five tabs, each focused on a different part of consumption monitoring. These tabs are available by default for all projects in the 
+organization but can be filtered for specific ones. It also allows filtering for dates. This is the default setup for the last three months (it takes two months back and the current, any day in May it takes data 
+from 1st March until today), except *Jobs Monitoring*, which provides detailed information on individual jobs, so it is only showing yesterday's data by default. 
+
+All of these filters can be changed. Some visuals provide a drill to see what the one-level lower detail is. It is visible when hovering over in the case of graphical representation, and in the case of one 
+number, the drill is available when it is understriked. Each visual has a question mark in the top right corner when hovering over it. When you click this question mark, it will describe the visual (e.g., which 
+filters apply to this and the logic behind the calculation).
 
 {: .image-popup}
 ![Screenshot - Activity Centre Visual Description](/management/telemetry/telemetry-dashboards/ac-info-button.png)
 
-
 ### Organization Usage Activity Center
-This tab provides highlevel overview on the consumption within the whole organization and in relation to contract. 
-In details it focus on five different section - KPIs, Active Contract Consumption, Consumption, Projects and Configuration Health. 
+This tab provides a high-level overview of the consumption within the entire organization and in relation to contracts.
+It focuses on five different sections: *KPIs*, *Active Contract Consumption*, *Consumption*, *Projects*, and *Configuration Health*. 
 
 #### KPIs
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-kpis.png)
 
-KPIs shows four of the numbers that are agreed in contract with relation to the limits. For PPU the usage and limit are shown for the period selected in Date range filter, for the others for Projects, Users, Storage TB this value is for current month and the limits are as defined in contract. 
+*KPIs* show four of the numbers agreed in the contract in relation to the limits. For PPU, the usage and limit are shown for the period selected in the Date range filter. For the others (Projects, Users, and 
+Storage TB), this value is for the current month, and the limits are as defined in the contract. 
 
 #### Active Contract Consumption
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
 
-Shows three different views on PPU consumption in relation to contractually agreed values.  PPU shows the actual usage per month. PPU Predicted line shows the value predicted based on the average consumption in the last 3 months. PPU limit line shows the consumption agreed in the contract, allocates the same value of credits into each month of contract tenure.
+This option shows three different views on PPU consumption in relation to contractually agreed values. PPU shows the actual consumption per month. The PPU Predicted line shows the value predicted based 
+on the average consumption in the last three months. The PPU limit line shows the consumption agreed in the contract, allocating the same value of credits to each month of contract tenure.
 
 #### Consumption
 {: .image-popup}
