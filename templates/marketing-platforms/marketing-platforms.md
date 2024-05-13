@@ -160,7 +160,7 @@ Authorize your LinkedIn account and then fill in the start and end dates followi
 Authorize your Google account and select the period for extracting the data.
 
 ## Authorizing Data Destinations
-To create a working flow, you must select at least one data destination.
+When creating a working flow you have an option to select one or more data destinations.
 
 ### BigQuery Database
 
@@ -201,10 +201,10 @@ More info [here](https://help.keboola.com/components/writers/database/postgresql
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
 1. Configure the Snowflake destination and click on **Save Configuration**
-1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
-3. Select **Keboola Snowflake database**. 
-4. Then go back to the flow and click **Run**. 
+2. After clicking **Save**, the template will be used in your project. You will see a flow. 
+3. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
+4. Select **Keboola Snowflake database**. 
+5. Then go back to the flow and click **Run**. 
 
 {: .image-popup}
 ![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions1.png)
