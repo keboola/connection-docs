@@ -90,21 +90,22 @@ It focuses on five different sections: *KPIs*, *Active Contract Consumption*, *C
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-kpis.png)
 
-*KPIs* show four of the numbers agreed in the contract in relation to the limits. For PPU, the usage and limit are shown for the period selected in the Date range filter. For the others (Projects, Users, and 
+*KPIs* show four numbers agreed in the contract relative to the limits. For PPU, the usage and limit are shown for the period selected in the Date range filter. For the others (Projects, Users, and 
 Storage TB), this value is for the current month, and the limits are as defined in the contract. 
 
 #### Active Contract Consumption
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
 
-This option shows three different views on PPU consumption in relation to contractually agreed values. PPU shows the actual consumption per month. The PPU Predicted line shows the value predicted based 
-on the average consumption in the last three months. The PPU limit line shows the consumption agreed in the contract, allocating the same value of credits to each month of contract tenure.
+This option shows three views on PPU consumption relative to contractually agreed values. PPU shows the actual consumption per month. The PPU Predicted line shows the value predicted based 
+on the average consumption in the last three months. The PPU limit line shows the consumption agreed in the contract, allocating the exact value of credits to each month of contract tenure.
 
 #### Consumption
 {: .image-popup}
 ![Screenshot - Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-consumption.png)
 
-Consumption shows three visual where first two have drill available once hover over and click on the desired point. PPU Daily shows daily consumption broken down into groups based on usage breakdown. PPU Daily per Project shows the consumption split between projects. The last visual shows the limits and actual values per month.  
+*Consumption* shows three visuals. The first two have drills available once you hover over and click on the desired point. PPU Daily shows daily consumption broken down into groups based on usage breakdown. PPU 
+Daily per Project shows the consumption split between projects. The last visual shows the limits and actual values per month.  
 
 #### Projects
 {: .image-popup}
@@ -113,28 +114,33 @@ Consumption shows three visual where first two have drill available once hover o
 {: .image-popup}
 ![Screenshot - Projects_2](/management/telemetry/telemetry-dashboards/ac-org-usage-projects2.png)
 
-Projects shows 5 most demanding components, configurations and projects. All of these four visuals provide the drill that breaks down the consumption into weeks and provides url so this can be access directly. Five most expensive projects also shows the usage breakdown - what consume the credits. Most demanding transformation shows the SQL and non-SQL transformations consuming the most of the credits. Last visual then show the most expensive components. 
+*Projects* shows the five most demanding components, configurations, and projects. These four visuals provide the drill that breaks down the consumption into weeks and provides a URL so this can be accessed 
+directly. The five most expensive projects also show the usage breakdown—what consumes the credits. The most demanding transformation shows the SQL and non-SQL transformations that consume the most of the 
+credits. The last visual then shows the most expensive components. 
 
 #### Configuration Health
 {: .image-popup}
 ![Screenshot - Configuration Health](/management/telemetry/telemetry-dashboards/ac-org-usage-config-health.png)
 
-Configuration Health shows the flows and jobs health over time. Whe hover over it is possible to see more detailed data (precise number of flows/jobs at a certain day that ended with success/error/warning).
+*Configuration Health* shows the health of flows and jobs over time. By hovering over it, you can see more detailed data (the precise number of flows/jobs on a certain day that ended with success/error/warning).
 
 ### Project Overview
-This tab provides visuals focused on the PPU consumption and shows the most expensive projects, transformations, configurations and components. It also shows the configurations, projects and users whose consumption increased significantly. It can be filtered for the branch (development vs. main).
+This tab provides visuals focused on PPU consumption and shows the most expensive projects, transformations, configurations, and components. It also shows the configurations, projects, and users whose consumption has increased significantly. It can be filtered for the branch (development vs. main).
 
 #### PPU and usage
 {: .image-popup}
 ![Screenshot - PPU and Usage](/management/telemetry/telemetry-dashboards/ac-project-overview-ppu.png)
 
-These four visuals show the PPU consumption from different angles. First one focus on PPU usage per configuration with differentiation between SQL, KBC and CDC credits. PPU Daily is showing the breakdown of PPU between component type over time selected. Treemap of configuration usage provides overview based on how many jobs were executed for component. In the drill it can also be found the particular configuration, project and also how many credits were consumed. Last visual it is addition to the treemap as it shows credit consumption per component and it split between SQL, KBC and CDC credits. 
+These four visuals show the PPU consumption from different angles. The first focuses on PPU usage per configuration, differentiating between SQL, KBC, and CDC credits. PPU Daily shows the breakdown of PPU 
+between component types over time selected. A configuration usage treemap provides an overview of how many jobs were executed for the components. In the drill, the particular configuration, project, and how many 
+credits were consumed can also be found. The last visual is in addition to the treemap, as it shows credit consumption per component and is split between SQL, KBC, and CDC credits. 
 
 #### Top 10 
 {: .image-popup}
 ![Screenshot - Top 10](/management/telemetry/telemetry-dashboards/ac-project-overview-top10.png)
 
-First of two tables focuses on Top 10 transformation based on their consumption and providing more details on the runtime and input and output mapping (e.g. whether there are any filters applied or if the output is incremental or full load). Top 10 Component Configurations shows the most expensive Configuration with information on how long these ran. 
+The first of two tables focuses on the top ten transformations based on their consumption. It provides more details on the runtime and input and output mapping (e.g., whether any filters are applied or 
+the output is incremental or full load). The top 10 Component Configurations show the most expensive configurations and provide information on how long they ran. 
 
 #### Significant changes (outliers)
 {: .image-popup}
