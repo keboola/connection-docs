@@ -71,7 +71,7 @@ The following data destinations will be coming soon:
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
-First decide which Data Source and which Data Destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**. 
+Select the template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**. 
 
 {: .image-popup}
 ![Add New Use Case](/templates/ecommerce/ecommerce-add-new-template.png)
