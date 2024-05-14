@@ -146,11 +146,11 @@ the output is incremental or full load). The top 10 Component Configurations sho
 {: .image-popup}
 ![Screenshot - Top 10](/management/telemetry/telemetry-dashboards/ac-project-overview-outliers.png)
 
-Last part of the Significant changes shows the outliers for Projects, Configurations and Users. All the table shows averarage PPU consumption in the last 30 days and only shows projects, configurations or user that consumed on given days 50% more or 50% less than the average and also it bills more than 1 credit. The percentage is shown in the last column. 
+The last part of the significant changes shows the outliers for Projects, Configurations, and Users. All the tables show average PPU consumption in the previous 30 days and only show projects, configurations, or 
+users that consumed 50% more or 50% less on given days. It also bills more than one credit. The percentage is shown in the last column. 
 
 ### Project Users
-This tab provides overview of users within the projects. It allowes to be filtered also based on branch type and specific user. 
-It shows the user roles, activities and who joined the projects in last 7 days. 
+This tab provides an overview of users within the projects and allows them to be filtered by branch type and specific user. It shows the user roles, activities, and who joined the projects in the last seven days. 
 
 #### Overview
 {: .image-popup}
@@ -163,8 +163,8 @@ This part summarizes the users in the project.
 ![Screenshot - Activities](/management/telemetry/telemetry-dashboards/ac-project-users-activities.png)
 
 ### Project Health
-This tab is focused on overall health in the projects. It can be filtered for the branch (development vs. main).
-In the overview part it focus on the flows and jobs, next part focus on components trends and the last shows four individual metrics - configuration without description, flows without error notifications, unused configurations and unused tables.
+This tab shows the overall health of the projects. It can be filtered for the branch (development vs. main). The overview section focuses on the flows and jobs. The next section focuses on component trends, 
+and the last section shows four individual metrics: configuration without description, flows without error notifications, unused configurations, and unused tables.
 
 #### Overview
 {: .image-popup}
@@ -182,5 +182,6 @@ In the overview part it focus on the flows and jobs, next part focus on componen
 {: .image-popup}
 ![Screenshot - Jobs Monitoring](/management/telemetry/telemetry-dashboards/ac-jobs-monitoring.png)
 
-This tab provides the lowest detailed. It allows to filter based on many different fields (additional to those mentioned already - Project ID, Component, Component Type, Component Configuration, Configuration ID, Job Run Type, Job Status, Token Name and Flow) and by default it is filtered for only yesterday's jobs, with status as error, warning and success and only for the jobs that are run automatically (Job Run Type = orchestration). 
-It shows all these details together in a table. 
+This tab provides the lowest detail. It allows filtering based on many fields (in addition to those mentioned already: Project ID, Component, Component Type, Component Configuration, Configuration ID, 
+Job Run Type, Job Status, Token Name, and Flow). By default, it is filtered for only yesterday's jobs, with status as error, warning, and success, and only for the jobs that are run automatically (Job Run Type = 
+a flow). It shows all these details together in a table. 
