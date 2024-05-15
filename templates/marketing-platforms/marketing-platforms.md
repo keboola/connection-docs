@@ -31,7 +31,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 
 | Name | Description |
 |---|---|
-| ONLINE MARKETING | contains data about impressions, clicks, costs per clicks, and costs per conversions |
+| ONLINE MARKETING | contains daily data about campaigns and theirs impressions, clicks, costs per clicks, and costs per conversions |
 
 ## Data Sources
 
