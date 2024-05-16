@@ -45,7 +45,7 @@ based on
 
 - elapsed time of the job (in seconds), 
 - types of jobs (workspace, SQL, Python, and R transformations), and 
-- backend performance: Xsmall, Small, Medium, Large.
+- backend performance: XSmall, Small, Medium, Large.
 
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
