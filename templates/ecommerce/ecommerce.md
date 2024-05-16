@@ -86,7 +86,7 @@ Now enter a name for the template instance that you are about to create. This al
 {: .image-popup}
 ![Shopify to Keboola DWH - Template Name](/templates/ecommerce/ecommerce-template-name.png)
 
-After clicking **Set Up Template**, you will see the template builder. Select exactly one on three eCommerce data sources. Fill in all needed credentials and perform the required OAuth authorizations. 
+After clicking **Set Up Template**, you will see the template builder. Select exactly one of three eCommerce data sources. Fill in all needed credentials and perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user authorization problems. 
 If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/ecommerce/#authorizing-data-destinations) below.
