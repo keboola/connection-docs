@@ -84,11 +84,13 @@ Note: By adding the Keboola service account as a subscriber, you enable read-onl
 Once you are done, click **Register Bucket** to start using it.
 
 #### BigLake tables
-Keboola does not support External tables in general but only [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). Please ensure the table you are using is of this type. External tables of other types do not work in transformations and workspaces due permissions issue.
+Keboola generaly does not support external tables, except for [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). Please ensure the table you are using is of this type. 
+External tables of other types do not work in transformations and workspaces due to permission issues.
 
-Please make sure, that you can perform `SELECT * FROM <table> LIMIT 1` query on your created BigLake table. Keboola checks this during the registration process. If the `SELECT` fails, table is skipped. 
+Please ensure that you can perform a `SELECT * FROM <table> LIMIT 1` query on your created BigLake table. Keboola checks this during the registration process. If the `SELECT` fails, the table is skipped. 
 
-The only exceptions are tables with `require_hive_partition_filter=true`. Such configuration on BigLake tables is supported by Keboola, but `SELECT` operations (like Data preview) will fail. This is expected behavior. You can still use these tables in your Workspaces and Transformations, but with appropriate `WHERE` conditions.
+The only exceptions are tables configured with `require_hive_partition_filter=true`. Such configurations on BigLake tables are supported by Keboola, but `SELECT` operations (like Data Preview) will fail. 
+This is expected behavior. You can still use these tables in your workspaces and transformations, but appropriate `WHERE` conditions are necessary.
 
 ### Considerations
 
