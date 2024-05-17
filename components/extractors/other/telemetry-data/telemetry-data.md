@@ -9,6 +9,9 @@ redirect_from:
 * TOC
 {:toc}
 
+***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to “Connection” or the 
+abbreviation “KBC” might still appear in table names, column names, etc.*
+
 The Telemetry Data connector allows you to retrieve data about your project or your entire [organization](/management/organization/). 
 It helps you monitor activities and usage in your Keboola projects. It also aids Keboola in calculating your project's consumption.
 
