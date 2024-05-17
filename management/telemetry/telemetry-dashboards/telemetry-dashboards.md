@@ -60,27 +60,28 @@ contract's tenure.
 direct access to the underlying data. For the five most expensive projects, there is also a usage breakdown, which shows what has consumed the credits. Next listed are the most demanding SQL and non-SQL 
 transformations, which have consumed most of the credits. The last visual is for the most expensive components. 
 
-### Configuration Health
+### Configurations Health
 {: .image-popup}
 ![Screenshot - Configuration Health](/management/telemetry/telemetry-dashboards/ou-config-health.png)
 
-*Configuration Health* shows the health of flows and jobs over time. By hovering over it, you can see more detailed data (the precise number of flows/jobs on a certain day that ended with success/error/warning).
+*Configurations Health* gives the health of flows and jobs over time. By hovering over a day, you can see more detailed data (the numbers of flows or jobs on that day that ended with success, error, 
+or warning).
 
 ## Activity Center
-*Activity Center* provides the most detailed insight into telemetry data from the three modes available. It is not available by default but has to be requested. The customer needs to contact their account 
-manager and share with them which project they want Activity Center in (i.e., target project, which can be only one project). Once the Activity Center is enabled for the customer under the profile picture below, 
-it will be visible to people with access to the target project.
+*Activity Center* provides the most detailed insight into telemetry data from the three modes available. It is not available by default but has to be requested. You need to tell your account 
+manager which project you want to be the target project in your Activity Center. You can have only one target project. Once the Activity Center has been enabled, it will be visible to everyone with access
+to the target project.
 
 {: .image-popup}
 ![Screenshot - Activity Centre in KBC](/management/telemetry/telemetry-dashboards/activity-centre-kbc.png)
 
-Once you select this option, the *Activity Center* opens. It consists of five tabs, each focused on a different part of consumption monitoring. These tabs are available by default for all projects in the 
-organization but can be filtered for specific ones. It also allows filtering for dates. This is the default setup for the last three months (it takes two months back and the current, any day in May it takes data 
-from 1st March until today), except *Jobs Monitoring*, which provides detailed information on individual jobs, so it is only showing yesterday's data by default. 
+The *Activity Center* has five tabs, each focused on a different aspect of consumption monitoring. These tabs are available by default for all projects in the organization but can be filtered for specific 
+ones. You can allows filter by date. The default setup is for the current month and the two previous months. For example, if you access the *Activity Center* during May, you will get data from 1st March until 
+today. However, *Jobs Monitoring* provides detailed information on individual jobs, so it shows only yesterday's data by default. 
 
-All of these filters can be changed. Some visuals provide a drill to see what the one-level lower detail is. It is visible when hovering over in the case of graphical representation, and in the case of one 
-number, the drill is available when it is understriked. Each visual has a question mark in the top right corner when hovering over it. When you click this question mark, it will describe the visual (e.g., which 
-filters apply to this and the logic behind the calculation).
+All these filters can be changed. For some visuals, you can drill down to see a lower level of detail. For a  graphical representation, the drill-down can be accessed by hovering over a point. The drill-down 
+is available for a number if it has an underline. When you hover ove a visual, a question mark appears in the top right corner. If you click on the question mark, you will get a description of the visual 
+(e.g., which filters are applicable and the logic behind the calculation).
 
 {: .image-popup}
 ![Screenshot - Activity Centre Visual Description](/management/telemetry/telemetry-dashboards/ac-info-button.png)
@@ -93,22 +94,23 @@ It focuses on five different sections: *KPIs*, *Active Contract Consumption*, *C
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-kpis.png)
 
-*KPIs* show four numbers agreed in the contract relative to the limits. For PPU, the usage and limit are shown for the period selected in the Date range filter. For the others (Projects, Users, and 
-Storage TB), this value is for the current month, and the limits are as defined in the contract. 
+*KPIs* show four of the metrics specified in the contract in comparison to the limits. For *PPU*, the usage and limit are shown for the period selected in the date range filter. For the others (*Projects*, 
+*Users*, and *Storage TB*), the values are for the current month only, and the limits are as defined in the contract. 
 
 #### Active Contract Consumption
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
 
-This option shows three views on PPU consumption relative to contractually agreed values. PPU shows the actual consumption per month. The PPU Predicted line shows the value predicted based 
-on the average consumption in the last three months. The PPU limit line shows the consumption agreed in the contract, allocating the exact value of credits to each month of contract tenure.
+This option shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction based on
+the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same number of credits to each month of 
+the contract's tenure.
 
 #### Consumption
 {: .image-popup}
 ![Screenshot - Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-consumption.png)
 
-*Consumption* shows three visuals. The first two have drills available once you hover over and click on the desired point. PPU Daily shows daily consumption broken down into groups based on usage breakdown. PPU 
-Daily per Project shows the consumption split between projects. The last visual shows the limits and actual values per month.  
+*Consumption* shows three visuals. For the first two, you can drill down by hovering over a point and clicking on it. *PPU Daily* shows daily consumption broken down into groups based on a usage breakdown. 
+*PPU Daily per Project* shows the consumption split between projects. The last visual shows the limits and actual values per month.  
 
 #### Projects
 {: .image-popup}
@@ -117,57 +119,59 @@ Daily per Project shows the consumption split between projects. The last visual 
 {: .image-popup}
 ![Screenshot - Projects_2](/management/telemetry/telemetry-dashboards/ac-org-usage-projects2.png)
 
-*Projects* shows the five most demanding components, configurations, and projects. These four visuals provide the drill that breaks down the consumption into weeks and provides a URL so this can be accessed 
-directly. The five most expensive projects also show the usage breakdown—what consumes the credits. The most demanding transformation shows the SQL and non-SQL transformations that consume the most of the 
-credits. The last visual then shows the most expensive components. 
+*Projects* show the five most demanding components, configurations, and projects. For these four visuals, you can drill down to see a breakdown of consumption by week. There is also a URL that gives direct 
+access to the underlying data. For the five most expensive projects, there is also a usage breakdown, which shows what has consumed the credits. Next listed are the most demanding SQL and non-SQL 
+transformations, which have consumed most of the credits. The last visual is for the most expensive components. 
 
 #### Configuration Health
 {: .image-popup}
 ![Screenshot - Configuration Health](/management/telemetry/telemetry-dashboards/ac-org-usage-config-health.png)
 
-*Configuration Health* shows the health of flows and jobs over time. By hovering over it, you can see more detailed data (the precise number of flows/jobs on a certain day that ended with success/error/warning).
+*Configuration Health* gives the health of flows and jobs over time. By hovering over a day, you can see more detailed data (the numbers of flows or jobs on that day that ended with success, error, or 
+warning).
 
 ### Project Overview
-This tab provides visuals focused on PPU consumption and shows the most expensive projects, transformations, configurations, and components. It also shows the configurations, projects, and users whose consumption has increased significantly. It can be filtered for the branch (development vs. main).
+This tab provides visuals focused on PPU consumption and shows the most expensive projects, transformations, configurations, and components. It also shows the configurations, projects, and users whose consumption has increased significantly. It can be filtered by branch (development vs. main).
 
 #### PPU and usage
 {: .image-popup}
 ![Screenshot - PPU and Usage](/management/telemetry/telemetry-dashboards/ac-project-overview-ppu.png)
 
-These four visuals show the PPU consumption from different angles. The first focuses on PPU usage per configuration, differentiating between SQL, KBC, and CDC credits. PPU Daily shows the breakdown of PPU 
-between component types over time selected. A configuration usage treemap provides an overview of how many jobs were executed for the components. In the drill, the particular configuration, project, and how many 
-credits were consumed can also be found. The last visual is in addition to the treemap, as it shows credit consumption per component and is split between SQL, KBC, and CDC credits. 
+These four visuals show PPU consumption from different angles. The first focuses on *PPU per Configuration*, differentiating between SQL, KBC, and CDC credits. *PPU Daily* shows a breakdown of PPU 
+between component types over the period selected. *Component's Usage* is a treemap and provides an overview of how many jobs were executed for the components. You can drill down for a particular 
+configuration or project to see how many credits it consumed. The last visual also shows the credits consumed per component split between SQL, KBC, and CDC credits. 
 
 #### Top 10 
 {: .image-popup}
 ![Screenshot - Top 10](/management/telemetry/telemetry-dashboards/ac-project-overview-top10.png)
 
-The first of two tables focuses on the top ten transformations based on their consumption. It provides more details on the runtime and input and output mapping (e.g., whether any filters are applied or 
-the output is incremental or full load). The top 10 Component Configurations show the most expensive configurations and provide information on how long they ran. 
+Top 10 has two tables. The first is the *Top 10 Transformations* based on their consumption. It provides details about the runtime and input and output mapping (e.g., whether any filters were applied or 
+whether the output was incremental or full load). *Top 10 Component Configurations* shows the most expensive configurations and provides information on how long they ran for. 
 
 #### Significant changes (outliers)
 {: .image-popup}
 ![Screenshot - Top 10](/management/telemetry/telemetry-dashboards/ac-project-overview-outliers.png)
 
-The last part of the significant changes shows the outliers for Projects, Configurations, and Users. All the tables show average PPU consumption in the previous 30 days and only show projects, configurations, or 
-users that consumed 50% more or 50% less on given days. It also bills more than one credit. The percentage is shown in the last column. 
+*Significant changes* shows outliers for projects, configurations, and users. The tables show the average PPU consumption over the previous 30 days for projects, configurations, or users that consumed
+50% more or 50% less on given days. It lists days on which a project billed more than 1 credit. The last column is the percentage of billed credits versus the average. 
 
 ### Project Users
-This tab provides an overview of users within the projects and allows them to be filtered by branch type and specific user. It shows the user roles, activities, and who joined the projects in the last seven days. 
+The first section provides an *Overview* of users within a project. They can be filtered by branch type and specific user. It shows the user roles, activities, and how many joined the project 
+in the last seven days. 
 
 #### Overview
 {: .image-popup}
 ![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-users-overview.png)
 
-This part summarizes the users in the project. 
+The second section, *Activities*, summarizes the users in a project. 
 
 #### Activities
 {: .image-popup}
 ![Screenshot - Activities](/management/telemetry/telemetry-dashboards/ac-project-users-activities.png)
 
 ### Project Health
-This tab shows the overall health of the projects. It can be filtered for the branch (development vs. main). The overview section focuses on the flows and jobs. The next section focuses on component trends, 
-and the last section shows four individual metrics: configuration without description, flows without error notifications, unused configurations, and unused tables.
+This tab shows the overall health of a project. It can be filtered by branch (development vs. main). The *Overview* section focuses on flows and jobs. The next section focuses on trends for *Components*, 
+and the last section shows four individual metrics: Configurations without a Description*, *Flows without Error Notifications*, *Unused Configurations*, and *Unused Tables*.
 
 #### Overview
 {: .image-popup}
@@ -185,6 +189,6 @@ and the last section shows four individual metrics: configuration without descri
 {: .image-popup}
 ![Screenshot - Jobs Monitoring](/management/telemetry/telemetry-dashboards/ac-jobs-monitoring.png)
 
-This tab provides the lowest detail. It allows filtering based on many fields (in addition to those mentioned already: Project ID, Component, Component Type, Component Configuration, Configuration ID, 
-Job Run Type, Job Status, Token Name, and Flow). By default, it is filtered for only yesterday's jobs, with status as error, warning, and success, and only for the jobs that are run automatically (Job Run Type = 
-a flow). It shows all these details together in a table. 
+This tab provides the lowest level of detail. It can be filtered on many fields in addition to those mentioned already: Project ID, Component, Component Type, Component Configuration, Configuration ID, 
+Job Run Type, Job Status, Token Name, and Flow. By default, it lists only yesterday's jobs whose status was error, warning, or success and only for jobs that were run automatically (Job Run Type is a flow).
+The details are shown as a table. 
