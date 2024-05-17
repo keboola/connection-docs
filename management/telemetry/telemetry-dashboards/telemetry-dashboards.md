@@ -6,45 +6,48 @@ permalink: /management/telemetry/telemetry-dashboards/
 * TOC
 {:toc}
 
-To get to all three telemetry dashboards, click the top right corner of the profile picture. The [Project Consumption](#project-consumption) dashboard is always available. If you check with the Account Manager, 
-[Organization Usage](#organization-usage) or [Activity Center](#activity-center) might also be available. If you get this available, you are in the right project.
+To get to all three telemetry dashboards, click the top right corner of the profile picture. The [Project Consumption](#project-consumption) dashboard is always available. Check with your account manager to see 
+if [Organization Usage](#organization-usage) or [Activity Center](#activity-center) are also available. 
 
 ## Project Consumption
 {: .image-popup}
 ![Screenshot - Project Consumption Dashboard](/management/telemetry/telemetry-dashboards/project-consumption.png)
 
-The dashboard has been filtered by default for the last 6 months; however, the Date range at the top of the dashboard can be changed. 
+By default, the dashboard is filtered for the last six months. The date range at the top of the dashboard can be changed. 
 
-In the *KPIs* section, the overall statistics of the Keboola project are presented. Some are self-explanatory (e.g., *Consumed Credits*, *Number of Jobs*), and the explanation for others can be found under 
-the question mark or here. *Error Jobs Ratio* shows the percentage of error jobs in the total number of jobs run. *Active Flows* show several flows with jobs starting in the selected date range. 
-*Active Component Configurations* is similar to the active flows, showing how many configurations have a job started in the selected date range, and the same applies to *Active Transformations*.
+The *KPIs* section presents overall statistics of the Keboola project. Some are self-explanatory (e.g., *Consumed Credits* and *Number of Jobs*). An explanation for the others can be found under 
+the question mark or here in the documentation. *Error Jobs Ratio* shows the number of error jobs as a percentage of the total number of jobs run. *Active Flows* shows the number of flows with jobs starting 
+in the selected date range. *Active Component Configurations* is like *Active Flows* but shows how many configurations have a job started in the selected date range, and the same applies to *Active 
+Transformations*.
 
-*Credit History* shows the evolution of consumed credits over time. Trends at the bottom of the print screen show the monthly evolution of consumption broken into component types (bar chart) and the error jobs and total jobs. 
+*Credits History* shows the evolution of consumed credits over time. *Trends* at the bottom of the print screen shows the monthly evolution of consumption broken into component types (bar chart) plus 
+a graph of the number of error jobs and the total number of jobs. 
 
 ## Organization Usage
-The dashboard is filtered for the last six months, which can be adjusted. It shows data for the whole Keboola organization (if there are more projects for the account, it will show data for all; 
-if there is only one, it will show the data for only one project). 
+The dashboard is filtered for the last six months, which can be adjusted. It shows data for the whole Keboola organization. If there are several projects for an account, it will show data for all of them. 
+If there is only one, it will show the data for that project. 
 
 ### KPIs
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ou-kpis.png)
 
-*KPIs* show four of the numbers agreed in the contract in relation to the limits. For PPU, the usage and limit are shown for the period selected in the Date range filter. For the others, for Projects, Users, and 
-Storage TB, this value is for the current month, and the limits are as defined in the contract. 
+*KPIs* show four of the metrics specified in the contract in comparison to their limits. For PPU, the usage and limit are shown for the period selected in the date range filter. For the others (Projects, 
+Users, and Storage TB), the values are for the current month only, and the limits are as defined in the contract. 
 
 ### Active Contract Consumption
 {: .image-popup}
 ![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
 
-*Active Contract Consumption* shows three different views on PPU consumption in relation to contractually agreed values. PPU shows the actual usage per month. The PPU Predicted line shows the value predicted 
-based on the average consumption in the last three months. The PPU limit line shows the consumption agreed in the contract, allocating the same value of credits to each month of contract tenure.
+*Active Contract Consumption* shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction 
+based on the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same nemuber of credits to each month of the 
+contract's tenure.
 
 ### Consumption
 {: .image-popup}
 ![Screenshot - Consumption](/management/telemetry/telemetry-dashboards/ou-consumption.png)
 
-*Consumption* shows three visuals. The first two have drill available once you hover over and click on the desired point. PPU Daily shows daily consumption broken down into groups based on usage breakdown. 
-*PPU Monthly* shows the same information but aggregates it per month. The last visual shows the limits and actual consumption per month.    
+*Consumption* shows three visuals. For the first two, you can drill down by hovering over a point and clicking on it. *PPU Daily* shows daily consumption broken down into groups based on a usage breakdown. 
+*PPU Monthly* shows the same information but aggregated by month. The last visual shows the limits and actual consumption per month.    
 
 ### Projects
 {: .image-popup}
@@ -53,9 +56,9 @@ based on the average consumption in the last three months. The PPU limit line sh
 {: .image-popup}
 ![Screenshot - Projects_2](/management/telemetry/telemetry-dashboards/ou-project2.png)
 
-*Projects* show the five most demanding components, configurations, and projects. These four visuals provide the drill that breaks down the consumption into weeks and provides a URL so this can be accessed 
-directly. The five most expensive projects also show the usage breakdown—what consumes the credits. The most demanding transformation shows the SQL and non-SQL transformations consuming the most of the credits. 
-The last visual then shows the most expensive components. 
+*Projects* show the five most demanding components, configurations, and projects. For these four visuals, you can drill down to see a breakdown of consumption by week. There is also a URL that gives
+direct access to the underlying data. For the five most expensive projects, there is also a usage breakdown, which shows what has consumed the credits. Next listed are the most demanding SQL and non-SQL 
+transformations, which have consumed most of the credits. The last visual is for the most expensive components. 
 
 ### Configuration Health
 {: .image-popup}
