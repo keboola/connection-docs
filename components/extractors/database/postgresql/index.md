@@ -11,7 +11,7 @@ permalink: /components/extractors/database/postgresql/
 Our connectors support most recent versions of PostgreSQL. You may choose different strategies to sync your data:
 
 - [Query based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log based CDC](/components/extractors/database/postgres#log-based-cdc)
+- [Log based CDC](/components/extractors/database/postgresql#log-based-cdc)
 
 
 # Query based connector
