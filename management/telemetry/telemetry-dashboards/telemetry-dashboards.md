@@ -18,7 +18,7 @@ if [Organization Usage](#organization-usage) or [Activity Center](#activity-cent
 
 By default, the dashboard is filtered for the last six months. The date range at the top of the dashboard can be changed. 
 
-The *KPIs* section presents overall statistics of the Keboola project. Some are self-explanatory (e.g., *Consumed Credits* and *Number of Jobs*). An explanation for the others can be found under 
+The *KPIs* section presents the overall statistics of the Keboola project. Some are self-explanatory (e.g., *Consumed Credits* and *Number of Jobs*). An explanation for the others can be found under 
 the question mark or here in the documentation. *Error Jobs Ratio* shows the number of error jobs as a percentage of the total number of jobs run. *Active Flows* shows the number of flows with jobs starting 
 in the selected date range. *Active Component Configurations* is like *Active Flows* but shows how many configurations have a job started in the selected date range, and the same applies to *Active 
 Transformations*.
