@@ -207,6 +207,8 @@ present similar information on component errors—the first in absolute values a
 {: .image-popup}
 ![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-health-config.png)
 
+This section displays important metrics with available drill-downs for all. While these metrics do not indicate immediate issues, they provide insights that could be useful for cleanup exercises. *Configurations without Description* shows how many configurations lack a description, making it unclear what the configuration accomplishes. *Flows without Error Notifications* indicates how many flows do not send  notifications when errors occur, which means errors might go unnoticed unless manually checked. *Unused Configurations* and *Unused Tables* identify configurations and tables that have not been used in any jobs or had any imports or exports, respectively, in the last 30 days.
+
 ### Jobs Monitoring
 {: .image-popup}
 ![Screenshot - Jobs Monitoring](/management/telemetry/telemetry-dashboards/ac-jobs-monitoring.png)
