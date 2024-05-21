@@ -27,8 +27,8 @@ Transformations*.
 a graph of the number of error jobs and the total number of jobs. 
 
 ## Organization Usage
-The dashboard is filtered for the last six months, which can be adjusted. It shows data for the whole Keboola organization. If there are several projects for an account, it will show data for all of them. 
-If there is only one, it will show the data for that project. 
+The dashboard is filtered for the last six months, which can be adjusted. It shows data for the whole Keboola organization. If you have an organization, you can view its usage, which typically includes multiple 
+projects. 
 
 ### KPIs
 {: .image-popup}
@@ -39,10 +39,10 @@ Users, and Storage TB), the values are for the current month only, and the limit
 
 ### Active Contract Consumption
 {: .image-popup}
-![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
+![Screenshot - Active Contract Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
 
 *Active Contract Consumption* shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction 
-based on the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same nemuber of credits to each month of the 
+based on the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same number of credits to each month of the 
 contract's tenure.
 
 ### Consumption
@@ -75,15 +75,17 @@ or warning).
 manager which project you want to be the target project in your Activity Center. You can have only one target project. Once the Activity Center has been enabled, it will be visible to everyone with access
 to the target project.
 
+The Activity Center dashboard is only available in one Keboola project. However, it shows information on consumption and trends for all Keboola projects that are associated with the given customer (organization).
+
 {: .image-popup}
 ![Screenshot - Activity Centre in KBC](/management/telemetry/telemetry-dashboards/activity-centre-kbc.png)
 
 The *Activity Center* has five tabs, each focused on a different aspect of consumption monitoring. These tabs are available by default for all projects in the organization but can be filtered for specific 
-ones. You can allows filter by date. The default setup is for the current month and the two previous months. For example, if you access the *Activity Center* during May, you will get data from 1st March until 
+ones. You can also filter by date. The default setup is for the current month and the two previous months. For example, if you access the *Activity Center* during May, you will get data from 1st March until 
 today. However, *Jobs Monitoring* provides detailed information on individual jobs, so it shows only yesterday's data by default. 
 
 All these filters can be changed. For some visuals, you can drill down to see a lower level of detail. For a  graphical representation, the drill-down can be accessed by hovering over a point. The drill-down 
-is available for a number if it has an underline. When you hover ove a visual, a question mark appears in the top right corner. If you click on the question mark, you will get a description of the visual 
+is available for a number if it has an underline. When you hover over a visual, a question mark appears in the top right corner. If you click on the question mark, you will get a description of the visual 
 (e.g., which filters are applicable and the logic behind the calculation).
 
 {: .image-popup}
@@ -102,7 +104,7 @@ It focuses on five different sections: *KPIs*, *Active Contract Consumption*, *C
 
 #### Active Contract Consumption
 {: .image-popup}
-![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
+![Screenshot - Active Contract Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
 
 This option shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction based on
 the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same number of credits to each month of 
@@ -153,7 +155,7 @@ whether the output was incremental or full load). *Top 10 Component Configuratio
 
 #### Significant changes (outliers)
 {: .image-popup}
-![Screenshot - Top 10](/management/telemetry/telemetry-dashboards/ac-project-overview-outliers.png)
+![Screenshot - Outliers](/management/telemetry/telemetry-dashboards/ac-project-overview-outliers.png)
 
 *Significant changes* shows outliers for projects, configurations, and users. The tables show the average PPU consumption over the previous 30 days for projects, configurations, or users that consumed
 50% more or 50% less on given days. It lists days on which a project billed more than 1 credit. The last column is the percentage of billed credits versus the average. 
@@ -166,11 +168,17 @@ in the last seven days.
 {: .image-popup}
 ![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-users-overview.png)
 
+*Users* shows the total number of users per project with limits consistent with those in the organization usage tab. *Active Users* shows the count of users who performed an action within the project during
+the selected period. *Users by Role* displays all users in the project according to their role, based on the selected date range, project, and branch type. 
+
 The second section, *Activities*, summarizes the users in a project. 
 
 #### Activities
 {: .image-popup}
 ![Screenshot - Activities](/management/telemetry/telemetry-dashboards/ac-project-users-activities.png)
+
+*Activities* summarizes user activity within a selected project. It details how many PPU users consumed and the status of their jobs (*UserJobs PPU*), and measures user activity based on the number of 
+configuration changes (*Configuration Updates*). Also, it shows the newly added project members in the last 7 days, along with their details (*Newly Added Users Last 7 Days*).
 
 ### Project Health
 This tab shows the overall health of a project. It can be filtered by branch (development vs. main). The *Overview* section focuses on flows and jobs. The next section focuses on trends for *Components*, 
@@ -180,9 +188,20 @@ and the last section shows four individual metrics: Configurations without a Des
 {: .image-popup}
 ![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-health-overview.png)
 
+*Overview* shows key metrics regarding the health of jobs and flows. *Jobs Error Ratio/Flow Error Ratio* indicates the percentage of jobs that ended in error relative to successful ones, while and *Error 
+Jobs/Error Flows* presents the absolute number of jobs that concluded with errors. Additionally, since flows can also end with warnings, two metrics display the percentage and absolute number of flows with 
+warning. 
+
+Below, two graphs illustrate the health of flows and jobs over time. By hovering over a particular day on the graph, you can view more detailed data, including the number of flows or jobs that ended with 
+success, error, or warning on that day.
+
 #### Components
 {: .image-popup}
 ![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-health-components.png)
+
+This section provides a more detailed view of the errors. *Error Jobs PPU* displays the number of credits consumed by jobs that ended in error; you can drill down to see further details. *PPU Consumed by Error 
+Jobs* shows the trend of credit consumption over time. *Components Errors Trend* examines the errors, split by component type, over time. The last two graphs, *Components Errors* and *Components Error Ratio*, 
+present similar information on component errors—the first in absolute values and the second as a percentage.
 
 #### Configurations, flow notifications, and tables
 {: .image-popup}
