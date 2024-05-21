@@ -72,10 +72,10 @@ or warning).
 
 ## Activity Center
 *Activity Center* provides the most detailed insight into telemetry data from the three modes available. It is not available by default but has to be requested. You need to tell your account 
-manager which project you want to be the target project in your Activity Center. You can have only one target project. Once the Activity Center has been enabled, it will be visible to everyone with access
+manager which project you want to be the target project in your *Activity Center*. You can have only one target project. Once the *Activity Center* has been enabled, it will be visible to everyone with access
 to the target project.
 
-The Activity Center dashboard is only available in one Keboola project. However, it shows information on consumption and trends for all Keboola projects that are associated with the given customer (organization).
+The *Activity Center* dashboard is only available in one Keboola project. However, it shows information on consumption and trends for all Keboola projects that are associated with the given customer (organization).
 
 {: .image-popup}
 ![Screenshot - Activity Centre in KBC](/management/telemetry/telemetry-dashboards/activity-centre-kbc.png)
