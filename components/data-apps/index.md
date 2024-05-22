@@ -152,12 +152,12 @@ This feature is not only efficient but also intelligent—ensuring you pay only 
 If you enter the URL of a sleeping app, it will trigger its wakeup, and you'll see a **waking up** page.
 
 {: .image-popup}
-![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
+![Code - code](/components/data-apps/data_apps-proxy-wakeup.png)
 
 Should anything unexpected occur, a **wakeup error** page will appear, and you can click on **Show More** to view the error details.
 
 {: .image-popup}
-![Code - code](/components/data-apps/data_apps-proxy-wakeup.png)
+![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
 
 
 ### Base Image
