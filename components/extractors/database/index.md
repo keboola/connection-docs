@@ -9,11 +9,11 @@ redirect_from:
 * TOC
 {:toc}
 
-Data source connectors import data from external sources and integrate it to the Keboola environment.
+Data source connectors import and integrate data from external sources into the Keboola environment.
 
 ## SQL Databases
 
-There are a number of connectors for [**SQL databases**](/components/extractors/database/sqldb/):
+There are multiple connectors for [**SQL databases**](/components/extractors/database/sqldb/):
 
 - [Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
@@ -26,10 +26,9 @@ There are a number of connectors for [**SQL databases**](/components/extractors/
 - [Snowflake](https://www.snowflake.com/)
 - [Teradata](https://www.teradata.com/)
 
-There may exist several variants of connectors for each database type, depending on the strategy used.
-In general there are be two types of connectors:
+Several variants of connectors may exist for each database type, depending on the strategy used. In general, there are two types of connectors:
 
-### Query Based Connectors
+### Query-Based Connectors
 
 These connectors work on a relational level, meaning they perform queries against the source database in order to sync
 data.
@@ -40,7 +39,7 @@ have an [advanced mode](/components/extractors/database/sqldb/).
 
 Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/).
 
-### Log based Connectors
+### Log-Based Connectors
 
 This type of connector performs log-based replication. There connectors may have different set of features and UI
 options, depending on the database type.
@@ -108,17 +107,15 @@ can choose the one most suitable.
   can be then queried and changes replicated in the destination
 - **Log-based** - Reading the database low-level proprietary transaction log directly to replicate the changes.
 
-| CDC Type                                                                     | Pros                                                                               | Cons                                                                                                                                                         | Keboola Implementation                                                                 |
-|------------------------------------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| [**Timestamp-based**](/components/extractors/database/#incremental-fetching) | - low cost<br/>-simple to use                                                      | - may increase load on the database<br/>- Can only process soft-deletes not DELETE statements<br/>- the source tables must have appropriate column available | Incremental Fetching                                                                   |
-| **Trigger-based**                                                            | - can capture DELETES<br/>- customizable                                           | - executional overhead and higher load on the production<br/>- Implementation overhead<br/>- events may need to be replicated in downstream logic            | Using standard [DB Extractors](/components/extractors/database/sqldb/)                 |
-| [**Log-based**](/components/extractors/database/#log-based-replication)      | - no computational overhead on production<br/>- can detect hard DELETEs<br/>- Fast | - higher costs<br/>- may be overkill for small use-cases                                                                                                     | Binlog type extractors like [MySql Binlog CDC](/components/extractors/database/mysql/) |
+| CDC Type | Pros | Cons | Keboola Implementation |
+|---|---|---|---|
+| [**Timestamp-based**](/components/extractors/database/#incremental-fetching) | Low cost.<br/>Simple to use. | May increase load on the database.<br/>Can only process soft-deletes not DELETE tatements.<br/>The source tables must have appropriate column available. | Incremental Fetching |
+| **Trigger-based** | Can capture DELETES.<br/>Customizable. | Executional overhead and higher load on the production.<br/>Implementation overhead.<br/>Events may need to be replicated in downstream logic. | Using standard [DB data source connectors](/components/extractors/database/sqldb/). |
+| [**Log-based**](/components/extractors/database/#log-based-replication) | No computational overhead on production.<br/>Can detect hard DELETEs.<br/>Fast | Higher costs.<br/>May be overkill for small use-cases. | Binlog type data source connectors like [MySql Binlog CDC](/components/extractors/database/mysql/). |
 
-**NOTE** Our connectors are currently all based on "micro batching" approach, meaning that they run in scheduled
-intervals and are not streaming the captured changes immediately as they appear in the source.
-This is a common approach in ETL tools and is suitable for most use-cases while keeping the costs significantly lower
-than true streaming replication.
-We will be introducing also real-time streaming replication in the future.
+***NOTE:** Our connectors are currently all based on "micro batching" approach, meaning that they run in scheduled
+intervals and are not streaming the captured changes immediately as they appear in the source. This is a common approach in ETL tools and is suitable for most use-cases while keeping the costs significantly lower
+than true streaming replication. We will be introducing also real-time streaming replication in the future.*
 
 ### Incremental Fetching
 
@@ -164,10 +161,10 @@ over
 having only newly added rows in a Storage table is that the table contains all loaded data and it is not necessary
 to synchronize extraction and processing.
 
-**NOTE** Our MS SQL connector leverages the CDC Tables feature of the MS SQL server to perform Incremental Fetching.
-See more in the [MS SQL CDC Mode](/components/extractors/database/microsoft-sql/#cdc-change-data-capture-mode) section.
+***NOTE:** Our MS SQL connector leverages the CDC Tables feature of the MS SQL server to perform Incremental Fetching.
+See more in the [MS SQL CDC Mode](/components/extractors/database/microsoft-sql/#cdc-change-data-capture-mode) section.*
 
-### Log-based replication
+### Log-Based Replication
 
 Due to the differences in log replication implementation in different systems,
 our log-based connectors may differ in configuration options and behaviour based on the source database.
