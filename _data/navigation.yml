@@ -108,7 +108,7 @@ items:
             title: Databases
             items:
               - url: /components/extractors/database/mysql/
-                title: MySql
+                title: MySQL
 
               - url: /components/extractors/database/postgresql/
                 title: PostgreSQL
