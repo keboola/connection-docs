@@ -1,20 +1,20 @@
 ---
-title: MySql
+title: MySQL
 permalink: /components/extractors/database/mysql/
 ---
 
 * TOC
 {:toc}
 
-[MySql](https://www.mysql.com/) is an open source database enables delivering high-performance and scalable web-based and embedded database applications.
+[MySQL](https://www.mysql.com/) is an open source database that enables delivering high-performance and scalable web-based and embedded database applications.
 
-Our connectors support most recent versions of MySql / AWS Aurora. You may choose different strategies to sync your data:
+Our connectors support most recent versions of MySQL / AWS Aurora. You may choose different strategies to synchronize your data:
 
-- [Query based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log based CDC](/components/extractors/database/mysql#log-based-binlog-cdc)
+- [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
+- [Log-based CDC](/components/extractors/database/mysql#log-based-binlog-cdc)
 
 
-# Query based connector
+## Query-Based Connector
 
 This is [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database in order to sync data. 
 This is the simplest approach suitable for most use cases, allowing for  [Time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
@@ -24,14 +24,14 @@ have an [advanced mode](/components/extractors/database/sqldb/).
 
 Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
 
-# MySQL Log-based CDC
+## MySQL Log-Based CDC
 
 [This connector](https://components.keboola.com/components/kds-team.ex-mysql-cdc) works with MySQL databases hosted on AWS RDS, Aurora MySQL, and standard non-hosted MySQL. It also supports MariaDB databases.
 
 {% include public-beta-warning.html %}
 
 
-## Functionality
+### Functionality
 
 This connector uses [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/mysql.html)
 under the hood.
@@ -106,19 +106,19 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 Note that the DDLs are collected only for the tracked tables by default.
 
-| Column name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `source`                    | The `source` field is structured exactly as standard data change events that the connector writes to table-specific topics. This field is useful to correlate events on different topics.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `ts_ms`                     | Optional field that displays the time at which the connector processed the event. The time is based on the system clock in the JVM running the Kafka Connect task. In the source object, ts\_ms indicates the time that the change was made in the database. By comparing the value for payload.source.ts\_ms with the value for payload.ts\_ms, you can determine the lag between the source database update and Debezium.                                                                                                                                                                                                                      |
-| `databaseName` `schemaName` | Identifies the database and the schema that contains the change. The value of the `databaseName` field is used as the message key for the record.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `ddl`                       | This field contains the DDL that is responsible for the schema change. The `ddl` field can contain multiple DDL statements. Each statement applies to the database in the `databaseName` field. Multiple DDL statements appear in the order in which they were applied to the database.  Clients can submit multiple DDL statements that apply to multiple databases. If MySQL applies them atomically, the connector takes the DDL statements in order, groups them by database, and creates a schema change event for each group. If MySQL applies them individually, the connector creates a separate schema change event for each statement. |
-| `tableChanges`              | An array of one or more items that contain the schema changes generated by a DDL command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `type`                      | Describes the kind of change. The value is one of the following:    `CREATE`  Table created.  `ALTER`  Table modified.  `DROP`  Table deleted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `id`                        | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `*<old>*,*<new>*` table names.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `table`                     | Represents table metadata after the applied change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `primaryKeyColumnNames`     | List of columns that compose the table’s primary key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `columns`                   | Metadata for each column in the changed table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `attributes`                | Custom attribute metadata for each table change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Column name | Description |
+|---|---|
+| `source` | The `source` field is structured exactly as standard data change events that the connector writes to table-specific topics. This field is useful to correlate events on different topics. |
+| `ts_ms` | Optional field that displays the time at which the connector processed the event. The time is based on the system clock in the JVM running the Kafka Connect task. In the source object, ts\_ms indicates the time that the change was made in the database. By comparing the value for payload.source.ts\_ms with the value for payload.ts\_ms, you can determine the lag between the source database update and Debezium. |
+| `databaseName` `schemaName` | Identifies the database and the schema that contains the change. The value of the `databaseName` field is used as the message key for the record. |
+| `ddl` | This field contains the DDL that is responsible for the schema change. The `ddl` field can contain multiple DDL statements. Each statement applies to the database in the `databaseName` field. Multiple DDL statements appear in the order in which they were applied to the database.  Clients can submit multiple DDL statements that apply to multiple databases. If MySQL applies them atomically, the connector takes the DDL statements in order, groups them by database, and creates a schema change event for each group. If MySQL applies them individually, the connector creates a separate schema change event for each statement. |
+| `tableChanges` | An array of one or more items that contain the schema changes generated by a DDL command. |
+| `type` | Describes the kind of change. The value is one of the following:    `CREATE`  Table created.  `ALTER`  Table modified.  `DROP`  Table deleted. |
+| `id` | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `*<old>*,*<new>*` table names. |
+| `table` | Represents table metadata after the applied change. |
+| `primaryKeyColumnNames` | List of columns that compose the table’s primary key. |
+| `columns` | Metadata for each column in the changed table. |
+| `attributes` | Custom attribute metadata for each table change. |
 
 ### Data Type Mapping
 
@@ -160,7 +160,7 @@ the [Keboola Connection Base Types](https://help.keboola.com/storage/tables/data
 | BOOLEAN     | BOOLEAN   |                                                                                  |
 | BIT(1)      | BOOLEAN   |                                                                                  |
 
-### System columns
+### System Columns
 
 Each result table will contain the following system columns:
 
@@ -171,7 +171,7 @@ Each result table will contain the following system columns:
 | KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted)                                                                                                            |
 | KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with `KBC__EVENT_TIMESTAMP_MS` to mark the latest event per record (ID) |
 
-### Supported MySQL topologies
+### Supported MySQL Topologies
 
 The Debezium MySQL connector supports the following MySQL topologies:
 
@@ -217,7 +217,7 @@ There is support for the Debezium MySQL connector to use hosted options such as 
 Because these hosted options do not allow a global read lock, table-level locks are used to create the *consistent
 snapshot*.
 
-### Using the connector with a MariaDB database
+### Using Connector with MariaDB Database
 
 Although it is possible to use the MySQL driver to connect and stream changes from MariaDB, it’s best to configure the
 Debezium MySQL connector to use the MariaDB adapter mode, so that the connector can take advantage of the MariaDB
@@ -234,7 +234,7 @@ connector, which natively streams changes from MariaDB binary transaction logs.
 
 ## Prerequisites
 
-### Setting up MySQL
+### Setting Up MySQL
 
 Some MySQL setup tasks are required before you can install and run a Debezium connector.
 
@@ -338,12 +338,12 @@ FROM performance_schema.global_variables WHERE variable_name='log_bin';
 
 Descriptions of MySQL binlog configuration properties:
 
-| Property                     | Description                                                                                                                                                                                                                                                                                                                                         |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `server-id`                  | The value for the `server-id` must be unique for each server and replication client in the MySQL cluster. During MySQL connector set up, Debezium assigns a unique server ID to the connector.                                                                                                                                                      |
-| `log_bin`                    | The value of `log_bin` is the base name of the sequence of binlog files.                                                                                                                                                                                                                                                                            |
-| `binlog_format`              | The `binlog-format` must be set to `ROW` or `row`.                                                                                                                                                                                                                                                                                                  |
-| `binlog_row_image`           | The `binlog_row_image` must be set to `FULL` or `full`.                                                                                                                                                                                                                                                                                             |
+| Property | Description |
+|---|---|
+| `server-id` | The value for the `server-id` must be unique for each server and replication client in the MySQL cluster. During MySQL connector set up, Debezium assigns a unique server ID to the connector. |
+| `log_bin` | The value of `log_bin` is the base name of the sequence of binlog files. |
+| `binlog_format` | The `binlog-format` must be set to `ROW` or `row`. |
+| `binlog_row_image` | The `binlog_row_image` must be set to `FULL` or `full`. |
 | `binlog_expire_logs_seconds` | The `binlog_expire_logs_seconds` corresponds to deprecated system variable `expire_logs_days`. This is the number of seconds for automatic binlog file removal. The default is `2592000`, which equals 30 days. Set the value to match the needs of your environment. See [MySQL purges binlog files](#mysql-purges-binlog-files-used-by-debezium). |
 
 #### Enabling GTIDs
@@ -395,9 +395,9 @@ Result
 
 Descriptions of GTID options:
 
-| Option                     | Description                                                                                                                                                                                                                       |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `gtid_mode`                | Boolean that specifies whether GTID mode of the MySQL server is enabled or not.   * `ON` = enabled * `OFF` = disabled                                                                                                             |
+| Option | Description |
+|---|---|
+| `gtid_mode` | Boolean that specifies whether GTID mode of the MySQL server is enabled or not.   * `ON` = enabled * `OFF` = disabled |
 | `enforce_gtid_consistency` | Boolean that specifies whether the server enforces GTID consistency by allowing the execution of statements that can be logged in a transactionally safe manner. Required when using GTIDs.   * `ON` = enabled * `OFF` = disabled |
 
 #### Configuring session timeouts
@@ -428,12 +428,12 @@ mysql> wait_timeout=<duration-in-seconds>
 
 Descriptions of MySQL session timeout options:
 
-| Option                | Description                                                                                                                                                                                                                                        |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Option | Description |
+|---|---|
 | `interactive_timeout` | The number of seconds the server waits for activity on an interactive connection before closing it. See [MySQL’s documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_interactive_timeout) for more details. |
-| `wait_timeout`        | The number of seconds the server waits for activity on a non-interactive connection before closing it. See [MySQL’s documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_wait_timeout) for more details.     |
+| `wait_timeout` | The number of seconds the server waits for activity on a non-interactive connection before closing it. See [MySQL’s documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_wait_timeout) for more details. |
 
-#### Enabling query log events
+#### Enabling query-log events
 
 You might want to see the original `SQL` statement for each binlog event.
 Enabling the `binlog_rows_query_log_events` option in the MySQL configuration or `binlog_annotate_row_events` in the
@@ -502,7 +502,7 @@ set @@global.binlog_row_value_options="" ;
 
 
 
-### Signalling table
+### Signalling Table
 
 The connector needs access to a signalling table in the source database. The signalling table is used by to connector to
 store various signal events and incremental snapshot watermarks.
@@ -517,7 +517,7 @@ You have sufficient access privileges to create a table on the source database.
 
 **Procedure**
 
-Submit a SQL query to the source database to create a table that is consistent with the required structure, as shown in
+Submit an SQL query to the source database to create a table that is consistent with the required structure, as shown in
 the following example:
 
 The following example shows a CREATE TABLE command that creates a three-column debezium_signal table:
@@ -541,7 +541,7 @@ CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT N
 - **User**: The username to be used to connect to the MySQL server.
 - **Password**: The password to be used to connect to the MySQL server.
 
-#### SSH Tunnel
+#### SSH tunnel
 
 You may opt to use a SSH Tunnel to secure your connection. Find detailed instructions for setting up an SSH tunnel in
 the [developer documentation](https://developers.keboola.com/integrate/database/. While setting up an SSH tunnel requires some work, it is the most reliable and secure
@@ -556,7 +556,7 @@ option for connecting to your database server.
 - **Schemas**: The schemas to be included in the CDC. The schemas are the databases in the MySQL instance.
 - **Tables**: The tables to be included in the CDC. If left empty, all tables in the selected schemas will be included.
 
-#### Column Filters
+#### Column filters
 
 The column filters are used to specify which columns should be included in the extraction. The lists can be defined as a
 comma-separated list of
@@ -608,7 +608,7 @@ tables.
 {: .image-popup}
 ![img_3.png](/components/extractors/database/mysql/img_3.png)
 
-#### Load Type
+#### Load type
 
 The `Load Type` configuration option specifies how the data is loaded into the destination tables.
 
