@@ -8,7 +8,7 @@ permalink: /components/extractors/database/mysql/
 
 [MySQL](https://www.mysql.com/) is an open source database that enables delivering high-performance and scalable web-based and embedded database applications.
 
-Our connectors support most recent versions of MySQL / AWS Aurora. You may choose different strategies to synchronize your data:
+Our connectors support the most recent versions of MySQL / AWS Aurora. You may choose different strategies to synchronize your data:
 
 - [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
 - [Log-based CDC](/components/extractors/database/mysql#log-based-binlog-cdc)
@@ -16,8 +16,8 @@ Our connectors support most recent versions of MySQL / AWS Aurora. You may choos
 
 ## Query-Based Connector
 
-This is [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database in order to sync data. 
-This is the simplest approach suitable for most use cases, allowing for  [Time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
+This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database in order to sync data. 
+It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
@@ -36,17 +36,16 @@ Their basic configuration is also part of the [Tutorial - Loading Data with Data
 This connector uses [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/mysql.html)
 under the hood.
 
-**NOTE** The component abstracts the underlying Debezium connector configuration and provides a simplified interface for
-the user. This means that only subset of the Debezium connector capabilities are exposed to the user.
+***NOTE:** The component abstracts the underlying Debezium connector configuration and provides a simplified user interface. Only a subset of the Debezium connector capabilities is exposed to the user.*
 
 MySQL has a binary log (binlog) that records all operations in the order in which they are committed to the database.
-This includes changes to table schemas as well as changes to the data in tables. MySQL uses the binlog for replication
+This includes changes to table schemas and changes to the table data. MySQL uses the binlog for replication
 and recovery.
 
 This MySQL connector reads the binlog, produces change events for row-level `INSERT`, `UPDATE`, and `DELETE` operations.
 
-As MySQL is typically set up to purge binlogs after a specified period of time, the MySQL connector performs an initial
-*consistent snapshot* of each of your databases. The MySQL connector reads the binlog from the point at which the
+As MySQL is typically set up to purge binlogs after a specified period, the MySQL connector performs an initial
+*consistent snapshot* of each of your databases. The MySQL connector reads the binlog from where the
 snapshot was made.
 
 **Supported Versions:**
@@ -65,51 +64,49 @@ When the connector is first started, it performs an initial *consistent snapshot
 This snapshot enables the connector to establish a baseline for the current state of the database.
 
 The connector completes a series of tasks when it performs the snapshot.
-The exact steps vary with the snapshot mode and with the table locking policy that is in effect for the database.
+The exact steps vary with the snapshot mode and the table-locking policy in effect for the database.
 
 You can select from various snapshot modes in the `Sync Options` > `Replication Mode` configuration property.
 
-For more technical detail on how the Snapshots work see the
-Debezium [official documentation](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-snapshots).
+For more technical details on how the Snapshots work, see the
+[official documentation](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-snapshots) of Debezium.
 
 ### Schema Drift
 
 To ensure correct processing of events that occur after a schema change, MySQL includes in the transaction log not only
-the row-level changes that affect the data, but also the DDL statements that are applied to the database.
+the row-level changes that affect the data but also the DDL statements that are applied to the database.
 As the connector encounters these DDL statements in the binlog, it parses them and updates an in-memory representation
 of each table’s schema.
 The connector uses this schema representation to identify the structure of the tables at the time of each insert,
 update, or delete operation and to produce the appropriate change event.
-In a separate output table `io_debezium_connector_mysql_schema_changes` the connector records all DDL statements along
-with the
+In a separate output table `io_debezium_connector_mysql_schema_changes` the connector records all DDL statements and the
 position in the binlog where each DDL statement appeared.
 
-The connector is capable of seamlessly handling schema changes in the source database, e.g. `ADD`, `DROP` columns.
+The connector is capable of seamlessly handling schema changes in the source database, e.g., `ADD`, `DROP` columns.
 
-The schema changes are handled in a following manner:
+The schema changes are handled in the following manner:
 
 - **ADD column**
-    - Such column is added to the destination table. Historic values will be empty (default not reflected).
+    - Such a column is added to the destination table. Historic values will be empty (default not reflected).
     - The DDL will be logged in the resulting `io_debezium_connector_mysql_schema_changes`
 - **DROP column**
     - The column will remain in the destination table.
     - The column NOT NULL constraint will be overridden and removed if present.
-    - It's values will be NULL/EMPTY since the deletion.
+    - Its values will be NULL/EMPTY since the deletion.
     - The DDL will be emitted into the `io_debezium_connector_mysql_schema_changes`.
 
 #### Schema change table
 
-`io_debezium_connector_mysql_schema_changes` is a table that contains the schema changes that are applied to the
-database.
-This table is a representation of the
+`io_debezium_connector_mysql_schema_changes` is a table that contains the schema changes applied to the
+database. It represents the
 underlying [Debezium Schema Change Topic](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-schema-change-topic).
 
-Note that the DDLs are collected only for the tracked tables by default.
+Note that the DDLs are collected only by default for the tracked tables.
 
 | Column name | Description |
 |---|---|
-| `source` | The `source` field is structured exactly as standard data change events that the connector writes to table-specific topics. This field is useful to correlate events on different topics. |
-| `ts_ms` | Optional field that displays the time at which the connector processed the event. The time is based on the system clock in the JVM running the Kafka Connect task. In the source object, ts\_ms indicates the time that the change was made in the database. By comparing the value for payload.source.ts\_ms with the value for payload.ts\_ms, you can determine the lag between the source database update and Debezium. |
+| `source` | The `source` field is structured exactly as standard data change events the connector writes to table-specific topics. This field is useful for correlating events on different topics. |
+| `ts_ms` | An optional field that displays the time at which the connector processed the event. The time is based on the system clock in the JVM running the Kafka Connect task. In the source object, ts\_ms indicates when the change was made in the database. By comparing the value for payload.source.ts\_ms with the value for payload.ts\_ms, you can determine the lag between the source database update and Debezium. |
 | `databaseName` `schemaName` | Identifies the database and the schema that contains the change. The value of the `databaseName` field is used as the message key for the record. |
 | `ddl` | This field contains the DDL that is responsible for the schema change. The `ddl` field can contain multiple DDL statements. Each statement applies to the database in the `databaseName` field. Multiple DDL statements appear in the order in which they were applied to the database.  Clients can submit multiple DDL statements that apply to multiple databases. If MySQL applies them atomically, the connector takes the DDL statements in order, groups them by database, and creates a schema change event for each group. If MySQL applies them individually, the connector creates a separate schema change event for each statement. |
 | `tableChanges` | An array of one or more items that contain the schema changes generated by a DDL command. |
@@ -123,7 +120,7 @@ Note that the DDLs are collected only for the tracked tables by default.
 ### Data Type Mapping
 
 The MySQL datatypes are mapped to
-the [Keboola Connection Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
 
 | Source Type | Base Type | Note                                                                             |
 |-------------|-----------|----------------------------------------------------------------------------------|
@@ -164,12 +161,12 @@ the [Keboola Connection Base Types](https://help.keboola.com/storage/tables/data
 
 Each result table will contain the following system columns:
 
-| Name                    | Base Type | Note                                                                                                                                                                     |
-|-------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| KBC__OPERATION          | STRING    | Event type, e.g. `r` - read on init sync; `c` - INSERT; `u` - UPDATE; `d` - DELETE                                                                                       |
-| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled.                                                                                   |
-| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted)                                                                                                            |
-| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with `KBC__EVENT_TIMESTAMP_MS` to mark the latest event per record (ID) |
+| Name | Base Type | Note |
+|---|---|---|
+| KBC__OPERATION | STRING | Event type, e.g., `r` - read on init sync; `c` - INSERT; `u` - UPDATE; `d` - DELETE |
+| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled. |
+| KBC__DELETED | BOOLEAN | True when the event is a delete event (the record is deleted). |
+| KBC__BATCH_EVENT_ORDER | INTEGER | Numerical order of the events in the current batch (extraction). You can use this in combination with `KBC__EVENT_TIMESTAMP_MS` to mark the latest event per record (ID) |
 
 ### Supported MySQL Topologies
 
@@ -177,15 +174,15 @@ The Debezium MySQL connector supports the following MySQL topologies:
 
 #### Standalone
 
-When a single MySQL server is used, the server must have the binlog enabled (*and optionally GTIDs enabled*) so the
-Debezium MySQL connector can monitor the server. This is often acceptable, since the binary log can also be used as an
+When a single MySQL server is used, the server must have the binlog enabled (*and optionally, GTIDs enabled*) so the
+Debezium MySQL connector can monitor the server. This is often acceptable since the binary log can also be used as an
 incremental [backup](https://dev.mysql.com/doc/refman/8.0/en/backup-methods.html). In this case, the MySQL connector
 always connects to and follows this standalone MySQL server instance.
 
 #### Primary and replica
 
 The Debezium MySQL connector can follow one of the primary servers or one of the replicas (*if that replica has its
-binlog enabled*), but the connector sees changes in only the cluster that is visible to that server. Generally, this is
+binlog enabled*). Still, the connector sees changes in only the cluster that is visible to that server. Generally, this is
 not a problem except for the multi-primary topologies.
 
 The connector records its position in the server’s binlog, which is different on each server in the cluster. Therefore,
@@ -194,28 +191,27 @@ recovered before the connector can continue.
 
 #### High available clusters
 
-A variety of [high availability](https://dev.mysql.com/doc/mysql-ha-scalability/en/) solutions exist for MySQL, and they
+A variety of [high-availability](https://dev.mysql.com/doc/mysql-ha-scalability/en/) solutions exist for MySQL, and they
 make it significantly easier to tolerate and almost immediately recover from problems and failures. Most HA MySQL
-clusters use GTIDs so that replicas are able to keep track of all changes on any of the primary servers.
+clusters use GTIDs so that replicas can keep track of all changes on any of the primary servers.
 
 #### Multi-primary
 
 [Network Database (NDB) cluster replication](https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-replication-multi-source.html)
-uses one or more MySQL replica nodes that each replicate from multiple primary servers. This is a powerful way to
-aggregate the replication of multiple MySQL clusters. This topology requires the use of GTIDs.
+uses one or more MySQL replica nodes replicating from multiple primary servers. This topology requires GTIDs and is a powerful way to
+aggregate the replication of multiple MySQL clusters.
 
-A Debezium MySQL connector can use these multi-primary MySQL replicas as sources, and can fail over to different
-multi-primary MySQL replicas as long as the new replica is caught up to the old replica. That is, the new replica has
-all transactions that were seen on the first replica. This works even if the connector is using only a subset of
-databases and/or tables, as the connector can be configured to include or exclude specific GTID sources when attempting
+A Debezium MySQL connector can use these multi-primary MySQL replicas as sources and failover to different
+multi-primary MySQL replicas if the new replica is caught up to the old replica. The new replica has
+all the transactions seen on the first replica. This works even if the connector is using only a subset of
+databases and tables, as the connector can be configured to include or exclude specific GTID sources when attempting
 to reconnect to a new multi-primary MySQL replica and find the correct position in the binlog.
 
 #### Hosted
 
 There is support for the Debezium MySQL connector to use hosted options such as Amazon RDS and Amazon Aurora.
 
-Because these hosted options do not allow a global read lock, table-level locks are used to create the *consistent
-snapshot*.
+Because these hosted options do not allow a global read lock, table-level locks create the *consistent snapshot*.
 
 ### Using Connector with MariaDB Database
 
