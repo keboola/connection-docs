@@ -6,27 +6,27 @@ permalink: /components/extractors/database/postgresql/
 * TOC
 {:toc}
 
-[PostgreSQL](https://www.postgresql.org/) is an open source database renowned for its advanced features, reliability, and performance, enabling the development of robust, scalable applications.
+[PostgreSQL](https://www.postgresql.org/) is an open-source database renowned for its advanced features, reliability, and performance. It enables the development of robust, scalable applications.
 
-Our connectors support most recent versions of PostgreSQL. You may choose different strategies to sync your data:
+Our connectors support the most recent versions of PostgreSQL. You may choose different strategies to sync your data:
 
-- [Query based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log based CDC](/components/extractors/database/postgresql#log-based-cdc)
+- [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
+- [Log-based CDC](/components/extractors/database/postgresql/#log-based-cdc)
 
 
-# Query based connector
+## Query-Based connector
 
-This is [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database in order to sync data. 
-This is the simplest approach suitable for most use cases, allowing for  [Time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
+This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database to sync data. 
+It is the simplest approach suitable for most use cases and allows for  [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
 
 Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
 
-# PostgreSQL Log-based CDC
+## PostgreSQL Log-Based CDC
 
-[This connector](https://components.keboola.com/components/kds-team.ex-postgres-cdc) uses [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
+[This connector](https://components.keboola.com/components/kds-team.ex-postgres-cdc) uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
 under the hood. The connector captures row-level changes in the schemas of a PostgreSQL database. It uses the `pgoutput`
 logical decoding output plug-in available in PostgreSQL 10+. 
 {% include public-beta-warning.html %}
@@ -34,7 +34,7 @@ logical decoding output plug-in available in PostgreSQL 10+.
 
 ## Functionality
 
-This connector uses [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
+This connector uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
 under the hood. The connector captures row-level changes in the schemas of a PostgreSQL database. It uses the `pgoutput`
 logical decoding output plug-in available in PostgreSQL 10+. It is maintained by the PostgreSQL community, and
 used by PostgreSQL itself for logical replication. This plug-in is always present so no additional libraries need to be
@@ -44,12 +44,12 @@ The first time it connects to a PostgreSQL server or cluster, the connector take
 of all schemas. After that snapshot is complete, the connector continuously captures row-level changes that insert,
 update, and delete database content and that were committed to a PostgreSQL database.
 
-**NOTE** The component abstracts the underlying Debezium connector configuration and provides a simplified interface for
-the user. This means that only subset of the Debezium connector capabilities are exposed to the user.
+***NOTE:** The component abstracts the underlying Debezium connector configuration and provides a simplified interface for
+the user. This means that only a subset of the Debezium connector capabilities are exposed to the user.*
 
-### Publication creation
+### Publication Creation
 
-The connector requires user with `rds_replication` role.  
+The connector requires a user with the `rds_replication` role.  
 To enable a user account other than the master account to initiate logical replication,
 you must grant the account the rds_replication role. For example, 
 ```sql
@@ -57,7 +57,7 @@ grant rds_replication to <my_user>
 ```
 
 
-**The connector handles the publication creation automatically**
+**The connector handles the publication creation automatically.**
 
 - If a publication exists, the connector uses it.
 - If no publication exists, the connector creates a new publication for tables that match the currently selected schemas
@@ -76,12 +76,12 @@ ALTER PUBLICATION <publication_name> SET TABLE <tbl1, tbl2, tbl3>
 #### Publication Names
 
 Note that each configuration of the connector creates a new publication with a unique name. The publication name contains 
-configuration_id and alternatively branch id if it's a branch configuration. The publication name is generated as follows:
+configuration_id and, alternatively, branch_id if it's a branch configuration. The publication name is generated as follows:
 - "kbc_publication_{config_id}_prod" for production configuration
 - "kbc_publication_{config_id}_dev_{branch_id}" for branch configuration.
 
-**NOTE** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
-and it's not deleted automatically. It is recommended to clean up any unused dev publications manually or using a script.
+***NOTE:** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
+and it's not deleted automatically. It is recommended to clean up any unused dev publications manually or using a script.*
 
 #### Slot Names
 
@@ -98,25 +98,25 @@ if different publications have different performance requirements or if they nee
 subscribers with different capabilities.
 
 
-### WAL disk space consumption
-In certain cases, it is possible for PostgreSQL disk space consumed by WAL files to spike or increase out of usual proportions. There are several possible reasons for this situation:
+### WAL disk-space consumption
+In certain cases, it is possible for PostgreSQL disk space consumed by WAL files to spike or increase out of the usual proportions. There are several possible reasons for this situation:
 
 - The LSN up to which the connector has received data is available in the `confirmed_flush_lsn` column of the server’s `pg_replication_slots` view. Data that is older than this LSN is no longer available, and the database is responsible for reclaiming the disk space.
   
-  - Also in the `pg_replication_slots` view, the `restart_lsn` column contains the LSN of the oldest WAL that the connector might require. If the value for confirmed_flush_lsn is regularly increasing and the value of restart_lsn lags then the database needs to reclaim the space. 
-  - The database typically reclaims disk space in batch blocks. This is expected behavior and no action by a user is necessary.
+  - Also in the `pg_replication_slots` view, the `restart_lsn` column contains the LSN of the oldest WAL that the connector might require. If the value for confirmed_flush_lsn regularly increases and the value of restart_lsn lags, the database needs to reclaim the space. 
+  - The database typically reclaims disk space in batch blocks. This is expected behavior, and no action by a user is necessary.
 
-- There are many updates in a database that is being tracked but only a tiny number of updates are related to the table(s) and schema(s) for which the connector is capturing changes. This situation can be easily solved with periodic heartbeat events. Set the heartbeat.interval.ms connector configuration property.
+- There are many updates in a database being tracked, but only a tiny number of updates are related to the table(s) and schema(s) for which the connector is capturing changes. This situation can be easily solved with periodic heartbeat events. Set the heartbeat.interval.ms connector configuration property.
 
-**NOTE:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector. **You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.**
+***NOTE:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector. **You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.***
 
-- The PostgreSQL instance contains multiple databases and one of them is a high-traffic database. Debezium captures changes in another database that is low-traffic in comparison to the other database. Debezium then cannot confirm the LSN as replication slots work per-database and Debezium is not invoked. As WAL is shared by all databases, the amount used tends to grow until an event is emitted by the database for which Debezium is capturing changes. To overcome this, it is necessary to:
+- The PostgreSQL instance contains multiple databases and one of them is a high-traffic database. Debezium captures changes in another database that is low-traffic in comparison to the other database. Debezium then cannot confirm the LSN as replication slots work per database, and Debezium is not invoked. As WAL is shared by all databases, the amount used tends to grow until an event is emitted by the database for which Debezium is capturing changes. To overcome this, it is necessary to:
   - Enable periodic heartbeat record generation with the `heartbeat > interval.ms` connector configuration property.
   - Regularly emit change events from the database for which Debezium is capturing changes.
 
 A separate process would then periodically update the table by either inserting a new row or repeatedly updating the same row. PostgreSQL then invokes Debezium, which confirms the latest LSN and allows the database to reclaim the WAL space. This task can be automated by means of the`heart beat > action query` connector configuration property.
 
-**TIP:** For users on AWS RDS with PostgreSQL, a situation similar to the high traffic/low traffic scenario can occur in an idle environment. AWS RDS causes writes to its own system tables to be invisible to clients on a frequent basis (5 minutes). Again, regularly emitting events solves the problem.
+**TIP:** For users on AWS RDS with PostgreSQL, a situation similar to the high-traffic/low-traffic scenario can occur in an idle environment. AWS RDS causes writes to its own system tables to be invisible to clients on a frequent basis (5 minutes). Again, regularly emitting events solves the problem.
 
 #### Enabling the Heartbeat queries
 
@@ -130,7 +130,7 @@ CREATE TABLE kbc.heartbeat (id SERIAL PRIMARY KEY, last_heartbeat TIMESTAMP NOT 
 INSERT INTO kbc.heartbeat (last_heartbeat) VALUES (NOW());
 ```
 
-The connector will then perform UPDATE query on that table in the selected interval. It is recommended to use UPDATE query to avoid table bloat.
+The connector will then perform an UPDATE query on that table in the selected interval. It is recommended that you use UPDATE query to avoid table bloat.
 
 **Enable the heartbeat signals:**
 
@@ -142,7 +142,7 @@ The connector will then perform UPDATE query on that table in the selected inter
 
  ### Data Type Mapping
 
-The MySQL datatypes are mapped to the [Keboola Connection Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+The MySQL datatypes are mapped to the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
 
 Based on the JSON file you've selected, the `base_type` column in the table can be updated as follows:
 
