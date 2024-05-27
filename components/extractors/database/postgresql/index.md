@@ -190,44 +190,44 @@ Based on the JSON file you've selected, the `base_type` column in the table can 
 | LTREE                    | STRING    | Contains the string representation of a PostgreSQL LTREE value.                               |
 | CITEXT                   | STRING    |                                                                                               |
 
-**Other types are not supported and such columns will be skipped from syncing.**
+**Other types are not supported, and such columns will be skipped from syncing.**
 
-### System columns
+### System Columns
 
 Each result table will contain the following system columns:
 
-| Name                    | Base Type | Note                                                                                                                                                                   |
-|-------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| KBC__OPERATION          | STRING    | Event type, e.g. r - read on init sync; c - INSERT; u - UPDATE; d - DELETE                                                                                             |
-| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled.                                                                                 |
-| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted)                                                                                                          |
-| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
+| Name | Base Type | Note |
+|---|---|---|
+| KBC__OPERATION | STRING | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE |
+| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled. |
+| KBC__DELETED | BOOLEAN | True when the event is a delete event (the record is deleted). |
+| KBC__BATCH_EVENT_ORDER | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
 
 ### Schema Drift
 
-The connector is capable of seamlessly handling schema changes in the source database, e.g. `ADD`, `DROP` columns.
+The connector is capable of seamlessly handling schema changes in the source database, e.g., `ADD`, `DROP` columns.
 
-The schema changes are handled in a following manner:
+The schema changes are handled in the following manner:
 
 - **ADD column**
-    - Such column is added to the destination table. Historic values will be empty (default not reflected).
+    - Such a column is added to the destination table. Historic values will be empty (default not reflected).
 - **DROP column**
     - The column will remain in the destination table.
     - The column NOT NULL constraint will be overridden and removed if present.
-    - It's values will be NULL/EMPTY since the deletion.
+    - Its values will be NULL/EMPTY since the deletion.
 
 ## Prerequisites
 
-This connector uses [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
+This connector uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
 under the hood. The following instructions are partially taken from there.
 
 This connector currently uses the native `pgoutput` logical replication stream support that is available only
 in `PostgreSQL 10+`.
-Currently, lower versions are not supported, but it is theoretically possible (please submit a feature request)
+Currently, lower versions are not supported, but it is theoretically possible (please submit a feature request).
 
-### Signalling table
+### Signaling Table
 
-The connector needs access to a signalling table in the source database. The signalling table is used by to connector to store various signal events and incremental snapshot watermarks.
+The connector needs access to a signaling table in the source database. The signaling table is used by to connector to store various signal events and incremental snapshot watermarks.
 
 #### Creating a signaling data collection
 
@@ -249,7 +249,7 @@ CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT N
 
 #### PostgreSQL Setup
 
-For this connector to work it is necessary to enable a replication slot, and configure a user with sufficient privileges
+For this connector to work, you must enable a replication slot and configure a user with sufficient privileges
 to perform the replication.
 
 #### PostgreSQL in the Cloud
@@ -257,14 +257,14 @@ to perform the replication.
 ##### PostgreSQL on Amazon RDS
 
 It is possible to capture changes in a PostgreSQL database that is running in
-link:[Amazon RDS](https://aws.amazon.com/rds/). To do this:
+link: [Amazon RDS](https://aws.amazon.com/rds/). To do this:
 
 * Set the instance parameter `rds.logical_replication` to `1`.
 * Verify that the `wal_level` parameter is set to `logical` by running the query `SHOW wal_level` as the database RDS
   master user.
   This might not be the case in multi-zone replication setups.
   You cannot set this option manually.
-  It is
+  It is the
   link: [automatically changed](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)
   when the `rds.logical_replication` parameter is set to `1`.
   If the `wal_level` is not set to `logical` after you make the preceding change, it is probably because the instance
@@ -281,16 +281,16 @@ link:[Amazon RDS](https://aws.amazon.com/rds/). To do this:
   To enable accounts other than the master account to create an initial snapshot, you must grant `SELECT` permission to
   the accounts on the tables to be captured.
   For more information about security for PostgreSQL logical replication, see the
-  link:[PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-security.html).
+  link: [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-security.html).
 
 ##### PostgreSQL on Azure
 
-It is possible to use {prodname} with: [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/),
+It is possible to use {prodname} with [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/),
 which has support for the `pgoutput` logical decoding.
 
 Set the Azure replication support to `logical`. You can use the
-link:[Azure CLI](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-cli) or
-the: [Azure Portal](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-portal) to configure
+link: [Azure CLI](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-cli) or
+the [Azure Portal](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-portal) to configure
 this. For example, to use the Azure CLI, here are
 the: [`az postgres server`](https://docs.microsoft.com/cli/azure/postgres/server?view#azure-cli-latest) commands that
 you need to execute:
@@ -303,8 +303,8 @@ az postgres server restart --resource-group mygroup --name myserver
 
 ##### PostgreSQL on CrunchyBridge
 
-It is possible to use {prodname} with: [CrunchyBridge](https://crunchybridge.com/); logical replication is already
-turned on. The `pgoutput` plugin is available. You will have to create a replication user and provide correct
+It is possible to use {prodname} with [CrunchyBridge](https://crunchybridge.com/); logical replication is already
+turned on. The `pgoutput` plugin is available. You will have to create a replication user and provide the correct
 privileges.
 
 #### Configuring the PostgreSQL server
@@ -320,7 +320,7 @@ wal_level = logical             // Instructs the server to use logical decoding 
 Depending on your requirements, you may have to set other PostgreSQL streaming replication parameters when using
 {prodname}.
 Examples include `max_wal_senders` and `max_replication_slots` for increasing the number of connectors that can access
-the sending server concurrently, and `wal_keep_size` for limiting the maximum WAL size which a replication slot will
+the sending server concurrently and `wal_keep_size` for limiting the maximum WAL size which a replication slot will
 retain.
 For more information about configuring streaming replication, see the
 link:https://www.postgresql.org/docs/current/runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SENDER[PostgreSQL
@@ -328,8 +328,8 @@ documentation].
 
 Debezium uses PostgreSQL's logical decoding, which uses replication slots.
 Replication slots are guaranteed to retain all WAL segments required for Debezium even during Debezium outages. For this
-reason, it is important to closely monitor replication slots to avoid too much disk consumption and other conditions
-that can happen such as catalog bloat if a replication slot stays unused for too long.
+reason, it is important to closely monitor replication slots to avoid excessive disk consumption and other conditions
+that can happen, such as catalog bloat if a replication slot stays unused for too long.
 For more information, see
 the [PostgreSQL streaming replication documentation](https://www.postgresql.org/docs/current/warm-standby.html#STREAMING-REPLICATION-SLOTS).
 
@@ -343,24 +343,24 @@ understanding [PostgreSQL documentation about the mechanics and configuration of
 is strongly recommended.
 endif::community[]
 
-### Setting up permissions
+### Setting Up Permissions
 
 The connector requires appropriate permissions to:
 
 - SELECT tables (to perform initial syncs)
 - `rds_replication`
 
-The connector requires user with `rds_replication` role.  
+The connector requires a user with the `rds_replication` role.  
 To enable a user account other than the master account to initiate logical replication,
 you must grant the account the rds_replication role. For example, `grant rds_replication to <my_user>`.
 
-Setting up a PostgreSQL server to run a Debezium connector requires a database user that can perform replications.
-Replication can be performed only by a database user that has appropriate permissions and only for a configured number
+Setting up a PostgreSQL server to run a Debezium connector requires a database user who can perform replications.
+Replication can be performed only by a database user with appropriate permissions and only for a configured number
 of hosts.
 
-Although, by default, superusers have the necessary `REPLICATION` and `LOGIN` roles, it is best **not to provide the
+Although superusers have the necessary `REPLICATION` and `LOGIN` roles by default, it is best **not to provide the
 Keboola replication user with elevated privileges**.
-Instead, create a Keboola user that has the minimum required privileges.
+Instead, create a Keboola user with the minimum required privileges.
 
 **PostgreSQL administrative permissions.**
 
@@ -385,21 +385,21 @@ connector must operate with specific privileges in the database.
 There are several options for determining how publications are created.
 In general, it is best to manually create publications for the tables that you want to capture, before you set up the
 connector.
-However, you can configure your environment in a way that permits Keboola connector to create publications
+However, you can configure your environment to permit the Keboola connector to create publications
 automatically, and to specify the data that is added to them.
 
-Keboola connector uses include list and exclude list properties to specify how data is inserted in the publication.
+The Keboola connector uses include-list and exclude-list properties to specify how data is inserted in the publication.
 
-For Keboola connector to create a PostgreSQL publication, it must run as a user that has the following privileges:
+For the Keboola connector to create a PostgreSQL publication, it must run as a user that has the following privileges:
 
 * Replication privileges in the database to add the table to a publication.
 * `CREATE` privileges on the database to add publications.
 * `SELECT` privileges on the tables to copy the initial table data. Table owners automatically have `SELECT` permission
   for the table.
 
-To add tables to a publication, the user must be an owner of the table.
-But because the source table already exists, you need a mechanism to share ownership with the original owner.
-To enable shared ownership, you create a PostgreSQL replication group, and then add the existing table owner and the
+To add tables to a publication, the user must be the owner of the table.
+However, because the source table already exists, you need a mechanism to share ownership with the original owner.
+To enable shared ownership, you create a PostgreSQL replication group and then add the existing table owner and the
 replication user to the group.
 
 1. Create a replication group.
@@ -438,11 +438,10 @@ ALTER TABLE __<table_name>__ OWNER TO REPLICATION_GROUP;
 - **User**: The username to be used to connect to the MySQL server.
 - **Password**: The password to be used to connect to the MySQL server.
 
-#### SSH Tunnel
+#### SSH tunnel
 
-You may opt to use a SSH Tunnel to secure your connection. Find detailed instructions for setting up an SSH tunnel in
-the [developer documentation](https://developers.keboola.com/integrate/database/. While setting up an SSH tunnel requires some work, it is the most reliable and secure
-option for connecting to your database server.
+You may opt to use an SSH Tunnel to secure your connection. The [developer documentation](https://developers.keboola.com/integrate/database/ provides detailed instructions for setting up an SSH tunnel.
+While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
 
 ### Data Source
 
@@ -452,14 +451,14 @@ option for connecting to your database server.
 - **Schemas**: The schemas to be included in the CDC.
 - **Tables**: The tables to be included in the CDC. If left empty, all tables in the selected schemas will be included.
 
-#### Column Filters
+#### Column filters
 
-The column filters are used to specify which columns should be included in the extraction. The lists can be defined as a
+The column filters are used to specify which columns should be included in the extraction. The list can be defined as a
 comma-separated list of
-fully-qualified names, i.e. in the form `schemaName.tableName.columnName`.
+fully-qualified names, i.e., in the form `schemaName.tableName.columnName`.
 
-To match the name of a column, connector applies the regular expression that you specify as an **anchored regular
-expression**. That is, the expression is used to match the entire name string of the column; it does not match
+To match the name of a column, the connector applies the regular expression that you specify as an **anchored regular
+expression**. The expression is used to match the entire name string of the column; it does not match
 substrings that might be present in a column name.
 
 **TIP**: To test your regex expressions, you can use online tools such as [this one](https://regex101.com/).
@@ -476,14 +475,13 @@ substrings that might be present in a column name.
 {: .image-popup}
 ![img_2.png](/components/extractors/database/postgresql/img_2.png)
 
-- **Signalling Table**: The name of the signalling table in the source database. The signalling table is used by the
-  connector to store various signal events and incremental snapshot watermarks. See more in
-  the [Signalling table](#signalling-table) section.
+- **Signaling Table**: The name of the signaling table in the source database. The connector uses the signaling table to store various signal events and incremental snapshot watermarks. See more in
+  the [Signaling Table](#signaling-table) section.
 - **Replication Mode**: The replication mode to be used. The following options are available:
-    - `Standard`: The connector performs an initial *consistent snapshot* of each of your databases. The connector reads
+    - `Standard`: The connector performs an initial *consistent snapshot* of each of your databases and reads
       the binlog from the point at which the snapshot was made.
     - `Changes only`: The connector reads the changes from the binlog immediately, skipping the initial load.
-- **Binary data handler**: Specifies how binary columns, for example, blob, binary, varbinary, should be represented in
+- **Binary data handler**: Specifies how binary columns, for example, blob, binary, and varbinary, should be represented in
   change events. The following options are available:
     - `Base64`: represents binary data as a base64-encoded String.
     - `Base64-url-safe`: represents binary data as a base64-url-safe-encoded String.
@@ -494,26 +492,26 @@ substrings that might be present in a column name.
 - **Snapshot parallelism**: Specifies the number of threads that the connector uses when performing an initial snapshot.
   To enable parallel initial snapshots, set the property to a value greater than 1. In a parallel initial snapshot, the
   connector processes multiple tables concurrently. Note that setting up high values may lead to OOM errors. Change the
-  default value on your own risk.
+  default value at your own risk.
 
-#### Hearbeat
+#### Heartbeat
 
-Enable heartbeat signals to prevent WAL disk space consumption. The connector will periodically emit a heartbeat signal to the selected table.
+Enable heartbeat signals to prevent the consumption of WAL disk space. The connector will periodically emit a heartbeat signal to the selected table.
 
 {: .image-popup}
 ![img_4.png](/components/extractors/database/postgresql/img_4.png)
 
-**NOTE** The heartbeat signal must also be selected in the `Datasource > Tables to sync` configuration property. For more information, see the [WAL disk space consumption](#wal-disk-space-consumption) section.
+***NOTE:** The heartbeat signal must also be selected in the `Datasource > Tables to sync` configuration property. For more information, see the [WAL disk space consumption](#wal-disk-space-consumption) section.*
 
 - **Heartbeat interval [ms]**: The interval in milliseconds at which the heartbeat signal is emitted. The default value
   is `3000` (3 s).
 - **Action Query**: The query that the connector uses to send heartbeat signals to the source database. The query must be
-  a valid SQL statement that the source database can execute and the heartbeat table must be tracked in the Source
+  a valid SQL statement that the source database can execute, and the heartbeat table must be tracked in the Source
   settings.
 
 ### Destination
 
-The destination is a mandatory configuration option. It is used to specify how the data is loaded into the destination
+The destination is a mandatory configuration option that specifies how the data is loaded into the destination
 tables.
 
 {: .image-popup}
@@ -526,11 +524,10 @@ The `Load Type` configuration option specifies how the data is loaded into the d
 The following options are available:
 
 - `Incremental Load - Deduplicated`: The connector upserts records into the destination table. The connector uses the
-  primary key to perform upsert. The connector does not delete records from the destination table.
+  primary key to perform an upsert. The connector does not delete records from the destination table.
 - `Incremental Load - Append`: The connector produces no primary key. The order of the events will be given by
   the `KBC__EVENT_TIMESTAMP_MS` column + helper `KBC__BATCH_EVENT_ORDER` column which contains the order in one batch.
 - `Full Load - Deduplicated`: The destination table data will be replaced with the current batch and deduplicated by the
   primary key.
-- `Full Load - Append`: The destination table data will be replaced with the current batch and the batch won't be
-  deduplicated.
+- `Full Load - Append`: The destination table data will be replaced with the current batch, which will not be deduplicated.
 
