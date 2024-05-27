@@ -211,19 +211,19 @@ to reconnect to a new multi-primary MySQL replica and find the correct position 
 
 There is support for the Debezium MySQL connector to use hosted options such as Amazon RDS and Amazon Aurora.
 
-Because these hosted options do not allow a global read lock, table-level locks create the *consistent snapshot*.
+Because these hosted options do not allow a global read lock, table-level locks create a *consistent snapshot*.
 
 ### Using Connector with MariaDB Database
 
 Although it is possible to use the MySQL driver to connect and stream changes from MariaDB, it’s best to configure the
-Debezium MySQL connector to use the MariaDB adapter mode, so that the connector can take advantage of the MariaDB
-driver, and its unique feature stack.
+Debezium MySQL connector to use the MariaDB adapter mode so that the connector can take advantage of the MariaDB
+driver and its unique feature stack.
 
 To toggle the MariaDB support mode, the `Connector adapter`configuration property
 must be specified with a value of `MariaDB`.
 
 This mode utilizes the MariaDB driver instead of the MySQL driver, meaning that you must also provide the database
-protocol and JDBC driver strings that are compliant with MariaDB, see the example below.
+protocol and JDBC driver strings that are compliant with MariaDB; see the example below.
 
 After you apply the Maria DB supplemental configuration, the Debezium MySQL connector uses the MariaDB adapter
 connector, which natively streams changes from MariaDB binary transaction logs.
@@ -232,7 +232,7 @@ connector, which natively streams changes from MariaDB binary transaction logs.
 
 ### Setting Up MySQL
 
-Some MySQL setup tasks are required before you can install and run a Debezium connector.
+Some MySQL setup tasks are required before installing and running a Debezium connector.
 
 #### Creating a user
 
@@ -260,7 +260,7 @@ GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *
 
 The table below describes the permissions.
 
-If using a hosted option such as Amazon RDS or Amazon Aurora that does not allow a global read lock, table-level locks are used to create the *consistent snapshot*. In this case, you need to also grant `LOCK TABLES` permissions to the user that you create. See [snapshots](#snapshots) for more details.
+If a hosted option such as Amazon RDS or Amazon Aurora does not allow a global read lock, table-level locks create a *consistent snapshot*. In this case, you need to also grant `LOCK TABLES` permissions to the user you create. See [snapshots](#snapshots) for more details.
 
 
 3. Finalize the user’s permissions:
@@ -274,7 +274,7 @@ Descriptions of user permissions:
 | Keyword                    | Description                                                                                                                                                              |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `SELECT`                   | Enables the connector to select rows from tables in databases. This is used only when performing a snapshot.                                                             |
-| `RELOAD`                   | Enables the connector the use of the `FLUSH` statement to clear or reload internal caches, flush tables, or acquire locks. This is used only when performing a snapshot. |
+| `RELOAD`                   | Enables the connector use the `FLUSH` statement to clear or reload internal caches, flush tables, or acquire locks. This is used only when performing a snapshot. |
 | `SHOW DATABASES`           | Enables the connector to see database names by issuing the `SHOW DATABASE` statement. This is used only when performing a snapshot.                                      |
 | `REPLICATION SLAVE`        | Enables the connector to connect to and read the MySQL server binlog.                                                                                                    |
 | `REPLICATION CLIENT`       | Enables the connector the use of the following statements:   * `SHOW MASTER STATUS` * `SHOW SLAVE STATUS` * `SHOW BINARY LOGS`     The connector always requires this.   |
@@ -340,7 +340,7 @@ Descriptions of MySQL binlog configuration properties:
 | `log_bin` | The value of `log_bin` is the base name of the sequence of binlog files. |
 | `binlog_format` | The `binlog-format` must be set to `ROW` or `row`. |
 | `binlog_row_image` | The `binlog_row_image` must be set to `FULL` or `full`. |
-| `binlog_expire_logs_seconds` | The `binlog_expire_logs_seconds` corresponds to deprecated system variable `expire_logs_days`. This is the number of seconds for automatic binlog file removal. The default is `2592000`, which equals 30 days. Set the value to match the needs of your environment. See [MySQL purges binlog files](#mysql-purges-binlog-files-used-by-debezium). |
+| `binlog_expire_logs_seconds` | The `binlog_expire_logs_seconds` corresponds to the deprecated system variable `expire_logs_days`. This is the number of seconds for automatic binlog file removal. The default is `2592000`, which equals 30 days. Set the value to match the needs of your environment. See [MySQL purges binlog files](#mysql-purges-binlog-files-used-by-debezium). |
 
 #### Enabling GTIDs
 
@@ -393,7 +393,7 @@ Descriptions of GTID options:
 
 | Option | Description |
 |---|---|
-| `gtid_mode` | Boolean that specifies whether GTID mode of the MySQL server is enabled or not.   * `ON` = enabled * `OFF` = disabled |
+| `gtid_mode` | Boolean that specifies whether the GTID mode of the MySQL server is enabled or not.   * `ON` = enabled * `OFF` = disabled |
 | `enforce_gtid_consistency` | Boolean that specifies whether the server enforces GTID consistency by allowing the execution of statements that can be logged in a transactionally safe manner. Required when using GTIDs.   * `ON` = enabled * `OFF` = disabled |
 
 #### Configuring session timeouts
@@ -474,7 +474,7 @@ connector might fail to consume **UPDATE** events.
 
 Procedure
 
-1. Check current variable value
+1. Check the current variable value
 
 ```sql
 show global variables where variable_name = 'binlog_row_value_options';
@@ -490,7 +490,7 @@ show global variables where variable_name = 'binlog_row_value_options';
 +--------------------------+-------+
 ```
 
-3. In case value is `PARTIAL_JSON`, unset this variable by:
+3. In case the value is `PARTIAL_JSON`, unset this variable by:
 
 ```sql
 set @@global.binlog_row_value_options="" ;
@@ -498,9 +498,9 @@ set @@global.binlog_row_value_options="" ;
 
 
 
-### Signalling Table
+### Signaling Table
 
-The connector needs access to a signalling table in the source database. The signalling table is used by to connector to
+The connector needs access to a signaling table in the source database. The connector uses the signaling table to
 store various signal events and incremental snapshot watermarks.
 
 #### Creating a signaling data collection
@@ -539,7 +539,7 @@ CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT N
 
 #### SSH tunnel
 
-You may opt to use a SSH Tunnel to secure your connection. Find detailed instructions for setting up an SSH tunnel in
+You may opt to use an SSH Tunnel to secure your connection. Find detailed instructions for setting up an SSH tunnel in
 the [developer documentation](https://developers.keboola.com/integrate/database/. While setting up an SSH tunnel requires some work, it is the most reliable and secure
 option for connecting to your database server.
 
@@ -554,11 +554,11 @@ option for connecting to your database server.
 
 #### Column filters
 
-The column filters are used to specify which columns should be included in the extraction. The lists can be defined as a
+The column filters are used to specify which columns should be included in the extraction. The list can be defined as a
 comma-separated list of
-fully-qualified names, i.e. in the form `schemaName.tableName.columnName`.
+fully-qualified names, i.e., in the form `schemaName.tableName.columnName`.
 
-To match the name of a column, connector applies the regular expression that you specify as an **anchored regular
+To match the name of a column, the connector applies the regular expression that you specify as an **anchored regular
 expression**. That is, the expression is used to match the entire name string of the column; it does not match
 substrings that might be present in a column name.
 
@@ -576,9 +576,9 @@ substrings that might be present in a column name.
 {: .image-popup}
 ![img_2.png](/components/extractors/database/mysql/img_2.png)
 
-- **Signalling Table**: The name of the signalling table in the source database. The signalling table is used by the
+- **Signaling Table**: The name of the signaling table in the source database. The signaling table is used by the
   connector to store various signal events and incremental snapshot watermarks. See more in
-  the [Signalling table](#signalling-table) section.
+  the [Signaling table](#signaling-table) section.
 - **Replication Mode**: The replication mode to be used. The following options are available:
     - `Standard`: The connector performs an initial *consistent snapshot* of each of your databases. The connector reads
       the binlog from the point at which the snapshot was made.
@@ -611,14 +611,14 @@ The `Load Type` configuration option specifies how the data is loaded into the d
 The following options are available:
 
 - `Incremental Load - Deduplicated`: The connector upserts records into the destination table. The connector uses the
-  primary key to perform upsert. The connector does not delete records from the destination table.
+  primary key to perform an upsert. The connector does not delete records from the destination table.
 - `Incremental Load - Append`: The connector produces no primary key. The order of the events will be given by
-  the `KBC__EVENT_TIMESTAMP_MS` column + helper `KBC__BATCH_EVENT_ORDER` column which contains the order in one batch.
+  the `KBC__EVENT_TIMESTAMP_MS` column + helper `KBC__BATCH_EVENT_ORDER` column, which contains the order in one batch.
 - `Full Load - Deduplicated`: The destination table data will be replaced with the current batch and deduplicated by the
   primary key.
-- `Full Load - Append`: The destination table data will be replaced with the current batch and the batch won't be
+- `Full Load - Append`: The destination table data will be replaced with the current batch, and the batch won't be
   deduplicated.
 
 #### Output bucket
 
-Optionally, you may specify an output bucket bucket in Keboola Storage (without the stage prefix) that will be used to store the result tables.
+Optionally, you may specify an output bucket in Keboola Storage (without the stage prefix) that will be used to store the result tables.
