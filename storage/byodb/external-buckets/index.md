@@ -8,13 +8,15 @@ permalink: /storage/byodb/external-buckets/
 
 If you operate Keboola in Bring Your Own Database (BYODB) mode using your own data warehouse, the data in the warehouse won't automatically be visible or accessible within Keboola. To address this, we offer the **External Datasets** feature.
 
-The implementation of external datasets varies depending on your database backend, whether it is a database, schema, or another concept.
+The implementation of External Datasets varies depending on your database backend, whether it is a database, schema, or another concept.
 Unless specified otherwise, this description refers to the implementation for Snowflake and BigQuery.
 
 ## What Is an External Dataset?
 Storage in Keboola is organized into [buckets](/storage/buckets/). An external dataset is a special type of bucket wherein Keboola does not manage 
 its content. It can be located _anywhere in the storage backend used by your Keboola project_ (Snowflake or BigQuery) and is a virtual bucket connected 
-to a Snowflake schema or BigQuery dataset, respectively. All table-like objects (such as tables, views, and external tables) inside the schema (in Snowflake)
+to a Snowflake schema or BigQuery dataset, respectively. 
+
+All table-like objects (such as tables, views, and external tables) inside the schema (in Snowflake)
 or dataset (in BigQuery) are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola. A single schema can 
 be registered simultaneously with multiple projects in Keboola.
 
@@ -64,7 +66,7 @@ They are accessible via the [read-only input mapping](/transformations/mappings/
 Keep in mind that external buckets cannot be used in an [output mapping](/transformations/mappings/#output-mapping) as they are not writable.
 
 ### External Dataset in a Snowflake SQL Transformation
-External datasets cannot be used in an [input mapping](transformations/mappings/#input-mapping) as they are not copied into your transformation 
+External datasets cannot be used in an input mapping as they are not copied into your transformation 
 workspace. You need to reference them in your transformation using a fully qualified name.
 
 In the following example, it is assumed that you've created an external dataset called `users-reporting` that references the `sales_emea` schema in the database 
@@ -110,9 +112,9 @@ If you wish to remove the schema, you must do so manually in your warehouse.
 
 ## Limitations
 
-* Table names in the external buckets can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
+* Table names can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
 * Table names are not case-sensitive. You cannot create two tables with the same name that differ only in letter case.
 * [Creating snapshots](https://keboola.docs.apiary.io/#reference/table-snapshotting/create-or-list-snapshots/create-table-snapshot) from tables in external buckets is not supported.
 * Sharing with other projects is not supported at the moment.
-* A read*only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source shcema, our [read-only input mapping](/transformations/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However,manually refreshing the bucket addressess this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables as illustrated below: <br> `GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO` <br> 
+* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/transformations/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addressess this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables as illustrated below: <br> `GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO` <br> 
 Ensure the role name follows the pattern in the picture and is suffixed with _RO.
