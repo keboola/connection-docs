@@ -41,7 +41,7 @@ access to the dataset in BigQuery. Once access has been grated, click **Register
 {: .alert.alert-info}
 Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
 
-#### BigLake tables
+### BigLake Tables
 Keboola generaly does not support external tables, except for [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). 
 Please ensure that any table you are using is of this type. External tables of other types will not work in transformations and workspaces due to permission issues.
 
