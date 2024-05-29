@@ -115,7 +115,7 @@ limited so that the data can be only read from the database and that the query e
 
 ### Connect to Looker
 It is possible to use the Snowflake connector to share data with [Looker](https://looker.com/).
-To share data between your Keboola project and PowerBI, choose the **Keboola Snowflake database** when configuring the credentials.
+To share data between your Keboola project and Looker, choose the **Keboola Snowflake database** when configuring the credentials.
 The connector will create a dedicated database for you and give you credentials. Run the connector and when it is finished, 
 connect the Looker data sources. Follow the official [instructions](https://docs.looker.com/setup-and-management/connecting-to-db).
 There are also some [Snowflake specific settings](https://docs.looker.com/setup-and-management/database-config/snowflake#adding_the_connection). Note that you
@@ -130,7 +130,7 @@ The connector will create a dedicated database for you and give you credentials.
 ### Connect to Qlik
 It is possible to use the Snowflake connector to share data with [Qlik Sense](https://www.qlik.com/us/products/qlik-sense)
 and [QlikView](https://www.qlik.com/us/products/qlikview).
-To share data between your Keboola project and PowerBI, choose the **Keboola Snowflake database** when configuring the credentials.
+To share data between your Keboola project and Qlik, choose the **Keboola Snowflake database** when configuring the credentials.
 The connector will create a dedicated database for you and give you credentials. Run the connector and when it is finished, connect the Qlik data sources. Follow the Qlik official
 [integration guide](https://help.qlik.com/en-US/connectors/Subsystems/ODBC_connector_help/Content/Connectors_ODBC/Snowflake/Create-Snowflake-connection.htm).
 

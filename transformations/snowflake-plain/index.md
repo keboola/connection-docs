@@ -54,6 +54,7 @@ of the variable as a user error, `Transformation aborted: Integrity check failed
 ## Dynamic Backends
 If you have a large amount of data in databases and complex queries, your transformation might run for a couple of hours.
 To speed it up, you can change the backend size in the configuration. Snowflake transformations suport the following sizes:
+- XSmall
 - Small _(default)_
 - Medium
 - Large
@@ -63,7 +64,7 @@ To speed it up, you can change the backend size in the configuration. Snowflake 
 
 Scaling up the backend size allocates more resources to speed up your transformation.
 
-*Note: This feature is currently in public beta. Please bear with us and provide feedback
+***Note:** This feature is currently in public beta. Please bear with us and provide feedback
 at [https://ideas.keboola.com](https://ideas.keboola.com).
 Also, dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 

@@ -3,7 +3,7 @@ title: Data Apps
 permalink: /components/data-apps/
 ---
 
-{% include warning.html content="This feature is in public beta. All data apps are terminated at midnight." %}
+{% include warning.html content="This feature is in public beta." %}
 
 * TOC
 {:toc}
@@ -23,9 +23,15 @@ and also publicly accessed from outside the project.
 It means that the users that will access your data app don't need access to a Keboola project.
 
 ## Create a Data App
+
+First, enter a custom prefix for your data app, which you will later share with your app users.
+
+{: .image-popup}
+![Code - main menu](/components/data-apps/data_apps-custom-data-app-url.png)
+
 There are two ways to create a data app in Keboola. Select a deployment type that will suit your needs:
 - **Code** – Just paste a Streamlit code to create a simple data app. 
-- **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications.
+- **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications. You must provide your GitHub username and private access token for repository authentication.
 
 {: .image-popup}
 ![Code - main menu](/components/data-apps/data_apps-main_menu.png)
@@ -35,30 +41,59 @@ For simple use cases, where your Streamlit code fits into one page, paste the co
 This deployment type is ideal for very simple apps or for testing. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/45663441) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
 {: .image-popup}
+![Code - code](/components/data-apps/data_app-development-type-code.png)
+{: .image-popup}
 ![Code - code](/components/data-apps/data_apps-hello_world-code.png)
 
 #### Packages
-To use additional packages that are not already in our [Streamlit Base Image](#base-image), enter them into the field Packages.
+To use additional Python packages that are not already in our [Streamlit Base Image](#base-image), enter them into the field Packages.
 
 {: .image-popup}
 ![Packages](/components/data-apps/data_apps-packages.png)
 
 ### Git Repository
-{% include warning.html content="In BETA, we only support GitHub repositories. Also, we only support MAIN as the main branch, not MASTER." %}
+{% include warning.html content="In BETA, we only support GitHub repositories." %}
 
 To provide feedback, use the feedback button in your project.
 If you have a complex application, push your app sources into GitHub and link the repository in this section.
 Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
 {: .image-popup}
-![Git repository](/components/data-apps/data_apps-git_repository.png)
+![Code - code](/components/data-apps/data_app-development-type-github.png)
+{: .image-popup}
+![Git repository](/components/data-apps/data_apps-git_repository_public.png)
+
+If you are using a private repository, you must authenticate using your GitHub username and private access token. Follow these steps to authenticate:
+
+1. Generate a personal access token on GitHub by going to your GitHub account settings, selecting **Developer settings > Personal access tokens**, and clicking **Generate new token**. Make sure to give the token appropriate permissions for accessing the repository.
+
+2. In Keboola, navigate to the **Data App Repository** in your Data App Configuration, check the `Private` option, and enter your GitHub username and the personal access token you generated in step 1.
+
+3. Click **Save** to authenticate with the private repository.
+
+Now, you can deploy your data app from the private repository and access it within your Keboola project.
+
+{: .image-popup}
+![Git repository](/components/data-apps/data_apps-git_repository_private.png)
 
 ## Secrets
 To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key value pairs in the section Secrets.
 These secrets will be injected into the secrets.toml file upon deployment of the app. 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
-{: .image-popup}
+### Default Secrets
+By default, the Keboola Streamlit Docker image includes two secrets that do not require explicit specification:
+
+- `kbc_url`: This represents the URL of the current Keboola project.
+- `kbc_token`: This represents the storage token with full read-write access to Keboola Storage.
+
+These secrets can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola storage token:
+```
+token = st.secrets["kbc_storage_token"]
+url = st.secrets["kbc_url"]
+client = Client(url, token)
+```
+
 ![Secrets](/components/data-apps/data_apps-secrets.png)
 
 ## Loading Data from Storage
@@ -73,10 +108,57 @@ For writing data back to Keboola Project Storage, use our [Keboola Storage Pytho
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
 
 ## Deployment and App Management
-{% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola does not provide authorization to data apps out of the box yet." %}
+{% include warning.html content="Once the data app is deployed, its URL will be publicly available! Keboola provides two authorization methods." %}
 
 ### Authorization
-We recommend incorporating some sort of authorization into your app—for example, the Streamlit authenticator. Check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+We recommend using the authorization methods provided by Keboola.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication.png)
+
+1. **Simple Authorization**: This method allows you to authenticate a user using a username and password.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication-basic.png)
+
+2. **OIDC (OpenID Connect) Authorization**: This enables users to log into your app using your Single Sign-On (SSO) providers providers. 
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication-oidc.png)
+
+If you enter an app with OIDC, you'll be asked to select an `Authentication Provider` and sign in.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-select-oidc-provider.png)
+
+3. **None**: Alternatively, you may implement your own authorization method within your Streamlit data app. For instance, you can use the Streamlit authenticator. For guidance, check out the [Streamlit authenticator tutorial](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [our example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_app-authentication-none.png)
+
+Choose the authorization method that best suits your app's requirements and security needs.
+
+## Sleep and Resume
+Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after an hour of inactivity. Here's how it works:
+
+**Activity Monitoring**: The app monitors for HTTP requests. If no activity is detected for one hour, the app automatically suspends.
+
+**Automatic Resumption**: As soon as a new request is made to the app, it wakes up and resumes operation. While the resume process is designed to be smooth, the first request upon waking may take slightly longer to process.
+
+**Cost Efficiency**: For example, if your app is active for two hours and then experiences no further activity, it will go to sleep after an additional hour. You'll only be billed for the three hours when the app was active and waiting to suspend.
+
+This feature is not only efficient but also intelligent—ensuring you pay only for what you use, while keeping the app ready for when you need it next.
+
+If you enter the URL of a sleeping app, it will trigger its wakeup, and you'll see a **waking up** page.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-proxy-wakeup.png)
+
+Should anything unexpected occur, a **wakeup error** page will appear, and you can click on **Show More** to view the error details.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
+
 
 ### Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
@@ -176,7 +258,7 @@ wheel                     0.40.0
 zipp                      3.16.2
 ```
 
-Please note that the versions of these packages might change as the newest version of the Streamlit package is used upon deployed if not specified explicitly in Packages field.
+Please note that the versions of these packages may change, as the newest version of the Streamlit package is used upon deployment unless explicitly specified in the Packages field.
 
 ### Actions Menu
 {: .image-popup}
