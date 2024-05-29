@@ -52,11 +52,11 @@ snapshot was made.
 
 **MySQL**:
 
-- Database: 8.0.x, 8.2, Driver: 8.3.0
+- Database: 5.7, 8.0.x, 8.2
 
 **MariaDB**:
 
-- Database: 11.1.2, Driver: 3.2.0
+- Database: 11.1.2
 
 ### Snapshots
 

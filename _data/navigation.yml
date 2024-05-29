@@ -113,6 +113,9 @@ items:
               - url: /components/extractors/database/postgresql/
                 title: PostgreSQL
 
+              - url: /components/extractors/database/oracle/
+                title: Oracle
+
               - url: /components/extractors/database/azure-storage-table/
                 title: Azure Storage Table
 
