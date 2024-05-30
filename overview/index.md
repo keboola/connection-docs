@@ -129,8 +129,10 @@ the Windows, macOS, and Linux environments.
 ## AI Assistance
 Keboola AI feature can increase your productivity in several areas, for example:
 
-* Suggesting descriptions of configurations, including [transformations](/transformations), [components](/components) and [flows](/orchestrator). Note that as part of description generation, the configuration might be sent to MS Azure AI service.  For this reason, do not place any secrets (API keys and passwords) into the code of transformations. Secrets marked as such are not sent anywhere.
-* Explaining of errors. When a job finishes in failure an error is reported. You can request an explanation of this error. Note that as part of explanation generation, the error might be sent to MS Azure AI service.
+* Suggesting descriptions of configurations, including [transformations](/transformations), [components](/components) and [flows](/orchestrator). Note that as part of description generation, the configuration is sent to the AI service.  
+* Explaining of errors. When a job finishes in failure an error is reported. You can request an explanation of this error. Note that as part of explanation generation, the error is sent to the AI service.
+
+We're using [Microsoft Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) for the AI service. Prompts and responses are [NOT used to train the model](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy). But you should not place any sensitive information (API keys and passwords) into the code of transformations, descriptions or any metadata as their contents are not consider secret and may be processed by the AI service as well as logs or telemetry processes. 
 
 ## Keboola Support
 When working with the Keboola platform, you are never on your own, and there are multiple [ways to obtain support](/management/support/) from us. 
