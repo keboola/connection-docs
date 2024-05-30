@@ -66,6 +66,13 @@ Many of these are 3rd-party components. Users can add these components via their
 We may share our pre-release versions that exist in private Beta with our test user groups. In such case, you will receive a component ID, using which you can create the configuration. 
 These components will eventually transition to a public Beta.
 
+## Configuration Description
+After you configure the component, it is a good practice to provide a description explaining what the component does.
+
+TODO screenshot
+
+Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify. Note that when using the AI service, the configuration might be sent to MS Azure AI service. This is another reason, why no secrets (API keys and passwords) should be transformation code. Variables are not sent anywhere.
+
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the component categories:
 

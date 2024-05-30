@@ -126,6 +126,12 @@ Components can be run as standard pieces of our Flows [/tutorial/automate/#main-
 [Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands for operating your cloud data pipeline. It can be installed in 
 the Windows, macOS, and Linux environments.
 
+## AI Assistance
+Keboola AI feature can increase your productivity in several areas, for example:
+
+* Suggesting descriptions of configurations, including [transformations](/transformations), [components](/components) and [flows](/orchestrator). Note that as part of description generation, the configuration might be sent to MS Azure AI service.  For this reason, do not place any secrets (API keys and passwords) into the code of transformations. Secrets marked as such are not sent anywhere.
+* Explaining of errors. When a job finishes in failure an error is reported. You can request an explanation of this error. Note that as part of explanation generation, the error might be sent to MS Azure AI service.
+
 ## Keboola Support
 When working with the Keboola platform, you are never on your own, and there are multiple [ways to obtain support](/management/support/) from us. 
 To solve your problem or to gain context, our support staff may join your project when requested.
