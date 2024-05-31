@@ -74,7 +74,9 @@ After configuring the component, it is a good practice to describe what it does.
 ![Screenshot - Add Description button](/components/description-button.png)
 
 Click the **Add Description** button to write the description manually. You can also click the **Generate Description** button to have our AI service write a suggestion for you that you can modify. 
-Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview#ai-assistance). Even though the contents are not used to train the model, as a best practice you should not store unencrypted secrets like API keys and passwords in the configuration (for example in Python transformation code). Variables and encrypted configuration parameters are automatically obfuscated.
+Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview#ai-assistance). Even though the contents are not used to train the model, as a best practice, 
+you should not store unencrypted secrets such as API keys and passwords in the configuration (for example, in Python transformation code). Variables and encrypted configuration parameters are automatically 
+obfuscated.
 
 {: .image-popup}
 ![Screenshot - AI generated description](/components/description-button.png)
