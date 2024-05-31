@@ -132,7 +132,7 @@ The Keboola AI feature can increase your productivity in several areas, such as:
 * **Suggesting descriptions of configurations**: This includes [transformations](/transformations), [components](/components), and [flows](/orchestrator). Note that the configuration is sent to the AI service as part of description generation.  
 * **Explaining errors**: When a job finishes in failure, an error is reported. You can request an explanation of this error. Note that the error is sent to the AI service as part of explanation generation.
 
-We're using [Microsoft Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) for the AI service. Prompts and responses are [NOT used to train the model](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy). 
+We're using a privately deployed [Microsoft Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) for the AI service. Prompts and responses are [NOT used to train the model](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy). 
 However, you should not place any sensitive information (such as API keys and passwords) into the code of transformations, descriptions or any metadata, as their contents are not consider secret and may be 
 processed by the AI service, as well as logs or telemetry processes. 
 
