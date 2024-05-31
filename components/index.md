@@ -43,7 +43,7 @@ All changes are backward compatible.
 
 **Limitations:**
 
-- Becuase in the early stages, these components are used in fewer projects. Minor bugs, though promptly fixed within the standard SLA, may appear more frequently.
+- Because in the early stages, these components are used in fewer projects. Minor bugs, though promptly fixed within the standard SLA, may appear more frequently.
 - The range of features might not be exhaustive and will likely expand through backward-compatible updates.
 - Documentation may be less comprehensive than in the GA version, often given as README.md files.
 - These components may pose limitations, like pending Google verification, verification status-related rate limits, etc.
@@ -73,7 +73,7 @@ After configuring the component, it is a good practice to describe what it does.
 {: .image-popup}
 ![Screenshot - Add Description button](/components/description-button.png)
 
-Click the **Add Description** button to write the description manually. You can also click the **Generate Description** button to have our AI service write a suggestion for you that you can modify. 
+Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify. 
 Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview#ai-assistance). Even though the contents are not used to train the model, as a best practice, 
 you should not store unencrypted secrets such as API keys and passwords in the configuration (for example, in Python transformation code). Variables and encrypted configuration parameters are automatically 
 obfuscated.
