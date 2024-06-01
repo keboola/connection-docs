@@ -18,7 +18,7 @@ Similar to other popular API development tools, you can set up and test the conn
 Features such as cURL import, request tests, output mapping generator, and dynamic function templates and evaluation make the configuration process easier. 
 
 {: .image-popup}
-![Generic Extractor - UI Animation](/components/extractors/other/generic/animation.gif)
+![Generic Extractor - UI](/components/extractors/other/generic/ui.png)
 
 Because you have to write it yourself, we included the
 [Generic Extractor guide](https://developers.keboola.com/extend/generic-extractor/) in our [Developer 
