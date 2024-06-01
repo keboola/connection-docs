@@ -79,7 +79,7 @@ you should not store unencrypted secrets such as API keys and passwords in the c
 obfuscated.
 
 {: .image-popup}
-![Screenshot - AI generated description](/components/description-button.png)
+![Screenshot - AI generated description](/components/description-generated.png)
 
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the component categories:
