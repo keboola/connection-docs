@@ -5,6 +5,7 @@ permalink: /templates/interactive-keboola-sheets/
 
 * TOC
 {:toc}
+This demo template utilizes a data app to demonstrate how Streamlit interacts with Keboola Storage. 
 
 This template will help you simplify data editing and management within your company. 
 The data app eliminates the need to export data to external tools, allowing business users to **directly access and edit tables stored in Keboola Storage**.
