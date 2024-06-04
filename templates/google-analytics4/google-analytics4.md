@@ -9,7 +9,7 @@ permalink: /templates/google-analytics4/
 Using the Google Analytics 4 template will provide you with insights into site activities: the length of visits, the number of pages seen per visit, the 
 bounce rate, and many other statistics, which you can see in time or by the traffic source. You can also enrich your Google Analytics data with 
 Google Search Console data. This will show you the average rank of your page in time.
-After all the necessary tasks are performed on the data, you can load the results into data destination of your choice or you can use data app for visualization.
+After all the necessary tasks are performed on the data, you can load the results into the data destination of your choice or use a data app for visualization.
 
 **The flow, in a nutshell:**
 
@@ -31,12 +31,12 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 
 | Name | Description |
 |---|---|
-| GA4 AD ANALYTICS | contains data about impressions, clicks, costs, sessions, coversions, bounces, and pageviews of each campaign per day |
-| GA4 AUDIENCE | contains aggregated data about set audiences, i.e. active, new or total users, sessions, average session duration, screen page views etc.|
+| GA4 AD ANALYTICS | contains data about impressions, clicks, costs, sessions, conversions, bounces, and pageviews of each campaign per day |
+| GA4 AUDIENCE | contains aggregated data about set audiences, i.e., active, new or total users, sessions, average session duration, screen page views, etc.|
 | GA4 DEMOGRAPHIC AUDIENCE | contains a high-level age/gender focused view of traffic (session) data |
-| GA4 EVENT | contains aggregated data about events, i.e. count, value, total users, active users, new users |
+| GA4 EVENT | contains aggregated data about events, i.e., count, value, total users, active users, new users |
 | GA4 GEO AUDIENCE | contains geographical data that tells you who your visitors coming to website are and where they are coming from |
-| GA4 PAGE BEHAVIOUR | contains data about visitor behaviour on the pages - pageviews, sessions, entrances, and time spent on a page |
+| GA4 PAGE BEHAVIOUR | contains data about visitor behaviour on the pages – pageviews, sessions, entrances, and time spent on a page |
 | GA4 TRAFFIC SOURCE | contains data about traffic sources of each campaign and source per day (sessions, bounces, users, session duration, and pageviews) |
 | GSC RANKING | contains data about average ranking of each page per day |
 
@@ -63,7 +63,7 @@ Select the template from the **Templates** tab in your Keboola project. When you
 {: .image-popup}
 ![Add New Template](/templates/google-analytics4/ga4-add-new-template.png)
 
-This page contains information about the template. Click on **+ Set Up Template**.
+This page contains information about the template. Click **+ Set Up Template**.
 
 {: .image-popup}
 ![Google Analytic 4 - Set Up Template](/templates/google-analytics4/ga4-set-up-template.png)
@@ -80,7 +80,7 @@ perform the required OAuth authorizations.
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
 authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/google-analytics/#authorizing-data-destinations) below.
 
-Follow the steps one by one and authorize Google Analytics 4 data source and optionally Google Search Console data source. If you want to upload the data to the database, choose one (or more) of the destinations and authorize it.
+Follow the steps one by one and authorize the Google Analytics 4 data source and, optionally, the Google Search Console data source. If you want to upload the data to the database, choose one (or more) of the destinations and authorize it.
 
 {: .image-popup}
 ![Google Analytics 4 - Flow](/templates/google-analytics4/ga4-flow.png)
@@ -114,7 +114,7 @@ Using this data source is optional.
 Authorize your Google Account and then fill in your domain.
 
 ## Authorizing Data Destinations
-When creating a working flow you have an option to select one or more data destinations.
+When creating a working flow, you can select one or more data destinations.
 
 ### BigQuery Database
 
@@ -143,7 +143,7 @@ in your duplicated Google sheet.
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-1. Configure the Snowflake destination and click on **Save Configuration**
+1. Configure the Snowflake destination and click **Save Configuration**.
 2. After clicking **Save**, the template will be used in your project. You will see a flow. 
 3. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
 4. Select **Keboola Snowflake database**. 
