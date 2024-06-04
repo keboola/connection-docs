@@ -16,8 +16,8 @@ After all the necessary tasks are performed on the data, you can transform the r
 
 - The data is then written into your selected destination, for example to Snowflake database via the Snowflake data destination connector.
 
-- Finally, you will run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
-The eCommerce data source connector, all data manipulations and analysis, and the data destination connector of your choice, will be processed.
+- Finally, you will run the entire flow (i.e., the sequence of all the prepared, above-mentioned steps, in the correct order). 
+The eCommerce data source connector, all data manipulations and analysis, and the data destination connector of your choice will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
@@ -30,9 +30,9 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 | Name | Description |
 |---|---|
 | ORDERS | contains list of customer orders including order date, purchase, price and taxes |
-| ORDER LINES | contains individual items to orders, incl. order date, amount of bought items, item prices and item average margin |
+| ORDER LINES | contains individual items to orders, incl. order date, amount of bought items, item prices, and item average margin |
 | CUSTOMERS | contains list of customers, incl. email, customer billing and shipping information, total orders count and total orders value, as well as the actual RFM segment and score of each customer |
-| PRODUCTS | contains list of products including product type, product manufacturer, product price, stock amount and the number of units sold in the last 30 days, information about stock refill |
+| PRODUCTS | contains list of products including product type, product manufacturer, product price, stock amount, number of units sold in the last 30 days, and information about stock refill |
 
 ## Data Sources
 
@@ -160,7 +160,7 @@ Both can be accomplished by following [this guide](https://support.bigcommerce.c
 Additional documentation is available [here](https://bitbucket.org/kds_consulting_team/kds-team.ex-bigcommerce/src/master/).
 
 ## Authorizing Data Destinations
-When creating a working flow you have an option to select one or more data destinations.
+When creating a working flow, you can select one or more data destinations.
 
 ### BigQuery Database
 
@@ -186,7 +186,7 @@ Duplicate the sheet into your Google Drive and paste the file ID back into Keboo
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-1. Configure the Snowflake destination and click on **Save Configuration**
+1. Configure the Snowflake destination and click **Save Configuration**.
 2. After clicking **Save**, the template will be used in your project. You will see a flow. 
 3. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
 4. Select **Keboola Snowflake database**. 
