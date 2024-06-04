@@ -10,7 +10,7 @@ Using one of the advertising platform templates will give you an overview of the
 and one location. That means that you won't have to go to multiple systems and collect data manually anymore. Keboola will do it for you.
 
 With this end-to-end flow you can bring into Keboola data from one or more marketing channels of your choice (Facebook Ads, LinkedIn Ads, Google Ads, 
-and Bing Ads). After all the necessary tasks are performed on the data, you load the results into Snowflake, Google BigQuery, Google Sheets or PostgreSQL.
+and Bing Ads). After all the necessary tasks are performed on the data, you load the results into Snowflake, Google BigQuery, Google Sheets, or PostgreSQL.
 
 **The flow, in a nutshell:**
 
@@ -25,13 +25,13 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected data source connectors, all data manipulations, and the Google Sheets data destination connector, will be processed.
   
-- If you want to vizualize the data from this template you can use the predefined data app.
+- If you want to visualize the data from this template, you can use the predefined data app.
 
 ## Table Description
 
 | Name | Description |
 |---|---|
-| ONLINE MARKETING | contains daily data about campaigns and theirs impressions, clicks, costs per clicks, and costs per conversions |
+| ONLINE MARKETING | contains daily data about campaigns and their impressions, clicks, costs per clicks, and costs per conversions |
 
 ## Data Sources
 
@@ -95,12 +95,11 @@ perform the required OAuth authorizations.
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
 authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/marketing-platforms/#authorizing-data-destinations) below.
 
-Follow the steps one by one and authorize at least one data source from the list. If you want to upload the data to the database, choose one of the destinations and authorize it or you can visualize the data directly using our streamlit data app. To do so, select the checkbox **Let’s do it** in the **Online Marketing Report** application 
-and save the configuration. 
+Follow the steps one by one and authorize at least one data source from the list. If you want to upload the data to the database, choose one of the destinations and authorize it, or you can visualize 
+the data directly using our Streamlit data app. To do so, select the checkbox **Let’s Do It** in the **Online Marketing Report** application and save the configuration. 
 
 {: .image-popup}
 ![Online Marketing Report](/templates/marketing-platforms/online-marketing-report.png)
-
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
@@ -159,7 +158,7 @@ Authorize your LinkedIn account and then fill in the start and end dates followi
 Authorize your Google account and select the period for extracting the data.
 
 ## Authorizing Data Destinations
-When creating a working flow you have an option to select one or more data destinations.
+When creating a working flow, you can select one or more data destinations.
 
 ### BigQuery Database
 
@@ -186,11 +185,11 @@ in your duplicated Google sheet.
 
 ### PostgreSQL Database
 
-You need to provide a host name, driver, port number, user name, password, database name, and a schema. 
+You must provide a hostname, driver, port number, user name, password, database name, and a schema. 
 
-We highly recommend that you create dedicated credentials for the data destination connector in your database. 
+We highly recommend creating dedicated credentials for the data destination connector in your database. 
 
-More info [here](https://help.keboola.com/components/writers/database/postgresql/).
+More info is available [here](https://help.keboola.com/components/writers/database/postgresql/).
 
 {: .image-popup}
 ![PostgreSQL Destination](/templates/marketing-platforms/postgresql-data-destination.png)
@@ -199,7 +198,7 @@ More info [here](https://help.keboola.com/components/writers/database/postgresql
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-1. Configure the Snowflake destination and click on **Save Configuration**
+1. Configure the Snowflake destination and click **Save Configuration**.
 2. After clicking **Save**, the template will be used in your project. You will see a flow. 
 3. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
 4. Select **Keboola Snowflake database**. 
