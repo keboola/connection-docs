@@ -17,7 +17,7 @@ After all the necessary tasks are performed on the data, you can transform the r
 - The data is then written into your selected destination, for example to Snowflake database via the Snowflake data destination connector.
 
 - Finally, you will run the entire flow (i.e., the sequence of all the prepared, above-mentioned steps, in the correct order). 
-The eCommerce data source connector, all data manipulations and analysis, and the data destination connector of your choice will be processed.
+The eCommerce data source connector, all data manipulations and analyses, and the data destination connector of your choice will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
