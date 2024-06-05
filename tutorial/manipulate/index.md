@@ -123,16 +123,17 @@ CREATE TABLE "opportunity_denorm" AS
 For BigQuery, the query will look like this:
 
 {% highlight sql %}
+CREATE TABLE opportunity_denorm AS
 WITH tmp_level AS (
     SELECT 
         Name, 
         CASE
-            WHEN Levelz = 'S' THEN 'Senior'
-            WHEN Levelz = 'M' THEN 'Intermediate'
-            WHEN Levelz = 'J' THEN 'Junior' 
+            WHEN `Level`.`Level` = 'S' THEN 'Senior'
+            WHEN `Level`.`Level` = 'M' THEN 'Intermediate'
+            WHEN `Level`.`Level` = 'J' THEN 'Junior' 
         END AS Level
     FROM 
-        in_c_csv_import.levelx
+        level
 ),
 tmp_opportunity AS (
     SELECT 
@@ -143,7 +144,7 @@ tmp_opportunity AS (
             ELSE 'Excellent' 
         END AS ProbabilityClass
     FROM 
-        in_c_csv_import.opportunity
+        opportunity
 )
 SELECT 
     tmp_opportunity.*,
@@ -157,9 +158,9 @@ SELECT
 FROM 
     tmp_opportunity
 JOIN 
-    in_c_csv_import.`user` ON tmp_opportunity.OwnerId = user.Id
+    user ON tmp_opportunity.OwnerId = user.Id
 JOIN 
-    in_c_csv_import.account ON tmp_opportunity.AccountId = account.Id 
+    account ON tmp_opportunity.AccountId = account.Id 
 JOIN 
     tmp_level ON user.Name = tmp_level.Name;
 {% endhighlight %}
