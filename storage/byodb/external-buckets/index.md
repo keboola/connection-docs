@@ -8,7 +8,7 @@ permalink: /storage/byodb/external-buckets/
 
 If you operate Keboola in Bring Your Own Database (BYODB) mode using your own data warehouse, the data in the warehouse won't automatically be visible or accessible within Keboola. To address this, we offer the **External Datasets** feature.
 
-The implementation of External Datasets varies depending on your database backend, whether it is a database, schema, or another concept.
+The implementation of  **External Datasets requires the [BYODB](https://help.keboola.com/storage/byodb/) to be enabled first** and varies depending on your database backend, whether it is a database, schema, or another concept.
 Unless specified otherwise, this description refers to the implementation for Snowflake and BigQuery.
 
 ## What Is an External Dataset?
