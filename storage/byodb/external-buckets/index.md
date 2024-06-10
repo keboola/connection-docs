@@ -8,8 +8,8 @@ permalink: /storage/byodb/external-buckets/
 
 If you operate Keboola in Bring Your Own Database (BYODB) mode using your own data warehouse, the data in the warehouse won't automatically be visible or accessible within Keboola. To address this, we offer the **External Datasets** feature.
 
-The implementation of External Datasets varies depending on your database backend, whether it is a database, schema, or another concept.
-Unless specified otherwise, this description refers to the implementation for Snowflake and BigQuery.
+The implementation of **External Datasets requires the [BYODB](https://help.keboola.com/storage/byodb/) to be enabled first**.
+Unless specified otherwise, this description refers to the implementation of Snowflake and BigQuery.
 
 ## What Is an External Dataset?
 Storage in Keboola is organized into [buckets](/storage/buckets/). An external dataset is a special type of bucket wherein Keboola does not manage 
@@ -25,8 +25,8 @@ An external dataset can be registered in the Storage of a project. Navigate to *
 backend you are using.
 
 ### Snowflake
-Fill in the **name** of the new bucket, **database** name, and **schema** name. Click **Next Step**. Keboola will then give you a code that you can use to 
-correctly grant Keboola access to the schema in your Snowflake. Once access has been granted, click **Register Dataset** to start using it.
+Fill in the **name** of the new bucket, **database** name, and **schema** name. Click **Next Step**. Keboola will then generate a code that you can use to 
+grant Keboola correct access to the schema in your Snowflake. Once access has been granted, click **Register Dataset** to start using it.
 
 {: .alert.alert-info}
 Note: This set of permissions grants the Keboola service account read-only access to the data.
@@ -35,8 +35,8 @@ Note: This set of permissions grants the Keboola service account read-only acces
 [Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
 
 ### BigQuery
-Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will give you a code that you can use to correctly grant Keboola 
-access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
+Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
+correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
 
 {: .alert.alert-info}
 Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
