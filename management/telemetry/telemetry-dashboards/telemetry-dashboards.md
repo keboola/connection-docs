@@ -3,14 +3,14 @@ title: Telemetry Dashboards
 permalink: /management/telemetry/telemetry-dashboards/
 ---
 
-* TOC
-{:toc}
-
 ***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to “Connection” or the abbreviation “KBC” might still appear in table
 names, column names, etc.*
 
 To get to all three telemetry dashboards, click the top right corner of the profile picture. The [Project Consumption](#project-consumption) dashboard is always available. Check with your account manager to see 
 if [Organization Usage](#organization-usage) or [Activity Center](#activity-center) are also available. 
+
+* TOC
+{:toc}
 
 ## Project Consumption
 {: .image-popup}
