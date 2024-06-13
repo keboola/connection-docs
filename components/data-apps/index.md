@@ -31,7 +31,7 @@ First, enter a custom prefix for your data app, which you will later share with 
 
 There are two ways to create a data app in Keboola. Select a deployment type that will suit your needs:
 - **Code** – Just paste a Streamlit code to create a simple data app. 
-- **Git repository** – Specify a git repository with Streamlit app sources. This is more suitable for complex applications. You must provide your GitHub username and private access token for repository authentication.
+- **Git repository** – Specify a Git repository with Streamlit app sources. This is more suitable for complex applications. For repository authentication, you must provide your GitHub username, private access token, or SSH private key.
 
 {: .image-popup}
 ![Code - main menu](/components/data-apps/data_apps-main_menu.png)
@@ -63,7 +63,11 @@ Provide the Project URL, choose the right branch, and finally, select your main 
 {: .image-popup}
 ![Git repository](/components/data-apps/data_apps-git_repository_public.png)
 
-If you are using a private repository, you must authenticate using your GitHub username and private access token. Follow these steps to authenticate:
+If you are using a private repository, you have two options to authenticate:
+- With your GitHub username and personal access token
+- With an SSH private key
+
+Follow these steps to authenticate using your GitHub username and personal access token:
 
 1. Generate a personal access token on GitHub by going to your GitHub account settings, selecting **Developer settings > Personal access tokens**, and clicking **Generate new token**. Make sure to give the token appropriate permissions for accessing the repository.
 
@@ -71,10 +75,12 @@ If you are using a private repository, you must authenticate using your GitHub u
 
 3. Click **Save** to authenticate with the private repository.
 
+To authenticate using your SSL private key, follow the instructions in the [GitHub manual](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). After generating your key, enter your SSH private key into the appropriate configuration field and click **Save**.
+
 Now, you can deploy your data app from the private repository and access it within your Keboola project.
 
 {: .image-popup}
-![Git repository](/components/data-apps/data_apps-git_repository_private.png)
+![Git repository](/components/data-apps/data_apps-git_repository_private_SSH.png)
 
 ## Secrets
 To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key value pairs in the section Secrets.
