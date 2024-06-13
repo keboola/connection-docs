@@ -13,7 +13,7 @@ services:
     command: jekyll serve --watch -H 0.0.0.0 --force_polling
 
   aws:
-    image: quay.io/keboola/aws-cli
+    image: public.ecr.aws/aws-cli/aws-cli:latest
     volumes:
       - ./:/code
     working_dir: /code
