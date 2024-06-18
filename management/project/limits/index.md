@@ -49,8 +49,8 @@ based on
 
 Types:
 - **KBC** - Generic type of PPU used in the projects.
-- **SQL** - PPU used for SQL transformation jobs, in case customer is using [BYODB](/storage/byodb) and has a separate product for SQL jobs.
-- **CDC** - PPU used for CDC extractor jobs, in case customer is using [CDC](/components/extractors/database/#change-data-capture-cdc) and has a separate product for CDC jobs.
+- **SQL** - PPU used for SQL transformation jobs, in case the customer is using [BYODB](/storage/byodb) and has a separate product for SQL jobs.
+- **CDC** - PPU used for CDC extractor jobs, in case the customer is using [CDC](/components/extractors/database/#change-data-capture-cdc) and has a separate product for CDC jobs.
 
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
