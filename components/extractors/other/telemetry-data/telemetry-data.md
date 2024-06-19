@@ -163,6 +163,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
 | `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `OpenRefine`, `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
+| `credit_type` | Type of credit associated with the job. Possible values: <br> `KBC`, `SQL`, `CDC` <br> Does not necessarily represent actually used credit, as SQL and CDC credits are only consumed if they exist in the contract ([info](/management/project/limits/#project-power--time-credits)). The type of actually billed credit is defined in the [kbc_usage_metrics_values](/components/extractors/other/telemetry-data/#kbc_usage_metrics_values) table | `KBC` |
 | `job_run_id` | Run ID of the job – multiple jobs can run under the same Run ID | `117643429.117644388` |
 | `job_start_at` | Datetime when the job started | `2020-03-15 11:59:39` |
 | `job_created_at` | Datetime when the job was created | `2020-03-15 11:59:38` |
@@ -301,7 +302,7 @@ You need data for all projects.*
 |---|---|---|
 | `metrics_values_id` (PK) | Identifier of the daily value of the usage metric (combination of the project ID, usage metric ID, metric breakdown, sandbox flag, and date) | `779_kbc-eu-central-1_kbc_tb_KBC TB_false_2020-07-14` |
 | `kbc_project_id` | Foreign key to the Keboola project | `779_kbc-eu-central-1` |
-| `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
+| `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `sql_ppu`, `cdc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
 | `date` | Date of the value | `2019-11-01` |
 | `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into data destination connectors, applications, and transformations. | `DWH Direct Query` |
 | `is_sandbox` | Flag determining if the value is for sandbox | `true` |
