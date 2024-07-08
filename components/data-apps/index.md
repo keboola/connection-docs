@@ -288,7 +288,7 @@ For example, a conflict of the specified packages:
 ### Hello World
 Author: Jordan Burger
 
-Our demo data app shows how to create a data app with Streamlit Python code from a code directly in keboola.
+This demo data app shows how to create a data app with Streamlit Python code from a code directly in Keboola.
 
 - [Configuration](https://demo.keboola.com/app/data-apps/75298630)
 - [Live App](https://hello-world-75299519.hub.north-europe.azure.keboola.com)
@@ -296,16 +296,16 @@ Our demo data app shows how to create a data app with Streamlit Python code from
 ### Titanic Demo App
 Author: Monika Feigler
 
-Our demo data app shows how to create a data app with Streamlit Python code and how to incorporate data and files from an input mapping into your code. This data app allows users to explore and analyze the Titanic dataset using interactive visualizations and filters.
+This demo data app shows how to create a data app with Streamlit Python code and how to incorporate data and files from an input mapping into your code. This data app allows users to explore and analyze the Titanic dataset using interactive visualizations and filters.
 
 - [Configuration](https://demo.keboola.com/app/data-apps/49752130)
 - [Source](https://github.com/keboola/titanic-data-app)
-- [Live App](https://titanic-demo-app-deployed-from-a-github-repository-49752295.hub.north-europe.azure.keboola.com/)
+- [Live app](https://titanic-demo-app-deployed-from-a-github-repository-49752295.hub.north-europe.azure.keboola.com/)
 
 ### AI Created Content Checker
 Author: Petr Huňka
 
-Our demo app offers a cutting-edge solution that leverages Shopify data to supercharge your campaigns. By harnessing the power of artificial intelligence (AI), we create tailor-made SMS messages and deliver them through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
+This demo app offers a cutting-edge solution that leverages Shopify data to supercharge your campaigns. By harnessing the power of artificial intelligence (AI), we create tailor-made SMS messages and deliver them through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
 
 - [Configuration](https://demo.keboola.com/app/data-apps/51362322)
 - [Documentation](https://help.keboola.com/templates/ai-campaign-executer/)
@@ -339,7 +339,7 @@ This app, along with the complete workflow, can be implemented using the eCommer
 ### Online Marketing Dashboard
 Author: Monika Feigler
 
-Our demo app provides an overview of the costs for all campaigns across marketing channels. 
+This demo app provides an overview of the costs for all campaigns across marketing channels. 
 - [Live app](https://online-marketing-dashboard-49569899.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/49567241)
 - [Documentation](https://help.keboola.com/templates/marketing-platforms/)
