@@ -285,22 +285,24 @@ For example, a conflict of the specified packages:
 
 ## Example Data Apps
 
+### Hello World
+Author: Jordan Burger
+
+Our demo data app shows how to create a data app with Streamlit Python code from a code directly in keboola.
+
+- [Configuration](https://demo.keboola.com/app/data-apps/75298630)
+- [Live App](https://hello-world-75299519.hub.north-europe.azure.keboola.com)
+  
 ### Titanic Demo App
 Author: Monika Feigler
 
 Our demo data app shows how to create a data app with Streamlit Python code and how to incorporate data and files from an input mapping into your code. This data app allows users to explore and analyze the Titanic dataset using interactive visualizations and filters.
 
-#### Deployed from code
-
-- [Configuration](https://demo.keboola.com/app/data-apps/45663441)
-- [Live App](https://sandbox.north-europe.azure.keboola.com/45663474/)
-  
-#### Deployed from a GitHub repository
-
 - [Configuration](https://demo.keboola.com/app/data-apps/49752130)
 - [Source](https://github.com/keboola/titanic-data-app)
+- [Live App](https://titanic-demo-app-deployed-from-a-github-repository-49752295.hub.north-europe.azure.keboola.com/)
 
-### AI SMS Campaign
+### AI Created Content Checker
 Author: Petr Huňka
 
 Our demo app offers a cutting-edge solution that leverages Shopify data to supercharge your campaigns. By harnessing the power of artificial intelligence (AI), we create tailor-made SMS messages and deliver them through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
@@ -308,6 +310,7 @@ Our demo app offers a cutting-edge solution that leverages Shopify data to super
 - [Configuration](https://demo.keboola.com/app/data-apps/51362322)
 - [Documentation](https://help.keboola.com/templates/ai-campaign-executer/)
 - [Source](https://github.com/keboola/ai_campaign_executer)
+- [Live app](https://ai-created-content-checker-ai-campaign-executer-51814454.hub.north-europe.azure.keboola.com)
   
 This data app, along with the complete workflow, can be implemented using the AI SMS Campaign template.
 
@@ -315,7 +318,7 @@ This data app, along with the complete workflow, can be implemented using the AI
 Author: Petr Huňka
 
 Simplify data editing and management within your company. The data app eliminates the need to export data to external tools, allowing business users to directly access and edit tables stored in Keboola Storage.
-- [Live app](https://sandbox.north-europe.azure.keboola.com/51814820/)
+- [Live app](https://interactive-keboola-sheets-keboola-sheets-app-51814820.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/51359967)
 - [Documentation](https://help.keboola.com/templates/interactive-keboola-sheets/)
 - [Source](https://github.com/keboola/planning-sheets-data-app/)
@@ -326,7 +329,7 @@ This data app, along with the complete workflow, can be implemented using the In
 Author: Ondřej Svoboda
 
 This data app provides an interactive display of several business metrics with integrated Slack notifications.
-- [Live app](https://sandbox.north-europe.azure.keboola.com/51814781/)
+- [Live app](https://interactive-kpi-report-kpi-app-71250158.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/51361334)
 - [Documentation](https://help.keboola.com/templates/interactive-kpi-reporting/)
 - [Source](https://github.com/keboola/interactive-kpi-reporting)
@@ -337,7 +340,7 @@ This app, along with the complete workflow, can be implemented using the eCommer
 Author: Monika Feigler
 
 Our demo app provides an overview of the costs for all campaigns across marketing channels. 
-- [Live app](https://sandbox.north-europe.azure.keboola.com/49569899/)
+- [Live app](https://online-marketing-dashboard-49569899.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/49567241)
 - [Documentation](https://help.keboola.com/templates/marketing-platforms/)
 - [Source](https://github.com/keboola/marketing-dashboard-data-app)
@@ -351,6 +354,7 @@ This data app is designed to provide a quick and comprehensive overview of the d
 - [Configuration](https://demo.keboola.com/app/data-apps/51525772)
 - [Documentation](https://help.keboola.com/templates/ua-and-ga4-comparison/)
 - [Source](https://github.com/keboola/ua-ga4-comparison)
+- [Live app](https://ua-ga4-comparison-app-51525847.hub.north-europe.azure.keboola.com)
 
 This app, along with the complete workflow, can be implemented using the UA and GA4 Comparison template.
 
