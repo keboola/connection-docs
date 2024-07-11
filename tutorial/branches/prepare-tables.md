@@ -62,7 +62,7 @@ CREATE TABLE "top_prices" AS SELECT * FROM "bitcoin_price" ORDER BY PRICE DESC L
 {% endhighlight %}
 
 {: .image-popup}
-![Snowflake output mapping](/tutorial/branches/figures/snflk-prod-code.png)
+![Snowflake output mapping](/tutorial/branches/figures/snflk-prod-code1.png)
 
 
 {: .image-popup}
