@@ -270,6 +270,17 @@ row. You can roll back a row to a previous version without interacting with the 
 ***Note:** You cannot copy a configuration row to a new configuration. You always have to copy the entire
 configuration.*
 
+### Running Component Configuration Jobs in Parallel ###
+All components (usually data source and data destination components) that support configuration rows now have the option to set job parallelism at the configuration level.
+
+This means you can control the speed of an extraction or writing process and specify which scenarios you want to speed up.
+
+This setting is optional, and "Parallel jobs: Off" is the default option.
+
+Example: There are five rows in your configuration. Setting the parallelism to 2 means the five jobs will be processed as three sets of consecutive jobs (2 + 2 + 1). The jobs in each set will run in parallel.
+
+This feature is now available in all projects with Queue v2 and on all stacks.
+
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user),
 this means that the service does not require entering credentials (username, password, token, etc.). Instead, you are 
