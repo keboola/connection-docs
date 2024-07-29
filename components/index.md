@@ -270,14 +270,13 @@ row. You can roll back a row to a previous version without interacting with the 
 ***Note:** You cannot copy a configuration row to a new configuration. You always have to copy the entire
 configuration.*
 
-### Running Component Configuration Jobs in Parallel ###
-All components (usually data source and data destination components) that support configuration rows now have the option to set job parallelism at the configuration level.
-
+### Running Component Configuration Jobs in Parallel
+All components (usually data source and destination connectors) that support configuration rows now have the option to set job parallelism at the configuration level.
 This means you can control the speed of an extraction or writing process and specify which scenarios you want to speed up.
 
-This setting is optional, and "Parallel jobs: Off" is the default option.
+This setting is optional, with the default option being **Parallel jobs: Off**.
 
-Example: There are five rows in your configuration. Setting the parallelism to 2 means the five jobs will be processed as three sets of consecutive jobs (2 + 2 + 1). The jobs in each set will run in parallel.
+**Example:** If your configuration has five rows and you set the parallelism to 2, the five jobs will be processed in three consecutive sets (2 + 2 + 1). The jobs within each set will run in parallel.
 
 This feature is now available in all projects with Queue v2 and on all stacks.
 
