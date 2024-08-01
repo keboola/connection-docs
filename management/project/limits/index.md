@@ -17,10 +17,10 @@ and a possible contract update conversation.
 2. **Platform limits** represent what our platform is **technically capable of**. Reaching or exceeding 
 these limits is either technically impossible, or it carries a risk of degraded performance.
 
-**Note:** These limits apply to standard Keboola projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
+***Note:** These limits apply to standard Keboola projects. The limits for [pay-as-you-go projects](/management/payg-project/) 
+might differ.*
 
 ## Business Limits
-
 Business limits are set for each project upon entering into the subscription. 
 
 All business limits are **soft limits**. Exceeding them will not cause the project to be restricted. 
@@ -35,7 +35,7 @@ Business limits vary based on your contract (refer to it to see which ones apply
 [Keboola support users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [tokens](/management/project/tokens). 
 - **Project Power** --- measured in [Time Credits/Units](#project-power---time-credits)
-- **Storage size** --- the sum of the sizes of the tables in your [Table Storage](/storage)
+- **Storage Size** --- the sum of the sizes of the tables in your [Table Storage](/storage)
 
 ### Project Power -- Time Credits
 
@@ -55,9 +55,9 @@ Types:
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
 
-| Types of jobs in Keboola              | Base job                | Time credits          |
-|---------------------------------------|-------------------------|-----------------------|
-| **Data source job**                    | 1 hour                  | **2**                 |
+| Types of jobs in Keboola | Base job | Time credits |
+|---|---|---|
+| **Data source job**                   | 1 hour                  | **2**                 |
 | **Data destination job**              | 1 GB out                | **0.2**               |  
 | **SQL job / workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
@@ -80,8 +80,8 @@ If you need more information, please contact your CSM.
 | **DataApps (BETA)**                   |                         |                       |
 | Small                                 | 1 hour                  | **1**                 |
 
-**Types of backend sizes used for jobs**
-
+| Types of backend sizes used for jobs | |
+|---|---|
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
@@ -121,5 +121,28 @@ As another example, you should not have more than 200 tables in a single bucket.
 how we believe the Storage component should be used. Nothing prevents you from exceeding that limit but the 
 component performance may degrade. 
 
-The **full list of the platform limits** is available as a 
-[separate document](https://docs.google.com/a/keboola.com/spreadsheets/d/1SqUE6vS5Nq0MmB6Kdw5DyuPjlbyXJ0zMDoGDU5cOfSI/edit?usp=sharing).
+The following sections list all Keboola platform's limits [Organization Limits](/management/project/limits/#organization-limits), and
+[Project Limits](/management/project/limits/#project-limits).
+
+### Organization Limits
+
+| Limit | Value | Soft/Hard |
+|---|---|---|
+| Maintainers per customer | max 1 | soft |
+| Members per maintainer | max 10,000  | soft |
+| Organizations per maintainer | max 500 | soft |
+| Members per organization | max 1,000 | soft |
+| Projects per organization | max 100 | soft |
+
+### Project Limits
+
+**Miscellaneous**
+
+| Limit | Value | Soft/Hard |
+|---|---|---|
+| Users per project | 50 | soft |
+| Resource name length | na |na |
+| API request size | na | na |
+
+
+|---|---|---|---|
