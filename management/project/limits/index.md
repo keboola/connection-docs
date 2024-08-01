@@ -141,18 +141,45 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
 | Storage total size | 30 | TB | soft |
-| Number of buckets | 100 | | soft |
-| Number of tables in a bucket |200 | | soft |
-| Total number of tables in a Snowflake storage |  20,000 | | soft |
-| Total number of tables in a Redshift storage | 9,000 | | soft |
-| Number of rows in a Snowflake table | 100,000,000,000 | | soft |
-| Number of rows in a Redshift table | 100,000,000,000 | | soft |
-| Number of columns in a Redshift table | 500 | | soft |
-| Number of columns in a Snowflake table | 500 | | soft |
-| Number of columns in a MySQL table | 100 | | soft |
-| Number of indexes on a Redshift table | 1 | | soft |
-| Number of indexes on a Snowflake table | N/A | | soft |
-| Number of indexes on a MySQL table | 10 | | soft |
+| Number of buckets | 100 | # | soft |
+| Number of tables in a bucket |200 | # | soft |
+| Total number of tables in a Snowflake storage |  20,000 | # | soft |
+| Total number of tables in a Redshift storage | 9,000 | # | soft |
+| Number of rows in a Snowflake table | 100,000,000,000 | # | soft |
+| Number of rows in a Redshift table | 100,000,000,000 | # | soft |
+| Number of columns in a Redshift table | 500 | # | soft |
+| Number of columns in a Snowflake table | 500 | # | soft |
+| Number of columns in a MySQL table | 100 | # | soft |
+| Number of indexes on a Redshift table | 1 | # | soft |
+| Number of indexes on a Snowflake table | N/A | # | soft |
+| Number of indexes on a MySQL table | 10 | # | soft |
+| Number of columns in a Redshift index | 400  | # | soft |
+| Number of columns in a Snowflake index | N/A  | # | soft |
+| Number of columns in a MySQL index | 4  | # | soft |
+| Number of attributes in a table | 100  | # | soft |
+| Snowflake column name length | 64 | bytes | hard |
+| Redshift column name length | 64 | bytes | hard |
+| MySQL column name length | 64 | bytes | hard |
+| Snowflake table name length | 100 | bytes | soft |
+| Redshift table name length | 80 | bytes | soft |
+| MySQL table name length | 80 | bytes | soft
+| Snowflake column name length | 64 | bytes | hard |
+| Redshift column name length | 64 | bytes | hard |
+| Bucket name length | 30 | bytes | hard |
+| Value length in a Snowflake table | 1 | MB | hard |
+| Value length in a Redshift table | 64 | kB | hard |
+| Value length in a MySQL table | 64 | kB | hard |
+| Snowflake table size | 30 | TB | hard |
+| Redshift table size | 100 | GB | hard |
+| MySQL table size | 50 | GB | hard |
+| Number of files | | | |
+| File size | | | | 
+| File chunk size | | | |
+| Number of file chunks | 300,000 | # | soft |
+| Number of tokens | | # | | 
+| Number of workspaces | | # | | 
+| Number of Redshift schemas (workspace + buckets combined) | 9,999 | # | hard | 
+| Snowflake workspace for a Snowflake data destination (writer) | 15 | # | soft |
 
 #### Configuration
 
@@ -164,9 +191,9 @@ The following sections list all Keboola platform's limits [Organization Limits](
 
 #### Components
 
- #### Timing
+#### Timing
 
- #### User interface
+#### User interface
 
 #### Miscellaneous
 
