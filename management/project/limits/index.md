@@ -136,7 +136,39 @@ The following sections list all Keboola platform's limits [Organization Limits](
 
 ### Project Limits
 
-**Miscellaneous**
+#### Storage limits
+
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+| Storage total size | 30 | TB | soft |
+| Number of buckets | 100 | | soft |
+| Number of tables in a bucket |200 | | soft |
+| Total number of tables in a Snowflake storage |  20,000 | | soft |
+| Total number of tables in a Redshift storage | 9,000 | | soft |
+| Number of rows in a Snowflake table | 100,000,000,000 | | soft |
+| Number of rows in a Redshift table | 100,000,000,000 | | soft |
+| Number of columns in a Redshift table | 500 | | soft |
+| Number of columns in a Snowflake table | 500 | | soft |
+| Number of columns in a MySQL table | 100 | | soft |
+| Number of indexes on a Redshift table | 1 | | soft |
+| Number of indexes on a Snowflake table | N/A | | soft |
+| Number of indexes on a MySQL table | 10 | | soft |
+
+#### Configuration
+
+#### Jobs
+
+#### Transformations
+
+#### Orchestration
+
+#### Components
+
+ #### Timing
+
+ #### User interface
+
+#### Miscellaneous
 
 | Limit | Value | Soft/Hard |
 |---|---|---|
@@ -145,4 +177,3 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | API request size | na | na |
 
 
-|---|---|---|---|
