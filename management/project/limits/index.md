@@ -181,7 +181,7 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Number of Redshift schemas (workspace + buckets combined) | 9,999 | # | hard | 
 | Snowflake workspace for a Snowflake data destination (writer) | 15 | # | soft |
 
-#### Configuration
+#### Configuration limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
@@ -202,37 +202,61 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Configuration name length | 50 | bytes | soft |
 | Configuration description length | 4 | MB | hard |
 
-#### Jobs
+#### Job limits
+
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+| Number of configuration job runs | | | |
+| Number of concurrent configuration job runs | 1 | # | hard |
+| Number of events in a job run | 100,000 | # | soft |
+| Event size in a job run | 16 | kB | soft |
+| Total number of jobs in history | 1,500,000 | # | soft |
+| Job list retention period | 3 | months | hard |
+
+#### Transformation limits
+
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+| Number of buckets | 30| # | soft |
+| Number of transformations in a bucket | 50 | # | soft |
+| Number of queries in an SQL transformation | 20 | # | soft |
+| Query size in an SQL transformation | 1 | kB | soft |
+| Number of scripts in a R/Python/OpenRefine transformation | 1 | # | soft |
+| Script size in an R transformation | 50 | kB | soft | 
+| Script size in a Python transformation | 50 | kB | soft |
+| Script size in an Open Refine transformation | 1 | MB | soft |
+| Storage size in an R transformation | 50 | GB | hard |
+| Storage size in a Python transformation | 50 | GB | hard |
+| Storage size in an OpenRefane transformation | 50 | GB | hard |
+| Transformation name length | 50 | bytes | soft | 
+| Transformation description length | 4 | MB | hard |
+| R transformation script: used memory | 8 | GB | hard |
+| Python transformation script: used memory | 8 | GB | hard |
+| OpenRefine transformation script: used memory | 8 | GB | hard |
+| 
+
+
+#### Orchestration limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
 
-#### Transformations
+#### Component limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
 
-#### Orchestration
+#### Timing limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
 
-#### Components
+#### User interface limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
 
-#### Timing
-
-| Limit | Value | Unit | Soft/Hard |  
-|---|---|---|---|
-
-#### User interface
-
-| Limit | Value | Unit | Soft/Hard |  
-|---|---|---|---|
-
-#### Miscellaneous
+#### Miscellaneous limits
 
 | Limit | Value | Soft/Hard |
 |---|---|---|
