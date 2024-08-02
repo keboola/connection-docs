@@ -183,17 +183,54 @@ The following sections list all Keboola platform's limits [Organization Limits](
 
 #### Configuration
 
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+| Number of configured components | 100 | # | soft |
+| Number of configurations in a project | | 1,500 | soft |
+| Number of configuration rows in a configuration | 200 | # | soft |
+| Configuration size | 4 | MB | soft |
+| Configuration state size | 4 | MB | soft |
+| Configuration row size | 16 | kB | soft |
+| Number of configurations per component | 200 | # | soft |
+| Number of configuration versions | 999 | # | soft |
+| Number of configuration row versions | | | |
+| Number of input mappings in a configuration | 100 | # | soft |
+| Number of output mappings in a configuration | 30 | # | soft |
+| Number of columns in input/output mapping | 20 | # | soft |
+| Number of filters in input/output mapping | 5 | # | soft |
+| Number of filter values in input/output mapping | 30 | # | soft |
+| Configuration name length | 50 | bytes | soft |
+| Configuration description length | 4 | MB | hard |
+
 #### Jobs
+
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
 
 #### Transformations
 
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+
 #### Orchestration
+
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
 
 #### Components
 
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+
 #### Timing
 
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
+
 #### User interface
+
+| Limit | Value | Unit | Soft/Hard |  
+|---|---|---|---|
 
 #### Miscellaneous
 
@@ -202,5 +239,3 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Users per project | 50 | soft |
 | Resource name length | na |na |
 | API request size | na | na |
-
-
