@@ -186,7 +186,7 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
 | Number of configured components | 100 | # | soft |
-| Number of configurations in a project | | 1,500 | soft |
+| Number of configurations in a project | 1,500 | # | soft |
 | Number of configuration rows in a configuration | 200 | # | soft |
 | Configuration size | 4 | MB | soft |
 | Configuration state size | 4 | MB | soft |
@@ -233,13 +233,27 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | R transformation script: used memory | 8 | GB | hard |
 | Python transformation script: used memory | 8 | GB | hard |
 | OpenRefine transformation script: used memory | 8 | GB | hard |
-| 
-
+| Timeout of a Snowflake tranformation job | 3 | hours | hard |
+| Size of entire Snowflake input mapping | N/A | GB | |
+| Size of entire Snowflake output mapping | N/A | GB | |
+| Query timeout of a Redshift SQL query | 60 | minutes | hard |
+| Timeout of a Redshift transformation job | 3 | hours | hard |
+| Size of entire Snowflake input mapping | N/A | GB | |
+| Size of entire Snowflake output mapping | N/A | GB | | 
+| MySQL SQL query timeout | 20 | minutes | soft |
+| Timeout of MySQL transformation job | 3 | hours | hard |
+| Size of entire MySQL input mapping | 5 | GB | soft |
+| Size of entire MySQL output mapping | 5 | GB | soft |
 
 #### Orchestration limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
+| Number of orchestrations | 30 | # | soft |
+| Number of tasks per orchestration | 30 | # | soft |
+| Number of phases per orchestration | 30 | # | soft |
+| Number of tasks per phase | 30 | # | soft |
+| Number of notification emails per orchestration | 5 | # | soft |
 
 #### Component limits
 
