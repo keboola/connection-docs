@@ -193,7 +193,7 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Configuration row size | 16 | kB | soft |
 | Number of configurations per component | 200 | # | soft |
 | Number of configuration versions | 999 | # | soft |
-| Number of configuration row versions | | | |
+| Number of configuration row versions | | # | |
 | Number of input mappings in a configuration | 100 | # | soft |
 | Number of output mappings in a configuration | 30 | # | soft |
 | Number of columns in input/output mapping | 20 | # | soft |
@@ -206,7 +206,7 @@ The following sections list all Keboola platform's limits [Organization Limits](
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
-| Number of configuration job runs | | | |
+| Number of configuration job runs | | # | |
 | Number of concurrent configuration job runs | 1 | # | hard |
 | Number of events in a job run | 100,000 | # | soft |
 | Event size in a job run | 16 | kB | soft |
@@ -259,21 +259,58 @@ The following sections list all Keboola platform's limits [Organization Limits](
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
+| Number of queries in any DB data source connector (extractor) | 50 | # | soft |
+| Query sixe in any DB data source connector | 1 | kB | soft |
+| Number of tables in a GoodData data destination connector (writer) | 40 | # | soft |
+| Number of tables in a Tableau data destination connector | 50 | # | soft |
+| Number of tables in a Google Drive/Dropbox data destination connector | 50 | # | soft |
+| Number of tables in a Google Drive/Dropbox data source connector | 50 | # | soft |
+| Number of queries in a MySQL/Oracle/MSSQL DB data destination connector | 50 | # | soft |
+| Number of queries in a Redshift/Snowflake DB data destination connector | 50 | # | soft |
+| File size in a CSV importer | 2 | GB | hard |
 
 #### Timing limits
 
-| Limit | Value | Unit | Soft/Hard |  
-|---|---|---|---|
+| Limit | Value | Unit |  
+|---|---|---|
+| Jobs per 3,600 seconds | 100 | # |
+| Events in a job per second | 10 | # |
+| Configuration runs per 3,600 seconds | 100 | # | 
+| Configuration versions per 3,600 seconds | 100 | # |
+| Configuration row versions per 3,600 seconds | 100 | # |
+| New configurations per 3,600 seconds | 100 | # |
+| Table imports per 3,600 seconds | 400 | # |
+| Table exports per 3,600 seconds | 400 | # |
+| Orchestration runs per 3,600 seconds | 120 | # |
+| API requests per 10 seconds per token | 3 | # |
+| Snowflake transformation query execution time | 900 | seconds |
+| Redshift transformation query execution time | 3,600 | seconds |
+| MySQL transformation query execution time | 1,200 | seconds |
+| R transformation script execution time | 10,800 | seconds |
+| Python transformation script execution time | 10,800 | seconds |
+| OpenRefine transformation script execution time | 10,800 | seconds |
+| Job execution time | 10,800 | seconds |
+| Table import time | | seconds |
+| Table export time | | seconds |
+| Sychronous API call execution time | | seconds |
+| Orchestration execution time | 36,000 | seconds |
+| Orchestration phase execution time | | seconds |
+| Total transformation execution time | | seconds |
+| DB data source connector (extractor) query execution time | | seconds |
+| DB data source connector exetuion time | 10,800 | seconds |
+| File uploads per second | | # |
+| File chunks per second | | # |
 
 #### User interface limits
 
 | Limit | Value | Unit | Soft/Hard |  
 |---|---|---|---|
+| Nesting level in a graph | 7 | # | soft |
 
 #### Miscellaneous limits
 
 | Limit | Value | Soft/Hard |
 |---|---|---|
 | Users per project | 50 | soft |
-| Resource name length | na |na |
-| API request size | na | na |
+| Resource name length | N/A | N/A |
+| API request size | N/A | N/A |
