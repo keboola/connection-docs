@@ -234,14 +234,15 @@ The following sections list all Keboola platform's limits [Organization Limits](
 | Python transformation script: used memory | 8 | GB | hard |
 | OpenRefine transformation script: used memory | 8 | GB | hard |
 | Timeout of a Snowflake tranformation job | 3 | hours | hard |
+| Timeout of a Snowflake SQL query | 15 | minutes | hard |
 | Size of entire Snowflake input mapping | N/A | GB | |
 | Size of entire Snowflake output mapping | N/A | GB | |
-| Query timeout of a Redshift SQL query | 60 | minutes | hard |
+| Redshift SQL query timeout | 60 | minutes | hard |
 | Timeout of a Redshift transformation job | 3 | hours | hard |
-| Size of entire Snowflake input mapping | N/A | GB | |
-| Size of entire Snowflake output mapping | N/A | GB | | 
+| Size of entire Redshift input mapping | N/A | GB | |
+| Size of entire Redshift output mapping | N/A | GB | | 
 | MySQL SQL query timeout | 20 | minutes | soft |
-| Timeout of MySQL transformation job | 3 | hours | hard |
+| Timeout of a MySQL transformation job | 3 | hours | hard |
 | Size of entire MySQL input mapping | 5 | GB | soft |
 | Size of entire MySQL output mapping | 5 | GB | soft |
 
