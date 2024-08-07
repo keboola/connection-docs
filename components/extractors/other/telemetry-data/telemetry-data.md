@@ -82,7 +82,7 @@ This table lists the [configurations of components](/components/#creating-compon
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
 | `kbc_branch_id` | Foreign key to Keboola branch | `3419_kbc-eu-central-1` |
-| `branch_type` | Differentiate between Main (production) branch and development | `default` |
+| `branch_type` | Differentiate between default (production) branch and development | `default` |
 | `token_id` | Identifier of the token that created this version of the configuration | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
