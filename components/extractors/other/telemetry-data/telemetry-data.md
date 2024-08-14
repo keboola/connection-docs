@@ -86,8 +86,8 @@ This table lists the [configurations of components](/components/#creating-compon
 | `kbc_configuration_version` | Current version of the configuration | `5` |
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
-| `kbc_branch_id` | Foreign key to Keboola branch | `3419_kbc-eu-central-1` |
-| `branch_type` | Differentiate between default (production) branch and development | `default` |
+| `kbc_branch_id` | Foreign key to a Keboola branch | `3419_kbc-eu-central-1` |
+| `branch_type` | Differentiate between the default (production) and development branch | `default` |
 | `token_id` | Identifier of the token that created this version of the configuration | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
@@ -907,7 +907,7 @@ This table shows data about [workspace](/transformations/workspace/) events.
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ### kbc_file_event
-This table shows data about events of the storage [files](/storage/files/).
+This table shows data about storage [file](/storage/files/) events.
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
@@ -917,7 +917,7 @@ This table shows data about events of the storage [files](/storage/files/).
 | `event` | Description of the event | `storage.fileUploaded` |
 | `event_type` | Type of the event | `info` |
 | `message` | Message describing the event | `Uploaded file in.c_in_sh_kbc_internal.kbc_flow_task.csv.gz` |
-| `kbc_file_id` | Identifier for the file | `759391664_kbc-eu-central-1` |
+| `kbc_file_id` | Identifier of the file | `759391664_kbc-eu-central-1` |
 | `kbc_token_id` | Foreign key to the Keboola token creating the event | `516357_kbc-eu-central-1` |
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
