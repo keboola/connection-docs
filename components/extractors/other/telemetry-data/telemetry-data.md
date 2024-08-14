@@ -86,9 +86,12 @@ This table lists the [configurations of components](/components/#creating-compon
 | `kbc_configuration_version` | Current version of the configuration | `5` |
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
+| `kbc_branch_id` | Foreign key to a Keboola branch | `3419_kbc-eu-central-1` |
+| `branch_type` | Differentiate between the default (production) and development branch | `default` |
 | `token_id` | Identifier of the token that created this version of the configuration | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
+| `folder_name` | Unique identifier of the token containing stack identification | `Archive` |
 
 ### kbc_component_configuration_version
 This table shows the [version history](/components/#configuration-versions) 
@@ -901,6 +904,21 @@ This table shows data about [workspace](/transformations/workspace/) events.
 | `event` | Description of the event | `storage.workspaceCreated` |
 | `event_type` | Type of the event | `info` |
 | `kbc_token_id` | Foreign key to the Keboola token creating the event | `516357_kbc-us-east-1` |
+| `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
+
+### kbc_file_event
+This table shows data about storage [file](/storage/files/) events.
+
+| **Column** | **Description** | **Example** | 
+|---|---|---|
+| `kbc_file_event_id` (PK) | Unique Keboola file event identifier | `7342403037_kbc-eu-central-1` |
+| `kbc_project_id` | Foreign key to the Keboola project | `2807_kbc-eu-central-1` |
+| `event_created_at` | Datetime when the file event was created | `2023-07-23 06:23:19` |
+| `event` | Description of the event | `storage.fileUploaded` |
+| `event_type` | Type of the event | `info` |
+| `message` | Message describing the event | `Uploaded file in.c_in_sh_kbc_internal.kbc_flow_task.csv.gz` |
+| `kbc_file_id` | Identifier of the file | `759391664_kbc-eu-central-1` |
+| `kbc_token_id` | Foreign key to the Keboola token creating the event | `516357_kbc-eu-central-1` |
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ## dst_ Columns
