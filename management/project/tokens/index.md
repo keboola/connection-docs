@@ -24,10 +24,10 @@ the server backend. Therefore you need to work with tokens only when working wit
 To learn more about all the available programmatic approaches, please follow our 
 [developers documentation](https://developers.keboola.com/overview/api/).
 
-Tokens can be managed from the **Users & Settings > API Tokens** page.
+Tokens can be managed from the **Project Settings > API Tokens** page.
 
 {: .image-popup}
-![Screenshot - Storage Tokens](/management/project/tokens/overview.png)
+![Screenshot - Storage Tokens](/management/project/tokens/API_tokens.png)
 
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
