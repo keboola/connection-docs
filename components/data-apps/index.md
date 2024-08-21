@@ -3,7 +3,7 @@ title: Data Apps
 permalink: /components/data-apps/
 ---
 
-{% include warning.html content="This feature is in public beta." %}
+
 
 * TOC
 {:toc}
