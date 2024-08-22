@@ -17,7 +17,7 @@ reason, you need to use the Redshift backend, contact our [support](/management/
 As with all other Keboola components, everything that can be done through the UI can be also done programmatically
 via the [Storage API](https://keboola.docs.apiary.io/).
 See our [developers guide](https://developers.keboola.com/integrate/storage/) to learn more.
-Every Storage operation must be authorized via a [token](/management/project/tokens/).
+Every Storage operation must be authorized via a [token](/management/project/tokens/). 
 It is also recorded in [Events](/management/project/tokens/#token-events) and
 [Jobs](/management/jobs/).
 
