@@ -31,9 +31,6 @@ grant Keboola correct access to the schema in your Snowflake. Once access has be
 {: .alert.alert-info}
 Note: This set of permissions grants the Keboola service account read-only access to the data.
 
-{: .alert.alert-warning}
-[Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
-
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
 correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
@@ -94,6 +91,12 @@ WHERE `source` = "mql";
 **Note:** The dataset name is the name of the bucket you provided in the dialog (`users-reporting`), not that of the original dataset created in BigQuery 
 (`sales_emea`). However, there are no technical limitations; they can have the same name. 
 
+## Sharing an External Dataset
+It is possible to share Snowflake external bucket with the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared the refresh operation is available only in the source project. Currently it is possible to share entire buckets, not specific tables from the bucket.
+
+{: .alert.alert-warning}
+**Note:** It is not possible to share BigQuery or BigLake datasets at the moment. If this is a relevant use case for you please create a support ticket.
+
 ## Removing an External Dataset
 Removing an external dataset is as simple as removing any other Storage bucket. Simply delete it in the UI or via API. The Storage bucket will be removed from 
 the project, but the schema in the database will remain untouched. Any rights that you have granted to Keboola during the registration will be revoked. 
@@ -115,6 +118,5 @@ If you wish to remove the schema, you must do so manually in your warehouse.
 * Table names can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
 * Table names are not case-sensitive. You cannot create two tables with the same name that differ only in letter case.
 * [Creating snapshots](https://keboola.docs.apiary.io/#reference/table-snapshotting/create-or-list-snapshots/create-table-snapshot) from tables in external buckets is not supported.
-* Sharing with other projects is not supported at the moment.
 * A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/transformations/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addressess this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables as illustrated below: <br> `GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO` <br> 
 Ensure the role name follows the pattern in the picture and is suffixed with _RO.
