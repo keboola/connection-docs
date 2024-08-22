@@ -21,4 +21,4 @@ New version is published immediately after push by [Travis](https://travis-ci.or
 
 ## License
 
-MIT licensed, see [LICENSE](./LICENSE) file. 
+MIT licensed, see [LICENSE](./LICENSE) file.  
