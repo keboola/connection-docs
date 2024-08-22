@@ -14,7 +14,7 @@ Unless specified otherwise, this description refers to the implementation of Sno
 ## What Is an External Dataset?
 Storage in Keboola is organized into [buckets](/storage/buckets/). An external dataset is a special type of bucket wherein Keboola does not manage 
 its content. It can be located _anywhere in the storage backend used by your Keboola project_ (Snowflake or BigQuery) and is a virtual bucket connected 
-to a Snowflake schema or BigQuery dataset, respectively. 
+to a Snowflake schema or BigQuery dataset, respectively.
 
 All table-like objects (such as tables, views, and external tables) inside the schema (in Snowflake)
 or dataset (in BigQuery) are mapped to tables in the bucket. Access to the bucket is read-only; you cannot write to the bucket from Keboola. A single schema can 
