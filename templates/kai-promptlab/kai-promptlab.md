@@ -48,8 +48,7 @@ you will see the newly created flow.
 Click **Run Template** and start building your visualizations a few minutes later.
 
 ## How to Use PromptLab Data App
-Once the flow is set up and running, you can view the data app under **Components > Data App**. Here, you can simply search for your data app and then open it 
-by clicking the **Open Data App** button.
+Once the flow is set up and running, you can view the data app under **Components > Data App**. Here, you can simply search for your data app and then open it by clicking on its name. On the page of the data app configuration you will first need to click on **Deploy Data App** button on the right side of the page. Once the app is deployed, another button will appear just below the one you clicked: **Open Data App**. 
 
 {: .image-popup}
 ![Add Data App](/templates/kai-promptlab/add-data-app.png)
