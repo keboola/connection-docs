@@ -6,7 +6,7 @@ permalink: /storage/byodb/external-buckets/
 * TOC
 {:toc}
 
-If you operate Keboola in Bring Your Own Database (BYODB) mode using your own data warehouse, the data in the warehouse won't automatically be visible or accessible within Keboola. To address this, we offer the **External Datasets** feature.
+If you operate Keboola in Bring-Your-Own-Database (BYODB) mode using your own data warehouse, the data in the warehouse won't automatically be visible or accessible within Keboola. To address this, we offer the **External Datasets** feature.
 
 The implementation of **External Datasets requires the [BYODB](https://help.keboola.com/storage/byodb/) to be enabled first**.
 Unless specified otherwise, this description refers to the implementation of Snowflake and BigQuery.
@@ -21,7 +21,7 @@ or dataset (in BigQuery) are mapped to tables in the bucket. Access to the bucke
 be registered simultaneously with multiple projects in Keboola.
 
 ## Creating an External Dataset
-An external dataset can be registered in the Storage of a project. Navigate to **Storage > Register External Dataset**. The dialog will differ based on the 
+An external dataset can be registered in the Storage of a project. Go to **Storage > Register External Dataset**. The dialog will differ based on the 
 backend you are using.
 
 ### Snowflake
@@ -29,14 +29,14 @@ Fill in the **name** of the new bucket, **database** name, and **schema** name. 
 grant Keboola correct access to the schema in your Snowflake. Once access has been granted, click **Register Dataset** to start using it.
 
 {: .alert.alert-info}
-Note: This set of permissions grants the Keboola service account read-only access to the data.
+**Note:** This set of permissions grants the Keboola service account read-only access to the data.
 
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
 correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
 
 {: .alert.alert-info}
-Note: By adding the Keboola service account as a subscriber, you enable read-only access to the data.
+**Note:** By adding the Keboola service account as a subscriber, you enable read-only access to the data.
 
 ### BigLake Tables
 Keboola generaly does not support external tables, except for [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). 
@@ -76,7 +76,8 @@ FROM "REPORTING"."sales_emea"."users"
 WHERE "source" = 'mql';
 ```
 
-***Note:** The query uses the **fully qualified name** of the table in the `FROM` clause.*
+{: .alert.alert-warning}
+**Note:** The query uses the **fully qualified name** of the table in the `FROM` clause.
 
 ### External Dataset in a BigQuery SQL Transformation
 For BigQuery, an external dataset is mapped to an actual dataset, `users_reporting` (the name you filled in the dialog), in your project—in this case, project `sapi-9752`. You can reference the contents of the dataset in your SQL transformation using a fully qualified name: 
@@ -88,14 +89,14 @@ WHERE `source` = "mql";
 ```
 
 {: .alert.alert-warning}
-**Note:** The dataset name is the name of the bucket you provided in the dialog (`users-reporting`), not that of the original dataset created in BigQuery 
+**Note:** The dataset name is the name of the bucket you provided in the dialog (`users-reporting`), not the original dataset created in BigQuery 
 (`sales_emea`). However, there are no technical limitations; they can have the same name. 
 
 ## Sharing an External Dataset
-It is possible to share Snowflake external bucket with the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared the refresh operation is available only in the source project. Currently it is possible to share entire buckets, not specific tables from the bucket.
+It is possible to share a Snowflake external bucket using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project. Currently, it is possible to share entire buckets, not specific tables within them.
 
 {: .alert.alert-warning}
-**Note:** It is not possible to share BigQuery or BigLake datasets at the moment. If this is a relevant use case for you please create a support ticket.
+**Note:** At this moment, it is not possible to share BigQuery or BigLake datasets. If this is a relevant use case for you, please create a support ticket.
 
 ## Removing an External Dataset
 Removing an external dataset is as simple as removing any other Storage bucket. Simply delete it in the UI or via API. The Storage bucket will be removed from 
