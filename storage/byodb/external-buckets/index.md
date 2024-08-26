@@ -96,7 +96,7 @@ WHERE `source` = "mql";
 (`sales_emea`). However, there are no technical limitations; they can have the same name. 
 
 ## Sharing an External Dataset
-It is possible to share a Snowflake external bucket using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project. Currently, it is possible to share entire buckets, not specific tables within them.
+It is possible to share a Snowflake external bucket using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset has been registered in). Currently, it is possible to share entire buckets, not specific tables within them.
 
 {: .alert.alert-warning}
 **Note:** At this moment, it is not possible to share BigQuery or BigLake datasets. If this is a relevant use case for you, please create a support ticket.
