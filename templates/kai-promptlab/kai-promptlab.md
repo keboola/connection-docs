@@ -48,12 +48,12 @@ you will see the newly created flow.
 Click **Run Template** and start building your visualizations a few minutes later.
 
 ## How to Use PromptLab Data App
-Once the flow is set up and running, you can view the data app under **Components > Data App**. Here, you can simply search for your data app and then open it by clicking on its name. 
+Once the flow is set up and running, you can view the data app under **Components > Data App**. Simply search for your data app and open it by clicking on its name. 
 
 {: .image-popup}
 ![Add Data App](/templates/kai-promptlab/data-app-list.png)
 
-On the page of the data app configuration you will first need to click on **Deploy Data App** button on the right side of the page. Once the app is deployed, another button will appear just below the one you clicked: **Open Data App**. 
+On the data app configuration page, you will first need to click the **Deploy Data App** button on the right side of the page. Once the app is deployed, another button will appear just below the one you clicked: **Open Data App**. 
 
 {: .image-popup}
 ![Add Data App](/templates/kai-promptlab/data-app-open.png)
@@ -65,5 +65,5 @@ For more information about Keboola API tokens, please refer to the [documentatio
 Once you have entered both required API tokens, click **Connect**. 
 
 The metadata for the account will be loaded, and you can either select from the drop-down menu or search within the bucket you wish to work with. 
-Then click **Select Bucket**.
+Then, click **Select Bucket**.
 
