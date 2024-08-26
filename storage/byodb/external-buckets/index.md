@@ -31,6 +31,9 @@ grant Keboola correct access to the schema in your Snowflake. Once access has be
 {: .alert.alert-info}
 **Note:** This set of permissions grants the Keboola service account read-only access to the data.
 
+{: .alert.alert-warning}
+[Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
+
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
 correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
