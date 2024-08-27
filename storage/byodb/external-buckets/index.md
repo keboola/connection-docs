@@ -99,7 +99,7 @@ WHERE `source` = "mql";
 It is possible to share a Snowflake external dataset using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
 
 {: .alert.alert-warning}
-**Note:** At this moment, sharing of External dataset is possible on projects with Snowflake storage backend only. Sharing of External datasets on BigQuery storage backend isn't supported yet. If this is a relevant use case for you, please create a support ticket.
+**Note:** At this time, sharing an external dataset is only possible on projects with a Snowflake storage backend. Sharing external datasets on a BigQuery storage backend isn't supported yet. If this is relevant to your use case, please create a support ticket.
 
 ## Removing an External Dataset
 Removing an external dataset is as simple as removing any other Storage bucket. Simply delete it in the UI or via API. The Storage bucket will be removed from 
