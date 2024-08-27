@@ -35,7 +35,7 @@ To avoid files being automatically deleted after 15 days (by default) and to kee
 do not forget to tick the respective checkbox.
 
 Also by default, uploaded files are marked as *non-public*. They are available only to the project
-administrators (those listed in the *Users & Settings* section)
+administrators (those listed in the *Users* section)
 and users with Storage [tokens](/management/project/tokens/) who have the permission to *Read all file uploads*.
 Users with restricted *Files* permission can access only their own files and the files
 they uploaded themselves.
