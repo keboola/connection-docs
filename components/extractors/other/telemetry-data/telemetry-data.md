@@ -46,11 +46,14 @@ This table shows snapshots of buckets in Storage.
 | `snapshot_date` (PK) | Date of the data snapshot | `2020-06-30` |
 | `stage` | Storage stage of the bucket | `in` |
 | `bucket` | Name of the bucket | `c-instagram` |
+| `bucket_display_name` | Name of the bucket | `instagram` |
 | `rows` | Number of rows in the bucket as of the date of the snapshot | `4714` |
 | `bytes` | Size of the bucket in bytes as of the date of the snapshot | `1870336` |
 | `sharing_type` | Type of bucket sharing (Data Catalog). <br> Possible values: `none` – not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
 | `shared_from_project_id` | Identifier of the source project if the bucket is linked (sharing_type = 'target') | `860_kbc-eu-central-1` |
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
+| `is_external_schema` | Flag if the bucket contains data from external sources (`1`, `0`) | `1` |
+| `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 
 ### kbc_branch
 This table shows main and development [branches](/components/branches/) in the project.
@@ -80,11 +83,15 @@ This table lists the [configurations of components](/components/#creating-compon
 | `kbc_project_id` | Foreign key to the Keboola project | `580_kbc-us-east-1` |
 | `kbc_component_id` | Identifier of the component | `keboola.python-transformation-v2` |
 | `kbc_component` | Name of the component | `Generic` |
+| `kbc_component_type` | Identifier of the component type | `extractor` |
+| `kbc_component_vendor` | Identifies who created the component | `keboola` |
+| `kbc_component_listing` | Identifies the visibility of the component (`public`, `private`) | `public` |
 | `configuration_id_num` | Numeric identifier of the configuration | `610931033` |
 | `kbc_component_configuration` | Name of the configuration | `Sample data from Dynamics` |
 | `configuration_created` | Datetime when the configuration was created | `2022-07-20 18:45:17` |
 | `kbc_configuration_version` | Current version of the configuration | `5` |
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
+| `description` | Can describe the purpose of the component (filled by users) | `This transformation put the data from customers into standardize format.` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
 | `kbc_branch_id` | Foreign key to a Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Differentiate between the default (production) and development branch | `default` |
@@ -125,6 +132,7 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `configuration_row_created` | Datetime of the configuration row's creation | `2022-04-25 11:59:42` |
 | `kbc_configuration_row_version` | Current version of the configuration row | `1` |
 | `kbc_configuration_is_disabled` | Flag indicating whether the configuration is disabled (`true`, `false`) | `false` |
+| `description` | Can describe the purpose of the component configuration row (filled by users) | `This part of transformation consolidate the data from various sources.` |
 | `configuration_row_json` | Complete JSON configuration row of the component | `{"parameters":{"incremental":false}}` |
 | `token_id` | Identifier of the token that created this version of the configuration row | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
@@ -137,6 +145,7 @@ and their consumption metrics.
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
+| `kbc_data_science_sandbox_resume_date_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox), including date | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a_2024-08-05` |
 | `kbc_data_science_sandbox_resume_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox) | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
 | `kbc_data_science_sandbox_id` | Data science sandbox identifier | `10910_kbc-eu-central-1` |
 | `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
@@ -147,7 +156,6 @@ and their consumption metrics.
 | `start_at` | Datetime when the sandbox resume window started | `2020-11-27 11:22:08` |
 | `sleep_at` | Datetime when the sandbox resume window ended | `2020-11-27 14:03:40` |
 | `type` | Type of the sandbox (`jupyter`, `rstudio`) | `jupyter` |
-| `sandbox_active` | Flag indicating whether the sandbox is active | `false` |
 | `hostname` | Hostname of the sandbox | `i-099734d8f8b97ae75-sandbox.eu-central-1.keboola.com` | 
 |`sandbox_runtime_hours` | Runtime of the sandbox on the particular date in hours | `2.413333` |
 | `backend_size` | Size of the data science backend | `Small` |
@@ -163,7 +171,9 @@ This table lists Keboola [jobs](/management/jobs/)
 |---|---|---|
 | `kbc_job_id` (PK) | Keboola job identifier | `117644387_kbc-eu-central-1` |
 | `kbc_component_configuration_id` | Foreign key to the component configuration | `410_kbc-eu-central-1_keboola.wr-google-sheets-259642632` |
+| `kbc_component_configuration_row_id` | Foreign key to Keboola component configuration row | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
+| `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
 | `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `OpenRefine`, `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
 | `credit_type` | Type of credit associated with the job. Possible values: <br> `KBC`, `SQL`, `CDC` <br> Does not necessarily represent actually used credit, as SQL and CDC credits are only consumed if they exist in the contract ([info](/management/project/limits/#project-power--time-credits)). The type of actually billed credit is defined in the [kbc_usage_metrics_values](/components/extractors/other/telemetry-data/#kbc_usage_metrics_values) table | `KBC` |
@@ -178,6 +188,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `token_id` | Identifier of the token that initiated the job | `145062` |
 | `token_name` | Name of the token that initiated the job | `Orchestrator GDrive` |
 | `kbc_token_id` | Unique identifier of the token with stack identification | `145062_kbc-eu-central-1` |
+| `flow` | Name of the flow including the ID of the flow | `Telemetry (ID: 915976687)` |
 | `job_time_credits_used` | Number of time credits consumed by the job | `0.001218890000` |
 | `job_billed_credits_used` | Number of actually billed credits | `0.001218890000` |
 | `job_total_time_sec` | Total time of the job in seconds (from initial trigger; start may be delayed) | `63` |
@@ -187,7 +198,8 @@ This table lists Keboola [jobs](/management/jobs/)
 | `dwh_small_ratio` | Ratio of Small DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH) | `0.75` |
 | `dwh_medium_ratio` | Ratio of Medium DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH) | `0.25` |
 | `dwh_large_ratio` | Ratio of Large DWH used for SQL transformations (sum of ratios might be <1, may partially run on free DWH) | `0` |
-
+| `backend_size` | Backend used for data science transformations (`Small`, `Medium`, `Large`) | `Small` |
+| `company_id` | Identifier of the company the event belongs to | `011t00000Gs3BiAAJ` |
 
 ### kbc_project
 This table shows data about Keboola [projects](/management/project/) 
@@ -230,9 +242,17 @@ The snapshots are taken multiple times a day.
 | `kbc_project_id` (PK) | Foreign key to the Keboola project | `409_com-keboola-azure-north-europe` |
 | `snapshot_time` (PK) | Datetime of the snapshot | `2020-06-29 12:55:16` |
 | `user_id` (PK) | Identifier of the user | `2195` |
+| `kbc_token_id` (PK) | Unique Keboola token identifier | `516357_kbc-us-east-1` |
 | `valid_from` | Datetime from which the user has been a member of the project | `2020-03-28 11:19:47` |
 | `email` | Email of the user | `john.doe@keboola.com` |
 | `domain` | Email domain of the user | `keboola.com` |
+| `role` | Role of the user within Keboola | `admin` |
+| `expires` | Date when the role expires | `2023-06-20T17:59:04Z` |
+| `invited_by_user_id` | User ID of the person that invited the user to the project | `12_com-keboola-azure-north-europe` |
+| `invited_by_email` | Email of the person that invited the user to the project | `john.doe@keboola.com` |
+| `approved_by_user_id` | User ID of the person that approved the user's invitation to the project | `20_com-keboola-azure-north-europe` |
+| `approved_by_email` | Email of the person that approved the user's invitation to the project | `jane.doe@keboola.com` |
+| `reason` | States the reason for joining the project | `Check the transformation logic` |
 
 
 ### kbc_snowflake_stats
@@ -314,7 +334,7 @@ You need data for all projects.*
 | `company_value` | Similar to the organization value, but it might give a different result if the company contains more organizations | `12` |
 | `time_credits_value` | Value in time credits for metrics calculated in credits | `0.001667` |
 | `run_time_hours` | Runtime value in hours for metrics calculated based on time | `0.000278` |
-
+| `jobs` | Number of jobs for relevant metrics | `100` |
 
 ### security_event
 This table lists [security events](/management/project/tokens/#token-events), 
@@ -486,6 +506,7 @@ This table shows data about Keboola [organizations](/management/organization/).
 | `kbc_organization_id_num` | Numerical organization identifier | `225` |
 | `kbc_organization` | Name of the organization | `Keboola Internal` |
 | `kbc_maintainer_id` | Identifier of the Maintainer (the parent of the organization) | `12_kbc-us-east-1` |
+| `company_id` | Identifier of the company the event belongs to | `011t00000Gs3BiAAJ` |
 | `kbc_region` | Region of the organization | `us-east-1` |
 | `kbc_cloud` | Cloud provider of the organization | `aws` |
 | `kbc_organization_created_at` | Datetime of the organization's creation | `2013-12-31 10:22:33` |
@@ -518,11 +539,15 @@ This table shows data about the current state of storage buckets.
 | `kbc_project_bucket_id` (PK) | Keboola bucket identifier | `866_kbc-eu-central-1_1147628` |
 | `stage` | Storage stage of the bucket | `in` |
 | `bucket` | Name of the bucket | `c-instagram` |
+| `bucket_display_name` | Name of the bucket | `instagram` |
 | `rows` | Number of rows in the bucket as of the date of the snapshot | `4714` |
 | `bytes` | Bucket size in bytes as of the date of the snapshot | `1870336` |
 | `sharing_type` | Type of the bucket sharing (Data Catalog). <br> Possible values: `none` – bucket not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
 | `shared_from_project_id` | Identifier of the source project if the bucket is linked (sharing_type = 'target') | `860_kbc-eu-central-1` |
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
+| `description` | Describe what the bucket contains | `twitter extractor raw data` |
+| `is_external_schema` | Flag if the bucket contains data from external sources (`1`, `0`) | `1` |
+| `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 
 ### kbc_column
 This table shows data about the current state of storage columns.
@@ -674,6 +699,7 @@ This table shows data about the current state of storage [tables](/storage/table
 | `table_id` | Storage table identifier | `in.c-in_sh_kbc_internal.kbc_project_user` |
 | `kbc_project_id` | Foreign key to the Keboola project | `7880_kbc-us-east-1` |
 | `kbc_project_bucket_id` | Foreign key to the Keboola bucket | `7880_kbc-us-east-1_729486` |
+| `last_snapshot_date` | Date when the last table snapshot was taken | `2020-10-07` |
 | `created` | Datetime when the table was created | `2020-10-07 12:29:25` |
 | `last_import` | Datetime of the last import to the table | `2023-08-17 08:00:12` |
 | `table_name` | Name of the Storage table | `kbc_project_user` |
@@ -687,6 +713,7 @@ This table shows data about the current state of storage [tables](/storage/table
 | `alias_filter_value` | Value the alias filter is filtering by | `ASNDUH8737D` |
 | `rows` | Number of rows in the table | `16362276` |
 | `bytes` | Data size of the table in bytes | `294944256` |
+| `description` | Can describe the purpose of the table (filled by users) | `Table provides information on customer behaviour` |
 
 ### kbc_table_event
 This table shows data about events of the storage [tables](/storage/tables/).
@@ -729,6 +756,7 @@ This table shows data about the storage [tokens](/management/project/tokens/).
 |---|---|---|
 | `kbc_token_id` (PK) | Unique Keboola token identifier | `516357_kbc-us-east-1` |
 | `kbc_project_id` | Foreign key to the Keboola project | `7880_kbc-us-east-1` |
+| `company_id` | Identifier of the company the event belongs to | `011t00000Gs3BiAAJ` |
 | `description` | Name of the token | `[_internal] Main Scheduler` |
 | `created` | Datetime when the token was created | `2022-07-29 08:39:08` |
 | `expires` | Datetime when the token expires | `2024-07-29 08:39:08` |
