@@ -17,7 +17,7 @@ Free Plan projects have the following limits:
 - **Transformations:** are limited to [SQL](/transformations/snowflake-plain/) and [Python](/transformations/python-plain/).
 - **DataScience:** training and deploying [ML models](transformations/ml-model-deployment/) is not available.
 - **Dynamic backend scaling:** possibility to choose the [backend size](/transformations/snowflake-plain/) for each transformation is not available. 
-- **Performance:** is limited to an xsmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
+- **Performance:** is limited to an XSmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
 - **Storage:** is limited to 250 GB of data storage.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
 
