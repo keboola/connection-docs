@@ -40,8 +40,8 @@ This table shows snapshots of buckets in Storage.
 | `kbc_project_id` (PK) | Foreign key to a Keboola project | `866_kbc-eu-central-1` |
 | `snapshot_date` (PK) | Date of the data snapshot | `2020-06-30` |
 | `stage` | Storage stage of the bucket | `in` |
-| `bucket` | Name of the bucket | `c-instagram` |
-| `bucket_display_name` | Name of the bucket | `instagram` |
+| `bucket` | Default name of the bucket | `c-instagram` |
+| `bucket_display_name` | Name of the bucket that can be changed by user (if not change it is the same as `bucket` without `c-` at the beginning) | `instagram_posts` |
 | `rows` | Number of rows in the bucket as of the date of the snapshot | `4714` |
 | `bytes` | Size of the bucket in bytes as of the date of the snapshot | `1870336` |
 | `sharing_type` | Type of bucket sharing (Data Catalog). <br> Possible values: `none` – not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
@@ -124,7 +124,7 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `configuration_row_created` | Datetime of the configuration row's creation | `2022-04-25 11:59:42` |
 | `kbc_configuration_row_version` | Current version of the configuration row | `1` |
 | `kbc_configuration_is_disabled` | Flag indicating whether the configuration is disabled (`true`, `false`) | `false` |
-| `description` | Can describe the purpose of the component configuration row (filled by users) | `This part of transformation consolidate the data from various sources.` |
+| `description` | Description of the component configuration row (filled by users) | `This part of transformation consolidate the data from various sources.` |
 | `configuration_row_json` | Complete JSON configuration row of the component | `{"parameters":{"incremental":false}}` |
 | `token_id` | Identifier of the token that created this version of the configuration row | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
