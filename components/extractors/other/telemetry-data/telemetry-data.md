@@ -52,7 +52,7 @@ This table shows snapshots of buckets in Storage.
 | `sharing_type` | Type of bucket sharing (Data Catalog). <br> Possible values: `none` – not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
 | `shared_from_project_id` | Identifier of the source project if the bucket is linked (sharing_type = 'target') | `860_kbc-eu-central-1` |
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
-| `is_external_schema` | Flag if the bucket contains data from external sources (`1`, `0`) | `1` |
+| `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 
 ### kbc_branch
@@ -84,14 +84,14 @@ This table lists the [configurations of components](/components/#creating-compon
 | `kbc_component_id` | Identifier of the component | `keboola.python-transformation-v2` |
 | `kbc_component` | Name of the component | `Generic` |
 | `kbc_component_type` | Identifier of the component type | `extractor` |
-| `kbc_component_vendor` | Identifies who created the component | `keboola` |
-| `kbc_component_listing` | Identifies the visibility of the component (`public`, `private`) | `public` |
+| `kbc_component_vendor` | Identifier of the component creator | `keboola` |
+| `kbc_component_listing` | Identifier of the component visibility (`public`, `private`) | `public` |
 | `configuration_id_num` | Numeric identifier of the configuration | `610931033` |
 | `kbc_component_configuration` | Name of the configuration | `Sample data from Dynamics` |
 | `configuration_created` | Datetime when the configuration was created | `2022-07-20 18:45:17` |
 | `kbc_configuration_version` | Current version of the configuration | `5` |
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
-| `description` | Can describe the purpose of the component (filled by users) | `This transformation put the data from customers into standardize format.` |
+| `description` | Description of the component configuration (filled by users) | `This transformation put the data from customers into standardize format.` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
 | `kbc_branch_id` | Foreign key to a Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Differentiate between the default (production) and development branch | `default` |
@@ -538,15 +538,15 @@ This table shows data about the current state of storage buckets.
 | `kbc_project_id` | Foreign key to the Keboola project | `866_kbc-eu-central-1` |
 | `kbc_project_bucket_id` (PK) | Keboola bucket identifier | `866_kbc-eu-central-1_1147628` |
 | `stage` | Storage stage of the bucket | `in` |
-| `bucket` | Name of the bucket | `c-instagram` |
-| `bucket_display_name` | Name of the bucket | `instagram` |
+| `bucket` | Default name of the bucket | `c-instagram` |
+| `bucket_display_name` | Name of the bucket that can be changed by user (if not change it is the same as `bucket`) | `instagram_posts` |
 | `rows` | Number of rows in the bucket as of the date of the snapshot | `4714` |
 | `bytes` | Bucket size in bytes as of the date of the snapshot | `1870336` |
 | `sharing_type` | Type of the bucket sharing (Data Catalog). <br> Possible values: `none` – bucket not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
 | `shared_from_project_id` | Identifier of the source project if the bucket is linked (sharing_type = 'target') | `860_kbc-eu-central-1` |
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
-| `description` | Describe what the bucket contains | `twitter extractor raw data` |
-| `is_external_schema` | Flag if the bucket contains data from external sources (`1`, `0`) | `1` |
+| `description` | Description of the bucket (filled by user) | `twitter extractor raw data` |
+| `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 
 ### kbc_column
@@ -605,8 +605,8 @@ This table shows data about flow tasks.
 | `kbc_project_id` | Foreign key to the Keboola project | `7880_kbc-us-east-1` |
 | `task_id` | Identifier of the task | `67558` |
 | `task_name` | Name of the task | `keboola.wr-db-snowflake-952663182` |
-| `task_enabled` | Flags if the task is enabled | `true` |
-| `continue_on_failure` | Flags if the flow should run in case of a task failure | `false` |
+| `task_enabled` | Flag indicating if the task is enabled | `true` |
+| `continue_on_failure` | Flag indicating if the flow should run in case of a task failure | `false` |
 | `mode` | Selected mode of the task | `run` |
 | `task_component_id_orig` | Keboola component identifier | `keboola.wr-db-snowflake` |
 | `task_configuration_id_num` | Numeric identifier of the task configuration | `952663182` |
@@ -713,7 +713,7 @@ This table shows data about the current state of storage [tables](/storage/table
 | `alias_filter_value` | Value the alias filter is filtering by | `ASNDUH8737D` |
 | `rows` | Number of rows in the table | `16362276` |
 | `bytes` | Data size of the table in bytes | `294944256` |
-| `description` | Can describe the purpose of the table (filled by users) | `Table provides information on customer behaviour` |
+| `description` | Description of the table (filled by user) | `Table provides information on customer behaviour` |
 
 ### kbc_table_event
 This table shows data about events of the storage [tables](/storage/tables/).
@@ -761,11 +761,11 @@ This table shows data about the storage [tokens](/management/project/tokens/).
 | `created` | Datetime when the token was created | `2022-07-29 08:39:08` |
 | `expires` | Datetime when the token expires | `2024-07-29 08:39:08` |
 | `refreshed` | Datetime when the token was refreshed | `2022-07-29T08:39:08Z` |
-| `is_disabled` | Flags if the token is disabled | `false` |
-| `can_manage_buckets` | Flags if the token can manage storage buckets | `true` |
-| `can_manage_tokens` | Flags if the token can manage other tokens | `false` |
-| `can_read_all_file_uploads` | Flags if the token can read storage file uploads | `true` |
-| `can_purge_trash` | Flags if the token can purge project trash | `false` |
+| `is_disabled` | Flag indicating if the token is disabled | `false` |
+| `can_manage_buckets` | Flag indicating if the token can manage storage buckets | `true` |
+| `can_manage_tokens` | Flag indicating if the token can manage other tokens | `false` |
+| `can_read_all_file_uploads` | Flag indicating if the token can read storage file uploads | `true` |
+| `can_purge_trash` | Flag indicating if the token can purge project trash | `false` |
 | `component_access` | Defines if the token has access to only a specific component | `orchestrator` |
 | `is_master_token` | Defines is the token is a master (generally user's personal token) | `false` |
 | `daily_capacity` | Daily operations capacity of the token (currently not used by the backend) | `5` |
@@ -830,7 +830,7 @@ This table shows data about input columns of [transformations](/transformations/
 | `column` | Input column name | `job_storage_mb` |
 | `column_type` | Data type of the column | `VARCHAR` |
 | `column_length` | Maximum length of the column | `16777216` |
-| `convert_empty_values_to_null` | Flags if the empty values should be converted to NULL | `false` |
+| `convert_empty_values_to_null` | Flag indicating if the empty values should be converted to NULL | `false` |
 
 ### kbc_transformation_output
 This table shows data about outputs of the [transformations](/transformations/).
@@ -842,7 +842,7 @@ This table shows data about outputs of the [transformations](/transformations/).
 | `kbc_transformation_output_id` (PK) | Unique Keboola transformation output identifier | `7880_kbc-us-east-1_keboola.snowflake-transformation_854061913_out.c-kbc_billing.kbc_data_science_sandbox` |
 | `kbc_component_configuration_id` | Foreign key to the transformation component configuration | `7880_kbc-us-east-1_keboola.snowflake-transformation_854061913` |
 | `kbc_project_id` | Foreign key to the Keboola project | `7880_kbc-us-east-1` |
-| `incremental` | Flags if the data should be written to the destination table incrementally | `true` |
+| `incremental` | Flag indicating if the data should be written to the destination table incrementally | `true` |
 | `destination` | Destination storage table | `out.c-kbc_billing.kbc_data_science_sandbox` |
 | `source` | Source table in the transformation workspace | `out_kbc_data_science_sandbox` |
 | `primary_key` | Primary key of the table (JSON array) | `["kbc_data_science_sandbox_resume_id","date"]` |
@@ -894,7 +894,7 @@ This table shows data about basic activity of project users (job runs and config
 | `date` (PK) | Date the activity occurred | `2023-08-14` |
 | `activity_type` (PK) | Type of the activity (`Job Run`, `Configuration Update` and `None` to see that the user did nothing) | `Job Run` |
 | `activities` | Number of activities (number of run job or configuration updates) | `3` |
-| `last_project_activity` | Flags if the activity is the last activity of the user in the project | `true` |
+| `last_project_activity` | Flag indicating if the activity is the last activity of the user in the project | `true` |
 
 ### kbc_workspace
 This table shows data about existing [workspaces](/transformations/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations).
@@ -908,7 +908,7 @@ This table shows data about existing [workspaces](/transformations/workspace/). 
 | `workspace_creator` | Foreign key to the Keboola table | `John Doe` |
 | `workspace_created` | Datetime when the workspace was created | `2023-06-13 20:41:42.268` |
 | `workspace_type` | Backend type of the workspace | `snowflake` |
-| `workspace_active` | Flags if the workspace is active | `1` |
+| `workspace_active` | Flag indicating if the workspace is active | `1` |
 | `workspace_expired` | Datetime when the workspace expired (empty for active) | `2023-07-18 10:20:56.384` |
 | `workspace_hostname` | Hostname of the workspace | `https://keboola.snowflakecomputing.com` |
 | `workspace_expire_hours` | Number of hours before the workspace expires due to inactivity (currently for data science workspaces) | `1` |
