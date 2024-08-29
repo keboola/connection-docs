@@ -46,7 +46,7 @@ This table shows snapshots of buckets in Storage.
 | `snapshot_date` (PK) | Date of the data snapshot | `2020-06-30` |
 | `stage` | Storage stage of the bucket | `in` |
 | `bucket` | Default name of the bucket | `c-instagram` |
-| `bucket_display_name` | Name of the bucket that can be changed by user (if not change it is the same as `bucket` without `c-` at the beginning) | `instagram_posts` |
+| `bucket_display_name` | Name of the bucket that can be changed by the user (if not changed, it is the same as `bucket` without `c-` at the beginning) | `instagram_posts` |
 | `rows` | Number of rows in the bucket as of the date of the snapshot | `4714` |
 | `bytes` | Size of the bucket in bytes as of the date of the snapshot | `1870336` |
 | `sharing_type` | Type of bucket sharing (Data Catalog). <br> Possible values: `none` – not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
@@ -91,7 +91,7 @@ This table lists the [configurations of components](/components/#creating-compon
 | `configuration_created` | Datetime when the configuration was created | `2022-07-20 18:45:17` |
 | `kbc_configuration_version` | Current version of the configuration | `5` |
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
-| `description` | Description of the component configuration (filled by users) | `This transformation put the data from customers into standardize format.` |
+| `description` | Description of the component configuration (filled by the user) | `This transformation put the data from customers into standardize format.` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
 | `kbc_branch_id` | Foreign key to a Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Differentiate between the default (production) and development branch | `default` |
@@ -132,7 +132,7 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `configuration_row_created` | Datetime of the configuration row's creation | `2022-04-25 11:59:42` |
 | `kbc_configuration_row_version` | Current version of the configuration row | `1` |
 | `kbc_configuration_is_disabled` | Flag indicating whether the configuration is disabled (`true`, `false`) | `false` |
-| `description` | Description of the component configuration row (filled by users) | `This part of transformation consolidate the data from various sources.` |
+| `description` | Description of the component configuration row (filled by the user) | `This part of transformation consolidate the data from various sources.` |
 | `configuration_row_json` | Complete JSON configuration row of the component | `{"parameters":{"incremental":false}}` |
 | `token_id` | Identifier of the token that created this version of the configuration row | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
@@ -171,7 +171,7 @@ This table lists Keboola [jobs](/management/jobs/)
 |---|---|---|
 | `kbc_job_id` (PK) | Keboola job identifier | `117644387_kbc-eu-central-1` |
 | `kbc_component_configuration_id` | Foreign key to the component configuration | `410_kbc-eu-central-1_keboola.wr-google-sheets-259642632` |
-| `kbc_component_configuration_row_id` | Foreign key to Keboola component configuration row | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
+| `kbc_component_configuration_row_id` | Foreign key to the Keboola component configuration row | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
@@ -539,13 +539,13 @@ This table shows data about the current state of storage buckets.
 | `kbc_project_bucket_id` (PK) | Keboola bucket identifier | `866_kbc-eu-central-1_1147628` |
 | `stage` | Storage stage of the bucket | `in` |
 | `bucket` | Default name of the bucket | `c-instagram` |
-| `bucket_display_name` | Name of the bucket that can be changed by user (if not change it is the same as `bucket`) | `instagram_posts` |
+| `bucket_display_name` | Name of the bucket that can be changed by the user (if not changed, it is the same as `bucket`) | `instagram_posts` |
 | `rows` | Number of rows in the bucket as of the date of the snapshot | `4714` |
 | `bytes` | Bucket size in bytes as of the date of the snapshot | `1870336` |
 | `sharing_type` | Type of the bucket sharing (Data Catalog). <br> Possible values: `none` – bucket not shared, <br> `target` – bucket linked from another project, <br>`source` / `org private` – bucket shared from this project, linkable only by organization members <br> `source` / `org public` – bucket shared from this project, linkable by any project members | `target` |
 | `shared_from_project_id` | Identifier of the source project if the bucket is linked (sharing_type = 'target') | `860_kbc-eu-central-1` |
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
-| `description` | Description of the bucket (filled by user) | `twitter extractor raw data` |
+| `description` | Description of the bucket (filled by the user) | `twitter extractor raw data` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 
@@ -713,7 +713,7 @@ This table shows data about the current state of storage [tables](/storage/table
 | `alias_filter_value` | Value the alias filter is filtering by | `ASNDUH8737D` |
 | `rows` | Number of rows in the table | `16362276` |
 | `bytes` | Data size of the table in bytes | `294944256` |
-| `description` | Description of the table (filled by user) | `Table provides information on customer behaviour` |
+| `description` | Description of the table (filled by the user) | `Table provides information on customer behaviour` |
 
 ### kbc_table_event
 This table shows data about events of the storage [tables](/storage/tables/).
