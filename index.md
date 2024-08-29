@@ -18,7 +18,7 @@ or connect with our team directly through [this link](https://www.keboola.com/co
 
 For some hands-on experience, dive into our Getting Started [tutorial](/tutorial/).
 
-Rest assured, we're here to support you whenever needed. Reach out via email at [support@keboola.com](support@keboola.com) or use the [support form](https://help.keboola.com/management/support/) directly within your project.  
+Rest assured, we're here to support you whenever needed. Reach out via email at support@keboola.com or use the [support form](https://help.keboola.com/management/support/) directly within your project.  
 
 ## Manage Keboola
 - [User management](/management/#user-management)

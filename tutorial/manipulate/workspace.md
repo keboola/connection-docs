@@ -59,4 +59,4 @@ as we did in the [previous tutorial step])/tutorial/manipulate/).
 Proceed to [Writing Data](/tutorial/write/) for the next step in the tutorial.
 
 ## If You Need Help
-Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
+Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
