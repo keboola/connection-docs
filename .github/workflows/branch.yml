@@ -13,6 +13,6 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v2
       - name: "Pull images"
-        run: docker-compose pull
+        run: docker compose pull
       - name: "Build"
-        run: docker-compose run --rm -e JEKYLL_ENV=production jekyll jekyll build
+        run: docker compose run --rm -e JEKYLL_ENV=production jekyll jekyll build

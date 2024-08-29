@@ -9,13 +9,18 @@ redirect_from:
 * TOC
 {:toc}
 
+***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to “Connection” or the 
+abbreviation “KBC” might still appear in table names, column names, etc.*
+
 The Telemetry Data connector allows you to retrieve data about your project or your entire [organization](/management/organization/). 
 It helps you monitor activities and usage in your Keboola projects. It also aids Keboola in calculating your project's consumption.
+
+If you don't need to work directly with the data or would like to see it in graphical form in Keboola, you can check the [Telemetry Dashboards](/management/telemetry/telemetry-dashboards).
 
 ## Configuration
 To configure the data source connector, select one of the following modes:
  
-1. [**Project mode**](#project-mode-tables): Extracts data only from a selected Keboola project.
+1. [**Project mode**](#project-mode-tables): Extracts data only from a selected Keboola project. 
 2. [**Organization mode**](#organization-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
 3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contract and also must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
 
@@ -26,7 +31,7 @@ Keep in mind that the tables *contact_limit_monthly*, *kbc_organization*, and *u
 {: .image-popup}
 ![Screenshot - Telemetry data model](/components/extractors/other/telemetry-data/telemetry-data-model.png)
 
-*Note: You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
+***Note:** You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
 
 ## Project Mode Tables
 The extracted tables provide you with information about your buckets, configurations, branches, jobs, sandboxes, projects, users, and security events.
@@ -88,9 +93,12 @@ This table lists the [configurations of components](/components/#creating-compon
 | `kbc_configuration_is_deleted` | Flag indicating whether the configuration is deleted (`true`, `false`) | `false` |
 | `description` | Description of the component configuration (filled by users) | `This transformation put the data from customers into standardize format.` |
 | `configuration_json` | Complete JSON configuration of the component | `{"parameters":{"id":"34289954"}}` |
+| `kbc_branch_id` | Foreign key to a Keboola branch | `3419_kbc-eu-central-1` |
+| `branch_type` | Differentiate between the default (production) and development branch | `default` |
 | `token_id` | Identifier of the token that created this version of the configuration | `241247` |
 | `token_name` | Name of the token that created this version of the configuration | `john.doe@keboola.com` |
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
+| `folder_name` | Unique identifier of the token containing stack identification | `Archive` |
 
 ### kbc_component_configuration_version
 This table shows the [version history](/components/#configuration-versions) 
@@ -168,6 +176,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
 | `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `OpenRefine`, `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
+| `credit_type` | Type of credit associated with the job. Possible values: <br> `KBC`, `SQL`, `CDC` <br> Does not necessarily represent actually used credit, as SQL and CDC credits are only consumed if they exist in the contract ([info](/management/project/limits/#project-power--time-credits)). The type of actually billed credit is defined in the [kbc_usage_metrics_values](/components/extractors/other/telemetry-data/#kbc_usage_metrics_values) table | `KBC` |
 | `job_run_id` | Run ID of the job – multiple jobs can run under the same Run ID | `117643429.117644388` |
 | `job_start_at` | Datetime when the job started | `2020-03-15 11:59:39` |
 | `job_created_at` | Datetime when the job was created | `2020-03-15 11:59:38` |
@@ -316,7 +325,7 @@ You need data for all projects.*
 |---|---|---|
 | `metrics_values_id` (PK) | Identifier of the daily value of the usage metric (combination of the project ID, usage metric ID, metric breakdown, sandbox flag, and date) | `779_kbc-eu-central-1_kbc_tb_KBC TB_false_2020-07-14` |
 | `kbc_project_id` | Foreign key to the Keboola project | `779_kbc-eu-central-1` |
-| `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
+| `usage_metric_id` | Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `sql_ppu`, `cdc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects` | `kbc_tb` |
 | `date` | Date of the value | `2019-11-01` |
 | `usage_breakdown` | Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into data destination connectors, applications, and transformations. | `DWH Direct Query` |
 | `is_sandbox` | Flag determining if the value is for sandbox | `true` |
@@ -923,6 +932,21 @@ This table shows data about [workspace](/transformations/workspace/) events.
 | `event` | Description of the event | `storage.workspaceCreated` |
 | `event_type` | Type of the event | `info` |
 | `kbc_token_id` | Foreign key to the Keboola token creating the event | `516357_kbc-us-east-1` |
+| `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
+
+### kbc_file_event
+This table shows data about storage [file](/storage/files/) events.
+
+| **Column** | **Description** | **Example** | 
+|---|---|---|
+| `kbc_file_event_id` (PK) | Unique Keboola file event identifier | `7342403037_kbc-eu-central-1` |
+| `kbc_project_id` | Foreign key to the Keboola project | `2807_kbc-eu-central-1` |
+| `event_created_at` | Datetime when the file event was created | `2023-07-23 06:23:19` |
+| `event` | Description of the event | `storage.fileUploaded` |
+| `event_type` | Type of the event | `info` |
+| `message` | Message describing the event | `Uploaded file in.c_in_sh_kbc_internal.kbc_flow_task.csv.gz` |
+| `kbc_file_id` | Identifier of the file | `759391664_kbc-eu-central-1` |
+| `kbc_token_id` | Foreign key to the Keboola token creating the event | `516357_kbc-eu-central-1` |
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ## dst_ Columns
