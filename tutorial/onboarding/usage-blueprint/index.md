@@ -28,9 +28,9 @@ permalink: /tutorial/onboarding/usage-blueprint/
 - Allow [Keboola support team](/management/support/#require-approval-for-support-access) to join your projects.
 
 Our Keboola organization administrators are:
-- Name, [email@company.com](email@company.com)
-- Name, [email2@company.com](email2@company.com)
-- Name, [email3@company.com](email3@company.com)
+- Name, email@company.com
+- Name, email2@company.com
+- Name, email3@company.com
 
 #### User requesting access to a project
 > *Usually, Keboola administrators keep a list of all current projects, project owners, and lead project engineers.

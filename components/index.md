@@ -67,20 +67,6 @@ Many of these are 3rd-party components. Users can add these components via their
 We may share our pre-release versions that exist in private Beta with our test user groups. In such a case, you will receive a component ID, which you can use to create the configuration. 
 These components will eventually transition to a public Beta.
 
-## Configuration Description
-After configuring the component, it is a good practice to describe what it does.
-
-{: .image-popup}
-![Screenshot - Add Description button](/components/description-button.png)
-
-Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify. 
-Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview#ai-assistance). Even though the contents are not used to train the model, as a best practice, 
-you should not store unencrypted secrets such as API keys and passwords in the configuration (for example, in Python transformation code). Variables and encrypted configuration parameters are automatically 
-obfuscated.
-
-{: .image-popup}
-![Screenshot - AI generated description](/components/description-generated.png)
-
 ## Creating Component Configuration
 To create a new component configuration, select *Components* from the top navigation and then select one of the component categories:
 
@@ -128,6 +114,20 @@ When you run a component, a [job](/management/jobs/) is created and subsequently
 
 You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and 
 the tables it produced in your project. Its active version (the one with the green tick mark) will be used when running the configuration.
+
+### Configuration Description
+After configuring the component, it is a good practice to describe what it does.
+
+{: .image-popup}
+![Screenshot - Add Description button](/components/description-button.png)
+
+Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify. 
+Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview#ai-assistance). Even though the contents are not used to train the model, as a best practice, 
+you should not store unencrypted secrets such as API keys and passwords in the configuration (for example, in Python transformation code). Variables and encrypted configuration parameters are automatically 
+obfuscated.
+
+{: .image-popup}
+![Screenshot - AI generated description](/components/description-generated.png)
 
 ### Configuration Versions
 Configuration parameters can be changed at any time. Every change to a configuration is recorded 
@@ -269,6 +269,16 @@ row. You can roll back a row to a previous version without interacting with the 
 
 ***Note:** You cannot copy a configuration row to a new configuration. You always have to copy the entire
 configuration.*
+
+### Running Component Configuration Jobs in Parallel
+All components (usually data source and destination connectors) that support configuration rows now have the option to set job parallelism at the configuration level.
+This means you can control the speed of an extraction or writing process and specify which scenarios you want to speed up.
+
+This setting is optional, with the default option being **Parallel jobs: Off**.
+
+**Example:** If your configuration has five rows and you set the parallelism to 2, the five jobs will be processed in three consecutive sets (2 + 2 + 1). The jobs within each set will run in parallel.
+
+This feature is now available in all projects with Queue v2 and on all stacks.
 
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user),

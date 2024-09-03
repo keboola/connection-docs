@@ -58,13 +58,11 @@ Finally, add a new code to `Block 1` named `Top prices` with the following query
 {% highlight sql %}
 {% raw %}
 CREATE TABLE "top_prices" AS SELECT * FROM "bitcoin_price" ORDER BY PRICE DESC LIMIT 5;
-
-ALTER TABLE "top_prices" DROP COLUMN "_timestamp";
 {% endraw %}
 {% endhighlight %}
 
 {: .image-popup}
-![Snowflake output mapping](/tutorial/branches/figures/snflk-prod-code.png)
+![Snowflake output mapping](/tutorial/branches/figures/snflk-prod-code1.png)
 
 
 {: .image-popup}
