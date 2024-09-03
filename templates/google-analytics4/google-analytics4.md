@@ -1,49 +1,49 @@
 ---
-title: Google Analytics
-permalink: /templates/google-analytics/
+title: Google Analytics 4
+permalink: /templates/google-analytics4/
 ---
 
 * TOC
 {:toc}
 
-Using one of the Google Analytics templates will provide you with insights into site activities: the length of visits, the number of pages seen per visit, the 
+Using the Google Analytics 4 template will provide you with insights into site activities: the length of visits, the number of pages seen per visit, the 
 bounce rate, and many other statistics, which you can see in time or by the traffic source. You can also enrich your Google Analytics data with 
 Google Search Console data. This will show you the average rank of your page in time.
-
-After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
+After all the necessary tasks are performed on the data, you can load the results into the data destination of your choice or use a data app for visualization.
 
 **The flow, in a nutshell:**
 
-- First, the Google Analytics data source connector will collect data from your Google Analytics account, and the Google Search Console data source connector (if selected) 
+- First, the Google Analytics 4 data source connector will collect data from your Google Analytics account, and the Google Search Console data source connector (if selected) 
 will get your Google Search Console data.
 
-- Then we will put your data into the requested shape, and the Snowflake data destination connector will load the results into a Snowflake database.
+- Then we will put your data into the requested shape, and the selected data destination connector will load the results into your database.
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). 
-The Google Analytics or Google Search Console data source connectors (if selected), all data manipulations, and the Snowflake data destination connector, will be processed.
+The Google Analytics 4 or Google Search Console data source connectors (if selected), all data manipulations, and the data destination connector, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
 
 {: .image-popup}
-![Business Data Model](/templates/google-analytics/erd-google-analytics.png)
+![Business Data Model](/templates/google-analytics4/ga4-erd.png)
 
 ## Table Description
 
 | Name | Description |
 |---|---|
-| GA AD ANALYTICS | contains data about impressions, clicks, costs, sessions, bounces, and pageviews of each campaign per day |
-| GA DEMOGRAPHIC AUDIENCE | contains a high-level age/gender focused view of traffic (session) data |
-| GA GEO AUDIENCE | contains geographical data that tells you who your visitors coming to website are and where they are coming from |
-| GA PAGE BEHAVIOUR | contains data about visitor behaviour on the pages - pageviews, sessions, entrances, and time spent on a page |
-| GA SITE STATISTICS | contains data about site statistics: sessions, pageviews, and average time data (page load time, download time, redirection time, and server connection time) per day |
-| GA TRAFFIC SOURCE | contains data about traffic sources of each campaign and source per day (sessions, bounces, users, session duration, and pageviews) |
+| GA4 AD ANALYTICS | contains data about impressions, clicks, costs, sessions, conversions, bounces, and pageviews of each campaign per day |
+| GA4 AUDIENCE | contains aggregated data about set audiences, i.e., active, new or total users, sessions, average session duration, screen page views, etc.|
+| GA4 DEMOGRAPHIC AUDIENCE | contains a high-level age/gender focused view of traffic (session) data |
+| GA4 EVENT | contains aggregated data about events, i.e., count, value, total users, active users, new users |
+| GA4 GEO AUDIENCE | contains geographical data that tells you who your visitors coming to website are and where they are coming from |
+| GA4 PAGE BEHAVIOUR | contains data about visitor behaviour on the pages – pageviews, sessions, entrances, and time spent on a page |
+| GA4 TRAFFIC SOURCE | contains data about traffic sources of each campaign and source per day (sessions, bounces, users, session duration, and pageviews) |
 | GSC RANKING | contains data about average ranking of each page per day |
 
 ## Data Sources
 These data sources are available in Public Beta:
 
-- [Google Analytics](https://analytics.google.com/analytics/web/)
+- [Google Analytics 4](https://analytics.google.com/analytics/web/)
 - [Google Search Console](https://search.google.com/search-console/about)
 
 ## Data Destinations
@@ -53,37 +53,37 @@ These data destinations are available in Public Beta:
 - [Snowflake database](https://www.snowflake.com/)
 - [Google BigQuery database](https://cloud.google.com/bigquery/) 
 - [Google Sheets](https://www.google.com/sheets/about/)
-
+- [PostgreSQL](https://www.postgresql.org/)
+  
 ## How to Use Template
 The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
-First decide which data source and which data destination you want to use. Then select the corresponding template 
-from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
+Select the template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
-![Add New Template](/templates/google-analytics/add-new-template.png)
+![Add New Template](/templates/google-analytics4/ga4-add-new-template.png)
 
-This page contains information about the template. Click **+ Use Template** again.
+This page contains information about the template. Click **+ Set Up Template**.
 
 {: .image-popup}
-![Add Google Analytics to Snowflake](/templates/google-analytics/add-google-analytics-to-snowflake.png)
+![Google Analytic 4 - Set Up Template](/templates/google-analytics4/ga4-set-up-template.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
 
 {: .image-popup}
-![Google Analytics to Snowflake - Template Name](/templates/google-analytics/google-analytics-to-snowflake-name.png)
+![Google Analytics 4 - Template Name](/templates/google-analytics4/ga4-template-name.png)
 
-After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
+After clicking **Set Up Template** again, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
 authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/google-analytics/#authorizing-data-destinations) below.
 
-Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
+Follow the steps one by one and authorize the Google Analytics 4 data source and, optionally, the Google Search Console data source. If you want to upload the data to the database, choose one (or more) of the destinations and authorize it.
 
 {: .image-popup}
-![Google Analytics to Snowflake](/templates/google-analytics/google-analytics-to-snowflake-steps.png)
+![Google Analytics 4 - Flow](/templates/google-analytics4/ga4-flow.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
 when it is done, you will see the newly created flow. 
@@ -91,17 +91,17 @@ when it is done, you will see the newly created flow.
 Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
-![Ad Platforms to Google Sheets - Flows](/templates/google-analytics/google-analytics-to-snowflake-flow.png)
+![Google Analytics 4 - All Runs](/templates/google-analytics4/google-analytics-to-snowflake-flow.png)
 
 ## Authorizing Data Sources
 
 To use a selected data source connector, you must first authorize the data source. 
 In addition to Google Analytics, you can also add data from the Google Search Console. 
 
-### Google Analytics
+### Google Analytics 4
 
 {: .image-popup}
-![Google Analytics Data Source](/templates/google-analytics/google-analytics-data-source.png)
+![Google Analytics 4 Data Source](/templates/google-analytics4/ga4-source.png)
 
 Authorize your Google account and select the period for extracting the data. The list of Google Analytics Profiles will automatically appear after the authorization.
 
@@ -109,17 +109,17 @@ Authorize your Google account and select the period for extracting the data. The
 Using this data source is optional.
 
 {: .image-popup}
-![Google  Data Search Console Data Source](/templates/google-analytics/google-search-console-data-source.png)
+![Google  Data Search Console Data Source](/templates/google-analytics4/google-search-console-data-source.png)
 
 Authorize your Google Account and then fill in your domain.
 
 ## Authorizing Data Destinations
-To create a working flow, you must select at least one data destination.
+When creating a working flow, you can select one or more data destinations.
 
 ### BigQuery Database
 
 {: .image-popup}
-![BigQuery Destination](/templates/marketing-platforms/bigquery-destination.png)
+![BigQuery Destination](/templates/google-analytics4/bigquery-destination.png)
 
 To configure the data destination connector, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
@@ -143,16 +143,17 @@ in your duplicated Google sheet.
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-1. After clicking **Save**, the template will be used in your project. You will see a flow. 
-2. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
-3. Select **Keboola Snowflake database**. 
-4. Then go back to the flow and click **Run**. 
+1. Configure the Snowflake destination and click **Save Configuration**.
+2. After clicking **Save**, the template will be used in your project. You will see a flow. 
+3. Go there and click on **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
+4. Select **Keboola Snowflake database**. 
+5. Then go back to the flow and click **Run**. 
 
 {: .image-popup}
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions1.png)
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions2.png)
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions3.png)
-![DWH Provided by Keboola](/templates/marketing-platforms/keboola-dwh-instructions4.png)
+![DWH Provided by Keboola](/templates/google-analytics4/keboola-dwh-instructions1.png)
+![DWH Provided by Keboola](/templates/google-analytics4/keboola-dwh-instructions2.png)
+![DWH Provided by Keboola](/templates/google-analytics4/keboola-dwh-instructions3.png)
+![DWH Provided by Keboola](/templates/google-analytics4/keboola-dwh-instructions4.png)
 
 Everything is set up.
 
@@ -162,7 +163,7 @@ If you want to use your own Snowflake database, you must provide the host name (
 schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
 
 {: .image-popup}
-![Snowflake Destination](/templates/marketing-platforms/snowflake-destination.png)
+![Snowflake Destination](/templates/google-analytics4/snowflake-destination.png)
 
 We highly recommend that you create a dedicated user for the data destination connector in your Snowflake database. Then you must provide 
 the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
@@ -181,4 +182,4 @@ Now follow the **Snowflake Database provided by Keboola** on the page **Authoriz
 Then go to the **Flows** tab and **Run** the flow again.  
 
 {: .image-popup}
-![Job - Snowflake](/templates/marketing-platforms/snowflake-job.png)
+![Job - Snowflake](/templates/google-analytics4/snowflake-job.png)
