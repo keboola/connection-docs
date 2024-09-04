@@ -490,9 +490,6 @@ items:
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
 
-      - url: /templates/kai-promptlab/
-        title: Kai PromptLab
-
       - url: /templates/kai-sql-bot/
         title: Kai SQL Bot
         
