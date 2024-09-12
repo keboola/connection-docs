@@ -31,6 +31,9 @@ grant Keboola correct access to the schema in your Snowflake. Once access has be
 {: .alert.alert-info}
 **Note:** This set of permissions grants the Keboola service account read-only access to the data.
 
+{: .alert.alert-warning}
+[Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
+
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
 correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
@@ -93,10 +96,10 @@ WHERE `source` = "mql";
 (`sales_emea`). However, there are no technical limitations; they can have the same name. 
 
 ## Sharing an External Dataset
-It is possible to share a Snowflake external bucket using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project. Currently, it is possible to share entire buckets, not specific tables within them.
+It is possible to share a Snowflake external dataset using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
 
 {: .alert.alert-warning}
-**Note:** At this moment, it is not possible to share BigQuery or BigLake datasets. If this is a relevant use case for you, please create a support ticket.
+**Note:** At this time, sharing an external dataset is only possible on projects with a Snowflake storage backend. Sharing external datasets on a BigQuery storage backend isn't supported yet. If this is relevant to your use case, please create a support ticket.
 
 ## Removing an External Dataset
 Removing an external dataset is as simple as removing any other Storage bucket. Simply delete it in the UI or via API. The Storage bucket will be removed from 
