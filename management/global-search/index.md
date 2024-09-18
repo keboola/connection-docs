@@ -1,6 +1,6 @@
 ---
 title: Global Search
-permalink: /management/global-search/
+permalink: /management/global-search/index.md
 ---
 
 * TOC
@@ -9,7 +9,7 @@ permalink: /management/global-search/
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> This feature is currently available in BETA.
+    <strong>Important:</strong> This feature is currently available in **BETA**.
 </div>
 
 ## What Is Global Search?
@@ -22,13 +22,13 @@ they will be notified that access must be requested.
 You can perform a search across the entire organization by using the global search interface:
 
 {: .image-popup}
-![Screenshot - Interface](/global-search/global-search-1.png)
+![Screenshot - Interface](/management/global-search/global-search-1.png)
 
 The functionality supports filtering by entity type and environment. The search results will return both the total number of matches and
 aggregated results by entity type.
 
 {: .image-popup}
-![Screenshot - Search Results](/global-search/global-search-2.png)
+![Screenshot - Search Results](/management/global-search/global-search-2.png)
 
 ## Supported Entity Types
 You can search various entities across your organization. Results are sorted by relevance and the entity creation date,
@@ -36,13 +36,13 @@ with the most relevant and newest results shown first.
 
 These are the currently supported types:
 
-- Flow
-- Bucket (under Storage)
-- Table (under Storage)
-- Transformation
-- Configuration (under Components)
-- Workspace
-- Shared Code
+- **Flow**
+- **Bucket** (under Storage)
+- **Table** (under Storage)
+- **Transformation**
+- **Configuration** (under Components)
+- **Workspace**
+- **Shared Code**
 
 ## Using Global Search
 Once a search is performed, the system will return a list of entities that match the query. The results will include detailed information about the entities found,
@@ -55,7 +55,7 @@ If a user attempts to search for an entity within a project they don’t have ac
 This ensures no sensitive or restricted information is exposed.
 
 {: .image-popup}
-![Screenshot - No Access](/global-search/global-search-3.png)
+![Screenshot - No Access](/management/global-search/global-search-3.png)
 
 ## Limitations
 The Global Search feature has the following limitations:
