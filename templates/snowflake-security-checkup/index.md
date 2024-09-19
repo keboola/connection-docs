@@ -56,3 +56,16 @@ While using this template, please keep the following in mind:
 - **No Multitenancy Support:** This template is designed for single-tenant use only and does not support multitenant projects or workspaces.
 - **Requires an Existing Snowflake Database:** You must provide your own Snowflake database, as the template does not support Snowflake databases created by Keboola.
 - **Automated Daily Flow:** The template is pre-configured for daily execution, making it easy to integrate into your routine security monitoring practices.
+
+## Guide: Creating a Snowflake Account with Specific Rights
+Follow these steps to create a Snowflake user account with a specific role, and grant the necessary privileges:  
+
+```
+CREATE OR REPLACE ROLE TEST_SNFLK_TEMPLATE;  
+CREATE OR REPLACE USER TEST_SNFLK_TEMPLATE     
+      PASSWORD='xxxxxxxx'    
+      DEFAULT_ROLE='TEST_SNFLK_TEMPLATE';
+GRANT ROLE TEST_SNFLK_TEMPLATE TO USER TEST_SNFLK_TEMPLATE;
+GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE TO ROLE TEST_SNFLK_TEMPLATE;
+GRANT USAGE ON WAREHOUSE DEV TO ROLE TEST_SNFLK_TEMPLATE;
+```
