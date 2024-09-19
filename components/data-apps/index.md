@@ -122,10 +122,10 @@ We recommend using the authorization methods provided by Keboola.
 {: .image-popup}
 ![Code - code](/components/data-apps/data_app-authentication.png)
 
-1. **Simple Authorization**: This method allows you to authenticate a user using a username and password.
+1. **Basic Authorization**: This method allows you to authenticate a user using a password genereted by keboola.
 
 {: .image-popup}
-![Code - code](/components/data-apps/data_app-authentication-basic.png)
+![Code - code](/components/data-apps/data_app-authentication-basic-proxy.png)
 
 2. **OIDC (OpenID Connect) Authorization**: This enables users to log into your app using your Single Sign-On (SSO) providers providers. 
 
@@ -165,6 +165,11 @@ Should anything unexpected occur, a **wakeup error** page will appear, and you c
 {: .image-popup}
 ![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
 
+### How to Setup Inactivity Sleep
+When you click **Deploy** or **Redeploy** for your app, a wizard will appear, prompting you to specify the backend size and the auto-sleep timeout. You can set the duration of inactivity after which the app will go to sleep, with options ranging from 5 minutes to 24 hours. The default is set to 5 minutes.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-deploy-timeout-backedsize.png)
 
 ### Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
