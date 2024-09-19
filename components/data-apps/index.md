@@ -144,6 +144,67 @@ If you enter an app with OIDC, you'll be asked to select an `Authentication Prov
 
 Choose the authorization method that best suits your app's requirements and security needs.
 
+## Theming
+To configure theming in your data app, users can select from predefined themes or create a custom theme. Predefined themes include "Keboola," "Light Red," "Light Purple," "Light Blue," "Dark Green," "Dark Amber," and "Dark Orange." Each theme has specified primary color, background color, secondary background color, text color, and font. Users choosing "Custom" can manually set these values.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-theming-predefined.png)
+
+For "Custom," users can select each color using color pickers and the desired font from a list.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-theming-custom.png)
+
+### Predefined Themes:
+1. **Keboola**  
+   - Primary Color: `#1F8FFF`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#E6F2FF`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+2. **Light Red**  
+   - Primary Color: `#FF5D5D`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#FFE6E6`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+3. **Light Purple**  
+   - Primary Color: `#9A6DD7`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#F2E6FF`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+4. **Light Blue**  
+   - Primary Color: `#0000B2`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#E6E6FF`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+5. **Dark Green**  
+   - Primary Color: `#4CAF50`  
+   - Background Color: `#222529`  
+   - Secondary Background Color: `#3D4F41`  
+   - Text Color: `#FFFFFF`  
+   - Font: Sans Serif
+
+6. **Dark Amber**  
+   - Primary Color: `#FFC107`  
+   - Background Color: `#222529`  
+   - Secondary Background Color: `#4A3A24`  
+   - Text Color: `#FFFFFF`  
+   - Font: Sans Serif
+
+7. **Dark Orange**  
+   - Primary Color: `#FFA500`  
+   - Background Color: `#222529`  
+   - Secondary Background Color: `#4A3324`  
+   - Text Color: `#FFFFFF`  
+   - Font: Sans Serif
+   - 
 ## Sleep and Resume
 Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after an hour of inactivity. Here's how it works:
 
