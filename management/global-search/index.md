@@ -1,6 +1,6 @@
 ---
 title: Global Search
-permalink: /management/global-search/index.md
+permalink: /management/global-search/
 ---
 
 * TOC
