@@ -3,14 +3,14 @@ title: Global Search
 permalink: /management/global-search/
 ---
 
-* TOC
-{:toc}
-
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
     <strong>Important:</strong> This feature is currently available in <strong>BETA</strong>.
 </div>
+
+* TOC
+{:toc}
 
 ## What Is Global Search?
 Global Search is an enhancement of the existing search functionality within Keboola.
