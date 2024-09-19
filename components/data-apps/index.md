@@ -165,7 +165,7 @@ Should anything unexpected occur, a **wakeup error** page will appear, and you c
 {: .image-popup}
 ![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
 
-### How to Setup Inactivity Auto Sleep Timeout
+### How to Setup Inactivity Timeout
 When you click **Deploy** or **Redeploy** for your app, a wizard will appear, prompting you to specify the backend size and the auto-sleep timeout. You can set the duration of inactivity after which the app will go to sleep, with options ranging from 5 minutes to 24 hours. The default is set to 5 minutes.
 
 {: .image-popup}
