@@ -41,7 +41,7 @@ The template also includes various other queries designed to enhance security mo
 within your Snowflake environment.
 
 ## Key Benefits
-The key benefits that the Snowflake Security Checkup template offers to you are:
+The key benefits that the Snowflake Security Checkup template offers are:
 
 - **Enhanced Security:** Quickly identify and respond to potential security threats.
 - **Operational Insights:** Gain visibility into unusual activity and operational errors.
