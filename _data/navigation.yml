@@ -706,6 +706,9 @@ items:
       - url: /management/organization/
         title: Organizations
 
+      - url: /management/global-search/
+        title: Global Search
+
       - url: /management/telemetry/
         title: Telemetry
         items:
