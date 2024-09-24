@@ -69,7 +69,7 @@ you must set these options:
   used for each preset are listed [here](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/).
 - **Report Aggregation** (aggregation) – The type of aggregation that needs to be used to aggregate the report data. For prebuilt
   report presets, only `Daily` and `Hourly` aggregation is available.
-- **[Time Range](components/extractors/marketing-sales/bing-ads/#specifying-time-range)**
+- **[Time Range](/components/extractors/marketing-sales/bing-ads/#specifying-time-range)**
 - **Return only complete data** (return_only_complete_data) – Determines whether the service must ensure that all
   the data has been processed and is available. If checked and the requested data are (partially) incomplete or
   unavailable, an error will be raised.
@@ -85,7 +85,7 @@ must set these options:
 - **Report Type** (report_type) – Select one of the available report types described in
   the [official documentation](https://learn.microsoft.com/en-us/advertising/guides/report-types?view=bingads-13).
 - **Report Aggregation** (aggregation) – The type of aggregation to use to aggregate the report data.
-- **[Time Range](components/extractors/marketing-sales/bing-ads/#specifying-time-range)**
+- **[Time Range](/components/extractors/marketing-sales/bing-ads/#specifying-time-range)**
 - **Return only complete data** (return_only_complete_data) – Determines whether or not the service must ensure that
   all the data has been processed and is available. If checked and the requested data are (partially) incomplete or
   unavailable, an error will be raised.
