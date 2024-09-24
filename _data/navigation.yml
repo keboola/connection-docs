@@ -505,6 +505,9 @@ items:
       - url: /templates/repository/
         title: Repository
 
+      - url: /templates/snowflake-security-checkup/
+        title: Snowflake Security Checkup
+
       - url: /templates/social-media-engagement/
         title: Social Media Engagement
 
