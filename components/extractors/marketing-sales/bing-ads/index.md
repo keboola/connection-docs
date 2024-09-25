@@ -142,17 +142,17 @@ Finally, you must set how the extracted data will be saved in Keboola Storage.
 - **Load Type** (load_type) – If Full Load is used, the destination table will be overwritten every run. If Incremental
   Load is used, data will be "upserted" into the destination table.
 - **Storage Table Name** (output_table_name) – Name of the table stored in Storage. Defaults are used if left empty (see
-  the [Output section](#output) for details).
+  the [Output section](/components/extractors/marketing-sales/bing-ads/#output) for details).
 
 {: .image-popup}
 ![Destination configuration entry](/components/extractors/marketing-sales/bing-ads/row_destination.png)
 
-Once again: don't forget to **save**.
+Once again, don't forget to **save**.
 
 ### Example Configuration
 
 Let's say you want to download an AdGroupPerformance report
-with [the preset columns and primary key](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/index.md)
+with [the preset columns and primary key](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/)
 and upsert the data into a table called `AdGroupPerformance_Daily_Report`. In that case you would:
 
 1. set the **Object Type** to `Report (Prebuilt)`,
@@ -170,7 +170,7 @@ needed.
 ## Output
 
 The output of every configuration row is always a single table in the Keboola Storage. If you specify the **Storage
-Table Name** in the [destination configuration](#destination), this name is used; otherwise, a default name is generated
+Table Name** in the [destination configuration](/components/extractors/marketing-sales/bing-ads/#destination), this name is used; otherwise, a default name is generated
 as specified below.
 
 ### Entities
@@ -189,7 +189,7 @@ will be empty.*
 When extracting report data (i.e., when Object Type in row config is set to `Report (Prebuilt)`), the output table
 schema depends on which report preset is specified in the Preset Name row configuration parameter and the chosen
 aggregation in the Aggregation parameter. You can see which columns are extracted for each combination of Preset Name and
-Aggregation [here](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/index.md). 
+Aggregation [here](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/). 
 The default table name is constructed as `{preset_name}_{aggregation}_Report`, where `{preset_name}` is the Preset
 Name parameter value and `{aggregation}` is the value of the Aggregation parameter.
 
