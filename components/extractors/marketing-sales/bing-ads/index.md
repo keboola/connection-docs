@@ -9,7 +9,7 @@ redirect_from:
 * TOC 
 {:toc}
 
-The [Microsoft Advertising (Bing Ads)](https://ads.microsoft.com/) data source connector supports extracting either campaign entity data or various types of
+The [Microsoft Advertising (Bing Ads)](https://ads.microsoft.com/) data source connector supports the extraction of either campaign entity data or various types of
 available reports. In the case of reports, you can specify your own set of columns and the primary key to use in Keboola Storage,
 but there are also presets of columns and appropriate primary keys available.
 
@@ -17,7 +17,7 @@ but there are also presets of columns and appropriate primary keys available.
 
 Have your Bing Ads Account ID and Customer ID ready. Please
 follow [this part of the official documentation](https://learn.microsoft.com/en-us/advertising/guides/get-started?view=bingads-13#get-ids). 
-Both should be numbers in the form of `391827251`.
+Both should be numbers in the format of `391827251`.
 
 ## Configuration
 
@@ -36,7 +36,7 @@ Then open the global configuration:
 {: .image-popup}
 ![Global Configuration opening](/components/extractors/marketing-sales/bing-ads/global_config_collapsed.png)
 
-Enter your Account ID and Customer ID into the components global configuration as you can see on the screenshot below.
+Enter your Account ID and Customer ID into the component's global configuration, as shown in the screenshot below.
 Don't forget to **save** the configuration.
 
 {: .image-popup}
@@ -49,7 +49,7 @@ Now you can configure the reports to extract as configuration rows. First, click
 {: .image-popup}
 ![Add Row](/components/extractors/marketing-sales/bing-ads/add_row.png)
 
-Then you must select the **object type**:
+Next, select the **object type**:
 
 - **Entity** to extract campaign entities (Ads, Ad Groups, Campaigns, etc.).
 - **Report (Prebuilt)** to extract reports using one of the presets.
@@ -118,12 +118,12 @@ collect historical data.
 
 #### Entities extraction
 
-This is useful for geting additional information about your campaigns or other entities. However, note that in most cases it
+This is useful for getting additional information about your campaigns or other entities. However, note that in most cases it
 may be more convenient to include entity related columns in the report itself.
 
 To download entities, select `Entity` **Object Type** and configure the following options:
 
-- **Entities** – List of entities (or rather entity types) to download. To load a full list of entities available, click
+- **Entities** – List of entities (or entity types) to download. To load a full list of entities available, click
   the **Re-Load Available Entities** button. Currently, only the extraction of entities within the `EntityData` data scope
   is supported. More information is available in
   the [official documentation](https://learn.microsoft.com/en-us/advertising/bulk-service/downloadentity?view=bingads-13#values)
@@ -152,8 +152,8 @@ Once again, don't forget to **save**.
 ### Example Configuration
 
 Let's say you want to download an AdGroupPerformance report
-with [the preset columns and primary key](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/)
-and upsert the data into a table called `AdGroupPerformance_Daily_Report`. In that case you would:
+with [the preset columns and a primary key](/components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/)
+and upsert the data into a table called `AdGroupPerformance_Daily_Report`. In that case, you would:
 
 1. set the **Object Type** to `Report (Prebuilt)`,
 2. set the **Preset Name** to `AdGroupPerformance`,
@@ -175,12 +175,11 @@ as specified below.
 
 ### Entities
 
-When extracting campaign entity data (i.e., when **Object Type** in row config is set to `Entity`), the default name of
+When extracting campaign entity data (i.e., when the **Object Type** in the row configuration is set to `Entity`), the default name of
 the Keboola Storage output table is `entities`.
 
-*NOTE: Note that due to the API behaviour the output table will always contain all 418 columns that are available for
-all entity types, even though the entity is not selected for download. Columns relevant to types that are not selected
-will be empty.*
+***Note:** Due to the API behaviour, the output table will always contain all 418 columns that are available for
+all entity types, even though the entity is not selected for download. Columns relevant to unselected types will be empty.*
 
 ### Reports
 
