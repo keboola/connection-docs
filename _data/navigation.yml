@@ -529,6 +529,15 @@ items:
       - url: /storage/buckets/
         title: Buckets
 
+      - url: /storage/data-streams/
+        title: Data Streams
+
+      - url: /storage/files/
+        title: Files
+
+      - url: /storage/jobs/
+        title: Jobs
+
       - url: /storage/tables/
         title: Tables & Aliases
         items:
@@ -543,12 +552,6 @@ items:
 
           - url: /storage/tables/backups/
             title: Backups and Restorations
-
-      - url: /storage/files/
-        title: Files
-
-      - url: /storage/jobs/
-        title: Jobs
 
       - url: /storage/byodb/
         title: Bring Your Own Database
