@@ -35,7 +35,7 @@ For every data stream, a unique “Data Stream URL” is generated. You can use 
 This dashboard shows the status of data waiting for import vs. imported data.
 
 {: .image-popup}
-![Screenshot - Data Streams Table Statistics](/storage/data-streams-pic1.png)
+![Screenshot - Data Streams Table Statistics](/storage/data-streams/data-streams-pic1.png)
 
 #### Table Settings
 In your table settings, you can:
