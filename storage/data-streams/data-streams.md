@@ -21,9 +21,11 @@ The most important benefits of the Data Streams feature include:
 The Data Streams feature receives messages through HTTP and saves them into the database once predefined conditions (record count, total size, or time) are met. The service uses Keboola's Buffer API for smooth data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
 
 ### Create a Data Stream
-1. Navigate to **Storage > Data Streams** and click **Create Data Stream**.
-2. Name the data stream, e.g., “my-first-data-stream.” The name of the table will be filled automatically based on the stream name, but you can change it if needed.
-3. Once the stream is created, you can add a description for better orientation within the project.
+Follow these steps to create a data stream:
+
+- Navigate to **Storage > Data Streams** and click **Create Data Stream**.
+- **Name the data stream**, e.g., “my-first-data-stream.” The name of the table will be filled automatically based on the stream name, but you can change it if needed.
+- Once the stream is created, you can **add a description** for better orientation within the project.
 
 ### Configure the Stream
 #### Data Stream URL
@@ -59,8 +61,8 @@ Here, you can simulate your payload and test it instantly with a table preview t
 ## Pricing
 Data Streams pricing details vary based on the number of streams and the volume of data ingested.
 
-- $25 per stream, per month
-- $0.15 per 1GB of streamed data 
+- **$25** per stream, per month
+- **$0.15** per 1GB of streamed data 
 
 ## Technical Documentation
 For further details and API integration steps, refer to our [comprehensive documentation](https://developers.keboola.com/integrate/push-data/).
