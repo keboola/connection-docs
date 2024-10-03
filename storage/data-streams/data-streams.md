@@ -18,7 +18,7 @@ The most important benefits of the Data Streams feature include:
 - **Real-Time Updates:** Trigger actions instantly based on real-time event data.
 
 ## How It Works
-The Data Streams feature receives messages through HTTP and saves them into the database once predefined conditions (record count, total size, or time) are met. The service uses Keboola's Buffer API for smooth data management. Learn more
+The Data Streams feature receives messages through HTTP and saves them into the database once predefined conditions (record count, total size, or time) are met. The service uses Keboola's Buffer API for smooth data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
 
 ### Create a Data Stream
 1. Navigate to **Storage > Data Streams** and click **Create Data Stream**.
@@ -34,19 +34,24 @@ This dashboard shows the status of data waiting for import vs. imported data.
 
 #### Table Settings
 In your table settings, you can:
-Change the name of the stream.
-Add a column or define your own structure using the PATH or JSONNET template. Learn more
-Edit column names (available only if you create a new table within the stream).
-Edit primary keys (available only if you create a new table within the stream).
-Delete a column (available only if you create a new table within the stream).
 
-INFO BOX: Changing the table’s name will create a new table, and the stream will import data into that table.
+- Change the name of the stream.
+- Add a column or define your own structure using the PATH or JSONNET template. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/#template-jsonnet)
+- Edit column names (available only if you create a new table within the stream).
+- Edit primary keys (available only if you create a new table within the stream).
+- Delete a column (available only if you create a new table within the stream).
+
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> Changing the table’s name will create a new table, and the stream will import data into that table.
+</div>
 
 #### Sample codes for integration
 For easier use, we’ve prepared a few examples of how to send data to a stream using Python, Javascript, and Bash.
 
 #### Import conditions
-In this section, you can set a few conditions for importing data. If any of these three conditions are met, events are instantly uploaded to the destination table. You can set the import time frequency, the size of the imported data, or the number of imported records. Learn more
+In this section, you can set a few conditions for importing data. If any of these three conditions are met, events are instantly uploaded to the destination table. You can set the import time frequency, the size of the imported data, or the number of imported records. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/#conditions)
 
 #### Payload test
 Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production.
@@ -58,5 +63,5 @@ Data Streams pricing details vary based on the number of streams and the volume 
 - $0.15 per 1GB of streamed data 
 
 ## Technical Documentation
-For further details and API integration steps, refer to our comprehensive documentation.
+For further details and API integration steps, refer to our [comprehensive documentation](https://developers.keboola.com/integrate/push-data/).
 
