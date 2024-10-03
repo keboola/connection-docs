@@ -6,7 +6,7 @@ permalink: /storage/data-streams/
 * TOC
 {:toc}
 
-Keboola’s Data Streams feature allows users to receive streaming event data directly into Keboola Storage without needing additional steps, such as setting up a data source, using middleware, or developing a custom component. It simplifies the process and enables ad-hoc messaging from your system to Keboola Storage.
+Keboola’s Data Streams feature allows users to receive streaming event data directly into Keboola Storage without needing additional steps, such as setting up a data source, using middleware, or developing a custom component. It simplifies the process and enables ad hoc messaging from your system to Keboola Storage.
 
 ## Key Benefits
 The most important benefits of the Data Streams feature include:
