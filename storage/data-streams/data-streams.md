@@ -64,8 +64,8 @@ Here, you can simulate your payload and test it instantly with a table preview t
 ## Pricing
 Data Streams pricing details vary based on the number of streams and the volume of data ingested.
 
-- **$25** per stream, per month
-- **$0.15** per 1GB of streamed data 
+- **$50** per stream, per month
+- **$0.1** per 1GB of streamed data 
 
 ## Technical Documentation
 For further details and API integration steps, refer to our [comprehensive documentation](https://developers.keboola.com/integrate/push-data/).
