@@ -27,17 +27,17 @@ Follow these steps to create a data stream:
 - **Name the data stream**, e.g., “my-first-data-stream.” The name of the table will be filled automatically based on the stream name, but you can change it if needed.
 - Once the stream is created, you can **add a description** for better orientation within the project.
 
-### Configure the Stream
-#### Data Stream URL
+### Configure a Data Stream
+#### Data stream URL
 For every data stream, a unique “Data Stream URL” is generated. You can use it in your application to send events. This URL cannot be changed.
 
-#### Table Statistics
+#### Table statistics
 This dashboard shows the status of data waiting for import vs. imported data.
 
 {: .image-popup}
 ![Screenshot - Data Streams Table Statistics](/storage/data-streams/data-streams-pic1.png)
 
-#### Table Settings
+#### Table settings
 In your table settings, you can:
 
 - Change the name of the stream.
