@@ -950,14 +950,14 @@ This table shows data about storage [file](/storage/files/) events.
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ### kbc_apps_params_event
-This table shows data about parameters of events in the [data apps](/components/data-apps/).
+This table shows data about the parameters of events in the [data apps](/components/data-apps/).
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
 | `kbc_apps_event_id` (PK) | Unique Keboola apps event identifier | `7103338092_kbc-us-east-1` |
 | `kbc_project_id` | Foreign key to the Keboola project | `7880_kbc-us-east-1` |
-| `event_created_at` | Datetime the event was created | `2023-06-14 00:13:23` |
-| `event` | App event which occurred | `ext.keboola.data-apps.` |
+| `event_created_at` | Datetime when the event was created | `2023-06-14 00:13:23` |
+| `event` | App event that occurred | `ext.keboola.data-apps.` |
 | `message` | Message describing the event | `Streamlit App Read Table` |
 | `kbc_token_id` | Foreign key to the Keboola token | `516356_kbc-us-east-1` |
 | `token_name` | Name of the token | `Streamlite APP` |
