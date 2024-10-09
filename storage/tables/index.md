@@ -25,6 +25,9 @@ Table and column names are limited to contain only alphanumeric characters. Dash
 underscores are allowed. Column names must not start or end with dash `-` or underscore 
 character `_`.
 
+If you select any table from any bucket in Storage, detailed information about the table will be displayed
+at the top of the screen. This is what we refer to as the **table detail** throughout our documentation.
+
 ## Aliases
 Apart from actual tables, it is also possible to create aliases. They behave similar to 
 [database views](https://en.wikipedia.org/wiki/View_(SQL)).
@@ -32,10 +35,7 @@ Apart from actual tables, it is also possible to create aliases. They behave sim
 An alias does not contain any actual data; it is simply a link to some already existing data.
 Hence an alias cannot be written to, and its size does not count to your project quota.
 
-In addition, if you create an alias from a table, the table **cannot be deleted** without the alias
-being deleted as well. If you attempt to do so, you will receive an error message similar to this one:
-
-    The blog-data table cannot be deleted. Please delete its aliases first: in.c-tutorial.blog-data,in.c-my-bucket.blog-data.
+To create an alias table, go to the Table detail, click the three dots on the right side of the screen, and select the 'Create alias table' option.
 
 {: .image-popup}
 ![Screenshot - Create alias](/storage/tables/create-alias.png)
@@ -45,11 +45,15 @@ An alias table can be filtered by a simple condition.
 {: .image-popup}
 ![Screenshot - Create Simple alias](/storage/tables/create-simple-alias.png)
 
-If you select any table from any bucket in Storage, detailed information about the table will be displayed
-on the right side of your screen. This is what we refer to as the **table detail** throughout our documentation.
+The Table detail of an alias table contains additional information, including a reference to the source table from which it was created and any filters applied to the alias. Note that you can adjust the alias filters even after the alias table has been created.
 
 {: .image-popup}
 ![Screenshot - Simple alias result](/storage/tables/create-simple-alias-result.png)
+
+When attempting to delete a table with alias tables elsewhere in Storage, you will be prompted with a notification as part of the deletion process. The notification will detail the aliases (including links) connected to the table. You must confirm that you understand the aliases will be deleted as well before proceeding.
+
+{: .image-popup}
+![Screenshot - Deleting table having aliases](/storage/tables/delete-table-with-alias.png)
 
 Alias columns are automatically synchronized, by default, with the source table. Columns added to the source
 table will be added to the alias automatically.
