@@ -1,12 +1,15 @@
 ---
-title: OpenID Connect Protocol
+title: OpenID Connect
 permalink: /components/data-apps/oidc/
 ---
 
-* TOC
-{:toc}
+OpenID Connect (OIDC) is a protocol that enables secure sharing of user profile information between two unrelated applications 
+without exposing the user's credentials.
 
-The OpenID Connect (OIDC) protocol is an identity authentication protocol for enabling two unrelated applications 
-to share user profile information without compromising user credentials.
+See the following articles for step-by-step information on how to configure the OIDC protocol for Keboola data apps:
 
-The following .....
+- [Google Cloud Platform](/components/data-apps/oidc/google-cloud-platform)
+- Google SSO (coming soon)
+- Microsoft Entra ID (coming soon)
+- Auth0 (coming soon)
+- OKTA (coming soon)
