@@ -453,7 +453,13 @@ items:
 
       - url: /components/data-apps/
         title: Data Apps
-
+        items:
+          - url: /components/data-apps/oidc/
+                title: OpenID Connect
+                items:
+                  - url: /components/data-apps/oidc/google-cloud-platform/
+                    title: Google Cloud Platform
+                    
       - url: /components/branches/
         title: Development Branches
 
