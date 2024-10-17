@@ -6,18 +6,18 @@ permalink: /components/data-apps/oidc/google-cloud-platform/
 * TOC
 {:toc}
 
-In this document, we'll show you the steps you need to follow to set up.......................... Google Cloud Platform (GCP).
+This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola data apps, specifically for use on Google Cloud Platform (GCP).
 
 ## Step 1: A New OAuth 2.0 Client ID in GCP
 Follow these steps to create a new OAuth 2.0 client ID in GCP:
 
 - Go to the GCP console.
-- Select the "APIs & Services" section.
-- Click "Credentials" and then "Create credentials".
-- Select "OAuth 2.0 client ID".
-- Choose "Web application" as the application type.
+- Select the **APIs & Services** section.
+- Click **Credentials** and then **Create Credentials**.
+- Select *OAuth 2.0 client ID*.
+- Choose *Web application* as the application type.
 - Give your client ID a name, for example, "Streamlit OIDC Demo".
-- Enter the Authorized redirect URIs back to your data app. <br>Make sure to add "/_proxy/callback" to the end of your redirect URL. This is how Keboola will send the authentication response to your app. <br>***Note:** The format of the redirect URL is as follows: https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback (e.g., https://google-oidc-data-app-1181276170.hub.keboola.com/_proxy/callback).*
+- Enter the Authorized redirect URIs back to your data app. Make sure to add `/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: **https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback** (e.g., https://google-oidc-data-app-1181276170.hub.keboola.com/_proxy/callback).
 - Click **Create** to finish.
 
 ## Step 2: New Data App in Keboola
