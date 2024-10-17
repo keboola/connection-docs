@@ -122,10 +122,10 @@ We recommend using the authorization methods provided by Keboola.
 {: .image-popup}
 ![Code - code](/components/data-apps/data_app-authentication.png)
 
-1. **Simple Authorization**: This method allows you to authenticate a user using a username and password.
+1. **Basic Authorization**: This method allows you to authenticate a user using a password genereted by keboola.
 
 {: .image-popup}
-![Code - code](/components/data-apps/data_app-authentication-basic.png)
+![Code - code](/components/data-apps/data_app-authentication-basic-proxy.png)
 
 2. **OIDC (OpenID Connect) Authorization**: This enables users to log into your app using your Single Sign-On (SSO) providers providers. 
 
@@ -144,6 +144,67 @@ If you enter an app with OIDC, you'll be asked to select an `Authentication Prov
 
 Choose the authorization method that best suits your app's requirements and security needs.
 
+## Theming
+To configure theming in your data app, users can select from predefined themes or create a custom theme. Predefined themes include "Keboola," "Light Red," "Light Purple," "Light Blue," "Dark Green," "Dark Amber," and "Dark Orange." Each theme has specified primary color, background color, secondary background color, text color, and font. Users choosing "Custom" can manually set these values.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-theming-predefined.png)
+
+For "Custom," users can select each color using color pickers and the desired font from a list.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-theming-custom.png)
+
+### Predefined Themes:
+1. **Keboola**  
+   - Primary Color: `#1F8FFF`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#E6F2FF`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+2. **Light Red**  
+   - Primary Color: `#FF5D5D`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#FFE6E6`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+3. **Light Purple**  
+   - Primary Color: `#9A6DD7`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#F2E6FF`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+4. **Light Blue**  
+   - Primary Color: `#0000B2`  
+   - Background Color: `#FFFFFF`  
+   - Secondary Background Color: `#E6E6FF`  
+   - Text Color: `#222529`  
+   - Font: Sans Serif
+
+5. **Dark Green**  
+   - Primary Color: `#4CAF50`  
+   - Background Color: `#222529`  
+   - Secondary Background Color: `#3D4F41`  
+   - Text Color: `#FFFFFF`  
+   - Font: Sans Serif
+
+6. **Dark Amber**  
+   - Primary Color: `#FFC107`  
+   - Background Color: `#222529`  
+   - Secondary Background Color: `#4A3A24`  
+   - Text Color: `#FFFFFF`  
+   - Font: Sans Serif
+
+7. **Dark Orange**  
+   - Primary Color: `#FFA500`  
+   - Background Color: `#222529`  
+   - Secondary Background Color: `#4A3324`  
+   - Text Color: `#FFFFFF`  
+   - Font: Sans Serif
+   - 
 ## Sleep and Resume
 Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after an hour of inactivity. Here's how it works:
 
@@ -165,6 +226,11 @@ Should anything unexpected occur, a **wakeup error** page will appear, and you c
 {: .image-popup}
 ![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
 
+### How to Setup Inactivity Timeout
+When you click **Deploy** or **Redeploy** for your app, a wizard will appear, prompting you to specify the backend size and the auto-sleep timeout. You can set the duration of inactivity after which the app will go to sleep, with options ranging from 5 minutes to 24 hours. The default is set to 5 minutes.
+
+{: .image-popup}
+![Code - code](/components/data-apps/data_apps-deploy-timeout-backedsize.png)
 
 ### Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
