@@ -459,6 +459,12 @@ items:
             items:
               - url: /components/data-apps/oidc/google-cloud-platform/
                 title: Google Cloud Platform
+              - url: /components/data-apps/oidc/okta/
+                title: Okta
+              - url: /components/data-apps/oidc/auth0/
+                title: Auth0
+              - url: /components/data-apps/oidc/microsoft-entra-id/
+                title: Microsoft Entra ID
                     
       - url: /components/branches/
         title: Development Branches
