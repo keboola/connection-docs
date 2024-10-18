@@ -43,7 +43,7 @@ Follow these steps to set up the authentication method for your data app:
 Follow these steps to set up your data app's consent screen in Okta:
 
 - Go to the Okta Admin Console and open your web app integration.
-- Enter the Sign-in redirect URIs back to your data app. Make sure to add `/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
+- Enter the sign-in redirect URIs back to your data app. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
 (e.g., `https://okta-oidc-data-app-1181276170.hub.north-europe.azure.keboola.com/_proxy/callback`).
 - Click **Save** to finish.
 
