@@ -12,12 +12,12 @@ This document will guide you through the steps needed to set up the OpenID Conne
 Follow these steps to create a new OAuth 2.0 client ID in Okta:
 
 - Go to the Okta Admin Console.
-- Click the **Applications** section and then again on the **Applications**.
+- Click **Applications** and then click **Applications** again.
 - Click **Create App Integration**.
 - Select **OIDC - OpenID Connect** as the sign-in method.
 - Choose **Web application** as the application type.
-- Give your wep app integration a name, for example, "Streamlit OIDC Demo".
-- You do not know your sign-in redirect URI yet; first, you will need to create a data app in Keboola.
+- Give your web app integration a name, for example, "Streamlit OIDC Demo".
+- You do not have your sign-in redirect URI yet; you'll need to create a data app in Keboola first.
 - Click **Save** to finish.
 
 ## Step 2: Configure Your Data App in Keboola
@@ -43,8 +43,8 @@ Follow these steps to set up the authentication method for your data app:
 Follow these steps to set up your data app's consent screen in Okta:
 
 - Go to the Okta Admin Console and open your web app integration.
-- Enter the Sign-in redirect URIs back to your data app. Make sure to add **/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
-(e.g., `https://https://okta-oidc-data-app-1181276170.hub.north-europe.azure.keboola.com/_proxy/callback`).
+- Enter the Sign-in redirect URIs back to your data app. Make sure to add `/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
+(e.g., `https://okta-oidc-data-app-1181276170.hub.north-europe.azure.keboola.com/_proxy/callback`).
 - Click **Save** to finish.
 
 ## Step 5: Deploy Your Data App in Keboola
@@ -61,10 +61,4 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Okta consent screen.
 - Log in with your Okta account to verify your identity.
-- The data app should display the "Hello World" message.
- 
- 
-
-
-
-
+- The data app should display the "Hello World" message. 
