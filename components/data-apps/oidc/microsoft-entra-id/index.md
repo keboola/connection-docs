@@ -6,6 +6,8 @@ permalink: /components/data-apps/oidc/microsoft-entra-id/
 * TOC
 {:toc}
 
+This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola data apps, specifically for use on Microsoft Entra ID.
+
 ## Step 1: Create a New OAuth 2.0 Client ID
 Follow these steps to create a new OAuth 2.0 client ID in Microsoft Entra ID:
 
