@@ -6,6 +6,8 @@ permalink: /components/data-apps/oidc/auth0/
 * TOC
 {:toc}
 
+This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola data apps, specifically for use on Auth0.
+
 ## Step 1: Create a New OAuth 2.0 Client ID in Auth0
 Follow these steps to create a new OAuth 2.0 client ID in Auth0:
 
