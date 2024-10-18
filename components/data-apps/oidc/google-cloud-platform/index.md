@@ -46,7 +46,7 @@ Follow these steps to configure your data app's OAuth consent screen in your Goo
 - Click the **OAuth consent screen** tab.
 - Update the application details, including the app name, support email, and application homepage link.000
 - Under **Authorized domains**, add `http://keboola.com`. This ensures that Keboola's domain is recognized as an authorized domain for your OAuth 2.0 app.
-- You do not need to provide the redirect URl yet; you will need to deploy your data app in Keboola first. 
+- You do not have the redirect URl yet; you will need to deploy your data app in Keboola first. 
 - Click **Save and continue** to proceed.
 
 ## Step 5: Deploy the Data App
