@@ -18,7 +18,7 @@ Follow these steps to create a new OAuth 2.0 client ID in Auth0:
 - Then select **Frontend**.
 - Choose **Other browser technology** as an application technology and give your application a name, for example, "Streamlit OIDC Demo". Then click **Continue**.
 - Choose **Python** as a technology you are using in your web app.
-- You do not need to provide the **Allowed callback URL** yet; you will need to create a data app in Keboola first.
+- You do not have the **Allowed callback URL** yet; you will need to create a data app in Keboola first.
 - Click **Save Changes** to finish.
 
 ## Step 2: Create a Data App in Keboola
