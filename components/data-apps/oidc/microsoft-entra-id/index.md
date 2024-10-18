@@ -13,12 +13,12 @@ Follow these steps to create a new OAuth 2.0 client ID in Microsoft Entra ID:
 
 - Go to portal.azure.com.
 - Search for **Entra ID** and select **Microsoft Entra ID**.
-- Click on **+ Add** and select **App registration**.
+- Click **+ Add** and select **App registration**.
 - Provide a human-readable name for the app.
 - Open your app. Go to **Manage → Authentication** and click **Add a platform**.
 - Choose **Web**.
 - You do not know your redirect URL yet; first, you need to create a data app in Keboola. 
-- Set up group claim. The app needs to be able to provide all user groups because this will be necessary later to authenticate users based on groups. To enable  this, go to **Manage -> Token configuration** and click **Add groups claim**. 
+- Set up group claim. <br>The app needs to be able to provide all user groups because this will be necessary later to authenticate users based on groups. To enable  this, go to **Manage -> Token configuration** and click **Add groups claim**. 
 - For large companies, we recommend using the last option to retrieve only the groups assigned to the application. Otherwise, all user roles will be included in the response.
 
 This step is unnecessary if you selected **All groups** in the previous step: 
@@ -33,25 +33,25 @@ Provide a human-readable description and click **Add**. Save **Value** because y
 Follow these steps to configure you data app in Keboola:
 
 - Go to your Keboola project.
-- Click on **Data Apps**.
-- Create a new Data App by clicking on the green **+** button.
-- Give your app a name and click on **Create Data App** to create the app.
+- Click **Data Apps**.
+- Create a new Data App by clicking the green **+** button.
+- Give your app a name and click **Create Data App** to create the app.
 
 ## Step 3: Configure the Authentication Method for Your Data App
 Follow these steps to set up the authentication method for you data app:
 
 - Go to the newly created Data App.
-- Click on the **Information & Settings** tab.
+- Click the **Information & Settings** tab.
 - Under **Authentication**, select **OIDC** and then **Azure OIDC**.
 - Provide credentials from the Azure portal, such as the **Client ID**, **Client Secret**, and **Tenant ID**.
-- Click on **Save** to apply the changes.
+- Click **Save** to apply the changes.
 - Deploy the data app to get the data app URL, which you will need to specify as the redirect URL.
 
 ## Step 4: Configure the OAuth Consent Screen
 Follow these steps to set up your data app's OAuth consent screen in the Azure portal.
 
 - Go to the Azure Portal and open your app.
-- Enter the redirect URL. Make sure to add `/_proxy/callback` to the end of your redirect URL. This is how Keboola will send the authentication response to your app. Format of the redirect URL is as follows:
+- Enter the redirect URL. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. This is how Keboola will send the authentication response to your app. Format of the redirect URL is as follows:
 `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://630064.hub.europe-west3.gcp.keboola.com/_proxy/callback`).
 - Save the changes.
 
@@ -59,10 +59,10 @@ Follow these steps to set up your data app's OAuth consent screen in the Azure p
 Follow these steps to deploy the data app in Keboola:
 
 - Go back to your Data App in Keboola.
-- Click on the **Deploy data app** tab.
+- Click the **Deploy data app** tab.
 - Select **Code** and paste your code. The example code in the video is `import streamlit as st st.write("Hello World")`
-- Click on **Add code** to save your code.
-- Click on the green **Deploy data app** button to deploy the application.
+- Click **Add code** to save your code.
+- Click the green **Deploy data app** button to deploy the application.
 
 ## Step 6: Test Your Data App
 Follow these steps to test your new data app:
