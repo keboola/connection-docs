@@ -34,13 +34,13 @@ Follow these steps to configure you data app in Keboola:
 
 - Go to your Keboola project.
 - Click **Data Apps**.
-- Create a new Data App by clicking the green **+** button.
+- Create a new data app by clicking the green **+** button.
 - Give your app a name and click **Create Data App** to create the app.
 
 ## Step 3: Configure the Authentication Method for Your Data App
 Follow these steps to set up the authentication method for you data app:
 
-- Go to the newly created Data App.
+- Go to the newly created data app.
 - Click the **Information & Settings** tab.
 - Under **Authentication**, select **OIDC** and then **Azure OIDC**.
 - Provide credentials from the Azure portal, such as the **Client ID**, **Client Secret**, and **Tenant ID**.
@@ -50,7 +50,7 @@ Follow these steps to set up the authentication method for you data app:
 ## Step 4: Configure the OAuth Consent Screen
 Follow these steps to set up your data app's OAuth consent screen in the Azure portal.
 
-- Go to the Azure Portal and open your app.
+- Go to the Azure portal and open your app.
 - Enter the redirect URL. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. This is how Keboola will send the authentication response to your app. Format of the redirect URL is as follows:
 `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://630064.hub.europe-west3.gcp.keboola.com/_proxy/callback`).
 - Save the changes.
@@ -58,16 +58,16 @@ Follow these steps to set up your data app's OAuth consent screen in the Azure p
 ## Step 5: Deploy Your Data App in Keboola
 Follow these steps to deploy the data app in Keboola:
 
-- Go back to your Data App in Keboola.
-- Click the **Deploy data app** tab.
+- Go back to your data app in Keboola.
+- Click the **Deploy Data App** tab.
 - Select **Code** and paste your code. The example code in the video is `import streamlit as st st.write("Hello World")`
-- Click **Add code** to save your code.
-- Click the green **Deploy data app** button to deploy the application.
+- Click **Add Code** to save your code.
+- Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test Your Data App
 Follow these steps to test your new data app:
 
-- Go to the Data App's URL.
+- Go to the data app's URL.
 - You should be asked to log in using your Entra ID account.
 - After successfully loging in, you will be redirected to the app.
 - The data app should display the "Hello World" message.
