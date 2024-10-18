@@ -6,46 +6,62 @@ permalink: /components/data-apps/oidc/okta/
 * TOC
 {:toc}
 
-Okta
-Step 1: Create a new OAuth 2.0 Client ID in Okta
-Go to the Okta Admin Console.
-Click on the "Applications" section and then again on the “Applications”.
-Click on "Create App Integration".
-Select “OIDC - OpenID Connect" as the sign-in method
-Choose "Web application" as the application type.
-Give your wep app integration a name, for example, "Streamlit OIDC Demo".
-Your “Sign-in redirect URIs ” is currently not known to you and you first need to create a data app in Keboola Connection.
-Click on "Save" to finish.
-Step 2: Configure your Data App in Keboola.
-Go to your Keboola project.
-Click on "Data Apps".
-Create a new Data App by clicking on the green "+" button.
-Give your app a name and click on "Create data app" to create the app.
-Step 3: Configure the authentication method for your Data App.
-Go to the newly created Data App.
-Click on the "Information & Settings" tab.
-Under "Authentication", select "OIDC" and then "Generic OIDC".
-Copy the Client ID from your Okta application to the "Client ID" field in Keboola.
-Copy the Client secret from Okta application to the "Client secret" field in Keboola.
-In the "Issuer URL" field, enter "https://<yourOktaOrg>.okta.com/oauth2/default". This is the correct issuer URL for Okta OIDC Setup
-Click on "Save" to apply the changes.
-Step 4: Configure your Data App's consent screen in Okta.
-Go to the Okta Admin Console and open your web app integration..
-Enter the Sign-in redirect URIs back to your data app. Make sure to add "/_proxy/callback" to the end of your redirect URL. This is how Keboola will send the authentication response to your app.
-The format of the redirect url is as follows:
-https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback
-(e.g.https://https://okta-oidc-data-app-1181276170.hub.north-europe.azure.keboola.com/_proxy/callback)
-Click on "Save" to finish.
-Step 5: Deploy your Data App in Keboola.
-In your Data App in Keboola click on the "Deploy data app" tab.
-Select "Code" and paste your code. For example you can paste this code: "import streamlit as st st.write("Hello World")"
-Click on "Add code" to save your code.
-Click on the green "Deploy data app" button to deploy the application.
-Step 6: Test your Data App.
-Go to the Data App's URL.
-You should be redirected to the Okta consent screen.
-Log in with your Okta account to verify your identity.
-The Data App should display the "Hello World" message.
+This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola data apps, specifically for use on Okta.
+
+## Step 1: Create a new OAuth 2.0 Client ID in Okta
+Follow these steps to create a new OAuth 2.0 client ID in Okta:
+
+- Go to the Okta Admin Console.
+- Click the **Applications** section and then again on the **Applications**.
+- Click **Create App Integration**.
+- Select **OIDC - OpenID Connect** as the sign-in method.
+- Choose **Web application** as the application type.
+- Give your wep app integration a name, for example, "Streamlit OIDC Demo".
+- You do not know your sign-in redirect URI yet; first, you will need to create a data app in Keboola.
+- Click **Save** to finish.
+
+## Step 2: Configure Your Data App in Keboola
+Follow these steps to set up a new data app in Keboola:
+
+- Go to your Keboola project.
+- Click **Data Apps**.
+- Create a new data app by clicking the green **+** button.
+- Give your app a name and click **Create Data App** to create the app.
+
+## Step 3: Configure the Authentication Method for Your Data App
+Follow these steps to set up the authentication method for your data app:
+
+- Go to the newly created data app.
+- Click the **Information & Settings** tab.
+- Under **Authentication**, select **OIDC** and then **Generic OIDC**.
+- Copy the client ID from your Okta application to the **Client ID** field in Keboola.
+- Copy the client secret from your Okta application to the **Client secret** field in Keboola.
+- In the **Issuer URL** field, enter `https://<yourOktaOrg>.okta.com/oauth2/default`. This is the correct issuer URL for Okta OIDC setup.
+- Click **Save** to apply the changes.
+
+## Step 4: Configure Your Data App's Consent Screen in Okta
+Follow these steps to set up your data app's consent screen in Okta:
+
+- Go to the Okta Admin Console and open your web app integration.
+- Enter the Sign-in redirect URIs back to your data app. Make sure to add **/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
+(e.g., `https://https://okta-oidc-data-app-1181276170.hub.north-europe.azure.keboola.com/_proxy/callback`).
+- Click **Save** to finish.
+
+## Step 5: Deploy Your Data App in Keboola
+Follow these steps to deploy your data app in Keboola:
+
+- In your data app in Keboola, click the **Deploy Data App** tab.
+- Select **Code** and paste your code. For example, you can paste this code: `import streamlit as st st.write("Hello World")`.
+- Click **Add code** to save your code.
+- Click the green **Deploy Data App** button to deploy the application.
+
+## Step 6: Test Your Data App
+Follow these steps to test your new data app:
+
+- Go to the data app's URL.
+- You should be redirected to the Okta consent screen.
+- Log in with your Okta account to verify your identity.
+- The data app should display the "Hello World" message.
  
  
 
