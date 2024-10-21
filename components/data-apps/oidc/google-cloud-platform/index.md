@@ -54,8 +54,7 @@ Follow these steps to deploy your data app in Keboola:
 
 - Go back to your data app in Keboola.
 - Click the **Deploy Data App** tab.
-- Select **Code** and paste your code. The example code in the video is `import streamlit as st st.write("Hello World")`.
-- Click **Add Code** to save your code.
+- Select **Code** or **GitHub** deployment type and add code of your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test the Data App
@@ -64,4 +63,4 @@ Follow these step to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Google OAuth consent screen.
 - Log in with your Google account to verify your identity.
-- The data app should display the "Hello World" message.
+- The data app should display its content.
