@@ -52,7 +52,7 @@ Follow these steps to set up your data app's OAuth consent screen in the Azure p
 
 - Go to the Azure portal and open your app.
 - Enter the redirect URL. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. This is how Keboola will send the authentication response to your app. Format of the redirect URL is as follows:
-`https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://630064.hub.europe-west3.gcp.keboola.com/_proxy/callback`).
+`https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://123456789.hub.europe-west3.gcp.keboola.com/_proxy/callback`).
 - Save the changes.
 
 ## Step 5: Deploy Your Data App in Keboola
@@ -60,8 +60,7 @@ Follow these steps to deploy the data app in Keboola:
 
 - Go back to your data app in Keboola.
 - Click the **Deploy Data App** tab.
-- Select **Code** and paste your code. The example code in the video is `import streamlit as st st.write("Hello World")`
-- Click **Add Code** to save your code.
+- Select **Code** or **GitHub** deployment type and add code of your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test Your Data App
@@ -70,4 +69,4 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be asked to log in using your Entra ID account.
 - After successfully loging in, you will be redirected to the app.
-- The data app should display the "Hello World" message.
+- The data app should display its content.
