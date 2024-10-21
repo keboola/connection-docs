@@ -453,7 +453,19 @@ items:
 
       - url: /components/data-apps/
         title: Data Apps
-
+        items:
+          - url: /components/data-apps/oidc/
+            title: OpenID Connect
+            items:
+              - url: /components/data-apps/oidc/auth0/
+                title: Auth0
+              - url: /components/data-apps/oidc/google-cloud-platform/
+                title: Google Cloud Platform
+              - url: /components/data-apps/oidc/microsoft-entra-id/
+                title: Microsoft Entra ID
+              - url: /components/data-apps/oidc/okta/
+                title: Okta
+                    
       - url: /components/branches/
         title: Development Branches
 
