@@ -63,7 +63,7 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Auth0 consent screen.
 - Log in with your Auth0 account to verify your identity.
-- The Data App should display its content.
+- The data app should display its content.
  
  
 
