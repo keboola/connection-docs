@@ -104,7 +104,7 @@ client = Client(url, token)
 
 ## Loading Data from Storage
 To load data from the storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
-Just select your table in the input mapping section and navigate to that by /data/in/table/your_data.csv or /data/in/files/fileID_FileName.* in your code.
+Just select your table in the input mapping section and navigate to that by /data/in/tables/your_data.csv or /data/in/files/fileID_FileName.* in your code.
 Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.
 Or you can use [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
 See the [examples](#Examples) below for usage of the Keboola Storage Python Client.
