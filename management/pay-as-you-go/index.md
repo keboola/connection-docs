@@ -19,6 +19,7 @@ Free Plan projects have the following limits:
 - **Dynamic backend scaling:** possibility to choose the [backend size](/transformations/snowflake-plain/) for each transformation is not available. 
 - **Performance:** is limited to an XSmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
 - **Storage:** is limited to 250 GB of data storage.
+- **Time travel:** is not supported and there is no option to restore data if bucket or table has been accidentaly deleted.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
 
 ## DWH Backend

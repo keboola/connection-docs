@@ -41,7 +41,7 @@ These values will help you easily identify the extraction later.
 Go through the list and select a file. Click **Open** to confirm the file you want to import.
 
 {: .image-popup}
-![Screenshot - Select file](/components/extractors/storage/onedrive/onedrive-04.png)
+![Screenshot - Select file](/components/extractors/storage/onedrive-excel-sheets/onedrive-04.png)
 
 The file is specified by a **Drive ID** and by a **File ID**. They are automatically filled in.   
 The **file name** is for your information only and changing it doesn't affect functionality.
@@ -52,7 +52,7 @@ The **file name** is for your information only and changing it doesn't affect fu
 Click **Load Worksheets** to select a worksheet from the workbook you configured in the previous step.
 
 {: .image-popup}
-![Screenshot - Empty worksheet config](/components/extractors/storage/onedrive/onedrive-06.png)
+![Screenshot - Empty worksheet config](/components/extractors/storage/onedrive-excel-sheets/onedrive-06.png)
 
 In the list that appeared, **click on the name** of the worksheet you want to import.
 
