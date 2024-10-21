@@ -17,7 +17,7 @@ Follow these steps to create a new OAuth 2.0 client ID in GCP:
 - Select **OAuth 2.0 Client ID**.
 - Choose **Web application** as the application type.
 - Give your client ID a name, for example, "Streamlit OIDC Demo".
-- Enter the **Authorized redirect URIs** pointing back to your data app. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://google-oidc-data-app-1181276170.hub.keboola.com/_proxy/callback`).
+- Enter the **Authorized redirect URIs** pointing back to your data app. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://google-oidc-data-app-1234567890.hub.keboola.com/_proxy/callback`).
 - Click **Create** to finish.
 
 ## Step 2: Create a New Data App in Keboola
