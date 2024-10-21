@@ -44,15 +44,14 @@ Follow these steps to set up your data app's consent screen in Okta:
 
 - Go to the Okta Admin Console and open your web app integration.
 - Enter the sign-in redirect URIs back to your data app. <br>Make sure to add `/_proxy/callback` to the end of your redirect URL. <br>This is how Keboola will send the authentication response to your app. The format of the redirect URL is as follows: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
-(e.g., `https://okta-oidc-data-app-1181276170.hub.north-europe.azure.keboola.com/_proxy/callback`).
+(e.g., `https://okta-oidc-data-app-1234567890.hub.north-europe.azure.keboola.com/_proxy/callback`).
 - Click **Save** to finish.
 
 ## Step 5: Deploy Your Data App in Keboola
 Follow these steps to deploy your data app in Keboola:
 
 - In your data app in Keboola, click the **Deploy Data App** tab.
-- Select **Code** and paste your code. For example, you can paste this code: `import streamlit as st st.write("Hello World")`.
-- Click **Add code** to save your code.
+- Select **Code** or **GitHub** deployment type and add code of your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test Your Data App
@@ -61,4 +60,4 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Okta consent screen.
 - Log in with your Okta account to verify your identity.
-- The data app should display the "Hello World" message. 
+- The data app should display its content. 
