@@ -54,7 +54,7 @@ Follow these steps to deploy your data app in Keboola:
 
 - Go back to your data app in Keboola.
 - Click the **Deploy data app** tab.
-- Select **Code** or **GitHub** deployment type and add code of your application.
+- Select the **Code** or **GitHub** deployment type, and add the code for your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test your Data App
@@ -63,7 +63,7 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Auth0 consent screen.
 - Log in with your Auth0 account to verify your identity.
-- The Data App should display its content.
+- The data app should display its content.
  
  
 
