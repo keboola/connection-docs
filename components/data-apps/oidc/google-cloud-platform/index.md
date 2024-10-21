@@ -54,7 +54,7 @@ Follow these steps to deploy your data app in Keboola:
 
 - Go back to your data app in Keboola.
 - Click the **Deploy Data App** tab.
-- Select the **Code** or **GitHub** deployment type, and add code for your application.
+- Select the **Code** or **GitHub** deployment type, and add the code for your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test the Data App
