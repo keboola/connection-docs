@@ -46,7 +46,7 @@ Follow these steps to configure your data app's consent screen in Auth0:
 - Go to the Auth0 and open your OIDC application.
 - Go to the **Settings** tab and enter the **Allowed callback URL**. The format of the callback URL is as follows:
 `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback`
-(e.g., `https://auth0-oidc-data-app-1181276170.hub.keboola.com/_proxy/callback`)
+(e.g., `https://auth0-oidc-data-app-1234567890.hub.keboola.com/_proxy/callback`)
 - Save the changes.
   
 ## Step 5: Deploy the Data App in Keboola
@@ -54,8 +54,7 @@ Follow these steps to deploy your data app in Keboola:
 
 - Go back to your data app in Keboola.
 - Click the **Deploy data app** tab.
-- Select **Code** and paste your code. The example code in the video is `import streamlit as st st.write("Hello World")`.
-- Click **Add Code** to save your code.
+- Select **Code** or **GitHub** deployment type and add code of your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test your Data App
@@ -64,7 +63,7 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Auth0 consent screen.
 - Log in with your Auth0 account to verify your identity.
-- The Data App should display the "Hello World" message.
+- The Data App should display its content.
  
  
 
