@@ -51,7 +51,7 @@ Follow these steps to set up your data app's consent screen in Okta:
 Follow these steps to deploy your data app in Keboola:
 
 - In your data app in Keboola, click the **Deploy Data App** tab.
-- Select **Code** or **GitHub** deployment type and add code of your application.
+- Select the **Code** or **GitHub** deployment type, and add the code for your application.
 - Click the green **Deploy Data App** button to deploy the application.
 
 ## Step 6: Test Your Data App
