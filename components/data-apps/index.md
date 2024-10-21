@@ -331,7 +331,7 @@ Author: Ondřej Svoboda
 This data app provides an interactive display of several business metrics with integrated Slack notifications.
 - [Live app](https://interactive-kpi-report-kpi-app-71250158.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/51361334)
-- [Documentation](https://help.keboola.com/templates/interactive-kpi-reporting/)
+- [Documentation](https://help.keboola.com/templates/ecomm-kpi-dashboard/)
 - [Source](https://github.com/keboola/interactive-kpi-reporting)
 
 This app, along with the complete workflow, can be implemented using the eCommerce KPI Dashboard template.
@@ -357,15 +357,6 @@ This data app is designed to provide a quick and comprehensive overview of the d
 - [Live app](https://ua-ga4-comparison-app-51525847.hub.north-europe.azure.keboola.com)
 
 This app, along with the complete workflow, can be implemented using the UA and GA4 Comparison template.
-
-### Kai PromptLab
-Author: Jordan Burger and Pavel Chocholouš
-
-Streamline your AI prompting process! Use this Streamlit app to refine, test, and compare multiple prompts, ensuring optimal results. Dive into AI with enhanced efficiency!
-- [Documentation](https://help.keboola.com/templates/kai-promptlab/)
-- [Source](https://github.com/keboola/kai-promptlab)
-
-This data app, along with the complete workflow, can be implemented using the Kai PromptLab template.
 
 ### Kai SQL Bot
 Author: Jordan Burger and Pavel Chocholouš
