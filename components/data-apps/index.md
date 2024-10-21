@@ -308,7 +308,7 @@ Author: Petr Huňka
 This demo app offers a cutting-edge solution that leverages Shopify data to supercharge your campaigns. By harnessing the power of artificial intelligence (AI), we create tailor-made SMS messages and deliver them through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
 
 - [Configuration](https://demo.keboola.com/app/data-apps/51362322)
-- [Documentation](https://help.keboola.com/templates/ai-campaign-executer/)
+- [Documentation](https://help.keboola.com/templates/ai-sms-campaign/)
 - [Source](https://github.com/keboola/ai_campaign_executer)
 - [Live app](https://ai-created-content-checker-ai-campaign-executer-51814454.hub.north-europe.azure.keboola.com)
   
