@@ -364,14 +364,14 @@ This demo data app shows how to create a data app with Streamlit Python code and
 - [Source](https://github.com/keboola/titanic-data-app)
 - [Live app](https://titanic-demo-app-deployed-from-a-github-repository-49752295.hub.north-europe.azure.keboola.com/)
 
-### AI Created Content Checker
+### AI-Created Content Checker
 Author: Petr Huňka
 
 This demo app offers a cutting-edge solution that leverages Shopify data to supercharge your campaigns. By harnessing the power of artificial intelligence (AI), tailor-made SMS messages are created and delivered 
 through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
 
 - [Configuration](https://demo.keboola.com/app/data-apps/51362322)
-- [Documentation](https://help.keboola.com/templates/ai-campaign-executer/)
+- [Documentation](https://help.keboola.com/templates/ai-sms-campaign/)
 - [Source](https://github.com/keboola/ai_campaign_executer)
 - [Live app](https://ai-created-content-checker-ai-campaign-executer-51814454.hub.north-europe.azure.keboola.com)
   
@@ -394,7 +394,7 @@ Author: Ondřej Svoboda
 This data app provides an interactive display of several business metrics with integrated Slack notifications.
 - [Live app](https://interactive-kpi-report-kpi-app-71250158.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/51361334)
-- [Documentation](https://help.keboola.com/templates/interactive-kpi-reporting/)
+- [Documentation](https://help.keboola.com/templates/ecomm-kpi-dashboard/)
 - [Source](https://github.com/keboola/interactive-kpi-reporting)
 
 This app, along with the complete workflow, can be implemented using the eCommerce KPI Dashboard template.
