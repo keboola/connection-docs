@@ -111,3 +111,9 @@ SELECT
     TO_JSON_STRING(STRUCT('name' AS NAME, '123' AS CIN))
 ;
 {% endhighlight %}
+
+### UDF
+
+There are two types of user-defined functions in BigQuery: persistent and temporary. Persistent UDFs are stored in a dataset and can be used by any user with access to the dataset. Temporary UDFs are only available during the session in which they are created.
+
+Because BQ transformations always run in a new session (and new dataset), you can only use temporary UDFs. To create a temporary UDF, use the `CREATE TEMP FUNCTION` statement. You can find more information about UDFs in the [BigQuery documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
