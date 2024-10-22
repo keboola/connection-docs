@@ -77,8 +77,11 @@ If you need more information, please contact your CSM.
 | Medium                                | 1 hour                  | **16**                |
 | Large                                 | 1 hour                  | **32**                |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
-| **DataApps (BETA)**                   |                         |                       |
-| Small                                 | 1 hour                  | **1**                 |
+| **DataApps**                          |                         |                       |
+| XSmall                                | 1 hour                  | **0.1**               |
+| Small                                 | 1 hour                  | **0.2**               |
+| Medium                                | 1 hour                  | **0.5**               |
+| Large                                 | 1 hour                  | **1**                 |
 
 **Types of backend sizes used for jobs**
 
