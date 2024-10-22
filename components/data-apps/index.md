@@ -217,7 +217,7 @@ If you enter the URL of a sleeping app, it will trigger its wakeup, and you'll s
 {: .image-popup}
 ![Code - code](/components/data-apps/data_apps-proxy-wakeup.png)
 
-Should anything unexpected occur, a **wakeup error** page will appear, and you can click on **Show More** to view the error details.
+Should anything unexpected occur, a **wakeup error** page will appear, and you can click **Show More** to view the error details.
 
 {: .image-popup}
 ![Code - code](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
@@ -229,7 +229,7 @@ When you click **Deploy** or **Redeploy** for your app, a wizard will appear, pr
 ![Code - code](/components/data-apps/data_apps-deploy-timeout-backedsize.png)
 
 ### Base Image
-When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit docker image. 
+When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit Docker image. 
 This image already has Streamlit and a few other basic packages pre-installed:
 
 ```
@@ -326,7 +326,7 @@ wheel                     0.40.0
 zipp                      3.16.2
 ```
 
-Please note that the versions of these packages may change, as the newest version of the Streamlit package is used upon deployment unless explicitly specified in the Packages field.
+Please note that the versions of these packages may change, as the newest version of the Streamlit package is used upon deployment unless explicitly specified in the `Packages` field.
 
 ### Actions Menu
 {: .image-popup}
@@ -339,7 +339,7 @@ Please note that the versions of these packages may change, as the newest versio
 - **Delete Data App** – stops the data app deployment and deletes its configuration.
 
 ### Debugging App Deployment
-If the data app's deployment job fails, you can see the logs from its container in the events log of the deployment job.  
+If the data app's deployment job fails, you can see the logs from its container in the event log of the deployment job.  
 For example, there may be a conflict with the specified packages:
 
 {: .image-popup}
