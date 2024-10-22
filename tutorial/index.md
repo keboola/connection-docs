@@ -17,7 +17,7 @@ automating the entire data pipeline for enhanced efficiency and consistency. Thi
 If you are new to Keboola, we recommend exploring our comprehensive [platform overview](/overview/). 
 This resource will help you become acquainted with commonly used terms and gain a solid understanding of the Keboola ecosystem.
 
-To get started, ensure you have access to a Keboola project. If you haven’t got one yet, reach out to us at [sales@keboola.com](sales@keboola.com), 
+To get started, ensure you have access to a Keboola project. If you haven’t got one yet, reach out to us at sales@keboola.com, 
 or create a free project [here](https://connection.north-europe.azure.keboola.com/wizard) instantly.
 
 If you are a developer looking to contribute new components to the Keboola platform, your [development project](https://developers.keboola.com/#development-project) 

@@ -102,7 +102,7 @@ CREATE TABLE "tmp_level" AS
     FROM "level";
 
 CREATE TABLE "tmp_opportunity" AS
-    SELECT * EXCLUDE ("_timestamp"), CASE
+    SELECT *, CASE
         WHEN "Probability" < 50 THEN 'Poor'
         WHEN "Probability" < 70 THEN 'Good'
         ELSE 'Excellent' END AS "ProbabilityClass"
@@ -204,4 +204,4 @@ Having learned to set up a transformation, you can now
 - take a brief side step to [Using a Workspace](/tutorial/manipulate/workspace/) – while we've configured our transformation with pre-developed queries in this tutorial, in real-life scenarios, you'll typically want to interact with the data, develop, and test your queries. A workspace serves as your safe playground specifically designed for that purpose.
 
 ## If You Need Help
-Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
+Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.

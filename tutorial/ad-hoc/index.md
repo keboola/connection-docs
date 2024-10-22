@@ -5,7 +5,7 @@ permalink: /tutorial/ad-hoc/
 
 After you have loaded your tables, either [manually](/tutorial/load/) or
 [using a data source connector](/tutorial/load/database/), [manipulated the data](/tutorial/manipulate/) in SQL,
-written it [into Tableau BI](/tutorial/write/) or [into GoodData BI](/tutorial/write/gooddata/), and
+written it [into Google Sheets](/tutorial/write/), and
 set everything to run [automatically](/tutorial/automate/), let's take a look at some additional Keboola 
 features related to doing ad-hoc analysis.
 
@@ -36,8 +36,8 @@ querying public data is only [free up to 1TB a month](https://cloud.google.com/b
 Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) for authentication 
 of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
-*Note: If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
-[load them from Google Drive](/tutorial/load/googledrive/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
+***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
+[load them from Google Sheets](/tutorial/load/googlesheets/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
 
 ### Prepare
 Before you start, have a Google service account and a Google Storage bucket ready.

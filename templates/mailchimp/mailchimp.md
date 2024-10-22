@@ -6,15 +6,15 @@ permalink: /templates/mailchimp/
 * TOC
 {:toc}
 
-With this end-to-end flow you can extract data from MailChimp and transform it into visualizations in any BI tool of your choice.
+With this end-to-end flow, you can extract data from Mailchimp and transform it into visualizations in any BI tool of your choice.
 
 **The flow, in a nutshell:**
 
-- First, the Mailchimp data source connector will collect data from your account: lists of campaigns, members and lists. 
+- First, the Mailchimp data source connector will collect data from your account: lists of campaigns, members, and lists. 
 
 - Then we prepare five tables (campaign, campaign-event, customer, list, list-member) that can be used to visualize results. 
 
-- The data is then written into a database of your choice.
+- The data is then written to a database of your choice.
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The survey data source connector, all data manipulations, and the destination connector, will be processed.
 
@@ -22,9 +22,9 @@ With this end-to-end flow you can extract data from MailChimp and transform it i
 
 | Name | Description |
 |---|---|
-| CAMPAIGN | the list of campaigns (campaign is any distributed content, that's created and measured in MailChimp) and metrics |
+| CAMPAIGN | the list of campaigns (campaign is any distributed content, that's created and measured in Mailchimp) and metrics |
 | CAMPAIGN-EVENT | information about campaign events such as type or created date |
-| CUSTOMER | the list of customers and theirs email addresses |
+| CUSTOMER | the list of customers and their email addresses |
 | LIST | the list of lists of contacts |
 | LIST-MEMBER | The table provides information on marketing contacts and their rating |
 
@@ -40,38 +40,38 @@ from the **Templates** tab in your Keboola project. When you are done, click **+
 This page contains information about the template. Click **+ Use Template** again.
 
 {: .image-popup}
-![Add MailChimp to Snowflake](/templates/mailchimp/add-mailchimp-to-snowflake.png)
+![Add Mailchimp to Snowflake](/templates/mailchimp/add-mailchimp-to-snowflake.png)
 
 You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want 
 and still keep everything organized.
 
 {: .image-popup}
-![MailChimp to Snowflake - Template Name](/templates/mailchimp/mailchimp-to-snowflake-name.png)
+![Mailchimp to Snowflake - Template Name](/templates/mailchimp/mailchimp-to-snowflake-name.png)
 
 After clicking **Next Step**, you will see the template builder. Fill in all needed credentials and 
 perform the required OAuth authorizations. 
 
 **Important:** Make sure to follow all the steps very carefully to prevent the newly created flow from failing because of any user 
-authorization problems. If you are struggling with this part, go to the section [Authorizing Destinations](/templates/mailchimp/authorizing-destinations/) below.
+authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/templates/mailchimp/#authorizing-data-destinations) below.
 
 Follow the steps one by one and authorize at least one data source from the list. Finally, the destination must be authorized as well.
 
 {: .image-popup}
-![MailChimp to Snowflake](/templates/mailchimp/mailchimp-to-snowflake-steps.png)
+![Mailchimp to Snowflake](/templates/mailchimp/mailchimp-to-snowflake-steps.png)
 
 When you are finished, click **Save** in the top right corner. The template builder will create your new configuration, and 
-when it is done, you will be redirected to the Template Catalogue where you can see the newly created flow. 
+once it's done, you will be redirected to the Template Catalog where you can see the newly created flow. 
 
 Click **Run Template** and start building your visualizations a few minutes later. 
 
 {: .image-popup}
-![MailChimp - Flows](/templates/mailchimp/mailchimp-to-snowflake-flow.png)
+![Mailchimp - Flows](/templates/mailchimp/mailchimp-to-snowflake-flow.png)
 
 
 ## Data Sources
 These data source connectors are available in Public Beta:
 
-[MailChimp](https://mailchimp.com/)
+[Mailchimp](https://mailchimp.com/)
 
 ## Data Destinations
 These data destination connectors are available in Public Beta:
@@ -87,7 +87,7 @@ To use a selected data source connector, you must first authorize the data sourc
 ### Mailchimp
 
 {: .image-popup}
-![MailChimp Data Source](/templates/mailchimp/mailchimp-data-source.png)
+![Mailchimp Data Source](/templates/mailchimp/mailchimp-data-source.png)
 
 Insert your Mailchimp API token and data center (the last part of the API key after the dash). Then fill in your account user name.
 
@@ -110,7 +110,7 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It is needed for correct mapping 
+Duplicate the sheet in your Google Drive and paste the file ID back to Keboola. It is needed for correct mapping 
 in your duplicated Google sheet. 
 
 <!-- 
@@ -121,7 +121,7 @@ in your duplicated Google sheet.
 
 If you do not have your own data warehouse, follow the instructions and we will create a database for you: 
 
-1. After clicking **Save**, the template will be used in your project. You will see a flow. 
+1. After clicking **Save**, the template will be applied to your project, and you will see a flow. 
 2. Go there and click **Snowflake Data Destination** to configure it. You will be redirected to the data destination configuration and asked to set up credentials. 
 3. Select **Keboola Snowflake database**. 
 4. Then go back to the flow and click **Run**. 

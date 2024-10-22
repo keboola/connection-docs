@@ -453,7 +453,19 @@ items:
 
       - url: /components/data-apps/
         title: Data Apps
-
+        items:
+          - url: /components/data-apps/oidc/
+            title: OpenID Connect
+            items:
+              - url: /components/data-apps/oidc/auth0/
+                title: Auth0
+              - url: /components/data-apps/oidc/google-cloud-platform/
+                title: Google Cloud Platform
+              - url: /components/data-apps/oidc/microsoft-entra-id/
+                title: Microsoft Entra ID
+              - url: /components/data-apps/oidc/okta/
+                title: Okta
+                    
       - url: /components/branches/
         title: Development Branches
 
@@ -490,14 +502,11 @@ items:
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
 
-      - url: /templates/kai-promptlab/
-        title: Kai PromptLab
-
       - url: /templates/kai-sql-bot/
         title: Kai SQL Bot
         
       - url: /templates/mailchimp/
-        title: MailChimp
+        title: Mailchimp
         
       - url: /templates/media-cashflow/
         title: Media Cashflow
@@ -507,6 +516,9 @@ items:
 
       - url: /templates/repository/
         title: Repository
+
+      - url: /templates/snowflake-security-checkup/
+        title: Snowflake Security Checkup
 
       - url: /templates/social-media-engagement/
         title: Social Media Engagement
@@ -529,6 +541,15 @@ items:
       - url: /storage/buckets/
         title: Buckets
 
+      - url: /storage/data-streams/
+        title: Data Streams
+
+      - url: /storage/files/
+        title: Files
+
+      - url: /storage/jobs/
+        title: Jobs
+
       - url: /storage/tables/
         title: Tables & Aliases
         items:
@@ -543,12 +564,6 @@ items:
 
           - url: /storage/tables/backups/
             title: Backups and Restorations
-
-      - url: /storage/files/
-        title: Files
-
-      - url: /storage/jobs/
-        title: Jobs
 
       - url: /storage/byodb/
         title: Bring Your Own Database
@@ -705,3 +720,12 @@ items:
 
       - url: /management/organization/
         title: Organizations
+
+      - url: /management/global-search/
+        title: Global Search
+
+      - url: /management/telemetry/
+        title: Telemetry
+        items:
+          - url: /management/telemetry/telemetry-dashboards/
+            title: Telemetry Dashboards

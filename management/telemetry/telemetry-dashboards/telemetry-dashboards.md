@@ -13,9 +13,6 @@ To get to all three telemetry dashboards, click the top right corner of the prof
 if [Organization Usage](#organization-usage) or [Activity Center](#activity-center) are also available. 
 
 ## Project Consumption
-{: .image-popup}
-![Screenshot - Project Consumption Dashboard](/management/telemetry/telemetry-dashboards/project-consumption.png)
-
 By default, the dashboard is filtered for the last six months. The date range at the top of the dashboard can be changed. 
 
 The *KPIs* section presents the overall statistics of the Keboola project. Some are self-explanatory (e.g., *Consumed Credits* and *Number of Jobs*). An explanation for the others can be found under 
@@ -25,6 +22,9 @@ Transformations*.
 
 *Credits History* shows the evolution of consumed credits over time. *Trends* at the bottom of the print screen shows the monthly evolution of consumption broken into component types (bar chart) plus 
 a graph of the number of error jobs and the total number of jobs. 
+
+{: .image-popup}
+![Screenshot - Project Consumption Dashboard](/management/telemetry/telemetry-dashboards/project-consumption.png)
 
 ## Organization Usage
 The dashboard is filtered for the last six months, which can be adjusted. It shows data for the whole Keboola organization. If you have an organization, you can view its usage, which typically includes multiple 

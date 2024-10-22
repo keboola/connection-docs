@@ -24,16 +24,16 @@ the server backend. Therefore you need to work with tokens only when working wit
 To learn more about all the available programmatic approaches, please follow our 
 [developers documentation](https://developers.keboola.com/overview/api/).
 
-Tokens can be managed from the **Users & Settings > API Tokens** page.
+Tokens can be managed from the **Project Settings > API Tokens** page.
 
 {: .image-popup}
-![Screenshot - Storage Tokens](/management/project/tokens/overview.png)
+![Screenshot - Storage Tokens](/management/project/tokens/API_tokens.png)
 
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
 the email of the user they belong to. Master tokens cannot be modified, shared or deleted. 
 The only way to delete a master token is by [removing the user](/management/project/users/#removing-a-user) 
-from the project on the **Users & Settings > Users** page. 
+from the project on the **Project Settings > Users** page. 
 
 A single user has only a single master token. In addition, master tokens are the only ones which can be 
 used to create other tokens. A master token has always access to all components, so having it allows you 

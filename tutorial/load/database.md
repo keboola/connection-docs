@@ -69,4 +69,4 @@ please navigate to Advanced Mode. Note that we will not cover the advanced mode 
 Proceed to [Data Manipulation](/tutorial/manipulate/).
 
 ## If You Need Help
-Feel free to reach out to our [support team](support@keboola.com) if there’s anything we can help with.
+Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
