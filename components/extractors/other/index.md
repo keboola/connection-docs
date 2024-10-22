@@ -9,7 +9,7 @@ Extractors import data from external sources and integrate it to the Keboola Con
 Apart from extractors for social networks, communication, storage, and marketing and sales, there are
 extractors that do not fall into any of the above mentioned categories:
 
-- [AWS CUR](/components/extractors/other/aws-cu-reports/) --- imports cost and usage report data of an AWS subscription.
+- [AWS CUR](/components/extractors/other/aws-cur-reports/) --- imports cost and usage report data of an AWS subscription.
 - [Azure Cost Management](/components/extractors/other/azure-cost/) --- imports cost and usage data of an Azure subscription.
 - [Ceps](/components/extractors/other/ceps/) --- imports data of the electricity transmission system in the Czech Republic (CEPS).
 - [Dark Sky](/components/extractors/other/dark-sky/) --- looks up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
