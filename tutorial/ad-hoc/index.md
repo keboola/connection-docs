@@ -161,6 +161,12 @@ Green is for success, red for failure. Click on the indicator, or the info next 
 Once the job is finished, click on the names of the tables to inspect their contents.
 
 ## Exploring Data
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form and have been replaced by [workspaces](/transformations/workspace/#main-header).
+</div>
+
 To explore the data, go to **Transformations**, and click on [**Sandbox**](/transformations/sandbox/).
 Provided for each user and project automatically, it is an isolated environment in which you can experiment without
 interfering with any production code.
