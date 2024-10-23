@@ -164,7 +164,7 @@ Once the job is finished, click on the names of the tables to inspect their cont
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form and have been replaced by [workspaces](/transformations/workspace/#main-header).
+    <strong>Important:</strong> The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form and have been replaced by workspaces.
 </div>
 
 To explore the data, go to **Transformations**, and click on [**Sandbox**](/transformations/sandbox/).
