@@ -8,25 +8,20 @@ permalink: /flows/
 
 *If you already know how flows work in general and want to create your first flow, go to our Getting Started tutorial.*
 
-Flows allow you to bring all the pieces of your project together. This is where you can build your custom automated processes, chain all the components to be run 
-in a specific order, and define when the process should be executed. In this section, we'll show you how to organize tasks into steps, set up notifications, and 
-schedule the execution of your flow.
+Flows allow you to bring all your project's segments together and automate running them repeatedly to bring in the newest data available. 
+This is where you can build your custom-automated processes, chain all the components to be run in a specific order, and define when the process should be 
+executed. In this section, we'll show you how to organize tasks into steps, set up notifications, and schedule the execution of your flow.
 
-## How Flows Work
-
-## Creating a Flow
-So far, you have learned to use Keboola to
-
-- load tables [manually](/tutorial/load/) or [using a data source connector](/tutorial/load/database/), 
-- [manipulate data in SQL](/tutorial/manipulate/), and
-- write data [into a Google Spreadsheet using a data destination connector](/tutorial/write/).
- 
-While connecting various systems together alone makes Keboola a powerful and easy-to-use tool, 
-the above steps must be done repeatedly to bring in the newest data available.
-
-This is where our flows come in:
+Flows allow you to:
 - Specify what tasks should be executed in what order (orchestrate tasks) and
 - Configure the automatic execution (schedule flow tasks).
+
+## How Flows Work
+## Creating a Flow
+## Using the Flow Builder
+https://www.keboola.com/blog/building-data-pipelines-has-become-even-easier-with-keboolas-flow-builder
+https://www.keboola.com/product/flow-builder
+
 
 1. Navigate to the **Flows** section of Keboola.
 
@@ -46,7 +41,7 @@ You can specify the folder name when creating a flow or assign it under a folder
    {: .image-popup}
    ![Select First Step](/tutorial/automate/automate3.png)
 
-5. Click the **Google Sheets Data Source** component. We extracted the *Levels* table from this data source and we’ll want to extract this data automatically in our flow.
+5. Click the **Google Sheets Extractor**. We extracted the *Levels* table from this data source and we’ll want to extract this data automatically in our flow.
 
    {: .image-popup}
    ![Select Google Sheets Data Source](/tutorial/automate/automate4.png)
