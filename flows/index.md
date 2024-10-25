@@ -6,8 +6,8 @@ permalink: /flows/
 * TOC
 {:toc}
 
-*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/) or 
-check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow) for useful tips.*
+*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
+For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
 
 Flows integrate all your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
