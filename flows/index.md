@@ -7,9 +7,10 @@ permalink: /flows/
 {:toc}
 
 *If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/) or 
-check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
+check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow) for useful tips.*
 
-Flows integrate all your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, and defining the execution schedule to **bring in the newest data available**. 
+Flows integrate all your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
+and defining the execution schedule to **bring in the newest data available**. 
 
 ## How Flows Work
 First you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then you decide in **what order** you want them to run. 
@@ -27,12 +28,14 @@ This feature enables you to do the following:
 - Build multiple data flows in a single view. Each flow is its own data pipeline.
 - Copy-and-paste an existing data flow to a new flow to reuse the work done across different data pipelines.
 
-Take the following steps to start building your first flow:
+These are the steps you need to take to build your first flow successfully:
 
 - [Step 1: Access the Flow Builder](#access-the-flow-builder)
 - [Step 2: Build the flow](#build-the-flow)
-- [Step 3: Schedule and automate your flow](#schedule-and-automate)
-- [Step 4: Check how your flow is running](#check-run-history)
+- [Step 3: Execute tasks in parallel](#execute-tasks-in-parallel)
+- [Step 4: Schedule and automate your flow](#schedule-and-automate)
+- [Step 5: Set up notifications](#set-up-notifications)
+- [Step 6: Check how your flow is running](#check-run-history)
 
 ### Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
@@ -45,19 +48,19 @@ Name your new flow and add an easy to understand description. Then click **Creat
 This will open up the **Flow Builder** view, where you can create your data flow.
 
 ### Build the Flow
-Click **Select First Step** and start selecting the components to collect your data from your data sources. Use the drop-down menu to select a particular configuration of the component.
+Click **Select First Step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
 
    {: .image-popup}
    ![Select First Step](/tutorial/automate/automate3.png)
 
-Now use the plus icon to add additional steps. 
+Now use the plus icon to add other steps. 
 
-Apart from the extractor(-s), you want to add selected transformation(-s) and writer(-s) that will load your transformed data into your selected data destination.
+Apart from the extractor(s), you want to add selected transformation(s) and writer(s) that will load your transformed data into your selected data destination.
 Continue adding other ready-made components and organize them in a logical flow  or select the ones you want to run in parallel using drag-and-drop function. 
 
 - Organize the components into a logical flow using the drag-and-drop functionality.
 - Configure each component by providing the credentials and instructions for what or where to extract or write or for what code to execute in a transformation.
-- Remember to adjust the input mapping of your transformation(-s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
+- Remember to adjust the input mapping of your transformation(s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
 - Save the changes.
 
 Once you’ve built your flow end-to-end, it can look something like this:
@@ -103,7 +106,7 @@ You can select predifined intervals or set your own. Another option is to use tr
 
 ### Set Up Notifications
 Once your pipeline or workflow is complete, you may not need to manage it actively every day. Stay on top of your flow's performance by setting up notifications for errors or long run times. From the drop-down 
-list of the project users in the **Notifications** tab, you can select a project user/-s who will receive the notification, or you can enter another email address. However, consider using a group email to keep 
+list of the project users in the **Notifications** tab, you can select (a) project user(s) who will receive the notification, or you can enter another email address. However, consider using a group email to keep 
 the whole team informed and responsive to any issues.
 
 You can set up an email notification for four different situations: 
@@ -116,13 +119,11 @@ You can set up an email notification for four different situations:
 {: .image-popup}
 ![Set Up Notifications](/tutorial/automate/automate15.png)
 
+Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
+
 ### Check Run History
 In the tab **All Runs**, you can check how your flow is running with a detailed breakdown of each task. 
 
-******************************************************
-
-Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
-
-In **Jobs** you’ll see how the Flow runs and triggers each individual component sequentially. 
-The status updates in real-time. Once the last of your extractors finishes, the transformations will be triggered. After they complete, the writer(-s) will run, and the flow will be finalized. 
+In **Jobs** you’ll see how the flow runs and triggers each individual component sequentially. The status updates in real-time. 
+Once the last of your extractors finishes, the transformations will be triggered. After they complete, the writer(s) will run, and the flow will be finalized. 
 In the end, you’ll see either a **Success** message or an error notification if something went wrong.
