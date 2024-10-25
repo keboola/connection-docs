@@ -12,14 +12,13 @@ check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet
 Flows integrate all your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
 
-## How Flows Work
 First you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then you decide in **what order** you want them to run. 
 And finally, you will determine **when** you want the entire flow to be executed and **how often**. There are notifications for you to choose from to help you oversee the entire process. 
 
 You can create data flows by dragging and dropping the components together on a single screen using the **Flow Builder** feature. With it, even scheduling and automating your data pipelines takes just 
 a button click. Let us show you how to organize individual tasks into steps, set up notifications, and schedule the execution of your flow.
 
-### Flow Builder
+## What is the Flow Builder?
 This feature enables you to do the following:
 
 - View your multi-step data pipeline in a single browser window, which is especially helpful when your data pipeline is complex. 
@@ -37,7 +36,7 @@ These are the steps you need to take to build your first flow successfully:
 - [Step 5: Set up notifications](#set-up-notifications)
 - [Step 6: Check how your flow is running](#check-run-history)
 
-### Access the Flow Builder
+## Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
    
  {: .image-popup}
@@ -47,7 +46,7 @@ Name your new flow and add an easy to understand description. Then click **Creat
 
 This will open up the **Flow Builder** view, where you can create your data flow.
 
-### Build the Flow
+## Build the Flow
 Click **Select First Step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
 
    {: .image-popup}
@@ -70,7 +69,7 @@ Once you’ve built your flow end-to-end, it can look something like this:
    
 Click **Run Flow** to set the data pipeline into action.
 
-### Execute Tasks in Parallel
+## Execute Tasks in Parallel
 You can group multiple tasks within one step, a phase. These tasks then run independently in parallel, speeding up the execution. 
 Steps execute sequentially, while tasks within a single step run in parallel. If you have multiple extractors, you can include them all in a single step, allowing them to run simultaneously. 
 
@@ -89,11 +88,11 @@ control.
 Use the menu next to each configuration row in the UI to execute specific configurations as needed, optimizing time and resources.
 " %}
 
-#### Parallel limits
+### Parallel limits
 Component jobs don't have a strict parallel limit, but [Storage jobs](/storage/jobs/) do. They are typically capped at 10 parallel jobs but the Keboola Support team can help you adjust this. 
 In environments with many users, component jobs may queue for Storage job availability, affecting runtime.
 
-### Schedule and Automate
+## Schedule and Automate
 Within the Flow Builder, click on **Set Schedule** and select when you want the flow to run.
 You can select predifined intervals or set your own. Another option is to use triggers to initiate the run. 
 
@@ -104,7 +103,7 @@ You can select predifined intervals or set your own. Another option is to use tr
 {: .image-popup}
 ![Set Schedule](/tutorial/automate/automate13.png)
 
-### Set Up Notifications
+## Set Up Notifications
 Once your pipeline or workflow is complete, you may not need to manage it actively every day. Stay on top of your flow's performance by setting up notifications for errors or long run times. From the drop-down 
 list of the project users in the **Notifications** tab, you can select (a) project user(s) who will receive the notification, or you can enter another email address. However, consider using a group email to keep 
 the whole team informed and responsive to any issues.
@@ -121,7 +120,7 @@ You can set up an email notification for four different situations:
 
 Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
 
-### Check Run History
+## Check Run History
 In the tab **All Runs**, you can check how your flow is running with a detailed breakdown of each task. 
 
 In **Jobs** you’ll see how the flow runs and triggers each individual component sequentially. The status updates in real-time. 
