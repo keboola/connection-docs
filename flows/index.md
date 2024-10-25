@@ -15,11 +15,11 @@ and defining the execution schedule to **bring in the newest data available**.
 First you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then you decide in **what order** you want them to run. 
 And finally, you will determine **when** you want the entire flow to be executed and **how often**. There are notifications for you to choose from to help you oversee the entire process. 
 
-You can create data flows by dragging and dropping the components together on a single screen using the **Flow Builder** feature. With it, even scheduling and automating your data pipelines takes just 
-a button click. Let us show you how to organize individual tasks into steps, set up notifications, and schedule the execution of your flow.
-
 ## What is the Flow Builder?
-This feature enables you to do the following:
+Using the **Flow Builder** feature, you can create data flows by dragging and dropping the components together on a single screen.
+Even scheduling and automating your data pipelines takes just a few button clicks. 
+
+The builder enables you to do the following:
 
 - View your multi-step data pipeline in a single browser window, which is especially helpful when your data pipeline is complex. 
 - Create your flows no data engineering skills.
@@ -27,7 +27,7 @@ This feature enables you to do the following:
 - Build multiple data flows in a single view. Each flow is its own data pipeline.
 - Copy-and-paste an existing data flow to a new flow to reuse the work done across different data pipelines.
 
-These are the steps you need to take to build your first flow successfully:
+Let us show you how to organize individual tasks into steps, set up notifications, and schedule the execution of your flow:
 
 - [Step 1: Access the Flow Builder](#access-the-flow-builder)
 - [Step 2: Build the flow](#build-the-flow)
@@ -39,8 +39,8 @@ These are the steps you need to take to build your first flow successfully:
 ## Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
    
- {: .image-popup}
-   ![Go to Flows](/tutorial/automate/automate1.png)
+{: .image-popup}
+![Go to Flows](/tutorial/automate/automate1.png)
 
 Name your new flow and add an easy to understand description. Then click **Create Flow** again. 
 
@@ -49,8 +49,8 @@ This will open up the **Flow Builder** view, where you can create your data flow
 ## Build the Flow
 Click **Select First Step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
 
-   {: .image-popup}
-   ![Select First Step](/tutorial/automate/automate3.png)
+{: .image-popup}
+![Select First Step](/tutorial/automate/automate3.png)
 
 Now use the plus icon to add other steps. 
 
@@ -64,8 +64,8 @@ Continue adding other ready-made components and organize them in a logical flow 
 
 Once you’ve built your flow end-to-end, it can look something like this:
 
- {: .image-popup}
-   ![Add SQL Transformation](/tutorial/automate/automate10.png)
+{: .image-popup}
+![Add SQL Transformation](/tutorial/automate/automate10.png)
    
 Click **Run Flow** to set the data pipeline into action.
 
