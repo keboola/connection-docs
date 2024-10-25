@@ -9,32 +9,30 @@ permalink: /flows/
 *If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/) or 
 check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
 
-Flows integrate all your project's segments (extractors, writer, transformations, etc.) by creating custom automated processes, chaining components to be run in a specific order, and defining the execution schedule to bring in the newest data available. 
-
-In this section, we'll show you how to organize tasks into steps, set up notifications, and schedule the execution of your flow.
+Flows integrate all your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, and defining the execution schedule to **bring in the newest data available**. 
 
 ## How Flows Work
-First you need to decide what exactly you want you flow to do. What steps it will be composed of and in what order you want them to run.
-Then you will determine when you want the entire flow to be executed and how often.
+First you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then you decide in **what order** you want them to run. 
+And finally, you will determine **when** you want the entire flow to be executed and **how often**. There are notifications for you to choose from to help you oversee the entire process. 
 
-To create a flow, use the **Flow Builder** feature, a tool for visually building end-to-end data pipelines from a single **drag-and-drop** user interface. 
+You can create data flows by dragging and dropping the components together on a single screen using the **Flow Builder** feature. With it, even scheduling and automating your data pipelines takes just 
+a button click. Let us show you how to organize individual tasks into steps, set up notifications, and schedule the execution of your flow.
 
 ### Flow Builder
-It enables you to
+This feature enables you to do the following:
 
-- view your multi-step data pipeline in a single browser window. This is especially helpful when your data pipeline is complex. 
-- use the tool with no data engineering skills.
-- view and work on the same data flows together, set up the data pipeline as a team and continue working on various components individually. The in-built version control lets your team to see the changes others made.
-- build multiple data flows in a single view. Each flow is its own data pipeline.
-- copy-and-paste an existing data flow to a new flow to reuse the work done across different data pipelines.
+- View your multi-step data pipeline in a single browser window, which is especially helpful when your data pipeline is complex. 
+- Create your flows no data engineering skills.
+- View and work on the same data flows together, set up the data pipeline as a team and continue working on various components individually. The in-built version control lets your team see the changes others have made over time.
+- Build multiple data flows in a single view. Each flow is its own data pipeline.
+- Copy-and-paste an existing data flow to a new flow to reuse the work done across different data pipelines.
 
 Take the following steps to start building your first flow:
 
-- [Step 1: Access the new Flow Builder feature](#access-the-flow-builder)
-- [Step 2: Select one or multiple ready-made components](#select-ready-made-components)
-- [Step 3: Build the entire flow](#build-the-flow)
-- [Step 4: Schedule and automate your flow](#schedule-and-automate-the-flow)
-- [Step 5: Check how your flow is running](#check-run-history)
+- [Step 1: Access the Flow Builder](#access-the-flow-builder)
+- [Step 2: Build the flow](#build-the-flow)
+- [Step 3: Schedule and automate your flow](#schedule-and-automate)
+- [Step 4: Check how your flow is running](#check-run-history)
 
 ### Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
@@ -46,37 +44,35 @@ Name your new flow and add an easy to understand description. Then click **Creat
 
 This will open up the **Flow Builder** view, where you can create your data flow.
 
-### Select Ready-Made Components 
-Click **Select First Step** and start selecting the components to collect your data from your data sources. 
+### Build the Flow
+Click **Select First Step** and start selecting the components to collect your data from your data sources. Use the drop-down menu to select a particular configuration of the component.
 
    {: .image-popup}
    ![Select First Step](/tutorial/automate/automate3.png)
 
-The general process is simple:
+Now use the plus icon to add additional steps. 
 
-- Select the components you want to extract your data from selected data sources, transform the data, and load it to your selected data destination.
-- Authorize Keboola to access data in those components.
-- Extract, transform, and load the data.
+Apart from the extractor(-s), you want to add selected transformation(-s) and writer(-s) that will load your transformed data into your selected data destination.
+Continue adding other ready-made components and organize them in a logical flow  or select the ones you want to run in parallel using drag-and-drop function. 
 
-### Step 3: Build the Flow
-Continue adding other ready-made components and organize them in a logical flow  or select the ones you want to run in parallel using drag & drop function. 
-
-For each flow:
-
-- Select one or multiple ready-made components.
-- Organize them into a logical flow using the drag and drop functionality.
+- Organize the components into a logical flow using the drag-and-drop functionality.
+- Extractions of the data are not dependent tasks and, thus, can be executed **in parallel**. You can accomplish this by simply dragging and dropping the second task into the Step 1 box.
 - Configure each component by providing the credentials and instructions for what or where to extract or write or for what code to execute in a transformation.
-- Save the changes .
+- Remember to adjust the input mapping of your transformation(-s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
+- Save the changes.
 
-Once you’ve built your flow end-to-end simply click on Run flow, to set the data pipeline into action.
+Once you’ve built your flow end-to-end, it can look something like this:
 
-### Schedule and Automate the Flow
-Within the Flow Builder, click on Set schedule under Automate to set up the orchestration that will automatically run your job at your preferred recurring time. 
+ {: .image-popup}
+   ![Add SQL Transformation](/tutorial/automate/automate10.png)
+   
+Click **Run Flow** to set the data pipeline into action.
 
-That’s the power of automation for you - set it and automate it.
+### Schedule and Automate
+Within the Flow Builder, click on **Set Schedule** under **Automate** to set up the orchestration that will automatically run your job at your preferred recurring time. 
 
 ### Check Run History
-In the tab “All runs” you can check how your flow is running with its detailed breakdown to each task. 
+In the tab **All Runs** you can check how your flow is running with its detailed breakdown to each task. 
 
 
 ******************************************************
