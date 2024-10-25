@@ -6,22 +6,69 @@ permalink: /flows/
 * TOC
 {:toc}
 
-*If you already know how flows work in general and want to create your first flow, go to our Getting Started tutorial.*
+*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).*
 
-Flows allow you to bring all your project's segments together and automate running them repeatedly to bring in the newest data available. 
-This is where you can build your custom-automated processes, chain all the components to be run in a specific order, and define when the process should be 
-executed. In this section, we'll show you how to organize tasks into steps, set up notifications, and schedule the execution of your flow.
+Flows integrate all your project's segments (extractors, writer, transformations, etc.) by creating custom automated processes, chaining components to be run in a specific order, and defining the execution schedule to bring in the newest data available. 
 
-Flows allow you to:
-- Specify what tasks should be executed in what order (orchestrate tasks) and
-- Configure the automatic execution (schedule flow tasks).
+In this section, we'll show you how to organize tasks into steps, set up notifications, and schedule the execution of your flow.
 
 ## How Flows Work
-## Creating a Flow
-## Using the Flow Builder
-https://www.keboola.com/blog/building-data-pipelines-has-become-even-easier-with-keboolas-flow-builder
-https://www.keboola.com/product/flow-builder
+First you need to decide what exactly you want you flow to do. What steps it will be composed of and in what order you want them to run.
+Then you will determine when you want the entire flow to be executed and how often.
 
+## Using the Flow Builder
+The Flow Builder is a feature that allows you to visually build end-to-end data pipelines from a single drag-and-drop user interface.
+
+- Step 1: Access the new Flow Builder feature
+- Step 2: Select one or multiple ready-made components
+- Step 3: Build out the entire flow
+- Step 4: Schedule and automate your flow
+- Step 5: Check how your flow is running
+
+### Step 1: Access the new Flow Builder feature
+Select from the top menu **Flows -> Flows**. Then click the **Create Flow** button.
+   
+Give your new flow a name and an easy to understand description. Then click **Create Flow** again. 
+
+This will open up the **Flow Builder** view, where you can view and build your data flow.
+
+### Step 2: Select one or multiple ready-made components 
+Start by selecting the components to collect your data from your data sources. The general process is simple:
+
+Select the right component to extract/transform/load data from/to your specified data source.
+Authorize Keboola to access data in that component.
+Extract/transform/load data.
+We will show you an end-to-end example of setting up ready-made components by walking you through reading data files from Google Drive.
+
+We start by clicking on Select Components > Google Drive to collect a file from our Google Drive folder.
+
+We proceed by clicking on the Google Drive component> show details cog > Select or Create Configuration to add new configuration. The configuration grants access to Keboola so it can read the data files on your Google Drive:
+
+Name the configuration (e.g.,  “Google Drive Config”) and click on Create (shown below) and the Configure (not shown):
+
+The wizard guides you through Google’s authorization to give Keboola access to our Google Drive (not shown here, but super easy to follow). 
+
+### Step 3: Build out the entire flow
+Continue adding other ready-made components and organize them in a logical flow  or select the ones you want to run in parallel using drag & drop function. 
+
+For each flow:
+
+Select one or multiple ready-made components.
+Organize them into a logical flow using the drag and drop functionality.
+Configure each component by providing the credentials and instructions for what or where to extract or write or for what code to execute in a transformation.
+Save the changes 
+Once you’ve built your flow end-to-end simply click on Run flow, to set the data pipeline into action.
+
+### Step 4: Schedule and automate your flow
+Within the Flow Builder, click on Set schedule under Automate to set up the orchestration that will automatically run your job at your preferred recurring time. 
+
+That’s the power of automation for you - set it and automate it.
+
+### Step 5: Check how your flow is running
+In the tab “All runs” you can check the run history of your flow with its detailed breakdown to each task. 
+
+
+******************************************************
 
 1. Navigate to the **Flows** section of Keboola.
 
@@ -223,6 +270,9 @@ secure. For more on development branches, see this [guide](https://help.keboola.
 In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, 
 enhancing overall efficiency. Each subsequent phase starts only after the previous one completes all its tasks.
 
+Steps execute sequentially, while tasks within a single step run in parallel. This means that if you have multiple data sources, you can include them all in a single step, allowing them to run simultaneously. 
+The same applies to data writers. Additionally, if you have transformations that are independent of the connectors, you can group them within the same step. This is why we can add the Google Drive extractor in the first step.
+
 ***Important note for multi-tenant environment users:**
 Please be aware of the interaction between Storage and component jobs mentioned [here](https://help.keboola.com/tutorial/onboarding/cheat-sheet/#optimize-with-parallelization). 
 If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. Limiting the number of concurrent component jobs to 10 
@@ -244,39 +294,16 @@ like at 0:15 am, for smoother execution.
 **Triggers:** Set flows to automatically start when certain Storage tables are updated, which is ideal for managing dependencies across projects. This ensures 
 your projects stay in sync and run efficiently.
 
-We will go into the Flows section and create a new one, which we will call "Daily Run."
-[“3 SEC PAUSE”]
-Now we can start by chaining the individual steps. The first task we want to run is the Snowflake source connector. Here, you will see a list of components such as extractors, applications, and writers. Next to that is a list of transformations, flows and finally, you'll find the Data Apps. We'll select the Snowflake writer, which you can think of as your own internal database, like Postgres or MySQL.
-[“3 SEC PAUSE”]
-Next, we want to transform the data. Click on the Transformations button and select the Snowflake transformation.
-[“5 SEC PAUSE”]
 
-Finally, we will select the Snowflake writer and configure it accordingly.
 
-3
-
-Typically, the process begins by extracting data from a database, followed by the transformation phase, and then the output is written to a database or BI tool. 
 
 [“3 SEC PAUSE”]
-
-Steps are executed sequentially, but tasks within a single step run in parallel. This means that if we had multiple sources we extract the data from, we can include them all in a single step, and they would run simultaneously. 
-
-The same goes for data writers, and there were transformations independent of the connectors, we could group them within the same step as well. This is why we can add the Google Drive extractor into the first step.
-
-
-4
-
-Now that we’ve specified what we want the process to do, we need to specify when it should be executed. Click on “SAVE” and then “Set schedule.” By default, it’s set to run once a day. However, there are some frequently used presets available—every 15 minutes, every hour, or every week. If we want to set a custom schedule, we can click on "Custom." Here, we can define specific times. For instance, if we want the flow to run four times a day, we can set it to run at midnight, 6:00 AM, 12:00 PM, and 6:00 PM, at the 35th minute of each hour. Please note that the time zone is by default set to UTC.
-
-[“3 SEC PAUSE”]
-We recommend adjusting it to your local time zone. Doing so is useful because daylight saving time changes on different days around the world. Ensuring that your data is refreshed at the right time is especially important for reports that need to be ready by, say, 9:00 AM for your executives to review in the morning. Now that we’ve set up the schedule, we can hit "Save" and move on.
-[“3 SEC PAUSE”]
-Next, we'll show you how to set up notifications. Once your pipeline or workflow is complete, you may not need to manage it actively every day. Keboola allows you to receive notifications about the status of these tasks. You can set up an email notification for four different states: when the flow finishes successfully, when it finishes with warnings, when it fails with an error message, and when the job process takes longer than usual. The drop-down list will show all the users in the project, or you can set another email address.
+Next, let’s look at how to set up notifications. Once your pipeline or workflow is complete, you may not need to manage it actively every day. Keboola allows you to receive notifications about the status of these tasks. You can set up an email notification for four different states: when the flow finishes successfully, when it finishes with warnings, when it fails with an error message, and when the job process takes longer than usual. The drop-down list will show all the users in the project, or you can enter another email address.
 5
 Regarding warnings, such a situation might occur when you set a task to continue running even if there’s an error. Let’s go back to the tasks and edit them. 
 6.
 
-The "continue on failure" flag determines whether a task should keep running even if there’s an error. It’s common for a flow with multiple extractors to have one fail occasionally. However, you don’t want the entire flow to stop because of this. For example, if the Snowflake extractor encounters an error for any reason, the entire flow will not stop— instead, the jobs will continue running. We have set up an email notification for the warning, so we will be notified if this one fails.
-At that point, we can investigate what caused the error in that specific task. This feature is particularly helpful when dealing with APIs that are inconsistent or prone to day-to-day errors. Now that everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking on "Run Flow."
-If we go to the "Jobs" now, we will see how the Flow runs and how it triggers each individual component sequentially. 
-The status is updated in real-time, so you can see that first it’s running the Snowflake and Google Drive connectors simultaneously. Once the last of these finishes, the transformations will be triggered. After they complete, the destination connector will run, and the flow will be finalized. In the end, you’ll see either a "Success" message or an error notification if something went wrong.
+The "continue on failure" flag determines whether a task should keep running even if there’s an error. It’s common for a flow with multiple extractors to have one fail occasionally. However, you don’t want the entire flow to stop because of this. For example, if the Snowflake extractor encounters an error for any reason, the entire flow will not stop; instead, the jobs will continue running. You have set up an email notification for warnings, so you’ll be notified if this task fails.
+At that point, you can investigate what caused the error in that specific task. This feature is particularly helpful when dealing with APIs that are inconsistent or prone to day-to-day errors. Now that everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking "Run Flow."
+If you go to "Jobs" now, you’ll see how the Flow runs and triggers each individual component sequentially. 
+The status updates in real-time, so you can observe that first it first runs the Snowflake and Google Drive extractors simultaneously. Once the last of these finishes, the transformations will be triggered. After they complete, the writer will run, and the flow will be finalized. In the end, you’ll see either a "Success" message or an error notification if something went wrong.
