@@ -592,6 +592,9 @@ items:
       - url: /orchestrator/design/
         title: Design
 
+  - url: /flows/
+    title: Flows
+
   - url: /transformations/
     title: Transformations
     items:
