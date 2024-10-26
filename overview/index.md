@@ -79,7 +79,7 @@ for output data delivery from Keboola to the systems and applications where the 
 ### Full Automation
 The [Flows](/flows/) feature helps you to fully automate end-to-end processes. 
 You can specify the order in which individual connectors, transformations, and other components will be run and set up parallelization. By adding
-a **schedule** or trigger, you can automate processes at sptecified intervals or times of the day.
+a **schedule** or trigger, you can automate processes at specified intervals or times of the day.
 
 The platform automatically scales resources to facilitate the automated processes.
 
