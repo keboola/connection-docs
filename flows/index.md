@@ -22,7 +22,7 @@ Even scheduling and automating your data pipelines takes just a few button click
 The builder enables you to do the following:
 
 - View your multi-step data pipeline in a single browser window, which is especially helpful when your data pipeline is complex. 
-- Create your flows no data engineering skills.
+- Create your flows with no data engineering skills.
 - View and work on the same data flows together, set up the data pipeline as a team and continue working on various components individually. The in-built version control lets your team see the changes others have made over time.
 - Build multiple data flows in a single view. Each flow is its own data pipeline.
 - Copy-and-paste an existing data flow to a new flow to reuse the work done across different data pipelines.
