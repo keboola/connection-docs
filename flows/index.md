@@ -9,21 +9,21 @@ permalink: /flows/
 *If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
 For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
 
-Flows integrate all your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
+Flows integrate all of your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
 
-First you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then you decide in **what order** you want them to run. 
-And finally, you will determine **when** you want the entire flow to be executed and **how often**. There are notifications for you to choose from to help you oversee the entire process. 
+First, you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then, you decide in **what order** you want them to run. 
+And finally, you will determine **when** you want the entire flow to be executed and **how often**. Notifications are available to help you monitor the entire process. 
 
 ## What is the Flow Builder?
 Using the **Flow Builder** feature, you can create data flows by dragging and dropping the components together on a single screen.
 Even scheduling and automating your data pipelines takes just a few button clicks. 
 
-The builder enables you to do the following:
+The flow builder enables you to do the following:
 
 - View your multi-step data pipeline in a single browser window, which is especially helpful when your data pipeline is complex. 
 - Create your flows with no data engineering skills.
-- View and work on the same data flows together, set up the data pipeline as a team and continue working on various components individually. The in-built version control lets your team see the changes others have made over time.
+- Collaborate on the same data flows, set up the data pipeline as a team, and continue working on different components individually. The in-built version control lets your team see the changes others have made over time.
 - Build multiple data flows in a single view. Each flow is its own data pipeline.
 - Copy-and-paste an existing data flow to a new flow to reuse the work done across different data pipelines.
 
@@ -44,7 +44,7 @@ Select from the top menu **Flows -> Flows** and click the **Create Flow** button
 
 Name your new flow and add an easy to understand description. Then click **Create Flow** again. 
 
-This will open up the **Flow Builder** view, where you can create your data flow.
+This will open up the **flow builder** view, where you can create your data flow.
 
 ## Build the Flow
 Click **Select First Step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
@@ -52,30 +52,30 @@ Click **Select First Step** and start selecting the components that will bring i
 {: .image-popup}
 ![Select First Step](/tutorial/automate/automate3.png)
 
-Now use the plus icon to add other steps. 
+Use the plus icon to add other steps. 
 
-Apart from the extractor(s), you want to add selected transformation(s) and writer(s) that will load your transformed data into your selected data destination.
-Continue adding other ready-made components and organize them in a logical flow  or select the ones you want to run in parallel using drag-and-drop function. 
+Apart from the extractor(s), you'll want to add selected transformations and writers that will load your transformed data into your selected data destination.
+Continue adding other ready-made components and organize them in a logical flow,  or select those you want to run in parallel using drag-and-drop function. 
 
 - Organize the components into a logical flow using the drag-and-drop functionality.
 - Configure each component by providing the credentials and instructions for what or where to extract or write or for what code to execute in a transformation.
 - Remember to adjust the input mapping of your transformation(s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
 - Save the changes.
 
-Once you’ve built your flow end-to-end, it can look something like this:
+Once you’ve built your flow end-to-end, it may look something like this:
 
 {: .image-popup}
 ![Add SQL Transformation](/tutorial/automate/automate10.png)
    
-Click **Run Flow** to set the data pipeline into action.
+Click **Run Flow** to start the data pipeline.
 
 ## Execute Tasks in Parallel
 You can group multiple tasks within one step, a phase. These tasks then run independently in parallel, speeding up the execution. 
 Steps execute sequentially, while tasks within a single step run in parallel. If you have multiple extractors, you can include them all in a single step, allowing them to run simultaneously. 
 
-The same applies to data writers. Also, transformations independent of the connectors can be grouped within the same step. Remember it does not save costs because each job uses credits independently.
+The same applies to data writers. Also, transformations independent of the connectors can be grouped within the same step. Note that this does not reduce costs, as each job consume credits independently.
 
-***Warning:** However, if too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. Limiting the number of concurrent component jobs 
+***Warning:** If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. Limiting the number of concurrent component jobs 
 to 10 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
 extent possible based on available resources.*
 
@@ -94,7 +94,7 @@ In environments with many users, component jobs may queue for Storage job availa
 
 ## Schedule and Automate
 Within the Flow Builder, click on **Set Schedule** and select when you want the flow to run.
-You can select predifined intervals or set your own. Another option is to use triggers to initiate the run. 
+You can select predefined intervals or set your own. Another option is to use triggers to initiate the run. 
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 
@@ -108,7 +108,7 @@ Once your pipeline or workflow is complete, you may not need to manage it active
 list of the project users in the **Notifications** tab, you can select (a) project user(s) who will receive the notification, or you can enter another email address. However, consider using a group email to keep 
 the whole team informed and responsive to any issues.
 
-You can set up an email notification for four different situations: 
+You can set up an email notification to the following situations: 
 
 - The flow finishes successfully.
 - The flow finishes with warnings; the **Continue on Failure** flag determines whether a task should keep running even if there’s an error. This option is off by default. It is particularly helpful when dealing with APIs that are inconsistent or prone to day-to-day errors. 
