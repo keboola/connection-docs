@@ -51,13 +51,84 @@ the user. This means that only a subset of the Debezium connector capabilities a
 
 The connector requires a user with the `rds_replication` role.  
 To enable a user account other than the master account to initiate logical replication,
-you must grant the account the rds_replication role. For example, 
+you must grant the account the `rds_replication` role. For example, 
 ```sql
 grant rds_replication to <my_user>
 ```
 
 
-**The connector handles the publication creation automatically.**
+There are several options for determining how publications are created. In general, 
+**it is best to manually create publications for the tables that you want to capture**, before you set up the connector.
+
+
+#### Manual publication creation
+
+This is the recommended approach. Set the connectors `Publication Auto Create Mode` to `disabled`. 
+This way, the connector will not attempt to create a publication. A database administrator or 
+the user configured to perform replications create the publication before running the connector.
+
+You can create a publication manually using the following SQL command for a specific table:
+    
+```sql
+CREATE PUBLICATION my_publication FOR TABLE my_table;
+```
+Or create it for all tables in a schema:
+        
+```sql
+CREATE PUBLICATION my_publication FOR ALL TABLES;
+```
+
+Then set the `Publication Name` in the connector configuration to `my_publication`.
+
+#### Automatic publication creation
+
+**NOTE** that in order to create a PostgreSQL publication, it must run as a user that has the following privileges:
+
+- Replication privileges in the database to add the table to a publication.
+- `CREATE` privileges on the database to add publications.
+- `SELECT` privileges on the tables to copy the initial table data. Table owners automatically have `SELECT` permission for the table.
+
+
+Set the connectors `Publication Auto Create Mode` to one of the following modes:
+
+**`all_tables`**
+
+In this mode, [the user must be a super user](https://www.postgresql.org/docs/current/logical-replication-security.html?t#:~:text=To%20add%20all%20tables%20in%20schema%20to%20a%20publication%2C%20the%20user%20must%20be%20a%20superuser.) add all tables to the publication.
+
+If a publication does not exist, the connector creates a publication for all tables in the database
+  from which the connector captures changes. 
+
+
+
+The connector runs the following SQL command to create a publication: `CREATE PUBLICATION <publication_name> FOR ALL TABLES;`
+
+**`filtered`**
+
+To add tables to a publication, the user must be an owner of the table. But because the source table already exists, 
+you need a mechanism to share ownership with the original owner. To enable shared ownership, 
+you create a PostgreSQL replication group, and then add the existing table owner and the replication user to the group.
+
+**Procedure**
+
+- Create a replication group. 
+```sql
+  CREATE ROLE `<replication_group>`;
+```
+- Add the original owner of the table to the group.
+```sql
+  GRANT REPLICATION_GROUP TO <original_owner>;
+```
+- Add the Debezium replication user to the group.
+```sql
+GRANT REPLICATION_GROUP TO <replication_user>;
+```
+- Transfer ownership of the table to <replication_group>.
+```sql
+ALTER TABLE <table_name> OWNER TO REPLICATION_GROUP;
+```
+
+
+**The connector publication creation process**
 
 - If a publication exists, the connector uses it.
 - If no publication exists, the connector creates a new publication for tables that match the currently selected schemas
@@ -73,12 +144,12 @@ CREATE PUBLICATION <publication_name> FOR TABLE <tbl1, tbl2, tbl3>
 ALTER PUBLICATION <publication_name> SET TABLE <tbl1, tbl2, tbl3>
 ```
 
-#### Publication Names
+#####  Publication Names
 
 Note that each configuration of the connector creates a new publication with a unique name. The publication name contains 
 configuration_id and, alternatively, branch_id if it's a branch configuration. The publication name is generated as follows:
-- "kbc_publication_{config_id}_prod" for production configuration
-- "kbc_publication_{config_id}_dev_{branch_id}" for branch configuration.
+- "`kbc_publication_{config_id}_prod`" for production configuration
+- "`kbc_publication_{config_id}_dev_{branch_id}`" for branch configuration.
 
 ***NOTE:** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
 and it's not deleted automatically. It is recommended to clean up any unused dev publications manually or using a script.*
@@ -87,8 +158,11 @@ and it's not deleted automatically. It is recommended to clean up any unused dev
 
 Note that each configuration of the connector creates a new slot with a unique name. The slot name contains 
 configuration_id and alternatively branch id if it's a branch configuration. The slot name is generated as follows:
-- "`slot_kbc_publication_{config_id}_prod`" for production configuration
-- "`kbc_publication_{config_id}_dev_{branch_id}`" for branch configuration.
+- "`slot_kbc_{config_id}_prod`" for production configuration
+- "`slot_kbc_{config_id}_dev_{branch_id}`" for branch configuration.
+
+***NOTE:** be careful when running configurations in a Development branch. Once the branch is deleted, the created slot still exists 
+and it's not deleted automatically. This may cause growth of WAL log size. It is recommended to clean up any unused slots manually or using a script.*
 
 #### Performance considerations
 
@@ -108,7 +182,7 @@ In certain cases, it is possible for PostgreSQL disk space consumed by WAL files
 
 - There are many updates in a database being tracked, but only a tiny number of updates are related to the table(s) and schema(s) for which the connector is capturing changes. This situation can be easily solved with periodic heartbeat events. Set the heartbeat.interval.ms connector configuration property.
 
-***NOTE:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector. **You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.***
+* **NOTE:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector. **You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.***
 
 - The PostgreSQL instance contains multiple databases and one of them is a high-traffic database. Debezium captures changes in another database that is low-traffic in comparison to the other database. Debezium then cannot confirm the LSN as replication slots work per database, and Debezium is not invoked. As WAL is shared by all databases, the amount used tends to grow until an event is emitted by the database for which Debezium is capturing changes. To overcome this, it is necessary to:
   - Enable periodic heartbeat record generation with the `heartbeat > interval.ms` connector configuration property.
@@ -140,7 +214,7 @@ The connector will then perform an UPDATE query on that table in the selected in
 - Select the heartbeat table in the `Datasource > Tables to sync` configuration property to track the heartbeat table and make sure it is contained in the publication.
 
 
- ### Data Type Mapping
+### Data Type Mapping
 
 The MySQL datatypes are mapped to the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
 
@@ -155,8 +229,9 @@ Based on the JSON file you've selected, the `base_type` column in the table can 
 | BIGINT                   | INTEGER   |                                                                                               |
 | DECIMAL                  | NUMERIC   |                                                                                               |
 | NUMERIC                  | NUMERIC   |                                                                                               |
-| REAL                     | NUMERIC   |                                                                                               |
-| DOUBLE PRECISION         | STRING    |                                                                                               |
+| FLOAT                    | FLOAT     |                                                                                               |
+| REAL                     | FLOAT     |                                                                                               |
+| DOUBLE PRECISION         | FLOAT     |                                                                                               |
 | SMALLSERIAL              | INTEGER   |                                                                                               |
 | SERIAL                   | INTEGER   |                                                                                               |
 | BIGSERIAL                | INTEGER   |                                                                                               |
@@ -196,12 +271,13 @@ Based on the JSON file you've selected, the `base_type` column in the table can 
 
 Each result table will contain the following system columns:
 
-| Name | Base Type | Note |
-|---|---|---|
-| KBC__OPERATION | STRING | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE |
-| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled. |
-| KBC__DELETED | BOOLEAN | True when the event is a delete event (the record is deleted). |
-| KBC__BATCH_EVENT_ORDER | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
+| Name                    | Base Type | Note                                                                                                                                                                   |
+|-------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| KBC__OPERATION          | STRING    | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE                                                                                            |
+| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled.                                                                                 |
+| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted).                                                                                                         |
+| KBC__LSN                | INTEGER   | LSN of the transaction.                                                                                                                                                |
+| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
 
 ### Schema Drift
 
