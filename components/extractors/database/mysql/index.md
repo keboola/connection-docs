@@ -625,7 +625,7 @@ Original Debezium docs [here](https://debezium.io/documentation/reference/stable
 ### Sync Options
 
 {: .image-popup}
-![img_5.png](/components/extractors/database/mysql/img_5.png)
+![img_2.png](/components/extractors/database/mysql/img_2.png)
 
 - **Signaling Table**: The name of the signaling table in the source database. The signaling table is used by the
   connector to store various signal events and incremental snapshot watermarks. See more in
@@ -640,6 +640,11 @@ Original Debezium docs [here](https://debezium.io/documentation/reference/stable
     - `Base64-url-safe`: represents binary data as a base64-url-safe-encoded String.
     - `Hex`: represents binary data as a hex-encoded (base16) String.
     - `Bytes`: represents binary data as a byte array.
+- **Snapshot Locking Mode**: [Specifies](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-snapshot-locking-mode) 
+how long the connector holds the MySQL global read lock during a snapshot:
+  - **`minimal`**: Locks only during initial schema read, then releases while using a `REPEATABLE READ` transaction for consistency.
+  - **`extended`**: Locks for the entire snapshot to avoid conflicts with concurrent operations.
+  - **`none`**: No table locks, safe if no schema changes occur. MyISAM tables still lock by default.
 
 ### Destination
 
