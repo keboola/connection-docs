@@ -47,6 +47,99 @@ update, and delete database content and that were committed to a PostgreSQL data
 ***NOTE:** The component abstracts the underlying Debezium connector configuration and provides a simplified interface for
 the user. This means that only a subset of the Debezium connector capabilities are exposed to the user.*
 
+
+### Snapshots
+
+When the connector is first started, it performs an initial *consistent snapshot* of your database.
+This snapshot enables the connector to establish a baseline for the current state of the database.
+
+The connector completes a series of tasks when it performs the snapshot.
+The exact steps vary with the snapshot mode and the table-locking policy in effect for the database.
+
+You can select from various snapshot modes in the `Sync Options` > `Replication Mode` configuration property.
+
+For more technical details on how the Snapshots work, see the
+[official documentation](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-snapshots) of Debezium.
+
+### Schema Drift
+
+The connector is capable of seamlessly handling schema changes in the source database, e.g., `ADD`, `DROP` columns.
+
+The schema changes are handled in the following manner:
+
+- **ADD column**
+    - Such a column is added to the destination table. Historic values will be empty (default not reflected).
+- **DROP column**
+    - The column will remain in the destination table.
+    - The column NOT NULL constraint will be overridden and removed if present.
+    - Its values will be NULL/EMPTY since the deletion.
+
+### System Columns
+
+Each result table will contain the following system columns:
+
+| Name                    | Base Type | Note                                                                                                                                                                   |
+|-------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| KBC__OPERATION          | STRING    | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE                                                                                            |
+| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled.                                                                                 |
+| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted).                                                                                                         |
+| KBC__LSN                | INTEGER   | LSN of the transaction.                                                                                                                                                |
+| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
+
+
+### Data Type Mapping
+
+The MySQL datatypes are mapped to the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+
+Based on the JSON file you've selected, the `base_type` column in the table can be updated as follows:
+
+| source_type              | base_type | note                                                            |
+|--------------------------|-----------|-----------------------------------------------------------------|
+| INTEGER                  | INTEGER   |                                                                 |
+| SMALLINT                 | INTEGER   |                                                                 |
+| INTEGER                  | INTEGER   |                                                                 |
+| INTEGER                  | INTEGER   |                                                                 |
+| BIGINT                   | INTEGER   |                                                                 |
+| DECIMAL                  | NUMERIC   |                                                                 |
+| NUMERIC                  | NUMERIC   |                                                                 |
+| FLOAT                    | FLOAT     |                                                                 |
+| REAL                     | FLOAT     |                                                                 |
+| DOUBLE PRECISION         | FLOAT     |                                                                 |
+| SMALLSERIAL              | INTEGER   |                                                                 |
+| SERIAL                   | INTEGER   |                                                                 |
+| BIGSERIAL                | INTEGER   |                                                                 |
+| MONEY                    | NUMERIC   |                                                                 |
+| CHARACTER                | STRING    |                                                                 |
+| CHAR                     | STRING    |                                                                 |
+| CHARACTER VARYING        | STRING    |                                                                 |
+| VARCHAR                  | STRING    |                                                                 |
+| TEXT                     | STRING    |                                                                 |
+| BYTEA                    | STRING    |                                                                 |
+| TIMESTAMP                | TIMESTAMP |                                                                 |
+| TIMESTAMP WITH TIME ZONE | TIMESTAMP |                                                                 |
+| DATE                     | DATE      |                                                                 |
+| TIME                     | STRING    | `HH:MM:SS` format                                               |
+| TIME WITH TIME ZONE      | STRING    | `HH:MM:SS+TZ` format                                            |
+| INTERVAL                 | STRING    |                                                                 |
+| BOOLEAN                  | BOOLEAN   |                                                                 |
+| POINT                    | STRING    |                                                                 |
+| CIDR                     | STRING    |                                                                 |
+| INET                     | STRING    |                                                                 |
+| MACADDR                  | STRING    |                                                                 |
+| MACADDR8                 | STRING    |                                                                 |
+| BIT                      | STRING    |                                                                 |
+| BIT VARYING              | STRING    |                                                                 |
+| UUID                     | STRING    |                                                                 |
+| XML                      | STRING    |                                                                 |
+| JSON                     | STRING    |                                                                 |
+| JSONB                    | STRING    |                                                                 |
+| INTEGER[]                | STRING    |                                                                 |
+| INT4RANGE                | STRING    |                                                                 |
+| LTREE                    | STRING    | Contains the string representation of a PostgreSQL LTREE value. |
+| CITEXT                   | STRING    |                                                                 |
+
+**Other types are not supported, and such columns will be skipped from syncing.**
+
 ### Publication Creation
 
 The connector requires a user with the `rds_replication` role.  
@@ -213,84 +306,6 @@ The connector will then perform an UPDATE query on that table in the selected in
   - It is recommended to use the default UPDATE query: `UPDATE kbc.heartbeat SET last_heartbeat = NOW()`
 - Select the heartbeat table in the `Datasource > Tables to sync` configuration property to track the heartbeat table and make sure it is contained in the publication.
 
-
-### Data Type Mapping
-
-The MySQL datatypes are mapped to the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
-
-Based on the JSON file you've selected, the `base_type` column in the table can be updated as follows:
-
-| source_type              | base_type | note                                                                                          |
-|--------------------------|-----------|-----------------------------------------------------------------------------------------------|
-| INTEGER                  | INTEGER   |                                                                                               |
-| SMALLINT                 | INTEGER   |                                                                                               |
-| INTEGER                  | INTEGER   |                                                                                               |
-| INTEGER                  | INTEGER   |                                                                                               |
-| BIGINT                   | INTEGER   |                                                                                               |
-| DECIMAL                  | NUMERIC   |                                                                                               |
-| NUMERIC                  | NUMERIC   |                                                                                               |
-| FLOAT                    | FLOAT     |                                                                                               |
-| REAL                     | FLOAT     |                                                                                               |
-| DOUBLE PRECISION         | FLOAT     |                                                                                               |
-| SMALLSERIAL              | INTEGER   |                                                                                               |
-| SERIAL                   | INTEGER   |                                                                                               |
-| BIGSERIAL                | INTEGER   |                                                                                               |
-| MONEY                    | NUMERIC   |                                                                                               |
-| CHARACTER                | STRING    |                                                                                               |
-| CHAR                     | STRING    |                                                                                               |
-| CHARACTER VARYING        | STRING    |                                                                                               |
-| VARCHAR                  | STRING    |                                                                                               |
-| TEXT                     | STRING    |                                                                                               |
-| BYTEA                    | STRING    |                                                                                               |
-| TIMESTAMP                | TIMESTAMP |                                                                                               |
-| TIMESTAMP WITH TIME ZONE | TIMESTAMP |                                                                                               |
-| DATE                     | DATE      |                                                                                               |
-| TIME                     | TIMESTAMP | A string representation of a timestamp with timezone information, where the timezone is GMT.  |
-| TIME WITH TIME ZONE      | TIMESTAMP | A string representation of a time value with timezone information, where the timezone is GMT. |
-| INTERVAL                 | STRING    |                                                                                               |
-| BOOLEAN                  | BOOLEAN   |                                                                                               |
-| POINT                    | STRING    |                                                                                               |
-| CIDR                     | STRING    |                                                                                               |
-| INET                     | STRING    |                                                                                               |
-| MACADDR                  | STRING    |                                                                                               |
-| MACADDR8                 | STRING    |                                                                                               |
-| BIT                      | STRING    |                                                                                               |
-| BIT VARYING              | STRING    |                                                                                               |
-| UUID                     | STRING    |                                                                                               |
-| XML                      | STRING    |                                                                                               |
-| JSON                     | STRING    |                                                                                               |
-| JSONB                    | STRING    |                                                                                               |
-| INTEGER[]                | STRING    |                                                                                               |
-| INT4RANGE                | STRING    |                                                                                               |
-| LTREE                    | STRING    | Contains the string representation of a PostgreSQL LTREE value.                               |
-| CITEXT                   | STRING    |                                                                                               |
-
-**Other types are not supported, and such columns will be skipped from syncing.**
-
-### System Columns
-
-Each result table will contain the following system columns:
-
-| Name                    | Base Type | Note                                                                                                                                                                   |
-|-------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| KBC__OPERATION          | STRING    | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE                                                                                            |
-| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled.                                                                                 |
-| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted).                                                                                                         |
-| KBC__LSN                | INTEGER   | LSN of the transaction.                                                                                                                                                |
-| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
-
-### Schema Drift
-
-The connector is capable of seamlessly handling schema changes in the source database, e.g., `ADD`, `DROP` columns.
-
-The schema changes are handled in the following manner:
-
-- **ADD column**
-    - Such a column is added to the destination table. Historic values will be empty (default not reflected).
-- **DROP column**
-    - The column will remain in the destination table.
-    - The column NOT NULL constraint will be overridden and removed if present.
-    - Its values will be NULL/EMPTY since the deletion.
 
 ## Prerequisites
 
@@ -557,7 +572,7 @@ To match the name of a column, connector applies the regular expression that you
 expression_. That is, the expression is used to match the entire name string of the column; it does not match substrings
 that might be present in a column name.
 
-![img_5.png](/components/extractors/database/postgresql/img_5.png)
+![img_5.png](/components/extractors/database/column_masks.png)
 
 There are two types of masks available:
 
@@ -584,7 +599,7 @@ Original Debezium docs [here](https://debezium.io/documentation/reference/stable
 ### Sync Options
 
 {: .image-popup}
-![img_6.png](/components/extractors/database/postgresql/img_6.png)
+![img_6.png](/components/extractors/database/postgresql/sync_options.png)
 
 - **Signaling Table**: The name of the signaling table in the source database. The connector uses the signaling table to store various signal events and incremental snapshot watermarks. See more in
   the [Signaling Table](#signaling-table) section.
