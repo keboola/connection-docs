@@ -548,6 +548,37 @@ substrings that might be present in a column name.
 - **Column List**: List of the fully-qualified column names or regular expressions that match the columns to be included
   or excluded (based on the selected filter type).
 
+### Column masks
+
+Column masks are used to mask sensitive data in the extraction.
+(comma separated list) of fully-qualified names for columns are of the form `schemaName.tableName.columnName`.
+
+To match the name of a column, connector applies the regular expression that you specify as an _anchored regular
+expression_. That is, the expression is used to match the entire name string of the column; it does not match substrings
+that might be present in a column name.
+
+There are two types of masks available:
+
+#### Length Mask
+
+The connector will mask the length of the string columns in the output data. 
+The string will be replaced with the specified amount of  `*` characters.
+
+
+Original Debezium docs [here](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars)
+
+#### Hash Mask
+
+The connector will hash the string columns in the output data using selected algorithm and salt.
+
+You may choose from various hashing algorithms, such as `SHA-256`, `SHA-512`, `MD5`, and `SHA-1`.
+Based on the hash function that is used, referential integrity is maintained, while column values are replaced with pseudonyms.
+Supported hash functions are described in the [MessageDigest section](https://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#MessageDigest) of the Java Cryptography Architecture Standard Algorithm Name Documentation.
+
+**NOTE** Hashing strategy version 2 is used to ensure fidelity across job runs and configurations.
+
+Original Debezium docs [here](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash)
+
 ### Sync Options
 
 {: .image-popup}
