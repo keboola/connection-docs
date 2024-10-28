@@ -303,7 +303,8 @@ Currently, lower versions are not supported, but it is theoretically possible (p
 
 ### Signaling Table
 
-The connector needs access to a signaling table in the source database. The signaling table is used by to connector to store various signal events and incremental snapshot watermarks.
+When not run in `read_only` mode, the connector needs access to a signaling table in the source database. 
+The signaling table is used by to connector to store various signal events and incremental snapshot watermarks.
 
 #### Creating a signaling data collection
 
@@ -513,6 +514,7 @@ ALTER TABLE __<table_name>__ OWNER TO REPLICATION_GROUP;
 - **Port**: The port number of the MySQL server.
 - **User**: The username to be used to connect to the MySQL server.
 - **Password**: The password to be used to connect to the MySQL server.
+- **Read-only mode**: When enabled, the connector doesn't require write access to the source database for signalling.
 
 #### SSH tunnel
 
@@ -565,10 +567,6 @@ substrings that might be present in a column name.
     - `Bytes`: represents binary data as a byte array.
 - **Snapshot Fetch Size**: During a snapshot, the connector reads table content in batches of rows. This property
   specifies the maximum number of rows in a batch. The default value is `10240`.
-- **Snapshot parallelism**: Specifies the number of threads that the connector uses when performing an initial snapshot.
-  To enable parallel initial snapshots, set the property to a value greater than 1. In a parallel initial snapshot, the
-  connector processes multiple tables concurrently. Note that setting up high values may lead to OOM errors. Change the
-  default value at your own risk.
 
 #### Heartbeat
 
