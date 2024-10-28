@@ -557,6 +557,8 @@ To match the name of a column, connector applies the regular expression that you
 expression_. That is, the expression is used to match the entire name string of the column; it does not match substrings
 that might be present in a column name.
 
+![img_5.png](/components/extractors/database/postgresql/img_5.png)
+
 There are two types of masks available:
 
 #### Length Mask
@@ -582,7 +584,7 @@ Original Debezium docs [here](https://debezium.io/documentation/reference/stable
 ### Sync Options
 
 {: .image-popup}
-![img_2.png](/components/extractors/database/postgresql/img_2.png)
+![img_6.png](/components/extractors/database/postgresql/img_6.png)
 
 - **Signaling Table**: The name of the signaling table in the source database. The connector uses the signaling table to store various signal events and incremental snapshot watermarks. See more in
   the [Signaling Table](#signaling-table) section.
@@ -598,6 +600,7 @@ Original Debezium docs [here](https://debezium.io/documentation/reference/stable
     - `Bytes`: represents binary data as a byte array.
 - **Snapshot Fetch Size**: During a snapshot, the connector reads table content in batches of rows. This property
   specifies the maximum number of rows in a batch. The default value is `10240`.
+- **Snapshot Statement Override** - Define a custom SQL SELECT statement that will be used to fetch the initial snapshot.
 
 #### Heartbeat
 
