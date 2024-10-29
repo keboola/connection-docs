@@ -118,6 +118,13 @@ Each phase (or step) of the flow runs successfully only if all jobs within that 
 If a phase fails, no subsequent phases will continue. To allow the following tasks to run despite errors, you can enable the **Continue on Failure** flag for each task (off by default).
 This is particularly helpful when working with APIs that are inconsistent or prone to frequent errors.
 
+## Task Parameters
+You can also set Task Parameters, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
+To do this, select the task and click **Set Advanced Parameters**. When finished, click **Set**.
+
+{: .image-popup}
+![Task Parameters](/flows/task-parameters.png)
+
 Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
 
 ## Check Run History
