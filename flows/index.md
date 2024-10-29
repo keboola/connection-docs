@@ -9,13 +9,13 @@ permalink: /flows/
 *If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
 For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
 
-Flows integrate all of your project's segments (extractors, writers, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
+Flows integrate all of your project's segments (data connectors, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
 
 First, you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then, you decide in **what order** you want them to run. 
 And finally, you will determine **when** you want the entire flow to be executed and **how often**. Notifications are available to help you monitor the entire process. 
 
-## What is the Flow Builder?
+## What Is the Flow Builder?
 Using the **Flow Builder** feature, you can create data flows by dragging and dropping the components together on a single screen.
 Even scheduling and automating your data pipelines takes just a few button clicks. 
 
@@ -53,7 +53,7 @@ Click **Select first step** and start selecting the components that will bring i
 
 Use the **plus icon** to add other steps. 
 
-Typically, the flow starts with extractors, or, if all the tables you need are already in the project, it starts with transformations. To load your transformed data into your selected data destination, add one or more writers.
+Typically, the flow starts with data source connectors, or, if all the tables you need are already in the project, it starts with transformations. To load your transformed data into your selected data destination, add one or more data destination connectors.
 
 Continue adding other ready-made components and organize them in a **logical flow** using the drag-and-drop functionality. 
 
@@ -65,15 +65,15 @@ Click **Save**.
 
 ### Execute Tasks in Parallel
 You can group multiple tasks within one step, a phase. These tasks then run independently in parallel, speeding up the execution. 
-Steps execute sequentially, while tasks within a single step run in parallel. If you have multiple extractors, you can include them all in a single step, allowing them to run simultaneously. 
+Steps execute sequentially, while tasks within a single step run in parallel. If you have multiple data source connectors, you can include them all in a single step, allowing them to run simultaneously. 
 
-The same applies to data writers. Also, transformations independent of the connectors can be grouped within the same step. Note that this does not reduce costs, as each job consume credits independently.
+The same applies to data destination connectors. Also, transformations independent of the connectors can be grouped within the same step. Note that this does not reduce costs, as each job consume credits independently.
 
 ***Warning:** If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. Limiting the number of concurrent component jobs 
 to 10 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
 extent possible based on available resources.*
 
-You can also set up parallelization **within a component** (configuration), directly in the component's UI for [row-based components](/components/#configuration-rows) like database extractors using the same credentials to run multiple tables concurrently.
+You can also set up parallelization **within a component** (configuration), directly in the component's UI for [row-based components](/components/#configuration-rows) like database source connectors using the same credentials to run multiple tables concurrently.
 
 {% include tip.html title="Execute Individual Configurations" content="
 Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater 
@@ -137,5 +137,5 @@ Once everything is configured, the flow will automatically run at the scheduled 
 In the tab **All Runs**, you can check how your flow is running with a detailed breakdown of each task. 
 
 In **Jobs** you’ll see how the flow runs and triggers each individual component sequentially. The status updates in real-time. 
-Once the last of your extractors finishes, the transformations will be triggered. After they complete, the writer(s) will run, and the flow will be finalized. 
+Once the last of your data source connectors finishes, the transformations will be triggered. After they complete, the data destination connector(s) will run, and the flow will be finalized. 
 In the end, you’ll see either a **Success** message or an error notification if something went wrong.
