@@ -120,7 +120,7 @@ This is particularly helpful when working with APIs that are inconsistent or pro
 
 ## Task Parameters
 You can also set Task Parameters, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
-To do this, select the task and click **Set Advanced Parameters**. When finished, click **Set**.
+To do this, select the task and click **Set advanced parameters**. When finished, click **Set**.
 
 {: .image-popup}
 ![Task Parameters](/flows/task-parameters.png)
