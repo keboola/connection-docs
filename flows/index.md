@@ -34,7 +34,9 @@ Let us show you how to organize individual tasks into steps, set up notification
 - [Step 3: Execute tasks in parallel](#execute-tasks-in-parallel)
 - [Step 4: Schedule and automate your flow](#schedule-and-automate)
 - [Step 5: Set up notifications](#set-up-notifications)
-- [Step 6: Check how your flow is running](#check-run-history)
+- [Step 6: Continue on failure](#continue-on-failure)
+- [Step 7: Set up task parameters](#set-up-task-parameters)
+- [Step 8: Check how your flow is running](#check-run-history)
 
 ## Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
@@ -118,7 +120,7 @@ Each phase (or step) of the flow runs successfully only if all jobs within that 
 If a phase fails, no subsequent phases will continue. To allow the following tasks to run despite errors, you can enable the **Continue on Failure** flag for each task (off by default).
 This is particularly helpful when working with APIs that are inconsistent or prone to frequent errors.
 
-## Task Parameters
+## Set Up Task Parameters
 You can also set Task Parameters, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
 To do this, select the task and click **Set advanced parameters**. When finished, click **Set**.
 
