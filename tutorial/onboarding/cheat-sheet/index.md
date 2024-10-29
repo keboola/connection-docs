@@ -40,7 +40,7 @@ to speed up execution rather than save costs, as each job uses credits independe
 **Parallelization opportunities:**
 
 1. **At the Flow Level:** Organize tasks into phases within a flow for simultaneous execution.
-2. **Among Components:** Set up parallelization for [row-based components](/components/#configuration-rows) like database data source connectors using the same credentials to run multiple tables concurrently. This setup can be done directly in the component's UI.
+2. **Among Component (Configuration) Rows:** Set up parallelization for [row-based components](/components/#configuration-rows) like database data source connectors using the same credentials to run multiple tables concurrently. This setup can be done directly in the component's UI.
 
 {% include tip.html title="Execute Individual Configurations" content="
 Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater 
