@@ -52,7 +52,7 @@ This will open up the **flow builder** view, where you can create your data flow
 Click **Select First Step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
 
 {: .image-popup}
-![Select First Step](/tutorial/automate/automate3.png)
+![Select First Step](/flows/build-flow.png)
 
 Use the plus icon to add other steps. 
 
@@ -98,7 +98,7 @@ You can select predefined intervals or set your own. Another option is to use tr
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
 
 {: .image-popup}
-![Set Schedule](/tutorial/automate/automate13.png)
+![Set Schedule](/flows/set-schedule.png)
 
 ## Set Up Notifications
 Once your pipeline or workflow is complete, you may not need to manage it actively every day. Stay on top of your flow's performance by setting up notifications for errors or long run times. From the drop-down 
@@ -113,7 +113,7 @@ You can set up an email notification to the following situations:
 - The job process takes longer than usual. 
 
 {: .image-popup}
-![Set Up Notifications](/tutorial/automate/automate15.png)
+![Set Up Notifications](/flows/notifications.png)
 
 ## Continue on Failure
 Each phase (or step) of the flow runs successfully only if all jobs within that phase complete successfully. 
