@@ -77,11 +77,13 @@ visualization platforms, custom internal reporting tools for business teams, and
 for output data delivery from Keboola to the systems and applications where the data gets used or consumed ([relational databases](/components/writers/database/), BI, [reporting and analytics](/components/writers/bi-tools/) platforms, tools, or applications).
 
 ### Full Automation
-The [Flows](https://help.keboola.com/orchestrator/) component, formerly known as Orchestrator, helps you to fully automate end-to-end processes. 
+The [Flows](/flows/) feature helps you to fully automate end-to-end processes. 
 You can specify the order in which individual connectors, transformations, and other components will be run and set up parallelization. By adding
-a **schedule** or trigger, you can [automate](/orchestrator/) processes at specified intervals or times of the day.
+a **schedule** or trigger, you can automate processes at specified intervals or times of the day.
 
 The platform automatically scales resources to facilitate the automated processes.
+
+***Note:** There's an older version of Flows, called the Orchestrator, which is used in legacy components only.*
 
 ### Development Branches
 The [Development Branches](/components/branches/) feature enables you to modify component settings without affecting active configurations or 
