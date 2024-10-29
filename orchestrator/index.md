@@ -6,7 +6,7 @@ permalink: /orchestrator/
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> The Orchestrator feature is available in legacy components only. In newer components, this feature has been replaced by Flows.
+    <strong>Important:</strong> The Orchestrator feature is available in legacy components only. In newer components, this feature has been replaced by
 <strong>Flows</strong>.
 </div>
 
