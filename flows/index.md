@@ -66,7 +66,7 @@ Typically, the flow starts with extractors, or, if all the tables you need are a
 Once you’ve built your flow end-to-end, it may look something like this:
 
 {: .image-popup}
-![Add SQL Transformation](/tutorial/automate/automate10.png)
+![Add Snowflake Transformation](/flows/add-transformation.png)
    
 Click **Run Flow** to start the data pipeline.
 
