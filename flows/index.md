@@ -94,9 +94,9 @@ control.
 - To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
 
-**Save** the changes.
-
 *****
+
+**Save** the changes.
 
 Once you’ve built your flow end-to-end, it may look something like this:
 
