@@ -3,7 +3,12 @@ title: Orchestrator
 permalink: /orchestrator/
 ---
 
-***Note:** This page will be updated soon. *
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> The Orchestrator feature is available in legacy components only. In newer components, this feature has been replaced by Flows.
+<strong>Flows</strong>.
+</div>
 
 Bringing systems for data loading, manipulation and writing together is what makes
 [Keboola](/overview/) so powerful and easy to use. With [source connectors](/components/extractors/), you can fetch

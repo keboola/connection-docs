@@ -574,6 +574,9 @@ items:
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 
+  - url: /flows/
+    title: Flows
+
   - url: /orchestrator/
     title: Orchestrations
     items:
