@@ -9,7 +9,7 @@ permalink: /flows/
 *If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
 For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
 
-Flows integrate all of your project's segments (extractors, writer, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
+Flows integrate all of your project's segments (extractors, writers, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
 
 First, you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then, you decide in **what order** you want them to run. 
@@ -54,10 +54,9 @@ Click **Select First Step** and start selecting the components that will bring i
 
 Use the plus icon to add other steps. 
 
-Apart from the extractor(s), you'll want to add selected transformations and writers that will load your transformed data into your selected data destination.
-Continue adding other ready-made components and organize them in a logical flow,  or select those you want to run in parallel using drag-and-drop function. 
+Typically, the flow starts with extractors, or, if all the tables you need are already in the project, it starts with transformations. To load your transformed data into your selected data destination, add one or more writers.
 
-- Organize the components into a logical flow using the drag-and-drop functionality.
+- Continue adding other ready-made components and organize them in a logical flow using the drag-and-drop functionality. 
 - Configure each component by providing the credentials and instructions for what or where to extract or write or for what code to execute in a transformation.
 - Remember to adjust the input mapping of your transformation(s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
 - Save the changes.
@@ -79,18 +78,14 @@ The same applies to data writers. Also, transformations independent of the conne
 to 10 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
 extent possible based on available resources.*
 
-You can also set up parallelization **among components**, directly in the component's UI for [row-based components](/components/#configuration-rows) like database extractors using the same credentials to run multiple tables concurrently.
+You can also set up parallelization **within a component** (configuration), directly in the component's UI for [row-based components](/components/#configuration-rows) like database extractors using the same credentials to run multiple tables concurrently.
 
 {% include tip.html title="Execute Individual Configurations" content="
 Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater 
 control.
-
-Use the menu next to each configuration row in the UI to execute specific configurations as needed, optimizing time and resources.
 " %}
 
-### Parallel limits
-Component jobs don't have a strict parallel limit, but [Storage jobs](/storage/jobs/) do. They are typically capped at 10 parallel jobs but the Keboola Support team can help you adjust this. 
-In environments with many users, component jobs may queue for Storage job availability, affecting runtime.
+[Storage jobs](/storage/jobs/) have a parallel limit. They are typically capped at 10 parallel jobs but the Keboola Support team can help you adjust this. 
 
 ## Schedule and Automate
 Within the Flow Builder, click on **Set Schedule** and select when you want the flow to run.
@@ -111,12 +106,17 @@ the whole team informed and responsive to any issues.
 You can set up an email notification to the following situations: 
 
 - The flow finishes successfully.
-- The flow finishes with warnings; the **Continue on Failure** flag determines whether a task should keep running even if there’s an error. This option is off by default. It is particularly helpful when dealing with APIs that are inconsistent or prone to day-to-day errors. 
+- The flow finishes with warnings.  
 - The flow fails with an error message.
 - The job process takes longer than usual. 
 
 {: .image-popup}
 ![Set Up Notifications](/tutorial/automate/automate15.png)
+
+## Continue on Failure
+Each phase (or step) of the flow runs successfully only if all jobs within that phase complete successfully. 
+If a phase fails, no subsequent phases will continue. To allow the following tasks to run despite errors, you can enable the **Continue on Failure** flag for each task (off by default).
+This is particularly helpful when working with APIs that are inconsistent or prone to frequent errors.
 
 Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
 
