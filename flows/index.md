@@ -35,8 +35,7 @@ Let us show you how to organize individual tasks into steps, set up notification
 - [Step 4: Schedule and automate your flow](#schedule-and-automate)
 - [Step 5: Set up notifications](#set-up-notifications)
 - [Step 6: Continue on failure](#continue-on-failure)
-- [Step 7: Set up task parameters](#set-up-task-parameters)
-- [Step 8: Check how your flow is running](#check-run-history)
+- [Step 7: Check how your flow is running](#check-run-history)
 
 ## Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
@@ -61,6 +60,12 @@ Typically, the flow starts with extractors, or, if all the tables you need are a
 - Continue adding other ready-made components and organize them in a logical flow using the drag-and-drop functionality. 
 - Configure each component by providing the credentials and instructions for what or where to extract or write or for what code to execute in a transformation.
 - Remember to adjust the input mapping of your transformation(s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
+- You can also set **Task Parameters**, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
+To do this, select the task and click **Set advanced parameters**. When finished, click **Set**.
+
+{: .image-popup}
+![Task Parameters](/flows/task-parameters.png)
+
 - Save the changes.
 
 Once you’ve built your flow end-to-end, it may look something like this:
@@ -119,13 +124,6 @@ You can set up an email notification to the following situations:
 Each phase (or step) of the flow runs successfully only if all jobs within that phase complete successfully. 
 If a phase fails, no subsequent phases will continue. To allow the following tasks to run despite errors, you can enable the **Continue on Failure** flag for each task (off by default).
 This is particularly helpful when working with APIs that are inconsistent or prone to frequent errors.
-
-## Set Up Task Parameters
-You can also set Task Parameters, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
-To do this, select the task and click **Set advanced parameters**. When finished, click **Set**.
-
-{: .image-popup}
-![Task Parameters](/flows/task-parameters.png)
 
 Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
 
