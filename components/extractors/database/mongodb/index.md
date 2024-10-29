@@ -55,6 +55,19 @@ A strict format means standard valid JSON must be used, and you cannot use Mongo
 Thus using objects such as *ObjectId*, *Date* or *NumberLong* is not allowed until you specify them
 in the strict format. Read more on the [strict format](https://docs.mongodb.com/v3.2/reference/mongodb-extended-json/).
 
+## Incremental Fetching
+
+To improve data extraction performance and reduce data transfer volume, you can use incremental fetching. 
+Incremental fetching ensures that only new or modified records are retrieved from MongoDB instead of re-fetching the entire dataset.
+
+### How It Works
+
+1. **Specify a Cursor Field**: Select a field in your MongoDB collection to act as the "cursor" for incremental fetching (such as a timestamp field `updated_at` or an auto-generated MongoDB `_id` containing a time component).
+
+2. **Configure and Enable Incremental Fetching**: In your MongoDB extractor configuration, set the `Property` field in the Incremental Fetching block, to specify the cursor field. The extractor will then limit the query on each run, fetching only records where the cursor field value is different than the last recorded value.
+
+3. **State Management for Continuity**: After each execution, the extractor saves the highest cursor value to maintain state. This allows future extractions to continue from the previous endpoint, ensuring only new or updated records are fetched.
+
 ## Configure Mapping
 By defining mapping, you specify the structure and content of your output tables, 
 their columns and relations between them.
