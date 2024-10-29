@@ -29,12 +29,11 @@ The flow builder enables you to do the following:
 
 Let us show you how to organize individual tasks into steps, set up notifications, and schedule the execution of your flow:
 
-- [Step 1: Access the Flow Builder](#access-the-flow-builder)
-- [Step 2: Build the flow](#build-the-flow)
-- [Step 3: Execute tasks in parallel](#execute-tasks-in-parallel)
-- [Step 4: Schedule and automate your flow](#schedule-and-automate)
-- [Step 5: Set up notifications](#set-up-notifications)
-- [Step 6: Check how your flow is running](#check-run-history)
+- [Access the Flow Builder](#access-the-flow-builder)
+- [Build the flow](#build-the-flow)
+- [Schedule and automate your flow](#schedule-and-automate)
+- [Set up notifications](#set-up-notifications)
+- [Check how your flow is running](#check-run-history)
 
 ## Access the Flow Builder
 Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
@@ -47,12 +46,12 @@ Name your new flow and add an easy to understand description. Then click **Creat
 This will open up the **flow builder** view, where you can create your data flow.
 
 ## Build the Flow
-Click **Select First Step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
+Click **Select first step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
 
 {: .image-popup}
 ![Select First Step](/flows/build-flow.png)
 
-Use the plus icon to add other steps. 
+Use the **plus icon** to add other steps. 
 
 Typically, the flow starts with extractors, or, if all the tables you need are already in the project, it starts with transformations. To load your transformed data into your selected data destination, add one or more writers.
 
@@ -62,26 +61,9 @@ Then configure each component by providing the **credentials** and **instruction
 
 Remember to adjust the **input mapping** of your transformation(s) to use the tables extracted from your selected data sources if necessary. Select the step and click **Edit Configuration**.
 
-You can also set **Task Parameters**, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
-To do this, select the task and click **Set advanced parameters**. When finished, click **Set**.
+Click **Save**.
 
-{: .image-popup}
-![Task Parameters](/flows/task-parameters.png)
-
-If you need to temporarily skip something, check the **Component enabled** flag. The task will then be excluded from the flow.
-
-Finally, if you are working with APIs that are inconsistent or prone to frequent errors, consider enabling the **Continue on Failure** flag. Each phase (or step) of the flow will only run successfully if all jobs within that phase complete successfully. If a phase fails, no subsequent phases will continue. However, enabling this flag for each task (off by default) allows the flow to continue to subsequent phases, ending with a warning status if errors are encountered.
-
-**Save** the changes.
-
-Once you’ve built your flow end-to-end, it may look something like this:
-
-{: .image-popup}
-![Add Snowflake Transformation](/flows/add-transformation.png)
-   
-Click **Run Flow** to start the data pipeline.
-
-## Execute Tasks in Parallel
+### Execute Tasks in Parallel
 You can group multiple tasks within one step, a phase. These tasks then run independently in parallel, speeding up the execution. 
 Steps execute sequentially, while tasks within a single step run in parallel. If you have multiple extractors, you can include them all in a single step, allowing them to run simultaneously. 
 
@@ -99,6 +81,29 @@ control.
 " %}
 
 [Storage jobs](/storage/jobs/) have a parallel limit. They are typically capped at 10 parallel jobs but the Keboola Support team can help you adjust this. 
+
+### Control Task Execution
+
+{: .image-popup}
+![Task Parameters](/flows/task-parameters.png)
+
+- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
+Select the task and click **Set advanced parameters**. When finished, click **Set**.
+
+- If you need to temporarily skip something, check the **Component enabled** flag. The task will then be excluded from the flow.
+
+- Finally, if you are working with APIs that are inconsistent or prone to frequent errors, consider enabling the **Continue on Failure** flag. Each phase (or step) of the flow will only run successfully if all jobs within that phase complete successfully. If a phase fails, no subsequent phases will continue. However, enabling this flag for each task (off by default) allows the flow to continue to subsequent phases, ending with a warning status if errors are encountered.
+
+**Save** the changes.
+
+*****
+
+Once you’ve built your flow end-to-end, it may look something like this:
+
+{: .image-popup}
+![Add Snowflake Transformation](/flows/add-transformation.png)
+   
+Click **Run Flow** to start the data pipeline.
 
 ## Schedule and Automate
 Within the Flow Builder, click on **Set Schedule** and select when you want the flow to run.
