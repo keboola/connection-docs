@@ -87,12 +87,12 @@ control.
 {: .image-popup}
 ![Task Parameters](/flows/task-parameters.png)
 
-- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
-Select the task and click **Set advanced parameters**. When finished, click **Set**.
-
-- If you need to temporarily skip something, check the **Component enabled** flag. The task will then be excluded from the flow.
+- If you need to temporarily skip something, check the **Component Enabled** flag. The task will then be excluded from the flow.
 
 - Finally, if you are working with APIs that are inconsistent or prone to frequent errors, consider enabling the **Continue on Failure** flag. Each phase (or step) of the flow will only run successfully if all jobs within that phase complete successfully. If a phase fails, no subsequent phases will continue. However, enabling this flag for each task (off by default) allows the flow to continue to subsequent phases, ending with a warning status if errors are encountered.
+
+- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**, a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job). 
+Select the task and click **Set advanced parameters**. When finished, click **Set**.
 
 **Save** the changes.
 
