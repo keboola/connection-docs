@@ -6,127 +6,110 @@ permalink: /components/extractors/database/mysql/
 * TOC
 {:toc}
 
-[MySQL](https://www.mysql.com/) is an open source database that enables delivering high-performance and scalable web-based and embedded database applications.
+[MySQL](https://www.mysql.com/) is an open source database that enables the delivery of high-performance, scalable web-based, and embedded database applications.
 
-Our connectors support the most recent versions of MySQL / AWS Aurora. You may choose different strategies to synchronize your data:
+Our connectors support the latest versions of MySQL and AWS Aurora. You can choose among different strategies to synchronize your data:
 
 - [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
 - [Log-based CDC](/components/extractors/database/mysql#log-based-binlog-cdc)
 
-
 ## Query-Based Connector
 
-This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database in order to sync data. 
-It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
+This [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) performs queries against the source database to sync data. 
+It is a straightforward approach suitable for most use cases, allowing for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
-have an [advanced mode](/components/extractors/database/sqldb/). 
+All connectors are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and 
+offer an [advanced mode](/components/extractors/database/sqldb/). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+Basic configuration is covered in the [Tutorial - Loading Data from Database](/tutorial/load/database/). 
 
 ## MySQL Log-Based CDC
 
-[This connector](https://components.keboola.com/components/kds-team.ex-mysql-cdc) works with MySQL databases hosted on AWS RDS, Aurora MySQL, and standard non-hosted MySQL. It also supports MariaDB databases.
+[This connector](https://components.keboola.com/components/kds-team.ex-mysql-cdc) is compatible with MySQL databases hosted on AWS RDS, Aurora MySQL, and standard non-hosted MySQL, as well as MariaDB databases.
 
 {% include public-beta-warning.html %}
 
-
 ### Functionality
 
-This connector uses [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/mysql.html)
-under the hood.
+The connector uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/mysql.html)
+as its underlying technology.
 
-***NOTE:** The component abstracts the underlying Debezium connector configuration and provides a simplified user interface. Only a subset of the Debezium connector capabilities is exposed to the user.*
+***Note:** This component abstracts the Debezium connector configuration, offering a simplified user interface with only a subset of Debezium's capabilities exposed to the user.*
 
-MySQL has a binary log (binlog) that records all operations in the order in which they are committed to the database.
-This includes changes to table schemas and changes to the table data. MySQL uses the binlog for replication
-and recovery.
+MySQL employs a binary log (binlog) that records all operations in the order they are committed to the database.
+This includes both changes to table schemas and data, which MySQL uses for replication and recovery purposes.
 
 This MySQL connector reads the binlog, produces change events for row-level `INSERT`, `UPDATE`, and `DELETE` operations.
 
-As MySQL is typically set up to purge binlogs after a specified period, the MySQL connector performs an initial
-*consistent snapshot* of each of your databases. The MySQL connector reads the binlog from where the
-snapshot was made.
+Because MySQL typically purges binlogs after a specified period, the MySQL connector first performs an initial *consistent 
+snapshot* of each database. It then reads the binlog from the point where the snapshot was taken.
 
-**Supported Versions:**
+**Supported Versions**
 
-**MySQL**:
-
-- Database: 5.7, 8.0.x, 8.2
-
-**MariaDB**:
-
-- Database: 11.1.2
+- **MySQL:** 5.7, 8.0.x, 8.2
+- **MariaDB:** 11.1.2
 
 ### Snapshots
 
-When the connector is first started, it performs an initial *consistent snapshot* of your database.
-This snapshot enables the connector to establish a baseline for the current state of the database.
+When the connector starts for the first time, it performs an initial *consistent snapshot* of your database.
+This snapshot establishes a baseline of the current database state.
 
-The connector completes a series of tasks when it performs the snapshot.
-The exact steps vary with the snapshot mode and the table-locking policy in effect for the database.
+During the snapshot, the connector completes a series of tasks that vary depending on the selected snapshot mode and the database's table-locking policy.
+You can select different snapshot modes in the `Sync Options` > `Replication Mode` configuration.
 
-You can select from various snapshot modes in the `Sync Options` > `Replication Mode` configuration property.
-
-For more technical details on how the Snapshots work, see the
-[official documentation](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-snapshots) of Debezium.
+For more technical details on Snapshots, see the
+[Debezium official documentation](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-snapshots).
 
 #### Table locking
 
-The Debezium MySQL connector completes different steps when it performs an initial snapshot 
-that uses a [global read lock](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-initial-snapshot-workflow-with-global-read-lock) 
-or [table-level locks](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-initial-snapshot-workflow-with-table-level-locks.
+The Debezium MySQL connector follows specific steps when performing an initial snapshot 
+that involves a [global read lock](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-initial-snapshot-workflow-with-global-read-lock) 
+or [table-level locks](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-initial-snapshot-workflow-with-table-level-locks).
 
-The read locks are used to ensure snapshot consistency in the event of schema changes during the snapshot. 
+These read locks ensure snapshot consistency, especially if schema changes occur during the snapshot process. 
 
-**WARNING** Due to the use of global and table level locks running multiple configurations 
-that perform initial snapshot from the same database may lead to errors because of locking conflicts. To prevent that, 
-make sure you use only one configuration per database or to run the initial snapshots separately. The alternative is to 
-disable the snapshot locking completely.
+**WARNING:** Using global or table-level locks while running multiple configurations with initial snapshots from the same database may cause locking conflicts. To avoid this, 
+use only one configuration per database or run initial snapshots separately. Alternatively, you can disable snapshot locking altogether.
 
 ### Schema Drift
 
-To ensure correct processing of events that occur after a schema change, MySQL includes in the transaction log not only
-the row-level changes that affect the data but also the DDL statements that are applied to the database.
-As the connector encounters these DDL statements in the binlog, it parses them and updates an in-memory representation
-of each table’s schema.
-The connector uses this schema representation to identify the structure of the tables at the time of each insert,
-update, or delete operation and to produce the appropriate change event.
-In a separate output table `io_debezium_connector_mysql_schema_changes` the connector records all DDL statements and the
-position in the binlog where each DDL statement appeared.
+To accurately process events following a schema change, MySQL logs both row-level changes and DDL statements in the transaction log.
+When the connector encounters DDL statements in the binlog, it parses them and updates an in-memory schema for each table.
+This schema representation allows the connector to identify the table structure at the time of each `insert`, `update`, or `delete` operation, ensuring the correct production
+of change events.
 
-The connector is capable of seamlessly handling schema changes in the source database, e.g., `ADD`, `DROP` columns.
+The connector logs all DDL statements and their binlog positions in a separate output table, `io_debezium_connector_mysql_schema_changes`.
 
-The schema changes are handled in the following manner:
+The connector seamlessly handles schema changes in the source database, such as adding or dropping columns.
+Here's how specific changes are managed:
 
 - **ADD column**
-    - Such a column is added to the destination table. Historic values will be empty (default not reflected).
-    - The DDL will be logged in the resulting `io_debezium_connector_mysql_schema_changes`
+    - The new column is added to the destination table. Historical values for this column remain empty (defaults are not applied).
+    - The DDL is logged in `io_debezium_connector_mysql_schema_changes`.
 - **DROP column**
-    - The column will remain in the destination table.
-    - The column NOT NULL constraint will be overridden and removed if present.
-    - Its values will be NULL/EMPTY since the deletion.
-    - The DDL will be emitted into the `io_debezium_connector_mysql_schema_changes`.
+    - The column remains in the destination table.
+    - If the column has a `NOT NULL` constraint, it will be overridden and removed.
+    - The column's value will be `NULL/EMPTY` from the point of deletion.
+    - The DDL is recorded in `io_debezium_connector_mysql_schema_changes`.
 
 #### Schema change table
 
-`io_debezium_connector_mysql_schema_changes` is a table that contains the schema changes applied to the
-database. It represents the
+`io_debezium_connector_mysql_schema_changes` is a table that logs schema changes applied to the database. It represents the
 underlying [Debezium Schema Change Topic](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-schema-change-topic).
 
-Note that the DDLs are collected only by default for the tracked tables.
+***Note:** By default, DDL statements are collected only for the tracked tables.*
 
 | Column name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `source`                    | The `source` field is structured exactly as standard data change events the connector writes to table-specific topics. This field is useful for correlating events on different topics.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `ts_ms`                     | An optional field that displays the time at which the connector processed the event. The time is based on the system clock in the JVM running the Kafka Connect task. In the source object, ts\_ms indicates when the change was made in the database. By comparing the value for payload.source.ts\_ms with the value for payload.ts\_ms, you can determine the lag between the source database update and Debezium.                                                                                                                                                                                                                            |
-| `databaseName` `schemaName` | Identifies the database and the schema that contains the change. The value of the `databaseName` field is used as the message key for the record.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `ddl`                       | This field contains the DDL that is responsible for the schema change. The `ddl` field can contain multiple DDL statements. Each statement applies to the database in the `databaseName` field. Multiple DDL statements appear in the order in which they were applied to the database.  Clients can submit multiple DDL statements that apply to multiple databases. If MySQL applies them atomically, the connector takes the DDL statements in order, groups them by database, and creates a schema change event for each group. If MySQL applies them individually, the connector creates a separate schema change event for each statement. |
-| `tableChanges`              | An array of one or more items that contain the schema changes generated by a DDL command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `type`                      | Describes the kind of change. The value is one of the following:    `CREATE`  Table created.  `ALTER`  Table modified.  `DROP`  Table deleted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `id`                        | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `*<old>*,*<new>*` table names.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `table`                     | Represents table metadata after the applied change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `primaryKeyColumnNames`     | List of columns that compose the table’s primary key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `source`                    | Structured in the same way as standard data change events, which the connector writes to table-specific topics. This field helps correlate events accross different topics.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `ts_ms`                     | An optional field showing the time at which the connector processed the event, based on the system clock in the JVM running the Kafka Connect task. In the `source` object, `ts\_ms` indicates the database change time. By comparing `payload.source.ts\_ms` with `payload.ts\_ms`, you can determine the lag between the source database update and Debezium processing.                                                                                                                                                                                                                            |
+| `databaseName` `schemaName` | Identifies the database and schema containing the change. The `databaseName` field is used as the record's message key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `ddl`                       | Contains the DDL statement responsible for the schema change, potentially with multiple statements. Each statement applies to the `databaseName`. If multiple statements apply to multiple databases, MySQL applies them in order, and the connector groups them by database, creating a schema change event for each group. If applied individually, a separate schema change event is created for each statement. |
+| `tableChanges`              | An array containing one or more items with schema changes generated by a DDL command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `type`                      | Describes the type of change: `CREATE` (table created), `ALTER` (table modified), `DROP` (table deleted).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `id`                        | The full identifier of the table that was created, altered, or dropped. For table renames, this is a concatenation of `*<old>*,*<new>*` table names.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `table`                     | Contains table metadata after the applied change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `primaryKeyColumnNames`     | Lists the columns that make up the table’s primary key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `columns`                   | Metadata for each column in the changed table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `attributes`                | Custom attribute metadata for each table change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
