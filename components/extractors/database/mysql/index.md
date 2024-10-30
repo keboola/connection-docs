@@ -101,7 +101,7 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 | Column name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `source`                    | Structured in the same way as standard data change events, which the connector writes to table-specific topics. This field helps correlate events accross different topics.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `source`                    | Structured in the same way as standard data change events, which the connector writes to table-specific topics. This field helps correlate events across different topics.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `ts_ms`                     | An optional field showing the time at which the connector processed the event, based on the system clock in the JVM running the Kafka Connect task. In the `source` object, `ts\_ms` indicates the database change time. By comparing `payload.source.ts\_ms` with `payload.ts\_ms`, you can determine the lag between the source database update and Debezium processing.                                                                                                                                                                                                                            |
 | `databaseName` `schemaName` | Identifies the database and schema containing the change. The `databaseName` field is used as the record's message key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `ddl`                       | Contains the DDL statement responsible for the schema change, potentially with multiple statements. Each statement applies to the `databaseName`. If multiple statements apply to multiple databases, MySQL applies them in order, and the connector groups them by database, creating a schema change event for each group. If applied individually, a separate schema change event is created for each statement. |
@@ -115,8 +115,7 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 ### Data Type Mapping
 
-The MySQL datatypes are mapped to
-the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+MySQL data types are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
 
 | Source Type | Base Type | Note                                                                             |
 |-------------|-----------|----------------------------------------------------------------------------------|
@@ -129,9 +128,9 @@ the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#bas
 | DOUBLE      | FLOAT     |                                                                                  |
 | REAL        | FLOAT     |                                                                                  |
 | DECIMAL     | NUMERIC   |                                                                                  |
-| DATE        | DATE      | `YYYY-MM-DD` Format When Native Types are disabled                               |
-| DATETIME    | TIMESTAMP | `YYYY-MM-DD HH:MM:SS` Format When Native Types are disabled                      |
-| TIMESTAMP   | TIMESTAMP | `YYYY-MM-DD HH:MM:SS+TZ` Format When Native Types are disabled. TZ is always UTC |
+| DATE        | DATE      | `YYYY-MM-DD` format when Native Types are disabled                               |
+| DATETIME    | TIMESTAMP | `YYYY-MM-DD HH:MM:SS` format when Native Types are disabled                      |
+| TIMESTAMP   | TIMESTAMP | `YYYY-MM-DD HH:MM:SS+TZ` format (UTC) when Native Types are disabled             |
 | TIME        | STRING    | `HH:MM:SS` format                                                                |
 | YEAR        | INTEGER   |                                                                                  |
 | CHAR        | STRING    |                                                                                  |
@@ -156,16 +155,16 @@ the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#bas
 
 ### System Columns
 
-Each result table will contain the following system columns:
+Each result table includes the following system columns:
 
 | Name                    | Base Type | Note                                                                                                                                                                     |
 |-------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | KBC__OPERATION          | STRING    | Event type, e.g., `r` - read on init sync; `c` - INSERT; `u` - UPDATE; `d` - DELETE                                                                                      |
-| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled.                                                                                   |
-| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (the record is deleted).                                                                                                           |
-| KBC__FILE               | STRING    | Name of the binlog file the transaction is present in.                                                                                                                   |
-| KBC__POS                | INTEGER   | Position in the binlog file of the transaction.                                                                                                                          |
-| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with `KBC__EVENT_TIMESTAMP_MS` to mark the latest event per record (ID) |
+| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. Displayed in miliseconds since epoch if Native types are not enabled.                                                                                   |
+| KBC__DELETED            | BOOLEAN   | Indicates if the event is a delete event (true if deleted).                                                                                                           |
+| KBC__FILE               | STRING    | Binlog file name containing the transaction.                                                                                                                   |
+| KBC__POS                | INTEGER   | Position within the binlog file for the transaction.                                                                                                                          |
+| KBC__BATCH_EVENT_ORDER  | INTEGER   | Numeric order of the events within the current batch (extraction). Can be combined with `KBC__EVENT_TIMESTAMP_MS` to track the latest event per record (ID). |
 
 ### Supported MySQL Topologies
 
@@ -173,56 +172,45 @@ The Debezium MySQL connector supports the following MySQL topologies:
 
 #### Standalone
 
-When a single MySQL server is used, the server must have the binlog enabled (*and optionally, GTIDs enabled*) so the
-Debezium MySQL connector can monitor the server. This is often acceptable since the binary log can also be used as an
-incremental [backup](https://dev.mysql.com/doc/refman/8.0/en/backup-methods.html). In this case, the MySQL connector
-always connects to and follows this standalone MySQL server instance.
+When using a single MySQL server, the server must have binlog enabled (*optionally, GTIDs enabled*) to allow monitoring by the
+Debezium MySQL connector. The binary log can also be used as an incremental [backup](https://dev.mysql.com/doc/refman/8.0/en/backup-methods.html). 
+In standalone setups, the connector always connects to and follows the specified MySQL instance.
 
 #### Primary and replica
 
-The Debezium MySQL connector can follow one of the primary servers or one of the replicas (*if that replica has its
-binlog enabled*). Still, the connector sees changes in only the cluster that is visible to that server. Generally, this is
-not a problem except for the multi-primary topologies.
+The Debezium MySQL connector can follow a primary server or a replica (*if that replica has its
+binlog enabled*). However, it only captures changes visible to that server, which may impact multi-primary topologies.
 
-The connector records its position in the server’s binlog, which is different on each server in the cluster. Therefore,
-the connector must follow just one MySQL server instance. If that server fails, that server must be restarted or
-recovered before the connector can continue.
+Since the connector logs its position within the server’s binlog (unique to each server), it must follow a single MySQL instance. to avoid inconsistencies.
+In case of server failure, the server must be restarted or recovered for the connector to resume tracking changes.
 
-#### High available clusters
+#### High-availability clusters
 
-A variety of [high-availability](https://dev.mysql.com/doc/mysql-ha-scalability/en/) solutions exist for MySQL, and they
-make it significantly easier to tolerate and almost immediately recover from problems and failures. Most HA MySQL
-clusters use GTIDs so that replicas can keep track of all changes on any of the primary servers.
+MySQL support a variety of [high-availability](https://dev.mysql.com/doc/mysql-ha-scalability/en/) (HA) solutions provide resilience and rapid recovery from failures. 
+Most HA MySQL clusters rely on Global Transaction Identifiers (GTIDs) to ensure that replicas can track all changes across primary servers.
 
 #### Multi-primary
 
-[Network Database (NDB) cluster replication](https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-replication-multi-source.html)
-uses one or more MySQL replica nodes replicating from multiple primary servers. This topology requires GTIDs and is a powerful way to
-aggregate the replication of multiple MySQL clusters.
+The [Network Database (NDB) cluster replication](https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-replication-multi-source.html) topology
+uses one or more MySQL replica nodes replicating from multiple primary servers. This setup requires GTIDs and follows for robust multi-source replication, making it
+ideal for aggregating changes across multiple MySQL clusters.
 
-A Debezium MySQL connector can use these multi-primary MySQL replicas as sources and failover to different
-multi-primary MySQL replicas if the new replica is caught up to the old replica. The new replica has
-all the transactions seen on the first replica. This works even if the connector is using only a subset of
-databases and tables, as the connector can be configured to include or exclude specific GTID sources when attempting
-to reconnect to a new multi-primary MySQL replica and find the correct position in the binlog.
+A Debezium MySQL connector can use these multi-primary MySQL replicas as sources. If failover occurs, the connector can switch to a new replica, provided that the replica
+is caught up with the initial replica. Even when only a subset of databases and tables is in use, the connector can be configured to include or exclude specific GTID sources. 
+This flexibility enables the connector to locate the correct position in the binlog when reconnecting to a new multi-primary MySQL replica.
 
 #### Hosted
 
-There is support for the Debezium MySQL connector to use hosted options such as Amazon RDS and Amazon Aurora.
-
-Because these hosted options do not allow a global read lock, table-level locks create a *consistent snapshot*.
+The Debezium MySQL connector is also compatible with hosted MySQL options, such as Amazon RDS and Amazon Aurora. While these hosted options lack global read lock support, 
+table-level locks are used to create a *consistent snapshot*, ensuring reliable data consistency in these environments.
 
 ### Using Connector with MariaDB Database
 
-Although it is possible to use the MySQL driver to connect and stream changes from MariaDB, it’s best to configure the
-Debezium MySQL connector to use the MariaDB adapter mode so that the connector can take advantage of the MariaDB
-driver and its unique feature stack.
+While the Debezium MySQL connector can connect to MariaDB using the MySQL driver, enabling **MariaDB adapter mode** allows it to fully utilize the MariaDB-specific driver 
+and feature set. For optimal compatibility and performance:
 
-To toggle the MariaDB support mode, the `Connector adapter`configuration property
-must be specified with a value of `MariaDB`.
-
-This mode utilizes the MariaDB driver instead of the MySQL driver, meaning that you must also provide the database
-protocol and JDBC driver strings that are compliant with MariaDB; see the example below.
+- Set the `Connector adapter` configuration property to `MariaDB`.
+- Provide MariaDB-compliant database protocol and JDBC driver strings.
 
 After you apply the Maria DB supplemental configuration, the Debezium MySQL connector uses the MariaDB adapter
 connector, which natively streams changes from MariaDB binary transaction logs.
@@ -231,7 +219,7 @@ connector, which natively streams changes from MariaDB binary transaction logs.
 
 ### Setting Up MySQL
 
-Some MySQL setup tasks are required before installing and running a Debezium connector.
+Setting up MySQL is required before installing and running the Debezium connector.
 
 #### Creating a user
 
@@ -259,7 +247,8 @@ GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *
 
 The table below describes the permissions.
 
-If a hosted option such as Amazon RDS or Amazon Aurora does not allow a global read lock, table-level locks create a *consistent snapshot*. In this case, you need to also grant `LOCK TABLES` permissions to the user you create. See [snapshots](#snapshots) for more details.
+If a hosted option such as Amazon RDS or Amazon Aurora does not allow a global read lock, table-level locks can create a *consistent snapshot*. 
+In this case, you also need to grant `LOCK TABLES` permissions to the user you create. See [snapshots](#snapshots) for more details.
 
 
 3. Finalize the user’s permissions:
@@ -335,7 +324,7 @@ Descriptions of MySQL binlog configuration properties:
 
 | Property | Description |
 |---|---|
-| `server-id` | The value for the `server-id` must be unique for each server and replication client in the MySQL cluster. During MySQL connector set up, Debezium assigns a unique server ID to the connector. |
+| `server-id` | The value for the `server-id` must be unique for each server and replication client in the MySQL cluster. During MySQL connector setup, Debezium will assign a unique server ID to the connector. |
 | `log_bin` | The value of `log_bin` is the base name of the sequence of binlog files. |
 | `binlog_format` | The `binlog-format` must be set to `ROW` or `row`. |
 | `binlog_row_image` | The `binlog_row_image` must be set to `FULL` or `full`. |
@@ -531,12 +520,12 @@ CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT N
 - **Connector adapter**: The connector adapter to be used. The following options are available:
     - `MySQL`: The connector uses the MySQL driver to connect to the MySQL database.
     - `MariaDB`: The connector uses the MariaDB driver to connect to the MariaDB database.
-- **Server Timezone** - [Optional] If the server uses timezone not in Country/City format, the underlying JDBC driver needs a specification of the timezone in the supported format. For instance instead of `CEST` use `Europe/Prague`. This property will set the JDBC connection property connectionTimeZone.
+- **Server Timezone** - [Optional] If the server uses a timezone that is not in Country/City format, the underlying JDBC driver needs a specification of the timezone in the supported format. For instance, instead of `CEST`, use `Europe/Prague`. This property sets the JDBC connection property connectionTimeZone.
 - **Host**: The hostname of the MySQL server.
 - **Port**: The port number of the MySQL server.
-- **User**: The username to be used to connect to the MySQL server.
-- **Password**: The password to be used to connect to the MySQL server.
-- **Read-only mode**: When enabled, the connector doesn't require write access to the source database for signalling.
+- **User**: The username used to connect to the MySQL server.
+- **Password**: The password used to connect to the MySQL server.
+- **Read-only mode**: When enabled, the connector does not require write access to the source database for signalling.
 
 #### SSH tunnel
 
@@ -574,12 +563,11 @@ substrings that might be present in a column name.
 
 ### Column masks
 
-Column masks are used to mask sensitive data in the extraction.
-(comma separated list) of fully-qualified names for columns are of the form `schemaName.tableName.columnName`.
+Column masks are used to mask sensitive data in the extraction. A comma-separated list of fully qualified names for columns is of the form `schemaName.tableName.columnName`.
 
-To match the name of a column, connector applies the regular expression that you specify as an _anchored regular
-expression_. That is, the expression is used to match the entire name string of the column; it does not match substrings
-that might be present in a column name.
+To match the name of a column, the connector applies the regular expression that you specify as an _anchored regular
+expression_. That is, the expression is used to match the entire name string of the column; it does not match any substrings
+that might be present in the column name.
 
 ![img_5.png](/components/extractors/database/column_masks.png)
 
@@ -587,23 +575,22 @@ There are two types of masks available:
 
 #### Length Mask
 
-The connector will mask the length of the string columns in the output data. 
-The string will be replaced with the specified amount of  `*` characters.
+The connector masks the length of string columns in the output data. 
+The string is replaced with the specified number of  `*` characters.
 
-
-Original Debezium docs [here](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars)
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars).
 
 #### Hash Mask
 
-The connector will hash the string columns in the output data using selected algorithm and salt.
+The connector hashes string columns in the output data using the selected algorithm and salt.
 
-You may choose from various hashing algorithms, such as `SHA-256`, `SHA-512`, `MD5`, and `SHA-1`.
-Based on the hash function that is used, referential integrity is maintained, while column values are replaced with pseudonyms.
+You can choose from various hashing algorithms, such as `SHA-256`, `SHA-512`, `MD5`, and `SHA-1`.
+Based on the hash function used, referential integrity is maintained while column values are replaced with pseudonyms.
 Supported hash functions are described in the [MessageDigest section](https://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#MessageDigest) of the Java Cryptography Architecture Standard Algorithm Name Documentation.
 
-**NOTE** Hashing strategy version 2 is used to ensure fidelity across job runs and configurations.
+***Note:** The hashing strategy version 2 is used to ensure fidelity across job runs and configurations.*
 
-Original Debezium docs [here](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash)
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash).
 
 ### Sync Options
 
@@ -613,21 +600,21 @@ Original Debezium docs [here](https://debezium.io/documentation/reference/stable
 - **Signaling Table**: The name of the signaling table in the source database. The signaling table is used by the
   connector to store various signal events and incremental snapshot watermarks. See more in
   the [Signaling table](#signaling-table) section.
-- **Replication Mode**: The replication mode to be used. The following options are available:
-    - `Standard`: The connector performs an initial *consistent snapshot* of each of your databases. The connector reads
+- **Replication Mode**: The replication mode used. The following options are available:
+    - `Standard`: The connector performs an initial *consistent snapshot* of each database. The connector reads
       the binlog from the point at which the snapshot was made.
     - `Changes only`: The connector reads the changes from the binlog immediately, skipping the initial load.
-- **Binary data handler**: Specifies how binary columns, for example, blob, binary, varbinary, should be represented in
+- **Binary data handler**: Specifies how binary columns, such as blob, binary, varbinary, should be represented in
   change events. The following options are available:
-    - `Base64`: represents binary data as a base64-encoded String.
+    - `Base64`: represents binary data as a base64-encoded string.
     - `Base64-url-safe`: represents binary data as a base64-url-safe-encoded String.
-    - `Hex`: represents binary data as a hex-encoded (base16) String.
+    - `Hex`: represents binary data as a hex-encoded (base16) string.
     - `Bytes`: represents binary data as a byte array.
 - **Snapshot Locking Mode**: [Specifies](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-snapshot-locking-mode) 
 how long the connector holds the MySQL global read lock during a snapshot:
-  - **`minimal`**: Locks only during initial schema read, then releases while using a `REPEATABLE READ` transaction for consistency.
+  - **`minimal`**: Locks only during the initial schema read, then releases while using a `REPEATABLE READ` transaction for consistency.
   - **`extended`**: Locks for the entire snapshot to avoid conflicts with concurrent operations.
-  - **`none`**: No table locks, safe if no schema changes occur. MyISAM tables still lock by default.
+  - **`none`**: No table locks; this is safe if no schema changes occur. MyISAM tables still lock by default.
 
 ### Destination
 
