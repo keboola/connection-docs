@@ -6,17 +6,18 @@ permalink: /components/data-apps/general-design-guide/
 * TOC
 {:toc}
 
-This guide helps you quickly create a user-friendly data app in Keboola, covering essentials like theming, headers, storage integration, and more.
+This guide will help you quickly create a user-friendly data app in Keboola. We cover essentials like theming, headers, storage integration, 
+and more to streamline your setup.
 
-With clear, step-by-step instructions for setting up caching, applying themes, and ensuring data security, you’ll be able to build an intuitive 
-and visually appealing app. 
+With clear, step-by-step instructions for caching, applying themes, and ensuring data security, you’ll be able to build an intuitive,
+visually appealing app. 
 
 ## Theming
-There are two ways to set theming:
+There are two options for setting theming:
 
-Set theming directly in the Keboola Data Apps interface, where you can choose either a predefined or custom theme. See more in Keboola's [documentation](https://help.keboola.com/).
+**1. Keboola Data Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in Keboola's [documentation](https://help.keboola.com/).
 
-Use the settings in the `config.toml` file, located in the `.streamlit` folder.
+**2. Configuration File:** Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 {: .image-popup}
 ![Screenshot - Streamlit Folder](/components/data-apps/general-design-guide/pic1.png)
@@ -35,7 +36,7 @@ secondaryBackgroundColor="#edf0f5"
 
 ### Logo
 
-Store the logo PNG image in the `/static/` repository folder (the app folder is created automatically upon deployment in Keboola).
+Store the logo PNG image in the `/static/` repository folder (created automatically upon deployment in Keboola).
 
 ```
 LOGO_IMAGE_PATH = os.path.abspath("./app/static/keboola.png")
@@ -58,7 +59,7 @@ st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 ### Set Up Caches
 
-Set the `ttl` based on your app's needs.
+Set the `ttl` parameter based on your app's needs.
 
 ```
 # Fetching data 
@@ -70,7 +71,7 @@ Set the `ttl` based on your app's needs.
 {: .image-popup}
 ![Screenshot - Info Panel](/components/data-apps/general-design-guide/pic2.png)
 
-Use `st.info` to provide additional information.
+Use `st.info` to provide helpful context or instructions to users.
 
 ```
 st.info('Select the table you want to edit. If the data is not up-to-data, click on the Reload Data button. Data freshness is displayed in the right corner.', icon="ℹ️")
@@ -78,7 +79,7 @@ st.info('Select the table you want to edit. If the data is not up-to-data, click
 
 ### Hide Anchor Links
 
-Hide anchor links if not needed.
+To hide anchor links, add this function.
 
 ```
 def hide_custom_anchor_link():
@@ -109,7 +110,7 @@ with st.expander("Table Info"):
 ```
 
 ### Primary Buttons
-Use the code below for primary buttons; secondary buttons can be simple `st.buttons`.
+Use the following code for primary buttons; secondary buttons can be simple `st.buttons`.
 
 {: .image-popup}
 ![Screenshot - Save Data](/components/data-apps/general-design-guide/pic3.png)
@@ -137,9 +138,9 @@ ChangeButtonColour('Save Data', '#FFFFFF', '#1EC71E','#1EC71E')
 ```
 
 ## Footer
-Use the code below for the footer section. Customize it as needed.
+Customize the footer with the code below.
 
-Here is an example of what a footer could look like. You can write whatever you want there.
+Here is an example of what a footer could look like.
 
 {: .image-popup}
 ![Screenshot - Footer](/components/data-apps/general-design-guide/pic4.png)
@@ -185,7 +186,7 @@ kbc_url = os.environ.get('KBC_URL')
 client = Client(kbc_url, kbc_token)
 ```
 
-### Get Data from Keboola
+### Retrieve Data from Keboola
 ```
 def get_dataframe(table_name):
     table_detail = client.tables.detail(table_name)
@@ -205,7 +206,7 @@ def get_dataframe(table_name):
 
 **Example**
 
-Get a table from Keboola Storage.
+Retrieve a table from Keboola Storage.
 
 ```
 if 'data' not in st.session_state:
@@ -228,7 +229,7 @@ def write_to_keboola(data, table_name, table_path, incremental):
 
 **Example**
 
-Writing `edited_data` incrementally into Keboola Storage. Incremental writing is faster than full load.
+Write `edited_data` **incrementally** to Keboola Storage for faster updates. Incremental writing is faster than full load.
 
 ```
 write_to_keboola(edited_data, 'in.c-bucketName.tableName', f'updated_data.csv.gz', 1)
