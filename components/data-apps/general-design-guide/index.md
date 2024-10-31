@@ -53,24 +53,29 @@ st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 ### Set Up Caches
 
-* `ttl` is custom based on your app needs.
+`ttl` is custom based on your app needs.
 
 ```
 # Fetching data 
 @st.cache_data(ttl=7200,show_spinner=False)
 ```
 
-### Info panel
+### Info Panel
 
-* Use `st.info` for more information.
+{: .image-popup}
+![Screenshot - Info Panel](/components/data-apps/general-design-guide/pic2.png)
 
+Use `st.info` for more information.
+
+```
 st.info('Select the table you want to edit. If the data is not up-to-data, click on the Reload Data button. Data freshness is displayed in the right corner.', icon="ℹ️")
-
+```
 
 ### Hide Anchor Links
 
-* Hide anchor links if they are not needed.
+Hide anchor links if they are not needed.
 
+```
 def hide_custom_anchor_link():
     st.markdown(
         """
@@ -87,22 +92,24 @@ def hide_custom_anchor_link():
         """,
         unsafe_allow_html=True,
     )
-
+```
 
 ### Use st.expander
+`st.expander` is great to use to keep your app simple and clean. Additional information should be available there.
 
-* `st.expander` is great to use to keep your app simple and clean, additional information should be available there.
-
+```
 # Expander with info about table
 with st.expander("Table Info"):
     # Code continues …
-
+```
 
 ### Primary Buttons
+Use the code below for primary buttons; secondary buttons can be only as `st.buttons`.
 
-* Use code below for primary buttons, secondary buttons can be only as `st.buttons`.
+{: .image-popup}
+![Screenshot - Save Data](/components/data-apps/general-design-guide/pic3.png)
 
-
+```
 def ChangeButtonColour(widget_label, font_color, background_color, border_color):
     htmlstr = f"""
         <script>
@@ -117,18 +124,22 @@ def ChangeButtonColour(widget_label, font_color, background_color, border_color)
         </script>
         """
     components.html(f"{htmlstr}", height=0, width=0)
-
+```
 
 **Example**
-
+```
 ChangeButtonColour('Save Data', '#FFFFFF', '#1EC71E','#1EC71E')
-
+```
 
 ## Footer
+Use the code below for the footer section. 
 
-* Use the code below for the footer section. 
-* Here is an example of what a footer could look like. You can write whatever you want there.
+Here is an example of what a footer could look like. You can write whatever you want there.
 
+{: .image-popup}
+![Screenshot - Footer](/components/data-apps/general-design-guide/pic4.png)
+
+```
 def display_footer_section():
     # Inject custom CSS for alignment and style
     st.markdown("""
@@ -152,25 +163,26 @@ def display_footer_section():
             <p>Version 2.0</p>
         </div>
         """, unsafe_allow_html=True)
-
+```
 
 ## Keboola Storage Communication
 
 ### Authenticate Client
 
-* `kbc_token` and `kbc_url` do not have to be specified, these are environment variables.
+`kbc_token` and `kbc_url` do not have to be specified, these are environment variables.
 
-* These variables represent the project where the application is deployed, if you want to map data from a different project, you have to set up the secrets for it.
+These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
 
+```
 # Constants
 kbc_token = os.environ.get('KBC_TOKEN')
 kbc_url = os.environ.get('KBC_URL')
 # Initialize Client
 client = Client(kbc_url, kbc_token)
-
+```
 
 ### Get Data from Keboola
-
+```
 def get_dataframe(table_name):
     table_detail = client.tables.detail(table_name)
     client.tables.export_to_file(table_id = table_name, path_name='')
@@ -185,19 +197,20 @@ def get_dataframe(table_name):
     os.rename(table_detail['name'], 'data.csv')
     df = pd.read_csv('data.csv')
     return df
-
+```
 
 **Example**
 
 * Getting a table from Keboola storage.
 
+```
 if 'data' not in st.session_state:
         st.session_state['data'] = None
 st.session_state['data'] = get_dataframe('in.c-bucketName.tableName')
-
+```
 
 ### Write Data to Keboola
-
+```
 def write_to_keboola(data, table_name, table_path, incremental):
     # Write the DataFrame to a CSV file with compression
     data.to_csv(table_path, index=False, compression='gzip')
@@ -207,15 +220,16 @@ def write_to_keboola(data, table_name, table_path, incremental):
         file_path=table_path,
         is_incremental=incremental
     )
-
+```
 
 **Example**
+Writing dataframe edited_data incrementally into Keboola storage.
 
-* Writing dataframe edited_data incrementally into Keboola storage.
+It is a best practice to prefer incremental writing, which is faster than full load.
 
-* It is a best practice to prefer incremental writing, which is faster than full load.
-
+```
 write_to_keboola(edited_data, 'in.c-bucketName.tableName', f'updated_data.csv.gz', 1)
+```
 
 
 
