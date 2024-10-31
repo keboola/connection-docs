@@ -134,12 +134,12 @@ ChangeButtonColour('Save Data', '#FFFFFF', '#1EC71E','#1EC71E')
 ```
 
 ## Footer
-Customize the footer with the code below.
-
 Here is an example of what a footer could look like.
 
 {: .image-popup}
 ![Screenshot - Footer](/components/data-apps/general-design-guide/pic4.png)
+
+Customize the footer with the code below.
 
 ```
 def display_footer_section():
