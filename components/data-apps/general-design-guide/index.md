@@ -6,12 +6,17 @@ permalink: /components/data-apps/general-design-guide/
 * TOC
 {:toc}
 
+This guide helps you quickly create a user-friendly data app in Keboola, covering essentials like theming, headers, storage integration, and more.
+
+With clear, step-by-step instructions for setting up caching, applying themes, and ensuring data security, you’ll be able to build an intuitive 
+and visually appealing app. 
+
 ## Theming
 There are two ways to set theming:
 
-Theming can be set directly in the data apps in Keboola, where you can choose a predefined theme or custom. More in the [documentation](https://help.keboola.com/).
+Set theming directly in the Keboola Data Apps interface, where you can choose either a predefined or custom theme. See more in Keboola's [documentation](https://help.keboola.com/).
 
-Use the settings in the `config.toml` file, which is located in the `.streamlit` folder.
+Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 {: .image-popup}
 ![Screenshot - Streamlit Folder](/components/data-apps/general-design-guide/pic1.png)
@@ -30,13 +35,13 @@ secondaryBackgroundColor="#edf0f5"
 
 ### Logo
 
-Store the logo PNG image in the repository folder `/static/` (the app folder is created automatically by deployment in Keboola).
+Store the logo PNG image in the `/static/` repository folder (the app folder is created automatically upon deployment in Keboola).
 
 ```
 LOGO_IMAGE_PATH = os.path.abspath("./app/static/keboola.png")
 ```
 
-Put the logo to the left side, disable the opening full screen image.
+Position the logo on the left and disable the full-screen view for the image.
 
 ```
 st.image(LOGO_IMAGE_PATH)
@@ -53,7 +58,7 @@ st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 ### Set Up Caches
 
-`ttl` is custom based on your app needs.
+Set the `ttl` based on your app's needs.
 
 ```
 # Fetching data 
@@ -65,7 +70,7 @@ st.markdown(hide_img_fs, unsafe_allow_html=True)
 {: .image-popup}
 ![Screenshot - Info Panel](/components/data-apps/general-design-guide/pic2.png)
 
-Use `st.info` for more information.
+Use `st.info` to provide additional information.
 
 ```
 st.info('Select the table you want to edit. If the data is not up-to-data, click on the Reload Data button. Data freshness is displayed in the right corner.', icon="ℹ️")
@@ -73,7 +78,7 @@ st.info('Select the table you want to edit. If the data is not up-to-data, click
 
 ### Hide Anchor Links
 
-Hide anchor links if they are not needed.
+Hide anchor links if not needed.
 
 ```
 def hide_custom_anchor_link():
@@ -95,7 +100,7 @@ def hide_custom_anchor_link():
 ```
 
 ### Use st.expander
-`st.expander` is great to use to keep your app simple and clean. Additional information should be available there.
+Use `st.expander` to keep your app simple and clean, with additional information inside.
 
 ```
 # Expander with info about table
@@ -104,7 +109,7 @@ with st.expander("Table Info"):
 ```
 
 ### Primary Buttons
-Use the code below for primary buttons; secondary buttons can be only as `st.buttons`.
+Use the code below for primary buttons; secondary buttons can be simple `st.buttons`.
 
 {: .image-popup}
 ![Screenshot - Save Data](/components/data-apps/general-design-guide/pic3.png)
@@ -132,7 +137,7 @@ ChangeButtonColour('Save Data', '#FFFFFF', '#1EC71E','#1EC71E')
 ```
 
 ## Footer
-Use the code below for the footer section. 
+Use the code below for the footer section. Customize it as needed.
 
 Here is an example of what a footer could look like. You can write whatever you want there.
 
@@ -169,9 +174,8 @@ def display_footer_section():
 
 ### Authenticate Client
 
-`kbc_token` and `kbc_url` do not have to be specified, these are environment variables.
-
-These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
+Environment variables `kbc_token` and `kbc_url` represent the project where the application is deployed. You do not need to specify them.
+To map data from a different project, configure the appropriate secrets.
 
 ```
 # Constants
@@ -201,7 +205,7 @@ def get_dataframe(table_name):
 
 **Example**
 
-* Getting a table from Keboola storage.
+Get a table from Keboola Storage.
 
 ```
 if 'data' not in st.session_state:
@@ -223,13 +227,9 @@ def write_to_keboola(data, table_name, table_path, incremental):
 ```
 
 **Example**
-Writing dataframe edited_data incrementally into Keboola storage.
 
-It is a best practice to prefer incremental writing, which is faster than full load.
+Writing `edited_data` incrementally into Keboola Storage. Incremental writing is faster than full load.
 
 ```
 write_to_keboola(edited_data, 'in.c-bucketName.tableName', f'updated_data.csv.gz', 1)
 ```
-
-
-
