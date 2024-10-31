@@ -12,7 +12,7 @@ and more to streamline your setup. With clear, step-by-step instructions, you’
 ## Theming
 There are two options for setting theming:
 
-1. **Keboola Data Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in Keboola's [documentation](https://help.keboola.com/).
+1. **Keboola Data Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [Keboola's documentation](https://help.keboola.com/).
 2. **Configuration File:** Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 {: .image-popup}
