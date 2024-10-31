@@ -69,16 +69,12 @@ Steps execute sequentially, while tasks within a single step run in parallel. If
 
 The same applies to data destination connectors. Also, transformations independent of the connectors can be grouped within the same step. Note that this does not reduce costs, as each job consume credits independently.
 
-***Warning:** If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. Limiting the number of concurrent component jobs 
-to 10 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
-extent possible based on available resources.*
+You can also set up parallelization **within a component** (configuration), directly in the component's UI for
+[row-based components](/components/#configuration-rows) like database source connectors using the same credentials to run multiple tables concurrently.
 
-You can also set up parallelization **within a component** (configuration), directly in the component's UI for [row-based components](/components/#configuration-rows) like database source connectors using the same credentials to run multiple tables concurrently.
-
-{% include tip.html title="Execute Individual Configurations" content="
-Run configurations individually in Keboola Flows for more efficient workflow management. You can fine-tune which rows to run in advanced settings for greater 
-control.
-" %}
+***Warning:** If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. 
+Limiting the number of concurrent component jobs to 10 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to 
+execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum extent possible based on available resources.*
 
 [Storage jobs](/storage/jobs/) have a parallel limit. They are typically capped at 10 parallel jobs but the Keboola Support team can help you adjust this. 
 
