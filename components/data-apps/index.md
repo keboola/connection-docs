@@ -83,8 +83,8 @@ To provide your app with environment variables or sensitive information like cre
 These secrets will be injected into the `secrets.toml` file upon deployment of the app. 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
-### Default Environment Variables
-By default, the Keboola Streamlit Docker image includes two important environment variables ready to be used in your application:
+## Access Storage from Data App
+By default, the Keboola Streamlit Docker image includes two environment variables, which can be easily used to access keboola storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
 - `KBC_TOKEN`: This represents the storage token with full read-write access to Keboola Storage.
