@@ -84,7 +84,7 @@ These secrets will be injected into the `secrets.toml` file upon deployment of t
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
 ## Access Storage from Data App
-By default, the Keboola Streamlit Docker image includes two environment variables, which can be easily used to access keboola storage from your application:
+By default, there are two environment variables available that make it easy to access Keboola storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
 - `KBC_TOKEN`: This represents the storage token with full read-write access to Keboola Storage.
@@ -97,7 +97,7 @@ kbc_url = os.environ.get('KBC_URL')
 # Initialize Client
 client = Client(kbc_url, kbc_token)
 ```
-These variables represent the project where the application is deployed, if you want to map data from a different project, you have to set up the secrets for it.
+These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
 
 ## Loading Data from Storage
 To load data from the storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
