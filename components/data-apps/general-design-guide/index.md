@@ -7,10 +7,7 @@ permalink: /components/data-apps/general-design-guide/
 {:toc}
 
 This guide will help you quickly create a user-friendly data app in Keboola. We cover essentials like theming, headers, storage integration, 
-and more to streamline your setup.
-
-With clear, step-by-step instructions for caching, applying themes, and ensuring data security, you’ll be able to build an intuitive,
-visually appealing app. 
+and more to streamline your setup. With clear, step-by-step instructions, you’ll be able to build an intuitive, visually appealing app. 
 
 ## Theming
 There are two options for setting theming:
