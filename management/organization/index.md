@@ -6,9 +6,9 @@ permalink: /management/organization/
 * TOC
 {:toc}
 
-Keboola Connection projects are grouped into **organizations**. Each organization is assigned to a **maintainer** (either Keboola or
+Keboola projects are grouped into **organizations**. Each organization is assigned to a **maintainer** (either Keboola or
 Keboola Partner), who is also primarily responsible for L1 support unless agreed otherwise.
-[Keboola Connection projects](/management/#project-status), organizations,
+[Keboola projects](/management/#project-status), organizations,
 and maintainers are therefore organized into a hierarchy:
 
 {: .image-popup}
@@ -43,7 +43,7 @@ The same goes for maintainers.
 {: .image-popup}
 ![Screenshot - Organizations Users](/management/organization/organization-2.png)
 
-Newly added organization members get an email confirmation, and if without a Keboola Connection account,
+Newly added organization members get an email confirmation, and if without a Keboola account,
 they are [invited to create one](/management/project/users/#new-user).
 Removed members receive an email notification.
 
@@ -87,7 +87,7 @@ The description for support access will reflect the current setting.
 ### Require MFA
 It is possible to set the [Multi-factor Authentication](/management/account/#multi-factor-authentication) (MFA) requirement
 for all projects in the organization. When MFA is required for an entire organization, users without MFA enabled
-can still log in to Keboola Connection, but they cannot access any projects in the organization. The list of users
+can still log in to Keboola, but they cannot access any projects in the organization. The list of users
 without MFA is shown when enabling the MFA requirement for the entire organization.
 
 {: .image-popup}

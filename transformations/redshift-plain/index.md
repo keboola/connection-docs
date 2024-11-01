@@ -7,7 +7,7 @@ permalink: /transformations/redshift-plain/
 {:toc}
 
 [AWS Redshift](https://aws.amazon.com/redshift/) is based on PostgreSQL 8.0, where AWS added powerful scaling 
-and made it available in the cloud. Transformations run on your own dedicated cluster in Keboola Connection.
+and made it available in the cloud. Transformations run on your own dedicated cluster in Keboola.
 
 ## Example
 To create a simple Redshift transformation, follow these steps:
@@ -28,7 +28,7 @@ CREATE TABLE "result" AS SELECT * FROM "source";
 You can organize the script into [blocks](/transformations/#writing-scripts).
 
 ## Limits
-Redshift in Keboola Connection does not support functions or stored procedures.
+Redshift in Keboola does not support functions or stored procedures.
 
 There are basic constraints set to keep your Redshift cluster healthy. By upgrading your Redshift cluster 
 to a larger size, these limits can be increased.

@@ -8,7 +8,7 @@ permalink: /storage/tables/csv-files/
 
 All data imported to and exported from Storage has to be in the CSV format.
 
-In many cases, our extractors and writers take care of the necessary conversion,
+In many cases, our data source and destination connectors take care of the necessary conversion,
 but sometimes you have to be aware of the supported formats --- for
 example, when you are [loading data manually](/tutorial/load/).
 
@@ -52,7 +52,7 @@ A CSV file in this format can be exported from
 
 - OpenOffice / LibreOffice Calc, where you simply save the file in a Text CSV file and select *Unicode (UTF-8)* encoding.
 - Google Drive, where it is the default output format (note, however, that you might
-    prefer to use the [Google Drive Extractor](/tutorial/load/googledrive/) instead).
+    prefer to use the [Google Drive data source connector](/tutorial/load/googledrive/) instead).
 - Microsoft Excel by following the below instructions.
 
 ### Exporting from Microsoft Excel
@@ -71,7 +71,7 @@ Notepad. Simply open the file, and without making any modifications, save it wit
 {: .image-popup}
 ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
 
-The resulting file `import-data.txt.csv` can now be imported into Keboola Connection Storage as a tab delimited file.
+The resulting file `import-data.txt.csv` can now be imported into Keboola Storage as a tab delimited file.
 
 {: .image-popup}
 ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
@@ -100,7 +100,7 @@ when asked about the file format).
 *Note: The rows are exported in random order and there is no way to specify ordering of rows in the exported file.*
 
 ### Opening in Microsoft Excel
-The easiest way to import the CSV file exported from Keboola Connection into Microsoft Excel is by starting Excel and opening 
+The easiest way to import the CSV file exported from Keboola into Microsoft Excel is by starting Excel and opening 
 a **blank workbook**. Then use the **Data** -- **From Text** function and select the exported file:
 
 {: .image-popup}

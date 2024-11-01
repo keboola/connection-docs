@@ -42,7 +42,7 @@ The R script itself will be compiled to `/data/script.R`. To access input and ou
 (`in/tables/file.csv`, `out/tables/file.csv`), or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/user/tag` or `/data/in/user/tag` path. If you want to dig really deep, have a look
 at the full [Common Interface Specification](https://developers.keboola.com/extend/common-interface/). Temporary files can
-be written to the `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola Connection.
+be written to the `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola.
 
 ## R Script Requirements
 The R script to be run within our environment must meet the following requirements:
@@ -64,6 +64,14 @@ In case your code relies on a specific package version, you can override the ins
 require(devtools)
 install_version("data.table", "1.12.8")
 require(data.table)
+{% endhighlight %}
+
+If you need to load a package that is on Github, but not on CRAN, then you can use the devtools::install_github method
+
+{% highlight r %}
+library(devtools)
+install_github("myGithub/myRlib")
+library(myRlib)
 {% endhighlight %}
 
 ### CSV Format
@@ -128,7 +136,7 @@ The following image shows the directory structure:
 ![Screenshot - Data folder structure](/transformations/r/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
-so that you can move the script to a Keboola Connection transformation with no changes. To develop an R transformation which takes
+so that you can move the script to a Keboola transformation with no changes. To develop an R transformation which takes
 a [sample CSV file](/transformations/r/source.csv) locally, take the following steps:
 
 - Put the R code into a file, for instance, script.R in the working directory.

@@ -43,7 +43,7 @@ the execution of tasks within an orchestration:
 It is useful for temporarily skipping something.
 - Enabling *Continue on Failure* on a task means that even if that task fails, the orchestration will continue running to the following 
 phases (and will end with a `warning` state). This feature is useful when a data source becomes temporarily unstable and you still want to try your best to extract it.
-- It is also possible to set *Task Parameters*. This is a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#creating-and-running-a-job).
+- It is also possible to set *Task Parameters*. This is a low-level feature that modifies the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job).
 - Action is always `run`.
 
 ## Automation
@@ -123,7 +123,7 @@ When you run an orchestration manually, the [notifications](/orchestrator/notifi
 who triggered the orchestration) --- the notification setting is ignored. When an orchestration runs unattended by the
 defined schedule, it runs as if the specified orchestration token triggered the execution. In that case,
 the [notifications](/orchestrator/notifications/) settings are honored.
-In either case, all the jobs created by the orchestration (extractors, writers, ...) are run using the orchestration token.
+In either case, all the jobs created by the orchestration (data source and destination connectors, etc.) are run using the orchestration token.
 That is true even if you trigger the orchestration manually. There is no need to know or manually use the orchestration token.
 
 **Important: Do not delete, refresh or otherwise modify the orchestration token. There is a special [API](https://developers.keboola.com/overview/api/) for that.**
@@ -141,7 +141,7 @@ buckets or tables.
 It means that the token will also work if it has access to no components.*
 
 ### Parallel Jobs
-Running things in the Keboola Connection platform is designed around the concept of [background jobs](/management/jobs/). One of the key properties is 
+Running things in the Keboola platform is designed around the concept of [background jobs](/management/jobs/). One of the key properties is 
 that the same configuration of the same component cannot run in parallel. This is primarily a safety measure to maintain consistency of
 the output data produced by that configuration. In a more technical way, we can say that
 *jobs running the same configuration are **serialized***.

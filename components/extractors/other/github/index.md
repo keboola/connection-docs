@@ -8,11 +8,11 @@ redirect_from:
 * TOC
 {:toc}
 
-The GitHub extractor uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
-to Keboola Connection.
+The GitHub data source connector uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
+to Keboola.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **GitHub** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **GitHub** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization), and
 select the template you wish to use. There are two configuration templates available:
 

@@ -9,14 +9,14 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the Papertrail [Search API](https://help.papertrailapp.com/kb/how-it-works/search-api)
+This data source connector uses the Papertrail [Search API](https://help.papertrailapp.com/kb/how-it-works/search-api)
 to import events matching the specified query from [Papertrail](https://www.papertrail.com/) 
 (logs from apps, servers, and cloud services).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Papertrail** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Papertrail** connector.
 
-To configure the extractor, you need to provide a Papertrail API token, enter a search query and select a retention period.
+To configure the connector, you need to provide a Papertrail API token, enter a search query and select a retention period.
 Then select the data you wish to extract.
 
 First, provide a Papertrail [API token](https://help.papertrailapp.com/kb/how-it-works/http-api#authentication).

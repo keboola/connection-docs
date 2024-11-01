@@ -1,149 +1,78 @@
 ---
-title: Part 3 - Writing Data
+title: "Part 3: Writing Data"
 permalink: /tutorial/write/
 ---
 
 * TOC
 {:toc}
 
-This part of our tutorial will guide you through the process of writing data from Keboola Connection. 
-You have learned to [manipulate data](/tutorial/manipulate/) in Keboola Connection using SQL, 
-and have a denormalized table called `opportunity_denorm` ready in the `out.c-tutorial` storage bucket. 
-This table is suitable to be loaded into [Tableau Analytics](https://www.tableau.com/). 
+This section of our tutorial will walk you through the process of writing data from Keboola to a destination. This step is commonly referred to as reverse ETL. 
+Having already learned how to [manipulate data](/tutorial/manipulate/) in Keboola using SQL, you now have a denormalized table called `opportunity_denorm` 
+ready in Storage.
 
-## Getting Started
+In this tutorial, we will push this table to a **Google Sheets** destination. It's important to note that other typical destinations can include BI tools, databases, or even applications/APIs, such as CRM systems, and more.
 
-**Before you proceed, have [Tableau Desktop](https://www.tableau.com/products/desktop) installed**.
-If you want to try connection to Tableau Server, have credentials for that server as well. 
-As an alternative, sign up for a free trial of [Tableau Online](https://www.tableau.com/products/cloud-bi) to test it out.
+1. Navigate to **Components**, click the **Add Component** button and use the search bar to find *Sheets*.
 
-Writing data from Keboola Connection into a business intelligence and analytics tool such as Tableau is very common. 
-Writing data to GoodData BI is covered in the following [side step](/tutorial/write/gooddata/). 
-However, keep in mind you can use the processed data in any way you wish.   
+   {: .image-popup}
+   ![Add Component](/tutorial/write/writing1.png)
 
-There are three options how to load the `opportunity_denorm` table into Tableau:
+2. Click **Add Component** and then click **Connect To My Data**.
 
-- Writing data to a provisioned Snowflake/Redshift database
-- Generating a [Tableau Data Extract (TDE)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1) 
-and loading it manually into Tableau Desktop
-- Generating a TDE and loading it into Tableau Server, either manually or automatically
+   {: .image-popup}
+   ![Connecto to Data](/tutorial/write/writing2.png)
 
-In either case, you need a writer component from the **Components -- Writers** menu. 
+3. Enter a *Name* and *Description* and click **Create Configuration**.
 
-{: .image-popup}
-![Screenshot - Writers](/tutorial/write/writers-intro.png)
+   {: .image-popup}
+   ![Name Component](/tutorial/write/writing3.png)
 
-In this tutorial, we'll go with the first option -- configuring the **Snowflake writer** as it is the easiest and fastest to use. 
-The description of the [Tableau TDE writer](/components/writers/bi-tools/tableau/) is part of the [writers](/components/writers/) 
-documentation. Click **Add New Writer**, find the Snowflake writer and click it.
+4. Now, we need to authorize the Google account to which we want to write the data.
+This process is similar to what we’ve done in the [Loading data from Google Sheets data source](/tutorial/load/googlesheets/) step of this tutorial.
 
-{: .image-popup}
-![Screenshot - Snowflake Writer](/tutorial/write/writers-intro-2.png)
+   {: .image-popup}
+   ![Authorize Google Account](/tutorial/write/writing4.png)
 
-Each writer can have multiple **configurations**. Each configuration represents a combination of data and destination. 
-To give an example, you only need a single configuration to write multiple tables into a single Tableau server. 
-However, two configurations are needed when you want to write data to two servers, or 
-have a set of data loaded manually and a different set automatically. 
-Continue with **New Configuration**.
+5. Enter a name for your connection and click **Sign in with Google**. You can also utilize *external authorization* if you need your colleagues
+to authorize their accounts. Please note that this authorization will only allow you to write data into a Google Spreadsheet.
 
-{: .image-popup}
-![Screenshot - Snowflake Writer](/tutorial/write/snowflake-intro.png)
+   {: .image-popup}
+   ![Authorize –Sign in with Google](/tutorial/write/writing5.png)
 
-Name the configuration and click **Create Configuration**.
+6. Click **Allow**.
 
-{: .image-popup}
-![Screenshot - Create Snowflake Writer Configuration](/tutorial/write/snowflake-create-config.png)
+   {: .image-popup}
+   ![Allow Access](/tutorial/write/writing6.png)
 
-At this moment, you're probably wondering why we are using the Snowflake database and where and how you are going to
-get credentials to it. The answer is near -- click the **Set up credentials** button:
+7. Click **New Table** now to select the `opportunity_denorm` table from your Storage. 
 
-{: .image-popup}
-![Screenshot - Snowflake Configuration Intro](/tutorial/write/snowflake-config.png)
+   {: .image-popup}
+   ![Select New Table](/tutorial/write/writing7.png)
 
-As part of the Keboola Connection platform we offer a 
-[dedicated database workspace](/components/writers/database/snowflake/#keboola-snowflake-database) that you can use to connect
-[external tools](/components/writers/database/snowflake/#using-keboola-provisioned-database). Simply click
-on **Keboola Snowflake Database**:
+8. Select the table and click **Next**.
 
-{: .image-popup}
-![Screenshot - Snowflake Credentials](/tutorial/write/snowflake-credentials.png)
+   {: .image-popup}
+   ![Select New Table](/tutorial/write/writing8.png)
 
-You will obtain a dedicated database and credentials to it. Use the lock icon to display 
-the password if you wish. Go back to the Snowflake writer configuration.
+9. You can either create a **new spreadsheet** or load data to an **existing spreadsheet**. Click **New spreadsheet** now and then click **Next**.
 
-{: .image-popup}
-![Screenshot - Snowflake Credentials](/tutorial/write/snowflake-credentials-2.png)
+   {: .image-popup}
+   ![Create a New Spreadsheet](/tutorial/write/writing9.png)
+ 
+10. Enter a name of your sheet, select **Update rows** and click **Save Sheet**. This will create a new empty spreadsheet under the authorized account. 
 
-The next step is to add tables -- click the **Add Table** button.
+    {: .image-popup}
+    ![Name and Save a Spreadsheet](/tutorial/write/writing10.png)
 
-{: .image-popup}
-![Screenshot - Select table](/tutorial/write/tableau-select-table.png)
+11. To load the data into the created spreadsheet, click the **Run Component** button.
 
-Select the table `out.c-opportunity.opportunity_denorm` and click **Add Table**:
+12. After the job is executed, you can click the spreadsheet name to open the Google Drive spreadsheet (assuming you have access to the spreadsheet).
 
-{: .image-popup}
-![Screenshot - Select table](/tutorial/write/tableau-select-table-2.png)
+    {: .image-popup}
+    ![Open the Spreadsheet](/tutorial/write/writing11.png)
 
-In the next step, you can specify properties of the columns in the target database, like `Name` and `Data Type`.
-Use the preview column to peek at the column data. Most columns in the `opportunity_denorm` table are strings (characters).
-Start with `Set All Columns to:` and select `string` to set them quickly. 
-Then **Preview** the content of each column and set its type accordingly.
-For the purpose of this tutorial, it is enough to set the *Amount* column to the type `number`.
-Don't forget to **Save** the settings.
+## What’s Next
+Proceed to [Flow Automation](/tutorial/automate/) for the next step in the tutorial. 
 
-{: .image-popup}
-![Screenshot - Snowflake Edit Columns](/tutorial/write/snowflake-columns.png)
-
-When done, go back to the configuration and click on **Run Component** to write the 
-data to the provisioned database.
-
-{: .image-popup}
-![Screenshot - Snowflake Run Configuration](/tutorial/write/snowflake-run.png)
-
-## Connecting with Tableau
-Now that you have prepared the data source, you can connect to it from Tableau. Login to Tableau online
-and **Create Workbook**:
-
-{: .image-popup}
-![Screenshot - Tableau Intro](/tutorial/write/tableau-1.png)
-
-A connection to a datasource will be requested. Choose *Connectors* and *Snowflake*:
-
-{: .image-popup}
-![Screenshot - Tableau Connectors](/tutorial/write/tableau-2.png)
-
-Enter the credentials from the Snowflake writer configuration (you can always review them by
-clicking on the **Database Credentials** button in the right menu).
-
-{: .image-popup}
-![Screenshot - Tableau Credentials](/tutorial/write/tableau-3.png)
-
-Select *Warehouse*, *Database* and *Schema* -- there is only one option because the database is completely
-isolated and created just for the purpose of your writer configuration. If in doubt, however, you can 
-always check the database credentials in the Snowflake writer configuration.
-You will see the *opportunity_denorm* table.
-
-{: .image-popup}
-![Screenshot - Tableau Database](/tutorial/write/tableau-4.png)
-
-You can now work with the data in Tableau. 
-You can also check that the *amount* column was converted to numeric.
-
-{: .image-popup}
-![Screenshot - Tableau Table](/tutorial/write/tableau-5.png)
-
-Create charts and reports as usual, and publish them to other people. 
-
-{: .image-popup}
-![Screenshot - Tableau Report](/tutorial/write/tableau-6.png)
-
-## Semi-final Note
-This concludes the main steps of the Keboola Connection tutorial. You have learned to load data into **Storage**, 
-manipulate it using **Transformations**, and load it into the target system using **Writers**. 
-
-At this point, you can
-
-- [return to the tutorial index](/tutorial/) for additional steps, 
-- take a brief side-step on how to set up a [writer to GoodData BI](/tutorial/write/gooddata/),
-- continue to [Setting up Automation](/tutorial/automate/), or just
-- [talk to us](/).
+## If You Need Help
+Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.

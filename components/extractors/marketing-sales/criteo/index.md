@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the Criteo Marketing Solutions API to extract data on ad performance.
+This data source connector uses the Criteo Marketing Solutions API to extract data on ad performance.
 
 ## Getting Credentials
 
@@ -31,9 +31,9 @@ To create a Criteo developer app and get a client ID and a client secret, take t
 Now you can use the client ID and client secret obtained from the text file.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Criteo** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Criteo** connector.
 
-To configure this extractor, you need to provide an API **Client ID** and a **Client secret**. Then click **Add Row**
+To configure this connector, you need to provide an API **Client ID** and a **Client secret**. Then click **Add Row**
 to create a new report to download.
 
 {: .image-popup}
@@ -42,7 +42,7 @@ to create a new report to download.
 ## Row Configuration
 
 In the configuration parameters, do the following:
-- Fill in the output name. It will be the name of the output table in Keboola Connection.
+- Fill in the output name. It will be the name of the output table in Keboola.
 - Fill in the [dimension](https://developers.criteo.com/marketing-solutions/docs/dimensions) for the report.
 - Fill in the [metrics](https://developers.criteo.com/marketing-solutions/docs/metrics) for the report.
 - Fill in the [currency](https://developers.criteo.com/marketing-solutions/docs/currencies-supported) of the report.

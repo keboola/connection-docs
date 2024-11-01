@@ -8,10 +8,22 @@ redirect_from:
 * TOC
 {:toc}
   
-This extractor allows you to download data from Shoptet permalinks.
+This data source connector allows you to download data from Shoptet permalinks. 
+In order to be able to use this connector, you have to create a permanent link to your report in Shoptet administration.
+
+For example, to create a permanent link for Orders, go to Orders > Export in you Shoptet adminitration page and at the bottom of the page, you can see the option to create the permanent link. This link is a direct download link to the csv file that you will use in component's configuration. To see how the report looks like, you can visit this link using your browser and it will automatically get downloaded to your computer.
+
+The link will look something like this: 
+`https://keboola.com/export/orders.csv?patternId=-9&partnerId=12&hash=3323211c346061e3d9abfadf1738a2a6661af830979b46111149664973d696a8`
+
+**The export must be set to csv format, other formats will not work.**
+
+![Screenshot - Export Config](/components/extractors/marketing-sales/shoptet/export_config.png)
+
+You can find more information on how to set up the export in [Shoptet documentation](https://podpora.shoptet.cz/hc/cs/articles/360003161791-Export-produkt%C5%AF).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Shoptet** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Shoptet** connector.
 
 - Set the shop name.
 - Set the Base URL of the store.

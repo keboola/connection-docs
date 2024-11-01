@@ -1,13 +1,13 @@
 ---
-title: Other Extractors
+title: Other Data Source Connectors
 permalink: /components/extractors/other/
 redirect_from:
     - /extractors/other/
 ---
 
-Extractors import data from external sources and integrate it to the Keboola Connection environment.
-Apart from extractors for social networks, communication, storage, and marketing and sales, there are
-extractors that do not fall into any of the above mentioned categories:
+Data source connectors import data from external sources and integrate it to the Keboola environment.
+Apart from connectors for social networks, communication, storage, and marketing and sales, there are
+connectors that do not fall into any of the above mentioned categories:
 
 - [AWS CUR](/components/extractors/other/aws-cu-reports/) --- imports cost and usage report data of an AWS subscription.
 - [Azure Cost Management](/components/extractors/other/azure-cost/) --- imports cost and usage data of an Azure subscription.
@@ -21,12 +21,15 @@ provides detailed data for locations specified by their names, address or coordi
 - [GitHub](/components/extractors/other/github/) --- imports data from GitHub, a software development platform.
 - [Google Search Console](/components/extractors/other/google-search-console/) --- imports data from Google Search Console, a web service by Google which allows webmasters to check indexing status and optimize visibility of their websites.
 - [Okta](/components/extractors/other/okta/) --- imports data from the Okta platform.
+- [HiBob](/components/extractors/other/hibob/) --- imports data from the HiBob HR platform.
+- [Mapbox](/components/extractors/other/mapbox/) --- imports data from the Mapbox API, providing customizable mapping solutions and location-based services for developers and businesses
 - [Papertrail](/components/extractors/other/papertrail/) --- imports data from Papertrail (log management).
 - [Pingdom](/components/extractors/other/pingdom/) --- imports data from Pingdom, a service for monitoring the uptime and performance of your websites and web applications.
 - [ServiceNow](/components/extractors/other/servicenow/) --- imports data from ServiceNow tables.
 - [Stripe](/components/extractors/other/stripe/) --- imports almost all data from Stripe, a service that enables online payments.
 - [Telemetry Data](/components/extractors/other/telemetry-data/) --- retrieves data about your project or the whole organization; helps Keboola calculate your project consumption.
 - [Time Doctor 2](/components/extractors/other/time-doctor-2/) --- imports data from Time Doctor 2.
+- [Weather API](/components/extractors/other/weather-api/) --- imports data from Weather API.
 - [What3words](/components/extractors/other/what3words/) --- converts What3words addresses to coordinates and vice versa.
 - [YourPass](/components/extractors/other/yourpass/) --- imports data about passes from YourPass.
 - And [more](https://components.keboola.com/components)

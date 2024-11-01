@@ -8,12 +8,12 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor loads single or multiple tables from a Keboola Connection project and stores them in a bucket in your
+This data source connector loads single or multiple tables from a Keboola project and stores them in a bucket in your
 current project. The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., when moving data between two different [organizations](/management/organization) or regions.
 
 ## Prepare API Token
-The extractor requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. 
+The connector requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. 
 This limits the potential risks of token misuse.
 
 To create such a token, go to **Users & Settings** in the *source project* and create a new token. Use a name that will
@@ -28,7 +28,7 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** connector.
 Select the region of the *source project*, and paste the token you generated in the *source project*.
 
 {: .image-popup}

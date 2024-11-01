@@ -8,12 +8,12 @@ redirect_from:
 * TOC
 {:toc}
 
-This writer loads single or multiple tables from your current project into a different Keboola Connection project.
+This data destination connector loads single or multiple tables from your current project into a different Keboola project.
 The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
 
 ## Prepare API Token
-The writer requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. 
+The data destination connector requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. 
 This limits the potential risks of token misuse.
 
 To create such a token, go to **Users & Settings** in the *target project* and create a new token. Use a name that will
@@ -29,7 +29,7 @@ If you want to write to multiple buckets, you'll have to create multiple tokens 
 and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** writer.
+[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** data destination connector.
 
 ## Specify Target Project
 Select the region of the *target project* and paste the token [you generated](#prepare-api-token) in the *target project*.

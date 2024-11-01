@@ -6,11 +6,11 @@ permalink: /components/extractors/other/azure-cost/
 * TOC
 {:toc}
 
-This extractor uses the [Azure Cost Management API](https://docs.microsoft.com/en-us/rest/api/cost-management/)
+This data source connector uses the [Azure Cost Management API](https://docs.microsoft.com/en-us/rest/api/cost-management/)
 to import cost and usage data of an [Azure subscription](https://techcommunity.microsoft.com/t5/azure/understanding-azure-account-subscription-and-directory/m-p/34800).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Cost Management** extractor.  
+[Create a new configuration](/components/#creating-component-configuration) of the **Azure Cost Management** connector.  
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with your Azure account.
 
 Fill in the **Subscription ID** and click **Save**.

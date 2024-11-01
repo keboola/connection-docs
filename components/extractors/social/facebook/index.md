@@ -9,17 +9,17 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract 
+This data source connector uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract 
 your Facebook Pages [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) 
 (including comments, likes, etc.), as well as Page or Page post [Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Pages** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Pages** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Facebook Page you want to extract.
 You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
-You can always revoke the authorization by removing the *Keboola Connection Extractor* from the list
+You can always revoke the authorization by removing the *Keboola data source* from the list
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}
@@ -37,7 +37,7 @@ all necessary fields will fill in automatically.
 {: .image-popup}
 ![Screenshot - New Query](/components/extractors/social/facebook/facebook-3.png)
 
-The query describes the extractor request to be sent to the Facebook Graph API. Knowing the API will make
+The query describes the connector request to be sent to the Facebook Graph API. Knowing the API will make
 creating a query easy because all options except `name` represent the [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
 ### Name
@@ -122,7 +122,7 @@ top parent ID is the Facebook Page ID.
 
 ## Facebook API Version
 You can set the version of the Facebook Graph API that will be applied for all requests made to the API
-by the Facebook Pages extractor. Read more about the Graph API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
+by the Facebook Pages data source connector. Read more about the Graph API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
 
 {: .image-popup}
 ![Screenshot - Api Version](/components/extractors/social/facebook/facebook-4.png)

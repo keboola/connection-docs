@@ -8,43 +8,43 @@ redirect_from:
 * TOC
 {:toc}
 
-All operations in a Keboola Connection project must be authorized. This is technically done using **API tokens**
+All operations in a Keboola project must be authorized. This is technically done using **API tokens**
 (also called **Storage API tokens**, **SAPI tokens**, and **Storage tokens**). 
 
-Keboola Connection is built using the [API-first approach](https://apigee.com/about/tags/api-first-0); almost every 
-operation done in Keboola Connection is in fact an API call and uses an API token. A token is valid only within 
+Keboola is built using the [API-first approach](https://apigee.com/about/tags/api-first-0); almost every 
+operation done in Keboola is in fact an API call and uses an API token. A token is valid only within 
 a **single project** (hence the name Storage API token). 
 
 Apart from API tokens, there are also [management tokens](/management/account/#tokens), which are used 
 to perform operations outside individual projects.
 
 Normally, when you are using the user interface, your API token is exchanged automatically with
-the server backend. Therefore you need to work with tokens only when working with Keboola Connection programmatically 
+the server backend. Therefore you need to work with tokens only when working with Keboola programmatically 
 (or if you need to limit a user's authorization to certain operations or data). 
 To learn more about all the available programmatic approaches, please follow our 
 [developers documentation](https://developers.keboola.com/overview/api/).
 
-Tokens can be managed from the **Users & Settings** --- **API Tokens** page.
+Tokens can be managed from the **Project Settings > API Tokens** page.
 
 {: .image-popup}
-![Screenshot - Storage Tokens](/management/project/tokens/overview.png)
+![Screenshot - Storage Tokens](/management/project/tokens/API_tokens.png)
 
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
 the email of the user they belong to. Master tokens cannot be modified, shared or deleted. 
 The only way to delete a master token is by [removing the user](/management/project/users/#removing-a-user) 
-from the project on the **Users & Settings** --- **Users** page. 
+from the project on the **Project Settings > Users** page. 
 
 A single user has only a single master token. In addition, master tokens are the only ones which can be 
 used to create other tokens. A master token has always access to all components, so having it allows you 
-to do everything that can be otherwise done via the Keboola Connection administration user interface.
+to do everything that can be otherwise done via the Keboola administration user interface.
 
 ## Working with Tokens
 API tokens are created
 
 1. automatically when joining a project (master token).
-2. automatically when creating a new configuration of certain components (for example, Orchestrations).
-3. automatically when running a JuypterLab Workspace.
+2. automatically when creating a new configuration of certain components (for example, orchestrations).
+3. automatically when running a JupyterLab workspace.
 4. automatically when using [external OAuth](/components/#external-authorization) authorization.
 5. manually when needed.
 
@@ -54,15 +54,15 @@ These are the typical reasons to manually create a new API token:
 - You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
 - You need to limit access to certain data (for example, share a single table) or components.
 
-Although tokens cannot be used to directly log in to the Keboola Connection user interface, they do allow executing almost all 
-operations in a Keboola Connection project. As such, they must be treated as secret. Therefore the token 
+Although tokens cannot be used to directly log in to the Keboola user interface, they do allow executing almost all 
+operations in a Keboola project. As such, they must be treated as secret. Therefore the token 
 string is shown only when the token is created and it is not accessible later. You should 
 immediately [refresh a token](#refreshing-a-token) in case there is a suspicion that the 
 token string was revealed to unauthorized persons.
 
 When creating a new token, the following rules apply:
 
-- Tokens by default give **no access** to any of the Keboola Connection component configurations.
+- Tokens by default give **no access** to any of the Keboola component configurations.
 - Token bearers can only access **permitted** Storage buckets via the [Storage API](http://developers.keboola.com/integrate/storage/) or
 [Storage console](https://storage-api-console.keboola.com/). 
 - Tokens **cannot** be used to run any actions in your project. However, they can trigger orchestrations.
@@ -70,10 +70,10 @@ When creating a new token, the following rules apply:
 
 You should never share the same token in multiple applications. The number of tokens is not 
 limited in any way, and there are no charges associated with them. Therefore, every time you need to provide
-someone with a Keboola Connection token, create a new one.
+someone with a Keboola token, create a new one.
 
 ## Token Events
-Keboola Connection also tracks all operations performed by each token. You can view the list of events from 
+Keboola also tracks all operations performed by each token. You can view the list of events from 
 the token detail page. Click on the token you are interested in:
 
 {: .image-popup}
@@ -86,7 +86,7 @@ In the **Events** tab, you can see all operations performed by that token:
 
 You can also see changes to the token itself (e.g., permission changes).
 
-*Note: The history of token operations is kept for **6 months**. If you are interested in 
+***Note:** The history of token operations is kept for **6 months**. If you are interested in 
 events associated with a particular storage object, view the events in [Storage](/storage/).*
 
 ## Limited Tokens
@@ -117,7 +117,7 @@ For production use, it is recommended not to give away your master token but to 
 different uses. This also simplifies refreshing tokens as it is clear for what each token is used.
 
 For example, suppose that you need to trigger data extraction from a MySQL database from within your own environment.
-You would then create a token that is authorized for running the **MySQL database extractor** (`keboola.ex-db-mysql` component) and
+You would then create a token that is authorized for running the **MySQL database source connector** (`keboola.ex-db-mysql` component) and
 **write** access to the `in.c-csv-import` bucket (which is used as a destination in the particular configuration you want to run).
 
 {: .image-popup}
@@ -153,9 +153,9 @@ A new token is generated. Now you can copy it or send it to someone.
 
 ## Sharing Token
 An existing token can be shared to an arbitrary email address (including yours). You can
-share a token by clicking the **Send token** button. Note that master tokens cannot be shared. 
+share a token by clicking the **Send Token** button. Note that master tokens cannot be shared. 
 
-**Important:** Always use the **Send token** feature instead of copying and sending the token yourself. 
+**Important:** Always use the **Send Token** feature instead of copying and sending the token yourself. 
 This is more secure because it does not actually send the token, only a link to retrieve it.
 
 {: .image-popup}
@@ -174,7 +174,7 @@ The recipient will obtain an email with an invitation link leading to the follow
 Only the buckets you made accessible will be accessible by the token. If you set the token to expire, 
 it will get deleted automatically after the specified period. In addition to sharing sections of 
 your data with selected users, the buckets can be also used for writing;
-people can send data directly to your Keboola Connection project instead of struggling with FTP or e-mail attachments.
+people can send data directly to your Keboola project instead of struggling with FTP or e-mail attachments.
 To revoke the access, simply delete or refresh the token.
 
 The token can then be used with the [Storage API](https://developers.keboola.com/integrate/) 

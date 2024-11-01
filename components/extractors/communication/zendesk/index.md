@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor fetches data from [Zendesk](https://www.zendesk.com/).
+This data source connector fetches data from [Zendesk](https://www.zendesk.com/).
 Before you start, have a working Zendesk account and get an API Token.
 
 ## Create New Application API Token
@@ -20,15 +20,15 @@ Go to **Admin / Channels / API**, and [create a new token](https://developer.zen
 {: .image-popup}
 ![Zendesk API token list](/components/extractors/communication/zendesk/zendesk-1.png)
 
-Fill in a description for the new token (for example, `Keboola Zendesk Extractor`), **Copy** the token and click the **Save** button.
+Fill in a description for the new token (for example, `Keboola Zendesk data source connector`), **Copy** the token and click the **Save** button.
 
 {: .image-popup}
 ![Zendesk Token copy](/components/extractors/communication/zendesk/zendesk-2.png)
 
-When the registration is finished, take a note of the API Key and save it. You will need it when creating your extractor configuration in Keboola Connection.
+When the registration is finished, take a note of the API Key and save it. You will need it when creating your connector configuration in Keboola.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Zendesk** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Zendesk** connector.
 Provide information about your Zendesk Account and API token.
 
 - **Your Zendesk domain**
@@ -313,5 +313,5 @@ Values of ticket custom fields
 
 ## Usage Limits
 
-Limits of the extractor are based on [Zendesk API Rate Limits](https://developer.zendesk.com/rest_api/docs/core/introduction#rate-limits).
+Limits of the data source connector are based on [Zendesk API Rate Limits](https://developer.zendesk.com/api-reference/introduction/rate-limits/#zendesk-suite-plan-limits).
 

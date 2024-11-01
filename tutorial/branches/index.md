@@ -1,5 +1,5 @@
 ---
-title: Development Branches
+title: "Part 6: Development Branches"
 permalink: /tutorial/branches/
 ---
 
@@ -25,4 +25,4 @@ various components that demonstrate the different aspects of branches.
   * [Project diff](/tutorial/branches/project-diff/)
   * [Merge to production](/tutorial/branches/merge-to-production/)
 
-{% include branches-beta-warning.html %}
+{% include public-beta-warning.html %}

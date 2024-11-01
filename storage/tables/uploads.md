@@ -5,7 +5,7 @@ permalink: /storage/tables/uploads/
 
 All tables imported to and exported from Storage go through [Files](/storage/files/).
 
-When a table is **imported** into Storage by any means (manually, through an extractor, or as a result of running an application),
+When a table is **imported** into Storage by any means (manually, through a data source connector, or as a result of running an application),
 the CSV file is first stored in *Files* and only then imported to an actual table. 
 This means that the Storage Files contain a history of data uploaded to the Storage Tables. 
 It is useful mainly in the two following cases:

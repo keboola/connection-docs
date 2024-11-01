@@ -9,36 +9,32 @@ items:
     title: Getting Started Tutorial
     items:
       - url: /tutorial/load/
-        title: Part 1 - Loading Data
+        title: "Part 1: Loading Data"
         items:
-          - url: /tutorial/load/googledrive/
-            title: Loading with GoogleDrive Extractor
+          - url: /tutorial/load/googlesheets/
+            title: Loading Data from Google Sheets
 
           - url: /tutorial/load/database/
-            title: Loading with Database Extractor
+            title: Loading Data from Database
 
       - url: /tutorial/manipulate/
-        title: Part 2 - Data Manipulation
+        title: "Part 2: Data Manipulation"
         items:
-          - url: /tutorial/manipulate/sandbox/
-            title: Using Sandbox
+          - url: /tutorial/manipulate/workspace/
+            title: Using Workspace
 
       - url: /tutorial/write/
-        title: Part 3 - Writing Data
-        items:
-          - url: /tutorial/write/gooddata/
-            title: Writing to GoodData
+        title: "Part 3: Writing Data"
 
       - url: /tutorial/automate/
-        title: Part 4 - Automation
+        title: "Part 4: Flow Automation"
 
       - url: /tutorial/ad-hoc/
-        title: Part 5 - Ad-Hoc Data Analysis
+        title: "Part 5: Ad-Hoc Data Analysis"
 
       - url: /tutorial/branches/
-        title: Part 6 - Development Branches
+        title: "Part 6: Development Branches"
         items:
-
           - url: /tutorial/branches/prepare-tables/
             title: Prepare Tables
 
@@ -57,11 +53,29 @@ items:
           - title: Merge to Production
             url: /tutorial/branches/merge-to-production/
 
+      - url: /tutorial/onboarding/
+        title: Keboola Platform Onboarding
+        items:
+        - url: /tutorial/onboarding/usage-blueprint/
+          title: Usage Blueprint
+
+        - url: /tutorial/onboarding/architecture-guide/
+          title: Multi-Project Architecture
+          items:
+            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+              title: Business Data Model
+
+        - url: /tutorial/onboarding/cheat-sheet/
+          title: Best Practices
+
+        - url: /tutorial/onboarding/governance-guide/
+          title: Governance Guide
+
   - url: /components/
     title: Components
     items:
       - url: /components/extractors/
-        title: Extractors
+        title: Data Source Connectors
         items:
           - url: /components/extractors/communication/
             title: Communication
@@ -81,6 +95,9 @@ items:
               - url: /components/extractors/communication/intercom/
                 title: Intercom
 
+              - url: /components/extractors/communication/ms-outlook/
+                title: MS Outlook (Office 365)
+
               - url: /components/extractors/communication/slack/
                 title: Slack
 
@@ -90,6 +107,15 @@ items:
           - url: /components/extractors/database/
             title: Databases
             items:
+              - url: /components/extractors/database/mysql/
+                title: MySQL
+
+              - url: /components/extractors/database/postgresql/
+                title: PostgreSQL
+
+              - url: /components/extractors/database/oracle/
+                title: Oracle
+
               - url: /components/extractors/database/azure-storage-table/
                 title: Azure Storage Table
 
@@ -98,6 +124,9 @@ items:
 
               - url: /components/extractors/database/bigquery/
                 title: Google BigQuery
+
+              - url: /components/extractors/database/microsoft-sql/
+                title: Microsoft SQL
 
               - url: /components/extractors/database/mongodb/
                 title: MongoDB
@@ -117,6 +146,9 @@ items:
               - url: /components/extractors/erp/k2/
                 title: K2
 
+              - url: /components/extractors/erp/netsuite/
+                title: NetSuite
+
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
             items:
@@ -128,6 +160,9 @@ items:
 
               - url: /components/extractors/marketing-sales/bigcommerce/
                 title: BigCommerce
+
+              - url: /components/extractors/marketing-sales/chartmogul/
+                title: ChartMogul
 
               - url: /components/extractors/marketing-sales/criteo/
                 title: Criteo
@@ -148,22 +183,34 @@ items:
                 title: Google Ad Manager
 
               - url: /components/extractors/marketing-sales/google-analytics/
-                title: Google Analytics
+                title: Google Analytics  (UA, GA4)
+
+              - url: /components/extractors/marketing-sales/google-cm360/
+                title: Google Campaign Manager 360
+
+              - url: /components/extractors/marketing-sales/google-dv360/
+                title: Google Display & Video 360
+
+              - url: /components/extractors/marketing-sales/google-my-business/
+                title: Google My Business
 
               - url: /components/extractors/marketing-sales/linkedin-pages/
-                title: Linkedin Pages              
+                title: Linkedin Pages
 
               - url: /components/extractors/marketing-sales/mailchimp/
                 title: Mailchimp
 
               - url: /components/extractors/marketing-sales/market-vision/
                 title: Market Vision
-              
+
               - url: /components/extractors/marketing-sales/bing-ads/
                 title: Microsoft Advertising (Bing Ads)
                 items:
                   - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
                     title: Columns and primary keys of report presets
+
+              - url: /components/extractors/marketing-sales/pinterest-ads/
+                title: Pinterest Ads
 
               - url: /components/extractors/marketing-sales/pipedrive/
                 title: Pipedrive
@@ -176,6 +223,12 @@ items:
 
               - url: /components/extractors/marketing-sales/sklik/
                 title: Sklik
+
+              - url: /components/extractors/marketing-sales/tiktok-ads/
+                title: TikTok Ads
+
+              - url: /components/extractors/marketing-sales/zoho/
+                title: Zoho
 
           - url: /components/extractors/social/
             title: Social
@@ -190,7 +243,10 @@ items:
                 title: Twitter
 
               - url: /components/extractors/social/youtube/
-                title: YouTube
+                title: YouTube Data API
+
+              - url: /components/extractors/social/youtube-reporting/
+                title: YouTube Reporting
 
           - url: /components/extractors/storage/
             title: Storage
@@ -213,12 +269,18 @@ items:
               - url: /components/extractors/storage/storage-api/
                 title: Keboola Connection Storage
 
-              - url: /components/extractors/storage/onedrive/
-                title: OneDrive
+              - url: /components/extractors/storage/onedrive-excel-sheets/
+                title: OneDrive Excel Sheets
+
+              - url: /components/extractors/storage/onedrive-files/
+                title: OneDrive Files
 
           - url: /components/extractors/other/
             title: Other
             items:
+              - url: /components/extractors/other/airtable/
+                title: Airtable
+
               - url: /components/extractors/other/aws-cu-reports/
                 title: AWS Cost Usage Reports
 
@@ -251,6 +313,12 @@ items:
 
               - url: /components/extractors/other/okta/
                 title: Okta
+                
+              - url: /components/extractors/other/hibob/
+                title: HiBob
+
+              - url: /components/extractors/other/mapbox/
+                title: Mapbox
 
               - url: /components/extractors/other/papertrail/
                 title: Papertrail
@@ -270,6 +338,9 @@ items:
               - url: /components/extractors/other/time-doctor-2
                 title: Time Doctor 2
 
+              - url: /components/extractors/other/weather-api
+                title: Weather API
+
               - url: /components/extractors/other/what3words/
                 title: What3words Augmentation
 
@@ -277,7 +348,7 @@ items:
                 title: YourPass
 
       - url: /components/writers/
-        title: Writers
+        title: Data Destination Connectors
         items:
           - url: /components/writers/bi-tools/
             title: Business Intelligence
@@ -380,57 +451,107 @@ items:
           - url: /components/applications/ai/
             title: AI
             items:
-              - url: /components/applications/ai/open-ai/
-                title: OpenAI
-        
+              - url: /components/applications/ai/generative-ai/
+                title: Generative AI
 
+      - url: /components/data-apps/
+        title: Data Apps
+        items:
+          - url: /components/data-apps/oidc/
+            title: OpenID Connect
+            items:
+              - url: /components/data-apps/oidc/auth0/
+                title: Auth0
+              - url: /components/data-apps/oidc/google-cloud-platform/
+                title: Google Cloud Platform
+              - url: /components/data-apps/oidc/microsoft-entra-id/
+                title: Microsoft Entra ID
+              - url: /components/data-apps/oidc/okta/
+                title: Okta
+                    
       - url: /components/branches/
         title: Development Branches
 
       - url: /components/ip-addresses/
         title: IP Addresses
-  
+
   - url: /templates/
     title: Templates
     items:
       - url: /templates/marketing-platforms/
         title: Advertising Platforms
-      
+
+      - url: /templates/ai-sms-campaign/
+        title: AI SMS Campaign
+        
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
-        
+
       - url: /templates/datahub/
         title: DataHub
-      
+
       - url: /templates/data-quality/
         title: Data Quality
-        
+
       - url: /templates/ecommerce/
         title: eCommerce
-      
+        
+      - url: /templates/ecomm-kpi-dashboard/
+        title: eCommerce KPI Dashboard
+
       - url: /templates/google-analytics/
         title: Google Analytics
-      
+
+      - url: /templates/interactive-keboola-sheets/
+        title: Interactive Keboola Sheets
+
+      - url: /templates/kai-sql-bot/
+        title: Kai SQL Bot
+        
+      - url: /templates/mailchimp/
+        title: Mailchimp
+        
+      - url: /templates/media-cashflow/
+        title: Media Cashflow
+
       - url: /templates/project-management/
         title: Project Management
-            
+
       - url: /templates/repository/
         title: Repository
-        
+
+      - url: /templates/snowflake-security-checkup/
+        title: Snowflake Security Checkup
+
+      - url: /templates/social-media-engagement/
+        title: Social Media Engagement
+
       - url: /templates/surveys/
         title: Surveys
-              
+
+      - url: /templates/ua-and-ga4-comparison/
+        title: UA and GA4 Comparison
+
   - url: /catalog/
     title: Data Catalog
     items:
       - url: /catalog/multi-project/
         title: Multi-Project Architecture
-  
+
   - url: /storage/
     title: Storage
     items:
       - url: /storage/buckets/
         title: Buckets
+
+      - url: /storage/data-streams/
+        title: Data Streams
+
+      - url: /storage/files/
+        title: Files
+
+      - url: /storage/jobs/
+        title: Jobs
 
       - url: /storage/tables/
         title: Tables & Aliases
@@ -447,14 +568,17 @@ items:
           - url: /storage/tables/backups/
             title: Backups and Restorations
 
-      - url: /storage/files/
-        title: Files
-
-      - url: /storage/jobs/
-        title: Jobs
-
       - url: /storage/byodb/
         title: Bring Your Own Database
+        items:
+          - url: /storage/byodb/external-buckets/
+            title: External Datasets
+
+      - url: /storage/byobq/
+        title: Bring Your Own BigQuery
+
+  - url: /flows/
+    title: Flows
 
   - url: /orchestrator/
     title: Orchestrations
@@ -509,6 +633,9 @@ items:
 
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
+
+      - url: /transformations/bigquery/
+        title: BigQuery Transformations
 
       - url: /transformations/redshift-plain/
         title: Redshift Transformations
@@ -599,3 +726,12 @@ items:
 
       - url: /management/organization/
         title: Organizations
+
+      - url: /management/global-search/
+        title: Global Search
+
+      - url: /management/telemetry/
+        title: Telemetry
+        items:
+          - url: /management/telemetry/telemetry-dashboards/
+            title: Telemetry Dashboards

@@ -14,11 +14,12 @@ Free Plan projects have the following limits:
 - **Azure North Europe**: Project is located in Europe, deployed in Microsoft Azure cloud. Read more about stack [here](/overview/#stacks).
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
-- **Transformations:** are limited to [SQL](/transformations/snowflake-plain/) and [Python](/transformations/python-plain/).
+- **Transformations:** are limited to [SQL](/transformations/snowflake-plain/), [Python](/transformations/python-plain/), and [R](/transformations/r-plain/).
 - **DataScience:** training and deploying [ML models](transformations/ml-model-deployment/) is not available.
 - **Dynamic backend scaling:** possibility to choose the [backend size](/transformations/snowflake-plain/) for each transformation is not available. 
-- **Performance:** is limited to an xsmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
+- **Performance:** is limited to an XSmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
 - **Storage:** is limited to 250 GB of data storage.
+- **Time travel:** is not supported and there is no option to restore data if bucket or table has been accidentaly deleted.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
 
 ## DWH Backend
@@ -51,12 +52,12 @@ If your credit card is declined when purchasing more minutes, possible reasons i
 - The transaction exceeds the credit card’s maximum transaction amount.
 
 ## Free Plan Project Upgrade
-Any Free Plan project can be upgraded to a [standard Keboola Connection project](/management/project/) upon the execution 
+Any Free Plan project can be upgraded to a [standard Keboola project](/management/project/) upon the execution 
 of our standard order form under the Master Software Subscription Agreement (MSSA).
 
 ## Project Deletion
 
-If your project does not use any credits for 30 days, we will mark it as inactive and scheduled for deletion. 
+If your project does not use any minutes for 30 days, we will mark it as inactive and scheduled for deletion. 
 We will inform you about that, and send you several warning emails.
 
 Next, 45 days after marking your project as inactive, we will check it one more time, to make sure that it is still inactive 

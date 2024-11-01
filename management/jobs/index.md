@@ -6,7 +6,7 @@ permalink: /management/jobs/
 * TOC
 {:toc}
 
-Most of the things done in Keboola Connection run as background, asynchronous jobs.
+Most of the things done in Keboola run as background, asynchronous jobs.
 For an overview of all jobs, running and finished, go to the **Jobs** section:
 
 {: .image-popup}
@@ -55,8 +55,8 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **Long running non-successful orchestrations (more than 2 hours)**  | `component:orchestrator durationSeconds:>7200 -status:success` |
 | **Orchestrations which ended with warning**  | `component:orchestrator status:warning` |
 | **Failed transformations**  | `component:transformation status:error`  |
-| **Failed jobs from Docker component HTTP extractor**  | `params.component:keboola.ex-http status:error` <br />  |
-| **Jobs from either HTTP extractor or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
+| **Failed jobs from Docker component HTTP data source connector**  | `params.component:keboola.ex-http status:error` <br />  |
+| **Jobs from either HTTP data source or Google Sheets data destination connector** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
 For more technical information about background jobs, see our 
@@ -97,7 +97,7 @@ the waiting state under the following conditions:
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
 
 ## Storage Jobs
-Not only we record all jobs executed in your Keboola Connection project, we also record all data that was uploaded
+Not only we record all jobs executed in your Keboola project, we also record all data that was uploaded
 into it. Go to **Storage** and click the **Jobs** tab:
 
 {: .image-popup}
@@ -109,7 +109,7 @@ When you click an **importTable** job, you'll see the Storage job detail:
 ![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)
 
 Clicking **File ID** will take you to the **Files** section in **Storage**,
-where all data pushed into your Keboola Connection project is stored.
+where all data pushed into your Keboola project is stored.
 You can download the data and import it into other tables, or you can revert to an older table version.
 
 {: .image-popup}

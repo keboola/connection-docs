@@ -10,14 +10,14 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor allows you to import data from Google Ads.
+This data source connector allows you to import data from Google Ads.
 If you do not have a Google Ads manager account, follow this [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Ads** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Ads** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
-To run the extractor, specify your [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en).
+To run the connector, specify your [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en).
 
 {: .image-popup}
 ![Screenshot - Customer configuration](/components/extractors/marketing-sales/google-ads/google-ads-1.png)

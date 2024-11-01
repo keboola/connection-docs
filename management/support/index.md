@@ -6,14 +6,14 @@ permalink: /management/support/
 * TOC
 {:toc}
 
-There are multiple ways to obtain support from within your project.
-First and foremost, there is a button at the bottom right of your project. Click it, select **Support / Chat**, and fill in the form
-to create a ticket, which will reach your maintainer.
+There are multiple ways to obtain support from within your project (if you cannot access your account at all, see [below](#locked-out-of-keboola)). 
+First and foremost, there is a button at the bottom right of your project. Click it, select **Support**, and fill in the form
+to create a ticket to reach your maintainer.
 
 {: .image-popup}
-![Screenshot -- User joined](/management/support/support-link.png)
+![Screenshot -- User joined](/management/support/help-support-new-widget.png)
 
-Secondly, if you happen to trigger a server error while working with Keboola Connection, there will be
+Secondly, if you happen to trigger a server error while working with Keboola, there will be
 a button to contact our support in the error alert message.
 
 {: .image-popup}
@@ -69,3 +69,7 @@ that neither [the maintainer](/management/organization/), nor Keboola Support ca
 In other words, when Auto Join is turned off for an organization, only the organization users and project users may
 access its projects. Every new user of the organization must be explicitly invited. Every new user of any of its projects
 must either be explicitly invited or be a user of the organization.
+
+## Locked Out of Keboola?
+If you happen to be locked out of Keboola and need to contact Keboola Support, please email [support@keboola.com](https://help.keboola.com/support@keboola.com) 
+or use the **support form** available at the [Keboola Support Portal](https://keboola.atlassian.net/servicedesk/customer/portal/9).

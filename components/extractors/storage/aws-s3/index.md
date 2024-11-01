@@ -8,14 +8,14 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables 
-in Keboola Connection (KBC) Storage.
+This data source connector loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables 
+in Keboola Storage.
 
 After creating a new configuration, select the files you want to extract from AWS S3 and determine how
-you save them to KBC Storage. You also need to set up proper permissions on AWS.
+you save them to Keboola Storage. You also need to set up proper permissions on AWS.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** connector.
 
 In order to access the files in S3, you need to set up AWS credentials or create an AWS role.
 
@@ -64,7 +64,9 @@ You can add the following policy document as an inline policy to an AWS user:
 Select `Role` as the **Login Type**. Create a role in your AWS account using the following steps:
 
  - Go to the [IAM Console](https://console.aws.amazon.com/iam/home?#/roles) and click **Create role**. Then click **Another AWS account**.
- - For **Account ID**, use `147946154733`.
+ - For **Account ID**
+   - use `147946154733` for stacks `connection.keboola.com`, `connection.eu-central-1.keboola.com`, `connection.north-europe.azure.keboola.com`.
+   - use `206948715642` for all other stacks.
  - For **External ID**, enter the value from your project.
  - **Do not enable the setting to Require MFA (multi-factor authentication)**.
  - On the next page, attach the policy:
@@ -120,11 +122,11 @@ The **Search Key** can be a path to a single file or a prefix to multiple files
 
 The **additional source settings** section allows you to set up the following:
 
- - **New Files Only**: The extractor will keep track of the downloaded files and will continue with the unprocessed files
+ - **New Files Only**: The connector will keep track of the downloaded files and will continue with the unprocessed files
  on the next run. To reset the state which keeps track of the progress and enables to continue with new files, 
- use the **Reset State** button or uncheck the **New Files Only** option and run the extractor again. 
+ use the **Reset State** button or uncheck the **New Files Only** option and run the connector again. 
  - **Wildcard**: **Search Key** is used as a prefix, and all available files matching the prefix will be downloaded.
- - **Subfolders**: Available only with **Wildcard** turned on. The extractor will also process all subfolders.
+ - **Subfolders**: Available only with **Wildcard** turned on. The connector will also process all subfolders.
  
 
 ### CSV Settings
@@ -134,12 +136,12 @@ The **additional source settings** section allows you to set up the following:
 
 - **Delimiter** and **Enclosure** specify the CSV format settings.
 - **Header** specifies how the destination table column names are obtained:
-  - **CSV file(s) contain(s) a header row**: All downloaded files contain a row with the CSV header. The extractor obtains 
+  - **CSV file(s) contain(s) a header row**: All downloaded files contain a row with the CSV header. The connector obtains 
   the header from a randomly selected downloaded file. 
   - **Set column names manually**: None of the downloaded files does contain a header row and you will use the **Column Names**
   input to specify the headers manually.
   - **Generate column names as col_1, col_2, etc.**: None of the downloaded files contains a header row, and 
-  the extractor will generate the column names automatically as a sequential number with the `col_` prefix.
+  the connector will generate the column names automatically as a sequential number with the `col_` prefix.
                  
 ### Destination
 
@@ -165,7 +167,7 @@ and **New Files Only** to create a configuration that incrementally loads all ne
  - **Add Row Number Column**: A new column `s3_row_filename` is added to the table and will contain the row number in each 
  of the downloaded files.
 
-The extractor also supports [Advanced mode](/components/#advanced-mode), all supported
+The data source connector also supports [Advanced mode](/components/#advanced-mode), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor).
 
 ## Limitations

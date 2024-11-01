@@ -8,17 +8,17 @@ redirect_from:
 * TOC
 {:toc}
 
-The FTP extractor loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Connection Storage.
+The FTP data source connector loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Storage.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FTP** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **FTP** connector.
 To access the files on FTP, you need to set up access credentials.
 
 {: .image-popup}
 ![Screenshot - FTP extractor server configuration](/components/extractors/storage/ftp/ftp-1.png)
 
 You can use a private key for the **SFTP** connection type. If you fill in the private key,
-the extractor will use it for login instead of the password. You can also change
+the connector will use it for login instead of the password. You can also change
 the port for each connection method. The default port for **FTP** and **FTPS** is **21**, and for **SFTP**, it is **22**.
 
 ## Add Tables
@@ -40,9 +40,9 @@ supports a recursive list of directories.
 {: .image-popup}
 ![Screenshot - FTP extractor download settings](/components/extractors/storage/ftp/ftp-3.png)
 
-- **New Files Only**: The extractor will keep track of downloaded files and will continue with the unprocessed files
+- **New Files Only**: The connector will keep track of downloaded files and will continue with the unprocessed files
  on the next run. To reset the state which keeps track of the progress and enables to continue with new files, 
- use the **Reset State** button or uncheck the **New Files Only** option and run the extractor again.
+ use the **Reset State** button or uncheck the **New Files Only** option and run the connector again.
  - **Decompress**: All downloaded files will be decompressed (currently supporting ZIP and GZIP). All files in all archives
  will be imported into a single Storage table.
 
@@ -72,11 +72,11 @@ There are three options for determining column names:
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.
 
 ### Audit
-The extractor can optionally add audit columns to the table. `ftp_filename` adds the processed file name, and `ftp_row_number`
+The data source connector can optionally add audit columns to the table. `ftp_filename` adds the processed file name, and `ftp_row_number`
 adds the row number in the source file.
 
 {: .image-popup}
 ![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-6.png)
 
-The extractor also supports [Advanced mode](/components/#advanced-mode), all supported
+The connector also supports [Advanced mode](/components/#advanced-mode), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/ex-ftp).

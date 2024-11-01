@@ -12,7 +12,7 @@ Extract layout data from [FileMaker](https://www.claris.com/filemaker/) relation
 
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FileMaker** Data Source (Extractor).
+[Create a new configuration](/components/#creating-component-configuration) of the **FileMaker** data source connector.
 
 
 ### Prepare the FileMaker database 
@@ -78,7 +78,7 @@ Output
 ======
 
 **NOTE** The columns prefixed `_` are prefixed with hsh prefix in the result table. 
-This is because the Keboola Connection Storage does not allow to store columns prefixed with underscore. So the column `_Timestamp` will be stored as `hsh_Timestamp` in the resulting table.
+This is because the Keboola Storage does not allow to store columns prefixed with underscore. So the column `_Timestamp` will be stored as `hsh_Timestamp` in the resulting table.
 
 
 ### Metadata Tables

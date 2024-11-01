@@ -10,11 +10,11 @@ redirect_from:
 
 YourPass enables users to create passes for mobile wallets; e.g., for boarding passes, loyalty points, or tickets.
 
-The YourPass extractor uses the [YourPass API](https://doc.yourpass.eu/) to import data from [YourPass](https://www.yourpass.eu/)
-to Keboola Connection.
+The YourPass data source connector uses the [YourPass API](https://doc.yourpass.eu/) to import data from [YourPass](https://www.yourpass.eu/)
+to Keboola.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **YourPasss** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **YourPasss** connector.
 
 ### Authorization Configuration
 
@@ -33,11 +33,11 @@ Then you can toggle between sandbox mode and production mode using the checkbox.
 
 ### Row Configuration
 
-In the row configuration select the pass endpoint to extract data about passes (only the pass endpoint is currently supported by the extractor).
+In the row configuration select the pass endpoint to extract data about passes (only the pass endpoint is currently supported by the connector).
 Then specify the output table name in the parameter **Output name**; this will be the name of the output table in Keboola.
 Specify the project ID to only fetch passes from a specific project. You can also specify the template ID, to only fetch
 passes created with a specific template. You can specify both template ID and project ID, as well as keep both blank. If you keep both 
-parameters blank, the extractor will fetch all passes from all projects.
+parameters blank, the connector will fetch all passes from all projects.
 
 {: .image-popup}
 ![Screenshot - YourPass row configuration](/components/extractors/other/yourpass/yourpass_row.png)

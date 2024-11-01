@@ -1,177 +1,181 @@
 ---
-title: Keboola Connection Overview
+title: Keboola Overview
 permalink: /overview/
 ---
 
 * TOC
 {:toc}
 
-Keboola Connection is a cloud platform for **interconnecting diverse systems**. It is used to
+Keboola is a cloud-based platform for all your data integration, transformation, and orchestration needs. 
+Designed for data engineers, analysts, and scientists, Keboola **simplifies data processes, enabling efficient management and insightful analysis**. 
 
-- *extract data* from a source system,
-- *manipulate and augment* the extracted data with other data, and finally,
-- *write the results* to a destination system.
+Key features of Keboola:
+- **Data Integration:** Effortlessly extract data from various sources like databases, cloud services, and APIs. Load it seamlessly into destinations of your choice for comprehensive analysis.
+- **Data Storage:** Use Keboola's robust data warehousing (Snowflake, BigQuery, Redshift, Synapse, etc.) for secure and accessible data storage. 
+- **Data Manipulation:** With our extensive toolset, clean, enrich, and transform your data using SQL, Python, R, and more directly within Keboola.
+- **Automation:**  Automate your data workflows end-to-end with Keboola's intuitive Flows, saving time and reducing manual errors.
 
-To give a simple **example** of what this means, you might use Keboola Connection to *extract* data about your customers from your Salesforce CRM.
-Then you *extract* comments from your Facebook page and find sentiment in them.
-After that, you join those data sets together with weather reports, and *write* everything into Tableau Online
-in order to create reports and analyze your customers' behavior.
+***Note:** In the early days, we called the Keboola platform **Keboola Connection (KBC)**.  Although the platform's name is **Keboola** now, you will probably see 
+the word Connection or the abbreviation 'KBC' occasionally in table names, column names, etc.*  
 
-## Keboola Connection Architecture
+## Deployment Options
+Keboola supports various deployment models to suit your specific needs:
 
-The following chart shows how Keboola Connection platform is structured. The platform is composed of many components which
-are structured into categories described below.
+- **Fully Managed:** Let us handle everything for you.
+- **Multi-Tenant:** Let us fully manage and maintain all resources.
+- **Multi-Tenant with BYO Database:** Use your data storage (Snowflake, BigQuery, Redshift, Synapse, etc.) while we manage the rest.
+- **Single-Tenant:** Deploy Keboola in your cloud environment (AWS, Azure, GCP) for maximum control and security.
 
-![KBC Structure Chart](/overview/kbc_structure.png){: .img-responsive}
+## Keboola Architecture
+Keboola organizes accounts by [**projects**](/management/project/), offering a single project on the [Free Plan](/management/payg-project/) and multiple projects 
+under its subscription models. This [**multi-project architecture**](/tutorial/onboarding/architecture-guide/) supports a Data Mesh strategy and a customizable 
+data warehouse structure for various needs and use cases.
 
-### Configurations
+The following diagram illustrates the structure of a single Keboola project, composed of various categorized components described below.
 
-Typically, Keboola Connection is fully managed by Keboola. 
-However, it also supports multi-, hybrid- and private cloud deployments.  
+{: .image-popup}
+![Keboola Architecture 1](/overview/project-structure1.png)
 
-When finishing your innovation cycle in the cloud, 
-your data pipeline processes can be compiled and executed in the cloud within your secure Keboola Connection environment. 
-However, you can also do an on-premise offload utilising your existing hardware inside your private cloud infrastructure. 
-
-
-### Data Sources
-Data sources are systems containing data you wish to [bring into Keboola Connection](/tutorial/load/).
-They can be pretty much anything from Google Analytics, Facebook, SalesForce to on-premise databases,
-legacy systems or even appliances and IoT devices. Data sources are not part of Keboola Connection.
-
-### Extractors
-[Extractors](/components/extractors/) are Keboola Connection components used for gathering data from sources.
-Typically, they connect to [APIs](https://en.wikipedia.org/wiki/Web_API) of external
-services. But they can also connect directly to an arbitrary database, or process incoming e-mails.
+### Data Source Connectors
+[Data source connectors](/components/extractors/), formerly known as extractors, are Keboola components used 
+to gather data from various sources. They can connect to APIs of external services, databases, applications, object storage, and many others.
 
 ### Storage
-[Storage](/storage/) is the central Keboola Connection component managing everything related to storing data and accessing it.
-It has two sections: [File Storage](/storage/files/) with all raw files uploaded
-to your project, and [Table Storage](/storage/tables/) where all data tables are organized
-into buckets which are further organized into *in* and *out* stages.
+[Storage](/storage/) is the central component in Keboola responsible for data management and access. It comprises two sections: 
 
-Storage is implemented as a layer on top of various database engines that we use as our [backends](/transformations/#backends) ([Snowflake](https://www.snowflake.com/) and [Redshift](https://aws.amazon.com/redshift/)).
-It provides an important API (Storage API) access for other components and 3rd party applications.
-Your own **remote storage** can be connected to Keboola Connection as well.
+- [File Storage](/storage/files/), with all raw files uploaded to your project, and
+- [Table Storage](https://help.keboola.com/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
 
-### Transformations
-[Transformations](/transformations/) are components which end-users can create by writing a **free-form script** in
-[SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift), [Julia](https://julialang.org/),
-[Python](https://www.python.org/about/) and [R](https://www.r-project.org/about.html). 
-Keboola Connection provides each user with [Sandbox](/transformations/sandbox/) --- a safe environment for your experiments.
+This component acts as a middle layer that works with various [backend](/transformations/#backends) database systems like 
+[Snowflake](https://www.snowflake.com/), [Redshift](https://aws.amazon.com/redshift/), [BigQuery](https://cloud.google.com/bigquery/),
+[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/), [and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
+making it easier to connect with other parts of the system and third-party applications.
+
+### Transformations & Workspaces
+[Transformations](/transformations/) allow you to manipulate data in your project. They are the tasks you want to perform and enable you to write custom scripts
+in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, BigQuery, etc.), dbt, [Julia](https://julialang.org/), [Python](https://www.python.org/about/), 
+and [R](https://www.r-project.org/about.html). 
+
+All transformations operate on a copy of Storage data in an isolated environment — a [workspace](/transformations/workspace/), guaranteeing safety for your
+analyses and experimentation. Workspaces support collaborations and can be shared. 
+
+- **SQL workspaces** are accessible through the database provider's IDE or your preferred SQL IDE.
+- **Python, R, or Julia workspaces** are available through Keboola's hosted and managed Jupyter Lab environment.
 
 ### Applications
-Unlike the free-form Transformations, [Applications](/components/applications/) are **predefined blocks**, which
-can be used to do some pretty advanced stuff like sentiment analysis, association discovery, or histogram grouping.
-Applications can also augment data (for example, add Weather or Exchange Rates) by calling on *3rd party services*
-to bring in additional data.
+Unlike free-form transformations, [applications](/components/applications/) are **predefined blocks** that enable users to perform advanced tasks such as 
+sentiment analysis, association discovery, or histogram grouping. They can also enhance data, for example, by incorporating external data like weather or exchange 
+rates through third-party services.
 
-### Writers
-[Writers](/components/writers/) are components delivering output data from Keboola Connection into the systems 
-and applications where the data gets used/consumed. These can be commonly used [relational databases](/components/writers/database/) or various [BI, reporting and analytics](/components/writers/bi-tools/) tools.
+### Data Apps
+[Data apps](/components/data-apps/) are simple web applications that can be deployed inside Keboola projects and also publicly accessed from outside the projects. 
+They are usually custom-built to address specific challenges, for example, recommendation engines, interactive segmentation tools, AI integration solutions, data 
+visualization platforms, custom internal reporting tools for business teams, and financial apps for gaining insights into spending patterns.
 
-### Data Consumption
-*Data Consumption* is represented by 3rd party systems that accept (or extract) data from Keboola Connection and use it further.
-These may be business intelligence analytics or visualization systems, but also e-mail marketing, CRM,
-or simply any system that can help our customers to realize the extra value Keboola Connection adds to the data.
+### Data Destination Connectors
+[Data destination connectors](/components/writers/), formerly known as writers, are components responsible
+for output data delivery from Keboola to the systems and applications where the data gets used or consumed ([relational databases](/components/writers/database/), BI, [reporting and analytics](/components/writers/bi-tools/) platforms, tools, or applications).
 
 ### Full Automation
+The [Flows](/flows/) feature helps you to fully automate end-to-end processes. 
+You can specify the order in which individual connectors, transformations, and other components will be run and set up parallelization. By adding
+a **schedule** or trigger, you can automate processes at specified intervals or times of the day.
 
-In the background, behind the scenes, there is the [**Orchestrator**](/orchestrator/)
-(or Scheduler) component which allows everything to be fully automated.
-Orchestrator enables to specify what components should be executed in what order and when 
-(specified intervals, specified times of the day, etc.).
+The platform automatically scales resources to facilitate the automated processes.
 
-The whole warehouse or data lake cycle can be fully automated via [API](https://developers.keboola.com/automate/#automation).
-The end-to-end serverless solution automatically enables you to connect data sources, automatically store data 
-in the correct format, check for format inconsistencies, and choose different metadata providers based on the
-operation you wish to perform on the data. The platform scales the needed resources automatically across various 
-types of data (structured, semi-structured, and non-structured) and processes.
+***Note:** There's an older version of Flows, called the Orchestrator, which is used in legacy components only.*
 
-The whole environment tracks all the [operational metadata](#operational-metadata) and 
-can be accessed without a server via [APIs](https://developers.keboola.com/overview/api/). 
-This is useful when automating development, testing and production run of data jobs with automatic controls of 
-[pipelines](https://keboola.docs.apiary.io/#reference/development-branches).
+### Development Branches
+The [Development Branches](/components/branches/) feature enables you to modify component settings without affecting active configurations or 
+entire orchestrated workflows. It's particularly useful for implementing significant project changes or when you need to be extra careful 
+about performing your changes safely.
 
+## Keboola Governance
 ### Operational Metadata
+Keboola collects diverse [operational metadata](/management/jobs/#search-attributes), including user activity, job status, data flow, 
+schema evolution, data pipeline performance, and adherence to a client's security rules. All project metadata is accessible in your project and enables you 
+to perform in-depth analyses, audits, or event-driven actions.
 
-Keboola Connection collects all kinds of [operational metadata](/management/jobs/#search-attributes), 
-describing user activity, job activity, data flow, 
-schema evolution, data pipeline performance, compliance with a client’s security rules, etc. 
-All project metadata is accessible from within the client’s Keboola Connection environment to perform any kind of analysis, audit, or event action.
+This metadata enables us to automatically create data lineage, offering real-time insights into data origin and usage for analytical and regulatory needs and
+highlighting the data's journey and usage on the platform.
 
-Based on the metadata, we are able to build **data lineage** on the fly and automatically. 
-This makes it possible to understand where the data is coming from and how it is used, both for analytical and regulatory purposes.
+### Cost Monitoring
+Keboola collects telemetry data on job executions and user activities, detailing credit units used per job for exact cost calculations. This allows costs to be 
+attributed to specific departments, teams, use cases, and users, offering detailed insights into resource use.
 
-### Components
+### Identity and Access management
+Manage user accounts in your organization, controlling their access to specific Keboola projects and datasets. Simplify data sharing within your 
+organization, keep track of individual access rights, and promote clear visibility of data access.
 
-Keboola Connection, as an open environment consisting of many built-in interoperating components (Storage, 
-Transformations, Extractors etc.), can be [extended](https://developers.keboola.com/extend/) with
- **arbitrary code to extract, transform or write data**.
+## Extending the Platform 
+The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
+can be [extended](https://developers.keboola.com/extend/) with **arbitrary code to extract, transform, or write data**.
 
-There are two ways of extending the platform: 
-creating [Components](https://developers.keboola.com/extend/#component) (used as extractors, applications and writers) and 
-creating components based on [Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
+You can extend the platform by creating
 
-All components can be created by us, your in-house teams or 3rd parties.
-They can easily use already existing data, ETL processes, and workflows. 
-The development platform provides you with automation of infrastructure, user management, data management, and essential services like 
-[data catalogue](/catalog/), operational metadata, full governance, and 
-reverse billing per job. 
-The components can be kept private or offered to other Keboola Connection users.
-Our market place consists of hundreds of applications that are developed mainly by 3rd 
-parties and can be natively used as part of the workflows you are creating. 
-This provides a great way for our users to really manage their environment and create a composable enterprise.
+- [components](https://developers.keboola.com/extend/#component) (used as data source and destination connectors and applications).
+- components based on the [Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
 
-Components can be run as standard pieces of our [orchestrations](/orchestrator/), 
-obtaining the full support and services (a link to your [components](https://components.keboola.com/components), 
-[logs, etc.](https://developers.keboola.com/extend/common-interface/)).
+Keboola, your in-house teams, or 3rd parties can create all components while using already existing data, ETL processes, and workflows. 
+The platform automates infrastructure, user, and data management, offering services like [data catalog](/catalog/), operational metadata, governance, 
+and reverse billing. Components can be private or shared with Keboola users via our marketplace featuring applications mainly from 3rd parties 
+to enhance workflows and support a composable enterprise.
 
-## Keboola CLI
-[Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands for operating your cloud 
-data pipeline. It is available to install in the Windows, macOS, and Linux environments.
+Components can be run as standard pieces of our Flows [/tutorial/automate/#main-header], obtaining the full support and services (a link to your
+[components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
+
+### Keboola CLI
+[Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands for operating your cloud data pipeline. It can be installed in 
+the Windows, macOS, and Linux environments.
+
+## AI Assistance
+The Keboola AI feature can increase your productivity in several areas, such as:
+
+* **Suggesting descriptions of configurations**: This includes [transformations](/transformations), [components](/components), and [flows](/orchestrator). Note that the configuration is sent to the AI service as part of description generation.  
+* **Explaining errors**: When a job finishes in failure, an error is reported. You can request an explanation of this error. Note that the error is sent to the AI service as part of explanation generation.
+
+We're using a privately deployed [Microsoft Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) for the AI service. Prompts and responses are [NOT used to train the model](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy). 
+However, you should not place any sensitive information (such as API keys and passwords) into the code of transformations, descriptions or any metadata, as their contents are not consider secret and may be 
+processed by the AI service, as well as logs or telemetry processes. 
 
 ## Keboola Support
-When working with Keboola Connection, you are never on your own and there are multiple [ways to obtain support](/management/support/) from us.
+When working with the Keboola platform, you are never on your own, and there are multiple [ways to obtain support](/management/support/) from us. 
 To solve your problem or to gain context, our support staff may join your project when requested.
 
 ## Other Commonly Used Terms
-This section explains a few terms that are often used throughout these documentation pages.
+This section explains a few terms often used throughout these documentation pages.
 
 ### Stacks
-Keboola Connection is available in multiple stacks, these can be either multi-tenant
-or single-tenant. The current multi-tenant stacks are:
+The Keboola platform is available in multiple stacks, either multi-tenant or single-tenant. The current multi-tenant stacks are:
 
-- US AWS -- [connection.keboola.com](https://connection.keboola.com), 
-- EU AWS -- [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com),
-- EU Azure -- [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com). 
+- US Virginia AWS – [connection.keboola.com](https://connection.keboola.com/),
+- US Virginia GCP - [connection.us-east4.gcp.keboola.com](https://connection.us-east4.gcp.keboola.com/)
+- EU Frankfurt AWS – [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com/)
+- EU Ireland Azure – [connection.north-europe.azure.keboola.com](https://connection.north-europe.azure.keboola.com/)
+- EU Frankfurt GCP - [connection.europe-west3.gcp.keboola.com](https://connection.europe-west3.gcp.keboola.com/)
 
-A **stack** is a combination of a datacenter location (region) and a cloud provider, and is identified by
-its domain (URL). The currently supported
-cloud providers are [Amazon AWS](https://aws.amazon.com/) and [Microsoft Azure](https://azure.microsoft.com/en-us/).
-A stack is a completely independent full instance of Keboola Connection services. That means that 
-if you have projects in multiple stacks, you need to have multiple Keboola Connection accounts.
+A **stack** combines a datacenter location (region) and a cloud provider and is identified by its domain (URL). The currently supported cloud 
+providers are [Amazon AWS](https://aws.amazon.com/), [Microsoft Azure](https://azure.microsoft.com/en-us/), and [Google Cloud](https://cloud.google.com/). 
+A stack is an entirely independent, full instance of Keboola platform services. That means that if you have projects in multiple stacks, you need to have 
+multiple Keboola accounts.
 
-Each stack uses a different network with a different set of **dedicated [IP addresses](/components/ip-addresses/)**.
-The [Developer documentations](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes in 
-more detail how to handle multiple stacks when working with the API.
+Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
+Our [developer documentation](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes how to handle multiple stacks 
+when working with the API in more detail.
 
-Single-tenant stacks are available for a single enterprise customer with a domain name in form `connection.CUSTOMER_NAME.keboola.com`.
+Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.
 
 ### Jobs
-Most things in Keboola Connection are done using the batch approach; when you perform an operation, a [job](/management/jobs/) is created
-and executed in the background. We also call these jobs **asynchronous**. Multiple jobs can be running at the same
-time and you can continue your work in the meantime.
+Most things in the Keboola platform are done using the batch approach; when you perform an action, a [job](/management/jobs/) is created and executed 
+in the background. We also call these jobs **asynchronous**. Multiple jobs can run simultaneously, and you can continue your work in the meantime.
 
 ### Tokens
-Every operation done in Keboola Connection must be authorized with a [*token*](/management/project/tokens/). Each Keboola Connection user is automatically assigned a token on their first login.
-Apart from that, tokens with limited access to some Keboola Connection operations can be created (and shared with other people).
-The principle of token authorization allows you, for example, to easily [share a single table](/management/project/tokens/#limited-tokens)
-from your Storage with someone without them having to register to Keboola Connection (enter email/password).
+In Keboola, every action requires a [token](/management/project/tokens/) for authorization, automatically assigned to users at first login. Additionally, 
+tokens for restricted access can be created and shared. 
+This token system enables easy [sharing of specific resources](/management/project/tokens/#limited-tokens), like tables, without requiring platform registration.
 
-### Input / Output Mapping
-To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings)
-separates source data from your script. A secure workspace is created with data copied from the tables specified
-in the [input mapping](/transformations/mappings/#input-mapping).
-After the transformation has been executed successfully, only tables and files defined
-in the [output mapping](/transformations/mappings/#output-mapping) are brought back to Storage.
+### Input and Output Mapping
+To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. 
+A secure [workspace](https://help.keboola.com/transformations/workspace/#main-header) is created with data copied from the tables specified 
+in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed successfully, only tables and files defined
+in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.

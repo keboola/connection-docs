@@ -41,7 +41,7 @@ The Julia script itself will be compiled to `/data/script.jl`. To access your in
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/files/` or `/data/in/files/` path. If you want to dig really deep,
 have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
-Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola Connection.
+Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for files you do not wish to exchange with Keboola.
 
 ### Packages
 You can list extra packages in the UI. These packages are installed using the [General package registry](https://github.com/JuliaRegistries/General).

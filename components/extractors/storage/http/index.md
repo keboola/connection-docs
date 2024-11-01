@@ -8,10 +8,10 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage.
+This data source connector loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **HTTP** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **HTTP** connector.
 
 Enter a base URL -- the prefix for all downloaded CSV files from a given website
 *(for example, `https://help.keboola.com`; you can then test the extraction on our sample tables)*.
@@ -67,5 +67,5 @@ There are three options for determining column names:
 
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**. 
 
-The extractor also supports [Advanced mode](/components/#advanced-mode), all supported
+The data source connector also supports [Advanced mode](/components/#advanced-mode), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/http-extractor).

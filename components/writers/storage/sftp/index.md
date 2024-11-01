@@ -9,12 +9,12 @@ redirect_from:
 {:toc}
   
 
-This writer allows you to write tables and files to a remote SFTP server.
+This data destination connector allows you to write tables and files to a remote SFTP server.
 
 ## Configuration
 
 [Create a new configuration](https://help.keboola.com/components/#creating-component-configuration) 
-of the SFTP writer. 
+of the SFTP data destination connector. 
 Then provide the target SFTP server URL, port (default is 22), and authentication, either via 
 a username and a password, or with a private key.
 

@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Keboola">
-	<title>{{ page.title }} | Keboola Connection User Documentation</title>
+	<title>{{ page.title }} | Keboola User Documentation</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 	<script>
       WebFont.load({
@@ -51,11 +51,11 @@
 							{% include breadcrumbs.html %}
 							{% endif %}
 
-							<h1>{{ page.title }}</h1>
+							<h1 id="main-header">{{ page.title }}</h1>
 
 						 	{{ content }}
 
-							<script type="text/javascript" src="https://keboola.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/23cn5b/b/19/a44af77267a987a660377e5c46e0fb64/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-UK&collectorId=34a4d3a5"></script>
+							<script type="text/javascript" src="https://keboola.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/-3ddrgv/b/8/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=712ca69e"></script>
 						</div>
 
 					</div>
@@ -100,5 +100,35 @@
   }
 });
 </script>
+
+<!-- Begin KAI chatbot -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+		location="us-central1"
+		project-id="keboola-ai"
+		agent-id="2400cda3-8b20-435d-8770-11569a61ced0"
+		language-code="en"
+		intent=WELCOME>
+		<df-messenger-chat-bubble
+			chat-title="Kai Documentation Chatbot (Beta)">
+	</df-messenger-chat-bubble>
+</df-messenger>
+<style>
+	df-messenger {
+		z-index: 999;
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		--df-messenger-chat-border-radius: 6px;
+		--df-messenger-chat-window-box-shadow: 0px 0px 59px 0px rgba(0, 0, 0, 0.25);
+		--df-messenger-titlebar-title-font-size: 16px;
+		--df-messenger-send-icon-color: #a2aab8;
+		--df-messenger-send-icon-color-active: #0B57D0;
+		--df-messenger-send-icon-color-hover: #0B57D0;
+		--df-messenger-input-padding: 8px 0 8px 16px;
+ 	}
+</style>
+<!-- End KAI chatbot -->
+
 </body>
 </html>

@@ -116,7 +116,7 @@ extractors
 </tr>
 </table>
 
-## With Nested Documents
+## Mapping with Nested Documents
 
 <table class="table table-bordered">
 <tr>
@@ -215,12 +215,10 @@ extractors-revisions
 <tr><td>68fc980</td><td>Second version</td><td>5716054bee6e764c94fa7ddd</td></tr>
 </table>
 
-As you can see, joining those two tables will be as easy as pie.
+As you can see, joining these two tables will be very easy.
 
 </td>
 </tr>
-<tr>
-    
 </table>
 
 
@@ -317,8 +315,6 @@ As you can see, the values from the "revisions" array are stored in the columns 
 </td>
 </tr>
 </table>
-
-
 
 ## With Lists
 

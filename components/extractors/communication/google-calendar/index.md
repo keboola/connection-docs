@@ -8,12 +8,12 @@ redirect_from:
 * TOC
 {:toc}
 
-The Google Calendar extractor uses the [Google Calendar API](https://developers.google.com/calendar/) to download all
+The Google Calendar data source connector uses the [Google Calendar API](https://developers.google.com/calendar/) to download all
 calendars available in your account, including events and their details (organizer, location, attendees, reminders,
 notifications, attachments, description, etc.). It can also be used for downloading Google owned calendars with all national holidays.
 
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Calendar** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Calendar** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 {: .image-popup}

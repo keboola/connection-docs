@@ -25,7 +25,7 @@ The Python script itself will be compiled to `/data/script.py`. To access your
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/files/` or `/data/in/files/` path. If you want to dig really deep,
 have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
-Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola Connection.
+Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola.
 
 ## Python Script Requirements
 Python is **sensitive to indentation**. Make sure not to mix tabs and spaces. All files are assumed to be in UTF;
@@ -90,7 +90,7 @@ you can develop the transformation script locally.
 The script itself is expected to be in the `data` directory. The script name is arbitrary. The `data` directory name
 is also arbitrary, we use it as general reference to the above folder structure. It is possible to use relative 
 directories --- the current directory of the transformation is always the `data` directory. That means you can move 
-the script to a Keboola Connection transformation with no changes. To develop a Python transformation 
+the script to a Keboola transformation with no changes. To develop a Python transformation 
 that takes a [sample CSV file](/transformations/python-plain/source.csv) locally, follow these steps:
 
 - Put the Python code into a file, for example, script.py in the working directory.
@@ -209,7 +209,7 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
 {% endhighlight %}
 
 ## Example 3 -- Using CSV Dialect
-You can simplify the above code using our pre-installed Keboola Connection (KBC) dialect.
+You can simplify the above code using our pre-installed Keboola dialect.
 
 {% highlight python %}
 import csv

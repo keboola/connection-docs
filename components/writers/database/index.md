@@ -1,12 +1,12 @@
 ---
-title: Database Writers
+title: Database Data Destination Connectors
 permalink: /components/writers/database/
 redirect_from:
     - /writers/database/
 
 ---
 
-Writers export data from Keboola Connection to SQL databases:
+Data destination connectors export data from Keboola to SQL databases:
 
 - [Google BigQuery](/components/writers/database/bigquery/) --- sends tables to a [Google BigQuery](https://cloud.google.com/bigquery/) dataset.
 - [Exasol](/components/writers/database/exasol/) --- sends tables to a [Exasol](https://www.exasol.com) database.

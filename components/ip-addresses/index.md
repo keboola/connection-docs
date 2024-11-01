@@ -11,16 +11,20 @@ using a firewall or AWS security groups. This applies especially to the producti
 connections should not be publicly available. For an extra layer of security, setting up an
 [SSH Tunnel](/components/extractors/database/#connecting-to-database) is also recommended.
 
-To access external systems (including your database), Keboola Connection uses the below 
-IP addresses. Please **whitelist** these IP addresses in your firewalls to allow Keboola Connection 
-to successfully connect to your system. This applies to all components including all extractors and writers.
+To access external systems (including your database), Keboola uses the below 
+IP addresses. Please **whitelist** these IP addresses in your firewalls to allow Keboola 
+to successfully connect to your system. This applies to all components including all data source and destination connectors.
 
 **Important:** These IP addresses can change in the future! For your convenience, you can programmatically
 fetch and process the [list of existing IP addresses in JSON format](/components/ip-addresses/kbc-public-ip.json).
-Below are listed the available [Keboola Connection Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
+Below are listed the available [Keboola Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
+
+For ease of identification, our outbound IP addresses on AWS stacks (except for legacy services) now have reverse DNS records. 
+Each IP address has a unique name like `outbound-if-issue-contact-support-at-keboola-com.keboola.com`, embedding a reference for a support email. 
+This enhancement helps us promptly tackle network issues or unauthorized access. 
 
 ## connection.keboola.com
-For projects in the default AWS US [region](/overview/#regions) (AWS region `us-east-1`), 
+For projects in the default AWS US [region](/overview/#stacks) (AWS region `us-east-1`), 
 the following IP addresses are currently used for all new projects:
 
 {% comment %}
@@ -48,7 +52,7 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.eu-central-1.keboola.com
-For projects in the AWS EU [region](/overview/#regions) (AWS region `eu-central-1`),
+For projects in the AWS EU [region](/overview/#stacks) (AWS region `eu-central-1`),
 the following IP addresses are currently used for all new projects:
 
 {% comment %}
@@ -73,7 +77,7 @@ For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-
 
 
 ## connection.north-europe.azure.keboola.com
-For projects in the Azure EU [region](/overview/#regions) (Azure region `north-europe`), 
+For projects in the Azure EU [region](/overview/#stacks) (Azure region `north-europe`), 
 the following IP addresses are currently used:
 
 {% comment %}
@@ -84,6 +88,56 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `20.82.252.129`
 - `20.82.252.124`
 - `20.67.181.161`
+- `149.72.196.5` - Used only for email delivery.
+
+## connection.europe-west3.gcp.keboola.com
+For projects in the GCP EU Frankfurt [region](/overview/#stacks) (GCP region `europe-west3`),
+the following IP addresses are currently used:
+
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
+- `35.234.119.197`
+- `34.141.46.49`
+- `35.246.230.46`
+- `34.107.122.61`
+- `34.141.48.196`
+- `34.159.107.55`
+- `35.198.95.119`
+- `34.141.105.82`
+- `34.159.221.111`
+- `34.141.110.244`
+- `34.159.45.34`
+- `34.159.249.35`
+- `34.141.102.89`
+- `34.141.53.119`
+- `34.107.117.166`
+- `34.89.161.253`
+- `149.72.196.5` - Used only for email delivery.
+
+## connection.us-east4.gcp.keboola.com
+For projects in the GCP US Virginia [region](/overview/#stacks) (GCP region `us-east4`),
+the following IP addresses are currently used:
+
+{% comment %}
+ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
+{% endcomment %}
+- `35.245.113.124`
+- `35.186.177.208`
+- `34.48.52.58`
+- `34.145.229.110`
+- `34.48.69.223`
+- `35.245.169.222`
+- `35.236.206.220`
+- `35.221.29.130`
+- `35.245.146.94`
+- `34.85.153.249`
+- `34.48.67.21`
+- `35.245.10.93`
+- `34.86.101.13`
+- `35.199.50.163`
+- `35.245.139.246`
+- `35.245.222.156`
 - `149.72.196.5` - Used only for email delivery.
 
 ## IP Address Ranges in JSON
@@ -99,8 +153,8 @@ The JSON file contains an array of ranges (attribute `prefixes`), each of which 
  - `vendor` — cloud service provider
  - `region` — cloud service region
  - `service` — Keboola application service
-   - `queue` - for Keboola Connection components
-   - `syrup` - for Keboola Connection components using legacy Queue V1
+   - `queue` - for Keboola components
+   - `syrup` - for Keboola components using legacy Queue V1
    - `email-delivery` - for outbound emails
 
 ### Sample JSON

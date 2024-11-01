@@ -8,11 +8,11 @@ redirect_from:
 * TOC
 {:toc}
   
-This writer sends tables as CSV or other files to a [Google Cloud Storage](https://cloud.google.com/storage) bucket.
+This data destination connector sends tables as CSV or other files to a [Google Cloud Storage](https://cloud.google.com/storage) bucket.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Cloud Storage** writer.
-To authorize the writer, you can either choose to use a Google service account or [instant authorization](/components/#instant-authorization).
+[Create a new configuration](/components/#creating-component-configuration) of the **Google Cloud Storage** data destination connector.
+To authorize the connector, you can either choose to use a Google service account or [instant authorization](/components/#instant-authorization).
 
 The service account login is the recommended way of authorizing this component. 
 

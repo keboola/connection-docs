@@ -8,15 +8,15 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Fixer API](https://fixer.io/documentation) to download currency exchange rates as published by 
+This data source connector uses the [Fixer API](https://fixer.io/documentation) to download currency exchange rates as published by 
 the European Central Bank (ECB).
 
 The exchange rates are available from a base currency to 42 destination currencies for all **working days** from 4th January 1999. 
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ECB Currency Rates** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **ECB Currency Rates** connector.
 
-From the dropdown list, select the source currency you wish to use. It is the only thing you need to do to configure this extractor. 
+From the dropdown list, select the source currency you wish to use. It is the only thing you need to do to configure this connector. 
 
 {: .image-popup}
 ![Screenshot - Currency Rates Source Currency](/components/extractors/other/currency-rates/currency-rates-1.png)

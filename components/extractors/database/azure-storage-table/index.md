@@ -6,16 +6,16 @@ permalink: /components/extractors/database/azure-storage-table/
 * TOC
 {:toc}
 
-The Azure Storage Table extractor allows you to fetch data from the
+The Azure Storage Table data source connector allows you to fetch data from the
 - [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) or the
 - [Azure Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 If you want to use
-- the [Cosmos DB Mongo DB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), use the [MongoDB extractor](/components/extractors/database/mongodb/).
-- the [Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api), use the [CosmosDB extractor](/components/extractors/database/cosmosdb/).
+- the [Cosmos DB Mongo DB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), use the [MongoDB data source connector](/components/extractors/database/mongodb/).
+- the [Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api), use the [CosmosDB data source connector](/components/extractors/database/cosmosdb/).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Storage Table** extractor.  
+[Create a new configuration](/components/#creating-component-configuration) of the **Azure Storage Table** connector.  
 
 Fill in the **Connection String**. Then click **Save**.
 
@@ -57,7 +57,7 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
   - See examples in the [MongoDB - Mapping Examples](/components/extractors/database/mongodb/mapping/).
   - For the details see the [keboola/php-csvmap](https://github.com/keboola/php-csvmap) library.
 
-By default, the extractor exports all rows and columns. It can be adjusted using the following settings:
+By default, the data source connector exports all rows and columns. It can be adjusted using the following settings:
 - **`select`**: string (optional); e.g., `PartitionKey, RowKey, Name, Age`
   - For `raw` mode, `PartitionKey` and `RowKey` fields must be present in the query results.
 - **`limit`**: integer (optional); the maximum number of exported rows; e.g., `500`

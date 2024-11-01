@@ -8,14 +8,14 @@ redirect_from:
 * TOC
 {:toc}
 
-To be able to work with Keboola Connection, each user needs to have the following:
+To be able to work with Keboola, each user needs to have the following:
 
-- Platform-wide Keboola Connection account
+- Platform-wide Keboola account
 - Access to a specific project
 
 Each user is, system-wide, **identified by their email address**.
 This means that you need to enter correct email addresses for existing users.
-Be especially careful about company aliases; from Keboola Connection's point of view, they are different users.
+Be especially careful about company aliases; from Keboola's point of view, they are different users.
 
 All operations performed by a user are technically done using the
 [master token](/management/project/tokens/#master-tokens). This is important for
@@ -23,34 +23,42 @@ All operations performed by a user are technically done using the
 
 ## User Roles
 
-There are four user roles available:
+There are the following user roles available:
 
-- **Share** -- the user has full administrative access to the project, including sharing data in the [Data Catalog](/catalog/).
+- **Share** – the user has full administrative access to the project, including sharing data in the [Data Catalog](/catalog/).
     _Note: The Share role can only be granted by an [organization member](/management/organization/)._
-- **Admin** -- the user has full administrative access to the project.
-- **Guest** -- the user can access all project data, but **cannot** 
-    - change project settings _(name, description, etc.)_,
-    - delete the project,
-    - manage users,
-    - manage [API tokens](/management/project/tokens/),
-    - permanently remove configurations in [Trash](/components/#delete-configuration),
-    - create a new [orchestration](/orchestrator/), 
-    - create an external authorization link, and
-    - change the name, the schedule and the disabled status of an existing orchestration.
-- **ReadOnly** -- the user can view all project data, but **cannot**
-    - create, modify or delete configurations of [components](/components/), [orchestrations](/orchestrator/) and [transformations](/transformations/),
-    - run any components, orchestrations and transformations,
-    - import and modify data in [Storage](/storage/),
-    - use [Data Catalog](/catalog/),
-    - change project settings _(name, description, etc.)_,
-    - create an external authorization link,
-    - delete the project,
-    - manage users, and
+- **Admin** – the user has full administrative access to the project.
+- **Guest** – the user can access all project data, but **cannot** 
+    - change project settings _(name, description, etc.)_;
+    - delete the project;
+    - manage users;
+    - manage [API tokens](/management/project/tokens/);
+    - permanently remove configurations in [trash](/components/#delete-configuration);
+    - create an external authorization link; and
+    - change the name, the schedule, and the disabled status of an existing orchestration.
+- **ReadOnly** – the user can view all project data, but **cannot**
+    - create, modify or delete configurations of [components](/components/), [orchestrations](/orchestrator/) and [transformations](/transformations/);
+    - run any components, orchestrations and transformations;
+    - import and modify data in [Storage](/storage/);
+    - use [Data Catalog](/catalog/);
+    - change project settings _(name, description, etc.)_;
+    - create an external authorization link;
+    - delete the project;
+    - manage users; and
     - manage [API tokens](/management/project/tokens/).
+- **Developer** – the user can write to any development branch but **cannot edit** the production branch.
+- **Reviewer** – the user extends the Developer role with the right to **approve** merge requests (except for their own requests).
+- **Production Manager** – the user has the right to
+    - **merge** the merge requests;
+    - **manage** configuration state in the production branch;
+    - **link/unlink**  a bucket;
+    - **manage** production credentials (in variable storre);
+    - **manage** triggers;
+    - **run** jobs;
+    - **manage** notifications (for flows). However, they
+    - **cannot make changes** in development branches (edit configurations, etc.).
 
-_Note: The ReadOnly role is currently available on all stacks for projects with feature `queuev2`_
-
-
+**Notes:**<br />*The ReadOnly role is currently available on all stacks for projects with feature `queuev2`.*<br />*The Developer, Reviewer and Production Manager roles are currently only available when the feature of Governed Change Management is active.*<br />*If the Production Manager is also an Organization Admin, they can invite new members to the project and assign them the Production Manager role.*
 
 ## Inviting User
 If you want to add a new user to the project, go to **Users & Settings** in the project and
@@ -74,7 +82,7 @@ they will never become a member of the project.
 The steps that follow an invitation differ depending on whether the user already exists or is new.
 
 ### New User
-If the user does not have a platform-wide Keboola Connection account yet, their name in the user list will be
+If the user does not have a platform-wide Keboola account yet, their name in the user list will be
 labelled as `Not activated yet`:
 
 {: .image-popup}
@@ -91,20 +99,20 @@ When they click the **Activate Your Account** button, they will be taken to the 
 ![Screenshot -- Activation form](/management/project/users/register-2.png)
 
 After filling it in, the [login form](/management/project/users/#authentication) appears.
-They can immediately login to Keboola Connection and see their invitation to the project they have been invited to.
+They can immediately login to Keboola and see their invitation to the project they have been invited to.
 Once they accept it, you will see their chosen screen name in the user list:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
 ### Existing User
-If the added user already has a Keboola Connection account, you will see their screen name in the user list right away:
+If the added user already has a Keboola account, you will see their screen name in the user list right away:
 
 {: .image-popup}
 ![Screenshot -- User joined](/management/project/users/users-list-2.png)
 
-*Note: If you intend to invite an existing user, it is a good idea to verify the screen name.
-If you see `Not activated yet` instead of the screen name, it means that there is no Keboola Connection account associated with the email address.*
+***Note:** If you intend to invite an existing user, it is a good idea to verify the screen name.
+If you see `Not activated yet` instead of the screen name, it means that there is no Keboola account associated with the email address.*
 
 The user will receive an email invitation:
 
@@ -157,7 +165,7 @@ No other user can enter the project. If Auto Join is disabled, maintainer users 
 see the name of the project and request access which must be approved by a current member of the project.
 
 ## Authentication
-There are three options for authenticating a Keboola Connection account:
+There are three options for authenticating a Keboola account:
 
 - Google account
 - Combination of an email address and the associated password
@@ -166,15 +174,15 @@ There are three options for authenticating a Keboola Connection account:
 The options are described in detail below.
 
 ### Google Account
-If you have a Google Account (Gmail), you can use it to authenticate to Keboola Connection.
+If you have a Google Account (Gmail), you can use it to authenticate to Keboola.
 Click the respective button on the login page:
 
 {: .image-popup}
 ![Screenshot -- Login Page](/management/project/users/login-1.png)
 
-Then follow the Google instructions to authorize Keboola Connection.
-No configuration in Keboola Connection is necessary to enable Google Account login.
-Bear in mind, however, that the Google Account email must match the email you are using in Keboola Connection.
+Then follow the Google instructions to authorize Keboola.
+No configuration in Keboola is necessary to enable Google Account login.
+Bear in mind, however, that the Google Account email must match the email you are using in Keboola.
 
 ### Multi-Factor Authentication
 Enable multi-factor authentication (MFA) in your [account settings](/management/account/#multi-factor-authentication).

@@ -8,25 +8,25 @@ redirect_from:
 * TOC
 {:toc}
 
-This extractor uses the [Instagram Graph API](https://developers.facebook.com/docs/instagram-api) (built on the 
+This data source connector uses the [Instagram Graph API](https://developers.facebook.com/docs/instagram-api) (built on the 
 [Facebook Graph API](https://developers.facebook.com/docs/graph-api)) to extract media objects, comments, insights 
 and metrics from [Instagram Business Accounts](https://business.instagram.com/getting-started). 
 
 In order to access a business account's data, users have to authorize a Facebook account and choose a Facebook page 
 that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
-the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) extractor.
+the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) connector.
 
 ## Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
 page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-api/getting-started#connect).
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Instagram** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Instagram** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with a Facebook account 
 with access to the Facebook page you have the Instagram Business Account connected to.
 You will be asked for the `instagram_basic,instagram_manage_insights,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 
-You can always revoke the authorization by removing the **Keboola IG Extractor** from the list
+You can always revoke the authorization by removing the **Keboola IG data source** from the list
 in the [Facebook apps tab](https://www.facebook.com/settings?tab=applications) (under settings).
 
 {: .image-popup}
@@ -45,7 +45,7 @@ all necessary fields will be filled automatically.
 {: .image-popup}
 ![Screenshot - New Query](/components/extractors/social/instagram/instagram-3.png)
 
-The query describes the extractor request to be sent to the Instagram Graph API that is built on the Facebook 
+The query describes the connector request to be sent to the Instagram Graph API that is built on the Facebook 
 Graph API. Knowing the API will make creating a query easy because all options except `name` represent the 
 [Facebook Graph API request](https://developers.facebook.com/docs/graph-api/using-graph-api) parameters.
 
@@ -130,7 +130,7 @@ top parent is named `page`, and it represents Instagram Business Account id.
 
 ## Facebook API Version
 Instagram Graph API versioning follows Facebook Graph API versioning. You can set the version of the Facebook Graph API that will be applied for all requests made to the API
-by the Instagram extractor. Read more about the Graph API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
+by the Instagram data source connector. Read more about the Graph API versions [here](https://developers.facebook.com/docs/graph-api/changelog/versions).
 
 {: .image-popup}
 ![Screenshot - Api Version](/components/extractors/social/instagram/instagram-4.png)

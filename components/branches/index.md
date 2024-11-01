@@ -19,7 +19,7 @@ and ideally, also perform a dry run to check that the data in the target system 
 that runs, e.g., every ten minutes, is difficult without an outage of the pipeline. Development Branches are designed 
 to help in such situations.
 
-{% include branches-beta-warning.html %}
+{% include public-beta-warning.html %}
 
 ## How Branches Work
 When you create a development branch in your project, you obtain an exact copy of the project and all its current 
@@ -31,11 +31,11 @@ from the Storage as if it were a normal configuration. However, when your branch
 (tables or files) to Storage, it is stored separately and does not overwrite the original production data and interfere
 with the running configurations. There is no need to duplicate your project's data when creating a new branch. 
 
-### Data pipelines
+### Data Pipelines
 
-When you create an extractor and then transform the data it produces using transformation it behaves the following way in branches: 
+When you create a data source connector and then transform the data it produces using transformation it behaves the following way in branches: 
 
-In production, you created an extractor that extracts your website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes the data from `in.c-requests` and transforms it into aggregated visits to a bucket named `out.c-visits`. You've already executed the pipeline multiple times, so both buckets have production data in them.
+In production, you created a data source connector that extracts your website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes the data from `in.c-requests` and transforms it into aggregated visits to a bucket named `out.c-visits`. You've already executed the pipeline multiple times, so both buckets have production data in them.
 
 Now when you switch to a new branch, and run the transformation. It will load the input data from `in.c-requests` and transform it. When it's about to write it back to storage, it will automatically prefix the output bucket with an ID of the branch - `out.c-1234-visits`. Your production data is left intact in `out.c-visits`.
 
@@ -43,7 +43,7 @@ Now when you switch to a new branch, and run the transformation. It will load th
 Bucket name is automatically prefixed with branch numeric ID when a job writes to storage in development branch.
 </div>
 
-Now you run the extractor in the branch. It stores the data in a bucket prefixed with branch ID - `in.c-1234-requests`. You production data is again left intact in `in.c-requests`.
+Now you run the data source connector in the branch. It stores the data in a bucket prefixed with branch ID - `in.c-1234-requests`. You production data is again left intact in `in.c-requests`.
 But when you now run the transformation, it will automatically check if you have branch version of the source bucket `in.c-requests`. Because you do have `in.c-1234-requests`, it will load the data from there.
 
 <div class="alert alert-info" markdown="1">
@@ -84,18 +84,18 @@ You can end your branch's lifecycle in two ways:
 **Important:** All this happens in a same project, allowing you to collaborate on the modifications with other members 
 of the project.
 
-## Component considerations
+## Component Considerations
 
 Certain components are not allowed to run in development branches. There are following special cases where components' functionality is limited in the development branches.
 
-### Working with external resources
+### Working with External Resources
 
-Some components, like writers, can write to a destination that is external to Keboola Connection. Those components'
+Some components, like writers, can write to a destination that is external to Keboola. Those components'
 configs are first marked as *unsafe* in development branch.
 
 You will not be able to run an unsafe config. You need to first observe the config and verify that it's either OK to
 write to the destination, or change the destination accordingly.
 
-### OAuth authorized components
+### OAuth Authorized Components
 
 Components using OAuth does not allow authorizing nor changing the OAuth in development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.

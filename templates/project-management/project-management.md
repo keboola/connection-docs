@@ -7,19 +7,19 @@ permalink: /templates/project-management/
 {:toc}
 
 
-With this end-to-end flow you can extract your updated data from your project management tool and bring it into Keboola Connection. 
+With this end-to-end flow you can extract your updated data from your project management tool and bring it into Keboola. 
 After all the necessary tasks are performed on the data, you can transform the results into visualizations in any BI tool of your choice.
 By using our project management template, you will get an overview across all projects, their epics, tasks, users, and their actions.
 
 **The flow, in a nutshell:**
 
-- First, the Project Management source component (extractor) will collect data from your account about projects and tasks.
+- First, the Project Management data source connector will collect data from your account about projects and tasks.
 
 - We then create the output tables and snapshots.
 
-- The data will be written into a selected data destination via one of the following destination components (writers): BigQuery, Snowflake, and Google Sheets.
+- The data will be written into a selected data destination via one of the following data destination connectors: BigQuery, Snowflake, and Google Sheets.
 
-- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The source component, all data manipulations, and the data destination component, will be processed.
+- Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). The data source connector, all data manipulations, and the data destination connector, will be processed.
 
 ## Entity Relationship Diagram
 An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
@@ -46,19 +46,21 @@ An entity-relationship diagram is a specialized graphic that illustrates the rel
 These data sources are available in Public Beta:
 
 - [Asana](https://asana.com/)
+- [Jira](https://www.atlassian.com/software/jira)
 
 ## Data Destinations
 These data destinations are available in Public Beta:
 
-- [Snowflake database provided by Keboola](https://help.keboola.com/components/writers/database/snowflake/)
-- [Snowflake database](https://www.snowflake.com/)
 - [Google BigQuery database](https://cloud.google.com/bigquery/) 
 - [Google Sheets](https://www.google.com/sheets/about/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Snowflake database](https://www.snowflake.com/)
+- [Snowflake database provided by Keboola](https://help.keboola.com/components/writers/database/snowflake/)
 
 ## How to Use Template
-The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the destination component.
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
 
-First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola Connection project. When you are done, click **+ Use Template**.
+First decide which data source and which data destination you want to use. Then select the corresponding template from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
 
 {: .image-popup}
 ![Add New Template](/templates/project-management/add-new-template.png)
@@ -94,13 +96,24 @@ Click **Run Template** and start building your visualizations a few minutes late
 ![PM to Google Sheets - Flows](/templates/project-management/pm-to-snowflake-flow.png)
 
 ## Authorizing Data Sources
-To use a selected data source component, you must first authorize the data source.
+To use a selected data source connector, you must first authorize the data source.
 
 ### Asana
 Insert the Asana API Key. You can generate a personal access token from the Asana developer console.
 
 {: .image-popup}
 ![Asana Data Source](/templates/project-management/asana-data-source.png)
+
+### Jira
+To authorize the Jira data source, enter the following information:
+
+- A username to Atlassian Cloud; usually an email
+- An API token to Atlassian Cloud. The token can be generated in the Manage Your Account section.
+- The ID of the organization for which the data will be downloaded. It can be found in the first part of the URL, i.e., https://<organization_id>.atlassian.net.
+- The URL that will be used to download data from your organization.
+
+{: .image-popup}
+![Jira Data Source](/templates/project-management/jira-data-source.png)
 
 ## Authorizing Data Destinations
 To create a working flow, you must select at least one data destination.
@@ -110,7 +123,7 @@ To create a working flow, you must select at least one data destination.
 {: .image-popup}
 ![BigQuery Destination](/templates/marketing-platforms/bigquery-destination.png)
 
-To configure the destination component, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
+To configure the data destination connector, you need to set up a [Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new JSON key.
 
 A detailed guide is available [here](https://help.keboola.com/components/writers/database/bigquery/).
 
@@ -121,8 +134,30 @@ A detailed guide is available [here](https://help.keboola.com/components/writers
 
 Authorize your Google account.
 
-Duplicate the sheet into your Google Drive and paste the file ID back to Keboola Connection. It is needed for correct mapping 
+Duplicate the sheet into your Google Drive and paste the file ID back to Keboola. It is needed for correct mapping 
 in your duplicated Google sheet. 
+
+### PostgreSQL Database
+If you want to use your own PostgreSQL database, you must provide the host name (account name), user name, password, database name, and a schema.
+
+{: .image-popup}
+![PostgreSQL Data Destination](/templates/project-management/postgresql-data-destination.png)
+
+### Snowflake Database
+
+If you want to use your own Snowflake database, you must provide the host name (account name), user name, password, database name, 
+schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
+
+{: .image-popup}
+![Snowflake Destination](/templates/marketing-platforms/snowflake-destination.png)
+
+We highly recommend that you create a dedicated user for the data destination connector in your Snowflake database. Then you must provide 
+the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
+
+**Warning:** Keep in mind that Snowflake is **case sensitive** and if identifiers are not quoted, they are converted to upper case. 
+So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the data destination connector configuration.
+
+More info [here](https://help.keboola.com/components/writers/database/snowflake/).
 
 ### Snowflake Database Provided by Keboola
 
@@ -141,29 +176,13 @@ If you do not have your own data warehouse, follow the instructions and we will 
 
 Everything is set up.
 
-### Snowflake Database
-
-If you want to use your own Snowflake database, you must provide the host name (account name), user name, password, database name, 
-schema, and a [warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
-
-{: .image-popup}
-![Snowflake Destination](/templates/marketing-platforms/snowflake-destination.png)
-
-We highly recommend that you create a dedicated user for the destination component in your Snowflake database. Then you must provide 
-the user with access to the Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html). 
-
-**Warning:** Keep in mind that Snowflake is **case sensitive** and if identifiers are not quoted, they are converted to upper case. 
-So if you run, for example,  a query CREATE SCHEMA john.doe;, you must enter the schema name as DOE in the destination component configuration.
-
-More info [here](https://help.keboola.com/components/writers/database/snowflake/).
-
 ## Most Common Errors
 Before turning to the Keboola support team for help, make sure your error is not a common problem that can be solved without our help.
 
 ### Missing Credentials to Snowflake Database 
 If you see the error pictured below, you have probably forgotten to set up the Snowflake database. 
 
-Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database component. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
+Click on the highlighted text under Configuration in the top left corner. This will redirect you to the Snowflake Database connector. Now follow the **Snowflake Database provided by Keboola** on the page Authorizations/destinations. 
 
 Then go to the **Jobs** tab and **Run** the flow again.  
 

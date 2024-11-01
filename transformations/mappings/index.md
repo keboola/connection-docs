@@ -30,7 +30,7 @@ They are deleted from the transformation staging area when the execution finishe
 {: .image-popup}
 ![Simple input and output mapping](/transformations/mappings/mappings.png)
 
-*Table names referenced by mappings are automatically quoted by Keboola Connection. 
+*Table names referenced by mappings are automatically quoted by Keboola. 
 This is especially important for Snowflake, which is case sensitive.*
 
 ## Overview
@@ -72,6 +72,10 @@ The supported database types are [Snowflake](https://www.snowflake.com/),
 *See an example of [setting up an input mapping](/tutorial/manipulate/#input-mapping) in our tutorial.*
 
 #### Options
+
+{% include warning.html content="When using table with native data types, following options will not be available." %}
+
+
 - **Source** --- Select a table or a bucket in Storage as the source table for your transformation. If you select 
 a bucket, it is the equivalent of selecting all tables currently present in the bucket. It does not automatically 
 add future tables to the selection.
@@ -150,9 +154,11 @@ This function is automatically enabled in transformations.
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
 However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema. However, you can still manually add tables to an input mapping.
    
-There is no need to set anything for a **read-only input mapping**. For transformations, all tables in Storage are automatically accessible in the transformation.
+There is no need to set anything for a **read-only input mapping** in **transformations**, all tables in Storage are automatically accessible in the transformation.
 This also applies to linked buckets. *Note that buckets and tables belong
 to another project, so you need to access the tables using the fully qualified identifier, including the database and schema, in the source project.*
+
+Users can enable or disable read-only access to the storage in **user workspaces** and the **Snowflake data destination**. If read-only access is disabled, users must define an input mapping as they typically do.
 
 {: .image-popup}
 ![Storage](/transformations/mappings/storage.png)
@@ -174,7 +180,7 @@ As you can see, a **read-only input mapping** allows you to read a table created
 
 #### _timestamp system column
 A table loaded using `CLONE` will contain all columns of the original table plus a new `_timestamp` column.
-This column is used internally by Keboola Connection for comparison with the value of the *Changed in last* filter. 
+This column is used internally by Keboola for comparison with the value of the *Changed in last* filter. 
 
 The value in the column contains a unix timestamp of the [last change of the row](/storage/tables/#manual-incremental-processing). 
 You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),

@@ -50,7 +50,7 @@ the MLflow server for training and registering the model.
 #### Sample code
 The following code uses the [MLflow Python API](https://mlflow.org/docs/latest/python_api/mlflow.html#module-mlflow)
 to fit an [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html) 
-regression model using [scikit-learn](https://sklearn.org/). At the end of the sample code, 
+regression model using [scikit-learn](https://scikit-learn.org/stable/). At the end of the sample code, 
 the model is registered to the MLflow server.
 
 Please note that due to the beta status of the feature, we are currently supporting only MLflow version 1.24. We have recently
@@ -150,7 +150,7 @@ if __name__ == "__main__":
 {: .image-popup}
 ![Screenshot - Sample Code](/transformations/ml-model-deployment/05-sample-code.png)
 
-Once you train your model and run the first experiment, you can go back to the Keboola Connection UI, 
+Once you train your model and run the first experiment, you can go back to the Keboola UI, 
 open the MLflow UI from there, and check the results.
 
 {: .image-popup}
@@ -161,7 +161,7 @@ MLflow provides [predefined stages](https://mlflow.org/docs/latest/model-registr
 for common use cases such as Staging, Production, or Archived. 
 You can transition a model version from one stage to another stage.
 
-Once ready, go back to the tab **ML/AI services** in the Keboola Connection UI and deploy the model. 
+Once ready, go back to the tab **ML/AI services** in the Keboola UI and deploy the model. 
 
 ### Existing ML Model
 If there are already any models available (perhaps created by someone else before you), simply go to 

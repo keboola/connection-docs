@@ -8,21 +8,21 @@ redirect_from:
 * TOC
 {:toc}
 
-The Sklik extractor fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
+The Sklik data source connector fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
 
 Before you start, have a working [Sklik](https://www.sklik.cz/) account, and get an Sklik 
 API [key](https://www.sklik.cz/generateToken). Select Settings from the drop-down menu next to your account name
 in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Sklik** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Sklik** connector.
 
 Then provide your API key:
 
 {: .image-popup}
 ![Sklik API Key](/components/extractors/marketing-sales/sklik/sklik-1.png)
 
-The extractor gets a list of all accessible accounts unless you restrict them explicitly.
+The data source connector gets a list of all accessible accounts unless you restrict them explicitly.
 
 ### Configure Reports
 Now configure your reports:
@@ -41,7 +41,7 @@ Now configure your reports:
   - etc.
 - **restrictionFilter** -- Json object of the restriction filter configuration for the `createReport` API call.
   - `dateFrom` and `dateTo` are required values. If omitted, yesterday's and today's dates will be used.
-  - The extractor allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.relative.php).
+  - The connector allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.relative.php).
 - **displayOptions** -- Json object of the display options configuration for the `createReport` API call
 - **displayColumns** -- array of columns to get
   - Column `id` as the identifier of the resource is downloaded every time.
@@ -76,7 +76,7 @@ Let's say we want to download daily stats for campaigns. The report will look li
 - displayOptions: `{ "statGranularity": "daily" }`
 - displayColumns: `id, name, clicks, impressions`
 
-The extractor will create the table `report1` which will look like:
+The connector will create the table `report1` which will look like:
 
 |id|accountId|name|
 |---|---|---|

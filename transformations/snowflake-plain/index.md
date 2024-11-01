@@ -54,6 +54,7 @@ of the variable as a user error, `Transformation aborted: Integrity check failed
 ## Dynamic Backends
 If you have a large amount of data in databases and complex queries, your transformation might run for a couple of hours.
 To speed it up, you can change the backend size in the configuration. Snowflake transformations suport the following sizes:
+- XSmall
 - Small _(default)_
 - Medium
 - Large
@@ -63,7 +64,7 @@ To speed it up, you can change the backend size in the configuration. Snowflake 
 
 Scaling up the backend size allocates more resources to speed up your transformation.
 
-*Note: This feature is currently in public beta. Please bear with us and provide feedback
+***Note:** This feature is currently in public beta. Please bear with us and provide feedback
 at [https://ideas.keboola.com](https://ideas.keboola.com).
 Also, dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
@@ -118,7 +119,7 @@ Be especially careful when setting up [input and output mappings](/transformatio
 
 When writing your transformation script, quoting all table and column names is highly recommended. 
 Snowflake converts all unquoted table/column identifiers to uppercase, which won't match table/column 
-identifiers created by Keboola Connection (unless they happen to be all uppercase).
+identifiers created by Keboola (unless they happen to be all uppercase).
 
 {% highlight sql %}
 SELECT "barcolumn" FROM "footable";
@@ -222,7 +223,7 @@ CREATE TABLE "out" AS
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate 
 from your transformation/sandbox session and the format may change unexpectedly.
 
-**Important:** In the AWS US Keboola Connection [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
+**Important:** In the AWS US Keboola [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
 (connection.keboola.com), the following [Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) 
 parameters are overridden:
 

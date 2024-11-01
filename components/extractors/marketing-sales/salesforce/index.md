@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
   
-This extractor allows you to import data from Salesforce via the Bulk API. Data can be fetched in two ways: by running
+This data source connector allows you to import data from Salesforce via the Bulk API. Data can be fetched in two ways: by running
 a specified SOQL query, or by selecting a Salesforce object and getting all data from that object.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Salesforce V2** extractor.
+[Create a new configuration](/components/#creating-component-configuration) of the **Salesforce V2** connector.
 
-To configure this extractor, you need to provide a **username**, **password**, and an **API security token**. Then select if
+To configure this connector, you need to provide a **username**, **password**, and an **API security token**. Then select if
 you want to get data from your sandbox or from the production environment.
 
 {: .image-popup}
@@ -57,7 +57,7 @@ like to have your destination table without any, you can modify it.
 
 ## Limitations
 
-Due to the extractor utilizing the Salesforce Bulk API, it will not be possible to run all types of queries. 
+Due to the data source connector utilizing the Salesforce Bulk API, it will not be possible to run all types of queries. 
 
 The Bulk API does not support queries with any of the following:
 * GROUP BY, OFFSET, or TYPEOF clauses
