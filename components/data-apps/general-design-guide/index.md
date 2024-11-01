@@ -64,13 +64,14 @@ Set the `ttl` parameter based on your app's needs.
 
 ### Info Panel
 
-{: .image-popup}
-![Screenshot - Info Panel](/components/data-apps/general-design-guide/pic2.png)
+{% include tip.html title="" content="
+Select the table you want to edit. If the data is not up to date, click the Reload Data button. The data freshness is displayed in the right corner.
+" %}
 
 Use `st.info` to provide helpful context or instructions to users.
 
 ```
-st.info('Select the table you want to edit. If the data is not up-to-data, click on the Reload Data button. Data freshness is displayed in the right corner.', icon="ℹ️")
+st.info('Select the table you want to edit. If the data is not up to date, click the Reload Data button. The data freshness is displayed in the right corner.', icon="ℹ️")
 ```
 
 ### Hide Anchor Links
