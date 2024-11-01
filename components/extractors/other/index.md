@@ -20,6 +20,7 @@ connectors that do not fall into any of the above mentioned categories:
 provides detailed data for locations specified by their names, address or coordinates.
 - [GitHub](/components/extractors/other/github/) --- imports data from GitHub, a software development platform.
 - [Google Search Console](/components/extractors/other/google-search-console/) --- imports data from Google Search Console, a web service by Google which allows webmasters to check indexing status and optimize visibility of their websites.
+- [Okta](/components/extractors/other/okta/) --- imports data from the Okta platform.
 - [HiBob](/components/extractors/other/hibob/) --- imports data from the HiBob HR platform.
 - [Mapbox](/components/extractors/other/mapbox/) --- imports data from the Mapbox API, providing customizable mapping solutions and location-based services for developers and businesses
 - [Papertrail](/components/extractors/other/papertrail/) --- imports data from Papertrail (log management).
