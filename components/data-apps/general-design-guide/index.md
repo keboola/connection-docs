@@ -112,22 +112,7 @@ Use the following code for primary buttons; secondary buttons can be simple `st.
 {: .image-popup}
 ![Screenshot - Save Data](/components/data-apps/general-design-guide/pic3.png)
 
-```
-def ChangeButtonColour(widget_label, font_color, background_color, border_color):
-    htmlstr = f"""
-        <script>
-            var elements = window.parent.document.querySelectorAll('button');
-            for (var i = 0; i < elements.length; ++i) {{ 
-                if (elements[i].innerText == '{widget_label}') {{ 
-                    elements[i].style.color ='{font_color}';
-                    elements[i].style.background = '{background_color}';
-                    elements[i].style.borderColor = '{border_color}';
-                }}
-            }}
-        </script>
-        """
-    components.html(f"{htmlstr}", height=0, width=0)
-```
+
 
 **Example**
 ```
