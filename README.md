@@ -9,7 +9,7 @@
 ### Running in Docker
 
 ```bash
-docker-compose run --rm --service-ports jekyll
+docker compose run --rm --service-ports jekyll
 ```
 Documentation will be available at http://localhost:4000
 
