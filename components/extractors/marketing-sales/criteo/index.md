@@ -54,4 +54,4 @@ In the configuration parameters, do the following:
 {: .image-popup}
 ![Screenshot - Row configuration](/components/extractors/marketing-sales/criteo/row.png)
 
-For further details on the Criteo API and troubleshooting steps, please refer to Criteo's official documentation at Criteo [API Documentation](https://developers.criteo.com/marketing-solutions/docs/api-troubleshooting-tips).
+For further details on the Criteo API and troubleshooting steps, please refer to Criteo's official [documentation](https://developers.criteo.com/marketing-solutions/docs/api-troubleshooting-tips).
