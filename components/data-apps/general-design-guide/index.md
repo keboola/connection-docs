@@ -79,6 +79,7 @@ st.info('Select the table you want to edit. If the data is not up to date, click
 To hide anchor links, add this function.
 
 ```
+{% raw %}
 def hide_custom_anchor_link():
     st.markdown(
         """
@@ -95,6 +96,7 @@ def hide_custom_anchor_link():
         """,
         unsafe_allow_html=True,
     )
+{% endraw %}
 ```
 
 ### Use st.expander
