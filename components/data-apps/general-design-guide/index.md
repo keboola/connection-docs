@@ -79,7 +79,6 @@ st.info('Select the table you want to edit. If the data is not up to date, click
 To hide anchor links, add this function.
 
 ```
-{% raw %}
 def hide_custom_anchor_link():
     st.markdown(
         """
@@ -96,7 +95,6 @@ def hide_custom_anchor_link():
         """,
         unsafe_allow_html=True,
     )
-{% endraw %}
 ```
 
 ### Use st.expander
@@ -115,6 +113,7 @@ Use the following code for primary buttons; secondary buttons can be simple `st.
 ![Screenshot - Save Data](/components/data-apps/general-design-guide/pic3.png)
 
 ```
+{% raw %}
 def ChangeButtonColour(widget_label, font_color, background_color, border_color):
     htmlstr = f"""
         <script>
@@ -129,6 +128,7 @@ def ChangeButtonColour(widget_label, font_color, background_color, border_color)
         </script>
         """
     components.html(f"{htmlstr}", height=0, width=0)
+{% endraw %}
 ```
 
 **Example**
