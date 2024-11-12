@@ -65,7 +65,7 @@ Set the `ttl` parameter based on your app's needs.
 ### Info Panel
 
 <div class="alert alert-info" markdown="1">
-<strong>Tip:</strong> Select the table you want to edit. If the data is not up to date, click the <strong>Reload Data</strong>strong> button. The data freshness is displayed in the right corner.
+<strong>Tip:</strong> Select the table you want to edit. If the data is not up to date, click the <strong>Reload Data</strong> button. The data freshness is displayed in the right corner.
 </div>
 
 Use `st.info` to provide helpful context or instructions to users.
