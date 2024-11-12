@@ -8,14 +8,23 @@ redirect_from:
 * TOC
 {:toc}
 
-This data source connector allows you to automatically retrieve email contents and/or it's attachments via the [IMAP protocol](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol). 
+This data source connector allows you to automatically retrieve email contents and/or it's attachments via the [IMAP protocol](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol) using [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication. 
 It supports incremental loads and IMAP query to define specific criteria. 
+
 
 The IMAP protocol provides several advantages:
 
 - Emails stay intact in your original inbox
 - Emails can be queried using a standardized [query syntax](query-syntax).
-- Can be used with *almost* any provider, so it will work with Gmail as well as with Outlook and others.
+- Can be used with *almost* any provider that support **Basic Authentication**, so it will work with Gmail and others.
+  - **Note** if you wish to use IMAP with MS Outlook, use this component: [MS Outlook IMAP Email Content and Attachments (Office 365)](/components/extractors/communication/ms-outlook/)
+
+
+<div class="alert alert-warning" style="max-width: 450px;">
+    <strong>Warning:</strong>
+    This component supports IMAP using the <b>Basic Authentication method only</b>. If you wish to use IMAP with MS Outlook, use this component: <a href="/components/extractors/communication/ms-outlook/">MS Outlook IMAP Email Content and Attachments (Office 365)</a> instead.
+</div>
+
 
 ## Features
 
