@@ -217,7 +217,7 @@ A single table named `emails` contains the email contents.
 
 Results are inserted incrementally to avoid duplicates.
 
-**Columns:** 'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'body', 'headers', 'number_of_attachments', 'size'
+**Columns:** `'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'body', 'headers', 'number_of_attachments', 'size'`
 
 
 ### Attachments
