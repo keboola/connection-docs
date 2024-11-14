@@ -457,6 +457,8 @@ items:
       - url: /components/data-apps/
         title: Data Apps
         items:
+          - url: /components/data-apps/general-design-guide/
+            title: General Design Guide
           - url: /components/data-apps/oidc/
             title: OpenID Connect
             items:
