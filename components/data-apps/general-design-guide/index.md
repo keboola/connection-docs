@@ -35,7 +35,7 @@ secondaryBackgroundColor="#edf0f5"
 Store the logo PNG image in the `/static/` repository folder (created automatically upon deployment in Keboola).
 
 ```
-LOGO_IMAGE_PATH = os.path.abspath("./app/static/keboola.png")
+LOGO_IMAGE_PATH = os.path.join(os.path.dirname(__file__), 'static/keboola.png"')
 ```
 
 Position the logo on the left and disable the full-screen view for the image.
