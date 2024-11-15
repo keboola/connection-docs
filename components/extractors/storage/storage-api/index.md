@@ -1,5 +1,5 @@
 ---
-title: Keboola Connection Storage
+title: Keboola Storage
 permalink: /components/extractors/storage/storage-api/
 redirect_from:
     - /extractors/storage/storage-api/
@@ -28,7 +28,7 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** connector.
+[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** connector.
 Select the region of the *source project*, and paste the token you generated in the *source project*.
 
 {: .image-popup}

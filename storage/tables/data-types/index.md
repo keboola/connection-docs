@@ -225,7 +225,7 @@ The `INTEGER` base type represents data types for whole numbers.
 <tr>
     <th rowspan='12'>Generic</th>
     <td>bigint</td>
-    <td rowspan='42'>INTEGER</td>
+    <td rowspan='43'>INTEGER</td>
     <td rowspan='12' colspan='2'></td>    
 </tr>
 <tr>
@@ -337,10 +337,10 @@ The `INTEGER` base type represents data types for whole numbers.
     <th>SiSense</th>
 </tr>
 <tr>
-    <th rowspan='6'>Snowflake</th>
+    <th rowspan='7'>Snowflake</th>
     <td>BIGINT</td>
-    <td rowspan='6'>INTEGER</td>
-    <th rowspan='6'>Snowflake</th>
+    <td rowspan='7'>INTEGER</td>
+    <th rowspan='7'>Snowflake</th>
 </tr>
 <tr>
     <td>BYTEINT</td>
@@ -356,6 +356,9 @@ The `INTEGER` base type represents data types for whole numbers.
 </tr>
 <tr>
     <td>TINYINT</td>
+</tr>
+<tr>
+    <td>NUMBER(38,0)</td>
 </tr>
 <tr>
     <th rowspan='4'>Synapse</th>

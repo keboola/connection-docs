@@ -267,7 +267,7 @@ items:
                 title: HTTP
 
               - url: /components/extractors/storage/storage-api/
-                title: Keboola Connection Storage
+                title: Keboola Storage
 
               - url: /components/extractors/storage/onedrive-excel-sheets/
                 title: OneDrive Excel Sheets
@@ -311,6 +311,9 @@ items:
               - url: /components/extractors/other/google-search-console/
                 title: Google Search Console
 
+              - url: /components/extractors/other/okta/
+                title: Okta
+                
               - url: /components/extractors/other/hibob/
                 title: HiBob
 
@@ -414,7 +417,7 @@ items:
                 title: Google Sheets
 
               - url: /components/writers/storage/storage-api/
-                title: Keboola Connection Storage
+                title: Keboola Storage
 
               - url: /components/writers/storage/onedrive/
                 title: OneDrive
@@ -453,7 +456,21 @@ items:
 
       - url: /components/data-apps/
         title: Data Apps
-
+        items:
+          - url: /components/data-apps/general-design-guide/
+            title: General Design Guide
+          - url: /components/data-apps/oidc/
+            title: OpenID Connect
+            items:
+              - url: /components/data-apps/oidc/auth0/
+                title: Auth0
+              - url: /components/data-apps/oidc/google-cloud-platform/
+                title: Google Cloud Platform
+              - url: /components/data-apps/oidc/microsoft-entra-id/
+                title: Microsoft Entra ID
+              - url: /components/data-apps/oidc/okta/
+                title: Okta
+                    
       - url: /components/branches/
         title: Development Branches
 
@@ -561,6 +578,9 @@ items:
 
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
+
+  - url: /flows/
+    title: Flows
 
   - url: /orchestrator/
     title: Orchestrations

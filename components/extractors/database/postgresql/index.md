@@ -44,24 +44,182 @@ The first time it connects to a PostgreSQL server or cluster, the connector take
 of all schemas. After that snapshot is complete, the connector continuously captures row-level changes that insert,
 update, and delete database content and that were committed to a PostgreSQL database.
 
-***NOTE:** The component abstracts the underlying Debezium connector configuration and provides a simplified interface for
+***Note:** The component abstracts the underlying Debezium connector configuration and provides a simplified interface for
 the user. This means that only a subset of the Debezium connector capabilities are exposed to the user.*
+
+
+### Snapshots
+
+When the connector starts for the first time, it performs an initial *consistent snapshot* of your database.
+This snapshot establishes a baseline for the database's current state.
+
+The connector completes a series of tasks during the snapshot process, which vary depending on the selected snapshot mode and the table-locking policy in effect for the database.
+
+You can choose from different snapshot modes in the `Sync Options` > `Replication Mode` configuration setting.
+
+For more technical details on how snapshots work, see the
+[official Debezium documentation](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-snapshots).
+
+### Schema Drift
+
+The connector seamlessly manages schema changes in the source database, such as `ADD` and `DROP` columns.
+
+Schema changes are handled as follows:
+
+- **ADD column**
+    - The new column is added to the destination table. Historic values will be empty (default values are not reflected).
+- **DROP column**
+    - The column remains in the destination table.
+    - Any NOT NULL constraint on the column is removed.
+    - Values in the column will be NULL/EMPTY following its deletion in the source.
+
+### System Columns
+
+Each result table includes the following system columns:
+
+| Name                    | Base Type | Note                                                                                                                                                                   |
+|-------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| KBC__OPERATION          | STRING    | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE                                                                                            |
+| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. Represents milliseconds since epoch if native types are not enabled.                                                                                 |
+| KBC__DELETED            | BOOLEAN   | True when the event is a delete event (indicating the record is deleted).                                                                                                         |
+| KBC__LSN                | INTEGER   | Log Sequence Number (LSN) of the transaction.                                                                                                                                                |
+| KBC__BATCH_EVENT_ORDER  | INTEGER   | Order of the events in the current batch (extraction). Can be used with KBC__EVENT_TIMESTAMP_MS to track the latest event per record (ID). |
+
+
+### Data Type Mapping
+
+MySQL datatypes are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+
+Based on the selected JSON file, the `base_type` column in the table will be updated accordingly:
+
+| source_type              | base_type | note                                                            |
+|--------------------------|-----------|-----------------------------------------------------------------|
+| INTEGER                  | INTEGER   |                                                                 |
+| SMALLINT                 | INTEGER   |                                                                 |
+| INTEGER                  | INTEGER   |                                                                 |
+| INTEGER                  | INTEGER   |                                                                 |
+| BIGINT                   | INTEGER   |                                                                 |
+| DECIMAL                  | NUMERIC   |                                                                 |
+| NUMERIC                  | NUMERIC   |                                                                 |
+| FLOAT                    | FLOAT     |                                                                 |
+| REAL                     | FLOAT     |                                                                 |
+| DOUBLE PRECISION         | FLOAT     |                                                                 |
+| SMALLSERIAL              | INTEGER   |                                                                 |
+| SERIAL                   | INTEGER   |                                                                 |
+| BIGSERIAL                | INTEGER   |                                                                 |
+| MONEY                    | NUMERIC   |                                                                 |
+| CHARACTER                | STRING    |                                                                 |
+| CHAR                     | STRING    |                                                                 |
+| CHARACTER VARYING        | STRING    |                                                                 |
+| VARCHAR                  | STRING    |                                                                 |
+| TEXT                     | STRING    |                                                                 |
+| BYTEA                    | STRING    |                                                                 |
+| TIMESTAMP                | TIMESTAMP |                                                                 |
+| TIMESTAMP WITH TIME ZONE | TIMESTAMP |                                                                 |
+| DATE                     | DATE      |                                                                 |
+| TIME                     | STRING    | `HH:MM:SS` format                                               |
+| TIME WITH TIME ZONE      | STRING    | `HH:MM:SS+TZ` format                                            |
+| INTERVAL                 | STRING    |                                                                 |
+| BOOLEAN                  | BOOLEAN   |                                                                 |
+| POINT                    | STRING    |                                                                 |
+| CIDR                     | STRING    |                                                                 |
+| INET                     | STRING    |                                                                 |
+| MACADDR                  | STRING    |                                                                 |
+| MACADDR8                 | STRING    |                                                                 |
+| BIT                      | STRING    |                                                                 |
+| BIT VARYING              | STRING    |                                                                 |
+| UUID                     | STRING    |                                                                 |
+| XML                      | STRING    |                                                                 |
+| JSON                     | STRING    |                                                                 |
+| JSONB                    | STRING    |                                                                 |
+| INTEGER[]                | STRING    |                                                                 |
+| INT4RANGE                | STRING    |                                                                 |
+| LTREE                    | STRING    | Contains the string representation of a PostgreSQL LTREE value. |
+| CITEXT                   | STRING    |                                                                 |
+
+**Other types are not supported, and such columns will be skipped from syncing.**
 
 ### Publication Creation
 
 The connector requires a user with the `rds_replication` role.  
 To enable a user account other than the master account to initiate logical replication,
-you must grant the account the rds_replication role. For example, 
+you must grant the account the `rds_replication` role. For example, 
 ```sql
 grant rds_replication to <my_user>
 ```
 
 
-**The connector handles the publication creation automatically.**
+There are several options for determining how publications are created. In general, 
+**it is best to manually create publications for the tables you want to capture** before setting up the connector.
+
+
+#### Manual publication creation
+
+This is the recommended approach. Set the connector's `Publication Auto Create Mode` to `disabled`. 
+This way, the connector will not attempt to create a publication. A database administrator or 
+the user configured for replication should create the publication before running the connector.
+
+You can create a publication manually for a specific table, use the following SQL command:
+    
+```sql
+CREATE PUBLICATION my_publication FOR TABLE my_table;
+```
+Or, to create a publication for all tables in a schema:
+        
+```sql
+CREATE PUBLICATION my_publication FOR ALL TABLES;
+```
+
+Then set the `Publication Name` in the connector configuration to `my_publication`.
+
+#### Automatic publication creation
+
+***Note:** To create a PostgreSQL publication, the connector must run as a user with the following privileges:*
+
+- Replication privileges on the database to add tables to a publication.
+- `CREATE` privileges on the database to add publications.
+- `SELECT` privileges on the tables to copy the initial data. Table owners automatically have `SELECT` permission.
+
+Set the connector's `Publication Auto Create Mode` to one of the following options:
+
+**`all_tables`**
+
+In this mode, [the user must be a superuser](https://www.postgresql.org/docs/current/logical-replication-security.html?t#:~:text=To%20add%20all%20tables%20in%20schema%20to%20a%20publication%2C%20the%20user%20must%20be%20a%20superuser.) to add all tables to the publication.
+
+If a publication does not exist, the connector creates a publication for all tables in the database from which the connector captures changes, 
+using the following SQL command: `CREATE PUBLICATION <publication_name> FOR ALL TABLES;`
+
+**`filtered`**
+
+To add tables to a publication, the user must be the table owner. If the source table already exists, 
+you need a mechanism to share ownership with the original owner. To enable shared ownership, 
+create a PostgreSQL replication group and add both the original table owner and the replication user to the group.
+
+**Procedure**
+
+- Create a replication group. 
+```sql
+  CREATE ROLE `<replication_group>`;
+```
+- Add the original owner of the table to the group.
+```sql
+  GRANT REPLICATION_GROUP TO <original_owner>;
+```
+- Add the Debezium replication user to the group.
+```sql
+GRANT REPLICATION_GROUP TO <replication_user>;
+```
+- Transfer ownership of the table to <replication_group>.
+```sql
+ALTER TABLE <table_name> OWNER TO REPLICATION_GROUP;
+```
+
+
+**Connector Publication Creation Process**
 
 - If a publication exists, the connector uses it.
-- If no publication exists, the connector creates a new publication for tables that match the currently selected schemas
-  and tables in the `Datasource` connector configuration property. For
+- If no publication exists, the connector creates a new publication for tables matching the selected schemas
+  and tables in the `Datasource` connector configuration. For
   example: 
 ```sql
 CREATE PUBLICATION <publication_name> FOR TABLE <tbl1, tbl2, tbl3>
@@ -73,22 +231,25 @@ CREATE PUBLICATION <publication_name> FOR TABLE <tbl1, tbl2, tbl3>
 ALTER PUBLICATION <publication_name> SET TABLE <tbl1, tbl2, tbl3>
 ```
 
-#### Publication Names
+#####  Publication names
 
 Note that each configuration of the connector creates a new publication with a unique name. The publication name contains 
 configuration_id and, alternatively, branch_id if it's a branch configuration. The publication name is generated as follows:
-- "kbc_publication_{config_id}_prod" for production configuration
-- "kbc_publication_{config_id}_dev_{branch_id}" for branch configuration.
+- "`kbc_publication_{config_id}_prod`" for production configuration
+- "`kbc_publication_{config_id}_dev_{branch_id}`" for branch configuration.
 
-***NOTE:** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
+***Note:** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
 and it's not deleted automatically. It is recommended to clean up any unused dev publications manually or using a script.*
 
 #### Slot Names
 
 Note that each configuration of the connector creates a new slot with a unique name. The slot name contains 
 configuration_id and alternatively branch id if it's a branch configuration. The slot name is generated as follows:
-- "`slot_kbc_publication_{config_id}_prod`" for production configuration
-- "`kbc_publication_{config_id}_dev_{branch_id}`" for branch configuration.
+- "`slot_kbc_{config_id}_prod`" for production configuration
+- "`slot_kbc_{config_id}_dev_{branch_id}`" for branch configuration.
+
+***Note:** Be cautious when running configurations in a development branch. Once the branch is deleted, any created slots will still exist and are not deleted automatically. 
+This can lead to increased WAL log size. It’s recommended to clean up any unused slots manually or with a script.*
 
 #### Performance considerations
 
@@ -108,7 +269,7 @@ In certain cases, it is possible for PostgreSQL disk space consumed by WAL files
 
 - There are many updates in a database being tracked, but only a tiny number of updates are related to the table(s) and schema(s) for which the connector is capturing changes. This situation can be easily solved with periodic heartbeat events. Set the heartbeat.interval.ms connector configuration property.
 
-***NOTE:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector. **You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.***
+***Note:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector.* ***You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.***
 
 - The PostgreSQL instance contains multiple databases and one of them is a high-traffic database. Debezium captures changes in another database that is low-traffic in comparison to the other database. Debezium then cannot confirm the LSN as replication slots work per database, and Debezium is not invoked. As WAL is shared by all databases, the amount used tends to grow until an event is emitted by the database for which Debezium is capturing changes. To overcome this, it is necessary to:
   - Enable periodic heartbeat record generation with the `heartbeat > interval.ms` connector configuration property.
@@ -140,82 +301,6 @@ The connector will then perform an UPDATE query on that table in the selected in
 - Select the heartbeat table in the `Datasource > Tables to sync` configuration property to track the heartbeat table and make sure it is contained in the publication.
 
 
- ### Data Type Mapping
-
-The MySQL datatypes are mapped to the [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
-
-Based on the JSON file you've selected, the `base_type` column in the table can be updated as follows:
-
-| source_type              | base_type | note                                                                                          |
-|--------------------------|-----------|-----------------------------------------------------------------------------------------------|
-| INTEGER                  | INTEGER   |                                                                                               |
-| SMALLINT                 | INTEGER   |                                                                                               |
-| INTEGER                  | INTEGER   |                                                                                               |
-| INTEGER                  | INTEGER   |                                                                                               |
-| BIGINT                   | INTEGER   |                                                                                               |
-| DECIMAL                  | NUMERIC   |                                                                                               |
-| NUMERIC                  | NUMERIC   |                                                                                               |
-| REAL                     | NUMERIC   |                                                                                               |
-| DOUBLE PRECISION         | STRING    |                                                                                               |
-| SMALLSERIAL              | INTEGER   |                                                                                               |
-| SERIAL                   | INTEGER   |                                                                                               |
-| BIGSERIAL                | INTEGER   |                                                                                               |
-| MONEY                    | NUMERIC   |                                                                                               |
-| CHARACTER                | STRING    |                                                                                               |
-| CHAR                     | STRING    |                                                                                               |
-| CHARACTER VARYING        | STRING    |                                                                                               |
-| VARCHAR                  | STRING    |                                                                                               |
-| TEXT                     | STRING    |                                                                                               |
-| BYTEA                    | STRING    |                                                                                               |
-| TIMESTAMP                | TIMESTAMP |                                                                                               |
-| TIMESTAMP WITH TIME ZONE | TIMESTAMP |                                                                                               |
-| DATE                     | DATE      |                                                                                               |
-| TIME                     | TIMESTAMP | A string representation of a timestamp with timezone information, where the timezone is GMT.  |
-| TIME WITH TIME ZONE      | TIMESTAMP | A string representation of a time value with timezone information, where the timezone is GMT. |
-| INTERVAL                 | STRING    |                                                                                               |
-| BOOLEAN                  | BOOLEAN   |                                                                                               |
-| POINT                    | STRING    |                                                                                               |
-| CIDR                     | STRING    |                                                                                               |
-| INET                     | STRING    |                                                                                               |
-| MACADDR                  | STRING    |                                                                                               |
-| MACADDR8                 | STRING    |                                                                                               |
-| BIT                      | STRING    |                                                                                               |
-| BIT VARYING              | STRING    |                                                                                               |
-| UUID                     | STRING    |                                                                                               |
-| XML                      | STRING    |                                                                                               |
-| JSON                     | STRING    |                                                                                               |
-| JSONB                    | STRING    |                                                                                               |
-| INTEGER[]                | STRING    |                                                                                               |
-| INT4RANGE                | STRING    |                                                                                               |
-| LTREE                    | STRING    | Contains the string representation of a PostgreSQL LTREE value.                               |
-| CITEXT                   | STRING    |                                                                                               |
-
-**Other types are not supported, and such columns will be skipped from syncing.**
-
-### System Columns
-
-Each result table will contain the following system columns:
-
-| Name | Base Type | Note |
-|---|---|---|
-| KBC__OPERATION | STRING | Event type, e.g., r - read on init sync; c - INSERT; u - UPDATE; d - DELETE |
-| KBC__EVENT_TIMESTAMP_MS | TIMESTAMP | Source database transaction timestamp. MS since epoch if Native types are not enabled. |
-| KBC__DELETED | BOOLEAN | True when the event is a delete event (the record is deleted). |
-| KBC__BATCH_EVENT_ORDER | INTEGER   | Numerical order of the events in the current batch (extraction). You can use this in combination with KBC__EVENT_TIMESTAMP_MS to mark the latest event per record (ID) |
-
-### Schema Drift
-
-The connector is capable of seamlessly handling schema changes in the source database, e.g., `ADD`, `DROP` columns.
-
-The schema changes are handled in the following manner:
-
-- **ADD column**
-    - Such a column is added to the destination table. Historic values will be empty (default not reflected).
-- **DROP column**
-    - The column will remain in the destination table.
-    - The column NOT NULL constraint will be overridden and removed if present.
-    - Its values will be NULL/EMPTY since the deletion.
-
 ## Prerequisites
 
 This connector uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/postgresql.html)
@@ -227,7 +312,7 @@ Currently, lower versions are not supported, but it is theoretically possible (p
 
 ### Signaling Table
 
-The connector needs access to a signaling table in the source database. The signaling table is used by to connector to store various signal events and incremental snapshot watermarks.
+When not running in `read_only` mode, the connector requires access to a signaling table in the source database. This signaling table is used by the connector to store various signal events and incremental snapshot watermarks.
 
 #### Creating a signaling data collection
 
@@ -239,7 +324,7 @@ You have sufficient access privileges to create a table on the source database.
 
 **Procedure**
 
-Submit a SQL query to the source database to create a table that is consistent with the required structure, as shown in the following example:
+Submit an SQL query to the source database to create a table that is consistent with the required structure, as shown in the following example:
 
 The following example shows a CREATE TABLE command that creates a three-column debezium_signal table:
 
@@ -437,6 +522,7 @@ ALTER TABLE __<table_name>__ OWNER TO REPLICATION_GROUP;
 - **Port**: The port number of the MySQL server.
 - **User**: The username to be used to connect to the MySQL server.
 - **Password**: The password to be used to connect to the MySQL server.
+- **Read-only mode**: When enabled, the connector does not require write access to the source database for signalling.
 
 #### SSH tunnel
 
@@ -467,13 +553,43 @@ substrings that might be present in a column name.
     - `None`: No filter applied, all columns in all tables will be extracted.
     - `Include List`: The columns to be included in the CDC.
     - `Exclude List`: The columns to be excluded from the CDC.
-- **Column List**: List of the fully-qualified column names or regular expressions that match the columns to be included
+- **Column List**: List of the fully qualified column names or regular expressions that match the columns to be included
   or excluded (based on the selected filter type).
+
+### Column Masks
+
+Column masks are used to mask sensitive data in the extraction.
+Specify a comma-separated list of fully qualified column names in the format `schemaName.tableName.columnName`.
+
+The connector applies the specified expression as an _anchored regular expression_ to match the full column name, not partial substrings
+that may appear in the name.
+
+![img_5.png](/components/extractors/database/column_masks.png)
+
+There are two types of masks available:
+
+#### Length mask
+
+This mask replaces the length of string columns in the output data with a specified number of  `*` characters.
+
+For more details, refer to the [Debezium documentation](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars).
+
+#### Hash mask
+
+This mask hashes string columns in the output data using a selected algorithm and salt.
+
+You may choose from various hashing algorithms, such as `SHA-256`, `SHA-512`, `MD5`, and `SHA-1`.
+Based on the hash function used, referential integrity is maintained while column values are replaced with pseudonyms.
+Supported hash functions are described in the [MessageDigest section](https://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#MessageDigest) of the Java Cryptography Architecture Standard Algorithm Name Documentation.
+
+***Note:** Hashing strategy version 2 is used to ensure consistency across job runs and configurations.*
+
+For more details, refer to the [Debezium documentation](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash).
 
 ### Sync Options
 
 {: .image-popup}
-![img_2.png](/components/extractors/database/postgresql/img_2.png)
+![img_6.png](/components/extractors/database/postgresql/sync_options.png)
 
 - **Signaling Table**: The name of the signaling table in the source database. The connector uses the signaling table to store various signal events and incremental snapshot watermarks. See more in
   the [Signaling Table](#signaling-table) section.
@@ -489,10 +605,7 @@ substrings that might be present in a column name.
     - `Bytes`: represents binary data as a byte array.
 - **Snapshot Fetch Size**: During a snapshot, the connector reads table content in batches of rows. This property
   specifies the maximum number of rows in a batch. The default value is `10240`.
-- **Snapshot parallelism**: Specifies the number of threads that the connector uses when performing an initial snapshot.
-  To enable parallel initial snapshots, set the property to a value greater than 1. In a parallel initial snapshot, the
-  connector processes multiple tables concurrently. Note that setting up high values may lead to OOM errors. Change the
-  default value at your own risk.
+- **Snapshot Statement Override** - Define a custom SQL SELECT statement to be used for fetching the initial snapshot.
 
 #### Heartbeat
 
@@ -501,7 +614,7 @@ Enable heartbeat signals to prevent the consumption of WAL disk space. The conne
 {: .image-popup}
 ![img_4.png](/components/extractors/database/postgresql/img_4.png)
 
-***NOTE:** The heartbeat signal must also be selected in the `Datasource > Tables to sync` configuration property. For more information, see the [WAL disk space consumption](#wal-disk-space-consumption) section.*
+***Note:** The heartbeat signal must also be selected in the `Datasource > Tables to sync` configuration property. For more information, see the [WAL disk space consumption](#wal-disk-space-consumption) section.*
 
 - **Heartbeat interval [ms]**: The interval in milliseconds at which the heartbeat signal is emitted. The default value
   is `3000` (3 s).
@@ -517,7 +630,7 @@ tables.
 {: .image-popup}
 ![img_3.png](/components/extractors/database/postgresql/img_3.png)
 
-#### Load Type
+#### Load type
 
 The `Load Type` configuration option specifies how the data is loaded into the destination tables.
 

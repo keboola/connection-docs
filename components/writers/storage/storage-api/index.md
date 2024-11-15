@@ -1,5 +1,5 @@
 ---
-title: Keboola Connection Storage
+title: Keboola Storage
 permalink: /components/writers/storage/storage-api/
 redirect_from:
     - /writers/storage/storage-api/
@@ -29,7 +29,7 @@ If you want to write to multiple buckets, you'll have to create multiple tokens 
 and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Connection Storage** data destination connector.
+[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** data destination connector.
 
 ## Specify Target Project
 Select the region of the *target project* and paste the token [you generated](#prepare-api-token) in the *target project*.
