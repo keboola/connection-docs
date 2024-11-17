@@ -32,7 +32,7 @@ grant Keboola correct access to the schema in your Snowflake. Once access has be
 **Note:** This set of permissions grants the Keboola service account read-only access to the data.
 
 {: .alert.alert-warning}
-[Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently not supported. Attempting to grant permissions will result in an error.
+[Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently supported only by [Direct share](https://docs.snowflake.com/en/guides-overview-sharing#direct-share) and only by grant privileges on objects directly to a share. More about it in [Secure Data Sharing](/storage/byodb/snowflake-secure-data-sharing/).
 
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
