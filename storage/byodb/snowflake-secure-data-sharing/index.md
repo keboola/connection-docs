@@ -105,4 +105,4 @@ GRANT IMPORTED PRIVILEGES ON DATABASE <CONSUMER_DATABASE_NAME> TO <KEBOOLA_PROJE
 
 ## Final Step
 You can now register the schema in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
-the schema present in this database. When registering, don't forget to check the `Is Secure Data Share?` checkbox.
+the schema present in this database. When registering, don't forget to check the `Secure Data Share` checkbox.
