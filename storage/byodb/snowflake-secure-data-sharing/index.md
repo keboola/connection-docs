@@ -11,12 +11,12 @@ This guide explains how to share a database and its objects with one or more acc
 The process involves two roles: the Producer and the Consumer.
 
 Producer: The Snowflake account that owns and shares the data.
-Consumer: The Snowflake account that accesses the shared data.
+Consumer: The Snowflake account that accesses the shared data. This account has to be used in Keboola as [BYODB](https://help.keboola.com/storage/byodb/#main-header)
 
 ## Producer Workflow
 
 ### 1. Create a Share
-Use `CREATE SHARE` to set up a share. Initially, the share is an empty container waiting for objects and accounts to be added.
+Use `CREATE SHARE` to set up a Share. Initially, the Share is an empty container waiting for objects and accounts to be added.
 
 ```sql
 CREATE SHARE <SHARE_NAME>;
@@ -47,15 +47,15 @@ SHOW GRANTS TO SHARE <SHARE_NAME>;
 ```
 
 ### 3. Add Accounts to the Share
-Add one or more accounts to the share using `ALTER SHARE`. To verify, use `SHOW SHARES`.
+Add one or more accounts to the Share using `ALTER SHARE`. To verify, use `SHOW SHARES`.
 ```sql
-ALTER SHARE <SHARE_NAME ADD ACCOUNTS=<ACCOUNT_NAME>;
+ALTER SHARE <SHARE_NAME> ADD ACCOUNTS=<ACCOUNT_NAME>;
 ```
 ```sql
 SHOW SHARES;
 ```
 
-The share is now ready for consumption by the specified accounts. For detailed guidance, refer to [Create and configure shares](https://docs.snowflake.com/en/user-guide/data-sharing-provider).
+The Share is now ready for consumption by the specified accounts. For detailed guidance, refer to [Create and configure Shares](https://docs.snowflake.com/en/user-guide/data-sharing-provider).
 
 ## Consumer Workflow
 
@@ -91,7 +91,7 @@ CREATE DATABASE <CONSUMER_DATABASE_NAME> FROM SHARE <PRODUCER_ACCOUNT>.<SHARE_NA
 ```
 
 ### Granting privileges on an imported database
-Currently, Keboola supports only shares with **direct access to database objects**. Shares with roles are not supported.
+Currently, Keboola supports only shares with **[direct access to database objects](https://docs.snowflake.com/en/user-guide/data-sharing-policy-protected-data)**. Shares with roles are not supported.
 
 To allow users to access shared objects, grant the `IMPORTED PRIVILEGES` privilege on the imported database to one or more roles in your account. A role can grant `IMPORTED PRIVILEGES` only if it:
 * Owns the imported database (i.e., has the `OWNERSHIP` privilege).
@@ -102,5 +102,5 @@ Example:
 GRANT IMPORTED PRIVILEGES ON DATABASE <CONSUMER_DATABASE_NAME> TO <KEBOOLA_PROJECT_ROLE>;
 ```
 
-## Final Steps
-You can now register the schema in the newly created database as an external bucket in Keboola, enabling seamless data integration.
+## Final Step
+You can now register the schema in the newly created database as an External dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as Database name and schema present in this database. When registering, don't forget to check the `Is Secure Data Share?` checkbox.
