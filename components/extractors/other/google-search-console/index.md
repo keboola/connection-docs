@@ -35,7 +35,7 @@ To extract a search analytics report, select the "Search analytics" endpoint.
 {: .image-popup}
 ![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/row_config.png)
 
-- Fill in the domain to extract data from; it should not contain "https://www." before the domain name.
+- Fill in the domain to extract data from; if the domain has data across all URL variations under the domain, enter it as sc-domain:domainname.com. It should not contain "https://www." before the domain name.
 - Fill in the dimensions you wish to extract data from. Possible dimensions are country, device, page, query, and searchAppearance (searchAppearance cannot be combined with other fields).
 - Select a date range to extract data from, either set dynamic date ranges, such as last week or last month or a custom date range where you specify a date from and date to. Custom dates can be filled in with the following:
     - Relative dates like: '1 min ago', '2 weeks ago', '3 months, 1 week and 1 day ago', 'in 2 days', 'tomorrow'.
