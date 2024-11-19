@@ -949,6 +949,38 @@ This table shows data about storage [file](/storage/files/) events.
 | `kbc_token_id` | Foreign key to the Keboola token creating the event | `516357_kbc-eu-central-1` |
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
+### kbc_data_app
+This table lists the [data apps](/components/data-apps/).
+
+| **Column** | **Description** | **Example** |
+|---|---|---|
+| `kbc_data_app_id` (PK) | Unique identifier for the data application | `123_kbc-us-east-1_keboola.data-apps-945672` |
+| `kbc_project_id` | Foreign key to the Keboola project | `580_kbc-us-east-1` |
+| `data_app_created` | Datetime when the data app was created | `2023-05-14 12:30:45` |
+| `data_app_id_num` | Numerical ID for the data application | `945672` |
+| `kbc_data_app_name` | Human-readable name of the data app | `Customer Data Loader` |
+| `kbc_data_app_url` | URL link to access the data application | `https://1191546783.hub.keboola.com` |
+| `kbc_component_id` | Identifier of the component | `keboola.data-apps_kbc-us-east-1` |
+| `kbc_component` | Name or type of the Keboola component | `keboola.data-apps` |
+| `kbc_component_configuration_id` | Foreign key to the Keboola component configuration | `123_kbc-us-east-1_keboola.data-apps_1191549426` |
+| `kbc_data_app_is_deleted` | Boolean flag indicating whether the data application has been deleted | `false` |
+
+### kbc_data_app_params_event
+This table lists events and their non-empty parameters from the `ext.keboola.data-apps.` event. 
+
+| **Column** | **Description** | **Example** |
+|---|---|---|
+| `kbc_data_app_event_id` (PK) | Unique identifier for the event created by the data app | `123557345_kbc-us-east-1` |
+| `kbc_project_id` | Foreign key to the Keboola project | `580_kbc-us-east-1` |
+| `kbc_data_app_id` | Foreign key to the Keboola data app | `123_kbc-us-east-1_keboola.data-apps-945672` |
+| `data_app_id_num` | Numerical ID for the data application | `945672` |
+| `event_created_at` | Datetime when the event was created | `2023-07-23 06:23:19` |
+| `event` | Description of the event | `ext.keboola.data-apps.` |
+| `message` | Message describing the event | `Streamlit App Read Table` |
+| `kbc_token_id` | Foreign key to the Keboola token | `516365_kbc-us-east-1` |
+| `token_name` | Name of the token | `streamlit write only-token` |
+| `params` | Parameters of the event (JSON object) | `{"event_type":"keboola_data_app_write","event_job_id":151808445362,"event_application":"Unknown","time":"2024-11-18 16:15:02","user":"Unknown"}` |
+
 ## dst_ Columns
 Columns with the **dst_** prefix are system columns used in Telemetry Data connector executions. They are **not** related to the data itself.
 
