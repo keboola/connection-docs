@@ -103,6 +103,12 @@ Example:
 GRANT IMPORTED PRIVILEGES ON DATABASE <CONSUMER_DATABASE_NAME> TO <KEBOOLA_PROJECT_ROLE>;
 ```
 
+### Limitations
+While sharing data can greatly enhance collaboration, certain object types and policies are not supported. Please keep the following limitations in mind:
+
+- Supported objects exclude secure user-defined functions (UDFs) and Apache Iceberg™ tables.
+- Masking policies will not be applied after sharing with other Keboola projects.
+
 ## Final Step
 You can now register the schema in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
 the schema present in this database. When registering, don't forget to check the `Secure Data Share` checkbox.
