@@ -950,7 +950,7 @@ This table shows data about storage [file](/storage/files/) events.
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ### kbc_data_app
-This table lists the [data apps](/components/data-apps/) 
+This table lists the [data apps](/components/data-apps/).
 
 | **Column** | **Description** | **Example** |
 |---|---|---|
@@ -966,11 +966,11 @@ This table lists the [data apps](/components/data-apps/)
 | `kbc_data_app_is_deleted` | Boolean flag indicating whether the data application has been deleted | `false` |
 
 ### kbc_data_app_params_event
-This table lists events and their non-empty parameters from event called ext.keboola.data-apps.. 
+This table lists events and their non-empty parameters from the `ext.keboola.data-apps.` event. 
 
 | **Column** | **Description** | **Example** |
 |---|---|---|
-| `kbc_data_app_event_id` (PK) | Unique identifier for the event created by data app | `123557345_kbc-us-east-1` |
+| `kbc_data_app_event_id` (PK) | Unique identifier for the event created by the data app | `123557345_kbc-us-east-1` |
 | `kbc_project_id` | Foreign key to the Keboola project | `580_kbc-us-east-1` |
 | `kbc_data_app_id` | Foreign key to the Keboola data app | `123_kbc-us-east-1_keboola.data-apps-945672` |
 | `data_app_id_num` | Numerical ID for the data application | `945672` |
