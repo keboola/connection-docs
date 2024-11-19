@@ -576,6 +576,9 @@ items:
           - url: /storage/byodb/external-buckets/
             title: External Datasets
 
+          - url: /storage/byodb/snowflake-secure-data-sharing/
+            title: Snowflake Secure Data Sharing
+
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 
