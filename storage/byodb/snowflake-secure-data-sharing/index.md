@@ -103,7 +103,7 @@ Example:
 GRANT IMPORTED PRIVILEGES ON DATABASE <CONSUMER_DATABASE_NAME> TO <KEBOOLA_PROJECT_ROLE>;
 ```
 
-### Limitations
+## Limitations
 While sharing data can greatly enhance collaboration, certain object types and policies are not supported. Please keep the following limitations in mind:
 
 - Supported objects exclude secure user-defined functions (UDFs) and Apache Iceberg™ tables.
