@@ -80,6 +80,22 @@ Your input tables are stored as CSV files in `in/tables/`, and your output table
 If you can process the file line-by-line, then the most effective way is to read each line, process it and write
 it immediately. The following two examples show two ways of reading and manipulating a CSV file.
 
+## Dynamic Backends
+If you have a large amount of data in databases and complex queries, your transformation might run for a couple of hours.
+To speed it up, you can change the backend size in the configuration. Snowflake transformations suport the following sizes:
+- XSmall
+- Small _(default)_
+- Medium
+- Large
+
+{: .image-popup}
+![Screenshot - Backend size configuration](/transformations/python-plain/backend-size.png)
+
+Scaling up the backend size allocates more resources to speed up your transformation.
+
+***Note:** Dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
+
+
 ## Development Tutorial
 To develop and debug Python transformations, you can use a [Python workspace](/transformations/workspace/) or 
 you can develop the transformation script locally. 
