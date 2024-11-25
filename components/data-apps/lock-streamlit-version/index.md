@@ -43,6 +43,8 @@ Generate a `requirements.txt` file to lock package versions of all installed pac
 
 This file lists all installed packages along with their specific versions. It ensures consistent versions across environments (development and production) and prevents dependency conflicts.
 
+***Note:** After updating or installing a new dependency, remember to run `pip freeze` again to update your `requirements.txt` file.*
+
 ## Example requirements.txt for a Streamlit App
 Below is an example optimized for a typical Streamlit app running in Keboola:
 
