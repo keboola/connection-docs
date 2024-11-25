@@ -237,6 +237,8 @@ When the app is deployed, the code specified in one of the deployment methods wi
 This image already has Streamlit and a few other basic packages pre-installed:
 
 ```
+# Dockerfile
+
 FROM python:3.10-slim
 
 RUN mkdir -m 777 /data \
