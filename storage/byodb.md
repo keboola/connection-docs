@@ -69,5 +69,5 @@ By default, you can have up to **100** service accounts per project to control r
 
 ----
 
-Additional BigQuery backend limits can be found here: [Quotas and Limits  |  BigQuery  |  Google Cloud](https://cloud.google.com/bigquery/quotas#api_request_quotas)
+Additional BigQuery backend limits can be found here: [BigQuery API Quotas and Limits](https://cloud.google.com/bigquery/quotas#api_request_quotas).
 
