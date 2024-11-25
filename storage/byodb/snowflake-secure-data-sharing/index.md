@@ -3,8 +3,11 @@ title: Snowflake Secure Data Sharing
 permalink: /storage/byodb/snowflake-secure-data-sharing/
 ---
 
+{: .alert.alert-warning}
 Important: This feature is currently available in BETA.
-TOC {:toc}
+
+* TOC
+{:toc}
 
 This guide explains how to share a database and its objects with one or more accounts by creating a share. Currently, Keboola supports granting privileges directly to a share, specifically for tables, external tables, views, secure views, and secure materialized views. For further reference, consult the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-sharing-gs#grant-privileges-directly-to-a-share).
 
