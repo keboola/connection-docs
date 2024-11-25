@@ -3,6 +3,9 @@ title: Snowflake Secure Data Sharing
 permalink: /storage/byodb/snowflake-secure-data-sharing/
 ---
 
+{: .alert.alert-warning}
+Important: This feature is currently available in BETA.
+
 * TOC
 {:toc}
 
