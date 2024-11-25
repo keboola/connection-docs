@@ -37,11 +37,11 @@ Install the necessary packages for your Streamlit app:
 `pip install streamlit pandas numpy`
 
 ### Generate requirements.txt
-Generate a `requirements.txt` file to lock package versions of all installed packages:
+Generate a `requirements.txt` file to lock the versions of all installed packages:
 
 `pip freeze > requirements.txt`
 
-This file lists all installed packages along with their specific versions. It ensures consistent versions across environments (development and production) and prevents dependency conflicts.
+This file lists all installed packages along with their specific versions. It ensures consistent package versions across environments (development and production) and prevents dependency conflicts.
 
 ***Note:** After updating or installing a new dependency, remember to run `pip freeze` again to update your `requirements.txt` file.*
 
@@ -69,8 +69,9 @@ Below is an example optimized for a typical Streamlit app running in Keboola:
 `watchdog==3.0.0`
 
 ## Best Practices for Managing Dependencies
+Following these best practices will help you maintain a stable, efficient, and consistent environment for your Streamlit applications in Keboola.
 
-- **Keep it Clean:** Only include necessary packages to keep the environment lightweight.
-- **Update Regularly:** Regularly update and test dependencies in a development environment before generating a new `requirements.txt` file.
-- **Test Locally:** Verify that your app works locally with the locked package versions before deploying in Keboola.
-- **Match Environments:** Use the same Python version locally as in Keboola (Python 3.10) to prevent version mismatches.
+- **Keep it Clean:** Include only the necessary packages to keep the environment lightweight.
+- **Update Regularly:** Periodically update and test dependencies in a development environment before generating a new `requirements.txt` file.
+- **Test Locally:** Verify that your app works correctly with the locked package versions in a local environmnet before deploying it in Keboola.
+- **Match Environments:** Use the same Python version in your local setup with Keboola's version (Python 3.10) to prevent version mismatches.
