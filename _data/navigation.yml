@@ -460,7 +460,7 @@ items:
           - url: /components/data-apps/general-design-guide/
             title: General Design Guide
           - url: /components/data-apps/lock-streamlit-version/
-            title: Lock Streamlit Version on GitHub Deployment
+            title: Locking Streamlit Version on GitHub Deployment
           - url: /components/data-apps/oidc/
             title: OpenID Connect
             items:
