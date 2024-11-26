@@ -30,4 +30,4 @@ a running average of the last 20 executions of the orchestration.
 When an orchestration is triggered manually, only the user who triggered it will receive any notifications. Therefore you
 don't have to worry about spamming your colleagues with messages when running orchestrations manually.
 
-**Important: Always set notifications for an error status in scheduled production orchestrations.**
+**Important: Notifications are not supported in Development branches. Always set notifications for an error status in scheduled production orchestrations.**
