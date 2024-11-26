@@ -10,10 +10,9 @@ This guide explains how to lock package versions in Streamlit applications deplo
 
 Locking package versions is essential for:   
 
-- **Stability:** Prevent disruptions caused by unexpected updates or dependency conflicts.
-- **Reproducibility:** Ensure consistent app behavior across development, testing, and production environments. 
-- **Ease of Debugging:** Simplify troubleshooting and streamline future updates with a stable environment.
-- **Compatibility:** Avoid issues with newer package versions that may not work seamlessly with Streamlit or your app's other dependencies.
+- **Stability and compatibility:** Prevent disruptions and ensure your app works seamlessly by avoiding issues with unexpected updates or incompatible package versions.
+- **Reproducibility:** Guarantee consistent app behavior across development, testing, and production environments. 
+- **Ease of Debugging:** Simplify troubleshooting and streamline future updates by maintaining a predictable environment.
   
 ## How to Lock Package Versions
 To ensure your Streamlit app runs reliably in Keboola, follow these steps to lock package versions:
