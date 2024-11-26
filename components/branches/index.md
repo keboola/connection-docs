@@ -99,3 +99,5 @@ write to the destination, or change the destination accordingly.
 ### OAuth Authorized Components
 
 Components using OAuth does not allow authorizing nor changing the OAuth in development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.
+
+**Important: Development branches are intended for development and testing only; therefore, setting up status notifications on Flows is not supported in these branches.**
