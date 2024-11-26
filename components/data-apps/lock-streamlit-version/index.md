@@ -10,9 +10,12 @@ This guide explains how to lock package versions in Streamlit applications deplo
 
 Locking package versions is essential for:   
 
-- **Stability and compatibility:** Prevent disruptions and ensure your app works seamlessly by avoiding issues with unexpected updates or incompatible package versions.
+- **Stability and compatibility:** Avoid disruptions and ensure seamless app functionality by preventing issues with unexpected updates or incompatible package versions.
 - **Reproducibility:** Guarantee consistent app behavior across development, testing, and production environments. 
-- **Ease of Debugging:** Simplify troubleshooting and streamline future updates by maintaining a predictable environment.
+- **Ease of debugging:** Simplify troubleshooting and streamline future updates by maintaining a predictable environment.
+
+Follow this [tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/) to package a simple Python project, set up the required files and structure, 
+build the package, and upload it to the Python Package Index. For information on installing dependencies, refer to the [Streamlit documentation](https://docs.streamlit.io/knowledge-base/dependencies).
   
 ## How to Lock Package Versions
 To ensure your Streamlit app runs reliably in Keboola, follow these steps to lock package versions:
@@ -70,7 +73,7 @@ Below is an example optimized for a typical Streamlit app running in Keboola:
 ## Best Practices for Managing Dependencies
 Following these best practices will help you maintain a stable, efficient, and consistent environment for your Streamlit applications in Keboola.
 
-- **Keep it Clean:** Include only the necessary packages to keep the environment lightweight.
-- **Update Regularly:** Periodically update and test dependencies in a development environment before generating a new `requirements.txt` file.
-- **Test Locally:** Verify that your app works correctly with the locked package versions in a local environmnet before deploying it in Keboola.
-- **Match Environments:** Use the same Python version in your local setup with Keboola's version (Python 3.10) to prevent version mismatches.
+- **Keep it clean:** Include only the necessary packages to keep the environment lightweight.
+- **Update regularly:** Periodically update and test dependencies in a development environment before generating a new `requirements.txt` file.
+- **Test locally:** Verify that your app works correctly with the locked package versions in a local environmnet before deploying it in Keboola.
+- **Match environments:** Use the same Python version in your local setup with Keboola's version (Python 3.10) to prevent version mismatches.
