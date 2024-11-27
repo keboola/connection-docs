@@ -28,4 +28,6 @@ for 100 minutes but it is still not finished after 120 minutes, a notification w
 a running average of the last 20 executions of the orchestration.
 
 When an orchestration is triggered manually, only the user who triggered it will receive any notifications. You
-don't have to worry about spamming your colleagues with messages when running orchestrations manually.*
+don't have to worry about spamming your colleagues with messages when running orchestrations manually.
+
+***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production orchestrations.*
