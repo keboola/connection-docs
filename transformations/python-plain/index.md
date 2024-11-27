@@ -82,7 +82,7 @@ it immediately. The following two examples show two ways of reading and manipula
 
 ## Dynamic Backends
 If you have a large amount of data in databases and complex queries, your transformation might run for a couple of hours.
-To speed it up, you can change the backend size in the configuration. Snowflake transformations suport the following sizes:
+To speed it up, you can change the backend size in the configuration. Python transformations suport the following sizes:
 - XSmall
 - Small _(default)_
 - Medium

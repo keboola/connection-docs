@@ -81,8 +81,7 @@ You can end your branch's lifecycle in two ways:
 - **Deleting** -- if you do not wish to use the changes you've made and want to simply discard them. The data associated with the branch is discarded when the branch is deleted.
 - [**Merging into production**](/tutorial/branches/merge-to-production/) -- all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/#configuration-versions) of the respective configurations. The branch can be either deleted or kept for further reference after merging. 
 
-**Important:** All this happens in a same project, allowing you to collaborate on the modifications with other members 
-of the project.
+***Important:** All of this happens within the same project, enabling collaboration with other project members on the modifications.*
 
 ## Component Considerations
 
@@ -99,3 +98,7 @@ write to the destination, or change the destination accordingly.
 ### OAuth Authorized Components
 
 Components using OAuth does not allow authorizing nor changing the OAuth in development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.
+
+*****
+
+***Important:** Development branches are for development and testing only, so setting up status notifications on Flows is not supported.*
