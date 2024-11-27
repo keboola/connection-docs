@@ -27,7 +27,5 @@ enabling [*Continue on error*](/orchestrator/running/) for the given tasks).
 for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as 
 a running average of the last 20 executions of the orchestration.
 
-When an orchestration is triggered manually, only the user who triggered it will receive any notifications. Therefore you
-don't have to worry about spamming your colleagues with messages when running orchestrations manually.
-
-**Important: Notifications are not supported in Development branches. Always set notifications for an error status in scheduled production orchestrations.**
+When an orchestration is triggered manually, only the user who triggered it will receive any notifications. You
+don't have to worry about spamming your colleagues with messages when running orchestrations manually.*
