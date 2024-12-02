@@ -503,8 +503,8 @@ items:
       - url: /templates/ecomm-kpi-dashboard/
         title: eCommerce KPI Dashboard
 
-      - url: /templates/google-analytics/
-        title: Google Analytics
+      - url: /templates/google-analytics4/
+        title: Google Analytics 4
 
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets

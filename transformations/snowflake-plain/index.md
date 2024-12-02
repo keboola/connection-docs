@@ -64,9 +64,7 @@ To speed it up, you can change the backend size in the configuration. Snowflake 
 
 Scaling up the backend size allocates more resources to speed up your transformation.
 
-***Note:** This feature is currently in public beta. Please bear with us and provide feedback
-at [https://ideas.keboola.com](https://ideas.keboola.com).
-Also, dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
+***Note:** Dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
 ## Example
 To create a simple Snowflake transformation, follow these steps:
