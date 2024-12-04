@@ -317,6 +317,8 @@ data in storage, and the number of users. This combines data from different data
 * `Writers` - `kbc_job` (jobs with **data destination** *component_type*)
 * `BAPI Messages` - Buffer API (data streams) usage; only aggregated values available
 * `BAPI Receiver` - Buffer API endpoints used; only aggregated values available
+* `Stream` - Data Streams endpoints used; only aggregated values available
+* `Streamed GB` - Streamed GB into the warehouse (uncompressed); only aggregated values available
 
 *Note: `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
