@@ -162,4 +162,3 @@ The currently supported log-based connectors:
 
 - [MySql CDC](/components/extractors/database/mysql/)
 - [PostgreSQL CDC](/components/extractors/database/postgresql/)
-- [Oracle CDC](/components/extractors/database/oracle/)
