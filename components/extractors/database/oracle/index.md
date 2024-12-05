@@ -16,7 +16,4 @@ have an [advanced mode](/components/extractors/database/sqldb/).
 
 Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
 
-## Oracle Log-Based CDC
-
-{% include private-beta-warning.html %}
 
