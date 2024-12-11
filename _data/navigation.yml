@@ -459,6 +459,8 @@ items:
         items:
           - url: /components/data-apps/general-design-guide/
             title: General Design Guide
+          - url: /components/data-apps/lock-streamlit-version/
+            title: Locking Streamlit Version on GitHub Deployment
           - url: /components/data-apps/oidc/
             title: OpenID Connect
             items:
@@ -501,8 +503,8 @@ items:
       - url: /templates/ecomm-kpi-dashboard/
         title: eCommerce KPI Dashboard
 
-      - url: /templates/google-analytics/
-        title: Google Analytics
+      - url: /templates/google-analytics4/
+        title: Google Analytics 4
 
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
@@ -575,6 +577,9 @@ items:
         items:
           - url: /storage/byodb/external-buckets/
             title: External Datasets
+
+          - url: /storage/byodb/snowflake-secure-data-sharing/
+            title: Snowflake Secure Data Sharing
 
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
