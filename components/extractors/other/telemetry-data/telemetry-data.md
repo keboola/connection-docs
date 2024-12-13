@@ -139,13 +139,34 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
 
 
+### kbc_data_app_workspace
+This table lists runs of [data apps] (/components/data-apps/) 
+and their consumption metrics.
+
+| **Column** | **Description** | **Example** | 
+|---|---|---|
+| `kbc_data_app_workspace_run_id` (PK) | Identifier of the workspace active window (between starting and pausing the sandbox) | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
+| `kbc_data_app_workspace_id` | Data app workspace identifier | `10910_kbc-eu-central-1` |
+| `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
+| `date` (PK) | Date for which the runtime hours and time credits are calculated | `2020-11-27` |
+| `created_at` | Datetime of workspace creation | `2020-11-27 11:22:08` |
+| `expiration_at` | Workspace expiration datetime | `2020-12-02 11:22:08` |
+| `updated_at` | Datetime when the workspace was last updated | `2020-11-27 14:03:40` |
+| `start_at` | Datetime when the workspace resume window started | `2020-11-27 11:22:08` |
+| `sleep_at` | Datetime when the workspace resume window ended | `2020-11-27 14:03:40` |
+| `type` | Type of the workspace | `streamlit` |
+| `hostname` | Hostname of the workspace | `https://hello-world-759519.hub.north-europe.azure.keboola.com` | 
+| `data_app_runtime_hours` | Runtime of the data app workspace on the particular date in hours | `2.413333` |
+| `backend_size` | Size of the data app backend | `Small` |
+| `time_credits_used` | Number of time credits consumed by the workspace on the particular date | `2.413333` |
+| `billed_credits_used` | Number of the actually billed credits | `2.413333` |
+
 ### kbc_data_science_sandbox
 This table lists Python/R [workspaces](/transformations/workspace/)/[sandboxes](/transformations/sandbox/) 
 and their consumption metrics.
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
-| `kbc_data_science_sandbox_resume_date_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox), including date | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a_2024-08-05` |
 | `kbc_data_science_sandbox_resume_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox) | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
 | `kbc_data_science_sandbox_id` | Data science sandbox identifier | `10910_kbc-eu-central-1` |
 | `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
