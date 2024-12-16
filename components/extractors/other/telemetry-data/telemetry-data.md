@@ -281,15 +281,16 @@ This table shows information about queries using Snowflake, including transforma
 
 | **Column** | **Description** | **Example** |
 |---|---|---|
-| `kbc_project_id` (PK) | Foreign key to the Keboola project | `458_kbc-eu-central-1` |
-| `snowflake_job_start_at` (PK) | Datetime hour the jobs started (Snowflake jobs/queries are aggregated per hour) | `2019-08-19 06:00:00` |
-| `dwh_size` (PK) | Size of the DWH used | `Medium` |
-| `snowflake_dwh` (PK) | DWH name | `KEBOOLA_PROD` |
-| `snowflake_database` (PK) | DB name | `KEBOOLA_391` |
-| `snowflake_schema` (PK) | Schema name | `WORKSPACE_146192784` |
-| `snowflake_user` (PK) | User running the queries | `KEBOOLA_WORKSPACE_146192784` |
-| `snowflake_job_type` (PK) | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project | `writer` |
-| `snowflake_job_result` (PK) | Result of the queries (`Success`, `Error`) | `Success` |
+| `kbc_snowflake_stats_id` | Hash of the snowflake queries stat group identifier | `8345cc0d580a6160d2ed5b9b16a` |
+| `kbc_project_id` | Foreign key to the Keboola project | `458_kbc-eu-central-1` |
+| `snowflake_job_start_at` | Datetime hour the jobs started (Snowflake jobs/queries are aggregated per hour) | `2019-08-19 06:00:00` |
+| `dwh_size` | Size of the DWH used | `Medium` |
+| `snowflake_dwh` | DWH name | `KEBOOLA_PROD` |
+| `snowflake_database` | DB name | `KEBOOLA_391` |
+| `snowflake_schema` | Schema name | `WORKSPACE_146192784` |
+| `snowflake_user` | User running the queries | `KEBOOLA_WORKSPACE_146192784` |
+| `snowflake_job_type` | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project | `writer` |
+| `snowflake_job_result` | Result of the queries (`Success`, `Error`) | `Success` |
 | `snowflake_queries` | Number of the queries aggregated by the primary key | `19` |
 | `snowflake_queries_length_s` | Length of the queries in seconds aggregated by the primary key | `205.214000` |
 | `time_credits_used` | Number of the time credits consumed by the queries | `0.91206222224` |
