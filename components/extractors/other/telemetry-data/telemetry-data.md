@@ -149,7 +149,7 @@ and their consumption metrics.
 | `kbc_data_app_workspace_id` | Data app workspace identifier | `10910_kbc-eu-central-1` |
 | `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
 | `date` (PK) | Date for which the runtime hours and time credits are calculated | `2020-11-27` |
-| `created_at` | Datetime of workspace creation | `2020-11-27 11:22:08` |
+| `created_at` | Datetime of the workspace creation | `2020-11-27 11:22:08` |
 | `expiration_at` | Workspace expiration datetime | `2020-12-02 11:22:08` |
 | `updated_at` | Datetime when the workspace was last updated | `2020-11-27 14:03:40` |
 | `start_at` | Datetime when the workspace resume window started | `2020-11-27 11:22:08` |
@@ -171,7 +171,7 @@ and their consumption metrics.
 | `kbc_data_science_sandbox_id` | Data science sandbox identifier | `10910_kbc-eu-central-1` |
 | `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
 | `date` (PK) | Date for which the runtime hours and time credits are calculated | `2020-11-27` |
-| `created_at` | Datetime of sandbox creation | `2020-11-27 11:22:08` |
+| `created_at` | Datetime of the sandbox creation | `2020-11-27 11:22:08` |
 | `expiration_at` | Sandbox expiration datetime | `2020-12-02 11:22:08` |
 | `updated_at` | Datetime when the sandbox was last updated | `2020-11-27 14:03:40` |
 | `start_at` | Datetime when the sandbox resume window started | `2020-11-27 11:22:08` |
