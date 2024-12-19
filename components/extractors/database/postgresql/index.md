@@ -14,10 +14,10 @@ Our connectors support the most recent versions of PostgreSQL. You may choose di
 - [Log-based CDC](/components/extractors/database/postgresql/#log-based-cdc)
 
 
-## Query-Based connector
+## Query-Based Connector
 
 This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database to sync data. 
-It is the simplest approach suitable for most use cases and allows for  [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
+It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
@@ -62,11 +62,11 @@ For more technical details on how snapshots work, see the
 
 #### Resumable Snapshots
 
-The Debezium Postgres Debezium connector supports partially resumable snapshots, enabling the connector to recover from failures during the snapshot process. Such failures might occur due to network issues or connector timeouts.
+The Debezium Postgres connector supports partially resumable snapshots, enabling the connector to recover from failures during the snapshot process, such as those caused by network issues or connector timeouts.
 
-If a failure occurs during the snapshot phase, the connector logs a warning message and terminates the job gracefully, saving the progress made up to that point. Upon restarting, the connector resumes the snapshot from the last known position, retrying the snapshot for **the last unfinished table** and any remaining tables.
+If a failure occurs during the snapshot phase, the connector logs a warning and gracefully terminates the job, saving the progress made up to that point. Upon restarting, the connector resumes the snapshot from the last known position, retrying the snapshot for **the last unfinished table** and any remaining tables.
 
-{% include warning.html content="The smallest unit at which the connector can resume is a table. If the snapshot process fails while fetching a specific table, the partial result will be stored in the storage. During the next job execution, the snapshot for that table will be restarted. <br>This means that in the Append Mode, you may encounter duplicate rows, which the consumer will need to handle appropriately." %}
+{% include warning.html content="The smallest resumable unit is a table. If the snapshot process fails while fetching a specific table, its partial result is stored. On the next job execution, the snapshot for that table restarts. <br>In Append Mode, this may result in duplicate rows, which the consumer must handle appropriately." %}
 
 ### Schema Drift
 
@@ -250,7 +250,7 @@ configuration_id and, alternatively, branch_id if it's a branch configuration. T
 ***Note:** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
 and it's not deleted automatically. It is recommended to clean up any unused dev publications manually or using a script.*
 
-#### Slot Names
+#### Slot names
 
 Note that each configuration of the connector creates a new slot with a unique name. The slot name contains 
 configuration_id and alternatively branch id if it's a branch configuration. The slot name is generated as follows:
@@ -268,24 +268,24 @@ if different publications have different performance requirements or if they nee
 subscribers with different capabilities.
 
 
-### Replica identity
+### Replica Identity
 
 {% include warning.html content="The <code>REPLICA IDENTITY</code> setting determines what is included in the <code>UPDATE</code> and <code>DELETE</code> events. If it is not set to <code>FULL</code>, these events will include only the primary key values or may not be emitted at all if no primary key is present." %}
 
 
-[REPLICA IDENTITY](https://www.postgresql.org/docs/current/static/sql-altertable.html#SQL-CREATETABLE-REPLICA-IDENTITY) is a PostgreSQL-specific table-level setting that determines the amount of information that is available to the logical decoding plug-in for `UPDATE` and `DELETE` events. More specifically, the setting of `REPLICA IDENTITY` controls what (if any) information is available for the previous values of the table columns involved, whenever an `UPDATE` or `DELETE` event occurs.
+[REPLICA IDENTITY](https://www.postgresql.org/docs/current/static/sql-altertable.html#SQL-CREATETABLE-REPLICA-IDENTITY) is a PostgreSQL-specific table-level setting that determines how much information is available to the logical decoding plug-in for `UPDATE` and `DELETE` events. Specifically, `REPLICA IDENTITY` controls what (if any) information about previous table column values is available during these events.
 
-There are 4 possible values for `REPLICA IDENTITY`:
+There are four possible values for `REPLICA IDENTITY`:
 
-- `DEFAULT` - The default behavior is that `UPDATE` and `DELETE` events contain the previous values for the primary key columns of a table if that table has a primary key. For an `UPDATE` event, only the primary key columns with changed values are present.
-- If a table does not have a primary key, the connector does not emit `UPDATE` or `DELETE` events for that table. For a table without a primary key, the connector emits only _create_ events. Typically, a table without a primary key is used for appending messages to the end of the table, which means that `UPDATE` and `DELETE` events are not useful.
-- `NOTHING` - Emitted events for `UPDATE` and `DELETE` operations do not contain any information about the previous value of any table column.
-- `FULL` - Emitted events for `UPDATE` and `DELETE` operations contain the previous values of all columns in the table.
-- `INDEX` _index-name_ - Emitted events for `UPDATE` and `DELETE` operations contain the previous values of the columns contained in the specified index. `UPDATE` events also contain the indexed columns with the updated values.
+- `DEFAULT`: This default behavior includes the previous values of the primary key columns in `UPDATE` and `DELETE` events, but only if the table has a primary key. For `UPDATE` events, only the primary key columns with changed values are included.
+- If a table does not have a primary key, the connector does not emit `UPDATE` or `DELETE` events for that table. Only _create_ events are emitted for such tables. Tables without primary keys are typicallly used for appending messages, where `UPDATE` and `DELETE` events are not relevant.
+- `NOTHING`: `UPDATE` and `DELETE` events do not include any information about the previous values of table columns.
+- `FULL`: `UPDATE` and `DELETE` events include the previous values of all columns in the table.
+- `INDEX` _index-name_: `UPDATE` and `DELETE` events include the previous values of the columns specified in the given index. For `UPDATE` events, the new values for the indexed columns are also included.
 
-**NOTE**: It is possible to let the connector override the `REPLICA IDENTITY` for matched tables by setting the `Replica identity override values` in the [Replication Plugin Advanced Options](#replication-plugin-advanced-options) configuration.
+***Note**: The connector can override the `REPLICA IDENTITY` for matched tables by using the `Replica identity override values` in the [Replication Plugin Advanced Options](#replication-plugin-advanced-options) configuration.*
 
-### WAL disk-space consumption
+### WAL Disk-Space Consumption
 In certain cases, it is possible for PostgreSQL disk space consumed by WAL files to spike or increase out of the usual proportions. There are several possible reasons for this situation:
 
 - The LSN up to which the connector has received data is available in the `confirmed_flush_lsn` column of the server’s `pg_replication_slots` view. Data that is older than this LSN is no longer available, and the database is responsible for reclaiming the disk space.
@@ -658,14 +658,14 @@ Enable heartbeat signals to prevent the consumption of WAL disk space. The conne
 
 ### Replication Plugin Advanced Options
 
-These parameters control whether the connector creates a publication and how it is created. It is recommended to create the publications manually before setting up the connector. Automatic creation works only if the user has owner permissions on the tables.
+These parameters control whether the connector creates a publication and how it is created. It is recommended to create publications manually before setting up the connector. Automatic creation works only if the user has owner permissions on the tables.
 
 More information about the publication creation process can be found in the [Publication Creation](#publication-creation) section.
 
 {: .image-popup}
 ![img_2.png](/components/extractors/database/postgresql/img_4.png)
 
-- **Publication Auto Create Mode**: The mode that specifies how the connector creates publications. The following options
+- **Publication Auto Create Mode**: The mode specifying how the connector creates publications. The following options
   are available:
     - `disabled`: The connector does not create a publication. A database administrator or the user configured for
       replication should create the publication before running the connector.
@@ -675,10 +675,10 @@ More information about the publication creation process can be found in the [Pub
       the table owner to add tables to a publication.
 - **Publication Name**: The name of the publication to be used by the connector. The publication name is generated based
     on the configuration ID and, optionally, the branch ID.
-- **Replica identity override values**: This option will overwrite the existing value in database. List of regular expressions that match fully-qualified tables and replica identity value to be used in the table.
-  - If you wish to keep previous values on `DELETED` records, the replica identity must be set to `FULL`, otherwise all values except primary key will be empty on deleted records. 
+- **Replica identity override values**: This option overwrites the existing value in the database. A list of regular expressions matches fully qualified tables and replica identity values to be used in the table.
+  - If you wish to keep previous values on `DELETED` records, the replica identity must be set to `FULL`; otherwise, all values except the primary key will be empty on deleted records. 
   - Leave empty to keep the database default. 
-  - For more information, see the [Replica identity](#replica-identity) section.
+  - For more information, see the [Replica Identity](#replica-identity) section.
 
 
 ### Destination
