@@ -14,10 +14,10 @@ Our connectors support the most recent versions of PostgreSQL. You may choose di
 - [Log-based CDC](/components/extractors/database/postgresql/#log-based-cdc)
 
 
-## Query-Based connector
+## Query-Based Connector
 
 This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database to sync data. 
-It is the simplest approach suitable for most use cases and allows for  [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
+It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
@@ -60,6 +60,14 @@ You can choose from different snapshot modes in the `Sync Options` > `Replicatio
 For more technical details on how snapshots work, see the
 [official Debezium documentation](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-snapshots).
 
+#### Resumable Snapshots
+
+The Debezium Postgres connector supports partially resumable snapshots, enabling the connector to recover from failures during the snapshot process, such as those caused by network issues or connector timeouts.
+
+If a failure occurs during the snapshot phase, the connector logs a warning and gracefully terminates the job, saving the progress made up to that point. Upon restarting, the connector resumes the snapshot from the last known position, retrying the snapshot for **the last unfinished table** and any remaining tables.
+
+{% include warning.html content="The smallest resumable unit is a table. If the snapshot process fails while fetching a specific table, its partial result is stored. On the next job execution, the snapshot for that table restarts. <br>In Append Mode, this may result in duplicate rows, which the consumer must handle appropriately." %}
+
 ### Schema Drift
 
 The connector seamlessly manages schema changes in the source database, such as `ADD` and `DROP` columns.
@@ -72,6 +80,7 @@ Schema changes are handled as follows:
     - The column remains in the destination table.
     - Any NOT NULL constraint on the column is removed.
     - Values in the column will be NULL/EMPTY following its deletion in the source.
+
 
 ### System Columns
 
@@ -241,7 +250,7 @@ configuration_id and, alternatively, branch_id if it's a branch configuration. T
 ***Note:** be careful when running configurations in a Development branch. Once the branch is deleted, the assigned publication still exists 
 and it's not deleted automatically. It is recommended to clean up any unused dev publications manually or using a script.*
 
-#### Slot Names
+#### Slot names
 
 Note that each configuration of the connector creates a new slot with a unique name. The slot name contains 
 configuration_id and alternatively branch id if it's a branch configuration. The slot name is generated as follows:
@@ -259,7 +268,24 @@ if different publications have different performance requirements or if they nee
 subscribers with different capabilities.
 
 
-### WAL disk-space consumption
+### Replica Identity
+
+{% include warning.html content="The <code>REPLICA IDENTITY</code> setting determines what is included in the <code>UPDATE</code> and <code>DELETE</code> events. If it is not set to <code>FULL</code>, these events will include only the primary key values or may not be emitted at all if no primary key is present." %}
+
+
+[REPLICA IDENTITY](https://www.postgresql.org/docs/current/static/sql-altertable.html#SQL-CREATETABLE-REPLICA-IDENTITY) is a PostgreSQL-specific table-level setting that determines how much information is available to the logical decoding plug-in for `UPDATE` and `DELETE` events. Specifically, `REPLICA IDENTITY` controls what (if any) information about previous table column values is available during these events.
+
+There are four possible values for `REPLICA IDENTITY`:
+
+- `DEFAULT`: This default behavior includes the previous values of the primary key columns in `UPDATE` and `DELETE` events, but only if the table has a primary key. For `UPDATE` events, only the primary key columns with changed values are included.
+- If a table does not have a primary key, the connector does not emit `UPDATE` or `DELETE` events for that table. Only _create_ events are emitted for such tables. Tables without primary keys are typicallly used for appending messages, where `UPDATE` and `DELETE` events are not relevant.
+- `NOTHING`: `UPDATE` and `DELETE` events do not include any information about the previous values of table columns.
+- `FULL`: `UPDATE` and `DELETE` events include the previous values of all columns in the table.
+- `INDEX` _index-name_: `UPDATE` and `DELETE` events include the previous values of the columns specified in the given index. For `UPDATE` events, the new values for the indexed columns are also included.
+
+***Note**: The connector can override the `REPLICA IDENTITY` for matched tables by using the `Replica identity override values` in the [Replication Plugin Advanced Options](#replication-plugin-advanced-options) configuration.*
+
+### WAL Disk-Space Consumption
 In certain cases, it is possible for PostgreSQL disk space consumed by WAL files to spike or increase out of the usual proportions. There are several possible reasons for this situation:
 
 - The LSN up to which the connector has received data is available in the `confirmed_flush_lsn` column of the server’s `pg_replication_slots` view. Data that is older than this LSN is no longer available, and the database is responsible for reclaiming the disk space.
@@ -269,7 +295,7 @@ In certain cases, it is possible for PostgreSQL disk space consumed by WAL files
 
 - There are many updates in a database being tracked, but only a tiny number of updates are related to the table(s) and schema(s) for which the connector is capturing changes. This situation can be easily solved with periodic heartbeat events. Set the heartbeat.interval.ms connector configuration property.
 
-***Note:** For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication created by the connector.* ***You can do that by selecting the heartbeat table in the `Datasource > Tables to sync` configuration property.***
+{% include warning.html content="For the connector to detect and process events from a heartbeat table, you must add the table to the PostgreSQL publication used by the connector." %}
 
 - The PostgreSQL instance contains multiple databases and one of them is a high-traffic database. Debezium captures changes in another database that is low-traffic in comparison to the other database. Debezium then cannot confirm the LSN as replication slots work per database, and Debezium is not invoked. As WAL is shared by all databases, the amount used tends to grow until an event is emitted by the database for which Debezium is capturing changes. To overcome this, it is necessary to:
   - Enable periodic heartbeat record generation with the `heartbeat > interval.ms` connector configuration property.
@@ -310,27 +336,38 @@ This connector currently uses the native `pgoutput` logical replication stream s
 in `PostgreSQL 10+`.
 Currently, lower versions are not supported, but it is theoretically possible (please submit a feature request).
 
-### Signaling Table
+[//]: # (### Signaling Table)
 
-When not running in `read_only` mode, the connector requires access to a signaling table in the source database. This signaling table is used by the connector to store various signal events and incremental snapshot watermarks.
+[//]: # ()
+[//]: # (When not running in `read_only` mode, the connector requires access to a signaling table in the source database. This signaling table is used by the connector to store various signal events and incremental snapshot watermarks.)
 
-#### Creating a signaling data collection
+[//]: # ()
+[//]: # (#### Creating a signaling data collection)
 
-You create a signaling table by submitting a standard SQL DDL query to the source database.
+[//]: # ()
+[//]: # (You create a signaling table by submitting a standard SQL DDL query to the source database.)
 
-**Prerequisites**
+[//]: # ()
+[//]: # (**Prerequisites**)
 
-You have sufficient access privileges to create a table on the source database.
+[//]: # ()
+[//]: # (You have sufficient access privileges to create a table on the source database.)
 
-**Procedure**
+[//]: # ()
+[//]: # (**Procedure**)
 
-Submit an SQL query to the source database to create a table that is consistent with the required structure, as shown in the following example:
+[//]: # ()
+[//]: # (Submit an SQL query to the source database to create a table that is consistent with the required structure, as shown in the following example:)
 
-The following example shows a CREATE TABLE command that creates a three-column debezium_signal table:
+[//]: # ()
+[//]: # (The following example shows a CREATE TABLE command that creates a three-column debezium_signal table:)
 
-```sql
-CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT NULL, data TEXT NULL);
-```
+[//]: # ()
+[//]: # (```sql)
+
+[//]: # (CREATE TABLE debezium_signal &#40;id VARCHAR&#40;42&#41; PRIMARY KEY, type VARCHAR&#40;32&#41; NOT NULL, data TEXT NULL&#41;;)
+
+[//]: # (```)
 
 #### PostgreSQL Setup
 
@@ -522,7 +559,6 @@ ALTER TABLE __<table_name>__ OWNER TO REPLICATION_GROUP;
 - **Port**: The port number of the MySQL server.
 - **User**: The username to be used to connect to the MySQL server.
 - **Password**: The password to be used to connect to the MySQL server.
-- **Read-only mode**: When enabled, the connector does not require write access to the source database for signalling.
 
 #### SSH tunnel
 
@@ -591,8 +627,6 @@ For more details, refer to the [Debezium documentation](https://debezium.io/docu
 {: .image-popup}
 ![img_6.png](/components/extractors/database/postgresql/sync_options.png)
 
-- **Signaling Table**: The name of the signaling table in the source database. The connector uses the signaling table to store various signal events and incremental snapshot watermarks. See more in
-  the [Signaling Table](#signaling-table) section.
 - **Replication Mode**: The replication mode to be used. The following options are available:
     - `Standard`: The connector performs an initial *consistent snapshot* of each of your databases and reads
       the binlog from the point at which the snapshot was made.
@@ -621,6 +655,31 @@ Enable heartbeat signals to prevent the consumption of WAL disk space. The conne
 - **Action Query**: The query that the connector uses to send heartbeat signals to the source database. The query must be
   a valid SQL statement that the source database can execute, and the heartbeat table must be tracked in the Source
   settings.
+
+### Replication Plugin Advanced Options
+
+These parameters control whether the connector creates a publication and how it is created. It is recommended to create publications manually before setting up the connector. Automatic creation works only if the user has owner permissions on the tables.
+
+More information about the publication creation process can be found in the [Publication Creation](#publication-creation) section.
+
+{: .image-popup}
+![img_2.png](/components/extractors/database/postgresql/img_4.png)
+
+- **Publication Auto Create Mode**: The mode specifying how the connector creates publications. The following options
+  are available:
+    - `disabled`: The connector does not create a publication. A database administrator or the user configured for
+      replication should create the publication before running the connector.
+    - `all_tables`: The connector creates a publication for all tables in the database from which the connector captures
+      changes. The user must be a superuser to add all tables to the publication.
+    - `filtered`: The connector creates a publication for tables that match the current configuration. The user must be
+      the table owner to add tables to a publication.
+- **Publication Name**: The name of the publication to be used by the connector. The publication name is generated based
+    on the configuration ID and, optionally, the branch ID.
+- **Replica identity override values**: This option overwrites the existing value in the database. A list of regular expressions matches fully qualified tables and replica identity values to be used in the table.
+  - If you wish to keep previous values on `DELETED` records, the replica identity must be set to `FULL`; otherwise, all values except the primary key will be empty on deleted records. 
+  - Leave empty to keep the database default. 
+  - For more information, see the [Replica Identity](#replica-identity) section.
+
 
 ### Destination
 
