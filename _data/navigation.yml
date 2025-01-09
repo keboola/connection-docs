@@ -561,7 +561,7 @@ items:
         title: Tables & Aliases
         items:
           - url: /storage/tables/data-types/
-            title: Native Data Types
+            title: Data Types
 
           - url: /storage/tables/csv-files/
             title: CSV Files
