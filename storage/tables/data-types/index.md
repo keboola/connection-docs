@@ -50,16 +50,16 @@ Extractors and transformations that match the storage backend (e.g., Snowflake S
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2).
+    <strong>Important:</strong> When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2). Follow the steps below to avoid this limitation.
+</div>
 
-To avoid this limitation: 
+**To avoid this limitation:** 
 - Manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), specifying the correct lengths and precisions.
 - Subsequent jobs writing data to this table will respect your defined schema as long as it matches the expected structure.
 - Be cautious when dropping and recreating tables. If a job creates a table, it will default to the base type with backend-specific defaults, which might not align with your source.
-</div>
 
 **Example:** 
-To ensure typed tables are imported correctly into Storage, define your table in a Snowflake SQL transformation, adhering the the desired schema and data types:
+To ensure typed tables are imported correctly into Storage, define your table in a Snowflake SQL transformation, adhering to the desired schema and data types:
 
 {: .image-popup}
 ![Screenshot - Create a Table](/storage/tables/data-types/create-table.png)
@@ -108,9 +108,11 @@ You **cannot change the type of a column in a typed table once it has been creat
    - Gradually update all configurations and references to use `date_timestamp` instead of `date`.
    - Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
 
-**Important notes:**
-- Always verify other configurations that depend on the table to avoid schema mismatches.
-- Pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
+</div>
 
 ### How to Create a Typed Table Based on a Non-Typed Table
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
