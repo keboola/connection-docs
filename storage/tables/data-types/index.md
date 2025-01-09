@@ -40,19 +40,23 @@ In transformations, this option is not available. Instead, you define the data t
 
 ### How to Create a Typed Table
 The Native Data Types feature allows tables to be created with data types that match the original source or storage backend. Here’s how you can create typed tables:
-1. **Manually via API** 
+- **Manually via API** 
 You can manually create typed tables using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition). Ensure that the data types align with the storage backend (e.g., Snowflake, BigQuery) used in your project. Alternatively, [base types](/storage/tables/data-types/#base-types) can be used for compatibility.
-2. **Using a Component**
-Extractors and transformations that match the storage backend (e.g., Snowflake SQL transformation on a Snowflake storage backend) will automatically create typed tables in Storage.
+- **Using a Component**
+Extractors and transformations that match the storage backend (e.g., Snowflake SQL transformation on a Snowflake storage backend) will automatically create typed tables in Storage:
   - **Matching Storage Backend:** Database extractors and transformations create storage tables using the same data types as the backend.
   - **Mismatching Storage Backend:** Extractors use base types to ensure compatibility. [Learn more.](/storage/tables/data-types/#base-types)
 
-**Important note:** When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2).
+<div class="clearfix"></div>
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2).
 
 To avoid this limitation: 
 - Manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), specifying the correct lengths and precisions.
 - Subsequent jobs writing data to this table will respect your defined schema as long as it matches the expected structure.
-- Be cautious when dropping and recreating tables. If a job creates a table, it will default to the base type with backend-specific defaults, which might not align with your source.*
+- Be cautious when dropping and recreating tables. If a job creates a table, it will default to the base type with backend-specific defaults, which might not align with your source.
+</div>
 
 **Example:** 
 To ensure typed tables are imported correctly into Storage, define your table in a Snowflake SQL transformation, adhering the the desired schema and data types:
@@ -95,17 +99,14 @@ Specifying native types using Keboola’s [base types](/storage/tables/data-type
 ### Changing Types of Existing Typed Columns
 You **cannot change the type of a column in a typed table once it has been created**. However, there are multiple workarounds to address this limitation:
 
-1. **For tables using full load** 
-Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
-2. **For tables loaded incrementally** 
-You will need to create a new column with the desired type and migrate the data step by step:
-
-- Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
-- Start by adding a new column named `date_timestamp` of type `TIMESTAMP` to the table.
-- Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
-- Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
-- Gradually update all configurations and references to use `date_timestamp` instead of `date`.
-- Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
+1. **For tables using full load:** Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
+2. **For tables loaded incrementally:** You will need to create a new column with the desired type and migrate the data step by step:
+   - Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
+   - Start by adding a new column named `date_timestamp` of type `TIMESTAMP` to the table.
+   - Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
+   - Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
+   - Gradually update all configurations and references to use `date_timestamp` instead of `date`.
+   - Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
 
 **Important notes:**
 - Always verify other configurations that depend on the table to avoid schema mismatches.
@@ -136,7 +137,7 @@ CREATE TABLE "typed_table" AS
     FROM "non_typed_table" AS ntt;
 ```
 
-**Step 3: Run the transformation** 
+**Step 3: Run the Transformation** 
 - Execute the transformation and wait for it to complete.
 
 **Step 4: Verify the Schema**
