@@ -28,7 +28,7 @@ Tables with native data types are labeled in the UI with a badge: **auto-typed**
 ## How It Works
 By default, all new tables are created as typed tables if the component supports this feature. Typed tables are labeled in the Storage UI with the label AUTO-TYPED. 
 
-You can configure the data type behavior in the UI component configuration settings. If the component supports this feature, you will see the option **“Automatic data types”** in the right menu, which can be toggled ON and OFF. 
+You can configure the data type behavior in the UI component configuration settings. If the component supports this feature, you will see the option **Automatic data types** in the right menu, which can be toggled ON and OFF. 
 - **When enabled:** The component creates a typed table that respects the data types from the source (e.g., DATETIME, BOOLEAN). 
 - **When disabled:** A typed table is created with all columns as VARCHAR, and data types are stored as metadata.
   
@@ -36,7 +36,7 @@ In transformations, this option is not available. Instead, you define the data t
 
 **Important:**
 - Existing tables will not be affected by this feature.
-- If you do not see the “Automatic data types”option in the sidebar, it means the component does not support this feature.
+- If you do not see the **Automatic data types** option in the sidebar, it means the component does not support this feature.
 
 ### How to Create a Typed Table
 The Native Data Types feature allows tables to be created with data types that match the original source or storage backend. Here’s how you can create typed tables:
