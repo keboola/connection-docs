@@ -27,8 +27,6 @@ Basic configuration is covered in the [Tutorial - Loading Data from Database](/t
 
 [This connector](https://components.keboola.com/components/kds-team.ex-mysql-cdc) is compatible with MySQL databases hosted on AWS RDS, Aurora MySQL, and standard non-hosted MySQL, as well as MariaDB databases.
 
-{% include public-beta-warning.html %}
-
 ### Functionality
 
 The connector uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/mysql.html)
