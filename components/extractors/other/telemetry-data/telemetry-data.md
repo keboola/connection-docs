@@ -131,7 +131,8 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `kbc_component_configuration_row` | Name of the configuration row | `test_view` |
 | `configuration_row_created` | Datetime of the configuration row's creation | `2022-04-25 11:59:42` |
 | `kbc_configuration_row_version` | Current version of the configuration row | `1` |
-| `kbc_configuration_is_disabled` | Flag indicating whether the configuration is disabled (`true`, `false`) | `false` |
+| `kbc_configuration_row_is_disabled` | Flag indicating whether the configuration row is disabled (`true`, `false`) | `false` |
+| `kbc_configuration_row_is_deleted` | Flag indicating whether the configuration row is deleted (`true`, `false`) | `false` |
 | `description` | Description of the component configuration row (filled by the user) | `This part of transformation consolidate the data from various sources.` |
 | `configuration_row_json` | Complete JSON configuration row of the component | `{"parameters":{"incremental":false}}` |
 | `token_id` | Identifier of the token that created this version of the configuration row | `241247` |
@@ -192,7 +193,7 @@ This table lists Keboola [jobs](/management/jobs/)
 |---|---|---|
 | `kbc_job_id` (PK) | Keboola job identifier | `117644387_kbc-eu-central-1` |
 | `kbc_component_configuration_id` | Foreign key to the component configuration | `410_kbc-eu-central-1_keboola.wr-google-sheets-259642632` |
-| `kbc_component_configuration_row_id` | Foreign key to the Keboola component configuration row | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
+| `kbc_component_configuration_row_id` | An array where each element serves as a foreign key to a Keboola component configuration row. This array is populated as a result of filtering rows during the job execution. If the job runs with all rows (no filtering), the array remains empty. | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
