@@ -16,7 +16,7 @@ Tables with native data types are labeled in the UI with a badge: **auto-typed**
 These are the key benefits of using the Native Data Types feature:
 - **Automatic Data Type Preservation:** Data types from the source are automatically respected, reducing the need for manual adjustments in Storage.
 - **Faster Data Handling:** Native data types enable more efficient data manipulation, as well as faster loading and unloading, improving overall performance.
-- **Simplified Transformations:** Read-Only data access eliminates the need for casting, making data operations smoother and more streamlined.
+- **Simplified Transformations:** Read-only data access eliminates the need for casting, making data operations smoother and more streamlined.
 - **Flexible Configurations:** Users can decide whether data types should be automatically fetched for each configuration when creating a table.
 - **Improved Workspace Loading:** Loading data into a workspace is significantly faster than loading into a table without native data types, eliminating the need for additional casting.
 - **Typed Columns in Workspaces:** Tables **accessed in a workspace** via the [read-only input mapping](/transformations/workspace/#read-only-input-mapping) already have typed columns, ensuring seamless data handling.
@@ -40,9 +40,9 @@ In transformations, this option is not available. Instead, you define the data t
 
 ### How to Create a Typed Table
 The Native Data Types feature allows tables to be created with data types that match the original source or storage backend. Here’s how you can create typed tables:
-- **Manually via API** 
+- **Manually via API**  
 You can manually create typed tables using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition). Ensure that the data types align with the storage backend (e.g., Snowflake, BigQuery) used in your project. Alternatively, [base types](/storage/tables/data-types/#base-types) can be used for compatibility.
-- **Using a Component**
+- **Using a Component**  
 Extractors and transformations that match the storage backend (e.g., Snowflake SQL transformation on a Snowflake storage backend) will automatically create typed tables in Storage:
   - **Matching Storage Backend:** Database extractors and transformations create storage tables using the same data types as the backend.
   - **Mismatching Storage Backend:** Extractors use base types to ensure compatibility. [Learn more.](/storage/tables/data-types/#base-types)
