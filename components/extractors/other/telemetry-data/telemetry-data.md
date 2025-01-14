@@ -337,8 +337,8 @@ data in storage, and the number of users. This combines data from different data
 * `Snowflake Sandbox` - `kbc_snowflake_stats` (records with **sandbox** *snowflake_job_type*)
 * `Transfromations` - `kbc_job` (jobs with **SQL** *transformation_type*)
 * `Writers` - `kbc_job` (jobs with **data destination** *component_type*)
-* `BAPI Messages` - Buffer API (data streams) usage; only aggregated values available
-* `BAPI Receiver` - Buffer API endpoints used; only aggregated values available
+* `BAPI Receiver` - ~Buffer API endpoints used; only aggregated values available~ since 28.02.2025 not available in favor of `Stream`
+* `BAPI Messages` - ~Buffer API (data streams) usage; only aggregated values available~ since 28.02.2025 not available in favor of `Stream GB`
 * `Stream` - Data Streams endpoints used; only aggregated values available
 * `Streamed GB` - Streamed GB into the warehouse (uncompressed); only aggregated values available
 
