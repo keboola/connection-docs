@@ -18,7 +18,7 @@ The most important benefits of the Data Streams feature include:
 - **Real-Time Updates:** Trigger actions instantly based on real-time event data.
 
 ## How It Works
-The Data Streams feature receives messages through HTTP and saves them into the database once predefined conditions (record count, total size, or time) are met. The service uses Keboola's Buffer API for smooth data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
+The Data Streams feature receives messages through HTTP and saves them into the database once predefined conditions (record count, total size, or time) are met. The service uses Keboola's [Stream API](https://stream.keboola.com/v1/documentation/) for smooth data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
 
 ### Create a Data Stream
 Follow these steps to create a data stream:
