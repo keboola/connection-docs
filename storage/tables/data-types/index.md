@@ -67,7 +67,7 @@ To ensure typed tables are imported correctly into Storage, define your table in
 ## Base Types
 Source data types are mapped to a destination using a **base type**. The current base types are `STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. For example, a MySQL extractor may store a column with the data type `BIGINT`. This type is mapped to the `INTEGER` base type, ensuring high interoperability between components. 
 
-For detailed mappings, please refer to the [conversion table](/storage/tables/data-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
+For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
 ### How to Define Data Types
 
