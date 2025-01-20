@@ -472,6 +472,8 @@ items:
                 title: Microsoft Entra ID
               - url: /components/data-apps/oidc/okta/
                 title: Okta
+          - url: /components/data-apps/terminal-log-tab/
+            title: Terminal Log Tab
                     
       - url: /components/branches/
         title: Development Branches
