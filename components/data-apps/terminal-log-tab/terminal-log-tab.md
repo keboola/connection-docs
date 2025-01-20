@@ -11,7 +11,7 @@ While there is a slight delay (a few seconds), the feature is designed to offer 
 assisting with monitoring and troubleshooting.
 
 {: .image-popup}
-![Screenshot - Hello World Data App](/components/data-apps/hello-world.png)
+![Screenshot - Hello World Data App](/components/data-apps/terminal-log-tab/hello-world.png)
 
 ## Key Features
 These are the key features:
