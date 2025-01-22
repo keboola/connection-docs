@@ -158,9 +158,10 @@ The behavior of incremental loading differs between **typed** and **non-typed ta
 For more information, refer to our documentation on [incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables).
 
 ## Handling NULLs
-Data can contain `NULL` values, and empty strings are always converted to `NULL`. For example:
-- `,,` => `NULL`
-- `""` => `NULL`
+Data can contain `NULL` values or empty strings, which are converted differently based on the processing backend, as follows:
+
+- Snowflake: `,,` => `NULL` or `""` => `NULL`
+- BigQuery: `,,` => `NULL` and `""` => `""`
 
 Columns without native types are always `VARCHAR NOT NULL`. This means you don’t need to worry about specific `NULL` behavior. However, this changes with typed columns. 
 
