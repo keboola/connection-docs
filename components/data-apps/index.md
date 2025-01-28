@@ -380,16 +380,16 @@ For example, there may be a conflict with the specified packages:
 ![Secrets](/components/data-apps/data_apps-job_error_log.png)
 
 ## AgGrid Enterprise License
-The AgGrid Enterprise License is now available for Streamlit Data Apps in Keboola, offering enhanced data manipulation capabilities such as:
+The AgGrid Enterprise License is now available for Streamlit Data Apps in Keboola, offering enhanced data manipulation capabilities, including:
 
-- Inline editing of datasets.
-- Advanced features like pivoting, filtering, and sorting.
-- A professional, polished interface without the "trial use only" message.
+- Inline dataset editing.
+- Advanced features such as pivoting, filtering, and sorting.
+- A professional interface, free from the "trial use only" watermark.
  
-Ensure your Data App is configured to use the AgGrid component to benefit from the enhanced features.
+Ensure your data app is configured to use the AgGrid component to take advantage of these enhanced features.
 
 ### How to Enable the License
-The **enterprise license** is **pre-configured for all Keboola stacks**, and no additional setup is required for supported applications.
+The **enterprise license** is **pre-configured for all Keboola stacks**, so no additional setup is required for supported applications.
 
 To access the license key in your Streamlit app, use the following code:
 
@@ -404,9 +404,10 @@ keboola = KeboolaStreamlit(URL, TOKEN)
 license_key = keboola.aggrid_license_key
 ```
 
-This license_key can then be used directly in **AgGrid**.
+You can use this license_key directly in **AgGrid**.
 
-**Reference Implementation:** [Keboola Streamlit Integration](https://github.com/keboola/keboola_streamlit/blob/main/src/keboola_streamlit/keboola_streamlit.py#L31)
+**Reference Implementation:**   
+[Keboola Streamlit Integration](https://github.com/keboola/keboola_streamlit/blob/main/src/keboola_streamlit/keboola_streamlit.py#L31)
 
 ## Example Data Apps
 
