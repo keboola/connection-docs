@@ -10,7 +10,7 @@ The **Native Data Types** feature streamlines the process of **propagating data 
 
 For example, when a user imports a large dataset with predefined data types, such as NUMERIC, BOOLEAN, and DATE, these types are preserved automatically. Without Native Data Types, the data would have been imported as VARCHAR, requiring the user to manually update the types in transformation. 
 
-A non typed tables without native data types are labeled in the UI with a badge: **non-typed**.
+Non-typed tables without native data types are labeled in the UI with a badge: **non-typed**.
 
 ## Key Benefits
 These are the key benefits of using the Native Data Types feature:
