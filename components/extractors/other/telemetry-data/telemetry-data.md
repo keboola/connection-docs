@@ -496,6 +496,7 @@ organization, or the Keboola platform itself.
 |`auditLog.storageBackendConnection.created`
 |`auditLog.storageBackendConnection.deleted`
 |`auditLog.storageBackendConnection.listed`
+|`auditLog.storageBackendConnection.detail`
 |`auditLog.storageBackendConnection.updated`
 |`auditLog.mergeRequest.created`
 |`auditLog.mergeRequest.stateChanged`
