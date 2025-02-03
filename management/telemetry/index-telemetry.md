@@ -25,15 +25,19 @@ Three modes are available for data and the visual form: project mode, organizati
 For the visual part, go to [Telemetry Dashboards](/management/telemetry/telemetry-dashboards).
 
 ## Email Notifications
-This chapter provides an overview of how email notifications in Keboola help customers monitor their credit usage. Notifications are sent to designated contact persons when specific credit usage thresholds are reached to ensure transparency and encourage proactive action.
+This section provides an overview of how email notifications in Keboola help customers monitor their credit usage. Notifications are sent to designated contacts when specific credit usage thresholds are reached to ensure transparency and encourage proactive action.
+
 ### How Notifications Work
-Keboola automatically tracks customer credit usage. Once a customer’s credit usage reaches a defined threshold, an email notification is sent to the contact person agreed upon with the Keboola Account Manager.
+Keboola automatically tracks customer credit usage. When usage reaches a defined threshold, an email notification is sent to the designated contact, as agreed upon with the Keboola Account Manager.
+
 Notifications are triggered at the following thresholds:
 - 80% of purchased credits used
 - 100%+ of purchased credits used
-These notifications serve as an alert to inform customers about their credit consumption status and to encourage them to take necessary actions, such as reviewing their usage or purchasing additional credits.
+
+These notifications serve as alerts to inform customers about their credit consumption status and encourage them to take necessary actions, such as reviewing usage or purchasing additional credits.
+
 ### Notification Conditions
 Notifications are only sent under the following conditions:
 - The customer must have an active contract signed with Keboola.
 - Notifications are not sent to customers with an Enterprise contract.
-- Notifications are not sent to customers or persons who have explicitly requested to be removed from the notification list.
+- Notifications are not sent to customers or individuals who have explicitly requested removal from the notification list.
