@@ -28,7 +28,7 @@ Using the Native Data Types feature also has its drawbacks:
 - Loading data with incompatible types will result in a failure.
 
 ## How It Works
-By default, all new tables are created as typed tables if the component supports this feature. Typed tables are labeled in the Storage UI with the label AUTO-TYPED. 
+By default, all new tables are created as typed tables if the component supports this feature. Non-typed tables are labeled in the Storage UI with the label NON-TYPED. 
 
 You can configure the data type behavior in the UI component configuration settings. If the component supports this feature, you will see the option **Automatic data types** in the right menu, which can be toggled ON and OFF. 
 - **When enabled:** The component creates a typed table that respects the data types from the source (e.g., DATETIME, BOOLEAN). 
