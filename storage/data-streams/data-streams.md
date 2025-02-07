@@ -62,10 +62,7 @@ In this section, you can set a few conditions for importing data. If any of thes
 Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production.
 
 ## Pricing
-Data Streams pricing details vary based on the number of streams and the volume of data ingested.
-
-- **$50** per stream, per month
-- **$0.1** per 1GB of streamed data 
+Data Streams pricing details vary based on the number of streams and the volume of data ingested. Please contact support for more information.
 
 ## Technical Documentation
 For further details and API integration steps, refer to our [comprehensive documentation](https://developers.keboola.com/integrate/push-data/).
