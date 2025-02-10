@@ -195,6 +195,8 @@ and retrieve data with:
 
     df_snowflake = keboola.snowflake_read_table(session=st.session_state['snowflake_session'], table_id='YOUR_SNOWFLAKE_TABLE_ID')
 
+For more details, visit the official KeboolaStreamlit repository on GitHub: [keboola/keboola_streamlit](https://github.com/keboola/keboola_streamlit).
+
 ### Authenticate Client
 
 Environment variables `kbc_token` and `kbc_url` represent the project where the application is deployed. You do not need to specify them.
