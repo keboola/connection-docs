@@ -172,11 +172,11 @@ def display_footer_section():
 
 ## Keboola Storage Communication
 
-Keboola offers multiple methods to interact with storage. For simpler data access, consider using the "keboola-streamlit" package. Install it with:
+Keboola offers multiple methods to interact with Storage. For simpler data access, consider using the "keboola-streamlit" package. Install it with:
 
     pip install keboola-streamlit
 
-Then initialize your client in your Streamlit app:
+Then, initialize your client in your Streamlit app:
 
     import streamlit as st
     from keboola_streamlit import KeboolaStreamlit
@@ -185,13 +185,13 @@ Then initialize your client in your Streamlit app:
     URL = os.environ.get('KBC_URL')
     keboola = KeboolaStreamlit(root_url=URL, token=TOKEN)
 
-This package provides simple functions such as keboola.read_table and keboola.write_table to read and write data easily.
+This package provides simple functions such as `keboola.read_table` and `keboola.write_table` to easily read and write data.
 
-For users with read-only workspaces or data warehouses like Snowflake, you can also use Python connectors such as Snowflake's Python connector or Snowpark. For example, you might initialize a Snowflake session with:
+For users with read-only workspaces or data warehouses like Snowflake, you can also use Python connectors, such as Snowflake's Python connector or Snowpark. For example, you might initialize a Snowflake session with:
 
     st.session_state['snowflake_session'] = keboola.snowflake_create_session_object()
 
-and retrieve data with:
+And retrieve data with:
 
     df_snowflake = keboola.snowflake_read_table(session=st.session_state['snowflake_session'], table_id='YOUR_SNOWFLAKE_TABLE_ID')
 
