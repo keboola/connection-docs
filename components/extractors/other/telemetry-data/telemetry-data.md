@@ -131,7 +131,8 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `kbc_component_configuration_row` | Name of the configuration row | `test_view` |
 | `configuration_row_created` | Datetime of the configuration row's creation | `2022-04-25 11:59:42` |
 | `kbc_configuration_row_version` | Current version of the configuration row | `1` |
-| `kbc_configuration_is_disabled` | Flag indicating whether the configuration is disabled (`true`, `false`) | `false` |
+| `kbc_configuration_row_is_disabled` | Flag indicating whether the configuration row is disabled (`true`, `false`) | `false` |
+| `kbc_configuration_row_is_deleted` | Flag indicating whether the configuration row is deleted (`true`, `false`) | `false` |
 | `description` | Description of the component configuration row (filled by the user) | `This part of transformation consolidate the data from various sources.` |
 | `configuration_row_json` | Complete JSON configuration row of the component | `{"parameters":{"incremental":false}}` |
 | `token_id` | Identifier of the token that created this version of the configuration row | `241247` |
@@ -139,18 +140,39 @@ This table lists rows of the [configurations for the components](/components/#cr
 | `kbc_token_id` | Unique identifier of the token containing stack identification | `241247_kbc-us-east-1` |
 
 
+### kbc_data_app_workspace
+This table lists runs of [data apps] (/components/data-apps/) 
+and their consumption metrics.
+
+| **Column** | **Description** | **Example** | 
+|---|---|---|
+| `kbc_data_app_workspace_run_id` (PK) | Identifier of the workspace active window (between starting and pausing the sandbox) | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
+| `kbc_data_app_workspace_id` | Data app workspace identifier | `10910_kbc-eu-central-1` |
+| `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
+| `date` (PK) | Date for which the runtime hours and time credits are calculated | `2020-11-27` |
+| `created_at` | Datetime of the workspace creation | `2020-11-27 11:22:08` |
+| `expiration_at` | Workspace expiration datetime | `2020-12-02 11:22:08` |
+| `updated_at` | Datetime when the workspace was last updated | `2020-11-27 14:03:40` |
+| `start_at` | Datetime when the workspace resume window started | `2020-11-27 11:22:08` |
+| `sleep_at` | Datetime when the workspace resume window ended | `2020-11-27 14:03:40` |
+| `type` | Type of the workspace | `streamlit` |
+| `hostname` | Hostname of the workspace | `https://hello-world-759519.hub.north-europe.azure.keboola.com` | 
+| `data_app_runtime_hours` | Runtime of the data app workspace on the particular date in hours | `2.413333` |
+| `backend_size` | Size of the data app backend | `Small` |
+| `time_credits_used` | Number of time credits consumed by the workspace on the particular date | `2.413333` |
+| `billed_credits_used` | Number of the actually billed credits | `2.413333` |
+
 ### kbc_data_science_sandbox
 This table lists Python/R [workspaces](/transformations/workspace/)/[sandboxes](/transformations/sandbox/) 
 and their consumption metrics.
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
-| `kbc_data_science_sandbox_resume_date_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox), including date | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a_2024-08-05` |
 | `kbc_data_science_sandbox_resume_id` (PK) | Identifier of the sandbox active window (between starting and pausing the sandbox) | `10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a` |
 | `kbc_data_science_sandbox_id` | Data science sandbox identifier | `10910_kbc-eu-central-1` |
 | `kbc_project_id` | Foreign key to the Keboola Project | `1075-eu-central-1` |
 | `date` (PK) | Date for which the runtime hours and time credits are calculated | `2020-11-27` |
-| `created_at` | Datetime of sandbox creation | `2020-11-27 11:22:08` |
+| `created_at` | Datetime of the sandbox creation | `2020-11-27 11:22:08` |
 | `expiration_at` | Sandbox expiration datetime | `2020-12-02 11:22:08` |
 | `updated_at` | Datetime when the sandbox was last updated | `2020-11-27 14:03:40` |
 | `start_at` | Datetime when the sandbox resume window started | `2020-11-27 11:22:08` |
@@ -171,7 +193,7 @@ This table lists Keboola [jobs](/management/jobs/)
 |---|---|---|
 | `kbc_job_id` (PK) | Keboola job identifier | `117644387_kbc-eu-central-1` |
 | `kbc_component_configuration_id` | Foreign key to the component configuration | `410_kbc-eu-central-1_keboola.wr-google-sheets-259642632` |
-| `kbc_component_configuration_row_id` | Foreign key to the Keboola component configuration row | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
+| `kbc_component_configuration_row_id` | An array where each element serves as a foreign key to a Keboola component configuration row. This array is populated as a result of filtering rows during the job execution. If the job runs with all rows (no filtering), the array remains empty. | `["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]` |
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
@@ -260,15 +282,16 @@ This table shows information about queries using Snowflake, including transforma
 
 | **Column** | **Description** | **Example** |
 |---|---|---|
-| `kbc_project_id` (PK) | Foreign key to the Keboola project | `458_kbc-eu-central-1` |
-| `snowflake_job_start_at` (PK) | Datetime hour the jobs started (Snowflake jobs/queries are aggregated per hour) | `2019-08-19 06:00:00` |
-| `dwh_size` (PK) | Size of the DWH used | `Medium` |
-| `snowflake_dwh` (PK) | DWH name | `KEBOOLA_PROD` |
-| `snowflake_database` (PK) | DB name | `KEBOOLA_391` |
-| `snowflake_schema` (PK) | Schema name | `WORKSPACE_146192784` |
-| `snowflake_user` (PK) | User running the queries | `KEBOOLA_WORKSPACE_146192784` |
-| `snowflake_job_type` (PK) | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project | `writer` |
-| `snowflake_job_result` (PK) | Result of the queries (`Success`, `Error`) | `Success` |
+| `kbc_snowflake_stats_id` | Hash of the snowflake queries stat group identifier | `8345cc0d580a6160d2ed5b9b16a` |
+| `kbc_project_id` | Foreign key to the Keboola project | `458_kbc-eu-central-1` |
+| `snowflake_job_start_at` | Datetime hour the jobs started (Snowflake jobs/queries are aggregated per hour) | `2019-08-19 06:00:00` |
+| `dwh_size` | Size of the DWH used | `Medium` |
+| `snowflake_dwh` | DWH name | `KEBOOLA_PROD` |
+| `snowflake_database` | DB name | `KEBOOLA_391` |
+| `snowflake_schema` | Schema name | `WORKSPACE_146192784` |
+| `snowflake_user` | User running the queries | `KEBOOLA_WORKSPACE_146192784` |
+| `snowflake_job_type` | Type of the Snowflake job. <br> Possible values: <br> `dwhm` – queries run via DWH manager, `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `writer` – queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project | `writer` |
+| `snowflake_job_result` | Result of the queries (`Success`, `Error`) | `Success` |
 | `snowflake_queries` | Number of the queries aggregated by the primary key | `19` |
 | `snowflake_queries_length_s` | Length of the queries in seconds aggregated by the primary key | `205.214000` |
 | `time_credits_used` | Number of the time credits consumed by the queries | `0.91206222224` |
@@ -315,12 +338,12 @@ data in storage, and the number of users. This combines data from different data
 * `Snowflake Sandbox` - `kbc_snowflake_stats` (records with **sandbox** *snowflake_job_type*)
 * `Transfromations` - `kbc_job` (jobs with **SQL** *transformation_type*)
 * `Writers` - `kbc_job` (jobs with **data destination** *component_type*)
-* `BAPI Messages` - Buffer API (data streams) usage; only aggregated values available
-* `BAPI Receiver` - Buffer API endpoints used; only aggregated values available
+* `BAPI Receiver` - ~Buffer API endpoints used; only aggregated values available~ Not available after February 28, 2025, replaced by `Stream`.
+* `BAPI Messages` - ~Buffer API (data streams) usage; only aggregated values available~ Not available after February 28, 2025, replaced by `Stream GB`.
 * `Stream` - Data Streams endpoints used; only aggregated values available
 * `Streamed GB` - Streamed GB into the warehouse (uncompressed); only aggregated values available
 
-*Note: `organization_value` and `company_value` are available in **Organization** mode only. 
+***Note:** `organization_value` and `company_value` are available in **Organization** mode only. 
 You need data for all projects.*
 
 | **Column** | **Description** | **Example** | 
@@ -473,6 +496,7 @@ organization, or the Keboola platform itself.
 |`auditLog.storageBackendConnection.created`
 |`auditLog.storageBackendConnection.deleted`
 |`auditLog.storageBackendConnection.listed`
+|`auditLog.storageBackendConnection.detail`
 |`auditLog.storageBackendConnection.updated`
 |`auditLog.mergeRequest.created`
 |`auditLog.mergeRequest.stateChanged`

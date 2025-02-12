@@ -18,7 +18,7 @@ The most important benefits of the Data Streams feature include:
 - **Real-Time Updates:** Trigger actions instantly based on real-time event data.
 
 ## How It Works
-The Data Streams feature receives messages through HTTP and saves them into the database once predefined conditions (record count, total size, or time) are met. The service uses Keboola's Buffer API for smooth data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
+The Data Streams feature receives messages via HTTP and saves them into the database once predefined conditions (e.g., record count, total size, or time) are met. The service uses Keboola's [Stream API](https://stream.keboola.com/v1/documentation/) for efficient data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
 
 ### Create a Data Stream
 Follow these steps to create a data stream:
@@ -62,10 +62,7 @@ In this section, you can set a few conditions for importing data. If any of thes
 Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production.
 
 ## Pricing
-Data Streams pricing details vary based on the number of streams and the volume of data ingested.
-
-- **$50** per stream, per month
-- **$0.1** per 1GB of streamed data 
+Data Streams pricing varies based on the number of streams and the volume of ingested data. Please contact our support team for more details.
 
 ## Technical Documentation
 For further details and API integration steps, refer to our [comprehensive documentation](https://developers.keboola.com/integrate/push-data/).

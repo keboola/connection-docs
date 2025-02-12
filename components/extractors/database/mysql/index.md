@@ -27,8 +27,6 @@ Basic configuration is covered in the [Tutorial - Loading Data from Database](/t
 
 [This connector](https://components.keboola.com/components/kds-team.ex-mysql-cdc) is compatible with MySQL databases hosted on AWS RDS, Aurora MySQL, and standard non-hosted MySQL, as well as MariaDB databases.
 
-{% include public-beta-warning.html %}
-
 ### Functionality
 
 The connector uses the [Debezium connector](https://debezium.io/documentation/reference/stable/connectors/mysql.html)
@@ -70,6 +68,16 @@ These read locks ensure snapshot consistency, especially if schema changes occur
 
 **WARNING:** Using global or table-level locks while running multiple configurations with initial snapshots from the same database may cause locking conflicts. To avoid this, 
 use only one configuration per database or run initial snapshots separately. Alternatively, you can disable snapshot locking altogether.
+
+#### Resumable Snapshots
+
+The Debezium MySQL connector supports partially resumable snapshots, enabling the connector to recover from failures during the snapshot process. Such failures might occur due to network issues or connector timeouts.
+
+If a failure occurs during the snapshot phase, the connector logs a warning message and terminates the job gracefully, saving the progress made up to that point. Upon restarting, the connector resumes the snapshot from the last known position, retrying the snapshot for **the last unfinished table** and any remaining tables.
+
+{% include warning.html content="The smallest unit at which the connector can resume is a table. If the snapshot process fails while fetching a specific table, the partial result will be stored in the storage. During the next job execution, the snapshot for that table will be restarted. <br>This means that in the Append Mode, you may encounter duplicate rows, which the consumer will need to handle appropriately." %}
+
+
 
 ### Schema Drift
 
@@ -117,41 +125,40 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 MySQL data types are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
 
-| Source Type | Base Type | Note                                                                             |
-|-------------|-----------|----------------------------------------------------------------------------------|
-| INTEGER     | INTEGER   |                                                                                  |
-| TINYINT     | INTEGER   |                                                                                  |
-| SMALLINT    | INTEGER   |                                                                                  |
-| MEDIUMINT   | INTEGER   |                                                                                  |
-| BIGINT      | INTEGER   |                                                                                  |
-| FLOAT       | FLOAT     |                                                                                  |
-| DOUBLE      | FLOAT     |                                                                                  |
-| REAL        | FLOAT     |                                                                                  |
-| DECIMAL     | NUMERIC   |                                                                                  |
-| DATE        | DATE      | `YYYY-MM-DD` format when Native Types are disabled                               |
-| DATETIME    | TIMESTAMP | `YYYY-MM-DD HH:MM:SS` format when Native Types are disabled                      |
-| TIMESTAMP   | TIMESTAMP | `YYYY-MM-DD HH:MM:SS+TZ` format (UTC) when Native Types are disabled             |
-| TIME        | STRING    | `HH:MM:SS` format                                                                |
-| YEAR        | INTEGER   |                                                                                  |
-| CHAR        | STRING    |                                                                                  |
-| VARCHAR     | STRING    |                                                                                  |
-| BLOB        | STRING    | Representation depends on the selected Binary Handling Mode                      |
-| TEXT        | STRING    |                                                                                  |
-| TINYBLOB    | STRING    | Representation depends on the selected Binary Handling Mode                      |
-| TINYTEXT    | STRING    |                                                                                  |
-| MEDIUMBLOB  | STRING    | Representation depends on the selected Binary Handling Mode                      |
-| MEDIUMTEXT  | STRING    |                                                                                  |
-| LONGBLOB    | STRING    | Representation depends on the selected Binary Handling Mode                      |
-| LONGTEXT    | STRING    |                                                                                  |
-| ENUM        | STRING    |                                                                                  |
-| SET         | STRING    |                                                                                  |
-| BIT         | STRING    |                                                                                  |
-| BINARY      | STRING    |                                                                                  |
-| VARBINARY   | STRING    |                                                                                  |
-| GEOMETRY    | STRING    |                                                                                  |
-| JSON        | STRING    |                                                                                  |
-| BOOLEAN     | BOOLEAN   |                                                                                  |
-| BIT(1)      | BOOLEAN   |                                                                                  |
+| Source Type | Base Type | Note                                                                 |
+|-------------|-----------|----------------------------------------------------------------------|
+| INTEGER     | INTEGER   |                                                                      |
+| TINYINT     | INTEGER   |                                                                      |
+| SMALLINT    | INTEGER   |                                                                      |
+| MEDIUMINT   | INTEGER   |                                                                      |
+| BIGINT      | INTEGER   |                                                                      |
+| FLOAT       | FLOAT     |                                                                      |
+| DOUBLE      | FLOAT     |                                                                      |
+| REAL        | FLOAT     |                                                                      |
+| DECIMAL     | NUMERIC   |                                                                      |
+| DATE        | DATE      | `YYYY-MM-DD` format when Native Types are disabled                   |
+| DATETIME    | TIMESTAMP | `YYYY-MM-DD HH:MM:SS` format when Native Types are disabled          |
+| TIMESTAMP   | TIMESTAMP | `YYYY-MM-DD HH:MM:SS+TZ` format (UTC) when Native Types are disabled |
+| TIME        | STRING    | `HH:MM:SS` format                                                    |
+| YEAR        | INTEGER   |                                                                      |
+| CHAR        | STRING    |                                                                      |
+| VARCHAR     | STRING    |                                                                      |
+| BLOB        | STRING    | Representation depends on the selected Binary Handling Mode          |
+| TEXT        | STRING    |                                                                      |
+| TINYBLOB    | STRING    | Representation depends on the selected Binary Handling Mode          |
+| TINYTEXT    | STRING    |                                                                      |
+| MEDIUMBLOB  | STRING    | Representation depends on the selected Binary Handling Mode          |
+| MEDIUMTEXT  | STRING    |                                                                      |
+| LONGBLOB    | STRING    | Representation depends on the selected Binary Handling Mode          |
+| LONGTEXT    | STRING    |                                                                      |
+| ENUM        | STRING    |                                                                      |
+| SET         | STRING    |                                                                      |
+| BIT         | STRING    |                                                                      |
+| BINARY      | STRING    |                                                                      |
+| VARBINARY   | STRING    |                                                                      |
+| GEOMETRY    | STRING    |                                                                      |
+| JSON        | STRING    |                                                                      |
+| BOOLEAN     | INTEGER   | MySQL represents boolean as TINYINT(1)                               |
 
 ### System Columns
 
@@ -486,10 +493,12 @@ set @@global.binlog_row_value_options="" ;
 
 
 
-### Signaling Table
+[//]: # (### Signaling Table)
 
-When not run in `read_only` mode, the connector needs access to a signaling table in the source database. The connector uses the signaling table to
-store various signal events and incremental snapshot watermarks.
+[//]: # ()
+[//]: # (When not run in `read_only` mode, the connector needs access to a signaling table in the source database. The connector uses the signaling table to)
+
+[//]: # (store various signal events and incremental snapshot watermarks.)
 
 #### Creating a signaling data collection
 
@@ -525,7 +534,6 @@ CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT N
 - **Port**: The port number of the MySQL server.
 - **User**: The username used to connect to the MySQL server.
 - **Password**: The password used to connect to the MySQL server.
-- **Read-only mode**: When enabled, the connector does not require write access to the source database for signalling.
 
 #### SSH tunnel
 
@@ -597,9 +605,6 @@ See the original [Debezium docs](https://debezium.io/documentation/reference/sta
 {: .image-popup}
 ![img_2.png](/components/extractors/database/mysql/img_2.png)
 
-- **Signaling Table**: The name of the signaling table in the source database. The signaling table is used by the
-  connector to store various signal events and incremental snapshot watermarks. See more in
-  the [Signaling table](#signaling-table) section.
 - **Replication Mode**: The replication mode used. The following options are available:
     - `Standard`: The connector performs an initial *consistent snapshot* of each database. The connector reads
       the binlog from the point at which the snapshot was made.
@@ -609,7 +614,6 @@ See the original [Debezium docs](https://debezium.io/documentation/reference/sta
     - `Base64`: represents binary data as a base64-encoded string.
     - `Base64-url-safe`: represents binary data as a base64-url-safe-encoded String.
     - `Hex`: represents binary data as a hex-encoded (base16) string.
-    - `Bytes`: represents binary data as a byte array.
 - **Snapshot Locking Mode**: [Specifies](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-snapshot-locking-mode) 
 how long the connector holds the MySQL global read lock during a snapshot:
   - **`minimal`**: Locks only during the initial schema read, then releases while using a `REPEATABLE READ` transaction for consistency.

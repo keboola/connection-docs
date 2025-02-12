@@ -122,5 +122,11 @@ If you wish to remove the schema, you must do so manually in your warehouse.
 * Table names can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
 * Table names are not case-sensitive. You cannot create two tables with the same name that differ only in letter case.
 * [Creating snapshots](https://keboola.docs.apiary.io/#reference/table-snapshotting/create-or-list-snapshots/create-table-snapshot) from tables in external buckets is not supported.
-* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/transformations/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addressess this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables as illustrated below: <br> `GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO` <br> 
-Ensure the role name follows the pattern in the picture and is suffixed with _RO.
+* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/transformations/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addressess this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables and views as illustrated below: <br>
+```
+GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
+GRANT SELECT ON FUTURE VIEWS IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
+GRANT SELECT ON FUTURE EXTERNAL TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
+```
+<br>
+Ensure the role name follows the pattern in the picture and is suffixed with `_RO`.
