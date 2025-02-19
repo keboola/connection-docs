@@ -1,5 +1,5 @@
 ---
-title: Microsoft Outlook (Office 365)
+title: MS Outlook IMAP Email Content and Attachments (Office 365)
 permalink: /components/extractors/communication/ms-outlook/
 redirect_from:
     - /extractors/communication/ms-outlook/
@@ -8,80 +8,182 @@ redirect_from:
 * TOC
 {:toc}
 
-Microsoft Outlook data source connector for Office 365 is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
+The Microsoft Outlook extractor for Office 365 is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
 
 ## Authorization
-[Create a new configuration](/components/#creating-component-configuration) of the **MS Outlook** connector.
+[Create a new configuration](/components/#creating-component-configuration) for the **MS Outlook** extractor.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
 
 ## IMAP Settings
-To configure the connection, please specify following parameters in IMAP Settings:
+To configure the connection, please specify the following parameters in IMAP Settings:
 
-#### User Name
-Your email address, for example: data@keboola.onmicrosoft.com
-
-#### IMAP Host
-Address of the IMAP server. Use outlook.office365.com for Office 365. 
-
-#### IMAP Port
-Port of the IMAP server. Use 993 for Office 365.
+- **User Name:** Your email address, e.g., `data@keboola.onmicrosoft.com`.
+- **IMAP Host:** The address of the IMAP server. For Office 365, use `outlook.office365.com`. 
+- **IMAP Port:** The port for the IMAP server. For Office 365, use 993.
 
 ## Row Configuration
 
-Click the `Add Row` button and name the row accordingly.
+Click the **Add Row** button and name the row appropriately.
 
-#### Search query
+### Search Query
 
-Fill in a `Search query` to filter only the emails you want. By default all emails are downloaded. The most common usecase would be to filter the emails 
-by the Subject and Sender, e.g. `(FROM "sender-email@example.com" SUBJECT "the subject")`. You can create much more complex queries if needed. 
-Refer to the [query syntax](/components/extractors/communication/email-imap/query-syntax/) for more examples. 
+Enter a `Search query` to filter only the emails you want. By default, all emails are downloaded. The most common use case is to filter emails 
+by Subject and Sender, e.g., `(FROM "sender-email@example.com" SUBJECT "the subject")`. You can create more complex queries if needed;
+refer to the [query syntax](query-syntax) for examples. 
 
-#### IMAP Folder
+{: .image-popup}
+![Screenshot - Row configuration](/components/extractors/communication/email-imap/row.png)
 
-Folder to get the emails from. Defaults to the root folder `INBOX`. For example a label name in GMAIL = folder.
+### IMAP Folder
 
-#### Mark seen
+Specify the folder from which to retrieve emails. Defaults to the root folder `INBOX`. For example, in Gmail, a label can function as a folder.
 
-When checked, emails that have been extracted will be marked as seen in the inbox.
+### Mark as Seen
 
-#### Period from date
+When selected, emails that have been extracted will be marked as "seen" in the inbox.
 
-Use this field to filter only emails received since the specified date. This field supports fixed dates in a format `YYYY-MM-DD` as well as 
-relative date period e.g. `yesterday`, `1 month ago`, `2 days ago`, etc. We recommend setting this to cover some safety interval, for example `2 days ago` when 
-scheduled to run every day. The data is always upserted incrementally, so there won't be any duplicates in the resulting table.
+### Period from Date
 
-#### Download Content
+Use this field to filter emails received since a specific date. The field supports fixed dates in the format `YYYY-MM-DD` as well as 
+relative dates like `yesterday`, `1 month ago`, `2 days ago`, etc. To avoid missing data, set this to cover a buffer period, e.g., `2 days ago` when 
+running daily. The data is always incrementally upserted, so duplicates won't appear in the resulting table.
 
-Check this option to download email content.
+### Download Content
 
-#### Download attachments
+Select this option to download the email content.
 
-When set to true, also the attachments will be downloaded. You may use regex pattern to filter only attachments that are matching your definition. 
+### Download Attachments
 
-For example to match only pdf files you can use `.+\.pdf` pattern. If left empty, all attachments are downloaded.
+When enabled, attachments are also downloaded. You may use a regex pattern to filter only specific attachments.
 
-By default, the files are downloaded into the File Storage. Use [processors](https://components.keboola.com/components?type=processor) 
-to control the behaviour.
+For example, to match only PDF files, use the pattern .+\.pdf. If left empty, all attachments are downloaded.
+
+By default, files are downloaded into File Storage. Use [processors](https://components.keboola.com/components?type=processor) to control the behavior.
+
+#### Example 1 - Processing CSV attachments
+
+If your attachments are in CSV format, you can use this combination of processors to store them in Table Storage:
+
+- Set the `folder` parameter in the [first processor](https://github.com/keboola/processor-move-files) to match the resulting table name.
+- Use the [second processor](https://components.keboola.com/components/keboola.processor-create-manifest) to define that the result will always replace the destination table and expects header in the CSV file.
+- ***Note:** In this setup, all attachments will be stored in the same table, so they msut share the same structure.*
+
+```json
+{
+  "before": [],
+  "after": [
+    {
+      "definition": {
+        "component": "keboola.processor-move-files"
+      },
+      "parameters": {
+        "direction": "tables",
+        "folder": "result_table"
+      }
+    },
+    {
+      "definition": {
+        "component": "keboola.processor-create-manifest"
+      },
+      "parameters": {
+        "delimiter": ",",
+        "enclosure": "\"",
+        "incremental": false,
+        "primary_key": [],
+        "columns_from": "header"
+      }
+    },
+    {
+      "definition": {
+        "component": "keboola.processor-skip-lines"
+      },
+      "parameters": {
+        "lines": 1
+      }
+    }
+  ]
+}
+```
+
+#### Example 2 - Processing XLSX attachments
+
+If your attachments are in XLSX format, you can use this combination of processors to store them in Table Storage:
+
+- The [first processor](https://components.keboola.com/components/kds-team.processor-xlsx2csv) converts each XSLX sheet into a separate table.
+- The [second processor](https://github.com/keboola/processor-move-files) moves the converted files for output staging to the tables folder.
+
+```json
+{
+  "before": [],
+  "after": [
+    {
+      "definition": {
+        "component": "kds-team.processor-xlsx2csv"
+      },
+      "parameters": {
+        "addFileName": true,
+        "selectSheets": [],
+        "ignoreSheets": []
+      }
+    },
+    {
+      "definition": {
+        "component": "keboola.processor-move-files"
+      },
+      "parameters": {
+        "direction": "tables"
+      }
+    }
+  ]
+}
+```
+
+
+#### Example 3 - Storing attachments in File Storage and adding custom tags
+
+Use [this processor](https://components.keboola.com/components/kds-team.processor-create-file-manifest) to store attachments in File Storage with custom tags. 
+It adds custom tags to the resulting files and offers additional options to create tags based on the resulting file name.
+
+```json
+{
+  "before": [],
+  "after": [
+    {
+      "definition": {
+        "component": "kds-team.processor-create-file-manifest"
+      },
+      "parameters": {
+        "tags": [
+          "SOME_TAG"
+        ],
+        "is_permanent": false,
+        "tag_functions": []
+      }
+    }
+  ]
+}
+```
+
 
 ## Output
 
-#### Table
+### Table
 
-Single table named **`emails`** containing the email contents.
+A single table named `emails` contains the email contents.
 
-The results are always inserted incrementally to avoid duplicates.
+Results are inserted incrementally to avoid duplicates.
 
-**Columns:** `['pk', 'uid', 'mail_box', 'date', 'from', 'to', 'body', 'headers', 'number_of_attachments', 'size']`
+**Columns:** `'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'body', 'headers', 'number_of_attachments', 'size'`
 
 
-#### Attachments
+### Attachments
 
-**Attachments** are stored by default in the File Storage prefixed by the generated message pk. `bb41793268d4a8710fb5ebd94eaed6bc_some_file.pdf`.
+**Attachments** are stored by default in File Storage, with filenames prefixed by the generated message primary key, e.g., `bb41793268d4a8710fb5ebd94eaed6bc_some_file.pdf`.
 
-The files will contain additional tags to distinguish the source:
+Files include tags to distinguish their source:
 
 {: .image-popup}
 ![Screenshot - Tags](/components/extractors/communication/email-imap/tags.png)
 
-Additional tags can be specified by the [Create File Manifest processor](https://components.keboola.com/components/kds-team.processor-create-file-manifest) 
-or further processed and stored in the Table Storage by other processors.
+Additional tags can be specified with the [Create File Manifest processor](https://components.keboola.com/components/kds-team.processor-create-file-manifest). 
+Attachments can also be further processed and stored in Table Storage using other processors.
