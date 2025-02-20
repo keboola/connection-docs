@@ -83,6 +83,27 @@ To provide your app with environment variables or sensitive information like cre
 These secrets will be injected into the `secrets.toml` file upon deployment of the app. 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
+### Direct Secrets Upload
+You can now upload a `secrets.toml` file directly through the UI when developing an app from code. The upload process:
+- Overwrites existing secrets with matching names
+- Preserves existing secrets that don't match uploaded ones
+- Creates new secrets if they don't exist
+- Does not delete any existing secrets
+
+#### Example secrets.toml structure:
+```
+[connections]
+aws_key = "YOUR_AWS_KEY"
+aws_secret = "YOUR_AWS_SECRET"
+[api_keys]
+openai = "YOUR_OPENAI_KEY"
+```
+### Best Practices
+1. Always use descriptive secret names
+2. Group related secrets under meaningful sections
+3. Back up your secrets configuration
+4. Review existing secrets before uploading new ones
+
 ## Access Storage from Data App
 By default, there are two environment variables available that make it easy to access Keboola storage from your application:
 
