@@ -85,10 +85,10 @@ These secrets will be injected into the `secrets.toml` file upon deployment of t
 
 ### Direct Secrets Upload
 You can now upload a `secrets.toml` file directly through the UI when developing an app from code. The upload process:
-- Overwrites existing secrets with matching names
-- Preserves existing secrets that don't match uploaded ones
-- Creates new secrets if they don't exist
-- Does not delete any existing secrets
+- Overwrites existing secrets with matching names.
+- Preserves existing secrets that don't match the uploaded ones.
+- Creates new secrets if they don't exist.
+- Does not delete any existing secrets.
 
 #### Example secrets.toml structure:
 ```
@@ -99,18 +99,18 @@ aws_secret = "YOUR_AWS_SECRET"
 openai = "YOUR_OPENAI_KEY"
 ```
 ### Best Practices
-1. Always use descriptive secret names
-2. Group related secrets under meaningful sections
-3. Back up your secrets configuration
-4. Review existing secrets before uploading new ones
+1. Always use descriptive secret names to improve clarity.
+2. Group related secrets under meaningful sections.
+3. Back up your secrets configuration regularly.
+4. Review existing secrets before uploading new ones to avoid unintentional overwrites.
 
 ## Access Storage from Data App
-By default, there are two environment variables available that make it easy to access Keboola storage from your application:
+By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
-- `KBC_TOKEN`: This represents the storage token with full read-write access to Keboola Storage.
+- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
 
-These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola storage token:
+These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola Storage token:
 ```
 # Constants
 kbc_token = os.environ.get('KBC_TOKEN')
@@ -121,7 +121,7 @@ client = Client(kbc_url, kbc_token)
 These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
 
 ## Loading Data from Storage
-To load data from the storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
+To load data from the Storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
 Just select your table in the input mapping section and navigate to that by `/data/in/tables/your_data.csv` or `/data/in/files/fileID_FileName.*` in your code.
 Note that, while in BETA, the app needs to be redeployed to fetch up-to-date data.
 Or you can use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
