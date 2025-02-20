@@ -7,7 +7,7 @@ permalink: /components/data-apps/general-design-guide/
 {:toc}
 
 This guide will help you quickly create a user-friendly data app in Keboola. We cover essentials like theming, headers, storage integration, 
-and more to streamline your setup. With clear, step-by-step instructions, you’ll be able to build an intuitive, visually appealing app. 
+and more to streamline your setup. With clear, step-by-step instructions, you'll be able to build an intuitive, visually appealing app. 
 
 ## Theming
 There are two options for setting theming:
@@ -171,6 +171,31 @@ def display_footer_section():
 ```
 
 ## Keboola Storage Communication
+
+Keboola offers multiple methods to interact with Storage. For simpler data access, consider using the "keboola-streamlit" package. Install it with:
+
+    pip install keboola-streamlit
+
+Then, initialize your client in your Streamlit app:
+
+    import streamlit as st
+    from keboola_streamlit import KeboolaStreamlit
+    
+    TOKEN = os.environ.get('KBC_TOKEN')
+    URL = os.environ.get('KBC_URL')
+    keboola = KeboolaStreamlit(root_url=URL, token=TOKEN)
+
+This package provides simple functions such as `keboola.read_table` and `keboola.write_table` to easily read and write data.
+
+For users with read-only workspaces or data warehouses like Snowflake, you can also use Python connectors, such as Snowflake's Python connector or Snowpark. For example, you might initialize a Snowflake session with:
+
+    st.session_state['snowflake_session'] = keboola.snowflake_create_session_object()
+
+And retrieve data with:
+
+    df_snowflake = keboola.snowflake_read_table(session=st.session_state['snowflake_session'], table_id='YOUR_SNOWFLAKE_TABLE_ID')
+
+For more details, visit the official KeboolaStreamlit repository on GitHub: [keboola/keboola_streamlit](https://github.com/keboola/keboola_streamlit).
 
 ### Authenticate Client
 
