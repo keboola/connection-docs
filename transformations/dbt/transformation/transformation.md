@@ -116,7 +116,7 @@ Clicking the button synchronously generates the documentation in a popup:
 ## Profiles and Target
 
 Keboola automatically generates a `profiles.yml` file for your dbt transformation. Here, you can see what the generated file looks like:
-```
+
 {% highlight yaml %}
 default:
   outputs:
@@ -131,7 +131,7 @@ default:
       threads: '{% raw %}{{ env_var("DBT_KBC_PROD_THREADS")| as_number }}{% endraw %}'
   target: kbc_prod
 {% endhighlight %}
-```
+
 
 ***Note:** The values of environment variables are provided automatically based on the database connection settings or the use of Keboola Storage.*
 
