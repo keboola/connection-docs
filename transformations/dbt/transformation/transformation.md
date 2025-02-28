@@ -19,9 +19,9 @@ After saving a configuration, click **Load Branches** to select the desired bran
 
 ### Execution Steps
 
-![](imgs/2776563910.png){: width="100%" }
+![](imgs/2740748169.png){: width="100%" }
 
-Select the desired execution steps and rearrange them if needed. If you need additional steps that are not available, please send us a feature request via the help icon.
+Select the desired execution steps, then edit or rearrange them as needed.
 
 ### Execution Parameters
 
@@ -116,7 +116,7 @@ Clicking the button synchronously generates the documentation in a popup:
 ## Profiles and Target
 
 Keboola automatically generates a `profiles.yml` file for your dbt transformation. Here, you can see what the generated file looks like:
-```
+
 {% highlight yaml %}
 default:
   outputs:
@@ -131,7 +131,7 @@ default:
       threads: '{% raw %}{{ env_var("DBT_KBC_PROD_THREADS")| as_number }}{% endraw %}'
   target: kbc_prod
 {% endhighlight %}
-```
+
 
 ***Note:** The values of environment variables are provided automatically based on the database connection settings or the use of Keboola Storage.*
 
