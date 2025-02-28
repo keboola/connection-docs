@@ -19,9 +19,9 @@ After saving a configuration, click **Load Branches** to select the desired bran
 
 ### Execution Steps
 
-![](imgs/2776563910.png){: width="100%" }
+![](imgs/2740748169.png){: width="100%" }
 
-Select the desired execution steps and rearrange them if needed. If you need additional steps that are not available, please send us a feature request via the help icon.
+Select the desired execution steps and edit or rearrange them as needed.
 
 ### Execution Parameters
 
