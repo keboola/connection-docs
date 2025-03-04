@@ -5,8 +5,8 @@ redirect_from:
   - /storage/buckets/sharing/
 ---
 
-- TOC
-  {:toc}
+* TOC
+{:toc}
 
 _Note: The original feature called Shared Buckets is now integrated into our Data Catalog._
 
