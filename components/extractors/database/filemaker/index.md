@@ -8,37 +8,37 @@ permalink: /components/extractors/database/filemaker/
 
 FileMaker is a cross-platform relational database application from Claris International.
 
-Extract layout data from [FileMaker](https://www.claris.com/filemaker/) relational database via [FileMaker Data API](https://help.claris.com/en/data-api-guide/content/write-data-api-calls.html).
+This component extracts layout data from [FileMaker](https://www.claris.com/filemaker/) relational databases using the [FileMaker Data API](https://help.claris.com/en/data-api-guide/content/write-data-api-calls.html).
 
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **FileMaker** data source connector.
 
 
-### Prepare the FileMaker database 
+### Prepare the FileMaker Database 
 
-- Prepare your database for FileMaker Data API access, by [creating specific layouts](https://help.claris.com/en/data-api-guide/content/prepare-databases-for-access.html)
-- Obtain FileMaker Data API credentials, host URL + username and password
+- Configure your database for FileMaker Data API access by [creating specific layouts](https://help.claris.com/en/data-api-guide/content/prepare-databases-for-access.html).
+- Obtain FileMaker Data API credentials, including the host URL, username, and password.
 
-### Authorization setup
+### Authorization Setup
 
 Fill in the required authorization parameters:
 
- - `Host URL` of the FileMaker server. (base_url) - [REQ] Host url of the FileMaker instance
- - `User Name` (username) - [REQ] Username 
- - `Password` (#password) - [REQ] Password
- - `Verify SSL certificate` (ssl_verify) - [OPT] Set to false to disable SSL (https) certificate verification. Use with caution.
+ - **Host URL** of the FileMaker server (`base_url`, required) – The FileMaker server host URL.
+ - **User Name** (`username`, required) – The username for authentication. 
+ - **Password** (`#password`, required) – The corresponding password.
+ - **Verify SSL certificate** (`ssl_verify`, optional) – Set to `false` to disable SSL (https) certificate verification. Use with caution.
 
 
 {: .image-popup}
 ![Screenshot - Authorization](/components/extractors/database/filemaker/image_auth.png)
 
-**Save** the configuration and then click **Add Row** to create a new row configuration.
+**Save** the configuration and click **Add Row** to create a new row configuration.
 
 
-### Row configuration
+### Row Configuration
 
-Define what type of objects you wish to download and the Storage syncing options.
+Define the object type to extract and configure storage syncing options.
 
 #### Object type
 
@@ -47,38 +47,39 @@ Define what type of objects you wish to download and the Storage syncing options
 {: .image-popup}
 ![Screenshot - Metadata](/components/extractors/database/filemaker/image_metadata.png)
 
-Download schemas of selected layouts. Provide list of Database and Layout names which you like to get the metadata of. 
+Download schemas of selected layouts. Provide a list of Database and Layout names to retrieve metadata. 
 
-**NOTE** You can leave the list empty to get metadata of all available objects.
+***Note:** Leave the list empty to retrieve metadata for all available objects.*
 
 ##### Layout
 
 {: .image-popup}
 ![Screenshot - Metadata](/components/extractors/database/filemaker/image_layout.png)
 
-Download data of particular layout with specified query
+Download data from a specific layout with a specified query.
 
 
 **Parameters:**
 
-- `Database` (database) - [OPT] FileMaker database name
-- `FileMaker layout name` (layout_name) - [OPT] Name of the Layout
-- `Query Group` (query) - [OPT] Groups of filter criteria. 'OR' logical operation is applied to each group. 'AND' logical operation is applied to each set of queries. Note that if you include field used for incremental fetching, the incremental fetching will not work as expected.
-  - For more information on the syntax see the [documentation](https://fmhelp.filemaker.com/help/18/fmp/en/#page/FMP_Help%2Ffinding-ranges.html%23)
-- `Load Type` (incremental) - Defines a way how he result is stored in the Storage.
-  - `Full load` - data in destination are overwritten each run
-  - `Incremental Update` - data in destination are upserted each run.
-- `Primary key` (pkey) - list of primary key columns if present. Needed for incremental load type
-- `Incremental fetching` (incremental_fetch) - If true each consecutive run will return only records with values >= than the highest incremental fields values from last run.
-- `Incremental fields` (incremental_fields) - List of columns used for incremental fetching. If multiple specified AND relation is used.
-- Page size (page_size) - [OPT] Number of records retrieved in single API call. Note that to large page size may affect load on the destination database
+- **Database** (`database`, optional) – The name of the FileMaker database.
+- **FileMaker layout name** (`layout_name`, optional) – The name of the layout.
+- **Query Group** (`query`, optional) – Groups of filter criteria.
+    - The logical 'OR' operation is applied between groups.
+    - The logical 'AND' operation is applied within a set of queries.
+    - ***Note:** If you include a field used for incremental fetching, the incremental fetching may not work as expected.*
+  - For more details on the syntax, see the [FileMaker documentation](https://fmhelp.filemaker.com/help/18/fmp/en/#page/FMP_Help%2Ffinding-ranges.html%23).
+- **Load Type** (`incremental`) – Defines how the result is stored in Keboola Storage:
+  - **Full load** – Overwrites data in the destination on each run.
+  - **Incremental Update** – Upserts data in the destination on each run.
+- **Primary key** (`pkey`) – List of primary key columns, if available. Required for incremental load.
+- **Incremental fetching** (`incremental_fetch`) – If `true`, only records with values **>=** to the last incremental field value will be retrieved from in consecutive runs.
+- **Incremental fields** (`incremental_fields`) – List of columns used for incremental fetching. If multiple specified, an **AND** relation is applied.
+- **Page size** (`page_size`, optional) – The number of records retrieved per API call. ***Note:** A large page size may impact performance on the destination database.*
 
 
-Output
-======
+## Output
 
-**NOTE** The columns prefixed `_` are prefixed with hsh prefix in the result table. 
-This is because the Keboola Storage does not allow to store columns prefixed with underscore. So the column `_Timestamp` will be stored as `hsh_Timestamp` in the resulting table.
+***Note:** Columns prefixed with `_` are stored in Keboola Storage with the `hsh` prefix in the resulting table. This is because Keboola Storage does not allow columns to begin with an underscore. For example, the column `_Timestamp` will be stored as `hsh_Timestamp` in the resulting table.*
 
 
 ### Metadata Tables
@@ -86,14 +87,14 @@ This is because the Keboola Storage does not allow to store columns prefixed wit
 
 #### `layouts`
 
-- List of available layouts
+- List of available layouts.
 
-columns: [`table`, `layout_name`, `parent_layout_name`] 
+Columns: [`table`, `layout_name`, `parent_layout_name`] 
 
   
 #### `layout_fields_metadata`
 
--  Schema and metadata describing the particular layout.
+-  Schema and metadata describing a specific layout.
 
 columns: [ `displayType`,
 	`repetitionEnd`,
@@ -115,4 +116,4 @@ columns: [ `displayType`,
 
 ### Layouts Tables
 
-Layout data defined by the particular query definition.
+Layout data is extracted based on the query definition provided.
