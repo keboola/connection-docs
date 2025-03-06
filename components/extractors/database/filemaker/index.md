@@ -72,7 +72,7 @@ Download data from a specific layout with a specified query.
   - **Full load** – Overwrites data in the destination on each run.
   - **Incremental Update** – Upserts data in the destination on each run.
 - **Primary key** (`pkey`) – List of primary key columns, if available. Required for incremental load.
-- **Incremental fetching** (`incremental_fetch`) – If `true`, only records with values **>=** to the last incremental field value will be retrieved from in consecutive runs.
+- **Incremental fetching** (`incremental_fetch`) – If `true`, only records with values **>=** to the last incremental field value will be retrieved in consecutive runs.
 - **Incremental fields** (`incremental_fields`) – List of columns used for incremental fetching. If multiple specified, an **AND** relation is applied.
 - **Page size** (`page_size`, optional) – The number of records retrieved per API call. ***Note:** A large page size may impact performance on the destination database.*
 
