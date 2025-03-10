@@ -32,6 +32,11 @@ You can then upload this file directly through the Keboola UI:
 {: .image-popup}
 ![Upload Requirements](/components/data-apps/lock-streamlit-version/code-deployment/upload-requirements.png)
 
+You can also update requirements.txt in the UI:
+
+{: .image-popup}
+![Update Requirements](/components/data-apps/lock-streamlit-version/code-deployment/update-requirements.png)
+
 **Important notes:**
 - If a package has a specific version defined, that exact version will be installed
 - If no version is specified, the latest version will be installed
