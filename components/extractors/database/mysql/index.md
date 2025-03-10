@@ -592,8 +592,7 @@ how long the connector holds the MySQL global read lock during a snapshot:
   - **`minimal`**: Locks only during the initial schema read, then releases while using a `REPEATABLE READ` transaction for consistency.
   - **`extended`**: Locks for the entire snapshot to avoid conflicts with concurrent operations.
   - **`none`**: No table locks; this is safe if no schema changes occur. MyISAM tables still lock by default.
-- **Snapshot Statement Override** - Define a custom SQL SELECT statement to be used for fetching the initial snapshot.
-
+- **Snapshot Statement Override**: Define a custom SQL SELECT statement to be used for fetching the initial snapshot.
 ### Destination
 
 The destination is a mandatory configuration option. It is used to specify how the data is loaded into the destination
