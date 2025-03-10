@@ -72,8 +72,7 @@ or a language interpreter
 ([Julia](https://julialang.org/), 
 [OpenRefine](https://openrefine.org/),
 [Python](https://www.python.org/about/),
-[R](https://www.r-project.org/about.html), 
-[Spark](https://spark.apache.org/)).
+[R](https://www.r-project.org/about.html).
 
 How do you decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better
 for joining tables, filtering data, grouping, and simple aggregations. Script languages are more suitable
@@ -234,16 +233,6 @@ New transformations are generally available on Azure-based [stacks](/overview/#s
     <td>JupyterLab</td>
 </tr>
 <tr>
-    <th>MLflow support</th> 
-    <td>Not available</td>
-    <td>Preview</td>
-</tr>
-<tr>
-    <th>Spark support</th> 
-    <td>Not available</td>
-    <td>Preview</td>
-</tr>
-<tr>
     <th rowspan='9'>Other features</th>
     <th>Transformations buckets</th> 
     <td>✓</td>
@@ -324,8 +313,7 @@ encouraging users to create reusable blocks of code. They also support
 [variables](/transformations/variables/#variables) that can be used to parametrize transformations.
 
 Apart from that, new transformations come with [workspaces](/transformations/workspace/) (previously named Sandboxes),
-which have many new features, such as loading and unloading data with a running workspace, 
-resuming the workspace, Spark, and MLflow support.
+which have many new features, such as loading and unloading data with a running workspace or resuming the workspace.
 
 #### Writing Scripts
 The transformation script can be organized into pieces that we call **code**, and these can be

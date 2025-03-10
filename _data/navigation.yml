@@ -83,6 +83,9 @@ items:
               - url: /components/extractors/communication/email-imap/
                 title: IMAP Email Contents and Attachments
 
+              - url: /components/extractors/communication/ms-outlook/
+                title: MS Outlook (Office 365) Email Contents and Attachments
+
               - url: /components/extractors/communication/email-attachments/
                 title: Email Attachments
 
@@ -94,9 +97,6 @@ items:
 
               - url: /components/extractors/communication/intercom/
                 title: Intercom
-
-              - url: /components/extractors/communication/ms-outlook/
-                title: MS Outlook (Office 365)
 
               - url: /components/extractors/communication/slack/
                 title: Slack
@@ -472,6 +472,8 @@ items:
                 title: Microsoft Entra ID
               - url: /components/data-apps/oidc/okta/
                 title: Okta
+          - url: /components/data-apps/terminal-log-tab/
+            title: Terminal Log Tab
                     
       - url: /components/branches/
         title: Development Branches

@@ -496,6 +496,7 @@ organization, or the Keboola platform itself.
 |`auditLog.storageBackendConnection.created`
 |`auditLog.storageBackendConnection.deleted`
 |`auditLog.storageBackendConnection.listed`
+|`auditLog.storageBackendConnection.detail`
 |`auditLog.storageBackendConnection.updated`
 |`auditLog.mergeRequest.created`
 |`auditLog.mergeRequest.stateChanged`
@@ -757,6 +758,7 @@ This table shows data about events of the storage [tables](/storage/tables/).
 | `results` | Results of the event (JSON object). | `{"rowsCount":"272800","sizeBytes":15412736}` |
 | `kbc_token_id` | Foreign key to the Keboola token | `516356_kbc-us-east-1` |
 | `token_name` | Name of the token | `orchestration trigger` |
+| `kbc_data_app_id` | Foreign key to the Keboola data app | `123_kbc-us-east-1_keboola.data-apps-945672` |
 
 ### kbc_table_metadata
 This table shows data about metadata of the storage [tables](/storage/tables/).
