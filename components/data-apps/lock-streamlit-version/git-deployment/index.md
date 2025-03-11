@@ -1,5 +1,5 @@
 ---
-title: How to Lock Package Versions in Streamlit Applications in Keboola (Deploying from Git Repository)
+title: Git Repository Deployment
 permalink: /components/data-apps/lock-streamlit-version/git-deployment/
 ---
 
