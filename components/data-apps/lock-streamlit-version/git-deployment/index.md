@@ -1,6 +1,6 @@
 ---
 title: How to Lock Package Versions in Streamlit Applications in Keboola (Deploying from Git Repository)
-permalink: /components/data-apps/lock-streamlit-version/
+permalink: /components/data-apps/lock-streamlit-version/git-deployment/
 ---
 
 * TOC
@@ -25,7 +25,7 @@ To ensure your Streamlit app runs reliably in Keboola, follow these steps to loc
 - [Generate a requirements.txt file](#generate-requirementstxt)
   
 ### Set Up a Virtual Environment
-Create and activate a Python virtual environment to isolate your app’s dependencies:
+Create and activate a Python virtual environment to isolate your app's dependencies:
 
 `python3 -m venv venv`
 
@@ -76,4 +76,4 @@ Following these best practices will help you maintain a stable, efficient, and c
 - **Keep it clean:** Include only the necessary packages to keep the environment lightweight.
 - **Update regularly:** Periodically update and test dependencies in a development environment before generating a new `requirements.txt` file.
 - **Test locally:** Verify that your app works correctly with the locked package versions in a local environmnet before deploying it in Keboola.
-- **Match environments:** Use the same Python version in your local setup with Keboola's version (Python 3.10) to prevent version mismatches.
+- **Match environments:** Use the same Python version in your local setup with Keboola's version (Python 3.10) to prevent version mismatches. 
