@@ -68,7 +68,6 @@ If you need more information, please contact your CSM.
 | Small                                 | 1 hour                  | **1**                 |
 | Medium                                | 1 hour                  | **2**                 |
 | Large                                 | 1 hour                  | **6**                 |
-| Deployed & running ML model (BETA)    | 1 hour                  | **0.1**               |
 | **dbt job**                           |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Remote                                | 1 hour                  | **2**                 |
