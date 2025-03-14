@@ -405,6 +405,10 @@ Automating scheduled table resets (e.g., overwriting temporary datasets).
 5. Confirm clicking the "Truncate table" button.
 
 ## Delete Rows
+
+{: .alert.alert-warning}
+Important: This feature is currently available in BETA.
+
 The Delete Rows feature allows you to remove specific records from a table in Storage. Unlike Truncate Table, which clears all data, Delete Rows selectively removes only matching records, keeping the rest of the table intact.
 
 When using the Delete Rows feature, you can apply multiple filters in a single execution, such as:
