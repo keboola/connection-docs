@@ -382,22 +382,14 @@ when using incremental processing set to `1 day`, that row will not be included 
 ## Truncate Table
 **Overview**
 
-The Truncate Table feature removes all records from a table while preserving its schema (column structure and metadata).
-
-**Key Characteristics:**
-
-Deletes all rows but keeps the table structure intact.
-Does not delete primary keys or metadata.
-Efficient when replacing an entire dataset.
+The Truncate Table feature removes all records from a table while preserving its schema (column structure and metadata). The feature deletes all rows but keeps the table structure intact. Primary keys or metadata remain without change. The feature is highly efficient especially when replacing an entire dataset.
 
 **When to Use Truncate Table?**
-
-Replacing data completely (e.g., daily refresh of customer records).
-Ensuring clean data ingestion without duplication.
-Automating scheduled table resets (e.g., overwriting temporary datasets).
+- Replacing data completely (e.g., daily refresh of customer records).
+- Ensuring clean data ingestion without duplication.
+- Automating scheduled table resets (e.g., overwriting temporary datasets).
 
 **How to Truncate a Table:**
-
 1. Navigate to Storage → Tables.
 2. Select the table you want to truncate.
 3. Click the three dots on the right side of the screen. A drop-down menu will display.
@@ -405,9 +397,7 @@ Automating scheduled table resets (e.g., overwriting temporary datasets).
 5. Confirm clicking the "Truncate table" button.
 
 ## Delete Rows
-
-{: .alert.alert-warning}
-Important: This feature is currently available in BETA.
+**Overview**
 
 The Delete Rows feature allows you to remove specific records from a table in Storage. Unlike Truncate Table, which clears all data, Delete Rows selectively removes only matching records, keeping the rest of the table intact.
 
@@ -416,19 +406,12 @@ When using the Delete Rows feature, you can apply multiple filters in a single e
 - Rows containing a specific value in a given column.
 Before deleting the rows, Keboola displays a preview of the records that will be removed based on your filters.
 
-**Key Characteristics:**
-
-Deletes only rows matching the provided values.
-Keeps table structure, metadata, and remaining rows.
-
 **When to Use Delete Rows?**
-
-Removing outdated records (e.g., inactive customers).
-Correcting erroneous data entries.
-Synchronizing data with external systems (e.g., deleting stale records).
+- Removing outdated records (e.g., inactive customers).
+- Correcting erroneous data entries.
+- Synchronizing data with external systems (e.g., deleting stale records).
 
 **How to Delete Rows:**
-
 1. Navigate to Storage → Tables.
 2. Select the table where you want to delete rows.
 3. Click the three dots on the right side of the screen to open a drop-down menu.
