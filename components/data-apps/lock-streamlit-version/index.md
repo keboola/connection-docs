@@ -19,7 +19,7 @@ Locking package versions is crucial for:
 
 Here's a typical example of a `requirements.txt` file with locked versions:
 
-```python
+```
 # Core dependencies
 streamlit==1.24.0
 pandas==1.3.5
