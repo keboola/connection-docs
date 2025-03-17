@@ -15,6 +15,25 @@ Locking package versions is crucial for:
 - **Reproducibility:** Ensure consistent behavior across environments
 - **Ease of debugging:** Maintain a predictable environment for troubleshooting
 
+## Example requirements.txt
+
+Here's a typical example of a `requirements.txt` file with locked versions:
+
+```python
+# Core dependencies
+streamlit==1.24.0
+pandas==1.3.5
+numpy==1.21.6
+
+# Visualization
+plotly==5.20.0
+matplotlib==3.7.2
+
+# Utilities
+requests==2.31.0
+protobuf==3.19.6
+```
+
 ## Deployment Methods
 
 1. **For Code Deployment:**

@@ -460,7 +460,7 @@ items:
           - url: /components/data-apps/general-design-guide/
             title: General Design Guide
           - url: /components/data-apps/lock-streamlit-version/
-            title: Locking Streamlit Version
+            title: Locking Package Versions
             items:
               - url: /components/data-apps/lock-streamlit-version/code-deployment/
                 title: Code Deployment
@@ -477,6 +477,10 @@ items:
                 title: Microsoft Entra ID
               - url: /components/data-apps/oidc/okta/
                 title: Okta
+              - url: /components/data-apps/oidc/gitlab/
+                title: GitLab
+              - url: /components/data-apps/oidc/github/
+                title: GitHub
           - url: /components/data-apps/terminal-log-tab/
             title: Terminal Log Tab
                     

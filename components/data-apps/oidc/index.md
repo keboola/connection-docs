@@ -12,6 +12,7 @@ See the following articles for step-by-step information on how to configure the 
 - [Google Cloud Platform](/components/data-apps/oidc/google-cloud-platform/)
 - [Microsoft Entra ID](/components/data-apps/oidc/microsoft-entra-id/)
 - [OKTA](/components/data-apps/oidc/okta/)
-- GitHub (coming soon)
+- [GitHub](/components/data-apps/oidc/github/)
+- [GitLab](/components/data-apps/oidc/gitlab/)
 - BitBucket (coming soon)
 - LinkedIn (coming soon)
