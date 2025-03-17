@@ -47,7 +47,6 @@ Follow these steps to set up the authentication method for your data app:
 - Under **Authentication**, select **OIDC** and then **Generic OIDC**.
 - Copy the Client ID from your GitHub application to the **Client ID** field in Keboola.
 - Copy the Client secret from your GitHub application to the **Client secret** field in Keboola.
-- Leave the **Issuer URL** field empty - GitHub uses a different OIDC implementation that doesn't require an issuer URL
 - Click **Save** to apply the changes.
 
 ## Step 5: Deploy Your Data App in Keboola
