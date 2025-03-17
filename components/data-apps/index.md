@@ -385,12 +385,12 @@ Please note that the versions of these packages may change, as the newest versio
 
 ### Actions Menu
 {: .image-popup}
-![Secrets](/components/data-apps/data_apps-manage-redeploy.png)
+![Secrets](/components/data-apps/data_apps-manage-redeploy-2.png)
 
 - **Deploy Data App** – starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
 - **Open Data App** – opens a new window with your data app.
 - **Redeploy** – if you made changes in the data app configuration, you have to redeploy it for the changes to take effect.
-- **Terminate Data App** – stops the data app. The container in which the application is running will be stopped, and the app's URL will no longer be available. The configuration of the app will remain intact.
+- **Suspend Data App** – stops the data app. The container in which the application is running will be stopped, and the app's URL will no longer be available. The configuration of the app will remain intact.
 - **Delete Data App** – stops the data app deployment and deletes its configuration.
 
 ### Debugging App Deployment
