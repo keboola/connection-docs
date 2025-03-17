@@ -385,7 +385,7 @@ Please note that the versions of these packages may change, as the newest versio
 
 ### Actions Menu
 {: .image-popup}
-![Secrets](/components/data-apps/data_apps-manage-redeploy.png)
+![Secrets](/components/data-apps/data_apps-manage-redeploy-2.png)
 
 - **Deploy Data App** – starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
 - **Open Data App** – opens a new window with your data app.
