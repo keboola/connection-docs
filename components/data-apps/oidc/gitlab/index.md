@@ -43,10 +43,11 @@ Follow these steps to set up the authentication method for your data app:
 
 - Go to the newly created data app.
 - Click the **Information & Settings** tab.
-- Under **Authentication**, select **OIDC** and then **Generic OIDC**.
+- Under **Authentication**, select **OIDC** and then **GitLab**.
 - Copy the Application ID from your GitLab application to the **Client ID** field in Keboola.
 - Copy the Secret from your GitLab application to the **Client secret** field in Keboola.
 - In the **Issuer URL** field, enter `https://gitlab.com`. This is the standard OIDC issuer URL for GitLab's implementation.
+- Other fields (**Groups**, **Projects**) are optional.
 - Click **Save** to apply the changes.
 
 ## Step 5: Deploy Your Data App in Keboola
@@ -61,4 +62,3 @@ Follow these steps to test your new data app:
 - You should be redirected to the GitLab consent screen.
 - Log in with your GitLab account to verify your identity.
 - The data app should display its content. 
-
