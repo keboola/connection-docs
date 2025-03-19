@@ -239,9 +239,6 @@ items:
               - url: /components/extractors/social/instagram/
                 title: Instagram
 
-              - url: /components/extractors/social/twitter/
-                title: Twitter
-
               - url: /components/extractors/social/youtube/
                 title: YouTube Data API
 
