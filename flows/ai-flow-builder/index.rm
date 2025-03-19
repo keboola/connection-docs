@@ -6,11 +6,11 @@ permalink: /ai-flow-builder/
 * TOC
 {:toc}
 
-*AI Flow Builder is an experimental AI assistant that helps you create a simple 3-step ETL flow from end to end based on your intent. It is available exclusively in Pay-As-You-Go projects, with the primary purpose of jumpstarting the first Flow creation.* 
+* AI Flow Builder is an experimental AI assistant that helps you create a simple 3-step ETL flow from end to end based on your intent. It is available exclusively in **Pay-As-You-Go** projects, with the primary purpose of jumpstarting the first Flow creation.* 
 
-This version is offered free of charge as it is subject to change, and we plan to expand its functionalities in the future.
+This version is offered **free of charge** as it is subject to change, and we plan to expand its functionalities in the future.
 
-Functionality
+## Functionality
 The AI-assisted Flow Builder process is divided into three logical phases.
 
 1. Defining the Flow Structure Based on User Intent
@@ -21,13 +21,13 @@ At this stage, the user gradually configures the components, starting with the f
 
 Once the component configuration is completed, the user clicks the "BACK TO FLOW" button, and the component execution starts automatically. During this period, the user can monitor the progress or proceed with configuring the remaining components within the phase.
 
-![[Pasted image 20250319080010.png]]
+Pasted image 20250319080010.png
 
 If any errors occur, the user will be notified, and navigating to the failed component configuration will prompt the assistant to help resolve the issue.
 
-🚨 Important: The AI Flow Builder does not allow proceeding to the next Flow phase until all components are fully configured and their execution is completed successfully (indicated by a green checkmark).
+## Important: ## The AI Flow Builder does not allow proceeding to the next Flow phase until all components are fully configured and their execution is completed successfully (indicated by a green checkmark).
 
-![[Pasted image 20250319080147.png]]
+Pasted image 20250319080147.png]]
 
 3. Previewing Results
 The output of a component can be previewed by clicking the "EXPLORE DATA" icon located at the bottom-right corner of the component icon.
@@ -52,10 +52,10 @@ If a destination component was specified during the initial Flow setup, it will 
 Flow Publishing
 Once all jobs in all Flow phases are successfully completed, the user can click the "PUBLISH" button. This finalizes the Flow, and the user is redirected to the standard Flow Builder, where they can set up scheduling or make additional modifications as needed.
 
-🚨 Important: Once the Flow is published, the AI Flow Builder can no longer be used for that Flow.
+Important: Once the Flow is published, the AI Flow Builder can no longer be used for that Flow.
 
 Limitations
-1️⃣ Only 3-Step (Phase) Flows Are Supported
+1️Only 3-Step (Phase) Flows Are Supported
 The AI Flow Builder supports Flows with up to three phases: Extract, Transform, and Load.
 The Extract phase may contain multiple connectors.
 The Transform phase supports only one SQL transformation configuration.
