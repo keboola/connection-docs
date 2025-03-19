@@ -8,7 +8,7 @@ permalink: /ai-flow-builder/
 
 # AI Flow Builder
 
-AI Flow Builder is an experimental AI assistant that helps you create a simple 3-step ETL flow from end to end based on your intent. It is available exclusively in **Pay-As-You-Go** projects, with the primary purpose of jumpstarting the first Flow creation.
+AI Flow Builder is an experimental AI assistant that helps you create a simple 3-step ETL flow from end to end based on your intent. It is available exclusively in **Pay-As-You-Go** projects, with the primary purpose of jumpstarting the first Flow creation. The feature can be enabled/disabled from the Project Settings.
 
 This version is offered **free of charge** as it is subject to change, and we plan to expand its functionalities in the future.
 
