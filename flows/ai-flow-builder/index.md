@@ -14,7 +14,7 @@ This version is offered **free of charge** as it is subject to change, and we pl
 
 ## Functionality
 
-The AI-assisted Flow Builder process is divided into **three logical phases**.
+The AI-assisted Flow Builder process is divided into **three logical episodes**.
 
 ### 1. Defining the Flow Structure Based on Your Intent
 You provide an intent, e.g., _"I would like to analyze my marketing campaigns,"_ and the assistant will ask additional questions about the data sources and desired destination to build the Flow structure. Once you confirm the suggested sequence of steps (components), the Flow is created with **empty configurations**, and the configuration process can begin.
@@ -22,7 +22,7 @@ You provide an intent, e.g., _"I would like to analyze my marketing campaigns,"_
 ### 2. Flow Configuration
 At this stage, you gradually configure the components, starting with the first phase of the Flow (**Extract**). When you click on a component configuration to open the **configuration detail view**, the assistant will guide you through the setup.
 
-Once the component configuration is completed, you click the **"BACK TO FLOW"** button, and the component execution starts automatically. During this period, you can **monitor the progress** or proceed with configuring the remaining components within the phase.
+Once the component configuration is completed, you click the **"BACK TO FLOW"** button, and the component execution starts automatically. During this period, you can **monitor the progress** or proceed with configuring the remaining components within the Flow phase.
 
 If any errors occur, you will be notified, and navigating to the failed component configuration will prompt the assistant to help resolve the issue.
 
