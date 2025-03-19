@@ -26,7 +26,7 @@ Once the component configuration is completed, you click the **"BACK TO FLOW"** 
 
 If any errors occur, you will be notified, and navigating to the failed component configuration will prompt the assistant to help resolve the issue.
 
-> **Important:** The AI Flow Builder **does not allow** proceeding to the next Flow phase until all components are fully configured and their execution is completed successfully (indicated by a **green checkmark**).
+**Important:** The AI Flow Builder **does not allow** proceeding to the next Flow phase until all components are fully configured and their execution is completed successfully (indicated by a **green checkmark**).
 
 ### 3. Previewing Results
 The output of a component can be previewed by clicking the **"EXPLORE DATA"** icon located at the bottom-right corner of the component icon.
@@ -47,7 +47,7 @@ If a **destination component** was specified during the initial Flow setup, it w
 ## Flow Publishing
 Once **all jobs** in all Flow phases are successfully completed, you can click the **"PUBLISH"** button. This finalizes the Flow, and you are redirected to the standard Flow Builder, where you can set up **scheduling** or make additional modifications as needed.
 
-> **Important:** Once the Flow is published, the **AI Flow Builder can no longer be used** for that Flow.
+**Important:** Once the Flow is published, the **AI Flow Builder can no longer be used** for that Flow.
 
 ## Limitations
 
