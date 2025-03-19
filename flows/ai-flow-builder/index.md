@@ -51,21 +51,21 @@ Once **all jobs** in all Flow phases are successfully completed, you can click t
 
 ## Limitations
 
-### 1 **Only 3-Step (Phase) Flows Are Supported**
+### 1. **Only 3-Step (Phase) Flows Are Supported**
 - The AI Flow Builder supports Flows with up to **three phases**: **Extract, Transform, and Load**.
 - The **Extract** phase may contain **multiple connectors**.
 - The **Transform** phase supports **only one SQL transformation configuration**.
 - The **Load** phase is **optional** and contains a destination component. If omitted, the transformed data will be stored in **Keboola Storage**.
 - After publishing the AI-generated Flow, you can freely edit it using the **standard Flow Builder**, adding additional phases or configurations.
 
-### 2 **Only AI-Assisted SQL Transformations Are Supported**
+### 2. **Only AI-Assisted SQL Transformations Are Supported**
 - In the **Data Processing phase**, only **AI-assisted SQL transformations** are currently supported.
 
-### 3 **AI Flow Builder Cannot Be Used on Existing Flows**
+### 3. **AI Flow Builder Cannot Be Used on Existing Flows**
 - The AI Flow Builder is designed to create new Flows **from scratch**. It **cannot** be used on existing Flows.
 
-### 4 **Scheduling Can Be Set Up Only After Publishing**
+### 4. **Scheduling Can Be Set Up Only After Publishing**
 - Flow scheduling can be configured **only after** the AI Flow Builder process is **completed and published** as a standard Flow.
 
-### 5 **Flow Structure Cannot Be Changed After Confirmation**
+### 5. **Flow Structure Cannot Be Changed After Confirmation**
 - Once you **confirm the Flow structure and components**, **it cannot be modified later** within the AI Flow Builder. Any further modifications must be made in the standard Flow Builder.
