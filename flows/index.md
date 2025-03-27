@@ -1,6 +1,6 @@
 ---
 title: Flows
-permalink: /flows/
+permalink: /flows/ai-flow-builder/
 ---
 
 * TOC
