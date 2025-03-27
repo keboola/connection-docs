@@ -11,6 +11,8 @@ AI Flow Builder is an experimental AI assistant that helps you create a simple 3
 
 This version is offered **free of charge** as it is subject to change, and we plan to expand its functionalities in the future.
 
+{% include public-beta-warning.html %}
+
 ## Functionality
 
 The AI-assisted Flow Builder process is divided into **three logical episodes**.
