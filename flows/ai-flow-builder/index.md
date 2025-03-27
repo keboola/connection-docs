@@ -1,6 +1,6 @@
 ---
 title: AI Flow Builder
-permalink: /ai-flow-builder/
+permalink: /flows/ai-flow-builder/
 ---
 
 * TOC
