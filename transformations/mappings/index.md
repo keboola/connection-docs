@@ -271,6 +271,16 @@ enabled only when *Incremental* is switched on.
 
 **Important:** Multiple output mappings can be created for your transformation. Each source table can be used only once however.
 
+#### Delete Rows in Output Mapping
+This feature allows you to selectively remove rows from the destination Storage table before importing new data, enabling precise control over incremental data updates. The deletion option is available only when Incremental loading is enabled. There are 2 options you can use:
+
+1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
+
+2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions.
+
+This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table
+
+
 ### File Output Mapping
 A file output mapping is used to store files produced by the transformation as [Storage files](/storage/files/). 
 If you want to store CSV files as [Storage tables](/storage/tables/), use 
