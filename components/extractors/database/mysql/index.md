@@ -492,33 +492,6 @@ set @@global.binlog_row_value_options="" ;
 ```
 
 
-
-[//]: # (### Signaling Table)
-
-[//]: # ()
-[//]: # (When not run in `read_only` mode, the connector needs access to a signaling table in the source database. The connector uses the signaling table to)
-
-[//]: # (store various signal events and incremental snapshot watermarks.)
-
-#### Creating a signaling data collection
-
-You create a signaling table by submitting a standard SQL DDL query to the source database.
-
-**Prerequisites**
-
-You have sufficient access privileges to create a table on the source database.
-
-**Procedure**
-
-Submit an SQL query to the source database to create a table that is consistent with the required structure, as shown in
-the following example:
-
-The following example shows a CREATE TABLE command that creates a three-column debezium_signal table:
-
-```sql
-CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT NULL, data TEXT NULL);
-```
-
 ## Configuration
 
 ### Connection Settings
