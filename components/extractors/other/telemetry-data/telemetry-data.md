@@ -54,6 +54,7 @@ This table shows snapshots of buckets in Storage.
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
+| `kbc_bucket_owner_id` | Datashare owner | `11358_kbc-eu-central-1` |
 
 ### kbc_branch
 This table shows main and development [branches](/components/branches/) in the project.
@@ -574,6 +575,7 @@ This table shows data about the current state of storage buckets.
 | `description` | Description of the bucket (filled by the user) | `twitter extractor raw data` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
+| `kbc_bucket_owner_id` | Datashare owner | `11358_kbc-eu-central-1` |
 
 ### kbc_column
 This table shows data about the current state of storage columns.
