@@ -714,6 +714,9 @@ items:
       - url: /management/jobs/
         title: Jobs
 
+      - url: /management/notifications/
+        title: Notifications
+        
       - url: /management/project/
         title: Project
         items:
