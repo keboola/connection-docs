@@ -266,8 +266,10 @@ as a new row will be replaced. See the description of
 [incremental loading](/storage/tables/#incremental-loading) for a detailed explanation and examples.
 - **Primary key** --- The [primary key](/storage/tables/#primary-keys) of the destination table; if the table already exists, 
 the primary key must match. Feel free to use a multi-column primary key.
-- **Delete rows** --- Delete rows matching the criteria from the destination table before importing the data. This option is 
-enabled only when *Incremental* is switched on.
+-  **Delete rows** --- When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
+   1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
+   2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. 
+  This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table
 
 **Important:** Multiple output mappings can be created for your transformation. Each source table can be used only once however.
 
