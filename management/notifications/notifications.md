@@ -53,7 +53,7 @@ From the **Notifications** tab in a Flow:
 - Enter other email addresses or webhook URLs.
 
 {: .image-popup}
-![Set Up Notifications](/management/flow-notifications.png)
+![Set Up Notifications](/management/notifications/flow-notifications.png)
 
 Notifications can be sent when:
 - The flow completes successfully.
