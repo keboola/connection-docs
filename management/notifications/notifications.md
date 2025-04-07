@@ -76,6 +76,7 @@ Use this to monitor specific transformations, data loads, or other components in
 ### 4. Credit Consumption Notifications
 - Send alerts when credit usage crosses a threshold.
 - **Email notifications only**, configured at the **organization level**.
+- **Only email notifications are supported** — webhook delivery is **not available** for this type.
 - More info: [Telemetry Email Notifications](/management/telemetry/#email-notifications).
 
 ## Webhook Notifications
@@ -87,6 +88,11 @@ Keboola supports webhook notifications alongside email. This allows real-time al
 - **Payload Format:** JSON via HTTP `POST` request with `application/json` content-type.
 - **Simple Integration:** No custom headers or payload transformations at this stage.
 - **Timeout & Retry:** 5-second timeout, **no retries** — ensure your endpoint is reliable.
+
+### Supported For
+- Orchestration notifications  
+- Flow notifications  
+- Job notifications 
 
 {: .image-popup}
 ![Webhook Setup UI](/management/notifications/webhook-notification.png)
