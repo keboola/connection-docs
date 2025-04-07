@@ -91,7 +91,7 @@ Keboola supports webhook notifications alongside email. This allows real-time al
 {: .image-popup}
 ![Webhook Setup UI](/management/notifications/webhook-notification.png)
 
-### Example Payload
+#### Example Payload
 
 ```json
 {
