@@ -606,9 +606,6 @@ items:
       - url: /orchestrator/running/
         title: Running
 
-      - url: /orchestrator/notifications/
-        title: Notifications
-
       - url: /orchestrator/design/
         title: Design
 
@@ -714,6 +711,9 @@ items:
       - url: /management/jobs/
         title: Jobs
 
+      - url: /management/notifications/
+        title: Notifications
+        
       - url: /management/project/
         title: Project
         items:
