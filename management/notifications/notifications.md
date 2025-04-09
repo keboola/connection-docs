@@ -8,7 +8,7 @@ permalink: /management/notifications/
 
 # Keboola Notifications Guide
 
-Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage. This guide outlines all available notification types, when to use them, and how to configure them. Notifications help you stay informed about the status of orchestrations, flows, jobs, and credit consumption — either via **email** or **webhooks**.
+Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage. This guide outlines all available notification types, when to use them, and how to configure them. Notifications help you stay informed about the status of orchestrations, flows, jobs, data apps and credit consumption — either via **email** or **webhooks**.
 
 ---
 
@@ -73,7 +73,18 @@ Open a component configuration and go to the **Notifications** tab:
 
 Use this to monitor specific transformations, data loads, or other components individually.
 
-### 4. Credit Consumption Notifications
+### 4. Data App Notifications
+- Get notified when a [Data App](/components/data-apps/) task completes, fails, or runs significantly longer than expected.  
+- Since Data Apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
+  
+- #### How to Configure
+Data App notifications are configured within the **component configuration** of the Data App itself.
+
+- Go to the configuration of your Data App (e.g., Deepnote Notebook Execution Trigger).
+- Open the **Notifications** tab.
+- Enter one or more **email addresses** or **webhook URLs**.
+
+### 5. Credit Consumption Notifications
 - Send alerts when credit usage crosses a threshold.
 - **Email notifications only**, configured at the **organization level**.
 - **Only email notifications are supported** — webhook delivery is **not available** for this type.
