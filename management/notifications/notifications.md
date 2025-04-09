@@ -77,7 +77,7 @@ Use this to monitor specific transformations, data loads, or other components in
 - Get notified when a [Data App](/components/data-apps/) task completes, fails, or runs significantly longer than expected.  
 - Since Data Apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
   
-- #### How to Configure
+#### How to Configure
 Data App notifications are configured within the **component configuration** of the Data App itself.
 
 - Go to the configuration of your Data App (e.g., Deepnote Notebook Execution Trigger).
