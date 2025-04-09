@@ -229,7 +229,7 @@ For `Custom`, users can select colors using the color pickers and choose the des
 ## Sleep and Resume
 Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after an hour of inactivity. Here's how it works:
 
-**Activity Monitoring**: The app monitors for HTTP requests. If no activity is detected for one hour, the app automatically suspends.
++**Activity Monitoring**: The app monitors for HTTP requests and active Websocket connections. If no activity is detected for one hour, the app automatically suspends. Please note that an inactive browser tab where your app is open may still cause background activity, potentially preventing your app from sleeping. If you're using Google Chrome, you may want to enable Memory Saver in the settings which can help preventing such background activity.
 
 **Automatic Resumption**: As soon as a new request is made to the app, it wakes up and resumes operation. While the resume process is designed to be smooth, the first request upon waking may take slightly longer to process.
 
