@@ -101,9 +101,6 @@ items:
               - url: /components/extractors/communication/slack/
                 title: Slack
 
-              - url: /components/extractors/communication/zendesk/
-                title: Zendesk
-
           - url: /components/extractors/database/
             title: Databases
             items:
