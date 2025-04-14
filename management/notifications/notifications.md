@@ -137,6 +137,12 @@ Keboola supports webhook notifications alongside email. This allows real-time al
   "eventType": "job-succeeded"
 }
 ```
+
+### Current limitations
+The webhook feature currently sends the full raw event data as a JSON POST request. Custom payload formatting is not yet supported.
+
+As a result, some third-party systems—such as Slack, Microsoft Teams, or Discord—may not accept or display these webhook messages correctly, as they require a specific payload structure (e.g., { "text": "message" } for Slack).
+
 ## Best Practices
 
 1. Use **group email addresses** for notifications to ensure team-wide awareness of critical issues.  
