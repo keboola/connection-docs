@@ -11,8 +11,6 @@ Keboola Partner), who is also primarily responsible for L1 support unless agreed
 [Keboola projects](/management/#project-status), organizations,
 and maintainers are therefore organized into a hierarchy:
 
-iashfioadshf oiasdfhoasd f asdf a
-
 {: .image-popup}
 ![Screenshot - Project Hierarchy](/management/organization/organizations-maintainers.png)
 
