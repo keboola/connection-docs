@@ -270,30 +270,30 @@ the primary key must match. Feel free to use a multi-column primary key.
    1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
    2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. 
   This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table
- - **How the Delete Rows feature Works**
+	- **How the Delete Rows feature Works**
 
-     Deletion is performed using SQL `DELETE` statements:
+     	Deletion is performed using SQL `DELETE` statements:
 
-     - Each deletion query you configure creates a separate SQL `DELETE` statement:
+     	- Each deletion query you configure creates a separate SQL `DELETE` statement:
 
-       ```sql
-       DELETE FROM table_name WHERE condition;
-       ```
+       	```sql
+       	DELETE FROM table_name WHERE condition;
+       	```
 
-     - Multiple filters within a single query combine into a single `DELETE` with `AND` conditions:
+     	- Multiple filters within a single query combine into a single `DELETE` with `AND` conditions:
 
-       ```sql
-       DELETE FROM table_name WHERE condition1 AND condition2 AND ...;
-       ```
+       	```sql
+       	DELETE FROM table_name WHERE condition1 AND condition2 AND ...;
+       	```
 
-     - Multiple queries result in separate `DELETE` statements, functioning as logical `OR`:
+     	- Multiple queries result in separate `DELETE` statements, functioning as logical `OR`:
 
-       ```sql
-       DELETE FROM table_name WHERE condition1;
-       DELETE FROM table_name WHERE condition2;
-       ```
+       	```sql
+       	DELETE FROM table_name WHERE condition1;
+       	DELETE FROM table_name WHERE condition2;
+       	```
 
-     In this scenario, rows matching **any** of the specified conditions across the queries will be deleted.
+     	In this scenario, rows matching **any** of the specified conditions across the queries will be deleted.
 
      **Note:** This process enables advanced row-level deletion logic, suitable for dynamic datasets where conditions may change per run.
 
