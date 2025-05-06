@@ -66,7 +66,7 @@ Project templates differ mainly in the project expiration time. Some may be subj
 
 ## Organization Settings
 
-### Auto Join
+### Auto Join 
 Some organizations may prefer to explicitly approve [access](/management/project/users/#who-can-access-a-project) 
 to their project by the [support team](/management/support/#require-approval-for-support-access). 
 To disable Auto Join and require approval for support accounts, click the **Change** link to modify the settings:

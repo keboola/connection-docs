@@ -14,7 +14,7 @@ For the integration to work, your Snowflake account must be accessible from a su
 To access Keboola-managed data, you should use only the provided roles and avoid granting permissions on Keboola-managed resources.
 
 #### Read-only access to project storage
-If your project has the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature enabled, then a role `KEBOOLA_$PROJECTID_RO` is provided for each project. 
+If your project has the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature enabled, then a role `KEBOOLA_<PROJECT_ID>_RO` (for example `KEBOOLA_5762_RO`) is provided for each project. 
 This role grants read-only access to all the schemas and tables in the project. You can assign this role to any of your roles or users to allow access to the project's storage.
 
 #### Read-only access without granting roles in Snowflake
@@ -31,14 +31,14 @@ possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/al
 * Do not modify the root role created when registering the backend.
 * Do not modify the warehouse created when registering the backend.
 * Do not modify the user created when registering the backend.
-* Do not modify the project databases (`KEBOOLA_$PROJECTID`).
+* Do not modify the project databases (`KEBOOLA_<PROJECT_ID>`).
   * Particularly, do not change ownership of the database or grant future permissions on objects in the database.
 * Do not modify the schemas in a project database.
   * Particularly, do not change ownership of the schemas or grant future permissions on objects in those schemas.
 * Do not modify the tables in schemas. 
 * Do not grant future permissions on tables.
 * If the dynamic backends feature is enabled, do not change the backends created when enabling the feature.
-* If the read-only input mapping feature is enabled, the role name is `KEBOOLA_$PROJECTID_RO`.
+* If the read-only input mapping feature is enabled, the role name is `KEBOOLA_<PROJECT_ID>_RO`.
   * You can grant this role to any of your roles or users. They will get read-only access to the data stored in a project's storage.
   * Granting new tables and schemas and even linked buckets is handled automatically by Storage API.
 
@@ -70,4 +70,3 @@ By default, you can have up to **100** service accounts per project to control r
 ----
 
 Additional BigQuery backend limits can be found here: [BigQuery API Quotas and Limits](https://cloud.google.com/bigquery/quotas#api_request_quotas).
-

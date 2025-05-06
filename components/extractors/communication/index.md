@@ -15,5 +15,4 @@ The following data source connectors support communication systems:
 - [Intercom](/components/extractors/communication/intercom/) 
 - [MS Outlook (Office 365)](/components/extractors/communication/ms-outlook/)
 - [Slack](/components/extractors/communication/slack/) 
-- [Zendesk](/components/extractors/communication/zendesk/) 
 - And [more](https://components.keboola.com/components)

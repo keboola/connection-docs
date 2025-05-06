@@ -101,9 +101,6 @@ items:
               - url: /components/extractors/communication/slack/
                 title: Slack
 
-              - url: /components/extractors/communication/zendesk/
-                title: Zendesk
-
           - url: /components/extractors/database/
             title: Databases
             items:
@@ -238,9 +235,6 @@ items:
 
               - url: /components/extractors/social/instagram/
                 title: Instagram
-
-              - url: /components/extractors/social/twitter/
-                title: Twitter
 
               - url: /components/extractors/social/youtube/
                 title: YouTube Data API
@@ -460,7 +454,12 @@ items:
           - url: /components/data-apps/general-design-guide/
             title: General Design Guide
           - url: /components/data-apps/lock-streamlit-version/
-            title: Locking Streamlit Version on GitHub Deployment
+            title: Locking Streamlit Version
+            items:
+              - url: /components/data-apps/lock-streamlit-version/code-deployment/
+                title: Code Deployment
+              - url: /components/data-apps/lock-streamlit-version/git-deployment/
+                title: Git Repository Deployment
           - url: /components/data-apps/oidc/
             title: OpenID Connect
             items:
@@ -588,6 +587,9 @@ items:
 
   - url: /flows/
     title: Flows
+    items:
+      - url: /flows/ai-flow-builder/
+        title: AI Flow Builder
 
   - url: /orchestrator/
     title: Orchestrations
@@ -600,9 +602,6 @@ items:
 
       - url: /orchestrator/running/
         title: Running
-
-      - url: /orchestrator/notifications/
-        title: Notifications
 
       - url: /orchestrator/design/
         title: Design
@@ -709,6 +708,9 @@ items:
       - url: /management/jobs/
         title: Jobs
 
+      - url: /management/notifications/
+        title: Notifications
+        
       - url: /management/project/
         title: Project
         items:

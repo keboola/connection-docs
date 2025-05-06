@@ -229,7 +229,7 @@ For `Custom`, users can select colors using the color pickers and choose the des
 ## Sleep and Resume
 Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after an hour of inactivity. Here's how it works:
 
-**Activity Monitoring**: The app monitors for HTTP requests. If no activity is detected for one hour, the app automatically suspends.
++**Activity Monitoring**: The app monitors for HTTP requests and active Websocket connections. If no activity is detected for one hour, the app automatically suspends. Please note that an inactive browser tab where your app is open may still cause background activity, potentially preventing your app from sleeping. If you're using Google Chrome, you may want to enable Memory Saver in the settings which can help preventing such background activity.
 
 **Automatic Resumption**: As soon as a new request is made to the app, it wakes up and resumes operation. While the resume process is designed to be smooth, the first request upon waking may take slightly longer to process.
 
@@ -385,12 +385,12 @@ Please note that the versions of these packages may change, as the newest versio
 
 ### Actions Menu
 {: .image-popup}
-![Secrets](/components/data-apps/data_apps-manage-redeploy.png)
+![Secrets](/components/data-apps/data_apps-manage-redeploy-2.png)
 
 - **Deploy Data App** – starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
 - **Open Data App** – opens a new window with your data app.
 - **Redeploy** – if you made changes in the data app configuration, you have to redeploy it for the changes to take effect.
-- **Terminate Data App** – stops the data app. The container in which the application is running will be stopped, and the app's URL will no longer be available. The configuration of the app will remain intact.
+- **Suspend Data App** – stops the data app. The container in which the application is running will be stopped, and the app's URL will no longer be available. The configuration of the app will remain intact.
 - **Delete Data App** – stops the data app deployment and deletes its configuration.
 
 ### Debugging App Deployment
@@ -399,6 +399,36 @@ For example, there may be a conflict with the specified packages:
 
 {: .image-popup}
 ![Secrets](/components/data-apps/data_apps-job_error_log.png)
+
+## AgGrid Enterprise License
+The AgGrid Enterprise License is now available for Streamlit Data Apps in Keboola, offering enhanced data manipulation capabilities, including:
+
+- Inline dataset editing.
+- Advanced features such as pivoting, filtering, and sorting.
+- A professional interface, free from the "trial use only" watermark.
+ 
+Ensure your data app is configured to use the AgGrid component to take advantage of these enhanced features.
+
+### How to Enable the License
+The **enterprise license** is **pre-configured for all Keboola stacks**, so no additional setup is required for supported applications.
+
+To access the license key in your Streamlit app, use the following code:
+
+```
+import streamlit as st
+from keboola_streamlit import KeboolaStreamlit
+
+URL = st.secrets["kbc_url"]
+TOKEN = st.secrets["kbc_token"]
+
+keboola = KeboolaStreamlit(URL, TOKEN)
+license_key = keboola.aggrid_license_key
+```
+
+You can use this license_key directly in **AgGrid**.
+
+**Reference Implementation:**   
+[Keboola Streamlit Integration](https://github.com/keboola/keboola_streamlit/blob/main/src/keboola_streamlit/keboola_streamlit.py#L31)
 
 ## Example Data Apps
 
