@@ -32,7 +32,7 @@ Let us show you how to organize individual tasks into steps, set up notification
 - [Access the Flow Builder](#access-the-flow-builder)
 - [Build the flow](#build-the-flow)
 - [Schedule and automate your flow](#schedule-and-automate)
-- [Set up notifications](#set-up-notifications)
+- [Set up notifications](/management/notifications/)
 - [Check how your flow is running](#check-run-history)
 
 ## Access the Flow Builder
@@ -115,23 +115,6 @@ You can select predefined intervals or set your own. Another option is to use tr
 
 {: .image-popup}
 ![Set Schedule](/flows/set-schedule.png)
-
-## Set Up Notifications
-Once your pipeline or workflow is complete, you may not need to manage it actively every day. Stay on top of your flow's performance by setting up notifications for errors or long run times. From the drop-down 
-list of the project users in the **Notifications** tab, you can select (a) project user(s) who will receive the notification, or you can enter another email address. However, consider using a group email to keep 
-the whole team informed and responsive to any issues.
-
-You can set up an email notification to the following situations: 
-
-- The flow finishes successfully.
-- The flow finishes with warnings.  
-- The flow fails with an error message.
-- The job process takes longer than usual. 
-
-{: .image-popup}
-![Set Up Notifications](/flows/notifications.png)
-
-Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
 
 ## Check Run History
 In the tab **All Runs**, you can check how your flow is running with a detailed breakdown of each task. 
