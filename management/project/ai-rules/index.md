@@ -6,7 +6,7 @@ permalink: /management/project/ai-rules/
 * TOC
 {:toc}
 
-The **AI Rules** section allows users to define specific instructions for AI functionality within Keboola Connection. Currently, users can customize how the **AI Generated Descriptions** feature behaves and responds in different contexts.
+The **AI Rules** section allows users to define specific instructions for AI functionality within Keboola platform. Currently, users can customize how the **AI Generated Descriptions** feature behaves and responds in different contexts.
 
 **Customizable AI Instructions**
 
