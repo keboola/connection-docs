@@ -511,7 +511,7 @@ set @@global.binlog_row_value_options="" ;
 #### SSH tunnel
 
 You may opt to use an SSH Tunnel to secure your connection. Find detailed instructions for setting up an SSH tunnel in
-the [developer documentation](https://developers.keboola.com/integrate/database/. While setting up an SSH tunnel requires some work, it is the most reliable and secure
+the [developer documentation](https://developers.keboola.com/integrate/database/). While setting up an SSH tunnel requires some work, it is the most reliable and secure
 option for connecting to your database server.
 
 ### Data Source
