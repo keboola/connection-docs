@@ -211,7 +211,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `token_id` | Identifier of the token that initiated the job | `145062` |
 | `token_name` | Name of the token that initiated the job | `Orchestrator GDrive` |
 | `kbc_token_id` | Unique identifier of the token with stack identification | `145062_kbc-eu-central-1` |
-| `flow` | Name of the flow including the ID of the flow | `Telemetry (ID: 915976687)` |
+| `flow` | The numeric configuration ID of the flow | `915976687` |
 | `job_time_credits_used` | Number of time credits consumed by the job | `0.001218890000` |
 | `job_billed_credits_used` | Number of actually billed credits | `0.001218890000` |
 | `job_total_time_sec` | Total time of the job in seconds (from initial trigger; start may be delayed) | `63` |
