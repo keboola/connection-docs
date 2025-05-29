@@ -63,11 +63,11 @@ If you need more information, please contact your CSM.
 | Small                                 | 1 hour                  | **6**                 |
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |
-| **Data Science job / workspace**      |                         |                       |
-| XSmall                                | 1 hour                  | **0.5**               |
-| Small                                 | 1 hour                  | **1**                 |
-| Medium                                | 1 hour                  | **2**                 |
-| Large                                 | 1 hour                  | **6**                 |
+| **Data Science job / workspace** (from Jun 1, 2025)      |                         |                       |
+| XSmall (jobs only)                                | 1 hour                  | **0.2**               |
+| Small                                 | 1 hour                  | **0.4**                 |
+| Medium                                | 1 hour                  | **0.6**                 |
+| Large                                 | 1 hour                  | **2**                 |
 | **dbt job**                           |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Remote                                | 1 hour                  | **2**                 |
