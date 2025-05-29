@@ -91,6 +91,18 @@ warning = function(w) {}
 )
 {% endhighlight %}
 
+## Dynamic Backends
+If you have a large amount of data in databases and complex queries, your transformation might run for a couple of hours.
+To speed it up, you can change the backend size in the configuration. R transformations suport the following sizes:
+- XSmall
+- Small _(default)_
+- Medium
+- Large
+
+Scaling up the backend size allocates more resources to speed up your transformation, which impacts [time credits consumption](/management/project/limits/#project-power--time-credits).
+
+***Note:** Dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
+
 ## Development Tutorial
 We recommend that you create an [R Workspace](/transformations/workspace) with the same
 input mapping your transformation will use. This is the fastest way to develop your transformation code.
