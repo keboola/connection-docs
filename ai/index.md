@@ -6,8 +6,6 @@ permalink: /ai/
 * TOC
 {:toc}
 
-# AI Features
-
 Keboola's AI-powered capabilities help you build, optimize, and automate your data pipelines with intelligent assistance. From automated flow creation to smart component recommendations, our AI features are designed to accelerate your data operations and reduce manual effort.
 
 ## Overview
