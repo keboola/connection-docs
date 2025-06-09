@@ -16,5 +16,5 @@ This page provides everything needed to set up and manage those integrations, in
 For more information refer to the [MCP Server documentation section](/ai/mcp-server/).
 
 {: .image-popup}
-![screenshot.png](screenshot.png)
+![MCP Server configuration screenshot](screenshot.png)
 
