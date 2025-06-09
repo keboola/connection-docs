@@ -735,6 +735,9 @@ items:
           - url: /management/project/ai-rules/
             title: AI Rules
 
+          - url: /management/project/mcp-server/
+            title: MCP Server
+
       - url: /management/payg-project/
         title: Free Plan
 
