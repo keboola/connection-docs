@@ -7,7 +7,7 @@ permalink: /ai/mcp-server/
 * TOC
 {:toc}
 
-Connect your MCP clients (**Cursor**, **Claude**, **Windsurf**, **VS Code**) and AI assistants to your **Keboola Project** and give them the powers of Keboola Expert user. 
+Connect your MCP clients (**Cursor**, **Claude**, **Windsurf**, **VS Code**) and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user. 
 
 Query data, create transformations, write SQL queries, and build your pipelines — **all with no clicks required.**
 
@@ -32,7 +32,7 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 ![mcp_debug](/ai/mcp-server/MCP_Claude-Debug_Error.gif)
 ## Connecting to Keboola's MCP Server
 
-Keboola MCP Server is hosted on every multi-tenant stack and supports oAuth authentication. You can use the remote server in any AI Assistant that supports remote sse connection and oAuth authentication.
+Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote SSE connection and OAuth authentication.
 
 ### Remote Server Setup
 
@@ -44,74 +44,7 @@ In case your AI assistant supports remote connection, you can connect to Keboola
 2. Copy the server URL and paste it into your AI assistant's settings.
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
-### Local Server Setup
-
-Some of the AI Assistants or MCP Clients do not support the remote oauth connection yet. In that case you may use a local deployment.
-
-#### Using mcp-remote adapter
-
-1. **Make sure you have [Node.js](https://nodejs.org/) installed.**
-   - **macOS**
-   ```bash
-   brew install node
-   ```
-   - **Windows**
-     -  Go to: [https://nodejs.org](https://nodejs.org)
-     - Download the **LTS** version (recommended)
-     - Run the Installer, ensure "npm package manager" is selected
-
-2. **Configure your client using mcp.json:**
-
-    ```json
-    {
-      "mcpServers": {
-        "keboola": {
-          "command": "npx",
-          "args": [
-            "mcp-remote",
-            "https://mcp.<YOUR_REGION>.keboola.com/sse"
-          ]
-        }
-      }
-    }
-    ```
-3. **Login**
-
-Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
-
-#### Using local deployment
-
-1. **Make sure you have Python 3.10+ installed**
-2. **Make sure you have uv installed**
-   - **macOS**
-   ```bash
-   brew install uv
-   ```
-   - **Windows**
-     -  Go to: [https://pypi.org/project/uv/](https://pypi.org/project/uv/)
-     - Download the latest version and install it
-3. **Obtain Storage token from your project**
-   - Go to your Keboola project: **Project Settings → Users & Settings → API Tokens**.
-   - Obtain your [Master token](management/project/tokens/#master-tokens).
-4. **Configure your client using mcp.json:**
-
-    ```json
-    {
-      "mcpServers": {
-        "keboola": {
-          "command": "uvx",
-          "args": [
-            "keboola_mcp_server",
-            "--api-url", "https://connection.YOUR_REGION.keboola.com"
-          ],
-          "env": {
-            "KBC_STORAGE_TOKEN": "your_keboola_storage_token"
-          }
-        }
-      }
-    }
-    ```
-
+For other options of local deployments see the [Developers Documentation](https://developers.keboola.com/integrate/mcp/#running-keboola-mcp-server-locally-using-uv-command).
 
 
 ### Using with Claude Desktop
@@ -129,7 +62,9 @@ Once you save the settings and refresh your AI assistant, you will be prompted t
 
 #### Via mcp-remote adapter
 
-If you don't have paid version you can still use the mcp-remote adapter to connect Claude Desktop to Keboola's MCP Server.
+If you don't have a paid version you can still use the [`mcp-remote`](https://github.com/geelen/mcp-remote) adapter to connect Claude Desktop to Keboola's MCP Server.
+
+> NOTE: This method requires you to have Node.js installed on your computer. For more information refer to the [Developers Documentation](https://developers.keboola.com/integrate/mcp)
 
 1. Open the Claude menu on your computer and select **"Settings…"**
 2. Click on **"Developer"** in the left-hand bar of the Settings pane, and then click on **"Edit Config"**
@@ -138,14 +73,11 @@ If you don't have paid version you can still use the mcp-remote adapter to conne
 {
   "mcpServers": {
     "keboola": {
-      "command": "uvx",
+      "command": "npx",
       "args": [
-        "keboola_mcp_server",
-        "--api-url", "https://connection.YOUR_REGION.keboola.com"
-      ],
-      "env": {
-        "KBC_STORAGE_TOKEN": "your_keboola_storage_token"
-      }
+        "mcp-remote",
+        "https://mcp.<YOUR_REGION>.keboola.com/sse"
+      ]
     }
   }
 }
@@ -155,20 +87,20 @@ If you don't have paid version you can still use the mcp-remote adapter to conne
 ### Using with Cursor
 
 1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`
-2. CLick the Cursor tab
-3. CLick the **"Install In Cursor"** button
+2. Click the Cursor tab
+3. Click the **"Install In Cursor"** button
+4. You'll be prompted to login into your Keboola account and select the project you want to connect to.
 
-**Alternatively**, add this configuration to your `mcp.json` file:
+**Alternatively**, click the button related to your region below:
 
-```json
-{
-  "mcpServers": {
-    "keboola": {
-      "url": "https://mcp.<YOUR_REGION>.keboola.com/sse"
-    }
-  }
-}
-```
+| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                         |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9zc2UifQ%3D%3D)                       |
+| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vc3NlIn0%3D)         |
+| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vc3NlIn0%3D)         |
+| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
+| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
+
 
 ## Available Tools
 
