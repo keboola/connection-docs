@@ -56,20 +56,20 @@ items:
       - url: /tutorial/onboarding/
         title: Keboola Platform Onboarding
         items:
-        - url: /tutorial/onboarding/usage-blueprint/
-          title: Usage Blueprint
+          - url: /tutorial/onboarding/usage-blueprint/
+            title: Usage Blueprint
 
-        - url: /tutorial/onboarding/architecture-guide/
-          title: Multi-Project Architecture
-          items:
-            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
-              title: Business Data Model
+          - url: /tutorial/onboarding/architecture-guide/
+            title: Multi-Project Architecture
+            items:
+              - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+                title: Business Data Model
 
-        - url: /tutorial/onboarding/cheat-sheet/
-          title: Best Practices
+          - url: /tutorial/onboarding/cheat-sheet/
+            title: Best Practices
 
-        - url: /tutorial/onboarding/governance-guide/
-          title: Governance Guide
+          - url: /tutorial/onboarding/governance-guide/
+            title: Governance Guide
 
   - url: /components/
     title: Components
@@ -307,7 +307,7 @@ items:
 
               - url: /components/extractors/other/okta/
                 title: Okta
-                
+
               - url: /components/extractors/other/hibob/
                 title: HiBob
 
@@ -473,7 +473,7 @@ items:
                 title: Okta
           - url: /components/data-apps/terminal-log-tab/
             title: Terminal Log Tab
-                    
+
       - url: /components/branches/
         title: Development Branches
 
@@ -488,7 +488,7 @@ items:
 
       - url: /templates/ai-sms-campaign/
         title: AI SMS Campaign
-        
+
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
 
@@ -500,7 +500,7 @@ items:
 
       - url: /templates/ecommerce/
         title: eCommerce
-        
+
       - url: /templates/ecomm-kpi-dashboard/
         title: eCommerce KPI Dashboard
 
@@ -512,10 +512,10 @@ items:
 
       - url: /templates/kai-sql-bot/
         title: Kai SQL Bot
-        
+
       - url: /templates/mailchimp/
         title: Mailchimp
-        
+
       - url: /templates/media-cashflow/
         title: Media Cashflow
 
@@ -710,7 +710,7 @@ items:
 
       - url: /management/notifications/
         title: Notifications
-        
+
       - url: /management/project/
         title: Project
         items:
@@ -735,6 +735,9 @@ items:
           - url: /management/project/ai-rules/
             title: AI Rules
 
+          - url: /management/project/mcp-server/
+            title: MCP Server
+
       - url: /management/payg-project/
         title: Free Plan
 
@@ -749,3 +752,9 @@ items:
         items:
           - url: /management/telemetry/telemetry-dashboards/
             title: Telemetry Dashboards
+
+  - url: /ai/
+    title: AI Features
+    items:
+      - url: /ai/mcp-server/
+        title: MCP Server
