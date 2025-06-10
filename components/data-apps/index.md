@@ -290,6 +290,7 @@ RUN mkdir .streamlit \
     && pip install --no-cache-dir \
         deepmerge \
         graphviz \
+        keboola.component \
         matplotlib \
         numpy \
         pandas \
