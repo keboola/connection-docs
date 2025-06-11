@@ -39,7 +39,7 @@ Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth auth
 In case your AI assistant supports remote connection, you can connect to Keboola's MCP Server by following these steps:
 
 1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/sse`.
-   - You can find the url in your Keboola [project settings](/management/project/), e.g. navigate to `Users & Settings` > `MCP Server`
+   - You can find the url in your Keboola [Project Settings](/management/project/) under the tab `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
