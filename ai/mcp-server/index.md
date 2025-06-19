@@ -122,8 +122,6 @@ For CLI control, dev environments, or contributing to the MCP Server, check out 
 Need help or want to contribute? [Open an issue on GitHub](https://github.com/keboola/mcp-server/issues/new) to report bugs, request features, or suggest improvements.
 We’d love your ideas, fixes, and feedback to make MCP even better.
 
-Feel free to reach out to us on our [Discord](https://discord.gg/keboola) anytime — we're here to help!
-
 <div class="alert alert-warning">
 <p>Don't forget to give us a <a href="https://github.com/keboola/mcp-server">star on GitHub!</a> </p>
 </div>
