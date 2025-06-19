@@ -47,3 +47,5 @@ when the actual table size is greater than 500MB.
 
 However, any recalculating job can be also invoked manually by [calling the Table
 Optimize method in Storage API](https://keboola.docs.apiary.io/#reference/tables/table-optimize/optimize-table).
+
+A comprehensive [video guide](https://www.youtube.com/watch?v=3jtU7mQX8Zw) on this subject is available on our YouTube channel.
