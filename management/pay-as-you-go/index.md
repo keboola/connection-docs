@@ -25,10 +25,10 @@ Free Plan projects have the following limits:
 ## DWH Backend
 Users can choose between a Keboola-managed backend or their own backend. Read more about Bring Your Own Database [here](storage/byodb/).
 
-## Pricing & Purchasing Aditional Minutes
-Each Free Plan project receives 60 minutes of free runtime per month. Minutes are used for running of any process 
-(a component job, an active Python workspace, SQL queries in Keboola-managed DWH, etc.). The only exception are orchestration jobs,
-which are not consuming any minutes. 
+## Pricing & Purchasing Additional Minutes
+Each Free Plan project receives up to 60 minutes of free runtime per month, limited to the actual usage from the previous month (for example, if a project used only 30 minutes last month, it will receive 30 free minutes this month). Minutes are used for running of any process 
+(component jobs, active Python workspaces, SQL queries in Keboola-managed DWH, etc.). The only exceptions are Flow/Orchestration jobs,
+which do not consume any minutes.
 
 Additional minutes can be purchased within the platform by using a credit card to prevent your jobs being blocked after you have used
 all your free minutes. There is no contract apart from the Free Plan Terms of Services. 
