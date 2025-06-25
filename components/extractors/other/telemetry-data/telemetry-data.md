@@ -34,7 +34,7 @@ Keep in mind that the tables *contact_limit_monthly*, *kbc_organization*, and *u
 ***Note:** You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
 
 ## Project Mode Tables
-The extracted tables provide you with information about your ets, configurations, branches, jobs, sandboxes, projects, users, and security events.
+The extracted tables provide you with information about your buckets, configurations, branches, jobs, sandboxes, projects, users, and security events.
 
 ### kbc_bucket_snapshot
 This table shows snapshots of buckets in Storage.
@@ -54,7 +54,7 @@ This table shows snapshots of buckets in Storage.
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
-| `kbc_bucket_owner_id` | Datashare owner, this field is optional | `11358_kbc-eu-central-1` |
+| `kbc_bucket_owner_id` | Optional field indicating who is responsible for shared data, used for tracking ownership in bucket sharing and the data catalog | `11358_kbc-eu-central-1` |
 
 ### kbc_branch
 This table shows main and development [branches](/components/branches/) in the project.
@@ -575,7 +575,7 @@ This table shows data about the current state of storage buckets.
 | `description` | Description of the bucket (filled by the user) | `twitter extractor raw data` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
-| `kbc_bucket_owner_id` | Datashare owner, this field is optional | `11358_kbc-eu-central-1` |
+| `kbc_bucket_owner_id` | Optional field indicating who is responsible for shared data, used for tracking ownership in bucket sharing and the data catalog | `11358_kbc-eu-central-1` |
 
 ### kbc_column
 This table shows data about the current state of storage columns.
