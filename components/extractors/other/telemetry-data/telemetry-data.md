@@ -606,6 +606,7 @@ This table shows data about columns' metadata.
 | `composite_id` | Folder structure identifier | `799945/storage/kbc_job/kbc_token_id` |
 | `key` | Metadata key | `KBC.datatype.type` |
 | `value` | Metadata value | `VARCHAR` |
+| `provider` | Defines which service or component provided the metadata | `keboola.ex-db-mssql` |
 
 ### kbc_flow_phase
 This table shows data about particular phases of flows.
@@ -775,6 +776,7 @@ This table shows data about metadata of the storage [tables](/storage/tables/).
 | `composite_id` | Folder structure identifier | `729487/storage/daily_credit_changes` |
 | `key` | Metadata key | `KBC.name` |
 | `value` | Metadata value | `out_daily_credit_changes` |
+| `provider` | Defines which service or component provided the metadata | `keboola.ex-db-mssql` |
 
 ### kbc_token
 This table shows data about the storage [tokens](/management/project/tokens/).
@@ -948,6 +950,9 @@ This table shows data about existing [workspaces](/transformations/workspace/). 
 | `storage_size_gb` | Size of the workspace (used for persistent workspaces) | `2` |
 | `kbc_token_id` | Foreign key to the Keboola token creating the workspace | `287689_kbc-us-east-1` |
 | `kbc_token_name` | Name of the token creating the workspace | `john.doe@keboola.com` |
+| `workspace_shared` | Flag indicating if the workspace is shared with other users | `true` |
+| `workspace_read_only_storage_access` | Flag indicating if the workspace has read-only storage access | `false` |
+| `kbc_workspace_name` | Name of the workspace | `My Workspace` |
 
 ### kbc_workspace_event
 This table shows data about [workspace](/transformations/workspace/) events.
