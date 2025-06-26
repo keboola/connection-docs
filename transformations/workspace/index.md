@@ -200,3 +200,5 @@ of production data of your choice. A workspace provides you with a safe and isol
 where you can experiment. The input mapping isolation also means that you can work on live
 production projects without data in the workspace constantly changing --- you update them
 on demand by loading data into the workspace.
+
+A comprehensive [video guide](https://www.youtube.com/watch?v=iQMnh9nqRiE) on this subject is available on our YouTube channel.
