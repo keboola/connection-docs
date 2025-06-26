@@ -205,3 +205,5 @@ with open('/data/in/tables/source.csv', mode='rt', encoding='utf-8') as in_file,
 
 The `kbc` dialect is automatically available in the transformation environment. If you want it in your local environment,
 it is defined as `csv.register_dialect('kbc', lineterminator='\n', delimiter = ',', quotechar = '"')`.
+
+A comprehensive [video guide](https://www.youtube.com/watch?v=l9IFqEStg_A) on this subject is available on our YouTube channel.
