@@ -53,7 +53,7 @@ For other options of local deployments see the [Developers Documentation](https:
 <p>These steps must be done by a Claude organization owner or primary owner, or on either a Claude Pro or Claude Max plan. The added integration will be available to all users in the Claude organization, but each user will still be required to authenticate themselves separately.</p>
 </div>
 
-- Go to [Settings > Integrations](https://claude.ai/settings/integrations)
+- Go to [Settings > Claude settings Configure > Integrations](https://claude.ai/settings/integrations)
 - Click the **"Add more"** button
 - Give the integration a name (Keboola) and paste in your Integration URL
   - `https://mcp.<YOUR_REGION>.keboola.com/sse`
