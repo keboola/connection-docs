@@ -67,33 +67,29 @@ to directly open the JupyterLab interface.
 ![Workspace - Python/R](/transformations/workspace/workspace-connect-pythonr.png)
 
 #### Snowflake
-We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different login type options.
+We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options.
 
-`Person` login type workspace uses SSO and Key Pair authentication methods:
+**Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
 
-- SSO: use the Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface: 
-use the **Connect** button in the **Connect** menu to login to Snowsight using SAML SSO authentication.
-- Key Pair: use your favorite database client or other third-party tool and the Key Pair credentials provided in 
-the **Connect** menu.
+- `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
+- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu.
 
 {: .image-popup}
 ![Workspace - Snowflake](/transformations/workspace/workspace-connect-snowflake-person.png)
 
-`Legacy Service` login type workspace uses SSO and single-factor password authentication methods:
+**Legacy Service** type workspace uses `SSO` and `Password` authentication methods. To connect using:
 
-- SSO: use the Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface: 
-use the **Connect** button in the **Connect** menu to login to Snowsight using SAML SSO authentication.
-- Password: use your favorite database client or other third-party tool and the Password credentials provided in 
-the **Connect** menu.
+- `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
+- `Password` - use your favorite database client or other third-party tool and the Password credentials provided in the **Connect** menu.
 
 {: .image-popup}
 ![Workspace - Snowflake](/transformations/workspace/workspace-connect-snowflake-legacy.png)
 
 >***Important***
 >
->`Legacy Service` is using single-factor password authentication which is being [deprecated by Snowflake](https://docs.snowflake.com/en/user-guide/security-mfa-rollout).
+>**Legacy Service** type workspace is using single-factor password authentication which is being [deprecated by Snowflake](https://docs.snowflake.com/en/user-guide/security-mfa-rollout).
 >As a result, we are deprecating this login type by the end of 2025.
->We recommend using `Person` login type workspace instead, if you don't need to use password authentication.
+>We recommend using `Person` type workspace instead, if you don't need to use password authentication.
 
 #### BigQuery
 To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
