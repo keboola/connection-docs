@@ -97,16 +97,10 @@ To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you hav
 {: .image-popup}
 ![Workspace - BigQuery](/transformations/workspace/workspace-connect-bigquery.png)
 
-#### Other
-To connect to a [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) 
-and [Redshift](https://aws.amazon.com/redshift/) workspaces, you have to use your database client 
-(we like [DBeaver](https://dbeaver.io)) and use the database options provided in the **Credentials** view. 
-If the database client does not have Synapse Driver, look for *Azure SQL Server*.
-
 ### Workspace Lifecycle
 When a workspace is created, it enters the **Active** state and can be used. 
 
-- Database (Snowflake, BigQuery, Redshift, and Synapse) workspaces are billed by the runtime of queries executed in them. As such, we leave them in active state until you delete them. 
+- Database (Snowflake and BigQuery) workspaces are billed by the runtime of queries executed in them. As such, we leave them in active state until you delete them. 
 - JupyterLab workspaces are billed by their running time. They can be terminated and resumed, in order to reduce running time while preserving your work. 
 
 {: .image-popup}
