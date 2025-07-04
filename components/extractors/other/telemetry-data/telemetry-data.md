@@ -198,7 +198,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
-| `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `OpenRefine`, `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
+| `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
 | `credit_type` | Type of credit associated with the job. Possible values: <br> `KBC`, `SQL`, `CDC` <br> Does not necessarily represent actually used credit, as SQL and CDC credits are only consumed if they exist in the contract ([info](/management/project/limits/#project-power--time-credits)). The type of actually billed credit is defined in the [kbc_usage_metrics_values](/components/extractors/other/telemetry-data/#kbc_usage_metrics_values) table | `KBC` |
 | `job_run_id` | Run ID of the job – multiple jobs can run under the same Run ID | `117643429.117644388` |
 | `job_start_at` | Datetime when the job started | `2020-03-15 11:59:39` |

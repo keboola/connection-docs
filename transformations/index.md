@@ -30,7 +30,7 @@ The schema below shows a high-level overview of transformations:
 {: .image-popup}
 ![Transformations schema](/transformations/transformations-schema.svg)
 
-A transformation is represented by a **transformation script** (SQL, Julia, OpenRefine, Python, R), which you
+A transformation is represented by a **transformation script** (SQL, Julia, Python, R), which you
 can use to manipulate your data. To ensure the safety of the data in Storage, a transformation
 operates in a separate **staging Storage** created for each transformation. 
 
@@ -70,7 +70,6 @@ A backend is the engine running the transformation script. It is a database serv
 [BigQuery](https://cloud.google.com/bigquery), 
 or a language interpreter 
 ([Julia](https://julialang.org/), 
-[OpenRefine](https://openrefine.org/),
 [Python](https://www.python.org/about/),
 [R](https://www.r-project.org/about.html).
 
@@ -88,8 +87,8 @@ The following are the currently available backends:
 - **SQL** --- [Snowflake](/transformations/snowflake-plain/) is offered as the default backend, but 
 you can apply for your own [Redshift](/transformations/redshift/) cluster. You can also use 
 [Microsoft Synapse](/transformations/synapse-plain/), or [Google BigQuery](/transformations/bigquery/) if it is enabled for your project.
-- **Script** --- [Julia](/transformations/julia/), [OpenRefine](/transformations/openrefine/), 
-[Python](/transformations/python-plain/), or [R](/transformations/r/).
+- **Script** --- [Julia](/transformations/julia/),
+[Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
 Choose according to your taste and available libraries.
 
 ***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
@@ -114,208 +113,131 @@ develop transformations without downloading and installing a database client.
 You can also use a workspace represented by an isolated [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) instance for Julia, 
 Python, and R transformations.
 
-## Transformation Versions & Features
-The current and most-used transformations are now marked as legacy. They receive important updates 
-(e.g., Python, R, Julia updates) but won't receive any new features. *Legacy transformations* will be available 
-together with *new transformations* for a long period to ensure smooth migration (which will start 
-once all features from legacy transformations are available in new transformations and there is a migration path).
-New transformations are not available in all projects at the moment. Therefore, using the legacy 
-transformations for day-to-day work is perfectly okay.
-
-Some features of legacy transformations are not yet available in new transformations, and some will 
-never be available in new transformations. The following table shows the feature status as of **October 2020**.
-New transformations are generally available on Azure-based [stacks](/overview/#stacks).
+## Transformations Features
 
 <table>
 <tr>
-    <th colspan='2'>Feature</th><th>Legacy Transformations</th><th>New Transformations</th>
+    <th colspan='2'>Feature</th>
+    <th>Availability/Limitations</th>
 </tr>
 <tr>
-    <th rowspan='13'>Backend</th>
-    <th><a href='/transformations/julia/'>Julia Transformations</a></th> 
-    <td>✓</td>
+    <th rowspan='8'>Backend</th>
+    <th>Julia Transformations</th> 
     <td>Planned</td>
-</tr>
-<tr>
-    <th><a href='/transformations/openrefine/'>OpenRefine Transformations</a></th> 
-    <td>✓</td>
-    <td>Not available</td>
 </tr>
 <tr>
     <th><a href='/transformations/python-plain/'>Python Transformations</a></th> 
     <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/r-plain/'>R Transformations</a></th> 
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/transformations/r/'>R Transformations</a></th> 
-    <td>✓</td>
-    <td>✓</td>
-</tr>
-<tr>
-    <th><a href='/transformations/redshift-plain/'>Redshift Transformations</a></th> 
-    <td>✓</td>
-    <td>✓</td>
-</tr>
-    <tr>
     <th><a href='/transformations/snowflake-plain/'>Snowflake Transformations</a></th> 
-    <td>✓</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/bigquery/'>Google BigQuery</a></th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/snowflake-plain/'>Snowflake Transformations Query timeout</a></th> 
-    <td>900s (configurable per project via Support)</td>
     <td>7200s (configurable per transformation)</td>
 </tr>
     <tr>
     <th><a href='/transformations/snowflake-plain/#dynamic-backends'>Snowflake Transformations Dynamic Backend</a></th> 
-    <td>Not available</td>
-    <td>✓</td>
-</tr>
-<tr>
-    <th><a href='/transformations/synapse-plain/'>Synapse Transformations</a></th> 
-    <td>Not available</td>
-    <td>✓</td>
-</tr>
-<tr>
-    <th><a href='/transformations/exasol/'>Exasol Transformations</a></th> 
-    <td>Not available</td>
-    <td>✓</td>
-</tr>
-<tr>
-    <th><a href='/transformations/teradata/'>Teradata Transformations</a></th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/oracle/'>Oracle Transformations</a></th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
-    <th rowspan='9'>Development tools</th>
+    <th rowspan='7'>Development tools</th>
     <th>Naming</th> 
-    <td><a href='/transformations/sandbox/'>Sandbox</a></td>
     <td><a href='/transformations/workspace/'>Workspace</a></td>
 </tr>
 <tr>
     <th>Max number</th> 
-    <td>One per user and type</td>
     <td>Unconstrained</td>
 </tr>
 <tr>
     <th>Lifecycle</th> 
-    <td>Terminates after five days; can be extended manually</td>
     <td>Sleeps after 1 hour of inactivity; can be resumed (if the auto-sleep feature is supported and enabled)</td>
 </tr>
 <tr>
     <th>Resume</th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
     <th>Load data</th> 
-    <td>Only when starting</td>
     <td>✓</td>
 </tr>
 <tr>
     <th>Unload data</th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
     <th>IDE</th> 
-    <td>Jupyter Notebook or RStudio</td>
     <td>JupyterLab</td>
 </tr>
+
 <tr>
     <th rowspan='9'>Other features</th>
-    <th>Transformations buckets</th> 
     <td>✓</td>
     <td>Not available</td>
 </tr>
 <tr>
     <th>Versioning</th> 
-    <td>Limited</td>
     <td>✓</td>
 </tr>
 <tr>
     <th>Copying</th> 
-    <td>Limited</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/#phases'>Phases</a></th> 
-    <td>✓</td>
     <td>Not available</td>
 </tr>
 <tr>
     <th><a href='/transformations/#dependencies'>Dependencies</a></th> 
-    <td>✓</td>
     <td>Not available</td>
 </tr>
 <tr>
     <th><a href='https://developers.keboola.com/integrate/storage/api/configurations/'>API Interface</a></th> 
-    <td>Non-standard</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/variables/#shared-code'>Shared code</a></th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/variables/#variables'>Variables</a></th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 <tr>
     <th><a href='/transformations/code-patterns'>Code patterns</a></th> 
-    <td>Not available</td>
     <td>✓</td>
 </tr>
 </table>
 
-#### Which Version Am I Using?
-In the transformation overview, if you are seeing workspaces and shared code, you're using *new transformations*:
+### Transformations
 
-{: .image-popup}
-![New Transformations Overview](/transformations/new-transformations-1.png)
-
-In the transformation detail, if you're seeing variables and shared code, you're using *new transformations*:
-
-{: .image-popup}
-![New Transformations Detail](/transformations/new-transformations-2.png)
-
-In the transformation detail, if you're seeing buckets, and sandboxes, you're using *legacy transformations*:
-
-{: .image-popup}
-![Legacy Transformations Overview](/transformations/legacy-transformations-1.png)
-
-In the transformation detail, if you're seeing dependent transformations, phases and sandbox, you're using 
-*legacy transformations*:
-
-{: .image-popup}
-![Legacy Transformations Overview](/transformations/legacy-transformations-2.png)
-
-### New Transformations
-New transformations behave like any other [component](/components/). This means that they use the 
+Transformations behave like any other [component](/components/). This means that they use the 
 standard [API](https://developers.keboola.com/integrate/storage/api/configurations/) to manipulate
 and run configurations and that creating your own 
 [transformation components](https://developers.keboola.com/extend/component/) is possible.
 
-New transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
+Transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
 encouraging users to create reusable blocks of code. They also support 
 [variables](/transformations/variables/#variables) that can be used to parametrize transformations.
 
-Apart from that, new transformations come with [workspaces](/transformations/workspace/) (previously named Sandboxes),
+Apart from that, transformations come with [workspaces](/transformations/workspace/) (previously named Sandboxes),
 which have many new features, such as loading and unloading data with a running workspace or resuming the workspace.
 
 #### Writing Scripts
+
 The transformation script can be organized into pieces that we call **code**, and these can be
 further organized into **blocks**. This allows you to somehow structure lengthy scripts.
 The structure provides **no executional isolation** --- all code pieces execute sequentially
@@ -353,25 +275,8 @@ When triggered
 - after typing `{% raw %}{{{% endraw %}`, it will suggest available variables.
 - in other cases, it will suggest everything (see the screenshot above).
 
-### Legacy Transformations
-Legacy transformations are the current version of transformations available in most US and EU stack projects. Each transformation bucket can contain any number of individual transformations.
-It should represent a logical set of operations you want to perform together.
-
-Though marked as legacy, legacy transformations are perfectly okay to use for daily work since they still receive updates, 
-but they do not include new features. Legacy transformations are grouped into folders called **transformation buckets**.
-
-We recommend avoiding complicated phase and dependency structures to maintain the best forward compatibility.
-
-#### Phases
-Phases in older projects allow multiple transformation steps to be run within a single workspace.
-Multiple steps with the exact input mapping (sharing data) might save some processing time, but ultimately,
-everything is less clear and isolated. To save time, run multiple orchestration tasks in parallel instead.
-
-#### Dependencies
-Dependencies allow you to chain transformation steps in older projects. A given transformation is executed after all 
-required steps have been executed.
-
 ## Read-Only Input Mapping
+
 With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
 for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name). 

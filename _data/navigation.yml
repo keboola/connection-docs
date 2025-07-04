@@ -638,6 +638,15 @@ items:
 
       - url: /transformations/r-plain/
         title: R Transformations
+        items:
+          - url: /transformations/r-plain/array-splitter/
+            title: Array Splitting
+
+          - url: /transformations/r-plain/plots/
+            title: Graphs & Charts
+
+          - url: /transformations/r-plain/binary/
+            title: Using Binary Files
 
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
@@ -645,56 +654,11 @@ items:
       - url: /transformations/bigquery/
         title: BigQuery Transformations
 
-      - url: /transformations/redshift-plain/
-        title: Redshift Transformations
-
-      - url: /transformations/synapse-plain/
-        title: Synapse Transformations
-
-      - url: /transformations/exasol/
-        title: Exasol Transformations
-
-      - url: /transformations/teradata/
-        title: Teradata Transformations
-
       - url: /transformations/oracle/
         title: Oracle Transformations
 
       - url: /transformations/code-patterns/
         title: Code Patterns
-
-      - url: /transformations/sandbox/
-        title: Legacy Sandbox
-
-      - url: /transformations/julia/
-        title: Legacy Julia Transformations
-
-      - url: /transformations/openrefine/
-        title: Legacy OpenRefine Transformations
-
-      - url: /transformations/python/
-        title: Legacy Python Transformations
-
-      - url: /transformations/r/
-        title: Legacy R Transformations
-        items:
-          - url: /transformations/r/array-splitter/
-            title: Array Splitting
-
-          - url: /transformations/r/plots/
-            title: Graphs & Charts
-
-          - url: /transformations/r/binary/
-            title: Using Binary Files
-
-      - url: /transformations/redshift/
-        title: Legacy Redshift Transformations
-
-      - url: /transformations/snowflake/
-        title: Legacy Snowflake Transformations
-
-      - url: /transformations/migration/
-        title: Transformation Migration
 
   - url: /management/
     title: Management

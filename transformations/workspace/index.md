@@ -1,6 +1,8 @@
 ---
 title: Workspace
 permalink: /transformations/workspace/
+redirect_from:
+  - /transformations/sandbox/
 ---
 
 * TOC
@@ -12,9 +14,6 @@ A workspace serves several purposes and can be used as
 - an *analytical workspace* where you can interactively perform experiments and modelling with live production data. 
 - an ephemeral workspace created on each run of a transformation to provide the *staging* area in which the transformation operates.
 Ephemeral transformation workspaces are not visible in the transformation UI, hence we won't mention them further.
-
-**In [legacy transformations](/transformations/#legacy-transformations), workspaces are 
-called [sandboxes](/transformations/sandbox/) and behave considerably differently.**
 
 ## Working with Workspaces
 You can create a Workspace on the Transformations page:
