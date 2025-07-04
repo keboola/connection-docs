@@ -91,6 +91,15 @@ We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces wi
 >As a result, we are deprecating this login type by the end of 2025.
 >We recommend using `Person` type workspace instead, if you don't need to use password authentication.
 
+##### Using Key Pair Authentication with Third-Party Tools
+Below are links to documentation for popular database IDEs used by Keboola users that support Key Pair authentication.
+
+- DBeaver Community Edition: https://community.snowflake.com/s/article/Using-Private-Key-authentication-in-DBeaver
+- DBeaver Commercial Editions: https://dbeaver.com/docs/dbeaver/Authentication-Snowflake/#private-key-authentication
+- DataGrip: https://www.jetbrains.com/help/datagrip/create-snowflake-data-source-with-key-pair-authentication.html
+- VSCode/Cursor Snowflake Extension: https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension
+- VSCode/Cursore DBCode Extension: https://dbcode.io/docs/supported-databases/snowflake
+
 #### BigQuery
 To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
 
