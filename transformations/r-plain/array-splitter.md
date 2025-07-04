@@ -1,8 +1,9 @@
 ---
 title: Array Splitting
-permalink: /transformations/r/array-splitter/
+permalink: /transformations/r-plain/array-splitter/
 redirect_from:
     - /manipulation/transformations/r/array-splitter/
+    - /transformations/r/array-splitter/
 
 ---
 
@@ -28,11 +29,11 @@ and produce a table like
 | 2        | 3         | sixth     |
 
 ## Prepare 
-Use the [sample table](/transformations/r/array-source.csv) shown above and import it into your *Storage*. 
+Use the [sample table](/transformations/r-plain/array-source.csv) shown above and import it into your *Storage*. 
 Then set the input and output mapping for your transformation.
 
 {: .image-popup}
-![Screenshot - Input/Output mapping](/transformations/r/array-split-io.png)
+![Screenshot - Input/Output mapping](/transformations/r-plain/array-split-io.png)
 
 ## Use the Script
 The following script will take each row of the source table, and split the column whose name is specified in the

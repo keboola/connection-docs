@@ -1,6 +1,8 @@
 ---
 title: Snowflake Transformation
 permalink: /transformations/snowflake-plain/
+redirect_from:
+  - /transformations/snowflake/
 ---
 
 * TOC
