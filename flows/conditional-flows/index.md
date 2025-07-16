@@ -1,6 +1,6 @@
 ---
 title: Conditional Flows
-permalink: /flows/conditional-flows
+permalink: /flows/conditional-flows/
 ---
 
 Conditional Flows extend Keboola's existing Flow capabilities with conditional logic, branching, and more robust error handling. You can now define Flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
