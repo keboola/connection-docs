@@ -1020,7 +1020,7 @@ This table lists events and their non-empty parameters from the `ext.keboola.dat
 Columns with the **dst_** prefix are system columns used in Telemetry Data connector executions. They are **not** related to the data itself.
 
 ## Data Recency
-You can obtain telemetry data for your project that is approximately 3 hours old when running the connector.
+You can obtain telemetry data for your project that is approximately 4-8 hours old when running the connector.
 
 *Note: This is not guaranteed, as the raw data is processed before reaching the connector's source; therefore delays in processing might occur.*
  
