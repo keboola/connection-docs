@@ -1,6 +1,6 @@
 ---
 title: Flows
-permalink: /flows/
+permalink: /conditional-flows/
 ---
 
 * TOC

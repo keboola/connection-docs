@@ -16,7 +16,7 @@ Navigate to **Flows > Conditional Flows > Create Flow**. After this step, you'll
 
 ## Build the Flow
 
-Link to video?
+Conditional Flows are built on top of the Flows functionality, therefore please refer to [Flows](/flows/).
 
 ## Conditions
 
@@ -38,10 +38,10 @@ Evaluation proceeds from top to bottom, and once a condition is true, the remain
 
 ### 2. Logical AND / OR between conditions
 
-You can use logical operators (AND) and (OR) to combine multiple conditions within a single if statement.
+You can use logical operators (AND) and (OR) to combine multiple statements within a single condition statement.
 
-- Use **(AND)** when all conditions must be true for the expression to pass.
-- Use **(OR)** when any one condition being true is enough.
+- Use **(AND)** when all statements must be true for the expression to pass.
+- Use **(OR)** when any one statement being true is enough.
 
 {: .image-popup}
 ![](/flows/conditional-flows/condition.png)
@@ -92,7 +92,7 @@ Variables in Conditional Flows let you store and reuse values - like dates, task
 ### Date & Time function
 
 Returns the date/time formatted according to the specified format string, available formats:
-https://www.php.net/manual/en/datetime.format.php
+[https://www.php.net/manual/en/datetime.format.php](https://www.php.net/manual/en/datetime.format.php).
 
 This example returns the full textual representation of the current month, such as "July" or "August".
 
@@ -197,7 +197,7 @@ Flows and Conditional Flows are not interchangeable. You cannot convert one to t
 
 There are differences between Flows and Conditional Flows at the moment, see the table below for more information:
 
-| Feature / Behavior | Conditional Flows                                           | Standard Flows | Notes                                                                                                                |
+| Feature / Behavior | Conditional Flows                                           | Flows | Notes                                                                                                                |
 |-------------------|-------------------------------------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------|
 | Run Selected Tasks / Re-run Failed Tasks | 🚧 Not yet supported                               | ✅ Supported | Planned for GA. Workaround: duplicate the phase and skip conditionally. Set Retry.                                   |
 | Trigger Components (cross-project) | 🚧 Not yet supported                                         | ✅ Supported | Planned for Conditional Flows. In Conditional Flows, you can't trigger another flow in Project B from Project A yet. |
@@ -207,7 +207,7 @@ There are differences between Flows and Conditional Flows at the moment, see the
 
 ## Migration
 
-We're planning an automatic migration from Standard Flows to Conditional Flows to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same - but with added flexibility under the hood.
+We're planning an automatic migration from Flows to Conditional Flows to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same - but with added flexibility under the hood.
 
 ## How to disable Conditional Flows
 
