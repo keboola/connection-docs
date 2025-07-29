@@ -7,7 +7,7 @@ permalink: /ai/mcp-server/
 * TOC
 {:toc}
 
-Connect your MCP clients (**Cursor**, **Claude**, **Windsurf**, **VS Code**) and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user. 
+Connect your MCP clients (**Cursor**, **Claude**, **Windsurf**, **VS Code**, **MAKE** or others) and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user. 
 
 Query data, create transformations, write SQL queries, and build your pipelines — **all with no clicks required.**
 
@@ -86,9 +86,9 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 
 ### Using with Cursor
 
-1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`
-2. Click the Cursor tab
-3. Click the **"Install In Cursor"** button
+1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
+2. Click the Cursor tab.
+3. Click the **"Install In Cursor"** button.
 4. You'll be prompted to login into your Keboola account and select the project you want to connect to.
 
 **Alternatively**, click the button related to your region below:
@@ -101,6 +101,14 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 | EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
 | EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
 
+### Using with MAKE
+
+1. Create your scenario in MAKE.
+2. Use the MCP Client component within the scenario.
+3. In the dropdown of the MCP Client, select Keboola.
+4. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
+5. Click the MAKE tab.
+6. Copy the integration URL displayed there into the MCP Client configuration in MAKE.
 
 ## Available Tools
 
