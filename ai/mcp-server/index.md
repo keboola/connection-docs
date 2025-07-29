@@ -13,6 +13,7 @@ Connect your MCP clients and AI assistants to your **Keboola Project** and give 
 - **[Claude](#using-with-claude-desktop)** - Organization-level integration
 - **[Windsurf](#using-with-windsurf)** - Plugin store or manual configuration
 - **[VS Code](#using-with-vs-code)** - Agent mode with MCP servers
+- **[Make](#using-with-make)** - Agent mode with MCP servers
 - **[Other clients](#remote-server-setup)** - Remote server connection
 
 Query data, create transformations, write SQL queries, and build your pipelines — **all with no clicks required.**
@@ -110,9 +111,9 @@ Click the button related to your region below:
 
 **Alternatively**, you can:
 
-1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`
-2. Click the Cursor tab
-3. Click the **"Install In Cursor"** button
+1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
+2. Click the Cursor tab.
+3. Click the **"Install In Cursor"** button.
 4. You'll be prompted to login into your Keboola account and select the project you want to connect to.
 
 ### Using with Windsurf
@@ -184,6 +185,14 @@ VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these s
 
 For detailed setup and troubleshooting, see the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
+### Using with MAKE
+
+1. Create your scenario in MAKE.
+2. Use the MCP Client component within the scenario.
+3. In the dropdown of the MCP Client, select Keboola.
+4. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
+5. Click the MAKE tab.
+6. Copy the integration URL displayed there into the MCP Client configuration in MAKE.
 
 ## Available Tools
 
