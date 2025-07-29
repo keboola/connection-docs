@@ -591,6 +591,9 @@ items:
       - url: /flows/ai-flow-builder/
         title: AI Flow Builder
 
+      - url: /flows/conditional-flows/
+        title: Conditional Flows
+
   - url: /orchestrator/
     title: Orchestrations
     items:

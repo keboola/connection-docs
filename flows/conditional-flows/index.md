@@ -3,7 +3,7 @@ title: Conditional Flows
 permalink: /flows/conditional-flows/
 ---
 
-Conditional Flows extend Keboola's existing Flow capabilities with conditional logic, branching, and more robust error handling. You can now define Flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
+Conditional Flows extend Keboola's existing [Flow](/flows/) capabilities with conditional logic, branching, and more robust error handling. You can now define Flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
 
 {% include public-beta-warning.html %}
 
@@ -16,7 +16,7 @@ Navigate to **Flows > Conditional Flows > Create Flow**. After this step, you'll
 
 ## Build the Flow
 
-Link to video?
+Conditional Flows are built on top of the Flows functionality, therefore please refer to [Flows](/flows/).
 
 ## Conditions
 
@@ -38,10 +38,10 @@ Evaluation proceeds from top to bottom, and once a condition is true, the remain
 
 ### 2. Logical AND / OR between conditions
 
-You can use logical operators (AND) and (OR) to combine multiple conditions within a single if statement.
+You can use logical operators (AND) and (OR) to combine multiple statements within a single condition statement.
 
-- Use **(AND)** when all conditions must be true for the expression to pass.
-- Use **(OR)** when any one condition being true is enough.
+- Use **(AND)** when all statements must be true for the expression to pass.
+- Use **(OR)** when any one statement being true is enough.
 
 {: .image-popup}
 ![](/flows/conditional-flows/condition.png)
@@ -53,7 +53,6 @@ You can use logical operators (AND) and (OR) to combine multiple conditions with
 - **After all tasks complete**, based on conditions it is determined which phase will be executed next.
 - You can define **multiple condition rules** - only the first matched condition is executed.
 - **How to end a flow:** You can stop a flow at any point using the End Flow option in the ELSE path of a conditional condition. This is especially useful when none of your IF conditions are met and you want to avoid continuing to another phase.
-- Alternatively, you can also use `"goto": null` in a JSON condition to end the flow from a specific condition.
 
 ## Variables
 
@@ -92,7 +91,7 @@ Variables in Conditional Flows let you store and reuse values - like dates, task
 ### Date & Time function
 
 Returns the date/time formatted according to the specified format string, available formats:
-https://www.php.net/manual/en/datetime.format.php
+[https://www.php.net/manual/en/datetime.format.php](https://www.php.net/manual/en/datetime.format.php).
 
 This example returns the full textual representation of the current month, such as "July" or "August".
 
@@ -197,8 +196,8 @@ Flows and Conditional Flows are not interchangeable. You cannot convert one to t
 
 There are differences between Flows and Conditional Flows at the moment, see the table below for more information:
 
-| Feature / Behavior | Conditional Flows                                           | Standard Flows | Notes                                                                                                                |
-|-------------------|-------------------------------------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------|
+| Feature / Behavior | Conditional Flows                                           | Flows | Notes                                                                                                                |
+|-------------------|-------------------------------------------------------------|-------|----------------------------------------------------------------------------------------------------------------------|
 | Run Selected Tasks / Re-run Failed Tasks | 🚧 Not yet supported                               | ✅ Supported | Planned for GA. Workaround: duplicate the phase and skip conditionally. Set Retry.                                   |
 | Trigger Components (cross-project) | 🚧 Not yet supported                                         | ✅ Supported | Planned for Conditional Flows. In Conditional Flows, you can't trigger another flow in Project B from Project A yet. |
 | CLI Support | 🚧 Not yet supported                                          | ✅ Supported | Conditional Flows are not yet available via Keboola CLI.                                                             |
@@ -207,7 +206,7 @@ There are differences between Flows and Conditional Flows at the moment, see the
 
 ## Migration
 
-We're planning an automatic migration from Standard Flows to Conditional Flows to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same - but with added flexibility under the hood.
+We're planning an automatic migration from Flows to Conditional Flows to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same - but with added flexibility under the hood.
 
 ## How to disable Conditional Flows
 
