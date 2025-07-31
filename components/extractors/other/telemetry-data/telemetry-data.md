@@ -366,7 +366,7 @@ You need data for all projects.*
 | `run_time_hours` | Runtime value in hours for metrics calculated based on time | `0.000278` |
 | `jobs` | Number of jobs for relevant metrics | `100` |
 
-***Note:** A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` indicates a correction. Due to incremental loads, the row couldn’t be deleted, so the original value was set to zero.*
+***Note:** A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
 
 ### security_event
 This table lists [security events](/management/project/tokens/#token-events), 
