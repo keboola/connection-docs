@@ -163,7 +163,7 @@ and their consumption metrics.
 | `time_credits_used` | Number of time credits consumed by the workspace on the particular date | `2.413333` |
 | `billed_credits_used` | Number of the actually billed credits | `2.413333` |
 
-***Note:** A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental downloads, so the value was cleared instead.*
+***Note:** A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
 
 ### kbc_data_science_sandbox
 This table lists Python/R [workspaces](/transformations/workspace/)/[sandboxes](/transformations/sandbox/) 
@@ -187,7 +187,7 @@ and their consumption metrics.
 | `time_credits_used` | Number of time credits consumed by the sandbox on the particular date | `2.413333` |
 | `billed_credits_used` | Number of the actually billed credits | `2.413333` |
 
-***Note:** A value of `0` in `sandbox_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental downloads, so the value was cleared instead.*
+***Note:** A value of `0` in `sandbox_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
 
 ### kbc_job
 This table lists Keboola [jobs](/management/jobs/) 
@@ -366,7 +366,7 @@ You need data for all projects.*
 | `run_time_hours` | Runtime value in hours for metrics calculated based on time | `0.000278` |
 | `jobs` | Number of jobs for relevant metrics | `100` |
 
-***Note:** A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` indicates a correction. Due to incremental downloads, the row couldn’t be deleted, so the value was cleared instead.*
+***Note:** A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` indicates a correction. Due to incremental loads, the row couldn’t be deleted, so the original value was set to zero.*
 
 ### security_event
 This table lists [security events](/management/project/tokens/#token-events), 
