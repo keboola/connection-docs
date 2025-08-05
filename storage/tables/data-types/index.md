@@ -10,7 +10,7 @@ The **Native Data Types** feature streamlines the process of **propagating data 
 
 For example, when a user imports a large dataset with predefined data types, such as NUMERIC, BOOLEAN, and DATE, these types are preserved automatically. Without Native Data Types, the data would have been imported as VARCHAR, requiring the user to manually update the types in transformation. 
 
-Non-typed tables without native data types are labeled in the UI with a badge: **non-typed**.
+Typed tables are labeled in the UI with a badge: **TYPED**.
 
 ## Key Benefits
 These are the key benefits of using the Native Data Types feature:
@@ -28,7 +28,7 @@ Using the Native Data Types feature also has its drawbacks:
 - Loading data with incompatible types will result in a failure.
 
 ## How It Works
-By default, all new tables are created as typed tables if the component supports this feature. Non-typed tables are labeled in the Storage UI with the label NON-TYPED. 
+By default, all new tables are created as typed tables if the component supports this feature. Typed tables are labeled in the Storage UI with the label **TYPED**. 
 
 You can configure the data type behavior in the UI component configuration settings. If the component supports this feature, you will see the option **Automatic data types** in the right menu, which can be toggled ON and OFF. 
 - **When enabled:** The component creates a typed table that respects the data types from the source (e.g., DATETIME, BOOLEAN). 
@@ -176,3 +176,4 @@ CREATE TABLE "ctas_table" (
     "created_at" TIMESTAMP_NTZ NOT NULL
 ) AS SELECT * FROM "typed_table";
 ```
+
