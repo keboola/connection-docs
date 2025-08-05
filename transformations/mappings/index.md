@@ -100,6 +100,8 @@ context. That means input mapping destination is the same file as the source for
 ![Source vs. destination](/transformations/mappings/source-destination.svg)
 
 #### Data types
+{% include warning.html content="When selecting user defined data types the transformation jobs can take longer than usual because new typed table will be created in the background before materializing in output into final output table" %}
+
 The data types option allows you to configure settings of data types for the destination table. Data types are applicable only
 for destinations in **database staging**. Select *User defined* to configure data types for individual columns. The types
 are pre-configured with data types stored in the [table metadata](/storage/tables/data-types/). The **Type**, **Length**, 
