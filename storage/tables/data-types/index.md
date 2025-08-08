@@ -34,7 +34,7 @@ You can configure the data type behavior in the UI component configuration setti
 - **When enabled:** The component creates a typed table that respects the data types from the source (e.g., DATETIME, BOOLEAN). 
 - **When disabled:** A typed table is created with all columns as VARCHAR, and data types are stored as metadata.
   
-In transformations, this option is not available. Instead, you define the data types in your query (if you need the table to be typed). If no types are defined, the table will default to storing data in VARCHAR format. However, it will still be marked as AUTO-TYPED in both cases. 
+In transformations, this option is not available. Instead, you define the data types in your query (if you need the table to be typed). If no types are defined, the table will default to storing data in VARCHAR format.
 
 **Important:** Existing tables will not be affected by this feature. Also, if you do not see the **Automatic data types** option in the sidebar, it means the component does not support this feature.
 
@@ -176,3 +176,4 @@ CREATE TABLE "ctas_table" (
     "created_at" TIMESTAMP_NTZ NOT NULL
 ) AS SELECT * FROM "typed_table";
 ```
+

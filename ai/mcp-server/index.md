@@ -7,7 +7,13 @@ permalink: /ai/mcp-server/
 * TOC
 {:toc}
 
-Connect your MCP clients (**Cursor**, **Claude**, **Windsurf**, **VS Code**) and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user. 
+Connect your MCP clients and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user:
+
+- **[Cursor](#using-with-cursor)** - Direct deeplink installation
+- **[Claude](#using-with-claude-desktop)** - Organization-level integration
+- **[Windsurf](#using-with-windsurf)** - Plugin store or manual configuration
+- **[VS Code](#using-with-vs-code)** - Agent mode with MCP servers
+- **[Other clients](#remote-server-setup)** - Remote server connection
 
 Query data, create transformations, write SQL queries, and build your pipelines — **all with no clicks required.**
 
@@ -39,6 +45,12 @@ Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth auth
 In case your AI assistant supports remote connection, you can connect to Keboola's MCP Server by following these steps:
 
 1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/sse`.
+   - Available stack URLs:
+     - `https://mcp.keboola.com/sse` 
+     - `https://mcp.us-east4.gcp.keboola.com/sse` 
+     - `https://mcp.eu-central-1.keboola.com/sse` 
+     - `https://mcp.north-europe.azure.keboola.com/sse`
+     - `https://mcp.europe-west3.gcp.keboola.com/sse`
    - You can find the url in your Keboola [Project Settings](/management/project/) under the tab `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
@@ -86,20 +98,91 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 
 ### Using with Cursor
 
+Click the button related to your region below:
+
+| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                         |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9zc2UifQ%3D%3D)                       |
+| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vc3NlIn0%3D)         |
+| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vc3NlIn0%3D)         |
+| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
+| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
+
+**Alternatively**, you can:
+
 1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`
 2. Click the Cursor tab
 3. Click the **"Install In Cursor"** button
 4. You'll be prompted to login into your Keboola account and select the project you want to connect to.
 
-**Alternatively**, click the button related to your region below:
+### Using with Windsurf
 
-| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                         |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9zc2UifQ%3D%3D)                       |
-| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vc3NlIn0%3D)         |
-| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vc3NlIn0%3D)         |
-| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
-| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
+Windsurf supports MCP through its native integration with Cascade. You can add Keboola's MCP Server in two ways:
+
+#### Option 1: Manual Configuration (Recommended)
+
+1. Open the Windsurf settings and navigate to `Cascade` > `Plugins`
+2. Click on "Add MCP Plugin" or edit the `mcp_config.json` file directly
+3. Add the Keboola MCP Server configuration:
+
+```json
+{
+  "mcpServers": {
+    "keboola": {
+      "serverUrl": "https://mcp.<YOUR_REGION>.keboola.com/sse"
+    }
+  }
+}
+```
+
+4. Replace `<YOUR_REGION>` with your specific stack URL from the [available stack URLs](#remote-server-setup)
+5. Press the refresh button after adding the configuration
+6. You'll be prompted to authenticate with your Keboola account and select the project
+
+For detailed instructions and troubleshooting, see the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin).
+
+### Using with VS Code
+
+VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these steps to set up Keboola's MCP Server:
+
+#### Prerequisites
+- VS Code with GitHub Copilot extension installed
+- GitHub Copilot subscription (Pro, Business, or Enterprise)
+
+#### Setup Instructions
+
+1. Open VS Code and ensure you have the latest version of the GitHub Copilot extension
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **"MCP: Configure Servers"**
+3. This will create or open your MCP configuration file (`mcp.json`)
+4. Add the Keboola MCP Server configuration:
+
+```json
+{
+  "servers": {
+    "keboola": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://mcp.<YOUR_REGION>.keboola.com/sse"
+      ]
+    }
+  }
+}
+```
+
+5. Replace `<YOUR_REGION>` with your specific stack URL from the [available stack URLs](#remote-server-setup)
+6. Save the configuration file
+7. Restart VS Code or run **"MCP: Restart Servers"** from the Command Palette
+8. You'll be prompted to authenticate with your Keboola account and select the project
+
+#### Using MCP Tools in VS Code
+
+- Open the Chat view and enable agent mode
+- Select the **Tools** button to see available Keboola tools
+- Use `#` in your chat to reference specific tools or resources
+- The tools will be available with up to 128 tools per request
+
+For detailed setup and troubleshooting, see the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
 
 ## Available Tools
