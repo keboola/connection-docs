@@ -587,9 +587,6 @@ items:
 
   - url: /flows/
     title: Flows
-    items:
-      - url: /flows/ai-flow-builder/
-        title: AI Flow Builder
 
   - url: /orchestrator/
     title: Orchestrations
