@@ -83,6 +83,17 @@ To change a sharing type, go to the bucket detail page and click the Edit sharin
 {: .image-popup}
 ![Screenshot -- Edit sharing](/catalog/catalog-5.png)
 
+### Adding new tables to an existing shared bucket
+To extend an existing shared bucket with additional tables, you don’t need to delete and recreate it. Instead, create an [alias](/storage/tables/#aliases) of the table and set the shared bucket as the destination. Here is how to do so:
+
+1. Go to **Storage → Tables** and locate the table you want to add.
+
+2. Click **Create Alias**.
+
+3. **Select the shared bucket** as the destination. Ensure the alias has no filter and automatic synchronization of columns enabled.
+
+Once created in the shared bucket, the alias will immediately appear in all linked projects.
+
 ### Share a New bucket
 Choose the **Select tables** option:
 
@@ -133,3 +144,5 @@ To stop sharing a bucket, go to *Data Catalog* and **Disable** sharing:
 
 {: .image-popup}
 ![Screenshot -- Disable Sharing](/catalog/catalog-14.png)
+
+
