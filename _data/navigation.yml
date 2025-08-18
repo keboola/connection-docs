@@ -56,20 +56,20 @@ items:
       - url: /tutorial/onboarding/
         title: Keboola Platform Onboarding
         items:
-        - url: /tutorial/onboarding/usage-blueprint/
-          title: Usage Blueprint
+          - url: /tutorial/onboarding/usage-blueprint/
+            title: Usage Blueprint
 
-        - url: /tutorial/onboarding/architecture-guide/
-          title: Multi-Project Architecture
-          items:
-            - url: /tutorial/onboarding/architecture-guide/bdm-guide/
-              title: Business Data Model
+          - url: /tutorial/onboarding/architecture-guide/
+            title: Multi-Project Architecture
+            items:
+              - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+                title: Business Data Model
 
-        - url: /tutorial/onboarding/cheat-sheet/
-          title: Best Practices
+          - url: /tutorial/onboarding/cheat-sheet/
+            title: Best Practices
 
-        - url: /tutorial/onboarding/governance-guide/
-          title: Governance Guide
+          - url: /tutorial/onboarding/governance-guide/
+            title: Governance Guide
 
   - url: /components/
     title: Components
@@ -307,7 +307,7 @@ items:
 
               - url: /components/extractors/other/okta/
                 title: Okta
-                
+
               - url: /components/extractors/other/hibob/
                 title: HiBob
 
@@ -473,7 +473,7 @@ items:
                 title: Okta
           - url: /components/data-apps/terminal-log-tab/
             title: Terminal Log Tab
-                    
+
       - url: /components/branches/
         title: Development Branches
 
@@ -488,7 +488,7 @@ items:
 
       - url: /templates/ai-sms-campaign/
         title: AI SMS Campaign
-        
+
       - url: /templates/customer-relationship-management/
         title: Customer Relationship Management
 
@@ -500,7 +500,7 @@ items:
 
       - url: /templates/ecommerce/
         title: eCommerce
-        
+
       - url: /templates/ecomm-kpi-dashboard/
         title: eCommerce KPI Dashboard
 
@@ -512,10 +512,10 @@ items:
 
       - url: /templates/kai-sql-bot/
         title: Kai SQL Bot
-        
+
       - url: /templates/mailchimp/
         title: Mailchimp
-        
+
       - url: /templates/media-cashflow/
         title: Media Cashflow
 
@@ -588,6 +588,9 @@ items:
   - url: /flows/
     title: Flows
 
+      - url: /flows/conditional-flows/
+        title: Conditional Flows
+
   - url: /orchestrator/
     title: Orchestrations
     items:
@@ -635,6 +638,15 @@ items:
 
       - url: /transformations/r-plain/
         title: R Transformations
+        items:
+          - url: /transformations/r-plain/array-splitter/
+            title: Array Splitting
+
+          - url: /transformations/r-plain/plots/
+            title: Graphs & Charts
+
+          - url: /transformations/r-plain/binary/
+            title: Using Binary Files
 
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
@@ -642,56 +654,11 @@ items:
       - url: /transformations/bigquery/
         title: BigQuery Transformations
 
-      - url: /transformations/redshift-plain/
-        title: Redshift Transformations
-
-      - url: /transformations/synapse-plain/
-        title: Synapse Transformations
-
-      - url: /transformations/exasol/
-        title: Exasol Transformations
-
-      - url: /transformations/teradata/
-        title: Teradata Transformations
-
       - url: /transformations/oracle/
         title: Oracle Transformations
 
       - url: /transformations/code-patterns/
         title: Code Patterns
-
-      - url: /transformations/sandbox/
-        title: Legacy Sandbox
-
-      - url: /transformations/julia/
-        title: Legacy Julia Transformations
-
-      - url: /transformations/openrefine/
-        title: Legacy OpenRefine Transformations
-
-      - url: /transformations/python/
-        title: Legacy Python Transformations
-
-      - url: /transformations/r/
-        title: Legacy R Transformations
-        items:
-          - url: /transformations/r/array-splitter/
-            title: Array Splitting
-
-          - url: /transformations/r/plots/
-            title: Graphs & Charts
-
-          - url: /transformations/r/binary/
-            title: Using Binary Files
-
-      - url: /transformations/redshift/
-        title: Legacy Redshift Transformations
-
-      - url: /transformations/snowflake/
-        title: Legacy Snowflake Transformations
-
-      - url: /transformations/migration/
-        title: Transformation Migration
 
   - url: /management/
     title: Management
@@ -707,7 +674,7 @@ items:
 
       - url: /management/notifications/
         title: Notifications
-        
+
       - url: /management/project/
         title: Project
         items:
@@ -732,6 +699,9 @@ items:
           - url: /management/project/ai-rules/
             title: AI Rules
 
+          - url: /management/project/mcp-server/
+            title: MCP Server
+
       - url: /management/payg-project/
         title: Free Plan
 
@@ -746,3 +716,9 @@ items:
         items:
           - url: /management/telemetry/telemetry-dashboards/
             title: Telemetry Dashboards
+
+  - url: /ai/
+    title: AI Features
+    items:
+      - url: /ai/mcp-server/
+        title: MCP Server

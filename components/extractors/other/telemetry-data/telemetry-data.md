@@ -54,7 +54,7 @@ This table shows snapshots of buckets in Storage.
 | `shared_from_bucket` | Identifier of the source bucket if the bucket is linked (sharing_type = 'target') | `in.c-keboola-ex-instagram-152387726` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
-| `kbc_bucket_owner_id` | Datashare owner | `11358_kbc-eu-central-1` |
+| `kbc_bucket_owner_id` | Optional field indicating who is responsible for shared data, used for tracking ownership in bucket sharing and the data catalog | `11358_kbc-eu-central-1` |
 
 ### kbc_branch
 This table shows main and development [branches](/components/branches/) in the project.
@@ -163,6 +163,8 @@ and their consumption metrics.
 | `time_credits_used` | Number of time credits consumed by the workspace on the particular date | `2.413333` |
 | `billed_credits_used` | Number of the actually billed credits | `2.413333` |
 
+***Note:** A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
+
 ### kbc_data_science_sandbox
 This table lists Python/R [workspaces](/transformations/workspace/)/[sandboxes](/transformations/sandbox/) 
 and their consumption metrics.
@@ -185,6 +187,7 @@ and their consumption metrics.
 | `time_credits_used` | Number of time credits consumed by the sandbox on the particular date | `2.413333` |
 | `billed_credits_used` | Number of the actually billed credits | `2.413333` |
 
+***Note:** A value of `0` in `sandbox_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
 
 ### kbc_job
 This table lists Keboola [jobs](/management/jobs/) 
@@ -198,7 +201,7 @@ This table lists Keboola [jobs](/management/jobs/)
 | `kbc_branch_id` | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
 | `branch_type` | Identifier of the type of branch where the job is run (`default`, `dev`)| `3419_kbc-eu-central-1` |
 | `kbc_component_id` | Identifier of the component related to the job | `keboola.wr-google-sheets` |
-| `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `OpenRefine`, `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
+| `transformation_type` | Type of the transformation, if applicable. Possible values: <br> `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` – not a transformation job or encapsulating an apparent transformation job | `None` |
 | `credit_type` | Type of credit associated with the job. Possible values: <br> `KBC`, `SQL`, `CDC` <br> Does not necessarily represent actually used credit, as SQL and CDC credits are only consumed if they exist in the contract ([info](/management/project/limits/#project-power--time-credits)). The type of actually billed credit is defined in the [kbc_usage_metrics_values](/components/extractors/other/telemetry-data/#kbc_usage_metrics_values) table | `KBC` |
 | `job_run_id` | Run ID of the job – multiple jobs can run under the same Run ID | `117643429.117644388` |
 | `job_start_at` | Datetime when the job started | `2020-03-15 11:59:39` |
@@ -211,7 +214,8 @@ This table lists Keboola [jobs](/management/jobs/)
 | `token_id` | Identifier of the token that initiated the job | `145062` |
 | `token_name` | Name of the token that initiated the job | `Orchestrator GDrive` |
 | `kbc_token_id` | Unique identifier of the token with stack identification | `145062_kbc-eu-central-1` |
-| `flow` | The numeric configuration ID of the flow | `915976687` |
+| `flow_id` | Unique identifier of the flow (Foreign key to the component configuration) | `410_kbc-eu-central-1_keboola.orchestrator_915976687` |
+| `flow` | Name of the Flow in the time of the job, including numeric ID to distinguish between flows with the same name | `My Main Flow (ID: 915976687)` |
 | `job_time_credits_used` | Number of time credits consumed by the job | `0.001218890000` |
 | `job_billed_credits_used` | Number of actually billed credits | `0.001218890000` |
 | `job_total_time_sec` | Total time of the job in seconds (from initial trigger; start may be delayed) | `63` |
@@ -361,6 +365,8 @@ You need data for all projects.*
 | `time_credits_value` | Value in time credits for metrics calculated in credits | `0.001667` |
 | `run_time_hours` | Runtime value in hours for metrics calculated based on time | `0.000278` |
 | `jobs` | Number of jobs for relevant metrics | `100` |
+
+***Note:** A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
 
 ### security_event
 This table lists [security events](/management/project/tokens/#token-events), 
@@ -575,7 +581,7 @@ This table shows data about the current state of storage buckets.
 | `description` | Description of the bucket (filled by the user) | `twitter extractor raw data` |
 | `is_external_schema` | Flag indicating if the bucket contains data from external sources (`1`, `0`) | `1` |
 | `kbc_branch_id` (PK) | Foreign key to the Keboola branch | `3419_kbc-eu-central-1` |
-| `kbc_bucket_owner_id` | Datashare owner | `11358_kbc-eu-central-1` |
+| `kbc_bucket_owner_id` | Optional field indicating who is responsible for shared data, used for tracking ownership in bucket sharing and the data catalog | `11358_kbc-eu-central-1` |
 
 ### kbc_column
 This table shows data about the current state of storage columns.
@@ -606,6 +612,7 @@ This table shows data about columns' metadata.
 | `composite_id` | Folder structure identifier | `799945/storage/kbc_job/kbc_token_id` |
 | `key` | Metadata key | `KBC.datatype.type` |
 | `value` | Metadata value | `VARCHAR` |
+| `provider` | Defines which service or component provided the metadata | `keboola.ex-db-mssql` |
 
 ### kbc_flow_phase
 This table shows data about particular phases of flows.
@@ -775,6 +782,7 @@ This table shows data about metadata of the storage [tables](/storage/tables/).
 | `composite_id` | Folder structure identifier | `729487/storage/daily_credit_changes` |
 | `key` | Metadata key | `KBC.name` |
 | `value` | Metadata value | `out_daily_credit_changes` |
+| `provider` | Defines which service or component provided the metadata | `keboola.ex-db-mssql` |
 
 ### kbc_token
 This table shows data about the storage [tokens](/management/project/tokens/).
@@ -948,6 +956,9 @@ This table shows data about existing [workspaces](/transformations/workspace/). 
 | `storage_size_gb` | Size of the workspace (used for persistent workspaces) | `2` |
 | `kbc_token_id` | Foreign key to the Keboola token creating the workspace | `287689_kbc-us-east-1` |
 | `kbc_token_name` | Name of the token creating the workspace | `john.doe@keboola.com` |
+| `workspace_shared` | Flag indicating if the workspace is shared with other users | `true` |
+| `workspace_read_only_storage_access` | Flag indicating if the workspace has read-only storage access | `false` |
+| `kbc_workspace_name` | Name of the workspace | `My Workspace` |
 
 ### kbc_workspace_event
 This table shows data about [workspace](/transformations/workspace/) events.
@@ -1014,7 +1025,7 @@ This table lists events and their non-empty parameters from the `ext.keboola.dat
 Columns with the **dst_** prefix are system columns used in Telemetry Data connector executions. They are **not** related to the data itself.
 
 ## Data Recency
-You can obtain telemetry data for your project that is approximately 3 hours old when running the connector.
+You can obtain telemetry data for your project that is approximately 4-8 hours old when running the connector.
 
 *Note: This is not guaranteed, as the raw data is processed before reaching the connector's source; therefore delays in processing might occur.*
  

@@ -1,6 +1,8 @@
 ---
 title: R Transformation
 permalink: /transformations/r-plain/
+redirect_from:
+  - /transformations/r/
 ---
 
 * TOC
@@ -123,11 +125,11 @@ To simulate the input and output mapping, all you need to do is create the right
 The following image shows the directory structure:
 
 {: .image-popup}
-![Screenshot - Data folder structure](/transformations/r/tree.png)
+![Screenshot - Data folder structure](/transformations/r-plain/tree.png)
 
 The script itself is expected to be in the `data` directory; its name is arbitrary. It is possible to use relative directories,
 so that you can move the script to a Keboola transformation with no changes. To develop an R transformation which takes
-a [sample CSV file](/transformations/r/source.csv) locally, take the following steps:
+a [sample CSV file](/transformations/r-plain/source.csv) locally, take the following steps:
 
 - Put the R code into a file, for instance, script.R in the working directory.
 - Put all tables from the input mapping inside the `in/tables` subdirectory of the working directory.
@@ -146,12 +148,12 @@ col2 = data$second * 42
 write.csv(df, file = "out/tables/result.csv", row.names = FALSE)
 {% endhighlight %}
 
-A complete example of the above is attached below in [data.zip](/transformations/r/data.zip).
+A complete example of the above is attached below in [data.zip](/transformations/r-plain/data.zip).
 Download it and test the script in your local R installation. The `result.csv` output file will be created.
 This script can be used in your transformations without any modifications.
 All you need to do is
 
-- create a table in Storage by uploading the [sample CSV file](/transformations/r/source.csv),
+- create a table in Storage by uploading the [sample CSV file](/transformations/r-plain/source.csv),
 - create an input mapping from that table, setting its destination to `source` (as expected by the R script),
 - create an output mapping from `result.csv` (produced by the R script) to a new table in your Storage,
 - copy & paste the above script into the transformation code, and finally,
@@ -195,6 +197,6 @@ with the exact same configuration as the transformation environment, use [our Do
 ## Examples
 There are more in-depth examples dealing with
 
-- [array splitting](/transformations/r/array-splitter/),
-- [plotting charts & graphs](/transformations/r/plots/), and
-- [using trained models and binary files](/transformations/r/binary/).
+- [array splitting](/transformations/r-plain/array-splitter/),
+- [plotting charts & graphs](/transformations/r-plain/plots/), and
+- [using trained models and binary files](/transformations/r-plain/binary/).

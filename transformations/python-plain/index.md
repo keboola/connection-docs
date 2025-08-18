@@ -1,6 +1,8 @@
 ---
 title: Python Transformation
 permalink: /transformations/python-plain/
+redirect_from:
+    - /transformations/python/
 ---
 
 * TOC

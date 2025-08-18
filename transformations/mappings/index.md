@@ -100,6 +100,8 @@ context. That means input mapping destination is the same file as the source for
 ![Source vs. destination](/transformations/mappings/source-destination.svg)
 
 #### Data types
+{% include warning.html content="When selecting user defined data types the transformation jobs can take longer than usual because new typed table will be created in the background before materializing in output into final output table" %}
+
 The data types option allows you to configure settings of data types for the destination table. Data types are applicable only
 for destinations in **database staging**. Select *User defined* to configure data types for individual columns. The types
 are pre-configured with data types stored in the [table metadata](/storage/tables/data-types/). The **Type**, **Length**, 
@@ -269,7 +271,7 @@ the primary key must match. Feel free to use a multi-column primary key.
 -  **Delete rows** --- When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
    1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
    2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. 
-  This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table
+  This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table. Please note that this option **is available in the production environment only** and **is not supported in development branches** (e.g. for testing or configuration changes in a development branch, the option will not be applied).
 	- **How the Delete Rows feature Works**
 
      	Deletion is performed using SQL `DELETE` statements:

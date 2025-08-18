@@ -61,8 +61,8 @@ visible in Keboola.
 {: .image-popup}
 ![Bucket refresh](/storage/byodb/external-buckets/figures/4.png)
 
-External datasets cannot be used in an [input mapping](/transformations/mappings/#input-mapping)
-They are accessible via the [read-only input mapping](/transformations/mappings/#read-only-input-mapping). 
+External datasets can be used in an [input mapping](/transformations/mappings/#input-mapping). If you would like to disable usage of External datasets in input mapping, reach out to our support to disable it.
+They are also accessible via the [read-only input mapping](/transformations/mappings/#read-only-input-mapping).
 Keep in mind that external buckets cannot be used in an [output mapping](/transformations/mappings/#output-mapping) as they are not writable.
 
 ### External Dataset in a Snowflake SQL Transformation

@@ -114,3 +114,5 @@ You can download the data and import it into other tables, or you can revert to 
 
 {: .image-popup}
 ![Screenshot - Files](/management/jobs/storage-file-uploads.png)
+
+A comprehensive [video guide](https://www.youtube.com/watch?v=qIkSgzVmJa0) on this subject is available on our YouTube channel.

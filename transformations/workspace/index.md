@@ -1,6 +1,8 @@
 ---
 title: Workspace
 permalink: /transformations/workspace/
+redirect_from:
+  - /transformations/sandbox/
 ---
 
 * TOC
@@ -13,9 +15,6 @@ A workspace serves several purposes and can be used as
 - an ephemeral workspace created on each run of a transformation to provide the *staging* area in which the transformation operates.
 Ephemeral transformation workspaces are not visible in the transformation UI, hence we won't mention them further.
 
-**In [legacy transformations](/transformations/#legacy-transformations), workspaces are 
-called [sandboxes](/transformations/sandbox/) and behave considerably differently.**
-
 ## Working with Workspaces
 You can create a Workspace on the Transformations page:
 
@@ -23,10 +22,10 @@ You can create a Workspace on the Transformations page:
 ![Workspace Introduction](/transformations/workspace/workspace-intro.png)
 
 Select a workspace type; not all workspace types are supported in all project workspaces. 
-Workspace types match available transformation types. For scripting languages ([Python](https://www.python.org/), 
-[R](https://www.r-project.org/), and [Julia](https://julialang.org/)), we provide [JupyterLab](https://jupyter.org/) with 
+Workspace types match available transformation types. For scripting languages ([Python](https://www.python.org/) and 
+[R](https://www.r-project.org/)), we provide [JupyterLab](https://jupyter.org/) with 
 the matching [kernel](https://jupyter.readthedocs.io/en/latest/projects/kernels.html).
-For SQL workspaces, you can either use [Snowflake workspace](https://docs.snowflake.com/en/user-guide/ui-using.html) 
+For SQL workspaces, you can either use Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) 
 or a database client of your liking (for example, [Dbeaver](https://dbeaver.io/)).
 
 {: .image-popup}
@@ -58,26 +57,58 @@ In the workspace detail, you can
 ![Workspace - Running](/transformations/workspace/workspace-detail-1.png)
 
 ### Connecting to Workspace
+#### Python/R
 To connect to a [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) workspace with the associated kernel 
-(Python, R, Julia), use the URL and the password provided in the **Credentials** link. Use the **Connect** button 
-to directly open the JupyterLab interface:
+(Python, R), use the URL and the password provided in the **Credentials** link. Use the **Connect** button 
+to directly open the JupyterLab interface.
 
-To connect to a [Snowflake](https://www.snowflake.com/) workspace,
+{: .image-popup}
+![Workspace - Python/R](/transformations/workspace/workspace-connect-pythonr.png)
 
-- use the Snowflake [Web Interface](https://docs.snowflake.com/en/user-guide/ui-using.html): 
-use the **Connect** link and username + password provided in the **Credentials** link.
-- use your favorite database client (we like [DBeaver](https://dbeaver.io/)) and the credentials provided in 
-the **Credentials** link.
+#### Snowflake
+We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options.
 
-To connect to a [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) 
-and [Redshift](https://aws.amazon.com/redshift/) workspaces, you have to use your database client 
-(we like [DBeaver](https://dbeaver.io)) and use the database options provided in the **Credentials** view. 
-If the database client does not have Synapse Driver, look for *Azure SQL Server*.
+**Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
+
+- `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
+- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu.
+
+{: .image-popup}
+![Workspace - Snowflake](/transformations/workspace/workspace-connect-snowflake-person.png)
+
+**Legacy Service** type workspace uses `SSO` and `Password` authentication methods. To connect using:
+
+- `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
+- `Password` - use your favorite database client or other third-party tool and the Password credentials provided in the **Connect** menu.
+
+{: .image-popup}
+![Workspace - Snowflake](/transformations/workspace/workspace-connect-snowflake-legacy.png)
+
+>***Important***
+>
+>**Legacy Service** type workspace is using single-factor password authentication which is being [deprecated by Snowflake](https://docs.snowflake.com/en/user-guide/security-mfa-rollout).
+>As a result, we are deprecating this login type by the end of 2025.
+>We recommend using `Person` type workspace instead, if you don't need to use password authentication.
+
+##### Using Key Pair Authentication with Third-Party Tools
+Below are links to documentation for popular database IDEs used by Keboola users that support Key Pair authentication.
+
+- [DBeaver Community Edition](https://community.snowflake.com/s/article/Using-Private-Key-authentication-in-DBeaver)
+- [DBeaver Commercial Editions](https://dbeaver.com/docs/dbeaver/Authentication-Snowflake/#private-key-authentication)
+- [DataGrip](https://www.jetbrains.com/help/datagrip/create-snowflake-data-source-with-key-pair-authentication.html)
+- [VSCode/Cursor Snowflake Extension](https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension)
+- [VSCode/Cursore DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
+
+#### BigQuery
+To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
+
+{: .image-popup}
+![Workspace - BigQuery](/transformations/workspace/workspace-connect-bigquery.png)
 
 ### Workspace Lifecycle
 When a workspace is created, it enters the **Active** state and can be used. 
 
-- Database (Snowflake, Redshift, and Synapse) workspaces are billed by the runtime of queries executed in them. As such, we leave them in active state until you delete them. 
+- Database (Snowflake and BigQuery) workspaces are billed by the runtime of queries executed in them. As such, we leave them in active state until you delete them. 
 - JupyterLab workspaces are billed by their running time. They can be terminated and resumed, in order to reduce running time while preserving your work. 
 
 {: .image-popup}
@@ -151,7 +182,7 @@ For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-ex
 ![Example - Table in workspace](/transformations/workspace/table-in-ws.png)
 
 ### Unloading Data
-You can also unload data from the workspace. To unload data, configure 
+You can also unload data from the Python and R workspaces. To unload data, configure 
 [Table Output Mapping](/transformations/mappings/#table-output-mapping)
 or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or both) and click **Unload Data** button.
 
@@ -200,3 +231,5 @@ of production data of your choice. A workspace provides you with a safe and isol
 where you can experiment. The input mapping isolation also means that you can work on live
 production projects without data in the workspace constantly changing --- you update them
 on demand by loading data into the workspace.
+
+A comprehensive [video guide](https://www.youtube.com/watch?v=iQMnh9nqRiE) on this subject is available on our YouTube channel.
