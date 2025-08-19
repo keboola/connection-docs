@@ -34,9 +34,3 @@ Automatically generates a description using AI.
 
 AI-powered explanations for job failures that help you understand and resolve errors more quickly.
 [Learn more about Explaining Errors →](/overview/#ai-assistance)
-
-### AI Flow Builder
-
-Create complete end-to-end ETL flows through natural language conversation.
-[Learn more about AI Flow Builder →](/flows/ai-flow-builder/)
-
