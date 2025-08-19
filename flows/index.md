@@ -45,10 +45,6 @@ Name your new flow and add an easy to understand description. Then click **Creat
 
 This will open up the **flow builder** view, where you can create your data flow.
 
-### AI Flow Builder
-
-In [PayAsYouGo](/management/payg-project/) projects you can use the **AI Flow Builder** beta feature to create a simple 3-step ETL flow from end to end using an AI-powered conversational assistant. For more information, see the [AI Flow Builder documentation](/flows/ai-flow-builder/).
-
 ## Build the Flow
 Click **Select first step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
 
