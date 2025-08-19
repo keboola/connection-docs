@@ -4,7 +4,7 @@ permalink: /components/extractors/database/
 redirect_from:
   - /extractors/database/
 
----
+--- 
 
 * TOC
 {:toc}
