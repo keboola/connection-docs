@@ -39,19 +39,19 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 ![Claude debug error flow in MCP Server](/ai/mcp-server/MCP_Claude-Debug_Error.gif)
 ## Connecting to Keboola's MCP Server
 
-Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote SSE connection and OAuth authentication.
+Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication.
 
 ### Remote Server Setup
 
 In case your AI assistant supports remote connection, you can connect to Keboola's MCP Server by following these steps:
 
-1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/sse`.
+1. Obtain the remote server URL of the stack `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
    - Available stack URLs:
-     - `https://mcp.keboola.com/sse` 
-     - `https://mcp.us-east4.gcp.keboola.com/sse` 
-     - `https://mcp.eu-central-1.keboola.com/sse` 
-     - `https://mcp.north-europe.azure.keboola.com/sse`
-     - `https://mcp.europe-west3.gcp.keboola.com/sse`
+     - `https://mcp.keboola.com/mcp` 
+     - `https://mcp.us-east4.gcp.keboola.com/mcp` 
+     - `https://mcp.eu-central-1.keboola.com/mcp` 
+     - `https://mcp.north-europe.azure.keboola.com/mcp`
+     - `https://mcp.europe-west3.gcp.keboola.com/mcp`
    - You can find the url in your Keboola [Project Settings](/management/project/) under the tab `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
@@ -69,7 +69,7 @@ For other options of local deployments see the [Developers Documentation](https:
 - Go to [Settings > Integrations](https://claude.ai/settings/integrations)
 - Click the **"Add more"** button
 - Give the integration a name (Keboola) and paste in your Integration URL
-  - `https://mcp.<YOUR_REGION>.keboola.com/sse`
+  - `https://mcp.<YOUR_REGION>.keboola.com/mcp`
 - Click **"Add"**
 - You'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
@@ -89,7 +89,7 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
       "command": "npx",
       "args": [
         "mcp-remote",
-        "https://mcp.<YOUR_REGION>.keboola.com/sse"
+        "https://mcp.<YOUR_REGION>.keboola.com/mcp"
       ]
     }
   }
@@ -101,13 +101,13 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 
 Click the button related to your region below:
 
-| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                         |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9zc2UifQ%3D%3D)                       |
-| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vc3NlIn0%3D)         |
-| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vc3NlIn0%3D)         |
-| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vc3NlIn0%3D) |
-| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL3NzZSJ9)       |
+| Stack (Region)                  | Cursor Deeplink                                                                                                                                                                                                         |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US Virginia AWS (default)       | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9tY3AifQ%3D%3D)                       |
+| US Virginia GCP (us-east4)      | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vbWNwIn0%3D)         |
+| EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vbWNwIn0%3D)         |
+| EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vbWNwIn0%3D) |
+| EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL21jcCJ9)       |
 
 **Alternatively**, you can:
 
@@ -130,7 +130,7 @@ Windsurf supports MCP through its native integration with Cascade. You can add K
 {
   "mcpServers": {
     "keboola": {
-      "serverUrl": "https://mcp.<YOUR_REGION>.keboola.com/sse"
+      "serverUrl": "https://mcp.<YOUR_REGION>.keboola.com/mcp"
     }
   }
 }
@@ -164,7 +164,7 @@ VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these s
       "command": "npx",
       "args": [
         "mcp-remote",
-        "https://mcp.<YOUR_REGION>.keboola.com/sse"
+        "https://mcp.<YOUR_REGION>.keboola.com/mcp"
       ]
     }
   }
