@@ -99,6 +99,42 @@ Below are links to documentation for popular database IDEs used by Keboola users
 - [VSCode/Cursor Snowflake Extension](https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension)
 - [VSCode/Cursore DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
+##### Private Key Security and Encryption
+We generate the private key unencrypted and recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
+In case you need to store the private key locally and want to protect it from unauthorized access, you can follow the instructions below based on your OS to encrypt it using [OpenSSL](https://www.openssl.org/):
+
+**macOS & Linux**
+
+Open a terminal and run:
+
+```
+openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encrypted.pem
+```
+
+* `-in private_key.pem` → input file
+* `-topk8` → outputs in PKCS #8 format
+* `-v2 aes-256-cbc` → encryption algorithm
+* `-out private_key_etncrypted.pem` → encrypted key file
+
+👉 You’ll be prompted to set a password.
+
+**Windows**
+
+Make sure OpenSSL is installed (e.g., via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or [Windows binaries](https://slproweb.com/products/Win32OpenSSL.html)).
+
+Open PowerShell or Command Prompt and run:
+
+```
+openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encrypted.pem
+```
+
+* `-in private_key.pem` → input file
+* `-topk8` → outputs in PKCS #8 format
+* `-v2 aes-256-cbc` → encryption algorithm
+* `-out private_key_encrypted.pem` → encrypted key file
+
+👉 You’ll be prompted to set a password.
+
 #### BigQuery
 To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
 
