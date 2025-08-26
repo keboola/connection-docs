@@ -100,7 +100,7 @@ Below are links to documentation for popular database IDEs used by Keboola users
 - [VSCode/Cursore DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
 ##### Private Key Security and Encryption
-We generate the private key unencrypted for smooth UX. We recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
+We generate the private key unencrypted and recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
 In case you need to store the private key locally and want to protect it from unauthorized access, you can follow the instructions below based on your OS to encrypt it using [OpenSSL](https://www.openssl.org/):
 
 **macOS & Linux**
