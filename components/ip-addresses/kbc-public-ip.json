@@ -3,34 +3,10 @@
     "createDate": "2023-02-08",
     "prefixes": [
         {
-            "ipPrefix": "34.224.0.188/32",
-            "vendor": "aws",
-            "region": "us-east-1",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "34.200.169.177/32",
-            "vendor": "aws",
-            "region": "us-east-1",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "52.206.109.126/32",
-            "vendor": "aws",
-            "region": "us-east-1",
-            "service": "syrup"
-        },
-        {
             "ipPrefix": "149.72.196.5/32",
             "vendor": "aws",
             "region": "us-east-1",
             "service": "email-delivery"
-        },
-        {
-            "ipPrefix": "34.203.87.137/32",
-            "vendor": "aws",
-            "region": "us-east-1",
-            "service": "syrup"
         },
         {
             "ipPrefix": "52.7.83.136/32",
@@ -91,18 +67,6 @@
             "vendor": "aws",
             "region": "us-east-1",
             "service": "queue"
-        },
-        {
-            "ipPrefix": "35.157.170.229/32",
-            "vendor": "aws",
-            "region": "eu-central-1",
-            "service": "syrup"
-        },
-        {
-            "ipPrefix": "35.157.93.175/32",
-            "vendor": "aws",
-            "region": "eu-central-1",
-            "service": "syrup"
         },
         {
             "ipPrefix": "3.66.248.180/32",
