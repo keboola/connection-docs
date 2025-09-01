@@ -43,12 +43,6 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `34.206.78.206`
 - `149.72.196.5` - Used only for email delivery.
 
-For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
-- `34.224.0.188`
-- `34.200.169.177`
-- `52.206.109.126`
-- `34.203.87.137`
-- `149.72.196.5` - Used only for email delivery.
 
 
 ## connection.eu-central-1.keboola.com
@@ -70,10 +64,6 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 - `3.71.156.204`
 - `149.72.196.5` - Used only for email delivery.
 
-For projects running on [legacy Queue V1](https://changelog.keboola.com/2021-11-10-what-is-new-queue/) the following IP Addresses are used:
-- `35.157.170.229`
-- `35.157.93.175`
-- `149.72.196.5` - Used only for email delivery.
 
 
 ## connection.north-europe.azure.keboola.com
@@ -154,7 +144,6 @@ The JSON file contains an array of ranges (attribute `prefixes`), each of which 
  - `region` — cloud service region
  - `service` — Keboola application service
    - `queue` - for Keboola components
-   - `syrup` - for Keboola components using legacy Queue V1
    - `email-delivery` - for outbound emails
 
 ### Sample JSON
