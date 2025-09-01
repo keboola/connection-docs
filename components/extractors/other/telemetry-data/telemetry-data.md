@@ -401,6 +401,7 @@ organization, or the Keboola platform itself.
 |`auditLog.admin.activation`
 |`auditLog.admin.addNewU2fDevice`
 |`auditLog.admin.changePassword`
+|`auditLog.admin.deleted`
 |`auditLog.admin.disableMfa`
 |`auditLog.admin.enableTotpMfa`
 |`auditLog.admin.enableU2fMfa`
