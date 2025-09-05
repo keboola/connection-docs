@@ -201,7 +201,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 
 - **Components & Transformations** – Create, edit, and launch them with natural language.  
 - **Storage** – Browse, edit, and document buckets, tables, and columns.  
-- **SQL** – Run and manage SQL queries (BigQuery not supported).  
+- **SQL** – Run and manage SQL queries.  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
 
