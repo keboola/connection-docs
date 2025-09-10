@@ -11,6 +11,7 @@ Connect your MCP clients and AI assistants to your **Keboola Project** and give 
 
 - **[Cursor](#using-with-cursor)** - Direct deeplink installation
 - **[Claude](#using-with-claude-desktop)** - Organization-level integration
+- **[ChatGPT](#using-with-chatgpt)** - Custom connector for Plus/Pro users
 - **[Windsurf](#using-with-windsurf)** - Plugin store or manual configuration
 - **[VS Code](#using-with-vs-code)** - Agent mode with MCP servers
 - **[Make](#using-with-make)** - Agent mode with MCP servers
@@ -96,6 +97,63 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 }
 ```
 4. Restart Claude Desktop, you'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
+
+### Using with ChatGPT
+
+<div class="alert alert-info">
+<p>This feature is available for ChatGPT Plus and Pro users only. Custom connectors are currently in beta.</p>
+</div>
+
+ChatGPT Plus and Pro users can connect to Keboola's MCP Server using custom connectors. Follow these steps to set up the integration:
+
+#### Step 1: Access ChatGPT Settings
+
+1. Log in to your ChatGPT Plus or Pro account
+2. Click on your profile icon in the bottom-left corner of the screen
+3. From the menu that appears, select **Settings**
+
+#### Step 2: Navigate to Connectors
+
+1. In the settings window, select the **Connectors** tab from the left-hand sidebar
+2. Look for the **"Developer mode"** option and toggle it on
+3. Read and acknowledge the warning that appears - this mode allows you to create custom connectors
+4. In the top-right corner of the Connectors page, click **Create**
+
+#### Step 3: Configure the New Connector
+
+1. A new window will open for the "New Connector" settings
+2. **Name**: Give your connector a name, such as "Keboola"
+3. **Description**: Provide a brief description (optional)
+4. **MCP Server URL**: This is the most important part. You need the specific URL for your Keboola MCP Server:
+   - Open a new tab and go to your Keboola [project settings](/management/project/)
+   - Navigate to `Users & Settings` > `MCP Server`
+   - Copy the MCP Server URL provided there (e.g., `https://mcp.us-east4.gcp.keboola.com/mcp`)
+   - Paste this URL into the **MCP Server URL** field in ChatGPT
+5. **Authentication**: The authentication method will be set to OAuth automatically
+6. Check the box to confirm you understand the "beta" nature of custom connectors
+7. Click **Create**
+
+#### Step 4: Authorize the Connection
+
+1. After clicking "Create," you will be redirected to the Keboola platform to authorize the connection
+2. Sign in to your Keboola account if prompted
+3. Select the specific Keboola project you want to connect to
+4. Once authorized, you will be redirected back to ChatGPT
+5. A confirmation message "Keboola is now connected" will appear at the top of the screen
+
+#### Step 5: Use the Connector in a Chat
+
+To use the custom connector you've created, you must explicitly enable Developer Mode in the chat interface:
+
+1. Start a new chat
+2. Click on the **"Add photos & files"** icon
+3. Hover over the **"More"** option
+4. From the expanded menu, select **"Developer Mode"**
+5. This will change the prompt box to indicate that developer mode is active
+6. You will see an option to select your custom connector (e.g., a button labeled "Keboola")
+7. Click on the **"Keboola"** button to enable it for this specific conversation
+
+You can now ask questions related to your Keboola data, and ChatGPT will use the connector to access the information. For example: "What data tables are in my project?" or "Show me the latest job runs."
 
 ### Using with Cursor
 
