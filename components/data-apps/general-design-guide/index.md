@@ -187,7 +187,7 @@ Then, initialize your client in your Streamlit app:
 
 This package provides simple functions such as `keboola.read_table` and `keboola.write_table` to easily read and write data.
 
-For users with read-only workspaces or data warehouses like Snowflake, you can also use Python connectors, such as Snowflake's Python connector or Snowpark. For example, you might initialize a Snowflake session with:
+For users with read-only workspaces or data warehouses like Snowflake, you can also use Python connectors. For example, you might initialize a Snowflake session with:
 
     st.session_state['snowflake_session'] = keboola.snowflake_create_session_object()
 
