@@ -59,6 +59,7 @@ To solve your problem or to gain context, they may join your project when reques
 ### Maintenance
 Keboola performs scheduled maintenance from time to time to keep things running smoothly. This takes place on Saturdays between 6:00 AM and 7:00 AM UTC and won’t happen more than once every 30 days. We make every effort to minimize any disruption during this period, but to avoid any potential interruptions, we recommend not scheduling critical jobs/flows during this maintenance window.
 
-If maintenance is needed outside of the regular window, we’ll post an announcement at least 48 hours in advance on our [status page](https://status.keboola.com/), unless we’ve agreed on a different way to notify you.
+If maintenance is needed outside of the regular window, we’ll post an announcement at least 48 hours in advance on our [status page](https://keboolastatus.com/), unless we’ve agreed on a different way to notify you.
 
 To check how the platform is doing at any moment, visit [stats.keboola.com](http://stats.keboola.com/) or use an alternative tracking method if one has been arranged with you.
+
