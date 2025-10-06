@@ -960,6 +960,7 @@ This table shows data about existing [workspaces](/transformations/workspace/). 
 | `workspace_shared` | Flag indicating if the workspace is shared with other users | `true` |
 | `workspace_read_only_storage_access` | Flag indicating if the workspace has read-only storage access | `false` |
 | `kbc_workspace_name` | Name of the workspace | `My Workspace` |
+| `workspace_schema` | Schema name | `WORKSPACE_985088174` |
 
 ### kbc_workspace_event
 This table shows data about [workspace](/transformations/workspace/) events.
