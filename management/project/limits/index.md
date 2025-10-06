@@ -82,8 +82,6 @@ If you need more information, please contact your CSM.
 | Medium                                | 1 hour                  | **0.5**               |
 | Large                                 | 1 hour                  | **1**                 |
 
-**Note:** If a Snowpark job or workspace is created, it is billed as a Data Science job/workspace plus DWH Direct Queries running in Snowflake. This is because Snowpark executes computations within Snowflake, generating additional query costs.
-
 **Types of backend sizes used for jobs**
 
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
@@ -127,3 +125,4 @@ component performance may degrade.
 
 The **full list of the platform limits** is available as a 
 [separate document](https://docs.google.com/a/keboola.com/spreadsheets/d/1SqUE6vS5Nq0MmB6Kdw5DyuPjlbyXJ0zMDoGDU5cOfSI/edit?usp=sharing).
+

@@ -33,7 +33,7 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 - [Release notes](https://changelog.keboola.com/)
 
 ## Resources
-- [status.keboola.com](http://status.keboola.com/) – get Keboola status updates (we recommend subscribing to the feed)
+- [keboolastatus.com](https://keboolastatus.com/) – get Keboola status updates (we recommend subscribing to the feed)
 - [www.keboola.com](https://www.keboola.com/) – our main web page
 - [blog.keboola.com](https://blog.keboola.com/) – something to read for data analysts
 - [500.keboola.com](https://500.keboola.com/) – something to read for tech geeks

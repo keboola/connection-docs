@@ -23,7 +23,7 @@ Free Plan projects have the following limits:
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
 
 ## DWH Backend
-Users can choose between a Keboola-managed backend or their own backend. Read more about Bring Your Own Database [here](storage/byodb/).
+In Pay As You Go projects, only a Keboola-managed backend is available. You can use your own database ([Bring Your Own Database](/storage/byodb/)) within any of the subscription plans.
 
 ## Pricing & Purchasing Additional Minutes
 Each Free Plan project receives up to 60 minutes of free runtime per month, limited to the actual usage from the previous month (for example, if a project used only 30 minutes last month, it will receive 30 free minutes this month). Minutes are used for running of any process 
