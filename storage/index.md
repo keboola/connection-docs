@@ -27,8 +27,12 @@ The Storage component manages all data stored in each Keboola project:
 - [Data files](/storage/files/) (File Storage) --- all raw files uploaded to your project
 - [Component configurations](/components/)
 
-Different storage technologies are used for the above data: [Amazon S3 Storage](https://aws.amazon.com/s3/), [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) or [Google Cloud Storage](https://cloud.google.com/storage/) for [File Storage](/storage/files/) and [BigQuery](https://cloud.google.com/bigquery/) or [Snowflake](https://www.snowflake.com/product/) for [Table Storage](/storage/tables/). The database system behind the Table Storage is referred to as a **backend**.
+Different storage technologies are used for the above data:
 
+- [Amazon S3 Storage](https://aws.amazon.com/s3/), [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/), and [Google Cloud Storage](https://cloud.google.com/storage/) are used for [File Storage](/storage/files/).
+- [BigQuery](https://cloud.google.com/bigquery/) and [Snowflake](https://www.snowflake.com/product/) are used for [Table Storage](/storage/tables/).
+
+The database system behind the Table Storage is referred to as a **backend**.
 Data in Table Storage is internally stored in a **database backend** (project backend).
 
 ### Storage Backend Types and Features
