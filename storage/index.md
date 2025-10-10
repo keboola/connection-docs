@@ -41,7 +41,7 @@ There are multiple types of storage backend configurations you can choose from, 
 #### Multi-tenant (MT)
 MT backend shares compute resources across projects, while maintaining a high degree of data isolation between those projects. Benefits of this setup are mainly cost-savings, as projects share the compute resources.
 
-**Snowflake** projects are *not allowed* to access Snowflake database directly through [Snowflake Workspaces](/transformations/workspace/#snowflake). This is due to the fact that all databases sharing the same resources exist in the same Snowflake account, and Snowflake does not allow direct access to the same account by different business entities. Users are able to use the in-platform SQL Editor for SQL development and analysis above the data in the Table Storage, and the Data Gateway component to share the data in read-only mode to 3rd party BI and visualization tools.
+**Snowflake** projects are *not allowed* to access the Snowflake database directly through [Snowflake Workspaces](/transformations/workspace/#snowflake). This limitation exists because all databases sharing the same resources exist in the same Snowflake account, and Snowflake does not allow direct access to the same account by different business entities. Instead, users can use the in-platform SQL Editor for SQL development and analysis above the data in Table Storage. The Data Gateway component can also be used to share data in read-only mode with third-party BI and visualization tools.
 
 **BigQuery** projects are *allowed* to access BigQuery database directly through [BigQuery Workspaces](/transformations/workspace/#bigquery), as BigQuery handles access to its environment differently.
 
