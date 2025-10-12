@@ -171,3 +171,99 @@ To persist the SQL logic and output mapping into a formal Keboola Transformation
 2.  Select **Save with description** (or **Save** if no new queries were added).
 
 This action saves the SQL code and the output mapping configuration, creating a new Transformation component in your project.
+
+# Advanced SQL Editor Features
+
+This section describes advanced features available in the SQL Editor workspace, specifically focusing on managing data sources through Input Mapping and leveraging reusable code blocks using Shared Code.
+
+## Input Mapping
+
+While the SQL Editor automatically provides read-only access to all tables within the project's Storage (visible in the **Storage Explorer** below the Working Tables section), Input Mapping (IM) is necessary when you need to apply filters, specify specific columns, or set time-based filters before the data is loaded into the workspace database.
+
+Input Mapping is also commonly used when migrating older transformations that relied on predefined input configurations.
+
+### Setting up Input Mapping
+
+To set up Input Mapping for a table:
+
+1. Locate the desired table in the **Storage Explorer** (e.g., the `account` table under `basic-customer`).
+2. Click the three dots next to the table name.
+3. Select **Add table to Input Mapping**.
+
+{: .image-popup}
+![Context menu showing Add table to Input Mapping](/transformations/sql-editor/21-input-mapping-context-menu.jpg)
+
+4. The Input Mapping configuration dialog opens:
+
+{: .image-popup}
+![Input Mapping dialog](/transformations/sql-editor/22-input-mapping-dialog.jpg)
+
+Here you can define:
+
+*   **Source:** The source bucket and table (pre-filled).
+*   **Table Name:** The alias used for this table in your SQL queries within the workspace (e.g., `account`).
+*   **Columns (optional):** Specify which columns to import, or leave empty to import all.
+*   **Changed in Last (optional):** Filter the data based on when it was last changed in Storage. This is useful for incremental loads.
+
+{: .image-popup}
+![Changed in Last filter selection](/transformations/sql-editor/23-input-mapping-changed-in-last.jpg)
+
+*   **Data Filter (optional):** Apply column-based filtering using specific values.
+*   **Data Types:** Define column data types (optional).
+
+5. Click **Add Input** to finalize the configuration. The table now appears in the **Working Tables** section marked with **IM** (Input Mapping).
+
+### Loading Input Mapped Data
+
+When a table is configured with Input Mapping, it is *not* immediately loaded into the workspace. The configuration merely tells the transformation what to load when it runs.
+
+To query and work with the filtered/mapped data interactively in the editor, you must manually load it:
+
+1. In the **Working Tables** section, locate the Input Mapped table (e.g., `account`).
+2. Click the **Load Data** option that appears near the table.
+
+{: .image-popup}
+![Load Data prompt](/transformations/sql-editor/24-load-data-confirmation.jpg)
+
+3. Confirm the loading by clicking **Load Latest Data**.
+
+If a table is configured for Input Mapping but not yet loaded, hovering over the table icon will show a warning indicating limited functionality.
+
+{: .image-popup}
+![Unloaded Input Mapped table warning](/transformations/sql-editor/25-unloaded-table-tooltip.jpg)
+
+## Shared Code
+
+Shared Code allows you to reuse predefined SQL queries across multiple transformations or query blocks. This promotes consistency and simplifies maintenance. 
+
+### Importing Shared Code Blocks
+
+To import shared code into a transformation block:
+
+1. In the SQL code editor block, click the **Select Shared Code** link.
+
+{: .image-popup}
+![Select Shared Code button](/transformations/sql-editor/26-select-shared-code.jpg)
+
+2. In the "Add Shared Code" dialog, select the desired code from the dropdown (e.g., `Aggregate`).
+
+{: .image-popup}
+![Shared Code dialog showing Aggregate selection](/transformations/sql-editor/27-add-shared-code-dialog.jpg)
+
+### Shared Code Options
+
+You have two options for using shared code:
+
+1.  **Use Inline:** The SQL text of the shared code is copied directly into your transformation block. You can then freely edit and modify the code locally. This is equivalent to copy-pasting the code.
+2.  **Use as Shared Code (Linking):** The code block is linked to the original shared code template.
+
+When linking shared code:
+
+*   The code block appears labeled **SHARED CODE**.
+*   Any updates made to the original shared code template will automatically propagate to this transformation block.
+*   The code within the block is read-only (uneditable), ensuring integrity with the shared template.
+
+{: .image-popup}
+![Shared Code block linked](/transformations/sql-editor/28-shared-code-linked.jpg)
+
+If you need to make modifications to the code for a specific transformation, you must use the **Use Inline** option.
