@@ -40,8 +40,6 @@ The workspace will be scheduled and created. Once active, you can access the SQL
 
 The SQL Editor interface consists of several key areas designed to facilitate SQL querying and transformation creation.
 
-![](1:45)
-
 ### Left Pane: Table Explorer
 
 The left pane, known as the Table Explorer, is divided into two sections:
@@ -152,8 +150,6 @@ Once temporary working tables are created, you must map them to a destination in
 3.  In the Output Mapping dialog, configure the destination bucket and table name in Storage. You can also define the primary key and set incremental loading options.
 4.  Click **ADD OUTPUT**.
 
-![](6:30)
-
 Once mapped, the table icon in the Working Tables section changes to **OM** (Output Mapping), confirming it is ready to be saved as a transformation.
 
 {: .image-popup}
@@ -172,17 +168,17 @@ To persist the SQL logic and output mapping into a formal Keboola Transformation
 
 This action saves the SQL code and the output mapping configuration, creating a new Transformation component in your project.
 
-# Advanced SQL Editor Features
+## Advanced SQL Editor Concepts
 
-This section describes advanced features available in the SQL Editor workspace, specifically focusing on managing data sources through Input Mapping and leveraging reusable code blocks using Shared Code.
+This section describes advanced concepts available in the SQL Editor.
 
-## Input Mapping
+### Input Mapping
 
 While the SQL Editor automatically provides read-only access to all tables within the project's Storage (visible in the **Storage Explorer** below the Working Tables section), Input Mapping (IM) is necessary when you need to apply filters, specify specific columns, or set time-based filters before the data is loaded into the workspace database.
 
 Input Mapping is also commonly used when migrating older transformations that relied on predefined input configurations.
 
-### Setting up Input Mapping
+#### Setting up Input Mapping
 
 To set up Input Mapping for a table:
 
@@ -213,7 +209,7 @@ Here you can define:
 
 5. Click **Add Input** to finalize the configuration. The table now appears in the **Working Tables** section marked with **IM** (Input Mapping).
 
-### Loading Input Mapped Data
+#### Loading Input Mapped Data
 
 When a table is configured with Input Mapping, it is *not* immediately loaded into the workspace. The configuration merely tells the transformation what to load when it runs.
 
@@ -232,11 +228,11 @@ If a table is configured for Input Mapping but not yet loaded, hovering over the
 {: .image-popup}
 ![Unloaded Input Mapped table warning](/transformations/sql-editor/25-unloaded-table-tooltip.jpg)
 
-## Shared Code
+### Shared Code
 
 Shared Code allows you to reuse predefined SQL queries across multiple transformations or query blocks. This promotes consistency and simplifies maintenance. 
 
-### Importing Shared Code Blocks
+#### Importing Shared Code Blocks
 
 To import shared code into a transformation block:
 
@@ -250,7 +246,7 @@ To import shared code into a transformation block:
 {: .image-popup}
 ![Shared Code dialog showing Aggregate selection](/transformations/sql-editor/27-add-shared-code-dialog.jpg)
 
-### Shared Code Options
+#### Shared Code Options
 
 You have two options for using shared code:
 
