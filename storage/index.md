@@ -50,7 +50,8 @@ MT backend type is used for all [Pay As You Go projects](/management/payg-projec
 #### Keboola-Brings-Database (KBDB)
 KBDB is **Snowflake** backend type where Keboola manages a dedicated account for a customer, while the customer is not an admin of the account. This setup is used for contract customers who need access to [Snowflake Workspaces](/transformations/workspace/#snowflake) and direct connection to Snowflake database (e.g. for SQL development in IDEs).
 
-As the dedicated account does not share the resources with other customers, it has higher performance, but also higher cost.
+As the dedicated account does not share the resources with other customers, it has higher and more stable performance, but also higher cost.
+
 
 #### Bring-Your-Own-Database (BYODB)
 This backend type allows customers to use their own database for their Keboola projects and can use both BigQuery and Snowflake as the backend.
