@@ -15,11 +15,6 @@ allow to push data to various business intelligence platforms:
 - [ThoughtSpot](/components/writers/bi-tools/thoughtspot) --- writes tables to [ThoughtSpot](https://www.thoughtspot.com/product).
 - And more
 
-A number of BI and Analytics tools are also accessible via the [Snowflake data destination connector](/components/writers/database/snowflake/) using the
-[Keboola-Provisioned Database](/components/writers/database/snowflake/#using-keboola-provisioned-database), for example:
+A number of BI and Analytics tools are also accessible via the [Data Gateway](/components/applications/data-gateway/) component, which is provising read only access to the data to third-party applications supporting Snowflake as a data source.
 
- - [Looker](/components/writers/database/snowflake/#connect-to-looker)
- - [PowerBI](/components/writers/database/snowflake/#connect-to-power-bi-desktop)
- - [Qlik](/components/writers/database/snowflake/#connect-to-qlik)
- - [Tableau](/components/writers/database/snowflake/#connect-to-tableau)
-- and [others](https://components.keboola.com/components)
+Users with access to Snowflake or BigQuery [workspaces](/transformations/workspace/) can utilize [read-only access to storage](/transformations/mappings/#read-only-input-mapping) to query the data in Storage directly. Or load data to created workspace by using [Snowflake](/components/writers/database/snowflake/) or [BigQuery](/components/writers/database/bigquery/) data destination connectors.
