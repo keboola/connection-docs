@@ -366,9 +366,10 @@ described in the component repository) and the processors (to learn more about p
 see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
 
 {: .image-popup}
-![Screenshot - Advanced](/components/configuration-17.png)
+![Screenshot - Advanced](/components/configuration-24.png)
 
 Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may
 be disabled. Reverting such changes will re-enable the visual form. But the JSON will translate back
 to the visual form whenever possible and vice versa.
+
 
