@@ -44,7 +44,7 @@ This means that:
 This design improves isolation, reliability, and performance when working in branches — especially for large-scale projects where multiple users or automated processes work in parallel.
 
 {: .image-popup}
-![Screenshot - Branched Storage](branched_storage.png)
+![Screenshot - Branched Storage](/branched_storage.png)
 
 ---
 
@@ -119,4 +119,5 @@ Components using OAuth does not allow authorizing nor changing the OAuth in deve
 *****
 
 ***Important:** Development branches are for development and testing only, so setting up status notifications on Flows is not supported.*
+
 
