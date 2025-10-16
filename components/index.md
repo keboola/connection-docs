@@ -360,7 +360,8 @@ The authorization can also be revoked from within the service. In that case the 
 and you will have to reset and reauthorize it.
 
 ## Debug Mode
-For more features, switch the configuration of each table to **Power User Mode** by clicking the *Debug mode* link.
+Clicking the **Debug mode** link allows you to access the JSON configuration directly, along with some advanced options on how to run the component.
+
 By editing the full JSON configuration, you can set up the component (all options are
 described in the component repository) and the processors (to learn more about processors, 
 see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
@@ -372,4 +373,7 @@ Changing the JSON configuration may render the visual form unable to represent t
 be disabled. Reverting such changes will re-enable the visual form. But the JSON will translate back
 to the visual form whenever possible and vice versa.
 
+### Run custom tag 
+When in Debug Mode, the **Run Custom Tag** option allows you to execute a specific version of a component.
 
+In most cases, you will not need to use this option directly. However, our team may occasionally ask you to run a component under a custom tag — either as part of troubleshooting an issue you have reported to our support team, or as part of the release management process to test a new version before its official release.
