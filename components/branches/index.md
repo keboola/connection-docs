@@ -45,7 +45,7 @@ This approach provides:
 - **Safety** – all write operations are performed within the branch’s own isolated context, ensuring that production data remains untouched.
 
 {: .image-popup}
-![Screenshot - Branched Storage](/tutorial/branches/figures/branched_storage.png)
+![Screenshot - Branched Storage](branched_storage.png)
 
 ---
 
@@ -116,3 +116,4 @@ Components using OAuth do not allow authorizing nor changing the OAuth in a deve
 *****
 
 ***Important:** Development branches are for development and testing only, so setting up status notifications on Flows is not supported.*
+
