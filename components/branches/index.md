@@ -26,48 +26,45 @@ When you create a development branch in your project, you obtain an exact copy o
 configurations. You can then modify these configurations without ever touching the original ones in production, 
 and these will keep running in orchestrations. 
 
-When you run a configuration in a branch, it is able to **read** the [tables](/storage/tables/) and [files](/storage/files/) 
-from the Storage as if it were a normal configuration. However, when your branch configuration attempts to **write** data
-(tables or files) to Storage, it is stored separately and does not overwrite the original production data and interfere
-with the running configurations. There is no need to duplicate your project's data when creating a new branch. 
+When you run a configuration in a branch, it can **read** the [tables](/storage/tables/) and [files](/storage/files/) 
+from Storage as if it were a normal configuration. However, when your branch configuration attempts to **write** data
+(tables or files), the data is written to the branch’s isolated storage layer. This means that production data and branch data
+are completely separated. There is no need to duplicate your entire project's data when creating a new branch.
 
 ### Branched Storage Architecture
 
-Under the hood, development branches now use a *branched storage architecture*.  
-This architecture creates a complete clone of the production Storage database, with a unique **branch-specific prefix** applied to all stored objects.  
+Under the hood, development branches now use a **branched storage architecture**.  
+Instead of creating prefixed buckets immediately upon branch creation, Keboola creates a dedicated *branched storage* — 
+a fully isolated logical copy of your production Storage environment.  
 
-This means that:
-- Each branch operates on an isolated snapshot of the production dataset.
-- Reads fall back to production data when a branch-specific version is not available.
-- Writes always target the branch-prefixed buckets and files, ensuring that production data remains untouched.
-
-This design improves isolation, reliability, and performance when working in branches — especially for large-scale projects where multiple users or automated processes work in parallel.
+This approach provides:
+- **Full isolation** – each branch has its own Storage environment that does not affect production.  
+- **On-demand materialization** – tables and files appear in the branched storage only once they are accessed, cloned, or written to within the branch.  
+- **Transparent behavior** – from the user’s perspective, reading and writing works exactly the same as in production.  
+  When a job in a branch reads from a table that has not been modified, the data is transparently loaded from production.
+- **Safety** – all write operations are performed within the branch’s own isolated context, ensuring that production data remains untouched.
 
 {: .image-popup}
-![Screenshot - Branched Storage](branched_storage.png)
+![Screenshot - Branched Storage](/tutorial/branches/figures/branched_storage.png)
 
 ---
 
 ### Data Pipelines
 
-When you create a data source connector and then transform the data it produces using transformation it behaves the following way in branches: 
+When you create a data source connector and then transform the data it produces using a transformation, it behaves the following way in branches:
 
-In production, you created a data source connector that extracts your website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes the data from `in.c-requests` and transforms it into aggregated visits to a bucket named `out.c-visits`. You've already executed the pipeline multiple times, so both buckets have production data in them.
+In production, you might have a data source connector that extracts website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes data from `in.c-requests` and transforms it into aggregated visits stored in `out.c-visits`. Both buckets contain production data.
 
-Now when you switch to a new branch, and run the transformation. It will load the input data from `in.c-requests` and transform it. When it's about to write it back to storage, it will automatically prefix the output bucket with an ID of the branch - `out.c-1234-visits`. Your production data is left intact in `out.c-visits`.
+When you switch to a new branch, no data is copied immediately. The branched storage references production data until you start modifying or writing data.  
 
-<div class="alert alert-info" markdown="1">
-Bucket name is automatically prefixed with branch numeric ID when a job writes to storage in development branch.
-</div>
-
-Now you run the data source connector in the branch. It stores the data in a bucket prefixed with branch ID - `in.c-1234-requests`. You production data is again left intact in `in.c-requests`.
-But when you now run the transformation, it will automatically check if you have branch version of the source bucket `in.c-requests`. Because you do have `in.c-1234-requests`, it will load the data from there.
+If you run a transformation that writes to a new table or modifies existing data, the table will be created or cloned inside the branched storage.  
+Any subsequent reads or writes within that branch will operate only on this isolated copy. Your production data in `out.c-visits` remains untouched.
 
 <div class="alert alert-info" markdown="1">
-When a job reads from storage in development branch it checks if there is a branch version of the bucket and uses it. If there is none, it will fallback to reading from production bucket instead.
+In branched storage, data is materialized only when it is written to or cloned within a branch. Reading from unmodified tables uses production data transparently.
 </div>
 
-This allows you to test the whole pipeline from start to finish with actual data in a complete isolation from your production data. Also, you don't need to re-run all you production jobs to get the data to the branch.
+This allows you to test the entire pipeline with real data, in complete isolation from production, without duplicating all storage content at branch creation.
 
 ## Creating a Branch
 If you have your configurations ready in production and want to create a branch to test some changes, click on your project’s name 
@@ -114,12 +111,8 @@ write to the destination, or change the destination accordingly.
 
 ### OAuth Authorized Components
 
-Components using OAuth does not allow authorizing nor changing the OAuth in development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.
+Components using OAuth do not allow authorizing nor changing the OAuth in a development branch. The OAuth authorization tokens are shared with production so changing them might break the production pipeline.
 
 *****
 
 ***Important:** Development branches are for development and testing only, so setting up status notifications on Flows is not supported.*
-
-
-
-
