@@ -44,6 +44,11 @@ This approach provides:
   When a job in a branch reads from a table that has not been modified, the data is transparently loaded from production.
 - **Safety** – all write operations are performed within the branch’s own isolated context, ensuring that production data remains untouched.
 
+<div class="alert alert-info" markdown="1">
+Branched Storage is currently available **only for projects using Snowflake** as the backend.  
+Projects running on **BigQuery** continue to use the previous branch model with prefixed buckets (e.g., `in.c-1234-bucket`) until Branched Storage support is added.
+</div>
+
 {: .image-popup}
 ![Screenshot - Branched Storage](branched_storage.png)
 
@@ -55,13 +60,16 @@ When you create a data source connector and then transform the data it produces 
 
 In production, you might have a data source connector that extracts website requests data to a bucket called `in.c-requests`. Then you create a transformation that takes data from `in.c-requests` and transforms it into aggregated visits stored in `out.c-visits`. Both buckets contain production data.
 
-When you switch to a new branch, no data is copied immediately. The branched storage references production data until you start modifying or writing data.  
+When you switch to a new branch in a **Snowflake project**, no data is copied immediately. The branched storage references production data until you start modifying or writing data.  
 
 If you run a transformation that writes to a new table or modifies existing data, the table will be created or cloned inside the branched storage.  
 Any subsequent reads or writes within that branch will operate only on this isolated copy. Your production data in `out.c-visits` remains untouched.
 
+For **BigQuery projects**, the classic prefix-based model still applies — new tables written from a branch are prefixed with the branch ID (e.g., `out.c-1234-visits`).
+
 <div class="alert alert-info" markdown="1">
-In branched storage, data is materialized only when it is written to or cloned within a branch. Reading from unmodified tables uses production data transparently.
+In Branched Storage (Snowflake), data is materialized only when it is written to or cloned within a branch.  
+Reading from unmodified tables uses production data transparently.
 </div>
 
 This allows you to test the entire pipeline with real data, in complete isolation from production, without duplicating all storage content at branch creation.
@@ -116,4 +124,3 @@ Components using OAuth do not allow authorizing nor changing the OAuth in a deve
 *****
 
 ***Important:** Development branches are for development and testing only, so setting up status notifications on Flows is not supported.*
-
