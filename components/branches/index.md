@@ -18,7 +18,7 @@ This ensures that each branch storage acts as a complete snapshot of the product
 Development branches are inherently safer, as all operations are executed on their isolated copy of the data.
 
 {: .image-popup}
-![Screenshot - Branched storage](/tutorial/branches/figures/branched_storage.png)
+![Screenshot - Branched storage](branched_storage.png)
 
 ---
 
@@ -52,4 +52,5 @@ For existing projects, this feature must be manually enabled to take advantage o
 - [Creating and Managing Branches](/tutorial/branches/)
 - [Deployment Process](/tutorial/deployment/)
 - [Storage Overview](/components/storage/)
+
 
