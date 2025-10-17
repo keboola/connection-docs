@@ -369,11 +369,18 @@ see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/pr
 {: .image-popup}
 ![Screenshot - Advanced](/components/configuration-24.png)
 
-Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may
-be disabled. Reverting such changes will re-enable the visual form. But the JSON will translate back
+Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may be disabled. Reverting such changes will re-enable the visual form. But the JSON will translate back
 to the visual form whenever possible and vice versa.
 
 ### Run custom tag 
 When in Debug Mode, the **Run Custom Tag** option allows you to execute a specific version of a component.
 
+<p align="center">
+  <img src="/components/configuration-25.png" class="image-popup" width="45%">
+  &nbsp;&nbsp;
+  <img src="/components/configuration-26.png" class="image-popup" width="45%">
+</p>
+
+
 In most cases, you will not need to use this option directly. However, our team may occasionally ask you to run a component under a custom tag — either as part of troubleshooting an issue you have reported to our support team, or as part of the release management process to test a new version before its official release.
+
