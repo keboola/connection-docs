@@ -382,5 +382,6 @@ When in Debug Mode, the **Run Custom Tag** option allows you to execute a specif
 </p>
 
 
-In most cases, you will not need to use this option directly. However, our team may occasionally ask you to run a component under a custom tag — either as part of troubleshooting an issue you have reported to our support team, or as part of the release management process to test a new version before its official release.
+In most cases, you will not need to use this option directly. However, our team may occasionally ask you to run a component under a custom tag — either as part of troubleshooting an issue you have reported to our [support](https://help.keboola.com/management/support/) team, or as part of the release management process to test a new version before its official release.
 
+You can confirm that the job run under the custom tag in the job's Parameters & Results section.
