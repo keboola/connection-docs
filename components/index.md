@@ -387,4 +387,5 @@ In most cases, you will not need to use this option directly. However, our team 
 You can confirm that the job run under the custom tag in the job's Parameters & Results section.
 
 {: .image-popup}
-![Screenshot - Advanced](/components/components_jobs_parameters.png)
+![Screenshot - Advanced](/components/components_job_parameters.png)
+
