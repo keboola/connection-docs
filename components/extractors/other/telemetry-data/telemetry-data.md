@@ -302,6 +302,21 @@ This table shows information about queries using Snowflake, including transforma
 | `time_credits_used` | Number of the time credits consumed by the queries | `0.91206222224` |
 | `billed_credits_used` | Number of the actually billed credits | `0.91206222224` |
 
+### kbc_bigquery_stats
+This table shows information about queries using BigQuery, including transformations and sandboxes.
+
+| **Column** | **Description** | **Example** |
+|---|---|---|
+| `kbc_bigquery_stats_id` | Hash of the bigquery queries stat group identifier | `8345cc0d580a6160d2ed5b9b16a` |
+| `kbc_project_id` | Foreign key to the Keboola project | `2_com-keboola-gcp-us-east4` |
+| `bigquery_job_start_at` | Datetime hour the jobs started (Bigquery jobs/queries are aggregated per hour) | `2019-08-19 06:00:00` |
+| `bigquery_user` | User running the queries | `kbc-euw3-ws-1865070` |
+| `bigquery_job_type` | Type of the Bigquery job. <br> Possible values: <br> `sandbox` – queries run in SQL sandbox, `transformations` – queries run in SQL transformations, `sapi` - queries related to the project's Storage | `sandbox` |
+| `bigquery_queries` | Number of the queries aggregated by the primary key | `19` |
+| `bigquery_queries_length_s` | Length of the queries in seconds aggregated by the primary key | `205.214000` |
+| `time_credits_used` | Number of the time credits consumed by the queries | `0.91206222224` |
+| `billed_credits_used` | Number of the actually billed credits | `0.91206222224` |
+
 
 ### kbc_table_snapshot
 This table shows [Storage table](/storage/tables/) snapshots.
