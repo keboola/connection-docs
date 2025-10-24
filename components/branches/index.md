@@ -33,9 +33,10 @@ are completely separated. There is no need to duplicate your entire project's da
 
 ### Branched Storage Architecture
 
-Under the hood, development branches now use a **branched storage architecture**.  
-Instead of creating prefixed buckets immediately upon branch creation, Keboola creates a dedicated *branched storage* — 
-a fully isolated logical copy of your production Storage environment.  
+Instead of creating prefixed buckets immediately upon branch creation, Keboola now uses *branched storage* —  
+a dedicated storage namespace that behaves like an isolated copy of your production environment,  
+but without duplicating data up front. Tables and files are only materialized when they are cloned or written to.  
+The isolation is handled by automatically prefixing schema names, without injecting branch IDs into bucket names.
 
 This approach provides:
 - **Full isolation** – each branch has its own Storage environment that does not affect production.  
@@ -124,3 +125,4 @@ Components using OAuth do not allow authorizing nor changing the OAuth in a deve
 *****
 
 ***Important:** Development branches are for development and testing only, so setting up status notifications on Flows is not supported.*
+
