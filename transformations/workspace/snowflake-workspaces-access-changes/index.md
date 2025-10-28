@@ -13,7 +13,7 @@ Users will no longer be able to log in to the Snowflake UI environment, nor conn
 
 
 # Snowflake Single-factor Password Authentication Deprecation
-While [Keboola-Brings-Database](/storage/#keboola-brings-database-kbdb) and [Bring-Your-Own-Database](/storage/#bring-your-own-database-byodb) projects are not loosing access to Snowflake workspaces, [Snowflake is globally deprecating single-factor password authentication](https://docs.snowflake.com/en/user-guide/security-mfa-rollout) and we are implementing changes to Keboola platform to support this change.
+While [Keboola-Brings-Database](/storage/#keboola-brings-database-kbdb) and [Bring-Your-Own-Database](/storage/#bring-your-own-database-byodb) projects are not losing access to Snowflake workspaces, [Snowflake is globally deprecating single-factor password authentication](https://docs.snowflake.com/en/user-guide/security-mfa-rollout) and we are implementing changes to Keboola platform to support this change.
 
 # Timeline of Changes
 
