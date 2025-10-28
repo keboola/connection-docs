@@ -57,7 +57,7 @@ You'll be redirected to the table detail page. Here you can configure how the ta
   - **Full Load (Clone)** - clones the entire table to the read-only workspace (including the data types).
 - **Columns** - modifications are available only for **Full Load (Copy)** load type.
     - **Column Name** - the name of the column in the Snowflake database.
-    - **Data Type** - the data type of the column in the Snowflake database. If [typed table](/storage/tables/data-types/) is selected, you can use only the data type defined in Storage or IGNORE "type" to not load the column at all.
+    - **Data Type** - the data type of the column in the Snowflake database. If [typed table](/storage/tables/data-types/) is selected, you can use only the data type defined in Storage, or set the data type to **IGNORE** to exclude the column from loading.
     - **Nullable** - whether the column is nullable.
     - **Default value** - the default value of the column.
 
