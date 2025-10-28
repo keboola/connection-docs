@@ -6,9 +6,14 @@ permalink: /transformations/sql-editor/
 * TOC
 {:toc}
 
-The Keboola SQL Editor allows users without specialized tools (like BI or ODBC customers) to directly interact with their Snowflake data warehouse within Keboola Connection. It provides a fluid, seamless, and integrated experience, replacing previous solutions like Snowsight. The editor supports better integration with Keboola Connection Storage features, including linked buckets, tables, shared code, and variables.
+The Keboola SQL Editor allows users without specialized tools (like BI or ODBC customers) to directly interact with their Snowflake data warehouse within Keboola Connection. It offers a smooth, fully integrated experience, replacing previous solutions like Snowsight. The editor is tightly connected with Keboola Storage, so you can easily access and use your buckets, tables, shared codes and variables in one place.
 
 Currently, the SQL Editor supports **Snowflake** workspaces.
+
+{% include public-beta-warning.html %}
+
+* TOC
+{:toc}
 
 ## Creating a Snowflake SQL Workspace
 
@@ -19,7 +24,7 @@ The SQL Editor is accessed via a dedicated Snowflake Workspace. To get started, 
 3.  Select **Snowflake SQL Workspace**.
 
 {: .image-popup}
-![SQL Editor - Create workspace modal](/transformations/sql-editor/01-create-workspace-modal.jpg)
+![SQL Editor - Create workspace modal](/transformations/sql-editor/01-create-snowflake-workspace-modal.png)
 
 4.  In the configuration dialog, provide a **Name** for your workspace (e.g., "Demo"). You can optionally add a description and select the **Backend Size**.
 
@@ -38,7 +43,7 @@ The workspace will be scheduled and created. Once active, you can access the SQL
 
 ## SQL Editor Interface Overview
 
-The SQL Editor interface consists of several key areas designed to facilitate SQL querying and transformation creation.
+The SQL Editor interface is divided into key sections that make it easy to explore data, write queries, and create transformations directly within Keboola.
 
 ### Left Pane: Table Explorer
 
@@ -116,6 +121,10 @@ After executing a query, you can access detailed information about the execution
 
 {: .image-popup}
 ![SQL Editor - Query details panel open in the results pane](/transformations/sql-editor/10-query-details-panel.jpg)
+
+### Viewing Query History
+
+After executing a query, you can view detailed information about previously run queries in the results pane by clicking **QUERY HISTORY**.
 
 ## Creating Transformations and Output Mapping
 
@@ -259,7 +268,10 @@ When linking shared code:
 *   Any updates made to the original shared code template will automatically propagate to this transformation block.
 *   The code within the block is read-only (uneditable), ensuring integrity with the shared template.
 
-{: .image-popup}
-![Shared Code block linked](/transformations/sql-editor/28-shared-code-linked.jpg)
-
 If you need to make modifications to the code for a specific transformation, you must use the **Use Inline** option.
+
+## Limitations
+
+*   The option to share a Snowflake workspace is currently unavailable.
+*   Download Query result table into CSV, TSV or excel is currently in development.
+
