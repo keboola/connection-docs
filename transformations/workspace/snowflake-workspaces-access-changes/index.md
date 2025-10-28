@@ -93,7 +93,7 @@ The option to use Keboola Snowflake database has been used mainly for connecting
 
 Data Gateway component will have an option to use existing Snowflake Writer configurations to quickly set up tables, columns and data loading options.
 
-## Januar 7, 2026
+## January 7, 2026
 
 ### ⚠️ Multi-tenant and Pay-As-You-Go Projects Lose Direct Access to Snowflake Workspaces
 ❌ KBDB/BYODB
