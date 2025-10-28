@@ -71,12 +71,19 @@ You can add additional tables to the Data Gateway by clicking the **Add Table** 
 {: .image-popup}
 ![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-7.png)
 
+Alternatively, you can add all tables from existing [Snowflake Writer](/components/writers/database/snowflake/) configuration by selecting **Import Snowflake Writer Tables** tab, selecting the existing configuration from a dropdown and clicking the **Create** button.
+
+This is especially helpful when you are migrating from Snowflake Writer to Data Gateway, as all the tables, columns and settings will be pre-filled.
+
+{: .image-popup}
+![Screenshot - Add All Tables](/components/applications/data-gateway/data-gateway-8.png)
+
 ## Load Data
 
 To load the selected tables and columns to the read-only workspace, click the **Run Component** button on the main configuration page.
 
 {: .image-popup}
-![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-8.png)
+![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-9.png)
 
 You can load data only for a selected table if you click the **Run Component** button on the table detail page.
 
@@ -85,4 +92,4 @@ You can load data only for a selected table if you click the **Run Component** b
 If you need to clean the workspace and remove previously loaded tables, you can do so by clicking the **Clean up workspace** menu item on the right side.
 
 {: .image-popup}
-![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-9.png)
+![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-10.png)
