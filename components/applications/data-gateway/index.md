@@ -52,7 +52,7 @@ Select the table you want to add and click the **Create** button.
 You'll be redirected to the table detail page. Here you can configure how the table will be shared by the Data Gateway.
 
 - **Database table name** - the name of the table in the Snowflake database.
-- **Load type** - the component supports two load types: **Full Load (Copy)** and **Full Load (Clone)**. Only Full Load types are supported, as they always represent the latest state of the table before the load.
+- **Load type** - the component supports two load types: **Full Load (Copy)** and **Full Load (Clone)**. Incremental loads are not supported; only Full Load types are available, which always represent the latest state of the table before the load.
   - **Full Load (Copy)** - replaces all existing table rows in the read-only workspace (allows changing the data types).
   - **Full Load (Clone)** - clones the entire table to the read-only workspace (including the data types).
 - **Columns** - modifications are available only for **Full Load (Copy)** load type.
