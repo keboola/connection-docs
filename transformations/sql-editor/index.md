@@ -6,14 +6,11 @@ permalink: /transformations/sql-editor/
 * TOC
 {:toc}
 
-The Keboola SQL Editor allows users without specialized tools (like BI or ODBC customers) to directly interact with their Snowflake data warehouse within Keboola Connection. It offers a smooth, fully integrated experience, replacing previous solutions like Snowsight. The editor is tightly connected with Keboola Storage, so you can easily access and use your buckets, tables, shared codes and variables in one place.
+The Keboola SQL Editor allows users without specialized tools to directly interact with their Snowflake data warehouse within Keboola Connection. It offers a smooth, fully integrated experience, replacing previous solutions like Snowsight. The editor is tightly connected with Keboola Storage, so you can easily access and use your buckets, tables, shared codes and variables in one place.
 
 Currently, the SQL Editor supports **Snowflake** workspaces.
 
 {% include public-beta-warning.html %}
-
-* TOC
-{:toc}
 
 ## Creating a Snowflake SQL Workspace
 
@@ -53,7 +50,7 @@ The left pane, known as the Table Explorer, is divided into two sections:
 {: .image-popup}
 ![SQL Editor - Editor storage explorer showing buckets and tables](/transformations/sql-editor/04-editor-storage-explorer.jpg)
 
-*   **Linked Tables**: Linked buckets and tables (shared with you from other projects) are also visible, typically indicated by a small chain icon.
+*   **Linked Tables**: Linked buckets and tables (shared with you from other projects) are also visible, indicated by a small chain icon.
 
 ### Right Pane: Code Blocks and Results
 
@@ -124,7 +121,7 @@ After executing a query, you can view detailed information about previously run 
 
 ## Creating Transformations and Output Mapping
 
-The SQL Editor supports creating persistent tables (transformations) that are saved back into Keboola Storage.
+The SQL Editor supports creating persistent tables that are saved back into Keboola Storage.
 
 ### Creating Output Tables
 
@@ -181,7 +178,7 @@ This section describes advanced concepts available in the SQL Editor.
 
 While the SQL Editor automatically provides read-only access to all tables within the project's Storage (visible in the **Storage Explorer** below the Working Tables section), Input Mapping (IM) is necessary when you need to apply filters, specify specific columns, or set time-based filters before the data is loaded into the workspace database.
 
-Input Mapping is also commonly used when migrating older transformations that relied on predefined input configurations.
+Input Mapping is also commonly used when migrating older transformations that rely on input mapping configuration.
 
 #### Setting up Input Mapping
 
@@ -278,10 +275,9 @@ The downloaded file will be in .sql format and can be copied directly into the S
 1. Go to **Workspaces** in Keboola Connection.
 2. Select the workspace and open Snowsight using the **Connect** button.
 3. In the left pane, navigate to **Projects** -> **Workspaces**
-<img width="1422" height="650" alt="Screenshot 2025-10-29 at 10 37 33" src="https://github.com/user-attachments/assets/69cf8062-9750-4927-8fa2-0753032a1a3b" />
-
+    {: .image-popup}
+    ![Snowsight Export](/transformations/sql-editor/29-snowsight.png)
 4. Under **Worksheets**, locate **Scratchpad**, choose a worksheet, and click … (More options).
-   
 6. Select **Download**.
 7. A File in .sql format containing your queries will be downloaded to your computer.
 8. Open the file and copy the queries you want to reuse.
