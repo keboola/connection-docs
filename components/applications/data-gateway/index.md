@@ -101,6 +101,6 @@ If you need to clean the workspace and remove previously loaded tables, you can 
 
 You can copy the configuration to create a new configuration with the same settings by clicking the **Copy configuration** button on the main configuration page.
 
-The new configuration will be created with the same settings as the original configuration and will be using the **same read-only workspace**. That means that the new configuration will we loading data into the same workspace as the original configuration. And resetting the Key Pair Authentication will affect all configurations using the same reader account workspace (all will be sharing the same credentials).
+The new configuration will be created with the same settings as the original configuration and will be using the **same read-only workspace**. That means that the new configuration will be loading data into the same workspace as the original configuration. And resetting the Key Pair Authentication will affect all configurations using the same reader account workspace (all will be sharing the same credentials).
 
 Using multiple configurations with the same reader account workspace can be useful if you want to load different data into the same workspace in different frequencies.
