@@ -442,8 +442,8 @@ items:
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
                 title: Deepnote Notebook Execution Trigger
-              - url: /components/applications/triggers/data-gateway/
-                title: Data Gateway
+          - url: /components/applications/data-gateway/
+            title: Data Gateway
           - url: /components/applications/ai/
             title: AI
             items:
