@@ -52,10 +52,13 @@ Select the table you want to add and click the **Create** button.
 You'll be redirected to the table detail page. Here you can configure how the table will be shared by the Data Gateway.
 
 - **Database table name** - the name of the table in the Snowflake database.
-- **Load type** - the component supports two load types: **Full Load (Copy)** and **Full Load (Clone)**. Incremental loads are not supported; only Full Load types are available, which always represent the latest state of the table before the load.
-  - **Full Load (Copy)** - replaces all existing table rows in the read-only workspace (allows changing the data types).
+- **Load type** - the component supports four load types:
   - **Full Load (Clone)** - clones the entire table to the read-only workspace (including the data types).
-- **Columns** - modifications are available only for **Full Load (Copy)** load type.
+  - **Full Load (Copy)** - replaces all existing table rows in the read-only workspace (allows changing the data types).
+  - **Incremental Load** - inserts new rows into the table in the read-only workspace. If a primary key is defined on the table, the data are [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data are inserted.
+    - **Manual** - the data that has been added or updated in selected time period will be fetched.
+    - **Automatic** - the data that has been added or updated since the last run of the component will be fetched.
+- **Columns** - modifications are **not** available for **Full Load (Clone)** load type.
     - **Column Name** - the name of the column in the Snowflake database.
     - **Data Type** - the data type of the column in the Snowflake database. If [typed table](/storage/tables/data-types/) is selected, you can use only the data type defined in Storage, or set the data type to **IGNORE** to exclude the column from loading.
     - **Nullable** - whether the column is nullable.
@@ -93,3 +96,11 @@ If you need to clean the workspace and remove previously loaded tables, you can 
 
 {: .image-popup}
 ![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-10.png)
+
+## Copy Configuration
+
+You can copy the configuration to create a new configuration with the same settings by clicking the **Copy configuration** button on the main configuration page.
+
+The new configuration will be created with the same settings as the original configuration and will be using the **same read-only workspace**. That means that the new configuration will we loading data into the same workspace as the original configuration. And resetting the Key Pair Authentication will affect all configurations using the same reader account workspace (all will be sharing the same credentials).
+
+Using multiple configurations with the same reader account workspace can be useful if you want to load different data into the same workspace in different frequencies.
