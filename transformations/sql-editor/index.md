@@ -279,9 +279,11 @@ The downloaded file will be in .sql format and can be copied directly into the S
 2. Select the workspace and open Snowsight using the **Connect** button.
 3. In the left pane, navigate to **Projects** -> **Workspaces**
 <img width="1422" height="650" alt="Screenshot 2025-10-29 at 10 37 33" src="https://github.com/user-attachments/assets/69cf8062-9750-4927-8fa2-0753032a1a3b" />
+
 4. Under **Worksheets**, locate **Scratchpad**, choose a worksheet, and click … (More options).
+   
 6. Select **Download**.
-7. A .sql file containing your queries will be downloaded to your computer.
+7. A File in .sql format containing your queries will be downloaded to your computer.
 8. Open the file and copy the queries you want to reuse.
 9. Go back to the SQL Editor in Keboola Connection.
 10. Paste the queries and continue working with them directly in the SQL Editor.
