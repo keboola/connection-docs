@@ -22,10 +22,6 @@ The SQL Editor is accessed via a dedicated Snowflake Workspace. To get started, 
 1.  Navigate to **Workspaces** from the main navigation menu.
 2.  Click **+ Create Workspace**.
 3.  Select **Snowflake SQL Workspace**.
-
-{: .image-popup}
-![SQL Editor - Create workspace modal](/transformations/sql-editor/01-create-snowflake-workspace-modal.png)
-
 4.  In the configuration dialog, provide a **Name** for your workspace (e.g., "Demo"). You can optionally add a description and select the **Backend Size**.
 
 5.  Click **CREATE WORKSPACE**.
@@ -274,4 +270,3 @@ If you need to make modifications to the code for a specific transformation, you
 
 *   The option to share a Snowflake workspace is currently unavailable.
 *   Download Query result table into CSV, TSV or excel is currently in development.
-
