@@ -616,6 +616,9 @@ items:
 
       - url: /transformations/workspace/
         title: Workspace
+        items:
+          - url: /transformations/workspace/snowflake-workspaces-access-changes/
+            title: Snowflake Workspaces Access Changes
 
       - url: /transformations/variables/
         title: Variables & Shared Code
