@@ -52,7 +52,9 @@ This ensures they can keep all workspace content intact. The only required step 
 
 The migration is irreversible.
 
-### Data Gateway Component Production Release
+## November 7, 2025
+
+### Data Gateway Component Public Release
 ☑️ KBDB/BYODB
 
 ✅ MT/PAYG
