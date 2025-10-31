@@ -442,6 +442,8 @@ items:
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
                 title: Deepnote Notebook Execution Trigger
+          - url: /components/applications/data-gateway/
+            title: Data Gateway
           - url: /components/applications/ai/
             title: AI
             items:
@@ -614,7 +616,13 @@ items:
 
       - url: /transformations/workspace/
         title: Workspace
-
+        items:
+          - url: /transformations/workspace/snowflake-workspaces-access-changes/
+            title: Snowflake Workspaces Access Changes
+            
+      - url: /transformations/sql-editor/
+        title: SQL Editor
+        
       - url: /transformations/variables/
         title: Variables & Shared Code
 
