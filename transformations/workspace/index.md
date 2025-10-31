@@ -135,6 +135,41 @@ openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encryp
 
 👉 You’ll be prompted to set a password.
 
+##### Private Key Conversion to .p8 Format
+Some third-party BI tools (such as Metabase) require private keys in `.p8` format instead of the default `.pem` format provided by Keboola. You can convert your private key using OpenSSL with the following command:
+
+**macOS & Linux**
+
+Open a terminal and run:
+
+```
+openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.p8 -nocrypt
+```
+
+* `-topk8` → outputs in PKCS #8 format
+* `-inform PEM` → input format is PEM
+* `-outform DER` → output format is DER
+* `-in private_key.pem` → input file
+* `-out private_key.p8` → output file
+* `-nocrypt` → no encryption
+
+**Windows**
+
+Make sure OpenSSL is installed (e.g., via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or [Windows binaries](https://slproweb.com/products/Win32OpenSSL.html)).
+
+Open PowerShell or Command Prompt and run:
+
+```
+openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.p8 -nocrypt
+```
+
+* `-topk8` → outputs in PKCS #8 format
+* `-inform PEM` → input format is PEM
+* `-outform DER` → output format is DER
+* `-in private_key.pem` → input file
+* `-out private_key.p8` → output file
+* `-nocrypt` → no encryption
+
 #### BigQuery
 To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
 
