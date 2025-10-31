@@ -283,7 +283,7 @@ The snapshots are taken multiple times a day.
 
 
 ### kbc_snowflake_stats
-This table shows information about queries using Snowflake, including transformations and sandboxes.
+This table shows information about queries using Snowflake, including transformations and sandboxes. Note that the table is not generated for BYODB customers.
 
 | **Column** | **Description** | **Example** |
 |---|---|---|
@@ -303,7 +303,7 @@ This table shows information about queries using Snowflake, including transforma
 | `billed_credits_used` | Number of the actually billed credits | `0.91206222224` |
 
 ### kbc_bigquery_stats
-This table shows information about queries using BigQuery, including transformations and sandboxes.
+This table shows information about queries using BigQuery, including transformations and sandboxes. Note that the table is not generated for BYODB customers.
 
 | **Column** | **Description** | **Example** |
 |---|---|---|
