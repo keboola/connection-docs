@@ -53,11 +53,13 @@ You'll be redirected to the table detail page. Here you can configure how the ta
 
 - **Database table name** - the name of the table in the Snowflake database.
 - **Load type** - the component supports four load types:
-  - **Full Load (Clone)** - clones the entire table to the read-only workspace (including the data types).
-  - **Full Load (Copy)** - replaces all existing table rows in the read-only workspace (allows changing the data types).
-  - **Incremental Load** - inserts new rows into the table in the read-only workspace. If a primary key is defined on the table, the data are [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data are inserted.
+  - **Full load (Clone)** - clones the entire table to the read-only workspace (including the data types).
+  - **Full load (Copy)** - replaces all existing table rows in the read-only workspace (allows changing the data types).
+  - **Incremental load** - inserts new rows into the table in the read-only workspace. If a primary key is defined on the table, the data are [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data are inserted.
     - **Manual** - the data that has been added or updated in selected time period will be fetched.
     - **Automatic** - the data that has been added or updated since the last run of the component will be fetched.
+- **Data filter** - you can filter the data to be loaded by adding a value filter on a column and/or by selecting only rows updated in a selected time period.
+- **Primary key** - you can specify the primary key of the target table. Primary key is required for the incremental loads for deduplication, otherwise the data will be appended.
 - **Columns** - modifications are **not** available for **Full Load (Clone)** load type.
     - **Column Name** - the name of the column in the Snowflake database.
     - **Data Type** - the data type of the column in the Snowflake database. If [typed table](/storage/tables/data-types/) is selected, you can use only the data type defined in Storage, or set the data type to **IGNORE** to exclude the column from loading.
