@@ -60,7 +60,7 @@ You'll be redirected to the table detail page. Here you can configure how the ta
     - **Automatic** - the data that has been added or updated since the last run of the component will be fetched.
 - **Data filter** - you can filter the data to be loaded by adding a value filter on a column and/or by selecting only rows updated in a selected time period.
 - **Primary key** - you can specify the primary key of the target table. Primary key is required for the incremental loads for deduplication, otherwise the data will be appended.
-- **Columns** - modifications are **not** available for **Full Load (Clone)** load type.
+- **Columns** - modifications are **not** available for **Full load (Clone)** load type.
     - **Column Name** - the name of the column in the Snowflake database.
     - **Data Type** - the data type of the column in the Snowflake database. If [typed table](/storage/tables/data-types/) is selected, you can use only the data type defined in Storage, or set the data type to **IGNORE** to exclude the column from loading.
     - **Nullable** - whether the column is nullable.
