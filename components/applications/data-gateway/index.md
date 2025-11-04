@@ -106,3 +106,36 @@ You can copy the configuration to create a new configuration with the same setti
 The new configuration will be created with the same settings as the original configuration and will be using the **same read-only workspace**. That means that the new configuration will be loading data into the same workspace as the original configuration. And resetting the Key Pair Authentication will affect all configurations using the same reader account workspace (all will be sharing the same credentials).
 
 Using multiple configurations with the same reader account workspace can be useful if you want to load different data into the same workspace in different frequencies.
+
+## Additional Privileges Set Up for Dedicated Snowflake Accounts
+
+Before you can use Data Gateway with a dedicated Snowflake backend, the Keboola root user (typically named `KEBOOLA_STORAGE`) needs additional privileges. These privileges allow the root user to create reader accounts and share data into them.
+
+### Who Can Set Up These Privileges
+
+- **Bring-Your-Own-Database (BYODB) customers**: You can set up the privileges yourself if you have access to Snowflake `ACCOUNTADMIN` role, or you can contact [Keboola Support](/management/support/) for assistance.
+- **Keboola-Brings-Database (KBDB) customers**: You must contact [Keboola Support](/management/support/) as you don't have access to the `ACCOUNTADMIN` role.
+
+### Required Privileges
+
+User with `ACCOUNTADMIN` permission needs to run the following SQL commands in your Snowflake account. Replace `KEBOOLA_STORAGE` with your actual Keboola root user name if it's different:
+
+```sql
+GRANT CREATE SHARE ON ACCOUNT TO ROLE KEBOOLA_STORAGE WITH GRANT OPTION;
+GRANT MANAGE SHARE TARGET ON ACCOUNT TO ROLE KEBOOLA_STORAGE WITH GRANT OPTION;
+GRANT CREATE ACCOUNT ON ACCOUNT TO ROLE KEBOOLA_STORAGE;
+```
+
+### How to Identify Missing Privileges
+
+If you try to set up Data Gateway without these privileges, you'll see an error message like this:
+
+```
+Insufficient privileges to create reader account for ROOT user "SAPI_PROD".
+```
+
+This error indicates that the required grants need to be applied before you can continue.
+
+### Reader Account Limits
+
+Snowflake sets a default limit of 20 reader accounts per single Snowflake account. If you plan to create Data Gateway configurations in multiple organizations, you may want to request a higher limit from Snowflake support. Each organization uses one reader account.
