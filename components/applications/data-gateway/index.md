@@ -58,9 +58,12 @@ You'll be redirected to the table detail page. Here you can configure how the ta
   - **Incremental load** - inserts new rows into the table in the read-only workspace. If a primary key is defined on the table, the data are [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data are inserted.
     - **Manual** - the data that has been added or updated in selected time period will be fetched.
     - **Automatic** - the data that has been added or updated since the last run of the component will be fetched.
+
+Following modifications are **not** available for **Full load (Clone)** load type.
+
 - **Data filter** - you can filter the data to be loaded by adding a value filter on a column and/or by selecting only rows updated in a selected time period.
 - **Primary key** - you can specify the primary key of the target table. Primary key is required for the incremental loads for deduplication, otherwise the data will be appended.
-- **Columns** - modifications are **not** available for **Full load (Clone)** load type.
+- **Columns**
     - **Column Name** - the name of the column in the Snowflake database.
     - **Data Type** - the data type of the column in the Snowflake database. If [typed table](/storage/tables/data-types/) is selected, you can use only the data type defined in Storage, or set the data type to **IGNORE** to exclude the column from loading.
     - **Nullable** - whether the column is nullable.
@@ -106,3 +109,36 @@ You can copy the configuration to create a new configuration with the same setti
 The new configuration will be created with the same settings as the original configuration and will be using the **same read-only workspace**. That means that the new configuration will be loading data into the same workspace as the original configuration. And resetting the Key Pair Authentication will affect all configurations using the same reader account workspace (all will be sharing the same credentials).
 
 Using multiple configurations with the same reader account workspace can be useful if you want to load different data into the same workspace in different frequencies.
+
+## Additional Privileges Set Up for Dedicated Snowflake Accounts
+
+Before you can use Data Gateway with a dedicated Snowflake backend, the Keboola root user (typically named `KEBOOLA_STORAGE`) needs additional privileges. These privileges allow the root user to create reader accounts and share data into them.
+
+### Who Can Set Up These Privileges
+
+- **Bring-Your-Own-Database (BYODB) customers**: You can set up the privileges yourself if you have access to the Snowflake `ACCOUNTADMIN` role, or you can contact [Keboola Support](/management/support/) for assistance.
+- **Keboola-Brings-Database (KBDB) customers**: You must contact [Keboola Support](/management/support/) as you don't have access to the `ACCOUNTADMIN` role.
+
+### Required Privileges
+
+A user with `ACCOUNTADMIN` permission needs to run the following SQL commands in your Snowflake account. Replace `KEBOOLA_STORAGE` with your actual Keboola root user name if it's different:
+
+```sql
+GRANT CREATE SHARE ON ACCOUNT TO ROLE KEBOOLA_STORAGE WITH GRANT OPTION;
+GRANT MANAGE SHARE TARGET ON ACCOUNT TO ROLE KEBOOLA_STORAGE WITH GRANT OPTION;
+GRANT CREATE ACCOUNT ON ACCOUNT TO ROLE KEBOOLA_STORAGE;
+```
+
+### How to Identify Missing Privileges
+
+If you try to set up Data Gateway without these privileges, you'll see an error message like this:
+
+```
+Insufficient privileges to create reader account for ROOT user "SAPI_PROD".
+```
+
+This error indicates that the required grants need to be applied before you can continue.
+
+### Reader Account Limits
+
+Snowflake sets a default limit of 20 reader accounts per single Snowflake account. If you plan to create Data Gateway configurations in multiple organizations, you may want to request a higher limit from Snowflake support. Each organization uses one reader account.
