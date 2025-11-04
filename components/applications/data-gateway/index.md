@@ -118,7 +118,7 @@ Before you can use Data Gateway with a dedicated Snowflake backend, the Keboola 
 
 ### Required Privileges
 
-User with `ACCOUNTADMIN` permission needs to run the following SQL commands in your Snowflake account. Replace `KEBOOLA_STORAGE` with your actual Keboola root user name if it's different:
+A user with `ACCOUNTADMIN` permission needs to run the following SQL commands in your Snowflake account. Replace `KEBOOLA_STORAGE` with your actual Keboola root user name if it's different:
 
 ```sql
 GRANT CREATE SHARE ON ACCOUNT TO ROLE KEBOOLA_STORAGE WITH GRANT OPTION;
