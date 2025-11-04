@@ -113,7 +113,7 @@ Before you can use Data Gateway with a dedicated Snowflake backend, the Keboola 
 
 ### Who Can Set Up These Privileges
 
-- **Bring-Your-Own-Database (BYODB) customers**: You can set up the privileges yourself if you have access to Snowflake `ACCOUNTADMIN` role, or you can contact [Keboola Support](/management/support/) for assistance.
+- **Bring-Your-Own-Database (BYODB) customers**: You can set up the privileges yourself if you have access to the Snowflake `ACCOUNTADMIN` role, or you can contact [Keboola Support](/management/support/) for assistance.
 - **Keboola-Brings-Database (KBDB) customers**: You must contact [Keboola Support](/management/support/) as you don't have access to the `ACCOUNTADMIN` role.
 
 ### Required Privileges
