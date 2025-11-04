@@ -268,6 +268,7 @@ as a new row will be replaced. See the description of
 [incremental loading](/storage/tables/#incremental-loading) for a detailed explanation and examples.
 - **Primary key** --- The [primary key](/storage/tables/#primary-keys) of the destination table; if the table already exists, 
 the primary key must match. Feel free to use a multi-column primary key.
+- **Deduplication Strategy** --- This allows to switch in Snowflake transformations from the default load Upsert to Insert. Upsert option uses deduplication based on primary keys and ensures data quality. By switching to Insert, the load performs faster but skips deduplication and type casting - meaning you are responsible for uniqueness and correct data types. As this option is for high data maturity users, you can ask our support to enable this for your project as Deduplication Strategy is under feature flag and not native in the platform.
 -  **Delete rows** --- When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
    1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
    2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. 
