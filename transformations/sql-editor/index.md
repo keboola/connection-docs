@@ -263,9 +263,57 @@ When linking shared code:
 
 If you need to make modifications to the code for a specific transformation, you must use the **Use Inline** option.
 
-## Limitations
+### Workspace Sharing
 
-*   The option to share a Snowflake workspace is currently unavailable.
+How Workspaces work now while using SQL Editor, there are two important components:
+1. Workspace 
+This stores configuration - such as:
+*   Input Mapping (IM)
+*   Output Mapping (OM)
+*   **Saved** SQL queries
+2. Working Tables
+This is the state of the database schema where tables are created while working in the workspace. Every user has his own.
+
+**Previous Behavior (before SQL Editor):**
+One workspace sandbox had one shared physical workspace for all users.
+Multiple users worked in the same database schema, meaning:
+*   They could see each other's tables.
+*   They could accidentally overwrite or remove each other’s data.
+Workspaces were hidden in the UI unless explicitly shared, but technically everyone still accessed the same workspace behind the scenes.
+
+**Current Behavior (SQL Editor Workspaces):**
+Each user now gets their own physical workspace (database schema) even though the sandbox configuration is shared.
+This makes collaboration safer because:
+*   Users share saved SQL queries, input/output mappings, and configuration.
+*   But do NOT share query result tables or loaded data.
+Everyone works in an isolated database state.
+
+### What This Means in Practice
+
+| Scenario | What Happens | Impact |
+|---|---|---|
+| Two users open the same shared workspace sandbox | They see the same configuration (Input/Output mapping, saved SQL queries) | ✅ Collaboration on queries and configuration |
+| User creates a table by running a query (not output-mapped) | Table is created only in that user’s personal database schema | ❌ Other users **cannot** see or access it |
+| User saves a SQL query | Query is saved to the shared workspace sandbox configuration | ✅ Other users **can see and run it** |
+| Two users save queries at the same time | A conflict warning appears (configuration changed by another user) | ⚠️ One user may need to reload/resolve changes |
+| User unloads table from SQL Editor to Storage | Table becomes a standard KBC Storage table | ✅ Visible to others via Storage, outside the workspace |
+| Sharing workspace sandbox is enabled | Users can open each other’s workspace sandbox configuration | ✅ Shared queries & mappings, ❌ not shared database state |
+
+**Benefits of the New Setup**
+*   Safer collaboration – users don’t overwrite each other’s data
+*   SQL queries can be shared without entering the database (unlike before)
+*   No risk of table conflicts when multiple people work in parallel
+*   Query results can now be exported to Storage (previously not possible)
+*   Same configuration, personal workspace state = best of both isolation and collaboration
+
+**Limitations to Be Aware Of**
+*   Users cannot directly share tables or workspace data with each other
+*   Only saved SQL queries are shared, drafts or unsaved queries are not visible to others
+*   When multiple users edit and save queries at the same time, a conflict alert may appear
+(e.g., “You are saving a configuration that was modified by another user.”)
+*   Each user sees their own version of workspace tables, even when working in the same shared sandbox
+
+## Limitations
 *   Download Query result table into CSV, TSV or excel is currently in development.
 
 ##   Extract Worksheets history from Snowsight
