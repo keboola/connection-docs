@@ -265,15 +265,14 @@ If you need to make modifications to the code for a specific transformation, you
 
 ### Workspace Sharing
 
-How Workspaces Work now while using SQL Editor, there are two important components:
-
-1. Workspace Sandbox 
-This stores settings (Configuration) such as:
+How Workspaces work now while using SQL Editor, there are two important components:
+1. Workspace 
+This stores configuration - such as:
 *   Input Mapping (IM)
 *   Output Mapping (OM)
 *   **Saved** SQL queries
-2. Physical Workspace (Database State)
-This is the actual database schema where tables are created while working in the workspace. Every user has his own.
+2. Working Tables
+This is the state of the database schema where tables are created while working in the workspace. Every user has his own.
 
 **Previous Behavior (before SQL Editor):**
 One workspace sandbox had one shared physical workspace for all users.
