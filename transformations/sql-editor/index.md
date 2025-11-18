@@ -263,6 +263,25 @@ When linking shared code:
 
 If you need to make modifications to the code for a specific transformation, you must use the **Use Inline** option.
 
+
+### Variables
+
+Variables allow you to parametrize transformations. More information can be found [here](https://help.keboola.com/transformations/variables/).
+Variables can be created, edited, used or removed inside of SQL Editor.
+
+#### Using Variables in Transformations and Workspaces
+
+Variables behave consistently across both Workspaces and Transformations:
+
+In a Workspace, you can create variables and use them in your SQL queries. When you save the Workspace (which also saves its queries), you can then copy it to a new or existing Transformation. This action transfers the queries, input/output mapping, and all associated variables.
+
+In a Transformation, you can also create variables and reference them in your transformation queries. You can then copy the Transformation to a Workspace, which brings over its queries, mappings, and variables.
+
+#### Important ####
+
+Variables are not shared automatically between Workspaces and Transformations.
+If you create a variable in either a Workspace or a Transformation and do not copy the configuration to the other environment, that variable will remain local to where it was created—meaning it won’t be visible or usable elsewhere.
+
 ### Workspace Sharing
 
 How Workspaces work now while using SQL Editor, there are two important components:
