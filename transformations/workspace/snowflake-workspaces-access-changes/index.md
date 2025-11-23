@@ -84,16 +84,15 @@ Keboola’s brand new [SQL editor](/transformations/sql-editor/) allows SQL deve
 With the upcoming workspace access changes, this editor will serve as the go-to solution for SQL development for customers using Keboola’s shared Snowflake backend (MT/PAYG).
 
 ### Snowflake Writer: Remove Option to Choose Keboola Snowflake Database
-✅ KBDB/BYODB
+❌ KBDB/BYODB
 
 ✅ MT/PAYG
 
-We will simplify Snowflake Writer to function as any other database writer - loading data to existing databases.
+Projects using Keboola's shared Snowflake backend (MT/PAYG) will no longer be able to use the [Keboola-provisioned Snowflake database](/components/writers/database/snowflake/#using-keboola-provisioned-database) as a data destination for Snowflake Writer.
 
-The option to use Keboola Snowflake database has been used mainly for connecting 3rd party BI tools. With the introduction of [Data Gateway](/components/applications/data-gateway/) for MT/PAYG customers and due to the fact KBDB/BYODB customers have their own database, this option won’t be relevant anymore.
+The option to use the Keboola Snowflake database has been used mainly for connecting 3rd party BI tools. This use case will be covered by the recently released [Data Gateway](/components/applications/data-gateway/) component.
 
-
-Data Gateway component will have an option to use existing Snowflake Writer configurations to quickly set up tables, columns and data loading options.
+The Data Gateway component can reuse existing Snowflake Writer configurations to quickly set up tables, columns, and data loading options.
 
 ## January 7, 2026
 
