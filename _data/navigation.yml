@@ -613,15 +613,6 @@ items:
     items:
       - url: /transformations/mappings/
         title: Mappings
-
-      - url: /transformations/workspace/
-        title: Workspace
-        items:
-          - url: /transformations/workspace/snowflake-workspaces-access-changes/
-            title: Snowflake Workspaces Access Changes
-            
-      - url: /transformations/sql-editor/
-        title: SQL Editor
         
       - url: /transformations/variables/
         title: Variables & Shared Code
@@ -667,6 +658,15 @@ items:
 
       - url: /transformations/code-patterns/
         title: Code Patterns
+
+  - url: /workspace/
+    title: Workspace
+    items:
+      - url: /workspace/snowflake-workspaces-access-changes/
+        title: Snowflake Workspaces Access Changes
+
+      - url: /workspace/sql-editor/
+        title: SQL Editor
 
   - url: /management/
     title: Management
