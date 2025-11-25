@@ -1,8 +1,9 @@
 ---
 title: Workspace
-permalink: /transformations/workspace/
+permalink: /workspace/
 redirect_from:
   - /transformations/sandbox/
+  - /transformations/workspace/
 ---
 
 * TOC
