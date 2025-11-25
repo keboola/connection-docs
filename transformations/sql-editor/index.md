@@ -1,6 +1,8 @@
 ---
 title: SQL Editor
-permalink: /transformations/sql-editor/
+permalink: /workspace/sql-editor/
+redirect_from:
+  - /transformations/sql-editor/
 ---
 
 * TOC
@@ -335,7 +337,9 @@ Everyone works in an isolated database state.
 *   Each user sees their own version of workspace tables, even when working in the same shared sandbox
 
 ## Limitations
-*   Download Query result table into CSV, TSV or excel is currently in development.
+*   Download Query result table into CSV, TSV or excel is currently in development. Workaround: Save the query result as a table via Output Mapping, unload it to Storage, and download it in your preferred file format.
+*   Session-dependent SQL features such as variables, transactions, and temporary tables are not yet supported inside the SQL Editor.
+These features will still run normally when executed as part of a transformation.
 
 ##   Extract Worksheets history from Snowsight
 You can manually download the history of recently executed queries from Snowsight.
