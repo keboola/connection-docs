@@ -1,7 +1,10 @@
 ---
 title: Snowflake Workspaces Access Changes
-permalink: /transformations/workspace/snowflake-workspaces-access-changes/
+permalink: /workspace/snowflake-workspaces-access-changes/
+redirect_from:
+  - /transformations/workspace/snowflake-workspaces-access-changes/
 ---
+
 
 * TOC
 {:toc}
