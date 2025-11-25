@@ -2,7 +2,6 @@
 title: Workspace
 permalink: /workspace/
 redirect_from:
-  - /transformations/workspace/
   - /transformations/sandbox/
   - /transformations/workspace/
 ---
