@@ -26,7 +26,7 @@ The SQL Editor is accessed via a dedicated Snowflake Workspace. To get started, 
 5.  Click **CREATE WORKSPACE**.
 
 {: .image-popup}
-![SQL Editor - Create workspace action](/transformations/sql-editor/02-create-workspace-action.jpg)
+![SQL Editor - Create workspace action](/workspace/sql-editor/02-create-workspace-action.jpg)
 
 The workspace will be scheduled and created. Once active, you can access the SQL Editor.
 
@@ -34,7 +34,7 @@ The workspace will be scheduled and created. Once active, you can access the SQL
 7.  Click **OPEN SQL EDITOR**.
 
 {: .image-popup}
-![SQL Editor - Workspace details open editor button](/transformations/sql-editor/03-workspace-details-open-editor.jpg)
+![SQL Editor - Workspace details open editor button](/workspace/sql-editor/03-workspace-details-open-editor.jpg)
 
 ## SQL Editor Interface Overview
 
@@ -50,7 +50,7 @@ The left pane, known as the Table Explorer, is divided into two sections:
 *   **Buckets and Tables**: The explorer shows buckets (folders) and the tables they contain. You can expand buckets to see tables (e.g., `account`, `user`).
 
 {: .image-popup}
-![SQL Editor - Editor storage explorer showing buckets and tables](/transformations/sql-editor/04-editor-storage-explorer.jpg)
+![SQL Editor - Editor storage explorer showing buckets and tables](/workspace/sql-editor/04-editor-storage-explorer.jpg)
 
 *   **Linked Tables**: Linked buckets and tables (shared with you from other projects) are also visible, indicated by a small chain icon.
 
@@ -73,12 +73,12 @@ To quickly inspect the contents of a table in the Storage Explorer:
 2.  Select **Data preview**.
 
 {: .image-popup}
-![SQL Editor - Context menu showing Data preview option](/transformations/sql-editor/05-data-preview-menu.jpg)
+![SQL Editor - Context menu showing Data preview option](/workspace/sql-editor/05-data-preview-menu.jpg)
 
 This executes a `SELECT * FROM table_name LIMIT 100` query, showing the first rows and metadata in the results pane below. 
 
 {: .image-popup}
-![SQL Editor - Query result preview of a table](/transformations/sql-editor/06-query-result-preview.jpg)
+![SQL Editor - Query result preview of a table](/workspace/sql-editor/06-query-result-preview.jpg)
 
 ### Inserting Table Names
 
@@ -88,7 +88,7 @@ Instead of manually typing full table names, you can insert the fully qualified 
 2.  Select **Place name in editor**.
 
 {: .image-popup}
-![SQL Editor - Context menu showing Place name in editor option](/transformations/sql-editor/07-place-name-in-editor-menu.jpg)
+![SQL Editor - Context menu showing Place name in editor option](/workspace/sql-editor/07-place-name-in-editor-menu.jpg)
 
 The editor automatically populates the code block with the table's fully qualified Snowflake identifier.
 
@@ -101,21 +101,21 @@ SELECT * FROM "SAPI_10495"."in.c-keboola-ex-http-01k749e8rrzzs9s7f9p7gbrg"."acco
 You can run a query either by clicking the green run icon next to the code block or using the keyboard shortcut **Ctrl + Enter**.
 
 {: .image-popup}
-![SQL Editor - Run query button with Ctrl+Enter shortcut hint](/transformations/sql-editor/08-run-query-button.jpg)
+![SQL Editor - Run query button with Ctrl+Enter shortcut hint](/workspace/sql-editor/08-run-query-button.jpg)
 
 ### Working with Multiple Queries
 
 You can add multiple code blocks using the **+ New Query** button below the existing block, or **+ New Code Block** below the main editor section.
 
 {: .image-popup}
-![SQL Editor - New query block added to the editor](/transformations/sql-editor/09-new-query-block.jpg)
+![SQL Editor - New query block added to the editor](/workspace/sql-editor/09-new-query-block.jpg)
 
 ### Viewing Query Details
 
 After executing a query, you can access detailed information about the execution in the results pane by clicking **QUERY DETAILS**.
 
 {: .image-popup}
-![SQL Editor - Query details panel open in the results pane](/transformations/sql-editor/10-query-details-panel.jpg)
+![SQL Editor - Query details panel open in the results pane](/workspace/sql-editor/10-query-details-panel.jpg)
 
 ### Viewing Query History
 
@@ -132,14 +132,14 @@ To create a persistent table, you must convert your `SELECT` statements into `CR
 1.  Define a new table using `CREATE TABLE "out" AS SELECT ...`
 
 {: .image-popup}
-![SQL Editor - SQL code block showing CREATE TABLE AS SELECT syntax](/transformations/sql-editor/11-create-table-select.jpg)
+![SQL Editor - SQL code block showing CREATE TABLE AS SELECT syntax](/workspace/sql-editor/11-create-table-select.jpg)
 
 2.  Run the query block.
 
 If successful, the new tables (e.g., `out` and `out2`) will appear in the **Working Tables** section.
 
 {: .image-popup}
-![SQL Editor - Working Tables section showing QR (Query Result) tables](/transformations/sql-editor/12-working-tables-qr.jpg)
+![SQL Editor - Working Tables section showing QR (Query Result) tables](/workspace/sql-editor/12-working-tables-qr.jpg)
 
 ### Mapping Output Tables to Storage
 
@@ -149,7 +149,7 @@ Once temporary working tables are created, you must map them to a destination in
 2.  Select **Add table to Output Mapping**.
 
 {: .image-popup}
-![SQL Editor - Context menu showing Add table to Output Mapping option](/transformations/sql-editor/13-add-to-output-mapping-menu.jpg)
+![SQL Editor - Context menu showing Add table to Output Mapping option](/workspace/sql-editor/13-add-to-output-mapping-menu.jpg)
 
 3.  In the Output Mapping dialog, configure the destination bucket and table name in Storage. You can also define the primary key and set incremental loading options.
 4.  Click **ADD OUTPUT**.
@@ -157,7 +157,7 @@ Once temporary working tables are created, you must map them to a destination in
 Once mapped, the table icon in the Working Tables section changes to **OM** (Output Mapping), confirming it is ready to be saved as a transformation.
 
 {: .image-popup}
-![SQL Editor - Working Tables section showing OM (Output Mapping) table](/transformations/sql-editor/14-working-tables-om.jpg)
+![SQL Editor - Working Tables section showing OM (Output Mapping) table](/workspace/sql-editor/14-working-tables-om.jpg)
 
 ### Saving Queries as a Transformation
 
@@ -166,7 +166,7 @@ To persist the SQL logic and output mapping into a formal Keboola Transformation
 1.  Click **SAVE QUERIES** in the top right corner.
 
 {: .image-popup}
-![SQL Editor - Save Queries button menu](/transformations/sql-editor/15-save-queries-button.jpg)
+![SQL Editor - Save Queries button menu](/workspace/sql-editor/15-save-queries-button.jpg)
 
 2.  Select **Save with description** (or **Save** if no new queries were added).
 
@@ -191,12 +191,12 @@ To set up Input Mapping for a table:
 3. Select **Add table to Input Mapping**.
 
 {: .image-popup}
-![Context menu showing Add table to Input Mapping](/transformations/sql-editor/21-input-mapping-context-menu.jpg)
+![Context menu showing Add table to Input Mapping](/workspace/sql-editor/21-input-mapping-context-menu.jpg)
 
 4. The Input Mapping configuration dialog opens:
 
 {: .image-popup}
-![Input Mapping dialog](/transformations/sql-editor/22-input-mapping-dialog.jpg)
+![Input Mapping dialog](/workspace/sql-editor/22-input-mapping-dialog.jpg)
 
 Here you can define:
 
@@ -206,7 +206,7 @@ Here you can define:
 *   **Changed in Last (optional):** Filter the data based on when it was last changed in Storage. This is useful for incremental loads.
 
 {: .image-popup}
-![Changed in Last filter selection](/transformations/sql-editor/23-input-mapping-changed-in-last.jpg)
+![Changed in Last filter selection](/workspace/sql-editor/23-input-mapping-changed-in-last.jpg)
 
 *   **Data Filter (optional):** Apply column-based filtering using specific values.
 *   **Data Types:** Define column data types (optional).
@@ -223,14 +223,14 @@ To query and work with the filtered/mapped data interactively in the editor, you
 2. Click the **Load Data** option that appears near the table.
 
 {: .image-popup}
-![Load Data prompt](/transformations/sql-editor/24-load-data-confirmation.jpg)
+![Load Data prompt](/workspace/sql-editor/24-load-data-confirmation.jpg)
 
 3. Confirm the loading by clicking **Load Latest Data**.
 
 If a table is configured for Input Mapping but not yet loaded, hovering over the table icon will show a warning indicating limited functionality.
 
 {: .image-popup}
-![Unloaded Input Mapped table warning](/transformations/sql-editor/25-unloaded-table-tooltip.jpg)
+![Unloaded Input Mapped table warning](/workspace/sql-editor/25-unloaded-table-tooltip.jpg)
 
 ### Shared Code
 
@@ -243,12 +243,12 @@ To import shared code into a transformation block:
 1. In the SQL code editor block, click the **Select Shared Code** link.
 
 {: .image-popup}
-![Select Shared Code button](/transformations/sql-editor/26-select-shared-code.jpg)
+![Select Shared Code button](/workspace/sql-editor/26-select-shared-code.jpg)
 
 2. In the "Add Shared Code" dialog, select the desired code from the dropdown (e.g., `Aggregate`).
 
 {: .image-popup}
-![Shared Code dialog showing Aggregate selection](/transformations/sql-editor/27-add-shared-code-dialog.jpg)
+![Shared Code dialog showing Aggregate selection](/workspace/sql-editor/27-add-shared-code-dialog.jpg)
 
 #### Shared Code Options
 
@@ -349,7 +349,7 @@ The downloaded file will be in .sql format and can be copied directly into the S
 2. Select the workspace and open Snowsight using the **Connect** button.
 3. In the left pane, navigate to **Projects** -> **Workspaces**
     {: .image-popup}
-    ![Snowsight Export](/transformations/sql-editor/29-snowsight.png)
+    ![Snowsight Export](/workspace/sql-editor/29-snowsight.png)
 4. Under **Worksheets**, locate **Scratchpad**, choose a worksheet, and click … (More options).
 6. Select **Download**.
 7. A File in .sql format containing your queries will be downloaded to your computer.

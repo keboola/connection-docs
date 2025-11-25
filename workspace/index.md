@@ -20,7 +20,7 @@ Ephemeral transformation workspaces are not visible in the transformation UI, he
 You can create a Workspace on the Transformations page:
 
 {: .image-popup}
-![Workspace Introduction](/transformations/workspace/workspace-intro.png)
+![Workspace Introduction](/workspace/workspace-intro.png)
 
 Select a workspace type; not all workspace types are supported in all project workspaces. 
 Workspace types match available transformation types. For scripting languages ([Python](https://www.python.org/) and 
@@ -30,22 +30,22 @@ For SQL workspaces, you can either use Snowflake's [Snowsight](https://docs.snow
 or a database client of your liking (for example, [Dbeaver](https://dbeaver.io/)).
 
 {: .image-popup}
-![Workspace - Select Type](/transformations/workspace/workspace-create-1.png)
+![Workspace - Select Type](/workspace/workspace-create-1.png)
 
 Name and optionally describe the workspace:
 
 {: .image-popup}
-![Workspace - Name workspace](/transformations/workspace/workspace-create-2.png)
+![Workspace - Name workspace](/workspace/workspace-create-2.png)
 
 Creating the workspace takes a few seconds, so it will take a while before it appears:
 
 {: .image-popup}
-![Workspace - Running](/transformations/workspace/workspace-create-3.png)
+![Workspace - Running](/workspace/workspace-create-3.png)
 
 Once the workspace is ready, you'll see it in the workspace list:
 
 {: .image-popup}
-![Workspace - Running](/transformations/workspace/workspace-create-4.png)
+![Workspace - Running](/workspace/workspace-create-4.png)
 
 In the workspace detail, you can
 
@@ -55,7 +55,7 @@ In the workspace detail, you can
 - manage the workspace (resume & terminate & delete).
 
 {: .image-popup}
-![Workspace - Running](/transformations/workspace/workspace-detail-1.png)
+![Workspace - Running](/workspace/workspace-detail-1.png)
 
 ### Connecting to Workspace
 #### Python/R
@@ -64,7 +64,7 @@ To connect to a [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) works
 to directly open the JupyterLab interface.
 
 {: .image-popup}
-![Workspace - Python/R](/transformations/workspace/workspace-connect-pythonr.png)
+![Workspace - Python/R](/workspace/workspace-connect-pythonr.png)
 
 #### Snowflake
 We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options.
@@ -75,7 +75,7 @@ We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces wi
 - `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu.
 
 {: .image-popup}
-![Workspace - Snowflake](/transformations/workspace/workspace-connect-snowflake-person.png)
+![Workspace - Snowflake](/workspace/workspace-connect-snowflake-person.png)
 
 **Legacy Service** type workspace uses `SSO` and `Password` authentication methods. To connect using:
 
@@ -83,7 +83,7 @@ We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces wi
 - `Password` - use your favorite database client or other third-party tool and the Password credentials provided in the **Connect** menu.
 
 {: .image-popup}
-![Workspace - Snowflake](/transformations/workspace/workspace-connect-snowflake-legacy.png)
+![Workspace - Snowflake](/workspace/workspace-connect-snowflake-legacy.png)
 
 >***Important***
 >
@@ -175,7 +175,7 @@ openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_k
 To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
 
 {: .image-popup}
-![Workspace - BigQuery](/transformations/workspace/workspace-connect-bigquery.png)
+![Workspace - BigQuery](/workspace/workspace-connect-bigquery.png)
 
 ### Workspace Lifecycle
 When a workspace is created, it enters the **Active** state and can be used. 
@@ -184,7 +184,7 @@ When a workspace is created, it enters the **Active** state and can be used.
 - JupyterLab workspaces are billed by their running time. They can be terminated and resumed, in order to reduce running time while preserving your work. 
 
 {: .image-popup}
-![Workspace - States](/transformations/workspace/workspace-states.svg)
+![Workspace - States](/workspace/workspace-states.svg)
 
 Workspace termination can be done manually or it is done automatically after 1 hour period of inactivity (if auto sleep feature is supported and enabled). 
 Inactivity is measured from the last save of any notebook in JupyterLab. When a workspace is terminated, it is switched off
@@ -221,7 +221,7 @@ To load arbitrary data into the workspace, configure a
 [file input mapping](/transformations/mappings/#file-input-mapping) (or both) and click the **Load Data** button.
 
 {: .image-popup}
-![Workspace - Load Data](/transformations/workspace/load-data.png)
+![Workspace - Load Data](/workspace/load-data.png)
 
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
@@ -240,7 +240,7 @@ You may not want to share workspace credentials with other people unless it's ac
 With **read-only input mappings** disabled, only tables listed in the input mapping are accessible.
 
 {: .image-popup}
-![Workspace - Create new workspace with Read Only](/transformations/workspace/create-new-ws-with-ro.png)
+![Workspace - Create new workspace with Read Only](/workspace/create-new-ws-with-ro.png)
 
 So, if we enable this feature when we create a workspace, we can access individual tables in the workspace,
 without needing to define any tables in the input mapping. However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema.
@@ -248,10 +248,10 @@ This also applies to linked buckets. *Note that buckets and tables belong to ano
 For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. When developing transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the database to find the correct database and schema names. 
 
 {: .image-popup}
-![Example - Empty Input Mapping](/transformations/workspace/example-of-empty-im.png)
+![Example - Empty Input Mapping](/workspace/example-of-empty-im.png)
 
 {: .image-popup}
-![Example - Table in workspace](/transformations/workspace/table-in-ws.png)
+![Example - Table in workspace](/workspace/table-in-ws.png)
 
 ### Unloading Data
 You can also unload data from the Python and R workspaces. To unload data, configure 
@@ -259,7 +259,7 @@ You can also unload data from the Python and R workspaces. To unload data, confi
 or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or both) and click **Unload Data** button.
 
 {: .image-popup}
-![Workspace - Unload Data](/transformations/workspace/unload-data.png)
+![Workspace - Unload Data](/workspace/unload-data.png)
 
 Unloading data is useful, for example, when your ad-hoc analysis leads to
 valuable results, or when you trained a new model which you'd like to use in transformations.
@@ -288,12 +288,12 @@ and develop a script in JupyterLab, you can use the **Create Transformation** bu
 deploy the notebook into a transformation. Please note that only input/output mapping without the actual script is copied when creating transformation from a workspace
 
 {: .image-popup}
-![Workspace - Create Transformation](/transformations/workspace/create-transformation-1.png)
+![Workspace - Create Transformation](/workspace/create-transformation-1.png)
 
 Enter the name of the new transformation:
 
 {: .image-popup}
-![Workspace - Create Transformation](/transformations/workspace/create-transformation-2.png)
+![Workspace - Create Transformation](/workspace/create-transformation-2.png)
 
 You can also create workspaces from transformations.
 
