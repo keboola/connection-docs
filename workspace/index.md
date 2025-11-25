@@ -17,7 +17,7 @@ A workspace serves several purposes and can be used as
 Ephemeral transformation workspaces are not visible in the transformation UI, hence we won't mention them further.
 
 ## Working with Workspaces
-You can create a Workspace on the Transformations page:
+Select from the top menu Workspaces:
 
 {: .image-popup}
 ![Workspace Introduction](/workspace/workspace-intro.png)
@@ -170,6 +170,14 @@ openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_k
 * `-in private_key.pem` → input file
 * `-out private_key.p8` → output file
 * `-nocrypt` → no encryption
+
+#### SQL Editor
+💡 Tip: Use SQL Editor for Safe Testing
+
+For interactive SQL exploration inside your workspace, use the SQL Editor.
+It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines.
+
+Learn more: [SQL Editor](/workspace/sql-editor).
 
 #### BigQuery
 To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
