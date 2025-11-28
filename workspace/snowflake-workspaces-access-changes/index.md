@@ -68,15 +68,6 @@ The [Data Gateway](/components/applications/data-gateway/) component allows user
 
 ## November 30, 2025
 
-### Snowflake SQL Workspaces: Password Authentication Deprecated
-✅ KBDB/BYODB
-
-✅ MT/PAYG
-
-As announced by Snowflake, customers will no longer be able to create **new legacy workspaces** that support single-factor password authentication (find out more in the official [Snowflake documentation](https://docs.snowflake.com/en/user-guide/security-mfa-rollout#deprecation-timeline)).
-
-To align with this global Snowflake change, we will remove the option to create legacy workspaces from the UI. Going forward, only **Key Pair** (for third-party tools) and **SSO** (for Snowsight) will be supported.
-
 ### Keboola SQL Editor in Production
 ✅ KBDB/BYODB
 
@@ -119,6 +110,19 @@ We know this is a significant change, and it will impact many of our loyal custo
 - Use the **SQL Editor** and **Data Gateway** tools, similar to MT customers.
 - Switch to a **BigQuery PAYG** project by creating a new one via our wizard. If you have prepaid credits in your Snowflake PAYG project, our support team can help transfer them.
 - Move to a **regular contract**, either KBDB/BYODB (Snowflake/BigQuery) or MT BigQuery. This option best suits customers looking to expand their Keboola usage, though it naturally involves higher costs.
+
+## Q1 2026
+
+### Snowflake SQL Workspaces: Password Authentication Deprecated
+✅ KBDB/BYODB
+
+✅ MT/PAYG
+
+*Because Snowflake has postponed the deprecation of single-factor password authentication to mid 2026, we will also postpone removing the option to create workspaces with password authentication from November 2025 to Q1 2026.*
+
+As announced by Snowflake, customers will no longer be able to create **new legacy workspaces** that support single-factor password authentication (find out more in the official [Snowflake documentation](https://docs.snowflake.com/en/user-guide/security-mfa-rollout#deprecation-timeline)).
+
+To align with this global Snowflake change, we will remove the option to create new workspaces with password authentication from the UI. Going forward, only **Key Pair** (for third-party tools) and **SSO** (for Snowsight) will be supported.
 
 ## August to October 2026
 
