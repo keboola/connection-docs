@@ -5,7 +5,7 @@ permalink: /transformations/dbt/transformation/
 
 ## Configuration
 
-![](imgs/2776563892.jpeg){: width="100%" }
+![](imgs/dbt-transformation-overview.webp){: width="100%" }
 
 ### dbt Project Repository
 
