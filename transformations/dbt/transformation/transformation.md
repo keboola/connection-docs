@@ -23,17 +23,15 @@ After saving a configuration, click **Load Branches** to select the desired bran
 
 Select the desired execution steps, then edit or rearrange them as needed.
 
-### Execution Parameters
+By editing individual steps, you can append [flags](https://docs.getdbt.com/reference/global-configs/about-global-configs#available-flags) or [specify resources](https://docs.getdbt.com/reference/node-selection/syntax) to the command. Available options vary depending on the command. Please refer to the [documentation](https://docs.getdbt.com/category/list-of-commands) for details.
 
-You can define specific [run parameters and node selectors](https://docs.getdbt.com/reference/node-selection/syntax). In short, this refers to everything after `--select`. Please visit the official [dbt core documentation](https://docs.getdbt.com/reference/node-selection/syntax).
+For example, you can use the following command:
 
-![](imgs/2776563916.png){: width="100%" }
+```
+dbt run --select "path:marts/finance,tag:nightly,config.materialized:table" --full-refresh
+```
 
-You can also specify a path, tags, and specific models.
-
-![](imgs/2776563922.png){: width="100%" }
-
-***Note:** The default thread level for the Keboola dbt transformation is set to 4. You can override this by using the `--threads X` parameter in the **Execution Parameters**.*
+![](imgs/dbt-transformation-step-edit.webp){: width="100%" }
 
 ### Freshness
 If you run the `dbt source freshness` step in your project, you can set time limits for displaying warnings and errors. Both time limits can be enabled and configured independently.
@@ -58,15 +56,27 @@ Configuration parameters expose typical dbt connection configurations, adjusted 
 
 ***Note:** You can control threads for the execution as part of these settings.*
 
-## Run Debug Job
+## Running transformation
 
-![](imgs/2776563940.png){: width="50%" }
+Before running the dbt transformation, you can configure additional parameters (such as the dbt Core version, backend size, and number of threads), run debug command, or view generated project documentation.
+
+![](imgs/dbt-transformation-run.webp){: width="50%" }
+
+### Run Debug
 
 To verify that your credentials and project setup are correct, you can run a debug job. This is the same as running `dbt debug` from the command prompt.
 
-The **Run Debug** button will create a separate job with standard logging, exposing the results of the dbt debug command:
+The **Run debug** button will create a separate job with standard logging, exposing the results of the dbt debug command:
 
 ![](imgs/2776563946.png){: width="100%" }
+
+## dbt Project Documentation
+
+When you press **dbt Project Documentation**, the job will generate the necessary files within artifacts to power documentation. The dbt documentation is then accessible via the button from the main configuration screen.
+
+Clicking the button synchronously generates the documentation in a popup:
+
+![](imgs/2776269049.png){: width="100%" }
 
 ## Manually Triggering dbt Transformation
 
@@ -102,16 +112,6 @@ You can also access all configuration jobs from the configuration screen and the
 The **Discover** tab is designed to provide more information about the run. Keboola plans to expand this tab to offer additional insights. Currently, it provides the timeline designed to visually display the duration of each model build.
 
 ![](imgs/2777448784.png){: width="100%" }
-
-## dbt Docs
-
-When you press **dbt Project Documentation**, the job will generate the necessary files within artifacts to power documentation. The dbt documentation is then accessible via the button from the main configuration screen.
-
-![](imgs/2777710870.png){: width="50%" }
-
-Clicking the button synchronously generates the documentation in a popup:
-
-![](imgs/2776269049.png){: width="100%" }
 
 ## Profiles and Target
 
