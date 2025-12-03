@@ -9,9 +9,9 @@ redirect_from:
 {:toc}
 
 This data destination connector sends data to a [Snowflake](https://www.snowflake.com/) database. It can either write data
-to an existing Snowflake database, or to a new database it provisions to you. The latter case is useful
-for sharing your data in form of an SQL database with some service. For example, you can use it to send
-data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
+to an existing Snowflake database, or to a new database it provisions to you. The latter case is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)) and is useful for sharing your data in form of an SQL database with some service.
+For example, you can use it to send data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
+Projects using [Multi-tenant](/storage/#multi-tenant-mt) Snowflake backend can use [Data Gateway](/components/applications/data-gateway/) component instead.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Snowflake** data destination connector.
@@ -24,10 +24,10 @@ The first step is to **set up credentials**:
 There are two modes of operation of the connector:
 
 - **Own Snowflake database** --- Use this when you have your own Snowflake database -- i.e., you have a contract with Snowflake, or someone gave you credentials of a database to write to.
-- **Keboola Snowflake database** --- In this mode, the connector will create a new database for you and **give you credentials** to it.
+- **Keboola Snowflake database** --- In this mode, the connector will create a new schema in project's database for you and **give you credentials** to it. This option is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)).
 
 ### Own Snowflake Database
-You need to provide a *host name* (account name), *user name*, *password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
+You need to provide a *host name* (account name), *user name*, *private key/password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
 
 {: .image-popup}
 ![Screenshot - Own Credentials](/components/writers/database/snowflake/snowflake-2.png)
@@ -54,18 +54,15 @@ Keep in mind that Snowflake is case sensitive and if identifiers are not quoted,
 query `CREATE SCHEMA john.doe;`, you need to enter the schema name as `DOE` in the connector configuration.
 
 ### Keboola Snowflake Database
-A Keboola Snowflake database is created by the connector and the credentials are provisioned for you:
+A Keboola Snowflake schema is created in project's database by the component and the credentials are provisioned for you:
 
 {: .image-popup}
 ![Screenshot - Provisioned Credentials](/components/writers/database/snowflake/snowflake-3.png)
 
 You can share the credentials with whatever service that needs to access your data.
-Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world.
-This means that it must not be receiving any data (outside those provided by the connector itself, of course). This is a contractual limitation.
-Also note that the number of provisioned Snowflake databases is part of [Project limits](/management/project/limits/).
 
 ## Table Configuration
-The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
+The next step is to configure the tables you want to write. Click **Add Table** and select an existing table from Storage:
 
 {: .image-popup}
 ![Screenshot - Select Table](/components/writers/database/snowflake/snowflake-4.png)
@@ -73,14 +70,14 @@ The next step is to configure the tables you want to write. Click **Add New Tabl
 The next step is to specify table configuration. Use the **preview** icon to peek at the column contents.
 
 {: .image-popup}
-![Screenshot - Table Columns](/components/writers/database/snowflake/snowflake-6.png)
+![Screenshot - Table Columns](/components/writers/database/snowflake/snowflake-5.png)
 
 For each column you can specify its
 
-- **name** in the destination database; you can also use the select box in the table header to bulk convert the case of all names.
-- **data type** (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
-- **nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
-- **default value**; the provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in the target table.
+- **Column Name** in the destination database; you can also use the select box in the table header to bulk convert the case of all names.
+- **Data Type** (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
+- **Nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
+- **Default Value**; the provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in the target table.
 
 The Snowflake connector can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
 column types are pre-filled automatically. Make sure to verify the suggested types, however. These data types are taken
@@ -88,31 +85,34 @@ from the data source and may not be the best choice for the data destination.
 
 When done configuring the columns, don't forget to **save** the settings.
 
-### Load Options
-At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
+### Load Settings
+At the top of the page, you can specify the target table name and additional load settings. There are two main options how the connector
 can write data to tables --- **Full Load** and **Incremental Load**.
 
 {: .image-popup}
-![Screenshot - Table Options](/components/writers/database/snowflake/snowflake-7.png)
+![Screenshot - Table Options](/components/writers/database/snowflake/snowflake-6.png)
 
-In the **Incremental Load** mode, the data are bulk inserted into
+In the **Incremental load** mode, the data are bulk inserted into
 the destination table and the table structure must match (including the data types). That means the structure of the target table
 will not be modified. If the target table doesn't exist, it will be created. If a primary key is defined on the table, the
 data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data is inserted.
 
-In the **Full Load** mode, the table is completely overwritten including the table structure. The table is overwritten
+In the **Full load** mode, the table is completely overwritten including the table structure. The table is overwritten
 using the [`ALTER SWAP`](https://docs.snowflake.net/manuals/sql-reference/sql/alter-table.html#parameters) command, which ensures
 the shortest unavailability of the target table. However, this operation still drops the table.
 
-Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
+Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a **Data changed in last** filter for
 [incremental processing](/storage/tables/#incremental-processing).
 
-## Using Keboola-Provisioned Database
+**Data changed in last** filter is not available when using **Automatic incremental load**, as the component will use the last run date to determine the data to be loaded.
+
+## Using Keboola Snowflake Database
 The connector offers the option to create a [Keboola-provisioned database](#keboola-snowflake-database) for you. You can
 use this database to connect Keboola to a wide range of consumers --- especially Business Intelligence tools and Analytics.
-The database can be queried in real time, but is still completely isolated from your project Storage. The database is
-limited so that the data can be only read from the database and that the query execution time is limited to
+The database can be queried in real time, but is still completely isolated from your project Storage. The database query execution time is limited to
 900 seconds (15 minutes).
+
+Of course, you can use your own Snowflake database for this purpose. And if you are using [Multi-tenant](/storage/#multi-tenant-mt) Snowflake backend, you can use [Data Gateway](/components/applications/data-gateway/) component instead.
 
 ### Connect to Looker
 It is possible to use the Snowflake connector to share data with [Looker](https://looker.com/).
