@@ -105,12 +105,11 @@ openai = "YOUR_OPENAI_KEY"
 4. Review existing secrets before uploading new ones to avoid unintentional overwrites.
 
 ## Access Storage from Data App
-By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
+By default, there is the following environment variable available that make it easy to access Keboola Storage from Streamlit data app:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
-- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
 
-These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola Storage token:
+Here is an example:
 ```
 # Constants
 kbc_token = os.environ.get('KBC_TOKEN')
@@ -118,7 +117,7 @@ kbc_url = os.environ.get('KBC_URL')
 # Initialize Client
 client = Client(kbc_url, kbc_token)
 ```
-These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
+The variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
 
 ## Loading Data from Storage
 To load data from the Storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section.
