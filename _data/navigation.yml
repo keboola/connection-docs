@@ -632,6 +632,9 @@ items:
           - url: /transformations/dbt/flows/
             title: Usage in Flows
 
+          - url: /transformations/dbt/troubleshooting/
+            title: Troubleshooting
+
       - url: /transformations/python-plain/
         title: Python Transformations
 
