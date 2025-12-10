@@ -33,7 +33,7 @@ Follow these steps to set up the authentication method for your data app:
 
 - Go to the newly created data app.
 - Click the **Information & Settings** tab.
-- Under **Authentication**, select **OIDC** and then **Generic OIDC**.
+- Under **Authentication**, select **OIDC** and then select provider **Google SSO**.
 - Copy the client ID from your Google Cloud Project to the **Client ID** field in Keboola.
 - Copy the client secret from your Google Cloud Project to the **Client secret** field in Keboola.
 - In the **Issuer URL** field, enter `https://accounts.google.com`, which is the correct issuer URL for Google OAuth 2.0.
