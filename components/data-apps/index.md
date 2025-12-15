@@ -110,7 +110,13 @@ openai = "YOUR_OPENAI_KEY"
 By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
-- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
+- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage. 
+
+To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your Data App as a secret.
+You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
+
+**Important:**
+Do not name your secret `KBC_TOKEN`, as this name is reserved.
 
 These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola Storage token:
 ```
