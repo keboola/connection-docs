@@ -102,9 +102,9 @@ openai = "YOUR_OPENAI_KEY"
 ```
 ### Best Practices
 1. Always use descriptive secret names to improve clarity.
-2. Group related secrets under meaningful sections.
-3. Back up your secrets configuration regularly.
-4. Review existing secrets before uploading new ones to avoid unintentional overwrites.
+2. Back up your secrets configuration regularly.
+3. Review existing secrets before uploading new ones to avoid unintentional overwrites.
+4. If you need nested/groups, use repo-based secrets. Direct upload does not support nested access.
 
 ## Access Storage from Data App
 By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
