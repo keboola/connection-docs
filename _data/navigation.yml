@@ -720,5 +720,20 @@ items:
   - url: /ai/
     title: AI Features
     items:
+      - url: /ai/kai-assistant/
+        title: Kai - AI Assistant
+        items:
+          - url: /ai/kai-assistant/getting-started/
+            title: Getting Started
+
+          - url: /ai/kai-assistant/use-cases/
+            title: Use Cases & Examples
+
+          - url: /ai/kai-assistant/best-practices/
+            title: Best Practices
+
+          - url: /ai/kai-assistant/technical/
+            title: Technical Details
+
       - url: /ai/mcp-server/
         title: MCP Server
