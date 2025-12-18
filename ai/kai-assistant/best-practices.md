@@ -8,6 +8,23 @@ permalink: /ai/kai-assistant/best-practices/
 
 This guide helps you leverage Kai as a high-impact team member. Learn how to communicate effectively, structure your workflows, and get the most value from your AI assistant.
 
+---
+
+## Quick Reference
+
+**Top 5 Best Practices:**
+1. **Provide business context** - Kai knows schemas, not business rules
+2. **Use development branches** - Test changes safely before production
+3. **Be specific** - Reference exact component IDs and table names
+4. **Plan before building** - For complex tasks, ask for an outline first
+5. **Let Kai read logs** - Don't paste errors, let Kai fetch them directly
+
+**Most common mistakes:**
+- Mixing unrelated tasks in one conversation
+- Pasting credentials in chat (use secure config prompts)
+- Skipping verification of business logic
+
+
 ## Understanding How Kai Works
 
 Before diving into best practices, it's important to understand what makes Kai different from generic AI tools.
