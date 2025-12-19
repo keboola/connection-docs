@@ -14,13 +14,58 @@ a specified SOQL query, or by selecting a Salesforce object and getting all data
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Salesforce V2** connector.
 
-To configure this connector, you need to provide a **username**, **password**, and an **API security token**. Then select if
-you want to get data from your sandbox or from the production environment.
+### Authorization
+The connector supports three authentication methods. Select the appropriate **Login Method** based on your Salesforce setup and security requirements.
 
-{: .image-popup}
-![Screenshot - Config](/components/extractors/marketing-sales/salesforce/config.png)
+#### Security Token with Username and Password
+This is the default and simplest authentication method. You need to provide your Salesforce **Login Name**, **Password**, and **Security Token**. 
+If you do not have your Security Token, you will need to reset it by following the steps in the 
+[Salesforce Documentation](https://help.salesforce.com/s/articleView?id=sf.user_security_token.htm&type=5).
 
-After this you can configure individual queries or objects in the [row based configuration](https://help.keboola.com/components/#configuration-rows).
+Note that the security token is different for sandbox and production environments. When exporting data from a sandbox, 
+don't forget to add `.sandboxname` at the end of your username.
+
+#### Connected App with Username and Password
+This method uses a Salesforce Connected App for authentication. In addition to your **Login Name** and **Password**, 
+you need to provide the **Consumer Key** and **Consumer Secret** from your Connected App.
+
+To set up a Connected App in Salesforce:
+
+1. In Salesforce Setup, navigate to **Platform Tools > Apps > App Manager**.
+2. Click **New Connected App**.
+3. Fill in the basic information (Connected App Name, API Name, Contact Email).
+4. In the **API (Enable OAuth Settings)** section, check **Enable OAuth Settings**.
+5. Enable **Enable for Device Flow** (the Callback URL will be set automatically).
+6. Select the following OAuth Scopes:
+   - Manage user data via APIs (api)
+   - Access unique user identifiers (openid)
+   - Perform requests at any time (refresh_token, offline_access)
+7. Save the Connected App.
+8. In **App Manager**, find your app, click the dropdown arrow, and select **Manage**.
+9. Click **Edit Policies** and set **IP Relaxation** to **Relax IP restrictions**.
+10. To get the Consumer Key and Secret, go back to **App Manager**, find your app, click **View**, 
+    then click **Manage Consumer Details** in the API section.
+
+#### Connected App OAuth 2.0 Client Credentials
+This method enables server-to-server authentication without user credentials. It requires a **Consumer Key**, 
+**Consumer Secret**, and your Salesforce **Domain** (e.g., `https://your-org.my.salesforce.com`).
+
+To enable Client Credentials Flow:
+
+1. Follow the steps above to create a Connected App.
+2. Additionally, check **Enable Client Credentials Flow** in the OAuth settings.
+3. Provide your Salesforce domain in the configuration.
+
+This method is ideal for automated integrations where no user interaction is required.
+
+### Additional Settings
+You can also configure:
+
+- **Sandbox** -- Enable this option to download records from a sandbox instead of the production environment (available for Security Token and Connected App methods).
+- **API Version** -- Select the Salesforce API version to use for data extraction.
+- **Proxy Settings** -- Configure an HTTPS proxy server if required by your network setup.
+
+After configuring the authorization, you can set up individual queries or objects in the [row based configuration](https://help.keboola.com/components/#configuration-rows).
 
 {: .image-popup}
 ![Screenshot - Row configuration](/components/extractors/marketing-sales/salesforce/row_config.png)
