@@ -79,8 +79,12 @@ Now, you can deploy your data app from the private repository and access it with
 ![Git repository](/components/data-apps/data_apps-git_repository_private_SSH.png)
 
 ## Secrets
-To provide your app with environment variables or sensitive information like credentials, API keys, etc., enter them as key value pairs in the section Secrets.
+To provide your app with environment variables or sensitive information like credentials, API keys, etc.
 These secrets will be injected into the `secrets.toml` file upon deployment of the app. 
+
+When you upload `secrets.toml` using the direct secrets upload UI, Keboola imports secrets as flat, top-level keys. Sections (TOML groups) are not preserved as nested structures. This means keys in the file become `st.secrets["your_key"]` after upload — you cannot access them as `st.secrets["group"]["key"]`.
+If your app expects nested secrets, use repo-based secrets.
+
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
 ### Direct Secrets Upload
@@ -92,23 +96,27 @@ You can now upload a `secrets.toml` file directly through the UI when developing
 
 #### Example secrets.toml structure:
 ```
-[connections]
 aws_key = "YOUR_AWS_KEY"
 aws_secret = "YOUR_AWS_SECRET"
-[api_keys]
 openai = "YOUR_OPENAI_KEY"
 ```
 ### Best Practices
 1. Always use descriptive secret names to improve clarity.
-2. Group related secrets under meaningful sections.
-3. Back up your secrets configuration regularly.
-4. Review existing secrets before uploading new ones to avoid unintentional overwrites.
+2. Back up your secrets configuration regularly.
+3. Review existing secrets before uploading new ones to avoid unintentional overwrites.
+4. If you need nested/groups, use repo-based secrets. Direct upload does not support nested access.
 
 ## Access Storage from Data App
 By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
-- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
+- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage. 
+
+To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your Data App as a secret.
+You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
+
+**Important:**
+Do not name your secret `KBC_TOKEN`, as this name is reserved.
 
 These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola Storage token:
 ```
