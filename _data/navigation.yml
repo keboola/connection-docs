@@ -733,3 +733,9 @@ items:
     items:
       - url: /ai/mcp-server/
         title: MCP Server
+
+  - url: /external-integrations/
+    title: External Integrations
+    items:
+      - url: /external-integrations/n8n/
+        title: n8n
