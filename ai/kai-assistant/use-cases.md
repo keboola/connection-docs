@@ -12,11 +12,11 @@ This page provides detailed examples of how to use Kai for common data engineeri
 
 ### Analyzing Job Failures
 
-When jobs fail, Kai can read the actual logs and provide specific diagnosis:
+When jobs fail, Kai can read the error message and provide specific diagnosis:
 
 **Example Prompt:**
 ```
-"Job 789012 failed. Read the event log, identify the root cause, 
+"Job 789012 failed. Read the error message, identify the root cause, 
 and check if the transformation has a syntax error or schema mismatch."
 ```
 
