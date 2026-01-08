@@ -6,94 +6,49 @@ permalink: /ai/kai-assistant/
 * TOC
 {:toc}
 
-Kai is Keboola's embedded AI assistant that serves as a comprehensive data engineering co-pilot within the Keboola platform. Unlike generic AI tools, Kai is deeply context-aware of your specific Keboola project, understanding your transformations, flows, table schemas, and jobs to provide intelligent, actionable assistance.
+Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pilot that understands your project's transformations, flows, table schemas, and jobs.
 
-## What is Kai?
+## What Kai Can Do
 
-Kai functions as a full-featured "Data Engineer" agent that can both explore and modify your Keboola projects through natural conversation. The assistant is embedded directly within the Keboola platform. 
+**Analytics & Exploration** — Query databases, explore schemas, calculate metrics, and analyze trends.
 
-### Key Capabilities
+**Integration Setup** — Configure extractors, destinations, and custom components. Manage authentication and packages.
 
-Kai excels at a wide range of data engineering tasks:
+**Coding** — Write and optimize SQL/Python transformations. Convert between languages.
 
-**Data Analytics & Exploration**
-- Execute SQL queries against your Snowflake/BigQuery databases
-- Explore table schemas and data structures
-- Calculate metrics, KPIs, and statistical analyses
-- Create reports and dashboards with Data Apps
-- Analyze trends and identify anomalies
+**Troubleshooting** — Debug job failures, resolve configuration errors, and investigate data quality issues.
 
-**Integration Setup**
-- Configure data extractors (Shopify, Google Sheets, APIs, CSV)
-- Set up data destinations
-- Create custom Python components for specialized integrations
-- Manage API tokens and authentication
-- Add packages to transformation environments
+**Documentation** — Generate project documentation, update table descriptions, and create onboarding materials.
 
-**Coding & Development**
-- Write SQL transformations
-- Create Python transformations
-- Convert between Python and SQL
-- Optimize queries and transformation logic
-- Build custom data processing components
+**Data Modeling** — Build analytical frameworks, dimensional models, and complex data structures.
 
-**Troubleshooting**
-- Debug job failures with automated diagnosis
-- Resolve configuration errors
-- Fix transformation bugs
-- Investigate data quality issues
-- Handle API token and authentication issues
+## Why Use Kai?
 
-**Documentation**
-- Generate comprehensive project documentation
-- Update table and column descriptions
-- Document transformations and data flows
-- Create project overviews for new team members
+**Context-aware** — Unlike generic AI tools, Kai reads your actual job logs, configurations, and data structures to provide specific solutions.
 
-**Data Modeling**
-- Build complex analytical frameworks
-- Create hierarchical data structures
-- Design dimensional models
-- Advanced clustering and taxonomy creation
+**No setup required** — Built into Keboola, already authenticated, understands your current location.
 
-## How Kai Differs from Other AI Tools
-
-### Context Awareness
-Unlike ChatGPT or Claude, Kai has direct access to your Keboola project. When you ask about an error, it doesn't guess based on syntax—it reads the actual job logs, configurations, and data structures to provide specific, actionable solutions.
-
-### Embedded Experience
-Kai is built into the Keboola platform with no installation required. It's already authenticated and understands your current location within the platform, making it seamless to use.
-
-### Data Engineering Focus
-Kai is specifically designed for data engineering workflows, with deep knowledge of Keboola components, transformations, and best practices.
+**Data engineering focus** — Deep knowledge of Keboola components, transformations, and best practices.
 
 ## Kai vs. MCP Server
 
-While Kai and the [MCP Server](/ai/mcp-server/) share underlying technology, they serve different use cases:
-
-| Feature | Kai (In-Platform) | MCP Server (External) |
-|---------|-------------------|----------------------|
-| **Installation** | None required | Requires setup with external tools |
-| **Best for** | Browser-based workflows, team collaboration | Local development, IDE integration |
-| **Authentication** | Automatic | Manual OAuth setup |
-| **Audit Trail** | Complete organizational visibility | Local only |
-| **Context** | Deep platform awareness | Tool-dependent |
-
-Many users leverage both tools depending on their specific needs and workflow preferences.
+| Feature | Kai | [MCP Server](/ai/mcp-server/) |
+|---------|-----|------------------------------|
+| **Best for** | Browser workflows, team collaboration | IDE integration, local development |
+| **Setup** | None | Requires external tool configuration |
+| **Audit trail** | Full organizational visibility | Local only |
 
 ## Getting Started
 
-Kai is currently in **Private Beta** and requires approval for access.
+Kai is currently in **Private Beta**. [Contact Keboola Support](mailto:support@keboola.com) to request access.
 
 [Get Started with Kai →](/ai/kai-assistant/getting-started/)
 
 ## Learn More
 
-- [Use Cases & Examples](/ai/kai-assistant/use-cases/) - Detailed examples and practical applications
-- [Best Practices](/ai/kai-assistant/best-practices/) - Tips for effective prompting and workflows  
-- [Technical Details](/ai/kai-assistant/technical/) - Architecture, security, and deployment information
+- [Use Cases & Examples](/ai/kai-assistant/use-cases/)
+- [Best Practices](/ai/kai-assistant/best-practices/)
 
 ## Support
 
-- **In-Chat Feedback**: Use thumbs up/down buttons directly in the interface
-- **Keboola Support**: Contact support for access requests or technical issues
+Use the thumbs up/down buttons in the chat to provide feedback, or contact [Keboola Support](mailto:support@keboola.com) for access requests and technical issues.
