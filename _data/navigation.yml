@@ -740,9 +740,6 @@ items:
           - url: /ai/kai-assistant/best-practices/
             title: Best Practices
 
-          - url: /ai/kai-assistant/technical/
-            title: Technical Details
-
       - url: /ai/mcp-server/
         title: MCP Server
 
