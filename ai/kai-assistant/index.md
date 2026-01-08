@@ -6,11 +6,11 @@ permalink: /ai/kai-assistant/
 * TOC
 {:toc}
 
-Kai is Keboola's embedded AI assistant that serves as a comprehensive data engineering co-pilot within the Keboola platform. Unlike generic AI tools, Kai is deeply context-aware of your specific Keboola project, understanding your data lineage, transformation flows, table schemas, and execution logs to provide intelligent, actionable assistance.
+Kai is Keboola's embedded AI assistant that serves as a comprehensive data engineering co-pilot within the Keboola platform. Unlike generic AI tools, Kai is deeply context-aware of your specific Keboola project, understanding your transformations, flows, table schemas, and jobs to provide intelligent, actionable assistance.
 
 ## What is Kai?
 
-Kai functions as a full-featured "Data Engineer" agent that can both explore and modify your Keboola projects through natural conversation. The assistant is embedded directly within the Keboola platform, eliminating the need for separate OAuth authentication or external tool installation.
+Kai functions as a full-featured "Data Engineer" agent that can both explore and modify your Keboola projects through natural conversation. The assistant is embedded directly within the Keboola platform. 
 
 ### Key Capabilities
 
@@ -20,12 +20,12 @@ Kai excels at a wide range of data engineering tasks:
 - Execute SQL queries against your Snowflake/BigQuery databases
 - Explore table schemas and data structures
 - Calculate metrics, KPIs, and statistical analyses
-- Create reports and dashboards
+- Create reports and dashboards with Data Apps
 - Analyze trends and identify anomalies
 
 **Integration Setup**
 - Configure data extractors (Shopify, Google Sheets, APIs, CSV)
-- Set up writers and data destinations
+- Set up data destinations
 - Create custom Python components for specialized integrations
 - Manage API tokens and authentication
 - Add packages to transformation environments
@@ -97,4 +97,3 @@ Kai is currently in **Private Beta** and requires approval for access.
 
 - **In-Chat Feedback**: Use thumbs up/down buttons directly in the interface
 - **Keboola Support**: Contact support for access requests or technical issues
-- **Community**: Join discussions in Slack channel `#feature-kai-in-platform-assistant`

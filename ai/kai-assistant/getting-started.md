@@ -19,13 +19,6 @@ Kai is currently in **Private Beta** (as of December 2025) and is controlled by 
 3. The feature flag will be enabled for your organization
 4. All users in your organization will then have access to Kai
 
-### Supported Regions
-
-Kai is available on the following stacks:
-- **US Stacks**: GCP US-East4 (fully deployed)
-- **EU Stacks**: GCP Europe-West3 (fully deployed)
-- **Azure/AWS**: Deployment in progress
-
 ## Finding Kai in Your Project
 
 Once access is enabled, you'll find Kai integrated directly into your Keboola project interface:
@@ -110,18 +103,6 @@ When Kai wants to perform actions that modify your project, you'll see a **Tool 
 - **Approve or deny** the action
 - **All actions are logged** in your project's audit trail
 
-### Response Types
-
-Kai provides different types of responses:
-
-**Information Responses**: Direct answers to questions about your data or configurations
-
-**Code Suggestions**: SQL queries, Python scripts, or configuration examples
-
-**Action Proposals**: Requests to create, modify, or run components with your approval
-
-**Error Analysis**: Detailed diagnosis of job failures with suggested fixes
-
 ## Common First Tasks
 
 ### Debugging a Failed Job
@@ -137,7 +118,7 @@ If you have a recent job failure:
 Try setting up a simple extractor:
 
 ```
-"Help me create a CSV extractor to import data from a file"
+"Help me create a Google Sheets extractor"
 ```
 
 ### Writing a Simple Transformation
@@ -209,7 +190,6 @@ During the Private Beta:
 
 - **Keboola Support**: For access issues or technical problems
 - **Documentation**: Refer to [Use Cases](/ai/kai-assistant/use-cases/) and [Best Practices](/ai/kai-assistant/best-practices/)
-- **Community**: Join the Slack channel `#feature-kai-in-platform-assistant`
 
 ## Troubleshooting Common Issues
 
@@ -247,7 +227,7 @@ Once you're comfortable with basic interactions:
 
 ## Security and Privacy
 
-- **All actions require approval** before execution
+- **All constructive actions require approval** before execution
 - **Complete audit trail** available to organization administrators
 - **PII and secrets are automatically redacted** from logs
 - **Regional data processing** respects data residency requirements
