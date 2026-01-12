@@ -112,13 +112,7 @@ Think of a session as a temporary working environment that exists while you’re
 
 A session in the SQL Editor lasts for 24 hours when there is no user activity (e.g. running a query) or when SQL Editor is closed.
 
-**After 24 hours of inactivity:**
-*   The session automatically expires
-*   Session-specific data is cleared
-*   A new session is created when you run the next query or re-open the SQL Editor
-
 #### What happens when a session expires?
-**When a session expires:**
 *   Temporary tables are removed
 *   Session variables are cleared
 *   Other session-specific state is lost
@@ -127,14 +121,11 @@ Your SQL queries themselves are not lost, but anything that depended on the prev
 If your browser window stays open past the 24-hour limit, you’ll see a message informing you that the session has expired. 
 
 #### SQL features that depend on sessions
-Some SQL features rely on an active session and will stop working once the session expires. These include:
 *   Temporary tables (e.g. CREATE TEMP TABLE)
 *   Temporary views
 *   SQL variables
 *   Session parameters
 *   Multi-step workflows that assume shared state between queries
-
-If you use any of these features, you may need to re-run setup queries after a session expires.
 
 ### Working with Multiple Queries
 
