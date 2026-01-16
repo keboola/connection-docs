@@ -57,16 +57,16 @@ If you need more information, please contact your CSM.
 
 | Types of jobs in Keboola              | Base job                | Time credits          |
 |---------------------------------------|-------------------------|-----------------------|
-| **Data source job**                    | 1 hour                  | **2**                 |
+| **Data source job**                   | 1 hour                  | **2**                 |
 | **Data destination job**              | 1 GB out                | **0.2**               |  
 | **SQL job / workspace**               |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |
-| **Data Science job / workspace** (from Jun 1, 2025)      |                         |                       |
-| XSmall (jobs only)                                | 1 hour                  | **0.2**               |
-| Small                                 | 1 hour                  | **0.4**                 |
-| Medium                                | 1 hour                  | **0.6**                 |
+| **Data Science job / workspace**      |                         |                       |
+| XSmall (jobs only)                    | 1 hour                  | **0.2**               |
+| Small                                 | 1 hour                  | **0.4**               |
+| Medium                                | 1 hour                  | **0.6**               |
 | Large                                 | 1 hour                  | **2**                 |
 | **dbt job**                           |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
@@ -75,6 +75,11 @@ If you need more information, please contact your CSM.
 | Small                                 | 1 hour                  | **8**                 |
 | Medium                                | 1 hour                  | **16**                |
 | Large                                 | 1 hour                  | **32**                |
+| **Data Gateway query**                |                         |                       |
+| Small                                 | 1 hour                  | **8**                 |
+| Medium                                | 1 hour                  | **16**                |
+| Large                                 | 1 hour                  | **32**                |
+| **Data Gateway job**                  | 1 GB out                | **0.2**               |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
 | **DataApps**                          |                         |                       |
 | XSmall                                | 1 hour                  | **0.1**               |
