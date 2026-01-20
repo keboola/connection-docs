@@ -263,6 +263,26 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
 
+## Restricting Tool Access
+
+When using the remote MCP server, you may want to limit which tools are available to AI agents. This is useful for:
+
+- **AI Agent Restrictions**: Limiting what actions an AI agent (like Devin or Cursor) can perform in your project
+- **Compliance and Security**: Enforcing data governance policies by restricting write operations
+- **Customer-Specific Access**: Creating tailored access profiles for different use cases
+
+The MCP server supports three HTTP headers for tool authorization:
+
+| Header | Purpose |
+|--------|---------|
+| `X-Allowed-Tools` | Only allow specific tools (comma-separated list) |
+| `X-Disallowed-Tools` | Block specific tools (comma-separated list) |
+| `X-Read-Only-Mode` | Restrict to read-only tools only (`true`/`1`/`yes`) |
+
+For example, setting `X-Read-Only-Mode: true` allows agents to query and explore data but prevents them from creating or modifying configurations.
+
+For detailed technical documentation including the full list of read-only tools and header combination behavior, see the [Developers Documentation](https://developers.keboola.com/integrate/mcp/#tool-authorization-and-access-control).
+
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
 For CLI control, dev environments, or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
