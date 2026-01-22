@@ -514,12 +514,3 @@ This data app is designed to provide a quick and comprehensive overview of the d
 - [Live app](https://ua-ga4-comparison-app-51525847.hub.north-europe.azure.keboola.com)
 
 This app, along with the complete workflow, can be implemented using the UA and GA4 Comparison template.
-
-### Kai SQL Bot
-Author: Jordan Burger and Pavel Chocholouš
-
-The SQL Bot data app is a dialogue-based AI interface tailored for Snowflake database queries. It allows you to engage in natural conversations and translates your requests into precise SQL commands.
-- [Documentation](https://help.keboola.com/templates/kai-sql-bot/)
-- [Source](https://github.com/keboola/Kai-SQL-bot)
-
-This app, along with the complete workflow, can be implemented using the Kai SQL Bot template.
