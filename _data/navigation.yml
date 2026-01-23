@@ -731,6 +731,9 @@ items:
       - url: /ai/mcp-server/
         title: MCP Server
 
+      - url: /ai/data-app-storage-guide/
+        title: Building Data Apps with Storage
+
   - url: /external-integrations/
     title: External Integrations
     items:
