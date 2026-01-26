@@ -10,7 +10,7 @@ This guide explains how to create a Streamlit data app that reads tables from Ke
 
 ## Overview
 
-Data apps in Keboola provide a powerful way to create interactive web applications that work directly with your data stored in Keboola Storage. A typical use case is building a data editor that allows business users to view and modify table contents without needing direct access to the Keboola platform.
+[Data apps](/components/data-apps/) in Keboola provide a powerful way to create interactive web applications that work directly with your data stored in [Keboola Storage](/storage/). A typical use case is building a data editor that allows business users to view and modify table contents without needing direct access to the Keboola platform.
 
 The workflow covered in this guide includes reading tables from a specific bucket, displaying the data in an editable interface, and writing modifications back to Storage using the Keboola Storage Python client.
 
@@ -32,18 +32,14 @@ Navigate to Components in your Keboola project and select Data Apps. Click on Cr
 
 For this guide, we'll use the Code deployment type, which allows you to paste Streamlit code directly into the configuration.
 
-### Step 2: Configure Secrets
+### Step 2: Access Storage Credentials
 
-In the Secrets section of your data app configuration, add the following secrets:
+Data apps in Keboola automatically have access to Storage credentials through Streamlit secrets. The following secrets are available by default:
 
-```toml
-kbc_url = "https://connection.YOUR_STACK.keboola.com"
-kbc_token = "your-storage-api-token"
-```
+- `kbc_url` - The Keboola Storage API URL for your stack
+- `kbc_token` - A Storage API token with access to your project
 
-Replace `YOUR_STACK` with your Keboola stack (e.g., `north-europe.azure`, `us-east-1.aws`) and provide your Storage API token.
-
-**Important**: Do not name your secret `KBC_TOKEN` as this name is reserved by the system. Use a different name like `kbc_token` or `kbc_storage_token`.
+You do not need to configure these manually - they are automatically provisioned when the data app is deployed.
 
 ## Reading Tables from Storage
 
