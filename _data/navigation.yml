@@ -512,9 +512,6 @@ items:
       - url: /templates/interactive-keboola-sheets/
         title: Interactive Keboola Sheets
 
-      - url: /templates/kai-sql-bot/
-        title: Kai SQL Bot
-
       - url: /templates/mailchimp/
         title: Mailchimp
 
