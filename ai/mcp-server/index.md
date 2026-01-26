@@ -279,6 +279,8 @@ The MCP server supports three HTTP headers for tool authorization:
 | `X-Disallowed-Tools` | Block specific tools (comma-separated list) |
 | `X-Read-Only-Mode` | Restrict to read-only tools only (`true`/`1`/`yes`) |
 
+These headers are set by the client (e.g., your AI agent integration or custom MCP client) when making HTTP requests to the MCP server. Refer to your MCP client's documentation for how to configure custom HTTP headers.
+
 For example, setting `X-Read-Only-Mode: true` allows agents to query and explore data but prevents them from creating or modifying configurations.
 
 For detailed technical documentation including the full list of read-only tools and header combination behavior, see the [Developer Documentation](https://developers.keboola.com/integrate/mcp/#tool-authorization-and-access-control).
