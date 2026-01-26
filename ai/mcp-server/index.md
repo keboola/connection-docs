@@ -281,7 +281,7 @@ The MCP server supports three HTTP headers for tool authorization:
 
 For example, setting `X-Read-Only-Mode: true` allows agents to query and explore data but prevents them from creating or modifying configurations.
 
-For detailed technical documentation including the full list of read-only tools and header combination behavior, see the [Developers Documentation](https://developers.keboola.com/integrate/mcp/#tool-authorization-and-access-control).
+For detailed technical documentation including the full list of read-only tools and header combination behavior, see the [Developer Documentation](https://developers.keboola.com/integrate/mcp/#tool-authorization-and-access-control).
 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
