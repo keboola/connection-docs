@@ -34,6 +34,35 @@ To see the organization a project is assigned to, go to **Users & Settings** ---
 {: .image-popup}
 ![Screenshot - Project Settings](/management/organization/project-detail.png)
 
+## Organization Admins
+An **organization admin** (also referred to as an organization member) is a user who has been explicitly added to an organization's membership list. This role is distinct from project-level roles and provides elevated permissions across all projects within the organization.
+
+### What Organization Admins Can Do
+Organization admins have the following capabilities:
+
+- **Project Access** --- Join and leave any project within the organization without requiring an invitation. This makes it easy for organization admins to provide support or oversight across multiple projects.
+- **Create New Projects** --- Set up new Keboola projects within the organization.
+- **Manage Data Sharing** --- Share and manage [shared buckets](/catalog/#sharing-types) across projects in the organization. Organization admins can share buckets to all organization members and manage bucket sharing settings.
+- **Manage Organization Members** --- Invite new members to the organization and remove existing members.
+- **Organization Settings** --- Configure organization-wide settings such as [Auto Join](#auto-join) and [MFA requirements](#require-mfa).
+- **Billing Access** --- View and edit billing details for the organization.
+- **Support Access Control** --- Allow or restrict [Keboola Support](/management/support/#require-approval-for-support-access) from joining projects in the organization.
+- **Development Branches** --- In projects with [protected default branches](/components/branches/), organization admins have additional permissions to manage development branches even without a specific project role.
+
+### Organization Admin vs. Project Roles
+It is important to understand that organization admin status is separate from [project user roles](/management/project/users/#user-roles). Being an organization admin does not automatically grant you a role within individual projects. However, organization admins can join any project in the organization at will.
+
+When working within a project, your permissions are determined by your project role (Admin, Share, Guest, etc.), not your organization admin status. The organization admin role primarily provides the ability to access projects and manage organization-level resources like shared buckets.
+
+### Who Should Be an Organization Admin
+We recommend keeping the number of organization admins small (typically 2-4 people) and limiting this role to:
+
+- Data platform administrators responsible for managing the Keboola environment
+- Team leads who need to oversee multiple projects
+- Users who need to manage data sharing across projects
+
+For regular project work, users should be added directly to the relevant projects with appropriate [project roles](/management/project/users/#user-roles) rather than being made organization admins.
+
 ## Manage Members
 All organization members are full members and as such can **add and remove** other members.
 As mentioned above, being a member of a project in an organization does not make you automatically
