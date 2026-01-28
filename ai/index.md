@@ -12,6 +12,11 @@ Keboola's AI-powered capabilities help you build, optimize, and automate your da
 
 Keboola integrates artificial intelligence throughout the platform to enhance productivity, simplify complex tasks, and provide intelligent insights. Whether you're a beginner looking to create your first data pipeline or an experienced data engineer optimizing existing workflows, our AI features adapt to your needs and skill level. Following AI features are currently available on Keboola platform:
 
+### AI Kit
+
+A plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It includes plugins for code quality and security analysis, building Keboola Python components, and creating Streamlit data apps.
+[Learn more about AI Kit →](/ai/ai-kit/)
+
 ### MCP Server
 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.

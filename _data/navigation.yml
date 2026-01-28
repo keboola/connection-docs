@@ -728,6 +728,9 @@ items:
   - url: /ai/
     title: AI Features
     items:
+      - url: /ai/ai-kit/
+        title: AI Kit
+
       - url: /ai/mcp-server/
         title: MCP Server
 
