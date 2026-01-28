@@ -56,12 +56,13 @@ Test changes safely by creating a development branch in the Keboola UI, then wor
 ## Security
 
 **Do:**
-- Say "I'll provide the API key when you prompt me" and let Kai handle credentials through the secure configuration interface
+- Let Kai handle credentials through secure configuration forms—never type secrets directly in chat
+- Say "I'll provide the API key when you prompt me" and Kai will use the secure configuration interface
 - Review every tool approval before confirming
 - Use dev branches for testing
 
 **Don't:**
-- Paste credentials in plain text
+- Paste credentials, API keys, or passwords in plain text chat messages
 - Blindly approve actions
 - Assume Kai knows about other projects (it only sees your current project)
 
