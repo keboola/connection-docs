@@ -8,6 +8,8 @@ permalink: /ai/kai-assistant/use-cases/
 
 Practical examples of what you can ask Kai to do.
 
+![Kai Capabilities](/ai/kai-assistant/Capabilities.gif)
+
 ## Troubleshooting
 
 **Debug a failed job:**
