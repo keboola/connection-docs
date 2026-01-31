@@ -134,6 +134,10 @@ You can add multiple code blocks using the **+ New Query** button below the exis
 {: .image-popup}
 ![SQL Editor - New query block added to the editor](/workspace/sql-editor/09-new-query-block.jpg)
 
+### Export Query result
+
+To download your query results as a CSV-formatted file, select Export Query result.
+
 ### Viewing Query Details
 
 After executing a query, you can access detailed information about the execution in the results pane by clicking **QUERY DETAILS**.
@@ -359,6 +363,3 @@ Everyone works in an isolated database state.
 *   When multiple users edit and save queries at the same time, a conflict alert may appear
 (e.g., “You are saving a configuration that was modified by another user.”)
 *   Each user sees their own version of workspace tables, even when working in the same shared sandbox
-
-## Limitations
-*   Download Query result table into CSV, TSV or excel is currently in development. Workaround: Save the query result as a table via Output Mapping, unload it to Storage, and download it in your preferred file format.
