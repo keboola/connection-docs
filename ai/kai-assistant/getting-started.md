@@ -6,269 +6,94 @@ permalink: /ai/kai-assistant/getting-started/
 * TOC
 {:toc}
 
-This guide will help you get started with Kai, Keboola's embedded AI assistant. From requesting access to your first successful interactions, we'll walk you through everything you need to know.
+## Access
 
-## Access Requirements
+Kai is now in Public Beta and available to all users in supported stacks.
 
-Kai is currently in **Private Beta** and is controlled by the `agent-chat` feature flag.
+### Enabling Kai
 
-### Requesting Access
+Every user can see the Kai button in their project (on supported stacks). To enable Kai:
 
-1. Contact [Keboola Support](mailto:support@keboola.com) to request Private Beta access
-2. Your request will be reviewed based on current capacity
-3. The feature flag will be enabled for your organization
-4. All users in your organization will then have access to Kai
+- **Organization Admins** — Can enable the feature directly from the chat screen when first clicking the Kai button
+- **Other users** — Need to ask their Organization Admin to enable the feature, or contact Keboola Support for assistance
+- **Settings** — Kai can also be enabled via **Settings → Features** in your project
 
-### Supported Regions
+## Opening Kai
 
-**Fully Available:**
-- ✅ GCP US-East4 (US Stack)
-- ✅ GCP Europe-West3 (EU Stack)
+Click the **Kai** button in your project's top navigation bar, or use keyboard shortcuts:
 
-**Coming Soon:**
-- 🚧 Azure/AWS stacks (deployment in progress)
+| Shortcut | Action |
+|----------|--------|
+| `A` | Open the chat window (shows recent conversation) |
+| `Shift + A` | Open a new chat |
 
----
+## Example Prompts
 
-## Finding Kai in Your Project
+**Explore your project:**
+- "What tables do we have in this project?"
+- "Show me the latest job runs and their status"
+- "What extractors are configured?"
 
-Once access is enabled, Kai appears directly in your Keboola project interface:
+**Analyze data:**
+- "Show me the schema for the orders table"
+- "How many rows are in the customers table?"
 
-1. Look for the **chat icon** (💬) in your project navigation
-2. Click to open the Kai assistant panel
-3. Start typing your first question or request
+**Debug issues:**
+- "Analyze the latest failed job and tell me what went wrong"
 
----
+**Build things:**
+- "Help me create a Google Sheets extractor"
+- "Create a SQL transformation that calculates monthly totals from my sales data"
 
-## Your First Interactions
+## Action Approval
 
-Start with these examples to see what Kai can do. Copy and paste them directly into the chat:
+When Kai wants to modify your project, you'll see a tool approval prompt. Review what Kai wants to do before approving. All actions are logged in your project's audit trail.
 
-### Explore Your Project
+## Contextual Awareness & Follow Mode
 
-Get familiar with your data and configurations:
-```
-"What tables do we have in this project?"
-```
+Kai is aware of what you're currently viewing in the Keboola UI. Every message you send includes your current page location, so Kai understands your context without needing explicit references.
 
-**What to expect:** Kai will list all buckets and tables with row counts and last update times.
-```
-"Show me all the transformations in this project"
-```
+### How Context Works
 
-**What to expect:** A list of transformations with their names, types (SQL/Python), and descriptions.
+- **Automatic context capture** — When you send a message, Kai receives your current URL path (e.g., which configuration, job, or table you're viewing)
+- **Context-aware responses** — Kai uses this information to provide relevant suggestions and can reference "this configuration" or "the current job" naturally
+- **Dynamic updates** — Kai checks for the latest context during conversations, so you can navigate to different pages and Kai will adapt
 
----
+### Follow Mode
 
-### Examine Data Structure
+Follow mode lets you watch Kai work in real-time:
 
-Understand your table schemas:
-```
-"Show me the schema for the orders table"
-```
+- **Automatic navigation** — When Kai accesses a configuration, table, or other resource, your browser navigates to that page automatically
+- **Visual feedback** — See exactly what Kai is reading or modifying as it happens
+- **Toggle control** — Enable or disable follow mode from the chat interface based on your preference
 
-**What to expect:** Column names, data types, and any primary keys or nullable fields.
-```
-"What columns are in the customers table and what do they contain?"
-```
+This makes interactions more natural—you can say "analyze this job" while viewing a job, and Kai knows exactly which job you mean. When Kai investigates an issue across multiple configurations, you can follow along as it moves through your project.
 
-**What to expect:** Not just column names, but also sample values to understand the data.
+## Tips for New Users
 
----
+- **Start with read-only operations** — explore data and configurations first
+- **Be specific** — reference exact table names and component IDs
+- **Use dev branches** — create a branch in the UI, then work with Kai in that branch
+- **Ask for explanations** — "Explain this SQL query step by step"
+- **Don't type secrets in chat** — Kai uses secure forms for credentials. When setting up extractors or connections, tell Kai what you need and it will prompt you through secure configuration interfaces
 
-### Analyze Your Data
+## Rate Limits
 
-Try some basic analysis:
-```
-"How many rows are in the orders table?"
-```
+Each user receives 150 turns (messages) per month per project. The limit resets at the beginning of each calendar month.
 
-**What to expect:** Exact row count, plus when the table was last updated.
-```
-"What's the date range of data in the transactions table?"
-```
+- Your current usage is displayed in the chat interface
+- Need more? Contact Keboola Support to discuss custom limits for your project
 
-**What to expect:** MIN and MAX dates, helping you understand data freshness.
+## Troubleshooting
 
----
-
-### Get Help with Components
-
-Explore existing configurations:
-```
-"What extractors are configured in this project?"
-```
-
-**What to expect:** List of all data sources (Shopify, Google Sheets, APIs, etc.) with their status.
-```
-"Show me the latest job runs and their status"
-```
-
-**What to expect:** Recent jobs with success/failure status and runtime duration.
-
----
-
-## Understanding Kai's Responses
-
-Now that you've tried some prompts, here's what to expect from Kai:
-
-### Tool Approval Process
-
-When Kai wants to perform actions that **modify** your project, you'll see a **Tool Approval** prompt:
-
-- ⚠️ **Review carefully** what Kai wants to do
-- ✅ **Approve** to proceed with the action
-- ❌ **Deny** if you're not comfortable
-- 📝 All actions are logged in your project's audit trail
-
-**Example:** If you ask Kai to "Create a Snowflake writer," it will show you the exact configuration before creating anything.
-
----
-
-### Response Types
-
-Kai provides different types of responses:
-
-**Information Responses**  
-Direct answers to questions about your data or configurations.  
-*Example: "The orders table has 45,382 rows and was last updated 2 hours ago"*
-
-**Code Suggestions**  
-SQL queries, Python scripts, or configuration examples you can use.  
-*Example: SQL query to calculate monthly revenue*
-
-**Action Proposals**  
-Requests to create, modify, or run components (requires your approval).  
-*Example: "Should I create this transformation for you?"*
-
-**Error Analysis**  
-Detailed diagnosis of job failures with suggested fixes.  
-*Example: "Job failed because column 'email_address' was renamed to 'email'"*
-
----
-
-## How Kai Works
-
-Understanding Kai's capabilities helps you work with it more effectively:
-
-### What Kai Knows
-
-Kai has direct access to:
-- All tables, buckets, and their schemas in your project
-- All component configurations (extractors, transformations, writers)
-- Job execution history and logs
-- Data lineage and dependencies
-- Your project's metadata and documentation
-
-### What Kai Can Do
-
-**Read-only operations** (instant, no approval needed):
-- Query your data using SQL
-- Examine configurations and schemas
-- Analyze job logs and errors
-- Explain how components work
-
-**Modifying operations** (require your approval):
-- Create new components (extractors, transformations, writers)
-- Update existing configurations
-- Run jobs and transformations
-- Generate and update documentation
-
-### Response Times
-
-- **Simple queries:** 2-5 seconds
-- **Complex analysis:** 10-30 seconds
-- **Creating components:** 15-45 seconds
-
-If Kai takes longer, it's likely analyzing large datasets or complex configurations.
-
----
-
-## Working Effectively with Kai
-
-### Start Simple
-
-Begin with **read-only operations** to build familiarity:
-- Explore your data and configurations
-- Ask questions about how things work
-- Request explanations before making changes
-
-### Be Specific
-
-**✅ Good examples:**
-- "Show me the schema for the customers table in bucket in.c-main"
-- "Analyze why job #45678 failed yesterday"
-- "List all transformations that use the orders table"
-
-**❌ Too vague:**
-- "Show me customer data"
-- "Something went wrong"
-- "Check my transformations"
-
-### Use Development Branches
-
-Test changes safely before affecting production:
-```
-"Create a development branch called 'kai-testing'"
-```
-
-Work in this branch when experimenting with Kai's suggestions.
-
-### Ask for Explanations
-
-Kai can explain its reasoning:
-```
-"Explain this SQL query step by step"
-"Why did you suggest this configuration?"
-"What would happen if I approve this change?"
-```
-
----
-
-## Rate Limits and Usage
-
-During Private Beta:
-
-- **100 messages per user per day**
-- **Resets:** Daily at midnight UTC
-- **What counts:** Each question or request you send (not Kai's responses)
-- **Free of charge** while in beta
-- **No restrictions** on complexity of requests
-
-**What happens at the limit:**  
-You'll see a message: *"You've reached your daily message limit. Your limit will reset at midnight UTC."*
-
-**Pro tip:** Be specific in your initial requests to minimize back-and-forth exchanges.
-
----
-
-## Getting Help
-
-### In-Platform Support
-- **👍 👎 Feedback:** Rate Kai's responses directly in the chat
-- **Error Explanations:** Kai automatically explains what went wrong
-
-### External Support
-- **Keboola Support:** [support@keboola.com](mailto:support@keboola.com) for access or technical issues
-- **Documentation:** Browse guides throughout this documentation
-- **Community:** Join `#feature-kai-in-platform-assistant` on Slack (access provided with beta approval)
-
----
+| Issue | Solution |
+|-------|----------|
+| Kai seems slow | Complex operations take time. Look for "Thinking…" indicator. |
+| Kai doesn't understand | Be more specific with names and IDs. Break complex requests into steps. |
+| Actions fail | Check permissions. Verify components exist. Try "retry the last action". |
+| Context confused | Start a fresh chat. Keep conversations focused on one task. |
 
 ## Next Steps
 
-Now that you understand how to interact with Kai:
-
-**Learn by Example:**
-- **[Use Cases →](/ai/kai-assistant/use-cases/)** - Detailed workflows for common tasks like debugging, building pipelines, and writing transformations
-
-**Master Advanced Techniques:**
-- **[Best Practices →](/ai/kai-assistant/best-practices/)** - Prompting patterns and advanced workflows
-
-**Reference Information:**
-- **[Troubleshooting →](/ai/kai-assistant/troubleshooting/)** - Solutions to common problems
-- **[Security & Privacy →](/ai/kai-assistant/security-and-privacy/)** - Data handling and compliance
-
----
-
-**Ready to start?** Open Kai in your project and try your first question!
+- [Use Cases & Examples](/ai/kai-assistant/use-cases/)
+- [Best Practices](/ai/kai-assistant/best-practices/)  
