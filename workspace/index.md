@@ -67,7 +67,17 @@ to directly open the JupyterLab interface.
 ![Workspace - Python/R](/workspace/workspace-connect-pythonr.png)
 
 #### Snowflake
-We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options.
+
+>***Important: Direct Access Availability***
+>
+>Direct access to Snowflake Workspaces is **only available for projects with dedicated Snowflake backends** (KBDB - Keboola-Brings-Database or BYODB - Bring-Your-Own-Database).
+>
+>**Multi-tenant and Pay-As-You-Go projects** using Keboola's shared Snowflake backend **do not have direct access** to Snowflake Workspaces.
+>For these projects, use these alternatives:
+>- **[SQL Editor](/workspace/sql-editor)** - for interactive SQL queries, transformations, and development
+>- **[Data Gateway](components/applications/data-gateway)** - for connecting BI tools and external applications
+
+We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options for projects with dedicated Snowflake backends.
 
 **Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
 
@@ -172,6 +182,11 @@ openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_k
 * `-nocrypt` → no encryption
 
 #### SQL Editor
+
+>***Note for Multi-tenant and Pay-As-You-Go Projects***
+>
+>If your project uses Keboola's shared Snowflake backend (Multi-tenant or Pay-As-You-Go), the **SQL Editor is your primary tool** for SQL development, as direct Snowflake workspace access is not available.
+
 💡 Tip: Use SQL Editor for Safe Testing
 
 For interactive SQL exploration inside your workspace, use the SQL Editor.
