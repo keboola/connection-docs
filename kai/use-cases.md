@@ -1,6 +1,6 @@
 ---
 title: Kai Use Cases & Examples
-permalink: /ai/kai-assistant/use-cases/
+permalink: /kai/use-cases/
 ---
 
 * TOC
@@ -8,7 +8,7 @@ permalink: /ai/kai-assistant/use-cases/
 
 Practical examples of what you can ask Kai to do.
 
-![Kai Capabilities](/ai/kai-assistant/Capabilities.gif)
+![Kai Capabilities](/kai/Capabilities.gif)
 
 ## Troubleshooting
 
@@ -114,4 +114,4 @@ Kai reads actual job logs, checks configurations, and traces data lineage to pro
 | "Calculate churn rate" | "Calculate monthly churn rate where churned = subscription ended and no renewal within 30 days" |
 | One complex request | Iterate: basic version first, then add features incrementally |
 
-For more tips, see [Best Practices](/ai/kai-assistant/best-practices/).
+For more tips, see [Best Practices](/kai/best-practices/).

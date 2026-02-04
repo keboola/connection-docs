@@ -1,6 +1,6 @@
 ---
 title: Kai Best Practices
-permalink: /ai/kai-assistant/best-practices/
+permalink: /kai/best-practices/
 ---
 
 * TOC
