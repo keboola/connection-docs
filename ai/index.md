@@ -15,7 +15,7 @@ Keboola integrates artificial intelligence throughout the platform to enhance pr
 ### Kai - AI Assistant
 
 Keboola's embedded AI assistant that serves as a comprehensive data engineering co-pilot within the platform. Kai is context-aware of your specific project and can both explore and modify your Keboola environment through natural conversation.
-[Learn more about Kai →](/ai/kai-assistant/)
+[Learn more about Kai →](/kai/)
 
 ### MCP Server
 

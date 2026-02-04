@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Kai
-permalink: /ai/kai-assistant/getting-started/
+permalink: /kai/getting-started/
 ---
 
 * TOC
@@ -28,7 +28,7 @@ Click the **KAI** button in your project's top navigation bar, or use keyboard s
 | **Shift + A** | Open a new chat |
 
 {: .image-popup}
-![Kai Chat Panel](/ai/kai-assistant/kai-welcome.png)
+![Kai Chat Panel](/kai/kai-welcome.png)
 
 ## Example Prompts
 
@@ -82,9 +82,11 @@ This makes interactions more natural—you can say "analyze this job" while view
 
 ## Rate Limits
 
-Each user receives **150 turns (messages) per month per project** on the free tier. The limit resets at the beginning of each calendar month.
+**Kai is free during the public beta period.**
 
-- **Pay-As-You-Go (PAYG) plans** have a lower limit of **15 messages per user per month**
+Each user receives **150 turns (messages) per month per project** on contracted plans. The limit resets at the beginning of each calendar month.
+
+- **Pay-As-You-Go (PAYG) plans** have a lower limit of **50 messages per user per month**
 - Your current usage is displayed in the chat interface
 - Need more? [Contact Keboola Support](mailto:support@keboola.com) to discuss custom limits for your project
 
@@ -99,5 +101,5 @@ Each user receives **150 turns (messages) per month per project** on the free ti
 
 ## Next Steps
 
-- [Use Cases & Examples](/ai/kai-assistant/use-cases/)
-- [Best Practices](/ai/kai-assistant/best-practices/)
+- [Use Cases & Examples](/kai/use-cases/)
+- [Best Practices](/kai/best-practices/)

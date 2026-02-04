@@ -1,6 +1,6 @@
 ---
 title: Kai - AI Assistant
-permalink: /ai/kai-assistant/
+permalink: /kai/
 ---
 
 * TOC
@@ -46,12 +46,12 @@ Kai is now in **Public Beta** and available to all users. Look for the **KAI** b
 - **Other users** can request access from their Organization Admin or [contact Keboola Support](mailto:support@keboola.com)
 - You can also enable Kai via **Settings → Features**
 
-[Get Started with Kai →](/ai/kai-assistant/getting-started/)
+[Get Started with Kai →](/kai/getting-started/)
 
 ## Learn More
 
-- [Use Cases & Examples](/ai/kai-assistant/use-cases/)
-- [Best Practices](/ai/kai-assistant/best-practices/)
+- [Use Cases & Examples](/kai/use-cases/)
+- [Best Practices](/kai/best-practices/)
 
 ## Support
 
