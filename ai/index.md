@@ -12,6 +12,11 @@ Keboola's AI-powered capabilities help you build, optimize, and automate your da
 
 Keboola integrates artificial intelligence throughout the platform to enhance productivity, simplify complex tasks, and provide intelligent insights. Whether you're a beginner looking to create your first data pipeline or an experienced data engineer optimizing existing workflows, our AI features adapt to your needs and skill level. Following AI features are currently available on Keboola platform:
 
+### Kai - AI Assistant
+
+Keboola's embedded AI assistant that serves as a comprehensive data engineering co-pilot within the platform. Kai is context-aware of your specific project and can both explore and modify your Keboola environment through natural conversation.
+[Learn more about Kai →](/kai/)
+
 ### MCP Server
 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.

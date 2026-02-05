@@ -26,6 +26,7 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 - [Data governance](/management/account/)
 
 ## AI
+- [Kai - AI Assistant](/kai/)
 - [MCP Server](/ai/mcp-server)
 
 ## Reference
