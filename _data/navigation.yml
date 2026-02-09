@@ -71,6 +71,18 @@ items:
           - url: /tutorial/onboarding/governance-guide/
             title: Governance Guide
 
+  - url: /kai/
+    title: Kai - AI Assistant
+    items:
+      - url: /kai/getting-started/
+        title: Getting Started
+
+      - url: /kai/use-cases/
+        title: Use Cases & Examples
+
+      - url: /kai/best-practices/
+        title: Best Practices
+
   - url: /components/
     title: Components
     items:
