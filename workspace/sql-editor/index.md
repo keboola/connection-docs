@@ -12,8 +12,6 @@ The Keboola SQL Editor allows users without specialized tools to directly intera
 
 Currently, the SQL Editor supports **Snowflake** workspaces.
 
-{% include public-beta-warning.html %}
-
 ## Creating a Snowflake SQL Workspace
 
 The SQL Editor is accessed via a dedicated Snowflake Workspace. To get started, you must first create this workspace.
