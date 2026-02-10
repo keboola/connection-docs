@@ -6,7 +6,7 @@ permalink: /orchestrator/
 <div class="clearfix"></div>
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> The Orchestrator feature is available in legacy components only. In newer components, this feature has been replaced by
+    <strong>Important:</strong> The legacy UI for defining and running workflows - will be deprecated on April 30, 2026. After this date, the Orchestrations section will be removed from the UI. This feature has been replaced by
 <strong>Flows</strong>.
 </div>
 
@@ -53,3 +53,4 @@ If any of the predefined scheduled options do not fit your needs, select **Custo
 
 When done, click the **Automate** button to create a new Orchestration containing the configuration as its only task.
 The orchestration has no special properties, so you can further modify it as any other orchestration.
+
