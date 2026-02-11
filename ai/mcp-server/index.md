@@ -3,6 +3,10 @@ title: Keboola Model Context Protocol (MCP) Server
 permalink: /ai/mcp-server/
 ---
 
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-triangle"></i>
+    <strong>SSE Transport Deprecation:</strong> The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using <code>/mcp</code> endpoints instead of <code>/sse</code>. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
+</div>
 
 * TOC
 {:toc}
@@ -40,7 +44,7 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 ![Claude debug error flow in MCP Server](/ai/mcp-server/MCP_Claude-Debug_Error.gif)
 ## Connecting to Keboola's MCP Server
 
-Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication.
+Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication. Streamable HTTP is the recommended transport method, providing bidirectional streaming for improved performance compared to the deprecated SSE transport.
 
 ### Remote Server Setup
 
