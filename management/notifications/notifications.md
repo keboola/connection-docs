@@ -74,7 +74,7 @@ Open a component configuration and go to the **Notifications** tab:
 Use this to monitor specific transformations, data loads, or other components individually.
 
 ### 4. Data App Notifications
-- Get notified when a [Data App](/components/data-apps/) task completes, fails, or runs significantly longer than expected.  
+- Get notified when a [Data App](/data-apps/) task completes, fails, or runs significantly longer than expected.  
 - Since Data Apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
   
 #### How to Configure
@@ -148,5 +148,5 @@ As a result, some third-party systems—such as Slack, Microsoft Teams, or Disco
 1. Use **group email addresses** for notifications to ensure team-wide awareness of critical issues.  
 2. Always configure error notifications for **production orchestrations/flows** to avoid missing failures.  
 3. Schedule flows during **off-peak hours** to minimize resource contention and optimize performance.
-4. Set up **webhook endpoints** to track jobs in external systems. 
+4. Set up **webhook endpoints** to track jobs in external systems.  
 

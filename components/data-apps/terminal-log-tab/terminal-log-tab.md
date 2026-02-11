@@ -1,6 +1,8 @@
 ---
 title: Terminal Log Tab
-permalink: /components/data-apps/terminal-log-tab/
+permalink: /data-apps/terminal-log-tab/
+redirect_from:
+  - /components/data-apps/terminal-log-tab/
 ---
 
 * TOC

@@ -1,6 +1,8 @@
 ---
 title: Locking Package Versions
-permalink: /components/data-apps/lock-streamlit-version/
+permalink: /data-apps/lock-streamlit-version/
+redirect_from:
+  - /components/data-apps/lock-streamlit-version/
 ---
 
 * TOC
