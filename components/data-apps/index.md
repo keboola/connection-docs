@@ -1,6 +1,8 @@
 ---
 title: Data Apps
-permalink: /components/data-apps/
+permalink: /data-apps/
+redirect_from:
+  - /components/data-apps/
 ---
 
 * TOC

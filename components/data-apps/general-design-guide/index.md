@@ -1,6 +1,8 @@
 ---
 title: Data Apps General Design Guide
-permalink: /components/data-apps/general-design-guide/
+permalink: /data-apps/general-design-guide/
+redirect_from:
+  - /components/data-apps/general-design-guide/
 ---
 
 * TOC
@@ -12,7 +14,7 @@ and more to streamline your setup. With clear, step-by-step instructions, you'll
 ## Theming
 There are two options for setting theming:
 
-1. **Keboola Data Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [the documentation](/components/data-apps/#theming).
+1. **Keboola Data Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [the documentation](/data-apps/#theming).
 2. **Configuration File:** Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 {: .image-popup}

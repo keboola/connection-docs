@@ -1,6 +1,8 @@
 ---
 title: Microsoft Entra ID
-permalink: /components/data-apps/oidc/microsoft-entra-id/
+permalink: /data-apps/oidc/microsoft-entra-id/
+redirect_from:
+  - /components/data-apps/oidc/microsoft-entra-id/
 ---
 
 * TOC

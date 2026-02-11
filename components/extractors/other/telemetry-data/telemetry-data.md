@@ -142,7 +142,7 @@ This table lists rows of the [configurations for the components](/components/#cr
 
 
 ### kbc_data_app_workspace
-This table lists runs of [data apps] (/components/data-apps/) 
+This table lists runs of [data apps] (/data-apps/) 
 and their consumption metrics.
 
 | **Column** | **Description** | **Example** | 
@@ -1007,7 +1007,7 @@ This table shows data about storage [file](/storage/files/) events.
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ### kbc_data_app
-This table lists the [data apps](/components/data-apps/).
+This table lists the [data apps](/data-apps/).
 
 | **Column** | **Description** | **Example** |
 |---|---|---|

@@ -83,6 +83,107 @@ items:
       - url: /kai/best-practices/
         title: Best Practices
 
+  - url: /flows/
+    title: Flows
+    items:
+      - url: /flows/conditional-flows/
+        title: Conditional Flows
+
+      - url: /orchestrator/
+        title: Orchestrations
+        items:
+          - url: /orchestrator/tasks/
+            title: Tasks
+            items:
+              - url: /orchestrator/tasks/nesting/
+                title: Nesting
+
+          - url: /orchestrator/running/
+            title: Running
+
+          - url: /orchestrator/design/
+            title: Design
+
+      - url: /templates/
+        title: Templates
+        items:
+          - url: /templates/marketing-platforms/
+            title: Advertising Platforms
+
+          - url: /templates/ai-sms-campaign/
+            title: AI SMS Campaign
+
+          - url: /templates/customer-relationship-management/
+            title: Customer Relationship Management
+
+          - url: /templates/datahub/
+            title: DataHub
+
+          - url: /templates/data-quality/
+            title: Data Quality
+
+          - url: /templates/ecommerce/
+            title: eCommerce
+
+          - url: /templates/ecomm-kpi-dashboard/
+            title: eCommerce KPI Dashboard
+
+          - url: /templates/google-analytics4/
+            title: Google Analytics 4
+
+          - url: /templates/interactive-keboola-sheets/
+            title: Interactive Keboola Sheets
+
+          - url: /templates/mailchimp/
+            title: Mailchimp
+
+          - url: /templates/media-cashflow/
+            title: Media Cashflow
+
+          - url: /templates/project-management/
+            title: Project Management
+
+          - url: /templates/repository/
+            title: Repository
+
+          - url: /templates/snowflake-security-checkup/
+            title: Snowflake Security Checkup
+
+          - url: /templates/social-media-engagement/
+            title: Social Media Engagement
+
+          - url: /templates/surveys/
+            title: Surveys
+
+          - url: /templates/ua-and-ga4-comparison/
+            title: UA and GA4 Comparison
+
+  - url: /data-apps/
+    title: Data Apps
+    items:
+      - url: /data-apps/general-design-guide/
+        title: General Design Guide
+      - url: /data-apps/lock-streamlit-version/
+        title: Locking Streamlit Version
+        items:
+          - url: /data-apps/lock-streamlit-version/code-deployment/
+            title: Code Deployment
+          - url: /data-apps/lock-streamlit-version/git-deployment/
+            title: Git Repository Deployment
+      - url: /data-apps/oidc/
+        title: OpenID Connect
+        items:
+          - url: /data-apps/oidc/auth0/
+            title: Auth0
+          - url: /data-apps/oidc/google-cloud-platform/
+            title: Google Cloud Platform
+          - url: /data-apps/oidc/microsoft-entra-id/
+            title: Microsoft Entra ID
+          - url: /data-apps/oidc/okta/
+            title: Okta
+      - url: /data-apps/terminal-log-tab/
+        title: Terminal Log Tab
+
   - url: /components/
     title: Components
     items:
@@ -462,93 +563,11 @@ items:
               - url: /components/applications/ai/generative-ai/
                 title: Generative AI
 
-      - url: /components/data-apps/
-        title: Data Apps
-        items:
-          - url: /components/data-apps/general-design-guide/
-            title: General Design Guide
-          - url: /components/data-apps/lock-streamlit-version/
-            title: Locking Streamlit Version
-            items:
-              - url: /components/data-apps/lock-streamlit-version/code-deployment/
-                title: Code Deployment
-              - url: /components/data-apps/lock-streamlit-version/git-deployment/
-                title: Git Repository Deployment
-          - url: /components/data-apps/oidc/
-            title: OpenID Connect
-            items:
-              - url: /components/data-apps/oidc/auth0/
-                title: Auth0
-              - url: /components/data-apps/oidc/google-cloud-platform/
-                title: Google Cloud Platform
-              - url: /components/data-apps/oidc/microsoft-entra-id/
-                title: Microsoft Entra ID
-              - url: /components/data-apps/oidc/okta/
-                title: Okta
-          - url: /components/data-apps/backend-versions/
-            title: Backend Versions
-          - url: /components/data-apps/terminal-log-tab/
-            title: Terminal Log Tab
-
       - url: /components/branches/
         title: Development Branches
 
       - url: /components/ip-addresses/
         title: IP Addresses
-
-  - url: /templates/
-    title: Templates
-    items:
-      - url: /templates/marketing-platforms/
-        title: Advertising Platforms
-
-      - url: /templates/ai-sms-campaign/
-        title: AI SMS Campaign
-
-      - url: /templates/customer-relationship-management/
-        title: Customer Relationship Management
-
-      - url: /templates/datahub/
-        title: DataHub
-
-      - url: /templates/data-quality/
-        title: Data Quality
-
-      - url: /templates/ecommerce/
-        title: eCommerce
-
-      - url: /templates/ecomm-kpi-dashboard/
-        title: eCommerce KPI Dashboard
-
-      - url: /templates/google-analytics4/
-        title: Google Analytics 4
-
-      - url: /templates/interactive-keboola-sheets/
-        title: Interactive Keboola Sheets
-
-      - url: /templates/mailchimp/
-        title: Mailchimp
-
-      - url: /templates/media-cashflow/
-        title: Media Cashflow
-
-      - url: /templates/project-management/
-        title: Project Management
-
-      - url: /templates/repository/
-        title: Repository
-
-      - url: /templates/snowflake-security-checkup/
-        title: Snowflake Security Checkup
-
-      - url: /templates/social-media-engagement/
-        title: Social Media Engagement
-
-      - url: /templates/surveys/
-        title: Surveys
-
-      - url: /templates/ua-and-ga4-comparison/
-        title: UA and GA4 Comparison
 
   - url: /catalog/
     title: Data Catalog
@@ -597,27 +616,6 @@ items:
 
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
-
-  - url: /flows/
-    title: Flows
-    items:
-      - url: /flows/conditional-flows/
-        title: Conditional Flows
-
-  - url: /orchestrator/
-    title: Orchestrations
-    items:
-      - url: /orchestrator/tasks/
-        title: Tasks
-        items:
-          - url: /orchestrator/tasks/nesting/
-            title: Nesting
-
-      - url: /orchestrator/running/
-        title: Running
-
-      - url: /orchestrator/design/
-        title: Design
 
   - url: /transformations/
     title: Transformations
