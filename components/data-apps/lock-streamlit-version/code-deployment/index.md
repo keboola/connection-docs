@@ -1,6 +1,8 @@
 ---
 title: Code Deployment
-permalink: /components/data-apps/lock-streamlit-version/code-deployment/
+permalink: /data-apps/lock-streamlit-version/code-deployment/
+redirect_from:
+  - /components/data-apps/lock-streamlit-version/code-deployment/
 ---
 
 * TOC
@@ -80,4 +82,4 @@ When this option is enabled:
 - **Regular Updates:** Periodically review and update your dependencies to ensure security and performance improvements
 - **Version Testing:** Always test your app with new package versions in a development environment before updating production
 - **Documentation:** Keep track of why specific package versions are required to help with future maintenance
-- **Minimal Dependencies:** Only include packages that are actually needed by your application 
+- **Minimal Dependencies:** Only include packages that are actually needed by your application  
