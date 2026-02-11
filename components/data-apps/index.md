@@ -262,135 +262,18 @@ When you click **Deploy** or **Redeploy** for your app, a wizard will appear, pr
 ![Code - code](/components/data-apps/data_apps-deploy-timeout-backedsize.png)
 
 ### Base Image
-When the app is deployed, the code specified in one of the deployment methods will be injected into our base Streamlit Docker image. 
-This image already has Streamlit and a few other basic packages pre-installed:
+When the app is deployed, the code specified in one of the deployment methods will be injected into the Streamlit base Docker image.
+You can select a specific backend version when deploying your app. Each version defines the Python version, Streamlit version, and a set of pre-installed packages.
 
-```
-# Dockerfile
+The following packages are pre-installed in all backend versions:
 
-FROM python:3.10-slim
+- `streamlit`, `pandas`, `numpy`, `matplotlib`, `plotly`, `scikit-learn`, `seaborn`
+- `graphviz`, `deepmerge`, `python-dotenv`, `toml`
+- `keboola.component`, `streamlit-aggrid`, `streamlit-keboola-api`, `streamlit_authenticator`
 
-RUN mkdir -m 777 /data \
- && groupadd --gid 1000 appuser \
- && useradd --uid 1000 --gid 1000 -ms /bin/bash appuser
+Starting with backend version **1.15.0**, each release is available with multiple Python versions (3.10, 3.11, 3.13). Python 3.10 is the default.
 
-RUN apt-get update && apt-get install -y \
-        build-essential \
-        software-properties-common \
-        git \
-        jq \
-        graphviz \
-        graphviz-dev \
-        vim \
-        ssh \
-        curl \
- && rm -rf /var/lib/apt/lists/*
-
-ENV STREAMLIT_SERVER_PORT=8888
-EXPOSE 8888
-
-WORKDIR /home/appuser
-USER appuser
-ENV PATH="${PATH}:/home/appuser/.local/bin"
-
-# pre install streamlit
-RUN mkdir .streamlit \
-    && pip install --no-cache-dir \
-        deepmerge \
-        graphviz \
-        keboola.component \
-        matplotlib \
-        numpy \
-        pandas \
-        plotly \
-        python-dotenv \
-        scikit-learn \
-        seaborn \
-        streamlit \
-        streamlit-aggrid \
-        streamlit-keboola-api \
-        streamlit_authenticator==0.3.1
-
-COPY src /home/appuser
-ENTRYPOINT ["./run.sh"]
-```
-
-```
-# pip list
-
-Package                   Version
-------------------------- -----------
-altair                     4.2.2
-attrs                      24.2.0
-bcrypt                     4.2.1
-blinker                    1.9.0
-cachetools                 5.5.0
-certifi                    2024.8.30
-charset-normalizer         3.4.0
-click                      8.1.7
-contourpy                  1.3.1
-cycler                     0.12.1
-deepmerge                  2.0
-entrypoints                0.4
-extra-streamlit-components 0.1.71
-fonttools                  4.55.0
-gitdb                      4.0.11
-GitPython                  3.1.43
-graphviz                   0.20.3
-idna                       3.10
-Jinja2                     3.1.4
-joblib                     1.4.2
-jsonschema                 4.23.0
-jsonschema-specifications  2024.10.1
-kiwisolver                 1.4.7
-markdown-it-py             3.0.0
-MarkupSafe                 3.0.2
-matplotlib                 3.9.2
-mdurl                      0.1.2
-numpy                      2.1.3
-packaging                  24.2
-pandas                     2.2.3
-pillow                     11.0.0
-pip                        23.0.1
-plotly                     5.24.1
-protobuf                   5.28.3
-pyarrow                    18.0.0
-pydeck                     0.9.1
-Pygments                   2.18.0
-PyJWT                      2.10.0
-pyparsing                  3.2.0
-python-dateutil            2.9.0.post0
-python-decouple            3.8
-python-dotenv              1.0.1
-pytz                       2024.2
-PyYAML                     6.0.2
-referencing                0.35.1
-requests                   2.32.3
-rich                       13.9.4
-rpds-py                    0.21.0
-scikit-learn               1.5.2
-scipy                      1.14.1
-seaborn                    0.13.2
-setuptools                 65.5.1
-six                        1.16.0
-smmap                      5.0.1
-streamlit                  1.40.1
-streamlit-aggrid           1.0.5
-streamlit-authenticator    0.3.1
-streamlit-keboola-api      0.2.0
-tenacity                   9.0.0
-threadpoolctl              3.5.0
-toml                       0.10.2
-toolz                      1.0.0
-tornado                    6.4.2
-typing_extensions          4.12.2
-tzdata                     2024.2
-urllib3                    2.2.3
-watchdog                   6.0.0
-wheel                      0.45.0
-```
-
-Please note that the versions of these packages may change, as the newest version of the Streamlit package is used upon deployment unless explicitly specified in the `Packages` field.
+For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/components/data-apps/backend-versions/) page.
 
 ### Actions Menu
 {: .image-popup}
