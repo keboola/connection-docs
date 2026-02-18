@@ -672,7 +672,7 @@ items:
         title: Code Patterns
 
   - url: /workspace/
-    title: Workspace
+    title: Workspaces
     items:
       - url: /workspace/snowflake-workspaces-access-changes/
         title: Snowflake Workspaces Access Changes
