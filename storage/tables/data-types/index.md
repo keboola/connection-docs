@@ -19,7 +19,7 @@ These are the key benefits of using the Native Data Types feature:
 - **Simplified Transformations:** Read-only data access eliminates the need for casting, making data operations smoother and more streamlined.
 - **Flexible Configurations:** Users can decide whether data types should be automatically fetched for each configuration when creating a table.
 - **Improved Workspace Loading:** Loading data into a workspace is significantly faster than loading into a table without native data types, eliminating the need for additional casting.
-- **Typed Columns in Workspaces:** Tables **accessed in a workspace** via the [read-only input mapping](/transformations/workspace/#read-only-input-mapping) already have typed columns, ensuring seamless data handling.
+- **Typed Columns in Workspaces:** Tables **accessed in a workspace** via the [read-only input mapping](/workspace/#read-only-input-mapping) already have typed columns, ensuring seamless data handling.
 
 ## Current Drawbacks
 Using the Native Data Types feature also has its drawbacks:

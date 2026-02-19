@@ -1,6 +1,8 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
 permalink: /ai/mcp-server/
+redirect_from:
+    - /external-integrations/mcp-server/
 ---
 
 <div class="alert alert-warning" role="alert">
@@ -41,7 +43,7 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 - Automatically generate clear, human-readable descriptions down to the column level for full data transparency.
 
 
-![Claude debug error flow in MCP Server](/ai/mcp-server/MCP_Claude-Debug_Error.gif)
+![Claude debug error flow in MCP Server](/ai/mcp-server/mcp-claude-debug-error.gif)
 ## Connecting to Keboola's MCP Server
 
 Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication. Streamable HTTP is the recommended transport method, providing bidirectional streaming for improved performance compared to the deprecated SSE transport.

@@ -99,7 +99,7 @@ Scaling up the backend size allocates more resources to speed up your transforma
 
 
 ## Development Tutorial
-To develop and debug Python transformations, you can use a [Python workspace](/transformations/workspace/) or 
+To develop and debug Python transformations, you can use a [Python workspace](/workspace/) or 
 you can develop the transformation script locally. 
 
 {: .image-popup}
@@ -135,7 +135,7 @@ with open('in/tables/source.csv', mode='rt', encoding='utf-8') as in_file, open(
 {% endhighlight %}
 
 ### Development Using Workspace
-To develop a transformation using a [workspace](/transformations/workspace/), configure the input (and optionally output) mapping.
+To develop a transformation using a [workspace](/workspace/), configure the input (and optionally output) mapping.
 **Load Data** and **Connect** to the workspace:
 
 {: .image-popup}
@@ -156,11 +156,11 @@ skeleton with the configured input and output mapping into which you can paste t
 
 ### Local Development 
 If you want to replicate the execution environment on your local machine, you need to have 
-[Python installed](https://www.python.org/downloads/), preferably the [same version as us](https://github.com/keboola/docker-custom-python/blob/master/Dockerfile#L1).
+[Python installed](https://www.python.org/downloads/).
 
 To simulate the input and output mapping, all you need to do is create the right directories with the right files.
 You can get a finished example of the [above script](/transformations/python-plain/#development-tutorial) 
-setup in [data.zip](/transformations/python/data.zip).
+setup in [data.zip](/transformations/python-plain/data.zip).
 Download it and test the script in your local Python installation. The `result.csv` output file will be created
 in the output folder. This script can be used in your transformations without any modifications. All you need to do is
 

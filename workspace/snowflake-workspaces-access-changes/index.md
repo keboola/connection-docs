@@ -73,7 +73,7 @@ The [Data Gateway](/components/applications/data-gateway/) component allows user
 
 ✅ MT/PAYG
 
-Keboola’s brand new [SQL editor](/transformations/sql-editor/) allows SQL development directly within Keboola. This powerful tool lets you query, explore, and transform your data directly inside Keboola, without the need to authenticate external tools or leave the project context.
+Keboola’s brand new [SQL editor](/workspace/sql-editor/) allows SQL development directly within Keboola. This powerful tool lets you query, explore, and transform your data directly inside Keboola, without the need to authenticate external tools or leave the project context.
 
 With the upcoming workspace access changes, this editor will serve as the go-to solution for SQL development for customers using Keboola’s shared Snowflake backend (MT/PAYG).
 

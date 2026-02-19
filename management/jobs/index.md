@@ -64,7 +64,7 @@ For more technical information about background jobs, see our
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
-[Orchestrator](/orchestrator/) at a scheduled time. In either case, the typical life time of a job has the 
+[Orchestrator](/flows/orchestrator/) at a scheduled time. In either case, the typical life time of a job has the 
 following states:
 
 **waiting** --> **processing** --> **success**/**error**

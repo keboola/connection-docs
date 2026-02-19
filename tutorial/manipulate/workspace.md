@@ -5,7 +5,7 @@ permalink: /tutorial/manipulate/workspace/
 
 An integral aspect of creating a transformation is the development of the script itself. 
 In Keboola, you can use SQL, Python, or R by default. To simplify the process of writing these scripts, 
-we offer **workspaces** (see the full documentation of [workspaces](/transformations/workspace/)). 
+we offer **workspaces** (see the full documentation of [workspaces](/workspace/)). 
 Workspaces provide a secure development and analytical environment 
 where you can interact with the data and develop your scripts with confidence.
 

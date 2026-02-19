@@ -15,7 +15,7 @@ Data source connectors import and integrate data from external sources into the 
 
 Multiple connectors are available for [**SQL databases**](/components/extractors/database/sqldb/):
 
-- [Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html)
+- [Cloudera Impala](https://www.cloudera.com/open-source/impala.html)
 - [Firebird](http://www.firebirdsql.org/)
 - [IBM DB2](https://www.ibm.com/analytics/db2)
 - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/)

@@ -12,7 +12,7 @@ redirect_from:
 Each data source connector (extractor) from an SQL database allows you to extract data from selected tables or results from arbitrary SQL queries. 
 This category of DB connectors performs direct queries against the source system, enabling the [_Time-stamp based_](/components/extractors/database/#incremental-fetching) CDC replication.
 
-The connectors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/products/open-source/apache-hadoop/impala.html), 
+The connectors for supported SQL databases ([Cloudera Impala](https://www.cloudera.com/open-source/impala.html), 
 [Firebird](http://www.firebirdsql.org/), [IBM DB2](https://www.ibm.com/analytics/db2), 
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), [MySQL](https://www.mysql.com/),
 [Oracle](https://www.oracle.com/index.html), [PostgreSQL](https://www.postgresql.org/), [Teradata](https://www.teradata.com/)) are configured
@@ -97,7 +97,7 @@ The MySQL database server enables [transaction isolation level](https://dev.mysq
 
 ### PostgreSQL Encryption
 The PostgreSQL database server also supports encrypting all database communication using SSL Certificates. See the
-[official guide](http://www.postgresql.cn/docs/9.5/ssl-tcp.html) for instructions on setting it up.
+[official guide](https://www.postgresql.org/docs/current/ssl-tcp.html) for instructions on setting it up.
 
 ### MS SQL Server Encryption
 The MS SQL database server also supports encrypting the whole database communication using SSL Certificates. See the

@@ -8,7 +8,7 @@ In some instances, you can use your own Snowflake/BigQuery account to host data 
 ## Snowflake
 For the integration to work, your Snowflake account must be accessible from a subset of [our IP addresses](/components/ip-addresses/).
 
-***Note:** [SCIM](https://docs.snowflake.com/en/user-guide/scim.html) authentication (AAD, Okta) is not supported.* 
+***Note:** [SCIM](https://docs.snowflake.com/en/user-guide/scim-intro) authentication (AAD, Okta) is not supported.* 
 
 ### Accessing Data in Keboola from Outside
 To access Keboola-managed data, you should use only the provided roles and avoid granting permissions on Keboola-managed resources.
@@ -18,13 +18,13 @@ If your project has the [read-only input mapping](/transformations/mappings/#rea
 This role grants read-only access to all the schemas and tables in the project. You can assign this role to any of your roles or users to allow access to the project's storage.
 
 #### Read-only access without granting roles in Snowflake
-To access data without granting roles in Snowflake, use the [transformation workspaces](/transformations/workspace/) feature. The user created for each workspace is automatically assigned the role mentioned above.
+To access data without granting roles in Snowflake, use the [transformation workspaces](/workspace/) feature. The user created for each workspace is automatically assigned the role mentioned above.
 This method is effective even if you *do not* use your own Snowflake account.
 
 ### Dynamic Backends Size for BYODB Snowflake
 For dynamic backends, you must have one Snowflake warehouse for each backend size. The sizes of these warehouses (small, medium, and large in Keboola) are independent and 
-can vary (XSmall, Small, and XLarge). Setting up the warehouses with an [aggressive AUTO_SUSPEND value](https://docs.snowflake.com/en/user-guide/warehouses-considerations.html#automating-warehouse-suspension), 
-possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/alter-warehouse.html), is recommended. 
+can vary (XSmall, Small, and XLarge). Setting up the warehouses with an [aggressive AUTO_SUSPEND value](https://docs.snowflake.com/en/user-guide/warehouses-considerations#automating-warehouse-suspension), 
+possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/alter-warehouse), is recommended. 
 
 ### Rules for Accessing Snowflake Objects Created by Keboola
 * Do not modify grants of any resource prefixed with `KEBOOLA_` (`SAPI_` for `https://connection.keboola.com` stack), unless explicitly approved by Keboola on a case-by-case basis. 
@@ -61,7 +61,7 @@ Keboola generates one GCP project per Keboola project, plus one main project for
 ### Number of Service Accounts
 Service accounts serve various purposes. Each project contains at least one service user. 
 
-Each project typically has at least one service user, limiting the number of workspaces/sandboxes to 99 at a time. [Workspaces](https://help.keboola.com/transformations/workspace/), 
+Each project typically has at least one service user, limiting the number of workspaces/sandboxes to 99 at a time. [Workspaces](/workspace/), 
 essential for tasks like transformations in Keboola, are created and then deleted post-use, impacting the service account limit only during the transformation job runtime.
 
 By default, you can have up to **100** service accounts per project to control resource access. You may request an increase in this quota if needed. For more information, see 

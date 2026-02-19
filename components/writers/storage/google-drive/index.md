@@ -11,7 +11,7 @@ redirect_from:
 This data destination connector sends tables as CSV files into a single [Google Drive](https://www.google.com/drive/) account.
 It allows you to write entire tables as CSV files, or Google Sheets files. To write tables as partial modifications
 to an existing sheet, use the [Google Sheets data destination connector](/components/writers/storage/google-sheets/). Writing tables as CSV files
-is not bound by [Google Sheets limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/).
+is not bound by [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** data destination connector.
@@ -36,7 +36,7 @@ be appended to the file name -- e.g., `cars (2019-01-06 17:46:22)`. Click **Next
 
 In the last step, you can select the folder and file name on Google Drive, where the table will be stored. When you select the
 *Convert to Google Docs format* option, the file will be saved as a Google Sheets table; otherwise, it will be saved as
-a CSV file. Keep in mind that the Google Sheets format is subject to [certain limits](https://gsuitetips.com/tips/sheets/google-spreadsheet-limitations/),
+a CSV file. Keep in mind that the Google Sheets format is subject to [certain limits](https://spreadsheetpoint.com/google-sheets-limitations/),
 If these are exceeded, the table load will fail.
 
 When done, click the **Save** button to finish the table configuration. 

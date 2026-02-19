@@ -8,21 +8,21 @@ permalink: /management/notifications/
 
 # Keboola Notifications Guide
 
-Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage. This guide outlines all available notification types, when to use them, and how to configure them. Notifications help you stay informed about the status of orchestrations, flows, jobs, data apps and credit consumption — either via **email** or **webhooks**.
+Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage. This guide outlines all available notification types, when to use them, and how to configure them. Notifications help you stay informed about the status of flows, jobs, data apps and credit consumption — either via **email** or **webhooks**.
 
 ---
 
 ## Overview of Notification Types
 
-### 1. Orchestration Notifications
-- Notify users about [Orchestration](/orchestrator/notifications/) results: success, warning, or failure.  
+### 1. Flow Notifications
+- Notify users about [Flow](/flows/) results: success, warning, or failure.  
 - Can be configured for specific scenarios such as manual triggers or errors.  
 
 #### How to Configure
-- When an orchestration is automated, it runs without any user intervention. This means that if the orchestration fails, no one will know about it unless you set notifications:
+- When a glow is automated, it runs without any user intervention. This means that if the flow fails, no one will know about it unless you set notifications:
 
 {: .image-popup}
-![Screenshot - Orchestration Notifications](/management/notifications/orchestration-main-1.png)
+![Screenshot - Flow Notifications](/management/notifications/orchestration-main-1.png)
 
 Then click **Edit Notifications** and set notifications for particular situations:
 
@@ -34,14 +34,14 @@ You can:
 - Enter a **webhook URL** to trigger an external system.
 
 Notifications can be sent when:
-- The orchestration finishes with an **error**.
-- Some tasks fail and the orchestration finishes with a **warning** (requires [*Continue on Error*](/orchestrator/running/)).
-- The orchestration takes significantly longer than usual. --- e.g., when you set the threshold to 20% and an orchestration usually runs 
-for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as a running average of the last 20 executions of the orchestration.
+- The flow finishes with an **error**.
+- Some tasks fail and the flow finishes with a **warning** (requires [*Continue on Error*](/flows/#control-task-execution)).
+- The flow takes significantly longer than usual. --- e.g., when you set the threshold to 20% and an flow usually runs 
+for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as a running average of the last 20 executions of the flow.
 
-**Note:** When triggered manually, only the user who started the orchestration receives the notification.
+**Note:** When triggered manually, only the user who started the flow receives the notification.
 
-***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production orchestrations.*
+***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production flows.*
   
 ### 2. Flow Notifications
 - Alert users about the success, warning, or failure of Flows. Flow notifications are only for the flow as a whole (not per-component).  
@@ -74,7 +74,7 @@ Open a component configuration and go to the **Notifications** tab:
 Use this to monitor specific transformations, data loads, or other components individually.
 
 ### 4. Data App Notifications
-- Get notified when a [Data App](/components/data-apps/) task completes, fails, or runs significantly longer than expected.  
+- Get notified when a [Data App](/data-apps/) task completes, fails, or runs significantly longer than expected.  
 - Since Data Apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
   
 #### How to Configure
@@ -95,13 +95,12 @@ Keboola supports webhook notifications alongside email. This allows real-time al
 
 ### How It Works
 
-- **Webhook Setup:** Add a webhook URL in the Notifications tab of any Flow, Job, or Orchestration.
+- **Webhook Setup:** Add a webhook URL in the Notifications tab of any Flow or Job.
 - **Payload Format:** JSON via HTTP `POST` request with `application/json` content-type.
 - **Simple Integration:** No custom headers or payload transformations at this stage.
 - **Timeout & Retry:** 5-second timeout, **no retries** — ensure your endpoint is reliable.
 
 ### Supported For
-- Orchestration notifications  
 - Flow notifications  
 - Job notifications 
 
@@ -146,7 +145,7 @@ As a result, some third-party systems—such as Slack, Microsoft Teams, or Disco
 ## Best Practices
 
 1. Use **group email addresses** for notifications to ensure team-wide awareness of critical issues.  
-2. Always configure error notifications for **production orchestrations/flows** to avoid missing failures.  
+2. Always configure error notifications for **production flows** to avoid missing failures.  
 3. Schedule flows during **off-peak hours** to minimize resource contention and optimize performance.
-4. Set up **webhook endpoints** to track jobs in external systems. 
+4. Set up **webhook endpoints** to track jobs in external systems.  
 

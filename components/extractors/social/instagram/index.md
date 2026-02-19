@@ -74,7 +74,7 @@ media objects created by an Instagram account. Each media object contains fields
 and `like_count`. The fields parameter in such case is `caption,comments_count,created_time,like_count`.
 
 - **Fields/Endpoint Nesting** ---
-    Media can contain comments and those can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/instagram-comment) field/endpoint for each media. This way, more endpoints can be nested, and there is no limit of nesting levels.
+    Media can contain comments and those can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-comment) field/endpoint for each media. This way, more endpoints can be nested, and there is no limit of nesting levels.
 
 - **Fields Parametrization** ---
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.

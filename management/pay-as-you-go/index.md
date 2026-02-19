@@ -15,7 +15,6 @@ Free Plan projects have the following limits:
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to SQL, Python, and R.
-- **DataScience:** training and deploying [ML models](transformations/ml-model-deployment/) is not available.
 - **Dynamic backend scaling:** possibility to choose the [backend size](/transformations/snowflake-plain/) for each transformation is not available. 
 - **Performance:** is limited to an XSmall data warehouse (DWH) (half the speed of standard projects) and doesn’t allow for Python workspace sizing.
 - **Storage:** is limited to 250 GB of data storage.

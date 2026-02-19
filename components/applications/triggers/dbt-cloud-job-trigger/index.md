@@ -6,7 +6,7 @@ permalink: /components/applications/triggers/dbt-cloud-job-trigger/
 * TOC
 {:toc}
   
-The dbt Cloud Job Trigger is used for triggering [dbt Cloud](https://www.getdbt.com/product/what-is-dbt/) jobs.
+The dbt Cloud Job Trigger is used for triggering [dbt Cloud](https://www.getdbt.com/product/what-is-dbt) jobs.
 
 ## Create New Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **dbt Cloud Job Trigger** application.
@@ -25,7 +25,7 @@ If you check the **Wait for result** option, the component will wait for the job
 * Select the maximum time the component waits for results using the **Max wait time** field.
 
 ## Getting a Service Account Token
-You can find out how to get a service account token in the [dbt Cloud documentation](https://docs.getdbt.com/docs/dbt-cloud/dbt-cloud-api/service-tokens).
+You can find out how to get a service account token in the [dbt Cloud documentation](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens).
 
 ## Notes on Artifacts Usage 
 In order to be able to use Keboola artifacts, the project must have the ```artifact``` feature enabled. You can find more information about this in [Keboola's docs](https://developers.keboola.com/integrate/artifacts/).

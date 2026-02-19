@@ -1,0 +1,161 @@
+---
+title: AI SMS Campaign
+permalink: /flows/templates/ai-sms-campaign/
+redirect_from:
+    - /templates/ai-sms-campaign/
+---
+
+* TOC
+{:toc}
+
+Revamp your marketing strategy with our template, seamlessly utilizing Shopify data to **create personalized campaigns**. 
+Our AI crafts customized SMS messages sent via Twilio, effectively engaging your customers and elevating your marketing with AI precision. 
+
+The template consists of two flows, where the first flow can be considered a data preparation phase, while the second serves as the execution phase.
+
+## Flow 1 – Preparation
+
+{: .image-popup}
+![Flow 1](/flows/templates/ai-sms-campaign/flow1.png)
+
+- First you set up a component to extract data from your Shopify account. You only need to provide your Shopify login credentials; the component will handle the extraction of all necessary data.
+- The transformation is pre-defined and will create a dataset containing customer contact information and recommended products for each customer.
+- The AI app utilizes the data created by the transformation mentioned above to generate customized SMS messages.
+- The transformation then creates two new tables from an existing table, with column renaming and the addition of an 'approved' column in the second table, which is initialized with a value of `'false'` for all rows.
+- Data is sent to the data app, where users can review and approve the generated messages for campaign execution. 
+
+## Flow 2 – Execution
+
+{: .image-popup}
+![Flow 2](/flows/templates/ai-sms-campaign/flow2.png)
+
+Once you have selected the messages for sending and clicked the **Upload to Keboola** button in the data app, 
+flow 2 is triggered automatically to send the data to Twilio.
+
+## Entity Relationship Diagram
+An entity-relationship diagram is a specialized graphic that illustrates the relationships between entities in a data destination.
+
+{: .image-popup}
+![Entity Relationship Diagram](/flows/templates/ai-sms-campaign/entity-rel-diagram.png)
+
+## Table Description
+
+| Name | Description |
+|---|---|
+| ORDER	| contains data about fulfilled customer orders, including order details, etc. |
+| CUSTOMER | contains contact details of individual customers, their marketing preferences, total spent, etc. |
+| LINE-ITEM	| contains data about individual items in stock, including prices, stock availability, etc. |
+| PRODUCT |	contains data about individual products offered, including description, product images, etc. |
+
+## Data Sources
+The following data sources are available:
+
+[Shopify](https://www.shopify.com/online)
+
+## Data Destinations
+The following data destinations are available:
+
+[Twilio](https://www.twilio.com/login)
+
+## How to Use Template
+The process is simple. We will guide you through it, and, when needed, ask you to provide your credentials and authorize the data destination connector.
+
+First decide which data source and which data destination you want to use. Then select the corresponding template 
+from the **Templates** tab in your Keboola project. When you are done, click **+ Use Template**.
+
+{: .image-popup}
+![Add New Template](/flows/templates/ai-sms-campaign/add-new-template.png)
+
+This page contains information about the template. Click **+ Use Template** again.
+
+{: .image-popup}
+![AI Campaign Executer](/flows/templates/ai-sms-campaign/ai-campaign-executer.png)
+
+You’ll be asked to write a name for the template instance you are about to create. You can use the template as many times as you want and still keep everything organized.
+
+{: .image-popup}
+![Name the template](/flows/templates/ai-sms-campaign/name-template.png)
+
+## Component Description
+
+### Shopify Data Source Connector
+The component is set up to extract all the data tables: 
+`customer`, `inventory-items`, `inventory-levels`, `line-item`, `locations`, `order`, `product`, `product-images`, `product-options`, and `product-variant`.
+
+### SQL Transformation 
+The transformation is configured to create a table with following columns: 
+
+- `customer_id`
+- `name` (equals to the first name of the customer)
+- `phone` (equals to a phone number of the customer)
+- `count` (equals to the number of products purchased)
+- `title` (equals to the name of the product)
+- `body_html` (equals to the description of the product).
+
+The data will be prepared for the next step of the process – personalized AI-generated messages to the customers on specific products.
+
+### Generative AI Personalize SMS Campaign
+Once authenticated to your AI provider, the component utilizes AI to generate a short and informal email campaign
+tailored for users of the online store. It dynamically incorporates the user's name (`Customer_Name`) and recommends a selection of products (`Product_1`, 
+`Product_2`, `Product_3`, `Product_4`, and `Product_5`), all while adding emoticons to create a personalized and engaging message for each recipient.
+
+### Twilio Campaign Maker 
+The component connects to the Twilio service and sends data from storage, where personalized text messages were generated by AI 
+and added to the contact information of the customers. 
+
+The component utilizes AI to generate a short and informal email campaign tailored for users of the Kopr online store. It dynamically incorporates 
+the user's name (`Customer_Name`) and recommends a selection of products (`Product_1`, `Product_2`, `Product_3`, `Product_4`, and `Product_5`), all while adding
+emoticons to create a personalized and engaging message for each recipient.  
+
+To authorize the component, you will need to input an Account SID, Authentication Token, Messaging Service SID, 
+and specify whether you wish to generate a log after sending the messages (true/false).
+
+## Authorizing Data Sources
+To use the selected data source connector, you must authorize it first. 
+
+### Shopify 
+
+{: .image-popup}
+![Shopify Data Source](/flows/templates/ai-sms-campaign/shopify-data-source.png)
+
+To enable this application, you must:
+
+- [Enable private app development](https://help.shopify.com/en/manual/apps/private-apps#enable-private-app-development-from-the-shopify-admin) for your store.
+- Create a private application.
+- Enable Read access ADMIN API PERMISSIONS for the following objects:
+  - Orders
+  - Products
+  - Inventory
+  - Customers
+
+Additional documentation is available [here](https://bitbucket.org/kds_consulting_team/kds-team.ex-shopify/src/master/README.md).
+
+## Authorizing Application
+
+{: .image-popup}
+![Authorizing Application](/flows/templates/ai-sms-campaign/authorizing-application.png)
+
+Choose your AI service provider and enter your API key.
+
+## Authorizing Data Destination
+
+{: .image-popup}
+![Twilio Data Destination](/flows/templates/ai-sms-campaign/twilio-data-destination.png)
+
+The component is required to have at least one table in the input table mapping. If more than one table is configured in the input table mapping, 
+the component will loop through all of the input tables and process all the rows, sending out the configured messages to the assigned numbers.
+
+### Input Mapping Requirements
+All tables are required to have the following columns:
+
+- phone_number
+- message
+
+### Configuration Parameters
+
+| Name | Description |
+|---|---|
+| Account SID | can be found in the console |
+| Authentication Token | can be found in the console |
+| Messaging Service SID | can be created via Messaging Service in the console; the purpose of this service is to define the service identity |
+| Output Log | users have the option to output a log of the list of messages and targets sent out using this application |

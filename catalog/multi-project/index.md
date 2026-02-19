@@ -65,7 +65,7 @@ The following image illustrates the usage pattern change:
     processed via transformations where the useful columns are renamed from their 6 character names to meaningful names, and the more obscure 
     columns are omitted. The Oracle DBAs decided that it's actually easier than to document the legacy tables. All of the Oracle tables are 
     formally considered to be current at least every 4th hour. However, they're updated more often, which the data scientists exploit in their 
-    [event triggered orchestrations](/orchestrator/running/#event-trigger).
+    [event triggered orchestrations](/flows/orchestrator/running/#event-trigger).
 - The SQL Server data source connectors are in the `MS` project. All the tables are shared as they are extracted using a `MSSSQL` bucket. There are no 
 transformations or other components. The project is only accessible to SQL Server DBAs. Formally the tables must be up to date at least 
 every 4th hour. In reality, they are updated every hour.

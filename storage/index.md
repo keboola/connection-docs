@@ -41,14 +41,14 @@ There are multiple types of storage backend configurations you can choose from, 
 #### Multi-tenant (MT)
 MT backend shares compute resources across projects, while maintaining a high degree of data isolation between those projects. Benefits of this setup are mainly cost-savings, as projects share the compute resources.
 
-**Snowflake** projects are *not allowed* to access the Snowflake database directly through [Snowflake Workspaces](/transformations/workspace/#snowflake). This limitation exists because all databases sharing the same resources exist in the same Snowflake account, and Snowflake does not allow direct access to the same account by different business entities. Instead, users can use the in-platform SQL Editor for SQL development and analysis above the data in Table Storage. The Data Gateway component can also be used to share data in read-only mode with third-party BI and visualization tools.
+**Snowflake** projects are *not allowed* to access the Snowflake database directly through [Snowflake Workspaces](/workspace/#snowflake). This limitation exists because all databases sharing the same resources exist in the same Snowflake account, and Snowflake does not allow direct access to the same account by different business entities. Instead, users can use the in-platform SQL Editor for SQL development and analysis above the data in Table Storage. The Data Gateway component can also be used to share data in read-only mode with third-party BI and visualization tools.
 
-**BigQuery** projects are *allowed* to access BigQuery database directly through [BigQuery Workspaces](/transformations/workspace/#bigquery), as BigQuery handles access to its environment differently.
+**BigQuery** projects are *allowed* to access BigQuery database directly through [BigQuery Workspaces](/workspace/#bigquery), as BigQuery handles access to its environment differently.
 
 MT backend type is used for all [Pay As You Go projects](/management/payg-project/) and most contract customers who don't need extra features coming with other backend types.
 
 #### Keboola-Brings-Database (KBDB)
-KBDB is **Snowflake** backend type where Keboola manages a dedicated account for a customer, while the customer is not an admin of the account. This setup is used for contract customers who need access to [Snowflake Workspaces](/transformations/workspace/#snowflake) and direct connection to Snowflake database (e.g. for SQL development in IDEs).
+KBDB is **Snowflake** backend type where Keboola manages a dedicated account for a customer, while the customer is not an admin of the account. This setup is used for contract customers who need access to [Snowflake Workspaces](/workspace/#snowflake) and direct connection to Snowflake database (e.g. for SQL development in IDEs).
 
 As the dedicated account does not share the resources with other customers, it has higher and more stable performance, but also higher cost.
 

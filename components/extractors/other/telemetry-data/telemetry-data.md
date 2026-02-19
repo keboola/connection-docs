@@ -142,7 +142,7 @@ This table lists rows of the [configurations for the components](/components/#cr
 
 
 ### kbc_data_app_workspace
-This table lists runs of [data apps] (/components/data-apps/) 
+This table lists runs of [data apps] (/data-apps/) 
 and their consumption metrics.
 
 | **Column** | **Description** | **Example** | 
@@ -166,7 +166,7 @@ and their consumption metrics.
 ***Note:** A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn’t be removed due to incremental loads, so the original value was set to zero.*
 
 ### kbc_data_science_sandbox
-This table lists Python/R [workspaces](/transformations/workspace/)/[sandboxes](/transformations/sandbox/) 
+This table lists Python/R [workspaces](/workspace/) 
 and their consumption metrics.
 
 | **Column** | **Description** | **Example** | 
@@ -950,7 +950,7 @@ This table shows data about basic activity of project users (job runs and config
 | `last_project_activity` | Flag indicating if the activity is the last activity of the user in the project | `true` |
 
 ### kbc_workspace
-This table shows data about existing [workspaces](/transformations/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations).
+This table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations).
 
 *Note: The table is always extracted in full.*
 
@@ -978,7 +978,7 @@ This table shows data about existing [workspaces](/transformations/workspace/). 
 | `workspace_schema` | Schema name | `WORKSPACE_985088174` |
 
 ### kbc_workspace_event
-This table shows data about [workspace](/transformations/workspace/) events.
+This table shows data about [workspace](/workspace/) events.
 
 | **Column** | **Description** | **Example** | 
 |---|---|---|
@@ -1007,7 +1007,7 @@ This table shows data about storage [file](/storage/files/) events.
 | `kbc_token_name` | Name of the token creating the event | `[_internal] main scheduler` |
 
 ### kbc_data_app
-This table lists the [data apps](/components/data-apps/).
+This table lists the [data apps](/data-apps/).
 
 | **Column** | **Description** | **Example** |
 |---|---|---|

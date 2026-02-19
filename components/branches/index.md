@@ -10,7 +10,7 @@ permalink: /components/branches/
 go to our [Getting Started tutorial](/tutorial/branches/).*
 
 Development Branches allow you to modify [component configurations](/components/) without interfering with running 
-configurations or entire [orchestrated pipelines](/orchestrator/). They are ideal to use when making bigger changes 
+configurations or entire [orchestrated pipelines](/flows/orchestrator/). They are ideal to use when making bigger changes 
 to a project or when you need to be extra careful about performing your changes safely. 
 
 To give an example, let's say that you have an ordinary orchestration that extracts, transforms and writes data 

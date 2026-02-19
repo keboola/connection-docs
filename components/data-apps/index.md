@@ -1,6 +1,8 @@
 ---
 title: Data Apps
-permalink: /components/data-apps/
+permalink: /data-apps/
+redirect_from:
+  - /components/data-apps/
 ---
 
 * TOC
@@ -273,7 +275,7 @@ The following packages are pre-installed in all backend versions:
 
 Starting with backend version **1.15.0**, each release is available with multiple Python versions (3.10, 3.11, 3.13). Python 3.10 is the default.
 
-For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/components/data-apps/backend-versions/) page.
+For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/data-apps/backend-versions/) page.
 
 ### Actions Menu
 {: .image-popup}
@@ -348,7 +350,7 @@ This demo app offers a cutting-edge solution that leverages Shopify data to supe
 through Twilio's platform. The result? A seamlessly personalized approach that captivates your audience, ensuring your marketing efforts are not only effective but also driven by AI precision.
 
 - [Configuration](https://demo.keboola.com/app/data-apps/51362322)
-- [Documentation](https://help.keboola.com/templates/ai-sms-campaign/)
+- [Documentation](/flows/templates/ai-sms-campaign/)
 - [Source](https://github.com/keboola/ai_campaign_executer)
 - [Live app](https://ai-created-content-checker-ai-campaign-executer-51814454.hub.north-europe.azure.keboola.com)
   
@@ -360,7 +362,7 @@ Author: Petr Huňka
 Simplify data editing and management within your company. The data app eliminates the need to export data to external tools, allowing business users to directly access and edit tables stored in Keboola Storage.
 - [Live app](https://interactive-keboola-sheets-keboola-sheets-app-51814820.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/51359967)
-- [Documentation](https://help.keboola.com/templates/interactive-keboola-sheets/)
+- [Documentation](/flows/templates/interactive-keboola-sheets/)
 - [Source](https://github.com/keboola/planning-sheets-data-app/)
 
 This data app, along with the complete workflow, can be implemented using the Interactive Keboola Sheets template.
@@ -371,7 +373,7 @@ Author: Ondřej Svoboda
 This data app provides an interactive display of several business metrics with integrated Slack notifications.
 - [Live app](https://interactive-kpi-report-kpi-app-71250158.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/51361334)
-- [Documentation](https://help.keboola.com/templates/ecomm-kpi-dashboard/)
+- [Documentation](/flows/templates/ecomm-kpi-dashboard/)
 - [Source](https://github.com/keboola/interactive-kpi-reporting)
 
 This app, along with the complete workflow, can be implemented using the eCommerce KPI Dashboard template.
@@ -382,7 +384,7 @@ Author: Monika Feigler
 This demo app provides an overview of the costs for all campaigns across marketing channels. 
 - [Live app](https://online-marketing-dashboard-49569899.hub.north-europe.azure.keboola.com)
 - [Configuration](https://demo.keboola.com/app/data-apps/49567241)
-- [Documentation](https://help.keboola.com/templates/marketing-platforms/)
+- [Documentation](/flows/templates/marketing-platforms/)
 - [Source](https://github.com/keboola/marketing-dashboard-data-app)
 
 This data app, along with the complete workflow, can be implemented using the Advertising Platform template.
@@ -392,7 +394,7 @@ Author: Marketing BI and Keboola
 
 This data app is designed to provide a quick and comprehensive overview of the differences between data gathered by Google’s Universal Analytics (UA) and Google Analytics 4 (GA4).
 - [Configuration](https://demo.keboola.com/app/data-apps/51525772)
-- [Documentation](https://help.keboola.com/templates/ua-and-ga4-comparison/)
+- [Documentation](/flows/templates/ua-and-ga4-comparison/)
 - [Source](https://github.com/keboola/ua-ga4-comparison)
 - [Live app](https://ua-ga4-comparison-app-51525847.hub.north-europe.azure.keboola.com)
 

@@ -84,11 +84,8 @@ feel free to step in with Python and finish the work with SQL again.
 
 The following are the currently available backends:
 
-- **SQL** --- [Snowflake](/transformations/snowflake-plain/) is offered as the default backend, but 
-you can apply for your own [Redshift](/transformations/redshift/) cluster. You can also use 
-[Microsoft Synapse](/transformations/synapse-plain/), or [Google BigQuery](/transformations/bigquery/) if it is enabled for your project.
-- **Script** --- [Julia](/transformations/julia/),
-[Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
+- **SQL** --- [Snowflake](/transformations/snowflake-plain/) or [Google BigQuery](/transformations/bigquery/) is offered as a default backend.
+- **Script** ---[Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
 Choose according to your taste and available libraries.
 
 ***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
@@ -99,7 +96,7 @@ they share common properties and functions. Particularly important is that all c
 [versioned](/components/#configuration-versions), and you can always [roll back](/components/#rollback-version) 
 a configuration or [copy](/components/#copy-configuration) a version to a new transformation.
 
-You can easily develop transformations using the [workspace](/transformations/workspace/). It allows you to run 
+You can easily develop transformations using the [workspace](/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on copies of your tables
 without affecting data in your Storage or your transformations. You can convert a workspace to a transformation 
 and vice versa.
@@ -107,7 +104,7 @@ and vice versa.
 For Redshift and Synapse, you'll get a separate database
 to which the data from input mapping can be loaded. You'll obtain database credentials, which you can
 use with a database client of your choice. You can do the same for Snowflake. In addition, we provide access
-to the [Snowflake web interface](https://docs.snowflake.com/en/user-guide/ui-using.html). Therefore, you can
+to the [Snowflake web interface](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs). Therefore, you can
 develop transformations without downloading and installing a database client.
 
 You can also use a workspace represented by an isolated [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) instance for Julia, 
@@ -156,7 +153,7 @@ Python, and R transformations.
 <tr>
     <th rowspan='7'>Development tools</th>
     <th>Naming</th> 
-    <td><a href='/transformations/workspace/'>Workspace</a></td>
+    <td><a href='/workspace/'>Workspace</a></td>
 </tr>
 <tr>
     <th>Max number</th> 
@@ -233,7 +230,7 @@ Transformations support [sharing pieces of code](/transformations/variables/#sha
 encouraging users to create reusable blocks of code. They also support 
 [variables](/transformations/variables/#variables) that can be used to parametrize transformations.
 
-Apart from that, transformations come with [workspaces](/transformations/workspace/) (previously named Sandboxes),
+Apart from that, transformations come with [workspaces](/workspace/) (previously named Sandboxes),
 which have many new features, such as loading and unloading data with a running workspace or resuming the workspace.
 
 #### Writing Scripts

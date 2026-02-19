@@ -14,7 +14,7 @@ The API is only available to Team and Enterprise plans of Deepnote.
 If you have one of these plans, then generate the API key by following the steps described in the [Deepnote API documentation](https://deepnote.com/docs/deepnote-api).
 
 ## Finding your Notebook and Project IDs
-The Notebook and Project ID can be obtained via the URL path to the notebook, described in the [endpoint documentation](https://deepnote.com/docs/api-execute-notebook). 
+The Notebook and Project ID can be obtained via the URL path to the notebook, described in the [endpoint documentation](https://deepnote.com/docs/deepnote-api#execute-notebook). 
 The project ID is a UUID with dashes (e.g. 25fcb3b2-cf3d-4c08-9b24-4306f1518caa) and the notebook ID is a UUID without dashes (e.g. abaf726ac4c34589961a588de29cd665).
 
 ## Create New Configuration

@@ -12,11 +12,11 @@ This data destination connector sends data to the [ThoughtSpot](https://www.thou
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** data destination connector.
-Then **Set Up Credentials**. You need to provide a [*host name*](https://docs.thoughtspot.com/5.0/data-integrate/clients/use-jdbc-driver.html), 
+Then **Set Up Credentials**. You need to provide a [*host name*](https://docs.thoughtspot.com/software/latest/dataflow-jdbc-reference), 
 *user name*, *password*, *database name*, *schema*, *SSH user*, and *SSH password*.
-The connector uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/5.0/admin/loading/use-data-importer.html#) 
+The connector uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/software/latest/tsload-connector) 
 and TQL commands to load that data. These commands are executed on the server through an SSH connection. 
-Therefore the [SSH credentials](https://docs.thoughtspot.com/4.4/app-integrate/introduction/logins.html) are 
+Therefore the [SSH credentials](https://docs.thoughtspot.com/software/latest/login-console) are 
 needed to connect to the server instance.
 
 {: .image-popup}
@@ -37,14 +37,14 @@ Then specify the table configuration. Use the **preview** icon to peek at the co
 For each column you can specify its
 
 - **name** in the destination database; you can also use the select box in the table header to bulk convert the case of all names.
-- **data type** (one of the [supported data types](https://docs.thoughtspot.com/5.0/admin/loading/datatypes.html#)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that the column will not be present in the destination table.
+- **data type** (one of the [supported data types](https://docs.thoughtspot.com/software/latest/data-types)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that the column will not be present in the destination table.
 
 When you're done configuring the columns, don't forget to **Save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table type and name additional load options. The table type is
-one of `STANDARD`, `FACT`, and `DIMENSION`. See an [explanatory article](https://www.thoughtspot.com/fact-and-dimension/dimensional-data-modeling-4-simple-steps)
-about schema design or the [official guide](https://docs.thoughtspot.com/5.0/admin/data-modeling/data-modeling-settings.html) for
+one of `STANDARD`, `FACT`, and `DIMENSION`. See an [explanatory article](https://www.thoughtspot.com/data-trends/data-modeling/dimensional-data-modeling)
+about schema design or the [official guide](https://docs.thoughtspot.com/cloud/latest/data-modeling-settings) for
 more details on designing the data schema.
 
 {: .image-popup}
@@ -61,7 +61,7 @@ will not be modified. If the target table doesn't exist, it will be created. If 
 data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data is inserted.
 
 In the **Full Load** mode, the table is completely overwritten including the table structure. The table is removed
-using the [`DROP`](https://docs.thoughtspot.com/5.0/admin/loading/check-dependencies-tql.html) command and it is recreated.
+using the [`DROP`](https://docs.thoughtspot.com/software/latest/tql-cli-commands) command and it is recreated.
 
 Additionally, you can specify a **primary key** for the table, a simple column **data filter**, and a filter for
 [incremental processing](/storage/tables/#incremental-processing).

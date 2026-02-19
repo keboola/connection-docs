@@ -56,7 +56,7 @@ making it easier to connect with other parts of the system and third-party appli
 in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, BigQuery, etc.), dbt, [Julia](https://julialang.org/), [Python](https://www.python.org/about/), 
 and [R](https://www.r-project.org/about.html). 
 
-All transformations operate on a copy of Storage data in an isolated environment — a [workspace](/transformations/workspace/), guaranteeing safety for your
+All transformations operate on a copy of Storage data in an isolated environment — a [workspace](/workspace/), guaranteeing safety for your
 analyses and experimentation. Workspaces support collaborations and can be shared. 
 
 - **SQL workspaces** are accessible through the database provider's IDE or your preferred SQL IDE.
@@ -68,7 +68,7 @@ sentiment analysis, association discovery, or histogram grouping. They can also 
 rates through third-party services.
 
 ### Data Apps
-[Data apps](/components/data-apps/) are simple web applications that can be deployed inside Keboola projects and also publicly accessed from outside the projects. 
+[Data apps](/data-apps/) are simple web applications that can be deployed inside Keboola projects and also publicly accessed from outside the projects. 
 They are usually custom-built to address specific challenges, for example, recommendation engines, interactive segmentation tools, AI integration solutions, data 
 visualization platforms, custom internal reporting tools for business teams, and financial apps for gaining insights into spending patterns.
 
@@ -131,7 +131,7 @@ the Windows, macOS, and Linux environments.
 ## AI Assistance
 The Keboola AI feature can increase your productivity in several areas, such as:
 
-* **Suggesting descriptions of configurations**: This includes [transformations](/transformations), [components](/components), and [flows](/orchestrator). Note that the configuration is sent to the AI service as part of description generation.  
+* **Suggesting descriptions of configurations**: This includes [transformations](/transformations), [components](/components), and [flows](/flows/orchestrator). Note that the configuration is sent to the AI service as part of description generation.  
 * **Explaining errors**: When a job finishes in failure, an error is reported. You can request an explanation of this error. Note that the error is sent to the AI service as part of explanation generation.
 
 We're using a privately deployed [Microsoft Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) for the AI service. Prompts and responses are [NOT used to train the model](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy). 
@@ -176,6 +176,6 @@ This token system enables easy [sharing of specific resources](/management/proje
 
 ### Input and Output Mapping
 To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. 
-A secure [workspace](https://help.keboola.com/transformations/workspace/#main-header) is created with data copied from the tables specified 
+A secure [workspace](/workspace/#main-header) is created with data copied from the tables specified 
 in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed successfully, only tables and files defined
 in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.

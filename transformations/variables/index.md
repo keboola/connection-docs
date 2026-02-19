@@ -57,7 +57,7 @@ or
 
 
 ### Orchestration Usage
-When you use [orchestrations](/orchestrator/) to automate transformations with variables, you can
+When you use [orchestrations](/flows/orchestrator/) to automate transformations with variables, you can
 either rely on the default values, or you can override them for each orchestration task.
 This can be done by configuration of task parameters:
 

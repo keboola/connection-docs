@@ -27,7 +27,7 @@ There are two modes of operation of the connector:
 - **Keboola Snowflake database** --- In this mode, the connector will create a new schema in project's database for you and **give you credentials** to it. This option is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)).
 
 ### Own Snowflake Database
-You need to provide a *host name* (account name), *user name*, *private key/password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html)*.
+You need to provide a *host name* (account name), *user name*, *private key/password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.com/en/user-guide/warehouses)*.
 
 {: .image-popup}
 ![Screenshot - Own Credentials](/components/writers/database/snowflake/snowflake-2.png)
@@ -49,7 +49,7 @@ CREATE USER WRITER_SAMPLE PASSWORD = 'WRITER_SAMPLE'
 GRANT ROLE WRITER_SAMPLE TO USER WRITER_SAMPLE;
 {% endhighlight %}
 
-You need to provide the user with access to a Snowflake [Warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses.html).
+You need to provide the user with access to a Snowflake [Warehouse](https://docs.snowflake.com/en/user-guide/warehouses).
 Keep in mind that Snowflake is case sensitive and if identifiers are not quoted, they are converted to upper case. So if you run, for example, a
 query `CREATE SCHEMA john.doe;`, you need to enter the schema name as `DOE` in the connector configuration.
 
@@ -75,9 +75,9 @@ The next step is to specify table configuration. Use the **preview** icon to pee
 For each column you can specify its
 
 - **Column Name** in the destination database; you can also use the select box in the table header to bulk convert the case of all names.
-- **Data Type** (one of [Snowflake data types](https://docs.snowflake.net/manuals/sql-reference/data-types.html)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
+- **Data Type** (one of [Snowflake data types](https://docs.snowflake.com/en/sql-reference-data-types)); you can also use the select box in the table header to bulk set the type for all columns. Setting the data type to `IGNORE` means that column will not be present in the destination table.
 - **Nullable**; when checked, the column will be marked as nullable and empty values (`''`) in that column will be converted to `NULL`. Use this for non-string columns with missing data.
-- **Default Value**; the provided value will be set as the [default value of the column](https://docs.snowflake.net/manuals/sql-reference/sql/create-table.html#optional-parameters) in the target table.
+- **Default Value**; the provided value will be set as the [default value of the column](https://docs.snowflake.com/en/sql-reference/sql/create-table#optional-parameters) in the target table.
 
 The Snowflake connector can take advantage of the [column metadata](/storage/tables/#metadata). If they are available, the
 column types are pre-filled automatically. Make sure to verify the suggested types, however. These data types are taken
@@ -98,7 +98,7 @@ will not be modified. If the target table doesn't exist, it will be created. If 
 data is [upserted](https://en.wikipedia.org/wiki/Merge_(SQL)). If no primary key is defined, the data is inserted.
 
 In the **Full load** mode, the table is completely overwritten including the table structure. The table is overwritten
-using the [`ALTER SWAP`](https://docs.snowflake.net/manuals/sql-reference/sql/alter-table.html#parameters) command, which ensures
+using the [`ALTER SWAP`](https://docs.snowflake.com/en/sql-reference/sql/alter-table#parameters) command, which ensures
 the shortest unavailability of the target table. However, this operation still drops the table.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a **Data changed in last** filter for

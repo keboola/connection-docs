@@ -11,14 +11,11 @@ redirect_from:
 This data destination connector sends tables into a [GoodData](https://www.gooddata.com/) project.
 
 Before configuring the GoodData connector, it is important to understand that GoodData relies on a
-[Logical Data Model (LDM)](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata) of your dataset.
+[Logical Data Model (LDM)](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata) of your dataset.
 The GoodData data destination connector creates the LDM for you so that you don't have to use CloudConnect or other tools
 provided by GoodData. However, you need to provide all the required information in the configuration. This makes
 the configuration non-trivial, and you should have the data model designed before you start configuring
 the connector.
-
-Check out the section on [writing into GoodData](/tutorial/write/gooddata/) available for you
-in our Getting Started tutorial.
 
 ## Configuration
 
@@ -47,7 +44,7 @@ After you set up the project, you will see the **Go To Project** button.
 
 ## Date Dimension
 
-[Date dimension](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times) is an important concept of the GoodData LDM.
+[Date dimension](https://help.gooddata.com/doc/enterprise/en/dashboards-and-insights/dates-and-times/) is an important concept of the GoodData LDM.
 It is the question of the LDM design to determine for which columns a date dimension should be created. One rule of thumb
 is that different date columns in a single table should have different date dimensions. On the other hand, you might want
 to share a date dimension between different tables --- a *main* date representing an event of something.
@@ -60,7 +57,7 @@ When creating a date dimension, you have to enter the dimension name and a dimen
 
 - Standard GoodData date dimension
 - Keboola date dimension, which is extended with a 'floating' week (it lets you analyze data as if the week starts, e.g., on Wednesday).
-- Custom date dimension -- this can be either a date dimension created for you directly by GoodData, or a [Self service calendar](https://help.gooddata.com/doc/en/reporting-and-dashboards/dates-and-times/custom-calendars-self-service). In the former case, you will have the dimension URN in the form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
+- Custom date dimension -- this can be either a date dimension created for you directly by GoodData, or a [Self service calendar](https://help.gooddata.com/doc/enterprise/en/dashboards-and-insights/manage-custom-date-dimensions/). In the former case, you will have the dimension URN in the form `urn:my-company-dimension:date`, enter `my-company-dimension` as *Template ID*. For the latter case, enter `custom` as the *Template ID*.
 
 ## Configure Tables
 
@@ -86,17 +83,17 @@ Setting the table columns involves configuration of three things:
 
 - **Title** of the column that is displayed in the GoodData project
 - **Data Type** of the column. You can choose from `INT`, `BIGINT`, `DECIMAL` for numbers, `VARCHAR` for texts.
-Consult the [GoodData documentation](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) for
+Consult the [GoodData documentation](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) for
 the limits of each data type.
 - **Type** of the column that defines the role of the column in LDM. The column types are:
     - `IGNORE` --- The column is excluded from the load and will not be created in the GoodData project.
-    - `FACT` --- The [Fact component](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) --- a numerical piece of arbitrary data used to define metrics, e.g., *Price* column.
-    - `ATTRIBUTE` --- The [Attribute component](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models) of the LDM model --- a discrete set of alphanumeric or numeric data, e.g., *Eye Color* column containing values *Blue*, *Brown*, and *Green*.
-    - `CONNECTION_POINT` --- The [Connection point component](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) --- acts like a primary key, i.e., it is used to identify the rows of the table.
-    - `REFERENCE` --- A column which defines a [Relation](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) between tables. You have to select a **Reference** column as a target to which the relation points to. The target must be a `CONNECTION_POINT` already defined in another table.
+    - `FACT` --- The [Fact component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) --- a numerical piece of arbitrary data used to define metrics, e.g., *Price* column.
+    - `ATTRIBUTE` --- The [Attribute component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models) of the LDM model --- a discrete set of alphanumeric or numeric data, e.g., *Eye Color* column containing values *Blue*, *Brown*, and *Green*.
+    - `CONNECTION_POINT` --- The [Connection point component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) --- acts like a primary key, i.e., it is used to identify the rows of the table.
+    - `REFERENCE` --- A column which defines a [Relation](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) between tables. You have to select a **Reference** column as a target to which the relation points to. The target must be a `CONNECTION_POINT` already defined in another table.
     - `DATE` --- A date column --- you have to select a corresponding [date dimension](#date-dimension) for it.
-    - `LABEL` --- A [Label attribute](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels) that allows you to display alternative values for a column. You have to select a **Reference** column, which is the name of an attribute column in the same table. The label column is used as a secondary view of the reference column in the GoodData UI. For example, you can create a reference column `FullName` and add a label column `Surname`. You can define multiple labels for a single attribute.
-    - `HYPERLINK` --- A [Hyperlink attribute](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels), which acts as a link in the reports. You have to select a **Reference**, which is the name of an attribute column in the same table. The reference column is the one that will be used as a label, the hyperlink column is the one that is expected to contain the address.
+    - `LABEL` --- A [Label attribute](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels) that allows you to display alternative values for a column. You have to select a **Reference** column, which is the name of an attribute column in the same table. The label column is used as a secondary view of the reference column in the GoodData UI. For example, you can create a reference column `FullName` and add a label column `Surname`. You can define multiple labels for a single attribute.
+    - `HYPERLINK` --- A [Hyperlink attribute](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels), which acts as a link in the reports. You have to select a **Reference**, which is the name of an attribute column in the same table. The reference column is the one that will be used as a label, the hyperlink column is the one that is expected to contain the address.
 
 {: .image-popup}
 ![Screenshot - Hyperlink configuration](/components/writers/bi-tools/gooddata/gooddata-7.png)
@@ -114,7 +111,7 @@ It can be much faster, but the source data needs to be correctly prepared.
 The incremental load relies on the following two features:
 
 - [Incremental processing](/storage/tables/#incremental-processing) in Storage, and
-- Identity in GoodData; this can be either a `CONNECTION_POINT` column (which acts as a database primary key), or a [Fact Grain](https://help.gooddata.com/doc/en/building-on-gooddata-platform/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models#FactsinLogicalDataModels-FactDatasets) (which acts as a compound unique key). Fact Grain can be used when there is no single identifying column (i.e. there is no `CONNECTION_POINT`) and there is a combination of columns which can be used to identify rows. If there is no such combination, then incremental loading cannot be used.
+- Identity in GoodData; this can be either a `CONNECTION_POINT` column (which acts as a database primary key), or a [Fact Grain](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models#FactsinLogicalDataModels-FactDatasets) (which acts as a compound unique key). Fact Grain can be used when there is no single identifying column (i.e. there is no `CONNECTION_POINT`) and there is a combination of columns which can be used to identify rows. If there is no such combination, then incremental loading cannot be used.
 
 From the table configuration page, you can also **Run** a load of a single table. However, if the table has relations to other
 tables, it will fail with the message: `Schema reference of column 'X' of dataset Y is invalid.`
