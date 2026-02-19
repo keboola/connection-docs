@@ -16,7 +16,7 @@ Notice that each translated address requires one API call.
 [Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** connector.
 
 ## Augment What3words Address
-In this mode of operation, you identify [what3words](https://what3words.com/about-us/) addresses, and the connector
+In this mode of operation, you identify [what3words](https://what3words.com/about) addresses, and the connector
 then fetches the geographical latitude and longitude coordinates for the places. 
 Specify a single table which has exactly one column with what3words addresses.
 If the source table does not meet this requirement, 

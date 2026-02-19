@@ -19,10 +19,10 @@ redirect_from:
 ## Limits
 - Snowflake queries are **limited** to 7,200 seconds by default.
 - Queries containing comments longer than 8,192 characters will segfault.
-- Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.net/manuals/sql-reference/constraints-overview.html).
+- Constraints (like PRIMARY KEY or UNIQUE) are defined but [not enforced](https://docs.snowflake.com/en/sql-reference/constraints-overview).
 
 Snowflake is a cloud database and, as such, brings continuous updates and behavioral changes. If you are 
-interested in those changes, please follow the official [Snowflake change log](https://community.snowflake.com/s/article/Pending-Behavior-Change-Log).
+interested in those changes, please follow the official [Snowflake release notes](https://docs.snowflake.com/en/release-notes/overview).
 
 When loading data to a Snowflake transformation, beware that there are two different
 methods: [copy and clone](/transformations/mappings/#snowflake-loading-type).
@@ -90,7 +90,7 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 ## Best Practices
 
 ### Case Sensitivity
-Snowflake is [case sensitive](https://docs.snowflake.com/en/sql-reference/identifiers-syntax.html#label-identifier-casing). 
+Snowflake is [case sensitive](https://docs.snowflake.com/en/sql-reference/identifiers-syntax#label-identifier-casing). 
 All unquoted table/column names are converted to upper case while quoted names keep their case.
 
 So, if you want to create the following table,
@@ -158,7 +158,7 @@ SELECT
 ;
 {% endhighlight %}
 
-When using an [unstructured data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured.html), 
+When using an [unstructured data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured), 
 you always **have to** use the explicit cast:
 
 {% highlight sql %}
@@ -203,7 +203,7 @@ Expression type does not match column data type, expecting VARCHAR(16777216) but
 
 ### Timestamp Columns
 By default, Snowflake uses the
-`YYYY-MM-DD HH24:MI:SS.FF3` [format](https://docs.snowflake.net/manuals/sql-reference/functions-conversion.html#label-date-time-format-conversion)
+`YYYY-MM-DD HH24:MI:SS.FF3` [format](https://docs.snowflake.com/en/sql-reference/functions-conversion#label-date-time-format-conversion)
 when converting the `timestamp` column to a character string.
 
 This means that if you create a table in a transformation that uses a `timestamp` column,
@@ -224,12 +224,12 @@ Do not use `ALTER SESSION` queries to modify the default timestamp format, as th
 from your transformation/sandbox session and the format may change unexpectedly.
 
 **Important:** In the AWS US Keboola [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
-(connection.keboola.com), the following [Snowflake default](https://docs.snowflake.net/manuals/sql-reference/parameters.html#) 
+(connection.keboola.com), the following [Snowflake default](https://docs.snowflake.com/en/sql-reference/parameters) 
 parameters are overridden:
 
-- [TIMESTAMP_OUTPUT_FORMAT](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-output-format) -- `DY, DD MON YYYY HH24:MI:SS TZHTZM`
-- [TIMESTAMP_TYPE_MAPPING](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-type-mapping) -- `TIMESTAMP_LTZ`
-- [TIMESTAMP_DAY_IS_ALWAYS_24H](https://docs.snowflake.net/manuals/sql-reference/parameters.html#timestamp-day-is-always-24h) -- `yes`
+- [TIMESTAMP_OUTPUT_FORMAT](https://docs.snowflake.com/en/sql-reference/parameters) -- `DY, DD MON YYYY HH24:MI:SS TZHTZM`
+- [TIMESTAMP_TYPE_MAPPING](https://docs.snowflake.com/en/sql-reference/parameters) -- `TIMESTAMP_LTZ`
+- [TIMESTAMP_DAY_IS_ALWAYS_24H](https://docs.snowflake.com/en/sql-reference/parameters) -- `yes`
 
 **Important:** Snowflake works with time zones (and [Daylight Savings Time](https://en.wikipedia.org/wiki/Daylight_saving_time)),
 requiring you to distinguish between various conversion functions:

@@ -75,7 +75,7 @@ to directly open the JupyterLab interface.
 >**Multi-tenant and Pay-As-You-Go projects** using Keboola's shared Snowflake backend **do not have direct access** to Snowflake Workspaces.
 >For these projects, use these alternatives:
 >- **[SQL Editor](/workspace/sql-editor)** - for interactive SQL queries, transformations, and development
->- **[Data Gateway](components/applications/data-gateway)** - for connecting BI tools and external applications
+>- **[Data Gateway](/components/applications/data-gateway)** - for connecting BI tools and external applications
 
 We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options for projects with dedicated Snowflake backends.
 

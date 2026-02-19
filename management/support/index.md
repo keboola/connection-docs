@@ -71,5 +71,5 @@ access its projects. Every new user of the organization must be explicitly invit
 must either be explicitly invited or be a user of the organization.
 
 ## Locked Out of Keboola?
-If you happen to be locked out of Keboola and need to contact Keboola Support, please email [support@keboola.com](https://help.keboola.com/support@keboola.com) 
+If you happen to be locked out of Keboola and need to contact Keboola Support, please email [support@keboola.com](mailto:support@keboola.com) 
 or use the **support form** available at the [Keboola Support Portal](https://keboola.atlassian.net/servicedesk/customer/portal/9).

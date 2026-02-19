@@ -167,7 +167,7 @@ Once the job is finished, click on the names of the tables to inspect their cont
     <strong>Important:</strong> The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form and have been replaced by workspaces.
 </div>
 
-To explore the data, go to **Transformations**, and click on [**Sandbox**](/transformations/sandbox/).
+To explore the data, go to [**Workspaces**](/workspace/).
 Provided for each user and project automatically, it is an isolated environment in which you can experiment without
 interfering with any production code.
 
@@ -207,7 +207,7 @@ df.head()
 {% endhighlight %}
 
 The path `/data/in/tables/` is the location for
-[loaded tables](/transformations/python/#file-locations); they
+[loaded tables](/transformations/python-plain/#file-locations); they
 are loaded as simple CSV files. Once your table is loaded, you can play with it:
 
 {% highlight python %}
@@ -227,11 +227,11 @@ plt.show()
 Now that you can experiment with the U.S. unemployment data extracted from Google BigQuery (or any other data extracted in any other way),
 you can do the same with the EU unemployment data. Available at [Eurostat](https://ec.europa.eu/eurostat/), the unemployment
 dataset is called
-[`tgs00010`](https://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tgs00010&plugin=1).
+[`tgs00010`](https://ec.europa.eu/eurostat/databrowser/product/view/tgs00010?lang=en).
 
 There are a number of ways how to get the data from Eurostat -- e.g., you can download it in TSV
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
-[REST API](https://ec.europa.eu/eurostat/web/json-and-unicode-web-services/about-this-service)
+[REST API](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-migrating/json)
 for downloading the data. This could be processed using the
 [Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
@@ -250,12 +250,12 @@ import subprocess
 import sys
 subprocess.call([sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '-q', 'pyjstat'])
 from pyjstat import pyjstat
-dataset = pyjstat.Dataset.read('http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/tgs00010?sex=T&precision=1&unit=PC&age=Y_GE15')
+dataset = pyjstat.Dataset.read('https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/tgs00010?format=JSON&unit=PC&isced11=ED0-2&isced11=ED3_4&isced11=ED5-8&isced11=NRP&isced11=TOTAL&isced11=UNK&sex=F&sex=M&sex=T&age=Y15-74&lang=EN')
 df = dataset.write('dataframe')
 df.head()
 {% endhighlight %}
 
-The URL was built using the Eurostat [Query Builder](https://ec.europa.eu/eurostat/web/json-and-unicode-web-services/getting-started/query-builder).
+The URL was built using the Eurostat [Query Builder](https://ec.europa.eu/eurostat/web/query-builder/tool).
 Also note that installing a library from within the Python code must be done using `pip install`. Now that you have the data, 
 feel free to play with it:
 
@@ -279,8 +279,8 @@ The above tutorial is done in the [Python language](https://www.python.org/) usi
 [Jupyter Notebook](https://jupyter.org/). The same can be done in the
 [R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/),
 or in [Julia](https://julialang.org/) using [Jupyter Notebook](https://jupyter.org/).
-For more information about sandboxes (including disk and memory limits), see the
-[corresponding documentation](/transformations/sandbox/).
+For more information about workspaces (including disk and memory limits), see the
+[corresponding documentation](/workspace/).
 
 ## Final Note
 This is the end of our stroll around Keboola. On our walk, we missed quite a few things:

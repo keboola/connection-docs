@@ -17,7 +17,7 @@ In this guide, you'll learn how to set up the Keboola node in n8n, connect it to
 Before you begin, make sure you have:
 - A Keboola project (You can create one for [free](https://connection.us-east4.gcp.keboola.com/wizard)).
 - A [Keboola Storage API Token](/management/project/tokens) (with the necessary permissions).
-- An [n8n instance](https://docs.n8n.io/learning-path) (currently, just the self-hosted variant is supported).
+- An [n8n instance](https://docs.n8n.io/learning-path/) (currently, just the self-hosted variant is supported).
 
 ## Install the Keboola Node (Self-hosted)
 

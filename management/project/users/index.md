@@ -37,7 +37,7 @@ There are the following user roles available:
     - create an external authorization link; and
     - change the name, the schedule, and the disabled status of an existing orchestration.
 - **ReadOnly** – the user can view all project data, but **cannot**
-    - create, modify or delete configurations of [components](/components/), [orchestrations](/orchestrator/) and [transformations](/transformations/);
+    - create, modify or delete configurations of [components](/components/), [orchestrations](/flows/orchestrator/) and [transformations](/transformations/);
     - run any components, orchestrations and transformations;
     - import and modify data in [Storage](/storage/);
     - use [Data Catalog](/catalog/);

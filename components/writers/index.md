@@ -26,10 +26,10 @@ For a definitive list of usable data destination connectors, see your project **
 
 ## Working with Data Destination Connectors
 Each data destination connector can have multiple configurations. Each configuration usually represents a single destination (database account, BI project, etc.).
-Even though destination connectors are generally designed for [**automated and repeated**](/orchestrator/) data collection,
+Even though destination connectors are generally designed for [**automated and repeated**](/flows/orchestrator/) data collection,
 they can be triggered manually at any time.
 
-We provide tutorials on [writing into GoodData](/tutorial/write/gooddata/) and [writing into Tableau](/tutorial/write/).
+We provide tutorials on [writing into Tableau](/tutorial/write/).
 
 You can also watch the following videos:
 

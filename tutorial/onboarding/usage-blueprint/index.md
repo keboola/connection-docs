@@ -47,13 +47,13 @@ To join an existing Keboola project, reach out to the **project owner** directly
 
 #### Member accessing a project
 > *Depending on your selection, you might be operating in a multi-tenant Azure (North Europe region), AWS (US or EU regions),
-> or GCP (Europe region) stack, or a dedicated single-tenant stack. The location of the stack determines the base URL that’ll take you to the platform’s UI.
+> or GCP (US region) stack, or a dedicated single-tenant stack. The location of the stack determines the base URL that’ll take you to the platform’s UI.
 > Check below for the link that matches your stack:*
 >
-> - Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin/)
+> - Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin)
 > - AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
 > - AWS US: [https://connection.keboola.com/admin](https://connection.keboola.com/admin)
-> - GCP EU: [https://connection.europe-west2.gcp.keboola.com](https://connection.europe-west2.gcp.keboola.com)
+> - GCP EU: [https://connection.us-east4.gcp.keboola.com/admin](https://connection.us-east4.gcp.keboola.com/admin)
 > - Single tenant stack: All relevant information is available within your Production Design document.
 
 Navigate to the login site of the Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 

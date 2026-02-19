@@ -11,7 +11,7 @@ redirect_from:
 The Sklik data source connector fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
 
 Before you start, have a working [Sklik](https://www.sklik.cz/) account, and get an Sklik 
-API [key](https://www.sklik.cz/generateToken). Select Settings from the drop-down menu next to your account name
+API [key](https://napoveda.sklik.cz/pokrocila-prace-s-daty/sklik-api/). Select Settings from the drop-down menu next to your account name
 in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
 ## Configuration
@@ -41,7 +41,7 @@ Now configure your reports:
   - etc.
 - **restrictionFilter** -- Json object of the restriction filter configuration for the `createReport` API call.
   - `dateFrom` and `dateTo` are required values. If omitted, yesterday's and today's dates will be used.
-  - The connector allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.relative.php).
+  - The connector allows you to use relative days in [these supported formats](https://www.php.net/manual/en/datetime.formats.php).
 - **displayOptions** -- Json object of the display options configuration for the `createReport` API call
 - **displayColumns** -- array of columns to get
   - Column `id` as the identifier of the resource is downloaded every time.

@@ -15,9 +15,9 @@ Documentation will be available at http://localhost:4000
 
 ### Publish
 
-* `git push origin HEAD` - on `master` branch
+* `git push origin HEAD` - on `main` branch
 
-New version is published immediately after push by [Travis](https://travis-ci.org/keboola/connection-docs)
+New version is published immediately after push to main.
 
 ## License
 

@@ -43,9 +43,9 @@ to create a new report to download.
 
 In the configuration parameters, do the following:
 - Fill in the output name. It will be the name of the output table in Keboola.
-- Fill in the [dimension](https://developers.criteo.com/marketing-solutions/docs/dimensions) for the report.
-- Fill in the [metrics](https://developers.criteo.com/marketing-solutions/docs/metrics) for the report.
-- Fill in the [currency](https://developers.criteo.com/marketing-solutions/docs/currencies-supported) of the report.
+- Fill in the [dimension](https://developers.criteo.com/marketing-solutions/docs/campaign-statistics#dimensions) for the report.
+- Fill in the [metrics](https://developers.criteo.com/marketing-solutions/docs/campaign-statistics#metrics) for the report.
+- Fill in the [currency](https://developers.criteo.com/marketing-solutions/docs/campaign-statistics#currencies) of the report.
 - Fill in the date range of the report. Either select a dynamic date range such as "Last week", or fill in a custom one with text such as 3 days ago, yesterday, a week ago, or exact dates like 1 september 2020.
 - Set the loading option. `Full` overwrites the existing table in Storage and `incremental` appends new data and updates existing passes in the table using a primary key.
 - If loading is set to `incremental`, set a primary key.

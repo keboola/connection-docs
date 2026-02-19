@@ -89,73 +89,73 @@ items:
       - url: /flows/conditional-flows/
         title: Conditional Flows
 
-      - url: /orchestrator/
+      - url: /flows/orchestrator/
         title: Orchestrations
         items:
-          - url: /orchestrator/tasks/
+          - url: /flows/orchestrator/tasks/
             title: Tasks
             items:
-              - url: /orchestrator/tasks/nesting/
+              - url: /flows/orchestrator/tasks/nesting/
                 title: Nesting
 
-          - url: /orchestrator/running/
+          - url: /flows/orchestrator/running/
             title: Running
 
-          - url: /orchestrator/design/
+          - url: /flows/orchestrator/design/
             title: Design
 
-      - url: /templates/
+      - url: /flows/templates/
         title: Templates
         items:
-          - url: /templates/marketing-platforms/
+          - url: /flows/templates/marketing-platforms/
             title: Advertising Platforms
 
-          - url: /templates/ai-sms-campaign/
+          - url: /flows/templates/ai-sms-campaign/
             title: AI SMS Campaign
 
-          - url: /templates/customer-relationship-management/
+          - url: /flows/templates/customer-relationship-management/
             title: Customer Relationship Management
 
-          - url: /templates/datahub/
+          - url: /flows/templates/datahub/
             title: DataHub
 
-          - url: /templates/data-quality/
+          - url: /flows/templates/data-quality/
             title: Data Quality
 
-          - url: /templates/ecommerce/
+          - url: /flows/templates/ecommerce/
             title: eCommerce
 
-          - url: /templates/ecomm-kpi-dashboard/
+          - url: /flows/templates/ecomm-kpi-dashboard/
             title: eCommerce KPI Dashboard
 
-          - url: /templates/google-analytics4/
+          - url: /flows/templates/google-analytics4/
             title: Google Analytics 4
 
-          - url: /templates/interactive-keboola-sheets/
+          - url: /flows/templates/interactive-keboola-sheets/
             title: Interactive Keboola Sheets
 
-          - url: /templates/mailchimp/
+          - url: /flows/templates/mailchimp/
             title: Mailchimp
 
-          - url: /templates/media-cashflow/
+          - url: /flows/templates/media-cashflow/
             title: Media Cashflow
 
-          - url: /templates/project-management/
+          - url: /flows/templates/project-management/
             title: Project Management
 
-          - url: /templates/repository/
+          - url: /flows/templates/repository/
             title: Repository
 
-          - url: /templates/snowflake-security-checkup/
+          - url: /flows/templates/snowflake-security-checkup/
             title: Snowflake Security Checkup
 
-          - url: /templates/social-media-engagement/
+          - url: /flows/templates/social-media-engagement/
             title: Social Media Engagement
 
-          - url: /templates/surveys/
+          - url: /flows/templates/surveys/
             title: Surveys
 
-          - url: /templates/ua-and-ga4-comparison/
+          - url: /flows/templates/ua-and-ga4-comparison/
             title: UA and GA4 Comparison
 
   - url: /data-apps/

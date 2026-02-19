@@ -6,7 +6,7 @@ permalink: /external-integrations/
 * TOC
 {:toc}
 
-Keboola's external integration capabilities let you seamlessly extend the platform with your existing tools and workflows. By connecting to Keboola through our [REST API](https://developers.keboola.com/overview/api) or [MCP (Model Context Protocol)](/external-integrations/mcp-server) server, you can orchestrate data pipelines, trigger jobs, and embed Keboola into a broader automation ecosystem.
+Keboola's external integration capabilities let you seamlessly extend the platform with your existing tools and workflows. By connecting to Keboola through our [REST API](https://developers.keboola.com/overview/api) or [MCP (Model Context Protocol)](/ai/mcp-server/) server, you can orchestrate data pipelines, trigger jobs, and embed Keboola into a broader automation ecosystem.
 
 > Keboola integrates with external tools at multiple levels, from low-level API access to ready-made workflow platforms. This flexibility allows you to choose the approach that best fits your team's needs.
 

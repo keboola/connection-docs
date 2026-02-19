@@ -14,7 +14,7 @@ It can also be used instead of repeated [manual imports of CSV](/tutorial/load/)
 
 Tables only get imported with the data source connector running. The import is **not** triggered by an email
 being sent or received. When running, the data source connector imports all emails received since its previous run.
-Therefore, it is a good idea to set up the data source connector in a [**scheduled** orchestration](/orchestrator/running/#time-schedule).
+Therefore, it is a good idea to set up the data source connector in a [**scheduled** orchestration](/flows/orchestrator/running/#time-schedule).
 
 <div class="alert alert-warning">
     <strong>Warning:</strong>

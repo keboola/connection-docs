@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-This data source connector uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1/) to import data 
+This data source connector uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) to import data 
 from [Pipedrive](https://www.pipedrive.com/en-gb).
 
 ## Configuration

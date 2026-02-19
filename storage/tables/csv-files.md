@@ -52,7 +52,7 @@ A CSV file in this format can be exported from
 
 - OpenOffice / LibreOffice Calc, where you simply save the file in a Text CSV file and select *Unicode (UTF-8)* encoding.
 - Google Drive, where it is the default output format (note, however, that you might
-    prefer to use the [Google Drive data source connector](/tutorial/load/googledrive/) instead).
+    prefer to use the [Google Sheets data source connector](/tutorial/load/googlesheets/) instead).
 - Microsoft Excel by following the below instructions.
 
 ### Exporting from Microsoft Excel
