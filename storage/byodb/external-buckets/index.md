@@ -65,6 +65,18 @@ External datasets can be used in an [input mapping](/transformations/mappings/#i
 They are also accessible via the [read-only input mapping](/transformations/mappings/#read-only-input-mapping).
 Keep in mind that external buckets cannot be used in an [output mapping](/transformations/mappings/#output-mapping) as they are not writable.
 
+#### Auto-Refresh
+
+You can enable **Auto-refresh** for external buckets using a cron scheduler. Auto-refresh ensures that your external dataset remains synced with the source schema and prevents pipelines from failing due to outdated metadata.
+
+To configure Auto-refresh, navigate to the bucket detail and click on the **Auto-Refresh** tab. Here you can set up a cron schedule that determines how often the bucket metadata will be refreshed automatically.
+
+{: .image-popup}
+![Auto-refresh configuration](/storage/byodb/external-buckets/figures/autorefresh-1.png)
+
+{: .image-popup}
+![Auto-refresh schedule](/storage/byodb/external-buckets/figures/autorefresh-2.png)
+
 ### External Dataset in a Snowflake SQL Transformation
 External datasets cannot be used in an input mapping as they are not copied into your transformation 
 workspace. You need to reference them in your transformation using a fully qualified name.
