@@ -251,7 +251,7 @@ When loading data, you have the option to **Clean workspace before loading**. Wh
 - **Stored procedures**
 - **User-defined functions (UDFs)**
 
-This is by design --- Keboola only manages objects it creates (tables and views). If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
+This is by design --- Keboola does not create stored procedures or UDFs, so it does not manage or remove them during cleanup. If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
 
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
