@@ -97,7 +97,7 @@ You can load data only for a selected table if you click the **Run Component** b
 
 ## Clean Up Workspace
 
-If you need to clean the workspace and remove previously loaded tables, you can do so by clicking the **Clean up workspace** menu item on the right side.
+If you need to clean the workspace and remove previously loaded tables, you can do so by clicking the **Clean up workspace** menu item on the right side. This operation removes all **tables** and **views** from the workspace schema. However, **stored procedures** and **user-defined functions (UDFs)** are not removed and will persist. If you need to remove these objects, you must drop them manually.
 
 {: .image-popup}
 ![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-10.png)

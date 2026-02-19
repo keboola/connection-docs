@@ -253,6 +253,8 @@ To query and work with the filtered/mapped data interactively in the editor, you
 
 3. Confirm the loading by clicking **Load Latest Data**.
 
+> **Note:** When using the **Clean workspace before loading** option, all **tables** and **views** in the workspace schema are removed before loading new data. However, **stored procedures** and **user-defined functions (UDFs)** are not removed and will persist across loads. If you have created any routines in the workspace, you are responsible for managing them manually.
+
 If a table is configured for Input Mapping but not yet loaded, hovering over the table icon will show a warning indicating limited functionality.
 
 {: .image-popup}
