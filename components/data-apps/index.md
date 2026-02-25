@@ -76,49 +76,6 @@ For detailed setup instructions, visit the technology-specific documentation pag
 - [Streamlit Data Apps](/data-apps/streamlit/)
 - [Python/JS Data Apps](/data-apps/python-js/)
 
-## Common Features
-
-Regardless of which technology you choose, all Data Apps share these capabilities:
-
-### Authentication & Security
-
-Keboola provides built-in authentication methods to protect your data apps:
-
-* **None**: No authentication -- the app is publicly accessible. You may implement your own auth logic within the app.
-* **Basic Authentication**: Simple password protection using a Keboola-generated password.
-* **OIDC/SSO Integration**: Enterprise single sign-on support (Auth0, Google, Microsoft Entra ID, Okta).
-* **GitHub Authentication**: Restrict access using GitHub OAuth -- by organization, team, repository, or allowed users.
-* **GitLab Authentication**: Restrict access using GitLab OAuth -- by groups, projects, or allowed roles.
-* **JumpCloud Authentication**: Restrict access using JumpCloud OIDC -- with optional role-based filtering.
-
-[Learn more about authentication -->](/data-apps/authentication/)
-
-### Data Integration
-
-* **Direct Storage Access**: Read and write to Keboola Storage tables.
-* **Input Mapping**: Automatically load specific tables into your app.
-* **Storage API Client**: Programmatic access to all Storage features.
-* **Environment Variables**: Pre-configured `KBC_URL` and `KBC_TOKEN`.
-
-### Configuration & Secrets
-
-* **Environment Variables**: Pass configuration to your apps.
-* **Secrets Management**: Securely store API keys and credentials.
-* **Theming**: Customize appearance with predefined or custom themes (Streamlit apps).
-
-### Resource Management
-
-* **Auto-Sleep/Resume**: Automatically suspend inactive apps to save costs.
-* **Configurable Timeouts**: Set inactivity periods from 5 minutes to 24 hours.
-* **Scalable Backend**: Choose appropriate compute resources for your needs.
-
-### Development Workflow
-
-* **Code Deployment**: Paste code directly for simple apps (Streamlit only).
-* **Git Integration**: Connect GitHub repositories for version control.
-* **Private Repository Support**: Authenticate with personal access tokens or SSH keys.
-* **Multiple Branches**: Deploy from any branch for testing.
-
 ## Sleep and Resume
 Our Suspend/Resume feature helps you save resources by automatically putting your app to sleep after a period of inactivity. Here is how it works:
 
