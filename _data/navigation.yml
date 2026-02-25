@@ -161,6 +161,12 @@ items:
   - url: /data-apps/
     title: Data Apps
     items:
+      - url: /data-apps/streamlit/
+        title: Streamlit Data Apps
+      - url: /data-apps/python-js/
+        title: Python/JS Data Apps
+      - url: /data-apps/authentication/
+        title: Authentication
       - url: /data-apps/general-design-guide/
         title: General Design Guide
       - url: /data-apps/lock-streamlit-version/
@@ -181,8 +187,8 @@ items:
             title: Microsoft Entra ID
           - url: /data-apps/oidc/okta/
             title: Okta
-          - url: /components/data-apps/backend-versions/
-            title: Backend Versions
+      - url: /components/data-apps/backend-versions/
+        title: Backend Versions
       - url: /data-apps/terminal-log-tab/
         title: Terminal Log Tab
 

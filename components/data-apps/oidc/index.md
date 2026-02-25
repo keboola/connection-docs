@@ -14,6 +14,5 @@ See the following articles for step-by-step information on how to configure the 
 - [Google Cloud Platform](/data-apps/oidc/google-cloud-platform/)
 - [Microsoft Entra ID](/data-apps/oidc/microsoft-entra-id/)
 - [OKTA](/data-apps/oidc/okta/)
-- GitHub (coming soon)
-- BitBucket (coming soon)
-- LinkedIn (coming soon)
+
+For additional authentication providers (GitHub, GitLab, JumpCloud), see the [Authentication](/data-apps/authentication/) page.
