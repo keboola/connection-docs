@@ -93,7 +93,7 @@ To authenticate using your SSH private key, follow the instructions in the [GitH
 
 To provide your app with environment variables or sensitive information like credentials, API keys, etc., use the Secrets section. These secrets will be injected into the `secrets.toml` file upon deployment of the app.
 
-When you upload `secrets.toml` using the direct secrets upload UI, Keboola imports secrets as flat, top-level keys. Sections (TOML groups) are not preserved as nested structures. This means keys in the file become `st.secrets["your_key"]` after upload -- you cannot access them as `st.secrets["group"]["key"]`. If your app expects nested secrets, use repo-based secrets.
+When you upload `secrets.toml` using the direct secrets upload UI, Keboola imports secrets as flat, top-level keys. Sections (TOML groups) are not preserved as nested structures. This means keys in the file become `st.secrets["your_key"]` after upload - you cannot access them as `st.secrets["group"]["key"]`. If your app expects nested secrets, use repo-based secrets.
 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 

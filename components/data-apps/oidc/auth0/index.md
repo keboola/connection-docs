@@ -1,8 +1,9 @@
 ---
 title: Auth0
-permalink: /data-apps/oidc/auth0/
+permalink: /data-apps/authentication/auth0/
 redirect_from:
   - /components/data-apps/oidc/auth0/
+  - /data-apps/oidc/auth0/
 ---
 
 * TOC
