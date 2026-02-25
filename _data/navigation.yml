@@ -167,17 +167,6 @@ items:
         title: Python/JS Data Apps
       - url: /data-apps/authentication/
         title: Authentication
-      - url: /data-apps/general-design-guide/
-        title: General Design Guide
-      - url: /data-apps/lock-streamlit-version/
-        title: Locking Streamlit Version
-        items:
-          - url: /data-apps/lock-streamlit-version/code-deployment/
-            title: Code Deployment
-          - url: /data-apps/lock-streamlit-version/git-deployment/
-            title: Git Repository Deployment
-      - url: /data-apps/oidc/
-        title: OpenID Connect
         items:
           - url: /data-apps/oidc/auth0/
             title: Auth0
@@ -187,6 +176,15 @@ items:
             title: Microsoft Entra ID
           - url: /data-apps/oidc/okta/
             title: Okta
+      - url: /data-apps/general-design-guide/
+        title: General Design Guide
+      - url: /data-apps/lock-streamlit-version/
+        title: Locking Streamlit Version
+        items:
+          - url: /data-apps/lock-streamlit-version/code-deployment/
+            title: Code Deployment
+          - url: /data-apps/lock-streamlit-version/git-deployment/
+            title: Git Repository Deployment
       - url: /components/data-apps/backend-versions/
         title: Backend Versions
       - url: /data-apps/terminal-log-tab/
