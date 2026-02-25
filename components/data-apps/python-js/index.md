@@ -51,7 +51,7 @@ your-repo/
 │   ├── supervisord/
 │   │   └── services/
 │   │       └── app.conf        <- Required. Tells Keboola how to start your app.
-│   └── setup.sh                <- Required. Installs your app's dependencies.
+│   └── setup.sh                <- Required if your app has dependencies. Installs them on startup.
 ├── pyproject.toml              <- Required for Python apps. Lists your Python packages.
 └── app.py                      <- Your application code (name and structure are up to you).
 ```
@@ -232,7 +232,7 @@ cd /app/frontend && npm install &
 wait
 ```
 
-{% include warning.html content="**Important:** After creating `setup.sh`, make it executable by running `chmod +x keboola-config/setup.sh` in your terminal. If this step is skipped, the file will not run and your app will fail to start." %}
+{% include tip.html content="**Note:** Keboola automatically makes `setup.sh` executable before running it. If you are testing locally outside of Keboola, you may need to run `chmod +x keboola-config/setup.sh` yourself." %}
 
 ## Step 4 -- Define Your Dependencies
 
@@ -258,7 +258,7 @@ build-backend = "setuptools.build_meta"
 
 Replace the packages in `dependencies` with whatever your app needs. Add one package per line, using `>=` to specify the minimum version.
 
-{% include tip.html content="**What is `uv`?** `uv` is a fast Python package manager -- it is the tool Keboola uses to install your Python libraries. Instead of the older `pip install` command, Keboola uses `uv sync`, which reads your `pyproject.toml` and installs everything listed there. You don't need to run `uv` yourself; it happens automatically when your app starts." %}
+{% include tip.html content="**What is `uv`?** `uv` is a fast Python package manager -- it is the tool Keboola uses to install your Python libraries. Instead of the older `pip install` command, Keboola uses `uv sync`, which reads your `pyproject.toml` and installs everything listed there. You don't need to call `uv` directly from your application code. The `uv sync` command in your `setup.sh` runs automatically before your app starts, installing everything listed in `pyproject.toml`." %}
 
 {% include tip.html content="**What is `pip`?** `pip` is the traditional Python package installer. You may have seen commands like `pip install flask` in tutorials. In Keboola's Python/JS image, direct `pip` usage is blocked for system stability reasons -- `uv sync` replaces it." %}
 
@@ -283,7 +283,9 @@ For Node.js apps, dependencies are defined in `package.json` as usual. The `setu
 2. Choose **Python/JS** as the type.
 3. Under **Repository**, enter your GitHub repository URL.
 4. Select the **branch** you want to deploy from (usually `main`).
-5. If your repository is private, enable **Private repository** and enter your GitHub username and a [Personal Access Token](https://github.com/settings/tokens).
+5. If your repository is private, enable **Private repository** and authenticate using either:
+   - **Personal Access Token**: Enter your GitHub username and a [Personal Access Token](https://github.com/settings/tokens), or
+   - **SSH Private Key**: Paste your SSH private key for key-based authentication.
 6. Add any [secrets](#secrets-and-environment-variables) your app needs.
 7. Click **Deploy**.
 
@@ -476,7 +478,6 @@ Your root route (`/`) likely only accepts GET requests. Keboola sends a POST req
 
 Check the **Terminal Log** tab in your Data App configuration in Keboola -- it shows stdout and stderr output from your app. Common causes:
 
-* `setup.sh` is not executable (`chmod +x keboola-config/setup.sh`).
 * A path in `app.conf` is relative (`app.py`) instead of absolute (`/app/app.py`).
 * A Python command in `app.conf` is missing the `uv run` prefix.
 * A package listed in `pyproject.toml` has a typo or does not exist.
