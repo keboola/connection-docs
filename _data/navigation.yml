@@ -168,13 +168,13 @@ items:
       - url: /data-apps/authentication/
         title: Authentication
         items:
-          - url: /data-apps/oidc/auth0/
+          - url: /data-apps/authentication/auth0/
             title: Auth0
-          - url: /data-apps/oidc/google-cloud-platform/
+          - url: /data-apps/authentication/google-cloud-platform/
             title: Google Cloud Platform
-          - url: /data-apps/oidc/microsoft-entra-id/
+          - url: /data-apps/authentication/microsoft-entra-id/
             title: Microsoft Entra ID
-          - url: /data-apps/oidc/okta/
+          - url: /data-apps/authentication/okta/
             title: Okta
       - url: /data-apps/general-design-guide/
         title: General Design Guide

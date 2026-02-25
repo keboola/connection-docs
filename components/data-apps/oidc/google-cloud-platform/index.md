@@ -1,8 +1,9 @@
 ---
 title: Google Cloud Platform
-permalink: /data-apps/oidc/google-cloud-platform/
+permalink: /data-apps/authentication/google-cloud-platform/
 redirect_from:
   - /components/data-apps/oidc/google-cloud-platform/
+  - /data-apps/oidc/google-cloud-platform/
 ---
 
 * TOC
