@@ -14,6 +14,45 @@ Data apps are simple, interactive web applications that use data to deliver insi
 
 As web applications deployed within your Keboola project, data apps can be publicly accessed from outside the project. This means users accessing your data app do not need access to a Keboola project -- they simply visit a URL.
 
+## Why Build Data Apps?
+
+Data apps transform how your organization interacts with data by providing purpose-built interfaces that solve specific business challenges.
+
+### Replace Traditional BI Tools
+
+Move beyond generic dashboards to create custom visualizations that match your exact needs:
+
+* **Brand Consistency**: Design dashboards in your company's color palette and visual identity.
+* **Real-Time Updates**: Pull fresh data on demand without waiting for scheduled refreshes.
+* **Cost Efficiency**: Eliminate per-seat licensing costs of traditional BI platforms.
+
+### Empower Business Users
+
+Build interactive tools that put data in the hands of non-technical users:
+
+* **Self-Service Analytics**: Enable business teams to explore data without SQL knowledge.
+* **Data Editing Interfaces**: Replace Excel workflows with controlled, collaborative editing tools.
+* **Automated Workflows**: Trigger actions based on data insights without manual intervention.
+* **Custom Reporting**: Generate tailored reports that match your team's specific needs.
+
+### Solve Specific Business Problems
+
+Create targeted solutions for unique challenges:
+
+* **Recommendation Engines**: Build personalized product or content recommendations.
+* **Interactive Segmentation Tools**: Allow marketing teams to define and visualize customer segments.
+* **AI Integration**: Connect machine learning models directly to business workflows.
+* **Financial Analysis Apps**: Provide real-time insights into spending patterns and forecasts.
+* **Campaign Management**: Design and execute data-driven marketing campaigns.
+
+### Benefits of Building in Keboola
+
+* **Integrated Platform**: Access all your transformed data directly from Storage.
+* **No Infrastructure Management**: Focus on building features, not managing servers.
+* **Secure by Design**: Built-in authentication and authorization options.
+* **Automatic Scaling**: Resources scale based on usage.
+* **Version Control**: Git-based deployment for production-grade development.
+
 ## Choose Your Technology
 
 Keboola Data Apps support two technology stacks, each designed for different use cases and skill sets:
