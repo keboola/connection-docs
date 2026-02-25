@@ -374,6 +374,8 @@ const apiKey = process.env.ANTHROPIC_API_KEY;
 
 This is the simplest possible Python/JS Data App. It displays \"Hello from Keboola!\" in a browser.
 
+You can clone the complete example from **[keboola/example-python-js-hello-world](https://github.com/keboola/example-python-js-hello-world)** and deploy it directly.
+
 **Repository structure:**
 
 ```
