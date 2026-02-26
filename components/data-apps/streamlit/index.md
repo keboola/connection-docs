@@ -47,10 +47,9 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 
 ## Deployment Methods
 
-There are two ways to deploy a Streamlit data app:
-
-{: .image-popup}
-![Deployment type](/components/data-apps/data_apps-main_menu.png)
+There are two ways to deploy a Streamlit data app: 
+1. Code
+2. Git Repository
 
 ### Code
 
