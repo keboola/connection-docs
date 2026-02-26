@@ -108,6 +108,10 @@ Getting started with Data Apps is straightforward:
 1. **Navigate to Data Apps**: In your Keboola project, go to the **Data Apps** section.
 2. **Create New App**: Click the **+** button to create a new data app.
 3. **Choose Type**: Choose your technology stack (Streamlit or Python/JS).
+
+{: .image-popup}
+![Choose type](/components/data-apps/Open_data_app_modal.png)
+
 4. **Configure Basic Settings**: Enter a custom URL prefix for your app and select a deployment method (Code or Git repository).
 5. **Deploy Your App**: Click **Deploy** and your app will be available at its public URL.
 
