@@ -19,7 +19,7 @@ Keboola provides several built-in authentication methods to control who can acce
 
 No built-in authentication is applied -- the app is publicly accessible to anyone with the URL. You may implement your own authorization method within the app itself.
 
-For Streamlit apps, you can use the [Streamlit authenticator](https://blog.streamlit.io/streamlit-authenticator-part-1-adding-an-authentication-component-to-your-app/) or take a look at [this example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
+For Streamlit apps, you can use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) or take a look at [this example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py).
 
 {: .image-popup}
 ![No authentication](/components/data-apps/data_app-authentication-none.png)
