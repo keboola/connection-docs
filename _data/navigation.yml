@@ -161,6 +161,21 @@ items:
   - url: /data-apps/
     title: Data Apps
     items:
+      - url: /data-apps/streamlit/
+        title: Streamlit Data Apps
+      - url: /data-apps/python-js/
+        title: Python/JS Data Apps
+      - url: /data-apps/authentication/
+        title: Authentication
+        items:
+          - url: /data-apps/authentication/auth0/
+            title: Auth0
+          - url: /data-apps/authentication/google-cloud-platform/
+            title: Google Cloud Platform
+          - url: /data-apps/authentication/microsoft-entra-id/
+            title: Microsoft Entra ID
+          - url: /data-apps/authentication/okta/
+            title: Okta
       - url: /data-apps/general-design-guide/
         title: General Design Guide
       - url: /data-apps/lock-streamlit-version/
@@ -170,19 +185,8 @@ items:
             title: Code Deployment
           - url: /data-apps/lock-streamlit-version/git-deployment/
             title: Git Repository Deployment
-      - url: /data-apps/oidc/
-        title: OpenID Connect
-        items:
-          - url: /data-apps/oidc/auth0/
-            title: Auth0
-          - url: /data-apps/oidc/google-cloud-platform/
-            title: Google Cloud Platform
-          - url: /data-apps/oidc/microsoft-entra-id/
-            title: Microsoft Entra ID
-          - url: /data-apps/oidc/okta/
-            title: Okta
-          - url: /components/data-apps/backend-versions/
-            title: Backend Versions
+      - url: /components/data-apps/backend-versions/
+        title: Backend Versions
       - url: /data-apps/terminal-log-tab/
         title: Terminal Log Tab
 

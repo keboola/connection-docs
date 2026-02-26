@@ -1,8 +1,9 @@
 ---
 title: Okta
-permalink: /data-apps/oidc/okta/
+permalink: /data-apps/authentication/okta/
 redirect_from:
   - /components/data-apps/oidc/okta/
+  - /data-apps/oidc/okta/
 ---
 
 * TOC
@@ -62,4 +63,4 @@ Follow these steps to test your new data app:
 - Go to the data app's URL.
 - You should be redirected to the Okta consent screen.
 - Log in with your Okta account to verify your identity.
-- The data app should display its content.  
+- The data app should display its content.    
