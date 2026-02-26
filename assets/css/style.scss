@@ -301,6 +301,10 @@ blockquote {
     margin-bottom: .5em;
   }
   border-radius: 3px;
+  code {
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
   @media (min-width: $screen-sm-min) {
     float: right;
     display: inline-block;
