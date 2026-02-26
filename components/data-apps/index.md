@@ -12,7 +12,7 @@ redirect_from:
 
 Data apps are simple, interactive web applications that use data to deliver insights or automatically take action. They are custom-tailored to tackle specific business problems and enable dynamic, purpose-built user experiences.
 
-As web applications deployed within your Keboola project, data apps can be publicly accessed from outside the project. This means users accessing your data app do not need access to a Keboola project -- they simply visit a URL.
+As web applications deployed within your Keboola project, data apps can be publicly accessed from outside the project. This means users accessing your data app do not need access to a Keboola project - they simply visit a URL.
 
 ## Why Build Data Apps?
 
@@ -83,7 +83,7 @@ Streamlit is a Python framework that turns Python scripts into interactive web a
 
 **Best for**: Development teams building production-grade, interactive applications.
 
-A full-stack solution where you bring your own code -- use any Python web framework (Flask, FastAPI, Dash), serve a JavaScript frontend, or combine both.
+A full-stack solution where you bring your own code - use any Python web framework (Flask, FastAPI, Dash), serve a JavaScript frontend, or combine both.
 
 **Key Features:**
 
@@ -108,6 +108,10 @@ Getting started with Data Apps is straightforward:
 1. **Navigate to Data Apps**: In your Keboola project, go to the **Data Apps** section.
 2. **Create New App**: Click the **+** button to create a new data app.
 3. **Choose Type**: Choose your technology stack (Streamlit or Python/JS).
+
+{: .image-popup}
+![Choose type](/components/data-apps/Open_data_app_modal.png)
+
 4. **Configure Basic Settings**: Enter a custom URL prefix for your app and select a deployment method (Code or Git repository).
 5. **Deploy Your App**: Click **Deploy** and your app will be available at its public URL.
 
@@ -123,12 +127,12 @@ Regardless of which technology you choose, all Data Apps share these capabilitie
 
 Keboola provides built-in authentication methods to protect your data apps:
 
-* **None**: No authentication -- the app is publicly accessible. You may implement your own auth logic within the app.
+* **None**: No authentication - the app is publicly accessible. You may implement your own auth logic within the app.
 * **Basic Authentication**: Simple password protection using a Keboola-generated password.
 * **OIDC/SSO Integration**: Enterprise single sign-on support (Auth0, Google, Microsoft Entra ID, Okta).
-* **GitHub Authentication**: Restrict access using GitHub OAuth -- by organization, team, repository, or allowed users.
-* **GitLab Authentication**: Restrict access using GitLab OAuth -- by groups, projects, or allowed roles.
-* **JumpCloud Authentication**: Restrict access using JumpCloud OIDC -- with optional role-based filtering.
+* **GitHub Authentication**: Restrict access using GitHub OAuth - by organization, team, repository, or allowed users.
+* **GitLab Authentication**: Restrict access using GitLab OAuth - by groups, projects, or allowed roles.
+* **JumpCloud Authentication**: Restrict access using JumpCloud OIDC - with optional role-based filtering.
 
 [Learn more about authentication -->](/data-apps/authentication/)
 
@@ -190,11 +194,11 @@ When you click **Deploy** or **Redeploy** for your app, a wizard will appear, pr
 {: .image-popup}
 ![Actions menu](/components/data-apps/data_apps-manage-redeploy-2.png)
 
-- **Deploy Data App** -- starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
-- **Open Data App** -- opens a new window with your data app.
-- **Redeploy** -- if you made changes in the data app configuration, you have to redeploy it for the changes to take effect.
-- **Suspend Data App** -- stops the data app. The container in which the application is running will be stopped, and the app URL will no longer be available. The configuration of the app will remain intact.
-- **Delete Data App** -- stops the data app deployment and deletes its configuration.
+- **Deploy Data App** - starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
+- **Open Data App** - opens a new window with your data app.
+- **Redeploy** - if you made changes in the data app configuration, you have to redeploy it for the changes to take effect.
+- **Suspend Data App** - stops the data app. The container in which the application is running will be stopped, and the app URL will no longer be available. The configuration of the app will remain intact.
+- **Delete Data App** - stops the data app deployment and deletes its configuration.
 
 ### Debugging App Deployment
 If the data app deployment job fails, you can see the logs from its container in the event log of the deployment job.
