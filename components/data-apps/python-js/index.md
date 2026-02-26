@@ -12,8 +12,6 @@ Python/JavaScript Data Apps give you full control over what you build and how yo
 
 This guide assumes you are building with the help of an AI assistant. Every step is explained in plain language - no deep technical knowledge required.
 
-**New to Data Apps?** Read the [Data Apps overview](/data-apps/) first to understand what Data Apps are and when to use them. If you want the simplest path and are building in Python, consider starting with [Streamlit Data Apps](/data-apps/streamlit/) instead.
-
 ## How It Works
 
 When you deploy a Python/JS Data App, Keboola:
