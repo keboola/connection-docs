@@ -157,3 +157,5 @@ The `credentials` object is the full content of the service account JSON key fil
 A successful response returns HTTP `201` with an object containing the new backend `id`. Note this `id` — it will be needed by Keboola support in the next step.
 
 ***Note:** Once both resources are registered, contact Keboola Support and provide the file storage ID and BigQuery backend ID. Support will set up your project with these backends.*
+
+For full API reference, see the [Keboola Management API documentation](https://keboolamanagementapi.docs.apiary.io/).
