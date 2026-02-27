@@ -87,3 +87,73 @@ each section is tailored to ensure a smooth and efficient setup.
     - Repeat the previous steps for the prefix `exp-15/` with an age of `15 days`.
 
 ***Note:** If you want to see your BigQuery tables directly in the BigQuery console, go to your folder and add a BigQuery Data Viewer or higher role.*
+
+## Register GCS File Storage in Keboola
+
+Once the GCS bucket is ready, register it in Keboola via the [Management API](https://keboolamanagementapi.docs.apiary.io/#reference/file-storages-gcs/file-storages-gcs-collection/create-file-storage). This requires a **Keboola Management API token** with super admin privileges. You can generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
+
+Send a `POST` request to `/manage/file-storage-gcs`:
+
+```
+POST https://<your-keboola-url>/manage/file-storage-gcs
+X-KBC-ManageApiToken: <your-manage-api-token>
+Content-Type: application/json
+```
+
+```json
+{
+  "gcsCredentials": {
+    "type": "service_account",
+    "project_id": "...",
+    "private_key_id": "...",
+    "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+    "client_email": "...",
+    "client_id": "...",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "..."
+  },
+  "filesBucket": "<your-gcs-bucket-name>",
+  "owner": "client",
+  "region": "<your-gcs-region>"
+}
+```
+
+The `gcsCredentials` object is the full content of the JSON key file downloaded when creating the service account. Set `filesBucket` to the name of the bucket created in the previous step, and `region` to the region where the bucket was created (e.g., `europe-west1`).
+
+A successful response returns HTTP `201` with an object containing the new file storage `id`. Note this `id` — it will be needed by Keboola support in the next step.
+
+## Register BigQuery Backend in Keboola
+
+Register the BigQuery table backend via the Management API. Send a `POST` request to `/manage/storage-backend/bigquery`:
+
+```
+POST https://<your-keboola-url>/manage/storage-backend/bigquery
+X-KBC-ManageApiToken: <your-manage-api-token>
+Content-Type: application/json
+```
+
+```json
+{
+  "credentials": {
+    "type": "service_account",
+    "project_id": "...",
+    "private_key_id": "...",
+    "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+    "client_email": "...",
+    "client_id": "...",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "..."
+  },
+  "folderId": "folders/<your-folder-id>"
+}
+```
+
+The `credentials` object is the full content of the service account JSON key file. Set `folderId` to the ID of the folder created in the first step, prefixed with `folders/` (e.g., `folders/1234567890`).
+
+A successful response returns HTTP `201` with an object containing the new backend `id`. Note this `id` — it will be needed by Keboola support in the next step.
+
+***Note:** Once both resources are registered, contact Keboola Support and provide the file storage ID and BigQuery backend ID. Support will set up your project with these backends.*
