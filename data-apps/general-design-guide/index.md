@@ -18,7 +18,7 @@ There are two options for setting theming:
 2. **Configuration File:** Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 {: .image-popup}
-![Screenshot - Streamlit Folder](/components/data-apps/general-design-guide/pic1.png)
+![Screenshot - Streamlit Folder](/data-apps/general-design-guide/pic1.png)
 
 ```
 [theme]
@@ -112,7 +112,7 @@ with st.expander("Table Info"):
 Use the following code for primary buttons; secondary buttons can be simple `st.buttons`.
 
 {: .image-popup}
-![Screenshot - Save Data](/components/data-apps/general-design-guide/pic3.png)
+![Screenshot - Save Data](/data-apps/general-design-guide/pic3.png)
 
 ```
 {% raw %}
@@ -142,7 +142,7 @@ ChangeButtonColour('Save Data', '#FFFFFF', '#1EC71E','#1EC71E')
 Here is an example of what a footer could look like.
 
 {: .image-popup}
-![Screenshot - Footer](/components/data-apps/general-design-guide/pic4.png)
+![Screenshot - Footer](/data-apps/general-design-guide/pic4.png)
 
 Customize the footer with the code below.
 
