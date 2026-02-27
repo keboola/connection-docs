@@ -13,6 +13,8 @@ each section is tailored to ensure a smooth and efficient setup.
 {: .image-popup}
 ![How to connect BigQuery](/storage/byobq/pic.png)
 
+***Note:** Naming conventions are up to you, but we strongly recommend naming all resources in a way that makes their connection to Keboola clearly identifiable (e.g., include "keboola" in the name). This makes debugging significantly easier when issues arise.*
+
 ## Create a Folder 
 [**Learn more**](https://cloud.google.com/resource-manager/docs/creating-managing-folders)
 
