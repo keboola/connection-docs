@@ -1,6 +1,8 @@
 ---
 title: Backend Versions
-permalink: /components/data-apps/backend-versions/
+permalink: /data-apps/backend-versions/
+redirect_from:
+  - /components/data-apps/backend-versions/
 ---
 
 * TOC

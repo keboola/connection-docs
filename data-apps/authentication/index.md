@@ -1,6 +1,9 @@
 ---
 title: Authentication
 permalink: /data-apps/authentication/
+redirect_from:
+  - /components/data-apps/authentication/
+
 ---
 
 * TOC
@@ -13,7 +16,7 @@ Once a data app is deployed, its URL is publicly available! We recommend using o
 Keboola provides several built-in authentication methods to control who can access your data apps. Choose the method that best fits your security requirements.
 
 {: .image-popup}
-![Authentication options](/components/data-apps/1_data_app_authentication.png)
+![Authentication options](/data-apps/authentication/authentication.png)
 
 ## None
 
@@ -37,7 +40,7 @@ This enables users to log into your app using your Single Sign-On (SSO) provider
 If you enter an app with OIDC, you will be asked to select an `Authentication Provider` and sign in.
 
 {: .image-popup}
-![Select OIDC provider](/components/data-apps/data_apps-select-oidc-provider.png)
+![Select OIDC provider](/data-apps/authentication/select-oidc-provider.png)
 
 ## GitHub Authentication
 

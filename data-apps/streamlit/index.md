@@ -1,6 +1,8 @@
 ---
 title: Streamlit Data Apps
 permalink: /data-apps/streamlit/
+redirect_from:
+  - /components/data-apps/streamlit/
 ---
 
 * TOC
@@ -43,7 +45,7 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 5. Choose a deployment method (Code or Git repository).
 
 {: .image-popup}
-![Custom URL prefix](/components/data-apps/data_apps-custom-data-app-url.png)
+![Custom URL prefix](/data-apps/streamlit/custom-data-app-url.png)
 
 ## Deployment Methods
 
@@ -56,22 +58,22 @@ There are two ways to deploy a Streamlit data app:
 For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/49752130) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
 {: .image-popup}
-![Code deployment](/components/data-apps/data_app-development-type-code.png)
+![Code deployment](/data-apps/streamlit/development-type-code.png)
 {: .image-popup}
-![Hello World code](/components/data-apps/data_apps-hello_world-code.png)
+![Hello World code](/data-apps/streamlit/hello-world-code.png)
 
 #### Packages
 To use additional Python packages that are not already included in the [base image](#base-image), enter them into the `Packages` field.
 
 {: .image-popup}
-![Packages](/components/data-apps/data_apps-packages.png)
+![Packages](/data-apps/streamlit/packages.png)
 
 ### Git Repository
 
 If you have a complex application, push your app sources into GitHub and link the repository in this section. Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
 {: .image-popup}
-![Git repository](/components/data-apps/data_apps-git_repository_public.png)
+![Git repository](/data-apps/streamlit/git-repository-public.png)
 
 If you are using a private repository, you have two options to authenticate:
 - With your GitHub username and personal access token
@@ -86,7 +88,7 @@ Follow these steps to authenticate using your GitHub username and personal acces
 To authenticate using your SSH private key, follow the instructions in the [GitHub manual](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). After generating your key, enter your SSH private key into the appropriate configuration field and click **Save**.
 
 {: .image-popup}
-![Private repository SSH](/components/data-apps/data_apps-git_repository_private_SSH.png)
+![Private repository SSH](/data-apps/streamlit/git-repository-private-ssh.png)
 
 ## Secrets
 
@@ -147,12 +149,12 @@ For writing data back to Keboola Project Storage, use the [Keboola Storage Pytho
 To configure theming in your data app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
 
 {: .image-popup}
-![Predefined themes](/components/data-apps/data_apps-theming-predefined.png)
+![Predefined themes](/data-apps/streamlit/theming-predefined.png)
 
 For `Custom`, users can select colors using the color pickers and choose the desired font from a list.
 
 {: .image-popup}
-![Custom theme](/components/data-apps/data_apps-theming-custom.png)
+![Custom theme](/data-apps/streamlit/theming-custom.png)
 
 ### Predefined Themes:
 1. **Keboola**
@@ -215,7 +217,7 @@ The following packages are pre-installed in all backend versions:
 
 Starting with backend version **1.15.0**, each release is available with multiple Python versions (3.10, 3.11, 3.13). Python 3.10 is the default.
 
-For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/components/data-apps/backend-versions/) page.
+For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/data-apps/backend-versions/) page.
 
 ## AgGrid Enterprise License
 The AgGrid Enterprise License is available for Streamlit Data Apps in Keboola, offering enhanced data manipulation capabilities, including:

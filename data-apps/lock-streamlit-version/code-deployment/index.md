@@ -32,12 +32,12 @@ When your app is ready for deployment, you have two options to create your requi
 You can then upload this file directly through the Keboola UI:
 
 {: .image-popup}
-![Upload Requirements](/components/data-apps/lock-streamlit-version/code-deployment/upload-requirements.png)
+![Upload Requirements](/data-apps/lock-streamlit-version/code-deployment/upload-requirements.png)
 
 You can also update requirements.txt in the UI:
 
 {: .image-popup}
-![Update Requirements](/components/data-apps/lock-streamlit-version/code-deployment/update-requirements.png)
+![Update Requirements](/data-apps/lock-streamlit-version/code-deployment/update-requirements.png)
 
 **Important notes:**
 - If a package has a specific version defined, that exact version will be installed
@@ -48,11 +48,11 @@ You can also update requirements.txt in the UI:
 
 After uploading your requirements.txt:
 
-1. Toggle the "Freeze versions" option in the UI
+1. Toggle the "Freeze versions"  option in the UI
 2. Click "Start Data App" to propagate this change
 
 {: .image-popup}
-![Freeze Version Toggle](/components/data-apps/lock-streamlit-version/code-deployment/freeze-version-toggle.png)
+![Freeze Version Toggle](/data-apps/lock-streamlit-version/code-deployment/freeze-version-toggle.png)
 
 This action will:
 - Execute a pip freeze command in the app
@@ -60,7 +60,7 @@ This action will:
 - Use these frozen versions for future redeploys and app wake-ups
 
 {: .image-popup}
-![Start Data App](/components/data-apps/lock-streamlit-version/code-deployment/start-data-app.png)
+![Start Data App](/data-apps/lock-streamlit-version/code-deployment/start-data-app.png)
 
 ### 3. Updating Package Dependencies
 
@@ -70,7 +70,7 @@ To update the requirements for your app:
 2. Enable the "Update packages dependencies" toggle
 
 {: .image-popup}
-![Update Dependencies](/components/data-apps/lock-streamlit-version/code-deployment/update-dependencies.png)
+![Update Dependencies](/data-apps/lock-streamlit-version/code-deployment/update-dependencies.png)
 
 When this option is enabled:
 - All package dependencies will be updated to their latest versions (if no version is explicitly defined)

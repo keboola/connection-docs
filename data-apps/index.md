@@ -110,7 +110,7 @@ Getting started with Data Apps is straightforward:
 3. **Choose Type**: Choose your technology stack (Streamlit or Python/JS).
 
 {: .image-popup}
-![Choose type](/components/data-apps/Open_data_app_modal.png)
+![Choose type](/data-apps/app-modal.png)
 
 4. **Configure Basic Settings**: Enter a custom URL prefix for your app and select a deployment method (Code or Git repository).
 5. **Deploy Your App**: Click **Deploy** and your app will be available at its public URL.
@@ -175,24 +175,24 @@ This feature ensures you pay only for what you use, while keeping the app ready 
 If you enter the URL of a sleeping app, it will trigger its wakeup, and you will see a **waking up** page.
 
 {: .image-popup}
-![Waking up](/components/data-apps/data_apps-proxy-wakeup.png)
+![Waking up](/data-apps/proxy-wakeup.png)
 
 Should anything unexpected occur, a **wakeup error** page will appear, and you can click **Show More** to view the error details.
 
 {: .image-popup}
-![Wakeup error](/components/data-apps/data_apps-proxy-error-wakeing-up.png)
+![Wakeup error](/data-apps/proxy-error-wakeing-up.png)
 
 ### How to Set Up Inactivity Timeout
 When you click **Deploy** or **Redeploy** for your app, a wizard will appear, prompting you to specify the backend size and the auto-sleep timeout. You can set the duration of inactivity after which the app will go to sleep, with options ranging from five minutes to 24 hours. The default is set to five minutes.
 
 {: .image-popup}
-![Deploy timeout and backend size](/components/data-apps/data_apps-deploy-timeout-backedsize.png)
+![Deploy timeout and backend size](/data-apps/deploy-timeout-backedsize.png)
 
 ## Deployment and App Management
 
 ### Actions Menu
 {: .image-popup}
-![Actions menu](/components/data-apps/data_apps-manage-redeploy-2.png)
+![Actions menu](/data-apps/manage-redeploy.png)
 
 - **Deploy Data App** - starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
 - **Open Data App** - opens a new window with your data app.
@@ -205,7 +205,7 @@ If the data app deployment job fails, you can see the logs from its container in
 For example, there may be a conflict with the specified packages:
 
 {: .image-popup}
-![Job error log](/components/data-apps/data_apps-job_error_log.png)
+![Job error log](/data-apps/job-error-log.png)
 
 ## Example Data Apps
 
@@ -245,7 +245,6 @@ Business metrics visualization with Slack integration.
 Natural language interface for Snowflake queries.
 
 - [Source Code](https://github.com/keboola/Kai-SQL-bot)
-- [Template Documentation](/flows/templates/kai-sql-bot/)
 
 ### Online Marketing Dashboard
 
