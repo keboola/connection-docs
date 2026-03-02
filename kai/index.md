@@ -53,6 +53,23 @@ Kai is now in **Public Beta** and available to all users. Look for the **KAI** b
 - [Use Cases & Examples](/kai/use-cases/)
 - [Best Practices](/kai/best-practices/)
 
+## Security & Governance
+
+Kai is designed with enterprise security in mind:
+
+- **No model training on your data** — Keboola does not use Kai inputs to train, retrain, or fine-tune models.
+- **Encryption** — Data is encrypted in transit (TLS 1.2+) and at rest (AES-256).
+- **Prompt data deletion** — Inference prompts and responses are removed from Google within 30 seconds and from LangSmith within 14 days.
+- **Regional processing** — Data is processed primarily in your chosen cloud region, with temporary routing to Vertex AI for real-time inference.
+- **Full audit trail** — All Kai actions are logged in your project's audit trail with full organizational visibility.
+- **Action approval** — Kai requires explicit user approval before modifying your project. Review every tool approval before confirming.
+- **Secure credential handling** — Kai uses secure configuration forms for credentials and secrets—never type passwords or API keys directly in chat.
+- **Project isolation** — Kai only sees your current project and cannot access data from other projects.
+
+AI-generated outputs are provided on an as-is basis and may be inaccurate or incomplete. Always verify outputs before acting on them.
+
+For full details, see the [Kai AI Assistant Terms](https://www.keboola.com/ai-assistant-terms).
+
 ## Support
 
 Use the thumbs up/down buttons in the chat to provide feedback, or contact [Keboola Support](mailto:support@keboola.com) for access requests and technical issues.
