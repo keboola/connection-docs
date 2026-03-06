@@ -15,7 +15,9 @@ each section is tailored to ensure a smooth and efficient setup.
 
 ***Note:** Naming conventions are up to you, but we strongly recommend naming all resources in a way that makes their connection to Keboola clearly identifiable (e.g., include "keboola" in the name). This makes debugging significantly easier when issues arise.*
 
-## Create a Folder 
+# Create BigQuery and GCP resources
+
+## 1. Create a Folder 
 [**Learn more**](https://cloud.google.com/resource-manager/docs/creating-managing-folders)
 
 1.	Go to **IAM & Admin > [Manage Resources](https://console.cloud.google.com/cloud-resource-manager)** and click on the **Create folder** button.
@@ -23,7 +25,7 @@ each section is tailored to ensure a smooth and efficient setup.
 3.	Under **Organization** and **Location**, select the organization resource or folder under which you want to create your new folder. If you have any difficulties creating a folder, learn more [here](https://cloud.google.com/resource-manager/docs/creating-managing-folders#folder-permissions). Click **Create**.
 4.	On the **Resource Manager** page, uncollapse the organization, locate your created folder, and copy its ID to the Keboola BigQuery registration form.
 
-## Create a Project 
+## 2. Create a Project 
 [**Learn more**](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project)
 
 1.	In the Resource Manager, click **Create Project**.
@@ -32,7 +34,7 @@ each section is tailored to ensure a smooth and efficient setup.
 4.	Once the project is created, select it by clicking **Select project** in the notification or find the project using the selector in the top left corner of the Google console.
 5.	Ensure that **billing is enabled** for your Google Cloud project ([verify that billing is enabled](https://cloud.google.com/billing/docs/how-to/verify-billing-enabled#console)).
 
-## Enable API Services 
+## 3. Enable API Services 
 [**Learn more**](https://cloud.google.com/endpoints/docs/openapi/enable-api#enabling_an_api)
 
 1.	Open **APIs & services** in the navigation menu of your project. Click **Enable APIs and Services**.
@@ -44,7 +46,7 @@ each section is tailored to ensure a smooth and efficient setup.
     - Analytics hub API (analyticshub.googleapis.com)
     - BigQuery API (bigquery.googleapis.com)
 
-## Create a Service Account 
+## 4. Create a Service Account 
 [**Learn more**](https://cloud.google.com/iam/docs/service-accounts-create#creating)
 
 1.	Go to **IAM & Admin > Service Accounts** in your project. Click **Create service accounts**. 
@@ -75,7 +77,7 @@ each section is tailored to ensure a smooth and efficient setup.
         - Paste the principal email address of the service account created earlier.
         - Select the role **Billing > Billing Account User** and click **Save**.
 
-## Create a Google Storage Bucket 
+## 5. Create a Google Storage Bucket 
 [**Learn more**](https://cloud.google.com/storage/docs/creating-buckets#create_a_new_bucket)
 
 1.	Navigate to **Cloud Storage > Buckets**. Click **Create Bucket**.
@@ -90,7 +92,9 @@ each section is tailored to ensure a smooth and efficient setup.
 
 ***Note:** If you want to see your BigQuery tables directly in the BigQuery console, go to your folder and add a BigQuery Data Viewer or higher role.*
 
-## Register GCS File Storage in Keboola
+# Register resources in Keboola
+
+## 1. Register GCS File Storage in Keboola
 
 Once the GCS bucket is ready, register it in Keboola via the [Management API](https://keboolamanagementapi.docs.apiary.io/#reference/file-storages-gcs/file-storages-gcs-collection/create-file-storage). This requires a **Keboola Management API token** with super admin privileges. You can generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
 
@@ -126,7 +130,7 @@ The `gcsCredentials` object is the full content of the JSON key file downloaded 
 
 A successful response returns HTTP `201` with an object containing the new file storage `id`. Note this `id` — it will be needed by Keboola support in the next step.
 
-## Register BigQuery Backend in Keboola
+## 2. Register BigQuery Backend in Keboola
 
 Register the BigQuery table backend via the Management API. Send a `POST` request to `/manage/storage-backend/bigquery`:
 
