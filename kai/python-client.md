@@ -209,3 +209,4 @@ async with KaiClient(
 - [GitHub Repository](https://github.com/keboola/kai-client)
 - [PyPI Package](https://pypi.org/project/kai-client/)
 - [Kai Documentation](/kai/)
+
