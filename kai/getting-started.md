@@ -25,7 +25,7 @@ Click the **KAI** button in your project's top navigation bar, or use keyboard s
 | Shortcut | Action |
 |----------|--------|
 | **A** | Open the chat window (shows recent conversation) |
-| **Shift + A** | Open a new chat |
+| **Ctrl + Shift + A** | Open a new chat |
 
 {: .image-popup}
 ![Kai Chat Panel](/kai/kai-welcome.png)
