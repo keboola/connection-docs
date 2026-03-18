@@ -32,6 +32,10 @@ uv add kai-client
 pip install kai-client
 ```
 
+## Prerequisites
+
+The Kai Python Client requires a [Master Token](/management/project/tokens/#master-tokens) to authenticate with the Keboola API. Standard tokens with limited permissions will not work. You can create a Master Token in your project's **Settings → API Tokens**.
+
 ## Quick Start
 
 ```python
@@ -41,7 +45,7 @@ from kai_client import KaiClient
 async def main():
     # Auto-discover the Kai API URL from your Keboola stack
     client = await KaiClient.from_storage_api(
-        storage_api_token="your-keboola-token",
+        storage_api_token="your-master-token",
         storage_api_url="https://connection.keboola.com"  # Your stack URL
     )
 
@@ -70,7 +74,7 @@ The package includes a `kai` CLI for quick interactions without writing code.
 Set your credentials as environment variables:
 
 ```bash
-export STORAGE_API_TOKEN="your-keboola-token"
+export STORAGE_API_TOKEN="your-master-token"
 export STORAGE_API_URL="https://connection.keboola.com"
 ```
 
@@ -97,7 +101,7 @@ In interactive mode, type your messages and press Enter. Type `exit`, `quit`, or
 
 ```python
 async with KaiClient(
-    storage_api_token="your-token",
+    storage_api_token="your-master-token",
     storage_api_url="https://connection.keboola.com"
 ) as client:
     chat_id, response = await client.chat("What is 2 + 2?")
@@ -108,7 +112,7 @@ async with KaiClient(
 
 ```python
 async with KaiClient(
-    storage_api_token="your-token",
+    storage_api_token="your-master-token",
     storage_api_url="https://connection.keboola.com"
 ) as client:
     chat_id = client.new_chat_id()
@@ -130,7 +134,7 @@ async with KaiClient(
 
 ```python
 async with KaiClient(
-    storage_api_token="your-token",
+    storage_api_token="your-master-token",
     storage_api_url="https://connection.keboola.com"
 ) as client:
     chat_id = client.new_chat_id()
@@ -156,7 +160,7 @@ Some tools require explicit approval before execution. The server sends a `tool-
 from kai_client import KaiClient
 
 async with KaiClient(
-    storage_api_token="your-token",
+    storage_api_token="your-master-token",
     storage_api_url="https://connection.keboola.com"
 ) as client:
     chat_id = client.new_chat_id()
@@ -188,7 +192,7 @@ from kai_client import (
 )
 
 async with KaiClient(
-    storage_api_token="your-token",
+    storage_api_token="your-master-token",
     storage_api_url="https://connection.keboola.com"
 ) as client:
     try:
@@ -209,4 +213,3 @@ async with KaiClient(
 - [GitHub Repository](https://github.com/keboola/kai-client)
 - [PyPI Package](https://pypi.org/project/kai-client/)
 - [Kai Documentation](/kai/)
-
