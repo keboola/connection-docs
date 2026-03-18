@@ -45,30 +45,52 @@ Your permissions persist across all conversations within the same project.
 
 ## System Instructions
 
-System Instructions let you provide Kai with persistent context and guidelines that apply to every conversation in your project. Use them to define preferences, conventions, and project-specific rules so you don't have to repeat yourself in every chat.
+System Instructions let you provide Kai with persistent context and guidelines so you don't have to repeat yourself in every chat. Instructions exist at two levels: **project-level** (shared across all users) and **user-level** (personal to you). User-level instructions amend project-level instructions — both are included in every conversation.
 
-### What to Include
+### Project-Level Instructions
 
-System Instructions are ideal for:
+Project-level instructions apply to **all users** in the project. They are managed in the project settings:
+
+1. Go to **Settings → Kai Assistant** in the main Keboola navigation.
+2. Enter your instructions in the **System instructions** text field.
+3. The instructions auto-save.
+
+Use project-level instructions for team-wide standards such as:
 
 - **Naming conventions** — e.g., "Always prefix staging tables with `stg_` and use snake_case for all column names."
 - **Coding standards** — e.g., "Write SQL transformations using CTEs instead of subqueries. Always include comments explaining business logic."
 - **Project context** — e.g., "Our fiscal year starts in April. Revenue calculations should exclude returns and use the `completed_at` date."
-- **Preferred tools and workflows** — e.g., "Use Snowflake SQL dialect. Always create transformations in a dev branch first."
-- **Response style** — e.g., "Keep explanations concise. Always show the SQL query before executing it."
 
-### How to Set System Instructions
+Project-level instructions can be edited by project admins and managers.
+
+### User-Level Instructions
+
+User-level instructions are **personal to you** and are added on top of the project-level instructions. They are configured in the Kai chat panel:
 
 1. Open the Kai chat panel.
 2. Click the **Settings** icon.
 3. Select the **System Instructions** tab.
 4. Enter your instructions in the text field.
-5. Click **Save**.
+5. The instructions auto-save.
 
-Your instructions will be included as context in every new conversation with Kai in that project. They do not affect other users or other projects.
+Use user-level instructions for personal preferences such as:
+
+- **Response style** — e.g., "Keep explanations concise. Always show the SQL query before executing it."
+- **Preferred workflows** — e.g., "Always create transformations in a dev branch first."
+- **Language or formatting** — e.g., "Respond in German. Use metric units."
+
+### How Instructions Are Applied
+
+When you start a conversation with Kai, both levels of instructions are included:
+
+1. **Project-level instructions** are applied first.
+2. **User-level instructions** are appended on top.
+
+This means user-level instructions can refine or add to the project-level instructions but cannot override Kai's core system rules.
 
 ### Tips
 
+- Each instruction field supports up to **4,000 characters**.
 - Keep instructions clear and specific — vague guidelines are less effective.
 - Update instructions as your project evolves and conventions change.
 - Focus on rules Kai can't infer from your project data alone (e.g., business logic, team preferences).
