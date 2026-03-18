@@ -1,0 +1,10 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Head.astro';
+---
+<Default {...Astro.props}><slot /></Default>
+<!-- GTM noscript for body -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMTTBS"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
