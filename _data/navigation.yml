@@ -83,6 +83,9 @@ items:
       - url: /kai/best-practices/
         title: Best Practices
 
+      - url: /kai/security-and-privacy/
+        title: Security & Privacy
+
   - url: /flows/
     title: Flows
     items:
