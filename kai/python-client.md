@@ -208,6 +208,67 @@ async with KaiClient(
         print(f"API error: {e.code} - {e.message}")
 ```
 
+## Use Cases
+
+### Kai via CLI with Claude Code
+
+The [kai-cli plugin](https://github.com/keboola/kai-client/tree/main/plugins/kai-cli) lets AI coding assistants like [Claude Code](https://claude.com/claude-code) interact with your Keboola project through the Kai CLI. Install the plugin to give Claude the ability to query data, manage configurations, run jobs, and troubleshoot issues — all through natural language in your terminal.
+
+#### Installation
+
+Download the plugin to your Claude Code plugins directory:
+
+```bash
+mkdir -p ~/.claude/plugins
+
+curl -L https://github.com/keboola/kai-client/archive/refs/heads/main.tar.gz | \
+  tar -xz --strip-components=2 -C ~/.claude/plugins kai-client-main/plugins/kai-cli
+```
+
+Or clone and link for development:
+
+```bash
+git clone https://github.com/keboola/kai-client.git
+ln -s "$(pwd)/kai-client/plugins/kai-cli" ~/.claude/plugins/kai-cli
+```
+
+Once installed, ask Claude to "use kai" or "help me with kai cli" to activate the skill. Claude can then run `kai chat`, `kai history`, `kai ping`, and other CLI commands on your behalf.
+
+### Integrating Kai into Data Apps
+
+The Kai Python Client can be embedded into Keboola [Data Apps](/data-apps/) to provide AI-powered chat interfaces for your end users.
+
+#### Streamlit Data Apps
+
+The [kai-streamlit plugin](https://github.com/keboola/kai-client/tree/main/plugins/kai-streamlit) provides patterns and working code for building [Streamlit Data Apps](/data-apps/streamlit/) with an integrated Kai chat interface. It handles the async bridge between Streamlit's synchronous model and the KaiClient's async API, streaming responses into Streamlit containers, tool approval flows with interactive Approve/Deny buttons, and session state management across Streamlit reruns.
+
+To get started, install the dependencies:
+
+```bash
+pip install kai-client streamlit
+```
+
+Then use the `run_async` bridge pattern to call KaiClient from Streamlit:
+
+```python
+import asyncio
+from kai_client import KaiClient
+
+def run_async(coro):
+    """Run an async coroutine from sync Streamlit code."""
+    loop = asyncio.new_event_loop()
+    try:
+        return loop.run_until_complete(coro)
+    finally:
+        loop.close()
+```
+
+See the [plugin repository](https://github.com/keboola/kai-client/tree/main/plugins/kai-streamlit) for a complete working example with streaming, tool approval, and suggested action buttons.
+
+#### Python/JS Data Apps
+
+Support for integrating Kai into [Python/JS Data Apps](/data-apps/python-js/) is coming soon. A dedicated plugin will be available to simplify embedding Kai chat into custom Python and JavaScript-based data applications.
+
 ## Resources
 
 - [GitHub Repository](https://github.com/keboola/kai-client)
