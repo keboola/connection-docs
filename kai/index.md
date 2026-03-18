@@ -53,6 +53,12 @@ Kai is now in **Public Beta** and available to all users. Look for the **KAI** b
 - [Use Cases & Examples](/kai/use-cases/)
 - [Best Practices](/kai/best-practices/)
 
+## Security & Privacy
+
+Your data is never used for AI training and is automatically deleted after processing.
+
+[Learn more about Kai security →](/kai/security-and-privacy/)
+
 ## Support
 
 Use the thumbs up/down buttons in the chat to provide feedback, or contact [Keboola Support](mailto:support@keboola.com) for access requests and technical issues.
