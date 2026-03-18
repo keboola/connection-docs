@@ -14,7 +14,11 @@ Kai is designed with enterprise security in mind. This page explains how your da
 
 **Automatically deleted:**
 - Inference prompts and responses: Removed from Google within 30 seconds
-- Observability logs: Deleted after 14 days
+- Observability logs (LangSmith, EU region): Deleted after 14 days.
+  We integrate LangSmith to continuously monitor, evaluate, and improve the assistant's quality, reliability, and user experience.
+    - PII and raw data content are redacted before traces are sent to LangSmith. Redaction covers names, emails, IDs, and any customer-specific values detected in either inputs or model responses.
+    - Tool responses containing data are never stored.
+    - Only scrubbed metadata and anonymized response summaries are stored for quality analysis.
 - Your workspace data: Never leaves your Keboola project
 
 **Encrypted everywhere:**
@@ -64,14 +68,6 @@ Kai leverages Keboola's existing security certifications:
 Default AI provider (Google Vertex AI) maintains SOC 2 Type II, ISO 27001, GDPR, and HIPAA certifications.
 
 When using BYOK, compliance depends on your chosen provider and commercial agreement.
-
-## For Regulated Industries
-
-If you work in healthcare, finance, or government:
-- Use BYOK to maintain direct control over AI provider selection
-- Leverage your existing AI provider agreements (BAAs, DPAs)
-- Configure regional processing to meet data residency requirements
-- Contact [support@keboola.com](mailto:support@keboola.com) for custom security reviews
 
 ## Questions?
 
