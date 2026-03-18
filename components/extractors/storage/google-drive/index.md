@@ -1,5 +1,5 @@
 ---
-title: Google Drive
+title: Google Drive Sheets
 permalink: /components/extractors/storage/google-drive/
 redirect_from:
     - /extractors/storage/google-drive/
@@ -42,3 +42,4 @@ When a sheet is added to the connector, it is displayed in the list of extracted
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
 The list shows the name (and the link) of the imported document and sheet, and also the name of the destination
 table in [Storage](/storage/). You can modify the destination table name by editing the sheet extraction.
+
