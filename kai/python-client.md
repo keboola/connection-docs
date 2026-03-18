@@ -11,12 +11,10 @@ The [Kai Python Client](https://github.com/keboola/kai-client) is an official Py
 ## Features
 
 - **Command-line interface** for quick interactions without writing code
-- **Async/await support** using `httpx`
-- **Server-Sent Events (SSE) streaming** for real-time chat responses
-- **Type-safe models** with Pydantic v2
-- **Comprehensive error handling** with custom exception classes
-- **Session management** for chat conversations
-- **Full API coverage** including chat, history, and voting endpoints
+- **Real-time streaming** — see responses as they arrive
+- **Conversation management** — maintain context across multiple messages
+- **Tool approval flows** — review and approve Kai actions programmatically
+- **Full API coverage** — chat, history, and feedback
 
 ## Installation
 
@@ -95,148 +93,17 @@ In interactive mode, type your messages and press Enter. Type `exit`, `quit`, or
 
 **Tool approval:** When Kai calls a write tool (e.g., `update_descriptions`, `run_job`, `create_config`), the CLI pauses and asks you to approve or deny. Use `--auto-approve` to skip this prompt.
 
-## Usage Examples
-
-### Simple Chat (Non-Streaming)
-
-```python
-async with KaiClient(
-    storage_api_token="your-master-token",
-    storage_api_url="https://connection.keboola.com"
-) as client:
-    chat_id, response = await client.chat("What is 2 + 2?")
-    print(response)
-```
-
-### Continuing a Conversation
-
-```python
-async with KaiClient(
-    storage_api_token="your-master-token",
-    storage_api_url="https://connection.keboola.com"
-) as client:
-    chat_id = client.new_chat_id()
-
-    # First message
-    async for event in client.send_message(chat_id, "Hello!"):
-        if event.type == "text":
-            print(event.text, end="")
-    print()
-
-    # Continue the conversation (reuse same chat_id)
-    async for event in client.send_message(chat_id, "What did I just say?"):
-        if event.type == "text":
-            print(event.text, end="")
-    print()
-```
-
-### Handling Tool Calls
-
-```python
-async with KaiClient(
-    storage_api_token="your-master-token",
-    storage_api_url="https://connection.keboola.com"
-) as client:
-    chat_id = client.new_chat_id()
-
-    async for event in client.send_message(chat_id, "List my Keboola tables"):
-        match event.type:
-            case "text":
-                print(event.text, end="")
-            case "tool-call":
-                if event.state == "input-available":
-                    print(f"\n[Calling {event.tool_name} with {event.input}]")
-                elif event.state == "output-available":
-                    print(f"\n[{event.tool_name} returned: {event.output}]")
-            case "finish":
-                print(f"\n[Done: {event.finish_reason}]")
-```
-
-### Tool Approval for Write Operations
-
-Some tools require explicit approval before execution. The server sends a `tool-approval-request` event with an `approval_id` that you use to approve or reject.
-
-```python
-from kai_client import KaiClient
-
-async with KaiClient(
-    storage_api_token="your-master-token",
-    storage_api_url="https://connection.keboola.com"
-) as client:
-    chat_id = client.new_chat_id()
-    pending_approval_id = None
-
-    async for event in client.send_message(chat_id, "Create a new bucket"):
-        if event.type == "tool-approval-request":
-            pending_approval_id = event.approval_id
-
-    # Approve the pending tool
-    if pending_approval_id:
-        async for event in client.approve_tool(
-            chat_id=chat_id,
-            approval_id=pending_approval_id,
-        ):
-            if event.type == "text":
-                print(event.text, end="")
-```
-
-### Error Handling
-
-```python
-from kai_client import (
-    KaiClient,
-    KaiError,
-    KaiAuthenticationError,
-    KaiRateLimitError,
-    KaiNotFoundError,
-)
-
-async with KaiClient(
-    storage_api_token="your-master-token",
-    storage_api_url="https://connection.keboola.com"
-) as client:
-    try:
-        async for event in client.send_message("chat-id", "Hello"):
-            print(event)
-    except KaiAuthenticationError:
-        print("Authentication failed")
-    except KaiRateLimitError:
-        print("Rate limited, try again later")
-    except KaiNotFoundError:
-        print("Chat not found")
-    except KaiError as e:
-        print(f"API error: {e.code} - {e.message}")
-```
+For more usage examples (non-streaming chat, conversations, tool calls, tool approval, error handling), see the [client README](https://github.com/keboola/kai-client#readme).
 
 ## Use Cases
-
-### Kai via CLI with Claude Code
-
-The [kai-cli plugin](https://github.com/keboola/kai-client/tree/main/plugins/kai-cli) lets AI coding assistants like [Claude Code](https://claude.com/claude-code) interact with your Keboola project through the Kai CLI. Install the plugin to give Claude the ability to query data, manage configurations, run jobs, and troubleshoot issues — all through natural language in your terminal.
-
-#### Installation
-
-Download the plugin to your Claude Code plugins directory:
-
-```bash
-mkdir -p ~/.claude/plugins
-
-curl -L https://github.com/keboola/kai-client/archive/refs/heads/main.tar.gz | \
-  tar -xz --strip-components=2 -C ~/.claude/plugins kai-client-main/plugins/kai-cli
-```
-
-Or clone and link for development:
-
-```bash
-git clone https://github.com/keboola/kai-client.git
-ln -s "$(pwd)/kai-client/plugins/kai-cli" ~/.claude/plugins/kai-cli
-```
-
-Once installed, ask Claude to "use kai" or "help me with kai cli" to activate the skill. Claude can then run `kai chat`, `kai history`, `kai ping`, and other CLI commands on your behalf.
 
 ### Integrating Kai into Data Apps
 
 The Kai Python Client can be embedded into Keboola [Data Apps](/data-apps/) to provide AI-powered chat interfaces for your end users.
+
+#### Python/JS Data Apps
+
+You can integrate Kai into [Python/JS Data Apps](/data-apps/python-js/) today using the Kai Python Client directly. A dedicated plugin with ready-made patterns will be available soon to simplify the setup.
 
 #### Streamlit Data Apps
 
@@ -265,9 +132,29 @@ def run_async(coro):
 
 See the [plugin repository](https://github.com/keboola/kai-client/tree/main/plugins/kai-streamlit) for a complete working example with streaming, tool approval, and suggested action buttons.
 
-#### Python/JS Data Apps
+### Kai via CLI with Claude Code
 
-Support for integrating Kai into [Python/JS Data Apps](/data-apps/python-js/) is coming soon. A dedicated plugin will be available to simplify embedding Kai chat into custom Python and JavaScript-based data applications.
+The [kai-cli plugin](https://github.com/keboola/kai-client/tree/main/plugins/kai-cli) lets AI coding assistants like [Claude Code](https://claude.com/claude-code) interact with your Keboola project through the Kai CLI. Install the plugin to give Claude the ability to query data, manage configurations, run jobs, and troubleshoot issues — all through natural language in your terminal.
+
+#### Installation
+
+Download the plugin to your Claude Code plugins directory:
+
+```bash
+mkdir -p ~/.claude/plugins
+
+curl -L https://github.com/keboola/kai-client/archive/refs/heads/main.tar.gz | \
+  tar -xz --strip-components=2 -C ~/.claude/plugins kai-client-main/plugins/kai-cli
+```
+
+Or clone and link for development:
+
+```bash
+git clone https://github.com/keboola/kai-client.git
+ln -s "$(pwd)/kai-client/plugins/kai-cli" ~/.claude/plugins/kai-cli
+```
+
+Once installed, ask Claude to "use kai" or "help me with kai cli" to activate the skill. Claude can then run `kai chat`, `kai history`, `kai ping`, and other CLI commands on your behalf.
 
 ## Resources
 
