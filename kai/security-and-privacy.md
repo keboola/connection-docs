@@ -16,7 +16,7 @@ Kai is designed with enterprise security in mind. This page explains how your da
 - Inference prompts and responses: Removed from Google within 30 seconds
 - Observability logs (LangSmith, EU region): Deleted after 14 days.
   We integrate LangSmith to continuously monitor, evaluate, and improve the assistant's quality, reliability, and user experience.
-    - PII and raw data content are redacted before traces are sent to LangSmith. Redaction covers names, emails, IDs, and any customer-specific values detected in either inputs or model responses.
+    - PII and raw data content are redacted before traces are sent to LangSmith. Redaction covers names, emails, IDs, and other customer-specific values detected in either inputs or model responses.
     - Tool responses containing data are never stored.
     - Only scrubbed metadata and anonymized response summaries are stored for quality analysis.
 - Your workspace data: Never leaves your Keboola project
