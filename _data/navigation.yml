@@ -89,6 +89,9 @@ items:
       - url: /kai/security-and-privacy/
         title: Security & Privacy
 
+      - url: /kai/python-client/
+        title: Python Client
+
   - url: /flows/
     title: Flows
     items:
