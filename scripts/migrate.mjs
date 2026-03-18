@@ -55,6 +55,8 @@ const stats = {
   privateBetaIncludes: 0,
   imagePopupRemoved: 0,
   kramdownAttrsRemoved: 0,
+  rawTagsStripped: 0,
+  commentTagsConverted: 0,
 };
 
 // ---------------------------------------------------------------------------
@@ -331,6 +333,29 @@ function removeKramdownAttrs(body) {
 }
 
 /**
+ * Strip `{% raw %}` and `{% endraw %}` tags — they are no-ops in Astro.
+ */
+function stripRawTags(body) {
+  const before = body;
+  body = body.replace(/\{%\s*(?:end)?raw\s*%\}/g, '');
+  if (body !== before) stats.rawTagsStripped++;
+  return body;
+}
+
+/**
+ * Convert `{% comment %}...{% endcomment %}` blocks to HTML comments.
+ */
+function convertCommentTags(body) {
+  const before = body;
+  body = body.replace(
+    /\{%\s*comment\s*%\}([\s\S]*?)\{%\s*endcomment\s*%\}/g,
+    (_match, content) => `<!-- ${content.trim()} -->`
+  );
+  if (body !== before) stats.commentTagsConverted++;
+  return body;
+}
+
+/**
  * Apply all body transformations in the correct order.
  */
 function transformBody(body) {
@@ -344,6 +369,9 @@ function transformBody(body) {
   // (since {: .image-popup} also matches the generic pattern)
   body = removeImagePopup(body);
   body = removeKramdownAttrs(body);
+  // Strip residual Liquid tags that are no-ops in Astro
+  body = stripRawTags(body);
+  body = convertCommentTags(body);
   return body;
 }
 
@@ -465,6 +493,8 @@ function main() {
   console.log(`  private-beta-warning includes:${stats.privateBetaIncludes}`);
   console.log(`  {: .image-popup} removed:     ${stats.imagePopupRemoved}`);
   console.log(`  Kramdown attrs removed:       ${stats.kramdownAttrsRemoved}`);
+  console.log(`  raw tags stripped:            ${stats.rawTagsStripped}`);
+  console.log(`  comment tags converted:       ${stats.commentTagsConverted}`);
   console.log('\nDone.');
 }
 

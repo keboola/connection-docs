@@ -18,11 +18,11 @@ create a new **Python** transformation and name it `Sample Python transformation
 Add a new code in `Block 1` named `Hello world`, insert the following code, and save it. 
 
 ```python
-{% raw %}
+
 f = open("out/files/demoFile.txt", "a")
 f.write("Hello World!")
 f.close ()
-{% endraw %}
+
 ```
 
 ![Screenshot - New codeblock](/tutorial/branches/figures/python-new-codeblock.png)

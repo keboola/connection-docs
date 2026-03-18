@@ -121,16 +121,16 @@ Keboola automatically generates a `profiles.yml` file for your dbt transformatio
 default:
   outputs:
     kbc_prod:
-      type: '{% raw %}{{ env_var("DBT_KBC_PROD_TYPE") }}{% endraw %}'
-      user: '{% raw %}{{ env_var("DBT_KBC_PROD_USER") }}{% endraw %}'
-      private_key: '{% raw %}{{ env_var("DBT_KBC_PROD_PRIVATE_KEY") }}{% endraw %}'
+      type: '{{ env_var("DBT_KBC_PROD_TYPE") }}'
+      user: '{{ env_var("DBT_KBC_PROD_USER") }}'
+      private_key: '{{ env_var("DBT_KBC_PROD_PRIVATE_KEY") }}'
       # or use a deprecated password
-      # password: '{% raw %}{{ env_var("DBT_KBC_PROD_PASSWORD") }}{% endraw %}'
-      schema: '{% raw %}{{ env_var("DBT_KBC_PROD_SCHEMA") }}{% endraw %}'
-      warehouse: '{% raw %}{{ env_var("DBT_KBC_PROD_WAREHOUSE") }}{% endraw %}'
-      database: '{% raw %}{{ env_var("DBT_KBC_PROD_DATABASE") }}{% endraw %}'
-      account: '{% raw %}{{ env_var("DBT_KBC_PROD_ACCOUNT") }}{% endraw %}'
-      threads: '{% raw %}{{ env_var("DBT_KBC_PROD_THREADS")| as_number }}{% endraw %}'
+      # password: '{{ env_var("DBT_KBC_PROD_PASSWORD") }}'
+      schema: '{{ env_var("DBT_KBC_PROD_SCHEMA") }}'
+      warehouse: '{{ env_var("DBT_KBC_PROD_WAREHOUSE") }}'
+      database: '{{ env_var("DBT_KBC_PROD_DATABASE") }}'
+      account: '{{ env_var("DBT_KBC_PROD_ACCOUNT") }}'
+      threads: '{{ env_var("DBT_KBC_PROD_THREADS")| as_number }}'
   target: kbc_prod
 ```
 

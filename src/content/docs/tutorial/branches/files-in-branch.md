@@ -28,13 +28,13 @@ Now it is time to make the changes to the transformation and test them. Go to **
 transformation` and change the *Hello world* code in `Block 1` as follows:
 
 ```python
-{% raw %}
+
 f = open("out/files/demoFile.txt", "a")
 f.write("Hello World!")
 f.close ()
 
 print("Output written to demoFile.txt")
-{% endraw %}
+
 ```
 
 ![Screenshot - Edit Code Block](/tutorial/branches/figures/python-branch-change-code.png)

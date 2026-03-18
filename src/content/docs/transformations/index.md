@@ -264,7 +264,7 @@ To trigger autocompletion, use `Ctrl+Space` or `Option+Space` as you would in yo
 When triggered
 
 - after typing `"`, it will suggest available tables.
-- after typing `{% raw %}{{{% endraw %}`, it will suggest available variables.
+- after typing `{{`, it will suggest available variables.
 - in other cases, it will suggest everything (see the screenshot above).
 
 ## Read-Only Input Mapping

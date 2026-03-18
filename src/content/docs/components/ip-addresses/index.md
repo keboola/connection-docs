@@ -27,9 +27,7 @@ This enhancement helps us promptly tackle network issues or unauthorized access.
 For projects in the default AWS US [region](/overview/#stacks) (AWS region `us-east-1`), 
 the following IP addresses are currently used for all new projects:
 
-{% comment %}
-ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
-{% endcomment %}
+<!-- ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json -->
 
 - `52.7.83.136`
 - `52.20.72.254`
@@ -49,9 +47,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 For projects in the AWS EU [region](/overview/#stacks) (AWS region `eu-central-1`),
 the following IP addresses are currently used for all new projects:
 
-{% comment %}
-ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
-{% endcomment %}
+<!-- ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json -->
 - `3.66.248.180`
 - `3.64.150.30`
 - `3.74.28.187`
@@ -70,9 +66,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 For projects in the Azure EU [region](/overview/#stacks) (Azure region `north-europe`), 
 the following IP addresses are currently used:
 
-{% comment %}
-ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
-{% endcomment %}
+<!-- ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json -->
 - `40.127.144.42`
 - `20.82.252.94`
 - `20.82.252.129`
@@ -84,9 +78,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 For projects in the GCP EU Frankfurt [region](/overview/#stacks) (GCP region `europe-west3`),
 the following IP addresses are currently used:
 
-{% comment %}
-ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
-{% endcomment %}
+<!-- ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json -->
 - `35.234.119.197`
 - `34.141.46.49`
 - `35.246.230.46`
@@ -109,9 +101,7 @@ ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.j
 For projects in the GCP US Virginia [region](/overview/#stacks) (GCP region `us-east4`),
 the following IP addresses are currently used:
 
-{% comment %}
-ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json
-{% endcomment %}
+<!-- ALERT: when changing those, change also /components/ip-addresses/kbc-public-ip.json and /components/extractors/ip-addresses/kbc-public-ip.json -->
 - `35.245.113.124`
 - `35.186.177.208`
 - `34.48.52.58`

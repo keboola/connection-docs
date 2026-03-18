@@ -45,11 +45,11 @@ whether the page header has yellow accent and shows the branch name.
 When you are in the branch, change the query limit from `LIMIT 5` to `LIMIT 10` in the transformation code, and save it.
 
 ```sql
-{% raw %}
+
 CREATE TABLE "top_prices" AS SELECT * FROM "bitcoin_price" ORDER BY PRICE DESC LIMIT 10;
 
 ALTER TABLE "top_prices" DROP COLUMN "_timestamp";
-{% endraw %}
+
 ```
     
 ![Screenshot - Change to code](/tutorial/branches/figures/transformation-branch-change-top-5.png)
@@ -133,7 +133,7 @@ Now add a second code to `Block 1` named `Dollar values of transactions` and ins
 ![Add a new code](/tutorial/branches/figures/transformation-branch-add-code.png)
 
 ```sql
-{% raw %}
+
 CREATE TABLE "dollar_btc_transactions" AS 
 SELECT 
     BT.DATE, 
@@ -145,7 +145,7 @@ FROM
 LEFT JOIN 
     "bitcoin_price" AS BP
         ON BP.DATE = BT.DATE;
-{% endraw %}
+
 ```
 
 ![Add a new code](/tutorial/branches/figures/transformation-branch-added-code.png)

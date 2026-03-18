@@ -14,6 +14,7 @@ export default defineConfig({
     redirectFrom(),
     starlight({
       title: 'Keboola User Documentation',
+      favicon: '/favicon.ico',
       logo: {
         src: './src/assets/logo.png',
         replacesTitle: true,

@@ -112,7 +112,7 @@ Use the following code for primary buttons; secondary buttons can be simple `st.
 ![Screenshot - Save Data](/data-apps/general-design-guide/pic3.png)
 
 ```
-{% raw %}
+
 def ChangeButtonColour(widget_label, font_color, background_color, border_color):
     htmlstr = f"""
         <script>
@@ -127,7 +127,7 @@ def ChangeButtonColour(widget_label, font_color, background_color, border_color)
         </script>
         """
     components.html(f"{htmlstr}", height=0, width=0)
-{% endraw %}
+
 ```
 
 **Example**

@@ -50,9 +50,9 @@ In **Table Output Mapping**, add a table `top_prices` that will be created in th
 Finally, add a new code to `Block 1` named `Top prices` with the following query:
 
 ```sql
-{% raw %}
+
 CREATE TABLE "top_prices" AS SELECT * FROM "bitcoin_price" ORDER BY PRICE DESC LIMIT 5;
-{% endraw %}
+
 ```
 
 ![Snowflake output mapping](/tutorial/branches/figures/snflk-prod-code1.png)

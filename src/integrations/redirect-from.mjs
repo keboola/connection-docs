@@ -70,19 +70,27 @@ function parseFrontmatter(content) {
 }
 
 /**
+ * Escape special HTML characters in a string to prevent injection.
+ */
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
  * Generate the HTML content for a redirect page.
  */
 function redirectHtml(targetUrl) {
+  const safeUrl = escapeHtml(targetUrl);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0;url=${targetUrl}">
-<link rel="canonical" href="https://help.keboola.com${targetUrl}">
+<meta http-equiv="refresh" content="0;url=${safeUrl}">
+<link rel="canonical" href="https://help.keboola.com${safeUrl}">
 <title>Redirecting...</title>
 </head>
 <body>
-<p>Redirecting to <a href="${targetUrl}">${targetUrl}</a></p>
+<p>Redirecting to <a href="${safeUrl}">${safeUrl}</a></p>
 </body>
 </html>
 `;

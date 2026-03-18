@@ -32,7 +32,7 @@ To parametrize the multiplier value (42), you can change it to a variable `{{ "{
 
 ```sql
 CREATE OR REPLACE TABLE "result" AS
-	SELECT "first", "second" * {% raw %}{{ multiplier }}{% endraw %} AS "larger_second" FROM "source";
+	SELECT "first", "second" * {{ multiplier }} AS "larger_second" FROM "source";
 ```
 
 When you define a variable, you have to provide its default value:
@@ -211,9 +211,9 @@ and parametrize the name of the table from which the `_timestamp` column is drop
 Add the `source` variable and modify the shared code to:
 
 ```sql
-{% raw %}
+
 ALTER TABLE "{{source}}" DROP COLUMN "_timestamp"; 
-{% endraw %}
+
 ```
 
 ![Screenshot - Shared Code with Variables](/transformations/variables/shared-code-variables-1.png)
