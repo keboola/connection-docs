@@ -25,7 +25,6 @@ Connect your MCP clients and AI assistants to your **Keboola Project** and give 
 Query data, create transformations, write SQL queries, and build your pipelines — **all with no clicks required.**
 
 
-## Overview  
 Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly into your data workflows. Just describe what you need in plain language to:
 
 - Search and explore your data.

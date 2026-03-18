@@ -1,0 +1,182 @@
+---
+/**
+ * "Copy as Markdown" button — converts the current page content to markdown
+ * and copies it to the clipboard. Shows a checkmark confirmation after copying.
+ */
+---
+<button
+  id="copy-md-btn"
+  class="copy-md-btn"
+  title="Copy page as Markdown"
+  aria-label="Copy page as Markdown"
+>
+  <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </svg>
+  <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+  <span class="copy-md-label">Copy as Markdown</span>
+</button>
+
+<style>
+  .copy-md-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--sl-color-gray-3);
+    border-radius: 0.375rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-gray-4);
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .copy-md-btn:hover {
+    color: var(--sl-color-text);
+    border-color: var(--sl-color-gray-4);
+  }
+  .copy-md-btn.copied {
+    color: #22c55e;
+    border-color: #22c55e;
+  }
+</style>
+
+<script is:inline>
+  function htmlToMd(node) {
+    if (node.nodeType === 3) return node.textContent || '';
+    if (node.nodeType !== 1) return '';
+
+    var el = node;
+    var tag = el.tagName.toLowerCase();
+    var kids = function() {
+      return Array.from(el.childNodes).map(htmlToMd).join('');
+    };
+
+    switch (tag) {
+      case 'h1': return '# ' + kids() + '\n\n';
+      case 'h2': return '## ' + kids() + '\n\n';
+      case 'h3': return '### ' + kids() + '\n\n';
+      case 'h4': return '#### ' + kids() + '\n\n';
+      case 'h5': return '##### ' + kids() + '\n\n';
+      case 'h6': return '###### ' + kids() + '\n\n';
+      case 'p': return kids() + '\n\n';
+      case 'br': return '\n';
+      case 'strong':
+      case 'b': return '**' + kids() + '**';
+      case 'em':
+      case 'i': return '*' + kids() + '*';
+      case 'code':
+        if (el.parentElement && el.parentElement.tagName.toLowerCase() === 'pre') return kids();
+        return '`' + kids() + '`';
+      case 'pre':
+        var codeEl = el.querySelector('code');
+        var lang = codeEl && codeEl.className ? (codeEl.className.match(/language-(\w+)/) || [])[1] || '' : '';
+        var text = codeEl ? codeEl.textContent : el.textContent;
+        return '```' + lang + '\n' + (text || '').trim() + '\n```\n\n';
+      case 'a':
+        var href = el.getAttribute('href') || '';
+        return '[' + kids() + '](' + href + ')';
+      case 'img':
+        return '![' + (el.getAttribute('alt') || '') + '](' + (el.getAttribute('src') || '') + ')';
+      case 'ul': return kids() + '\n';
+      case 'ol': return kids() + '\n';
+      case 'li':
+        var parentTag = el.parentElement ? el.parentElement.tagName.toLowerCase() : '';
+        var prefix = parentTag === 'ol'
+          ? (Array.from(el.parentElement.children).indexOf(el) + 1) + '. '
+          : '- ';
+        return prefix + kids().trim() + '\n';
+      case 'blockquote':
+        return kids().trim().split('\n').map(function(l) { return '> ' + l; }).join('\n') + '\n\n';
+      case 'table':
+        var rows = Array.from(el.querySelectorAll('tr'));
+        if (!rows.length) return '';
+        var lines = [];
+        rows.forEach(function(row, i) {
+          var cells = Array.from(row.querySelectorAll('th, td')).map(function(c) { return c.textContent.trim(); });
+          lines.push('| ' + cells.join(' | ') + ' |');
+          if (i === 0) lines.push('| ' + cells.map(function() { return '---'; }).join(' | ') + ' |');
+        });
+        return lines.join('\n') + '\n\n';
+      case 'hr': return '---\n\n';
+      case 'aside':
+        var atype = el.getAttribute('aria-label') || 'note';
+        return ':::' + atype.toLowerCase() + '\n' + kids().trim() + '\n:::\n\n';
+      case 'script':
+      case 'style':
+      case 'nav':
+      case 'template':
+      case 'svg':
+        return '';
+      default:
+        return kids();
+    }
+  }
+
+  function initCopyBtn() {
+    var btn = document.getElementById('copy-md-btn');
+    if (!btn || btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+
+    btn.addEventListener('click', function() {
+      var content = document.querySelector('.sl-markdown-content');
+      if (!content) {
+        console.error('Copy MD: .sl-markdown-content not found');
+        return;
+      }
+
+      var title = document.querySelector('h1');
+      var titleText = title ? title.textContent.trim() : '';
+      var md = '# ' + titleText + '\n\n' + htmlToMd(content).replace(/\n{3,}/g, '\n\n').trim();
+
+      var iconCopy = btn.querySelector('.icon-copy');
+      var iconCheck = btn.querySelector('.icon-check');
+      var label = btn.querySelector('.copy-md-label');
+
+      navigator.clipboard.writeText(md).then(function() {
+        btn.classList.add('copied');
+        iconCopy.style.display = 'none';
+        iconCheck.style.display = '';
+        label.textContent = 'Copied!';
+
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          iconCopy.style.display = '';
+          iconCheck.style.display = 'none';
+          label.textContent = 'Copy as Markdown';
+        }, 2500);
+      }).catch(function() {
+        // Fallback for older browsers
+        var ta = document.createElement('textarea');
+        ta.value = md;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+
+        btn.classList.add('copied');
+        iconCopy.style.display = 'none';
+        iconCheck.style.display = '';
+        label.textContent = 'Copied!';
+
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          iconCopy.style.display = '';
+          iconCheck.style.display = 'none';
+          label.textContent = 'Copy as Markdown';
+        }, 2500);
+      });
+    });
+  }
+
+  // Run on initial load and on Astro view transitions
+  initCopyBtn();
+  document.addEventListener('astro:page-load', initCopyBtn);
+  document.addEventListener('astro:after-swap', initCopyBtn);
+</script>

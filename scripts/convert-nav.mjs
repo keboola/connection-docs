@@ -53,8 +53,9 @@ function convertItem(item) {
   const childItems = item.items.map(convertItem);
   return {
     label: item.title,
+    collapsed: true,
     items: [
-      { slug },        // parent page as first entry
+      { label: 'Overview', slug },  // parent page labeled "Overview" to avoid duplicating group name
       ...childItems,
     ],
   };
@@ -81,9 +82,10 @@ function serializeValue(value, indent = 0) {
   if (typeof value === 'object' && value !== null) {
     const keys = Object.keys(value);
 
-    // Compact single-key objects on one line: { slug: 'foo' }
-    if (keys.length === 1 && typeof value[keys[0]] === 'string') {
-      return `{ ${keys[0]}: ${JSON.stringify(value[keys[0]])} }`;
+    // Compact small objects on one line: { slug: 'foo' } or { label: 'x', slug: 'y' }
+    if (keys.length <= 2 && keys.every((k) => typeof value[k] === 'string')) {
+      const parts = keys.map((k) => `${k}: ${JSON.stringify(value[k])}`);
+      return `{ ${parts.join(', ')} }`;
     }
 
     const entries = keys.map((k) => {

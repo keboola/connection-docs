@@ -2,27 +2,27 @@
 // Re-generate with:  node scripts/convert-nav.mjs
 
 export const sidebar = [
-  {
-    label: "Home",
-    slug: "",
-  },
+  { label: "Home", slug: "" },
   { slug: "overview" },
   {
     label: "Getting Started Tutorial",
+    collapsed: true,
     items: [
-      { slug: "tutorial" },
+      { label: "Overview", slug: "tutorial" },
       {
         label: "Part 1: Loading Data",
+        collapsed: true,
         items: [
-          { slug: "tutorial/load" },
+          { label: "Overview", slug: "tutorial/load" },
           { slug: "tutorial/load/googlesheets" },
           { slug: "tutorial/load/database" },
         ],
       },
       {
         label: "Part 2: Data Manipulation",
+        collapsed: true,
         items: [
-          { slug: "tutorial/manipulate" },
+          { label: "Overview", slug: "tutorial/manipulate" },
           { slug: "tutorial/manipulate/workspace" },
         ],
       },
@@ -31,8 +31,9 @@ export const sidebar = [
       { slug: "tutorial/ad-hoc" },
       {
         label: "Part 6: Development Branches",
+        collapsed: true,
         items: [
-          { slug: "tutorial/branches" },
+          { label: "Overview", slug: "tutorial/branches" },
           { slug: "tutorial/branches/prepare-tables" },
           { slug: "tutorial/branches/prepare-files" },
           { slug: "tutorial/branches/tables-in-branch" },
@@ -43,13 +44,15 @@ export const sidebar = [
       },
       {
         label: "Keboola Platform Onboarding",
+        collapsed: true,
         items: [
-          { slug: "tutorial/onboarding" },
+          { label: "Overview", slug: "tutorial/onboarding" },
           { slug: "tutorial/onboarding/usage-blueprint" },
           {
             label: "Multi-Project Architecture",
+            collapsed: true,
             items: [
-              { slug: "tutorial/onboarding/architecture-guide" },
+              { label: "Overview", slug: "tutorial/onboarding/architecture-guide" },
               { slug: "tutorial/onboarding/architecture-guide/bdm-guide" },
             ],
           },
@@ -61,8 +64,9 @@ export const sidebar = [
   },
   {
     label: "Kai - AI Assistant",
+    collapsed: true,
     items: [
-      { slug: "kai" },
+      { label: "Overview", slug: "kai" },
       { slug: "kai/getting-started" },
       { slug: "kai/use-cases" },
       { slug: "kai/best-practices" },
@@ -70,17 +74,20 @@ export const sidebar = [
   },
   {
     label: "Flows",
+    collapsed: true,
     items: [
-      { slug: "flows" },
+      { label: "Overview", slug: "flows" },
       { slug: "flows/conditional-flows" },
       {
         label: "Orchestrations",
+        collapsed: true,
         items: [
-          { slug: "flows/orchestrator" },
+          { label: "Overview", slug: "flows/orchestrator" },
           {
             label: "Tasks",
+            collapsed: true,
             items: [
-              { slug: "flows/orchestrator/tasks" },
+              { label: "Overview", slug: "flows/orchestrator/tasks" },
               { slug: "flows/orchestrator/tasks/nesting" },
             ],
           },
@@ -90,8 +97,9 @@ export const sidebar = [
       },
       {
         label: "Templates",
+        collapsed: true,
         items: [
-          { slug: "flows/templates" },
+          { label: "Overview", slug: "flows/templates" },
           { slug: "flows/templates/marketing-platforms" },
           { slug: "flows/templates/ai-sms-campaign" },
           { slug: "flows/templates/customer-relationship-management" },
@@ -115,14 +123,16 @@ export const sidebar = [
   },
   {
     label: "Data Apps",
+    collapsed: true,
     items: [
-      { slug: "data-apps" },
+      { label: "Overview", slug: "data-apps" },
       { slug: "data-apps/streamlit" },
       { slug: "data-apps/python-js" },
       {
         label: "Authentication",
+        collapsed: true,
         items: [
-          { slug: "data-apps/authentication" },
+          { label: "Overview", slug: "data-apps/authentication" },
           { slug: "data-apps/authentication/auth0" },
           { slug: "data-apps/authentication/google-cloud-platform" },
           { slug: "data-apps/authentication/microsoft-entra-id" },
@@ -132,8 +142,9 @@ export const sidebar = [
       { slug: "data-apps/general-design-guide" },
       {
         label: "Locking Streamlit Version",
+        collapsed: true,
         items: [
-          { slug: "data-apps/lock-streamlit-version" },
+          { label: "Overview", slug: "data-apps/lock-streamlit-version" },
           { slug: "data-apps/lock-streamlit-version/code-deployment" },
           { slug: "data-apps/lock-streamlit-version/git-deployment" },
         ],
@@ -144,16 +155,19 @@ export const sidebar = [
   },
   {
     label: "Components",
+    collapsed: true,
     items: [
-      { slug: "components" },
+      { label: "Overview", slug: "components" },
       {
         label: "Data Source Connectors",
+        collapsed: true,
         items: [
-          { slug: "components/extractors" },
+          { label: "Overview", slug: "components/extractors" },
           {
             label: "Communication",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/communication" },
+              { label: "Overview", slug: "components/extractors/communication" },
               { slug: "components/extractors/communication/email-imap" },
               { slug: "components/extractors/communication/ms-outlook" },
               { slug: "components/extractors/communication/email-attachments" },
@@ -165,8 +179,9 @@ export const sidebar = [
           },
           {
             label: "Databases",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/database" },
+              { label: "Overview", slug: "components/extractors/database" },
               { slug: "components/extractors/database/mysql" },
               { slug: "components/extractors/database/postgresql" },
               { slug: "components/extractors/database/oracle" },
@@ -176,8 +191,9 @@ export const sidebar = [
               { slug: "components/extractors/database/microsoft-sql" },
               {
                 label: "MongoDB",
+                collapsed: true,
                 items: [
-                  { slug: "components/extractors/database/mongodb" },
+                  { label: "Overview", slug: "components/extractors/database/mongodb" },
                   { slug: "components/extractors/database/mongodb/mapping" },
                 ],
               },
@@ -187,16 +203,18 @@ export const sidebar = [
           },
           {
             label: "ERP",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/erp" },
+              { label: "Overview", slug: "components/extractors/erp" },
               { slug: "components/extractors/erp/k2" },
               { slug: "components/extractors/erp/netsuite" },
             ],
           },
           {
             label: "Marketing/Sales",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/marketing-sales" },
+              { label: "Overview", slug: "components/extractors/marketing-sales" },
               { slug: "components/extractors/marketing-sales/adform-dsp-reports" },
               { slug: "components/extractors/marketing-sales/babelforce" },
               { slug: "components/extractors/marketing-sales/bigcommerce" },
@@ -216,8 +234,9 @@ export const sidebar = [
               { slug: "components/extractors/marketing-sales/market-vision" },
               {
                 label: "Microsoft Advertising (Bing Ads)",
+                collapsed: true,
                 items: [
-                  { slug: "components/extractors/marketing-sales/bing-ads" },
+                  { label: "Overview", slug: "components/extractors/marketing-sales/bing-ads" },
                   { slug: "components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk" },
                 ],
               },
@@ -232,8 +251,9 @@ export const sidebar = [
           },
           {
             label: "Social",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/social" },
+              { label: "Overview", slug: "components/extractors/social" },
               { slug: "components/extractors/social/facebook" },
               { slug: "components/extractors/social/instagram" },
               { slug: "components/extractors/social/youtube" },
@@ -242,8 +262,9 @@ export const sidebar = [
           },
           {
             label: "Storage",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/storage" },
+              { label: "Overview", slug: "components/extractors/storage" },
               { slug: "components/extractors/storage/aws-s3" },
               { slug: "components/extractors/storage/azure-datalake-gen2" },
               { slug: "components/extractors/storage/ftp" },
@@ -256,8 +277,9 @@ export const sidebar = [
           },
           {
             label: "Other",
+            collapsed: true,
             items: [
-              { slug: "components/extractors/other" },
+              { label: "Overview", slug: "components/extractors/other" },
               { slug: "components/extractors/other/airtable" },
               { slug: "components/extractors/other/aws-cu-reports" },
               { slug: "components/extractors/other/azure-cost" },
@@ -287,12 +309,14 @@ export const sidebar = [
       },
       {
         label: "Data Destination Connectors",
+        collapsed: true,
         items: [
-          { slug: "components/writers" },
+          { label: "Overview", slug: "components/writers" },
           {
             label: "Business Intelligence",
+            collapsed: true,
             items: [
-              { slug: "components/writers/bi-tools" },
+              { label: "Overview", slug: "components/writers/bi-tools" },
               { slug: "components/writers/bi-tools/gooddata" },
               { slug: "components/writers/bi-tools/looker" },
               { slug: "components/writers/bi-tools/tableau" },
@@ -301,8 +325,9 @@ export const sidebar = [
           },
           {
             label: "Database",
+            collapsed: true,
             items: [
-              { slug: "components/writers/database" },
+              { label: "Overview", slug: "components/writers/database" },
               { slug: "components/writers/database/bigquery" },
               { slug: "components/writers/database/exasol" },
               { slug: "components/writers/database/firebolt" },
@@ -317,8 +342,9 @@ export const sidebar = [
           },
           {
             label: "Storage",
+            collapsed: true,
             items: [
-              { slug: "components/writers/storage" },
+              { label: "Overview", slug: "components/writers/storage" },
               { slug: "components/writers/storage/aws-s3" },
               { slug: "components/writers/storage/dropbox" },
               { slug: "components/writers/storage/google-cloud-storage" },
@@ -331,8 +357,9 @@ export const sidebar = [
           },
           {
             label: "Other",
+            collapsed: true,
             items: [
-              { slug: "components/writers/other" },
+              { label: "Overview", slug: "components/writers/other" },
               { slug: "components/writers/other/azure-event-hub" },
               { slug: "components/writers/other/yourpass" },
             ],
@@ -341,12 +368,14 @@ export const sidebar = [
       },
       {
         label: "Applications",
+        collapsed: true,
         items: [
-          { slug: "components/applications" },
+          { label: "Overview", slug: "components/applications" },
           {
             label: "Triggers",
+            collapsed: true,
             items: [
-              { slug: "components/applications/triggers" },
+              { label: "Overview", slug: "components/applications/triggers" },
               { slug: "components/applications/triggers/exasol-cluster-starter" },
               { slug: "components/applications/triggers/orchestration-trigger-queue-v2" },
               { slug: "components/applications/triggers/dbt-cloud-job-trigger" },
@@ -356,8 +385,9 @@ export const sidebar = [
           { slug: "components/applications/data-gateway" },
           {
             label: "AI",
+            collapsed: true,
             items: [
-              { slug: "components/applications/ai" },
+              { label: "Overview", slug: "components/applications/ai" },
               { slug: "components/applications/ai/generative-ai" },
             ],
           },
@@ -369,23 +399,26 @@ export const sidebar = [
   },
   {
     label: "Data Catalog",
+    collapsed: true,
     items: [
-      { slug: "catalog" },
+      { label: "Overview", slug: "catalog" },
       { slug: "catalog/multi-project" },
     ],
   },
   {
     label: "Storage",
+    collapsed: true,
     items: [
-      { slug: "storage" },
+      { label: "Overview", slug: "storage" },
       { slug: "storage/buckets" },
       { slug: "storage/data-streams" },
       { slug: "storage/files" },
       { slug: "storage/jobs" },
       {
         label: "Tables & Aliases",
+        collapsed: true,
         items: [
-          { slug: "storage/tables" },
+          { label: "Overview", slug: "storage/tables" },
           { slug: "storage/tables/data-types" },
           { slug: "storage/tables/csv-files" },
           { slug: "storage/tables/uploads" },
@@ -394,8 +427,9 @@ export const sidebar = [
       },
       {
         label: "Bring Your Own Database",
+        collapsed: true,
         items: [
-          { slug: "storage/byodb" },
+          { label: "Overview", slug: "storage/byodb" },
           { slug: "storage/byodb/external-buckets" },
           { slug: "storage/byodb/snowflake-secure-data-sharing" },
         ],
@@ -405,14 +439,16 @@ export const sidebar = [
   },
   {
     label: "Transformations",
+    collapsed: true,
     items: [
-      { slug: "transformations" },
+      { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
       { slug: "transformations/variables" },
       {
         label: "dbt Transformation",
+        collapsed: true,
         items: [
-          { slug: "transformations/dbt" },
+          { label: "Overview", slug: "transformations/dbt" },
           { slug: "transformations/dbt/cli" },
           { slug: "transformations/dbt/transformation" },
           { slug: "transformations/dbt/cloud" },
@@ -423,8 +459,9 @@ export const sidebar = [
       { slug: "transformations/python-plain" },
       {
         label: "R Transformations",
+        collapsed: true,
         items: [
-          { slug: "transformations/r-plain" },
+          { label: "Overview", slug: "transformations/r-plain" },
           { slug: "transformations/r-plain/array-splitter" },
           { slug: "transformations/r-plain/plots" },
           { slug: "transformations/r-plain/binary" },
@@ -438,24 +475,27 @@ export const sidebar = [
   },
   {
     label: "Workspaces",
+    collapsed: true,
     items: [
-      { slug: "workspace" },
+      { label: "Overview", slug: "workspace" },
       { slug: "workspace/snowflake-workspaces-access-changes" },
       { slug: "workspace/sql-editor" },
     ],
   },
   {
     label: "Management",
+    collapsed: true,
     items: [
-      { slug: "management" },
+      { label: "Overview", slug: "management" },
       { slug: "management/support" },
       { slug: "management/account" },
       { slug: "management/jobs" },
       { slug: "management/notifications" },
       {
         label: "Project",
+        collapsed: true,
         items: [
-          { slug: "management/project" },
+          { label: "Overview", slug: "management/project" },
           { slug: "management/project/users" },
           { slug: "management/project/tokens" },
           { slug: "management/project/limits" },
@@ -471,8 +511,9 @@ export const sidebar = [
       { slug: "management/global-search" },
       {
         label: "Telemetry",
+        collapsed: true,
         items: [
-          { slug: "management/telemetry" },
+          { label: "Overview", slug: "management/telemetry" },
           { slug: "management/telemetry/telemetry-dashboards" },
         ],
       },
@@ -480,15 +521,17 @@ export const sidebar = [
   },
   {
     label: "AI Features",
+    collapsed: true,
     items: [
-      { slug: "ai" },
+      { label: "Overview", slug: "ai" },
       { slug: "ai/mcp-server" },
     ],
   },
   {
     label: "External Integrations",
+    collapsed: true,
     items: [
-      { slug: "external-integrations" },
+      { label: "Overview", slug: "external-integrations" },
       { slug: "external-integrations/n8n" },
     ],
   },

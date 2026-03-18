@@ -1,0 +1,20 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import CopyMarkdown from './CopyMarkdown.astro';
+---
+
+<div class="page-title-row">
+  <Default {...Astro.props}><slot /></Default>
+  <CopyMarkdown />
+</div>
+
+<style>
+  .page-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

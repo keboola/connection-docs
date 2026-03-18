@@ -31,7 +31,6 @@ They are deleted from the transformation staging area when the execution finishe
 *Table names referenced by mappings are automatically quoted by Keboola. 
 This is especially important for Snowflake, which is case sensitive.*
 
-## Overview
 The concept of mapping helps to make the transformations repeatable and protect the project [Storage](/storage/). 
 You can always rely on the following:
 - Having an empty staging Storage (no need to clean up before transformations)

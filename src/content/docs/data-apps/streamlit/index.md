@@ -7,8 +7,6 @@ redirect_from:
 
 
 
-## Overview
-
 Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code. It is the fastest way to build data apps in Keboola, perfect for rapid prototyping and internal tools.
 
 **When to Use Streamlit:**

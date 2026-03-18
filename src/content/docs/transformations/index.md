@@ -23,7 +23,6 @@ A transformation [**backend**](/transformations/#backends) executes the transfor
 of the transformation script, all transformations are **automatically versioned**, and you can use a **workspace**
 that provides a copy of the environment and can be run interactively.
 
-## Overview
 The schema below shows a high-level overview of transformations:
 
 ![Transformations schema](/transformations/transformations-schema.svg)

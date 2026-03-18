@@ -7,8 +7,6 @@ slug: 'ai'
 
 Keboola's AI-powered capabilities help you build, optimize, and automate your data pipelines with intelligent assistance. From automated flow creation to smart component recommendations, our AI features are designed to accelerate your data operations and reduce manual effort.
 
-## Overview
-
 Keboola integrates artificial intelligence throughout the platform to enhance productivity, simplify complex tasks, and provide intelligent insights. Whether you're a beginner looking to create your first data pipeline or an experienced data engineer optimizing existing workflows, our AI features adapt to your needs and skill level. Following AI features are currently available on Keboola platform:
 
 ### Kai - AI Assistant

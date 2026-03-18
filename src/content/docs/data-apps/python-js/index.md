@@ -5,8 +5,6 @@ slug: 'data-apps/python-js'
 
 
 
-## Overview
-
 Python/JavaScript Data Apps give you full control over what you build and how you build it. Unlike Streamlit Data Apps - which use a ready-made Python environment - Python/JS Data Apps let you use **any Python web framework** (Flask, FastAPI, Dash), serve a **JavaScript frontend**, or combine both. You bring the code; Keboola handles the hosting, access control, and data connectivity.
 
 This guide assumes you are building with the help of an AI assistant. Every step is explained in plain language - no deep technical knowledge required.

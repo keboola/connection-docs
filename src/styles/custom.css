@@ -1,17 +1,26 @@
 /* Use Lato font via Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* Keboola brand overrides — only accent color and font */
 :root {
+  --sl-font: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Light theme accents */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #daeeff;
+  --sl-color-accent: #0070cc;
+  --sl-color-accent-high: #003566;
+}
+
+/* Dark theme accents */
+:root[data-theme='dark'] {
   --sl-color-accent-low: #1a3a5c;
   --sl-color-accent: #1f8fff;
   --sl-color-accent-high: #b3d9ff;
-  --sl-font: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #f5f6f8;
-  --sl-color-gray-2: #e8eaed;
-  --sl-color-gray-3: #b4b8be;
-  --sl-color-gray-4: #7b8189;
-  --sl-color-gray-5: #444950;
-  --sl-color-gray-6: #2a2d31;
-  --sl-color-black: #181a1e;
+}
+
+/* Make logo visible in dark mode */
+:root[data-theme='dark'] .site-title img {
+  filter: brightness(0) invert(1);
 }

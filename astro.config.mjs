@@ -22,19 +22,20 @@ export default defineConfig({
       plugins: [starlightImageZoom()],
       customCss: ['./src/styles/custom.css'],
       head: [
-        // GTM head script — only for production
+        // GTM head script — only fires on help.keboola.com (not localhost/preview)
         {
           tag: 'script',
-          content: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          content: `if(location.hostname==='help.keboola.com'){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-WMTTBS');`,
+          })(window,document,'script','dataLayer','GTM-WMTTBS');}`,
         },
       ],
       sidebar,
       components: {
         Head: './src/components/Head.astro',
+        PageTitle: './src/components/PageTitle.astro',
       },
       pagination: false,
       editLink: {

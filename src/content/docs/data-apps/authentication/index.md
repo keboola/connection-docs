@@ -8,8 +8,6 @@ redirect_from:
 
 
 
-## Overview
-
 Once a data app is deployed, its URL is publicly available! We recommend using one of the built-in authentication methods described below to protect your app.
 
 Keboola provides several built-in authentication methods to control who can access your data apps. Choose the method that best fits your security requirements.

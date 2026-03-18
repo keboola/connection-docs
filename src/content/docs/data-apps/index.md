@@ -7,8 +7,6 @@ redirect_from:
 
 
 
-## Overview
-
 Data apps are simple, interactive web applications that use data to deliver insights or automatically take action. They are custom-tailored to tackle specific business problems and enable dynamic, purpose-built user experiences.
 
 As web applications deployed within your Keboola project, data apps can be publicly accessed from outside the project. This means users accessing your data app do not need access to a Keboola project - they simply visit a URL.

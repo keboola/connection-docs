@@ -9,8 +9,6 @@ Keboola's external integration capabilities let you seamlessly extend the platfo
 
 > Keboola integrates with external tools at multiple levels, from low-level API access to ready-made workflow platforms. This flexibility allows you to choose the approach that best fits your team's needs.
 
-## Overview
-
 External integrations make it simple to connect Keboola with other platforms and services. Whether you want to trigger data pipeline runs from external systems, enrich data with AI tools, or orchestrate workflows across multiple services, Keboola provides flexible ways to integrate:
 
 ### REST API
