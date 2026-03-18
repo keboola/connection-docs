@@ -54,24 +54,7 @@ When Kai wants to modify your project, you'll see a tool approval prompt. Review
 
 You can also click **Always allow** directly in the approval dialog to skip future confirmations for that specific tool.
 
-## Tool Permissions
-
-Tool Permissions let you control which tools Kai can use in your project. Open the Kai chat panel and go to **Settings → Tool Permissions** to configure them.
-
-Tools are divided into two categories:
-
-- **Read-only tools** — Tools that only read data from your project (e.g., listing tables, reading configurations).
-- **Write tools** — Tools that can modify your project (e.g., creating or updating configurations, running transformations).
-
-For each tool, you can set one of three permission levels:
-
-| Permission | Behavior |
-|------------|----------|
-| **Always allow** | The tool runs automatically without asking for confirmation. |
-| **Always ask** | Kai must request your approval each time before using the tool. |
-| **Block** | The tool is completely disabled and Kai cannot use it. |
-
-Your permissions persist across all conversations and are **per-user and per-project**, so each team member can configure their own preferences independently.
+For more granular control, see [Tool Permissions](/kai/settings/#tool-permissions) in Kai Settings.
 
 ## Contextual Awareness & Follow Mode
 
@@ -122,5 +105,6 @@ Each user receives **150 turns (messages) per month per project** on contracted 
 
 ## Next Steps
 
+- [Kai Settings](/kai/settings/) — Configure Tool Permissions and System Instructions
 - [Use Cases & Examples](/kai/use-cases/)
 - [Best Practices](/kai/best-practices/)
