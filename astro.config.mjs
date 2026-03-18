@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
 import { sidebar } from './src/sidebar.mjs';
+import redirectFrom from './src/integrations/redirect-from.mjs';
 
 export default defineConfig({
   site: 'https://help.keboola.com',
@@ -10,6 +11,7 @@ export default defineConfig({
     format: 'directory',
   },
   integrations: [
+    redirectFrom(),
     starlight({
       title: 'Keboola User Documentation',
       logo: {
