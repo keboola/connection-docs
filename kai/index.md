@@ -55,7 +55,7 @@ Kai is now in **Public Beta** and available to all users. Look for the **KAI** b
 
 ## Security & Privacy
 
-Your data is never used for AI training, is encrypted everywhere, and is automatically deleted after processing.
+Your data is never used for AI training and is automatically deleted after processing.
 
 [Learn more about Kai security →](/kai/security-and-privacy/)
 
