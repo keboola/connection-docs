@@ -31,13 +31,13 @@ Kai is designed with enterprise security in mind. This page explains how your da
 
 By default, Kai uses Google Vertex AI under Keboola's commercial agreement, which guarantees zero data retention for model training and automatic deletion after 30 seconds.
 
-**Bring Your Own Keys (BYOK)** — Enterprise customers can optionally configure Kai to use their own AI provider credentials (Anthropic, OpenAI, Azure OpenAI, or Google Vertex AI). This gives you:
+**Bring Your Own LLM (BYOLLM)** — Enterprise customers can optionally configure Kai to use their own AI provider credentials (Azure AI Foundry or Google Vertex AI). Additional providers will be available in the future. This gives you:
 - Direct control over which AI provider processes your data
 - Your own commercial agreements and compliance terms
 - Usage billed directly to your AI provider account
 - Additional control for regulated industries
 
-Contact [support@keboola.com](mailto:support@keboola.com) to discuss BYOK options.
+Contact [support@keboola.com](mailto:support@keboola.com) to discuss BYOLLM options.
 
 ## Access & Control
 
@@ -67,7 +67,7 @@ Kai leverages Keboola's existing security certifications:
 
 Default AI provider (Google Vertex AI) maintains SOC 2 Type II, ISO 27001, GDPR, and HIPAA certifications.
 
-When using BYOK, compliance depends on your chosen provider and commercial agreement.
+When using BYOLLM, compliance depends on your chosen provider and commercial agreement.
 
 ## Questions?
 
