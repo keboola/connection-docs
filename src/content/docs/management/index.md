@@ -1,0 +1,63 @@
+---
+title: Management
+slug: 'management'
+redirect_from:
+  - /tutorial/management/
+---
+
+
+
+Everything you do in Keboola must take place within a Keboola **Project**, its basic organizational unit.
+All projects are grouped into [**Organizations**](/management/organization/).
+
+### Data Governance
+Everything that happens with your data in Keboola at any stage of your project is recorded.
+It enables you to use your uploaded data for other tables, access previous versions of your tables, and
+extract all your project data. Everything done in Keboola is traceable, and if possible, also recoverable.
+
+- [**Jobs**](/management/jobs/#jobs) --- give you an overview of all your jobs,
+running and finished (what tables were modified, how much data was transferred and
+what events occurred during the job execution).
+- [**Storage Jobs**](/management/jobs/#storage-jobs) --- track all data
+which were uploaded/downloaded into your project.
+- [**Table Snapshots**](/storage/tables/backups/#table-snapshots) --- allow you to revert data
+to an earlier version (either revert the contents of a table or copy the table into another one).
+- [**Data Takeout**](/management/project/export/) --- allows you to get your data back from us; in Keboola, you are
+always the sole owner of your data. Data Takeout is especially useful for proof-of-concept projects.
+- [**Trash tab**](/components/#delete-configuration) --- allows you to list and restore deleted configurations.
+
+### User Management
+There are three types of Keboola [project users](/management/project/users/):
+
+- **Administrators** --- are all equal as most Keboola operations generally require access to most of the data and functions. These are full-
+fledged trusted users that count against your project quota.
+- **Guest Users** --- with full access to the project data and [limited access](/management/project/users/#user-roles) to project functions. These users 
+count against your project quota.
+- **Tokens/Service Users** --- with [limited access](/management/project/tokens/#limited-tokens) to project data. They can only read or write to
+selected buckets, sending data directly to your Keboola project. These users have only [API tokens](/management/project/tokens/). They can't use the UI and they do not
+ count against your project quota.
+
+### Project Status
+All important information on your project status can be found in the following places:
+
+- **Overview** --- check this section for basic status information about your project.
+- [**Limits tab**](/management/project/limits/) in *Users & Settings* --- check all your measured billable
+metrics, your current limits, as well as the monthly trend. This enables you to control your usage in order to
+stay within your limits. To increase the limits, contact our sales.
+
+![Screenshot - Project Overview](/management/project-overview.png)
+
+### Project Deletion
+It is possible to entirely [delete your project](/management/project/delete/).
+
+### Keboola Support
+There are multiple [ways to obtain support](/management/support/) from our technical staff.
+To solve your problem or to gain context, they may join your project when requested.
+
+### Maintenance
+Keboola performs scheduled maintenance from time to time to keep things running smoothly. This takes place on Saturdays between 6:00 AM and 7:00 AM UTC and won’t happen more than once every 30 days. We make every effort to minimize any disruption during this period, but to avoid any potential interruptions, we recommend not scheduling critical jobs/flows during this maintenance window.
+
+If maintenance is needed outside of the regular window, we’ll post an announcement at least 48 hours in advance on our [status page](https://keboolastatus.com/), unless we’ve agreed on a different way to notify you.
+
+To check how the platform is doing at any moment, visit [stats.keboola.com](http://stats.keboola.com/) or use an alternative tracking method if one has been arranged with you.
+

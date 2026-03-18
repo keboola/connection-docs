@@ -133,7 +133,8 @@ function transformFrontmatter(fmRaw) {
   let i = 0;
 
   while (i < lines.length) {
-    const line = lines[i];
+    // Strip trailing \r to handle Windows line endings
+    const line = lines[i].replace(/\r$/, '');
 
     // --- permalink → slug ---
     const permalinkMatch = line.match(/^permalink:\s*(.+)$/);
