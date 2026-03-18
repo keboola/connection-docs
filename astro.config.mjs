@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
+import { sidebar } from './src/sidebar.mjs';
 
 export default defineConfig({
   site: 'https://help.keboola.com',
@@ -28,10 +29,7 @@ export default defineConfig({
           })(window,document,'script','dataLayer','GTM-WMTTBS');`,
         },
       ],
-      sidebar: [
-        // Placeholder — will be replaced by convert-nav.mjs output
-        { label: 'Home', slug: '' },
-      ],
+      sidebar,
       components: {
         Head: './src/components/Head.astro',
       },

@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "gen:sidebar": "node scripts/convert-nav.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34",
