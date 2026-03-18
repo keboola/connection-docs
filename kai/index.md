@@ -30,13 +30,13 @@ Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pil
 
 **Data engineering focus** — Deep knowledge of Keboola components, transformations, and best practices.
 
-## Kai vs. MCP Server vs. Python Client
+## Kai vs. MCP Server
 
-| Feature | Kai | [MCP Server](/ai/mcp-server/) | [Python Client](/kai/python-client/) |
-|---------|-----|------------------------------|--------------------------------------|
-| **Best for** | Browser workflows, team collaboration | IDE integration, local development | Scripting, automation, programmatic access |
-| **Setup** | None | Requires external tool configuration | `pip install kai-client` |
-| **Audit trail** | Full organizational visibility | Local only | Full organizational visibility |
+| Feature | Kai | [MCP Server](/ai/mcp-server/) |
+|---------|-----|------------------------------|
+| **Best for** | Browser workflows, team collaboration | IDE integration, local development |
+| **Setup** | None | Requires external tool configuration |
+| **Audit trail** | Full organizational visibility | Local only |
 
 ## Getting Started
 
