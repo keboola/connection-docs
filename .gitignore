@@ -10,3 +10,4 @@ Gemfile.lock
 .worktrees
 node_modules
 dist
+.astro

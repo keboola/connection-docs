@@ -1,3 +1,6 @@
+/* Use Lato font via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 :root {
   --sl-color-accent-low: #1a3a5c;
   --sl-color-accent: #1f8fff;
@@ -12,6 +15,3 @@
   --sl-color-gray-6: #2a2d31;
   --sl-color-black: #181a1e;
 }
-
-/* Use Lato font via Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');

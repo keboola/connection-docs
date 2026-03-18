@@ -11,10 +11,10 @@
     "gen:sidebar": "node scripts/convert-nav.mjs"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.34",
-    "astro": "^5",
+    "@astrojs/starlight": "^0.38",
+    "astro": "^6",
     "sharp": "^0.33",
-    "starlight-image-zoom": "^0.10"
+    "starlight-image-zoom": "^0.14"
   },
   "devDependencies": {
     "js-yaml": "^4.1.1"

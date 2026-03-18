@@ -34,7 +34,7 @@ const SKIP_DIRS = new Set([
 const SKIP_FILES = new Set(['README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md']);
 
 /** Image extensions to copy */
-const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg']);
+const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']);
 
 // ---------------------------------------------------------------------------
 // Counters for the summary
