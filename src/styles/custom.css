@@ -96,6 +96,11 @@
   filter: brightness(0) invert(1);
 }
 
+/* Normalize sidebar: make group labels match leaf link styling */
+.sidebar-content details > summary {
+  font-weight: normal;
+}
+
 /* Instant view transitions — no crossfade animation */
 ::view-transition-old(root),
 ::view-transition-new(root) {
