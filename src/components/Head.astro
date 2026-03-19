@@ -15,6 +15,19 @@ import { ClientRouter } from 'astro:transitions';
 </style>
 <Default {...Astro.props}><slot /></Default>
 <ClientRouter fallback="swap" />
+<script is:inline>
+  // Preserve sidebar open/closed state across view transitions
+  document.addEventListener('astro:before-swap', function(e) {
+    var currentDetails = document.querySelectorAll('.sidebar-content details');
+    var newDetails = e.newDocument.querySelectorAll('.sidebar-content details');
+    currentDetails.forEach(function(detail, i) {
+      if (!newDetails[i]) return;
+      // Keep the group containing the active page open, preserve user state for others
+      var hasActive = newDetails[i].querySelector('[aria-current="page"]');
+      newDetails[i].open = hasActive ? true : detail.open;
+    });
+  });
+</script>
 <!-- GTM noscript — only on production hostname -->
 <noscript>
   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMTTBS"
