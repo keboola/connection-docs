@@ -96,9 +96,12 @@
   filter: brightness(0) invert(1);
 }
 
-/* Normalize sidebar: make group labels match leaf link styling */
-.sidebar-content details > summary {
-  font-weight: normal;
+/* Normalize nested sidebar groups to match leaf link styling.
+   Top-level groups keep .large (bold + bigger), but sub-groups should
+   look the same as regular links. */
+details details .large {
+  font-size: var(--sl-text-sm) !important;
+  font-weight: normal !important;
 }
 
 /* Instant view transitions — no crossfade animation */
