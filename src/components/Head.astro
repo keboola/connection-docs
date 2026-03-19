@@ -3,8 +3,18 @@ import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Head.astro';
 import { ClientRouter } from 'astro:transitions';
 ---
+{/* Anti-FOUC: set background + disable VT animations before any external CSS */}
+<style is:inline>
+  html { background: hsl(224, 10%, 10%); }
+  html[data-theme='light'] { background: #fff; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    mix-blend-mode: normal !important;
+  }
+</style>
 <Default {...Astro.props}><slot /></Default>
-<ClientRouter />
+<ClientRouter fallback="swap" />
 <!-- GTM noscript — only on production hostname -->
 <noscript>
   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMTTBS"

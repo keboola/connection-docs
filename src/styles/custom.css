@@ -95,3 +95,10 @@
 :root[data-theme='dark'] .site-title img {
   filter: brightness(0) invert(1);
 }
+
+/* Instant view transitions — no crossfade animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none !important;
+  mix-blend-mode: normal !important;
+}
