@@ -7,6 +7,10 @@ import redirectFrom from './src/integrations/redirect-from.mjs';
 export default defineConfig({
   site: 'https://help.keboola.com',
   trailingSlash: 'always',
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
   build: {
     format: 'directory',
   },

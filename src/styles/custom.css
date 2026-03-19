@@ -20,13 +20,6 @@
   --sl-color-accent-high: #b3d9ff;
 }
 
-/* Disable view transition animation — instant page swap, no flash */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
 /* Make logo visible in dark mode */
 :root[data-theme='dark'] .site-title img {
   filter: brightness(0) invert(1);
