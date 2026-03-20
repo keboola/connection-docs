@@ -63,8 +63,7 @@ Depending on the transformation types, you can either build your transformations
 with database tables or with CSV files. Furthermore, the CSV files can be placed locally with the transformation
 script or they can be placed on a remote storage such as [Amazon S3](https://aws.amazon.com/s3/) or 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
-The supported database types are [Snowflake](https://www.snowflake.com/), 
-[Redshift](https://aws.amazon.com/redshift/), and [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/).
+The supported database type is [Snowflake](https://www.snowflake.com/).
 
 {: .image-popup}
 ![Table Input mapping](/transformations/mappings/table-input-mapping.png)
@@ -246,8 +245,7 @@ Depending on the transformation backend, the table output mapping process can do
 the project [Storage tables](/storage/tables/).
 - In case of **File Staging** --- import the specified *CSV files* into project [Storage tables](/storage/tables/).
 
-The supported staging database types are as follows: [Snowflake](https://www.snowflake.com/), 
-[Redshift](https://aws.amazon.com/redshift/), and [Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/). 
+The supported staging database type is [Snowflake](https://www.snowflake.com/).
 The supported staging for CSV files is a storage local to the transformation.
 
 {: .image-popup}

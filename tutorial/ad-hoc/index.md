@@ -283,7 +283,7 @@ For more information about workspaces (including disk and memory limits), see th
 
 ## Final Note
 This is the end of our stroll around Keboola. On our walk, we missed quite a few things:
-Applications, Python and R transformations, Redshift and Snowflake features, to name a few.
+Applications, Python and R transformations, Snowflake features, to name a few.
 However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola can help in connecting different systems together.
 
