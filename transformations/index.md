@@ -63,9 +63,7 @@ tables from the input mapping are taken, modified, and produced into the tables 
 
 A backend is the engine running the transformation script. It is a database server
 ([Snowflake](https://www.snowflake.com/),
-[Exasol](https://www.exasol.com/),
-[Teradata](https://www.teradata.com/),
-[BigQuery](https://cloud.google.com/bigquery)), 
+[BigQuery](https://cloud.google.com/bigquery)),
 or a language interpreter 
 ([Python](https://www.python.org/about/),
 [R](https://www.r-project.org/about.html)).
@@ -268,4 +266,4 @@ When triggered
 
 With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
-for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).      
+for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).        

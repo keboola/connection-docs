@@ -18,7 +18,7 @@ storage, and processes. It provides a structured framework for distributing task
 Each project includes the following key components:
 
 1. **Storage**
-   - Relational databases such as Snowflake, Exasol, and others
+   - Relational databases such as Snowflake, BigQuery, and others
    - Object storage options like S3 or Azure Blob Storage
 2. **Components**
    - Data sources and destinations for loading data into Keboola Storage and exporting to databases, services, or applications
