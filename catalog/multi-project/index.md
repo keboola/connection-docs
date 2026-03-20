@@ -78,7 +78,7 @@ come to the company, they can simply create a new project, use the shared data w
 working immediately. If the word "everyone" in the above statement is undesired, then the access can be tied down by using a different
 [sharing type](/catalog/#sharing-types). The multi architecture setup also creates an interface. If the Oracle DBAs need to change 
 anything in the database schema, they can do that in an unlimited number of arbitrarily sized steps, provided that the shared data 
-remains same. For that they can use the entire power of SQL, Python, R and Julia transformations combined. This is a much more flexible 
+remains same. For that they can use the entire power of SQL, Python, and R transformations combined. This is a much more flexible 
 solution then the traditional way of creating views. Then there is, of course, the advantage that you can work with the Oracle data 
 even when the server is down; but that's integral part of Keboola.
 
