@@ -11,7 +11,7 @@ Designed for data engineers, analysts, and scientists, Keboola **simplifies data
 
 Key features of Keboola:
 - **Data Integration:** Effortlessly extract data from various sources like databases, cloud services, and APIs. Load it seamlessly into destinations of your choice for comprehensive analysis.
-- **Data Storage:** Use Keboola's robust data warehousing (Snowflake, BigQuery, Redshift, Synapse, etc.) for secure and accessible data storage. 
+- **Data Storage:** Use Keboola's robust data warehousing (Snowflake, BigQuery, etc.) for secure and accessible data storage. 
 - **Data Manipulation:** With our extensive toolset, clean, enrich, and transform your data using SQL, Python, R, and more directly within Keboola.
 - **Automation:**  Automate your data workflows end-to-end with Keboola's intuitive Flows, saving time and reducing manual errors.
 
@@ -23,7 +23,7 @@ Keboola supports various deployment models to suit your specific needs:
 
 - **Fully Managed:** Let us handle everything for you.
 - **Multi-Tenant:** Let us fully manage and maintain all resources.
-- **Multi-Tenant with BYO Database:** Use your data storage (Snowflake, BigQuery, Redshift, Synapse, etc.) while we manage the rest.
+- **Multi-Tenant with BYO Database:** Use your data storage (Snowflake, BigQuery, etc.) while we manage the rest.
 - **Single-Tenant:** Deploy Keboola in your cloud environment (AWS, Azure, GCP) for maximum control and security.
 
 ## Keboola Architecture
@@ -47,13 +47,13 @@ to gather data from various sources. They can connect to APIs of external servic
 - [Table Storage](https://help.keboola.com/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
 
 This component acts as a middle layer that works with various [backend](/transformations/#backends) database systems like 
-[Snowflake](https://www.snowflake.com/), [Redshift](https://aws.amazon.com/redshift/), [BigQuery](https://cloud.google.com/bigquery/),
-[Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/), [and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
+[Snowflake](https://www.snowflake.com/), [BigQuery](https://cloud.google.com/bigquery/),
+[and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
 making it easier to connect with other parts of the system and third-party applications.
 
 ### Transformations & Workspaces
 [Transformations](/transformations/) allow you to manipulate data in your project. They are the tasks you want to perform and enable you to write custom scripts
-in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, BigQuery, etc.), dbt, [Python](https://www.python.org/about/), 
+in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, BigQuery, etc.), dbt, [Python](https://www.python.org/about/), 
 and [R](https://www.r-project.org/about.html). 
 
 All transformations operate on a copy of Storage data in an isolated environment — a [workspace](/workspace/), guaranteeing safety for your
