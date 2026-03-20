@@ -53,14 +53,14 @@ making it easier to connect with other parts of the system and third-party appli
 
 ### Transformations & Workspaces
 [Transformations](/transformations/) allow you to manipulate data in your project. They are the tasks you want to perform and enable you to write custom scripts
-in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, BigQuery, etc.), dbt, [Julia](https://julialang.org/), [Python](https://www.python.org/about/), 
+in [SQL](https://en.wikipedia.org/wiki/SQL) (Snowflake, Redshift, BigQuery, etc.), dbt, [Python](https://www.python.org/about/), 
 and [R](https://www.r-project.org/about.html). 
 
 All transformations operate on a copy of Storage data in an isolated environment — a [workspace](/workspace/), guaranteeing safety for your
 analyses and experimentation. Workspaces support collaborations and can be shared. 
 
 - **SQL workspaces** are accessible through the database provider's IDE or your preferred SQL IDE.
-- **Python, R, or Julia workspaces** are available through Keboola's hosted and managed Jupyter Lab environment.
+- **Python and R workspaces** are available through Keboola's hosted and managed JupyterLab environment.
 
 ### Applications
 Unlike free-form transformations, [applications](/components/applications/) are **predefined blocks** that enable users to perform advanced tasks such as 

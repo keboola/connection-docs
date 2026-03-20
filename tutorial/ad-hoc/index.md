@@ -11,7 +11,7 @@ features related to doing ad-hoc analysis.
 
 This part of the tutorial shows how to work with arbitrary data in Python
 in a completely unrestricted way. Although our examples use the Python language,
-the very same can be achieved using R or Julia.
+the very same can be achieved using R.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
 
@@ -277,14 +277,13 @@ simply copy&paste it into a [Transformation](/tutorial/manipulate/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](https://jupyter.org/). The same can be done in the
-[R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/),
-or in [Julia](https://julialang.org/) using [Jupyter Notebook](https://jupyter.org/).
+[R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/).
 For more information about workspaces (including disk and memory limits), see the
 [corresponding documentation](/workspace/).
 
 ## Final Note
 This is the end of our stroll around Keboola. On our walk, we missed quite a few things:
-Applications, Python, R and Julia transformations, Redshift and Snowflake features, to name a few.
+Applications, Python and R transformations, Redshift and Snowflake features, to name a few.
 However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola can help in connecting different systems together.
 
