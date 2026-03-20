@@ -19,8 +19,6 @@ and ideally, also perform a dry run to check that the data in the target system 
 that runs, e.g., every ten minutes, is difficult without an outage of the pipeline. Development Branches are designed
 to help in such situations.
 
-{% include public-beta-warning.html %}
-
 ## How Branches Work
 
 When you create a development branch in your project, you obtain an exact copy of the project and all its current
