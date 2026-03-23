@@ -6,7 +6,7 @@ permalink: /management/telemetry/telemetry-dashboards/
 * TOC
 {:toc}
 
-*Note: Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to "Connection" or the abbreviation "KBC" might still appear in table
+***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to "Connection" or the abbreviation "KBC" might still appear in table
 names, column names, etc.*
 
 The telemetry dashboards help you understand how your Keboola projects and organization consume resources. To access them, click your profile picture in the top right corner.
