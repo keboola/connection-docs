@@ -34,7 +34,7 @@ Keep in mind that the tables *contact_limit_monthly*, *kbc_organization*, and *u
 ***Note:** You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
 
 ## Project Mode Tables
-The extracted tables provide you with information about your buckets, configurations, branches, jobs, sandboxes, projects, users, and security events.
+The extracted tables provide you with information about your buckets, configurations, branches, jobs, AI agent and MCP interactions, sandboxes, projects, users, and security events.
 
 ### kbc_bucket_snapshot
 This table shows snapshots of buckets in Storage.
@@ -227,6 +227,37 @@ This table lists Keboola [jobs](/management/jobs/)
 | `dwh_large_ratio` | Ratio of Large DWH used for SQL transformations (sum of ratios might be <1, may partially run on free DWH) | `0` |
 | `backend_size` | Backend used for data science transformations (`Small`, `Medium`, `Large`) | `Small` |
 | `company_id` | Identifier of the company the event belongs to | `011t00000Gs3BiAAJ` |
+
+### kbc_mcp_event
+This table captures [MCP](/ai/mcp-server/) (Model Context Protocol) interaction events — every tool call made against a Keboola project
+through an MCP server. This includes calls from external MCP clients (e.g., Claude Desktop, Cursor) as well as
+Keboola's internal AI agents such as [Kai](/ai/kai-assistant/) and AI Chat. Each row represents a single tool invocation with its
+input arguments, outcome (success or error), duration, and the context of the caller.
+
+The table enables analysis of AI-assisted operations: what tools are used, by whom, how often they fail,
+which environments and agent types drive the most activity, and how MCP adoption evolves over time.
+
+| **Column** | **Description** | **Example** |
+|---|---|---|
+| `kbc_mcp_event_id` (PK) | Unique identifier of the MCP event | `019d032f-b425-7692-bb3c-638fed287c7a_com-keboola-gcp-us-east4` |
+| `kbc_project_id` (FK) | Foreign key to the Keboola project where the tool call was executed | `361_com-keboola-gcp-us-east4` |
+| `event_created_at` | Timestamp when the MCP event occurred | `2026-03-18 23:02:31.000` |
+| `event` | Event source identifier indicating the MCP server component that handled the call. Possible values include: <br> `ext.keboola.mcp-server-tool.` – external MCP server tool call, <br> `ext.keboola.kai-assistant.` – Kai assistant tool call, <br> `ext.keboola.ai-chat.` – AI Chat tool call | `ext.keboola.kai-assistant.` |
+| `type` | Outcome of the tool call (`success`, `error`) | `success` |
+| `kbc_token_id` (FK) | Composite identifier of the token used for the MCP session (numeric ID + stack) | `1177215_com-keboola-gcp-us-east4` |
+| `token_name` | Name of the token used for the MCP session — typically the user's email for interactive sessions or a scheduler token name for automated calls | `some_user@example.com` |
+| `api_version` | Version of the Keboola API used by the MCP server | `v2` |
+| `http_user_agent` | HTTP user agent string of the MCP server, including server version, environment, and transport protocol | `Keboola MCP Server/1.48.4 app_env=local transport=http-compat/streamable-http` |
+| `mcp_user_agent` | User agent of the MCP client connecting to the server (e.g., the IDE or AI tool). Identifies the caller application | `claude-ai/0.1.0` |
+| `mcp_version` | Version of the Keboola MCP server that processed the call | `1.48.4` |
+| `mcp_environment` | Deployment environment of the MCP server. `DEV` for local/external clients; production hashes for Keboola-hosted agents (Kai, AI Chat) | `DEV` |
+| `mcp_conversation_id` | Unique identifier linking tool calls within the same conversation session. Empty for external clients that don't report conversation context | `4a22b77b-5a08-4ec3-8477-3c6f4369c418` |
+| `tool` | Name of the MCP tool that was called (e.g., `query_data`, `get_project_info`, `create_sql_transformation`) | `query_data` |
+| `tool_arguments` | JSON array of key-value pairs representing the arguments passed to the tool call | `[{"key":"bucket_ids","value":"[]"}]` |
+| `duration` | Duration of the tool call execution in seconds | `3` |
+| `message` | Result message — a success confirmation or the full error message for failed calls | `MCP tool "query_data" call succeeded.` |
+| `agent_type` | Type of agent that made the call. Possible values: <br> `external` – an external MCP client (Claude Desktop, Cursor, etc.), <br> `kai-assistant` – the Keboola Kai assistant, <br> `ai-chat` – the Keboola AI Chat | `kai-assistant` |
+| `is_keboola_agent_event` | Flag indicating whether the event originated from a Keboola-managed AI agent (`true` for Kai and AI Chat, `false` for external clients) | `true` |
 
 ### kbc_project
 This table shows data about Keboola [projects](/management/project/) 
