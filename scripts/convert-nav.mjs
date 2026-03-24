@@ -40,7 +40,7 @@ function convertItem(item) {
 
   // Special case: Home page
   if (item.url === '/') {
-    return { label: 'Home', slug: '' };
+    return { label: 'Home', slug: 'index' };
   }
 
   // Leaf node — no children

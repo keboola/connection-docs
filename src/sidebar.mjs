@@ -2,7 +2,7 @@
 // Re-generate with:  node scripts/convert-nav.mjs
 
 export const sidebar = [
-  { label: "Home", slug: "" },
+  { label: "Home", slug: "index" },
   { slug: "overview" },
   {
     label: "Getting Started Tutorial",
