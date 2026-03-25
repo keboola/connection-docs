@@ -138,6 +138,12 @@ table {
   code.td-break-code {
     word-break: break-all;
   }
+
+  // Force long code examples (JSON, URLs) to wrap instead of overflowing
+  td code {
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
 }
 
 .root {

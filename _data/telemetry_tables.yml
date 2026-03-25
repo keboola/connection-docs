@@ -1,0 +1,2628 @@
+tables:
+  # ===================== PROJECT MODE =====================
+
+  - id: kbc_bucket_snapshot
+    mode: project
+    description: "This table shows snapshots of buckets in Storage."
+    is_full_load: false
+    columns:
+      - name: bucket_id
+        pk: true
+        description: "Identifier for the storage bucket"
+        example: "`1147628`"
+      - name: kbc_project_id
+        pk: true
+        fk: kbc_project
+        description: "Foreign key to a Keboola project"
+        example: "`866_kbc-eu-central-1`"
+      - name: snapshot_date
+        pk: true
+        description: "Date of the data snapshot"
+        example: "`2020-06-30`"
+      - name: stage
+        description: "Storage stage of the bucket"
+        example: "`in`"
+      - name: bucket
+        description: "Default name of the bucket"
+        example: "`c-instagram`"
+      - name: bucket_display_name
+        description: "Name of the bucket that can be changed by the user (if not changed, it is the same as `bucket` without `c-` at the beginning)"
+        example: "`instagram_posts`"
+      - name: rows
+        description: "Number of rows in the bucket as of the date of the snapshot"
+        example: "`4714`"
+      - name: bytes
+        description: "Size of the bucket in bytes as of the date of the snapshot"
+        example: "`1870336`"
+      - name: sharing_type
+        description: "Type of bucket sharing (Data Catalog). <br> Possible values: `none` -- not shared, <br> `target` -- bucket linked from another project, <br>`source` / `org private` -- bucket shared from this project, linkable only by organization members <br> `source` / `org public` -- bucket shared from this project, linkable by any project members"
+        example: "`target`"
+      - name: shared_from_project_id
+        description: "Identifier of the source project if the bucket is linked (sharing_type = 'target')"
+        example: "`860_kbc-eu-central-1`"
+      - name: shared_from_bucket
+        description: "Identifier of the source bucket if the bucket is linked (sharing_type = 'target')"
+        example: "`in.c-keboola-ex-instagram-152387726`"
+      - name: is_external_schema
+        description: "Flag indicating if the bucket contains data from external sources (`1`, `0`)"
+        example: "`1`"
+      - name: kbc_branch_id
+        pk: true
+        fk: kbc_branch
+        description: "Foreign key to the Keboola branch"
+        example: "`3419_kbc-eu-central-1`"
+      - name: kbc_bucket_owner_id
+        description: "Optional field indicating who is responsible for shared data, used for tracking ownership in bucket sharing and the data catalog"
+        example: "`11358_kbc-eu-central-1`"
+
+  - id: kbc_branch
+    mode: project
+    description: "This table shows main and development [branches](/components/branches/) in the project."
+    is_full_load: false
+    columns:
+      - name: kbc_branch_id
+        pk: true
+        description: "Keboola Branch identifier"
+        example: "`3419_kbc-eu-central-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to a Keboola project"
+        example: "`866_kbc-eu-central-1`"
+      - name: kbc_branch
+        description: "Name of the branch"
+        example: "`My dev branch`"
+      - name: kbc_branch_created_at
+        description: "Datetime of the branch creation"
+        example: "`2022-05-18 06:13:45`"
+      - name: is_default
+        description: "Determines if the branch is the main (default) branch (`true`, `false`)"
+        example: "`false`"
+      - name: token_id
+        description: "Identifier of the token that created this branch"
+        example: "`241247`"
+      - name: token_name
+        description: "Name of the token that created this branch"
+        example: "`john.doe@keboola.com`"
+      - name: kbc_token_id
+        description: "Unique identifier of the token containing stack identification"
+        example: "`241247_kbc-us-east-1`"
+
+  - id: kbc_component_configuration
+    mode: project
+    description: "This table lists the [configurations of components](/components/#creating-component-configuration) (e.g., a configuration of the AWS S3 data source connector)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_component_configuration_id
+        pk: true
+        description: "Identifier for the component configuration"
+        example: "`580_kbc-us-east-1_keboola.python- transformation-v2-610931033`"
+      - name: kbc_component_configuration_url
+        description: "URL of the configuration in the Keboola project"
+        example: "`https://connection.keboola.com/ admin/projects/580/transformations/ bucket/152336525`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`580_kbc-us-east-1`"
+      - name: kbc_component_id
+        description: "Identifier of the component"
+        example: "`keboola.python-transformation-v2`"
+      - name: kbc_component
+        description: "Name of the component"
+        example: "`Generic`"
+      - name: kbc_component_type
+        description: "Identifier of the component type"
+        example: "`extractor`"
+      - name: kbc_component_vendor
+        description: "Identifier of the component creator"
+        example: "`keboola`"
+      - name: kbc_component_listing
+        description: "Identifier of the component visibility (`public`, `private`)"
+        example: "`public`"
+      - name: configuration_id_num
+        description: "Numeric identifier of the configuration"
+        example: "`610931033`"
+      - name: kbc_component_configuration
+        description: "Name of the configuration"
+        example: "`Sample data from Dynamics`"
+      - name: configuration_created
+        description: "Datetime when the configuration was created"
+        example: "`2022-07-20 18:45:17`"
+      - name: kbc_configuration_version
+        description: "Current version of the configuration"
+        example: "`5`"
+      - name: kbc_configuration_is_deleted
+        description: "Flag indicating whether the configuration is deleted (`true`, `false`)"
+        example: "`false`"
+      - name: description
+        description: "Description of the component configuration (filled by the user)"
+        example: "`This transformation put the data from customers into standardize format.`"
+      - name: configuration_json
+        description: "Complete JSON configuration of the component"
+        example: "`{\"parameters\":{\"id\":\"34289954\"}}`"
+      - name: kbc_branch_id
+        fk: kbc_branch
+        description: "Foreign key to a Keboola branch"
+        example: "`3419_kbc-eu-central-1`"
+      - name: branch_type
+        description: "Differentiate between the default (production) and development branch"
+        example: "`default`"
+      - name: token_id
+        description: "Identifier of the token that created this version of the configuration"
+        example: "`241247`"
+      - name: token_name
+        description: "Name of the token that created this version of the configuration"
+        example: "`john.doe@keboola.com`"
+      - name: kbc_token_id
+        description: "Unique identifier of the token containing stack identification"
+        example: "`241247_kbc-us-east-1`"
+      - name: folder_name
+        description: "Unique identifier of the token containing stack identification"
+        example: "`Archive`"
+
+  - id: kbc_component_configuration_version
+    mode: project
+    description: "This table shows the [version history](/components/#configuration-versions) of the component configuration."
+    is_full_load: false
+    columns:
+      - name: kbc_component_configuration_id
+        pk: true
+        fk: kbc_component_configuration
+        description: "Identifier for the component configuration"
+        example: "`6610_kbc-us-east-1_orchestrator-583757303`"
+      - name: kbc_branch_id
+        pk: true
+        fk: kbc_branch
+        description: "Foreign key to the Keboola branch"
+        example: "`3419_kbc-eu-central-1`"
+      - name: configuration_updated_at
+        description: "Datetime when the configuration was updated"
+        example: "`2020-03-28 20:29:25`"
+      - name: change_description
+        description: "Description of what changed in the configuration"
+        example: "`Update orchestration notifications`"
+      - name: configuration_version
+        pk: true
+        description: "Version of the configuration"
+        example: "`3`"
+      - name: last_version
+        description: "Flag indicating whether this is the last version of the configuration (`true`, `false`)"
+        example: "`false`"
+      - name: token_id
+        description: "Identifier of the token that created this version of the configuration"
+        example: "`241247`"
+      - name: token_name
+        description: "Name of the token that created this version of the configuration"
+        example: "`john.doe@keboola.com`"
+      - name: kbc_token_id
+        description: "Unique identifier of the token containing stack identification"
+        example: "`241247_kbc-us-east-1`"
+
+  - id: kbc_component_configuration_row
+    mode: project
+    description: "This table lists rows of the [configurations for the components](/components/#creating-component-configuration) (e.g., a configuration for a single table in the Snowflake data destination connector)."
+    is_full_load: false
+    columns:
+      - name: kbc_component_configuration_row_id
+        pk: true
+        description: "Component configuration row identifier"
+        example: "`8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the Keboola component configuration"
+        example: "`8765_kbc-us-east-1_keboola.ex-db-mysql_844500148`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`8765_kbc-us-east-1`"
+      - name: kbc_component_id
+        description: "Identifier of the component"
+        example: "`keboola.ex-db-mysql_kbc-us-east-1`"
+      - name: configuration_row_id_num
+        description: "Numeric identifier of the configuration row"
+        example: "`844500150`"
+      - name: kbc_component_configuration_row
+        description: "Name of the configuration row"
+        example: "`test_view`"
+      - name: configuration_row_created
+        description: "Datetime of the configuration row's creation"
+        example: "`2022-04-25 11:59:42`"
+      - name: kbc_configuration_row_version
+        description: "Current version of the configuration row"
+        example: "`1`"
+      - name: kbc_configuration_row_is_disabled
+        description: "Flag indicating whether the configuration row is disabled (`true`, `false`)"
+        example: "`false`"
+      - name: kbc_configuration_row_is_deleted
+        description: "Flag indicating whether the configuration row is deleted (`true`, `false`)"
+        example: "`false`"
+      - name: description
+        description: "Description of the component configuration row (filled by the user)"
+        example: "`This part of transformation consolidate the data from various sources.`"
+      - name: configuration_row_json
+        description: "Complete JSON configuration row of the component"
+        example: "`{\"parameters\":{\"incremental\":false}}`"
+      - name: token_id
+        description: "Identifier of the token that created this version of the configuration row"
+        example: "`241247`"
+      - name: token_name
+        description: "Name of the token that created this version of the configuration"
+        example: "`john.doe@keboola.com`"
+      - name: kbc_token_id
+        description: "Unique identifier of the token containing stack identification"
+        example: "`241247_kbc-us-east-1`"
+
+  - id: kbc_data_app_workspace
+    mode: project
+    description: "This table lists runs of [data apps](/data-apps/) and their consumption metrics."
+    is_full_load: false
+    note: "A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
+    columns:
+      - name: kbc_data_app_workspace_run_id
+        pk: true
+        description: "Identifier of the workspace active window (between starting and pausing the sandbox)"
+        example: "`10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a`"
+      - name: kbc_data_app_workspace_id
+        description: "Data app workspace identifier"
+        example: "`10910_kbc-eu-central-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola Project"
+        example: "`1075-eu-central-1`"
+      - name: date
+        pk: true
+        description: "Date for which the runtime hours and time credits are calculated"
+        example: "`2020-11-27`"
+      - name: created_at
+        description: "Datetime of the workspace creation"
+        example: "`2020-11-27 11:22:08`"
+      - name: expiration_at
+        description: "Workspace expiration datetime"
+        example: "`2020-12-02 11:22:08`"
+      - name: updated_at
+        description: "Datetime when the workspace was last updated"
+        example: "`2020-11-27 14:03:40`"
+      - name: start_at
+        description: "Datetime when the workspace resume window started"
+        example: "`2020-11-27 11:22:08`"
+      - name: sleep_at
+        description: "Datetime when the workspace resume window ended"
+        example: "`2020-11-27 14:03:40`"
+      - name: type
+        description: "Type of the workspace"
+        example: "`streamlit`"
+      - name: hostname
+        description: "Hostname of the workspace"
+        example: "`https://hello-world-759519.hub.north-europe.azure.keboola.com`"
+      - name: data_app_runtime_hours
+        description: "Runtime of the data app workspace on the particular date in hours"
+        example: "`2.413333`"
+      - name: backend_size
+        description: "Size of the data app backend"
+        example: "`Small`"
+      - name: time_credits_used
+        description: "Number of time credits consumed by the workspace on the particular date"
+        example: "`2.413333`"
+      - name: billed_credits_used
+        description: "Number of the actually billed credits"
+        example: "`2.413333`"
+
+  - id: kbc_data_science_sandbox
+    mode: project
+    description: "This table lists Python/R [workspaces](/workspace/) and their consumption metrics."
+    is_full_load: false
+    note: "A value of `0` in `sandbox_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
+    columns:
+      - name: kbc_data_science_sandbox_resume_id
+        pk: true
+        description: "Identifier of the sandbox active window (between starting and pausing the sandbox)"
+        example: "`10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a`"
+      - name: kbc_data_science_sandbox_id
+        description: "Data science sandbox identifier"
+        example: "`10910_kbc-eu-central-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola Project"
+        example: "`1075-eu-central-1`"
+      - name: date
+        pk: true
+        description: "Date for which the runtime hours and time credits are calculated"
+        example: "`2020-11-27`"
+      - name: created_at
+        description: "Datetime of the sandbox creation"
+        example: "`2020-11-27 11:22:08`"
+      - name: expiration_at
+        description: "Sandbox expiration datetime"
+        example: "`2020-12-02 11:22:08`"
+      - name: updated_at
+        description: "Datetime when the sandbox was last updated"
+        example: "`2020-11-27 14:03:40`"
+      - name: start_at
+        description: "Datetime when the sandbox resume window started"
+        example: "`2020-11-27 11:22:08`"
+      - name: sleep_at
+        description: "Datetime when the sandbox resume window ended"
+        example: "`2020-11-27 14:03:40`"
+      - name: type
+        description: "Type of the sandbox (`jupyter`, `rstudio`)"
+        example: "`jupyter`"
+      - name: hostname
+        description: "Hostname of the sandbox"
+        example: "`i-099734d8f8b97ae75-sandbox.eu-central-1.keboola.com`"
+      - name: sandbox_runtime_hours
+        description: "Runtime of the sandbox on the particular date in hours"
+        example: "`2.413333`"
+      - name: backend_size
+        description: "Size of the data science backend"
+        example: "`Small`"
+      - name: time_credits_used
+        description: "Number of time credits consumed by the sandbox on the particular date"
+        example: "`2.413333`"
+      - name: billed_credits_used
+        description: "Number of the actually billed credits"
+        example: "`2.413333`"
+
+  - id: kbc_job
+    mode: project
+    description: "This table lists Keboola [jobs](/management/jobs/) (e.g., a connector job or a transformation)."
+    is_full_load: false
+    columns:
+      - name: kbc_job_id
+        pk: true
+        description: "Keboola job identifier"
+        example: "`117644387_kbc-eu-central-1`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the component configuration"
+        example: "`410_kbc-eu-central-1_keboola.wr-google-sheets-259642632`"
+      - name: kbc_component_configuration_row_id
+        description: "An array where each element serves as a foreign key to a Keboola component configuration row. This array is populated as a result of filtering rows during the job execution. If the job runs with all rows (no filtering), the array remains empty."
+        example: "`[\"8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150\"]`"
+      - name: kbc_branch_id
+        fk: kbc_branch
+        description: "Foreign key to the Keboola branch"
+        example: "`3419_kbc-eu-central-1`"
+      - name: branch_type
+        description: "Identifier of the type of branch where the job is run (`default`, `dev`)"
+        example: "`3419_kbc-eu-central-1`"
+      - name: kbc_component_id
+        description: "Identifier of the component related to the job"
+        example: "`keboola.wr-google-sheets`"
+      - name: transformation_type
+        description: "Type of the transformation, if applicable. Possible values: <br> `R`, `Python`, `SQL`, `Unknown`: backend wasn't recognized or a new backend not yet introduced, `None` -- not a transformation job or encapsulating an apparent transformation job"
+        example: "`None`"
+      - name: credit_type
+        description: "Type of credit associated with the job. Possible values: <br> `KBC`, `SQL`, `CDC` <br> Does not necessarily represent actually used credit, as SQL and CDC credits are only consumed if they exist in the contract ([info](/management/project/limits/#project-power--time-credits)). The type of actually billed credit is defined in the [kbc_usage_metrics_values](/components/extractors/other/telemetry-data/#kbc_usage_metrics_values) table"
+        example: "`KBC`"
+      - name: job_run_id
+        description: "Run ID of the job -- multiple jobs can run under the same Run ID"
+        example: "`117643429.117644388`"
+      - name: job_start_at
+        description: "Datetime when the job started"
+        example: "`2020-03-15 11:59:39`"
+      - name: job_created_at
+        description: "Datetime when the job was created"
+        example: "`2020-03-15 11:59:38`"
+      - name: job_status
+        description: "Status of the job (`success`, `error`, `terminated`, `processing`, `cancelled`, `warning`)"
+        example: "`success`"
+      - name: error_type
+        description: "Type of error for unsuccessful jobs (`user`, `application`)"
+        example: "`user`"
+      - name: error_message
+        description: "Message propagated in the error job event"
+        example: "`Transformation aborted with message...`"
+      - name: job_run_type
+        description: "Specifies if the job was run by orchestration or manually (`orchestration`, `manual`)"
+        example: "`orchestration`"
+      - name: job_type
+        description: "Indicates whether the job is a standard job or a container job, which encapsulates another job (such as Flow). Only `standard` jobs consume credits (`standard`, `container`, `orchestrationContainer`, `phaseContainer`)"
+        example: "`orchestration`"
+      - name: token_id
+        description: "Identifier of the token that initiated the job"
+        example: "`145062`"
+      - name: token_name
+        description: "Name of the token that initiated the job"
+        example: "`Orchestrator GDrive`"
+      - name: kbc_token_id
+        description: "Unique identifier of the token with stack identification"
+        example: "`145062_kbc-eu-central-1`"
+      - name: flow_id
+        description: "Unique identifier of the flow (Foreign key to the component configuration)"
+        example: "`410_kbc-eu-central-1_keboola.orchestrator_915976687`"
+      - name: flow
+        description: "Name of the Flow in the time of the job, including numeric ID to distinguish between flows with the same name"
+        example: "`My Main Flow (ID: 915976687)`"
+      - name: job_time_credits_used
+        description: "Number of time credits consumed by the job"
+        example: "`0.001218890000`"
+      - name: job_billed_credits_used
+        description: "Number of actually billed credits"
+        example: "`0.001218890000`"
+      - name: job_total_time_sec
+        description: "Total time of the job in seconds (from initial trigger; start may be delayed)"
+        example: "`63`"
+      - name: job_run_time_sec
+        description: "Runtime of the job in seconds (from the time the job started)"
+        example: "`62`"
+      - name: job_network_mb
+        description: "Data transferred via the network in MB -- used for data destination billing"
+        example: "`6.094449`"
+      - name: ds_backend_size
+        description: "Backend used for data science transformations (`Small`, `Medium`, `Large`)"
+        example: "`Small`"
+      - name: dwh_small_ratio
+        description: "Ratio of Small DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH)"
+        example: "`0.75`"
+      - name: dwh_medium_ratio
+        description: "Ratio of Medium DWH used for SQL transformations (sum of ratios may be <1, may partially run on free DWH)"
+        example: "`0.25`"
+      - name: dwh_large_ratio
+        description: "Ratio of Large DWH used for SQL transformations (sum of ratios might be <1, may partially run on free DWH)"
+        example: "`0`"
+      - name: backend_size
+        description: "Backend used for data science transformations (`Small`, `Medium`, `Large`)"
+        example: "`Small`"
+      - name: company_id
+        description: "Identifier of the company the event belongs to"
+        example: "`011t00000Gs3BiAAJ`"
+
+  - id: kbc_mcp_event
+    mode: project
+    description: "This table captures [MCP](/ai/mcp-server/) (Model Context Protocol) interaction events -- every tool call made against a Keboola project through an MCP server. This includes calls from external MCP clients (e.g., Claude Desktop, Cursor) as well as Keboola's internal AI agents such as [Kai](/ai/kai-assistant/) and AI Chat. Each row represents a single tool invocation with its input arguments, outcome (success or error), duration, and the context of the caller."
+    is_full_load: false
+    columns:
+      - name: kbc_mcp_event_id
+        pk: true
+        description: "Unique identifier of the MCP event"
+        example: "`019d032f-b425-7692-bb3c-638fed287c7a_com-keboola-gcp-us-east4`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project where the tool call was executed"
+        example: "`361_com-keboola-gcp-us-east4`"
+      - name: event_created_at
+        description: "Timestamp when the MCP event occurred"
+        example: "`2026-03-18 23:02:31.000`"
+      - name: event
+        description: "Event source identifier indicating the MCP server component that handled the call. Possible values include: <br> `ext.keboola.mcp-server-tool.` -- external MCP server tool call, <br> `ext.keboola.kai-assistant.` -- Kai assistant tool call, <br> `ext.keboola.ai-chat.` -- AI Chat tool call"
+        example: "`ext.keboola.kai-assistant.`"
+      - name: type
+        description: "Outcome of the tool call (`success`, `error`)"
+        example: "`success`"
+      - name: kbc_token_id
+        description: "Composite identifier of the token used for the MCP session (numeric ID + stack)"
+        example: "`1177215_com-keboola-gcp-us-east4`"
+      - name: token_name
+        description: "Name of the token used for the MCP session -- typically the user's email for interactive sessions or a scheduler token name for automated calls"
+        example: "`some_user@example.com`"
+      - name: api_version
+        description: "Version of the Keboola API used by the MCP server"
+        example: "`v2`"
+      - name: http_user_agent
+        description: "HTTP user agent string of the MCP server, including server version, environment, and transport protocol"
+        example: "`Keboola MCP Server/1.48.4 app_env=local transport=http-compat/streamable-http`"
+      - name: mcp_user_agent
+        description: "User agent of the MCP client connecting to the server (e.g., the IDE or AI tool). Identifies the caller application"
+        example: "`claude-ai/0.1.0`"
+      - name: mcp_version
+        description: "Version of the Keboola MCP server that processed the call"
+        example: "`1.48.4`"
+      - name: mcp_environment
+        description: "Deployment environment of the MCP server. `DEV` for local/external clients; production hashes for Keboola-hosted agents (Kai, AI Chat)"
+        example: "`DEV`"
+      - name: mcp_conversation_id
+        description: "Unique identifier linking tool calls within the same conversation session. Empty for external clients that don't report conversation context"
+        example: "`4a22b77b-5a08-4ec3-8477-3c6f4369c418`"
+      - name: tool
+        description: "Name of the MCP tool that was called (e.g., `query_data`, `get_project_info`, `create_sql_transformation`)"
+        example: "`query_data`"
+      - name: tool_arguments
+        description: "JSON array of key-value pairs representing the arguments passed to the tool call"
+        example: "`[{\"key\":\"bucket_ids\",\"value\":\"[]\"}]`"
+      - name: duration
+        description: "Duration of the tool call execution in seconds"
+        example: "`3`"
+      - name: message
+        description: "Result message -- a success confirmation or the full error message for failed calls"
+        example: "`MCP tool \"query_data\" call succeeded.`"
+      - name: agent_type
+        description: "Type of agent that made the call. Possible values: <br> `external` -- an external MCP client (Claude Desktop, Cursor, etc.), <br> `kai-assistant` -- the Keboola Kai assistant, <br> `ai-chat` -- the Keboola AI Chat"
+        example: "`kai-assistant`"
+      - name: is_keboola_agent_event
+        description: "Flag indicating whether the event originated from a Keboola-managed AI agent (`true` for Kai and AI Chat, `false` for external clients)"
+        example: "`true`"
+
+  - id: kbc_project
+    mode: project
+    description: "This table shows data about Keboola [projects](/management/project/) belonging to an organization."
+    is_full_load: false
+    columns:
+      - name: kbc_project_id
+        pk: true
+        description: "Keboola project identifier"
+        example: "`1944_kbc-us-east-1`"
+      - name: kbc_project_id_num
+        description: "Project numeric identifier"
+        example: "`1944`"
+      - name: kbc_project
+        description: "Name of the project"
+        example: "`Sales Workshop - Kuba`"
+      - name: kbc_project_region
+        description: "Region of the project"
+        example: "`us-east-1`"
+      - name: kbc_project_cloud
+        description: "Cloud provider of the project"
+        example: "`aws`"
+      - name: kbc_project_url
+        description: "URL of the project"
+        example: "`https://connection.keboola.com/admin/projects/1944`"
+      - name: kbc_organization_id
+        fk: kbc_organization
+        description: "Foreign key to the Keboola organization"
+        example: "`116_kbc-us-east-1`"
+      - name: kbc_project_created
+        description: "Datetime when the project was created"
+        example: "`2017-09-04 14:26:40`"
+      - name: kbc_project_deleted
+        description: "Datetime when the project was deleted"
+        example: "`2017-10-19 14:26:49`"
+      - name: kbc_project_is_deleted
+        description: "Determines if the project is deleted."
+        example: "`true`"
+      - name: kbc_project_expiration
+        description: "Datetime of the project's expiration date"
+        example: "`2017-10-25 10:13:57`"
+      - name: kbc_project_type
+        description: "Type of the project. No actual impact on billing. Possible values: <br> `demo`, `poc`, `poc15Days`, `poc15DaysGuideMode`, `poc30Days`,  `poc6months`, `production`, `payAsYouGo`"
+        example: "`poc`"
+      - name: kbc_project_creator
+        description: "User that created the project"
+        example: "`john.doe@keboola.com`"
+
+  - id: kbc_project_snapshot
+    mode: project
+    description: "This table shows snapshots of projects to track changes in their size."
+    is_full_load: false
+    columns:
+      - name: kbc_project_id
+        pk: true
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`1105_kbc-eu-central-1`"
+      - name: snapshot_date
+        pk: true
+        description: "Date of the data snapshot"
+        example: "`2020-06-26`"
+      - name: rows
+        description: "Number of rows in the project at the time of the snapshot"
+        example: "`28137568882`"
+      - name: bytes
+        description: "Data size of the project in bytes at the time of the snapshot"
+        example: "`1071491549696`"
+
+  - id: kbc_project_user
+    mode: project
+    description: "This table shows snapshots capturing the projects' [admins](/management/project/users/). The snapshots are taken multiple times a day."
+    is_full_load: false
+    columns:
+      - name: kbc_project_id
+        pk: true
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`409_com-keboola-azure-north-europe`"
+      - name: snapshot_time
+        pk: true
+        description: "Datetime of the snapshot"
+        example: "`2020-06-29 12:55:16`"
+      - name: user_id
+        pk: true
+        description: "Identifier of the user"
+        example: "`2195`"
+      - name: kbc_token_id
+        pk: true
+        description: "Unique Keboola token identifier"
+        example: "`516357_kbc-us-east-1`"
+      - name: valid_from
+        description: "Datetime from which the user has been a member of the project"
+        example: "`2020-03-28 11:19:47`"
+      - name: email
+        description: "Email of the user"
+        example: "`john.doe@keboola.com`"
+      - name: domain
+        description: "Email domain of the user"
+        example: "`keboola.com`"
+      - name: role
+        description: "Role of the user within Keboola"
+        example: "`admin`"
+      - name: expires
+        description: "Date when the role expires"
+        example: "`2023-06-20T17:59:04Z`"
+      - name: invited_by_user_id
+        description: "User ID of the person that invited the user to the project"
+        example: "`12_com-keboola-azure-north-europe`"
+      - name: invited_by_email
+        description: "Email of the person that invited the user to the project"
+        example: "`john.doe@keboola.com`"
+      - name: approved_by_user_id
+        description: "User ID of the person that approved the user's invitation to the project"
+        example: "`20_com-keboola-azure-north-europe`"
+      - name: approved_by_email
+        description: "Email of the person that approved the user's invitation to the project"
+        example: "`jane.doe@keboola.com`"
+      - name: reason
+        description: "States the reason for joining the project"
+        example: "`Check the transformation logic`"
+
+  - id: kbc_snowflake_stats
+    mode: project
+    description: "This table shows information about queries using Snowflake, including transformations and sandboxes. Note that the table is not generated for BYODB customers."
+    is_full_load: false
+    columns:
+      - name: kbc_snowflake_stats_id
+        description: "Hash of the snowflake queries stat group identifier"
+        example: "`8345cc0d580a6160d2ed5b9b16a`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`458_kbc-eu-central-1`"
+      - name: snowflake_job_start_at
+        description: "Datetime hour the jobs started (Snowflake jobs/queries are aggregated per hour)"
+        example: "`2019-08-19 06:00:00`"
+      - name: dwh_size
+        description: "Size of the DWH used"
+        example: "`Medium`"
+      - name: snowflake_dwh
+        description: "DWH name"
+        example: "`KEBOOLA_PROD`"
+      - name: snowflake_database
+        description: "DB name"
+        example: "`KEBOOLA_391`"
+      - name: snowflake_schema
+        description: "Schema name"
+        example: "`WORKSPACE_146192784`"
+      - name: snowflake_user
+        description: "User running the queries"
+        example: "`KEBOOLA_WORKSPACE_146192784`"
+      - name: snowflake_job_type
+        description: "Type of the Snowflake job. <br> Possible values: <br> `dwhm` -- queries run via DWH manager, `sandbox` -- queries run in SQL sandbox, `transformations` -- queries run in SQL transformations, `writer` -- queries run against a Keboola-provisioned DB, `sapi` - queries related to the project's Storage, `platform_management` - system queries related to management of the project"
+        example: "`writer`"
+      - name: snowflake_job_result
+        description: "Result of the queries (`Success`, `Error`)"
+        example: "`Success`"
+      - name: snowflake_queries
+        description: "Number of the queries aggregated by the primary key"
+        example: "`19`"
+      - name: snowflake_queries_length_s
+        description: "Length of the queries in seconds aggregated by the primary key"
+        example: "`205.214000`"
+      - name: time_credits_used
+        description: "Number of the time credits consumed by the queries"
+        example: "`0.91206222224`"
+      - name: billed_credits_used
+        description: "Number of the actually billed credits"
+        example: "`0.91206222224`"
+
+  - id: kbc_bigquery_stats
+    mode: project
+    description: "This table shows information about queries using BigQuery, including transformations and sandboxes. Note that the table is not generated for BYODB customers."
+    is_full_load: false
+    columns:
+      - name: kbc_bigquery_stats_id
+        description: "Hash of the bigquery queries stat group identifier"
+        example: "`8345cc0d580a6160d2ed5b9b16a`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`2_com-keboola-gcp-us-east4`"
+      - name: bigquery_job_start_at
+        description: "Datetime hour the jobs started (Bigquery jobs/queries are aggregated per hour)"
+        example: "`2019-08-19 06:00:00`"
+      - name: bigquery_user
+        description: "User running the queries"
+        example: "`kbc-euw3-ws-1865070`"
+      - name: bigquery_job_type
+        description: "Type of the Bigquery job. <br> Possible values: <br> `sandbox` -- queries run in SQL sandbox, `transformations` -- queries run in SQL transformations, `sapi` - queries related to the project's Storage"
+        example: "`sandbox`"
+      - name: bigquery_queries
+        description: "Number of the queries aggregated by the primary key"
+        example: "`19`"
+      - name: bigquery_queries_length_s
+        description: "Length of the queries in seconds aggregated by the primary key"
+        example: "`205.214000`"
+      - name: time_credits_used
+        description: "Number of the time credits consumed by the queries"
+        example: "`0.91206222224`"
+      - name: billed_credits_used
+        description: "Number of the actually billed credits"
+        example: "`0.91206222224`"
+
+  - id: kbc_table_snapshot
+    mode: project
+    description: "This table shows [Storage table](/storage/tables/) snapshots."
+    is_full_load: false
+    columns:
+      - name: table_id
+        pk: true
+        description: "Storage table identifier"
+        example: "`in.c-GDU_Management.status`"
+      - name: kbc_project_id
+        pk: true
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`239_kbc-eu-central-1`"
+      - name: snapshot_date
+        pk: true
+        description: "Date of the data snapshot"
+        example: "`2020-07-02`"
+      - name: bucket_id
+        description: "Foreign key to the Keboola bucket"
+        example: "`1695`"
+      - name: created
+        description: "Datetime when the table was created"
+        example: "`2020-07-02 08:27:03`"
+      - name: last_import
+        description: "Datetime of the last import to the table"
+        example: "`2020-07-02 08:33:39`"
+      - name: table_name
+        description: "Name of the Storage table"
+        example: "`status`"
+      - name: primary_key
+        description: "Primary key of the Storage table"
+        example: "`id`"
+      - name: is_alias
+        description: "Indicates if the table is an alias (`true`, `false`)"
+        example: "`true`"
+      - name: alias_column_sync
+        description: "Determines if the alias table should sync all the columns from the source table (`true`, `false`)."
+        example: "`true`"
+      - name: source_project_id
+        description: "Foreign key to the Keboola project the alias is coming from"
+        example: "`20-eu-central-1`"
+      - name: source_table_id
+        description: "Identifier of the source table"
+        example: "`out.c-GDUserManagement.status`"
+      - name: alias_filter_column
+        description: "Column used to filter rows of the source table"
+        example: "`USER_ID`"
+      - name: alias_filter_operator
+        description: "Type of the alias filter operator. Possible values: <br> `eq` -- SQL \"IN\" <br> `ne` -- SQL \"NOT IN\""
+        example: "`eq`"
+      - name: alias_filter_value
+        description: "Value the alias filter is filtering by"
+        example: "`ASNDUH8737D`"
+      - name: rows
+        description: "Number of rows in the table"
+        example: "`8`"
+      - name: bytes
+        description: "Data size of the table in bytes"
+        example: "`2048`"
+
+  - id: kbc_usage_metrics_values
+    mode: project
+    description: "This table shows aggregated values for all metrics that may be included in the contract, such as consumed credits, data in storage, and the number of users. This combines data from different data sources (tables), making it useful for providing an overview of consumption."
+    is_full_load: false
+    note: "A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
+    org_mode_note: "`organization_value` and `company_value` are available in **Organization** mode only. You need data for all projects."
+    usage_breakdown:
+      - name: "Applications"
+        source: "kbc_job"
+        detail: "jobs with **application** *component_type*"
+      - name: "Data Science"
+        source: "kbc_job"
+        detail: "jobs with **R/Python** *transformation_type*"
+      - name: "Data Science Sandbox"
+        source: "kbc_data_science_sandbox"
+        detail: "aggregation of *sandbox_runtime_hours*"
+      - name: "DWH Direct Query"
+        source: "kbc_snowflake_stats"
+        detail: "records with **writer/dwhm** *snowflake_job_type*"
+      - name: "Extractor"
+        source: "kbc_job"
+        detail: "jobs with **data source** *component_type*"
+      - name: "KBC Users"
+        source: "kbc_project_user"
+        detail: "Active/Inactive state is defined based on users' activity in the last 3 days"
+      - name: "KBC Projects"
+        source: "kbc_project"
+        detail: "existing projects per particular date"
+      - name: "KBC TB"
+        source: "kbc_project_snapshot"
+        detail: "aggregation of *bytes*"
+      - name: "Snowflake Sandbox"
+        source: "kbc_snowflake_stats"
+        detail: "records with **sandbox** *snowflake_job_type*"
+      - name: "Transfromations"
+        source: "kbc_job"
+        detail: "jobs with **SQL** *transformation_type*"
+      - name: "Writers"
+        source: "kbc_job"
+        detail: "jobs with **data destination** *component_type*"
+      - name: "BAPI Receiver"
+        source: ""
+        detail: "~Buffer API endpoints used; only aggregated values available~ Not available after February 28, 2025, replaced by `Stream`."
+      - name: "BAPI Messages"
+        source: ""
+        detail: "~Buffer API (data streams) usage; only aggregated values available~ Not available after February 28, 2025, replaced by `Stream GB`."
+      - name: "Stream"
+        source: ""
+        detail: "Data Streams endpoints used; only aggregated values available"
+      - name: "Streamed GB"
+        source: ""
+        detail: "Streamed GB into the warehouse (uncompressed); only aggregated values available"
+    columns:
+      - name: metrics_values_id
+        pk: true
+        description: "Identifier of the daily value of the usage metric (combination of the project ID, usage metric ID, metric breakdown, sandbox flag, and date)"
+        example: "`779_kbc-eu-central-1_kbc_tb_KBC TB_false_2020-07-14`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`779_kbc-eu-central-1`"
+      - name: usage_metric_id
+        fk: usage_metric
+        description: "Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `sql_ppu`, `cdc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects`"
+        example: "`kbc_tb`"
+      - name: date
+        description: "Date of the value"
+        example: "`2019-11-01`"
+      - name: usage_breakdown
+        description: "Breakdown of the usage metric (still the same limit, but a more detailed view of consumption for some metrics). For instance, PPU can be broken down into data destination connectors, applications, and transformations."
+        example: "`DWH Direct Query`"
+      - name: is_sandbox
+        description: "Flag determining if the value is for sandbox"
+        example: "`true`"
+      - name: value
+        description: "Value of the metric (always related to the particular metric, key-value pairs)"
+        example: "`4.150657`"
+      - name: organization_value
+        description: "Organization value of the metric (used for Keboola users, where we're assigning distinct users to the single org project, so we're not calculating users more than once when looking at organization value -- a single user can be in multiple projects)"
+        example: "`15`"
+      - name: company_value
+        description: "Similar to the organization value, but it might give a different result if the company contains more organizations"
+        example: "`12`"
+      - name: time_credits_value
+        description: "Value in time credits for metrics calculated in credits"
+        example: "`0.001667`"
+      - name: run_time_hours
+        description: "Runtime value in hours for metrics calculated based on time"
+        example: "`0.000278`"
+      - name: jobs
+        description: "Number of jobs for relevant metrics"
+        example: "`100`"
+
+  - id: security_event
+    mode: project
+    description: "This table lists [security events](/management/project/tokens/#token-events), such as project logins or token creations. The events might be related directly to the project, its organization, or the Keboola platform itself."
+    is_full_load: false
+    columns:
+      - name: security_event_id
+        pk: true
+        description: "Security event identifier"
+        example: "`2080005325_kbc-us-east-1`"
+      - name: event_created
+        description: "Datetime of the event"
+        example: "`2020-07-01 10:15:20`"
+      - name: company_id
+        description: "Identifier of the company the event belongs to"
+        example: "`011t00000Gs3BiAAJ`"
+      - name: kbc_organization_id
+        fk: kbc_organization
+        description: "Foreign key to the Keboola organization (events can be related to a project, organization or the whole platform, e.g., failed logins)"
+        example: "`211_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`5954_kbc-us-east-1`"
+      - name: admin_email
+        description: "Email of the user participating in the event"
+        example: "`john.doe@keboola.com`"
+      - name: admin_name
+        description: "Name of the user participating in the event"
+        example: "`Martin Matejka`"
+      - name: admin_ip
+        description: "IP address from which the event was triggered"
+        example: "`34.200.169.177`"
+      - name: operation
+        description: "Type of the event operation. Possible values are listed in the table [Security event operations](#security-event-operations) below."
+        example: "`auditLog.project.adminsListed`"
+      - name: operation_params
+        description: "Additional operation parameters. Possible values are listed in the table [Operation parameters](#operation-parameters) below."
+        example: "`password`"
+      - name: token_id
+        description: "Token identifier if it's a part of the event (e.g., token creation)"
+        example: "`47949`"
+      - name: token_description
+        description: "Token description if it's a part of the event (e.g., token creation)"
+        example: "`token for linking shared bucket to project`"
+      - name: kbc_token_id
+        description: "Unique identifier of the token containing stack identification"
+        example: "`47949_kbc-us-east-1`"
+      - name: context_admin_email
+        description: "Email of the user in the context with the event (e.g., invitation or admin removal)"
+        example: "`john.doe@keboola.com`"
+      - name: context_admin_name
+        description: "Name of the user in the context with the event (e.g., invitation or admin removal)"
+        example: "`Martin Matejka`"
+      - name: context_merge_request_id
+        description: "ID of the merge request (related to branch merge request events in SOX projects)"
+        example: "`42`"
+      - name: context_merge_request_name
+        description: "Name of the merge request (related to branch merge request events in SOX projects)"
+        example: "`Update of my configuration`"
+      - name: context_operation
+        description: "Type of the merge request operation (`request_review`, `finish_review`, `approve`, `merge`, `publish`)"
+        example: "`request_review`"
+      - name: context_state_from
+        description: "Original state of the merge request operation (`development`, `in_review`, `approved`, `in_merge`)"
+        example: "`in_review`"
+      - name: context_state_to
+        description: "End state of the merge request operation (`in_review`, `approved`, `in_merge`, `published`)"
+        example: "`approved`"
+    security_operations:
+      - "auditLog.admin.activation"
+      - "auditLog.admin.addNewU2fDevice"
+      - "auditLog.admin.changePassword"
+      - "auditLog.admin.deleted"
+      - "auditLog.admin.disableMfa"
+      - "auditLog.admin.enableTotpMfa"
+      - "auditLog.admin.enableU2fMfa"
+      - "auditLog.admin.failedLogin"
+      - "auditLog.admin.login"
+      - "auditLog.admin.loginWithTotp"
+      - "auditLog.admin.loginWithTotpViaRecoveryCode"
+      - "auditLog.admin.loginWithU2f"
+      - "auditLog.admin.logout"
+      - "auditLog.admin.lostPassword"
+      - "auditLog.admin.maintainer.invitationListed"
+      - "auditLog.admin.maintainerInvitation.accepted"
+      - "auditLog.admin.maintainerInvitation.detail"
+      - "auditLog.admin.maintainerInvitation.rejected"
+      - "auditLog.admin.metadataListed"
+      - "auditLog.admin.organizationInvitation.accepted"
+      - "auditLog.admin.organizationInvitation.rejected"
+      - "auditLog.admin.projectInvitation.accepted"
+      - "auditLog.admin.projectInvitation.rejected"
+      - "auditLog.admin.reauthorizeCurrentUserTotp"
+      - "auditLog.admin.regenerateRecoveryCodes"
+      - "auditLog.admin.removeU2fDevice"
+      - "auditLog.admin.showRecoveryCodes"
+      - "auditLog.admin.sudo"
+      - "auditLog.dataPlanes.listed"
+      - "auditLog.deletedProjectsListed"
+      - "auditLog.maintainer.adminAdded"
+      - "auditLog.maintainer.adminRemoved"
+      - "auditLog.maintainer.adminsListed"
+      - "auditLog.maintainer.invitationCreated"
+      - "auditLog.maintainer.invitationDeleted"
+      - "auditLog.maintainer.invitationDetail"
+      - "auditLog.maintainer.invitationsListed"
+      - "auditLog.maintainer.metadataDeleted"
+      - "auditLog.maintainer.metadataListed"
+      - "auditLog.maintainer.metadataSet"
+      - "auditLog.maintainer.promoCodesListed"
+      - "auditLog.maintainers.created"
+      - "auditLog.maintainers.deleted"
+      - "auditLog.maintainers.detail"
+      - "auditLog.maintainers.listed"
+      - "auditLog.maintainers.organizationCreated"
+      - "auditLog.maintainers.updated"
+      - "auditLog.mergeRequest.created"
+      - "auditLog.mergeRequest.stateChanged"
+      - "auditLog.organization.adminAdded"
+      - "auditLog.organization.adminRemoved"
+      - "auditLog.organization.adminsInProjectsListed"
+      - "auditLog.organization.adminsListed"
+      - "auditLog.organization.deleted"
+      - "auditLog.organization.detail"
+      - "auditLog.organization.invitationCreated"
+      - "auditLog.organization.invitationDeleted"
+      - "auditLog.organization.invitationDetail"
+      - "auditLog.organization.invitationsListed"
+      - "auditLog.organization.metadataDeleted"
+      - "auditLog.organization.metadataListed"
+      - "auditLog.organization.metadataSet"
+      - "auditLog.organization.projectCreated"
+      - "auditLog.organization.projectsListed"
+      - "auditLog.organization.updated"
+      - "auditLog.payAsYouGo.creditsManualTopUp"
+      - "auditLog.payAsYouGo.wizardComplete"
+      - "auditLog.payg.topup.try"
+      - "auditLog.payg.topup.updated"
+      - "auditLog.project.addedToOrganization"
+      - "auditLog.project.adminAdded"
+      - "auditLog.project.adminRemoved"
+      - "auditLog.project.adminUpdated"
+      - "auditLog.project.adminsListed"
+      - "auditLog.project.deleted"
+      - "auditLog.project.deletedDetail"
+      - "auditLog.project.detail"
+      - "auditLog.project.featureAdded"
+      - "auditLog.project.featureRemoved"
+      - "auditLog.project.fileStorageAssigned"
+      - "auditLog.project.invitationCreated"
+      - "auditLog.project.invitationDeleted"
+      - "auditLog.project.invitationsListed"
+      - "auditLog.project.joinRequest.approved"
+      - "auditLog.project.joinRequest.rejected"
+      - "auditLog.project.joinRequestsListed"
+      - "auditLog.project.limitAdded"
+      - "auditLog.project.limitRemoved"
+      - "auditLog.project.metadataDeleted"
+      - "auditLog.project.metadataListed"
+      - "auditLog.project.metadataSet"
+      - "auditLog.project.purged"
+      - "auditLog.project.removedFromOrganization"
+      - "auditLog.project.requestAccess"
+      - "auditLog.project.setEnabledStatus"
+      - "auditLog.project.storageBackendAssigned"
+      - "auditLog.project.storageBackendRemoved"
+      - "auditLog.project.storageTokenCreated"
+      - "auditLog.project.undeleted"
+      - "auditLog.project.updated"
+      - "auditLog.promoCode.applied"
+      - "auditLog.promoCode.created"
+      - "auditLog.spc.account.created"
+      - "auditLog.storageBackendConnection.created"
+      - "auditLog.storageBackendConnection.deleted"
+      - "auditLog.storageBackendConnection.listed"
+      - "auditLog.storageBackendConnection.detail"
+      - "auditLog.storageBackendConnection.updated"
+      - "auditLog.mergeRequest.created"
+      - "auditLog.mergeRequest.stateChanged"
+    operation_parameters:
+      - condition: "Updating project type"
+        values: "`demo`, `poc`, `poc15Days`, `poc15DaysGuideMode`, `poc30Days`, `poc6months`, `production`"
+      - condition: "Logging into [pay-as-you-go project](/management/payg-project/) (PAYG)"
+        values: "`payAsYouGo`"
+      - condition: "Logging into project via Google SSO"
+        values: "`googleLogin`"
+      - condition: "Password-related operations (incl. login via credentials)"
+        values: "`password`"
+
+  # ===================== ORGANIZATION MODE =====================
+
+  - id: contract_limit_monthly
+    mode: organization
+    description: "This table lists the limits set in contracts for comparison with actual consumption."
+    is_full_load: false
+    columns:
+      - name: contract_limit_monthly_id
+        pk: true
+        description: "Identifier of the monthly limit of the usage metric (combination of the contract ID, usage metric ID, month, and limit type)"
+        example: "`8011t000002V7W7AAK kbc_ppu 2019-08-01 contract`"
+      - name: contract_id
+        description: "Identifier of the contract -- there can be multiple active contracts at once"
+        example: "`8011t000002V7W7AAK`"
+      - name: usage_metric_id
+        fk: usage_metric
+        description: "Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects`"
+        example: "`kbc_ppu`"
+      - name: date
+        description: "Month of the limit value"
+        example: "`2019-08-01`"
+      - name: limit_value
+        description: "Value of the limit for a particular month"
+        example: "`3500`"
+      - name: limit_type
+        description: "Usually labeled as `contract`, but it can be `reimbursement` in case of raised limits due to platform issues"
+        example: "`contract`"
+
+  - id: kbc_organization
+    mode: organization
+    description: "This table shows data about Keboola [organizations](/management/organization/)."
+    is_full_load: false
+    columns:
+      - name: kbc_organization_id
+        pk: true
+        description: "Keboola organization identifier"
+        example: "`225_kbc-us-east-1`"
+      - name: kbc_organization_id_num
+        description: "Numerical organization identifier"
+        example: "`225`"
+      - name: kbc_organization
+        description: "Name of the organization"
+        example: "`Keboola Internal`"
+      - name: kbc_maintainer_id
+        description: "Identifier of the Maintainer (the parent of the organization)"
+        example: "`12_kbc-us-east-1`"
+      - name: company_id
+        description: "Identifier of the company the event belongs to"
+        example: "`011t00000Gs3BiAAJ`"
+      - name: kbc_region
+        description: "Region of the organization"
+        example: "`us-east-1`"
+      - name: kbc_cloud
+        description: "Cloud provider of the organization"
+        example: "`aws`"
+      - name: kbc_organization_created_at
+        description: "Datetime of the organization's creation"
+        example: "`2013-12-31 10:22:33`"
+      - name: kbc_organization_deleted_at
+        description: "Datetime of deletion, if the organization was deleted"
+        example: "`2019-02-02 13:45:51`"
+      - name: kbc_organization_is_deleted
+        description: "Flag indicating if the organization is deleted (`true`, `false`)"
+        example: "`true`"
+      - name: kbc_organization_autojoin
+        description: "Flag indicating if Keboola Support can access projects in the organization without a confirmed request"
+        example: "`true`"
+      - name: kbc_organization_url
+        description: "URL of the organization in Keboola"
+        example: "`https://connection.keboola.com/ admin/organizations/225/settings`"
+
+  - id: usage_metric
+    mode: organization
+    description: "This table shows metrics related to your contracts."
+    is_full_load: false
+    columns:
+      - name: usage_metric_id
+        description: "Identifier of the usage metric. Possible values: <br> `kbc_ppu`, `kbc_tb`, `kbc_users`, `kbc_projects`"
+        example: "`kbc_ppu`"
+      - name: usage_metric
+        description: "Name of the metric"
+        example: "`2019-08-01`"
+      - name: metric_type
+        description: "Defines whether the metric is calculated cumulatively over a period of time (like PPU) or whether it represents the actual total value on a particular date (like Projects). <br> Possible values: <br> `cumulative`, `standard`"
+        example: "`cumulative`"
+
+  # ===================== ACTIVITY CENTER MODE =====================
+
+  - id: kbc_bucket
+    mode: activity_center
+    description: "This table shows data about the current state of storage buckets."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: bucket_id
+        description: "Storage bucket identifier"
+        example: "`1147628`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`866_kbc-eu-central-1`"
+      - name: kbc_project_bucket_id
+        pk: true
+        description: "Keboola bucket identifier"
+        example: "`866_kbc-eu-central-1_1147628`"
+      - name: stage
+        description: "Storage stage of the bucket"
+        example: "`in`"
+      - name: bucket
+        description: "Default name of the bucket"
+        example: "`c-instagram`"
+      - name: bucket_display_name
+        description: "Name of the bucket that can be changed by the user (if not changed, it is the same as `bucket`)"
+        example: "`instagram_posts`"
+      - name: rows
+        description: "Number of rows in the bucket as of the date of the snapshot"
+        example: "`4714`"
+      - name: bytes
+        description: "Bucket size in bytes as of the date of the snapshot"
+        example: "`1870336`"
+      - name: sharing_type
+        description: "Type of the bucket sharing (Data Catalog). <br> Possible values: `none` -- bucket not shared, <br> `target` -- bucket linked from another project, <br>`source` / `org private` -- bucket shared from this project, linkable only by organization members <br> `source` / `org public` -- bucket shared from this project, linkable by any project members"
+        example: "`target`"
+      - name: shared_from_project_id
+        description: "Identifier of the source project if the bucket is linked (sharing_type = 'target')"
+        example: "`860_kbc-eu-central-1`"
+      - name: shared_from_bucket
+        description: "Identifier of the source bucket if the bucket is linked (sharing_type = 'target')"
+        example: "`in.c-keboola-ex-instagram-152387726`"
+      - name: description
+        description: "Description of the bucket (filled by the user)"
+        example: "`twitter extractor raw data`"
+      - name: is_external_schema
+        description: "Flag indicating if the bucket contains data from external sources (`1`, `0`)"
+        example: "`1`"
+      - name: kbc_branch_id
+        pk: true
+        fk: kbc_branch
+        description: "Foreign key to the Keboola branch"
+        example: "`3419_kbc-eu-central-1`"
+      - name: kbc_bucket_owner_id
+        description: "Optional field indicating who is responsible for shared data, used for tracking ownership in bucket sharing and the data catalog"
+        example: "`11358_kbc-eu-central-1`"
+
+  - id: kbc_column
+    mode: activity_center
+    description: "This table shows data about the current state of storage columns."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: column_id
+        description: "Storage column identifier"
+        example: "`in.c-in_sh_kbc_internal.kbc_schedule.kbc_token_id`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_project_column_id
+        pk: true
+        description: "Keboola column identifier"
+        example: "`7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_schedule.kbc_token_id`"
+      - name: kbc_project_table_id
+        fk: kbc_table
+        description: "Foregin key to the Keboola table"
+        example: "`7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_schedule`"
+      - name: column_name
+        description: "Name of the column"
+        example: "`kbc_token_id`"
+      - name: sort
+        description: "Order of the column in the table"
+        example: "`11`"
+
+  - id: kbc_column_metadata
+    mode: activity_center
+    description: "This table shows data about columns' metadata."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_column_metadata_id
+        pk: true
+        description: "Keboola column metadata identifier"
+        example: "`1713681942_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_project_column_id
+        fk: kbc_column
+        description: "Foreign key to the Keboola column"
+        example: "`7880_kbc-us-east-1_out.c-kbc_public_telemetry.kbc_job.kbc_token_id`"
+      - name: column_name
+        description: "Name of the column"
+        example: "`kbc_token_id`"
+      - name: table_id
+        description: "Identifier of the storage table"
+        example: "`out.c-kbc_public_telemetry.kbc_job`"
+      - name: composite_id
+        description: "Folder structure identifier"
+        example: "`799945/storage/kbc_job/kbc_token_id`"
+      - name: key
+        description: "Metadata key"
+        example: "`KBC.datatype.type`"
+      - name: value
+        description: "Metadata value"
+        example: "`VARCHAR`"
+      - name: provider
+        description: "Defines which service or component provided the metadata"
+        example: "`keboola.ex-db-mssql`"
+
+  - id: kbc_flow_phase
+    mode: activity_center
+    description: "This table shows data about particular phases of flows."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_flow_phase_id
+        pk: true
+        description: "Keboola flow phase identifier"
+        example: "`7880_kbc-us-east-1_keboola.orchestrator_884004674_9`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the flow component configuration"
+        example: "`7880_kbc-us-east-1_keboola.orchestrator_884004674`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: phase_id
+        description: "Identifier of the phase"
+        example: "`9`"
+      - name: phase_name
+        description: "Name of the phase"
+        example: "`Load`"
+      - name: depends_on_phase_id
+        description: "Identifiers of the phases this depends on (JSON array)"
+        example: "`[8]`"
+
+  - id: kbc_flow_task
+    mode: activity_center
+    description: "This table shows data about flow tasks."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_flow_task_id
+        pk: true
+        description: "Keboola flow task identifier"
+        example: "`7880_kbc-us-east-1_keboola.orchestrator_884004674_67558`"
+      - name: kbc_flow_phase_id
+        fk: kbc_flow_phase
+        description: "Foreign key to Keboola flow phase"
+        example: "`7880_kbc-us-east-1_keboola.orchestrator_884004674_9`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: task_id
+        description: "Identifier of the task"
+        example: "`67558`"
+      - name: task_name
+        description: "Name of the task"
+        example: "`keboola.wr-db-snowflake-952663182`"
+      - name: task_enabled
+        description: "Flag indicating if the task is enabled"
+        example: "`true`"
+      - name: continue_on_failure
+        description: "Flag indicating if the flow should run in case of a task failure"
+        example: "`false`"
+      - name: mode
+        description: "Selected mode of the task"
+        example: "`run`"
+      - name: task_component_id_orig
+        description: "Keboola component identifier"
+        example: "`keboola.wr-db-snowflake`"
+      - name: task_configuration_id_num
+        description: "Numeric identifier of the task configuration"
+        example: "`952663182`"
+      - name: task_kbc_component_id
+        description: "Unique Keboola component identifier"
+        example: "`keboola.wr-db-snowflake_kbc-us-east-1`"
+      - name: task_kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the flow component configuration"
+        example: "`7880_kbc-us-east-1_keboola.wr-db-snowflake_952663182`"
+
+  - id: kbc_job_input_table
+    mode: activity_center
+    description: "This table shows data about all input tables of the job."
+    is_full_load: false
+    columns:
+      - name: kbc_job_id
+        pk: true
+        fk: kbc_job
+        description: "Keboola flow task identifier"
+        example: "`963416992_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: table_id
+        description: "Identifier of the table"
+        example: "`in.c-in_sh_kbc_internal.kbc_project`"
+      - name: kbc_project_table_id
+        pk: true
+        fk: kbc_table
+        description: "Foreign key to the Keboola Table"
+        example: "`7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_project`"
+      - name: table_name
+        description: "Name of the table"
+        example: "`kbc_project`"
+      - name: mappings
+        description: "Number of times the table was used in the job input (i.e., one table can be used multiple times in the input mapping of the transformation)"
+        example: "`1`"
+
+  - id: kbc_job_output_table
+    mode: activity_center
+    description: "This table shows data about all output tables of the job."
+    is_full_load: false
+    columns:
+      - name: kbc_job_id
+        pk: true
+        fk: kbc_job
+        description: "Keboola flow task identifier"
+        example: "`909588277_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: table_id
+        description: "Identifier of the table"
+        example: "`out.c-kbc_billing.kbc_event`"
+      - name: kbc_project_table_id
+        pk: true
+        fk: kbc_table
+        description: "Foreign key to the Keboola Table"
+        example: "`7880_kbc-us-east-1_out.c-kbc_billing.kbc_event`"
+      - name: table_name
+        description: "Name of the table"
+        example: "`kbc_event`"
+      - name: mappings
+        description: "Number of times the table was used in the job output (i.e., one table can be written multiple times to the storage in the output mapping of the transformation)"
+        example: "`1`"
+
+  - id: kbc_notification_subscription
+    mode: activity_center
+    description: "This table shows data subscriptions to notifications sent by Keboola (mostly flow notifications)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_notification_subscription_id
+        pk: true
+        description: "Keboola notification subscription identifier"
+        example: "`1083_kbc-us-east-1`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the flow component configuration"
+        example: "`7880_kbc-us-east-1_keboola.orchestrator_884004674`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_component_id
+        description: "Unique Keboola component identifier"
+        example: "`keboola.orchestrator_kbc-us-east-1`"
+      - name: type
+        description: "Type of the notification"
+        example: "`project`"
+      - name: created_at
+        description: "Datetime when the notification subscription was created"
+        example: "`2022-07-29 08:39:09`"
+      - name: deleted_at
+        description: "Datetime when the notification subscription was deleted"
+        example: "`2022-12-01 08:39:28`"
+      - name: event
+        description: "Defines event which triggers the notification"
+        example: "`job-succeeded-with-warning`"
+      - name: recipient_channel
+        description: "Channel the notification is sent through"
+        example: "`email`"
+      - name: recipient_address
+        description: "Address of the recipient"
+        example: "`my-notifications@keboola.com`"
+
+  - id: kbc_organization_user
+    mode: activity_center
+    description: "This table shows data about users in [organizations](/management/organization/)."
+    is_full_load: false
+    columns:
+      - name: kbc_organization_id
+        pk: true
+        fk: kbc_organization
+        description: "Foreign key to the Keboola organization"
+        example: "`141_kbc-us-east-1`"
+      - name: snapshot_time
+        pk: true
+        description: "Date of the snapshot"
+        example: "`2023-07-25`"
+      - name: user_id
+        pk: true
+        description: "Unique identifier of the user"
+        example: "`53_kbc-us-east-1`"
+      - name: valid_from
+        description: "Datetime from which the user is a member of the organization"
+        example: "`2019-11-12 14:06:02`"
+      - name: email
+        description: "Email of the user"
+        example: "`john.doe@keboola.com`"
+      - name: domain
+        description: "Email domain of the user"
+        example: "`keboola.com`"
+      - name: invated_by_email
+        description: "Email of the inviter"
+        example: "`john.doe@keboola.com`"
+
+  - id: kbc_schedule
+    mode: activity_center
+    description: "This table shows data about configuration schedules."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_schedule_id
+        pk: true
+        description: "Keboola schedule identifier"
+        example: "`21860_kbc-us-east-1`"
+      - name: kbc_scheduler_configuration_id
+        description: "Foreign key to the scheduler component configuration"
+        example: "`7880_kbc-us-east-1_keboola.scheduler_884004680`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: mode
+        description: "Mode of the schedule execution"
+        example: "`run`"
+      - name: tag
+        description: "Tag associated with the schedule"
+        example: "`mytag`"
+      - name: crontab
+        description: "Crontab definition of the schedule"
+        example: "`55 2 * * *`"
+      - name: crontab_timezone
+        description: "Timezone of the crontab"
+        example: "`UTC`"
+      - name: state
+        description: "Current state of the schedule"
+        example: "`enabled`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the configuration of the scheduled component"
+        example: "`7880_kbc-us-east-1_keboola.orchestrator_884004679`"
+      - name: kbc_component_id
+        description: "Unique identifier of the scheduled Keboola component"
+        example: "`keboola.orchestrator_kbc-us-east-1`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token"
+        example: "`516358_kbc-us-east-1`"
+      - name: token_name
+        description: "Name of the token"
+        example: "`[_internal] Daily Scheduler`"
+
+  - id: kbc_table
+    mode: activity_center
+    description: "This table shows data about the current state of storage [tables](/storage/tables/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_project_table_id
+        pk: true
+        description: "Unique Keboola storage table identifier"
+        example: "`7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_project_user`"
+      - name: table_id
+        description: "Storage table identifier"
+        example: "`in.c-in_sh_kbc_internal.kbc_project_user`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_project_bucket_id
+        fk: kbc_bucket
+        description: "Foreign key to the Keboola bucket"
+        example: "`7880_kbc-us-east-1_729486`"
+      - name: last_snapshot_date
+        description: "Date when the last table snapshot was taken"
+        example: "`2020-10-07`"
+      - name: created
+        description: "Datetime when the table was created"
+        example: "`2020-10-07 12:29:25`"
+      - name: last_import
+        description: "Datetime of the last import to the table"
+        example: "`2023-08-17 08:00:12`"
+      - name: table_name
+        description: "Name of the Storage table"
+        example: "`kbc_project_user`"
+      - name: primary_key
+        description: "Primary key of the Storage table"
+        example: "`kbc_project_id,snapshot_time,user_id`"
+      - name: is_alias
+        description: "Determines if the table is an alias (`true`, `false`)"
+        example: "`true`"
+      - name: alias_column_sync
+        description: "Determines if the alias table should sync all the columns from the source table (`true`, `false`)."
+        example: "`true`"
+      - name: source_project_id
+        description: "Foreign key to the Keboola project the alias is coming from"
+        example: "`7874_kbc-us-east-1`"
+      - name: source_table_id
+        description: "Identifier of the source table"
+        example: "`out.c-kbc_internal.kbc_project_user`"
+      - name: alias_filter_column
+        description: "Column used to filter rows of the source table"
+        example: "`user_id`"
+      - name: alias_filter_operator
+        description: "Type of the alias filter operator. Possible values: <br> `eq` -- SQL \"IN\" <br> `ne` -- SQL \"NOT IN\""
+        example: "`eq`"
+      - name: alias_filter_value
+        description: "Value the alias filter is filtering by"
+        example: "`ASNDUH8737D`"
+      - name: rows
+        description: "Number of rows in the table"
+        example: "`16362276`"
+      - name: bytes
+        description: "Data size of the table in bytes"
+        example: "`294944256`"
+      - name: description
+        description: "Description of the table (filled by the user)"
+        example: "`Table provides information on customer behaviour`"
+
+  - id: kbc_table_event
+    mode: activity_center
+    description: "This table shows data about events of the storage [tables](/storage/tables/)."
+    is_full_load: false
+    columns:
+      - name: kbc_table_event_id
+        pk: true
+        description: "Unique Keboola table event identifier"
+        example: "`7103338092_kbc-us-east-1`"
+      - name: table_id
+        description: "Storage table identifier"
+        example: "`in.c-in_sh_kbc_internal.kbc_flow_task`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_project_table_id
+        fk: kbc_table
+        description: "Foreign key to the Keboola table"
+        example: "`7880_kbc-us-east-1_in.c-in_sh_kbc_internal.kbc_flow_task`"
+      - name: event_created_at
+        description: "Datetime the table was created"
+        example: "`2023-06-14 00:13:23`"
+      - name: event
+        description: "Table event which occurred"
+        example: "`storage.tableImportDone`"
+      - name: event_type
+        description: "Type of the event"
+        example: "`success`"
+      - name: message
+        description: "Message describing the event"
+        example: "`Imported table in.c-in_sh_kbc_internal.kbc_flow_task`"
+      - name: params
+        description: "Parameters of the event (JSON object)"
+        example: "`{\"importId\":\"985123712\",\"incremental\":true,\"source\":{\"dataObject\":\"out_kbc_flow_task\",\"type\":\"workspace\",\"tableName\":\"out_kbc_flow_task\",\"workspaceId\":\"985122240\"}}`"
+      - name: results
+        description: "Results of the event (JSON object)."
+        example: "`{\"rowsCount\":\"272800\",\"sizeBytes\":15412736}`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token"
+        example: "`516356_kbc-us-east-1`"
+      - name: token_name
+        description: "Name of the token"
+        example: "`orchestration trigger`"
+      - name: kbc_data_app_id
+        fk: kbc_data_app
+        description: "Foreign key to the Keboola data app"
+        example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
+
+  - id: kbc_table_metadata
+    mode: activity_center
+    description: "This table shows data about metadata of the storage [tables](/storage/tables/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_table_metadata_id
+        pk: true
+        description: "Unique Keboola table metadata identifier"
+        example: "`1709268888_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_project_table_id
+        fk: kbc_table
+        description: "Foreign key to the Keboola table"
+        example: "`7880_kbc-us-east-1_out.c-kbc_billing.daily_credit_changes`"
+      - name: composite_id
+        description: "Folder structure identifier"
+        example: "`729487/storage/daily_credit_changes`"
+      - name: key
+        description: "Metadata key"
+        example: "`KBC.name`"
+      - name: value
+        description: "Metadata value"
+        example: "`out_daily_credit_changes`"
+      - name: provider
+        description: "Defines which service or component provided the metadata"
+        example: "`keboola.ex-db-mssql`"
+
+  - id: kbc_token
+    mode: activity_center
+    description: "This table shows data about the storage [tokens](/management/project/tokens/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_token_id
+        pk: true
+        description: "Unique Keboola token identifier"
+        example: "`516357_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: company_id
+        description: "Identifier of the company the event belongs to"
+        example: "`011t00000Gs3BiAAJ`"
+      - name: description
+        description: "Name of the token"
+        example: "`[_internal] Main Scheduler`"
+      - name: created
+        description: "Datetime when the token was created"
+        example: "`2022-07-29 08:39:08`"
+      - name: expires
+        description: "Datetime when the token expires"
+        example: "`2024-07-29 08:39:08`"
+      - name: refreshed
+        description: "Datetime when the token was refreshed"
+        example: "`2022-07-29T08:39:08Z`"
+      - name: is_disabled
+        description: "Flag indicating if the token is disabled"
+        example: "`false`"
+      - name: can_manage_buckets
+        description: "Flag indicating if the token can manage storage buckets"
+        example: "`true`"
+      - name: can_manage_tokens
+        description: "Flag indicating if the token can manage other tokens"
+        example: "`false`"
+      - name: can_read_all_file_uploads
+        description: "Flag indicating if the token can read storage file uploads"
+        example: "`true`"
+      - name: can_purge_trash
+        description: "Flag indicating if the token can purge project trash"
+        example: "`false`"
+      - name: component_access
+        description: "Defines if the token has access to only a specific component"
+        example: "`orchestrator`"
+      - name: is_master_token
+        description: "Defines is the token is a master (generally user's personal token)"
+        example: "`false`"
+      - name: daily_capacity
+        description: "Daily operations capacity of the token (currently not used by the backend)"
+        example: "`5`"
+      - name: created_by_token_id
+        fk: kbc_token
+        description: "Foreign key to the creator Keboola token"
+        example: "`287689_kbc-us-east-1`"
+      - name: created_by_token_name
+        description: "Name of the creator token"
+        example: "`john.doe@keboola.com`"
+
+  - id: kbc_token_event
+    mode: activity_center
+    description: "This table shows data about events of the storage [tokens](/management/project/tokens/)."
+    is_full_load: false
+    columns:
+      - name: kbc_token_event_id
+        pk: true
+        description: "Unique Keboola token event identifier"
+        example: "`7104199256_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: event_created_at
+        description: "Datetime when the table was created"
+        example: "`2023-06-14 06:03:10`"
+      - name: event
+        description: "Token event which occurred"
+        example: "`storage.tokenCreated`"
+      - name: event_type
+        description: "Type of the event"
+        example: "`info`"
+      - name: target_kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token related to the event"
+        example: "`593967_kbc-us-east-1`"
+      - name: target_kbc_token_name
+        description: "Name of the Keboola token related to the event"
+        example: "`[_internal] Scheduler for 985200312 Scheduler`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token creating the event"
+        example: "`287689_kbc-us-east-1`"
+      - name: token_name
+        description: "Name of the token creating the event"
+        example: "`john.doe@keboola.com`"
+
+  - id: kbc_transformation_code
+    mode: activity_center
+    description: "This table shows data about codes of [transformations](/transformations/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_transformation_code_id
+        pk: true
+        description: "Unique Keboola transformation code identifier"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_867148197_Product Stickiness`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the transformation component configuration"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_867148197`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: code_name
+        description: "Name of the transformation code"
+        example: "`Product Stickiness`"
+      - name: code_script
+        description: "Script in the code block (JSON object)"
+        example: "`[\"--speed up queries by some deletes\\nCREATE TABLE \\\"kbc_usage_metrics_values_filtered\\\"\\nAS\\n SELECT...`"
+
+  - id: kbc_transformation_input
+    mode: activity_center
+    description: "This table shows data about inputs of [transformations](/transformations/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_transformation_input_id
+        pk: true
+        description: "Unique Keboola transformation input identifier"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_854061922_kbc_column_metadata`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the transformation component configuration"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_854061922`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: changed_since
+        description: "Changed since data filter value"
+        example: "`-12 hours`"
+      - name: destination
+        description: "Destination table in the transformation workspace"
+        example: "`kbc_column_metadata`"
+      - name: source
+        description: "Source storage table"
+        example: "`out.c-kbc_public_telemetry_preprocess.kbc_column_metadata`"
+      - name: where_column
+        description: "Column to filter by"
+        example: "`kbc_project_stack`"
+      - name: where_operator
+        description: "Column filter operator"
+        example: "`eq`"
+      - name: where_values
+        description: "Column filter value (JSON array)"
+        example: "`[\"com-keboola-azure-north-europe\"]`"
+
+  - id: kbc_transformation_input_column
+    mode: activity_center
+    description: "This table shows data about input columns of [transformations](/transformations/). Available only for non-clone mappings."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_transformation_input_column_id
+        pk: true
+        description: "Unique Keboola transformation input column identifier"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_854061913_kbc_job_job_storage_mb`"
+      - name: kbc_transformation_input_id
+        fk: kbc_transformation_input
+        description: "Foreign key to transformation input"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_854061913_kbc_job`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: column
+        description: "Input column name"
+        example: "`job_storage_mb`"
+      - name: column_type
+        description: "Data type of the column"
+        example: "`VARCHAR`"
+      - name: column_length
+        description: "Maximum length of the column"
+        example: "`16777216`"
+      - name: convert_empty_values_to_null
+        description: "Flag indicating if the empty values should be converted to NULL"
+        example: "`false`"
+
+  - id: kbc_transformation_output
+    mode: activity_center
+    description: "This table shows data about outputs of the [transformations](/transformations/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_transformation_output_id
+        pk: true
+        description: "Unique Keboola transformation output identifier"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_854061913_out.c-kbc_billing.kbc_data_science_sandbox`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the transformation component configuration"
+        example: "`7880_kbc-us-east-1_keboola.snowflake-transformation_854061913`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: incremental
+        description: "Flag indicating if the data should be written to the destination table incrementally"
+        example: "`true`"
+      - name: destination
+        description: "Destination storage table"
+        example: "`out.c-kbc_billing.kbc_data_science_sandbox`"
+      - name: source
+        description: "Source table in the transformation workspace"
+        example: "`out_kbc_data_science_sandbox`"
+      - name: primary_key
+        description: "Primary key of the table (JSON array)"
+        example: "`[\"kbc_data_science_sandbox_resume_id\",\"date\"]`"
+      - name: delete_where_column
+        description: "Column used to identify records to delete before storage import"
+        example: "`kbc_project_stack`"
+      - name: delete_where_operator
+        description: "Column filter operator"
+        example: "`eq`"
+      - name: delete_where_values
+        description: "Column filter value (JSON array)"
+        example: "`[\"com-keboola-azure-north-europe\"]`"
+
+  - id: kbc_trigger
+    mode: activity_center
+    description: "This table shows data about [triggers](/components/applications/triggers/)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_trigger_id
+        pk: true
+        description: "Unique Keboola trigger identifier"
+        example: "`1773_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7874_kbc-us-east-1`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the component configuration which is being triggered"
+        example: "`7874_kbc-us-east-1_keboola.orchestrator_884004642`"
+      - name: kbc_component_id
+        description: "Unique identifier of Keboola component of the triggered configuration"
+        example: "`keboola.orchestrator_kbc-us-east-1`"
+      - name: state
+        description: "State of the trigger"
+        example: "`charging`"
+      - name: cool_down_period_minutes
+        description: "Defines a time period before the trigger can be run again"
+        example: "`5`"
+      - name: last_run
+        description: "Datetime of the last run"
+        example: "`2022-08-03 11:53:19`"
+      - name: updated
+        description: "Datetime of the last trigger update"
+        example: "`2022-08-03 11:53:20`"
+      - name: run_with_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token triggering the job"
+        example: "`516356_kbc-us-east-1`"
+      - name: run_with_token_name
+        description: "Name of the token triggering the job"
+        example: "`Orchestration trigger`"
+      - name: created_by_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token creating the trigger"
+        example: "`516354_kbc-us-east-1`"
+      - name: created_by_token_name
+        description: "Name of the token creating the trigger"
+        example: "`john.doe@keboola.com`"
+
+  - id: kbc_trigger_table
+    mode: activity_center
+    description: "This table shows data about tables used to [trigger](/components/applications/triggers/) jobs."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_trigger_table_id
+        pk: true
+        description: "Unique Keboola trigger table identifier"
+        example: "`5700_kbc-us-east-1`"
+      - name: kbc_trigger_id
+        fk: kbc_trigger
+        description: "Foreign key to the Keboola trigger"
+        example: "`1773_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7874_kbc-us-east-1`"
+      - name: kbc_project_table_id
+        fk: kbc_table
+        description: "Foreign key to the Keboola table triggering the job"
+        example: "`7874_kbc-us-east-1_out.c-kbc_billing.trigger`"
+      - name: table_id
+        description: "Identifier of the storage table triggering the job"
+        example: "`out.c-kbc_billing.trigger`"
+
+  - id: kbc_user_activity
+    mode: activity_center
+    description: "This table shows data about basic activity of project users (job runs and configuration updates)."
+    is_full_load: false
+    columns:
+      - name: kbc_user_id
+        pk: true
+        description: "Keboola user email address (activity can be tracked across stacks)"
+        example: "`john.doe@keboola.com`"
+      - name: kbc_project_id
+        pk: true
+        fk: kbc_project
+        description: "Foreign key to the Keboola project related to the activity"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_component_id
+        pk: true
+        description: "Identifier of the Keboola component related to the activity"
+        example: "`keboola.wr-db-snowflake_kbc-us-east-1`"
+      - name: date
+        pk: true
+        description: "Date the activity occurred"
+        example: "`2023-08-14`"
+      - name: activity_type
+        pk: true
+        description: "Type of the activity (`Job Run`, `Configuration Update` and `None` to see that the user did nothing)"
+        example: "`Job Run`"
+      - name: activities
+        description: "Number of activities (number of run job or configuration updates)"
+        example: "`3`"
+      - name: last_project_activity
+        description: "Flag indicating if the activity is the last activity of the user in the project"
+        example: "`true`"
+
+  - id: kbc_workspace
+    mode: activity_center
+    description: "This table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_workspace_id
+        pk: true
+        description: "Unique Keboola workspace identifier"
+        example: "`985088171_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: workspace_creator
+        description: "Foreign key to the Keboola table"
+        example: "`John Doe`"
+      - name: workspace_created
+        description: "Datetime when the workspace was created"
+        example: "`2023-06-13 20:41:42.268`"
+      - name: workspace_type
+        description: "Backend type of the workspace"
+        example: "`snowflake`"
+      - name: workspace_active
+        description: "Flag indicating if the workspace is active"
+        example: "`1`"
+      - name: workspace_expired
+        description: "Datetime when the workspace expired (empty for active)"
+        example: "`2023-07-18 10:20:56.384`"
+      - name: workspace_hostname
+        description: "Hostname of the workspace"
+        example: "`https://keboola.snowflakecomputing.com`"
+      - name: workspace_expire_hours
+        description: "Number of hours before the workspace expires due to inactivity (currently for data science workspaces)"
+        example: "`1`"
+      - name: workspace_start
+        description: "Datetime when the workspace started"
+        example: "`2023-06-13T20:41:42.268Z`"
+      - name: workspace_updated
+        description: "Datetime when the workspace was updated"
+        example: "`2023-07-12T12:01:24.181Z`"
+      - name: workspace_user
+        description: "User generated for the workspace"
+        example: "`SAPI_WORKSPACE_985088174`"
+      - name: backend_size
+        description: "Backend size of the workspace"
+        example: "`small`"
+      - name: storage_size_gb
+        description: "Size of the workspace (used for persistent workspaces)"
+        example: "`2`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token creating the workspace"
+        example: "`287689_kbc-us-east-1`"
+      - name: kbc_token_name
+        description: "Name of the token creating the workspace"
+        example: "`john.doe@keboola.com`"
+      - name: workspace_shared
+        description: "Flag indicating if the workspace is shared with other users"
+        example: "`true`"
+      - name: workspace_read_only_storage_access
+        description: "Flag indicating if the workspace has read-only storage access"
+        example: "`false`"
+      - name: kbc_workspace_name
+        description: "Name of the workspace"
+        example: "`My Workspace`"
+      - name: workspace_schema
+        description: "Schema name"
+        example: "`WORKSPACE_985088174`"
+
+  - id: kbc_workspace_event
+    mode: activity_center
+    description: "This table shows data about [workspace](/workspace/) events."
+    is_full_load: false
+    columns:
+      - name: kbc_workspace_event_id
+        pk: true
+        description: "Unique Keboola workspace event identifier"
+        example: "`7236030887_kbc-us-east-1`"
+      - name: kbc_workspace_id
+        fk: kbc_workspace
+        description: "Foreign key to the Keboola workspace"
+        example: "`985088171_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: event_created_at
+        description: "Datetime when the workspace event was created"
+        example: "`2023-07-23 06:23:19`"
+      - name: event
+        description: "Description of the event"
+        example: "`storage.workspaceCreated`"
+      - name: event_type
+        description: "Type of the event"
+        example: "`info`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token creating the event"
+        example: "`516357_kbc-us-east-1`"
+      - name: kbc_token_name
+        description: "Name of the token creating the event"
+        example: "`[_internal] main scheduler`"
+
+  - id: kbc_file_event
+    mode: activity_center
+    description: "This table shows data about storage [file](/storage/files/) events."
+    is_full_load: false
+    columns:
+      - name: kbc_file_event_id
+        pk: true
+        description: "Unique Keboola file event identifier"
+        example: "`7342403037_kbc-eu-central-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`2807_kbc-eu-central-1`"
+      - name: event_created_at
+        description: "Datetime when the file event was created"
+        example: "`2023-07-23 06:23:19`"
+      - name: event
+        description: "Description of the event"
+        example: "`storage.fileUploaded`"
+      - name: event_type
+        description: "Type of the event"
+        example: "`info`"
+      - name: message
+        description: "Message describing the event"
+        example: "`Uploaded file in.c_in_sh_kbc_internal.kbc_flow_task.csv.gz`"
+      - name: kbc_file_id
+        description: "Identifier of the file"
+        example: "`759391664_kbc-eu-central-1`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token creating the event"
+        example: "`516357_kbc-eu-central-1`"
+      - name: kbc_token_name
+        description: "Name of the token creating the event"
+        example: "`[_internal] main scheduler`"
+
+  - id: kbc_data_app
+    mode: activity_center
+    description: "This table lists the [data apps](/data-apps/)."
+    is_full_load: false
+    columns:
+      - name: kbc_data_app_id
+        pk: true
+        description: "Unique identifier for the data application"
+        example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`580_kbc-us-east-1`"
+      - name: data_app_created
+        description: "Datetime when the data app was created"
+        example: "`2023-05-14 12:30:45`"
+      - name: data_app_id_num
+        description: "Numerical ID for the data application"
+        example: "`945672`"
+      - name: kbc_data_app_name
+        description: "Human-readable name of the data app"
+        example: "`Customer Data Loader`"
+      - name: kbc_data_app_url
+        description: "URL link to access the data application"
+        example: "`https://1191546783.hub.keboola.com`"
+      - name: kbc_component_id
+        description: "Identifier of the component"
+        example: "`keboola.data-apps_kbc-us-east-1`"
+      - name: kbc_component
+        description: "Name or type of the Keboola component"
+        example: "`keboola.data-apps`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the Keboola component configuration"
+        example: "`123_kbc-us-east-1_keboola.data-apps_1191549426`"
+      - name: kbc_data_app_is_deleted
+        description: "Boolean flag indicating whether the data application has been deleted"
+        example: "`false`"
+
+  - id: kbc_data_app_params_event
+    mode: activity_center
+    description: "This table lists events and their non-empty parameters from the `ext.keboola.data-apps.` event."
+    is_full_load: false
+    columns:
+      - name: kbc_data_app_event_id
+        pk: true
+        description: "Unique identifier for the event created by the data app"
+        example: "`123557345_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`580_kbc-us-east-1`"
+      - name: kbc_data_app_id
+        fk: kbc_data_app
+        description: "Foreign key to the Keboola data app"
+        example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
+      - name: data_app_id_num
+        description: "Numerical ID for the data application"
+        example: "`945672`"
+      - name: event_created_at
+        description: "Datetime when the event was created"
+        example: "`2023-07-23 06:23:19`"
+      - name: event
+        description: "Description of the event"
+        example: "`ext.keboola.data-apps.`"
+      - name: message
+        description: "Message describing the event"
+        example: "`Streamlit App Read Table`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token"
+        example: "`516365_kbc-us-east-1`"
+      - name: token_name
+        description: "Name of the token"
+        example: "`streamlit write only-token`"
+      - name: params
+        description: "Parameters of the event (JSON object)"
+        example: "`{\"event_type\":\"keboola_data_app_write\",\"event_job_id\":151808445362,\"event_application\":\"Unknown\",\"time\":\"2024-11-18 16:15:02\",\"user\":\"Unknown\"}`"
+
+relationships:
+  # Organization -> Project
+  - from: kbc_organization
+    to: kbc_project
+    label: "has projects"
+    type: one-to-many
+  - from: kbc_organization
+    to: kbc_organization_user
+    label: "has users"
+    type: one-to-many
+  - from: kbc_organization
+    to: security_event
+    label: "has events"
+    type: one-to-many
+
+  # Project -> direct children
+  - from: kbc_project
+    to: kbc_branch
+    label: "has branches"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_bucket_snapshot
+    label: "has bucket snapshots"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_project_snapshot
+    label: "has snapshots"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_project_user
+    label: "has users"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_component_configuration
+    label: "has configurations"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_component_configuration_row
+    label: "has config rows"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_data_app_workspace
+    label: "has data app workspaces"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_data_science_sandbox
+    label: "has sandboxes"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_job
+    label: "has jobs"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_mcp_event
+    label: "has MCP events"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_snowflake_stats
+    label: "has Snowflake stats"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_bigquery_stats
+    label: "has BigQuery stats"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_table_snapshot
+    label: "has table snapshots"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_usage_metrics_values
+    label: "has usage metrics"
+    type: one-to-many
+  - from: kbc_project
+    to: security_event
+    label: "has security events"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_bucket
+    label: "has buckets"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_column
+    label: "has columns"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_column_metadata
+    label: "has column metadata"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_flow_phase
+    label: "has flow phases"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_flow_task
+    label: "has flow tasks"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_job_input_table
+    label: "has job inputs"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_job_output_table
+    label: "has job outputs"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_notification_subscription
+    label: "has notifications"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_schedule
+    label: "has schedules"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_table
+    label: "has tables"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_table_event
+    label: "has table events"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_table_metadata
+    label: "has table metadata"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_token
+    label: "has tokens"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_token_event
+    label: "has token events"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_transformation_code
+    label: "has transformation code"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_transformation_input
+    label: "has transformation inputs"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_transformation_input_column
+    label: "has input columns"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_transformation_output
+    label: "has transformation outputs"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_trigger
+    label: "has triggers"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_trigger_table
+    label: "has trigger tables"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_user_activity
+    label: "has user activity"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_workspace
+    label: "has workspaces"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_workspace_event
+    label: "has workspace events"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_file_event
+    label: "has file events"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_data_app
+    label: "has data apps"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_data_app_params_event
+    label: "has data app events"
+    type: one-to-many
+
+  # Branch relationships
+  - from: kbc_branch
+    to: kbc_bucket_snapshot
+    label: "has bucket snapshots"
+    type: one-to-many
+  - from: kbc_branch
+    to: kbc_component_configuration
+    label: "has configurations"
+    type: one-to-many
+  - from: kbc_branch
+    to: kbc_component_configuration_version
+    label: "has config versions"
+    type: one-to-many
+  - from: kbc_branch
+    to: kbc_job
+    label: "has jobs"
+    type: one-to-many
+  - from: kbc_branch
+    to: kbc_bucket
+    label: "has buckets"
+    type: one-to-many
+
+  # Component configuration relationships
+  - from: kbc_component_configuration
+    to: kbc_component_configuration_version
+    label: "has versions"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_component_configuration_row
+    label: "has rows"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_job
+    label: "runs jobs"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_flow_phase
+    label: "has phases"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_flow_task
+    label: "has tasks"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_notification_subscription
+    label: "has notifications"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_schedule
+    label: "has schedules"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_trigger
+    label: "has triggers"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_transformation_code
+    label: "has code"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_transformation_input
+    label: "has inputs"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_transformation_output
+    label: "has outputs"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_data_app
+    label: "has data app"
+    type: one-to-many
+
+  # Flow phase -> task
+  - from: kbc_flow_phase
+    to: kbc_flow_task
+    label: "has tasks"
+    type: one-to-many
+
+  # Job -> input/output tables
+  - from: kbc_job
+    to: kbc_job_input_table
+    label: "reads tables"
+    type: one-to-many
+  - from: kbc_job
+    to: kbc_job_output_table
+    label: "writes tables"
+    type: one-to-many
+
+  # Bucket -> table
+  - from: kbc_bucket
+    to: kbc_table
+    label: "contains tables"
+    type: one-to-many
+
+  # Table relationships
+  - from: kbc_table
+    to: kbc_column
+    label: "has columns"
+    type: one-to-many
+  - from: kbc_table
+    to: kbc_table_metadata
+    label: "has metadata"
+    type: one-to-many
+  - from: kbc_table
+    to: kbc_table_event
+    label: "has events"
+    type: one-to-many
+  - from: kbc_table
+    to: kbc_job_input_table
+    label: "used as input"
+    type: one-to-many
+  - from: kbc_table
+    to: kbc_job_output_table
+    label: "used as output"
+    type: one-to-many
+  - from: kbc_table
+    to: kbc_trigger_table
+    label: "triggers"
+    type: one-to-many
+
+  # Column -> metadata
+  - from: kbc_column
+    to: kbc_column_metadata
+    label: "has metadata"
+    type: one-to-many
+
+  # Token relationships
+  - from: kbc_token
+    to: kbc_token_event
+    label: "has events"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_schedule
+    label: "runs schedules"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_table_event
+    label: "creates events"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_workspace_event
+    label: "creates events"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_file_event
+    label: "creates events"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_workspace
+    label: "creates workspaces"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_trigger
+    label: "runs/creates triggers"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_data_app_params_event
+    label: "creates events"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_token
+    label: "creates token"
+    type: one-to-many
+
+  # Trigger -> trigger table
+  - from: kbc_trigger
+    to: kbc_trigger_table
+    label: "watches tables"
+    type: one-to-many
+
+  # Transformation input -> columns
+  - from: kbc_transformation_input
+    to: kbc_transformation_input_column
+    label: "has columns"
+    type: one-to-many
+
+  # Workspace -> events
+  - from: kbc_workspace
+    to: kbc_workspace_event
+    label: "has events"
+    type: one-to-many
+
+  # Data app relationships
+  - from: kbc_data_app
+    to: kbc_data_app_params_event
+    label: "has events"
+    type: one-to-many
+  - from: kbc_data_app
+    to: kbc_table_event
+    label: "has events"
+    type: one-to-many
+
+  # Usage metric relationships
+  - from: usage_metric
+    to: contract_limit_monthly
+    label: "has limits"
+    type: one-to-many
+  - from: usage_metric
+    to: kbc_usage_metrics_values
+    label: "has values"
+    type: one-to-many
