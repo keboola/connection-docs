@@ -25,13 +25,15 @@ To configure the data source connector, select one of the following modes:
 3. [**Activity Center mode**](#activity-center-mode-tables): Extracts data from all projects within your organizations. The data is compiled into a single target project. This mode is available to customers who have the **Activity Center add-on** in their contract and also must be set up by Keboola. After configuring the connector, contact your Keboola Account Manager or our [support team](/management/support/).
 
 ## Data Model
-The model below helps you better understand relations between individual tables extracted by this component. 
-Keep in mind that the tables *contact_limit_monthly*, *kbc_organization*, and *usage_metric* are extracted only in **Organization** mode. The model does not contain tables available in Activity Center mode.
+The interactive model below helps you understand relations between individual tables extracted by this component.
+Use the toolbar to filter tables by mode, switch layout direction, and expand tables to see their columns. You can zoom with the scroll wheel, pan by dragging the background, and drag individual tables to rearrange them.
 
-{: .image-popup}
-![Screenshot - Telemetry data model](/components/extractors/other/telemetry-data/telemetry-data-model.png)
+<div id="diagram-viewer"></div>
 
-***Note:** You can find the schema in full resolution and with several export options [here](https://dbdiagram.io/d/602629a380d742080a3a406a).*
+<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+<script src="https://unpkg.com/elkjs@0.9.3/lib/elk.bundled.js"></script>
+<script src="/assets/js/diagram-data.js"></script>
+<script src="/assets/js/diagram-viewer.js"></script>
 
 ## Project Mode Tables
 The extracted tables provide you with information about your buckets, configurations, branches, jobs, AI agent and MCP interactions, sandboxes, projects, users, and security events.
