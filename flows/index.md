@@ -112,6 +112,8 @@ You can select predefined intervals or set your own. Another option is to use tr
 {: .image-popup}
 ![Set Schedule](/flows/set-schedule.png)
 
+***Note on Triggers:** If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the Flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the Flow immediately*
+
 ## Check Run History
 In the tab **All Runs**, you can check how your flow is running with a detailed breakdown of each task. 
 
