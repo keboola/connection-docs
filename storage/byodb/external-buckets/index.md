@@ -108,10 +108,33 @@ WHERE `source` = "mql";
 (`sales_emea`). However, there are no technical limitations; they can have the same name. 
 
 ## Sharing an External Dataset
-It is possible to share a Snowflake external dataset using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
+It is possible to share an external dataset using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
 
-{: .alert.alert-warning}
-**Note:** At this time, sharing an external dataset is only possible on projects with a Snowflake storage backend. Sharing external datasets on a BigQuery storage backend isn't supported yet. If this is relevant to your use case, please create a support ticket.
+### Snowflake
+Sharing a Snowflake external dataset works out of the box — no additional configuration is required beyond the standard bucket sharing flow.
+
+### BigQuery
+Sharing a BigQuery external dataset is supported, but requires additional IAM permissions to be granted on your Analytics Hub listing. This is because BigQuery Analytics Hub does not allow re-sharing a linked (subscribed) dataset — instead, the target project must subscribe directly to your original listing. Keboola handles this automatically, but needs permission to grant subscriber access on your behalf.
+
+To enable sharing, grant one of the following to the Keboola service account on your Analytics Hub listing, in addition to the `roles/analyticshub.subscriber` already required for registration:
+
+**Option 1 — Custom role (recommended, least privilege):**
+Create a custom IAM role in your GCP project with exactly these two permissions:
+- `analyticshub.listings.getIamPolicy`
+- `analyticshub.listings.setIamPolicy`
+
+The scope of this custom role depends on where your external datasets live:
+- If all external datasets come from **a single GCP project**, create the custom role at the **project level** and grant it to the Keboola service account on that project.
+- If external datasets come from **multiple GCP projects** across your organization, create the custom role at the **organization level** so it can be applied across projects.
+
+**Option 2 — Built-in `roles/analyticshub.listingAdmin` (simpler, broader permissions):**
+Grant the built-in `roles/analyticshub.listingAdmin` role to the Keboola service account on your listing. This role includes the required permissions, but also covers additional capabilities (such as updating or deleting the listing) that Keboola does not use.
+
+{: .alert.alert-info}
+**Note:** Sharing permissions can be granted at any time after initial registration, but the registration process navigates you to provide such permissions to enable sharing. If not provided during the reigstration (e.g. for the previously registered datasets) Keboola detects the change on the next refresh and enables sharing from that point on. Revoking the permission will prevent new shares; projects that are already linked remain unaffected.
+
+{: .alert.alert-info}
+**Note:** To configure the Keboola platform to recognize your custom role, please contact support. A platform-level configuration is required to surface the role name in the registration guide.
 
 ## Removing an External Dataset
 Removing an external dataset is as simple as removing any other Storage bucket. Simply delete it in the UI or via API. The Storage bucket will be removed from 
