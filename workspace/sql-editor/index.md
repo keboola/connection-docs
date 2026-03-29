@@ -134,9 +134,11 @@ You can add multiple code blocks using the **+ New Query** button below the exis
 
 ### Export Query result
 
-To download your query results as a CSV-formatted file, select Export Query result.
+To download your query results as a CSV-formatted file, select Export Query result and choose your preffered format:
+CSV — Standard comma-separated values
+CSV (gzip) — Compressed CSV for large exports
 
-**Download limit:** Exported CSV files are limited to **100 MB**. If your query result exceeds this size, consider adding a `LIMIT` clause to reduce the row count, filtering the data before export, or using Keboola Storage to access the full dataset.
+**Download limit:** Exported files are limited to **100 MB**. If your query result exceeds this size, consider adding a `LIMIT` clause to reduce the row count, filtering the data before export, or using Keboola Storage to access the full dataset. Or use Keboola Storage to access the full dataset.
 
 ### Viewing Query Details
 
