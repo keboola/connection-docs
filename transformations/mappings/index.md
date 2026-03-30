@@ -118,14 +118,21 @@ The pre-set data types are only suggestions, you can change them to your liking.
 the types. Beware, however, that if a column contains values not matching the type, the entire load (and transformation) will 
 fail. In such a case, it's reasonable to revert to `VARCHAR` types -- for example, by setting **Data types** to **None**. 
 
-#### Snowflake loading type
-When working with large tables, it may become important to understand how the tables are loaded into a Snowflake staging 
-database. We use two loading options: `COPY` and `CLONE`. The clone copy type is a highly optimized operation which 
-allows loading an arbitrary large table in near-constant time. There is a limitation, however, that the clone type can't be used 
-together with any filters or data type configurations. 
+#### Loading type (Snowflake and BigQuery)
+When working with large tables, it may become important to understand how the tables are loaded into a staging
+database. We use two loading options: `COPY` and `CLONE`. The `CLONE` type is a highly optimized operation which
+allows loading an arbitrary large table in near-constant time. There is a limitation, however, that the `CLONE` type can't be used
+together with any filters or data type configurations.
+
+The `CLONE` loading type is supported on **Snowflake** and **BigQuery** backends.
+
+When using `AUTO` (the default), Keboola automatically selects `CLONE` when all conditions are met (no filters, no data type
+configurations, no incremental loading), and falls back to `COPY` otherwise.
+
+**BigQuery-specific limitation:** `CLONE` is not supported for [linked buckets](/catalog/) on BigQuery. If a table comes from a linked bucket on BigQuery, the load will fall back to `COPY` when using `AUTO`, or fail if `CLONE` is explicitly requested.
 
 This might present a dilemma when loading huge tables. A logical approach when trying to speed up loading a large table would
-be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's 
+be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's
 actually faster to remove the filters and data types, take advantage of the `CLONE` loading type, and apply the filters
 inside the transformation. Also, when you need more complex filters (filtering by multiple columns or ranges), it's best to
 remove the filter completely from the input mapping, take advantage of the clone loading and do the filtering inside of the
@@ -141,7 +148,7 @@ Clone table:
 {: .image-popup}
 ![Table Clone](/transformations/mappings/table-clone.png)
 
-The `CLONE` mapping will execute almost instantly for a table of any size (typically under 10 seconds) 
+The `CLONE` mapping will execute almost instantly for a table of any size (typically under 10 seconds)
 as it physically does not move any data.
 
 On the other hand, you can use a [read-only input mapping](/transformations/mappings/#read-only-input-mapping) which makes all the buckets and tables available with read access,
@@ -180,24 +187,30 @@ As you can see, a **read-only input mapping** allows you to read a table created
 
 
 #### _timestamp system column
-A table loaded using `CLONE` will contain all columns of the original table plus a new `_timestamp` column.
-This column is used internally by Keboola for comparison with the value of the *Changed in last* filter. 
+A table loaded using `CLONE` (on both Snowflake and BigQuery) will contain all columns of the original table plus a new `_timestamp` column.
+This column is used internally by Keboola for comparison with the value of the *Changed in last* filter.
 
-The value in the column contains a unix timestamp of the [last change of the row](/storage/tables/#manual-incremental-processing). 
+The value in the column contains a unix timestamp of the [last change of the row](/storage/tables/#manual-incremental-processing).
 You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),
 i.e., to replace the role of the **Changed in Last** filter in the input mapping (which you can't use with a clone mapping).
 
-**Important: The _timestamp column cannot be imported back to Storage.** 
+**Important: The _timestamp column cannot be imported back to Storage.**
 
 When you attempt to do so, you'll get the following error:
 
-	Failed to process output mapping: Failed to load table "out.c-test.opportunity": 
-	Invalid columns: _timestamp: Only alphanumeric characters and underscores are allowed in the column name. 
+	Failed to process output mapping: Failed to load table "out.c-test.opportunity":
+	Invalid columns: _timestamp: Only alphanumeric characters and underscores are allowed in the column name.
 	Underscore is not allowed on the beginning.
 
 If you are not using the `_timestamp` column in your transformation, you have to drop it, for example:
 
+In Snowflake:
+
 	`ALTER TABLE "my-table" DROP COLUMN "_timestamp";`
+
+In BigQuery:
+
+	`ALTER TABLE my-table DROP COLUMN _timestamp;`
 
 The `_timestamp` column is not present on tables loaded using the copy method.
 
