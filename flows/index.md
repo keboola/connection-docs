@@ -90,6 +90,24 @@ execute more jobs in parallel. Keboola will then concurrently execute the jobs t
 - Finally, to modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**. 
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
 
+***Example of the advanced parameter:** changing a variable in transformation:*
+
+```json
+{
+  "componentId": "keboola.snowflake-transformation",
+  "configId": "0123abc",
+  "mode": "run",
+  "variableValuesData": {
+    "values": [
+      {
+        "name": "variables_name",
+        "value": 12345
+      }
+    ]
+  }
+}
+```
+
 *****
 
 **Save** the changes.
@@ -112,7 +130,7 @@ You can select predefined intervals or set your own. Another option is to use tr
 {: .image-popup}
 ![Set Schedule](/flows/set-schedule.png)
 
-***Note on Triggers:** If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the Flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the Flow immediately*
+***Note on Triggers:** If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the Flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the Flow immediately.*
 
 ## Check Run History
 In the tab **All Runs**, you can check how your flow is running with a detailed breakdown of each task. 
