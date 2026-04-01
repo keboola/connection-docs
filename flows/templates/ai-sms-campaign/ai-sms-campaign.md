@@ -22,14 +22,14 @@ The template consists of two flows, where the first flow can be considered a dat
 - The transformation is pre-defined and will create a dataset containing customer contact information and recommended products for each customer.
 - The AI app utilizes the data created by the transformation mentioned above to generate customized SMS messages.
 - The transformation then creates two new tables from an existing table, with column renaming and the addition of an 'approved' column in the second table, which is initialized with a value of `'false'` for all rows.
-- Data is sent to the data app, where users can review and approve the generated messages for campaign execution. 
+- Data is sent to the app, where users can review and approve the generated messages for campaign execution. 
 
 ## Flow 2 – Execution
 
 {: .image-popup}
 ![Flow 2](/flows/templates/ai-sms-campaign/flow2.png)
 
-Once you have selected the messages for sending and clicked the **Upload to Keboola** button in the data app, 
+Once you have selected the messages for sending and clicked the **Upload to Keboola** button in the app, 
 flow 2 is triggered automatically to send the data to Twilio.
 
 ## Entity Relationship Diagram

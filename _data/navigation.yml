@@ -168,12 +168,12 @@ items:
             title: UA and GA4 Comparison
 
   - url: /data-apps/
-    title: Data Apps
+    title: Apps
     items:
       - url: /data-apps/streamlit/
-        title: Streamlit Data Apps
+        title: Streamlit Apps
       - url: /data-apps/python-js/
-        title: Python/JS Data Apps
+        title: Python/JS Apps
       - url: /data-apps/authentication/
         title: Authentication
         items:

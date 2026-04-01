@@ -1,5 +1,5 @@
 ---
-title: Python/JS Data Apps
+title: Python/JS Apps
 permalink: /data-apps/python-js/
 ---
 
@@ -8,13 +8,13 @@ permalink: /data-apps/python-js/
 
 ## Overview
 
-Python/JavaScript Data Apps give you full control over what you build and how you build it. Unlike Streamlit Data Apps - which use a ready-made Python environment - Python/JS Data Apps let you use **any Python web framework** (Flask, FastAPI, Dash), serve a **JavaScript frontend**, or combine both. You bring the code; Keboola handles the hosting, access control, and data connectivity.
+Python/JavaScript Apps give you full control over what you build and how you build it. Unlike Streamlit Apps - which use a ready-made Python environment - Python/JS Apps let you use **any Python web framework** (Flask, FastAPI, Dash), serve a **JavaScript frontend**, or combine both. You bring the code; Keboola handles the hosting, access control, and data connectivity.
 
 This guide assumes you are building with the help of an AI assistant. Every step is explained in plain language - no deep technical knowledge required.
 
 ## How It Works
 
-When you deploy a Python/JS Data App, Keboola:
+When you deploy a Python/JS App, Keboola:
 
 1. Clones your GitHub repository into the app container.
 2. Runs your `setup.sh` script to install dependencies.
@@ -31,14 +31,14 @@ Your browser -> Keboola -> Nginx (port 8888) -> Your app (internal port, e.g. 50
 ## What You Need Before Starting
 
 * A **GitHub account** (free). Your app code lives here.
-* A **Keboola project** with Data Apps available.
+* A **Keboola project** with Apps available.
 * Basic comfort with creating files and folders - an AI assistant can generate all the code for you.
 
 You do **not** need to install Python, Node.js, or any development tools on your computer. Everything runs inside Keboola's infrastructure.
 
 ## Repository Structure - The Golden Rule
 
-Every Python/JS Data App repository **must** follow this structure. Missing any piece will cause the deployment to fail.
+Every Python/JS App repository **must** follow this structure. Missing any piece will cause the deployment to fail.
 
 ```
 your-repo/
@@ -279,7 +279,7 @@ For Node.js apps, dependencies are defined in `package.json` as usual. The `setu
 
 ## Step 5 - Configure and Deploy in Keboola
 
-1. In your Keboola project, go to **Data Apps** and click **Create Data App**.
+1. In your Keboola project, go to **Apps** and click **Create App**.
 2. Choose **Python/JS** as the type.
 3. Under **Repository**, enter your GitHub repository URL.
 4. Select the **branch** you want to deploy from (usually `main`).
@@ -291,13 +291,13 @@ For Node.js apps, dependencies are defined in `package.json` as usual. The `setu
 
 Keboola will clone your repository, run `setup.sh`, and start your app. The first deployment may take a few minutes. Once complete, a URL will appear - click it to open your app.
 
-**To update your app:** Push changes to your GitHub repository, then click **Redeploy** in the Keboola Data App configuration. Keboola will pull the latest code and restart the app.
+**To update your app:** Push changes to your GitHub repository, then click **Redeploy** in the Keboola app configuration. Keboola will pull the latest code and restart the app.
 
 ## Working with Keboola Data
 
 ### Reading data loaded via Input Mapping
 
-If you configured **Input Mapping** in your Data App settings, Keboola loads selected tables from Storage into the container before your app starts. Your app can then read them as CSV files:
+If you configured **Input Mapping** in your app settings, Keboola loads selected tables from Storage into the container before your app starts. Your app can then read them as CSV files:
 
 ```python
 import pandas as pd
@@ -336,11 +336,11 @@ For a complete example using the official Python client library, see the [Kebool
 
 ## Secrets and Environment Variables
 
-Sensitive values - API keys, tokens, passwords - should never be written directly into your code. Store them as **secrets** in the Data App configuration instead.
+Sensitive values - API keys, tokens, passwords - should never be written directly into your code. Store them as **secrets** in the app configuration instead.
 
 ### Adding a secret in Keboola
 
-In your Data App configuration, go to the **Secrets** section and add key-value pairs:
+In your app configuration, go to the **Secrets** section and add key-value pairs:
 
 | Key | Value |
 |---|---|
@@ -372,7 +372,7 @@ const apiKey = process.env.ANTHROPIC_API_KEY;
 
 ## Example: Hello World App
 
-This is the simplest possible Python/JS Data App. It displays \"Hello from Keboola!\" in a browser.
+This is the simplest possible Python/JS App. It displays \"Hello from Keboola!\" in a browser.
 
 You can clone the complete example from **[keboola/example-python-js-hello-world](https://github.com/keboola/example-python-js-hello-world)** and deploy it directly.
 
@@ -406,7 +406,7 @@ def index():
     <html>
       <body style="font-family: sans-serif; padding: 2rem;">
         <h1>Hello from Keboola!</h1>
-        <p>Your Python/JS Data App is running.</p>
+        <p>Your Python/JS App is running.</p>
       </body>
     </html>
     """
@@ -478,7 +478,7 @@ Your root route (`/`) likely only accepts GET requests. Keboola sends a POST req
 
 ### App fails to start / keeps restarting
 
-Check the **Terminal Log** tab in your Data App configuration in Keboola - it shows stdout and stderr output from your app. Common causes:
+Check the **Terminal Log** tab in your app configuration in Keboola - it shows stdout and stderr output from your app. Common causes:
 
 * A path in `app.conf` is relative (`app.py`) instead of absolute (`/app/app.py`).
 * A Python command in `app.conf` is missing the `uv run` prefix.
@@ -496,7 +496,7 @@ You have `pip install` somewhere in `setup.sh` or your code. Replace it with `uv
 
 ### Environment variable is undefined
 
-Add it as a secret in the Keboola Data App configuration (see [Secrets and Environment Variables](#secrets-and-environment-variables)). Secrets are available to both `setup.sh` and your running app.
+Add it as a secret in the Keboola app configuration (see [Secrets and Environment Variables](#secrets-and-environment-variables)). Secrets are available to both `setup.sh` and your running app.
 
 ### Streaming responses arrive all at once instead of in real time
 

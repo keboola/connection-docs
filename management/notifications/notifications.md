@@ -8,7 +8,7 @@ permalink: /management/notifications/
 
 # Keboola Notifications Guide
 
-Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage. This guide outlines all available notification types, when to use them, and how to configure them. Notifications help you stay informed about the status of flows, jobs, data apps and credit consumption — either via **email** or **webhooks**.
+Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage. This guide outlines all available notification types, when to use them, and how to configure them. Notifications help you stay informed about the status of flows, jobs, apps and credit consumption — either via **email** or **webhooks**.
 
 ---
 
@@ -73,14 +73,14 @@ Open a component configuration and go to the **Notifications** tab:
 
 Use this to monitor specific transformations, data loads, or other components individually.
 
-### 4. Data App Notifications
-- Get notified when a [Data App](/data-apps/) task completes, fails, or runs significantly longer than expected.  
-- Since Data Apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
+### 4. App Notifications
+- Get notified when an [App](/data-apps/) task completes, fails, or runs significantly longer than expected.  
+- Since apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
   
 #### How to Configure
-Data App notifications are configured within the **component configuration** of the Data App itself.
+App notifications are configured within the **component configuration** of the app itself.
 
-- Go to the configuration of your Data App (e.g., Deepnote Notebook Execution Trigger).
+- Go to the configuration of your app (e.g., Deepnote Notebook Execution Trigger).
 - Open the **Notifications** tab.
 - Enter one or more **email addresses** or **webhook URLs**.
 
@@ -147,5 +147,5 @@ As a result, some third-party systems—such as Slack, Microsoft Teams, or Disco
 1. Use **group email addresses** for notifications to ensure team-wide awareness of critical issues.  
 2. Always configure error notifications for **production flows** to avoid missing failures.  
 3. Schedule flows during **off-peak hours** to minimize resource contention and optimize performance.
-4. Set up **webhook endpoints** to track jobs in external systems.  
+4. Set up **webhook endpoints** to track jobs in external systems.    
 

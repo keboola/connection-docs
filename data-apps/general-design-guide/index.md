@@ -1,5 +1,5 @@
 ---
-title: Data Apps General Design Guide
+title: Apps General Design Guide
 permalink: /data-apps/general-design-guide/
 redirect_from:
   - /components/data-apps/general-design-guide/
@@ -8,13 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
-This guide will help you quickly create a user-friendly data app in Keboola. We cover essentials like theming, headers, storage integration, 
+This guide will help you quickly create a user-friendly app in Keboola. We cover essentials like theming, headers, storage integration, 
 and more to streamline your setup. With clear, step-by-step instructions, you'll be able to build an intuitive, visually appealing app. 
 
 ## Theming
 There are two options for setting theming:
 
-1. **Keboola Data Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [the documentation](/data-apps/#theming).
+1. **Keboola Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [the documentation](/data-apps/#theming).
 2. **Configuration File:** Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 {: .image-popup}

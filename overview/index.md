@@ -67,8 +67,8 @@ Unlike free-form transformations, [applications](/components/applications/) are 
 sentiment analysis, association discovery, or histogram grouping. They can also enhance data, for example, by incorporating external data like weather or exchange 
 rates through third-party services.
 
-### Data Apps
-[Data apps](/data-apps/) are simple web applications that can be deployed inside Keboola projects and also publicly accessed from outside the projects. 
+### Apps
+[Apps](/data-apps/) are simple web applications that can be deployed inside Keboola projects and also publicly accessed from outside the projects. 
 They are usually custom-built to address specific challenges, for example, recommendation engines, interactive segmentation tools, AI integration solutions, data 
 visualization platforms, custom internal reporting tools for business teams, and financial apps for gaining insights into spending patterns.
 
