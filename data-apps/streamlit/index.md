@@ -55,7 +55,7 @@ There are two ways to deploy a Streamlit data app:
 
 ### Code
 
-For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/49752130) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
+For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
 {: .image-popup}
 ![Code deployment](/data-apps/streamlit/development-type-code.png)

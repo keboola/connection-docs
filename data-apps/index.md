@@ -213,14 +213,12 @@ For example, there may be a conflict with the specified packages:
 
 Simple demonstration of Streamlit code deployment.
 
-- [Configuration](https://demo.keboola.com/app/data-apps/75298630)
 - [Live App](https://hello-world-75299519.hub.north-europe.azure.keboola.com)
 
 ### Titanic Demo App
 
 Interactive data exploration with visualizations and filters.
 
-- [Configuration](https://demo.keboola.com/app/data-apps/49752130)
 - [Source Code](https://github.com/keboola/titanic-data-app)
 - [Live App](https://titanic-demo-app-deployed-from-a-github-repository-49752295.hub.north-europe.azure.keboola.com/)
 
