@@ -1,5 +1,5 @@
 ---
-title: Data Apps
+title: Apps
 permalink: /data-apps/
 redirect_from:
   - /components/data-apps/
@@ -10,13 +10,13 @@ redirect_from:
 
 ## Overview
 
-Data apps are simple, interactive web applications that use data to deliver insights or automatically take action. They are custom-tailored to tackle specific business problems and enable dynamic, purpose-built user experiences.
+Apps are simple, interactive web applications that use data to deliver insights or automatically take action. They are custom-tailored to tackle specific business problems and enable dynamic, purpose-built user experiences.
 
-As web applications deployed within your Keboola project, data apps can be publicly accessed from outside the project. This means users accessing your data app do not need access to a Keboola project - they simply visit a URL.
+As web applications deployed within your Keboola project, apps can be publicly accessed from outside the project. This means users accessing your app do not need access to a Keboola project - they simply visit a URL.
 
-## Why Build Data Apps?
+## Why Build Apps?
 
-Data apps transform how your organization interacts with data by providing purpose-built interfaces that solve specific business challenges.
+Apps transform how your organization interacts with data by providing purpose-built interfaces that solve specific business challenges.
 
 ### Replace Traditional BI Tools
 
@@ -55,7 +55,7 @@ Create targeted solutions for unique challenges:
 
 ## Choose Your Technology
 
-Keboola Data Apps support two technology stacks, each designed for different use cases and skill sets:
+Keboola Apps support two technology stacks, each designed for different use cases and skill sets:
 
 ### Streamlit (Python)
 
@@ -77,7 +77,7 @@ Streamlit is a Python framework that turns Python scripts into interactive web a
 * Model demos and visualizations.
 * Internal reporting tools.
 
-[Learn more about Streamlit Data Apps -->](/data-apps/streamlit/)
+[Learn more about Streamlit Apps -->](/data-apps/streamlit/)
 
 ### Python/JS (Custom Frameworks)
 
@@ -99,14 +99,14 @@ A full-stack solution where you bring your own code - use any Python web framewo
 * Applications requiring advanced UI features.
 * Tools needing multiple data processing backends.
 
-[Learn more about Python/JS Data Apps -->](/data-apps/python-js/)
+[Learn more about Python/JS Apps -->](/data-apps/python-js/)
 
-## Creating Your First Data App
+## Creating Your First App
 
-Getting started with Data Apps is straightforward:
+Getting started with Apps is straightforward:
 
-1. **Navigate to Data Apps**: In your Keboola project, go to the **Data Apps** section.
-2. **Create New App**: Click the **+** button to create a new data app.
+1. **Navigate to Apps**: In your Keboola project, go to the **Apps** section.
+2. **Create New App**: Click the **+** button to create a new app.
 3. **Choose Type**: Choose your technology stack (Streamlit or Python/JS).
 
 {: .image-popup}
@@ -116,16 +116,16 @@ Getting started with Data Apps is straightforward:
 5. **Deploy Your App**: Click **Deploy** and your app will be available at its public URL.
 
 For detailed setup instructions, visit the technology-specific documentation pages:
-- [Streamlit Data Apps](/data-apps/streamlit/)
-- [Python/JS Data Apps](/data-apps/python-js/)
+- [Streamlit Apps](/data-apps/streamlit/)
+- [Python/JS Apps](/data-apps/python-js/)
 
 ## Common Features
 
-Regardless of which technology you choose, all Data Apps share these capabilities:
+Regardless of which technology you choose, all apps share these capabilities:
 
 ### Authentication & Security
 
-Keboola provides built-in authentication methods to protect your data apps:
+Keboola provides built-in authentication methods to protect your apps:
 
 * **None**: No authentication - the app is publicly accessible. You may implement your own auth logic within the app.
 * **Basic Authentication**: Simple password protection using a Keboola-generated password.
@@ -194,20 +194,20 @@ When you click **Deploy** or **Redeploy** for your app, a wizard will appear, pr
 {: .image-popup}
 ![Actions menu](/data-apps/manage-redeploy.png)
 
-- **Deploy Data App** - starts the data app. Once the deployment job is finished, you can go to the data app public URL by clicking **Open Data App**.
-- **Open Data App** - opens a new window with your data app.
-- **Redeploy** - if you made changes in the data app configuration, you have to redeploy it for the changes to take effect.
-- **Suspend Data App** - stops the data app. The container in which the application is running will be stopped, and the app URL will no longer be available. The configuration of the app will remain intact.
-- **Delete Data App** - stops the data app deployment and deletes its configuration.
+- **Deploy App** - starts the app. Once the deployment job is finished, you can go to the app public URL by clicking **Open App**.
+- **Open App** - opens a new window with your app.
+- **Redeploy** - if you made changes in the app configuration, you have to redeploy it for the changes to take effect.
+- **Suspend App** - stops the app. The container in which the application is running will be stopped, and the app URL will no longer be available. The configuration of the app will remain intact.
+- **Delete App** - stops the app deployment and deletes its configuration.
 
 ### Debugging App Deployment
-If the data app deployment job fails, you can see the logs from its container in the event log of the deployment job.
+If the app deployment job fails, you can see the logs from its container in the event log of the deployment job.
 For example, there may be a conflict with the specified packages:
 
 {: .image-popup}
 ![Job error log](/data-apps/job-error-log.png)
 
-## Example Data Apps
+## Example Apps
 
 ### Hello World
 
@@ -256,7 +256,7 @@ Multi-channel campaign cost overview.
 
 ---
 
-**Ready to build your first Data App?** Choose your technology:
+**Ready to build your first app?** Choose your technology:
 
-* [Streamlit Data Apps -->](/data-apps/streamlit/)
-* [Python/JS Data Apps -->](/data-apps/python-js/)
+* [Streamlit Apps -->](/data-apps/streamlit/)
+* [Python/JS Apps -->](/data-apps/python-js/)

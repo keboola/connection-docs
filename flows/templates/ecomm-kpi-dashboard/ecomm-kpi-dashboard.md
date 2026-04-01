@@ -9,9 +9,9 @@ redirect_from:
 {:toc}
 
 Utilizing eCommerce KPI dashboards powered by Shopify data provides a comprehensive **overview of critical financial metrics**, including turnover, 
-orders, and customer data. These insights are presented through a **pre-defined data app dashboard** equipped with a date filter for your convenience. 
+orders, and customer data. These insights are presented through a **pre-defined app dashboard** equipped with a date filter for your convenience. 
 
-The dashboards display a comparison between planned numbers and the actual situation. Moreover, the data app facilitates effortless parameter sharing, 
+The dashboards display a comparison between planned numbers and the actual situation. Moreover, the app facilitates effortless parameter sharing, 
 enabling **seamless integration with Slack** for quick communication. 
 
 With all your data centralized in a single table and location, the need for manual data collection across multiple systems is eliminated, 
@@ -27,8 +27,8 @@ The template consists of two separate flows, one for building interactive dashbo
 The first flow is for **building interactive dashboards** based on transformed data extracted from Shopify:
 
   - First, you will authorize the data source connector to extract data from your Shopify account. 
-  - An SQL transformation will then prepare the data and create a table needed for the data app.
-  - The data will then be sent into the data app, where users can view and filter it by date.
+  - An SQL transformation will then prepare the data and create a table needed for the app.
+  - The data will then be sent into the app, where users can view and filter it by date.
 
 {: .image-popup}
 ![Flow 1](/flows/templates/ecomm-kpi-dashboard/flow1.png)
@@ -94,8 +94,8 @@ you will see the newly created flow. Click **Run Template** and start building y
 {: .image-popup}
 ![Flow 1 Interactive KPI Report](/flows/templates/ecomm-kpi-dashboard/flow1-report.png)
 
-## How to Use Data App
-To fully utilize this template, set up the pre-defined data app for data visualization. 
+## How to Use App
+To fully utilize this template, set up the pre-defined app for data visualization. 
 
 To get started, follow these steps:
 
@@ -106,15 +106,15 @@ To get started, follow these steps:
 {: .image-popup}
 ![Name Interactive KPI Report](/flows/templates/ecomm-kpi-dashboard/name-int-kpi-report.png)
 
-This will take you to the page where you can configure the data app template. Here, you will need to provide credentials for the data sources 
-and data destinations you intend to use. Once you have completed this step, you can launch your data app using this template.
+This will take you to the page where you can configure the app template. Here, you will need to provide credentials for the data sources 
+and data destinations you intend to use. Once you have completed this step, you can launch your app using this template.
 
 {: .image-popup}
 ![Interactive KPI Report PS](/flows/templates/ecomm-kpi-dashboard/int-kpi-report-ps.png)
 
-A data app has been created. You can find its details in the **Components – Data Apps** section, where you can edit the apps you have created.
+An app has been created. You can find its details in the **Components – Apps** section, where you can edit the apps you have created.
 
-Below, you can see a screenshot of the data app created using the eCommerce KPI Dashboard template. When configuring the app 
+Below, you can see a screenshot of the app created using the eCommerce KPI Dashboard template. When configuring the app 
 for the eCommerce KPI Dashboard, simply insert the Keboola Token in the dialog box shown in the screenshot below and save the configuration.
 
 {: .image-popup}
@@ -124,12 +124,12 @@ for the eCommerce KPI Dashboard, simply insert the Keboola Token in the dialog b
 ![Performance Indicators](/flows/templates/ecomm-kpi-dashboard/performance-indicators.png)
 
 Now, you are ready to go. The template is operational, and the interactive dashboards are prepared for users. 
-The URL of the data app is located in the **Components > Data Apps** section, where you can search for the app by the name you assigned to it. 
+The URL of the app is located in the **Components > Apps** section, where you can search for the app by the name you assigned to it. 
 
-Upon opening the data app, you will find the link to its user interface on the right side of the screen. 
+Upon opening the app, you will find the link to its user interface on the right side of the screen. 
 
 {: .image-popup}
-![Opening Data App](/flows/templates/ecomm-kpi-dashboard/opening-app.png)
+![Opening App](/flows/templates/ecomm-kpi-dashboard/opening-app.png)
 
 ## Authorizing Data Sources
 To use a selected data source connector, you must first authorize the data source. 

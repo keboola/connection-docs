@@ -19,11 +19,11 @@ To begin, click on **Templates** in the top menu, and then select **Add Template
 {: .image-popup}
 ![Add New Template](/flows/templates/ua-and-ga4-comparison/add-template.png)
 
-This will take you to the list of all available templates. Check the box for data app templates and view the list that appears. 
+This will take you to the list of all available templates. Check the box for app templates and view the list that appears. 
 From this list, select **UA and GA4 Comparison** and click on **Use Template**.
 
 {: .image-popup}
-![New Template – Data Apps](/flows/templates/ua-and-ga4-comparison/new-template-data-apps.png)
+![New Template – Apps](/flows/templates/ua-and-ga4-comparison/new-template-data-apps.png)
 
 You will then be directed to the main **Template** page, where all the components used are listed. Here, you can also find a general description of the template. 
 
@@ -39,15 +39,15 @@ Then you will configure the template:
 
 1. **Data extractions** – First, you will authorize the Universal Analytics data source connector and at least one of the following two sources: GA4 API and/or GA4 from the BigQuery database. They will provide all available data. For more details, see the [Authorizing Data Sources](/flows/templates/ua-and-ga4-comparison/#authorizing-data-sources) section below.
 
-2. **Snowflake SQL** – Then, the data will be prepared so that it can be sent to the data app.
+2. **Snowflake SQL** – Then, the data will be prepared so that it can be sent to the app.
 
-3. **Data app deployment** – The data app will download data from Universal Analytics and one or two additional sources, integrating them thereafter.
+3. **App deployment** – The app will download data from Universal Analytics and one or two additional sources, integrating them thereafter.
 
-Once you have authorized the Universal Analytics data source and at least one GA4 data source, click **Configure** in the data app. Then, tick the checkbox 
+Once you have authorized the Universal Analytics data source and at least one GA4 data source, click **Configure** in the app. Then, tick the checkbox 
 **Let’s Do It** to run the app.
 
 {: .image-popup}
-![Configure Data App](/flows/templates/ua-and-ga4-comparison/save-config.png)
+![Configure App](/flows/templates/ua-and-ga4-comparison/save-config.png)
 
 To learn more about how templates work, please refer to [the templates page](/flows/templates/). 
 
@@ -81,13 +81,13 @@ Please authorize your Google BigQuery account. To create a new JSON key, follow 
 {: .image-popup}
 ![Authorize Data Source BigQuery](/flows/templates/ua-and-ga4-comparison/bigquery.png)
 
-## Setting Up Data App
+## Setting Up App
 {: .image-popup}
-![Setting Up Data App](/flows/templates/ua-and-ga4-comparison/configuring-app.png)
+![Setting Up App](/flows/templates/ua-and-ga4-comparison/configuring-app.png)
 
-**Deployment Type** – A Git repository is used for this data app.
+**Deployment Type** – A Git repository is used for this app.
 
-**Data App Repository** – To run the app from the template, use the Git repository. You can either use the one provided as an example 
+**App Repository** – To run the app from the template, use the Git repository. You can either use the one provided as an example 
 or utilize your own Git repository. In order to run the app successfully, you need to fill in all necessary fields: Project URL, Username, Access Token, 
 Branch, and Main File Path. 
 
@@ -96,18 +96,18 @@ in the section **Secrets**. These secrets will be injected into the `secrets.tom
 
 **Table/File Input Mapping** – Select a table or files in the input mapping section.
 
-**(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
+**(Re)deploy App** – Once everything is set up, simply click **Deploy App** (or **Redeploy App**).
 
-To modify or view the data app, you can find it under **Components > Data App**. 
+To modify or view the app, you can find it under **Components > App**. 
 
-For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
+For more information on how apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
-## Using Data App
+## Using App
 
 {: .image-popup}
-![Using Data App](/flows/templates/ua-and-ga4-comparison/using-app.png)
+![Using App](/flows/templates/ua-and-ga4-comparison/using-app.png)
 
-This data application enables business users to compare the performance of Google Universal Analytics (GA UA) and Google Analytics 4 (GA4). 
+This application enables business users to compare the performance of Google Universal Analytics (GA UA) and Google Analytics 4 (GA4). 
 
 You can filter analytics data by date range, traffic source, medium, and campaign. The application then generates interactive line charts, 
 offering a visual comparison of key metrics like Users, Sessions, and Transactions between GA UA and GA4. Additionally, it presents a grouped bar chart 
