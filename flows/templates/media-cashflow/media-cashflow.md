@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 The Media Cashflow template **combines data from various platforms**, such as ECB currency rates, Meta, Google Ads, LinkedIn, TikTok, and Sklik. 
-It then transforms this data and consolidates it into a single data model for **further deployment in a data app**. 
+It then transforms this data and consolidates it into a single data model for **further deployment in an app**. 
 
 In this app, users can view and filter expenses by client, identify upcoming payments, or change budgets for campaigns.
 
@@ -21,11 +21,11 @@ To begin, click on **Templates** in the top menu, and then select **Add Template
 {: .image-popup}
 ![Add New Template](/flows/templates/media-cashflow/add-template.png)
 
-This will take you to the list of all available templates. Among the various categories available, we will focus on the data app templates for our case. 
-To do so, check the box for data app templates and view the list that appears. From this list, select **Marketing Cashflow** and click on **Use Template**.
+This will take you to the list of all available templates. Among the various categories available, we will focus on the app templates for our case. 
+To do so, check the box for app templates and view the list that appears. From this list, select **Marketing Cashflow** and click on **Use Template**.
 
 {: .image-popup}
-![Add New Template – Data Apps](/flows/templates/media-cashflow/new-template-data-apps.png)
+![Add New Template – Apps](/flows/templates/media-cashflow/new-template-data-apps.png)
 
 You will then be directed to the main **Template** page, where all the components used are listed. Here, you can also find a general description of the Template. 
 Click **Use Template** to begin. Name the template, and click **Next Step**.
@@ -41,16 +41,16 @@ Then you will configure the template:
 1. **Data extractions** – First, you will select one or multiple data source connectors that will provide all available data.
 For more details, see the section [Data Sources](/flows/templates/media-cashflow/#data-sources) below.
 
-2. **Snowflake SQL** – Then the data will be prepared so it can be sent to the data app.
+2. **Snowflake SQL** – Then the data will be prepared so it can be sent to the app.
 
-3. **Data app deployment**
-   - After authorizing at least one data source, click **Configure** in the **Data App** box. To do so, you will need to provide your Keboola token.
+3. **App deployment**
+   - After authorizing at least one data source, click **Configure** in the **App** box. To do so, you will need to provide your Keboola token.
    - Once you enter, **save** the configuration and start using the app.
-   - The data app will visualize the campaign spending across various advertising platforms. It will display both the total budget and the budget spent per client on different advertising platforms. Additionally, the app will provide you with the capability to input or modify budgets for specific clients and choose the advertising platforms to which the specific budget will apply.
+   - The app will visualize the campaign spending across various advertising platforms. It will display both the total budget and the budget spent per client on different advertising platforms. Additionally, the app will provide you with the capability to input or modify budgets for specific clients and choose the advertising platforms to which the specific budget will apply.
    - These changes will be promptly saved to storage and will become accessible for subsequent data refreshes from advertising campaigns.
    
 {: .image-popup}
-![Configure Data App](/flows/templates/media-cashflow/configure-data-app.png)
+![Configure App](/flows/templates/media-cashflow/configure-data-app.png)
 
 To learn more about how templates work, please refer to [the templates page](/flows/templates/).
 
@@ -103,32 +103,32 @@ Authorize the Sklik account using the Sklik API token, and define a list of acco
 
 To access data from your TikTok account, authorize your account and define rows you want to use. For more details, visit the [documentation](https://bitbucket.org/kds_consulting_team/kds-team.ex-tiktok-ads/src/master/README.md). 
 
-## Setting Up Data App
+## Setting Up App
 
 {: .image-popup}
-![Setting Up Data App](/flows/templates/media-cashflow/setting-up-app.png)
+![Setting Up App](/flows/templates/media-cashflow/setting-up-app.png)
 
-**Deployment Type** – A Git repository is used for this data app.
+**Deployment Type** – A Git repository is used for this app.
 
-**Data App Repository** – To run the app from the template, use the Git repository. You can either use the one provided as an example 
+**App Repository** – To run the app from the template, use the Git repository. You can either use the one provided as an example 
 or utilize your own Git repository. In order to run the app successfully, you need to fill in all necessary fields: Project URL, Username, Access Token, Branch, and Main File Path. 
 
 **Secrets** – To provide your app with environment variables or sensitive information like credentials, API keys etc., enter them as key-value pairs in the section **Secrets**. These secrets will be injected into the `secrets.toml` file upon deployment of the app.
 
 **Table/File Input Mapping** – Select a table or files in the input mapping section
 
-**(Re)deploy Data App** – Once everything is set up, simply click **Deploy Data App** (or **Redeploy Data App**).
+**(Re)deploy App** – Once everything is set up, simply click **Deploy App** (or **Redeploy App**).
 
-To modify or view the data app, you can find it under **Components > Data App**. 
+To modify or view the app, you can find it under **Components > App**. 
 
-For more information on how data apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
+For more information on how apps work and how to set them up, please visit [this page](https://help.keboola.com/components/data-apps/).
 
-## Using Data App
+## Using App
 
 {: .image-popup}
-![Using Data App](/flows/templates/media-cashflow/using-data-app.png)
+![Using App](/flows/templates/media-cashflow/using-data-app.png)
 
-This data app combines budget plans and actual expenditures from various campaigns across different platforms. 
+This app combines budget plans and actual expenditures from various campaigns across different platforms. 
 It allows you to monitor campaign spending effortlessly and to filter expenses by client. 
 
 Moreover, you can conveniently adjust the budget allocated for each campaign, ensuring optimal resource allocation and enhanced campaign performance.

@@ -1,5 +1,5 @@
 ---
-title: Streamlit Data Apps
+title: Streamlit Apps
 permalink: /data-apps/streamlit/
 redirect_from:
   - /components/data-apps/streamlit/
@@ -10,7 +10,7 @@ redirect_from:
 
 ## Overview
 
-Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code. It is the fastest way to build data apps in Keboola, perfect for rapid prototyping and internal tools.
+Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code. It is the fastest way to build apps in Keboola, perfect for rapid prototyping and internal tools.
 
 **When to Use Streamlit:**
 
@@ -38,8 +38,8 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 
 ### Create Your First Streamlit App
 
-1. **Navigate to Data Apps** in your Keboola project.
-2. Click the **+** button to create a new data app.
+1. **Navigate to Apps** in your Keboola project.
+2. Click the **+** button to create a new app.
 3. Enter a **custom prefix** for your app's URL.
 4. Select **Streamlit** as the technology stack.
 5. Choose a deployment method (Code or Git repository).
@@ -49,7 +49,7 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 
 ## Deployment Methods
 
-There are two ways to deploy a Streamlit data app: 
+There are two ways to deploy a Streamlit app: 
 1. Code
 2. Git Repository
 
@@ -82,7 +82,7 @@ If you are using a private repository, you have two options to authenticate:
 Follow these steps to authenticate using your GitHub username and personal access token:
 
 1. Generate a personal access token on GitHub by going to your GitHub account settings, selecting **Developer settings > Personal access tokens**, and clicking **Generate new token**. Ensure the token has the necessary permissions to access the repository.
-2. In Keboola, navigate to the **Data App Repository** in your data app configuration, check the `Private` option, and enter your GitHub username and the personal access token you generated in step 1.
+2. In Keboola, navigate to the **App Repository** in your app configuration, check the `Private` option, and enter your GitHub username and the personal access token you generated in step 1.
 3. Click **Save** to authenticate with the private repository.
 
 To authenticate using your SSH private key, follow the instructions in the [GitHub manual](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). After generating your key, enter your SSH private key into the appropriate configuration field and click **Save**.
@@ -118,18 +118,18 @@ openai = "YOUR_OPENAI_KEY"
 3. Review existing secrets before uploading new ones to avoid unintentional overwrites.
 4. If you need nested/groups, use repo-based secrets. Direct upload does not support nested access.
 
-## Access Storage from Data App
+## Access Storage from App
 By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
 - `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
 
-To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your Data App as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
+To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
 
 **Important:**
 Do not name your secret `KBC_TOKEN`, as this name is reserved.
 
-These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola Storage token:
+These environment variables can be accessed within your Streamlit app code. Here is an example of how to initialize the Keboola Storage token:
 ```
 # Constants
 kbc_token = os.environ.get('KBC_TOKEN')
@@ -146,7 +146,7 @@ To load data from the Storage of a Keboola project into the app, use the [input 
 For writing data back to Keboola Project Storage, use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).
 
 ## Theming
-To configure theming in your data app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
+To configure theming in your app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
 
 {: .image-popup}
 ![Predefined themes](/data-apps/streamlit/theming-predefined.png)
@@ -220,13 +220,13 @@ Starting with backend version **1.15.0**, each release is available with multipl
 For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/data-apps/backend-versions/) page.
 
 ## AgGrid Enterprise License
-The AgGrid Enterprise License is available for Streamlit Data Apps in Keboola, offering enhanced data manipulation capabilities, including:
+The AgGrid Enterprise License is available for Streamlit apps in Keboola, offering enhanced data manipulation capabilities, including:
 
 - Inline dataset editing.
 - Advanced features such as pivoting, filtering, and sorting.
 - A professional interface, free from the "trial use only" watermark.
 
-Ensure your data app is configured to use the AgGrid component to take advantage of these enhanced features.
+Ensure your app is configured to use the AgGrid component to take advantage of these enhanced features.
 
 ### How to Enable the License
 The **enterprise license** is **pre-configured for all Keboola stacks**, so no additional setup is required for supported applications.

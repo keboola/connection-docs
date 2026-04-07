@@ -254,7 +254,7 @@ tables:
 
   - id: kbc_data_app_workspace
     mode: project
-    description: "This table lists runs of [data apps](/data-apps/) and their consumption metrics."
+    description: "This table lists runs of [apps](/data-apps/) and their consumption metrics."
     is_full_load: false
     note: "A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     columns:
@@ -263,7 +263,7 @@ tables:
         description: "Identifier of the workspace active window (between starting and pausing the sandbox)"
         example: "`10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a`"
       - name: kbc_data_app_workspace_id
-        description: "Data app workspace identifier"
+        description: "App workspace identifier"
         example: "`10910_kbc-eu-central-1`"
       - name: kbc_project_id
         fk: kbc_project
@@ -295,10 +295,10 @@ tables:
         description: "Hostname of the workspace"
         example: "`https://hello-world-759519.hub.north-europe.azure.keboola.com`"
       - name: data_app_runtime_hours
-        description: "Runtime of the data app workspace on the particular date in hours"
+        description: "Runtime of the app workspace on the particular date in hours"
         example: "`2.413333`"
       - name: backend_size
-        description: "Size of the data app backend"
+        description: "Size of the app backend"
         example: "`Small`"
       - name: time_credits_used
         description: "Number of time credits consumed by the workspace on the particular date"
@@ -801,7 +801,7 @@ tables:
     mode: project
     description: "This table shows aggregated values for all metrics that may be included in the contract, such as consumed credits, data in storage, and the number of users. This combines data from different data sources (tables), making it useful for providing an overview of consumption."
     is_full_load: false
-    note: "A `0` value for **Data Apps** or **Data Science Sandbox** in `usage_breakdown` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
+    note: "A `0` value for **Apps** or **Data Science Sandbox** in `usage_breakdown` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     org_mode_note: "`organization_value` and `company_value` are available in **Organization** mode only. You need data for all projects."
     usage_breakdown:
       - name: "Applications"
@@ -1653,7 +1653,7 @@ tables:
         example: "`orchestration trigger`"
       - name: kbc_data_app_id
         fk: kbc_data_app
-        description: "Foreign key to the Keboola data app"
+        description: "Foreign key to the Keboola app"
         example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
 
   - id: kbc_table_metadata
@@ -2167,28 +2167,28 @@ tables:
 
   - id: kbc_data_app
     mode: activity_center
-    description: "This table lists the [data apps](/data-apps/)."
+    description: "This table lists the [apps](/data-apps/)."
     is_full_load: false
     columns:
       - name: kbc_data_app_id
         pk: true
-        description: "Unique identifier for the data application"
+        description: "Unique identifier for the application"
         example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
       - name: kbc_project_id
         fk: kbc_project
         description: "Foreign key to the Keboola project"
         example: "`580_kbc-us-east-1`"
       - name: data_app_created
-        description: "Datetime when the data app was created"
+        description: "Datetime when the app was created"
         example: "`2023-05-14 12:30:45`"
       - name: data_app_id_num
-        description: "Numerical ID for the data application"
+        description: "Numerical ID for the application"
         example: "`945672`"
       - name: kbc_data_app_name
-        description: "Human-readable name of the data app"
+        description: "Human-readable name of the app"
         example: "`Customer Data Loader`"
       - name: kbc_data_app_url
-        description: "URL link to access the data application"
+        description: "URL link to access the application"
         example: "`https://1191546783.hub.keboola.com`"
       - name: kbc_component_id
         description: "Identifier of the component"
@@ -2201,7 +2201,7 @@ tables:
         description: "Foreign key to the Keboola component configuration"
         example: "`123_kbc-us-east-1_keboola.data-apps_1191549426`"
       - name: kbc_data_app_is_deleted
-        description: "Boolean flag indicating whether the data application has been deleted"
+        description: "Boolean flag indicating whether the application has been deleted"
         example: "`false`"
 
   - id: kbc_data_app_params_event
@@ -2211,7 +2211,7 @@ tables:
     columns:
       - name: kbc_data_app_event_id
         pk: true
-        description: "Unique identifier for the event created by the data app"
+        description: "Unique identifier for the event created by the app"
         example: "`123557345_kbc-us-east-1`"
       - name: kbc_project_id
         fk: kbc_project
@@ -2219,10 +2219,10 @@ tables:
         example: "`580_kbc-us-east-1`"
       - name: kbc_data_app_id
         fk: kbc_data_app
-        description: "Foreign key to the Keboola data app"
+        description: "Foreign key to the Keboola app"
         example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
       - name: data_app_id_num
-        description: "Numerical ID for the data application"
+        description: "Numerical ID for the application"
         example: "`945672`"
       - name: event_created_at
         description: "Datetime when the event was created"
@@ -2286,7 +2286,7 @@ relationships:
     type: one-to-many
   - from: kbc_project
     to: kbc_data_app_workspace
-    label: "has data app workspaces"
+    label: "has app workspaces"
     type: one-to-many
   - from: kbc_project
     to: kbc_data_science_sandbox
@@ -2418,11 +2418,11 @@ relationships:
     type: one-to-many
   - from: kbc_project
     to: kbc_data_app
-    label: "has data apps"
+    label: "has apps"
     type: one-to-many
   - from: kbc_project
     to: kbc_data_app_params_event
-    label: "has data app events"
+    label: "has app events"
     type: one-to-many
 
   # Branch relationships
@@ -2494,7 +2494,7 @@ relationships:
     type: one-to-many
   - from: kbc_component_configuration
     to: kbc_data_app
-    label: "has data app"
+    label: "has app"
     type: one-to-many
 
   # Flow phase -> task
@@ -2607,7 +2607,7 @@ relationships:
     label: "has events"
     type: one-to-many
 
-  # Data app relationships
+  # App relationships
   - from: kbc_data_app
     to: kbc_data_app_params_event
     label: "has events"

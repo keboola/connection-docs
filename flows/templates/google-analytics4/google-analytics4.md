@@ -11,7 +11,7 @@ redirect_from:
 Using the Google Analytics 4 template will provide you with insights into site activities: the length of visits, the number of pages seen per visit, the 
 bounce rate, and many other statistics, which you can see in time or by the traffic source. You can also enrich your Google Analytics data with 
 Google Search Console data. This will show you the average rank of your page in time.
-After all the necessary tasks are performed on the data, you can load the results into the data destination of your choice or use a data app for visualization.
+After all the necessary tasks are performed on the data, you can load the results into the data destination of your choice or use an app for visualization.
 
 **The flow, in a nutshell:**
 
