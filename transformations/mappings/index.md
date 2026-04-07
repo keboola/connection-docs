@@ -188,10 +188,11 @@ As you can see, a **read-only input mapping** allows you to read a table created
 
 
 #### _timestamp system column
-A table loaded using `CLONE` (on both Snowflake and BigQuery) will contain all columns of the original table plus a new `_timestamp` column.
+A cloned table is an exact copy of the source table, including the `_timestamp` system column.
 This column is used internally by Keboola for comparison with the value of the *Changed in last* filter.
 
-The value in the column contains a unix timestamp of the [last change of the row](/storage/tables/#manual-incremental-processing).
+The column type differs by backend: `TIMESTAMP_NTZ(9)` on Snowflake and `TIMESTAMP` on BigQuery.
+The value contains the [last change of the row](/storage/tables/#manual-incremental-processing).
 You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),
 i.e., to replace the role of the **Changed in Last** filter in the input mapping (which you can't use with a clone mapping).
 
@@ -203,7 +204,8 @@ When you attempt to do so, you'll get the following error:
 	Invalid columns: _timestamp: Only alphanumeric characters and underscores are allowed in the column name.
 	Underscore is not allowed on the beginning.
 
-If you are not using the `_timestamp` column in your transformation, you have to drop it, for example:
+If you are not using the `_timestamp` column in your transformation, you can either use the `dropTimestampColumn` option
+in the input mapping to exclude it automatically, or drop it manually:
 
 In Snowflake:
 
