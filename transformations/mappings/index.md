@@ -122,12 +122,13 @@ fail. In such a case, it's reasonable to revert to `VARCHAR` types -- for exampl
 When working with large tables, it may become important to understand how the tables are loaded into a staging
 database. We use two loading options: `COPY` and `CLONE`. The `CLONE` type is a highly optimized operation which
 allows loading an arbitrary large table in near-constant time. There is a limitation, however, that the `CLONE` type can't be used
-together with any filters or data type configurations.
+together with any filters, data type configurations, or incremental loading.
 
 The `CLONE` loading type is supported on **Snowflake** and **BigQuery** backends.
 
 When using `AUTO` (the default), Keboola automatically selects `CLONE` when all conditions are met (no filters, no data type
-configurations, no incremental loading), and falls back to `COPY` otherwise.
+configurations, no incremental loading), and falls back to `COPY` otherwise. When `CLONE` is explicitly requested with
+incompatible options (such as `incremental`), the request will fail.
 
 **BigQuery-specific limitation:** `CLONE` is not supported for [linked buckets](/catalog/) on BigQuery. If a table comes from a linked bucket on BigQuery, the load will fall back to `COPY` when using `AUTO`, or fail if `CLONE` is explicitly requested.
 
