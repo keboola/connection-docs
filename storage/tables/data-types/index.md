@@ -179,10 +179,12 @@ This distinction matters because backends treat them differently.
 
 This means the **same CSV file** can produce different NULL semantics depending on the target column type in BigQuery. Numeric columns will have `NULL` where string columns will have an empty string, even though the source CSV value is the same.
 
+**Note:** This is a behavior of BigQuery's CSV parser, not Keboola Storage. BigQuery does not provide any option (similar to Snowflake's `EMPTY_FIELD_AS_NULL`) to change how quoted empty strings are handled during CSV loading. There is no available workaround at the BigQuery level.
+
 ### The `treatValuesAsNull` Parameter
 When importing data, you can use the `treatValuesAsNull` parameter to specify which values should be treated as `NULL`. For example, `treatValuesAsNull: [""]` tells the system to treat empty strings as `NULL`.
 
-However, in BigQuery, this parameter maps to BigQuery’s native `nullMarker`, which **only applies to unquoted CSV fields**. Quoted values bypass the null marker check entirely — this is by design, as quoting is the CSV mechanism to distinguish a null marker from a literal string value.
+However, in BigQuery, this parameter maps to BigQuery’s native [`nullMarker`](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) CSV load option, which **only applies to unquoted CSV fields**. Quoted values bypass the null marker check entirely — this is a limitation of BigQuery’s CSV parser, not Keboola Storage.
 
 In practice:
 
@@ -191,7 +193,7 @@ In practice:
 | `,,` (unquoted empty) | matches null marker → **NULL** | `NULL` |
 | `""` (quoted empty) | skipped (quoted) | `’’` (empty string) |
 
-If your data source (e.g., a database extractor) writes `NULL` values as `""` instead of `,,`, string columns will contain empty strings instead of `NULL` in BigQuery, while numeric columns will still show `NULL` due to type coercion.
+If your data source (e.g., a database extractor) writes `NULL` values as `""` instead of `,,`, string columns will contain empty strings instead of `NULL` in BigQuery, while numeric columns will still show `NULL` due to type coercion. To ensure correct NULL handling, the data source must represent NULL values as unquoted empty fields (`,,`) in the CSV.
 
 ### NULL and Incremental Loading
 Columns without native types are always `VARCHAR NOT NULL`. This means you don’t need to worry about specific `NULL` behavior. However, this changes with typed columns. 
