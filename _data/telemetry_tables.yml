@@ -2098,8 +2098,7 @@ tables:
   - id: kbc_sql_workspace
     mode: project
     description: "This table shows data about SQL [workspaces](/workspace/) provisioned via configurations. It replaces `kbc_workspace` for SQL-based workspace tracking."
-    is_full_load: true
-    note: "The table is always extracted in full."
+    is_full_load: false
     columns:
       - name: kbc_sql_workspace_id
         pk: true
