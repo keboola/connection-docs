@@ -2133,7 +2133,7 @@ tables:
       - name: kbc_workspace_name
         description: "Name of the workspace (derived from component configuration)"
         example: "`My Workspace`"
-      - name: kbc_configuration_id
+      - name: kbc_component_configuration_id
         fk: kbc_component_configuration
         description: "Foreign key to the component configuration that created this workspace"
         example: "`580_kbc-us-east-1_keboola.sandboxes_610931033`"
