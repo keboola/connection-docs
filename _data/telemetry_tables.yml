@@ -2029,7 +2029,7 @@ tables:
     mode: activity_center
     description: "This table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
     is_full_load: true
-    note: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace`. The table is always extracted in full."
+    note: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace` and `kbc_data_app`. The table is always extracted in full."
     columns:
       - name: kbc_workspace_id
         pk: true
