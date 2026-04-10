@@ -2134,8 +2134,9 @@ tables:
         description: "Name of the workspace (derived from component configuration)"
         example: "`My Workspace`"
       - name: kbc_configuration_id
-        description: "Identifier of the configuration that created this workspace"
-        example: "`610931033`"
+        fk: kbc_component_configuration
+        description: "Foreign key to the component configuration that created this workspace"
+        example: "`580_kbc-us-east-1_keboola.sandboxes_610931033`"
       - name: workspace_database
         description: "Database name of the workspace"
         example: "`SAPI_1234`"
