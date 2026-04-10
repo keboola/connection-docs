@@ -1168,7 +1168,7 @@ tables:
   # ===================== ACTIVITY CENTER MODE =====================
 
   - id: kbc_bucket
-    mode: activity_center
+    mode: project
     description: "This table shows data about the current state of storage buckets."
     is_full_load: true
     note: "The table is always extracted in full."
@@ -1540,7 +1540,7 @@ tables:
         example: "`[_internal] Daily Scheduler`"
 
   - id: kbc_table
-    mode: activity_center
+    mode: project
     description: "This table shows data about the current state of storage [tables](/storage/tables/)."
     is_full_load: true
     note: "The table is always extracted in full."
@@ -2029,7 +2029,7 @@ tables:
     mode: activity_center
     description: "This table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
     is_full_load: true
-    note: "The table is always extracted in full."
+    note: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace`. The table is always extracted in full."
     columns:
       - name: kbc_workspace_id
         pk: true
@@ -2094,6 +2094,64 @@ tables:
       - name: workspace_schema
         description: "Schema name"
         example: "`WORKSPACE_985088174`"
+
+  - id: kbc_sql_workspace
+    mode: project
+    description: "This table shows data about SQL [workspaces](/workspace/) provisioned via configurations. It replaces `kbc_workspace` for SQL-based workspace tracking."
+    is_full_load: true
+    note: "The table is always extracted in full."
+    columns:
+      - name: kbc_sql_workspace_id
+        pk: true
+        description: "Unique SQL workspace identifier"
+        example: "`985088171_kbc-us-east-1`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: workspace_creator
+        description: "Creator of the workspace"
+        example: "`John Doe`"
+      - name: workspace_created
+        description: "Datetime when the workspace was created"
+        example: "`2023-06-13 20:41:42.268`"
+      - name: workspace_type
+        description: "Backend type of the workspace"
+        example: "`snowflake`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token that created or owns the workspace"
+        example: "`287689_kbc-us-east-1`"
+      - name: kbc_token_name
+        description: "Name of the token that created or owns the workspace"
+        example: "`john.doe@keboola.com`"
+      - name: workspace_deleted
+        description: "Datetime when the workspace was deleted (empty if still active)"
+        example: "`2023-07-18 10:20:56.384`"
+      - name: workspace_updated
+        description: "Datetime when the workspace was last updated"
+        example: "`2023-07-12 12:01:24.181`"
+      - name: kbc_workspace_name
+        description: "Name of the workspace (derived from component configuration)"
+        example: "`My Workspace`"
+      - name: kbc_configuration_id
+        description: "Identifier of the configuration that created this workspace"
+        example: "`610931033`"
+      - name: workspace_database
+        description: "Database name of the workspace"
+        example: "`SAPI_1234`"
+      - name: workspace_schema
+        description: "Schema name of the workspace"
+        example: "`WORKSPACE_985088174`"
+      - name: backend_size
+        description: "Backend size of the workspace"
+        example: "`small`"
+      - name: read_only_storage_access
+        description: "Flag indicating if the workspace has read-only storage access (`true`, `false`)"
+        example: "`true`"
+      - name: workspace_shared
+        description: "Flag indicating if the workspace is shared with other users (`true`, `false`)"
+        example: "`true`"
 
   - id: kbc_workspace_event
     mode: activity_center
@@ -2166,7 +2224,7 @@ tables:
         example: "`[_internal] main scheduler`"
 
   - id: kbc_data_app
-    mode: activity_center
+    mode: project
     description: "This table lists the [apps](/data-apps/)."
     is_full_load: false
     columns:
@@ -2409,6 +2467,10 @@ relationships:
     label: "has workspaces"
     type: one-to-many
   - from: kbc_project
+    to: kbc_sql_workspace
+    label: "has sql workspaces"
+    type: one-to-many
+  - from: kbc_project
     to: kbc_workspace_event
     label: "has workspace events"
     type: one-to-many
@@ -2575,6 +2637,10 @@ relationships:
   - from: kbc_token
     to: kbc_workspace
     label: "creates workspaces"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_sql_workspace
+    label: "creates sql workspaces"
     type: one-to-many
   - from: kbc_token
     to: kbc_trigger
