@@ -2136,10 +2136,6 @@ tables:
       - name: kbc_configuration_id
         description: "Identifier of the configuration that created this workspace"
         example: "`610931033`"
-      - name: kbc_component_id
-        fk: kbc_component_configuration
-        description: "Foreign key to the component configuration that owns this workspace"
-        example: "`keboola.sandboxes_kbc-us-east-1`"
       - name: workspace_database
         description: "Database name of the workspace"
         example: "`SAPI_1234`"
