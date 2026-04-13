@@ -73,6 +73,7 @@ This design ensures:
 
 ### Step 1: Enable Direct Grant feature
 -- need to verify but it looks like private beta - check the exact feature name
+direct-grant-output-mapping
 
 ### Step 2: Storage Access
 
