@@ -91,7 +91,6 @@ tables:
     mode: project
     description: "This table lists the [configurations of components](/components/#creating-component-configuration) (e.g., a configuration of the AWS S3 data source connector)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_component_configuration_id
         pk: true
@@ -139,7 +138,7 @@ tables:
         example: "`This transformation put the data from customers into standardize format.`"
       - name: configuration_json
         description: "Complete JSON configuration of the component"
-        example: "`{\"parameters\":{\"id\":\"34289954\"}}`"
+        example: '`{"parameters":{"id":"34289954"}}`'
       - name: kbc_branch_id
         fk: kbc_branch
         description: "Foreign key to a Keboola branch"
@@ -241,7 +240,7 @@ tables:
         example: "`This part of transformation consolidate the data from various sources.`"
       - name: configuration_row_json
         description: "Complete JSON configuration row of the component"
-        example: "`{\"parameters\":{\"incremental\":false}}`"
+        example: '`{"parameters":{"incremental":false}}`'
       - name: token_id
         description: "Identifier of the token that created this version of the configuration row"
         example: "`241247`"
@@ -377,7 +376,7 @@ tables:
         example: "`410_kbc-eu-central-1_keboola.wr-google-sheets-259642632`"
       - name: kbc_component_configuration_row_id
         description: "An array where each element serves as a foreign key to a Keboola component configuration row. This array is populated as a result of filtering rows during the job execution. If the job runs with all rows (no filtering), the array remains empty."
-        example: "`[\"8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150\"]`"
+        example: '`["8765_kbc-us-east-1_keboola.ex-db-mysql_844500148_844500150"]`'
       - name: kbc_branch_id
         fk: kbc_branch
         description: "Foreign key to the Keboola branch"
@@ -518,13 +517,13 @@ tables:
         example: "`query_data`"
       - name: tool_arguments
         description: "JSON array of key-value pairs representing the arguments passed to the tool call"
-        example: "`[{\"key\":\"bucket_ids\",\"value\":\"[]\"}]`"
+        example: '`[{"key":"bucket_ids","value":"[]"}]`'
       - name: duration
         description: "Duration of the tool call execution in seconds"
         example: "`3`"
       - name: message
         description: "Result message -- a success confirmation or the full error message for failed calls"
-        example: "`MCP tool \"query_data\" call succeeded.`"
+        example: '`MCP tool "query_data" call succeeded.`'
       - name: agent_type
         description: "Type of agent that made the call. Possible values: <br> `external` -- an external MCP client (Claude Desktop, Cursor, etc.), <br> `kai-assistant` -- the Keboola Kai assistant, <br> `ai-chat` -- the Keboola AI Chat"
         example: "`kai-assistant`"
@@ -785,7 +784,7 @@ tables:
         description: "Column used to filter rows of the source table"
         example: "`USER_ID`"
       - name: alias_filter_operator
-        description: "Type of the alias filter operator. Possible values: <br> `eq` -- SQL \"IN\" <br> `ne` -- SQL \"NOT IN\""
+        description: 'Type of the alias filter operator. Possible values: <br> `eq` -- SQL "IN" <br> `ne` -- SQL "NOT IN"'
         example: "`eq`"
       - name: alias_filter_value
         description: "Value the alias filter is filtering by"
@@ -1171,7 +1170,6 @@ tables:
     mode: project
     description: "This table shows data about the current state of storage buckets."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: bucket_id
         description: "Storage bucket identifier"
@@ -1227,7 +1225,6 @@ tables:
     mode: activity_center
     description: "This table shows data about the current state of storage columns."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: column_id
         description: "Storage column identifier"
@@ -1255,7 +1252,6 @@ tables:
     mode: activity_center
     description: "This table shows data about columns' metadata."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_column_metadata_id
         pk: true
@@ -1292,7 +1288,6 @@ tables:
     mode: activity_center
     description: "This table shows data about particular phases of flows."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_flow_phase_id
         pk: true
@@ -1320,7 +1315,6 @@ tables:
     mode: activity_center
     description: "This table shows data about flow tasks."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_flow_task_id
         pk: true
@@ -1425,7 +1419,6 @@ tables:
     mode: activity_center
     description: "This table shows data subscriptions to notifications sent by Keboola (mostly flow notifications)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_notification_subscription_id
         pk: true
@@ -1496,7 +1489,6 @@ tables:
     mode: activity_center
     description: "This table shows data about configuration schedules."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_schedule_id
         pk: true
@@ -1543,7 +1535,6 @@ tables:
     mode: project
     description: "This table shows data about the current state of storage [tables](/storage/tables/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_project_table_id
         pk: true
@@ -1591,7 +1582,7 @@ tables:
         description: "Column used to filter rows of the source table"
         example: "`user_id`"
       - name: alias_filter_operator
-        description: "Type of the alias filter operator. Possible values: <br> `eq` -- SQL \"IN\" <br> `ne` -- SQL \"NOT IN\""
+        description: 'Type of the alias filter operator. Possible values: <br> `eq` -- SQL "IN" <br> `ne` -- SQL "NOT IN"'
         example: "`eq`"
       - name: alias_filter_value
         description: "Value the alias filter is filtering by"
@@ -1640,10 +1631,10 @@ tables:
         example: "`Imported table in.c-in_sh_kbc_internal.kbc_flow_task`"
       - name: params
         description: "Parameters of the event (JSON object)"
-        example: "`{\"importId\":\"985123712\",\"incremental\":true,\"source\":{\"dataObject\":\"out_kbc_flow_task\",\"type\":\"workspace\",\"tableName\":\"out_kbc_flow_task\",\"workspaceId\":\"985122240\"}}`"
+        example: '`{"importId":"985123712","incremental":true,"source":{"dataObject":"out_kbc_flow_task","type":"workspace","tableName":"out_kbc_flow_task","workspaceId":"985122240"}}`'
       - name: results
         description: "Results of the event (JSON object)."
-        example: "`{\"rowsCount\":\"272800\",\"sizeBytes\":15412736}`"
+        example: '`{"rowsCount":"272800","sizeBytes":15412736}`'
       - name: kbc_token_id
         fk: kbc_token
         description: "Foreign key to the Keboola token"
@@ -1660,7 +1651,6 @@ tables:
     mode: activity_center
     description: "This table shows data about metadata of the storage [tables](/storage/tables/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_table_metadata_id
         pk: true
@@ -1691,7 +1681,6 @@ tables:
     mode: activity_center
     description: "This table shows data about the storage [tokens](/management/project/tokens/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_token_id
         pk: true
@@ -1789,7 +1778,6 @@ tables:
     mode: activity_center
     description: "This table shows data about codes of [transformations](/transformations/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_transformation_code_id
         pk: true
@@ -1814,7 +1802,6 @@ tables:
     mode: activity_center
     description: "This table shows data about inputs of [transformations](/transformations/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_transformation_input_id
         pk: true
@@ -1845,13 +1832,12 @@ tables:
         example: "`eq`"
       - name: where_values
         description: "Column filter value (JSON array)"
-        example: "`[\"com-keboola-azure-north-europe\"]`"
+        example: '`["com-keboola-azure-north-europe"]`'
 
   - id: kbc_transformation_input_column
     mode: activity_center
     description: "This table shows data about input columns of [transformations](/transformations/). Available only for non-clone mappings."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_transformation_input_column_id
         pk: true
@@ -1882,7 +1868,6 @@ tables:
     mode: activity_center
     description: "This table shows data about outputs of the [transformations](/transformations/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_transformation_output_id
         pk: true
@@ -1907,7 +1892,7 @@ tables:
         example: "`out_kbc_data_science_sandbox`"
       - name: primary_key
         description: "Primary key of the table (JSON array)"
-        example: "`[\"kbc_data_science_sandbox_resume_id\",\"date\"]`"
+        example: '`["kbc_data_science_sandbox_resume_id","date"]`'
       - name: delete_where_column
         description: "Column used to identify records to delete before storage import"
         example: "`kbc_project_stack`"
@@ -1916,13 +1901,12 @@ tables:
         example: "`eq`"
       - name: delete_where_values
         description: "Column filter value (JSON array)"
-        example: "`[\"com-keboola-azure-north-europe\"]`"
+        example: '`["com-keboola-azure-north-europe"]`'
 
   - id: kbc_trigger
     mode: activity_center
     description: "This table shows data about [triggers](/components/applications/triggers/)."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_trigger_id
         pk: true
@@ -1970,7 +1954,6 @@ tables:
     mode: activity_center
     description: "This table shows data about tables used to [trigger](/components/applications/triggers/) jobs."
     is_full_load: true
-    note: "The table is always extracted in full."
     columns:
       - name: kbc_trigger_table_id
         pk: true
@@ -2027,9 +2010,8 @@ tables:
 
   - id: kbc_workspace
     mode: activity_center
-    description: "This table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
+    description: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace` and `kbc_data_app`. \n\nThis table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
     is_full_load: true
-    note: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace` and `kbc_data_app`. The table is always extracted in full."
     columns:
       - name: kbc_workspace_id
         pk: true
@@ -2300,7 +2282,7 @@ tables:
         example: "`streamlit write only-token`"
       - name: params
         description: "Parameters of the event (JSON object)"
-        example: "`{\"event_type\":\"keboola_data_app_write\",\"event_job_id\":151808445362,\"event_application\":\"Unknown\",\"time\":\"2024-11-18 16:15:02\",\"user\":\"Unknown\"}`"
+        example: '`{"event_type":"keboola_data_app_write","event_job_id":151808445362,"event_application":"Unknown","time":"2024-11-18 16:15:02","user":"Unknown"}`'
 
 relationships:
   # Organization -> Project
