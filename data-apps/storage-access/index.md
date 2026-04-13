@@ -1,4 +1,10 @@
-# Storage Access
+---
+title: Storage Access
+permalink: /data-apps/storage-access/
+---
+
+* TOC
+{:toc}
 
 ## Overview
 
@@ -65,7 +71,10 @@ This design ensures:
 
 ## Setting Up Storage Access
 
-### Step 1: Storage Access
+### Step 1: Enable Direct Grant feature
+-- need to verify but it looks like private beta - check the exact feature name
+
+### Step 2: Storage Access
 
 1. Open your Data App configuration in Keboola.
 2. Go to the **Advanced Settings** tab.
