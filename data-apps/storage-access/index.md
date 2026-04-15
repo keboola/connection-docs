@@ -71,9 +71,10 @@ This design ensures:
 
 ## Setting Up Storage Access
 
-### Step 1: Enable Direct Grant feature
--- need to verify but it looks like private beta - check the exact feature name
-direct-grant-output-mapping
+### Step 1: Enable Storage Access
+1. Go to the **Project Settings**.
+2.  Go to the **Features**.
+3.  Find the **Storage Access** feature and activate it.
 
 ### Step 2: Storage Access
 
