@@ -196,6 +196,8 @@ items:
             title: Git Repository Deployment
       - url: /components/data-apps/backend-versions/
         title: Backend Versions
+      - url: /data-apps/storage-access/
+        title: Storage Access
       - url: /data-apps/terminal-log-tab/
         title: Terminal Log Tab
 
