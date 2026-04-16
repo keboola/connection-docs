@@ -45,12 +45,14 @@ Query Service ────► Workspace User ────► Storage Tables
          billing, metadata refresh                 with granted permissions
 ```
 
-Your app communicates with Storage through the **Query Service API**, not directly with Snowflake. This provides:
+Your app communicates with Storage through the [**Query Service API**](https://query.keboola.com/api-docs/), not directly with Snowflake. This provides:
 
 - Automatic authentication using your app's token
 - Usage tracking for billing
 - Automatic metadata refresh after writes
 - Abstraction from the underlying backend
+
+The recommended Python client library is [keboola.query-service-client](https://pypi.org/project/keboola.query-service-client/).
 
 ### Workspace Lifecycle
 
@@ -89,7 +91,6 @@ This design ensures:
 
 - You can add multiple tables from different buckets.
 - All selected tables must exist before deploying.
-- Column-level permissions are not supported - the app has access to all columns in selected tables.
 
 ### Step 3: Deploy Your App
 
@@ -121,13 +122,19 @@ import os
 import json
 from keboola.query_service_client import QueryServiceClient
 
-# Read workspace ID from the manifest file
+# Read workspace ID from the manifest file (once at startup)
 manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH", 
                                 "/var/run/secrets/keboola.com/workspace/manifest.json")
 
-with open(manifest_path) as f:
-    manifest = json.load(f)
-    workspace_id = manifest["workspaceId"]
+try:
+    with open(manifest_path) as f:
+        manifest = json.load(f)
+        workspace_id = manifest["workspaceId"]
+except (FileNotFoundError, KeyError) as e:
+    raise RuntimeError(
+        "Storage Access is not enabled for this app. "
+        "Enable it in Advanced Settings and redeploy."
+    ) from e
 
 # Initialize the Query Service client
 client = QueryServiceClient(
@@ -267,25 +274,26 @@ When Storage Access is enabled, these environment variables are available to you
 | Variable | Description |
 | --- | --- |
 | `KBC_WORKSPACE_MANIFEST_PATH` | Path to the workspace manifest file (contains `workspaceId`) |
-| `WORKSPACE_ID` | The workspace ID directly (alternative to reading from manifest) |
 | `KBC_TOKEN` | Storage API token (always available) |
 | `KBC_URL` | Keboola Connection URL (always available) |
 
 **Reading the workspace ID:**
 
+The recommended way to obtain the workspace ID is from the manifest file:
+
 ```python
 import os
 import json
 
-# Method 1: From environment variable (simpler)
-workspace_id = os.environ.get("WORKSPACE_ID")
-
-# Method 2: From manifest file (more robust)
 manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
                                 "/var/run/secrets/keboola.com/workspace/manifest.json")
-if os.path.exists(manifest_path):
+try:
     with open(manifest_path) as f:
         workspace_id = json.load(f)["workspaceId"]
+except (FileNotFoundError, KeyError) as e:
+    raise RuntimeError(
+        "Storage Access is not enabled. Enable it in Advanced Settings and redeploy."
+    ) from e
 ```
 
 ## Comparison: Input Mapping vs Direct Storage Access
@@ -316,30 +324,31 @@ from keboola.query_service_client import QueryServiceClient
 
 app = Flask(__name__)
 
-# Initialize Query Service client
-def get_qs_client():
-    manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
-                                    "/var/run/secrets/keboola.com/workspace/manifest.json")
-    with open(manifest_path) as f:
-        workspace_id = json.load(f)["workspaceId"]
-    
-    return QueryServiceClient(
-        token=os.environ["KBC_TOKEN"],
-        url=os.environ["KBC_URL"]
-    ), workspace_id
+# Initialize Query Service client once at startup
+manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
+                                "/var/run/secrets/keboola.com/workspace/manifest.json")
+with open(manifest_path) as f:
+    WORKSPACE_ID = json.load(f)["workspaceId"]
+
+qs_client = QueryServiceClient(
+    token=os.environ["KBC_TOKEN"],
+    url=os.environ["KBC_URL"]
+)
+
+ALLOWED_STATUSES = {"pending", "approved", "rejected"}
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    client, workspace_id = get_qs_client()
-    
     if request.method == "POST":
-        # Handle status update
-        record_id = request.form["record_id"]
+        # Validate and sanitize user input
+        record_id = int(request.form["record_id"])  # ensure integer
         new_status = request.form["status"]
+        if new_status not in ALLOWED_STATUSES:
+            return "Invalid status", 400
         
-        client.execute_query(
-            workspace_id=workspace_id,
+        qs_client.execute_query(
+            workspace_id=WORKSPACE_ID,
             query=f'''
                 UPDATE "in.c-main"."approvals"
                 SET status = '{new_status}', updated_at = CURRENT_TIMESTAMP
@@ -348,8 +357,8 @@ def index():
         )
     
     # Load current records
-    result = client.execute_query(
-        workspace_id=workspace_id,
+    result = qs_client.execute_query(
+        workspace_id=WORKSPACE_ID,
         query='SELECT id, name, status, updated_at FROM "in.c-main"."approvals" ORDER BY id'
     )
     records = [dict(zip(result["columns"], row)) for row in result["data"]]
@@ -416,59 +425,107 @@ build-backend = "setuptools.build_meta"
 **1. Handle missing workspace gracefully**
 
 ```python
-workspace_id = os.environ.get("WORKSPACE_ID")
-if not workspace_id:
-    # Fall back to Input Mapping or show error
-    st.error("Direct Storage Access is not enabled for this app.")
+import os, json
+
+manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
+                                "/var/run/secrets/keboola.com/workspace/manifest.json")
+try:
+    with open(manifest_path) as f:
+        workspace_id = json.load(f)["workspaceId"]
+except (FileNotFoundError, KeyError):
+    # Storage Access is not enabled — show a user-friendly error
+    import streamlit as st  # or use your framework's error handling
+    st.error("Storage Access is not enabled for this app. Enable it in Advanced Settings and redeploy.")
     st.stop()
 ```
 
-**2. Use parameterized queries to prevent SQL injection**
+**2. Validate and sanitize user input to prevent SQL injection**
+
+Since the Query Service accepts raw SQL strings, you must validate all user input before including it in queries:
 
 ```python
 # ❌ DANGEROUS - never do this
 query = f"SELECT * FROM table WHERE id = {user_input}"
 
-# ✅ SAFE - use parameterized queries or sanitize input
-safe_id = int(user_input)  # Validate it's actually a number
+# ✅ SAFE - validate types and use allowlists
+safe_id = int(user_input)  # Ensure it's actually a number
 query = f"SELECT * FROM table WHERE id = {safe_id}"
+
+# ✅ For string values, use an allowlist of permitted values
+ALLOWED_STATUSES = {"pending", "approved", "rejected"}
+if status not in ALLOWED_STATUSES:
+    raise ValueError(f"Invalid status: {status}")
+query = f"UPDATE table SET status = '{status}' WHERE id = {safe_id}"
 ```
 
-**3. Implement pagination for large datasets**
+**3. Implement keyset pagination for large datasets**
+
+Use keyset (cursor-based) pagination instead of OFFSET, which can produce duplicates or gaps on live data:
 
 ```python
 page_size = 1000
-offset = 0
+last_id = 0  # Start from the beginning
 
 while True:
     result = client.execute_query(
         workspace_id=workspace_id,
-        query=f"SELECT * FROM table LIMIT {page_size} OFFSET {offset}"
+        query=f'''
+            SELECT * FROM "in.c-main"."my_table"
+            WHERE id > {last_id}
+            ORDER BY id ASC
+            LIMIT {page_size}
+        '''
     )
     if not result["data"]:
         break
     process_batch(result["data"])
-    offset += page_size
+    last_id = result["data"][-1][0]  # Update cursor to last row's id
 ```
 
 **4. Cache frequently-used data**
+
+For **Streamlit** apps, use `st.cache_data`:
 
 ```python
 import streamlit as st
 
 @st.cache_data(ttl=300)  # Cache for 5 minutes
 def load_reference_data():
-    client, workspace_id = get_qs_client()
-    result = client.execute_query(...)
+    result = client.execute_query(
+        workspace_id=workspace_id,
+        query='SELECT * FROM "in.c-main"."reference_data"'
+    )
     return pd.DataFrame(result["data"], columns=result["columns"])
 ```
 
-**5. Log write operations for auditability**
+For **Python/JS** (non-Streamlit) apps, use a simple in-memory cache:
+
+```python
+from functools import lru_cache
+import time
+
+_cache = {}
+_cache_ttl = 300  # seconds
+
+def get_cached_data(key, query_fn):
+    now = time.time()
+    if key in _cache and now - _cache[key]["ts"] < _cache_ttl:
+        return _cache[key]["data"]
+    data = query_fn()
+    _cache[key] = {"data": data, "ts": now}
+    return data
+```
+
+**5. Track write operations**
+
+Write operations are automatically tracked by the Query Service for billing purposes. For additional application-level auditing, log to stdout (visible in Data App container logs):
 
 ```python
 import logging
+logging.basicConfig(level=logging.INFO)
 
 logging.info(f"User {current_user} updated record {record_id} to status {new_status}")
+# Output goes to stdout → visible in the Terminal Log tab of your Data App
 ```
 
 ## Limitations
