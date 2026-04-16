@@ -85,7 +85,7 @@ This design ensures:
 3. Find the **Storage Access** section.
 4. Click **+ Add Writable Table**.
 2. Select a bucket and table from Storage.
-3. For each table, the app will have **SELECT**, **UPDATE**, and **TRUNCATE** permissions.
+3. For each table, the app will have **INSERT**, **SELECT**, **UPDATE**, **DELETE** and **TRUNCATE** permissions.
 
 **Notes:**
 
@@ -302,7 +302,7 @@ except (FileNotFoundError, KeyError) as e:
 | --- | --- | --- |
 | **Data freshness** | Snapshot at deploy time | Real-time, always current |
 | **Data loading** | CSV files loaded to `/data/in/tables/` | Query on demand via API |
-| **Write capability** | None (read-only) | SELECT, UPDATE, TRUNCATE, DELETE |
+| **Write capability** | None (read-only) | INSERT, SELECT, UPDATE, TRUNCATE, DELETE |
 | **Dataset size** | Limited by container memory | Virtually unlimited (pagination) |
 | **Configuration** | Select tables in UI | Select tables + enable toggle |
 | **Use case** | Static dashboards, reports | Interactive apps, data entry |
