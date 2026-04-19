@@ -3,7 +3,7 @@ tables:
 
   - id: kbc_bucket_snapshot
     mode: project
-    description: "This table shows snapshots of buckets in Storage."
+    description: "**DEPRECATING** – This table is being replaced by the current state in `kbc_bucket`. \n\nThis table shows snapshots of buckets in Storage."
     is_full_load: false
     columns:
       - name: bucket_id
@@ -253,7 +253,7 @@ tables:
 
   - id: kbc_data_app_workspace
     mode: project
-    description: "This table lists runs of [apps](/data-apps/) and their consumption metrics."
+    description: "**DEPRECATING** – This table is being replaced by `kbc_non_sql_workspace_run`. \n\nThis table lists runs of [apps](/data-apps/) and their consumption metrics."
     is_full_load: false
     note: "A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     columns:
@@ -308,7 +308,7 @@ tables:
 
   - id: kbc_data_science_sandbox
     mode: project
-    description: "This table lists Python/R [workspaces](/workspace/) and their consumption metrics."
+    description: "**DEPRECATING** – This table is being replaced by `kbc_non_sql_workspace_run`. \n\nThis table lists Python/R [workspaces](/workspace/) and their consumption metrics."
     is_full_load: false
     note: "A value of `0` in `sandbox_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     columns:
@@ -737,7 +737,7 @@ tables:
 
   - id: kbc_table_snapshot
     mode: project
-    description: "This table shows [Storage table](/storage/tables/) snapshots."
+    description: "**DEPRECATING** – This table is being replaced by the current state in `kbc_table`. \n\nThis table shows [Storage table](/storage/tables/) snapshots."
     is_full_load: false
     columns:
       - name: table_id
@@ -2010,7 +2010,7 @@ tables:
 
   - id: kbc_workspace
     mode: activity_center
-    description: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace` and `kbc_data_app`. \n\nThis table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
+    description: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace` and `kbc_non_sql_workspace`. \n\nThis table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
     is_full_load: true
     columns:
       - name: kbc_workspace_id
@@ -2134,6 +2134,120 @@ tables:
       - name: workspace_shared
         description: "Flag indicating if the workspace is shared with other users (`true`, `false`)"
         example: "`true`"
+
+  - id: kbc_non_sql_workspace
+    mode: project
+    description: "This table shows data about non-SQL [workspaces](/workspace/), including Data Apps (Streamlit, Python JS) and Data Science sandboxes (Python, R, Julia, Python-Databricks, Python-MLflow, Python-Snowpark, Python-Spark). It replaces `kbc_workspace` for non-SQL workspace tracking and supersedes `kbc_data_app` for data apps metadata."
+    is_full_load: false
+    columns:
+      - name: kbc_non_sql_workspace_id
+        pk: true
+        description: "Unique non-SQL workspace identifier"
+        example: "`985088171_kbc-us-east-1`"
+      - name: kbc_data_app_id
+        description: "Data App identifier (populated only for Data App workspaces with type `streamlit` or `python-js`; empty for Data Science sandboxes)"
+        example: "`7880_kbc-us-east-1_keboola.data-apps_985088171`"
+      - name: workspace_id_num
+        description: "Numeric part of the workspace identifier (without the stack suffix)"
+        example: "`985088171`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`7880_kbc-us-east-1`"
+      - name: kbc_workspace_name
+        description: "Name of the workspace (derived from component configuration)"
+        example: "`My Data App`"
+      - name: component_id
+        description: "Identifier of the component that created the workspace"
+        example: "`keboola.data-apps`"
+      - name: kbc_component
+        description: "Human-readable component name"
+        example: "`Data App`"
+      - name: kbc_component_configuration_id
+        fk: kbc_component_configuration
+        description: "Foreign key to the component configuration that created this workspace"
+        example: "`7880_kbc-us-east-1_keboola.data-apps_985088171`"
+      - name: workspace_created
+        description: "Datetime when the workspace was created"
+        example: "`2023-06-13 20:41:42.268`"
+      - name: workspace_deleted
+        description: "Datetime when the workspace was deleted (empty if still active)"
+        example: "`2023-07-18 10:20:56.384`"
+      - name: workspace_updated
+        description: "Datetime when the workspace was last updated"
+        example: "`2023-07-12 12:01:24.181`"
+      - name: workspace_hostname
+        description: "Hostname of the workspace"
+        example: "`https://hello-world-759519.hub.north-europe.azure.keboola.com`"
+      - name: workspace_type
+        description: "Type of the non-SQL workspace (`streamlit`, `python-js`, `python`, `r`, `julia`, `python-databricks`, `python-mlflow`, `python-snowpark`, `python-spark`)"
+        example: "`streamlit`"
+      - name: kbc_token_id
+        fk: kbc_token
+        description: "Foreign key to the Keboola token that created or owns the workspace"
+        example: "`287689_kbc-us-east-1`"
+      - name: kbc_token_name
+        description: "Name of the token that created or owns the workspace"
+        example: "`john.doe@keboola.com`"
+      - name: storage_size_gb
+        description: "Size of the workspace storage in GB (used for persistent workspaces)"
+        example: "`2`"
+      - name: workspace_expire_hours
+        description: "Number of hours before the workspace expires due to inactivity"
+        example: "`1`"
+      - name: workspace_shared
+        description: "Flag indicating if the workspace is shared with other users (`true`, `false`)"
+        example: "`true`"
+      - name: is_persistent
+        description: "Flag indicating if the workspace has persistent storage (`true`, `false`)"
+        example: "`false`"
+
+  - id: kbc_non_sql_workspace_run
+    mode: project
+    description: "This table lists runs of non-SQL [workspaces](/workspace/) (Data Apps and Data Science sandboxes) and their consumption metrics. It replaces `kbc_data_app_workspace` and `kbc_data_science_sandbox` for non-SQL workspace run tracking."
+    is_full_load: false
+    note: "A value of `0` in `runtime_hours`, `time_credits_used`, or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
+    columns:
+      - name: kbc_non_sql_workspace_run_id
+        pk: true
+        description: "Identifier of the workspace active window (between starting and pausing the workspace)"
+        example: "`10910_kbc-eu-central-1_8c9e68ac-3a40-4aea-a62c-34ef37d12a5a`"
+      - name: kbc_non_sql_workspace_id
+        fk: kbc_non_sql_workspace
+        description: "Foreign key to the non-SQL workspace"
+        example: "`10910_kbc-eu-central-1`"
+      - name: kbc_workspace_name
+        description: "Name of the workspace (derived from component configuration)"
+        example: "`My Data App`"
+      - name: kbc_project_id
+        fk: kbc_project
+        description: "Foreign key to the Keboola project"
+        example: "`1075_kbc-eu-central-1`"
+      - name: date
+        pk: true
+        description: "Date for which the runtime hours and credits are calculated"
+        example: "`2025-06-30`"
+      - name: workspace_start_at
+        description: "Datetime when the workspace resume window started"
+        example: "`2025-06-30 11:22:08`"
+      - name: workspace_sleep_at
+        description: "Datetime when the workspace resume window ended"
+        example: "`2025-06-30 14:03:40`"
+      - name: workspace_type
+        description: "Type of the non-SQL workspace (`streamlit`, `python-js`, `python`, `r`, `julia`, `python-databricks`, `python-mlflow`, `python-snowpark`, `python-spark`)"
+        example: "`streamlit`"
+      - name: backend_size
+        description: "Size of the workspace backend"
+        example: "`Small`"
+      - name: runtime_hours
+        description: "Runtime of the workspace on the particular date in hours"
+        example: "`2.413333`"
+      - name: time_credits_used
+        description: "Number of time credits consumed by the workspace on the particular date"
+        example: "`2.413333`"
+      - name: billed_credits_used
+        description: "Number of the actually billed credits"
+        example: "`2.413333`"
 
   - id: kbc_workspace_event
     mode: activity_center
