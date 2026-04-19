@@ -2137,7 +2137,7 @@ tables:
 
   - id: kbc_non_sql_workspace
     mode: project
-    description: "This table shows data about non-SQL [workspaces](/workspace/), including Data Apps (Streamlit, Python JS) and Data Science sandboxes (Python, R, etc.). It replaces `kbc_workspace` for non-SQL workspace tracking and supersedes `kbc_data_app` for data apps metadata."
+    description: "This table shows data about non-SQL [workspaces](/workspace/), including Data Apps (Streamlit, Python JS) and Data Science sandboxes (Python, R, etc.)."
     is_full_load: false
     columns:
       - name: kbc_non_sql_workspace_id
