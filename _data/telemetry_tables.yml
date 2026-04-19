@@ -2137,7 +2137,7 @@ tables:
 
   - id: kbc_non_sql_workspace
     mode: project
-    description: "This table shows data about non-SQL [workspaces](/workspace/), including Data Apps (Streamlit, Python JS) and Data Science sandboxes (Python, R, Julia, Python-Databricks, Python-MLflow, Python-Snowpark, Python-Spark). It replaces `kbc_workspace` for non-SQL workspace tracking and supersedes `kbc_data_app` for data apps metadata."
+    description: "This table shows data about non-SQL [workspaces](/workspace/), including Data Apps (Streamlit, Python JS) and Data Science sandboxes (Python, R, etc.). It replaces `kbc_workspace` for non-SQL workspace tracking and supersedes `kbc_data_app` for data apps metadata."
     is_full_load: false
     columns:
       - name: kbc_non_sql_workspace_id
@@ -2180,7 +2180,7 @@ tables:
         description: "Hostname of the workspace"
         example: "`https://hello-world-759519.hub.north-europe.azure.keboola.com`"
       - name: workspace_type
-        description: "Type of the non-SQL workspace (`streamlit`, `python-js`, `python`, `r`, `julia`, `python-databricks`, `python-mlflow`, `python-snowpark`, `python-spark`)"
+        description: "Type of the non-SQL workspace (`streamlit`, `python-js`, `python`, `r`, etc.)"
         example: "`streamlit`"
       - name: kbc_token_id
         fk: kbc_token
@@ -2234,7 +2234,7 @@ tables:
         description: "Datetime when the workspace resume window ended"
         example: "`2025-06-30 14:03:40`"
       - name: workspace_type
-        description: "Type of the non-SQL workspace (`streamlit`, `python-js`, `python`, `r`, `julia`, `python-databricks`, `python-mlflow`, `python-snowpark`, `python-spark`)"
+        description: "Type of the non-SQL workspace (`streamlit`, `python-js`, `python`, `r`, etc.)"
         example: "`streamlit`"
       - name: backend_size
         description: "Size of the workspace backend"
