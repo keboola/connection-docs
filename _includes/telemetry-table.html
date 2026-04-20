@@ -1,0 +1,55 @@
+{%- comment -%}
+  Renders a single telemetry table's documentation from YAML data.
+  Data source: _data/telemetry_tables.yml
+  Usage: {% include telemetry-table.html table=table %}
+{%- endcomment -%}
+
+{%- assign t = include.table -%}
+
+### {{ t.id }}
+
+{{ t.description }}
+
+{%- if t.is_full_load %}
+
+*Note: The table is always extracted in full.*
+{%- endif -%}
+
+{%- if t.org_mode_note %}
+
+***Note:** {{ t.org_mode_note }}*
+{%- endif -%}
+
+{%- if t.usage_breakdown %}
+
+`usage_breakdown` data sources (which tables serve as sources for the results):
+{% for item in t.usage_breakdown %}
+* `{{ item.name }}` - {% if item.source %}`{{ item.source }}`{% endif %} ({{ item.detail }})
+{%- endfor -%}
+{%- endif %}
+
+| **Column** | **Description** | **Example** |
+|---|---|---|
+{%- for col in t.columns %}
+| `{{ col.name }}`{% if col.pk %} (PK){% endif %} | {{ col.description }} | `{{ col.example }}` |
+{%- endfor %}
+
+{%- if t.note %}
+
+{{ t.note }}
+{%- endif -%}
+
+{%- if t.security_operations %}
+
+#### Security event operations
+
+{% for op in t.security_operations %}
+|`{{ op }}`
+{%- endfor %}
+
+#### Operation parameters
+
+{% for param in t.operation_parameters %}
+| {{ param.condition }}: | {{ param.values }} |
+{%- endfor %}
+{%- endif %}

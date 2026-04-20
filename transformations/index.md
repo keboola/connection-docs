@@ -30,7 +30,7 @@ The schema below shows a high-level overview of transformations:
 {: .image-popup}
 ![Transformations schema](/transformations/transformations-schema.svg)
 
-A transformation is represented by a **transformation script** (SQL, Julia, Python, R), which you
+A transformation is represented by a **transformation script** (SQL, Python, R), which you
 can use to manipulate your data. To ensure the safety of the data in Storage, a transformation
 operates in a separate **staging Storage** created for each transformation. 
 
@@ -54,7 +54,7 @@ in Storage. This means, for example, that you can rename tables in Storage witho
 There are a number of staging options that influence the transformation script code, too. 
 Typically, you will create an SQL transformation that works with data in a Snowflake database or a Python script 
 that works with CSV files on a "local" disk (local from the script's perspective). However, it is possible to have 
-a Python script that works with data in a Synapse database or with data on Azure Blob Storage (ABS).
+a Python script that works with CSV files on Azure Blob Storage (ABS).
 The transformations are very flexible, though all the combinations might not be available in all projects at all times.
 
 ## Backends
@@ -62,16 +62,11 @@ The  **Transformation Script** is code that defines what happens with the data w
 tables from the input mapping are taken, modified, and produced into the tables referenced in the output mapping.
 
 A backend is the engine running the transformation script. It is a database server
-([Amazon Redshift](https://aws.amazon.com/redshift/),
-[Snowflake](https://www.snowflake.com/),
-[Exasol](https://www.exasol.com/),
-[Teradata](https://www.teradata.com/),
-[Microsoft Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) on Azure Stack), 
-[BigQuery](https://cloud.google.com/bigquery), 
+([Snowflake](https://www.snowflake.com/),
+[BigQuery](https://cloud.google.com/bigquery)),
 or a language interpreter 
-([Julia](https://julialang.org/), 
-[Python](https://www.python.org/about/),
-[R](https://www.r-project.org/about.html).
+([Python](https://www.python.org/about/),
+[R](https://www.r-project.org/about.html)).
 
 How do you decide **which backend is appropriate for each task**? A rule of thumb is that SQL performs better
 for joining tables, filtering data, grouping, and simple aggregations. Script languages are more suitable
@@ -101,14 +96,13 @@ and play with your arbitrary transformation scripts on copies of your tables
 without affecting data in your Storage or your transformations. You can convert a workspace to a transformation 
 and vice versa.
 
-For Redshift and Synapse, you'll get a separate database
-to which the data from input mapping can be loaded. You'll obtain database credentials, which you can
-use with a database client of your choice. You can do the same for Snowflake. In addition, we provide access
+You'll obtain database credentials, which you can
+use with a database client of your choice for Snowflake. In addition, we provide access
 to the [Snowflake web interface](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs). Therefore, you can
 develop transformations without downloading and installing a database client.
 
-You can also use a workspace represented by an isolated [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) instance for Julia, 
-Python, and R transformations.
+You can also use a workspace represented by an isolated [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) instance for
+Python and R transformations.
 
 ## Transformations Features
 
@@ -118,11 +112,7 @@ Python, and R transformations.
     <th>Availability/Limitations</th>
 </tr>
 <tr>
-    <th rowspan='8'>Backend</th>
-    <th>Julia Transformations</th> 
-    <td>Planned</td>
-</tr>
-<tr>
+    <th rowspan='7'>Backend</th>
     <th><a href='/transformations/python-plain/'>Python Transformations</a></th> 
     <td>✓</td>
 </tr>
@@ -276,4 +266,4 @@ When triggered
 
 With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
-for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name). 
+for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).        

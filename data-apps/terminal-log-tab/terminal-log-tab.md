@@ -13,7 +13,7 @@ While there is a slight delay of a few seconds, this feature is designed to offe
 helping with monitoring and troubleshooting.
 
 {: .image-popup}
-![Screenshot - Hello World Data App](/data-apps/terminal-log-tab/hello-world.png)
+![Screenshot - Hello World App](/data-apps/terminal-log-tab/hello-world.png)
 
 ## Key Features
 The Terminal Log Tab includes the following features:

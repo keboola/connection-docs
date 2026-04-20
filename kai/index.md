@@ -53,6 +53,7 @@ Kai is now in **Public Beta** and available to all users. Look for the **KAI** b
 - [Settings (Tool Permissions & System Instructions)](/kai/settings/)
 - [Use Cases & Examples](/kai/use-cases/)
 - [Best Practices](/kai/best-practices/)
+- [Python Client](/kai/python-client/)
 
 ## Security & Privacy
 

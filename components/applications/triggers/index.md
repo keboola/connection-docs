@@ -15,4 +15,5 @@ The following applications support triggering:
 - [Orchestration Trigger V2](/components/applications/triggers/orchestration-trigger-queue-v2/) - Trigger to start a Keboola Orchestration V2
 - [dbt Cloud Job Trigger](/components/applications/triggers/dbt-cloud-job-trigger/)
 - [Deepnote Notebook Execution Trigger](/components/applications/triggers/deepnote-notebook-execution-trigger/) - Trigger to execute a Notebook in Deepnote
+- [Power BI Refresh](/components/applications/triggers/powerbi-refresh/) - Trigger dataset refreshes in a Power BI workspace
 - And [more](https://components.keboola.com/components)

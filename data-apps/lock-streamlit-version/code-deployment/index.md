@@ -49,14 +49,14 @@ You can also update requirements.txt in the UI:
 After uploading your requirements.txt:
 
 1. Toggle the "Freeze versions"  option in the UI
-2. Click "Start Data App" to propagate this change
+2. Click "Start App" to propagate this change
 
 {: .image-popup}
 ![Freeze Version Toggle](/data-apps/lock-streamlit-version/code-deployment/freeze-version-toggle.png)
 
 This action will:
 - Execute a pip freeze command in the app
-- Store the frozen dependencies in the Data App state
+- Store the frozen dependencies in the app state
 - Use these frozen versions for future redeploys and app wake-ups
 
 {: .image-popup}
@@ -66,7 +66,7 @@ This action will:
 
 To update the requirements for your app:
 
-1. Start the Data App
+1. Start the app
 2. Enable the "Update packages dependencies" toggle
 
 {: .image-popup}
@@ -75,11 +75,11 @@ To update the requirements for your app:
 When this option is enabled:
 - All package dependencies will be updated to their latest versions (if no version is explicitly defined)
 - The dependencies will be resolved automatically
-- The new package versions will be frozen in the Data App state
+- The new package versions will be frozen in the app state
 
 ## Best Practices for Package Management
 
 - **Regular Updates:** Periodically review and update your dependencies to ensure security and performance improvements
 - **Version Testing:** Always test your app with new package versions in a development environment before updating production
 - **Documentation:** Keep track of why specific package versions are required to help with future maintenance
-- **Minimal Dependencies:** Only include packages that are actually needed by your application  
+- **Minimal Dependencies:** Only include packages that are actually needed by your application    

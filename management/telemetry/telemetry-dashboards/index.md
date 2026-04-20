@@ -6,221 +6,298 @@ permalink: /management/telemetry/telemetry-dashboards/
 * TOC
 {:toc}
 
-***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to “Connection” or the abbreviation “KBC” might still appear in table
+***Note:** Initially, the Keboola platform was referred to as Keboola Connection (KBC). While it is now simply known as Keboola, references to "Connection" or the abbreviation "KBC" might still appear in table
 names, column names, etc.*
 
-To get to all three telemetry dashboards, click the top right corner of the profile picture. The [Project Consumption](#project-consumption) dashboard is always available. Check with your account manager to see 
-if [Organization Usage](#organization-usage) or [Activity Center](#activity-center) are also available. 
+The telemetry dashboards help you understand how your Keboola projects and organization consume resources. To access them, click your profile picture in the top right corner.
+
+### Key Terms
+- **Credits (PPU)** — Platform Processing Units, the standard unit of resource consumption in Keboola. Pay-As-You-Go projects use *minutes* instead.
+- **Component** — a tool type in Keboola (e.g., Snowflake SQL Extractor, Python Transformation). A **configuration** is a specific saved instance of a component with its settings.
+- **Flow** — an automated sequence of tasks (previously known as *orchestration*). Flows can be scheduled or triggered manually.
+
+Three dashboard types are available:
+
+- [**Project Consumption**](#project-consumption) — always available for every project
+- [**Organization Usage**](#organization-usage) — available for organizations with a contract
+- [**Activity Center**](#activity-center) — the most detailed view; must be enabled by your account manager
+
+All dashboards include a **date range filter** at the top (default: last 6 months) and a **data freshness indicator** showing when the data was last updated. You can click **Refresh** to trigger a background data update when newer source data is available.
 
 ## Project Consumption
-By default, the dashboard is filtered for the last six months. The date range at the top of the dashboard can be changed. 
+The Project Consumption dashboard shows usage metrics for a single Keboola project. It is available to everyone with access to the project.
 
-The *KPIs* section presents the overall statistics of the Keboola project. Some are self-explanatory (e.g., *Consumed Credits* and *Number of Jobs*). An explanation for the others can be found under 
-the question mark or here in the documentation. *Error Jobs Ratio* shows the number of error jobs as a percentage of the total number of jobs run. *Active Flows* shows the number of flows with jobs starting 
-in the selected date range. *Active Component Configurations* is like *Active Flows* but shows how many configurations have a job started in the selected date range, and the same applies to *Active 
-Transformations*.
-
-*Credits History* shows the evolution of consumed credits over time. *Trends* at the bottom of the print screen shows the monthly evolution of consumption broken into component types (bar chart) plus 
-a graph of the number of error jobs and the total number of jobs. 
-
-{: .image-popup}
-![Screenshot - Project Consumption Dashboard](/management/telemetry/telemetry-dashboards/project-consumption.png)
-
-## Organization Usage
-The dashboard is filtered for the last six months, which can be adjusted. It shows data for the whole Keboola organization. If you have an organization, you can view its usage, which typically includes multiple 
-projects. 
+The dashboard automatically detects whether the project uses a **credit-based** (standard) or **minute-based** (Pay-As-You-Go) billing model and displays the appropriate metrics.
 
 ### KPIs
-*KPIs* show four of the metrics specified in the contract in comparison to their limits. For PPU, the usage and limit are shown for the period selected in the date range filter. For the others (Projects, 
-Users, and Storage TB), the values are for the current month only, and the limits are as defined in the contract. 
+Four summary cards are displayed at the top:
+
+| KPI | Description |
+|-----|-------------|
+| **Consumed Credits** (or **Minutes Consumed** for PAYG) | Total credits or minutes used in the selected period |
+| **Number of Jobs** | Total jobs executed |
+| **Error Jobs Ratio** | Percentage of jobs that ended in error (highlighted in red if above 5%) |
+| **Favourite Component** | The component with the most jobs, along with its job count |
+
+### Charts
+
+- **Credits Consumption History** (or **Minutes History** for PAYG) — line chart showing consumed credits over time. For PAYG projects, a second line shows available minutes on the right Y-axis.
+- **Credits by Usage Category** (or **Minutes by Usage Category** for PAYG) — stacked bar chart (monthly view) or line chart (daily view) breaking down consumption by category. Click on a bar to drill down to daily detail. Click on legend items to show or hide categories.
+- **Jobs Trend** — line chart showing total jobs and error jobs per month.
 
 {: .image-popup}
-![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ou-kpis.png)
+![Project Consumption](/management/telemetry/telemetry-dashboards/project-consumption.png)
+
+## Organization Usage
+The Organization Usage dashboard shows consumption across all projects in your organization. It is available to organizations with an active contract. This content is also available as the [Organization Usage tab](#ac-organization-usage) within the Activity Center.
+
+### KPIs
+Four KPI cards compare current usage against contract limits:
+
+| KPI | Description |
+|-----|-------------|
+| **PPU (Credits)** | Credits consumed vs. contract limit for the selected period |
+| **Projects** | Number of active projects vs. contract limit (current month) |
+| **Users** | Number of users vs. contract limit (current month) |
+| **Storage TB** | Storage used vs. contract limit (current month) |
+
+Each KPI includes a progress bar: green below 80%, orange at 80–99%, and red at 100% or above.
+
+{: .image-popup}
+![Organization Usage KPIs](/management/telemetry/telemetry-dashboards/ou-kpis.png)
 
 ### Active Contract Consumption
-*Active Contract Consumption* shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction 
-based on the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same number of credits to each month of the 
-contract's tenure.
+A line chart with three lines showing PPU consumption relative to the contract:
+
+- **PPU** (solid) — actual monthly consumption
+- **Predicted PPU** (dashed) — prediction based on the average of the last three months
+- **PPU Limit** (red) — monthly credit allocation from the contract
 
 {: .image-popup}
-![Screenshot - Active Contract Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
+![Active Contract Consumption](/management/telemetry/telemetry-dashboards/ou-contract.png)
+
 
 ### Consumption
-*Consumption* shows three visuals. For the first two, you can drill down by hovering over a point and clicking on it. *PPU Daily* shows daily consumption broken down into groups based on a usage breakdown. 
-*PPU Monthly* shows the same information but aggregated by month. The last visual shows the limits and actual consumption per month.    
+- **Credits Consumption History** — daily credits as a line chart. Click on a data point to see a breakdown by usage category.
+- **Credits by Usage Category** — stacked bar chart (monthly) or line chart (daily) showing consumption by category. Toggleable legend; click a bar to drill down.
+- **Monthly Usage Summary** — table listing each month with PPU used vs. limit, projects, users, and storage. Color indicators (green/orange/red) use the same thresholds as the KPI cards.
 
 {: .image-popup}
-![Screenshot - Consumption](/management/telemetry/telemetry-dashboards/ou-consumption.png)
+![Consumption](/management/telemetry/telemetry-dashboards/ou-consumption.png)
 
-### Projects
-*Projects* show the five most demanding components, configurations, and projects. For these four visuals, you can drill down to see a breakdown of consumption by week. There is also a URL that gives
-direct access to the underlying data. For the five most expensive projects, there is also a usage breakdown, which shows what has consumed the credits. Next listed are the most demanding SQL and non-SQL 
-transformations, which have consumed most of the credits. The last visual is for the most expensive components. 
+### Top Projects and Components
+Four horizontal bar charts showing the most demanding areas of your organization:
 
-{: .image-popup}
-![Screenshot - Projects_1](/management/telemetry/telemetry-dashboards/ou-project1.png)
+- **Top Projects by Consumed Credits** — top 10 projects ranked by credit consumption
+- **Most Demanding SQL Transformations** — top 10 SQL transformation configurations by credits
+- **Most Demanding non-SQL Transformations** — top 10 non-SQL transformation configurations by credits
+- **Most Demanding Component Configurations** — top 10 non-transformation component configurations by credits
 
-{: .image-popup}
-![Screenshot - Projects_2](/management/telemetry/telemetry-dashboards/ou-project2.png)
-
-### Configurations Health
-*Configurations Health* gives the health of flows and jobs over time. By hovering over a day, you can see more detailed data (the numbers of flows or jobs on that day that ended with success, error, 
-or warning).
+All four charts support **Load more** and **Show less** to expand beyond the top 10. Project names link directly to Keboola.
 
 {: .image-popup}
-![Screenshot - Configuration Health](/management/telemetry/telemetry-dashboards/ou-config-health.png)
+![Top Projects and Components](/management/telemetry/telemetry-dashboards/ou-projects.png)
+
+### Configuration Health
+Two side-by-side trend charts:
+
+- **Flows Health** — total and error flow runs over time
+- **Jobs Health** — total and error job runs over time
+
+Each chart includes a **Show by Project** toggle that switches to a sortable per-project breakdown table.
+
+{: .image-popup}
+![Configuration Health](/management/telemetry/telemetry-dashboards/ou-config-health.png)
 
 ## Activity Center
-*Activity Center* provides the most detailed insight into telemetry data from the three modes available. It is not available by default but has to be requested. You need to tell your account 
-manager which project you want to be the target project in your *Activity Center*. You can have only one target project. Once the *Activity Center* has been enabled, it will be visible to everyone with access
-to the target project.
+The Activity Center provides the most detailed insight into your telemetry data across all projects in your organization. It is **not available by default** — contact your account manager to enable it. You will need to designate a target project where the Activity Center will be accessible.
 
-The *Activity Center* dashboard is only available in one Keboola project. However, it shows information on consumption and trends for all Keboola projects that are associated with the given customer (organization).
+Once enabled, the Activity Center is visible to everyone with access to the target project. Although it lives in one project, it shows data for **all projects** associated with your organization.
 
-{: .image-popup}
-![Screenshot - Activity Centre in KBC](/management/telemetry/telemetry-dashboards/activity-centre-kbc.png)
+### Shared Controls
+All five tabs share the following controls:
 
-The *Activity Center* has five tabs, each focused on a different aspect of consumption monitoring. These tabs are available by default for all projects in the organization but can be filtered for specific 
-ones. You can also filter by date. The default setup is for the current month and the two previous months. For example, if you access the *Activity Center* during May, you will get data from 1st March until 
-today. However, *Jobs Monitoring* provides detailed information on individual jobs, so it shows only yesterday's data by default. 
-
-All these filters can be changed. For some visuals, you can drill down to see a lower level of detail. For a  graphical representation, the drill-down can be accessed by hovering over a point. The drill-down 
-is available for a number if it has an underline. When you hover over a visual, a question mark appears in the top right corner. If you click on the question mark, you will get a description of the visual 
-(e.g., which filters are applicable and the logic behind the calculation).
+- **Date range filter** — preset options (This month, Last 3 months, Last 6 months). Jobs Monitoring uses a custom date picker defaulting to yesterday–today.
+- **Organization filter** — multi-select dropdown with fuzzy search. Selecting an organization filters the project dropdown and all tab data to that organization's projects. Visible on all tabs except Organization Usage.
+- **Project filter** — multi-select dropdown with fuzzy search. Constrained by the selected organization. Available on project-specific tabs.
+- **Data freshness indicator** — shows when data was last updated, with a Refresh button to trigger background regeneration.
 
 {: .image-popup}
-![Screenshot - Activity Centre Visual Description](/management/telemetry/telemetry-dashboards/ac-info-button.png)
+![Activity Center Header](/management/telemetry/telemetry-dashboards/ac-header.png)
 
-### Organization Usage Activity Center
-This tab provides a high-level overview of the consumption within the entire organization and in relation to contracts.
-It focuses on five different sections: *KPIs*, *Active Contract Consumption*, *Consumption*, *Projects*, and *Configuration Health*. 
-
-#### KPIs
-*KPIs* show four of the metrics specified in the contract in comparison to the limits. For *PPU*, the usage and limit are shown for the period selected in the date range filter. For the others (*Projects*, 
-*Users*, and *Storage TB*), the values are for the current month only, and the limits are as defined in the contract. 
+### Organization Usage {#ac-organization-usage}
+This tab is identical in content and functionality to the standalone [Organization Usage](#organization-usage) dashboard described above — KPIs with contract limits, Active Contract Consumption, Consumption charts, Top Projects and Components, and Configuration Health. Please refer to that section for a detailed description of each visual.
 
 {: .image-popup}
-![Screenshot - KPIs](/management/telemetry/telemetry-dashboards/ac-org-usage-kpis.png)
-
-#### Active Contract Consumption
-This option shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction based on
-the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same number of credits to each month of 
-the contract's tenure.
-
-{: .image-popup}
-![Screenshot - Active Contract Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-contract.png)
-
-This option shows three different views of PPU consumption in relation to the contractually agreed values. *PPU* is the actual usage per month. The *Predicted PPU* line is a prediction based on
-the average consumption in the last three months. The *PPU Limit* line is the consumption agreed in the contract, which is determined by allocating the same number of credits to each month of 
-the contract's tenure.
-
-#### Consumption
-*Consumption* shows three visuals. For the first two, you can drill down by hovering over a point and clicking on it. *PPU Daily* shows daily consumption broken down into groups based on a usage breakdown. 
-*PPU Daily per Project* shows the consumption split between projects. The last visual shows the limits and actual values per month.  
-
-{: .image-popup}
-![Screenshot - Consumption](/management/telemetry/telemetry-dashboards/ac-org-usage-consumption.png)
-
-#### Projects
-*Projects* show the five most demanding components, configurations, and projects. For these four visuals, you can drill down to see a breakdown of consumption by week. There is also a URL that gives direct 
-access to the underlying data. For the five most expensive projects, there is also a usage breakdown, which shows what has consumed the credits. Next listed are the most demanding SQL and non-SQL 
-transformations, which have consumed most of the credits. The last visual is for the most expensive components. 
-
-{: .image-popup}
-![Screenshot - Projects_1](/management/telemetry/telemetry-dashboards/ac-org-usage-projects1.png)
-
-{: .image-popup}
-![Screenshot - Projects_2](/management/telemetry/telemetry-dashboards/ac-org-usage-projects2.png)
-
-#### Configuration Health
-*Configuration Health* gives the health of flows and jobs over time. By hovering over a day, you can see more detailed data (the numbers of flows or jobs on that day that ended with success, error, or 
-warning).
-
-{: .image-popup}
-![Screenshot - Configuration Health](/management/telemetry/telemetry-dashboards/ac-org-usage-config-health.png)
+![Activity Center Organization Usage](/management/telemetry/telemetry-dashboards/ac-org-usage.png)
 
 ### Project Overview
-This tab provides visuals focused on PPU consumption and shows the most expensive projects, transformations, configurations, and components. It also shows the configurations, projects, and users whose consumption has increased significantly. It can be filtered by branch (development vs. main).
+This tab focuses on credit consumption patterns and highlights the most expensive projects, transformations, and components.
 
-#### PPU and usage
-These four visuals show PPU consumption from different angles. The first focuses on *PPU per Configuration*, differentiating between SQL, KBC, and CDC credits. *PPU Daily* shows a breakdown of PPU 
-between component types over the period selected. *Component's Usage* is a treemap and provides an overview of how many jobs were executed for the components. You can drill down for a particular 
-configuration or project to see how many credits it consumed. The last visual also shows the credits consumed per component split between SQL, KBC, and CDC credits. 
+#### Credits by Usage Category
+Stacked bar chart (monthly) or line chart (daily) showing PPU consumption broken down by category. Click on legend items to toggle categories; click on a bar to drill down to daily detail.
+    
+{: .image-popup}
+![Credits by Usage Category](/management/telemetry/telemetry-dashboards/ac-project-overview-credits.png)
 
 {: .image-popup}
-![Screenshot - PPU and Usage](/management/telemetry/telemetry-dashboards/ac-project-overview-ppu.png)
+![Credits by Usage Category Drilldown](/management/telemetry/telemetry-dashboards/ac-project-overview-credits-drilldown.png)
 
-#### Top 10 
-Top 10 has two tables. The first is the *Top 10 Transformations* based on their consumption. It provides details about the runtime and input and output mapping (e.g., whether any filters were applied or 
-whether the output was incremental or full load). *Top 10 Component Configurations* shows the most expensive configurations and provides information on how long they ran for. 
+#### Most Demanding Components, Transformations, and Configurations
+Four horizontal bar charts ranking the top consumers:
+
+- **Most Demanding Components** — top 10 components by credits. Click on a bar to see a **Configuration Breakdown** table with configuration name, project, credits, and runtime hours.
+- **Most Demanding SQL Transformations** — top 10 SQL transformation configurations by credits
+- **Most Demanding non-SQL Transformations** — top 10 non-SQL transformation configurations by credits
+- **Most Demanding Component Configurations** — top 10 non-transformation configurations by credits
+
+All charts support Load more / Show less.
 
 {: .image-popup}
-![Screenshot - Top 10](/management/telemetry/telemetry-dashboards/ac-project-overview-top10.png)
-
-#### Significant changes (outliers)
-*Significant changes* shows outliers for projects, configurations, and users. The tables show the average PPU consumption over the previous 30 days for projects, configurations, or users that consumed
-50% more or 50% less on given days. It lists days on which a project billed more than 1 credit. The last column is the percentage of billed credits versus the average. 
+![Top Components](/management/telemetry/telemetry-dashboards/ac-project-overview-top.png)
 
 {: .image-popup}
-![Screenshot - Outliers](/management/telemetry/telemetry-dashboards/ac-project-overview-outliers.png)
+![Top Components Drilldown](/management/telemetry/telemetry-dashboards/ac-project-overview-top-drilldown.png)
+
+#### Significant Changes (Outliers)
+This section helps you spot sudden, unexpected changes in credit consumption. It highlights cases where daily spending significantly exceeded its recent average — which could indicate an inefficient query, a change in data volume, or a misconfigured schedule.
+
+Three tables are available:
+
+- **Project Outliers** — projects whose daily spend exceeded 2× their 30-day average (minimum 10 credits). Expand a row to see a per-category credit breakdown.
+- **Configuration Outliers** — individual configurations with the same deviation pattern. Deviations above 3× are highlighted in red. Configuration names link to Keboola.
+- **User Outliers** — user tokens with above-average consumption. Expand a row to see top configurations and components.
+
+All tables are sortable by any column.
+
+{: .image-popup}
+![Outliers](/management/telemetry/telemetry-dashboards/ac-project-overview-outliers.png)
 
 ### Project Users
-The first section provides an *Overview* of users within a project. They can be filtered by branch type and specific user. It shows the user roles, activities, and how many joined the project 
-in the last seven days. 
+This tab provides visibility into user activity, roles, and consumption within your projects.
 
-#### Overview
-*Users* shows the total number of users per project with limits consistent with those in the organization usage tab. *Active Users* shows the count of users who performed an action within the project during
-the selected period. *Users by Role* displays all users in the project according to their role, based on the selected date range, project, and branch type. 
+#### Active Users Over Time
+Line chart showing the count of active users per day (or per week for ranges longer than 31 days). Click on a data point to see a sortable table of individual users with their activity counts by type (Configuration Update, Job Run, Job Error).
 
-{: .image-popup}
-![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-users-overview.png)
-
-The second section, *Activities*, summarizes the users in a project. 
-
-#### Activities
-*Activities* summarizes user activity within a selected project. It details how many PPU users consumed and the status of their jobs (*UserJobs PPU*), and measures user activity based on the number of 
-configuration changes (*Configuration Updates*). Also, it shows the newly added project members in the last 7 days, along with their details (*Newly Added Users Last 7 Days*).
+**Note:** An "active" user is one who performed a real action (configuration change, job run, etc.). Users who only logged in without performing an action are not counted.
 
 {: .image-popup}
-![Screenshot - Activities](/management/telemetry/telemetry-dashboards/ac-project-users-activities.png)
+![Active Users Over Time](/management/telemetry/telemetry-dashboards/ac-project-users-active.png)
+
+#### Current Users by Role
+A table showing users grouped by role with a count per role. Expand a role to see individual users with their email and project.
+
+#### Current Users Without MFA
+A table listing users who have not enabled multi-factor authentication. Expand a user to see their projects and roles.
+
+{: .image-popup}
+![Current Users by Role and Current Users Without MFA](/management/telemetry/telemetry-dashboards/ac-project-users-roles-mfa.png)
+
+#### User Job Consumption
+Horizontal stacked bar chart showing the top 10 users by credit consumption, split into success and error credits. Click on a bar to see a detail table with project, component, configuration, credits, jobs, and errors. Supports Load more / Show less.
+
+{: .image-popup}
+![User Job Consumption](/management/telemetry/telemetry-dashboards/ac-project-users-consumption.png)
+
+#### Newly Added Users
+A sortable table showing users added in the last 7 days, with email, project, role, invited by, and date.
 
 ### Project Health
-This tab shows the overall health of a project. It can be filtered by branch (development vs. main). The *Overview* section focuses on flows and jobs. The next section focuses on trends for *Components*, 
-and the last section shows four individual metrics: Configurations without a Description*, *Flows without Error Notifications*, *Unused Configurations*, and *Unused Tables*.
+This tab helps you monitor the health of jobs, flows, and configurations across your projects.
 
-#### Overview
-*Overview* shows key metrics regarding the health of jobs and flows. *Jobs Error Ratio/Flow Error Ratio* indicates the percentage of jobs that ended in error relative to successful ones, while and *Error 
-Jobs/Error Flows* presents the absolute number of jobs that concluded with errors. Additionally, since flows can also end with warnings, two metrics display the percentage and absolute number of flows with 
-warning. 
+#### Overview KPIs
+Six KPI cards summarizing job and flow health:
 
-{: .image-popup}
-![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-health-overview.png)
+| KPI | Description |
+|-----|-------------|
+| **Jobs Error Ratio** | Percentage of non-flow jobs ending in error |
+| **Error Jobs** | Total count of error jobs |
+| **Flows Error Ratio** | Percentage of flow/orchestrator jobs ending in error |
+| **Error Flows** | Total count of error flows |
+| **Flows Warning Ratio** | Percentage of flows ending with a warning |
+| **Warning Flows** | Total count of warning flows |
 
-Below, two graphs illustrate the health of flows and jobs over time. By hovering over a particular day on the graph, you can view more detailed data, including the number of flows or jobs that ended with 
-success, error, or warning on that day.
-
-#### Components
-This section provides a more detailed view of the errors. *Error Jobs PPU* displays the number of credits consumed by jobs that ended in error; you can drill down to see further details. *PPU Consumed by Error 
-Jobs* shows the trend of credit consumption over time. *Components Errors Trend* examines the errors, split by component type, over time. The last two graphs, *Components Errors* and *Components Error Ratio*, 
-present similar information on component errors—the first in absolute values and the second as a percentage.
+#### Flows Health and Jobs Health
+Two side-by-side trend charts showing total and error runs over time. Each includes a **Show by Project** toggle that switches to a sortable per-project breakdown table.
 
 {: .image-popup}
-![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-health-components.png)
+![Overview KPIs and Flows/Jobs Health](/management/telemetry/telemetry-dashboards/ac-project-health-overview.png)
 
-#### Configurations, flow notifications, and tables
-This section displays important metrics with available drill-downs for all. While these metrics do not indicate immediate issues, they provide insights that could be useful for cleanup exercises. *Configurations 
-without Description* shows how many configurations lack a description, making it unclear what the configuration accomplishes. *Flows without Error Notifications* indicates how many flows do not send  
-notifications when errors occur, which means errors might go unnoticed unless manually checked. *Unused Configurations* and *Unused Tables* identify configurations and tables that have not been used in any jobs 
-or had any imports or exports, respectively, in the last 30 days.
+#### Consumed Credits by Error Jobs
+Line chart showing the trend of credits consumed by jobs that ended in error. Click on a data point to see a sortable detail table with project, component, configuration, token, and credits.
+
+#### Component Errors
+Horizontal bar chart showing the top 10 components by error count. Toggle between **By Error Count** and **By Error Ratio**. Click on a bar to see a detail table with project, configuration, errors, and error ratio (color-coded: red above 5%, orange above 1%). Supports Load more / Show less.
 
 {: .image-popup}
-![Screenshot - Project Users Overview](/management/telemetry/telemetry-dashboards/ac-project-health-config.png)
+![Consumed Credits by Error Jobs and Component Errors](/management/telemetry/telemetry-dashboards/ac-project-health-errors.png)
+
+#### Configuration Health
+Four KPI cards act as toggle buttons. Selecting a metric displays a horizontal bar chart broken down by component; clicking a bar drills down to a project and configuration detail table.
+
+| Metric | Description |
+|--------|-------------|
+| **Unused** | Configurations with no jobs in the last 90 days |
+| **Unorchestrated** | Configurations not included in any enabled schedule |
+| **Without Description** | Configurations with an empty description |
+| **Deprecated** | Configurations marked as deprecated |
+
+Deleted configurations and configurations in deleted projects are excluded.
+
+{: .image-popup}
+![Configuration Health](/management/telemetry/telemetry-dashboards/ac-project-health-config.png)
+
+#### General Issues
+Four KPI cards act as toggle buttons (same pattern as Configuration Health). Selecting a metric shows a detail table.
+
+| Metric | Description |
+|--------|-------------|
+| **Flows without Schedule** | Flow/orchestrator configurations not in any enabled schedule |
+| **Flows without Error Notification** | Flow/orchestrator configurations without an error notification subscription |
+| **Unused Branches** | Non-default development branches with no configuration changes in the last 90 days |
+| **Unused Workspaces** | Workspace configurations with no jobs in the last 90 days |
+
+Tables include project and configuration links to Keboola.
+
+{: .image-popup}
+![General Issues](/management/telemetry/telemetry-dashboards/ac-project-health-general-issues.png)
 
 ### Jobs Monitoring
-This tab provides the lowest level of detail. It can be filtered on many fields in addition to those mentioned already: Project ID, Component, Component Type, Component Configuration, Configuration ID, 
-Job Run Type, Job Status, Token Name, and Flow. By default, it lists only yesterday's jobs whose status was error, warning, or success and only for jobs that were run automatically (Job Run Type is a flow).
-The details are shown as a table. 
+This tab provides the most granular view of your data — individual job records across all projects, queried directly from the database for the most up-to-date results.
+
+#### Filters
+Seven multi-select filters with fuzzy search are available. Filters are **bidirectionally dependent** — selecting a value in one filter updates the available options in all others. Click **Apply** to load data with the current filters, or **Reset** to clear all filters.
+
+| Filter | Description |
+|--------|-------------|
+| **Types** | Component type (e.g., extractor, writer, transformation) |
+| **Components** | Specific component (e.g., `keboola.ex-db-snowflake`) |
+| **Configurations** | Configuration name |
+| **Run Types** | How the job was triggered (manual, flow, schedule, etc.) |
+| **Statuses** | Job status (success, error, warning, processing, waiting) |
+| **Tokens** | Token that ran the job |
+| **Flows** | Flow the job belongs to |
+
+The date filter defaults to yesterday–today, with a maximum range of 90 days.
+
+#### Jobs Table
+A sortable table (server-side sorting) showing individual job records:
+
+| Column | Description |
+|--------|-------------|
+| **Job ID** | Numeric ID, links to the job detail in Keboola |
+| **Created At** | Timestamp in your local timezone |
+| **Project** | Project name, links to the project in Keboola |
+| **Type** | Component type |
+| **Component** | Component ID |
+| **Configuration** | Configuration name, links to the configuration in Keboola |
+| **Run Type** | How the job was triggered |
+| **Status** | Color-coded badge (green = success, red = error, yellow = warning, blue = processing, gray = waiting) |
+| **Token** | Token name |
+| **Runtime** | Job duration in human-readable format |
+| **Credits** | Credits consumed by the job |
+
+Navigation uses **Previous / Next** buttons with 50 rows per page. The total count is shown as "Page X of Y".
 
 {: .image-popup}
-![Screenshot - Jobs Monitoring](/management/telemetry/telemetry-dashboards/ac-jobs-monitoring.png)
-
+![Jobs Table](/management/telemetry/telemetry-dashboards/ac-jobs-monitoring.png)

@@ -7,3 +7,4 @@ Gemfile
 Gemfile.lock
 /.vscode
 .playwright-mcp
+.env

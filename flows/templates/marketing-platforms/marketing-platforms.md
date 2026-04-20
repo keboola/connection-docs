@@ -27,7 +27,7 @@ and Bing Ads). After all the necessary tasks are performed on the data, you load
 
 - Finally, you will schedule and run the entire flow (i.e., the sequence of all the prepared, above mentioned steps, in the correct order). All your selected data source connectors, all data manipulations, and the Google Sheets data destination connector, will be processed.
   
-- If you want to visualize the data from this template, you can use the predefined data app.
+- If you want to visualize the data from this template, you can use the predefined app.
 
 ## Table Description
 
@@ -98,7 +98,7 @@ perform the required OAuth authorizations.
 authorization problems. If you are struggling with this part, go to the section [Authorizing Data Destinations](/flows/templates/marketing-platforms/#authorizing-data-destinations) below.
 
 Follow the steps one by one and authorize at least one data source from the list. If you want to upload the data to the database, choose one of the destinations and authorize it, or you can visualize 
-the data directly using our Streamlit data app. To do so, select the checkbox **Let’s Do It** in the **Online Marketing Report** application and save the configuration. 
+the data directly using our Streamlit app. To do so, select the checkbox **Let’s Do It** in the **Online Marketing Report** application and save the configuration. 
 
 {: .image-popup}
 ![Online Marketing Report](/flows/templates/marketing-platforms/online-marketing-report.png)
@@ -114,9 +114,9 @@ Click **Run Template** and start building your visualizations a few minutes late
 {: .image-popup}
 ![Ads Platforms - All Runs](/flows/templates/marketing-platforms/adsplatforms-all-runs.png)
 
-A data app has been created. You can also find its details in the section **Components – Data Apps**, where you can always edit the data apps you have created.
+An app has been created. You can also find its details in the section **Components – Apps**, where you can always edit the apps you have created.
 
-Below, you can see a screenshot of the data app created from the Advertising Platforms template.
+Below, you can see a screenshot of the app created from the Advertising Platforms template.
 
 {: .image-popup}
 ![Online Marketing Dashboard](/flows/templates/marketing-platforms/online-marketing-dashboard.png)
