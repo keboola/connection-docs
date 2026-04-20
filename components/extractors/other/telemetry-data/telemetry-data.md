@@ -44,21 +44,22 @@ window.TELEMETRY_DIAGRAM = {{ site.data.telemetry_tables | jsonify }};
 ## Project Mode Tables
 The extracted tables provide you with information about your buckets, configurations, branches, jobs, AI agent and MCP interactions, sandboxes, projects, users, and security events.
 
-{% for table in site.data.telemetry_tables.tables %}{% if table.mode == "project" %}
+{% assign sorted_tables = site.data.telemetry_tables.tables | sort: "id" %}
+{% for table in sorted_tables %}{% if table.mode == "project" %}
 {% include telemetry-table.html table=table %}
 {% endif %}{% endfor %}
 
 ## Organization Mode Tables
 In addition to the tables provided to you by [Project Mode](#project-mode-tables), this mode adds information about your organizations, outlines the limits of your contracts, and includes a table with usage metrics. This table can be used as a common dimension for both contract limits and metric values.
 
-{% for table in site.data.telemetry_tables.tables %}{% if table.mode == "organization" %}
+{% for table in sorted_tables %}{% if table.mode == "organization" %}
 {% include telemetry-table.html table=table %}
 {% endif %}{% endfor %}
 
 ## Activity Center Mode Tables
 In addition to the tables provided to you by [Organization Mode](#organization-mode-tables), this mode adds information about columns, flows, notifications, schedules, storage metadata, tokens, transformations, triggers, user activity, and workspaces.
 
-{% for table in site.data.telemetry_tables.tables %}{% if table.mode == "activity_center" %}
+{% for table in sorted_tables %}{% if table.mode == "activity_center" %}
 {% include telemetry-table.html table=table %}
 {% endif %}{% endfor %}
 
