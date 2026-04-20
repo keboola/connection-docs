@@ -116,6 +116,23 @@ For the full `CommonInterface` reference — including reading input tables, wri
 working with files, state files, error handling, and logging — see the
 [Developer Documentation](https://developers.keboola.com/extend/component/tutorial/).
 
+## Using Kai to Configure Custom Python
+
+[Kai](/kai/), Keboola's AI assistant, can help you set up and work with the Custom Python component directly
+from the Keboola UI. Open Kai in your project and describe what you need — for example:
+
+- *"Create a Custom Python configuration that fetches data from the Stripe API and saves it to Storage."*
+- *"Help me set up a Custom Python component to push data from my orders table to a REST API."*
+- *"Debug my Custom Python job — it's failing with a connection timeout."*
+
+Kai understands the Custom Python component's configuration, the `CommonInterface` library,
+and Keboola best practices. It can generate code snippets, configure user parameters with
+encrypted credentials, set up Git repository integration, and troubleshoot failed jobs —
+all within the chat.
+
+{% include tip.html content="When asking Kai to build a Custom Python configuration, be specific about the external service,
+authentication method, and which tables or files you want to read or write. The more context you provide, the better the result." %}
+
 ## Example Repository
 
 We have prepared a [simple example project](https://github.com/keboola/component-custom-python-example-repo-1)
