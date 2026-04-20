@@ -202,6 +202,9 @@ items:
   - url: /components/
     title: Components
     items:
+      - url: /components/running-jobs-in-parallel/
+        title: Running Jobs in Parallel
+
       - url: /components/extractors/
         title: Data Source Connectors
         items:
