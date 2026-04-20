@@ -14,7 +14,7 @@ Storage Access allows your Data App to read data from and write data back to Keb
 - **Write-back capability**: Update, insert into **existing** Storage tables directly from your app
 - **Interactive applications**: Build data entry forms, approval workflows, and collaborative tools
 
-This feature is available for both **Streamlit** and **Python/JS** Data Apps.
+This feature is available for both **Streamlit** and **Python/JS** Data Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
 
 ## When to Use Storage Access
 
@@ -32,7 +32,7 @@ This feature is available for both **Streamlit** and **Python/JS** Data Apps.
 
 ### Architecture Overview 
 
-When you enable Storage Access, Keboola creates a dedicated **workspace** for your Data App. This workspace contains a database user with specific permissions (INSERT, SELECT, UPDATE, TRUNCATE, DELETE) on the tables you've selected.
+When you enable Storage Access, Keboola creates a dedicated **workspace** for your Data App. This workspace contains a database user with specific permissions (SELECT, INSERT, UPDATE, DELETE, TRUNCATE) on the tables you've selected.
 
 ```
 Your Data App
@@ -78,14 +78,14 @@ This design ensures:
 2.  Go to the **Features**.
 3.  Find the **Storage Access** feature and activate it.
 
-### Step 2: Storage Access
+### Step 2: Configure Writable Tables
 
 1. Open your Data App configuration in Keboola.
 2. Go to the **Advanced Settings** tab.
 3. Find the **Storage Access** section.
 4. Click **+ Add Writable Table**.
-2. Select a bucket and table from Storage.
-3. For each table, the app will have **INSERT**, **SELECT**, **UPDATE**, **DELETE** and **TRUNCATE** permissions.
+5. Select a bucket and table from Storage.
+6. For each table, the app will have **SELECT**, **INSERT**, **UPDATE**, **DELETE**, and **TRUNCATE** permissions.
 
 **Notes:**
 
@@ -110,7 +110,6 @@ Install the Keboola Query Service client:
 
 ```toml
 dependencies = [
-    "kbcstorage>=0.8.0",
     "keboola.query-service-client>=0.2.0",
 ]
 ```
@@ -242,7 +241,7 @@ client.execute_query(
 )
 ```
 
-**Warning:** Truncation is immediate and cannot be undone. Use with caution.
+{% include warning.html content="Truncation removes every row in the target table immediately and cannot be undone through the Query Service. Use with caution." %}
 
 ### Important Considerations
 
@@ -302,7 +301,7 @@ except (FileNotFoundError, KeyError) as e:
 | --- | --- | --- |
 | **Data freshness** | Snapshot at deploy time | Real-time, always current |
 | **Data loading** | CSV files loaded to `/data/in/tables/` | Query on demand via API |
-| **Write capability** | None (read-only) | INSERT, SELECT, UPDATE, TRUNCATE, DELETE |
+| **Write capability** | None (read-only) | INSERT, UPDATE, DELETE, TRUNCATE |
 | **Dataset size** | Limited by container memory | Virtually unlimited (pagination) |
 | **Configuration** | Select tables in UI | Select tables + enable toggle |
 | **Use case** | Static dashboards, reports | Interactive apps, data entry |
@@ -316,10 +315,9 @@ This example shows a simple Flask app that reads records from Storage and allows
 **`app.py`:**
 
 ```python
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, render_template_string
 import os
 import json
-import pandas as pd
 from keboola.query_service_client import QueryServiceClient
 
 app = Flask(__name__)
@@ -410,8 +408,6 @@ version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
     "flask>=3.0.0",
-    "pandas>=2.0.0",
-    "kbcstorage>=0.8.0",
     "keboola.query-service-client>=0.2.0",
 ]
 
