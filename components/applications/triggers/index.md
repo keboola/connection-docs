@@ -16,4 +16,5 @@ The following applications support triggering:
 - [dbt Cloud Job Trigger](/components/applications/triggers/dbt-cloud-job-trigger/)
 - [Deepnote Notebook Execution Trigger](/components/applications/triggers/deepnote-notebook-execution-trigger/) - Trigger to execute a Notebook in Deepnote
 - [Power BI Refresh](/components/applications/triggers/powerbi-refresh/) - Trigger dataset refreshes in a Power BI workspace
+- [Tableau Extract Refresh Trigger](/components/applications/triggers/tableau-extract-refresh/) - Trigger Tableau extract refresh tasks for data sources and workbooks
 - And [more](https://components.keboola.com/components)
