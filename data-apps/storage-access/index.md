@@ -52,7 +52,7 @@ Your app communicates with Storage through the [**Query Service API**](https://q
 - Automatic metadata refresh after writes
 - Abstraction from the underlying backend
 
-The recommended Python client library is [keboola.query-service-client](https://pypi.org/project/keboola.query-service-client/).
+The recommended Python client library is [keboola-query-service](https://pypi.org/project/keboola-query-service/) (also available for JavaScript/TypeScript as [@keboola/query-service](https://www.npmjs.com/package/@keboola/query-service)).
 
 ### Workspace Lifecycle
 
@@ -110,7 +110,7 @@ Install the Keboola Query Service client:
 
 ```toml
 dependencies = [
-    "keboola.query-service-client>=0.2.0",
+    "keboola-query-service>=0.2.0",
 ]
 ```
 
@@ -118,27 +118,23 @@ dependencies = [
 
 ```python
 import os
-import json
-from keboola.query_service_client import QueryServiceClient
+from keboola_query_service import Client
 
-# Read workspace ID from the manifest file (once at startup)
-manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH", 
-                                "/var/run/secrets/keboola.com/workspace/manifest.json")
-
+# Storage Access env vars are set by the platform when the feature is enabled.
 try:
-    with open(manifest_path) as f:
-        manifest = json.load(f)
-        workspace_id = manifest["workspaceId"]
-except (FileNotFoundError, KeyError) as e:
+    branch_id = os.environ["BRANCH_ID"]
+    workspace_id = os.environ["WORKSPACE_ID"]
+    query_service_url = os.environ["QUERY_SERVICE_URL"]
+except KeyError as e:
     raise RuntimeError(
         "Storage Access is not enabled for this app. "
         "Enable it in Advanced Settings and redeploy."
     ) from e
 
 # Initialize the Query Service client
-client = QueryServiceClient(
+client = Client(
+    base_url=query_service_url,
     token=os.environ["KBC_TOKEN"],
-    url=os.environ["KBC_URL"]
 )
 ```
 
@@ -150,13 +146,17 @@ To read a table you've selected in the UI:
 import pandas as pd
 
 # Query a table - use the full table ID (bucket.table)
-result = client.execute_query(
+results = client.execute_query(
+    branch_id=branch_id,
     workspace_id=workspace_id,
-    query='SELECT * FROM "in.c-main"."customers" LIMIT 1000'
+    statements=['SELECT * FROM "in.c-main"."customers" LIMIT 1000'],
 )
 
+# One QueryResult per statement — we sent one statement, so take the first.
+result = results[0]
+
 # Convert to DataFrame
-df = pd.DataFrame(result["data"], columns=result["columns"])
+df = pd.DataFrame(result.data, columns=[c.name for c in result.columns])
 print(df.head())
 ```
 
@@ -172,7 +172,7 @@ You can run any SELECT query against your permitted tables:
 ```python
 # Join multiple tables
 query = """
-    SELECT 
+    SELECT
         c.customer_name,
         SUM(o.amount) as total_spent
     FROM "in.c-main"."customers" c
@@ -182,7 +182,12 @@ query = """
     LIMIT 10
 """
 
-result = client.execute_query(workspace_id=workspace_id, query=query)
+results = client.execute_query(
+    branch_id=branch_id,
+    workspace_id=workspace_id,
+    statements=[query],
+)
+result = results[0]
 ```
 
 ## Writing Data Back to Storage
@@ -196,35 +201,38 @@ Storage Access allows your app to modify data in Storage tables using standard S
 
 ### Inserting and Updating Data
 
-You can use standard SQL INSERT and UPDATE statements directly via the Query Service:
+You can use standard SQL INSERT and UPDATE statements directly via the Query Service. Pass `statements` as a list — the SDK will execute them (transactionally by default) and return one result per statement:
 
 ```python
 # INSERT new records
 client.execute_query(
+    branch_id=branch_id,
     workspace_id=workspace_id,
-    query='''
+    statements=['''
         INSERT INTO "in.c-main"."approvals" ("id", "name", "status", "updated_at")
         VALUES (1, 'New Record', 'pending', CURRENT_TIMESTAMP)
-    '''
+    '''],
 )
 
 # UPDATE existing records
 client.execute_query(
+    branch_id=branch_id,
     workspace_id=workspace_id,
-    query='''
+    statements=['''
         UPDATE "in.c-main"."approvals"
         SET status = 'approved', updated_at = CURRENT_TIMESTAMP
         WHERE id = 123
-    '''
+    '''],
 )
 
 # DELETE records
 client.execute_query(
+    branch_id=branch_id,
     workspace_id=workspace_id,
-    query='''
+    statements=['''
         DELETE FROM "in.c-main"."approvals"
         WHERE status = 'cancelled'
-    '''
+    '''],
 )
 ```
 
@@ -236,8 +244,9 @@ To remove all data from a table:
 
 ```python
 client.execute_query(
+    branch_id=branch_id,
     workspace_id=workspace_id,
-    query='TRUNCATE TABLE "in.c-main"."temp_data"'
+    statements=['TRUNCATE TABLE "in.c-main"."temp_data"'],
 )
 ```
 
@@ -260,40 +269,43 @@ query = """
     SET status = 'approved', version = version + 1
     WHERE id = 123 AND version = 5
 """
-result = client.execute_query(workspace_id=workspace_id, query=query)
+results = client.execute_query(
+    branch_id=branch_id,
+    workspace_id=workspace_id,
+    statements=[query],
+)
 
-if result["rows_affected"] == 0:
+if results[0].rows_affected == 0:
     raise Exception("Record was modified by another user. Please refresh and try again.")
 ```
 
 ## Environment Variables
 
-When Storage Access is enabled, these environment variables are available to your app:
+When Storage Access is enabled, the platform sets these environment variables in your Data App container:
 
 | Variable | Description |
 | --- | --- |
-| `KBC_WORKSPACE_MANIFEST_PATH` | Path to the workspace manifest file (contains `workspaceId`) |
-| `KBC_TOKEN` | Storage API token (always available) |
-| `KBC_URL` | Keboola Connection URL (always available) |
+| `WORKSPACE_ID` | ID of the provisioned workspace for this app. |
+| `BRANCH_ID` | Storage API branch ID of the project. |
+| `QUERY_SERVICE_URL` | URL of the Query Service API (stack-specific). |
+| `KBC_TOKEN` | Keboola Storage API token. |
 
-**Reading the workspace ID:**
-
-The recommended way to obtain the workspace ID is from the manifest file:
+If Storage Access is not enabled, `WORKSPACE_ID` / `BRANCH_ID` / `QUERY_SERVICE_URL` are not set. Read them with a clear error message for users:
 
 ```python
 import os
-import json
 
-manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
-                                "/var/run/secrets/keboola.com/workspace/manifest.json")
 try:
-    with open(manifest_path) as f:
-        workspace_id = json.load(f)["workspaceId"]
-except (FileNotFoundError, KeyError) as e:
+    branch_id = os.environ["BRANCH_ID"]
+    workspace_id = os.environ["WORKSPACE_ID"]
+    query_service_url = os.environ["QUERY_SERVICE_URL"]
+except KeyError as e:
     raise RuntimeError(
         "Storage Access is not enabled. Enable it in Advanced Settings and redeploy."
     ) from e
 ```
+
+For the full list of environment variables exposed to Data Apps, see the [data-app-python-js runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables).
 
 ## Comparison: Input Mapping vs Direct Storage Access
 
@@ -317,20 +329,17 @@ This example shows a simple Flask app that reads records from Storage and allows
 ```python
 from flask import Flask, request, render_template_string
 import os
-import json
-from keboola.query_service_client import QueryServiceClient
+from keboola_query_service import Client
 
 app = Flask(__name__)
 
-# Initialize Query Service client once at startup
-manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
-                                "/var/run/secrets/keboola.com/workspace/manifest.json")
-with open(manifest_path) as f:
-    WORKSPACE_ID = json.load(f)["workspaceId"]
+# Read Storage Access env vars once at startup
+BRANCH_ID = os.environ["BRANCH_ID"]
+WORKSPACE_ID = os.environ["WORKSPACE_ID"]
 
-qs_client = QueryServiceClient(
+qs_client = Client(
+    base_url=os.environ["QUERY_SERVICE_URL"],
     token=os.environ["KBC_TOKEN"],
-    url=os.environ["KBC_URL"]
 )
 
 ALLOWED_STATUSES = {"pending", "approved", "rejected"}
@@ -344,23 +353,27 @@ def index():
         new_status = request.form["status"]
         if new_status not in ALLOWED_STATUSES:
             return "Invalid status", 400
-        
+
         qs_client.execute_query(
+            branch_id=BRANCH_ID,
             workspace_id=WORKSPACE_ID,
-            query=f'''
+            statements=[f'''
                 UPDATE "in.c-main"."approvals"
                 SET status = '{new_status}', updated_at = CURRENT_TIMESTAMP
                 WHERE id = {record_id}
-            '''
+            '''],
         )
-    
+
     # Load current records
-    result = qs_client.execute_query(
+    results = qs_client.execute_query(
+        branch_id=BRANCH_ID,
         workspace_id=WORKSPACE_ID,
-        query='SELECT id, name, status, updated_at FROM "in.c-main"."approvals" ORDER BY id'
+        statements=['SELECT id, name, status, updated_at FROM "in.c-main"."approvals" ORDER BY id'],
     )
-    records = [dict(zip(result["columns"], row)) for row in result["data"]]
-    
+    result = results[0]
+    column_names = [c.name for c in result.columns]
+    records = [dict(zip(column_names, row)) for row in result.data]
+
     return render_template_string(TEMPLATE, records=records)
 
 
@@ -408,7 +421,7 @@ version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
     "flask>=3.0.0",
-    "keboola.query-service-client>=0.2.0",
+    "keboola-query-service>=0.2.0",
 ]
 
 [build-system]
@@ -421,14 +434,13 @@ build-backend = "setuptools.build_meta"
 **1. Handle missing workspace gracefully**
 
 ```python
-import os, json
+import os
 
-manifest_path = os.environ.get("KBC_WORKSPACE_MANIFEST_PATH",
-                                "/var/run/secrets/keboola.com/workspace/manifest.json")
 try:
-    with open(manifest_path) as f:
-        workspace_id = json.load(f)["workspaceId"]
-except (FileNotFoundError, KeyError):
+    branch_id = os.environ["BRANCH_ID"]
+    workspace_id = os.environ["WORKSPACE_ID"]
+    query_service_url = os.environ["QUERY_SERVICE_URL"]
+except KeyError:
     # Storage Access is not enabled — show a user-friendly error
     import streamlit as st  # or use your framework's error handling
     st.error("Storage Access is not enabled for this app. Enable it in Advanced Settings and redeploy.")
@@ -463,19 +475,21 @@ page_size = 1000
 last_id = 0  # Start from the beginning
 
 while True:
-    result = client.execute_query(
+    results = client.execute_query(
+        branch_id=branch_id,
         workspace_id=workspace_id,
-        query=f'''
+        statements=[f'''
             SELECT * FROM "in.c-main"."my_table"
             WHERE id > {last_id}
             ORDER BY id ASC
             LIMIT {page_size}
-        '''
+        '''],
     )
-    if not result["data"]:
+    rows = results[0].data
+    if not rows:
         break
-    process_batch(result["data"])
-    last_id = result["data"][-1][0]  # Update cursor to last row's id
+    process_batch(rows)
+    last_id = rows[-1][0]  # Update cursor to last row's id
 ```
 
 **4. Cache frequently-used data**
@@ -487,11 +501,13 @@ import streamlit as st
 
 @st.cache_data(ttl=300)  # Cache for 5 minutes
 def load_reference_data():
-    result = client.execute_query(
+    results = client.execute_query(
+        branch_id=branch_id,
         workspace_id=workspace_id,
-        query='SELECT * FROM "in.c-main"."reference_data"'
+        statements=['SELECT * FROM "in.c-main"."reference_data"'],
     )
-    return pd.DataFrame(result["data"], columns=result["columns"])
+    result = results[0]
+    return pd.DataFrame(result.data, columns=[c.name for c in result.columns])
 ```
 
 For **Python/JS** (non-Streamlit) apps, use a simple in-memory cache:
