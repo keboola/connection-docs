@@ -199,6 +199,8 @@ Storage Access allows your app to modify data in Storage tables using standard S
 - Data correction interfaces
 - Collaborative editing
 
+{% include warning.html content="The Query Service accepts raw SQL and does not support parameterized queries or server-side bind variables. Your application is responsible for validating every untrusted value before interpolating it into a statement. See the [Validate and sanitize user input](#best-practices) guidance for patterns." %}
+
 ### Inserting and Updating Data
 
 You can use standard SQL INSERT and UPDATE statements directly via the Query Service. Pass `statements` as a list — the SDK will execute them (transactionally by default) and return one result per statement:
@@ -465,6 +467,8 @@ if status not in ALLOWED_STATUSES:
     raise ValueError(f"Invalid status: {status}")
 query = f"UPDATE table SET status = '{status}' WHERE id = {safe_id}"
 ```
+
+{% include tip.html title="Safer interpolation helpers are coming" content="First-class `SQL.literal()` / `SQL.ident()` / `sql.format()` helpers (with dialect-aware escaping and a `SafeSql` trust marker) are in development in the [Keboola Query Service Python SDK](https://github.com/keboola/query-service-api-python-sdk) and [JavaScript SDK](https://github.com/keboola/query-service-api-js-sdk) and will replace the allowlist/type-coercion patterns above once a release ships. Until then, the validation approach shown here is the recommended interim solution — especially for arbitrary string input, which is genuinely hard to sanitize by hand." %}
 
 **3. Implement keyset pagination for large datasets**
 
