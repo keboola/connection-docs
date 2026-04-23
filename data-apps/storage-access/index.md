@@ -26,11 +26,13 @@ This feature is available for both **Streamlit** and **Python/JS** Data Apps. Co
 
 **Stick with Input Mapping when:**
 
-- You don't need write-back capability - the app only reads and displays data
+- You don't need write-back capability — the app only reads and displays data.
+- Your dataset is small and changes infrequently (e.g., static reference data loaded at deploy time).
+- You want the simplest possible setup with no additional configuration.
 
 ## How It Works
 
-### Architecture Overview 
+### Architecture Overview
 
 When you enable Storage Access, Keboola creates a dedicated **workspace** for your Data App. This workspace contains a database user with specific permissions (SELECT, INSERT, UPDATE, DELETE, TRUNCATE) on the tables you've selected.
 
@@ -74,9 +76,10 @@ This design ensures:
 ## Setting Up Storage Access
 
 ### Step 1: Enable Storage Access
+
 1. Go to the **Project Settings**.
-2.  Go to the **Features**.
-3.  Find the **Storage Access** feature and activate it.
+2. Go to the **Features**.
+3. Find the **Storage Access** feature and activate it.
 
 ### Step 2: Configure Writable Tables
 
@@ -350,8 +353,12 @@ ALLOWED_STATUSES = {"pending", "approved", "rejected"}
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        # Validate and sanitize user input
-        record_id = int(request.form["record_id"])  # ensure integer
+        # Validate and sanitize user input BEFORE it reaches SQL.
+        # int() guarantees record_id is a number; the allowlist guarantees
+        # new_status is one of three exact strings. This is the only reason
+        # the f-string below is safe — do not add other form fields to the
+        # query without analogous validation.
+        record_id = int(request.form["record_id"])
         new_status = request.form["status"]
         if new_status not in ALLOWED_STATUSES:
             return "Invalid status", 400
@@ -517,7 +524,6 @@ def load_reference_data():
 For **Python/JS** (non-Streamlit) apps, use a simple in-memory cache:
 
 ```python
-from functools import lru_cache
 import time
 
 _cache = {}
