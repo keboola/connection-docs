@@ -120,15 +120,19 @@ dependencies = [
 **In your Python code:**
 
 ```python
+import json
 import os
 from keboola_query_service import Client
 
-# Storage Access env vars are set by the platform when the feature is enabled.
+# Storage Access config is set by the platform when the feature is enabled.
+# workspace_id is read from the manifest file (recommended); the other values
+# are plain env vars.
 try:
     branch_id = os.environ["BRANCH_ID"]
-    workspace_id = os.environ["WORKSPACE_ID"]
     query_service_url = os.environ["QUERY_SERVICE_URL"]
-except KeyError as e:
+    with open(os.environ["KBC_WORKSPACE_MANIFEST_PATH"]) as f:
+        workspace_id = json.load(f)["workspaceId"]
+except (KeyError, FileNotFoundError) as e:
     raise RuntimeError(
         "Storage Access is not enabled for this app. "
         "Enable it in Advanced Settings and redeploy."
@@ -290,21 +294,24 @@ When Storage Access is enabled, the platform sets these environment variables in
 
 | Variable | Description |
 | --- | --- |
-| `WORKSPACE_ID` | ID of the provisioned workspace for this app. |
+| `KBC_WORKSPACE_MANIFEST_PATH` | Path to the workspace manifest JSON file. The file contains `workspaceId` (and other workspace metadata). **Recommended source for the workspace ID.** |
+| `WORKSPACE_ID` | ID of the provisioned workspace for this app. Also available in the manifest file (above) — prefer reading the manifest in new code. |
 | `BRANCH_ID` | Storage API branch ID of the project. |
 | `QUERY_SERVICE_URL` | URL of the Query Service API (stack-specific). |
 | `KBC_TOKEN` | Keboola Storage API token. |
 
-If Storage Access is not enabled, `WORKSPACE_ID` / `BRANCH_ID` / `QUERY_SERVICE_URL` are not set. Read them with a clear error message for users:
+If Storage Access is not enabled, `KBC_WORKSPACE_MANIFEST_PATH` / `WORKSPACE_ID` / `BRANCH_ID` / `QUERY_SERVICE_URL` are not set. Read them with a clear error message for users:
 
 ```python
+import json
 import os
 
 try:
     branch_id = os.environ["BRANCH_ID"]
-    workspace_id = os.environ["WORKSPACE_ID"]
     query_service_url = os.environ["QUERY_SERVICE_URL"]
-except KeyError as e:
+    with open(os.environ["KBC_WORKSPACE_MANIFEST_PATH"]) as f:
+        workspace_id = json.load(f)["workspaceId"]
+except (KeyError, FileNotFoundError) as e:
     raise RuntimeError(
         "Storage Access is not enabled. Enable it in Advanced Settings and redeploy."
     ) from e
@@ -333,14 +340,17 @@ This example shows a simple Flask app that reads records from Storage and allows
 
 ```python
 from flask import Flask, request, render_template_string
+import json
 import os
 from keboola_query_service import Client
 
 app = Flask(__name__)
 
-# Read Storage Access env vars once at startup
+# Read Storage Access config once at startup.
+# workspace_id is read from the manifest (recommended); other values are env vars.
 BRANCH_ID = os.environ["BRANCH_ID"]
-WORKSPACE_ID = os.environ["WORKSPACE_ID"]
+with open(os.environ["KBC_WORKSPACE_MANIFEST_PATH"]) as f:
+    WORKSPACE_ID = json.load(f)["workspaceId"]
 
 qs_client = Client(
     base_url=os.environ["QUERY_SERVICE_URL"],
@@ -443,13 +453,15 @@ build-backend = "setuptools.build_meta"
 **1. Handle missing workspace gracefully**
 
 ```python
+import json
 import os
 
 try:
     branch_id = os.environ["BRANCH_ID"]
-    workspace_id = os.environ["WORKSPACE_ID"]
     query_service_url = os.environ["QUERY_SERVICE_URL"]
-except KeyError:
+    with open(os.environ["KBC_WORKSPACE_MANIFEST_PATH"]) as f:
+        workspace_id = json.load(f)["workspaceId"]
+except (KeyError, FileNotFoundError):
     # Storage Access is not enabled — show a user-friendly error
     import streamlit as st  # or use your framework's error handling
     st.error("Storage Access is not enabled for this app. Enable it in Advanced Settings and redeploy.")

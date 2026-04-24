@@ -140,7 +140,7 @@ Keboola provides built-in authentication methods to protect your apps:
 
 * **Input Mapping**: Automatically load specific tables into your app.
 * **Storage API Client**: Programmatic access to all Storage features.
-* **Environment Variables**: Platform-provided env vars include `BRANCH_ID` (always set), `KBC_TOKEN` and `DATA_LOADER_API_URL` (with Data Loader), and `WORKSPACE_ID` / `QUERY_SERVICE_URL` (with [Storage Access](/data-apps/storage-access/)). See the [runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables) for the full list.
+* **Environment Variables**: Platform-provided env vars include `BRANCH_ID` (always set), `KBC_TOKEN` and `DATA_LOADER_API_URL` (with Data Loader), and `WORKSPACE_ID` / `QUERY_SERVICE_URL` / `KBC_WORKSPACE_MANIFEST_PATH` (with [Storage Access](/data-apps/storage-access/)). See the [runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables) for the full list.
 
 ### Configuration & Secrets
 
