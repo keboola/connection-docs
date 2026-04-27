@@ -16,6 +16,43 @@ However, some constructs require manual adjustment. The sections below cover the
 
 You can also use the **Kai AI assistant** in Keboola to help with migration.
 
+## Transformation Migration Component
+
+Keboola provides an experimental **Transformation Migration** component (`keboola.app-transformation-migration`) that automates 
+the migration of Snowflake transformations to DuckDB. The component handles SQL dialect translation, preserves input/output 
+table mappings, and creates new DuckDB transformation configurations automatically.
+
+{: .image-popup}
+![Transformation Migration Component](/transformations/duckdb/migration-component.png)
+
+### How to Use the Migration Component
+
+1. In your Keboola project, go to **Components** and search for **Transformation Migration**.
+2. Create a new configuration.
+3. Configure the following parameters:
+    - **Source Branch** --- select the branch containing your Snowflake transformations (default: `default`).
+    - **Destination Branch** --- choose an existing dev branch for the migrated configurations, or check **Create New Branch** 
+      to create a new one.
+    - **Source Transformation Type** --- select `Snowflake`.
+    - **Destination Transformation Type** --- select `DuckDB`.
+    - **Transformations to Migrate** --- click **Load Transformations** and select one or more Snowflake transformations to migrate.
+    - **Destination Config Name Pattern** --- use `%s` as a placeholder for the original configuration name 
+      (e.g., `%s` keeps the same name, `%s_duckdb` appends a suffix).
+    - **Debug Mode** --- enable for detailed logging if needed.
+4. Click **Run Component**.
+5. Review the migration summary in the job logs.
+6. Check the created DuckDB configurations in the destination branch.
+
+### What the Component Does
+
+- Uses [SQLGlot](https://github.com/tobymao/sqlglot) to automatically translate SQL code blocks from Snowflake to DuckDB dialect.
+- Preserves all input/output table mappings and runtime settings (backend size, etc.).
+- If SQL translation fails for any code block, the original Snowflake SQL is preserved as comments in the DuckDB configuration, 
+  and an error is reported at the end of the migration.
+
+*Note: This component is **experimental** and may contain unhandled bugs or have various limitations. Always review the migrated 
+configurations before running them.*
+
 ## Identifier Case Sensitivity
 
 This is one of the most critical differences when migrating.
