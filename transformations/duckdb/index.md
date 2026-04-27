@@ -1,0 +1,282 @@
+---
+title: DuckDB Transformation
+permalink: /transformations/duckdb/
+---
+
+* TOC
+{:toc}
+
+[DuckDB](https://duckdb.org/) is an in-process analytical database designed for fast SQL analytics. 
+It brings several advantages to Keboola transformations:
+
+- **In-process execution** --- no external database server needed
+- **Columnar storage** --- optimized for analytical queries
+- **Block-based orchestration** with automatic dependency analysis
+- **Parallel execution** of independent scripts within blocks
+- **Cost-effective** alternative to cloud data warehouses for small to medium datasets
+- **Rich SQL dialect** with modern quality-of-life extensions
+
+***Note:** DuckDB Transformation is currently in **BETA**. Breaking changes may occur.*
+
+## Creating a DuckDB Transformation
+
+To create a new DuckDB transformation, click **New Transformation** in the Transformations section and select **DuckDB Transformation**.
+
+{: .image-popup}
+![Screenshot - New Transformation](/transformations/duckdb/new-transformation.png)
+
+Name your transformation, optionally add a description and folder, and click **Create Transformation**.
+
+{: .image-popup}
+![Screenshot - Create Transformation](/transformations/duckdb/create-transformation.png)
+
+## Configuration
+
+The configuration page allows you to set up input/output mappings, write SQL queries, and configure transformation settings.
+
+{: .image-popup}
+![Screenshot - DuckDB Transformation Configuration](/transformations/duckdb/configuration.png)
+
+On the right side panel, you can configure:
+
+- **Timeout** --- maximum execution time (default: 1 hour)
+- **Backend size** --- amount of memory allocated for the transformation (see [Dynamic Backends](#dynamic-backends))
+- **DuckDB version** --- select which DuckDB version to use
+- **Automatic data types** --- automatically assign data types to output tables
+- **Use parquet for input tables** --- use Parquet format instead of CSV for input data (see [Parquet Format](#parquet-format))
+- **Infer input table data types** --- infer data types from input tables (see [Infer Input Table Data Types](#infer-input-table-data-types))
+- **Debug mode** --- enable debug mode for troubleshooting
+
+### DuckDB Version
+
+You can select the DuckDB version used to run the transformation. This allows you to pin a specific version for stability or use the latest version for new features.
+
+{: .image-popup}
+![Screenshot - DuckDB Version Selection](/transformations/duckdb/duckdb-version.png)
+
+## Block-Based Orchestration
+
+DuckDB transformations use **block-based orchestration** for organizing and executing SQL code:
+
+- **Blocks** are executed **sequentially** (one after another).
+- **Scripts** (code pieces) within a block are executed **in parallel** when they have no dependencies on each other.
+- The system uses [SQLGlot](https://github.com/tobymao/sqlglot) to automatically analyze SQL and build a **DAG** (Directed Acyclic Graph) of dependencies.
+- Execution order is automatically optimized based on the dependency analysis.
+
+This means you can organize your transformation into logical blocks and let the system handle parallel execution where possible.
+
+## Dynamic Backends
+
+You can change the backend size to allocate more memory for your transformation. The following sizes are available:
+
+| Backend Size | Memory | Recommended For |
+|---|---|---|
+| **XSmall** | 8 GB | Small datasets, testing |
+| **Small** *(default)* | 16 GB | Most use cases |
+| **Medium** | 32 GB | Large datasets (5 GB+) |
+| **Large** | 113.6 GB | Very large datasets (10 GB+) |
+
+Start with the **Small** backend and scale up as needed based on your dataset size and query complexity.
+
+***Note:** Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
+
+### Auto-Resource Detection
+
+DuckDB automatically detects the available CPU and memory resources. You can also manually configure resource limits using the `threads` and `max_memory_mb` parameters in the transformation configuration.
+
+## Parquet Format
+
+By default, input tables are loaded as CSV files. You can enable Parquet format for significantly better performance,
+especially with larger datasets.
+
+**Advantages of Parquet:**
+- Much faster processing than CSV
+- Lower memory usage
+- Columnar storage optimized for analytical queries
+
+**Recommendation:** Always use Parquet for datasets larger than 1 GB.
+
+To enable Parquet, toggle the **Use parquet for input tables** option in the transformation settings.
+
+## Infer Input Table Data Types
+
+When working with non-typed (string-based) Storage tables, you can enable the **Infer input table data types** option.
+This feature instructs DuckDB to infer the actual data types of the input columns, so you can work with numeric, date, and boolean types directly in your SQL queries without manual casting.
+
+{: .image-popup}
+![Screenshot - Infer Input Table Data Types Enabled](/transformations/duckdb/infer-data-types-enabled.png)
+
+**Why is this useful?**
+
+Keboola Storage tables can be **non-typed** (all columns stored as `VARCHAR`). Without type inference enabled,
+all values in input tables are treated as strings, and functions like `SUM()` will fail because they expect numeric types.
+
+{: .image-popup}
+![Screenshot - Job Error Without Type Inference](/transformations/duckdb/job-error-varchar.png)
+
+With **Infer input table data types** enabled, DuckDB automatically detects the correct types (e.g., `INTEGER`, `FLOAT`, `DATE`),
+so aggregate functions and type-specific operations work as expected.
+
+{: .image-popup}
+![Screenshot - Successful Job With Type Inference](/transformations/duckdb/job-success.png)
+
+The output table then contains properly typed columns:
+
+{: .image-popup}
+![Screenshot - Output Table With Typed Columns](/transformations/duckdb/output-typed-columns.png)
+
+## Example
+
+To create a simple DuckDB transformation, follow these steps:
+
+- Create a table in Storage by uploading the [sample CSV file](/transformations/source.csv).
+- Create an input mapping from that table, setting its destination to `sample` (as expected by the DuckDB script).
+- Create an output mapping, setting its destination to a new table in your Storage.
+- Copy & paste the below script into the transformation code.
+- Save and run the transformation.
+
+{% highlight sql %}
+CREATE TABLE "output" AS
+SELECT "order_date", SUM("order_amount") AS "sum_orders_amount"
+FROM "sample"
+GROUP BY "order_date";
+{% endhighlight %}
+
+{: .image-popup}
+![Screenshot - Query Example](/transformations/duckdb/query-example.png)
+
+You can organize the script into [blocks](/transformations/#writing-scripts).
+
+## Best Practices
+
+### Case Sensitivity
+
+DuckDB handles identifier case differently than Snowflake:
+
+- **Unquoted identifiers** are converted to **lowercase** (e.g., `MyTable` becomes `mytable`).
+- **Quoted identifiers** are **case-insensitive** in DuckDB (e.g., `"MyTable"` and `"MYTABLE"` refer to the same table).
+
+This is different from Snowflake, where unquoted identifiers become uppercase and quoted identifiers are case-sensitive.
+
+**Recommendation:** Use consistent **lowercase** naming for all table and column identifiers.
+
+***Note:** Column names are case-sensitive even without quotes. Be careful when migrating from Snowflake.*
+
+### Optimizing SQL Queries
+
+**Filter and project early** --- apply `WHERE` clauses as close to the source table as possible and select only the columns you need. 
+This reduces the amount of data DuckDB needs to scan.
+
+{% highlight sql %}
+-- Good: filter and project at the source
+SELECT id, name, price 
+FROM products 
+WHERE category = 'electronics' AND price > 100;
+{% endhighlight %}
+
+**Use EXPLAIN for performance analysis** --- prefix your query with `EXPLAIN` to see the execution plan and identify expensive operations.
+
+{% highlight sql %}
+EXPLAIN SELECT product_category, SUM(price) AS total_revenue 
+FROM sales 
+WHERE sale_date >= '2023-01-01' 
+GROUP BY product_category 
+ORDER BY total_revenue DESC;
+{% endhighlight %}
+
+### DuckDB SQL Extensions
+
+DuckDB provides several quality-of-life SQL extensions that simplify common patterns:
+
+**GROUP BY ALL** --- automatically groups by all non-aggregated columns:
+
+{% highlight sql %}
+SELECT product, category, SUM(sales) 
+FROM orders 
+GROUP BY ALL;
+{% endhighlight %}
+
+**EXCLUDE** --- select all columns except specific ones:
+
+{% highlight sql %}
+SELECT * EXCLUDE (password, ssn, credit_card) 
+FROM users;
+{% endhighlight %}
+
+**ASOF JOIN** --- useful for time-series data where timestamps do not match exactly:
+
+{% highlight sql %}
+SELECT 
+    s.player_id,
+    s.score,
+    s.score_time,
+    w.temperature,
+    w.conditions
+FROM scores s
+ASOF JOIN weather w
+ON s.score_time >= w.timestamp;
+{% endhighlight %}
+
+**SUMMARIZE** --- quick data profiling with min, max, null percentage, and unique counts:
+
+{% highlight sql %}
+SUMMARIZE SELECT * FROM my_table;
+{% endhighlight %}
+
+### Working With Data Types
+
+Keboola Storage [tables](/storage/tables/) store data in character types by default. When **Infer input table data types** is disabled,
+all columns are loaded as `VARCHAR`. You need to cast values explicitly:
+
+{% highlight sql %}
+CREATE TABLE "result" AS
+SELECT 
+    CAST("amount" AS DECIMAL) AS "amount",
+    CAST("created_at" AS TIMESTAMP) AS "created_at"
+FROM "source";
+{% endhighlight %}
+
+When **Infer input table data types** is enabled, DuckDB automatically infers the correct types and you can use them directly.
+
+### Memory Management for Large Datasets
+
+For datasets larger than 10 GB, configure DuckDB to use on-disk processing with PRAGMA settings:
+
+{% highlight sql %}
+PRAGMA memory_limit='8GB';
+PRAGMA temp_directory='/tmp/duckdb_temp';
+PRAGMA threads=4;
+PRAGMA enable_object_cache;
+{% endhighlight %}
+
+### Modular Transformations
+
+- Split complex transformations into smaller steps, each producing one output table.
+- Use consistent naming conventions for output tables (e.g., `stg_customers`, `fact_orders`, `dim_products`).
+- Document complex business logic directly in the SQL code.
+
+### What DuckDB Is Not
+
+DuckDB is an **OLAP** (Online Analytical Processing) database optimized for `SELECT` statements and analytical queries.
+Avoid workflows with frequent `INSERT` and `UPDATE` operations. For transactional workloads, use a different backend such as Snowflake.
+
+## When to Use DuckDB vs. Snowflake
+
+**Choose DuckDB for:**
+- Ad-hoc analysis and small to medium datasets
+- Rapid prototyping of transformations
+- Projects with limited budgets
+- Datasets under a few terabytes
+- Development and testing
+
+**Choose Snowflake for:**
+- Very large datasets (TB+)
+- Complex enterprise workloads
+- Sharing warehouses across multiple processes
+- Maximum scalability
+- Advanced Snowflake-specific features
+
+## Migrating from Snowflake to DuckDB
+
+If you are migrating existing Snowflake transformations to DuckDB, see the detailed 
+[Snowflake to DuckDB Migration Guide](/transformations/duckdb/snowflake-migration/).
