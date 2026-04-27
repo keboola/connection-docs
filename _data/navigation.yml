@@ -685,9 +685,6 @@ items:
 
       - url: /transformations/duckdb/
         title: DuckDB Transformations
-        items:
-          - url: /transformations/duckdb/snowflake-migration/
-            title: Snowflake to DuckDB Migration
 
       - url: /transformations/oracle/
         title: Oracle Transformations
