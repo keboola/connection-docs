@@ -162,6 +162,20 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 
 ## Best Practices
 
+### Semicolons Between Statements
+
+Each SQL statement in a DuckDB transformation **must be terminated with a semicolon** (`;`). If you have multiple statements
+in a single script, make sure they are properly separated:
+
+{% highlight sql %}
+-- Correct: each statement ends with a semicolon
+CREATE TABLE "output_a" AS SELECT * FROM "input_a";
+
+CREATE TABLE "output_b" AS SELECT * FROM "input_b";
+{% endhighlight %}
+
+Missing semicolons will cause syntax errors.
+
 ### Case Sensitivity
 
 DuckDB handles identifier case differently than Snowflake:
@@ -277,6 +291,67 @@ PRAGMA enable_object_cache;
 
 DuckDB is an **OLAP** (Online Analytical Processing) database optimized for `SELECT` statements and analytical queries.
 Avoid workflows with frequent `INSERT` and `UPDATE` operations. For transactional workloads, use a different backend such as Snowflake.
+
+### Real-World Example: CRM Data Transformation
+
+The following example shows a typical DuckDB transformation processing CRM data (e.g., from HubSpot). It demonstrates
+common patterns: `TRY_CAST` for safe type conversion, `NULLIF` for handling empty strings, and `::` for type casting.
+
+{% highlight sql %}
+/* companies */
+CREATE TABLE "out_companies" AS
+SELECT
+  "companyId",
+  "name",
+  "website",
+  TRY_CAST(NULLIF("createdate", '') AS DATE) AS "createdate",
+  "isDeleted"::BOOLEAN AS "isDeleted"
+FROM "companies";
+
+/* contacts */
+CREATE TABLE "out_contacts" AS
+SELECT
+  "canonical_vid",
+  "firstname",
+  "lastname",
+  "email",
+  TRY_CAST(NULLIF("createdate", '') AS DATE) AS "createdate",
+  "hs_analytics_source" AS "email_source",
+  "associatedcompanyid",
+  "lifecyclestage"
+FROM "contacts";
+
+/* deals */
+CREATE TABLE "out_deals" AS
+SELECT
+  "dealId",
+  "isDeleted"::BOOLEAN AS "isDeleted",
+  "dealname",
+  TRY_CAST(NULLIF("createdate", '') AS DATE) AS "createdate",
+  TRY_CAST(NULLIF("closedate", '') AS DATE) AS "closedate",
+  "dealtype",
+  TRY_CAST(NULLIF("amount", '') AS DOUBLE) AS "amount",
+  "pipeline",
+  "dealstage",
+  "hubspot_owner_id",
+  "hs_analytics_source"
+FROM "deals";
+
+/* pipeline stages */
+CREATE TABLE "out_stages" AS
+SELECT
+  "stageId",
+  "label",
+  TRY_CAST(NULLIF("displayOrder", '') AS INT) AS "displayOrder",
+  TRY_CAST(NULLIF("probability", '') AS DOUBLE) AS "probability",
+  "closedWon"::BOOLEAN AS "closedWon"
+FROM "pipeline_stages";
+{% endhighlight %}
+
+**Key patterns used:**
+- `TRY_CAST(NULLIF("column", '') AS TYPE)` --- safely converts empty strings to `NULL` before casting. This avoids errors when the source data contains empty values.
+- `"column"::BOOLEAN` --- shorthand type cast syntax.
+- Each statement ends with a **semicolon** (`;`) --- required when multiple statements are in a single script.
 
 ## When to Use DuckDB vs. Snowflake
 
