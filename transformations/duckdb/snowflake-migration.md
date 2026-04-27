@@ -22,26 +22,59 @@ Keboola provides an experimental **Transformation Migration** component (`kebool
 the migration of Snowflake transformations to DuckDB. The component handles SQL dialect translation, preserves input/output 
 table mappings, and creates new DuckDB transformation configurations automatically.
 
+**Important:** The automatic migration is **not 100% accurate**. The success rate depends on the complexity of your SQL, 
+data types, and Snowflake-specific features used. Expect that roughly **25% of migrated transformations will require manual 
+adjustments** --- for example, fixing case sensitivity issues, replacing unsupported functions, or adjusting data type casts. 
+Always review and test the migrated configurations before using them in production.
+
+### Tutorial: Migrating Snowflake Transformations
+
+#### Step 1: Create a New Configuration
+
+In your Keboola project, go to **Components** and search for **Transformation Migration**. Create a new configuration.
+Set the following parameters:
+
+- **Source Branch** --- select the branch containing your Snowflake transformations (default: `default`).
+- **Destination Branch** --- choose an existing dev branch for the migrated configurations, or create a new one.
+- **Source Transformation Type** --- select `Snowflake`.
+- **Destination Transformation Type** --- select `DuckDB`.
+- **Destination Config Name Pattern** --- use `%s` as a placeholder for the original name 
+  (e.g., `%s` keeps the same name, `%s_duckdb` appends a suffix).
+
 {: .image-popup}
-![Transformation Migration Component](/transformations/duckdb/migration-component.png)
+![Migration Component Configuration](/transformations/duckdb/migration-component.png)
 
-### How to Use the Migration Component
+#### Step 2: Select Transformations to Migrate
 
-1. In your Keboola project, go to **Components** and search for **Transformation Migration**.
-2. Create a new configuration.
-3. Configure the following parameters:
-    - **Source Branch** --- select the branch containing your Snowflake transformations (default: `default`).
-    - **Destination Branch** --- choose an existing dev branch for the migrated configurations, or check **Create New Branch** 
-      to create a new one.
-    - **Source Transformation Type** --- select `Snowflake`.
-    - **Destination Transformation Type** --- select `DuckDB`.
-    - **Transformations to Migrate** --- click **Load Transformations** and select one or more Snowflake transformations to migrate.
-    - **Destination Config Name Pattern** --- use `%s` as a placeholder for the original configuration name 
-      (e.g., `%s` keeps the same name, `%s_duckdb` appends a suffix).
-    - **Debug Mode** --- enable for detailed logging if needed.
-4. Click **Run Component**.
-5. Review the migration summary in the job logs.
-6. Check the created DuckDB configurations in the destination branch.
+Click **Load Transformations** to populate the list of available Snowflake transformations.
+Select one or more transformations you want to migrate to DuckDB.
+
+{: .image-popup}
+![Select Transformations to Migrate](/transformations/duckdb/migration-select-transformations.png)
+
+#### Step 3: Save and Run
+
+After selecting the transformations, click **Save** and then **Run Component**.
+
+{: .image-popup}
+![Save Configuration and Run](/transformations/duckdb/migration-save-and-run.png)
+
+#### Step 4: Review the Job
+
+Once the job completes, review the migration summary in the job detail. The logs show which transformations 
+were migrated successfully and provide links to the newly created DuckDB configurations.
+
+{: .image-popup}
+![Job Detail with Migration Results](/transformations/duckdb/migration-job-detail.png)
+
+#### Step 5: Review and Adjust the Migrated Configuration
+
+Open the newly created DuckDB transformation. The component preserves all input/output table mappings and runtime settings.
+**Review the SQL code carefully** --- some queries may need manual adjustments due to syntax differences between 
+Snowflake and DuckDB (see the sections below for common differences).
+
+{: .image-popup}
+![Migrated DuckDB Transformation](/transformations/duckdb/migration-result.png)
 
 ### What the Component Does
 
@@ -50,8 +83,14 @@ table mappings, and creates new DuckDB transformation configurations automatical
 - If SQL translation fails for any code block, the original Snowflake SQL is preserved as comments in the DuckDB configuration, 
   and an error is reported at the end of the migration.
 
-*Note: This component is **experimental** and may contain unhandled bugs or have various limitations. Always review the migrated 
-configurations before running them.*
+### Limitations
+
+- The automatic SQL translation is **not perfect**. Complex queries, Snowflake-specific functions, and edge cases 
+  in data types may not be converted correctly.
+- Roughly **25% of migrated transformations** will need some manual fixes --- typically related to case sensitivity, 
+  unsupported functions, or data type differences.
+- The component is **experimental** and may contain unhandled bugs or have various limitations.
+- Always **test the migrated transformations** on a dev branch before deploying to production.
 
 ## Identifier Case Sensitivity
 
