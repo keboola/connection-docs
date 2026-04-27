@@ -41,15 +41,17 @@ On the right side panel, you can configure:
 
 - **Timeout** --- maximum execution time (default: 1 hour)
 - **Backend size** --- amount of memory allocated for the transformation (see [Dynamic Backends](#dynamic-backends))
-- **DuckDB version** --- select which DuckDB version to use
+- **DuckDB version** --- select which DuckDB version to use (see [DuckDB Version](#duckdb-version))
 - **Automatic data types** --- automatically assign data types to output tables
 - **Use parquet for input tables** --- use Parquet format instead of CSV for input data (see [Parquet Format](#parquet-format))
 - **Infer input table data types** --- infer data types from input tables (see [Infer Input Table Data Types](#infer-input-table-data-types))
-- **Debug mode** --- enable debug mode for troubleshooting
+- **Debug mode** --- enable debug logging for troubleshooting
 
 ### DuckDB Version
 
-You can select the DuckDB version used to run the transformation. This allows you to pin a specific version for stability or use the latest version for new features.
+You can select the DuckDB version used to run the transformation. Use `latest` (default) to always run on the most 
+recent supported version, or pin to a specific version (e.g., `1.5.2`, `1.4.4`) for stability. Each supported version 
+runs in its own isolated environment.
 
 {: .image-popup}
 ![Screenshot - DuckDB Version Selection](/transformations/duckdb/duckdb-version.png)
@@ -64,6 +66,17 @@ DuckDB transformations use **block-based orchestration** for organizing and exec
 - Execution order is automatically optimized based on the dependency analysis.
 
 This means you can organize your transformation into logical blocks and let the system handle parallel execution where possible.
+
+## Sync Actions
+
+DuckDB transformations provide four **sync actions** for debugging and visualization without running the full transformation:
+
+- **Syntax check** (`syntax_check`) --- validates your SQL syntax without executing any queries. Useful for catching errors before running the transformation.
+- **Lineage visualization** (`lineage_visualization`) --- generates a markdown diagram of data dependencies, showing how tables flow through your transformation.
+- **Execution plan visualization** (`execution_plan_visualization`) --- shows the planned execution order with blocks and batches, illustrating how the automatic DAG organizes your queries.
+- **Expected input tables** (`expected_input_tables`) --- displays the list of input tables that the transformation expects based on the SQL analysis.
+
+These actions are available from the transformation configuration page and are helpful for understanding and debugging complex transformations.
 
 ## Dynamic Backends
 
@@ -153,14 +166,19 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 
 DuckDB handles identifier case differently than Snowflake:
 
-- **Unquoted identifiers** are converted to **lowercase** (e.g., `MyTable` becomes `mytable`).
-- **Quoted identifiers** are **case-insensitive** in DuckDB (e.g., `"MyTable"` and `"MYTABLE"` refer to the same table).
+**Table names:**
+- **Unquoted table names** are converted to **lowercase** (e.g., `SELECT * FROM MyTable` references `mytable`).
+- **Quoted table names** are **case-sensitive** (e.g., `SELECT * FROM "MyTable"` references exactly `MyTable`).
 
-This is different from Snowflake, where unquoted identifiers become uppercase and quoted identifiers are case-sensitive.
+**Column names:**
+- **Columns are always case-sensitive** regardless of quoting (e.g., `SELECT columnName` and `SELECT ColumnName` refer to different columns).
 
-**Recommendation:** Use consistent **lowercase** naming for all table and column identifiers.
+This is different from Snowflake, where unquoted identifiers become uppercase.
 
-***Note:** Column names are case-sensitive even without quotes. Be careful when migrating from Snowflake.*
+**Best practices:**
+- Use consistent casing for table and column names.
+- When referencing tables with mixed case or special characters, always use quotes: `"TaBlE-stage"`.
+- Be aware that input table names are typically lowercase unless explicitly quoted.
 
 ### Optimizing SQL Queries
 

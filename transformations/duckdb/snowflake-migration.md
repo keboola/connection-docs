@@ -24,9 +24,12 @@ This is one of the most critical differences when migrating.
 - Unquoted identifiers are converted to **uppercase** (`MyTable` becomes `MYTABLE`).
 - Quoted identifiers are **case-sensitive** (`"MyTable"` and `"MYTABLE"` are different tables).
 
-**DuckDB:**
-- Unquoted identifiers are converted to **lowercase** (`MyTable` becomes `mytable`).
-- Quoted identifiers are **case-insensitive** (`"MyTable"` and `"MYTABLE"` refer to the same table).
+**DuckDB table names:**
+- Unquoted table names are converted to **lowercase** (`MyTable` becomes `mytable`).
+- Quoted table names are **case-sensitive** (`"MyTable"` references exactly `MyTable`).
+
+**DuckDB column names:**
+- Columns are **always case-sensitive** regardless of quoting (`SELECT columnName` and `SELECT ColumnName` refer to different columns).
 
 **Migration tip:** Use consistent **lowercase** naming in DuckDB:
 
