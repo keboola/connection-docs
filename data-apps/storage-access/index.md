@@ -95,6 +95,30 @@ This design ensures:
 - You can add multiple tables from different buckets.
 - All selected tables must exist before deploying.
 
+#### Configuring Writable Tables Programmatically
+
+If you manage Data App configurations through the Storage API (or via automation/agents) rather than the UI, the same writable-table selection is expressed in the configuration JSON under `storage.output.tables`. Each entry is a table the app gets read/write permissions on:
+
+```json
+{
+  "storage": {
+    "output": {
+      "tables": [
+        {
+          "destination": "out.c-data-app.mvc-crashes",
+          "unload_strategy": "direct-grant"
+        }
+      ]
+    }
+  }
+}
+```
+
+- **`destination`** — the full Storage table ID (`<stage>.<bucket>.<table>`) the app should be able to read and write. The table must exist before the app is deployed.
+- **`unload_strategy: "direct-grant"`** — required marker that tells the platform "grant the app's workspace direct SELECT/INSERT/UPDATE/DELETE/TRUNCATE on this table." Tables without this strategy in `storage.output.tables` are not exposed via Storage Access.
+
+To add or remove writable tables programmatically, update the Data App's configuration via the Storage API ([Component Configurations endpoint](https://keboola.docs.apiary.io/#reference/component-configurations)) and redeploy the app for the new permissions to take effect.
+
 ### Step 3: Deploy Your App
 
 Click **Deploy** (or **Redeploy** for existing apps). During deployment:
