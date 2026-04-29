@@ -40,8 +40,8 @@ all without leaving Keboola.
 
 Select the Python version for your code:
 
-- **3.13** *(recommended)* — Isolated environment with only the packages you install.
-- **3.14** — Isolated environment (release candidate).
+- **3.14** *(recommended)* — Isolated environment with only the packages you install.
+- **3.13** — Isolated environment.
 - **3.12** — Isolated environment.
 - **base** — Shared environment (Python 3.10) with many pre-installed packages in legacy versions. Not recommended; will be deprecated in the future.
 
