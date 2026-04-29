@@ -16,6 +16,8 @@ Storage Access allows your Data App to read data from and write data back to Keb
 
 This feature is available for both **Streamlit** and **Python/JS** Data Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
 
+{% include warning.html content="**Snowflake only.** Storage Access currently works only on projects using the Snowflake storage backend. BigQuery support is coming soon." %}
+
 ## When to Use Storage Access
 
 **Use Storage Access when you need to:**
@@ -47,7 +49,7 @@ Query Service ────► Workspace User ────► Storage Tables
          billing, metadata refresh                 with granted permissions
 ```
 
-Your app communicates with Storage through the [**Query Service API**](https://query.keboola.com/api-docs/), not directly with Snowflake. This provides:
+Your app communicates with Storage through the [**Query Service API**](https://query.keboola.com/api/v1/documentation), not directly with Snowflake. This provides:
 
 - Automatic authentication using your app's token
 - Usage tracking for billing
