@@ -49,7 +49,7 @@ Query Service ────► Workspace User ────► Storage Tables
          billing, metadata refresh                 with granted permissions
 ```
 
-Your app communicates with Storage through the [**Query Service API**](https://query.keboola.com/api/v1/documentation), not directly with Snowflake. This provides:
+Your app communicates with Storage through the [**Query Service API**](https://api.keboola.com/?service=query), not directly with Snowflake. This provides:
 
 - Automatic authentication using your app's token
 - Usage tracking for billing
