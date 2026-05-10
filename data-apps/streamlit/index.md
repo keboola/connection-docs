@@ -233,8 +233,9 @@ In your Data App configuration, switch to the raw JSON editor and add a `config.
 The data app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
 
 1. Streamlit's built-in defaults
-2. Your repository's `.streamlit/config.toml` (if Git-deployed)
-3. The `config.toml` string injected via the Data App configuration above
+2. Keboola's runtime defaults (sets `[server] address = "0.0.0.0"` and `[browser] gatherUsageStats = false`)
+3. Your repository's `.streamlit/config.toml` (if Git-deployed)
+4. The `config.toml` string injected via the Data App configuration above
 
 ### Common Use Cases
 
@@ -252,9 +253,9 @@ maxUploadSize = 500
 gatherUsageStats = false
 ```
 
-**Custom theming beyond the predefined options** - see [Streamlit's theme reference](https://docs.streamlit.io/develop/concepts/configuration/theming).
+**Streamlit theme options not exposed in the Theming form** (e.g. `base = "dark"`, additional font controls, newly-added Streamlit theme keys) - see [Streamlit's theme reference](https://docs.streamlit.io/develop/concepts/configuration/theming).
 
-> **Note:** Settings configured here override the corresponding values from the **Theming** UI when both are set.
+> **Note on theming:** the **Theming** UI reads and rewrites the same `config.toml` field. Non-theme sections you set here (e.g. `[server]`, `[browser]`) are preserved when you save changes through the Theming UI. However, the Theming UI overwrites the `[theme]` section on save, so prefer the Theming UI when a value is available there - and use this raw JSON path for theme keys it doesn't expose.
 
 ## Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into the Streamlit base Docker image. You can select a specific backend version when deploying your app. Each version defines the Python version, Streamlit version, and a set of pre-installed packages.
