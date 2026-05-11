@@ -153,7 +153,7 @@ on your project setup:
 
 - In standard projects, users with the **Admin** or **Share** role can change roles of other users.
   The **Share** role can only be assigned by an [organization member](/management/organization/).
-- In projects with [Governed Change Management](/components/branches/#governed-change-management) active,
+- In projects with Governed Change Management active,
   the **Production Manager** can change roles of other users.
 
 *Note: Changing roles is not available when SAML-based role management is enabled.*
