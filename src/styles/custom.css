@@ -976,6 +976,24 @@ nav.sidebar {
   .pagination-links { grid-template-columns: 1fr; }
 }
 
+/* Auto-migrated: pseudo-H4 produced from `**Bold:**` + list pairs.
+   These were previously invisible to the TOC; promote them visually so they
+   read like a clearly-bounded subsection without competing with real H3s. */
+.sl-markdown-content h4.beacon-pseudo-h4:not(:where(.not-content *)) {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--fg-3);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-1);
+}
+:root[data-theme='dark'] .sl-markdown-content h4.beacon-pseudo-h4:not(:where(.not-content *)) {
+  color: var(--fg-2);
+}
+
 /* Auto-migrated: side-by-side code pair (from beacon-transforms plugin) */
 .sl-markdown-content .beacon-code-pair {
   display: grid;

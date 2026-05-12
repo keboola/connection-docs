@@ -8,6 +8,11 @@ export const collections = {
     schema: docsSchema({
       extend: z.object({
         redirect_from: z.array(z.string()).optional(),
+        // Beacon design — optional per-page overrides
+        ask: z.string().optional(),
+        icon: z.string().optional(),
+        section: z.string().optional(),
+        beacon: z.boolean().optional(),
       }),
     }),
   }),

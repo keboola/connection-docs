@@ -10,6 +10,66 @@ const title = entry?.data?.title as string | undefined;
 const description = entry?.data?.description as string | undefined;
 const ask = entry?.data?.ask as string | undefined;
 
+/* Auto-derive a hero lede from the first body paragraph when the
+   frontmatter doesn't set `description`. We parse the raw markdown body
+   because changes from remark plugins don't flow back into entry.data
+   after content-collection schema validation. */
+function deriveLedeFromBody(body: string | undefined): string | undefined {
+  if (!body) return undefined;
+  const lines = body.split('\n');
+  let buf = '';
+  let inFence = false;
+  let inFrontmatter = false;
+  let seenAny = false;
+
+  for (let raw of lines) {
+    const line = raw.trim();
+    if (!seenAny && line === '---') { inFrontmatter = !inFrontmatter; continue; }
+    if (inFrontmatter) continue;
+    seenAny = true;
+
+    // Skip fenced code blocks
+    if (/^```/.test(line)) { inFence = !inFence; continue; }
+    if (inFence) continue;
+
+    // Skip blank lines (unless we've collected something — then flush)
+    if (!line) {
+      if (buf) break;
+      continue;
+    }
+    // Skip headings
+    if (/^#{1,6}\s/.test(line)) { if (buf) break; continue; }
+    // Skip image / link-only / italic-only / blockquote / list lines
+    if (/^!?\[.*\]\(.+\)\s*$/.test(line)) { if (buf) break; continue; }
+    if (/^[*_].*[*_]\s*$/.test(line) && !buf) { if (buf) break; continue; }
+    if (/^>/.test(line)) { if (buf) break; continue; }
+    if (/^[-*+]\s|\d+\.\s/.test(line)) { if (buf) break; continue; }
+    // Skip HTML block start (`<div`, `<table`, …)
+    if (/^<\w/.test(line)) { if (buf) break; continue; }
+
+    buf = buf ? `${buf} ${line}` : line;
+    if (buf.length >= 280) break;
+  }
+
+  if (!buf || buf.length < 40) return undefined;
+  const cleaned = buf
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (cleaned.length <= 220) return cleaned;
+  const sentence = cleaned.match(/^([^.!?]+[.!?])/)?.[1];
+  return sentence && sentence.length >= 60 && sentence.length <= 240
+    ? sentence
+    : cleaned.slice(0, 200).replace(/\s+\S*$/, '') + '…';
+}
+
+const lede = (description && description.trim())
+  || deriveLedeFromBody(entry?.body as string | undefined);
+
 /* Page slug — `entry.id` is the canonical content-collection slug
    ("transformations/snowflake-plain"). Fall back to frontmatter or
    the route slug, then normalize. */
@@ -119,7 +179,7 @@ const askPlaceholder = ask
     <CopyMarkdown />
   </div>
 
-  {description && <p class="b-lede">{description}</p>}
+  {lede && <p class="b-lede">{lede}</p>}
 
   <div class="b-ask" role="search">
     <span class="b-ask-icon" aria-hidden="true">
