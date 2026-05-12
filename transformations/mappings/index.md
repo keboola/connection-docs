@@ -371,13 +371,12 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 | **Manual output mapping** | **~11 seconds** |
 
 #### Supported Backends
-Manual output mapping currently supports:
-
-- **Snowflake** transformations (`keboola.snowflake-transformation`)
-- **BigQuery** transformations (`keboola.google-bigquery-transformation`)
+Manual output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
+including [transformations](/transformations/), [sandboxes](/transformations/sandbox/),
+and [data apps](/components/data-apps/).
 
 #### How It Works
-When a transformation with manual output mapping runs:
+When a component with manual output mapping runs:
 
 1. The workspace role/service account receives **write privileges** on the specified Storage tables.
 2. Your transformation SQL operates directly on Storage tables using their read-only storage paths
