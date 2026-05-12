@@ -340,3 +340,161 @@ Only the files stored directly in the `out/files/` directory can be mapped, subd
 - **Tag** --- Tags which will be applied to the target file uploaded in [Storage](/storage/tables/)
 - **Permanent** - This option makes the file stay in the file Storage, until you delete it manually. 
 If unchecked, the target file will be deleted after 15 days.
+
+### Manual Output Mapping
+Manual Output Mapping lets your transformation write directly to Storage tables instead of going through
+the standard copy-based output mapping process. With manual output mapping enabled, the transformation
+workspace receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE`, `DELETE`,
+or `TRUNCATE` you run in your transformation SQL is applied immediately to the destination table --- there is no
+separate import step.
+
+This feature is available as a **private beta** and must be enabled by [Keboola Support](/management/support/).
+
+{: .image-popup}
+![Manual Output Mapping](/transformations/mappings/manual-output-mapping.png)
+
+#### When to Use Manual Output Mapping
+Manual output mapping is designed for **advanced users with high data maturity** who are comfortable writing
+production-quality SQL and managing data consistency themselves. Typical use cases include:
+
+- **Large incremental loads** --- Standard output mapping on a 150 GB table with a single-row append can take over
+  an hour due to deduplication and copy overhead. Manual output mapping reduces this to seconds.
+- **dbt teams and analysts** --- Teams already writing final-state SQL who want their transformations to apply
+  changes immediately without intermediate staging.
+- **Minimal overhead workflows** --- When the standard mapping pipeline (copy to staging, deduplicate, import)
+  creates unnecessary overhead for your workload.
+
+**Performance comparison** (incremental load --- 1 row added to a 150 GB table):
+
+| Method | Approximate Time |
+|--------|-----------------|
+| Standard output mapping (Upsert) | ~160 min |
+| Simplified output mapping (Insert) | ~55 min |
+| **Manual output mapping** | **~11 seconds** |
+
+#### Supported Backends
+Manual output mapping currently supports:
+
+- **Snowflake** transformations (`keboola.snowflake-transformation`)
+- **BigQuery** transformations (`keboola.google-bigquery-transformation`)
+
+#### How It Works
+When a transformation with manual output mapping runs:
+
+1. The workspace role/service account receives **write privileges** on the specified Storage tables.
+2. Your transformation SQL operates directly on Storage tables using their read-only storage paths
+   (e.g., `"KBC_USE4_33"."in.c-raw-data"."my-table"`).
+3. After the transformation finishes, Keboola runs a **refresh job** that updates table metadata,
+   row counts, and statistics. No data is copied --- the changes are already in place.
+
+The workspace receives these privileges on each granted table:
+- `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE` (Snowflake)
+- `bigquery.tables.getData`, `bigquery.tables.updateData`, `bigquery.tables.get` (BigQuery)
+
+The workspace **cannot**:
+- Create new tables in the bucket
+- Drop or alter existing tables
+- Write to tables not listed in the output mapping
+
+#### Configuration
+Manual output mapping is configured per output table in the transformation configuration JSON.
+To set it up, switch to the JSON editor in the output mapping section and add the `unload_strategy` field:
+
+{% highlight json %}
+{
+  "storage": {
+    "output": {
+      "tables": [
+        {
+          "destination": "out.c-my-bucket.my_table",
+          "unload_strategy": "direct-grant"
+        }
+      ]
+    }
+  }
+}
+{% endhighlight %}
+
+The `unload_strategy` field accepts two values:
+- `direct-grant` --- Write directly to the Storage table (manual output mapping).
+- `copy` --- Standard output mapping (default when the field is omitted).
+
+You can mix both strategies in a single transformation --- some tables can use manual output mapping while
+others use the standard copy strategy.
+
+#### Good Practices
+
+**Write idempotent SQL.** Because there is no automatic rollback on failure, your SQL should be safe
+to re-run. Use patterns like `MERGE` or `DELETE` + `INSERT` within a transaction:
+
+{% highlight sql %}
+BEGIN;
+DELETE FROM "in.c-my-bucket"."sales"
+  WHERE date = CURRENT_DATE();
+INSERT INTO "in.c-my-bucket"."sales"
+  SELECT * FROM "my_staging_table"
+  WHERE date = CURRENT_DATE();
+COMMIT;
+{% endhighlight %}
+
+**Handle deduplication yourself.** Use `MERGE` statements or explicit `DELETE` before `INSERT`
+to avoid duplicate rows:
+
+{% highlight sql %}
+MERGE INTO "in.c-my-bucket"."customers" AS target
+USING "my_staging_table" AS source
+ON target."id" = source."id"
+WHEN MATCHED THEN UPDATE SET
+  target."name" = source."name",
+  target."email" = source."email"
+WHEN NOT MATCHED THEN INSERT ("id", "name", "email")
+  VALUES (source."id", source."name", source."email");
+{% endhighlight %}
+
+**Test in a non-production environment first.** Manual output mapping writes affect data immediately.
+Validate your transformation logic thoroughly before pointing it at production tables.
+
+**Use the read-only storage path for table references.** In your SQL, reference tables by their
+full Storage path (e.g., `"SCHEMA"."in.c-bucket"."table"`), not by workspace-local names.
+
+#### Bad Practices
+
+**Do not rely on automatic deduplication.** Unlike standard output mapping, Keboola does **not**
+deduplicate data based on primary keys. Even if a primary key is defined in Storage, it is ignored.
+Running a plain `INSERT` repeatedly will create duplicate rows:
+
+{% highlight sql %}
+-- BAD: This will create duplicates on every run
+INSERT INTO "in.c-my-bucket"."customers"
+  SELECT * FROM "my_staging_table";
+{% endhighlight %}
+
+**Do not assume type checking.** Keboola does not verify that column data types in your SQL match
+the Storage table metadata. Mismatched types may cause errors or silent data inconsistencies.
+
+**Do not use DDL statements.** You cannot `CREATE TABLE`, `DROP TABLE`, `ALTER TABLE`, or
+`SWAP TABLE` on Storage tables through manual output mapping. Schema changes must be done through
+[Storage](/storage/tables/).
+
+**Do not use manual output mapping in development branches for production data.** Development branches
+currently share the same Snowflake schema as production. Writing via manual output mapping in a dev branch
+**will modify production data**. This limitation is being addressed in a future release.
+
+#### Limitations
+
+- **No automatic deduplication** --- Primary keys defined in Storage are ignored. You must handle
+  deduplication in your SQL.
+- **No type checking or casting** --- Column types are not validated against Storage metadata.
+- **No schema changes** --- You cannot alter table structure (add/remove/rename columns). Use
+  [Storage](/storage/tables/) for schema modifications.
+- **No automatic rollback** --- If a transformation fails mid-execution, the table may be left in a
+  partially written state. Wrap related operations in transactions to mitigate this.
+- **Limited auditability** --- Only an import event is created on success, compared to the more
+  detailed event trail of standard output mapping.
+- **Development branch isolation not supported** --- Dev branch writes affect production data
+  on Snowflake. Use caution when testing.
+- **Snowflake and BigQuery only** --- Other transformation backends are not supported.
+- **Table statistics may be delayed** --- Row counts and data sizes are read from Snowflake
+  metadata views, which may not reflect changes immediately.
+- **Read-only, external, and linked buckets are not supported** --- Manual output mapping cannot write
+  to buckets that are read-only, external schemas, or linked from another project.
