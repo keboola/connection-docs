@@ -359,8 +359,6 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 
 - **Large incremental loads** --- Standard output mapping on a 150 GB table with a single-row append can take over
   an hour due to deduplication and copy overhead. Manual output mapping reduces this to seconds.
-- **dbt teams and analysts** --- Teams already writing final-state SQL who want their transformations to apply
-  changes immediately without intermediate staging.
 - **Minimal overhead workflows** --- When the standard mapping pipeline (copy to staging, deduplicate, import)
   creates unnecessary overhead for your workload.
 
