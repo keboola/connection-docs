@@ -1,20 +1,103 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/PageTitle.astro';
 import CopyMarkdown from './CopyMarkdown.astro';
+
+const { entry, slug } = Astro.props;
+const title = entry?.data?.title as string | undefined;
+const description = entry?.data?.description as string | undefined;
+const ask = entry?.data?.ask as string | undefined;
+const pageSlug = (entry?.slug as string | undefined) ?? slug ?? '';
+
+/* ---------- Auto-derive eyebrow pill from the top-level section ---------- */
+const SECTION_LABELS: Record<string, string> = {
+  'tutorial': 'Getting Started',
+  'overview': 'Overview',
+  'kai': 'Kai · AI Assistant',
+  'flows': 'Flows',
+  'data-apps': 'Data Apps',
+  'components': 'Components',
+  'catalog': 'Data Catalog',
+  'storage': 'Storage',
+  'transformations': 'Transformations',
+  'workspace': 'Workspaces',
+  'management': 'Management',
+  'ai': 'AI Features',
+  'external-integrations': 'External Integrations',
+};
+const topSegment = pageSlug.split('/')[0] ?? '';
+const sectionLabel: string = (entry?.data as any)?.section
+  ?? SECTION_LABELS[topSegment]
+  ?? 'Keboola Docs';
+
+/* ---------- Auto-derive a page icon (emoji or unicode) ---------- */
+const ICON_MAP: Record<string, string> = {
+  // Section-level
+  'tutorial': '🧭',
+  'overview': '🗺️',
+  'kai': '✨',
+  'flows': '🔀',
+  'data-apps': '🚀',
+  'components': '🧩',
+  'catalog': '📚',
+  'storage': '🗄️',
+  'workspace': '🖥️',
+  'management': '⚙️',
+  'ai': '🧠',
+  'external-integrations': '🔌',
+  // Specific pages
+  'transformations': '✨',
+  'transformations/snowflake-plain': '❄️',
+  'transformations/python-plain': '🐍',
+  'transformations/r-plain': '📊',
+  'transformations/dbt': '🔧',
+  'transformations/bigquery': '🔵',
+  'transformations/oracle': '🔴',
+  'transformations/mappings': '🔁',
+  'transformations/variables': '📝',
+  'transformations/code-patterns': '🎯',
+};
+const pageIcon: string | undefined =
+  (entry?.data as any)?.icon
+  ?? ICON_MAP[pageSlug]
+  ?? ICON_MAP[topSegment];
+
+const askPlaceholder = ask
+  ?? `e.g. "How do I get started with ${title ?? 'this'}?"`;
 ---
 
-<div class="page-title-row">
-  <Default {...Astro.props}><slot /></Default>
-  <CopyMarkdown />
-</div>
+<div class="b-pagehead">
+  <div class="b-meta-row">
+    <span class="b-pill">{sectionLabel}</span>
+    {entry?.data?.lastUpdated && (
+      <span class="b-meta-text">
+        Updated {new Date(entry.data.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+      </span>
+    )}
+  </div>
 
-<style>
-  .page-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-</style>
+  <div class="page-title-row">
+    <h1 id="_top" class="b-title">
+      {pageIcon && <span class="b-title-icon" aria-hidden="true">{pageIcon}</span>}
+      <span>{title}<slot /></span>
+    </h1>
+    <CopyMarkdown />
+  </div>
+
+  {description && <p class="b-lede">{description}</p>}
+
+  <div class="b-ask" role="search">
+    <span class="b-ask-icon" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+      </svg>
+    </span>
+    <div class="b-ask-body">
+      <span class="b-ask-label">Ask Kai about this page</span>
+      <span class="b-ask-prompt">{askPlaceholder}</span>
+    </div>
+    <button class="b-ask-btn" type="button">
+      Ask
+      <kbd>⌘</kbd><kbd>/</kbd>
+    </button>
+  </div>
+</div>

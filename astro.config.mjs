@@ -3,12 +3,16 @@ import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
+import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 
 export default defineConfig({
   site: 'https://help.keboola.com',
   trailingSlash: 'always',
   build: {
     format: 'directory',
+  },
+  markdown: {
+    remarkPlugins: [beaconTransforms],
   },
   integrations: [
     redirectFrom(),
@@ -37,7 +41,7 @@ export default defineConfig({
         Head: './src/components/Head.astro',
         PageTitle: './src/components/PageTitle.astro',
       },
-      pagination: false,
+      pagination: true,
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
