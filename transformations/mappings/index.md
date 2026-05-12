@@ -490,8 +490,5 @@ currently share the same Snowflake schema as production. Writing via manual outp
   detailed event trail of standard output mapping.
 - **Development branch isolation not supported** --- Dev branch writes affect production data
   on Snowflake. Use caution when testing.
-- **Snowflake and BigQuery only** --- Other transformation backends are not supported.
-- **Table statistics may be delayed** --- Row counts and data sizes are read from Snowflake
-  metadata views, which may not reflect changes immediately.
 - **Read-only, external, and linked buckets are not supported** --- Manual output mapping cannot write
   to buckets that are read-only, external schemas, or linked from another project.
