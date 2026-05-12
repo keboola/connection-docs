@@ -3,6 +3,8 @@ title: Authentication
 slug: 'data-apps/authentication'
 redirect_from:
   - /components/data-apps/authentication/
+  - /data-apps/oidc/
+  - /components/data-apps/oidc/
 
 ---
 
