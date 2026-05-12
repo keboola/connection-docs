@@ -1,12 +1,23 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
 import CopyMarkdown from './CopyMarkdown.astro';
 
-const { entry, slug } = Astro.props;
+/* Starlight 0.30+ exposes the page entry via Astro.locals.starlightRoute.
+   The legacy `Astro.props.entry` is empty, so any code that reads from
+   props silently produces the fallback chrome (generic pill, no icon). */
+const route: any = (Astro as any).locals?.starlightRoute;
+const entry = route?.entry;
 const title = entry?.data?.title as string | undefined;
 const description = entry?.data?.description as string | undefined;
 const ask = entry?.data?.ask as string | undefined;
-const pageSlug = (entry?.slug as string | undefined) ?? slug ?? '';
+
+/* Page slug — `entry.id` is the canonical content-collection slug
+   ("transformations/snowflake-plain"). Fall back to frontmatter or
+   the route slug, then normalize. */
+const rawId = (entry?.id as string | undefined) ?? '';
+const frontmatterSlug = entry?.data?.slug as string | undefined;
+const pageSlug = (frontmatterSlug || rawId || route?.slug || '')
+  .replace(/^\//, '')
+  .replace(/\/$/, '');
 
 /* ---------- Auto-derive eyebrow pill from the top-level section ---------- */
 const SECTION_LABELS: Record<string, string> = {
@@ -29,9 +40,9 @@ const sectionLabel: string = (entry?.data as any)?.section
   ?? SECTION_LABELS[topSegment]
   ?? 'Keboola Docs';
 
-/* ---------- Auto-derive a page icon (emoji or unicode) ---------- */
+/* ---------- Auto-derive a page icon (emoji) ---------- */
 const ICON_MAP: Record<string, string> = {
-  // Section-level
+  /* Section-level */
   'tutorial': '🧭',
   'overview': '🗺️',
   'kai': '✨',
@@ -44,22 +55,47 @@ const ICON_MAP: Record<string, string> = {
   'management': '⚙️',
   'ai': '🧠',
   'external-integrations': '🔌',
-  // Specific pages
+  /* Specific pages */
   'transformations': '✨',
   'transformations/snowflake-plain': '❄️',
   'transformations/python-plain': '🐍',
   'transformations/r-plain': '📊',
   'transformations/dbt': '🔧',
-  'transformations/bigquery': '🔵',
-  'transformations/oracle': '🔴',
+  'transformations/bigquery': '🔷',
+  'transformations/oracle': '🅾️',
   'transformations/mappings': '🔁',
   'transformations/variables': '📝',
   'transformations/code-patterns': '🎯',
+  /* Tutorial sub-pages */
+  'tutorial/load': '📥',
+  'tutorial/manipulate': '✨',
+  'tutorial/write': '📤',
+  'tutorial/automate': '⏱️',
+  'tutorial/ad-hoc': '🔬',
+  'tutorial/branches': '🌿',
+  'tutorial/onboarding': '🎓',
+  /* Kai sub-pages */
+  'kai/getting-started': '🧪',
+  'kai/security-and-privacy': '🛡️',
+  'kai/use-cases': '💡',
+  'kai/best-practices': '📋',
+  'kai/settings': '⚙️',
+  'kai/python-client': '🐍',
+  /* AI sub-pages */
+  'ai/mcp-server': '🔌',
+  /* Data Apps sub-pages */
+  'data-apps/streamlit': '🐍',
+  'data-apps/python-js': '⚡',
+  'data-apps/authentication': '🔐',
+  'data-apps/general-design-guide': '📐',
 };
 const pageIcon: string | undefined =
   (entry?.data as any)?.icon
   ?? ICON_MAP[pageSlug]
   ?? ICON_MAP[topSegment];
+
+const lastUpdated = (entry?.data as any)?.lastUpdated
+  ?? (route as any)?.lastUpdated;
 
 const askPlaceholder = ask
   ?? `e.g. "How do I get started with ${title ?? 'this'}?"`;
@@ -68,9 +104,9 @@ const askPlaceholder = ask
 <div class="b-pagehead">
   <div class="b-meta-row">
     <span class="b-pill">{sectionLabel}</span>
-    {entry?.data?.lastUpdated && (
+    {lastUpdated && (
       <span class="b-meta-text">
-        Updated {new Date(entry.data.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        Updated {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
       </span>
     )}
   </div>
