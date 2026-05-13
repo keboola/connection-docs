@@ -1017,6 +1017,213 @@ nav.sidebar {
   /* picks up the same .starlight-aside--* tints defined above */
 }
 
+/* ───────── Tier 2 auto-migrated components ───────── */
+
+/* 1. Backend-size pills (XSmall / Small (default) / Medium / Large) */
+.sl-markdown-content ul.beacon-size-pills:not(:where(.not-content *)) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding-left: 0;
+  margin: 14px 0 22px;
+}
+.sl-markdown-content ul.beacon-size-pills > li {
+  position: relative;
+  padding: 12px 16px;
+  margin: 0;
+  flex: 1 0 130px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-1);
+  text-align: center;
+}
+.sl-markdown-content ul.beacon-size-pills > li::before {
+  display: none;
+}
+.sl-markdown-content ul.beacon-size-pills > li.is-default {
+  background: var(--kbc-green-100);
+  border: 1.5px solid var(--kbc-green-500);
+  color: var(--kbc-green-800);
+}
+.sl-markdown-content ul.beacon-size-pills > li.is-default::after {
+  content: 'DEFAULT';
+  position: absolute;
+  top: -9px;
+  right: 10px;
+  background: var(--kbc-green-500);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.6px;
+}
+:root[data-theme='dark'] .sl-markdown-content ul.beacon-size-pills > li.is-default {
+  background: rgba(30, 199, 30, 0.16);
+  color: var(--kbc-green-200);
+}
+
+/* 2. Term–definition glossary lists */
+.sl-markdown-content ul.beacon-glossary:not(:where(.not-content *)) {
+  margin: 16px 0;
+  padding: 4px 0;
+  list-style: none;
+}
+.sl-markdown-content ul.beacon-glossary > li {
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  gap: 8px 22px;
+  padding: 10px 0;
+  margin: 0;
+  border-top: 1px solid var(--border-1);
+}
+.sl-markdown-content ul.beacon-glossary > li:first-child { border-top: none; }
+.sl-markdown-content ul.beacon-glossary > li::before { display: none; }
+.sl-markdown-content ul.beacon-glossary > li > p:first-child {
+  display: contents;
+}
+.sl-markdown-content ul.beacon-glossary > li strong:first-child {
+  color: var(--fg-1);
+  font-weight: 600;
+  font-size: 13.5px;
+}
+@media (max-width: 720px) {
+  .sl-markdown-content ul.beacon-glossary > li { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* 3. Label-value spec tables */
+.sl-markdown-content table.beacon-spec-table:not(:where(.not-content *)) {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  margin: 16px 0;
+  overflow: visible;
+}
+.sl-markdown-content table.beacon-spec-table thead { display: none; }
+.sl-markdown-content table.beacon-spec-table tr {
+  border-top: 1px solid var(--border-1);
+}
+.sl-markdown-content table.beacon-spec-table tr:first-child { border-top: none; }
+.sl-markdown-content table.beacon-spec-table td {
+  padding: 9px 12px 9px 0;
+  border: 0;
+  vertical-align: top;
+}
+.sl-markdown-content table.beacon-spec-table td:first-child {
+  width: 240px;
+  color: var(--fg-1);
+  font-size: 13.5px;
+}
+.sl-markdown-content table.beacon-spec-table td:first-child strong {
+  font-weight: 600;
+}
+.sl-markdown-content table.beacon-spec-table td:last-child {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg-2);
+}
+
+/* 4. Status-emoji table cells */
+.sl-markdown-content table.beacon-status-table td.beacon-status:not(:where(.not-content *)) {
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 6px 10px;
+  display: inline-block;
+  margin: 4px 0;
+  line-height: 1;
+  font-size: 12.5px;
+}
+.sl-markdown-content td.beacon-status--ok        { color: var(--kbc-green-800); background: var(--kbc-green-100); }
+.sl-markdown-content td.beacon-status--pending   { color: var(--kbc-orange-600); background: var(--kbc-orange-100); }
+.sl-markdown-content td.beacon-status--gone      { color: var(--kbc-red-700);   background: var(--kbc-red-100); }
+.sl-markdown-content td.beacon-status--warn      { color: var(--kbc-orange-600); background: var(--kbc-orange-100); }
+:root[data-theme='dark'] .sl-markdown-content td.beacon-status--ok      { background: rgba(30, 199, 30, 0.16); color: var(--kbc-green-200); }
+:root[data-theme='dark'] .sl-markdown-content td.beacon-status--pending { background: rgba(245, 147, 0, 0.18); color: var(--kbc-orange-200); }
+:root[data-theme='dark'] .sl-markdown-content td.beacon-status--gone    { background: rgba(224, 0, 37, 0.18);  color: var(--kbc-red-200); }
+:root[data-theme='dark'] .sl-markdown-content td.beacon-status--warn    { background: rgba(245, 147, 0, 0.18); color: var(--kbc-orange-200); }
+
+/* Zebra rows for status tables */
+.sl-markdown-content table.beacon-status-table tr:nth-child(even) td {
+  background: var(--bg-2);
+}
+
+/* 5. Prompt bubbles (Kai-style chat examples) */
+.sl-markdown-content .beacon-prompt {
+  margin: 16px 0;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f4f8ff 0%, #fdfdfd 100%);
+  border: 1px solid #d6e6ff;
+  border-radius: 12px;
+}
+:root[data-theme='dark'] .sl-markdown-content .beacon-prompt {
+  background: linear-gradient(135deg, rgba(31, 143, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-color: rgba(31, 143, 255, 0.3);
+}
+.sl-markdown-content .beacon-prompt > .beacon-prompt-label {
+  font-weight: 600;
+  color: var(--kbc-blue-700);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0 0 8px;
+}
+:root[data-theme='dark'] .sl-markdown-content .beacon-prompt > .beacon-prompt-label {
+  color: var(--kbc-blue-200);
+}
+.sl-markdown-content .beacon-prompt > .expressive-code,
+.sl-markdown-content .beacon-prompt > pre {
+  margin: 0 !important;
+  background: var(--bg-1) !important;
+  border: 1px solid var(--border-1) !important;
+}
+.sl-markdown-content .beacon-prompt > pre code,
+.sl-markdown-content .beacon-prompt .expressive-code pre {
+  font-family: var(--font-sans) !important;
+  font-size: 15px !important;
+  font-style: italic;
+  color: var(--fg-2) !important;
+  white-space: pre-wrap;
+}
+
+/* 6. Figure with center caption */
+.sl-markdown-content figure.beacon-figure {
+  margin: 16px 0;
+  text-align: center;
+}
+.sl-markdown-content figure.beacon-figure img {
+  display: inline-block;
+  margin: 0 auto 8px;
+  max-width: 100%;
+}
+.sl-markdown-content figure.beacon-figure figcaption {
+  font-size: 13px;
+  color: var(--fg-3);
+  font-style: italic;
+}
+
+/* 7. Wide-table horizontal scroll wrapper */
+.sl-markdown-content .beacon-table-scroll {
+  overflow-x: auto;
+  margin: 16px 0;
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  background: var(--bg-1);
+}
+.sl-markdown-content .beacon-table-scroll::after {
+  /* edge fade indicator on horizontal overflow */
+  content: '';
+}
+.sl-markdown-content .beacon-table-scroll > table {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  min-width: 100%;
+}
+
 /* Instant view transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {

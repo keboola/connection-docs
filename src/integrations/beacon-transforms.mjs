@@ -406,6 +406,187 @@ function transformBoldedCallouts(tree) {
 }
 
 /** ---------------------------------------------------------------------
+ *  8) Backend-size pills — UL of XSmall/Small/Medium/Large items
+ *  ------------------------------------------------------------------- */
+const SIZE_RE =
+  /^(XSmall|Small|Medium|Large|XLarge|2XLarge|3XLarge|4XLarge)(\s+\(default\))?\s*$/i;
+
+function transformBackendSizes(tree) {
+  visit(tree, 'list', (node) => {
+    if (node.ordered) return;
+    if (node.children.length < 3 || node.children.length > 8) return;
+    const matches = [];
+    for (const li of node.children) {
+      const t = mdastText(li).trim();
+      const m = t.match(SIZE_RE);
+      if (!m) return;
+      matches.push({ name: m[1], isDefault: !!m[2] });
+    }
+    addClass(node, 'beacon-size-pills');
+    for (let k = 0; k < node.children.length; k++) {
+      if (matches[k].isDefault) addClass(node.children[k], 'is-default');
+    }
+  });
+}
+
+/** ---------------------------------------------------------------------
+ *  9) Term–definition glossary lists
+ *      `- **Term** — definition text…`
+ *  ------------------------------------------------------------------- */
+function transformGlossaryList(tree) {
+  visit(tree, 'list', (node) => {
+    if (node.ordered) return;
+    if (node.children.length < 3) return;
+    let glossaryShape = 0;
+    for (const li of node.children) {
+      const para = li.children?.find((c) => c.type === 'paragraph');
+      if (!para || !para.children?.length) return;
+      const first = para.children[0];
+      if (first.type !== 'strong') return;
+      const second = para.children[1];
+      if (!second || second.type !== 'text') return;
+      if (!/^\s*(—|–|--|-)\s+/.test(second.value)) return;
+      glossaryShape++;
+    }
+    if (glossaryShape / node.children.length < 0.66) return;
+    addClass(node, 'beacon-glossary');
+  });
+}
+
+/** ---------------------------------------------------------------------
+ *  10) Label-value "spec" tables (2-col, col 1 is bold)
+ *  ------------------------------------------------------------------- */
+function transformSpecTables(tree) {
+  visit(tree, 'table', (table) => {
+    if (!table.children?.length) return;
+    let validRows = 0;
+    let twoColumns = true;
+    for (const row of table.children) {
+      if (!row.children || row.children.length !== 2) { twoColumns = false; break; }
+      const firstCell = row.children[0];
+      const onlyBold =
+        firstCell.children?.length === 1 &&
+        firstCell.children[0].type === 'strong';
+      if (onlyBold) validRows++;
+    }
+    if (!twoColumns) return;
+    // Header row may not match — require 66% of remaining rows to be bold-prefixed
+    if (validRows / table.children.length < 0.5) return;
+    addClass(table, 'beacon-spec-table');
+  });
+}
+
+/** ---------------------------------------------------------------------
+ *  11) Status-emoji table cells → status pills
+ *  ------------------------------------------------------------------- */
+const STATUS_EMOJI_TO_CLASS = {
+  '🚧': 'beacon-status--pending',
+  '✅': 'beacon-status--ok',
+  '✔️': 'beacon-status--ok',
+  '❌': 'beacon-status--gone',
+  '⚠️': 'beacon-status--warn',
+  '🟢': 'beacon-status--ok',
+  '🔴': 'beacon-status--gone',
+  '🟡': 'beacon-status--warn',
+};
+function transformStatusTables(tree) {
+  visit(tree, 'table', (table) => {
+    let touched = false;
+    for (const row of table.children ?? []) {
+      for (const cell of row.children ?? []) {
+        const firstChild = cell.children?.[0];
+        if (!firstChild) continue;
+        const text = firstChild.type === 'text' ? firstChild.value : '';
+        for (const [emoji, cls] of Object.entries(STATUS_EMOJI_TO_CLASS)) {
+          if (text.startsWith(emoji)) {
+            addClass(cell, 'beacon-status', cls);
+            touched = true;
+            break;
+          }
+        }
+      }
+    }
+    if (touched) addClass(table, 'beacon-status-table');
+  });
+}
+
+/** ---------------------------------------------------------------------
+ *  12) Prompt bubbles — `Label:` paragraph + fenced code w/ quoted body
+ *  ------------------------------------------------------------------- */
+function transformPromptBubbles(tree) {
+  for (let i = 0; i < tree.children.length - 1; i++) {
+    const para = tree.children[i];
+    const code = tree.children[i + 1];
+    if (para.type !== 'paragraph' || code.type !== 'code') continue;
+    if (code.lang) continue;
+    const text = mdastText(para).trim();
+    if (!text.endsWith(':')) continue;
+    if (text.length < 4 || text.length > 100) continue;
+    const codeBody = code.value.trim();
+    // Body must start with a quote character (typical chat-style examples)
+    if (!/^["“'‘]/.test(codeBody)) continue;
+
+    const open = { type: 'html', value: '<div class="beacon-prompt">' };
+    const close = { type: 'html', value: '</div>' };
+    addClass(para, 'beacon-prompt-label');
+    addClass(code, 'beacon-prompt-body');
+    tree.children.splice(i, 2, open, para, code, close);
+    i += 3;
+  }
+}
+
+/** ---------------------------------------------------------------------
+ *  13) <div align="center">caption</div> below image → <figure>+caption
+ *  ------------------------------------------------------------------- */
+function transformFigureCaptions(tree) {
+  for (let i = 0; i < tree.children.length - 1; i++) {
+    const node = tree.children[i];
+    const next = tree.children[i + 1];
+    if (node.type !== 'paragraph') continue;
+    if (node.children?.length !== 1 || node.children[0].type !== 'image') continue;
+    if (next.type !== 'html') continue;
+    const m = next.value.match(/^<div\s+align\s*=\s*["']center["']\s*>([\s\S]*?)<\/div>\s*$/i);
+    if (!m) continue;
+
+    const img = node.children[0];
+    const alt = (img.alt ?? '').replace(/"/g, '&quot;');
+    const url = (img.url ?? '').replace(/"/g, '&quot;');
+    const caption = m[1].trim();
+    const figureHtml = {
+      type: 'html',
+      value:
+        `<figure class="beacon-figure">` +
+        `<img src="${url}" alt="${alt}" />` +
+        `<figcaption>${caption}</figcaption>` +
+        `</figure>`,
+    };
+    tree.children.splice(i, 2, figureHtml);
+  }
+}
+
+/** ---------------------------------------------------------------------
+ *  14) Wrap wide tables in a horizontal-scroll container
+ *  ------------------------------------------------------------------- */
+function transformTableScroll(tree) {
+  // Wrap every non-spec, non-status table in a scroll container. The CSS
+  // overflow rule is a no-op when content fits, so it's safe to apply
+  // broadly — and avoids tuning a column/length heuristic.
+  for (let i = 0; i < tree.children.length; i++) {
+    const node = tree.children[i];
+    if (node.type !== 'table') continue;
+
+    // Don't wrap a spec table — that one is borderless on purpose
+    const classes = node.data?.hProperties?.className;
+    if (Array.isArray(classes) && classes.includes('beacon-spec-table')) continue;
+
+    const open = { type: 'html', value: '<div class="beacon-table-scroll">' };
+    const close = { type: 'html', value: '</div>' };
+    tree.children.splice(i, 1, open, node, close);
+    i += 2;
+  }
+}
+
+/** ---------------------------------------------------------------------
  *  Plugin entry
  *  ------------------------------------------------------------------- */
 export default function beaconTransforms() {
@@ -416,13 +597,22 @@ export default function beaconTransforms() {
        - legacy alerts before everything else so their bodies participate
          in later passes
        - pseudo-H4 before step lists so the new heading can act as a cue
+       - backend / glossary / status table classifiers BEFORE generic step
+         and table-scroll passes (so they win the more-specific match)
        - bolded callouts last so other transforms don't see asides
     */
     transformLegacyAlerts(tree);
     transformPseudoHeadings(tree);
     transformAdvantageList(tree);
+    transformBackendSizes(tree);
+    transformGlossaryList(tree);
+    transformSpecTables(tree);
+    transformStatusTables(tree);
     transformStepLists(tree);
+    transformPromptBubbles(tree);
     transformCodePairs(tree);
+    transformFigureCaptions(tree);
+    transformTableScroll(tree);
     transformBoldedCallouts(tree);
   };
 }
