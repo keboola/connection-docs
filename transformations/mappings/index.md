@@ -457,7 +457,8 @@ full Storage path (e.g., `"SCHEMA"."in.c-bucket"."table"`), not by workspace-loc
 #### Bad Practices
 
 **Do not rely on automatic deduplication.** Unlike standard output mapping, Keboola does **not**
-deduplicate data based on primary keys. Even if a primary key is defined in Storage, it is ignored.
+deduplicate data based on primary keys. Primary keys on Snowflake and BigQuery are not enforced by the
+backend, so a primary key defined in Storage will not prevent duplicates on direct writes.
 Running a plain `INSERT` repeatedly will create duplicate rows:
 
 {% highlight sql %}
@@ -479,8 +480,8 @@ currently share the same Snowflake schema as production. Writing via manual outp
 
 #### Limitations
 
-- **No automatic deduplication** --- Primary keys defined in Storage are ignored. You must handle
-  deduplication in your SQL.
+- **No automatic deduplication** --- Primary keys on Snowflake and BigQuery are not enforced by the
+  backend, so they will not prevent duplicates on direct writes. You must handle deduplication in your SQL.
 - **No type checking or casting** --- Column types are not validated against Storage metadata.
 - **No schema changes** --- You cannot alter table structure (add/remove/rename columns). Use
   [Storage](/storage/tables/) for schema modifications.
