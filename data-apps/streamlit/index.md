@@ -62,6 +62,8 @@ For simple use cases where your Streamlit code fits on one page, paste the code 
 {: .image-popup}
 ![Hello World code](/data-apps/streamlit/hello-world-code.png)
 
+You can also override Streamlit defaults like file upload size or browser settings without committing a `.streamlit/config.toml` file - see [Streamlit Configuration](#streamlit-configuration) below.
+
 #### Packages
 To use additional Python packages that are not already included in the [base image](#base-image), enter them into the `Packages` field.
 
@@ -205,6 +207,55 @@ For `Custom`, users can select colors using the color pickers and choose the des
    - Secondary Background Color: `#4A3324`
    - Text Color: `#FFFFFF`
    - Font: Sans Serif
+
+For Streamlit configuration beyond theming (e.g. upload size, server or browser settings), see [Streamlit Configuration](#streamlit-configuration) below.
+
+## Streamlit Configuration
+
+Beyond the predefined themes above, you can inject any [Streamlit configuration option](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) into your app's runtime `config.toml` directly from the Data App configuration in Keboola. This is useful when your app is deployed via the **Code** method (no Git repo, where you would otherwise commit a `.streamlit/config.toml` file) and you need to override Streamlit defaults such as upload size, server settings, or browser behavior.
+
+### Setting Custom config.toml
+
+In your Data App configuration, switch to the raw JSON editor and add a `config.toml` string under `parameters.dataApp.streamlit`:
+
+```json
+{
+  "parameters": {
+    "dataApp": {
+      "streamlit": {
+        "config.toml": "[server]\nmaxUploadSize = 500\n"
+      }
+    }
+  }
+}
+```
+
+The data app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
+
+1. Streamlit's built-in defaults
+2. Keboola's runtime defaults (sets `[server] address = "0.0.0.0"` and `[browser] gatherUsageStats = false`)
+3. Your repository's `.streamlit/config.toml` (if Git-deployed)
+4. The `config.toml` string injected via the Data App configuration above
+
+### Common Use Cases
+
+**Increase `st.file_uploader` size limit.** Streamlit defaults to 200 MB. To accept larger files:
+
+```toml
+[server]
+maxUploadSize = 500
+```
+
+**Disable usage stats:**
+
+```toml
+[browser]
+gatherUsageStats = false
+```
+
+**Streamlit theme options not exposed in the Theming form** (e.g. `base = "dark"`, additional font controls, newly-added Streamlit theme keys) - see [Streamlit's theme reference](https://docs.streamlit.io/develop/concepts/configuration/theming).
+
+> **Note on theming:** the **Theming** UI reads and rewrites the same `config.toml` field. Non-theme sections you set here (e.g. `[server]`, `[browser]`) are preserved when you save changes through the Theming UI. However, the Theming UI overwrites the `[theme]` section on save, so prefer the Theming UI when a value is available there - and use this raw JSON path for theme keys it doesn't expose.
 
 ## Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into the Streamlit base Docker image. You can select a specific backend version when deploying your app. Each version defines the Python version, Streamlit version, and a set of pre-installed packages.
