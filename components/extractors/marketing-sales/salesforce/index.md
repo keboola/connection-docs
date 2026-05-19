@@ -77,7 +77,7 @@ This method is ideal for automated integrations where no user interaction is req
 ### Additional Settings
 You can also configure:
 
-- **Sandbox** -- Enable this option to download records from a sandbox instead of the production environment (available for Security Token and Connected App methods).
+- **Sandbox** -- Enable this option to download records from a sandbox instead of the production environment (available for Security Token and External Client App methods).
 - **API Version** -- Select the Salesforce API version to use for data extraction.
 - **Proxy Settings** -- Configure an HTTPS proxy server if required by your network setup.
 
