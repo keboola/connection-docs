@@ -204,20 +204,4 @@ You can use this overview to validate whether your conditions behaved as expecte
 {: .image-popup}
 ![](/flows/conditional-flows/all-runs.png)
 
-## Comparison with Legacy Flows
-
-Flows and [Legacy Flows](/flows/flows-legacy/) are not interchangeable. You cannot convert one to the other. A migration tool is being planned to help with this in the future.
-
-There are differences between Flows and Legacy Flows at the moment, see the table below for more information:
-
-| Feature / Behavior | Flows                                           | Legacy Flows | Notes                                                                                                                |
-|-------------------|-------------------------------------------------------------|-------|----------------------------------------------------------------------------------------------------------------------|
-| Run Selected Tasks / Re-run Failed Tasks | 🚧 Not yet supported                               | ✅ Supported | Planned for GA. Workaround: duplicate the phase and skip conditionally. Set Retry.                                   |
-| Trigger Components (cross-project) | ✅ Supported                                         | ✅ Supported | Cross-project flow triggering is available. |
-| CLI Support | 🚧 Not yet supported                                          | ✅ Supported | Not yet available via Keboola CLI.                                                             |
-| "Continue on Failure" toggle | 🔁 Replaced by Conditions | ✅ Simple UI toggle | Failure handling is expressed through conditions, offering more flexibility. (e.g., if status == 'error' then...)                  |
-
-## Migration
-
-We're planning an automatic migration from Legacy Flows to Flows to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same - but with added flexibility under the hood.
 
