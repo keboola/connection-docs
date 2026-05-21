@@ -95,8 +95,8 @@ items:
   - url: /flows/
     title: Flows
     items:
-      - url: /flows/conditional-flows/
-        title: Conditional Flows
+      - url: /flows/flows-legacy/
+        title: Flows (Legacy)
 
       - url: /flows/templates/
         title: Templates
