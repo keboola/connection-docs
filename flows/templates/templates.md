@@ -8,6 +8,11 @@ redirect_from:
 * TOC
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> Data templates create <a href="/flows/flows-legacy/">legacy flows</a>, which are no longer the recommended way to build data pipelines. For building new workflows, we recommend using the <a href="/kai/">Kai AI assistant</a>, which can help you set up flows and component configurations interactively.
+</div>
+
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
 by a [flow](/flows/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
 that solves a specific problem. 
