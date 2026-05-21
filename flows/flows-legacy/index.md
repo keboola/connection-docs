@@ -12,8 +12,6 @@ permalink: /flows/flows-legacy/
 
 We're planning an automatic migration from Legacy Flows to [Flows](/flows/) to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same — but with added flexibility under the hood.
 
-Legacy Flows and [Flows](/flows/) are not interchangeable. You cannot convert one to the other manually.
-
 * TOC
 {:toc}
 
