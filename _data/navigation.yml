@@ -98,21 +98,6 @@ items:
       - url: /flows/conditional-flows/
         title: Conditional Flows
 
-      - url: /flows/orchestrator/
-        title: Orchestrations
-        items:
-          - url: /flows/orchestrator/tasks/
-            title: Tasks
-            items:
-              - url: /flows/orchestrator/tasks/nesting/
-                title: Nesting
-
-          - url: /flows/orchestrator/running/
-            title: Running
-
-          - url: /flows/orchestrator/design/
-            title: Design
-
       - url: /flows/templates/
         title: Templates
         items:

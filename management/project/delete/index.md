@@ -16,7 +16,7 @@ button. This marks your project for deletion, and, for some time, nothing else h
 Once marked, the project enters a **60-day grace period** during which
 
 - the project cannot be accessed.
-- all project operations, such as data loads and orchestrations, are stopped.
+- all project operations, such as data loads and flows, are stopped.
 - a request for **undeleting** the project can be sent to our [support team](mailto:support@keboola.com).
 
 After the grace period expires, the deletion becomes **irreversible**, and the project along with any associated data

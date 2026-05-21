@@ -9,7 +9,7 @@ redirect_from:
 {:toc}
 
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
-by an [orchestration](/flows/orchestrator/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
+by a [flow](/flows/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
 that solves a specific problem. 
 
 Keboola is a very open [platform](/overview), which may be overwhelming in many cases. 

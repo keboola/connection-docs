@@ -21,7 +21,7 @@ Two mapping types must be set up before running a transformation:
 If an input mapping does not fit well to your use case, then a [read-only input mapping](/transformations/mappings/#read-only-input-mapping) offers straightforward access to the data, and will drastically reduce the execution time.
 This feature is useful in the following scenarios:
    - Slow transformations where a clone is not used (input mapping)
-   - Complex orchestrations that move data from a data source to the workspace where they are accessed by other apps
+   - Complex flows that move data from a data source to the workspace where they are accessed by other apps
    - Cases where updating data in Storage via output mapping causes multiple data movement operations
 2. **Output Mapping** --- This is a list of tables written into Storage after running the transformation. 
 Tables not listed are neither modified nor permanently stored (i.e., they are temporary). 

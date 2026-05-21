@@ -86,5 +86,5 @@ In these cases, higher parallelism reduces total execution time proportionally t
 Parallelism has little or no effect when:
 
 - **Multiple rows write to the same destination table** – Table-level locks mean only one writer proceeds at a time, regardless of the parallelism setting.
-- **Sequential dependencies between rows** – If one row depends on the output of another, parallelism cannot help. Use [orchestration phases](/flows/orchestrator/running/#parallel-jobs) to enforce the required ordering instead.
+- **Sequential dependencies between rows** – If one row depends on the output of another, parallelism cannot help. Use [flow steps](/flows/#execute-tasks-in-parallel) to enforce the required ordering instead.
 - **Shared backend bottlenecks** – If the upstream system (database, API, storage layer) is already saturated, adding concurrent requests may slow things down further by increasing contention.
