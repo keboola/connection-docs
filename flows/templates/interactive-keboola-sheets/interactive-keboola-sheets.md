@@ -7,21 +7,21 @@ redirect_from:
 
 * TOC
 {:toc}
-This demo template uses a data app to demonstrate how Streamlit interacts with Keboola Storage. 
+This demo template uses an app to demonstrate how Streamlit interacts with Keboola Storage. 
 
 This template will help you simplify data editing and management within your company. 
-The data app eliminates the need to export data to external tools, allowing business users to **directly access and edit tables stored in Keboola Storage**.
+The app eliminates the need to export data to external tools, allowing business users to **directly access and edit tables stored in Keboola Storage**.
 
 By centralizing data editing, the app enhances collaboration, reduces errors, and streamlines your data management processes. 
 Replace manual data manipulation with a seamless data editing solution. Utilizing this template will provide you with a **more efficient** and **user-friendly** 
 approach to editing and managing data. 
 
-The flow consists of only one component – the data app itself; no complex flow configuration is needed.
+The flow consists of only one component – the app itself; no complex flow configuration is needed.
 
 {: .image-popup}
 ![The Flow](/flows/templates/interactive-keboola-sheets/flow.png)
 
-## Setting Up the Data App
+## Setting Up the App
 
 {: .image-popup}
 ![Data Editor](/flows/templates/interactive-keboola-sheets/data-editor.png)
@@ -31,7 +31,7 @@ In the **Secrets** section, insert the token(s) of the bucket(s) you want to mak
 
 - Specify the field/column limitations within the Python code of the app.
 - Deploy the app. 
-- Within the data app, business users can select a table for editing.
+- Within the app, business users can select a table for editing.
 - After completing the edits, click **Save Changes**, and the changes will instantly be saved back into the table in Keboola Storage.
 
 ## How to Use the Template
@@ -54,9 +54,9 @@ You can use the template as many times as you want and still keep everything org
 {: .image-popup}
 ![Template Name](/flows/templates/interactive-keboola-sheets/template-name.png)
 
-After clicking **Next Step**, you will see the template builder. Fill in all required fields and start using the template and the data app.
+After clicking **Next Step**, you will see the template builder. Fill in all required fields and start using the template and the app.
 
-## How the Data App Works
+## How the App Works
 This web application is designed to help you easily edit and manage your tabular data stored in a Keboola environment. 
 Whether you are a data analyst, scientist, or anyone working with data, this tool simplifies the process of making changes to your datasets.
 

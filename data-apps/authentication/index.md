@@ -11,9 +11,9 @@ redirect_from:
 
 ## Overview
 
-Once a data app is deployed, its URL is publicly available! We recommend using one of the built-in authentication methods described below to protect your app.
+Once an app is deployed, its URL is publicly available! We recommend using one of the built-in authentication methods described below to protect your app.
 
-Keboola provides several built-in authentication methods to control who can access your data apps. Choose the method that best fits your security requirements.
+Keboola provides several built-in authentication methods to control who can access your apps. Choose the method that best fits your security requirements.
 
 {: .image-popup}
 ![Authentication options](/data-apps/authentication/authentication.png)
@@ -44,7 +44,7 @@ If you enter an app with OIDC, you will be asked to select an `Authentication Pr
 
 ## GitHub Authentication
 
-Restrict access to your data app using GitHub OAuth. Users authenticate via their GitHub account, and you can optionally restrict access to specific organizations, teams, repositories, or individual users.
+Restrict access to your app using GitHub OAuth. Users authenticate via their GitHub account, and you can optionally restrict access to specific organizations, teams, repositories, or individual users.
 
 ### Required Fields
 
@@ -69,7 +69,7 @@ Restrict access to your data app using GitHub OAuth. Users authenticate via thei
 1. Go to your GitHub account **Settings > Developer Settings > OAuth Apps** and create a new OAuth App.
 2. Set the **Authorization callback URL** to: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 3. Copy the **Client ID** and **Client Secret** from the created OAuth App.
-4. In your Keboola Data App configuration, select **GitHub** as the authentication method.
+4. In your Keboola app configuration, select **GitHub** as the authentication method.
 5. Paste the **Client ID** and **Client Secret**.
 6. Optionally configure organization, team, repository, or allowed users restrictions.
 7. If you use organization, team, or repository restrictions with a private organization, provide an **Access Token** with `read:org` scope.
@@ -77,7 +77,7 @@ Restrict access to your data app using GitHub OAuth. Users authenticate via thei
 
 ## GitLab Authentication
 
-Restrict access to your data app using GitLab OAuth. Users authenticate via their GitLab account, and you can optionally restrict access by groups, projects, or roles.
+Restrict access to your app using GitLab OAuth. Users authenticate via their GitLab account, and you can optionally restrict access by groups, projects, or roles.
 
 ### Required Fields
 
@@ -101,14 +101,14 @@ Restrict access to your data app using GitLab OAuth. Users authenticate via thei
 2. Set the **Redirect URI** to: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 3. Ensure the `openid`, `profile`, and `email` scopes are selected. If you use group or project restrictions, also select `read_api`.
 4. Copy the **Application ID** and **Secret**.
-5. In your Keboola Data App configuration, select **GitLab** as the authentication method.
+5. In your Keboola app configuration, select **GitLab** as the authentication method.
 6. Paste the **Client ID**, **Client Secret**, and **GitLab Instance URL**.
 7. Optionally configure groups, projects, or allowed roles restrictions.
 8. Save and redeploy your app.
 
 ## JumpCloud Authentication
 
-Restrict access to your data app using JumpCloud OIDC. Users authenticate via their JumpCloud account, and you can optionally restrict access by roles.
+Restrict access to your app using JumpCloud OIDC. Users authenticate via their JumpCloud account, and you can optionally restrict access by roles.
 
 ### Required Fields
 
@@ -131,7 +131,7 @@ Restrict access to your data app using JumpCloud OIDC. Users authenticate via th
 2. Configure the application as an **OIDC** application.
 3. Set the **Redirect URI** to: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 4. Copy the **Client ID** and **Client Secret** from the SSO tab.
-5. In your Keboola Data App configuration, select **JumpCloud** as the authentication method.
+5. In your Keboola app configuration, select **JumpCloud** as the authentication method.
 6. Paste the **Client ID**, **Client Secret**, **Issuer URL**, and **Logout URL**.
 7. Optionally configure allowed roles to restrict access.
 8. Save and redeploy your app.
@@ -146,4 +146,4 @@ https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback
 
 For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`
 
-You can find your app's full URL after the first deployment in the Data App configuration.
+You can find your app's full URL after the first deployment in the app configuration.

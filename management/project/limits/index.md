@@ -59,7 +59,7 @@ If you need more information, please contact your CSM.
 |---------------------------------------|-------------------------|-----------------------|
 | **Data source job**                   | 1 hour                  | **2**                 |
 | **Data destination job**              | 1 GB out                | **0.2**               |  
-| **SQL job / workspace**               |                         |                       |
+| **SQL job / workspace / Query service** |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Medium                                | 1 hour                  | **12**                |
 | Large                                 | 1 hour                  | **26**                |

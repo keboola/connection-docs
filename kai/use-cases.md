@@ -58,7 +58,7 @@ Kai reads actual job logs, checks configurations, and traces data lineage to pro
 "Add the pandas package to my Python transformation environment."
 ```
 
-## Data Apps
+## Apps
 
 **Create a dashboard:**
 ```

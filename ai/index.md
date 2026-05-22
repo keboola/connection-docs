@@ -17,6 +17,9 @@ Keboola integrates artificial intelligence throughout the platform to enhance pr
 Keboola's embedded AI assistant that serves as a comprehensive data engineering co-pilot within the platform. Kai is context-aware of your specific project and can both explore and modify your Keboola environment through natural conversation.
 [Learn more about Kai →](/kai/)
 
+A [Python client library](https://github.com/keboola/kai-client) is also available for programmatic access to the Kai API, enabling scripting, automation, and integration into custom workflows.
+[Learn more about the Python Client →](/kai/python-client/)
+
 ### MCP Server
 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.

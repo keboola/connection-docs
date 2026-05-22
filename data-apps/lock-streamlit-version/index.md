@@ -22,7 +22,7 @@ Locking package versions is crucial for:
 1. **For Code Deployment:**
    - Upload or create requirements.txt in Keboola UI
    - Enable "Freeze versions" toggle
-   - Start the Data App to apply changes
+   - Start the app to apply changes
 
 2. **For Git Repository:**
    - Set up virtual environment

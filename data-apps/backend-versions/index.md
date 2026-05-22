@@ -8,7 +8,7 @@ redirect_from:
 * TOC
 {:toc}
 
-When deploying a data app, you can select a **backend version** from a dropdown in the deployment wizard.
+When deploying an app, you can select a **backend version** from a dropdown in the deployment wizard.
 Each backend version defines the runtime environment your app runs in, including the Python version, Streamlit version,
 and a set of pre-installed packages.
 
@@ -24,7 +24,7 @@ For example: `1.15.2 - Python 3.13 + Streamlit 1.51`
 
 This means:
 
-- **Backend version** (`1.15.2`): The release version of the base Docker image that powers your data app. Newer backend versions may include updated pre-installed packages, bug fixes, and infrastructure improvements.
+- **Backend version** (`1.15.2`): The release version of the base Docker image that powers your app. Newer backend versions may include updated pre-installed packages, bug fixes, and infrastructure improvements.
 - **Python version** (`3.13`): The version of the Python interpreter. Different Python versions offer different language features and performance characteristics.
 - **Streamlit version** (`1.51`): The version of the [Streamlit](https://streamlit.io/) framework used to run your app.
 
