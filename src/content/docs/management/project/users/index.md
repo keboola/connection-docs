@@ -125,6 +125,25 @@ Once the invitation is accepted, the user becomes a member of the project:
 
 ![Screenshot -- User joined](/management/project/users/users-list-3.png)
 
+## Changing User Role
+You can change the role of an existing project member directly from the user list. Click the action menu (three dots)
+next to the user and select **Change Role**:
+
+A modal dialog will appear, allowing you to select a new role from the available options. The available roles depend
+on your project setup:
+
+- **Standard projects** — Share, Admin, Guest, and Read Only.
+- **Governed Change Management projects** — Production Manager, Developer, and Reviewer.
+
+**Who can change roles:**
+
+- In standard projects, users with the **Admin** or **Share** role can change roles of other users.
+  The **Share** role can only be assigned by an [organization member](/management/organization/).
+- In projects with Governed Change Management active,
+  the **Production Manager** can change roles of other users.
+
+*Note: Changing roles is not available when SAML-based role management is enabled.*
+
 ## Removing User
 You may remove a user from a project by clicking the **Remove** button in the user list.
 The user will receive a notification email about being removed from the project.

@@ -1,5 +1,5 @@
 ---
-title: Streamlit Data Apps
+title: Streamlit Apps
 slug: 'data-apps/streamlit'
 redirect_from:
   - /components/data-apps/streamlit/
@@ -7,7 +7,7 @@ redirect_from:
 
 
 
-Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code. It is the fastest way to build data apps in Keboola, perfect for rapid prototyping and internal tools.
+Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code. It is the fastest way to build apps in Keboola, perfect for rapid prototyping and internal tools.
 
 **When to Use Streamlit:**
 
@@ -35,8 +35,8 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 
 ### Create Your First Streamlit App
 
-1. **Navigate to Data Apps** in your Keboola project.
-2. Click the **+** button to create a new data app.
+1. **Navigate to Apps** in your Keboola project.
+2. Click the **+** button to create a new app.
 3. Enter a **custom prefix** for your app's URL.
 4. Select **Streamlit** as the technology stack.
 5. Choose a deployment method (Code or Git repository).
@@ -45,16 +45,18 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 
 ## Deployment Methods
 
-There are two ways to deploy a Streamlit data app: 
+There are two ways to deploy a Streamlit app: 
 1. Code
 2. Git Repository
 
 ### Code
 
-For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out our [Titanic Demo App](https://demo.keboola.com/app/data-apps/49752130) or [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
+For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
 
 ![Code deployment](/data-apps/streamlit/development-type-code.png)
 ![Hello World code](/data-apps/streamlit/hello-world-code.png)
+
+You can also override Streamlit defaults like file upload size or browser settings without committing a `.streamlit/config.toml` file - see [Streamlit Configuration](#streamlit-configuration) below.
 
 #### Packages
 To use additional Python packages that are not already included in the [base image](#base-image), enter them into the `Packages` field.
@@ -74,7 +76,7 @@ If you are using a private repository, you have two options to authenticate:
 Follow these steps to authenticate using your GitHub username and personal access token:
 
 1. Generate a personal access token on GitHub by going to your GitHub account settings, selecting **Developer settings > Personal access tokens**, and clicking **Generate new token**. Ensure the token has the necessary permissions to access the repository.
-2. In Keboola, navigate to the **Data App Repository** in your data app configuration, check the `Private` option, and enter your GitHub username and the personal access token you generated in step 1.
+2. In Keboola, navigate to the **App Repository** in your app configuration, check the `Private` option, and enter your GitHub username and the personal access token you generated in step 1.
 3. Click **Save** to authenticate with the private repository.
 
 To authenticate using your SSH private key, follow the instructions in the [GitHub manual](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). After generating your key, enter your SSH private key into the appropriate configuration field and click **Save**.
@@ -109,18 +111,18 @@ openai = "YOUR_OPENAI_KEY"
 3. Review existing secrets before uploading new ones to avoid unintentional overwrites.
 4. If you need nested/groups, use repo-based secrets. Direct upload does not support nested access.
 
-## Access Storage from Data App
+## Access Storage from App
 By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
 
 - `KBC_URL`: This represents the URL of the current Keboola project.
 - `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
 
-To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your Data App as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
+To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
 
 **Important:**
 Do not name your secret `KBC_TOKEN`, as this name is reserved.
 
-These environment variables can be accessed within your Streamlit data app code. Here is an example of how to initialize the Keboola Storage token:
+These environment variables can be accessed within your Streamlit app code. Here is an example of how to initialize the Keboola Storage token:
 ```
 # Constants
 kbc_token = os.environ.get('KBC_TOKEN')
@@ -137,7 +139,7 @@ To load data from the Storage of a Keboola project into the app, use the [input 
 For writing data back to Keboola Project Storage, use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).
 
 ## Theming
-To configure theming in your data app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
+To configure theming in your app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
 
 ![Predefined themes](/data-apps/streamlit/theming-predefined.png)
 
@@ -195,6 +197,55 @@ For `Custom`, users can select colors using the color pickers and choose the des
    - Text Color: `#FFFFFF`
    - Font: Sans Serif
 
+For Streamlit configuration beyond theming (e.g. upload size, server or browser settings), see [Streamlit Configuration](#streamlit-configuration) below.
+
+## Streamlit Configuration
+
+Beyond the predefined themes above, you can inject any [Streamlit configuration option](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) into your app's runtime `config.toml` directly from the Data App configuration in Keboola. This is useful when your app is deployed via the **Code** method (no Git repo, where you would otherwise commit a `.streamlit/config.toml` file) and you need to override Streamlit defaults such as upload size, server settings, or browser behavior.
+
+### Setting Custom config.toml
+
+In your Data App configuration, switch to the raw JSON editor and add a `config.toml` string under `parameters.dataApp.streamlit`:
+
+```json
+{
+  "parameters": {
+    "dataApp": {
+      "streamlit": {
+        "config.toml": "[server]\nmaxUploadSize = 500\n"
+      }
+    }
+  }
+}
+```
+
+The data app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
+
+1. Streamlit's built-in defaults
+2. Keboola's runtime defaults (sets `[server] address = "0.0.0.0"` and `[browser] gatherUsageStats = false`)
+3. Your repository's `.streamlit/config.toml` (if Git-deployed)
+4. The `config.toml` string injected via the Data App configuration above
+
+### Common Use Cases
+
+**Increase `st.file_uploader` size limit.** Streamlit defaults to 200 MB. To accept larger files:
+
+```toml
+[server]
+maxUploadSize = 500
+```
+
+**Disable usage stats:**
+
+```toml
+[browser]
+gatherUsageStats = false
+```
+
+**Streamlit theme options not exposed in the Theming form** (e.g. `base = "dark"`, additional font controls, newly-added Streamlit theme keys) - see [Streamlit's theme reference](https://docs.streamlit.io/develop/concepts/configuration/theming).
+
+> **Note on theming:** the **Theming** UI reads and rewrites the same `config.toml` field. Non-theme sections you set here (e.g. `[server]`, `[browser]`) are preserved when you save changes through the Theming UI. However, the Theming UI overwrites the `[theme]` section on save, so prefer the Theming UI when a value is available there - and use this raw JSON path for theme keys it doesn't expose.
+
 ## Base Image
 When the app is deployed, the code specified in one of the deployment methods will be injected into the Streamlit base Docker image. You can select a specific backend version when deploying your app. Each version defines the Python version, Streamlit version, and a set of pre-installed packages.
 
@@ -209,13 +260,13 @@ Starting with backend version **1.15.0**, each release is available with multipl
 For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/data-apps/backend-versions/) page.
 
 ## AgGrid Enterprise License
-The AgGrid Enterprise License is available for Streamlit Data Apps in Keboola, offering enhanced data manipulation capabilities, including:
+The AgGrid Enterprise License is available for Streamlit apps in Keboola, offering enhanced data manipulation capabilities, including:
 
 - Inline dataset editing.
 - Advanced features such as pivoting, filtering, and sorting.
 - A professional interface, free from the "trial use only" watermark.
 
-Ensure your data app is configured to use the AgGrid component to take advantage of these enhanced features.
+Ensure your app is configured to use the AgGrid component to take advantage of these enhanced features.
 
 ### How to Enable the License
 The **enterprise license** is **pre-configured for all Keboola stacks**, so no additional setup is required for supported applications.

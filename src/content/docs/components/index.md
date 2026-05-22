@@ -253,7 +253,9 @@ This setting is optional, with the default option being **Parallel jobs: Off**.
 
 **Example:** If your configuration has five rows and you set the parallelism to 2, the five jobs will be processed in three consecutive sets (2 + 2 + 1). The jobs within each set will run in parallel.
 
-This feature is now available in all projects with Queue v2 and on all stacks.
+**Important:** Parallelism defines the **maximum** number of jobs that can run concurrently — not a guarantee. Actual concurrency depends on storage capacity, resource locks, and worker availability. Jobs that cannot start immediately are placed into a waiting state, which is normal behavior.
+
+For a full explanation of how parallelism interacts with system limits, billing, and when it actually helps, see [Running Jobs in Parallel](/components/running-jobs-in-parallel/).
 
 ## Authorization
 Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user),

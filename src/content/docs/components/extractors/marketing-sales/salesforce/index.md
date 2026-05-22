@@ -24,43 +24,59 @@ If you do not have your Security Token, you will need to reset it by following t
 Note that the security token is different for sandbox and production environments. When exporting data from a sandbox, 
 don't forget to add `.sandboxname` at the end of your username.
 
-#### Connected App with Username and Password
-This method uses a Salesforce Connected App for authentication. In addition to your **Login Name** and **Password**, 
-you need to provide the **Consumer Key** and **Consumer Secret** from your Connected App.
+#### External Client App with Username and Password
+This method uses a Salesforce External Client App for authentication (the current-generation replacement for
+Connected Apps, introduced in Salesforce Spring '26). In addition to your **Login Name** and **Password**, 
+you need to provide the **Consumer Key** and **Consumer Secret** from your External Client App.
 
-To set up a Connected App in Salesforce:
+**Note:** If you already have a Connected App set up from before Spring '26, it continues to work — no
+migration is required. These steps apply when creating a new app.
 
-1. In Salesforce Setup, navigate to **Platform Tools > Apps > App Manager**.
-2. Click **New Connected App**.
-3. Fill in the basic information (Connected App Name, API Name, Contact Email).
-4. In the **API (Enable OAuth Settings)** section, check **Enable OAuth Settings**.
-5. Enable **Enable for Device Flow** (the Callback URL will be set automatically).
-6. Select the following OAuth Scopes:
+To set up an External Client App in Salesforce:
+
+1. In Salesforce Setup, use Quick Find to navigate to **App Manager**.
+2. Click **New External Client App**.
+3. Fill in the **External Client App Name**, **API Name**, and **Contact Email**.
+4. Set the **Distribution State** to **Local** (for use within your current org only).
+5. Click **Save**.
+6. Scroll down to the **API (Enable OAuth Settings)** section and check **Enable OAuth Settings**.
+7. Enter a **Callback URL** (e.g., `https://localhost` — a placeholder is required even if not used).
+8. Select the following **OAuth Scopes** and move them to Selected OAuth Scopes:
    - Manage user data via APIs (api)
    - Access unique user identifiers (openid)
    - Perform requests at any time (refresh_token, offline_access)
-7. Save the Connected App.
-8. In **App Manager**, find your app, click the dropdown arrow, and select **Manage**.
-9. Click **Edit Policies** and set **IP Relaxation** to **Relax IP restrictions**.
-10. To get the Consumer Key and Secret, go back to **App Manager**, find your app, click **View**, 
-    then click **Manage Consumer Details** in the API section.
+9. Click **Save**.
+10. Go to the **Policies** tab of your External Client App, click **Edit**, and set **IP Relaxation** to
+    **Relax IP restrictions**.
+11. To retrieve the Consumer Key and Secret, go to the **Settings** tab, click **OAuth Settings**, 
+    then click **Consumer Key and Secret** (you may be prompted for identity verification).
 
-#### Connected App OAuth 2.0 Client Credentials
-This method enables server-to-server authentication without user credentials. It requires a **Consumer Key**, 
+#### External Client App OAuth 2.0 Client Credentials
+This method enables server-to-server authentication without user credentials. It requires a **Consumer Key**,
 **Consumer Secret**, and your Salesforce **Domain** (e.g., `https://your-org.my.salesforce.com`).
 
-To enable Client Credentials Flow:
+**Note:** If you already have a Connected App with Client Credentials Flow set up from before Spring '26, it
+continues to work — no migration is required. These steps apply when creating a new app.
 
-1. Follow the steps above to create a Connected App.
-2. Additionally, check **Enable Client Credentials Flow** in the OAuth settings.
-3. Provide your Salesforce domain in the configuration.
+To create an External Client App with Client Credentials Flow:
+
+1. Follow **steps 1–9** in the [External Client App with Username and Password](#external-client-app-with-username-and-password)
+   section above to create the app and configure OAuth settings.
+2. Under **Flow Enablement**, additionally check **Enable Client Credentials Flow**.
+3. Click **Save**.
+4. Go to the **Policies** tab, click **Edit**.
+5. Set **Permitted Users** to **Admin approved users are pre-authorized**.
+6. In the **Run As (Username)** field, enter the Salesforce username whose permissions the integration will use.
+7. Click **Save**.
+8. Retrieve the Consumer Key and Secret from the **Settings** tab → **OAuth Settings** → **Consumer Key and Secret**.
+9. Provide your Salesforce domain in the Keboola configuration (e.g., `https://your-org.my.salesforce.com`).
 
 This method is ideal for automated integrations where no user interaction is required.
 
 ### Additional Settings
 You can also configure:
 
-- **Sandbox** -- Enable this option to download records from a sandbox instead of the production environment (available for Security Token and Connected App methods).
+- **Sandbox** -- Enable this option to download records from a sandbox instead of the production environment (available for Security Token and External Client App methods).
 - **API Version** -- Select the Salesforce API version to use for data extraction.
 - **Proxy Settings** -- Configure an HTTPS proxy server if required by your network setup.
 

@@ -277,6 +277,10 @@ or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or bot
 Unloading data is useful, for example, when your ad-hoc analysis leads to
 valuable results, or when you trained a new model which you'd like to use in transformations.
 
+For Snowflake and BigQuery workspaces, you can also export a single table directly from the workspace schema to
+[File Storage](/storage/files/) via the Storage API. See
+[Exporting Workspace Tables to Files](/workspace/table-export/) for details.
+
 ### Data Persistency (beta)
 When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.
 

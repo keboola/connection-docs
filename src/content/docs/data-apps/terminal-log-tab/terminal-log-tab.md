@@ -11,7 +11,7 @@ The Terminal Log Tab in Keboola provides users with an **almost real-time** view
 While there is a slight delay of a few seconds, this feature is designed to offer valuable insights into the application’s runtime environment, 
 helping with monitoring and troubleshooting.
 
-![Screenshot - Hello World Data App](/data-apps/terminal-log-tab/hello-world.png)
+![Screenshot - Hello World App](/data-apps/terminal-log-tab/hello-world.png)
 
 ## Key Features
 The Terminal Log Tab includes the following features:

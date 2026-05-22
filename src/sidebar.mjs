@@ -72,6 +72,7 @@ export const sidebar = [
       { slug: "kai/use-cases" },
       { slug: "kai/best-practices" },
       { slug: "kai/security-and-privacy" },
+      { slug: "kai/python-client" },
     ],
   },
   {
@@ -124,7 +125,7 @@ export const sidebar = [
     ],
   },
   {
-    label: "Data Apps",
+    label: "Apps",
     collapsed: true,
     items: [
       { label: "Overview", slug: "data-apps" },
@@ -152,6 +153,7 @@ export const sidebar = [
         ],
       },
       { slug: "data-apps/backend-versions" },
+      { slug: "data-apps/storage-access" },
       { slug: "data-apps/terminal-log-tab" },
     ],
   },
@@ -160,6 +162,7 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "components" },
+      { slug: "components/running-jobs-in-parallel" },
       {
         label: "Data Source Connectors",
         collapsed: true,
@@ -384,6 +387,7 @@ export const sidebar = [
               { slug: "components/applications/triggers/deepnote-notebook-execution-trigger" },
             ],
           },
+          { slug: "components/applications/custom-python" },
           { slug: "components/applications/data-gateway" },
           {
             label: "AI",
