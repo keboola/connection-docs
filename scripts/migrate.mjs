@@ -705,14 +705,18 @@ function main() {
   console.log(`Transformed and wrote ${stats.mdFiles} markdown files.\n`);
 
   // ---- 2. Copy image files from content directories ----
+  // Content pages use a mix of absolute refs (`/foo/bar.png` → resolved against
+  // `public/`) and relative refs (`imgs/baz.png` → resolved against the page's
+  // own folder under `src/content/docs/`). Each image is copied to both
+  // locations so either form works after migration.
   console.log('Scanning for image files in content directories...');
   const imageFiles = findImageFiles();
   console.log(`Found ${imageFiles.length} image files.\n`);
 
   for (const absPath of imageFiles) {
     const rel = relative(ROOT, absPath);
-    const dest = join(DEST_DOCS, rel);
-    copyFileSafe(absPath, dest);
+    copyFileSafe(absPath, join(DEST_DOCS, rel));
+    copyFileSafe(absPath, join(DEST_PUBLIC, rel));
     stats.imagesCopied++;
   }
 
