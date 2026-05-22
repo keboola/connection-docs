@@ -14,7 +14,7 @@ Flows allow you to build automated data pipelines with conditional logic, branch
 
 ## Access Flows
 
-Navigate to **Flows > Conditional Flows > Create Flow**. After this step, you'll land directly in the Builder where you can start creating your first flow. Use the plus icon (+) to add different types of actions such as components, conditions, variables, notifications, and more - all of which are explained in detail later in this documentation.
+Navigate to **Flows > Create Flow**. You'll land directly in the Builder where you can start creating your first flow. Use the plus icon (+) to add different types of actions such as components, conditions, variables, notifications, and more — all of which are explained in detail later in this documentation.
 
 ## Build the Flow
 
@@ -22,9 +22,11 @@ Navigate to **Flows > Conditional Flows > Create Flow**. After this step, you'll
 
 - **Phases** group multiple tasks (components, variables, notifications).
 - **Tasks within a phase** run in parallel.
-- **After all tasks complete**, based on conditions it is determined which phase will be executed next.
+- **After all tasks in a phase complete**, based on conditions it is determined which phase will be executed next.
 - You can define **multiple condition rules** - only the first matched condition is executed.
 - **How to end a flow:** You can stop a flow at any point using the End Flow option in the ELSE path of a conditional condition. This is especially useful when none of your IF conditions are met and you want to avoid continuing to another phase.
+
+{% include warning.html content="If too many tasks are scheduled in a single phase, you may exceed the available [Storage job](/storage/jobs/) slots, causing delays in your flow's execution. Limiting the number of concurrent component jobs to 10 is recommended. The Keboola Support team can help you adjust parallel limits." %}
 
 ## Conditions
 
@@ -172,6 +174,19 @@ You can also create the notification inside of condition as a New Phase, name it
 {: .image-popup}
 ![](/flows/conditional-flows/notification-2.png)
 
+## Schedule and Automate
+
+Click on **Set Schedule** in your flow and select when you want the flow to run. You can select predefined intervals or set your own. Another option is to use triggers to initiate the run.
+
+**Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
+
+**Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
+
+{: .image-popup}
+![Set Schedule](/flows/set-schedule.png)
+
+*Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
+
 ## Check Run History
 
 Once your flow is running, you can track its progress and debug issues using the **All Runs** tab.
@@ -189,24 +204,4 @@ You can use this overview to validate whether your conditions behaved as expecte
 {: .image-popup}
 ![](/flows/conditional-flows/all-runs.png)
 
-## Comparison with Legacy Flows
 
-Flows and [Legacy Flows](/flows/flows-legacy/) are not interchangeable. You cannot convert one to the other. A migration tool is being planned to help with this in the future.
-
-There are differences between Flows and Legacy Flows at the moment, see the table below for more information:
-
-| Feature / Behavior | Flows                                           | Legacy Flows | Notes                                                                                                                |
-|-------------------|-------------------------------------------------------------|-------|----------------------------------------------------------------------------------------------------------------------|
-| Run Selected Tasks / Re-run Failed Tasks | 🚧 Not yet supported                               | ✅ Supported | Planned for GA. Workaround: duplicate the phase and skip conditionally. Set Retry.                                   |
-| Trigger Components (cross-project) | 🚧 Not yet supported                                         | ✅ Supported | Planned for Flows. You can't trigger another flow in Project B from Project A yet. |
-| CLI Support | 🚧 Not yet supported                                          | ✅ Supported | Not yet available via Keboola CLI.                                                             |
-| Templates Support | 🚧 Not yet supported                                          | ✅ Supported | Not available yet.                                                                              |
-| "Continue on Failure" toggle | 🔁 Replaced by Conditions | ✅ Simple UI toggle | Failure handling is expressed through conditions, offering more flexibility. (e.g., if status == 'error' then...)                  |
-
-## Migration
-
-We're planning an automatic migration from Legacy Flows to Flows to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same - but with added flexibility under the hood.
-
-## How to disable Flows
-
-Go to **Project Settings -> Features -> Conditional Flows** - use toggle to disable the feature.
