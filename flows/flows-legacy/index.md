@@ -5,8 +5,14 @@ permalink: /flows/flows-legacy/
 
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> This is the legacy Flow Builder. It is being replaced by <a href="/flows/">Conditional Flows</a>, which offer conditional logic, branching, retries, and more robust error handling. We recommend using Conditional Flows for all new workflows. An automatic migration from legacy Flows to Conditional Flows is planned.
+    <strong>Important:</strong> This is the legacy Flow Builder. It is being replaced by <a href="/flows/">Flows</a>, which offer conditional logic, branching, retries, and more robust error handling. We recommend using <a href="/flows/">Flows</a> for all new workflows. An automatic migration from legacy Flows to Flows is planned.
 </div>
+
+## Migration to Flows
+
+We're planning an automatic migration from Legacy Flows to [Flows](/flows/) to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same — but with added flexibility under the hood.
+
+News and more information about the migration will be posted to our [changelog](https://changelog.keboola.com/).
 
 * TOC
 {:toc}
