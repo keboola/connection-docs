@@ -191,7 +191,7 @@ items:
             title: Code Deployment
           - url: /data-apps/lock-streamlit-version/git-deployment/
             title: Git Repository Deployment
-      - url: /components/data-apps/backend-versions/
+      - url: /data-apps/backend-versions/
         title: Backend Versions
       - url: /data-apps/terminal-log-tab/
         title: Terminal Log Tab

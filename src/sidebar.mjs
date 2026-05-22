@@ -151,7 +151,7 @@ export const sidebar = [
           { slug: "data-apps/lock-streamlit-version/git-deployment" },
         ],
       },
-      { slug: "components/data-apps/backend-versions" },
+      { slug: "data-apps/backend-versions" },
       { slug: "data-apps/terminal-log-tab" },
     ],
   },
