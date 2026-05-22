@@ -1228,3 +1228,223 @@ nav.sidebar {
   animation: none !important;
   mix-blend-mode: normal !important;
 }
+
+/* ─────────────────────────────────────────────────────────────────
+   Ask Kai chat drawer
+   ───────────────────────────────────────────────────────────────── */
+#ask-kai-drawer {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  inset: 0;
+  color: var(--fg-1);
+}
+#ask-kai-drawer::backdrop {
+  background: rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(2px);
+}
+#ask-kai-drawer .ak-shell {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 100vw);
+  background: var(--bg-1);
+  border-left: 1px solid var(--border-1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.18);
+}
+#ask-kai-drawer[open] .ak-shell {
+  animation: ak-slide-in 180ms ease-out;
+}
+@keyframes ak-slide-in {
+  from { transform: translateX(8px); opacity: 0.6; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+.ak-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-1);
+  background: var(--bg-1);
+  flex-shrink: 0;
+}
+.ak-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--fg-1);
+}
+.ak-spark { font-size: 16px; }
+.ak-close {
+  border: none;
+  background: transparent;
+  color: var(--fg-3);
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+.ak-close:hover { background: var(--bg-2); color: var(--fg-1); }
+.ak-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ak-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 0;
+}
+.ak-empty-lede {
+  color: var(--fg-3);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+.ak-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ak-suggestion {
+  text-align: left;
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  color: var(--fg-2);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+  font-family: inherit;
+}
+.ak-suggestion:hover {
+  border-color: var(--kbc-blue-450);
+  background: var(--kbc-blue-100);
+  color: var(--fg-1);
+}
+.ak-msg { display: flex; }
+.ak-msg-user { justify-content: flex-end; }
+.ak-msg-assistant { justify-content: flex-start; }
+.ak-bubble {
+  max-width: 92%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  word-wrap: break-word;
+}
+.ak-msg-user .ak-bubble {
+  background: var(--kbc-blue-500);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.ak-msg-user .ak-bubble p { color: #fff; margin: 0; }
+.ak-msg-assistant .ak-bubble {
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  color: var(--fg-2);
+  border-bottom-left-radius: 4px;
+}
+.ak-msg-assistant .ak-bubble p { margin: 0 0 6px; }
+.ak-msg-assistant .ak-bubble p:last-child { margin-bottom: 0; }
+.ak-msg-assistant .ak-bubble a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ak-msg-assistant .ak-bubble a:hover { color: var(--link-hover); }
+.ak-msg-assistant .ak-bubble code {
+  background: var(--kbc-blue-100);
+  color: var(--kbc-blue-700);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.92em;
+  font-family: var(--font-mono);
+}
+.ak-error { color: var(--kbc-red-700); margin: 0; }
+.ak-typing {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 4px;
+}
+.ak-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fg-4);
+  animation: ak-typing 1.2s ease-in-out infinite;
+}
+.ak-typing span:nth-child(2) { animation-delay: 0.15s; }
+.ak-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes ak-typing {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+.ak-input {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--border-1);
+  background: var(--bg-1);
+}
+.ak-input textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid var(--border-1);
+  background: var(--bg-1);
+  color: var(--fg-1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 40px;
+  max-height: 160px;
+  outline: none;
+  transition: border-color 0.12s;
+}
+.ak-input textarea:focus { border-color: var(--kbc-blue-500); }
+.ak-send {
+  background: var(--kbc-blue-500);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, opacity 0.12s;
+}
+.ak-send:hover { background: var(--kbc-blue-600); }
+.ak-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Make the page-level Ask Kai widget actually look clickable. */
+.b-ask { cursor: pointer; }
+.b-ask:hover { border-color: var(--kbc-blue-450); }
+
+@media (max-width: 600px) {
+  #ask-kai-drawer .ak-shell { width: 100vw; }
+}

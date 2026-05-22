@@ -1,0 +1,267 @@
+---
+/**
+ * AskKaiDrawer.astro
+ *
+ * Site-wide chat drawer for the "Ask Kai" widget. Rendered once on every
+ * page via Head.astro. Opens when:
+ *   - the page-level Ask Kai widget (.b-ask, .b-ask-btn) is clicked
+ *   - the sidebar "Ask Kai about these docs" entry is clicked
+ *   - the user presses ⌘+/  (or Ctrl+/ on Windows/Linux)
+ *
+ * Posts each user message to /api/chat and renders the streamed reply.
+ * Session id is held in memory only (resets on reload / new tab).
+ */
+---
+
+<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs">
+  <div class="ak-shell">
+    <header class="ak-header">
+      <div class="ak-title">
+        <span class="ak-spark" aria-hidden="true">✨</span>
+        <span>Ask Kai</span>
+      </div>
+      <button type="button" class="ak-close" aria-label="Close" data-ask-kai-close>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <section class="ak-messages" id="ak-messages" aria-live="polite">
+      <div class="ak-empty" data-ask-kai-empty>
+        <p class="ak-empty-lede">Ask anything about Keboola — I'll search the docs and cite the pages I use.</p>
+        <div class="ak-suggestions">
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I set up a flow with conditional steps?</button>
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>What backends does Keboola Storage support?</button>
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I deploy a Streamlit data app?</button>
+        </div>
+      </div>
+    </section>
+
+    <form class="ak-input" id="ak-form" autocomplete="off">
+      <textarea
+        id="ak-input"
+        name="message"
+        placeholder="Ask a question about the docs…"
+        rows="1"
+        required
+        aria-label="Your question"
+      ></textarea>
+      <button type="submit" class="ak-send" id="ak-send" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </div>
+</dialog>
+
+<script is:inline>
+  (function () {
+    var drawer = /** @type {HTMLDialogElement} */ (document.getElementById('ask-kai-drawer'));
+    if (!drawer) return;
+
+    var form = /** @type {HTMLFormElement} */ (document.getElementById('ak-form'));
+    var input = /** @type {HTMLTextAreaElement} */ (document.getElementById('ak-input'));
+    var sendBtn = /** @type {HTMLButtonElement} */ (document.getElementById('ak-send'));
+    var messages = /** @type {HTMLElement} */ (document.getElementById('ak-messages'));
+
+    /** @type {string|null} */ var sessionId = null;
+    /** @type {AbortController|null} */ var inflight = null;
+
+    function open() {
+      if (!drawer.open) drawer.showModal();
+      setTimeout(function () { input.focus(); }, 30);
+    }
+    function close() {
+      if (inflight) inflight.abort();
+      if (drawer.open) drawer.close();
+    }
+
+    function autoResize() {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 160) + 'px';
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        }[c];
+      });
+    }
+
+    // Minimal markdown renderer: paragraphs, inline code, bold, italic, and
+    // [text](href) links. Anything fancier and we'll pull in marked.
+    function renderMarkdown(md) {
+      var html = escapeHtml(md);
+      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      html = html.replace(
+        /\[([^\]]+)\]\(([^)]+)\)/g,
+        function (_, label, href) {
+          var safe = String(href).replace(/^javascript:/i, '#');
+          return '<a href="' + safe + '" target="_blank" rel="noopener">' + label + '</a>';
+        }
+      );
+      html = html
+        .split(/\n{2,}/)
+        .map(function (p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; })
+        .join('');
+      return html;
+    }
+
+    function appendUser(text) {
+      var empty = messages.querySelector('[data-ask-kai-empty]');
+      if (empty) empty.remove();
+      var div = document.createElement('div');
+      div.className = 'ak-msg ak-msg-user';
+      div.innerHTML = '<div class="ak-bubble"><p>' + escapeHtml(text) + '</p></div>';
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function appendAssistantPlaceholder() {
+      var div = document.createElement('div');
+      div.className = 'ak-msg ak-msg-assistant';
+      div.innerHTML =
+        '<div class="ak-bubble">' +
+        '<div class="ak-typing"><span></span><span></span><span></span></div>' +
+        '</div>';
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div.querySelector('.ak-bubble');
+    }
+
+    async function send(text) {
+      if (!text.trim() || inflight) return;
+      appendUser(text);
+      input.value = '';
+      autoResize();
+      sendBtn.disabled = true;
+
+      var bubble = appendAssistantPlaceholder();
+      var accumulated = '';
+      inflight = new AbortController();
+
+      try {
+        var res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ message: text, sessionId: sessionId }),
+          signal: inflight.signal,
+        });
+        if (!res.ok || !res.body) throw new Error('Network error (' + res.status + ')');
+
+        var reader = res.body.getReader();
+        var decoder = new TextDecoder();
+        var buffer = '';
+
+        // Replace the typing indicator the moment we start receiving.
+        var started = false;
+
+        while (true) {
+          var chunk = await reader.read();
+          if (chunk.done) break;
+          buffer += decoder.decode(chunk.value, { stream: true });
+          var lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            if (!line.startsWith('data: ')) continue;
+            var payload;
+            try {
+              payload = JSON.parse(line.slice(6));
+            } catch (_) {
+              continue;
+            }
+            if (payload.type === 'session' && payload.sessionId) {
+              sessionId = payload.sessionId;
+            } else if (payload.type === 'text-delta') {
+              if (!started) {
+                bubble.innerHTML = '<div class="ak-content"></div>';
+                started = true;
+              }
+              accumulated += payload.text;
+              bubble.querySelector('.ak-content').innerHTML = renderMarkdown(accumulated);
+              messages.scrollTop = messages.scrollHeight;
+            } else if (payload.type === 'error') {
+              bubble.innerHTML =
+                '<p class="ak-error">' + escapeHtml(payload.message) + '</p>';
+            }
+          }
+        }
+      } catch (err) {
+        if (err && err.name !== 'AbortError') {
+          bubble.innerHTML =
+            '<p class="ak-error">Sorry — request failed: ' +
+            escapeHtml(err.message || String(err)) +
+            '</p>';
+        }
+      } finally {
+        inflight = null;
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    }
+
+    // ─── Wire triggers ───────────────────────────────────────────────
+    document.addEventListener('click', function (e) {
+      var t = /** @type {HTMLElement} */ (e.target);
+      if (!t) return;
+      // Open: the per-page Ask Kai widget (whole row is clickable for ergonomics)
+      if (t.closest('.b-ask')) {
+        e.preventDefault();
+        open();
+        return;
+      }
+      // Close button inside the drawer
+      if (t.closest('[data-ask-kai-close]')) {
+        e.preventDefault();
+        close();
+        return;
+      }
+      // Click outside the shell (on the backdrop) closes
+      if (t === drawer) {
+        close();
+        return;
+      }
+      // Suggestion chip
+      var suggestion = t.closest('[data-ask-kai-prompt]');
+      if (suggestion) {
+        e.preventDefault();
+        send(suggestion.textContent || '');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      // Open with ⌘+/  (or Ctrl+/)
+      if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+        e.preventDefault();
+        open();
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      send(input.value);
+    });
+
+    // Enter to send, Shift+Enter for newline
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    });
+    input.addEventListener('input', autoResize);
+  })();
+</script>
