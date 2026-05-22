@@ -87,6 +87,20 @@ async function main() {
   console.log(`MCP URL:        ${mcpUrl}`);
   console.log(`Existing state: ${existing ? STATE_FILE : '(none)'}`);
 
+  // 0. Environment — the runtime sandbox the agent operates in. Required
+  //    by sessions.create(). One per project is fine; we reuse if it exists.
+  console.log('\n[0/2] Creating / reusing environment…');
+  let environmentId = existing?.environmentId || null;
+  if (environmentId) {
+    const env = await client.beta.environments.retrieve(environmentId).catch(() => null);
+    if (!env) environmentId = null;
+  }
+  if (!environmentId) {
+    const env = await client.beta.environments.create({ name: 'keboola-docs-env' });
+    environmentId = env.id;
+  }
+  console.log(`    environment id: ${environmentId}`);
+
   // 1. Vault — only needed if the MCP server requires a bearer token.
   let vaultId = null;
   if (mcpBearer) {
@@ -136,12 +150,19 @@ async function main() {
     console.log(`    created agent id: ${agentId}`);
   }
 
-  const state = { agentId, vaultId, mcpUrl, updatedAt: new Date().toISOString() };
+  const state = {
+    agentId,
+    environmentId,
+    vaultId,
+    mcpUrl,
+    updatedAt: new Date().toISOString(),
+  };
   writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 
   console.log('\nDone. Set these on the Vercel project (keboola-docs-beacon):');
   console.log(`  ANTHROPIC_API_KEY=<your key>`);
   console.log(`  KAI_AGENT_ID=${agentId}`);
+  console.log(`  KAI_ENVIRONMENT_ID=${environmentId}`);
   if (vaultId) console.log(`  KAI_VAULT_ID=${vaultId}`);
   console.log('\nState written to .agent.json (gitignored).');
 }

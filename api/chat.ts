@@ -76,6 +76,7 @@ async function handleLive(
 ) {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
   const agentId = process.env.KAI_AGENT_ID!;
+  const environmentId = process.env.KAI_ENVIRONMENT_ID!;
   const vaultId = process.env.KAI_VAULT_ID || null;
 
   setupSse(res);
@@ -85,6 +86,7 @@ async function handleLive(
   if (!activeSessionId) {
     const session = await client.beta.sessions.create({
       agent: agentId,
+      environment_id: environmentId,
       ...(vaultId ? { vault_ids: [vaultId] } : {}),
     } as any);
     activeSessionId = session.id;
@@ -158,9 +160,13 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     return;
   }
 
-  // Live mode requires the API key + an agent id. A vault id is only needed
-  // when the MCP server is bearer-protected.
-  const live = !!(process.env.KAI_AGENT_ID && process.env.ANTHROPIC_API_KEY);
+  // Live mode requires the API key, an agent id, and an environment id.
+  // A vault id is only needed when the MCP server is bearer-protected.
+  const live = !!(
+    process.env.KAI_AGENT_ID &&
+    process.env.KAI_ENVIRONMENT_ID &&
+    process.env.ANTHROPIC_API_KEY
+  );
 
   try {
     if (live) {
