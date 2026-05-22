@@ -52,6 +52,10 @@ Click the **KAI** button in your project's top navigation bar, or use keyboard s
 
 When Kai wants to modify your project, you'll see a tool approval prompt. Review what Kai wants to do before approving. All actions are logged in your project's audit trail.
 
+You can also click **Always allow** directly in the approval dialog to skip future confirmations for that specific tool.
+
+For more granular control, see [Tool Permissions](/kai/settings/#tool-permissions) in Kai Settings.
+
 ## Contextual Awareness & Follow Mode
 
 Kai is aware of what you're currently viewing in the Keboola UI. Every message you send includes your current page location, so Kai understands your context without needing explicit references.
@@ -101,5 +105,6 @@ Each user receives **150 turns (messages) per month per project** on contracted 
 
 ## Next Steps
 
+- [Kai Settings](/kai/settings/) — Configure Tool Permissions and System Instructions
 - [Use Cases & Examples](/kai/use-cases/)
 - [Best Practices](/kai/best-practices/)

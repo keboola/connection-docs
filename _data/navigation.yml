@@ -77,11 +77,17 @@ items:
       - url: /kai/getting-started/
         title: Getting Started
 
+      - url: /kai/settings/
+        title: Settings
+
       - url: /kai/use-cases/
         title: Use Cases & Examples
 
       - url: /kai/best-practices/
         title: Best Practices
+
+      - url: /kai/security-and-privacy/
+        title: Security & Privacy
 
   - url: /flows/
     title: Flows

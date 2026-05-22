@@ -120,11 +120,7 @@ The platform limits may be **soft** limits or **hard** limits. They are also lik
 development continues and often can be mitigated by a good project design. Contact us for advice if you are 
 concerned about any of them!
 
-For example, the [Redshift backend](/storage/#backend-properties) allows the maximum table cell size of 64kB. This
-is a hard limit and nothing can be done about it as long as Redshift is a hard requirement (the Snowflake backend 
-can take larger cells). 
-
-As another example, you should not have more than 200 tables in a single bucket. This is a soft limit related to
+For example, you should not have more than 200 tables in a single bucket. This is a soft limit related to
 how we believe the Storage component should be used. Nothing prevents you from exceeding that limit but the 
 component performance may degrade. 
 
