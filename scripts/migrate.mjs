@@ -61,6 +61,8 @@ const stats = {
   overviewHeadingsRemoved: 0,
   redirectToPagesSkipped: 0,
   redirectFromAliasesInjected: 0,
+  telemetryTablesExpanded: 0,
+  jekyllAssetsCopied: 0,
 };
 
 // ---------------------------------------------------------------------------
@@ -363,6 +365,120 @@ function convertCommentTags(body) {
  * Apply all body transformations in the correct order.
  */
 /**
+ * Lazy-load `_data/telemetry_tables.yml`. Returns the parsed object or null
+ * if the file isn't present.
+ */
+let _telemetryTablesCache;
+function loadTelemetryTables() {
+  if (_telemetryTablesCache !== undefined) return _telemetryTablesCache;
+  const p = join(ROOT, '_data', 'telemetry_tables.yml');
+  if (!existsSync(p)) {
+    _telemetryTablesCache = null;
+    return null;
+  }
+  _telemetryTablesCache = yaml.load(readFileSync(p, 'utf-8'));
+  return _telemetryTablesCache;
+}
+
+/**
+ * Render one telemetry table entry to markdown. Mirrors the Liquid template
+ * at `_includes/telemetry-table.html`.
+ */
+function renderTelemetryTable(t) {
+  const lines = [];
+  lines.push(`### ${t.id}`);
+  lines.push('');
+  lines.push(t.description);
+  if (t.is_full_load) {
+    lines.push('');
+    lines.push('*Note: The table is always extracted in full.*');
+  }
+  if (t.org_mode_note) {
+    lines.push('');
+    lines.push(`***Note:** ${t.org_mode_note}*`);
+  }
+  if (t.usage_breakdown) {
+    lines.push('');
+    lines.push('`usage_breakdown` data sources (which tables serve as sources for the results):');
+    for (const item of t.usage_breakdown) {
+      const src = item.source ? `\`${item.source}\`` : '';
+      lines.push(`* \`${item.name}\` - ${src} (${item.detail})`);
+    }
+  }
+  lines.push('');
+  lines.push('| **Column** | **Description** | **Example** |');
+  lines.push('|---|---|---|');
+  for (const col of t.columns) {
+    const pk = col.pk ? ' (PK)' : '';
+    lines.push(`| \`${col.name}\`${pk} | ${col.description} | \`${col.example}\` |`);
+  }
+  if (t.note) {
+    lines.push('');
+    lines.push(t.note);
+  }
+  if (t.security_operations) {
+    lines.push('');
+    lines.push('#### Security event operations');
+    lines.push('');
+    for (const op of t.security_operations) lines.push(`|\`${op}\``);
+    lines.push('');
+    lines.push('#### Operation parameters');
+    lines.push('');
+    for (const param of t.operation_parameters) {
+      lines.push(`| ${param.condition}: | ${param.values} |`);
+    }
+  }
+  return lines.join('\n');
+}
+
+/**
+ * Expand the small set of Jekyll Liquid patterns used on the Telemetry Data
+ * connector page. The page drives its table sections from YAML + an include
+ * template. We resolve everything statically so the output is plain markdown:
+ *
+ *   {% assign sorted_tables = site.data.telemetry_tables.tables | sort: "id" %}
+ *   → noop (we sort once below)
+ *
+ *   {% for table in sorted_tables %}{% if table.mode == "X" %}
+ *   {% include telemetry-table.html table=table %}
+ *   {% endif %}{% endfor %}
+ *   → concatenated markdown rendering of each matching table
+ *
+ *   {{ site.data.telemetry_tables | jsonify }}
+ *   → JSON string for the interactive diagram-viewer.js to consume
+ */
+function expandTelemetryTableIncludes(body) {
+  if (!body.includes('telemetry-table.html') && !body.includes('site.data.telemetry_tables')) {
+    return body;
+  }
+  const data = loadTelemetryTables();
+  if (!data) return body;
+
+  const sorted = [...(data.tables || [])].sort((a, b) => String(a.id).localeCompare(String(b.id)));
+
+  // Drop the {% assign sorted_tables = ... %} line — it has no effect after expansion.
+  body = body.replace(/\{%-?\s*assign\s+sorted_tables\s*=[^%]+%\}\s*\n?/g, '');
+
+  // Replace mode-filtered loops with concatenated rendered tables.
+  body = body.replace(
+    /\{%-?\s*for\s+table\s+in\s+sorted_tables\s*-?%\}\s*\{%-?\s*if\s+table\.mode\s*==\s*"([^"]+)"\s*-?%\}\s*\{%-?\s*include\s+telemetry-table\.html\s+table=table\s*-?%\}\s*\{%-?\s*endif\s*-?%\}\s*\{%-?\s*endfor\s*-?%\}/g,
+    (_match, mode) => {
+      const filtered = sorted.filter((t) => t.mode === mode);
+      stats.telemetryTablesExpanded += filtered.length;
+      return filtered.map(renderTelemetryTable).join('\n\n');
+    }
+  );
+
+  // Inline the full YAML as JSON for the diagram viewer's window.TELEMETRY_DIAGRAM.
+  body = body.replace(
+    /\{\{\s*site\.data\.telemetry_tables\s*\|\s*jsonify\s*\}\}/g,
+    () => JSON.stringify(data)
+  );
+
+  return body;
+}
+
+/**
  * Strip a leading `## Overview` H2 heading. Only removes when `## Overview`
  * is the first H2 in the body — a Jekyll-era organizational wrapper that's
  * redundant under Starlight's page-title + intro lede convention. A mid-page
@@ -389,6 +505,9 @@ function transformBody(body) {
   body = convertWarningIncludes(body);
   body = convertPublicBetaWarning(body);
   body = convertPrivateBetaWarning(body);
+  // Expand Jekyll YAML+include patterns (telemetry tables) before stripRawTags
+  // so the `{% %}` blocks are resolved to plain markdown.
+  body = expandTelemetryTableIncludes(body);
   // image-popup must come before generic kramdown attrs
   // (since {: .image-popup} also matches the generic pattern)
   body = removeImagePopup(body);
@@ -531,6 +650,25 @@ function copyFileSafe(src, dest) {
 // Main
 // ---------------------------------------------------------------------------
 
+/**
+ * Mirror `assets/js/*.js` from the Jekyll source into `public/assets/js/`
+ * so that pages embedding `<script src="/assets/js/...">` continue to work.
+ * (The `assets/` tree is excluded from the markdown walk via SKIP_DIRS, so
+ * its files don't get auto-copied with content images.)
+ */
+function copyJekyllAssetsJs() {
+  const srcDir = join(ROOT, 'assets', 'js');
+  if (!existsSync(srcDir)) return;
+  for (const name of readdirSync(srcDir)) {
+    if (extname(name) !== '.js') continue;
+    const src = join(srcDir, name);
+    const dest = join(DEST_PUBLIC, 'assets', 'js', name);
+    copyFileSafe(src, dest);
+    stats.jekyllAssetsCopied++;
+    console.log(`Copied: assets/js/${name} → public/assets/js/${name}`);
+  }
+}
+
 function main() {
   console.log('=== Jekyll → Starlight migration ===');
   console.log(`Root:        ${ROOT}`);
@@ -608,6 +746,10 @@ function main() {
     console.warn(`WARNING: ${faviconSrc} not found — skipping.`);
   }
 
+  // ---- 4. Mirror Jekyll's /assets/js/ so pages that reference
+  //         `<script src="/assets/js/foo.js">` still work in Astro.
+  copyJekyllAssetsJs();
+
   // ---- Summary ----
   console.log('\n=== Migration Summary ===');
   console.log(`  Markdown files processed:     ${stats.mdFiles}`);
@@ -629,6 +771,8 @@ function main() {
   console.log(`  leading ## Overview removed:  ${stats.overviewHeadingsRemoved}`);
   console.log(`  redirect_to stubs skipped:    ${stats.redirectToPagesSkipped}`);
   console.log(`  redirect_from aliases added:  ${stats.redirectFromAliasesInjected}`);
+  console.log(`  telemetry tables expanded:    ${stats.telemetryTablesExpanded}`);
+  console.log(`  jekyll assets/js copied:      ${stats.jekyllAssetsCopied}`);
   console.log('\nDone.');
 }
 
