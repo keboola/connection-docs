@@ -605,6 +605,9 @@ items:
 
       - url: /storage/data-streams/
         title: Data Streams
+        items:
+          - url: /storage/data-streams/opentelemetry/
+            title: OpenTelemetry (OTLP)
 
       - url: /storage/files/
         title: Files
