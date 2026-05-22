@@ -7,8 +7,9 @@
    Starlight's CSS variables.
    ───────────────────────────────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts are loaded via <link> tags in src/components/Head.astro so they don't
+   block CSS parsing on every page navigation (a render-blocking @import here
+   was the cause of inter-page style flicker reintroduced by the Beacon redesign). */
 
 /* ───────── Keboola Design System tokens ───────── */
 :root,
@@ -489,9 +490,6 @@ nav.sidebar {
   margin-bottom: 16px;
   padding-top: 0;
   border-top: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 .sl-markdown-content h2 a.sl-anchor-link,
 .sl-markdown-content h3 a.sl-anchor-link {

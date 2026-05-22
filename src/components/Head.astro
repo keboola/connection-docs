@@ -13,6 +13,14 @@ import { ClientRouter } from 'astro:transitions';
     mix-blend-mode: normal !important;
   }
 </style>
+{/* Preconnect + non-blocking font load. Replaces a @import in custom.css that
+    was re-evaluating on every view transition and causing visible style flicker. */}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+/>
 <Default {...Astro.props}><slot /></Default>
 <ClientRouter fallback="swap" />
 <script is:inline>

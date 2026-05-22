@@ -98,8 +98,28 @@ function isImperativeFirstWord(text) {
   return IMPERATIVE_VERBS.has(firstWord(text));
 }
 
+/** Returns true if any descendant of node is `inlineCode` or `code`. */
+function containsCode(node) {
+  let found = false;
+  visit(node, (child) => {
+    if (child.type === 'inlineCode' || child.type === 'code') {
+      found = true;
+      return false; // stop walking
+    }
+  });
+  return found;
+}
+
 /** ---------------------------------------------------------------------
  *  1) First short ul → beacon-check-grid
+ *
+ *  Promotes the page's first short unordered list (before any H2) to the
+ *  two-column green-check "advantage" grid. Only fires when the list reads
+ *  like a feature/benefit list:
+ *    - 3+ short (≤90 char) items
+ *    - no inline code in any item (content lists like
+ *      `- Adform connector with the \`Campaigns\` config` should NOT match)
+ *    - no embedded links (advantage lists are typically standalone phrases)
  *  ------------------------------------------------------------------- */
 function transformAdvantageList(tree) {
   let foundHeading = false;
@@ -117,6 +137,31 @@ function transformAdvantageList(tree) {
         return txt.length > 0 && txt.length <= ADVANTAGE_MAX_ITEM_LEN;
       });
       if (!allShort) continue;
+
+      // Each item must read like a feature/benefit, not an entity name or
+      // mid-sentence continuation:
+      //   - at least 2 words (filters out noun-only lists like
+      //     "Activities / Customers / Subscriptions")
+      //   - starts with an uppercase letter or digit (filters out lists that
+      //     continue a sentence from the preceding paragraph)
+      const itemsLookLikeBenefits = node.children.every((li) => {
+        const txt = mdastText(li).trim();
+        if (!/^[A-Z0-9]/.test(txt)) return false;
+        if (!/\s/.test(txt)) return false;
+        return true;
+      });
+      if (!itemsLookLikeBenefits) continue;
+
+      // Reject lists that look like in-content references: anything with
+      // inline code or links is almost certainly not a marketing-style
+      // advantage list.
+      let anyCode = false;
+      let anyLink = false;
+      visit(node, (child) => {
+        if (child.type === 'inlineCode' || child.type === 'code') anyCode = true;
+        if (child.type === 'link') anyLink = true;
+      });
+      if (anyCode || anyLink) continue;
       addClass(node, 'beacon-check-grid');
       break;
     }
