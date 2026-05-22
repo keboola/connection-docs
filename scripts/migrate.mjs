@@ -13,6 +13,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, existsSync } from 'fs';
 import { join, dirname, extname, relative, resolve } from 'path';
+import yaml from 'js-yaml';
 
 // ---------------------------------------------------------------------------
 // Configuration
@@ -57,6 +58,9 @@ const stats = {
   kramdownAttrsRemoved: 0,
   rawTagsStripped: 0,
   commentTagsConverted: 0,
+  overviewHeadingsRemoved: 0,
+  redirectToPagesSkipped: 0,
+  redirectFromAliasesInjected: 0,
 };
 
 // ---------------------------------------------------------------------------
@@ -358,6 +362,26 @@ function convertCommentTags(body) {
 /**
  * Apply all body transformations in the correct order.
  */
+/**
+ * Strip a leading `## Overview` H2 heading. Only removes when `## Overview`
+ * is the first H2 in the body — a Jekyll-era organizational wrapper that's
+ * redundant under Starlight's page-title + intro lede convention. A mid-page
+ * `## Overview` (i.e. preceded by other H2s) is preserved.
+ */
+function stripLeadingOverviewHeading(body) {
+  const lines = body.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    if (!/^## /.test(lines[i])) continue;
+    if (/^##\s+Overview\s*$/.test(lines[i])) {
+      lines.splice(i, 1);
+      if (i < lines.length && lines[i] === '') lines.splice(i, 1);
+      stats.overviewHeadingsRemoved++;
+    }
+    break;
+  }
+  return lines.join('\n');
+}
+
 function transformBody(body) {
   body = removeTocMarkers(body);
   body = convertHighlightBlocks(body);
@@ -372,6 +396,7 @@ function transformBody(body) {
   // Strip residual Liquid tags that are no-ops in Astro
   body = stripRawTags(body);
   body = convertCommentTags(body);
+  body = stripLeadingOverviewHeading(body);
   return body;
 }
 
@@ -379,10 +404,103 @@ function transformBody(body) {
 // Full file transform
 // ---------------------------------------------------------------------------
 
-function transformFile(content) {
+/**
+ * Inject extra entries into the frontmatter's `redirect_from:` list.
+ * If a `redirect_from:` block exists, appends entries at the end of its list.
+ * If not, appends a new `redirect_from:` block at the end of the frontmatter.
+ */
+function injectRedirectAliases(fmRaw, aliases) {
+  if (!aliases || aliases.length === 0) return fmRaw;
+
+  const lines = fmRaw.split('\n');
+  let listStart = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^redirect_from:\s*$/.test(lines[i])) {
+      listStart = i;
+      break;
+    }
+  }
+
+  const aliasLines = aliases.map((a) => `  - ${a}`);
+  if (listStart >= 0) {
+    let endIdx = listStart + 1;
+    while (endIdx < lines.length && /^\s+-\s/.test(lines[endIdx])) endIdx++;
+    lines.splice(endIdx, 0, ...aliasLines);
+  } else {
+    // Drop any trailing blank line so the new block sits flush
+    while (lines.length && lines[lines.length - 1] === '') lines.pop();
+    lines.push('redirect_from:', ...aliasLines);
+  }
+
+  stats.redirectFromAliasesInjected += aliases.length;
+  return lines.join('\n');
+}
+
+/**
+ * Pre-scan all markdown files for `redirect_to:` frontmatter and build:
+ *   - aliasMap: target permalink → array of paths to append to its redirect_from
+ *   - skipPaths: absolute paths of files to skip writing (the redirect stubs)
+ *
+ * This replicates Jekyll's jekyll-redirect-from behavior for `redirect_to`,
+ * which the Astro redirect-from integration does not honor natively.
+ */
+function buildRedirectAliasMap(mdFiles) {
+  const aliasMap = new Map();
+  const skipPaths = new Set();
+
+  for (const absPath of mdFiles) {
+    const content = readFileSync(absPath, 'utf-8');
+    const { frontmatter } = splitFrontmatter(content);
+    if (!frontmatter) continue;
+
+    let fm;
+    try {
+      fm = yaml.load(frontmatter);
+    } catch {
+      continue;
+    }
+    if (!fm || typeof fm !== 'object' || !fm.redirect_to) continue;
+
+    const target = String(fm.redirect_to).replace(/\/$/, '') + '/';
+    const aliases = [];
+    if (fm.permalink) aliases.push(String(fm.permalink));
+    if (Array.isArray(fm.redirect_from)) {
+      for (const r of fm.redirect_from) aliases.push(String(r));
+    }
+
+    if (!aliasMap.has(target)) aliasMap.set(target, []);
+    aliasMap.get(target).push(...aliases);
+    skipPaths.add(absPath);
+  }
+
+  return { aliasMap, skipPaths };
+}
+
+/**
+ * Extract this file's permalink (with trailing slash) so we can look it up
+ * in the redirect alias map.
+ */
+function getPermalinkForLookup(frontmatter) {
+  if (!frontmatter) return null;
+  let fm;
+  try {
+    fm = yaml.load(frontmatter);
+  } catch {
+    return null;
+  }
+  if (!fm || typeof fm !== 'object' || !fm.permalink) return null;
+  return String(fm.permalink).replace(/\/$/, '') + '/';
+}
+
+function transformFile(content, aliases) {
   const { frontmatter, body } = splitFrontmatter(content);
 
-  const newFm = frontmatter ? transformFrontmatter(frontmatter) : '';
+  let fmToTransform = frontmatter;
+  if (frontmatter && aliases && aliases.length) {
+    fmToTransform = injectRedirectAliases(frontmatter, aliases);
+  }
+
+  const newFm = fmToTransform ? transformFrontmatter(fmToTransform) : '';
   const newBody = transformBody(body);
 
   if (newFm) {
@@ -424,10 +542,23 @@ function main() {
   const mdFiles = findMarkdownFiles();
   console.log(`Found ${mdFiles.length} markdown files to process.\n`);
 
+  // Pre-scan for redirect_to pages so we can skip them and fold their
+  // permalinks into the target page's redirect_from list.
+  const { aliasMap, skipPaths } = buildRedirectAliasMap(mdFiles);
+
   for (const absPath of mdFiles) {
+    if (skipPaths.has(absPath)) {
+      stats.redirectToPagesSkipped++;
+      continue;
+    }
     const rel = relative(ROOT, absPath);
     const content = readFileSync(absPath, 'utf-8');
-    const transformed = transformFile(content);
+
+    const { frontmatter } = splitFrontmatter(content);
+    const permalink = getPermalinkForLookup(frontmatter);
+    const aliases = permalink ? aliasMap.get(permalink) : null;
+
+    const transformed = transformFile(content, aliases);
     const dest = join(DEST_DOCS, rel);
     writeFileSafe(dest, transformed);
     stats.mdFiles++;
@@ -495,6 +626,9 @@ function main() {
   console.log(`  Kramdown attrs removed:       ${stats.kramdownAttrsRemoved}`);
   console.log(`  raw tags stripped:            ${stats.rawTagsStripped}`);
   console.log(`  comment tags converted:       ${stats.commentTagsConverted}`);
+  console.log(`  leading ## Overview removed:  ${stats.overviewHeadingsRemoved}`);
+  console.log(`  redirect_to stubs skipped:    ${stats.redirectToPagesSkipped}`);
+  console.log(`  redirect_from aliases added:  ${stats.redirectFromAliasesInjected}`);
   console.log('\nDone.');
 }
 
