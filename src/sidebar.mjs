@@ -68,8 +68,10 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "kai" },
       { slug: "kai/getting-started" },
+      { slug: "kai/settings" },
       { slug: "kai/use-cases" },
       { slug: "kai/best-practices" },
+      { slug: "kai/security-and-privacy" },
     ],
   },
   {
@@ -149,7 +151,7 @@ export const sidebar = [
           { slug: "data-apps/lock-streamlit-version/git-deployment" },
         ],
       },
-      { slug: "data-apps/backend-versions" },
+      { slug: "components/data-apps/backend-versions" },
       { slug: "data-apps/terminal-log-tab" },
     ],
   },
