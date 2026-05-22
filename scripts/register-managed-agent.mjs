@@ -2,14 +2,20 @@
 /**
  * register-managed-agent.mjs
  *
- * One-off setup script: creates a Claude Managed Agent + a vault holding the
- * docs MCP server bearer token, prints the IDs we need to set as Vercel env
- * vars on the keboola-docs-beacon project.
+ * One-off setup script: creates a Claude Managed Agent that points at the
+ * docs MCP server, prints the IDs we need to set as Vercel env vars on the
+ * keboola-docs-beacon project.
  *
  * Required env (load via `vercel env pull .env.local` or export inline):
  *   ANTHROPIC_API_KEY       — Anthropic API key
  *   DOCS_MCP_URL            — public Streamable HTTP URL of the docs MCP server
- *   DOCS_MCP_BEARER         — bearer token the MCP server expects
+ *
+ * Optional:
+ *   DOCS_MCP_BEARER         — bearer token for the MCP server. If set, a vault
+ *                              holding it is created and the script prints
+ *                              KAI_VAULT_ID. If unset, the MCP server is
+ *                              assumed to be open (no auth) and no vault is
+ *                              created.
  *
  * On success, writes the IDs to .agent.json (gitignored) so you can re-source
  * them and so a follow-up run can update instead of creating duplicates.
@@ -19,6 +25,10 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Anthropic from '@anthropic-ai/sdk';
+
+// Run via:
+//   node --env-file=.env.local scripts/register-managed-agent.mjs
+// Pull the env first with: vercel env pull .env.local --environment=production
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATE_FILE = resolve(__dirname, '..', '.agent.json');
@@ -34,7 +44,7 @@ function requireEnv(name) {
 
 const apiKey = requireEnv('ANTHROPIC_API_KEY');
 const mcpUrl = requireEnv('DOCS_MCP_URL');
-const mcpBearer = requireEnv('DOCS_MCP_BEARER');
+const mcpBearer = process.env.DOCS_MCP_BEARER || null;
 
 const client = new Anthropic({ apiKey });
 
@@ -77,22 +87,27 @@ async function main() {
   console.log(`MCP URL:        ${mcpUrl}`);
   console.log(`Existing state: ${existing ? STATE_FILE : '(none)'}`);
 
-  // 1. Vault holding the MCP bearer token.
-  console.log('\n[1/2] Creating / updating vault…');
-  const vault = existing?.vaultId
-    ? await client.beta.vaults.retrieve(existing.vaultId).catch(() => null)
-    : null;
-  const vaultId =
-    vault?.id ??
-    (await client.beta.vaults.create({ name: 'keboola-docs-mcp-vault' })).id;
-  console.log(`    vault id: ${vaultId}`);
+  // 1. Vault — only needed if the MCP server requires a bearer token.
+  let vaultId = null;
+  if (mcpBearer) {
+    console.log('\n[1/2] Creating / updating vault…');
+    const vault = existing?.vaultId
+      ? await client.beta.vaults.retrieve(existing.vaultId).catch(() => null)
+      : null;
+    vaultId =
+      vault?.id ??
+      (await client.beta.vaults.create({ name: 'keboola-docs-mcp-vault' })).id;
+    console.log(`    vault id: ${vaultId}`);
 
-  await client.beta.vaults.credentials.create(vaultId, {
-    type: 'static_bearer',
-    mcp_server_url: mcpUrl,
-    bearer_token: mcpBearer,
-  });
-  console.log('    stored static_bearer credential');
+    await client.beta.vaults.credentials.create(vaultId, {
+      type: 'static_bearer',
+      mcp_server_url: mcpUrl,
+      bearer_token: mcpBearer,
+    });
+    console.log('    stored static_bearer credential');
+  } else {
+    console.log('\n[1/2] Skipping vault — MCP server is open (no bearer).');
+  }
 
   // 2. Agent declaring the MCP server + tools.
   console.log('\n[2/2] Creating / updating agent…');
@@ -125,9 +140,9 @@ async function main() {
   writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 
   console.log('\nDone. Set these on the Vercel project (keboola-docs-beacon):');
-  console.log(`  KAI_AGENT_ID=${agentId}`);
-  console.log(`  KAI_VAULT_ID=${vaultId}`);
   console.log(`  ANTHROPIC_API_KEY=<your key>`);
+  console.log(`  KAI_AGENT_ID=${agentId}`);
+  if (vaultId) console.log(`  KAI_VAULT_ID=${vaultId}`);
   console.log('\nState written to .agent.json (gitignored).');
 }
 
