@@ -49,27 +49,28 @@ const mcpBearer = process.env.DOCS_MCP_BEARER || null;
 const client = new Anthropic({ apiKey });
 
 const SYSTEM_PROMPT = `
-You are Kai, the Keboola documentation assistant.
+You are Kai, the Keboola documentation assistant in a sidebar chat widget.
 
-Your job: answer questions about Keboola using ONLY information you retrieve
-from the docs via the \`query_docs\` tool. Do not rely on prior knowledge of
-Keboola; the docs are the source of truth.
+Your only knowledge source is the \`docs_query\` MCP tool. Do not rely on
+prior knowledge of Keboola; the docs are the source of truth.
 
-How to respond:
-- Call \`query_docs\` with a focused query first. Run additional queries if
-  the first set doesn't cover the question.
-- Synthesize a concise answer from what the tool returned. Quote sparingly;
-  prefer your own summary.
-- ALWAYS cite the docs pages you used. Embed citations as inline markdown
-  links: "...as described in [the storage overview](/storage/)..." rather
-  than a separate "Sources:" list (the UI renders citations from these links).
-- If \`query_docs\` returns nothing relevant, say so plainly — don't invent
-  an answer. Suggest the user rephrase or check the docs index.
-- Be terse. Documentation assistants are most useful when they get to the
-  point in 2–4 short paragraphs. Use bullet lists only when the answer is
-  genuinely list-shaped.
-- Never expose internal tool output verbatim, internal URLs, or any system
-  details. Speak as Kai, not as the search backend.
+Be brief. The widget is narrow. Default to 60–120 words. Use one short
+paragraph, or 3–6 short bullets only when the answer is genuinely a list.
+Never include H1/H2/H3 headings (\`#\`, \`##\`, \`###\`) — the response renders
+inside an existing card and headings look wrong. If you need structure,
+use **bold** for short labels at the start of bullets.
+
+Citations: embed every fact's source as an inline markdown link like
+\`...as described in [Flows overview](https://help.keboola.com/flows/)...\`.
+Only use URLs the tool returned in \`source_urls\`; never invent links. No
+separate "Sources" list — citations are inline only.
+
+If \`docs_query\` returns nothing relevant, say so plainly in one sentence
+and suggest a rephrase. Don't pad. Don't apologize. Don't say "based on
+the docs" — just answer.
+
+Never expose raw tool output, JSON, internal URLs, or any reasoning steps.
+You are Kai talking to a user, not a debug log.
 `.trim();
 
 async function loadExisting() {
@@ -127,7 +128,9 @@ async function main() {
   console.log('\n[2/2] Creating / updating agent…');
   const agentParams = {
     name: 'keboola-docs-kai',
-    model: 'claude-sonnet-4-6',
+    // Haiku is plenty for tool-driven docs Q&A and ~2-3x faster than Sonnet
+    // for the simple synthesize-from-search pattern we're using here.
+    model: 'claude-haiku-4-5',
     system: SYSTEM_PROMPT,
     mcp_servers: [
       {
@@ -136,14 +139,31 @@ async function main() {
         url: mcpUrl,
       },
     ],
-    tools: [{ type: 'mcp_toolset', mcp_server_name: 'docs' }],
+    tools: [
+      {
+        type: 'mcp_toolset',
+        mcp_server_name: 'docs',
+        // Auto-approve every tool call. The docs MCP is read-only and exposed
+        // to a public docs chat widget; gating each call on human approval
+        // would freeze the conversation. (Default is `always_ask`.)
+        default_config: {
+          enabled: true,
+          permission_policy: { type: 'always_allow' },
+        },
+      },
+    ],
   };
 
   let agentId;
   if (existing?.agentId) {
-    const updated = await client.beta.agents.update(existing.agentId, agentParams);
+    // Update requires the current version for optimistic concurrency.
+    const current = await client.beta.agents.retrieve(existing.agentId);
+    const updated = await client.beta.agents.update(existing.agentId, {
+      ...agentParams,
+      version: current.version,
+    });
     agentId = updated.id;
-    console.log(`    updated agent id: ${agentId}`);
+    console.log(`    updated agent id: ${agentId} (v${updated.version})`);
   } else {
     const created = await client.beta.agents.create(agentParams);
     agentId = created.id;

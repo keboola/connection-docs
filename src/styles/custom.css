@@ -1380,6 +1380,48 @@ nav.sidebar {
   font-family: var(--font-mono);
 }
 .ak-error { color: var(--kbc-red-700); margin: 0; }
+
+/* Rendered-markdown styling inside an assistant bubble. */
+.ak-msg-assistant .ak-bubble .ak-content > *:first-child { margin-top: 0; }
+.ak-msg-assistant .ak-bubble .ak-content > *:last-child  { margin-bottom: 0; }
+.ak-msg-assistant .ak-bubble .ak-content p { margin: 0 0 8px; }
+.ak-msg-assistant .ak-bubble .ak-content ul,
+.ak-msg-assistant .ak-bubble .ak-content ol {
+  margin: 0 0 8px;
+  padding-left: 20px;
+}
+.ak-msg-assistant .ak-bubble .ak-content li { margin: 2px 0; }
+.ak-msg-assistant .ak-bubble .ak-content li > p { margin: 0; }
+.ak-msg-assistant .ak-bubble .ak-content h1,
+.ak-msg-assistant .ak-bubble .ak-content h2,
+.ak-msg-assistant .ak-bubble .ak-content h3,
+.ak-msg-assistant .ak-bubble .ak-content h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 10px 0 4px;
+  color: var(--fg-1);
+}
+.ak-msg-assistant .ak-bubble .ak-content strong { color: var(--fg-1); }
+.ak-msg-assistant .ak-bubble .ak-content pre {
+  background: var(--bg-3);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  overflow-x: auto;
+  margin: 6px 0;
+}
+
+/* Progress indicator while the agent is still working. */
+.ak-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ak-progress-label {
+  font-size: 13px;
+  color: var(--fg-3);
+}
+
 .ak-typing {
   display: inline-flex;
   gap: 4px;

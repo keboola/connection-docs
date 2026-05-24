@@ -14,4 +14,6 @@ dist
 .astro
 .vercel
 .env*.local
+.env*.local.bak
 .agent.json
+.env.production

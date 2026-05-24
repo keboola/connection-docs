@@ -16,7 +16,7 @@
  *   data: {"type":"done"}
  */
 
-import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Anthropic from '@anthropic-ai/sdk';
 
 export const config = { runtime: 'nodejs' };
@@ -26,31 +26,39 @@ interface ChatRequest {
   sessionId?: string;
 }
 
-async function readJsonBody(req: IncomingMessage): Promise<ChatRequest> {
+async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
+  // @vercel/node parses JSON bodies for us if content-type matches.
+  if (req.body && typeof req.body === 'object') return req.body as ChatRequest;
+  if (typeof req.body === 'string' && req.body) return JSON.parse(req.body);
   const chunks: Buffer[] = [];
-  for await (const chunk of req) chunks.push(chunk as Buffer);
+  for await (const chunk of req as any) chunks.push(chunk as Buffer);
   const raw = Buffer.concat(chunks).toString('utf-8');
   if (!raw) return { message: '' };
   return JSON.parse(raw);
 }
 
-function writeSse(res: ServerResponse, data: unknown) {
+function writeSse(res: VercelResponse, data: unknown) {
   res.write(`data: ${JSON.stringify(data)}\n\n`);
 }
 
-function setupSse(res: ServerResponse) {
+function setupSse(res: VercelResponse) {
   res.statusCode = 200;
   res.setHeader('content-type', 'text/event-stream; charset=utf-8');
   res.setHeader('cache-control', 'no-cache, no-transform');
   res.setHeader('connection', 'keep-alive');
   res.setHeader('x-accel-buffering', 'no');
+  // CORS: lets `astro dev` on localhost hit the deployed function directly
+  // during local frontend iteration.
+  res.setHeader('access-control-allow-origin', '*');
+  res.setHeader('access-control-allow-headers', 'content-type');
+  res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
 }
 
 /**
  * Stub response while the MCP server isn't wired yet. Lets us deploy the UI
  * end-to-end and verify the widget plumbing works.
  */
-async function handleStub(message: string, res: ServerResponse) {
+async function handleStub(message: string, res: VercelResponse) {
   setupSse(res);
   writeSse(res, { type: 'session', sessionId: 'stub' });
 
@@ -72,7 +80,7 @@ async function handleStub(message: string, res: ServerResponse) {
 async function handleLive(
   message: string,
   sessionId: string | undefined,
-  res: ServerResponse,
+  res: VercelResponse,
 ) {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
   const agentId = process.env.KAI_AGENT_ID!;
@@ -108,9 +116,25 @@ async function handleLive(
 
   try {
     for await (const event of stream as AsyncIterable<any>) {
-      // Surface only assistant text to the browser. Tool calls and internal
-      // state stay inside the agent loop.
-      if (event.type === 'agent.message' && Array.isArray(event.content)) {
+      // Forward agent state changes as progress events so the drawer can
+      // show "Searching docs…" / "Reading sources…" instead of an opaque
+      // typing indicator. Managed Agents doesn't stream text deltas, so
+      // the final agent.message arrives in one chunk — but progress events
+      // along the way still feel much faster than waiting in silence.
+      if (event.type === 'agent.thinking') {
+        writeSse(res, { type: 'progress', label: 'Thinking…' });
+      } else if (event.type === 'agent.mcp_tool_use') {
+        const q = event.input?.query;
+        writeSse(res, {
+          type: 'progress',
+          label: q ? `Searching docs for "${String(q).slice(0, 60)}"…` : 'Searching docs…',
+        });
+      } else if (event.type === 'agent.mcp_tool_result') {
+        writeSse(res, {
+          type: 'progress',
+          label: event.is_error ? 'Tool returned an error' : 'Writing answer…',
+        });
+      } else if (event.type === 'agent.message' && Array.isArray(event.content)) {
         for (const block of event.content) {
           if (block.type === 'text' && typeof block.text === 'string') {
             writeSse(res, { type: 'text-delta', text: block.text });
@@ -134,7 +158,17 @@ async function handleLive(
   res.end();
 }
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // CORS preflight for cross-origin POSTs during local dev.
+  if (req.method === 'OPTIONS') {
+    res.statusCode = 204;
+    res.setHeader('access-control-allow-origin', '*');
+    res.setHeader('access-control-allow-headers', 'content-type');
+    res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+    res.setHeader('access-control-max-age', '86400');
+    res.end();
+    return;
+  }
   if (req.method !== 'POST') {
     res.statusCode = 405;
     res.setHeader('content-type', 'application/json');

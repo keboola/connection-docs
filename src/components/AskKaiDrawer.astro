@@ -58,210 +58,197 @@
   </div>
 </dialog>
 
-<script is:inline>
-  (function () {
-    var drawer = /** @type {HTMLDialogElement} */ (document.getElementById('ask-kai-drawer'));
-    if (!drawer) return;
+<script>
+  import { marked } from 'marked';
 
-    var form = /** @type {HTMLFormElement} */ (document.getElementById('ak-form'));
-    var input = /** @type {HTMLTextAreaElement} */ (document.getElementById('ak-input'));
-    var sendBtn = /** @type {HTMLButtonElement} */ (document.getElementById('ak-send'));
-    var messages = /** @type {HTMLElement} */ (document.getElementById('ak-messages'));
+  // GitHub-flavored markdown, soft line breaks, no auto-IDs on headings,
+  // and an open-in-new-tab + URL-scheme sanitizer for links.
+  marked.setOptions({ gfm: true, breaks: true });
+  marked.use({
+    renderer: {
+      link({ href, title, tokens }) {
+        const safe = /^(https?:|\/|#|mailto:)/i.test(href) ? href : '#';
+        const text = this.parser.parseInline(tokens);
+        const titleAttr = title ? ` title="${title}"` : '';
+        const ext = /^https?:/i.test(safe);
+        return `<a href="${safe}"${titleAttr}${ext ? ' target="_blank" rel="noopener"' : ''}>${text}</a>`;
+      },
+    },
+  });
 
-    /** @type {string|null} */ var sessionId = null;
-    /** @type {AbortController|null} */ var inflight = null;
+  const drawer = document.getElementById('ask-kai-drawer') as HTMLDialogElement | null;
+  if (drawer) {
+    const form = document.getElementById('ak-form') as HTMLFormElement;
+    const input = document.getElementById('ak-input') as HTMLTextAreaElement;
+    const sendBtn = document.getElementById('ak-send') as HTMLButtonElement;
+    const messages = document.getElementById('ak-messages') as HTMLElement;
 
-    function open() {
+    let sessionId: string | null = null;
+    let inflight: AbortController | null = null;
+
+    const openDrawer = (prefill?: string) => {
       if (!drawer.open) drawer.showModal();
-      setTimeout(function () { input.focus(); }, 30);
-    }
-    function close() {
-      if (inflight) inflight.abort();
+      setTimeout(() => {
+        if (prefill !== undefined) {
+          input.value = prefill;
+          autoResize();
+        }
+        input.focus();
+      }, 30);
+    };
+    const closeDrawer = () => {
+      inflight?.abort();
       if (drawer.open) drawer.close();
-    }
+    };
 
-    function autoResize() {
+    const autoResize = () => {
       input.style.height = 'auto';
       input.style.height = Math.min(input.scrollHeight, 160) + 'px';
-    }
+    };
 
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, function (c) {
-        return {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;',
-        }[c];
-      });
-    }
+    const escapeHtml = (s: string) =>
+      String(s).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[c]!);
 
-    // Minimal markdown renderer: paragraphs, inline code, bold, italic, and
-    // [text](href) links. Anything fancier and we'll pull in marked.
-    function renderMarkdown(md) {
-      var html = escapeHtml(md);
-      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-      html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-      html = html.replace(
-        /\[([^\]]+)\]\(([^)]+)\)/g,
-        function (_, label, href) {
-          var safe = String(href).replace(/^javascript:/i, '#');
-          return '<a href="' + safe + '" target="_blank" rel="noopener">' + label + '</a>';
-        }
-      );
-      html = html
-        .split(/\n{2,}/)
-        .map(function (p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; })
-        .join('');
-      return html;
-    }
-
-    function appendUser(text) {
-      var empty = messages.querySelector('[data-ask-kai-empty]');
-      if (empty) empty.remove();
-      var div = document.createElement('div');
+    const appendUser = (text: string) => {
+      messages.querySelector('[data-ask-kai-empty]')?.remove();
+      const div = document.createElement('div');
       div.className = 'ak-msg ak-msg-user';
-      div.innerHTML = '<div class="ak-bubble"><p>' + escapeHtml(text) + '</p></div>';
+      div.innerHTML = `<div class="ak-bubble"><p>${escapeHtml(text)}</p></div>`;
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
-    }
+    };
 
-    function appendAssistantPlaceholder() {
-      var div = document.createElement('div');
+    const appendAssistantPlaceholder = () => {
+      const div = document.createElement('div');
       div.className = 'ak-msg ak-msg-assistant';
-      div.innerHTML =
-        '<div class="ak-bubble">' +
-        '<div class="ak-typing"><span></span><span></span><span></span></div>' +
-        '</div>';
+      div.innerHTML = `
+        <div class="ak-bubble">
+          <div class="ak-progress" data-ask-kai-progress>
+            <div class="ak-typing"><span></span><span></span><span></span></div>
+            <span class="ak-progress-label">Thinking…</span>
+          </div>
+        </div>
+      `;
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
-      return div.querySelector('.ak-bubble');
-    }
+      return div.querySelector('.ak-bubble') as HTMLElement;
+    };
 
-    async function send(text) {
-      if (!text.trim() || inflight) return;
-      appendUser(text);
+    const showProgress = (bubble: HTMLElement, label: string) => {
+      const labelEl = bubble.querySelector('.ak-progress-label');
+      if (labelEl) labelEl.textContent = label;
+    };
+
+    const startContent = (bubble: HTMLElement) => {
+      bubble.innerHTML = '<div class="ak-content"></div>';
+      return bubble.querySelector('.ak-content') as HTMLElement;
+    };
+
+    const send = async (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed || inflight) return;
+      appendUser(trimmed);
       input.value = '';
       autoResize();
       sendBtn.disabled = true;
 
-      var bubble = appendAssistantPlaceholder();
-      var accumulated = '';
+      const bubble = appendAssistantPlaceholder();
+      let accumulated = '';
+      let contentEl: HTMLElement | null = null;
       inflight = new AbortController();
 
+      // During `astro dev`, point at the deployed function (with CORS) so we
+      // can iterate on the UI without a working local Vercel function. In
+      // prod builds the relative path resolves to the same-origin function.
+      const apiBase = import.meta.env.DEV ? 'https://keboola-docs-beacon.vercel.app' : '';
       try {
-        var res = await fetch('/api/chat', {
+        const res = await fetch(`${apiBase}/api/chat`, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ message: text, sessionId: sessionId }),
+          body: JSON.stringify({ message: trimmed, sessionId }),
           signal: inflight.signal,
         });
-        if (!res.ok || !res.body) throw new Error('Network error (' + res.status + ')');
+        if (!res.ok || !res.body) throw new Error(`Network error (${res.status})`);
 
-        var reader = res.body.getReader();
-        var decoder = new TextDecoder();
-        var buffer = '';
-
-        // Replace the typing indicator the moment we start receiving.
-        var started = false;
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
 
         while (true) {
-          var chunk = await reader.read();
-          if (chunk.done) break;
-          buffer += decoder.decode(chunk.value, { stream: true });
-          var lines = buffer.split('\n');
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
           buffer = lines.pop() || '';
 
-          for (var i = 0; i < lines.length; i++) {
-            var line = lines[i];
+          for (const line of lines) {
             if (!line.startsWith('data: ')) continue;
-            var payload;
-            try {
-              payload = JSON.parse(line.slice(6));
-            } catch (_) {
-              continue;
-            }
+            let payload: any;
+            try { payload = JSON.parse(line.slice(6)); } catch { continue; }
+
             if (payload.type === 'session' && payload.sessionId) {
               sessionId = payload.sessionId;
+            } else if (payload.type === 'progress') {
+              showProgress(bubble, payload.label || 'Working…');
             } else if (payload.type === 'text-delta') {
-              if (!started) {
-                bubble.innerHTML = '<div class="ak-content"></div>';
-                started = true;
-              }
+              if (!contentEl) contentEl = startContent(bubble);
               accumulated += payload.text;
-              bubble.querySelector('.ak-content').innerHTML = renderMarkdown(accumulated);
+              // marked.parse is sync by default — fine for chunked rendering.
+              contentEl.innerHTML = marked.parse(accumulated) as string;
               messages.scrollTop = messages.scrollHeight;
             } else if (payload.type === 'error') {
-              bubble.innerHTML =
-                '<p class="ak-error">' + escapeHtml(payload.message) + '</p>';
+              bubble.innerHTML = `<p class="ak-error">${escapeHtml(payload.message)}</p>`;
             }
           }
         }
-      } catch (err) {
-        if (err && err.name !== 'AbortError') {
-          bubble.innerHTML =
-            '<p class="ak-error">Sorry — request failed: ' +
-            escapeHtml(err.message || String(err)) +
-            '</p>';
+      } catch (err: any) {
+        if (err?.name !== 'AbortError') {
+          bubble.innerHTML = `<p class="ak-error">Sorry — request failed: ${escapeHtml(err?.message || String(err))}</p>`;
         }
       } finally {
         inflight = null;
         sendBtn.disabled = false;
         input.focus();
       }
-    }
+    };
+
+    // Expose for the search overlay integration.
+    (window as any).askKai = {
+      open: openDrawer,
+      send: (q: string) => { openDrawer(); send(q); },
+    };
 
     // ─── Wire triggers ───────────────────────────────────────────────
-    document.addEventListener('click', function (e) {
-      var t = /** @type {HTMLElement} */ (e.target);
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement | null;
       if (!t) return;
-      // Open: the per-page Ask Kai widget (whole row is clickable for ergonomics)
-      if (t.closest('.b-ask')) {
-        e.preventDefault();
-        open();
-        return;
-      }
-      // Close button inside the drawer
-      if (t.closest('[data-ask-kai-close]')) {
-        e.preventDefault();
-        close();
-        return;
-      }
-      // Click outside the shell (on the backdrop) closes
-      if (t === drawer) {
-        close();
-        return;
-      }
-      // Suggestion chip
-      var suggestion = t.closest('[data-ask-kai-prompt]');
-      if (suggestion) {
-        e.preventDefault();
-        send(suggestion.textContent || '');
-      }
+      if (t.closest('.b-ask')) { e.preventDefault(); openDrawer(); return; }
+      if (t.closest('[data-ask-kai-close]')) { e.preventDefault(); closeDrawer(); return; }
+      if (t === drawer) { closeDrawer(); return; }
+      const suggestion = t.closest('[data-ask-kai-prompt]') as HTMLElement | null;
+      if (suggestion) { e.preventDefault(); send(suggestion.textContent || ''); }
     });
 
-    document.addEventListener('keydown', function (e) {
-      // Open with ⌘+/  (or Ctrl+/)
+    document.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === '/') {
         e.preventDefault();
-        open();
+        openDrawer();
       }
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      send(input.value);
-    });
-
-    // Enter to send, Shift+Enter for newline
-    input.addEventListener('keydown', function (e) {
+    form.addEventListener('submit', (e) => { e.preventDefault(); send(input.value); });
+    input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         form.requestSubmit();
       }
     });
     input.addEventListener('input', autoResize);
-  })();
+  }
 </script>
