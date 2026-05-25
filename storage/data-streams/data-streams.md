@@ -73,70 +73,11 @@ Here, you can simulate your payload and test it instantly with a table preview t
 
 ### Configure an OpenTelemetry (OTLP) Data Stream
 
-[OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework that captures three types of signals from your web apps, APIs, and services:
-
-- **Logs** — application events and errors (e.g., failed requests, warnings, debug messages).
-- **Metrics** — performance measurements over time (e.g., request latency, CPU usage, error rates).
-- **Traces** — end-to-end request flows across services (e.g., an API call that touches multiple microservices).
-
 Choosing the **OpenTelemetry (OTLP)** source type turns Keboola into a drop-in [OTLP/HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) endpoint. Any official OpenTelemetry SDK or collector can export directly to Keboola, and the incoming telemetry data lands in Storage — queryable alongside your business data.
 
-#### Why Send Telemetry to Keboola?
+When you create an OTLP data stream, three destination tables (**logs**, **metrics**, **traces**) are automatically created with pre-configured column mappings.
 
-Your web apps, APIs, and services already generate telemetry data. Typically, this data lives in a dedicated monitoring tool (e.g., Datadog, New Relic, Grafana) while your business data lives in Keboola. When you need to understand how application performance affects business outcomes, you have to export data, build custom pipelines, or switch between tools.
-
-With OTLP source support in Data Streams, your telemetry and business data live side by side in Keboola Storage. This lets you:
-
-- **Correlate application errors with revenue impact** — join error logs with transaction records to see how outages affect orders.
-- **Connect API latency to conversion rates** — analyze whether slow response times cause drop-offs in user workflows.
-- **Track deployment activity alongside business KPIs** — measure whether a new release improved or degraded key metrics.
-- **Monitor LLM agent or pipeline performance** — trace AI agent activity and cost alongside product usage data.
-
-##### Example: Joining Error Logs with Business Data
-
-Once your telemetry data is in Keboola Storage, you can query it alongside any other table. For example, to find how API errors affected revenue:
-
-```sql
-SELECT
-    DATE(logs."timestamp") AS date,
-    COUNT(DISTINCT transactions."order_id") AS lost_orders,
-    SUM(transactions."amount") AS lost_revenue
-FROM logs
-JOIN transactions ON logs."trace_id" = transactions."trace_id"
-WHERE logs."severity" = 'ERROR'
-GROUP BY date
-```
-
-#### Destination Tables
-When you create an OTLP data stream, **three destination tables** are automatically created and pre-mapped:
-
-| Table | Content |
-|---|---|
-| **logs** | Log records emitted by your applications (events, errors, warnings). |
-| **metrics** | Metric data points (counters, gauges, histograms, etc.). |
-| **traces** | Distributed trace spans with timing and context. |
-
-Each table's column mapping is pre-configured so the fields you query most often — such as `service`, `severity`, `trace_id`, `host_name`, `k8s_pod_name`, and `deployment_environment` — are stored as **top-level columns** rather than buried inside a JSON blob. Each signal's column mappings are independently editable per sink. An opt-in option is available if you also want to keep the raw OTLP payload.
-
-#### Endpoint and Environment Variables
-The source detail page displays the **OTLP endpoint URL** along with a copy button and a ready-to-paste environment variable snippet.
-
-To connect any OpenTelemetry SDK (Python, Node.js, Go, Java, .NET, Rust, etc.) or collector, set two environment variables:
-
-```
-export OTEL_EXPORTER_OTLP_ENDPOINT="<your-stream-endpoint>"
-export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
-```
-
-Replace `<your-stream-endpoint>` with the endpoint URL shown on the source detail page. Once these variables are set, any official OpenTelemetry SDK will automatically pick them up and begin exporting telemetry data to your Keboola project. Records are typically available in Storage within approximately 15 seconds of ingestion.
-
-#### OTLP Source Detail Page
-The OTLP source detail page provides:
-
-- **Endpoint URL** with a one-click copy button.
-- **Environment variable snippet** ready to paste into your application or deployment configuration.
-- **Table statistics** for each of the three destination tables (logs, metrics, traces), showing waiting vs. imported data.
-- **Import conditions** — the same configurable thresholds (time interval, data size, record count) as HTTP data streams.
+For full setup instructions, SDK examples, use cases, and configuration details, see the dedicated **[OpenTelemetry (OTLP) Data Streams](/storage/data-streams/opentelemetry/)** page.
 
 ## Pricing
 Data Streams pricing varies based on the number of streams and the volume of ingested data. Please contact our support team for more details.
