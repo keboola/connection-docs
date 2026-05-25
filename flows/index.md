@@ -28,6 +28,47 @@ Navigate to **Flows > Create Flow**. You'll land directly in the Builder where y
 
 {% include warning.html content="If too many tasks are scheduled in a single phase, you may exceed the available [Storage job](/storage/jobs/) slots, causing delays in your flow's execution. Limiting the number of concurrent component jobs to 10 is recommended. The Keboola Support team can help you adjust parallel limits." %}
 
+### Execute Tasks in Parallel
+You can group multiple tasks within one phase. These tasks then run independently in parallel, speeding up the execution.
+Phases execute sequentially, while tasks within a single phase run in parallel. If you have multiple data source connectors, you can include them all in a single phase, allowing them to run simultaneously.
+
+The same applies to data destination connectors. Also, transformations independent of the connectors can be grouped within the same phase. Note that this does not reduce costs, as each job consumes credits independently.
+
+You can also set up parallelization **within a component** (configuration), directly in the component's UI for
+[row-based components](/components/#configuration-rows) like database source connectors using the same credentials to run multiple tables concurrently.
+
+[Storage jobs](/storage/jobs/) have a parallel limit. They are typically capped at 10 parallel jobs but the Keboola Support team can help you adjust this.
+
+### Control Task Execution
+
+{: .image-popup}
+![Task Parameters](/flows/task-parameters.png)
+
+- If you need to temporarily skip something, disable the task. The task will then be excluded from the flow.
+
+- Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. See also [Retry](#retry) for automatic retries of failed tasks.
+
+- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
+Select the task and click **Set advanced parameters**. When finished, click **Set**.
+
+***Example of the advanced parameter:** changing a variable in transformation:*
+
+```json
+{
+  "componentId": "keboola.snowflake-transformation",
+  "configId": "0123abc",
+  "mode": "run",
+  "variableValuesData": {
+    "values": [
+      {
+        "name": "variables_name",
+        "value": 12345
+      }
+    ]
+  }
+}
+```
+
 ## Conditions
 
 ### 1. Conditional Logic (IF statements)
@@ -54,7 +95,7 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 - Use **(OR)** when any one statement being true is enough.
 
 {: .image-popup}
-![](/flows/conditional-flows/condition.png)
+![](/flows/conditional-flows-condition.png)
 
 ## Variables
 
@@ -145,10 +186,10 @@ To access the retry settings, click on task to open the configuration.
 **Example:** If you set 3 retries with 10 seconds delay between attempts, it means the task will run 4x total.
 
 {: .image-popup}
-![](/flows/conditional-flows/task.png)
+![](/flows/conditional-flows-task.png)
 
 {: .image-popup}
-![](/flows/conditional-flows/retry.png)
+![](/flows/conditional-flows-retry.png)
 
 **Problem:** Pipeline fails due to API timeout.  
 **Solution:** Configure retry logic for that task.
@@ -160,7 +201,7 @@ Introduce a delay (in seconds) before executing a task - useful for waiting for 
 To access the delay settings, click on task to open the configuration.
 
 {: .image-popup}
-![](/flows/conditional-flows/delay.png)
+![](/flows/conditional-flows-delay.png)
 
 ## Notifications
 
@@ -169,10 +210,10 @@ Send alerts directly from the flow and conditions using email(s) or webhook(s). 
 You can also create the notification inside of condition as a New Phase, name it and once the condition is all set, use the Use the plus icon (+) and select Notification.
 
 {: .image-popup}
-![](/flows/conditional-flows/notification-1.png)
+![](/flows/conditional-flows-notification-1.png)
 
 {: .image-popup}
-![](/flows/conditional-flows/notification-2.png)
+![](/flows/conditional-flows-notification-2.png)
 
 ## Schedule and Automate
 
@@ -202,6 +243,6 @@ In this tab, you will find a complete list of all past executions of your flow. 
 You can use this overview to validate whether your conditions behaved as expected - e.g. if the flow correctly skipped a phase on the weekend or retried a failing task.
 
 {: .image-popup}
-![](/flows/conditional-flows/all-runs.png)
+![](/flows/conditional-flows-all-runs.png)
 
 

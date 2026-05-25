@@ -1,6 +1,17 @@
 ---
 title: Flows (Legacy)
 permalink: /flows/flows-legacy/
+redirect_from:
+    - /orchestrator/
+    - /orchestrator/design/
+    - /orchestrator/running/
+    - /orchestrator/tasks/
+    - /orchestrator/tasks/nesting/
+    - /flows/orchestrator/
+    - /flows/orchestrator/design/
+    - /flows/orchestrator/running/
+    - /flows/orchestrator/tasks/
+    - /flows/orchestrator/tasks/nesting/
 ---
 
 <div class="alert alert-warning" role="alert">

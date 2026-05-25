@@ -10,7 +10,7 @@ redirect_from:
 
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> Data templates create <a href="/flows/flows-legacy/">legacy flows</a>, which are no longer the recommended way to build data pipelines. For building new workflows, we recommend using the <a href="/kai/">Kai AI assistant</a>, which can help you set up flows and component configurations interactively.
+    <strong>Important:</strong> Data templates are being discouraged and will be deprecated, as they only create <a href="/flows/flows-legacy/">legacy flows</a>. There are no plans to add template support for the new <a href="/flows/">Flows</a>. For building new workflows, use Flows directly — the <a href="/kai/">Kai AI assistant</a> can help you set them up interactively.
 </div>
 
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
