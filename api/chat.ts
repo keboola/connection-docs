@@ -77,6 +77,107 @@ async function handleStub(message: string, res: VercelResponse) {
   res.end();
 }
 
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+/**
+ * The Keboola docs MCP server (a data app) scales to zero when idle, so the
+ * first call after a quiet period fails with HTTP 503. Detect that specific
+ * failure shape so we know to retry instead of surfacing the error.
+ */
+function isMcpColdStartError(message: string | undefined | null): boolean {
+  if (!message) return false;
+  return (
+    /MCP server .* initialize failed/i.test(message) ||
+    /upstream server error \(HTTP 503\)/i.test(message) ||
+    /mcp_connection_failed/i.test(message)
+  );
+}
+
+interface RunResult {
+  /** Whether the session completed normally (agent.message received). */
+  ok: boolean;
+  /** Whether the failure was a recoverable MCP cold-start. */
+  retryable: boolean;
+  /** Session id used (so the client can reuse if we returned success). */
+  sessionId: string | null;
+}
+
+async function runOneSession(
+  client: Anthropic,
+  agentId: string,
+  environmentId: string,
+  vaultId: string | null,
+  message: string,
+  reuseSessionId: string | undefined,
+  res: VercelResponse,
+  forwardProgress: boolean,
+): Promise<RunResult> {
+  let activeSessionId = reuseSessionId ?? null;
+  if (!activeSessionId) {
+    const session = await client.beta.sessions.create({
+      agent: agentId,
+      environment_id: environmentId,
+      ...(vaultId ? { vault_ids: [vaultId] } : {}),
+    } as any);
+    activeSessionId = session.id;
+  }
+
+  const stream = await client.beta.sessions.events.stream(activeSessionId);
+  await client.beta.sessions.events.send(activeSessionId, {
+    events: [{ type: 'user.message', content: [{ type: 'text', text: message }] }],
+  });
+
+  let gotAgentMessage = false;
+
+  for await (const event of stream as AsyncIterable<any>) {
+    if (event.type === 'agent.thinking') {
+      if (forwardProgress) writeSse(res, { type: 'progress', label: 'Thinking…' });
+    } else if (event.type === 'agent.mcp_tool_use') {
+      if (forwardProgress) {
+        const q = event.input?.query;
+        writeSse(res, {
+          type: 'progress',
+          label: q ? `Searching docs for "${String(q).slice(0, 60)}"…` : 'Searching docs…',
+        });
+      }
+    } else if (event.type === 'agent.mcp_tool_result') {
+      if (forwardProgress) {
+        writeSse(res, {
+          type: 'progress',
+          label: event.is_error ? 'Retrying…' : 'Writing answer…',
+        });
+      }
+      // If the tool result itself is an error and it's an MCP cold-start, bail
+      // out so the outer loop can retry with a fresh session instead of letting
+      // the agent draft a "the docs are down" reply on partial info.
+      if (event.is_error && Array.isArray(event.content)) {
+        const text = event.content.map((c: any) => c?.text || '').join(' ');
+        if (isMcpColdStartError(text)) {
+          return { ok: false, retryable: true, sessionId: activeSessionId };
+        }
+      }
+    } else if (event.type === 'agent.message' && Array.isArray(event.content)) {
+      gotAgentMessage = true;
+      for (const block of event.content) {
+        if (block.type === 'text' && typeof block.text === 'string') {
+          writeSse(res, { type: 'text-delta', text: block.text });
+        }
+      }
+    } else if (event.type === 'session.status_idle') {
+      break;
+    } else if (event.type === 'session.error') {
+      const msg = event.error?.message ?? 'Agent error';
+      if (isMcpColdStartError(msg) && !gotAgentMessage) {
+        return { ok: false, retryable: true, sessionId: activeSessionId };
+      }
+      writeSse(res, { type: 'error', message: msg });
+      return { ok: false, retryable: false, sessionId: activeSessionId };
+    }
+  }
+
+  return { ok: gotAgentMessage, retryable: !gotAgentMessage, sessionId: activeSessionId };
+}
+
 async function handleLive(
   message: string,
   sessionId: string | undefined,
@@ -89,71 +190,64 @@ async function handleLive(
 
   setupSse(res);
 
-  // Reuse session if the client passed one, else create a fresh one.
-  let activeSessionId = sessionId;
-  if (!activeSessionId) {
-    const session = await client.beta.sessions.create({
-      agent: agentId,
-      environment_id: environmentId,
-      ...(vaultId ? { vault_ids: [vaultId] } : {}),
-    } as any);
-    activeSessionId = session.id;
-  }
-  writeSse(res, { type: 'session', sessionId: activeSessionId });
+  // The MCP data app may be cold; allow up to ~15s of retries before giving up.
+  const startedAt = Date.now();
+  const budgetMs = 15_000;
+  const maxAttempts = 4;
 
-  // Subscribe to the agent's event stream BEFORE sending the user event, so we
-  // don't miss the first delta.
-  const stream = await client.beta.sessions.events.stream(activeSessionId);
-
-  await client.beta.sessions.events.send(activeSessionId, {
-    events: [
-      {
-        type: 'user.message',
-        content: [{ type: 'text', text: message }],
-      },
-    ],
-  });
-
-  try {
-    for await (const event of stream as AsyncIterable<any>) {
-      // Forward agent state changes as progress events so the drawer can
-      // show "Searching docs…" / "Reading sources…" instead of an opaque
-      // typing indicator. Managed Agents doesn't stream text deltas, so
-      // the final agent.message arrives in one chunk — but progress events
-      // along the way still feel much faster than waiting in silence.
-      if (event.type === 'agent.thinking') {
-        writeSse(res, { type: 'progress', label: 'Thinking…' });
-      } else if (event.type === 'agent.mcp_tool_use') {
-        const q = event.input?.query;
-        writeSse(res, {
-          type: 'progress',
-          label: q ? `Searching docs for "${String(q).slice(0, 60)}"…` : 'Searching docs…',
-        });
-      } else if (event.type === 'agent.mcp_tool_result') {
-        writeSse(res, {
-          type: 'progress',
-          label: event.is_error ? 'Tool returned an error' : 'Writing answer…',
-        });
-      } else if (event.type === 'agent.message' && Array.isArray(event.content)) {
-        for (const block of event.content) {
-          if (block.type === 'text' && typeof block.text === 'string') {
-            writeSse(res, { type: 'text-delta', text: block.text });
-          }
-        }
-      } else if (event.type === 'session.status_idle') {
-        break;
-      } else if (event.type === 'session.error') {
-        writeSse(res, {
-          type: 'error',
-          message: event.error?.message ?? 'Agent error',
-        });
-        break;
-      }
+  let lastSessionId: string | null = null;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    if (attempt === 1) {
+      // First attempt — emit the session id once we have it.
+    } else {
+      writeSse(res, {
+        type: 'progress',
+        label: 'Docs service is waking up, retrying…',
+      });
+      const elapsed = Date.now() - startedAt;
+      const remaining = budgetMs - elapsed;
+      if (remaining <= 0) break;
+      await sleep(Math.min(2000, Math.max(800, remaining / (maxAttempts - attempt + 1))));
     }
-  } catch (err: any) {
-    writeSse(res, { type: 'error', message: err?.message ?? String(err) });
+
+    const result = await runOneSession(
+      client,
+      agentId,
+      environmentId,
+      vaultId,
+      message,
+      // On retry, always start a fresh session — the previous one is dead-ended
+      // on the MCP failure. Only the first attempt may reuse the client's id.
+      attempt === 1 ? sessionId : undefined,
+      res,
+      attempt === 1, // only forward progress events on first attempt to avoid
+                    // re-emitting "Thinking…" / "Searching…" multiple times
+    );
+    lastSessionId = result.sessionId;
+
+    if (attempt === 1 && result.sessionId) {
+      writeSse(res, { type: 'session', sessionId: result.sessionId });
+    }
+
+    if (result.ok) {
+      writeSse(res, { type: 'done' });
+      res.end();
+      return;
+    }
+    if (!result.retryable) break;
   }
 
+  // Out of retries.
+  writeSse(res, {
+    type: 'error',
+    message:
+      'The docs service did not respond in time. Try again in a few seconds — it may just be waking up.',
+  });
+  // Still expose the last session id so a follow-up turn can resume if the
+  // service comes back.
+  if (lastSessionId) {
+    writeSse(res, { type: 'session', sessionId: lastSessionId });
+  }
   writeSse(res, { type: 'done' });
   res.end();
 }

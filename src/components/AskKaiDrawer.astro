@@ -13,7 +13,7 @@
  */
 ---
 
-<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs">
+<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs" transition:persist>
   <div class="ak-shell">
     <header class="ak-header">
       <div class="ak-title">
@@ -150,6 +150,45 @@
       return bubble.querySelector('.ak-content') as HTMLElement;
     };
 
+    // Animate text into the bubble word-by-word. Managed Agents delivers the
+    // final agent.message in one chunk, so without this the user waits in
+    // silence then sees a blob. With it, the answer reads like it's being
+    // typed and the long total time is hidden behind continuous motion.
+    const startTypewriter = (
+      contentEl: HTMLElement,
+      getFullText: () => string,
+      signal: AbortSignal,
+    ): Promise<void> =>
+      new Promise<void>((resolve) => {
+        let shown = '';
+        const tick = () => {
+          if (signal.aborted) return resolve();
+          const full = getFullText();
+          if (shown === full) {
+            // Caught up — yield and check again in case more text arrives.
+            setTimeout(tick, 40);
+            return;
+          }
+          // 2-4 tokens per tick keeps a 200-word answer animating in ~1.5s.
+          const remaining = full.slice(shown.length);
+          const tokens = remaining.match(/\S+\s*|\s+/g) ?? [remaining];
+          const batch = Math.min(tokens.length, 2 + Math.floor(Math.random() * 3));
+          for (let k = 0; k < batch; k++) shown += tokens[k];
+          contentEl.innerHTML = marked.parse(shown) as string;
+          messages.scrollTop = messages.scrollHeight;
+          setTimeout(() => requestAnimationFrame(tick), 18);
+        };
+        requestAnimationFrame(tick);
+
+        // Allow the outer flow to finalize the typewriter once the stream ends.
+        (contentEl as any).__finalize = () => {
+          shown = getFullText();
+          contentEl.innerHTML = marked.parse(shown) as string;
+          messages.scrollTop = messages.scrollHeight;
+          resolve();
+        };
+      });
+
     const send = async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || inflight) return;
@@ -159,9 +198,11 @@
       sendBtn.disabled = true;
 
       const bubble = appendAssistantPlaceholder();
-      let accumulated = '';
+      let fullText = '';
       let contentEl: HTMLElement | null = null;
+      let typewriterDone: Promise<void> | null = null;
       inflight = new AbortController();
+      const signal = inflight.signal;
 
       // During `astro dev`, point at the deployed function (with CORS) so we
       // can iterate on the UI without a working local Vercel function. In
@@ -172,7 +213,7 @@
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ message: trimmed, sessionId }),
-          signal: inflight.signal,
+          signal,
         });
         if (!res.ok || !res.body) throw new Error(`Network error (${res.status})`);
 
@@ -195,18 +236,22 @@
             if (payload.type === 'session' && payload.sessionId) {
               sessionId = payload.sessionId;
             } else if (payload.type === 'progress') {
-              showProgress(bubble, payload.label || 'Working…');
+              if (!contentEl) showProgress(bubble, payload.label || 'Working…');
             } else if (payload.type === 'text-delta') {
-              if (!contentEl) contentEl = startContent(bubble);
-              accumulated += payload.text;
-              // marked.parse is sync by default — fine for chunked rendering.
-              contentEl.innerHTML = marked.parse(accumulated) as string;
-              messages.scrollTop = messages.scrollHeight;
+              fullText += payload.text;
+              if (!contentEl) {
+                contentEl = startContent(bubble);
+                typewriterDone = startTypewriter(contentEl, () => fullText, signal);
+              }
             } else if (payload.type === 'error') {
               bubble.innerHTML = `<p class="ak-error">${escapeHtml(payload.message)}</p>`;
             }
           }
         }
+
+        // Stream ended — flush whatever's left, then wait for the typewriter.
+        if (contentEl && (contentEl as any).__finalize) (contentEl as any).__finalize();
+        if (typewriterDone) await typewriterDone;
       } catch (err: any) {
         if (err?.name !== 'AbortError') {
           bubble.innerHTML = `<p class="ak-error">Sorry — request failed: ${escapeHtml(err?.message || String(err))}</p>`;
