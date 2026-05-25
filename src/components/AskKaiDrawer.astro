@@ -308,11 +308,32 @@
       send: (q: string) => { openDrawer(); send(q); },
     };
 
+    // Inject a real clickable Ask-Kai button at the top of the sidebar.
+    // Idempotent — runs on initial load AND after every Astro view transition
+    // (the sidebar gets re-rendered with the new active state on each nav).
+    const ensureSidebarTrigger = () => {
+      const sidebar = document.querySelector('.sidebar-content');
+      if (!sidebar) return;
+      if (sidebar.querySelector(':scope > .ak-sidebar-trigger')) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ak-sidebar-trigger';
+      btn.setAttribute('data-ask-kai-open', '');
+      btn.innerHTML = '<span aria-hidden="true">✨</span><span>Ask Kai about these docs</span>';
+      sidebar.insertBefore(btn, sidebar.firstChild);
+    };
+    ensureSidebarTrigger();
+    document.addEventListener('astro:page-load', ensureSidebarTrigger);
+
     // ─── Wire triggers ───────────────────────────────────────────────
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement | null;
       if (!t) return;
-      if (t.closest('.b-ask')) { e.preventDefault(); openDrawer(); return; }
+      if (t.closest('[data-ask-kai-open]') || t.closest('.b-ask')) {
+        e.preventDefault();
+        openDrawer();
+        return;
+      }
       if (t.closest('[data-ask-kai-close]')) { e.preventDefault(); closeDrawer(); return; }
       if (t === drawer) { closeDrawer(); return; }
       const suggestion = t.closest('[data-ask-kai-prompt]') as HTMLElement | null;
