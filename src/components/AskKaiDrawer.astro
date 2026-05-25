@@ -140,6 +140,37 @@
       return div.querySelector('.ak-bubble') as HTMLElement;
     };
 
+    const renderSources = (
+      bubble: HTMLElement,
+      items: { url: string; label: string }[],
+    ) => {
+      const msgEl = bubble.parentElement;
+      if (!msgEl) return;
+      if (!items?.length) return;
+      const safeItems = items.filter(
+        (i) => i && typeof i.url === 'string' && /^https?:\/\//i.test(i.url),
+      );
+      if (!safeItems.length) return;
+      const chips = safeItems
+        .map(
+          (i) =>
+            `<a class="ak-chip" href="${escapeHtml(i.url)}" target="_blank" rel="noopener">
+               <svg class="ak-chip-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                 <path d="M14 3h7v7"></path>
+                 <path d="M10 14 21 3"></path>
+                 <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+               </svg>
+               <span>${escapeHtml(i.label || i.url)}</span>
+             </a>`,
+        )
+        .join('');
+      const wrap = document.createElement('div');
+      wrap.className = 'ak-sources';
+      wrap.innerHTML = `<div class="ak-sources-label">Sources</div><div class="ak-chips">${chips}</div>`;
+      msgEl.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+    };
+
     const showProgress = (bubble: HTMLElement, label: string) => {
       const labelEl = bubble.querySelector('.ak-progress-label');
       if (labelEl) labelEl.textContent = label;
@@ -243,6 +274,14 @@
                 contentEl = startContent(bubble);
                 typewriterDone = startTypewriter(contentEl, () => fullText, signal);
               }
+            } else if (payload.type === 'sources') {
+              // Render chips once the typewriter has caught up so they
+              // appear at the bottom of the finalized answer, not mid-flow.
+              const items = Array.isArray(payload.items) ? payload.items : [];
+              (async () => {
+                if (typewriterDone) await typewriterDone;
+                renderSources(bubble, items);
+              })();
             } else if (payload.type === 'error') {
               bubble.innerHTML = `<p class="ak-error">${escapeHtml(payload.message)}</p>`;
             }
