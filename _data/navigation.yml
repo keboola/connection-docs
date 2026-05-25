@@ -95,6 +95,9 @@ items:
   - url: /flows/
     title: Flows
     items:
+      - url: /flows/flow-migration-guide/
+        title: Flow Migration Guide
+
       - url: /flows/flows-legacy/
         title: Flows (Legacy)
         items:
