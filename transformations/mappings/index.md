@@ -234,9 +234,20 @@ will be used to select files.
 - **Query** --- if selecting files by tags is not precise enough, you can use 
 an [elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax)
 to refine the search. If you combine *query* with *tags*, both conditions must be met.
-- **Processed Tags** --- specify tags which will be assigned to the input files once the transformation is finished.
+- **Processed Tags** *(deprecated)* --- specify tags which will be assigned to the input files once the transformation is finished.
 This allows you to process Storage files in an incremental fashion. You can combine this setting with the *query* 
 option to omit already processed files in recurring transformations.
+
+{% include warning.html content="**Processed Tags are deprecated.** They are not compatible with the [development branches](/tutorial/branches/) feature, because a job running in a development branch cannot write tags back to files stored in production. New configurations should not use this option, and the UI no longer offers it. Existing configurations continue to work; affected projects will be contacted before any breaking change. See [Alternatives to Processed Tags](#alternatives-to-processed-tags) below." %}
+
+##### Alternatives to Processed Tags
+
+Depending on your use case, pick one of the following:
+
+- **[Incremental processing on Storage tables](/storage/tables/#incremental-processing)** --- if your data is tabular, ingest it once and use **table input mapping** with `changed_since` and the `_timestamp` system column. This is the recommended replacement for most pipelines.
+- **Time-bounded query** --- replace the "mark as processed" pattern with a time window in the query, e.g. `tags:toprocess AND created:>=now-1d`. Works for file-only pipelines where files must stay as files.
+- **[Component state file](https://developers.keboola.com/extend/common-interface/config-file/#state-file)** --- if you maintain a custom component, track processed file IDs in `state.json` instead of in Storage tags. Works in both production and development branches.
+- **Explicit `file_ids`** --- if the caller already knows which files to process, pass them directly in the input mapping.
 
 ## Output Mapping
 An output mapping takes results (tables and files) from your transformation and stores them back in Storage. 
