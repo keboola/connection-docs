@@ -26,6 +26,22 @@ interface ChatRequest {
   sessionId?: string;
 }
 
+/**
+ * Direct-MCP mode (default): /api/chat calls the docs MCP server's
+ * `docs_query` tool directly and streams its answer back. Skips the
+ * Managed Agents loop entirely — much faster (~6-8s vs ~16-20s) since
+ * we drop the two wrapping Haiku calls that mostly just paraphrase
+ * what MCP already returned.
+ *
+ * Set KAI_USE_AGENT=1 in env to fall back to the managed-agent path
+ * (useful if we later need agent-side decisioning or multi-step
+ * tool use).
+ */
+const USE_AGENT = process.env.KAI_USE_AGENT === '1';
+const MCP_URL =
+  process.env.DOCS_MCP_URL ||
+  'https://docs-mcp-43665566.hub.us-east4.gcp.keboola.com/mcp';
+
 async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
   // @vercel/node parses JSON bodies for us if content-type matches.
   if (req.body && typeof req.body === 'object') return req.body as ChatRequest;
@@ -52,6 +68,176 @@ function setupSse(res: VercelResponse) {
   res.setHeader('access-control-allow-origin', '*');
   res.setHeader('access-control-allow-headers', 'content-type');
   res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+}
+
+/**
+ * Minimal MCP Streamable-HTTP client. Each call opens a fresh session,
+ * runs the handshake, invokes the named tool, and returns the parsed
+ * result. Reaches for nothing fancy — no streaming, no resumption —
+ * because docs_query is a single one-shot RPC.
+ */
+async function mcpToolCall(
+  toolName: string,
+  args: Record<string, unknown>,
+  signal?: AbortSignal,
+): Promise<{ text: string; source_urls: string[] }> {
+  const headers: Record<string, string> = {
+    'content-type': 'application/json',
+    accept: 'application/json, text/event-stream',
+  };
+
+  const parseSseJson = (raw: string): any => {
+    for (const line of raw.split('\n')) {
+      if (line.startsWith('data: ')) return JSON.parse(line.slice(6));
+    }
+    return JSON.parse(raw);
+  };
+
+  // 1. initialize → captures the mcp-session-id header for subsequent calls.
+  const initRes = await fetch(MCP_URL, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'initialize',
+      params: {
+        protocolVersion: '2024-11-05',
+        capabilities: {},
+        clientInfo: { name: 'keboola-docs-beacon', version: '1.0.0' },
+      },
+    }),
+    signal,
+  });
+  if (!initRes.ok) {
+    throw new Error(`MCP initialize failed: HTTP ${initRes.status}`);
+  }
+  const sessionId = initRes.headers.get('mcp-session-id');
+  if (!sessionId) throw new Error('MCP initialize returned no session id');
+
+  const sessHeaders = { ...headers, 'mcp-session-id': sessionId };
+
+  // 2. notifications/initialized — completes the handshake.
+  await fetch(MCP_URL, {
+    method: 'POST',
+    headers: sessHeaders,
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'notifications/initialized',
+      params: {},
+    }),
+    signal,
+  });
+
+  // 3. tools/call.
+  const callRes = await fetch(MCP_URL, {
+    method: 'POST',
+    headers: sessHeaders,
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 2,
+      method: 'tools/call',
+      params: { name: toolName, arguments: args },
+    }),
+    signal,
+  });
+  if (!callRes.ok) {
+    throw new Error(`MCP tools/call failed: HTTP ${callRes.status}`);
+  }
+  const raw = await callRes.text();
+  const parsed = parseSseJson(raw);
+  const errMsg = parsed?.error?.message;
+  if (errMsg) throw new Error(`MCP error: ${errMsg}`);
+
+  const innerText: string | undefined = parsed?.result?.content?.[0]?.text;
+  if (!innerText) throw new Error('MCP returned no result content');
+
+  // The tool wraps its JSON answer in a `text` content block, so parse it back.
+  let inner: { text?: string; source_urls?: string[] };
+  try {
+    inner = JSON.parse(innerText);
+  } catch {
+    // If it isn't JSON (e.g. an error string), surface as-is.
+    return { text: innerText, source_urls: [] };
+  }
+  return {
+    text: inner.text ?? '',
+    source_urls: Array.isArray(inner.source_urls) ? inner.source_urls : [],
+  };
+}
+
+/** Turn a docs URL into a short pretty label for the Sources list. */
+function labelForUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.replace(/\/$/, '');
+    if (!path) return u.hostname;
+    const last = path.split('/').filter(Boolean).pop() ?? u.hostname;
+    return last.replace(/[-_]/g, ' ');
+  } catch {
+    return url;
+  }
+}
+
+/**
+ * Direct MCP path — call docs_query, stream the text, append a Sources
+ * list. Retries on 503 cold-start up to a 15s budget.
+ */
+async function handleDirectMcp(message: string, res: VercelResponse) {
+  setupSse(res);
+  // Synthetic session id so the client treats follow-ups as a continuation.
+  writeSse(res, { type: 'session', sessionId: `mcp-${Date.now()}` });
+  writeSse(res, { type: 'progress', label: `Searching docs for "${message.slice(0, 60)}"…` });
+
+  const startedAt = Date.now();
+  const budgetMs = 15_000;
+  const maxAttempts = 4;
+
+  let answer: { text: string; source_urls: string[] } | null = null;
+  let lastErr: Error | null = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    if (Date.now() - startedAt > budgetMs) break;
+    try {
+      answer = await mcpToolCall('docs_query', { query: message });
+      break;
+    } catch (e: any) {
+      lastErr = e;
+      const msg = String(e?.message || '');
+      const isColdStart = /HTTP 503/.test(msg) || /initialize failed/i.test(msg);
+      if (!isColdStart || attempt >= maxAttempts) break;
+      writeSse(res, { type: 'progress', label: 'Docs service is waking up, retrying…' });
+      const remaining = budgetMs - (Date.now() - startedAt);
+      if (remaining <= 0) break;
+      await new Promise((r) => setTimeout(r, Math.min(2000, Math.max(500, remaining / 4))));
+    }
+  }
+
+  if (!answer) {
+    writeSse(res, {
+      type: 'error',
+      message:
+        'The docs service didn’t respond in time. Try again in a few seconds — it may just be waking up.',
+    });
+    writeSse(res, { type: 'done' });
+    res.end();
+    return;
+  }
+
+  writeSse(res, { type: 'progress', label: 'Writing answer…' });
+
+  // Build the final markdown: the tool's text, then a compact Sources list.
+  let body = answer.text.trim();
+  if (answer.source_urls.length) {
+    const lines = answer.source_urls
+      .slice(0, 6)
+      .map((u) => `- [${labelForUrl(u)}](${u})`);
+    body += `\n\n**Sources**\n${lines.join('\n')}`;
+  }
+
+  writeSse(res, { type: 'text-delta', text: body });
+  writeSse(res, { type: 'done' });
+  res.end();
 }
 
 /**
@@ -290,15 +476,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Live mode requires the API key, an agent id, and an environment id.
   // A vault id is only needed when the MCP server is bearer-protected.
-  const live = !!(
+  // Direct-MCP is the default fast path. Fall back to the managed-agent path
+  // if KAI_USE_AGENT=1 is set in env and the required agent vars are present.
+  const agentReady = !!(
     process.env.KAI_AGENT_ID &&
     process.env.KAI_ENVIRONMENT_ID &&
     process.env.ANTHROPIC_API_KEY
   );
 
   try {
-    if (live) {
+    if (USE_AGENT && agentReady) {
       await handleLive(message, body.sessionId, res);
+    } else if (MCP_URL) {
+      await handleDirectMcp(message, res);
     } else {
       await handleStub(message, res);
     }
