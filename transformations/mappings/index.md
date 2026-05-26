@@ -229,23 +229,18 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
 #### Options
-- **Tags** --- specify [tags](/storage/files/#uploading-file) which 
-will be used to select files.
-- **Query** --- if selecting files by tags is not precise enough, you can use 
-an [elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax)
-to refine the search. If you combine *query* with *tags*, both conditions must be met.
-- **Processed Tags** *(deprecated, do not use)* --- a legacy option that used to assign tags to input files after the transformation finished, to skip already-processed files on subsequent runs. **Do not use this option for new configurations** --- see [Alternatives to Processed Tags](#alternatives-to-processed-tags) below.
+- **Tags** — [tags](http://localhost:4000/storage/files/#uploading-file) used to select files.
+- **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
+- **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
+- **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
 
-{% include warning.html content="**Processed Tags are deprecated.** They are not compatible with the [development branches](/tutorial/branches/) feature, because a job running in a development branch cannot write tags back to files stored in production. New configurations should not use this option, and the UI no longer offers it. Existing configurations continue to work; affected projects will be contacted before any breaking change." %}
+{% include warning.html content="*Processed Tags* and *Query* are deprecated and not compatible with [development branches](http://localhost:4000/tutorial/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change." %}
 
-##### Alternatives to Processed Tags
+#### Incremental file processing
 
-For incremental file processing, pick one of the following:
+Incremental processing is active when **Changed Since** is set to *Since last successful run*. In this mode, the configuration stores a reference to the newest file matching the specified tags. The next run continues with files newer than that reference, so the transformation is automatically fed only the files that have not yet been processed.
 
-- **[Incremental processing on Storage tables](/storage/tables/#incremental-processing)** --- if your data is tabular, ingest it once and use **table input mapping** with `changed_since` and the `_timestamp` system column. This is the recommended replacement for most pipelines.
-- **Time-bounded query** --- replace the "mark as processed" pattern with a time window in the query, e.g. `tags:toprocess AND created:>=now-1d`. Works for file-only pipelines where files must stay as files.
-- **[Component state file](https://developers.keboola.com/extend/common-interface/config-file/#state-file)** --- if you maintain a custom component, track processed file IDs in `state.json` instead of in Storage tags. Works in both production and development branches.
-- **Explicit `file_ids`** --- if the caller already knows which files to process, pass them directly in the input mapping.
+To manipulate the state — for example, to run a backfill — use **Debug Mode → Update State** to reset it.
 
 ## Output Mapping
 An output mapping takes results (tables and files) from your transformation and stores them back in Storage. 
