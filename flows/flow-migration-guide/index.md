@@ -62,7 +62,7 @@ Once the migration finishes, the Flow detail shows a green **"This Flow has been
 
 ## After the migration
 
-The migration job has already done the cleanup that previously required manual steps:
+The migration job performs the following steps:
 
 - A new Conditional Flow has been created with the migrated configuration.
 - Schedules, triggers, and notifications have been copied to the new Conditional Flow automatically -- you do **not** need to set them up manually.
