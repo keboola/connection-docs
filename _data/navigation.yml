@@ -93,7 +93,7 @@ items:
         title: Python Client
 
   - url: /flows/
-    title: Flows
+    title: Conditional Flows
     items:
       - url: /flows/flows-legacy/
         title: Legacy Flows

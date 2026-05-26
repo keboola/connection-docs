@@ -1,5 +1,5 @@
 ---
-title: Flows
+title: Conditional Flows
 permalink: /flows/
 redirect_from:
     - /flows/conditional-flows/
