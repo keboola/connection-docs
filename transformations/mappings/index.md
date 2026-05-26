@@ -229,12 +229,12 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
 #### Options
-- **Tags** — [tags](http://localhost:4000/storage/files/#uploading-file) used to select files.
+- **Tags** — [tags](/storage/files/#uploading-file) used to select files.
 - **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
 - **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
 - **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
 
-{% include warning.html content="*Processed Tags* and *Query* are deprecated and not compatible with [development branches](http://localhost:4000/tutorial/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change." %}
+{% include warning.html content="*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/tutorial/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change." %}
 
 #### Incremental file processing
 
