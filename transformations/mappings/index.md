@@ -234,9 +234,10 @@ will be used to select files.
 - **Query** --- if selecting files by tags is not precise enough, you can use 
 an [elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax)
 to refine the search. If you combine *query* with *tags*, both conditions must be met.
-- **Processed Tags** --- specify tags which will be assigned to the input files once the transformation is finished.
+- **Processed Tags** *(deprecated)* --- specify tags which will be assigned to the input files once the transformation is finished.
 This allows you to process Storage files in an incremental fashion. You can combine this setting with the *query* 
 option to omit already processed files in recurring transformations.
+This feature is deprecated and will be removed in a future update. The option is only visible for configurations that already use processed tags.
 
 ## Output Mapping
 An output mapping takes results (tables and files) from your transformation and stores them back in Storage. 
