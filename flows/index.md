@@ -7,7 +7,7 @@ redirect_from:
 
 Flows allow you to build automated data pipelines with conditional logic, branching, retries, and robust error handling. You can define flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
 
-*Looking for [Legacy Flows](/flows/flows-legacy/)? To migrate an existing Legacy Flow to a new Flow, see the [Migration Guide](/flows/flow-migration-guide/).*
+*Looking for [Legacy Flows](/flows/flows-legacy/)? To migrate an existing Legacy Flow to a new Conditional Flow, see the [Migration Guide](/flows/flow-migration-guide/).*
 
 * TOC
 {:toc}
