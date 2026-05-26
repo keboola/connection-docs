@@ -1,5 +1,5 @@
 ---
-title: Legacy Flow Migration Guide
+title: Migration Guide
 permalink: /flows/flow-migration-guide/
 ---
 
