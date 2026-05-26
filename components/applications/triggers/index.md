@@ -12,7 +12,7 @@ For example, triggering the creation of a report in a 3rd party system, or start
 The following applications support triggering: 
 
 - [Exasol Cluster Starter](/components/applications/triggers/exasol-cluster-starter/)
-- [Orchestration Trigger](/components/applications/triggers/orchestration-trigger-queue-v2/) - Trigger Keboola Flows and Conditional Flows across projects
+- [Orchestration Trigger](/components/applications/triggers/orchestration-trigger-queue-v2/) - Trigger Keboola Conditional Flows and Legacy Flows across projects
 - [dbt Cloud Job Trigger](/components/applications/triggers/dbt-cloud-job-trigger/)
 - [Deepnote Notebook Execution Trigger](/components/applications/triggers/deepnote-notebook-execution-trigger/) - Trigger to execute a Notebook in Deepnote
 - [Power BI Refresh](/components/applications/triggers/powerbi-refresh/) - Trigger dataset refreshes in a Power BI workspace
