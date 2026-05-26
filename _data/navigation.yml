@@ -95,9 +95,6 @@ items:
   - url: /flows/
     title: Flows
     items:
-      - url: /flows/flow-migration-guide/
-        title: Flow Migration Guide
-
       - url: /flows/flows-legacy/
         title: Flows (Legacy)
         items:
@@ -154,6 +151,9 @@ items:
 
               - url: /flows/templates/ua-and-ga4-comparison/
                 title: UA and GA4 Comparison
+
+      - url: /flows/flow-migration-guide/
+        title: Flow Migration Guide
 
   - url: /data-apps/
     title: Apps
