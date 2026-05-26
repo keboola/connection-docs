@@ -570,7 +570,7 @@ items:
               - url: /components/applications/triggers/exasol-cluster-starter/
                 title: Exasol Cluster Starter
               - url: /components/applications/triggers/orchestration-trigger-queue-v2/
-                title: Orchestration Trigger V2
+                title: Orchestration Trigger
               - url: /components/applications/triggers/dbt-cloud-job-trigger/
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
