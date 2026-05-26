@@ -58,7 +58,7 @@ Let us show you how to organize individual tasks into steps, set up notification
 - [Check how your flow is running](#check-run-history)
 
 ## Access the Legacy Flow Builder
-Select from the top menu **Flows > Legacy Flows** and click the **Create Flow** button.
+Select from the top menu **Conditional Flows > Legacy Flows** and click the **Create Flow** button.
    
 {: .image-popup}
 ![Go to Flows](/tutorial/automate/automate1.png)

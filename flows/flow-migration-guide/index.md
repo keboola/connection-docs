@@ -17,7 +17,7 @@ This guide walks you through migrating an existing [Legacy Flow](/flows/flows-le
 
 ## Step 1: Open Migration Preview
 
-Navigate to **Flows > Legacy Flows** in the top menu and open the detail of the Legacy Flow you want to migrate. A blue banner appears on the Legacy Flow detail reading **"This Legacy Flow can be migrated to a Conditional Flow"**, together with a green **Migration Preview** button.
+Navigate to **Conditional Flows > Legacy Flows** in the top menu and open the detail of the Legacy Flow you want to migrate. A blue banner appears on the Legacy Flow detail reading **"This Legacy Flow can be migrated to a Conditional Flow"**, together with a green **Migration Preview** button.
 
 {: .image-popup}
 ![Legacy Flow detail with the Migration Preview button](/flows/flow-migration-guide/migration-preview-button.png)

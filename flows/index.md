@@ -14,7 +14,7 @@ Flows allow you to build automated data pipelines with conditional logic, branch
 
 ## Access Flows
 
-Navigate to **Flows > Create Flow**. You'll land directly in the Builder where you can start creating your first flow. Use the plus icon (+) to add different types of actions such as components, conditions, variables, notifications, and more — all of which are explained in detail later in this documentation.
+Navigate to **Conditional Flows > Create Flow**. You'll land directly in the Builder where you can start creating your first flow. Use the plus icon (+) to add different types of actions such as components, conditions, variables, notifications, and more — all of which are explained in detail later in this documentation.
 
 ## Build the Flow
 
