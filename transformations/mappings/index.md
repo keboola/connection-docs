@@ -229,14 +229,18 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
 #### Options
-- **Tags** --- specify [tags](/storage/files/#uploading-file) which 
-will be used to select files.
-- **Query** --- if selecting files by tags is not precise enough, you can use 
-an [elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax)
-to refine the search. If you combine *query* with *tags*, both conditions must be met.
-- **Processed Tags** --- specify tags which will be assigned to the input files once the transformation is finished.
-This allows you to process Storage files in an incremental fashion. You can combine this setting with the *query* 
-option to omit already processed files in recurring transformations.
+- **Tags** — [tags](/storage/files/#uploading-file) used to select files.
+- **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
+- **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
+- **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
+
+{% include warning.html content="*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/tutorial/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change." %}
+
+#### Incremental file processing
+
+Incremental processing is active when **Changed Since** is set to *Since last successful run*. In this mode, the configuration stores a reference to the newest file matching the specified tags. The next run continues with files newer than that reference, so the transformation is automatically fed only the files that have not yet been processed.
+
+To manipulate the state — for example, to run a backfill — use **Debug Mode → Update State** to reset it.
 
 ## Output Mapping
 An output mapping takes results (tables and files) from your transformation and stores them back in Storage. 
