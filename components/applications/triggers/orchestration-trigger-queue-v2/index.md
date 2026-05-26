@@ -39,21 +39,3 @@ The configuration has the following parameters:
   * **Pass Main Flow Variables** – When checked, the variables defined for the main flow are appended to the recovery flow's variables.
   * **Variables of the flow on failure** – Optional list of `name` / `value` pairs passed into the recovery flow.
 * **Trigger Info** – Click **SHOW INFO** to validate the configuration. The action confirms that the Storage API token, stack, and flow IDs are valid and shows which flow (and in which project) will be triggered. When **Store Metadata in configuration** is enabled, the resolved **Project ID**, **Project Name**, and **Orchestration link** are stored in the configuration for quick reference.
-
-## Sample Configuration
-
-```json
-{
-    "parameters": {
-        "#kbcToken": "SECRET_VALUE",
-        "kbcUrl": "eu-central-1.",
-        "orchestrationId": "832802120",
-        "variables": [
-            {"name": "env", "value": "production"}
-        ],
-        "waitUntilFinish": true,
-        "failOnWarning": true
-    },
-    "action": "run"
-}
-```
