@@ -1,5 +1,5 @@
 ---
-title: Flows (Legacy)
+title: Legacy Flows
 permalink: /flows/flows-legacy/
 redirect_from:
     - /orchestrator/
@@ -16,12 +16,12 @@ redirect_from:
 
 <div class="alert alert-warning" role="alert">
     <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> This is the legacy Flow Builder. It is being replaced by <a href="/flows/">Flows</a>, which offer conditional logic, branching, retries, and more robust error handling. We recommend using <a href="/flows/">Flows</a> for all new workflows. An automatic migration from legacy Flows to Flows is planned.
+    <strong>Important:</strong> This is the Legacy Flow Builder. It is being replaced by <a href="/flows/">Conditional Flows</a>, which offer conditional logic, branching, retries, and more robust error handling. We recommend using <a href="/flows/">Conditional Flows</a> for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
 </div>
 
-## Migration to Flows
+## Migration to Conditional Flows
 
-We're planning an automatic migration from Legacy Flows to [Flows](/flows/) to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same — but with added flexibility under the hood.
+We're planning an automatic migration from Legacy Flows to [Conditional Flows](/flows/) to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same — but with added flexibility under the hood.
 
 News and more information about the migration will be posted to our [changelog](https://changelog.keboola.com/).
 
@@ -31,17 +31,17 @@ News and more information about the migration will be posted to our [changelog](
 *If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
 For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
 
-Flows integrate all of your project's segments (data connectors, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
+Legacy Flows integrate all of your project's segments (data connectors, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
 
 First, you need to decide what exactly you want your flow to do, meaning **what tasks** should be executed. Then, you decide in **what order** you want them to run. 
 And finally, you will determine **when** you want the entire flow to be executed and **how often**. Notifications are available to help you monitor the entire process. 
 
-## What Is the Flow Builder?
-Using the **Flow Builder** feature, you can create data flows by dragging and dropping the components together on a single screen.
+## What Is the Legacy Flow Builder?
+Using the **Legacy Flow Builder** feature, you can create data flows by dragging and dropping the components together on a single screen.
 Even scheduling and automating your data pipelines takes just a few button clicks. 
 
-The flow builder enables you to do the following:
+The Legacy Flow Builder enables you to do the following:
 
 - View your multi-step data pipeline in a single browser window, which is especially helpful when your data pipeline is complex. 
 - Create your flows with no data engineering skills.
@@ -51,21 +51,21 @@ The flow builder enables you to do the following:
 
 Let us show you how to organize individual tasks into steps, set up notifications, and schedule the execution of your flow:
 
-- [Access the Flow Builder](#access-the-flow-builder)
+- [Access the Legacy Flow Builder](#access-the-legacy-flow-builder)
 - [Build the flow](#build-the-flow)
 - [Schedule and automate your flow](#schedule-and-automate)
 - [Set up notifications](/management/notifications/)
 - [Check how your flow is running](#check-run-history)
 
-## Access the Flow Builder
-Select from the top menu **Flows -> Flows** and click the **Create Flow** button.
+## Access the Legacy Flow Builder
+Select from the top menu **Conditional Flows > Legacy Flows** and click the **Create Flow** button.
    
 {: .image-popup}
 ![Go to Flows](/tutorial/automate/automate1.png)
 
 Name your new flow and add an easy to understand description. Then click **Create Flow** again. 
 
-This will open up the **flow builder** view, where you can create your data flow.
+This will open up the **Legacy Flow Builder** view, where you can create your data flow.
 
 ## Build the Flow
 Click **Select first step** and start selecting the components that will bring in data from your selected data sources. Use the drop-down menu to select a particular configuration of the component.
@@ -142,7 +142,7 @@ Once you’ve built your flow end-to-end, it may look something like this:
 Click **Run Flow** to start the data pipeline.
 
 ## Schedule and Automate
-Within the Flow Builder, click on **Set Schedule** and select when you want the flow to run.
+Within the Legacy Flow Builder, click on **Set Schedule** and select when you want the flow to run.
 You can select predefined intervals or set your own. Another option is to use triggers to initiate the run. 
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
