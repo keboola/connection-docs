@@ -105,14 +105,13 @@ Variables in Flows let you store and reuse values - like dates, task results, or
 
 1. In a phase, click the **+** icon and choose **Set Variable**. The Set Variable panel opens on the right.
 2. Enter a **Variable Name** — this is the identifier other tasks will use to reference the value.
-3. Choose a **Variable Type**:
-   - **Static Value** — a fixed text or number you enter directly. Useful for thresholds, IDs, or labels that don't change between runs.
-   - **Dynamic Value** — a value computed at run time from a task result, an earlier phase, or a built-in function (see [Using Task Results as Dynamic Values](#using-task-results-as-dynamic-values) and [Date & Time function](#date--time-function) below).
+3. Choose a **Variable Type** — either [Static Value](#static-value) or [Dynamic Value](#dynamic-value).
 
-{: .image-popup}
-![Set Variable panel in Conditional Flow](/flows/conditional-flows-variables-set.png)
+### Static Value
 
-**JSON equivalent** of a static variable (useful when authoring a flow as a template or via the API):
+A **Static Value** is a fixed text or number you enter directly. Useful for thresholds, IDs, or labels that don't change between runs.
+
+**JSON equivalent** (useful when authoring a flow as a template or via the API):
 
 ```json
 {
@@ -122,9 +121,12 @@ Variables in Flows let you store and reuse values - like dates, task results, or
 }
 ```
 
-### Using Task Results as Dynamic Values
+### Dynamic Value
 
-When you choose **Dynamic Value**, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
+A **Dynamic Value** is computed at run time from a task result, an earlier phase, or a built-in function (see [Date & Time function](#date--time-function) below). When you pick this type, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
+
+{: .image-popup}
+![Set Variable panel in Conditional Flow](/flows/conditional-flows-variables-set.png)
 
 If a task produces **multiple output tables**, the picker also offers aggregations across all of them: **Sum**, **Minimum**, **Maximum**, and **Average** of a numeric field. For example, `Sum of importedRowsCount` returns the total number of rows imported by an HTTP data source across every output table.
 
