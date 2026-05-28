@@ -161,7 +161,7 @@ This function is automatically enabled in transformations.
 *Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
 
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
-However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema. However, you can still manually add tables to an input mapping.
+Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
    
 There is no need to set anything for a **read-only input mapping** in **transformations**, all tables in Storage are automatically accessible in the transformation.
 This also applies to linked buckets. *Note that buckets and tables belong
