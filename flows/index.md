@@ -111,6 +111,9 @@ Variables in Flows let you store and reuse values - like dates, task results, or
 
 A **Static Value** is a fixed text or number you enter directly. Useful for thresholds, IDs, or labels that don't change between runs.
 
+{: .image-popup}
+![Set Variable panel with Static Value selected](/flows/conditional-flows-variables-static-set.png)
+
 **JSON equivalent** (useful when authoring a flow as a template or via the API):
 
 ```json
