@@ -341,9 +341,9 @@ Only the files stored directly in the `out/files/` directory can be mapped, subd
 - **Permanent** - This option makes the file stay in the file Storage, until you delete it manually. 
 If unchecked, the target file will be deleted after 15 days.
 
-### Manual Output Mapping
-Manual Output Mapping lets your transformation write directly to Storage tables instead of going through
-the standard copy-based output mapping process. With manual output mapping enabled, the transformation
+### Direct Mode Output Mapping
+Direct Mode Output Mapping lets your transformation write directly to Storage tables instead of going through
+the standard copy-based output mapping process. With Direct Mode output mapping enabled, the transformation
 workspace receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE`, `DELETE`,
 or `TRUNCATE` you run in your transformation SQL is applied immediately to the destination table --- there is no
 separate import step.
@@ -351,14 +351,14 @@ separate import step.
 This feature is available as a **private beta** and must be enabled by [Keboola Support](/management/support/).
 
 {: .image-popup}
-![Manual Output Mapping](/transformations/mappings/manual-output-mapping.png)
+![Direct Mode Output Mapping](/transformations/mappings/manual-output-mapping.png)
 
-#### When to Use Manual Output Mapping
-Manual output mapping is designed for **advanced users with high data maturity** who are comfortable writing
+#### When to Use Direct Mode Output Mapping
+Direct Mode output mapping is designed for **advanced users with high data maturity** who are comfortable writing
 production-quality SQL and managing data consistency themselves. Typical use cases include:
 
 - **Large incremental loads** --- Standard output mapping on a 150 GB table with a single-row append can take over
-  an hour due to deduplication and copy overhead. Manual output mapping reduces this to seconds.
+  an hour due to deduplication and copy overhead. Direct Mode output mapping reduces this to seconds.
 - **Minimal overhead workflows** --- When the standard mapping pipeline (copy to staging, deduplicate, import)
   creates unnecessary overhead for your workload.
 
@@ -368,15 +368,15 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 |--------|-----------------|
 | Standard output mapping (Upsert) | ~160 min |
 | Simplified output mapping (Insert) | ~55 min |
-| **Manual output mapping** | **~11 seconds** |
+| **Direct Mode output mapping** | **~11 seconds** |
 
 #### Supported Backends
-Manual output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
+Direct Mode output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
 including [transformations](/transformations/), [sandboxes](/transformations/sandbox/),
 and [data apps](/components/data-apps/).
 
 #### How It Works
-When a component with manual output mapping runs:
+When a component with Direct Mode output mapping runs:
 
 1. The workspace role/service account receives **write privileges** on the specified Storage tables.
 2. Your transformation SQL operates directly on Storage tables using their read-only storage paths
@@ -394,7 +394,7 @@ The workspace **cannot**:
 - Write to tables not listed in the output mapping
 
 #### Configuration
-Manual output mapping is configured per output table in the transformation configuration JSON.
+Direct Mode output mapping is configured per output table in the transformation configuration JSON.
 To set it up, switch to the JSON editor in the output mapping section and add the `unload_strategy` field:
 
 {% highlight json %}
@@ -413,10 +413,10 @@ To set it up, switch to the JSON editor in the output mapping section and add th
 {% endhighlight %}
 
 The `unload_strategy` field accepts two values:
-- `direct-grant` --- Write directly to the Storage table (manual output mapping).
+- `direct-grant` --- Write directly to the Storage table (Direct Mode output mapping).
 - `copy` --- Standard output mapping (default when the field is omitted).
 
-You can mix both strategies in a single transformation --- some tables can use manual output mapping while
+You can mix both strategies in a single transformation --- some tables can use Direct Mode output mapping while
 others use the standard copy strategy.
 
 #### Good Practices
@@ -448,7 +448,7 @@ WHEN NOT MATCHED THEN INSERT ("id", "name", "email")
   VALUES (source."id", source."name", source."email");
 {% endhighlight %}
 
-**Test in a non-production environment first.** Manual output mapping writes affect data immediately.
+**Test in a non-production environment first.** Direct Mode output mapping writes affect data immediately.
 Validate your transformation logic thoroughly before pointing it at production tables.
 
 **Use the read-only storage path for table references.** In your SQL, reference tables by their
@@ -471,11 +471,11 @@ INSERT INTO "in.c-my-bucket"."customers"
 the Storage table metadata. Mismatched types may cause errors or silent data inconsistencies.
 
 **Do not use DDL statements.** You cannot `CREATE TABLE`, `DROP TABLE`, `ALTER TABLE`, or
-`SWAP TABLE` on Storage tables through manual output mapping. Schema changes must be done through
+`SWAP TABLE` on Storage tables through Direct Mode output mapping. Schema changes must be done through
 [Storage](/storage/tables/).
 
-**Do not use manual output mapping in development branches for production data.** Development branches
-currently share the same Snowflake schema as production. Writing via manual output mapping in a dev branch
+**Do not use Direct Mode output mapping in development branches for production data.** Development branches
+currently share the same Snowflake schema as production. Writing via Direct Mode output mapping in a dev branch
 **will modify production data**. This limitation is being addressed in a future release.
 
 #### Limitations
@@ -491,5 +491,5 @@ currently share the same Snowflake schema as production. Writing via manual outp
   detailed event trail of standard output mapping.
 - **Development branch isolation not supported** --- Dev branch writes affect production data
   on Snowflake. Use caution when testing.
-- **Read-only, external, and linked buckets are not supported** --- Manual output mapping cannot write
+- **Read-only, external, and linked buckets are not supported** --- Direct Mode output mapping cannot write
   to buckets that are read-only, external schemas, or linked from another project.
