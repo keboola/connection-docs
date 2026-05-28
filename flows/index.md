@@ -99,9 +99,20 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ## Variables
 
-Variables in Flows let you store and reuse values - like dates, task results, or custom inputs - throughout your flow. You can use them to make decisions, control flow logic, or pass dynamic values between tasks.
+Variables in Flows let you store and reuse values - like dates, task results, or custom inputs - throughout your flow. You can use them to make decisions, control flow logic, or pass dynamic values between tasks. The sections below walk through how to set up and use variables from the UI; each step also shows the JSON shape generated behind the scenes for template authors and API users.
 
-**Example Static variables:**
+### Adding a Variable
+
+1. In a phase, click the **+** icon and choose **Set Variable**. The Set Variable panel opens on the right.
+2. Enter a **Variable Name** — this is the identifier other tasks will use to reference the value.
+3. Choose a **Variable Type**:
+   - **Static Value** — a fixed text or number you enter directly. Useful for thresholds, IDs, or labels that don't change between runs.
+   - **Dynamic Value** — a value computed at run time from a task result, an earlier phase, or a built-in function (see [Using Task Results as Dynamic Values](#using-task-results-as-dynamic-values) and [Date & Time function](#date--time-function) below).
+
+{: .image-popup}
+![Set Variable panel in Conditional Flow](/flows/conditional-flows-variables-set.png)
+
+**JSON equivalent** of a static variable (useful when authoring a flow as a template or via the API):
 
 ```json
 {
@@ -111,7 +122,16 @@ Variables in Flows let you store and reuse values - like dates, task results, or
 }
 ```
 
-**Example Dynamic variables:** Using a source to compute the value dynamically.
+### Using Task Results as Dynamic Values
+
+When you choose **Dynamic Value**, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
+
+If a task produces **multiple output tables**, the picker also offers aggregations across all of them: **Sum**, **Minimum**, **Maximum**, and **Average** of a numeric field. For example, `Sum of importedRowsCount` returns the total number of rows imported by an HTTP data source across every output table.
+
+{: .image-popup}
+![Dynamic Value picker showing task result tree with aggregations](/flows/conditional-flows-variables-picker.png)
+
+**JSON equivalent** — the picker generates a `source` definition behind the scenes. The same dynamic variable expressed as a function:
 
 ```json
 {
@@ -128,6 +148,16 @@ Variables in Flows let you store and reuse values - like dates, task results, or
       }
     ]
   }
+}
+```
+
+The `value` field accepts [JMESPath](https://jmespath.org/) expressions, so you can filter and extract specific items from the task result instead of just walking the tree. For example, picking the name of a particular output table by its ID:
+
+```json
+{
+  "type": "task",
+  "task": "97288",
+  "value": "job.result.output.tables[?id=='out.c-test.example'][].name | [0]"
 }
 ```
 
@@ -174,6 +204,28 @@ This example returns the full textual representation of the current month, such 
  }
 }
 ```
+
+### Using Variables in Conditions
+
+Once a variable has been set in an earlier phase, any later **Condition** can compare its value against a constant, against another variable, or against a task result.
+
+1. In the IF row, click the value picker and choose a variable, a task result, or a phase result from an earlier phase.
+2. Choose an operator (Greater than, Equals, Contains, …).
+3. Provide a comparison value — a constant, or another value picked from the tree.
+4. Set the THEN and ELSE actions: **Continue To** an existing phase, or end the flow.
+
+Only the first matching IF condition is executed; subsequent IFs in the same Conditions block are skipped.
+
+{: .image-popup}
+![IF/THEN/ELSE condition referencing a task result](/flows/conditional-flows-variables-condition.png)
+
+See also the [Conditions](#conditions) section above for the full list of operators and condition types.
+
+### How Variables Reach Component Jobs
+
+When a phase runs a component (a job task), the variables you set earlier in the flow are merged into the component's own variables. A flow variable replaces a component variable **only if both have the same name** — flow variables whose names the component does not declare are silently ignored. This means: to let a flow drive a value inside a component, declare a variable with the matching name in the component's configuration; the flow will fill it in when the job runs.
+
+For finer control on a specific job task, an advanced `variableOverrides` field on the task can restrict which flow variables are merged in.
 
 ## Retry
 
