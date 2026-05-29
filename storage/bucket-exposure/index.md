@@ -4,180 +4,185 @@ permalink: /storage/bucket-exposure/
 ---
 
 {: .alert.alert-warning}
-Important: This feature is currently available in BETA and only for BigQuery projects. It is
-gated behind the `bucket-exposure` project feature flag — contact Keboola support to enable it.
+Important: This feature is currently available in BETA and only for BigQuery projects.
+Contact Keboola support to have it enabled for your project.
 
 * TOC
 {:toc}
 
-**Bucket Exposure** lets you publish data from a Keboola bucket directly to external consumers
-through [Google BigQuery Analytics Hub](https://cloud.google.com/bigquery/docs/analytics-hub-introduction).
-Subscribers you specify get **read-only, zero-copy** access to the data in their own BigQuery
-environment — no exports, no data duplication, no manual handoffs.
+**Bucket Exposure** lets you share data from a Keboola bucket with people outside your
+Keboola project — directly inside their own Google BigQuery environment. No exports, no
+data copies, no manual handoffs.
 
-The data is always live: subscribers see the latest version of the dataset every time they
-query it.
+You pick a bucket, give it a friendly name, and list who should have access. Those people
+or teams see the data appear in their BigQuery, and they can query it just like any other
+dataset. The data is **always live**: as soon as it changes in Keboola, the new version is
+visible to them.
 
-## What Is Bucket Exposure?
+## When to Use Bucket Exposure
 
-Exposure is a property of a regular Keboola-owned [bucket](/storage/buckets/) on a BigQuery
-project. When you expose a bucket, Keboola publishes its underlying BigQuery dataset as an
-**Analytics Hub listing**. The people or groups you nominate as subscribers can then "subscribe"
-to that listing in their own GCP project and receive a **linked dataset** — a live, read-only
-view of the data.
+Bucket Exposure is the right choice when:
 
-```
-Keboola bucket (BigQuery dataset)
-        ↓ exposed via Analytics Hub
-    Listing (visible to subscribers)
-        ↓ subscriber clicks "Subscribe"
-    Linked dataset (in subscriber's BigQuery project)
-        ↓
-    Subscriber queries the data (always up to date)
-```
+- You want to share **prepared, governed data** with a partner, a client, or another team
+  in your organization — and they work in **BigQuery**, not in Keboola.
+- You want a **single source of truth**: instead of emailing CSVs or running nightly
+  exports, your consumers always see the latest version of the data.
+- You want **control and visibility**: you decide who has access, you can revoke it at any
+  time from Keboola, and every change is auditable.
 
-### Who is it for?
+Typical scenarios:
 
-- **Data teams** that need to share processed datasets with partners, clients, or other
-  departments that work directly in BigQuery.
-- **Organizations** that want a governed, auditable way to distribute data without copying
-  it into separate projects.
+- The **Marketing team** maintains a curated customer segmentation in Keboola. The
+  **BI team** consumes it directly in their BigQuery workspace, in real time.
+- A **data provider** sells a cleaned, enriched dataset to **paying customers**. Each
+  customer gets access to the same dataset in their own GCP project — no replication, no
+  staging buckets.
+- A **finance team** needs to give their **external auditors** a read-only view of
+  specific reconciliation data, with the ability to revoke access at the end of the audit.
 
-### How does it differ from other sharing features?
+## How It Differs From Other Sharing Features
 
-- [**Data Catalog**](/catalog/) shares buckets between Keboola projects within the same
-  organization. Bucket Exposure shares **outside** Keboola, directly into a subscriber's
-  BigQuery project.
-- [**External Datasets**](/storage/byodb/external-buckets/) register a BigQuery dataset you
-  already own as a Keboola bucket. Bucket Exposure is the opposite direction — it publishes
-  a Keboola-owned dataset to external BigQuery consumers.
-- Exposure and Catalog sharing are independent and can be used on the same bucket
-  simultaneously.
+| Feature | What it does | Who can access |
+|---------|--------------|----------------|
+| [**Data Catalog**](/catalog/) | Share a bucket with another **Keboola project** in the same organization. | Keboola users only. |
+| [**External Datasets**](/storage/byodb/external-buckets/) | Register a BigQuery dataset **you already own** as a bucket inside Keboola. | Keboola users only. |
+| **Bucket Exposure** | Share a Keboola-owned bucket **out into BigQuery** for people who don't use Keboola. | Anyone with a Google account or Google Group. |
+
+Bucket Exposure and Data Catalog sharing are independent — you can do both on the same
+bucket if you want.
 
 ## Creating an Exposure
 
-In the Keboola UI, open a bucket detail and use the **Expose Bucket** action. You will be
-asked for:
+Open the bucket you want to share in **Storage**. On the bucket detail page, either click
+the **Disabled (click to enable)** link next to *Bucket exposure*, or open the **⋯** menu
+in the top right and choose **Create bucket exposure**.
 
-| Field | Description |
-|-------|-------------|
-| **Exposure Name** | A human-readable name for the dataset (e.g. *Sales Dataset Q1*). This is what subscribers will see when browsing Analytics Hub. Max 63 characters. |
-| **Description** *(optional)* | A description of the data being shared. Max 2000 characters. |
-| **Listing ID** | A unique identifier for the listing (e.g. `sales_dataset_q1`). Lowercase letters, digits and underscores only. **Cannot be changed after creation.** |
-| **Subscribers** | A list of email addresses or Google Groups that should have access. Each entry must be prefixed with `user:` or `group:` (see [Managing Subscribers](#managing-subscribers)). |
+{: .image-popup}
+![Open the Create bucket exposure action from the bucket detail](/storage/bucket-exposure/figures/bucket-detail.png)
 
-The operation runs asynchronously — you will see a job in the Keboola UI tracking its
-progress. Once the job completes, the bucket is exposed and subscribers can find the listing
-in BigQuery Analytics Hub.
+A dialog opens. Fill in:
+
+{: .image-popup}
+![Create bucket exposure dialog](/storage/bucket-exposure/figures/bucket-exposure-create-modal.png)
+
+- **Exposure name** — what your consumers will see when they look up the dataset in
+  BigQuery. Use a friendly name like *Sales Dataset Q1* or *Customer Segments — Production*.
+- **Description** *(optional)* — a short explanation of what the data is. Your consumers
+  will see this too.
+- **BigQuery listing ID** — a technical identifier (lowercase letters, digits and
+  underscores). This **cannot be changed later**, so pick something stable. If you're not
+  sure, it's safe to derive it from the exposure name, e.g. `sales_dataset_q1`.
+- **Subscribers** *(optional)* — the people or groups who should have access. For each
+  entry, pick whether it is a **User** (a single Google account, e.g.
+  `john.doe@example.com`) or a **Group** (a Google Group, e.g.
+  `analytics-team@example.com`). You can add subscribers later from the exposure detail.
+
+Click **Create**. The exposure is created in the background — you will see a job in
+Keboola tracking its progress. Once the job finishes, the bucket is live in BigQuery
+Analytics Hub and your subscribers can start using it.
 
 {: .alert.alert-info}
-**Note:** You need **manage** access to the bucket (the same permission level required for
-[sharing a bucket between Keboola projects](/catalog/)).
+**Who can create an exposure?** Anyone with **manage** access to the bucket — the same
+permission required to share a bucket inside Keboola.
 
-## Managing Subscribers
+## Managing Your Exposures
 
-Each subscriber entry must be prefixed so that Google can correctly route the grant — Google
-cannot tell a personal email from a group email automatically:
+All your exposures live under **Data Catalog → Bucket exposures**.
 
-| Prefix | Example | Meaning |
-|--------|---------|---------|
-| `user:` | `user:analyst@company.com` | A single Google account |
-| `group:` | `group:data-team@company.com` | A Google Group; all members of the group inherit access |
+{: .image-popup}
+![Bucket exposures list](/storage/bucket-exposure/figures/bucket-exposure-listing.png)
 
-Adding a subscriber later (via the **Update** action) takes effect immediately — the new
-subscriber can subscribe to the listing in the GCP Console without waiting. Removing a
-subscriber also takes effect immediately and revokes access to the listing.
+Each row shows the friendly name, the source bucket, the BigQuery listing ID, and the
+number of subscribers. Click a row to see details.
 
-{: .alert.alert-warning}
-**Keboola is the single source of truth** for subscriber access. If someone manually edits
-permissions on the listing in the GCP Console, those changes will be overwritten the next
-time the exposure is updated from Keboola.
+{: .image-popup}
+![Bucket exposure detail](/storage/bucket-exposure/figures/bucket-exposure-detail.png)
 
-## What the Subscriber Sees in BigQuery
+The detail page lists everyone who has access and gives you **Edit** and **Delete** buttons.
 
-The subscriber experience is entirely within the **Google Cloud Console** — subscribers do
-**not** need a Keboola account.
+### Editing an Exposure
 
-1. Open **BigQuery** > **Analytics Hub** in the GCP Console.
-2. Go to **Search listings**.
-3. Find the listing by name (the **Exposure Name** you set in Keboola).
-4. Click **Subscribe** on the listing.
-5. Choose a destination project and dataset name for the linked dataset.
-6. Click **Subscribe**.
+Click **Edit** on the detail page to change the exposure name, description, or the list of
+subscribers. Adding or removing a subscriber takes effect immediately — new people gain
+access right away, removed people lose access right away.
 
-A **linked dataset** appears in the subscriber's BigQuery project. This is a read-only,
-zero-copy view of the original data — queries run against it read directly from the source
-dataset in real time.
+{: .image-popup}
+![Edit bucket exposure dialog](/storage/bucket-exposure/figures/bucket-exposure-edit-modal.png)
 
-Subscribers see the **listing name** and **description** you provided when creating the
-exposure. The linked dataset behaves like any other BigQuery dataset — they can query it,
-join it with their own tables, and use it in dashboards or pipelines.
+The **BigQuery listing ID** is shown but cannot be edited — changing it would break the
+connection for everyone already subscribed.
 
-## Updating an Exposure
+### Deleting an Exposure
 
-You can update the **Exposure Name**, **Description**, or **subscriber list** at any time
-from the bucket detail in the Keboola UI. The **Listing ID** cannot be changed — it would
-break existing subscriber references.
+Click **Delete** on the detail page to remove the exposure entirely. All current
+subscribers immediately lose access to the data in BigQuery.
 
-Updates run asynchronously — you will see a job in the Keboola UI.
+If you delete the **bucket itself** in Storage, the exposure is cleaned up automatically —
+you don't need to remove it manually first.
 
-## Deleting an Exposure
+## What Your Subscribers See
 
-Deleting an exposure removes the listing from Analytics Hub entirely. Existing subscribers
-lose access immediately and their linked datasets stop returning data.
+Your subscribers do **not** need a Keboola account. Everything happens for them inside the
+**Google Cloud Console**:
 
-Deletion also runs asynchronously.
+1. They open **BigQuery → Analytics Hub** in the GCP Console.
+2. They go to **Search listings** and find your exposure by name.
+3. They click **Subscribe**, pick a destination project, and choose a name for the linked
+   dataset.
+4. A **linked dataset** appears in their BigQuery project. From their point of view, it
+   behaves like any normal BigQuery dataset — they can query it, join it with their own
+   tables, use it in dashboards, etc. — except they cannot modify it.
 
-If you delete the **bucket itself**, the exposure is cleaned up automatically — the listing
-is removed from Analytics Hub and subscribers lose access. You do not need to remove the
-exposure first.
+The data they see is always live. Whenever the data in your Keboola bucket changes (a new
+load, a transformation, a deletion), their queries reflect it on the next run. There is no
+copy of the data on their side — it stays in your project.
 
-## Rules and Limitations
+## Things to Keep in Mind
 
-| Rule | Reason |
-|------|--------|
-| The bucket must be a **regular bucket** (not [linked](/catalog/), not [external](/storage/byodb/external-buckets/)) | You can only expose data that Keboola owns and controls. |
-| Each bucket can have **at most one exposure** | One listing per bucket keeps the model simple and avoids confusion. |
-| Exposure and internal bucket sharing are **independent** | Sharing a bucket between Keboola projects ([Data Catalog](/catalog/)) and exposing it externally via Analytics Hub are separate features that do not interfere with each other. |
-| The **Listing ID** is immutable after creation | Changing it would break existing subscriber references. |
-| **Keboola is the single source of truth** for subscriber access | Manual edits to the listing's IAM policy in the GCP Console will be overwritten by the next update from Keboola. |
-| **BigQuery only** | The initial release supports BigQuery via Analytics Hub. Snowflake support (via Secure Data Sharing or role grants) is planned. |
-| Requires the `bucket-exposure` **feature flag** | Gradual rollout — contact Keboola support to enable it on your project. |
+- **One exposure per bucket.** Each bucket can have at most one exposure. If you need to
+  share different slices of data with different audiences, create separate buckets.
+- **Read-only.** Subscribers can query but never write. They cannot change, delete, or
+  re-share the data.
+- **Regular buckets only.** You can expose buckets that Keboola owns. You cannot expose
+  [linked buckets](/catalog/) (already shared from another Keboola project) or
+  [external datasets](/storage/byodb/external-buckets/) (registered from BigQuery).
+- **BigQuery only (for now).** Snowflake support is on the roadmap and will use the same
+  UI — your existing workflow won't change.
+- **Manage subscribers from Keboola.** If you or someone else edits the listing's
+  permissions directly in the GCP Console, those changes will be overwritten the next time
+  the exposure is updated from Keboola. Keboola is the single source of truth.
+- **Costs.** There is no extra storage cost — the data is not copied. Your subscribers
+  pay for the queries they run in their own GCP project; you continue to pay for the
+  storage in yours.
 
 ## FAQ
 
-**Q: Does this copy the data?**
-No. Analytics Hub uses zero-copy sharing. The subscriber's linked dataset reads directly from
-the original BigQuery dataset. There is no data duplication and no additional storage cost
-for the subscriber.
+**Q: Is the data copied to my subscriber's project?**
+No. Analytics Hub uses zero-copy sharing. Your subscribers see a live link to the original
+data — there is no duplication and no extra storage to pay for.
 
-**Q: Is the data always up to date?**
-Yes. The linked dataset is a live reference. Any changes to the data in the Keboola bucket
-(via transformations, loads, etc.) are immediately visible to subscribers.
+**Q: Is the shared data always up to date?**
+Yes. Subscribers always see the latest version. There is no refresh, no sync, no delay.
+
+**Q: Can I share the same bucket with different groups at different access levels?**
+Not directly. Each exposure has a single subscriber list and everyone on it gets the same
+read-only access. If you need different access tiers, split the data into separate
+buckets, each with its own exposure.
 
 **Q: What happens if I delete the bucket?**
-The exposure is automatically cleaned up — the listing is removed from Analytics Hub and
-existing subscribers lose access.
+The exposure is removed automatically and your subscribers lose access. No leftover state
+in BigQuery.
 
-**Q: Can I expose the same bucket to different groups with different permissions?**
-Not directly — each bucket has a single exposure with a single subscriber list. All
-subscribers on the list get the same read-only access. If you need different access levels,
-consider creating separate buckets with different data subsets.
+**Q: Can I take away access from a single subscriber?**
+Yes. Open the exposure detail, click **Edit**, remove the subscriber from the list, and
+save. The change is immediate.
 
-**Q: Will this work with Snowflake?**
-Not yet. The initial release supports BigQuery only. The feature is designed to support
-additional backends (like Snowflake via Secure Data Sharing) in the future without changing
-the user-facing workflow.
+**Q: Will this work for Snowflake projects?**
+Not yet. Initial release is BigQuery only. Snowflake support is planned with the same UI,
+so the way you work will not change when it ships.
 
-**Q: What permissions do I need in Keboola?**
-You need **manage** access to the bucket (the same permission level required for [sharing a
-bucket](/catalog/)).
-
-**Q: What does the subscriber need on the GCP side?**
-The subscriber needs access to a GCP project where they can create a subscription (linked
-dataset). No special Analytics Hub roles are needed — Keboola grants the necessary
-`roles/analyticshub.subscriber` role on the listing automatically.
-
-**Q: Who pays for queries against the linked dataset?**
-The **subscriber** pays the BigQuery compute cost in their own GCP project. Storage of the
-underlying data is still billed to the project that owns the Keboola bucket.
+**Q: What do my subscribers need on their side?**
+A Google account or a Google Group that you've added as a subscriber, and access to any
+GCP project where they can create a linked dataset. They do not need any Keboola license
+or special Analytics Hub permissions — Keboola grants them everything they need to view
+the listing and subscribe to it.
