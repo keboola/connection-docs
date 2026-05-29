@@ -591,6 +591,9 @@ items:
       - url: /storage/buckets/
         title: Buckets
 
+      - url: /storage/bucket-exposure/
+        title: Bucket Exposure
+
       - url: /storage/data-streams/
         title: Data Streams
         items:
