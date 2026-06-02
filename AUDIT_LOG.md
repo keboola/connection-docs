@@ -49,61 +49,6 @@ The migration script copied the parent section title (`Keboola Overview`) onto t
 
 ---
 
-### F-3 — Paragraph spacing too large
-**File:** `src/styles/custom.css`  
-**Type:** Visual rendering  
-
-Default Starlight `--sl-content-gap-y: 1rem` combined with `line-height: 1.7` and `h2 margin-top: 40px` made pages feel overly airy.
-
-**Changes:**
-```diff
-- --sl-line-height: 1.7;
-+ --sl-line-height: 1.65;
-+ --sl-content-gap-y: 0.875rem;
-
-- margin-top: 40px;   /* h2 */
-- margin-bottom: 16px;
-+ margin-top: 32px;
-+ margin-bottom: 14px;
-```
-
----
-
-### F-4 — "Ask Kai" block: label and prompt on one line
-**File:** `src/styles/custom.css`  
-**Type:** Layout bug  
-
-`.b-ask-body` contained two `<span>` elements (inline by default), causing "Ask Kai about this page" and the placeholder text to render side-by-side on a single line instead of stacking vertically.
-
-**Change:**
-```diff
--.b-ask-body { flex: 1; min-width: 0; }
-+.b-ask-body {
-+  flex: 1;
-+  min-width: 0;
-+  display: flex;
-+  flex-direction: column;
-+  gap: 2px;
-+}
-```
-
-Also reduced the block's bottom margin (`32px → 24px`) and added `text-overflow: ellipsis` to the prompt line.
-
----
-
-### F-5 — "On this page" heading too small
-**File:** `src/styles/custom.css`  
-**Type:** Visual  
-
-The right-sidebar TOC heading was `11px` — barely readable at normal viewing distance.
-
-**Change:**
-```diff
--.right-sidebar-panel h2 { font-size: 11px; }
-+.right-sidebar-panel h2 { font-size: 16px; }
-```
-
----
 
 ## Fixed (continued)
 
@@ -143,6 +88,19 @@ One file used ` ```bigquery ` as a code fence language identifier. Astro's expre
 - ```bigquery
 + ```sql
 ```
+
+---
+
+## Deferred — Phase 2 UI/UX
+
+Visual and layout issues spotted during the audit that are outside Phase 1 scope.
+Full details and proposed diffs are in **`UI_FIXES_LOG.md`**.
+
+| ID | Issue |
+|---|---|
+| U-1 | Paragraph spacing too large (`line-height`, `content-gap-y`, `h2` margins) |
+| U-2 | "Ask Kai" block — label and prompt render on one line instead of stacking |
+| U-3 | "On this page" TOC heading `11px` — too small to read comfortably |
 
 ---
 
