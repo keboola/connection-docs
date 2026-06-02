@@ -89,7 +89,7 @@ WHERE "source" = 'mql';
 ### External Dataset in a BigQuery SQL Transformation
 For BigQuery, an external dataset is mapped to an actual dataset, `users_reporting` (the name you filled in the dialog), in your project—in this case, project `sapi-9752`. You can reference the contents of the dataset in your SQL transformation using a fully qualified name: 
 
-```bigquery
+```sql
 CREATE TABLE `MQL_USERS` AS SELECT *
 FROM `users_reporting`.`users`
 WHERE `source` = "mql";

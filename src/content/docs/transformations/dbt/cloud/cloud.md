@@ -5,7 +5,7 @@ slug: 'transformations/dbt/cloud'
 
 dbt Cloud is supported via dedicated components. You can find them in the menu section **Components**:
 
-![](imgs/2777448719.png){: width="100%" }
+![](imgs/2777448719.png)
 
 *   `kds-team.ex-dbt-cloud-api` for extracting data from dbt Cloud API
 
@@ -14,31 +14,31 @@ dbt Cloud is supported via dedicated components. You can find them in the menu s
 
 ## dbt Cloud Trigger
 
-![](imgs/2776563988.png){: width="100%" }
+![](imgs/2776563988.png)
 
 The component configuration is pretty straightforward. You must authorize the component by providing your `Account ID`, `Job ID`, and `API key`.
 
 The component generates a status table called `dbt_cloud_trigger` storing the job trigger API response:
 
-![](imgs/2776269020.png){: width="100%" }
+![](imgs/2776269020.png)
 
 When **Wait for result** is selected, the component polls the status until the job ends. The component has a default wait time limit that can be optionally set to a different time. When the option **Wait for result** is used, the component extracts artifacts, stores them in the file storage, and additionally, produces a job result API call table:
 
-![](imgs/2776564000.png){: width="100%" }
+![](imgs/2776564000.png)
 
 Both tables can be found in the storage, or accessed directly from the job result:
 
-![](imgs/2777710848.png){: width="100%" }
+![](imgs/2777710848.png)
 
 Artifacts can be found in the storage - files - search by tag:
 
-![](imgs/2777448746.png){: width="100%" }
+![](imgs/2777448746.png)
 
 Search by tag (component type or configuration ID):
 
 `tags:"componentId-kds-team.app-dbt-cloud-job-trigger"`
 
-![](imgs/2776269036.png){: width="100%" }
+![](imgs/2776269036.png)
 
 **Tip:**: Those files can be also easily [retrieved externally via the API](https://keboola.docs.apiary.io/#reference/files/list-files/list-files) or from an integrated Jupyter workspace for further analysis.
 
@@ -61,10 +61,10 @@ The purpose of this data source connector is to extract and store the [dbt Cloud
 
 To configure the source connector, enter the API token and select a default configuration:
 
-![](imgs/2777448752.png){: width="100%" }
+![](imgs/2777448752.png)
 
 You can access the data from Storage, or directly from the job detail screen:
 
-![](imgs/2777710857.png){: width="100%" }
+![](imgs/2777710857.png)
 
 ***Note:** The data source connector utilizes our powerful Generic Extractor. In case you want to customize the extraction, select just some endpoints, etc. You can switch to the JSON schema and edit the configuration manually.*

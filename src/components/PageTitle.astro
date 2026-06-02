@@ -67,8 +67,7 @@ function deriveLedeFromBody(body: string | undefined): string | undefined {
     : cleaned.slice(0, 200).replace(/\s+\S*$/, '') + '…';
 }
 
-const lede = (description && description.trim())
-  || deriveLedeFromBody(entry?.body as string | undefined);
+const lede = description && description.trim();
 
 /* Page slug — `entry.id` is the canonical content-collection slug
    ("transformations/snowflake-plain"). Fall back to frontmatter or
