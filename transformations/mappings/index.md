@@ -136,7 +136,7 @@ This might present a dilemma when loading huge tables. A logical approach when t
 be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's
 actually faster to remove the filters and data types, take advantage of the `CLONE` loading type, and apply the filters
 inside the transformation. Also, when you need more complex filters (filtering by multiple columns or ranges), it's best to
-remove the filter completely from the input mapping, take advantage of the clone loading and do the filtering inside of the
+remove the filter completely from the input mapping, take advantage of the clone loading, and do the filtering inside of the
 transformation.
 
 You can verify the table loading type in the events --- copy table:
@@ -344,8 +344,8 @@ If unchecked, the target file will be deleted after 15 days.
 ### Direct Mode Output Mapping
 Direct Mode Output Mapping lets your transformation write directly to Storage tables instead of going through
 the standard copy-based output mapping process. With Direct Mode output mapping enabled, the transformation
-workspace receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE`, `DELETE`,
-or `TRUNCATE` you run in your transformation SQL is applied immediately to the destination table --- there is no
+user receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE`, `DELETE`,
+or `TRUNCATE` you run in your transformation SQL can be applied immediately to the destination table --- there is no
 separate import step.
 
 This feature is available as a **private beta** and must be enabled by [Keboola Support](/management/support/).
@@ -372,8 +372,9 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 
 #### Supported Backends
 Direct Mode output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
-including [transformations](/transformations/), [sandboxes](/transformations/sandbox/),
-and [data apps](/components/data-apps/).
+including [transformations](/transformations/) and [data apps](/components/data-apps/). 
+
+{% include warning.html content="Workspaces (standalone or via SQL editor) are not supported for time being." %}
 
 #### How It Works
 When a component with Direct Mode output mapping runs:
