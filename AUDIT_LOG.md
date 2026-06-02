@@ -104,6 +104,126 @@ Full details and proposed diffs are in **`UI_FIXES_LOG.md`**.
 
 ---
 
+---
+
+## New Findings — Cross-Branch Comparison (`main` vs `feature/astro-migration`)
+
+> Audit method: `git diff FETCH_HEAD:<old-path> src/content/docs/<new-path>` across all 269 pages.
+
+---
+
+### M-1 — 5 Pages Never Migrated (completely missing)
+
+Pages present on the old site (`main`) that have no equivalent in `src/content/docs/`:
+
+| Old path | Description |
+|---|---|
+| `data-apps/oidc/index.md` | OIDC authentication for data apps |
+| `flows/flow-migration-guide/index.md` | Guide for migrating legacy flows |
+| `flows/flows-legacy/index.md` | Legacy Flows documentation |
+| `storage/bucket-exposure/index.md` | Bucket Exposure feature docs |
+| `storage/data-streams/opentelemetry/index.md` | OpenTelemetry integration for data streams |
+
+**Action:** Migrate these 5 pages from `main` into `src/content/docs/`.
+
+---
+
+### M-2 — 21 Images Missing from `/public`
+
+Images referenced in the old site with absolute paths that were not copied to `/public` in the new site. All 21 images will render as broken `<img>` tags.
+
+```
+/storage/bucket-exposure/figures/bucket-exposure-detail.png
+/storage/bucket-exposure/figures/bucket-exposure-listing.png
+/storage/bucket-exposure/figures/bucket-exposure-create-modal.png
+/storage/bucket-exposure/figures/bucket-exposure-edit-modal.png
+/storage/bucket-exposure/figures/bucket-detail.png
+/transformations/mappings/manual-output-mapping.png
+/flows/conditional-flows-variables-picker.png
+/flows/conditional-flows-variables-condition.png
+/flows/conditional-flows-variables-set.png
+/flows/conditional-flows-variables-static-set.png
+/flows/conditional-flows-all-runs.png
+/flows/conditional-flows-condition.png
+/flows/conditional-flows-delay.png
+/flows/conditional-flows-notification-1.png
+/flows/conditional-flows-notification-2.png
+/flows/conditional-flows-retry.png
+/flows/conditional-flows-task.png
+/flows/flow-migration-guide/migration-in-progress.png
+/flows/flow-migration-guide/migration-complete.png
+/flows/flow-migration-guide/migration-preview-button.png
+/flows/flow-migration-guide/migration-preview.png
+```
+
+**Action:** Copy these image files from the `main` branch assets into `/public` of the new site.
+
+---
+
+### M-3 — `flows/index.md` — Wrong content version migrated (HIGH severity)
+
+The migration pulled an **older version** of the Flows page instead of the current one.
+
+- **Old site (`main`):** Documents "Conditional Flows" — the current product. Covers conditional logic, branching, retries, error handling, and links to the Legacy Flows migration guide.
+- **New site (migrated):** Documents "Flow Builder" — the legacy product. The entire intro, structure, and feature descriptions are from a previous version of the product.
+
+This means the migrated Flows page is a **regression** — it describes a product that was superseded by Conditional Flows.
+
+**Action:** Replace `src/content/docs/flows/index.md` content with the current version from `main:flows/index.md`.
+
+---
+
+### M-4 — Terminology: "flows" incorrectly changed to "orchestrations"
+
+In several files the migration script replaced the word "flows" with "orchestrations" — reverting to older Keboola terminology that is no longer used.
+
+**Affected files:**
+| File | Old text | New (wrong) text |
+|---|---|---|
+| `management/project/tokens/index.md` | `creating a new configuration of certain components (for example, flows)` | `…(for example, orchestrations)` |
+| `management/project/tokens/index.md` | `Tokens **cannot** … However, they can trigger flows.` | `…trigger orchestrations.` |
+| `overview/index.md` | `[flows](/flows/)` | `[flows](/flows/orchestrator)` (wrong URL) |
+
+**Action:** Revert these three substitutions to match the old site.
+
+---
+
+### M-5 — Paragraph dropped from `storage/tables/index.md`
+
+The following paragraph exists in `main` but is absent in the migrated version:
+
+> *"Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and transformations via read-only storage access — no input mapping configuration is required. Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW. In linked buckets, alias VIEWs from the source project are automatically mirrored to the destination project, making them immediately queryable there as well."*
+
+**Action:** Restore this paragraph in `src/content/docs/storage/tables/index.md`.
+
+---
+
+### M-6 — Missing `redirect_from` entry in `management/project/tokens/index.md`
+
+Old site had:
+```yaml
+redirect_from:
+  - /storage/tokens/
+```
+This redirect is absent in the migrated file. Any external links pointing to `/storage/tokens/` will 404.
+
+**Action:** Add `/storage/tokens/` to the `redirect_from` array.
+
+---
+
+### M-7 — Grammar: comma dropped in `transformations/mappings/index.md`
+
+Migration introduced a punctuation error:
+
+```diff
+- remove the filter completely from the input mapping, take advantage of the clone loading, and do the filtering
++ remove the filter completely from the input mapping, take advantage of the clone loading and do the filtering
+```
+
+Oxford comma was removed, slightly changing the sentence rhythm. Minor but a migration artifact.
+
+---
+
 ## Catalogued — Phase 3 (do not fix now)
 
 ### C-1 — Tautological introductory paragraphs
