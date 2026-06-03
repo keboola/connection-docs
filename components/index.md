@@ -204,7 +204,7 @@ or the **Move to Trash** button in the configuration detail.
 {: .image-popup}
 ![Screenshot - Delete](/components/configuration-19.png)
 
-Each configuration moved to Trash acts as deleted: it is removed from orchestrations, cannot be run, and is not displayed.
+Each configuration moved to Trash acts as deleted: it is removed from flows, cannot be run, and is not displayed.
 You can undo the delete operation immediately, or you can restore the configuration from Trash, which is accessible from 
 the main menu.
 
@@ -245,7 +245,7 @@ Each row can individually be modified or deleted. You can also disable a row, wh
 configuration is run, the row will be skipped. You can also run a single row explicitly. Jobs that run only
 a single row have the label **partial**. Therefore, you can, for example, create a configuration 
 that, on a scheduled run, extracts all the enabled tables and also contains tables that
-share the same credentials but are updated manually (or in a different orchestration).
+share the same credentials but are updated manually (or in a different flow).
 
 You can add as many rows as you like; the list of configuration rows is fully searchable. You can also change the order of the
 rows. The order is maintained during processing, so you can use this to extract the large tables first, for example. The

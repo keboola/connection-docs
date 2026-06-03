@@ -93,79 +93,67 @@ items:
         title: Python Client
 
   - url: /flows/
-    title: Flows
+    title: Conditional Flows
     items:
-      - url: /flows/conditional-flows/
-        title: Conditional Flows
-
-      - url: /flows/orchestrator/
-        title: Orchestrations
+      - url: /flows/flows-legacy/
+        title: Legacy Flows
         items:
-          - url: /flows/orchestrator/tasks/
-            title: Tasks
+          - url: /flows/templates/
+            title: Templates
             items:
-              - url: /flows/orchestrator/tasks/nesting/
-                title: Nesting
+              - url: /flows/templates/marketing-platforms/
+                title: Advertising Platforms
 
-          - url: /flows/orchestrator/running/
-            title: Running
+              - url: /flows/templates/ai-sms-campaign/
+                title: AI SMS Campaign
 
-          - url: /flows/orchestrator/design/
-            title: Design
+              - url: /flows/templates/customer-relationship-management/
+                title: Customer Relationship Management
 
-      - url: /flows/templates/
-        title: Templates
-        items:
-          - url: /flows/templates/marketing-platforms/
-            title: Advertising Platforms
+              - url: /flows/templates/datahub/
+                title: DataHub
 
-          - url: /flows/templates/ai-sms-campaign/
-            title: AI SMS Campaign
+              - url: /flows/templates/data-quality/
+                title: Data Quality
 
-          - url: /flows/templates/customer-relationship-management/
-            title: Customer Relationship Management
+              - url: /flows/templates/ecommerce/
+                title: eCommerce
 
-          - url: /flows/templates/datahub/
-            title: DataHub
+              - url: /flows/templates/ecomm-kpi-dashboard/
+                title: eCommerce KPI Dashboard
 
-          - url: /flows/templates/data-quality/
-            title: Data Quality
+              - url: /flows/templates/google-analytics4/
+                title: Google Analytics 4
 
-          - url: /flows/templates/ecommerce/
-            title: eCommerce
+              - url: /flows/templates/interactive-keboola-sheets/
+                title: Interactive Keboola Sheets
 
-          - url: /flows/templates/ecomm-kpi-dashboard/
-            title: eCommerce KPI Dashboard
+              - url: /flows/templates/mailchimp/
+                title: Mailchimp
 
-          - url: /flows/templates/google-analytics4/
-            title: Google Analytics 4
+              - url: /flows/templates/media-cashflow/
+                title: Media Cashflow
 
-          - url: /flows/templates/interactive-keboola-sheets/
-            title: Interactive Keboola Sheets
+              - url: /flows/templates/project-management/
+                title: Project Management
 
-          - url: /flows/templates/mailchimp/
-            title: Mailchimp
+              - url: /flows/templates/repository/
+                title: Repository
 
-          - url: /flows/templates/media-cashflow/
-            title: Media Cashflow
+              - url: /flows/templates/snowflake-security-checkup/
+                title: Snowflake Security Checkup
 
-          - url: /flows/templates/project-management/
-            title: Project Management
+              - url: /flows/templates/social-media-engagement/
+                title: Social Media Engagement
 
-          - url: /flows/templates/repository/
-            title: Repository
+              - url: /flows/templates/surveys/
+                title: Surveys
 
-          - url: /flows/templates/snowflake-security-checkup/
-            title: Snowflake Security Checkup
+              - url: /flows/templates/ua-and-ga4-comparison/
+                title: UA and GA4 Comparison
 
-          - url: /flows/templates/social-media-engagement/
-            title: Social Media Engagement
-
-          - url: /flows/templates/surveys/
-            title: Surveys
-
-          - url: /flows/templates/ua-and-ga4-comparison/
-            title: UA and GA4 Comparison
+      - url: /flows/flow-migration-guide/
+        title: Migration Guide
 
   - url: /data-apps/
     title: Apps
@@ -570,7 +558,7 @@ items:
               - url: /components/applications/triggers/exasol-cluster-starter/
                 title: Exasol Cluster Starter
               - url: /components/applications/triggers/orchestration-trigger-queue-v2/
-                title: Orchestration Trigger V2
+                title: Orchestration Trigger
               - url: /components/applications/triggers/dbt-cloud-job-trigger/
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
@@ -603,8 +591,14 @@ items:
       - url: /storage/buckets/
         title: Buckets
 
+      - url: /storage/bucket-exposure/
+        title: Bucket Exposure
+
       - url: /storage/data-streams/
         title: Data Streams
+        items:
+          - url: /storage/data-streams/opentelemetry/
+            title: OpenTelemetry (OTLP)
 
       - url: /storage/files/
         title: Files

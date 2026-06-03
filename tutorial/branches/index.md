@@ -7,7 +7,7 @@ permalink: /tutorial/branches/
 {:toc}
   
 The feature Development Branches allows you to modify [component configurations](/components/) 
-without interfering with the running configurations or entire [orchestrated pipelines](/flows/orchestrator/).
+without interfering with the running configurations or entire [automated pipelines](/flows/).
 
 ## Tutorial
 First, learn how development branches [work in general](/components/branches/).
