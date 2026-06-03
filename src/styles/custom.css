@@ -1568,67 +1568,89 @@ nav.sidebar {
 /* ─── Sidebar collapse toggle ──────────────────────────────────── */
 
 /*
- * Button sits OUTSIDE the sidebar, at the right edge of the sidebar border.
- * Line appears to the RIGHT of the button (same position as the border).
- * Right TOC stays frozen — .right-sidebar-container keeps its original width.
+ * Layout:
+ *   [sidebar content] | [button] | [grey line] | [main content]
+ *
+ * Button floats to the LEFT of the grey dividing line, at HOME-nav level.
+ * Grey line is always visible as a fixed pseudo-element.
+ * Sidebar fades out then collapses (no visible shrinking window).
  */
+
+/* Grey border line — always present, independent of sidebar state */
+#ak-sidebar-collapse::after {
+  content: '';
+  position: fixed;
+  top: var(--sl-nav-height, 3.5rem);
+  bottom: 0;
+  left: var(--sl-sidebar-width, 18rem);
+  width: 1px;
+  background: var(--border-1);
+  pointer-events: none;
+  transition: left 0.3s ease;
+}
+
+/* The button — left of the line, at HOME-nav level */
 #ak-sidebar-collapse {
   position: fixed;
-  top: calc(var(--sl-nav-height, 3.5rem) + 80px);
-  /* At the sidebar right edge, button fully to the right (outside sidebar) */
-  left: var(--sl-sidebar-width, 18rem);
-  transform: translateX(-50%);
+  /* HOME nav item is roughly at nav-height + padding + ask-kai-btn height */
+  top: calc(var(--sl-nav-height, 3.5rem) + 88px);
+  /* Sits left of the line with a small gap: line is at sidebar-width, button 14px left of it */
+  left: calc(var(--sl-sidebar-width, 18rem) - 14px);
+  transform: translateX(-100%);   /* fully left of the line, not touching it */
   z-index: 200;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 5px;
   background: var(--bg-1);
   border: 1px solid var(--border-1);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.09);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--fg-3);
   padding: 0;
-  transition: left 0.22s ease, transform 0.22s ease, color 0.15s, background 0.15s;
+  transition: left 0.3s ease, color 0.15s, background 0.15s;
 }
 #ak-sidebar-collapse:hover {
   color: var(--fg-1);
   background: var(--bg-2);
   border-color: var(--border-2);
 }
-#ak-sidebar-collapse svg { transition: transform 0.22s ease; }
+#ak-sidebar-collapse svg { transition: transform 0.3s ease; }
 
-/* Vertical line — the sidebar right border, always visible */
-#ak-sidebar-collapse::after {
-  content: '';
-  position: fixed;
-  top: var(--sl-nav-height, 3.5rem);
-  bottom: 0;
-  /* Sits right of the button: sidebar-width (the border line position) */
-  left: calc(var(--sl-sidebar-width, 18rem) + 1px);
-  width: 1px;
-  background: var(--border-1);
-  pointer-events: none;
-  transition: left 0.22s ease;
-}
-
-/* Collapsed state */
-:root.sidebar-collapsed .sidebar-pane {
-  width: 0 !important;
+/* ── Fade animation (no visible shrinking) ──────────────────────
+ * Collapsing: fade out opacity (0.25s), THEN snap width to 0
+ * Expanding:  snap width to full (instant), THEN fade in opacity
+ */
+.sidebar-pane {
+  opacity: 1;
   overflow: hidden;
+  /* When going TO expanded: width instantly, opacity fades in */
+  transition: opacity 0.25s ease 0.05s, width 0s ease 0s;
+}
+:root.sidebar-collapsed .sidebar-pane {
+  opacity: 0;
+  width: 0 !important;
+  /* When going TO collapsed: opacity fades out, width snaps AFTER */
+  transition: opacity 0.22s ease 0s, width 0s ease 0.22s;
+}
+.main-frame {
+  /* Matches sidebar width-snap timing */
+  transition: padding-inline-start 0s ease 0s;
 }
 :root.sidebar-collapsed .main-frame {
   padding-inline-start: 0 !important;
+  transition: padding-inline-start 0s ease 0.22s;
 }
-/* Button at left edge, line just to its right */
+
+/* Collapsed — button moves left of the new line position (left: 0 + gap) */
 :root.sidebar-collapsed #ak-sidebar-collapse {
-  left: 24px;
-  transform: translateX(-50%);
+  left: calc(0px + 14px);  /* 14px from left viewport edge */
+  transform: translateX(-100%);  /* keep same visual offset */
 }
 :root.sidebar-collapsed #ak-sidebar-collapse::after {
-  left: 37px; /* right of button: 24px - 12px (center) + 24px + 1px */
+  left: 0px;  /* line at left viewport edge */
 }
 :root.sidebar-collapsed #ak-sidebar-collapse svg {
   transform: rotate(180deg);
@@ -1640,12 +1662,9 @@ nav.sidebar {
   width: var(--sl-sidebar-width) !important;
 }
 
-/* Smooth transitions */
-.sidebar-pane  { transition: width 0.22s ease; }
-.main-frame    { transition: padding-inline-start 0.22s ease; }
-
 @media (max-width: 72rem) {
   #ak-sidebar-collapse { display: none; }
+  #ak-sidebar-collapse::after { display: none; }
 }
 
 @media (max-width: 600px) {
