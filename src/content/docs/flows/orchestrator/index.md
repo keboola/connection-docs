@@ -5,12 +5,9 @@ redirect_from:
     - /orchestrator/
 ---
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> The legacy UI for defining and running workflows - will be deprecated on April 30, 2026. After this date, the Orchestrations section will be removed from the UI. This feature has been replaced by
-<strong>Flows</strong>.
-</div>
+:::caution
+**Important:** The legacy UI for defining and running workflows - will be deprecated on April 30, 2026. After this date, the Orchestrations section will be removed from the UI. This feature has been replaced by **Flows**.
+:::
 
 Bringing systems for data loading, manipulation and writing together is what makes
 [Keboola](/overview/) so powerful and easy to use. With [source connectors](/components/extractors/), you can fetch
