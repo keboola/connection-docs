@@ -1,28 +1,48 @@
 # Phase 1 Migration Audit Log
 
-**Branch:** `feature/astro-migration`  
+**Branch:** `fix/phase1-migration-audit`  
 **Repo:** `keboola/connection-docs`  
 **Auditor:** Nikita Zverev  
-**Date:** 2026-06-02  
+**Started:** 2026-06-02 | **Last updated:** 2026-06-03
 
 ---
 
 ## Summary
 
-Full build passes — 271 pages, no fatal errors. Audit identified 4 categories of issues:
-- 2 fixed (rendering bugs)
-- 3 fixed (visual/CSS)
-- 2 pending (mechanical migration artifacts — ready for PR)
+Full build passes — 271 pages, no fatal errors.
+
+| Category | Count | Status |
+|---|---|---|
+| Rendering bugs (component level) | 1 | ✅ All fixed |
+| Frontmatter migration artifacts | 2 | ✅ All fixed — 1 baked into `migrate.mjs` |
+| Kramdown syntax artifacts | 1 | ✅ Fixed — already handled by `migrate.mjs` |
+| Code fence artifacts | 1 | ✅ Fixed — baked into `migrate.mjs` |
+| Cross-branch content gaps | 7 | ✅ All resolved after main sync + migrate re-run |
+| Deferred UI/UX (Phase 2) | 3 | 📋 Logged in `UI_FIXES_LOG.md` |
+| Deferred content quality (Phase 3) | 1 | 📋 Catalogued below |
 
 ---
 
-## Fixed
+## Durability of each fix
+
+| Fix | Location | Survives `migrate.mjs` rerun? |
+|---|---|---|
+| F-1 Duplicate paragraph | `src/components/PageTitle.astro` | ✅ Always — script never touches components |
+| F-2 Wrong page title | `scripts/migrate.mjs` `TITLE_OVERRIDES` | ✅ Yes — baked into script |
+| F-6 Kramdown `{: width=...}` | `scripts/migrate.mjs` `removeKramdownAttrs()` | ✅ Always — was already in script |
+| F-7 `bigquery` code fence | `scripts/migrate.mjs` `FENCE_LANG_ALIASES` | ✅ Yes — baked into script |
+| M-1…M-7 Content gaps | Resolved by merging `main` + rerunning script | ✅ Self-healing on every future rerun |
+
+---
+
+## Fixed — Component / Frontend
 
 ### F-1 — Duplicate first paragraph on every page
 **File:** `src/components/PageTitle.astro`  
 **Type:** Rendering bug  
+**Durability:** Permanent — `migrate.mjs` never touches `src/components/`
 
-`PageTitle.astro` auto-extracted the first body paragraph via `deriveLedeFromBody()` and rendered it as a styled lede *above* the page title. The same paragraph then rendered again as normal body content — visible duplication on every page without an explicit `description:` in frontmatter.
+`PageTitle.astro` contained a `deriveLedeFromBody()` function that automatically extracted the first body paragraph and rendered it as a styled lede above the page content. The same paragraph then rendered again as normal body text — causing visible duplication on every page that did not have an explicit `description:` in its frontmatter.
 
 **Change:**
 ```diff
@@ -31,168 +51,175 @@ Full build passes — 271 pages, no fatal errors. Audit identified 4 categories 
 + const lede = description && description.trim();
 ```
 
-The `deriveLedeFromBody` function is retained in the file but no longer called. The styled lede now only appears when a page explicitly sets `description:` in its frontmatter.
+`deriveLedeFromBody` is retained in the file but no longer called. The styled lede now only appears when a page explicitly sets `description:` in its frontmatter.
 
 ---
+
+## Fixed — Migration Script (`scripts/migrate.mjs`)
 
 ### F-2 — Wrong page title on Google Data Policy page
 **File:** `src/content/docs/overview/google-data-policy.md`  
 **Type:** Frontmatter migration artifact  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs` via `TITLE_OVERRIDES` map
 
-The migration script copied the parent section title (`Keboola Overview`) onto this page instead of deriving a title from the page content.
+The Jekyll source had `title: Keboola Overview` (copied from the parent section). The migration faithfully reproduced the wrong title. Now corrected via a per-file override in the script.
 
-**Change:**
+**Change in generated file:**
 ```diff
 - title: Keboola Overview
 + title: Google Data Usage Policy
 ```
 
+**Change in `migrate.mjs`:**
+```js
+const TITLE_OVERRIDES = {
+  'overview/google-data-policy.md': 'Google Data Usage Policy',
+};
+```
+Applied in `transformFile()` after all other frontmatter transforms. To fix other wrong titles in future, add an entry to this map.
+
 ---
 
-
-## Fixed (continued)
-
-### F-6 — Jekyll Kramdown attribute syntax renders as literal text (41 occurrences)
+### F-6 — Jekyll Kramdown `{: width="..."}` renders as literal text (41 occurrences)
 **Type:** Migration artifact  
+**Durability:** ✅ Permanent — already handled by `removeKramdownAttrs()` in `migrate.mjs`
 
-Four DBT documentation files contained Jekyll Kramdown inline attribute syntax (`{: width="100%" }`) after image tags. Standard Markdown (used by Astro/remark) does not recognize this syntax — rendered as visible garbage text after every image.
-
-The image files themselves exist and resolve correctly. Only the attribute suffix was stripped.
+Four DBT documentation files contained Jekyll Kramdown inline attribute syntax after image tags. Astro's remark pipeline does not recognise this syntax — it rendered as visible garbage text after every image.
 
 **Affected files:**
 | File | Occurrences |
 |---|---|
-| `src/content/docs/transformations/dbt/transformation/transformation.md` | 16 |
-| `src/content/docs/transformations/dbt/cli/cli.md` | 13 |
-| `src/content/docs/transformations/dbt/cloud/cloud.md` | 10 |
-| `src/content/docs/transformations/dbt/flows/flows.md` | 3 |
-| `src/content/docs/transformations/dbt/index.md` | 3 |
+| `transformations/dbt/transformation/transformation.md` | 16 |
+| `transformations/dbt/cli/cli.md` | 13 |
+| `transformations/dbt/cloud/cloud.md` | 10 |
+| `transformations/dbt/flows/flows.md` | 3 |
+| `transformations/dbt/index.md` | 3 |
 
-**Change:**
+**Example change:**
 ```diff
 - ![](imgs/2776563898.png){: width="100%" }
 + ![](imgs/2776563898.png)
 ```
 
+Note: image files themselves were present and resolving correctly — only the attribute suffix was the problem.
+
 ---
 
 ### F-7 — Unknown code fence language `bigquery`
 **Type:** Migration artifact  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs` via `FENCE_LANG_ALIASES` map
 
-One file used ` ```bigquery ` as a code fence language identifier. Astro's expressive-code highlighter does not recognise it, falling back to plain unformatted text. The build emitted a `[WARN]` for this.
+One file used ` ```bigquery ` as a code fence language. Astro's expressive-code highlighter does not recognise it — the build emitted a `[WARN]` and the block rendered as plain unformatted text.
 
-**Affected file:** `src/content/docs/storage/byodb/external-buckets/index.md` line 92
+**Affected file:** `storage/byodb/external-buckets/index.md`
 
-**Change:**
+**Change in generated file:**
 ```diff
 - ```bigquery
 + ```sql
 ```
 
----
-
-## Deferred — Phase 2 UI/UX
-
-Visual and layout issues spotted during the audit that are outside Phase 1 scope.
-Full details and proposed diffs are in **`UI_FIXES_LOG.md`**.
-
-| ID | Issue |
-|---|---|
-| U-1 | Paragraph spacing too large (`line-height`, `content-gap-y`, `h2` margins) |
-| U-2 | "Ask Kai" block — label and prompt render on one line instead of stacking |
-| U-3 | "On this page" TOC heading `11px` — too small to read comfortably |
-
----
-
----
-
-## New Findings — Cross-Branch Comparison (`main` vs `feature/astro-migration`)
-
-> Audit method: `git diff FETCH_HEAD:<old-path> src/content/docs/<new-path>` across all 269 pages.
-
----
-
-### M-1 — Pages not present in migrated site ✅ RESOLVED
-
-After merging latest `main` and re-running `migrate.mjs`, all previously missing pages now exist:
-
-| Page | Status |
-|---|---|
-| `data-apps/oidc/index.md` | ✅ Was a `redirect_to` stub — correctly folded into `redirect_from` on `/data-apps/authentication/` |
-| `flows/flow-migration-guide/index.md` | ✅ Now migrated |
-| `flows/flows-legacy/index.md` | ✅ Now migrated |
-| `storage/bucket-exposure/index.md` | ✅ Now migrated |
-| `storage/data-streams/opentelemetry/index.md` | ✅ Now migrated |
-
----
-
-### M-2 — 21 Images Missing from `/public` ✅ RESOLVED
-
-All 21 images now present in `/public` after merging `main` and re-running `migrate.mjs`.
-
----
-
-### M-3 — `flows/index.md` — Wrong content version migrated ✅ RESOLVED
-
-The migration pulled an **older version** of the Flows page instead of the current one.
-
-- **Old site (`main`):** Documents "Conditional Flows" — the current product. Covers conditional logic, branching, retries, error handling, and links to the Legacy Flows migration guide.
-- **New site (migrated):** Documents "Flow Builder" — the legacy product. The entire intro, structure, and feature descriptions are from a previous version of the product.
-
-This means the migrated Flows page is a **regression** — it describes a product that was superseded by Conditional Flows.
-
-Page now correctly titled "Conditional Flows" after re-running `migrate.mjs` against updated `main`.
-
----
-
-### M-4 — Terminology: "flows" incorrectly changed to "orchestrations"
-
-In several files the migration script replaced the word "flows" with "orchestrations" — reverting to older Keboola terminology that is no longer used.
-
-**Affected files:**
-| File | Old text | New (wrong) text |
-|---|---|---|
-| `management/project/tokens/index.md` | `creating a new configuration of certain components (for example, flows)` | `…(for example, orchestrations)` |
-| `management/project/tokens/index.md` | `Tokens **cannot** … However, they can trigger flows.` | `…trigger orchestrations.` |
-| `overview/index.md` | `[flows](/flows/)` | `[flows](/flows/orchestrator)` (wrong URL) |
-
-✅ RESOLVED — all three fixed after re-running `migrate.mjs` against updated `main`.
-
----
-
-### M-5 — Paragraph dropped from `storage/tables/index.md`
-
-The following paragraph exists in `main` but is absent in the migrated version:
-
-> *"Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and transformations via read-only storage access — no input mapping configuration is required. Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW. In linked buckets, alias VIEWs from the source project are automatically mirrored to the destination project, making them immediately queryable there as well."*
-
-✅ RESOLVED — paragraph restored after re-running `migrate.mjs`.
-
----
-
-### M-6 — Missing `redirect_from` entry in `management/project/tokens/index.md`
-
-Old site had:
-```yaml
-redirect_from:
-  - /storage/tokens/
+**Change in `migrate.mjs`:**
+```js
+const FENCE_LANG_ALIASES = {
+  bigquery: 'sql',
+};
 ```
-This redirect is absent in the migrated file. Any external links pointing to `/storage/tokens/` will 404.
-
-✅ RESOLVED — redirect present after re-running `migrate.mjs`.
+The new `remapFenceLanguages()` function runs in `transformBody()` after highlight-block conversion. To silence future unknown-language build warnings, add an entry to this map.
 
 ---
 
-### M-7 — Grammar: comma dropped in `transformations/mappings/index.md`
+## Fixed — Cross-Branch Content Gaps
 
-Migration introduced a punctuation error:
+> **Audit method:** `git diff FETCH_HEAD:<old-path> src/content/docs/<new-path>` across all 269 pages, comparing `main` against `feature/astro-migration`.  
+> **Root cause of all M-series issues:** `main` received new commits after the last `migrate.mjs` run. Merging `main` and re-running the script resolved all of them automatically.
+
+---
+
+### M-1 — 5 pages not present in migrated site ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
+
+| Page | Note |
+|---|---|
+| `data-apps/oidc/index.md` | Was a `redirect_to` stub — script correctly folded its URL into `redirect_from` on `/data-apps/authentication/` |
+| `flows/flow-migration-guide/index.md` | Now migrated |
+| `flows/flows-legacy/index.md` | Now migrated |
+| `storage/bucket-exposure/index.md` | Now migrated |
+| `storage/data-streams/opentelemetry/index.md` | Now migrated |
+
+---
+
+### M-2 — 21 images missing from `/public` ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
+
+Images were added to `main` after the last migration run and not yet copied to `/public`. All 21 now present:
+
+```
+/flows/conditional-flows-variables-*.png  (4 files)
+/flows/conditional-flows-*.png            (7 files)
+/flows/flow-migration-guide/*.png         (4 files)
+/storage/bucket-exposure/figures/*.png    (5 files)
+/transformations/mappings/manual-output-mapping.png
+```
+
+---
+
+### M-3 — `flows/index.md` had wrong content version ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
+
+The migrated Flows page described the legacy "Flow Builder" product instead of the current "Conditional Flows" feature. The `main` branch had been updated to Conditional Flows after the last `migrate.mjs` run. Now correctly titled and structured.
+
+---
+
+### M-4 — "flows" incorrectly replaced with "orchestrations" in 3 places ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
+
+The migrated content used stale terminology ("orchestrations") from an older `main` snapshot. Updated `main` content uses the current term "flows" consistently.
+
+| File | Wrong text | Correct text |
+|---|---|---|
+| `management/project/tokens/index.md` | `for example, orchestrations` | `for example, flows` |
+| `management/project/tokens/index.md` | `they can trigger orchestrations` | `they can trigger flows` |
+| `overview/index.md` | `[flows](/flows/orchestrator)` | `[flows](/flows/)` |
+
+---
+
+### M-5 — Alias table paragraph dropped from `storage/tables/index.md` ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
+
+The following paragraph was absent in the migration but present in `main`:
+
+> *"Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and transformations via read-only storage access — no input mapping configuration is required. Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW."*
+
+---
+
+### M-6 — Missing `redirect_from: /storage/tokens/` ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
+
+The tokens page was previously accessible at `/storage/tokens/`. The redirect was absent in the migration, which would have caused 404s for any external links. Now present.
+
+---
+
+### M-7 — Oxford comma dropped in `transformations/mappings/index.md` ✅ RESOLVED
+**Resolution:** Merge + `migrate.mjs` rerun
 
 ```diff
 - remove the filter completely from the input mapping, take advantage of the clone loading, and do the filtering
 + remove the filter completely from the input mapping, take advantage of the clone loading and do the filtering
 ```
+The stale `main` snapshot had already removed the comma; the updated `main` restores it.
 
-✅ RESOLVED — comma restored after re-running `migrate.mjs` against updated `main`.
+---
+
+## Deferred — Phase 2 UI/UX
+
+Visual and layout issues spotted during the audit. Outside Phase 1 scope — full details and proposed diffs are in **`UI_FIXES_LOG.md`**.
+
+| ID | File | Issue |
+|---|---|---|
+| U-1 | `src/styles/custom.css` | Paragraph spacing too large (`line-height 1.7`, `content-gap-y 1rem`, `h2 margin-top 40px`) |
+| U-2 | `src/styles/custom.css` | "Ask Kai" block — `.b-ask-body` missing `flex-direction: column`, label and prompt render on one line |
+| U-3 | `src/styles/custom.css` | "On this page" TOC heading `11px` — too small to read comfortably |
 
 ---
 
@@ -203,9 +230,12 @@ Many section index pages open with a paragraph that re-states what the page titl
 
 ---
 
-## Remaining Week-1 Tasks
+## Remaining Tasks
 
-- [x] Fix Kramdown `{: width=... }` attributes (41 occurrences across dbt docs)
-- [x] Fix `bigquery` code fence → `sql`
-- [ ] **Open PR** — commit all fixes to a branch and open pull request for Jordan's review
+- [x] F-1 Duplicate first paragraph — `PageTitle.astro`
+- [x] F-2 Wrong page title — `migrate.mjs` + generated file
+- [x] F-6 Kramdown `{: width=...}` — 41 occurrences stripped
+- [x] F-7 `bigquery` fence → `sql` — `migrate.mjs` + generated file
+- [x] M-1…M-7 — all resolved by merging `main` + rerunning `migrate.mjs`
+- [ ] **Open PR** — push branch and open pull request for Jordan's review
 - [ ] **Sync with Jordan** — triage this log, agree on Phase 2 priorities
