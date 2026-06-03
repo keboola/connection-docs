@@ -1588,12 +1588,12 @@ nav.sidebar {
   transition: left 0.3s ease;
 }
 
-/* Button — always to the RIGHT of the grey line */
+/* Button — always to the LEFT of the grey line */
 #ak-sidebar-collapse {
   position: fixed;
   top: calc(var(--sl-nav-height, 3.5rem) + 88px);
-  /* Start right after the grey line with a small gap */
-  left: calc(var(--sl-sidebar-width, 18rem) + 8px);
+  /* Button sits left of the line: line is at sidebar-width, button ends 6px before it */
+  left: calc(var(--sl-sidebar-width, 18rem) - 28px - 6px);
   z-index: 200;
   width: 28px;
   height: 28px;
@@ -1638,12 +1638,12 @@ nav.sidebar {
   transition: padding-inline-start 0s ease 0.22s;
 }
 
-/* Collapsed — line at left edge, button just to its right */
+/* Collapsed — button at left edge, grey line just to its right */
 :root.sidebar-collapsed #ak-sidebar-collapse {
-  left: 8px; /* 1px line at 0px, button 8px from edge */
+  left: 6px;
 }
 :root.sidebar-collapsed #ak-sidebar-collapse::after {
-  left: 0px;
+  left: calc(6px + 28px + 6px); /* line right of button: button-left + button-width + gap */
 }
 :root.sidebar-collapsed #ak-sidebar-collapse svg {
   transform: rotate(180deg);
