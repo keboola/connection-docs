@@ -27,15 +27,21 @@ backend you are using.
 Fill in the **name** of the new bucket, **database** name, and **schema** name. Click **Next Step**. Keboola will then generate a code that you can use to 
 grant Keboola correct access to the schema in your Snowflake. Once access has been granted, click **Register Dataset** to start using it.
 
+:::note
 **Note:** This set of permissions grants the Keboola service account read-only access to the data.
+:::
 
+:::caution
 [Sharing data via Snowflake](https://docs.snowflake.com/en/guides-overview-sharing) is currently supported only through [Direct Share](https://docs.snowflake.com/en/guides-overview-sharing#direct-share) and requires granting privileges on objects directly to a share. Learn more in [Secure Data Sharing](/storage/byodb/snowflake-secure-data-sharing/).
+:::
 
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
 correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
 
+:::note
 **Note:** By adding the Keboola service account as a subscriber, you enable read-only access to the data.
+:::
 
 ### BigLake Tables
 Keboola generaly does not support external tables, except for [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). 
@@ -84,7 +90,9 @@ FROM "REPORTING"."sales_emea"."users"
 WHERE "source" = 'mql';
 ```
 
+:::caution
 **Note:** The query uses the **fully qualified name** of the table in the `FROM` clause.
+:::
 
 ### External Dataset in a BigQuery SQL Transformation
 For BigQuery, an external dataset is mapped to an actual dataset, `users_reporting` (the name you filled in the dialog), in your project—in this case, project `sapi-9752`. You can reference the contents of the dataset in your SQL transformation using a fully qualified name: 
@@ -95,8 +103,10 @@ FROM `users_reporting`.`users`
 WHERE `source` = "mql";
 ```
 
+:::caution
 **Note:** The dataset name is the name of the bucket you provided in the dialog (`users-reporting`), not the original dataset created in BigQuery 
 (`sales_emea`). However, there are no technical limitations; they can have the same name. 
+:::
 
 ## Sharing an External Dataset
 It is possible to share an external dataset using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
@@ -121,9 +131,13 @@ The scope of this custom role depends on where your external datasets live:
 **Option 2 — Built-in `roles/analyticshub.listingAdmin` (simpler, broader permissions):**
 Grant the built-in `roles/analyticshub.listingAdmin` role to the Keboola service account on your listing. This role includes the required permissions, but also covers additional capabilities (such as updating or deleting the listing) that Keboola does not use.
 
+:::note
 **Note:** Sharing permissions can be granted at any time after initial registration, but the registration process navigates you to provide such permissions to enable sharing. If not provided during the reigstration (e.g. for the previously registered datasets) Keboola detects the change on the next refresh and enables sharing from that point on. Revoking the permission will prevent new shares; projects that are already linked remain unaffected.
+:::
 
+:::note
 **Note:** To configure the Keboola platform to recognize your custom role, please contact support. A platform-level configuration is required to surface the role name in the registration guide.
+:::
 
 ## Removing an External Dataset
 Removing an external dataset is as simple as removing any other Storage bucket. Simply delete it in the UI or via API. The Storage bucket will be removed from 

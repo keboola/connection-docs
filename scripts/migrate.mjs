@@ -351,6 +351,61 @@ function convertPrivateBetaWarning(body) {
 }
 
 /**
+ * Convert Kramdown block-level alert attributes to Starlight admonitions.
+ *
+ * Jekyll pattern (attribute on the line BEFORE the paragraph it styles):
+ *   {: .alert.alert-warning}
+ *   Important: some text…
+ *
+ * Becomes:
+ *   :::caution
+ *   Important: some text…
+ *   :::
+ *
+ * Mapping:
+ *   .alert-warning  → :::caution
+ *   .alert-info     → :::note
+ *   .alert-danger   → :::danger
+ *   .alert-success  → :::tip
+ *
+ * Must run before removeKramdownAttrs() which would strip the marker first.
+ */
+const ALERT_KIND = {
+  warning: 'caution',
+  info:    'note',
+  danger:  'danger',
+  success: 'tip',
+};
+
+function convertAlertAttributes(body) {
+  const lines = body.split('\n');
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const m = lines[i].match(/^[ \t]*\{:\s*\.alert\.alert-(\w+)[^}]*\}\s*$/);
+    if (m) {
+      const kind = ALERT_KIND[m[1]] ?? 'note';
+      i++; // skip the attribute line
+      // Collect the following paragraph (lines until blank or another attribute)
+      const para = [];
+      while (i < lines.length && lines[i].trim() !== '' && !/^\{:/.test(lines[i])) {
+        para.push(lines[i]);
+        i++;
+      }
+      if (para.length) {
+        out.push(`:::${kind}`);
+        out.push(...para);
+        out.push(':::');
+      }
+    } else {
+      out.push(lines[i]);
+      i++;
+    }
+  }
+  return out.join('\n');
+}
+
+/**
  * Remove `{: .image-popup}` lines entirely.
  */
 function removeImagePopup(body) {
@@ -541,6 +596,9 @@ function transformBody(body) {
   // Expand Jekyll YAML+include patterns (telemetry tables) before stripRawTags
   // so the `{% %}` blocks are resolved to plain markdown.
   body = expandTelemetryTableIncludes(body);
+  // alert attributes must run before image-popup and generic kramdown stripping
+  // so the marker is still present when we need to convert the following paragraph
+  body = convertAlertAttributes(body);
   // image-popup must come before generic kramdown attrs
   // (since {: .image-popup} also matches the generic pattern)
   body = removeImagePopup(body);

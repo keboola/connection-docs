@@ -3,8 +3,10 @@ title: Bucket Exposure
 slug: 'storage/bucket-exposure'
 ---
 
+:::caution
 Important: This feature is currently available in BETA and only for BigQuery projects.
 Contact Keboola support to have it enabled for your project.
+:::
 
 
 
@@ -77,8 +79,10 @@ Click **Create**. The exposure is created in the background — you will see a j
 Keboola tracking its progress. Once the job finishes, the bucket is live in BigQuery
 Analytics Hub and your subscribers can start using it.
 
+:::note
 **Who can create an exposure?** Anyone with **manage** access to the bucket — the same
 permission required to share a bucket inside Keboola.
+:::
 
 ## Managing Your Exposures
 
