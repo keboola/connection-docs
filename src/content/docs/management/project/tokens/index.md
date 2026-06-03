@@ -41,7 +41,7 @@ to do everything that can be otherwise done via the Keboola administration user 
 API tokens are created
 
 1. automatically when joining a project (master token).
-2. automatically when creating a new configuration of certain components (for example, orchestrations).
+2. automatically when creating a new configuration of certain components (for example, flows).
 3. automatically when running a JupyterLab workspace.
 4. automatically when using [external OAuth](/components/#external-authorization) authorization.
 5. manually when needed.
@@ -63,7 +63,7 @@ When creating a new token, the following rules apply:
 - Tokens by default give **no access** to any of the Keboola component configurations.
 - Token bearers can only access **permitted** Storage buckets via the [Storage API](http://developers.keboola.com/integrate/storage/) or
 [Storage console](https://storage-api-console.keboola.com/). 
-- Tokens **cannot** be used to run any actions in your project. However, they can trigger orchestrations.
+- Tokens **cannot** be used to run any actions in your project. However, they can trigger flows.
 - Tokens **cannot** be used to create other tokens (only a master token can be used to create new tokens).
 
 You should never share the same token in multiple applications. The number of tokens is not 

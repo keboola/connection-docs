@@ -53,9 +53,9 @@ or
     No value provided for variable "multiplier".
 
 
-### Orchestration Usage
-When you use [orchestrations](/flows/orchestrator/) to automate transformations with variables, you can
-either rely on the default values, or you can override them for each orchestration task.
+### Flow Usage
+When you use [flows](/flows/) to automate transformations with variables, you can
+either rely on the default values, or you can override them for each flow task.
 This can be done by configuration of task parameters:
 
 ![Screenshot - Orchestration Task Parameters](/transformations/variables/orchestration-parameters.png)

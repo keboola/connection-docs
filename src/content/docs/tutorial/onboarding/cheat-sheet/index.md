@@ -144,9 +144,9 @@ If too many tasks are scheduled in a single phase, you may exceed the available 
 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
 extent possible based on available resources.*
 
-### Continue Despite Failures
-Tasks have a **Continue on Failure** option, which is off by default. Turning it on allows the flow to continue even if a task fails, useful for non-critical 
-tasks or those expected to succeed later. Keep an eye on task statuses to quickly fix any issues.
+### Handle Failures
+In Flows, failure handling is expressed through [conditions](/flows/#conditions) — branch on task or phase status (success, failure, warning) to run fallback logic, send notifications, or end the flow.
+Combined with [automatic retries](/flows/#retry), you can recover from transient errors without manual intervention.
 
 ### Set Up Notifications
 Stay on top of your flow's performance by setting up notifications for errors or long run times. Consider using a group email to keep the whole team informed 

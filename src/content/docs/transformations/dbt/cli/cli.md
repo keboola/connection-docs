@@ -25,7 +25,7 @@ brew upgrade keboola-cli
 kbc --version
 ```
 
-![](imgs/2772467715.png)
+![](imgs/2772467715.png){: width="100%" }
 
 **You will then gain access to dbt-related commands within Keboola CLI!**
 
@@ -53,20 +53,20 @@ The user is in the folder with the cloned dbt project and can run the following 
 
 ### Example
 
-![](imgs/2770010115.jpg)
+![](imgs/2770010115.jpg){: width="100%" }
 
 Store credentials to your zsh env profile (or your respective environment):
 ---------------------------------------------------------------------------
 
 The file is located (Unix) in `~/.zshrc`
 
-![](imgs/2770206732.png)
+![](imgs/2770206732.png){: width="100%" }
 
 Then you can run dbt locally against the project storage, safely develop and test your code.
 
 As part of the init command, CLI will create all sources from storage buckets. A storage bucket is a source file containing tables:
 
-![](imgs/2777448699.png)
+![](imgs/2777448699.png){: width="100%" }
 
 *Note: Please note that `_timestamp` is automatically filled, alongside `primary keys` and corresponding `tests` for primary keys (`unique` and `not_null` tests).*
 
@@ -84,21 +84,21 @@ dbt debug -t beer_demo --profiles-dir .
 *   We are using local profiles; they are using environmental variables stored before.
 
 
-![](imgs/2769649699.png)
+![](imgs/2769649699.png){: width="100%" }
 
 You should see green in all steps:
 
-![](imgs/2770239505.png)
+![](imgs/2770239505.png){: width="100%" }
 
 dbt Run
 -------
 
 For the script alteration, the only check/change you have to make with off-the-shelf scripts is to alter source definitions to match sources:
 
-![](imgs/2769879073.png)
+![](imgs/2769879073.png){: width="100%" }
 
 
-![](imgs/2770042889.png)
+![](imgs/2770042889.png){: width="100%" }
 
 To execute the dbt:
 
@@ -106,7 +106,7 @@ To execute the dbt:
 dbt run -t beer_demo  --profiles-dir .
 ```
 
-![](imgs/2769879081.png)
+![](imgs/2769879081.png){: width="100%" }
 
 ### Other Commands for Future Use
 
@@ -124,7 +124,7 @@ dbt run -t beer_demo  --profiles-dir .
 *   **Example** (non-interactive mode):
 
 
-![](imgs/2770010121.jpg)
+![](imgs/2770010121.jpg){: width="100%" }
 
 `kbc dbt generate sources`
 --------------------------
@@ -135,7 +135,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   **Example** (non-interactive mode)
 
-    ![](imgs/2770010127.jpg)
+    ![](imgs/2770010127.jpg){: width="100%" }
 
 `kbc dbt generate env`
 ----------------------
@@ -146,7 +146,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   **Example**
 
-    ![](imgs/2770010133.jpg )
+    ![](imgs/2770010133.jpg ){: width="100%" }
 
 ### Workspaces Support
 
@@ -161,4 +161,4 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   **Example** (non-interactive mode)
 
-    ![](imgs/2770010139.jpg)
+    ![](imgs/2770010139.jpg){: width="100%" }

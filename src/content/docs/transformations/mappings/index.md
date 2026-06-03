@@ -20,7 +20,7 @@ Two mapping types must be set up before running a transformation:
 If an input mapping does not fit well to your use case, then a [read-only input mapping](/transformations/mappings/#read-only-input-mapping) offers straightforward access to the data, and will drastically reduce the execution time.
 This feature is useful in the following scenarios:
    - Slow transformations where a clone is not used (input mapping)
-   - Complex orchestrations that move data from a data source to the workspace where they are accessed by other apps
+   - Complex flows that move data from a data source to the workspace where they are accessed by other apps
    - Cases where updating data in Storage via output mapping causes multiple data movement operations
 2. **Output Mapping** --- This is a list of tables written into Storage after running the transformation. 
 Tables not listed are neither modified nor permanently stored (i.e., they are temporary). 
@@ -134,7 +134,7 @@ This might present a dilemma when loading huge tables. A logical approach when t
 be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's
 actually faster to remove the filters and data types, take advantage of the `CLONE` loading type, and apply the filters
 inside the transformation. Also, when you need more complex filters (filtering by multiple columns or ranges), it's best to
-remove the filter completely from the input mapping, take advantage of the clone loading and do the filtering inside of the
+remove the filter completely from the input mapping, take advantage of the clone loading, and do the filtering inside of the
 transformation.
 
 You can verify the table loading type in the events --- copy table:
@@ -157,7 +157,7 @@ This function is automatically enabled in transformations.
 *Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
 
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
-However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema. However, you can still manually add tables to an input mapping.
+Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
    
 There is no need to set anything for a **read-only input mapping** in **transformations**, all tables in Storage are automatically accessible in the transformation.
 This also applies to linked buckets. *Note that buckets and tables belong
@@ -221,14 +221,20 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
 #### Options
-- **Tags** --- specify [tags](/storage/files/#uploading-file) which 
-will be used to select files.
-- **Query** --- if selecting files by tags is not precise enough, you can use 
-an [elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax)
-to refine the search. If you combine *query* with *tags*, both conditions must be met.
-- **Processed Tags** --- specify tags which will be assigned to the input files once the transformation is finished.
-This allows you to process Storage files in an incremental fashion. You can combine this setting with the *query* 
-option to omit already processed files in recurring transformations.
+- **Tags** — [tags](/storage/files/#uploading-file) used to select files.
+- **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
+- **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
+- **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
+
+:::caution
+*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/tutorial/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change.
+:::
+
+#### Incremental file processing
+
+Incremental processing is active when **Changed Since** is set to *Since last successful run*. In this mode, the configuration stores a reference to the newest file matching the specified tags. The next run continues with files newer than that reference, so the transformation is automatically fed only the files that have not yet been processed.
+
+To manipulate the state — for example, to run a backfill — use **Debug Mode → Update State** to reset it.
 
 ## Output Mapping
 An output mapping takes results (tables and files) from your transformation and stores them back in Storage. 
@@ -326,3 +332,158 @@ Only the files stored directly in the `out/files/` directory can be mapped, subd
 - **Tag** --- Tags which will be applied to the target file uploaded in [Storage](/storage/tables/)
 - **Permanent** - This option makes the file stay in the file Storage, until you delete it manually. 
 If unchecked, the target file will be deleted after 15 days.
+
+### Direct Mode Output Mapping
+Direct Mode Output Mapping lets your transformation write directly to Storage tables instead of going through
+the standard copy-based output mapping process. With Direct Mode output mapping enabled, the transformation
+user receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE`, `DELETE`,
+or `TRUNCATE` you run in your transformation SQL can be applied immediately to the destination table --- there is no
+separate import step.
+
+This feature is available as a **private beta** and must be enabled by [Keboola Support](/management/support/).
+
+![Direct Mode Output Mapping](/transformations/mappings/manual-output-mapping.png)
+
+#### When to Use Direct Mode Output Mapping
+Direct Mode output mapping is designed for **advanced users with high data maturity** who are comfortable writing
+production-quality SQL and managing data consistency themselves. Typical use cases include:
+
+- **Large incremental loads** --- Standard output mapping on a 150 GB table with a single-row append can take over
+  an hour due to deduplication and copy overhead. Direct Mode output mapping reduces this to seconds.
+- **Minimal overhead workflows** --- When the standard mapping pipeline (copy to staging, deduplicate, import)
+  creates unnecessary overhead for your workload.
+
+**Performance comparison** (incremental load --- 1 row added to a 150 GB table):
+
+| Method | Approximate Time |
+|--------|-----------------|
+| Standard output mapping (Upsert) | ~160 min |
+| Simplified output mapping (Insert) | ~55 min |
+| **Direct Mode output mapping** | **~11 seconds** |
+
+#### Supported Backends
+Direct Mode output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
+including [transformations](/transformations/) and [data apps](/components/data-apps/). 
+
+:::caution
+Workspaces (standalone or via SQL editor) are not supported for time being.
+:::
+
+#### How It Works
+When a component with Direct Mode output mapping runs:
+
+1. The workspace role/service account receives **write privileges** on the specified Storage tables.
+2. Your transformation SQL operates directly on Storage tables using their read-only storage paths
+   (e.g., `"KBC_USE4_33"."in.c-raw-data"."my-table"`).
+3. After the transformation finishes, Keboola runs a **refresh job** that updates table metadata,
+   row counts, and statistics. No data is copied --- the changes are already in place.
+
+The workspace receives these privileges on each granted table:
+- `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE` (Snowflake)
+- `bigquery.tables.getData`, `bigquery.tables.updateData`, `bigquery.tables.get` (BigQuery)
+
+The workspace **cannot**:
+- Create new tables in the bucket
+- Drop or alter existing tables
+- Write to tables not listed in the output mapping
+
+#### Configuration
+Direct Mode output mapping is configured per output table in the transformation configuration JSON.
+To set it up, switch to the JSON editor in the output mapping section and add the `unload_strategy` field:
+
+```json
+{
+  "storage": {
+    "output": {
+      "tables": [
+        {
+          "destination": "out.c-my-bucket.my_table",
+          "unload_strategy": "direct-grant"
+        }
+      ]
+    }
+  }
+}
+```
+
+The `unload_strategy` field accepts two values:
+- `direct-grant` --- Write directly to the Storage table (Direct Mode output mapping).
+- `copy` --- Standard output mapping (default when the field is omitted).
+
+You can mix both strategies in a single transformation --- some tables can use Direct Mode output mapping while
+others use the standard copy strategy.
+
+#### Good Practices
+
+**Write idempotent SQL.** Because there is no automatic rollback on failure, your SQL should be safe
+to re-run. Use patterns like `MERGE` or `DELETE` + `INSERT` within a transaction:
+
+```sql
+BEGIN;
+DELETE FROM "in.c-my-bucket"."sales"
+  WHERE date = CURRENT_DATE();
+INSERT INTO "in.c-my-bucket"."sales"
+  SELECT * FROM "my_staging_table"
+  WHERE date = CURRENT_DATE();
+COMMIT;
+```
+
+**Handle deduplication yourself.** Use `MERGE` statements or explicit `DELETE` before `INSERT`
+to avoid duplicate rows:
+
+```sql
+MERGE INTO "in.c-my-bucket"."customers" AS target
+USING "my_staging_table" AS source
+ON target."id" = source."id"
+WHEN MATCHED THEN UPDATE SET
+  target."name" = source."name",
+  target."email" = source."email"
+WHEN NOT MATCHED THEN INSERT ("id", "name", "email")
+  VALUES (source."id", source."name", source."email");
+```
+
+**Test in a non-production environment first.** Direct Mode output mapping writes affect data immediately.
+Validate your transformation logic thoroughly before pointing it at production tables.
+
+**Use the read-only storage path for table references.** In your SQL, reference tables by their
+full Storage path (e.g., `"SCHEMA"."in.c-bucket"."table"`), not by workspace-local names.
+
+#### Bad Practices
+
+**Do not rely on automatic deduplication.** Unlike standard output mapping, Keboola does **not**
+deduplicate data based on primary keys. Primary keys on Snowflake and BigQuery are not enforced by the
+backend, so a primary key defined in Storage will not prevent duplicates on direct writes.
+Running a plain `INSERT` repeatedly will create duplicate rows:
+
+```sql
+-- BAD: This will create duplicates on every run
+INSERT INTO "in.c-my-bucket"."customers"
+  SELECT * FROM "my_staging_table";
+```
+
+**Do not assume type checking.** Keboola does not verify that column data types in your SQL match
+the Storage table metadata. Mismatched types may cause errors or silent data inconsistencies.
+
+**Do not use DDL statements.** You cannot `CREATE TABLE`, `DROP TABLE`, `ALTER TABLE`, or
+`SWAP TABLE` on Storage tables through Direct Mode output mapping. Schema changes must be done through
+[Storage](/storage/tables/).
+
+**Do not use Direct Mode output mapping in development branches for production data.** Development branches
+currently share the same Snowflake schema as production. Writing via Direct Mode output mapping in a dev branch
+**will modify production data**. This limitation is being addressed in a future release.
+
+#### Limitations
+
+- **No automatic deduplication** --- Primary keys on Snowflake and BigQuery are not enforced by the
+  backend, so they will not prevent duplicates on direct writes. You must handle deduplication in your SQL.
+- **No type checking or casting** --- Column types are not validated against Storage metadata.
+- **No schema changes** --- You cannot alter table structure (add/remove/rename columns). Use
+  [Storage](/storage/tables/) for schema modifications.
+- **No automatic rollback** --- If a transformation fails mid-execution, the table may be left in a
+  partially written state. Wrap related operations in transactions to mitigate this.
+- **Limited auditability** --- Only an import event is created on success, compared to the more
+  detailed event trail of standard output mapping.
+- **Development branch isolation not supported** --- Dev branch writes affect production data
+  on Snowflake. Use caution when testing.
+- **Read-only, external, and linked buckets are not supported** --- Direct Mode output mapping cannot write
+  to buckets that are read-only, external schemas, or linked from another project.

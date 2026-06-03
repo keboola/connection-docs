@@ -28,7 +28,7 @@ destination project.
   - Alter the whitelist using the appropriate new [IP addresses](/components/ip-addresses/).
   - Set up any SSH tunnels for data source and destination connectors.
   - Invite users to the project.
-  - Enable orchestrations.
+  - Enable flows.
 - When everything is done, the old project can be safely deleted.
 
 ## What Will Be Migrated
@@ -36,7 +36,7 @@ destination project.
 - All project data and metadata for buckets, tables, and columns
 - Configurations for all data source and destination connectors, and applications
 - All transformations
-- All orchestrations
+- All flows
 - Keboola-Provisioned Snowflake data destination connectors will be moved to the new stack's Snowflake account.
 - GoodData projects will be moved to the new stack's GoodData account.
 

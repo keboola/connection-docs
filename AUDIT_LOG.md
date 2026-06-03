@@ -112,55 +112,27 @@ Full details and proposed diffs are in **`UI_FIXES_LOG.md`**.
 
 ---
 
-### M-1 — 5 Pages Never Migrated (completely missing)
+### M-1 — Pages not present in migrated site ✅ RESOLVED
 
-Pages present on the old site (`main`) that have no equivalent in `src/content/docs/`:
+After merging latest `main` and re-running `migrate.mjs`, all previously missing pages now exist:
 
-| Old path | Description |
+| Page | Status |
 |---|---|
-| `data-apps/oidc/index.md` | OIDC authentication for data apps |
-| `flows/flow-migration-guide/index.md` | Guide for migrating legacy flows |
-| `flows/flows-legacy/index.md` | Legacy Flows documentation |
-| `storage/bucket-exposure/index.md` | Bucket Exposure feature docs |
-| `storage/data-streams/opentelemetry/index.md` | OpenTelemetry integration for data streams |
-
-**Action:** Migrate these 5 pages from `main` into `src/content/docs/`.
+| `data-apps/oidc/index.md` | ✅ Was a `redirect_to` stub — correctly folded into `redirect_from` on `/data-apps/authentication/` |
+| `flows/flow-migration-guide/index.md` | ✅ Now migrated |
+| `flows/flows-legacy/index.md` | ✅ Now migrated |
+| `storage/bucket-exposure/index.md` | ✅ Now migrated |
+| `storage/data-streams/opentelemetry/index.md` | ✅ Now migrated |
 
 ---
 
-### M-2 — 21 Images Missing from `/public`
+### M-2 — 21 Images Missing from `/public` ✅ RESOLVED
 
-Images referenced in the old site with absolute paths that were not copied to `/public` in the new site. All 21 images will render as broken `<img>` tags.
-
-```
-/storage/bucket-exposure/figures/bucket-exposure-detail.png
-/storage/bucket-exposure/figures/bucket-exposure-listing.png
-/storage/bucket-exposure/figures/bucket-exposure-create-modal.png
-/storage/bucket-exposure/figures/bucket-exposure-edit-modal.png
-/storage/bucket-exposure/figures/bucket-detail.png
-/transformations/mappings/manual-output-mapping.png
-/flows/conditional-flows-variables-picker.png
-/flows/conditional-flows-variables-condition.png
-/flows/conditional-flows-variables-set.png
-/flows/conditional-flows-variables-static-set.png
-/flows/conditional-flows-all-runs.png
-/flows/conditional-flows-condition.png
-/flows/conditional-flows-delay.png
-/flows/conditional-flows-notification-1.png
-/flows/conditional-flows-notification-2.png
-/flows/conditional-flows-retry.png
-/flows/conditional-flows-task.png
-/flows/flow-migration-guide/migration-in-progress.png
-/flows/flow-migration-guide/migration-complete.png
-/flows/flow-migration-guide/migration-preview-button.png
-/flows/flow-migration-guide/migration-preview.png
-```
-
-**Action:** Copy these image files from the `main` branch assets into `/public` of the new site.
+All 21 images now present in `/public` after merging `main` and re-running `migrate.mjs`.
 
 ---
 
-### M-3 — `flows/index.md` — Wrong content version migrated (HIGH severity)
+### M-3 — `flows/index.md` — Wrong content version migrated ✅ RESOLVED
 
 The migration pulled an **older version** of the Flows page instead of the current one.
 
@@ -169,7 +141,7 @@ The migration pulled an **older version** of the Flows page instead of the curre
 
 This means the migrated Flows page is a **regression** — it describes a product that was superseded by Conditional Flows.
 
-**Action:** Replace `src/content/docs/flows/index.md` content with the current version from `main:flows/index.md`.
+Page now correctly titled "Conditional Flows" after re-running `migrate.mjs` against updated `main`.
 
 ---
 
@@ -184,7 +156,7 @@ In several files the migration script replaced the word "flows" with "orchestrat
 | `management/project/tokens/index.md` | `Tokens **cannot** … However, they can trigger flows.` | `…trigger orchestrations.` |
 | `overview/index.md` | `[flows](/flows/)` | `[flows](/flows/orchestrator)` (wrong URL) |
 
-**Action:** Revert these three substitutions to match the old site.
+✅ RESOLVED — all three fixed after re-running `migrate.mjs` against updated `main`.
 
 ---
 
@@ -194,7 +166,7 @@ The following paragraph exists in `main` but is absent in the migrated version:
 
 > *"Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and transformations via read-only storage access — no input mapping configuration is required. Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW. In linked buckets, alias VIEWs from the source project are automatically mirrored to the destination project, making them immediately queryable there as well."*
 
-**Action:** Restore this paragraph in `src/content/docs/storage/tables/index.md`.
+✅ RESOLVED — paragraph restored after re-running `migrate.mjs`.
 
 ---
 
@@ -207,7 +179,7 @@ redirect_from:
 ```
 This redirect is absent in the migrated file. Any external links pointing to `/storage/tokens/` will 404.
 
-**Action:** Add `/storage/tokens/` to the `redirect_from` array.
+✅ RESOLVED — redirect present after re-running `migrate.mjs`.
 
 ---
 
@@ -220,7 +192,7 @@ Migration introduced a punctuation error:
 + remove the filter completely from the input mapping, take advantage of the clone loading and do the filtering
 ```
 
-Oxford comma was removed, slightly changing the sentence rhythm. Minor but a migration artifact.
+✅ RESOLVED — comma restored after re-running `migrate.mjs` against updated `main`.
 
 ---
 

@@ -195,7 +195,7 @@ Six KPI cards summarizing job and flow health:
 |-----|-------------|
 | **Jobs Error Ratio** | Percentage of non-flow jobs ending in error |
 | **Error Jobs** | Total count of error jobs |
-| **Flows Error Ratio** | Percentage of flow/orchestrator jobs ending in error |
+| **Flows Error Ratio** | Percentage of flow jobs ending in error |
 | **Error Flows** | Total count of error flows |
 | **Flows Warning Ratio** | Percentage of flows ending with a warning |
 | **Warning Flows** | Total count of warning flows |
@@ -232,8 +232,8 @@ Four KPI cards act as toggle buttons (same pattern as Configuration Health). Sel
 
 | Metric | Description |
 |--------|-------------|
-| **Flows without Schedule** | Flow/orchestrator configurations not in any enabled schedule |
-| **Flows without Error Notification** | Flow/orchestrator configurations without an error notification subscription |
+| **Flows without Schedule** | Flow configurations not in any enabled schedule |
+| **Flows without Error Notification** | Flow configurations without an error notification subscription |
 | **Unused Branches** | Non-default development branches with no configuration changes in the last 90 days |
 | **Unused Workspaces** | Workspace configurations with no jobs in the last 90 days |
 

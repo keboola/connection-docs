@@ -13,7 +13,7 @@ It can also be used instead of repeated [manual imports of CSV](/tutorial/load/)
 
 Tables only get imported with the data source connector running. The import is **not** triggered by an email
 being sent or received. When running, the data source connector imports all emails received since its previous run.
-Therefore, it is a good idea to set up the data source connector in a [**scheduled** orchestration](/flows/orchestrator/running/#time-schedule).
+Therefore, it is a good idea to set up the data source connector in a [**scheduled** flow](/flows/#schedule-and-automate).
 
 <div class="alert alert-warning">
     <strong>Warning:</strong>
@@ -56,5 +56,5 @@ There may be a delay between the time the email is sent, received, and picked up
 ![Screenshot - Job Detail](/components/extractors/communication/email-attachments/email-attachments-2.png)
 
 ***Note:** When multiple valid emails are received between the data source connector runs, they are imported into separate tables 
-(`data1` -- `dataN`). If this is not desired, time the sending of the emails and configure the connector orchestration 
+(`data1` -- `dataN`). If this is not desired, time the sending of the emails and configure the connector flow 
 to make sure only one email is processed at a time.*

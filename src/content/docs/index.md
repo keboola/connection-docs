@@ -12,7 +12,7 @@ the ins and outs of Keboola.
 ## Where to Start
 If you are new to Keboola and **would like a quick orientation** to the Keboola ecosystem, explore our comprehensive [overview](/overview/).
 
-Ready to take the next step? Grab your free trial and set up your account [here](https://connection.north-europe.azure.keboola.com/wizard),
+Ready to take the next step? Grab your free trial and set up your account [here](https://connection.us-east4.gcp.keboola.com/wizard),
 or connect with our team directly through [this link](https://www.keboola.com/contact).
 
 For some hands-on experience, dive into our Getting Started [tutorial](/tutorial/).

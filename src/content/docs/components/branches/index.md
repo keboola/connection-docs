@@ -9,10 +9,10 @@ slug: 'components/branches'
 go to our [Getting Started tutorial](/tutorial/branches/).*
 
 Development Branches allow you to modify [component configurations](/components/) without interfering with running
-configurations or entire [orchestrated pipelines](/flows/orchestrator/). They are ideal to use when making bigger changes
+configurations or entire [automated pipelines](/flows/). They are ideal to use when making bigger changes
 to a project or when you need to be extra careful about performing your changes safely.
 
-To give an example, let's say that you have an ordinary orchestration that extracts, transforms and writes data
+To give an example, let's say that you have an ordinary flow that extracts, transforms and writes data
 to a target system, and you need to remove a column from the source. To do that, you must modify several configurations,
 and ideally, also perform a dry run to check that the data in the target system is correct. However, modifying a pipeline
 that runs, e.g., every ten minutes, is difficult without an outage of the pipeline. Development Branches are designed
@@ -22,7 +22,7 @@ to help in such situations.
 
 When you create a development branch in your project, you obtain an exact copy of the project and all its current
 configurations. You can then modify these configurations without ever touching the original ones in production,
-and these will keep running in orchestrations.
+and these will keep running in flows.
 
 When you run a configuration in a branch, it can **read** the [tables](/storage/tables/) and [files](/storage/files/)
 from Storage as if it were a normal configuration. However, when your branch configuration attempts to **write** data
