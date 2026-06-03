@@ -39,6 +39,8 @@ Full build passes — 271 pages, no fatal errors.
 | F-10 Sidebar not regenerated | Run `node scripts/convert-nav.mjs` after each merge | ⚠️ Manual step — must be part of sync workflow |
 | F-11 Audit logs in content dir | `scripts/migrate.mjs` `SKIP_FILES` | ✅ Yes — baked into script |
 | F-12 Single-line ` ```x``` ` spans | `scripts/migrate.mjs` `expandSingleLineFences()` | ✅ Yes — baked into script |
+| F-13 Alert links/code/bold stripped | `scripts/migrate.mjs` `convertHtmlAlerts()` fixed order | ✅ Yes — baked into script |
+| F-14 Stale `flows/conditional-flows/` blocking redirect | `scripts/migrate.mjs` `POST_MIGRATE_DELETE` | ✅ Yes — deleted on every run |
 | M-1…M-7 Content gaps | Resolved by merging `main` + rerunning script | ✅ Self-healing on every future rerun |
 
 ---
@@ -252,6 +254,48 @@ Jekyll/Kramdown treats ` ```content``` ` on one line as an inline code span. Rem
    'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
 +  'AUDIT_LOG.md', 'UI_FIXES_LOG.md',
  ]);
+```
+
+---
+
+### F-13 — `convertHtmlAlerts()` stripped hyperlinks and lost code/bold formatting
+**Type:** Migration script bug — found in code review  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs`
+
+The catch-all `.replace(/<[^>]+>/g, '')` in `convertHtmlAlerts()` ran before specific tag conversions, stripping `<a href>`, `<code>`, and `<b>` wholesale. Link text survived but URLs were lost; inline code lost its formatting.
+
+**Affected pages (confirmed):**
+- `ai/mcp-server/index.md` — `/mcp` and `/sse` lost backtick formatting
+- `components/extractors/communication/email-attachments/index.md` — stack URL links lost
+- `components/extractors/communication/email-imap/index.md` — MS Outlook component link lost
+
+**Fix in `migrate.mjs`:** Reordered conversions so specific tags are handled before the generic strip:
+```diff
+- .replace(/<i[^>]*><\/i>/gi, '')
+- .replace(/<\/?strong>/gi, '**')
+- .replace(/<[^>]+>/g, '')          // stripped links/code too
++ .replace(/<i[^>]*>[\s\S]*?<\/i>/gi, '')
++ .replace(/<a\s[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)')
++ .replace(/<code>([\s\S]*?)<\/code>/gi, '`$1`')
++ .replace(/<\/?(?:strong|b)>/gi, '**')
++ .replace(/<\/?(?:em|i)>/gi, '_')
++ .replace(/<[^>]+>/g, '')          // only strips remaining unknown tags
+```
+
+---
+
+### F-14 — `flows/conditional-flows/` stale page blocking redirect (code review)
+**Type:** Migration script bug — found in code review  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs` via `POST_MIGRATE_DELETE`
+
+`flows/index.md` declares `redirect_from: ['/flows/conditional-flows/']` but `migrate.mjs` also regenerated `src/content/docs/flows/conditional-flows/index.md` from the old Jekyll source. The redirect-from integration skips any redirect whose target HTML already exists, so visitors kept landing on the stale retired page instead of the current Conditional Flows page.
+
+**Fix:** Added `POST_MIGRATE_DELETE` array to `migrate.mjs`. After every migration run, listed directories are deleted from `src/content/docs/`. Stale `flows/conditional-flows/` directory and all its images (8 files) deleted.
+
+```js
+const POST_MIGRATE_DELETE = [
+  'flows/conditional-flows', // moved to flows/index.md with redirect_from
+];
 ```
 
 ---
