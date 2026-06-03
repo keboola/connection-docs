@@ -325,6 +325,39 @@
     ensureSidebarTrigger();
     document.addEventListener('astro:page-load', ensureSidebarTrigger);
 
+
+    // ─── Sidebar collapse toggle ──────────────────────────────────────
+    const COLLAPSED_CLASS = 'sidebar-collapsed';
+    const STORAGE_KEY = 'kbc-sidebar-collapsed';
+
+    const applySidebarState = (collapsed: boolean) => {
+      document.documentElement.classList.toggle(COLLAPSED_CLASS, collapsed);
+    };
+
+    const ensureCollapseBtn = () => {
+      if (document.getElementById('ak-sidebar-collapse')) return;
+      // Only show on desktop where sidebar exists
+      if (window.innerWidth < 1152) return;
+      const btn = document.createElement('button');
+      btn.id = 'ak-sidebar-collapse';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Toggle sidebar');
+      btn.title = 'Collapse sidebar';
+      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+      document.body.appendChild(btn);
+      btn.addEventListener('click', () => {
+        const collapsed = document.documentElement.classList.toggle(COLLAPSED_CLASS);
+        localStorage.setItem(STORAGE_KEY, String(collapsed));
+        btn.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+      });
+    };
+
+    // Restore persisted state before first paint
+    const storedCollapsed = localStorage.getItem(STORAGE_KEY) === 'true';
+    applySidebarState(storedCollapsed);
+    ensureCollapseBtn();
+    document.addEventListener('astro:page-load', ensureCollapseBtn);
+
     // ─── Wire triggers ───────────────────────────────────────────────
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement | null;
