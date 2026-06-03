@@ -559,10 +559,12 @@ function renderTelemetryTable(t) {
     lines.push('');
     lines.push('#### Security event operations');
     lines.push('');
-    for (const op of t.security_operations) lines.push(`|\`${op}\``);
+    for (const op of t.security_operations) lines.push(`- \`${op}\``);
     lines.push('');
     lines.push('#### Operation parameters');
     lines.push('');
+    lines.push('| Condition | Values |');
+    lines.push('|---|---|');
     for (const param of t.operation_parameters) {
       lines.push(`| ${param.condition}: | ${param.values} |`);
     }
