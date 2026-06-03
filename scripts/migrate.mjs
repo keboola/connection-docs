@@ -32,7 +32,10 @@ const SKIP_DIRS = new Set([
 ]);
 
 /** Specific root-level files to skip */
-const SKIP_FILES = new Set(['README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md']);
+const SKIP_FILES = new Set([
+  'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
+  'AUDIT_LOG.md', 'UI_FIXES_LOG.md',
+]);
 
 /**
  * Per-file title overrides — keyed by the file's path relative to ROOT.
