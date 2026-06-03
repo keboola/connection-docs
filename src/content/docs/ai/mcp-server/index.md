@@ -6,7 +6,7 @@ redirect_from:
 ---
 
 :::caution
-**SSE Transport Deprecation:** The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using /mcp endpoints instead of /sse. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
+**SSE Transport Deprecation:** The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using `/mcp` endpoints instead of `/sse`. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
 :::
 
 
@@ -298,5 +298,5 @@ Need help or want to contribute? [Open an issue on GitHub](https://github.com/ke
 We’d love your ideas, fixes, and feedback to make MCP even better.
 
 :::caution
-Don't forget to give us a star on GitHub!
+Don't forget to give us a [star on GitHub!](https://github.com/keboola/mcp-server)
 :::

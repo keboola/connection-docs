@@ -1567,26 +1567,31 @@ nav.sidebar {
 
 /* ─── Sidebar collapse toggle ──────────────────────────────────── */
 
-/* The button: top of sidebar at content level, right-edge aligned */
+/*
+ * Button sits OUTSIDE the sidebar, at the right edge of the sidebar border.
+ * Line appears to the RIGHT of the button (same position as the border).
+ * Right TOC stays frozen — .right-sidebar-container keeps its original width.
+ */
 #ak-sidebar-collapse {
   position: fixed;
-  /* Content starts ~120px below top of page (nav + page title area) */
   top: calc(var(--sl-nav-height, 3.5rem) + 80px);
-  left: calc(var(--sl-sidebar-width, 18rem) - 36px);
+  /* At the sidebar right edge, button fully to the right (outside sidebar) */
+  left: var(--sl-sidebar-width, 18rem);
+  transform: translateX(-50%);
   z-index: 200;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 5px;
   background: var(--bg-1);
   border: 1px solid var(--border-1);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.09);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--fg-3);
   padding: 0;
-  transition: left 0.22s ease, top 0.22s ease, color 0.15s, background 0.15s;
+  transition: left 0.22s ease, transform 0.22s ease, color 0.15s, background 0.15s;
 }
 #ak-sidebar-collapse:hover {
   color: var(--fg-1);
@@ -1594,6 +1599,20 @@ nav.sidebar {
   border-color: var(--border-2);
 }
 #ak-sidebar-collapse svg { transition: transform 0.22s ease; }
+
+/* Vertical line — the sidebar right border, always visible */
+#ak-sidebar-collapse::after {
+  content: '';
+  position: fixed;
+  top: var(--sl-nav-height, 3.5rem);
+  bottom: 0;
+  /* Sits right of the button: sidebar-width (the border line position) */
+  left: calc(var(--sl-sidebar-width, 18rem) + 1px);
+  width: 1px;
+  background: var(--border-1);
+  pointer-events: none;
+  transition: left 0.22s ease;
+}
 
 /* Collapsed state */
 :root.sidebar-collapsed .sidebar-pane {
@@ -1603,39 +1622,28 @@ nav.sidebar {
 :root.sidebar-collapsed .main-frame {
   padding-inline-start: 0 !important;
 }
-/* Button moves to left edge, arrow flips */
+/* Button at left edge, line just to its right */
 :root.sidebar-collapsed #ak-sidebar-collapse {
-  left: 6px;
-  top: calc(var(--sl-nav-height, 3.5rem) + 80px);
+  left: 24px;
+  transform: translateX(-50%);
+}
+:root.sidebar-collapsed #ak-sidebar-collapse::after {
+  left: 37px; /* right of button: 24px - 12px (center) + 24px + 1px */
 }
 :root.sidebar-collapsed #ak-sidebar-collapse svg {
   transform: rotate(180deg);
 }
 
-/* Vertical line Stripe-style: runs full height on the left when collapsed */
-:root.sidebar-collapsed #ak-sidebar-collapse::after {
-  content: '';
-  position: fixed;
-  top: var(--sl-nav-height, 3.5rem);
-  bottom: 0;
-  left: 18px; /* centre of the 26px button + 6px offset */
-  width: 1px;
-  background: var(--border-1);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Right sidebar stays at fixed width — only content area expands */
+/* Right sidebar stays frozen — only centre content expands */
 :root.sidebar-collapsed .right-sidebar-container {
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
   width: var(--sl-sidebar-width) !important;
 }
 
 /* Smooth transitions */
-.sidebar-pane { transition: width 0.22s ease; }
-.main-frame   { transition: padding-inline-start 0.22s ease; }
+.sidebar-pane  { transition: width 0.22s ease; }
+.main-frame    { transition: padding-inline-start 0.22s ease; }
 
-/* Hide on mobile — Starlight handles mobile nav separately */
 @media (max-width: 72rem) {
   #ak-sidebar-collapse { display: none; }
 }

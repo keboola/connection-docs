@@ -16,7 +16,7 @@ being sent or received. When running, the data source connector imports all emai
 Therefore, it is a good idea to set up the data source connector in a [**scheduled** flow](/flows/#schedule-and-automate).
 
 :::caution
-**Warning:** This component is available only on AWS multitenant stacks connection.keboola.com and connection.eu-central-1.keboola.com
+**Warning:** This component is available only on AWS multitenant stacks [connection.keboola.com](https://connection.keboola.com) and [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com)
 :::
 
 ## Configuration

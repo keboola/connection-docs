@@ -15,7 +15,7 @@ redirect_from:
 ---
 
 :::caution
-**Important:** This is the Legacy Flow Builder. It is being replaced by Conditional Flows, which offer conditional logic, branching, retries, and more robust error handling. We recommend using Conditional Flows for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
+**Important:** This is the Legacy Flow Builder. It is being replaced by [Conditional Flows](/flows/), which offer conditional logic, branching, retries, and more robust error handling. We recommend using [Conditional Flows](/flows/) for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
 :::
 
 ## Migration to Conditional Flows

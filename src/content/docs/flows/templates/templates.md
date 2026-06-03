@@ -8,7 +8,7 @@ redirect_from:
 
 
 :::caution
-**Important:** Data templates are being discouraged and will be deprecated, as they only create legacy flows. There are no plans to add template support for the new Flows. For building new workflows, use Flows directly — the Kai AI assistant can help you set them up interactively.
+**Important:** Data templates are being discouraged and will be deprecated, as they only create [legacy flows](/flows/flows-legacy/). There are no plans to add template support for the new [Flows](/flows/). For building new workflows, use Flows directly — the [Kai AI assistant](/kai/) can help you set them up interactively.
 :::
 
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
