@@ -48,9 +48,9 @@ Using the search box and advanced patterns you can easily find job based on vari
 
 | | Query |
 |---|---|
-| **Failed orchestrations**  | `component:orchestrator status:error` |
-| **Long running non-successful orchestrations (more than 2 hours)**  | `component:orchestrator durationSeconds:>7200 -status:success` |
-| **Orchestrations which ended with warning**  | `component:orchestrator status:warning` |
+| **Failed flows**  | `component:orchestrator status:error` |
+| **Long running non-successful flows (more than 2 hours)**  | `component:orchestrator durationSeconds:>7200 -status:success` |
+| **Flows which ended with warning**  | `component:orchestrator status:warning` |
 | **Failed transformations**  | `component:transformation status:error`  |
 | **Failed jobs from Docker component HTTP data source connector**  | `params.component:keboola.ex-http status:error` <br />  |
 | **Jobs from either HTTP data source or Google Sheets data destination connector** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
@@ -61,7 +61,7 @@ For more technical information about background jobs, see our
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
-[Orchestrator](/flows/orchestrator/) at a scheduled time. In either case, the typical life time of a job has the 
+[flow](/flows/) at a scheduled time. In either case, the typical life time of a job has the 
 following states:
 
 **waiting** --> **processing** --> **success**/**error**

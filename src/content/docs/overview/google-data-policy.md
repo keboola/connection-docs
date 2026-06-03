@@ -1,5 +1,5 @@
 ---
-title: Keboola Overview
+title: Google Data Usage Policy
 slug: 'overview/google-data-policy'
 ---
 

@@ -15,4 +15,4 @@ The view of Storage jobs can be useful in very busy projects, or in cases where 
 being stuck on the message `Waiting for X Storage jobs to finish.`. There is a core limitation of Storage Tables --- only one job may 
 write to a table at a time. So when you see jobs taking longer than usual or waiting for Storage Jobs to finish, you might want to 
 check the Storage Jobs to understand what is happening. You can see how many jobs are processing if they are writing to same 
-tables, and then, for example, adjust orchestration triggers to avoid concurrency issues.
+tables, and then, for example, adjust flow triggers to avoid concurrency issues.

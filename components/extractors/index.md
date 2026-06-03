@@ -27,7 +27,7 @@ For a definitive list of usable data source connectors, see your project **Data 
 [public list of components](https://components.keboola.com/components).
 
 ## Working with Data Source Connectors
-Even though data source connectors are generally designed for [**automated and repeated**](/flows/orchestrator/) data collection,
+Even though data source connectors are generally designed for [**automated and repeated**](/flows/) data collection,
 they can be triggered manually at any time.
 
 - For manual import of ad-hoc data, see [Data Import in Storage](/storage/files/), or our [tutorial on manual data loading](/tutorial/load/).

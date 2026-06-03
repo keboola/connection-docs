@@ -11,7 +11,7 @@
  * This script is idempotent — running it again produces the same result.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync, existsSync, rmSync } from 'fs';
 import { join, dirname, extname, relative, resolve } from 'path';
 import yaml from 'js-yaml';
 
@@ -32,7 +32,38 @@ const SKIP_DIRS = new Set([
 ]);
 
 /** Specific root-level files to skip */
-const SKIP_FILES = new Set(['README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md']);
+const SKIP_FILES = new Set([
+  'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
+  'AUDIT_LOG.md', 'UI_FIXES_LOG.md',
+]);
+
+/**
+ * Directories under DEST_DOCS to delete after migration.
+ * Use when a Jekyll page was moved/renamed and the old path still gets
+ * regenerated from the source tree, causing the redirect to be suppressed
+ * (the redirect-from integration skips any redirect whose target page exists).
+ */
+const POST_MIGRATE_DELETE = [
+  'flows/conditional-flows', // moved to flows/index.md with redirect_from
+];
+
+/**
+ * Per-file title overrides — keyed by the file's path relative to ROOT.
+ * Use when the Jekyll frontmatter title is wrong (e.g. copied from a parent
+ * section) and the correct title cannot be derived mechanically.
+ */
+const TITLE_OVERRIDES = {
+  'overview/google-data-policy.md': 'Google Data Usage Policy',
+};
+
+/**
+ * Code-fence language aliases — maps unrecognised language identifiers to
+ * ones that expressive-code (Astro Starlight's highlighter) supports.
+ * Add entries here whenever the build emits an "unknown language" warning.
+ */
+const FENCE_LANG_ALIASES = {
+  bigquery: 'sql',
+};
 
 /** Image extensions to copy */
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']);
@@ -212,6 +243,37 @@ function removeTocMarkers(body) {
 }
 
 /**
+ * Convert single-line triple-backtick spans to proper fenced code blocks.
+ *
+ * Jekyll/Kramdown treats ```content``` on one line as an inline code span.
+ * Remark (used by Astro) interprets the opening ``` as a fenced code block
+ * start and treats everything up to the newline as the language identifier,
+ * which breaks rendering entirely.
+ *
+ * Pattern:  ```some content here```   (opening and closing on the same line)
+ * Becomes:
+ *   ```
+ *   some content here
+ *   ```
+ */
+function expandSingleLineFences(body) {
+  return body.replace(/^```(.+)```$/gm, (_match, content) => {
+    return '```\n' + content + '\n```';
+  });
+}
+
+/**
+ * Remap unrecognised code-fence language identifiers using FENCE_LANG_ALIASES.
+ * Runs after highlight-block conversion so both forms are covered.
+ */
+function remapFenceLanguages(body) {
+  return body.replace(/^```(\w+)$/gm, (_match, lang) => {
+    const mapped = FENCE_LANG_ALIASES[lang.toLowerCase()];
+    return mapped ? '```' + mapped : _match;
+  });
+}
+
+/**
  * Convert Jekyll highlight blocks:
  *   {% highlight lang %}...{% endhighlight %}
  * →
@@ -319,6 +381,96 @@ function convertPrivateBetaWarning(body) {
 }
 
 /**
+ * Convert Kramdown block-level alert attributes to Starlight admonitions.
+ *
+ * Jekyll pattern (attribute on the line BEFORE the paragraph it styles):
+ *   {: .alert.alert-warning}
+ *   Important: some text…
+ *
+ * Becomes:
+ *   :::caution
+ *   Important: some text…
+ *   :::
+ *
+ * Mapping:
+ *   .alert-warning  → :::caution
+ *   .alert-info     → :::note
+ *   .alert-danger   → :::danger
+ *   .alert-success  → :::tip
+ *
+ * Must run before removeKramdownAttrs() which would strip the marker first.
+ */
+const ALERT_KIND = {
+  warning: 'caution',
+  info:    'note',
+  danger:  'danger',
+  success: 'tip',
+};
+
+function convertAlertAttributes(body) {
+  const lines = body.split('\n');
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const m = lines[i].match(/^[ \t]*\{:\s*\.alert\.alert-(\w+)[^}]*\}\s*$/);
+    if (m) {
+      const kind = ALERT_KIND[m[1]] ?? 'note';
+      i++; // skip the attribute line
+      // Collect the following paragraph (lines until blank or another attribute)
+      const para = [];
+      while (i < lines.length && lines[i].trim() !== '' && !/^\{:/.test(lines[i])) {
+        para.push(lines[i]);
+        i++;
+      }
+      if (para.length) {
+        out.push(`:::${kind}`);
+        out.push(...para);
+        out.push(':::');
+      }
+    } else {
+      out.push(lines[i]);
+      i++;
+    }
+  }
+  return out.join('\n');
+}
+
+/**
+ * Convert HTML <div class="alert alert-*"> blocks to Starlight admonitions.
+ *
+ * Handles both single-line and multi-line alert divs, stripping any inner
+ * icon tags (<i class="fas …">) and role attributes. Also removes preceding
+ * <div class="clearfix"></div> lines which serve no purpose in Astro.
+ *
+ * Must run before removeImagePopup / removeKramdownAttrs.
+ */
+function convertHtmlAlerts(body) {
+  // Drop clearfix divs entirely
+  body = body.replace(/^[ \t]*<div[^>]*class="clearfix"[^>]*>[\s\S]*?<\/div>[ \t]*\n?/gm, '');
+
+  // Match <div class="alert alert-TYPE …"> … </div> (possibly multi-line)
+  return body.replace(
+    /<div[^>]*class="[^"]*alert\s+alert-(warning|info|danger|success)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+    (_match, type, inner) => {
+      const kind = ALERT_KIND[type.toLowerCase()] ?? 'note';
+      const cleaned = inner
+        .replace(/<i[^>]*>[\s\S]*?<\/i>/gi, '')              // strip icon tags (with content)
+        .replace(/<a\s[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)') // links → [text](url)
+        .replace(/<code>([\s\S]*?)<\/code>/gi, '`$1`')        // code → backticks
+        .replace(/<\/?(?:strong|b)>/gi, '**')                  // bold → **
+        .replace(/<\/?(?:em|i)>/gi, '_')                       // italic → _
+        .replace(/<[^>]+>/g, '')                               // strip remaining tags
+        .split('\n')
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .join(' ')
+        .trim();
+      return `:::${kind}\n${cleaned}\n:::`;
+    }
+  );
+}
+
+/**
  * Remove `{: .image-popup}` lines entirely.
  */
 function removeImagePopup(body) {
@@ -420,10 +572,12 @@ function renderTelemetryTable(t) {
     lines.push('');
     lines.push('#### Security event operations');
     lines.push('');
-    for (const op of t.security_operations) lines.push(`|\`${op}\``);
+    for (const op of t.security_operations) lines.push(`- \`${op}\``);
     lines.push('');
     lines.push('#### Operation parameters');
     lines.push('');
+    lines.push('| Condition | Values |');
+    lines.push('|---|---|');
     for (const param of t.operation_parameters) {
       lines.push(`| ${param.condition}: | ${param.values} |`);
     }
@@ -500,7 +654,9 @@ function stripLeadingOverviewHeading(body) {
 
 function transformBody(body) {
   body = removeTocMarkers(body);
+  body = expandSingleLineFences(body);
   body = convertHighlightBlocks(body);
+  body = remapFenceLanguages(body);
   body = convertTipIncludes(body);
   body = convertWarningIncludes(body);
   body = convertPublicBetaWarning(body);
@@ -508,6 +664,10 @@ function transformBody(body) {
   // Expand Jekyll YAML+include patterns (telemetry tables) before stripRawTags
   // so the `{% %}` blocks are resolved to plain markdown.
   body = expandTelemetryTableIncludes(body);
+  // alert attributes must run before image-popup and generic kramdown stripping
+  // so the marker is still present when we need to convert the following paragraph
+  body = convertAlertAttributes(body);
+  body = convertHtmlAlerts(body);
   // image-popup must come before generic kramdown attrs
   // (since {: .image-popup} also matches the generic pattern)
   body = removeImagePopup(body);
@@ -611,7 +771,7 @@ function getPermalinkForLookup(frontmatter) {
   return String(fm.permalink).replace(/\/$/, '') + '/';
 }
 
-function transformFile(content, aliases) {
+function transformFile(content, aliases, relPath) {
   const { frontmatter, body } = splitFrontmatter(content);
 
   let fmToTransform = frontmatter;
@@ -619,7 +779,14 @@ function transformFile(content, aliases) {
     fmToTransform = injectRedirectAliases(frontmatter, aliases);
   }
 
-  const newFm = fmToTransform ? transformFrontmatter(fmToTransform) : '';
+  let newFm = fmToTransform ? transformFrontmatter(fmToTransform) : '';
+
+  // Apply per-file title overrides after all other frontmatter transforms.
+  const titleOverride = relPath && TITLE_OVERRIDES[relPath];
+  if (titleOverride && newFm) {
+    newFm = newFm.replace(/^title:.*$/m, `title: ${titleOverride}`);
+  }
+
   const newBody = transformBody(body);
 
   if (newFm) {
@@ -634,6 +801,10 @@ function transformFile(content, aliases) {
 
 function ensureDir(filePath) {
   mkdirSync(dirname(filePath), { recursive: true });
+}
+
+function rmrf(dirPath) {
+  try { rmSync(dirPath, { recursive: true, force: true }); } catch { /* non-fatal */ }
 }
 
 function writeFileSafe(dest, content) {
@@ -696,7 +867,7 @@ function main() {
     const permalink = getPermalinkForLookup(frontmatter);
     const aliases = permalink ? aliasMap.get(permalink) : null;
 
-    const transformed = transformFile(content, aliases);
+    const transformed = transformFile(content, aliases, rel);
     const dest = join(DEST_DOCS, rel);
     writeFileSafe(dest, transformed);
     stats.mdFiles++;
@@ -753,6 +924,18 @@ function main() {
   // ---- 4. Mirror Jekyll's /assets/js/ so pages that reference
   //         `<script src="/assets/js/foo.js">` still work in Astro.
   copyJekyllAssetsJs();
+
+  // ---- 5. Post-migration cleanup ----
+  // Remove directories that were moved/renamed in main — their old paths
+  // still get regenerated by the migration but must not exist so the
+  // redirect-from integration can activate the declared redirect_from aliases.
+  for (const rel of POST_MIGRATE_DELETE) {
+    const target = join(DEST_DOCS, rel);
+    if (existsSync(target)) {
+      rmrf(target);
+      console.log(`Deleted stale path: ${rel}`);
+    }
+  }
 
   // ---- Summary ----
   console.log('\n=== Migration Summary ===');

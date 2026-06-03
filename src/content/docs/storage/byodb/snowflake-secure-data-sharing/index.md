@@ -3,7 +3,9 @@ title: Snowflake Secure Data Sharing
 slug: 'storage/byodb/snowflake-secure-data-sharing'
 ---
 
+:::caution
 Important: This feature is currently available in BETA.
+:::
 
 
 

@@ -6,7 +6,7 @@ slug: 'tutorial/onboarding'
 
 
 Welcome to the Keboola onboarding guide! Whether you've completed your proof of concept project or are stepping up 
-from the [free tier](https://connection.north-europe.azure.keboola.com/wizard), this guide will help you navigate through it. 
+from the [free tier](https://connection.us-east4.gcp.keboola.com/wizard), this guide will help you navigate through it. 
 
 Check out the complete overview of the Keboola platform [here](https://help.keboola.com/overview/).
 

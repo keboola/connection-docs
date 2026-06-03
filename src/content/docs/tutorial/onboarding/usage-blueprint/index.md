@@ -178,13 +178,9 @@ For Storage buckets, tables, and columns:
 6. Set “_PK” and “_ID” columns within each table to mark primary and foreign keys.
 
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> Some data source connectors create Storage buckets you cannot rename. 
-   Generally, don’t apply the same naming conventions on anything loaded into Keboola via a data source connector (e.g., a table, CSV file, and JSON). 
-   Keep their original names and use these naming conventions only for the layers you add on top for consistency and simplicity.
-</div>
+:::caution
+**Important:** Some data source connectors create Storage buckets you cannot rename. Generally, don’t apply the same naming conventions on anything loaded into Keboola via a data source connector (e.g., a table, CSV file, and JSON). Keep their original names and use these naming conventions only for the layers you add on top for consistency and simplicity.
+:::
 
 
 ### Descriptions

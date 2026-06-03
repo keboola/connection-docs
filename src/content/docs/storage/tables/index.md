@@ -34,6 +34,12 @@ Apart from actual tables, it is also possible to create aliases. They behave sim
 An alias does not contain any actual data; it is simply a link to some already existing data.
 Therefore, an alias cannot be written to, and its size does not count toward your project quota.
 
+Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and 
+transformations via [read-only storage access](/transformations/mappings/#read-only-input-mapping) — no input mapping configuration is required. 
+Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW. 
+In [linked buckets](/catalog/), alias VIEWs from the source project are automatically mirrored to the destination project, 
+making them immediately queryable there as well.
+
 To create an alias table, go to the table detail, click the three dots on the right side of the screen, and select the 'Create alias table' option.
 
 ![Screenshot - Create alias](/storage/tables/create-alias.png)

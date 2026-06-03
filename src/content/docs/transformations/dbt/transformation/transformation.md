@@ -9,7 +9,9 @@ slug: 'transformations/dbt/transformation'
 
 ### Database Connection
 
+:::note
 **Note:** The _Database Connection_ configuration section is available **only** for dbt transformation with **remote warehouse**.
+:::
 
 The required connection parameters for your remote data warehouse vary depending on the selected backend type. Use the **Run Debug** option in the right panel to validate the connection using the entered parameters.
 
@@ -139,4 +141,6 @@ default:
 If needed, you can use a `profiles.yml` file committed in your dbt project repository for Remote DWH components and set the target according to your requirements. In this case, you must use the environment variables mentioned above in the generated `profiles.yml` and specify the target in each executed step. Your committed `profiles.yml` file will be merged with the automatically generated version.
 ![](imgs/2740663016.png){: width="100%" }
 
+:::caution
 Important: Never commit sensitive information such as access credentials or passwords to the repository.
+:::

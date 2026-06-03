@@ -46,11 +46,10 @@ Extractors and transformations that match the storage backend (e.g., Snowflake S
   - **Matching Storage Backend:** Database extractors and transformations create storage tables using the same data types as the backend.
   - **Mismatching Storage Backend:** Extractors use base types to ensure compatibility. [Learn more.](/storage/tables/data-types/#base-types)
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2). <br>To avoid this limitation, follow the steps below. 
-</div>
+
+:::caution
+**Important:** When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2). To avoid this limitation, follow the steps below.
+:::
 
 To avoid the limitation:
 - Manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), specifying the correct lengths and precisions.
@@ -107,11 +106,10 @@ You **cannot change the type of a column in a typed table once it has been creat
    - Gradually update all configurations and references to use `date_timestamp` instead of `date`.
    - Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
-</div>
+
+:::caution
+**Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
+:::
 
 ### How to Create a Typed Table Based on a Non-Typed Table
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:

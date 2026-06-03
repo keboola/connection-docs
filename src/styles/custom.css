@@ -111,7 +111,8 @@
   --sl-sidebar-width: 18rem;
 
   --sl-text-base: 0.9375rem; /* 15px */
-  --sl-line-height: 1.7;
+  --sl-line-height: 1.6;
+  --sl-content-gap-y: 0.6rem;
 }
 
 /* ───────── Dark theme ───────── */
@@ -391,66 +392,78 @@ nav.sidebar {
 .b-ask {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
+  gap: 12px;
+  padding: 12px 16px;
   background: linear-gradient(135deg, #f4f8ff 0%, #f6fff4 100%);
   border: 1px solid #d6e6ff;
   border-radius: 12px;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   cursor: pointer;
+  transition: border-color 0.15s;
 }
 :root[data-theme='dark'] .b-ask {
   background: linear-gradient(135deg, rgba(31, 143, 255, 0.12) 0%, rgba(30, 199, 30, 0.08) 100%);
   border-color: rgba(31, 143, 255, 0.35);
 }
 .b-ask-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
   background: linear-gradient(135deg, var(--kbc-blue-500), var(--kbc-green-500));
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  box-shadow: 0 4px 10px rgba(31, 143, 255, 0.25);
+  box-shadow: 0 3px 8px rgba(31, 143, 255, 0.25);
   flex-shrink: 0;
 }
-.b-ask-body { flex: 1; min-width: 0; }
+.b-ask-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
 .b-ask-label {
   font-size: 13px;
   font-weight: 600;
   color: var(--fg-1);
+  line-height: 1.3;
 }
 .b-ask-prompt {
-  font-size: 12.5px;
-  color: var(--fg-3);
+  font-size: 12px;
+  color: var(--fg-4);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .b-ask-btn {
-  height: 36px;
-  padding: 0 18px;
+  height: 34px;
+  padding: 0 16px;
   border: none;
   border-radius: 8px;
   background: var(--kbc-grey-900);
   color: #fff;
   font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: inherit;
   flex-shrink: 0;
+  transition: opacity 0.15s;
 }
+.b-ask-btn:hover { opacity: 0.88; }
 :root[data-theme='dark'] .b-ask-btn {
   background: var(--kbc-grey-100);
   color: var(--kbc-grey-900);
 }
 .b-ask-btn kbd {
-  background: #222529;
+  background: rgba(255,255,255,0.15);
   color: #fff;
-  border: 1px solid #454952;
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 3px;
   padding: 0 4px;
   font-family: var(--font-mono);
@@ -461,9 +474,9 @@ nav.sidebar {
   text-align: center;
 }
 :root[data-theme='dark'] .b-ask-btn kbd {
-  background: var(--kbc-grey-200);
+  background: rgba(0,0,0,0.12);
   color: var(--kbc-grey-900);
-  border-color: var(--kbc-grey-400);
+  border-color: rgba(0,0,0,0.15);
 }
 
 /* CopyMarkdown button placement */
@@ -496,8 +509,8 @@ nav.sidebar {
   color: var(--fg-1);
   letter-spacing: -0.01em;
   line-height: 1.25;
-  margin-top: 40px;
-  margin-bottom: 16px;
+  margin-top: 32px;
+  margin-bottom: 14px;
   padding-top: 0;
   border-top: none;
 }
@@ -846,16 +859,16 @@ nav.sidebar {
 .right-sidebar { background: transparent; }
 .right-sidebar-panel { padding-top: 1.5rem; }
 .right-sidebar-panel h2 {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--fg-3);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg-1);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
+  letter-spacing: 0.6px;
+  margin-bottom: 14px;
 }
 .right-sidebar-panel ul {
   position: relative;
-  padding-left: 14px;
+  padding-left: 16px;
   list-style: none;
 }
 .right-sidebar-panel ul::before {
@@ -870,35 +883,36 @@ nav.sidebar {
 .right-sidebar-panel ul li { padding-left: 0; margin: 0; }
 .right-sidebar-panel a {
   display: block;
-  padding: 4px 0;
-  font-size: 12.5px;
-  line-height: 18px;
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 20px;
   color: var(--fg-3);
   border-left: none;
   position: relative;
   text-decoration: none;
+  transition: color 0.1s;
 }
 .right-sidebar-panel a:hover { color: var(--fg-1); }
 .right-sidebar-panel a[aria-current='true'] {
   color: var(--kbc-blue-700);
-  font-weight: 500;
+  font-weight: 600;
   border-left: none;
 }
 .right-sidebar-panel a[aria-current='true']::before {
   content: '';
   position: absolute;
-  left: -17px;
+  left: -19px;
   top: 50%;
   transform: translateY(-50%);
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--kbc-blue-500);
 }
 :root[data-theme='dark'] .right-sidebar-panel a[aria-current='true'] {
   color: var(--kbc-blue-200);
 }
-.right-sidebar-panel li ul a { padding-left: 14px; font-size: 12px; color: var(--fg-3); }
+.right-sidebar-panel li ul a { padding-left: 14px; font-size: 13px; color: var(--fg-3); }
 
 /* ───────── Page footer (prev/next pagination) ───────── */
 .pagination-links {
@@ -1550,6 +1564,110 @@ nav.sidebar {
 .b-ask { cursor: pointer; }
 .b-ask:hover { border-color: var(--kbc-blue-450); }
 
+
+/* ─── Sidebar collapse toggle ──────────────────────────────────── */
+
+/*
+ * Layout:
+ *   [sidebar content] | [button] | [grey line] | [main content]
+ *
+ * Button floats to the LEFT of the grey dividing line, at HOME-nav level.
+ * Grey line is always visible as a fixed pseudo-element.
+ * Sidebar fades out then collapses (no visible shrinking window).
+ */
+
+/* Grey border line — always present, independent of sidebar state */
+#ak-sidebar-collapse::after {
+  content: '';
+  position: fixed;
+  top: var(--sl-nav-height, 3.5rem);
+  bottom: 0;
+  left: var(--sl-sidebar-width, 18rem);
+  width: 1px;
+  background: var(--border-1);
+  pointer-events: none;
+  transition: left 0.3s ease;
+}
+
+/* The button — left of the line, at HOME-nav level */
+#ak-sidebar-collapse {
+  position: fixed;
+  /* HOME nav item is roughly at nav-height + padding + ask-kai-btn height */
+  top: calc(var(--sl-nav-height, 3.5rem) + 88px);
+  /* Sits left of the line with a small gap: line is at sidebar-width, button 14px left of it */
+  left: calc(var(--sl-sidebar-width, 18rem) - 14px);
+  transform: translateX(-100%);   /* fully left of the line, not touching it */
+  z-index: 200;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--fg-3);
+  padding: 0;
+  transition: left 0.3s ease, color 0.15s, background 0.15s;
+}
+#ak-sidebar-collapse:hover {
+  color: var(--fg-1);
+  background: var(--bg-2);
+  border-color: var(--border-2);
+}
+#ak-sidebar-collapse svg { transition: transform 0.3s ease; }
+
+/* ── Fade animation (no visible shrinking) ──────────────────────
+ * Collapsing: fade out opacity (0.25s), THEN snap width to 0
+ * Expanding:  snap width to full (instant), THEN fade in opacity
+ */
+.sidebar-pane {
+  opacity: 1;
+  overflow: hidden;
+  /* When going TO expanded: width instantly, opacity fades in */
+  transition: opacity 0.25s ease 0.05s, width 0s ease 0s;
+}
+:root.sidebar-collapsed .sidebar-pane {
+  opacity: 0;
+  width: 0 !important;
+  /* When going TO collapsed: opacity fades out, width snaps AFTER */
+  transition: opacity 0.22s ease 0s, width 0s ease 0.22s;
+}
+.main-frame {
+  /* Matches sidebar width-snap timing */
+  transition: padding-inline-start 0s ease 0s;
+}
+:root.sidebar-collapsed .main-frame {
+  padding-inline-start: 0 !important;
+  transition: padding-inline-start 0s ease 0.22s;
+}
+
+/* Collapsed — button moves left of the new line position (left: 0 + gap) */
+:root.sidebar-collapsed #ak-sidebar-collapse {
+  left: calc(0px + 14px);  /* 14px from left viewport edge */
+  transform: translateX(-100%);  /* keep same visual offset */
+}
+:root.sidebar-collapsed #ak-sidebar-collapse::after {
+  left: 0px;  /* line at left viewport edge */
+}
+:root.sidebar-collapsed #ak-sidebar-collapse svg {
+  transform: rotate(180deg);
+}
+
+/* Right sidebar stays frozen — only centre content expands */
+:root.sidebar-collapsed .right-sidebar-container {
+  flex-shrink: 0 !important;
+  width: var(--sl-sidebar-width) !important;
+}
+
+@media (max-width: 72rem) {
+  #ak-sidebar-collapse { display: none; }
+  #ak-sidebar-collapse::after { display: none; }
+}
+
 @media (max-width: 600px) {
   #ask-kai-drawer .ak-shell { width: 100vw; }
+  #ak-fab { bottom: 20px; right: 16px; }
 }

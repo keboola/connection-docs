@@ -51,11 +51,9 @@ your-repo/
 └── app.py                      <- Your application code (name and structure are up to you).
 ```
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> The `keboola-config` folder name and the subfolder paths inside it are exact - do not rename them or change the folder hierarchy.
-</div>
+:::caution
+**Important:** The `keboola-config` folder name and the subfolder paths inside it are exact - do not rename them or change the folder hierarchy.
+:::
 
 ## Step 1 - Create Your GitHub Repository
 

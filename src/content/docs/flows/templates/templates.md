@@ -7,8 +7,12 @@ redirect_from:
 
 
 
+:::caution
+**Important:** Data templates are being discouraged and will be deprecated, as they only create [legacy flows](/flows/flows-legacy/). There are no plans to add template support for the new [Flows](/flows/). For building new workflows, use Flows directly — the [Kai AI assistant](/kai/) can help you set them up interactively.
+:::
+
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
-by an [orchestration](/flows/orchestrator/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
+by a [flow](/flows/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
 that solves a specific problem. 
 
 Keboola is a very open [platform](/overview), which may be overwhelming in many cases. 
