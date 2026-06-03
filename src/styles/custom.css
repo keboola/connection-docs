@@ -1566,11 +1566,13 @@ nav.sidebar {
 
 
 /* ─── Sidebar collapse toggle ──────────────────────────────────── */
+
+/* The button: top of sidebar at content level, right-edge aligned */
 #ak-sidebar-collapse {
   position: fixed;
-  top: calc(var(--sl-nav-height, 3.5rem) + 16px);
-  /* inside the sidebar, aligned to its right edge */
-  left: calc(var(--sl-sidebar-width, 18rem) - 40px);
+  /* Content starts ~120px below top of page (nav + page title area) */
+  top: calc(var(--sl-nav-height, 3.5rem) + 80px);
+  left: calc(var(--sl-sidebar-width, 18rem) - 36px);
   z-index: 200;
   width: 26px;
   height: 26px;
@@ -1584,16 +1586,16 @@ nav.sidebar {
   cursor: pointer;
   color: var(--fg-3);
   padding: 0;
+  transition: left 0.22s ease, top 0.22s ease, color 0.15s, background 0.15s;
 }
 #ak-sidebar-collapse:hover {
   color: var(--fg-1);
   background: var(--bg-2);
   border-color: var(--border-2);
 }
+#ak-sidebar-collapse svg { transition: transform 0.22s ease; }
 
-/* Collapsed — target pane + padding directly.
-   Do NOT touch --sl-sidebar-width: the right TOC sidebar uses it
-   in its own width formula and breaks if set to 0. */
+/* Collapsed state */
 :root.sidebar-collapsed .sidebar-pane {
   width: 0 !important;
   overflow: hidden;
@@ -1601,18 +1603,37 @@ nav.sidebar {
 :root.sidebar-collapsed .main-frame {
   padding-inline-start: 0 !important;
 }
+/* Button moves to left edge, arrow flips */
 :root.sidebar-collapsed #ak-sidebar-collapse {
-  left: 8px;
+  left: 6px;
+  top: calc(var(--sl-nav-height, 3.5rem) + 80px);
 }
 :root.sidebar-collapsed #ak-sidebar-collapse svg {
   transform: rotate(180deg);
 }
 
+/* Vertical line Stripe-style: runs full height on the left when collapsed */
+:root.sidebar-collapsed #ak-sidebar-collapse::after {
+  content: '';
+  position: fixed;
+  top: var(--sl-nav-height, 3.5rem);
+  bottom: 0;
+  left: 18px; /* centre of the 26px button + 6px offset */
+  width: 1px;
+  background: var(--border-1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Right sidebar stays at fixed width — only content area expands */
+:root.sidebar-collapsed .right-sidebar-container {
+  flex-shrink: 0;
+  width: var(--sl-sidebar-width) !important;
+}
+
 /* Smooth transitions */
-#ak-sidebar-collapse { transition: left 0.22s ease, color 0.15s, background 0.15s; }
-#ak-sidebar-collapse svg { transition: transform 0.22s ease; }
 .sidebar-pane { transition: width 0.22s ease; }
-.main-frame { transition: padding-inline-start 0.22s ease; }
+.main-frame   { transition: padding-inline-start 0.22s ease; }
 
 /* Hide on mobile — Starlight handles mobile nav separately */
 @media (max-width: 72rem) {
