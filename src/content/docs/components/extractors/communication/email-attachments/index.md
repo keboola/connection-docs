@@ -15,10 +15,9 @@ Tables only get imported with the data source connector running. The import is *
 being sent or received. When running, the data source connector imports all emails received since its previous run.
 Therefore, it is a good idea to set up the data source connector in a [**scheduled** flow](/flows/#schedule-and-automate).
 
-<div class="alert alert-warning">
-    <strong>Warning:</strong>
-    This component is available only on AWS multitenant stacks <a href="https://connection.keboola.com">connection.keboola.com</a> and <a href="https://connection.eu-central-1.keboola.com">connection.eu-central-1.keboola.com</a>
-</div>
+:::caution
+**Warning:** This component is available only on AWS multitenant stacks connection.keboola.com and connection.eu-central-1.keboola.com
+:::
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Email Attachments** data source connector.

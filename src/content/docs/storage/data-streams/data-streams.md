@@ -54,11 +54,9 @@ In your table settings, you can:
 - Edit primary keys (available only if you create a new table within the stream).
 - Delete a column (available only if you create a new table within the stream).
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> Changing the table's name will create a new table, and the stream will import data into that table.
-</div>
+:::caution
+**Important:** Changing the table's name will create a new table, and the stream will import data into that table.
+:::
 
 #### Sample codes for integration
 For easier use, we've prepared a few examples of how to send data to a stream using Python, Javascript, and Bash.

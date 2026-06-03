@@ -14,10 +14,9 @@ redirect_from:
     - /flows/orchestrator/tasks/nesting/
 ---
 
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> This is the Legacy Flow Builder. It is being replaced by <a href="/flows/">Conditional Flows</a>, which offer conditional logic, branching, retries, and more robust error handling. We recommend using <a href="/flows/">Conditional Flows</a> for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
-</div>
+:::caution
+**Important:** This is the Legacy Flow Builder. It is being replaced by Conditional Flows, which offer conditional logic, branching, retries, and more robust error handling. We recommend using Conditional Flows for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
+:::
 
 ## Migration to Conditional Flows
 

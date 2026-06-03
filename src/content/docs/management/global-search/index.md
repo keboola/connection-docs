@@ -3,11 +3,9 @@ title: Global Search
 slug: 'management/global-search'
 ---
 
-<div class="clearfix"></div>
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> This feature is currently available in <strong>BETA</strong>.
-</div>
+:::caution
+**Important:** This feature is currently available in **BETA**.
+:::
 
 
 

@@ -5,10 +5,9 @@ redirect_from:
     - /external-integrations/mcp-server/
 ---
 
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-triangle"></i>
-    <strong>SSE Transport Deprecation:</strong> The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using <code>/mcp</code> endpoints instead of <code>/sse</code>. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
-</div>
+:::caution
+**SSE Transport Deprecation:** The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using /mcp endpoints instead of /sse. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
+:::
 
 
 
@@ -67,9 +66,9 @@ For other options of local deployments see the [Developers Documentation](https:
 
 ### Using with Claude Desktop
 
-<div class="alert alert-warning">
-<p>These steps must be done by a Claude organization owner or primary owner, or on either a Claude Pro or Claude Max plan. The added integration will be available to all users in the Claude organization, but each user will still be required to authenticate themselves separately.</p>
-</div>
+:::caution
+These steps must be done by a Claude organization owner or primary owner, or on either a Claude Pro or Claude Max plan. The added integration will be available to all users in the Claude organization, but each user will still be required to authenticate themselves separately.
+:::
 
 - Go to [Settings > Integrations](https://claude.ai/settings/integrations)
 - Click the **"Add more"** button
@@ -104,9 +103,9 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 
 ### Using with ChatGPT
 
-<div class="alert alert-info">
-<p>This feature is available for ChatGPT Plus and Pro users only. Custom connectors are currently in beta.</p>
-</div>
+:::note
+This feature is available for ChatGPT Plus and Pro users only. Custom connectors are currently in beta.
+:::
 
 ChatGPT Plus and Pro users can connect to Keboola's MCP Server using custom connectors. Follow these steps to set up the integration:
 
@@ -298,6 +297,6 @@ For CLI control, dev environments, or contributing to the MCP Server, check out 
 Need help or want to contribute? [Open an issue on GitHub](https://github.com/keboola/mcp-server/issues/new) to report bugs, request features, or suggest improvements.
 We’d love your ideas, fixes, and feedback to make MCP even better.
 
-<div class="alert alert-warning">
-<p>Don't forget to give us a <a href="https://github.com/keboola/mcp-server">star on GitHub!</a> </p>
-</div>
+:::caution
+Don't forget to give us a star on GitHub!
+:::

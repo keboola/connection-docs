@@ -19,10 +19,9 @@ The IMAP protocol offers several advantages:
   <br>***Note:** If you wish to use IMAP with MS Outlook, use this component: [MS Outlook IMAP Email Content and Attachments (Office 365)](/components/extractors/communication/ms-outlook/).*
 
 
-<div class="alert alert-warning" style="max-width: 450px;">
-    <strong>Warning:</strong>
-    This component supports IMAP only with <b>basic authentication</b>. If you wish to use IMAP with MS Outlook, use this component instead: <a href="/components/extractors/communication/ms-outlook/">MS Outlook IMAP Email Content and Attachments (Office 365)</a>.
-</div>
+:::caution
+**Warning:** This component supports IMAP only with basic authentication. If you wish to use IMAP with MS Outlook, use this component instead: MS Outlook IMAP Email Content and Attachments (Office 365).
+:::
 
 
 ## Features

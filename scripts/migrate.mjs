@@ -406,6 +406,38 @@ function convertAlertAttributes(body) {
 }
 
 /**
+ * Convert HTML <div class="alert alert-*"> blocks to Starlight admonitions.
+ *
+ * Handles both single-line and multi-line alert divs, stripping any inner
+ * icon tags (<i class="fas …">) and role attributes. Also removes preceding
+ * <div class="clearfix"></div> lines which serve no purpose in Astro.
+ *
+ * Must run before removeImagePopup / removeKramdownAttrs.
+ */
+function convertHtmlAlerts(body) {
+  // Drop clearfix divs entirely
+  body = body.replace(/^[ \t]*<div[^>]*class="clearfix"[^>]*>[\s\S]*?<\/div>[ \t]*\n?/gm, '');
+
+  // Match <div class="alert alert-TYPE …"> … </div> (possibly multi-line)
+  return body.replace(
+    /<div[^>]*class="[^"]*alert\s+alert-(warning|info|danger|success)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+    (_match, type, inner) => {
+      const kind = ALERT_KIND[type.toLowerCase()] ?? 'note';
+      const cleaned = inner
+        .replace(/<i[^>]*><\/i>/gi, '')   // strip icon tags
+        .replace(/<\/?strong>/gi, '**')    // bold → markdown
+        .replace(/<[^>]+>/g, '')           // strip remaining tags
+        .split('\n')
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .join(' ')
+        .trim();
+      return `:::${kind}\n${cleaned}\n:::`;
+    }
+  );
+}
+
+/**
  * Remove `{: .image-popup}` lines entirely.
  */
 function removeImagePopup(body) {
@@ -599,6 +631,7 @@ function transformBody(body) {
   // alert attributes must run before image-popup and generic kramdown stripping
   // so the marker is still present when we need to convert the following paragraph
   body = convertAlertAttributes(body);
+  body = convertHtmlAlerts(body);
   // image-popup must come before generic kramdown attrs
   // (since {: .image-popup} also matches the generic pattern)
   body = removeImagePopup(body);

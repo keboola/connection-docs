@@ -7,10 +7,9 @@ redirect_from:
 
 
 
-<div class="alert alert-warning" role="alert">
-    <i class="fas fa-exclamation-circle"></i>
-    <strong>Important:</strong> Data templates are being discouraged and will be deprecated, as they only create <a href="/flows/flows-legacy/">legacy flows</a>. There are no plans to add template support for the new <a href="/flows/">Flows</a>. For building new workflows, use Flows directly — the <a href="/kai/">Kai AI assistant</a> can help you set them up interactively.
-</div>
+:::caution
+**Important:** Data templates are being discouraged and will be deprecated, as they only create legacy flows. There are no plans to add template support for the new Flows. For building new workflows, use Flows directly — the Kai AI assistant can help you set them up interactively.
+:::
 
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
 by a [flow](/flows/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
