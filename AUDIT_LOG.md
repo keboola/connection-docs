@@ -14,9 +14,12 @@ Full build passes — 271 pages, no fatal errors.
 | Category | Count | Status |
 |---|---|---|
 | Rendering bugs (component level) | 1 | ✅ All fixed |
-| Frontmatter migration artifacts | 2 | ✅ All fixed — 1 baked into `migrate.mjs` |
-| Kramdown syntax artifacts | 1 | ✅ Fixed — already handled by `migrate.mjs` |
+| Frontmatter migration artifacts | 2 | ✅ All fixed — baked into `migrate.mjs` |
+| Kramdown syntax artifacts | 2 | ✅ Fixed — baked into `migrate.mjs` |
+| HTML alert blocks not converted | 1 | ✅ Fixed — baked into `migrate.mjs` |
 | Code fence artifacts | 1 | ✅ Fixed — baked into `migrate.mjs` |
+| Sidebar not regenerated after merge | 1 | ✅ Fixed — 25 pages now visible in nav |
+| Audit log files breaking build | 1 | ✅ Fixed — added to `SKIP_FILES` |
 | Cross-branch content gaps | 7 | ✅ All resolved after main sync + migrate re-run |
 | Deferred UI/UX (Phase 2) | 3 | 📋 Logged in `UI_FIXES_LOG.md` |
 | Deferred content quality (Phase 3) | 1 | 📋 Catalogued below |
@@ -31,6 +34,10 @@ Full build passes — 271 pages, no fatal errors.
 | F-2 Wrong page title | `scripts/migrate.mjs` `TITLE_OVERRIDES` | ✅ Yes — baked into script |
 | F-6 Kramdown `{: width=...}` | `scripts/migrate.mjs` `removeKramdownAttrs()` | ✅ Always — was already in script |
 | F-7 `bigquery` code fence | `scripts/migrate.mjs` `FENCE_LANG_ALIASES` | ✅ Yes — baked into script |
+| F-8 Kramdown `{: .alert.alert-*}` | `scripts/migrate.mjs` `convertAlertAttributes()` | ✅ Yes — baked into script |
+| F-9 HTML `<div class="alert">` | `scripts/migrate.mjs` `convertHtmlAlerts()` | ✅ Yes — baked into script |
+| F-10 Sidebar not regenerated | Run `node scripts/convert-nav.mjs` after each merge | ⚠️ Manual step — must be part of sync workflow |
+| F-11 Audit logs in content dir | `scripts/migrate.mjs` `SKIP_FILES` | ✅ Yes — baked into script |
 | M-1…M-7 Content gaps | Resolved by merging `main` + rerunning script | ✅ Self-healing on every future rerun |
 
 ---
@@ -126,6 +133,106 @@ const FENCE_LANG_ALIASES = {
 };
 ```
 The new `remapFenceLanguages()` function runs in `transformBody()` after highlight-block conversion. To silence future unknown-language build warnings, add an entry to this map.
+
+---
+
+### F-8 — Kramdown `{: .alert.alert-*}` blocks rendered as plain text (12 occurrences)
+**Type:** Migration artifact  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs` via `convertAlertAttributes()`
+
+Four files used Jekyll Kramdown block-level alert attributes (a line before the paragraph they style). `migrate.mjs` was stripping the marker via `removeKramdownAttrs()` but leaving the following paragraph as unstyled plain text — losing the warning/info box visible on the live site.
+
+**Affected files:**
+| File | Occurrences |
+|---|---|
+| `storage/bucket-exposure/index.md` | 2 |
+| `storage/byodb/external-buckets/index.md` | 7 |
+| `storage/byodb/snowflake-secure-data-sharing/index.md` | 1 |
+| `transformations/dbt/transformation/transformation.md` | 2 |
+
+**Example change:**
+```diff
+- {: .alert.alert-warning}
+- Important: This feature is currently available in BETA…
++ :::caution
++ Important: This feature is currently available in BETA…
++ :::
+```
+
+**Change in `migrate.mjs`:** Added `convertAlertAttributes()` with mapping:
+- `alert-warning` → `:::caution`
+- `alert-info` → `:::note`
+- `alert-danger` → `:::danger`
+- `alert-success` → `:::tip`
+
+Runs before `removeKramdownAttrs()` so the marker is still present when the paragraph is converted.
+
+---
+
+### F-9 — HTML `<div class="alert alert-*">` blocks not converted (data-streams page broken)
+**Type:** Migration artifact  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs` via `convertHtmlAlerts()`
+
+`storage/data-streams/data-streams.md` contained a `<div class="alert alert-warning">` HTML block preceded by `<div class="clearfix"></div>`. These rely on Bootstrap CSS and Font Awesome icons that don't exist in Astro — the alert rendered as broken unstyled HTML and the clearfix div left an empty block.
+
+`migrate.mjs` had no handler for this form (only the Kramdown `{:}` form was handled).
+
+**Example change:**
+```diff
+- <div class="clearfix"></div>
+- <div class="alert alert-warning" role="alert">
+-     <i class="fas fa-exclamation-circle"></i>
+-     <strong>Important:</strong> Changing the table's name will create a new table…
+- </div>
++ :::caution
++ **Important:** Changing the table's name will create a new table…
++ :::
+```
+
+**Change in `migrate.mjs`:** Added `convertHtmlAlerts()` which:
+- Strips `<div class="clearfix">` entirely
+- Converts `<div class="alert alert-TYPE">` to the matching `:::` admonition
+- Strips `<i class="fas …">` icon tags (FA not available in Astro)
+- Converts `<strong>` to `**` markdown bold
+
+Runs alongside `convertAlertAttributes()` so both alert patterns are fully covered.
+
+---
+
+### F-10 — Sidebar not regenerated after merging `main` (25 pages invisible in nav)
+**Type:** Process gap  
+**Durability:** ✅ Resolved — `node scripts/convert-nav.mjs` must be re-run after every `main` merge
+
+After merging the latest `main` commits, `src/sidebar.mjs` was not regenerated. The content files existed and built correctly, but were invisible in the navigation. Affected pages:
+
+- `storage/bucket-exposure`
+- `flows/flows-legacy` + `flows/flow-migration-guide`
+- `storage/data-streams/opentelemetry`
+- All 20 flow templates
+
+**Fix:** Ran `node scripts/convert-nav.mjs`. Build page count went from 271 → 275.
+
+**Note for Jordan:** The workflow after every `main` sync should be:
+1. `git merge origin/main`
+2. `node scripts/migrate.mjs`
+3. `node scripts/convert-nav.mjs`
+4. `astro build` to verify
+
+---
+
+### F-11 — `AUDIT_LOG.md` and `UI_FIXES_LOG.md` copied into `src/content/docs/` breaking build
+**Type:** Process gap  
+**Durability:** ✅ Permanent — both files added to `SKIP_FILES` in `migrate.mjs`
+
+`migrate.mjs` scanned the repo root and copied all `.md` files — including the audit logs — into `src/content/docs/`. Astro's content collection schema requires frontmatter with `title:`, so the build failed with `InvalidContentEntryDataError`.
+
+**Fix in `migrate.mjs`:**
+```diff
+ const SKIP_FILES = new Set([
+   'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
++  'AUDIT_LOG.md', 'UI_FIXES_LOG.md',
+ ]);
+```
 
 ---
 
@@ -233,9 +340,13 @@ Many section index pages open with a paragraph that re-states what the page titl
 ## Remaining Tasks
 
 - [x] F-1 Duplicate first paragraph — `PageTitle.astro`
-- [x] F-2 Wrong page title — `migrate.mjs` + generated file
+- [x] F-2 Wrong page title — `migrate.mjs` `TITLE_OVERRIDES`
 - [x] F-6 Kramdown `{: width=...}` — 41 occurrences stripped
-- [x] F-7 `bigquery` fence → `sql` — `migrate.mjs` + generated file
+- [x] F-7 `bigquery` fence → `sql` — `migrate.mjs` `FENCE_LANG_ALIASES`
+- [x] F-8 Kramdown `{: .alert.alert-*}` — `migrate.mjs` `convertAlertAttributes()` (12 occurrences, 4 files)
+- [x] F-9 HTML `<div class="alert">` — `migrate.mjs` `convertHtmlAlerts()` (data-streams + others)
+- [x] F-10 Sidebar not regenerated — ran `convert-nav.mjs`, 275 pages now built
+- [x] F-11 Audit logs breaking build — added to `migrate.mjs` `SKIP_FILES`
 - [x] M-1…M-7 — all resolved by merging `main` + rerunning `migrate.mjs`
 - [ ] **Open PR** — push branch and open pull request for Jordan's review
 - [ ] **Sync with Jordan** — triage this log, agree on Phase 2 priorities
