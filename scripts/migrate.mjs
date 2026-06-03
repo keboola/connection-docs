@@ -34,6 +34,24 @@ const SKIP_DIRS = new Set([
 /** Specific root-level files to skip */
 const SKIP_FILES = new Set(['README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md']);
 
+/**
+ * Per-file title overrides — keyed by the file's path relative to ROOT.
+ * Use when the Jekyll frontmatter title is wrong (e.g. copied from a parent
+ * section) and the correct title cannot be derived mechanically.
+ */
+const TITLE_OVERRIDES = {
+  'overview/google-data-policy.md': 'Google Data Usage Policy',
+};
+
+/**
+ * Code-fence language aliases — maps unrecognised language identifiers to
+ * ones that expressive-code (Astro Starlight's highlighter) supports.
+ * Add entries here whenever the build emits an "unknown language" warning.
+ */
+const FENCE_LANG_ALIASES = {
+  bigquery: 'sql',
+};
+
 /** Image extensions to copy */
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']);
 
@@ -209,6 +227,17 @@ function removeTocMarkers(body) {
   body = body.replace(/^[ \t]*\{:toc\}\s*$/gm, '');
   if (body !== before) stats.tocRemoved++;
   return body;
+}
+
+/**
+ * Remap unrecognised code-fence language identifiers using FENCE_LANG_ALIASES.
+ * Runs after highlight-block conversion so both forms are covered.
+ */
+function remapFenceLanguages(body) {
+  return body.replace(/^```(\w+)$/gm, (_match, lang) => {
+    const mapped = FENCE_LANG_ALIASES[lang.toLowerCase()];
+    return mapped ? '```' + mapped : _match;
+  });
 }
 
 /**
@@ -501,6 +530,7 @@ function stripLeadingOverviewHeading(body) {
 function transformBody(body) {
   body = removeTocMarkers(body);
   body = convertHighlightBlocks(body);
+  body = remapFenceLanguages(body);
   body = convertTipIncludes(body);
   body = convertWarningIncludes(body);
   body = convertPublicBetaWarning(body);
@@ -611,7 +641,7 @@ function getPermalinkForLookup(frontmatter) {
   return String(fm.permalink).replace(/\/$/, '') + '/';
 }
 
-function transformFile(content, aliases) {
+function transformFile(content, aliases, relPath) {
   const { frontmatter, body } = splitFrontmatter(content);
 
   let fmToTransform = frontmatter;
@@ -619,7 +649,14 @@ function transformFile(content, aliases) {
     fmToTransform = injectRedirectAliases(frontmatter, aliases);
   }
 
-  const newFm = fmToTransform ? transformFrontmatter(fmToTransform) : '';
+  let newFm = fmToTransform ? transformFrontmatter(fmToTransform) : '';
+
+  // Apply per-file title overrides after all other frontmatter transforms.
+  const titleOverride = relPath && TITLE_OVERRIDES[relPath];
+  if (titleOverride && newFm) {
+    newFm = newFm.replace(/^title:.*$/m, `title: ${titleOverride}`);
+  }
+
   const newBody = transformBody(body);
 
   if (newFm) {
@@ -696,7 +733,7 @@ function main() {
     const permalink = getPermalinkForLookup(frontmatter);
     const aliases = permalink ? aliasMap.get(permalink) : null;
 
-    const transformed = transformFile(content, aliases);
+    const transformed = transformFile(content, aliases, rel);
     const dest = join(DEST_DOCS, rel);
     writeFileSafe(dest, transformed);
     stats.mdFiles++;
