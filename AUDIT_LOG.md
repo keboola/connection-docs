@@ -38,6 +38,7 @@ Full build passes — 271 pages, no fatal errors.
 | F-9 HTML `<div class="alert">` | `scripts/migrate.mjs` `convertHtmlAlerts()` | ✅ Yes — baked into script |
 | F-10 Sidebar not regenerated | Run `node scripts/convert-nav.mjs` after each merge | ⚠️ Manual step — must be part of sync workflow |
 | F-11 Audit logs in content dir | `scripts/migrate.mjs` `SKIP_FILES` | ✅ Yes — baked into script |
+| F-12 Single-line ` ```x``` ` spans | `scripts/migrate.mjs` `expandSingleLineFences()` | ✅ Yes — baked into script |
 | M-1…M-7 Content gaps | Resolved by merging `main` + rerunning script | ✅ Self-healing on every future rerun |
 
 ---
@@ -220,6 +221,25 @@ After merging the latest `main` commits, `src/sidebar.mjs` was not regenerated. 
 
 ---
 
+### F-12 — Single-line triple-backtick spans treated as broken code fences (36 occurrences)
+**File:** `components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/index.md`  
+**Type:** Migration artifact  
+**Durability:** ✅ Permanent — fixed in `migrate.mjs` via `expandSingleLineFences()`
+
+Jekyll/Kramdown treats ` ```content``` ` on one line as an inline code span. Remark (used by Astro) treats the opening ` ``` ` as a fenced code block start and takes the entire content (`TimePeriod, CurrencyCode, ...`) as the language identifier — breaking rendering completely for the entire Bing Ads report presets page.
+
+**Example change:**
+```diff
+- ```TimePeriod, CurrencyCode, AdDistribution, DeviceType, …```
++ ```
++ TimePeriod, CurrencyCode, AdDistribution, DeviceType, …
++ ```
+```
+
+**Change in `migrate.mjs`:** Added `expandSingleLineFences()` which converts any line matching ` ```content``` ` (open and close on same line) to a proper 3-line fenced code block. Runs before `convertHighlightBlocks()` and `remapFenceLanguages()`.
+
+---
+
 ### F-11 — `AUDIT_LOG.md` and `UI_FIXES_LOG.md` copied into `src/content/docs/` breaking build
 **Type:** Process gap  
 **Durability:** ✅ Permanent — both files added to `SKIP_FILES` in `migrate.mjs`
@@ -347,6 +367,7 @@ Many section index pages open with a paragraph that re-states what the page titl
 - [x] F-9 HTML `<div class="alert">` — `migrate.mjs` `convertHtmlAlerts()` (data-streams + others)
 - [x] F-10 Sidebar not regenerated — ran `convert-nav.mjs`, 275 pages now built
 - [x] F-11 Audit logs breaking build — added to `migrate.mjs` `SKIP_FILES`
+- [x] F-12 Single-line ` ```x``` ` spans — `migrate.mjs` `expandSingleLineFences()` (36 occurrences, Bing Ads)
 - [x] M-1…M-7 — all resolved by merging `main` + rerunning `migrate.mjs`
 - [ ] **Open PR** — push branch and open pull request for Jordan's review
 - [ ] **Sync with Jordan** — triage this log, agree on Phase 2 priorities
