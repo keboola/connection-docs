@@ -233,6 +233,26 @@ function removeTocMarkers(body) {
 }
 
 /**
+ * Convert single-line triple-backtick spans to proper fenced code blocks.
+ *
+ * Jekyll/Kramdown treats ```content``` on one line as an inline code span.
+ * Remark (used by Astro) interprets the opening ``` as a fenced code block
+ * start and treats everything up to the newline as the language identifier,
+ * which breaks rendering entirely.
+ *
+ * Pattern:  ```some content here```   (opening and closing on the same line)
+ * Becomes:
+ *   ```
+ *   some content here
+ *   ```
+ */
+function expandSingleLineFences(body) {
+  return body.replace(/^```(.+)```$/gm, (_match, content) => {
+    return '```\n' + content + '\n```';
+  });
+}
+
+/**
  * Remap unrecognised code-fence language identifiers using FENCE_LANG_ALIASES.
  * Runs after highlight-block conversion so both forms are covered.
  */
@@ -619,6 +639,7 @@ function stripLeadingOverviewHeading(body) {
 
 function transformBody(body) {
   body = removeTocMarkers(body);
+  body = expandSingleLineFences(body);
   body = convertHighlightBlocks(body);
   body = remapFenceLanguages(body);
   body = convertTipIncludes(body);
