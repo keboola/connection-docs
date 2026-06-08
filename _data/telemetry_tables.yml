@@ -3,7 +3,7 @@ tables:
 
   - id: kbc_bucket_snapshot
     mode: project
-    description: "**DEPRECATING** – This table is being replaced by the current state in `kbc_bucket`. \n\nThis table shows snapshots of buckets in Storage."
+    description: "**DEPRECATED** – This table is being replaced by the current state in `kbc_bucket`. \n\nThis table shows snapshots of buckets in Storage."
     is_full_load: false
     columns:
       - name: bucket_id
@@ -253,7 +253,7 @@ tables:
 
   - id: kbc_data_app_workspace
     mode: project
-    description: "**DEPRECATING** – This table is being replaced by `kbc_non_sql_workspace_run`. \n\nThis table lists runs of [apps](/data-apps/) and their consumption metrics."
+    description: "**DEPRECATED** – This table is being replaced by `kbc_non_sql_workspace_run`. \n\nThis table lists runs of [apps](/data-apps/) and their consumption metrics."
     is_full_load: false
     note: "A value of `0` in `data_app_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     columns:
@@ -308,7 +308,7 @@ tables:
 
   - id: kbc_data_science_sandbox
     mode: project
-    description: "**DEPRECATING** – This table is being replaced by `kbc_non_sql_workspace_run`. \n\nThis table lists Python/R [workspaces](/workspace/) and their consumption metrics."
+    description: "**DEPRECATED** – This table is being replaced by `kbc_non_sql_workspace_run`. \n\nThis table lists Python/R [workspaces](/workspace/) and their consumption metrics."
     is_full_load: false
     note: "A value of `0` in `sandbox_runtime_hours`,`time_credits_used` or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     columns:
@@ -737,7 +737,7 @@ tables:
 
   - id: kbc_table_snapshot
     mode: project
-    description: "**DEPRECATING** – This table is being replaced by the current state in `kbc_table`. \n\nThis table shows [Storage table](/storage/tables/) snapshots."
+    description: "**DEPRECATED** – This table is being replaced by the current state in `kbc_table`. \n\nThis table shows [Storage table](/storage/tables/) snapshots."
     is_full_load: false
     columns:
       - name: table_id
@@ -1533,7 +1533,7 @@ tables:
 
   - id: kbc_table
     mode: project
-    description: "This table shows data about the current state of storage [tables](/storage/tables/)."
+    description: "This table shows data about the current state of storage [tables](/storage/tables/). \n\n*Note: This table includes only tables from the main branch.*"
     is_full_load: true
     columns:
       - name: kbc_project_table_id
@@ -2010,7 +2010,7 @@ tables:
 
   - id: kbc_workspace
     mode: activity_center
-    description: "**DEPRECATING** – This table is being replaced by `kbc_sql_workspace` and `kbc_non_sql_workspace`. \n\nThis table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
+    description: "**DEPRECATED** – This table is being replaced by `kbc_sql_workspace` and `kbc_non_sql_workspace`. \n\nThis table shows data about existing [workspaces](/workspace/). Unlike SQL and Data Science sandboxes, this table includes all workspaces of the project (i.e., those created by transformations)."
     is_full_load: true
     columns:
       - name: kbc_workspace_id
