@@ -1,15 +1,22 @@
 # Phase 1 Migration Audit Log
 
-**Branch:** `fix/phase1-migration-audit`  
 **Repo:** `keboola/connection-docs`  
 **Auditor:** Nikita Zverev  
-**Started:** 2026-06-02 | **Last updated:** 2026-06-03
+**Started:** 2026-06-02 | **Last updated:** 2026-06-08
+
+## PR Status
+
+| PR | Branch | Phase | Status |
+|---|---|---|---|
+| [#934](https://github.com/keboola/connection-docs/pull/934) | `fix/phase1-migration-audit` | Phase 1 | ✅ **Merged** |
+| [#935](https://github.com/keboola/connection-docs/pull/935) | `fix/phase1-code-review` | Phase 1 CR | 🟢 Open — awaiting review |
+| [#939](https://github.com/keboola/connection-docs/pull/939) | `feat/phase2-ui-arrow` | Phase 2 UI | 🟢 Open — awaiting review |
 
 ---
 
 ## Summary
 
-Full build passes — 271 pages, no fatal errors.
+Build passes — 275 pages, no fatal errors (2 harmless framework warnings).
 
 | Category | Count | Status |
 |---|---|---|
@@ -20,8 +27,11 @@ Full build passes — 271 pages, no fatal errors.
 | Code fence artifacts | 1 | ✅ Fixed — baked into `migrate.mjs` |
 | Sidebar not regenerated after merge | 1 | ✅ Fixed — 25 pages now visible in nav |
 | Audit log files breaking build | 1 | ✅ Fixed — added to `SKIP_FILES` |
+| Single-line triple-backtick spans | 1 | ✅ Fixed — baked into `migrate.mjs` |
+| Telemetry table invalid markdown | 1 | ✅ Fixed — baked into `migrate.mjs` |
 | Cross-branch content gaps | 7 | ✅ All resolved after main sync + migrate re-run |
-| Deferred UI/UX (Phase 2) | 3 | 📋 Logged in `UI_FIXES_LOG.md` |
+| Code review fixes (PR #935) | 2 | ✅ Fixed — baked into `migrate.mjs` (PR open) |
+| Phase 2 UI implemented | 4 | ✅ Applied — in `custom.css` + `AskKaiDrawer.astro` |
 | Deferred content quality (Phase 3) | 1 | 📋 Catalogued below |
 
 ---
@@ -382,15 +392,23 @@ The stale `main` snapshot had already removed the comma; the updated `main` rest
 
 ---
 
-## Deferred — Phase 2 UI/UX
+## Phase 2 UI/UX — Applied ✅
 
-Visual and layout issues spotted during the audit. Outside Phase 1 scope — full details and proposed diffs are in **`UI_FIXES_LOG.md`**.
+Full details in **`UI_FIXES_LOG.md`**. Changes are in `src/styles/custom.css` and `src/components/AskKaiDrawer.astro` — neither is touched by `migrate.mjs`.
 
-| ID | File | Issue |
+| ID | Issue | Status |
 |---|---|---|
-| U-1 | `src/styles/custom.css` | Paragraph spacing too large (`line-height 1.7`, `content-gap-y 1rem`, `h2 margin-top 40px`) |
-| U-2 | `src/styles/custom.css` | "Ask Kai" block — `.b-ask-body` missing `flex-direction: column`, label and prompt render on one line |
-| U-3 | `src/styles/custom.css` | "On this page" TOC heading `11px` — too small to read comfortably |
+| U-1 | Paragraph spacing too large — `line-height`, `content-gap-y`, `h2` margins | ✅ Applied |
+| U-2 | "Ask Kai" block label/prompt on one line — missing `flex-direction: column` | ✅ Applied |
+| U-3 | "On this page" TOC font `11px` — too small | ✅ Applied — `14px` heading, `14px` links |
+| U-4 | Sidebar collapse toggle — Stripe-style `←` button, fade animation, frozen right TOC | ✅ Applied — PR #939 open |
+
+**Sidebar collapse implementation notes:**
+- Button sits LEFT of grey dividing line at HOME-nav level (`nav-height + 88px`)
+- Fade animation: sidebar `opacity→0` (0.22s) then `width: 0` snaps — no visible shrinking
+- Right "On this page" stays frozen: `flex-shrink:0; width:var(--sl-sidebar-width)`
+- State persisted in `localStorage`, restored on every Astro view transition
+- Root cause: `--sl-sidebar-width` is shared between left sidebar pane AND right TOC width formula — targeting `.sidebar-pane` width directly avoids breaking the right panel
 
 ---
 
@@ -401,17 +419,32 @@ Many section index pages open with a paragraph that re-states what the page titl
 
 ---
 
-## Remaining Tasks
+## Task Status
 
+### Phase 1 — Complete ✅
 - [x] F-1 Duplicate first paragraph — `PageTitle.astro`
 - [x] F-2 Wrong page title — `migrate.mjs` `TITLE_OVERRIDES`
 - [x] F-6 Kramdown `{: width=...}` — 41 occurrences stripped
 - [x] F-7 `bigquery` fence → `sql` — `migrate.mjs` `FENCE_LANG_ALIASES`
-- [x] F-8 Kramdown `{: .alert.alert-*}` — `migrate.mjs` `convertAlertAttributes()` (12 occurrences, 4 files)
-- [x] F-9 HTML `<div class="alert">` — `migrate.mjs` `convertHtmlAlerts()` (data-streams + others)
-- [x] F-10 Sidebar not regenerated — ran `convert-nav.mjs`, 275 pages now built
-- [x] F-11 Audit logs breaking build — added to `migrate.mjs` `SKIP_FILES`
-- [x] F-12 Single-line ` ```x``` ` spans — `migrate.mjs` `expandSingleLineFences()` (36 occurrences, Bing Ads)
-- [x] M-1…M-7 — all resolved by merging `main` + rerunning `migrate.mjs`
-- [ ] **Open PR** — push branch and open pull request for Jordan's review
-- [ ] **Sync with Jordan** — triage this log, agree on Phase 2 priorities
+- [x] F-8 Kramdown `{: .alert.alert-*}` — `migrate.mjs` `convertAlertAttributes()` (12 occurrences)
+- [x] F-9 HTML `<div class="alert">` — `migrate.mjs` `convertHtmlAlerts()`
+- [x] F-10 Sidebar not regenerated — ran `convert-nav.mjs`, 275 pages built
+- [x] F-11 Audit logs breaking build — `migrate.mjs` `SKIP_FILES`
+- [x] F-12 Single-line ` ```x``` ` spans — `migrate.mjs` `expandSingleLineFences()` (36 occurrences)
+- [x] F-13 Alert links/code stripped — `migrate.mjs` `convertHtmlAlerts()` fix (PR #935)
+- [x] F-14 `flows/conditional-flows/` blocking redirect — `migrate.mjs` `POST_MIGRATE_DELETE` (PR #935)
+- [x] M-1…M-7 — resolved by merging `main` + rerunning `migrate.mjs`
+- [x] PR #934 — **merged** into `feature/astro-migration`
+- [ ] PR #935 — open, awaiting Jordan's review (Phase 1 CR fixes)
+
+### Phase 2 — Applied, PRs open
+- [x] U-1 Paragraph spacing — `custom.css`
+- [x] U-2 Ask Kai block layout — `custom.css`
+- [x] U-3 TOC font size ×1.5 — `custom.css`
+- [x] U-4 Sidebar collapse toggle — `custom.css` + `AskKaiDrawer.astro`
+- [ ] PR #939 — open, awaiting Jordan's review (sidebar arrow position fix)
+
+### Phase 3 — Not started (pending Phase 2 merge)
+- [ ] Content rewrite — task-oriented, agent-optimized pages
+- [ ] Feedback vote buttons
+- [ ] Edit → auto-open PR for contributions
