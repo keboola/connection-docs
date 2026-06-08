@@ -1533,7 +1533,7 @@ tables:
 
   - id: kbc_table
     mode: project
-    description: "This table shows data about the current state of storage [tables](/storage/tables/). \n\n*Note: This table includes only tables from the main branch.*"
+    description: "This table shows data about the current state of storage [tables](/storage/tables/) in the main branch only."
     is_full_load: true
     columns:
       - name: kbc_project_table_id
