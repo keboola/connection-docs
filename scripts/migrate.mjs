@@ -29,12 +29,15 @@ const SKIP_DIRS = new Set([
   '_includes', '_layouts', '_sass', '_data', '_site',
   'node_modules', 'src', 'scripts', '.worktrees', '.git',
   '.github', '.claude', 'assets', 'public',
+  // Build outputs — never a migration source (and would pollute the asset walk)
+  'dist', '.astro', '.vercel',
 ]);
 
 /** Specific root-level files to skip */
 const SKIP_FILES = new Set([
   'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
   'AUDIT_LOG.md', 'UI_FIXES_LOG.md', 'DEV_DOCS_INTEGRATION.md',
+  'claude.md', 'CLAUDE.md',
 ]);
 
 /**
@@ -67,6 +70,12 @@ const FENCE_LANG_ALIASES = {
 
 /** Image extensions to copy */
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']);
+
+/** Downloadable asset extensions referenced from content (A-1: these were
+ *  previously not migrated, breaking ~33 download links in tutorials/
+ *  transformations). Root-level files (package.json, tsconfig.json, …) are
+ *  excluded in findDownloadFiles so only in-content assets are copied. */
+const DOWNLOAD_EXTS = new Set(['.csv', '.zip', '.docx', '.xlsx', '.pdf', '.json']);
 
 // ---------------------------------------------------------------------------
 // Counters for the summary
@@ -144,6 +153,15 @@ function findMarkdownFiles() {
 /** Return all image files that should be copied. */
 function findImageFiles() {
   return walkDir(ROOT, (name) => IMAGE_EXTS.has(extname(name).toLowerCase()));
+}
+
+/** Return downloadable asset files that should be copied (A-1). Skips files
+ *  sitting directly in ROOT (config like package.json) — only assets that live
+ *  inside content directories are migrated. */
+function findDownloadFiles() {
+  return walkDir(ROOT, (name, full) =>
+    DOWNLOAD_EXTS.has(extname(name).toLowerCase()) && dirname(full) !== ROOT,
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -892,6 +910,22 @@ function main() {
   }
 
   console.log(`Copied ${stats.imagesCopied} image files.\n`);
+
+  // ---- 2b. Copy downloadable assets (A-1: .csv/.zip/.docx/.xlsx/.pdf/.json) ----
+  // Same dual copy as images so both absolute (`/foo/bar.csv` → public) and
+  // relative (`bar.csv` → page folder) references resolve after migration.
+  console.log('Scanning for downloadable asset files in content directories...');
+  const downloadFiles = findDownloadFiles();
+  console.log(`Found ${downloadFiles.length} downloadable asset files.\n`);
+
+  let downloadsCopied = 0;
+  for (const absPath of downloadFiles) {
+    const rel = relative(ROOT, absPath);
+    copyFileSafe(absPath, join(DEST_DOCS, rel));
+    copyFileSafe(absPath, join(DEST_PUBLIC, rel));
+    downloadsCopied++;
+  }
+  console.log(`Copied ${downloadsCopied} downloadable asset files.\n`);
 
   // ---- 3. Copy special asset files ----
   const logoSrc = join(ROOT, 'assets', 'img', 'logo.png');

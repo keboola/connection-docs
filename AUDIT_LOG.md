@@ -526,10 +526,26 @@ held across the whole site.
 - Visual table/heading spot-check on the flagged pages.
 
 ### Phase 2 audit — task checklist
-- [ ] A-1 Add `DOWNLOAD_EXTS` copy to `migrate.mjs` (≈33 links) — durable
-- [ ] A-2 Fix 3 dead page links (confirm targets w/ Jordan)
-- [ ] A-3 Rewrite legacy-domain in-content links → internal (`migrate.mjs` transform)
-- [ ] A-4 Demote stray in-content `<h1>` on 5 pages
-- [ ] A-5 Repair datahub fence
+- [x] **A-1 Add `DOWNLOAD_EXTS` copy to `migrate.mjs`** — ✅ done. 24 assets now
+      copied (dual: `src/content/docs` + `public`); broken links **36 → 3**.
+- [x] **A-7 (new) Skip `claude.md`/`CLAUDE.md` in migration** — ✅ done. The
+      validation re-run revealed `migrate.mjs` was copying the instructions file
+      into `src/content/docs/` (same class as F-11) — added to `SKIP_FILES`. Also
+      added `dist`/`.astro`/`.vercel` to `SKIP_DIRS` (never a migration source).
+- [ ] A-2 Fix 3 dead page links — **needs Jordan** (correct targets are a content
+      fact): `/overview/environment/`, `/ai/kai-assistant/`, `/integrate/…` (dev-docs).
+- [ ] A-3 Rewrite legacy-domain links → internal — **deferred**: needs a two-pass
+      transform that only rewrites when the target route exists (else it would
+      turn working external links into broken internal ones). Don't touch the
+      `developers.keboola.com` subset until dev docs are unified.
+- [ ] A-4 Demote stray in-content `<h1>` on 5 pages — **deferred**: these are real
+      markdown `#` body headings, so fixing properly means shifting heading levels
+      on those pages (borderline Phase-3 content work). Low severity.
+- [ ] A-5 Repair datahub fence — **deferred**: needs a careful human look at the
+      SQL block (mis-editing the fence could make it worse). 1 page, low severity.
 - [ ] External-link network check (separate pass)
 - [ ] Old↔new fidelity diff
+
+> Bonus fix landed with the migrate re-run: a stale **duplicate "Important:" line**
+> in `storage/data-streams/data-streams.md` (curly vs straight apostrophe) is now
+> de-duplicated by the script.
