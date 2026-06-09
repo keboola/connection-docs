@@ -1568,15 +1568,14 @@ nav.sidebar {
 /* ─── Sidebar collapse toggle ──────────────────────────────────── */
 
 /*
- * Layout:
- *   [sidebar content] | [button] | [grey line] | [main content]
+ * Expanded:  [sidebar] | grey-line | [←button] | [content]
+ * Collapsed: grey-line | [→button] | [content]
  *
- * Button floats to the LEFT of the grey dividing line, at HOME-nav level.
- * Grey line is always visible as a fixed pseudo-element.
- * Sidebar fades out then collapses (no visible shrinking window).
+ * Button always sits to the RIGHT of the grey line.
+ * Stripe-style: simple arrow, clean, at HOME-nav level.
  */
 
-/* Grey border line — always present, independent of sidebar state */
+/* Grey border line — always at sidebar right edge */
 #ak-sidebar-collapse::after {
   content: '';
   position: fixed;
@@ -1589,28 +1588,26 @@ nav.sidebar {
   transition: left 0.3s ease;
 }
 
-/* The button — left of the line, at HOME-nav level */
+/* Button — always to the LEFT of the grey line */
 #ak-sidebar-collapse {
   position: fixed;
-  /* HOME nav item is roughly at nav-height + padding + ask-kai-btn height */
   top: calc(var(--sl-nav-height, 3.5rem) + 88px);
-  /* Sits left of the line with a small gap: line is at sidebar-width, button 14px left of it */
-  left: calc(var(--sl-sidebar-width, 18rem) - 14px);
-  transform: translateX(-100%);   /* fully left of the line, not touching it */
+  /* Button sits left of the line: line is at sidebar-width, button ends 6px before it */
+  left: calc(var(--sl-sidebar-width, 18rem) - 28px - 6px);
   z-index: 200;
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   background: var(--bg-1);
   border: 1px solid var(--border-1);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--fg-3);
   padding: 0;
-  transition: left 0.3s ease, color 0.15s, background 0.15s;
+  transition: left 0.3s ease, color 0.15s, background 0.15s, border-color 0.15s;
 }
 #ak-sidebar-collapse:hover {
   color: var(--fg-1);
@@ -1619,24 +1616,21 @@ nav.sidebar {
 }
 #ak-sidebar-collapse svg { transition: transform 0.3s ease; }
 
-/* ── Fade animation (no visible shrinking) ──────────────────────
- * Collapsing: fade out opacity (0.25s), THEN snap width to 0
- * Expanding:  snap width to full (instant), THEN fade in opacity
+/* ── Fade animation ─────────────────────────────────────────────
+ * Collapsing: opacity 0 (0.22s) → width snaps to 0 after fade
+ * Expanding:  width snaps to full → opacity 1 fades in (0.25s)
  */
 .sidebar-pane {
   opacity: 1;
   overflow: hidden;
-  /* When going TO expanded: width instantly, opacity fades in */
   transition: opacity 0.25s ease 0.05s, width 0s ease 0s;
 }
 :root.sidebar-collapsed .sidebar-pane {
   opacity: 0;
   width: 0 !important;
-  /* When going TO collapsed: opacity fades out, width snaps AFTER */
   transition: opacity 0.22s ease 0s, width 0s ease 0.22s;
 }
 .main-frame {
-  /* Matches sidebar width-snap timing */
   transition: padding-inline-start 0s ease 0s;
 }
 :root.sidebar-collapsed .main-frame {
@@ -1644,19 +1638,18 @@ nav.sidebar {
   transition: padding-inline-start 0s ease 0.22s;
 }
 
-/* Collapsed — button moves left of the new line position (left: 0 + gap) */
+/* Collapsed — button at left edge, grey line just to its right */
 :root.sidebar-collapsed #ak-sidebar-collapse {
-  left: calc(0px + 14px);  /* 14px from left viewport edge */
-  transform: translateX(-100%);  /* keep same visual offset */
+  left: 6px;
 }
 :root.sidebar-collapsed #ak-sidebar-collapse::after {
-  left: 0px;  /* line at left viewport edge */
+  left: calc(6px + 28px + 6px); /* line right of button: button-left + button-width + gap */
 }
 :root.sidebar-collapsed #ak-sidebar-collapse svg {
   transform: rotate(180deg);
 }
 
-/* Right sidebar stays frozen — only centre content expands */
+/* Right sidebar frozen */
 :root.sidebar-collapsed .right-sidebar-container {
   flex-shrink: 0 !important;
   width: var(--sl-sidebar-width) !important;

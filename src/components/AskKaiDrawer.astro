@@ -343,10 +343,10 @@
       btn.type = 'button';
       btn.setAttribute('aria-label', 'Toggle sidebar');
       btn.title = 'Collapse sidebar';
-      /* ←| icon matching Stripe docs style */
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 12 5 8 9 4"/>
-        <line x1="12" y1="3" x2="12" y2="13"/>
+      /* Stripe-style ← arrow: chevron + horizontal tail */
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="11 18 5 12 11 6"/>
       </svg>`;
       document.body.appendChild(btn);
       btn.addEventListener('click', () => {
