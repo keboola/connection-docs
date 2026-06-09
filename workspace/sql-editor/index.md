@@ -8,18 +8,18 @@ redirect_from:
 * TOC
 {:toc}
 
-The Keboola SQL Editor allows users without specialized tools to directly interact with their Snowflake data warehouse within Keboola Connection. It offers a smooth, fully integrated experience, replacing previous solutions like Snowsight. The editor is tightly connected with Keboola Storage, so you can easily access and use your buckets, tables, shared codes and variables in one place.
+The Keboola SQL Editor allows users without specialized tools to directly interact with their data warehouse within Keboola Connection. It offers a smooth, fully integrated experience, replacing previous solutions like Snowsight. The editor is tightly connected with Keboola Storage, so you can easily access and use your buckets, tables, shared codes and variables in one place.
 
-Currently, the SQL Editor supports **Snowflake** workspaces.
+Currently, the SQL Editor supports **Snowflake** and **Google BigQuery** workspaces.
 
-## Creating a Snowflake SQL Workspace
+## Creating an SQL Workspace
 
-The SQL Editor is accessed via a dedicated Snowflake Workspace. To get started, you must first create this workspace.
+The SQL Editor is accessed via a dedicated SQL workspace. To get started, you must first create this workspace.
 
 1.  Navigate to **Workspaces** from the main navigation menu.
 2.  Click **+ Create Workspace**.
-3.  Select **Snowflake SQL Workspace**.
-4.  In the configuration dialog, provide a **Name** for your workspace (e.g., "Demo"). You can optionally add a description and select the **Backend Size**.
+3.  Select **Snowflake SQL Workspace** or **Google BigQuery Workspace**, depending on your project's backend.
+4.  In the configuration dialog, provide a **Name** for your workspace (e.g., "Demo"). You can optionally add a description and select the **Backend Size** (Snowflake only).
 
 5.  Click **CREATE WORKSPACE**.
 
@@ -56,7 +56,7 @@ The left pane, known as the Table Explorer, is divided into two sections:
 
 The main central area is where you write and execute your SQL code.
 
-*   **Code Block**: This is where you write your SQL queries. The editor supports syntax highlighting and autocompletion for Snowflake SQL keywords and functions. 
+*   **Code Block**: This is where you write your SQL queries. The editor supports syntax highlighting and autocompletion for SQL keywords and functions of your backend (Snowflake or BigQuery). 
 *   **Query Result Pane**: Located below the code block, this area displays the results of executed queries and query details.
 
 ## Basic Usage and Querying
@@ -88,7 +88,7 @@ Instead of manually typing full table names, you can insert the fully qualified 
 {: .image-popup}
 ![SQL Editor - Context menu showing Place name in editor option](/workspace/sql-editor/07-place-name-in-editor-menu.jpg)
 
-The editor automatically populates the code block with the table's fully qualified Snowflake identifier.
+The editor automatically populates the code block with the table's fully qualified identifier. The exact format depends on your backend; the example below shows Snowflake.
 
 ```sql
 SELECT * FROM "SAPI_10495"."in.c-keboola-ex-http-01k749e8rrzzs9s7f9p7gbrg"."account";
@@ -349,7 +349,7 @@ Everyone works in an isolated database state.
 |---|---|---|
 | Two users open the same shared workspace sandbox | They see the same configuration (Input/Output mapping, saved SQL queries) | ✅ Collaboration on queries and configuration |
 | User creates a table by running a query (not output-mapped) | Table is created only in that user’s personal database schema | ❌ Other users **cannot** see or access it |
-| User saves a SQL query | Query is saved to the shared workspace sandbox configuration | ✅ Other users **can see and run it** |
+| User saves an SQL query | Query is saved to the shared workspace sandbox configuration | ✅ Other users **can see and run it** |
 | Two users save queries at the same time | A conflict warning appears (configuration changed by another user) | ⚠️ One user may need to reload/resolve changes |
 | User unloads table from SQL Editor to Storage | Table becomes a standard KBC Storage table | ✅ Visible to others via Storage, outside the workspace |
 | Sharing workspace sandbox is enabled | Users can open each other’s workspace sandbox configuration | ✅ Shared queries & mappings, ❌ not shared database state |
