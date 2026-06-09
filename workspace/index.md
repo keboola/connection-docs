@@ -70,16 +70,11 @@ to directly open the JupyterLab interface.
 
 The built-in [SQL Editor](/workspace/sql-editor) lets you work with **Snowflake** and **Google BigQuery** workspaces directly in your browser, without connecting any external tools.
 
->***Note for Multi-tenant and Pay-As-You-Go Projects***
+>***Note for Multi-tenant and Pay-As-You-Go Projects (Snowflake backend)***
 >
 >If your project uses Keboola's shared Snowflake backend (Multi-tenant or Pay-As-You-Go), the **SQL Editor is your primary tool** for SQL development, as direct Snowflake workspace access is not available.
 
-💡 Tip: Use SQL Editor for Safe Testing
-
-For interactive SQL exploration inside your workspace, use the SQL Editor.
-It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines.
-
-Learn more: [SQL Editor](/workspace/sql-editor).
+{% include tip.html title="Use SQL Editor for Safe Testing" content="For interactive SQL exploration inside your workspace, use the SQL Editor. It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines. Learn more: [SQL Editor](/workspace/sql-editor)." %}
 
 #### Snowflake
 

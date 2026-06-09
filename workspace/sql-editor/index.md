@@ -10,7 +10,7 @@ redirect_from:
 
 The Keboola SQL Editor allows users without specialized tools to directly interact with their data warehouse within Keboola Connection. It offers a smooth, fully integrated experience, replacing previous solutions like Snowsight. The editor is tightly connected with Keboola Storage, so you can easily access and use your buckets, tables, shared codes and variables in one place.
 
-Currently, the SQL Editor supports **Snowflake** and **BigQuery** workspaces.
+Currently, the SQL Editor supports **Snowflake** and **Google BigQuery** workspaces.
 
 ## Creating an SQL Workspace
 
@@ -88,7 +88,7 @@ Instead of manually typing full table names, you can insert the fully qualified 
 {: .image-popup}
 ![SQL Editor - Context menu showing Place name in editor option](/workspace/sql-editor/07-place-name-in-editor-menu.jpg)
 
-The editor automatically populates the code block with the table's fully qualified identifier.
+The editor automatically populates the code block with the table's fully qualified identifier. The exact format depends on your backend; the example below shows Snowflake.
 
 ```sql
 SELECT * FROM "SAPI_10495"."in.c-keboola-ex-http-01k749e8rrzzs9s7f9p7gbrg"."account";
