@@ -20,6 +20,8 @@ dist
 
 # Claude / local dev tools — screenshots saved during dev sessions
 CLAUDE.md
+claude.md
+scripts/screenshot.mjs
 screenshot-*.png
 audit-*.png
 check-*.png
