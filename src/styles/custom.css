@@ -1745,7 +1745,7 @@ nav.sidebar {
   transform: rotate(180deg);
 }
 
-/* Right sidebar stays frozen — only centre content expands */
+/* Right sidebar frozen */
 :root.sidebar-collapsed .right-sidebar-container {
   flex-shrink: 0 !important;
 }
