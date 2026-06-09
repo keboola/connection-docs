@@ -204,6 +204,78 @@ site-search kbd {
   border-radius: 3px;
 }
 
+/* "Ask Kai" CTA injected at the top of the search modal (AskKaiDrawer.astro).
+   A polished card: gradient badge + title + live query subtitle + arrow.
+   Clicking it opens the Kai chat drawer with the typed query. */
+.ak-search-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 11px 14px;
+  border: 1px solid rgba(100, 130, 255, 0.28);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5f7ff 0%, #eef1ff 100%);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.ak-search-cta:hover {
+  border-color: rgba(100, 130, 255, 0.5);
+  box-shadow: 0 4px 14px rgba(100, 130, 255, 0.18);
+  transform: translateY(-1px);
+}
+.ak-search-cta:active { transform: translateY(0); }
+.ak-sc-badge {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--kbc-blue-500), #6f8cff);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(31, 143, 255, 0.35);
+}
+.ak-sc-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.ak-sc-title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-1);
+  line-height: 1.3;
+}
+.ak-sc-text {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #5b7aee;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ak-sc-go {
+  flex-shrink: 0;
+  display: flex;
+  color: #5b7aee;
+  transition: transform 0.15s ease;
+}
+.ak-search-cta:hover .ak-sc-go { transform: translateX(2px); }
+:root[data-theme='dark'] .ak-search-cta {
+  background: linear-gradient(135deg, rgba(100, 130, 255, 0.16) 0%, rgba(100, 130, 255, 0.08) 100%);
+  border-color: rgba(100, 130, 255, 0.32);
+}
+:root[data-theme='dark'] .ak-sc-text,
+:root[data-theme='dark'] .ak-sc-go { color: #8ba4ff; }
+
 /* KAI header button */
 .ak-header-kai {
   display: inline-flex;

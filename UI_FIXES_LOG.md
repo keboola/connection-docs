@@ -206,3 +206,33 @@ localhost:4321. The production build uses persistent `<link>` stylesheets that d
 survive. **Always confirm cross-navigation CSS with `npx astro build && npx astro
 preview`** before concluding there's a bug. (U-11 verified: 24px holds on every
 page after navigating in the build.)
+
+### U-13 — Ask Kai removed from pages; polished Kai card in the search modal
+**Files:** `src/components/PageTitle.astro`, `src/components/AskKaiDrawer.astro`,
+`src/styles/custom.css` · ✅ Applied
+
+- Removed the per-page `.b-ask` "Ask Kai about this page" block from **all** pages
+  (incl. home — fully supersedes U-9). Header `KAI – AI ASSISTANT` button kept.
+- **Added** a polished Kai card at the top of the search modal: gradient badge +
+  "Ask Kai" title + subtitle that live-updates to the typed query (`"<query>"`) +
+  arrow. Clicking it closes the search modal, opens the Kai chat drawer, and sends
+  the query (chosen approach: banner → existing drawer chat, not an inline chat).
+
+**How (AskKaiDrawer.astro):**
+```js
+const ensureSearchKaiCta = () => {
+  const frame = document.querySelector('site-search dialog .dialog-frame');
+  if (!frame || frame.querySelector('.ak-search-cta')) return;
+  // inject <button.ak-search-cta> before frame.lastElementChild (above search/results)
+  // readQuery() <- input.pagefind-ui__search-input ; frame 'input' listener live-updates label
+  // click: dialog.close(); openDrawer(); if (q) send(q);
+};
+ensureSearchKaiCta();
+document.addEventListener('astro:page-load', ensureSearchKaiCta);
+```
+The dialog markup is in the DOM even when closed, so the CTA is injected at page
+load (re-run after view transitions; dup-guarded). Real Pagefind search runs in
+**prod builds only**, so verified with `astro build && astro preview`: CTA present
+on open, label updates to the typed query, click sends `"how do I set up a flow"`
+to the drawer and closes search. Works light + dark; the CTA itself also renders
+in dev (above the "search only in production" notice).

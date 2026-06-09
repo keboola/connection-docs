@@ -371,6 +371,59 @@
     ensureHeaderKaiBtn();
     document.addEventListener('astro:page-load', ensureHeaderKaiBtn);
 
+    // ─── Kai inside the search modal ──────────────────────────────────
+    // Adds an "Ask Kai" CTA to the top of the search dialog, so when the search
+    // bar opens users can hand their typed query to Kai instead of (or after)
+    // scanning the search results. Real Pagefind search runs in prod builds
+    // only, but this CTA works in dev too.
+    const ensureSearchKaiCta = () => {
+      const frame = document.querySelector('site-search dialog .dialog-frame');
+      if (!frame || frame.querySelector('.ak-search-cta')) return;
+
+      const cta = document.createElement('button');
+      cta.type = 'button';
+      cta.className = 'ak-search-cta';
+      cta.innerHTML =
+        '<span class="ak-sc-badge" aria-hidden="true">' +
+          '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>' +
+        '</span>' +
+        '<span class="ak-sc-body">' +
+          '<span class="ak-sc-title">Ask Kai</span>' +
+          '<span class="ak-sc-text">Get an instant answer about the docs</span>' +
+        '</span>' +
+        '<span class="ak-sc-go" aria-hidden="true">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+        '</span>';
+      // Place above the search input / results (after the mobile Cancel button).
+      frame.insertBefore(cta, frame.lastElementChild);
+
+      const readQuery = () => {
+        const i = frame.querySelector(
+          'input.pagefind-ui__search-input, input[type="search"], input[type="text"]',
+        ) as HTMLInputElement | null;
+        return (i?.value || '').trim();
+      };
+      const refresh = () => {
+        const q = readQuery();
+        const t = cta.querySelector('.ak-sc-text') as HTMLElement;
+        if (t) t.textContent = q ? `“${q}”` : 'Get an instant answer about the docs';
+      };
+      // Live-update the CTA label as the user types in the search box.
+      frame.addEventListener('input', refresh);
+
+      cta.addEventListener('click', (e) => {
+        e.preventDefault();
+        const q = readQuery();
+        (frame.closest('dialog') as HTMLDialogElement | null)?.close();
+        openDrawer();
+        if (q) send(q);
+      });
+    };
+    ensureSearchKaiCta();
+    document.addEventListener('astro:page-load', ensureSearchKaiCta);
+
     // ─── Wire triggers ───────────────────────────────────────────────
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement | null;
