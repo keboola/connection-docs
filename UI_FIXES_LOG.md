@@ -113,3 +113,96 @@ applySidebarState(localStorage.getItem('kbc-sidebar-collapsed') === 'true');
 - Neither file is touched by `migrate.mjs` — these changes are permanent across all future migration reruns
 - U-4 (sidebar collapse) state survives page navigation via Astro view transitions because `AskKaiDrawer.astro` uses `transition:persist` and re-runs `ensureCollapseBtn` on `astro:page-load`
 - Jordan's Phase 2 also includes: feedback vote buttons and Edit → auto-open PR (not yet implemented)
+
+---
+
+## Session 2026-06-09 — Header / sidebar / spacing refinements
+
+> Files touched: `src/styles/custom.css`, `src/components/PageTitle.astro`,
+> `src/components/AskKaiDrawer.astro`, `src/components/Head.astro`.
+> None are touched by `migrate.mjs`.
+
+### U-5 — Content pushed ~600px down the page
+**File:** `src/styles/custom.css` · ✅ Applied
+
+`.sidebar-pane` had `position: relative` (unlayered, so it beat Starlight's
+`@layer` `position: fixed`). That dropped the fixed sidebar into normal flow and
+shoved `.main-frame` down. Removed the `position: relative` — Starlight's
+`position: fixed` + `overflow-y: auto` (working scroll) came back automatically.
+
+### U-6 — Floating grey stripe next to the header Kai button
+**File:** `src/styles/custom.css` · ✅ Applied
+
+The stripe was Starlight's `.social-icons::after` separator, rendered even though
+no social icons are configured. Hidden it:
+```css
+.social-icons::after { display: none !important; }
+```
+
+### U-7 — Content jumps on new-tab load (FOUC of collapsed sidebar)
+**File:** `src/components/Head.astro` · ✅ Applied
+
+`localStorage` restore ran in a deferred ES module (after first paint). Moved a
+synchronous restore into a `<script is:inline>` in `<head>` so the
+`sidebar-collapsed` class is set **before** first paint; also re-applied in
+`astro:before-swap` for view-transition navigations.
+
+### U-8 — Sidebar/content divider line "disappeared" on scroll
+**File:** `src/styles/custom.css` · ✅ Applied
+
+Replaced the faint `border-right` on the (scrollable) `.sidebar-pane` with a
+**fixed, full-height** divider that can't drop out on scroll/short pages/nav:
+```css
+@media (min-width: 50rem) {
+  :root[data-has-sidebar] .main-frame::before {
+    content:''; position:fixed; top:var(--sl-nav-height); bottom:0;
+    left:var(--sl-sidebar-width); width:1px; background:var(--sl-color-gray-5);
+    z-index:1; pointer-events:none; transition:left .22s ease;
+  }
+  :root[data-has-sidebar].sidebar-collapsed .main-frame::before { left:40px; }
+}
+```
+
+### U-9 — "Ask Kai about this page" block → home page only
+**File:** `src/components/PageTitle.astro` · ✅ Applied
+
+The `.b-ask` block rendered on every page. Now conditionally rendered only on the
+root home page (`const isHome = pageSlug === ''`) — `{isHome && (<div class="b-ask">…)}`.
+Conditional **render** (not CSS hide) so no empty gap remains on other pages.
+
+### U-10 — Removed "BETA" label on header Kai button
+**Files:** `src/components/AskKaiDrawer.astro`, `src/styles/custom.css` · ✅ Applied
+
+Dropped the `<span class="ak-hk-beta">BETA</span>` from the injected button and
+deleted the now-unused `.ak-hk-beta` CSS rule.
+
+### U-11 — Gap between page title and first paragraph too large
+**File:** `src/styles/custom.css` · ✅ Applied
+
+After U-9 removed the Ask Kai block, the title→content gap was ~80px (two stacked
+content-panels at 24px padding each + margins). Collapsed the panel junction to
+~24px:
+```css
+.content-panel:has(.b-pagehead) { padding-bottom: 0 !important; }
+.content-panel + .content-panel  { padding-top: 0 !important; }
+```
+`!important` is required: on Astro view-transition swaps the override otherwise
+loses to Starlight's layered default. **Verify in a production build**, not dev
+(see note below).
+
+### U-12 — Sidebar collapse toggle reworked (supersedes U-4)
+**File:** `src/styles/custom.css` (+ injection in `AskKaiDrawer.astro`) · ✅ Applied
+
+The toggle now lives **inside** `.sidebar-pane` (top-right, `top:16px; right:8px`),
+not fixed to the viewport. Final styling: `27px` box, `14px` icon, `--bg-1`
+background + `1px` border + subtle shadow so it's clearly visible (was a
+transparent 24px hit-area that read as invisible).
+Collapsed rail stays `40px`; the button is centred there with `right:6px`.
+
+### Dev vs. production — CSS persistence across navigation ⚠️
+`npm run dev` (Vite) injects CSS as `<style>` tags that **do not survive** Astro
+view-transition swaps, so a correct rule can look "broken after navigating" on
+localhost:4321. The production build uses persistent `<link>` stylesheets that do
+survive. **Always confirm cross-navigation CSS with `npx astro build && npx astro
+preview`** before concluding there's a bug. (U-11 verified: 24px holds on every
+page after navigating in the build.)

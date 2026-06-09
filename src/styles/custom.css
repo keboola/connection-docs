@@ -204,50 +204,70 @@ site-search kbd {
   border-radius: 3px;
 }
 
+/* KAI header button */
+.ak-header-kai {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: linear-gradient(135deg, #f4f6ff 0%, #edf0ff 100%);
+  border: 1px solid rgba(100, 130, 255, 0.28);
+  border-radius: 6px;
+  color: #5b7aee;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+.ak-header-kai:hover { opacity: 0.88; }
+.ak-hk-icon { font-size: 13px; line-height: 1; color: #5b7aee; }
+:root[data-theme='dark'] .ak-header-kai {
+  background: linear-gradient(135deg, rgba(100, 130, 255, 0.18) 0%, rgba(100, 130, 255, 0.1) 100%);
+  border-color: rgba(100, 130, 255, 0.35);
+  color: #8ba4ff;
+}
+:root[data-theme='dark'] .ak-hk-icon { color: #8ba4ff; }
+
+/* Hide Starlight's social-icons separator (no social icons configured in this project) */
+.social-icons::after { display: none !important; }
+
+/* Auto / theme-select button — compact */
+starlight-theme-select button {
+  padding: 4px 10px !important;
+  font-size: 13px !important;
+  height: auto !important;
+  gap: 4px !important;
+}
+
 /* ───────── Sidebar (left nav) ───────── */
 nav.sidebar {
   background: var(--bg-1);
-  border-right: 1px solid var(--border-1);
+}
+
+/* Remove the grey dividing line between the page-header section and the markdown section */
+.content-panel + .content-panel {
+  border-top: none !important;
+}
+
+/* Tighten the gap between the page header (title/lede) and the first paragraph.
+   Default Starlight stacks two content-panels (24px bottom + 24px top padding)
+   on top of the page-head margin, leaving ~80px. Collapse the panel junction so
+   the head sits ~28px above the content. */
+.content-panel:has(.b-pagehead) { padding-bottom: 0 !important; }
+.content-panel + .content-panel { padding-top: 0 !important; }
+
+/* Remove the right-sidebar border-left that bleeds into the header area */
+.right-sidebar-container {
+  border-left: none !important;
 }
 .sidebar-content { padding: 0.5rem 0.75rem 2rem; }
 
-/* "Ask Kai" gradient button — real <button> injected into the sidebar by
-   AskKaiDrawer.astro on page load + after view transitions (replaces the
-   old ::before pseudo-element approach that wasn't clickable). */
-.ak-sidebar-trigger {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 0.25rem 0 1rem;
-  height: 38px;
-  width: 100%;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #f7fbff 0%, #eaf3ff 100%);
-  color: var(--kbc-blue-700);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: inset 0 0 0 1px rgba(31, 143, 255, 0.25);
-  letter-spacing: 0.1px;
-  transition: box-shadow 0.15s, transform 0.05s;
-}
-.ak-sidebar-trigger:hover {
-  box-shadow: inset 0 0 0 1px rgba(31, 143, 255, 0.45);
-}
-.ak-sidebar-trigger:active {
-  transform: translateY(1px);
-}
-:root[data-theme='dark'] .ak-sidebar-trigger {
-  background: linear-gradient(180deg, rgba(31, 143, 255, 0.12) 0%, rgba(31, 143, 255, 0.06) 100%);
-  color: var(--kbc-blue-200);
-  box-shadow: inset 0 0 0 1px rgba(31, 143, 255, 0.4);
-}
+/* "Ask Kai" sidebar button — hidden per Phase 2 designer spec */
+.ak-sidebar-trigger { display: none; }
 
 /* Group headings */
 .sidebar-content .large {
@@ -397,7 +417,7 @@ nav.sidebar {
   background: linear-gradient(135deg, #f4f8ff 0%, #f6fff4 100%);
   border: 1px solid #d6e6ff;
   border-radius: 12px;
-  margin: 0 0 24px;
+  margin: 0 0 8px;
   cursor: pointer;
   transition: border-color 0.15s;
 }
@@ -545,6 +565,7 @@ nav.sidebar {
 }
 
 .sl-markdown-content p, .sl-markdown-content li { text-wrap: pretty; }
+.sl-markdown-content p + p { margin-top: 0.5rem; }
 
 /* Lists — default style: bullets, terracotta-free.
    The auto-migration plugin adds `.beacon-check-grid` to advantage-style lists
@@ -1567,90 +1588,86 @@ nav.sidebar {
 
 /* ─── Sidebar collapse toggle ──────────────────────────────────── */
 
-/*
- * Layout:
- *   [sidebar content] | [button] | [grey line] | [main content]
- *
- * Button floats to the LEFT of the grey dividing line, at HOME-nav level.
- * Grey line is always visible as a fixed pseudo-element.
- * Sidebar fades out then collapses (no visible shrinking window).
- */
-
-/* Grey border line — always present, independent of sidebar state */
-#ak-sidebar-collapse::after {
-  content: '';
-  position: fixed;
-  top: var(--sl-nav-height, 3.5rem);
-  bottom: 0;
-  left: var(--sl-sidebar-width, 18rem);
-  width: 1px;
-  background: var(--border-1);
-  pointer-events: none;
-  transition: left 0.3s ease;
-}
-
-/* The button — left of the line, at HOME-nav level */
+/* Toggle button — inside .sidebar-pane, top-right, Stripe-style.
+   Same anchor (top:16 / right:8) — only larger + more visible. */
 #ak-sidebar-collapse {
-  position: fixed;
-  /* HOME nav item is roughly at nav-height + padding + ask-kai-btn height */
-  top: calc(var(--sl-nav-height, 3.5rem) + 88px);
-  /* Sits left of the line with a small gap: line is at sidebar-width, button 14px left of it */
-  left: calc(var(--sl-sidebar-width, 18rem) - 14px);
-  transform: translateX(-100%);   /* fully left of the line, not touching it */
-  z-index: 200;
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
+  position: absolute;
+  top: 16px;
+  right: 8px;
+  z-index: 10;
+  width: 27px;
+  height: 27px;
+  border-radius: 6px;
   background: var(--bg-1);
   border: 1px solid var(--border-1);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--fg-3);
+  color: var(--sl-color-gray-2);
   padding: 0;
-  transition: left 0.3s ease, color 0.15s, background 0.15s;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
 #ak-sidebar-collapse:hover {
-  color: var(--fg-1);
-  background: var(--bg-2);
+  color: var(--sl-color-gray-1);
+  background: var(--sl-color-gray-6);
   border-color: var(--border-2);
 }
-#ak-sidebar-collapse svg { transition: transform 0.3s ease; }
-
-/* ── Fade animation (no visible shrinking) ──────────────────────
- * Collapsing: fade out opacity (0.25s), THEN snap width to 0
- * Expanding:  snap width to full (instant), THEN fade in opacity
- */
-.sidebar-pane {
-  opacity: 1;
-  overflow: hidden;
-  /* When going TO expanded: width instantly, opacity fades in */
-  transition: opacity 0.25s ease 0.05s, width 0s ease 0s;
+#ak-sidebar-collapse svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
 }
-:root.sidebar-collapsed .sidebar-pane {
-  opacity: 0;
-  width: 0 !important;
-  /* When going TO collapsed: opacity fades out, width snaps AFTER */
-  transition: opacity 0.22s ease 0s, width 0s ease 0.22s;
+
+.sidebar-pane {
+  transition: width 0.22s ease;
+}
+
+/* Persistent vertical divider between sidebar and content.
+   Fixed + full height so it never disappears on scroll, navigation, short
+   pages, or while the sidebar scrolls internally. Scoped to pages that
+   actually have a left sidebar, and hidden on mobile where the sidebar is an
+   overlay (≥ 50rem is where Starlight shows the static sidebar). */
+@media (min-width: 50rem) {
+  :root[data-has-sidebar] .main-frame::before {
+    content: '';
+    position: fixed;
+    top: var(--sl-nav-height);
+    bottom: 0;
+    left: var(--sl-sidebar-width);
+    width: 1px;
+    background: var(--sl-color-gray-5);
+    z-index: 1;
+    pointer-events: none;
+    transition: left 0.22s ease;
+  }
+  :root[data-has-sidebar].sidebar-collapsed .main-frame::before {
+    left: 40px;
+  }
+}
+.sidebar-content {
+  transition: opacity 0.18s ease;
 }
 .main-frame {
-  /* Matches sidebar width-snap timing */
-  transition: padding-inline-start 0s ease 0s;
-}
-:root.sidebar-collapsed .main-frame {
-  padding-inline-start: 0 !important;
-  transition: padding-inline-start 0s ease 0.22s;
+  transition: padding-inline-start 0.22s ease;
 }
 
-/* Collapsed — button moves left of the new line position (left: 0 + gap) */
-:root.sidebar-collapsed #ak-sidebar-collapse {
-  left: calc(0px + 14px);  /* 14px from left viewport edge */
-  transform: translateX(-100%);  /* keep same visual offset */
+/* Collapsed state */
+:root.sidebar-collapsed .sidebar-pane {
+  width: 40px !important;
+  overflow: hidden;
 }
-:root.sidebar-collapsed #ak-sidebar-collapse::after {
-  left: 0px;  /* line at left viewport edge */
+:root.sidebar-collapsed .sidebar-content {
+  opacity: 0;
+  pointer-events: none;
+}
+:root.sidebar-collapsed .main-frame {
+  padding-inline-start: 40px !important;
+}
+/* Centre the toggle in the collapsed rail (40px rail, 27px button) */
+:root.sidebar-collapsed #ak-sidebar-collapse {
+  right: 6px;
 }
 :root.sidebar-collapsed #ak-sidebar-collapse svg {
   transform: rotate(180deg);
@@ -1659,12 +1676,10 @@ nav.sidebar {
 /* Right sidebar stays frozen — only centre content expands */
 :root.sidebar-collapsed .right-sidebar-container {
   flex-shrink: 0 !important;
-  width: var(--sl-sidebar-width) !important;
 }
 
 @media (max-width: 72rem) {
   #ak-sidebar-collapse { display: none; }
-  #ak-sidebar-collapse::after { display: none; }
 }
 
 @media (max-width: 600px) {
