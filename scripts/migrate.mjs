@@ -34,7 +34,7 @@ const SKIP_DIRS = new Set([
 /** Specific root-level files to skip */
 const SKIP_FILES = new Set([
   'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
-  'AUDIT_LOG.md', 'UI_FIXES_LOG.md',
+  'AUDIT_LOG.md', 'UI_FIXES_LOG.md', 'DEV_DOCS_INTEGRATION.md',
 ]);
 
 /**
