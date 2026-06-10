@@ -1,9 +1,17 @@
 /**
- * /api/chat — proxies the Ask Kai widget to the Keboola docs MCP server.
+ * /api/chat — proxies the Ask Kai widget to the Keboola AI Service.
  *
- * One path: call the docs MCP `docs_query` tool directly, stream its text
- * answer to the browser, then emit a `sources` event with the docs URLs so
- * the drawer can render them as chips.
+ * Calls the AI Service `POST /docs/question` endpoint directly (one request),
+ * streams its answer to the browser, then emits a `sources` event with the
+ * docs URLs so the drawer can render them as chips.
+ *
+ * This replaces the previous Keboola docs MCP integration: the MCP required a
+ * 3-step initialize/notify/tools-call handshake against a data app that cold-
+ * starts and turns off — a plain API call is faster, cheaper, and more reliable.
+ *
+ * Required env (set in the Vercel project):
+ *   AI_SERVICE_URL          base URL of the Keboola AI Service
+ *   KBC_STORAGE_API_TOKEN   Storage API token (sent as X-StorageApi-Token)
  *
  * Request:  POST { message: string, sessionId?: string }
  * Response: text/event-stream
@@ -13,9 +21,8 @@
  *   data: {"type":"sources","items":[{ "url":"…", "label":"…" }]}
  *   data: {"type":"done"}
  *
- * Cold-start of the Keboola docs data app is handled with up to 3 retries
- * within a 15s budget — the function emits "Docs service is waking up…"
- * progress events between attempts.
+ * Cold-start of the AI Service is handled with retries within a 15s budget —
+ * the function emits "waking up…" progress events between attempts.
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -27,9 +34,9 @@ interface ChatRequest {
   sessionId?: string;
 }
 
-const MCP_URL =
-  process.env.DOCS_MCP_URL ||
-  'https://docs-mcp-43665566.hub.us-east4.gcp.keboola.com/mcp';
+// AI Service: POST {AI_SERVICE_URL}/docs/question  (auth: X-StorageApi-Token)
+const AI_SERVICE_URL = (process.env.AI_SERVICE_URL || '').replace(/\/$/, '');
+const KBC_TOKEN = process.env.KBC_STORAGE_API_TOKEN || '';
 
 // ─── HTTP / SSE plumbing ─────────────────────────────────────────────────
 
@@ -57,97 +64,44 @@ function setupSse(res: VercelResponse) {
   res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
 }
 
-// ─── Minimal MCP Streamable-HTTP client ──────────────────────────────────
+// ─── AI Service client ───────────────────────────────────────────────────
 
 interface DocsAnswer {
   text: string;
   source_urls: string[];
 }
 
-async function mcpToolCall(
-  toolName: string,
-  args: Record<string, unknown>,
+/** Call POST {AI_SERVICE_URL}/docs/question and normalize the response. */
+async function askDocsQuestion(
+  query: string,
   signal?: AbortSignal,
 ): Promise<DocsAnswer> {
-  const headers: Record<string, string> = {
-    'content-type': 'application/json',
-    accept: 'application/json, text/event-stream',
+  const res = await fetch(`${AI_SERVICE_URL}/docs/question`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      accept: 'application/json',
+      'X-StorageApi-Token': KBC_TOKEN,
+    },
+    body: JSON.stringify({ query }),
+    signal,
+  });
+
+  if (!res.ok) {
+    throw new Error(`AI Service /docs/question failed: HTTP ${res.status}`);
+  }
+
+  // DocsResponse: { response: string, metadata: { sources: string[] } }
+  const data = (await res.json()) as {
+    response?: string;
+    metadata?: { sources?: string[] };
   };
 
-  const parseSseJson = (raw: string): any => {
-    for (const line of raw.split('\n')) {
-      if (line.startsWith('data: ')) return JSON.parse(line.slice(6));
-    }
-    return JSON.parse(raw);
-  };
-
-  // 1. initialize → captures the mcp-session-id header for subsequent calls.
-  const initRes = await fetch(MCP_URL, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'initialize',
-      params: {
-        protocolVersion: '2024-11-05',
-        capabilities: {},
-        clientInfo: { name: 'keboola-docs-beacon', version: '1.0.0' },
-      },
-    }),
-    signal,
-  });
-  if (!initRes.ok) {
-    throw new Error(`MCP initialize failed: HTTP ${initRes.status}`);
-  }
-  const sessionId = initRes.headers.get('mcp-session-id');
-  if (!sessionId) throw new Error('MCP initialize returned no session id');
-
-  const sessHeaders = { ...headers, 'mcp-session-id': sessionId };
-
-  // 2. notifications/initialized — completes the handshake.
-  await fetch(MCP_URL, {
-    method: 'POST',
-    headers: sessHeaders,
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      method: 'notifications/initialized',
-      params: {},
-    }),
-    signal,
-  });
-
-  // 3. tools/call.
-  const callRes = await fetch(MCP_URL, {
-    method: 'POST',
-    headers: sessHeaders,
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      id: 2,
-      method: 'tools/call',
-      params: { name: toolName, arguments: args },
-    }),
-    signal,
-  });
-  if (!callRes.ok) {
-    throw new Error(`MCP tools/call failed: HTTP ${callRes.status}`);
-  }
-  const raw = await callRes.text();
-  const parsed = parseSseJson(raw);
-  if (parsed?.error?.message) throw new Error(`MCP error: ${parsed.error.message}`);
-
-  const innerText: string | undefined = parsed?.result?.content?.[0]?.text;
-  if (!innerText) throw new Error('MCP returned no result content');
-
-  let inner: { text?: string; source_urls?: string[] };
-  try {
-    inner = JSON.parse(innerText);
-  } catch {
-    return { text: innerText, source_urls: [] };
-  }
   return {
-    text: inner.text ?? '',
-    source_urls: Array.isArray(inner.source_urls) ? inner.source_urls : [],
+    text: data.response ?? '',
+    source_urls: Array.isArray(data.metadata?.sources)
+      ? (data.metadata!.sources as string[])
+      : [],
   };
 }
 
@@ -177,11 +131,11 @@ function labelForUrl(url: string): string {
   }
 }
 
-// ─── Direct-MCP handler ─────────────────────────────────────────────────
+// ─── Docs-question handler ───────────────────────────────────────────────
 
-async function handleDirectMcp(message: string, res: VercelResponse) {
+async function handleDocsQuestion(message: string, res: VercelResponse) {
   setupSse(res);
-  writeSse(res, { type: 'session', sessionId: `mcp-${Date.now()}` });
+  writeSse(res, { type: 'session', sessionId: `ai-${Date.now()}` });
   writeSse(res, {
     type: 'progress',
     label: `Searching docs for "${message.slice(0, 60)}"…`,
@@ -196,13 +150,13 @@ async function handleDirectMcp(message: string, res: VercelResponse) {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     if (Date.now() - startedAt > budgetMs) break;
     try {
-      answer = await mcpToolCall('docs_query', { query: message });
+      answer = await askDocsQuestion(message);
       break;
     } catch (e: any) {
       const msg = String(e?.message || '');
-      const isColdStart =
-        /HTTP 503/.test(msg) || /initialize failed/i.test(msg);
-      if (!isColdStart || attempt >= maxAttempts) break;
+      // Retry only on transient cold-start / upstream errors.
+      const isTransient = /HTTP 5\d\d/.test(msg) || /fetch failed|ECONN|ETIMEDOUT/i.test(msg);
+      if (!isTransient || attempt >= maxAttempts) break;
       writeSse(res, {
         type: 'progress',
         label: 'Docs service is waking up, retrying…',
@@ -240,15 +194,16 @@ async function handleDirectMcp(message: string, res: VercelResponse) {
   res.end();
 }
 
-// ─── Stub handler (used when DOCS_MCP_URL is empty) ─────────────────────
+// ─── Stub handler (used when the AI Service env isn't configured) ────────
 
 async function handleStub(message: string, res: VercelResponse) {
   setupSse(res);
   writeSse(res, { type: 'session', sessionId: 'stub' });
   const reply =
-    `Ask Kai is wiring up. Once the docs MCP server is live, this widget ` +
-    `will run your question — "${message.slice(0, 80)}" — against the live ` +
-    `documentation. Until then, please use the search at the top of the sidebar.`;
+    `Ask Kai is wiring up. Once the AI Service env (AI_SERVICE_URL + ` +
+    `KBC_STORAGE_API_TOKEN) is configured, this widget will run your question ` +
+    `— "${message.slice(0, 80)}" — against the live documentation. Until then, ` +
+    `please use the search at the top of the sidebar.`;
   for (const chunk of reply.match(/.{1,18}/g) ?? []) {
     writeSse(res, { type: 'text-delta', text: chunk });
     await new Promise((r) => setTimeout(r, 25));
@@ -295,8 +250,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    if (MCP_URL) {
-      await handleDirectMcp(message, res);
+    if (AI_SERVICE_URL && KBC_TOKEN) {
+      await handleDocsQuestion(message, res);
     } else {
       await handleStub(message, res);
     }
