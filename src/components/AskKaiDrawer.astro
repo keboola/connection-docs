@@ -308,22 +308,8 @@
       send: (q: string) => { openDrawer(); send(q); },
     };
 
-    // Inject a real clickable Ask-Kai button at the top of the sidebar.
-    // Idempotent — runs on initial load AND after every Astro view transition
-    // (the sidebar gets re-rendered with the new active state on each nav).
-    const ensureSidebarTrigger = () => {
-      const sidebar = document.querySelector('.sidebar-content');
-      if (!sidebar) return;
-      if (sidebar.querySelector(':scope > .ak-sidebar-trigger')) return;
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'ak-sidebar-trigger';
-      btn.setAttribute('data-ask-kai-open', '');
-      btn.innerHTML = '<span aria-hidden="true">✨</span><span>Ask Kai about these docs</span>';
-      sidebar.insertBefore(btn, sidebar.firstChild);
-    };
-    ensureSidebarTrigger();
-    document.addEventListener('astro:page-load', ensureSidebarTrigger);
+    // Sidebar trigger is hidden via CSS (display:none on .ak-sidebar-trigger).
+    // No injection needed.
 
 
     // ─── Sidebar collapse toggle ──────────────────────────────────────
@@ -336,19 +322,19 @@
 
     const ensureCollapseBtn = () => {
       if (document.getElementById('ak-sidebar-collapse')) return;
-      // Only show on desktop where sidebar exists
       if (window.innerWidth < 1152) return;
+      const sidebarPane = document.querySelector('.sidebar-pane');
+      if (!sidebarPane) return;
       const btn = document.createElement('button');
       btn.id = 'ak-sidebar-collapse';
       btn.type = 'button';
       btn.setAttribute('aria-label', 'Toggle sidebar');
       btn.title = 'Collapse sidebar';
-      /* Stripe-style ← arrow: chevron + horizontal tail */
-      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"/>
-        <polyline points="11 18 5 12 11 6"/>
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 12 5 8 9 4"/>
+        <line x1="12" y1="3" x2="12" y2="13"/>
       </svg>`;
-      document.body.appendChild(btn);
+      sidebarPane.insertBefore(btn, sidebarPane.firstChild);
       btn.addEventListener('click', () => {
         const collapsed = document.documentElement.classList.toggle(COLLAPSED_CLASS);
         localStorage.setItem(STORAGE_KEY, String(collapsed));
@@ -356,11 +342,87 @@
       });
     };
 
-    // Restore persisted state before first paint
-    const storedCollapsed = localStorage.getItem(STORAGE_KEY) === 'true';
-    applySidebarState(storedCollapsed);
-    ensureCollapseBtn();
-    document.addEventListener('astro:page-load', ensureCollapseBtn);
+    // Head.astro inline script already applies class before first paint (FOUC fix).
+    // Here we re-apply on view-transition navigations and inject the button.
+    const restoreState = () => {
+      applySidebarState(localStorage.getItem(STORAGE_KEY) === 'true');
+      ensureCollapseBtn();
+    };
+    restoreState();
+    document.addEventListener('astro:page-load', restoreState);
+
+    // ─── Header KAI button ───────────────────────────────────────
+    const ensureHeaderKaiBtn = () => {
+      // Remove any leftover buttons from previous navigation cycles first
+      document.querySelectorAll('#ak-header-kai').forEach(el => el.remove());
+      const themeSelect = document.querySelector('starlight-theme-select');
+      if (!themeSelect) return;
+      const btn = document.createElement('button');
+      btn.id = 'ak-header-kai';
+      btn.type = 'button';
+      btn.className = 'ak-header-kai';
+      btn.setAttribute('data-ask-kai-open', '');
+      btn.setAttribute('aria-label', 'Open Ask Kai');
+      btn.innerHTML =
+        '<span class="ak-hk-icon" aria-hidden="true">✨</span>' +
+        '<span class="ak-hk-label">KAI – AI ASSISTANT</span>';
+      themeSelect.parentNode!.insertBefore(btn, themeSelect);
+    };
+    ensureHeaderKaiBtn();
+    document.addEventListener('astro:page-load', ensureHeaderKaiBtn);
+
+    // ─── Kai inside the search modal ──────────────────────────────────
+    // Adds an "Ask Kai" CTA to the top of the search dialog, so when the search
+    // bar opens users can hand their typed query to Kai instead of (or after)
+    // scanning the search results. Real Pagefind search runs in prod builds
+    // only, but this CTA works in dev too.
+    const ensureSearchKaiCta = () => {
+      const frame = document.querySelector('site-search dialog .dialog-frame');
+      if (!frame || frame.querySelector('.ak-search-cta')) return;
+
+      const cta = document.createElement('button');
+      cta.type = 'button';
+      cta.className = 'ak-search-cta';
+      cta.innerHTML =
+        '<span class="ak-sc-badge" aria-hidden="true">' +
+          '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>' +
+        '</span>' +
+        '<span class="ak-sc-body">' +
+          '<span class="ak-sc-title">Ask Kai</span>' +
+          '<span class="ak-sc-text">Get an instant answer about the docs</span>' +
+        '</span>' +
+        '<span class="ak-sc-go" aria-hidden="true">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+        '</span>';
+      // Place above the search input / results (after the mobile Cancel button).
+      frame.insertBefore(cta, frame.lastElementChild);
+
+      const readQuery = () => {
+        const i = frame.querySelector(
+          'input.pagefind-ui__search-input, input[type="search"], input[type="text"]',
+        ) as HTMLInputElement | null;
+        return (i?.value || '').trim();
+      };
+      const refresh = () => {
+        const q = readQuery();
+        const t = cta.querySelector('.ak-sc-text') as HTMLElement;
+        if (t) t.textContent = q ? `“${q}”` : 'Get an instant answer about the docs';
+      };
+      // Live-update the CTA label as the user types in the search box.
+      frame.addEventListener('input', refresh);
+
+      cta.addEventListener('click', (e) => {
+        e.preventDefault();
+        const q = readQuery();
+        (frame.closest('dialog') as HTMLDialogElement | null)?.close();
+        openDrawer();
+        if (q) send(q);
+      });
+    };
+    ensureSearchKaiCta();
+    document.addEventListener('astro:page-load', ensureSearchKaiCta);
 
     // ─── Wire triggers ───────────────────────────────────────────────
     document.addEventListener('click', (e) => {

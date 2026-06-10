@@ -17,3 +17,23 @@ dist
 .env*.local.bak
 .agent.json
 .env.production
+
+# Claude / local dev tools — screenshots saved during dev sessions
+CLAUDE.md
+claude.md
+scripts/screenshot.mjs
+screenshot-*.png
+audit-*.png
+check-*.png
+final-*.png
+header-*.png
+toc-*.png
+diag-*.png
+cur-*.png
+fix-*.png
+before-*.png
+after-*.png
+nav-test-*.png
+pw-*.png
+stripe-*.png
+sidebar-scroll-test.png

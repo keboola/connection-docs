@@ -24,13 +24,27 @@ import { ClientRouter } from 'astro:transitions';
 <Default {...Astro.props}><slot /></Default>
 <ClientRouter fallback="swap" />
 <script is:inline>
-  // Preserve sidebar open/closed state across view transitions
+  // Restore sidebar collapsed state synchronously — prevents FOUC on new tab open
+  try {
+    if (localStorage.getItem('kbc-sidebar-collapsed') === 'true') {
+      document.documentElement.classList.add('sidebar-collapsed');
+    }
+  } catch(e) {}
+</script>
+<script is:inline>
+  // Preserve sidebar state across view transitions
   document.addEventListener('astro:before-swap', function(e) {
+    // Restore collapsed class on incoming document before swap
+    try {
+      if (localStorage.getItem('kbc-sidebar-collapsed') === 'true') {
+        e.newDocument.documentElement.classList.add('sidebar-collapsed');
+      }
+    } catch(err) {}
+    // Keep sidebar section open/closed state
     var currentDetails = document.querySelectorAll('.sidebar-content details');
     var newDetails = e.newDocument.querySelectorAll('.sidebar-content details');
     currentDetails.forEach(function(detail, i) {
       if (!newDetails[i]) return;
-      // Keep the group containing the active page open, preserve user state for others
       var hasActive = newDetails[i].querySelector('[aria-current="page"]');
       newDetails[i].open = hasActive ? true : detail.open;
     });
