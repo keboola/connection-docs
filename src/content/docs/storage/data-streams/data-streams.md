@@ -56,7 +56,6 @@ In your table settings, you can:
 
 :::caution
 **Important:** Changing the table's name will create a new table, and the stream will import data into that table.
-**Important:** Changing the table’s name will create a new table, and the stream will import data into that table.
 :::
 
 #### Sample codes for integration

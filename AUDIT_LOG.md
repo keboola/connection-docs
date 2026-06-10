@@ -448,3 +448,104 @@ Many section index pages open with a paragraph that re-states what the page titl
 - [ ] Content rewrite — task-oriented, agent-optimized pages
 - [ ] Feedback vote buttons
 - [ ] Edit → auto-open PR for contributions
+
+---
+
+## Phase 2 — Systematic migration-fidelity audit (2026-06-09)
+
+This is the full-site mechanical pass Jordan's onboarding calls "your first real
+task" — the earlier F-/M- findings were caught ad hoc; this is exhaustive.
+
+**Tool:** `scripts/audit-phase2.mjs` (read-only; run after `astro build`). Crawls
+all **439** built HTML pages in `dist/` + **274** markdown sources for: broken
+internal links, missing images, old-domain link smells, heading hierarchy,
+malformed tables, unclosed code fences.
+
+### Results
+
+| Check | Count | Severity |
+|---|---|---|
+| Broken internal links | 36 | 🔴 High (33 = missing assets, 3 = dead page links) |
+| Missing images | **0** | ✅ Clean — confirms M-2 held |
+| Malformed tables | **0** | ✅ Clean |
+| In-content links to old domains | 162 | 🟠 Medium-High |
+| Multiple `<h1>` per page | 5 | 🟡 Medium |
+| Unclosed/unbalanced code fence | 1 | 🟡 Low |
+| External links (not network-checked) | 1555 | ⚪ Deferred |
+
+> A first run reported 600 "old-domain" hits; ~438 were the legitimate `<head>`
+> canonical tag on every page. The audit now scans **body content only**, so the
+> 162 are genuine in-content cross-references.
+
+### A-1 — Downloadable assets not migrated (≈33 broken links) 🔴
+**Root cause:** `migrate.mjs` copies only `IMAGE_EXTS`
+(`.png/.jpg/.jpeg/.gif/.svg/.webp`). Pages link to downloadable **`.csv` / `.zip`
+/ `.docx` / `.json`** sample files that exist in the Jekyll source (e.g.
+`transformations/source.csv`, `tutorial/branches/bitcoin_price.csv`,
+`tutorial/onboarding/usage-blueprint/…-blueprint-document.docx`,
+`components/ip-addresses/kbc-public-ip.json`) but are never copied.
+**Fix (durable):** add a `DOWNLOAD_EXTS` set to `migrate.mjs`, copy those files
+alongside images (dual copy → `src/content/docs` + `public`).
+Affected: `transformations/{python,r}-plain/*`, `transformations/{bigquery,oracle,
+snowflake-plain}`, `tutorial/load/*`, `tutorial/branches/*`,
+`components/extractors/**`, `components/ip-addresses`, `tutorial/onboarding/usage-blueprint`.
+
+### A-2 — Dead internal page links (3) 🔴
+- `/404` → `/overview/environment/` (no such page)
+- `/components/extractors/other/telemetry-data/` → `/ai/kai-assistant/` (no such page)
+- `/workspace/table-export/` → `/integrate/storage/api/importer/#download-a-file`
+  — an `/integrate/…` path that **only exists in the developer docs** (resolves
+  for free once dev docs are unified; until then repoint to developers.keboola.com).
+**Fix:** confirm correct targets with Jordan (content-fact), then fix links/redirects.
+
+### A-3 — In-content absolute links to legacy domains (162) 🟠
+Body links hard-coded to `https://help.keboola.com/…` and
+`https://developers.keboola.com/…` instead of relative internal routes. When the
+Astro site replaces help.keboola.com, the help-domain ones bounce readers back to
+the old site. **Fix (durable):** a `migrate.mjs` transform rewriting
+`https://help.keboola.com/<path>` → `/<path>` where the path exists in the new
+site. The `developers.keboola.com` subset is the strongest evidence for dev-docs
+unification (those become internal once unified) — see `DEV_DOCS_INTEGRATION.md`.
+
+### A-4 — Multiple `<h1>` per page (5) 🟡
+`/data-apps/python-js/` (4), `/workspace/snowflake-workspaces-access-changes/` (4),
+`/storage/byobq/` (3), `/data-apps/storage-access/` (2), `/management/notifications/` (2).
+Likely raw `<h1>` HTML carried over from Jekyll on top of the page-title `<h1>`.
+**Fix:** demote in-content `<h1>`→`<h2>` (verify each).
+
+### A-5 — Unclosed/unbalanced code fence (1) 🟡
+`flows/templates/datahub/datahub.md` — 5 ``` markers (odd). Verify manually.
+
+### A-6 — Clean ✅
+0 missing images, 0 malformed tables — image migration (M-2) and table conversion
+held across the whole site.
+
+### Not yet covered (next iterations)
+- External link validation (1555 links — network pass, do separately).
+- Old↔new page-for-page fidelity diff vs the live Jekyll site.
+- Visual table/heading spot-check on the flagged pages.
+
+### Phase 2 audit — task checklist
+- [x] **A-1 Add `DOWNLOAD_EXTS` copy to `migrate.mjs`** — ✅ done. 24 assets now
+      copied (dual: `src/content/docs` + `public`); broken links **36 → 3**.
+- [x] **A-7 (new) Skip `claude.md`/`CLAUDE.md` in migration** — ✅ done. The
+      validation re-run revealed `migrate.mjs` was copying the instructions file
+      into `src/content/docs/` (same class as F-11) — added to `SKIP_FILES`. Also
+      added `dist`/`.astro`/`.vercel` to `SKIP_DIRS` (never a migration source).
+- [ ] A-2 Fix 3 dead page links — **needs Jordan** (correct targets are a content
+      fact): `/overview/environment/`, `/ai/kai-assistant/`, `/integrate/…` (dev-docs).
+- [ ] A-3 Rewrite legacy-domain links → internal — **deferred**: needs a two-pass
+      transform that only rewrites when the target route exists (else it would
+      turn working external links into broken internal ones). Don't touch the
+      `developers.keboola.com` subset until dev docs are unified.
+- [ ] A-4 Demote stray in-content `<h1>` on 5 pages — **deferred**: these are real
+      markdown `#` body headings, so fixing properly means shifting heading levels
+      on those pages (borderline Phase-3 content work). Low severity.
+- [ ] A-5 Repair datahub fence — **deferred**: needs a careful human look at the
+      SQL block (mis-editing the fence could make it worse). 1 page, low severity.
+- [ ] External-link network check (separate pass)
+- [ ] Old↔new fidelity diff
+
+> Bonus fix landed with the migrate re-run: a stale **duplicate "Important:" line**
+> in `storage/data-streams/data-streams.md` (curly vs straight apostrophe) is now
+> de-duplicated by the script.
