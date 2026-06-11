@@ -13,24 +13,28 @@
  *   node scripts/switchover.mjs            # DRY RUN — prints the plan only
  *   node scripts/switchover.mjs --apply    # actually performs the cutover
  *   node scripts/switchover.mjs --apply --skip-build   # skip the build checks
+ *   node scripts/switchover.mjs --force    # proceed despite a page-tree mismatch
  *
  * Steps:
  *   1. Preflight (git clean, on a branch, not main, src/content/docs present).
  *   2. Finalize Astro: run migrate.mjs + convert-nav.mjs so content + nav are
  *      fully current with the Jekyll source (incl. anything just synced from main).
  *   3. Pre-cutover build — must pass.
- *   4. git rm the Jekyll source (content dirs + SSG config + root index/404).
- *   5. Post-cutover build — must STILL pass (proves Astro is self-contained).
- *   6. Print the diff summary + manual next steps. No commit.
+ *   4. Validate migration: page-tree diff (every Jekyll source page must have a
+ *      matching Astro page). Aborts on any missing page unless --force.
+ *   5. git rm the Jekyll source (content dirs + SSG config + root index/404).
+ *   6. Post-cutover build — must STILL pass (proves Astro is self-contained).
+ *   7. Print the summary + manual next steps. No commit.
  */
 
 import { execSync } from 'node:child_process';
-import { existsSync, readdirSync, statSync } from 'node:fs';
-import { resolve, dirname, join } from 'node:path';
+import { existsSync, readdirSync, statSync, readFileSync } from 'node:fs';
+import { resolve, dirname, join, relative } from 'node:path';
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..');
 const APPLY = process.argv.includes('--apply');
 const SKIP_BUILD = process.argv.includes('--skip-build');
+const FORCE = process.argv.includes('--force');
 
 const sh = (cmd, opts = {}) =>
   execSync(cmd, { cwd: ROOT, stdio: 'pipe', encoding: 'utf8', ...opts }).trim();
@@ -67,6 +71,57 @@ const KEEP = new Set([
 
 const REMOVE = [...JEKYLL_CONTENT_DIRS, ...JEKYLL_SSG, ...JEKYLL_ROOT_PAGES]
   .filter((p) => existsSync(join(ROOT, p)));
+
+// Pages migrate.mjs intentionally does NOT produce an Astro page for, so they
+// must be excluded from the page-tree diff (kept in sync with migrate.mjs):
+//   - POST_MIGRATE_DELETE: generated dirs deleted after migration.
+//   - redirect stubs: Jekyll pages whose frontmatter has `redirect_to:` (handled
+//     by the redirect-from integration, not written as Astro pages).
+const POST_MIGRATE_DELETE = ['flows/conditional-flows'];
+
+/** Collect .md/.mdx paths under `dir`, relative to `base`, as posix strings. */
+function collectMd(dir, base = dir, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const e of readdirSync(dir)) {
+    const full = join(dir, e);
+    if (statSync(full).isDirectory()) collectMd(full, base, out);
+    else if (/\.mdx?$/.test(e)) out.push(relative(base, full).split(/[\\/]/).join('/'));
+  }
+  return out;
+}
+
+/** A Jekyll page with `redirect_to:` in frontmatter is not migrated to a page. */
+function isRedirectStub(absPath) {
+  const fm = readFileSync(absPath, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  return fm ? /^\s*redirect_to\s*:/m.test(fm[1]) : false;
+}
+
+/**
+ * Diff the Jekyll source page tree against the generated Astro page tree.
+ * migrate.mjs mirrors source paths into src/content/docs, so a faithful
+ * migration means every real Jekyll page has a same-path Astro page.
+ */
+function diffPageTrees() {
+  const jekyllAll = [
+    ...JEKYLL_CONTENT_DIRS.flatMap((d) => collectMd(join(ROOT, d), ROOT)),
+    ...JEKYLL_ROOT_PAGES.filter((f) => existsSync(join(ROOT, f))),
+  ];
+  const jekyll = jekyllAll.filter(
+    (rel) =>
+      !POST_MIGRATE_DELETE.some((p) => rel === p || rel.startsWith(p + '/')) &&
+      !isRedirectStub(join(ROOT, rel)),
+  );
+  const astro = collectMd(join(ROOT, 'src', 'content', 'docs'));
+  const astroSet = new Set(astro);
+  const jekyllSet = new Set(jekyll);
+  return {
+    jekyllCount: jekyll.length,
+    astroCount: astro.length,
+    excluded: jekyllAll.length - jekyll.length, // redirect stubs + post-delete
+    missing: jekyll.filter((p) => !astroSet.has(p)), // in Jekyll, not in Astro
+    extra: astro.filter((p) => !jekyllSet.has(p)),    // in Astro, not in Jekyll
+  };
+}
 
 // ── 1. Preflight ────────────────────────────────────────────────────────────
 hr(`Jekyll → Astro switchover  ${APPLY ? '(APPLY)' : '(DRY RUN)'}`);
@@ -105,8 +160,29 @@ if (unknown.length) {
   unknown.forEach((e) => log(`    ${e}`));
 }
 
-// ── 4. Remove Jekyll ─────────────────────────────────────────────────────────
-hr(`4. Remove Jekyll source  (${REMOVE.length} entries)`);
+// ── 4. Validate migration — page-tree diff (Jekyll ↔ Astro) ─────────────────
+hr('4. Validate migration — page-tree diff (Jekyll ↔ Astro)');
+const { jekyllCount, astroCount, excluded, missing, extra } = diffPageTrees();
+log(`Jekyll source pages: ${jekyllCount} real (+${excluded} redirect-stub/intentional-delete, excluded)`);
+log(`Astro pages:         ${astroCount}`);
+
+if (missing.length) {
+  log(`\n✗ ${missing.length} Jekyll page(s) have NO matching Astro page (content would be lost):`);
+  missing.slice(0, 50).forEach((p) => log(`    ${p}`));
+  if (missing.length > 50) log(`    …and ${missing.length - 50} more`);
+  if (!FORCE) die('Page-tree mismatch — aborting before deletion. Investigate the missing pages, or re-run with --force if they are known/intentional.');
+  log('\n⚠ --force given: continuing despite missing pages.');
+} else {
+  log('✓ every Jekyll source page has a matching Astro page — migration is complete');
+}
+if (extra.length) {
+  log(`\nℹ ${extra.length} Astro-only page(s) (no Jekyll source — new/authored-in-Astro, fine):`);
+  extra.slice(0, 30).forEach((p) => log(`    ${p}`));
+  if (extra.length > 30) log(`    …and ${extra.length - 30} more`);
+}
+
+// ── 5. Remove Jekyll ─────────────────────────────────────────────────────────
+hr(`5. Remove Jekyll source  (${REMOVE.length} entries)`);
 REMOVE.forEach((p) => log(`    ${APPLY ? 'rm' : 'would rm'}  ${p}`));
 
 if (!APPLY) {
@@ -121,9 +197,9 @@ for (const p of REMOVE) {
 }
 log('✓ Jekyll source removed (staged)');
 
-// ── 5. Post-cutover build ────────────────────────────────────────────────────
+// ── 6. Post-cutover build ────────────────────────────────────────────────────
 if (!SKIP_BUILD) {
-  hr('5. Post-cutover build (Astro must be self-contained now)');
+  hr('6. Post-cutover build (Astro must be self-contained now)');
   try { sh('npx astro build'); log('✓ build passes (post-cutover) — Astro stands alone'); }
   catch (e) { die(`Post-cutover build FAILED — do NOT commit. Restore with \`git checkout -- .\`:\n${e.stdout || e.message}`); }
 }
