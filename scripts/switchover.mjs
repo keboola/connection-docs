@@ -63,7 +63,7 @@ const KEEP = new Set([
   '.claude', '.astro', '.vercel', '.worktrees', '.gitignore', '.vercelignore',
   'package.json', 'package-lock.json', 'astro.config.mjs', 'tsconfig.json',
   'README.md', 'LICENSE', 'LICENSE.md', 'AUDIT_LOG.md', 'UI_FIXES_LOG.md',
-  'DEV_DOCS_INTEGRATION.md', 'claude.md', 'CLAUDE.md', 'keboola-kolecko.png',
+  'DEV_DOCS_INTEGRATION.md', 'AGENTS.md', 'claude.md', 'CLAUDE.md', 'keboola-kolecko.png',
   'wishlist.png', 'favicon.ico', 'google9cde6c6b9250e5a4.html', 'docker-compose.yml',
   // _data/navigation.yml is still consumed by convert-nav.mjs → keep _data.
   '_data',
@@ -201,7 +201,7 @@ log('✓ Jekyll source removed (staged)');
 if (!SKIP_BUILD) {
   hr('6. Post-cutover build (Astro must be self-contained now)');
   try { sh('npx astro build'); log('✓ build passes (post-cutover) — Astro stands alone'); }
-  catch (e) { die(`Post-cutover build FAILED — do NOT commit. Restore with \`git checkout -- .\`:\n${e.stdout || e.message}`); }
+  catch (e) { die(`Post-cutover build FAILED — do NOT commit. Restore everything (incl. the git-rm'd Jekyll source) with \`git reset --hard HEAD\`:\n${e.stdout || e.message}`); }
 }
 
 // ── 6. Summary + next steps ──────────────────────────────────────────────────
