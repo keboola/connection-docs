@@ -96,7 +96,7 @@ each section is tailored to ensure a smooth and efficient setup.
 
 ## 1. Register GCS File Storage in Keboola
 
-Once the GCS bucket is ready, register it in Keboola via the [Management API](https://keboolamanagementapi.docs.apiary.io/#reference/file-storages-gcs/file-storages-gcs-collection/create-file-storage). This requires a **Keboola Management API token** with super admin privileges. You can generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
+Once the GCS bucket is ready, register it in Keboola via the [Management API](https://api.keboola.com/?service=manage#post-/manage/file-storage-gcs). This requires a **Keboola Management API token** with super admin privileges. You can generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
 
 Send a `POST` request to `/manage/file-storage-gcs`:
 
@@ -164,4 +164,4 @@ A successful response returns HTTP `201` with an object containing the new backe
 
 ***Note:** Once both resources are registered, contact Keboola Support and provide the file storage ID and BigQuery backend ID. Support will set up your project with these backends.*
 
-For full API reference, see the [Keboola Management API documentation](https://keboolamanagementapi.docs.apiary.io/).
+For full API reference, see the [Keboola Management API documentation](https://api.keboola.com/?service=manage).

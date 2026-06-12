@@ -14,7 +14,7 @@ It is implemented as a layer on top of database engines that we use as our backe
 By default all new [Pay As You Go projects](/management/payg-project/) use the BigQuery backend. If you are a contract customer, you can select which backend you want to use.
 
 As with all other Keboola components, everything that can be done through the UI can be also done programmatically
-via the [Storage API](https://keboola.docs.apiary.io/).
+via the [Storage API](https://api.keboola.com/?service=storage).
 See our [developers guide](https://developers.keboola.com/integrate/storage/) to learn more.
 Every Storage operation must be authorized via a [token](/management/project/tokens/).
 It is also recorded in [Events](/management/project/tokens/#token-events) and
