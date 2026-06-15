@@ -236,3 +236,51 @@ load (re-run after view transitions; dup-guarded). Real Pagefind search runs in
 on open, label updates to the typed query, click sends `"how do I set up a flow"`
 to the drawer and closes search. Works light + dark; the CTA itself also renders
 in dev (above the "search only in production" notice).
+
+---
+
+### U-14 — Logo invisible in dark mode
+**Files:** `astro.config.mjs`, `src/assets/logo-dark.png`
+**Status:** ✅ Applied
+
+The near-black "Keboola" wordmark + mascot vanished against the dark theme
+background (single `logo.src` used for both themes). Added a brand-blue variant
+(`#097CF7`, Azure Radiance — recolored from the original via `sharp`, so the hex
+is exact rather than a CSS-filter approximation) and wired separate light/dark
+logos so Starlight swaps per theme.
+
+```diff
+ logo: {
+-  src: './src/assets/logo.png',
++  light: './src/assets/logo.png',   // near-black wordmark — light theme
++  dark: './src/assets/logo-dark.png', // #097CF7 variant — dark theme
+   replacesTitle: true,
+ },
+```
+
+Verified in the production build: the blue logo emits with `light:sl-hidden`
+(shown only in dark theme), the original with `dark:sl-hidden`.
+
+---
+
+### U-15 — Ask Kai entry points shown even when the backend is unconfigured
+**Files:** `api/chat.ts`, `src/components/AskKaiDrawer.astro`
+**Status:** ✅ Applied
+
+Kai only works when `AI_SERVICE_URL` + `KBC_STORAGE_API_TOKEN` are set; otherwise
+`/api/chat` returns the "wiring up" stub. The static frontend can't see server
+env, so it advertised Kai even on unconfigured deploys (e.g. the #897 preview).
+Added a config probe and gated the entry points on it.
+
+```diff
++// api/chat.ts — config probe for the static frontend
++if (req.method === 'GET') {
++  res.end(JSON.stringify({ enabled: Boolean(AI_SERVICE_URL && KBC_TOKEN) }));
++  return;
++}
+```
+
+The drawer probes `GET /api/chat` once per session (`sessionStorage`-cached),
+removes the header button + search CTA when `enabled` is false, and early-returns
+from both `ensure*` injectors. Optimistic default (configured = normal prod case)
+avoids a flash. Once the env vars are set at launch, Kai shows normally.

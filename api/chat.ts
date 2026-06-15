@@ -224,6 +224,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.end();
     return;
   }
+  // Lightweight config probe: lets the static frontend decide whether to show
+  // the Ask Kai entry points (it can't see server env vars otherwise).
+  if (req.method === 'GET') {
+    res.statusCode = 200;
+    res.setHeader('content-type', 'application/json');
+    res.setHeader('access-control-allow-origin', '*');
+    res.setHeader('cache-control', 'no-store');
+    res.end(JSON.stringify({ enabled: Boolean(AI_SERVICE_URL && KBC_TOKEN) }));
+    return;
+  }
   if (req.method !== 'POST') {
     res.statusCode = 405;
     res.setHeader('content-type', 'application/json');
