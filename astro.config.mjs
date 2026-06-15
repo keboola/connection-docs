@@ -20,7 +20,10 @@ export default defineConfig({
       title: 'Keboola User Documentation',
       favicon: '/favicon.ico',
       logo: {
-        src: './src/assets/logo.png',
+        // Dark near-black wordmark for light theme; brand-blue (#097CF7,
+        // Azure Radiance) variant for dark theme so it stays legible + on-brand.
+        light: './src/assets/logo.png',
+        dark: './src/assets/logo-dark.png',
         replacesTitle: true,
       },
       plugins: [starlightImageZoom()],

@@ -351,8 +351,52 @@
     restoreState();
     document.addEventListener('astro:page-load', restoreState);
 
+    // ─── Kai availability gate ────────────────────────────────────────
+    // Kai only works when the backend env (AI_SERVICE_URL + KBC_STORAGE_API_TOKEN)
+    // is configured. A static page can't see server env, so probe GET /api/chat
+    // once per session and hide the entry points unless the backend confirms it.
+    const KAI_FLAG = 'kbc-kai-enabled';
+    const apiBase = import.meta.env.DEV ? 'https://keboola-docs-beacon.vercel.app' : '';
+    // Optimistic default (configured is the normal prod case) → no flash; a
+    // cached 'false' from earlier this session keeps it hidden across navigations.
+    const cached = sessionStorage.getItem(KAI_FLAG);
+    let kaiEnabled = cached !== 'false';
+    const removeKaiEntrypoints = () =>
+      document.querySelectorAll('#ak-header-kai, .ak-search-cta').forEach(el => el.remove());
+    if (cached === null) {
+      // Not probed yet this session — ask the backend once. Fail CLOSED: a
+      // non-ok response (e.g. a static deploy with no /api/chat, or the S3
+      // fallback) or a network error hides the entry points rather than
+      // advertising a Kai that 404s.
+      fetch(`${apiBase}/api/chat`)
+        .then(r => {
+          if (!r.ok) {
+            // No reachable backend — hide and cache (a static deploy stays
+            // static, so this avoids re-probing on every navigation).
+            kaiEnabled = false;
+            sessionStorage.setItem(KAI_FLAG, 'false');
+            removeKaiEntrypoints();
+            return;
+          }
+          return r.json().then(({ enabled }) => {
+            kaiEnabled = Boolean(enabled);
+            sessionStorage.setItem(KAI_FLAG, String(kaiEnabled));
+            if (!kaiEnabled) removeKaiEntrypoints();
+          });
+        })
+        .catch(() => {
+          // Network error — treat as unavailable for now, but don't cache: a
+          // later navigation re-probes in case it was a transient blip.
+          kaiEnabled = false;
+          removeKaiEntrypoints();
+        });
+    } else if (!kaiEnabled) {
+      removeKaiEntrypoints();
+    }
+
     // ─── Header KAI button ───────────────────────────────────────
     const ensureHeaderKaiBtn = () => {
+      if (!kaiEnabled) return;
       // Remove any leftover buttons from previous navigation cycles first
       document.querySelectorAll('#ak-header-kai').forEach(el => el.remove());
       const themeSelect = document.querySelector('starlight-theme-select');
@@ -377,6 +421,7 @@
     // scanning the search results. Real Pagefind search runs in prod builds
     // only, but this CTA works in dev too.
     const ensureSearchKaiCta = () => {
+      if (!kaiEnabled) return;
       const frame = document.querySelector('site-search dialog .dialog-frame');
       if (!frame || frame.querySelector('.ak-search-cta')) return;
 
