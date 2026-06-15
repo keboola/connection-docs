@@ -564,9 +564,15 @@ only — content rewrite is a separate, later phase.
   migration fixes + audit tooling), **#944** (Kai → AI Service API, dropped the MCP).
 - Synced `feature/astro-migration` with `main` (telemetry + BigQuery SQL-editor
   docs, #937/#938). Build clean, 274 pages. #897 (→ `main`) is no longer behind.
-- Repo guides added (**#946**): `AGENTS.md`, `CLAUDE.md`, refreshed `README.md`.
+- Repo guides **merged** (**#946** ✅, 2026-06-12): `AGENTS.md`, `CLAUDE.md`,
+  refreshed `README.md`.
 
 ### Switchover script — `scripts/switchover.mjs` (#945)
+**Status:** approved by Jordan; two review fixes applied — `AGENTS.md` added to the
+`KEEP` allowlist, and the post-cutover build-failure restore command corrected to
+`git reset --hard HEAD` (the previous `git checkout -- .` wouldn't restore the
+git-rm'd Jekyll source). Awaiting merge.
+
 The repo still **duplicates** (Jekyll source + generated Astro). The script does
 the one-time cutover (dry-run by default, never auto-commits):
 
