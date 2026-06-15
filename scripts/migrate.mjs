@@ -37,7 +37,7 @@ const SKIP_DIRS = new Set([
 const SKIP_FILES = new Set([
   'README.md', 'LICENSE', 'LICENSE.md', 'CONTRIBUTING.md',
   'AUDIT_LOG.md', 'UI_FIXES_LOG.md', 'DEV_DOCS_INTEGRATION.md',
-  'claude.md', 'CLAUDE.md',
+  'claude.md', 'CLAUDE.md', 'AGENTS.md',
 ]);
 
 /**
