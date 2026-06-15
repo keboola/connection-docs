@@ -284,3 +284,10 @@ The drawer probes `GET /api/chat` once per session (`sessionStorage`-cached),
 removes the header button + search CTA when `enabled` is false, and early-returns
 from both `ensure*` injectors. Optimistic default (configured = normal prod case)
 avoids a flash. Once the env vars are set at launch, Kai shows normally.
+
+**Fails closed.** A non-ok response (e.g. a static deploy with no `/api/chat`, or
+the S3 fallback) or a network error hides the entry points instead of leaving the
+optimistic default — so Kai isn't advertised where it would 404 (the window after
+cutover before the DNS flip to Vercel, and the rollback path). A non-ok result is
+cached `false` (a static deploy stays static); a network error is not cached, so a
+later navigation re-probes in case it was transient.
