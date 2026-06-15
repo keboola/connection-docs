@@ -681,6 +681,9 @@ items:
       - url: /transformations/bigquery/
         title: BigQuery Transformations
 
+      - url: /transformations/duckdb/
+        title: DuckDB Transformations
+
       - url: /transformations/oracle/
         title: Oracle Transformations
 
