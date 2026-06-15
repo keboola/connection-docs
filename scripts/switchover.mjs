@@ -15,10 +15,17 @@
  *   node scripts/switchover.mjs --apply --skip-build   # skip the build checks
  *   node scripts/switchover.mjs --force    # proceed despite a page-tree mismatch
  *
+ * Note: even a DRY RUN regenerates the Astro content/nav in step 2 (that's how
+ * the page-tree diff stays honest), so it can leave src/content/docs +
+ * src/sidebar.mjs dirty. That's expected — preflight tolerates changes confined
+ * to those generated paths, and --apply stages them into the cutover commit.
+ *
  * Steps:
- *   1. Preflight (git clean, on a branch, not main, src/content/docs present).
+ *   1. Preflight (on a branch, not main, src/content/docs present; tree clean
+ *      except for regenerated content, which step 2 owns).
  *   2. Finalize Astro: run migrate.mjs + convert-nav.mjs so content + nav are
- *      fully current with the Jekyll source (incl. anything just synced from main).
+ *      fully current with the Jekyll source (incl. anything just synced from
+ *      main), and report which generated files were refreshed.
  *   3. Pre-cutover build — must pass.
  *   4. Validate migration: page-tree diff (every Jekyll source page must have a
  *      matching Astro page). Aborts on any missing page unless --force.
@@ -129,11 +136,25 @@ hr(`Jekyll → Astro switchover  ${APPLY ? '(APPLY)' : '(DRY RUN)'}`);
 let branch;
 try { branch = sh('git rev-parse --abbrev-ref HEAD'); } catch { die('Not a git repo.'); }
 if (branch === 'main') die('Refusing to run on main. Use a dedicated branch.');
-if (sh('git status --porcelain').split('\n').filter((l) => l && !/ claude\.md$/.test(l)).length) {
-  die('Working tree not clean. Commit or stash first (the cutover should be a reviewable diff).');
+// Changes confined to the generated outputs are tolerated: step 2 regenerates
+// src/content/docs + src/sidebar.mjs deterministically, so a prior (dry) run
+// that left them dirty must NOT block a re-run or the --apply run. Anything
+// else (or a dirty claude.md) still aborts so the cutover stays a clean diff.
+const isGenerated = (p) =>
+  p.startsWith('src/content/docs/') || p === 'src/sidebar.mjs';
+const isIgnored = (p) => /^claude\.md$/i.test(p);
+const dirty = sh('git status --porcelain')
+  .split('\n')
+  .filter(Boolean)
+  // porcelain line is "XY <path>"; sh() trims the output, so the first line's
+  // leading space is gone — strip the status token by whitespace, not columns.
+  .map((l) => l.trim().replace(/^\S+\s+/, '').replace(/^"|"$/g, ''))
+  .filter((p) => !isGenerated(p) && !isIgnored(p));
+if (dirty.length) {
+  die(`Working tree not clean. Commit or stash first (the cutover should be a reviewable diff):\n    ${dirty.join('\n    ')}`);
 }
 if (!existsSync(join(ROOT, 'src', 'content', 'docs'))) die('src/content/docs missing — nothing to switch to.');
-log(`✓ branch: ${branch}, clean tree, Astro content present`);
+log(`✓ branch: ${branch}, tree clean (or only regenerated content), Astro content present`);
 
 // ── 2. Finalize Astro (content + nav current with the Jekyll source) ─────────
 hr('2. Finalize Astro from the current Jekyll source');
@@ -142,6 +163,20 @@ log(sh('node scripts/migrate.mjs').split('\n').slice(-3).join('\n'));
 log('› node scripts/convert-nav.mjs');
 sh('node scripts/convert-nav.mjs');
 log('✓ migrate + convert-nav done');
+
+// Surface what the finalize step actually changed — these are pages/nav that
+// were stale in the committed Astro content (e.g. updates synced from main but
+// not yet re-migrated). They become part of the cutover commit in --apply mode.
+const regen = sh('git status --porcelain -- src/content/docs src/sidebar.mjs')
+  .split('\n')
+  .filter(Boolean);
+if (regen.length) {
+  log(`\nℹ ${regen.length} generated file(s) refreshed by migrate/convert-nav — ${APPLY ? 'these will be staged into the cutover commit' : 'commit these (or they ride along with --apply)'}:`);
+  regen.slice(0, 20).forEach((l) => log(`    ${l.trim()}`));
+  if (regen.length > 20) log(`    …and ${regen.length - 20} more`);
+} else {
+  log('✓ generated content already current (no refresh needed)');
+}
 
 // ── 3. Pre-cutover build ─────────────────────────────────────────────────────
 if (!SKIP_BUILD) {
@@ -196,6 +231,11 @@ for (const p of REMOVE) {
   catch { sh(`rm -rf -- "${join(ROOT, p)}"`); } // untracked fallback
 }
 log('✓ Jekyll source removed (staged)');
+
+// Stage the regenerated content/nav from step 2 too, so the cutover is one
+// complete, reviewable diff (deletions + any pages refreshed from the source).
+sh('git add -A -- src/content/docs src/sidebar.mjs');
+log('✓ regenerated content + nav staged');
 
 // ── 6. Post-cutover build ────────────────────────────────────────────────────
 if (!SKIP_BUILD) {
