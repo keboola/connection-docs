@@ -228,7 +228,6 @@ Collaborative data editing without exporting to external tools.
 
 - [Live App](https://interactive-keboola-sheets-keboola-sheets-app-51814820.hub.north-europe.azure.keboola.com)
 - [Source Code](https://github.com/keboola/planning-sheets-data-app/)
-- [Template Documentation](/flows/templates/interactive-keboola-sheets/)
 
 ### eCommerce KPI Dashboard
 
@@ -236,7 +235,6 @@ Business metrics visualization with Slack integration.
 
 - [Live App](https://interactive-kpi-report-kpi-app-71250158.hub.north-europe.azure.keboola.com)
 - [Source Code](https://github.com/keboola/interactive-kpi-reporting)
-- [Template Documentation](/flows/templates/ecomm-kpi-dashboard/)
 
 ### AI SQL Bot
 
@@ -250,7 +248,6 @@ Multi-channel campaign cost overview.
 
 - [Live App](https://online-marketing-dashboard-49569899.hub.north-europe.azure.keboola.com)
 - [Source Code](https://github.com/keboola/marketing-dashboard-data-app)
-- [Template Documentation](/flows/templates/marketing-platforms/)
 
 ---
 

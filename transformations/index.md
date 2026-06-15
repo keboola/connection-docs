@@ -63,7 +63,8 @@ tables from the input mapping are taken, modified, and produced into the tables 
 
 A backend is the engine running the transformation script. It is a database server
 ([Snowflake](https://www.snowflake.com/),
-[BigQuery](https://cloud.google.com/bigquery)),
+[BigQuery](https://cloud.google.com/bigquery),
+[DuckDB](https://duckdb.org/)),
 or a language interpreter 
 ([Python](https://www.python.org/about/),
 [R](https://www.r-project.org/about.html)).
@@ -79,7 +80,7 @@ feel free to step in with Python and finish the work with SQL again.
 
 The following are the currently available backends:
 
-- **SQL** --- [Snowflake](/transformations/snowflake-plain/) or [Google BigQuery](/transformations/bigquery/) is offered as a default backend.
+- **SQL** --- [Snowflake](/transformations/snowflake-plain/), [Google BigQuery](/transformations/bigquery/), or [DuckDB](/transformations/duckdb/) *(beta)* is offered as a default backend.
 - **Script** ---[Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
 Choose according to your taste and available libraries.
 
@@ -127,6 +128,10 @@ Python and R transformations.
 <tr>
     <th><a href='/transformations/bigquery/'>Google BigQuery</a></th> 
     <td>✓</td>
+</tr>
+<tr>
+    <th><a href='/transformations/duckdb/'>DuckDB Transformations</a></th> 
+    <td>✓ (beta)</td>
 </tr>
 <tr>
     <th><a href='/transformations/snowflake-plain/'>Snowflake Transformations Query timeout</a></th> 
@@ -266,4 +271,4 @@ When triggered
 
 With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
-for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).        
+for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).
