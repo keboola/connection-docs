@@ -60,7 +60,7 @@ including Generic Extractor configurations.
 Many of these components also serve our internal purposes, and we decided to share them publicly to benefit our community.
 
 ### Private / Unlisted
-Some components are still unlisted for various reasons. Each stack's full list of components is accessible via the public [Storage API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
+Some components are still unlisted for various reasons. Each stack's full list of components is accessible via the public [Storage API index call](https://api.keboola.com/?service=storage#get-/v2/storage). 
 Many of these are 3rd-party components. Users can add these components via their ID, but we cannot guarantee their functionality. 
 
 We may share our pre-release versions that exist in private Beta with our test user groups. In such a case, you will receive a component ID, which you can use to create the configuration. 
@@ -132,7 +132,7 @@ The bottom right panel shows a list of the configuration versions. Use the list 
 - compare any two successive versions.
 - roll back to an older version.
 
-All of the operations can be [accessed via an API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
+All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
 The [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/) explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.

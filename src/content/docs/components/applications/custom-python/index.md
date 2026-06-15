@@ -70,6 +70,8 @@ a target table name, or debug flags. Enter them as a JSON object.
 Any key starting with `#` (e.g., `#api_key`) will be **encrypted** when you save the configuration.
 The decrypted value is available to your code at runtime via `CommonInterface`.
 
+***Note:** Unlike [Python Transformations](/transformations/python-plain/), which store all code and parameters as plaintext, Custom Python encrypts any parameter whose key begins with `#`. Use Custom Python (or another component supporting `#`-encrypted parameters) to hold credentials — never a transformation.*
+
 ## Git Configuration
 
 When using **Get from Git repository** as your code source, fill in the repository settings:
