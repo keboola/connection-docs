@@ -544,8 +544,55 @@ held across the whole site.
 - [ ] A-5 Repair datahub fence — **deferred**: needs a careful human look at the
       SQL block (mis-editing the fence could make it worse). 1 page, low severity.
 - [ ] External-link network check (separate pass)
-- [ ] Old↔new fidelity diff
+- [x] **Old↔new page-tree fidelity** — ✅ automated in `scripts/switchover.mjs`
+      (page-tree diff, see cutover section below). Per-page *content* fidelity diff
+      still open.
 
 > Bonus fix landed with the migrate re-run: a stale **duplicate "Important:" line**
 > in `storage/data-streams/data-streams.md` (curly vs straight apostrophe) is now
 > de-duplicated by the script.
+
+---
+
+## Production cutover — Jekyll → Astro switchover (2026-06-11)
+
+Getting the Astro site live at help.keboola.com (replacing Jekyll). Mechanical
+only — content rewrite is a separate, later phase.
+
+### Done
+- Merged into `feature/astro-migration`: **#942** (Phase 2 UI), **#943** (Phase 2
+  migration fixes + audit tooling), **#944** (Kai → AI Service API, dropped the MCP).
+- Synced `feature/astro-migration` with `main` (telemetry + BigQuery SQL-editor
+  docs, #937/#938). Build clean, 274 pages. #897 (→ `main`) is no longer behind.
+- Repo guides **merged** (**#946** ✅, 2026-06-12): `AGENTS.md`, `CLAUDE.md`,
+  refreshed `README.md`.
+
+### Switchover script — `scripts/switchover.mjs` (#945)
+**Status:** approved by Jordan; two review fixes applied — `AGENTS.md` added to the
+`KEEP` allowlist, and the post-cutover build-failure restore command corrected to
+`git reset --hard HEAD` (the previous `git checkout -- .` wouldn't restore the
+git-rm'd Jekyll source). Awaiting merge.
+
+The repo still **duplicates** (Jekyll source + generated Astro). The script does
+the one-time cutover (dry-run by default, never auto-commits):
+
+1. Preflight (clean tree, on a branch ≠ main).
+2. Finalize Astro — `migrate.mjs` + `convert-nav.mjs`.
+3. Pre-cutover build.
+4. **Page-tree diff (migration-completeness gate)** — diffs the Jekyll source page
+   tree against the generated Astro tree; **aborts before deletion if any Jekyll
+   page has no Astro counterpart** (excludes redirect stubs + `POST_MIGRATE_DELETE`;
+   override with `--force`). Latest run: **269 Jekyll pages → all matched, 0
+   missing**; 5 Astro-only (`flows/orchestrator/*`, fine).
+5. `git rm` the Jekyll source (20 entries: 13 content dirs + `_includes`/
+   `_layouts`/`_sass`/`assets` + `_config.yml` + root `index.md`/`404.md`).
+6. Post-cutover build — must still pass (Astro stands alone).
+7. Summary; no commit.
+   `_data/` is kept (still feeds `convert-nav.mjs`); `migrate.mjs` becomes obsolete
+   afterward (content is then edited directly in `src/content/docs/`).
+
+### Remaining (maintainer / hands-on)
+- [ ] Run `scripts/switchover.mjs --apply` with Jordan → review → commit.
+- [ ] Approve + merge **#897** (`feature/astro-migration` → `main`).
+- [ ] Set Kai env vars in Vercel (`AI_SERVICE_URL`, `KBC_STORAGE_API_TOKEN`).
+- [ ] Switch the `help.keboola.com` domain to the Astro deployment.
