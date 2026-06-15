@@ -160,7 +160,7 @@ When you decline the invitation, you'll lose the opportunity to enter the projec
 ![Screenshot -- Promo codes](/management/account/invitations.png)
 
 ## Tokens
-On the **Access Tokens** page, you can create tokens for the [Management API](https://keboolamanagementapi.docs.apiary.io/#).
+On the **Access Tokens** page, you can create tokens for the [Management API](https://api.keboola.com/?service=manage).
 Do not confuse them with [Storage API tokens](/management/project/tokens/), which are used for operations
 within a project. Management tokens are used for project-independent operations such as creating and moving projects,
 creating organizations and projects monitoring. This means that the Management API offers some features which are

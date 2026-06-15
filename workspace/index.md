@@ -66,6 +66,16 @@ to directly open the JupyterLab interface.
 {: .image-popup}
 ![Workspace - Python/R](/workspace/workspace-connect-pythonr.png)
 
+#### SQL Editor
+
+The built-in [SQL Editor](/workspace/sql-editor) lets you work with **Snowflake** and **Google BigQuery** workspaces directly in your browser, without connecting any external tools.
+
+>***Note for Multi-tenant and Pay-As-You-Go Projects (Snowflake backend)***
+>
+>If your project uses Keboola's shared Snowflake backend (Multi-tenant or Pay-As-You-Go), the **SQL Editor is your primary tool** for SQL development, as direct Snowflake workspace access is not available.
+
+{% include tip.html title="Use SQL Editor for Safe Testing" content="For interactive SQL exploration inside your workspace, use the SQL Editor. It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines. Learn more: [SQL Editor](/workspace/sql-editor)." %}
+
 #### Snowflake
 
 >***Important: Direct Access Availability***
@@ -181,21 +191,8 @@ openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_k
 * `-out private_key.p8` → output file
 * `-nocrypt` → no encryption
 
-#### SQL Editor
-
->***Note for Multi-tenant and Pay-As-You-Go Projects***
->
->If your project uses Keboola's shared Snowflake backend (Multi-tenant or Pay-As-You-Go), the **SQL Editor is your primary tool** for SQL development, as direct Snowflake workspace access is not available.
-
-💡 Tip: Use SQL Editor for Safe Testing
-
-For interactive SQL exploration inside your workspace, use the SQL Editor.
-It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines.
-
-Learn more: [SQL Editor](/workspace/sql-editor).
-
 #### BigQuery
-To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace, you have to use your database client and the **Credentials File** provided in the **Connect** menu.
+To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace with an external database client, use the **Credentials File** provided in the **Connect** menu. Alternatively, use the built-in [SQL Editor](/workspace/sql-editor) without any external tools.
 
 {: .image-popup}
 ![Workspace - BigQuery](/workspace/workspace-connect-bigquery.png)
@@ -273,7 +270,7 @@ With **read-only input mappings** disabled, only tables listed in the input mapp
 ![Workspace - Create new workspace with Read Only](/workspace/create-new-ws-with-ro.png)
 
 So, if we enable this feature when we create a workspace, we can access individual tables in the workspace,
-without needing to define any tables in the input mapping. However, a **read-only input mapping** cannot access alias tables, because technically it is just a reference to an existing schema.
+without needing to define any tables in the input mapping. Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases.
 This also applies to linked buckets. *Note that buckets and tables belong to another project, so you must access, for example, the database of another project depending on the backend.
 For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. When developing transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the database to find the correct database and schema names. 
 

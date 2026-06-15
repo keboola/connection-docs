@@ -61,7 +61,7 @@ including Generic Extractor configurations.
 Many of these components also serve our internal purposes, and we decided to share them publicly to benefit our community.
 
 ### Private / Unlisted
-Some components are still unlisted for various reasons. Each stack's full list of components is accessible via the public [Storage API index call](https://keboola.docs.apiary.io/#reference/miscellaneous/api-index/component-list). 
+Some components are still unlisted for various reasons. Each stack's full list of components is accessible via the public [Storage API index call](https://api.keboola.com/?service=storage#get-/v2/storage). 
 Many of these are 3rd-party components. Users can add these components via their ID, but we cannot guarantee their functionality. 
 
 We may share our pre-release versions that exist in private Beta with our test user groups. In such a case, you will receive a component ID, which you can use to create the configuration. 
@@ -143,7 +143,7 @@ The bottom right panel shows a list of the configuration versions. Use the list 
 - compare any two successive versions.
 - roll back to an older version.
 
-All of the operations can be [accessed via an API](https://keboola.docs.apiary.io/#reference/component-configurations/create-config).
+All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
 The [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/) explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.
@@ -204,7 +204,7 @@ or the **Move to Trash** button in the configuration detail.
 {: .image-popup}
 ![Screenshot - Delete](/components/configuration-19.png)
 
-Each configuration moved to Trash acts as deleted: it is removed from orchestrations, cannot be run, and is not displayed.
+Each configuration moved to Trash acts as deleted: it is removed from flows, cannot be run, and is not displayed.
 You can undo the delete operation immediately, or you can restore the configuration from Trash, which is accessible from 
 the main menu.
 
@@ -245,7 +245,7 @@ Each row can individually be modified or deleted. You can also disable a row, wh
 configuration is run, the row will be skipped. You can also run a single row explicitly. Jobs that run only
 a single row have the label **partial**. Therefore, you can, for example, create a configuration 
 that, on a scheduled run, extracts all the enabled tables and also contains tables that
-share the same credentials but are updated manually (or in a different orchestration).
+share the same credentials but are updated manually (or in a different flow).
 
 You can add as many rows as you like; the list of configuration rows is fully searchable. You can also change the order of the
 rows. The order is maintained during processing, so you can use this to extract the large tables first, for example. The

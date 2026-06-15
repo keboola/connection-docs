@@ -119,7 +119,7 @@ If you manage Data App configurations through the Storage API (or via automation
 - **`destination`** — the full Storage table ID (`<stage>.<bucket>.<table>`) the app should be able to read and write. The table must exist before the app is deployed.
 - **`unload_strategy: "direct-grant"`** — required marker that tells the platform "grant the app's workspace direct SELECT/INSERT/UPDATE/DELETE/TRUNCATE on this table." Tables without this strategy in `storage.output.tables` are not exposed via Storage Access.
 
-To add or remove writable tables programmatically, update the Data App's configuration via the Storage API ([Component Configurations endpoint](https://keboola.docs.apiary.io/#reference/component-configurations)) and redeploy the app for the new permissions to take effect.
+To add or remove writable tables programmatically, update the Data App's configuration via the Storage API ([Component Configurations endpoint](https://api.keboola.com/?service=storage#tag--Component-Configurations)) and redeploy the app for the new permissions to take effect.
 
 ### Step 3: Deploy Your App
 

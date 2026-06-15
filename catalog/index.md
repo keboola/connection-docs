@@ -53,7 +53,7 @@ There are some constraints to how shared buckets can be used:
 
 - Source and destination projects must belong to the same organization (and region).
 - To manage shared buckets, your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned.
-- [Table aliases](/storage/tables/#aliases) filtered by a condition are not shared.
+- [Table aliases](/storage/tables/#aliases) filtered by a condition are shared as database VIEWs with the filter enforced as a `WHERE` clause.
 - [Table aliases](/storage/tables/#aliases) without automatically synchronized columns are not shared.
 - Tables in linked buckets work like [aliases](/storage/tables/#aliases) — i.e., all tables are read-only in the destination project.
 - If your bucket is already linked in other projects, you cannot drop it. Nor can you drop any of its children, tables or columns.
@@ -110,7 +110,7 @@ create an [alias](/storage/tables/#aliases) of the table and set the shared buck
 
 2. Click **Create Alias**.
 
-3. **Select the shared bucket** as the destination. Ensure the alias has no filter and automatic synchronization of the columns enabled.
+3. **Select the shared bucket** as the destination. Ensure automatic synchronization of the columns is enabled.
 
 Once created in the shared bucket, the alias will immediately appear in all linked projects.
 

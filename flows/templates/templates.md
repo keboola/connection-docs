@@ -8,8 +8,13 @@ redirect_from:
 * TOC
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-circle"></i>
+    <strong>Important:</strong> Data templates are being discouraged and will be deprecated, as they only create <a href="/flows/flows-legacy/">legacy flows</a>. There are no plans to add template support for the new <a href="/flows/">Flows</a>. For building new workflows, use Flows directly — the <a href="/kai/">Kai AI assistant</a> can help you set them up interactively.
+</div>
+
 Data templates are pre-defined sets of [component configurations](/components/). The individual configurations are connected 
-by an [orchestration](/flows/orchestrator/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
+by a [flow](/flows/) and [metadata](/storage/tables/#metadata). Together they form a functional reusable block
 that solves a specific problem. 
 
 Keboola is a very open [platform](/overview), which may be overwhelming in many cases. 
