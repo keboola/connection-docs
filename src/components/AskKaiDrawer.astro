@@ -13,7 +13,13 @@
  */
 ---
 
-<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs" transition:persist>
+<!-- Persist a wrapper <div>, NOT the <dialog> itself. transition:persist on a
+     <dialog> throws "InvalidStateError: Transition was aborted because of invalid
+     state" on every Astro view-transition navigation (a <dialog> can't be moved
+     across the transition). Persisting this wrapper keeps the drawer's DOM and
+     conversation history across navigations without breaking the transition. -->
+<div id="ask-kai-persist" transition:persist>
+<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs">
   <div class="ak-shell">
     <header class="ak-header">
       <div class="ak-title">
@@ -57,6 +63,7 @@
     </form>
   </div>
 </dialog>
+</div>
 
 <script>
   import { marked } from 'marked';
