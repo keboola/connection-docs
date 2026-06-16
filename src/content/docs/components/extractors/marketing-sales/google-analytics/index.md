@@ -25,16 +25,12 @@ The Google Analytics connector uses the [Google Analytics Data API (v1)](https:/
 
 ## How Data Loading Works
 
-There are two distinct "incremental" concepts in this connector. Understanding the difference helps avoid confusion:
+There are two distinct "incremental" concepts in this connector:
 
 | Concept | What it means | How it's controlled |
 |---------|--------------|-------------------|
 | **Incremental storage writes** | Data is always **upserted** into Keboola Storage tables using primary keys. Existing rows with matching keys are updated; new rows are appended. Old data is never deleted or replaced. | **Always on** — this is hardcoded in the connector and cannot be changed. |
 | **Incremental date fetching** | The connector fetches only data **since the last successful run** instead of re-downloading a fixed date range each time. | **Optional** — controlled by the "Incremental load" checkbox in the date range settings. |
-
-In summary:
-- Your Storage tables always grow incrementally (upsert) regardless of configuration.
-- The *date range* determines how much data is fetched from the Google API on each run — either a fixed window (e.g., "last 7 days") or from the last run date onward.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** connector.
