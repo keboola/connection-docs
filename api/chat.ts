@@ -91,17 +91,21 @@ async function askDocsQuestion(
     throw new Error(`AI Service /docs/question failed: HTTP ${res.status}`);
   }
 
-  // DocsResponse: { response: string, metadata: { sources: string[] } }
+  // DocsResponse: { text: string, sourceUrls: string[] }.
+  // (An earlier build expected { response, metadata.sources }; the live AI
+  //  Service returns { text, sourceUrls } — read those, but tolerate the old
+  //  shape too so a future revert on either side doesn't silently blank Kai.)
   const data = (await res.json()) as {
+    text?: string;
+    sourceUrls?: string[];
     response?: string;
     metadata?: { sources?: string[] };
   };
 
+  const sources = data.sourceUrls ?? data.metadata?.sources;
   return {
-    text: data.response ?? '',
-    source_urls: Array.isArray(data.metadata?.sources)
-      ? (data.metadata!.sources as string[])
-      : [],
+    text: data.text ?? data.response ?? '',
+    source_urls: Array.isArray(sources) ? sources : [],
   };
 }
 
