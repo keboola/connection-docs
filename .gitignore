@@ -18,6 +18,11 @@ dist
 .agent.json
 .env.production
 
+# Internal working docs — kept locally, not tracked in the repo
+AUDIT_LOG.md
+UI_FIXES_LOG.md
+DEV_DOCS_INTEGRATION.md
+
 # Claude / local dev tools — screenshots saved during dev sessions
 # (CLAUDE.md and AGENTS.md are committed — agent/contributor guides.)
 scripts/screenshot.mjs

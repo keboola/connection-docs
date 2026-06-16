@@ -18,6 +18,4 @@ The full repo guide — stack, structure, commands, and conventions — lives in
   tags that don't survive Astro view-transition swaps.
 - **Screenshots:** save throwaways to `/tmp`, not the repo. `scripts/screenshot.mjs`
   is a local-only helper (gitignored).
-- **Log changes:** UI changes → `UI_FIXES_LOG.md`; migration findings →
-  `AUDIT_LOG.md`.
 - **Ask a maintainer** for product facts vs. content choices instead of guessing.
