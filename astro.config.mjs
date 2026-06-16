@@ -44,6 +44,7 @@ export default defineConfig({
         Head: './src/components/Head.astro',
         PageTitle: './src/components/PageTitle.astro',
         Footer: './src/components/Footer.astro',
+        EditLink: './src/components/EditLink.astro',
       },
       pagination: true,
       editLink: {

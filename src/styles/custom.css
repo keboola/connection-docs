@@ -1758,3 +1758,45 @@ nav.sidebar {
   #ask-kai-drawer .ak-shell { width: 100vw; }
   #ak-fab { bottom: 20px; right: 16px; }
 }
+
+/* ───────── Suggest an Edit button + tooltip ───────── */
+.suggest-edit-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.suggest-edit-link {
+  align-items: center;
+  gap: 0.5em;
+  color: var(--sl-color-text-accent);
+  text-decoration: none;
+  font-size: var(--sl-text-sm);
+}
+
+.suggest-edit-link:hover {
+  color: var(--sl-color-white);
+}
+
+.suggest-edit-wrapper::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--sl-color-gray-1);
+  color: var(--sl-color-gray-7);
+  font-size: var(--sl-text-xs);
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.3rem;
+  white-space: normal;
+  width: 220px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+}
+
+.suggest-edit-wrapper:hover::after {
+  opacity: 1;
+}
