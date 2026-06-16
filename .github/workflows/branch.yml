@@ -12,7 +12,12 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
-      - name: "Pull images"
-        run: docker compose pull
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - name: "Install dependencies"
+        run: npm ci
       - name: "Build"
-        run: docker compose run --rm -e JEKYLL_ENV=production jekyll jekyll build
+        run: npm run build

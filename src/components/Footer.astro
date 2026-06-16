@@ -1,0 +1,13 @@
+---
+/**
+ * Footer.astro
+ *
+ * Override of Starlight's Footer that wraps the default footer markup and
+ * also renders the global AskKaiDrawer once per page (it's a `<dialog>` and
+ * needs to live in the body, not the head).
+ */
+import Default from '@astrojs/starlight/components/Footer.astro';
+import AskKaiDrawer from './AskKaiDrawer.astro';
+---
+<Default><slot /></Default>
+<AskKaiDrawer />

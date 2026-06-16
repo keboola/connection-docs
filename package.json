@@ -1,0 +1,24 @@
+{
+  "name": "keboola-docs",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "gen:sidebar": "node scripts/convert-nav.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.38",
+    "astro": "^6",
+    "marked": "^18.0.4",
+    "sharp": "^0.33",
+    "starlight-image-zoom": "^0.14"
+  },
+  "devDependencies": {
+    "@vercel/node": "^5.8.4",
+    "js-yaml": "^4.1.1"
+  }
+}

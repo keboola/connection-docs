@@ -1,0 +1,57 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Head.astro';
+import { ClientRouter } from 'astro:transitions';
+---
+{/* Anti-FOUC: set background + disable VT animations before any external CSS */}
+<style is:inline>
+  html { background: hsl(224, 10%, 10%); }
+  html[data-theme='light'] { background: #fff; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    mix-blend-mode: normal !important;
+  }
+</style>
+{/* Preconnect + non-blocking font load. Replaces a @import in custom.css that
+    was re-evaluating on every view transition and causing visible style flicker. */}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+/>
+<Default {...Astro.props}><slot /></Default>
+<ClientRouter fallback="swap" />
+<script is:inline>
+  // Restore sidebar collapsed state synchronously — prevents FOUC on new tab open
+  try {
+    if (localStorage.getItem('kbc-sidebar-collapsed') === 'true') {
+      document.documentElement.classList.add('sidebar-collapsed');
+    }
+  } catch(e) {}
+</script>
+<script is:inline>
+  // Preserve sidebar state across view transitions
+  document.addEventListener('astro:before-swap', function(e) {
+    // Restore collapsed class on incoming document before swap
+    try {
+      if (localStorage.getItem('kbc-sidebar-collapsed') === 'true') {
+        e.newDocument.documentElement.classList.add('sidebar-collapsed');
+      }
+    } catch(err) {}
+    // Keep sidebar section open/closed state
+    var currentDetails = document.querySelectorAll('.sidebar-content details');
+    var newDetails = e.newDocument.querySelectorAll('.sidebar-content details');
+    currentDetails.forEach(function(detail, i) {
+      if (!newDetails[i]) return;
+      var hasActive = newDetails[i].querySelector('[aria-current="page"]');
+      newDetails[i].open = hasActive ? true : detail.open;
+    });
+  });
+</script>
+<!-- GTM noscript — only on production hostname -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMTTBS"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>

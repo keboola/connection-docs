@@ -8,3 +8,31 @@ Gemfile.lock
 /.vscode
 .playwright-mcp
 .env
+.worktrees
+node_modules
+dist
+.astro
+.vercel
+.env*.local
+.env*.local.bak
+.agent.json
+.env.production
+
+# Claude / local dev tools — screenshots saved during dev sessions
+# (CLAUDE.md and AGENTS.md are committed — agent/contributor guides.)
+scripts/screenshot.mjs
+screenshot-*.png
+audit-*.png
+check-*.png
+final-*.png
+header-*.png
+toc-*.png
+diag-*.png
+cur-*.png
+fix-*.png
+before-*.png
+after-*.png
+nav-test-*.png
+pw-*.png
+stripe-*.png
+sidebar-scroll-test.png

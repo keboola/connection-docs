@@ -1,0 +1,503 @@
+---
+/**
+ * AskKaiDrawer.astro
+ *
+ * Site-wide chat drawer for the "Ask Kai" widget. Rendered once on every
+ * page via Head.astro. Opens when:
+ *   - the page-level Ask Kai widget (.b-ask, .b-ask-btn) is clicked
+ *   - the sidebar "Ask Kai about these docs" entry is clicked
+ *   - the user presses ⌘+/  (or Ctrl+/ on Windows/Linux)
+ *
+ * Posts each user message to /api/chat and renders the streamed reply.
+ * Session id is held in memory only (resets on reload / new tab).
+ */
+---
+
+<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs" transition:persist>
+  <div class="ak-shell">
+    <header class="ak-header">
+      <div class="ak-title">
+        <span class="ak-spark" aria-hidden="true">✨</span>
+        <span>Ask Kai</span>
+      </div>
+      <button type="button" class="ak-close" aria-label="Close" data-ask-kai-close>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <section class="ak-messages" id="ak-messages" aria-live="polite">
+      <div class="ak-empty" data-ask-kai-empty>
+        <p class="ak-empty-lede">Ask anything about Keboola — I'll search the docs and cite the pages I use.</p>
+        <div class="ak-suggestions">
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I set up a flow with conditional steps?</button>
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>What backends does Keboola Storage support?</button>
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I deploy a Streamlit data app?</button>
+        </div>
+      </div>
+    </section>
+
+    <form class="ak-input" id="ak-form" autocomplete="off">
+      <textarea
+        id="ak-input"
+        name="message"
+        placeholder="Ask a question about the docs…"
+        rows="1"
+        required
+        aria-label="Your question"
+      ></textarea>
+      <button type="submit" class="ak-send" id="ak-send" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  import { marked } from 'marked';
+
+  // GitHub-flavored markdown, soft line breaks, no auto-IDs on headings,
+  // and an open-in-new-tab + URL-scheme sanitizer for links.
+  marked.setOptions({ gfm: true, breaks: true });
+  marked.use({
+    renderer: {
+      link({ href, title, tokens }) {
+        const safe = /^(https?:|\/|#|mailto:)/i.test(href) ? href : '#';
+        const text = this.parser.parseInline(tokens);
+        const titleAttr = title ? ` title="${title}"` : '';
+        const ext = /^https?:/i.test(safe);
+        return `<a href="${safe}"${titleAttr}${ext ? ' target="_blank" rel="noopener"' : ''}>${text}</a>`;
+      },
+    },
+  });
+
+  const drawer = document.getElementById('ask-kai-drawer') as HTMLDialogElement | null;
+  if (drawer) {
+    const form = document.getElementById('ak-form') as HTMLFormElement;
+    const input = document.getElementById('ak-input') as HTMLTextAreaElement;
+    const sendBtn = document.getElementById('ak-send') as HTMLButtonElement;
+    const messages = document.getElementById('ak-messages') as HTMLElement;
+
+    let sessionId: string | null = null;
+    let inflight: AbortController | null = null;
+
+    const openDrawer = (prefill?: string) => {
+      if (!drawer.open) drawer.showModal();
+      setTimeout(() => {
+        if (prefill !== undefined) {
+          input.value = prefill;
+          autoResize();
+        }
+        input.focus();
+      }, 30);
+    };
+    const closeDrawer = () => {
+      inflight?.abort();
+      if (drawer.open) drawer.close();
+    };
+
+    const autoResize = () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 160) + 'px';
+    };
+
+    const escapeHtml = (s: string) =>
+      String(s).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[c]!);
+
+    const appendUser = (text: string) => {
+      messages.querySelector('[data-ask-kai-empty]')?.remove();
+      const div = document.createElement('div');
+      div.className = 'ak-msg ak-msg-user';
+      div.innerHTML = `<div class="ak-bubble"><p>${escapeHtml(text)}</p></div>`;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    };
+
+    const appendAssistantPlaceholder = () => {
+      const div = document.createElement('div');
+      div.className = 'ak-msg ak-msg-assistant';
+      div.innerHTML = `
+        <div class="ak-bubble">
+          <div class="ak-progress" data-ask-kai-progress>
+            <div class="ak-typing"><span></span><span></span><span></span></div>
+            <span class="ak-progress-label">Thinking…</span>
+          </div>
+        </div>
+      `;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div.querySelector('.ak-bubble') as HTMLElement;
+    };
+
+    const renderSources = (
+      bubble: HTMLElement,
+      items: { url: string; label: string }[],
+    ) => {
+      const msgEl = bubble.parentElement;
+      if (!msgEl) return;
+      if (!items?.length) return;
+      const safeItems = items.filter(
+        (i) => i && typeof i.url === 'string' && /^https?:\/\//i.test(i.url),
+      );
+      if (!safeItems.length) return;
+      const chips = safeItems
+        .map(
+          (i) =>
+            `<a class="ak-chip" href="${escapeHtml(i.url)}" target="_blank" rel="noopener">
+               <svg class="ak-chip-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                 <path d="M14 3h7v7"></path>
+                 <path d="M10 14 21 3"></path>
+                 <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+               </svg>
+               <span>${escapeHtml(i.label || i.url)}</span>
+             </a>`,
+        )
+        .join('');
+      const wrap = document.createElement('div');
+      wrap.className = 'ak-sources';
+      wrap.innerHTML = `<div class="ak-sources-label">Sources</div><div class="ak-chips">${chips}</div>`;
+      msgEl.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+    };
+
+    const showProgress = (bubble: HTMLElement, label: string) => {
+      const labelEl = bubble.querySelector('.ak-progress-label');
+      if (labelEl) labelEl.textContent = label;
+    };
+
+    const startContent = (bubble: HTMLElement) => {
+      bubble.innerHTML = '<div class="ak-content"></div>';
+      return bubble.querySelector('.ak-content') as HTMLElement;
+    };
+
+    // Animate text into the bubble word-by-word. Managed Agents delivers the
+    // final agent.message in one chunk, so without this the user waits in
+    // silence then sees a blob. With it, the answer reads like it's being
+    // typed and the long total time is hidden behind continuous motion.
+    const startTypewriter = (
+      contentEl: HTMLElement,
+      getFullText: () => string,
+      signal: AbortSignal,
+    ): Promise<void> =>
+      new Promise<void>((resolve) => {
+        let shown = '';
+        const tick = () => {
+          if (signal.aborted) return resolve();
+          const full = getFullText();
+          if (shown === full) {
+            // Caught up — yield and check again in case more text arrives.
+            setTimeout(tick, 40);
+            return;
+          }
+          // 2-4 tokens per tick keeps a 200-word answer animating in ~1.5s.
+          const remaining = full.slice(shown.length);
+          const tokens = remaining.match(/\S+\s*|\s+/g) ?? [remaining];
+          const batch = Math.min(tokens.length, 2 + Math.floor(Math.random() * 3));
+          for (let k = 0; k < batch; k++) shown += tokens[k];
+          contentEl.innerHTML = marked.parse(shown) as string;
+          messages.scrollTop = messages.scrollHeight;
+          setTimeout(() => requestAnimationFrame(tick), 18);
+        };
+        requestAnimationFrame(tick);
+
+        // Allow the outer flow to finalize the typewriter once the stream ends.
+        (contentEl as any).__finalize = () => {
+          shown = getFullText();
+          contentEl.innerHTML = marked.parse(shown) as string;
+          messages.scrollTop = messages.scrollHeight;
+          resolve();
+        };
+      });
+
+    const send = async (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed || inflight) return;
+      appendUser(trimmed);
+      input.value = '';
+      autoResize();
+      sendBtn.disabled = true;
+
+      const bubble = appendAssistantPlaceholder();
+      let fullText = '';
+      let contentEl: HTMLElement | null = null;
+      let typewriterDone: Promise<void> | null = null;
+      inflight = new AbortController();
+      const signal = inflight.signal;
+
+      // During `astro dev`, point at the deployed function (with CORS) so we
+      // can iterate on the UI without a working local Vercel function. In
+      // prod builds the relative path resolves to the same-origin function.
+      const apiBase = import.meta.env.DEV ? 'https://keboola-docs-beacon.vercel.app' : '';
+      try {
+        const res = await fetch(`${apiBase}/api/chat`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ message: trimmed, sessionId }),
+          signal,
+        });
+        if (!res.ok || !res.body) throw new Error(`Network error (${res.status})`);
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            let payload: any;
+            try { payload = JSON.parse(line.slice(6)); } catch { continue; }
+
+            if (payload.type === 'session' && payload.sessionId) {
+              sessionId = payload.sessionId;
+            } else if (payload.type === 'progress') {
+              if (!contentEl) showProgress(bubble, payload.label || 'Working…');
+            } else if (payload.type === 'text-delta') {
+              fullText += payload.text;
+              if (!contentEl) {
+                contentEl = startContent(bubble);
+                typewriterDone = startTypewriter(contentEl, () => fullText, signal);
+              }
+            } else if (payload.type === 'sources') {
+              // Render chips once the typewriter has caught up so they
+              // appear at the bottom of the finalized answer, not mid-flow.
+              const items = Array.isArray(payload.items) ? payload.items : [];
+              (async () => {
+                if (typewriterDone) await typewriterDone;
+                renderSources(bubble, items);
+              })();
+            } else if (payload.type === 'error') {
+              bubble.innerHTML = `<p class="ak-error">${escapeHtml(payload.message)}</p>`;
+            }
+          }
+        }
+
+        // Stream ended — flush whatever's left, then wait for the typewriter.
+        if (contentEl && (contentEl as any).__finalize) (contentEl as any).__finalize();
+        if (typewriterDone) await typewriterDone;
+      } catch (err: any) {
+        if (err?.name !== 'AbortError') {
+          bubble.innerHTML = `<p class="ak-error">Sorry — request failed: ${escapeHtml(err?.message || String(err))}</p>`;
+        }
+      } finally {
+        inflight = null;
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    };
+
+    // Expose for the search overlay integration.
+    (window as any).askKai = {
+      open: openDrawer,
+      send: (q: string) => { openDrawer(); send(q); },
+    };
+
+    // Sidebar trigger is hidden via CSS (display:none on .ak-sidebar-trigger).
+    // No injection needed.
+
+
+    // ─── Sidebar collapse toggle ──────────────────────────────────────
+    const COLLAPSED_CLASS = 'sidebar-collapsed';
+    const STORAGE_KEY = 'kbc-sidebar-collapsed';
+
+    const applySidebarState = (collapsed: boolean) => {
+      document.documentElement.classList.toggle(COLLAPSED_CLASS, collapsed);
+    };
+
+    const ensureCollapseBtn = () => {
+      if (document.getElementById('ak-sidebar-collapse')) return;
+      if (window.innerWidth < 1152) return;
+      const sidebarPane = document.querySelector('.sidebar-pane');
+      if (!sidebarPane) return;
+      const btn = document.createElement('button');
+      btn.id = 'ak-sidebar-collapse';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Toggle sidebar');
+      btn.title = 'Collapse sidebar';
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 12 5 8 9 4"/>
+        <line x1="12" y1="3" x2="12" y2="13"/>
+      </svg>`;
+      sidebarPane.insertBefore(btn, sidebarPane.firstChild);
+      btn.addEventListener('click', () => {
+        const collapsed = document.documentElement.classList.toggle(COLLAPSED_CLASS);
+        localStorage.setItem(STORAGE_KEY, String(collapsed));
+        btn.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+      });
+    };
+
+    // Head.astro inline script already applies class before first paint (FOUC fix).
+    // Here we re-apply on view-transition navigations and inject the button.
+    const restoreState = () => {
+      applySidebarState(localStorage.getItem(STORAGE_KEY) === 'true');
+      ensureCollapseBtn();
+    };
+    restoreState();
+    document.addEventListener('astro:page-load', restoreState);
+
+    // ─── Kai availability gate ────────────────────────────────────────
+    // Kai only works when the backend env (AI_SERVICE_URL + KBC_STORAGE_API_TOKEN)
+    // is configured. A static page can't see server env, so probe GET /api/chat
+    // once per session and hide the entry points unless the backend confirms it.
+    const KAI_FLAG = 'kbc-kai-enabled';
+    const apiBase = import.meta.env.DEV ? 'https://keboola-docs-beacon.vercel.app' : '';
+    // Optimistic default (configured is the normal prod case) → no flash; a
+    // cached 'false' from earlier this session keeps it hidden across navigations.
+    const cached = sessionStorage.getItem(KAI_FLAG);
+    let kaiEnabled = cached !== 'false';
+    const removeKaiEntrypoints = () =>
+      document.querySelectorAll('#ak-header-kai, .ak-search-cta').forEach(el => el.remove());
+    if (cached === null) {
+      // Not probed yet this session — ask the backend once. Fail CLOSED: a
+      // non-ok response (e.g. a static deploy with no /api/chat, or the S3
+      // fallback) or a network error hides the entry points rather than
+      // advertising a Kai that 404s.
+      fetch(`${apiBase}/api/chat`)
+        .then(r => {
+          if (!r.ok) {
+            // No reachable backend — hide and cache (a static deploy stays
+            // static, so this avoids re-probing on every navigation).
+            kaiEnabled = false;
+            sessionStorage.setItem(KAI_FLAG, 'false');
+            removeKaiEntrypoints();
+            return;
+          }
+          return r.json().then(({ enabled }) => {
+            kaiEnabled = Boolean(enabled);
+            sessionStorage.setItem(KAI_FLAG, String(kaiEnabled));
+            if (!kaiEnabled) removeKaiEntrypoints();
+          });
+        })
+        .catch(() => {
+          // Network error — treat as unavailable for now, but don't cache: a
+          // later navigation re-probes in case it was a transient blip.
+          kaiEnabled = false;
+          removeKaiEntrypoints();
+        });
+    } else if (!kaiEnabled) {
+      removeKaiEntrypoints();
+    }
+
+    // ─── Header KAI button ───────────────────────────────────────
+    const ensureHeaderKaiBtn = () => {
+      if (!kaiEnabled) return;
+      // Remove any leftover buttons from previous navigation cycles first
+      document.querySelectorAll('#ak-header-kai').forEach(el => el.remove());
+      const themeSelect = document.querySelector('starlight-theme-select');
+      if (!themeSelect) return;
+      const btn = document.createElement('button');
+      btn.id = 'ak-header-kai';
+      btn.type = 'button';
+      btn.className = 'ak-header-kai';
+      btn.setAttribute('data-ask-kai-open', '');
+      btn.setAttribute('aria-label', 'Open Ask Kai');
+      btn.innerHTML =
+        '<span class="ak-hk-icon" aria-hidden="true">✨</span>' +
+        '<span class="ak-hk-label">KAI – AI ASSISTANT</span>';
+      themeSelect.parentNode!.insertBefore(btn, themeSelect);
+    };
+    ensureHeaderKaiBtn();
+    document.addEventListener('astro:page-load', ensureHeaderKaiBtn);
+
+    // ─── Kai inside the search modal ──────────────────────────────────
+    // Adds an "Ask Kai" CTA to the top of the search dialog, so when the search
+    // bar opens users can hand their typed query to Kai instead of (or after)
+    // scanning the search results. Real Pagefind search runs in prod builds
+    // only, but this CTA works in dev too.
+    const ensureSearchKaiCta = () => {
+      if (!kaiEnabled) return;
+      const frame = document.querySelector('site-search dialog .dialog-frame');
+      if (!frame || frame.querySelector('.ak-search-cta')) return;
+
+      const cta = document.createElement('button');
+      cta.type = 'button';
+      cta.className = 'ak-search-cta';
+      cta.innerHTML =
+        '<span class="ak-sc-badge" aria-hidden="true">' +
+          '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>' +
+        '</span>' +
+        '<span class="ak-sc-body">' +
+          '<span class="ak-sc-title">Ask Kai</span>' +
+          '<span class="ak-sc-text">Get an instant answer about the docs</span>' +
+        '</span>' +
+        '<span class="ak-sc-go" aria-hidden="true">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+        '</span>';
+      // Place above the search input / results (after the mobile Cancel button).
+      frame.insertBefore(cta, frame.lastElementChild);
+
+      const readQuery = () => {
+        const i = frame.querySelector(
+          'input.pagefind-ui__search-input, input[type="search"], input[type="text"]',
+        ) as HTMLInputElement | null;
+        return (i?.value || '').trim();
+      };
+      const refresh = () => {
+        const q = readQuery();
+        const t = cta.querySelector('.ak-sc-text') as HTMLElement;
+        if (t) t.textContent = q ? `“${q}”` : 'Get an instant answer about the docs';
+      };
+      // Live-update the CTA label as the user types in the search box.
+      frame.addEventListener('input', refresh);
+
+      cta.addEventListener('click', (e) => {
+        e.preventDefault();
+        const q = readQuery();
+        (frame.closest('dialog') as HTMLDialogElement | null)?.close();
+        openDrawer();
+        if (q) send(q);
+      });
+    };
+    ensureSearchKaiCta();
+    document.addEventListener('astro:page-load', ensureSearchKaiCta);
+
+    // ─── Wire triggers ───────────────────────────────────────────────
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement | null;
+      if (!t) return;
+      if (t.closest('[data-ask-kai-open]') || t.closest('.b-ask')) {
+        e.preventDefault();
+        openDrawer();
+        return;
+      }
+      if (t.closest('[data-ask-kai-close]')) { e.preventDefault(); closeDrawer(); return; }
+      if (t === drawer) { closeDrawer(); return; }
+      const suggestion = t.closest('[data-ask-kai-prompt]') as HTMLElement | null;
+      if (suggestion) { e.preventDefault(); send(suggestion.textContent || ''); }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+        e.preventDefault();
+        openDrawer();
+      }
+    });
+
+    form.addEventListener('submit', (e) => { e.preventDefault(); send(input.value); });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    });
+    input.addEventListener('input', autoResize);
+  }
+</script>
