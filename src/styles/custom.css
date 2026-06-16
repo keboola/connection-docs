@@ -1459,7 +1459,9 @@ nav.sidebar {
 }
 .ak-msg { display: flex; }
 .ak-msg-user { justify-content: flex-end; }
-.ak-msg-assistant { justify-content: flex-start; }
+/* Column so the source chips stack UNDERNEATH the answer bubble (renderSources
+   appends .ak-sources as a sibling of .ak-bubble), not beside it. */
+.ak-msg-assistant { flex-direction: column; align-items: flex-start; }
 .ak-bubble {
   max-width: 92%;
   padding: 10px 14px;
