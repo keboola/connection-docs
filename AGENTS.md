@@ -98,9 +98,3 @@ Images: place alongside the Markdown and reference with an absolute path
   `main` (build → `aws s3 sync` to `help.keboola.com`).
 - The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs
   `AI_SERVICE_URL` + `KBC_STORAGE_API_TOKEN` env vars.
-
-## Logs / references
-
-- `AUDIT_LOG.md` — Jekyll→Astro migration-fidelity audit (historical).
-- `UI_FIXES_LOG.md` — UI/UX change log.
-- `DEV_DOCS_INTEGRATION.md` — proposal for unifying the developer docs.
