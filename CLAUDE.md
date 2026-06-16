@@ -2,8 +2,8 @@
 
 Guidance for Claude Code (and other agents) working in this repo.
 
-The full repo guide — stack, structure, commands, conventions, and the critical
-migration rules — lives in **AGENTS.md**. Read it first:
+The full repo guide — stack, structure, commands, and conventions — lives in
+**AGENTS.md**. Read it first:
 
 @AGENTS.md
 
@@ -11,9 +11,7 @@ migration rules — lives in **AGENTS.md**. Read it first:
 
 - **Dev server:** `npm run dev` → http://localhost:4321. Keep exactly **one**
   dev server running; kill stale ones (`pkill -f "astro dev"`) before starting.
-- **Pre-switchover, content is generated.** Do not hand-edit `src/content/docs/`
-  — edit the Jekyll source in the root content dirs and run
-  `node scripts/migrate.mjs`. (See AGENTS.md → "Migration state".)
+- **Content → edit `src/content/docs/` directly** (Markdown).
 - **CSS/UI changes go only in `src/styles/custom.css`.**
 - **Verify view-transition-sensitive CSS in a production build**
   (`astro build && astro preview`), not `npm run dev` — Vite injects `<style>`

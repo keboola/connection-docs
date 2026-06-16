@@ -9,22 +9,6 @@ The official documentation for Keboola, available at [help.keboola.com](https://
 > **Contributing with an AI agent?** See **[AGENTS.md](./AGENTS.md)** (and
 > **[CLAUDE.md](./CLAUDE.md)**) for the full repo guide and the critical rules.
 
-## Migration status (Jekyll → Astro)
-
-This repo is mid-migration from the old Jekyll site to Astro Starlight, and
-currently **keeps both side by side**:
-
-- The **Jekyll source** lives in the root content directories (`transformations/`,
-  `storage/`, `components/`, …) plus `_config.yml`, `_layouts`, `_includes`, `_sass`.
-- The **Astro content** in `src/content/docs/` is **generated from the Jekyll
-  source** by `scripts/migrate.mjs`.
-
-**Until the cutover, edit the Jekyll source — not `src/content/docs/`** (it is
-regenerated). The final switchover is scripted in `scripts/switchover.mjs`
-(dry-run by default): it finalizes Astro, removes the Jekyll source, and makes
-`src/content/docs/` the single source of truth. **After the switchover**, edit
-`src/content/docs/` directly.
-
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 22 or later
@@ -54,7 +38,6 @@ The dev server supports hot reload — changes to content files are reflected im
 │   └── sidebar.mjs     # Generated sidebar navigation config
 ├── public/             # Static assets (images, favicon) served as-is
 ├── scripts/
-│   ├── migrate.mjs     # Content migration script (Jekyll → Starlight)
 │   └── convert-nav.mjs # Sidebar generator from _data/navigation.yml
 ├── astro.config.mjs    # Astro + Starlight configuration
 └── package.json
@@ -62,12 +45,8 @@ The dev server supports hot reload — changes to content files are reflected im
 
 ## Writing Content
 
-Documentation pages are Markdown files. **Pre-switchover** they are authored in
-the Jekyll source (root content dirs) and regenerated into `src/content/docs/` by
-`scripts/migrate.mjs` — don't edit `src/content/docs/` directly yet (see
-[Migration status](#migration-status-jekyll--astro)). **Post-switchover** they are
-edited directly in `src/content/docs/`. Either way, each page needs frontmatter
-with at least a `title` and `slug`:
+Documentation pages are Markdown files in `src/content/docs/` — edit them
+directly. Each page needs frontmatter with at least a `title` and `slug`:
 
 ```yaml
 ---
