@@ -103,6 +103,7 @@ const stats = {
   redirectFromAliasesInjected: 0,
   telemetryTablesExpanded: 0,
   jekyllAssetsCopied: 0,
+  stalePagesPruned: 0,
 };
 
 // ---------------------------------------------------------------------------
@@ -858,6 +859,41 @@ function copyJekyllAssetsJs() {
   }
 }
 
+/**
+ * Prune generated pages whose Jekyll source no longer exists.
+ *
+ * migrate mirrors each source page 1:1 to the same path under DEST_DOCS, so the
+ * generated tree must contain ONLY pages with a matching ROOT/<rel> source. A
+ * .md/.mdx page in DEST_DOCS with no such source is stale — its Jekyll source
+ * was deleted (a removed docs section) and the deletion never propagated to the
+ * generated Astro tree. Left in place the orphan stays published AND can suppress
+ * an intended redirect (the redirect-from integration skips any alias whose
+ * target page still exists). This keeps src/content/docs an exact mirror of the
+ * Jekyll source — there are no pages authored directly in Astro.
+ *
+ * Scope is pages only (.md/.mdx). Co-located assets are left alone: a still-live
+ * page's images can themselves be sourceless, so blanket asset deletion is unsafe.
+ */
+function pruneStalePages() {
+  if (!existsSync(DEST_DOCS)) return;
+  const walk = (dir, out = []) => {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry);
+      if (statSync(full).isDirectory()) walk(full, out);
+      else if (/\.mdx?$/.test(entry)) out.push(full);
+    }
+    return out;
+  };
+  for (const full of walk(DEST_DOCS)) {
+    const rel = relative(DEST_DOCS, full).split(/[\\/]/).join('/');
+    if (!existsSync(join(ROOT, rel))) {
+      rmrf(full);
+      stats.stalePagesPruned++;
+      console.log(`Pruned stale page (no Jekyll source): ${rel}`);
+    }
+  }
+}
+
 function main() {
   console.log('=== Jekyll → Starlight migration ===');
   console.log(`Root:        ${ROOT}`);
@@ -971,6 +1007,9 @@ function main() {
     }
   }
 
+  // ---- 5b. Prune stale generated pages whose Jekyll source was removed ----
+  pruneStalePages();
+
   // ---- Summary ----
   console.log('\n=== Migration Summary ===');
   console.log(`  Markdown files processed:     ${stats.mdFiles}`);
@@ -994,6 +1033,7 @@ function main() {
   console.log(`  redirect_from aliases added:  ${stats.redirectFromAliasesInjected}`);
   console.log(`  telemetry tables expanded:    ${stats.telemetryTablesExpanded}`);
   console.log(`  jekyll assets/js copied:      ${stats.jekyllAssetsCopied}`);
+  console.log(`  stale pages pruned:           ${stats.stalePagesPruned}`);
   console.log('\nDone.');
 }
 

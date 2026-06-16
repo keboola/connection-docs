@@ -17,6 +17,11 @@ Keboola's embedded AI assistant that serves as a comprehensive data engineering 
 A [Python client library](https://github.com/keboola/kai-client) is also available for programmatic access to the Kai API, enabling scripting, automation, and integration into custom workflows.
 [Learn more about the Python Client →](/kai/python-client/)
 
+### AI Kit
+
+A plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It includes plugins for code quality and security analysis, building Keboola Python components, and creating Streamlit data apps.
+[Learn more about AI Kit →](/ai/ai-kit/)
+
 ### MCP Server
 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.
