@@ -291,3 +291,43 @@ optimistic default — so Kai isn't advertised where it would 404 (the window af
 cutover before the DNS flip to Vercel, and the rollback path). A non-ok result is
 cached `false` (a static deploy stays static); a network error is not cached, so a
 later navigation re-probes in case it was transient.
+
+---
+
+### U-16 — Glossary list renders text word-by-word when the definition has bold/links
+**File:** `src/integrations/beacon-transforms.mjs`
+**Status:** ✅ Applied
+
+`transformGlossaryList` tags a `- **Term** — definition` list as `.beacon-glossary`,
+whose CSS lays each `<li>` out as a 2-col grid via `p { display: contents }`. That
+only works when the item has exactly two inline pieces (term + one text node). When
+the *definition* also contains inline nodes (more `**bold**`, a link), each becomes
+its own grid cell and scatters into the narrow ~140px term column — text wraps
+word-by-word (seen on `/catalog/` → "Sharing Types").
+
+Tightened the detector to require the definition be a single text node; richer
+items now render as a plain bullet list (correct), while genuine simple glossaries
+(e.g. Shared/Linked bucket on the same page) still get the grid.
+
+```diff
+   if (!/^\s*(—|–|--|-)\s+/.test(second.value)) return;
++  // 2-col grid uses display:contents → the <li> must have exactly two inline
++  // pieces. Any extra node scatters into the term column. Render those plain.
++  if (para.children.length !== 2) return;
+   glossaryShape++;
+```
+
+---
+
+### U-17 — Search slow / empty modal: Pagefind assets served uncached
+**File:** `vercel.json` (new)
+**Status:** ✅ Applied
+
+On Vercel, framework output (`/_astro/*`) is `immutable`, but `/pagefind/*` got the
+default `Cache-Control: max-age=0, must-revalidate`. So every search re-fetched
+`pagefind.js` + wasm + index fragments (253 of them) over the network → the modal
+showed an empty box until everything loaded. Added a `vercel.json` header rule
+giving `/pagefind/*` a real TTL (`max-age=86400, stale-while-revalidate=604800`).
+Not `immutable`/1y because `pagefind.js`/`pagefind-entry.json` aren't content-hashed
+and change per build — a day's cache + SWR keeps repeat searches instant while still
+picking up a new index within a day.
