@@ -724,10 +724,14 @@ nav.sidebar {
   list-style: none;
   margin: 0 0 20px;
 }
+/* The <li> is a normal block with room on the left for the number badge —
+   NOT a flex container. A flex <li> turns every inline node of a "tight" list
+   item (no <p> wrapper) into its own flex box, so rich steps (text+bold, inline
+   code, links) wrap word-by-word. Absolute-positioning the badge keeps the step
+   text in normal flow regardless of tight/loose. */
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li {
-  display: flex;
-  gap: 14px;
-  padding: 8px 0;
+  position: relative;
+  padding: 8px 0 8px 38px;
   margin: 0;
   counter-increment: beacon-step;
 }
@@ -736,17 +740,19 @@ nav.sidebar {
 }
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li::before {
   content: counter(beacon-step);
+  position: absolute;
+  left: 0;
+  top: 8px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background: var(--kbc-grey-100);
   color: var(--fg-2);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  flex-shrink: 0;
   font-family: var(--font-mono);
 }
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li::marker {
