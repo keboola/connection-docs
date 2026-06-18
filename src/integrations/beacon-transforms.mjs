@@ -528,16 +528,30 @@ function transformGlossaryList(tree) {
       const second = para.children[1];
       if (!second || second.type !== 'text') return;
       if (!/^\s*(—|–|--|-)\s+/.test(second.value)) return;
-      // The 2-col grid renders via `display: contents`, so the <li> must hold
-      // exactly two inline pieces (term + a single definition text). Any extra
-      // inline node — more bold, a link, italics — becomes its own grid cell and
-      // scatters into the narrow term column (text breaks word-by-word). Render
-      // those richer items as a plain list instead of a broken glossary.
-      if (para.children.length !== 2) return;
       glossaryShape++;
     }
     if (glossaryShape / node.children.length < 0.66) return;
     addClass(node, 'beacon-glossary');
+
+    // Wrap the whole definition (everything after the leading term) in a single
+    // element so the 2-col grid gets exactly [term][definition]. Without this,
+    // `p{display:contents}` flattens each inline node (extra bold, links) into
+    // its own grid cell → the definition "staircases" into the narrow term
+    // column. Wrapped, the definition flows as one full-width sentence.
+    for (const li of node.children) {
+      const para = li.children?.find((c) => c.type === 'paragraph');
+      if (!para?.children?.length) continue;
+      const [term, ...rest] = para.children;
+      if (!rest.length) continue;
+      para.children = [
+        term,
+        {
+          type: 'beaconGlossaryDef',
+          data: { hName: 'span', hProperties: { className: ['beacon-glossary-def'] } },
+          children: rest,
+        },
+      ];
+    }
   });
 }
 
