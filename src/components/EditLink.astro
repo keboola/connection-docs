@@ -1,20 +1,13 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
+import Icon from '@astrojs/starlight/components/Icon.astro';
 
-const { editUrl } = Astro.props;
+const { editUrl } = Astro.locals.starlightRoute;
 const tooltip = 'Want to improve this page? Submit a pull request on GitHub. We review all suggestions within 48 hours.';
 ---
 {editUrl && (
   <div class="suggest-edit-wrapper" data-tooltip={tooltip}>
-    <a
-      href={editUrl.href}
-      rel="noopener noreferrer"
-      target="_blank"
-      class="sl-flex suggest-edit-link"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" fill="currentColor">
-        <path d="m14.06 9.02.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83a.996.996 0 0 0 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/>
-      </svg>
+    <a href={editUrl} class="sl-flex suggest-edit-link print:hidden">
+      <Icon name="pencil" size="1.2em" />
       Suggest an Edit
     </a>
   </div>
