@@ -9,16 +9,16 @@ slug: 'components/extractors/database/postgresql'
 
 Our connectors support the most recent versions of PostgreSQL. You may choose different strategies to sync your data:
 
-- [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log-based CDC](/components/extractors/database/postgresql/#log-based-cdc)
+- [Query-based connector](/components/extractors/database/sqldb/#initial-setup)
+- [Log-based CDC](/components/extractors/database/postgresql/#postgresql-log-based-cdc)
 
 
 ## Query-Based Connector
 
-This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database to sync data. 
+This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-pgsql) that performs queries against the source database to sync data. 
 It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
+They are all [configured](/components/extractors/database/sqldb/#initial-setup) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
 
 Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
@@ -100,7 +100,7 @@ Each result table includes the following system columns:
 
 ### Data Type Mapping
 
-MySQL datatypes are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+PostgreSQL datatypes are mapped to [Keboola Base Types](/storage/tables/data-types/#base-types) as follows:
 
 Based on the selected JSON file, the `base_type` column in the table will be updated accordingly:
 
@@ -386,7 +386,7 @@ to perform the replication.
 ##### PostgreSQL on Amazon RDS
 
 It is possible to capture changes in a PostgreSQL database that is running in
-link: [Amazon RDS](https://aws.amazon.com/rds/). To do this:
+[Amazon RDS](https://aws.amazon.com/rds/). To do this:
 
 * Set the instance parameter `rds.logical_replication` to `1`.
 * Verify that the `wal_level` parameter is set to `logical` by running the query `SHOW wal_level` as the database RDS
@@ -394,12 +394,12 @@ link: [Amazon RDS](https://aws.amazon.com/rds/). To do this:
   This might not be the case in multi-zone replication setups.
   You cannot set this option manually.
   It is the
-  link: [automatically changed](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)
+  [automatically changed](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)
   when the `rds.logical_replication` parameter is set to `1`.
   If the `wal_level` is not set to `logical` after you make the preceding change, it is probably because the instance
   has to be restarted after the parameter group change.
   Restarts occur during your maintenance window, or you can initiate a restart manually.
-* Set the {prodname} `plugin.name` parameter to `pgoutput`.
+* Set the Debezium `plugin.name` parameter to `pgoutput`.
 * Initiate logical replication from an AWS account that has the `rds_replication` role.
   The role grants permissions to manage logical slots and to stream data using logical slots.
   By default, only the master user account on AWS has the `rds_replication` role on Amazon RDS.
@@ -410,18 +410,18 @@ link: [Amazon RDS](https://aws.amazon.com/rds/). To do this:
   To enable accounts other than the master account to create an initial snapshot, you must grant `SELECT` permission to
   the accounts on the tables to be captured.
   For more information about security for PostgreSQL logical replication, see the
-  link: [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-security.html).
+  [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-security.html).
 
 ##### PostgreSQL on Azure
 
-It is possible to use {prodname} with [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/),
+It is possible to use Debezium with [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/),
 which has support for the `pgoutput` logical decoding.
 
 Set the Azure replication support to `logical`. You can use the
-link: [Azure CLI](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-cli) or
+[Azure CLI](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-cli) or
 the [Azure Portal](https://docs.microsoft.com/en-us/azure/postgresql/concepts-logical#using-azure-portal) to configure
 this. For example, to use the Azure CLI, here are
-the: [`az postgres server`](https://docs.microsoft.com/cli/azure/postgres/server?view#azure-cli-latest) commands that
+the [`az postgres server`](https://docs.microsoft.com/cli/azure/postgres/server?view#azure-cli-latest) commands that
 you need to execute:
 
 ```
@@ -432,7 +432,7 @@ az postgres server restart --resource-group mygroup --name myserver
 
 ##### PostgreSQL on CrunchyBridge
 
-It is possible to use {prodname} with [CrunchyBridge](https://crunchybridge.com/); logical replication is already
+It is possible to use Debezium with [CrunchyBridge](https://crunchybridge.com/); logical replication is already
 turned on. The `pgoutput` plugin is available. You will have to create a replication user and provide the correct
 privileges.
 
@@ -447,13 +447,13 @@ wal_level = logical             // Instructs the server to use logical decoding 
 ```
 
 Depending on your requirements, you may have to set other PostgreSQL streaming replication parameters when using
-{prodname}.
+Debezium.
 Examples include `max_wal_senders` and `max_replication_slots` for increasing the number of connectors that can access
 the sending server concurrently and `wal_keep_size` for limiting the maximum WAL size which a replication slot will
 retain.
 For more information about configuring streaming replication, see the
-link:https://www.postgresql.org/docs/current/runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SENDER[PostgreSQL
-documentation].
+[PostgreSQL
+documentation](https://www.postgresql.org/docs/current/runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SENDER).
 
 Debezium uses PostgreSQL's logical decoding, which uses replication slots.
 Replication slots are guaranteed to retain all WAL segments required for Debezium even during Debezium outages. For this
@@ -470,7 +470,6 @@ Otherwise, its default value is applied, which adds a latency of about 200 milli
 **TIP:** Reading and
 understanding [PostgreSQL documentation about the mechanics and configuration of the PostgreSQL write-ahead log](https://www.postgresql.org/docs/current/static/wal-configuration.html)
 is strongly recommended.
-endif::community[]
 
 ### Setting Up Permissions
 
@@ -507,8 +506,8 @@ Keboola(Debezium) streams change events for PostgreSQL source tables from _publi
 tables.
 Publications contain a filtered set of change events that are generated from one or more tables.
 The data in each publication is filtered based on the publication specification.
-The specification can be created by the PostgreSQL database administrator or by the {prodname} connector.
-To permit the {prodname} PostgreSQL connector to create publications and specify the data to replicate to them, the
+The specification can be created by the PostgreSQL database administrator or by the Debezium connector.
+To permit the Debezium PostgreSQL connector to create publications and specify the data to replicate to them, the
 connector must operate with specific privileges in the database.
 
 There are several options for determining how publications are created.
@@ -543,7 +542,7 @@ CREATE ROLE _<replication_group>_;
 GRANT REPLICATION_GROUP TO __<original_owner>__;
 ```
 
-3. Add the {prodname} replication user to the group.
+3. Add the Debezium replication user to the group.
 
 ```sql
 GRANT REPLICATION_GROUP TO __<replication_user>__;
@@ -561,14 +560,14 @@ ALTER TABLE __<table_name>__ OWNER TO REPLICATION_GROUP;
 
 ![img.png](/components/extractors/database/postgresql/img.png)
 
-- **Host**: The hostname of the MySQL server.
-- **Port**: The port number of the MySQL server.
-- **User**: The username to be used to connect to the MySQL server.
-- **Password**: The password to be used to connect to the MySQL server.
+- **Host**: The hostname of the PostgreSQL server.
+- **Port**: The port number of the PostgreSQL server.
+- **User**: The username to be used to connect to the PostgreSQL server.
+- **Password**: The password to be used to connect to the PostgreSQL server.
 
 #### SSH tunnel
 
-You may opt to use an SSH Tunnel to secure your connection. The [developer documentation](https://developers.keboola.com/integrate/database/ provides detailed instructions for setting up an SSH tunnel.
+You may opt to use an SSH Tunnel to secure your connection. The [developer documentation](https://developers.keboola.com/integrate/database/) provides detailed instructions for setting up an SSH tunnel.
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
 
 ### Data Source
@@ -633,8 +632,8 @@ For more details, refer to the [Debezium documentation](https://debezium.io/docu
 
 - **Replication Mode**: The replication mode to be used. The following options are available:
     - `Standard`: The connector performs an initial *consistent snapshot* of each of your databases and reads
-      the binlog from the point at which the snapshot was made.
-    - `Changes only`: The connector reads the changes from the binlog immediately, skipping the initial load.
+      the transaction log (WAL) from the point at which the snapshot was made.
+    - `Changes only`: The connector reads the changes from the transaction log (WAL) immediately, skipping the initial load.
 - **Binary data handler**: Specifies how binary columns, for example, blob, binary, and varbinary, should be represented in
   change events. The following options are available:
     - `Base64`: represents binary data as a base64-encoded String.
@@ -665,7 +664,7 @@ These parameters control whether the connector creates a publication and how it 
 
 More information about the publication creation process can be found in the [Publication Creation](#publication-creation) section.
 
-![img_2.png](/components/extractors/database/postgresql/img_4.png)
+![img_2.png](/components/extractors/database/postgresql/img_2.png)
 
 - **Publication Auto Create Mode**: The mode specifying how the connector creates publications. The following options
   are available:
