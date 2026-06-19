@@ -16,7 +16,7 @@ you save them to Keboola Storage.
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Azure Datalake Gen 2** connector.
 
-In order to access the files in you need to prepare an account name, account key, and file system.
+In order to access the files in Azure Datalake Gen2, you need to prepare an account name, account key, and file system.
 
 ### Authentication 
 Fill in the Account name, key and file system you wish to retrieve data from.
