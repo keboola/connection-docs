@@ -22,7 +22,7 @@ edit the [input mapping](/transformations/mappings/#input-mapping) details accor
 You can test the extraction on this [sample file](/components/extractors/other/geocoding-augmentation/locations.csv). 
 Upload it to the `in.c-main` bucket in Storage first and call it `locations`.
 Specify a single table in the [output mapping](/transformations/mappings/#output-mapping) 
-and select the **geocode** method in the configuration. You can use the `openstreetmap` provider for free.
+and select the **geocode** method in the configuration. You can use the `nominatim` provider for free.
 (The names of the input and CSV files are arbitrary, and so are the names of the columns.)
 
 ![Screenshot - Add coordinates to locations](/components/extractors/other/geocoding-augmentation/geocoding-1.png)
@@ -52,4 +52,4 @@ The following are the available providers that will be queried for the data:
 - **map_quest** - [MapQuest](https://developer.mapquest.com/documentation/geocoding-api/) provider, needs parameter **apiKey**.
 - **tomtom** - [TomTom](https://www.programmableweb.com/api/tomtom-geocoding) provider, needs parameter **apiKey**, parameter locale may have one of these values: de, es, fr, it, nl, pl, pt, sv.
 - **opencage**: [OpenCage](https://opencagedata.com/) provider, needs parameter **apiKey**.
-- **openstreetmap**: [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Nominatim) provider, does not need any API key.
+- **nominatim**: [OpenStreetMap / Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) provider, does not need any API key.
