@@ -63,7 +63,7 @@ Click **Save** and run the configuration.
 
 ### Sitemaps Endpoint
 
-To extract a search analytics report, select the "Sitemaps" endpoint.
+To extract a sitemaps report, select the "Sitemaps" endpoint.
 
 ![Screenshot - Sitemaps Config](/components/extractors/other/google-search-console/row_config_sitemaps.png)
 

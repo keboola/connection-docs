@@ -36,7 +36,7 @@ This way you can import new data, e.g., from today, without deleting the data im
 ## Output Table
 
 The output table contains the following columns:
-- Time dimension, if enabled; art of the primary key
+- Time dimension, if enabled; part of the primary key
 - Columns from the grouping dimension; part of the primary key
 - **Cost**/**Usage** column
 - **Currency** column
