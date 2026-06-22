@@ -55,7 +55,7 @@ By default, Global Search performs a relevance-based name search:
 
 - **Name matching** — matches entity names (and, for tables, column names). A match on a table name ranks higher than a match on one of its columns.
 - **Exact ID** — searching for an entity's exact ID returns that entity directly, which is useful for finding an entity that has since been renamed.
-- **Regex mode** *(advanced, opt-in)* — enable the **Regex** toggle in the search bar to run a regular-expression search against entity names. Regex matching applies to the whole name (for example, `report` does not match `monthly_report` — use `.*report.*`) and is case-insensitive.
+- **Regex mode** *(advanced, opt-in)* — enable the **Regex** toggle in the search bar to run a regular-expression search against entity names. Regex matching applies to the whole name (for example, `report` does not match `monthlyReport` — use `.*report.*`) and is case-insensitive.
 
 ![Global Search with the Regex toggle enabled, the pattern "(customers|orders)" matching the customers and orders tables](/management/global-search/global-search-regex.png)
 
