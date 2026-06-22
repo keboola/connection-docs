@@ -46,7 +46,7 @@ such as entity type, name, and source project.
 When a table is matched through one of its column names rather than the table name itself, the result row shows which column matched (for example, *Matched column: email*),
 so it is clear why the table is relevant to your query.
 
-![Screenshot - Matched column](/management/global-search/global-search-matched-column.png)
+![Global Search results for the query "email" showing the customers and orders tables, each labeled with the column it matched on](/management/global-search/global-search-matched-column.png)
 
 ***Note:** Folders are not displayed in search results because they do not support detailed searches and rely on metadata.*
 
@@ -57,7 +57,7 @@ By default, Global Search performs a relevance-based name search:
 - **Exact ID** — searching for an entity's exact ID returns that entity directly, which is useful for finding an entity that has since been renamed.
 - **Regex mode** *(advanced, opt-in)* — enable the **Regex** toggle in the search bar to run a regular-expression search against entity names. Regex matching applies to the whole name (for example, `report` does not match `monthly_report` — use `.*report.*`) and is case-insensitive.
 
-![Screenshot - Regex mode](/management/global-search/global-search-regex.png)
+![Global Search with the Regex toggle enabled, the pattern "(customers|orders)" matching the customers and orders tables](/management/global-search/global-search-regex.png)
 
 ## Sharing and Accessing Results
 If a user attempts to search for an entity within a project they don’t have access to, they will be notified that they need to request access to that project.
