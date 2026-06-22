@@ -60,7 +60,7 @@ Follow these steps to deploy your app in Keboola:
 - Click the green **Deploy App** button to deploy the application.
 
 ## Step 6: Test the App
-Follow these step to test your new app:
+Follow these steps to test your new app:
 
 - Go to the app's URL.
 - You should be redirected to the Google OAuth consent screen.

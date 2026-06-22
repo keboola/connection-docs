@@ -51,7 +51,7 @@ There are two ways to deploy a Streamlit app:
 
 ### Code
 
-For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
+For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out [this example from Streamlit docs](https://docs.streamlit.io/get-started/tutorials/create-an-app).
 
 ![Code deployment](/data-apps/streamlit/development-type-code.png)
 ![Hello World code](/data-apps/streamlit/hello-world-code.png)
@@ -89,7 +89,7 @@ To provide your app with environment variables or sensitive information like cre
 
 When you upload `secrets.toml` using the direct secrets upload UI, Keboola imports secrets as flat, top-level keys. Sections (TOML groups) are not preserved as nested structures. This means keys in the file become `st.secrets["your_key"]` after upload - you cannot access them as `st.secrets["group"]["key"]`. If your app expects nested secrets, use repo-based secrets.
 
-[Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
+[Read more about the Streamlit secrets](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management).
 
 ### Direct Secrets Upload
 You can upload a `secrets.toml` file directly through the UI when developing an app from code. The upload process:
@@ -117,7 +117,7 @@ By default, there are two environment variables available that make it easy to a
 - `KBC_URL`: This represents the URL of the current Keboola project.
 - `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
 
-To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
+To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](/management/project/tokens/).
 
 **Important:**
 Do not name your secret `KBC_TOKEN`, as this name is reserved.
@@ -133,7 +133,7 @@ client = Client(kbc_url, kbc_token)
 These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
 
 ## Loading Data from Storage
-To load data from the Storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section. Just select your table in the input mapping section and navigate to that by `/data/in/tables/your_data.csv` or `/data/in/files/fileID_FileName.*` in your code. Note that the app needs to be redeployed to fetch up-to-date data. Or you can use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
+To load data from the Storage of a Keboola project into the app, use the [input mapping](/transformations/mappings/#input-mapping) section. Just select your table in the input mapping section and navigate to that by `/data/in/tables/your_data.csv` or `/data/in/files/fileID_FileName.*` in your code. Note that the app needs to be redeployed to fetch up-to-date data. Or you can use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
 
 ## Writing Back to Storage
 For writing data back to Keboola Project Storage, use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).
