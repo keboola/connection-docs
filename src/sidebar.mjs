@@ -4,6 +4,7 @@
 export const sidebar = [
   { label: "Home", slug: "index" },
   { slug: "overview" },
+  { slug: "silly" },
   {
     label: "Getting Started Tutorial",
     collapsed: true,

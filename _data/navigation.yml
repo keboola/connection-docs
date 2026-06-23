@@ -5,6 +5,9 @@ items:
   - url: /overview/
     title: Keboola Overview
 
+  - url: /silly/
+    title: The Silly Page
+
   - url: /tutorial/
     title: Getting Started Tutorial
     items:
