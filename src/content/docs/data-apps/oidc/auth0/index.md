@@ -39,7 +39,7 @@ Follow these steps to set up the authentication method for your app:
 - Under **Authentication**, select **OIDC** and then **Generic OIDC**.
 - Copy the client ID from your Auth0 application to the **Client ID** field in Keboola.
 - Copy the client secret from the Auth0 application to the **Client secret** field in Keboola.
-- In the **Issuer URL** field, enter `https://<yourDomain>.us.auth0.com/`, which is the correct issuer URL for Google OAuth 2.0.
+- In the **Issuer URL** field, enter `https://<yourDomain>.us.auth0.com/`, which is the correct issuer URL for Auth0.
 - Click **Save** to apply the changes.
 
 ## Step 4: Set Up the Auth0 Consent Screen
