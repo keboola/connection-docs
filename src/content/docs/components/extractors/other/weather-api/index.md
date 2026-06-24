@@ -26,9 +26,9 @@ Subscribe to the plan that fits your expected consumption.
       * Choose `Forecast` to obtain a forecast (use `Forecast days` to specify how many days ahead you want data for). 
       * Choose `History` to retrieve historical data. Use `Historical Date` to specify the period in the past.
     * **Location Query** (location_query): A query parameter for location. It can be latitude and longitude in decimal degrees, e.g., 48.8567,2.3508, a city name, e.g., Paris, or even an IP address like `100.0.0.1`. Learn more in the [documentation](https://www.weatherapi.com/docs/).
-    * **Forecast Days** (forecast_days): The number of forecast days required.
+    * **Forecast Days** (forecast_days): The number of forecast days required (1--14).
     * **Historical Date** (historical_date): The date from which to fetch historical data, either in `YYYY-MM-DD` format or a relative date like `last week`.
-    * **Continue On Failure** (continue_on_failure): A Boolean value. If set to `True`, the process will continue dispite fetching errors, and failed responses will be saved in the `failed_fetches.csv` file. 
+    * **Continue On Failure** (continue_on_failure): Available only when using an input table. A Boolean value. If set to `True`, the process will continue despite fetching errors, and failed responses will be saved in the `failed_fetches.csv` file. 
   If set to `False`, the component run will terminate with an error as soon as one request fails.
 * **Destination Settings** (destination_settings)
     * **Load Type** (load_type): If full load is selected, the destination table will be overwritten with every run. If incremental load is used, data will be upserted into the existing destination table. Full load overwrites the destination table each time.
@@ -49,4 +49,4 @@ There are four output tables:
 - `weather_astronomical.csv`: Contains daily historical and future astronomical data.
 - `weather_daily.csv`: Contains daily forecasts and historical data.
 - `weather_hourly.csv`: Contains hourly forecasts and historical data.
-- `failed_fetches.csv`: If the 'continue on failure' parameter is set to `true`, this table will record any errors that occurr during data fetching.
+- `failed_fetches.csv`: If the 'continue on failure' parameter is set to `true`, this table will record any errors that occur during data fetching.
