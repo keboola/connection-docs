@@ -15,7 +15,7 @@ type: how-to
 Code Pattern is a special type of [component](/components/) that
 
 - generates code based on [parameters](#parameters-form), and
-- can be used in the user interface of [New Transformations](/transformations/#new-transformations).
+- can be used in the user interface when creating a [transformation](/transformations/).
 
 ## List of Code Patterns
 

@@ -2,31 +2,38 @@
 
 Every `TODO(human-review)` marker left inline across the Transformations section
 split, grouped for sign-off. The markers remain in-source; this is the index.
-(63 markers across 15 files.)
 
-## A. Reference facts to verify against component code (SoT not in this repo)
+> **Reconciled with PRDCT-354 (Devin "Audit vs code").** Page `type`s were
+> aligned to Block 0 (added a `tutorial` type; retyped cli, r-plain
+> array-splitter/binary/plots, duckdb/snowflake-migration → tutorial;
+> troubleshooting → how-to; flows → explanation). Items below that Block B
+> verified against component code are marked **Resolved**; only the genuinely
+> unverifiable ones remain open.
 
-The component config schemas / READMEs are not in the docs repo and were not
-reachable, so these carried-over values could not be verified against code.
-Nothing was invented, renamed, or removed — only flagged.
+## Resolved via PRDCT-354 audit (Block B — verified vs code)
 
-- **Snowflake** (`snowflake-plain/reference.md`): backend sizes + default; 7,200 s
-  query timeout; 8,192-char comment segfault; `ABORT_TRANSFORMATION` name/semantics;
-  AWS-US timestamp parameter overrides; copy/clone loading types; Free-Plan backend
-  availability.
-- **BigQuery** (`bigquery/reference.md`, `bigquery/how-to.md`): the "2 hours" query
-  timeout vs current GCP quota; `Query timeout` parameter name/units and that default
-  `0` = "use BigQuery default"; `ABORT_TRANSFORMATION` semantics.
-- **Oracle** (`oracle/index.md`): exact default/behavior of the optional `schema`
-  config field (added per instruction; semantics unconfirmed).
-- **DuckDB** (`duckdb/reference.md`): default Timeout (1 h); default for "Automatic
-  data types"; backend sizes / memory figures / default; Free-Plan availability;
-  parameter names `threads` / `max_memory_mb`; list of supported DuckDB versions.
+- **Snowflake** (`snowflake-plain/reference.md`): `query_timeout=7200`,
+  `ABORT_TRANSFORMATION`, and copy/clone loading types — confirmed.
+- **BigQuery** (`bigquery/reference.md`): `Query timeout` parameter default `0`
+  and `ABORT_TRANSFORMATION` (STRING DEFAULT '') — confirmed.
+- **DuckDB** (`duckdb/reference.md`): `threads`, `max_memory_mb`, `dtypes_infer`,
+  `debug`, `syntax_check`, `duckdb_version`, **supported versions {1.5.2, 1.4.4}**,
+  the 4 sync actions, and block orchestration — confirmed.
+- **Oracle** (`oracle/index.md`): the optional `schema` field is `db.schema`
+  (`scalarNode('schema')`) — confirmed.
+
+## A. Reference facts still unverifiable (platform-level / not in code audit)
+
+- **Snowflake** (`snowflake-plain/reference.md`): backend sizes + default;
+  8,192-char comment segfault; AWS-US timestamp parameter overrides; Free-Plan
+  backend availability.
+- **BigQuery** (`bigquery/reference.md`): the "2 hours" GCP query-runtime claim
+  (platform-side; current GCP quota may be 6 h).
+- **DuckDB** (`duckdb/reference.md`): backend sizes / memory figures; default Timeout (1 h).
 - **Python** (`python-plain/reference.md`): current Python version; 8 GB memory /
   6 h / CPU limits; preinstalled package list; backend sizes / default / plan.
-- **R** (`r-plain/reference.md`): R `4.4.1` is current + other selectable versions
-  (version bumped 4.0.5 → 4.4.1 per instruction); 16 GB / 6 h / CPU limits;
-  preinstalled packages; backend sizes / default / plan.
+- **R** (`r-plain/reference.md`): R `4.4.1` confirmed (PRDCT-354 Block A, bumped
+  4.0.5 → 4.4.1); 16 GB / 6 h / CPU limits; preinstalled packages; backend sizes.
 
 ## B. UI labels / control names to confirm (how-to pages)
 

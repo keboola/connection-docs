@@ -6,7 +6,7 @@ keywords:
   - R array splitting
   - split array column R
   - R transformation example
-type: how-to
+type: tutorial
 redirect_from:
     - /manipulation/transformations/r/array-splitter/
     - /transformations/r/array-splitter/

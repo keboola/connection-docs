@@ -7,7 +7,7 @@ keywords:
   - R charts graphs
   - R transformation plot
   - R transformation example
-type: how-to
+type: tutorial
 redirect_from:
     - /manipulation/transformations/r/plots/
     - /transformations/r/plots/

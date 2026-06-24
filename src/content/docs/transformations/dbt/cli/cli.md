@@ -8,7 +8,7 @@ keywords:
   - kbc dbt init
   - local dbt development
   - dbt debug run
-type: how-to
+type: tutorial
 ---
 
 Video:

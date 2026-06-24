@@ -7,7 +7,7 @@ keywords:
   - dbt connection failure
   - dbt authentication error
   - dbt profiles.yml
-type: reference
+type: how-to
 ---
 
 ## Remote workspaces

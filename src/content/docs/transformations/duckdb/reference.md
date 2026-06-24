@@ -20,10 +20,13 @@ Reference material for [DuckDB SQL transformations](/transformations/duckdb/). T
 DuckDB Transformation is currently in **BETA**. Breaking changes may occur.
 :::
 
-<!-- TODO(human-review): the DuckDB transformation config schema
-     (component-duckdb-transformation configuration.py) is not in this docs
-     repo, so the settings, defaults, backend memory figures, and parameter
-     names below could not be verified against code. Flagged inline. -->
+<!-- Verified vs code (PRDCT-354 audit, Block B): the settings, parameter names
+     (threads, max_memory_mb, dtypes_infer, debug, syntax_check, duckdb_version),
+     SUPPORTED_VERSIONS={1.5.2,1.4.4}, the 4 sync actions, and block orchestration
+     are confirmed against configuration.py / versions.py / component.py. The
+     backend sizes/memory figures and the default Timeout are platform-level and
+     remain flagged inline below. -->
+
 
 ## Configuration settings
 
@@ -41,7 +44,7 @@ Set these on the right-side panel of the transformation configuration:
 
 ### DuckDB version
 
-Select the DuckDB version used to run the transformation. Use `latest` (default) to always run on the most recent supported version, or pin a specific version (for example, `1.5.2`, `1.4.4`) for stability. Each supported version runs in its own isolated environment. <!-- TODO(human-review): confirm the list of supported versions. -->
+Select the DuckDB version used to run the transformation. Use `latest` (default) to always run on the most recent supported version, or pin a specific supported version — **`1.5.2`** or **`1.4.4`** — for stability. Each supported version runs in its own isolated environment.
 
 ## Backend sizes
 
@@ -60,7 +63,7 @@ Dynamic backends are **not** available on the [Free Plan (Pay As You Go)](/manag
 
 ### Auto-resource detection
 
-DuckDB automatically detects available CPU and memory. You can also set resource limits manually with the `threads` and `max_memory_mb` parameters in the transformation configuration. <!-- TODO(human-review): confirm parameter names `threads` / `max_memory_mb` against configuration.py. -->
+DuckDB automatically detects available CPU and memory. You can also set resource limits manually with the `threads` and `max_memory_mb` parameters in the transformation configuration.
 
 ## Block-based orchestration
 

@@ -7,7 +7,7 @@ keywords:
   - R transformation binary
   - R trained model file
   - R transformation example
-type: how-to
+type: tutorial
 redirect_from:
     - /manipulation/transformations/r/binary/
     - /transformations/r/binary/

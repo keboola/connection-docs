@@ -192,11 +192,11 @@ Python and R transformations.
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/transformations/#phases'>Phases</a></th> 
+    <th>Phases</th> 
     <td>Not available</td>
 </tr>
 <tr>
-    <th><a href='/transformations/#dependencies'>Dependencies</a></th> 
+    <th>Dependencies</th> 
     <td>Not available</td>
 </tr>
 <tr>

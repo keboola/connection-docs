@@ -13,20 +13,20 @@ type: reference
 
 Reference material for [BigQuery SQL transformations](/transformations/bigquery/). To create one, see the [how-to](/transformations/bigquery/how-to/).
 
-<!-- TODO(human-review): the BigQuery transformation config schema
-     (google-bigquery-transformation ConfigDefinition.php) is not in this docs
-     repo, so the config fields and limits below could not be verified against
-     code. Items needing a check are flagged inline. -->
+<!-- Verified vs code (PRDCT-354 audit, Block B): the Query timeout parameter
+     defaults to 0 and ABORT_TRANSFORMATION (STRING DEFAULT '') are confirmed
+     against google-bigquery-transformation ConfigDefinition.php / Transformation.php.
+     The GCP-side "2 hours" runtime claim is platform-level and unverified. -->
 
 ## Limits
 
 | Limit | Value | Notes |
 |---|---|---|
-| Query runtime | 2 hours (BigQuery default) | <!-- TODO(human-review): verify the 2-hour maximum against current GCP query-jobs quota; it may have changed. --> Adjustable per configuration via the **Query timeout** parameter. See [BigQuery query-jobs quotas](https://cloud.google.com/bigquery/quotas#query_jobs). |
+| Query runtime | 2 hours (BigQuery default) | <!-- TODO(human-review): GCP-side claim, not in the code audit — current GCP query-jobs quota may be 6h. --> Adjustable per configuration via the **Query timeout** parameter. See [BigQuery query-jobs quotas](https://cloud.google.com/bigquery/quotas#query_jobs). |
 | Tables per query | Capped | BigQuery limits the [number of tables referenced by a single query](https://cloud.google.com/bigquery/quotas#tables). |
 | Mutations | Discouraged | BigQuery favors an append-only model; row-level mutations are [generally discouraged](https://cloud.google.com/bigquery/docs/best-practices-costs#avoid_using_dml). |
 
-**Query timeout** parameter — overrides the per-query runtime limit. Default: `0` (use BigQuery's own default). <!-- TODO(human-review): confirm the parameter name, units, and that 0 means "use BigQuery default" against ConfigDefinition.php. -->
+**Query timeout** parameter — overrides the per-query runtime limit. Default: `0` (use BigQuery's own default).
 
 For BigQuery limitations specific to Keboola, see [BigQuery Limitations](/storage/byodb/#bigquery-limitations). Track upstream changes in the [BigQuery release notes](https://cloud.google.com/bigquery/docs/release-notes).
 
@@ -42,7 +42,7 @@ SET ABORT_TRANSFORMATION = (
 );
 ```
 
-This sets `ABORT_TRANSFORMATION` to `'Integrity check failed'` when the `INTEGRITY_CHECK` table has one or more rows with `RESULT = 'failed'`. An empty string does not abort. <!-- TODO(human-review): confirm the variable name and abort semantics against component code. -->
+This sets `ABORT_TRANSFORMATION` to `'Integrity check failed'` when the `INTEGRITY_CHECK` table has one or more rows with `RESULT = 'failed'`. An empty string does not abort.
 
 ## Working with data types
 

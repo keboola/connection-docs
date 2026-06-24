@@ -7,7 +7,7 @@ keywords:
   - orchestrate dbt Keboola
   - schedule dbt transformation
   - dbt pipeline
-type: how-to
+type: explanation
 ---
 
 All dbt-related components behave like any other component in Keboola, so you orchestrate them with [flows](/flows/).

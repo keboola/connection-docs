@@ -36,7 +36,7 @@ GRANT CREATE TABLE TO KEBOOLA_TRANSFORMATION;
 1. Open **Components → Transformations**, click **New Transformation**, and choose **Oracle Transformation**. <!-- TODO(human-review): confirm nav + type labels. -->
 2. Open the **Database Credentials** link in the configuration.
 3. Enter the host, port, database/service, username, and password for the `KEBOOLA_TRANSFORMATION` user.
-4. **(Optional) Schema** — set this to run the transformation against a specific Oracle schema. Leave it empty to use the connected user's default schema. <!-- TODO(human-review): the `schema` field exists in oracle-transformation ConfigDefinition.php but its exact default/behavior is not documented; confirm against code before publishing. -->
+4. **(Optional) Schema** — an optional `schema` field under the database connection (`db.schema` in the configuration). Set it to run the transformation against a specific Oracle schema; leave it empty to use the connected user's default schema. <!-- Verified vs code (PRDCT-354 audit): optional scalarNode('schema') in oracle-transformation ConfigDefinition.php. -->
 5. Click **Test Credentials**, then **Save**.
 
 ## Step 3 — Map the input

@@ -6,7 +6,7 @@ keywords:
   - Snowflake to DuckDB migration
   - migrate Snowflake transformation DuckDB
   - DuckDB SQL differences
-type: how-to
+type: tutorial
 ---
 
 
