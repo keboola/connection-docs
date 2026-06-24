@@ -13,8 +13,8 @@ Storage Access allows your Data App to read data from and write data back to Keb
 
 This feature is available for both **Streamlit** and **Python/JS** Data Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
 
-:::caution
-**Snowflake only.** Storage Access currently works only on projects using the Snowflake storage backend. BigQuery support is coming soon.
+:::note
+Storage Access works on both **Snowflake** and **BigQuery** backends. The SQL examples on this page use Snowflake identifier quoting (`"bucket"."table"`). On BigQuery, identifier quoting and table naming differ — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend).
 :::
 
 ## When to Use Storage Access
@@ -48,7 +48,7 @@ Query Service ────► Workspace User ────► Storage Tables
          billing, metadata refresh                 with granted permissions
 ```
 
-Your app communicates with Storage through the [**Query Service API**](https://api.keboola.com/?service=query), not directly with Snowflake. This provides:
+Your app communicates with Storage through the [**Query Service API**](https://api.keboola.com/?service=query), not directly with the underlying storage backend. This provides:
 
 - Automatic authentication using your app's token
 - Usage tracking for billing
@@ -196,6 +196,7 @@ print(df.head())
 
 - Use the full table ID in quotes: `"bucket_stage.bucket_name"."table_name"`
 - Example: `"in.c-sales"."orders"` for a table `orders` in bucket `in.c-sales`
+- On **BigQuery**, identifier quoting and dataset names differ — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend).
 
 ### Running Custom Queries
 
@@ -316,6 +317,54 @@ results = client.execute_query(
 if results[0].rows_affected == 0:
     raise Exception("Record was modified by another user. Please refresh and try again.")
 ```
+
+## Working with the BigQuery Backend
+
+Storage Access works on BigQuery projects as well as Snowflake ones. The setup steps, workspace lifecycle, environment variables, and Query Service client are **identical** across backends — but BigQuery uses a different SQL dialect, so the way you quote identifiers and name tables differs from the Snowflake examples above.
+
+If your project runs on BigQuery, apply the two rules below to every query. The Query Service passes SQL through to the backend unchanged — it does **not** translate dialects — so your application is responsible for emitting the correct syntax for the project's backend.
+
+### Quote identifiers with backticks, per segment
+
+BigQuery quotes identifiers with backticks (`` ` ``) instead of Snowflake's double quotes, and **each segment must be quoted separately**. Do not wrap the whole `dataset.table` reference in a single pair of backticks — BigQuery interprets a dotted name inside one pair of backticks as `project.dataset.table` and tries to resolve the first segment as a Google Cloud project (you'll see an error such as `The project <stage> has not enabled BigQuery`).
+
+```sql
+-- ✅ Correct — each segment quoted on its own
+SELECT * FROM `my_dataset`.`customers` LIMIT 1000
+
+-- ❌ Wrong — BigQuery reads `my_dataset` as a project ID
+SELECT * FROM `my_dataset.customers` LIMIT 1000
+```
+
+| Backend | Identifier quoting | Example |
+| --- | --- | --- |
+| Snowflake | Double quotes | `"in.c-main"."customers"` |
+| BigQuery | Backticks, per segment | `` `in_c_main`.`customers` `` |
+
+### Reference the dataset by its mangled bucket name
+
+BigQuery dataset names cannot contain dots (`.`) or hyphens (`-`), so a Keboola bucket is **not** exposed under its literal bucket ID. The bucket ID is mapped to a dataset name by replacing every `.` and `-` with an underscore (`_`):
+
+| Keboola bucket ID | BigQuery dataset name |
+| --- | --- |
+| `in.c-main` | `in_c_main` |
+| `out.c-Test-Data---Customers-Products-Orders` | `out_c_Test_Data___Customers_Products_Orders` |
+
+So a table `customers` in bucket `out.c-Test-Data---Customers-Products-Orders` is referenced as:
+
+```sql
+SELECT * FROM `out_c_Test_Data___Customers_Products_Orders`.`customers` LIMIT 100
+```
+
+Only the **dataset** (bucket) name is mangled — the **table** name keeps its original form. A table named `cashier-data`, for example, stays `cashier-data`; it just needs backticks because of the hyphen.
+
+:::tip[Find the exact names in Storage]
+You don't have to derive the names by hand. Open the table in **Storage** and go to its **Overview** tab — it shows the **Dataset Name** (the bucket's BigQuery dataset, e.g. `in_c_shared_bucket`) and the **Table Name** to use in your queries.
+
+If your app needs to discover names dynamically at runtime, you can also query `INFORMATION_SCHEMA.SCHEMATA` to list the datasets the workspace can see.
+:::
+
+Everything else — reads, writes (`INSERT`/`UPDATE`/`DELETE`/`TRUNCATE`), pagination, and the best practices below — works the same as on Snowflake once the identifiers are quoted and named correctly. If you build a single app that must run on both backends, detect the backend type and generate identifiers accordingly.
 
 ## Environment Variables
 
@@ -595,6 +644,6 @@ logging.info(f"User {current_user} updated record {record_id} to status {new_sta
 
 ## Limitations
 
-- **Snowflake only**: Storage Access currently works only with Snowflake backends. BigQuery support is planned for a future release.
+- **SQL dialect differs by backend**: On BigQuery you must quote identifiers with backticks per segment and reference datasets by their mangled bucket name — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend). The Query Service does not translate dialects.
 - **Column-level permissions not supported**: If you grant access to a table, the app can read/write all columns.
 - **Permission changes require app restart**: If you add or remove tables from the Storage Access configuration, the changes take effect on the next app start (deploy, redeploy, or wake from sleep).
