@@ -1336,7 +1336,21 @@ nav.sidebar {
   margin: 0;
   border: 0;
   border-radius: 0;
+  /* Grow to content so wide tables overflow the wrapper and it scrolls;
+     min-width keeps narrow tables full-width. The base rule's width:100%
+     otherwise pins the table and wide content gets clipped instead. */
+  width: max-content;
   min-width: 100%;
+}
+
+/* Fallback for raw HTML <table> blocks: the markdown table-scroll wrapper only
+   catches mdast table nodes, and hand-written <table> markup can split across
+   several HTML nodes, so it stays unwrapped. Make any unwrapped, non-spec,
+   non-status table scroll on its own instead of clipping under the TOC. */
+.sl-markdown-content
+  table:not(.beacon-spec-table):not(.beacon-status-table):not(:where(.beacon-table-scroll *)):not(:where(.not-content *)) {
+  display: block;
+  overflow-x: auto;
 }
 
 /* Instant view transitions */
