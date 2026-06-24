@@ -9,15 +9,15 @@ redirect_from:
 
 This data source connector uses the [Instagram Graph API](https://developers.facebook.com/docs/instagram-api) (built on the 
 [Facebook Graph API](https://developers.facebook.com/docs/graph-api)) to extract media objects, comments, insights 
-and metrics from [Instagram Business Accounts](https://business.instagram.com/getting-started). 
+and metrics from Instagram Business Accounts. 
 
 In order to access a business account's data, users have to authorize a Facebook account and choose a Facebook page 
-that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
+that is connected to an Instagram Business Account. The rest of 
 the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) connector.
 
 ## Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
-page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-api/getting-started#connect).
+page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started/).
 
 [Create a new configuration](/components/#creating-component-configuration) of the **Instagram** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with a Facebook account 
@@ -58,14 +58,14 @@ the output table name will be `foo_insights`.
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Instagram API.
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
-A typical example would be the [media](https://developers.facebook.com/docs/graph-api/reference/instagram-media).
+A typical example would be the [media](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-media).
 If left empty, the *Endpoint* option references data of the Instagram Business Account itself, which in fact 
-refers to the [user](https://developers.facebook.com/docs/graph-api/reference/instagram-user) endpoint.
+refers to the [user](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user) endpoint.
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of
 fields, but it also can be used to parametrize the fields and nest more endpoints into it.
-The [media](https://developers.facebook.com/docs/graph-api/reference/instagram-media) endpoint returns all
+The [media](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-media) endpoint returns all
 media objects created by an Instagram account. Each media object contains fields such as `caption`, `comments_count`, `created_time`
 and `like_count`. The fields parameter in such case is `caption,comments_count,created_time,like_count`.
 
