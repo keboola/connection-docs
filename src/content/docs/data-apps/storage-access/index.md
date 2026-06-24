@@ -5,13 +5,13 @@ slug: 'data-apps/storage-access'
 
 
 
-Storage Access allows your Data App to read data from and write data back to Keboola Storage tables in real-time. Your app connects directly to Keboola's storage through Query Service via SQL, enabling:
+Storage Access allows your App to read data from and write data back to Keboola Storage tables in real-time. Your app connects directly to Keboola's storage through Query Service via SQL, enabling:
 
 - **Real-time data access**: Always work with the latest data, no redeployment needed
 - **Write-back capability**: Update, insert into **existing** Storage tables directly from your app
 - **Interactive applications**: Build data entry forms, approval workflows, and collaborative tools
 
-This feature is available for both **Streamlit** and **Python/JS** Data Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
+This feature is available for both **Streamlit** and **Python/JS** Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
 
 :::note
 Storage Access works on both **Snowflake** and **BigQuery** backends. The SQL examples on this page use Snowflake identifier quoting (`"bucket"."table"`). On BigQuery, identifier quoting and table naming differ — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend).
@@ -35,10 +35,10 @@ Storage Access works on both **Snowflake** and **BigQuery** backends. The SQL ex
 
 ### Architecture Overview
 
-When you enable Storage Access, Keboola creates a dedicated **workspace** for your Data App. This workspace contains a database user with specific permissions (SELECT, INSERT, UPDATE, DELETE, TRUNCATE) on the tables you've selected.
+When you enable Storage Access, Keboola creates a dedicated **workspace** for your App. This workspace contains a database user with specific permissions (SELECT, INSERT, UPDATE, DELETE, TRUNCATE) on the tables you've selected.
 
 ```
-Your Data App
+Your App
      │
      ▼
 Query Service ────► Workspace User ────► Storage Tables
@@ -84,7 +84,7 @@ This design ensures:
 
 ### Step 2: Configure Writable Tables
 
-1. Open your Data App configuration in Keboola.
+1. Open your App configuration in Keboola.
 2. Go to the **Advanced Settings** tab.
 3. Find the **Storage Access** section.
 4. Click **+ Add Writable Table**.
@@ -98,7 +98,7 @@ This design ensures:
 
 #### Configuring Writable Tables Programmatically
 
-If you manage Data App configurations through the Storage API (or via automation/agents) rather than the UI, the same writable-table selection is expressed in the configuration JSON under `storage.output.tables`. Each entry is a table the app gets read/write permissions on:
+If you manage App configurations through the Storage API (or via automation/agents) rather than the UI, the same writable-table selection is expressed in the configuration JSON under `storage.output.tables`. Each entry is a table the app gets read/write permissions on:
 
 ```json
 {
@@ -118,7 +118,7 @@ If you manage Data App configurations through the Storage API (or via automation
 - **`destination`** — the full Storage table ID (`<stage>.<bucket>.<table>`) the app should be able to read and write. The table must exist before the app is deployed.
 - **`unload_strategy: "direct-grant"`** — required marker that tells the platform "grant the app's workspace direct SELECT/INSERT/UPDATE/DELETE/TRUNCATE on this table." Tables without this strategy in `storage.output.tables` are not exposed via Storage Access.
 
-To add or remove writable tables programmatically, update the Data App's configuration via the Storage API ([Component Configurations endpoint](https://api.keboola.com/?service=storage#tag--Component-Configurations)) and redeploy the app for the new permissions to take effect.
+To add or remove writable tables programmatically, update the App's configuration via the Storage API ([Component Configurations endpoint](https://api.keboola.com/?service=storage#tag--Component-Configurations)) and redeploy the app for the new permissions to take effect.
 
 ### Step 3: Deploy Your App
 
@@ -368,7 +368,7 @@ Everything else — reads, writes (`INSERT`/`UPDATE`/`DELETE`/`TRUNCATE`), pagin
 
 ## Environment Variables
 
-When Storage Access is enabled, the platform sets these environment variables in your Data App container:
+When Storage Access is enabled, the platform sets these environment variables in your App container:
 
 | Variable | Description |
 | --- | --- |
@@ -395,7 +395,7 @@ except (KeyError, FileNotFoundError) as e:
     ) from e
 ```
 
-For the full list of environment variables exposed to Data Apps, see the [data-app-python-js runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables).
+For the full list of environment variables exposed to Apps, see the [data-app-python-js runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables).
 
 ## Comparison: Input Mapping vs Direct Storage Access
 
@@ -410,7 +410,7 @@ For the full list of environment variables exposed to Data Apps, see the [data-a
 
 **You can use both together:** Input Mapping for reference data that rarely changes, Storage Access for data you need to read/write in real-time.
 
-## Example: Read-Write Data App
+## Example: Read-Write App
 
 This example shows a simple Flask app that reads records from Storage and allows users to update their status.
 
@@ -632,14 +632,14 @@ def get_cached_data(key, query_fn):
 
 **5. Track write operations**
 
-Write operations are automatically tracked by the Query Service for billing purposes. For additional application-level auditing, log to stdout (visible in Data App container logs):
+Write operations are automatically tracked by the Query Service for billing purposes. For additional application-level auditing, log to stdout (visible in App container logs):
 
 ```python
 import logging
 logging.basicConfig(level=logging.INFO)
 
 logging.info(f"User {current_user} updated record {record_id} to status {new_status}")
-# Output goes to stdout → visible in the Terminal Log tab of your Data App
+# Output goes to stdout → visible in the Terminal Log tab of your App
 ```
 
 ## Limitations
