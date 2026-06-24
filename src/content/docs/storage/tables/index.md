@@ -123,7 +123,7 @@ Their uniqueness is checked and the data are de-duplicated. The result table loo
 
 The order of rows in the imported file is not important and is not kept. That means that from each of
 the duplicate rows a randomly selected one is kept and all others are discarded.
-In our example, the rows `John,$150`, `John,$340` and `Darla,$60000` were discarded.
+In our example, the rows `John,$150`, `John,$340` and `Darla,$600000` were discarded.
 
 With a primary key defined on **multiple columns**, the combination of their values is unique.
 Let's say you have a table with three columns: `name`, `age` and `money`.  The primary key is defined
@@ -187,9 +187,9 @@ The above applies only when **incremental load** is used.
 When an incremental load is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
-#### Difference between tables with [native datatypes](/storage/tables/data-types/#native-datatypes) and string tables
+#### Difference between tables with [native datatypes](/storage/tables/data-types/) and string tables
 
-There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes eanbled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
+There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes enabled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
 
 **Example:**
 
@@ -249,7 +249,7 @@ Here we can see a **significant change in the incremental load**. The `_timestam
 | existing row, no new values =>  |7|Edith|ED-BT-13| 9471           |1996-12-18|
 | new row =>                      |8|Kate|CD-CZ-01| 5282           |2008-06-07|
 | new row =>                      |9|Josh|BA-AB-11| 6624           |2004-10-04|
-| new row =>                      |10|Arthur|EE-FF-66| 596	2021-04-06 |
+| new row =>                      |10|Arthur|EE-FF-66| 596           |2021-04-06 |
 
 - Result of incremental import A3
 

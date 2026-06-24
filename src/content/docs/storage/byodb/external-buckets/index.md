@@ -7,7 +7,7 @@ slug: 'storage/byodb/external-buckets'
 
 If you operate Keboola in Bring-Your-Own-Database (BYODB) mode using your own data warehouse, the data in the warehouse won't automatically be visible or accessible within Keboola. To address this, we offer the **External Datasets** feature.
 
-The implementation of **External Datasets requires the [BYODB](https://help.keboola.com/storage/byodb/) to be enabled first**.
+The implementation of **External Datasets requires the [BYODB](/storage/byodb/) to be enabled first**.
 Unless specified otherwise, this description refers to the implementation of Snowflake and BigQuery.
 
 ## What Is an External Dataset?
@@ -37,14 +37,14 @@ grant Keboola correct access to the schema in your Snowflake. Once access has be
 
 ### BigQuery
 Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**. Keboola will generate a code that you can use to grant Keboola 
-correct access to the dataset in BigQuery. Once access has been grated, click **Register Dataset** to start using it.
+correct access to the dataset in BigQuery. Once access has been granted, click **Register Dataset** to start using it.
 
 :::note
 **Note:** By adding the Keboola service account as a subscriber, you enable read-only access to the data.
 :::
 
 ### BigLake Tables
-Keboola generaly does not support external tables, except for [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). 
+Keboola generally does not support external tables, except for [BigLake tables](https://cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake). 
 Please ensure that any table you are using is of this type. External tables of other types will not work in transformations and workspaces due to permission issues.
 
 Please ensure that you can perform a `SELECT * FROM <table> LIMIT 1` query on your created BigLake table. Keboola checks this during the registration process. 
@@ -109,7 +109,7 @@ WHERE `source` = "mql";
 :::
 
 ## Sharing an External Dataset
-It is possible to share an external dataset using the same process as [any other Storage bucket](https://help.keboola.com/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
+It is possible to share an external dataset using the same process as [any other Storage bucket](/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
 
 ### Snowflake
 Sharing a Snowflake external dataset works out of the box — no additional configuration is required beyond the standard bucket sharing flow.
@@ -132,7 +132,7 @@ The scope of this custom role depends on where your external datasets live:
 Grant the built-in `roles/analyticshub.listingAdmin` role to the Keboola service account on your listing. This role includes the required permissions, but also covers additional capabilities (such as updating or deleting the listing) that Keboola does not use.
 
 :::note
-**Note:** Sharing permissions can be granted at any time after initial registration, but the registration process navigates you to provide such permissions to enable sharing. If not provided during the reigstration (e.g. for the previously registered datasets) Keboola detects the change on the next refresh and enables sharing from that point on. Revoking the permission will prevent new shares; projects that are already linked remain unaffected.
+**Note:** Sharing permissions can be granted at any time after initial registration, but the registration process navigates you to provide such permissions to enable sharing. If not provided during the registration (e.g. for the previously registered datasets) Keboola detects the change on the next refresh and enables sharing from that point on. Revoking the permission will prevent new shares; projects that are already linked remain unaffected.
 :::
 
 :::note
@@ -160,7 +160,7 @@ If you wish to remove the schema, you must do so manually in your warehouse.
 * Table names can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
 * Table names are not case-sensitive. You cannot create two tables with the same name that differ only in letter case.
 * [Creating snapshots](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/snapshots) from tables in external buckets is not supported.
-* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addressess this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables and views as illustrated below: <br>
+* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addresses this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables and views as illustrated below: <br>
 ```
 GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
 GRANT SELECT ON FUTURE VIEWS IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
