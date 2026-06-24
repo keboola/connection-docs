@@ -1,6 +1,14 @@
 ---
 title: Input and Output Mapping
 slug: 'transformations/mappings'
+description: How input and output mapping move data between Keboola Storage and a transformation's staging area — table and file mapping, loading types, and read-only input mapping.
+keywords:
+  - input mapping
+  - output mapping
+  - transformation staging
+  - read-only input mapping
+  - Snowflake loading type
+type: reference
 ---
 
 *To configure input and output mappings in the process of creating a transformation, 

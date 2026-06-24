@@ -1,6 +1,12 @@
 ---
 title: Array Splitting
 slug: 'transformations/r-plain/array-splitter'
+description: Worked example of splitting an array column into multiple rows in an R transformation in Keboola.
+keywords:
+  - R array splitting
+  - split array column R
+  - R transformation example
+type: how-to
 redirect_from:
     - /manipulation/transformations/r/array-splitter/
     - /transformations/r/array-splitter/

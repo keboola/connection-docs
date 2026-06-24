@@ -1,6 +1,13 @@
 ---
 title: Code Patterns
 slug: 'transformations/code-patterns'
+description: Code Patterns are components that generate transformation code from parameters in Keboola — how to create a transformation with a code pattern and fill in its parameters form.
+keywords:
+  - code patterns
+  - generate transformation code
+  - code pattern parameters
+  - predefined code pattern
+type: how-to
 ---
 
 

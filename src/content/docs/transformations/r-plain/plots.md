@@ -1,6 +1,13 @@
 ---
 title: Plots & Graphs
 slug: 'transformations/r-plain/plots'
+description: Worked example of generating charts and graphs in an R transformation in Keboola and saving them as image files.
+keywords:
+  - R plots
+  - R charts graphs
+  - R transformation plot
+  - R transformation example
+type: how-to
 redirect_from:
     - /manipulation/transformations/r/plots/
     - /transformations/r/plots/
