@@ -1,6 +1,14 @@
 ---
 title: Input and Output Mapping
 slug: 'transformations/mappings'
+description: How input and output mapping move data between Keboola Storage and a transformation's staging area — table and file mapping, loading types, and read-only input mapping.
+keywords:
+  - input mapping
+  - output mapping
+  - transformation staging
+  - read-only input mapping
+  - Snowflake loading type
+type: reference
 ---
 
 *To configure input and output mappings in the process of creating a transformation, 
@@ -154,7 +162,7 @@ This function is automatically enabled in transformations.
 
 ##### Read-only input mapping
 
-*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+*Note: You must be using [transformations](/transformations/) to see this feature.*
 
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
 Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.

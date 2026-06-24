@@ -1,6 +1,13 @@
 ---
-title: Troubleshooting
+title: dbt transformation troubleshooting
 slug: 'transformations/dbt/troubleshooting'
+description: Troubleshoot dbt transformations in Keboola — diagnose and fix remote-workspace connection and authentication failures.
+keywords:
+  - dbt troubleshooting
+  - dbt connection failure
+  - dbt authentication error
+  - dbt profiles.yml
+type: how-to
 ---
 
 ## Remote workspaces

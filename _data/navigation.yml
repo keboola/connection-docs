@@ -587,6 +587,11 @@ items:
         
       - url: /transformations/variables/
         title: Variables & Shared Code
+        items:
+          - url: /transformations/variables/how-to/
+            title: How do I use variables and shared code?
+          - url: /transformations/variables/explanation/
+            title: What they are
 
       - url: /transformations/dbt/
         title: dbt Transformation
@@ -608,10 +613,19 @@ items:
 
       - url: /transformations/python-plain/
         title: Python Transformations
+        items:
+          - url: /transformations/python-plain/how-to/
+            title: How do I run a Python transformation?
+          - url: /transformations/python-plain/reference/
+            title: Reference
 
       - url: /transformations/r-plain/
         title: R Transformations
         items:
+          - url: /transformations/r-plain/how-to/
+            title: How do I run an R transformation?
+          - url: /transformations/r-plain/reference/
+            title: Reference
           - url: /transformations/r-plain/array-splitter/
             title: Array Splitting
 
@@ -633,9 +647,23 @@ items:
 
       - url: /transformations/bigquery/
         title: BigQuery Transformations
+        items:
+          - url: /transformations/bigquery/how-to/
+            title: How do I run a BigQuery transformation?
+          - url: /transformations/bigquery/reference/
+            title: Reference
 
       - url: /transformations/duckdb/
         title: DuckDB Transformations
+        items:
+          - url: /transformations/duckdb/how-to/
+            title: How do I run a DuckDB transformation?
+          - url: /transformations/duckdb/reference/
+            title: Reference
+          - url: /transformations/duckdb/explanation/
+            title: When to use it
+          - url: /transformations/duckdb/snowflake-migration/
+            title: Snowflake to DuckDB Migration
 
       - url: /transformations/oracle/
         title: Oracle Transformations
