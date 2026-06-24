@@ -623,6 +623,13 @@ items:
 
       - url: /transformations/snowflake-plain/
         title: Snowflake Transformations
+        items:
+          - url: /transformations/snowflake-plain/how-to/
+            title: How do I run a Snowflake transformation?
+          - url: /transformations/snowflake-plain/reference/
+            title: Reference
+          - url: /transformations/snowflake-plain/explanation/
+            title: When to use it
 
       - url: /transformations/bigquery/
         title: BigQuery Transformations
