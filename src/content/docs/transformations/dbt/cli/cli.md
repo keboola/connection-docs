@@ -57,20 +57,63 @@ The user is in the folder with the cloned dbt project and can run the following 
 4.  They are outputted to stdout.
 
 
-Store credentials to your zsh env profile (or your respective environment):
+#### Example output
+
+`kbc dbt init` prints environment variables to stdout and generates the dbt files shown below. **All values here are placeholders** — use the exact values from your own `kbc dbt init` output, and never commit secrets (storage token, password) to the repository.
+
+Environment variables (printed to stdout — store them in your shell profile, e.g. `~/.zshrc`):
+
+```shell
+export KBC_STORAGE_API_TOKEN=<your_storage_api_token>   # secret — do not commit
+export DBT_KBC_TARGET1_TYPE=snowflake
+export DBT_KBC_TARGET1_ACCOUNT=<account>
+export DBT_KBC_TARGET1_DATABASE=<database>
+export DBT_KBC_TARGET1_WAREHOUSE=<warehouse>
+export DBT_KBC_TARGET1_SCHEMA=<schema>
+export DBT_KBC_TARGET1_USER=<user>
+export DBT_KBC_TARGET1_PASSWORD=<password>              # secret — do not commit
+export DBT_KBC_TARGET1_THREADS=4
+```
+
+Generated `profiles.yml`:
+
+```yaml
+default:
+  outputs:
+    target1:
+      type: "{{ env_var('DBT_KBC_TARGET1_TYPE') }}"
+      account: "{{ env_var('DBT_KBC_TARGET1_ACCOUNT') }}"
+      database: "{{ env_var('DBT_KBC_TARGET1_DATABASE') }}"
+      warehouse: "{{ env_var('DBT_KBC_TARGET1_WAREHOUSE') }}"
+      schema: "{{ env_var('DBT_KBC_TARGET1_SCHEMA') }}"
+      user: "{{ env_var('DBT_KBC_TARGET1_USER') }}"
+      password: "{{ env_var('DBT_KBC_TARGET1_PASSWORD') }}"
+      threads: "{{ env_var('DBT_KBC_TARGET1_THREADS') | as_number }}"
+  target: target1
+```
+
+Generated source file — one per Storage bucket (for example `models/_sources/in.c-test.yml`). `_timestamp` is added automatically, alongside the primary keys and their `unique` and `not_null` tests:
+
+```yaml
+version: 2
+
+sources:
+  - name: in.c-test
+    schema: in.c-test
+    tables:
+      - name: <table_name>
+        columns:
+          - name: <primary_key_column>
+            tests:
+              - unique
+              - not_null
+          - name: _timestamp        # filled automatically by Keboola
+```
+
+Store credentials to your shell env profile (or your respective environment):
 ---------------------------------------------------------------------------
 
-The file is located (Unix) in `~/.zshrc`. Add the environment variables that `kbc dbt init` printed to stdout.
-
-Then you can run dbt locally against the project storage, safely develop and test your code.
-
-As part of the init command, CLI will create all sources from storage buckets. A storage bucket becomes a dbt source file containing its tables.
-
-<!-- TODO(human-review: add generated source-file example) The original screenshot
-     showed a generated dbt source file for a bucket; its exact contents can't be
-     reconstructed from the page text. Add a short fenced YAML example. -->
-
-*Note: Please note that `_timestamp` is automatically filled, alongside `primary keys` and corresponding `tests` for primary keys (`unique` and `not_null` tests).*
+On Unix, add the `export` lines above to `~/.zshrc` (or your shell profile). Then you can run dbt locally against the project storage, safely develop and test your code.
 
 ### Run Test Debug
 

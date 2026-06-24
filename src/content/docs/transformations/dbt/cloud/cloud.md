@@ -26,6 +26,11 @@ The component configuration is pretty straightforward. You must authorize the co
 
 The component generates a status table called `dbt_cloud_trigger` storing the job trigger API response.
 
+<!-- TODO(human-review: dbt_cloud_trigger status-table columns) The dropped
+     screenshot showed this generated table; its column schema can't be
+     reconstructed from the page. Document the columns here. -->
+
+
 When **Wait for result** is selected, the component polls the status until the job ends. The component has a default wait time limit that can be optionally set to a different time. When the option **Wait for result** is used, the component extracts artifacts, stores them in the file storage, and additionally, produces a job result API call table. Both tables can be found in Storage, or accessed directly from the job result.
 
 Artifacts can be found in Storage → **Files**, searched by tag (component type or configuration ID):
