@@ -48,9 +48,13 @@ against the actual image (12 kept):
   freshness, output mapping, run panel, Discover timeline.
 - `dbt/cloud/cloud.md` (2): dbt Cloud Trigger config, dbt Cloud API source connector config.
 
-Plus `dbt/cli/cli.md`: `TODO(human-review: add generated source-file example)` —
-the dropped "generated source file" screenshot should be replaced with a short
-fenced YAML example (its exact contents weren't reconstructable from the page).
+`dbt/cli/cli.md`: the `kbc dbt init` outputs (env vars, `profiles.yml`, generated
+`models/_sources/*.yml`) are now transcribed to fenced blocks with masked
+placeholders.
+
+`code-patterns/index.md`: `TODO(human-review: transcribe generated-code screenshot)` —
+the "Generated Code" screenshot shows code (should be a fenced block); content is
+code-pattern-specific and wasn't viewable here, so add a representative example.
 
 ## D. Content correctness
 
