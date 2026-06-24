@@ -1,6 +1,8 @@
 ---
 title: Looker
 slug: 'components/writers/bi-tools/looker'
+redirect_from:
+    - /writers/bi-tools/looker/
 ---
 
 
