@@ -1,6 +1,13 @@
 ---
 title: Transformations
 slug: 'transformations'
+description: Manipulate data in your Keboola project with SQL, Python, or R transformations — how they work, the available backends, and their features.
+keywords:
+  - transformations
+  - Keboola transformation
+  - SQL Python R transformation
+  - transformation backends
+type: explanation
 redirect_from:
     - /manipulation/transformations/
 ---
@@ -171,12 +178,12 @@ Python and R transformations.
     <td>JupyterLab</td>
 </tr>
 
+<!-- TODO(human-review): the first "Other features" sub-row was malformed (no
+     feature name, an extra cell, and rowspan 9 vs 8 real features). It was
+     removed and the rowspan corrected to 8. If it represented a real feature,
+     re-add it with the correct name/value. -->
 <tr>
-    <th rowspan='9'>Other features</th>
-    <td>✓</td>
-    <td>Not available</td>
-</tr>
-<tr>
+    <th rowspan='8'>Other features</th>
     <th>Versioning</th> 
     <td>✓</td>
 </tr>
