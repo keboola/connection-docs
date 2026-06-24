@@ -633,9 +633,23 @@ items:
 
       - url: /transformations/bigquery/
         title: BigQuery Transformations
+        items:
+          - url: /transformations/bigquery/how-to/
+            title: How do I run a BigQuery transformation?
+          - url: /transformations/bigquery/reference/
+            title: Reference
 
       - url: /transformations/duckdb/
         title: DuckDB Transformations
+        items:
+          - url: /transformations/duckdb/how-to/
+            title: How do I run a DuckDB transformation?
+          - url: /transformations/duckdb/reference/
+            title: Reference
+          - url: /transformations/duckdb/explanation/
+            title: When to use it
+          - url: /transformations/duckdb/snowflake-migration/
+            title: Snowflake to DuckDB Migration
 
       - url: /transformations/oracle/
         title: Oracle Transformations

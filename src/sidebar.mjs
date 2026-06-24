@@ -451,8 +451,26 @@ export const sidebar = [
           { slug: "transformations/snowflake-plain/explanation" },
         ],
       },
-      { slug: "transformations/bigquery" },
-      { slug: "transformations/duckdb" },
+      {
+        label: "BigQuery Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/bigquery" },
+          { slug: "transformations/bigquery/how-to" },
+          { slug: "transformations/bigquery/reference" },
+        ],
+      },
+      {
+        label: "DuckDB Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/duckdb" },
+          { slug: "transformations/duckdb/how-to" },
+          { slug: "transformations/duckdb/reference" },
+          { slug: "transformations/duckdb/explanation" },
+          { slug: "transformations/duckdb/snowflake-migration" },
+        ],
+      },
       { slug: "transformations/oracle" },
       { slug: "transformations/code-patterns" },
     ],
