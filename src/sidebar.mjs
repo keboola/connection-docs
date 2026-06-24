@@ -417,7 +417,15 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      {
+        label: "Variables & Shared Code",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/variables" },
+          { slug: "transformations/variables/how-to" },
+          { slug: "transformations/variables/explanation" },
+        ],
+      },
       {
         label: "dbt Transformation",
         collapsed: true,
@@ -430,12 +438,22 @@ export const sidebar = [
           { slug: "transformations/dbt/troubleshooting" },
         ],
       },
-      { slug: "transformations/python-plain" },
+      {
+        label: "Python Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/python-plain" },
+          { slug: "transformations/python-plain/how-to" },
+          { slug: "transformations/python-plain/reference" },
+        ],
+      },
       {
         label: "R Transformations",
         collapsed: true,
         items: [
           { label: "Overview", slug: "transformations/r-plain" },
+          { slug: "transformations/r-plain/how-to" },
+          { slug: "transformations/r-plain/reference" },
           { slug: "transformations/r-plain/array-splitter" },
           { slug: "transformations/r-plain/plots" },
           { slug: "transformations/r-plain/binary" },

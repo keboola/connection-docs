@@ -587,6 +587,11 @@ items:
         
       - url: /transformations/variables/
         title: Variables & Shared Code
+        items:
+          - url: /transformations/variables/how-to/
+            title: How do I use variables and shared code?
+          - url: /transformations/variables/explanation/
+            title: What they are
 
       - url: /transformations/dbt/
         title: dbt Transformation
@@ -608,10 +613,19 @@ items:
 
       - url: /transformations/python-plain/
         title: Python Transformations
+        items:
+          - url: /transformations/python-plain/how-to/
+            title: How do I run a Python transformation?
+          - url: /transformations/python-plain/reference/
+            title: Reference
 
       - url: /transformations/r-plain/
         title: R Transformations
         items:
+          - url: /transformations/r-plain/how-to/
+            title: How do I run an R transformation?
+          - url: /transformations/r-plain/reference/
+            title: Reference
           - url: /transformations/r-plain/array-splitter/
             title: Array Splitting
 
