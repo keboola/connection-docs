@@ -1,6 +1,13 @@
 ---
 title: dbt Transformation
 slug: 'transformations/dbt'
+description: Run dbt projects in Keboola as versioned, schedulable components in your data pipeline — configure them in the UI, develop locally with the CLI, or trigger dbt Cloud.
+keywords:
+  - dbt transformation
+  - dbt Keboola
+  - dbt component
+  - dbt data pipeline
+type: explanation
 ---
 
 

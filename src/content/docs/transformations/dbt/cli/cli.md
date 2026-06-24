@@ -1,6 +1,14 @@
 ---
 title: dbt CLI
 slug: 'transformations/dbt/cli'
+description: Set up local dbt development with the Keboola CLI — install it, run kbc dbt init, store credentials, and run dbt debug and dbt run against your project Storage.
+keywords:
+  - dbt CLI
+  - Keboola CLI dbt
+  - kbc dbt init
+  - local dbt development
+  - dbt debug run
+type: how-to
 ---
 
 Video:
@@ -24,8 +32,6 @@ If you already have CLI, make sure you have the most updated version:
 brew upgrade keboola-cli
 kbc --version
 ```
-
-![](imgs/2772467715.png){: width="100%" }
 
 **You will then gain access to dbt-related commands within Keboola CLI!**
 
@@ -51,22 +57,18 @@ The user is in the folder with the cloned dbt project and can run the following 
 4.  They are outputted to stdout.
 
 
-### Example
-
-![](imgs/2770010115.jpg){: width="100%" }
-
 Store credentials to your zsh env profile (or your respective environment):
 ---------------------------------------------------------------------------
 
-The file is located (Unix) in `~/.zshrc`
-
-![](imgs/2770206732.png){: width="100%" }
+The file is located (Unix) in `~/.zshrc`. Add the environment variables that `kbc dbt init` printed to stdout.
 
 Then you can run dbt locally against the project storage, safely develop and test your code.
 
-As part of the init command, CLI will create all sources from storage buckets. A storage bucket is a source file containing tables:
+As part of the init command, CLI will create all sources from storage buckets. A storage bucket becomes a dbt source file containing its tables.
 
-![](imgs/2777448699.png){: width="100%" }
+<!-- TODO(human-review: add generated source-file example) The original screenshot
+     showed a generated dbt source file for a bucket; its exact contents can't be
+     reconstructed from the page text. Add a short fenced YAML example. -->
 
 *Note: Please note that `_timestamp` is automatically filled, alongside `primary keys` and corresponding `tests` for primary keys (`unique` and `not_null` tests).*
 
@@ -84,29 +86,18 @@ dbt debug -t beer_demo --profiles-dir .
 *   We are using local profiles; they are using environmental variables stored before.
 
 
-![](imgs/2769649699.png){: width="100%" }
-
-You should see green in all steps:
-
-![](imgs/2770239505.png){: width="100%" }
+All checks should pass (shown in green).
 
 dbt Run
 -------
 
-For the script alteration, the only check/change you have to make with off-the-shelf scripts is to alter source definitions to match sources:
-
-![](imgs/2769879073.png){: width="100%" }
-
-
-![](imgs/2770042889.png){: width="100%" }
+For the script alteration, the only check/change you have to make with off-the-shelf scripts is to alter source definitions to match sources.
 
 To execute the dbt:
 
 ```java
 dbt run -t beer_demo  --profiles-dir .
 ```
-
-![](imgs/2769879081.png){: width="100%" }
 
 ### Other Commands for Future Use
 
@@ -121,10 +112,7 @@ dbt run -t beer_demo  --profiles-dir .
 
     *   If there is an existing profile with the same name, it will be overwritten. Otherwise, the new profile will be just appended to the others if there are any.
 
-*   **Example** (non-interactive mode):
-
-
-![](imgs/2770010121.jpg){: width="100%" }
+*   Can be run in non-interactive mode.
 
 `kbc dbt generate sources`
 --------------------------
@@ -133,9 +121,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   Lists all tables in the default branch from the Storage API and generates source files to `models/_sources`. Tables from each bucket are stored in a separate file.
 
-*   **Example** (non-interactive mode)
-
-    ![](imgs/2770010127.jpg){: width="100%" }
+*   Can be run in non-interactive mode.
 
 `kbc dbt generate env`
 ----------------------
@@ -144,9 +130,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   Asks for an existing workspace (select box or id flag).
 
-*   **Example**
-
-    ![](imgs/2770010133.jpg ){: width="100%" }
+*   Can be run in non-interactive mode.
 
 ### Workspaces Support
 
@@ -159,6 +143,4 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   Supports parameter `name`, `type`, and `size` (for `python` and `r`).
 
-*   **Example** (non-interactive mode)
-
-    ![](imgs/2770010139.jpg){: width="100%" }
+*   Can be run in non-interactive mode.
