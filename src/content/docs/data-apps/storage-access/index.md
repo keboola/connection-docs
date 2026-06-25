@@ -324,22 +324,24 @@ Storage Access works on BigQuery projects as well as Snowflake ones. The setup s
 
 If your project runs on BigQuery, apply the two rules below to every query. The Query Service passes SQL through to the backend unchanged — it does **not** translate dialects — so your application is responsible for emitting the correct syntax for the project's backend.
 
-### Quote identifiers with backticks, per segment
+### Quote identifiers with backticks
 
-BigQuery quotes identifiers with backticks (`` ` ``) instead of Snowflake's double quotes, and **each segment must be quoted separately**. Do not wrap the whole `dataset.table` reference in a single pair of backticks — BigQuery interprets a dotted name inside one pair of backticks as `project.dataset.table` and tries to resolve the first segment as a Google Cloud project (you'll see an error such as `The project <stage> has not enabled BigQuery`).
+BigQuery quotes identifiers with backticks (`` ` ``) instead of Snowflake's double quotes. A table reference is **two parts** — `dataset.table` — and you may write it either as `` `dataset`.`table` `` or as `` `dataset.table` `` (both are valid; you do not have to quote each segment separately). The trap is **adding a third leading segment**: do not prepend the Keboola stage (`in`/`out`) or a Snowflake-style "database", and do not split the dotted bucket ID into separate backticked parts. BigQuery interprets a three-part name as `project.dataset.table` and tries to resolve the first segment as a Google Cloud project (you'll see an error such as `The project <stage> has not enabled BigQuery`).
 
 ```sql
--- ✅ Correct — each segment quoted on its own
-SELECT * FROM `my_dataset`.`customers` LIMIT 1000
+-- ✅ Correct — dataset.table (two parts); either quoting style works
+SELECT * FROM `in_c_main`.`customers` LIMIT 1000
+SELECT * FROM `in_c_main.customers`  LIMIT 1000
 
--- ❌ Wrong — BigQuery reads `my_dataset` as a project ID
-SELECT * FROM `my_dataset.customers` LIMIT 1000
+-- ❌ Wrong — the Keboola stage `in` becomes a third (project) segment
+SELECT * FROM `in`.`c-main`.`customers` LIMIT 1000
+SELECT * FROM `in.c-main.customers`     LIMIT 1000
 ```
 
 | Backend | Identifier quoting | Example |
 | --- | --- | --- |
 | Snowflake | Double quotes | `"in.c-main"."customers"` |
-| BigQuery | Backticks, per segment | `` `in_c_main`.`customers` `` |
+| BigQuery | Backticks, `dataset.table` (no stage prefix) | `` `in_c_main`.`customers` `` |
 
 ### Reference the dataset by its mangled bucket name
 
@@ -644,6 +646,6 @@ logging.info(f"User {current_user} updated record {record_id} to status {new_sta
 
 ## Limitations
 
-- **SQL dialect differs by backend**: On BigQuery you must quote identifiers with backticks per segment and reference datasets by their mangled bucket name — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend). The Query Service does not translate dialects.
+- **SQL dialect differs by backend**: On BigQuery you must quote identifiers with backticks and reference datasets by their mangled bucket name (with no stage prefix) — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend). The Query Service does not translate dialects.
 - **Column-level permissions not supported**: If you grant access to a table, the app can read/write all columns.
 - **Permission changes require app restart**: If you add or remove tables from the Storage Access configuration, the changes take effect on the next app start (deploy, redeploy, or wake from sleep).
