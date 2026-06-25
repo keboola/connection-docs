@@ -13,6 +13,10 @@ export const collections = {
         icon: z.string().optional(),
         section: z.string().optional(),
         beacon: z.boolean().optional(),
+        // Docs revamp (Diátaxis) — every revamped page declares the single
+        // reader need it serves, plus user-vocabulary keywords for search/RAG.
+        keywords: z.array(z.string()).optional(),
+        type: z.enum(['how-to', 'reference', 'explanation']).optional(),
       }),
     }),
   }),

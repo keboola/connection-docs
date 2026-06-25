@@ -441,7 +441,16 @@ export const sidebar = [
           { slug: "transformations/r-plain/binary" },
         ],
       },
-      { slug: "transformations/snowflake-plain" },
+      {
+        label: "Snowflake Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/snowflake-plain" },
+          { slug: "transformations/snowflake-plain/how-to" },
+          { slug: "transformations/snowflake-plain/reference" },
+          { slug: "transformations/snowflake-plain/explanation" },
+        ],
+      },
       { slug: "transformations/bigquery" },
       { slug: "transformations/duckdb" },
       { slug: "transformations/oracle" },
