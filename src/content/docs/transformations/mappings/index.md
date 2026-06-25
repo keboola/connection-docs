@@ -153,7 +153,7 @@ feature in your project's **Settings → Features**. New input loads will then d
 faster, more consistent loading, with the automatic `VIEW`/`COPY` fallbacks described above. You can always override the
 strategy per table with the **Load type** option above.
 
-Keboola is gradually disabling this feature across all BigQuery projects, with the rollout completing by **July 30, 2026**.
+Keboola is gradually disabling this feature across all BigQuery projects, with the rollout completing by **July 15, 2026**.
 After that, `CLONE` becomes the default load type on BigQuery for everyone.
 :::
 
