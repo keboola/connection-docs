@@ -171,7 +171,7 @@ CREATE OR REPLACE TABLE "result" AS
 	SELECT *, "second" * 42 AS "larger_second" FROM "source";
 ```
 
-Because of [Clone mapping](/transformations/mappings/#snowflake-loading-type), you have 
+Because of [Clone mapping](/transformations/mappings/#loading-type-snowflake-and-bigquery), you have 
 to drop the `_timestamp` column from the source by executing this query:
 
 ```sql
