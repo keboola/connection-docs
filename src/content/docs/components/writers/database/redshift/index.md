@@ -103,7 +103,7 @@ The database can be queried in real time but is still completely isolated from y
 
 ### Connect to Looker
 It is possible to use the Redshift connector to share data with [Looker](https://looker.com/).
-To share data between your Keboola project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
+To share data between your Keboola project and Looker, choose **Keboola Redshift Database** when configuring the credentials.
 The connector will create a dedicated database for you and give you credentials. Run the connector and when it is finished, you can
 connect the Looker data sources. Follow the official
 [instructions](https://docs.looker.com/setup-and-management/connecting-to-db). Note that you
@@ -119,7 +119,7 @@ connect the Power BI data sources. Follow the official [instructions for Power B
 ### Connect to Qlik
 It is possible to use the Redshift connector to share data with [Qlik Sense](https://www.qlik.com/us/products/qlik-sense)
 and [QlikView](https://www.qlik.com/us/products/qlikview).
-To share data between your Keboola project and PowerBI, choose **Keboola Redshift Database** when configuring the credentials.
+To share data between your Keboola project and Qlik, choose **Keboola Redshift Database** when configuring the credentials.
 The connector will create a dedicated database for you and give you credentials. Run the connector and when it is finished, you can
 connect the Qlik data sources. Follow the Qlik official [integration guide](https://help.qlik.com/en-US/connectors/Subsystems/ODBC_connector_help/Content/Connectors_ODBC/Redshift/Create-Redshift-connection.htm).
 

@@ -24,7 +24,7 @@ Snowflake is a cloud database and, as such, brings continuous updates and behavi
 interested in those changes, please follow the official [Snowflake release notes](https://docs.snowflake.com/en/release-notes/overview).
 
 When loading data to a Snowflake transformation, beware that there are two different
-methods: [copy and clone](/transformations/mappings/#snowflake-loading-type).
+methods: [copy and clone](/transformations/mappings/#loading-type-snowflake-and-bigquery).
 
 ## Aborting Transformation Execution
 In some cases, you may need to abort the transformation execution and exit with an error message. 
@@ -53,7 +53,7 @@ of the variable as a user error, `Transformation aborted: Integrity check failed
 
 ## Dynamic Backends
 If you have a large amount of data in databases and complex queries, your transformation might run for a couple of hours.
-To speed it up, you can change the backend size in the configuration. Snowflake transformations suport the following sizes:
+To speed it up, you can change the backend size in the configuration. Snowflake transformations support the following sizes:
 - XSmall
 - Small _(default)_
 - Medium
