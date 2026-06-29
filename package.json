@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "gen:sidebar": "node scripts/convert-nav.mjs"
+    "gen:sidebar": "node scripts/convert-nav.mjs",
+    "new:page": "node scripts/new-page.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.38",
