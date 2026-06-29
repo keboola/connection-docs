@@ -22,7 +22,6 @@ Each project includes the following key components:
 2. **Components**
    - Data sources and destinations for loading data into Keboola Storage and exporting to databases, services, or applications
    - Applications for specialized tasks (data quality checks, NLP, etc.)
-   - Data templates for easy pipeline setup
 3. **Transformations** allow you to manipulate data for further use and consumption (SQL, Python, and R).
 4. **Flows** bring everything together as sets of tasks organized in workflows with assigned execution schedules.
 5. **Governance layer** covers metadata, telemetry, identity management, access control, etc. 
