@@ -27,7 +27,7 @@ All options may be modified later. Click **Next** to select whether to create a 
 In the last step, you can select to which worksheet the data should be written and whether to append or overwrite
 worksheet rows. When worksheet rows are appended, the table header is written only when the worksheet is empty.
 
-![Screenshot - Add Table Step 3](/components/writers/storage/google-sheets/google-sheets-2.png)
+![Screenshot - Add Table Step 3](/components/writers/storage/google-sheets/google-sheets-3.png)
 
 When done, click the **Save Sheet** button to finish the table configuration. 
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
