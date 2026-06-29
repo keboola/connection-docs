@@ -9,10 +9,10 @@ redirect_from:
 
 This data source connector uses the [Instagram Graph API](https://developers.facebook.com/docs/instagram-api) (built on the 
 [Facebook Graph API](https://developers.facebook.com/docs/graph-api)) to extract media objects, comments, insights 
-and metrics from Instagram Business Accounts. 
+and metrics from [Instagram Business Accounts](https://business.instagram.com/getting-started). 
 
 In order to access a business account's data, users have to authorize a Facebook account and choose a Facebook page 
-that is connected to an Instagram Business Account. The rest of 
+that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
 the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) connector.
 
 ## Configuration
