@@ -22,7 +22,7 @@ To run the connector, specify your [customer ID](https://support.google.com/goog
 
 To download a report, specify a [GAQL query](https://developers.google.com/google-ads/api/docs/query/overview),
 through which you can customize the output of a [predefined report type](https://developers.google.com/google-ads/api/docs/reporting/overview). 
-You can use the [Query Builder](https://developers.google.com/google-ads/api/fields/v11/overview_query_builder) to simplify the development of the query.
+You can use the [Query Builder](https://developers.google.com/google-ads/api/fields/v17/overview_query_builder) to simplify the development of the query.
 
 Optionally, you can specify the start (*since*) and end (*until*) dates of downloaded stats. 
 The *Since*/*Until* parameter is parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php) and 
@@ -73,7 +73,7 @@ This table is created by the GAQL query you specified and contains the result of
 
 | campaignId | campaignName | metricsClicks | metricsImpressions |
 |------------|--------------|---------------|--------------------|
-| 12345678   | jumped       | Ad Group #1   | Ad Group #2        |
-| 90123456   | fox          | Ad Group #1   | Ad Group #2        |
-| 78901234   | quick        | Ad Group #1   | Ad Group #2        |
-| 56789012   | brown        | Ad Group #1   | Ad Group #2        |
+| 12345678   | jumped       | 142           | 1893               |
+| 90123456   | fox          | 87            | 1241               |
+| 78901234   | quick        | 231           | 3102               |
+| 56789012   | brown        | 56            | 782                |
