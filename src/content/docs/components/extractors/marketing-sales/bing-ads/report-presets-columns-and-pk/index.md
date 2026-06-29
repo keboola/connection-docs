@@ -1,6 +1,7 @@
 ---
 title: Columns and primary key of report configuration presets
 slug: 'components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk'
+description: Reference of the output columns and primary keys for each Bing Ads report configuration preset in the Bing Ads data source connector.
 redirect_from:
     - /extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
 ---

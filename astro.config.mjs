@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
+import starlightLlmsTxt from 'starlight-llms-txt';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
@@ -26,7 +27,35 @@ export default defineConfig({
         dark: './src/assets/logo-dark.png',
         replacesTitle: true,
       },
-      plugins: [starlightImageZoom()],
+      plugins: [
+        starlightImageZoom(),
+        // Generates /llms.txt, /llms-full.txt, /llms-small.txt at build time
+        // (llmstxt.org standard) so external AI agents and our own Ask Kai RAG
+        // get a curated, structured entrypoint to the docs.
+        starlightLlmsTxt({
+          projectName: 'Keboola Documentation',
+          description:
+            'Keboola is a data platform as a service. The documentation covers ' +
+            'Storage (tables, buckets, files), Transformations (SQL, Python, R, ' +
+            'dbt), Components (data source and destination connectors), Flows ' +
+            '(orchestration), and platform administration.',
+          // Float the section indexes and the Diátaxis Transformations pilot to
+          // the top of the generated output.
+          promote: ['index*', 'transformations/**'],
+          // Trim the small variant of the noisiest deep-reference pages.
+          exclude: ['404', '**/report-presets-columns-and-pk/**'],
+          // Let agents pull a single product domain at a time.
+          customSets: [
+            {
+              label: 'Transformations',
+              paths: ['transformations/**'],
+              description:
+                'SQL, Python, R, and dbt transformations — how-to guides, ' +
+                'reference, and concepts (Diátaxis-structured).',
+            },
+          ],
+        }),
+      ],
       customCss: ['./src/styles/custom.css'],
       head: [
         // GTM head script — only fires on help.keboola.com (not localhost/preview)

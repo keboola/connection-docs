@@ -1,6 +1,7 @@
 ---
 title: Snowflake Transformation
 slug: 'transformations/snowflake-plain'
+description: 'Run SQL transformations on Keboola''s Snowflake backend: its advantages, query and syntax limits, and how it differs from other backends.'
 redirect_from:
   - /transformations/snowflake/
 ---
