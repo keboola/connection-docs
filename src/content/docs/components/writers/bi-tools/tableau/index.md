@@ -36,13 +36,13 @@ then configure only the differing columns.
 
 For each column you may select one of the data types supported by
 TDE (`string`, `boolean`, `number`, `decimal`, `date`, `datetime`) or `IGNORE`, which means that the column will not
-be part od the TDE file. When configuring the data types, use the *Preview* icon to peek at the data. For `date` and
+be part of the TDE file. When configuring the data types, use the *Preview* icon to peek at the data. For `date` and
 `datetime` columns, you also have to specify the format in which dates are present in the table.
 
 ![Screenshot - Table Configuration Columns](/components/writers/bi-tools/tableau/tableau-3.png)
 
 As optional last steps in table configuration, you can configure the name of the TDE file (useful for uploading to Dropbox or Google Drive)
-and *Table data filter*. The table data filter allows you to set a simple file for one column or
+and *Table data filter*. The table data filter allows you to set a simple filter for one column or
 take advantage of [Incremental processing](/storage/tables/#incremental-processing) by writing only
 recently modified data.
 

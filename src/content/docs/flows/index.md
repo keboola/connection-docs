@@ -134,7 +134,30 @@ If a task produces **multiple output tables**, the picker also offers aggregatio
 
 ![Dynamic Value picker showing task result tree with aggregations](/flows/conditional-flows-variables-picker.png)
 
-**JSON equivalent** — the picker generates a `source` definition behind the scenes. The same dynamic variable expressed as a function:
+:::caution
+**Aggregations are not functions.** The Sum / Minimum / Maximum / Average options are not built-in functions — the `function` enum only accepts `COUNT` and `DATE`. The picker implements each aggregation as a [JMESPath](https://jmespath.org/) expression placed in the task `value` field rather than a `function` block. When authoring a flow via the API or as a template, write the aggregation directly in `value`:
+
+- **Sum** → `sum(job.result.output.tables[].importedRowsCount)`
+- **Minimum** → `min(job.result.output.tables[].importedRowsCount)`
+- **Maximum** → `max(job.result.output.tables[].importedRowsCount)`
+- **Average** → `avg(job.result.output.tables[].importedRowsCount)`
+:::
+
+**JSON equivalent** — behind the scenes the aggregation is stored as a `source` definition. For example, `Sum of importedRowsCount` can be expressed as a JMESPath aggregation in the task `value`. Note that the picker tree displays paths rooted at `result.*` (for example `result.output.tables`), while the generated `value` expression is rooted at `job.result.*`:
+
+```json
+{
+  "type": "variable",
+  "name": "total_imported_rows",
+  "source": {
+    "type": "task",
+    "task": "extract-data",
+    "value": "sum(job.result.output.tables[].importedRowsCount)"
+  }
+}
+```
+
+`COUNT` and `DATE` are the only functions exposed via the `function` block (see [Date & Time function](#date--time-function) below); they take their inputs as `operands`. `COUNT` counts the items a JMESPath expression returns — for example, the number of output tables a task produced:
 
 ```json
 {
