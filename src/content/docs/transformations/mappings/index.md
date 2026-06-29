@@ -143,10 +143,18 @@ In the input mapping, tables that will be loaded as a read-only view are marked 
 
 ![Read-only view indicator in the input mapping](/transformations/mappings/read-only-view-indicator.png)
 
-:::note[New default on BigQuery]
-BigQuery input mapping now defaults to `CLONE` (matching Snowflake) for faster, more consistent loading; previously it
-often loaded input tables as views. Tables that can't be cloned --- linked, external, and alias tables --- are loaded as
-a read-only `VIEW`. You can always override the strategy per table with the **Load type** option above.
+:::note[Default load type on BigQuery]
+On BigQuery, the default input-mapping load type is controlled by the **BigQuery Input Mapping – Default Load Type View**
+feature. While this feature is enabled --- the current state in most projects --- input tables default to `VIEW`, just as
+before. That's perfectly fine, and nothing changes for you.
+
+To make `CLONE` the default in your project right now, **disable** the **BigQuery Input Mapping – Default Load Type View**
+feature in your project's **Settings → Features**. New input loads will then default to `CLONE` (matching Snowflake) for
+faster, more consistent loading, with the automatic `VIEW`/`COPY` fallbacks described above. You can always override the
+strategy per table with the **Load type** option above.
+
+Keboola is gradually disabling this feature across all BigQuery projects, with the rollout completing by **July 15, 2026**.
+After that, `CLONE` becomes the default load type on BigQuery for everyone.
 :::
 
 This might present a dilemma when loading huge tables. A logical approach when trying to speed up loading a large table would
