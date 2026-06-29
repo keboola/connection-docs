@@ -70,5 +70,5 @@ Follow these steps to test your new app:
 
 - Go to the app's URL.
 - You should be asked to log in using your Entra ID account.
-- After successfully loging in, you will be redirected to the app.
+- After successfully logging in, you will be redirected to the app.
 - The app should display its content.

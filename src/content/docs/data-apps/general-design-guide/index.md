@@ -13,7 +13,7 @@ and more to streamline your setup. With clear, step-by-step instructions, you'll
 ## Theming
 There are two options for setting theming:
 
-1. **Keboola Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [the documentation](/data-apps/#theming).
+1. **Keboola Apps Interface:** Choose from predefined or custom themes directly in the Keboola interface. See more in [the documentation](/data-apps/streamlit/#theming).
 2. **Configuration File:** Use the settings in the `config.toml` file, located in the `.streamlit` folder.
 
 ![Screenshot - Streamlit Folder](/data-apps/general-design-guide/pic1.png)
@@ -35,7 +35,7 @@ secondaryBackgroundColor="#edf0f5"
 Store the logo PNG image in the `/static/` repository folder (created automatically upon deployment in Keboola).
 
 ```
-LOGO_IMAGE_PATH = os.path.join(os.path.dirname(__file__), 'static/keboola.png"')
+LOGO_IMAGE_PATH = os.path.join(os.path.dirname(__file__), 'static/keboola.png')
 ```
 
 Position the logo on the left and disable the full-screen view for the image.

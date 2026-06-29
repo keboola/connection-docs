@@ -76,5 +76,5 @@ Following these best practices will help you maintain a stable, efficient, and c
 
 - **Keep it clean:** Include only the necessary packages to keep the environment lightweight.
 - **Update regularly:** Periodically update and test dependencies in a development environment before generating a new `requirements.txt` file.
-- **Test locally:** Verify that your app works correctly with the locked package versions in a local environmnet before deploying it in Keboola.
+- **Test locally:** Verify that your app works correctly with the locked package versions in a local environment before deploying it in Keboola.
 - **Match environments:** Use the same Python version in your local setup with Keboola's version (Python 3.10) to prevent version mismatches.  
