@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Kai
+description: Kai is now in Public Beta and available to all users in supported stacks.
 slug: 'kai/getting-started'
 ---
 

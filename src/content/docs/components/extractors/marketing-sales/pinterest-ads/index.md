@@ -1,5 +1,6 @@
 ---
 title: Pinterest Ads
+description: Pinterest is a social media platform and a visual discovery engine that allows users to discover, save, and share creative ideas and inspirations through…
 slug: 'components/extractors/marketing-sales/pinterest-ads'
 ---
 

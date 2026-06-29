@@ -1,5 +1,6 @@
 ---
 title: Array Splitting
+description: Array splitting is what you do if you have a list of values in a single cell delimited by a character (a comma, semi-colon, etc.), and want each of those…
 slug: 'transformations/r-plain/array-splitter'
 redirect_from:
     - /manipulation/transformations/r/array-splitter/

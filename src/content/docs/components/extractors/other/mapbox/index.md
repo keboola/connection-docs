@@ -1,5 +1,6 @@
 ---
 title: Mapbox
+description: "This data source connector enriches input data using outputs from the Mapbox API and currently supports two endpoints: Isochrone and Matrix."
 slug: 'components/extractors/other/mapbox'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Business Intelligence
+description: Data destination connectors export data from Keboola to external systems. The following data destination connectors allow to push data to various business…
 slug: 'components/writers/bi-tools'
 redirect_from:
     - /writers/bi-tools/

@@ -1,5 +1,6 @@
 ---
 title: Git Repository Deployment
+description: This guide explains how to lock package versions in Streamlit applications deployed from a GIT repository in the Keboola platform.
 slug: 'data-apps/lock-streamlit-version/git-deployment'
 redirect_from:
   - /components/data-apps/lock-streamlit-version/git-deployment/

@@ -1,5 +1,6 @@
 ---
 title: "Part 1: Loading Data"
+description: Keboola offers various methods to load data, providing flexibility to suit different project stages.
 slug: 'tutorial/load'
 ---
 

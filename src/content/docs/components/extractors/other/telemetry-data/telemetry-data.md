@@ -1,5 +1,6 @@
 ---
 title: Telemetry Data
+description: "in a single file: data/telemetrytables.yml The Liquid template that renders each table is: includes/telemetry-table.html -->"
 slug: 'components/extractors/other/telemetry-data'
 redirect_from:
     - /extractors/other/telemetry-data/

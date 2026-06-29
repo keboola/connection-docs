@@ -1,5 +1,6 @@
 ---
 title: Kai - AI Assistant
+description: "Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pilot that understands your project's transformations, flows, table schemas, and…"
 slug: 'kai'
 ---
 

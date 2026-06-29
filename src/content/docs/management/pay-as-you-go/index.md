@@ -1,5 +1,6 @@
 ---
 title: Pay As You Go (Free Plan)
+description: You can now start working with Keboola for free. Simply sign up on the website and create a free project.
 slug: 'management/payg-project'
 ---
 

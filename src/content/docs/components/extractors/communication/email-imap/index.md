@@ -1,5 +1,6 @@
 ---
 title: IMAP Email Contents and Attachments
+description: This extractor allows you to automatically retrieve email contents and/or attachments via the IMAP protocol using basic authentication.
 slug: 'components/extractors/communication/email-imap'
 redirect_from:
     - /extractors/communication/email-imap/

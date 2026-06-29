@@ -1,5 +1,6 @@
 ---
 title: Working with Files in Branch
+description: "Now that you have created a branch from configurations in production and tested how tables behave in development branches, let's do the same with files."
 slug: 'tutorial/branches/files-in-branch'
 ---
 

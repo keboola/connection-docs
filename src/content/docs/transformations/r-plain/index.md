@@ -1,5 +1,6 @@
 ---
 title: R Transformation
+description: "R transformations are for advanced statistical computations. Apart from ready-to-use implementations of state-of-the-art algorithms, R's other great assets are…"
 slug: 'transformations/r-plain'
 redirect_from:
   - /transformations/r/

@@ -1,5 +1,6 @@
 ---
 title: Telemetry Dashboards
+description: "Note: Initially, the Keboola platform was referred to as Keboola Connection (KBC)."
 slug: 'management/telemetry/telemetry-dashboards'
 ---
 

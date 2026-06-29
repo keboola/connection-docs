@@ -1,5 +1,6 @@
 ---
 title: Snowflake
+description: This data destination connector sends data to a Snowflake database. It can either write data to an existing Snowflake database, or to a new database it…
 slug: 'components/writers/database/snowflake'
 redirect_from:
     - /writers/database/snowflake/

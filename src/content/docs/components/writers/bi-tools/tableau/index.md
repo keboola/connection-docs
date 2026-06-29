@@ -1,5 +1,6 @@
 ---
 title: Tableau TDE
+description: There is a wide range of options for sending data to the Tableau ecosystem. This data destination connector creates Tableau Data Extract (TDE) files and…
 slug: 'components/writers/bi-tools/tableau'
 redirect_from:
     - /writers/bi-tools/tableau/

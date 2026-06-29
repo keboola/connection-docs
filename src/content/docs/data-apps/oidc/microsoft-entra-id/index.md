@@ -1,5 +1,6 @@
 ---
 title: Microsoft Entra ID
+description: This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola apps, specifically for use on Microsoft Entra ID.
 slug: 'data-apps/authentication/microsoft-entra-id'
 redirect_from:
   - /components/data-apps/oidc/microsoft-entra-id/

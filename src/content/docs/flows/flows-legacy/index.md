@@ -1,5 +1,6 @@
 ---
 title: Legacy Flows
+description: "We're planning an automatic migration from Legacy Flows to Conditional Flows to ensure a smooth transition without requiring manual intervention from users."
 slug: 'flows/flows-legacy'
 redirect_from:
     - /orchestrator/

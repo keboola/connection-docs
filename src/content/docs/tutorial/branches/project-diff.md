@@ -1,5 +1,6 @@
 ---
 title: Project Diff
+description: You have already learned how files and tables behave in branches. Now it is time to complete the branch lifecycle and merge the development branch back to…
 slug: 'tutorial/branches/project-diff'
 ---
 

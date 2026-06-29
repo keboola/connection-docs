@@ -1,5 +1,6 @@
 ---
 title: Communication Data Source Connectors
+description: Data source connectors import data from external sources and integrate it to the Keboola environment.
 slug: 'components/extractors/communication'
 redirect_from:
     - /extractors/communication/

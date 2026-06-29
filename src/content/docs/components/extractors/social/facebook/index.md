@@ -1,5 +1,6 @@
 ---
 title: Facebook Pages
+description: This data source connector uses the Facebook Graph API to extract your Facebook Pages feed (including comments, likes, etc.), as well as Page or Page post…
 slug: 'components/extractors/social/facebook'
 redirect_from:
     - /extractors/social/facebook/

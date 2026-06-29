@@ -1,5 +1,6 @@
 ---
 title: Project Settings
+description: The Project Settings page provides general information about your project. To access it, click your avatar icon at the upper right corner on any page in…
 slug: 'management/project'
 ---
 

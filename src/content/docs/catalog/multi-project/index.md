@@ -1,5 +1,6 @@
 ---
 title: Multi-Project Architecture
+description: Keboola is a very versatile platform and can be used in many different ways. When you deal with a larger number of source and destination systems, or when some…
 slug: 'catalog/multi-project'
 ---
 

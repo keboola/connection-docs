@@ -1,5 +1,6 @@
 ---
 title: Market Vision
+description: This data source connector uses the Market Vision API to extract Market Vision projects and their corresponding Forms, Questions, Categories, and Fieldsets.
 slug: 'components/extractors/marketing-sales/market-vision'
 redirect_from:
     - /extractors/marketing-sales/market-vision/

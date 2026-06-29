@@ -1,5 +1,6 @@
 ---
 title: Google Cloud Platform
+description: This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola apps, specifically for use on Google Cloud…
 slug: 'data-apps/authentication/google-cloud-platform'
 redirect_from:
   - /components/data-apps/oidc/google-cloud-platform/

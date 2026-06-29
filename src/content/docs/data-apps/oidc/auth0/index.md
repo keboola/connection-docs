@@ -1,5 +1,6 @@
 ---
 title: Auth0
+description: This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola apps, specifically for use on Auth0.
 slug: 'data-apps/authentication/auth0'
 redirect_from:
   - /components/data-apps/oidc/auth0/

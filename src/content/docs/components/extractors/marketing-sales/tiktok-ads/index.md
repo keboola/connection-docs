@@ -1,5 +1,6 @@
 ---
 title: TikTok Ads
+description: This data source connector uses the TikTok Marketing Reports API to extract reports on performance of ads.
 slug: 'components/extractors/marketing-sales/tiktok-ads'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Geocoding Augmentation
+description: This data source connector provides detailed data for locations specified by their names, addresses, or coordinates.
 slug: 'components/extractors/other/geocoding-augmentation'
 redirect_from:
     - /extractors/other/geocoding-augmentation/

@@ -1,5 +1,6 @@
 ---
 title: Azure Storage Table
+description: The Azure Storage Table data source connector allows you to fetch data from the - Azure Table storage or the - Azure Cosmos DB Table API.
 slug: 'components/extractors/database/azure-storage-table'
 ---
 

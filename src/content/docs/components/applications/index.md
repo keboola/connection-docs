@@ -1,5 +1,6 @@
 ---
 title: Applications
+description: Applications are without any doubt more powerful than Transformations. They further enrich your data and add value to it in new ways.
 slug: 'components/applications'
 redirect_from:
     - /manipulation/applications/

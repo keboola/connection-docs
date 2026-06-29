@@ -1,5 +1,6 @@
 ---
 title: Kai Settings
+description: "Kai's settings let you personalize how Kai behaves in your project. Open the Kai chat panel and click the Settings icon (gear) to access them."
 slug: 'kai/settings'
 ---
 

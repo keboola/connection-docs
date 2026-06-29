@@ -1,5 +1,6 @@
 ---
 title: Prepare File Manipulating Configurations
+description: In the previous part of our tutorial on using development branches, you prepared production configurations that manipulate tables.
 slug: 'tutorial/branches/prepare-files'
 ---
 

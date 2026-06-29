@@ -1,5 +1,6 @@
 ---
 title: Available Metrics
+description: "Note that this list can be retrieved also via this API call:"
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-metrics'
 ---
 

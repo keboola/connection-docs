@@ -1,5 +1,6 @@
 ---
 title: Azure Cost Management
+description: This data source connector uses the Azure Cost Management API to import cost and usage data of an Azure subscription.
 slug: 'components/extractors/other/azure-cost'
 ---
 
