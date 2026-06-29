@@ -44,6 +44,8 @@ export default defineConfig({
         Head: './src/components/Head.astro',
         PageTitle: './src/components/PageTitle.astro',
         Footer: './src/components/Footer.astro',
+        // Adds a header link to the Keboola API reference (api.keboola.com).
+        SocialIcons: './src/components/SocialIcons.astro',
       },
       pagination: true,
       editLink: {
