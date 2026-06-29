@@ -71,7 +71,7 @@ All components can be used in the flows, thus orchestrated with data pipeline de
             <em>Customers use their own external infrastructure and development environments</em>
         </p>
     </td>
-    <td class="confluenceTd">
+    <td>
         <p style="text-align: center;">
             <em>Development is provided by dbt Cloud and the execution is defined by users on their own infrastructure</em>
         </p>
