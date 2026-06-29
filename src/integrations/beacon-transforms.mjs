@@ -299,6 +299,10 @@ function boldFirstPhrase(node) {
   }
 }
 
+/** Blocks allowed between two fragments of one numbered sequence. A lone image
+ *  becomes a `paragraph` wrapping the image node, so `paragraph` covers it. */
+const STEP_CONNECTIVE = new Set(['paragraph', 'html', 'thematicBreak', 'code', 'blockquote']);
+
 function transformStepLists(tree) {
   for (let i = 0; i < tree.children.length; i++) {
     const node = tree.children[i];
@@ -342,6 +346,39 @@ function transformStepLists(tree) {
     node.ordered = true;
     addClass(node, 'beacon-steps');
     boldFirstPhrase(node);
+  }
+
+  // An image/paragraph (or a step's nested sub-bullets) between steps makes
+  // markdown split one numbered list into several `<ol start=N>`. The pass above
+  // only tags the first fragment; extend `.beacon-steps` to the continuations
+  // (carrying the badge counter forward) so a sequence isn't styled half as
+  // badges and half as bare blue numbers — e.g. steps 1–3 badges, 4–5 plain.
+  promoteStepContinuations(tree);
+}
+
+function promoteStepContinuations(tree) {
+  const kids = tree.children;
+  const isStepList = (n) =>
+    n?.type === 'list' && n.ordered &&
+    (n.data?.hProperties?.className || []).includes('beacon-steps');
+
+  for (let i = 0; i < kids.length; i++) {
+    if (!isStepList(kids[i])) continue;
+    let expected = (kids[i].start ?? 1) + kids[i].children.length;
+    for (let j = i + 1; j < kids.length; j++) {
+      const b = kids[j];
+      if (b.type === 'heading') break; // new section ends the sequence
+      if (b.type === 'list') {
+        if (!b.ordered) continue; // a step's nested sub-bullets — step over
+        if ((b.start ?? 1) !== expected) break; // numbering doesn't continue
+        addClass(b, 'beacon-steps');
+        setHProp(b, 'style', `counter-reset: beacon-step ${(b.start ?? 1) - 1}`);
+        boldFirstPhrase(b);
+        expected += b.children.length;
+        continue;
+      }
+      if (!STEP_CONNECTIVE.has(b.type)) break; // a real content break
+    }
   }
 }
 

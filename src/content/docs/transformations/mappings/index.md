@@ -118,17 +118,44 @@ fail. In such a case, it's reasonable to revert to `VARCHAR` types -- for exampl
 
 #### Loading type (Snowflake and BigQuery)
 When working with large tables, it may become important to understand how the tables are loaded into a staging
-database. We use two loading options: `COPY` and `CLONE`. The `CLONE` type is a highly optimized operation which
-allows loading an arbitrary large table in near-constant time. There is a limitation, however, that the `CLONE` type can't be used
-together with any filters, data type configurations, or incremental loading.
+database. Keboola uses three loading strategies --- `COPY`, `CLONE`, and `VIEW` --- plus an `AUTO` mode (the default)
+that picks the best available strategy for each table:
 
-The `CLONE` loading type is supported on **Snowflake** and **BigQuery** backends.
+- **`CLONE`** --- a highly optimized operation that loads an arbitrarily large table in near-constant time, because it
+physically moves no data. `CLONE` can't be combined with filters, data type configurations, or incremental loading.
+It is supported on **Snowflake** and **BigQuery** backends.
+- **`COPY`** --- a full physical copy of the data into the staging database. Always available; used when neither `CLONE`
+nor `VIEW` can be applied (for example, when filters or data types are configured).
+- **`VIEW`** --- loads the table as a read-only view instead of copying any data; the data is read live from its source
+location. Used for **linked, external, and alias tables**.
 
-When using `AUTO` (the default), Keboola automatically selects `CLONE` when all conditions are met (no filters, no data type
-configurations, no incremental loading), and falls back to `COPY` otherwise. When `CLONE` is explicitly requested with
-incompatible options (such as `incremental`), the request will fail.
+You can set the strategy per table with the **Load type** option in the input mapping (**Auto**, **Copy**, **Clone**, or **View**):
 
-**BigQuery-specific limitation:** `CLONE` is not supported for [linked buckets](/catalog/) on BigQuery. If a table comes from a linked bucket on BigQuery, the load will fall back to `COPY` when using `AUTO`, or fail if `CLONE` is explicitly requested.
+![Load type options in the input mapping](/transformations/mappings/load-type-options.png)
+
+**How `AUTO` decides.** `AUTO` prefers `CLONE` whenever the table can be cloned. On **BigQuery**, tables that can't be
+cloned --- **linked, external, and alias tables** --- are loaded as a read-only `VIEW`. When filters, data type
+configurations, or incremental loading are used (which neither `CLONE` nor `VIEW` supports), `AUTO` falls back to `COPY`.
+If you explicitly request `CLONE` for a table that can't be cloned (for example, a [linked-bucket](/catalog/) table on
+BigQuery, or any table with incompatible options such as `incremental`), the request fails.
+
+In the input mapping, tables that will be loaded as a read-only view are marked with a view icon:
+
+![Read-only view indicator in the input mapping](/transformations/mappings/read-only-view-indicator.png)
+
+:::note[Default load type on BigQuery]
+On BigQuery, the default input-mapping load type is controlled by the **BigQuery Input Mapping – Default Load Type View**
+feature. While this feature is enabled --- the current state in most projects --- input tables default to `VIEW`, just as
+before. That's perfectly fine, and nothing changes for you.
+
+To make `CLONE` the default in your project right now, **disable** the **BigQuery Input Mapping – Default Load Type View**
+feature in your project's **Settings → Features**. New input loads will then default to `CLONE` (matching Snowflake) for
+faster, more consistent loading, with the automatic `VIEW`/`COPY` fallbacks described above. You can always override the
+strategy per table with the **Load type** option above.
+
+Keboola is gradually disabling this feature across all BigQuery projects, with the rollout completing by **July 15, 2026**.
+After that, `CLONE` becomes the default load type on BigQuery for everyone.
+:::
 
 This might present a dilemma when loading huge tables. A logical approach when trying to speed up loading a large table would
 be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's
