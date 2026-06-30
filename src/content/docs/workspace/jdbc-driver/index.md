@@ -69,3 +69,7 @@ The driver accepts the following connection properties (how you set them depends
 | `workspace` | no | Specific workspace ID. Newest workspace is auto-selected if omitted |
 
 The JDBC URL takes the form `jdbc:keboola://<host>`, where `<host>` is your Keboola stack — e.g. `jdbc:keboola://connection.keboola.com` or `jdbc:keboola://connection.eu-central-1.keboola.com`.
+
+## Need Help?
+
+For further help, reach out via [Keboola Support](/management/support/).

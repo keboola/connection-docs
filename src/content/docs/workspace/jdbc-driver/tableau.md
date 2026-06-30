@@ -74,3 +74,7 @@ To browse real Snowflake tables, pick a database and schema from the left-hand p
 - **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (Transformations → Workspaces).
 - **Custom stack** — replace the host in the JDBC URL with your stack hostname (e.g. `jdbc:keboola://connection.north-europe.azure.keboola.com`). Keep supplying the token in the **Password** field, not in the URL.
 - **Generic "An error occurred" with no details** — Tableau swallows JDBC error messages. Run the same connection in DBeaver to see the real error, then fix and retry in Tableau.
+
+## Need Help?
+
+For further help, reach out via [Keboola Support](/management/support/).
