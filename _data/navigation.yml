@@ -104,36 +104,33 @@ items:
   - url: /data-apps/
     title: Apps
     items:
-      - url: /data-apps/streamlit/
-        title: Streamlit Apps
+      - url: /data-apps/getting-started/
+        title: Getting started
+      - url: /data-apps/examples/
+        title: What people build
+      - url: /data-apps/build-with-kai/
+        title: Build with Kai
+      - url: /data-apps/build-in-the-ui/
+        title: Build in the UI
+      - url: /data-apps/build-locally/
+        title: Build locally
+      - url: /data-apps/what-are-apps/
+        title: What are apps?
       - url: /data-apps/python-js/
         title: Python/JS Apps
+      - url: /data-apps/streamlit/
+        title: Streamlit Apps
+        items:
+          - url: /data-apps/streamlit/lock-version/
+            title: Lock package versions
+          - url: /data-apps/streamlit/design-guide/
+            title: Streamlit design guide
       - url: /data-apps/authentication/
         title: Authentication
-        items:
-          - url: /data-apps/authentication/auth0/
-            title: Auth0
-          - url: /data-apps/authentication/google-cloud-platform/
-            title: Google Cloud Platform
-          - url: /data-apps/authentication/microsoft-entra-id/
-            title: Microsoft Entra ID
-          - url: /data-apps/authentication/okta/
-            title: Okta
-      - url: /data-apps/general-design-guide/
-        title: General Design Guide
-      - url: /data-apps/lock-streamlit-version/
-        title: Locking Streamlit Version
-        items:
-          - url: /data-apps/lock-streamlit-version/code-deployment/
-            title: Code Deployment
-          - url: /data-apps/lock-streamlit-version/git-deployment/
-            title: Git Repository Deployment
-      - url: /data-apps/backend-versions/
-        title: Backend Versions
-      - url: /data-apps/storage-access/
-        title: Storage Access
-      - url: /data-apps/terminal-log-tab/
-        title: Terminal Log Tab
+      - url: /data-apps/publish-and-share/
+        title: Publish and share
+      - url: /data-apps/reference/
+        title: Reference
 
   - url: /components/
     title: Components

@@ -1,31 +1,29 @@
 ---
-title: Streamlit Apps
+title: Streamlit apps
 slug: 'data-apps/streamlit'
+description: Build and manage Streamlit apps in Keboola — a Python-only framework for quick data tools.
 redirect_from:
   - /components/data-apps/streamlit/
 ---
 
 
 
-Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code. It is the fastest way to build apps in Keboola, perfect for rapid prototyping and internal tools.
+Streamlit is a Python-only framework for building data tools quickly. It's a good fit for simple internal apps. For richer or customer-facing apps, use JavaScript/Python — see [Build an app with Kai](/data-apps/build-with-kai/) and [What are Keboola apps](/data-apps/what-are-apps/).
 
-**When to Use Streamlit:**
+:::note
+Most new apps use JavaScript/Python. Reach for Streamlit when you specifically want its quick Python-script model.
+:::
 
-* Quick dashboard creation and prototyping
-* Data exploration and visualization tools
-* Internal reporting and analytics applications
-* Model demonstrations and testing interfaces
-* Apps primarily built by data scientists or analysts
+<!-- TODO(human-review, Miro): confirm the positioning. Streamlit is supported but on a deprecation path internally; do NOT state it is retired. Keep this subtree clearly scoped as "Streamlit-specific". -->
 
-**Key Advantages:**
+## In this section
 
-* Write everything in pure Python
-* Built-in widgets and interactive components
-* Automatic UI generation from Python code
-* Extensive data science library support
-* Rapid development and iteration
+- **[Design guide](/data-apps/streamlit/design-guide/)** — layout and styling patterns for Streamlit apps.
+- **[Lock the Streamlit version](/data-apps/streamlit/lock-version/)** — pin your app to a specific Streamlit version.
 
-## Getting Started
+<!-- TODO(human-review, Miro): design-guide.md and lock-version.md were created from the moved/merged source (former top-level general-design-guide + the three lock-streamlit-version pages). Verify the content. -->
+
+## Build a Streamlit app
 
 ### Prerequisites
 
@@ -33,7 +31,7 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 * Familiarity with data manipulation (pandas, numpy)
 * Understanding of data visualization concepts
 
-### Create Your First Streamlit App
+### Create your first Streamlit app
 
 1. **Navigate to Apps** in your Keboola project.
 2. Click the **+** button to create a new app.
@@ -43,27 +41,54 @@ Streamlit is a Python framework that transforms data scripts into interactive we
 
 ![Custom URL prefix](/data-apps/streamlit/custom-data-app-url.png)
 
-## Deployment Methods
+### Deployment methods
 
-There are two ways to deploy a Streamlit app: 
-1. Code
-2. Git Repository
+There are two ways to deploy a Streamlit app: Code and Git repository.
 
-### Code
+#### Code
 
-For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing. Check out [this example from Streamlit docs](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together).
+For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing.
 
 ![Code deployment](/data-apps/streamlit/development-type-code.png)
-![Hello World code](/data-apps/streamlit/hello-world-code.png)
 
-You can also override Streamlit defaults like file upload size or browser settings without committing a `.streamlit/config.toml` file - see [Streamlit Configuration](#streamlit-configuration) below.
+For example, paste [Streamlit's "Uber pickups in NYC" tutorial app](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together):
 
-#### Packages
+```python
+import streamlit as st
+import pandas as pd
+import numpy as np
+
+st.title('Uber pickups in NYC')
+
+DATE_COLUMN = 'date/time'
+DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
+            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
+
+@st.cache_data
+def load_data(nrows):
+    data = pd.read_csv(DATA_URL, nrows=nrows)
+    lowercase = lambda x: str(x).lower()
+    data.rename(lowercase, axis='columns', inplace=True)
+    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
+    return data
+
+data = load_data(10000)
+
+st.subheader('Number of pickups by hour')
+hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0, 24))[0]
+st.bar_chart(hist_values)
+
+st.subheader('Map of all pickups')
+st.map(data)
+```
+
+You can also override Streamlit defaults like file upload size or browser settings without committing a `.streamlit/config.toml` file - see [Streamlit configuration](#streamlit-configuration) below.
+
 To use additional Python packages that are not already included in the [base image](#base-image), enter them into the `Packages` field.
 
 ![Packages](/data-apps/streamlit/packages.png)
 
-### Git Repository
+#### Git repository
 
 If you have a complex application, push your app sources into GitHub and link the repository in this section. Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
 
@@ -91,121 +116,48 @@ When you upload `secrets.toml` using the direct secrets upload UI, Keboola impor
 
 [Read more about the Streamlit secrets](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app/connect-to-data-sources/secrets-management).
 
-### Direct Secrets Upload
+### Direct secrets upload
 You can upload a `secrets.toml` file directly through the UI when developing an app from code. The upload process:
 - Overwrites existing secrets with matching names.
 - Preserves existing secrets that don't match the uploaded ones.
 - Creates new secrets if they don't exist.
 - Does not delete any existing secrets.
 
-#### Example secrets.toml structure:
+Example `secrets.toml` structure:
 ```
 aws_key = "YOUR_AWS_KEY"
 aws_secret = "YOUR_AWS_SECRET"
 openai = "YOUR_OPENAI_KEY"
 ```
 
-### Best Practices
+### Best practices
 1. Always use descriptive secret names to improve clarity.
 2. Back up your secrets configuration regularly.
 3. Review existing secrets before uploading new ones to avoid unintentional overwrites.
 4. If you need nested/groups, use repo-based secrets. Direct upload does not support nested access.
 
-## Access Storage from App
-By default, there are two environment variables available that make it easy to access Keboola Storage from your application:
+## Access Storage from app
 
-- `KBC_URL`: This represents the URL of the current Keboola project.
-- `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
+Your app reads and writes Keboola Storage the same way any app does — via Input Mapping, the Storage API at runtime, or real-time Storage Access. Keboola injects `KBC_URL` and `KBC_TOKEN` (the Storage token) into the app automatically. For the patterns and code, see [Data access](/data-apps/reference/#data-access) and [Environment variables](/data-apps/reference/#environment-variables) in the reference.
 
-To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
-
-**Important:**
-Do not name your secret `KBC_TOKEN`, as this name is reserved.
-
-These environment variables can be accessed within your Streamlit app code. Here is an example of how to initialize the Keboola Storage token:
-```
-# Constants
-kbc_token = os.environ.get('KBC_TOKEN')
-kbc_url = os.environ.get('KBC_URL')
-# Initialize Client
-client = Client(kbc_url, kbc_token)
-```
-These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
-
-## Loading Data from Storage
-To load data from the Storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section. Just select your table in the input mapping section and navigate to that by `/data/in/tables/your_data.csv` or `/data/in/files/fileID_FileName.*` in your code. Note that the app needs to be redeployed to fetch up-to-date data. Or you can use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
-
-## Writing Back to Storage
-For writing data back to Keboola Project Storage, use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).
+The `keboola-streamlit` package wraps these for Streamlit with helpers like `keboola.read_table` and `keboola.write_table` — see the [Streamlit design guide](/data-apps/streamlit/design-guide/#keboola-storage-communication).
 
 ## Theming
 To configure theming in your app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
 
 ![Predefined themes](/data-apps/streamlit/theming-predefined.png)
 
-For `Custom`, users can select colors using the color pickers and choose the desired font from a list.
+For `Custom`, users can select colors using the color pickers and choose the desired font from a list. For the exact color values of each predefined theme, see the [predefined theme reference](#predefined-theme-reference) at the bottom of this page.
 
-![Custom theme](/data-apps/streamlit/theming-custom.png)
+For Streamlit configuration beyond theming (e.g. upload size, server or browser settings), see [Streamlit configuration](#streamlit-configuration) below.
 
-### Predefined Themes:
-1. **Keboola**
-   - Primary Color: `#1F8FFF`
-   - Background Color: `#FFFFFF`
-   - Secondary Background Color: `#E6F2FF`
-   - Text Color: `#222529`
-   - Font: Sans Serif
+## Streamlit configuration
 
-2. **Light Red**
-   - Primary Color: `#FF5D5D`
-   - Background Color: `#FFFFFF`
-   - Secondary Background Color: `#FFE6E6`
-   - Text Color: `#222529`
-   - Font: Sans Serif
+Beyond the predefined themes above, you can inject any [Streamlit configuration option](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) into your app's runtime `config.toml` directly from the app configuration in Keboola. This is useful when your app is deployed via the **Code** method (no Git repo, where you would otherwise commit a `.streamlit/config.toml` file) and you need to override Streamlit defaults such as upload size, server settings, or browser behavior.
 
-3. **Light Purple**
-   - Primary Color: `#9A6DD7`
-   - Background Color: `#FFFFFF`
-   - Secondary Background Color: `#F2E6FF`
-   - Text Color: `#222529`
-   - Font: Sans Serif
+### Setting a custom config.toml
 
-4. **Light Blue**
-   - Primary Color: `#0000B2`
-   - Background Color: `#FFFFFF`
-   - Secondary Background Color: `#E6E6FF`
-   - Text Color: `#222529`
-   - Font: Sans Serif
-
-5. **Dark Green**
-   - Primary Color: `#4CAF50`
-   - Background Color: `#222529`
-   - Secondary Background Color: `#3D4F41`
-   - Text Color: `#FFFFFF`
-   - Font: Sans Serif
-
-6. **Dark Amber**
-   - Primary Color: `#FFC107`
-   - Background Color: `#222529`
-   - Secondary Background Color: `#4A3A24`
-   - Text Color: `#FFFFFF`
-   - Font: Sans Serif
-
-7. **Dark Orange**
-   - Primary Color: `#FFA500`
-   - Background Color: `#222529`
-   - Secondary Background Color: `#4A3324`
-   - Text Color: `#FFFFFF`
-   - Font: Sans Serif
-
-For Streamlit configuration beyond theming (e.g. upload size, server or browser settings), see [Streamlit Configuration](#streamlit-configuration) below.
-
-## Streamlit Configuration
-
-Beyond the predefined themes above, you can inject any [Streamlit configuration option](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) into your app's runtime `config.toml` directly from the Data App configuration in Keboola. This is useful when your app is deployed via the **Code** method (no Git repo, where you would otherwise commit a `.streamlit/config.toml` file) and you need to override Streamlit defaults such as upload size, server settings, or browser behavior.
-
-### Setting Custom config.toml
-
-In your Data App configuration, switch to the raw JSON editor and add a `config.toml` string under `parameters.dataApp.streamlit`:
+In your app configuration, switch to the raw JSON editor and add a `config.toml` string under `parameters.dataApp.streamlit`:
 
 ```json
 {
@@ -224,9 +176,9 @@ The data app runtime extracts that string at startup and merges it into Streamli
 1. Streamlit's built-in defaults
 2. Keboola's runtime defaults (sets `[server] address = "0.0.0.0"` and `[browser] gatherUsageStats = false`)
 3. Your repository's `.streamlit/config.toml` (if Git-deployed)
-4. The `config.toml` string injected via the Data App configuration above
+4. The `config.toml` string injected via the app configuration above
 
-### Common Use Cases
+### Common use cases
 
 **Increase `st.file_uploader` size limit.** Streamlit defaults to 200 MB. To accept larger files:
 
@@ -246,20 +198,12 @@ gatherUsageStats = false
 
 > **Note on theming:** the **Theming** UI reads and rewrites the same `config.toml` field. Non-theme sections you set here (e.g. `[server]`, `[browser]`) are preserved when you save changes through the Theming UI. However, the Theming UI overwrites the `[theme]` section on save, so prefer the Theming UI when a value is available there - and use this raw JSON path for theme keys it doesn't expose.
 
-## Base Image
-When the app is deployed, the code specified in one of the deployment methods will be injected into the Streamlit base Docker image. You can select a specific backend version when deploying your app. Each version defines the Python version, Streamlit version, and a set of pre-installed packages.
+## Base image
+When the app is deployed, the code you provide is injected into the Streamlit base Docker image. You select a **backend version** when deploying; each version defines the Python version, Streamlit version, and a set of pre-installed packages you can use without adding them to the `Packages` field.
 
-The following packages are pre-installed in all backend versions:
+For the list of backend versions, supported Python versions, and the full pre-installed package list, see [Backend versions](/data-apps/reference/#backend-versions) in the reference.
 
-- `streamlit`, `pandas`, `numpy`, `matplotlib`, `plotly`, `scikit-learn`, `seaborn`
-- `graphviz`, `deepmerge`, `python-dotenv`, `toml`
-- `keboola.component`, `streamlit-aggrid`, `streamlit-keboola-api`, `streamlit_authenticator`
-
-Starting with backend version **1.15.0**, each release is available with multiple Python versions (3.10, 3.11, 3.13). Python 3.10 is the default.
-
-For the full list of available versions, pre-installed packages, and a changelog of what changed in each release, see the [Backend Versions](/data-apps/backend-versions/) page.
-
-## AgGrid Enterprise License
+## AgGrid Enterprise license
 The AgGrid Enterprise License is available for Streamlit apps in Keboola, offering enhanced data manipulation capabilities, including:
 
 - Inline dataset editing.
@@ -268,7 +212,7 @@ The AgGrid Enterprise License is available for Streamlit apps in Keboola, offeri
 
 Ensure your app is configured to use the AgGrid component to take advantage of these enhanced features.
 
-### How to Enable the License
+### How to enable the license
 The **enterprise license** is **pre-configured for all Keboola stacks**, so no additional setup is required for supported applications.
 
 To access the license key in your Streamlit app, use the following code:
@@ -286,5 +230,19 @@ license_key = keboola.aggrid_license_key
 
 You can use this license_key directly in **AgGrid**.
 
-**Reference Implementation:**
+**Reference implementation:**
 [Keboola Streamlit Integration](https://github.com/keboola/keboola_streamlit/blob/main/src/keboola_streamlit/keboola_streamlit.py#L31)
+
+## Predefined theme reference
+
+Color values for each predefined theme. All use the **Sans Serif** font. Choose `Custom` to set your own.
+
+| Theme | Primary | Background | Secondary background | Text |
+|---|---|---|---|---|
+| Keboola | `#1F8FFF` | `#FFFFFF` | `#E6F2FF` | `#222529` |
+| Light Red | `#FF5D5D` | `#FFFFFF` | `#FFE6E6` | `#222529` |
+| Light Purple | `#9A6DD7` | `#FFFFFF` | `#F2E6FF` | `#222529` |
+| Light Blue | `#0000B2` | `#FFFFFF` | `#E6E6FF` | `#222529` |
+| Dark Green | `#4CAF50` | `#222529` | `#3D4F41` | `#FFFFFF` |
+| Dark Amber | `#FFC107` | `#222529` | `#4A3A24` | `#FFFFFF` |
+| Dark Orange | `#FFA500` | `#222529` | `#4A3324` | `#FFFFFF` |
