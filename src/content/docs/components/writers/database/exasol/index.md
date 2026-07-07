@@ -55,7 +55,7 @@ In the **Full Load** mode you replace all existing rows in the destination table
 In the **Automatic Incremental Load** mode, you append all data that has been added or changed since the last successful run. A primary key must be specified
 
 In the **Manual Incremental Load** mode, you can select which data will be uploaded based on setting data filters on columns or specify 
-a specific date range of when data was changed to upload.A primary key must be specified
+a specific date range of when data was changed to upload. A primary key must be specified.
 
 You can specify the Destination Table Primary Key in the Load settings on the bottom of the load settings pop up.
 
@@ -64,7 +64,7 @@ You can specify the Destination Table Primary Key in the Load settings on the bo
 
 The name of the table in the Exasol database can be set in the Database Table Name box on the top of the configuration by clicking on the pencil icon, naming the table and pressing the blue checkmark icon.
 
-The Case sensitivity of the table can be set using the drop down selector in the case sensitivity box. Case sensitivity makes table objects and their columns case sensitive, just as if you where to use doublequotes in SQL statements.
+The Case sensitivity of the table can be set using the drop down selector in the case sensitivity box. Case sensitivity makes table objects and their columns case sensitive, just as if you were to use double quotes in SQL statements.
 
 ![Screenshot - case sensitive](/components/writers/database/exasol/case_sensitive_and_db_name.png)
 

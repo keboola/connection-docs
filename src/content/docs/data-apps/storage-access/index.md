@@ -5,16 +5,16 @@ slug: 'data-apps/storage-access'
 
 
 
-Storage Access allows your Data App to read data from and write data back to Keboola Storage tables in real-time. Your app connects directly to Keboola's storage through Query Service via SQL, enabling:
+Storage Access allows your App to read data from and write data back to Keboola Storage tables in real-time. Your app connects directly to Keboola's storage through Query Service via SQL, enabling:
 
 - **Real-time data access**: Always work with the latest data, no redeployment needed
 - **Write-back capability**: Update, insert into **existing** Storage tables directly from your app
 - **Interactive applications**: Build data entry forms, approval workflows, and collaborative tools
 
-This feature is available for both **Streamlit** and **Python/JS** Data Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
+This feature is available for both **Streamlit** and **Python/JS** Apps. Code examples on this page use Python; the same concepts apply when calling the Query Service API from JavaScript.
 
-:::caution
-**Snowflake only.** Storage Access currently works only on projects using the Snowflake storage backend. BigQuery support is coming soon.
+:::note
+Storage Access works on both **Snowflake** and **BigQuery** backends. The SQL examples on this page use Snowflake identifier quoting (`"bucket"."table"`). On BigQuery, identifier quoting and table naming differ — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend).
 :::
 
 ## When to Use Storage Access
@@ -35,10 +35,10 @@ This feature is available for both **Streamlit** and **Python/JS** Data Apps. Co
 
 ### Architecture Overview
 
-When you enable Storage Access, Keboola creates a dedicated **workspace** for your Data App. This workspace contains a database user with specific permissions (SELECT, INSERT, UPDATE, DELETE, TRUNCATE) on the tables you've selected.
+When you enable Storage Access, Keboola creates a dedicated **workspace** for your App. This workspace contains a database user with specific permissions (SELECT, INSERT, UPDATE, DELETE, TRUNCATE) on the tables you've selected.
 
 ```
-Your Data App
+Your App
      │
      ▼
 Query Service ────► Workspace User ────► Storage Tables
@@ -48,7 +48,7 @@ Query Service ────► Workspace User ────► Storage Tables
          billing, metadata refresh                 with granted permissions
 ```
 
-Your app communicates with Storage through the [**Query Service API**](https://api.keboola.com/?service=query), not directly with Snowflake. This provides:
+Your app communicates with Storage through the [**Query Service API**](https://api.keboola.com/?service=query), not directly with the underlying storage backend. This provides:
 
 - Automatic authentication using your app's token
 - Usage tracking for billing
@@ -84,7 +84,7 @@ This design ensures:
 
 ### Step 2: Configure Writable Tables
 
-1. Open your Data App configuration in Keboola.
+1. Open your App configuration in Keboola.
 2. Go to the **Advanced Settings** tab.
 3. Find the **Storage Access** section.
 4. Click **+ Add Writable Table**.
@@ -98,7 +98,7 @@ This design ensures:
 
 #### Configuring Writable Tables Programmatically
 
-If you manage Data App configurations through the Storage API (or via automation/agents) rather than the UI, the same writable-table selection is expressed in the configuration JSON under `storage.output.tables`. Each entry is a table the app gets read/write permissions on:
+If you manage App configurations through the Storage API (or via automation/agents) rather than the UI, the same writable-table selection is expressed in the configuration JSON under `storage.output.tables`. Each entry is a table the app gets read/write permissions on:
 
 ```json
 {
@@ -118,7 +118,7 @@ If you manage Data App configurations through the Storage API (or via automation
 - **`destination`** — the full Storage table ID (`<stage>.<bucket>.<table>`) the app should be able to read and write. The table must exist before the app is deployed.
 - **`unload_strategy: "direct-grant"`** — required marker that tells the platform "grant the app's workspace direct SELECT/INSERT/UPDATE/DELETE/TRUNCATE on this table." Tables without this strategy in `storage.output.tables` are not exposed via Storage Access.
 
-To add or remove writable tables programmatically, update the Data App's configuration via the Storage API ([Component Configurations endpoint](https://api.keboola.com/?service=storage#tag--Component-Configurations)) and redeploy the app for the new permissions to take effect.
+To add or remove writable tables programmatically, update the App's configuration via the Storage API ([Component Configurations endpoint](https://api.keboola.com/?service=storage#tag--Component-Configurations)) and redeploy the app for the new permissions to take effect.
 
 ### Step 3: Deploy Your App
 
@@ -196,6 +196,7 @@ print(df.head())
 
 - Use the full table ID in quotes: `"bucket_stage.bucket_name"."table_name"`
 - Example: `"in.c-sales"."orders"` for a table `orders` in bucket `in.c-sales`
+- On **BigQuery**, identifier quoting and dataset names differ — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend).
 
 ### Running Custom Queries
 
@@ -317,9 +318,59 @@ if results[0].rows_affected == 0:
     raise Exception("Record was modified by another user. Please refresh and try again.")
 ```
 
+## Working with the BigQuery Backend
+
+Storage Access works on BigQuery projects as well as Snowflake ones. The setup steps, workspace lifecycle, environment variables, and Query Service client are **identical** across backends — but BigQuery uses a different SQL dialect, so the way you quote identifiers and name tables differs from the Snowflake examples above.
+
+If your project runs on BigQuery, apply the two rules below to every query. The Query Service passes SQL through to the backend unchanged — it does **not** translate dialects — so your application is responsible for emitting the correct syntax for the project's backend.
+
+### Quote identifiers with backticks
+
+BigQuery quotes identifiers with backticks (`` ` ``) instead of Snowflake's double quotes. A table reference is **two parts** — `dataset.table` — and you may write it either as `` `dataset`.`table` `` or as `` `dataset.table` `` (both are valid; you do not have to quote each segment separately). The trap is **adding a third leading segment**: do not prepend the Keboola stage (`in`/`out`) or a Snowflake-style "database", and do not split the dotted bucket ID into separate backticked parts. BigQuery interprets a three-part name as `project.dataset.table` and tries to resolve the first segment as a Google Cloud project (you'll see an error such as `The project <stage> has not enabled BigQuery`).
+
+```sql
+-- ✅ Correct — dataset.table (two parts); either quoting style works
+SELECT * FROM `in_c_main`.`customers` LIMIT 1000
+SELECT * FROM `in_c_main.customers`  LIMIT 1000
+
+-- ❌ Wrong — the Keboola stage `in` becomes a third (project) segment
+SELECT * FROM `in`.`c-main`.`customers` LIMIT 1000
+SELECT * FROM `in.c-main.customers`     LIMIT 1000
+```
+
+| Backend | Identifier quoting | Example |
+| --- | --- | --- |
+| Snowflake | Double quotes | `"in.c-main"."customers"` |
+| BigQuery | Backticks, `dataset.table` (no stage prefix) | `` `in_c_main`.`customers` `` |
+
+### Reference the dataset by its mangled bucket name
+
+BigQuery dataset names cannot contain dots (`.`) or hyphens (`-`), so a Keboola bucket is **not** exposed under its literal bucket ID. The bucket ID is mapped to a dataset name by replacing every `.` and `-` with an underscore (`_`):
+
+| Keboola bucket ID | BigQuery dataset name |
+| --- | --- |
+| `in.c-main` | `in_c_main` |
+| `out.c-Test-Data---Customers-Products-Orders` | `out_c_Test_Data___Customers_Products_Orders` |
+
+So a table `customers` in bucket `out.c-Test-Data---Customers-Products-Orders` is referenced as:
+
+```sql
+SELECT * FROM `out_c_Test_Data___Customers_Products_Orders`.`customers` LIMIT 100
+```
+
+Only the **dataset** (bucket) name is mangled — the **table** name keeps its original form. A table named `cashier-data`, for example, stays `cashier-data`; it just needs backticks because of the hyphen.
+
+:::tip[Find the exact names in Storage]
+You don't have to derive the names by hand. Open the table in **Storage** and go to its **Overview** tab — it shows the **Dataset Name** (the bucket's BigQuery dataset, e.g. `in_c_shared_bucket`) and the **Table Name** to use in your queries.
+
+If your app needs to discover names dynamically at runtime, you can also query `INFORMATION_SCHEMA.SCHEMATA` to list the datasets the workspace can see.
+:::
+
+Everything else — reads, writes (`INSERT`/`UPDATE`/`DELETE`/`TRUNCATE`), pagination, and the best practices below — works the same as on Snowflake once the identifiers are quoted and named correctly. If you build a single app that must run on both backends, detect the backend type and generate identifiers accordingly.
+
 ## Environment Variables
 
-When Storage Access is enabled, the platform sets these environment variables in your Data App container:
+When Storage Access is enabled, the platform sets these environment variables in your App container:
 
 | Variable | Description |
 | --- | --- |
@@ -346,7 +397,7 @@ except (KeyError, FileNotFoundError) as e:
     ) from e
 ```
 
-For the full list of environment variables exposed to Data Apps, see the [data-app-python-js runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables).
+For the full list of environment variables exposed to Apps, see the [data-app-python-js runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables).
 
 ## Comparison: Input Mapping vs Direct Storage Access
 
@@ -361,7 +412,7 @@ For the full list of environment variables exposed to Data Apps, see the [data-a
 
 **You can use both together:** Input Mapping for reference data that rarely changes, Storage Access for data you need to read/write in real-time.
 
-## Example: Read-Write Data App
+## Example: Read-Write App
 
 This example shows a simple Flask app that reads records from Storage and allows users to update their status.
 
@@ -583,18 +634,18 @@ def get_cached_data(key, query_fn):
 
 **5. Track write operations**
 
-Write operations are automatically tracked by the Query Service for billing purposes. For additional application-level auditing, log to stdout (visible in Data App container logs):
+Write operations are automatically tracked by the Query Service for billing purposes. For additional application-level auditing, log to stdout (visible in App container logs):
 
 ```python
 import logging
 logging.basicConfig(level=logging.INFO)
 
 logging.info(f"User {current_user} updated record {record_id} to status {new_status}")
-# Output goes to stdout → visible in the Terminal Log tab of your Data App
+# Output goes to stdout → visible in the Terminal Log tab of your App
 ```
 
 ## Limitations
 
-- **Snowflake only**: Storage Access currently works only with Snowflake backends. BigQuery support is planned for a future release.
+- **SQL dialect differs by backend**: On BigQuery you must quote identifiers with backticks and reference datasets by their mangled bucket name (with no stage prefix) — see [Working with the BigQuery Backend](#working-with-the-bigquery-backend). The Query Service does not translate dialects.
 - **Column-level permissions not supported**: If you grant access to a table, the app can read/write all columns.
 - **Permission changes require app restart**: If you add or remove tables from the Storage Access configuration, the changes take effect on the next app start (deploy, redeploy, or wake from sleep).

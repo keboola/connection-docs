@@ -70,6 +70,10 @@ The built-in [SQL Editor](/workspace/sql-editor) lets you work with **Snowflake*
 For interactive SQL exploration inside your workspace, use the SQL Editor. It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines. Learn more: [SQL Editor](/workspace/sql-editor).
 :::
 
+#### Keboola JDBC Driver
+
+To query your project's data from external SQL clients and BI tools, use the [Keboola JDBC driver](/workspace/jdbc-driver/). It connects DBeaver, DataGrip, Tableau, or any JDBC-compatible client to your project through the Query Service API, with step-by-step installation guides for each.
+
 #### Snowflake
 
 >***Important: Direct Access Availability***

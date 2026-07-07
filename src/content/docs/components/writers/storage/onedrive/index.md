@@ -1,6 +1,8 @@
 ---
 title: OneDrive Excel Sheets
 slug: 'components/writers/storage/onedrive'
+redirect_from:
+    - /writers/storage/onedrive/
 ---
 
 
