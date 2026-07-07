@@ -32,6 +32,8 @@ DuckDB Transformation is currently in **BETA**. Breaking changes may occur.
 
 Set these on the right-side panel of the transformation configuration:
 
+![The DuckDB transformation configuration page with the settings panel on the right — Timeout, Backend size, DuckDB version, and the data-type toggles](/transformations/duckdb/configuration.png)
+
 | Setting | Description | Default |
 |---|---|---|
 | **Timeout** | Maximum execution time. | 1 hour <!-- TODO(human-review): confirm default --> |

@@ -23,6 +23,9 @@ This page shows how to parametrize a transformation with **variables** and how t
    ```
 
 2. In the **Variables** section, define `multiplier` and give it a **default value**. Every referenced variable must be defined, and every defined variable must have a value.
+
+   ![The Variables section of a transformation with the multiplier variable set to a default value of 100](/transformations/variables/variables-setting.png)
+
 3. **Run** the transformation. You can provide a runtime override of the default value when you run it.
 
 If a variable is referenced but not defined, or has no value, you get an error such as `Missing values for placeholders: "multiplier"` or `No value provided for variable "multiplier".`
@@ -42,12 +45,16 @@ When you automate transformations with [flows](/flows/), each flow task can eith
 }
 ```
 
+![A flow task's Task parameters dialog with the variableValuesData JSON overriding multiplier to 1000](/transformations/variables/task-parameters.png)
+
 ## Create shared code
 
 Create shared code in either of two ways:
 
 - From the **Shared Codes** page — choose to create new shared code and enter a name.
 - From an existing transformation's code — share a selected snippet; its code and code type are filled in automatically. You still enter a name.
+
+![The Shared Codes page with the New Shared Code button](/transformations/variables/shared-code.png)
 
 :::caution
 For Snowflake, a single shared code can contain **only one query**, and the SQL query must end with a semicolon (`;`).
@@ -56,6 +63,8 @@ For Snowflake, a single shared code can contain **only one query**, and the SQL 
 ## Use shared code in a transformation
 
 1. While editing a transformation, insert shared code and select the snippet you want.
+
+   ![A transformation code block with the Select Shared Code action highlighted](/transformations/variables/shared-code-use-1.png)
 2. Choose how to use it (see the [explanation](/transformations/variables/explanation/#shared-code)):
    - **Use Inline** — copies the snippet, no link.
    - **Use as Shared Code** — links it; later edits to the shared code apply everywhere it is linked.

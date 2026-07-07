@@ -32,6 +32,8 @@ Get a table into Storage to use as the input. If you do not have one handy, uplo
 3. Set the **Destination** (staging table name) to `source`.
 4. Save the mapping.
 
+![A BigQuery transformation with the source table mapped in, a result table mapped out, and the SQL code block below](/transformations/bigquery/sample-transformation.png)
+
 ## Step 3 — Write the SQL script
 
 In the code editor, paste:

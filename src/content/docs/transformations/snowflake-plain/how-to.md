@@ -37,6 +37,8 @@ The input mapping copies a Storage table into the transformation's staging area 
 3. Set the **Destination** (the staging table name) to `source`.
 4. Save the mapping.
 
+![A Snowflake transformation with the source table mapped in, a result table mapped out, and the Main Code block below](/transformations/snowflake-plain/sample-transformation.png)
+
 ## Step 3 — Write the SQL script
 
 In the transformation's code editor, paste:
@@ -70,6 +72,8 @@ If the table is there with the expected values, the transformation works.
 ## Make it faster (backend size)
 
 If the job is slow because of large data or complex queries, raise the **backend size** in the configuration (XSmall → Small → Medium → Large). A bigger backend allocates more resources; the available sizes and the default are listed in the [reference](/transformations/snowflake-plain/reference/#backend-sizes-dynamic-backends). Dynamic backends are not available on the Free Plan.
+
+![The Backend Size dropdown in the transformation panel with Xsmall, Small, Medium, and Large options](/transformations/snowflake-plain/backend-size.png)
 
 ## Stop a run on a condition
 

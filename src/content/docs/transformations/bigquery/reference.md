@@ -44,6 +44,8 @@ SET ABORT_TRANSFORMATION = (
 
 This sets `ABORT_TRANSFORMATION` to `'Integrity check failed'` when the `INTEGRITY_CHECK` table has one or more rows with `RESULT = 'failed'`. An empty string does not abort.
 
+![A failed BigQuery job whose event log shows the SET ABORT_TRANSFORMATION query and the "Transformation aborted" user error](/transformations/bigquery/abort.png)
+
 ## Working with data types
 
 Keboola Storage [tables](/storage/tables/) store data as character types. When creating an output-mapping table you can rely on implicit casting to `STRING`:

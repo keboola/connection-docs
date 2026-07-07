@@ -30,6 +30,8 @@ Python transformations have **no facility for encrypting secrets**. Any API key,
 2. In **Input Mapping**, add it and set its **Destination** to `source` (the script reads `in/tables/source.csv`).
 3. In **Output Mapping**, map `result.csv` (produced by the script) to a new Storage table, for example `out.c-main.result`.
 
+![The transformation with source.csv mapped in as in/tables/source.csv and out/tables/destination mapped out to a Storage table](/transformations/python-plain/sample-io.png)
+
 ## Step 3 — Write the script
 
 Paste a script that reads `in/tables/source.csv` and writes `out/tables/result.csv`:
@@ -58,7 +60,13 @@ See the [reference](/transformations/python-plain/reference/#reading-and-writing
 The fastest way to iterate is a [Python workspace](/workspace/) (JupyterLab) with the same input mapping:
 
 1. Configure input (and optionally output) mapping, then **Load Data** and **Connect** to the workspace.
+
+   ![A Python workspace with input/output mapping and the Connect and Load Data actions highlighted](/transformations/python-plain/input-output.png)
+
 2. Paste your script into the notebook — the `in/`/`out/` directory structure and input files are already prepared.
+
+   ![JupyterLab workspace with the in/ and out/ folders and the CSV-processing script in a notebook cell](/transformations/python-plain/workspace.png)
+
 3. Run it; optionally **Unload Data** to push results to Storage, or **Create Transformation** to scaffold a transformation with the same mapping.
 
 To develop **locally**, [install Python](https://www.python.org/downloads/) and recreate the directory structure (`in/tables/`, `out/tables/`) with your input files. A ready example is in [data.zip](/transformations/python-plain/data.zip); the same script then runs unchanged as a transformation. For an exact environment, use the [Keboola Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
@@ -66,6 +74,8 @@ To develop **locally**, [install Python](https://www.python.org/downloads/) and 
 ## Make it faster (backend size)
 
 For large data, raise the **Backend size** in the configuration (XSmall → Small → Medium → Large); see [backend sizes](/transformations/python-plain/reference/#backend-sizes-dynamic-backends). This affects [time-credit consumption](/management/project/limits/#project-power--time-credits).
+
+![The Backend size dropdown in the transformation panel with Xsmall, Small, Medium, and Large options](/transformations/python-plain/backend-size.png)
 
 ## Troubleshooting
 

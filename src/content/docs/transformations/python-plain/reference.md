@@ -38,6 +38,8 @@ The Python script runs in an isolated [environment](https://developers.keboola.c
 - Downloaded files: `in/files/` (or `/data/in/files/`).
 - Temporary files: `/tmp/`. Do **not** use `/data/` for files you don't want exchanged with Keboola.
 
+![The /data directory tree — in/tables, in/user, out/files, and out/tables](/transformations/python-plain/tree.png)
+
 See the full [Common Interface specification](https://developers.keboola.com/extend/common-interface/).
 
 ## Script requirements
@@ -62,6 +64,8 @@ You can organize the script into [blocks](/transformations/#writing-scripts).
 ## Packages
 
 List extra packages in the UI; they are installed with [pip](https://pypi.org/project/pip/) from [PyPI](https://pypi.org/). Some packages have external dependencies that may not be available — [contact support](/management/support/) if you hit problems. After install, you still need to `import` them.
+
+![The Packages field in the transformation with the matrix package added](/transformations/python-plain/packages.png)
 
 The latest versions are installed at release time. To pin a version, force-reinstall it from your code:
 

@@ -20,7 +20,7 @@ dbt Cloud is supported via dedicated components. You can find them in the **Comp
 
 ## dbt Cloud Trigger
 
-![TODO(human-review: alt unverified) The dbt Cloud Trigger component configuration with Account ID, Job ID, and API key fields](imgs/2776563988.png)
+![The dbt Cloud Trigger configuration — Account ID 949, Job ID 121341, an API Key field, Cause "Triggered from Keboola", Wait for result checked, and Max wait time 60](imgs/2776563988.png)
 
 The component configuration is pretty straightforward. You must authorize the component by providing your `Account ID`, `Job ID`, and `API key`.
 
@@ -58,7 +58,7 @@ The purpose of this data source connector is to extract and store the [dbt Cloud
 
 To configure the source connector, enter the API token and select a default configuration:
 
-![TODO(human-review: alt unverified) The dbt Cloud API source connector configuration with the API token and default configuration](imgs/2777448752.png)
+![The dbt Cloud API data source connector — the dbt Cloud project URL, a Token field, and the Configuration Template set to dbt Cloud API](imgs/2777448752.png)
 
 You can access the data from Storage, or directly from the job detail screen.
 

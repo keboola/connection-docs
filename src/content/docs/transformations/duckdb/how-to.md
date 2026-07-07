@@ -28,6 +28,8 @@ Get a table into Storage to use as the input. If you do not have one handy, uplo
 2. Select **DuckDB Transformation**. <!-- TODO(human-review): confirm type label. -->
 3. Name it, optionally add a description and folder, and click **Create Transformation**.
 
+![The New Transformation dialog listing the transformation types, including DuckDB Transformation (beta)](/transformations/duckdb/new-transformation.png)
+
 ## Step 2 — Add the input mapping
 
 1. In **Input Mapping**, add your Storage table.
@@ -47,6 +49,8 @@ GROUP BY "order_date";
 
 End every statement with a semicolon (`;`). Quote identifiers that need exact case (`"sample"`). You can split longer scripts into [blocks](/transformations/#writing-scripts), which DuckDB runs with automatic dependency analysis (see [block-based orchestration](/transformations/duckdb/reference/#block-based-orchestration)).
 
+![The DuckDB transformation with the aggregation query in the code editor and the output table mapping above it](/transformations/duckdb/query-example.png)
+
 > If `SUM()` fails with a type error, your input is loading as `VARCHAR`. Either cast explicitly, or enable **Infer input table data types** — see [Step: typed inputs](#optional-work-with-typed-inputs).
 
 ## Step 4 — Add the output mapping
@@ -61,9 +65,13 @@ End every statement with a semicolon (`;`). Quote identifiers that need exact ca
 2. Wait for the [job](/management/jobs/) to finish with a success status.
 3. Open **Storage**, find your destination table, and confirm it has one row per `order_date` with the summed amount.
 
+![The finished DuckDB job showing a SUCCESS status with input and output mapping and run duration](/transformations/duckdb/job-success.png)
+
 ## Optional: work with typed inputs
 
 By default, input columns load as `VARCHAR`, so numeric and date functions need explicit casts. To use real types directly, enable **Infer input table data types** in the configuration settings — DuckDB then detects types like `INTEGER`, `FLOAT`, and `DATE`. See [Infer input table data types](/transformations/duckdb/reference/#infer-input-table-data-types).
+
+![The transformation settings panel with the Infer input table data types toggle enabled](/transformations/duckdb/infer-data-types-enabled.png)
 
 ## Make it faster (backend size)
 

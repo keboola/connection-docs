@@ -26,6 +26,8 @@ You want to run advanced statistical or vector/matrix computations with R. An R 
 2. In **Input Mapping**, add it and set its **Destination** to `source` (the script reads `in/tables/source.csv`).
 3. In **Output Mapping**, map `result.csv` to a new Storage table, for example `out.c-main.result`.
 
+![An R transformation with source.csv mapped in as in/tables/source.csv and out/tables/result.csv mapped out to a Storage table](/transformations/r-plain/sample-io.png)
+
 ## Step 3 — Write the script
 
 ```r

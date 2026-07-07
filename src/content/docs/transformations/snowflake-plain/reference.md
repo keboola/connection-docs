@@ -68,6 +68,8 @@ SET ABORT_TRANSFORMATION = (
 
 The example sets `ABORT_TRANSFORMATION` to `'Integrity check failed'` when the `INTEGRITY_CHECK` table has one or more rows with `RESULT = 'failed'`. An empty string does not abort.
 
+![A failed job whose event log shows the SET ABORT_TRANSFORMATION query and the "Transformation aborted" message](/transformations/snowflake-plain/abort.png)
+
 ## Identifier case sensitivity
 
 Snowflake is [case sensitive](https://docs.snowflake.com/en/sql-reference/identifiers-syntax#label-identifier-casing). Unquoted table/column names are folded to **upper case**; quoted names keep their case. Keboola creates tables and columns with their original case, so unquoted identifiers in your script may not match.
