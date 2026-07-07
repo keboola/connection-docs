@@ -42,6 +42,10 @@ pw-*.png
 stripe-*.png
 sidebar-scroll-test.png
 
+# internal working files — local-only, never ship in docs PRs
+apps-section/
+.claude/
+
 # local screenshot-capture session (never commit)
 apps-section/auth.json
 apps-section/shots/
