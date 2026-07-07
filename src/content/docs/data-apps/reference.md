@@ -19,11 +19,15 @@ Each app has its own configuration.
 
 | Setting | What it does |
 |---|---|
-| Authentication | Who can open the app. See [Authentication](/data-apps/authentication/). |
+| Authentication | Who can open the app — None, Basic, OIDC, GitHub, GitLab, or JumpCloud. See [Authentication](/data-apps/authentication/). |
+| Code Source | Where the app's code comes from — inline **Code** or a **Git Repository**. |
+| Backend version | The runtime image (Python version and, for Streamlit, the Streamlit version). See [Backend versions](#backend-versions). |
+| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. |
+| Auto-sleep | The inactivity timeout before the app suspends. See [Sleep and resume](#sleep-and-resume). |
 | URL | The address where the app is served. |
-| Versioning | Draft vs production versions of the app. |
+| Versioning | Draft vs production versions of the app, on the **Versions** tab. |
 
-<!-- TODO(human-review, Miro): complete this table from the real settings list and confirm each row. -->
+<!-- Rows reflect the app config observed live (Overview + App Info + deploy wizard). Confirm the full Advanced Settings list before treating as exhaustive. -->
 
 ## Environment variables
 
@@ -41,7 +45,7 @@ Sensitive values — API keys, tokens, passwords — should be stored as **secre
 
 ### Secrets
 
-Add secrets as key-value pairs in the app configuration. The `#` prefix marks a value as a secret (encrypted at rest). Keboola makes secrets available as environment variables when your app starts: the `#` prefix is stripped and the name is uppercased. For example, `#my-custom-var` becomes `MY_CUSTOM_VAR` — dashes become underscores, the value is uppercased, and the `#` is removed.
+Add secrets as key-value pairs in the app configuration. The `#` prefix marks a value as a secret (encrypted at rest). Keboola makes secrets available as environment variables when your app starts: the `#` prefix is stripped and the **variable name** is uppercased. For example, `#my-custom-var` becomes `MY_CUSTOM_VAR` — the `#` is removed, dashes become underscores, and the name is uppercased. The value itself is passed through unchanged.
 
 ## Runtime and language support
 

@@ -10,16 +10,19 @@ Once your app is ready, publish it and share the link with the people who need i
 
 ## Publish the app
 
-1. **Promote your draft** to a production version.
-2. **Confirm authentication** — check the app's [authentication](/data-apps/authentication/) so the right people can open it.
+An app is "published" once it's deployed and reachable at its URL, with the right people able to open it:
 
-<!-- TODO(human-review, Miro / Adam Vyborny): document the real publish flow and what "published" means (URL, state, who can see it). -->
+1. **Deploy the app.** From the app's configuration, click **Deploy App**. When the status turns **Active**, it's served at its public URL. See [App actions](/data-apps/reference/#app-actions).
+2. **Set authentication.** Choose who can open it — a shared password, SSO, GitHub, and more. See [Authentication](/data-apps/authentication/).
+3. **Share the URL.** Anyone who passes the app's authentication can open it.
+
+If you built the app in a **development branch**, merge the branch to production to make it part of your live project (Keboola's standard branch workflow).
+
+<!-- VERIFY(Miro / Adam Vyborny): confirm precisely what "publish" / "promote to production" means for apps — deploy + branch-merge vs an app-level production version — and the exact steps / URL / state changes. Flagged internally as confusing. -->
 
 ## Share with your team
 
-Share the app URL. Anyone who passes the app's authentication can open it.
-
-<!-- TODO(human-review, Miro): note sharing options and any per-app access controls. -->
+Share the app URL. Anyone who passes the app's authentication can open it — control that with [Authentication](/data-apps/authentication/).
 
 ## Manage a deployed app
 
