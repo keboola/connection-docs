@@ -796,7 +796,7 @@ nav.sidebar {
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li::marker {
   content: '';
 }
-.sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li > strong:first-child {
+.sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li > strong.beacon-step-title {
   display: block;
   font-size: 14px;
   font-weight: 600;
