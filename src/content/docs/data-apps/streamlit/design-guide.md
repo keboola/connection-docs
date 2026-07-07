@@ -18,7 +18,7 @@ There are two options for setting theming:
 
 ![Screenshot - Streamlit Folder](/data-apps/streamlit/design-guide-folder.png)
 
-```
+```toml
 [theme]
 font="sans serif"
 textColor="#222529"
@@ -34,13 +34,13 @@ secondaryBackgroundColor="#edf0f5"
 
 Store the logo PNG image in the `/static/` repository folder (created automatically upon deployment in Keboola).
 
-```
+```python
 LOGO_IMAGE_PATH = os.path.join(os.path.dirname(__file__), 'static/keboola.png')
 ```
 
 Position the logo on the left and disable the full-screen view for the image.
 
-```
+```python
 st.image(LOGO_IMAGE_PATH)
 hide_img_fs = '''
         <style>
@@ -57,7 +57,7 @@ st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 Set the `ttl` parameter based on your app's needs.
 
-```
+```python
 # Fetching data 
 @st.cache_data(ttl=7200,show_spinner=False)
 ```
@@ -70,7 +70,7 @@ Set the `ttl` parameter based on your app's needs.
 
 Use `st.info` to provide helpful context or instructions to users.
 
-```
+```python
 st.info('Select the table you want to edit. If the data is not up to date, click the Reload Data button. The data freshness is displayed in the right corner.', icon="ℹ️")
 ```
 
@@ -78,7 +78,7 @@ st.info('Select the table you want to edit. If the data is not up to date, click
 
 To hide anchor links, add this function.
 
-```
+```python
 def hide_custom_anchor_link():
     st.markdown(
         """
@@ -100,7 +100,7 @@ def hide_custom_anchor_link():
 ### Use st.expander
 Use `st.expander` to keep your app simple and clean, with additional information inside.
 
-```
+```python
 # Expander with info about table
 with st.expander("Table Info"):
     # Code continues …
@@ -111,7 +111,7 @@ Use the following code for primary buttons; secondary buttons can be simple `st.
 
 ![Screenshot - Save Data](/data-apps/streamlit/design-guide-save-button.png)
 
-```
+```python
 
 def ChangeButtonColour(widget_label, font_color, background_color, border_color):
     htmlstr = f"""
@@ -131,7 +131,7 @@ def ChangeButtonColour(widget_label, font_color, background_color, border_color)
 ```
 
 **Example**
-```
+```python
 ChangeButtonColour('Save Data', '#FFFFFF', '#1EC71E','#1EC71E')
 ```
 
@@ -142,7 +142,7 @@ Here is an example of what a footer could look like.
 
 Customize the footer with the code below.
 
-```
+```python
 def display_footer_section():
     # Inject custom CSS for alignment and style
     st.markdown("""

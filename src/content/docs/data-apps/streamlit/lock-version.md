@@ -126,7 +126,7 @@ This file lists all installed packages along with their specific versions. It en
 ***Note:** After updating or installing a new dependency, remember to run `pip freeze` again to update your `requirements.txt` file.*
 
 ### Example requirements.txt for a Streamlit app
-Below is an example optimized for a typical Streamlit app running in Keboola:
+Below is an example of the *shape* of a locked `requirements.txt` for a Streamlit app in Keboola. The versions shown are illustrative — pin the current versions your app actually uses (see the [backend versions](/data-apps/reference/#backend-versions) for what ships pre-installed):
 
 ```text
 streamlit==1.24.0

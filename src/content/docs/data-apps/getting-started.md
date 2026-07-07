@@ -71,6 +71,10 @@ When the deploy finishes, Kai gives you the **live URL** and a link to the app's
 
 By default the app is protected with **basic authentication** — open it from the configuration page to see the login credentials. To change who can access it (a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
+Open the URL and your app is live — running on your governed data, served from its own address:
+
+![The deployed Website Analytics Dashboard running live, with metric tiles and a sessions-by-device chart](/data-apps/getting-started-live-app.png)
+
 That's it — you've built and published your first app. You described what you wanted, Kai read your governed data, planned, and deployed it — and you never picked a framework. The same loop builds dashboards, internal tools, data narratives, and more; for the concepts behind it, see [What are Keboola apps](/data-apps/what-are-apps/).
 
 ## What's next

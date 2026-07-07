@@ -39,15 +39,22 @@ app.get("/api/rows", async (req, res) => {
 
 ## Develop with an AI coding tool
 
-You can build the app with an AI coding assistant (for example, Claude). Keboola provides a skill file that teaches the assistant the correct app structure and APIs.
+You can build the app with an AI coding assistant (Claude Code, Cursor, or Copilot). When you create a Python/JS app, Keboola offers a ready-made **skill file** — **Download Skill** or **View on GitHub** — that teaches your assistant the correct app structure, deployment config, and Keboola APIs, so you get working code with fewer errors. The app's **Overview** also links it as **AI Skill for Building**.
 
-<!-- TODO(human-review, Adam Vyborny): link the current ai-kit SKILL.md / the DataAppsAISkill resource and describe how to use it. -->
+![The Create Python / JS App dialog, with a "Build Apps faster with AI" panel offering Download Skill and View on GitHub](/data-apps/python-js-ai-skill.png)
+
+<!-- VERIFY(Adam Vyborny): "Download Skill" / "View on GitHub" observed live in the Create Python/JS dialog (us-east4). Confirm the GitHub destination / canonical skill resource to link directly. -->
 
 ## Sync to your project
 
-Develop locally, then sync the app to your Keboola project to run it.
+Keboola runs your app from a **Git repository** you point it at. Develop locally, push, and connect the repo:
 
-<!-- TODO(human-review, Adam Vyborny / Roman Bracinik): document the actual local → project sync flow and the provisioned-Git / own-Git options. -->
+1. In your project, create a **Python/JS app** (**Apps → + Create App → Python / JS**).
+2. On the app's configuration page, open **Git Repository** and set the **Project URL**. For a private repo, toggle **Private** and add your credentials.
+3. Pick the **branch** (**Load Branches**) and the entrypoint.
+4. Click **Deploy App**. Keboola clones the repo, installs dependencies, and runs it. Push changes and **Redeploy** to ship them.
+
+![The Python/JS app configuration page: Authentication, a Git Repository section with Project URL and Load Branches, and the App Info panel showing the Python / JS backend](/data-apps/python-js-config.png)
 
 ## Access your data
 

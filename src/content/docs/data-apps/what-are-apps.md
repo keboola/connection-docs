@@ -1,7 +1,7 @@
 ---
 title: What are Keboola apps
 slug: 'data-apps/what-are-apps'
-description: Understand what Keboola apps are, how they run on your governed data, and when to use JavaScript/Python versus Streamlit.
+description: Understand what Keboola apps are, how they run on your governed data, and when to use Python/JS versus Streamlit.
 ---
 
 
@@ -12,7 +12,7 @@ A Keboola app is an interactive application that runs inside your Keboola projec
 
 Keboola has always handled the data pipeline — extracting, transforming, and loading your data. Apps add the layer on top: the interface your team or customers actually use. Because the app runs inside your project, it reaches your data through the same access controls you already manage.
 
-This is the part that sets Keboola apps apart from general app builders: the app is governed by default. It can only touch data the project can touch, and you control who can open it.
+This is the part that sets Keboola apps apart from general app builders: the app is governed by default. There's no separate database connection to configure, expose, or leak, and no dataset copied to an outside service — the app reads through the project's own access, server-side. It can only touch data the project can touch, and you control who can open it.
 
 ## What you can build
 
@@ -21,11 +21,13 @@ This is the part that sets Keboola apps apart from general app builders: the app
 - **Data narratives** — scrollable, explained stories built from your data.
 - **Anything interactive** — configurators, simulators, and more.
 
-## JavaScript/Python vs Streamlit
+![A deployed Keboola app — a Website Analytics Dashboard with metric tiles and a sessions-by-device chart — running on the project's governed data](/data-apps/getting-started-live-app.png)
 
-Most apps run on JavaScript and Python, which give you full control over the interface. Streamlit is a Python-only framework that is quicker for simple data tools but more limited in look and interactivity.
+## Python/JS vs Streamlit
 
-- Build something rich or customer-facing → JavaScript/Python.
+Most apps run on **Python/JS** (any Python or JavaScript framework), which gives you full control over the interface. **Streamlit** is a Python-only framework that is quicker for simple data tools but more limited in look and interactivity.
+
+- Build something rich or customer-facing → Python/JS.
 - Build a quick internal data tool → Streamlit can be enough.
 
 When you build with Kai, you don't have to choose up front — Kai selects the framework that fits your request. For details on each, see [Python/JS apps](/data-apps/python-js/) (the full-control option) and [Streamlit apps](/data-apps/streamlit/) (the quick Python option).

@@ -725,9 +725,8 @@ nav.sidebar {
   margin: 0 0 20px;
 }
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li {
-  display: flex;
-  gap: 14px;
-  padding: 8px 0;
+  position: relative;
+  padding: 8px 0 8px 38px;
   margin: 0;
   counter-increment: beacon-step;
 }
@@ -736,6 +735,9 @@ nav.sidebar {
 }
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li::before {
   content: counter(beacon-step);
+  position: absolute;
+  left: 0;
+  top: 8px;
   width: 24px;
   height: 24px;
   border-radius: 50%;

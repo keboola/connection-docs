@@ -107,15 +107,15 @@ items:
       - url: /data-apps/getting-started/
         title: Getting started
       - url: /data-apps/examples/
-        title: What people build
+        title: Beyond dashboards
+      - url: /data-apps/what-are-apps/
+        title: What are apps?
       - url: /data-apps/build-with-kai/
         title: Build with Kai
       - url: /data-apps/build-in-the-ui/
         title: Build in the UI
       - url: /data-apps/build-locally/
         title: Build locally
-      - url: /data-apps/what-are-apps/
-        title: What are apps?
       - url: /data-apps/python-js/
         title: Python/JS Apps
       - url: /data-apps/streamlit/

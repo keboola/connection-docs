@@ -45,3 +45,5 @@ sidebar-scroll-test.png
 # local screenshot-capture session (never commit)
 apps-section/auth.json
 apps-section/shots/
+apps-section/_shots/
+apps-section/_*.mjs

@@ -10,8 +10,8 @@ Once your app is ready, publish it and share the link with the people who need i
 
 ## Publish the app
 
-1. Promote your draft to a production version.
-2. Confirm the app's [authentication](/data-apps/authentication/) so the right people can open it.
+1. **Promote your draft** to a production version.
+2. **Confirm authentication** — check the app's [authentication](/data-apps/authentication/) so the right people can open it.
 
 <!-- TODO(human-review, Miro / Adam Vyborny): document the real publish flow and what "published" means (URL, state, who can see it). -->
 

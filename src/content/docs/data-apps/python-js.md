@@ -29,6 +29,8 @@ For the bigger picture of how apps fit into Keboola, see [What are Keboola apps]
 
 Keboola clones your repository, installs dependencies, starts your app using the process configuration you provide, and serves it behind a secure URL through an internal web server. You don't manage servers, ports, or Docker — only your code and a small configuration folder.
 
+![A Python/JS app's configuration page: the Overview tab with Authentication and a Git Repository section, and an App Info panel showing the Python / JS backend, size, and auto-sleep](/data-apps/python-js-config.png)
+
 <!-- VERIFY(Adam Vyborny / Michal Jerabek): confirm the runtime/hosting model to state publicly (Operator is live today; E2B is pending sign-off — do not assert E2B as the hosting mechanism). -->
 
 ## Build a Python/JS app
@@ -38,6 +40,8 @@ You can build one three ways:
 - **[Build with Kai](/data-apps/build-with-kai/)** — describe it and let Kai generate the app. The fastest path. (Building Python/JS with Kai requires the Kai-in-E2B backend on your project; without it, Kai builds Streamlit. <!-- VERIFY(Adam Vyborny): confirm the exact prerequisite/enablement. -->)
 - **[Build in the UI](/data-apps/build-in-the-ui/)** — create the app from the interface and point it at a Git repository that contains your code and configuration.
 - **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, then sync to your project. The home of full-control development.
+
+Building it yourself? When you create a Python/JS app, Keboola offers a downloadable **AI skill** (for Claude Code, Cursor, or Copilot) that teaches your assistant the correct app structure, deployment config, and Keboola APIs — see [Develop with an AI coding tool](/data-apps/build-locally/#develop-with-an-ai-coding-tool).
 
 ## Reference
 

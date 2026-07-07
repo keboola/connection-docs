@@ -8,10 +8,10 @@ redirect_from:
 
 
 
-Streamlit is a Python-only framework for building data tools quickly. It's a good fit for simple internal apps. For richer or customer-facing apps, use JavaScript/Python — see [Build an app with Kai](/data-apps/build-with-kai/) and [What are Keboola apps](/data-apps/what-are-apps/).
+Streamlit is a Python-only framework for building data tools quickly. It's a good fit for simple internal apps. For richer or customer-facing apps, use **Python/JS** — see [Python/JS vs Streamlit](/data-apps/what-are-apps/#pythonjs-vs-streamlit) for when to use which.
 
 :::note
-Most new apps use JavaScript/Python. Reach for Streamlit when you specifically want its quick Python-script model.
+Most new apps use Python/JS. Reach for Streamlit when you specifically want its quick Python-script model.
 :::
 
 <!-- TODO(human-review, Miro): confirm the positioning. Streamlit is supported but on a deprecation path internally; do NOT state it is retired. Keep this subtree clearly scoped as "Streamlit-specific". -->
@@ -124,7 +124,7 @@ You can upload a `secrets.toml` file directly through the UI when developing an 
 - Does not delete any existing secrets.
 
 Example `secrets.toml` structure:
-```
+```toml
 aws_key = "YOUR_AWS_KEY"
 aws_secret = "YOUR_AWS_SECRET"
 openai = "YOUR_OPENAI_KEY"
@@ -217,7 +217,7 @@ The **enterprise license** is **pre-configured for all Keboola stacks**, so no a
 
 To access the license key in your Streamlit app, use the following code:
 
-```
+```python
 import streamlit as st
 from keboola_streamlit import KeboolaStreamlit
 

@@ -38,6 +38,6 @@ Apps go well beyond dashboards: live data narratives, internal tools, configurat
 
 ## A note on frameworks
 
-Keboola apps usually run on JavaScript and Python, with [Streamlit](/data-apps/streamlit/) still supported for specific cases — and when you build with Kai, it picks the framework for you. See [JavaScript/Python vs Streamlit](/data-apps/what-are-apps/#javascriptpython-vs-streamlit) for when to use which.
+Keboola apps usually run on **Python/JS**, with [Streamlit](/data-apps/streamlit/) still supported for specific cases — and when you build with Kai, it picks the framework for you. See [Python/JS vs Streamlit](/data-apps/what-are-apps/#pythonjs-vs-streamlit) for when to use which.
 
 <!-- TODO(human-review, Miro): confirm the exact "default vs supported" wording. Python/JS is the forward path; Streamlit availability depends on the "Kai in E2B" feature flag per project. Do not state Streamlit is retired. -->

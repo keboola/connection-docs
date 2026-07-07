@@ -91,10 +91,10 @@ export const sidebar = [
       { label: "Overview", slug: "data-apps" },
       { slug: "data-apps/getting-started" },
       { slug: "data-apps/examples" },
+      { slug: "data-apps/what-are-apps" },
       { slug: "data-apps/build-with-kai" },
       { slug: "data-apps/build-in-the-ui" },
       { slug: "data-apps/build-locally" },
-      { slug: "data-apps/what-are-apps" },
       { slug: "data-apps/python-js" },
       {
         label: "Streamlit Apps",
