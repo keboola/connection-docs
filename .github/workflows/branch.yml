@@ -10,6 +10,13 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
+      - name: "Enforce PRDCT-id in PR title"
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "PR title: $PR_TITLE"
+          echo "$PR_TITLE" | grep -qE '^PRDCT-[0-9]+' || {
+            echo "::error::PR title must start with the Linear issue id, e.g. 'PRDCT-123: …' (auto-links the PR to its issue)."; exit 1; }
       - name: "Checkout"
         uses: actions/checkout@v4
       - name: "Setup Node.js"

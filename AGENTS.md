@@ -94,6 +94,10 @@ Images: place alongside the Markdown and reference with an absolute path
 ## Workflow & deployment
 
 - Docs-as-code: changes go through PRs; a maintainer reviews and merges.
+- **PR titles MUST start with the Linear issue id**, e.g. `PRDCT-354: split the
+  Snowflake transformation page`. This auto-links the PR to its issue (Linear
+  matches the id in the title, description, or branch name). The PR build
+  enforces it (`.github/workflows/branch.yml`).
 - Production deploys via GitHub Actions (`.github/workflows/main.yml`) on push to
   `main` (build → `aws s3 sync` to `help.keboola.com`).
 - The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs
