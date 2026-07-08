@@ -1,6 +1,7 @@
 ---
 title: Kai Settings
 slug: 'kai/settings'
+description: Configure Kai per project and per user — tool permissions (always allow / ask / block) and project- and user-level system instructions.
 ---
 
 
@@ -8,6 +9,9 @@ slug: 'kai/settings'
 Kai's settings let you personalize how Kai behaves in your project. Open the Kai chat panel and click the **Settings** icon (gear) to access them. Settings are **per-user and per-project**, so each team member can configure their own preferences independently.
 
 The settings panel has two tabs: **Tool Permissions** and **System Instructions**.
+<!-- TODO(human-review): confirm the gear → two-tab layout (Tool Permissions / System Instructions) and the exact tab labels against the live UI. -->
+<!-- TODO(human-review): confirm the "Settings → Kai Assistant" project-settings path and the "Settings → Features" enable path. -->
+<!-- TODO(human-review): confirm the 4,000-character instruction limit. -->
 
 ## Tool Permissions
 
