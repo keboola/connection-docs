@@ -265,6 +265,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **SQL** – Run and manage SQL queries.  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
+- **Semantic Layer** – Ground queries in your business definitions and validate AI-generated SQL against your business rules. Private beta — see [Semantic Layer](/ai/semantic-layer/).
 
 ## Restricting Tool Access
 
