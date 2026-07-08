@@ -94,7 +94,7 @@ freeze waiting for the locks to be released. See the [Redshift docs](https://doc
 for more details.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 
 ## Using Keboola Provisioned Database
 The connector offers the option to create a [Keboola Provisioned database](#keboola-redshift-database) for you. You can

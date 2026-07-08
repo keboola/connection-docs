@@ -56,7 +56,7 @@ As the token has access to a single bucket only, you do not need to specify the 
 
 ### Save Settings
 
-- **Incremental** -- enables [incremental loading](/storage/tables/#incremental-loading) in the current project. If the **Primary Key** is not set, the data is appended. 
+- **Incremental** -- enables [incremental loading](/storage/tables/incremental-loading/) in the current project. If the **Primary Key** is not set, the data is appended. 
 Otherwise the rows with an existing primary key are updated.
 - **Primary Key** -- sets the primary key of the table in the current project. The primary key does not have to be the same
 as in the *source project*.

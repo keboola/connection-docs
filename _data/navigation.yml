@@ -555,6 +555,9 @@ items:
       - url: /storage/tables/
         title: Tables & Aliases
         items:
+          - url: /storage/tables/incremental-loading/
+            title: Primary Keys & Incremental Loading
+
           - url: /storage/tables/data-types/
             title: Data Types
 

@@ -33,7 +33,7 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
 
 - **`containerId`**: string (required); the ID of the Cosmos DB container
 - **`output`**: string (required); the name of the output table in your bucket
-- **`incremental`**: boolean (optional); enables [incremental loading](/storage/tables/#incremental-loading); the default is `false`
+- **`incremental`**: boolean (optional); enables [incremental loading](/storage/tables/incremental-loading/); the default is `false`
 - **`incrementalFetchingKey`**: string (optional); the name of the key for [incremental fetching](/components/extractors/database/#incremental-fetching), e.g., `c.id`
 - **`mode`**: enum (optional)
     - `mapping` (default) -- items are exported using specified `mapping`
