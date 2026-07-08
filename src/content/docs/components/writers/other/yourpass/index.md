@@ -1,6 +1,8 @@
 ---
 title: YourPass
 slug: 'components/writers/other/yourpass'
+redirect_from:
+    - /writers/other/yourpass/
 ---
 
 
@@ -82,8 +84,8 @@ To update passes, add a table into the input mapping with the following columns:
 - `id` (required) 
 - `templateId` (required) 
 - `expirationDate` (optional) -  in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm]Z ex.: "2021-10-30T14:00:00.000000Z"
-- `dynamicData` (optional)  - flattened with an underscore as described in [Adding dynamic data and dynamic images](#### Adding dynamic data and dynamic images)
-- `dynamicImages` (optional) - flattened with an underscore as described in [Adding dynamic data and dynamic images](#### Adding dynamic data and dynamic images)
+- `dynamicData` (optional)  - flattened with an underscore as described in [Adding dynamic data and dynamic images](#adding-dynamic-data-and-dynamic-images)
+- `dynamicImages` (optional) - flattened with an underscore as described in [Adding dynamic data and dynamic images](#adding-dynamic-data-and-dynamic-images)
 - `voided` (optional) - is a boolean value : "True" or "False"
 
 

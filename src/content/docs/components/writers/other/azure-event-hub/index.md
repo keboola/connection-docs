@@ -1,6 +1,8 @@
 ---
 title: Azure Event Hub
 slug: 'components/writers/other/azure-event-hub'
+redirect_from:
+    - /writers/other/azure-event-hub/
 ---
 
 
@@ -18,15 +20,15 @@ There are two **mapping modes**:
 
 Fill in the **Connection String** and **Event Hub Name**. Then click **Save**.
 
-![Screenshot - Extractor configuration](/components/writers/other/azure-event-hub/config.png)
+![Screenshot - Configuration](/components/writers/other/azure-event-hub/config.png)
 
 Click **Add Row** to add one or more [configuration rows](/components/#configuration-rows).
 
-![Screenshot - Extractor configuration](/components/writers/other/azure-event-hub/add-row.png)
+![Screenshot - Add Row](/components/writers/other/azure-event-hub/add-row.png)
 
 Fill in the **Name**, and, optionally, the **Description**. Then click **Add Row**.
 
-![Screenshot - Extractor configuration](/components/extractors/database/cosmosdb/add-row-modal.png)
+![Screenshot - Add Row Modal](/components/writers/other/azure-event-hub/add-row-modal.png)
 
 Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 

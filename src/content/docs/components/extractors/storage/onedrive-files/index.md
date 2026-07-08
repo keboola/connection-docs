@@ -31,7 +31,7 @@ The **File Path** parameter defines the location of the file/s that you will be 
 - **`*.csv`**: Downloads all available CSV files.
 - **`/reports/*.csv`**: Downloads all available CSV files from the "reports" folder and its subfolders.
 - **`db_exports/report_*.xlsx`**: Downloads all .xlsx files named "report_*" (* is a wildcard) from the "db_exports" folder and its subfolders.
-- **`db_exports/2022_*/.csv`**: Downloads all CSV files from folders matching "db_exports/2022_*" (* is a wildcard).
+- **`db_exports/2022_*/*.csv`**: Downloads all CSV files from folders matching "db_exports/2022_*" (* is a wildcard).
 
 **new_files_only (optional)**: If set to true, the component will use the timestamp of the freshest file downloaded at the last run to download only newer files. The `LastModifiedAt` value from the GraphAPI is used.
 
