@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
+import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
   },
   integrations: [
     redirectFrom(),
+    pageMarkdown(),
     starlight({
       title: 'Keboola User Documentation',
       favicon: '/favicon.ico',

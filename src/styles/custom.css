@@ -615,6 +615,62 @@ nav.sidebar {
   border-color: var(--border-2);
 }
 
+/* Page actions split-button: [Copy as Markdown][▾] + dropdown menu */
+.copy-md-group {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+/* Specificity note: these must beat `.page-title-row > :last-child button`
+   above (0-2-1), hence the class-based 0-3-0 selectors. */
+.page-title-row .copy-md-group .copy-md-btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.page-title-row .copy-md-group .copy-md-toggle {
+  display: inline-flex;
+  align-items: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  padding: 6px 7px;
+  cursor: pointer;
+}
+.copy-md-group .copy-md-toggle[aria-expanded='true'] {
+  color: var(--fg-1);
+  background: var(--bg-2);
+}
+.copy-md-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 190px;
+  padding: 4px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.copy-md-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--fg-2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.copy-md-menu a:hover {
+  background: var(--bg-2);
+  color: var(--fg-1);
+}
+.copy-md-menu a svg { flex-shrink: 0; opacity: 0.7; }
+.copy-md-menu a:hover svg { opacity: 1; }
+
 /* ───────── Markdown content ───────── */
 .sl-markdown-content {
   font-size: 15px;
