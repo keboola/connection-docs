@@ -10,6 +10,7 @@
     "astro": "astro",
     "gen:sidebar": "node scripts/convert-nav.mjs",
     "lint:content": "node scripts/content-lint.mjs",
+    "lint:layout": "node scripts/audit-rendering.mjs",
     "new:page": "node scripts/new-page.mjs",
     "backfill:desc": "node scripts/backfill-descriptions.mjs"
   },
@@ -23,7 +24,11 @@
   },
   "devDependencies": {
     "@vercel/node": "^5.8.4",
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.2.0",
+    "mdast-util-from-markdown": "^2.0.3",
+    "mdast-util-gfm": "^3.1.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "unist-util-visit": "^5.1.0"
   },
   "overrides": {
     "@astrojs/markdown-remark": "7.2.0"

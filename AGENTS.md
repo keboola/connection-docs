@@ -41,6 +41,11 @@ api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
 scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
+  content-lint.mjs        # content linter (npm run lint:content) — descriptions, Jekyll leftovers, deixis
+  audit-rendering.mjs     # AST audit for card/grid layouts that scatter rich list content (npm run lint:layout)
+  new-page.mjs            # scaffolds a task/concept page + nav entry (npm run new:page)
+  backfill-descriptions.mjs # one-shot: draft missing frontmatter descriptions (npm run backfill:desc)
+  templates/              # reference page skeletons (task-page-template.md)
   migrate.mjs, switchover.mjs  # legacy one-time Jekyll→Astro migration (no longer used)
 astro.config.mjs  # Astro + Starlight config
 _data/navigation.yml  # sidebar source (consumed by convert-nav.mjs)
