@@ -286,14 +286,28 @@ function boldFirstPhrase(node) {
     const firstPara = li.children?.find((c) => c.type === 'paragraph');
     if (!firstPara || !firstPara.children?.length) continue;
     const firstChild = firstPara.children[0];
+
+    // A leading authored bold (`**Title**` at the very start of the item) is a
+    // genuine step title — tag it so CSS can block it. Do NOT tag inline bold
+    // that follows text (e.g. "Select **Applications**"): that's mid-sentence
+    // emphasis, and CSS `:first-child` would otherwise mistake it for a title
+    // because it ignores the leading text node, breaking the step onto a
+    // staircase of lines.
+    if (firstChild.type === 'strong') {
+      addClass(firstChild, 'beacon-step-title');
+      continue;
+    }
     if (firstChild.type !== 'text') continue;
     const value = firstChild.value;
     const splitMatch = value.match(/^([^—:.]{1,60})([—:.])\s*(.*)$/s);
     if (!splitMatch) continue;
     const [, title, , rest] = splitMatch;
-    const newChildren = [
-      { type: 'strong', children: [{ type: 'text', value: title.trim() }] },
-    ];
+    const titleNode = {
+      type: 'strong',
+      data: { hProperties: { className: ['beacon-step-title'] } },
+      children: [{ type: 'text', value: title.trim() }],
+    };
+    const newChildren = [titleNode];
     if (rest) newChildren.push({ type: 'text', value: ` ${rest}` });
     firstPara.children.splice(0, 1, ...newChildren);
   }
