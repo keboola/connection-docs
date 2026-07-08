@@ -25,6 +25,10 @@ only a *usage pattern* of the Keboola platform. The idea is to create separate p
 analyzing and writing data. The projects structure can follow the organization structure, technological structure, or
 anything else really.
 
+:::tip
+This page explains the concept with a worked example. For a guided walkthrough of *when and how* to adopt it for your organization, see the [Multi-Project Architecture Guide](/tutorial/onboarding/architecture-guide/).
+:::
+
 ## Example Scenario
 Let's say that you have an existing Keboola project that contains:
 
