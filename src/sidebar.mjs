@@ -448,6 +448,16 @@ export const sidebar = [
       { label: "Overview", slug: "workspace" },
       { slug: "workspace/snowflake-workspaces-access-changes" },
       { slug: "workspace/sql-editor" },
+      {
+        label: "Keboola JDBC Driver",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "workspace/jdbc-driver" },
+          { slug: "workspace/jdbc-driver/dbeaver" },
+          { slug: "workspace/jdbc-driver/datagrip" },
+          { slug: "workspace/jdbc-driver/tableau" },
+        ],
+      },
     ],
   },
   {

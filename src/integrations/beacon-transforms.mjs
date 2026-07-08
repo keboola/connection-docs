@@ -286,18 +286,36 @@ function boldFirstPhrase(node) {
     const firstPara = li.children?.find((c) => c.type === 'paragraph');
     if (!firstPara || !firstPara.children?.length) continue;
     const firstChild = firstPara.children[0];
+
+    // A leading authored bold (`**Title**` at the very start of the item) is a
+    // genuine step title — tag it so CSS can block it. Do NOT tag inline bold
+    // that follows text (e.g. "Select **Applications**"): that's mid-sentence
+    // emphasis, and CSS `:first-child` would otherwise mistake it for a title
+    // because it ignores the leading text node, breaking the step onto a
+    // staircase of lines.
+    if (firstChild.type === 'strong') {
+      addClass(firstChild, 'beacon-step-title');
+      continue;
+    }
     if (firstChild.type !== 'text') continue;
     const value = firstChild.value;
     const splitMatch = value.match(/^([^—:.]{1,60})([—:.])\s*(.*)$/s);
     if (!splitMatch) continue;
     const [, title, , rest] = splitMatch;
-    const newChildren = [
-      { type: 'strong', children: [{ type: 'text', value: title.trim() }] },
-    ];
+    const titleNode = {
+      type: 'strong',
+      data: { hProperties: { className: ['beacon-step-title'] } },
+      children: [{ type: 'text', value: title.trim() }],
+    };
+    const newChildren = [titleNode];
     if (rest) newChildren.push({ type: 'text', value: ` ${rest}` });
     firstPara.children.splice(0, 1, ...newChildren);
   }
 }
+
+/** Blocks allowed between two fragments of one numbered sequence. A lone image
+ *  becomes a `paragraph` wrapping the image node, so `paragraph` covers it. */
+const STEP_CONNECTIVE = new Set(['paragraph', 'html', 'thematicBreak', 'code', 'blockquote']);
 
 function transformStepLists(tree) {
   for (let i = 0; i < tree.children.length; i++) {
@@ -342,6 +360,39 @@ function transformStepLists(tree) {
     node.ordered = true;
     addClass(node, 'beacon-steps');
     boldFirstPhrase(node);
+  }
+
+  // An image/paragraph (or a step's nested sub-bullets) between steps makes
+  // markdown split one numbered list into several `<ol start=N>`. The pass above
+  // only tags the first fragment; extend `.beacon-steps` to the continuations
+  // (carrying the badge counter forward) so a sequence isn't styled half as
+  // badges and half as bare blue numbers — e.g. steps 1–3 badges, 4–5 plain.
+  promoteStepContinuations(tree);
+}
+
+function promoteStepContinuations(tree) {
+  const kids = tree.children;
+  const isStepList = (n) =>
+    n?.type === 'list' && n.ordered &&
+    (n.data?.hProperties?.className || []).includes('beacon-steps');
+
+  for (let i = 0; i < kids.length; i++) {
+    if (!isStepList(kids[i])) continue;
+    let expected = (kids[i].start ?? 1) + kids[i].children.length;
+    for (let j = i + 1; j < kids.length; j++) {
+      const b = kids[j];
+      if (b.type === 'heading') break; // new section ends the sequence
+      if (b.type === 'list') {
+        if (!b.ordered) continue; // a step's nested sub-bullets — step over
+        if ((b.start ?? 1) !== expected) break; // numbering doesn't continue
+        addClass(b, 'beacon-steps');
+        setHProp(b, 'style', `counter-reset: beacon-step ${(b.start ?? 1) - 1}`);
+        boldFirstPhrase(b);
+        expected += b.children.length;
+        continue;
+      }
+      if (!STEP_CONNECTIVE.has(b.type)) break; // a real content break
+    }
   }
 }
 
@@ -491,16 +542,30 @@ function transformGlossaryList(tree) {
       const second = para.children[1];
       if (!second || second.type !== 'text') return;
       if (!/^\s*(—|–|--|-)\s+/.test(second.value)) return;
-      // The 2-col grid renders via `display: contents`, so the <li> must hold
-      // exactly two inline pieces (term + a single definition text). Any extra
-      // inline node — more bold, a link, italics — becomes its own grid cell and
-      // scatters into the narrow term column (text breaks word-by-word). Render
-      // those richer items as a plain list instead of a broken glossary.
-      if (para.children.length !== 2) return;
       glossaryShape++;
     }
     if (glossaryShape / node.children.length < 0.66) return;
     addClass(node, 'beacon-glossary');
+
+    // Wrap the whole definition (everything after the leading term) in a single
+    // element so the 2-col grid gets exactly [term][definition]. Without this,
+    // `p{display:contents}` flattens each inline node (extra bold, links) into
+    // its own grid cell → the definition "staircases" into the narrow term
+    // column. Wrapped, the definition flows as one full-width sentence.
+    for (const li of node.children) {
+      const para = li.children?.find((c) => c.type === 'paragraph');
+      if (!para?.children?.length) continue;
+      const [term, ...rest] = para.children;
+      if (!rest.length) continue;
+      para.children = [
+        term,
+        {
+          type: 'beaconGlossaryDef',
+          data: { hName: 'span', hProperties: { className: ['beacon-glossary-def'] } },
+          children: rest,
+        },
+      ];
+    }
   });
 }
 

@@ -1,0 +1,24 @@
+---
+// Override of Starlight's SocialIcons so we can add a header link to the
+// Keboola API reference (api.keboola.com). SocialIcons renders inside the
+// header's right-group, so this is the natural, view-transition-safe slot for
+// a persistent header link (no JS injection needed). The Default is kept so any
+// future `social` config still renders.
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+---
+
+<a
+  class="header-api-link"
+  href="https://api.keboola.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Keboola API documentation (opens in a new tab)"
+>
+  <svg class="header-api-link__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="8 6 2 12 8 18" />
+    <polyline points="16 6 22 12 16 18" />
+  </svg>
+  <span class="header-api-link__label">API</span>
+</a>
+
+<Default {...Astro.props}><slot /></Default>

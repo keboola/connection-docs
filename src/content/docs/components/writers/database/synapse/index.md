@@ -1,6 +1,8 @@
 ---
 title: Synapse
 slug: 'components/writers/database/synapse'
+redirect_from:
+    - /writers/database/synapse/
 ---
 
 

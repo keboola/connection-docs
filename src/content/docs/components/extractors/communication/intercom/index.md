@@ -49,6 +49,7 @@ The table `users` lists all [Users](https://developers.intercom.com/intercom-api
 has the following columns:
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `user` |
 | `id` | The Intercom defined id representing the user |
 | `created_at` | The time the user was added to Intercom |
@@ -84,6 +85,7 @@ has the following columns:
 This table records relations between `users` and `tags`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `tag` |
 | `id` [FK] | Tag identifier (`tags.id`) |
 | `users_pk` [FK] | User identifier (`users.id`) |
@@ -93,6 +95,7 @@ This table records relations between `users` and `tags`.
 This table records relations between `users` and `segments`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `segment` |
 | `id` [FK] | Segment identifier (`segments.id`) |
 | `users_pk` [FK] | User identifier (`users.id`) |
@@ -102,6 +105,7 @@ This table records relations between `users` and `segments`.
 This table records relations between `users` and `companies`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `company` |
 | `id` [FK] | Company identifier (`companies.id`) |
 | `users_pk` [FK] | User identifier (`users.id`) |
@@ -111,6 +115,7 @@ This table records relations between `users` and `companies`.
 This table lists social profiles attached to the user.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `social_profile` |
 | `id` | User ID on the service |
 | `name` | The name of the service (e.g., twitter, facebook) |
@@ -123,6 +128,7 @@ This table lists social profiles attached to the user.
 This table lists all [Notes](https://developers.intercom.com/intercom-api-reference/reference#note-model).
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `note` |
 | `id` [PK] | The id representing the note |
 | `created_at` | The time the note was created | 
@@ -138,6 +144,7 @@ This table lists [Event Summaries](https://developers.intercom.com/intercom-api-
 for each user.
 
 | Column | Description |
+| --- | --- |
 | `user_id` [FK] | The user id |  
 | `name` | Event name |
 | `count` | Event count |
@@ -150,6 +157,7 @@ for each user.
 This table lists [Leads](https://developers.intercom.com/intercom-api-reference/reference#leads-object).
 
 | Column | Description |
+| --- | --- |
 | `type` | Value is `contact` |
 | `id` | The Intercom defined id representing the Lead |
 | `created_at` | The time the Lead was added to Intercom |
@@ -186,6 +194,7 @@ This table lists [Leads](https://developers.intercom.com/intercom-api-reference/
 This table records relations between `leads` and `tags`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `tag` |
 | `id` [FK] | Tag identifier (`tags.id`) |
 | `leads_pk` [FK] | Lead identifier (`leads.id`) |
@@ -195,6 +204,7 @@ This table records relations between `leads` and `tags`.
 This table records relations between `leads` and `segments`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `segment` |
 | `id` [FK] | Segment identifier (`segments.id`) |
 | `leads_pk` [FK] | Lead identifier (`leads.id`) |
@@ -204,6 +214,7 @@ This table records relations between `leads` and `segments`.
 This table records relations between `leads` and `companies`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `company` |
 | `id` [FK] | Company identifier (`companies.id`) |
 | `leads_pk` [FK] | Lead identifier (`leads.id`) |
@@ -213,6 +224,7 @@ This table records relations between `leads` and `companies`.
 This table lists the social profiles attached to all users.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `social_profile` |
 | `id` | User ID on the service |
 | `name` | The name of the service (e.g., twitter, facebook) |
@@ -225,6 +237,7 @@ This table lists the social profiles attached to all users.
 This table lists all [Companies](https://developers.intercom.com/intercom-api-reference/reference#company-model).
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `company` |
 | `id` [PK] | The Intercom defined id representing the company |
 | `created_at` | The time the company was added to Intercom |
@@ -244,6 +257,7 @@ This table lists all [Admins](https://developers.intercom.com/intercom-api-refer
 
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `admin` or `team` |
 | `id` [PK] | The id of the admin or team |
 | `name` | The name of the admin or team |
@@ -254,6 +268,7 @@ This table lists all [Admins](https://developers.intercom.com/intercom-api-refer
 This table lists all [Tags](https://developers.intercom.com/intercom-api-reference/reference#tag-model).
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `tag` |
 | `id` [PK] | The id of the tag |
 | `name` | The name of the tag |
@@ -263,6 +278,7 @@ This table lists all [Tags](https://developers.intercom.com/intercom-api-referen
 This table lists all [Segments](https://developers.intercom.com/intercom-api-reference/reference#segment-model).
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `segment` |
 | `id` [PK] | The id representing the segment |
 | `name` | The name of the segment |
@@ -276,6 +292,7 @@ This table lists all [Segments](https://developers.intercom.com/intercom-api-ref
 This table lists all [Conversations](https://developers.intercom.com/intercom-api-reference/reference#conversation-model).
 
 | Column | Description |
+| --- | --- |
 | `type` | Value is `conversation` |
 | `id` [PK] | The id representing the conversation |
 | `created_at` | The time the conversation was created |
@@ -302,6 +319,7 @@ This table lists all [Conversations](https://developers.intercom.com/intercom-ap
 This table lists all attachments for all conversations.
 
 | Column | Description |
+| --- | --- |
 | `type` | Undocumented |
 | `name` | Undocumented |
 | `url` | Undocumented |
@@ -316,6 +334,7 @@ This table lists all attachments for all conversations.
 This table lists all customers (users or leads) involved in each conversation.
 
 | Column | Description |
+| --- | --- |
 | `type` | `user` or `conversation` (lead) |
 | `id` | User or Lead id |
 | `conversations_pk` [FK] | Conversation identifier (`conversations.id`) |
@@ -325,6 +344,7 @@ This table lists all customers (users or leads) involved in each conversation.
 This table records relations between `conversations` and `tags`.
 
 | Column | Description |
+| --- | --- |
 | `type` | 	Value is `tag` |
 | `id` [FK] | Tag identifier (`tags.id`) |
 | `conversations_pk` [FK] | Conversation identifier (`conversations.id`) |
@@ -334,6 +354,7 @@ This table records relations between `conversations` and `tags`.
 This table lists all [Conversation parts](https://developers.intercom.com/intercom-api-reference/reference#conversation-part-model).
 
 | Column | Description |
+| --- | --- |
 | `type` | Value is `conversation_part` |
 | `id` [PK] | The id representing the conversation part |
 | `part_type` | The type of conversation part |
@@ -352,6 +373,7 @@ This table lists all [Conversation parts](https://developers.intercom.com/interc
 This table lists all attachments for each conversation part.
 
 | Column | Description |
+| --- | --- |
 | `type` | Undocumented |
 | `name` | Undocumented |
 | `url` | Undocumented |

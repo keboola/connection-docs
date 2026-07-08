@@ -5,6 +5,7 @@ description: Per-app settings, environment variables, data access, backend versi
 redirect_from:
   - /components/data-apps/backend-versions/
   - /components/data-apps/terminal-log-tab/
+  - /data-apps/storage-access/
 ---
 
 
@@ -137,8 +138,8 @@ For the full API, see the [Keboola Storage Python Client documentation](https://
 
 Storage Access lets your app read from and write back to Keboola Storage tables in real time, over SQL through the Query Service.
 
-:::caution
-**Snowflake only.** Storage Access currently works only on projects using the Snowflake storage backend. BigQuery support is coming soon.
+:::note
+Storage Access works on both **Snowflake** and **BigQuery** backends. The SQL examples below use Snowflake identifier quoting (`"bucket"."table"`); on BigQuery, identifier quoting and table naming differ — see [BigQuery backend](#bigquery-backend).
 :::
 
 **Enable it:** in **Project Settings > Features**, activate **Storage Access**. Then, in the app's **Advanced Settings > Storage Access**, click **+ Add Writable Table** and select the buckets/tables the app may read and write (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`). All selected tables must exist before you deploy. Managing configs via the Storage API? The same selection is expressed under `storage.output.tables` with `"unload_strategy": "direct-grant"` per table.
@@ -171,6 +172,26 @@ The Query Service accepts raw SQL and does not support parameterized queries. Va
 :::
 
 **How it works:** enabling Storage Access provisions an ephemeral **workspace** (a database user with the granted permissions). A fresh workspace is created each time the app starts, wakes from sleep, or is redeployed, and is deleted when the app is deleted — so permission changes take effect on the next start.
+
+#### BigQuery backend
+
+Setup, workspace lifecycle, environment variables, and the Query Service client are identical on BigQuery — only the SQL dialect differs. The Query Service passes SQL through to the backend unchanged (it does **not** translate dialects), so apply two rules to every query:
+
+- **Quote identifiers with backticks**, as `dataset.table` (two parts). Do not prepend the Keboola stage (`in`/`out`) as a third segment — BigQuery resolves a three-part name as `project.dataset.table` and fails with an error like `The project <stage> has not enabled BigQuery`.
+- **Use the mangled dataset name.** BigQuery dataset names cannot contain `.` or `-`, so every `.` and `-` in the bucket ID becomes `_` (`in.c-main` → `in_c_main`). Only the bucket (dataset) name is mangled — the table name keeps its original form.
+
+```sql
+-- ✅ Correct — dataset.table (two parts); either quoting style works
+SELECT * FROM `in_c_main`.`customers` LIMIT 1000
+SELECT * FROM `in_c_main.customers`  LIMIT 1000
+
+-- ❌ Wrong — the Keboola stage `in` becomes a third (project) segment
+SELECT * FROM `in`.`c-main`.`customers` LIMIT 1000
+```
+
+:::tip[Find the exact names in Storage]
+Open the table in **Storage** and check its **Overview** tab — it shows the **Dataset Name** and **Table Name** to use in queries. To discover names dynamically at runtime, query `INFORMATION_SCHEMA.SCHEMATA`.
+:::
 
 **Input Mapping vs Storage Access:**
 
@@ -237,6 +258,5 @@ If the app deployment job fails, you can see the logs from its container in the 
 
 Storage Access has the following limitations:
 
-- **Snowflake only** — Storage Access currently works only with Snowflake backends. BigQuery support is planned for a future release.
 - **Column-level permissions not supported** — granting access to a table grants read/write on all its columns.
 - **Permission changes require app restart** — adding or removing tables takes effect on the next app start (deploy, redeploy, or wake from sleep).

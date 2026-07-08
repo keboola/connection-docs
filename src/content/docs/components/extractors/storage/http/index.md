@@ -61,5 +61,5 @@ There are three options for determining column names:
 
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**. 
 
-The data source connector also supports [Advanced mode](/components/#advanced-mode), all supported
+The data source connector also supports [Debug mode](/components/#debug-mode), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/http-extractor).

@@ -78,7 +78,7 @@ The resulting file `import-data.txt.csv` can now be imported into Keboola Storag
 When you export a table from Storage, the same format is used for import:
 
 - **Delimiter** is set to comma `,`.
-- **Enclosure** is set double quote `"`.
+- **Enclosure** is set to double quote `"`.
 - Enclosure is escaped by preceding it with another enclosure character.
 - Header row is always present.
 - Unix line breaks are used (LF -- \n)
@@ -90,7 +90,7 @@ The above format is again compatible with many applications; you can
 - open it in OpenOffice / LibreOffice Calc without any conversion (just make sure you use only comma as a delimiter 
 when asked about the file format).
 - import it into Google Drive without any conversion (notice, however, that you might want to
-    use the Google Drive Writer instead)
+    use the [Google Drive data destination connector](/components/writers/storage/google-drive/) instead)
 - import it into Microsoft Excel by following the below instructions.
 
 *Note: The rows are exported in random order and there is no way to specify ordering of rows in the exported file.*

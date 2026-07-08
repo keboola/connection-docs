@@ -91,18 +91,57 @@ async function askDocsQuestion(
     throw new Error(`AI Service /docs/question failed: HTTP ${res.status}`);
   }
 
-  // DocsResponse: { response: string, metadata: { sources: string[] } }
+  // DocsResponse: { text: string, sourceUrls: string[] }.
+  // (An earlier build expected { response, metadata.sources }; the live AI
+  //  Service returns { text, sourceUrls } — read those, but tolerate the old
+  //  shape too so a future revert on either side doesn't silently blank Kai.)
   const data = (await res.json()) as {
+    text?: string;
+    sourceUrls?: string[];
     response?: string;
     metadata?: { sources?: string[] };
   };
 
+  const sources = data.sourceUrls ?? data.metadata?.sources;
   return {
-    text: data.response ?? '',
-    source_urls: Array.isArray(data.metadata?.sources)
-      ? (data.metadata!.sources as string[])
-      : [],
+    text: data.text ?? data.response ?? '',
+    source_urls: Array.isArray(sources) ? sources : [],
   };
+}
+
+// ─── Source URL normalization ────────────────────────────────────────────
+
+/**
+ * The AI Service indexes docs by their GitHub repo file paths, so it returns
+ * source URLs like
+ *   https://help.keboola.com/connection-docs/src/content/docs/storage
+ * instead of the published page URL
+ *   https://help.keboola.com/storage/
+ * which 404s. Strip the repo-path prefix and normalize to the published form.
+ *
+ * Idempotent: URLs that don't carry the prefix (or live on another host such as
+ * developers.keboola.com / components.keboola.com) are returned unchanged, so
+ * this becomes a no-op once the upstream index is fixed.
+ */
+function normalizeSourceUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    if (u.hostname !== 'help.keboola.com') return url;
+
+    // Match an optional leading `/connection-docs` then `/src/content/docs`.
+    const prefix = /^\/(?:connection-docs\/)?src\/content\/docs\//;
+    if (!prefix.test(u.pathname)) return url;
+
+    let path = u.pathname.replace(prefix, '');
+    // Defensive: drop a trailing `/index` and any markdown extension.
+    path = path.replace(/\.mdx?$/i, '').replace(/\/index$/i, '');
+    // Exactly one leading + trailing slash.
+    path = '/' + path.replace(/^\/+|\/+$/g, '') + '/';
+
+    return `https://help.keboola.com${path}`;
+  } catch {
+    return url;
+  }
 }
 
 // ─── Source label helpers ────────────────────────────────────────────────
@@ -186,7 +225,10 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
   if (answer.source_urls.length) {
     const items = answer.source_urls
       .slice(0, 6)
-      .map((url) => ({ url, label: labelForUrl(url) }));
+      .map((raw) => {
+        const url = normalizeSourceUrl(raw);
+        return { url, label: labelForUrl(url) };
+      });
     writeSse(res, { type: 'sources', items });
   }
 

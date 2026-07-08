@@ -17,7 +17,7 @@ You need to provide a *host name*, *user name*, *password*, *database name*, and
 
 ![Screenshot - Save Credentials](/components/writers/database/mssql/mssql-2.png)
 
-We highly recommend that you create a dedicated credentials for the connector in your database. You can use the following SQL code to get started:
+We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
 ```sql
 CREATE LOGIN writer_sample WITH PASSWORD = 'Writer_sample1';

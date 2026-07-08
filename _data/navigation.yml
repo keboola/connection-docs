@@ -244,7 +244,7 @@ items:
                 title: Google Ad Manager
 
               - url: /components/extractors/marketing-sales/google-analytics/
-                title: Google Analytics  (UA, GA4)
+                title: Google Analytics 4 (GA4)
 
               - url: /components/extractors/marketing-sales/google-cm360/
                 title: Google Campaign Manager 360
@@ -641,6 +641,16 @@ items:
 
       - url: /workspace/sql-editor/
         title: SQL Editor
+
+      - url: /workspace/jdbc-driver/
+        title: Keboola JDBC Driver
+        items:
+          - url: /workspace/jdbc-driver/dbeaver/
+            title: DBeaver
+          - url: /workspace/jdbc-driver/datagrip/
+            title: DataGrip
+          - url: /workspace/jdbc-driver/tableau/
+            title: Tableau
 
   - url: /management/
     title: Management
