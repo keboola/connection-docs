@@ -1,6 +1,7 @@
 ---
 title: Buckets
 slug: 'storage/buckets'
+description: Buckets are containers for tables in Storage, organized into in and out stages — creating a bucket, reviewing its detail, and using buckets to share tables.
 ---
 
 Buckets are containers for tables in Storage. They are further organized into the following two **stages**:
@@ -14,7 +15,7 @@ For information on how to load data into Storage, see the corresponding part of 
 
 ![Screenshot - Create bucket](/storage/buckets/create-bucket.png)
 
-To review information about an existing bucket, hover over the bucket name and select **Bucket detail**:
+To review information about an existing bucket, click the bucket name in the **Tables & Buckets** tab; the bucket detail shows its ID, backend, sharing status, schema, stage, and size:
 
 ![Screenshot - Bucket information](/storage/buckets/bucket-info.png)
 

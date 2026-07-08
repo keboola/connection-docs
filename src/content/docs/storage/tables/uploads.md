@@ -1,6 +1,7 @@
 ---
 title: Table Import & Export
 slug: 'storage/tables/uploads'
+description: How table imports and exports flow through File Storage, why exported tables may be sliced, and how to export a merged file from the table detail.
 ---
 
 All tables imported to and exported from Storage go through [Files](/storage/files/).
@@ -18,7 +19,7 @@ created in *Files* and then it is actually downloaded from there. This does not 
 Storage tables manually though.
 Beware, however, that due to the nature of database exports, the exported table may be **sliced** and require
 [substantial effort to reconstruct](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
-To make sure your tables are exported as merged files, always use the **Export** feature in 
-the **Action** tab of the table detail:
+To make sure your tables are exported as merged files, always use the **Export table** option in 
+the three-dots menu of the table detail:
 
 ![Screenshot - Export table](/storage/tables/table-export.png)
