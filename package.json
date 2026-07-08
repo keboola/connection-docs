@@ -9,7 +9,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "gen:sidebar": "node scripts/convert-nav.mjs"
+    "gen:sidebar": "node scripts/convert-nav.mjs",
+    "audit": "node scripts/audit-phase2.mjs",
+    "lint": "node scripts/lint-docs.mjs",
+    "check:render": "node scripts/check-render.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.38",
@@ -20,6 +23,7 @@
   },
   "devDependencies": {
     "@vercel/node": "^5.8.4",
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.2.0",
+    "playwright": "^1.49.0"
   }
 }
