@@ -62,7 +62,7 @@ posts created by a Facebook Page. Each post contains fields such as `caption`, `
 and `type`. The fields parameter in such case is `caption,message,created_time,type`.
 
 - **Fields/Endpoint Nesting** ---
-    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/comment) field/endpoint for each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you wanted to include likes of posts comments,the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
+    Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/comment) field/endpoint for each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you wanted to include likes of posts comments, the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
 
 - **Fields Parametrization** ---
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.
