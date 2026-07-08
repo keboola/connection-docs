@@ -488,7 +488,6 @@ export const sidebar = [
           { slug: "management/project/migration" },
           { slug: "management/project/delete" },
           { slug: "management/project/ai-rules" },
-          { slug: "management/project/mcp-server" },
         ],
       },
       { slug: "management/payg-project" },
@@ -510,7 +509,15 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "ai" },
       { slug: "ai/ai-kit" },
-      { slug: "ai/mcp-server" },
+      {
+        label: "MCP Server",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "ai/mcp-server" },
+          { slug: "ai/mcp-server/connect" },
+          { slug: "ai/mcp-server/reference" },
+        ],
+      },
     ],
   },
   {
