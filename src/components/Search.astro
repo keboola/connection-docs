@@ -1,0 +1,14 @@
+---
+// Override of Starlight's Search so the `<site-search>` web component survives
+// Astro view transitions. The repo adds a manual <ClientRouter>, which swaps the
+// header on every client-side navigation — leaving a fresh, un-bound <site-search>
+// whose lazy Pagefind init doesn't reliably re-attach (search/⌘K appear broken
+// until a full reload). Persisting a wrapper keeps the same, already-initialized
+// element (and its Pagefind binding) across navigations. `display: contents`
+// keeps the wrapper invisible to the header's flex layout.
+import Default from '@astrojs/starlight/components/Search.astro';
+---
+
+<div transition:persist="starlight-search" style="display: contents">
+  <Default {...Astro.props}><slot /></Default>
+</div>
