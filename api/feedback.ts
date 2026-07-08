@@ -25,16 +25,21 @@ export const config = { runtime: 'nodejs' };
 const INGEST_URL = (process.env.FEEDBACK_INGEST_URL || '').trim();
 const INGEST_TOKEN = (process.env.FEEDBACK_INGEST_TOKEN || '').trim();
 
-// Keep in sync with the chips offered in Feedback.astro. Unknown reasons are
+// Keep in sync with the reasons offered in Feedback.astro. Unknown reasons are
 // dropped rather than rejected, so tweaking the UI never 400s a submission.
 const ALLOWED_REASONS = new Set([
-  'inaccurate',
-  'hard-to-follow',
-  'missing-info',
-  'outdated',
-  'clear',
+  // 👍 "What did you like?"
   'accurate',
-  'good-example',
+  'solved-problem',
+  'easy-to-understand',
+  'helped-decide',
+  // 👎 "What could be better?"
+  'inaccurate',
+  'hard-to-understand',
+  'missing-info',
+  'didnt-solve',
+  // shared
+  'another-reason',
 ]);
 
 const MAX_COMMENT = 1000;
