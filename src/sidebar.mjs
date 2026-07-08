@@ -434,7 +434,6 @@ export const sidebar = [
           { slug: "transformations/dbt/cli" },
           { slug: "transformations/dbt/transformation" },
           { slug: "transformations/dbt/cloud" },
-          { slug: "transformations/dbt/flows" },
           { slug: "transformations/dbt/troubleshooting" },
         ],
       },
