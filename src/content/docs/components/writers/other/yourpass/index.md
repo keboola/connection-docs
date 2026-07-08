@@ -1,5 +1,6 @@
 ---
 title: YourPass
+description: YourPass enables users to create passes for mobile wallets; e.g., for boarding passes, loyalty points, or tickets.
 slug: 'components/writers/other/yourpass'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Python/JS Apps
+description: Python/JavaScript Apps give you full control over what you build and how you build it.
 slug: 'data-apps/python-js'
 ---
 

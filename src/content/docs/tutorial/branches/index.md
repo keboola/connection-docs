@@ -1,5 +1,6 @@
 ---
 title: "Part 6: Development Branches"
+description: The feature Development Branches allows you to modify component configurations without interfering with the running configurations or entire automated…
 slug: 'tutorial/branches'
 ---
 

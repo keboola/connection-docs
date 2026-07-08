@@ -1,5 +1,6 @@
 ---
 title: Locking Package Versions
+description: "This guide explains how to lock package versions in Streamlit applications in Keboola, covering both deployment methods: from code and from Git repository."
 slug: 'data-apps/lock-streamlit-version'
 redirect_from:
   - /components/data-apps/lock-streamlit-version/

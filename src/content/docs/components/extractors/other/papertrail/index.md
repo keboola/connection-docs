@@ -1,5 +1,6 @@
 ---
 title: Papertrail
+description: This data source connector uses the Papertrail Search API to import events matching the specified query from Papertrail (logs from apps, servers, and cloud…
 slug: 'components/extractors/other/papertrail'
 redirect_from:
     - /extractors/other/papertrail/

@@ -1,5 +1,6 @@
 ---
 title: Keboola Governance Guide
+description: "Welcome to the Keboola Governance Guide! Here, we cover everything you need to know about managing and monitoring your use of our platform, including operating…"
 slug: 'tutorial/onboarding/governance-guide'
 ---
 

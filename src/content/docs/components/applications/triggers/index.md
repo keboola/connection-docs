@@ -1,5 +1,6 @@
 ---
 title: Trigger Applications
+description: Triggers are applications that generate an action in a specified service. For example, triggering the creation of a report in a 3rd party system, or starting a…
 slug: 'components/applications/triggers'
 redirect_from:
     - /applications/triggers/

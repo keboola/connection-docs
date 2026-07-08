@@ -1,5 +1,6 @@
 ---
 title: Orchestration Trigger
+description: The Orchestration Trigger application triggers Keboola Conditional Flows and Legacy Flows — typically across different Keboola projects in a Multi-Project…
 slug: 'components/applications/triggers/orchestration-trigger-queue-v2'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Streamlit Apps
+description: Streamlit is a Python framework that transforms data scripts into interactive web applications with minimal code.
 slug: 'data-apps/streamlit'
 redirect_from:
   - /components/data-apps/streamlit/

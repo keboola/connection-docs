@@ -1,5 +1,6 @@
 ---
 title: Authentication
+description: "Once an app is deployed, its URL is publicly available! We recommend using one of the built-in authentication methods described below to protect your app."
 slug: 'data-apps/authentication'
 redirect_from:
   - /components/data-apps/authentication/

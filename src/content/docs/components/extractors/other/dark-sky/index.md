@@ -1,5 +1,6 @@
 ---
 title: Dark Sky
+description: This data source connector allows you to look up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
 slug: 'components/extractors/other/dark-sky'
 redirect_from:
     - /extractors/other/dark-sky/

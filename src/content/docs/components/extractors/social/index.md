@@ -1,5 +1,6 @@
 ---
 title: Social Data Source Connectors
+description: Data source connectors import data from external sources and integrate it to the Keboola environment.
 slug: 'components/extractors/social'
 redirect_from:
     - /extractors/social/

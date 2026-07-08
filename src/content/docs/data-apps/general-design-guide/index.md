@@ -1,5 +1,6 @@
 ---
 title: Apps General Design Guide
+description: This guide will help you quickly create a user-friendly app in Keboola. We cover essentials like theming, headers, storage integration, and more to streamline…
 slug: 'data-apps/general-design-guide'
 redirect_from:
   - /components/data-apps/general-design-guide/

@@ -1,5 +1,6 @@
 ---
 title: Keboola Storage
+description: This data source connector loads single or multiple tables from a Keboola project and stores them in a bucket in your current project.
 slug: 'components/extractors/storage/storage-api'
 redirect_from:
     - /extractors/storage/storage-api/

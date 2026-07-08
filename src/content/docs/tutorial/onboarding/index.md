@@ -1,5 +1,6 @@
 ---
 title: Keboola Platform Onboarding
+description: "Welcome to the Keboola onboarding guide! Whether you've completed your proof of concept project or are stepping up from the free tier, this guide will help you…"
 slug: 'tutorial/onboarding'
 ---
 

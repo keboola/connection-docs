@@ -1,5 +1,6 @@
 ---
 title: Mapping Examples
+description: "extractors <table> <tr><th>id</th><th>name</th></tr> <tr><td>5716054bee6e764c94fa7ddd</td><td>MongoDB extractor</td></tr> </table>"
 slug: 'components/extractors/database/mongodb/mapping'
 redirect_from:
     - /extractors/database/mongodb/mapping/

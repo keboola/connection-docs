@@ -1,5 +1,6 @@
 ---
 title: dbt Transformation
+description: dbt™ is a transformation workflow that lets teams deploy analytics code quickly and collaboratively.
 slug: 'transformations/dbt'
 ---
 

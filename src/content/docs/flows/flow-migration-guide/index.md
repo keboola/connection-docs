@@ -1,5 +1,6 @@
 ---
 title: Migration Guide
+description: This guide walks you through migrating an existing Legacy Flow to the new Conditional Flow engine.
 slug: 'flows/flow-migration-guide'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Snowflake Workspaces Access Changes
+description: By end of the year 2025, all projects using Keboola’s shared Snowflake backend (Multi-tenant or Pay-As-You-Go) will lose direct access to SQL workspaces, as…
 slug: 'workspace/snowflake-workspaces-access-changes'
 redirect_from:
   - /transformations/workspace/snowflake-workspaces-access-changes/

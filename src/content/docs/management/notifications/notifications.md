@@ -1,5 +1,6 @@
 ---
 title: Notifications
+description: Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage.
 slug: 'management/notifications'
 ---
 

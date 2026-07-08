@@ -1,5 +1,6 @@
 ---
 title: Data Catalog
+description: "Note: The original feature called Shared Buckets is now integrated into our Data Catalog."
 slug: 'catalog'
 redirect_from:
   - /storage/buckets/sharing/

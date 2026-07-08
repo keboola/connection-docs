@@ -1,5 +1,6 @@
 ---
 title: Native Data Types
+description: The Native Data Types feature streamlines the process of propagating data types from the source to the storage.
 slug: 'storage/tables/data-types'
 ---
 

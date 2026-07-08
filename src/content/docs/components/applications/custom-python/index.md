@@ -1,5 +1,6 @@
 ---
 title: Custom Python
+description: This component lets you run custom Python code directly in Keboola. Use it to call external APIs, process files, push data to third-party systems, or build any…
 slug: 'components/applications/custom-python'
 ---
 

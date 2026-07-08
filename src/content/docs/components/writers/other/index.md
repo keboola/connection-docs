@@ -1,5 +1,6 @@
 ---
 title: Other Data Destination Connectors
+description: Data destination connectors export data from Keboola to external systems. Apart from data destination connectors for business intelligence platforms, databases…
 slug: 'components/writers/other'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Storage Jobs
+description: Storage jobs are not to be confused with component jobs. Storage jobs represent a low level view of all data loaded to and unloaded from the Table Storage.
 slug: 'storage/jobs'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Organizations
+description: Keboola projects are grouped into organizations. Each organization is assigned to a maintainer (either Keboola or Keboola Partner), who is also primarily…
 slug: 'management/organization'
 ---
 

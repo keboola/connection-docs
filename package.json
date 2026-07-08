@@ -8,17 +8,24 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "gen:sidebar": "node scripts/convert-nav.mjs"
+    "gen:sidebar": "node scripts/convert-nav.mjs",
+    "lint:content": "node scripts/content-lint.mjs",
+    "new:page": "node scripts/new-page.mjs",
+    "backfill:desc": "node scripts/backfill-descriptions.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.38",
     "astro": "^6",
     "marked": "^18.0.4",
     "sharp": "^0.33",
-    "starlight-image-zoom": "^0.14"
+    "starlight-image-zoom": "^0.14",
+    "starlight-llms-txt": "^0.10.0"
   },
   "devDependencies": {
     "@vercel/node": "^5.8.4",
     "js-yaml": "^4.2.0"
+  },
+  "overrides": {
+    "@astrojs/markdown-remark": "7.2.0"
   }
 }

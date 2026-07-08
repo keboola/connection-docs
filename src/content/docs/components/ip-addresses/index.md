@@ -1,5 +1,6 @@
 ---
 title: IP Addresses
+description: A good security practice is to block connections from unrecognized sources on the network level using a firewall or AWS security groups.
 slug: 'components/ip-addresses'
 redirect_from:
     - /extractors/ip-addresses/

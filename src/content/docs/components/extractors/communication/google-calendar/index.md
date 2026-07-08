@@ -1,5 +1,6 @@
 ---
 title: Google Calendar
+description: The Google Calendar data source connector uses the Google Calendar API to download all calendars available in your account, including events and their details…
 slug: 'components/extractors/communication/google-calendar'
 redirect_from:
     - /extractors/communication/google-calendar/

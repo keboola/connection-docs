@@ -1,5 +1,6 @@
 ---
 title: Storage
+description: See our Getting Started tutorial for instructions on how to use Storage.
 slug: 'storage'
 ---
 
