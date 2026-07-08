@@ -1,6 +1,13 @@
 ---
 title: Using Binary Files
 slug: 'transformations/r-plain/binary'
+description: Worked example of reading and writing binary files (such as trained models) in an R transformation in Keboola.
+keywords:
+  - R binary files
+  - R transformation binary
+  - R trained model file
+  - R transformation example
+type: tutorial
 redirect_from:
     - /manipulation/transformations/r/binary/
     - /transformations/r/binary/

@@ -417,7 +417,15 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      {
+        label: "Variables & Shared Code",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/variables" },
+          { slug: "transformations/variables/how-to" },
+          { slug: "transformations/variables/explanation" },
+        ],
+      },
       {
         label: "dbt Transformation",
         collapsed: true,
@@ -426,16 +434,25 @@ export const sidebar = [
           { slug: "transformations/dbt/cli" },
           { slug: "transformations/dbt/transformation" },
           { slug: "transformations/dbt/cloud" },
-          { slug: "transformations/dbt/flows" },
           { slug: "transformations/dbt/troubleshooting" },
         ],
       },
-      { slug: "transformations/python-plain" },
+      {
+        label: "Python Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/python-plain" },
+          { slug: "transformations/python-plain/how-to" },
+          { slug: "transformations/python-plain/reference" },
+        ],
+      },
       {
         label: "R Transformations",
         collapsed: true,
         items: [
           { label: "Overview", slug: "transformations/r-plain" },
+          { slug: "transformations/r-plain/how-to" },
+          { slug: "transformations/r-plain/reference" },
           { slug: "transformations/r-plain/array-splitter" },
           { slug: "transformations/r-plain/plots" },
           { slug: "transformations/r-plain/binary" },
@@ -451,8 +468,26 @@ export const sidebar = [
           { slug: "transformations/snowflake-plain/explanation" },
         ],
       },
-      { slug: "transformations/bigquery" },
-      { slug: "transformations/duckdb" },
+      {
+        label: "BigQuery Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/bigquery" },
+          { slug: "transformations/bigquery/how-to" },
+          { slug: "transformations/bigquery/reference" },
+        ],
+      },
+      {
+        label: "DuckDB Transformations",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/duckdb" },
+          { slug: "transformations/duckdb/how-to" },
+          { slug: "transformations/duckdb/reference" },
+          { slug: "transformations/duckdb/explanation" },
+          { slug: "transformations/duckdb/snowflake-migration" },
+        ],
+      },
       { slug: "transformations/oracle" },
       { slug: "transformations/code-patterns" },
     ],

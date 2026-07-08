@@ -15,25 +15,24 @@ type: reference
 
 Reference material for [Snowflake SQL transformations](/transformations/snowflake-plain/). To create one, see the [how-to](/transformations/snowflake-plain/how-to/); for when and why to use them, see the [explanation](/transformations/snowflake-plain/explanation/).
 
-<!-- TODO(human-review): None of the product-specific limits, sizes, or
-     parameter overrides below could be verified against the Snowflake
-     transformation component code/config schema — it is not present in this
-     docs repo. Each value carried over from the previous page is flagged
-     inline. Please verify against the component source of truth before publish. -->
+<!-- Verified vs code (PRDCT-354 audit, Block B): query_timeout=7200,
+     ABORT_TRANSFORMATION, and the copy/clone loading types are confirmed
+     against snowflake-transformation ConfigDefinition.php / platform. Items
+     still unverified are flagged inline below. -->
 
 ## Limits
 
 | Limit | Value | Notes |
 |---|---|---|
-| Query runtime | 7,200 seconds (default) | <!-- TODO(human-review): confirm default statement timeout --> Long-running queries are cancelled past this. |
-| Comment length | 8,192 characters | <!-- TODO(human-review): confirm --> Queries containing a comment longer than this will segfault. |
+| Query runtime | 7,200 seconds (default) | Long-running queries are cancelled past this. |
+| Comment length | 8,192 characters | <!-- TODO(human-review): not in the code audit — confirm. --> Queries containing a comment longer than this will segfault. |
 | Constraints | Defined but not enforced | `PRIMARY KEY` / `UNIQUE` are accepted but [not enforced by Snowflake](https://docs.snowflake.com/en/sql-reference/constraints-overview). |
 
 Snowflake is a cloud database that ships continuous updates and behavioral changes. Track them in the official [Snowflake release notes](https://docs.snowflake.com/en/release-notes/overview).
 
 ## Loading type (copy vs. clone)
 
-When data is loaded into a Snowflake transformation there are two methods — **copy** and **clone**. They are configured on the input mapping; see [loading type](/transformations/mappings/#loading-type-snowflake-and-bigquery). <!-- TODO(human-review): confirm copy/clone are still the two supported loading types. -->
+When data is loaded into a Snowflake transformation there are two methods — **copy** and **clone**. They are configured on the input mapping; see [loading type](/transformations/mappings/#loading-type-snowflake-and-bigquery).
 
 ## Backend sizes (dynamic backends)
 
@@ -67,7 +66,9 @@ SET ABORT_TRANSFORMATION = (
 );
 ```
 
-The example sets `ABORT_TRANSFORMATION` to `'Integrity check failed'` when the `INTEGRITY_CHECK` table has one or more rows with `RESULT = 'failed'`. An empty string does not abort. <!-- TODO(human-review): confirm the variable name and "checked after each query / returned as user error" semantics against component code. -->
+The example sets `ABORT_TRANSFORMATION` to `'Integrity check failed'` when the `INTEGRITY_CHECK` table has one or more rows with `RESULT = 'failed'`. An empty string does not abort.
+
+![A failed job whose event log shows the SET ABORT_TRANSFORMATION query and the "Transformation aborted" message](/transformations/snowflake-plain/abort.png)
 
 ## Identifier case sensitivity
 

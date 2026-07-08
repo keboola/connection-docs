@@ -1,6 +1,16 @@
 ---
 title: dbt Transformation
 slug: 'transformations/dbt'
+description: Run dbt projects in Keboola as versioned, schedulable components in your data pipeline — configure them in the UI, develop locally with the CLI, or trigger dbt Cloud.
+keywords:
+  - dbt transformation
+  - dbt Keboola
+  - dbt component
+  - dbt data pipeline
+  - dbt in flows
+type: explanation
+redirect_from:
+  - /transformations/dbt/flows/
 ---
 
 
@@ -143,3 +153,14 @@ All components can be used in the flows, thus orchestrated with data pipeline de
 ***Note:** Each component can have multiple configurations. They can differ by any configuration parameters. It is expected that users will have different configurations for different repositories. However, it is also possible for users to have different configurations for different branches (dev, prod, etc.), different run parameters (such as `tag: nighly`, model specification, etc.), or models to orchestrate portion of the dbt mono-repo.*
 
 When using a dbt transformation on the Keboola infrastructure, you can additionally set up CLI with the local development environment against the provisioned infrastructure (workspace). Please see the dbt CLI section for more information.
+
+## Orchestrate dbt in flows
+
+All dbt-related components behave like any other component in Keboola, so you orchestrate them with [flows](/flows/). To run dbt as part of a pipeline:
+
+1. Open or create a [flow](/flows/).
+2. Add the dbt component as a task, alongside your other extractors, transformations, and writers, in the order you want them to run.
+3. Set a **schedule** on the flow so it runs automatically.
+4. Configure **notifications** to be alerted on success, warning, or error.
+
+Because dbt components are ordinary flow tasks, everything a flow offers — ordering, scheduling, and notifications — applies to them. See [Flows](/flows/) for the full configuration.

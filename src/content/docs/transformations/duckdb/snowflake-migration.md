@@ -1,6 +1,12 @@
 ---
 title: Snowflake to DuckDB Migration
 slug: 'transformations/duckdb/snowflake-migration'
+description: How to migrate an existing Snowflake transformation to DuckDB in Keboola — SQL dialect differences and what to change.
+keywords:
+  - Snowflake to DuckDB migration
+  - migrate Snowflake transformation DuckDB
+  - DuckDB SQL differences
+type: tutorial
 ---
 
 

@@ -16,7 +16,7 @@ export const collections = {
         // Docs revamp (Diátaxis) — every revamped page declares the single
         // reader need it serves, plus user-vocabulary keywords for search/RAG.
         keywords: z.array(z.string()).optional(),
-        type: z.enum(['how-to', 'reference', 'explanation']).optional(),
+        type: z.enum(['how-to', 'reference', 'explanation', 'tutorial']).optional(),
       }),
     }),
   }),

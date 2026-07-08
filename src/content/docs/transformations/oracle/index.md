@@ -1,20 +1,28 @@
 ---
-title: Oracle Transformation
+title: How do I run an Oracle transformation?
 slug: 'transformations/oracle'
+description: Create, configure, and run an Oracle SQL transformation in Keboola — set up the database user and credentials, write the SQL, map input and output, and run it. Note that Oracle transformations run on your own Oracle server.
+keywords:
+  - Oracle transformation
+  - Oracle transformations
+  - Oracle SQL transformation Keboola
+  - Oracle transformation credentials
+  - Oracle transformation schema
+type: how-to
 ---
 
+You want to transform data with SQL on an [Oracle database](https://www.oracle.com/database/). Unlike other backends, an Oracle transformation runs on **your own Oracle server** (it is not provisioned by Keboola), so you set up the database user and credentials yourself. This page takes you from nothing to a successful run.
 
+**Time:** ~15 minutes · **You will need:** a Keboola project, access to an Oracle server where you can create a user, and one table in [Storage](/storage/tables/) to read from.
 
-The [Oracle database](https://www.oracle.com/index.html) is a multi-model database management system produced and 
-is marketed by Oracle Corporation.
+## Before you start
 
-## Example
-After you create a configuration, configure the database credentials using the `Database Credentials` link:
+- You manage the Oracle server. Keboola connects to it with credentials you provide, so the server must be reachable from Keboola and you are responsible for its availability.
+- Have the [sample CSV file](/transformations/source.csv) (or any table) ready to upload to Storage as the input.
 
-![Screenshot - Credentials link](/transformations/oracle/navigate-to-credentials.png)
+## Step 1 — Create a database user
 
-The following SQL code creates user `KEBOOLA_TRANSFORMATION`, a schema with the same name, and grants the user 
-read/write privileges only to this schema.
+In Oracle, create a dedicated user for Keboola and grant it the privileges to open a session and create tables. Replace the password with your own:
 
 ```sql
 CREATE USER KEBOOLA_TRANSFORMATION IDENTIFIED BY "secretPassword20" QUOTA UNLIMITED ON USERS;
@@ -22,26 +30,57 @@ CREATE USER KEBOOLA_TRANSFORMATION IDENTIFIED BY "secretPassword20" QUOTA UNLIMI
 GRANT CREATE SESSION TO KEBOOLA_TRANSFORMATION;
 GRANT CREATE TABLE TO KEBOOLA_TRANSFORMATION;
 ```
- 
-Fill in the credentials to the database. After testing the credentials, save them:
 
-![Screenshot - Credentials](/transformations/oracle/credentials.png)
+## Step 2 — Create the transformation and add credentials
 
-After you save the credentials, follow these steps to create a simple Oracle transformation:
+1. Open **Components → Transformations**, click **New Transformation**, and choose **Oracle Transformation**. <!-- TODO(human-review): confirm nav + type labels. -->
+2. Open the **Database Credentials** link in the configuration.
 
-- Create a table in Storage by uploading the [sample CSV file](/transformations/source.csv).
-- Create input mapping from that table, setting its destination to `source`.
-- Create output mapping, setting its destination to a new table in your Storage.
-- Copy & paste the below script into the transformation code.
-- Save and run the transformation.
- 
+   ![The Oracle transformation configuration with the Database Credentials link in the right-side actions](/transformations/oracle/navigate-to-credentials.png)
+
+3. Enter the host, port, database/service, username, and password for the `KEBOOLA_TRANSFORMATION` user.
+4. **(Optional) Schema** — an optional `schema` field under the database connection (`db.schema` in the configuration). Set it to run the transformation against a specific Oracle schema; leave it empty to use the connected user's default schema. <!-- Verified vs code (PRDCT-354 audit): optional scalarNode('schema') in oracle-transformation ConfigDefinition.php. -->
+5. Click **Test Credentials**, then **Save**.
+
+   ![The Oracle Credentials form — Hostname, Port, Username, Password, Database, and Schema fields with Test Credentials and Save](/transformations/oracle/credentials.png)
+
+## Step 3 — Map the input
+
+1. Upload the [sample CSV file](/transformations/source.csv) to Storage as a table.
+2. In **Input Mapping**, add the table and set its **Destination** to `source`.
+3. Save the mapping.
+
+## Step 4 — Write the SQL script
+
+In the code editor, paste:
+
 ```sql
 CREATE TABLE "result" AS SELECT * FROM "source";
 ```
 
-![Screenshot - Sample Transformation](/transformations/oracle/sample-transformation.png)
+You can split longer scripts into [blocks](/transformations/#writing-scripts).
 
-You can organize the script into [blocks](/transformations/#writing-scripts).
+## Step 5 — Add the output mapping
 
-Please keep in mind that this transformation, unlike the other transformations, runs on your Oracle Database server 
-(it is not provisioned by Keboola). You must ensure a flawless course.
+1. In **Output Mapping**, set **Source** to `result` (the table the script creates).
+2. Set **Destination** to a new Storage table, for example `out.c-main.result`.
+3. Save the mapping.
+
+## Step 6 — Run it and confirm the result
+
+1. Click **Run** on the transformation.
+2. Wait for the [job](/management/jobs/) to finish with a success status.
+3. Open **Storage** and confirm your destination table contains the rows from `source`.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Credentials test fails | Server unreachable, wrong host/port/service, or user lacks `CREATE SESSION` | Verify connectivity and re-check the grants in Step 1. |
+| `table or view does not exist` | Input destination name doesn't match the script, or wrong schema | Ensure the input **Destination** is `source`; if you set **Schema**, confirm the objects live there. |
+| Run succeeds but nothing in Storage | Missing/incorrect output mapping | Add an output mapping whose **Source** matches the table the script created (`result`). |
+
+## Related
+
+- [Input and output mapping](/transformations/mappings/) — how staging works.
+- [Tutorial: Manipulating data](/tutorial/manipulate/) — guided first transformation.
