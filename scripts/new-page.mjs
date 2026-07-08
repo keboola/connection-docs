@@ -90,10 +90,31 @@ if (existsSync(filePath) && !flag('force')) {
   process.exit(1);
 }
 
+// Full Phase-3 frontmatter (see src/content.config.ts and
+// scripts/templates/task-page-template.md) — a scaffolded page must pass the
+// docs-page PR checklist without the author re-inventing the field set.
+const cleanTask = oneLine(title).replace(/\?$/, '').replace(/^How do I /i, '');
+const today = new Date().toISOString().slice(0, 10);
+const fmLines = [
+  `title: ${/[:#'"]/.test(title) ? JSON.stringify(title) : title}`,
+  `slug: '${slug}'`,
+  `description: ${JSON.stringify(buildDesc(title))}`,
+  `keywords: # 3–5 phrases users would actually search for`,
+  `  - ${cleanTask.toLowerCase()}`,
+];
+if (type === 'how-to') {
+  fmLines.push(
+    `task: ${cleanTask.charAt(0).toUpperCase() + cleanTask.slice(1)}`,
+    `audience: New and existing Keboola users`,
+  );
+}
+fmLines.push(
+  `last_verified: ${today} # date the steps were last checked against the product`,
+  `related: [] # absolute slugs, e.g. /components/extractors/database/`,
+);
+
 const page = `---
-title: ${/[:#'"]/.test(title) ? JSON.stringify(title) : title}
-slug: '${slug}'
-description: ${JSON.stringify(buildDesc(title))}
+${fmLines.join('\n')}
 ---
 
 ${(TEMPLATES[type] || TEMPLATES['how-to'])(title)}`;
@@ -106,7 +127,8 @@ let navNote = '';
 if (flag('nav') && section) {
   const nav = readFileSync(NAV, 'utf8');
   const url = `/${slug.replace(/\/?$/, '/')}`;
-  const re = new RegExp(`(title:\\s*${section}\\s*\\n\\s*items:\\n)`);
+  const escaped = section.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(title:\\s*${escaped}\\s*\\n\\s*items:\\n)`);
   if (re.test(nav)) {
     const insert = `      - url: ${url}\n        title: ${title}\n`;
     writeFileSync(NAV, nav.replace(re, `$1${insert}`));
@@ -120,6 +142,8 @@ console.log(`
 ✓ created ${filePath.replace(ROOT + '/', '')}
 ${navNote}Checklist before you open a PR:
   □ Replace the draft description with a real one (≤160 chars, says the outcome)
+  □ Fill keywords (3–5 real search phrases) and related (2–4 absolute slugs)
+  □ Verify the steps in the product, then confirm last_verified
   □ Lead with the reader's task, not the feature
   □ Each step is a single verifiable action; no "as shown above"
   □ Link to related pages with absolute paths (/section/page/)
