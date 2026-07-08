@@ -21,3 +21,12 @@ jobs:
         run: npm ci
       - name: "Build"
         run: npm run build
+      - name: "Content lint (gated vs baseline)"
+        run: npm run lint
+      - name: "Install Playwright browser"
+        run: npx playwright install --with-deps chromium
+      - name: "Render / layout checks"
+        run: |
+          npm run preview &
+          for i in $(seq 1 30); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 1; done
+          PREVIEW_URL=http://localhost:4321 npm run check:render
