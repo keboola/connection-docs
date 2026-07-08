@@ -1,6 +1,7 @@
 ---
 title: Migration Guide
 slug: 'flows/flow-migration-guide'
+description: Migrate a Legacy Flow to a Conditional Flow — open the Migration Preview, review the side-by-side comparison and structural changes, run the migration, and verify the result.
 ---
 
 
