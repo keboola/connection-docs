@@ -1,6 +1,7 @@
 ---
 title: External Datasets
 slug: 'storage/byodb/external-buckets'
+description: External Datasets register an existing Snowflake schema or BigQuery dataset as a read-only virtual bucket in Storage — requirements, registration steps, and limits.
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: Data Streams
 slug: 'storage/data-streams'
+description: Data Streams push event data straight into Storage over HTTP or OpenTelemetry — no connector or middleware needed; sources, import conditions, and setup.
 ---
 
 
@@ -63,7 +64,7 @@ table and no deduplication happens on import.
 
 If you need unique rows (e.g., one row per event ID), it is up to you to decide whether
 deduplication is required and to handle it **downstream**: create a
-[deduplication transformation](/storage/tables/#primary-key-deduplication) that reads the stream
+[deduplication transformation](/storage/tables/incremental-loading/#primary-key-deduplication) that reads the stream
 table and writes the result to a new table where the
 [output mapping](/transformations/mappings/#output-mapping) primary key performs the
 deduplication on load. Schedule it to run regularly with a [conditional flow](/flows/).
