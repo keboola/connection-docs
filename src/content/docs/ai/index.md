@@ -27,6 +27,11 @@ A plugin marketplace for AI coding assistants that provides specialized agents, 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.
 [Learn more about MCP Server →](/ai/mcp-server/)
 
+### Semantic Layer
+
+Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means and produce consistent, validated answers. Currently in private beta.
+[Learn more about the Semantic Layer →](/ai/semantic-layer/)
+
 ### AI Component Suggestions
 
 Allows users to get AI suggestions when searching for a component. To activate the feature, go to Project Settings → Features → AI Component Suggestions.

@@ -721,6 +721,9 @@ items:
       - url: /ai/mcp-server/
         title: MCP Server
 
+      - url: /ai/semantic-layer/
+        title: Semantic Layer
+
   - url: /external-integrations/
     title: External Integrations
     items:
