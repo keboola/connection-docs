@@ -12,7 +12,7 @@ Let's set up the local development with [Keboola CLI](https://developers.keboola
 
 It is easy on Mac with [homebrew](https://docs.brew.sh/Installation.html) support (other platforms covered in the [documentation](https://developers.keboola.com/cli/installation/)):
 
-```java
+```bash
 brew tap keboola/keboola-cli
 brew install keboola-cli
 kbc --version
@@ -20,12 +20,12 @@ kbc --version
 
 If you already have CLI, make sure you have the most updated version:
 
-```java
+```bash
 brew upgrade keboola-cli
 kbc --version
 ```
 
-![](imgs/2772467715.png){: width="100%" }
+![](imgs/2772467715.png)
 
 **You will then gain access to dbt-related commands within Keboola CLI!**
 
@@ -53,26 +53,26 @@ The user is in the folder with the cloned dbt project and can run the following 
 
 ### Example
 
-![](imgs/2770010115.jpg){: width="100%" }
+![](imgs/2770010115.jpg)
 
 Store credentials to your zsh env profile (or your respective environment):
 ---------------------------------------------------------------------------
 
 The file is located (Unix) in `~/.zshrc`
 
-![](imgs/2770206732.png){: width="100%" }
+![](imgs/2770206732.png)
 
 Then you can run dbt locally against the project storage, safely develop and test your code.
 
 As part of the init command, CLI will create all sources from storage buckets. A storage bucket is a source file containing tables:
 
-![](imgs/2777448699.png){: width="100%" }
+![](imgs/2777448699.png)
 
 *Note: Please note that `_timestamp` is automatically filled, alongside `primary keys` and corresponding `tests` for primary keys (`unique` and `not_null` tests).*
 
 ### Run Test Debug
 
-```java
+```bash
 dbt debug -t beer_demo --profiles-dir .
 ```
 
@@ -84,29 +84,29 @@ dbt debug -t beer_demo --profiles-dir .
 *   We are using local profiles; they are using environmental variables stored before.
 
 
-![](imgs/2769649699.png){: width="100%" }
+![](imgs/2769649699.png)
 
 You should see green in all steps:
 
-![](imgs/2770239505.png){: width="100%" }
+![](imgs/2770239505.png)
 
 dbt Run
 -------
 
 For the script alteration, the only check/change you have to make with off-the-shelf scripts is to alter source definitions to match sources:
 
-![](imgs/2769879073.png){: width="100%" }
+![](imgs/2769879073.png)
 
 
-![](imgs/2770042889.png){: width="100%" }
+![](imgs/2770042889.png)
 
 To execute the dbt:
 
-```java
+```bash
 dbt run -t beer_demo  --profiles-dir .
 ```
 
-![](imgs/2769879081.png){: width="100%" }
+![](imgs/2769879081.png)
 
 ### Other Commands for Future Use
 
@@ -124,7 +124,7 @@ dbt run -t beer_demo  --profiles-dir .
 *   **Example** (non-interactive mode):
 
 
-![](imgs/2770010121.jpg){: width="100%" }
+![](imgs/2770010121.jpg)
 
 `kbc dbt generate sources`
 --------------------------
@@ -135,7 +135,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   **Example** (non-interactive mode)
 
-    ![](imgs/2770010127.jpg){: width="100%" }
+    ![](imgs/2770010127.jpg)
 
 `kbc dbt generate env`
 ----------------------
@@ -146,7 +146,7 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   **Example**
 
-    ![](imgs/2770010133.jpg ){: width="100%" }
+    ![](imgs/2770010133.jpg )
 
 ### Workspaces Support
 
@@ -161,4 +161,4 @@ dbt run -t beer_demo  --profiles-dir .
 
 *   **Example** (non-interactive mode)
 
-    ![](imgs/2770010139.jpg){: width="100%" }
+    ![](imgs/2770010139.jpg)

@@ -307,6 +307,36 @@ site-search kbd {
 /* Hide Starlight's social-icons separator (no social icons configured in this project) */
 .social-icons::after { display: none !important; }
 
+/* API reference link in the header (api.keboola.com). A refined, secondary
+   pill — quieter than the KAI button so the two sit together without competing. */
+.header-api-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--fg-2);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.header-api-link:hover {
+  color: var(--link);
+  border-color: var(--kbc-blue-450);
+  background: var(--bg-2);
+}
+.header-api-link__icon {
+  color: var(--fg-4);
+  transition: color 0.15s;
+}
+.header-api-link:hover .header-api-link__icon { color: var(--link); }
+
 /* Auto / theme-select button — compact */
 starlight-theme-select button {
   padding: 4px 10px !important;
@@ -621,6 +651,14 @@ nav.sidebar {
 .sl-markdown-content h2 a.sl-anchor-link:hover,
 .sl-markdown-content h3 a.sl-anchor-link:hover { color: var(--link); }
 
+/* Push the heading anchor (chain) icon farther right so it sits clearly to
+   the side of the heading instead of colliding with the last word. Starlight
+   renders the link as a sibling of the heading and controls the text→icon
+   spacing via --sl-anchor-icon-gap on the wrapper (default 0.25em). */
+.sl-markdown-content .sl-heading-wrapper {
+  --sl-anchor-icon-gap: 0.5em;
+}
+
 .sl-markdown-content h3 {
   font-size: 16px;
   font-weight: 600;
@@ -758,7 +796,7 @@ nav.sidebar {
 .sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li::marker {
   content: '';
 }
-.sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li > strong:first-child {
+.sl-markdown-content ol.beacon-steps:not(:where(.not-content *)) > li > strong.beacon-step-title {
   display: block;
   font-size: 14px;
   font-weight: 600;
