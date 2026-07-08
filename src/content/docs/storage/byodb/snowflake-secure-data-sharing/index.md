@@ -14,7 +14,7 @@ This guide explains how to share a database and its objects with one or more acc
 The process involves **two roles**:
 
 - **Producer:** The Snowflake account that owns and shares the data.
-- **Consumer:** The Snowflake account that accesses the shared data. This account must be used in Keboola as [BYODB](https://help.keboola.com/storage/byodb/#main-header).
+- **Consumer:** The Snowflake account that accesses the shared data. This account must be used in Keboola as [BYODB](/storage/byodb/).
 
 ## Producer Workflow
 As the producer, your role involves creating the share, adding the necessary database objects, and granting access to consumer accounts. Follow these steps to configure the share:

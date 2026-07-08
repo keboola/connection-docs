@@ -645,6 +645,16 @@ items:
       - url: /workspace/sql-editor/
         title: SQL Editor
 
+      - url: /workspace/jdbc-driver/
+        title: Keboola JDBC Driver
+        items:
+          - url: /workspace/jdbc-driver/dbeaver/
+            title: DBeaver
+          - url: /workspace/jdbc-driver/datagrip/
+            title: DataGrip
+          - url: /workspace/jdbc-driver/tableau/
+            title: Tableau
+
   - url: /management/
     title: Management
     items:
