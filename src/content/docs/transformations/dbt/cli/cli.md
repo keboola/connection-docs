@@ -11,6 +11,8 @@ keywords:
 type: tutorial
 ---
 
+This is a task walkthrough for developing dbt locally against your Keboola project. For the full `kbc dbt` command reference — every command, flag, and option — see the [Keboola CLI dbt documentation](https://developers.keboola.com/cli/dbt/).
+
 Video:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/q3wZ8gukpnw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -142,48 +144,11 @@ To execute the dbt:
 dbt run -t beer_demo  --profiles-dir .
 ```
 
-### Other Commands for Future Use
+## Other commands
 
-`kbc dbt generate profile`
---------------------------
+Beyond `kbc dbt init`, the CLI can generate parts of the setup individually and manage the underlying workspaces — for example:
 
-*   Generates just `profiles.yml`.
+- `kbc dbt generate profile` / `sources` / `env` — regenerate just the `profiles.yml`, the source files, or the environment variables.
+- `kbc remote workspace create` — create a workspace directly (supports `name`, `type`, and `size`).
 
-*   Reads the profile name from `dbt_project.yml` and the `target` name from the input.
-
-*   Stores the profile to `profiles.yml`.
-
-    *   If there is an existing profile with the same name, it will be overwritten. Otherwise, the new profile will be just appended to the others if there are any.
-
-*   Can be run in non-interactive mode.
-
-`kbc dbt generate sources`
---------------------------
-
-*   Generates only `sources.yml`.
-
-*   Lists all tables in the default branch from the Storage API and generates source files to `models/_sources`. Tables from each bucket are stored in a separate file.
-
-*   Can be run in non-interactive mode.
-
-`kbc dbt generate env`
-----------------------
-
-*   Generates bash commands to create env vars for dbt CLI.
-
-*   Asks for an existing workspace (select box or id flag).
-
-*   Can be run in non-interactive mode.
-
-### Workspaces Support
-
-*   Universal support to manage workspaces
-
-*   Hide `keboola.sandboxes` configurations from the Keboola project folder structure.
-
-
-### `kbc remote workspace create`
-
-*   Supports parameter `name`, `type`, and `size` (for `python` and `r`).
-
-*   Can be run in non-interactive mode.
+These commands, their flags, and non-interactive usage are documented in full in the developer docs — see the [dbt CLI reference](https://developers.keboola.com/cli/dbt/) and the [`kbc dbt` command pages](https://developers.keboola.com/cli/commands/dbt/).
