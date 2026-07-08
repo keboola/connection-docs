@@ -1,6 +1,7 @@
 ---
 title: AI Features
 slug: 'ai'
+description: Keboola's AI features in one place — the Kai assistant, its Python client, AI Kit for coding assistants, the MCP server, component suggestions, AI rules, generated descriptions, and error explanations.
 ---
 
 
