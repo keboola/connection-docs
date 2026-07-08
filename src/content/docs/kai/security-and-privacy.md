@@ -1,6 +1,7 @@
 ---
 title: Security & Privacy
 slug: 'kai/security-and-privacy'
+description: How Kai protects your data — no training use, fast deletion, encryption, regional processing, BYOLLM, access controls, audit trail, and compliance.
 ---
 
 
@@ -11,6 +12,7 @@ Kai is designed with enterprise security in mind. This page explains how your da
 
 **Never used for AI training** — Keboola does not use Kai inputs to train, retrain, or fine-tune models.
 
+<!-- TODO(human-review): confirm retention numbers (30-second inference deletion, 14-day LangSmith log retention) and the LangSmith EU region claim with the Kai product/security owner. -->
 **Automatically deleted:**
 - Inference prompts and responses: Removed from Google within 30 seconds
 - Observability logs (LangSmith, EU region): Deleted after 14 days.
@@ -58,6 +60,7 @@ Contact [support@keboola.com](mailto:support@keboola.com) to discuss BYOLLM opti
 
 ## Compliance
 
+<!-- TODO(human-review): confirm the certification list (SOC 2 Type II, ISO 27001, GDPR, regional residency) and the Vertex AI HIPAA claim with the security/compliance owner. -->
 Kai leverages Keboola's existing security certifications:
 - SOC 2 Type II
 - ISO 27001
