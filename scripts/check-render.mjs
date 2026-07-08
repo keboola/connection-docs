@@ -33,11 +33,18 @@ function walk(dir) {
 const route = (f) => '/' + relative(DIST, f).replace(/index\.html$/, '').replace(/\.html$/, '');
 
 // Pick pages that actually contain a wrapped table; cap for runtime.
-const all = walk(DIST);
+// Sort so the sample is deterministic — readdir order differs between macOS
+// and Linux, and a platform-dependent sample means local pass / CI fail.
+const all = walk(DIST).sort();
 const tablePages = [];
+let tablePagesTotal = 0;
 for (const f of all) {
-  if (readFileSync(f, 'utf8').includes('beacon-table-scroll')) tablePages.push(route(f));
-  if (tablePages.length >= TABLE_CAP) break;
+  if (!readFileSync(f, 'utf8').includes('beacon-table-scroll')) continue;
+  tablePagesTotal++;
+  if (tablePages.length < TABLE_CAP) tablePages.push(route(f));
+}
+if (tablePagesTotal > tablePages.length) {
+  console.log(`(sampling ${tablePages.length} of ${tablePagesTotal} table pages — raise TABLE_CAP to widen)`);
 }
 // Representative spread for the multi-viewport layout check.
 const layoutPages = [...new Set(['/', ...tablePages])].slice(0, 8);
