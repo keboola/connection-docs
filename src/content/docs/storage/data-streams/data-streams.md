@@ -51,11 +51,23 @@ In your table settings, you can:
 - Change the name of the stream.
 - Add a column or define your own structure using the PATH or JSONNET template. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/#template-jsonnet)
 - Edit column names (available only if you create a new table within the stream).
-- Edit primary keys (available only if you create a new table within the stream).
 - Delete a column (available only if you create a new table within the stream).
 
 :::caution
 **Important:** Changing the table's name will create a new table, and the stream will import data into that table.
+:::
+
+:::note[No primary key support]
+Data streams do **not** support primary keys --- every incoming event is **appended** to the
+table and no deduplication happens on import.
+
+If you need unique rows (e.g., one row per event ID), it is up to you to decide whether
+deduplication is required and to handle it **downstream**: create a
+[deduplication transformation](/storage/tables/#primary-key-deduplication) that reads the stream
+table and writes the result to a new table where the
+[output mapping](/transformations/mappings/#output-mapping) primary key performs the
+deduplication on load. Schedule it to run regularly with a [conditional flow](/flows/).
+[Kai](/kai/) can help you build both the transformation and the scheduled flow.
 :::
 
 #### Sample codes for integration
