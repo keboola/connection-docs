@@ -1,6 +1,7 @@
 ---
 title: "Part 2: Data Manipulation"
 slug: 'tutorial/manipulate'
+description: 'Part 2 of the tutorial — build a SQL transformation that denormalizes the loaded tables, with input and output mappings explained step by step.'
 ---
 
 At this juncture, you're acquainted with the swift process of loading data into Keboola, resulting in four new tables in your Storage: 

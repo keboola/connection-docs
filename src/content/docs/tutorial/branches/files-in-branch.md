@@ -1,6 +1,7 @@
 ---
 title: Working with Files in Branch
 slug: 'tutorial/branches/files-in-branch'
+description: 'Learn how files behave in development branches by running the file-manipulating configurations in a branch.'
 ---
 
 

@@ -3,6 +3,7 @@ title: Keboola Getting Started Tutorial
 slug: 'tutorial'
 redirect_from:
   - /getting-started/
+description: 'A hands-on tour of Keboola — load data, transform it with SQL, write it to a destination, automate the pipeline with a flow, and explore ad-hoc analysis.'
 ---
 
 Discover how to leverage the Keboola platform to effortlessly extract data from various sources,  transform it, and securely store it within the Keboola platform. 

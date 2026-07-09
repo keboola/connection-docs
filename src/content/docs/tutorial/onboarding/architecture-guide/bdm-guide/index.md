@@ -1,6 +1,7 @@
 ---
 title: Business Data Model Guide
 slug: 'tutorial/onboarding/architecture-guide/bdm-guide'
+description: 'Design a Business Data Model — a shared, business-oriented view of your data that guides how projects and pipelines are structured.'
 ---
 
 

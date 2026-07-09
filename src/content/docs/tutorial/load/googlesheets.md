@@ -1,6 +1,7 @@
 ---
 title: Loading Data from Google Sheets
 slug: 'tutorial/load/googlesheets'
+description: 'Load a shared Google spreadsheet into Storage with the Google Sheets data source connector.'
 ---
 
 In the [previous step](/tutorial/load/), you learned how to quickly load data into Keboola using [manual import](/tutorial/load/).

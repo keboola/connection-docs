@@ -1,6 +1,7 @@
 ---
 title: Merge to Production
 slug: 'tutorial/branches/merge-to-production'
+description: 'Merge a reviewed development branch back to production and clean up after the merge.'
 ---
 
 

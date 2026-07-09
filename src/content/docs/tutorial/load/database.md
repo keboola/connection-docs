@@ -1,6 +1,7 @@
 ---
 title: Loading Data from Database
 slug: 'tutorial/load/database'
+description: 'Load data from an external Snowflake database with a database data source connector — the procedure is the same for all database sources.'
 ---
 
 So far, you have learned to load data into Keboola [manually](/tutorial/load/) and

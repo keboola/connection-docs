@@ -1,6 +1,7 @@
 ---
 title: Keboola Governance Guide
 slug: 'tutorial/onboarding/governance-guide'
+description: 'Governance practices for Keboola — access management, security, monitoring, and operational responsibilities across your projects.'
 ---
 
 Welcome to the Keboola Governance Guide! Here, we cover everything you need to know about managing and monitoring your use of our platform, 

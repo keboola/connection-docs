@@ -1,6 +1,7 @@
 ---
 title: "Part 6: Development Branches"
 slug: 'tutorial/branches'
+description: 'Part 6 of the tutorial — use development branches to change configurations safely without touching production pipelines.'
 ---
 
 

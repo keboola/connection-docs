@@ -1,6 +1,7 @@
 ---
 title: "Cheat Sheet: Best Practices"
 slug: 'tutorial/onboarding/cheat-sheet'
+description: 'Best practices for everyday Keboola work — credentials, incremental loads, transformations, flows, error handling, and development branches.'
 ---
 
 How you use Keboola can differ significantly. From setting up automated data pipelines with Flows to managing components such as data sources, destinations, 

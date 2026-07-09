@@ -1,6 +1,7 @@
 ---
 title: Multi-Project Architecture Guide
 slug: 'tutorial/onboarding/architecture-guide'
+description: 'How to organize Keboola projects — single project, multi-project architectures, and proven setups for organizations of different sizes.'
 ---
 
 

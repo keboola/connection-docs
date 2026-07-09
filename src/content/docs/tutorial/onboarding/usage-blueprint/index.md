@@ -1,6 +1,7 @@
 ---
 title: Keboola Platform Usage Blueprint
 slug: 'tutorial/onboarding/usage-blueprint'
+description: 'A customizable template for documenting how your organization uses Keboola — naming conventions, responsibilities, and operating rules.'
 ---
 
 > Welcome to your personalized Keboola Platform Usage Blueprint Document! 
