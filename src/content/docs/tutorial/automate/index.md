@@ -1,6 +1,7 @@
 ---
 title: "Part 4: Flow Automation"
 slug: 'tutorial/automate'
+description: 'Part 4 of the tutorial — orchestrate the load, transform, and write steps into a flow and schedule it to run automatically every day.'
 ---
 
 So far, you have learned to use Keboola to
@@ -16,7 +17,12 @@ This is where our flows come in:
 - Specify what tasks should be executed in what order (orchestrate tasks) and
 - Configure the automatic execution (schedule flow tasks).
 
-1. Navigate to the **Flows** section of Keboola.
+:::caution
+The screenshots below show the **Legacy Flow Builder**. New projects default to [Conditional Flows](/flows/), which offer conditional logic, retries, and more — the concepts here (steps, parallel tasks, schedules, notifications) carry over. To build this pipeline in the Conditional Flows builder, see [Conditional Flows](/flows/).
+:::
+<!-- TODO(human-review): re-record this walkthrough (steps + screenshots) on the Conditional Flows builder; the current one uses the Legacy builder UI. -->
+
+1. Navigate to the **Conditional Flows** section of Keboola.
 
 ![Go to Flows](/tutorial/automate/automate1.png)
 
