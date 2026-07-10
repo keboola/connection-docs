@@ -9,7 +9,10 @@ description: Develop a Keboola app with your own tools and Git account, then syn
 Build an app in your own environment when you want full control over the code, your editor, and your Git workflow. Keboola still hosts and runs the app. This is the full-control path for [Python/JS apps](/data-apps/python-js/).
 
 :::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? **[Download the app-building skill](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md)** and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.md" download="keboola-dataapp-development-SKILL.md">⬇ Download the app-building skill</a>
+<!-- Skill file vendored from keboola/ai-kit@main (plugins/dataapp-developer/skills/dataapp-development/SKILL.md) so the download works same-origin. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## Before you start
