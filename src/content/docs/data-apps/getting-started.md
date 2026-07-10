@@ -38,38 +38,31 @@ Type what you want in plain language. Name the kind of app, what it should show,
 
 The more specific you are — the data, the charts, the audience — the closer Kai's first version will be.
 
-## Step 3 — Watch Kai read your data and plan
+## Step 3 — Watch Kai read your data and build
 
-Kai opens a chat and gets to work. It **explores your Storage on its own** — listing buckets and reading table details — then tells you what it found and proposes a plan before building anything.
+Kai gets to work. It **explores your Storage on its own** — listing buckets and reading table details — then writes the app: you see each step in the chat (*File index.ts edited*, *File App.tsx written*) while Kai pushes the code and starts a development container.
 
-In our run, Kai discovered the project's Google Analytics and Search Console tables, chose the analytics table, and proposed a **Website Analytics Dashboard**: total sessions, total users, and page views as tiles, plus a "sessions by device" bar chart.
+In our run, Kai discovered the project's Google Analytics tables and built a **Google Analytics Dashboard**: sessions, users, and page views as tiles, plus a "sessions by device" bar chart.
 
-![Kai's chat exploring the project's Storage — listing buckets, reading table details — and proposing a dashboard plan](/data-apps/getting-started-kai-build.png)
-<!-- SCREENSHOT(Nikita — screenshots.mjs): the Kai chat mid-build, showing the "Listing buckets" / "Getting table detail" steps and the proposed plan. Mask table/bucket names if sensitive. -->
+![Kai building the dashboard: the chat reports each file written and the container starting, next to the Code view of the draft's files](/data-apps/getting-started-kai-build.png)
 
 :::tip
-Build in a **development branch** (Kai flags this in the chat). Your experiments stay isolated from production until you're ready.
+Build in a **development branch**. Your experiments stay isolated from production until you're ready.
 :::
 
-## Step 4 — Approve the app
+## Step 4 — Preview the draft
 
-Kai doesn't change your project silently. When it's ready to create the app, it shows you the exact configuration — the app name, description, the packages it will use, and the authentication type — and asks you to **Approve** (or Decline).
+The build opens a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. The draft hot-reloads as Kai edits, and building it doesn't touch your production project. Ask for changes in the chat until it looks right.
 
-![Kai's confirmation step showing the generated app configuration with Approve, Decline, and Always allow buttons](/data-apps/getting-started-approve.png)
-<!-- SCREENSHOT(Nikita — screenshots.mjs): the "Modifying app — Confirmation required" card with the config JSON visible and the Approve button. -->
+Kai finishes with next-step suggestions: **Publish to production**, **Make changes**, or type your own.
 
-Click **Approve**. Kai creates the app and then deploys it for you.
+## Step 5 — Publish to production
 
-<!-- VERIFY(Adam Vyborny): in our run Kai generated a Streamlit app (packages streamlit + pandas, authentication_type "basic-auth"). Whether Kai builds Python/JS vs Streamlit depends on the "Kai-in-E2B" feature flag being enabled on the project — confirm and describe the real prerequisite. -->
+When you're happy with the draft, click **Publish to Production**. The app is deployed and available at its own URL; you'll find it in **Apps**, with its settings on the app's configuration page.
 
-## Step 5 — Open your live app
+By default the app is protected with **basic authentication** — open it from the configuration page to see the login credentials. To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
-When the deploy finishes, Kai gives you the **live URL** and a link to the app's **configuration** page. The app takes about a minute to start the first time.
-
-![Kai's completion message with the deployed dashboard's live URL and configuration link](/data-apps/getting-started-deployed.png)
-<!-- SCREENSHOT(Nikita — screenshots.mjs): Kai's final message with the "Dashboard URL" and "Configuration" links. Mask the full app URL / project ID. -->
-
-By default the app is protected with **basic authentication** — open it from the configuration page to see the login credentials. To change who can access it (a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
+<!-- TODO(human-review, Adam Vyborny): re-capture the published-app screenshots (getting-started-deployed.png, getting-started-live-app.png still show the previous backend's run) — publish blocked in the demo project during re-shoot (app start failures); see PR notes. -->
 
 Open the URL and your app is live — running on your governed data, served from its own address:
 

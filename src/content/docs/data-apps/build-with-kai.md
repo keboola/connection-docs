@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-Kai builds a working app from a plain-language description — no coding and no Git account needed. From one chat it reads your data, plans the app, shows you the configuration to approve, and deploys it to a live URL. This is the fastest way to go from idea to a running app.
+Kai builds a working app from a plain-language description — no coding and no Git account needed. From one chat it reads your data, writes the code, and opens a live draft you can preview, refine, and publish. This is the fastest way to go from idea to a running app.
 
 This page is the full guide to building in the platform — the Kai loop, how to prompt and refine, how Kai touches your data, and the [manual creation path](#create-an-app-manually) that lives on the same **Create App** screen. If you'd rather just follow one build end to end with screenshots, start with the quick [Getting started](/data-apps/getting-started/) walkthrough and come back here for the detail.
 
@@ -23,17 +23,17 @@ Build in a **development branch** so your experiments stay isolated from product
 
 ## How building with Kai works
 
-From a single prompt, Kai runs the whole loop — explore, plan, confirm, deploy:
+From a single prompt, Kai runs the whole loop — explore, build, preview, publish:
 
-1. **Start a build.** Open Kai in your project, or go to **Apps → + Create App**, which leads with a Kai prompt.
+1. **Start a build.** Go to **Apps → Create App**, which leads with a *"Describe what you want to build…"* prompt — or open the **Kai Agent** chat anywhere in your project.
 2. **Describe what you want** in plain language — name the source tables, what the app should show, and the main thing people should be able to do.
-3. **Kai explores your Storage and proposes a plan.** On its own it lists buckets and reads table details, tells you what it found, and describes the app it will build — before creating anything.
-4. **Review and approve.** Kai shows the exact configuration — name, description, packages, and authentication type — and asks you to **Approve** (or Decline) before it makes any change to your project. (If you've set tools to **Always allow** in [Kai's Tool Permissions](/kai/settings/#tool-permissions), pre-approved steps run without asking.)
-5. **Kai deploys the app** and gives you the live URL. Keep chatting to refine it.
+3. **Kai explores your Storage and writes the app.** It lists buckets, reads table details, then writes the code — you see each step in the chat (*File index.ts edited*, *File App.tsx written*) while Kai pushes the code and starts a development container.
+4. **A split-screen builder opens** with your app as a **draft**: chat on the left; on the right the app's name, a **Preview** of the running app, a **Code** view of its files, and a **Publish to Production** button. Kai finishes with next-step suggestions — publish, make changes, or ask for something else.
+5. **Refine in chat, then publish.** The draft hot-reloads as Kai edits. When you're happy, click **Publish to Production** to make the app live and shareable.
 
-![Kai's chat exploring the project's Storage — listing buckets, reading table details — then proposing a dashboard plan](/data-apps/getting-started-kai-build.png)
+![Kai building a Python/JS app: the chat reports each file written and the container starting, next to the Code view of the draft's files with the Publish to Production button](/data-apps/getting-started-kai-build.png)
 
-<!-- VERIFY(Adam Vyborny): confirm the exact UI labels for the Python/JS (new backend) build loop, incl. whether a live split-screen preview / hot-reload applies. Screenshots being re-shot on the new backend. -->
+<!-- Flow verified live on the new (Python/JS) Kai backend, project 6015, 2026-07-10: prompt → file-edit chips → draft split-screen (PREVIEW / CODE / PUBLISH TO PRODUCTION) → next-step card. -->
 
 ### Writing a good prompt
 
@@ -49,9 +49,9 @@ Kai's first version is a starting point, not the final word. Keep chatting to ch
 
 ### What Kai does on its own — and what it asks first
 
-Kai explores your Storage without asking, so it can find the right tables and understand your data. But it never changes your project silently: before it creates or modifies an app it shows you the exact configuration and waits for your **Approve** — unless you've pre-approved that tool with **Always allow**. You stay in control of every change that touches the project.
+Kai explores your Storage without asking, so it can find the right tables and understand your data. Building a **draft** doesn't touch your production project — the app goes live only when you click **Publish to Production**. For tools that do modify the project, Kai asks for approval unless you've pre-approved them with **Always allow** in [Tool Permissions](/kai/settings/#tool-permissions).
 
-![Kai's confirmation step: the generated app configuration — name, packages, and authentication type — with Approve, Decline, and Always allow buttons](/data-apps/getting-started-approve.png)
+<!-- TODO(human-review, Adam Vyborny): confirm the approval model on the new backend — in the observed run the draft build ran without an Approve card; publishing is the explicit user action. The old Approve/Decline screenshot (getting-started-approve.png) is from the previous backend. -->
 
 ## Create an app manually
 
@@ -75,9 +75,9 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ## Move from draft to production
 
-A draft is your working version with live preview. When you're happy with it, promote it to a production version that you can share.
+A draft is your working version with live preview — it exists in the builder (and on the app's **Drafts** tab) without affecting anything you've shared. When you're happy with it, click **Publish to Production**: the app is deployed and available at its URL, behind the [authentication](/data-apps/authentication/) you chose.
 
-<!-- TODO(human-review, Adam Vyborny / Pepa Martinec): document the draft → production flow precisely. This was called out internally as confusing; describe the actual steps and what changes (URL, hosting state). -->
+<!-- TODO(human-review, Adam Vyborny / Pepa Martinec): confirm what publishing changes exactly (URL, hosting state) and how re-publishing a newer draft behaves. -->
 
 ## How Kai handles data access
 

@@ -62,9 +62,10 @@ Backend versions since **1.15.0** are available in multiple Python variants:
 
 ## Backend versions
 
-:::note[Streamlit apps only]
-The backend-version format and pre-installed package list below apply to [Streamlit](/data-apps/streamlit/) apps. Python/JS apps bring their own dependencies from the repository (`requirements.txt` / `package.json`). <!-- TODO(human-review, Adam Vyborny): confirm how backend versions surface for the Python/JS runtime. -->
+:::note
+For **Python/JS** apps the deploy wizard shows the backend in the format `1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3)` — the runtime image with its Python, Node, and Bun versions; dependencies come from your repository (`requirements.txt` / `package.json`). The format and pre-installed package list below apply to [Streamlit](/data-apps/streamlit/) apps.
 :::
+<!-- Python/JS wizard format observed live (us-east4, 2026-07-10): "1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3) (default)"; XSmall = 8 GB RAM, 1 CPU core, 1TB SSD shared. -->
 
 When deploying an app, you can select a **backend version** from a dropdown in the deployment wizard. Each backend version defines the runtime environment, including the Python version, Streamlit version, and a set of pre-installed packages.
 

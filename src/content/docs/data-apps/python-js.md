@@ -37,23 +37,21 @@ Keboola clones your repository, installs dependencies, starts your app using the
 
 The day-to-day loop, whichever way you build:
 
-1. **Code lives in a Git repository** (yours, or one Kai manages for you). The typical scaffold is a frontend (`src/App.tsx`, React) plus server-side API routes (`server/index.ts`, Express) — see [App structure](/data-apps/build-locally/#app-structure).
+1. **Code lives in a Git repository** — yours, or a private Keboola-managed repo that Kai creates for the app (`git.<stack>.keboola.com/keboola/app-<id>.git`). The scaffold is a React frontend (`App.tsx`), server-side routes (`index.ts`), and a data-access helper (`kbcQuery.ts`) — see [App structure](/data-apps/build-locally/#app-structure).
 2. **Data access happens server-side.** Your backend queries Storage (Storage API or real-time SQL via the Query Service) using the auto-injected `KBC_TOKEN` — the browser never sees the token; the frontend only talks to your own API routes. Environment variables and code patterns are in [Reference → Data access](/data-apps/reference/#data-access).
 3. **Ship a change**: push to the connected branch and hit **Redeploy** (Keboola re-clones, reinstalls, restarts) — or, if Kai built the app, just tell Kai what to change and approve its edit.
-4. **Debug on the app detail**: the app's page shows deployment state and logs, and the deploy wizard controls backend size and the inactivity timeout. The app **sleeps when idle** and wakes on the next visit.
-
-<!-- TODO(human-review, Adam Vyborny): confirm the log/terminal tab name on the app detail for the Python/JS backend and whether hot-reload/preview applies before Redeploy. Screenshots being re-shot on the new backend. -->
+4. **Debug on the app detail**: the app's page has **Overview / Advanced Settings / All Runs / Terminal Logs / Drafts / Versions** tabs — deployment state, run history, and terminal output are all there — and the deploy wizard controls backend size and the inactivity timeout. The app **sleeps when idle** and wakes on the next visit. When Kai edits a draft, the preview hot-reloads.
 
 ### Build faster with AI Kit
 
-The [AI Kit](/ai/ai-kit/) gives your coding assistant (Claude Code, Cursor, Copilot) Keboola-specific skills — including the **Data App Developer plugin** with a validate → build → verify workflow for apps. When you create a Python/JS app, the dialog also offers **Download Skill** — a ready-made skill file teaching your assistant the correct app structure, deployment config, and Keboola APIs. Grab it there, or install the full kit:
+The [AI Kit](/ai/ai-kit/) gives your coding assistant (Claude Code, Cursor, Copilot) Keboola-specific skills — including the **Data App Developer plugin** with a validate → build → verify workflow for apps. When you create a Python/JS app, the dialog also offers **Download Skill** — a ready-made skill file teaching your assistant the correct app structure, deployment config, and Keboola APIs. Grab it there, [download it directly](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md), or install the full kit:
 
 ```bash
 /plugin marketplace add keboola/ai-kit
 /plugin install dataapp-developer
 ```
 
-<!-- VERIFY(Jordan): provide the canonical direct-download URL for the skill file so the docs can link it without going through GitHub. -->
+<!-- Skill source verified from the in-product "View on GitHub" link: keboola/ai-kit → plugins/dataapp-developer/skills/dataapp-development/SKILL.md. -->
 
 ## Build a Python/JS app
 

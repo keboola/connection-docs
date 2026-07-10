@@ -41,7 +41,7 @@ app.get("/api/rows", async (req, res) => {
 
 You can build the app with an AI coding assistant (Claude Code, Cursor, or Copilot). When you create a Python/JS app, Keboola offers a ready-made **skill file** — **Download Skill** or **View on GitHub** — that teaches your assistant the correct app structure, deployment config, and Keboola APIs, so you get working code with fewer errors. The app's **Overview** also links it as **AI Skill for Building**.
 
-For the full toolkit — including the **Data App Developer plugin** with its validate → build → verify workflow — install [AI Kit](/ai/ai-kit/) in your assistant:
+The skill file can also be [downloaded directly](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md). For the full toolkit — including the **Data App Developer plugin** with its validate → build → verify workflow — install [AI Kit](/ai/ai-kit/) in your assistant:
 
 ```bash
 /plugin marketplace add keboola/ai-kit
