@@ -67,7 +67,7 @@ The day-to-day loop, whichever way you build:
 1. **Code lives in a Git repository** — yours, or a private Keboola-managed repo that Kai creates for the app (`git.<stack>.keboola.com/keboola/app-<id>.git`).
 2. **Data access happens server-side.** Your backend queries Storage (Storage API or real-time SQL via the Query Service) using the auto-injected `KBC_TOKEN` — the browser never sees the token. Environment variables and code patterns are in [Reference → Data access](/data-apps/reference/#data-access).
 3. **Ship a change**: push to the connected branch and hit **Redeploy** — or, if Kai built the app, just tell Kai what to change.
-4. **Debug on the app detail**: the app's page has **Overview / Advanced Settings / All Runs / Terminal Logs / Drafts / Versions** tabs. The app **sleeps when idle** and wakes on the next visit; drafts hot-reload as Kai edits.
+4. **Debug on the app detail**: the app's page has **Overview / Advanced Settings / All Runs / Terminal Logs / Versions** tabs (a **Drafts** tab appears while a draft exists). Env variables, theme, and data mappings live under **Advanced Settings**. The app **sleeps when idle** and wakes on the next visit; drafts hot-reload as Kai edits.
 
 ## Sync to your project
 

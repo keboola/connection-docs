@@ -21,7 +21,7 @@ This is the part that sets Keboola apps apart from general app builders: the app
 - **Data narratives** — scrollable, explained stories built from your data.
 - **Anything interactive** — configurators, simulators, and more.
 
-![A deployed Keboola app — a Website Analytics Dashboard with metric tiles and a sessions-by-device chart — running on the project's governed data](/data-apps/getting-started-live-app.png)
+![A Keboola app built by Kai — a Toy Store Sales Dashboard with metric tiles and a top-products chart — running on the project's governed data](/data-apps/getting-started-draft-preview.png)
 
 ## The stack: Python/JS
 
