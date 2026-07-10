@@ -8,6 +8,10 @@ description: The powerful, flexible way to build Keboola apps — any Python or 
 
 Python/JS apps are the **full-control** way to build on Keboola. Where Streamlit gives you a quick, ready-made Python environment, Python/JS apps let you **bring your own code** — any Python web framework (Flask, FastAPI, Dash), a JavaScript frontend (React, Vue, plain JS), or both together. You build the experience; Keboola handles the hosting, access control, and data connectivity.
 
+:::tip[Get your agent started right away]
+Building with Claude Code, Cursor, or Copilot? **[Download the app-building skill](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md)** and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+:::
+
 ## Why choose Python/JS
 
 - **Any framework, any UI.** Full control over look, layout, and interactivity — not limited to a widget set. Build a polished, customer-facing product, not just an internal tool.

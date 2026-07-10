@@ -16,7 +16,7 @@ Apps go well beyond dashboards — you describe what you want and Kai builds it,
 
 - A Keboola project with **Kai** available.
 - At least one table in **Storage** — Kai reads your data directly, so it works with whatever you already have.
-- A few minutes. Building in a **development branch** keeps your production project untouched while you experiment.
+- A few minutes.
 
 ## Step 1 — Open Apps and start a new app
 
@@ -46,21 +46,19 @@ In our run, Kai discovered the project's Google Analytics tables and built a **G
 
 ![Kai building the dashboard: the chat reports each file written and the container starting, next to the Code view of the draft's files](/data-apps/getting-started-kai-build.png)
 
-:::tip
-Build in a **development branch**. Your experiments stay isolated from production until you're ready.
-:::
-
 ## Step 4 — Preview the draft
 
 The build opens a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. The draft hot-reloads as Kai edits, and building it doesn't touch your production project. Ask for changes in the chat until it looks right.
 
 Kai finishes with next-step suggestions: **Publish to production**, **Make changes**, or type your own.
 
+<!-- SCREENSHOT(demo project 264): the split-screen draft with the live Preview visible — step 4 needs its own image (Jordan, 2026-07-10). -->
+
 ## Step 5 — Publish to production
 
 When you're happy with the draft, click **Publish to Production**. The app is deployed and available at its own URL; you'll find it in **Apps**, with its settings on the app's configuration page.
 
-By default the app is protected with **basic authentication** — open it from the configuration page to see the login credentials. To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
+By default the app is protected with **Basic (Password)** authentication — the generated password sits right next to **Open App** on the app's configuration page, ready to copy (Kai also shows it as the last build step). To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
 <!-- TODO(human-review, Adam Vyborny): re-capture the published-app screenshots (getting-started-deployed.png, getting-started-live-app.png still show the previous backend's run) — publish blocked in the demo project during re-shoot (app start failures); see PR notes. -->
 
