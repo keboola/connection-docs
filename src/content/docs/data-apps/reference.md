@@ -3,7 +3,6 @@ title: Apps reference
 slug: 'data-apps/reference'
 description: Per-app settings, environment variables, data access, backend versions, and limits for Keboola apps.
 redirect_from:
-  - /components/data-apps/backend-versions/
   - /components/data-apps/terminal-log-tab/
   - /data-apps/storage-access/
 ---
@@ -48,62 +47,22 @@ Sensitive values — API keys, tokens, passwords — should be stored as **secre
 
 Add secrets as key-value pairs in the app configuration. The `#` prefix marks a value as a secret (encrypted at rest). Keboola makes secrets available as environment variables when your app starts: the `#` prefix is stripped and the **variable name** is uppercased. For example, `#my-custom-var` becomes `MY_CUSTOM_VAR` — the `#` is removed, dashes become underscores, and the name is uppercased. The value itself is passed through unchanged.
 
-## Runtime and language support
-
-Backend versions since **1.15.0** are available in multiple Python variants:
-
-| Python Version | Notes |
-|---|---|
-| **3.10** | Default. Most widely compatible with third-party packages. Recommended if you are unsure. |
-| **3.11** | Faster execution in many workloads (10–60% speedup over 3.10). Good balance of compatibility and performance. |
-| **3.13** | Latest stable Python release. Best performance and newest language features, but some packages may not yet support it. |
-
-<!-- VERIFY(Adam Vyborny): the current page says Python 3.10 only. Confirmed stale — supported versions are 3.10, 3.11, and 3.13. -->
-
 ## Backend versions
 
-:::note
-For **Python/JS** apps the deploy wizard shows the backend in the format `1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3)` — the runtime image with its Python, Node, and Bun versions; dependencies come from your repository (`requirements.txt` / `package.json`). The format and pre-installed package list below apply to [Streamlit](/data-apps/streamlit/) apps.
-:::
-<!-- Python/JS wizard format observed live (us-east4, 2026-07-10): "1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3) (default)"; XSmall = 8 GB RAM, 1 CPU core, 1TB SSD shared. -->
-
-When deploying an app, you can select a **backend version** from a dropdown in the deployment wizard. Each backend version defines the runtime environment, including the Python version, Streamlit version, and a set of pre-installed packages.
-
-Each backend version is displayed in the following format:
+When deploying an app, you select a **backend version** — the runtime image — in the deploy wizard. For **Python/JS** apps it looks like this:
 
 ```
-<backend_version> - Python <python_version> + Streamlit <streamlit_version>
+1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3)
 ```
 
-For example: `1.15.2 - Python 3.13 + Streamlit 1.51`.
+- **Backend version** (`1.6.1`): the release of the base image that runs your app.
+- **Python / Node / Bun versions**: the interpreters available to your code.
 
-- **Backend version** (`1.15.2`): The release version of the base Docker image that powers your app.
-- **Python version** (`3.13`): The version of the Python interpreter.
-- **Streamlit version** (`1.51`): The version of the [Streamlit](https://streamlit.io/) framework used to run your app.
+Python/JS apps bring their own dependencies from the repository — `requirements.txt` for Python, `package.json` for Node — installed on deploy. There is no pre-installed package list to depend on.
 
-### Pre-installed packages
+<!-- Python/JS wizard format observed live (us-east4 + europe-west3, 2026-07-10): "1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3) (default)"; XSmall = 8 GB RAM, 1 CPU core, 1TB SSD shared. -->
 
-All backend versions ship with the same set of pre-installed packages regardless of the Python variant. These are available immediately without adding them to the `Packages` field or `requirements.txt`:
-
-- `streamlit`
-- `pandas`
-- `numpy`
-- `matplotlib`
-- `plotly`
-- `scikit-learn`
-- `seaborn`
-- `graphviz`
-- `deepmerge`
-- `python-dotenv`
-- `keboola.component`
-- `streamlit-aggrid`
-- `streamlit-keboola-api`
-- `streamlit_authenticator` (pinned to 0.3.1)
-- `toml`
-
-To add packages beyond this list, specify them in the **Packages** field (for code deployment) or in a `requirements.txt` file (for Git repository deployment).
-
-<!-- TODO(human-review, Michal Jerabek): NO-SOURCE in Loop A — the backend-versions changelog could not be verified against a reachable source. Confirm current backend versions and the hosting model (Operator today; E2B pending sign-off) before publishing. -->
+Building a **Streamlit** app? Its backend versions, supported Python variants, and the pre-installed package list live in the [Streamlit section](/data-apps/streamlit/#backend-versions).
 
 ## Data access
 

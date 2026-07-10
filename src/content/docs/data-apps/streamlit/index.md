@@ -4,6 +4,7 @@ slug: 'data-apps/streamlit'
 description: Build and manage Streamlit apps in Keboola — a Python-only framework for quick data tools.
 redirect_from:
   - /components/data-apps/streamlit/
+  - /components/data-apps/backend-versions/
 ---
 
 
@@ -143,6 +144,58 @@ Your app reads and writes Keboola Storage the same way any app does — via Inpu
 
 The `keboola-streamlit` package wraps these for Streamlit with helpers like `keboola.read_table` and `keboola.write_table` — see the [Streamlit design guide](/data-apps/streamlit/design-guide/#keboola-storage-communication).
 
+## Runtime and language support
+
+Backend versions since **1.15.0** are available in multiple Python variants:
+
+| Python Version | Notes |
+|---|---|
+| **3.10** | Default. Most widely compatible with third-party packages. Recommended if you are unsure. |
+| **3.11** | Faster execution in many workloads (10–60% speedup over 3.10). Good balance of compatibility and performance. |
+| **3.13** | Latest stable Python release. Best performance and newest language features, but some packages may not yet support it. |
+
+<!-- VERIFY(Adam Vyborny): the current page says Python 3.10 only. Confirmed stale — supported versions are 3.10, 3.11, and 3.13. -->
+
+## Backend versions
+
+When deploying an app, you can select a **backend version** from a dropdown in the deployment wizard. Each backend version defines the runtime environment, including the Python version, Streamlit version, and a set of pre-installed packages.
+
+Each backend version is displayed in the following format:
+
+```
+<backend_version> - Python <python_version> + Streamlit <streamlit_version>
+```
+
+For example: `1.15.2 - Python 3.13 + Streamlit 1.51`.
+
+- **Backend version** (`1.15.2`): The release version of the base Docker image that powers your app.
+- **Python version** (`3.13`): The version of the Python interpreter.
+- **Streamlit version** (`1.51`): The version of the [Streamlit](https://streamlit.io/) framework used to run your app.
+
+### Pre-installed packages
+
+All backend versions ship with the same set of pre-installed packages regardless of the Python variant. These are available immediately without adding them to the `Packages` field or `requirements.txt`:
+
+- `streamlit`
+- `pandas`
+- `numpy`
+- `matplotlib`
+- `plotly`
+- `scikit-learn`
+- `seaborn`
+- `graphviz`
+- `deepmerge`
+- `python-dotenv`
+- `keboola.component`
+- `streamlit-aggrid`
+- `streamlit-keboola-api`
+- `streamlit_authenticator` (pinned to 0.3.1)
+- `toml`
+
+To add packages beyond this list, specify them in the **Packages** field (for code deployment) or in a `requirements.txt` file (for Git repository deployment).
+
+<!-- TODO(human-review, Michal Jerabek): NO-SOURCE in Loop A — the backend-versions changelog could not be verified against a reachable source. Confirm current backend versions and the hosting model (Operator today; E2B pending sign-off) before publishing. -->
+
 ## Theming
 To configure theming in your app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
 
@@ -202,7 +255,7 @@ gatherUsageStats = false
 ## Base image
 When the app is deployed, the code you provide is injected into the Streamlit base Docker image. You select a **backend version** when deploying; each version defines the Python version, Streamlit version, and a set of pre-installed packages you can use without adding them to the `Packages` field.
 
-For the list of backend versions, supported Python versions, and the full pre-installed package list, see [Backend versions](/data-apps/reference/#backend-versions) in the reference.
+For the list of backend versions, supported Python versions, and the full pre-installed package list, see [Backend versions](#backend-versions) below.
 
 ## AgGrid Enterprise license
 The AgGrid Enterprise License is available for Streamlit apps in Keboola, offering enhanced data manipulation capabilities, including:
