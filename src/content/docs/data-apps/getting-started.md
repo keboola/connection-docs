@@ -10,7 +10,7 @@ Keboola apps are interactive web applications — dashboards, tools, even data n
 
 This walkthrough takes you from nothing to a **live, deployed dashboard in about 10 minutes**, using Kai. You won't write any code.
 
-Apps go well beyond dashboards — you describe what you want and Kai builds it, whether that's a dashboard, an internal tool, or a scrollable data narrative. For the range of what's possible, see [What people build](/data-apps/examples/). This page builds a simple dashboard so you can learn the flow; the same steps produce any of them.
+Apps go well beyond dashboards — you describe what you want and Kai builds it, whether that's a dashboard, an internal tool, or a scrollable data narrative. For the range of what's possible, see [Beyond dashboards](/data-apps/#beyond-dashboards). This page builds a simple dashboard so you can learn the flow; the same steps produce any of them.
 
 ## What you'll need
 
@@ -81,7 +81,7 @@ That's it — you've built and published your first app. You described what you 
 
 - **Control who can open it** → [Authentication](/data-apps/authentication/)
 - **Share it with your team** → [Publish and share](/data-apps/publish-and-share/)
-- **Prefer to click through it yourself?** → [Build in the UI](/data-apps/build-in-the-ui/)
+- **Prefer to click through it yourself?** → [Create an app manually](/data-apps/build-with-kai/#create-an-app-manually)
 - **Want full control over the code?** → [Build locally](/data-apps/build-locally/)
-- **See more of what people build** → [What people build](/data-apps/examples/)
+- **See more of what people build** → [Beyond dashboards](/data-apps/#beyond-dashboards)
 - **The concepts behind it** → [What are Keboola apps](/data-apps/what-are-apps/)
