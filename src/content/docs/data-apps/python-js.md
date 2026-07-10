@@ -33,12 +33,34 @@ Keboola clones your repository, installs dependencies, starts your app using the
 
 <!-- VERIFY(Adam Vyborny / Michal Jerabek): confirm the runtime/hosting model to state publicly (Operator is live today; E2B is pending sign-off — do not assert E2B as the hosting mechanism). -->
 
+## How development works
+
+The day-to-day loop, whichever way you build:
+
+1. **Code lives in a Git repository** (yours, or one Kai manages for you). The typical scaffold is a frontend (`src/App.tsx`, React) plus server-side API routes (`server/index.ts`, Express) — see [App structure](/data-apps/build-locally/#app-structure).
+2. **Data access happens server-side.** Your backend queries Storage (Storage API or real-time SQL via the Query Service) using the auto-injected `KBC_TOKEN` — the browser never sees the token; the frontend only talks to your own API routes. Environment variables and code patterns are in [Reference → Data access](/data-apps/reference/#data-access).
+3. **Ship a change**: push to the connected branch and hit **Redeploy** (Keboola re-clones, reinstalls, restarts) — or, if Kai built the app, just tell Kai what to change and approve its edit.
+4. **Debug on the app detail**: the app's page shows deployment state and logs, and the deploy wizard controls backend size and the inactivity timeout. The app **sleeps when idle** and wakes on the next visit.
+
+<!-- TODO(human-review, Adam Vyborny): confirm the log/terminal tab name on the app detail for the Python/JS backend and whether hot-reload/preview applies before Redeploy. Screenshots being re-shot on the new backend. -->
+
+### Build faster with AI Kit
+
+The [AI Kit](/ai/ai-kit/) gives your coding assistant (Claude Code, Cursor, Copilot) Keboola-specific skills — including the **Data App Developer plugin** with a validate → build → verify workflow for apps. When you create a Python/JS app, the dialog also offers **Download Skill** — a ready-made skill file teaching your assistant the correct app structure, deployment config, and Keboola APIs. Grab it there, or install the full kit:
+
+```bash
+/plugin marketplace add keboola/ai-kit
+/plugin install dataapp-developer
+```
+
+<!-- VERIFY(Jordan): provide the canonical direct-download URL for the skill file so the docs can link it without going through GitHub. -->
+
 ## Build a Python/JS app
 
 You can build one three ways:
 
 - **[Build with Kai](/data-apps/build-with-kai/)** — describe it and let Kai generate the app. The fastest path. (Building Python/JS with Kai requires the Kai-in-E2B backend on your project; without it, Kai builds Streamlit. <!-- VERIFY(Adam Vyborny): confirm the exact prerequisite/enablement. -->)
-- **[Build in the UI](/data-apps/build-in-the-ui/)** — create the app from the interface and point it at a Git repository that contains your code and configuration.
+- **[Create the app manually](/data-apps/build-with-kai/#create-an-app-manually)** — set the app up from the interface and point it at a Git repository that contains your code and configuration.
 - **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, then sync to your project. The home of full-control development.
 
 Building it yourself? When you create a Python/JS app, Keboola offers a downloadable **AI skill** (for Claude Code, Cursor, or Copilot) that teaches your assistant the correct app structure, deployment config, and Keboola APIs — see [Develop with an AI coding tool](/data-apps/build-locally/#develop-with-an-ai-coding-tool).

@@ -62,6 +62,10 @@ Backend versions since **1.15.0** are available in multiple Python variants:
 
 ## Backend versions
 
+:::note[Streamlit apps only]
+The backend-version format and pre-installed package list below apply to [Streamlit](/data-apps/streamlit/) apps. Python/JS apps bring their own dependencies from the repository (`requirements.txt` / `package.json`). <!-- TODO(human-review, Adam Vyborny): confirm how backend versions surface for the Python/JS runtime. -->
+:::
+
 When deploying an app, you can select a **backend version** from a dropdown in the deployment wizard. Each backend version defines the runtime environment, including the Python version, Streamlit version, and a set of pre-installed packages.
 
 Each backend version is displayed in the following format:

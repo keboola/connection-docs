@@ -8,6 +8,10 @@ redirect_from:
 
 
 
+:::note[Streamlit apps only]
+This page applies to [Streamlit](/data-apps/streamlit/) apps only. New apps run on [Python/JS](/data-apps/python-js/).
+:::
+
 This guide will help you quickly create a user-friendly app in Keboola. We cover essentials like theming, headers, storage integration, and more to streamline your setup. With clear, step-by-step instructions, you'll be able to build an intuitive, visually appealing app.
 
 ## Theming

@@ -1,7 +1,7 @@
 ---
 title: What are Keboola apps
 slug: 'data-apps/what-are-apps'
-description: Understand what Keboola apps are, how they run on your governed data, and when to use Python/JS versus Streamlit.
+description: Understand what Keboola apps are — Python/JS applications that run inside your project on governed data — and how they're hosted.
 ---
 
 
@@ -23,16 +23,13 @@ This is the part that sets Keboola apps apart from general app builders: the app
 
 ![A deployed Keboola app — a Website Analytics Dashboard with metric tiles and a sessions-by-device chart — running on the project's governed data](/data-apps/getting-started-live-app.png)
 
-## Python/JS vs Streamlit
+## The stack: Python/JS
 
-Most apps run on **Python/JS** (any Python or JavaScript framework), which gives you full control over the interface. **Streamlit** is a Python-only framework that is quicker for simple data tools but more limited in look and interactivity.
+Keboola apps run on **Python/JS** — any Python or JavaScript framework, giving you full control over the interface. That's what Kai builds, and the path for all new apps. How development actually works — code, configuration, data access, deployment — is covered in [Python/JS apps](/data-apps/python-js/).
 
-- Build something rich or customer-facing → Python/JS.
-- Build a quick internal data tool → Streamlit can be enough.
+Have an existing **Streamlit** app? Streamlit remains supported; its documentation lives in the [Streamlit apps](/data-apps/streamlit/) section.
 
-When you build with Kai, you don't have to choose up front — Kai selects the framework that fits your request. For details on each, see [Python/JS apps](/data-apps/python-js/) (the full-control option) and [Streamlit apps](/data-apps/streamlit/) (the quick Python option).
-
-<!-- TODO(human-review, Miro): verify the framework framing and whether Streamlit selection is automatic or requires a project setting (Kai-in-E2B flag). -->
+<!-- TODO(human-review, Miro): verify the framework framing — Python/JS as the sole forward path for new apps. Do not state Streamlit is retired. -->
 
 ## How an app is hosted
 

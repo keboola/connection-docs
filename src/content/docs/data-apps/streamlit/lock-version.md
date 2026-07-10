@@ -10,6 +10,10 @@ redirect_from:
 
 
 
+:::note[Streamlit apps only]
+This page applies to [Streamlit](/data-apps/streamlit/) apps only. New apps run on [Python/JS](/data-apps/python-js/).
+:::
+
 This guide explains how to lock package versions in Streamlit applications in Keboola, covering both deployment methods: from code and from a Git repository.
 
 ## Why lock package versions?
