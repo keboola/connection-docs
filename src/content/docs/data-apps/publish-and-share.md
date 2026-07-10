@@ -16,6 +16,8 @@ An app is "published" once it's deployed and reachable at its URL, with the righ
 2. **Set authentication.** Choose who can open it — a shared password, SSO, GitHub, and more. See [Authentication](/data-apps/authentication/).
 3. **Share the URL.** Anyone who passes the app's authentication can open it.
 
+![The app's configuration page: the App URL block with Open in new tab, the Authentication type, and the App Info panel (backend, owner, App ID)](/data-apps/publish-config.png)
+
 <!-- VERIFY(Miro / Adam Vyborny): confirm precisely what "publish" / "promote to production" means for apps — deploy + branch-merge vs an app-level production version — and the exact steps / URL / state changes. Flagged internally as confusing. -->
 
 ## Share with your team
@@ -24,4 +26,4 @@ Share the app URL. Anyone who passes the app's authentication can open it — co
 
 ## Manage a deployed app
 
-To deploy, open, redeploy, suspend, or delete an app from its actions menu, see [App actions](/data-apps/reference/#app-actions) in the reference.
+Every app has an actions menu (the **⋯** button, and the **Open App** / **Redeploy App** / **Start App** buttons in its header) — deploy, open, redeploy, suspend, or delete. See [App actions](/data-apps/reference/#app-actions) in the reference.
