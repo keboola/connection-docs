@@ -1,43 +1,73 @@
 ---
 title: Apps
 slug: 'data-apps'
-description: Build and run apps on top of your governed data in Keboola — with Kai, in the UI, or locally — without leaving the platform.
+description: 'Build and run Python/JS apps on your governed data in Keboola — what apps are, how to build them with Kai or locally, how to run and share them, and real examples.'
 redirect_from:
   - /components/data-apps/
+  - /data-apps/examples/
 ---
 
 
 
 Apps let you build interactive applications — dashboards, tools, internal apps — directly on top of your data in Keboola. The app runs in your project's governed space, so it can only reach the data you already have access to. No separate hosting, no shadow IT.
 
-## Why build apps in Keboola
+## What a Keboola app is
 
-Apps run inside your project's governed space — next to your data, behind your existing access controls, with no infrastructure to manage and nothing copied to an outside service. Build them your way: with Kai, in the UI, or locally. Read more in [What are Keboola apps](/data-apps/what-are-apps/).
+A Keboola app is a **Python/JS application hosted by your project**. It runs next to your data, behind your project's access controls, and gets its own URL you can share. Apps sleep when idle and wake on the first visit, so they cost nothing while nobody is looking. There's no infrastructure to manage and nothing is copied to an outside service — the app reads Storage through the project's own permissions.
 
-## Start here
+You can put an app in front of anyone: your team (behind [authentication](/data-apps/authentication/)), a client, or the public. And an app isn't limited to human visitors — it can expose an API or an MCP server so other agents and services can call it.
+
+For the full explanation — how apps fit into the platform and how they're isolated — see [What are Keboola apps](/data-apps/what-are-apps/).
+
+## Two ways to build
+
+- **[Build with Kai](/data-apps/build-with-kai/)** — describe the app in plain language and Kai explores your data, proposes a plan, and deploys the app from one chat. No coding needed; you approve every change before it lands. The same **Create App** screen also offers [manual creation](/data-apps/build-with-kai/#create-an-app-manually) if you'd rather configure the app yourself.
+- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control. The [Python/JS apps](/data-apps/python-js/) page covers how development actually works.
 
 New to apps? Follow [Getting started](/data-apps/getting-started/) to build and publish your first app in about 10 minutes.
 
-## Choose how to build
-
-- **[Build with Kai](/data-apps/build-with-kai/)** — describe the app in plain language and let Kai build it. The fastest path, no coding needed.
-- **[Build in the UI](/data-apps/build-in-the-ui/)** — create and configure an app from the Keboola interface.
-- **[Build locally](/data-apps/build-locally/)** — develop with your own tools, use your own Git account, and sync the app to your project. For developers who want full control.
-
 ## Run and share
 
-- [Authentication](/data-apps/authentication/) — control who can open your app.
-- [Publish and share](/data-apps/publish-and-share/) — make an app available to others.
-- [Reference](/data-apps/reference/) — settings, environment variables, and backend versions.
+Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail.
 
-## What people build
+## Beyond dashboards
 
-Apps go well beyond dashboards: live data narratives, internal tools, configurators, even games. See [what people build](/data-apps/examples/) for real examples.
+Apps go far beyond dashboards — live data narratives, internal tools, configurators, even games. These three were built with Kai during Keboola's internal app competition; each turns real data into something interactive and genuinely useful, built the same way you'd build an everyday internal tool: describe what you want to Kai, on top of your Storage data.
 
-<!-- TODO(human-review, Miro): confirm which competition apps can be shown publicly, then link/screenshot them on the examples page. -->
+*The links below open real, running apps that sleep when idle — the first load may take a few seconds to wake.*
+
+<!-- VERIFY(Jordan / Miro): these three are Jordan's picks for public showcase. Confirm they can stay linked publicly in external docs (they run on internal projects and may sleep). -->
+
+### Seasonal — when and where to travel
+
+Pick a month and dial in what you care about — warmth, dryness, cool nights, long daylight, calm winds, sunshine — and **Seasonal** scores **1,192 destinations worldwide** to find where the weather actually fits you, and when. Play the whole year as an animation, compare destinations side by side, and jump straight to Google Flights. It turns a dry weather dataset into a real consumer product, not a report.
+
+- **Live app:** <https://seasonal-74013643.hub.europe-west3.gcp.keboola.com/>
+- **Data:** 10-year climate normals from Meteostat weather-station records and NASA POWER satellite reanalysis, merged by an automated Keboola pipeline.
+- Built by Maxmilian Ottomansky.
+
+![Seasonal — a world map that finds your perfect-weather destinations by month](/data-apps/examples-seasonal.png)
+
+### Global Flight Shockwave Simulator — if a hub stops
+
+Pick a major airport hub — Heathrow, Atlanta, Dubai, Paris CDG, or Chicago O'Hare — and watch a **72-hour animated simulation** of how shutting it down cascades through the global flight network, with an optional voiceover narrating the fallout. It shows an app can be an immersive, cinematic simulation — not just charts.
+
+- **Live app:** <https://flight-shockwave-1304626299.hub.keboola.com/>
+- Built by Michaela Zajacova.
+
+![Global Flight Shockwave Simulator — pick a hub and watch a 72-hour flight-network shutdown ripple out](/data-apps/examples-flight-shockwave.png)
+
+### Color Season Analyzer — understanding your palette
+
+An editorial, **scrollytelling** guide to personal color analysis — from Itten's Bauhaus color studies to today's four-season framework, with swatch sets and curated palettes per season. A soft, designed, consumer-grade experience built on the very same platform as your team's dashboards.
+
+- **Live app:** <https://color-season-analyzer-43672911.hub.us-east4.gcp.keboola.com/>
+- Built by Andrea Nováková.
+
+![Color Season Analyzer — an editorial "Understanding your palette" scrollytelling app](/data-apps/examples-color-season.png)
 
 ## A note on frameworks
 
-Keboola apps usually run on **Python/JS**, with [Streamlit](/data-apps/streamlit/) still supported for specific cases — and when you build with Kai, it picks the framework for you. See [Python/JS vs Streamlit](/data-apps/what-are-apps/#pythonjs-vs-streamlit) for when to use which.
+Keboola apps run on **Python/JS** — that's what Kai builds and the forward path for new apps. [Streamlit](/data-apps/streamlit/) remains supported for existing apps; its docs live in their own section.
 
-<!-- TODO(human-review, Miro): confirm the exact "default vs supported" wording. Python/JS is the forward path; Streamlit availability depends on the "Kai in E2B" feature flag per project. Do not state Streamlit is retired. -->
+<!-- TODO(human-review, Miro): confirm the exact "default vs supported" wording for Python/JS vs Streamlit. Do not state Streamlit is retired. -->
