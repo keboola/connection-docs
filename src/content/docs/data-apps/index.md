@@ -34,10 +34,8 @@ Dashboards are just the start — see [Beyond dashboards](#beyond-dashboards) be
 
 ## Two ways to build
 
-- **[Build with Kai](/data-apps/build-with-kai/)** — describe the app in plain language and Kai explores your data, proposes a plan, and deploys the app from one chat. No coding needed; you approve every change before it lands. The same **Create App** screen also offers [manual creation](/data-apps/build-with-kai/#create-an-app-manually) if you'd rather configure the app yourself.
+- **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself.
 - **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control. The [Python/JS apps](/data-apps/python-js/) page covers how development actually works.
-
-New to apps? Follow [Getting started](/data-apps/getting-started/) to build and publish your first app in about 10 minutes.
 
 ## Run and share
 

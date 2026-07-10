@@ -1,42 +1,48 @@
 ---
-title: "Getting started: build your first app"
+title: Build your first app with Kai
 slug: 'data-apps/getting-started'
-description: Build and publish your first Keboola app in about 10 minutes — describe it to Kai, watch it read your data and build a dashboard, then deploy it to a live URL. No code required.
+description: Build and publish a Keboola app in about 10 minutes — describe it to Kai, preview the live draft, publish to production. Plus prompting tips, the approval model, and manual creation.
+redirect_from:
+  - /data-apps/build-with-kai/
+  - /data-apps/build-in-the-ui/
 ---
 
 
 
-Keboola apps are interactive web applications — dashboards, tools, even data narratives — that run **inside your project, on top of your governed data**. The app can only reach data you already have access to, there's no separate hosting to set up, and you can build it just by describing what you want.
+Kai builds a working app from a plain-language description — no coding and no Git account needed. From one chat it reads your governed data, writes the code, and opens a live draft you can preview, refine, and publish. This walkthrough takes you from nothing to a **live, published app in about 10 minutes**, and covers the details you'll want next: how to prompt, what Kai asks before touching your project, how drafts become production, and the [manual creation path](#create-an-app-manually) on the same screen.
 
-This walkthrough takes you from nothing to a **live, deployed dashboard in about 10 minutes**, using Kai. You won't write any code.
-
-Apps go well beyond dashboards — you describe what you want and Kai builds it, whether that's a dashboard, an internal tool, or a scrollable data narrative. For the range of what's possible, see [Beyond dashboards](/data-apps/#beyond-dashboards). This page builds a simple dashboard so you can learn the flow; the same steps produce any of them.
+Apps go well beyond dashboards — the same steps produce internal tools, data narratives, or [anything interactive](/data-apps/#beyond-dashboards). This page builds a simple dashboard so you can learn the flow.
 
 ## What you'll need
 
-- A Keboola project with **Kai** available.
+- A Keboola project with **Kai** available. <!-- TODO(human-review, Adam Vyborny): state the exact prerequisite. Building Python/JS apps requires the new Kai backend enabled on the project. Give the real enablement step or link. -->
 - At least one table in **Storage** — Kai reads your data directly, so it works with whatever you already have.
 - A few minutes.
+
+:::tip[Get your agent started right away]
+Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.md" download="keboola-dataapp-development-SKILL.md">⬇ Download the app-building skill</a>
+<!-- Skill file vendored from keboola/ai-kit@main (plugins/dataapp-developer/skills/dataapp-development/SKILL.md) so the download works same-origin. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
+:::
 
 ## Step 1 — Open Apps and start a new app
 
 In your project, open **Apps** from the left navigation, then click **+ Create App**.
 
 ![The Apps list in a Keboola project with the Create App button in the top right](/data-apps/getting-started-apps-list.png)
-<!-- SCREENSHOT(Nikita — screenshots.mjs): the Apps list view showing the "+ Create App" button. UI-locator. Mask project ID / app names if sensitive. -->
 
-You land on the **Build web apps from your Keboola data** screen. It leads with a single prompt — *"Describe what you want to build…"* — and, below it, manual **Streamlit** and **Python / JS** options for when you'd rather set things up yourself.
+You land on the **Build web apps from your Keboola data** screen. It leads with a single prompt — *"Describe what you want to build…"* — and, below it, manual **Streamlit** and **Python / JS** options for when you'd rather [set things up yourself](#create-an-app-manually). (The **Kai Agent** chat anywhere in your project works too.)
 
 ![The Create App screen: a "Describe what you want to build" prompt with manual Streamlit and Python/JS options below](/data-apps/getting-started-create-app.png)
-<!-- SCREENSHOT(Nikita — screenshots.mjs): the Create App landing screen with the Kai prompt and the "or create manually" Streamlit / Python-JS cards. -->
 
 ## Step 2 — Describe the app you want
 
-Type what you want in plain language. Name the kind of app, what it should show, and keep it simple for your first one. For example:
+Type what you want in plain language. The clearer your prompt, the closer Kai's first version lands — name three things: **the data**, **the audience**, and **the main action** you want people to take. For example:
 
 > Build a simple dashboard from my Storage data: a title, three key metrics as big number tiles, and one bar chart. Keep it clean and easy to read.
 
-The more specific you are — the data, the charts, the audience — the closer Kai's first version will be.
+The more specific you are — which tables, which charts, who it's for — the less you'll need to refine afterward.
 
 ## Step 3 — Watch Kai read your data, verify it, and ask for your approval
 
@@ -50,13 +56,13 @@ In our run, Kai found the project's Shopify tables and built a **Toy Store Sales
 
 ![Kai building the dashboard: creating the prod app and the draft, deploying the dev container, and writing each file, next to the draft panel](/data-apps/getting-started-kai-build.png)
 
-## Step 4 — Preview the draft
+## Step 4 — Preview the draft and refine it
 
-The build runs in a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. As the product puts it, this is *"a private draft that updates live as Kai builds"* — it hot-reloads as Kai edits and doesn't touch anything you've shared. Ask for changes in the chat until it looks right.
+The build runs in a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. As the product puts it, this is *"a private draft that updates live as Kai builds"* — it hot-reloads as Kai edits and doesn't touch anything you've shared.
 
 ![The split-screen builder: Kai's chat next to the live Preview of the Toy Store Sales Dashboard draft — metric tiles and a top-products chart — with the Publish to Production button](/data-apps/getting-started-draft-preview.png)
 
-Kai finishes with next-step suggestions: **Publish to production**, **Make changes**, or type your own.
+Kai's first version is a starting point, not the final word. Keep chatting to change it — a different chart, another metric, a new filter, a cleaner layout — in as many rounds as you need. Kai finishes each round with next-step suggestions: **Publish to production**, **Make changes**, or type your own.
 
 ## Step 5 — Publish to production
 
@@ -70,13 +76,52 @@ Open the URL, enter the password, and your app is live — running on your gover
 
 ![The published Toy Store Sales Dashboard open at its own URL — metric tiles and the top-products chart, no Keboola chrome around it](/data-apps/getting-started-live-app.png)
 
-That's it — you've built and published your first app. You described what you wanted, Kai read your governed data, planned, and deployed it — and you never picked a framework. The same loop builds dashboards, internal tools, data narratives, and more; for the concepts behind it, see [What are Keboola apps](/data-apps/what-are-apps/).
+That's it — you've built and published your first app, and you never picked a framework. The sections below cover the mechanics you'll want as you build more.
+
+## What Kai does on its own — and what it asks first
+
+Kai explores your Storage without asking, so it can find the right tables and understand your data. But before it **creates or modifies the app** in your project, it shows the **Confirmation required** card and waits for your **Approve** — click **Always allow** to skip the prompt for future builds ([Tool Permissions](/kai/settings/#tool-permissions) gives you the same control centrally). The draft itself is private: nothing is shared until you publish.
+
+## How drafts become production
+
+A draft is your private working version with live preview — Kai keeps it on its own branch in the app's managed Git repository, alongside the production app it created up front. **Publish to Production** merges the draft branch into `main`, deploys the production app, and cleans the draft up.
+
+<!-- Publish mechanics observed live (264, 2026-07-10): update context file (CLAUDE.md in the app repo), merge draft branch → main, deploy prod, delete draft branch/config. -->
+
+## How Kai handles data access
+
+Kai uses your data through the project's access controls — the app can only reach data the project can reach. Read-only access is used by default, so the app can't change your data unless you ask for write-back.
+
+<!-- TODO(human-review, Adam Vyborny): confirm "read-only by default" claim and how write-back is enabled. -->
+
+## Create an app manually
+
+Prefer to set the app up yourself, without the chat? Manual creation lives on the same **Create App** screen, under **or create manually** — pick a stack and Keboola sets the app up for you to configure.
+
+![The Create App screen: the Kai prompt at the top and, under "or create manually", the stack choice cards](/data-apps/build-in-ui-create.png)
+
+1. In your Keboola project, open **Apps** and click **+ Create App**.
+2. Under **or create manually**, choose a stack — **Python / JS** (custom apps, production UIs; connect a Git repository) or **Streamlit** (existing Streamlit apps; basic Python).
+3. Name the app and click **Create App**. It opens on its own configuration page, marked **Not Deployed**.
+4. Set the **Code Source** — paste inline **Code** or connect a **Git Repository** — and pick the **Authentication** method.
+5. Configure the rest of the app's settings — backend size, auto-sleep, and more; see [Reference](/data-apps/reference/) for the full list.
+
+![The app's configuration page: the Overview tab with Authentication and Code Source (Git Repository or Code), plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
+
+6. Click **Deploy App**. A short wizard asks for the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
+
+![The deploy/redeploy wizard: backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
+
+7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+
+## Expose the app to other agents
+
+An app you build with Kai can expose an API — or an MCP server — so another agent or service can call it, not just human visitors. The data-fetching logic stays server-side and your Storage token is never exposed to the browser. This is a Python/JS-app capability; for the scaffold and how to wire it up, see [Python/JS apps](/data-apps/python-js/).
 
 ## What's next
 
 - **Control who can open it** → [Authentication](/data-apps/authentication/)
 - **Share it with your team** → [Publish and share](/data-apps/publish-and-share/)
-- **Prefer to click through it yourself?** → [Create an app manually](/data-apps/build-with-kai/#create-an-app-manually)
 - **Want full control over the code?** → [Build locally](/data-apps/build-locally/)
 - **See more of what people build** → [Beyond dashboards](/data-apps/#beyond-dashboards)
 - **The concepts behind it** → [What are Keboola apps](/data-apps/what-are-apps/)

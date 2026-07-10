@@ -64,8 +64,8 @@ The [AI Kit](/ai/ai-kit/) gives your coding assistant (Claude Code, Cursor, Copi
 
 You can build one three ways:
 
-- **[Build with Kai](/data-apps/build-with-kai/)** — describe it and let Kai generate the app. The fastest path. (Building Python/JS with Kai requires the Kai-in-E2B backend on your project; without it, Kai builds Streamlit. <!-- VERIFY(Adam Vyborny): confirm the exact prerequisite/enablement. -->)
-- **[Create the app manually](/data-apps/build-with-kai/#create-an-app-manually)** — set the app up from the interface and point it at a Git repository that contains your code and configuration.
+- **[Build with Kai](/data-apps/getting-started/)** — describe it and let Kai generate the app. The fastest path. (Building Python/JS with Kai requires the Kai-in-E2B backend on your project; without it, Kai builds Streamlit. <!-- VERIFY(Adam Vyborny): confirm the exact prerequisite/enablement. -->)
+- **[Create the app manually](/data-apps/getting-started/#create-an-app-manually)** — set the app up from the interface and point it at a Git repository that contains your code and configuration.
 - **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, then sync to your project. The home of full-control development.
 
 Building it yourself? When you create a Python/JS app, Keboola offers a downloadable **AI skill** (for Claude Code, Cursor, or Copilot) that teaches your assistant the correct app structure, deployment config, and Keboola APIs — see [Develop with an AI coding tool](/data-apps/build-locally/#develop-with-an-ai-coding-tool).

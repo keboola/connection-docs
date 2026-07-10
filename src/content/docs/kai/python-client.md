@@ -104,7 +104,7 @@ The Kai Python Client can be embedded into Keboola [Apps](/data-apps/) to provid
 
 #### Python/JS Apps
 
-You can integrate Kai into [Python/JS Apps](/data-apps/build-with-kai/) today using the Kai Python Client directly. A dedicated plugin with ready-made patterns will be available soon to simplify the setup.
+You can integrate Kai into [Python/JS Apps](/data-apps/getting-started/) today using the Kai Python Client directly. A dedicated plugin with ready-made patterns will be available soon to simplify the setup.
 
 #### Streamlit Apps
 
