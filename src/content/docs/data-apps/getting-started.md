@@ -66,9 +66,9 @@ When you're happy with the draft, click **Publish to Production**. Kai merges th
 
 By default the app is protected with **Basic (Password)** authentication — the generated password also sits on the app's configuration page, ready to copy. To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
-Open the URL, enter the password, and your app is live — running on your governed data, served from its own address.
+Open the URL, enter the password, and your app is live — running on your governed data, served from its own address:
 
-<!-- TODO(human-review): add a standalone shot of the published app open at its own URL (needs the password login — capture manually). The old getting-started-live-app.png showed the previous backend's run and was removed. -->
+![The published Toy Store Sales Dashboard open at its own URL — metric tiles and the top-products chart, no Keboola chrome around it](/data-apps/getting-started-live-app.png)
 
 That's it — you've built and published your first app. You described what you wanted, Kai read your governed data, planned, and deployed it — and you never picked a framework. The same loop builds dashboards, internal tools, data narratives, and more; for the concepts behind it, see [What are Keboola apps](/data-apps/what-are-apps/).
 
