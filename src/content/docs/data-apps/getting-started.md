@@ -38,33 +38,37 @@ Type what you want in plain language. Name the kind of app, what it should show,
 
 The more specific you are — the data, the charts, the audience — the closer Kai's first version will be.
 
-## Step 3 — Watch Kai read your data and build
+## Step 3 — Watch Kai read your data, verify it, and ask for your approval
 
-Kai gets to work. It **explores your Storage on its own** — listing buckets and reading table details — then writes the app: you see each step in the chat (*File index.ts edited*, *File App.tsx written*) while Kai pushes the code and starts a development container.
+Kai gets to work. It **explores your Storage on its own** — listing buckets, reading table details, even sampling the data to verify its queries will work. Then, before creating anything in your project, it shows a **Confirmation required** card with the exact app configuration — name, description, and authentication type — and waits for your **Approve** (or **Decline**; **Always allow** skips this prompt for future builds).
 
-In our run, Kai discovered the project's Google Analytics tables and built a **Google Analytics Dashboard**: sessions, users, and page views as tiles, plus a "sessions by device" bar chart.
+![Kai's confirmation card before creating the app: the generated configuration with Decline, Always allow, and Approve buttons, next to the draft-vs-production explainer](/data-apps/getting-started-approve.png)
 
-![Kai building the dashboard: the chat reports each file written and the container starting, next to the Code view of the draft's files](/data-apps/getting-started-kai-build.png)
+After you approve, Kai creates the app, sets up a **private draft**, and writes the code — you see each step in the chat (*File index.ts edited*, *Writing file…*) while it deploys a development container.
+
+In our run, Kai found the project's Shopify tables and built a **Toy Store Sales Dashboard**: total orders, revenue, and customers as tiles, plus a "top products by orders" bar chart.
+
+![Kai building the dashboard: creating the prod app and the draft, deploying the dev container, and writing each file, next to the draft panel](/data-apps/getting-started-kai-build.png)
 
 ## Step 4 — Preview the draft
 
-The build opens a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. The draft hot-reloads as Kai edits, and building it doesn't touch your production project. Ask for changes in the chat until it looks right.
+The build runs in a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. As the product puts it, this is *"a private draft that updates live as Kai builds"* — it hot-reloads as Kai edits and doesn't touch anything you've shared. Ask for changes in the chat until it looks right.
+
+![The split-screen builder: Kai's chat next to the live Preview of the Toy Store Sales Dashboard draft — metric tiles and a top-products chart — with the Publish to Production button](/data-apps/getting-started-draft-preview.png)
 
 Kai finishes with next-step suggestions: **Publish to production**, **Make changes**, or type your own.
 
-<!-- SCREENSHOT(demo project 264): the split-screen draft with the live Preview visible — step 4 needs its own image (Jordan, 2026-07-10). -->
-
 ## Step 5 — Publish to production
 
-When you're happy with the draft, click **Publish to Production**. The app is deployed and available at its own URL; you'll find it in **Apps**, with its settings on the app's configuration page.
+When you're happy with the draft, click **Publish to Production**. Kai merges the draft into the app's main branch, deploys the production app, and cleans the draft up. The app turns **Active** and is available at its own URL — and Kai's final message hands you the **App URL, the password, and an Open App button**.
 
-By default the app is protected with **Basic (Password)** authentication — the generated password sits right next to **Open App** on the app's configuration page, ready to copy (Kai also shows it as the last build step). To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
+![The published app: the configuration page showing Active status, next to Kai's final message with the App URL, the generated password, and an Open App button](/data-apps/getting-started-deployed.png)
 
-<!-- TODO(human-review, Adam Vyborny): re-capture the published-app screenshots (getting-started-deployed.png, getting-started-live-app.png still show the previous backend's run) — publish blocked in the demo project during re-shoot (app start failures); see PR notes. -->
+By default the app is protected with **Basic (Password)** authentication — the generated password also sits on the app's configuration page, ready to copy. To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
-Open the URL and your app is live — running on your governed data, served from its own address:
+Open the URL, enter the password, and your app is live — running on your governed data, served from its own address.
 
-![The deployed Website Analytics Dashboard running live, with metric tiles and a sessions-by-device chart](/data-apps/getting-started-live-app.png)
+<!-- TODO(human-review): add a standalone shot of the published app open at its own URL (needs the password login — capture manually). The old getting-started-live-app.png showed the previous backend's run and was removed. -->
 
 That's it — you've built and published your first app. You described what you wanted, Kai read your governed data, planned, and deployed it — and you never picked a framework. The same loop builds dashboards, internal tools, data narratives, and more; for the concepts behind it, see [What are Keboola apps](/data-apps/what-are-apps/).
 

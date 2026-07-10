@@ -27,13 +27,13 @@ From a single prompt, Kai runs the whole loop — explore, build, preview, publi
 
 1. **Start a build.** Go to **Apps → Create App**, which leads with a *"Describe what you want to build…"* prompt — or open the **Kai Agent** chat anywhere in your project.
 2. **Describe what you want** in plain language — name the source tables, what the app should show, and the main thing people should be able to do.
-3. **Kai explores your Storage and writes the app.** It lists buckets, reads table details, then writes the code — you see each step in the chat (*File index.ts edited*, *File App.tsx written*) while Kai pushes the code and starts a development container.
-4. **A split-screen builder opens** with your app as a **draft**: chat on the left; on the right the app's name, a **Preview** of the running app, a **Code** view of its files, and a **Publish to Production** button. Kai finishes with next-step suggestions — publish, make changes, or ask for something else.
-5. **Refine in chat, then publish.** The draft hot-reloads as Kai edits. When you're happy, click **Publish to Production** to make the app live and shareable.
+3. **Kai explores your Storage and verifies its plan.** It lists buckets, reads table details, and samples the data to check its queries actually work — then asks you to **Approve** the app configuration before creating anything.
+4. **Kai builds a private draft in a split-screen builder**: chat on the left; on the right a live **Preview** of the running app, a **Code** view of its files, and a **Publish to Production** button. You see every step in the chat (*File index.ts edited*, *Writing file…*) as the draft hot-reloads.
+5. **Refine in chat, then publish.** When you're happy, click **Publish to Production** — Kai merges the draft into the app's main branch, deploys production, and hands you the URL, the password, and an **Open App** button.
 
-![Kai building a Python/JS app: the chat reports each file written and the container starting, next to the Code view of the draft's files with the Publish to Production button](/data-apps/getting-started-kai-build.png)
+![Kai building a Python/JS app: the chat reports creating the app and each file written, next to the draft panel with the Publish to Production button](/data-apps/getting-started-kai-build.png)
 
-<!-- Flow verified live on the new (Python/JS) Kai backend, project 6015, 2026-07-10: prompt → file-edit chips → draft split-screen (PREVIEW / CODE / PUBLISH TO PRODUCTION) → next-step card. -->
+<!-- Flow verified live on the new (Python/JS) Kai backend, demo project 264, 2026-07-10: prompt → explore/verify → Confirmation card → prod app + private draft → split-screen live preview → Publish (merge draft → main, deploy, cleanup) → URL + password card. -->
 
 ### Writing a good prompt
 
@@ -49,9 +49,9 @@ Kai's first version is a starting point, not the final word. Keep chatting to ch
 
 ### What Kai does on its own — and what it asks first
 
-Kai explores your Storage without asking, so it can find the right tables and understand your data. Building a **draft** doesn't touch your production project — the app goes live only when you click **Publish to Production**. For tools that do modify the project, Kai asks for approval unless you've pre-approved them with **Always allow** in [Tool Permissions](/kai/settings/#tool-permissions).
+Kai explores your Storage without asking, so it can find the right tables and understand your data. But before it **creates or modifies the app** in your project, it shows a **Confirmation required** card with the exact configuration and waits for your **Approve** — click **Always allow** to skip the prompt for future builds ([Tool Permissions](/kai/settings/#tool-permissions) gives you the same control centrally). The draft itself is private: as the product puts it, *"a private draft that updates live as Kai builds"* — nothing is shared until you publish.
 
-<!-- TODO(human-review, Adam Vyborny): confirm the approval model on the new backend — in the observed run the draft build ran without an Approve card; publishing is the explicit user action. The old Approve/Decline screenshot (getting-started-approve.png) is from the previous backend. -->
+![Kai's confirmation card: the generated app configuration with Decline, Always allow, and Approve buttons](/data-apps/getting-started-approve.png)
 
 ## Create an app manually
 
@@ -75,9 +75,9 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ## Move from draft to production
 
-A draft is your working version with live preview — it exists in the builder (and on the app's **Drafts** tab) without affecting anything you've shared. When you're happy with it, click **Publish to Production**: the app is deployed and available at its URL, behind the [authentication](/data-apps/authentication/) you chose.
+A draft is your private working version with live preview — Kai keeps it on its own branch in the app's managed Git repository, alongside the production app it created up front. When you click **Publish to Production**, Kai merges the draft branch into `main`, deploys the production app, and cleans the draft up. The app turns **Active** at its URL, behind the [authentication](/data-apps/authentication/) you chose — and Kai hands you the URL and the generated password.
 
-<!-- TODO(human-review, Adam Vyborny / Pepa Martinec): confirm what publishing changes exactly (URL, hosting state) and how re-publishing a newer draft behaves. -->
+<!-- Publish mechanics observed live (264, 2026-07-10): update context file (CLAUDE.md in the app repo), merge draft branch → main, deploy prod, delete draft branch/config. -->
 
 ## How Kai handles data access
 
