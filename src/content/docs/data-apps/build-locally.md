@@ -1,12 +1,16 @@
 ---
 title: Build an app locally
 slug: 'data-apps/build-locally'
-description: Develop a Keboola app with your own tools and Git account, then sync it to your project.
+description: How Python/JS app development works — the scaffold, server-side data access, the dev loop, and syncing your own repository to a Keboola project.
+redirect_from:
+  - /data-apps/python-js/
 ---
 
 
 
-Build an app in your own environment when you want full control over the code, your editor, and your Git workflow. Keboola still hosts and runs the app. This is the full-control path for [Python/JS apps](/data-apps/python-js/).
+Build an app in your own environment when you want full control over the code, your editor, and your Git workflow. Keboola still hosts and runs the app — it clones your repository, installs dependencies, starts the app, and serves it behind a secure URL. You don't manage servers, ports, or Docker: only your code and a small configuration folder.
+
+For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
 ## Before you start
 
@@ -51,6 +55,15 @@ The skill file can also be [downloaded directly](https://raw.githubusercontent.c
 ![The Create Python / JS App dialog, with a "Build Apps faster with AI" panel offering Download Skill and View on GitHub](/data-apps/python-js-ai-skill.png)
 
 <!-- VERIFY(Adam Vyborny): "Download Skill" / "View on GitHub" observed live in the Create Python/JS dialog (us-east4). Confirm the GitHub destination / canonical skill resource to link directly. -->
+
+## How development works
+
+The day-to-day loop, whichever way you build:
+
+1. **Code lives in a Git repository** — yours, or a private Keboola-managed repo that Kai creates for the app (`git.<stack>.keboola.com/keboola/app-<id>.git`).
+2. **Data access happens server-side.** Your backend queries Storage (Storage API or real-time SQL via the Query Service) using the auto-injected `KBC_TOKEN` — the browser never sees the token. Environment variables and code patterns are in [Reference → Data access](/data-apps/reference/#data-access).
+3. **Ship a change**: push to the connected branch and hit **Redeploy** — or, if Kai built the app, just tell Kai what to change.
+4. **Debug on the app detail**: the app's page has **Overview / Advanced Settings / All Runs / Terminal Logs / Drafts / Versions** tabs. The app **sleeps when idle** and wakes on the next visit; drafts hot-reload as Kai edits.
 
 ## Sync to your project
 

@@ -25,7 +25,15 @@ This is the part that sets Keboola apps apart from general app builders: the app
 
 ## The stack: Python/JS
 
-Keboola apps run on **Python/JS** — any Python or JavaScript framework, giving you full control over the interface. That's what Kai builds, and the path for all new apps. How development actually works — code, configuration, data access, deployment — is covered in [Python/JS apps](/data-apps/python-js/).
+Keboola apps run on **Python/JS** — any Python web framework (Flask, FastAPI, Dash), a JavaScript frontend (React, Vue, plain JS), or both together. That's what Kai builds, and the path for all new apps. What that buys you:
+
+- **Any framework, any UI.** Full control over look, layout, and interactivity — a polished, customer-facing product, not just an internal tool.
+- **Full-stack.** A JavaScript/React frontend with a server-side backend (for example, an Express or FastAPI API) in one app.
+- **Server-side data access.** Your Storage token stays on the server; the browser never sees it.
+- **An API — or an MCP server.** Because there's a real backend, the app can serve other agents and services, not just human visitors.
+- **Your Git workflow.** Develop in your own editor and Git account — production-grade, versioned development.
+
+How development actually works — code, configuration, data access, deployment — is covered in [Build locally](/data-apps/build-locally/).
 
 Have an existing **Streamlit** app? Streamlit remains supported; its documentation lives in the [Streamlit apps](/data-apps/streamlit/) section.
 

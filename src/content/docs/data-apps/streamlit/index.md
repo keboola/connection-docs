@@ -11,7 +11,7 @@ redirect_from:
 Streamlit is a Python-only framework for building data tools quickly. It remains supported for existing apps and simple internal tools.
 
 :::note[Streamlit apps only]
-Everything in this section applies to **Streamlit** apps only. New apps — including everything Kai builds — run on [Python/JS](/data-apps/python-js/); see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
+Everything in this section applies to **Streamlit** apps only. New apps — including everything Kai builds — run on [Python/JS](/data-apps/build-locally/); see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 :::
 
 <!-- TODO(human-review, Miro): confirm the positioning. Streamlit is supported but on a deprecation path internally; do NOT state it is retired. Keep this subtree clearly scoped as "Streamlit-specific". -->

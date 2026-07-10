@@ -91,9 +91,23 @@ export const sidebar = [
       { label: "Overview", slug: "data-apps" },
       { slug: "data-apps/getting-started" },
       { slug: "data-apps/what-are-apps" },
-      { slug: "data-apps/build-with-kai" },
-      { slug: "data-apps/build-locally" },
-      { slug: "data-apps/python-js" },
+      {
+        label: "Build",
+        collapsed: true,
+        items: [
+          { slug: "data-apps/build-with-kai" },
+          { slug: "data-apps/build-locally" },
+        ],
+      },
+      {
+        label: "Run & share",
+        collapsed: true,
+        items: [
+          { slug: "data-apps/authentication" },
+          { slug: "data-apps/publish-and-share" },
+        ],
+      },
+      { slug: "data-apps/reference" },
       {
         label: "Streamlit Apps",
         collapsed: true,
@@ -103,9 +117,6 @@ export const sidebar = [
           { slug: "data-apps/streamlit/design-guide" },
         ],
       },
-      { slug: "data-apps/authentication" },
-      { slug: "data-apps/publish-and-share" },
-      { slug: "data-apps/reference" },
     ],
   },
   {

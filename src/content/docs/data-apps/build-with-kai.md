@@ -87,7 +87,7 @@ Kai uses your data through the project's access controls — the app can only re
 
 ## Expose the app to other agents
 
-An app you build with Kai can expose an API — or an MCP server — so another agent or service can call it, not just human visitors. The data-fetching logic stays server-side and your Storage token is never exposed to the browser. This is a Python/JS-app capability; for the scaffold and how to wire it up, see [Python/JS apps](/data-apps/python-js/).
+An app you build with Kai can expose an API — or an MCP server — so another agent or service can call it, not just human visitors. The data-fetching logic stays server-side and your Storage token is never exposed to the browser. This is a Python/JS-app capability; for the scaffold and how to wire it up, see [Build locally](/data-apps/build-locally/).
 
 ## Next steps
 
