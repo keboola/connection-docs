@@ -18,7 +18,10 @@ This page is the full guide to building in the platform — the Kai loop, how to
 - Kai available in your project. <!-- TODO(human-review, Adam Vyborny): state the exact prerequisite. Building Python/JS apps requires the new Kai backend enabled on the project. Give the real enablement step or link. -->
 
 :::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? **[Download the app-building skill](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md)** and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.md" download="keboola-dataapp-development-SKILL.md">⬇ Download the app-building skill</a>
+<!-- Skill file vendored from keboola/ai-kit@main (plugins/dataapp-developer/skills/dataapp-development/SKILL.md) so the download works same-origin. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## How building with Kai works

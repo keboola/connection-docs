@@ -13,7 +13,10 @@ Build an app in your own environment when you want full control over the code, y
 For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
 :::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? **[Download the app-building skill](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md)** and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.md" download="keboola-dataapp-development-SKILL.md">⬇ Download the app-building skill</a>
+<!-- Skill file vendored from keboola/ai-kit@main (plugins/dataapp-developer/skills/dataapp-development/SKILL.md) so the download works same-origin. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## Before you start
