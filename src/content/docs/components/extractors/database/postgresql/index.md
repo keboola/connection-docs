@@ -10,7 +10,7 @@ slug: 'components/extractors/database/postgresql'
 Our connectors support the most recent versions of PostgreSQL. You may choose different strategies to sync your data:
 
 - [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log-based CDC](/components/extractors/database/postgresql/#log-based-cdc)
+- [Log-based CDC](/components/extractors/database/postgresql/#postgresql-log-based-cdc)
 
 
 ## Query-Based Connector

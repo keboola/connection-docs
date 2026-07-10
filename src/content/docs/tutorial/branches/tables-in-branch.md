@@ -110,7 +110,7 @@ but are stored along normal buckets and are visible in production as well as in 
 from all development branches in production.*
 
 Now switch back to the `Sample branch`. Navigate to the `Bitcoin` transformation and run it again. Check the input mapping 
-and verify that the `bitcoin_prices` table from the branch was used as input. 
+and verify that the `bitcoin_price` table from the branch was used as input. 
 
 ![Input mapping from branch data](/tutorial/branches/figures/input-mapping-from-branch.png)
 

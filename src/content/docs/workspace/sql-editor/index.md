@@ -125,7 +125,7 @@ You can add multiple code blocks using the **+ New Query** button below the exis
 
 ### Export Query result
 
-To download your query results as a CSV-formatted file, select Export Query result and choose your preffered format:
+To download your query results as a CSV-formatted file, select Export Query result and choose your preferred format:
 *   CSV — Standard comma-separated values
 *   CSV (gzip) — Compressed CSV for large exports
 

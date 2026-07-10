@@ -10,7 +10,7 @@ slug: 'components/extractors/database/mysql'
 Our connectors support the latest versions of MySQL and AWS Aurora. You can choose among different strategies to synchronize your data:
 
 - [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log-based CDC](/components/extractors/database/mysql#log-based-binlog-cdc)
+- [Log-based CDC](/components/extractors/database/mysql/#mysql-log-based-cdc)
 
 ## Query-Based Connector
 

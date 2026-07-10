@@ -14,7 +14,7 @@ files and optionally uploads them to a destination (Tableau Server,
 to be used together with [Tableau Desktop](https://www.tableau.com/products/desktop) or
 [Tableau Server](https://www.tableau.com/products/server). An alternative approach is to send data using the
 **[Snowflake data destination connector](/components/writers/database/snowflake/)** through a
-[Keboola-provisioned database](/components/writers/database/snowflake/#using-keboola-provisioned-database). That is more suitable to be used
+[Keboola-provisioned database](/components/writers/database/snowflake/#using-keboola-snowflake-database). That is more suitable to be used
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
