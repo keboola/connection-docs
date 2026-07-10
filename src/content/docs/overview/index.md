@@ -119,7 +119,7 @@ The platform automates infrastructure, user, and data management, offering servi
 and reverse billing. Components can be private or shared with Keboola users via our marketplace featuring applications mainly from 3rd parties 
 to enhance workflows and support a composable enterprise.
 
-Components can be run as standard pieces of our Flows [/tutorial/automate/#main-header], obtaining the full support and services (a link to your
+Components can be run as standard pieces of our [Flows](/tutorial/automate/#main-header), obtaining the full support and services (a link to your
 [components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
 
 ### Keboola CLI

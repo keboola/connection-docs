@@ -42,7 +42,7 @@ Every job passes through predictable states:
 **waiting** → **processing** → **success** / **error**
 
 **How billing relates to job state:**
-- Jobs in the **waiting** state are not billed at the job level. A job only consumes [credits](/management/project/limits/#project-power) once it starts **processing**.
+- Jobs in the **waiting** state are not billed at the job level. A job only consumes [credits](/management/project/limits/#project-power---time-credits) once it starts **processing**.
 - Jobs in the **processing** state are billed based on compute resources consumed.
 
 **Important — container runtime billing:** Some components run inside a container that orchestrates multiple child jobs. In these cases, the parent container may continue running and accumulating runtime costs even while individual child jobs are in the waiting state. Setting very high parallelism in a container-based component does not pause the container while jobs queue — the container remains active throughout.

@@ -54,7 +54,7 @@ To determine if MPA suits your organization, consider the following:
 
 1. **Do you want to separate data extraction?**  
 Streamline data acquisition with a dedicated project (e.g., L0 or Staging project) to enhance collaboration.
-2. **Do you have diverse data sources?**  ne
+2. **Do you have diverse data sources?**  
 Process varying data sources (e.g., marketing, CRM, sales, accounting) in distinct projects for clearer management.
 3. **Do you have unique team requirements?**  
 Cater to different teams, branches, or country-specific needs with isolated projects.

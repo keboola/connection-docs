@@ -14,7 +14,7 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 
 - what tables were imported (created by the job and imported into your Storage).
 - what tables were exported (read from your Storage by the job).
-- how many [credits](/management/project/limits/#project-power) were used by running the job.
+- how many [credits](/management/project/limits/#project-power---time-credits) were used by running the job.
 - what events occurred during the job execution.
 - what exact parameters were used for the job (this might be useful when working with the [API](https://developers.keboola.com/integrate/jobs/#apis-for-working-with-jobs)).
 
