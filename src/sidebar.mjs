@@ -89,13 +89,12 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "data-apps" },
-      { slug: "data-apps/getting-started" },
       { slug: "data-apps/what-are-apps" },
       {
         label: "Build",
         collapsed: true,
         items: [
-          { slug: "data-apps/build-with-kai" },
+          { slug: "data-apps/getting-started" },
           { slug: "data-apps/build-locally" },
         ],
       },

@@ -104,13 +104,11 @@ items:
   - url: /data-apps/
     title: Apps
     items:
-      - url: /data-apps/getting-started/
-        title: Getting started
       - url: /data-apps/what-are-apps/
         title: What are apps?
       - title: Build
         items:
-          - url: /data-apps/build-with-kai/
+          - url: /data-apps/getting-started/
             title: With Kai
           - url: /data-apps/build-locally/
             title: Locally
