@@ -16,8 +16,6 @@ An app is "published" once it's deployed and reachable at its URL, with the righ
 2. **Set authentication.** Choose who can open it — a shared password, SSO, GitHub, and more. See [Authentication](/data-apps/authentication/).
 3. **Share the URL.** Anyone who passes the app's authentication can open it.
 
-If you built the app in a **development branch**, merge the branch to production to make it part of your live project (Keboola's standard branch workflow).
-
 <!-- VERIFY(Miro / Adam Vyborny): confirm precisely what "publish" / "promote to production" means for apps — deploy + branch-merge vs an app-level production version — and the exact steps / URL / state changes. Flagged internally as confusing. -->
 
 ## Share with your team
