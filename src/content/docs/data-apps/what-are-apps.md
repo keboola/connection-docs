@@ -25,7 +25,7 @@ Keboola provisions and runs the app for you — there's no server to set up.
 - **Anything interactive** — configurators, simulators, and more.
 - **Agent-facing services** — an app can expose an API or an MCP server so other agents and services call it, not just human visitors (a Python/JS capability).
 
-![A Keboola app built by Kai — a Toy Store Sales Dashboard with metric tiles and a top-products chart — running at its own URL on the project's governed data](/data-apps/getting-started-live-app.png)
+![A Keboola Python/JS app — a Shopify Store Monitor dashboard with KPI tiles, revenue and orders charts, and product/vendor tables — running on the project's governed data](/data-apps/app-dashboard.png)
 
 ## The stack: Python/JS
 

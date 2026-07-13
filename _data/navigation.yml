@@ -127,6 +127,8 @@ items:
             title: Lock package versions
           - url: /data-apps/streamlit/design-guide/
             title: Streamlit design guide
+          - url: /data-apps/streamlit/migrate-to-python-js/
+            title: Migrate to Python/JS
 
   - url: /components/
     title: Components

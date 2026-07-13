@@ -16,12 +16,13 @@ Everything in this section applies to **Streamlit** apps only. New apps — incl
 :::
 
 <!-- TODO(human-review, Miro): confirm the positioning. Streamlit is supported but on a deprecation path internally; do NOT state it is retired. Keep this subtree clearly scoped as "Streamlit-specific". -->
-<!-- TODO: a Streamlit → Python/JS migration page is needed soon (per Jordan, 2026-07-10) — not the immediate priority; link it from here when it exists. -->
+Ready to move an app to the current stack? See [Migrate a Streamlit app to Python/JS](/data-apps/streamlit/migrate-to-python-js/).
 
 ## In this section
 
 - **[Design guide](/data-apps/streamlit/design-guide/)** — layout and styling patterns for Streamlit apps.
 - **[Lock the Streamlit version](/data-apps/streamlit/lock-version/)** — pin your app to a specific Streamlit version.
+- **[Migrate to Python/JS](/data-apps/streamlit/migrate-to-python-js/)** — move an existing Streamlit app to the current stack with Kai.
 
 <!-- TODO(human-review, Miro): design-guide.md and lock-version.md were created from the moved/merged source (former top-level general-design-guide + the three lock-streamlit-version pages). Verify the content. -->
 

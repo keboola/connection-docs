@@ -114,6 +114,7 @@ export const sidebar = [
           { label: "Overview", slug: "data-apps/streamlit" },
           { slug: "data-apps/streamlit/lock-version" },
           { slug: "data-apps/streamlit/design-guide" },
+          { slug: "data-apps/streamlit/migrate-to-python-js" },
         ],
       },
     ],
