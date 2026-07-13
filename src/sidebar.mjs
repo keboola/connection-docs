@@ -449,6 +449,17 @@ export const sidebar = [
     ],
   },
   {
+    label: "CLI",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "cli" },
+      { slug: "cli/getting-started" },
+      { slug: "cli/commands" },
+      { slug: "cli/workflows" },
+      { slug: "cli/for-agents" },
+    ],
+  },
+  {
     label: "Workspaces",
     collapsed: true,
     items: [

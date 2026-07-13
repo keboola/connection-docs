@@ -1,0 +1,100 @@
+---
+title: Getting started with kbagent
+slug: 'cli/getting-started'
+description: 'Install the kbagent CLI, connect a Keboola project (single, multi-project, or a whole organization), verify with kbagent doctor, and run your first commands.'
+---
+
+
+
+Install [kbagent](/cli/), connect it to a project, and run your first commands. This takes a couple of minutes.
+
+## Install
+
+The recommended install is the prebuilt wheel via the install script:
+
+```bash
+curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
+```
+
+Or install from source with [uv](https://docs.astral.sh/uv/) (auto-updates, version-pinnable):
+
+```bash
+uv tool install "git+https://github.com/keboola/cli"
+```
+
+Check the version:
+
+```console
+$ kbagent --version
+kbagent v0.66.0
+```
+<!-- Verified locally 2026-07-13: kbagent v0.66.0 via `uv tool install`. -->
+
+## Connect a project
+
+How you authenticate depends on how much you want to manage.
+
+**A single project** — use a [Storage API token](/management/project/tokens/):
+
+```bash
+kbagent project add --project prod \
+  --url https://connection.keboola.com --token YOUR_TOKEN
+```
+
+**A whole organization** — use a Manage API token (org admin). kbagent registers every project and mints per-project tokens:
+
+```bash
+KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
+  org setup --org-id 123 --url https://connection.keboola.com --yes
+```
+
+<!-- TODO(human-review, Jordan): confirm the exact single-project token type (Storage vs Master) and the org-setup token/flag details; `--allow-env-manage-token` is required to read KBC_MANAGE_API_TOKEN from the environment (default-deny since 0.28.0). -->
+
+:::caution
+kbagent never sends your token anywhere except your Keboola stack, but treat the config directory as sensitive — it stores project credentials. Don't paste tokens into shared terminals or commit them.
+:::
+
+## Verify with `doctor`
+
+`kbagent doctor` runs health checks on your configuration and connectivity. Before you add a project it already tells you what's missing and how to fix it:
+
+```console
+$ kbagent doctor
+╭─────────────────────────────── kbagent doctor ───────────────────────────────╮
+│   PASS  Config source: Using global config …                                 │
+│   WARN  Config file: Config file not found. Run 'kbagent project add' …       │
+│   SKIP  Project connectivity: No projects configured.                         │
+│   PASS  CLI version: kbagent v0.66.0                                          │
+│   WARN  MCP server: MCP server available via: uvx keboola_mcp_server          │
+│   WARN  Claude Code plugin: kbagent Claude Code plugin not installed …         │
+│   Summary: 9 checks, 2 passed, 4 warnings                                     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+```
+<!-- Real output captured 2026-07-13 (pre-auth). Trimmed for width. -->
+
+## Run your first commands
+
+Once a project is connected, explore it (add `--json` / `-j` for machine-readable output):
+
+```bash
+kbagent project list          # connected projects
+kbagent config list           # configurations in the default project
+kbagent job list --limit 5    # recent jobs
+kbagent search "customer_id"  # find tables, buckets, configs by name/content
+```
+
+<!-- VERIFY(owner): capture real output of project list / config list / job list against demo project 264 once the CLI is authenticated (user runs `project add`; read-only reads only). -->
+
+## Set a conversation ID (for agents)
+
+When an AI agent drives kbagent, set a conversation ID so platform observability can correlate the session — every request then carries an `X-Conversation-ID` header:
+
+```bash
+export KBAGENT_CONVERSATION_ID="<unique-id>"
+```
+
+## Next steps
+
+- [Commands](/cli/commands/) — the full command groups.
+- [Workflows](/cli/workflows/) — dev branches, GitOps sync, and real use cases.
+- [For AI agents](/cli/for-agents/) — the Claude Code plugin and sandboxing.

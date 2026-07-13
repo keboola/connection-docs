@@ -636,6 +636,18 @@ items:
       - url: /transformations/code-patterns/
         title: Code Patterns
 
+  - url: /cli/
+    title: CLI
+    items:
+      - url: /cli/getting-started/
+        title: Getting Started
+      - url: /cli/commands/
+        title: Commands
+      - url: /cli/workflows/
+        title: Workflows
+      - url: /cli/for-agents/
+        title: For AI Agents
+
   - url: /workspace/
     title: Workspaces
     items:
