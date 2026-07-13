@@ -167,7 +167,6 @@ For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/
 
 You can find your app's full URL after the first deployment in the app configuration.
 
-## Next steps
+---
 
-- [Publish and share](/data-apps/publish-and-share/)
-- [Reference](/data-apps/reference/)
+**Next:** [Publish and share →](/data-apps/publish-and-share/)

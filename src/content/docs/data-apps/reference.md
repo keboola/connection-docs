@@ -224,3 +224,7 @@ Storage Access has the following limitations:
 
 - **Column-level permissions not supported** — granting access to a table grants read/write on all its columns.
 - **Permission changes require app restart** — adding or removing tables takes effect on the next app start (deploy, redeploy, or wake from sleep).
+
+---
+
+**Next:** [Streamlit apps →](/data-apps/streamlit/)

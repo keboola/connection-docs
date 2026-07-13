@@ -300,3 +300,7 @@ Color values for each predefined theme. All use the **Sans Serif** font. Choose 
 | Dark Green | `#4CAF50` | `#222529` | `#3D4F41` | `#FFFFFF` |
 | Dark Amber | `#FFC107` | `#222529` | `#4A3A24` | `#FFFFFF` |
 | Dark Orange | `#FFA500` | `#222529` | `#4A3324` | `#FFFFFF` |
+
+---
+
+That completes the Apps section. Back to the [Apps overview](/data-apps/).

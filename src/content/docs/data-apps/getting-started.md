@@ -116,12 +116,8 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ## Expose the app to other agents
 
-An app you build with Kai can expose an API — or an MCP server — so another agent or service can call it, not just human visitors. The data-fetching logic stays server-side and your Storage token is never exposed to the browser. This is a Python/JS-app capability; for the scaffold and how to wire it up, see [Python/JS apps](/data-apps/python-js/).
+An app you build with Kai can expose an API — or an MCP server — so another agent or service can call it, not just human visitors. The data-fetching logic stays server-side and your Storage token is never exposed to the browser. This is a Python/JS-app capability; for the scaffold and how to wire it up, see [Build locally](/data-apps/build-locally/).
 
-## What's next
+---
 
-- **Control who can open it** → [Authentication](/data-apps/authentication/)
-- **Share it with your team** → [Publish and share](/data-apps/publish-and-share/)
-- **Want full control over the code?** → [Build locally](/data-apps/build-locally/)
-- **See more of what people build** → [Beyond dashboards](/data-apps/#beyond-dashboards)
-- **The concepts behind it** → [What are Keboola apps](/data-apps/what-are-apps/)
+**Next:** [Build an app locally →](/data-apps/build-locally/)

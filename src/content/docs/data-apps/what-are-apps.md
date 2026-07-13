@@ -48,3 +48,7 @@ Keboola provisions and runs the app for you — there's no server for you to set
 ## Where Kai fits
 
 Kai can build, edit, and run apps for you. Throughout these docs, "build with Kai" is the recommended path for most users — it removes the low-level setup you'd otherwise do by hand. Developers who want full control can still build locally; see [Build locally](/data-apps/build-locally/).
+
+---
+
+**Next:** [Build your first app with Kai →](/data-apps/getting-started/)

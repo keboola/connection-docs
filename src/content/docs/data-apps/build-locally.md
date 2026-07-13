@@ -87,7 +87,6 @@ Keboola runs your app from a **Git repository** you point it at. Develop locally
 
 Apps read Keboola data through Input Mapping, the Storage API, or Storage Access (real-time SQL via the Query Service). See [Reference → Data access](/data-apps/reference/#data-access) for environment variables, code patterns, and Storage Access setup.
 
-## Next steps
+---
 
-- [Authentication](/data-apps/authentication/)
-- [Reference](/data-apps/reference/) — environment variables and settings.
+**Next:** [Authentication →](/data-apps/authentication/)
