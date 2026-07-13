@@ -21,16 +21,7 @@ For the full explanation — how apps fit into the platform and how they're isol
 
 ## What people build
 
-- **Dashboards & reports** — live metrics for a team or a client, replacing a BI seat for that one view.
-
-![A published Keboola app — a sales dashboard with metric tiles and a top-products chart — served at its own URL](/data-apps/getting-started-live-app.png)
-
-- **Internal tools** — forms, approvals, and admin panels that read *and write back* to your data.
-- **Data narratives** — scrollable, explained stories built from your data.
-- **Configurators & simulators** — interactive what-if tools running on live data.
-- **Agent-facing services** — an app with an API or MCP server that other agents and services call.
-
-Dashboards are just the start — see [Beyond dashboards](#beyond-dashboards) below for what that range looks like in practice.
+Dashboards and reports, internal tools, data narratives, configurators, and agent-facing services — see [what you can build](/data-apps/what-are-apps/#what-you-can-build) for the full picture. Dashboards are just the start: **[Beyond dashboards](#beyond-dashboards)** below shows the range.
 
 ## Two ways to build
 

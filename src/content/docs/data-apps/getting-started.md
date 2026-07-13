@@ -101,22 +101,18 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 ![The Create App screen: the Kai prompt at the top and, under "or create manually", the stack choice cards](/data-apps/build-in-ui-create.png)
 
 1. In your Keboola project, open **Apps** and click **+ Create App**.
-2. Under **or create manually**, choose a stack — **Python / JS** (custom apps, production UIs; connect a Git repository) or **Streamlit** (existing Streamlit apps; basic Python).
+2. Under **or create manually**, choose a stack — **Python / JS** (custom apps, production UIs) or **Streamlit** (existing Streamlit apps; basic Python).
 3. Name the app and click **Create App**. It opens on its own configuration page, marked **Not Deployed**.
-4. Set the **Code Source** — paste inline **Code** or connect a **Git Repository** — and pick the **Authentication** method.
+4. Set the **code source** and the **Authentication** method. A **Python / JS** app runs from a **Git repository** — connect one (there's no inline-code option for Python/JS). A **Streamlit** app can use inline **Code** or a Git repository.
 5. Configure the rest of the app's settings — backend size, auto-sleep, and more; see [Reference](/data-apps/reference/) for the full list.
 
-![The app's configuration page: the Overview tab with Authentication and Code Source (Git Repository or Code), plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
+![The app's configuration page: the Overview tab with Authentication and a Git Repository section, plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
 
 6. Click **Deploy App**. A short wizard asks for the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
 
 ![The deploy/redeploy wizard: backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
 7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
-
-## Expose the app to other agents
-
-An app you build with Kai can expose an API — or an MCP server — so another agent or service can call it, not just human visitors. The data-fetching logic stays server-side and your Storage token is never exposed to the browser. This is a Python/JS-app capability; for the scaffold and how to wire it up, see [Build locally](/data-apps/build-locally/).
 
 ---
 

@@ -14,12 +14,16 @@ Keboola has always handled the data pipeline — extracting, transforming, and l
 
 This is the part that sets Keboola apps apart from general app builders: the app is governed by default. There's no separate database connection to configure, expose, or leak, and no dataset copied to an outside service — the app reads through the project's own access, server-side. It can only touch data the project can touch, and you control who can open it.
 
+Keboola provisions and runs the app for you — there's no server to set up.
+<!-- TODO(human-review, Michal Jerabek / Pavel Synek): confirm the hosting model to state publicly. Live today = Operator (Keboola's Kubernetes). E2B is the proposed backend for Kai-generated JS apps and is NOT yet signed off. Do not document E2B as the hosting mechanism until confirmed. -->
+
 ## What you can build
 
 - **Dashboards** — track metrics, replace a BI seat for an internal view.
 - **Internal tools** — forms, approvals, and workflows that read and write back to your data.
 - **Data narratives** — scrollable, explained stories built from your data.
 - **Anything interactive** — configurators, simulators, and more.
+- **Agent-facing services** — an app can expose an API or an MCP server so other agents and services call it, not just human visitors (a Python/JS capability).
 
 ![A Keboola app built by Kai — a Toy Store Sales Dashboard with metric tiles and a top-products chart — running at its own URL on the project's governed data](/data-apps/getting-started-live-app.png)
 
@@ -38,12 +42,6 @@ How development actually works — code, configuration, data access, deployment 
 Have an existing **Streamlit** app? Streamlit remains supported; its documentation lives in the [Streamlit apps](/data-apps/streamlit/) section.
 
 <!-- TODO(human-review, Miro): verify the framework framing — Python/JS as the sole forward path for new apps. Do not state Streamlit is retired. -->
-
-## How an app is hosted
-
-Keboola provisions and runs the app for you — there's no server for you to set up.
-
-<!-- TODO(human-review, Michal Jerabek / Pavel Synek): confirm the hosting model to state publicly. Live today = Operator (Keboola's Kubernetes). E2B is the proposed backend for Kai-generated JS apps and is NOT yet signed off. Do not document E2B as the hosting mechanism until confirmed. -->
 
 ## Where Kai fits
 
