@@ -12,25 +12,38 @@ This walkthrough takes you from nothing to browsing a real project with [kbagent
 
 ## Step 1 — Install
 
-The quickest install is the prebuilt wheel via the install script:
+Pick the line for your OS.
+
+**macOS / Linux** — the prebuilt wheel via the install script:
 
 ```bash
 curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
 ```
 
-Or install from source with [uv](https://docs.astral.sh/uv/) — this version auto-updates and can be pinned:
+**Windows** — install with [uv](https://docs.astral.sh/uv/) in PowerShell (install uv first if you don't have it):
+
+```powershell
+uv tool install "git+https://github.com/keboola/cli"
+```
+
+**Any OS, from source** — `uv` works on macOS, Linux, and Windows, auto-updates, and can be pinned:
 
 ```bash
 uv tool install "git+https://github.com/keboola/cli"
 ```
 
-Confirm it's on your `PATH`:
+Confirm it's on your `PATH` (all platforms):
 
 ```console
 $ kbagent --version
 kbagent v0.66.0
 ```
-<!-- Verified locally 2026-07-13: kbagent v0.66.0. -->
+<!-- Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. TODO(human-review): confirm the Windows/PowerShell install line and whether install.sh has a Windows equivalent. -->
+
+:::tip
+On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv/) without installing (`uvx --from 'git+https://github.com/keboola/cli' kbagent …`) — handy for a one-off or in CI.
+:::
+<!-- TODO(human-review): confirm the uvx invocation name. -->
 
 ## Step 2 — Connect your project
 

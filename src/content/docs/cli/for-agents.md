@@ -12,14 +12,16 @@ description: 'Give an AI coding agent safe control of Keboola with kbagent — t
 
 ## Claude Code plugin
 
-Install the plugin from the CLI's own marketplace:
+:::tip[Add kbagent to Claude Code]
+Run these two commands **inside Claude Code** to install the plugin from the CLI's own marketplace (use the copy button on the block):
 
 ```
 /plugin marketplace add keboola/cli
 /plugin install kbagent@keboola-agent-cli
 ```
+:::
 
-This adds a **`/keboola`** slash command that spawns a `keboola-expert` subagent with fresh context and hard rules (fetch the current reference, dry-run first, prefer the CLI over raw REST/MCP, gate on version), plus a structured verification payload. `kbagent doctor` tells you whether the plugin is installed.
+The plugin installs via Claude Code's marketplace, not as a downloaded file — so it's a command you run in the assistant, not a button. It adds a **`/keboola`** slash command that spawns a `keboola-expert` subagent with fresh context and hard rules (fetch the current reference, dry-run first, prefer the CLI over raw REST/MCP, gate on version), plus a structured verification payload. `kbagent doctor` tells you whether the plugin is installed.
 
 ## The `context` reference
 
