@@ -645,6 +645,8 @@ items:
         title: Commands
       - url: /cli/workflows/
         title: Workflows
+      - url: /cli/web-ui/
+        title: Web UI
       - url: /cli/for-agents/
         title: For AI Agents
 

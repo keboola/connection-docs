@@ -58,32 +58,17 @@ kbagent never sends your token anywhere except your Keboola stack, but treat the
 
 `kbagent doctor` runs health checks on your configuration and connectivity. Once a project is connected it confirms the link and flags anything still worth doing:
 
-```console
-$ kbagent doctor
-  PASS  Config file: config.json exists with correct permissions.
-  PASS  Config parseable: valid JSON with 1 project(s).
-  PASS  Project 'docs-demo': Connected to https://connection.europe-west3.gcp.keboola.com
-        (project: L0 - Shopify, id: 264) in 163ms
-  PASS  CLI version: kbagent v0.66.0
-  PASS  Conversation ID: X-Conversation-ID: docs-capture
-  WARN  Claude Code plugin: not installed. Run /plugin marketplace add keboola/cli
-```
-<!-- Real output captured 2026-07-13 against demo project 264; trimmed for width. -->
+![kbagent doctor output: config found, project 'docs-demo' connected to the stack (L0 - Shopify, id 264), CLI version, and warnings for the MCP server and Claude Code plugin](/cli/terminal-connect.png)
+<!-- Real terminal output captured 2026-07-13 against demo project 264, rendered with charmbracelet/freeze. -->
 
 ## Run your first commands
 
 Once a project is connected, explore it. Add `--json` / `-j` for machine-readable output (what an agent uses):
 
-```console
-$ kbagent job list --limit 5
-                                        Jobs
-┏━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
-┃ Project   ┃   Job ID ┃ Status  ┃ Component           ┃ Created            ┃ Duration ┃
-┡━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
-│ docs-demo │ 90878516 │ success │ keboola.flow        │ 2026-07-13T07:16:… │   1m 14s │
-│           │ 90878596 │ success │ keboola.snowflake-… │ 2026-07-13T07:16:… │      36s │
-│           │ 90878900 │ success │ keboola.data-apps   │ 2026-07-13T07:17:… │      20s │
-└───────────┴──────────┴─────────┴─────────────────────┴────────────────────┴──────────┘
+![kbagent job list --limit 5: a table of recent jobs in docs-demo with job ID, success status, component, created time, and duration](/cli/terminal-browse.png)
+
+```bash
+kbagent job list --limit 5    # recent jobs (shown above)
 ```
 
 Other everyday reads:

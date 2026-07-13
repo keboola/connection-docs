@@ -84,6 +84,8 @@ kbagent workspace from-transformation --project prod \
 
 `search` finds configs, tables, buckets, and flows across every connected project. It uses Keboola's Global Search by default; where that feature isn't enabled, add `--search-type config-based` to scan configurations directly:
 
+![kbagent search "shopify" --search-type config-based: a results table of matching configurations in docs-demo with type, ID, name, and component ID](/cli/terminal-search.png)
+
 ```console
 $ kbagent search "shopify" --search-type config-based
 Search results for "shopify" (config-based) — 19 result(s) across 1 project(s)

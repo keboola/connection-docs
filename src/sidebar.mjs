@@ -456,6 +456,7 @@ export const sidebar = [
       { slug: "cli/getting-started" },
       { slug: "cli/commands" },
       { slug: "cli/workflows" },
+      { slug: "cli/web-ui" },
       { slug: "cli/for-agents" },
     ],
   },
