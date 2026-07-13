@@ -117,7 +117,7 @@ Will be
  {
   "templateId": "1101",
   "dynamicData_lastName": "Jedno",
-  "dynamicData_fistName": "Tomáš"
+  "dynamicData_fistName": "Tomáš",
   "dynamicImages_logo": "id-of-logo-image",
   "dynamicImages_strip_cs": "id-of-czech-image"
 }
