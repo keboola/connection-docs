@@ -12,6 +12,7 @@
     "gen:sidebar": "node scripts/convert-nav.mjs"
   },
   "dependencies": {
+    "@astrojs/mdx": "^5.0.2",
     "@astrojs/starlight": "^0.38",
     "astro": "^6",
     "marked": "^18.0.4",
