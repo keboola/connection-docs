@@ -56,34 +56,48 @@ kbagent never sends your token anywhere except your Keboola stack, but treat the
 
 ## Verify with `doctor`
 
-`kbagent doctor` runs health checks on your configuration and connectivity. Before you add a project it already tells you what's missing and how to fix it:
+`kbagent doctor` runs health checks on your configuration and connectivity. Once a project is connected it confirms the link and flags anything still worth doing:
 
 ```console
 $ kbagent doctor
-╭─────────────────────────────── kbagent doctor ───────────────────────────────╮
-│   PASS  Config source: Using global config …                                 │
-│   WARN  Config file: Config file not found. Run 'kbagent project add' …       │
-│   SKIP  Project connectivity: No projects configured.                         │
-│   PASS  CLI version: kbagent v0.66.0                                          │
-│   WARN  MCP server: MCP server available via: uvx keboola_mcp_server          │
-│   WARN  Claude Code plugin: kbagent Claude Code plugin not installed …         │
-│   Summary: 9 checks, 2 passed, 4 warnings                                     │
-╰──────────────────────────────────────────────────────────────────────────────╯
+  PASS  Config file: config.json exists with correct permissions.
+  PASS  Config parseable: valid JSON with 1 project(s).
+  PASS  Project 'docs-demo': Connected to https://connection.europe-west3.gcp.keboola.com
+        (project: L0 - Shopify, id: 264) in 163ms
+  PASS  CLI version: kbagent v0.66.0
+  PASS  Conversation ID: X-Conversation-ID: docs-capture
+  WARN  Claude Code plugin: not installed. Run /plugin marketplace add keboola/cli
 ```
-<!-- Real output captured 2026-07-13 (pre-auth). Trimmed for width. -->
+<!-- Real output captured 2026-07-13 against demo project 264; trimmed for width. -->
 
 ## Run your first commands
 
-Once a project is connected, explore it (add `--json` / `-j` for machine-readable output):
+Once a project is connected, explore it. Add `--json` / `-j` for machine-readable output (what an agent uses):
+
+```console
+$ kbagent job list --limit 5
+                                        Jobs
+┏━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃ Project   ┃   Job ID ┃ Status  ┃ Component           ┃ Created            ┃ Duration ┃
+┡━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│ docs-demo │ 90878516 │ success │ keboola.flow        │ 2026-07-13T07:16:… │   1m 14s │
+│           │ 90878596 │ success │ keboola.snowflake-… │ 2026-07-13T07:16:… │      36s │
+│           │ 90878900 │ success │ keboola.data-apps   │ 2026-07-13T07:17:… │      20s │
+└───────────┴──────────┴─────────┴─────────────────────┴────────────────────┴──────────┘
+```
+
+Other everyday reads:
 
 ```bash
 kbagent project list          # connected projects
 kbagent config list           # configurations in the default project
-kbagent job list --limit 5    # recent jobs
-kbagent search "customer_id"  # find tables, buckets, configs by name/content
+kbagent search "shopify" --search-type config-based   # find configs by name/content
 ```
 
-<!-- VERIFY(owner): capture real output of project list / config list / job list against demo project 264 once the CLI is authenticated (user runs `project add`; read-only reads only). -->
+:::note
+`kbagent search` uses Keboola's Global Search by default. If a project doesn't have that feature enabled, kbagent tells you and you can fall back to `--search-type config-based` to scan configurations directly.
+:::
+<!-- Real output captured 2026-07-13 against project 264 (job list, project list, config-based search all verified). Global-search-not-enabled behavior observed on 264. -->
 
 ## Set a conversation ID (for agents)
 
