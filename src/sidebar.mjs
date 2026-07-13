@@ -454,10 +454,11 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "cli" },
       { slug: "cli/getting-started" },
-      { slug: "cli/commands" },
+      { slug: "cli/concepts" },
       { slug: "cli/workflows" },
-      { slug: "cli/web-ui" },
       { slug: "cli/for-agents" },
+      { slug: "cli/commands" },
+      { slug: "cli/web-ui" },
     ],
   },
   {

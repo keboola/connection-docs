@@ -42,3 +42,7 @@ The home screen summarizes the active project — connected projects, agent task
 ## When to use it
 
 The Web UI is handy for browsing and monitoring at a glance. For scripting, multi-project operations, GitOps sync, and handing work to an AI agent, use the [command line](/cli/commands/) — the two share the same kbagent config, so you can switch freely.
+
+---
+
+That's the tour. Jump back to the [CLI overview](/cli/) or dive into a [how-to guide](/cli/workflows/).

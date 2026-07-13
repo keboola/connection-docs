@@ -640,15 +640,17 @@ items:
     title: CLI
     items:
       - url: /cli/getting-started/
-        title: Getting Started
-      - url: /cli/commands/
-        title: Commands
+        title: Get Started
+      - url: /cli/concepts/
+        title: How It Works
       - url: /cli/workflows/
-        title: Workflows
+        title: How-to Guides
+      - url: /cli/for-agents/
+        title: Use with AI Agents
+      - url: /cli/commands/
+        title: Command Reference
       - url: /cli/web-ui/
         title: Web UI
-      - url: /cli/for-agents/
-        title: For AI Agents
 
   - url: /workspace/
     title: Workspaces

@@ -1,99 +1,116 @@
 ---
-title: Getting started with kbagent
+title: Get started with kbagent
 slug: 'cli/getting-started'
-description: 'Install the kbagent CLI, connect a Keboola project (single, multi-project, or a whole organization), verify with kbagent doctor, and run your first commands.'
+description: 'A guided first run of the kbagent CLI — install it, connect a Keboola project, verify with doctor, and run your first read commands. Plus multi-project and organization setup.'
 ---
 
 
 
-Install [kbagent](/cli/), connect it to a project, and run your first commands. This takes a couple of minutes.
+This walkthrough takes you from nothing to browsing a real project with [kbagent](/cli/) in a few minutes. Follow it top to bottom for a single project; the [Connect more](#connect-more-projects) section covers multi-project and organization setup.
 
-## Install
+<!-- Tutorial-type page. Source: keboola/cli README + docs/TUTORIAL.md. Terminal output verified locally against demo project 264, 2026-07-13. -->
 
-The recommended install is the prebuilt wheel via the install script:
+## Step 1 — Install
+
+The quickest install is the prebuilt wheel via the install script:
 
 ```bash
 curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
 ```
 
-Or install from source with [uv](https://docs.astral.sh/uv/) (auto-updates, version-pinnable):
+Or install from source with [uv](https://docs.astral.sh/uv/) — this version auto-updates and can be pinned:
 
 ```bash
 uv tool install "git+https://github.com/keboola/cli"
 ```
 
-Check the version:
+Confirm it's on your `PATH`:
 
 ```console
 $ kbagent --version
 kbagent v0.66.0
 ```
-<!-- Verified locally 2026-07-13: kbagent v0.66.0 via `uv tool install`. -->
+<!-- Verified locally 2026-07-13: kbagent v0.66.0. -->
 
-## Connect a project
+## Step 2 — Connect your project
 
-How you authenticate depends on how much you want to manage.
-
-**A single project** — use a [Storage API token](/management/project/tokens/):
+For one project you need a [Storage API token](/management/project/tokens/) and your stack URL:
 
 ```bash
 kbagent project add --project prod \
   --url https://connection.keboola.com --token YOUR_TOKEN
 ```
 
-**A whole organization** — use a Manage API token (org admin). kbagent registers every project and mints per-project tokens:
+`prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
+
+<!-- TODO(human-review, Jordan): confirm the exact single-project token type (Storage vs Master). -->
+
+:::caution
+kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
+:::
+
+## Step 3 — Verify the connection
+
+`kbagent doctor` checks your configuration and connectivity. Once a project is connected it confirms the link and flags anything else worth doing (like installing the agent plugin):
+
+![kbagent doctor output: config found, project 'docs-demo' connected to the stack (L0 - Shopify, id 264), CLI version PASS, and warnings for the MCP server and Claude Code plugin](/cli/terminal-connect.png)
+
+You can also test connectivity on its own with `kbagent project status`.
+
+## Step 4 — Browse the project
+
+Explore what's there. Recent jobs:
+
+![kbagent job list --limit 5: a table of recent jobs in docs-demo with job ID, success status, component, created time, and duration](/cli/terminal-browse.png)
+
+```bash
+kbagent job list --limit 5    # recent jobs (shown above)
+kbagent project list          # connected projects
+kbagent config list           # configurations in the default project
+```
+
+## Step 5 — Search
+
+Find configs, tables, buckets, and flows by name or content:
+
+```bash
+kbagent search "shopify"
+```
+
+:::note
+`kbagent search` uses Keboola's Global Search by default. If a project doesn't have that feature enabled, kbagent says so — add `--search-type config-based` to scan configurations directly instead.
+:::
+<!-- Global-search-not-enabled fallback verified on project 264, 2026-07-13. -->
+
+## Step 6 — Go further
+
+- **Add `--json`** to any command for machine-readable output — this is what an AI agent consumes.
+- **Set a conversation ID** when an agent drives kbagent, so platform observability can correlate the session (adds an `X-Conversation-ID` header):
+
+  ```bash
+  export KBAGENT_CONVERSATION_ID="<unique-id>"
+  ```
+
+## Connect more projects
+
+**Several projects** — register each with its own Storage token (`project add`), or bulk-onboard with a Manage API token:
+
+```bash
+KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
+  org setup --project-ids 901,9621 --url https://connection.keboola.com --yes
+```
+
+**A whole organization** (org admin) — kbagent registers every project and mints per-project tokens:
 
 ```bash
 KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
   org setup --org-id 123 --url https://connection.keboola.com --yes
 ```
 
-<!-- TODO(human-review, Jordan): confirm the exact single-project token type (Storage vs Master) and the org-setup token/flag details; `--allow-env-manage-token` is required to read KBC_MANAGE_API_TOKEN from the environment (default-deny since 0.28.0). -->
+<!-- TODO(human-review, Jordan): confirm org setup flags (--allow-env-manage-token required to read KBC_MANAGE_API_TOKEN; default-deny since 0.28.0), --project-ids vs --org-id, --token-expires-in. -->
 
-:::caution
-kbagent never sends your token anywhere except your Keboola stack, but treat the config directory as sensitive — it stores project credentials. Don't paste tokens into shared terminals or commit them.
-:::
+Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 
-## Verify with `doctor`
+---
 
-`kbagent doctor` runs health checks on your configuration and connectivity. Once a project is connected it confirms the link and flags anything still worth doing:
-
-![kbagent doctor output: config found, project 'docs-demo' connected to the stack (L0 - Shopify, id 264), CLI version, and warnings for the MCP server and Claude Code plugin](/cli/terminal-connect.png)
-<!-- Real terminal output captured 2026-07-13 against demo project 264, rendered with charmbracelet/freeze. -->
-
-## Run your first commands
-
-Once a project is connected, explore it. Add `--json` / `-j` for machine-readable output (what an agent uses):
-
-![kbagent job list --limit 5: a table of recent jobs in docs-demo with job ID, success status, component, created time, and duration](/cli/terminal-browse.png)
-
-```bash
-kbagent job list --limit 5    # recent jobs (shown above)
-```
-
-Other everyday reads:
-
-```bash
-kbagent project list          # connected projects
-kbagent config list           # configurations in the default project
-kbagent search "shopify" --search-type config-based   # find configs by name/content
-```
-
-:::note
-`kbagent search` uses Keboola's Global Search by default. If a project doesn't have that feature enabled, kbagent tells you and you can fall back to `--search-type config-based` to scan configurations directly.
-:::
-<!-- Real output captured 2026-07-13 against project 264 (job list, project list, config-based search all verified). Global-search-not-enabled behavior observed on 264. -->
-
-## Set a conversation ID (for agents)
-
-When an AI agent drives kbagent, set a conversation ID so platform observability can correlate the session — every request then carries an `X-Conversation-ID` header:
-
-```bash
-export KBAGENT_CONVERSATION_ID="<unique-id>"
-```
-
-## Next steps
-
-- [Commands](/cli/commands/) — the full command groups.
-- [Workflows](/cli/workflows/) — dev branches, GitOps sync, and real use cases.
-- [For AI agents](/cli/for-agents/) — the Claude Code plugin and sandboxing.
+**Next:** [How kbagent works →](/cli/concepts/)

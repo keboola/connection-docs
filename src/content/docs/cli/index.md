@@ -6,29 +6,35 @@ description: 'kbagent, the Keboola command-line interface — an AI-friendly CLI
 
 
 
-**kbagent** is Keboola's command-line interface: one tool to manage all your Keboola projects — browse and edit configurations, run and monitor jobs, work with Storage, build flows, sync configs as local files, and drive dev branches — across multiple projects and stacks at once. It's designed to be equally comfortable in your hands and in an **AI coding agent's**, with structured JSON output and built-in safety controls.
+**kbagent** is Keboola's command-line interface: one tool to manage all your Keboola projects from the terminal — browse and edit configurations, run and monitor jobs, work with Storage, build flows, sync configs as local files, and drive development branches — across many projects and stacks at once. It's built to be equally comfortable in your hands and in an **AI coding agent's**, with structured JSON output and built-in safety controls.
 
-<!-- Source: keboola/cli README + docs/guide.md. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
+<!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
 
-## Why kbagent
+## In one minute
 
-- **Workflow-oriented, not endpoint-oriented.** Commands map to what you actually do — "run this job and wait", "create a dev branch and target it", "sync these configs to disk" — instead of raw API calls.
-- **Multi-project and multi-stack.** Connect many projects (or a whole organization) and run operations across them, in parallel.
-- **Dev branches propagate automatically.** Point a command at a branch and related operations follow it.
-- **GitOps sync.** Pull configurations to YAML on disk, diff them, and push changes back — version-control your project.
-- **Agent-safe by design.** A session firewall (`--deny-writes` / `--deny-destructive`) and read-only sandboxing let you hand the CLI to an AI agent without handing over the keys.
+```bash
+# install
+curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
+# connect a project
+kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
+# explore
+kbagent doctor
+kbagent job list --limit 5
+kbagent search "customer_id"
+```
 
-## Who it's for
+Everything the UI does — and a lot the UI doesn't — is a command away, scriptable, and safe to hand to an agent.
 
-- **Data engineers** who want to script and version Keboola instead of clicking through the UI.
-- **AI coding agents** (Claude Code, Cursor, Copilot) — kbagent ships a Claude Code plugin and a machine-readable command reference so an agent can operate Keboola safely. See [kbagent for AI agents](/cli/for-agents/).
+## This section
 
-## Start here
+The pages read in order, from first run to deep reference:
 
-- **[Getting started](/cli/getting-started/)** — install, connect a project, run your first commands.
-- **[Commands](/cli/commands/)** — the command groups and what each does.
-- **[Workflows](/cli/workflows/)** — dev branches, GitOps sync, permissions, and real end-to-end use cases.
-- **[For AI agents](/cli/for-agents/)** — the Claude Code plugin, sandboxing, and `kbagent context`.
+1. **[Get started](/cli/getting-started/)** — install, connect a project, run your first commands (a guided walkthrough).
+2. **[Concepts](/cli/concepts/)** — how kbagent works: the connection model, multi-project, dev branches, GitOps sync, and the safety firewall.
+3. **[How-to guides](/cli/workflows/)** — task recipes: onboard an org, dev-branch workflow, GitOps sync, audits, CI/CD tokens, encryption.
+4. **[Use with AI agents](/cli/for-agents/)** — the Claude Code plugin, `kbagent context`, and sandboxing an agent.
+5. **[Command reference](/cli/commands/)** — every command group, global flags, JSON output, and error codes.
+6. **[Web UI](/cli/web-ui/)** — the optional local browser dashboard.
 
 ## How it relates to the other tools
 
@@ -36,10 +42,14 @@ description: 'kbagent, the Keboola command-line interface — an AI-friendly CLI
 |------|-----------|
 | **kbagent CLI** | Scripting and multi-project operations from your terminal; giving an agent safe, sandboxed control. |
 | **[MCP server](/ai/mcp-server/)** | Letting an AI client call Keboola tools directly over MCP. |
-| **[AI Kit](/ai/ai-kit/)** | Coding-assistant plugins (skills/agents) for building Keboola components and apps. |
+| **[AI Kit](/ai/ai-kit/)** | Coding-assistant plugins for building Keboola components and apps. |
 | **[Kai](/kai/)** | The in-product AI assistant. |
 
 :::note
 kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
-<!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline (~March 2027 mentioned) and whether to state it here or only in the developer docs. -->
+<!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
 :::
+
+---
+
+**Next:** [Get started with kbagent →](/cli/getting-started/)

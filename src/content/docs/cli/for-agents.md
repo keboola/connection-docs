@@ -61,3 +61,7 @@ export KBAGENT_CONVERSATION_ID="<unique-id>"
 - **[Kai](/kai/)** — the in-product assistant; reachable from the CLI via `kbagent kai` *(beta)*.
 
 <!-- VERIFY(owner): confirm the plugin install string `kbagent@keboola-agent-cli` and the /keboola subagent description against the current repo. -->
+
+---
+
+**Next:** [Command reference →](/cli/commands/)
