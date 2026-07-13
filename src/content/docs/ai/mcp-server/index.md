@@ -290,7 +290,7 @@ For detailed technical documentation including the full list of read-only tools 
 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
-For CLI control, dev environments, or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
+Prefer a terminal or want to give an agent sandboxed, multi-project control? See the [kbagent CLI](/cli/) — it can also call MCP tools via `kbagent tool`. For dev environments or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
 
 
 ## Support and Feedback
