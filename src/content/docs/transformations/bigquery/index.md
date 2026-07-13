@@ -131,14 +131,4 @@ When developing the transformation code, it's easiest to create a workspace with
 
 ### Read-Only Input Mapping in Development Branches
 
-When you work in a [development branch](/components/branches/), each branch keeps its own copy of a bucket in a separate dataset. The branch dataset name is the default (production) dataset name prefixed with the branch ID. For example, in branch `1234` the bucket `in.c-main`:
-
-- is the dataset `in_c_main` in production (the default branch), and
-- is the dataset `1234_in_c_main` in branch `1234`.
-
-Reference a branch table by its prefixed dataset name, for example `` `1234_in_c_main`.`users` ``. Production data stays in the un-prefixed `in_c_*` datasets and remains readable from the branch.
-
-Read access is scoped per branch:
-
-- A **dev-branch** transformation reads its **own** branch datasets **and** the default (production) datasets. Datasets belonging to **other** branches are not accessible.
-- A **default-branch** transformation reads **only** the default datasets and cannot read any branch datasets.
+In a [development branch](/components/branches/), a bucket's dataset is prefixed with the branch ID: the bucket `in.c-main` is `in_c_main` in production (the default branch) and `1234_in_c_main` in branch `1234`. A dev-branch transformation reads its own branch datasets and the production ones (other branches are not accessible); a default-branch transformation reads only production datasets.
