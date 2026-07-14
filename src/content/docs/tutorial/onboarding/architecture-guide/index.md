@@ -39,6 +39,10 @@ and democratization, by maintaining integrated yet isolated environments to avoi
 ## Multi-Project Architecture (MPA)
 MPA is a design strategy that divides data processing tasks among multiple function-specific Keboola projects. It transforms a single-project focus on Extract, Transform, and Load (ETL) processes into a structured data platform, enhancing organizational data management. This approach clarifies the role, simplifies access control, and supports tailored data usage and governance.
 
+:::tip
+See [**Multi-Project Architecture**](/catalog/multi-project/) for a concrete, worked example of splitting a single project (Oracle, SQL Server, and Google Analytics sources) into function-specific projects, and how it maps to [Data Catalog](/catalog/) sharing.
+:::
+
 These are the key benefits of MPA:
 
 1. **Defined Roles and Access:** Facilitates role-specific access and responsibilities, ideal for diverse organizational needs.
