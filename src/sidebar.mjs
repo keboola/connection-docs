@@ -521,4 +521,14 @@ export const sidebar = [
       { slug: "external-integrations/n8n" },
     ],
   },
+  {
+    label: "API & Automation",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "automate" },
+      { slug: "automate/run-job" },
+      { slug: "automate/run-orchestration" },
+      { slug: "automate/set-schedule" },
+    ],
+  },
 ];

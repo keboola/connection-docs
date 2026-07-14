@@ -726,3 +726,13 @@ items:
     items:
       - url: /external-integrations/n8n/
         title: n8n
+
+  - url: /automate/
+    title: API & Automation
+    items:
+      - url: /automate/run-job/
+        title: Run a Job
+      - url: /automate/run-orchestration/
+        title: Run Orchestration
+      - url: /automate/set-schedule/
+        title: Set Schedule
