@@ -545,6 +545,10 @@ items:
         items:
           - url: /storage/data-streams/opentelemetry/
             title: OpenTelemetry (OTLP)
+          - url: /storage/data-streams/reference/
+            title: Reference
+          - url: /storage/data-streams/tutorial/
+            title: Tutorial
 
       - url: /storage/files/
         title: Files
