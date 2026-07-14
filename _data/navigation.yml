@@ -4,6 +4,11 @@ items:
 
   - url: /overview/
     title: Keboola Overview
+    items:
+      - url: /overview/api/
+        title: Our APIs
+      - url: /overview/encryption/
+        title: Encryption
 
   - url: /tutorial/
     title: Getting Started Tutorial

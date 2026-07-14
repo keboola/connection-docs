@@ -219,7 +219,7 @@ CREATE TABLE "out" AS
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate 
 from your transformation/sandbox session and the format may change unexpectedly.
 
-**Important:** In the AWS US Keboola [region](https://developers.keboola.com/overview/api/#regions-and-endpoints) 
+**Important:** In the AWS US Keboola [region](/overview/api/#regions-and-endpoints) 
 (connection.keboola.com), the following [Snowflake default](https://docs.snowflake.com/en/sql-reference/parameters) 
 parameters are overridden:
 

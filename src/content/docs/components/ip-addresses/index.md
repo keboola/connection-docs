@@ -17,7 +17,7 @@ to successfully connect to your system. This applies to all components including
 
 **Important:** These IP addresses can change in the future! For your convenience, you can programmatically
 fetch and process the [list of existing IP addresses in JSON format](/components/ip-addresses/kbc-public-ip.json).
-Below are listed the available [Keboola Stack endpoints](https://developers.keboola.com/overview/api/#regions-and-endpoints).
+Below are listed the available [Keboola Stack endpoints](/overview/api/#regions-and-endpoints).
 
 For ease of identification, our outbound IP addresses on AWS stacks (except for legacy services) now have reverse DNS records. 
 Each IP address has a unique name like `outbound-if-issue-contact-support-at-keboola-com.keboola.com`, embedding a reference for a support email. 

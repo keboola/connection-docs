@@ -3,7 +3,15 @@
 
 export const sidebar = [
   { label: "Home", slug: "index" },
-  { slug: "overview" },
+  {
+    label: "Keboola Overview",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "overview" },
+      { slug: "overview/api" },
+      { slug: "overview/encryption" },
+    ],
+  },
   {
     label: "Getting Started Tutorial",
     collapsed: true,
