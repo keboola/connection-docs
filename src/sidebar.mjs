@@ -478,7 +478,6 @@ export const sidebar = [
           { slug: "management/project/migration" },
           { slug: "management/project/delete" },
           { slug: "management/project/ai-rules" },
-          { slug: "management/project/mcp-server" },
         ],
       },
       { slug: "management/payg-project" },
