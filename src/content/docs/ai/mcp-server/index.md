@@ -3,6 +3,7 @@ title: Keboola Model Context Protocol (MCP) Server
 slug: 'ai/mcp-server'
 redirect_from:
     - /external-integrations/mcp-server/
+    - /integrate/mcp/
 ---
 
 :::caution

@@ -529,6 +529,44 @@ export const sidebar = [
       { slug: "automate/run-job" },
       { slug: "automate/run-orchestration" },
       { slug: "automate/set-schedule" },
+      {
+        label: "Integration",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "integrate" },
+          {
+            label: "Storage API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "integrate/storage/api" },
+              { slug: "integrate/storage/api/configurations" },
+              { slug: "integrate/storage/api/import-export" },
+              { slug: "integrate/storage/api/importer" },
+              { slug: "integrate/storage/api/tde-exporter" },
+            ],
+          },
+          { slug: "integrate/storage/python-client" },
+          { slug: "integrate/storage/r-client" },
+          { slug: "integrate/storage/php-client" },
+          { slug: "integrate/storage/docker-cli-client" },
+          {
+            label: "Variables",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "integrate/variables" },
+              { slug: "integrate/variables/tutorial" },
+            ],
+          },
+          {
+            label: "Artifacts",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "integrate/artifacts" },
+              { slug: "integrate/artifacts/tutorial" },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];

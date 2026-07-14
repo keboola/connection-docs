@@ -736,3 +736,35 @@ items:
         title: Run Orchestration
       - url: /automate/set-schedule/
         title: Set Schedule
+      - url: /integrate/
+        title: Integration
+        items:
+          - url: /integrate/storage/api/
+            title: Storage API
+            items:
+              - url: /integrate/storage/api/configurations/
+                title: Configurations
+              - url: /integrate/storage/api/import-export/
+                title: Import & Export
+              - url: /integrate/storage/api/importer/
+                title: API Importer
+              - url: /integrate/storage/api/tde-exporter/
+                title: TDE Exporter
+          - url: /integrate/storage/python-client/
+            title: Storage API Python Client
+          - url: /integrate/storage/r-client/
+            title: Storage API R Client
+          - url: /integrate/storage/php-client/
+            title: Storage API PHP Client
+          - url: /integrate/storage/docker-cli-client/
+            title: Storage API Docker CLI Client
+          - url: /integrate/variables/
+            title: Variables
+            items:
+              - url: /integrate/variables/tutorial/
+                title: Variables Tutorial
+          - url: /integrate/artifacts/
+            title: Artifacts
+            items:
+              - url: /integrate/artifacts/tutorial/
+                title: Artifacts Tutorial

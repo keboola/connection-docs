@@ -3,6 +3,7 @@ title: Conditional Flows
 slug: 'flows'
 redirect_from:
     - /flows/conditional-flows/
+    - /integrate/orchestrator/
 ---
 
 Flows allow you to build automated data pipelines with conditional logic, branching, retries, and robust error handling. You can define flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.

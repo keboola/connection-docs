@@ -10,6 +10,10 @@ which differ in only a limited number of values. You can have, for example, a tr
 processes all orders from the Meals department. With variables, you can modify it to work for the
 Drinks department, too.
 
+:::tip
+Want to define and resolve variables programmatically? See [Variables](/integrate/variables/) for the underlying Configuration API used by the `keboola.variables` component.
+:::
+
 ## Variables
 Transformation variables are unrelated to the transformation code itself. It means that they do not manifest themselves
 as SQL or Python variables. Transformation variables are evaluated before the transformation is run and

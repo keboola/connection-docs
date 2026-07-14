@@ -1,6 +1,8 @@
 ---
 title: Jobs
 slug: 'management/jobs'
+redirect_from:
+    - /integrate/jobs/
 ---
 
 
