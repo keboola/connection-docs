@@ -16,7 +16,7 @@ A source represents an endpoint for receiving events.
 
 Sources are managed using the Stream API. The full API reference is available at https://stream.keboola.com/v1/documentation/, and the OpenAPI specification is available at https://stream.keboola.com/v1/documentation/openapi3.json.
 
-Events are received via HTTP. Each source can be associated with up to 20 `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`.
+Events are received via HTTP. Each source can be associated with up to 100 `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`.
 
 ## Columns
 
@@ -35,7 +35,7 @@ The available column types are:
 
 | Type | Description |
 |---|---|
-| `id`| Event ID |
+| `uuid`| Unique event ID (UUID) |
 | `datetime` | Time of the event |
 | `ip` | IP of the event sender |
 | `body` | The unaltered event body |
@@ -49,7 +49,7 @@ The `path` column type can be used to fetch a single field from a `JSON` object.
 
 ```json
 {
-  "type": "json",
+  "type": "path",
   "name": "id",
   "path": "issue.id",
   "defaultValue": "undefined", 
@@ -103,7 +103,7 @@ A source may be created without any sinks. The sinks can then be created separat
 
 ***Warning**: Events sent to a source without any sinks will be permanently lost. This is because data is buffered per sink, not per source.*
 
-The requests are asynchronous and create a task that must be completed before the source or sink is ready to use. The task status can be checked using the [`GET /v1/branches/{branchId}/sources/{sourceId}/tasks/{taskId}`](https://stream.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
+The requests are asynchronous and create a task that must be completed before the source or sink is ready to use. The task status can be checked using the [`GET /v1/tasks/{taskId}`](https://stream.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
 
 Sink tables are created if they do not exist. If they already exist, the schema defined by `sink.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the import from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
 
