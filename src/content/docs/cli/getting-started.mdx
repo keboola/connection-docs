@@ -44,7 +44,7 @@ Pick your operating system:
     ```
   </TabItem>
   <TabItem label="Windows">
-    Install with [uv](https://docs.astral.sh/uv/) in PowerShell (install uv first if you don't have it):
+    The install script is Bash-only, so on Windows run it inside [WSL](https://learn.microsoft.com/windows/wsl/install) using the Linux instructions above. To install natively in PowerShell, use [uv](https://docs.astral.sh/uv/) (install uv first if you don't have it):
 
     ```powershell
     uv tool install "git+https://github.com/keboola/cli"
@@ -52,7 +52,7 @@ Pick your operating system:
   </TabItem>
 </Tabs>
 
-{/* TODO(human-review): confirm the Windows/PowerShell install line and whether install.sh has a Windows equivalent. */}
+{/* Verified: install.sh is macOS/Linux/WSL only — no native Windows equivalent. PENDING(maintainer): confirm native Windows/PowerShell (uv) is officially supported, or whether WSL is the only supported path — see Maintainer questions in the integration plan. */}
 
 Confirm it's on your `PATH` (all platforms):
 
@@ -60,12 +60,15 @@ Confirm it's on your `PATH` (all platforms):
 $ kbagent --version
 kbagent v0.66.0
 ```
-{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. TODO(human-review): confirm the Windows/PowerShell install line and whether install.sh has a Windows equivalent. */}
+{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. */}
 
 :::tip
 On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv/) without installing (`uvx --from 'git+https://github.com/keboola/cli' kbagent …`) — handy for a one-off or in CI.
 :::
-{/* TODO(human-review): confirm the uvx invocation name. */}
+
+:::note
+The install includes the optional web UI and scheduled-agent extras by default; set `KBAGENT_NO_SERVER=1` before installing for a CLI-only build. kbagent auto-updates itself **and** its bundled MCP server on launch — update manually with `kbagent update`, or opt out with `KBAGENT_AUTO_UPDATE=false`.
+:::
 
 ## Step 2 — Connect your project
 
@@ -76,9 +79,7 @@ kbagent project add --project prod \
   --url https://connection.keboola.com --token YOUR_TOKEN
 ```
 
-`prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
-
-{/* TODO(human-review, Jordan): confirm the exact single-project token type (Storage vs Master). */}
+`prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`. Omit `--token` to be prompted interactively, which keeps the token out of your shell history.
 
 :::caution
 kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
@@ -90,7 +91,7 @@ kbagent only talks to your Keboola stack, but the config directory stores projec
 
 ![kbagent doctor output: config found, project 'docs-demo' connected to the stack (L0 - Shopify, id 264), CLI version PASS, and warnings for the MCP server and Claude Code plugin](/cli/terminal-connect.png)
 
-You can also test connectivity on its own with `kbagent project status`.
+`kbagent doctor --fix` auto-fixes common issues it finds (like installing the agent plugin). You can also test connectivity on its own with `kbagent project status`.
 
 ## Step 4 — Browse the project
 
@@ -128,21 +129,24 @@ kbagent search "shopify"
 
 ## Connect more projects
 
-**Several projects** — register each with its own Storage token (`project add`), or bulk-onboard with a Manage API token:
+**Several projects** — register each with its own Storage token (`project add`), or bulk-onboard several at once by ID. `kbagent` prompts for a Manage API or Personal Access Token interactively by default:
 
 ```bash
-KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
-  org setup --project-ids 901,9621 --url https://connection.keboola.com --yes
+kbagent org setup --project-ids 901,9621 --url https://connection.keboola.com --yes
 ```
 
 **A whole organization** (org admin) — kbagent registers every project and mints per-project tokens:
 
 ```bash
+kbagent org setup --org-id 123 --url https://connection.keboola.com --yes
+```
+
+For CI / non-interactive use, opt in to reading the token from the environment with `--allow-env-manage-token` and provide `KBC_MANAGE_API_TOKEN`:
+
+```bash
 KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
   org setup --org-id 123 --url https://connection.keboola.com --yes
 ```
-
-{/* TODO(human-review, Jordan): confirm org setup flags (--allow-env-manage-token required to read KBC_MANAGE_API_TOKEN; default-deny since 0.28.0), --project-ids vs --org-id, --token-expires-in. */}
 
 Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 

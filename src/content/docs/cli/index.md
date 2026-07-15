@@ -8,7 +8,7 @@ description: 'kbagent, the Keboola command-line interface — an AI-friendly CLI
 
 **kbagent** is Keboola's command-line interface: one tool to manage all your Keboola projects from the terminal. It's built to be equally comfortable in your hands and in an **AI coding agent's** — every command has structured JSON output and the whole thing sits behind a safety firewall you can tighten before handing it over.
 
-<!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
+<!-- Source: keboola/cli README + docs, mirrored into help docs. -->
 
 ## What you can do with it
 
@@ -61,7 +61,7 @@ The pages read in order, from first run to deep reference:
 
 :::note
 kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
-<!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
+<!-- PENDING(maintainer): confirm the legacy Keboola-as-Code CLI deprecation timeline and whether to state a date here — see Maintainer questions in the integration plan. Don't invent a date. -->
 :::
 
 ---

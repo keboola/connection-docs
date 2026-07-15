@@ -37,7 +37,7 @@ Link a git branch to the Keboola dev branch so they move together:
 kbagent sync branch-link --project analytics
 ```
 
-**Result:** your edits live on the branch; production is untouched until you merge. <!-- VERIFY(owner): confirm branch create/merge and sync branch-link flags against v0.66.0. -->
+**Result:** your edits live on the branch; production is untouched until you merge. `kbagent branch reset --project analytics` returns to main, and any command can override the target with `--branch <id>`.
 
 ## Version your configs with GitOps
 
@@ -59,10 +59,10 @@ kbagent sync push --project prod    # apply local changes back
 **Goal:** find where a credential might be hard-coded, everywhere at once.
 
 ```bash
-kbagent config search --query "password" --ignore-case
+kbagent config search --query "password" -i
 ```
 
-**Result:** matches across every connected project in one list. <!-- VERIFY(owner): confirm `config search` flags. -->
+**Result:** matches across every connected project in one list. `-i` ignores case; add `-r` to match `--query` as a regular expression.
 
 ## Monitor job health
 
@@ -83,17 +83,22 @@ kbagent job detail --project prod --job-id 90878516
 kbagent token create --project prod --description "nightly-ci" --expires-in 86400
 ```
 
-**Result:** a scoped Storage token (shown once) that auto-expires. `token refresh` rotates one; `token delete` revokes immediately. <!-- VERIFY(owner): confirm token create/refresh flags. -->
+**Result:** a scoped Storage token (shown once) that auto-expires. `token refresh` rotates one; `token delete` revokes immediately. <!-- PENDING(owner): token create/refresh flag names (--description, --expires-in) not verified against the dev docs; confirm with `kbagent token --help`. -->
 
 ## Encrypt secrets
 
 **Goal:** put a secret into a config safely. Encryption is one-way — there's no decrypt — so encrypted values are safe to store.
 
 ```bash
-kbagent encrypt values --project prod ...
+kbagent encrypt values --project prod --component-id keboola.ex-db-mysql --input @secrets.json
 ```
 
-**Result:** `#`-prefixed values encrypted for the target component, ready to paste into a configuration. <!-- VERIFY(owner): confirm `encrypt values` invocation. -->
+`--input` takes inline JSON, `@file`, or `-` for stdin. **Result:** the `#`-prefixed values encrypted for that component (scope `ComponentSecure`), ready to paste into a configuration.
+
+:::note
+`kbagent config update` already auto-encrypts any `#`-prefixed value before writing it (since v0.54.0), so for most edits you don't need this step. Use `encrypt values` when you want the ciphertext on its own — for example to hand to an MCP tool call or paste elsewhere.
+:::
+<!-- PENDING(owner): confirm the `config update` auto-encrypt version and that `encrypt values` remains the recommended standalone path. -->
 
 ## Run kbagent safely (unattended or via an agent)
 

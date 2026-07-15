@@ -21,7 +21,7 @@ Run these two commands **inside Claude Code** to install the plugin from the CLI
 ```
 :::
 
-The plugin installs via Claude Code's marketplace, not as a downloaded file — so it's a command you run in the assistant, not a button. It adds a **`/keboola`** slash command that spawns a `keboola-expert` subagent with fresh context and hard rules (fetch the current reference, dry-run first, prefer the CLI over raw REST/MCP, gate on version), plus a structured verification payload. `kbagent doctor` tells you whether the plugin is installed.
+The plugin installs via Claude Code's marketplace, not as a downloaded file — so it's a command you run in the assistant, not a button. It adds a **`/keboola`** slash command that spawns a `kbagent:keboola-expert` subagent with fresh context and hard rules (fetch the current reference, dry-run first, prefer the CLI over raw REST/MCP, gate on version), plus a structured verification payload. `kbagent doctor` tells you whether the plugin is installed.
 
 ## The `context` reference
 
@@ -35,7 +35,7 @@ It prints usage instructions and the complete, version-matched command list as M
 
 ## Sandbox the agent
 
-Don't give an agent write access it doesn't need. kbagent's [permission firewall](/cli/workflows/#permissions-and-sandboxing) lets you scope a session or a workspace:
+Don't give an agent write access it doesn't need. kbagent's [permission firewall](/cli/concepts/#the-permission-firewall) lets you scope a session or a workspace:
 
 ```bash
 # Read-only local workspace for an agent
@@ -61,8 +61,6 @@ export KBAGENT_CONVERSATION_ID="<unique-id>"
 - **[MCP server](/ai/mcp-server/)** — direct tool calls over MCP; kbagent can also call MCP tools via `kbagent tool`.
 - **[AI Kit](/ai/ai-kit/)** — coding-assistant plugins for building Keboola components and apps.
 - **[Kai](/kai/)** — the in-product assistant; reachable from the CLI via `kbagent kai` *(beta)*.
-
-<!-- VERIFY(owner): confirm the plugin install string `kbagent@keboola-agent-cli` and the /keboola subagent description against the current repo. -->
 
 ---
 
