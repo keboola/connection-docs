@@ -20,10 +20,10 @@ Apps go well beyond dashboards — the same steps produce internal tools, data n
 - A few minutes.
 
 :::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
 
-<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.md" download="keboola-dataapp-development-SKILL.md">⬇ Download the app-building skill</a>
-<!-- Skill file vendored from keboola/ai-kit@main (plugins/dataapp-developer/skills/dataapp-development/SKILL.md) so the download works same-origin. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
+<!-- Full skill folder vendored verbatim from keboola/ai-kit@b7f57df (plugins/dataapp-developer/skills/dataapp-development/) as a zip so the download works same-origin. Per Jordan (Jul 14 sync): ship the whole folder — skill + templates + references — not just SKILL.md. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## Step 1 — Open Apps and start a new app

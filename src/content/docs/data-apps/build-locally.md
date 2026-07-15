@@ -13,10 +13,10 @@ Build an app in your own environment when you want full control over the code, y
 For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
 :::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace.
+Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
 
-<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.md" download="keboola-dataapp-development-SKILL.md">⬇ Download the app-building skill</a>
-<!-- Skill file vendored from keboola/ai-kit@main (plugins/dataapp-developer/skills/dataapp-development/SKILL.md) so the download works same-origin. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
+<!-- Full skill folder vendored verbatim from keboola/ai-kit@b7f57df (plugins/dataapp-developer/skills/dataapp-development/) as a zip so the download works same-origin. Per Jordan (Jul 14 sync): ship the whole folder — skill + templates + references — not just SKILL.md. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## Before you start
@@ -52,7 +52,7 @@ app.get("/api/rows", async (req, res) => {
 
 You can build the app with an AI coding assistant (Claude Code, Cursor, or Copilot). When you create a Python/JS app, Keboola offers a ready-made **skill file** — **Download Skill** or **View on GitHub** — that teaches your assistant the correct app structure, deployment config, and Keboola APIs, so you get working code with fewer errors. The app's **Overview** also links it as **AI Skill for Building**.
 
-The skill file can also be [downloaded directly](https://raw.githubusercontent.com/keboola/ai-kit/main/plugins/dataapp-developer/skills/dataapp-development/SKILL.md). For the full toolkit — including the **Data App Developer plugin** with its validate → build → verify workflow — install [AI Kit](/ai/ai-kit/) in your assistant:
+The full skill folder — the skill plus app templates and reference guides — is also [browsable on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development). For the full toolkit — including the **Data App Developer plugin** with its validate → build → verify workflow — install [AI Kit](/ai/ai-kit/) in your assistant:
 
 ```bash
 /plugin marketplace add keboola/ai-kit
