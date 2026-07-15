@@ -10,6 +10,10 @@ Welcome to the Multi-Project Architecture Guide!
 This guide helps you effectively organize your Keboola projects, sharing successful strategies for clients of all sizes. You'll learn about various project 
 setups that meet your organizational needs and gain insights to tailor your Keboola projects for maximum efficiency and success.
 
+:::tip
+For the platform concept behind this — what multi-project architecture is and a worked example — see [Multi-Project Architecture](/catalog/multi-project/).
+:::
+
 ## Single Keboola Project 
 A **Keboola project** is the starting point for using the **Keboola Platform**, acting as a self-contained environment for managing access, data pipelines, 
 storage, and processes. It provides a structured framework for distributing tasks and access across teams, ensuring efficient data governance.
