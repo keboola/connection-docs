@@ -1,6 +1,7 @@
 ---
 title: Keboola Platform Onboarding
 slug: 'tutorial/onboarding'
+description: 'Start here after your proof of concept — a guided path through architecture planning, governance, usage documentation, and best practices.'
 ---
 
 

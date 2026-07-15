@@ -1,6 +1,7 @@
 ---
 title: "Part 1: Loading Data"
 slug: 'tutorial/load'
+description: 'Part 1 of the tutorial — load CSV files into Storage manually, the quickest way to get data in during a proof of concept.'
 ---
 
 

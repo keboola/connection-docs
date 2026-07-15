@@ -1,6 +1,7 @@
 ---
 title: Working with Tables in Branch
 slug: 'tutorial/branches/tables-in-branch'
+description: 'Run configurations inside a development branch and learn how Storage tables behave in branches.'
 ---
 
 

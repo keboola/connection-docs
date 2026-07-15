@@ -1,6 +1,7 @@
 ---
 title: "Part 3: Writing Data"
 slug: 'tutorial/write'
+description: 'Part 3 of the tutorial — write the transformed table from Storage to Google Sheets with a data destination connector (reverse ETL).'
 ---
 
 

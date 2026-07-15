@@ -1,6 +1,7 @@
 ---
 title: Using a Workspace
 slug: 'tutorial/manipulate/workspace'
+description: 'Develop and test your transformation SQL interactively in a workspace before saving it to the transformation.'
 ---
 
 An integral aspect of creating a transformation is the development of the script itself. 

@@ -1,6 +1,7 @@
 ---
 title: Prepare File Manipulating Configurations
 slug: 'tutorial/branches/prepare-files'
+description: 'Set up the production file-manipulating configurations used in the development-branches tutorial.'
 ---
 
 

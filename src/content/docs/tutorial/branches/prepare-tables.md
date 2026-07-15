@@ -1,6 +1,7 @@
 ---
 title: Prepare Table-Manipulating Configurations
 slug: 'tutorial/branches/prepare-tables'
+description: 'Set up the production table-manipulating configurations used throughout the development-branches tutorial.'
 ---
 
 

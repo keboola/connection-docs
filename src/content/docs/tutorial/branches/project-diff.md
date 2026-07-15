@@ -1,6 +1,7 @@
 ---
 title: Project Diff
 slug: 'tutorial/branches/project-diff'
+description: 'Review changes between your development branch and production with the project diff before merging.'
 ---
 
 

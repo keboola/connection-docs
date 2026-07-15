@@ -1,6 +1,7 @@
 ---
 title: "Part 5: Ad-Hoc Data Analysis"
 slug: 'tutorial/ad-hoc'
+description: 'Part 5 of the tutorial — pull public data with the BigQuery connector and explore it ad hoc with Python, pandas, and Matplotlib in a Jupyter workspace.'
 ---
 
 After you have loaded your tables, either [manually](/tutorial/load/) or
@@ -147,6 +148,7 @@ Once the job is finished, click on the names of the tables to inspect their cont
 :::caution
 **Important:** The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form and have been replaced by workspaces.
 :::
+<!-- TODO(human-review): rewrite this "Exploring Data" walkthrough on the current Workspaces UI and recapture the screenshots (they show the retired "New Sandbox" flow). -->
 
 To explore the data, go to [**Workspaces**](/workspace/).
 Provided for each user and project automatically, it is an isolated environment in which you can experiment without
