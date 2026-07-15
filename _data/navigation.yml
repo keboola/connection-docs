@@ -721,6 +721,22 @@ items:
       - url: /ai/mcp-server/
         title: MCP Server
 
+  - url: /extend/
+    title: Extending Keboola
+    items:
+      - url: /extend/component/
+        title: Building Components
+      - url: /extend/common-interface/
+        title: Common Interface
+      - url: /extend/generic-extractor/
+        title: Generic Extractor
+      - url: /extend/generic-writer/
+        title: Generic Writer
+      - url: /extend/job-queue/
+        title: Job Queue
+      - url: /extend/publish/
+        title: Publish to Marketplace
+
   - url: /external-integrations/
     title: External Integrations
     items:

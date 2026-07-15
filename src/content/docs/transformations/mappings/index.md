@@ -277,7 +277,7 @@ simplify the transformation script implementation (no need to worry about cleanu
 Keep in mind that every table or file specified in the output mapping must be physically present in the staging area. 
 A missing source table for the output mapping is an error. This is important when the results of a transformation are 
 empty --- you have to ensure that an empty table or an empty file (with a header or 
-a [manifest](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
+a [manifest](/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
 
 ### Table Output Mapping
 Depending on the transformation backend, the table output mapping process can do the following:

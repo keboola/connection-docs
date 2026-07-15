@@ -14,7 +14,7 @@ faster to do in [SQL Transformations](/transformations/#backends).
 ***Warning:** Python transformations have **no facility for encrypting secrets**. Any credential you place in transformation code — API keys, passwords, tokens, connection strings — is stored as **plaintext** in the configuration. It is not encrypted at rest, it is readable by anyone with access to the project's configuration, and it is included when the configuration is processed by features such as the AI **Generate description**. **Do not put credentials in transformation code.** Instead, store them in the [Custom Python](/components/applications/custom-python/) application, where any parameter whose key starts with `#` is [encrypted](https://developers.keboola.com/overview/encryption/) and made available to your code as an environment variable at runtime.*
 
 ## Environment
-The Python script is running in an isolated [environment](https://developers.keboola.com/extend/#component).
+The Python script is running in an isolated [environment](/extend/#component).
 The Python version is updated regularly, few weeks after the official release. The update is always announced on the
 [status page](https://keboolastatus.com/).
 
@@ -27,7 +27,7 @@ The Python script itself will be compiled to `/data/script.py`. To access your
 [mapped input and output](/transformations/mappings/) tables, use
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/files/` or `/data/in/files/` path. If you want to dig really deep,
-have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
+have a look at the [full Common Interface specification](/extend/common-interface/).
 Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola.
 
 ## Python Script Requirements
@@ -169,7 +169,7 @@ in the output folder. This script can be used in your transformations without an
 
 The above steps are usually sufficient for daily development and debugging of moderately complex Python transformations,
 although they do not reproduce the transformation execution environment exactly. You can also create a development environment
-with the exact same configuration using [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
+with the exact same configuration using [our Docker image](/extend/docker/running/#running-transformations).
 
 ## Example 1 -- Using Dictionaries
 The following piece of code reads a table with two columns, named **first** and **second**, 

@@ -514,6 +514,19 @@ export const sidebar = [
     ],
   },
   {
+    label: "Extending Keboola",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "extend" },
+      { slug: "extend/component" },
+      { slug: "extend/common-interface" },
+      { slug: "extend/generic-extractor" },
+      { slug: "extend/generic-writer" },
+      { slug: "extend/job-queue" },
+      { slug: "extend/publish" },
+    ],
+  },
+  {
     label: "External Integrations",
     collapsed: true,
     items: [

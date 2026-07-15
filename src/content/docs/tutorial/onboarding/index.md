@@ -52,7 +52,7 @@ It's time to get practical:
 - Start with our [Keboola Introduction](https://academy.keboola.com/courses/introduction-2023).
 - Check out [General Best Practices](https://academy.keboola.com/courses/best-practices-2023). 
 - Solve problems with our [Debugging Techniques](https://academy.keboola.com/courses/debug-techniques).
-- Developers, see this [video](https://www.youtube.com/watch?v=IhET2hDD_1w) and [documentation](https://developers.keboola.com/extend/) on making new components. Learn more in our [academy lessons](https://academy.keboola.com/courses/common-components-and-processors).
+- Developers, see this [video](https://www.youtube.com/watch?v=IhET2hDD_1w) and [documentation](/extend/) on making new components. Learn more in our [academy lessons](https://academy.keboola.com/courses/common-components-and-processors).
 
 ## Cheat Sheet: Embracing Best Practices
 Mastering Keboola means knowing how to set up components, automate workflows, and more. 

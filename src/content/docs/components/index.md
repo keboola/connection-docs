@@ -332,7 +332,7 @@ Clicking the **Debug mode** link allows you to access the JSON configuration dir
 
 By editing the full JSON configuration, you can set up the component (all options are
 described in the component repository) and the processors (to learn more about processors, 
-see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
+see the [Developers Docs](/extend/docker-runner/processors/)).
 
 ![Screenshot - Advanced](/components/configuration-24.png)
 
