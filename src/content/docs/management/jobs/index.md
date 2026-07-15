@@ -1,6 +1,7 @@
 ---
 title: Jobs
 slug: 'management/jobs'
+description: Track component jobs in Keboola — the jobs log and search syntax, the job lifecycle and states, waiting and parallelism limits, and how to terminate a running job.
 ---
 
 
@@ -92,20 +93,6 @@ the waiting state under the following conditions:
 - If there is already a running job of the **same configuration**.
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
 
-## Storage Jobs
-Not only we record all jobs executed in your Keboola project, we also record all data that was uploaded
-into it. Go to **Storage** and click the **Jobs** tab:
+## Storage jobs
 
-![Screenshot - Storage Jobs](/management/jobs/storage-jobs.png)
-
-When you click an **importTable** job, you'll see the Storage job detail:
-
-![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)
-
-Clicking **File ID** will take you to the **Files** section in **Storage**,
-where all data pushed into your Keboola project is stored.
-You can download the data and import it into other tables, or you can revert to an older table version.
-
-![Screenshot - Files](/management/jobs/storage-file-uploads.png)
-
-A comprehensive [video guide](https://www.youtube.com/watch?v=qIkSgzVmJa0) on this subject is available on our YouTube channel.
+Component jobs are separate from **Storage jobs** — the low-level record of data loaded to and unloaded from Table Storage. For the Storage → Jobs view and its details, see [Storage jobs](/storage/jobs/).
