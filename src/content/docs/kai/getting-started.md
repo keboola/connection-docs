@@ -1,6 +1,7 @@
 ---
 title: Getting Started with Kai
 slug: 'kai/getting-started'
+description: Turn on Kai, open the chat, run your first prompts, approve its actions, and learn context and follow mode, rate limits, and troubleshooting.
 ---
 
 
@@ -19,12 +20,15 @@ Every user can see the Kai button in their project (on supported stacks). To ena
 
 ## Opening Kai
 
-Click the **KAI** button in your project's top navigation bar, or use keyboard shortcuts:
+Click the **Kai Assistant** button in your project's top navigation bar, or use keyboard shortcuts:
 
 | Shortcut | Action |
 |----------|--------|
 | **A** | Open the chat window (shows recent conversation) |
 | **Ctrl + Shift + A** | Open a new chat |
+<!-- TODO(human-review): confirm keyboard shortcuts (A / Ctrl+Shift+A) — not verifiable via UI inspection. -->
+
+The chat opens as a side panel with an **Ask Kai anything about your project…** input and **Suggested actions for this project**.
 
 ![Kai Chat Panel](/kai/kai-welcome.png)
 
@@ -86,6 +90,7 @@ This makes interactions more natural—you can say "analyze this job" while view
 
 **Kai is free during the public beta period.**
 
+<!-- TODO(human-review): confirm rate-limit numbers (150 turns/month contracted; 50/month PAYG) and reset cadence with the Kai product owner. -->
 Each user receives **150 turns (messages) per month per project** on contracted plans. The limit resets at the beginning of each calendar month.
 
 - **Pay-As-You-Go (PAYG) plans** have a lower limit of **50 messages per user per month**

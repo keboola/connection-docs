@@ -1,6 +1,7 @@
 ---
 title: Kai - AI Assistant
 slug: 'kai'
+description: Kai is Keboola's embedded, context-aware AI data-engineering assistant — what it does, why it's different, how it compares to the MCP server, and how to turn it on.
 ---
 
 
@@ -39,13 +40,7 @@ Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pil
 
 ## Getting Started
 
-Kai is now in **Public Beta** and available to all users. Look for the **KAI** button in your project's navigation bar.
-
-- **Organization Admins** can enable Kai directly from the chat screen
-- **Other users** can request access from their Organization Admin or [contact Keboola Support](mailto:support@keboola.com)
-- You can also enable Kai via **Settings → Features**
-
-[Get Started with Kai →](/kai/getting-started/)
+Kai is in **Public Beta** and available to all users — look for the **Kai Assistant** button in your project's navigation bar. For how to enable it, open the chat, and run your first prompts, see [Getting started with Kai](/kai/getting-started/).
 
 ## Learn More
 
