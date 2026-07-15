@@ -115,6 +115,8 @@ Components share a common structure, so once you've worked through one, you've s
 - **Configuration** — every component stores its configuration in [Storage](/storage/), managed through the Storage Component Configurations API. A stored configuration can be referenced whenever the component runs.
 - **Jobs** — each component is executed by a `/run` API call that queues an asynchronous [job](/management/jobs/), accepting either a reference to a stored configuration or a full configuration inline. Jobs can be scheduled and chained through [Flows](/flows/).
 
+Some components additionally expose [synchronous actions](https://developers.keboola.com/extend/common-interface/actions/), and the [Developer Portal API](https://api.keboola.com/?service=developer-portal) lists every component available in Keboola, including its metadata.
+
 ## Extending the Platform 
 The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
 can be [extended](https://developers.keboola.com/extend/) with **arbitrary code to extract, transform, or write data**.

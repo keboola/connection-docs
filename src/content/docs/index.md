@@ -24,7 +24,7 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 ## Work with Keboola Programmatically
 Keboola is designed to be driven by code as well as through the UI:
 
-- **[Integrate](https://developers.keboola.com/integrate/)** Keboola with other systems—exchange data through the [Storage API](https://developers.keboola.com/integrate/storage/), use Keboola as a data-handling backbone for your own product, or control the whole pipeline from the outside. You can also drive Keboola in natural language through the [MCP Server](/ai/mcp-server/).
+- **[Integrate](https://developers.keboola.com/integrate/)** Keboola with other systems—exchange data through the [Storage API](https://developers.keboola.com/integrate/storage/), use Keboola as a data-handling backbone for your own product, wrap it in your own UI for your customers, or control the whole pipeline from the outside. You can also drive Keboola in natural language through the [MCP Server](/ai/mcp-server/).
 - **[Extend](https://developers.keboola.com/extend/)** Keboola by building your own components—package arbitrary code as a component, or build custom connectors with the Generic Extractor. Working without a Keboola project? Apply for a [development project](/extend/development-project/).
 - **[Automate](https://developers.keboola.com/automate/)** your processes—run any component on a schedule, or trigger it programmatically when something happens in your system.
 
