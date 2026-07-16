@@ -29,12 +29,12 @@ that the companies endpoint will return.
 
 ### Endpoints
 
- - `users` – [OPT] ***this endpoint is required for the processing worklog, edit-time and timeuse endpoints***
+ - `users` -- [OPT] ***this endpoint is required for the processing worklog, edit-time and timeuse endpoints***
  - `worklog` -- [OPT] fetches data from the [worklog](https://api2.timedoctor.com/#/Activity/getActivityWorklog) endpoint
  - `edit-time` -- [OPT] fetches data from the [edit-time](https://api2.timedoctor.com/#/Activity/getActivityEditTime) endpoint
- - `timeuse` – [OPT] fetches data from the [timeuse](https://api2.timedoctor.com/#/Activity/getActivityTimeuse) endpoint
- - `projects` – [OPT] fetches data from the [projects](https://api2.timedoctor.com/#/Projects/projects) endpoint
- - `tasks` – [OPT] fetches data from the [tasks](https://api2.timedoctor.com/#/Tasks/tasks) endpoint
+ - `timeuse` -- [OPT] fetches data from the [timeuse](https://api2.timedoctor.com/#/Activity/getActivityTimeuse) endpoint
+ - `projects` -- [OPT] fetches data from the [projects](https://api2.timedoctor.com/#/Projects/projects) endpoint
+ - `tasks` -- [OPT] fetches data from the [tasks](https://api2.timedoctor.com/#/Tasks/tasks) endpoint
 
 ### Additional Settings
 
