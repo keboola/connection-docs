@@ -28,7 +28,7 @@ Click the **Add Row** button and name the row appropriately.
 
 Enter a `Search query` to filter only the emails you want. By default, all emails are downloaded. The most common use case is to filter emails 
 by Subject and Sender, e.g., `(FROM "sender-email@example.com" SUBJECT "the subject")`. You can create more complex queries if needed;
-refer to the [query syntax](query-syntax) for examples. 
+refer to the [query syntax](/components/extractors/communication/email-imap/query-syntax/) for examples. 
 
 ![Screenshot - Row configuration](/components/extractors/communication/email-imap/row.png)
 
@@ -64,7 +64,7 @@ If your attachments are in CSV format, you can use this combination of processor
 
 - Set the `folder` parameter in the [first processor](https://github.com/keboola/processor-move-files) to match the resulting table name.
 - Use the [second processor](https://components.keboola.com/components/keboola.processor-create-manifest) to define that the result will always replace the destination table and expects header in the CSV file.
-- ***Note:** In this setup, all attachments will be stored in the same table, so they msut share the same structure.*
+- ***Note:** In this setup, all attachments will be stored in the same table, so they must share the same structure.*
 
 ```json
 {
@@ -107,7 +107,7 @@ If your attachments are in CSV format, you can use this combination of processor
 
 If your attachments are in XLSX format, you can use this combination of processors to store them in Table Storage:
 
-- The [first processor](https://components.keboola.com/components/kds-team.processor-xlsx2csv) converts each XSLX sheet into a separate table.
+- The [first processor](https://components.keboola.com/components/kds-team.processor-xlsx2csv) converts each XLSX sheet into a separate table.
 - The [second processor](https://github.com/keboola/processor-move-files) moves the converted files for output staging to the tables folder.
 
 ```json
@@ -171,7 +171,7 @@ A single table named `emails` contains the email contents.
 
 Results are inserted incrementally to avoid duplicates.
 
-**Columns:** `'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'body', 'headers', 'number_of_attachments', 'size'`
+**Columns:** `'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'subject', 'body', 'body_html', 'headers', 'number_of_attachments', 'size', 'attachment_names'`
 
 
 ### Attachments

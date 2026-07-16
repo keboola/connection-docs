@@ -109,6 +109,41 @@ async function askDocsQuestion(
   };
 }
 
+// ─── Source URL normalization ────────────────────────────────────────────
+
+/**
+ * The AI Service indexes docs by their GitHub repo file paths, so it returns
+ * source URLs like
+ *   https://help.keboola.com/connection-docs/src/content/docs/storage
+ * instead of the published page URL
+ *   https://help.keboola.com/storage/
+ * which 404s. Strip the repo-path prefix and normalize to the published form.
+ *
+ * Idempotent: URLs that don't carry the prefix (or live on another host such as
+ * developers.keboola.com / components.keboola.com) are returned unchanged, so
+ * this becomes a no-op once the upstream index is fixed.
+ */
+function normalizeSourceUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    if (u.hostname !== 'help.keboola.com') return url;
+
+    // Match an optional leading `/connection-docs` then `/src/content/docs`.
+    const prefix = /^\/(?:connection-docs\/)?src\/content\/docs\//;
+    if (!prefix.test(u.pathname)) return url;
+
+    let path = u.pathname.replace(prefix, '');
+    // Defensive: drop a trailing `/index` and any markdown extension.
+    path = path.replace(/\.mdx?$/i, '').replace(/\/index$/i, '');
+    // Exactly one leading + trailing slash.
+    path = '/' + path.replace(/^\/+|\/+$/g, '') + '/';
+
+    return `https://help.keboola.com${path}`;
+  } catch {
+    return url;
+  }
+}
+
 // ─── Source label helpers ────────────────────────────────────────────────
 
 /**
@@ -190,7 +225,10 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
   if (answer.source_urls.length) {
     const items = answer.source_urls
       .slice(0, 6)
-      .map((url) => ({ url, label: labelForUrl(url) }));
+      .map((raw) => {
+        const url = normalizeSourceUrl(raw);
+        return { url, label: labelForUrl(url) };
+      });
     writeSse(res, { type: 'sources', items });
   }
 

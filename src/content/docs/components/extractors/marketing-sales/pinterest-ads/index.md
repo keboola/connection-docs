@@ -22,7 +22,7 @@ To get Pinterest Ad Analytics reports, have
 *Note: Remember, it may take some time for your ads to start running and for data to accumulate in your analytics reports.* 
 
 ## Configuration
-First, [create a new configuration](https://help.keboola.com/components/#creating-component-configuration) of the Pinterest Ads connector.
+First, [create a new configuration](/components/#creating-component-configuration) of the Pinterest Ads connector.
 Then, click the **Authorize Account** button and log in with your Pinterest business account.
 
 Now, you can define reports to download:

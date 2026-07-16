@@ -2,7 +2,7 @@
 title: Criteo
 slug: 'components/extractors/marketing-sales/criteo'
 redirect_from:
-    - /extractors/makreting-sales/criteo/
+    - /extractors/marketing-sales/criteo/
 ---
 
 

@@ -46,7 +46,7 @@ then see it in the list of enabled APIs.
 ![Screenshot - Google API Console - Fill Credentials](/components/extractors/communication/gmail/google_console_detail.png)
 
 6. Click **Create** and a pop-up window will display your new client ID and client secret credentials.
-7. You can now use these credentials in the **Custom Authorization** tab when authorizing the Google Analytics connector.
+7. You can now use these credentials in the **Custom Authorization** tab when authorizing the Gmail Messages connector.
  
 ![Screenshot - Custom Authorization](/components/extractors/communication/gmail/custom-credentials.png)
 
