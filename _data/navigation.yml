@@ -694,9 +694,6 @@ items:
           - url: /management/project/ai-rules/
             title: AI Rules
 
-          - url: /management/project/mcp-server/
-            title: MCP Server
-
       - url: /management/payg-project/
         title: Free Plan
 
@@ -720,6 +717,12 @@ items:
 
       - url: /ai/mcp-server/
         title: MCP Server
+        items:
+          - url: /ai/mcp-server/connect/
+            title: Connect a client
+
+          - url: /ai/mcp-server/reference/
+            title: Reference
 
   - url: /external-integrations/
     title: External Integrations
