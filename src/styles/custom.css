@@ -1503,7 +1503,9 @@ nav.sidebar {
 }
 .ak-msg { display: flex; }
 .ak-msg-user { justify-content: flex-end; }
-.ak-msg-assistant { justify-content: flex-start; }
+/* Column so the appended .ak-sources block stacks BELOW the bubble instead of
+   becoming a side-by-side flex sibling (which pushed sources off to the right). */
+.ak-msg-assistant { flex-direction: column; align-items: flex-start; }
 .ak-bubble {
   max-width: 92%;
   padding: 10px 14px;
