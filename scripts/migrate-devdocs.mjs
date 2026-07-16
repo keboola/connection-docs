@@ -391,28 +391,79 @@ for (const f of walkDocs(DEST_DOCS)) {
 
 /* ------------------------------- navigation ------------------------------- */
 
+// Mirror the DEV SITE'S OWN navigation tree (dev _data/navigation.yml) so the group
+// renders with the same nesting/expanders as every other help section. Transformations:
+// drop Home, promote /overview/'s children (the parent is help's own overview), prune
+// SKIPped nodes (children included), remap cli URLs, retitle the cli root.
+
+function parseNav(yaml) {
+  const root = { url: '', title: '', items: [] };
+  const stack = [{ indent: -1, node: root }];
+  for (const raw of yaml.split('\n')) {
+    if (!raw.trim() || raw.trim().startsWith('#') || /^items:\s*$/.test(raw)) continue;
+    const u = raw.match(/^(\s*)- url:\s*(\S+)\s*$/);
+    if (u) {
+      const indent = u[1].length;
+      while (stack.length > 1 && stack[stack.length - 1].indent >= indent) stack.pop();
+      const node = { url: u[2], title: '', items: [] };
+      stack[stack.length - 1].node.items.push(node);
+      stack.push({ indent, node });
+      continue;
+    }
+    if (/^\s*title:\s*(.+)$/.test(raw)) {
+      stack[stack.length - 1].node.title = raw.match(/^\s*title:\s*(.+)$/)[1].trim().replace(/^["']|["']$/g, '');
+      continue;
+    }
+    if (/^\s*items:\s*$/.test(raw)) continue;
+    console.warn('nav parser: unrecognized line, skipped: ' + raw);
+  }
+  return root.items;
+}
+
+function transformNavNodes(nodes) {
+  const out = [];
+  for (const n of nodes) {
+    if (n.url === '/') continue; // dev Home — help has its own
+    const norm = n.url.endsWith('/') ? n.url : `${n.url}/`;
+    if (norm === '/overview/') { out.push(...transformNavNodes(n.items)); continue; } // promote children
+    if (SKIP.has(norm)) continue; // pruned with children (weave-owned pages)
+    let url = n.url;
+    for (const r of REMAP) url = url.replace(r.urlFrom, r.urlTo);
+    const title = url === '/cli/keboola-as-code/' ? 'Keboola as Code CLI' : n.title;
+    out.push({ url, title, items: transformNavNodes(n.items) });
+  }
+  return out;
+}
+
+function serializeNav(nodes, indent) {
+  let s = '';
+  for (const n of nodes) {
+    s += `${' '.repeat(indent)}- url: ${n.url}\n${' '.repeat(indent + 2)}title: ${n.title}\n`;
+    if (n.items.length) s += `${' '.repeat(indent + 2)}items:\n${serializeNav(n.items, indent + 4)}`;
+  }
+  return s;
+}
+
 const NAV_MARKER = '# --- Developer Docs (migrated from developers.keboola.com, phase 1) ---';
 const navFile = join(REPO, '_data', 'navigation.yml');
 let nav = readFileSync(navFile, 'utf8');
-if (!nav.includes(NAV_MARKER)) {
-  const item = (url, title, indent) => `${' '.repeat(indent)}- url: ${url}\n${' '.repeat(indent + 2)}title: ${title}\n`;
-  let block = `\n  ${NAV_MARKER}\n`;
-  block += item('/overview/api/', 'Developer Docs', 2).replace('title: Developer Docs', 'title: Developer Docs\n    items:').trimEnd() + '\n';
-  const sub = [
-    ['/overview/api/', 'Our APIs'],
-    ['/overview/encryption/', 'Encryption'],
-    ['/integrate/', 'Integration'],
-    ['/extend/', 'Extending Keboola'],
-    ['/automate/', 'Automation'],
-    ['/cli/keboola-as-code/', 'Keboola as Code CLI'],
-  ];
-  for (const [u, tTitle] of sub) block += item(u, tTitle, 6);
-  nav = nav.replace(/^  - url: \/external-integrations\//m, `${block}\n  - url: /external-integrations/`);
-  if (!DRY) writeFileSync(navFile, nav);
-  report.nav.push('inserted "Developer Docs" group before External Integrations');
-} else {
-  report.nav.push('nav group already present (idempotent skip)');
-}
+
+const devNavTree = transformNavNodes(parseNav(readFileSync(join(SRC, '_data', 'navigation.yml'), 'utf8').replace(/\r\n/g, '\n')));
+// every nav URL must resolve to a ported page (or be a group landing that ports)
+const navUrls = [];
+(function collect(ns) { for (const n of ns) { navUrls.push(n.url); collect(n.items); } })(devNavTree);
+for (const u of navUrls) if (!portedUrls.has(u.endsWith('/') ? u : `${u}/`))
+  report.todos.push(`nav URL not among ported pages: ${u}`);
+
+let block = `\n  ${NAV_MARKER}\n`;
+block += `  - url: ${devNavTree[0].url}\n    title: Developer Docs\n    items:\n`;
+block += serializeNav(devNavTree, 6);
+block += '\n';
+// replace any previous generated block, then insert fresh (idempotent regeneration)
+nav = nav.replace(/\n  # --- Developer Docs[^\n]*\n[\s\S]*?(?=\n  - url: \/external-integrations\/)/, '');
+nav = nav.replace(/(\n)(  - url: \/external-integrations\/)/, `${block}$1$2`);
+if (!DRY) writeFileSync(navFile, nav);
+report.nav.push(`Developer Docs group mirrors dev navigation.yml (${navUrls.length} entries)`);
 if (!DRY) execSync('node scripts/convert-nav.mjs', { cwd: REPO, stdio: 'inherit' });
 
 /* --------------------------------- report --------------------------------- */

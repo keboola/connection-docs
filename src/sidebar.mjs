@@ -520,10 +520,405 @@ export const sidebar = [
       { label: "Overview", slug: "overview/api" },
       { slug: "overview/api" },
       { slug: "overview/encryption" },
-      { slug: "integrate" },
-      { slug: "extend" },
-      { slug: "automate" },
-      { slug: "cli/keboola-as-code" },
+      {
+        label: "Extending Keboola",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "extend" },
+          {
+            label: "Components",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/component" },
+              {
+                label: "Tutorial",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/component/tutorial" },
+                  { slug: "extend/component/tutorial/input-mapping" },
+                  { slug: "extend/component/tutorial/output-mapping" },
+                  { slug: "extend/component/tutorial/configuration" },
+                  { slug: "extend/component/tutorial/processors" },
+                  { slug: "extend/component/tutorial/debugging" },
+                ],
+              },
+              { slug: "extend/component/processors" },
+              {
+                label: "Code Patterns",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/component/code-patterns" },
+                  { slug: "extend/component/code-patterns/interface" },
+                  { slug: "extend/component/code-patterns/tutorial" },
+                ],
+              },
+              {
+                label: "Implementation Notes",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/component/implementation" },
+                  { slug: "extend/component/implementation/php" },
+                  { slug: "extend/component/implementation/python" },
+                  { slug: "extend/component/implementation/r" },
+                ],
+              },
+              { slug: "extend/component/running" },
+              {
+                label: "UI Options",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/component/ui-options" },
+                  {
+                    label: "Configuration Schema",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "extend/component/ui-options/configuration-schema" },
+                      { slug: "extend/component/ui-options/configuration-schema/examples" },
+                      { slug: "extend/component/ui-options/configuration-schema/sync-action-examples" },
+                    ],
+                  },
+                  { slug: "extend/component/ui-options/default-configuration" },
+                ],
+              },
+              { slug: "extend/component/deployment" },
+            ],
+          },
+          {
+            label: "Generic Extractor",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/generic-extractor" },
+              {
+                label: "Generic Extractor Tutorial",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/generic-extractor/tutorial" },
+                  { slug: "extend/generic-extractor/tutorial/rest" },
+                  { slug: "extend/generic-extractor/tutorial/json" },
+                  { slug: "extend/generic-extractor/tutorial/basic" },
+                  { slug: "extend/generic-extractor/tutorial/pagination" },
+                  { slug: "extend/generic-extractor/tutorial/jobs" },
+                  { slug: "extend/generic-extractor/tutorial/mapping" },
+                ],
+              },
+              {
+                label: "Configuration",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/generic-extractor/configuration" },
+                  {
+                    label: "API Configuration",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "extend/generic-extractor/configuration/api" },
+                      {
+                        label: "Pagination",
+                        collapsed: true,
+                        items: [
+                          { label: "Overview", slug: "extend/generic-extractor/configuration/api/pagination" },
+                          { slug: "extend/generic-extractor/configuration/api/pagination/response-url" },
+                          { slug: "extend/generic-extractor/configuration/api/pagination/response-param" },
+                          { slug: "extend/generic-extractor/configuration/api/pagination/offset" },
+                          { slug: "extend/generic-extractor/configuration/api/pagination/pagenum" },
+                          { slug: "extend/generic-extractor/configuration/api/pagination/cursor" },
+                          { slug: "extend/generic-extractor/configuration/api/pagination/multiple" },
+                        ],
+                      },
+                      {
+                        label: "Authentication",
+                        collapsed: true,
+                        items: [
+                          { label: "Overview", slug: "extend/generic-extractor/configuration/api/authentication" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/query" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/basic" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/bearer_token" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/api_key" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/login" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/oauth_cc" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/oauth10" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/oauth20" },
+                          { slug: "extend/generic-extractor/configuration/api/authentication/oauth20-login" },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    label: "Extraction Configuration",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "extend/generic-extractor/configuration/config" },
+                      {
+                        label: "Jobs",
+                        collapsed: true,
+                        items: [
+                          { label: "Overview", slug: "extend/generic-extractor/configuration/config/jobs" },
+                          { slug: "extend/generic-extractor/configuration/config/jobs/children" },
+                        ],
+                      },
+                      { slug: "extend/generic-extractor/configuration/config/mappings" },
+                    ],
+                  },
+                  { slug: "extend/generic-extractor/configuration/iterations" },
+                  { slug: "extend/generic-extractor/configuration/ssh-proxy" },
+                ],
+              },
+              { slug: "extend/generic-extractor/map" },
+              { slug: "extend/generic-extractor/functions" },
+              { slug: "extend/generic-extractor/incremental" },
+              { slug: "extend/generic-extractor/running" },
+              { slug: "extend/generic-extractor/publish" },
+            ],
+          },
+          {
+            label: "Generic Writer",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/generic-writer" },
+              { slug: "extend/generic-writer/configuration" },
+              { slug: "extend/generic-writer/configuration-examples" },
+            ],
+          },
+          {
+            label: "Common Interface",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/common-interface" },
+              { slug: "extend/common-interface/folders" },
+              { slug: "extend/common-interface/config-file" },
+              { slug: "extend/common-interface/environment" },
+              {
+                label: "Manifest Files",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/common-interface/manifest-files" },
+                  { slug: "extend/common-interface/manifest-files/in-tables-manifests" },
+                  { slug: "extend/common-interface/manifest-files/in-files-manifests" },
+                  { slug: "extend/common-interface/manifest-files/in-files-s3-staging" },
+                  { slug: "extend/common-interface/manifest-files/in-files-abs-staging" },
+                  { slug: "extend/common-interface/manifest-files/out-tables-manifests" },
+                  { slug: "extend/common-interface/manifest-files/out-tables-manifests-native-types" },
+                  { slug: "extend/common-interface/manifest-files/out-files-manifests" },
+                ],
+              },
+              { slug: "extend/common-interface/oauth" },
+              { slug: "extend/common-interface/actions" },
+              { slug: "extend/common-interface/logging" },
+              { slug: "extend/common-interface/development-branches" },
+            ],
+          },
+          { slug: "extend/job-queue" },
+          {
+            label: "Publishing Component",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/publish" },
+              { slug: "extend/publish/checklist" },
+            ],
+          },
+        ],
+      },
+      {
+        label: "Integration",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "integrate" },
+          {
+            label: "Storage",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "integrate/storage" },
+              { slug: "integrate/storage/php-client" },
+              { slug: "integrate/storage/r-client" },
+              { slug: "integrate/storage/python-client" },
+              { slug: "integrate/storage/docker-cli-client" },
+              {
+                label: "Using API",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "integrate/storage/api" },
+                  { slug: "integrate/storage/api/configurations" },
+                  { slug: "integrate/storage/api/importer" },
+                  { slug: "integrate/storage/api/import-export" },
+                  { slug: "integrate/storage/api/tde-exporter" },
+                ],
+              },
+            ],
+          },
+          { slug: "integrate/jobs" },
+          {
+            label: "Variables",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "integrate/variables" },
+              { slug: "integrate/variables/tutorial" },
+            ],
+          },
+          {
+            label: "Artifacts",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "integrate/artifacts" },
+              { slug: "integrate/artifacts/tutorial" },
+            ],
+          },
+        ],
+      },
+      {
+        label: "Automation/Common Tasks",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "automate" },
+          { slug: "automate/run-job" },
+          { slug: "automate/run-orchestration" },
+          { slug: "automate/set-schedule" },
+        ],
+      },
+      {
+        label: "Keboola as Code CLI",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "cli/keboola-as-code" },
+          { slug: "cli/keboola-as-code/installation" },
+          { slug: "cli/keboola-as-code/getting-started" },
+          { slug: "cli/keboola-as-code/structure" },
+          {
+            label: "Commands",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "cli/keboola-as-code/commands" },
+              { slug: "cli/keboola-as-code/commands/help" },
+              { slug: "cli/keboola-as-code/commands/status" },
+              {
+                label: "sync",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "cli/keboola-as-code/commands/sync" },
+                  { slug: "cli/keboola-as-code/commands/sync/init" },
+                  { slug: "cli/keboola-as-code/commands/sync/pull" },
+                  { slug: "cli/keboola-as-code/commands/sync/push" },
+                  { slug: "cli/keboola-as-code/commands/sync/diff" },
+                ],
+              },
+              {
+                label: "ci",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "cli/keboola-as-code/commands/ci" },
+                  { slug: "cli/keboola-as-code/commands/ci/workflows" },
+                ],
+              },
+              {
+                label: "local",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "cli/keboola-as-code/commands/local" },
+                  {
+                    label: "create",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/local/create" },
+                      { slug: "cli/keboola-as-code/commands/local/create/config" },
+                      { slug: "cli/keboola-as-code/commands/local/create/row" },
+                    ],
+                  },
+                  { slug: "cli/keboola-as-code/commands/local/persist" },
+                  { slug: "cli/keboola-as-code/commands/local/encrypt" },
+                  {
+                    label: "validate",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/local/validate" },
+                      { slug: "cli/keboola-as-code/commands/local/validate/config" },
+                      { slug: "cli/keboola-as-code/commands/local/validate/row" },
+                      { slug: "cli/keboola-as-code/commands/local/validate/schema" },
+                    ],
+                  },
+                  { slug: "cli/keboola-as-code/commands/local/fix-paths" },
+                ],
+              },
+              {
+                label: "remote",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "cli/keboola-as-code/commands/remote" },
+                  {
+                    label: "create",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/remote/create" },
+                      { slug: "cli/keboola-as-code/commands/remote/create/branch" },
+                      { slug: "cli/keboola-as-code/commands/remote/create/bucket" },
+                    ],
+                  },
+                  {
+                    label: "file",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/remote/file" },
+                      { slug: "cli/keboola-as-code/commands/remote/file/download" },
+                      { slug: "cli/keboola-as-code/commands/remote/file/upload" },
+                    ],
+                  },
+                  {
+                    label: "job",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/remote/job" },
+                      { slug: "cli/keboola-as-code/commands/remote/job/run" },
+                    ],
+                  },
+                  {
+                    label: "table",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/remote/table" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/create" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/upload" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/download" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/preview" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/detail" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/import" },
+                      { slug: "cli/keboola-as-code/commands/remote/table/unload" },
+                    ],
+                  },
+                  {
+                    label: "workspace",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/remote/workspace" },
+                      { slug: "cli/keboola-as-code/commands/remote/workspace/create" },
+                      { slug: "cli/keboola-as-code/commands/remote/workspace/delete" },
+                      { slug: "cli/keboola-as-code/commands/remote/workspace/detail" },
+                      { slug: "cli/keboola-as-code/commands/remote/workspace/list" },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "dbt",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "cli/keboola-as-code/commands/dbt" },
+                  { slug: "cli/keboola-as-code/commands/dbt/init" },
+                  {
+                    label: "generate",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "cli/keboola-as-code/commands/dbt/generate" },
+                      { slug: "cli/keboola-as-code/commands/dbt/generate/profile" },
+                      { slug: "cli/keboola-as-code/commands/dbt/generate/sources" },
+                      { slug: "cli/keboola-as-code/commands/dbt/generate/env" },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          { slug: "cli/keboola-as-code/github-integration" },
+          { slug: "cli/keboola-as-code/devops-use-cases" },
+          { slug: "cli/keboola-as-code/dbt" },
+        ],
+      },
     ],
   },
   {
