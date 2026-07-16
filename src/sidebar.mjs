@@ -514,6 +514,19 @@ export const sidebar = [
     ],
   },
   {
+    label: "Developer Docs",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "overview/api" },
+      { slug: "overview/api" },
+      { slug: "overview/encryption" },
+      { slug: "integrate" },
+      { slug: "extend" },
+      { slug: "automate" },
+      { slug: "cli/keboola-as-code" },
+    ],
+  },
+  {
     label: "External Integrations",
     collapsed: true,
     items: [

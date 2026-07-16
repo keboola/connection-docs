@@ -133,12 +133,12 @@ The bottom right panel shows a list of the configuration versions. Use the list 
 - roll back to an older version.
 
 All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
-The [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/) explains how to work with configurations.
+The [developer guide](/integrate/storage/api/configurations/) explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.
 
 The version list is unlimited. Configuration versions are also created when the configurations are manipulated 
-programmatically using [the API](https://developers.keboola.com/overview/api/). In other words, all configuration modifications are recorded.
+programmatically using [the API](/overview/api/). In other words, all configuration modifications are recorded.
 
 ### Compare Versions
 You can compare adjacent versions by clicking the *compare* icon:
@@ -151,7 +151,7 @@ The differences between the raw JSON configurations are displayed when you compa
 
 When you roll back a configuration, a new version is created. This means you never lose any version of
 a configuration, and there is always an option to get back to it. Configuration versions are also created when 
-the configurations are manipulated programmatically via [the API](https://developers.keboola.com/overview/api/).
+the configurations are manipulated programmatically via [the API](/overview/api/).
 
 ### Rollback Version
 If you need to return to an older version of the configuration, you can also roll back to it (the other option is to make its copy).

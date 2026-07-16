@@ -43,7 +43,7 @@ While this makes some operations seemingly unnecessarily complicated, it ensures
 are repeatable and you can't inadvertently overwrite data in the project Storage. For ad-hoc
 operations, we recommend you use **[workspaces](/workspace/)**. For 
 bulk operations, consider taking advantage of **[variables](/transformations/variables/)**
-and [programmatic automation](https://developers.keboola.com/automate/).
+and [programmatic automation](/automate/).
 
 ## Input Mapping
 Both [Storage tables](/storage/tables/) and [Storage files](/storage/files/) can be used in the input mapping of a transformation.
@@ -277,7 +277,7 @@ simplify the transformation script implementation (no need to worry about cleanu
 Keep in mind that every table or file specified in the output mapping must be physically present in the staging area. 
 A missing source table for the output mapping is an error. This is important when the results of a transformation are 
 empty --- you have to ensure that an empty table or an empty file (with a header or 
-a [manifest](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
+a [manifest](/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
 
 ### Table Output Mapping
 Depending on the transformation backend, the table output mapping process can do the following:

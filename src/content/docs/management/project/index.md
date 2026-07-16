@@ -35,7 +35,7 @@ The API Tokens section in the Keboola platform is used to manage programmatic ac
 ### 4 CLI Sync
 The CLI Sync section is used to set up and manage synchronization between the Keboola platform and your local development environment using the Keboola CLI (KBC CLI). It allows you to securely connect CLI-based tools to a specific project, enabling actions like pulling configurations, pushing changes, or running jobs programmatically. 
 
-If you need to setup your Keboola CLI, simply follow the instructions displayed on this page. For more detailed information go to the [Developer documentation](https://developers.keboola.com/cli/).
+If you need to setup your Keboola CLI, simply follow the instructions displayed on this page. For more detailed information go to the [Developer documentation](/cli/keboola-as-code/).
 
 ### 5 Features
 The Features section in the Keboola UI is used to toggle project-specific feature flags. It allows project admins to enable or disable experimental, beta, or advanced platform capabilities that are not generally available by default. 

@@ -721,6 +721,24 @@ items:
       - url: /ai/mcp-server/
         title: MCP Server
 
+
+  # --- Developer Docs (migrated from developers.keboola.com, phase 1) ---
+  - url: /overview/api/
+    title: Developer Docs
+    items:
+      - url: /overview/api/
+        title: Our APIs
+      - url: /overview/encryption/
+        title: Encryption
+      - url: /integrate/
+        title: Integration
+      - url: /extend/
+        title: Extending Keboola
+      - url: /automate/
+        title: Automation
+      - url: /cli/keboola-as-code/
+        title: Keboola as Code CLI
+
   - url: /external-integrations/
     title: External Integrations
     items:

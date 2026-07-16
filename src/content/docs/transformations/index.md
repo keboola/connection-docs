@@ -193,7 +193,7 @@ Python and R transformations.
     <td>Not available</td>
 </tr>
 <tr>
-    <th><a href='https://developers.keboola.com/integrate/storage/api/configurations/'>API Interface</a></th> 
+    <th><a href='/integrate/storage/api/configurations/'>API Interface</a></th> 
     <td>✓</td>
 </tr>
 <tr>
@@ -213,9 +213,9 @@ Python and R transformations.
 ### Transformations
 
 Transformations behave like any other [component](/components/). This means that they use the 
-standard [API](https://developers.keboola.com/integrate/storage/api/configurations/) to manipulate
+standard [API](/integrate/storage/api/configurations/) to manipulate
 and run configurations and that creating your own 
-[transformation components](https://developers.keboola.com/extend/component/) is possible.
+[transformation components](/extend/component/) is possible.
 
 Transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
 encouraging users to create reusable blocks of code. They also support 

@@ -16,7 +16,7 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 - what tables were exported (read from your Storage by the job).
 - how many [credits](/management/project/limits/#project-power) were used by running the job.
 - what events occurred during the job execution.
-- what exact parameters were used for the job (this might be useful when working with the [API](https://developers.keboola.com/integrate/jobs/#apis-for-working-with-jobs)).
+- what exact parameters were used for the job (this might be useful when working with the [API](/integrate/jobs/#apis-for-working-with-jobs)).
 
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
 
@@ -57,7 +57,7 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
 For more technical information about background jobs, see our 
-[Developers documentation](https://developers.keboola.com/integrate/jobs/).
+[Developers documentation](/integrate/jobs/).
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
@@ -80,7 +80,7 @@ Terminating the child job will probably cause the parent to terminate or fail.
 
 ## Waiting Jobs
 When a job is run, it is always put in the waiting state to wait for our **infrastructure** --- 
-[worker](https://developers.keboola.com/integrate/jobs/) to start executing it.
+[worker](/integrate/jobs/) to start executing it.
 This usually takes anywhere from several seconds to a couple of minutes at most. 
 
 There is one more reason for a job to be in the waiting state: **project parallelism limits**. 
