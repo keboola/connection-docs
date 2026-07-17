@@ -19,7 +19,7 @@ kbc i [flags]
 The command must be run in an empty directory.
 
 If the command is run without options, it will start an interactive dialog asking for:
-- URL of the [stack](/overview/), for example, `connection.keboola.com`.
+- URL of the [stack](/overview/#stacks), for example, `connection.keboola.com`.
 - [Master token](/management/project/tokens/#master-tokens) to your project.
 - Allowed [branches](/tutorial/branches/) to work with.
 

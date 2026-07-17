@@ -85,7 +85,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 
 - Use only the necessary [UI options](/extend/component/ui-options/) (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
 - For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) --- do not use the `genericDockerUI-tableOutput` flag.
-- Use [encryption](/overview/) to store sensitive values. No plain-text passwords!
+- Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
 - Use a [configuration schema](/extend/component/ui-options/configuration-schema/).
     - List all properties in the `required` field.
     - Always use `propertyOrder` to explicitly define the order of the fields in the form.

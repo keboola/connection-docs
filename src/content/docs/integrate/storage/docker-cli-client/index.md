@@ -46,7 +46,7 @@ or on Windows:
 
     docker run --volume=C:\Users\name\some-dir:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
 
-or when using other then [default US region](/overview/), you need to provide the Storage API address:
+or when using other then [default US region](/overview/api/#regions-and-endpoints), you need to provide the Storage API address:
 
 ```bash
 docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token --url="https://connection.eu-central-1.keboola.com/"

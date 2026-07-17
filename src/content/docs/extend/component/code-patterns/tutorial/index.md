@@ -80,7 +80,7 @@ You have created an empty transformation.
 /admin/projects/{PROJECT_ID}/transformations-v2/{COMPONENT_ID}/{CONFIGURATION_ID}
 ```
 
-**Set the code pattern to the transformation via [Storage API](/overview/).**
+**Set the code pattern to the transformation via [Storage API](/overview/api/).**
 
 Load the configuration in the JSON format via the [Configuration Detail](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-) API call.
 

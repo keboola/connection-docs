@@ -12,13 +12,13 @@ In the examples, we use the `curl` console tool to interact with our APIs.
 
 ## Define API endpoints
 
-First, store the [API endpoints](/overview/) as environment variables, so we don't have to repeat ourselves.
+First, store the [API endpoints](/overview/api/) as environment variables, so we don't have to repeat ourselves.
 
 We will need:
 - [Storage API](/integrate/storage/api/) to store the variable definitions and the extractor configuration -
 - [Job Queue API](/extend/job-queue/) to run the extractor job from the configuration.
 
-The host names depend on your [stack](/overview/):
+The host names depend on your [stack](/overview/api/#stacks-and-endpoints):
 
 ```shell
 export STORAGE_API_HOST="https://connection.keboola.com"
@@ -27,7 +27,7 @@ export JOB_QUEUE_HOST="https://queue.keboola.com"
 
 ## Obtain Storage API Token
 
-A [Storage API Token](/management/project/tokens/) is needed to interact with the [Keboola APIs](/overview/).
+A [Storage API Token](/management/project/tokens/) is needed to interact with the [Keboola APIs](/overview/api/#list-of-keboola-apis).
 
 Obtain a Storage API token from the user interface of your project, see this [Guide](/management/project/tokens).
 

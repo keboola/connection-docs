@@ -4,7 +4,7 @@ slug: 'cli/keboola-as-code/commands/local/encrypt'
 ---
 
 
-Encrypt all [unencrypted secrets](/overview/) in the [local directory](/cli/keboola-as-code/structure/).
+Encrypt all [unencrypted secrets](/overview/encryption/#encrypting-data-with-api) in the [local directory](/cli/keboola-as-code/structure/).
 
 ```
 kbc local encrypt [flags]
@@ -15,7 +15,7 @@ Or shorter:
 kbc e [flags]
 ```
 
-[Unencrypted secrets](/overview/) are values of properties prefixed by `#` that have not been encrypted 
+[Unencrypted secrets](/overview/encryption/#encrypting-data-with-api) are values of properties prefixed by `#` that have not been encrypted 
 yet. 
 
 For example, `{"#someSecretProperty": "secret value"}`  

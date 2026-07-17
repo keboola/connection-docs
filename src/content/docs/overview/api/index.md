@@ -27,7 +27,7 @@ Using a portal for a different stack than your token's stack will result in <cod
 | [Billing API](https://api.keboola.com/?service=billing)                                                     | Billing API for Pay as You Go projects.                                                                                                                             |
 | [Developer Portal API](https://api.keboola.com/?service=developer-portal)                                   | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
 | [Editor API](https://api.keboola.com/?service=editor)                                                       | API for managing SQL editor sessions.                                                                                                                               |
-| [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/).                                                                                                                       |
+| [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/encryption/).                                                                                                                       |
 | [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
 | [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
@@ -43,7 +43,7 @@ If you're unsure which API to use, refer to our [integration guide](/integrate/)
 performed actions.
 
 ## Stacks and Endpoints
-Keboola is available in multiple [stacks](/overview/), which can be 
+Keboola is available in multiple [stacks](/overview/#stacks), which can be 
 either multi-tenant or single-tenant. Current multi-tenant stacks are:
 
 - US Virginia AWS – [connection.keboola.com](https://connection.keboola.com/)
@@ -147,7 +147,7 @@ The services listed above are:
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `queue` --- [Service for Running Components](/extend/job-queue/)
 - `billing` --- Service for Computing Credits
-- `encryption` --- Service for [Encryption](/overview/)
+- `encryption` --- Service for [Encryption](/overview/encryption/)
 - `scheduler` --- [Service for Configuring Schedules](/automate/set-schedule/)
 - `sync-actions` --- [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` --- Service for Configuring Job Notifications
@@ -248,7 +248,7 @@ There are several ways to send requests to our APIs:
 Send requests to our API directly from the Apiary console by clicking on **Switch to console** or **Try**.
 Fill in the request headers and parameters, then click **Call Resource**.
 
-![Apiary console](/overview/)
+![Apiary console](/overview/api/apiary-console.png)
 
 The Apiary console is fine if you send API requests only occasionally. It requires no application installation;
 however, it has no history and no other useful features.
@@ -258,7 +258,7 @@ however, it has no history and no other useful features.
 We also provide a collection of [useful API calls](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) with examples.
 The collection contains code examples in various languages; the requests can also be imported into the Postman application.
 
-![Postman Docs](/overview/)
+![Postman Docs](/overview/api/postman-import.png)
 
 ### cURL
 [cURL](https://curl.haxx.se/) is a common library with a [command-line interface (CLI)](https://curl.haxx.se/docs/manpage.html).

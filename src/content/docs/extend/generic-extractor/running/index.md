@@ -117,7 +117,7 @@ When you store such configuration in the Keboola UI, it will automatically be en
 ```
 
 The above configuration then **cannot** be run locally.
-Read more about [encryption](/overview/).
+Read more about [encryption](/overview/encryption/).
 
 ### Building and Running the Image
 To build the container from source:

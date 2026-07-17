@@ -37,7 +37,7 @@ kbc help local create row
 | [kbc local create config](/cli/keboola-as-code/commands/local/create/config/) | Create an empty [configuration](/components/). |
 | [kbc local create row](/cli/keboola-as-code/commands/local/create/row/) | Create an empty [configuration row](/components/#configuration-rows). |
 | [kbc local persist](/cli/keboola-as-code/commands/local/persist/) | Detect new directories with a [configuration](/components/) or a [configuration row](/components/#configuration-rows). |
-| [kbc local encrypt](/cli/keboola-as-code/commands/local/encrypt/) | Encrypt all [unencrypted secrets](/overview/). |
+| [kbc local encrypt](/cli/keboola-as-code/commands/local/encrypt/) | Encrypt all [unencrypted secrets](/overview/encryption/#encrypting-data-with-api). |
 | [kbc local validate](/cli/keboola-as-code/commands/local/validate/) | Validate the local directory. |
 | [kbc local validate config](/cli/keboola-as-code/commands/local/validate/config/) | Validate a configuration JSON file. |
 | [kbc local validate row](/cli/keboola-as-code/commands/local/validate/row/) | Validate a configuration row JSON file. |

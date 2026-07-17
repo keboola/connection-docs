@@ -208,12 +208,15 @@ function rewriteLinks(b) {
   b = b.replace(/\]\(https?:\/\/developers\.keboola\.com(\/[^)]*)?\)/g, (_, p) => `](${p || '/'})`);
   // section remaps (cli → cli/keboola-as-code)
   for (const r of REMAP) b = b.replace(/\]\((\/[^)]*)\)/g, (m, p) => `](${p.replace(r.urlFrom, r.urlTo)})`);
-  // links to skipped pages → their canonical help target
-  b = b.replace(/\]\((\/[^)#]*\/?)(#[^)]*)?\)/g, (m, p, hash = '') => {
-    const norm = p.endsWith('/') ? p : `${p}/`;
-    for (const [skip, target] of SKIP) {
-      if (skip !== '/' && norm.startsWith(skip)) return target ? `](${target})` : m;
-    }
+  // links to skipped pages → their canonical help target.
+  // EXACT match for single-page skips (their siblings/children DO port — e.g. /overview/api/);
+  // prefix match only for whole skipped subtrees. Never touches image/file paths (exact
+  // match requires the trailing-slash page URL).
+  const SKIP_SUBTREES = ['/integrate/data-streams/', '/integrate/push-data/'];
+  b = b.replace(/\]\((\/[^)#]*\/)(#[^)]*)?\)/g, (m, p, hash) => {
+    const h = hash || '';
+    if (SKIP.has(p)) { const t = SKIP.get(p); return t ? `](${t}${t === p ? h : ''})` : m; }
+    for (const st of SKIP_SUBTREES) if (p.startsWith(st)) return `](${SKIP.get(st) || SKIP.get('/integrate/data-streams/')})`;
     return m;
   });
   // documented source-typo corrections

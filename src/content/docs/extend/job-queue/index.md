@@ -64,7 +64,7 @@ to have no network access.
 The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
 
 - run a [component](/extend/component/).
-- [encrypt values](/overview/).
+- [encrypt values](/overview/encryption/).
 - [prepare the data folder](/extend/component/running/#preparing-the-data-folder).
 - run [component actions](/extend/common-interface/actions/).
 - run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).

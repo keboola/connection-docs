@@ -17,7 +17,7 @@ See [Publish Component tutorial](/extend/publish/) for details.
 - <input type="checkbox"> The correct [data flow is set in UI options](/extend/publish/#component-name-and-description).
 
 **Component Configuration**
-- <input type="checkbox"> Sensitive values [use encryption](/overview/).
+- <input type="checkbox"> Sensitive values [use encryption](/overview/encryption/).
 - [Configuration and Row schema](/extend/publish/#component-configuration)
     - <input type="checkbox"> Titles are short and without a colon, period, etc.
     - <input type="checkbox"> Required properties are listed in the field `required`.

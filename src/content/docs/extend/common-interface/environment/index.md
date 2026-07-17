@@ -14,14 +14,14 @@ The following environment variables are injected into the container:
 
  - `KBC_DATADIR`: Always `/data/` in Keboola; use this variable during component development to create development and testing environments.
  - `KBC_RUNID`: The RunId from Storage; links all events within an API call (useful for logging).
- - `KBC_PROJECTID`: The ID of the project in Keboola within a [Keboola stack](/overview/).
- - `KBC_STACKID`: The ID of the [Keboola stack](/overview/).
+ - `KBC_PROJECTID`: The ID of the project in Keboola within a [Keboola stack](/overview/api/#regions-and-endpoints).
+ - `KBC_STACKID`: The ID of the [Keboola stack](/overview/api/#regions-and-endpoints).
  - `KBC_CONFIGID`: The ID of the configuration, or a hash of configuration data if the configuration is not named (e.g., when `configData` is used in an [API call](https://api.keboola.com/?service=job-queue#post-/jobs)).
  - `KBC_CONFIGVERSION`: The version of the configuration, or empty if unnamed (when `configData` is used in the [API call](https://api.keboola.com/?service=job-queue#post-/jobs)).
  - `KBC_COMPONENTID`: The ID of the component.
  - `KBC_CONFIGROWID`: The ID of the configuration row, if available.
  - `KBC_BRANCHID`: The ID of the [development branch](https://api.keboola.com/?service=storage#get-/v2/storage/dev-branches/-id-).
- - `KBC_STAGING_FILE_PROVIDER`: Either `aws` or `azure`, depending on the type of [stack](/overview/) the container is running. This value refers to the file storage used during [file import/export operations](/integrate/storage/api/import-export/).
+ - `KBC_STAGING_FILE_PROVIDER`: Either `aws` or `azure`, depending on the type of [stack](/overview/api/#regions-and-endpoints) the container is running. This value refers to the file storage used during [file import/export operations](/integrate/storage/api/import-export/).
  - `KBC_PROJECT_FEATURE_GATES`: A comma-separated list of feature gates activated for the current project. Feature gates are considered internal and may change or disappear without notice. We recommend checking with our support team before relying on any feature gates.
  - `KBC_COMPONENT_RUN_MODE`: Either `run` or `debug`. The value `debug` is used when the job is run in debug mode ([learn more](/extend/component/running/#debugging)). This variable can be helpful, for example, to enable more verbose logging.
  - `KBC_DATA_TYPE_SUPPORT`: Either `authoritative`, `hints`, or `none`:

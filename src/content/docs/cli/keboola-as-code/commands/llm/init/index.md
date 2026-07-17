@@ -20,7 +20,7 @@ This command creates the local manifest and metadata directory (`.keboola/`) wit
 Use [kbc llm export](/cli/keboola-as-code/commands/llm/export/) after initialization to generate the AI-optimized project data.
 
 If the command is run without options, it will start an interactive dialog asking for:
-- URL of the [stack](/overview/), for example, `connection.keboola.com`.
+- URL of the [stack](/overview/#stacks), for example, `connection.keboola.com`.
 - [Storage API token](/management/project/tokens/) to your project.
 - Allowed [branches](/tutorial/branches/) to work with.
 

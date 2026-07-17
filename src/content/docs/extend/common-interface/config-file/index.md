@@ -23,7 +23,7 @@ Simple components can be created with a static input/output mapping.
 They do not use this configuration section at all (see [Tutorial](/extend/component/tutorial/)).
 - `parameters`: Contains arbitrary parameters passed from the UI to the component. This section can be used in any
 way you wish. Your component should validate the contents of this section. For passing sensitive
-data, use [encryption](/overview/). This section is not available in Transformations.
+data, use [encryption](/overview/encryption/). This section is not available in Transformations.
 - `image_parameters`: See [below](#image-parameters).
 - `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/) or 
 [Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-workspace) .
@@ -46,9 +46,9 @@ The `image_parameters` contents are configured in the [component settings](https
 text fields: **Image Parameters** and **Stack Parameters**.
 
 Both JSONs are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
-provide different values for different [Keboola Stacks](/overview/). Values in
+provide different values for different [Keboola Stacks](/overview/api/#regions-and-endpoints). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
-*Stack Parameters* are indexed with [Storage URL](/overview/) or the given region.
+*Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
 
 Given the following *Image Parameters*:
 
@@ -106,7 +106,7 @@ the `stack_parameters` and `image_parameters` values are already merged and only
 current region are visible.
 
 #### Encryption
-Both *Image Parameters* and *Stack Parameters* support [encrypted values](/overview/). In practice, however,
+Both *Image Parameters* and *Stack Parameters* support [encrypted values](/overview/encryption/). In practice, however,
 the encrypted values must always be stored in *Stack Parameters*, because ciphers are not transferable between regions
 (i.e. an encrypted value is only usable in the region in which it was encrypted).
 
@@ -114,7 +114,7 @@ As with configurations, the encrypted values must be prefixed with the hash sign
 you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
 When using the [encryption API](https://api.keboola.com/?service=encryption#post-/encrypt), provide only the `componentId`
 parameter (using `projectId` or `configId` will make the cipher unusable).
-Also take care to use the correct [API URL](/overview/) to obtain
+Also take care to use the correct [API URL](/overview/api/#regions-and-endpoints) to obtain
 ciphers for each region you need.
 
 ## State File
@@ -132,7 +132,7 @@ file (valid JSON) that
 will be available to the next API call. A missing or an empty file will remove the state value.
 A state object is saved to configuration storage only when actually running the app
 (not when using the [Run Job API call in debug mode](https://api.keboola.com/?service=job-queue#post-/jobs)). The state must be a valid JSON file.
-[Encryption](/overview/) is applied to the state the same way it is applied to
+[Encryption](/overview/encryption/#encrypting-data-with-api) is applied to the state the same way it is applied to
 configurations, `KBC::ProjectSecure::` ciphers are used. 
 
 ### State File Properties

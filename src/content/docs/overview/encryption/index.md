@@ -18,11 +18,11 @@ deleted after the container's completion. The component code exclusively accesse
 When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.
 For instance, consider the following configuration:
 
-![Screenshot - Configuration editor - before](/overview/)
+![Screenshot - Configuration editor - before](/overview/encryption-1.png)
 
 After saving, the configuration appears as follows:
 
-![Screenshot - Configuration editor - after](/overview/)
+![Screenshot - Configuration editor - after](/overview/encryption-2.png)
 
 Once saved, the value becomes encrypted and irreversible. The component defines which values are
 encrypted, indicating that not all values can be encrypted unless explicitly supported by the component.
@@ -134,7 +134,7 @@ This cipher type helps encrypt information shared across multiple components, e.
 The following rules apply to all ciphers:
 
 - Providing only a `configId` without a `projectId` is not allowed. Similarly, providing only `branchType` without `projectId` is also not allowed.
-- Cipher decryption is only possible in the [region](/overview/) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
+- Cipher decryption is only possible in the [region](/overview/api/#regions-and-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
 - There is no decryption API; the cipher is decrypted internally before a component is run.
 - Ciphering a value that is already encrypted does not change its encryption.
 - There is no way to retrieve the component, project, configuration ID, or branch type from the cipher.

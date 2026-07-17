@@ -8,7 +8,7 @@ slug: 'automate'
 Use the Keboola Orchestrator component to specify what tasks should be executed in what order and 
 configure their automatic execution (specified intervals, specified times of the day, etc.).
 
-The set of [Keboola APIs](/overview/) provides full automation of the data warehouse cycle. 
+The set of [Keboola APIs](/overview/api/) provides full automation of the data warehouse cycle. 
 The end-to-end serverless solution automatically enables you to connect data sources, automatically store data 
 in the correct format, check for format inconsistencies, and choose different metadata providers based on the
 operation you wish to perform on the data. The platform scales the needed resources automatically across various 

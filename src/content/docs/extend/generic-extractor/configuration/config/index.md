@@ -41,7 +41,7 @@ Apart from the properties listed below, the `config` section can contain any num
 other properties which are not used by Generic Extractor itself, but may be referenced
 from within [functions](/extend/generic-extractor/functions/).
 
-The keys prefixed by the hash character `#` are [automatically encrypted](/overview/) when the
+The keys prefixed by the hash character `#` are [automatically encrypted](/overview/encryption/) when the
 configuration is saved. It is advisable to store sensitive information in such fields. Note, however, they
 are not automatic aliases to un-encrypted fields. That means that when using a `#password` field, you
 must always refer to it as `#password` (for instance, in [functions](/extend/generic-extractor/functions)).
