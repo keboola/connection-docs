@@ -90,7 +90,7 @@ You can load data only for a selected table if you click the **Run Component** b
 If you need to clean the workspace and remove previously loaded tables, you can do so by clicking the **Clean up workspace** menu item on the right side. This operation removes all **tables** and **views** from the workspace schema. However, **stored procedures** and **user-defined functions (UDFs)** are not removed and will persist. This is because Keboola does not create these objects, so it does not manage or remove them. If you need to remove these objects, you must drop them manually.
 
 :::caution
-Clean up removes **all** tables and views from the workspace schema, including any loaded by **other configurations that share the same read-only workspace** (for example, [copied configurations](#copy-configuration)). Cleaning up from one configuration will also remove data loaded by every other configuration using the same reader account workspace.
+Cleaning up all tables will also remove those loaded by every other configuration using the same read-only workspace.
 :::
 
 ![Screenshot - Add Table](/components/applications/data-gateway/data-gateway-10.png)
