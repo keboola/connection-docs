@@ -7,146 +7,92 @@ redirect_from:
 ---
 
 :::caution[Needs review]
-`VERIFY(owner)`: This end-to-end example uses the Stream API directly. The source-creation payload below
-uses an older `exports` shape; the current API models sources and `sinks` separately (see the
-[Data Streams Reference](/storage/data-streams/reference/)). Confirm the payload against the live
-[Stream API](https://stream.keboola.com/v1/documentation/) before relying on it.
+`VERIFY(owner)`: request shapes below follow the current [Stream API OpenAPI spec](https://stream.keboola.com/v1/documentation/openapi3.json) (sources + sinks model). The JSON *response* examples are illustrative, not captured from a live run, and the literal `default` value for `{branchId}` should be confirmed before publishing.
 :::
 
-In this tutorial, we will set up a source for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
+In this tutorial, we will set up a data stream for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
 
-You will need your project's master token, and a GitHub repository where you have the `Admin` role.
+## Prerequisites
+
+- A [Storage API token](/management/project/tokens/) for your project (**Users & Settings → API Tokens**; the examples below assume a master token).
+- A GitHub repository where you have the `Admin` role.
+- Your stack's Stream API host. The examples use `stream.keboola.com` (AWS US); on other [stacks](/overview/#stacks) replace the host accordingly.
+- `{branchId}` — your branch ID (`default` refers to the production branch).
 
 ## Creating a Source
 
-To start ingesting events, you must first create a source. Send the following payload to the `https://stream.keboola.com/v1/branches/{branchId}/sources` endpoint:
-```json
-{
-  "name": "Github Issues",
-  "exports": [
-    {
-      "name": "Events",
-      "conditions": { "count": 1 },
-      "mapping": {
-        "tableId": "in.c-github.issues",
-        "columns": [
-          {
-            "type": "id",
-            "name": "id"
-          },
-          { "type": "datetime", "name": "datetime" },
-          { "type": "ip", "name": "ip" },
-          { "type": "body", "name": "body" },
-          { "type": "headers", "name": "headers" },
-          {
-            "type": "path",
-            "name": "id",
-            "path": "issue.id",
-            "defaultValue": "undefined", 
-            "rawString": true
-          },
-          {
-            "type": "template",
-            "name": "template",
-            "template": {
-              "language": "jsonnet",
-              "content": "'#' + Body('issue.id') + ': ' + Body('issue.body', 'n/a')"
-            }
-          }
-        ]
-      }
-    }
-  ]
-}
-```
+A **source** is the endpoint that receives events; a **sink** maps received events into a Storage table. They are created separately.
 
-You can do this using `curl`, or anything else that allows you to send an HTTP request:
+**1. Create the source:**
+
 ```shell
-$ curl --header 'Content-Type: application/json' \
-       --header 'X-StorageApi-Token: <YOUR_TOKEN>' \
-       --data '{ ...the payload above... }' \
-       https://stream.keboola.com/v1/branches/{branchId}/sources
+curl --request POST "https://stream.keboola.com/v1/branches/default/sources" \
+     --header "Content-Type: application/json" \
+     --header "X-StorageApi-Token: YOUR_TOKEN" \
+     --data '{"type": "http", "name": "GitHub Issues"}'
 ```
 
-The response will contain the task that has been created:
-```json
-{
-  "id": "2023-02-16T16:04:39.570Z_Pg7U4",
-  "sourceId": "github-issues",
-  "url": "https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues/tasks/source.create/2023-02-16T16:04:39.570Z_Pg7U4",
-  "type": "source.create",
-  "createdAt": "2023-02-17T11:20:57.406Z",
-  "isFinished": false,
-  "result": ""
-}
+The request is asynchronous — the response contains a task. Poll it until it finishes:
+
+```shell
+curl --header "X-StorageApi-Token: YOUR_TOKEN" \
+     "https://stream.keboola.com/v1/tasks/TASK_ID"
 ```
 
-You can query the task's status by querying the `url` field and wait until the `isFinished` field is set to `true`:
-```json
-{
-  "id": "2023-02-16T16:04:39.570Z_Pg7U4",
-  "sourceId": "github-issues",
-  "url": "https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues/tasks/source.create/2023-02-16T16:04:39.570Z_Pg7U4",
-  "type": "source.create",
-  "createdAt": "2023-02-17T11:20:57.406Z",
-  "finishedAt": "2023-02-17T11:20:57.753Z",
-  "isFinished": true,
-  "duration": 343,
-  "result": "source created"
-}
-```
+**2. Create a sink** on the source (the `sourceId` was generated from the name — `github-issues`). The sink maps event data to columns of a destination table:
 
-Upon success, query the source URL `https://stream.keboola.com/v1/branches/{branchId}/sources/github-issues`, and the response will contain the source you've just created:
-```json
-{
-  "id": "github-issues",
-  "url": "https://stream.keboola.com/stream/<YOUR_PROJECT_ID>/github-issues/<SECRET>",
-  "name": "Github Issues",
-  "exports": [
-    {
-      "id": "events",
-      "name": "Events",
-      "conditions": {
-        "count": 1,
-        "size": "5MB",
-        "time": "5m"
-      },
-      "mapping": {
-        "tableId": "in.c-github.issues",
-        "columns": [
-          {
-            "type": "id",
-            "name": "id"
-          },
-          { "type": "datetime", "name": "datetime" },
-          { "type": "ip", "name": "ip" },
-          { "type": "body", "name": "body" },
-          { "type": "headers", "name": "headers" },
-          {
-            "type": "path",
-            "name": "id",
-            "path": "issue.id",
-            "defaultValue": "undefined", 
-            "rawString": true
-          },
-          {
-            "type": "template",
-            "name": "template",
-            "template": {
-              "language": "jsonnet",
-              "content": "'#' + Body('issue.id') + ': ' + Body('issue.body', 'n/a')"
-            }
+```shell
+curl --request POST "https://stream.keboola.com/v1/branches/default/sources/github-issues/sinks" \
+     --header "Content-Type: application/json" \
+     --header "X-StorageApi-Token: YOUR_TOKEN" \
+     --data '{
+  "type": "table",
+  "name": "Events",
+  "table": {
+    "type": "keboola",
+    "tableId": "in.c-github.issues",
+    "mapping": {
+      "columns": [
+        { "type": "uuid", "name": "id" },
+        { "type": "datetime", "name": "datetime" },
+        { "type": "ip", "name": "ip" },
+        { "type": "body", "name": "body" },
+        { "type": "headers", "name": "headers" },
+        {
+          "type": "path",
+          "name": "issue_id",
+          "path": "issue.id",
+          "defaultValue": "undefined",
+          "rawString": true
+        },
+        {
+          "type": "template",
+          "name": "summary",
+          "template": {
+            "language": "jsonnet",
+            "content": "'#' + Body('issue.id') + ': ' + Body('issue.body', 'n/a')"
           }
-        ]
-      }
+        }
+      ]
     }
-  ]
-}
+  }
+}'
 ```
 
-The most important part of the response is the `url` field. This is the endpoint to which you will point your GitHub webhook. Once you've created the source and obtained its `url` field, you are ready to configure the GitHub webhook.
+This is also asynchronous — poll the returned task the same way.
 
-Normally, the URL only returns a short response to reduce traffic. You can add `?verbose=true` to the URL to receive more information about what happened with the request. Note that this makes the response slower, so we recommend using this parameter for testing purposes only.
+**3. Get the source's ingest URL.** Fetch the source detail:
+
+```shell
+curl --header "X-StorageApi-Token: YOUR_TOKEN" \
+     "https://stream.keboola.com/v1/branches/default/sources/github-issues"
+```
+
+The response contains the source's **ingest URL** (`https://stream.keboola.com/stream/...` with a secret) — this is the endpoint you will point the GitHub webhook at.
+
+By default, received events are imported into the table when the [import conditions](/storage/data-streams/reference/#conditions) are met (defaults: 1 minute / 50 MB / 50,000 records — adjustable via the [sink settings endpoints](/storage/data-streams/reference/#source-and-sink-settings)).
+
+Normally, the ingest URL only returns a short response to reduce traffic. You can add `?verbose=true` to it to receive more information about what happened with the request. This makes the response slower, so use it for testing only.
 
 ## Configuring the Github Webhook
 
@@ -162,7 +108,7 @@ Click `Add webhook`.
 
 ![Github add webhook](/storage/data-streams/tutorial/gh-settings-webhook-add.png)
 
-Enter the source `url` into the `Payload URL` field, and set the `Content Type` to `application/json`.
+Enter the source's **ingest URL** into the `Payload URL` field, and set the `Content Type` to `application/json`.
 
 For `Which events would you like to trigger this webhook?`, click `Let me select individual events`, then find `Issues` and tick it:
 
@@ -171,25 +117,32 @@ For `Which events would you like to trigger this webhook?`, click `Let me select
 
 Click `Add webhook` at the bottom of the page.
 
-Any events related to issues in your repository will now be buffered by the source, and uploaded to your table every minute.
+Any events related to issues in your repository will now be buffered by the source and imported into your table when the import conditions are met (about a minute with the defaults).
 
 To see your integration at work, head over to your repository and [open a few issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ## Results
 
-The following token was generated.
+Creating the sink **automatically generated a dedicated token** in your project — you did not create it yourself. It has the minimum scope (write access to the destination bucket plus file manipulation; files are used as staging storage to prevent data loss). Its description follows the format `[_internal] Stream Sink <source-id>/<sink-id>` — do not delete or refresh it manually (see [Tokens](/storage/data-streams/reference/#tokens)).
 
 ![Keboola token settings screenshot showing the generated token](/storage/data-streams/tutorial/token.png)
 
-This token only has the minimal set of permissions, which, in this case, is access to a single bucket and the ability to manipulate files. Currently, files are used as staging storage to prevent data loss. You can see these files in your project's Storage.
+You can see the staging files in your project's Storage:
 
 ![Keboola storage file](/storage/data-streams/tutorial/github_webhook_export_file.png)
 
-Since the table `in.c-github-issues` did not exist, it was created.
+Since the table `in.c-github.issues` did not exist, it was created:
 
 ![Keboola storage table](/storage/data-streams/tutorial/github_webhook_export_table.png)
 
-Finally, you can take a look at the destination table's data sample to find your data, ready for further processing.
+**Verify the data landed** — open the table's **Data Sample** in the UI, or fetch the table detail via the Storage API:
+
+```shell
+curl --header "X-StorageApi-Token: YOUR_TOKEN" \
+     "https://connection.keboola.com/v2/storage/tables/in.c-github.issues"
+```
+
+A non-zero `rowsCount` in the response confirms the events were imported.
 
 ![Keboola storage table sample data](/storage/data-streams/tutorial/github_webhook_export_table_data.png)
 
