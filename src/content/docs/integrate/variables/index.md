@@ -6,10 +6,10 @@ slug: 'integrate/variables'
 
 *Note: This is a preview feature and as such may change considerably in the future.*
 
-**Variables** are placeholders used in [configurations](/integrate/storage/api/configurations/). Their value is 
+**Variables** are placeholders used in [configurations](/storage/api/configurations/). Their value is 
 resolved at [job runtime](/integrate/jobs/). 
 
-**Important:** Make sure you're familiar with the [Configuration API](/integrate/storage/api/configurations/) and 
+**Important:** Make sure you're familiar with the [Configuration API](/storage/api/configurations/) and 
 the [Job API](/integrate/jobs/) before reading on.
 
 See [Tutorial](/integrate/variables/tutorial) for step-by-step example.
@@ -94,7 +94,7 @@ Then you can use the variables in the configuration body:
 ```
 
 ## Variable Values 
-You can either store the variable values as [configuration rows](/integrate/storage/api/configurations/#configuration-rows) of the 
+You can either store the variable values as [configuration rows](/storage/api/configurations/#configuration-rows) of the 
 *variable configuration* and provide the row ID of the stored values at run time, or you can provide the variable values directly at run 
 time. There are three options how you can provide values to the variables:
 

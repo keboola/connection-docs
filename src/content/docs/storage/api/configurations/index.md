@@ -1,6 +1,8 @@
 ---
 title: Component Configurations API
-slug: 'integrate/storage/api/configurations'
+slug: 'storage/api/configurations'
+redirect_from:
+    - /integrate/storage/api/configurations/
 ---
 
 

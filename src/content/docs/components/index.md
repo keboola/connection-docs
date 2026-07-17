@@ -133,7 +133,7 @@ The bottom right panel shows a list of the configuration versions. Use the list 
 - roll back to an older version.
 
 All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
-The [developer guide](/integrate/storage/api/configurations/) explains how to work with configurations.
+The [developer guide](/storage/api/configurations/) explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.
 

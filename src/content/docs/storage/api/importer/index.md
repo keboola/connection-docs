@@ -1,10 +1,12 @@
 ---
 title: Storage API Importer
-slug: 'integrate/storage/api/importer'
+slug: 'storage/api/importer'
+redirect_from:
+    - /integrate/storage/api/importer/
 ---
 
 
-The [whole process of importing](/integrate/storage/api/) a table into Storage can be simplified with the
+The [whole process of importing](/storage/api/) a table into Storage can be simplified with the
 Storage API Importer Service.
 The Storage API Importer allows you to make an HTTP POST request and import a file directly into an existing Storage table.
 
@@ -21,7 +23,7 @@ using one of the [API clients](/integrate/storage/#clients)). However, the disad
 has to be posted in a single HTTP request. **The maximum limit for a file size is 2GB and the transfer time is 45 minutes**.
 This means that for substantially large files (usually more than hundreds of MB)
 you may experience timeouts. If that happens, use the above outlined approach and upload the
-files [directly to S3](/integrate/storage/api/import-export/#manually-uploading-a-file).
+files [directly to S3](/storage/api/import-export/#manually-uploading-a-file).
 
 ## Parameters
 

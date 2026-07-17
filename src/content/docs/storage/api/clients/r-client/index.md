@@ -1,6 +1,8 @@
 ---
 title: R Client Library
-slug: 'integrate/storage/r-client'
+slug: 'storage/api/clients/r-client'
+redirect_from:
+    - /integrate/storage/r-client/
 ---
 
 

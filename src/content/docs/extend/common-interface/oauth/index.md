@@ -72,7 +72,7 @@ decrypt the `authorization.oauth_api.credentials.#data` and `authorization.oauth
 
 If you want to bypass the OAuth Broker API integration, you can paste all required credential parameters in the configuration directly.
 Fields requiring encryption will be encrypted and decrypted as usual. That means that you can save the following configuration
-via the [configuration API](/integrate/storage/api/configurations/).
+via the [configuration API](/storage/api/configurations/).
 
 ```json
 {

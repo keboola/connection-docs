@@ -213,7 +213,7 @@ Python and R transformations.
 ### Transformations
 
 Transformations behave like any other [component](/components/). This means that they use the 
-standard [API](/integrate/storage/api/configurations/) to manipulate
+standard [API](/storage/api/configurations/) to manipulate
 and run configurations and that creating your own 
 [transformation components](/extend/component/) is possible.
 

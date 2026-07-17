@@ -66,7 +66,7 @@ Such a URL is valid for the entire validity of the file itself (either 15 days o
 In some cases, the file may be **sliced**. When you encounter a *sliced file*, you will 
 obtain a [JSON](https://en.wikipedia.org/wiki/JSON) manifest file instead of the actual file. 
 This can happen for some [exported or imported tables](/storage/tables/uploads/) from Storage or files which are particularly large.
-Merging a sliced file requires a [substantial effort](/integrate/storage/api/import-export/#working-with-sliced-files).
+Merging a sliced file requires a [substantial effort](/storage/api/import-export/#working-with-sliced-files).
 
 ## Limits
 The maximum allowed size of an uploaded file is currently 2 GB (2,048,000,000 bytes exactly). 

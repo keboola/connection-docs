@@ -55,7 +55,7 @@ finishes, its `results` contain the ID of the exported file:
 }
 ```
 
-Download the file with the standard [file download](/integrate/storage/api/importer/#download-a-file) flow.
+Download the file with the standard [file download](/storage/api/importer/#download-a-file) flow.
 
 ## Backend-Specific Notes
 

@@ -25,7 +25,7 @@ credentials for downloading the actual file data.
 ```
 
 If the file is sliced and you need to merge it into a single file, read through the guide to
-[working with sliced files](/integrate/storage/api/import-export/#working-with-sliced-files).
+[working with sliced files](/storage/api/import-export/#working-with-sliced-files).
 In that case, the `name` points to another manifest, which contains a list of sliced files.
 
 Note: Exchanging data via Azure ABS is currently available only for input mapping.

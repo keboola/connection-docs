@@ -1,7 +1,8 @@
 ---
 title: Storage Docker CLI Client
-slug: 'integrate/storage/docker-cli-client'
+slug: 'storage/api/clients/docker-cli'
 redirect_from:
+    - /integrate/storage/docker-cli-client/
     - /integrate/storage/php-cli-client/
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: TDE Exporter
-slug: 'integrate/storage/api/tde-exporter'
+slug: 'storage/api/tde-exporter'
+redirect_from:
+    - /integrate/storage/api/tde-exporter/
 ---
 
 
@@ -11,11 +13,11 @@ but it can also be used as a standalone component.
 
 Users can [run a TDE exporter job](/integrate/jobs/) as any other Keboola component or register it
 as an orchestration task. After the exporter finishes, the resulting TDE files will be available in the
-*Storage* --- *File uploads* section where you can download them via UI or [API](/integrate/storage/api/import-export/).
+*Storage* --- *File uploads* section where you can download them via UI or [API](/storage/api/import-export/).
 
 ##  Running the Component
 The TDE Exporter is a Keboola [component](/extend/component/) supporting both
-[stored](/integrate/storage/api/configurations/) and
+[stored](/storage/api/configurations/) and
 custom configurations supplied directly in the `run` request.
 
 ### Stored Configuration

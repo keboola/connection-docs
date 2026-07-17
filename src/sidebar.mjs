@@ -409,6 +409,21 @@ export const sidebar = [
         ],
       },
       { slug: "storage/byobq" },
+      {
+        label: "Storage API",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/api" },
+          { slug: "storage/api/configurations" },
+          { slug: "storage/api/import-export" },
+          { slug: "storage/api/importer" },
+          { slug: "storage/api/tde-exporter" },
+          { slug: "storage/api/clients/python-client" },
+          { slug: "storage/api/clients/r-client" },
+          { slug: "storage/api/clients/php-client" },
+          { slug: "storage/api/clients/docker-cli" },
+        ],
+      },
     ],
   },
   {
@@ -722,28 +737,7 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "integrate" },
-          {
-            label: "Storage",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "integrate/storage" },
-              { slug: "integrate/storage/php-client" },
-              { slug: "integrate/storage/r-client" },
-              { slug: "integrate/storage/python-client" },
-              { slug: "integrate/storage/docker-cli-client" },
-              {
-                label: "Using API",
-                collapsed: true,
-                items: [
-                  { label: "Overview", slug: "integrate/storage/api" },
-                  { slug: "integrate/storage/api/configurations" },
-                  { slug: "integrate/storage/api/importer" },
-                  { slug: "integrate/storage/api/import-export" },
-                  { slug: "integrate/storage/api/tde-exporter" },
-                ],
-              },
-            ],
-          },
+          { slug: "integrate/storage" },
           { slug: "integrate/jobs" },
           {
             label: "Variables",

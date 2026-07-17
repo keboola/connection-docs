@@ -20,8 +20,8 @@ convert the CSV to UTF-8 as expected by [Storage](/storage/). See the
 Processors are technically supported in any configuration of any component. However, as an **advanced feature**, they have little to no 
 [support in the UI](/extend/component/ui-options/#genericdockerui-processors). To manually configure processors, 
 you have to use the [Component Configuration API](https://api.keboola.com/?service=storage#tag--Component-Configurations).
-See the respective part of our [documentation](/integrate/storage/api/configurations/) for
-examples of working with the [Component Configuration API](/integrate/storage/api/configurations/).
+See the respective part of our [documentation](/storage/api/configurations/) for
+examples of working with the [Component Configuration API](/storage/api/configurations/).
 If you want to implement your own processor, see our [implementation notes](/extend/component/implementation/#implementing-processors).
 
 If the component does not contain the [respective configuration field](/extend/component/ui-options/#genericdockerui-processors) or
@@ -144,7 +144,7 @@ When updating the configuration, you must provide `componentId`, `configurationI
 the configuration in the `configuration` form field. Make sure to supply only the **contents** of the `configuration`
 node and to properly escape the form data.
 
-See our [configuration documentation](/integrate/storage/api/configurations/#modifying-a-configuration) for
+See our [configuration documentation](/storage/api/configurations/#modifying-a-configuration) for
 a more thorough description and the *Add processor to Email Attachments Extractor Configuration* example
 in our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 Remember, the processors can be [chained](/extend/component/tutorial/processors/#chaining-processors) to
@@ -182,7 +182,7 @@ The names and allowed values of the parameters are fully up to the processor int
 and are described in the respective processor documentation.
 
 ### Using Processors with Configuration Rows
-If the configuration uses [Configuration Rows](/integrate/storage/api/configurations/#configuration-rows),
+If the configuration uses [Configuration Rows](/storage/api/configurations/#configuration-rows),
 you have to use the [Update Configuration Row](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-/rows/-rowId-)
 API call to set the processors.
 
