@@ -28,7 +28,7 @@ Using a portal for a different stack than your token's stack will result in <cod
 | [Developer Portal API](https://api.keboola.com/?service=developer-portal)                                   | Developer Portal is an application separated from Keboola for [creating components](/extend/component/).                                                            |
 | [Editor API](https://api.keboola.com/?service=editor)                                                       | API for managing SQL editor sessions.                                                                                                                               |
 | [Encryption API](https://api.keboola.com/?service=encryption)                                               | Provides [Encryption](/overview/encryption/).                                                                                                                       |
-| [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/integrate/storage/api/importer/) is a helper service for easy table imports.                                                                            |
+| [Importer API](https://api.keboola.com/?service=import)                                                     | [Importer](/storage/api/importer/) is a helper service for easy table imports.                                                                            |
 | [Notifications API](https://api.keboola.com/?service=notification)                                          | API to subscribe to events, e.g., failed orchestrations.                                                                                                            |
 | [OAuth Broker API](https://api.keboola.com/?service=oauth)                                                  | OAuth Broker is a component managing [OAuth authorizations](/extend/common-interface/oauth/#authorize) of other components.                                         |
 | [Query API](https://api.keboola.com/?service=query)                                                 | Query is a service for running SQL queries on Snowflake and BigQuery.                                                         |
@@ -143,7 +143,7 @@ Otherwise, you may encounter `Invalid Token` or unauthorized errors. The *author
 
 The services listed above are:
 
-- `import` --- [Storage Importer Service](/integrate/storage/api/importer/)
+- `import` --- [Storage Importer Service](/storage/api/importer/)
 - `oauth` --- [OAuth Manager Service](/extend/common-interface/oauth/)
 - `queue` --- [Service for Running Components](/extend/job-queue/)
 - `billing` --- Service for Computing Credits

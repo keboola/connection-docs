@@ -1,6 +1,8 @@
 ---
 title: Storage PHP Client Library
-slug: 'integrate/storage/php-client'
+slug: 'storage/api/clients/php-client'
+redirect_from:
+    - /integrate/storage/php-client/
 ---
 
 

@@ -1,6 +1,8 @@
 ---
 title: Manually Importing and Exporting Data
-slug: 'integrate/storage/api/import-export'
+slug: 'storage/api/import-export'
+redirect_from:
+    - /integrate/storage/api/import-export/
 ---
 
 
@@ -19,7 +21,7 @@ from the uploaded file (use it as the `dataFileId` parameter) into the destinati
 The import is asynchronous, so the request only creates a job and you need to poll for its results.
 The imported files must conform to the [RFC4180 Specification](https://tools.ietf.org/html/rfc4180).
 
-![Schema of file upload process](/integrate/storage/api/async-import-handling.svg)
+![Schema of file upload process](/storage/api/async-import-handling.svg)
 
 Exporting a table from Storage is analogous to its importing. First, data is [asynchronously
 exported](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
@@ -205,7 +207,7 @@ if (jobParsed['status'] == 'error'):
 For production setup, we recommend using the approach [outlined above](#manually-uploading-a-file)
 with direct upload to S3 as it is more reliable and universal.
 In case you need to avoid using an S3 client, it is also possible to upload the 
-file by a simple HTTP request to [Storage API Importer Service](/integrate/storage/api/importer/).
+file by a simple HTTP request to [Storage API Importer Service](/storage/api/importer/).
 
 ```bash
 curl --request POST --header "X-StorageApi-Token:storage-token" --form "data=@new-file.csv" https://import.keboola.com/upload-file

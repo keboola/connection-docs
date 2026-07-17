@@ -25,10 +25,10 @@ in UTF8 encoding, you do not need to implement this conversion in the component.
 [processors](/extend/component/processors/) to load the incompatible data.
 - **Avoid iterations.** For example, your component is downloading multiple files from a system and converts them to CSV files
 for Storage import. You do not need to implement the loop around the files, you can use
-[configuration rows](/integrate/storage/api/configurations/#configuration-rows) and implement processing of only a single table.
+[configuration rows](/storage/api/configurations/#configuration-rows) and implement processing of only a single table.
 
 Before you create any complex components, be sure to read about
-[configurations](/integrate/storage/api/configurations/) and [processors](/extend/component/processors/)
+[configurations](/storage/api/configurations/) and [processors](/extend/component/processors/)
 as they can substantially simplify your component code. We also recommend that you use our
 [common interface](/extend/common-interface/) library, which is available for
 [Python](/extend/component/implementation/python/#using-the-kbc-package),
@@ -89,7 +89,7 @@ component may be difficult. A processor might be a good solution if the followin
 The first condition is especially important. Another way to read it is that a processor must never supply a function expected from the component.
 In other words: **Each component should be able to consume/generate a valid input/output without any processors.** For example, if an extractor can
 produce tables without any further processing, good, let it be tables, but if can not, it should output only files and processors should do the rest.
-If processors are used together with [configuration rows](/integrate/storage/api/configurations/#configuration-rows),
+If processors are used together with [configuration rows](/storage/api/configurations/#configuration-rows),
 the last condition is weakened, because a different set of processors may be applied to each configuration row.
 
 ### Design

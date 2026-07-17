@@ -17,7 +17,7 @@ Every time a table is **exported** from Storage, the process is reversed: first,
 created in *Files* and then it is actually downloaded from there. This does not apply when exporting
 Storage tables manually though.
 Beware, however, that due to the nature of database exports, the exported table may be **sliced** and require
-[substantial effort to reconstruct](/integrate/storage/api/import-export/#working-with-sliced-files).
+[substantial effort to reconstruct](/storage/api/import-export/#working-with-sliced-files).
 To make sure your tables are exported as merged files, always use the **Export** feature in 
 the **Action** tab of the table detail:
 

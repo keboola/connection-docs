@@ -327,7 +327,7 @@ def load_table(table_id: str) -> pd.DataFrame:
     return pd.read_csv(StringIO(response.text))
 ```
 
-For a complete example using the official Python client library, see the [Keboola Storage Python Client documentation](/integrate/storage/python-client/).
+For a complete example using the official Python client library, see the [Keboola Storage Python Client documentation](/storage/api/clients/python-client/).
 
 ## Secrets and Environment Variables
 

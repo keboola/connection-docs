@@ -36,7 +36,7 @@ A component first checks for a development version of the production bucket when
 
 ### Configuration State in a Development Branch
 
-Configuration [states](/integrate/storage/api/configurations/#state) are stored separately for each development branch and are not merged back to the main branch upon merging of the branch itself.
+Configuration [states](/storage/api/configurations/#state) are stored separately for each development branch and are not merged back to the main branch upon merging of the branch itself.
 
 ### Components Interacting with External Resources
 

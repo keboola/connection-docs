@@ -1,6 +1,8 @@
 ---
 title: Python Client Library
-slug: 'integrate/storage/python-client'
+slug: 'storage/api/clients/python-client'
+redirect_from:
+    - /integrate/storage/python-client/
 ---
 
 

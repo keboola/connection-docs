@@ -579,6 +579,26 @@ items:
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 
+      - url: /storage/api/
+        title: Storage API
+        items:
+          - url: /storage/api/configurations/
+            title: Configurations
+          - url: /storage/api/import-export/
+            title: Import & Export
+          - url: /storage/api/importer/
+            title: API Importer
+          - url: /storage/api/tde-exporter/
+            title: TDE Exporter
+          - url: /storage/api/clients/python-client/
+            title: Python client
+          - url: /storage/api/clients/r-client/
+            title: R client
+          - url: /storage/api/clients/php-client/
+            title: PHP client
+          - url: /storage/api/clients/docker-cli/
+            title: Docker CLI client
+
   - url: /transformations/
     title: Transformations
     items:
@@ -920,26 +940,6 @@ items:
         items:
           - url: /integrate/storage/
             title: Storage
-            items:
-              - url: /integrate/storage/php-client/
-                title: PHP client library
-              - url: /integrate/storage/r-client/
-                title: R client library
-              - url: /integrate/storage/python-client/
-                title: Python client library
-              - url: /integrate/storage/docker-cli-client/
-                title: Docker CLI client
-              - url: /integrate/storage/api/
-                title: Using API
-                items:
-                  - url: /integrate/storage/api/configurations/
-                    title: Configurations API
-                  - url: /integrate/storage/api/importer/
-                    title: Storage API Importer
-                  - url: /integrate/storage/api/import-export/
-                    title: Manually importing and exporting data
-                  - url: /integrate/storage/api/tde-exporter/
-                    title: TDE Exporter
           - url: /integrate/jobs/
             title: Component Jobs
           - url: /integrate/variables/

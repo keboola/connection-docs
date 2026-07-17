@@ -15,7 +15,7 @@ In the examples, we use the `curl` console tool to interact with our APIs.
 First, store the [API endpoints](/overview/api/) as environment variables, so we don't have to repeat ourselves.
 
 We will need:
-- [Storage API](/integrate/storage/api/) to store the variable definitions and the extractor configuration -
+- [Storage API](/storage/api/) to store the variable definitions and the extractor configuration -
 - [Job Queue API](/extend/job-queue/) to run the extractor job from the configuration.
 
 The host names depend on your [stack](/overview/api/#stacks-and-endpoints):
