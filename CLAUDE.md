@@ -23,3 +23,5 @@ The full repo guide — stack, structure, commands, and conventions — lives in
 - **Screenshots:** save throwaways to `/tmp`, not the repo. `scripts/screenshot.mjs`
   is a local-only helper (gitignored).
 - **Ask a maintainer** for product facts vs. content choices instead of guessing.
+- **PR titles start with the Linear issue id** (`PRDCT-<id>: …`) so the PR
+  auto-links to its issue; the PR build enforces it. See AGENTS.md → Workflow.

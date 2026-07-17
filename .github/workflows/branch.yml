@@ -10,6 +10,13 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
+      - name: "Enforce PRDCT-id in PR title"
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "PR title: $PR_TITLE"
+          echo "$PR_TITLE" | grep -qE '^PRDCT-[0-9]+' || {
+            echo "::error::PR title must start with the Linear issue id, e.g. 'PRDCT-123: …' (auto-links the PR to its issue)."; exit 1; }
       - name: "Checkout"
         uses: actions/checkout@v4
       - name: "Setup Node.js"
@@ -21,3 +28,12 @@ jobs:
         run: npm ci
       - name: "Build"
         run: npm run build
+      - name: "Content lint (gated vs baseline)"
+        run: npm run lint
+      - name: "Install Playwright browser"
+        run: npx playwright install --with-deps chromium
+      - name: "Render / layout checks"
+        run: |
+          npm run preview &
+          for i in $(seq 1 30); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 1; done
+          PREVIEW_URL=http://localhost:4321 npm run check:render
