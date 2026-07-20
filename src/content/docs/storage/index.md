@@ -14,7 +14,7 @@ By default all new [Pay As You Go projects](/management/payg-project/) use the B
 
 As with all other Keboola components, everything that can be done through the UI can be also done programmatically
 via the [Storage API](https://api.keboola.com/?service=storage).
-See our [developers guide](https://developers.keboola.com/integrate/storage/) to learn more.
+See our [developers guide](/integrate/storage/) to learn more.
 Every Storage operation must be authorized via a [token](/management/project/tokens/).
 It is also recorded in [Events](/management/project/tokens/#token-events) and
 [Jobs](/management/jobs/).

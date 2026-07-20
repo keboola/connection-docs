@@ -16,7 +16,7 @@ they can perform really advanced tasks, such as sentiment analysis, association 
 histogram grouping. They can also enhance data by calling on 3rd party services to bring in additional data 
 such as Weather or Exchange Rates. 
 
-All applications are **implemented as [components](https://developers.keboola.com/extend/)** 
+All applications are **implemented as [components](/extend/)** 
 and as such can be completely created by 3rd party developers. 
 You can even create your own application. 
 Applications can be created either for a particular end-user, or they may be offered 
@@ -36,7 +36,7 @@ The following screenshot shows some of many Keboola applications (created by bot
 ![Keboola and 3rd parties Applications in Keboola](/components/applications/applications.png)
 
 If you want to learn more about Applications or are interested in creating one, go to 
-our [Developer Documentation](https://developers.keboola.com/extend/).
+our [Developer Documentation](/extend/).
 
 If you want to see a short **demo on using a 3rd party app in Keboola** (analyzing text data), [click here](https://www.youtube.com/watch?v=dx03hlA7dTo). 
 The video shows how to quickly extract text data from Twitter's API, process the data through Geneea's
@@ -63,4 +63,4 @@ Applications are versioned externally.
 - There are also some [technical differences](https://developers.keboola.com/extend/custom-science/#technical-differences) between the two.
 
 When deciding between the two, consider your capabilities, available resources and the
-complexity of the task you need to perform. For more details, go to our [Developer Documentation](https://developers.keboola.com/extend/).
+complexity of the task you need to perform. For more details, go to our [Developer Documentation](/extend/).

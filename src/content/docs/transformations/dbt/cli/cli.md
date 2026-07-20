@@ -8,9 +8,9 @@ Video:
 
 ## Local Development
 
-Let's set up the local development with [Keboola CLI](https://developers.keboola.com/cli/).
+Let's set up the local development with [Keboola CLI](/cli/keboola-as-code/).
 
-It is easy on Mac with [homebrew](https://docs.brew.sh/Installation.html) support (other platforms covered in the [documentation](https://developers.keboola.com/cli/installation/)):
+It is easy on Mac with [homebrew](https://docs.brew.sh/Installation.html) support (other platforms covered in the [documentation](/cli/keboola-as-code/installation/)):
 
 ```bash
 brew tap keboola/keboola-cli

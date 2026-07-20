@@ -51,7 +51,7 @@ For a deeper exploration of Keboola features, aligning with real-world usage, co
    - Explore how to perform ad-hoc data analysis, allowing flexibility in interacting with arbitrary data.
 5. [**Development branches**](/tutorial/branches/)
    - Learn how to safely modify a running project using development branches.
-6. [**Command-line interface (CLI)**](https://developers.keboola.com/cli/)
+6. [**Command-line interface (CLI)**](/cli/keboola-as-code/)
    - Operate a project efficiently using the Keboola command-line tool.
 
 These advanced steps will provide you with a comprehensive understanding of Keboola's capabilities and their practical application in real-world scenarios.

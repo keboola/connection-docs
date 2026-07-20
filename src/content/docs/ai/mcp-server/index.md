@@ -2,6 +2,7 @@
 title: Keboola Model Context Protocol (MCP) Server
 slug: 'ai/mcp-server'
 redirect_from:
+    - /integrate/mcp/
     - /external-integrations/mcp-server/
 ---
 
@@ -61,7 +62,7 @@ In case your AI assistant supports remote connection, you can connect to Keboola
 2. Copy the server URL and paste it into your AI assistant's settings.
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
-For other options of local deployments see the [Developers Documentation](https://developers.keboola.com/integrate/mcp/#running-keboola-mcp-server-locally-using-uv-command).
+For other options of local deployments see the [Developers Documentation](/ai/mcp-server/).
 
 
 ### Using with Claude Desktop
@@ -81,7 +82,7 @@ These steps must be done by a Claude organization owner or primary owner, or on 
 
 If you don't have a paid version you can still use the [`mcp-remote`](https://github.com/geelen/mcp-remote) adapter to connect Claude Desktop to Keboola's MCP Server.
 
-> NOTE: This method requires you to have Node.js installed on your computer. For more information refer to the [Developers Documentation](https://developers.keboola.com/integrate/mcp)
+> NOTE: This method requires you to have Node.js installed on your computer. For more information refer to the [Developers Documentation](/ai/mcp-server/)
 
 1. Open the Claude menu on your computer and select **"Settings…"**
 2. Click on **"Developer"** in the left-hand bar of the Settings pane, and then click on **"Edit Config"**
@@ -286,7 +287,7 @@ These headers are set by the client (e.g., your AI agent integration or custom M
 
 For example, setting `X-Read-Only-Mode: true` allows agents to query and explore data but prevents them from creating or modifying configurations.
 
-For detailed technical documentation including the full list of read-only tools and header combination behavior, see the [Developer Documentation](https://developers.keboola.com/integrate/mcp/#tool-authorization-and-access-control).
+For detailed technical documentation including the full list of read-only tools and header combination behavior, see the [Developer Documentation](/ai/mcp-server/).
 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).

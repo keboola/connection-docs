@@ -721,6 +721,375 @@ items:
       - url: /ai/mcp-server/
         title: MCP Server
 
+
+  # --- Developer Docs (migrated from developers.keboola.com, phase 1) ---
+  - url: /overview/api/
+    title: Developer Docs
+    items:
+      - url: /overview/api/
+        title: Our APIs
+      - url: /overview/encryption/
+        title: Encryption
+      - url: /extend/
+        title: Extending Keboola
+        items:
+          - url: /extend/component/
+            title: Components
+            items:
+              - url: /extend/component/tutorial/
+                title: Tutorial
+                items:
+                  - url: /extend/component/tutorial/input-mapping/
+                    title: Input Mapping
+                  - url: /extend/component/tutorial/output-mapping/
+                    title: Output Mapping
+                  - url: /extend/component/tutorial/configuration/
+                    title: Configuration
+                  - url: /extend/component/tutorial/processors/
+                    title: Processors
+                  - url: /extend/component/tutorial/debugging/
+                    title: Debugging
+              - url: /extend/component/processors/
+                title: Processors
+              - url: /extend/component/code-patterns/
+                title: Code Patterns
+                items:
+                  - url: /extend/component/code-patterns/interface/
+                    title: Interface
+                  - url: /extend/component/code-patterns/tutorial/
+                    title: Tutorial
+              - url: /extend/component/implementation/
+                title: Implementation Notes
+                items:
+                  - url: /extend/component/implementation/php/
+                    title: PHP Implementation Notes
+                  - url: /extend/component/implementation/python/
+                    title: Python Implementation Notes
+                  - url: /extend/component/implementation/r/
+                    title: R Implementation Notes
+              - url: /extend/component/running/
+                title: Running Components
+              - url: /extend/component/ui-options/
+                title: UI Options
+                items:
+                  - url: /extend/component/ui-options/configuration-schema/
+                    title: Configuration Schema
+                    items:
+                      - url: /extend/component/ui-options/configuration-schema/examples
+                        title: Examples
+                      - url: /extend/component/ui-options/configuration-schema/sync-action-examples
+                        title: Sync Action Examples
+                  - url: /extend/component/ui-options/default-configuration/
+                    title: Default Configuration
+              - url: /extend/component/deployment/
+                title: Deployment
+          - url: /extend/generic-extractor/
+            title: Generic Extractor
+            items:
+              - url: /extend/generic-extractor/tutorial/
+                title: Generic Extractor Tutorial
+                items:
+                  - url: /extend/generic-extractor/tutorial/rest/
+                    title: REST HTTP API Introduction
+                  - url: /extend/generic-extractor/tutorial/json/
+                    title: JSON Introduction
+                  - url: /extend/generic-extractor/tutorial/basic/
+                    title: Basic Configuration
+                  - url: /extend/generic-extractor/tutorial/pagination/
+                    title: Pagination Tutorial
+                  - url: /extend/generic-extractor/tutorial/jobs/
+                    title: Jobs Tutorial
+                  - url: /extend/generic-extractor/tutorial/mapping/
+                    title: Mapping Tutorial
+              - url: /extend/generic-extractor/configuration/
+                title: Configuration
+                items:
+                  - url: /extend/generic-extractor/configuration/api/
+                    title: API Configuration
+                    items:
+                      - url: /extend/generic-extractor/configuration/api/pagination/
+                        title: Pagination
+                        items:
+                          - url: /extend/generic-extractor/configuration/api/pagination/response-url/
+                            title: Response URL Scroller
+                          - url: /extend/generic-extractor/configuration/api/pagination/response-param/
+                            title: Response Parameter Scroller
+                          - url: /extend/generic-extractor/configuration/api/pagination/offset/
+                            title: Offset Scroller
+                          - url: /extend/generic-extractor/configuration/api/pagination/pagenum/
+                            title: Page Number Scroller
+                          - url: /extend/generic-extractor/configuration/api/pagination/cursor/
+                            title: Cursor Scroller
+                          - url: /extend/generic-extractor/configuration/api/pagination/multiple/
+                            title: Multiple Scrollers
+                      - url: /extend/generic-extractor/configuration/api/authentication/
+                        title: Authentication
+                        items:
+                          - url: /extend/generic-extractor/configuration/api/authentication/query/
+                            title: Query
+                          - url: /extend/generic-extractor/configuration/api/authentication/basic/
+                            title: Basic
+                          - url: /extend/generic-extractor/configuration/api/authentication/bearer_token/
+                            title: Bearer Token
+                          - url: /extend/generic-extractor/configuration/api/authentication/api_key/
+                            title: API Key
+                          - url: /extend/generic-extractor/configuration/api/authentication/login/
+                            title: Login
+                          - url: /extend/generic-extractor/configuration/api/authentication/oauth_cc/
+                            title: OAuth 2.0 Client Credentials
+                          - url: /extend/generic-extractor/configuration/api/authentication/oauth10/
+                            title: OAuth 1.0
+                          - url: /extend/generic-extractor/configuration/api/authentication/oauth20/
+                            title: OAuth 2.0
+                          - url: /extend/generic-extractor/configuration/api/authentication/oauth20-login/
+                            title: Login using OAuth 2.0
+                  - url: /extend/generic-extractor/configuration/config/
+                    title: Extraction Configuration
+                    items:
+                      - url: /extend/generic-extractor/configuration/config/jobs/
+                        title: Jobs
+                        items:
+                          - url: /extend/generic-extractor/configuration/config/jobs/children/
+                            title: Child Jobs
+                      - url: /extend/generic-extractor/configuration/config/mappings/
+                        title: Mappings
+                  - url: /extend/generic-extractor/configuration/iterations/
+                    title: Iterations
+                  - url: /extend/generic-extractor/configuration/ssh-proxy/
+                    title: SSH Proxy Configuration
+              - url: /extend/generic-extractor/map/
+                title: Configuration Map
+              - url: /extend/generic-extractor/functions/
+                title: Functions
+              - url: /extend/generic-extractor/incremental/
+                title: Incremental Extraction
+              - url: /extend/generic-extractor/running/
+                title: Running Generic Extractor
+              - url: /extend/generic-extractor/publish/
+                title: Publishing Component
+          - url: /extend/generic-writer/
+            title: Generic Writer
+            items:
+              - url: /extend/generic-writer/configuration/
+                title: Configuration
+              - url: /extend/generic-writer/configuration-examples/
+                title: Configuration Examples
+          - url: /extend/common-interface/
+            title: Common Interface
+            items:
+              - url: /extend/common-interface/folders/
+                title: Data Folders
+              - url: /extend/common-interface/config-file/
+                title: Configuration File
+              - url: /extend/common-interface/environment/
+                title: Environment
+              - url: /extend/common-interface/manifest-files/
+                title: Manifest Files
+                items:
+                  - url: /extend/common-interface/manifest-files/in-tables-manifests/
+                    title: IN tables
+                  - url: /extend/common-interface/manifest-files/in-files-manifests/
+                    title: IN files
+                  - url: /extend/common-interface/manifest-files/in-files-s3-staging/
+                    title: IN files S3 staging
+                  - url: /extend/common-interface/manifest-files/in-files-abs-staging/
+                    title: IN files ABS staging
+                  - url: /extend/common-interface/manifest-files/out-tables-manifests/
+                    title: OUT tables
+                  - url: /extend/common-interface/manifest-files/out-tables-manifests-native-types/
+                    title: OUT tables with Native Types
+                  - url: /extend/common-interface/manifest-files/out-files-manifests/
+                    title: OUT files
+              - url: /extend/common-interface/oauth/
+                title: OAuth2
+              - url: /extend/common-interface/actions/
+                title: Actions
+              - url: /extend/common-interface/logging/
+                title: Logging
+              - url: /extend/common-interface/development-branches/
+                title: Development branches
+          - url: /extend/job-queue/
+            title: Job Queue
+          - url: /extend/publish/
+            title: Publishing Component
+            items:
+              - url: /extend/publish/checklist/
+                title: Checklist
+      - url: /integrate/
+        title: Integration
+        items:
+          - url: /integrate/storage/
+            title: Storage
+            items:
+              - url: /integrate/storage/php-client/
+                title: PHP client library
+              - url: /integrate/storage/r-client/
+                title: R client library
+              - url: /integrate/storage/python-client/
+                title: Python client library
+              - url: /integrate/storage/docker-cli-client/
+                title: Docker CLI client
+              - url: /integrate/storage/api/
+                title: Using API
+                items:
+                  - url: /integrate/storage/api/configurations/
+                    title: Configurations API
+                  - url: /integrate/storage/api/importer/
+                    title: Storage API Importer
+                  - url: /integrate/storage/api/import-export/
+                    title: Manually importing and exporting data
+                  - url: /integrate/storage/api/tde-exporter/
+                    title: TDE Exporter
+          - url: /integrate/jobs/
+            title: Component Jobs
+          - url: /integrate/variables/
+            title: Variables
+            items:
+              - url: /integrate/variables/tutorial/
+                title: Tutorial
+          - url: /integrate/artifacts/
+            title: Artifacts
+            items:
+              - url: /integrate/artifacts/tutorial/
+                title: Tutorial
+      - url: /automate/
+        title: Automation/Common Tasks
+        items:
+          - url: /automate/run-job/
+            title: Run Job
+          - url: /automate/run-orchestration/
+            title: Run Orchestration
+          - url: /automate/set-schedule/
+            title: Set Schedule
+      - url: /cli/keboola-as-code/
+        title: Keboola as Code CLI
+        items:
+          - url: /cli/keboola-as-code/installation/
+            title: Installation
+          - url: /cli/keboola-as-code/getting-started/
+            title: Getting Started
+          - url: /cli/keboola-as-code/structure/
+            title: Structure
+          - url: /cli/keboola-as-code/commands/
+            title: Commands
+            items:
+              - url: /cli/keboola-as-code/commands/help/
+                title: help
+              - url: /cli/keboola-as-code/commands/status/
+                title: status
+              - url: /cli/keboola-as-code/commands/sync/
+                title: sync
+                items:
+                  - url: /cli/keboola-as-code/commands/sync/init/
+                    title: init
+                  - url: /cli/keboola-as-code/commands/sync/pull/
+                    title: pull
+                  - url: /cli/keboola-as-code/commands/sync/push/
+                    title: push
+                  - url: /cli/keboola-as-code/commands/sync/diff/
+                    title: diff
+              - url: /cli/keboola-as-code/commands/ci/
+                title: ci
+                items:
+                  - url: /cli/keboola-as-code/commands/ci/workflows/
+                    title: workflows
+              - url: /cli/keboola-as-code/commands/local/
+                title: local
+                items:
+                  - url: /cli/keboola-as-code/commands/local/create/
+                    title: create
+                    items:
+                      - url: /cli/keboola-as-code/commands/local/create/config/
+                        title: config
+                      - url: /cli/keboola-as-code/commands/local/create/row/
+                        title: row
+                  - url: /cli/keboola-as-code/commands/local/persist/
+                    title: persist
+                  - url: /cli/keboola-as-code/commands/local/encrypt/
+                    title: encrypt
+                  - url: /cli/keboola-as-code/commands/local/validate/
+                    title: validate
+                    items:
+                      - url: /cli/keboola-as-code/commands/local/validate/config/
+                        title: config
+                      - url: /cli/keboola-as-code/commands/local/validate/row/
+                        title: row
+                      - url: /cli/keboola-as-code/commands/local/validate/schema/
+                        title: schema
+                  - url: /cli/keboola-as-code/commands/local/fix-paths/
+                    title: fix-paths
+              - url: /cli/keboola-as-code/commands/remote/
+                title: remote
+                items:
+                  - url: /cli/keboola-as-code/commands/remote/create/
+                    title: create
+                    items:
+                      - url: /cli/keboola-as-code/commands/remote/create/branch/
+                        title: branch
+                      - url: /cli/keboola-as-code/commands/remote/create/bucket/
+                        title: bucket
+                  - url: /cli/keboola-as-code/commands/remote/file/
+                    title: file
+                    items:
+                      - url: /cli/keboola-as-code/commands/remote/file/download/
+                        title: download
+                      - url: /cli/keboola-as-code/commands/remote/file/upload/
+                        title: upload
+                  - url: /cli/keboola-as-code/commands/remote/job/
+                    title: job
+                    items:
+                      - url: /cli/keboola-as-code/commands/remote/job/run/
+                        title: run
+                  - url: /cli/keboola-as-code/commands/remote/table/
+                    title: table
+                    items:
+                      - url: /cli/keboola-as-code/commands/remote/table/create/
+                        title: create
+                      - url: /cli/keboola-as-code/commands/remote/table/upload/
+                        title: upload
+                      - url: /cli/keboola-as-code/commands/remote/table/download/
+                        title: download
+                      - url: /cli/keboola-as-code/commands/remote/table/preview/
+                        title: preview
+                      - url: /cli/keboola-as-code/commands/remote/table/detail/
+                        title: detail
+                      - url: /cli/keboola-as-code/commands/remote/table/import/
+                        title: import
+                      - url: /cli/keboola-as-code/commands/remote/table/unload/
+                        title: unload
+                  - url: /cli/keboola-as-code/commands/remote/workspace/
+                    title: workspace
+                    items:
+                      - url: /cli/keboola-as-code/commands/remote/workspace/create/
+                        title: create
+                      - url: /cli/keboola-as-code/commands/remote/workspace/delete/
+                        title: delete
+                      - url: /cli/keboola-as-code/commands/remote/workspace/detail/
+                        title: detail
+                      - url: /cli/keboola-as-code/commands/remote/workspace/list/
+                        title: list
+              - url: /cli/keboola-as-code/commands/dbt/
+                title: dbt
+                items:
+                  - url: /cli/keboola-as-code/commands/dbt/init/
+                    title: init
+                  - url: /cli/keboola-as-code/commands/dbt/generate/
+                    title: generate
+                    items:
+                      - url: /cli/keboola-as-code/commands/dbt/generate/profile/
+                        title: profile
+                      - url: /cli/keboola-as-code/commands/dbt/generate/sources/
+                        title: sources
+                      - url: /cli/keboola-as-code/commands/dbt/generate/env/
+                        title: env
+          - url: /cli/keboola-as-code/github-integration/
+            title: GitHub Integration
+          - url: /cli/keboola-as-code/devops-use-cases/
+            title: DevOps Use Cases
+          - url: /cli/keboola-as-code/dbt/
+            title: dbt
+
+
   - url: /external-integrations/
     title: External Integrations
     items:

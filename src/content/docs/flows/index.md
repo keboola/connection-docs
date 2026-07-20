@@ -2,6 +2,7 @@
 title: Conditional Flows
 slug: 'flows'
 redirect_from:
+    - /integrate/orchestrator/
     - /flows/conditional-flows/
 ---
 
@@ -48,7 +49,7 @@ You can also set up parallelization **within a component** (configuration), dire
 
 - Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. See also [Retry](#retry) for automatic retries of failed tasks.
 
-- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
+- To modify the parameters sent to the underlying [API call](/integrate/jobs/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
 
 ***Example of the advanced parameter:** changing a variable in transformation:*

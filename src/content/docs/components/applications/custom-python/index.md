@@ -112,7 +112,7 @@ print(ci.configuration.parameters)
 
 For the full `CommonInterface` reference — including reading input tables, writing output tables,
 working with files, state files, error handling, and logging — see the
-[Developer Documentation](https://developers.keboola.com/extend/component/tutorial/).
+[Developer Documentation](/extend/component/tutorial/).
 
 ## Using Kai to Configure Custom Python
 

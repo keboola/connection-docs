@@ -14,7 +14,7 @@ other operations are too difficult. Common data operations like joining, sorting
 faster to do in [SQL Transformations](/transformations/#backends).
 
 ## Environment
-The R script is executed in an isolated [environment](https://developers.keboola.com/extend/#component).
+The R script is executed in an isolated [environment](/extend/#component).
 The current R version is **4.0.5**, however it is possible to switch your configuration to run on other versions if available.
 
 ![Screenshot - Change Backend](/transformations/r-plain/change-backend.png)
@@ -32,7 +32,7 @@ The R script itself will be compiled to `/data/script.R`. To access your
 [mapped input and output](/transformations/mappings/) tables, use
 relative (`in/tables/file.csv`, `out/tables/file.csv`) or absolute (`/data/in/tables/file.csv`, `/data/out/tables/file.csv`) paths.
 To access downloaded files, use the `in/files/` or `/data/in/files/` path. If you want to dig really deep,
-have a look at the [full Common Interface specification](https://developers.keboola.com/extend/common-interface/).
+have a look at the [full Common Interface specification](/extend/common-interface/).
 Temporary files can be written to a `/tmp/` folder. Do not use the `/data/` folder for those files you do not wish to exchange with Keboola.
 
 ## R Script Requirements

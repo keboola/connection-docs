@@ -1877,3 +1877,55 @@ nav.sidebar {
   #ask-kai-drawer .ak-shell { width: 100vw; }
   #ak-fab { bottom: 20px; right: 16px; }
 }
+
+/* ============================================================================
+   TRANSITIONAL (phase 1 of the dev-docs migration) — REMOVE IN PHASE 2.
+   Marks sidebar entries migrated from developers.keboola.com with an accent
+   dot + a legend at the bottom of the sidebar. Scoped purely by URL prefix;
+   dies together with the temporary "Developer Docs" group.
+   ========================================================================== */
+
+/* dot on migrated pages */
+#starlight__sidebar a[href^="/extend/"]::before,
+#starlight__sidebar a[href^="/integrate/"]::before,
+#starlight__sidebar a[href^="/automate/"]::before,
+#starlight__sidebar a[href^="/cli/keboola-as-code"]::before,
+#starlight__sidebar a[href^="/overview/api/"]::before,
+#starlight__sidebar a[href^="/overview/encryption/"]::before {
+  content: "";
+  display: inline-block;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sl-color-accent);
+  margin-right: 0.45rem;
+  align-self: center;
+}
+
+/* dot on groups whose subtree is migrated (incl. the Developer Docs root) */
+#starlight__sidebar details:has(a[href^="/extend/"]) > summary .group-label::before,
+#starlight__sidebar details:has(a[href^="/integrate/"]) > summary .group-label::before,
+#starlight__sidebar details:has(a[href^="/automate/"]) > summary .group-label::before,
+#starlight__sidebar details:has(a[href^="/cli/keboola-as-code"]) > summary .group-label::before {
+  content: "";
+  display: inline-block;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sl-color-accent);
+  margin-right: 0.45rem;
+  align-self: center;
+}
+
+/* legend at the bottom of the sidebar */
+#starlight__sidebar .sidebar-content::after {
+  content: "\2022  migrated from developers.keboola.com";
+  display: block;
+  margin-top: auto;
+  padding: 0.75rem 0.25rem 0.25rem;
+  border-top: 1px solid var(--sl-color-hairline-light, var(--sl-color-gray-5));
+  font-size: var(--sl-text-xs);
+  color: var(--sl-color-gray-3);
+}

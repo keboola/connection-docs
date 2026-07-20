@@ -568,7 +568,7 @@ ALTER TABLE __<table_name>__ OWNER TO REPLICATION_GROUP;
 
 #### SSH tunnel
 
-You may opt to use an SSH Tunnel to secure your connection. The [developer documentation](https://developers.keboola.com/integrate/database/ provides detailed instructions for setting up an SSH tunnel.
+You may opt to use an SSH Tunnel to secure your connection. The [developer documentation](/components/extractors/database/ provides detailed instructions for setting up an SSH tunnel.
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
 
 ### Data Source
