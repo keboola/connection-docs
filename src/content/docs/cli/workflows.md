@@ -102,14 +102,14 @@ kbagent job detail --project prod --job-id 90878516
 
 ```bash
 kbagent agent create --name "Weekend triage" --type ai_agent \
-  --cron "0 6 * * 1" \
+  --cli claude --cron "0 6 * * 1" \
   --prompt "Review the weekend's failed jobs and post a triage summary"
-kbagent agent test           # dry-run the task now
-kbagent agent list           # what's scheduled
-kbagent agent runs           # past runs (drill in with run-detail / run-events)
+kbagent agent run <task-id>      # run it once right now (create prints the ID)
+kbagent agent list               # what's scheduled
+kbagent agent runs <task-id>     # past runs (drill in with run-detail / run-events)
 ```
 
-**Result:** every Monday at 6:00 an agent reviews the weekend's failures and writes up the triage — a standing task nobody has to remember. `agent cron-preview` shows the upcoming firing times.
+**Result:** every Monday at 6:00 an agent reviews the weekend's failures and writes up the triage — a standing task nobody has to remember. `agent cron-preview` shows the upcoming firing times. Scheduled firing lives in the server: keep `kbagent serve` running (task management and ad-hoc `agent run` work without it).
 
 ## Debug transformation SQL from the terminal
 

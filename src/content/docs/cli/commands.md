@@ -54,6 +54,8 @@ $ kbagent --json project list
 - **`job`** — `list`, `detail`, `run`, `terminate`.
 - **`storage`** — buckets, tables, and files (browse and manage).
 - **`lineage`** — cross-project, **column-level data lineage**: mermaid, HTML, or ER output, plus a local interactive viewer (`lineage server`).
+
+  ![The kbagent lineage browser: an interactive graph of the demo project's pipeline — Shopify extractor tables flowing through two Snowflake transformations into BDM output tables, with input/output-mapping edges and upstream/downstream controls](/cli/lineage-graph.png)
 - **`component`**, **`data-app`**, **`stream`**, **`sharing`**, **`kai`** (beta — `kai ask` queries Kai from the shell).
 
 ## Flows
@@ -73,9 +75,9 @@ $ kbagent --json project list
 
 ## Error codes
 
-With `--json`, failures return a stable string `code` you can branch on. kbagent defines stable string codes across 14 categories (auth/access, network, API, configuration, jobs, variables, storage, I/O, lineage, sharing, KAI, workspace/query, sync, encryption) — for example `INVALID_TOKEN`, `TIMEOUT`, `QUEUE_JOB_FAILED`, `UNKNOWN_ERROR`. The full list is in the CLI's [`docs/error-codes.md`](https://github.com/keboola/cli/blob/main/docs/error-codes.md).
+With `--json`, failures return a stable string `code` you can branch on, grouped into categories (auth/access, network, API, configuration, jobs, storage, sync, and more) — for example `INVALID_TOKEN`, `TIMEOUT`, `QUEUE_JOB_FAILED`, `UNKNOWN_ERROR`. The full list is in the CLI's [`docs/error-codes.md`](https://github.com/keboola/cli/blob/main/docs/error-codes.md).
 
-<!-- Error-code categories from keboola/cli docs/error-codes.md; count intentionally omitted (enum drifts faster than docs — Padak review 2026-07). -->
+<!-- Counts intentionally omitted (both code and category counts drift faster than docs — Padak reviews 2026-07). -->
 
 ## The full, live reference
 
