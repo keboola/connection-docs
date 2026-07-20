@@ -1,6 +1,8 @@
 ---
 title: kbagent command reference
 slug: 'cli/commands'
+sidebar:
+  label: Command Reference
 description: 'Reference for the kbagent CLI — global flags, JSON output, every command group and its subcommands (project, config, job, storage, flow, sync, branch, workspace, token, agent), and error codes.'
 ---
 
@@ -51,7 +53,8 @@ $ kbagent --json project list
 - **`config`** — `list`, `detail`, `search`, `update`, `delete`; rows (`row-create/update/delete`); variables (`variables-set/get/clear`); metadata; `oauth-url`.
 - **`job`** — `list`, `detail`, `run`, `terminate`.
 - **`storage`** — buckets, tables, and files (browse and manage).
-- **`component`**, **`data-app`**, **`stream`**, **`sharing`**, **`lineage`**, **`kai`** (beta).
+- **`lineage`** — cross-project, **column-level data lineage**: mermaid, HTML, or ER output, plus a local interactive viewer (`lineage server`).
+- **`component`**, **`data-app`**, **`stream`**, **`sharing`**, **`kai`** (beta — `kai ask` queries Kai from the shell).
 
 ## Flows
 
@@ -65,14 +68,14 @@ $ kbagent --json project list
 - **`sync`** — `init`, `pull`, `status`, `diff`, `push`, `clone`, `branch-link/unlink/status`.
 - **`encrypt`** — `values` (one-way encrypt `#`-prefixed secrets).
 - **`tool`** — call Keboola [MCP](/ai/mcp-server/) tools directly.
-- **`agent`** — scheduled agent tasks: `list`, `show`, `create`, `update`, `delete`, `run`, `runs`, `test`, `cron-preview`.
+- **`agent`** — **scheduled AI agents**: cron-driven agent tasks that run against your projects unattended ([recipe](/cli/workflows/#schedule-an-ai-agent)): `list`, `show`, `create`, `update`, `delete`, `run`, `runs`, `run-detail`, `run-events`, `test`, `prompt-improve`, `cron-preview`.
 - **`semantic-layer`**, **`dev-portal`**, **`http`**.
 
 ## Error codes
 
-With `--json`, failures return a stable string `code` you can branch on. kbagent defines ~52 codes across 14 categories (auth/access, network, API, configuration, jobs, variables, storage, I/O, lineage, sharing, KAI, workspace/query, sync, encryption) — for example `INVALID_TOKEN`, `TIMEOUT`, `QUEUE_JOB_FAILED`, `UNKNOWN_ERROR`. The full list is in the CLI's [`docs/error-codes.md`](https://github.com/keboola/cli/blob/main/docs/error-codes.md).
+With `--json`, failures return a stable string `code` you can branch on. kbagent defines stable string codes across 14 categories (auth/access, network, API, configuration, jobs, variables, storage, I/O, lineage, sharing, KAI, workspace/query, sync, encryption) — for example `INVALID_TOKEN`, `TIMEOUT`, `QUEUE_JOB_FAILED`, `UNKNOWN_ERROR`. The full list is in the CLI's [`docs/error-codes.md`](https://github.com/keboola/cli/blob/main/docs/error-codes.md).
 
-<!-- Error-code categories from keboola/cli docs/error-codes.md; ~52 codes. -->
+<!-- Error-code categories from keboola/cli docs/error-codes.md; count intentionally omitted (enum drifts faster than docs — Padak review 2026-07). -->
 
 ## The full, live reference
 

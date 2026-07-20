@@ -6,7 +6,9 @@ description: 'kbagent, the Keboola command-line interface — an AI-friendly CLI
 
 
 
-**kbagent** is Keboola's command-line interface: one tool to manage all your Keboola projects from the terminal. It's built to be equally comfortable in your hands and in an **AI coding agent's** — every command has structured JSON output and the whole thing sits behind a safety firewall you can tighten before handing it over.
+Your data platform now has a command line an AI can drive. **kbagent** connects your whole Keboola organization, puts a firewall around what an agent may touch, and lets it audit, fix, and build across every project at once — while you keep the veto on anything destructive.
+
+It's just as comfortable in your own hands: one tool for every project from the terminal, every command scriptable, with structured JSON output throughout.
 
 <!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
 
@@ -18,6 +20,8 @@ description: 'kbagent, the Keboola command-line interface — an AI-friendly CLI
 - **Build and schedule flows**, create SQL workspaces to debug transformations, and manage development branches.
 - **Version your project with GitOps** — pull configurations to local files, diff them, and push changes back.
 - **Search everything** — find a config, table, or flow by name or content across all connected projects.
+- **Trace data lineage** — cross-project, column-level lineage as mermaid, HTML, or ER diagrams, with a local interactive viewer.
+- **Schedule AI agents** — cron-driven agent tasks that watch jobs, triage failures, and report — unattended ([recipe](/cli/workflows/#schedule-an-ai-agent)).
 - **Hand work to an AI agent safely** — a read-only sandbox and a permission firewall let an agent operate Keboola without risk.
 
 ## In one minute
@@ -33,7 +37,7 @@ kbagent job list --limit 5
 kbagent search "customer_id"
 ```
 
-Everything the UI does — and a lot it doesn't — is a command away, scriptable, and safe to hand to an agent.
+A minute in, `doctor` has confirmed the connection, you've seen your last five job runs, and `search` is answering across every project you connected. Everything the UI does — and a lot it doesn't — is a command away, scriptable, and safe to hand to an agent.
 
 ## Why a CLI (and not just the UI)?
 

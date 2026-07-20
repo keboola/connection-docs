@@ -1,6 +1,8 @@
 ---
 title: How kbagent works
 slug: 'cli/concepts'
+sidebar:
+  label: How It Works
 description: 'The concepts behind the kbagent CLI — the connection and config model, multi-project and stacks, development-branch propagation, GitOps sync, and the permission firewall and agent sandboxing.'
 ---
 
@@ -14,7 +16,7 @@ This page explains the ideas behind [kbagent](/cli/) so the commands make sense.
 
 kbagent doesn't log in interactively. You register **connections** — a project alias, its stack URL, and a token — and kbagent stores them in a config file it reads on every command:
 
-- **Global config** (default): `~/Library/Application Support/keboola-agent-cli/config.json` on macOS. Shared across all your shells.
+- **Global config** (default): `~/Library/Application Support/keboola-agent-cli/config.json` on macOS, `~/.config/keboola-agent-cli/config.json` on Linux (`kbagent doctor` prints the active path). Shared across all your shells.
 - **Local config**: run `kbagent init` in a directory to create a project-scoped `.kbagent/` workspace. When present, it takes precedence over the global config, so different repos can target different projects.
 
 `kbagent doctor` tells you which config is in effect and whether each connection is healthy.

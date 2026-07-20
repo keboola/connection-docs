@@ -1,6 +1,8 @@
 ---
 title: Get started with kbagent
 slug: 'cli/getting-started'
+sidebar:
+  label: Get Started
 description: 'A guided first run of the kbagent CLI — install it, connect a Keboola project, verify with doctor, and run your first read commands. Plus multi-project and organization setup.'
 ---
 
@@ -24,7 +26,7 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Or with [uv](https://docs.astral.sh/uv/) (auto-updates, version-pinnable):
+    Or with [uv](https://docs.astral.sh/uv/) (easy to pin to a version or uninstall):
 
     ```bash
     uv tool install "git+https://github.com/keboola/cli"
@@ -37,7 +39,7 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Or with [uv](https://docs.astral.sh/uv/) (auto-updates, version-pinnable):
+    Or with [uv](https://docs.astral.sh/uv/) (easy to pin to a version or uninstall):
 
     ```bash
     uv tool install "git+https://github.com/keboola/cli"
@@ -52,7 +54,7 @@ Pick your operating system:
   </TabItem>
 </Tabs>
 
-{/* TODO(human-review): confirm the Windows/PowerShell install line and whether install.sh has a Windows equivalent. */}
+Whichever method you use, kbagent keeps itself current with its own startup update check (`kbagent update` runs one manually).
 
 Confirm it's on your `PATH` (all platforms):
 
@@ -60,12 +62,11 @@ Confirm it's on your `PATH` (all platforms):
 $ kbagent --version
 kbagent v0.66.0
 ```
-{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. TODO(human-review): confirm the Windows/PowerShell install line and whether install.sh has a Windows equivalent. */}
+{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. Windows/PowerShell uv path + install.sh being bash-only confirmed by Padak (review, v0.66.1). */}
 
 :::tip
 On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv/) without installing (`uvx --from 'git+https://github.com/keboola/cli' kbagent …`) — handy for a one-off or in CI.
 :::
-{/* TODO(human-review): confirm the uvx invocation name. */}
 
 ## Step 2 — Connect your project
 
@@ -78,7 +79,7 @@ kbagent project add --project prod \
 
 `prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
 
-{/* TODO(human-review, Jordan): confirm the exact single-project token type (Storage vs Master). */}
+A Storage API token is enough for browsing. Some commands need an admin (master) token — `token create` requires the `canManageTokens` permission, and creating branches or workspaces needs admin privileges.
 
 :::caution
 kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
@@ -101,7 +102,7 @@ Explore what's there. Recent jobs:
 ```bash
 kbagent job list --limit 5    # recent jobs (shown above)
 kbagent project list          # connected projects
-kbagent config list           # configurations in the default project
+kbagent config list           # configurations across all connected projects
 ```
 
 ## Step 5 — Search
@@ -142,7 +143,7 @@ KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
   org setup --org-id 123 --url https://connection.keboola.com --yes
 ```
 
-{/* TODO(human-review, Jordan): confirm org setup flags (--allow-env-manage-token required to read KBC_MANAGE_API_TOKEN; default-deny since 0.28.0), --project-ids vs --org-id, --token-expires-in. */}
+{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-ids / --yes correct; --token-expires-in lives on `project refresh`, not org setup. */}
 
 Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 

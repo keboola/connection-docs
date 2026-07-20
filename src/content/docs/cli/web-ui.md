@@ -1,6 +1,8 @@
 ---
 title: kbagent Web UI
 slug: 'cli/web-ui'
+sidebar:
+  label: Web UI
 description: 'Run the optional kbagent Web UI — a local browser dashboard for your Keboola projects: browse configurations, monitor jobs, search, and jump into workspaces, served by kbagent serve --ui.'
 ---
 
@@ -17,13 +19,13 @@ uv tool install --force --with 'keboola-cli[server]' 'git+https://github.com/keb
 kbagent serve --ui
 ```
 
-kbagent prints the local URL (default `http://127.0.0.1:8001/`) and opens it. The browser is authenticated via an HttpOnly cookie — no token in the URL or the page. The server is **localhost-only** by default.
+kbagent prints the local URL (default `http://127.0.0.1:8001/`) — open it in your browser. The browser is authenticated via an HttpOnly cookie — no token in the URL or the page. The server is **localhost-only** by default.
 
 <!-- Verified 2026-07-13: `kbagent serve --ui` (v0.66.0) serves the bundled React SPA against the connected project; screenshots below are project 264 (dummy Shopify data). -->
 
 ## Dashboard
 
-The home screen summarizes the active project — connected projects, agent tasks, Doctor issues, recent jobs — with an "ask the local AI" box and suggested next steps. The left rail groups everything the CLI can do: **Manage** (projects, branches, doctor), **Browse** (configs, components, storage, jobs, search), **Develop** (SQL workspaces, flows, schedules, data apps), **Insights** (lineage, semantic layer), and **AI / Tools**.
+The home screen summarizes the active project — connected projects, agent tasks, Doctor issues, recent jobs — with an "ask the local AI" box and suggested next steps. That AI box makes this a local AI dashboard over everything kbagent can see: ask about your projects right there, no browser tab to Keboola needed. The left rail groups everything the CLI can do: **Manage** (projects, branches, doctor), **Browse** (configs, components, storage, jobs, search), **Develop** (SQL workspaces, flows, schedules, data apps), **Insights** (lineage, semantic layer), and **AI / Tools**.
 
 ![The kbagent Web UI dashboard for project docs-demo: summary tiles (projects connected, agent tasks, Doctor issues, recent jobs), an ask-the-AI box, scheduled agents, and suggested next steps, with the full left navigation](/cli/webui-dashboard.png)
 

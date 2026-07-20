@@ -1,6 +1,8 @@
 ---
 title: kbagent for AI agents
 slug: 'cli/for-agents'
+sidebar:
+  label: Use with AI Agents
 description: 'Give an AI coding agent safe control of Keboola with kbagent — the Claude Code plugin and /keboola subagent, read-only sandboxing, the conversation ID, and the kbagent context reference.'
 ---
 
@@ -35,7 +37,7 @@ It prints usage instructions and the complete, version-matched command list as M
 
 ## Sandbox the agent
 
-Don't give an agent write access it doesn't need. kbagent's [permission firewall](/cli/workflows/#permissions-and-sandboxing) lets you scope a session or a workspace:
+Don't give an agent write access it doesn't need. kbagent's [permission firewall](/cli/workflows/#run-kbagent-safely-unattended-or-via-an-agent) lets you scope a session or a workspace:
 
 ```bash
 # Read-only local workspace for an agent
@@ -60,9 +62,9 @@ export KBAGENT_CONVERSATION_ID="<unique-id>"
 - **kbagent** — the agent's hands on your projects from the terminal, with sandboxing.
 - **[MCP server](/ai/mcp-server/)** — direct tool calls over MCP; kbagent can also call MCP tools via `kbagent tool`.
 - **[AI Kit](/ai/ai-kit/)** — coding-assistant plugins for building Keboola components and apps.
-- **[Kai](/kai/)** — the in-product assistant; reachable from the CLI via `kbagent kai` *(beta)*.
+- **[Kai](/kai/)** — the in-product assistant; `kbagent kai ask -m "why did last night's load fail?"` puts the same assistant in your shell *(beta)*.
 
-<!-- VERIFY(owner): confirm the plugin install string `kbagent@keboola-agent-cli` and the /keboola subagent description against the current repo. -->
+<!-- Plugin install string (marketplace `keboola-agent-cli`, plugin `kbagent`) and the /keboola → keboola-expert subagent description confirmed by Padak against source (review, v0.66.1). -->
 
 ---
 
