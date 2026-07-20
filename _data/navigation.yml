@@ -5,6 +5,12 @@ items:
   - url: /overview/
     title: Keboola Overview
 
+  - url: /how-to/
+    title: How-to Guides
+    items:
+      - url: /how-to/load-data-from-snowflake/
+        title: How do I load data from Snowflake?
+
   - url: /tutorial/
     title: Getting Started Tutorial
     items:

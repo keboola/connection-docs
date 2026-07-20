@@ -5,6 +5,14 @@ export const sidebar = [
   { label: "Home", slug: "index" },
   { slug: "overview" },
   {
+    label: "How-to Guides",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "how-to" },
+      { slug: "how-to/load-data-from-snowflake" },
+    ],
+  },
+  {
     label: "Getting Started Tutorial",
     collapsed: true,
     items: [
