@@ -415,6 +415,15 @@ export const sidebar = [
               { slug: "components/writers/other/yourpass" },
             ],
           },
+          {
+            label: "Generic Writer",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/generic-writer" },
+              { slug: "components/writers/generic-writer/configuration" },
+              { slug: "components/writers/generic-writer/configuration-examples" },
+            ],
+          },
         ],
       },
       {
@@ -682,15 +691,6 @@ export const sidebar = [
                 ],
               },
               { slug: "extend/component/deployment" },
-            ],
-          },
-          {
-            label: "Generic Writer",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "extend/generic-writer" },
-              { slug: "extend/generic-writer/configuration" },
-              { slug: "extend/generic-writer/configuration-examples" },
             ],
           },
           {

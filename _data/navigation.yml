@@ -580,6 +580,14 @@ items:
               - url: /components/writers/other/yourpass/
                 title: YourPass
 
+          - url: /components/writers/generic-writer/
+            title: Generic Writer
+            items:
+              - url: /components/writers/generic-writer/configuration/
+                title: Configuration
+              - url: /components/writers/generic-writer/configuration-examples/
+                title: Configuration Examples
+
       - url: /components/applications/
         title: Applications
         items:
@@ -888,13 +896,6 @@ items:
                     title: Default Configuration
               - url: /extend/component/deployment/
                 title: Deployment
-          - url: /extend/generic-writer/
-            title: Generic Writer
-            items:
-              - url: /extend/generic-writer/configuration/
-                title: Configuration
-              - url: /extend/generic-writer/configuration-examples/
-                title: Configuration Examples
           - url: /extend/common-interface/
             title: Common Interface
             items:
