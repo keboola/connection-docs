@@ -5,7 +5,7 @@ slug: 'integrate/variables/tutorial'
 
 
 This tutorial will guide you through basic usage of [Variables](/integrate/variables/) in the component configuration.
-The result will be the parametrized configuration of the [Generic Extractor](/extend/generic-extractor),
+The result will be the parametrized configuration of the [Generic Extractor](/components/extractors/generic-extractor/),
 but this approach can be applied to any component. 
 
 In the examples, we use the `curl` console tool to interact with our APIs.

@@ -44,7 +44,7 @@ Additionally, the following options can be specified:
 
 The options will cause the specified rows to be deleted from the source table before the new
 table is imported. See an [example](/extend/common-interface/config-file/#output-mapping---delete-rows).
-Using this option makes sense only with [incremental loads](/extend/generic-extractor/incremental/).
+Using this option makes sense only with [incremental loads](/components/extractors/generic-extractor/incremental/).
 
 The `metadata` and `column_metadata` fields allow you to set
 Metadata for the table and its columns.

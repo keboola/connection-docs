@@ -106,7 +106,7 @@ Created new config "main/extractor/ex-generic-v2/wiki"
 ```
 
 Edit file `main/extractor/ex-generic-v2/wiki/config.json` as 
-a [Generic Extractor](/extend/generic-extractor/) configuration. A super basic 
+a [Generic Extractor](/components/extractors/generic-extractor/) configuration. A super basic 
 configuration could look like this:
 
 ```json

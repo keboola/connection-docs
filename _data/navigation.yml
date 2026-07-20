@@ -408,6 +408,91 @@ items:
               - url: /components/extractors/other/yourpass/
                 title: YourPass
 
+          - url: /components/extractors/generic-extractor/
+            title: Generic Extractor Reference
+            items:
+              - url: /components/extractors/generic-extractor/tutorial/
+                title: Generic Extractor Tutorial
+                items:
+                  - url: /components/extractors/generic-extractor/tutorial/rest/
+                    title: REST HTTP API Introduction
+                  - url: /components/extractors/generic-extractor/tutorial/json/
+                    title: JSON Introduction
+                  - url: /components/extractors/generic-extractor/tutorial/basic/
+                    title: Basic Configuration
+                  - url: /components/extractors/generic-extractor/tutorial/pagination/
+                    title: Pagination Tutorial
+                  - url: /components/extractors/generic-extractor/tutorial/jobs/
+                    title: Jobs Tutorial
+                  - url: /components/extractors/generic-extractor/tutorial/mapping/
+                    title: Mapping Tutorial
+              - url: /components/extractors/generic-extractor/configuration/
+                title: Configuration
+                items:
+                  - url: /components/extractors/generic-extractor/configuration/api/
+                    title: API Configuration
+                    items:
+                      - url: /components/extractors/generic-extractor/configuration/api/pagination/
+                        title: Pagination
+                        items:
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/response-url/
+                            title: Response URL Scroller
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/response-param/
+                            title: Response Parameter Scroller
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/offset/
+                            title: Offset Scroller
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/pagenum/
+                            title: Page Number Scroller
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/cursor/
+                            title: Cursor Scroller
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/multiple/
+                            title: Multiple Scrollers
+                      - url: /components/extractors/generic-extractor/configuration/api/authentication/
+                        title: Authentication
+                        items:
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/query/
+                            title: Query
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/basic/
+                            title: Basic
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/bearer_token/
+                            title: Bearer Token
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/api_key/
+                            title: API Key
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/login/
+                            title: Login
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth_cc/
+                            title: OAuth 2.0 Client Credentials
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth10/
+                            title: OAuth 1.0
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth20/
+                            title: OAuth 2.0
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth20-login/
+                            title: Login using OAuth 2.0
+                  - url: /components/extractors/generic-extractor/configuration/config/
+                    title: Extraction Configuration
+                    items:
+                      - url: /components/extractors/generic-extractor/configuration/config/jobs/
+                        title: Jobs
+                        items:
+                          - url: /components/extractors/generic-extractor/configuration/config/jobs/children/
+                            title: Child Jobs
+                      - url: /components/extractors/generic-extractor/configuration/config/mappings/
+                        title: Mappings
+                  - url: /components/extractors/generic-extractor/configuration/iterations/
+                    title: Iterations
+                  - url: /components/extractors/generic-extractor/configuration/ssh-proxy/
+                    title: SSH Proxy Configuration
+              - url: /components/extractors/generic-extractor/map/
+                title: Configuration Map
+              - url: /components/extractors/generic-extractor/functions/
+                title: Functions
+              - url: /components/extractors/generic-extractor/incremental/
+                title: Incremental Extraction
+              - url: /components/extractors/generic-extractor/running/
+                title: Running Generic Extractor
+              - url: /components/extractors/generic-extractor/publish/
+                title: Publishing Component
+
       - url: /components/writers/
         title: Data Destination Connectors
         items:
@@ -803,90 +888,6 @@ items:
                     title: Default Configuration
               - url: /extend/component/deployment/
                 title: Deployment
-          - url: /extend/generic-extractor/
-            title: Generic Extractor
-            items:
-              - url: /extend/generic-extractor/tutorial/
-                title: Generic Extractor Tutorial
-                items:
-                  - url: /extend/generic-extractor/tutorial/rest/
-                    title: REST HTTP API Introduction
-                  - url: /extend/generic-extractor/tutorial/json/
-                    title: JSON Introduction
-                  - url: /extend/generic-extractor/tutorial/basic/
-                    title: Basic Configuration
-                  - url: /extend/generic-extractor/tutorial/pagination/
-                    title: Pagination Tutorial
-                  - url: /extend/generic-extractor/tutorial/jobs/
-                    title: Jobs Tutorial
-                  - url: /extend/generic-extractor/tutorial/mapping/
-                    title: Mapping Tutorial
-              - url: /extend/generic-extractor/configuration/
-                title: Configuration
-                items:
-                  - url: /extend/generic-extractor/configuration/api/
-                    title: API Configuration
-                    items:
-                      - url: /extend/generic-extractor/configuration/api/pagination/
-                        title: Pagination
-                        items:
-                          - url: /extend/generic-extractor/configuration/api/pagination/response-url/
-                            title: Response URL Scroller
-                          - url: /extend/generic-extractor/configuration/api/pagination/response-param/
-                            title: Response Parameter Scroller
-                          - url: /extend/generic-extractor/configuration/api/pagination/offset/
-                            title: Offset Scroller
-                          - url: /extend/generic-extractor/configuration/api/pagination/pagenum/
-                            title: Page Number Scroller
-                          - url: /extend/generic-extractor/configuration/api/pagination/cursor/
-                            title: Cursor Scroller
-                          - url: /extend/generic-extractor/configuration/api/pagination/multiple/
-                            title: Multiple Scrollers
-                      - url: /extend/generic-extractor/configuration/api/authentication/
-                        title: Authentication
-                        items:
-                          - url: /extend/generic-extractor/configuration/api/authentication/query/
-                            title: Query
-                          - url: /extend/generic-extractor/configuration/api/authentication/basic/
-                            title: Basic
-                          - url: /extend/generic-extractor/configuration/api/authentication/bearer_token/
-                            title: Bearer Token
-                          - url: /extend/generic-extractor/configuration/api/authentication/api_key/
-                            title: API Key
-                          - url: /extend/generic-extractor/configuration/api/authentication/login/
-                            title: Login
-                          - url: /extend/generic-extractor/configuration/api/authentication/oauth_cc/
-                            title: OAuth 2.0 Client Credentials
-                          - url: /extend/generic-extractor/configuration/api/authentication/oauth10/
-                            title: OAuth 1.0
-                          - url: /extend/generic-extractor/configuration/api/authentication/oauth20/
-                            title: OAuth 2.0
-                          - url: /extend/generic-extractor/configuration/api/authentication/oauth20-login/
-                            title: Login using OAuth 2.0
-                  - url: /extend/generic-extractor/configuration/config/
-                    title: Extraction Configuration
-                    items:
-                      - url: /extend/generic-extractor/configuration/config/jobs/
-                        title: Jobs
-                        items:
-                          - url: /extend/generic-extractor/configuration/config/jobs/children/
-                            title: Child Jobs
-                      - url: /extend/generic-extractor/configuration/config/mappings/
-                        title: Mappings
-                  - url: /extend/generic-extractor/configuration/iterations/
-                    title: Iterations
-                  - url: /extend/generic-extractor/configuration/ssh-proxy/
-                    title: SSH Proxy Configuration
-              - url: /extend/generic-extractor/map/
-                title: Configuration Map
-              - url: /extend/generic-extractor/functions/
-                title: Functions
-              - url: /extend/generic-extractor/incremental/
-                title: Incremental Extraction
-              - url: /extend/generic-extractor/running/
-                title: Running Generic Extractor
-              - url: /extend/generic-extractor/publish/
-                title: Publishing Component
           - url: /extend/generic-writer/
             title: Generic Writer
             items:

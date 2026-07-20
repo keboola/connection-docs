@@ -6,16 +6,16 @@ slug: 'extend/generic-writer'
 
 Generic Writer is a [Keboola component](/overview/) that allows you to send any type of HTTP requests with or without data to arbitrary HTTP endpoints. 
 
-It is a counterpart to the [Generic Extractor](/extend/generic-extractor) that allows you to extract data from virtually any API.
+It is a counterpart to the [Generic Extractor](/components/extractors/generic-extractor/) that allows you to extract data from virtually any API.
 
 The core concepts and configuration of the writer are also quite similar to the Generic Extractor, so it should be easy to 
 configure for anyone familiar with the extractor.
 
 ## Generic Writer Requirements
-The requirements are the same as for the [Generic Extractor](/extend/generic-extractor/#generic-extractor-requirements).
+The requirements are the same as for the [Generic Extractor](/components/extractors/generic-extractor/#generic-extractor-requirements).
 No programming skills or additional tools are required. You just need to do two easy things before you start:
 
-- Learn how to [write JSON](/extend/generic-extractor/tutorial/json/).
+- Learn how to [write JSON](/components/extractors/generic-extractor/tutorial/json/).
 - Have the documentation of your chosen API at hand.
 
 ## Functionality Notes

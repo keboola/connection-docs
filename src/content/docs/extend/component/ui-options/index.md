@@ -114,5 +114,5 @@ The configuration provided in this input is available in the `authorization` sec
 [configuration file](/extend/common-interface/config-file/#configuration-file-structure).
 
 ## genericTemplatesUI
-This flag is used to provide a UI for components based on the [Generic Extractor](/extend/generic-extractor/). It allows the end user to select a
-[Generic Extractor template](/extend/generic-extractor/publish/).
+This flag is used to provide a UI for components based on the [Generic Extractor](/components/extractors/generic-extractor/). It allows the end user to select a
+[Generic Extractor template](/components/extractors/generic-extractor/publish/).
