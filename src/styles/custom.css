@@ -1436,7 +1436,24 @@ nav.sidebar {
   margin: 0;
   border: 0;
   border-radius: 0;
-  min-width: 100%;
+  /* Starlight defaults tables to display:block (its own scroll), which
+     collapses the table to content width and left-packs it inside our
+     full-width wrapper, leaving empty space on the right. Force real table
+     layout at full width: cells wrap normally and fill the wrapper; only when
+     the content genuinely can't fit does the table exceed the wrapper and the
+     wrapper scrolls horizontally. */
+  display: table;
+  width: 100%;
+}
+
+/* Fallback for raw HTML <table> blocks: the markdown table-scroll wrapper only
+   catches mdast table nodes, and hand-written <table> markup can split across
+   several HTML nodes, so it stays unwrapped. Make any unwrapped, non-spec,
+   non-status table scroll on its own instead of clipping under the TOC. */
+.sl-markdown-content
+  table:not(.beacon-spec-table):not(.beacon-status-table):not(:where(.beacon-table-scroll *)):not(:where(.not-content *)) {
+  display: block;
+  overflow-x: auto;
 }
 
 /* Instant view transitions */
@@ -1559,7 +1576,9 @@ nav.sidebar {
 }
 .ak-msg { display: flex; }
 .ak-msg-user { justify-content: flex-end; }
-.ak-msg-assistant { justify-content: flex-start; }
+/* Column so the appended .ak-sources block stacks BELOW the bubble instead of
+   becoming a side-by-side flex sibling (which pushed sources off to the right). */
+.ak-msg-assistant { flex-direction: column; align-items: flex-start; }
 .ak-bubble {
   max-width: 92%;
   padding: 10px 14px;
