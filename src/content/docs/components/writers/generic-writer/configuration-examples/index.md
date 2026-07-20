@@ -1,6 +1,8 @@
 ---
 title: Generic Writer Configuration Examples
-slug: 'extend/generic-writer/configuration-examples'
+slug: 'components/writers/generic-writer/configuration-examples'
+redirect_from:
+    - /extend/generic-writer/configuration-examples/
 ---
 
 

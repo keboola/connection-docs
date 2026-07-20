@@ -1,6 +1,8 @@
 ---
 title: Generic Writer
-slug: 'extend/generic-writer'
+slug: 'components/writers/generic-writer'
+redirect_from:
+    - /extend/generic-writer/
 ---
 
 
@@ -44,5 +46,5 @@ allows you to leverage secure [encripted parameters](overview/encryption/) and d
 - Calling arbitrary endpoints with parameters defined on the input
     - E.g., `DELETE api.com/[[user_id]]` where `user_id` is a column in the input table
 
-For real configuration examples, see the [configuration examples section](/extend/generic-writer/configuration-examples)
+For real configuration examples, see the [configuration examples section](/components/writers/generic-writer/configuration-examples)
  or the collection of [functional examples](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/).

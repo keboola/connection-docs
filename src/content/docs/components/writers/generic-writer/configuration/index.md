@@ -1,6 +1,8 @@
 ---
 title: Generic Writer Configuration 
-slug: 'extend/generic-writer/configuration'
+slug: 'components/writers/generic-writer/configuration'
+redirect_from:
+    - /extend/generic-writer/configuration/
 ---
 
 
@@ -10,7 +12,7 @@ table and single endpoint per configuration.
 The data can be sent in two ways:
 
 1. Send all content at once - either BINARY or JSON in chunks
-2. [Iterate](/extend/generic-writer/configuration/#iterate-by-columns) through each row - where the data is sent in
+2. [Iterate](/components/writers/generic-writer/configuration/#iterate-by-columns) through each row - where the data is sent in
    iterations specified in the input data. By default 1 row = 1 iteration. This allows to change the endpoint
    dynamically based on the input using placeholders: `www.example.com/api/user/{{id}}`. Or sending data with different
    user parameters that are present in the input table.
@@ -19,40 +21,40 @@ The data can be sent in two ways:
 
 *Click on the section names if you want to learn more.*
 
-- [**api**](/extend/generic-writer/configuration/#api) --- [REQUIRED] sets the basic properties of the API.
-    - [**base_url**](/extend/generic-writer/configuration/#base-url) ---  [REQUIRED] defines the URL to which the API requests
+- [**api**](/components/writers/generic-writer/configuration/#api) --- [REQUIRED] sets the basic properties of the API.
+    - [**base_url**](/components/writers/generic-writer/configuration/#base-url) ---  [REQUIRED] defines the URL to which the API requests
       should be sent.
-    - [**authentication**](/extend/generic-writer/configuration/#authentication) --- needs to be configured for any API
+    - [**authentication**](/components/writers/generic-writer/configuration/#authentication) --- needs to be configured for any API
       which is not public.
-    - [**retry_config**](/extend/generic-writer/configuration/#retry-config) --- automatically, and repeatedly, retries
+    - [**retry_config**](/components/writers/generic-writer/configuration/#retry-config) --- automatically, and repeatedly, retries
       failed HTTP requests.
-    - [**default_query_parameters**](/extend/generic-writer/configuration/#default-query-parameters) --- sets the
+    - [**default_query_parameters**](/components/writers/generic-writer/configuration/#default-query-parameters) --- sets the
       default query parameters sent with each API call.
-    - [**default_headers**](/extend/generic-writer/configuration/#default-headers) --- sets the default query headers
+    - [**default_headers**](/components/writers/generic-writer/configuration/#default-headers) --- sets the default query headers
       sent with each API call.
-    - [**ssl_verification**](/extend/generic-writer/configuration/#ssl-verification) --- allows turning of the SSL certificate
+    - [**ssl_verification**](/components/writers/generic-writer/configuration/#ssl-verification) --- allows turning of the SSL certificate
       verification. Use with caution.
-    - [**timeout**](/extend/generic-writer/configuration/#timeout) --- maximum time in seconds for which the component
+    - [**timeout**](/components/writers/generic-writer/configuration/#timeout) --- maximum time in seconds for which the component
       waits after each request (defaults to None if not set).
-- [**user_parameters**](/extend/generic-writer/configuration/#user-parameters) --- user parameters to be used in various
+- [**user_parameters**](/components/writers/generic-writer/configuration/#user-parameters) --- user parameters to be used in various
   contexts, e.g. passwords. Supports dynamic functions.
-- [**request_parameters**](/extend/generic-writer/configuration/#request-parameters) --- [REQUIRED] HTTP parameters of the request
-    - [**method**](/extend/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
-    - [**endpoint_path**](/extend/generic-writer/configuration/#enpoint-path) --- [REQUIRED] relative path of the endpoint.
-    - [**query_parameters**](/extend/generic-writer/configuration/#query-parameters) --- query parameters sent with each
+- [**request_parameters**](/components/writers/generic-writer/configuration/#request-parameters) --- [REQUIRED] HTTP parameters of the request
+    - [**method**](/components/writers/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
+    - [**endpoint_path**](/components/writers/generic-writer/configuration/#enpoint-path) --- [REQUIRED] relative path of the endpoint.
+    - [**query_parameters**](/components/writers/generic-writer/configuration/#query-parameters) --- query parameters sent with each
       request
-    - [**headers**](/extend/generic-writer/configuration/#headers) --- headers sent with each request
-- [**request_content**](/extend/generic-writer/configuration/#request-content) --- [REQUIRED] defines how the data is sent
-    - [**content_type**](/extend/generic-writer/configuration/#content-type) --- [REQUIRED] defines how the data is transferred (
+    - [**headers**](/components/writers/generic-writer/configuration/#headers) --- headers sent with each request
+- [**request_content**](/components/writers/generic-writer/configuration/#request-content) --- [REQUIRED] defines how the data is sent
+    - [**content_type**](/components/writers/generic-writer/configuration/#content-type) --- [REQUIRED] defines how the data is transferred (
       JSON, binary file, Empty, etc.)
-    - [**json_mapping**](/extend/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in
+    - [**json_mapping**](/components/writers/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in
       case of JSON content type.
-    - [**iterate_by_columns**](/extend/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in
+    - [**iterate_by_columns**](/components/writers/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in
       the input data that are excluded from the content and may be used instead of placeholders within the
       request_options. The input table is iterated row by row, e.g. 1 row = 1 request
-- [**debug**](/extend/generic-writer/configuration/#debug) --- Turns on more verbose logging for debugging purposes.
+- [**debug**](/components/writers/generic-writer/configuration/#debug) --- Turns on more verbose logging for debugging purposes.
 
-There are also simple pre-defined [**functions**](/extend/generic-writer/configuration/#dynamic-functions) available,
+There are also simple pre-defined [**functions**](/components/writers/generic-writer/configuration/#dynamic-functions) available,
 adding extra flexibility when needed.
 
 ### Configuration Map
@@ -148,41 +150,41 @@ navigate between them.
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Api
-    $("span:contains('\"debug\"')").wrap("<a href='/extend/generic-writer/configuration/#debug'></a>");
-    $("span:contains('\"api\"')").wrap("<a href='/extend/generic-writer/configuration/#api'></a>");
-    $("span:contains('\"base_url\"')").wrap("<a href='/extend/generic-writer/configuration/#base-url'></a>");
-    $("span:contains('\"default_query_parameters\"')").wrap("<a href='/extend/generic-writer/configuration/#default-query-parameters'></a>");
-    $("span:contains('\"default_headers\"')").first().wrap("<a href='/extend/generic-writer/configuration/#default-headers'></a>");
-    $("span:contains('\"retry_config\"')").first().wrap("<a href='/extend/generic-writer/configuration/#retry-config'></a>");
-    $("span:contains('\"authentication\"')").first().wrap("<a href='/extend/generic-writer/configuration/#authentication '></a>");
+    $("span:contains('\"debug\"')").wrap("<a href='/components/writers/generic-writer/configuration/#debug'></a>");
+    $("span:contains('\"api\"')").wrap("<a href='/components/writers/generic-writer/configuration/#api'></a>");
+    $("span:contains('\"base_url\"')").wrap("<a href='/components/writers/generic-writer/configuration/#base-url'></a>");
+    $("span:contains('\"default_query_parameters\"')").wrap("<a href='/components/writers/generic-writer/configuration/#default-query-parameters'></a>");
+    $("span:contains('\"default_headers\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#default-headers'></a>");
+    $("span:contains('\"retry_config\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#retry-config'></a>");
+    $("span:contains('\"authentication\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#authentication '></a>");
 
-    $("span:contains('\"user_parameters\"')").first().wrap("<a href='/extend/generic-writer/configuration/#user-parameters '></a>");
+    $("span:contains('\"user_parameters\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#user-parameters '></a>");
 
     // Request options
-    $("span:contains('\"request_parameters\"')").wrap("<a href='/extend/generic-writer/configuration/#request-parameters'></a>");
-    $("span:contains('\"api_request\"')").wrap("<a href='/extend/generic-writer/configuration/#api-request'></a>");
-    $("span:contains('\"method\"')").wrap("<a href='/extend/generic-writer/configuration/#method'></a>");
-    $("span:contains('\"endpoint_path\"')").first().wrap("<a href='/extend/generic-writer/configuration/#endpoint-path'></a>");
-    $("span:contains('\"headers\"')").first().wrap("<a href='/extend/generic-writer/configuration/#headers'></a>");
-    $("span:contains('\"query_parameters\"')").first().wrap("<a href='/extend/generic-writer/configuration/#query-parameters'></a>");
+    $("span:contains('\"request_parameters\"')").wrap("<a href='/components/writers/generic-writer/configuration/#request-parameters'></a>");
+    $("span:contains('\"api_request\"')").wrap("<a href='/components/writers/generic-writer/configuration/#api-request'></a>");
+    $("span:contains('\"method\"')").wrap("<a href='/components/writers/generic-writer/configuration/#method'></a>");
+    $("span:contains('\"endpoint_path\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#endpoint-path'></a>");
+    $("span:contains('\"headers\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#headers'></a>");
+    $("span:contains('\"query_parameters\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#query-parameters'></a>");
 
     // Content
-    $("span:contains('\"request_content\"')").first().wrap("<a href='/extend/generic-writer/configuration/#request-content'></a>");
-    $("span:contains('\"content_type\"')").first().wrap("<a href='/extend/generic-writer/configuration/#content-type'></a>");
+    $("span:contains('\"request_content\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#request-content'></a>");
+    $("span:contains('\"content_type\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#content-type'></a>");
 
     // JSON CONFIG
-    $("span:contains('\"json_mapping\"')").wrap("<a href='/extend/generic-writer/configuration/#json-mapping'></a>");
-    $("span:contains('\"chunk_size\"')").wrap("<a href='/extend/generic-writer/configuration/#chunk_size'></a>");
-    $("span:contains('\"nesting_delimiter\"')").wrap("<a href='/extend/generic-writer/configuration/#nesting-delimiter'></a>");
-    $("span:contains('\"request_data_wrapper\"')").wrap("<a href='/extend/generic-writer/configuration/#request-data-wrapper'></a>");
-    $("span:contains('\"autodetect\"')").first().wrap("<a href='/extend/generic-writer/configuration/#autodetect'></a>");
-    $("span:contains('\"column_data_types\"')").wrap("<a href='/extend/generic-writer/configuration/#column-data-types'></a>");
-    $("span:contains('\"datatype_override\"')").wrap("<a href='/extend/generic-writer/configuration/#column-datatype-override'></a>");
-    $("span:contains('\"column_names_override\"')").wrap("<a href='/extend/generic-writer/configuration/#datatype-override'></a>");
-    $("span:contains('\"iterate_by_columns\"')").wrap("<a href='/extend/generic-writer/configuration/#iterate-by-columns'></a>");
+    $("span:contains('\"json_mapping\"')").wrap("<a href='/components/writers/generic-writer/configuration/#json-mapping'></a>");
+    $("span:contains('\"chunk_size\"')").wrap("<a href='/components/writers/generic-writer/configuration/#chunk_size'></a>");
+    $("span:contains('\"nesting_delimiter\"')").wrap("<a href='/components/writers/generic-writer/configuration/#nesting-delimiter'></a>");
+    $("span:contains('\"request_data_wrapper\"')").wrap("<a href='/components/writers/generic-writer/configuration/#request-data-wrapper'></a>");
+    $("span:contains('\"autodetect\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#autodetect'></a>");
+    $("span:contains('\"column_data_types\"')").wrap("<a href='/components/writers/generic-writer/configuration/#column-data-types'></a>");
+    $("span:contains('\"datatype_override\"')").wrap("<a href='/components/writers/generic-writer/configuration/#column-datatype-override'></a>");
+    $("span:contains('\"column_names_override\"')").wrap("<a href='/components/writers/generic-writer/configuration/#datatype-override'></a>");
+    $("span:contains('\"iterate_by_columns\"')").wrap("<a href='/components/writers/generic-writer/configuration/#iterate-by-columns'></a>");
 
     // Configuration
-    $("span:contains('\"debug\"')").wrap("<a href='/extend/generic-writer/configuration/#debug'></a>");
+    $("span:contains('\"debug\"')").wrap("<a href='/components/writers/generic-writer/configuration/#debug'></a>");
 
 }, false);
 </script>
@@ -395,10 +397,10 @@ All parameters defined here can be then referenced using the `{"attr":"PARAMETER
 in the following sections:
 
 - in the `user_parameters` section itself.
-- [`api.default_query_parameters`](/extend/generic-writer/configuration/#default-query-parameters)
-- [`api.default_headers`](/extend/generic-writer/configuration/#default-headers)
-- [`request_parameters.headers`](/extend/generic-writer/configuration/#headers)
-- [`request_parameters.query parameters`](/extend/generic-writer/configuration/#query-parameters)
+- [`api.default_query_parameters`](/components/writers/generic-writer/configuration/#default-query-parameters)
+- [`api.default_headers`](/components/writers/generic-writer/configuration/#default-headers)
+- [`request_parameters.headers`](/components/writers/generic-writer/configuration/#headers)
+- [`request_parameters.query parameters`](/components/writers/generic-writer/configuration/#query-parameters)
 
 See
 example [010](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/010-simple-json-user-parameters-various)
@@ -427,7 +429,7 @@ e.g. when `base_url` is set to `https://example.com/api` and `endpoint_path` to 
 is `https://example.com/api/customer`
 
 **NOTE** That it is possible to change the `enpoint_path` dynamically
-using [iteration columns](/extend/generic-writer/configuration/#iterate-by-columns) e.g. `/orders/[[id]]` as seen
+using [iteration columns](/components/writers/generic-writer/configuration/#iterate-by-columns) e.g. `/orders/[[id]]` as seen
 in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/005-json-iterations/)
 
 ```json
@@ -866,7 +868,7 @@ The function takes two arguments:
 }
 ```
 
-The above value is then available in [supported contexts](/extend/generic-writer/configuration/#referencing-parameters)
+The above value is then available in [supported contexts](/components/writers/generic-writer/configuration/#referencing-parameters)
 as:
 
 ```json
