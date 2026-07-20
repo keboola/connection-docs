@@ -88,7 +88,7 @@ The expected behavior of the above component types can be described in more deta
 - Transformation -- represents a transformation engine. The UI treats these components specially and expects that they have similar capabilities
 and configuration options. These are created by Keboola. If you wish to bring your own, please contact us first.
 - Other -- this component type has a special role in the UI, it has no standard component UI. Notable "other" components are:
-    - `keboola.variables` -- Component for storing [variables](/integrate/variables/) configurations. Use the standard [configurations API](https://api.keboola.com/?service=storage#tag--Component-Configurations). No jobs can be made.
+    - `keboola.variables` -- Component for storing [variables](/transformations/variables/api/) configurations. Use the standard [configurations API](https://api.keboola.com/?service=storage#tag--Component-Configurations). No jobs can be made.
     - `keboola.storage` -- Placeholder component for actions from Storage service. Neither configurations nor jobs can be made. Use the
     [dedicated API](https://api.keboola.com/?service=storage) to work with Storage.
 

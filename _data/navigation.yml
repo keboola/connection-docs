@@ -700,6 +700,12 @@ items:
         
       - url: /transformations/variables/
         title: Variables & Shared Code
+        items:
+          - url: /transformations/variables/api/
+            title: Variables API
+            items:
+              - url: /transformations/variables/api/tutorial/
+                title: Tutorial
 
       - url: /transformations/dbt/
         title: dbt Transformation
@@ -944,11 +950,6 @@ items:
             title: Storage
           - url: /integrate/jobs/
             title: Component Jobs
-          - url: /integrate/variables/
-            title: Variables
-            items:
-              - url: /integrate/variables/tutorial/
-                title: Tutorial
           - url: /integrate/artifacts/
             title: Artifacts
             items:

@@ -1,6 +1,8 @@
 ---
 title: Variables
-slug: 'integrate/variables'
+slug: 'transformations/variables/api'
+redirect_from:
+    - /integrate/variables/
 ---
 
 
@@ -12,7 +14,7 @@ resolved at [job runtime](/integrate/jobs/).
 **Important:** Make sure you're familiar with the [Configuration API](/storage/api/configurations/) and 
 the [Job API](/integrate/jobs/) before reading on.
 
-See [Tutorial](/integrate/variables/tutorial) for step-by-step example.
+See [Tutorial](/transformations/variables/api/tutorial) for step-by-step example.
 
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
@@ -230,8 +232,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 
 ```
 
-The `variables_id` property contains the ID of the [variable configuration](/integrate/variables/#step-1--create-variables-configuration) - e.g., `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/integrate/variables/#step-2--create-default-values-for-variable) - e.g., `807952812`.
+The `variables_id` property contains the ID of the [variable configuration](/transformations/variables/api/#step-1--create-variables-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](/transformations/variables/api/#step-2--create-default-values-for-variable) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 ```python
@@ -294,11 +296,11 @@ with the following body:
 }
 ```
 
-The `config` property contains the ID of the [main configuration](/integrate/variables/#step-3--create-main-configuration).
+The `config` property contains the ID of the [main configuration](/transformations/variables/api/#step-3--create-main-configuration).
 Before executing the API call, you have to create the source table. Unless you modified the mapping in the 
-[example](/integrate/variables/#step-3--create-main-configuration), you have to create a bucket named
+[example](/transformations/variables/api/#step-3--create-main-configuration), you have to create a bucket named
 **variable-testing** in the **in** stage. Then create a table called **batman** with columns  **COUNTRY** 
-and **CARS**. You can use this [sample CSV file](/integrate/variables/countries.csv).
+and **CARS**. You can use this [sample CSV file](/transformations/variables/api/countries.csv).
 
 After you create the input table, you can run the job. 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#31486ac2-ea52-4f19-a039-2ee1b1ae5863). 
@@ -376,7 +378,7 @@ where you can verify that the variables were replaced.
 </details>
 
 #### Option 2 -- Run a job with stored values
-Similarly to the [default values](http://localhost:4000/integrate/variables/#step-2--create-default-values-for-variable), 
+Similarly to the [default values](/transformations/variables/api/#step-2--create-default-values-for-variable), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 ```json
@@ -396,7 +398,7 @@ you can store another set of values. Let's add another configuration row to the 
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#fbe487b5-cd68-4318-8219-7c067ebef795). 
 You will obtain an ID of the row. Then create a table called **watman** with 
-columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/integrate/variables/countries.csv).
+columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/transformations/variables/api/countries.csv).
 
 Run a job with parameters and provide the ID of the main configuration in the `config` property and 
 the ID of the value row in `variableValuesId`:
@@ -461,11 +463,11 @@ Variables in a configuration interact with an orchestrator in two ways:
 
 Entering variable values in task configurations allows the orchestration to run configurations with variables. 
 Variable values are entered in the `actionParameters` property. The parameters are identical to 
-[running a job](/integrate/variables/#step-4--run-job).
+[running a job](/transformations/variables/api/#step-4--run-job).
 
 When running an orchestration, you can also provide variable values for an entire orchestration. In that case, 
 the provided values will override those set in individual orchestration tasks. The parameters are identical 
-to [running a job](/integrate/variables/#step-4--run-job).
+to [running a job](/transformations/variables/api/#step-4--run-job).
 
 ### Step 5 -- Create Orchestration
 You have to use the 
@@ -501,7 +503,7 @@ You can use the following data in the configuration:
 ```
 
 The contents of the `task` property are identical to the body 
-of the [run job API call](/integrate/variables/#step-4--run-job). Here, the value `807968875` refers to the ID 
+of the [run job API call](/transformations/variables/api/#step-4--run-job). Here, the value `807968875` refers to the ID 
 of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
 You can use the `variableValuesData` field in the same manner.
 Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
@@ -531,7 +533,7 @@ As long as the variable values can be found somewhere, this is sufficient. See [
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
 to override variable values set to individual tasks. The calling convention is the same as shown in the 
-[basic job run](/integrate/variables/#step-4--run-job). The same rules also apply, notably that you can't 
+[basic job run](/transformations/variables/api/#step-4--run-job). The same rules also apply, notably that you can't 
 use `variableValuesId` and `variableValuesData` together. 
 A sample request body:
 
@@ -568,7 +570,7 @@ values or as an array of `values`):
 
 The following diagram shows the parameters mentioned on this page and to what they refer to:
 
-![Screenshot -- Properties references](/integrate/variables/variables.svg)
+![Screenshot -- Properties references](/transformations/variables/api/variables.svg)
 
 In a nutshell, `variableValuesId` always refers to the row of the variable configuration associated with the 
 main configuration. The main configuration is referenced in the `config` parameter. From another point of view,
