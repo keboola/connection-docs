@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
 import { sidebar } from './src/sidebar.mjs';
@@ -52,5 +53,7 @@ export default defineConfig({
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
     }),
+    // Must come AFTER starlight() so MDX code blocks use astro-expressive-code.
+    mdx(),
   ],
 });

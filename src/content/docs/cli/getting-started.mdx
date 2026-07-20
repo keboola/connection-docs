@@ -1,0 +1,152 @@
+---
+title: Get started with kbagent
+slug: 'cli/getting-started'
+sidebar:
+  label: Get Started
+description: 'A guided first run of the kbagent CLI — install it, connect a Keboola project, verify with doctor, and run your first read commands. Plus multi-project and organization setup.'
+---
+
+
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This walkthrough takes you from nothing to browsing a real project with [kbagent](/cli/) in a few minutes. Follow it top to bottom for a single project; the [Connect more](#connect-more-projects) section covers multi-project and organization setup.
+
+{/* Tutorial-type page. Source: keboola/cli README + docs/TUTORIAL.md. Terminal output verified locally against demo project 264, 2026-07-13. */}
+
+## Step 1 — Install
+
+Pick your operating system:
+
+<Tabs syncKey="os">
+  <TabItem label="macOS">
+    The prebuilt wheel via the install script:
+
+    ```bash
+    curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
+    ```
+
+    Or with [uv](https://docs.astral.sh/uv/) (easy to pin to a version or uninstall):
+
+    ```bash
+    uv tool install "git+https://github.com/keboola/cli"
+    ```
+  </TabItem>
+  <TabItem label="Linux">
+    The prebuilt wheel via the install script:
+
+    ```bash
+    curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
+    ```
+
+    Or with [uv](https://docs.astral.sh/uv/) (easy to pin to a version or uninstall):
+
+    ```bash
+    uv tool install "git+https://github.com/keboola/cli"
+    ```
+  </TabItem>
+  <TabItem label="Windows">
+    Install with [uv](https://docs.astral.sh/uv/) in PowerShell (install uv first if you don't have it):
+
+    ```powershell
+    uv tool install "git+https://github.com/keboola/cli"
+    ```
+  </TabItem>
+</Tabs>
+
+Whichever method you use, kbagent keeps itself current with its own startup update check (`kbagent update` runs one manually).
+
+Confirm it's on your `PATH` (all platforms):
+
+```console
+$ kbagent --version
+kbagent v0.66.0
+```
+{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. Windows/PowerShell uv path + install.sh being bash-only confirmed by Padak (review, v0.66.1). */}
+
+:::tip
+On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv/) without installing (`uvx --from 'git+https://github.com/keboola/cli' kbagent …`) — handy for a one-off or in CI.
+:::
+
+## Step 2 — Connect your project
+
+For one project you need a [Storage API token](/management/project/tokens/) and your stack URL:
+
+```bash
+kbagent project add --project prod \
+  --url https://connection.keboola.com --token YOUR_TOKEN
+```
+
+`prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
+
+A Storage API token is enough for browsing. Some commands need an admin (master) token — `token create` requires the `canManageTokens` permission, and creating branches or workspaces needs admin privileges.
+
+:::caution
+kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
+:::
+
+## Step 3 — Verify the connection
+
+`kbagent doctor` checks your configuration and connectivity. Once a project is connected it confirms the link and flags anything else worth doing (like installing the agent plugin):
+
+![kbagent doctor output: config found, project 'docs-demo' connected to the stack (L0 - Shopify, id 264), CLI version PASS, and warnings for the MCP server and Claude Code plugin](/cli/terminal-connect.png)
+
+You can also test connectivity on its own with `kbagent project status`.
+
+## Step 4 — Browse the project
+
+Explore what's there. Recent jobs:
+
+![kbagent job list --limit 5: a table of recent jobs in docs-demo with job ID, success status, component, created time, and duration](/cli/terminal-browse.png)
+
+```bash
+kbagent job list --limit 5    # recent jobs (shown above)
+kbagent project list          # connected projects
+kbagent config list           # configurations across all connected projects
+```
+
+## Step 5 — Search
+
+Find configs, tables, buckets, and flows by name or content:
+
+```bash
+kbagent search "shopify"
+```
+
+:::note
+`kbagent search` uses Keboola's Global Search by default. If a project doesn't have that feature enabled, kbagent says so — add `--search-type config-based` to scan configurations directly instead.
+:::
+{/* Global-search-not-enabled fallback verified on project 264, 2026-07-13. */}
+
+## Step 6 — Go further
+
+- **Add `--json`** to any command for machine-readable output — this is what an AI agent consumes.
+- **Set a conversation ID** when an agent drives kbagent, so platform observability can correlate the session (adds an `X-Conversation-ID` header):
+
+  ```bash
+  export KBAGENT_CONVERSATION_ID="<unique-id>"
+  ```
+
+## Connect more projects
+
+**Several projects** — register each with its own Storage token (`project add`), or bulk-onboard with a Manage API token:
+
+```bash
+KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
+  org setup --project-ids 901,9621 --url https://connection.keboola.com --yes
+```
+
+**A whole organization** (org admin) — kbagent registers every project and mints per-project tokens:
+
+```bash
+KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
+  org setup --org-id 123 --url https://connection.keboola.com --yes
+```
+
+{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-ids / --yes correct; --token-expires-in lives on `project refresh`, not org setup. */}
+
+Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
+
+---
+
+**Next:** [How kbagent works →](/cli/concepts/)
