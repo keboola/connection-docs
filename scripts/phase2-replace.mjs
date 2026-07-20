@@ -126,7 +126,22 @@ function walkDocs(dir) {
 }
 for (const f of walkDocs(DOCS)) {
   let t = readFileSync(f, 'utf8'); const before = t;
-  for (const [from, to] of moveMap) t = t.split(`](${from}`).join(`](${to.replace(/\/$/, '')}/`.replace('//', '/')).split(`](${from.replace(/\/$/, '')}#`).join(`](${to.replace(/\/$/, '')}#`);
+  for (const [from, to] of moveMap) {
+    const fromN = from.replace(/\/$/, ''), toN = to.replace(/\/$/, '');
+    // markdown links: with trailing slash, bare no-slash, anchored, and Jekyll
+    // dev-server artifacts (frontmatter redirect_from lines match none of these)
+    t = t.split(`](${from}`).join(`](${toN}/`);
+    t = t.split(`](${fromN})`).join(`](${toN}/)`);
+    t = t.split(`](${fromN}#`).join(`](${toN}/#`);
+    t = t.split(`](http://localhost:4000${from}`).join(`](${toN}/`);
+    t = t.split(`](http://localhost:4000${fromN}#`).join(`](${toN}/#`);
+    // HTML anchors in embedded markup/scripts
+    for (const q of [`'`, `"`]) {
+      t = t.split(`href=${q}${from}`).join(`href=${q}${toN}/`);
+      t = t.split(`href=${q}${fromN}${q}`).join(`href=${q}${toN}/${q}`);
+      t = t.split(`href=${q}${fromN}#`).join(`href=${q}${toN}/#`);
+    }
+  }
   if (t !== before) { if (!DRY) writeFileSync(f, t); report.flips.push(relative(REPO, f)); }
 }
 
