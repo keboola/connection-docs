@@ -866,7 +866,7 @@ nav.sidebar {
 /* Inline code — Keboola blue-tinted */
 .sl-markdown-content :not(pre) > code:not(:where(.not-content *)) {
   background: var(--kbc-blue-100);
-  color: var(--kbc-blue-600);
+  color: var(--kbc-blue-800);
   padding: 1.5px 6px;
   border-radius: 4px;
   font-family: var(--font-mono);
