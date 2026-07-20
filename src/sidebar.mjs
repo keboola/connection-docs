@@ -527,7 +527,21 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      {
+        label: "Variables & Shared Code",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/variables" },
+          {
+            label: "Variables API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "transformations/variables/api" },
+              { slug: "transformations/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
       {
         label: "dbt Transformation",
         collapsed: true,
@@ -739,14 +753,6 @@ export const sidebar = [
           { label: "Overview", slug: "integrate" },
           { slug: "integrate/storage" },
           { slug: "integrate/jobs" },
-          {
-            label: "Variables",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "integrate/variables" },
-              { slug: "integrate/variables/tutorial" },
-            ],
-          },
           {
             label: "Artifacts",
             collapsed: true,
