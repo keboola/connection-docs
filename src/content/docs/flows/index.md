@@ -1,6 +1,7 @@
 ---
 title: Conditional Flows
 slug: 'flows'
+description: Build automated pipelines with Conditional Flows — phases and parallel tasks, IF/THEN conditions, variables, retries, delays, notifications, schedules, and run history.
 redirect_from:
     - /flows/conditional-flows/
 ---
@@ -13,7 +14,9 @@ Flows allow you to build automated data pipelines with conditional logic, branch
 
 ## Access Flows
 
-Navigate to **Conditional Flows > Create Flow**. You'll land directly in the Builder where you can start creating your first flow. Use the plus icon (+) to add different types of actions such as components, conditions, variables, notifications, and more — all of which are explained in detail later in this documentation.
+Navigate to **Conditional Flows > Create Flow**. You'll land directly in the **Builder** tab, where you can start creating your first flow; the other tabs — **All Runs**, **Schedules**, **Notifications**, and **Versions** — cover monitoring and automation and are explained later in this documentation.
+
+Use the plus icon (+) on the canvas to add a task to a phase. The **Add Task** menu offers three task types: **Component**, **Notification**, and **Variable**. Conditions are not tasks — they control which phase runs next and are configured on the transitions between phases. <!-- TODO(human-review): confirm how conditions are added in the Builder (on the phase transition?) — the Add Task menu does not include them. -->
 
 ## Build the Flow
 
@@ -23,10 +26,10 @@ Navigate to **Conditional Flows > Create Flow**. You'll land directly in the Bui
 - **Tasks within a phase** run in parallel.
 - **After all tasks in a phase complete**, based on conditions it is determined which phase will be executed next.
 - You can define **multiple condition rules** - only the first matched condition is executed.
-- **How to end a flow:** You can stop a flow at any point using the End Flow option in the ELSE path of a conditional condition. This is especially useful when none of your IF conditions are met and you want to avoid continuing to another phase.
+- **How to end a flow:** You can stop a flow at any point using the End Flow option in the ELSE path of a conditional condition. This is especially useful when none of your IF conditions are met and you want to avoid continuing to another phase. <!-- TODO(human-review): confirm the "End Flow in the ELSE path" mechanism and its exact UI label. -->
 
 :::caution
-If too many tasks are scheduled in a single phase, you may exceed the available [Storage job](/storage/jobs/) slots, causing delays in your flow's execution. Limiting the number of concurrent component jobs to 10 is recommended. The Keboola Support team can help you adjust parallel limits.
+If too many tasks are scheduled in a single phase, you may exceed the available [Storage job](/storage/jobs/) slots, causing delays in your flow's execution. Limiting the number of concurrent component jobs to 10 is recommended. The Keboola Support team can help you adjust parallel limits. <!-- TODO(human-review): confirm the 10-parallel Storage-job guidance and default cap. -->
 :::
 
 ### Execute Tasks in Parallel
@@ -81,6 +84,8 @@ Control the flow of execution based on conditions like:
 - **Number of Output Tables** - control the flow based on how many output tables a task produces.
 - **Duration of Task** - condition to trigger actions depending on how long a task runs. This is useful for detecting anomalies (e.g., unusually short or long runtimes).
 
+<!-- TODO(human-review): confirm this condition-type list (status / variable values / date-time / output-table count / task duration) against the current condition builder. -->
+
 Evaluation proceeds from top to bottom, and once a condition is true, the remaining conditions are ignored - even if others would also evaluate to be true.
 
 :::caution
@@ -100,163 +105,15 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ## Variables
 
-Variables in Flows let you store and reuse values - like dates, task results, or custom inputs - throughout your flow. You can use them to make decisions, control flow logic, or pass dynamic values between tasks. The sections below walk through how to set up and use variables from the UI; each step also shows the JSON shape generated behind the scenes for template authors and API users.
+Variables let you store and reuse values — like dates, task results, or custom inputs — throughout your flow. Add one in a phase with the **+** icon → **Variable**; a variable holds either a **Static Value** (fixed text or number) or a **Dynamic Value** computed at run time from a task result, a phase, or a built-in function. Later conditions can then compare the variable's value, and component jobs receive flow variables that match their own variable names.
 
-### Adding a Variable
-
-1. In a phase, click the **+** icon and choose **Set Variable**. The Set Variable panel opens on the right.
-2. Enter a **Variable Name** — this is the identifier other tasks will use to reference the value.
-3. Choose a **Variable Type** — either [Static Value](#static-value) or [Dynamic Value](#dynamic-value).
-
-### Static Value
-
-A **Static Value** is a fixed text or number you enter directly. Useful for thresholds, IDs, or labels that don't change between runs.
-
-![Set Variable panel with Static Value selected](/flows/conditional-flows-variables-static-set.png)
-
-**JSON equivalent** (useful when authoring a flow as a template or via the API):
-
-```json
-{
-  "type": "variable",
-  "name": "max_duration",
-  "value": 3600
-}
-```
-
-### Dynamic Value
-
-A **Dynamic Value** is computed at run time from a task result, an earlier phase, or a built-in function (see [Date & Time function](#date--time-function) below). When you pick this type, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
-
-![Set Variable panel in Conditional Flow](/flows/conditional-flows-variables-set.png)
-
-If a task produces **multiple output tables**, the picker also offers aggregations across all of them: **Sum**, **Minimum**, **Maximum**, and **Average** of a numeric field. For example, `Sum of importedRowsCount` returns the total number of rows imported by an HTTP data source across every output table.
-
-![Dynamic Value picker showing task result tree with aggregations](/flows/conditional-flows-variables-picker.png)
-
-:::caution
-**Aggregations are not functions.** The Sum / Minimum / Maximum / Average options are not built-in functions — the `function` enum only accepts `COUNT` and `DATE`. The picker implements each aggregation as a [JMESPath](https://jmespath.org/) expression placed in the task `value` field rather than a `function` block. When authoring a flow via the API or as a template, write the aggregation directly in `value`:
-
-- **Sum** → `sum(job.result.output.tables[].importedRowsCount)`
-- **Minimum** → `min(job.result.output.tables[].importedRowsCount)`
-- **Maximum** → `max(job.result.output.tables[].importedRowsCount)`
-- **Average** → `avg(job.result.output.tables[].importedRowsCount)`
-:::
-
-**JSON equivalent** — behind the scenes the aggregation is stored as a `source` definition. For example, `Sum of importedRowsCount` can be expressed as a JMESPath aggregation in the task `value`. Note that the picker tree displays paths rooted at `result.*` (for example `result.output.tables`), while the generated `value` expression is rooted at `job.result.*`:
-
-```json
-{
-  "type": "variable",
-  "name": "total_imported_rows",
-  "source": {
-    "type": "task",
-    "task": "extract-data",
-    "value": "sum(job.result.output.tables[].importedRowsCount)"
-  }
-}
-```
-
-`COUNT` and `DATE` are the only functions exposed via the `function` block (see [Date & Time function](#date--time-function) below); they take their inputs as `operands`. `COUNT` counts the items a JMESPath expression returns — for example, the number of output tables a task produced:
-
-```json
-{
-  "type": "variable",
-  "name": "table_count",
-  "source": {
-    "type": "function",
-    "function": "COUNT",
-    "operands": [
-      {
-        "type": "task",
-        "task": "extract-data",
-        "value": "job.result.output.tables"
-      }
-    ]
-  }
-}
-```
-
-The `value` field accepts [JMESPath](https://jmespath.org/) expressions, so you can filter and extract specific items from the task result instead of just walking the tree. For example, picking the name of a particular output table by its ID:
-
-```json
-{
-  "type": "task",
-  "task": "97288",
-  "value": "job.result.output.tables[?id=='out.c-test.example'][].name | [0]"
-}
-```
-
-### Date & Time function
-
-Returns the date/time formatted according to the specified format string, available formats:
-[https://www.php.net/manual/en/datetime.format.php](https://www.php.net/manual/en/datetime.format.php).
-
-This example returns the full textual representation of the current month, such as "July" or "August".
-
-```json
-{
- "type": "function",
- "function": "DATE",
- "operands": [
-   {
-     "type": "const",
-     "value": "F"
-   }
- ]
-}
-```
-
-**Example of creating a variable with the current timestamp:**
-
-```json
-{
- "id": "set-timestamp",
- "name": "Set Timestamp Variable",
- "phase": "init",
- "task": {
-   "type": "variable",
-   "name": "current_timestamp",
-   "source": {
-     "type": "function",
-     "function": "DATE",
-     "operands": [
-       {
-         "type": "const",
-         "value": "U"
-       }
-     ]
-   }
- }
-}
-```
-
-### Using Variables in Conditions
-
-Once a variable has been set in an earlier phase, any later **Condition** can compare its value against a constant, against another variable, or against a task result.
-
-1. In the IF row, click the value picker and choose a variable, a task result, or a phase result from an earlier phase.
-2. Choose an operator (Greater than, Equals, Contains, …).
-3. Provide a comparison value — a constant, or another value picked from the tree.
-4. Set the THEN and ELSE actions: **Continue To** an existing phase, or end the flow.
-
-Only the first matching IF condition is executed; subsequent IFs in the same Conditions block are skipped.
-
-![IF/THEN/ELSE condition referencing a task result](/flows/conditional-flows-variables-condition.png)
-
-See also the [Conditions](#conditions) section above for the full list of operators and condition types.
-
-### How Variables Reach Component Jobs
-
-When a phase runs a component (a job task), the variables you set earlier in the flow are merged into the component's own variables. A flow variable replaces a component variable **only if both have the same name** — flow variables whose names the component does not declare are silently ignored. This means: to let a flow drive a value inside a component, declare a variable with the matching name in the component's configuration; the flow will fill it in when the job runs.
-
-For finer control on a specific job task, an advanced `variableOverrides` field on the task can restrict which flow variables are merged in.
+For the full guide — static and dynamic values, JMESPath aggregations, the `COUNT` and `DATE` functions, and how variables reach component jobs — see [Flow Variables](/flows/variables/).
 
 ## Retry
 
 You can retry failed tasks automatically and optionally choose to retry based on specific failure messages.
 
-By default, the system retries up to 3 times with a 10-second delay between attempts. Both the number of attempts and the delay can be customized to fit your workflow.
+By default, the system retries up to 3 times with a 10-second delay between attempts. Both the number of attempts and the delay can be customized to fit your workflow. <!-- TODO(human-review): confirm the retry defaults (3 attempts, 10-second delay). -->
 
 To access the retry settings, click on task to open the configuration.
 
@@ -289,7 +146,7 @@ You can also create the notification inside of condition as a New Phase, name it
 
 ## Schedule and Automate
 
-Click on **Set Schedule** in your flow and select when you want the flow to run. You can select predefined intervals or set your own. Another option is to use triggers to initiate the run.
+Open the **Schedules** tab in your flow and click **Create Schedule**. A schedule starts the flow either at a **date and time** (predefined intervals or your own cron-style setting) or via a **table trigger**. You can create **multiple schedules** for one flow — they function independently, and the flow runs whenever any of them fires.
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 
@@ -297,7 +154,7 @@ Click on **Set Schedule** in your flow and select when you want the flow to run.
 
 ![Set Schedule](/flows/set-schedule.png)
 
-*Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
+*Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.* <!-- TODO(human-review): confirm the trigger cool-down semantics described here. -->
 
 ## Check Run History
 
