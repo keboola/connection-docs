@@ -20,14 +20,14 @@ Features such as cURL import, request tests, output mapping generator, and dynam
 ![Generic Extractor - UI](/components/extractors/other/generic/ui.png)
 
 Because you have to write it yourself, we included the
-[Generic Extractor guide](/extend/generic-extractor/) in our [Developer 
+[Generic Extractor guide](/components/extractors/generic-extractor/) in our [Developer 
 Documentation](/extend/). 
 
 No other programming or software engineering skills are necessary. Even though configuring the Generic Extractor may seem quite 
 complex at first, once you understand the concept, you can extract desired data within (tens of) minutes. 
 
 We strongly recommend configuring your first Generic Extractor using [our 
-tutorial](/extend/generic-extractor/tutorial/), which will guide you through the visual builder and underlying JSON configuration.
+tutorial](/components/extractors/generic-extractor/tutorial/), which will guide you through the visual builder and underlying JSON configuration.
 
 
 ### JSON Configuration
@@ -35,7 +35,7 @@ tutorial](/extend/generic-extractor/tutorial/), which will guide you through the
 Underneath the UI, the configurations are formed as **JSON**.
 
 Even though the UI is intuitive, it is beneficial to understand what specific parts of an existing configuration JSON do. To do so, you may check the 
-[Configuration Map](/extend/generic-extractor/map/).
+[Configuration Map](/components/extractors/generic-extractor/map/).
 
 ## Template Mode
 Generic Extractor is used as the base for many data source connectors. These components allow you to select pre-defined configurations 

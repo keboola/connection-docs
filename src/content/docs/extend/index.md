@@ -46,12 +46,12 @@ They can be implemented in virtually any programming language and be fully custo
 They also support OAuth authorization. To get started with building a component, see our [**tutorial**](/extend/component/tutorial/).
 
 ## Generic Extractor
-[Generic Extractor](/extend/generic-extractor/) is a Keboola component acting like a
-customizable [HTTP REST client](/extend/generic-extractor/tutorial/rest/). It can be configured to extract data 
+[Generic Extractor](/components/extractors/generic-extractor/) is a Keboola component acting like a
+customizable [HTTP REST client](/components/extractors/generic-extractor/tutorial/rest/). It can be configured to extract data 
 from virtually any API and offers a vast amount of configuration options. With Generic Extractor, you can build an 
 entirely new extractor for Keboola in less than an hour. 
 
-Components based on Generic Extractor are built using [JSON configuration](/extend/generic-extractor/tutorial/) and a
-[published template](/extend/generic-extractor/publish/). They have a predefined UI, require no knowledge of Docker or
+Components based on Generic Extractor are built using [JSON configuration](/components/extractors/generic-extractor/tutorial/) and a
+[published template](/components/extractors/generic-extractor/publish/). They have a predefined UI, require no knowledge of Docker or
 other tools, and they use a Keboola owned [repository](https://github.com/keboola/kbc-ui-templates/). To get 
-started with Generic Extractor, see our [**tutorial**](/extend/generic-extractor/tutorial/).
+started with Generic Extractor, see our [**tutorial**](/components/extractors/generic-extractor/tutorial/).

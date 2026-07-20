@@ -47,7 +47,7 @@ filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
 
 Additionally, the following options will cause the specified rows to be deleted from the source table before the new
 table is imported. See an [example](/extend/common-interface/config-file/#output-mapping---delete-rows).
-Using this option makes sense only with [incremental loads](/extend/generic-extractor/incremental/).
+Using this option makes sense only with [incremental loads](/components/extractors/generic-extractor/incremental/).
 
 ```json
 {
