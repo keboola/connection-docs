@@ -11,9 +11,9 @@ We do not cheat or have any advantage over other developers; our UI and other co
 As a result, it is very easy to, for example, write custom scripts to bootstrap a project, or do something that our UI does not offer.
 Let's have a look into this!
 
-One of the very important components is [Storage](/integrate/storage/), which not only stores all data in a 
+One of the very important components is [Storage](/storage/api/), which not only stores all data in a 
 project, but also provides additional functions such as managing other components and their configurations. 
-When you are integrating your systems with Keboola, **chances are that you want to start with [Storage](/integrate/storage/)**.
+When you are integrating your systems with Keboola, **chances are that you want to start with [Storage](/storage/api/)**.
 
 <!-- 
  

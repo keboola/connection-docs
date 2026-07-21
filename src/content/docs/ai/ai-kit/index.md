@@ -120,7 +120,7 @@ For detailed documentation on each plugin, including complete agent specificatio
 
 Additional resources:
 
-- [Keboola Developer Documentation](https://developers.keboola.com/)
+- [Extending Keboola](/extend/)
 - [Python Component Library](https://github.com/keboola/python-component)
 - [Cookiecutter Python Component Template](https://github.com/keboola/cookiecutter-python-component)
 - [Streamlit Documentation](https://docs.streamlit.io)

@@ -70,7 +70,6 @@ consists of an encrypted connection created through an SSH protocol connection. 
 your database server located in your private network that you do not want to be accessed directly from the Internet. The
 SSH connection is encrypted and uses a public-private key pair for user authorization.
 
-Find detailed instructions for setting up an SSH tunnel in the [developer documentation](https://developers.keboola.com/integrate/database/).
 While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
 
 ## Change Data Capture (CDC)

@@ -19,7 +19,7 @@ curl --request POST --header "X-StorageApi-Token:storage-token" --form "tableId=
 ```
 
 Using the Storage API Importer is the easiest way to upload data into Storage (except for
-using one of the [API clients](/integrate/storage/#clients)). However, the disadvantage is that the whole data file
+using one of the [API clients](/storage/api/)). However, the disadvantage is that the whole data file
 has to be posted in a single HTTP request. **The maximum limit for a file size is 2GB and the transfer time is 45 minutes**.
 This means that for substantially large files (usually more than hundreds of MB)
 you may experience timeouts. If that happens, use the above outlined approach and upload the

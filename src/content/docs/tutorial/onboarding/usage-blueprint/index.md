@@ -98,11 +98,11 @@ Here are examples of how we name projects:
 ### Managing Project Users
 > *As mentioned before, a project owner is mainly responsible for managing project users. Keboola has different roles for project users.*
 
-The project owner needs to ensure users are added with the right roles. Keboola user roles are documented [here](https://help.keboola.com/management/project/users/#user-roles). 
+The project owner needs to ensure users are added with the right roles. Keboola user roles are documented [here](/management/project/users/#user-roles). 
 Remember, being a project owner is a formal role and doesn’t directly correspond to specific Keboola project roles and privileges. 
 Usually, users are invited as project admins or with a sharing role unless they need a different one.
 
-To invite or remove a user from your project, follow the steps in the [Keboola documentation](https://help.keboola.com/management/project/users/#inviting-user).
+To invite or remove a user from your project, follow the steps in the [Keboola documentation](/management/project/users/#inviting-user).
 
 ### Naming Conventions
 > *Using naming conventions for all Keboola components is recommended to keep your project well organized, comprehensible, and simpler to manage and navigate.

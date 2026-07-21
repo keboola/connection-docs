@@ -119,7 +119,7 @@ consistent and easier to manage.
 Performance generally scales up with size, but costs do, too. 
 
 The impact varies by query, so testing and evaluating outcomes is advised. Sometimes, a larger warehouse might be more cost-effective if it significantly 
-reduces runtime. More details on costs can be found [here](https://help.keboola.com/management/project/limits/#project-power--time-credits).
+reduces runtime. More details on costs can be found [here](/management/project/limits/#project-power--time-credits).
 
 **Python and R transformations:** The choice of backend size affects the memory available for processing data. A larger backend is often necessary for handling 
 larger datasets or when memory limits are reached rather than for potential speed gains.
@@ -130,7 +130,7 @@ Listing columns enhances your query's safety and readability, ensuring you're cl
 
 :::tip[Safe Development Practices]
 Use development branches for any changes or new additions to ensure a controlled and safe development environment. This method keeps your work organized and
-secure. For more on development branches, see this [guide](https://help.keboola.com/tutorial/branches/).
+secure. For more on development branches, see this [guide](/tutorial/branches/).
 :::
 
 ## Automating Your Flow
@@ -139,7 +139,7 @@ In your Flows, you can streamline processing by grouping multiple tasks within o
 enhancing overall efficiency. Each subsequent phase starts only after the previous one completes all its tasks.
 
 ***Important note for multi-tenant environment users:**
-Please be aware of the interaction between Storage and component jobs mentioned [here](https://help.keboola.com/tutorial/onboarding/cheat-sheet/#optimize-with-parallelization). 
+Please be aware of the interaction between Storage and component jobs mentioned [here](/tutorial/onboarding/cheat-sheet/#optimize-with-parallelization). 
 If too many tasks are scheduled in a single phase, you may exceed the available Storage job slots, causing delays in your flow’s execution. Limiting the number of concurrent component jobs to 10 
 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
 extent possible based on available resources.*

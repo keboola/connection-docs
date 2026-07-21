@@ -332,7 +332,7 @@ Clicking the **Debug mode** link allows you to access the JSON configuration dir
 
 By editing the full JSON configuration, you can set up the component (all options are
 described in the component repository) and the processors (to learn more about processors, 
-see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
+see the [processors documentation](/extend/component/processors/)).
 
 ![Screenshot - Advanced](/components/configuration-24.png)
 
@@ -348,7 +348,7 @@ When in Debug Mode, the **Run Custom Tag** option allows you to execute a specif
   <img src="/components/configuration-26.png" width="45%">
 </p>
 
-In most cases, you will not need to use this option directly. However, our team may occasionally ask you to run a component under a custom tag — either as part of troubleshooting an issue you have reported to our [support](https://help.keboola.com/management/support/) team, or as part of the release management process to test a new version before its official release.
+In most cases, you will not need to use this option directly. However, our team may occasionally ask you to run a component under a custom tag — either as part of troubleshooting an issue you have reported to our [support](/management/support/) team, or as part of the release management process to test a new version before its official release.
 
 You can confirm that the job ran under the custom tag in the job's Parameters & Results section.
 

@@ -19,7 +19,7 @@ This resource will help you become acquainted with commonly used terms and gain 
 To get started, ensure you have access to a Keboola project. If you haven’t got one yet, reach out to us at sales@keboola.com, 
 or create a free project [here](https://connection.us-east4.gcp.keboola.com/wizard) instantly.
 
-If you are a developer looking to contribute new components to the Keboola platform, your [development project](https://developers.keboola.com/#development-project) 
+If you are a developer looking to contribute new components to the Keboola platform, your [development project](/extend/component/tutorial/) 
 will be automatically set up upon registering as a developer. 
 
 Please be aware that for a comprehensive understanding of the tutorial and to unlock the full capabilities of Keboola, it is recommended to have at least a basic understanding of the [SQL](https://en.wikipedia.org/wiki/SQL) language. SQL is commonly used for data transformation, often with Python or R alongside.
