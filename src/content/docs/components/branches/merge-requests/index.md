@@ -12,6 +12,13 @@ approve or reject the changes, and only then are they merged into production.
 Merge requests give you the review, approval, and audit workflow that teams expect from modern
 Git-based development — while keeping everything inside your Keboola project.
 
+:::caution[Branches 2.0]
+Merge requests are part of the **Branches 2.0** feature. If you don't see them in your project,
+enable Branches 2.0 in your **project settings** or contact **Keboola support** to have it turned on.
+
+Merge requests are not yet integrated with **Kai** (the AI assistant) — that integration is in progress.
+:::
+
 :::tip
 If your project does **not** require any approvals, a merge request is still created, but it is
 auto-approved the moment you submit it, so you can merge immediately. You get the diff and the
