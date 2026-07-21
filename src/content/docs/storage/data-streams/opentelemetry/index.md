@@ -204,11 +204,11 @@ The OTLP source detail page provides:
 - **Endpoint URL** with a one-click copy button.
 - **Environment variable snippet** ready to paste into your application or deployment configuration.
 - **Table statistics** for each of the three destination tables (logs, metrics, traces), showing waiting vs. imported data.
-- **Import conditions** — the same configurable thresholds (time interval, data size, record count) as HTTP data streams. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/#conditions)
+- **Import conditions** — the same configurable thresholds (time interval, data size, record count) as HTTP data streams. [Learn more](/storage/data-streams/reference/#conditions)
 
 ## Technical Reference
 
 - [OpenTelemetry Protocol Specification](https://opentelemetry.io/docs/specs/otlp/)
 - [OTLP/HTTP Transport](https://opentelemetry.io/docs/specs/otlp/#otlphttp)
 - [Keboola Stream API Documentation](https://stream.keboola.com/v1/documentation/)
-- [Data Streams Developer Documentation](https://developers.keboola.com/integrate/data-streams/overview/)
+- [Data Streams Developer Documentation](/storage/data-streams/reference/)
