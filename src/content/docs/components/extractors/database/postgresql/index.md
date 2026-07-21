@@ -1,5 +1,6 @@
 ---
 title: PostgreSQL
+description: PostgreSQL is an open-source database renowned for its advanced features, reliability, and performance.
 slug: 'components/extractors/database/postgresql'
 ---
 

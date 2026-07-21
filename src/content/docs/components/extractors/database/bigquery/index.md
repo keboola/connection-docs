@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+description: The BigQuery data source connector loads data from BigQuery and brings it into Keboola.
 slug: 'components/extractors/database/bigquery'
 redirect_from:
     - /extractors/database/bigquery/

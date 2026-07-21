@@ -1,5 +1,6 @@
 ---
 title: Instagram
+description: This data source connector uses the Instagram Graph API (built on the Facebook Graph API) to extract media objects, comments, insights and metrics from…
 slug: 'components/extractors/social/instagram'
 redirect_from:
     - /extractors/social/instagram/

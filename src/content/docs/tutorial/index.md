@@ -1,5 +1,6 @@
 ---
 title: Keboola Getting Started Tutorial
+description: Discover how to leverage the Keboola platform to effortlessly extract data from various sources, transform it, and securely store it within the Keboola…
 slug: 'tutorial'
 redirect_from:
   - /getting-started/

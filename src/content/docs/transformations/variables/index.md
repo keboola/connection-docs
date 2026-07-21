@@ -1,5 +1,6 @@
 ---
 title: Variables
+description: Variables allow you to parametrize transformations. This is useful when you have similar transformations which differ in only a limited number of values.
 slug: 'transformations/variables'
 ---
 

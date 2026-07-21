@@ -1,5 +1,6 @@
 ---
 title: Mapping Examples
+description: Worked examples of MongoDB extractor mapping — flat documents, primary keys, nested documents, lists, and boolean values.
 slug: 'components/extractors/database/mongodb/mapping'
 redirect_from:
     - /extractors/database/mongodb/mapping/

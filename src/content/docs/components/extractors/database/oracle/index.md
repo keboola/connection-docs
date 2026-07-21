@@ -1,5 +1,6 @@
 ---
 title: Oracle
+description: This is a standard connector that performs queries against the source database to sync data.
 slug: 'components/extractors/database/oracle'
 ---
 

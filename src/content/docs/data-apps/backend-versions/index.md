@@ -1,5 +1,6 @@
 ---
 title: Backend Versions
+description: When deploying an app, you can select a backend version from a dropdown in the deployment wizard.
 slug: 'data-apps/backend-versions'
 redirect_from:
   - /components/data-apps/backend-versions/

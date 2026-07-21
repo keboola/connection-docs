@@ -1,5 +1,6 @@
 ---
 title: dbt Cloud
+description: dbt Cloud is supported via dedicated components. You can find them in the menu section Components.
 slug: 'transformations/dbt/cloud'
 ---
 

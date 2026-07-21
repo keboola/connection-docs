@@ -1,5 +1,6 @@
 ---
 title: Gmail Messages
+description: The Gmail Messages data source connector allows you to fetch data from your Gmail account.
 slug: 'components/extractors/communication/gmail'
 redirect_from:
     - /extractors/communication/gmail/

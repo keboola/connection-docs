@@ -1,5 +1,6 @@
 ---
 title: Storage Access
+description: Storage Access allows your App to read data from and write data back to Keboola Storage tables in real-time.
 slug: 'data-apps/storage-access'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Data Gateway
+description: This application allows you to share data in read-only mode with third-party BI and visualization tools.
 slug: 'components/applications/data-gateway'
 redirect_from:
     - /applications/data-gateway/

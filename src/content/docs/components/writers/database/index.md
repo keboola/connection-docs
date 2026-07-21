@@ -1,5 +1,6 @@
 ---
 title: Database Data Destination Connectors
+description: Data destination connectors export data from Keboola to SQL databases.
 slug: 'components/writers/database'
 redirect_from:
     - /writers/database/

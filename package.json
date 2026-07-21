@@ -9,7 +9,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "gen:sidebar": "node scripts/convert-nav.mjs"
+    "gen:sidebar": "node scripts/convert-nav.mjs",
+    "lint:content": "node scripts/content-lint.mjs",
+    "backfill:desc": "node scripts/backfill-descriptions.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.38",

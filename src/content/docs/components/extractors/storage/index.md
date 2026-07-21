@@ -1,5 +1,6 @@
 ---
 title: Storage Data Source Connectors
+description: Data source connectors import data from external sources and integrate it to the Keboola environment.
 slug: 'components/extractors/storage'
 redirect_from:
     - /extractors/storage/

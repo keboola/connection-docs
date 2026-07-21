@@ -1,5 +1,6 @@
 ---
 title: Available Dimensions
+description: The full list of dimensions available when configuring the Adform DSP Reports connector.
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-dimensions'
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/available-dimensions/

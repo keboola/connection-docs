@@ -1,5 +1,6 @@
 ---
 title: Okta
+description: This document will guide you through the steps needed to set up the OpenID Connect (OIDC) protocol for Keboola apps, specifically for use on Okta.
 slug: 'data-apps/authentication/okta'
 redirect_from:
   - /components/data-apps/oidc/okta/

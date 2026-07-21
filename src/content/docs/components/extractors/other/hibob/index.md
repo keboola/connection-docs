@@ -1,5 +1,6 @@
 ---
 title: HiBob
+description: HiBob is an HR management platform that offers a wide range of features to support talent management.
 slug: 'components/extractors/other/hibob'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Keboola Overview
+description: Keboola is a cloud-based platform for all your data integration, transformation, and orchestration needs.
 slug: 'overview'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Part 4: Flow Automation"
+description: So far, you have learned to use Keboola to…
 slug: 'tutorial/automate'
 ---
 

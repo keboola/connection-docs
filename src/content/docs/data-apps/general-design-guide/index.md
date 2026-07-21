@@ -1,5 +1,6 @@
 ---
 title: Apps General Design Guide
+description: This guide will help you quickly create a user-friendly app in Keboola.
 slug: 'data-apps/general-design-guide'
 redirect_from:
   - /components/data-apps/general-design-guide/

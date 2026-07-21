@@ -1,5 +1,6 @@
 ---
 title: Available Metrics
+description: The full list of metrics available when configuring the Adform DSP Reports connector.
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-metrics'
 ---
 
