@@ -42,11 +42,11 @@ to gather data from various sources. They can connect to APIs of external servic
 [Storage](/storage/) is the central component in Keboola responsible for data management and access. It comprises two sections: 
 
 - [File Storage](/storage/files/), with all raw files uploaded to your project, and
-- [Table Storage](https://help.keboola.com/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
+- [Table Storage](/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
 
 This component acts as a middle layer that works with various [backend](/transformations/#backends) database systems like 
 [Snowflake](https://www.snowflake.com/), [BigQuery](https://cloud.google.com/bigquery/),
-[and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
+[and others](/transformations/#backends). It provides a key Storage API for working with data, 
 making it easier to connect with other parts of the system and third-party applications.
 
 ### Transformations & Workspaces
@@ -107,12 +107,12 @@ organization, keep track of individual access rights, and promote clear visibili
 
 ## Extending the Platform 
 The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
-can be [extended](https://developers.keboola.com/extend/) with **arbitrary code to extract, transform, or write data**.
+can be [extended](/extend/) with **arbitrary code to extract, transform, or write data**.
 
 You can extend the platform by creating
 
-- [components](https://developers.keboola.com/extend/#component) (used as data source and destination connectors and applications).
-- components based on the [Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
+- [components](/extend/#component) (used as data source and destination connectors and applications).
+- components based on the [Generic Extractor](/extend/#generic-extractor).
 
 Keboola, your in-house teams, or 3rd parties can create all components while using already existing data, ETL processes, and workflows. 
 The platform automates infrastructure, user, and data management, offering services like [data catalog](/catalog/), operational metadata, governance, 
@@ -120,10 +120,10 @@ and reverse billing. Components can be private or shared with Keboola users via 
 to enhance workflows and support a composable enterprise.
 
 Components can be run as standard pieces of our Flows [/tutorial/automate/#main-header], obtaining the full support and services (a link to your
-[components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
+[components](https://components.keboola.com/components), [logs, etc.](/extend/common-interface/)).
 
 ### Keboola CLI
-[Keboola CLI](https://developers.keboola.com/cli/) (Command Line Interface) is a set of commands for operating your cloud data pipeline. It can be installed in 
+[Keboola CLI](/cli/keboola-as-code/) (Command Line Interface) is a set of commands for operating your cloud data pipeline. It can be installed in 
 the Windows, macOS, and Linux environments.
 
 ## AI Assistance
@@ -158,7 +158,7 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes how to handle multiple stacks 
+Our [API documentation](/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
 when working with the API in more detail.
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.

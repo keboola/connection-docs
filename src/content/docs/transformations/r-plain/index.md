@@ -186,7 +186,7 @@ converted to the local time zone.
 ### Going Further
 The above steps are usually sufficient for daily development and debugging of moderately complex R transformations,
 although they do not reproduce the transformation execution environment exactly. To create a development environment
-with the exact same configuration as the transformation environment, use [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
+with the exact same configuration as the transformation environment, use [our Docker image](/extend/component/running/#running-transformations).
 
 ## Examples
 There are more in-depth examples dealing with

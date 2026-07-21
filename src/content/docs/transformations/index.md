@@ -193,7 +193,7 @@ Python and R transformations.
     <td>Not available</td>
 </tr>
 <tr>
-    <th><a href='/integrate/storage/api/configurations/'>API Interface</a></th> 
+    <th><a href='/storage/api/configurations/'>API Interface</a></th> 
     <td>✓</td>
 </tr>
 <tr>

@@ -169,7 +169,7 @@ in the output folder. This script can be used in your transformations without an
 
 The above steps are usually sufficient for daily development and debugging of moderately complex Python transformations,
 although they do not reproduce the transformation execution environment exactly. You can also create a development environment
-with the exact same configuration using [our Docker image](https://developers.keboola.com/extend/docker/running/#running-transformations).
+with the exact same configuration using [our Docker image](/extend/component/running/#running-transformations).
 
 ## Example 1 -- Using Dictionaries
 The following piece of code reads a table with two columns, named **first** and **second**, 

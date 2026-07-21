@@ -100,7 +100,7 @@ Each result table includes the following system columns:
 
 ### Data Type Mapping
 
-MySQL datatypes are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+MySQL datatypes are mapped to [Keboola Base Types](/storage/tables/data-types/#base-types) as follows:
 
 Based on the selected JSON file, the `base_type` column in the table will be updated accordingly:
 

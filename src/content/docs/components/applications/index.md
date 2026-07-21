@@ -60,7 +60,7 @@ use Application.
 - Transformations are versioned as changes in the configuration in the Keboola project.
 Applications are versioned externally.
 - Applications can be created for you by 3rd parties, with some or even no access to your Keboola project.
-- There are also some [technical differences](https://developers.keboola.com/extend/custom-science/#technical-differences) between the two.
+- There are also some technical differences between the two; see the [component types](/extend/component/#component-types) overview.
 
 When deciding between the two, consider your capabilities, available resources and the
 complexity of the task you need to perform. For more details, go to our [Developer Documentation](/extend/).

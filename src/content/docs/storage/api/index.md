@@ -22,7 +22,7 @@ Please note that the Storage API calls require the request to be sent
 as `form-data` (unlike the rest of Keboola API, which is sent as `application/json`).
 
 For exporting tables from and importing tables to Storage, we highly recommend that you use one of the
-[available clients](/integrate/storage/) or the [Storage API Importer service](/storage/api/importer/).
+available clients or the [Storage API Importer service](/storage/api/importer/).
 All imports and exports are done using CSV files. See
 the [RFC4180 Specification](https://tools.ietf.org/html/rfc4180) for the format
 and encoding specification, and

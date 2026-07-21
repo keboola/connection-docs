@@ -8,7 +8,7 @@ slug: 'tutorial/onboarding'
 Welcome to the Keboola onboarding guide! Whether you've completed your proof of concept project or are stepping up 
 from the [free tier](https://connection.us-east4.gcp.keboola.com/wizard), this guide will help you navigate through it. 
 
-Check out the complete overview of the Keboola platform [here](https://help.keboola.com/overview/).
+Check out the complete overview of the Keboola platform [here](/overview/).
 
 ## Build a Solid Foundation
 We recommend starting with a good plan. It will give you a good foundation for your further work with Keboola. If your plan is smaller, 
@@ -20,7 +20,7 @@ covering one or two Keboola projects, you may not need all these steps. Here's w
 4. [Keboola Governance Details](#keboola-governance-details)
    
 ### Create a Keboola Platform Usage Blueprint
-Use our [template](https://help.keboola.com/tutorial/onboarding/usage-blueprint/) to create a blueprint that fits your company. This includes:
+Use our [template](/tutorial/onboarding/usage-blueprint/) to create a blueprint that fits your company. This includes:
 
 - Selecting organization administrators
 - Setting up a project access request system, possibly with approval steps
@@ -30,15 +30,15 @@ Use our [template](https://help.keboola.com/tutorial/onboarding/usage-blueprint/
 ### Design a Multi-Project Architecture
 This step is entirely **optional**.
 
-Check out our guide for creating a [multi-project setup](https://help.keboola.com/tutorial/onboarding/architecture-guide/), which helps organize 
+Check out our guide for creating a [multi-project setup](/tutorial/onboarding/architecture-guide/), which helps organize 
 data tasks across several Keboola projects.
 
 ### Business Data Model Methodology
-Our Business Data Model [guide](https://help.keboola.com/tutorial/onboarding/architecture-guide/bdm-guide/)
+Our Business Data Model [guide](/tutorial/onboarding/architecture-guide/bdm-guide/)
 helps you to keep your data flexible and efficient, which is especially useful with multiple projects.
  
 ### Keboola Governance Details
-Our governance [guide](https://help.keboola.com/tutorial/onboarding/governance-guide/) teaches you to monitor usage and costs, plus enhance security.
+Our governance [guide](/tutorial/onboarding/governance-guide/) teaches you to monitor usage and costs, plus enhance security.
 
 ## Get Your Hands On!
 It's time to get practical:
@@ -56,6 +56,6 @@ It's time to get practical:
 
 ## Cheat Sheet: Embracing Best Practices
 Mastering Keboola means knowing how to set up components, automate workflows, and more. 
-Here’s a [cheat sheet](https://help.keboola.com/tutorial/onboarding/cheat-sheet/) to help you along.
+Here’s a [cheat sheet](/tutorial/onboarding/cheat-sheet/) to help you along.
 
 Enjoy exploring Keboola!

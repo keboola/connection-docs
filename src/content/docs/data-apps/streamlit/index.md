@@ -117,7 +117,7 @@ By default, there are two environment variables available that make it easy to a
 - `KBC_URL`: This represents the URL of the current Keboola project.
 - `KBC_TOKEN`: This represents the Storage token with full read-write access to Keboola Storage.
 
-To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](https://help.keboola.com/management/project/tokens/).
+To securely access Storage, we recommend creating a dedicated Storage token with limited permissions and passing it to your app as a secret. You can generate such a token following the [guide here](/management/project/tokens/).
 
 **Important:**
 Do not name your secret `KBC_TOKEN`, as this name is reserved.
@@ -133,7 +133,7 @@ client = Client(kbc_url, kbc_token)
 These variables represent the project where the application is deployed. To map data from a different project, you need to configure the appropriate secrets.
 
 ## Loading Data from Storage
-To load data from the Storage of a Keboola project into the app, use the [input mapping](https://help.keboola.com/transformations/mappings/#input-mapping) section. Just select your table in the input mapping section and navigate to that by `/data/in/tables/your_data.csv` or `/data/in/files/fileID_FileName.*` in your code. Note that the app needs to be redeployed to fetch up-to-date data. Or you can use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
+To load data from the Storage of a Keboola project into the app, use the [input mapping](/transformations/mappings/#input-mapping) section. Just select your table in the input mapping section and navigate to that by `/data/in/tables/your_data.csv` or `/data/in/files/fileID_FileName.*` in your code. Note that the app needs to be redeployed to fetch up-to-date data. Or you can use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client) in the app to load the data as needed.
 
 ## Writing Back to Storage
 For writing data back to Keboola Project Storage, use the [Keboola Storage Python Client](https://github.com/keboola/sapi-python-client).

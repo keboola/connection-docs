@@ -26,7 +26,7 @@ When creating a data stream, you choose a **source type** that determines how da
 | **OpenTelemetry (OTLP)** | An OTLP/HTTP endpoint that accepts logs, metrics, and traces from any OpenTelemetry-compatible SDK or collector. |
 
 ## How It Works
-The Data Streams feature receives messages via HTTP and saves them into the database once predefined conditions (e.g., record count, total size, or time) are met. The service uses Keboola's [Stream API](https://stream.keboola.com/v1/documentation/) for efficient data management. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/)
+The Data Streams feature receives messages via HTTP and saves them into the database once predefined conditions (e.g., record count, total size, or time) are met. The service uses Keboola's [Stream API](https://stream.keboola.com/v1/documentation/) for efficient data management.
 
 ### Create a Data Stream
 Follow these steps to create a data stream:
@@ -49,7 +49,7 @@ This dashboard shows the status of data waiting for import vs. imported data.
 In your table settings, you can:
 
 - Change the name of the stream.
-- Add a column or define your own structure using the PATH or JSONNET template. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/#template-jsonnet)
+- Add a column or define your own structure using the PATH or JSONNET template.
 - Edit column names (available only if you create a new table within the stream).
 - Delete a column (available only if you create a new table within the stream).
 
@@ -74,7 +74,7 @@ deduplication on load. Schedule it to run regularly with a [conditional flow](/f
 For easier use, we've prepared a few examples of how to send data to a stream using Python, Javascript, and Bash.
 
 #### Import conditions
-In this section, you can set a few conditions for importing data. If any of these three conditions are met, events are instantly uploaded to the destination table. You can set the import time frequency, the size of the imported data, or the number of imported records. [Learn more](https://developers.keboola.com/integrate/data-streams/overview/#conditions)
+In this section, you can set a few conditions for importing data. If any of these three conditions are met, events are instantly uploaded to the destination table. You can set the import time frequency, the size of the imported data, or the number of imported records.
 
 #### Payload test
 Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production.
@@ -91,4 +91,4 @@ For full setup instructions, SDK examples, use cases, and configuration details,
 Data Streams pricing varies based on the number of streams and the volume of ingested data. Please contact our support team for more details.
 
 ## Technical Documentation
-For further details and API integration steps, refer to our [comprehensive documentation](https://developers.keboola.com/integrate/push-data/).
+For further details and API integration steps, refer to the [Stream API documentation](https://stream.keboola.com/v1/documentation/).

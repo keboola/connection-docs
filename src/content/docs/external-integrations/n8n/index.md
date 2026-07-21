@@ -119,4 +119,4 @@ If you need functionality that isn’t covered by the node’s built-in actions,
 - **Operation errors**: Double-check input parameters such as bucket names, table IDs, or job IDs.
 - **Node not available**: Confirm the Keboola node is installed from the Community Nodes registry. There is currently support for self-hosted n8n instances only. We are working on adding support for n8n Cloud too (stay tuned).
 
-For further help, reach out via [Keboola Support](https://help.keboola.com).
+For further help, reach out via [Keboola Support](/).
