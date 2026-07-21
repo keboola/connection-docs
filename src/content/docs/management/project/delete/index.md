@@ -1,5 +1,6 @@
 ---
 title: Project Deletion
+description: It is possible to entirely delete your project. However, consider exporting the project first.
 slug: 'management/project/delete'
 redirect_from:
   - /management/project-delete/

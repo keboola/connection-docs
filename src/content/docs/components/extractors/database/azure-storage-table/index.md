@@ -1,5 +1,6 @@
 ---
 title: Azure Storage Table
+description: The Azure Storage Table data source connector allows you to fetch data from the…
 slug: 'components/extractors/database/azure-storage-table'
 ---
 

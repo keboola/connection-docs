@@ -1,5 +1,6 @@
 ---
 title: Terminal Log Tab
+description: The Terminal Log Tab in Keboola provides users with an almost real-time view of the application’s terminal logs.
 slug: 'data-apps/terminal-log-tab'
 redirect_from:
   - /components/data-apps/terminal-log-tab/

@@ -1,5 +1,6 @@
 ---
 title: Microsoft Advertising (Bing Ads)
+description: The Microsoft Advertising (Bing Ads) data source connector supports the extraction of either campaign entity data or various types of available reports.
 slug: 'components/extractors/marketing-sales/bing-ads'
 redirect_from:
     - /extractors/marketing-sales/bing-ads/

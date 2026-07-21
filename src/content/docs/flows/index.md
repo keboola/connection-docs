@@ -1,5 +1,6 @@
 ---
 title: Conditional Flows
+description: Flows allow you to build automated data pipelines with conditional logic, branching, retries, and robust error handling.
 slug: 'flows'
 redirect_from:
     - /flows/conditional-flows/

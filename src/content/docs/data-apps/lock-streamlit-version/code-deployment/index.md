@@ -1,5 +1,6 @@
 ---
 title: Code Deployment
+description: This guide explains how to lock package versions in Streamlit applications deployed from code in the Keboola platform.
 slug: 'data-apps/lock-streamlit-version/code-deployment'
 redirect_from:
   - /components/data-apps/lock-streamlit-version/code-deployment/

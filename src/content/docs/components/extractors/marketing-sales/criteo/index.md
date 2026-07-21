@@ -1,5 +1,6 @@
 ---
 title: Criteo
+description: This data source connector uses the Criteo Marketing Solutions API to extract data on ad performance.
 slug: 'components/extractors/marketing-sales/criteo'
 redirect_from:
     - /extractors/marketing-sales/criteo/

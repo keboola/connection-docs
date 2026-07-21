@@ -1,5 +1,6 @@
 ---
 title: OneDrive Files
+description: The OneDrive Files data source connector downloads files from the Microsoft OneDrive cloud storage and stores them in your project.
 slug: 'components/extractors/storage/onedrive-files'
 ---
 

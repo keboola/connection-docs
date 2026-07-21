@@ -1,5 +1,6 @@
 ---
 title: Bucket Exposure
+description: Bucket Exposure lets you share data from a Keboola bucket with people outside your Keboola project — directly inside their own Google BigQuery environment.
 slug: 'storage/bucket-exposure'
 ---
 

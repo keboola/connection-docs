@@ -1,5 +1,6 @@
 ---
 title: AWS Cost Usage Reports
+description: This data source connector downloads AWS Cost Usage Reports exported to S3 in CSV format.
 slug: 'components/extractors/other/aws-cu-reports'
 ---
 

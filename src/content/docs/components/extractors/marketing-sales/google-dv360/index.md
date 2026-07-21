@@ -1,5 +1,6 @@
 ---
 title: Google Display & Video 360
+description: "Google Display & Video 360 is an integrated solution for end-to-end advertising campaigns."
 slug: 'components/extractors/marketing-sales/google-dv360'
 ---
 

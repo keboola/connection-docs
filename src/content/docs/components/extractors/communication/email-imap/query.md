@@ -1,5 +1,6 @@
 ---
 title: IMAP Query Syntax
+description: "To combine multiple keywords enclose the query in brackets, e.g. the following matches all unseen emails received from address sender-email@example.com with…"
 slug: 'components/extractors/communication/email-imap/query-syntax'
 ---
 

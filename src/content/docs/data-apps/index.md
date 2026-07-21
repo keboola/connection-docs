@@ -1,5 +1,6 @@
 ---
 title: Apps
+description: Apps are simple, interactive web applications that use data to deliver insights or automatically take action.
 slug: 'data-apps'
 redirect_from:
   - /components/data-apps/

@@ -1,5 +1,6 @@
 ---
 title: Exasol
+description: This data destination connector sends data to a Exasol database.
 slug: 'components/writers/database/exasol'
 redirect_from:
     - /writers/database/exasol/

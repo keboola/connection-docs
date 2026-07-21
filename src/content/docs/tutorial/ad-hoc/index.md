@@ -1,5 +1,6 @@
 ---
 title: "Part 5: Ad-Hoc Data Analysis"
+description: After you have loaded your tables, either manually or using a data source connector, manipulated the data in SQL, written it into Google Sheets, and set…
 slug: 'tutorial/ad-hoc'
 ---
 

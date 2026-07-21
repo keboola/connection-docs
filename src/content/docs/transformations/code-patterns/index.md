@@ -1,5 +1,6 @@
 ---
 title: Code Patterns
+description: Code Pattern is a special type of component that…
 slug: 'transformations/code-patterns'
 ---
 

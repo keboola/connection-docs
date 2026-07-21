@@ -1,5 +1,6 @@
 ---
 title: Project Users
+description: To be able to work with Keboola, each user needs to have the following.
 slug: 'management/project/users'
 redirect_from:
   - /management/users/

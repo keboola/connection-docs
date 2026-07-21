@@ -1,5 +1,6 @@
 ---
 title: Workspace
+description: A workspace serves several purposes and can be used as…
 slug: 'workspace'
 redirect_from:
   - /transformations/sandbox/

@@ -1,5 +1,6 @@
 ---
 title: Kai Best Practices
+description: Kai knows your schema but not your business rules. Include domain context for better results.
 slug: 'kai/best-practices'
 ---
 
