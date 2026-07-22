@@ -132,11 +132,21 @@ or merged until every conflict is resolved.
 
 You resolve each conflicting configuration directly from the row:
 
-- **Resolve** keeps your branch version.
-- The dropdown next to it offers **Keep production version**, which discards your branch change for that
-  configuration and takes what is currently in production.
+- **Resolve** opens a three-way **Merge Conflict Resolution** view (see below).
+- The dropdown next to it offers a one-click shortcut, **Keep production version**, which discards your
+  branch change for that configuration and takes what is currently in production.
 
 ![Screenshot - Resolve conflict options](/components/branches/merge-requests/figures/conflict-resolve.png)
+
+### Three-way merge resolution
+
+**Resolve** opens the configuration side by side in three panes — **Production** (the current production
+version), an editable **Merge Result** in the middle, and your **Branch** version. Conflicting lines are
+highlighted; use the arrows to pull a line from either side into the merge result, or edit the merge
+result directly. When no conflicts remain, click **Save changes** to store the reconciled configuration
+in your branch.
+
+![Screenshot - Three-way merge conflict resolution](/components/branches/merge-requests/figures/conflict-resolution-3way.png)
 
 Alternatively, use **Pull from Prod** in the branch switcher to bring the current production state into
 your branch, reconcile the affected configurations yourself, and then submit the merge request again.
