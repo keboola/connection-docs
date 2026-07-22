@@ -45,11 +45,12 @@ jobs:
       - name: "Freshness report (docs vs new reference)"
         id: check
         run: |
-          if node scripts/check-cli-reference.mjs > /tmp/report.txt 2>&1; then
-            echo "status=clean" >> "$GITHUB_OUTPUT"
-          else
-            echo "status=FINDINGS — docs mention commands/flags the CLI no longer has" >> "$GITHUB_OUTPUT"
-          fi
+          node scripts/check-cli-reference.mjs > /tmp/report.txt 2>&1 && rc=0 || rc=$?
+          case "$rc" in
+            0) echo "status=clean" >> "$GITHUB_OUTPUT" ;;
+            2) echo "status=GATE ERROR — reference format unreadable; the gate could not run" >> "$GITHUB_OUTPUT" ;;
+            *) echo "status=FINDINGS — docs mention commands/flags the CLI no longer has" >> "$GITHUB_OUTPUT" ;;
+          esac
           { echo 'report<<KBEOF'; cat /tmp/report.txt; echo 'KBEOF'; } >> "$GITHUB_OUTPUT"
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v7

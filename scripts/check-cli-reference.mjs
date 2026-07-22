@@ -62,7 +62,10 @@ function parseOptionRow(line) {
   const spans = [...cell1.matchAll(/`([^`]+)`/g)].map((m) => m[1]);
   if (!spans.length) return null;
   const aliases = spans.filter((s) => s.startsWith('-'));
-  const takesValue = spans.some((s) => /^<.*>$/.test(s));
+  // Metavar forms: `<str>` (current generator), bare `TEXT`/`INTEGER` (Click's
+  // native make_metavar — emitted at v0.70.1, could return on a Typer/Click
+  // bump), and choice `[a|b]`. Pinned as a contract in keboola/cli#513.
+  const takesValue = spans.some((s) => /^<.*>$/.test(s) || /^[A-Z][A-Z0-9_]*$/.test(s) || s.startsWith('['));
   const positional = !aliases.length && cell1.includes('(positional)');
   return {
     aliases,
