@@ -36,6 +36,7 @@ Sensitive values — API keys, tokens, passwords — should be stored as **secre
 | Variable | Notes |
 |---|---|
 | `KBC_TOKEN` | Storage token, **injected automatically**. Reserved — do not set it yourself, and keep it server-side. |
+| `KBC_URL` | Storage API URL for the current stack, **injected automatically**. Pair it with `KBC_TOKEN` when creating the Storage client. |
 | `KBC_WORKSPACE_MANIFEST_PATH` | Path to the workspace manifest JSON file (contains `workspaceId`). Recommended source for the workspace ID. Set with Storage Access. |
 | `WORKSPACE_ID` | ID of the provisioned workspace. Also in the manifest — prefer the manifest in new code. Set with Storage Access. |
 | `BRANCH_ID` | Storage API branch ID of the project. |
