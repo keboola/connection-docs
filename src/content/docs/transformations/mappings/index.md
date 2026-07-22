@@ -199,7 +199,7 @@ You have read access to all the tables in your project's Storage directly on the
 ![Read Only Input Mapping in transformation](/transformations/mappings/read-only-transformation.png)
 
 In the transformation code (Snowflake), we select from the table **"in.c-main"."users"** and create a new table: `create table "cities" as select "city" from "in.c-main"."users";`.
-Depending on the backend, the SQL format is different. More info regarding access to individual tables depending on the backend can be found in the documentation of those individual backends ( [Snowflake](/transformations/snowflake-plain/#bucket-objects-for-read-only-input-mapping), [BigQuery](/transformations/bigquery/) ).
+Depending on the backend, the SQL format is different. More info regarding access to individual tables depending on the backend can be found in the documentation of those individual backends ( [Snowflake](/transformations/snowflake-plain/#bucket-objects-for-read-only-input-mapping), [BigQuery](/transformations/bigquery/#bucket-objects-for-read-only-input-mapping) ).
 
 As you can see, a **read-only input mapping** allows you to read a table created in Storage directly in the transformation.
 
