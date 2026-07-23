@@ -31,7 +31,7 @@ meaning queries are not executed directly against your Storage tables. Instead, 
 executes queries, and finally unloads created/modified objects back to the Storage.
 
 1. [**Input Mapping**](/transformations/mappings/#input-mapping): This is where you specify the tables to be used in your transformation. In the default setup, tables not mentioned in Input Mapping cannot be used in the transformation.
-2. [**Output Mapping**](/transformations/#output-mapping): This section deals with tables created or modified within your transformation. Here, you specify the tables that will be written into Storage after the successful execution of the transformation. Tables not mentioned in Output Mapping will neither be modified nor permanently stored; they are considered temporary.
+2. [**Output Mapping**](/transformations/mappings/#output-mapping): This section deals with tables created or modified within your transformation. Here, you specify the tables that will be written into Storage after the successful execution of the transformation. Tables not mentioned in Output Mapping will neither be modified nor permanently stored; they are considered temporary.
 3. [**Queries**](/tutorial/manipulate/#transformation-script): SQL queries define what will happen with the data. These queries take the tables from Input Mapping, modify them, and produce the tables referenced in Output Mapping. To enhance clarity, queries can be further organized into blocks.
 
 The mapping concept serves as a crucial safeguard when manipulating your data. It ensures that there is no accidental modification of the wrong tables. The only 

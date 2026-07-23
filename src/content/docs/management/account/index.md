@@ -136,7 +136,7 @@ To do that, follow the key's documentation (e.g., press the button):
 ![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
 
 ## Invitations
-The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-a-user) to.
+The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-user) to.
 When you accept an invitation, you'll become a user of the project and will be redirected there. 
 When you decline the invitation, you'll lose the opportunity to enter the project.
 

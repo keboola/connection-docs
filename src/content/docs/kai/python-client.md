@@ -100,7 +100,7 @@ For more usage examples (non-streaming chat, conversations, tool calls, tool app
 
 The Kai Python Client can be embedded into Keboola [Apps](/data-apps/) to provide AI-powered chat interfaces for your end users.
 
-**Important:** Apps are automatically provisioned with a Storage API token, but this built-in token is **not** a master token and is insufficient for the Kai Client. You must pass a [Master Token](/management/project/tokens/#master-tokens) explicitly — for example, via a [secret environment variable](/data-apps/python-js/#secrets) in your app configuration.
+**Important:** Apps are automatically provisioned with a Storage API token, but this built-in token is **not** a master token and is insufficient for the Kai Client. You must pass a [Master Token](/management/project/tokens/#master-tokens) explicitly — for example, via a [secret environment variable](/data-apps/python-js/#secrets-and-environment-variables) in your app configuration.
 
 #### Python/JS Apps
 
