@@ -21,6 +21,6 @@
   },
   "devDependencies": {
     "@vercel/node": "^5.8.4",
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.3.0"
   }
 }
