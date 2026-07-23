@@ -1,0 +1,72 @@
+name: "Sync CLI command reference"
+
+# Fetches the generated command reference from the latest keboola/cli release
+# (built from the CLI's own command tree — keboola/cli#500) and opens a PR
+# when it changed. The PR diff reads as the CLI changelog since the last sync;
+# the body carries the docs-freshness report against the new reference.
+#
+# NOTE: PRs opened with the default GITHUB_TOKEN do not trigger pull_request
+# workflows (a documented GitHub limitation), so branch.yml won't run on the
+# bot PR — the freshness report embedded in the PR body substitutes for it.
+# To get full CI on bot PRs later, add a PAT/GitHub-App secret and pass it as
+# `token:` to peter-evans/create-pull-request.
+
+on:
+  schedule:
+    - cron: "30 5 * * *" # daily, 05:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: "Sync"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: "Fetch latest command reference"
+        run: |
+          mkdir -p _data/cli
+          curl -fsSL --retry 3 \
+            https://github.com/keboola/cli/releases/latest/download/command-reference.md \
+            -o _data/cli/command-reference.md
+      - name: "Extract CLI version"
+        id: ver
+        run: |
+          v=$(grep -m1 -oE 'Generated from kbagent (v[0-9][0-9.]*)' _data/cli/command-reference.md | grep -oE 'v[0-9][0-9.]*' || true)
+          echo "version=${v:-unknown}" >> "$GITHUB_OUTPUT"
+      - name: "Freshness report (docs vs new reference)"
+        id: check
+        run: |
+          node scripts/check-cli-reference.mjs > /tmp/report.txt 2>&1 && rc=0 || rc=$?
+          case "$rc" in
+            0) echo "status=clean" >> "$GITHUB_OUTPUT" ;;
+            2) echo "status=GATE ERROR — reference format unreadable; the gate could not run" >> "$GITHUB_OUTPUT" ;;
+            *) echo "status=FINDINGS — docs mention commands/flags the CLI no longer has" >> "$GITHUB_OUTPUT" ;;
+          esac
+          { echo 'report<<KBEOF'; cat /tmp/report.txt; echo 'KBEOF'; } >> "$GITHUB_OUTPUT"
+      - name: "Create pull request"
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: _data/cli/command-reference.md
+          branch: sync/cli-command-reference
+          delete-branch: true
+          commit-message: "chore: sync CLI command reference (${{ steps.ver.outputs.version }})"
+          title: "chore: sync CLI command reference (${{ steps.ver.outputs.version }})"
+          body: |
+            Automated sync of `_data/cli/command-reference.md` from the latest
+            [keboola/cli release](https://github.com/keboola/cli/releases/latest).
+            The diff is effectively the CLI changelog since the last sync.
+
+            **Freshness check: ${{ steps.check.outputs.status }}**
+
+            ```
+            ${{ steps.check.outputs.report }}
+            ```

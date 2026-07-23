@@ -615,6 +615,62 @@ nav.sidebar {
   border-color: var(--border-2);
 }
 
+/* Page actions split-button: [Copy as Markdown][▾] + dropdown menu */
+.copy-md-group {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+/* Specificity note: these must beat `.page-title-row > :last-child button`
+   above (0-2-1), hence the class-based 0-3-0 selectors. */
+.page-title-row .copy-md-group .copy-md-btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.page-title-row .copy-md-group .copy-md-toggle {
+  display: inline-flex;
+  align-items: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  padding: 6px 7px;
+  cursor: pointer;
+}
+.copy-md-group .copy-md-toggle[aria-expanded='true'] {
+  color: var(--fg-1);
+  background: var(--bg-2);
+}
+.copy-md-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 190px;
+  padding: 4px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.copy-md-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--fg-2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.copy-md-menu a:hover {
+  background: var(--bg-2);
+  color: var(--fg-1);
+}
+.copy-md-menu a svg { flex-shrink: 0; opacity: 0.7; }
+.copy-md-menu a:hover svg { opacity: 1; }
+
 /* ───────── Markdown content ───────── */
 .sl-markdown-content {
   font-size: 15px;
@@ -810,7 +866,7 @@ nav.sidebar {
 /* Inline code — Keboola blue-tinted */
 .sl-markdown-content :not(pre) > code:not(:where(.not-content *)) {
   background: var(--kbc-blue-100);
-  color: var(--kbc-blue-600);
+  color: var(--kbc-blue-800);
   padding: 1.5px 6px;
   border-radius: 4px;
   font-family: var(--font-mono);
@@ -1380,7 +1436,24 @@ nav.sidebar {
   margin: 0;
   border: 0;
   border-radius: 0;
-  min-width: 100%;
+  /* Starlight defaults tables to display:block (its own scroll), which
+     collapses the table to content width and left-packs it inside our
+     full-width wrapper, leaving empty space on the right. Force real table
+     layout at full width: cells wrap normally and fill the wrapper; only when
+     the content genuinely can't fit does the table exceed the wrapper and the
+     wrapper scrolls horizontally. */
+  display: table;
+  width: 100%;
+}
+
+/* Fallback for raw HTML <table> blocks: the markdown table-scroll wrapper only
+   catches mdast table nodes, and hand-written <table> markup can split across
+   several HTML nodes, so it stays unwrapped. Make any unwrapped, non-spec,
+   non-status table scroll on its own instead of clipping under the TOC. */
+.sl-markdown-content
+  table:not(.beacon-spec-table):not(.beacon-status-table):not(:where(.beacon-table-scroll *)):not(:where(.not-content *)) {
+  display: block;
+  overflow-x: auto;
 }
 
 /* Instant view transitions */
@@ -1503,7 +1576,9 @@ nav.sidebar {
 }
 .ak-msg { display: flex; }
 .ak-msg-user { justify-content: flex-end; }
-.ak-msg-assistant { justify-content: flex-start; }
+/* Column so the appended .ak-sources block stacks BELOW the bubble instead of
+   becoming a side-by-side flex sibling (which pushed sources off to the right). */
+.ak-msg-assistant { flex-direction: column; align-items: flex-start; }
 .ak-bubble {
   max-width: 92%;
   padding: 10px 14px;

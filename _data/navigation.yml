@@ -516,6 +516,9 @@ items:
 
       - url: /components/branches/
         title: Development Branches
+        items:
+          - url: /components/branches/merge-requests/
+            title: Merge Requests
 
       - url: /components/ip-addresses/
         title: IP Addresses
