@@ -359,7 +359,14 @@ export const sidebar = [
           },
         ],
       },
-      { slug: "components/branches" },
+      {
+        label: "Development Branches",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/branches" },
+          { slug: "components/branches/merge-requests" },
+        ],
+      },
       { slug: "components/ip-addresses" },
     ],
   },
