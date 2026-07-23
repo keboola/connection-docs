@@ -51,6 +51,10 @@ function convertItem(item) {
   // Branch node — has children
   // The parent page itself goes first, then each child is converted recursively
   const childItems = item.items.map(convertItem);
+  // Label-only group (no landing page of its own)
+  if (!item.url) {
+    return { label: item.title, collapsed: true, items: childItems };
+  }
   return {
     label: item.title,
     collapsed: true,
