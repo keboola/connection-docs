@@ -13,10 +13,10 @@
     "check:cli": "node scripts/check-cli-reference.mjs"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.38",
-    "astro": "^6",
+    "@astrojs/starlight": "^0.41",
+    "astro": "^7",
     "marked": "^18.0.4",
-    "sharp": "^0.33",
+    "sharp": "^0.35",
     "starlight-image-zoom": "^0.14"
   },
   "devDependencies": {
