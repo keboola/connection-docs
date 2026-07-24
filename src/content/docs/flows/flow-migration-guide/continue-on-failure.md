@@ -2,15 +2,15 @@
 title: Continue on Failure in Conditional Flows
 slug: 'flows/flow-migration-guide/continue-on-failure'
 description: >-
-  Conditional Flows have no Continue on Failure toggle and no warning job status.
-  Learn how to reproduce continue-on-failure with a warning notification using
-  conditions.
+  Conditional Flows have no Continue on Failure toggle, so the Legacy Flow
+  "continue on failure + warning notification" behavior is not migrated
+  automatically. Learn how to reproduce it using conditions.
 ---
 
 When you migrate a [Legacy Flow](/flows/flows-legacy/) to a [Conditional Flow](/flows/) using the [Migration Guide](/flows/flow-migration-guide/), the **Continue on Failure** behavior does not carry over automatically. This page explains why and shows how to reproduce it with conditions.
 
 :::caution[Known issue]
-Conditional Flows have no **Continue on Failure** toggle, and therefore no job **warning** status. In Legacy Flows, the **warning** status appeared when a task with **Continue on Failure** enabled finished with an error. The combination of continuing on failure and sending a warning notification is not migrated automatically — you have to rebuild it manually using [conditions](/flows/#conditions).
+Conditional Flows have no **Continue on Failure** toggle. In Legacy Flows, enabling **Continue on Failure** on a task made the task finish with a **warning** status instead of failing the whole Flow, and could send a warning notification. Because Conditional Flows have no **Continue on Failure** toggle, this behavior is not migrated automatically — you have to rebuild it manually using [conditions](/flows/#conditions).
 :::
 
 ## Workaround: reproduce continue-on-failure with conditions
