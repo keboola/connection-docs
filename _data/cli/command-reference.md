@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.76.1 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.76.2 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
