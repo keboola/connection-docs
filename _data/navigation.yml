@@ -651,6 +651,8 @@ items:
         title: Command Reference
       - url: /cli/web-ui/
         title: Web UI
+      - url: /cli/troubleshooting/
+        title: Troubleshooting
 
   - url: /workspace/
     title: Workspaces

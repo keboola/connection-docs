@@ -459,6 +459,7 @@ export const sidebar = [
       { slug: "cli/for-agents" },
       { slug: "cli/commands" },
       { slug: "cli/web-ui" },
+      { slug: "cli/troubleshooting" },
     ],
   },
   {

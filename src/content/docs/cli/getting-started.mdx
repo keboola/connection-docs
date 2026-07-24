@@ -18,35 +18,37 @@ This walkthrough takes you from nothing to browsing a real project with [kbagent
 
 Pick your operating system:
 
+{/* VERIFY(owner: Padak): provisional canon — install script marked Recommended on macOS/Linux (matches the landing page and README), uv as the alternative. Flip the labels if uv-first is preferred. */}
+
 <Tabs syncKey="os">
   <TabItem label="macOS">
-    The prebuilt wheel via the install script:
+    **Recommended** — the prebuilt wheel via the install script:
 
     ```bash
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Or with [uv](https://docs.astral.sh/uv/) (easy to pin to a version or uninstall):
+    Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
     ```bash
     uv tool install "git+https://github.com/keboola/cli"
     ```
   </TabItem>
   <TabItem label="Linux">
-    The prebuilt wheel via the install script:
+    **Recommended** — the prebuilt wheel via the install script:
 
     ```bash
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Or with [uv](https://docs.astral.sh/uv/) (easy to pin to a version or uninstall):
+    Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
     ```bash
     uv tool install "git+https://github.com/keboola/cli"
     ```
   </TabItem>
   <TabItem label="Windows">
-    Install with [uv](https://docs.astral.sh/uv/) in PowerShell (install uv first if you don't have it):
+    **Recommended** — [uv](https://docs.astral.sh/uv/) in PowerShell, the one supported native path on Windows (install uv first if you don't have it):
 
     ```powershell
     uv tool install "git+https://github.com/keboola/cli"
@@ -70,7 +72,10 @@ On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv
 
 ## Step 2 — Connect your project
 
-For one project you need a [Storage API token](/management/project/tokens/) and your stack URL:
+For one project you need a Storage API token and your stack URL. To create the token, open your project in the browser and go to **Project Settings → API Tokens → New Token**: give it a description, pick **Full Access** (you can scope it down later), and click **Create** — then copy the token right away, it's shown only once.
+
+![The New Token form in Keboola Project Settings: a description field, an Expires In selector, and Full Access selected for both Files and Components & Buckets, with the Create button in the corner](/cli/token-create.png)
+{/* Screenshot: live capture of /admin/projects/264/tokens-settings/new-token, demo project 264, 2026-07-24. */}
 
 ```bash
 kbagent project add --project prod \
@@ -79,7 +84,7 @@ kbagent project add --project prod \
 
 `prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
 
-A Storage API token is enough for browsing. Some commands need an admin (master) token — `token create` requires the `canManageTokens` permission, and creating branches or workspaces needs admin privileges.
+A Storage API token is enough for browsing. Some commands need an admin (master) token — `token create` requires the `canManageTokens` permission, and creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 
 :::caution
 kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
@@ -148,5 +153,7 @@ KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
 Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 
 ---
+
+Something failing along the way? The [Troubleshooting](/cli/troubleshooting/) page covers the most common errors and their fixes.
 
 **Next:** [How kbagent works →](/cli/concepts/)

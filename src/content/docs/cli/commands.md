@@ -75,7 +75,7 @@ $ kbagent --json project list
 
 ## Error codes
 
-With `--json`, failures return a stable string `code` you can branch on, grouped into categories (auth/access, network, API, configuration, jobs, storage, sync, and more) — for example `INVALID_TOKEN`, `TIMEOUT`, `QUEUE_JOB_FAILED`, `UNKNOWN_ERROR`. The full list is in the CLI's [`docs/error-codes.md`](https://github.com/keboola/cli/blob/main/docs/error-codes.md).
+With `--json`, failures return a stable string `code` you can branch on, grouped into categories (auth/access, network, API, configuration, jobs, storage, sync, and more) — for example `INVALID_TOKEN`, `TIMEOUT`, `QUEUE_JOB_FAILED`, `UNKNOWN_ERROR`. The full list is in the CLI's [`docs/error-codes.md`](https://github.com/keboola/cli/blob/main/docs/error-codes.md); the codes you're most likely to meet, with fixes, are on [Troubleshooting](/cli/troubleshooting/).
 
 <!-- Counts intentionally omitted (both code and category counts drift faster than docs — Padak reviews 2026-07). -->
 

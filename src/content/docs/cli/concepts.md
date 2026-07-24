@@ -10,7 +10,11 @@ description: 'The concepts behind the kbagent CLI — the connection and config 
 
 This page explains the ideas behind [kbagent](/cli/) so the commands make sense. You don't need it to get going — [Get started](/cli/getting-started/) is enough for that — but it's worth reading before you script kbagent or hand it to an agent.
 
-<!-- Source: keboola/cli README + docs/guide.md. Explanation-type page. -->
+![How kbagent works: you or an AI agent issue commands to kbagent running locally, which keeps a config store of project aliases and tokens and a local serve process for the Web UI and scheduled agents; every call passes through the permission firewall (--deny-writes, --deny-destructive, persisted policies) before reaching your Keboola projects' APIs across US/EU stacks, with read commands fanning out organization-wide](/cli/how-it-works.svg)
+
+Everything below is that picture in words: connections feed the config store, the firewall decides what may pass, and the same commands address one project or the whole organization.
+
+<!-- Source: keboola/cli README + docs/guide.md. Explanation-type page. Diagram: public/cli/how-it-works.svg (hand-authored, editable). -->
 
 ## Connections and config
 

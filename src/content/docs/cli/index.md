@@ -27,7 +27,7 @@ It's just as comfortable in your own hands: one tool for every project from the 
 ## In one minute
 
 ```bash
-# install (macOS/Linux; see Get started for Windows)
+# install (recommended on macOS/Linux; Windows → Get started)
 curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
 # connect a project
 kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
