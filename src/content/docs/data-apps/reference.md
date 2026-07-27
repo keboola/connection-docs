@@ -28,7 +28,7 @@ Each app has its own configuration.
 
 ## Environment variables
 
-Sensitive values — API keys, tokens, passwords — should be stored as **secrets** in the app configuration, never written into your code. The platform also injects several variables automatically: `BRANCH_ID` (always set), `KBC_TOKEN` and `DATA_LOADER_API_URL` (with Data Loader), and `WORKSPACE_ID` / `QUERY_SERVICE_URL` / `KBC_WORKSPACE_MANIFEST_PATH` (with Storage Access). See the [runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables) for the full list.
+Sensitive values — API keys, tokens, passwords — should be stored as **secrets** in the app configuration, never written into your code. The platform also injects several variables automatically: `BRANCH_ID` (always set), `KBC_TOKEN` (with Data Loader), and `WORKSPACE_ID` / `QUERY_SERVICE_URL` / `KBC_WORKSPACE_MANIFEST_PATH` (with Storage Access). See the [runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables) for the full list.
 
 | Variable | Notes |
 |---|---|
