@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.72.0 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.76.1 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
@@ -375,6 +375,21 @@ Show detailed information about a specific component.
 | `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-db-snowflake) |
 | `--project` `<str>` |  | Project alias (uses first available if not set) |
 
+### `kbagent component sync-action`
+
+Run a synchronous component action such as testConnection.
+
+| Option | Required | Description |
+|---|---|---|
+| `action_name` (positional) | yes | |
+| `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-db-mysql) |
+| `--config-id` `<str>` |  | Configuration ID whose stored configData to send (required unless --config-data) |
+| `--row-id` `<str>` |  | Configuration row ID to shallow-merge over the root configuration |
+| `--project` `<str>` | yes | Project alias |
+| `--branch` `<int>` |  | Run in a specific dev branch ID (defaults to active branch) |
+| `--config-data` `<str>` |  | Explicit configData JSON: inline, @file.json, or - for stdin (skips config fetch) |
+| `--timeout` `<int>` |  | Request timeout in seconds for the action call (long actions e.g. getTables) |
+
 ## `config`
 
 Browse and inspect configurations
@@ -402,6 +417,16 @@ Show detailed information about one or many configurations.
 | `--config-id` `<str>` |  | Configuration ID. When omitted, the command switches to BULK mode and returns every configuration under --component-id as a JSON array ({'configs': [...], 'errors': [...]}). |
 | `--branch` `<int>` |  | Get detail from a specific dev branch ID (defaults to active branch) |
 | `--with-state` |  | Attach the runtime state dict to each config under 'state'. Single-config mode: state is read from the same detail response (no extra HTTP call). Bulk mode: state is fetched inline via include=state (no N+1). WARNING: --with-state output may contain OAuth tokens, refresh tokens, and other credential-bearing runtime data. Do not pipe into logs, scratch files, or shared workspaces without redaction. |
+
+### `kbagent config examples`
+
+Show sample configuration JSON examples for a component.
+
+| Option | Required | Description |
+|---|---|---|
+| `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-google-drive) |
+| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--row` |  | Show row configuration examples only |
 
 ### `kbagent config search`
 
@@ -1294,6 +1319,61 @@ Export a table to a Storage File.
 | `--file-type` `<str>` |  | Output format: 'csv' (default) or 'parquet'. Parquet output is always sliced; with --download each slice is saved as its own file under --output (treated as a directory). |
 | `--keep-slices` |  | CSV-only with --download: write each slice as its own file under --output (treated as a directory) instead of concatenating into a single CSV. Mirrors the parquet download layout. Ignored for parquet (always sliced) and for non-sliced exports. |
 
+### `kbagent storage snapshots`
+
+List snapshots of a table.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--table-id` `<str>` | yes | Table ID (e.g. 'in.c-my-bucket.my-table') |
+| `--limit` `<int>` |  | Max snapshots to return |
+| `--branch` `<int>` |  | Dev branch ID (production endpoint by default) |
+
+### `kbagent storage snapshot-create`
+
+Create a snapshot of a table (data + columns + primary key).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--table-id` `<str>` | yes | Table ID to snapshot (e.g. 'in.c-my-bucket.my-table') |
+| `--description` `<str>` |  | Human-readable snapshot description |
+| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+
+### `kbagent storage snapshot-detail`
+
+Show one snapshot's detail (source table, creation time, description).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--snapshot-id` `<str>` | yes | Snapshot ID |
+
+### `kbagent storage snapshot-delete`
+
+Delete one or more table snapshots (the source tables are untouched).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--snapshot-id` `<str>` | yes | Snapshot ID to delete (repeat for multiple) |
+| `--dry-run` |  | Show what would be deleted without executing |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent storage table-from-snapshot`
+
+Create a NEW table from an existing snapshot (snapshot restore).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--snapshot-id` `<str>` | yes | Source snapshot ID |
+| `--bucket-id` `<str>` | yes | Destination bucket ID (e.g. 'in.c-my-bucket') |
+| `--name` `<str>` | yes | Name for the new table (required by the API) |
+| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--dry-run` |  | Show what would be created without executing |
+
 ## `stream`
 
 Data Streams (OTLP) source management
@@ -1512,6 +1592,66 @@ List recent Kai chat sessions.
 | `--project` `<str>` |  | Project alias (uses default if omitted). |
 | `--limit` / `-n` `<int>` |  | Maximum number of chats to return. |
 
+## `docs`
+
+Ask the Keboola documentation natural-language questions
+
+### `kbagent docs query`
+
+Ask the Keboola documentation a natural language question.
+
+| Option | Required | Description |
+|---|---|---|
+| `question` (positional) | yes | |
+| `--project` `<str>` |  | Project alias (uses first available if not set) |
+
+## `transformation`
+
+SQL transformations - create, inspect, and edit blocks/codes
+
+### `kbagent transformation create`
+
+Create a SQL transformation from a SQL script.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias |
+| `--name` `<str>` | yes | Transformation name |
+| `--sql` `<str>` |  | SQL text (semicolon-separated statements). Mutually exclusive with --sql-file. |
+| `--sql-file` `<path>` |  | Read SQL from a file. Mutually exclusive with --sql. |
+| `--created-table` `<str>` |  | Table name created by the SQL (repeatable). Each is mapped to out.c-<derived-bucket>.<table> in the output mapping. |
+| `--component-id` `<str>` |  | SQL transformation component ID (keboola.snowflake-transformation or keboola.google-bigquery-transformation). Default: derived from the project's default backend. |
+| `--description` `<str>` |  | Configuration description |
+| `--branch` `<int>` |  | Create in a specific dev branch ID (defaults to active branch) |
+| `--dry-run` |  | Print the would-be configuration payload without creating |
+
+### `kbagent transformation show`
+
+Show a SQL transformation's block/code tree with positional IDs.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--component-id` `<str>` |  | Component ID. When omitted, the known SQL transformation components are tried until the configuration is found. |
+| `--branch` `<int>` |  | Read from a specific dev branch ID (defaults to active branch) |
+
+### `kbagent transformation edit`
+
+Edit a SQL transformation's blocks/codes with positional operations.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--component-id` `<str>` |  | Component ID. When omitted, the known SQL transformation components are tried until the configuration is found. |
+| `--branch` `<int>` |  | Edit in a specific dev branch ID (defaults to active branch) |
+| `--change-description` `<str>` | yes | Human-readable summary of this change (stored in config version history) |
+| `--op` `<str>` |  | Operation as inline JSON (repeatable, applied in order). Ops: add_block, remove_block, rename_block, add_code, remove_code, rename_code, set_code, add_script, str_replace. Example: '{"op": "set_code", "block_id": "b0", "code_id": "b0.c0", "script": "SELECT 1;"}'. IDs come from `transformation show`. Mutually exclusive with --op-file. |
+| `--op-file` `<path>` |  | Read operations from a JSON file containing an array of op objects. |
+| `--storage` `<str>` |  | FULL REPLACEMENT of configuration.storage (inline JSON, @file, or - for stdin). Include every input/output mapping you want to keep -- the existing storage block is overwritten wholesale. |
+| `--dry-run` |  | Apply ops locally and print the resulting tree without writing |
+
 ## `flow`
 
 Manage conditional flows (keboola.flow)
@@ -1538,12 +1678,20 @@ Show detailed conditional-flow information including phases and tasks.
 
 ### `kbagent flow schema`
 
-Print the conditional-flow YAML template, or --full for the live JSON Schema.
+Print the conditional-flow YAML template, or --full for the JSON Schema.
 
 | Option | Required | Description |
 |---|---|---|
-| `--full` |  | Dump the live JSON Schema fetched from the stack (requires --project). |
-| `--project` `<str>` |  | Project alias -- required for --full (the schema is served by the stack). |
+| `--full` |  | Dump the conditional-flow JSON Schema: live from the stack with --project, bundled snapshot without it. |
+| `--project` `<str>` |  | Project alias -- with --full, fetch the live schema from this stack. |
+
+### `kbagent flow examples`
+
+Show bundled example flow configurations (offline, no project needed).
+
+| Option | Required | Description |
+|---|---|---|
+| `--component-id` `<str>` |  | Flow component id: keboola.flow (conditional, default) or keboola.orchestrator (legacy, informational only). |
 
 ### `kbagent flow validate`
 
@@ -2071,6 +2219,16 @@ Show the entities in a semantic-layer model.
 | `--project` `<str>` | yes | Project alias |
 | `--model` `<str>` |  | Model name or UUID. Optional when the project has a single model. |
 | `--type` `<str>` |  | Filter to one entity type: dataset | metric | relationship | constraint | glossary. |
+
+### `kbagent semantic-layer schema`
+
+Fetch the server-side JSON Schema of semantic object types.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--type` `<str>` |  | Comma-separated semantic type(s): model | dataset | metric | relationship | constraint | glossary. |
+| `--all` |  | Fetch the schema of every known semantic type. |
 
 ### `kbagent semantic-layer export`
 
