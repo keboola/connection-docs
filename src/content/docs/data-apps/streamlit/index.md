@@ -5,6 +5,7 @@ description: Build and manage Streamlit apps in Keboola — a Python-only framew
 redirect_from:
   - /components/data-apps/streamlit/
   - /components/data-apps/backend-versions/
+  - /data-apps/backend-versions/
 ---
 
 Streamlit is a Python-only framework for building data tools quickly. It remains supported for existing apps and simple internal tools.
@@ -142,7 +143,7 @@ The `keboola-streamlit` package wraps these for Streamlit with helpers like `keb
 
 ## Runtime and language support
 
-Backend versions since **1.15.0** are available in multiple Python variants:
+Current backend versions are available in multiple Python variants:
 
 | Python Version | Notes |
 |---|---|
@@ -160,9 +161,9 @@ Each backend version is displayed in the following format:
 <backend_version> - Python <python_version> + Streamlit <streamlit_version>
 ```
 
-For example: `1.15.2 - Python 3.13 + Streamlit 1.51`.
+For example: `Python 3.13 + Streamlit 1.51` prefixed by the image release number.
 
-- **Backend version** (`1.15.2`): The release version of the base Docker image that powers your app.
+- **Backend version**: The release version of the base Docker image that powers your app.
 - **Python version** (`3.13`): The version of the Python interpreter.
 - **Streamlit version** (`1.51`): The version of the [Streamlit](https://streamlit.io/) framework used to run your app.
 

@@ -6,6 +6,9 @@ redirect_from:
   - /components/data-apps/lock-streamlit-version/
   - /components/data-apps/lock-streamlit-version/code-deployment/
   - /components/data-apps/lock-streamlit-version/git-deployment/
+  - /data-apps/lock-streamlit-version/
+  - /data-apps/lock-streamlit-version/code-deployment/
+  - /data-apps/lock-streamlit-version/git-deployment/
 ---
 
 :::note[Streamlit apps only]

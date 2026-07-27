@@ -4,6 +4,7 @@ slug: 'data-apps/streamlit/design-guide'
 description: Practical patterns for building a user-friendly Streamlit app in Keboola - theming, headers, body components, footers, and Storage communication.
 redirect_from:
   - /components/data-apps/general-design-guide/
+  - /data-apps/general-design-guide/
 ---
 
 

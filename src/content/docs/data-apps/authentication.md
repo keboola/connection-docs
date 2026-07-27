@@ -8,12 +8,16 @@ redirect_from:
   - /components/data-apps/oidc/
   - /data-apps/oidc/auth0/
   - /components/data-apps/oidc/auth0/
+  - /data-apps/authentication/auth0/
   - /data-apps/oidc/google-cloud-platform/
   - /components/data-apps/oidc/google-cloud-platform/
+  - /data-apps/authentication/google-cloud-platform/
   - /data-apps/oidc/microsoft-entra-id/
   - /components/data-apps/oidc/microsoft-entra-id/
+  - /data-apps/authentication/microsoft-entra-id/
   - /data-apps/oidc/okta/
   - /components/data-apps/oidc/okta/
+  - /data-apps/authentication/okta/
 ---
 
 Once an app is deployed, its URL is publicly available. Protect it so only the right people can open it, and choose the method that fits your audience. You set it in the app's configuration under **Authentication → Authentication Type**, which offers six options.

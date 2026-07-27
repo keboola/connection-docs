@@ -4,6 +4,7 @@ slug: 'data-apps/reference'
 description: Per-app settings, environment variables, data access, backend versions, and limits for Keboola apps.
 redirect_from:
   - /components/data-apps/terminal-log-tab/
+  - /data-apps/terminal-log-tab/
   - /data-apps/storage-access/
 ---
 
