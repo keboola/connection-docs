@@ -523,6 +523,108 @@ export const sidebar = [
     ],
   },
   {
+    label: "Extending Keboola",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "extend" },
+      {
+        label: "Components",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "extend/component" },
+          {
+            label: "Tutorial",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/component/tutorial" },
+              { slug: "extend/component/tutorial/input-mapping" },
+              { slug: "extend/component/tutorial/output-mapping" },
+              { slug: "extend/component/tutorial/configuration" },
+              { slug: "extend/component/tutorial/processors" },
+              { slug: "extend/component/tutorial/debugging" },
+            ],
+          },
+          { slug: "extend/component/processors" },
+          {
+            label: "Code Patterns",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/component/code-patterns" },
+              { slug: "extend/component/code-patterns/interface" },
+              { slug: "extend/component/code-patterns/tutorial" },
+            ],
+          },
+          {
+            label: "Implementation Notes",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/component/implementation" },
+              { slug: "extend/component/implementation/php" },
+              { slug: "extend/component/implementation/python" },
+              { slug: "extend/component/implementation/r" },
+            ],
+          },
+          { slug: "extend/component/running" },
+          {
+            label: "UI Options",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/component/ui-options" },
+              {
+                label: "Configuration Schema",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "extend/component/ui-options/configuration-schema" },
+                  { slug: "extend/component/ui-options/configuration-schema/examples" },
+                  { slug: "extend/component/ui-options/configuration-schema/sync-action-examples" },
+                ],
+              },
+              { slug: "extend/component/ui-options/default-configuration" },
+            ],
+          },
+          { slug: "extend/component/deployment" },
+        ],
+      },
+      {
+        label: "Common Interface",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "extend/common-interface" },
+          { slug: "extend/common-interface/folders" },
+          { slug: "extend/common-interface/config-file" },
+          { slug: "extend/common-interface/environment" },
+          {
+            label: "Manifest Files",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/common-interface/manifest-files" },
+              { slug: "extend/common-interface/manifest-files/in-tables-manifests" },
+              { slug: "extend/common-interface/manifest-files/in-files-manifests" },
+              { slug: "extend/common-interface/manifest-files/in-files-s3-staging" },
+              { slug: "extend/common-interface/manifest-files/in-files-abs-staging" },
+              { slug: "extend/common-interface/manifest-files/out-tables-manifests" },
+              { slug: "extend/common-interface/manifest-files/out-tables-manifests-native-types" },
+              { slug: "extend/common-interface/manifest-files/out-files-manifests" },
+            ],
+          },
+          { slug: "extend/common-interface/oauth" },
+          { slug: "extend/common-interface/actions" },
+          { slug: "extend/common-interface/logging" },
+          { slug: "extend/common-interface/development-branches" },
+        ],
+      },
+      { slug: "extend/job-queue" },
+      {
+        label: "Publishing Component",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "extend/publish" },
+          { slug: "extend/publish/checklist" },
+        ],
+      },
+    ],
+  },
+  {
     label: "External Integrations",
     collapsed: true,
     items: [
