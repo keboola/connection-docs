@@ -4,8 +4,6 @@ slug: 'data-apps/what-are-apps'
 description: Understand what Keboola apps are — Python/JS applications that run inside your project on governed data — and how they're hosted.
 ---
 
-
-
 A Keboola app is an interactive application that runs inside your Keboola project, on top of your data. Use one to give people a way to *see* and *act on* data, not just move it.
 
 ## How apps fit into Keboola
@@ -15,7 +13,6 @@ Keboola has always handled the data pipeline — extracting, transforming, and l
 This is the part that sets Keboola apps apart from general app builders: the app is governed by default. There's no separate database connection to configure, expose, or leak, and no dataset copied to an outside service — the app reads through the project's own access, server-side. It can only touch data the project can touch, and you control who can open it.
 
 Keboola provisions and runs the app for you — there's no server to set up.
-<!-- TODO(human-review, Michal Jerabek / Pavel Synek): confirm the hosting model to state publicly. Live today = Operator (Keboola's Kubernetes). E2B is the proposed backend for Kai-generated JS apps and is NOT yet signed off. Do not document E2B as the hosting mechanism until confirmed. -->
 
 ## What you can build
 
@@ -40,8 +37,6 @@ Keboola apps run on **Python/JS** — any Python web framework (Flask, FastAPI, 
 How development actually works — code, configuration, data access, deployment — is covered in [Build locally](/data-apps/build-locally/).
 
 Have an existing **Streamlit** app? Streamlit remains supported; its documentation lives in the [Streamlit apps](/data-apps/streamlit/) section.
-
-<!-- TODO(human-review, Miro): verify the framework framing — Python/JS as the sole forward path for new apps. Do not state Streamlit is retired. -->
 
 ## Where Kai fits
 

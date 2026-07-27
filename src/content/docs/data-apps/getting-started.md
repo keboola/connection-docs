@@ -7,15 +7,13 @@ redirect_from:
   - /data-apps/build-in-the-ui/
 ---
 
-
-
 Kai builds a working app from a plain-language description — no coding and no Git account needed. From one chat it reads your governed data, writes the code, and opens a live draft you can preview, refine, and publish. This walkthrough takes you from nothing to a **live, published app in about 10 minutes**, and covers the details you'll want next: how to prompt, what Kai asks before touching your project, how drafts become production, and the [manual creation path](#create-an-app-manually) on the same screen.
 
 Apps go well beyond dashboards — the same steps produce internal tools, data narratives, or [anything interactive](/data-apps/#beyond-dashboards). This page builds a simple dashboard so you can learn the flow.
 
 ## What you'll need
 
-- A Keboola project with **Kai** available. <!-- TODO(human-review, Adam Vyborny): state the exact prerequisite. Building Python/JS apps requires the new Kai backend enabled on the project. Give the real enablement step or link. -->
+- A Keboola project with **Kai** available.
 - At least one table in **Storage** — Kai reads your data directly, so it works with whatever you already have.
 - A few minutes.
 
@@ -23,7 +21,6 @@ Apps go well beyond dashboards — the same steps produce internal tools, data n
 Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
 
 <a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
-<!-- Full skill folder vendored verbatim from keboola/ai-kit@b7f57df (plugins/dataapp-developer/skills/dataapp-development/) as a zip so the download works same-origin. Per Jordan (Jul 14 sync): ship the whole folder — skill + templates + references — not just SKILL.md. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## Step 1 — Open Apps and start a new app
@@ -86,13 +83,9 @@ Kai explores your Storage without asking, so it can find the right tables and un
 
 A draft is your private working version with live preview — Kai keeps it on its own branch in the app's managed Git repository, alongside the production app it created up front. **Publish to Production** merges the draft branch into `main`, deploys the production app, and cleans the draft up.
 
-<!-- Publish mechanics observed live (264, 2026-07-10): update context file (CLAUDE.md in the app repo), merge draft branch → main, deploy prod, delete draft branch/config. -->
-
 ## How Kai handles data access
 
 Kai uses your data through the project's access controls — the app can only reach data the project can reach. Read-only access is used by default, so the app can't change your data unless you ask for write-back.
-
-<!-- TODO(human-review, Adam Vyborny): confirm "read-only by default" claim and how write-back is enabled. -->
 
 ## Create an app manually
 

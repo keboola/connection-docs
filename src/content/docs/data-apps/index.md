@@ -7,8 +7,6 @@ redirect_from:
   - /data-apps/examples/
 ---
 
-
-
 Apps let you build interactive applications — dashboards, tools, internal apps — directly on top of your data in Keboola. The app runs in your project's governed space, so it can only reach the data you already have access to. No separate hosting, no shadow IT.
 
 ## What a Keboola app is
@@ -37,8 +35,6 @@ Every app has its own settings page in **Apps**: who can open it ([Authenticatio
 Apps go far beyond dashboards — live data narratives, internal tools, configurators, even games. These three were built with Kai during Keboola's internal app competition; each turns real data into something interactive and genuinely useful, built the same way you'd build an everyday internal tool: describe what you want to Kai, on top of your Storage data.
 
 *The links below open real, running apps that sleep when idle — the first load may take a few seconds to wake.*
-
-<!-- VERIFY(Jordan / Miro): these three are Jordan's picks for public showcase. Confirm they can stay linked publicly in external docs (they run on internal projects and may sleep). -->
 
 ### Seasonal — when and where to travel
 
@@ -71,8 +67,6 @@ An editorial, **scrollytelling** guide to personal color analysis — from Itten
 ## A note on frameworks
 
 Keboola apps run on **Python/JS** — that's what Kai builds and the forward path for new apps. [Streamlit](/data-apps/streamlit/) remains supported for existing apps; its docs live in their own section.
-
-<!-- TODO(human-review, Miro): confirm the exact "default vs supported" wording for Python/JS vs Streamlit. Do not state Streamlit is retired. -->
 
 ---
 

@@ -7,15 +7,12 @@ redirect_from:
   - /components/data-apps/backend-versions/
 ---
 
-
-
 Streamlit is a Python-only framework for building data tools quickly. It remains supported for existing apps and simple internal tools.
 
 :::note[Streamlit apps only]
 Everything in this section applies to **Streamlit** apps only. New apps — including everything Kai builds — run on [Python/JS](/data-apps/build-locally/); see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 :::
 
-<!-- TODO(human-review, Miro): confirm the positioning. Streamlit is supported but on a deprecation path internally; do NOT state it is retired. Keep this subtree clearly scoped as "Streamlit-specific". -->
 Ready to move an app to the current stack? See [Migrate a Streamlit app to Python/JS](/data-apps/streamlit/migrate-to-python-js/).
 
 ## In this section
@@ -23,8 +20,6 @@ Ready to move an app to the current stack? See [Migrate a Streamlit app to Pytho
 - **[Design guide](/data-apps/streamlit/design-guide/)** — layout and styling patterns for Streamlit apps.
 - **[Lock the Streamlit version](/data-apps/streamlit/lock-version/)** — pin your app to a specific Streamlit version.
 - **[Migrate to Python/JS](/data-apps/streamlit/migrate-to-python-js/)** — move an existing Streamlit app to the current stack with Kai.
-
-<!-- TODO(human-review, Miro): design-guide.md and lock-version.md were created from the moved/merged source (former top-level general-design-guide + the three lock-streamlit-version pages). Verify the content. -->
 
 ## Build a Streamlit app
 
@@ -155,8 +150,6 @@ Backend versions since **1.15.0** are available in multiple Python variants:
 | **3.11** | Faster execution in many workloads (10–60% speedup over 3.10). Good balance of compatibility and performance. |
 | **3.13** | Latest stable Python release. Best performance and newest language features, but some packages may not yet support it. |
 
-<!-- VERIFY(Adam Vyborny): the current page says Python 3.10 only. Confirmed stale — supported versions are 3.10, 3.11, and 3.13. -->
-
 ## Backend versions
 
 When deploying an app, you can select a **backend version** from a dropdown in the deployment wizard. Each backend version defines the runtime environment, including the Python version, Streamlit version, and a set of pre-installed packages.
@@ -194,8 +187,6 @@ All backend versions ship with the same set of pre-installed packages regardless
 - `toml`
 
 To add packages beyond this list, specify them in the **Packages** field (for code deployment) or in a `requirements.txt` file (for Git repository deployment).
-
-<!-- TODO(human-review, Michal Jerabek): NO-SOURCE in Loop A — the backend-versions changelog could not be verified against a reachable source. Confirm current backend versions and the hosting model (Operator today; E2B pending sign-off) before publishing. -->
 
 ## Theming
 To configure theming in your app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.

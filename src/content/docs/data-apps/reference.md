@@ -7,8 +7,6 @@ redirect_from:
   - /data-apps/storage-access/
 ---
 
-
-
 Technical reference for building and running Keboola apps — the settings, variables, and runtime behavior you'll reach for while developing.
 
 **On this page:** [Environment variables](#environment-variables) · [Data access](#data-access) · [Backend versions](#backend-versions) · [App actions](#app-actions) · [Sleep and resume](#sleep-and-resume) · [Limits](#limits)
@@ -27,8 +25,6 @@ Each app has its own configuration.
 | URL | The address where the app is served. |
 | Versioning | Draft vs production versions of the app, on the **Versions** tab. |
 
-<!-- Rows reflect the app config observed live (Overview + App Info + deploy wizard). Confirm the full Advanced Settings list before treating as exhaustive. -->
-
 ## Environment variables
 
 Sensitive values — API keys, tokens, passwords — should be stored as **secrets** in the app configuration, never written into your code. The platform also injects several variables automatically: `BRANCH_ID` (always set), `KBC_TOKEN` and `DATA_LOADER_API_URL` (with Data Loader), and `WORKSPACE_ID` / `QUERY_SERVICE_URL` / `KBC_WORKSPACE_MANIFEST_PATH` (with Storage Access). See the [runtime README](https://github.com/keboola/data-app-python-js/blob/main/README.md#environment-variables) for the full list.
@@ -41,8 +37,6 @@ Sensitive values — API keys, tokens, passwords — should be stored as **secre
 | `WORKSPACE_ID` | ID of the provisioned workspace. Also in the manifest — prefer the manifest in new code. Set with Storage Access. |
 | `BRANCH_ID` | Storage API branch ID of the project. |
 | `QUERY_SERVICE_URL` | URL of the Query Service API (stack-specific). Set with Storage Access. |
-
-<!-- VERIFY(Adam Vyborny): confirm the full env-var list. Correct the existing error: KBC_TOKEN is reserved/auto-injected, not a secret the user adds; "the value is uppercased" should read "the variable name", not the value. -->
 
 ### Secrets
 
@@ -60,8 +54,6 @@ When deploying an app, you select a **backend version** — the runtime image �
 - **Python / Node / Bun versions**: the interpreters available to your code.
 
 Python/JS apps bring their own dependencies from the repository — `requirements.txt` for Python, `package.json` for Node — installed on deploy. There is no pre-installed package list to depend on.
-
-<!-- Python/JS wizard format observed live (us-east4 + europe-west3, 2026-07-10): "1.6.1 - Python 3.11 + JavaScript (Node 20, Bun 1.3) (default)"; XSmall = 8 GB RAM, 1 CPU core, 1TB SSD shared. -->
 
 Building a **Streamlit** app? Its backend versions, supported Python variants, and the pre-installed package list live in the [Streamlit section](/data-apps/streamlit/#backend-versions).
 
@@ -218,8 +210,6 @@ If the app deployment job fails, you can see the logs from its container in the 
 ![Job error log](/data-apps/job-error-log.png)
 
 ## Limits
-
-<!-- TODO(human-review, owner): confirm any hard limits vs configurable backend sizes (Jordan's note: limits should not lead a reference page — keep them at the bottom). -->
 
 Storage Access has the following limitations:
 

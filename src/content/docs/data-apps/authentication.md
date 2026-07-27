@@ -16,8 +16,6 @@ redirect_from:
   - /components/data-apps/oidc/okta/
 ---
 
-
-
 Once an app is deployed, its URL is publicly available. Protect it so only the right people can open it, and choose the method that fits your audience. You set it in the app's configuration under **Authentication → Authentication Type**, which offers six options.
 
 ![The Authentication Type dropdown in an app's configuration, listing None, Basic, OIDC, GitLab, GitHub, and JumpCloud](/data-apps/auth-options.png)
@@ -25,13 +23,11 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 ## Authentication methods
 
 - **None (Public Access)** — the app is public to anyone with the URL. You can still add your own authorization inside the app; for Streamlit, use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) ([example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py)).
-- **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, the password is shown on the app's configuration page next to **Open App**, ready to copy — and when Kai builds an app, it shows the password as the last step. <!-- TODO(human-review, Miro): note the password-rotation gotcha flagged in Loop A. -->
+- **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, the password is shown on the app's configuration page next to **Open App**, ready to copy — and when Kai builds an app, it shows the password as the last step.
 - **OIDC (Custom)** — users sign in with your identity provider (Auth0, Google Cloud, Microsoft Entra ID, Okta). Recommended for anything beyond a quick share.
 - **GitHub** — restrict access with GitHub OAuth by organization, team, repository, or allowed users.
 - **GitLab** — restrict access with GitLab OAuth by groups, projects, or roles.
 - **JumpCloud** — restrict access with JumpCloud OIDC, with optional role-based filtering.
-
-<!-- Authentication Type dropdown options observed live (us-east4): None (Public Access), Basic (Password), OIDC (Custom), GitLab, GitHub, JumpCloud — the six-method list is accurate; these are top-level types, not sub-providers of OIDC. -->
 
 ## OIDC (single sign-on)
 
@@ -54,12 +50,10 @@ The flow is the same for every provider — only the provider option, issuer URL
 
 | Provider | Keboola provider option | Issuer URL | Notes |
 |---|---|---|---|
-| **Auth0** | Generic OIDC | `https://<yourDomain>.us.auth0.com/` | Register a regular web application. <!-- VERIFY(Miro): confirm the Auth0 issuer format and provider option. The old page mislabeled this issuer as "Google OAuth 2.0" — do not carry that label forward. --> |
-| **Google Cloud** | Google SSO | `https://accounts.google.com` | On the **OAuth consent screen**, add `keboola.com` under **Authorized domains**. <!-- VERIFY(Miro): old page used an invalid `http://keboola.com` (scheme); confirm the bare-domain value and the redirect-URI step order. --> |
-| **Microsoft Entra ID** | Azure OIDC | *(from your tenant)* | Provide **Client ID**, **Client Secret**, and **Tenant ID**. To restrict by group, add a groups claim (**Manage → Token configuration → Add groups claim**; for large tenants, return only groups assigned to the app). <!-- VERIFY(Miro): confirm the "Tenant ID" field exists in the flow as described and the real field set. --> |
-| **Okta** | Generic OIDC | `https://<yourOktaOrg>.okta.com/oauth2/default` | Register an **OIDC – OpenID Connect** web app. <!-- Loop A: Okta verified clean against appsproxy source. --> |
-
-<!-- TODO(human-review, Miro): confirm the provider options, issuer URLs, and field names above against the live UI. -->
+| **Auth0** | Generic OIDC | `https://<yourDomain>.us.auth0.com/` | Register a regular web application. |
+| **Google Cloud** | Google SSO | `https://accounts.google.com` | On the **OAuth consent screen**, add `keboola.com` under **Authorized domains**. |
+| **Microsoft Entra ID** | Azure OIDC | *(from your tenant)* | Provide **Client ID**, **Client Secret**, and **Tenant ID**. To restrict by group, add a groups claim (**Manage → Token configuration → Add groups claim**; for large tenants, return only groups assigned to the app). |
+| **Okta** | Generic OIDC | `https://<yourOktaOrg>.okta.com/oauth2/default` | Register an **OIDC – OpenID Connect** web app. |
 
 ## GitHub authentication
 

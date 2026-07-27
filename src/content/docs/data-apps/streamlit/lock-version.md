@@ -8,8 +8,6 @@ redirect_from:
   - /components/data-apps/lock-streamlit-version/git-deployment/
 ---
 
-
-
 :::note[Streamlit apps only]
 This page applies to [Streamlit](/data-apps/streamlit/) apps only. New apps run on [Python/JS](/data-apps/build-locally/).
 :::
@@ -152,5 +150,5 @@ These apply to both deployment methods:
 - **Minimal dependencies:** include only the packages your app actually needs.
 - **Update regularly:** periodically review and update dependencies, testing in a development environment before updating production.
 - **Test locally:** verify the app works with the locked versions locally before deploying to Keboola.
-- **Match environments:** use the same Python version locally as Keboola to prevent version mismatches. <!-- VERIFY(owner): Keboola's Streamlit Python version — reference.md lists 3.10/3.11/3.13; reconcile the exact supported version(s). -->
+- **Match environments:** use the same Python version locally as Keboola to prevent version mismatches.
 - **Document:** keep track of why specific versions are pinned to help future maintenance.

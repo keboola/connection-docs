@@ -4,11 +4,7 @@ slug: 'data-apps/streamlit/migrate-to-python-js'
 description: 'Move an existing Streamlit app to the Python/JS stack with Kai — one click starts a guided migration that rebuilds the UI in React and moves queries server-side, leaving the original untouched until you publish.'
 ---
 
-
-
 New Keboola apps run on [Python/JS](/data-apps/what-are-apps/#the-stack-pythonjs). If you have an existing **Streamlit** app, Kai can migrate it for you — it rebuilds the same dashboard as a Python/JS app (React UI, server-side data access) while leaving your original Streamlit app untouched until you're ready to switch.
-
-<!-- Flow verified live in project 264 (Kai Agent), 2026-07-14: the "Migrate to Python/JS with Kai" button + Kai migration plan + build → draft preview. -->
 
 ## Before you start
 
@@ -34,8 +30,6 @@ Refine anything in chat, exactly as with [any Kai build](/data-apps/getting-star
 ## Step 3 — Publish and retire the old app
 
 When the migrated app looks right, click **Publish to Production**. Once you're confident in it over a run or two, you can delete the original Streamlit app from the **Apps** list if you no longer need it.
-
-<!-- TODO(human-review, Adam Vyborny): confirm whether the migration creates a separate new app or a new version of the same app, and the exact retire/delete step for the old Streamlit config. -->
 
 ---
 

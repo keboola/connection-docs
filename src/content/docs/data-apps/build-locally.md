@@ -6,8 +6,6 @@ redirect_from:
   - /data-apps/python-js/
 ---
 
-
-
 Build an app in your own environment when you want full control over the code, your editor, and your Git workflow. Keboola still hosts and runs the app — it clones your repository, installs dependencies, starts the app, and serves it behind a secure URL. You don't manage servers, ports, or Docker: only your code and a small configuration folder.
 
 For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
@@ -16,7 +14,6 @@ For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), s
 Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
 
 <a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
-<!-- Full skill folder vendored verbatim from keboola/ai-kit@b7f57df (plugins/dataapp-developer/skills/dataapp-development/) as a zip so the download works same-origin. Per Jordan (Jul 14 sync): ship the whole folder — skill + templates + references — not just SKILL.md. TODO: sync mechanism when repo→docs mirroring lands (Jordan). -->
 :::
 
 ## Before you start
@@ -46,8 +43,6 @@ app.get("/api/rows", async (req, res) => {
 `KBC_TOKEN` is injected automatically and must stay server-side. Don't add it as a secret yourself, and never send it to the browser.
 :::
 
-<!-- VERIFY(Adam Vyborny): scaffold (React + Vite + Express), file paths, and the KBC_TOKEN guidance. Source: internal Devin answer grounded in keboola/ui SKILL.md. The current public page tells users to add #KBC_TOKEN as a secret — that is wrong (reserved, auto-injected, silently shadowed) and must be corrected here. -->
-
 ## Develop with an AI coding tool
 
 You can build the app with an AI coding assistant (Claude Code, Cursor, or Copilot). When you create a Python/JS app, Keboola offers a ready-made **skill file** — **Download Skill** or **View on GitHub** — that teaches your assistant the correct app structure, deployment config, and Keboola APIs, so you get working code with fewer errors. The app's **Overview** also links it as **AI Skill for Building**.
@@ -60,8 +55,6 @@ The full skill folder — the skill plus app templates and reference guides — 
 ```
 
 ![The Create Python / JS App dialog, with a "Build Apps faster with AI" panel offering Download Skill and View on GitHub](/data-apps/python-js-ai-skill.png)
-
-<!-- VERIFY(Adam Vyborny): "Download Skill" / "View on GitHub" observed live in the Create Python/JS dialog (us-east4). Confirm the GitHub destination / canonical skill resource to link directly. -->
 
 ## How development works
 
