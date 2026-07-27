@@ -40,10 +40,10 @@ OIDC lets users log into your app through your single sign-on (SSO) provider. Ke
 The flow is the same for every provider — only the provider option, issuer URL, and a few provider quirks differ (see the table below). You must register a callback URL for **each** app; credentials can't be reused across apps.
 
 1. **Register the app with your identity provider.** Create an OIDC / OAuth 2.0 **web application** in the provider's console. You'll get a **Client ID** and **Client Secret**. Leave the callback URL for now — you don't have it until the Keboola app exists.
-2. **Create the app in Keboola.** Open **Apps**, click the green **+**, name it, and click **Create App**.
-3. **Set the authentication method.** In the app's **Information & Settings** tab, under **Authentication**, select **OIDC**, choose your provider option, and paste the **Client ID**, **Client Secret**, and **Issuer URL**. Click **Save**.
+2. **Create the app in Keboola.** Open **Apps**, click **+ Create App**, and [create the app manually](/data-apps/getting-started/#create-an-app-manually) — pick a stack, name the app, and click **Create App**. It opens on its own configuration page.
+3. **Set the authentication method.** On the configuration page, under **Authentication**, select **OIDC**, choose your provider option, and paste the **Client ID**, **Client Secret**, and **Issuer URL**. Click **Save**.
 4. **Add the callback URL to your provider.** Register the app's [callback URL](#callback-url-format) as the authorized redirect URI in the provider's console.
-5. **Deploy the app.** In the **Deploy App** tab, choose the **Code** or **GitHub** deployment type, add your code, and click **Deploy App**.
+5. **Deploy the app.** Set the app's **code source** — a Python/JS app runs from a connected **Git repository**; a Streamlit app can use inline **Code** or Git — then click **Deploy App** and complete the short wizard (backend size, inactivity timeout).
 6. **Test.** Open the app URL — you should be redirected to your provider to sign in, then land in the app.
 
 ### Provider settings
