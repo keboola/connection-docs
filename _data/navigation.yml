@@ -577,6 +577,26 @@ items:
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 
+      - url: /storage/api/
+        title: Storage API
+        items:
+          - url: /storage/api/configurations/
+            title: Configurations
+          - url: /storage/api/import-export/
+            title: Import & Export
+          - url: /storage/api/importer/
+            title: API Importer
+          - url: /storage/api/tde-exporter/
+            title: TDE Exporter
+          - url: /storage/api/clients/python-client/
+            title: Python client
+          - url: /storage/api/clients/r-client/
+            title: R client
+          - url: /storage/api/clients/php-client/
+            title: PHP client
+          - url: /storage/api/clients/docker-cli/
+            title: Docker CLI client
+
   - url: /transformations/
     title: Transformations
     items:
