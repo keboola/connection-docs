@@ -81,6 +81,8 @@ Control the flow of execution based on conditions like:
 - **Number of Output Tables** - control the flow based on how many output tables a task produces.
 - **Duration of Task** - condition to trigger actions depending on how long a task runs. This is useful for detecting anomalies (e.g., unusually short or long runtimes).
 
+Each of these can be evaluated for a single task, a whole phase, all or any task in a phase, or any task in the whole flow - see [What the Condition Compares](#3-what-the-condition-compares-subject).
+
 Evaluation proceeds from top to bottom, and once a condition is true, the remaining conditions are ignored - even if others would also evaluate to be true.
 
 :::caution
@@ -97,6 +99,51 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 - Use **(OR)** when any one statement being true is enough.
 
 ![](/flows/conditional-flows-condition.png)
+
+### 3. What the Condition Compares (Subject)
+
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](#using-variables-in-conditions)).
+
+In the **Phases / Tasks** tab you can choose:
+
+| Subject | What it evaluates |
+| --- | --- |
+| **Any Task in the Flow** | A flow-level row above the phase list. The statement passes when **at least one** finished task anywhere in the flow matches. |
+| ***phase* > Whole Phase Status** | The resulting status of the whole phase. |
+| ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
+| ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](#dynamic-value) variables). |
+
+For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
+
+Only phases that run **before** the condition (plus the condition's own phase) can be referenced. *Any Task in the Flow* is the exception - it is flow-level and not limited to upstream phases.
+
+:::caution
+*Any Task in the Flow* evaluates only tasks that have **already finished** at the moment the condition is evaluated. Tasks in phases that have not run yet are ignored.
+:::
+
+The typical use case is a single flow-level error branch - *"if any task in the flow ended with an error, send a notification"* - instead of repeating an *Any Task in Phase* statement for every phase.
+
+**JSON equivalent** (useful when authoring a flow as a template or via the API) - the aggregated subjects wrap the inner statement, which uses `*` as the task:
+
+```json
+{
+  "type": "operator",
+  "operator": "ANY_TASKS_IN_ANY_PHASE",
+  "operands": [
+    {
+      "type": "operator",
+      "operator": "EQUALS",
+      "operands": [
+        { "type": "task", "task": "*", "value": "job.status" },
+        { "type": "const", "value": "error" }
+      ]
+    }
+  ]
+}
+```
+
+The per-phase variants use the same shape with the `ANY_TASKS_IN_PHASE` or `ALL_TASKS_IN_PHASE` operator plus a `"phase": "<phase-id>"` property.
 
 ## Variables
 
