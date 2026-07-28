@@ -490,6 +490,14 @@ items:
               - url: /components/writers/other/yourpass/
                 title: YourPass
 
+          - url: /components/writers/generic-writer/
+            title: Generic Writer
+            items:
+              - url: /components/writers/generic-writer/configuration/
+                title: Configuration
+              - url: /components/writers/generic-writer/configuration-examples/
+                title: Configuration Examples
+
       - url: /components/applications/
         title: Applications
         items:

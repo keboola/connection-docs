@@ -331,6 +331,15 @@ export const sidebar = [
               { slug: "components/writers/other/yourpass" },
             ],
           },
+          {
+            label: "Generic Writer",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/generic-writer" },
+              { slug: "components/writers/generic-writer/configuration" },
+              { slug: "components/writers/generic-writer/configuration-examples" },
+            ],
+          },
         ],
       },
       {
