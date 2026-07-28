@@ -108,7 +108,7 @@ In the **Phases / Tasks** tab you can choose:
 
 | Subject | What it evaluates |
 | --- | --- |
-| **Any Task in the Flow** | A flow-level row above the phase list. The statement passes when **at least one** finished task anywhere in the flow matches. |
+| **Any Task in the Flow** | A flow-level row above the phase list. The statement passes when **at least one** already finished task anywhere in the flow matches. |
 | ***phase* > Whole Phase Status** | The resulting status of the whole phase. |
 | ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
 | ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
@@ -116,10 +116,10 @@ In the **Phases / Tasks** tab you can choose:
 
 For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
 
-Only phases that run **before** the condition (plus the condition's own phase) can be referenced. *Any Task in the Flow* is the exception - it is flow-level and not limited to upstream phases.
+When you pick a specific phase or task, you can only reference phases that run **before** the condition (plus the condition's own phase). *Any Task in the Flow* needs no phase at all, so it also covers tasks in parallel branches that already finished - not just the ones directly upstream.
 
 :::caution
-*Any Task in the Flow* evaluates only tasks that have **already finished** at the moment the condition is evaluated. Tasks in phases that have not run yet are ignored.
+A condition can only ever look at tasks that have **already finished** at the moment it is evaluated. *Any Task in the Flow* therefore silently ignores tasks in phases that have not run yet - it never waits for them.
 :::
 
 The typical use case is a single flow-level error branch - *"if any task in the flow ended with an error, send a notification"* - instead of repeating an *Any Task in Phase* statement for every phase.
