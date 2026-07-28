@@ -426,7 +426,21 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      {
+        label: "Variables & Shared Code",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/variables" },
+          {
+            label: "Variables API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "transformations/variables/api" },
+              { slug: "transformations/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
       {
         label: "dbt Transformation",
         collapsed: true,
