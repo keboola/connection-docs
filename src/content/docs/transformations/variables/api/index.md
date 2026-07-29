@@ -6,8 +6,6 @@ redirect_from:
 ---
 
 
-*Note: This is a preview feature and as such may change considerably in the future.*
-
 **Variables** are placeholders used in [configurations](/storage/api/configurations/). Their value is 
 resolved at [job runtime](/integrate/jobs/). 
 
@@ -57,7 +55,7 @@ This is an example of the contents of such a configuration:
 }
 ```
 
-Note that `type` is always `string`.
+Each variable declares a `type` (for example, `string`).
 
 ## Main Configuration
 When you create a variable configuration, you'll obtain an ID of the configuration - e.g., `807940806`. 
@@ -101,7 +99,7 @@ You can either store the variable values as [configuration rows](/storage/api/co
 time. There are three options how you can provide values to the variables:
 
 - Reference values using `variables_values_id` property in the *main configuration* (default values).
-- Reference values using `variablesValuesId` property in job parameters.
+- Reference values using `variableValuesId` property in job parameters.
 - Provide values using  `variableValuesData` property in job parameters.
 
 The structure of variable values, regardless of whether it is stored in configuration or provided at runtime, is as follows:
@@ -225,7 +223,7 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
                 ]
             }
         ]
-    }
+    },
     "variables_id": "807968875",
     "variables_values_id": "807952812"
 }
@@ -266,7 +264,7 @@ See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 There are three options for providing variable values when running a job:
 
 - Relying on default variables
-- Providing ID of values using the `variablesValuesId` property in job parameters
+- Providing ID of values using the `variableValuesId` property in job parameters
 - Providing values using the `variableValuesData` property in job parameters
 
 Following the rules for running a job, you always **have to** provide values for the defined variables. 
@@ -279,9 +277,9 @@ be replaced. If you omit *thirdVar*, it will be replaced by an empty string. If 
 *secondVar*, an error will be raised.
 
 The second rule is that the three options of passing values are mutually exclusive. If you provide values using 
-`variablesValuesId` or `variableValuesData`, it overrides the default values (if provided). You can't use 
-`variablesValuesId` and `variableValuesData` together in a single call. If you do that, an error will be raised.
-If no default values are set and none of the `variablesValuesId` or `variableValuesData` is provided, an error 
+`variableValuesId` or `variableValuesData`, it overrides the default values (if provided). You can't use 
+`variableValuesId` and `variableValuesData` together in a single call. If you do that, an error will be raised.
+If no default values are set and none of the `variableValuesId` or `variableValuesData` is provided, an error 
 will be raised.
 
 #### Option 1 -- Rely on default variables
@@ -406,7 +404,7 @@ the ID of the value row in `variableValuesId`:
 ```json
 {
     "component": "keboola.python-transformation-v2",
-    "config": "807968875,
+    "config": "807968875",
     "mode": "run",
     "variableValuesId": "807957572"
 }
