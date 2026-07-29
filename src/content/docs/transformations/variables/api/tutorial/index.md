@@ -17,7 +17,7 @@ In the examples, we use the `curl` console tool to interact with our APIs.
 First, store the [API endpoints](/overview/api/) as environment variables, so we don't have to repeat ourselves.
 
 We will need:
-- [Storage API](/storage/api/) to store the variable definitions and the extractor configuration -
+- [Storage API](/storage/api/) to store the variable definitions and the extractor configuration.
 - [Job Queue API](/extend/job-queue/) to run the extractor job from the configuration.
 
 The host names depend on your [stack](/overview/api/#stacks-and-endpoints):
@@ -31,7 +31,7 @@ export JOB_QUEUE_HOST="https://queue.keboola.com"
 
 A [Storage API Token](/management/project/tokens/) is needed to interact with the [Keboola APIs](/overview/api/#list-of-keboola-apis).
 
-Obtain a Storage API token from the user interface of your project, see this [Guide](/management/project/tokens).
+Obtain a Storage API token from the user interface of your project, see this [Guide](/management/project/tokens). The token must be allowed to manage component configurations — a read-only token fails at the create-configuration step.
 
 Then store the token to the environment variable.
 ```shell
@@ -164,7 +164,7 @@ In this example are values of the variables part of the run job request.
 
 For other ways to define values see the [Variables documentation](/transformations/variables/api/#variable-values).
 
-Use [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs) to run *extractor configuration*.
+Use [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) to run *extractor configuration*.
 ```shell
 curl --include \
      --request POST \
@@ -185,9 +185,16 @@ curl --include \
 
 ## Check the job result
 
-The status of a running job can be seen via API or UI.
+The run-job call returns a job object that includes its `id` and `status`. Poll the job by its ID to follow progress:
 
-In the picture we can see that the entered values of the variables were used.
+```shell
+curl --header "X-StorageApi-Token: $TOKEN" \
+     "$JOB_QUEUE_HOST/jobs/{jobId}"
+```
+
+The `status` progresses from `processing` to `success` when the job finishes (or `error` on failure, with details in the `result` field).
+
+In the Keboola UI you can see the same job — in the picture below, the entered values of the variables were used.
 
 ![Screenshot -- Job](/transformations/variables/api/tutorial-1.png)
 

@@ -55,7 +55,7 @@ This is an example of the contents of such a configuration:
 }
 ```
 
-Each variable declares a `type` (for example, `string`).
+Each variable declares a `type` — a free-form label describing the value's data type (for example, `string` or `int`). It is used by the UI; the resolver substitutes the value into the configuration as text regardless of the declared type.
 
 ## Main Configuration
 When you create a variable configuration, you'll obtain an ID of the configuration - e.g., `807940806`. 
@@ -230,8 +230,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 
 ```
 
-The `variables_id` property contains the ID of the [variable configuration](/transformations/variables/api/#step-1--create-variables-configuration) - e.g., `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/transformations/variables/api/#step-2--create-default-values-for-variable) - e.g., `807952812`.
+The `variables_id` property contains the ID of the [variable configuration](/transformations/variables/api/#step-1--create-variable-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](/transformations/variables/api/#step-2--create-default-values-for-variables) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 ```python
@@ -376,7 +376,7 @@ where you can verify that the variables were replaced.
 </details>
 
 #### Option 2 -- Run a job with stored values
-Similarly to the [default values](/transformations/variables/api/#step-2--create-default-values-for-variable), 
+Similarly to the [default values](/transformations/variables/api/#step-2--create-default-values-for-variables), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 ```json
