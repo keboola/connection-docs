@@ -6,10 +6,6 @@ redirect_from:
     - /integrate/mcp/
 ---
 
-:::caution
-**SSE Transport Deprecation:** The SSE transport for MCP Server will be deprecated on 01.04.2026. Please migrate to Streamable HTTP transport using `/mcp` endpoints instead of `/sse`. Streamable HTTP provides bidirectional streaming for improved performance and reliability.
-:::
-
 
 
 Connect your MCP clients and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user:
@@ -17,7 +13,7 @@ Connect your MCP clients and AI assistants to your **Keboola Project** and give 
 - **[Cursor](#using-with-cursor)** - Direct deeplink installation
 - **[Claude](#using-with-claude-desktop)** - Organization-level integration
 - **[ChatGPT](#using-with-chatgpt)** - Custom connector for Plus/Pro users
-- **[Windsurf](#using-with-windsurf)** - Plugin store or manual configuration
+- **[Windsurf](#using-with-windsurf)** - Manual configuration
 - **[VS Code](#using-with-vs-code)** - Agent mode with MCP servers
 - **[Make](#using-with-make)** - Agent mode with MCP servers
 - **[Other clients](#remote-server-setup)** - Remote server connection
@@ -44,7 +40,7 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 ![Claude debug error flow in MCP Server](/ai/mcp-server/mcp-claude-debug-error.gif)
 ## Connecting to Keboola's MCP Server
 
-Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication. Streamable HTTP is the recommended transport method, providing bidirectional streaming for improved performance compared to the deprecated SSE transport.
+Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication. Streamable HTTP is the recommended transport method, providing bidirectional streaming for improved performance and reliability.
 
 ### Remote Server Setup
 
@@ -182,9 +178,7 @@ Click the button related to your region below:
 
 ### Using with Windsurf
 
-Windsurf supports MCP through its native integration with Cascade. You can add Keboola's MCP Server in two ways:
-
-#### Option 1: Manual Configuration (Recommended)
+Windsurf supports MCP through its native integration with Cascade. Add Keboola's MCP Server with a manual configuration:
 
 1. Open the Windsurf settings and navigate to `Cascade` > `Plugins`
 2. Click on "Add MCP Plugin" or edit the `mcp_config.json` file directly
@@ -245,7 +239,7 @@ VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these s
 - Open the Chat view and enable agent mode
 - Select the **Tools** button to see available Keboola tools
 - Use `#` in your chat to reference specific tools or resources
-- The tools will be available with up to 128 tools per request
+- The available Keboola tools will appear in the tools list for the agent
 
 For detailed setup and troubleshooting, see the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
@@ -267,6 +261,8 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Storage** – Browse, edit, and document buckets, tables, and columns.  
 - **SQL** – Run and manage SQL queries.  
 - **Jobs** – Start, monitor, and debug execution flows.  
+- **Flows** – Create and manage flows that orchestrate your components.  
+- **Data Apps** – Browse and inspect your data apps.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
 
 ## Restricting Tool Access
@@ -311,7 +307,7 @@ The following tools are classified as read-only (they do not modify data). The l
 
 | Category | Tools |
 |----------|-------|
-| Components | `get_configs`, `get_components`, `get_config_examples` |
+| Components | `get_configs`, `get_components`, `get_config_examples`, `run_sync_action` |
 | Flows | `get_flows`, `get_flow_examples`, `get_flow_schema` |
 | Storage | `get_buckets`, `get_tables` |
 | SQL | `query_data` |
@@ -349,19 +345,6 @@ This configuration would result in only `get_configs`, `get_buckets`, and `get_t
 :::note[The rest of this page is for developers]
 The sections below cover running the server locally and integrating it programmatically. If you just want to connect an AI client, you're already done above — skip ahead, or hand these to your AI agent to set up for you.
 :::
-
-## MCP Server Capabilities
-
-The Keboola MCP Server supports several core concepts of the Model Context Protocol. Here's a summary:
-
-| Concept     | Supported | Notes                                                                                                  |
-|-------------|-----------|--------------------------------------------------------------------------------------------------------|
-| Transports  | ✅        | Supports `stdio` and `Streamable HTTP` (recommended) for client communication. |
-| Prompts     | ✅        | Processes natural language prompts from MCP clients to interact with Keboola.                          |
-| Tools       | ✅        | Provides a rich set of tools for storage operations, component management, SQL execution, job control. |
-| Resources   | ❌        | Exposing Keboola project entities (data, configurations, etc.) as formal MCP Resources is not currently supported.      |
-| Sampling    | ❌        | Advanced sampling techniques are not explicitly supported by the server itself.                        |
-| Roots       | ❌        | The concept of 'Roots' as defined in general MCP is not a specific feature of the Keboola MCP server.  |
 
 ## Running the MCP Server Locally
 
@@ -505,7 +488,7 @@ Beyond ready-made clients, you can integrate the Keboola MCP Server directly int
 
 ### Claude Messages API with MCP Connector (Beta)
 
-Anthropic offers a beta feature, the [MCP connector](https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector), which enables you to connect to remote MCP servers (such as the Keboola MCP Server) directly through Claude's Messages API. This method bypasses the need for a separate, standalone MCP client if you are already using the Claude Messages API.
+Anthropic offers a beta feature, the [MCP connector](https://platform.claude.com/docs/en/docs/agents-and-tools/mcp-connector), which enables you to connect to remote MCP servers (such as the Keboola MCP Server) directly through Claude's Messages API. This method bypasses the need for a separate, standalone MCP client if you are already using the Claude Messages API.
 
 **Key features of this integration:**
 
@@ -515,14 +498,14 @@ Anthropic offers a beta feature, the [MCP connector](https://docs.anthropic.com/
 
 This approach can simplify your architecture if you're building applications that programmatically interact with Claude and need to leverage MCP-enabled tools without managing an additional client layer.
 
-For complete details, API examples, and configuration options, please consult the [official Anthropic MCP connector documentation](https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector).
+For complete details, API examples, and configuration options, please consult the [official Anthropic MCP connector documentation](https://platform.claude.com/docs/en/docs/agents-and-tools/mcp-connector).
 
 ### OpenAI Agents SDK (Python)
 
 The [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/mcp/) ships with first-class MCP support. Simply start the Keboola MCP Server (locally via `uvx` or remotely over Streamable HTTP) and register it with the SDK:
 
 ```python
-from agents import Agent
+from agents import Agent, Runner
 from agents.mcp import MCPServerStdio
 
 async with MCPServerStdio(
@@ -533,7 +516,7 @@ async with MCPServerStdio(
         instructions="Use the Keboola tools to achieve the task",
         mcp_servers=[mcp],
     )
-    await agent.run("Load yesterday's CSV into Snowflake")
+    result = await Runner.run(agent, "Load yesterday's CSV into Snowflake")
 ```
 
 The SDK automatically calls `list_tools()` on the server, making every Keboola operation available to the model.
@@ -542,7 +525,7 @@ The SDK automatically calls `list_tools()` on the server, making every Keboola o
 
 [LangChain](https://python.langchain.com/docs/) does not yet include a built-in MCP connector, but you can integrate by:
 
-1. Running the Keboola MCP Server, or attaching to our deployed instance `https://mcp.REGION.keboola.com`.
+1. Running the Keboola MCP Server, or attaching to our deployed instance `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
 2. Mapping each entry from `list_tools()` to a `Tool` in LangChain.
 3. Adding those tools to an `AgentExecutor`.
 
@@ -556,7 +539,7 @@ Because the server returns standard JSON schemas, the mapping is straightforward
 
 If you are developing your own MCP client or integrating MCP capabilities into a custom application, you can connect to the Keboola MCP Server. The server supports standard MCP communication protocols.
 
-For detailed instructions and SDKs for building your own MCP client, refer to the official [Model Context Protocol documentation for client developers](https://modelcontextprotocol.io/quickstart/client). Supported transports (`stdio`, `Streamable HTTP`) are listed in [MCP Server Capabilities](#mcp-server-capabilities) above. For more details on the Keboola MCP server, including how it can be run and configured for custom client integration, refer to its [GitHub repository](https://github.com/keboola/mcp-server).
+For detailed instructions and SDKs for building your own MCP client, refer to the official [Model Context Protocol documentation for client developers](https://modelcontextprotocol.io/quickstart/client). Supported transports are `stdio` and `Streamable HTTP`. For more details on the Keboola MCP server, including how it can be run and configured for custom client integration, refer to its [GitHub repository](https://github.com/keboola/mcp-server).
 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
