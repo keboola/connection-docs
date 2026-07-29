@@ -6,8 +6,8 @@ redirect_from:
     - /integrate/push-data/tutorial/
 ---
 
-:::caution[Needs review]
-`VERIFY(owner)`: request shapes below follow the current [Stream API OpenAPI spec](https://stream.keboola.com/v1/documentation/openapi3.json) (sources + sinks model). The JSON *response* examples are illustrative, not captured from a live run, and the literal `default` value for `{branchId}` should be confirmed before publishing.
+:::note
+The request shapes below follow the current [Stream API OpenAPI spec](https://stream.keboola.com/v1/documentation/openapi3.json) (sources + sinks model). The JSON response snippets are illustrative — copy the actual values (e.g. the ingest URL) from your own API responses.
 :::
 
 In this tutorial, we will set up a data stream for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
@@ -88,7 +88,7 @@ curl --header "X-StorageApi-Token: YOUR_TOKEN" \
      "https://stream.keboola.com/v1/branches/default/sources/github-issues"
 ```
 
-The response contains the source's **ingest URL** (`https://stream.keboola.com/stream/...` with a secret) — this is the endpoint you will point the GitHub webhook at.
+The response contains the source's **ingest URL** in the `http.url` field — a value of the form `https://stream-in.keboola.com/<secret>` (the ingest endpoint is a separate data-plane host, `stream-in.<stack>`). This is the endpoint you will point the GitHub webhook at.
 
 By default, received events are imported into the table when the [import conditions](/storage/data-streams/reference/#conditions) are met (defaults: 1 minute / 50 MB / 50,000 records — adjustable via the [sink settings endpoints](/storage/data-streams/reference/#source-and-sink-settings)).
 

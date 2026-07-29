@@ -48,7 +48,7 @@ Replace `<your-stream-endpoint>` with the endpoint URL shown on the source detai
 
 ### Step 3: Verify Data Ingestion
 
-Records are typically available in Storage within approximately 15 seconds of ingestion. Check the **Table statistics** on the source detail page to confirm data is flowing.
+Records become available in Storage once the stream's [import conditions](/storage/data-streams/reference/#conditions) are met (by default within about a minute). Check the **Table statistics** on the source detail page to confirm data is flowing.
 
 ## Destination Tables
 

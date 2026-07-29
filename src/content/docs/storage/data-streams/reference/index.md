@@ -97,7 +97,7 @@ Changing these conditions will trigger an immediate import of waiting files, aft
 
 Sources can be created using the [`POST /v1/branches/{branchId}/sources`](https://stream.keboola.com/v1/documentation/#/configuration/CreateSource) endpoint.
 
-If a source or sink `id` is omitted, it will be generated from the corresponding `name` field.
+If the `sourceId` or `sinkId` is omitted, it will be generated from the corresponding `name` field.
 
 A source may be created without any sinks. The sinks can then be created separately using the [`POST /v1/branches/{branchId}/sources/{sourceId}/sinks`](https://stream.keboola.com/v1/documentation/#/configuration/CreateSink) endpoint.
 
@@ -105,7 +105,7 @@ A source may be created without any sinks. The sinks can then be created separat
 
 The requests are asynchronous and create a task that must be completed before the source or sink is ready to use. The task status can be checked using the [`GET /v1/tasks/{taskId}`](https://stream.keboola.com/v1/documentation/#/configuration/GetTask) endpoint.
 
-Sink tables are created if they do not exist. If they already exist, the schema defined by `sink.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the import from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
+Sink tables are created if they do not exist. If they already exist, the schema defined by `sink.table.mapping.columns` must match the existing schema. If the table schema is manually altered and it no longer matches, the import from staging storage to the table will fail. The data is kept in the staging storage for up to 7 days during which you can recover any failures.
 
 ## Delete Sources and Sinks
 
@@ -117,13 +117,13 @@ A source may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourc
 
 The `UpdateSource` endpoint may only update the source's name. Sinks may only be updated separately.
 
-If a sink's `mapping.tableId` is updated, it is handled the same way as in the create operation. If the table exists, `mapping.columns` must match the existing table's schema. If the table does not exist, it is created.
+If a sink's `table.tableId` is updated, it is handled the same way as in the create operation. If the table exists, `table.mapping.columns` must match the existing table's schema. If the table does not exist, it is created.
 
 ## Source and Sink Settings
 
-The import conditions mentioned above can be accessed using the [`GET /v1/branches/{branchId}/sources/{sourceId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSourceSettings) endpoint and changed using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/PatchSourceSettings) endpoint.
+The import conditions mentioned above can be accessed using the [`GET /v1/branches/{branchId}/sources/{sourceId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSourceSettings) endpoint and changed using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSourceSettings) endpoint.
 
-Same settings also exist for a sink. Use the [`GET /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSinkSettings) endpoint and the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/PatchSinkSettings) endpoint in that case.
+Same settings also exist for a sink. Use the [`GET /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSinkSettings) endpoint and the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSinkSettings) endpoint in that case.
 
 ## Delivery Guarantees
 
