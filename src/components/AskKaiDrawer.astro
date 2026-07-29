@@ -13,7 +13,7 @@
  */
 ---
 
-<dialog id="ask-kai-drawer" aria-label="Ask Kai about the Keboola docs" transition:persist>
+<dialog id="ask-kai-drawer" aria-label="Ask Kai — AI assistant for the Keboola docs" transition:persist>
   <div class="ak-shell">
     <header class="ak-header">
       <div class="ak-title">
@@ -30,7 +30,7 @@
 
     <section class="ak-messages" id="ak-messages" aria-live="polite">
       <div class="ak-empty" data-ask-kai-empty>
-        <p class="ak-empty-lede">Ask anything about Keboola — I'll search the docs and cite the pages I use.</p>
+        <p class="ak-empty-lede">Hi, I'm Kai — Keboola's AI assistant for the docs. Ask me anything and I'll answer from the documentation and cite the pages I use.</p>
         <div class="ak-suggestions">
           <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I set up a flow with conditional steps?</button>
           <button type="button" class="ak-suggestion" data-ask-kai-prompt>What backends does Keboola Storage support?</button>
@@ -55,6 +55,8 @@
         </svg>
       </button>
     </form>
+
+    <p class="ak-footnote">Kai is an AI and can make mistakes. Check the sources it links.</p>
   </div>
 </dialog>
 
@@ -435,7 +437,7 @@
         '</span>' +
         '<span class="ak-sc-body">' +
           '<span class="ak-sc-title">Ask Kai</span>' +
-          '<span class="ak-sc-text">Get an instant answer about the docs</span>' +
+          '<span class="ak-sc-text">Get an instant AI-powered answer about the docs</span>' +
         '</span>' +
         '<span class="ak-sc-go" aria-hidden="true">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
@@ -453,7 +455,7 @@
       const refresh = () => {
         const q = readQuery();
         const t = cta.querySelector('.ak-sc-text') as HTMLElement;
-        if (t) t.textContent = q ? `“${q}”` : 'Get an instant answer about the docs';
+        if (t) t.textContent = q ? `“${q}”` : 'Get an instant AI-powered answer about the docs';
       };
       // Live-update the CTA label as the user types in the search box.
       frame.addEventListener('input', refresh);
