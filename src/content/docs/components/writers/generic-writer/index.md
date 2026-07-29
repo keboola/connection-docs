@@ -28,14 +28,14 @@ The content can be sent in two ways:
 
 1. Send all content at once – either BINARY or JSON in chunks
 2. Iterate through each row – where the data is sent in iterations specified in the input data. By default 1 row = 1 iteration. 
-This allows to change the endpoint dynamically based on the input using placeholders: `www.example.com/api/user/{{id}}`.
+This allows to change the endpoint dynamically based on the input using placeholders: `www.example.com/api/user/[[id]]`.
 Or sending data with different user parameters that are present in the input table.
 
 ## Use Cases
 
-There are variety of use-cases for the generic writer. You may create, update or even delete objects via RESTful API or just trigger 
+There are a variety of use-cases for the generic writer. You may create, update or even delete objects via RESTful API or just trigger 
 simple webhooks by sending GET requests to specified endpoints or send notifications to slack. The setup is quite straightforward and it 
-allows you to leverage secure [encripted parameters](overview/encryption/) and dynamic functions. 
+allows you to leverage secure [encrypted parameters](https://developers.keboola.com/overview/encryption/) and dynamic functions. 
 
 **The typical use cases are:**
 
@@ -46,5 +46,5 @@ allows you to leverage secure [encripted parameters](overview/encryption/) and d
 - Calling arbitrary endpoints with parameters defined on the input
     - E.g., `DELETE api.com/[[user_id]]` where `user_id` is a column in the input table
 
-For real configuration examples, see the [configuration examples section](/components/writers/generic-writer/configuration-examples)
+For real configuration examples, see the [configuration examples section](/components/writers/generic-writer/configuration-examples/)
  or the collection of [functional examples](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/).

@@ -1,5 +1,5 @@
 ---
-title: Generic Writer Configuration 
+title: Generic Writer Configuration
 slug: 'components/writers/generic-writer/configuration'
 redirect_from:
     - /extend/generic-writer/configuration/
@@ -14,7 +14,7 @@ The data can be sent in two ways:
 1. Send all content at once - either BINARY or JSON in chunks
 2. [Iterate](/components/writers/generic-writer/configuration/#iterate-by-columns) through each row - where the data is sent in
    iterations specified in the input data. By default 1 row = 1 iteration. This allows to change the endpoint
-   dynamically based on the input using placeholders: `www.example.com/api/user/{{id}}`. Or sending data with different
+   dynamically based on the input using placeholders: `www.example.com/api/user/[[id]]`. Or sending data with different
    user parameters that are present in the input table.
 
 ### Configuration parameters
@@ -32,7 +32,7 @@ The data can be sent in two ways:
       default query parameters sent with each API call.
     - [**default_headers**](/components/writers/generic-writer/configuration/#default-headers) --- sets the default query headers
       sent with each API call.
-    - [**ssl_verification**](/components/writers/generic-writer/configuration/#ssl-verification) --- allows turning of the SSL certificate
+    - [**ssl_verification**](/components/writers/generic-writer/configuration/#ssl-verification) --- allows turning off the SSL certificate
       verification. Use with caution.
     - [**timeout**](/components/writers/generic-writer/configuration/#timeout) --- maximum time in seconds for which the component
       waits after each request (defaults to None if not set).
@@ -40,7 +40,7 @@ The data can be sent in two ways:
   contexts, e.g. passwords. Supports dynamic functions.
 - [**request_parameters**](/components/writers/generic-writer/configuration/#request-parameters) --- [REQUIRED] HTTP parameters of the request
     - [**method**](/components/writers/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
-    - [**endpoint_path**](/components/writers/generic-writer/configuration/#enpoint-path) --- [REQUIRED] relative path of the endpoint.
+    - [**endpoint_path**](/components/writers/generic-writer/configuration/#endpoint-path) --- [REQUIRED] relative path of the endpoint.
     - [**query_parameters**](/components/writers/generic-writer/configuration/#query-parameters) --- query parameters sent with each
       request
     - [**headers**](/components/writers/generic-writer/configuration/#headers) --- headers sent with each request
@@ -51,7 +51,7 @@ The data can be sent in two ways:
       case of JSON content type.
     - [**iterate_by_columns**](/components/writers/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in
       the input data that are excluded from the content and may be used instead of placeholders within the
-      request_options. The input table is iterated row by row, e.g. 1 row = 1 request
+      `request_parameters`. The input table is iterated row by row, e.g. 1 row = 1 request
 - [**debug**](/components/writers/generic-writer/configuration/#debug) --- Turns on more verbose logging for debugging purposes.
 
 There are also simple pre-defined [**functions**](/components/writers/generic-writer/configuration/#dynamic-functions) available,
@@ -59,10 +59,11 @@ adding extra flexibility when needed.
 
 ### Configuration Map
 
-The following sample configuration shows various configuration options and their nesting. You can use the map to
-navigate between them.
+The following sample configuration shows various configuration options and their nesting. Each option is documented in
+its own section below.
 
-```json {
+```json
+{
   "parameters": {
     "debug": false,
     "api": {
@@ -145,54 +146,8 @@ navigate between them.
       ]
     }
   }
-} ```
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Api
-    $("span:contains('\"debug\"')").wrap("<a href='/components/writers/generic-writer/configuration/#debug'></a>");
-    $("span:contains('\"api\"')").wrap("<a href='/components/writers/generic-writer/configuration/#api'></a>");
-    $("span:contains('\"base_url\"')").wrap("<a href='/components/writers/generic-writer/configuration/#base-url'></a>");
-    $("span:contains('\"default_query_parameters\"')").wrap("<a href='/components/writers/generic-writer/configuration/#default-query-parameters'></a>");
-    $("span:contains('\"default_headers\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#default-headers'></a>");
-    $("span:contains('\"retry_config\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#retry-config'></a>");
-    $("span:contains('\"authentication\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#authentication '></a>");
-
-    $("span:contains('\"user_parameters\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#user-parameters '></a>");
-
-    // Request options
-    $("span:contains('\"request_parameters\"')").wrap("<a href='/components/writers/generic-writer/configuration/#request-parameters'></a>");
-    $("span:contains('\"api_request\"')").wrap("<a href='/components/writers/generic-writer/configuration/#api-request'></a>");
-    $("span:contains('\"method\"')").wrap("<a href='/components/writers/generic-writer/configuration/#method'></a>");
-    $("span:contains('\"endpoint_path\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#endpoint-path'></a>");
-    $("span:contains('\"headers\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#headers'></a>");
-    $("span:contains('\"query_parameters\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#query-parameters'></a>");
-
-    // Content
-    $("span:contains('\"request_content\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#request-content'></a>");
-    $("span:contains('\"content_type\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#content-type'></a>");
-
-    // JSON CONFIG
-    $("span:contains('\"json_mapping\"')").wrap("<a href='/components/writers/generic-writer/configuration/#json-mapping'></a>");
-    $("span:contains('\"chunk_size\"')").wrap("<a href='/components/writers/generic-writer/configuration/#chunk_size'></a>");
-    $("span:contains('\"nesting_delimiter\"')").wrap("<a href='/components/writers/generic-writer/configuration/#nesting-delimiter'></a>");
-    $("span:contains('\"request_data_wrapper\"')").wrap("<a href='/components/writers/generic-writer/configuration/#request-data-wrapper'></a>");
-    $("span:contains('\"autodetect\"')").first().wrap("<a href='/components/writers/generic-writer/configuration/#autodetect'></a>");
-    $("span:contains('\"column_data_types\"')").wrap("<a href='/components/writers/generic-writer/configuration/#column-data-types'></a>");
-    $("span:contains('\"datatype_override\"')").wrap("<a href='/components/writers/generic-writer/configuration/#column-datatype-override'></a>");
-    $("span:contains('\"column_names_override\"')").wrap("<a href='/components/writers/generic-writer/configuration/#datatype-override'></a>");
-    $("span:contains('\"iterate_by_columns\"')").wrap("<a href='/components/writers/generic-writer/configuration/#iterate-by-columns'></a>");
-
-    // Configuration
-    $("span:contains('\"debug\"')").wrap("<a href='/components/writers/generic-writer/configuration/#debug'></a>");
-
-}, false);
-</script>
-<style>
-pre a {
-    border-bottom: 1px dashed navy;
 }
-</style>
+```
 
 ## Api
 
@@ -206,15 +161,20 @@ An URL of the endpoint where the payload is being sent. e.g. `www.example.com/ap
 **NOTE** May contain placeholders for iterations wrapped in `[[]]`,e.g. ``www.example.com/api/v[[api_version]]``.  
 But in most cases you would set this up on the `endpoint_path` level.
 
-The parameter `api_version` needs to be specified in the `user_parameters` or in the source data itself if the column is
-set as an iteration parameter column.
+The parameter `api_version` needs to be a column in the source data that is listed in
+[`iterate_by_columns`](/components/writers/generic-writer/configuration/#iterate-by-columns). Placeholders in `base_url`
+and `endpoint_path` are filled in from iteration columns only — values from `user_parameters` are **not** substituted
+there (they apply to headers and query parameters).
+
+**NOTE** A placeholder in `base_url` is resolved once, on the first iteration, and the resolved URL is then reused for
+all remaining rows. To vary the URL per row, put the placeholder in `endpoint_path` instead.
 
 ### Retry Config
 
 Here you can set parameters of the request retry in case of failure.
 
 - `max_retries` --- Number of maximum retries before failure (DEFAULT `1`)
-- `codes` --- List of HTTP codes to retry on, e.g. [503, 429] (DEFAULT `(500, 502, 504)`)
+- `codes` --- List of HTTP codes to retry on, e.g. [503, 429] (DEFAULT `500`, `502`, `504`)
 - `backoff_factor` --- backoff factor of the exponential backoff. (DEFAULT `0.3`)
 
 ```json
@@ -257,7 +217,7 @@ components.
 
 ### Default Headers
 
-Allows you to define default query parameters that are being sent with each req This is mostly useful for
+Allows you to define default headers that are being sent with each request. This is mostly useful for
 creating Generic Writer templates and registered components.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
@@ -340,7 +300,7 @@ See [example 030](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ### SSL Verification
 
-Allows turning of the SSL certificate verification. Use with caution. When set to false, the certificate verification is
+Allows turning off the SSL certificate verification. Use with caution. When set to false, the certificate verification is
 turned off.
 
 ```json
@@ -363,8 +323,8 @@ For more information, refer to [requests docs](https://requests.readthedocs.io/e
 
 ## User Parameters
 
-In this section you can defined user parameters to be used in various contexts, e.g. passwords. This is also
-the place to use the [dynamic functions]().
+In this section you can define user parameters to be used in various contexts, e.g. passwords. This is also
+the place to use the [dynamic functions](/components/writers/generic-writer/configuration/#dynamic-functions).
 
 It allows referencing another values from `user_parameters` referenced by `{"attr":"par"}` notation.
 
@@ -411,9 +371,11 @@ Define parameters of the HTTP request sent.
 
 ### Method
 
-Request method - POST, PUT, UPDATE, DELETE etc.
+Request method - POST, PUT, PATCH, DELETE etc.
 
-Supported methods: `['GET', 'POST', 'PATCH', 'UPDATE', 'PUT', 'DELETE']`
+Supported methods: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. The method is passed through to the
+API without validation, so any other value is sent verbatim and will most likely be rejected by
+the target server.
 
 ```json
 "request_parameters": {
@@ -428,9 +390,12 @@ A relative path of the endpoint. The final request URL is `base_url` and `endpoi
 e.g. when `base_url` is set to `https://example.com/api` and `endpoint_path` to `/customer` the resulting URL
 is `https://example.com/api/customer`
 
-**NOTE** That it is possible to change the `enpoint_path` dynamically
+**NOTE** That it is possible to change the `endpoint_path` dynamically
 using [iteration columns](/components/writers/generic-writer/configuration/#iterate-by-columns) e.g. `/orders/[[id]]` as seen
 in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/005-json-iterations/)
+
+**Note** The `[[column]]` form is the current placeholder syntax. The older `{{column}}` form is still
+accepted for backward compatibility, but new configurations should use `[[column]]`.
 
 ```json
 {
@@ -443,7 +408,7 @@ in [example 005](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/s
 
 ### Headers
 
-Allows you to define default query parameters that are being sent with each request.
+Allows you to define headers that are being sent with each request.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
@@ -463,7 +428,7 @@ See [example 006](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 ### Query parameters
 
-Allows you to define default query parameters that are being sent with each request.
+Allows you to define query parameters that are being sent with each request.
 
 **NOTE** That you can reference parameters defined in `user_parameters` using the `{"attr":"SOME_KEY"}` syntax.
 
@@ -500,8 +465,9 @@ Defines how to process the input and how the sent content should look like.
   See [example](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/tests/functional/binary_simple/)
 - `BINARY_GZ` - input is sent as gzipped binary data.
   See [example](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/tests/functional/binary_gz/)
-- `EMPTY_REQUEST` - sends just empty requests. Usefull for triggerring webhooks, DELETE calls, etc. As many requests as
-  there are rows on the input are sent. Useful with `iterate_by_columns` enabled to trigger multiple endpoints.
+- `EMPTY_REQUEST` - sends just empty requests. Useful for triggering webhooks, DELETE calls, etc. Combine it with
+  `iterate_by_columns` to send one request per input row and to trigger multiple endpoints; without iteration columns a
+  single empty request is sent regardless of how many rows the input table has.
   See [example 022](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/022-empty-request-iterations-delete/)
 
 ```json
@@ -515,17 +481,20 @@ Defines how to process the input and how the sent content should look like.
 
 [REQUIRED for JSON based content type] This section defines the CSV 2 JSON conversion in case of JSON content type.
 
+When the `json_mapping` section is present, the `nesting_delimiter`, `chunk_size` and `column_data_types` keys are all
+required — omitting any of them fails the job.
+
 #### Nesting delimiter
 
 A string that is used for nesting. e.g. `__`. This way you can define nested objects based on column names.
 
-e.g. When set to `__` a column value `address__streed` will be converted to `{"address"{"street":"COLUMN_VALUE"}}`
+e.g. When set to `__` a column value `address__street` will be converted to `{"address":{"street":"COLUMN_VALUE"}}`
 
 ```json
 "request_content": {
     "content_type": "JSON",
     "json_mapping": {
-        "nesting_delimiter": "_",
+        "nesting_delimiter": "__",
 ...
 ```
 
@@ -550,28 +519,27 @@ see [example 003](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 
 #### Column datatypes
 
-Optional configuration of column types. This version supports nesting (three levels) and three datatypes:
+Optional configuration of column types. Nested objects are supported, as are the following four datatypes:
 
-- `bool` - Boolean value case-insensitive conversion: `t`, `true`, `yes`, `1`,`"1"` to `True` and `f`, `false`, `no`
-  to `False`
+- `bool` - Boolean value case-insensitive conversion: `t`, `true`, `yes`, `1`,`"1"` to `True` and `f`, `false`, `no`,
+  `0`, `"0"` to `False`
 - `string` - String
 - `number` - Number
 - `object` - Object - valid JSON array or JSON object, e.g. ["1","2"], {"key":"val"}
 
 ##### Autodetect
 
-Default value `true
-`
+Default value `false`.
+
 Set this option to `true` to make the parser automatically detect the above datatypes. It may be used in combination
-with
-`datatype_override` option to force datatype to some columns.
+with the `datatype_override` option to force a datatype on some columns.
 
 ##### Column datatype override
 
 [OPTIONAL]
 
 The `autodetect` option in most cases takes care of the datatype conversion properly. But there are some scenarios where
-you want make sure that the datatype conversion is forced. E.g. for `phone_number` column to be treated as String a
+you want to make sure that the datatype conversion is forced. E.g. for `phone_number` column to be treated as String a
 mapping should be defined as `"phone_number":"string"`.
 
 Below are options that can be used as a datatype values:
@@ -581,7 +549,7 @@ want it to be Boolean, use `bool`
 (case-insensitive conversion: `t`, `true`, `yes` to `True` and `f`, `false`, `no` to `False`)
 If the value should be an array or object `object` - valid JSON array or JSON object, e.g. ["1","2"], {"key":"val"}
 
-**Note** If the `autodetect` option is turned off all unspecified column will be treated as a string.
+**Note** If the `autodetect` option is turned off all unspecified columns will be treated as a string.
 
 ```json
 {
@@ -625,13 +593,13 @@ A wrapper/mask of the parsed data. It needs to be json-encoded json. E.g
     "content_type": "JSON",
     "json_mapping": {
         "nesting_delimiter": "__",
-        "chunk_size": 1,
+        "chunk_size": 2,
         "request_data_wrapper": "{ \"data\": [[data]]}",
     ...
 }
 ```
 
-Given a single column `user__id` and `chunksize` = 2, the above will cause each request being sent as:
+Given a single column `user__id` and `chunk_size` = 2, the above will cause each request being sent as:
 
 ```json
 {
@@ -658,10 +626,10 @@ examples: [012](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/sr
 You may override specific column names using the `column_names_override` parameter to be able to generate fields with
 characters not supported in Storage column names.
 
-**NOTE** that this is applied **after** the column type definition, so refer to original name in the `column_types`
-config.
+**NOTE** that this is applied **after** the column type definition, so refer to the original name in the
+`column_data_types.datatype_override` config.
 
-**NOTE2** It is possible to rename nested objects as well. The rename is applied to the leaf node.
+**Note** It is possible to rename nested objects as well. The rename is applied to the leaf node.
 E.g. `"address___city":"city.address"`
 with delimiter set to `___` will result in `{"address":{"city.address":"SOME_VALUE"}}`.
 See [example 23](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/023-simple-json-nested-object-rename-column/)
@@ -691,7 +659,7 @@ and [23](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/maste
 
 This parameter allows performing the requests in iterations based on provided parameters within data. The user specifies
 columns in the source table that will be used as parameters for each request. The column values may be then used instead
-of placeholders within the `request_options`. The input table is iterated row by row, e.g. 1 row = 1 request.
+of placeholders within the `request_parameters`. The input table is iterated row by row, e.g. 1 row = 1 request.
 
 ```json
 "request_content": {
@@ -725,8 +693,9 @@ These will be injected in:
 
 ```
 
-**NOTE** The iteration columns may be specified for requests of any content type. The `chunk_size` parameter in JSON
-mapping is overridden to `1`.
+**NOTE** The iteration columns may be specified for requests of any content type. Each iteration sends a single row, but
+`chunk_size` still controls the payload shape: with `chunk_size` set to `1` a bare object `{}` is sent, and with a value
+greater than `1` a single-element array `[{}]` is sent.
 
 See the example configurations:
 
@@ -790,10 +759,10 @@ Sent to `www.example.com/api/user/2?date=01.02.2020`
 
 ## Dynamic Functions
 
-The application support functions that may be applied on parameters in the configuration to get dynamic values.
+The application supports functions that may be applied on parameters in the configuration to get dynamic values.
 
-Currently these functions work only in the `user_parameters` scope. Place the required function object instead of the
-user parameter value.
+These functions are evaluated in the `user_parameters` scope, and also in `headers` and `query_parameters` values. Place
+the required function object instead of the value.
 
 The function values may refer to another user params using `{"attr": "custom_par"}`
 
@@ -850,7 +819,8 @@ The result is returned as a date string in the specified format, by default `%Y-
 The function takes two arguments:
 
 1. [REQ] Date string
-2. [OPT] result date format. The format should be defined as in http://strftime.org/
+2. [OPT] result date format. The format should be defined as in the
+   [Python strftime reference](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes)
 
 **Example**
 

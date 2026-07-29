@@ -33,11 +33,8 @@ It will send as many requests as there are rows in the input table. Each request
  },
  "request_parameters": {
   "method": "POST",
-  "endpoint_path": "/test/[[id]]?",
+  "endpoint_path": "/test/[[id]]",
   "headers": {
-   "Authorization": {
-    "attr": "token_encoded"
-   },
    "Content-Type": "application/json"
   },
   "query_parameters": {
@@ -66,8 +63,9 @@ It will send as many requests as there are rows in the input table. Each request
 
 ### Exponea Batch Events Writer
 
-Write customer [events](https://docs.exponea.com/reference#add-event) into the [Exponea API](https://docs.exponea.com)
-in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
+Write customer [events](https://documentation.bloomreach.com/engagement/reference/add-event) into the
+[Bloomreach Engagement (formerly Exponea) tracking API](https://documentation.bloomreach.com/engagement/reference/welcome)
+in [batches](https://documentation.bloomreach.com/engagement/reference/batch-commands-2) of `3` requests.
 
 **Writer config:**
 
@@ -96,12 +94,12 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
  },
  "request_parameters": {
   "method": "POST",
-  "endpoint_path": "/track/v2/projects/1234566/batch?",
+  "endpoint_path": "/track/v2/projects/1234566/batch",
   "headers": {
    "Authorization": {
     "attr": "token_encoded"
    },
-   "Content-type": "application/csv"
+   "Content-type": "application/json"
   }
  },
  "request_content": {
@@ -112,7 +110,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
    "column_data_types": {
     "autodetect": true
    },
-   "request_data_wrapper": "{\"commands\":{{data}}}"
+   "request_data_wrapper": "{\"commands\":[[data]]}"
   }
  }
 }
@@ -122,9 +120,9 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
 
 | name             | data__customer_ids__registered | data__properties__price | data__timestamp | data__event_type | data__properties__test |
 |------------------|--------------------------------|-------------------------|-----------------|------------------|------------------------|
-| customers/events | milan@test.com              | 150                     | 123456.78       | testing_event    | a                      |
-| customers/events | petr@test.com               | 150                     | 123456.78       | testing_event    | a                      |
-| customers/events | masha@test.com    | 150                     | 123456.78       | testing_event    | a                      |
+| customers/events | milan@test.com                 | 150                     | 123456.78       | testing_event    | a                      |
+| customers/events | petr@test.com                  | 150                     | 123456.78       | testing_event    | a                      |
+| customers/events | masha@test.com                 | 150                     | 123456.78       | testing_event    | a                      |
 
 **Result request:**
 
@@ -134,7 +132,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
             "name": "customers/events",
             "data": {
                 "customer_ids": {
-                    "registered": "milan@keboola.com"
+                    "registered": "milan@test.com"
                 },
                 "properties": {
                     "price": 150,
@@ -147,7 +145,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
             "name": "customers/events",
             "data": {
                 "customer_ids": {
-                    "registered": "petr@keboola.com"
+                    "registered": "petr@test.com"
                 },
                 "properties": {
                     "price": 150,
@@ -160,7 +158,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
             "name": "customers/events",
             "data": {
                 "customer_ids": {
-                    "registered": "masha.reutovski@keboola.com"
+                    "registered": "masha@test.com"
                 },
                 "properties": {
                     "price": 150,
@@ -177,7 +175,7 @@ in [batches](https://docs.exponea.com/reference#batch-commands) of `3` requests.
 
 ### Customer.io User Event
 
-Update user events via the [Customer.io API](https://customer.io/docs/api/#apitrackeventsevent_add) based on the user_id column.
+Update user events via the [Customer.io Track API](https://docs.customer.io/integrations/api/track/) based on the user_id column.
 
 The API uses Basic http authentication.
 
@@ -195,14 +193,12 @@ The API uses Basic http authentication.
         }
       }
  },
+ "user_parameters": {},
  "request_parameters": {
   "method": "POST",
-  "endpoint_path": "/api/v1/customers/{{user_id}}/events?",
+  "endpoint_path": "/api/v1/customers/[[user_id]]/events",
   "headers": {
-   "Authorization": {
-    "attr": "token_encoded"
-   },
-   "Content-type": "application/csv"
+   "Content-type": "application/json"
   }
  },
  "request_content": {
@@ -243,8 +239,8 @@ POST `https://track.customer.io/api/v1/customers/a@test.com/events`
 
 ### Slack Notification
 
-Send notifications to Slack channels via an API. Note that you need to create an app with appropriate permissions at https://api.slack.com/apps
- and retrieve the API token.
+Send notifications to Slack channels via an API. Note that you need to create an app with appropriate permissions
+at [api.slack.com/apps](https://api.slack.com/apps) and retrieve the API token.
 
 **Input Table:**
 
@@ -257,7 +253,7 @@ Send notifications to Slack channels via an API. Note that you need to create an
 
 ```json
 {
- "debug": true,
+ "debug": false,
  "api": {
   "base_url": "https://slack.com"
  },
@@ -275,7 +271,7 @@ Send notifications to Slack channels via an API. Note that you need to create an
  },
  "request_parameters": {
   "method": "POST",
-  "endpoint_path": "/api/chat.postMessage?",
+  "endpoint_path": "/api/chat.postMessage",
   "headers": {
    "Authorization": {
     "attr": "token_encoded"
