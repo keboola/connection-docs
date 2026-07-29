@@ -65,20 +65,20 @@ When using the remote server with OAuth, you get the permissions that match your
 
 ### Using with Claude Desktop
 
-:::caution
-These steps must be done by a Claude organization owner or primary owner, or on either a Claude Pro or Claude Max plan. The added integration will be available to all users in the Claude organization, but each user will still be required to authenticate themselves separately.
+:::note
+Custom connectors are available on the Free, Pro, Max, Team, and Enterprise plans; each user adds the connector for themselves (Free is limited to one custom connector) and authenticates separately. Rolling a connector out **organization-wide** on Team/Enterprise is done by an Organization Owner under Organization settings → Connectors.
 :::
 
-- Go to [Settings > Integrations](https://claude.ai/settings/integrations)
-- Click the **"Add more"** button
-- Give the integration a name (Keboola) and paste in your Integration URL
+- In Claude, go to **Settings → Connectors**
+- Click **"Add custom connector"**
+- Give the connector a name (Keboola) and paste in your Integration URL
   - `https://mcp.<YOUR_REGION>.keboola.com/mcp`
 - Click **"Add"**
 - You'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
-#### Via mcp-remote adapter
+#### Via mcp-remote adapter (fallback)
 
-If you don't have a paid version you can still use the [`mcp-remote`](https://github.com/geelen/mcp-remote) adapter to connect Claude Desktop to Keboola's MCP Server.
+For MCP clients that don't yet support native remote (OAuth) connections, you can bridge to the remote server with the [`mcp-remote`](https://github.com/geelen/mcp-remote) adapter.
 
 > NOTE: This method requires you to have Node.js installed on your computer.
 
@@ -103,10 +103,10 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
 ### Using with ChatGPT
 
 :::note
-This feature is available for ChatGPT Plus and Pro users only. Custom connectors are currently in beta.
+Custom connectors (Developer mode / MCP) are available on ChatGPT Plus, Pro, Business, and Enterprise, and are currently in beta.
 :::
 
-ChatGPT Plus and Pro users can connect to Keboola's MCP Server using custom connectors. Follow these steps to set up the integration:
+ChatGPT Plus, Pro, Business, and Enterprise users can connect to Keboola's MCP Server using custom connectors. Follow these steps to set up the integration:
 
 #### Step 1: Access ChatGPT Settings
 
@@ -117,9 +117,9 @@ ChatGPT Plus and Pro users can connect to Keboola's MCP Server using custom conn
 #### Step 2: Navigate to Connectors
 
 1. In the settings window, select the **Connectors** tab from the left-hand sidebar
-2. Look for the **"Developer mode"** option and toggle it on
+2. Open **Advanced settings** and toggle on **Developer mode**
 3. Read and acknowledge the warning that appears - this mode allows you to create custom connectors
-4. In the top-right corner of the Connectors page, click **Create**
+4. Back on the Connectors page, click **Create**
 
 #### Step 3: Configure the New Connector
 
@@ -145,17 +145,7 @@ ChatGPT Plus and Pro users can connect to Keboola's MCP Server using custom conn
 
 #### Step 5: Use the Connector in a Chat
 
-To use the custom connector you've created, you must explicitly enable Developer Mode in the chat interface:
-
-1. Start a new chat
-2. Click on the **"Add photos & files"** icon
-3. Hover over the **"More"** option
-4. From the expanded menu, select **"Developer Mode"**
-5. This will change the prompt box to indicate that developer mode is active
-6. You will see an option to select your custom connector (e.g., a button labeled "Keboola")
-7. Click on the **"Keboola"** button to enable it for this specific conversation
-
-You can now ask questions related to your Keboola data, and ChatGPT will use the connector to access the information. For example: "What data tables are in my project?" or "Show me the latest job runs."
+In a chat, enable the Keboola connector for the conversation via the message composer's tools/connectors menu (the exact control varies by ChatGPT version). Once it's enabled, you can ask questions about your Keboola data and ChatGPT will use the connector — for example: "What data tables are in my project?" or "Show me the latest job runs."
 
 ### Using with Cursor
 
@@ -211,19 +201,16 @@ VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these s
 #### Setup Instructions
 
 1. Open VS Code and ensure you have the latest version of the GitHub Copilot extension
-2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **"MCP: Configure Servers"**
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **"MCP: Add Server"**
 3. This will create or open your MCP configuration file (`mcp.json`)
-4. Add the Keboola MCP Server configuration:
+4. Add the Keboola MCP Server configuration (VS Code connects to remote servers natively over Streamable HTTP — no adapter needed):
 
 ```json
 {
   "servers": {
     "keboola": {
-      "command": "npx",
-      "args": [
-        "mcp-remote",
-        "https://mcp.<YOUR_REGION>.keboola.com/mcp"
-      ]
+      "type": "http",
+      "url": "https://mcp.<YOUR_REGION>.keboola.com/mcp"
     }
   }
 }
@@ -246,11 +233,9 @@ For detailed setup and troubleshooting, see the [VS Code MCP documentation](http
 ### Using with MAKE
 
 1. Create your scenario in MAKE.
-2. Use the MCP Client component within the scenario.
-3. In the dropdown of the MCP Client, select Keboola.
-4. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
-5. Click the MAKE tab.
-6. Copy the integration URL displayed there into the MCP Client configuration in MAKE.
+2. Add the **MCP Client** module to the scenario.
+3. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`, and open the MAKE tab.
+4. Copy the integration URL displayed there and enter it as the server URL in the MCP Client module. MAKE loads the available Keboola tools automatically.
 
 ## Available Tools
 
@@ -261,8 +246,10 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Storage** – Browse, edit, and document buckets, tables, and columns.  
 - **SQL** – Run and manage SQL queries.  
 - **Jobs** – Start, monitor, and debug execution flows.  
-- **Flows** – Create and manage flows that orchestrate your components.  
-- **Data Apps** – Browse and inspect your data apps.  
+- **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
+- **Data Apps** – Create, deploy, and manage Streamlit and Python/JS data apps.  
+- **Search & Discovery** – Find components, configurations, and objects across your project.  
+- **Project & OAuth** – Read project info and set up OAuth authorizations for components.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
 
 ## Restricting Tool Access
@@ -341,6 +328,15 @@ X-Disallowed-Tools: query_data
 ```
 
 This configuration would result in only `get_configs`, `get_buckets`, and `get_tables` being available (the intersection of allowed and read-only, minus the disallowed).
+
+## Development Branches
+
+To keep an AI agent's changes off production, you can scope the MCP server to a [development branch](/components/branches/):
+
+- **Remote server:** send the `X-Branch-Id` HTTP header with your branch ID (set by the client, like the tool-authorization headers above).
+- **Local server:** set the `KBC_BRANCH_ID` environment variable.
+
+Without it, the server operates on the production branch.
 
 :::note[The rest of this page is for developers]
 The sections below cover running the server locally and integrating it programmatically. If you just want to connect an AI client, you're already done above — skip ahead, or hand these to your AI agent to set up for you.
@@ -428,6 +424,7 @@ The primary way to run the server locally without Docker is by using `uv` or `uv
    * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
    * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
    * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
+   * `KBC_BRANCH_ID` (optional): a development branch ID to scope operations to; defaults to the production branch.
 
    Refer to the [Keboola Tokens](/management/project/tokens/) and [Keboola workspace manipulation](/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
 
@@ -492,7 +489,8 @@ Anthropic offers a beta feature, the [MCP connector](https://platform.claude.com
 
 **Key features of this integration:**
 
-*   **Direct API Calls**: You configure connections to MCP servers by including the `mcp_servers` parameter in your API requests to Claude.
+*   **Direct API Calls**: You configure connections to MCP servers by including the `mcp_servers` parameter in your API requests to Claude, and enable tools via an `mcp_toolset` in the `tools` array.
+*   **Beta header**: The connector is a beta feature — send `anthropic-beta: mcp-client-2025-11-20` (the earlier `mcp-client-2025-04-04` version is deprecated).
 *   **Tool Calling**: The primary MCP functionality currently supported through this connector is tool usage.
 *   **Accessibility**: The target MCP server needs to be publicly accessible over HTTP.
 
@@ -523,17 +521,26 @@ The SDK automatically calls `list_tools()` on the server, making every Keboola o
 
 ### LangChain
 
-[LangChain](https://python.langchain.com/docs/) does not yet include a built-in MCP connector, but you can integrate by:
+[LangChain](https://python.langchain.com/docs/) provides an official MCP adapter, [`langchain-mcp-adapters`](https://github.com/langchain-ai/langchain-mcp-adapters). Point its `MultiServerMCPClient` at the Keboola MCP Server and load the tools into your agent:
 
-1. Running the Keboola MCP Server, or attaching to our deployed instance `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
-2. Mapping each entry from `list_tools()` to a `Tool` in LangChain.
-3. Adding those tools to an `AgentExecutor`.
+```python
+from langchain_mcp_adapters.client import MultiServerMCPClient
 
-Because the server returns standard JSON schemas, the mapping is straightforward and can be handled with a lightweight wrapper. Native MCP support is already under discussion in the LangChain community.
+client = MultiServerMCPClient(
+    {
+        "keboola": {
+            "transport": "streamable_http",
+            "url": "https://mcp.<YOUR_REGION>.keboola.com/mcp",
+        }
+    }
+)
+tools = await client.get_tools()
+# pass `tools` to your LangChain / LangGraph agent
+```
 
 ### Other frameworks
 
-* **[Crew AI](https://crewai.com)** – Provide crew members with Keboola tool definitions and route tool invocations through the MCP server.
+* **[CrewAI](https://crewai.com)** – Use the native MCP support via `MCPServerAdapter` from `crewai-tools[mcp]` to expose the Keboola MCP Server's tools to your crew.
 
 ### Building your own MCP client
 
