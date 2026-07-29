@@ -206,7 +206,7 @@ in the following URL:
 
 or, in a more readable [URLDecoded](https://urldecode.org/) form:
 
-    https://example.com/3.0/mock-api?/mock-server/web/users/12/orders/2/tickets/000/comments?startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished&filter[query]=q=user:johnDoe&filter[tags][first]=1&filter[tags][second]=0
+    https://example.com/3.0/mock-api?startDate=2016-01-20&types[0]=new&types[1]=active&types[2]=finished&filter[query]=q=user:johnDoe&filter[tags][first]=1&filter[tags][second]=0
 
 ### POST
 The HTTP POST method sends the parameters in the request body. They are sent as a JSON object in the same form
@@ -1511,7 +1511,7 @@ The above situation can be handled by encoding the parameters in a JSON into the
 "jobs": [
     {
         "endpoint": "getUsers",
-        "method": "POST",
+        "method": "GET",
         "params": {
             "filter": {
                 "field": "type",

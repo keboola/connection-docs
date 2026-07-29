@@ -86,7 +86,7 @@ Place your secret into the `config.#__CLIENT_SECRET` and ID into the `config.#__
       }
   },
     "config": {
-       "__CLIENT_ID": "CLIENT ID"
+       "__CLIENT_ID": "CLIENT ID",
        "#__CLIENT_SECRET": "secret",
        "jobs": [...]
     }
@@ -135,7 +135,7 @@ Place your secret into the `config.#__CLIENT_SECRET` and ID into the `config.#__
     }
   },
     "config": {
-       "__CLIENT_ID": "CLIENT ID"
+       "__CLIENT_ID": "CLIENT ID",
        "#__CLIENT_SECRET": "secret",
        "jobs": [...]
     }

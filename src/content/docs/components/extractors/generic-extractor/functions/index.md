@@ -762,10 +762,10 @@ leads to the following function context:
 	"authorization": {
 		"data.status": "ok",
 		"data.access_token": "testToken",
-		"data.foo.bar": "baz"
+		"data.foo.bar": "baz",
 		"timestamp": 1492949837,
 		"nonce": "99206d94a6846841",
-		"clientId": "clientId",
+		"clientId": "clientId"
 	}
 }
 ```

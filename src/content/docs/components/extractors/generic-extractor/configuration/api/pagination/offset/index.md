@@ -64,7 +64,7 @@ There are four users in total. The response looks as follows:
 ]
 ```
 
-Querying `users?offset=0&limit=2` returns the first two users. Querying `users?offset=2limit` returns
+Querying `users?offset=0&limit=2` returns the first two users. Querying `users?offset=2&limit=2` returns
 the second two users. Generic Extractor will then query `users?offset=4&limit=2`. 
 
 If the response is empty (the API returns an empty page, `[])`, the **underflow** check kicks in 

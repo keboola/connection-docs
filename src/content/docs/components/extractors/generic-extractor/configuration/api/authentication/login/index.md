@@ -496,7 +496,7 @@ This assumes that the response of the **login request** looks like this:
 ```json
 {
     "authorization": {
-        "token": "a1b2c3d435f6",/
+        "token": "a1b2c3d435f6",
         "expires": 3600
     }
 }

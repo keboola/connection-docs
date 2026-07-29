@@ -23,27 +23,25 @@ This method is available through UI. You can select the `Api Key Auth` method an
 
 In the underlying JSON, the API Key is implemented as follows:
 
-Place your token into the `config.#__AUTH_TOKEN` parameter. The `Authorization` header is then constructed using the `concat` function.
+Place your token into the `config.#__AUTH_TOKEN` parameter. It is then referenced in the header or query parameter via the `attr` function.
 
 **Header section**
 
 ```json
 {
     "api": {
-        ...,
+        "...": "...",
         "http": {
-      "http": {
-          "headers": {
-            "X-StorageApi-Token": {
-              "attr": "#__AUTH_TOKEN"
+            "headers": {
+                "X-StorageApi-Token": {
+                    "attr": "#__AUTH_TOKEN"
+                }
             }
-          }
         }
-      }
     },
     "config": {
-       "#__AUTH_TOKEN": "secret",
-       "jobs": [...]
+        "#__AUTH_TOKEN": "secret",
+        "jobs": ["..."]
     }
 }
 ```
@@ -53,20 +51,20 @@ Place your token into the `config.#__AUTH_TOKEN` parameter. The `Authorization` 
 ```json
 {
     "api": {
-        ...,
+        "...": "...",
         "http": {
-      "http": {
-          "params": {
-            "X-StorageApi-Token": {
-              "attr": "#__AUTH_TOKEN"
+            "defaultOptions": {
+                "params": {
+                    "X-StorageApi-Token": {
+                        "attr": "#__AUTH_TOKEN"
+                    }
+                }
             }
-          }
         }
-      }
     },
     "config": {
-       "#__AUTH_TOKEN": "secret",
-       "jobs": [...]
+        "#__AUTH_TOKEN": "secret",
+        "jobs": ["..."]
     }
 }
 ```

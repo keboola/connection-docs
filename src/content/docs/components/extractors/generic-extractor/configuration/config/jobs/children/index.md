@@ -136,7 +136,7 @@ useful in these cases:
 - Some resources return inconsistent or incomplete responses.
 - You are not interested in some of the resources and want to speed up the extraction.
 
-The `responseFilter` configuration contains a string expression with a filter condition composed of the following:
+The `recursionFilter` configuration contains a string expression with a filter condition composed of the following:
 
 - Name of a property from the parent response
 - Comparison operator: `<`, `>`, `<=`, `>=`, `==` (equal), `!=` (not equal), `~~` (like), `!~` (unlike)
@@ -786,7 +786,7 @@ Let's look at how to retrieve more nested API resources:
                         "endpoint": "user/{2:user-id}/orders",
                         "dataType": "orders",
                         "placeholders": {
-                            "2-user-id": "id"
+                            "2:user-id": "id"
                         },
                         "children": [
                             {

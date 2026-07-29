@@ -155,10 +155,10 @@ The default Retry configuration `retryConfig` is:
 
 ```json
 {
+    "maxRetries": 10,
     "http": {
         "retryHeader": "Retry-After",
-        "codes": [500, 502, 503, 504, 408, 420, 429],
-        "maxRetries": 10
+        "codes": [500, 502, 503, 504, 408, 420, 429]
     },
     "curl": {
         "codes": [28, 6, 7, 35, 52, 56]

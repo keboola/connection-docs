@@ -164,7 +164,7 @@ parameters which should be used for querying the next page.
  }
 ```
 
-Then use the `paramsIsQuery` configuration so that your Generic Extractor can produce a 
+Then use the `paramIsQuery` configuration so that your Generic Extractor can produce a 
 valid URL:
 
 ```json
