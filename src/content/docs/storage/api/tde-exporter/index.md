@@ -6,6 +6,10 @@ redirect_from:
 ---
 
 
+:::note[Legacy format]
+TDE (Tableau Data Extract) is a legacy Tableau format, superseded by Hyper (`.hyper`) in newer Tableau versions. For current Tableau output, prefer the maintained Tableau [writers](/components/writers/).
+:::
+
 [TDE Exporter](https://github.com/keboola/tde-exporter) exports tables from Keboola Storage into the
 [TDE file format (Tableau Data Extract)](https://www.tableau.com/about/blog/2014/7/understanding-tableau-data-extracts-part1).
 This component is normally a part of the [Tableau Writer](/tutorial/write/),

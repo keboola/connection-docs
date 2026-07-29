@@ -17,8 +17,11 @@ The current implementation supports all basic data manipulations:
 The client source code is available in our [Github repository](https://github.com/keboola/sapi-python-client/).
 
 ## Installation
-This library is available on [Github](https://github.com/keboola/sapi-python-client), so we
-recommend that you use the `pip` package to install it:
+The library is published on [PyPI](https://pypi.org/project/kbcstorage/) as `kbcstorage`, so install it with `pip`:
+
+    pip install kbcstorage
+
+Alternatively, install the latest development version directly from [GitHub](https://github.com/keboola/sapi-python-client):
 
     pip3 install git+https://github.com/keboola/sapi-python-client.git
 

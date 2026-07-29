@@ -20,7 +20,7 @@ Unless you already have it, [install Composer](https://getcomposer.org/download/
 On *nix system, do so by running
 
 ```bash
-curl -s http://getcomposer.org/installer | php
+curl -s https://getcomposer.org/installer | php
 mv ./composer.phar ~/bin/composer # or /usr/local/bin/composer
 ```
 
@@ -34,14 +34,14 @@ composer require keboola/storage-api-client
 
 in the root of your project. You should get an output similar to this one:
 
-    Using version ^4.11 for keboola/storage-api-client
+    Using version ^18.10 for keboola/storage-api-client
     ./composer.json has been created
     Loading composer repositories with package information
     Updating dependencies (including require-dev)
     - Installing aws/aws-sdk-php (3.18.18)
         Downloading: 100%
     ...
-    - Installing keboola/storage-api-client (4.11.0)
+    - Installing keboola/storage-api-client (18.10.0)
         Downloading: 100%
     Writing lock file
     Generating autoload files

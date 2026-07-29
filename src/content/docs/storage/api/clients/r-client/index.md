@@ -6,6 +6,10 @@ redirect_from:
 ---
 
 
+:::note[Limited maintenance]
+The R client library is in limited maintenance (last release 2023). For actively maintained access to Storage, prefer the [Python client](/storage/api/clients/python-client/) or the [PHP client](/storage/api/clients/php-client/), or call the [Storage API](https://api.keboola.com/?service=storage) directly.
+:::
+
 The R client library is a [Storage API client](https://api.keboola.com/?service=storage) which you can use in your R code.
 The current implementation supports all basic data manipulations:
 
@@ -43,11 +47,12 @@ To list available commands, run
 and the above command works.
 
 The client is implemented as an [RC class](http://adv-r.had.co.nz/R5.html). To work with it, create an instance of the client.
-The only required argument to create it is a valid Storage API token.
+It requires a valid Storage API token and your stack's Storage API URL (`https://connection.keboola.com` on AWS US; use your [stack's endpoint](/overview/#stacks) otherwise).
 
 ```r
 client <- SapiClient$new(
-    token = 'your-token'
+    token = 'your-token',
+    url = 'https://connection.keboola.com'
 )
 ```
 
@@ -60,7 +65,8 @@ To create the `new-table` table in the `in.c-main` bucket, use
 ```r
 myDataFrame <- data.frame(id = c(1,2,3,4), secondCol = c('a', 'b', 'c', 'd'))
 client <- SapiClient$new(
-    token = 'your-token'
+    token = 'your-token',
+    url = 'https://connection.keboola.com'
 )
 
 table <- client$saveTable(
@@ -82,7 +88,8 @@ To export data from the `old-table` table in the `in.c-main` bucket, use
 
 ```r
 client <- SapiClient$new(
-  token = 'your-token'
+  token = 'your-token',
+  url = 'https://connection.keboola.com'
 )
 
 data <- client$importTable('in.c-main.old-table')
@@ -96,7 +103,8 @@ a [data.table](https://cran.r-project.org/web/packages/data.table/index.html) ob
 ```r
 # create a client
 client <- SapiClient$new(
-    token = 'your-token'
+    token = 'your-token',
+    url = 'https://connection.keboola.com'
 )
 
 # verify the token

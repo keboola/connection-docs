@@ -241,7 +241,7 @@ Given the above configuration, the **effective configuration** passed to the com
 {
     "parameters": {
         "accessKeyId": "AKIAIBZYEEXQILP46FCA",
-        "#secretAccessKey": "KBC::ComponentProjectEncrypted==p5gvUw4RSGiVJjT2ayVORpqS7yiKhExi7NnQECntVm8haHaHtFNVDMT8X8b+htnixpXhPIQ9yV+ETrvr+hNeYfh+Ex+UpC//QPWnLcEOC8XOLgmQN8BNgRGSERWUziK0"
+        "#secretAccessKey": "KBC::ComponentProjectEncrypted==p5gvUw4RSGiVJjT2ayVORpqS7yiKhExi7NnQECntVm8haHaHtFNVDMT8X8b+htnixpXhPIQ9yV+ETrvr+hNeYfh+Ex+UpC//QPWnLcEOC8XOLgmQN8BNgRGSERWUziK0",
         "bucket": "travis-php-db-import-tests-s3filesbucket-vm9zhtm5jd7s",
         "key": "tw_accounts.csv",
         "saveAs": "first-table",

@@ -33,7 +33,7 @@ access to an S3 server for the actual file download.
 To upload a file to Keboola File Storage, follow the instructions outlined in the
 [API documentation](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/files/prepare).
 First create a file resource; to create a new file called
-[`new-file.csv`](/integrate/storage/new-table.csv) with `52` bytes, call:
+[`new-file.csv`](/storage/api/new-table.csv) with `52` bytes, call:
 
 ```bash
 curl --request POST --header "Content-Type: application/json" --header "X-StorageApi-Token:storage-token" --data-binary "{ \"name\": \"new-file.csv\", \"sizeBytes\": 52, \"federationToken\": 1 }" https://connection.keboola.com/v2/storage/files/prepare
