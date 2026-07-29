@@ -14,7 +14,7 @@ start with the [Data Streams](/storage/data-streams/) page.
 
 A source represents an endpoint for receiving events.
 
-Sources are managed using the Stream API. The full API reference is available at https://stream.keboola.com/v1/documentation/, and the OpenAPI specification is available at https://stream.keboola.com/v1/documentation/openapi3.json.
+Sources are managed using the Stream API. See the full [Stream API reference](https://stream.keboola.com/v1/documentation/) and its [OpenAPI specification](https://stream.keboola.com/v1/documentation/openapi3.json).
 
 Events are received via HTTP. Each source can be associated with up to 100 `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`.
 
@@ -72,7 +72,7 @@ The `template` column type currently supports the `jsonnet` templating language.
 | `BodyStr()` | Get the entire request body as a string. | `BodyStr()` | `"{\"a\":\"b\"}"` |
 | `Header()` | Get all request headers. | `Header()` | `{ "Content-Type": "application/json" }` |
 | `Header(string)` | Get the value of a single request header. Fails if the header does not exist; in that case, the record will not be saved. | `Header("Content-Type")` | `"application/json"` |
-| `Header(string, string)` | Get the value of a single request header or a default value. | `Header("Content-Type")` | `"application/json"` |
+| `Header(string, string)` | Get the value of a single request header or a default value. | `Header("Content-Type", "application/json")` | `"application/json"` |
 | `HeaderStr()` | Get the request headers as a string, each line containing one "header: value" pair. The lines are sorted alphabetically. | `HeaderStr()` | `Content-Type: application/json` |
 | `Now()` | Get the current UTC datetime as a string formatted using the default format. | `Now()` | `"2023-01-14T08:04:05.123Z"` |
 | `Now(string)` | Get the current UTC datetime as a string with the custom [`strftime`](https://man7.org/linux/man-pages/man3/strftime.3.html)-compatible format. | `Now("%Y-%m-%d")` | `2023-01-14` |
@@ -113,7 +113,7 @@ Sources may be deleted using the [`DELETE /v1/branches/{branchId}/sources/{sourc
 
 ## Update Sources and Sinks
 
-A source may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSource) endpoint. Sinks maybe updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSink) endpoint.
+A source may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSource) endpoint. Sinks may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSink) endpoint.
 
 The `UpdateSource` endpoint may only update the source's name. Sinks may only be updated separately.
 
@@ -140,7 +140,9 @@ To ensure that every record is delivered at least once, the client needs to impl
 ## Tokens
 
 A token is generated for each source sink. These tokens have the minimum possible scope with `write` permission for the bucket in which the destination table is 
-stored. You can view these tokens at `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings`. Their description follows the format 
+stored. You can view them under **Users & Settings → API Tokens** in your project, or directly at
+`https://connection.keboola.com/admin/projects/<project-id>/tokens-settings` (replace the host with your
+[stack's](/overview/#stacks) if you are not on AWS US). Their description follows the format 
 `[_internal] Stream Sink <source-id>/<sink-id>`.
 
 These tokens should not be deleted or refreshed manually. To refresh a token, you can disable and re-enable the sink.
