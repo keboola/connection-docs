@@ -1,0 +1,611 @@
+---
+/**
+ * InkDash.astro — a small canvas game for the 404 page.
+ *
+ * The Keboola octopus swims freely (arrow keys / WASD on desktop, finger drag
+ * on touch), collects data cubes and dodges red 404 jellyfish. Three lives,
+ * endless levels, high score in localStorage.
+ *
+ * Everything is drawn in code — no sprite assets — so it stays crisp on retina
+ * and follows the light/dark theme.
+ *
+ * Three things this deliberately gets right:
+ *   1. It never steals the keyboard. Arrow/space/WASD are only preventDefault-ed
+ *      while a game is actually running; Esc leaves. Otherwise the page would
+ *      stop scrolling from the keyboard.
+ *   2. It tears down on `astro:before-swap`. This site runs ClientRouter, and a
+ *      broken internal link lands here via a client-side swap, so a leaked
+ *      rAF loop and window listeners are a real risk.
+ *   3. The Play/again control is a real <button>, not canvas-drawn text, and the
+ *      canvas itself is exposed as a labelled image.
+ */
+---
+
+<div class="inkdash" data-state="idle">
+  <canvas
+    class="inkdash-canvas"
+    role="img"
+    aria-label="A small game: the Keboola octopus collects data cubes and dodges 404 jellyfish."
+  ></canvas>
+
+  <div class="inkdash-overlay">
+    <p class="inkdash-msg">Well, since you are here…</p>
+    <button class="inkdash-play" type="button">Play</button>
+    <p class="inkdash-hint">
+      Arrow keys or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to swim, or just drag.
+      Stop any time — <kbd>Esc</kbd> or the Stop button.
+    </p>
+  </div>
+
+  {/* Outside .inkdash-overlay on purpose: the overlay is hidden while a game
+      runs, and this is the only way out for anyone without an Esc key. */}
+  <button class="inkdash-stop" type="button">Stop</button>
+
+  <p class="sr-only">
+    This is an optional game and is not needed to use the documentation. Use the
+    search above or the links below to find what you were looking for.
+  </p>
+</div>
+
+<script>
+  /* ---------------- config (logical world units) ---------------- */
+  const W = 960;
+  const H = 540;
+
+  const PLAYER_R = 19;
+  const ACCEL = 0.62;
+  const FRICTION = 0.9;
+  const MAX_SPEED = 7;
+
+  const CUBE_HALF = 9;
+  const CUBES_PER_LEVEL = 10;
+
+  const ENEMY_R = 21;
+  const ENEMY_BASE = 3;
+  const ENEMY_BASE_SPEED = 1.8;
+
+  const START_LIVES = 3;
+  const INVULN_FRAMES = 72; // ~1.2s at 60fps
+  const HI_KEY = 'kbc-inkdash-hi';
+
+  const BRAND = '#097CF7';
+  const CUBE_COLOR = '#12b886';
+  const ENEMY_COLOR = '#e8384f';
+
+  const MOVE_KEYS = new Set([
+    'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+    'w', 'a', 's', 'd', 'W', 'A', 'S', 'D', ' ',
+  ]);
+
+  function initInkDash() {
+    const root = document.querySelector<HTMLElement>('.inkdash');
+    if (!root) return null;
+
+    const canvas = root.querySelector<HTMLCanvasElement>('.inkdash-canvas');
+    const overlay = root.querySelector<HTMLElement>('.inkdash-overlay');
+    const msgEl = root.querySelector<HTMLElement>('.inkdash-msg');
+    const playBtn = root.querySelector<HTMLButtonElement>('.inkdash-play');
+    const stopBtn = root.querySelector<HTMLButtonElement>('.inkdash-stop');
+    if (!canvas || !overlay || !msgEl || !playBtn || !stopBtn) return null;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------------- theme ---------------- */
+    let dark = true;
+    const readTheme = () => {
+      const attr = document.documentElement.dataset.theme;
+      dark = attr
+        ? attr === 'dark'
+        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+    readTheme();
+    const themeObserver = new MutationObserver(readTheme);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    const water = () => (dark ? ['#08111f', '#0d2138'] : ['#eaf4ff', '#d3e8ff']);
+    const ink = () => (dark ? 'rgba(255,255,255,0.82)' : 'rgba(15,23,42,0.78)');
+    const inkDim = () => (dark ? 'rgba(255,255,255,0.32)' : 'rgba(15,23,42,0.32)');
+
+    /* ---------------- canvas sizing (DPR-aware) ---------------- */
+    let scale = 1;
+    /* CSS pixels per world unit. The canvas transform draws everything in world
+       units, so any fixed world-unit font shrinks linearly with the panel: at a
+       340px-wide panel a 15-unit label renders at ~5px and is unreadable. HUD
+       text is therefore sized through `cssPx()` to stay physically constant. */
+    let cssPerWorld = 1;
+    const cssPx = (size: number) => size / cssPerWorld;
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      if (!rect.width) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round((rect.width * (H / W)) * dpr);
+      scale = (rect.width / W) * dpr;
+      cssPerWorld = rect.width / W;
+    };
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    resize();
+
+    /* ---------------- state ---------------- */
+    type State = 'idle' | 'playing' | 'dead';
+    let state: State = 'idle';
+
+    let hi = 0;
+    try {
+      hi = parseInt(localStorage.getItem(HI_KEY) || '0', 10) || 0;
+    } catch {}
+
+    let score = 0;
+    let lives = START_LIVES;
+    let level = 1;
+    let invuln = 0;
+    let banner = '';
+    let bannerTimer = 0;
+    let tick = 0;
+
+    const player = { x: W / 2, y: H / 2, vx: 0, vy: 0 };
+    let cubes: { x: number; y: number; phase: number }[] = [];
+    let enemies: { x: number; y: number; vx: number; vy: number }[] = [];
+    let bubbles: { x: number; y: number; r: number; v: number }[] = [];
+
+    const keys = new Set<string>();
+    let pointerTarget: { x: number; y: number } | null = null;
+
+    const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+    function spawnLevel() {
+      cubes = [];
+      let guard = 0;
+      while (cubes.length < CUBES_PER_LEVEL && guard++ < 500) {
+        const c = { x: rand(60, W - 60), y: rand(60, H - 60), phase: rand(0, Math.PI * 2) };
+        const clearOfPlayer = Math.hypot(c.x - player.x, c.y - player.y) > 90;
+        const clearOfCubes = cubes.every((o) => Math.hypot(o.x - c.x, o.y - c.y) > 80);
+        if (clearOfPlayer && clearOfCubes) cubes.push(c);
+      }
+
+      const count = ENEMY_BASE + (level - 1);
+      const speed = ENEMY_BASE_SPEED + 0.3 * (level - 1);
+      enemies = [];
+      for (let i = 0; i < count; i++) {
+        // Spawn along the edges so a new level never starts on top of the player.
+        const edge = i % 4;
+        const x = edge === 0 ? 40 : edge === 1 ? W - 40 : rand(60, W - 60);
+        const y = edge === 2 ? 40 : edge === 3 ? H - 40 : rand(60, H - 60);
+        const dir = rand(0, Math.PI * 2);
+        enemies.push({ x, y, vx: Math.cos(dir) * speed, vy: Math.sin(dir) * speed });
+      }
+
+      bubbles = Array.from({ length: 14 }, () => ({
+        x: rand(0, W),
+        y: rand(0, H),
+        r: rand(1.5, 4),
+        v: rand(0.25, 0.7),
+      }));
+    }
+
+    function setOverlay(message: string, label: string) {
+      msgEl.textContent = message;
+      playBtn.textContent = label;
+    }
+
+    function start() {
+      score = 0;
+      lives = START_LIVES;
+      level = 1;
+      invuln = 0;
+      banner = '';
+      bannerTimer = 0;
+      player.x = W / 2;
+      player.y = H / 2;
+      player.vx = 0;
+      player.vy = 0;
+      pointerTarget = null;
+      keys.clear();
+      spawnLevel();
+      state = 'playing';
+      root.dataset.state = 'playing';
+      canvas.focus?.();
+    }
+
+    /* Called on every exit path, not just death — quitting with a good score
+       should still record it. */
+    function recordHighScore() {
+      if (score <= hi) return;
+      hi = score;
+      try {
+        localStorage.setItem(HI_KEY, String(hi));
+      } catch {}
+    }
+
+    function stop(reason: 'dead' | 'idle') {
+      state = reason;
+      root.dataset.state = reason;
+      keys.clear();
+      pointerTarget = null;
+      recordHighScore();
+      if (reason === 'dead') {
+        setOverlay(`Caught by a 404. Score ${score}.`, 'Play again');
+      } else {
+        setOverlay('Well, since you are here…', 'Play');
+      }
+    }
+
+    /* ---------------- input ---------------- */
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (state === 'playing' && e.key === 'Escape') {
+        stop('idle');
+        return;
+      }
+      // Only swallow movement keys while a game is running, so the page keeps
+      // its normal keyboard scrolling the rest of the time.
+      if (state !== 'playing') return;
+      if (MOVE_KEYS.has(e.key)) {
+        e.preventDefault();
+        keys.add(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+      }
+    };
+    const onKeyUp = (e: KeyboardEvent) => {
+      keys.delete(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+    };
+    const onBlur = () => keys.clear();
+
+    const pointerPos = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: ((e.clientX - rect.left) / rect.width) * W,
+        y: ((e.clientY - rect.top) / rect.height) * H,
+      };
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (state !== 'playing') return;
+      pointerTarget = pointerPos(e);
+      canvas.setPointerCapture?.(e.pointerId);
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (state !== 'playing' || !pointerTarget) return;
+      e.preventDefault();
+      pointerTarget = pointerPos(e);
+    };
+    const onPointerUp = () => {
+      pointerTarget = null;
+    };
+
+    const onStopClick = () => {
+      if (state === 'playing') stop('idle');
+    };
+
+    playBtn.addEventListener('click', start);
+    stopBtn.addEventListener('click', onStopClick);
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('blur', onBlur);
+    canvas.addEventListener('pointerdown', onPointerDown);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerup', onPointerUp);
+    canvas.addEventListener('pointercancel', onPointerUp);
+
+    /* ---------------- update ---------------- */
+    function update(dt: number) {
+      let ax = 0;
+      let ay = 0;
+      if (keys.has('arrowleft') || keys.has('ArrowLeft') || keys.has('a')) ax -= 1;
+      if (keys.has('arrowright') || keys.has('ArrowRight') || keys.has('d')) ax += 1;
+      if (keys.has('arrowup') || keys.has('ArrowUp') || keys.has('w')) ay -= 1;
+      if (keys.has('arrowdown') || keys.has('ArrowDown') || keys.has('s')) ay += 1;
+
+      if (pointerTarget && !ax && !ay) {
+        const dx = pointerTarget.x - player.x;
+        const dy = pointerTarget.y - player.y;
+        const d = Math.hypot(dx, dy);
+        if (d > 4) {
+          ax = dx / d;
+          ay = dy / d;
+        }
+      }
+
+      if (ax || ay) {
+        const m = Math.hypot(ax, ay) || 1;
+        player.vx += (ax / m) * ACCEL * dt;
+        player.vy += (ay / m) * ACCEL * dt;
+      }
+
+      player.vx *= Math.pow(FRICTION, dt);
+      player.vy *= Math.pow(FRICTION, dt);
+
+      const sp = Math.hypot(player.vx, player.vy);
+      if (sp > MAX_SPEED) {
+        player.vx = (player.vx / sp) * MAX_SPEED;
+        player.vy = (player.vy / sp) * MAX_SPEED;
+      }
+
+      player.x = Math.max(PLAYER_R, Math.min(W - PLAYER_R, player.x + player.vx * dt));
+      player.y = Math.max(PLAYER_R + 26, Math.min(H - PLAYER_R, player.y + player.vy * dt));
+
+      for (const e of enemies) {
+        e.x += e.vx * dt;
+        e.y += e.vy * dt;
+        if (e.x < ENEMY_R || e.x > W - ENEMY_R) {
+          e.vx *= -1;
+          e.x = Math.max(ENEMY_R, Math.min(W - ENEMY_R, e.x));
+        }
+        if (e.y < ENEMY_R + 26 || e.y > H - ENEMY_R) {
+          e.vy *= -1;
+          e.y = Math.max(ENEMY_R + 26, Math.min(H - ENEMY_R, e.y));
+        }
+      }
+
+      for (let i = cubes.length - 1; i >= 0; i--) {
+        const c = cubes[i]!;
+        if (Math.hypot(c.x - player.x, c.y - player.y) < PLAYER_R + CUBE_HALF) {
+          cubes.splice(i, 1);
+          score += 10;
+        }
+      }
+
+      if (invuln > 0) invuln -= dt;
+      else {
+        for (const e of enemies) {
+          if (Math.hypot(e.x - player.x, e.y - player.y) < PLAYER_R + ENEMY_R - 4) {
+            lives -= 1;
+            invuln = INVULN_FRAMES;
+            player.x = W / 2;
+            player.y = H / 2;
+            player.vx = 0;
+            player.vy = 0;
+            pointerTarget = null;
+            if (lives <= 0) {
+              stop('dead');
+              return;
+            }
+            banner = `${lives} ${lives === 1 ? 'life' : 'lives'} left`;
+            bannerTimer = 60;
+            break;
+          }
+        }
+      }
+
+      if (cubes.length === 0) {
+        level += 1;
+        score += 50;
+        banner = `Level ${level}`;
+        bannerTimer = 72;
+        spawnLevel();
+      }
+
+      if (bannerTimer > 0) {
+        bannerTimer -= dt;
+        if (bannerTimer <= 0) banner = '';
+      }
+
+      for (const b of bubbles) {
+        b.y -= b.v * dt;
+        if (b.y < -b.r) {
+          b.y = H + b.r;
+          b.x = rand(0, W);
+        }
+      }
+    }
+
+    /* ---------------- draw ---------------- */
+    /* Five tentacles fanning outward from under the head, drawn first so the
+       head hides their roots — matches the logo silhouette. Tentacles kept thin
+       and well spread, otherwise at small sizes they merge into one blob and the
+       whole thing reads as a lightbulb. */
+    function octopus(x: number, y: number, t: number, wiggle: boolean, s = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      if (s !== 1) ctx.scale(s, s);
+
+      ctx.strokeStyle = BRAND;
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 4.2;
+      for (let i = 0; i < 5; i++) {
+        const spread = (i - 2) / 2; // -1 … 1
+        const sway = wiggle ? Math.sin(t * 0.12 + i * 0.8) * 3.5 : 0;
+        ctx.beginPath();
+        ctx.moveTo(spread * 9, 13);
+        ctx.quadraticCurveTo(spread * 17 + sway, 26, spread * 25 + sway * 1.4, 33);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = BRAND;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 17, 19, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(-6.5, -2, 3.6, 0, Math.PI * 2);
+      ctx.arc(6.5, -2, 3.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+      const [top, bottom] = water();
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, top);
+      g.addColorStop(1, bottom);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+
+      if (state === 'playing') {
+        ctx.fillStyle = dark ? 'rgba(255,255,255,0.09)' : 'rgba(9,124,247,0.12)';
+        for (const b of bubbles) {
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      if (state === 'idle') {
+        // Big and high in the frame: it's the hero of the idle screen, and the
+        // overlay copy and Play button sit below it.
+        octopus(W / 2, H * 0.32, tick, !reduceMotion, 2.4);
+        return;
+      }
+
+      // data cubes
+      for (const c of cubes) {
+        const bob = Math.sin(tick * 0.06 + c.phase) * 3;
+        ctx.save();
+        ctx.translate(c.x, c.y + bob);
+        ctx.fillStyle = CUBE_COLOR;
+        ctx.beginPath();
+        ctx.roundRect(-CUBE_HALF, -CUBE_HALF, CUBE_HALF * 2, CUBE_HALF * 2, 3);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(-CUBE_HALF + 3, -2);
+        ctx.lineTo(CUBE_HALF - 3, -2);
+        ctx.moveTo(-CUBE_HALF + 3, 3);
+        ctx.lineTo(CUBE_HALF - 3, 3);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      /* 404 jellyfish. The label rides along in world units, so below ~7 CSS px
+         it degrades into a smudge — drop it and let the red shape carry the
+         meaning rather than render noise. */
+      const showEnemyLabel = 13 * cssPerWorld >= 7;
+      ctx.font = '600 13px ui-sans-serif, system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (const e of enemies) {
+        ctx.save();
+        ctx.translate(e.x, e.y);
+        ctx.fillStyle = ENEMY_COLOR;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, ENEMY_R, ENEMY_R * 0.8, 0, Math.PI, 0);
+        ctx.fill();
+        ctx.strokeStyle = ENEMY_COLOR;
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+        for (let i = -1; i <= 1; i++) {
+          const sway = Math.sin(tick * 0.14 + i) * 3;
+          ctx.beginPath();
+          ctx.moveTo(i * 9, 0);
+          ctx.quadraticCurveTo(i * 9 + sway, 9, i * 9 + sway * 1.5, 17);
+          ctx.stroke();
+        }
+        if (showEnemyLabel) {
+          ctx.fillStyle = '#fff';
+          ctx.fillText('404', 0, -8);
+        }
+        ctx.restore();
+      }
+
+      // player (blinks while invulnerable)
+      if (state === 'playing' && (invuln <= 0 || Math.floor(tick / 6) % 2 === 0)) {
+        octopus(player.x, player.y, tick, true);
+      }
+
+      /* HUD — sized in CSS pixels so it stays legible on a phone. On narrow
+         panels the centre "Level" label is dropped rather than left to collide
+         with the labels either side of it. */
+      const pad = cssPx(14);
+      const row1 = cssPx(18);
+      const row2 = cssPx(40);
+      const roomy = cssPerWorld * W > 520;
+
+      ctx.font = `600 ${cssPx(14)}px ui-sans-serif, system-ui, sans-serif`;
+      ctx.fillStyle = ink();
+      ctx.textAlign = 'left';
+      ctx.fillText(`Score ${score}`, pad, row1);
+      ctx.textAlign = 'right';
+      ctx.fillText(`Cubes ${cubes.length}`, W - pad, row1);
+      if (roomy) {
+        ctx.textAlign = 'center';
+        ctx.fillStyle = inkDim();
+        ctx.fillText(`Level ${level}`, W / 2, row1);
+      }
+
+      const dot = cssPx(6.5);
+      for (let i = 0; i < lives; i++) {
+        ctx.fillStyle = BRAND;
+        ctx.beginPath();
+        ctx.arc(pad + dot + i * cssPx(19), row2, dot, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = inkDim();
+      ctx.textAlign = 'right';
+      ctx.font = `600 ${cssPx(12)}px ui-sans-serif, system-ui, sans-serif`;
+      ctx.fillText(roomy ? `Best ${hi}` : `Lv ${level} · Best ${hi}`, W - pad, row2);
+
+      if (banner) {
+        ctx.font = `700 ${cssPx(26)}px ui-sans-serif, system-ui, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = ink();
+        ctx.fillText(banner, W / 2, H / 2);
+      }
+    }
+
+    /* ---------------- loop ---------------- */
+    let raf = 0;
+    let last = 0;
+    const frame = (now: number) => {
+      const dt = last ? Math.min((now - last) / 16.667, 2.5) : 1;
+      last = now;
+      tick += dt;
+      if (state === 'playing') update(dt);
+      draw();
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+
+    /* ---------------- teardown ---------------- */
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      themeObserver.disconnect();
+      playBtn.removeEventListener('click', start);
+      stopBtn.removeEventListener('click', onStopClick);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup', onKeyUp);
+      window.removeEventListener('blur', onBlur);
+      canvas.removeEventListener('pointerdown', onPointerDown);
+      canvas.removeEventListener('pointermove', onPointerMove);
+      canvas.removeEventListener('pointerup', onPointerUp);
+      canvas.removeEventListener('pointercancel', onPointerUp);
+    };
+  }
+
+  let teardown: (() => void) | null = null;
+
+  /* Tears down any previous instance first, so booting twice is safe. */
+  const boot = () => {
+    teardown?.();
+    teardown = initInkDash();
+  };
+
+  /* Don't depend on catching the initial `astro:page-load`: whether this module
+     executes before ClientRouter dispatches it is a bundling-order detail. Boot
+     directly for this load, and let page-load handle later swaps. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  document.addEventListener('astro:page-load', boot);
+
+  // ClientRouter swaps the DOM out from under us — drop the loop and the
+  // window-level listeners before that happens.
+  document.addEventListener('astro:before-swap', () => {
+    teardown?.();
+    teardown = null;
+  });
+</script>

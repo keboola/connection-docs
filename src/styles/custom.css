@@ -1913,3 +1913,137 @@ nav.sidebar {
   margin: 4px 0;
 }
 .skill-download-btn:hover { opacity: 0.85; color: var(--sl-color-white); }
+
+/* ==========================================================================
+   404 page — Ink-dash game + "search the docs" call to action
+   ========================================================================== */
+
+.inkdash {
+  position: relative;
+  max-width: 720px;
+  margin: 1.5rem 0;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--sl-color-bg);
+}
+
+.inkdash-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Only capture touch gestures while a game is running — otherwise the canvas
+   would swallow page scrolling on mobile. */
+.inkdash[data-state='playing'] .inkdash-canvas { touch-action: none; }
+
+.inkdash-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Bottom-aligned so the idle octopus drawn in the upper third stays visible. */
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 16px 30px;
+  text-align: center;
+  background: none;
+}
+
+.inkdash[data-state='playing'] .inkdash-overlay { display: none; }
+
+.inkdash-msg {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+
+.inkdash-play {
+  padding: 9px 24px;
+  background: var(--sl-color-accent);
+  border: 1px solid var(--sl-color-accent);
+  border-radius: 6px;
+  /* Literal white, not --sl-color-white: Starlight flips that token to near
+     black in the light theme, which would put dark text on the blue accent. */
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.inkdash-play:hover { opacity: 0.85; }
+
+/* The only way out of a running game for anyone without an Esc key, so it lives
+   outside the overlay and is shown exactly while playing. Bottom-right corner —
+   the HUD occupies the top band. */
+.inkdash-stop {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: none;
+  min-width: 64px;
+  min-height: 40px;
+  padding: 8px 16px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  /* Literal white on the translucent plate — --sl-color-white flips to near
+     black in the light theme. */
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.inkdash[data-state='playing'] .inkdash-stop { display: block; }
+
+.inkdash-stop:hover { opacity: 0.8; }
+
+.inkdash-hint {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--sl-color-gray-3);
+}
+
+.inkdash-hint kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 4px;
+  background: var(--sl-color-gray-6);
+  font-size: 11px;
+}
+
+/* --- search CTA --- */
+.notfound-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  background: var(--sl-color-accent);
+  border: 1px solid var(--sl-color-accent);
+  border-radius: 8px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.notfound-search:hover { opacity: 0.85; }
+
+.notfound-partners {
+  font-size: 13.5px;
+  color: var(--sl-color-gray-3);
+}

@@ -1,0 +1,110 @@
+---
+/**
+ * 404.astro — the "page not found" page.
+ *
+ * This is a real Astro page rather than an entry in the `docs` collection so it
+ * can (a) drop the chrome that makes no sense on a 404 (right-hand TOC, "Copy as
+ * Markdown", the section eyebrow pill, prev/next pagination) and (b) ship a
+ * bundled <script> for the InkDash game, which a plain `.md` file cannot.
+ *
+ * <StarlightPage> keeps the sidebar, which is the whole point — on a 404 the
+ * sidebar *is* the answer to "where was I supposed to go".
+ *
+ * Output path is unchanged: Astro special-cases the 404 route and emits
+ * `dist/404.html` at the root, exactly as the collection page did. The S3 error
+ * document config lives outside this repo, so that path must not move.
+ */
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import InkDash from '../components/InkDash.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Page Not Found',
+    description:
+      "The page you requested doesn't exist. Search the docs below, or pick one of the links.",
+    tableOfContents: false,
+    pagefind: false,
+    hideMeta: true,
+    head: [{ tag: 'meta', attrs: { name: 'robots', content: 'noindex, follow' } }],
+  }}
+  headings={[]}
+  prev={false}
+  next={false}
+>
+  <p>
+    If we sent you here by mistake, tell us at
+    <a href="mailto:support@keboola.com">support@keboola.com</a> and we'll fix the link.
+  </p>
+
+  <p>
+    <button class="notfound-search" type="button" id="notfound-search">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <span>Search the documentation</span>
+    </button>
+  </p>
+
+  <InkDash />
+
+  <h2>Where you might be headed</h2>
+
+  <ul>
+    <li><a href="/">Documentation home</a> — start over from the top.</li>
+    <li>
+      <a href="https://connection.keboola.com">connection.keboola.com</a> — log in to Keboola.
+    </li>
+    <li>
+      <a href="https://keboolastatus.com/">keboolastatus.com</a> — service status and changelog.
+      Worth subscribing to the feed or piping it into a Slack channel.
+    </li>
+    <li>
+      <a href="mailto:support@keboola.com">support@keboola.com</a> — talk to a human.
+    </li>
+  </ul>
+
+  <p class="notfound-partners">
+    Working with a Keboola partner? Reach your region at
+    <a href="mailto:cz.support@keboola.com">cz.support@keboola.com</a> (Europe),
+    <a href="mailto:support.ca@keboola.com">support.ca@keboola.com</a> (North America), or
+    <a href="mailto:apac.support@keboola.com">apac.support@keboola.com</a> (Asia).
+  </p>
+</StarlightPage>
+
+<script>
+  /* Reuse Starlight's own search modal instead of shipping a second search UI.
+     Pagefind only builds in production, so in `astro dev` the modal opens with
+     Starlight's dev-mode notice — expected, not a bug.
+
+     Delegated from `document` on purpose. Astro emits a page-level <script>
+     after </html>, which runs *after* ClientRouter has already dispatched
+     `astro:page-load` for the initial load — so wiring the button inside a
+     page-load handler silently never binds. Delegation needs no lifecycle hook
+     and keeps working across view-transition swaps. */
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target?.closest('#notfound-search')) return;
+    /* Deferred to the next task, not called inline. Starlight's openModal()
+       registers a window-level "click outside closes me" handler as it opens.
+       Triggering it synchronously means our own click — still bubbling toward
+       window — reaches that fresh handler and slams the modal shut again. */
+    setTimeout(() => {
+      document
+        .querySelector<HTMLButtonElement>('site-search button[data-open-modal]')
+        ?.click();
+    }, 0);
+  });
+</script>
