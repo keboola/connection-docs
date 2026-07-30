@@ -15,7 +15,7 @@ Before you start, have a working Intercom account with a plan (a trial will work
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
 
 Choose one of the configuration templates available: **Basic** or **Conversations** and **Save** the configuration.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ![Screenshot - Intercom configuration](/components/extractors/communication/intercom/intercom-1.png)
 

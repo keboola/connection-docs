@@ -355,9 +355,6 @@ items:
               - url: /components/extractors/other/currency-rates/
                 title: ECB Currency Rates
 
-              - url: /components/extractors/other/generic/
-                title: Generic Extractor
-
               - url: /components/extractors/other/geocoding-augmentation/
                 title: Geocoding Augmentation
 
@@ -404,7 +401,7 @@ items:
                 title: YourPass
 
           - url: /components/extractors/generic-extractor/
-            title: Generic Extractor Reference
+            title: Generic Extractor
             items:
               - url: /components/extractors/generic-extractor/tutorial/
                 title: Generic Extractor Tutorial

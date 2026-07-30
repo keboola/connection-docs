@@ -254,7 +254,6 @@ export const sidebar = [
               { slug: "components/extractors/other/dark-sky" },
               { slug: "components/extractors/other/dynamodb-streams" },
               { slug: "components/extractors/other/currency-rates" },
-              { slug: "components/extractors/other/generic" },
               { slug: "components/extractors/other/geocoding-augmentation" },
               { slug: "components/extractors/other/github" },
               { slug: "components/extractors/other/google-search-console" },
@@ -273,7 +272,7 @@ export const sidebar = [
             ],
           },
           {
-            label: "Generic Extractor Reference",
+            label: "Generic Extractor",
             collapsed: true,
             items: [
               { label: "Overview", slug: "components/extractors/generic-extractor" },

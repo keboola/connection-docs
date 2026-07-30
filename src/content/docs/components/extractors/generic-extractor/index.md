@@ -3,6 +3,7 @@ title: Generic Extractor
 slug: 'components/extractors/generic-extractor'
 redirect_from:
     - /extend/generic-extractor/
+    - /components/extractors/other/generic/
 ---
 
 
@@ -51,6 +52,20 @@ do not limit the configuration. You can always switch to JSON
 [free-form configuration](/components/extractors/generic-extractor/publish/#submission) when necessary.
 
 Also, templates can be used only with published components based on Generic Extractor configurations.
+
+## Template Mode
+Generic Extractor is used as the base for many data source connectors. These components allow you to select pre-defined configurations
+-- templates -- without the need to configure Generic Extractor manually.
+
+![Generic Extractor - template](/components/extractors/generic-extractor/generic-1.png)
+
+The components can be heavily customized using the **Switch to JSON editor** button.
+If you select the template and want to specify more details using the advanced mode, don't forget to click **Save** first.
+The code will be pre-filled for you based on that template.
+
+![Generic Extractor - template](/components/extractors/generic-extractor/generic-2.png)
+
+When finished editing, save the configuration. You can always switch back to the templates, but you'll lose your customizations.
 
 ## Generic Extractor Source
 As with other Keboola components, the Generic Extractor connector is available on
