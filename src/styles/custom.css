@@ -1769,6 +1769,20 @@ nav.sidebar {
 }
 .ak-send:hover { background: var(--kbc-blue-600); }
 .ak-send:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Quiet AI footnote under the composer. Outside .ak-messages so it persists for
+   the whole conversation — the greeting that also names Kai as an AI is removed
+   once the first message is sent, so this is the lasting disclosure
+   (EU AI Act Art. 50(1)). */
+.ak-footnote {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 12px 10px;
+  background: var(--bg-1);
+  color: var(--fg-3);
+  font-size: 11.5px;
+  line-height: 1.4;
+  text-align: center;
+}
 
 /* Make the page-level Ask Kai widget actually look clickable. */
 .b-ask { cursor: pointer; }

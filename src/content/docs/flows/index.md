@@ -46,7 +46,7 @@ You can also set up parallelization **within a component** (configuration), dire
 
 - If you need to temporarily skip something, disable the task. The task will then be excluded from the flow.
 
-- Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. See also [Retry](#retry) for automatic retries of failed tasks.
+- Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. To let selected tasks fail while the rest of the phase must succeed, use the [Continue on Failure](#4-continue-on-failure) condition subject. See also [Retry](#retry) for automatic retries of failed tasks.
 
 - To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
@@ -81,6 +81,8 @@ Control the flow of execution based on conditions like:
 - **Number of Output Tables** - control the flow based on how many output tables a task produces.
 - **Duration of Task** - condition to trigger actions depending on how long a task runs. This is useful for detecting anomalies (e.g., unusually short or long runtimes).
 
+Each of these can be evaluated for a single task, a whole phase, all or any task in a phase, or any task in the whole flow - see [What the Condition Compares](#3-what-the-condition-compares-subject).
+
 Evaluation proceeds from top to bottom, and once a condition is true, the remaining conditions are ignored - even if others would also evaluate to be true.
 
 :::caution
@@ -97,6 +99,77 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 - Use **(OR)** when any one statement being true is enough.
 
 ![](/flows/conditional-flows-condition.png)
+
+### 3. What the Condition Compares (Subject)
+
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](#using-variables-in-conditions)).
+
+In the **Phases / Tasks** tab you can choose:
+
+| Subject | What it evaluates |
+| --- | --- |
+| **Any Task in the Flow** | A flow-level row above the phase list. The statement passes when **at least one** already finished task anywhere in the flow matches. |
+| ***phase* > Whole Phase Status** | The resulting status of the whole phase. |
+| ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
+| ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
+| ***phase* > Continue on Failure** | Passes when **every** task in that phase succeeded, except the tasks you explicitly allow to fail. See [Continue on Failure](#4-continue-on-failure). |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](#dynamic-value) variables). |
+
+For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
+
+When you pick a specific phase or task, you can only reference phases that run **before** the condition (plus the condition's own phase). *Any Task in the Flow* needs no phase at all, so it also covers tasks in parallel branches that already finished - not just the ones directly upstream.
+
+:::caution
+A condition can only ever look at tasks that have **already finished** at the moment it is evaluated. *Any Task in the Flow* therefore silently ignores tasks in phases that have not run yet - it never waits for them.
+:::
+
+The typical use case for *Any Task in the Flow* is a single flow-level error branch - *"if any task in the flow ended with an error, send a notification"* - instead of repeating an *Any Task in Phase* statement for every phase.
+
+**JSON equivalent** (useful when authoring a flow as a template or via the API) - the aggregated subjects wrap the inner statement, which uses `*` as the task:
+
+```json
+{
+  "type": "operator",
+  "operator": "ANY_TASKS_IN_ANY_PHASE",
+  "operands": [
+    {
+      "type": "operator",
+      "operator": "EQUALS",
+      "operands": [
+        { "type": "task", "task": "*", "value": "job.status" },
+        { "type": "const", "value": "error" }
+      ]
+    }
+  ]
+}
+```
+
+The per-phase variants use the same shape with the `ANY_TASKS_IN_PHASE` or `ALL_TASKS_IN_PHASE` operator plus a `"phase": "<phase-id>"` property.
+
+### 4. Continue on Failure
+
+**Continue on Failure** is a subject of its own, picked per phase next to *All Tasks in Phase* and *Any Task in Phase*. It expresses *"these tasks may fail, all the others must succeed"* - the equivalent of the **Continue on Failure** toggle known from [Legacy Flows](/flows/flows-legacy/).
+
+After selecting it, pick the tasks that are allowed to fail in the **All tasks of the phase must succeed, except** selector. The statement then passes when every other task in the phase finished successfully; a task blocks the branch only if it did **not** succeed **and** is not on the list. Leave the list empty to require that the whole phase succeeds.
+
+The condition is summarized as *All tasks in Extract Data succeeded / except My GitHub*.
+
+:::tip
+Use this subject instead of combining an *All Tasks in Phase* statement with per-task *failed* statements using **OR**. Such a combination passes as soon as one of the tolerated tasks fails - even when a task that had to succeed failed as well.
+:::
+
+**JSON equivalent** - the operator takes no `operands`, because the statuses are fixed. It carries the ids of the tolerated tasks instead:
+
+```json
+{
+  "type": "operator",
+  "operator": "CONTINUE_ON_FAILURE",
+  "phase": "8888",
+  "tasks": ["456", "789"]
+}
+```
+
+Task ids that no longer belong to the phase (for example a deleted or disabled task) are ignored, so the condition keeps working when the phase's tasks change.
 
 ## Variables
 
