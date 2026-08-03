@@ -2001,14 +2001,16 @@ nav.sidebar {
 .notfound-search:hover { opacity: 0.85; }
 
 /* --- Ink-dash panel ---
-   A framed scene whose water wash is drawn on the canvas. The frame and the fill
-   are the look; the size is what changes. */
+   A framed scene whose water, light and particulate are drawn on the canvas. It
+   is the LAST element of the 404 page, after every recovery link, so its height
+   costs the page nothing — which is what lets it be a real scene instead of a
+   strip. */
 .inkdash {
   position: relative;
   max-width: 720px;
-  /* Tight, and measured: on a real typo URL at a 760px viewport the recovery
-     links land 24px above the fold. Every 10px added here spends that margin. */
-  margin: 0.5rem 0 0.9rem;
+  /* Room above, because it now follows body copy rather than sitting wedged
+     between two blocks. */
+  margin: 2rem 0 0.5rem;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 10px;
   /* The canvas is square-cornered, so the panel has to clip it to its radius. */
@@ -2020,22 +2022,27 @@ nav.sidebar {
   width: 100%;
   height: auto;
   /* Sizing lives here, not in the component, and there are two of it: compact at
-     rest so the recovery links above stay above the fold, and the full field once
-     a game starts. Each pairs with a world height (H_IDLE / H_PLAY) that keeps
-     the drawing scale at ~0.75 CSS px per world unit, so the octopus does not
-     change size when the panel grows.
+     rest, so the page doesn't end in a big abandoned box, and the full field once
+     a game starts. Each pairs with a world height (H_IDLE / H_PLAY) over the SAME
+     world width, which is what keeps the drawing scale identical in both — the
+     octopus must not change size when the panel grows, only gain water above and
+     below it.
+
+     That shared width is 840, not the ~960 it used to be: fewer world units in
+     the same box means everything is drawn bigger (~0.86 CSS px per world unit),
+     and scale is the one real cure for "small sprites in an empty rectangle".
 
      Each state also holds a min-height: below a phone width the panel stops
      shrinking and the game narrows its world instead. Letting the aspect ratio
      win there produced an 87px-tall field — unplayable, with the 40px Stop button
      alone covering half of it. */
-  aspect-ratio: 960 / 250;
-  min-height: 160px;
+  aspect-ratio: 840 / 250;
+  min-height: 170px;
 }
 
 .inkdash[data-state='playing'] .inkdash-canvas {
-  aspect-ratio: 960 / 540;
-  min-height: 330px;
+  aspect-ratio: 840 / 540;
+  min-height: 360px;
   /* Only capture touch gestures while a game runs — otherwise the panel would
      swallow page scrolling on mobile. */
   touch-action: none;
@@ -2048,13 +2055,14 @@ nav.sidebar {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
-  /* Bottom RIGHT, because the octopus is drawn left of centre. Stacking the copy
-     over it in a panel this short either overlaps it or forces it small — which
-     is what made the flat strip version read as nothing at all. */
+  /* One centred ROW along the bottom, under a centred octopus. Stacking the
+     message above the pill costs ~30px of the resting panel's ~215px, which is
+     exactly what forced the earlier layouts to either shrink the octopus to
+     nothing or shove it off to one side. A row keeps the hero big and centred. */
+  flex-direction: row;
   align-items: flex-end;
-  justify-content: flex-end;
-  gap: 9px;
+  justify-content: center;
+  gap: 14px;
   /* Bottom padding clears the hint line, which is a sibling rather than a child
      of this button. */
   padding: 12px 22px 40px;
@@ -2062,12 +2070,15 @@ nav.sidebar {
   border: 0;
   cursor: pointer;
   font-family: var(--font-sans);
-  text-align: right;
+  text-align: center;
 }
 
 .inkdash[data-state='playing'] .inkdash-start { display: none; }
 
 .inkdash-start-msg {
+  /* The row is bottom-aligned, so the text needs the pill's own vertical padding
+     back to sit on the same optical line as its label. */
+  padding-bottom: 8px;
   font-size: 15px;
   font-weight: 600;
   color: var(--sl-color-white);

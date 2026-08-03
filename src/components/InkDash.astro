@@ -7,12 +7,18 @@
  * in localStorage. Everything is drawn in code — no sprite assets — so it stays
  * crisp on retina and follows the light/dark theme.
  *
- * The panel is a framed, water-filled scene — the wash and the frame are the
- * look — but it is COMPACT WHILE RESTING and grows to the playable geometry only
- * once a game starts. That split is the whole layout compromise: a permanently
- * tall panel pushed the actual recovery links below the fold (measured), while a
- * permanently short one left a play field too shallow to dodge in. Nobody is
- * reading the links while playing, so that is when the height is free to take.
+ * The panel sits LAST on the 404 page, after every recovery link, so it owes the
+ * page no apology for its size — see the comment at its usage in 404.astro. It is
+ * still COMPACT WHILE RESTING and grows to the playable geometry once a game
+ * starts, so the page doesn't simply end in a big empty box; growing downward
+ * from the last element pushes nothing anywhere, and start() scrolls the field
+ * into view.
+ *
+ * The scene is OPEN WATER — no seabed, no floor line. Depth comes from the wash,
+ * three things layered over it (slanted light shafts, drifting particulate sized
+ * and paced together so the small stuff reads as far away, a vignette) and from
+ * drawing big: the world is 840 units wide, not 960, which is what keeps the
+ * octopus from being a speck in an empty rectangle.
  *
  * Four things this deliberately gets right:
  *   1. It never steals the keyboard. Movement keys are only preventDefault-ed
@@ -54,8 +60,9 @@
   <button class="inkdash-stop" type="button">Stop</button>
 
   <p class="sr-only">
-    This is an optional game and is not needed to use the documentation. Use the
-    search above or the links below to find what you were looking for.
+    This is an optional game and is not needed to use the documentation. The
+    search and the recovery links above are what you want if you are looking for
+    a page.
   </p>
 </div>
 
@@ -63,20 +70,27 @@
   /* ---------------- world (logical units) ---------------- */
   /* Two world heights, one per state: compact at rest, the full field in play.
      Both are paired in CSS with a rendered height that keeps CSS-pixels-per-world
-     -unit at ~0.75 either way, so the octopus does NOT change size when the panel
+     -unit at ~0.86 either way, so the octopus does NOT change size when the panel
      grows — only more water appears above and below it.
+
+     BASE_W is 840 rather than the panel's own 960-ish proportions: fewer world
+     units across the same box means everything is drawn bigger. That is the one
+     effective cure for "small sprites in an empty rectangle" — atmosphere helps,
+     but scale is what makes the scene feel inhabited.
 
      Within a state H is fixed and the world's WIDTH follows the panel's real
      aspect ratio (see CSS). At a phone width a fixed-width world would render an
      87px-tall panel — unplayable, the 40px Stop button alone covering half of it.
      So CSS holds a minimum height and the world narrows instead of shortening. */
-  const BASE_W = 960;
+  const BASE_W = 840;
   const H_IDLE = 250;
   const H_PLAY = 540;
   let H = H_IDLE;
 
-  /* A function, not a constant: H changes with the state. */
-  const seabed = () => H - 12;
+  /* Open water: the floor is the panel edge, with just enough margin that a
+     sprite never clips against it. There is no seabed line — it made the scene
+     read as a shallow tank, and the version everyone liked didn't have one. */
+  const FLOOR_PAD = 6;
 
   const PLAYER_R = 17;
   const ACCEL = 0.62;
@@ -165,40 +179,78 @@
       attributeFilter: ['data-theme'],
     });
 
-    const ink = () => (dark ? 'rgba(255,255,255,0.82)' : 'rgba(15,23,42,0.78)');
-    const inkDim = () => (dark ? 'rgba(255,255,255,0.34)' : 'rgba(15,23,42,0.34)');
+    const ink = () => (dark ? 'rgba(255,255,255,0.86)' : 'rgba(9,32,56,0.86)');
+    /* Not as dim as it sounds in the light theme: the wash it sits on is now a
+       saturated sea blue rather than near-white, so 0.34 alpha disappeared. */
+    const inkDim = () => (dark ? 'rgba(255,255,255,0.42)' : 'rgba(9,32,56,0.56)');
 
-    /* Depth palette: "going deeper" is carried by the water wash, the seabed and
-       its kelp all shifting cooler along the same ramp as levels climb. */
-    const mix = (a: number[], b: number[], t: number, alpha: number) =>
-      `rgba(${Math.round(a[0]! + (b[0]! - a[0]!) * t)},${Math.round(
-        a[1]! + (b[1]! - a[1]!) * t
-      )},${Math.round(a[2]! + (b[2]! - a[2]!) * t)},${alpha})`;
+    const lerp3 = (a: number[], b: number[], t: number) => [
+      a[0]! + (b[0]! - a[0]!) * t,
+      a[1]! + (b[1]! - a[1]!) * t,
+      a[2]! + (b[2]! - a[2]!) * t,
+    ];
+    const css3 = (c: number[], alpha = 1) =>
+      `rgba(${Math.round(c[0]!)},${Math.round(c[1]!)},${Math.round(c[2]!)},${alpha})`;
 
+    /* "Going deeper" as levels climb: the wash keeps its shape and slides toward
+       a darker, more indigo end of the same ramp. */
     const depth = () => Math.min((level - 1) / 6, 1);
-    const seabedColor = () =>
-      dark
-        ? mix([46, 96, 122], [58, 62, 138], depth(), 0.62)
-        : mix([120, 170, 190], [96, 110, 190], depth(), 0.5);
-    const kelpColor = () =>
-      dark
-        ? mix([36, 110, 108], [48, 60, 140], depth(), 0.42)
-        : mix([110, 175, 165], [110, 120, 195], depth(), 0.38);
 
-    /* Top and bottom stop of the water. Opaque on purpose — the panel is a
-       framed scene, and this wash is what makes it one. It stays well clear of
-       both themes' page background so the frame never looks like a stray border
-       around nothing. */
-    const water = () =>
-      dark
-        ? [
-            mix([8, 17, 31], [14, 13, 42], depth(), 1),
-            mix([13, 33, 56], [28, 24, 78], depth(), 1),
-          ]
-        : [
-            mix([234, 244, 255], [236, 237, 255], depth(), 1),
-            mix([211, 232, 255], [214, 213, 250], depth(), 1),
-          ];
+    /* Top and bottom stop of the water. Opaque, saturated, and deliberately not
+       pale: a near-white gradient read as a marketing banner rather than as the
+       sea, which is the whole reason this palette changed. Sea blue in the light
+       theme (#cfe6f5 → #7fb4d8), deep navy in the dark one (#071426 → #123a5c). */
+    const water = () => {
+      const d = depth();
+      return dark
+        ? [lerp3([10, 27, 48], [12, 14, 44], d), lerp3([22, 69, 110], [30, 32, 96], d)]
+        : [lerp3([207, 230, 245], [168, 198, 222], d), lerp3([127, 180, 216], [96, 132, 196], d)];
+    };
+
+    /* Sunlight from above. White in both themes — tinting it to the water only
+       made it vanish. */
+    const rayAlpha = () => (dark ? 0.07 : 0.1);
+    /* Particulate: white in the dark theme reads as plankton catching the light;
+       in the light theme white on sea blue does the same without going chalky. */
+    const moteColor = (a: number) =>
+      dark ? `rgba(255,255,255,${a})` : `rgba(255,255,255,${a * 1.25})`;
+
+    /* A halo behind cubes and jellyfish, so they sit IN the water rather than on
+       top of a flat fill. One cached radial-gradient bitmap per colour, drawn with
+       drawImage: ctx.shadowBlur is the obvious way and costs a full-canvas blur
+       per object — twenty of those a frame is a measurable stall on a phone. */
+    const glowCache = new Map<string, HTMLCanvasElement>();
+    const rgba = (hex: string, a: number) => {
+      const n = parseInt(hex.slice(1), 16);
+      return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+    };
+    const glowSprite = (color: string) => {
+      /* Keyed by theme as well as colour: a halo strong enough to be seen in deep
+         navy is a smudge on daylight water. */
+      const key = `${color}|${dark ? 'd' : 'l'}`;
+      const hit = glowCache.get(key);
+      if (hit) return hit;
+      const size = 64;
+      const off = document.createElement('canvas');
+      off.width = size;
+      off.height = size;
+      const octx = off.getContext('2d')!;
+      const peak = dark ? 0.5 : 0.26;
+      const g = octx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      /* Three stops, not two: a straight colour→transparent ramp reads as a flat
+         disc with a visible rim rather than as light bleeding into water. */
+      g.addColorStop(0, rgba(color, peak));
+      g.addColorStop(0.35, rgba(color, peak * 0.4));
+      g.addColorStop(1, rgba(color, 0));
+      octx.fillStyle = g;
+      octx.fillRect(0, 0, size, size);
+      glowCache.set(key, off);
+      return off;
+    };
+    const glow = (x: number, y: number, r: number, color: string) => {
+      const s = glowSprite(color);
+      ctx.drawImage(s, x - r, y - r, r * 2, r * 2);
+    };
 
     /* ---------------- canvas sizing (DPR-aware) ---------------- */
     let scale = 1;
@@ -223,7 +275,14 @@
       scale = cssPerWorld * dpr;
       W = rect.width / cssPerWorld;
     };
-    const ro = new ResizeObserver(resize);
+    /* resize() stays pure geometry; the observer also re-lays-out the atmosphere,
+       which is spread across the world box. Split this way because the first
+       resize() runs before the scene arrays are declared below — calling into
+       them from here would hit their temporal dead zone. */
+    const ro = new ResizeObserver(() => {
+      resize();
+      reflowAmbient();
+    });
     ro.observe(canvas);
     resize();
 
@@ -250,8 +309,22 @@
     let enemies: {
       x: number; y: number; vx: number; vy: number; type: EnemyType;
     }[] = [];
-    let bubbles: { x: number; y: number; r: number; v: number }[] = [];
-    let kelp: { x: number; h: number; lean: number }[] = [];
+    /* Particulate in one array, not one per layer: size, speed and alpha are
+       correlated on purpose, so the small faint slow ones read as far away and
+       the big ones as close. That correlation IS the parallax — separate layer
+       bookkeeping would buy nothing. `front` is the only real split: a handful of
+       large motes drift over the player, which is what sells the water as a
+       volume the octopus is inside rather than a backdrop behind it. */
+    let motes: {
+      x: number; y: number; r: number; v: number; a: number; drift: number; front: boolean;
+    }[] = [];
+
+    /* Light shafts: fixed geometry per scene, breathing only in alpha. */
+    let rays: { x: number; w: number; slant: number; phase: number }[] = [];
+
+    /* World box the current atmosphere was laid out for. */
+    let ambientW = 0;
+    let ambientH = 0;
 
     const keys = new Set<string>();
     let pointerTarget: { x: number; y: number } | null = null;
@@ -263,7 +336,61 @@
        text sit on top of the play field. */
     const topBand = () => Math.max(24, cssPx(17) + cssPx(9));
     const playTop = () => topBand() + PLAYER_R;
-    const playBottom = () => seabed() - PLAYER_R;
+    const playBottom = () => H - FLOOR_PAD - PLAYER_R;
+
+    /* Atmosphere is per-SCENE, not per-level: motes and shafts belong to the
+       panel, so the resting state gets them too — an idle box of flat gradient is
+       exactly what read as lifeless. Called again when the panel resizes, since
+       both are laid out across the world box. */
+    function spawnAmbient() {
+      const area = (W * H) / 1000;
+      motes = Array.from({ length: Math.round(Math.min(Math.max(area * 0.22, 22), 60)) }, () => {
+        /* One roll drives size, speed and opacity together: near motes are big,
+           quick and brighter, far ones small, slow and faint. */
+        const near = Math.pow(rand(0, 1), 1.7);
+        return {
+          x: rand(0, W),
+          y: rand(0, H),
+          r: 0.7 + near * 2.2,
+          v: 0.12 + near * 0.55,
+          a: 0.05 + near * 0.16,
+          drift: rand(0, Math.PI * 2),
+          front: false,
+        };
+      });
+
+      /* The few large ones that pass in FRONT of everything. Kept faint and
+         soft-edged: at full opacity they read as dirt on the screen. */
+      for (let i = 0; i < 6; i++) {
+        motes.push({
+          x: rand(0, W),
+          y: rand(0, H),
+          r: rand(4, 9),
+          v: rand(0.8, 1.4),
+          a: rand(0.05, 0.09),
+          drift: rand(0, Math.PI * 2),
+          front: true,
+        });
+      }
+
+      rays = Array.from({ length: 4 }, (_, i) => ({
+        x: W * (0.12 + i * 0.24) + rand(-30, 30),
+        w: rand(W * 0.06, W * 0.13),
+        slant: rand(0.18, 0.42),
+        phase: rand(0, Math.PI * 2),
+      }));
+
+      ambientW = W;
+      ambientH = H;
+    }
+
+    /* Only re-scatter when the box has actually changed shape. A ResizeObserver
+       fires on every pixel of a window drag, and respawning on each one makes the
+       whole scene twitch. */
+    function reflowAmbient() {
+      if (Math.abs(W - ambientW) < W * 0.12 && H === ambientH) return;
+      spawnAmbient();
+    }
 
     function spawnLevel() {
       const plan = levelPlan(level);
@@ -283,7 +410,7 @@
 
       enemies = [];
       const eTop = topBand() + ENEMY_R;
-      const eBottom = seabed() - ENEMY_R;
+      const eBottom = H - FLOOR_PAD - ENEMY_R;
       for (let i = 0; i < plan.count; i++) {
         /* One of the level's newest type is guaranteed, so a new code actually
            shows up on the level that introduces it. */
@@ -313,18 +440,6 @@
         enemies.push({ x, y, vx: Math.cos(dir) * speed, vy: Math.sin(dir) * speed, type });
       }
 
-      bubbles = Array.from({ length: Math.min(10 + level * 2, 26) }, () => ({
-        x: rand(0, W),
-        y: rand(0, H),
-        r: rand(1.2, 3.2),
-        v: rand(0.25, 0.7),
-      }));
-
-      kelp = Array.from({ length: Math.min(3 + level, 9) }, () => ({
-        x: rand(10, W - 10),
-        h: rand(18, 54),
-        lean: rand(-0.5, 0.5),
-      }));
     }
 
     function start() {
@@ -346,6 +461,7 @@
       H = H_PLAY;
       root.dataset.state = 'playing';
       resize();
+      spawnAmbient();
 
       player.x = W * 0.25;
       player.y = H / 2;
@@ -355,6 +471,24 @@
       keys.clear();
       spawnLevel();
       state = 'playing';
+
+      /* The panel is the last thing on the page, so the field it just grew into
+         is very likely half below the viewport. Only scroll when it doesn't
+         already fit — an unconditional scrollIntoView yanks the page for anyone
+         who had it in view already. */
+      const box = root.getBoundingClientRect();
+      if (box.top < 0 || box.bottom > window.innerHeight) {
+        /* window.scrollTo, not element.scrollIntoView: an ancestor in the
+           Starlight layout is itself a scroll container, so scrollIntoView
+           scrolled THAT — measured, the page moved 5px and the field stayed
+           below the fold. Centre the panel when it fits, otherwise pin it near
+           the top. */
+        const margin = Math.max(12, (window.innerHeight - box.height) / 2);
+        window.scrollTo({
+          top: Math.max(0, window.scrollY + box.top - margin),
+          behavior: reduceMotion ? 'auto' : 'smooth',
+        });
+      }
     }
 
     /* Called on every exit path, not just death — quitting with a good score
@@ -369,12 +503,13 @@
 
     function stop(reason: 'dead' | 'idle') {
       state = reason;
-      /* Back to the compact panel on every exit — including death, so the links
-         below come back into reach instead of staying pushed down by a field
-         nobody is playing in. */
+      /* Back to the compact panel on every exit — including death. Nothing is
+         below it to free up any more, but a page that ends in a big abandoned
+         play field looks like a mistake. */
       H = H_IDLE;
       root.dataset.state = reason;
       resize();
+      spawnAmbient();
       keys.clear();
       pointerTarget = null;
       recordHighScore();
@@ -499,7 +634,7 @@
           e.x = Math.max(ENEMY_R, Math.min(W - ENEMY_R, e.x));
         }
         const top = topBand() + ENEMY_R;
-        const bottom = seabed() - ENEMY_R;
+        const bottom = H - FLOOR_PAD - ENEMY_R;
         if (e.y < top || e.y > bottom) {
           e.vy *= -1;
           e.y = Math.max(top, Math.min(bottom, e.y));
@@ -555,11 +690,18 @@
         if (bannerTimer <= 0) banner = '';
       }
 
-      for (const b of bubbles) {
-        b.y -= b.v * dt;
-        if (b.y < -b.r) {
-          b.y = H + b.r;
-          b.x = rand(0, W);
+    }
+
+    /* Runs in every state, unlike update() — the resting panel is the same body
+       of water and freezing it there is what made it look like a picture of a
+       gradient. Under prefers-reduced-motion the caller skips this entirely. */
+    function driftAmbient(dt: number) {
+      for (const m of motes) {
+        m.y -= m.v * dt;
+        m.x += Math.sin(tick * 0.01 + m.drift) * 0.12 * dt;
+        if (m.y < -m.r) {
+          m.y = H + m.r;
+          m.x = rand(0, W);
         }
       }
     }
@@ -576,25 +718,25 @@
 
       ctx.strokeStyle = BRAND;
       ctx.lineCap = 'round';
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 4.2;
       for (let i = 0; i < 5; i++) {
         const spread = (i - 2) / 2; // -1 … 1
-        const sway = wiggle ? Math.sin(t * 0.12 + i * 0.8) * 3.2 : 0;
+        const sway = wiggle ? Math.sin(t * 0.12 + i * 0.8) * 3.5 : 0;
         ctx.beginPath();
-        ctx.moveTo(spread * 8, 11);
-        ctx.quadraticCurveTo(spread * 15 + sway, 22, spread * 22 + sway * 1.4, 28);
+        ctx.moveTo(spread * 9, 13);
+        ctx.quadraticCurveTo(spread * 17 + sway, 26, spread * 25 + sway * 1.4, 33);
         ctx.stroke();
       }
 
       ctx.fillStyle = BRAND;
       ctx.beginPath();
-      ctx.ellipse(0, 0, 15, 16.5, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, 17, 19, 0, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.fillStyle = '#fff';
       ctx.beginPath();
-      ctx.arc(-5.6, -2, 3.2, 0, Math.PI * 2);
-      ctx.arc(5.6, -2, 3.2, 0, Math.PI * 2);
+      ctx.arc(-6.5, -2, 3.6, 0, Math.PI * 2);
+      ctx.arc(6.5, -2, 3.6, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -603,6 +745,7 @@
     /* Drifters are domes; the chaser is a diamond with spikes. The shape is the
        real signal — labels vanish on narrow panels. */
     function enemy(e: (typeof enemies)[number]) {
+      glow(e.x, e.y, ENEMY_R * 2.1, e.type.color);
       ctx.save();
       ctx.translate(e.x, e.y);
       ctx.fillStyle = e.type.color;
@@ -650,29 +793,47 @@
       ctx.restore();
     }
 
-    function seabedAndKelp() {
-      ctx.strokeStyle = seabedColor();
-      ctx.lineWidth = 1.4;
-      ctx.beginPath();
-      ctx.moveTo(0, seabed());
-      ctx.lineTo(W, seabed());
-      ctx.stroke();
-
-      ctx.strokeStyle = kelpColor();
-      ctx.lineWidth = 3;
-      ctx.lineCap = 'round';
-      for (const k of kelp) {
-        const sway = reduceMotion ? 0 : Math.sin(tick * 0.03 + k.x) * 3;
+    /* Slanted shafts from the surface. Drawn per frame rather than cached: the
+       cost here is compositing four translucent quads, which a cached bitmap would
+       still have to pay, and a cache would need invalidating on resize, theme flip
+       AND every level's depth shift. */
+    function lightShafts() {
+      const base = rayAlpha();
+      for (const r of rays) {
+        const breathe = reduceMotion ? 1 : 0.75 + 0.25 * Math.sin(tick * 0.008 + r.phase);
+        const g = ctx.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, `rgba(255,255,255,${base * breathe})`);
+        g.addColorStop(0.55, `rgba(255,255,255,${base * breathe * 0.35})`);
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.moveTo(k.x, seabed());
-        ctx.quadraticCurveTo(
-          k.x + k.lean * 12 + sway,
-          seabed() - k.h * 0.6,
-          k.x + k.lean * 20 + sway * 1.6,
-          seabed() - k.h
-        );
-        ctx.stroke();
+        ctx.moveTo(r.x, 0);
+        ctx.lineTo(r.x + r.w, 0);
+        ctx.lineTo(r.x + r.w + r.slant * H, H);
+        ctx.lineTo(r.x + r.slant * H * 0.8, H);
+        ctx.closePath();
+        ctx.fill();
       }
+    }
+
+    function drawMotes(front: boolean) {
+      for (const m of motes) {
+        if (m.front !== front) continue;
+        ctx.fillStyle = moteColor(m.a);
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    /* Darkens the edges so the scene has a centre. Without it the wash meets the
+       frame at full strength and the panel reads as a filled rectangle. */
+    function vignette() {
+      const g = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.25, W / 2, H / 2, Math.max(W, H) * 0.68);
+      g.addColorStop(0, 'rgba(0,0,0,0)');
+      g.addColorStop(1, dark ? 'rgba(0,0,0,0.3)' : 'rgba(6,38,70,0.2)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
     }
 
     function draw() {
@@ -684,39 +845,40 @@
          and without it the frame encloses nothing. */
       const [top, bottom] = water();
       const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, top);
-      g.addColorStop(1, bottom);
+      g.addColorStop(0, css3(top!));
+      /* A third stop, weighted toward the deep end at a third of the way down:
+         with a plain two-stop ramp the upper half of the light theme sat near
+         white and the whole panel read as a marketing banner. The endpoints are
+         unchanged — only where the water gets serious. */
+      g.addColorStop(0.32, css3(lerp3(top!, bottom!, 0.55)));
+      g.addColorStop(1, css3(bottom!));
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
 
+      /* Order matters and is the same in every state: far particulate sits inside
+         the wash, the shafts cut across it, entities live in front of both, the
+         big near motes pass over them and the vignette closes the box. */
+      drawMotes(false);
+      lightShafts();
+
       if (state === 'idle' || state === 'dead') {
-        /* Left of centre, while the message and the Play pill are pinned to the
-           bottom RIGHT (see CSS). Splitting them horizontally is what buys the
-           octopus its size back: stacked in a panel this short, a big one and the
-           copy overlap, and shrinking it to fit is what made the strip version
-           look like nothing. Swimming, not parked on the seabed — an octopus
-           isn't a dinosaur. */
-        ctx.strokeStyle = seabedColor();
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.moveTo(0, seabed());
-        ctx.lineTo(W, seabed());
-        ctx.stroke();
-        octopus(W * 0.2, H * 0.42, tick, !reduceMotion, 2);
+        /* The hero of the resting panel: centred and big, as in the version this
+           went back to. The copy is a single centred ROW pinned to the bottom
+           (see CSS) rather than a stack — that is what leaves room for a 2.2×
+           octopus in a panel this short. Swimming mid-water, not parked on a
+           floor — an octopus isn't a dinosaur.
+
+           High enough that the tentacles clear that row: at 2.05× they reach
+           ~68 world units below the head, and the copy starts at ~0.62H. */
+        octopus(W / 2, H * 0.29, tick, !reduceMotion, 2.05);
+        drawMotes(true);
+        vignette();
         return;
-      }
-
-      seabedAndKelp();
-
-      ctx.fillStyle = dark ? 'rgba(255,255,255,0.10)' : 'rgba(9,124,247,0.14)';
-      for (const b of bubbles) {
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fill();
       }
 
       for (const c of cubes) {
         const bob = Math.sin(tick * 0.06 + c.phase) * 2.5;
+        glow(c.x, c.y + bob, CUBE_HALF * 3, CUBE_COLOR);
         ctx.save();
         ctx.translate(c.x, c.y + bob);
         ctx.fillStyle = CUBE_COLOR;
@@ -740,6 +902,11 @@
       if (invuln <= 0 || Math.floor(tick / 6) % 2 === 0) {
         octopus(player.x, player.y, tick, true);
       }
+
+      drawMotes(true);
+      /* Before the HUD, never over it: dimming the score to frame the scene is
+         not a trade worth making. */
+      vignette();
 
       /* HUD on one row, sized in CSS pixels so it stays legible on a phone. One
          row even in the taller play field: a second would buy nothing the corner
@@ -773,6 +940,10 @@
     }
 
     /* ---------------- loop ---------------- */
+    /* The resting panel is a scene too, so it needs its atmosphere before the
+       first frame — not only once a game starts. */
+    spawnAmbient();
+
     let raf = 0;
     let last = 0;
     const frame = (now: number) => {
@@ -780,6 +951,7 @@
       last = now;
       tick += dt;
       if (state === 'playing') update(dt);
+      if (!reduceMotion) driftAmbient(dt);
       draw();
       raf = requestAnimationFrame(frame);
     };

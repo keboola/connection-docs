@@ -44,8 +44,6 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
       already a bullet in the list below. */}
   <NotFoundSuggestions />
 
-  <InkDash />
-
   <h2>Where you might be headed</h2>
 
   <ul>
@@ -68,7 +66,14 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
     <a href="mailto:support.ca@keboola.com">support.ca@keboola.com</a> (North America), or
     <a href="mailto:apac.support@keboola.com">apac.support@keboola.com</a> (Asia).
   </p>
-</StarlightPage>
+
+  {/* Last on the page on purpose. Everything the visitor actually came for —
+      the path that failed, the closest real pages, search, the recovery links —
+      is above this, so the game is free to be a full-size scene instead of a
+      strip apologising for the space it takes. Between the suggestions and the
+      links it pushed those links below the fold (measured); here it cannot push
+      anything anywhere, and a screen reader meets the useful part first. */}
+  <InkDash />
 
 <script>
   /* Reuse Starlight's own search modal instead of shipping a second search UI.
