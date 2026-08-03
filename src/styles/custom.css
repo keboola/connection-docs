@@ -1913,13 +1913,13 @@ nav.sidebar {
 .skill-download-btn:hover { opacity: 0.85; color: var(--sl-color-white); }
 
 /* ==========================================================================
-   404 page — recovery block + Ink-dash strip
+   404 page — recovery block + Ink-dash panel
    ========================================================================== */
 
 /* --- "did you mean" recovery block --- */
 .nf-help {
   /* Tight on purpose: every 10px here decides whether the recovery links
-     below the strip land above the fold. */
+     below the game panel land above the fold. */
   margin: 1rem 0 1.1rem;
 }
 
@@ -2000,63 +2000,137 @@ nav.sidebar {
 
 .notfound-search:hover { opacity: 0.85; }
 
-/* --- Ink-dash strip ---
-   Deliberately frameless and unfilled, like Chrome's offline dinosaur: a
-   bordered, filled panel reads as a widget and competes with the page. Measured,
-   the old panel pushed the recovery links below the fold. */
+/* --- Ink-dash panel ---
+   A framed scene whose water wash is drawn on the canvas. The frame and the fill
+   are the look; the size is what changes. */
 .inkdash {
   position: relative;
   max-width: 720px;
-  margin: 0.35rem 0 1rem;
-  background: none;
-  border: 0;
+  /* Tight, and measured: on a real typo URL at a 760px viewport the recovery
+     links land 24px above the fold. Every 10px added here spends that margin. */
+  margin: 0.5rem 0 0.9rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+  /* The canvas is square-cornered, so the panel has to clip it to its radius. */
+  overflow: hidden;
 }
 
 .inkdash-canvas {
   display: block;
   width: 100%;
-  /* Sizing lives here, not in the component: the strip keeps the reference
-     aspect until a phone width, then stops shrinking. Below that the game keeps
-     this height and narrows its world instead — at 87px it was unplayable, the
-     40px Stop button alone covering half of it. */
-  aspect-ratio: 960 / 245;
   height: auto;
-  min-height: 148px;
+  /* Sizing lives here, not in the component, and there are two of it: compact at
+     rest so the recovery links above stay above the fold, and the full field once
+     a game starts. Each pairs with a world height (H_IDLE / H_PLAY) that keeps
+     the drawing scale at ~0.75 CSS px per world unit, so the octopus does not
+     change size when the panel grows.
+
+     Each state also holds a min-height: below a phone width the panel stops
+     shrinking and the game narrows its world instead. Letting the aspect ratio
+     win there produced an 87px-tall field — unplayable, with the 40px Stop button
+     alone covering half of it. */
+  aspect-ratio: 960 / 250;
+  min-height: 160px;
 }
 
-/* Only capture touch gestures while a game runs — otherwise the strip would
-   swallow page scrolling on mobile. */
-.inkdash[data-state='playing'] .inkdash-canvas { touch-action: none; }
+.inkdash[data-state='playing'] .inkdash-canvas {
+  aspect-ratio: 960 / 540;
+  min-height: 330px;
+  /* Only capture touch gestures while a game runs — otherwise the panel would
+     swallow page scrolling on mobile. */
+  touch-action: none;
+}
 
-/* Covers the strip so click and tap work anywhere on it, and space/Enter work
-   natively once focused — no global key handler, so page scrolling stays intact.
-   Styled as quiet text, not a call to action. */
+/* Covers the whole panel so click and tap work anywhere on it, and space/Enter
+   work natively once focused — no global key handler, so page scrolling stays
+   intact. The pill inside carries the call to action. */
 .inkdash-start {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
+  /* Bottom RIGHT, because the octopus is drawn left of centre. Stacking the copy
+     over it in a panel this short either overlaps it or forces it small — which
+     is what made the flat strip version read as nothing at all. */
   align-items: flex-end;
-  justify-content: center;
-  padding: 0 12px 6px;
+  justify-content: flex-end;
+  gap: 9px;
+  /* Bottom padding clears the hint line, which is a sibling rather than a child
+     of this button. */
+  padding: 12px 22px 40px;
   background: none;
   border: 0;
-  border-radius: 8px;
   cursor: pointer;
   font-family: var(--font-sans);
+  text-align: right;
 }
 
 .inkdash[data-state='playing'] .inkdash-start { display: none; }
 
-.inkdash-start-label {
-  font-size: 13px;
-  color: var(--sl-color-gray-3);
-  text-align: center;
-  transition: color 0.15s;
+.inkdash-start-msg {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sl-color-white);
 }
 
-.inkdash-start:hover .inkdash-start-label,
-.inkdash-start:focus-visible .inkdash-start-label {
-  color: var(--sl-color-white);
+.inkdash-start-cta {
+  padding: 8px 22px;
+  background: var(--sl-color-accent);
+  border-radius: 6px;
+  /* Literal white, not --sl-color-white: Starlight flips that token to near
+     black in the light theme, which would put dark text on the blue accent. */
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+.inkdash-start:hover .inkdash-start-cta { opacity: 0.85; }
+
+/* The button covers the whole panel, so its own focus ring would trace the
+   entire frame. Put the ring on the pill instead — that is what looks pressable. */
+.inkdash-start:focus-visible { outline: none; }
+
+.inkdash-start:focus-visible .inkdash-start-cta {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 2px;
+}
+
+.inkdash-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11px;
+  margin: 0;
+  padding: 0 12px;
+  /* Painted over the full-cover start button, so clicks have to pass through. */
+  pointer-events: none;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--sl-color-gray-3);
+}
+
+.inkdash[data-state='playing'] .inkdash-hint { display: none; }
+
+.inkdash-hint kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 4px;
+  background: var(--sl-color-gray-6);
+  font-size: 11px;
+}
+
+/* Below this width the resting panel cannot hold the octopus, the message, the
+   pill and a hint that has wrapped to two lines. Both texts give way and the
+   pill stays: the hint is keyboard guidance, and at this width the visitor is
+   overwhelmingly on a touch device that drags instead. */
+@media (max-width: 600px) {
+  .inkdash-hint,
+  .inkdash-start-msg { display: none; }
+
+  .inkdash-start { padding-bottom: 16px; }
 }
 
 .inkdash-stop {

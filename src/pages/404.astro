@@ -11,8 +11,9 @@
  * sidebar *is* the answer to "where was I supposed to go".
  *
  * Output path is unchanged: Astro special-cases the 404 route and emits
- * `dist/404.html` at the root, exactly as the collection page did. The S3 error
- * document config lives outside this repo, so that path must not move.
+ * `dist/404.html` at the root, exactly as the collection page did. Production is
+ * served by Vercel, which returns that file for any unmatched path — so the path
+ * must not move.
  */
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import InkDash from '../components/InkDash.astro';
