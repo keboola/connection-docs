@@ -390,11 +390,9 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 
 #### Supported Backends
 Direct Mode output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
-including [transformations](/transformations/) and [data apps](/components/data-apps/). 
-
-:::caution
-Workspaces (standalone or via SQL editor) are not supported for time being.
-:::
+including [transformations](/transformations/), [data apps](/components/data-apps/), and
+[workspaces](/workspace/) --- both standalone Snowflake/BigQuery workspaces and workspaces opened in the
+[SQL Editor](/workspace/sql-editor/).
 
 #### How It Works
 When a component with Direct Mode output mapping runs:
@@ -404,6 +402,10 @@ When a component with Direct Mode output mapping runs:
    (e.g., `"KBC_USE4_33"."in.c-raw-data"."my-table"`).
 3. After the transformation finishes, Keboola runs a **refresh job** that updates table metadata,
    row counts, and statistics. No data is copied --- the changes are already in place.
+
+In a **workspace**, there is no job to wait for: the write privileges are granted as soon as you save the
+Direct Mode output mapping, so you can write to the Storage table from your very next query. Removing the
+mapping revokes the privileges again.
 
 The workspace receives these privileges on each granted table:
 - `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE` (Snowflake)
@@ -415,8 +417,13 @@ The workspace **cannot**:
 - Write to tables not listed in the output mapping
 
 #### Configuration
-Direct Mode output mapping is configured per output table in the transformation configuration JSON.
-To set it up, switch to the JSON editor in the output mapping section and add the `unload_strategy` field:
+In Snowflake and BigQuery transformations and workspaces, add an output mapping and switch the mode from
+**Guided Mode** to **Direct Mode**. Pick an existing Storage table as the destination; the dialog then shows the
+full table path to copy into your SQL.
+
+The mode cannot be switched on an existing mapping --- delete the mapping and create a new one instead.
+
+Under the hood, Direct Mode is the `unload_strategy` field on the output table in the configuration JSON:
 
 ```json
 {
@@ -439,6 +446,27 @@ The `unload_strategy` field accepts two values:
 
 You can mix both strategies in a single transformation --- some tables can use Direct Mode output mapping while
 others use the standard copy strategy.
+
+#### Workspaces
+In a workspace, Direct Mode output mapping replaces the **Unload Data** round trip --- you write to the Storage
+table directly from the workspace instead of loading data into Storage afterwards.
+
+In a **standalone Snowflake or BigQuery workspace**, open the **Output Mapping** section in the workspace detail,
+add an output, and select **Direct Mode**.
+
+In the **[SQL Editor](/workspace/sql-editor/)**, you can also create the destination table on the fly:
+
+1. In the **Working Tables** section, click the three dots next to a working table and select **Create writable table**.
+2. Set the destination bucket and table name, adjust the column definitions and the primary key.
+3. Click **CREATE WRITABLE TABLE**.
+
+Keboola creates the Storage table (creating the bucket first if it does not exist yet) and registers it as a
+Direct Mode output mapping. The source working table itself is not modified or copied --- only its column
+structure is used as the template for the new Storage table.
+
+The new table appears in the **Writable tables** section of the Storage Explorer with the **DG** badge, and the
+workspace can write to it right away. Use the three-dots menu there to remove the mapping (and with it the
+workspace's write access).
 
 #### Good Practices
 

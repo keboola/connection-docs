@@ -284,6 +284,10 @@ For Snowflake and BigQuery workspaces, you can also export a single table direct
 [File Storage](/storage/files/) via the Storage API. See
 [Exporting Workspace Tables to Files](/workspace/table-export/) for details.
 
+Snowflake and BigQuery workspaces can also skip unloading entirely and write to a Storage table directly with
+[Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping). The workspace gets write
+access to the selected table as soon as the mapping is saved, so no **Unload Data** run is needed.
+
 ### Data Persistency (beta)
 When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.
 
