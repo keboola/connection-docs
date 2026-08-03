@@ -77,16 +77,16 @@ deduplication on load. Schedule it to run regularly with a [conditional flow](/f
 For easier use, we've prepared a few examples of how to send data to a stream using Python, Javascript, and Bash.
 
 #### Import conditions
-In this section, you can set a few conditions for importing data. If any of these three conditions are met, events are instantly uploaded to the destination table. You can set the import time frequency, the size of the imported data, or the number of imported records. [Learn more](/storage/data-streams/reference/#conditions)
+In this section, you can set a few conditions for importing data. Whichever condition is met first triggers an import into the destination table — you can set the interval, the size of the imported data, or the number of imported records. [Learn more](/storage/data-streams/reference/#conditions)
 
 #### Payload test
-Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production.
+Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production. The same check is available over the API through the [payload test endpoint](/storage/data-streams/reference/#test-a-payload).
 
 ### Configure an OpenTelemetry (OTLP) Data Stream
 
 Choosing the **OpenTelemetry (OTLP)** source type turns Keboola into a drop-in [OTLP/HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) endpoint. Any official OpenTelemetry SDK or collector can export directly to Keboola, and the incoming telemetry data lands in Storage — queryable alongside your business data.
 
-When you create an OTLP data stream, three destination tables (**logs**, **metrics**, **traces**) are automatically created with pre-configured column mappings.
+When you create an OTLP data stream, the app sets up a destination table per signal (**logs**, **metrics**, **traces**) with a default column mapping, so there is nothing to map by hand before you start sending data.
 
 For full setup instructions, SDK examples, use cases, and configuration details, see the dedicated **[OpenTelemetry (OTLP) Data Streams](/storage/data-streams/opentelemetry/)** page.
 

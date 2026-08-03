@@ -16,7 +16,15 @@ A source represents an endpoint for receiving events.
 
 Sources are managed using the Stream API. See the full [Stream API reference](https://stream.keboola.com/v1/documentation/) and its [OpenAPI specification](https://stream.keboola.com/v1/documentation/openapi3.json).
 
-Events are received via HTTP. Each source can be associated with up to 100 `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`.
+Events are received via HTTP. Each source can be associated with up to 100 `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`. A branch may hold up to 100 sources, and a sink mapping up to 100 columns.
+
+:::note[Admin token required for writes]
+All write operations on the Stream API (creating, updating, deleting, enabling, and disabling
+sources and sinks, and changing settings) require the **master token of a project user with the
+admin role**. Custom Storage API tokens, and master tokens of guest or read-only users, are
+rejected with `403 only admin token can do write operations on streams`. Reading and ingesting
+data are not affected — ingest is authenticated by the secret embedded in the source's URL.
+:::
 
 ## Columns
 
@@ -42,6 +50,12 @@ The available column types are:
 | `headers` | The unaltered request headers |
 | `path` | A field from the JSON object |
 | `template` | A custom mapping using a template language |
+
+The same column types apply to both source types. For an **OTLP** source, the "event body" a mapping
+sees is the single flattened record the service derives from each log record, metric data point, or
+span — so `body` stores that record as JSON, and `path`/`template` address its fields. See
+[Fields Available to Column Mappings](/storage/data-streams/opentelemetry/#fields-available-to-column-mappings)
+for the field list per signal.
 
 ### Path
 
@@ -81,15 +95,25 @@ The `template` column type currently supports the `jsonnet` templating language.
 
 Incoming events are mapped to the schema defined in each sink, and each new row is appended to a CSV file on the local hard disk (local storage).
 
-When the local storage accumulates enough records or a short time passes, the records from local storage are appended to a CSV file stored in your Keboola project (staging storage).
+Data then moves in two steps, each with its own set of trigger conditions. Both sets are defined per sink and changed through the [settings endpoints](#source-and-sink-settings); within each set, **whichever condition is met first** triggers the step.
 
-Once certain conditions are met, the data from the file is imported into the destination table (target storage). These `conditions` are defined by the sink:
+**Step 1 — local storage → staging storage.** Records are appended to a CSV file stored in your Keboola project. Keys are under `storage.level.staging.upload.trigger`:
 
-| Condition | Minimum | Maximum | Default |
-|:-|:-:|:-:|:-:|
-| `time` | 30 seconds |  24 hours | 1 minute |
-| `size` | 100 B | 500 MB | 50 MB |
-| `count` | 1 | 10 million | 50 thousand |
+| Condition | Key | Minimum | Maximum | Default |
+|:-|:-|:-:|:-:|:-:|
+| Interval | `interval` | 1 second | 30 minutes | 30 seconds |
+| Size | `size` | 100 B | 50 MB | 5 MB |
+| Record count | `count` | 1 | 10 million | 10 thousand |
+
+**Step 2 — staging storage → destination table (target storage).** Keys are under `storage.level.target.import.trigger`:
+
+| Condition | Key | Minimum | Maximum | Default |
+|:-|:-|:-:|:-:|:-:|
+| Interval | `interval` | 30 seconds | 24 hours | 1 minute |
+| Size | `size` | 100 B | 500 MB | 50 MB |
+| Record count | `count` | 1 | 10 million | 50 thousand |
+
+The step-2 conditions are the ones the in-app **Import conditions** panel exposes, and they are what determines how soon a received event shows up in the table.
 
 Changing these conditions will trigger an immediate import of waiting files, after which the stream will follow the updated conditions.
 
@@ -115,7 +139,11 @@ Sources may be deleted using the [`DELETE /v1/branches/{branchId}/sources/{sourc
 
 A source may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSource) endpoint. Sinks may be updated using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSink) endpoint.
 
-The `UpdateSource` endpoint may only update the source's name. Sinks may only be updated separately.
+The `UpdateSource` endpoint updates the source's `name`, `description`, and `type`. Sinks are not touched by it — they may only be updated separately.
+
+:::caution
+Changing a source's `type` (between `http` and `otlp`) discards the previous transport's configuration and **generates a new secret**, so the source gets a **new ingest URL**. Any client still posting to the old URL stops being accepted.
+:::
 
 If a sink's `table.tableId` is updated, it is handled the same way as in the create operation. If the table exists, `table.mapping.columns` must match the existing table's schema. If the table does not exist, it is created.
 
@@ -124,6 +152,14 @@ If a sink's `table.tableId` is updated, it is handled the same way as in the cre
 The import conditions mentioned above can be accessed using the [`GET /v1/branches/{branchId}/sources/{sourceId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSourceSettings) endpoint and changed using the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSourceSettings) endpoint.
 
 Same settings also exist for a sink. Use the [`GET /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSinkSettings) endpoint and the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSinkSettings) endpoint in that case.
+
+## Test a Payload
+
+The in-app **Payload test** is backed by the [`POST /v1/branches/{branchId}/sources/{sourceId}/test`](https://stream.keboola.com/v1/documentation/#/test/TestSource) endpoint. Post a sample payload and the API renders it through every sink's mapping, returning the destination `tableId` and the resulting column values for each sink — **without storing anything**. This is the fastest way to check a `path` or `jsonnet` template before pointing a real client at the source.
+
+For an HTTP source, the request body is the raw payload a client would send, treated as a single record.
+
+For an OTLP source, the body must be a single **already-flattened OTLP record** — not a protobuf batch and not the multi-record envelope an OTel SDK sends. The `?signal=` query parameter (`logs`, `metrics`, or `traces`; defaults to `logs`) selects which signal the request simulates, and sinks whose [`allowedSignals`](/storage/data-streams/opentelemetry/#routing-signals-to-tables) filter rejects that signal are omitted from the result, exactly as they would be skipped during real ingestion.
 
 ## Delivery Guarantees
 
@@ -139,8 +175,8 @@ To ensure that every record is delivered at least once, the client needs to impl
 
 ## Tokens
 
-A token is generated for each source sink. These tokens have the minimum possible scope with `write` permission for the bucket in which the destination table is 
-stored. You can view them under **Users & Settings → API Tokens** in your project, or directly at
+A token is generated for each source sink. These tokens have the minimum possible scope: `write` permission for the bucket in which the destination table is
+stored, plus read access to all file uploads (staging storage is implemented with files). You can view them under **Users & Settings → API Tokens** in your project, or directly at
 `https://connection.keboola.com/admin/projects/<project-id>/tokens-settings` (replace the host with your
 [stack's](/overview/#stacks) if you are not on AWS US). Their description follows the format 
 `[_internal] Stream Sink <source-id>/<sink-id>`.

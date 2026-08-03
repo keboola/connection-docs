@@ -14,7 +14,10 @@ In this tutorial, we will set up a data stream for the [`issues`](https://docs.g
 
 ## Prerequisites
 
-- A [Storage API token](/management/project/tokens/) for your project (**Users & Settings → API Tokens**; the examples below assume a master token).
+- The **master token** of a project user with the **admin** role (**Users & Settings → API Tokens → your
+  own token**). Write operations on streams are restricted to admin tokens — a custom
+  [Storage API token](/management/project/tokens/), or the master token of a user with the guest or
+  read-only role, is rejected with `403 only admin token can do write operations on streams`.
 - A GitHub repository where you have the `Admin` role.
 - Your stack's Stream API host. The examples use `stream.keboola.com` (AWS US); on other [stacks](/overview/#stacks) replace the host accordingly.
 - A branch ID. The examples use `default`, which refers to the production branch.
@@ -45,20 +48,26 @@ curl --header "X-StorageApi-Token: YOUR_TOKEN" \
      "https://stream.keboola.com/v1/tasks/TASK_ID"
 ```
 
-Take `TASK_ID` from the `taskId` field of the create response — or just use its `url` field, which is the ready-made polling URL. Note that a task ID legitimately contains `/` and `:` characters (for example `source.create/2026-01-14T08:04:05.123Z_Ab3xY`); pass it through as-is.
+Take `TASK_ID` from the `taskId` field of the create response — or just use its `url` field, which is the ready-made polling URL. A task ID is a multi-segment path built from the task type, the branch and source IDs, and a timestamp with a random suffix, so it legitimately contains `/` and `:` characters; pass it through as-is.
 
 The task is done when `isFinished` is `true`. Then check `status`, which is `success` or `error` (on failure the reason is in `error`):
 
 ```json
 {
-  "taskId": "source.create/2026-01-14T08:04:05.123Z_Ab3xY",
-  "type": "source.create",
-  "url": "https://stream.keboola.com/v1/tasks/source.create/2026-01-14T08:04:05.123Z_Ab3xY",
+  "taskId": "api.create.source/1234/github-issues/2026-01-14T08:04:05.123Z_Ab3xY",
+  "type": "api.create.source",
+  "url": "https://stream.keboola.com/v1/tasks/api.create.source/1234/github-issues/2026-01-14T08:04:05.123Z_Ab3xY",
   "status": "success",
   "isFinished": true,
-  "outputs": { "sourceId": "github-issues" }
+  "createdAt": "2026-01-14T08:04:05.123Z",
+  "outputs": {
+    "sourceId": "github-issues",
+    "url": "https://stream.keboola.com/v1/branches/1234/sources/github-issues"
+  }
 }
 ```
+
+Here `1234` is your project's default branch ID, resolved from the `default` you passed in the URL. On success, `outputs.url` is the ready-made source-detail URL used in step 3.
 
 **2. Create a sink** on the source. The sink maps event data to columns of a destination table. The JSON is passed on standard input so that the quotes inside the Jsonnet template survive:
 
@@ -159,7 +168,7 @@ To see your integration at work, head over to your repository and [open a few is
 
 ## Results
 
-Creating the sink **automatically generated a dedicated token** in your project — you did not create it yourself. It has the minimum scope (write access to the destination bucket plus file manipulation; files are used as staging storage to prevent data loss). Its description follows the format `[_internal] Stream Sink <source-id>/<sink-id>`, so with the IDs used above it reads `[_internal] Stream Sink github-issues/events` — do not delete or refresh it manually (see [Tokens](/storage/data-streams/reference/#tokens)).
+Creating the sink **automatically generated a dedicated token** in your project — you did not create it yourself. It has the minimum scope: write access to the destination bucket, plus read access to all file uploads (files are used as staging storage to prevent data loss). Its description follows the format `[_internal] Stream Sink <source-id>/<sink-id>`, so with the IDs used above it reads `[_internal] Stream Sink github-issues/events` — do not delete or refresh it manually (see [Tokens](/storage/data-streams/reference/#tokens)).
 
 ![Keboola token settings screenshot showing the generated token](/storage/data-streams/tutorial/token.png)
 
