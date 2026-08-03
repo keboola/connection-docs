@@ -1,5 +1,5 @@
 ---
-title: Variables
+title: Variables API
 slug: 'transformations/variables/api'
 redirect_from:
     - /integrate/variables/
