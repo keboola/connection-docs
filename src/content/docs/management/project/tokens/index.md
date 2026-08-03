@@ -30,7 +30,7 @@ Tokens can be managed from the **Project Settings > API Tokens** page.
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
 the email of the user they belong to. Master tokens cannot be modified, shared or deleted. 
-The only way to delete a master token is by [removing the user](/management/project/users/#removing-a-user) 
+The only way to delete a master token is by [removing the user](/management/project/users/#removing-user) 
 from the project on the **Project Settings > Users** page. 
 
 A single user has only a single master token. In addition, master tokens are the only ones which can be 
@@ -55,7 +55,7 @@ These are the typical reasons to manually create a new API token:
 Although tokens cannot be used to directly log in to the Keboola user interface, they do allow executing almost all 
 operations in a Keboola project. As such, they must be treated as secret. Therefore the token 
 string is shown only when the token is created and it is not accessible later. You should 
-immediately [refresh a token](#refreshing-a-token) in case there is a suspicion that the 
+immediately [refresh a token](#refreshing-token) in case there is a suspicion that the 
 token string was revealed to unauthorized persons.
 
 When creating a new token, the following rules apply:
@@ -117,7 +117,7 @@ You would then create a token that is authorized for running the **MySQL databas
 *Note: For historical reasons, specifying the Orchestrator component in component permissions is optional. 
 This means that the token will also work if it has access to no components.*
 
-You can then [share the token](#sharing-a-token) to the person responsible for the database process and be 
+You can then [share the token](#sharing-token) to the person responsible for the database process and be 
 sure that they can use only that particular component in that particular bucket. They will be even able to 
 reconfigure it --- e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.

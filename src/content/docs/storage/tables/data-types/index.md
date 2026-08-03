@@ -116,7 +116,7 @@ If you have a non-typed table, `non_typed_table`, with undefined data types and 
 
 **Step 1: Set Up the Transformation** 
 - Create a new transformation in Keboola.
-- Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/#read-only-input-mapping)).
+- Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/mappings/#read-only-input-mapping)).
 - In the output mapping section, define the output table as `typed_table`. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
 
 ![Screenshot - Typed Table Transformation](/storage/tables/data-types/typed-table-transformation.png)

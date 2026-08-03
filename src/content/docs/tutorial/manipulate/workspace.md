@@ -46,7 +46,7 @@ click the **Connect** button again to access the Web-based Snowflake SQL IDE (pl
 
 
 After completing the development of your queries, you can then copy and paste them into a transformation configuration, 
-as we did in the [previous tutorial step])/tutorial/manipulate/).
+as we did in the [previous tutorial step](/tutorial/manipulate/).
 
 ## What’s Next
 Proceed to [Writing Data](/tutorial/write/) for the next step in the tutorial.

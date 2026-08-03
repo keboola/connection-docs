@@ -109,7 +109,7 @@ Python and R transformations.
     <th>Availability/Limitations</th>
 </tr>
 <tr>
-    <th rowspan='7'>Backend</th>
+    <th rowspan='8'>Backend</th>
     <th><a href='/transformations/python-plain/'>Python Transformations</a></th> 
     <td>✓</td>
 </tr>
@@ -172,11 +172,7 @@ Python and R transformations.
 </tr>
 
 <tr>
-    <th rowspan='9'>Other features</th>
-    <td>✓</td>
-    <td>Not available</td>
-</tr>
-<tr>
+    <th rowspan='8'>Other features</th>
     <th>Versioning</th> 
     <td>✓</td>
 </tr>
