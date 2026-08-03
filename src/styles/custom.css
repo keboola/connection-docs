@@ -1345,10 +1345,8 @@ nav.sidebar {
 /* 4. Status-emoji table cells */
 .sl-markdown-content table.beacon-status-table td.beacon-status:not(:where(.not-content *)) {
   font-weight: 500;
-  border-radius: 999px;
-  padding: 6px 10px;
-  display: inline-block;
-  margin: 4px 0;
+  text-align: center;
+  white-space: nowrap;
   line-height: 1;
   font-size: 12.5px;
 }
