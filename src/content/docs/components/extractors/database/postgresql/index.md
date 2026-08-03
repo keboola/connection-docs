@@ -21,7 +21,7 @@ It is the simplest approach suitable for most use cases and allows for [time-sta
 They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/getting-started/load/database/). 
 
 ## PostgreSQL Log-Based CDC
 

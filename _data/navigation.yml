@@ -4,72 +4,83 @@ items:
 
   - url: /overview/
     title: Keboola Overview
-
-  - url: /tutorial/
-    title: Getting Started Tutorial
     items:
-      - url: /tutorial/load/
-        title: "Part 1: Loading Data"
+      - url: /overview/onboarding/
+        title: Platform Onboarding
         items:
-          - url: /tutorial/load/googlesheets/
-            title: Loading Data from Google Sheets
-
-          - url: /tutorial/load/database/
-            title: Loading Data from Database
-
-      - url: /tutorial/manipulate/
-        title: "Part 2: Data Manipulation"
-        items:
-          - url: /tutorial/manipulate/workspace/
-            title: Using Workspace
-
-      - url: /tutorial/write/
-        title: "Part 3: Writing Data"
-
-      - url: /tutorial/automate/
-        title: "Part 4: Flow Automation"
-
-      - url: /tutorial/ad-hoc/
-        title: "Part 5: Ad-Hoc Data Analysis"
-
-      - url: /tutorial/branches/
-        title: "Part 6: Development Branches"
-        items:
-          - url: /tutorial/branches/prepare-tables/
-            title: Prepare Tables
-
-          - url: /tutorial/branches/prepare-files/
-            title: Prepare Files
-
-          - title: Tables in Branch
-            url: /tutorial/branches/tables-in-branch/
-
-          - title: Files in Branch
-            url: /tutorial/branches/files-in-branch/
-
-          - url: /tutorial/branches/project-diff/
-            title: Project Diff
-
-          - title: Merge to Production
-            url: /tutorial/branches/merge-to-production/
-
-      - url: /tutorial/onboarding/
-        title: Keboola Platform Onboarding
-        items:
-          - url: /tutorial/onboarding/usage-blueprint/
+          - url: /overview/onboarding/usage-blueprint/
             title: Usage Blueprint
 
-          - url: /tutorial/onboarding/architecture-guide/
+          - url: /overview/onboarding/architecture-guide/
             title: Multi-Project Architecture
             items:
-              - url: /tutorial/onboarding/architecture-guide/bdm-guide/
+              - url: /overview/onboarding/architecture-guide/bdm-guide/
                 title: Business Data Model
 
-          - url: /tutorial/onboarding/cheat-sheet/
+          - url: /overview/onboarding/cheat-sheet/
             title: Best Practices
 
-          - url: /tutorial/onboarding/governance-guide/
+          - url: /overview/onboarding/governance-guide/
             title: Governance Guide
+
+      - url: /overview/google-data-policy/
+        title: Google Data Policy
+
+  - url: /getting-started/
+    title: Getting Started
+    items:
+      - url: /getting-started/project/
+        title: Get a Project
+
+      - url: /getting-started/load/
+        title: Load Your Data
+
+      - url: /getting-started/transform/
+        title: Transform Your Data
+
+      - url: /getting-started/write/
+        title: Send Your Data Somewhere
+
+      - url: /getting-started/automate/
+        title: Automate It with a Flow
+
+      - url: /getting-started/next-steps/
+        title: Where to Go Next
+
+      - title: Going Further
+        items:
+          - url: /getting-started/load/googlesheets/
+            title: Load from Google Sheets
+
+          - url: /getting-started/load/database/
+            title: Load from a Database
+
+          - url: /getting-started/transform/workspace/
+            title: Use a Workspace
+
+          - url: /getting-started/ad-hoc/
+            title: Ad-Hoc Data Analysis
+
+          - url: /getting-started/branches/
+            title: Development Branches
+            items:
+              - url: /getting-started/branches/prepare-tables/
+                title: Prepare Tables
+
+              - url: /getting-started/branches/prepare-files/
+                title: Prepare Files
+
+              - title: Tables in Branch
+                url: /getting-started/branches/tables-in-branch/
+
+              - title: Files in Branch
+                url: /getting-started/branches/files-in-branch/
+
+              - url: /getting-started/branches/project-diff/
+                title: Project Diff
+
+              - title: Merge to Production
+                url: /getting-started/branches/merge-to-production/
 
   - url: /kai/
     title: Kai - AI Assistant

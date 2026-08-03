@@ -29,7 +29,7 @@ Each data destination connector can have multiple configurations. Each configura
 Even though destination connectors are generally designed for [**automated and repeated**](/flows/) data collection,
 they can be triggered manually at any time.
 
-We provide tutorials on [writing into Tableau](/tutorial/write/).
+We provide tutorials on [writing into Tableau](/getting-started/write/).
 
 You can also watch the following videos:
 

@@ -60,7 +60,7 @@ For more technical information about background jobs, see our
 [Developers documentation](https://developers.keboola.com/integrate/jobs/).
 
 ## Running Jobs
-Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
+Jobs are either run [manually from any configuration](/getting-started/) or automatically by the 
 [flow](/flows/) at a scheduled time. In either case, the typical life time of a job has the 
 following states:
 
