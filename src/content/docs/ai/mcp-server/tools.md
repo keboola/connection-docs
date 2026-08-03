@@ -27,6 +27,10 @@ What your AI client can call through the [Keboola MCP Server](/ai/mcp-server/), 
 
 For the exact tool names and their annotations, see [`TOOLS.md`](https://github.com/keboola/mcp-server/blob/main/TOOLS.md) in the server repository.
 
+:::note[Not every tool shows up every time]
+The server offers a client only the tools that make sense for the connection: semantic-layer tools appear when the project has semantic models, data-app tools outside a development branch, and a read-only token collapses the set to the read-only tools below. So a shorter tool list in your client isn't necessarily a misconfiguration.
+:::
+
 ## Restricting tool access
 
 On the remote server you can limit which tools an AI client is offered. This is useful for:

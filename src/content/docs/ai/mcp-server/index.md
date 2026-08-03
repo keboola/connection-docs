@@ -24,7 +24,7 @@ Connected to your project, an assistant can:
 - **Launch and monitor jobs** in real time, and debug the ones that fail.
 - **Document everything automatically** — down to the column level.
 
-The full catalogue, and how to restrict it, is in the [tools reference](/ai/mcp-server/tools/).
+The tool categories, the read-only set, and how to restrict them are in the [tools reference](/ai/mcp-server/tools/).
 
 ## What people use it for
 
@@ -35,9 +35,13 @@ The full catalogue, and how to restrict it, is in the [tools reference](/ai/mcp-
 
 ## How it works
 
-The MCP Server is **hosted on every multi-tenant stack** and supports OAuth authentication, so any AI assistant that speaks remote **Streamable HTTP** with OAuth can connect to it — nothing to install. Streamable HTTP is the recommended transport: it streams bidirectionally, which makes long tool calls faster and more reliable.
+The MCP Server is **hosted on every multi-tenant stack** and supports OAuth authentication, so any AI assistant that speaks remote **Streamable HTTP** with OAuth can connect to it — nothing to install. Streamable HTTP is the recommended transport, providing bidirectional streaming for improved performance and reliability.
 
-**Permissions follow you.** When you connect over OAuth, the assistant gets exactly the permissions your Keboola role has — no more. If you need finer-grained control than your role gives, [run the server yourself](/ai/mcp-server/self-hosted/) with a specific **Storage token** and **workspace schema**, or restrict the tool set with [authorization headers](/ai/mcp-server/tools/#restricting-tool-access).
+**Permissions follow you.** When you connect over OAuth, the assistant gets the permissions that match your Keboola role. If you need finer-grained control than your role gives, [run the server yourself](/ai/mcp-server/self-hosted/) with a specific **Storage token** and **workspace schema**, or restrict the tool set with [authorization headers](/ai/mcp-server/tools/#restricting-tool-access).
+
+### Remote server setup
+
+Your project's server URL, the per-client steps, and the programmatic recipes all live on **[Connect an AI client](/ai/mcp-server/connect/)** — start there. If your client can't do remote OAuth, that page also covers the `mcp-remote` bridge and [running the server locally](/ai/mcp-server/self-hosted/).
 
 ## Keeping an agent off production
 

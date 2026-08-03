@@ -8,11 +8,13 @@ description: 'Connect Claude, ChatGPT, Cursor, Windsurf, VS Code, or Make to the
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Get your AI client talking to your Keboola project. Every route below ends the same way: you paste a server URL into the client, authenticate with your Keboola account, and pick the project — after which the assistant can use the [Keboola tools](/ai/mcp-server/tools/). For what the server is and how permissions work, see the [MCP Server overview](/ai/mcp-server/).
+Get your AI client talking to your Keboola project. Every route below does the same thing: point the client at your project's MCP server URL, authenticate with your Keboola account, and pick the project — after which the assistant can use the [Keboola tools](/ai/mcp-server/tools/). For what the server is and how permissions work, see the [MCP Server overview](/ai/mcp-server/).
 
 {/* How-to-type page. Source: the pre-split ai/mcp-server single page (through #1061). Client UI steps not re-verified live in this split — see VERIFY note below. */}
 
 {/* VERIFY(owner: Jordan/Matyáš): client-side menu paths (Claude Settings → Connectors, ChatGPT Developer mode, Windsurf Cascade → Plugins) move often; worth a live pass per client. */}
+
+{/* VERIFY(owner: Matyáš): the Keboola-side path and tab set — this page says Project Settings → MCP Server tab (matching the server README); confirm the current client tabs there, including whether a MAKE tab exists. The only public evidence was the stale screenshot dropped in this split. */}
 
 ## Step 1 — Get your server URL
 
@@ -26,7 +28,7 @@ The MCP Server runs on every multi-tenant stack. Your URL is `https://mcp.<YOUR_
 | EU Ireland Azure (north-europe) | `https://mcp.north-europe.azure.keboola.com/mcp` |
 | EU Frankfurt GCP (europe-west3) | `https://mcp.europe-west3.gcp.keboola.com/mcp` |
 
-You can also copy it from the platform: **[Project Settings](/management/project/) → Users & Settings → MCP Server**, which also shows client-specific instructions and an install button for some clients.
+You can also copy it from the platform: **[Project Settings](/management/project/) → MCP Server** tab, which also shows client-specific instructions and an install button for some clients.
 
 {/* SCREENSHOT(nikita): Project Settings → MCP Server tab in demo project 264, showing the Integration URL. The previous shot (management/project/mcp-server/screenshot.png) was dropped in the split — it showed a stale /sse URL from a non-demo project. */}
 
@@ -92,7 +94,7 @@ You can also copy it from the platform: **[Project Settings](/management/project
 
     **Alternatively**, install it from the platform:
 
-    1. Go to [Project Settings](/management/project/) → **Users & Settings → MCP Server**.
+    1. Go to [Project Settings](/management/project/) → the **MCP Server** tab.
     2. Open the **Cursor** tab.
     3. Click **Install In Cursor**.
     4. Log in to your Keboola account and select the project.
@@ -153,7 +155,7 @@ You can also copy it from the platform: **[Project Settings](/management/project
   <TabItem label="Make">
     1. Create your scenario in Make.
     2. Add the **MCP Client** module to it.
-    3. Go to [Project Settings](/management/project/) → **Users & Settings → MCP Server** and open the **MAKE** tab.
+    3. Go to [Project Settings](/management/project/) → the **MCP Server** tab, then open the **MAKE** section.
     4. Copy the integration URL shown there and enter it as the server URL in the MCP Client module. Make loads the available Keboola tools automatically.
   </TabItem>
 
