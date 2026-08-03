@@ -45,6 +45,10 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 
 Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication. Streamable HTTP is the recommended transport method, providing bidirectional streaming for improved performance compared to the deprecated SSE transport.
 
+### Choosing Your Project(s)
+
+Authenticating no longer pins your session to a single project up front. Once you're connected, ask your assistant something like *"what Keboola projects can you access?"* — it will list every project reachable by your account and ask which one(s) you want to work in. You can work across several projects at once, or re-scope to a different project or subset at any point later in the conversation.
+
 ### Remote Server Setup
 
 In case your AI assistant supports remote connection, you can connect to Keboola's MCP Server by following these steps:
@@ -59,7 +63,7 @@ In case your AI assistant supports remote connection, you can connect to Keboola
    - You can find the url in your Keboola [Project Settings](/management/project/) under the tab `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
-3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
+3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 For other options of local deployments see the [Developers Documentation](https://developers.keboola.com/integrate/mcp/#running-keboola-mcp-server-locally-using-uv-command).
 
@@ -75,7 +79,7 @@ These steps must be done by a Claude organization owner or primary owner, or on 
 - Give the integration a name (Keboola) and paste in your Integration URL
   - `https://mcp.<YOUR_REGION>.keboola.com/mcp`
 - Click **"Add"**
-- You'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
+- You'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 #### Via mcp-remote adapter
 
@@ -99,7 +103,7 @@ If you don't have a paid version you can still use the [`mcp-remote`](https://gi
   }
 }
 ```
-4. Restart Claude Desktop, you'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
+4. Restart Claude Desktop, you'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 ### Using with ChatGPT
 
@@ -175,7 +179,7 @@ Click the button related to your region below:
 1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
 2. Click the Cursor tab.
 3. Click the **"Install In Cursor"** button.
-4. You'll be prompted to login into your Keboola account and select the project you want to connect to.
+4. You'll be prompted to log in to your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 ### Using with Windsurf
 
@@ -199,7 +203,7 @@ Windsurf supports MCP through its native integration with Cascade. You can add K
 
 4. Replace `<YOUR_REGION>` with your specific stack URL from the [available stack URLs](#remote-server-setup)
 5. Press the refresh button after adding the configuration
-6. You'll be prompted to authenticate with your Keboola account and select the project
+6. You'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above)
 
 For detailed instructions and troubleshooting, see the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin).
 
@@ -235,7 +239,7 @@ VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these s
 5. Replace `<YOUR_REGION>` with your specific stack URL from the [available stack URLs](#remote-server-setup)
 6. Save the configuration file
 7. Restart VS Code or run **"MCP: Restart Servers"** from the Command Palette
-8. You'll be prompted to authenticate with your Keboola account and select the project
+8. You'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above)
 
 #### Using MCP Tools in VS Code
 
@@ -291,6 +295,10 @@ For detailed technical documentation including the full list of read-only tools 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
 For CLI control, dev environments, or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
+
+:::caution
+**Storage Token Deprecation:** Local/CLI setups that authenticate with a static Storage API token (`KBC_STORAGE_TOKEN`) should migrate to the browser-based `login` command — static-token support will be removed in a future release. See the [Developer Documentation](https://developers.keboola.com/integrate/mcp/#authenticating-without-a-static-storage-token-browser-login) for details.
+:::
 
 
 ## Support and Feedback
