@@ -128,8 +128,9 @@ Notifications tab is enough here.
 ## Check it worked
 
 - The flow's run history shows one successful run with all three phases green.
-- **Jobs** lists a job per task — the load, the transformation, the delivery — alongside the
-  flow's own orchestration job.
+- **Jobs** lists more entries than you might expect: a job per task (the load, the
+  transformation, the delivery), a **Conditional Flows phase** job per phase, and the
+  **Conditional Flows** job for the run itself. That is normal.
 - The schedule is shown on the flow, with the next run time.
 
 ## If it goes wrong

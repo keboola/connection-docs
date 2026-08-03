@@ -11,9 +11,10 @@ there using a **data source connector** — the thing that does all real loading
 Step 2 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
-and cannot take new configurations (verified live in project 264, 2026-08-04). Field names and
-behaviour sourced from components/extractors/storage/http/index.md, which documents this exact
-connector against these exact sample files. Screenshots pending the live walk. -->
+and cannot take new configurations (verified live in project 264, 2026-08-04). Every label,
+default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http, and
+the run succeeded in 32s. Note our own connector page
+(components/extractors/storage/http/index.md) still says "Add Table"; the UI says "Add Row". -->
 
 ## What you need
 
@@ -54,73 +55,89 @@ four tables rather than four separate configurations.
 
 ## Create the configuration
 
-1. Open **Components** and search for `HTTP`. Pick the **HTTP** *data source*.
+1. Open **Components** and search for `HTTP`. Two results come back — pick plain **HTTP**
+   (*Data Source*), not **HTTP Advanced**, and click **Add Component**.
 
-   ![Screenshot - Find the HTTP data source connector](/getting-started/load/picture1.png)
+   ![Screenshot - Find the HTTP data source connector](/getting-started/load/01-find-http.png)
 
-2. Click **Add Component**, then create a configuration named `[TUTORIAL] Sample data` and give
-   it a description. Descriptions are what keep a project readable six months later; see the
-   [best practices cheat sheet](/overview/onboarding/cheat-sheet/).
+2. Choose **Connect To My Data**. (**Use With Demo Data** sets the connector up against a
+   dataset Keboola prepared — handy for a look around, but here you want your own URL.)
 
-   ![Screenshot - Create the configuration](/getting-started/load/picture3.png)
+3. Replace the suggested name with `[TUTORIAL] Sample data`, add a description, and click
+   **Create Configuration**. Descriptions are what keep a project readable six months later;
+   see the [best practices cheat sheet](/overview/onboarding/cheat-sheet/).
 
-3. Set the **base URL** — the prefix shared by every file this configuration downloads:
+   ![Screenshot - Create the configuration](/getting-started/load/02-create-configuration.png)
+
+4. Open **Base URL and Connection Options** and set **Base URL** to the prefix shared by every
+   file this configuration downloads, then click **Save**:
 
    ```
    https://help.keboola.com
    ```
 
-   ![Screenshot - Set the base URL](/getting-started/load/picture4.png)
+   ![Screenshot - Set the base URL](/getting-started/load/03-base-url.png)
 
 ## Add the four tables
 
-Each table is a [configuration row](/components/#configuration-rows): its own path and settings,
+Each file is a [configuration row](/components/#configuration-rows) — its own path and settings,
 sharing the configuration's base URL.
 
-4. Click **Add Table** and name it `opportunity`. The name seeds the Storage table name.
+5. In the **Rows** section, click **Add Row**, name it `opportunity`, and click **Create**. The
+   row name becomes the Storage table name, so use exactly this spelling.
 
-5. In the table's settings, set the **path** to the file, relative to the base URL:
+6. Under **Download Settings**, set **Path** to the file, relative to the base URL:
 
    ```
    /getting-started/opportunity.csv
    ```
 
-6. Under the header options, choose **Read from the file(s) header** — the sample files carry
-   column names on the first line. (The alternatives are setting the columns by hand, or having
-   them generated as `col_1`, `col_2`, ….)
+7. Check the rest of the row and click **Save**:
 
-   ![Screenshot - Table path and header settings](/getting-started/load/picture5.png)
+   - **Save Settings → Table name** is already `opportunity`, taken from the row name.
+   - **Delimiter** `,` and **Enclosure** `"` are already right for these files.
+   - **Header & Primary Key → Read Header** already reads *Read the header from the file(s)
+     header*, which is what you want — the sample files carry column names on the first line.
+     Leave it alone. (The alternatives are typing the columns yourself or having them generated
+     as `col_1`, `col_2`, ….)
 
-7. Save the table, then repeat steps 4–6 for the other three:
+   ![Screenshot - Row path and save settings](/getting-started/load/04-row-settings.png)
 
-   | Table name | Path |
+8. Repeat steps 5–7 for the other three files:
+
+   | Row name | Path |
    |---|---|
    | `account` | `/getting-started/account.csv` |
    | `user` | `/getting-started/user.csv` |
    | `level` | `/getting-started/level.csv` |
 
-8. Run the configuration.
+9. Back on the configuration, click **Run Component** and confirm with **Run**. One job fetches
+   all four rows.
 
-   ![Screenshot - Run the configuration](/getting-started/load/picture6.png)
+   ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
 
 ## Check it worked
 
-Open **Storage**. Data lives in **buckets**, and each bucket holds tables. The connector created
-a bucket of its own — named after the configuration, something like `keboola-ex-http-1234567`,
-shown with an **IN** badge — holding four tables: `opportunity`, `account`, `user` and `level`.
+Watch it in **Jobs**. The rows are fetched one after another, so expect a couple of minutes for
+all four — the run behind these screenshots took 2 minutes 4 seconds.
 
-![Screenshot - The four tables in Storage](/getting-started/load/picture7.png)
+Then open **Storage**. Data lives in **buckets**, and each bucket holds tables. The connector
+created a bucket of its own — named after the configuration, shown with an **IN** badge —
+holding four tables: `opportunity`, `account`, `user` and `level`.
 
-Click a table to see its columns, row count and a **Data Sample** of the real contents. If
-`opportunity` has a few hundred rows and columns like `AccountId` and `Probability`, this step is
-done.
+![Screenshot - The four tables in Storage](/getting-started/load/06-storage-tables.png)
 
-![Screenshot - Table detail with data sample](/getting-started/load/picture8.png)
+Click a table and open its **Data Sample** tab to see the real contents. `opportunity` should
+have 639 rows with columns like `AccountId`, `Amount` and `StageName`; `account` 275; `user` and
+`level` 28 each. If that matches, this step is done.
+
+![Screenshot - Table detail with data sample](/getting-started/load/07-table-detail.png)
 
 :::note[Your bucket name will differ]
 The bucket name contains the configuration's own ID, so yours will not match the screenshots
-exactly — and that is fine. The next step lets you name these tables whatever you like inside
-the transformation, and it is those names the SQL depends on.
+exactly — and that is fine. The **Rows** list shows where each row lands, and the next step lets
+you name these tables whatever you like inside the transformation; it is those names the SQL
+depends on.
 :::
 
 ## If it goes wrong
@@ -134,6 +151,8 @@ the transformation, and it is those names the SQL depends on.
   **Read from the file(s) header**.
 - **The table is empty but the job succeeded.** The URL returned an HTML error page instead of a
   CSV. Open it in a browser to see what actually comes back.
+- **You want the four files fetched at the same time.** Raise **Parallel jobs** on the
+  configuration — the connector then processes its rows concurrently.
 
 :::tip[Or ask Kai]
 Kai can inspect what landed and tell you whether it looks right:
