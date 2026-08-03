@@ -77,7 +77,7 @@ feel free to step in with Python and finish the work with SQL again.
 The following are the currently available backends:
 
 - **SQL** — [Snowflake](/transformations/snowflake-plain/), [Google BigQuery](/transformations/bigquery/), or [DuckDB](/transformations/duckdb/) *(beta)* is offered as a default backend.
-- **Script** ---[Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
+- **Script** — [Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
 Choose according to your taste and available libraries.
 
 ***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
