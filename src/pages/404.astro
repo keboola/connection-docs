@@ -44,6 +44,14 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
       already a bullet in the list below. */}
   <NotFoundSuggestions />
 
+  {/* Directly after the search button, before the recovery links. It costs those
+      links vertical space — at a 1280×800 viewport the list now starts around the
+      fold instead of well above it — which is exactly why the compact resting
+      state and the grow-on-Play split matter here: at rest the panel is ~215px,
+      and it only takes the full field while somebody is playing and nobody is
+      reading the links. */}
+  <InkDash />
+
   <h2>Where you might be headed</h2>
 
   <ul>
@@ -66,14 +74,6 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
     <a href="mailto:support.ca@keboola.com">support.ca@keboola.com</a> (North America), or
     <a href="mailto:apac.support@keboola.com">apac.support@keboola.com</a> (Asia).
   </p>
-
-  {/* Last on the page on purpose. Everything the visitor actually came for —
-      the path that failed, the closest real pages, search, the recovery links —
-      is above this, so the game is free to be a full-size scene instead of a
-      strip apologising for the space it takes. Between the suggestions and the
-      links it pushed those links below the fold (measured); here it cannot push
-      anything anywhere, and a screen reader meets the useful part first. */}
-  <InkDash />
 
 <script>
   /* Reuse Starlight's own search modal instead of shipping a second search UI.

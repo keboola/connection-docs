@@ -7,12 +7,13 @@
  * in localStorage. Everything is drawn in code — no sprite assets — so it stays
  * crisp on retina and follows the light/dark theme.
  *
- * The panel sits LAST on the 404 page, after every recovery link, so it owes the
- * page no apology for its size — see the comment at its usage in 404.astro. It is
- * still COMPACT WHILE RESTING and grows to the playable geometry once a game
- * starts, so the page doesn't simply end in a big empty box; growing downward
- * from the last element pushes nothing anywhere, and start() scrolls the field
- * into view.
+ * The panel sits between the search button and the recovery links, so its height
+ * is spent out of those links' budget. Hence the split that carries the layout:
+ * COMPACT WHILE RESTING (~215px) and only growing to the playable geometry once a
+ * game starts. A permanently tall panel pushed the links below the fold
+ * (measured), a permanently short one left a field too shallow to dodge in — and
+ * nobody is reading the links while playing, so that is when the height is free
+ * to take. start() scrolls the grown field into view.
  *
  * The scene is OPEN WATER — no seabed, no floor line. Depth comes from the wash,
  * three things layered over it (slanted light shafts, drifting particulate sized
@@ -60,9 +61,8 @@
   <button class="inkdash-stop" type="button">Stop</button>
 
   <p class="sr-only">
-    This is an optional game and is not needed to use the documentation. The
-    search and the recovery links above are what you want if you are looking for
-    a page.
+    This is an optional game and is not needed to use the documentation. Use the
+    search above or the links below to find what you were looking for.
   </p>
 </div>
 
@@ -478,11 +478,12 @@
          who had it in view already. */
       const box = root.getBoundingClientRect();
       if (box.top < 0 || box.bottom > window.innerHeight) {
-        /* window.scrollTo, not element.scrollIntoView: an ancestor in the
-           Starlight layout is itself a scroll container, so scrollIntoView
-           scrolled THAT — measured, the page moved 5px and the field stayed
-           below the fold. Centre the panel when it fits, otherwise pin it near
-           the top. */
+        /* The panel grows downward, so on a short viewport the new field can run
+           past the bottom even from mid-page. window.scrollTo, not
+           element.scrollIntoView: an ancestor in the Starlight layout is itself a
+           scroll container, so scrollIntoView scrolled THAT — measured, the page
+           moved 5px and the field stayed below the fold. Centre the panel when it
+           fits, otherwise pin it near the top. */
         const margin = Math.max(12, (window.innerHeight - box.height) / 2);
         window.scrollTo({
           top: Math.max(0, window.scrollY + box.top - margin),
@@ -503,9 +504,9 @@
 
     function stop(reason: 'dead' | 'idle') {
       state = reason;
-      /* Back to the compact panel on every exit — including death. Nothing is
-         below it to free up any more, but a page that ends in a big abandoned
-         play field looks like a mistake. */
+      /* Back to the compact panel on every exit — including death, so the links
+         below come back into reach instead of staying pushed down by a field
+         nobody is playing in. */
       H = H_IDLE;
       root.dataset.state = reason;
       resize();

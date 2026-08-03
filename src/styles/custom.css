@@ -2002,15 +2002,15 @@ nav.sidebar {
 
 /* --- Ink-dash panel ---
    A framed scene whose water, light and particulate are drawn on the canvas. It
-   is the LAST element of the 404 page, after every recovery link, so its height
-   costs the page nothing — which is what lets it be a real scene instead of a
-   strip. */
+   sits between the search button and the recovery links, so every pixel of its
+   resting height is spent out of those links' fold budget — hence compact at
+   rest, full field only while playing. */
 .inkdash {
   position: relative;
   max-width: 720px;
-  /* Room above, because it now follows body copy rather than sitting wedged
-     between two blocks. */
-  margin: 2rem 0 0.5rem;
+  /* Tight, and measured: it is wedged between two blocks, and every 10px here
+     spends the margin the recovery links have above the fold. */
+  margin: 0.6rem 0 1rem;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 10px;
   /* The canvas is square-cornered, so the panel has to clip it to its radius. */
@@ -2022,8 +2022,8 @@ nav.sidebar {
   width: 100%;
   height: auto;
   /* Sizing lives here, not in the component, and there are two of it: compact at
-     rest, so the page doesn't end in a big abandoned box, and the full field once
-     a game starts. Each pairs with a world height (H_IDLE / H_PLAY) over the SAME
+     rest, so the recovery links below stay within reach of the fold, and the full
+     field once a game starts. Each pairs with a world height (H_IDLE / H_PLAY) over the SAME
      world width, which is what keeps the drawing scale identical in both — the
      octopus must not change size when the panel grows, only gain water above and
      below it.
@@ -2034,8 +2034,8 @@ nav.sidebar {
 
      Each state also holds a min-height: below a phone width the panel stops
      shrinking and the game narrows its world instead. Letting the aspect ratio
-     win there produced an 87px-tall field — unplayable, with the 40px Stop button
-     alone covering half of it. */
+     win there produced an 87px-tall field — unplayable, a third of it taken by
+     the Stop button in the corner. */
   aspect-ratio: 840 / 250;
   min-height: 170px;
 }
@@ -2144,21 +2144,27 @@ nav.sidebar {
   .inkdash-start { padding-bottom: 16px; }
 }
 
+/* Half the size it used to be (60×40 → 30×20): it is an escape hatch for anyone
+   without an Esc key, not a control anybody aims for, and at full size it ate a
+   visible corner of the field. Below the 44px touch-target guideline on purpose —
+   Esc and the field's own edges are the primary ways out, and a tap that misses
+   costs nothing here. */
 .inkdash-stop {
   position: absolute;
   right: 6px;
   bottom: 6px;
   display: none;
-  min-width: 60px;
-  min-height: 40px;
-  padding: 8px 14px;
+  min-width: 30px;
+  min-height: 20px;
+  padding: 3px 8px;
   background: color-mix(in srgb, var(--sl-color-bg) 72%, transparent);
   border: 1px solid var(--sl-color-gray-5);
-  border-radius: 6px;
+  border-radius: 5px;
   color: var(--sl-color-white);
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
+  line-height: 1.2;
   cursor: pointer;
   transition: opacity 0.15s;
 }
