@@ -367,7 +367,11 @@ user receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE
 or `TRUNCATE` you run in your transformation SQL can be applied immediately to the destination table --- there is no
 separate import step.
 
-This feature is available as a **private beta** and must be enabled by [Keboola Support](/management/support/).
+This feature must be enabled by [Keboola Support](/management/support/).
+
+:::caution[Beta]
+This feature is currently in beta. Please provide feedback using the feedback button in your project.
+:::
 
 ![Direct Mode Output Mapping](/transformations/mappings/manual-output-mapping.png)
 
