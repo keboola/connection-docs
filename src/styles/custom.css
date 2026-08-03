@@ -615,6 +615,62 @@ nav.sidebar {
   border-color: var(--border-2);
 }
 
+/* Page actions split-button: [Copy as Markdown][▾] + dropdown menu */
+.copy-md-group {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+/* Specificity note: these must beat `.page-title-row > :last-child button`
+   above (0-2-1), hence the class-based 0-3-0 selectors. */
+.page-title-row .copy-md-group .copy-md-btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.page-title-row .copy-md-group .copy-md-toggle {
+  display: inline-flex;
+  align-items: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  padding: 6px 7px;
+  cursor: pointer;
+}
+.copy-md-group .copy-md-toggle[aria-expanded='true'] {
+  color: var(--fg-1);
+  background: var(--bg-2);
+}
+.copy-md-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 190px;
+  padding: 4px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.copy-md-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--fg-2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.copy-md-menu a:hover {
+  background: var(--bg-2);
+  color: var(--fg-1);
+}
+.copy-md-menu a svg { flex-shrink: 0; opacity: 0.7; }
+.copy-md-menu a:hover svg { opacity: 1; }
+
 /* ───────── Markdown content ───────── */
 .sl-markdown-content {
   font-size: 15px;
@@ -810,7 +866,7 @@ nav.sidebar {
 /* Inline code — Keboola blue-tinted */
 .sl-markdown-content :not(pre) > code:not(:where(.not-content *)) {
   background: var(--kbc-blue-100);
-  color: var(--kbc-blue-600);
+  color: var(--kbc-blue-800);
   padding: 1.5px 6px;
   border-radius: 4px;
   font-family: var(--font-mono);
@@ -1715,6 +1771,20 @@ nav.sidebar {
 }
 .ak-send:hover { background: var(--kbc-blue-600); }
 .ak-send:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Quiet AI footnote under the composer. Outside .ak-messages so it persists for
+   the whole conversation — the greeting that also names Kai as an AI is removed
+   once the first message is sent, so this is the lasting disclosure
+   (EU AI Act Art. 50(1)). */
+.ak-footnote {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 12px 10px;
+  background: var(--bg-1);
+  color: var(--fg-3);
+  font-size: 11.5px;
+  line-height: 1.4;
+  text-align: center;
+}
 
 /* Make the page-level Ask Kai widget actually look clickable. */
 .b-ask { cursor: pointer; }
@@ -1821,3 +1891,25 @@ nav.sidebar {
   #ask-kai-drawer .ak-shell { width: 100vw; }
   #ak-fab { bottom: 20px; right: 16px; }
 }
+
+/* Skill-download button (docs CTA in app-building pages).
+   Solid accent so it reads as an action, not a link — per stakeholder ask. */
+.skill-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: var(--sl-color-accent);
+  border: 1px solid var(--sl-color-accent);
+  border-radius: 6px;
+  color: var(--sl-color-white) !important;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none !important;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+  margin: 4px 0;
+}
+.skill-download-btn:hover { opacity: 0.85; color: var(--sl-color-white); }
