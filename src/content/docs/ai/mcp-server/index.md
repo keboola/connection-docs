@@ -1,14 +1,14 @@
 ---
 title: Keboola MCP Server
 slug: 'ai/mcp-server'
-description: 'What the Keboola MCP Server is — a Model Context Protocol server that lets Claude, Cursor, ChatGPT, VS Code, Windsurf, and Make work inside your Keboola project with your own permissions: query data, build transformations, run and debug jobs.'
+description: 'The Keboola MCP Server lets Claude, Cursor, ChatGPT, VS Code, Windsurf, and Make work inside your Keboola project with your own permissions — query data, build transformations, run and debug jobs.'
 redirect_from:
     - /external-integrations/mcp-server/
     - /integrate/mcp/
     - /management/project/mcp-server/
 ---
 
-The **Keboola MCP Server** gives an AI assistant the powers of a Keboola expert user. Connect Claude, Cursor, ChatGPT, VS Code, Windsurf, or Make to your project and describe what you need in plain language — the assistant queries your data, builds transformations, runs jobs, and documents what it finds, **with no clicks required**.
+Model Context Protocol (MCP) is the open standard AI clients use to call external tools. Keboola runs an MCP server for every project, which gives a connected assistant the powers of a Keboola expert user: describe what you need in plain language and it queries your data, builds the transformation, runs the job, and documents what it finds — **with no clicks required**.
 
 <!-- Explanation-type page. Source: the pre-split ai/mcp-server single page (through #1061) + keboola/mcp-server README. Split into explanation/how-to/reference on 2026-08-04. -->
 
@@ -16,7 +16,7 @@ The **Keboola MCP Server** gives an AI assistant the powers of a Keboola expert 
 
 ## What your assistant can do
 
-Model Context Protocol (MCP) is the open standard AI clients use to call external tools. Keboola's MCP Server exposes your project through it, so an assistant can:
+Connected to your project, an assistant can:
 
 - **Search and explore your data** — buckets, tables, and columns.
 - **Set up and manage workflows** — no code required.
