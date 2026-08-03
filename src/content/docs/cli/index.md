@@ -12,6 +12,15 @@ It's just as comfortable in your own hands: one tool for every project from the 
 
 <!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
 
+:::caution[Beta]
+kbagent is in beta. Commands and output formats may still change.
+:::
+
+:::note
+kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
+<!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
+:::
+
 ## What you can do with it
 
 - **Manage projects across your whole org** — connect one project, several, or an entire organization, across US/EU and AWS/Azure/GCP stacks, and operate on them together.
@@ -62,11 +71,6 @@ The pages read in order, from first run to deep reference:
 | **[MCP server](/ai/mcp-server/)** | Letting an AI client call Keboola tools directly over MCP. |
 | **[AI Kit](/ai/ai-kit/)** | Coding-assistant plugins for building Keboola components and apps. |
 | **[Kai](/kai/)** | The in-product AI assistant. |
-
-:::note
-kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
-<!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
-:::
 
 ---
 
