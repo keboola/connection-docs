@@ -23,3 +23,19 @@ The full repo guide — stack, structure, commands, and conventions — lives in
 - **Screenshots:** save throwaways to `/tmp`, not the repo. `scripts/screenshot.mjs`
   is a local-only helper (gitignored).
 - **Ask a maintainer** for product facts vs. content choices instead of guessing.
+
+## Migrating dev docs into help (Jordan, 2026-07-30)
+
+- **De-duplicate, never add-alongside.** Moving a page is not the goal; *unifying* is.
+  Lifecycle: merge the information into the help page → update the links pointing at it →
+  then kill/redirect the old page. If a competing overview survives, the migration is not
+  done. Before placing anything, search for where that concept **already lives** (expand every
+  `**/other/` nav subgroup — thin stubs hide there) and dedup into **one** canonical page.
+- **Never let an agent decide information architecture.** Placement is a human call made
+  against the **live preview**; automated audit output is evidence, not a verdict. Recommend a
+  home and **surface the decision** — don't self-place cross-cutting features. Use the
+  `migration-placement` skill; it encodes this and the known failure cases.
+- **Never hard-delete a dev page without checking what links to it**
+  (`gh search code "developers.keboola.com/<section>" --owner keboola`, plus non-GitHub
+  callers). Some sections have hundreds of inbound references — see the scan table in
+  `DEV-MIGRATION-PLAN.md`.
