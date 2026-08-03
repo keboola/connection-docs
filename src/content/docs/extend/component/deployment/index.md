@@ -300,8 +300,8 @@ and configuration ID. It is highly recommended to create a dedicated token for t
 The commands will need two extra environment variables apart from the
 [ones listed above](/extend/component/deployment/#deploy-configuration):
 
-- `KBC_STORAGE_TOKEN` --- the Storage token that the test(s) will run under
-- `KBC_APP_TEST_CONFIG` --- the ID of the configuration to test
+- `KBC_STORAGE_TOKEN` — the Storage token that the test(s) will run under
+- `KBC_APP_TEST_CONFIG` — the ID of the configuration to test
 
 ![Screenshot -- Sample Configurations](/extend/component/deployment/configuration-sample.png)
 
@@ -360,7 +360,7 @@ that you would like to test.
 When you commit to the component repository, the Docker image will be built, and using a `test` tag, it will be tested in production Keboola.
 However, it will not be deployed to production! To get it into production, create a new normal version tag (`x.y.z`) in the repository.
 The Docker image will be built and tested using the `test` tag, and if all succeeds, it will be deployed
-with the `x.y.z` tag into Keboola --- a new version will be available in production.
+with the `x.y.z` tag into Keboola — a new version will be available in production.
 You can see the [Python code](https://github.com/keboola/component-generator/tree/master/templates/python-tests) or
 [PHP code](https://github.com/keboola/component-generator/tree/master/templates/php-component/) in our
 [Templates repository](https://github.com/keboola/component-generator/tree/master/templates).

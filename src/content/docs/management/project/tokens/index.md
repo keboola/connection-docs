@@ -95,7 +95,7 @@ You can also limit the token validity.
 
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail.png)
 
-You can see and copy the token only once --- right after it was created. If you
+You can see and copy the token only once — right after it was created. If you
 need to access the token later, you can [share it](#sharing-token).
 
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail-2.png)
@@ -119,7 +119,7 @@ This means that the token will also work if it has access to no components.*
 
 You can then [share the token](#sharing-a-token) to the person responsible for the database process and be 
 sure that they can use only that particular component in that particular bucket. They will be even able to 
-reconfigure it --- e.g., update the extraction queries (but only via the API).
+reconfigure it — e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.
 
 You can also specify if a token is allowed to delete configurations in [Trash](/components/#delete-configuration) by 

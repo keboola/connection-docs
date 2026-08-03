@@ -10,7 +10,7 @@ redirect_from:
 
 
 Components allow you to [extend](/extend/) Keboola.
-The data interface to components is very similar to [Transformations](/transformations/) --- data is exchanged as
+The data interface to components is very similar to [Transformations](/transformations/) — data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
 
 ### Intro to Component Creation

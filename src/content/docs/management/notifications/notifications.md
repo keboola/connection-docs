@@ -33,7 +33,7 @@ You can:
 Notifications can be sent when:
 - The flow finishes with an **error**.
 - Some tasks fail and the flow finishes with a **warning** (requires [*Continue on Error*](/flows/#control-task-execution)).
-- The flow takes significantly longer than usual. --- e.g., when you set the threshold to 20% and an flow usually runs 
+- The flow takes significantly longer than usual. — e.g., when you set the threshold to 20% and an flow usually runs 
 for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as a running average of the last 20 executions of the flow.
 
 **Note:** When triggered manually, only the user who started the flow receives the notification.

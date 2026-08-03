@@ -78,13 +78,13 @@ When creating the configuration, use
 to validate the configuration before storing it. The configuration contains the following nodes,
 all of them are optional:
 
-- `parameters` --- an arbitrary object passed to the dockerized application itself
-- `storage` --- configuration of [input and output mapping](/extend/common-interface/folders/); specific options correspond to the options of the
+- `parameters` — an arbitrary object passed to the dockerized application itself
+- `storage` — configuration of [input and output mapping](/extend/common-interface/folders/); specific options correspond to the options of the
 [unload data](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously) and
 [load data](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async) API calls.
-- `runtime` --- [runtime settings](/integrate/jobs/#job-runtime-configuration) (`tag`, `backend`, `parallelism`); most notably `runtime.tag`
+- `runtime` — [runtime settings](/integrate/jobs/#job-runtime-configuration) (`tag`, `backend`, `parallelism`); most notably `runtime.tag`
 pins the Docker image tag that jobs of this configuration run, which is the usual way of testing a development build of a component
-- `processors` --- configuration of [Processors](/extend/component/processors/)
-- `authorization` --- OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration
-- `image_parameters` --- an arbitrary object passed from the [component](/extend/component/); not stored in the component configuration
-- `action` --- an [action](/extend/common-interface/actions/) being executed; not stored in the component configuration
+- `processors` — configuration of [Processors](/extend/component/processors/)
+- `authorization` — OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration
+- `image_parameters` — an arbitrary object passed from the [component](/extend/component/); not stored in the component configuration
+- `action` — an [action](/extend/common-interface/actions/) being executed; not stored in the component configuration

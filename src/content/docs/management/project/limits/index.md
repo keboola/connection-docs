@@ -29,12 +29,12 @@ You can also request an upgrade by clicking the **Request Increase** button crea
 
 Business limits vary based on your contract (refer to it to see which ones apply in your case):
 
-- **Projects** --- the number of Keboola projects (workspaces dedicated for data use cases)
-- **Users** --- the number of [project users](/management/project/users).
+- **Projects** — the number of Keboola projects (workspaces dedicated for data use cases)
+- **Users** — the number of [project users](/management/project/users).
 [Keboola support users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [tokens](/management/project/tokens). 
-- **Project Power** --- measured in [Time Credits/Units](#project-power---time-credits)
-- **Storage size** --- the sum of the sizes of the tables in your [Table Storage](/storage)
+- **Project Power** — measured in [Time Credits/Units](#project-power--time-credits)
+- **Storage size** — the sum of the sizes of the tables in your [Table Storage](/storage)
 
 ### Project Power -- Time Credits
 

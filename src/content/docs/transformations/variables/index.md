@@ -101,7 +101,7 @@ otherwise unrelated transformations. Like with the variables, the shared code is
 before the transformation runs. This means that it does not interfere with your
 transformation code.
 
-There are two ways how to create shared code --- from the **Shared Codes** page:
+There are two ways how to create shared code — from the **Shared Codes** page:
 
 ![Screenshot - Create Shared Code](/transformations/variables/shared-code.png)
 
@@ -121,9 +121,9 @@ You can use shared code when editing a transformation:
 
 Select the shared code you want to use. There are two options how you can use it:
 
-- **Use Inline** --- This will make a copy of the shared code in the transformation you're editing. There 
+- **Use Inline** — This will make a copy of the shared code in the transformation you're editing. There 
 won't be any link between the transformation and the shared code.
-- **Use as Shared Code** --- This will link the shared code with the transformation. When you modify the
+- **Use as Shared Code** — This will link the shared code with the transformation. When you modify the
 shared code, it will affect all linked transformations.
 
 ![Screenshot - Shared Code Use](/transformations/variables/shared-code-use-2.png)

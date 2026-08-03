@@ -158,7 +158,7 @@ and `documentationUrl`, which describes additional parameters of the processor.
 
 ### Configuring Parameters
 A processor may allow (or require) parameters. These are entered in the `parameters` section.
-The below configuration sets values for two parameters --- `lines` and `direction_from`:
+The below configuration sets values for two parameters — `lines` and `direction_from`:
 
 ```json
 {

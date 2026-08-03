@@ -40,7 +40,7 @@ the designated tables in Storage. The **input** and **output** mappings ensure c
 the transformation processes -- the transformation always operates in an isolated workspace.
 
 ## Mapping
-[**Input and output mapping**](/transformations/mappings/) --- separates the source data from your transformation. 
+[**Input and output mapping**](/transformations/mappings/) — separates the source data from your transformation. 
 Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the 
 input mappings. Database table names and CSV file names in transformations are completely unrelated to names of tables 
 in Storage. This means, for example, that you can rename tables in Storage without breaking any of your transformations.
@@ -76,7 +76,7 @@ feel free to step in with Python and finish the work with SQL again.
 
 The following are the currently available backends:
 
-- **SQL** --- [Snowflake](/transformations/snowflake-plain/), [Google BigQuery](/transformations/bigquery/), or [DuckDB](/transformations/duckdb/) *(beta)* is offered as a default backend.
+- **SQL** — [Snowflake](/transformations/snowflake-plain/), [Google BigQuery](/transformations/bigquery/), or [DuckDB](/transformations/duckdb/) *(beta)* is offered as a default backend.
 - **Script** ---[Python](/transformations/python-plain/), or [R](/transformations/r-plain/).
 Choose according to your taste and available libraries.
 
@@ -228,7 +228,7 @@ which have many new features, such as loading and unloading data with a running 
 
 The transformation script can be organized into pieces that we call **code**, and these can be
 further organized into **blocks**. This allows you to somehow structure lengthy scripts.
-The structure provides **no executional isolation** --- all code pieces execute sequentially
+The structure provides **no executional isolation** — all code pieces execute sequentially
 in the same context in a top-down left-to-right direction. You can assign custom names to 
 individual blocks and code pieces. You can reorder both the code elements and blocks by dragging them:
 

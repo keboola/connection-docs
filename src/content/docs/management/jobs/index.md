@@ -74,12 +74,12 @@ Until a job is finished (i.e., it is waiting or processing), it can be terminate
 a few seconds.*
 
 In some cases, a job can have **child jobs**. They are identified by having their `RunId` delimited with
-a dot --- e.g., `347371952.3473719650`. In this case, the job `3473719650` run is in fact a child
+a dot — e.g., `347371952.3473719650`. In this case, the job `3473719650` run is in fact a child
 job to `347371952`. Terminating the parent job will automatically terminate the child job too. 
 Terminating the child job will probably cause the parent to terminate or fail.
 
 ## Waiting Jobs
-When a job is run, it is always put in the waiting state to wait for our **infrastructure** --- 
+When a job is run, it is always put in the waiting state to wait for our **infrastructure** —
 [worker](https://developers.keboola.com/integrate/jobs/) to start executing it.
 This usually takes anywhere from several seconds to a couple of minutes at most. 
 
