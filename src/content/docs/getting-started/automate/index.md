@@ -6,92 +6,135 @@ redirect_from:
   - /tutorial/automate/
 ---
 
-So far, you have learned to use Keboola to
+You have four configurations that each do one thing when you click Run. A **flow** turns them
+into one pipeline that runs in the right order, at the right time, without you.
+Step 5 of the [Getting Started](/getting-started/) arc.
 
-- load tables [manually](/getting-started/load/) or [using a data source connector](/getting-started/load/database/), 
-- [manipulate data in SQL](/getting-started/transform/), and
-- write data [into a Google Spreadsheet using a data destination connector](/getting-started/write/).
- 
-While connecting various systems together alone makes Keboola a powerful and easy-to-use tool, 
-the above steps must be done repeatedly to bring in the newest data available.
+<!-- Tutorial-type page (step 5 of 6). Written against Conditional Flows (the current flow type; demo project 264 reports conditional_flows: true). Terminology sourced from /flows/. Screenshots pending live verification. -->
 
-This is where our flows come in:
-- Specify what tasks should be executed in what order (orchestrate tasks) and
-- Configure the automatic execution (schedule flow tasks).
+## What you need
 
-1. Navigate to the **Flows** section of Keboola.
+Everything from the previous steps, in one project:
 
-![Go to Flows](/getting-started/automate/automate1.png)
+- the four CSV Import configurations from [Load Your Data](/getting-started/load/) — or the
+  [Google Sheets](/getting-started/load/googlesheets/) and
+  [database](/getting-started/load/database/) connectors, if you took those side trips,
+- the `Denormalize opportunities` transformation from
+  [Transform Your Data](/getting-started/transform/),
+- the Google Sheets destination from
+  [Send Your Data Somewhere](/getting-started/write/).
 
-2. Click **Create Flow**.
+## Phases and tasks
 
-3. Enter a *Name* and *Description* for your flow. Similar to creating a transformation, you can organize flows into folders.
-You can specify the folder name when creating a flow or assign it under a folder later. Click **Create Flow**.
+A flow is a list of **phases**. Each phase holds one or more **tasks** — a component
+configuration to run, a notification to send, a variable to set.
 
-![Name the Flow](/getting-started/automate/automate2.png)
+- **Tasks inside one phase run in parallel.**
+- **Phases run one after another**, and the flow only moves on when a phase is finished.
 
-4. Click **Select First Step**.
+That is the whole model, and it makes the ordering obvious: things that can happen at the same
+time go in one phase; things that depend on each other go in separate phases. Your pipeline is
+three phases — extract, transform, deliver — because the transformation needs all four tables
+before it can join them, and the sheet needs the joined table before it can deliver it.
 
-![Select First Step](/getting-started/automate/automate3.png)
+Flows can also branch on what happened: retry a task, take a different path on failure, end
+early. That is [conditions](/flows/#conditions), and you need none of it yet.
 
-5. Click the **Google Sheets Data Source** component. We extracted the *Levels* table from this data source and we’ll want to extract this data automatically in our flow.
+## Build the flow
 
-![Select Google Sheets Data Source](/getting-started/automate/automate4.png)
+1. Go to **Conditional Flows** and click **Create Flow**. Name it
+   `[TUTORIAL] Opportunity pipeline`, add a description, and you land in the **Builder**.
 
-6. Use the drop down menu to select a particular configuration of this component.
+   ![Screenshot - Create a flow](/getting-started/automate/automate1.png)
 
-![Select Configuration](/getting-started/automate/automate5.png)
+2. Use the plus icon (**+**) to add your first task and pick **Component**. Select the
+   `[TUTORIAL] Opportunity` CSV Import configuration.
 
-7. Now use the plus icon to add additional steps. Select the **Snowflake data source** component we used to extract the *User, Opportunity*, and *Account* tables.
-Then select the configuration we created.
+   ![Screenshot - Add the first component task](/getting-started/automate/automate2.png)
 
-![Additional Steps](/getting-started/automate/automate6.png)
+3. Add the other three CSV Import configurations **to the same phase** — they read four
+   independent files, so there is no reason to wait for one before starting the next.
 
-8. Extractions of the data are not dependent tasks and, thus, can be executed in parallel.
-You can accomplish this by simply dragging and dropping the second task into the Step 1 box.
+   ![Screenshot - Four tasks in one phase](/getting-started/automate/automate3.png)
 
-![Extraction 1](/getting-started/automate/automate7.png)
+4. Add a **new phase** and put the `Denormalize opportunities` transformation in it. Being in
+   a later phase is what guarantees all four tables have landed before the SQL runs.
 
-![Extraction 2](/getting-started/automate/automate8.png)
+   ![Screenshot - The transformation in its own phase](/getting-started/automate/automate4.png)
 
-![Extraction 3](/getting-started/automate/automate9.png)
+5. Add a third phase holding the Google Sheets destination configuration.
 
-9. Continue to add the **SQL Transformation** step and the **Google Sheets Data Destination** steps. You should now have a flow looking like this
+   ![Screenshot - The destination phase](/getting-started/automate/automate5.png)
 
-![Add SQL Transformation](/getting-started/automate/automate10.png)
+You now have three phases: four parallel loads, then the transformation, then the delivery.
 
+![Screenshot - The finished flow](/getting-started/automate/automate10.png)
 
-When configuring the **transformation** in the [Data Manipulation](/getting-started/transform/) step of this tutorial, 
-we used the input tables we loaded manually into Keboola. Now, we need to adjust the **input mapping** of our transformation to use the tables extracted 
-from **Google Sheets** and **Snowflake data sources**.
+:::note[If you took the connector side trips]
+If your data now comes from the Google Sheets and database connectors instead of CSV Import,
+put both connectors in the first phase — and open the transformation's **input mapping** to
+point at the tables those connectors produce, because their table names differ from
+`in.c-csv-import.*`. A flow that runs the right components against the wrong input mapping
+succeeds and produces nothing useful.
 
-You can get to the configuration by selecting the step and clicking **Edit Configuration**.
+![Screenshot - Edit the input mapping](/getting-started/automate/automate12.png)
+:::
 
-![Edit Configuration](/getting-started/automate/automate11.png)
+## Run it
 
-Remove the current **input mapping** tables and add the ones from the Google Sheet and Snowflake data sources. 
-Make sure you edit the *Table name* parameter because those are the names we use in our query to reference those tables.
+Run the flow once by hand before scheduling it. Every task creates its own job, so **Jobs**
+tells you exactly which step failed if one does, and the flow's run detail shows the phases
+completing in order.
 
-![Replace Input Mapping](/getting-started/automate/automate12.png)
+## Set a schedule
 
-## Set a Schedule
-1. Click **Set Schedule**.
+Click **Set Schedule** and choose when the flow runs — a predefined interval or your own.
+Daily at 6:15 UTC is a reasonable choice for this pipeline.
 
-![Set Schedule](/getting-started/automate/automate13.png)
+![Screenshot - Set a schedule](/getting-started/automate/automate13.png)
 
-2. Set the schedule to 6:15am UTC daily execution and click **Set Up Schedule**.
+If you share a stack with other projects, scheduling slightly off the hour avoids the busiest
+moments. A flow can also be triggered when a table changes instead of on a clock — see
+[Schedule and Automate](/flows/#schedule-and-automate).
 
-![Set Schedule 1](/getting-started/automate/automate14.png)
+## Get told when it breaks
 
-## Notifications
-To ensure that responsible persons are notified when the flow fails or runs into warnings, it’s always a good idea to set up **notifications**.
+An automated pipeline that fails silently is worse than a manual one. Add a **Notification**
+task with the plus icon (**+**) and enter the email addresses that should hear about
+failures — or point it at a webhook.
 
-Navigate to the **Notifications** tab and enter/select email addresses of those that should be notified on success/warning/error or processing.
+![Screenshot - Set up notifications](/getting-started/automate/automate15.png)
 
-![Set Up Notifications](/getting-started/automate/automate15.png)
+For anything more selective than "tell me when it breaks", conditions let you branch on
+status: *if any task in the flow ended with an error, send a notification*. See
+[Notifications](/flows/#notifications).
 
-## What’s Next
-Having mastered the automation process, you may proceed to the [Development Branches](/getting-started/branches/) part of the tutorial.
+## Check it worked
 
-## If You Need Help
-Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
+- The flow's run history shows one successful run with all three phases green.
+- **Jobs** lists six jobs from that run: four loads, one transformation, one delivery.
+- The schedule is shown on the flow, with the next run time.
+
+## If it goes wrong
+
+- **The transformation fails inside the flow but works on its own.** Its phase is running
+  before the loads finish — check that the connectors sit in an *earlier* phase, not the same
+  one.
+- **Everything succeeds but the sheet is unchanged.** The destination ran before the
+  transformation wrote its output, or its phase is missing entirely. Read the run detail top
+  to bottom.
+- **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the
+  project is out of runtime credits — Free Plan projects get 60 minutes a month, and while
+  flow jobs themselves consume none, the component jobs they start do.
+- **Jobs queue instead of running.** Too many parallel tasks in one phase; Storage jobs are
+  typically capped at 10 in parallel. Split the phase.
+
+:::tip[Or ask Kai]
+Kai can build the flow for you and explain what it did:
+
+> Create a flow that runs my four CSV Import configurations in parallel, then the
+> `Denormalize opportunities` transformation, then the Google Sheets destination. Schedule it
+> daily at 6:15 UTC.
+:::
+
+**Next:** [Where to go next →](/getting-started/next-steps/)

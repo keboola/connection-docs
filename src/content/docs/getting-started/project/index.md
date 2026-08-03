@@ -5,6 +5,9 @@ description: Create a Keboola project on the Free Plan, understand what a projec
 ---
 
 Everything you do in Keboola happens inside a **project**. This page gets you into one.
+Step 1 of the [Getting Started](/getting-started/) arc.
+
+<!-- Tutorial-type page (step 1 of 6). Free Plan limits sourced from /management/payg-project/; sign-up flow and project screen pending live verification. -->
 
 ## What you need
 
@@ -76,4 +79,4 @@ the project navigation and ask:
 > What is in this project? Summarize the buckets, configurations and flows it contains.
 :::
 
-**Next →** [Load Your Data](/getting-started/load/)
+**Next:** [Load your data →](/getting-started/load/)

@@ -6,85 +6,98 @@ redirect_from:
   - /tutorial/manipulate/
 ---
 
-At this juncture, you're acquainted with the swift process of loading data into Keboola, resulting in four new tables in your Storage: 
-`account, opportunity, level`, and `user`. 
+Four raw tables are not much use on their own. This step joins them into one wide table with
+SQL, and introduces the mechanism that keeps your source data safe while you do it.
+Step 3 of the [Getting Started](/getting-started/) arc.
 
-In this segment of the tutorial, we'll guide you through data manipulation in [Storage](/storage/tables/) using [transformations](/transformations/). 
-Our objective is to create a denormalized table from the input tables and make some minor modifications to it.
+<!-- Tutorial-type page (step 3 of 6). SQL verified against Snowflake syntax; UI labels and screenshots pending live verification in demo project 264. -->
 
+## What you need
 
+Four tables in Storage — `in.c-csv-import.opportunity`, `account`, `user` and `level` —
+from [Load Your Data](/getting-started/load/). If your tables have different names, use
+yours everywhere below.
 
-## Creating Transformation
-1. To start, navigate to the Keboola **Transformations** section.
+## How a transformation works
 
-![Screenshot - Transformations Console](/getting-started/transform/transformations-intro.png)
+A transformation never runs against your Storage tables directly. Keboola copies the tables
+you ask for into a temporary database schema, runs your queries there, and copies back only
+the results you ask for. Three settings control that:
 
-2. Next, click the **Create Transformation** button and choose **Snowflake SQL Transformation** (or another SQL transformation, depending on your project's backend).
+1. **[Input mapping](/transformations/mappings/#input-mapping)** — which Storage tables get
+   copied in, and what they are called inside the transformation. Anything you do not list
+   is not visible to your code.
+2. **[Output mapping](/transformations/mappings/#output-mapping)** — which tables your code
+   produces get written back to Storage, and where. Anything you do not list is thrown away
+   when the job ends.
+3. **Queries** — the SQL itself, organized into named code blocks.
 
-![Screenshot - Create Transformation](/getting-started/transform/create-transformation.png)
+That is the safeguard: the only tables your transformation can change are the ones named in
+the output mapping. It is also what lets Keboola track data lineage across the project.
 
-3. Enter `Denormalize opportunities` as its name, and remember to provide a description. Transformations can be organized into folders;
-you can either add it to a folder during creation or move it to any folder later. Now, enter `Opportunity` as the folder name.
+![Screenshot - How mapping works](/getting-started/transform/mapping.png)
 
-![Screenshot - Name Transformation](/getting-started/transform/name-transformation.png)
+## Create the transformation
 
+1. Open **Transformations**.
 
-Keboola transformations operate on a few fundamental building blocks. It's crucial to note that the transformation process occurs in a dedicated database schema,
-meaning queries are not executed directly against your Storage tables. Instead, the system clones selected tables into the dedicated transformation schema, 
-executes queries, and finally unloads created/modified objects back to the Storage.
+   ![Screenshot - Transformations section](/getting-started/transform/transformations-intro.png)
 
-1. [**Input Mapping**](/transformations/mappings/#input-mapping): This is where you specify the tables to be used in your transformation. In the default setup, tables not mentioned in Input Mapping cannot be used in the transformation.
-2. [**Output Mapping**](/transformations/#output-mapping): This section deals with tables created or modified within your transformation. Here, you specify the tables that will be written into Storage after the successful execution of the transformation. Tables not mentioned in Output Mapping will neither be modified nor permanently stored; they are considered temporary.
-3. [**Queries**](/getting-started/transform/#transformation-script): SQL queries define what will happen with the data. These queries take the tables from Input Mapping, modify them, and produce the tables referenced in Output Mapping. To enhance clarity, queries can be further organized into blocks.
+2. Click **Create Transformation** and choose **Snowflake SQL Transformation**. (Which SQL
+   backends you see depends on the project — the backend is a project-level setting, not a
+   per-transformation choice.)
 
-The mapping concept serves as a crucial safeguard when manipulating your data. It ensures that there is no accidental modification of the wrong tables. The only 
-tables modified by your transformation are those explicitly specified in the Output Mapping. Additionally, this concept plays a vital role in maintaining a 
-detailed data lineage across your project.
+   ![Screenshot - Create a transformation](/getting-started/transform/create-transformation.png)
 
-![Screenshot - Mapping](/getting-started/transform/mapping.png)
+3. Name it `Denormalize opportunities`, add a description, and put it in a folder called
+   `Opportunity`. Folders are cosmetic but they are the difference between a browsable
+   project and a wall of configurations.
 
-### Input Mapping
-Let’s start with setting Input Mapping by clicking the **New Input** button.
+   ![Screenshot - Name the transformation](/getting-started/transform/name-transformation.png)
 
-![Screenshot - Input Mapping](/getting-started/transform/input-mapping1.png)
+## Set the input mapping
 
-The *Source* field in the input mapping refers to Storage. Select `in.c-csv-import.account` as the source table. You can do a full text search in the select 
-field; typing `acc` will give you the table as well. In the *Table name* field, the table name `account` is automatically filled for you. This is the name of the 
-source table inside the transformation. Use the **Add Input** button to create the input mapping.
+1. Click **New Input**.
 
-Please note that there are additional settings you can configure, such as the *Changed in Last* filter, which aids in incremental processing of large tables. 
-However, for the purpose of our tutorial, we won't delve into those details. See additional information about [input mapping](/transformations/mappings/#input-mapping) 
-(all available options, etc.).
+   ![Screenshot - New input mapping](/getting-started/transform/input-mapping1.png)
 
-Add the remaining three tables: `opportunity`, `user` and `level`. You can add multiple tables at once:
+2. Set **Source** to `in.c-csv-import.account` — the field searches, so typing `acc` finds
+   it. **Table name** fills in automatically as `account`; that is the name your SQL will
+   use. Click **Add Input**.
 
-![Screenshot - Input Mapping Add Tables](/getting-started/transform/IM-add-tables.png)
+3. Add the other three the same way — `opportunity`, `user` and `level`. You can select
+   several tables at once.
 
-You will get to the following configuration:
+   ![Screenshot - Adding several input tables](/getting-started/transform/IM-add-tables.png)
 
-![Screenshot - Input Mapping Configuration](/getting-started/transform/input-mapping3.png)
+You should end up with four inputs:
 
-### Output Mapping
-Continue with setting up output mapping by clicking on the **New Output** button.
+![Screenshot - The finished input mapping](/getting-started/transform/input-mapping3.png)
 
-![Screenshot - Setting Output Mapping](/getting-started/transform/output-mapping1.png)
+Input mapping has more to it — incremental processing with **Changed in Last**, column
+filters, data filters. None of it is needed here; see
+[input mapping](/transformations/mappings/#input-mapping) when you have a large table to
+process.
 
-Enter `opportunity_denorm` into the *Table name* field in the output mapping; the *Table name* field refers to the transformation. This table does not exist yet. 
-We will create it in the transformation query. 
+## Set the output mapping
 
-The *Destination* field refers to the name of the output table in Storage. It will be auto-generated to create the `opportunity_denorm` table 
-in the `denormalize-opportunity` [bucket in the output stage](/storage/tables/) in Storage. 
-Neither the table nor the bucket exist, but they will be created once the transformation runs.
+1. Click **New Output**.
 
-After you finish the output mapping, you will see this:
+   ![Screenshot - New output mapping](/getting-started/transform/output-mapping1.png)
 
-![Screenshot - Finished Output Mapping](/getting-started/transform/output-mapping2.png)
+2. In **Table name**, enter `opportunity_denorm`. This is the name of a table your SQL will
+   create — it does not exist yet.
 
-See additional information about [output mapping](/transformations/mappings/#output-mapping) (all available options, etc.).
+3. **Destination** auto-fills to `out.c-denormalize-opportunity.opportunity_denorm`: the
+   `out` stage, a new bucket, and the table. Neither the bucket nor the table exists; both
+   are created the first time the transformation runs.
 
-### Transformation Queries
-To produce that table from the tables `account`, `opportunity` and `user`, write a transformation script.
-To save you some time, we have already prepared the necessary SQL queries for you:
+   ![Screenshot - The finished output mapping](/getting-started/transform/output-mapping2.png)
+
+## Write the queries
+
+Click **New Code**, name the block `Opportunity denorm`, paste the SQL below, and click
+**Save**.
 
 ```sql
 CREATE TABLE "tmp_level" AS
@@ -113,84 +126,107 @@ CREATE TABLE "opportunity_denorm" AS
         JOIN "tmp_level" ON "user"."Name" = "tmp_level"."Name";
 ```
 
-For BigQuery, the query will look like this:
+Three queries, in order: spell out the seniority codes; classify each opportunity by how
+likely it is to close; then join everything into `opportunity_denorm`. Only that last table
+is in the output mapping, so the two `tmp_` tables vanish when the job finishes.
+
+![Screenshot - The code block](/getting-started/transform/new-code.png)
+
+:::note[On a BigQuery project]
+[BigQuery](/transformations/bigquery/) does not use double-quoted identifiers, and CTEs
+replace the temporary tables:
 
 ```sql
 CREATE TABLE opportunity_denorm AS
 WITH tmp_level AS (
-    SELECT 
-        Name, 
+    SELECT
+        Name,
         CASE
-            WHEN `Level`.`Level` = 'S' THEN 'Senior'
-            WHEN `Level`.`Level` = 'M' THEN 'Intermediate'
-            WHEN `Level`.`Level` = 'J' THEN 'Junior' 
+            WHEN Level = 'S' THEN 'Senior'
+            WHEN Level = 'M' THEN 'Intermediate'
+            WHEN Level = 'J' THEN 'Junior'
         END AS Level
-    FROM 
+    FROM
         level
 ),
 tmp_opportunity AS (
-    SELECT 
-        * EXCEPT (_timestamp), 
+    SELECT
+        * EXCEPT (_timestamp),
         CASE
             WHEN CAST(Probability as INT64) < 50 THEN 'Poor'
             WHEN CAST(Probability as INT64) < 70 THEN 'Good'
-            ELSE 'Excellent' 
+            ELSE 'Excellent'
         END AS ProbabilityClass
-    FROM 
+    FROM
         opportunity
 )
-SELECT 
+SELECT
     tmp_opportunity.*,
-    user.Name AS UserName, 
+    user.Name AS UserName,
     user.Sales_Market AS UserSalesMarket,
     user.Global_Market AS UserGlobalMarket,
-    account.Name AS AccountName, 
+    account.Name AS AccountName,
     account.Region AS AccountRegion,
-    account.Status AS AccountStatus, 
-    account.FirstOrder AS AccountFirstOrder 
-FROM 
+    account.Status AS AccountStatus,
+    account.FirstOrder AS AccountFirstOrder
+FROM
     tmp_opportunity
-JOIN 
+JOIN
     user ON tmp_opportunity.OwnerId = user.Id
-JOIN 
-    account ON tmp_opportunity.AccountId = account.Id 
-JOIN 
+JOIN
+    account ON tmp_opportunity.AccountId = account.Id
+JOIN
     tmp_level ON user.Name = tmp_level.Name;
 ```
 
-Click the **New Code** button. Begin by entering a query name – input *Opportunity denorm*. Next, paste the queries into the editor, and then click **Save**.
+<!-- VERIFY(owner): this BigQuery variant is carried over from the previous version of the
+page and has not been run against a BigQuery project. The demo project (264) is Snowflake.
+The original also referenced `Level`.`Level` inside the CTE, which looks wrong; corrected to
+`Level` here but unverified. -->
+:::
 
-![Screenshot - New Code](/getting-started/transform/new-code.png)
+## Run it and check the result
 
-In the first query, we enhance user level descriptions for better clarity.
+Click **Run Transformation**. That creates a background job which copies the input tables
+in, runs your SQL, and writes `opportunity_denorm` back to Storage.
 
-In the second query, we calculate the quality level for each deal opportunity based on the estimated probability of closing the deal.
+![Screenshot - Running the transformation](/getting-started/transform/run-transformation.png)
 
-In the third query, we denormalize all tables into a single one. 
+Watch it in **Jobs**, or via the notification that appears when the job starts. A green
+job means it worked.
 
-## Running Transformation
-Click **Run Transformation**. This will create a background job which will
-- get the specified tables from Storage,
-- load them in a transformation schema,
-- execute the queries, and
-- store the result in Storage again.
+![Screenshot - Successful job](/getting-started/transform/transf-successful.png)
 
-![Screenshot - Run Transformation](/getting-started/transform/new-code.png)
+Then open **Storage**: there is a new bucket `out.c-denormalize-opportunity` holding
+`opportunity_denorm`. Its detail page shows **Recently updated by**, which tells you which
+configuration last wrote to it — the fastest way to answer "where did this table come
+from?" months later.
 
-To see if the transformation job was successful, navigate to **Jobs**, or click on the small **Snowflake SQL job has been scheduled** window 
-that pops up after a transformation starts running.
+![Screenshot - The new table in Storage](/getting-started/transform/table-in-storage.png)
 
-![Screenshot - Transformation Successful](/getting-started/transform/transf-successful.png)
+## If it goes wrong
 
-After a successful execution of the transformation you’ll see a new table created in your **Storage**. 
-Please notice also the **Recently updated** by where you can see what component configuration recently updated that table.
+- **`Object 'ACCOUNT' does not exist`.** A table is missing from the input mapping, or the
+  **Table name** inside the transformation differs from what the SQL uses. Snowflake
+  uppercases unquoted identifiers, which is why every identifier above is double-quoted.
+- **The job succeeds but Storage has no new table.** The output mapping is empty or names a
+  table your SQL never creates. The names must match exactly: `opportunity_denorm`.
+- **`Numeric value '' is not recognized`.** Storage columns are untyped text, so an empty
+  cell arrives as `''`, not `NULL`. Wrap the cast: `TRY_CAST("Probability" AS NUMBER(38,9))`.
+- **You want to see what the query actually returns before saving.** That is what a
+  [workspace](/getting-started/transform/workspace/) is for.
 
-![Screenshot - Table in Storage](/getting-started/transform/table-in-storage.png)
+:::tip[Or ask Kai]
+Kai reads the job log, so it is faster at this than you are:
 
-## What’s Next
-Having learned to set up a transformation, you can now
-- continue with the next [Writing Data](/getting-started/write/) step, or
-- take a brief side step to [Using a Workspace](/getting-started/transform/workspace/) – while we've configured our transformation with pre-developed queries in this tutorial, in real-life scenarios, you'll typically want to interact with the data, develop, and test your queries. A workspace serves as your safe playground specifically designed for that purpose.
+> My transformation `Denormalize opportunities` failed. Read the last job's log and tell me
+> what to fix.
+:::
 
-## If You Need Help
-Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
+## Going further
+
+- [Use a Workspace](/getting-started/transform/workspace/) — develop and test queries
+  against a copy of the data before committing them to a transformation. This is how the
+  work is really done.
+
+**Next:** [Send your data somewhere →](/getting-started/write/)

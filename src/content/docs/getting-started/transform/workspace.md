@@ -38,7 +38,7 @@ Click **Create Workspace**.
    in a state as of the moment of loading. To refresh the data in a Workspace, you need to click **Load Data** again. 
    
    If you wish to have read access to all data in your Storage without physically cloning it into the workspace, 
-   check the *Grant read-only access to all storage data* option when creating a workspace. However, this is a feature we won't delve into in this tutorial.
+   check the *Grant read-only access to all storage data* option when creating a workspace. However, this is a feature we do not cover here.
 
 ![Set Input Mapping](/getting-started/transform/workspaces6.png)
 
@@ -49,10 +49,6 @@ click the **Connect** button again to access the Web-based Snowflake SQL IDE (pl
 
 
 After completing the development of your queries, you can then copy and paste them into a transformation configuration, 
-as we did in the [previous tutorial step])/getting-started/transform/).
+as we did in the [previous step](/getting-started/transform/).
 
-## What’s Next
-Proceed to [Writing Data](/getting-started/write/) for the next step in the tutorial.
-
-## If You Need Help
-Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
+**Next:** [Send your data somewhere →](/getting-started/write/)

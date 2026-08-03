@@ -8,7 +8,7 @@ redirect_from:
 
 In the [previous step](/getting-started/load/), you learned how to quickly load data into Keboola using [manual import](/getting-started/load/).
 However, in real production projects, this is seldom used as most data is obtained automatically using data source connectors.
-In this part of the tutorial, you will use a Google Sheets data source connector to load data from an external spreadsheet.
+A side trip from [Load Your Data](/getting-started/load/): instead of uploading a file by hand, you will pull the data straight out of a spreadsheet with the Google Sheets data source connector.
 
 
 
@@ -31,7 +31,7 @@ Go to [Google Spreadsheets](https://www.google.com/sheets/about/) and start a ne
 
 ![Data Source Overview Screenshot](/getting-started/load/source-intro.png)
 
-3. Click **Connect To My Data**. The 'Use With Demo Data' option will extract datasets prepared by Keboola for your experimentation outside of this tutorial, and it can be found across all commonly used connectors.
+3. Click **Connect To My Data**. The 'Use With Demo Data' option will extract datasets prepared by Keboola for your experimentation outside of this guide, and it can be found across all commonly used connectors.
 
 4. Enter a name and description and click **Create Configuration**. 
 
@@ -71,9 +71,9 @@ or navigate directly to the **Storage** section to explore the data.
 
 ![Go to Storage](/getting-started/load/storage.png)
 
-## What’s Next
-Proceed to [Data Manipulation](/getting-started/transform/) for the next step in the tutorial. 
-Alternatively, take another brief side step to explore loading data with the [Database data source connector](/getting-started/load/database/).
+## Going further
 
-## If You Need Help
-Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
+Another side trip: load the same kind of data with the
+[database data source connector](/getting-started/load/database/).
+
+**Next:** [Transform your data →](/getting-started/transform/)

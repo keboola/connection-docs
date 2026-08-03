@@ -6,64 +6,119 @@ redirect_from:
   - /tutorial/write/
 ---
 
+Data that never leaves the platform is not worth much. This step pushes your joined table
+out to a Google Sheet — the same move, under the same mechanism, that later sends data to a
+warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
 
+<!-- Tutorial-type page (step 4 of 6). UI labels and screenshots pending live verification in demo project 264. -->
 
-This section of our tutorial will walk you through the process of writing data from Keboola to a destination. This step is commonly referred to as reverse ETL. 
-Having already learned how to [manipulate data](/getting-started/transform/) in Keboola using SQL, you now have a denormalized table called `opportunity_denorm` 
-ready in Storage.
+## What you need
 
-In this tutorial, we will push this table to a **Google Sheets** destination. It's important to note that other typical destinations can include BI tools, databases, or even applications/APIs, such as CRM systems, and more.
+- The table `opportunity_denorm` in Storage, from
+  [Transform Your Data](/getting-started/transform/).
+- A Google account you can authorize. The connector only ever gets permission to write
+  spreadsheets.
 
-1. Navigate to **Components**, click the **Add Component** button and use the search bar to find *Sheets*.
+## Sending data out
 
-![Add Component](/getting-started/write/writing1.png)
+Getting data out is handled by **data destination connectors** — the mirror image of the
+data source connectors you loaded with. The pattern is always the same: authorize the
+target, pick the Storage table, say where it goes, run it. Sending processed data back into
+the operational systems it came from is often called **reverse ETL**; in Keboola it is just
+another component in your flow.
 
-2. Click **Add Component** and then click **Connect To My Data**.
+Google Sheets is the easiest destination to try. The
+[full catalogue](/components/writers/) covers databases, BI tools, and cloud storage.
 
-![Connecto to Data](/getting-started/write/writing2.png)
+## Configure the destination
 
-3. Enter a *Name* and *Description* and click **Create Configuration**.
+1. Open **Components**, click **Add Component**, and search for `Sheets`.
 
-![Name Component](/getting-started/write/writing3.png)
+   ![Screenshot - Search for the Google Sheets destination](/getting-started/write/writing1.png)
 
-4. Now, we need to authorize the Google account to which we want to write the data.
-This process is similar to what we’ve done in the [Loading data from Google Sheets data source](/getting-started/load/googlesheets/) step of this tutorial.
+2. Click **Add Component**, then **Connect To My Data**.
 
-![Authorize Google Account](/getting-started/write/writing4.png)
+   ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
 
-5. Enter a name for your connection and click **Sign in with Google**. You can also utilize *external authorization* if you need your colleagues
-to authorize their accounts. Please note that this authorization will only allow you to write data into a Google Spreadsheet.
+3. Name the configuration `[TUTORIAL] Opportunity denorm to Sheets`, add a description, and
+   click **Create Configuration**.
 
-![Authorize –Sign in with Google](/getting-started/write/writing5.png)
+   ![Screenshot - Name the configuration](/getting-started/write/writing3.png)
+
+## Authorize your Google account
+
+4. Authorize the account you want to write into.
+
+   ![Screenshot - Authorize a Google account](/getting-started/write/writing4.png)
+
+5. Name the authorization and click **Sign in with Google**. Use **external authorization**
+   instead if a colleague — not you — owns the target account; Keboola sends them a link
+   and never sees their credentials.
+
+   ![Screenshot - Sign in with Google](/getting-started/write/writing5.png)
 
 6. Click **Allow**.
 
-![Allow Access](/getting-started/write/writing6.png)
+   ![Screenshot - Grant access](/getting-started/write/writing6.png)
 
-7. Click **New Table** now to select the `opportunity_denorm` table from your Storage. 
+The authorization belongs to this configuration and grants write access to spreadsheets only.
+Keboola stores component secrets as
+[encrypted configuration parameters](https://developers.keboola.com/overview/encryption/), so
+the credentials are never visible in the configuration itself.
 
-![Select New Table](/getting-started/write/writing7.png)
+## Pick the table and the sheet
 
-8. Select the table and click **Next**.
+7. Click **New Table**.
 
-![Select New Table](/getting-started/write/writing8.png)
+   ![Screenshot - New table](/getting-started/write/writing7.png)
 
-9. You can either create a **new spreadsheet** or load data to an **existing spreadsheet**. Click **New spreadsheet** now and then click **Next**.
+8. Select `out.c-denormalize-opportunity.opportunity_denorm` and click **Next**.
 
-![Create a New Spreadsheet](/getting-started/write/writing9.png)
- 
-10. Enter a name of your sheet, select **Update rows** and click **Save Sheet**. This will create a new empty spreadsheet under the authorized account. 
+   ![Screenshot - Select the Storage table](/getting-started/write/writing8.png)
 
-![Name and Save a Spreadsheet](/getting-started/write/writing10.png)
+9. Choose **New spreadsheet** and click **Next**. (An existing spreadsheet works too — you
+   pick it from the authorized account's Drive.)
 
-11. To load the data into the created spreadsheet, click the **Run Component** button.
+   ![Screenshot - New spreadsheet](/getting-started/write/writing9.png)
 
-12. After the job is executed, you can click the spreadsheet name to open the Google Drive spreadsheet (assuming you have access to the spreadsheet).
+10. Name the sheet, select **Update rows**, and click **Save Sheet**. This creates an empty
+    spreadsheet in the authorized account, ready to receive the data.
 
-![Open the Spreadsheet](/getting-started/write/writing11.png)
+    ![Screenshot - Name and save the sheet](/getting-started/write/writing10.png)
 
-## What’s Next
-Proceed to [Flow Automation](/getting-started/automate/) for the next step in the tutorial. 
+    **Update rows** replaces the sheet's contents on every run. The alternative, **Append
+    rows**, adds to the bottom — right for a log, wrong for a table you want to reflect
+    current state.
 
-## If You Need Help
-Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
+## Run it and check the result
+
+11. Click **Run Component**.
+
+12. When the job finishes, click the spreadsheet name to open it in Google Drive.
+
+    ![Screenshot - Open the spreadsheet](/getting-started/write/writing11.png)
+
+The sheet should hold every row of `opportunity_denorm`, with the joined columns —
+`UserName`, `AccountName`, `ProbabilityClass` — that did not exist in any of the four CSVs
+you started with. That is the whole pipeline, end to end.
+
+## If it goes wrong
+
+- **The job fails with a permission error.** The authorization expired or was revoked in the
+  Google account. Re-authorize the configuration; the sheet selection survives.
+- **The spreadsheet stays empty.** The table was saved in the configuration but the
+  component has not run since — click **Run Component**. If it did run, check in **Jobs**
+  whether the source table had any rows.
+- **Only some columns arrive.** The sheet was created against an older version of the table.
+  Delete the sheet from the configuration and add it again so the column list is rebuilt.
+- **You cannot open the spreadsheet.** It lives in the authorized Google account, not
+  yours — if you authorized a colleague's account, ask them to share it.
+
+:::tip[Or ask Kai]
+Kai can confirm the delivery matched the source:
+
+> Compare the row count of `out.c-denormalize-opportunity.opportunity_denorm` with what the
+> last Google Sheets destination job wrote, and tell me if they differ.
+:::
+
+**Next:** [Automate it with a flow →](/getting-started/automate/)

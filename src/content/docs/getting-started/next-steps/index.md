@@ -6,6 +6,9 @@ description: You have a running pipeline — here is what to learn next dependin
 
 You now have a pipeline that loads data, reshapes it, delivers it, and runs itself on a
 schedule. That is the whole shape of working in Keboola; everything else is a variation on it.
+Step 6, the last, of the [Getting Started](/getting-started/) arc.
+
+<!-- Explanation-type page (step 6 of 6): a routing page, no steps of its own. Kai Public Beta status per /kai/; agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
 
 ## What you built
 
@@ -82,4 +85,4 @@ If you are documenting or automating your own work on top of Keboola, the
 - [keboolastatus.com](https://keboolastatus.com/) — platform status, worth subscribing to.
 - [changelog.keboola.com](https://changelog.keboola.com/) — what shipped recently.
 
-**Back to** [Getting Started](/getting-started/)
+**Back to:** [Getting Started →](/getting-started/)

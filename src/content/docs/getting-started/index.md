@@ -6,53 +6,84 @@ redirect_from:
   - /tutorial/
 ---
 
-Discover how to leverage the Keboola platform to effortlessly extract data from various sources,  transform it, and securely store it within the Keboola platform. 
-Uncover the capabilities to not only store the transformed data but also to efficiently write it to a desired destination. Additionally, master the art of 
-automating the entire data pipeline for enhanced efficiency and consistency. This tutorial will guide you through basic usage of Keboola platform.
+Keboola is a platform for moving data around and doing something useful to it on the way:
+pull it out of the systems that hold it, reshape it, put the result where people need it, and
+keep doing that on a schedule without anyone watching. This guide walks you through that
+whole loop once, on sample data, in about 30 minutes.
 
+<!-- Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. -->
 
+By the end you will have a pipeline that is genuinely running. Not a demo — the same
+mechanism a production project uses, just smaller.
 
-## Prerequisites 
+## What you will build
 
-If you are new to Keboola, we recommend exploring our comprehensive [platform overview](/overview/). 
-This resource will help you become acquainted with commonly used terms and gain a solid understanding of the Keboola ecosystem.
+| Phase | What happens | Keboola calls it |
+|---|---|---|
+| Load | four CSV files become four tables | a **data source connector** |
+| Transform | SQL joins them into one wide table | a **transformation** |
+| Deliver | that table appears in a Google Sheet | a **data destination connector** |
+| Automate | all of it runs daily, in order, and emails you if it breaks | a **flow** |
 
-To get started, ensure you have access to a Keboola project. If you haven’t got one yet, reach out to us at sales@keboola.com, 
-or create a free project [here](https://connection.us-east4.gcp.keboola.com/wizard) instantly.
+The data is a small sales pipeline: opportunities, the accounts they belong to, the users who
+own them, and each user's seniority. The join produces the table someone would actually want
+to look at — every opportunity with its account, its owner, and how likely it is to close.
 
-If you are a developer looking to contribute new components to the Keboola platform, your [development project](https://developers.keboola.com/#development-project) 
-will be automatically set up upon registering as a developer. 
+## Before you start
 
-Please be aware that for a comprehensive understanding of the tutorial and to unlock the full capabilities of Keboola, it is recommended to have at least a basic understanding of the [SQL](https://en.wikipedia.org/wiki/SQL) language. SQL is commonly used for data transformation, often with Python or R alongside.
+- **A project.** [Step 1](/getting-started/project/) gets you one; the Free Plan is enough
+  for everything here.
+- **Basic SQL.** One `SELECT` with a couple of `JOIN`s. If you have never written SQL, the
+  queries are given in full and you can paste them.
+- **A Google account**, for the delivery step. Skippable — you can stop after transforming
+  and still have learned the core of the platform.
 
-## Getting Started
-Upon completing this tutorial, you will gain confidence in:
-1. Integrating data seamlessly into Keboola
-2. Effectively manipulating data through Keboola transformation
-3. Automating the entire data pipeline
-4. Leveraging Keboola for advanced analytics and transformation development
+Nothing needs installing. Everything below happens in the browser.
 
-To expedite your onboarding, we've organized the tutorial into basic and advanced steps.
+:::note[New to the platform entirely?]
+If you would rather understand the pieces before touching them, read the
+[platform overview](/overview/) first — what the components are, how Storage is organized,
+what a stack is. This guide explains each piece as it comes up, so you can also just start.
+:::
 
-### Basic Steps
-1. [**Loading data manually**](/getting-started/load/): Load four CSV files into Keboola Storage tables.
-2. [**Data manipulation**](/getting-started/transform/): Utilize transformations to create a denormalized table from the input tables and make minor modifications.
-3. [**Writing data into Google Sheets**](/getting-started/write/): Write the transformed data to Google Sheets.
+## The steps
 
-### Advanced Steps
-For a deeper exploration of Keboola features, aligning with real-world usage, consider the following advanced steps:
-1. **Loading data using data source connectors**
-   - [Google Sheets data source](/getting-started/load/googlesheets/): Load data from an external spreadsheet using the Google Sheets data source connector.
-   - [Database data source](/getting-started/load/database/): Load data from an external database utilizing the [Snowflake Database data source connector](/getting-started/load/database/) (applicable to all Keboola-supported [database data sources](/components/extractors/database/)).
-2. [**Data manipulation: creating and using a workspace**](/getting-started/transform/workspace/)
-   - Create and utilize a workspace, a secure development and analytical environment. It enables you to interact with data and develop transformation code on a copy of your production data.
-3. [**Automation: setting up a flow**](/getting-started/automate/)
-   - Specify task sequences and configure their automatic execution through the setup of a flow.
-4. [**Ad-hoc data analysis**](/getting-started/ad-hoc/)
-   - Explore how to perform ad-hoc data analysis, allowing flexibility in interacting with arbitrary data.
-5. [**Development branches**](/getting-started/branches/)
-   - Learn how to safely modify a running project using development branches.
-6. [**Command-line interface (CLI)**](https://developers.keboola.com/cli/)
-   - Operate a project efficiently using the Keboola command-line tool.
+1. **[Get a Project](/getting-started/project/)** — create or join one, learn what a project
+   and a stack are, find your way around.
+2. **[Load Your Data](/getting-started/load/)** — upload the four sample files into Storage
+   and understand buckets, tables and stages.
+3. **[Transform Your Data](/getting-started/transform/)** — write the SQL that joins them,
+   and see how input and output mapping keep your source data safe.
+4. **[Send Your Data Somewhere](/getting-started/write/)** — push the result to a Google
+   Sheet with a data destination connector.
+5. **[Automate It with a Flow](/getting-started/automate/)** — run the whole thing in order,
+   on a schedule, with notifications.
+6. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
+   you actually want to do, including how to drive Keboola from an AI assistant, an IDE, or
+   your terminal.
 
-These advanced steps will provide you with a comprehensive understanding of Keboola's capabilities and their practical application in real-world scenarios.
+Read them in order. Each step ends with a link to the next, and every page states what it
+assumes so you can also land on one directly and catch up.
+
+## Going further
+
+Optional side trips, once the main path makes sense. None of them are needed to finish the
+arc:
+
+- **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
+  **[Load from a Database](/getting-started/load/database/)** — do the loading step the way a
+  real project does it, with a connector instead of a manual upload.
+- **[Use a Workspace](/getting-started/transform/workspace/)** — develop and test SQL against
+  a copy of your data before committing it to a transformation.
+- **[Ad-Hoc Data Analysis](/getting-started/ad-hoc/)** — explore arbitrary data in a Python
+  or R notebook rather than building a pipeline.
+- **[Development Branches](/getting-started/branches/)** — change a running project safely,
+  review the diff, then merge.
+
+## If you are planning a rollout, not learning the tool
+
+This guide is for one person building one pipeline. For introducing Keboola to a team —
+project architecture, a data model, naming conventions, governance — start with
+[Platform Onboarding](/overview/onboarding/) instead.
+
+**Next:** [Get a project →](/getting-started/project/)

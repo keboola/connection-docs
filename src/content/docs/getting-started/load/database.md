@@ -56,12 +56,8 @@ This action will execute the data extraction, generating three new tables in you
       - stores results in the specified tables in Storage.
 
 For more advanced configuration options, such as incremental fetch, incremental load, or advanced SQL query mode, 
-please navigate to Advanced Mode. Note that we will not cover the advanced mode options in this tutorial.
+please navigate to Advanced Mode. Note that we do not cover the advanced mode options here.
 
 ![Advanced Mode](/getting-started/load/db-picture8.png)
 
-## What's Next
-Proceed to [Data Manipulation](/getting-started/transform/).
-
-## If You Need Help
-Feel free to reach out to our [support team](/management/support/) if there’s anything we can help with.
+**Next:** [Transform your data →](/getting-started/transform/)

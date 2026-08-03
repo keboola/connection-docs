@@ -10,14 +10,24 @@ the ins and outs of Keboola.
 
 
 ## Where to Start
-If you are new to Keboola and **would like a quick orientation** to the Keboola ecosystem, explore our comprehensive [overview](/overview/).
 
-Ready to take the next step? Grab your free trial and set up your account [here](https://connection.us-east4.gcp.keboola.com/wizard),
-or connect with our team directly through [this link](https://www.keboola.com/contact).
+**New to Keboola?** Work through [Getting Started](/getting-started/). In about 30 minutes you
+build a real pipeline — load data, transform it with SQL, deliver the result, and put it on a
+schedule. It starts by [getting you a project](/getting-started/project/), free.
 
-For some hands-on experience, dive into our Getting Started [tutorial](/getting-started/).
+Prefer to understand the pieces first? The [platform overview](/overview/) explains what the
+components are, how Storage works, and what a stack is.
 
-Rest assured, we're here to support you whenever needed. Reach out via email at support@keboola.com or use the [support form](https://help.keboola.com/management/support/) directly within your project.
+**Rolling Keboola out to a team?** Start with [Platform Onboarding](/overview/onboarding/) —
+usage blueprint, project architecture, data model, and governance.
+
+**Working with an AI assistant?** [Kai](/kai/) is built into the project, the
+[MCP server](/ai/mcp-server/) connects Keboola to your IDE, and the [kbagent CLI](/cli/) puts
+it in your terminal.
+
+Need a project or a quote? [Create a free one](https://connection.us-east4.gcp.keboola.com/wizard)
+or [talk to us](https://www.keboola.com/contact). For anything else, email support@keboola.com
+or use the [support form](/management/support/) inside your project.
 
 ## Manage Keboola
 - [User management](/management/#user-management)
