@@ -75,7 +75,7 @@ This script reads a CSV file line by line and checks whether it is odd or even.
 Finally, the result is written to either `odd.csv` or `even.csv`.
 
 Commit and push the code in your repository and tag it with a [normal version tag](https://semver.org/#spec-item-2).
-This will trigger a [build on Travis CI](/extend/component/tutorial/#building-the-component) and automatically
+This will trigger a [build on Travis CI](/extend/component/tutorial/#building-component) and automatically
 deploy the new version into Keboola. Keep in mind that after the deployment, it may take up to 5 minutes for the update to propagate to all Keboola instances.
 
 ## Verifying

@@ -64,7 +64,7 @@ deploy:
 The `.travis.yml` file offers a vast number of [configuration options](https://docs.travis-ci.com/user/customizing-the-build/).
 We only need a few of them though. The options `sudo`, `language` and `services` define that all we need is Docker.
 The `before_script` section executes a single shell command which
-[builds the image](/extend/component/tutorial/debugging/#step-2--build-the-image) and tags it `keboola-component`. The
+[builds the image](/extend/component/tutorial/debugging/#step-2--build-image) and tags it `keboola-component`. The
 tag is completely arbitrary at this moment, but we'll need it later. The `after_success` section simply lists the
 built images in the log.
 
@@ -120,7 +120,7 @@ image `quay.io/keboola/developer-portal-cli-v2`. The entire script uses the foll
 - `KBC_DEVELOPERPORTAL_VENDOR` -- Vendor ID
 - `KBC_DEVELOPERPORTAL_APP` -- Component ID
 
-You can read more about using the Developer Portal CLI in the [chapter about running components](/extend/component/running/#running-a-component).
+You can read more about using the Developer Portal CLI in the [chapter about running components](/extend/component/running/#running-component).
 The deploy script first pulls the image and then calls the `ecr:get-repository` command (while passing in the
 `KBC_DEVELOPERPORTAL_USERNAME` and `KBC_DEVELOPERPORTAL_PASSWORD` variables). The result of that command is stored in the `REPOSITORY`
 variable. After that the `ecr:get-login` command is called; it returns
@@ -150,8 +150,8 @@ or
 The above deploy script requires four environment variables to be set. Set the following environment variables in the repository configuration:
 
  - `KBC_DEVELOPERPORTAL_APP` the component ID -- e.g.: `keboola-test.ex-docs-tutorial`
- - `KBC_DEVELOPERPORTAL_PASSWORD` with the [**Service Account**](/extend/component/tutorial/#creating-a-deployment-account) password
- - `KBC_DEVELOPERPORTAL_USERNAME` with the [**Service Account**](/extend/component/tutorial/#creating-a-deployment-account) login
+ - `KBC_DEVELOPERPORTAL_PASSWORD` with the [**Service Account**](/extend/component/tutorial/#creating-deployment-account) password
+ - `KBC_DEVELOPERPORTAL_USERNAME` with the [**Service Account**](/extend/component/tutorial/#creating-deployment-account) login
  - `KBC_DEVELOPERPORTAL_VENDOR` with the vendor of the component -- e.g.: `keboola-test`
 
 ![Screenshot -- Repository Configuration](/extend/component/deployment/deploy-config-3.png)
@@ -282,7 +282,7 @@ If you want to use another continuous integration setting or deploy to the repos
 As in the [above script](/extend/component/deployment/#deploy-script),
 we recommend using the [Developer Portal CLI client](https://github.com/keboola/developer-portal-cli-v2). This CLI tool (runnable in Docker or PHP)
 allows you to obtain the repository for a component and push credentials to that repository. See the chapter about
-[running components](/extend/component/running/#running-a-component), for example, how to obtain the AWS registry credentials.
+[running components](/extend/component/running/#running-component), for example, how to obtain the AWS registry credentials.
 If you want to get even more low level, you can use the [Developer Portal API](https://api.keboola.com/?service=developer-portal) directly.
 It also allows you to [generate credentials for a service account](https://api.keboola.com/?service=developer-portal#post-/vendors/-vendor-/credentials)
 programmatically. We use our AWS ECR registry for hosting all component images.

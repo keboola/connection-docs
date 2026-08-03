@@ -25,7 +25,7 @@ examples of working with the [Component Configuration API](/storage/api/configur
 If you want to implement your own processor, see our [implementation notes](/extend/component/implementation/#implementing-processors).
 
 If the component does not contain the [respective configuration field](/extend/component/ui-options/#genericdockerui-processors) or
-an [advanced configuration mode](/extractors/other/aws-s3/#advanced), processors are
+an [advanced configuration mode](/components/extractors/storage/aws-s3/), processors are
 completely **invisible in the UI**. In such case, modifying the configuration through the UI may delete the processor configuration
 (though you can always [rollback](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-/versions/-versionId-/rollback)).
 Therefore be sure to add an **appropriate warning** to the configuration description.
@@ -187,7 +187,7 @@ you have to use the [Update Configuration Row](https://api.keboola.com/?service=
 API call to set the processors.
 
 Provide `componentId`, `configurationId`, `rowId` and the contents of the configuration in
-the same manner as when [adding a processor to configuration](#adding-a-processor).
+the same manner as when [adding a processor to configuration](#adding-processor).
 
 See an example *Add processor to S3 Extractor configuration Row* in
 [our collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).

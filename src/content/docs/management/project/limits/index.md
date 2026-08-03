@@ -103,10 +103,10 @@ The storage size is the sum of the sizes of the tables in your [table Storage](/
 [Aliases](/storage/tables/#aliases) and [linked buckets](/catalog/) do 
 not count towards this number, and neither do [files](/storage/files/).
 
-The table storage size is measured as it is reported by the underlying [backend](/storage/#backend-properties). 
+The table storage size is measured as it is reported by the underlying [backend](/storage/#storage-backend-types-and-features). 
 This means that the reported size is substantially smaller than the size of imported raw CSV files, thanks to 
 compression used by the database backend. This also means that reported sizes of the same data may differ slightly 
-across projects with different [backends](/storage/#backend-properties) (or between buckets in a project
+across projects with different [backends](/storage/#storage-backend-types-and-features) (or between buckets in a project
 with mixed backends).
 
 ## Platform Limits

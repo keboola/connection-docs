@@ -32,7 +32,7 @@ Several variants of connectors may exist for each database type, depending on th
 These connectors work on a relational level, performing queries against the source database to synchronize data.
 This straightforward approach suits most use cases and supports Timestamp-based CDC replication.
 
-All are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and offer an [advanced mode](/components/extractors/database/sqldb/).
+All are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/).
 
 Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/).
 

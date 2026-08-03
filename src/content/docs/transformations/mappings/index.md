@@ -54,7 +54,7 @@ Depending on the transformation backend, the table input mapping process can do 
 
 - **Database Staging**: Copy the selected tables to *tables* in a newly created *database* schema. If you have not selected any tables and [read-only input mappings](/transformations/mappings/#read-only-input-mapping) are enabled, you can access them automatically in the workspace. In this case the tables are not copied.
 - **File Staging**: Export the selected tables to *CSV files* and copy them to a designated staging *Storage* 
-(not to be confused with a [file mapping](/transformations/mappings/#file-mapping), as we're still working with tables).
+(not to be confused with a [file mapping](/transformations/mappings/#file-input-mapping), as we're still working with tables).
 
 Depending on the transformation types, you can either build your transformations working 
 with database tables or with CSV files. Furthermore, the CSV files can be placed locally with the transformation
@@ -181,7 +181,7 @@ This function is automatically enabled in transformations.
 
 ##### Read-only input mapping
 
-*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+*Note: You must be using [new transformations](/transformations/) to see this feature.*
 
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
 Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
