@@ -20,7 +20,7 @@ mechanism a production project uses, just smaller.
 
 | Phase | What happens | Keboola calls it |
 |---|---|---|
-| Load | four CSV files become four tables | a **data source connector** |
+| Load | four CSV files, fetched from a URL, become four tables | a **data source connector** |
 | Transform | SQL joins them into one wide table | a **transformation** |
 | Deliver | that table appears in a Google Sheet | a **data destination connector** |
 | Automate | all of it runs daily, in order, and emails you if it breaks | a **flow** |
@@ -52,8 +52,8 @@ what a stack is. This guide explains each piece as it comes up, so you can also 
 
 1. **[Get a Project](/getting-started/project/)** — create or join one, learn what a project
    and a stack are, find your way around.
-2. **[Load Your Data](/getting-started/load/)** — upload the four sample files into Storage
-   and understand buckets, tables and stages.
+2. **[Load Your Data](/getting-started/load/)** — pull the four sample files into Storage with
+   a connector, and understand buckets, tables and stages.
 3. **[Transform Your Data](/getting-started/transform/)** — write the SQL that joins them,
    and see how input and output mapping keep your source data safe.
 4. **[Send Your Data Somewhere](/getting-started/write/)** — push the result to a Google

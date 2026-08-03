@@ -22,9 +22,8 @@ images. -->
 
 Everything from the previous steps, in one project:
 
-- the four CSV Import configurations from [Load Your Data](/getting-started/load/) — or the
-  [Google Sheets](/getting-started/load/googlesheets/) and
-  [database](/getting-started/load/database/) connectors, if you took those side trips,
+- the `[TUTORIAL] Sample data` HTTP configuration from
+  [Load Your Data](/getting-started/load/),
 - the `Denormalize opportunities` transformation from
   [Transform Your Data](/getting-started/transform/),
 - the Google Sheets destination from
@@ -40,8 +39,13 @@ configuration to run, a notification to send, a variable to set.
 
 That is the whole model, and it makes the ordering obvious: things that can happen at the same
 time go in one phase; things that depend on each other go in separate phases. Your pipeline is
-three phases — extract, transform, deliver — because the transformation needs all four tables
+three phases — extract, transform, deliver — because the transformation needs the four tables
 before it can join them, and the sheet needs the joined table before it can deliver it.
+
+Each phase here holds a single task, so nothing runs in parallel yet. Parallelism shows up the
+moment you have a second source: two connectors both go in phase 1 and run at the same time.
+Inside your HTTP configuration the four tables are already fetched by one job — row-based
+components like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel).
 
 Flows can also branch on what happened: retry a task, take a different path on failure, end
 early. That is [conditions](/flows/#conditions), and you need none of it yet.
@@ -55,39 +59,33 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
    ![Screenshot - Create a flow](/getting-started/automate/automate1.png)
 
 2. Use the plus icon (**+**) to add your first task and pick **Component**. Select the
-   `[TUTORIAL] Opportunity` CSV Import configuration.
+   `[TUTORIAL] Sample data` HTTP configuration.
 
    ![Screenshot - Add the first component task](/getting-started/automate/automate2.png)
 
-3. Add the other three CSV Import configurations **to the same phase** — they read four
-   independent files, so there is no reason to wait for one before starting the next. The
-   builder distinguishes adding a task *into* an existing phase from starting a *new* one;
-   phases are the numbered groups (**Step 1**, **Step 2**, …) and the tasks sit inside them.
-
-   <!-- VERIFY(owner): name the exact builder affordance for "add into this phase" vs "add a
-   new phase" once walked live — the legacy capture predates the conditional-flow builder. -->
-
-   ![Screenshot - Four tasks in one phase](/getting-started/automate/automate3.png)
-
-4. Add a **new phase** and put the `Denormalize opportunities` transformation in it. Being in
-   a later phase is what guarantees all four tables have landed before the SQL runs.
+3. Add a **new phase** and put the `Denormalize opportunities` transformation in it. Being in a
+   later phase is what guarantees the tables have landed before the SQL runs.
 
    ![Screenshot - The transformation in its own phase](/getting-started/automate/automate4.png)
 
-5. Add a third phase holding the Google Sheets destination configuration.
+4. Add a third phase holding the Google Sheets destination configuration.
 
    ![Screenshot - The destination phase](/getting-started/automate/automate5.png)
 
-You now have three phases: four parallel loads, then the transformation, then the delivery.
+   <!-- VERIFY(owner): name the exact builder affordance for "add a task into this phase" vs
+   "start a new phase" once walked live — the legacy captures predate the conditional-flow
+   builder. -->
+
+You now have three phases: the load, then the transformation, then the delivery.
 
 ![Screenshot - The finished flow](/getting-started/automate/automate10.png)
 
 :::note[If you took the connector side trips]
-If your data now comes from the Google Sheets and database connectors instead of CSV Import,
-put both connectors in the first phase — and open the transformation's **input mapping** to
-point at the tables those connectors produce, because their table names differ from
-`in.c-csv-import.*`. A flow that runs the right components against the wrong input mapping
-succeeds and produces nothing useful.
+If you also added the Google Sheets or database connector, put them in the first phase
+alongside the HTTP configuration — that is where the parallelism above becomes real. Then open
+the transformation's **input mapping** and point it at the tables those connectors produce,
+since they land in their own buckets. A flow that runs the right components against the wrong
+input mapping succeeds and produces nothing useful.
 
 ![Screenshot - Edit the input mapping](/getting-started/automate/automate12.png)
 :::
@@ -130,14 +128,14 @@ Notifications tab is enough here.
 ## Check it worked
 
 - The flow's run history shows one successful run with all three phases green.
-- **Jobs** lists a job per task — four loads, one transformation, one delivery — alongside the
+- **Jobs** lists a job per task — the load, the transformation, the delivery — alongside the
   flow's own orchestration job.
 - The schedule is shown on the flow, with the next run time.
 
 ## If it goes wrong
 
 - **The transformation fails inside the flow but works on its own.** Its phase is running
-  before the loads finish — check that the connectors sit in an *earlier* phase, not the same
+  before the load finishes — check that the connector sits in an *earlier* phase, not the same
   one.
 - **Everything succeeds but the sheet is unchanged.** The destination ran before the
   transformation wrote its output, or its phase is missing entirely. Read the run detail top
@@ -151,7 +149,7 @@ Notifications tab is enough here.
 :::tip[Or ask Kai]
 Kai can build the flow for you and explain what it did:
 
-> Create a flow that runs my four CSV Import configurations in parallel, then the
+> Create a flow that runs my `[TUTORIAL] Sample data` HTTP configuration, then the
 > `Denormalize opportunities` transformation, then the Google Sheets destination.
 
 Set the schedule and the notifications yourself afterwards — those are quick, and it is worth

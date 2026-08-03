@@ -14,7 +14,7 @@ Step 6, the last, of the [Getting Started](/getting-started/) arc.
 
 | Step | What it does | Where it lives |
 |---|---|---|
-| CSV Import configurations | bring raw data into the project | **Components** |
+| HTTP configuration | brings raw data into the project | **Components** |
 | SQL transformation | joins the raw tables into one table | **Transformations** |
 | Google Sheets destination | delivers the result outside Keboola | **Components** |
 | Flow | runs all of it, in order, on a schedule | **Flows** |
@@ -23,9 +23,9 @@ Every job that ran is in **Jobs**, and every table it touched is in **Storage**.
 
 ## Pick your next thing
 
-**"My real data is not in a CSV file."** Browse the
+**"My real data is not a CSV file on a public URL."** Browse the
 [data source connectors](/components/extractors/) — databases, APIs, cloud storage, ad
-platforms, CRMs. They configure the same way the CSV Import did, and drop into a flow the
+platforms, CRMs. They configure the same way the HTTP connector did, and drop into a flow the
 same way. Two worked examples are in this guide already:
 [Google Sheets](/getting-started/load/googlesheets/) and
 [a database](/getting-started/load/database/).

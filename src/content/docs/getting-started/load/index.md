@@ -1,142 +1,152 @@
 ---
 title: 'Load Your Data'
 slug: 'getting-started/load'
-description: 'Load your first tables into Keboola Storage by uploading CSV files with the CSV Import connector, then check the result in Storage.'
+description: 'Load your first four tables into Keboola Storage with the HTTP data source connector, pulling the sample CSV files straight from a URL.'
 redirect_from:
   - /tutorial/load/
 ---
 
 Nothing in Keboola happens until there is data in **Storage**. This step puts four tables
-there by uploading CSV files by hand — the fastest way to get something real to work with.
+there using a **data source connector** — the thing that does all real loading in Keboola.
 Step 2 of the [Getting Started](/getting-started/) arc.
 
-<!-- Tutorial-type page (step 2 of 6). UI labels and screenshots pending live verification in demo project 264. -->
+<!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
+and cannot take new configurations (verified live in project 264, 2026-08-04). Field names and
+behaviour sourced from components/extractors/storage/http/index.md, which documents this exact
+connector against these exact sample files. Screenshots pending the live walk. -->
 
 ## What you need
 
-- A Keboola project you can sign in to. If you do not have one, start with
-  [Get a Project](/getting-started/project/).
-- The four sample files below, downloaded to your computer.
+A Keboola project you can sign in to. If you do not have one, start with
+[Get a Project](/getting-started/project/).
+
+Nothing to download — the connector fetches the files itself.
 
 ## The sample data
 
 Four small tables describing a sales pipeline: opportunities, the accounts they belong to,
-the users who own them, and each user's seniority level.
+the users who own them, and each user's seniority level. They are published here, and the
+connector reads them over HTTPS:
 
-- [opportunity.csv](/getting-started/opportunity.csv) — business opportunities
-- [account.csv](/getting-started/account.csv) — the accounts
-- [user.csv](/getting-started/user.csv) — the users
-- [level.csv](/getting-started/level.csv) — company levels per user
+| Table | File |
+|---|---|
+| opportunities | [`/getting-started/opportunity.csv`](/getting-started/opportunity.csv) |
+| accounts | [`/getting-started/account.csv`](/getting-started/account.csv) |
+| users | [`/getting-started/user.csv`](/getting-started/user.csv) |
+| levels | [`/getting-started/level.csv`](/getting-started/level.csv) |
 
-Download all four before you start. All characters in this data are fictitious, and any
-resemblance to real persons, living, dead, undead, unborn, or otherwise semi-existent is
-purely coincidental.
+All characters in this data are fictitious, and any resemblance to real persons, living, dead,
+undead, unborn, or otherwise semi-existent is purely coincidental.
 
-## Two ways data gets in
+## How loading works
 
-Keboola loads data with **data source connectors** — components that pull from a source on
-demand or on a schedule. One of them, **CSV Import**, simply takes a file you upload.
+Data gets into Keboola through **data source connectors** — components that fetch from a source
+on demand or on a schedule. There are [hundreds of them](/components/extractors/): databases,
+APIs, ad platforms, cloud drives. They differ in how they authenticate and what they can fetch,
+but they all end the same way: rows in a Storage table.
 
-Manual upload is the right tool when you are starting a project or proving something out.
-For production you move to a connector that talks to the real source: a database, an API,
-a cloud drive. This step uses CSV Import; the two side trips at the end of this page do the
-same job with a [Google Sheet](/getting-started/load/googlesheets/) and a
-[database](/getting-started/load/database/).
+You will use the **HTTP** connector, which downloads CSV files from a URL. It is the simplest
+one that still behaves like a real connector — it can be re-run, scheduled, and dropped into a
+flow, which is what [step 5](/getting-started/automate/) depends on.
 
-## Load the first table
+One configuration can fetch **many** files, so you will build a single configuration holding
+four tables rather than four separate configurations.
 
-1. Open **Components** and search for **CSV Import**.
+## Create the configuration
 
-   ![Screenshot - Components search for CSV Import](/getting-started/load/picture1.png)
+1. Open **Components** and search for `HTTP`. Pick the **HTTP** *data source*.
 
-2. Click **Add Component**, then **Connect To My Data**.
+   ![Screenshot - Find the HTTP data source connector](/getting-started/load/picture1.png)
 
-   ![Screenshot - Add the CSV Import component](/getting-started/load/picture2.png)
+2. Click **Add Component**, then create a configuration named `[TUTORIAL] Sample data` and give
+   it a description. Descriptions are what keep a project readable six months later; see the
+   [best practices cheat sheet](/overview/onboarding/cheat-sheet/).
 
-3. Name the configuration `[TUTORIAL] Opportunity`, add a description, and click
-   **Create Configuration**.
+   ![Screenshot - Create the configuration](/getting-started/load/picture3.png)
 
-   ![Screenshot - Name the new configuration](/getting-started/load/picture3.png)
+3. Set the **base URL** — the prefix shared by every file this configuration downloads:
 
-   One connector can hold many configurations — you will create four here, one per file.
-   Clear names and descriptions are what keep a project readable six months later; see the
-   [best practices cheat sheet](/overview/onboarding/cheat-sheet/) for conventions.
+   ```
+   https://help.keboola.com
+   ```
 
-4. In the **CSV File** section, click **Select file** and pick the
-   [opportunity.csv](/getting-started/opportunity.csv) you downloaded.
+   ![Screenshot - Set the base URL](/getting-started/load/picture4.png)
 
-   ![Screenshot - Select the CSV file](/getting-started/load/picture4.png)
+## Add the four tables
 
-5. In **Upload Settings**, click the pen icon next to **Destination**. The destination is
-   three separate controls, not one string:
+Each table is a [configuration row](/components/#configuration-rows): its own path and settings,
+sharing the configuration's base URL.
 
-   | Control | Set it to | Why |
-   |---|---|---|
-   | Stage | `IN` | data arriving in the project |
-   | Bucket | `csv-import` | already the default |
-   | Table name | `opportunity` | the only one you need to change |
+4. Click **Add Table** and name it `opportunity`. The name seeds the Storage table name.
 
-   Click **Save**. Together they make the table's full Storage ID,
-   `in.c-csv-import.opportunity` — the name the next step's SQL refers to. (Storage adds the
-   `c-` prefix to bucket names itself.)
+5. In the table's settings, set the **path** to the file, relative to the base URL:
 
-   ![Screenshot - Set the destination table](/getting-started/load/picture5.png)
+   ```
+   /getting-started/opportunity.csv
+   ```
 
-6. Click **Upload**.
+6. Under the header options, choose **Read from the file(s) header** — the sample files carry
+   column names on the first line. (The alternatives are setting the columns by hand, or having
+   them generated as `col_1`, `col_2`, ….)
 
-   ![Screenshot - Upload the file](/getting-started/load/picture6.png)
+   ![Screenshot - Table path and header settings](/getting-started/load/picture5.png)
 
-## Load the other three
+7. Save the table, then repeat steps 4–6 for the other three:
 
-Go back to **Components** and repeat steps 1–6 for the remaining files, changing the
-configuration name and the table name each time:
+   | Table name | Path |
+   |---|---|
+   | `account` | `/getting-started/account.csv` |
+   | `user` | `/getting-started/user.csv` |
+   | `level` | `/getting-started/level.csv` |
 
-| File | Configuration name | Table name | Full Storage ID |
-|---|---|---|---|
-| `account.csv` | `[TUTORIAL] Account` | `account` | `in.c-csv-import.account` |
-| `user.csv` | `[TUTORIAL] User` | `user` | `in.c-csv-import.user` |
-| `level.csv` | `[TUTORIAL] Level` | `level` | `in.c-csv-import.level` |
+8. Run the configuration.
 
-The destination names matter: the transformation in the next step refers to these exact
-tables.
+   ![Screenshot - Run the configuration](/getting-started/load/picture6.png)
 
 ## Check it worked
 
-Open **Storage**. Data is organized into **buckets**, and each bucket holds tables. You
-should see one bucket — listed as `csv-import` with an **IN** badge, its full ID being
-`in.c-csv-import` — containing four tables:
+Open **Storage**. Data lives in **buckets**, and each bucket holds tables. The connector created
+a bucket of its own — named after the configuration, something like `keboola-ex-http-1234567`,
+shown with an **IN** badge — holding four tables: `opportunity`, `account`, `user` and `level`.
 
 ![Screenshot - The four tables in Storage](/getting-started/load/picture7.png)
 
-Click a table name to see its columns, row count and a **Data Sample** of the actual
-contents. If the sample looks like your CSV, this step is done.
+Click a table to see its columns, row count and a **Data Sample** of the real contents. If
+`opportunity` has a few hundred rows and columns like `AccountId` and `Probability`, this step is
+done.
 
 ![Screenshot - Table detail with data sample](/getting-started/load/picture8.png)
 
+:::note[Your bucket name will differ]
+The bucket name contains the configuration's own ID, so yours will not match the screenshots
+exactly — and that is fine. The next step lets you name these tables whatever you like inside
+the transformation, and it is those names the SQL depends on.
+:::
+
 ## If it goes wrong
 
-- **The upload job fails.** Open **Jobs** and read the job's log — for CSV Import the usual
-  cause is a delimiter or encoding mismatch. The files above are comma-separated UTF-8.
-- **The table lands somewhere unexpected.** The destination was left at its default. Edit
-  the configuration's **Upload Settings**, fix the destination, and upload again; the
-  wrongly named table can be deleted in Storage.
-- **Every row arrives as a single column.** The file was saved with semicolons by a
-  spreadsheet app. Re-download the original, or set the delimiter in the configuration.
-- **Nothing happens when you click Upload.** The file selection did not stick — reselect
-  the file, save the configuration, then upload.
+- **The job fails with a 404.** The path is wrong, or missing its leading slash. Base URL and
+  path are concatenated, so `https://help.keboola.com` + `/getting-started/user.csv` is right,
+  while a base URL with a trailing slash gives you a double slash.
+- **Every row arrives as one column.** The **Delimiter** setting does not match the file. These
+  files are comma-separated.
+- **The first data row is missing, or columns are called `col_1`.** Wrong header option — pick
+  **Read from the file(s) header**.
+- **The table is empty but the job succeeded.** The URL returned an HTML error page instead of a
+  CSV. Open it in a browser to see what actually comes back.
 
 :::tip[Or ask Kai]
 Kai can inspect what landed and tell you whether it looks right:
 
-> List the tables in the `in.c-csv-import` bucket with their row counts, and show me a
-> sample of `opportunity`.
+> List the tables the HTTP connector just created, with their row counts, and show me a sample of
+> `opportunity`.
 :::
 
 ## Going further
 
-- [Load from Google Sheets](/getting-started/load/googlesheets/) — the same data pulled
-  from a spreadsheet automatically instead of uploaded by hand.
-- [Load from a database](/getting-started/load/database/) — the pattern every database
-  connector follows.
+- [Load from Google Sheets](/getting-started/load/googlesheets/) — the same data pulled from a
+  spreadsheet, with an authorized account instead of a public URL.
+- [Load from a database](/getting-started/load/database/) — the pattern every database connector
+  follows.
 
 **Next:** [Transform your data →](/getting-started/transform/)

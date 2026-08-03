@@ -14,12 +14,13 @@ Step 3 of the [Getting Started](/getting-started/) arc.
 
 ## What you need
 
-Four tables in Storage — `in.c-csv-import.opportunity`, `account`, `user` and `level` —
-from [Load Your Data](/getting-started/load/).
+Four tables in Storage — `opportunity`, `account`, `user` and `level` — from
+[Load Your Data](/getting-started/load/). They sit in whatever bucket the connector created,
+and its name contains a configuration ID, so yours will not match the screenshots.
 
-If your tables have different Storage names, that is fine: what the SQL depends on is the
-**Table name** you give each one in the input mapping below. Those must be exactly
-`opportunity`, `account`, `user` and `level`, or you have to edit the queries to match.
+That does not matter. What the SQL depends on is the **Table name** you give each table in the
+input mapping below: those must be exactly `opportunity`, `account`, `user` and `level`, or you
+have to edit the queries to match.
 
 ## How a transformation works
 
@@ -70,9 +71,10 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
    ![Screenshot - New input mapping](/getting-started/transform/input-mapping1.png)
 
-2. Set **Source** to `in.c-csv-import.account` — the field searches, so typing `acc` finds
-   it. **Table name** fills in automatically as `account`; that is the name your SQL will
-   use. Click **Add Input**.
+2. Set **Source** to your `account` table — the field searches, so typing `acc` finds it.
+   **Table name** fills in automatically as `account`; that is the name your SQL will use, and
+   it is what makes the queries below work regardless of which bucket the table lives in. Click
+   **Add Input**.
 
 3. Add the other three the same way — `opportunity`, `user` and `level`. You can select
    several tables at once.

@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 
-After you have loaded your tables, either [manually](/getting-started/load/) or
+After you have loaded your tables, either [from a URL](/getting-started/load/) or
 [using a data source connector](/getting-started/load/database/), [manipulated the data](/getting-started/transform/) in SQL,
 written it [into Google Sheets](/getting-started/write/), and
 set everything to run [automatically](/getting-started/automate/), let's take a look at some additional Keboola 
@@ -40,7 +40,7 @@ Then create a [service account](https://cloud.google.com/bigquery/docs/authentic
 of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 ***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
-[load them from Google Sheets](/getting-started/load/googlesheets/). Or, export them to a CSV file and [load them from local files](/getting-started/load/#manually-loading-data).*
+[load them from Google Sheets](/getting-started/load/googlesheets/). Or, export them to a CSV file, publish it, and [load it over HTTP](/getting-started/load/).*
 
 ### Prepare
 Before you start, have a Google service account and a Google Storage bucket ready.

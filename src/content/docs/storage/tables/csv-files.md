@@ -9,7 +9,7 @@ All data imported to and exported from Storage has to be in the CSV format.
 
 In many cases, our data source and destination connectors take care of the necessary conversion,
 but sometimes you have to be aware of the supported formats --- for
-example, when you are [loading data manually](/getting-started/load/).
+example, when you are [loading data with the HTTP connector](/getting-started/load/).
 
 ## Input CSV Format
 Storage accepts CSV files in the format defined by [RFC 4180 Specification](https://tools.ietf.org/html/rfc4180).

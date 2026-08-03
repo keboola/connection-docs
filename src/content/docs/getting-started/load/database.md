@@ -6,7 +6,7 @@ redirect_from:
   - /tutorial/load/database/
 ---
 
-So far, you have learned to load data into Keboola [manually](/getting-started/load/) and
+So far, you have learned to load data into Keboola [from a URL](/getting-started/load/) and
 via a [Google Sheets data source connector](/getting-started/load/googlesheets/).
 
 Now, let's explore loading data from an external database using the Snowflake Database data source (the procedure is the same for all our database data sources).
