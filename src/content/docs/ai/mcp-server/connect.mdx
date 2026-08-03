@@ -1,0 +1,242 @@
+---
+title: Connect an AI client to Keboola
+slug: 'ai/mcp-server/connect'
+sidebar:
+  label: Connect a Client
+description: 'Connect Claude, ChatGPT, Cursor, Windsurf, VS Code, or Make to the Keboola MCP Server — get your server URL, set the client up, authenticate with OAuth. Plus connecting from your own code with the Claude Messages API, OpenAI Agents SDK, or LangChain.'
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Get your AI client talking to your Keboola project. Every route below ends the same way: you paste a server URL into the client, authenticate with your Keboola account, and pick the project — after which the assistant can use the [Keboola tools](/ai/mcp-server/tools/). For what the server is and how permissions work, see the [MCP Server overview](/ai/mcp-server/).
+
+{/* How-to-type page. Source: the pre-split ai/mcp-server single page (through #1061). Client UI steps not re-verified live in this split — see VERIFY note below. */}
+
+{/* VERIFY(owner: Jordan/Matyáš): client-side menu paths (Claude Settings → Connectors, ChatGPT Developer mode, Windsurf Cascade → Plugins) move often; worth a live pass per client. */}
+
+## Step 1 — Get your server URL
+
+The MCP Server runs on every multi-tenant stack. Your URL is `https://mcp.<YOUR_REGION>.keboola.com/mcp`:
+
+| Stack (region) | Server URL |
+|---|---|
+| US Virginia AWS (default) | `https://mcp.keboola.com/mcp` |
+| US Virginia GCP (us-east4) | `https://mcp.us-east4.gcp.keboola.com/mcp` |
+| EU Frankfurt AWS (eu-central-1) | `https://mcp.eu-central-1.keboola.com/mcp` |
+| EU Ireland Azure (north-europe) | `https://mcp.north-europe.azure.keboola.com/mcp` |
+| EU Frankfurt GCP (europe-west3) | `https://mcp.europe-west3.gcp.keboola.com/mcp` |
+
+You can also copy it from the platform: **[Project Settings](/management/project/) → Users & Settings → MCP Server**, which also shows client-specific instructions and an install button for some clients.
+
+{/* SCREENSHOT(nikita): Project Settings → MCP Server tab in demo project 264, showing the Integration URL. The previous shot (management/project/mcp-server/screenshot.png) was dropped in the split — it showed a stale /sse URL from a non-demo project. */}
+
+## Step 2 — Set up your client
+
+<Tabs syncKey="mcpclient">
+  <TabItem label="Claude">
+    :::note
+    Custom connectors are available on the Free, Pro, Max, Team, and Enterprise plans; each user adds the connector for themselves (Free is limited to one custom connector) and authenticates separately. Rolling a connector out **organization-wide** on Team/Enterprise is done by an Organization Owner under Organization settings → Connectors.
+    :::
+
+    1. In Claude, go to **Settings → Connectors**.
+    2. Click **Add custom connector**.
+    3. Give it a name (Keboola) and paste in your integration URL — `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
+    4. Click **Add**.
+    5. Authenticate with your Keboola account and select the project you want to connect to.
+
+    **Fallback — the `mcp-remote` adapter.** For MCP clients that don't yet support native remote (OAuth) connections, bridge to the remote server with [`mcp-remote`](https://github.com/geelen/mcp-remote). This requires Node.js on your computer.
+
+    1. Open the Claude menu on your computer and select **Settings…**
+    2. Click **Developer** in the left-hand bar, then **Edit Config**.
+    3. Paste this into the config file and save:
+
+       ```json
+       {
+         "mcpServers": {
+           "keboola": {
+             "command": "npx",
+             "args": [
+               "mcp-remote",
+               "https://mcp.<YOUR_REGION>.keboola.com/mcp"
+             ]
+           }
+         }
+       }
+       ```
+
+    4. Restart Claude Desktop. You'll be prompted to authenticate and select a project.
+  </TabItem>
+
+  <TabItem label="ChatGPT">
+    :::note
+    Custom connectors (Developer mode / MCP) are available on ChatGPT Plus, Pro, Business, and Enterprise, and are currently in beta.
+    :::
+
+    1. **Open settings** — log in, click your profile icon in the bottom-left corner, and select **Settings**.
+    2. **Turn on Developer mode** — select the **Connectors** tab, open **Advanced settings**, toggle **Developer mode** on, and acknowledge the warning. Back on the Connectors page, click **Create**.
+    3. **Configure the connector** — in the "New Connector" window, give it a **Name** ("Keboola") and an optional description, then paste your **MCP Server URL** (step 1). Authentication is set to OAuth automatically. Tick the box acknowledging the beta, then click **Create**.
+    4. **Authorize** — you're redirected to Keboola; sign in if prompted and select the project. Once authorized you land back in ChatGPT with a "Keboola is now connected" confirmation.
+    5. **Use it in a chat** — enable the Keboola connector for the conversation from the message composer's tools/connectors menu (the exact control varies by ChatGPT version), then ask about your data: *"What data tables are in my project?"* or *"Show me the latest job runs."*
+  </TabItem>
+
+  <TabItem label="Cursor">
+    Click the deeplink for your region:
+
+    | Stack (region) | Cursor deeplink |
+    |---|---|
+    | US Virginia AWS (default) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5rZWJvb2xhLmNvbS9tY3AifQ%3D%3D) |
+    | US Virginia GCP (us-east4) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC51cy1lYXN0NC5nY3Aua2Vib29sYS5jb20vbWNwIn0%3D) |
+    | EU Frankfurt AWS (eu-central-1) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldS1jZW50cmFsLTEua2Vib29sYS5jb20vbWNwIn0%3D) |
+    | EU Ireland Azure (north-europe) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ub3J0aC1ldXJvcGUuYXp1cmUua2Vib29sYS5jb20vbWNwIn0%3D) |
+    | EU Frankfurt GCP (europe-west3) | [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=keboola&config=eyJ1cmwiOiJodHRwczovL21jcC5ldXJvcGUtd2VzdDMuZ2NwLmtlYm9vbGEuY29tL21jcCJ9) |
+
+    **Alternatively**, install it from the platform:
+
+    1. Go to [Project Settings](/management/project/) → **Users & Settings → MCP Server**.
+    2. Open the **Cursor** tab.
+    3. Click **Install In Cursor**.
+    4. Log in to your Keboola account and select the project.
+  </TabItem>
+
+  <TabItem label="Windsurf">
+    Windsurf supports MCP through its native integration with Cascade. Add the server with a manual configuration:
+
+    1. Open Windsurf settings and go to **Cascade → Plugins**.
+    2. Click **Add MCP Plugin**, or edit `mcp_config.json` directly.
+    3. Add the Keboola MCP Server configuration:
+
+       ```json
+       {
+         "mcpServers": {
+           "keboola": {
+             "serverUrl": "https://mcp.<YOUR_REGION>.keboola.com/mcp"
+           }
+         }
+       }
+       ```
+
+    4. Replace `<YOUR_REGION>` with your stack URL from [step 1](#step-1--get-your-server-url).
+    5. Press the refresh button.
+    6. Authenticate with your Keboola account and select the project.
+
+    For detailed instructions and troubleshooting, see the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin).
+  </TabItem>
+
+  <TabItem label="VS Code">
+    VS Code reaches MCP servers through GitHub Copilot's agent mode. You need VS Code with the **GitHub Copilot** extension and a Copilot subscription (Pro, Business, or Enterprise).
+
+    1. Make sure the GitHub Copilot extension is up to date.
+    2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **MCP: Add Server**.
+    3. This creates or opens your MCP configuration file (`mcp.json`).
+    4. Add the configuration — VS Code connects to remote servers natively over Streamable HTTP, no adapter needed:
+
+       ```json
+       {
+         "servers": {
+           "keboola": {
+             "type": "http",
+             "url": "https://mcp.<YOUR_REGION>.keboola.com/mcp"
+           }
+         }
+       }
+       ```
+
+    5. Replace `<YOUR_REGION>` with your stack URL from [step 1](#step-1--get-your-server-url), and save.
+    6. Restart VS Code, or run **MCP: Restart Servers** from the Command Palette.
+    7. Authenticate with your Keboola account and select the project.
+
+    **Using the tools:** open the Chat view, enable agent mode, and click **Tools** to see the available Keboola tools. Type `#` in the chat to reference a specific tool or resource.
+
+    For detailed setup and troubleshooting, see the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
+  </TabItem>
+
+  <TabItem label="Make">
+    1. Create your scenario in Make.
+    2. Add the **MCP Client** module to it.
+    3. Go to [Project Settings](/management/project/) → **Users & Settings → MCP Server** and open the **MAKE** tab.
+    4. Copy the integration URL shown there and enter it as the server URL in the MCP Client module. Make loads the available Keboola tools automatically.
+  </TabItem>
+
+  <TabItem label="Any other client">
+    Any AI assistant that supports a remote Streamable HTTP connection with OAuth can use the server:
+
+    1. Take the server URL for your stack from [step 1](#step-1--get-your-server-url).
+    2. Paste it into your assistant's settings.
+    3. Save and refresh the assistant. You'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
+
+    If your client can't do remote OAuth yet, bridge to it with the [`mcp-remote` adapter](#step-2--set-up-your-client) shown in the Claude tab, or [run the server locally](/ai/mcp-server/self-hosted/).
+  </TabItem>
+</Tabs>
+
+**Result:** the assistant lists Keboola tools and works in the project with the permissions your Keboola role has. Ask it *"What tables are in my project?"* to confirm the connection.
+
+## Scope the connection to a development branch
+
+To keep an agent's changes off production, send the `X-Branch-Id` HTTP header with your [development branch](/components/branches/) ID (running locally, set `KBC_BRANCH_ID` instead). Without it, the server works on production.
+
+## Connect from your own code
+
+:::note[The rest of this page is more technical]
+The recipes below are for building MCP into your own application or agent framework. If you just wanted to connect an AI client, you're done — skip these, or hand them to your coding agent.
+:::
+
+### Claude Messages API with MCP connector (beta)
+
+Anthropic's [MCP connector](https://platform.claude.com/docs/en/docs/agents-and-tools/mcp-connector) connects remote MCP servers directly through Claude's Messages API, so you don't need a standalone MCP client if you're already calling the API.
+
+- **Direct API calls** — configure servers with the `mcp_servers` parameter in your request, and enable tools via an `mcp_toolset` in the `tools` array.
+- **Beta header** — send `anthropic-beta: mcp-client-2025-11-20` (the earlier `mcp-client-2025-04-04` version is deprecated).
+- **Tool calling** is the MCP functionality currently supported through the connector.
+- **Accessibility** — the target MCP server has to be publicly reachable over HTTP, which the hosted Keboola server is.
+
+For API examples and configuration options, see the [official MCP connector documentation](https://platform.claude.com/docs/en/docs/agents-and-tools/mcp-connector).
+
+### OpenAI Agents SDK (Python)
+
+The [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/mcp/) ships with first-class MCP support. Start the Keboola MCP Server (locally via `uvx`, or remotely over Streamable HTTP) and register it:
+
+```python
+from agents import Agent, Runner
+from agents.mcp import MCPServerStdio
+
+async with MCPServerStdio(
+    params={"command": "uvx", "args": ["keboola_mcp_server"]}
+) as mcp:
+    agent = Agent(
+        name="Assistant",
+        instructions="Use the Keboola tools to achieve the task",
+        mcp_servers=[mcp],
+    )
+    result = await Runner.run(agent, "Load yesterday's CSV into Snowflake")
+```
+
+The SDK calls `list_tools()` on the server automatically, making every Keboola operation available to the model.
+
+### LangChain
+
+[LangChain](https://python.langchain.com/docs/) has an official MCP adapter, [`langchain-mcp-adapters`](https://github.com/langchain-ai/langchain-mcp-adapters). Point its `MultiServerMCPClient` at the server and load the tools into your agent:
+
+```python
+from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient(
+    {
+        "keboola": {
+            "transport": "streamable_http",
+            "url": "https://mcp.<YOUR_REGION>.keboola.com/mcp",
+        }
+    }
+)
+tools = await client.get_tools()
+# pass `tools` to your LangChain / LangGraph agent
+```
+
+### Other frameworks
+
+- **[CrewAI](https://crewai.com)** — use the native MCP support via `MCPServerAdapter` from `crewai-tools[mcp]` to expose the Keboola tools to your crew.
+
+### Building your own MCP client
+
+If you're writing your own client, the server speaks the standard MCP protocols over `stdio` and Streamable HTTP. Start from the [Model Context Protocol documentation for client developers](https://modelcontextprotocol.io/quickstart/client); for how the Keboola server itself can be run and configured, see its [GitHub repository](https://github.com/keboola/mcp-server) and [Run the server yourself](/ai/mcp-server/self-hosted/).
+
+**Next:** [Tools reference →](/ai/mcp-server/tools/)
