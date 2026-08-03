@@ -9,7 +9,7 @@ redirect_from:
 Keboola is a platform for moving data around and doing something useful to it on the way:
 pull it out of the systems that hold it, reshape it, put the result where people need it, and
 keep doing that on a schedule without anyone watching. This guide walks you through that
-whole loop once, on sample data, in about 30 minutes.
+whole loop once, on sample data, in under an hour.
 
 <!-- Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. -->
 
@@ -34,9 +34,11 @@ to look at — every opportunity with its account, its owner, and how likely it 
 - **A project.** [Step 1](/getting-started/project/) gets you one; the Free Plan is enough
   for everything here.
 - **Basic SQL.** One `SELECT` with a couple of `JOIN`s. If you have never written SQL, the
-  queries are given in full and you can paste them.
-- **A Google account**, for the delivery step. Skippable — you can stop after transforming
-  and still have learned the core of the platform.
+  queries are given in full and you can paste them — in both Snowflake and BigQuery form,
+  since which one you need depends on your project.
+- **A Google account**, for the delivery step. If you would rather not connect one, stop
+  after step 3 — you will have seen the core of the platform, though you will not have a
+  pipeline to automate in step 5.
 
 Nothing needs installing. Everything below happens in the browser.
 

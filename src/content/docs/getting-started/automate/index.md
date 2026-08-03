@@ -10,7 +10,13 @@ You have four configurations that each do one thing when you click Run. A **flow
 into one pipeline that runs in the right order, at the right time, without you.
 Step 5 of the [Getting Started](/getting-started/) arc.
 
-<!-- Tutorial-type page (step 5 of 6). Written against Conditional Flows (the current flow type; demo project 264 reports conditional_flows: true). Terminology sourced from /flows/. Screenshots pending live verification. -->
+<!-- Tutorial-type page (step 5 of 6). Written against Conditional Flows (the current flow
+type; demo project 264 reports conditional_flows: true via the MCP project info). Terminology
+sourced from /flows/. WARNING: every screenshot on this page is still the legacy-flow capture
+inherited from /tutorial/automate/ — they show the drag-and-drop builder, a "Continue on
+Failure" toggle that Conditional Flows do not have, and a two-task first phase instead of
+four. All 15 must be re-shot; captions are written for the intended new shots, not the current
+images. -->
 
 ## What you need
 
@@ -42,8 +48,9 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
 
 ## Build the flow
 
-1. Go to **Conditional Flows** and click **Create Flow**. Name it
-   `[TUTORIAL] Opportunity pipeline`, add a description, and you land in the **Builder**.
+1. Go to **Flows** — labelled **Conditional Flows** where both kinds exist — and click
+   **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and you land
+   in the **Builder**.
 
    ![Screenshot - Create a flow](/getting-started/automate/automate1.png)
 
@@ -53,7 +60,12 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
    ![Screenshot - Add the first component task](/getting-started/automate/automate2.png)
 
 3. Add the other three CSV Import configurations **to the same phase** — they read four
-   independent files, so there is no reason to wait for one before starting the next.
+   independent files, so there is no reason to wait for one before starting the next. The
+   builder distinguishes adding a task *into* an existing phase from starting a *new* one;
+   phases are the numbered groups (**Step 1**, **Step 2**, …) and the tasks sit inside them.
+
+   <!-- VERIFY(owner): name the exact builder affordance for "add into this phase" vs "add a
+   new phase" once walked live — the legacy capture predates the conditional-flow builder. -->
 
    ![Screenshot - Four tasks in one phase](/getting-started/automate/automate3.png)
 
@@ -82,9 +94,9 @@ succeeds and produces nothing useful.
 
 ## Run it
 
-Run the flow once by hand before scheduling it. Every task creates its own job, so **Jobs**
-tells you exactly which step failed if one does, and the flow's run detail shows the phases
-completing in order.
+Click **Run Flow** to run it once by hand before scheduling it. Every task creates its own
+job, so **Jobs** tells you exactly which step failed if one does, and the flow's run detail
+shows the phases completing in order.
 
 ## Set a schedule
 
@@ -99,20 +111,27 @@ moments. A flow can also be triggered when a table changes instead of on a clock
 
 ## Get told when it breaks
 
-An automated pipeline that fails silently is worse than a manual one. Add a **Notification**
-task with the plus icon (**+**) and enter the email addresses that should hear about
-failures — or point it at a webhook.
+An automated pipeline that fails silently is worse than a manual one. Open the flow's
+**Notifications** tab, click **Edit Notifications**, and enter the email addresses (or a
+webhook URL) that should hear about failures.
 
 ![Screenshot - Set up notifications](/getting-started/automate/automate15.png)
 
-For anything more selective than "tell me when it breaks", conditions let you branch on
-status: *if any task in the flow ended with an error, send a notification*. See
-[Notifications](/flows/#notifications).
+You can be told when the flow **finishes with an error**, when it finishes with a **warning**,
+and when it takes significantly longer than its own average. Error notifications on every
+scheduled production flow are the one setting nobody should skip — see
+[Notifications](/management/notifications/).
+
+There is a second, finer mechanism: a **Notification** task placed inside the flow, driven by
+a [condition](/flows/#conditions) such as *if any task in the flow ended with an error*. That
+is what you reach for when a single flow needs different alerts for different failures; the
+Notifications tab is enough here.
 
 ## Check it worked
 
 - The flow's run history shows one successful run with all three phases green.
-- **Jobs** lists six jobs from that run: four loads, one transformation, one delivery.
+- **Jobs** lists a job per task — four loads, one transformation, one delivery — alongside the
+  flow's own orchestration job.
 - The schedule is shown on the flow, with the next run time.
 
 ## If it goes wrong
@@ -124,8 +143,8 @@ status: *if any task in the flow ended with an error, send a notification*. See
   transformation wrote its output, or its phase is missing entirely. Read the run detail top
   to bottom.
 - **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the
-  project is out of runtime credits — Free Plan projects get 60 minutes a month, and while
-  flow jobs themselves consume none, the component jobs they start do.
+  project is out of runtime credits — Free Plan projects get up to 60 minutes a month, and
+  while flow jobs themselves consume none, the component jobs they start do.
 - **Jobs queue instead of running.** Too many parallel tasks in one phase; Storage jobs are
   typically capped at 10 in parallel. Split the phase.
 
@@ -133,8 +152,10 @@ status: *if any task in the flow ended with an error, send a notification*. See
 Kai can build the flow for you and explain what it did:
 
 > Create a flow that runs my four CSV Import configurations in parallel, then the
-> `Denormalize opportunities` transformation, then the Google Sheets destination. Schedule it
-> daily at 6:15 UTC.
+> `Denormalize opportunities` transformation, then the Google Sheets destination.
+
+Set the schedule and the notifications yourself afterwards — those are quick, and it is worth
+seeing where they live.
 :::
 
 **Next:** [Where to go next →](/getting-started/next-steps/)

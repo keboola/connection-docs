@@ -67,15 +67,18 @@ same job with a [Google Sheet](/getting-started/load/googlesheets/) and a
 
    ![Screenshot - Select the CSV file](/getting-started/load/picture4.png)
 
-5. In **Upload Settings**, click the pen icon next to **Destination** and set the Storage
-   table this file becomes:
+5. In **Upload Settings**, click the pen icon next to **Destination**. The destination is
+   three separate controls, not one string:
 
-   ```
-   in.c-csv-import.opportunity
-   ```
+   | Control | Set it to | Why |
+   |---|---|---|
+   | Stage | `IN` | data arriving in the project |
+   | Bucket | `csv-import` | already the default |
+   | Table name | `opportunity` | the only one you need to change |
 
-   Click **Save**. That name has three parts: the `in` stage (data arriving in the
-   project), the bucket `c-csv-import`, and the table `opportunity`.
+   Click **Save**. Together they make the table's full Storage ID,
+   `in.c-csv-import.opportunity` — the name the next step's SQL refers to. (Storage adds the
+   `c-` prefix to bucket names itself.)
 
    ![Screenshot - Set the destination table](/getting-started/load/picture5.png)
 
@@ -85,14 +88,14 @@ same job with a [Google Sheet](/getting-started/load/googlesheets/) and a
 
 ## Load the other three
 
-Repeat steps 2–6 for the remaining files, changing the configuration name and the
-destination each time:
+Go back to **Components** and repeat steps 1–6 for the remaining files, changing the
+configuration name and the table name each time:
 
-| File | Configuration name | Destination table |
-|---|---|---|
-| `account.csv` | `[TUTORIAL] Account` | `in.c-csv-import.account` |
-| `user.csv` | `[TUTORIAL] User` | `in.c-csv-import.user` |
-| `level.csv` | `[TUTORIAL] Level` | `in.c-csv-import.level` |
+| File | Configuration name | Table name | Full Storage ID |
+|---|---|---|---|
+| `account.csv` | `[TUTORIAL] Account` | `account` | `in.c-csv-import.account` |
+| `user.csv` | `[TUTORIAL] User` | `user` | `in.c-csv-import.user` |
+| `level.csv` | `[TUTORIAL] Level` | `level` | `in.c-csv-import.level` |
 
 The destination names matter: the transformation in the next step refers to these exact
 tables.
@@ -100,7 +103,8 @@ tables.
 ## Check it worked
 
 Open **Storage**. Data is organized into **buckets**, and each bucket holds tables. You
-should see one bucket, `in.c-csv-import`, containing four tables:
+should see one bucket — listed as `csv-import` with an **IN** badge, its full ID being
+`in.c-csv-import` — containing four tables:
 
 ![Screenshot - The four tables in Storage](/getting-started/load/picture7.png)
 

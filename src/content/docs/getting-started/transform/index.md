@@ -15,8 +15,11 @@ Step 3 of the [Getting Started](/getting-started/) arc.
 ## What you need
 
 Four tables in Storage — `in.c-csv-import.opportunity`, `account`, `user` and `level` —
-from [Load Your Data](/getting-started/load/). If your tables have different names, use
-yours everywhere below.
+from [Load Your Data](/getting-started/load/).
+
+If your tables have different Storage names, that is fine: what the SQL depends on is the
+**Table name** you give each one in the input mapping below. Those must be exactly
+`opportunity`, `account`, `user` and `level`, or you have to edit the queries to match.
 
 ## How a transformation works
 
@@ -43,9 +46,15 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
    ![Screenshot - Transformations section](/getting-started/transform/transformations-intro.png)
 
-2. Click **Create Transformation** and choose **Snowflake SQL Transformation**. (Which SQL
-   backends you see depends on the project — the backend is a project-level setting, not a
-   per-transformation choice.)
+2. Click **Create Transformation** and **note which SQL transformations your project offers** —
+   *Snowflake SQL* or *BigQuery SQL* (and possibly *DuckDB*, in beta). Which ones appear
+   depends on the project: new [Free Plan](/management/payg-project/) projects default to the
+   [BigQuery backend](/storage/), while contract customers choose theirs. Pick the SQL
+   transformation your project offers, and use the matching query block below.
+
+   <!-- VERIFY(owner): button label — this page says "Create Transformation",
+   transformations/duckdb/index.md:22 says "New Transformation", and the dialog in
+   create-transformation.png is titled "New Transformation". Settle it on the live walk. -->
 
    ![Screenshot - Create a transformation](/getting-started/transform/create-transformation.png)
 
@@ -57,7 +66,7 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
 ## Set the input mapping
 
-1. Click **New Input**.
+1. Click **New Table Input**.
 
    ![Screenshot - New input mapping](/getting-started/transform/input-mapping1.png)
 
@@ -81,23 +90,25 @@ process.
 
 ## Set the output mapping
 
-1. Click **New Output**.
+1. Click **New Table Output**.
 
    ![Screenshot - New output mapping](/getting-started/transform/output-mapping1.png)
 
 2. In **Table name**, enter `opportunity_denorm`. This is the name of a table your SQL will
    create — it does not exist yet.
 
-3. **Destination** auto-fills to `out.c-denormalize-opportunity.opportunity_denorm`: the
-   `out` stage, a new bucket, and the table. Neither the bucket nor the table exists; both
-   are created the first time the transformation runs.
+3. **Destination** auto-fills to `out.c-denormalize-opportunities.opportunity_denorm` — the
+   `out` stage, a new bucket named after the transformation, and the table. Neither the
+   bucket nor the table exists yet; both are created the first time the transformation runs.
 
    ![Screenshot - The finished output mapping](/getting-started/transform/output-mapping2.png)
 
 ## Write the queries
 
-Click **New Code**, name the block `Opportunity denorm`, paste the SQL below, and click
-**Save**.
+Click **New Code**. The editor creates `Block 1` and puts a code inside it — name that code
+`Opportunity denorm`, paste the SQL for **your project's backend**, and click **Save**.
+
+### If your project uses Snowflake
 
 ```sql
 CREATE TABLE "tmp_level" AS
@@ -130,11 +141,15 @@ Three queries, in order: spell out the seniority codes; classify each opportunit
 likely it is to close; then join everything into `opportunity_denorm`. Only that last table
 is in the output mapping, so the two `tmp_` tables vanish when the job finishes.
 
+Every identifier is double-quoted because Snowflake uppercases unquoted ones, and the
+column names in the sample data are mixed case.
+
 ![Screenshot - The code block](/getting-started/transform/new-code.png)
 
-:::note[On a BigQuery project]
-[BigQuery](/transformations/bigquery/) does not use double-quoted identifiers, and CTEs
-replace the temporary tables:
+### If your project uses BigQuery
+
+[BigQuery](/transformations/bigquery/) does not quote identifiers this way, and CTEs replace
+the temporary tables. The result is the same table:
 
 ```sql
 CREATE TABLE opportunity_denorm AS
@@ -180,10 +195,11 @@ JOIN
 ```
 
 <!-- VERIFY(owner): this BigQuery variant is carried over from the previous version of the
-page and has not been run against a BigQuery project. The demo project (264) is Snowflake.
-The original also referenced `Level`.`Level` inside the CTE, which looks wrong; corrected to
-`Level` here but unverified. -->
-:::
+page and has NOT been run against a BigQuery project — the demo project (264) is Snowflake,
+so it could not be tested during the rewrite. It matters more than it used to: new Free Plan
+projects default to BigQuery (storage/index.md), so this is the block most new readers will
+use. The original also referenced `Level`.`Level` inside the CTE, which looks wrong;
+corrected to `Level` here but unverified. -->
 
 ## Run it and check the result
 
@@ -197,22 +213,27 @@ job means it worked.
 
 ![Screenshot - Successful job](/getting-started/transform/transf-successful.png)
 
-Then open **Storage**: there is a new bucket `out.c-denormalize-opportunity` holding
-`opportunity_denorm`. Its detail page shows **Recently updated by**, which tells you which
-configuration last wrote to it — the fastest way to answer "where did this table come
-from?" months later.
+Then open **Storage**: there is a new bucket `out.c-denormalize-opportunities` holding
+`opportunity_denorm`. The table list has a **Recently updated by** column showing which
+configuration last wrote to each table — the fastest way to answer "where did this table
+come from?" months later.
 
 ![Screenshot - The new table in Storage](/getting-started/transform/table-in-storage.png)
 
 ## If it goes wrong
 
-- **`Object 'ACCOUNT' does not exist`.** A table is missing from the input mapping, or the
-  **Table name** inside the transformation differs from what the SQL uses. Snowflake
-  uppercases unquoted identifiers, which is why every identifier above is double-quoted.
+- **`Object 'ACCOUNT' does not exist`** (Snowflake). A table is missing from the input
+  mapping, or the **Table name** inside the transformation differs from what the SQL uses.
+  Snowflake uppercases unquoted identifiers, which is why every identifier is double-quoted.
+  On BigQuery the equivalent error is `Table ... was not found`.
 - **The job succeeds but Storage has no new table.** The output mapping is empty or names a
   table your SQL never creates. The names must match exactly: `opportunity_denorm`.
-- **`Numeric value '' is not recognized`.** Storage columns are untyped text, so an empty
-  cell arrives as `''`, not `NULL`. Wrap the cast: `TRY_CAST("Probability" AS NUMBER(38,9))`.
+- **`Numeric value '' is not recognized`.** Tables loaded from CSV arrive as text columns
+  unless you give them types, so an empty cell is `''` rather than `NULL` and a comparison
+  like `"Probability" < 50` fails on it. The sample data has no empty values, so you will not
+  hit this here — but with your own data, cast defensively:
+  `TRY_CAST("Probability" AS NUMBER(38,9))` on Snowflake,
+  `SAFE_CAST(Probability AS INT64)` on BigQuery.
 - **You want to see what the query actually returns before saving.** That is what a
   [workspace](/getting-started/transform/workspace/) is for.
 

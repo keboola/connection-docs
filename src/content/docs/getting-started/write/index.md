@@ -16,8 +16,7 @@ warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started
 
 - The table `opportunity_denorm` in Storage, from
   [Transform Your Data](/getting-started/transform/).
-- A Google account you can authorize. The connector only ever gets permission to write
-  spreadsheets.
+- A Google account you can authorize.
 
 ## Sending data out
 
@@ -32,7 +31,10 @@ Google Sheets is the easiest destination to try. The
 
 ## Configure the destination
 
-1. Open **Components**, click **Add Component**, and search for `Sheets`.
+1. Open **Components**, click **Add Component**, and search for `Sheets`. Several results
+   come back, including a *data source* and a *data destination* with almost the same name —
+   pick **Google Sheets** *data destination* (component ID `keboola.wr-google-sheets`).
+   Picking the data source by mistake makes the rest of this page impossible.
 
    ![Screenshot - Search for the Google Sheets destination](/getting-started/write/writing1.png)
 
@@ -61,10 +63,16 @@ Google Sheets is the easiest destination to try. The
 
    ![Screenshot - Grant access](/getting-started/write/writing6.png)
 
-The authorization belongs to this configuration and grants write access to spreadsheets only.
-Keboola stores component secrets as
-[encrypted configuration parameters](https://developers.keboola.com/overview/encryption/), so
-the credentials are never visible in the configuration itself.
+The authorization belongs to this configuration. Keboola stores component secrets as
+[encrypted configuration parameters](https://developers.keboola.com/overview/encryption/) —
+there is no decryption API, so the credentials are never readable back out of the
+configuration.
+
+<!-- VERIFY(owner): the previous version of this page claimed the authorization "will only
+allow you to write data into a Google Spreadsheet". The exact OAuth scopes requested by
+keboola.wr-google-sheets are not published, and step 9 lets the reader pick an existing
+spreadsheet from Drive, which implies more than spreadsheet-write. Claim removed rather than
+guessed. -->
 
 ## Pick the table and the sheet
 
@@ -72,17 +80,22 @@ the credentials are never visible in the configuration itself.
 
    ![Screenshot - New table](/getting-started/write/writing7.png)
 
-8. Select `out.c-denormalize-opportunity.opportunity_denorm` and click **Next**.
+8. Select `out.c-denormalize-opportunities.opportunity_denorm` and click **Next**.
 
    ![Screenshot - Select the Storage table](/getting-started/write/writing8.png)
 
-9. Choose **New spreadsheet** and click **Next**. (An existing spreadsheet works too — you
-   pick it from the authorized account's Drive.)
+   You are now in a small wizard with tabs — **Source**, **Destination**, **Options** —
+   which is why the next two steps feel like one long form.
+
+9. On **Destination**, choose **New spreadsheet** and name the *spreadsheet* (the file that
+   will appear in Drive). An existing spreadsheet works too — you pick it from the authorized
+   account's Drive. Click **Next**.
 
    ![Screenshot - New spreadsheet](/getting-started/write/writing9.png)
 
-10. Name the sheet, select **Update rows**, and click **Save Sheet**. This creates an empty
-    spreadsheet in the authorized account, ready to receive the data.
+10. On **Options**, name the *sheet* (the tab inside that file), select **Update rows**, and
+    click **Save Sheet**. This creates the empty spreadsheet in the authorized account, ready
+    to receive data.
 
     ![Screenshot - Name and save the sheet](/getting-started/write/writing10.png)
 
@@ -117,8 +130,9 @@ you started with. That is the whole pipeline, end to end.
 :::tip[Or ask Kai]
 Kai can confirm the delivery matched the source:
 
-> Compare the row count of `out.c-denormalize-opportunity.opportunity_denorm` with what the
-> last Google Sheets destination job wrote, and tell me if they differ.
+> Read the last Google Sheets destination job and tell me whether it succeeded and what it
+> reported, then give me the row count of
+> `out.c-denormalize-opportunities.opportunity_denorm`.
 :::
 
 **Next:** [Automate it with a flow →](/getting-started/automate/)

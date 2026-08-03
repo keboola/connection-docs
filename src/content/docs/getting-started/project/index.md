@@ -29,11 +29,13 @@ inside one project. Larger organizations run several of them; see
 You have three ways in, in order of how quickly they get you started:
 
 1. **Free Plan** — [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
-   right now. It is enough for everything in this guide: 250 GB of Storage and 60 minutes
-   of job runtime per month. See [Pay As You Go](/management/payg-project/) for the full
-   list of limits.
+   right now. It is enough for everything in this guide: 250 GB of Storage and up to 60
+   minutes of job runtime a month (the free allowance tracks your previous month's usage, so
+   a brand-new project starts at the full 60). See [Pay As You Go](/management/payg-project/)
+   for the full list of limits — including that the Free Plan does not let you choose a stack
+   and gives you one project.
 2. **Join an existing project** — ask an admin of your company's Keboola organization to
-   invite you. They add you under **Users** in the project settings.
+   invite you. They do it from **Users & Settings** in the project, with **Invite User**.
 3. **Talk to us** — for a trial of a full project with a chosen stack and no Free Plan
    limits, [contact Keboola](https://www.keboola.com/contact).
 
@@ -53,9 +55,11 @@ After signing in you land on the project dashboard. Five places matter for this 
 
 - **Components** — every data source connector, data destination connector, and
   application you can add to the project. This is where you configure how data gets in and out.
-- **Transformations** — the SQL, Python, R and dbt code that reshapes your data.
+- **Transformations** — the code that reshapes your data: SQL, Python and R, plus dbt on
+  paid plans.
 - **Storage** — every table and file in the project, organized into buckets.
-- **Flows** — the automation layer: what runs, in what order, on what schedule.
+- **Flows** — the automation layer: what runs, in what order, on what schedule. Projects that
+  have both kinds show this as **Conditional Flows**.
 - **Jobs** — the log of everything that has run, successfully or not.
 
 ## Check it worked
@@ -73,10 +77,14 @@ list — empty is fine, that is what you are about to change.
   a new account; a fresh Free Plan project will not have access to your team's data.
 
 :::tip[Or ask Kai]
-Once you are in a project, Keboola's built-in assistant can orient you. Open **Kai** from
-the project navigation and ask:
+Keboola's built-in assistant can orient you in a project you did not build. Look for **Kai**
+in the project navigation — it has to be enabled first, and it is not on every stack, so see
+[Get started with Kai](/kai/getting-started/) if you cannot find it. Then ask:
 
 > What is in this project? Summarize the buckets, configurations and flows it contains.
+
+On the empty project you just created there is nothing to summarize yet — this one pays off
+later, or on a project you inherit.
 :::
 
 **Next:** [Load your data →](/getting-started/load/)

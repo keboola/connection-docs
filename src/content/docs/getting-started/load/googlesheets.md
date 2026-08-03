@@ -6,8 +6,6 @@ redirect_from:
   - /tutorial/load/googlesheets/
 ---
 
-In the [previous step](/getting-started/load/), you learned how to quickly load data into Keboola using [manual import](/getting-started/load/).
-However, in real production projects, this is seldom used as most data is obtained automatically using data source connectors.
 A side trip from [Load Your Data](/getting-started/load/): instead of uploading a file by hand, you will pull the data straight out of a spreadsheet with the Google Sheets data source connector.
 
 

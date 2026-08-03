@@ -72,8 +72,9 @@ exposes the same operations three ways, and which one you pick depends on where 
   speaks the Model Context Protocol (Claude, Cursor, and others). Use this when you want
   your coding agent to read and change the project while you work on code.
 - **[kbagent CLI](/cli/)** — Keboola from the terminal: projects, configurations, jobs,
-  storage, and flows, scriptable, and usable by a coding agent that has a shell.
-  Start with [the CLI quickstart](/cli/getting-started/).
+  storage, and flows, scriptable, and usable by a coding agent that has a shell. In beta, so
+  commands and output formats may still change. Start with
+  [the CLI quickstart](/cli/getting-started/).
 
 If you are documenting or automating your own work on top of Keboola, the
 [API reference](https://developers.keboola.com/overview/api/) is the layer underneath all three.

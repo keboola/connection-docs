@@ -178,6 +178,6 @@ This token system enables easy [sharing of specific resources](/management/proje
 
 ### Input and Output Mapping
 To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. 
-A secure [workspace](/workspace/#main-header) is created with data copied from the tables specified 
+A secure [workspace](/workspace/) is created with data copied from the tables specified 
 in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed successfully, only tables and files defined
 in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.
