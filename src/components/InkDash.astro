@@ -2,42 +2,42 @@
 /**
  * InkDash.astro — a small canvas game for the 404 page.
  *
- * The Keboola octopus swims freely (arrow keys / WASD on desktop, finger drag
- * on touch), collects data cubes and dodges red 404 jellyfish. Three lives,
- * endless levels, high score in localStorage.
+ * The Keboola octopus swims (arrow keys / WASD, or drag on touch), collects data
+ * cubes and dodges HTTP-error jellyfish. Three lives, endless levels, high score
+ * in localStorage. Everything is drawn in code — no sprite assets — so it stays
+ * crisp on retina and follows the light/dark theme.
  *
- * Everything is drawn in code — no sprite assets — so it stays crisp on retina
- * and follows the light/dark theme.
+ * Shaped like Chrome's offline dinosaur on purpose: a wide, shallow, FRAMELESS
+ * strip with no fill and no call-to-action block. A bordered, filled panel with a
+ * big Play button reads as a widget and competes with the page — measured, it
+ * pushed the actual recovery links below the fold. Decoration until you engage.
  *
- * Three things this deliberately gets right:
- *   1. It never steals the keyboard. Arrow/space/WASD are only preventDefault-ed
- *      while a game is actually running; Esc leaves. Otherwise the page would
- *      stop scrolling from the keyboard.
- *   2. It tears down on `astro:before-swap`. This site runs ClientRouter, and a
- *      broken internal link lands here via a client-side swap, so a leaked
+ * Four things this deliberately gets right:
+ *   1. It never steals the keyboard. Movement keys are only preventDefault-ed
+ *      while a game runs, and starting is a real <button> rather than a global
+ *      space handler — hijacking space would break page scrolling.
+ *   2. It tears down on `astro:before-swap`. This site runs ClientRouter and a
+ *      broken internal link lands here through a client-side swap, so a leaked
  *      rAF loop and window listeners are a real risk.
- *   3. The Play/again control is a real <button>, not canvas-drawn text, and the
- *      canvas itself is exposed as a labelled image.
+ *   3. Enemies differ by SHAPE, not only by their number: labels are dropped on
+ *      narrow panels (below ~7 CSS px they are a smudge), so on a phone the code
+ *      is invisible and the silhouette has to carry the difference.
+ *   4. HUD text is sized in CSS pixels, not world units, or it shrinks with the
+ *      panel and becomes unreadable on a phone.
  */
 ---
 
 <div class="inkdash" data-state="idle">
-  <canvas
-    class="inkdash-canvas"
-    role="img"
-    aria-label="A small game: the Keboola octopus collects data cubes and dodges 404 jellyfish."
-  ></canvas>
+  <canvas class="inkdash-canvas" aria-hidden="true"></canvas>
 
-  <div class="inkdash-overlay">
-    <p class="inkdash-msg">Well, since you are here…</p>
-    <button class="inkdash-play" type="button">Play</button>
-    <p class="inkdash-hint">
-      Arrow keys or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to swim, or just drag.
-      Stop any time — <kbd>Esc</kbd> or the Stop button.
-    </p>
-  </div>
+  {/* The start control is a real button covering the strip: click and tap work
+      everywhere, and space/Enter work natively once it has focus — so we never
+      register a global space handler and never take scrolling from the page. */}
+  <button class="inkdash-start" type="button">
+    <span class="inkdash-start-label">Click or tap to play</span>
+  </button>
 
-  {/* Outside .inkdash-overlay on purpose: the overlay is hidden while a game
+  {/* Outside the start button on purpose: that button is hidden while a game
       runs, and this is the only way out for anyone without an Esc key. */}
   <button class="inkdash-stop" type="button">Stop</button>
 
@@ -48,33 +48,63 @@
 </div>
 
 <script>
-  /* ---------------- config (logical world units) ---------------- */
-  const W = 960;
-  const H = 540;
+  /* ---------------- world (logical units) ---------------- */
+  /* H is fixed; the world's WIDTH follows the strip's real aspect ratio (see
+     CSS). At a phone width a fixed 960x245 world would render an 87px-tall
+     strip — unplayable, and the 40px Stop button alone would cover half of it.
+     So CSS holds a minimum height and the world narrows instead of shortening. */
+  const BASE_W = 960;
+  const H = 245;
 
-  const PLAYER_R = 19;
+  const SEABED = H - 12;
+
+  const PLAYER_R = 17;
   const ACCEL = 0.62;
   const FRICTION = 0.9;
   const MAX_SPEED = 7;
 
-  const CUBE_HALF = 9;
+  const CUBE_HALF = 8;
   const CUBES_PER_LEVEL = 10;
 
-  const ENEMY_R = 21;
-  const ENEMY_BASE = 3;
-  const ENEMY_BASE_SPEED = 1.8;
-
+  const ENEMY_R = 18;
   const START_LIVES = 3;
   const INVULN_FRAMES = 72; // ~1.2s at 60fps
   const HI_KEY = 'kbc-inkdash-hi';
 
   const BRAND = '#097CF7';
   const CUBE_COLOR = '#12b886';
-  const ENEMY_COLOR = '#e8384f';
+
+  /* Enemy roster as data, not scattered conditionals. `from` is the level the
+     type first appears on; all of them stay in play afterwards. Colours stay in
+     one warm-red family so "hazard" reads instantly, and the chaser is both the
+     darkest and the only non-dome shape. */
+  const ENEMY_TYPES = [
+    { code: '404', from: 1, behavior: 'drift', color: '#e8384f' },
+    { code: '500', from: 2, behavior: 'drift', color: '#d92d43' },
+    { code: '403', from: 3, behavior: 'drift', color: '#e8574f' },
+    { code: '429', from: 4, behavior: 'drift', color: '#c92a3f' },
+    { code: '502', from: 5, behavior: 'drift', color: '#b62438' },
+    { code: '504', from: 6, behavior: 'chase', color: '#8f1d2c' },
+  ] as const;
+
+  type EnemyType = (typeof ENEMY_TYPES)[number];
+
+  /** Enemy roster, count and speed for a level. */
+  function levelPlan(level: number) {
+    const available = ENEMY_TYPES.filter((t) => t.from <= level);
+    return {
+      available,
+      newest: available[available.length - 1]!,
+      /* Capped lower than a square field would allow: the strip is shallow, so
+         past ~8 the corridor stops being dodgeable rather than getting harder. */
+      count: Math.min(3 + (level - 1), 8),
+      speed: 1.7 + 0.28 * (level - 1),
+    };
+  }
 
   const MOVE_KEYS = new Set([
     'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
-    'w', 'a', 's', 'd', 'W', 'A', 'S', 'D', ' ',
+    'w', 'a', 's', 'd', 'W', 'A', 'S', 'D',
   ]);
 
   function initInkDash() {
@@ -82,11 +112,10 @@
     if (!root) return null;
 
     const canvas = root.querySelector<HTMLCanvasElement>('.inkdash-canvas');
-    const overlay = root.querySelector<HTMLElement>('.inkdash-overlay');
-    const msgEl = root.querySelector<HTMLElement>('.inkdash-msg');
-    const playBtn = root.querySelector<HTMLButtonElement>('.inkdash-play');
+    const startBtn = root.querySelector<HTMLButtonElement>('.inkdash-start');
+    const startLabel = root.querySelector<HTMLElement>('.inkdash-start-label');
     const stopBtn = root.querySelector<HTMLButtonElement>('.inkdash-stop');
-    if (!canvas || !overlay || !msgEl || !playBtn || !stopBtn) return null;
+    if (!canvas || !startBtn || !startLabel || !stopBtn) return null;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return null;
@@ -108,26 +137,49 @@
       attributeFilter: ['data-theme'],
     });
 
-    const water = () => (dark ? ['#08111f', '#0d2138'] : ['#eaf4ff', '#d3e8ff']);
     const ink = () => (dark ? 'rgba(255,255,255,0.82)' : 'rgba(15,23,42,0.78)');
-    const inkDim = () => (dark ? 'rgba(255,255,255,0.32)' : 'rgba(15,23,42,0.32)');
+    const inkDim = () => (dark ? 'rgba(255,255,255,0.34)' : 'rgba(15,23,42,0.34)');
+
+    /* Depth palette: the strip has no fill, so "going deeper" is carried by the
+       seabed and its kelp shifting cooler as levels climb — never by a
+       background wash, which is what made this read as a widget. */
+    const mix = (a: number[], b: number[], t: number, alpha: number) =>
+      `rgba(${Math.round(a[0]! + (b[0]! - a[0]!) * t)},${Math.round(
+        a[1]! + (b[1]! - a[1]!) * t
+      )},${Math.round(a[2]! + (b[2]! - a[2]!) * t)},${alpha})`;
+
+    const depth = () => Math.min((level - 1) / 6, 1);
+    const seabedColor = () =>
+      dark
+        ? mix([46, 96, 122], [58, 62, 138], depth(), 0.62)
+        : mix([120, 170, 190], [96, 110, 190], depth(), 0.5);
+    const kelpColor = () =>
+      dark
+        ? mix([36, 110, 108], [48, 60, 140], depth(), 0.42)
+        : mix([110, 175, 165], [110, 120, 195], depth(), 0.38);
 
     /* ---------------- canvas sizing (DPR-aware) ---------------- */
     let scale = 1;
-    /* CSS pixels per world unit. The canvas transform draws everything in world
-       units, so any fixed world-unit font shrinks linearly with the panel: at a
-       340px-wide panel a 15-unit label renders at ~5px and is unreadable. HUD
-       text is therefore sized through `cssPx()` to stay physically constant. */
+    /* CSS pixels per world unit. The canvas transform draws in world units, so
+       a fixed world-unit font shrinks with the panel: at a 340px strip a
+       15-unit label lands at ~5px. HUD text goes through cssPx() to stay
+       physically constant. */
     let cssPerWorld = 1;
+    let W = BASE_W; // world units across; recomputed from the rendered aspect
     const cssPx = (size: number) => size / cssPerWorld;
+
+    /* CSS owns the strip's rendered size (aspect-ratio plus a min-height), and
+       this only reads it. Setting the height from here instead would both cause
+       a layout shift on load and risk an observer feedback loop. */
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      if (!rect.width) return;
+      if (!rect.width || !rect.height) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round((rect.width * (H / W)) * dpr);
-      scale = (rect.width / W) * dpr;
-      cssPerWorld = rect.width / W;
+      canvas.height = Math.round(rect.height * dpr);
+      cssPerWorld = rect.height / H; // uniform, so world units stay square
+      scale = cssPerWorld * dpr;
+      W = rect.width / cssPerWorld;
     };
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
@@ -149,50 +201,88 @@
     let banner = '';
     let bannerTimer = 0;
     let tick = 0;
+    let killedBy = '404';
 
-    const player = { x: W / 2, y: H / 2, vx: 0, vy: 0 };
+    const player = { x: W * 0.25, y: H / 2, vx: 0, vy: 0 };
     let cubes: { x: number; y: number; phase: number }[] = [];
-    let enemies: { x: number; y: number; vx: number; vy: number }[] = [];
+    let enemies: {
+      x: number; y: number; vx: number; vy: number; type: EnemyType;
+    }[] = [];
     let bubbles: { x: number; y: number; r: number; v: number }[] = [];
+    let kelp: { x: number; h: number; lean: number }[] = [];
 
     const keys = new Set<string>();
     let pointerTarget: { x: number; y: number } | null = null;
 
     const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
+    /* The band kept clear for the HUD scales with the HUD text, which is sized
+       in CSS pixels: on a narrow strip a constant band would let one-row HUD
+       text sit on top of the play field. */
+    const topBand = () => Math.max(24, cssPx(17) + cssPx(9));
+    const playTop = () => topBand() + PLAYER_R;
+    const playBottom = () => SEABED - PLAYER_R;
+
     function spawnLevel() {
+      const plan = levelPlan(level);
+
       cubes = [];
       let guard = 0;
-      while (cubes.length < CUBES_PER_LEVEL && guard++ < 500) {
-        const c = { x: rand(60, W - 60), y: rand(60, H - 60), phase: rand(0, Math.PI * 2) };
-        const clearOfPlayer = Math.hypot(c.x - player.x, c.y - player.y) > 90;
-        const clearOfCubes = cubes.every((o) => Math.hypot(o.x - c.x, o.y - c.y) > 80);
+      while (cubes.length < CUBES_PER_LEVEL && guard++ < 800) {
+        const c = {
+          x: rand(40, W - 40),
+          y: rand(playTop(), playBottom()),
+          phase: rand(0, Math.PI * 2),
+        };
+        const clearOfPlayer = Math.hypot(c.x - player.x, c.y - player.y) > 80;
+        const clearOfCubes = cubes.every((o) => Math.hypot(o.x - c.x, o.y - c.y) > 52);
         if (clearOfPlayer && clearOfCubes) cubes.push(c);
       }
 
-      const count = ENEMY_BASE + (level - 1);
-      const speed = ENEMY_BASE_SPEED + 0.3 * (level - 1);
       enemies = [];
-      for (let i = 0; i < count; i++) {
-        // Spawn along the edges so a new level never starts on top of the player.
-        const edge = i % 4;
-        const x = edge === 0 ? 40 : edge === 1 ? W - 40 : rand(60, W - 60);
-        const y = edge === 2 ? 40 : edge === 3 ? H - 40 : rand(60, H - 60);
+      const eTop = topBand() + ENEMY_R;
+      const eBottom = SEABED - ENEMY_R;
+      for (let i = 0; i < plan.count; i++) {
+        /* One of the level's newest type is guaranteed, so a new code actually
+           shows up on the level that introduces it. */
+        const type = i === 0
+          ? plan.newest
+          : plan.available[Math.floor(rand(0, plan.available.length))]!;
+
+        /* Spread across the whole strip, keeping clear of the player's corner
+           and of each other. Confining spawns to one half — the first attempt at
+           "don't land on the player" — bunched later levels into a wall on the
+           right and left the other half trivially safe. */
+        let x = 0;
+        let y = 0;
+        let tries = 0;
+        do {
+          x = rand(30, W - 30);
+          y = rand(eTop, eBottom);
+          tries++;
+        } while (
+          tries < 60 &&
+          (Math.hypot(x - player.x, y - player.y) < 190 ||
+            enemies.some((o) => Math.hypot(o.x - x, o.y - y) < 70))
+        );
+
         const dir = rand(0, Math.PI * 2);
-        enemies.push({ x, y, vx: Math.cos(dir) * speed, vy: Math.sin(dir) * speed });
+        const speed = type.behavior === 'chase' ? plan.speed * 0.55 : plan.speed;
+        enemies.push({ x, y, vx: Math.cos(dir) * speed, vy: Math.sin(dir) * speed, type });
       }
 
-      bubbles = Array.from({ length: 14 }, () => ({
+      bubbles = Array.from({ length: Math.min(10 + level * 2, 26) }, () => ({
         x: rand(0, W),
         y: rand(0, H),
-        r: rand(1.5, 4),
+        r: rand(1.2, 3.2),
         v: rand(0.25, 0.7),
       }));
-    }
 
-    function setOverlay(message: string, label: string) {
-      msgEl.textContent = message;
-      playBtn.textContent = label;
+      kelp = Array.from({ length: Math.min(3 + level, 9) }, () => ({
+        x: rand(10, W - 10),
+        h: rand(18, 54),
+        lean: rand(-0.5, 0.5),
+      }));
     }
 
     function start() {
@@ -202,7 +292,7 @@
       invuln = 0;
       banner = '';
       bannerTimer = 0;
-      player.x = W / 2;
+      player.x = W * 0.25;
       player.y = H / 2;
       player.vx = 0;
       player.vy = 0;
@@ -211,7 +301,6 @@
       spawnLevel();
       state = 'playing';
       root.dataset.state = 'playing';
-      canvas.focus?.();
     }
 
     /* Called on every exit path, not just death — quitting with a good score
@@ -230,11 +319,10 @@
       keys.clear();
       pointerTarget = null;
       recordHighScore();
-      if (reason === 'dead') {
-        setOverlay(`Caught by a 404. Score ${score}.`, 'Play again');
-      } else {
-        setOverlay('Well, since you are here…', 'Play');
-      }
+      startLabel.textContent =
+        reason === 'dead'
+          ? `Caught by a ${killedBy} — score ${score}. Play again`
+          : 'Click or tap to play';
     }
 
     /* ---------------- input ---------------- */
@@ -244,7 +332,8 @@
         return;
       }
       // Only swallow movement keys while a game is running, so the page keeps
-      // its normal keyboard scrolling the rest of the time.
+      // its normal keyboard scrolling the rest of the time. Space is never
+      // captured — starting is the button's job.
       if (state !== 'playing') return;
       if (MOVE_KEYS.has(e.key)) {
         e.preventDefault();
@@ -276,12 +365,11 @@
     const onPointerUp = () => {
       pointerTarget = null;
     };
-
     const onStopClick = () => {
       if (state === 'playing') stop('idle');
     };
 
-    playBtn.addEventListener('click', start);
+    startBtn.addEventListener('click', start);
     stopBtn.addEventListener('click', onStopClick);
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
@@ -326,18 +414,35 @@
       }
 
       player.x = Math.max(PLAYER_R, Math.min(W - PLAYER_R, player.x + player.vx * dt));
-      player.y = Math.max(PLAYER_R + 26, Math.min(H - PLAYER_R, player.y + player.vy * dt));
+      player.y = Math.max(playTop(), Math.min(playBottom(), player.y + player.vy * dt));
 
       for (const e of enemies) {
+        if (e.type.behavior === 'chase') {
+          /* Steers toward the player instead of bouncing — slower, but it never
+             gives up, which is the new pressure the later levels add. */
+          const dx = player.x - e.x;
+          const dy = player.y - e.y;
+          const d = Math.hypot(dx, dy) || 1;
+          const sp2 = Math.hypot(e.vx, e.vy) || 1;
+          e.vx += (dx / d) * 0.05 * dt;
+          e.vy += (dy / d) * 0.05 * dt;
+          const cap = sp2 > 2.6 ? 2.6 / sp2 : 1;
+          e.vx *= cap;
+          e.vy *= cap;
+        }
+
         e.x += e.vx * dt;
         e.y += e.vy * dt;
+
         if (e.x < ENEMY_R || e.x > W - ENEMY_R) {
           e.vx *= -1;
           e.x = Math.max(ENEMY_R, Math.min(W - ENEMY_R, e.x));
         }
-        if (e.y < ENEMY_R + 26 || e.y > H - ENEMY_R) {
+        const top = topBand() + ENEMY_R;
+        const bottom = SEABED - ENEMY_R;
+        if (e.y < top || e.y > bottom) {
           e.vy *= -1;
-          e.y = Math.max(ENEMY_R + 26, Math.min(H - ENEMY_R, e.y));
+          e.y = Math.max(top, Math.min(bottom, e.y));
         }
       }
 
@@ -355,7 +460,8 @@
           if (Math.hypot(e.x - player.x, e.y - player.y) < PLAYER_R + ENEMY_R - 4) {
             lives -= 1;
             invuln = INVULN_FRAMES;
-            player.x = W / 2;
+            killedBy = e.type.code;
+            player.x = W * 0.25;
             player.y = H / 2;
             player.vx = 0;
             player.vy = 0;
@@ -374,8 +480,13 @@
       if (cubes.length === 0) {
         level += 1;
         score += 50;
-        banner = `Level ${level}`;
-        bannerTimer = 72;
+        const plan = levelPlan(level);
+        /* Name the newcomer on the level that introduces it — otherwise a new
+           code just quietly appears among the others. */
+        banner = plan.newest.from === level
+          ? `Level ${level} · ${plan.newest.code} incoming`
+          : `Level ${level}`;
+        bannerTimer = 80;
         spawnLevel();
       }
 
@@ -395,9 +506,9 @@
 
     /* ---------------- draw ---------------- */
     /* Five tentacles fanning outward from under the head, drawn first so the
-       head hides their roots — matches the logo silhouette. Tentacles kept thin
-       and well spread, otherwise at small sizes they merge into one blob and the
-       whole thing reads as a lightbulb. */
+       head hides their roots — matches the logo silhouette. Kept thin and well
+       spread: at small sizes they otherwise merge into one blob and the whole
+       thing reads as a lightbulb. */
     function octopus(x: number, y: number, t: number, wiggle: boolean, s = 1) {
       ctx.save();
       ctx.translate(x, y);
@@ -405,151 +516,188 @@
 
       ctx.strokeStyle = BRAND;
       ctx.lineCap = 'round';
-      ctx.lineWidth = 4.2;
+      ctx.lineWidth = 4;
       for (let i = 0; i < 5; i++) {
         const spread = (i - 2) / 2; // -1 … 1
-        const sway = wiggle ? Math.sin(t * 0.12 + i * 0.8) * 3.5 : 0;
+        const sway = wiggle ? Math.sin(t * 0.12 + i * 0.8) * 3.2 : 0;
         ctx.beginPath();
-        ctx.moveTo(spread * 9, 13);
-        ctx.quadraticCurveTo(spread * 17 + sway, 26, spread * 25 + sway * 1.4, 33);
+        ctx.moveTo(spread * 8, 11);
+        ctx.quadraticCurveTo(spread * 15 + sway, 22, spread * 22 + sway * 1.4, 28);
         ctx.stroke();
       }
 
       ctx.fillStyle = BRAND;
       ctx.beginPath();
-      ctx.ellipse(0, 0, 17, 19, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, 15, 16.5, 0, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.fillStyle = '#fff';
       ctx.beginPath();
-      ctx.arc(-6.5, -2, 3.6, 0, Math.PI * 2);
-      ctx.arc(6.5, -2, 3.6, 0, Math.PI * 2);
+      ctx.arc(-5.6, -2, 3.2, 0, Math.PI * 2);
+      ctx.arc(5.6, -2, 3.2, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
     }
 
-    function draw() {
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+    /* Drifters are domes; the chaser is a diamond with spikes. The shape is the
+       real signal — labels vanish on narrow panels. */
+    function enemy(e: (typeof enemies)[number]) {
+      ctx.save();
+      ctx.translate(e.x, e.y);
+      ctx.fillStyle = e.type.color;
+      ctx.strokeStyle = e.type.color;
+      ctx.lineCap = 'round';
 
-      const [top, bottom] = water();
-      const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, top);
-      g.addColorStop(1, bottom);
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
-
-      if (state === 'playing') {
-        ctx.fillStyle = dark ? 'rgba(255,255,255,0.09)' : 'rgba(9,124,247,0.12)';
-        for (const b of bubbles) {
+      if (e.type.behavior === 'chase') {
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(0, -ENEMY_R);
+        ctx.lineTo(ENEMY_R * 0.92, 0);
+        ctx.lineTo(0, ENEMY_R * 0.72);
+        ctx.lineTo(-ENEMY_R * 0.92, 0);
+        ctx.closePath();
+        ctx.fill();
+        for (let i = -1; i <= 1; i++) {
+          const sway = Math.sin(tick * 0.18 + i) * 2.5;
           ctx.beginPath();
-          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(i * 7, ENEMY_R * 0.6);
+          ctx.quadraticCurveTo(i * 7 + sway, ENEMY_R * 0.6 + 8, i * 7 + sway * 1.6, ENEMY_R * 0.6 + 16);
+          ctx.stroke();
+        }
+      } else {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, ENEMY_R, ENEMY_R * 0.78, 0, Math.PI, 0);
+        ctx.fill();
+        ctx.lineWidth = 2.2;
+        for (let i = -1; i <= 1; i++) {
+          const sway = Math.sin(tick * 0.14 + i) * 2.6;
+          ctx.beginPath();
+          ctx.moveTo(i * 7.5, 0);
+          ctx.quadraticCurveTo(i * 7.5 + sway, 8, i * 7.5 + sway * 1.5, 15);
+          ctx.stroke();
         }
       }
 
-      if (state === 'idle') {
-        // Big and high in the frame: it's the hero of the idle screen, and the
-        // overlay copy and Play button sit below it.
-        octopus(W / 2, H * 0.32, tick, !reduceMotion, 2.4);
+      if (13 * cssPerWorld >= 7) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '600 12px ui-sans-serif, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(e.type.code, 0, e.type.behavior === 'chase' ? -2 : -7);
+      }
+
+      ctx.restore();
+    }
+
+    function seabedAndKelp() {
+      ctx.strokeStyle = seabedColor();
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(0, SEABED);
+      ctx.lineTo(W, SEABED);
+      ctx.stroke();
+
+      ctx.strokeStyle = kelpColor();
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      for (const k of kelp) {
+        const sway = reduceMotion ? 0 : Math.sin(tick * 0.03 + k.x) * 3;
+        ctx.beginPath();
+        ctx.moveTo(k.x, SEABED);
+        ctx.quadraticCurveTo(
+          k.x + k.lean * 12 + sway,
+          SEABED - k.h * 0.6,
+          k.x + k.lean * 20 + sway * 1.6,
+          SEABED - k.h
+        );
+        ctx.stroke();
+      }
+    }
+
+    function draw() {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      /* No fill: the strip is transparent so it reads as decoration on the page
+         rather than as a panel. */
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+      if (state === 'idle' || state === 'dead') {
+        /* Swimming mid-strip rather than sitting on the seabed: an octopus isn't
+           a dinosaur, and parked at the bottom it left the upper two thirds of
+           the strip visibly empty. */
+        ctx.strokeStyle = seabedColor();
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(0, SEABED);
+        ctx.lineTo(W, SEABED);
+        ctx.stroke();
+        octopus(W * 0.25, H * 0.42, tick, !reduceMotion, 1.6);
         return;
       }
 
-      // data cubes
+      seabedAndKelp();
+
+      ctx.fillStyle = dark ? 'rgba(255,255,255,0.10)' : 'rgba(9,124,247,0.14)';
+      for (const b of bubbles) {
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       for (const c of cubes) {
-        const bob = Math.sin(tick * 0.06 + c.phase) * 3;
+        const bob = Math.sin(tick * 0.06 + c.phase) * 2.5;
         ctx.save();
         ctx.translate(c.x, c.y + bob);
         ctx.fillStyle = CUBE_COLOR;
         ctx.beginPath();
-        ctx.roundRect(-CUBE_HALF, -CUBE_HALF, CUBE_HALF * 2, CUBE_HALF * 2, 3);
+        ctx.roundRect(-CUBE_HALF, -CUBE_HALF, CUBE_HALF * 2, CUBE_HALF * 2, 2.5);
         ctx.fill();
         ctx.strokeStyle = 'rgba(255,255,255,0.55)';
-        ctx.lineWidth = 1.2;
+        ctx.lineWidth = 1.1;
         ctx.beginPath();
-        ctx.moveTo(-CUBE_HALF + 3, -2);
-        ctx.lineTo(CUBE_HALF - 3, -2);
-        ctx.moveTo(-CUBE_HALF + 3, 3);
-        ctx.lineTo(CUBE_HALF - 3, 3);
+        ctx.moveTo(-CUBE_HALF + 2.5, -1.8);
+        ctx.lineTo(CUBE_HALF - 2.5, -1.8);
+        ctx.moveTo(-CUBE_HALF + 2.5, 2.6);
+        ctx.lineTo(CUBE_HALF - 2.5, 2.6);
         ctx.stroke();
         ctx.restore();
       }
 
-      /* 404 jellyfish. The label rides along in world units, so below ~7 CSS px
-         it degrades into a smudge — drop it and let the red shape carry the
-         meaning rather than render noise. */
-      const showEnemyLabel = 13 * cssPerWorld >= 7;
-      ctx.font = '600 13px ui-sans-serif, system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      for (const e of enemies) {
-        ctx.save();
-        ctx.translate(e.x, e.y);
-        ctx.fillStyle = ENEMY_COLOR;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, ENEMY_R, ENEMY_R * 0.8, 0, Math.PI, 0);
-        ctx.fill();
-        ctx.strokeStyle = ENEMY_COLOR;
-        ctx.lineWidth = 2.5;
-        ctx.lineCap = 'round';
-        for (let i = -1; i <= 1; i++) {
-          const sway = Math.sin(tick * 0.14 + i) * 3;
-          ctx.beginPath();
-          ctx.moveTo(i * 9, 0);
-          ctx.quadraticCurveTo(i * 9 + sway, 9, i * 9 + sway * 1.5, 17);
-          ctx.stroke();
-        }
-        if (showEnemyLabel) {
-          ctx.fillStyle = '#fff';
-          ctx.fillText('404', 0, -8);
-        }
-        ctx.restore();
-      }
+      for (const e of enemies) enemy(e);
 
       // player (blinks while invulnerable)
-      if (state === 'playing' && (invuln <= 0 || Math.floor(tick / 6) % 2 === 0)) {
+      if (invuln <= 0 || Math.floor(tick / 6) % 2 === 0) {
         octopus(player.x, player.y, tick, true);
       }
 
-      /* HUD — sized in CSS pixels so it stays legible on a phone. On narrow
-         panels the centre "Level" label is dropped rather than left to collide
-         with the labels either side of it. */
-      const pad = cssPx(14);
-      const row1 = cssPx(18);
-      const row2 = cssPx(40);
+      /* HUD on one row — in a 280-unit world a second row would eat a fifth of
+         the play area. Sized in CSS pixels so it stays legible on a phone. */
+      const pad = cssPx(13);
+      const row = cssPx(17);
       const roomy = cssPerWorld * W > 520;
 
-      ctx.font = `600 ${cssPx(14)}px ui-sans-serif, system-ui, sans-serif`;
+      ctx.font = `600 ${cssPx(13)}px ui-sans-serif, system-ui, sans-serif`;
+      ctx.textBaseline = 'middle';
       ctx.fillStyle = ink();
       ctx.textAlign = 'left';
-      ctx.fillText(`Score ${score}`, pad, row1);
-      ctx.textAlign = 'right';
-      ctx.fillText(`Cubes ${cubes.length}`, W - pad, row1);
-      if (roomy) {
-        ctx.textAlign = 'center';
-        ctx.fillStyle = inkDim();
-        ctx.fillText(`Level ${level}`, W / 2, row1);
-      }
+      ctx.fillText(`Score ${score}`, pad, row);
 
-      const dot = cssPx(6.5);
-      for (let i = 0; i < lives; i++) {
-        ctx.fillStyle = BRAND;
-        ctx.beginPath();
-        ctx.arc(pad + dot + i * cssPx(19), row2, dot, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.fillStyle = inkDim();
       ctx.textAlign = 'right';
-      ctx.font = `600 ${cssPx(12)}px ui-sans-serif, system-ui, sans-serif`;
-      ctx.fillText(roomy ? `Best ${hi}` : `Lv ${level} · Best ${hi}`, W - pad, row2);
+      ctx.fillStyle = inkDim();
+      ctx.fillText(
+        roomy
+          ? `Lv ${level} · ${'●'.repeat(lives)} · Best ${hi}`
+          : `L${level} · ${'●'.repeat(lives)} · ${hi}`,
+        W - pad,
+        row
+      );
 
       if (banner) {
-        ctx.font = `700 ${cssPx(26)}px ui-sans-serif, system-ui, sans-serif`;
+        ctx.font = `700 ${cssPx(20)}px ui-sans-serif, system-ui, sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillStyle = ink();
-        ctx.fillText(banner, W / 2, H / 2);
+        ctx.fillText(banner, W / 2, H * 0.5);
       }
     }
 
@@ -571,7 +719,7 @@
       cancelAnimationFrame(raf);
       ro.disconnect();
       themeObserver.disconnect();
-      playBtn.removeEventListener('click', start);
+      startBtn.removeEventListener('click', start);
       stopBtn.removeEventListener('click', onStopClick);
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('keyup', onKeyUp);

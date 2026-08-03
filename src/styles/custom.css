@@ -1915,60 +1915,83 @@ nav.sidebar {
 .skill-download-btn:hover { opacity: 0.85; color: var(--sl-color-white); }
 
 /* ==========================================================================
-   404 page — Ink-dash game + "search the docs" call to action
+   404 page — recovery block + Ink-dash strip
    ========================================================================== */
 
-.inkdash {
-  position: relative;
-  max-width: 720px;
-  margin: 1.5rem 0;
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--sl-color-bg);
+/* --- "did you mean" recovery block --- */
+.nf-help {
+  /* Tight on purpose: every 10px here decides whether the recovery links
+     below the strip land above the fold. */
+  margin: 1rem 0 1.1rem;
 }
 
-.inkdash-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Only capture touch gestures while a game is running — otherwise the canvas
-   would swallow page scrolling on mobile. */
-.inkdash[data-state='playing'] .inkdash-canvas { touch-action: none; }
-
-.inkdash-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Bottom-aligned so the idle octopus drawn in the upper third stays visible. */
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 16px 16px 30px;
-  text-align: center;
-  background: none;
-}
-
-.inkdash[data-state='playing'] .inkdash-overlay { display: none; }
-
-.inkdash-msg {
-  margin: 0;
-  font-family: var(--font-sans);
+.nf-asked {
+  margin: 0 0 0.5rem;
   font-size: 15px;
-  font-weight: 600;
-  color: var(--sl-color-white);
 }
 
-.inkdash-play {
-  padding: 9px 24px;
+.nf-asked-path {
+  overflow-wrap: anywhere;
+}
+
+.nf-guesses {
+  margin: 0 0 0.5rem;
+}
+
+.nf-guesses-lead {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-3);
+}
+
+.nf-guesses-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nf-guesses-list li {
+  margin: 0 0 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+}
+
+.nf-guesses-list a {
+  font-weight: 600;
+}
+
+.nf-guess-path {
+  font-family: var(--__sl-font-mono, ui-monospace, monospace);
+  font-size: 12.5px;
+  color: var(--sl-color-gray-3);
+  overflow-wrap: anywhere;
+}
+
+.nf-parent {
+  margin: 0 0 0.7rem;
+  font-size: 15px;
+}
+
+.nf-search-row {
+  margin: 0;
+}
+
+.notfound-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
   background: var(--sl-color-accent);
   border: 1px solid var(--sl-color-accent);
-  border-radius: 6px;
-  /* Literal white, not --sl-color-white: Starlight flips that token to near
-     black in the light theme, which would put dark text on the blue accent. */
+  border-radius: 8px;
+  /* Literal white: Starlight flips --sl-color-white to near black in the light
+     theme, which would put dark text on the blue accent. */
   color: #fff;
   font-family: var(--font-sans);
   font-size: 15px;
@@ -1977,25 +2000,79 @@ nav.sidebar {
   transition: opacity 0.15s;
 }
 
-.inkdash-play:hover { opacity: 0.85; }
+.notfound-search:hover { opacity: 0.85; }
 
-/* The only way out of a running game for anyone without an Esc key, so it lives
-   outside the overlay and is shown exactly while playing. Bottom-right corner —
-   the HUD occupies the top band. */
+/* --- Ink-dash strip ---
+   Deliberately frameless and unfilled, like Chrome's offline dinosaur: a
+   bordered, filled panel reads as a widget and competes with the page. Measured,
+   the old panel pushed the recovery links below the fold. */
+.inkdash {
+  position: relative;
+  max-width: 720px;
+  margin: 0.35rem 0 1rem;
+  background: none;
+  border: 0;
+}
+
+.inkdash-canvas {
+  display: block;
+  width: 100%;
+  /* Sizing lives here, not in the component: the strip keeps the reference
+     aspect until a phone width, then stops shrinking. Below that the game keeps
+     this height and narrows its world instead — at 87px it was unplayable, the
+     40px Stop button alone covering half of it. */
+  aspect-ratio: 960 / 245;
+  height: auto;
+  min-height: 148px;
+}
+
+/* Only capture touch gestures while a game runs — otherwise the strip would
+   swallow page scrolling on mobile. */
+.inkdash[data-state='playing'] .inkdash-canvas { touch-action: none; }
+
+/* Covers the strip so click and tap work anywhere on it, and space/Enter work
+   natively once focused — no global key handler, so page scrolling stays intact.
+   Styled as quiet text, not a call to action. */
+.inkdash-start {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 12px 6px;
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.inkdash[data-state='playing'] .inkdash-start { display: none; }
+
+.inkdash-start-label {
+  font-size: 13px;
+  color: var(--sl-color-gray-3);
+  text-align: center;
+  transition: color 0.15s;
+}
+
+.inkdash-start:hover .inkdash-start-label,
+.inkdash-start:focus-visible .inkdash-start-label {
+  color: var(--sl-color-white);
+}
+
 .inkdash-stop {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 6px;
+  bottom: 6px;
   display: none;
-  min-width: 64px;
+  min-width: 60px;
   min-height: 40px;
-  padding: 8px 16px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--sl-color-bg) 72%, transparent);
+  border: 1px solid var(--sl-color-gray-5);
   border-radius: 6px;
-  /* Literal white on the translucent plate — --sl-color-white flips to near
-     black in the light theme. */
-  color: #fff;
+  color: var(--sl-color-white);
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
@@ -2006,42 +2083,6 @@ nav.sidebar {
 .inkdash[data-state='playing'] .inkdash-stop { display: block; }
 
 .inkdash-stop:hover { opacity: 0.8; }
-
-.inkdash-hint {
-  margin: 0;
-  max-width: 34ch;
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--sl-color-gray-3);
-}
-
-.inkdash-hint kbd {
-  padding: 1px 5px;
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 4px;
-  background: var(--sl-color-gray-6);
-  font-size: 11px;
-}
-
-/* --- search CTA --- */
-.notfound-search {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 18px;
-  background: var(--sl-color-accent);
-  border: 1px solid var(--sl-color-accent);
-  border-radius: 8px;
-  color: #fff;
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-
-.notfound-search:hover { opacity: 0.85; }
 
 .notfound-partners {
   font-size: 13.5px;

@@ -1,0 +1,225 @@
+---
+/**
+ * NotFoundSuggestions.astro — the recovery block on the 404 page.
+ *
+ * Echoes back the path that was requested and offers the closest real pages.
+ * A typo is the most common way to land on a 404, and the old page never showed
+ * what was asked for, so the one thing the visitor could act on — spotting their
+ * own mistake — was missing.
+ *
+ * Matching runs against a list of real slugs embedded at build time rather than
+ * through Pagefind, because the problem is a mistyped URL and Pagefind searches
+ * page *content*, not addresses. It also keeps this working in `npm run dev`,
+ * where Pagefind isn't built at all, with no async load to race.
+ *
+ * Cost check: ~257 pages, roughly 17 KB of raw JSON (well under that gzipped),
+ * against a page that is already ~95 KB of HTML.
+ */
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('docs');
+
+/* `data.slug` is the canonical route in this repo, with `entry.id` as the
+   fallback — the same precedence src/components/PageTitle.astro uses. */
+const pages = entries
+  .map((entry) => {
+    const slug = ((entry.data as any).slug || entry.id || '')
+      .replace(/^\//, '')
+      .replace(/\/$/, '');
+    return { p: `/${slug}/`, t: entry.data.title as string };
+  })
+  .filter((page) => page.p !== '//')
+  .sort((a, b) => a.p.localeCompare(b.p));
+---
+
+<div class="nf-help" aria-live="polite">
+  <p class="nf-asked" hidden>
+    <span class="nf-asked-lead">There's no page at</span>
+    <code class="nf-asked-path"></code>
+  </p>
+
+  <div class="nf-guesses" hidden>
+    <p class="nf-guesses-lead">Did you mean:</p>
+    <ul class="nf-guesses-list"></ul>
+  </div>
+
+  <p class="nf-parent" hidden>
+    Or browse <a class="nf-parent-link" href="/"></a>.
+  </p>
+
+  <p class="nf-search-row">
+    <button class="notfound-search" type="button" id="notfound-search">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <span>Search the documentation</span>
+    </button>
+  </p>
+</div>
+
+{/* `<` is escaped so a title can never terminate the script tag early. */}
+<script
+  id="nf-pages"
+  type="application/json"
+  is:inline
+  set:html={JSON.stringify(pages).replace(/</g, '\\u003c')}
+/>
+
+<script>
+  /* Kept as a bundled module script (not `define:vars`, which would inline it
+     and drop types). The page list travels in a JSON script tag. */
+
+  type Page = { p: string; t: string };
+
+  const MAX_GUESSES = 3;
+  /* Below this, a guess is noise. A bot hitting /wp-login.php should get
+     nothing rather than a nonsense suggestion. */
+  const MIN_SCORE = 0.62;
+
+  function levenshtein(a: string, b: string): number {
+    if (a === b) return 0;
+    if (!a.length) return b.length;
+    if (!b.length) return a.length;
+    let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+    for (let i = 1; i <= a.length; i++) {
+      const curr = [i];
+      for (let j = 1; j <= b.length; j++) {
+        curr[j] = Math.min(
+          prev[j]! + 1,
+          curr[j - 1]! + 1,
+          prev[j - 1]! + (a[i - 1] === b[j - 1] ? 0 : 1)
+        );
+      }
+      prev = curr;
+    }
+    return prev[b.length]!;
+  }
+
+  const similarity = (a: string, b: string) => {
+    const max = Math.max(a.length, b.length);
+    return max === 0 ? 1 : 1 - levenshtein(a, b) / max;
+  };
+
+  const trim = (s: string) => s.replace(/^\/+/, '').replace(/\/+$/, '').toLowerCase();
+  const lastSeg = (s: string) => trim(s).split('/').pop() || '';
+  const firstSeg = (s: string) => trim(s).split('/')[0] || '';
+
+  function render() {
+    const root = document.querySelector<HTMLElement>('.nf-help');
+    const data = document.getElementById('nf-pages');
+    if (!root || !data?.textContent) return;
+
+    /* Idempotent: this runs both directly and on astro:page-load, and appending
+       twice would duplicate every guess. */
+    root.querySelectorAll<HTMLElement>('.nf-asked, .nf-guesses, .nf-parent')
+      .forEach((el) => { el.hidden = true; });
+    const listEl = root.querySelector<HTMLElement>('.nf-guesses-list');
+    if (listEl) listEl.textContent = '';
+
+    let pages: Page[] = [];
+    try {
+      pages = JSON.parse(data.textContent);
+    } catch {
+      return;
+    }
+
+    const path = location.pathname;
+    /* Reached directly rather than by a bad link: claiming "there's no page at
+       /404.html" would simply be false. */
+    const isDirect = /^\/(404(\.html)?\/?)?$/.test(path);
+    if (isDirect || !pages.length) return;
+
+    const askedEl = root.querySelector<HTMLElement>('.nf-asked');
+    const pathEl = root.querySelector<HTMLElement>('.nf-asked-path');
+    if (askedEl && pathEl) {
+      pathEl.textContent = path;
+      askedEl.hidden = false;
+    }
+
+    /* Score on the whole path and on the final segment, keep the better of the
+       two, and nudge matches that at least share a top-level section. */
+    const want = trim(path);
+    const wantLast = lastSeg(path);
+    const wantFirst = firstSeg(path);
+
+    const ranked = pages
+      .map((page) => {
+        const base = Math.max(
+          similarity(want, trim(page.p)),
+          similarity(wantLast, lastSeg(page.p))
+        );
+        const bonus = firstSeg(page.p) === wantFirst ? 0.12 : 0;
+        return { page, score: Math.min(base + bonus, 1) };
+      })
+      .filter((r) => r.score >= MIN_SCORE)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, MAX_GUESSES);
+
+    /* Hand the search button a query. The top guess's title beats the raw typo:
+       searching "data strems" through Pagefind — which indexes content, not
+       addresses — returns noise, while "Data Streams" returns the real thing. */
+    root.dataset.nfQuery = ranked.length
+      ? ranked[0]!.page.t
+      : wantLast.replace(/[-_]+/g, ' ').trim();
+
+    if (ranked.length) {
+      const box = root.querySelector<HTMLElement>('.nf-guesses');
+      const list = root.querySelector<HTMLElement>('.nf-guesses-list');
+      if (box && list) {
+        for (const { page } of ranked) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = page.p;
+          a.textContent = page.t;
+          const path_ = document.createElement('span');
+          path_.className = 'nf-guess-path';
+          path_.textContent = page.p;
+          li.append(a, path_);
+          list.append(li);
+        }
+        box.hidden = false;
+      }
+    }
+
+    /* Longest existing ancestor — useful even when nothing scores above the
+       threshold, e.g. /storage/whatever/ still has /storage/ to fall back to. */
+    const known = new Set(pages.map((page) => page.p));
+    const segs = want.split('/').filter(Boolean);
+    for (let i = segs.length - 1; i >= 1; i--) {
+      const candidate = `/${segs.slice(0, i).join('/')}/`;
+      if (!known.has(candidate)) continue;
+      const parent = pages.find((page) => page.p === candidate)!;
+      const wrap = root.querySelector<HTMLElement>('.nf-parent');
+      const link = root.querySelector<HTMLAnchorElement>('.nf-parent-link');
+      if (wrap && link) {
+        link.href = parent.p;
+        link.textContent = parent.t;
+        wrap.hidden = false;
+      }
+      break;
+    }
+  }
+
+  /* Delegated from `document`, and wired outside any lifecycle hook: Astro emits
+     a page-level script after </html>, which runs *after* ClientRouter has
+     already dispatched astro:page-load — a listener registered there would
+     silently never fire. */
+  document.addEventListener('astro:page-load', render);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render, { once: true });
+  } else {
+    render();
+  }
+</script>

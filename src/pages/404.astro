@@ -16,13 +16,18 @@
  */
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import InkDash from '../components/InkDash.astro';
+import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
 ---
 
 <StarlightPage
   frontmatter={{
     title: 'Page Not Found',
-    description:
-      "The page you requested doesn't exist. Search the docs below, or pick one of the links.",
+    /* One line on purpose. The block below already names the path that failed,
+       so a longer lede repeats it and costs vertical space the recovery links
+       need — measured, it was the difference between them landing above the
+       fold or below it. This still carries a direct visit to /404.html, where
+       that block hides itself. */
+    description: "That page doesn't exist. Here's what's nearby.",
     tableOfContents: false,
     pagefind: false,
     hideMeta: true,
@@ -32,31 +37,11 @@ import InkDash from '../components/InkDash.astro';
   prev={false}
   next={false}
 >
-  <p>
-    If we sent you here by mistake, tell us at
-    <a href="mailto:support@keboola.com">support@keboola.com</a> and we'll fix the link.
-  </p>
-
-  <p>
-    <button class="notfound-search" type="button" id="notfound-search">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-      </svg>
-      <span>Search the documentation</span>
-    </button>
-  </p>
+  {/* Requested path, closest matches, parent section and the search button —
+      one block, because "did you mean" and "search yourself" are one job. The
+      standalone support@ line that used to sit here is gone: the same address is
+      already a bullet in the list below. */}
+  <NotFoundSuggestions />
 
   <InkDash />
 
@@ -94,6 +79,43 @@ import InkDash from '../components/InkDash.astro';
      `astro:page-load` for the initial load — so wiring the button inside a
      page-load handler silently never binds. Delegation needs no lifecycle hook
      and keeps working across view-transition swaps. */
+  /* The URL already says what the visitor was after, so the modal opens with
+     that query instead of an empty field. NotFoundSuggestions publishes the
+     better wording on `.nf-help[data-nf-query]` — the matched page's title when
+     it found one, since Pagefind indexes content and would return noise for the
+     raw typo. Falls back to the slug words. */
+  function queryFromPath(): string {
+    const published = document.querySelector<HTMLElement>('.nf-help')?.dataset.nfQuery;
+    if (published) return published;
+
+    const seg = location.pathname
+      .replace(/\.html?$/, '')
+      .split('/')
+      .filter(Boolean)
+      .pop();
+    if (!seg || /^404$/.test(seg)) return '';
+    return decodeURIComponent(seg).replace(/[-_]+/g, ' ').trim();
+  }
+
+  /* Starlight discards its PagefindUI instance (`new PagefindUI({...})` in
+     components/Search.astro), so `triggerSearch` is out of reach — drive the
+     input directly. Svelte's handler reads from the event target, hence the
+     dispatched `input` event. The field only exists once PagefindUI has mounted,
+     so poll briefly with setTimeout — NOT requestAnimationFrame, which never
+     fires in a hidden tab. */
+  function prefill(query: string, attemptsLeft = 20) {
+    const input = document.querySelector<HTMLInputElement>(
+      '#starlight__search input.pagefind-ui__search-input'
+    );
+    if (!input) {
+      if (attemptsLeft > 0) setTimeout(() => prefill(query, attemptsLeft - 1), 50);
+      return;
+    }
+    if (input.value) return; // never clobber something the visitor typed
+    input.value = query;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement | null;
     if (!target?.closest('#notfound-search')) return;
@@ -105,6 +127,8 @@ import InkDash from '../components/InkDash.astro';
       document
         .querySelector<HTMLButtonElement>('site-search button[data-open-modal]')
         ?.click();
+      const query = queryFromPath();
+      if (query) prefill(query);
     }, 0);
   });
 </script>
