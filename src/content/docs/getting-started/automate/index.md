@@ -54,8 +54,8 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
 
 ## Build the flow
 
-1. Open **Flows** in the navigation — the section itself is titled **Conditional Flows** — and
-   click **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and click
+1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
+   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and click
    **Create Flow** again in the dialog.
 
    ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
@@ -80,12 +80,16 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
 
 5. Repeat for a third phase holding the Google Sheets destination configuration.
 
-6. Click **Save**. The Builder keeps your changes as a draft until you do — **Reset** throws
-   them away, and **Run flow** stays disabled until the flow is saved.
+6. Click **Save**. The Builder keeps your changes as a draft until you do — **Save** and
+   **Reset** only appear while there are unsaved changes, and **Run flow** stays disabled until
+   you save.
 
 You now have three phases: the load, then the transformation, then the delivery.
 
-![Screenshot - The finished flow](/getting-started/automate/05-flow-saved.png)
+![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
+
+*The capture above shows the first two phases; the delivery phase sits below them, off the bottom
+of the frame.*
 
 :::note[Clicking a task opens its settings]
 Worth knowing early: selecting a task gives you **Edit Configuration**, **Run rows** (for
@@ -114,10 +118,10 @@ the flow's own **All Runs** tab shows each run with its phases.
 
 ## Set a schedule
 
-Open the flow's **Schedules** tab and click **Create Schedule**. Pick a predefined interval —
-**Every 15 minutes**, **Every hour**, **Once a day**, **Once a week**, **End of month** — or set
-your own under **Set Your Own** (every day/week/month, at an hour and minute you choose). Then
-click **Set Up Schedule**.
+Open the flow's **Schedules** tab and click **Create Schedule**. Choose **Once a day** — that
+matches the daily pipeline this guide set out to build. The other predefined intervals are **Every
+15 minutes**, **Every hour**, **Once a week** and **End of month**, or set your own under **Set Your
+Own** (every day/week/month, at an hour and minute you pick). Then click **Set Up Schedule**.
 
 ![Screenshot - Create a schedule](/getting-started/automate/06-create-schedule.png)
 

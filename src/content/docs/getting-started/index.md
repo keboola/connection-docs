@@ -31,14 +31,15 @@ to look at — every opportunity with its account, its owner, and how likely it 
 
 ## Before you start
 
-- **A project.** [Step 1](/getting-started/project/) gets you one; the Free Plan is enough
-  for everything here.
+- **A project.** [Step 1](/getting-started/project/) gets you one. The Free Plan covers this
+  guide's work — the whole arc uses roughly six minutes of job runtime — as long as your project
+  has runtime minutes available.
 - **Basic SQL.** One `SELECT` with a couple of `JOIN`s. If you have never written SQL, the
   queries are given in full and you can paste them — in both Snowflake and BigQuery form,
   since which one you need depends on your project.
-- **A Google account**, for the delivery step. If you would rather not connect one, stop
-  after step 3 — you will have seen the core of the platform, though you will not have a
-  pipeline to automate in step 5.
+- **A Google account**, for the delivery step. If you would rather not connect one, skip step 4
+  and build step 5's flow with two phases instead of three — loading and transforming on a
+  schedule is a real pipeline, just one that keeps its result inside Keboola.
 
 Nothing needs installing. Everything below happens in the browser.
 

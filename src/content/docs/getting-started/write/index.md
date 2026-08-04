@@ -97,15 +97,15 @@ guessed. -->
    You are now in a small wizard with tabs — **Source**, **Destination**, **Options** —
    which is why the next two steps feel like one long form.
 
-9. On **Destination**, choose **New spreadsheet** and name the *spreadsheet* (the file that
-   will appear in Drive). An existing spreadsheet works too — you pick it from the authorized
-   account's Drive. Click **Next**.
+9. On **Destination**, choose **New spreadsheet** and name the *spreadsheet* — the file that
+   will appear in Drive. Use `[TUTORIAL] Opportunity denorm`. An existing spreadsheet works too;
+   you pick it from the authorized account's Drive. Click **Next**.
 
    ![Screenshot - New spreadsheet](/getting-started/write/writing9.png)
 
-10. On **Options**, name the *sheet* (the tab inside that file), select **Update rows**, and
-    click **Save Sheet**. This creates the empty spreadsheet in the authorized account, ready
-    to receive data.
+10. On **Options**, name the *sheet* — the tab inside that file — `opportunity_denorm`, select
+    **Update rows**, and click **Save Sheet**. This creates the empty spreadsheet in the authorized
+    account, ready to receive data.
 
     ![Screenshot - Name and save the sheet](/getting-started/write/writing10.png)
 
@@ -119,7 +119,8 @@ guessed. -->
 
 11. Click **Run Component**.
 
-12. When the job finishes, click the spreadsheet name to open it in Google Drive.
+12. When the job finishes, click the spreadsheet name — `[TUTORIAL] Opportunity denorm` — to open
+    it in Google Drive.
 
     ![Screenshot - Open the spreadsheet](/getting-started/write/writing11.png)
 

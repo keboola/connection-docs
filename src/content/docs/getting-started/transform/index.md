@@ -55,8 +55,8 @@ the output mapping. It is also what lets Keboola track data lineage across the p
    ![Screenshot - Transformations section](/getting-started/transform/00-transformations.png)
 
 2. Click **Create Transformation**. The **New Transformation** dialog lists what this project
-   can run — *Snowflake SQL Transformation*, *Python*, *R*, and *DuckDB Transformation* (beta),
-   or the Google BigQuery equivalent on a BigQuery project.
+   can run — *Snowflake SQL Transformation*, *Python*, *R*, and *DuckDB Transformation* (beta).
+   On a BigQuery project the SQL entry is the Google BigQuery one instead.
 
    **This list is how you find out which SQL dialect you need.** New
    [Free Plan](/management/payg-project/) projects default to the
@@ -76,19 +76,20 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
 1. In **Table Input Mapping**, click **Add Table Input**.
 
-2. **Source** searches your Storage as you type — type `opportunity` and tick the table. The
-   picker is multi-select, so you can tick `account`, `user` and `level` in the same go; it
-   keeps a count of what you have chosen.
+2. **Source** searches your Storage as you type. Type `opportunity` and tick the table; the
+   picker is multi-select, so tick `account`, `user` and `level` too — it keeps a count of what
+   you have chosen.
 
    ![Screenshot - Selecting source tables](/getting-started/transform/03-input-source.png)
 
-3. With a single table selected, **Table name** fills in automatically — `opportunity`. That is
-   the name your SQL uses, and it is what makes the queries below work no matter which bucket
-   the table actually lives in.
+3. Click **Add Input**. Each table arrives with its **Input Table** name taken from the source
+   table — `opportunity`, `account`, `user`, `level`.
 
-4. Click **Add Input**.
+   **Those four names are what your SQL uses**, which is why the queries below work no matter
+   which bucket the tables actually live in. If you add a table on its own rather than in a
+   batch, the dialog exposes the same value as a **Table name** field you can edit.
 
-You should end up with four inputs — `opportunity`, `account`, `user`, `level`:
+You should end up with four inputs, listed as **Source Table → Input Table**:
 
 ![Screenshot - The finished input mapping](/getting-started/transform/04-input-mapping.png)
 
@@ -207,19 +208,22 @@ JOIN
     tmp_level ON user.Name = tmp_level.Name;
 ```
 
-<!-- VERIFY(owner): this BigQuery variant is carried over from the previous version of the
-page and has NOT been run against a BigQuery project — the demo project (264) is Snowflake,
-so it could not be tested during the rewrite. It matters more than it used to: new Free Plan
-projects default to BigQuery (storage/index.md), so this is the block most new readers will
-use. The original also referenced `Level`.`Level` inside the CTE, which looks wrong;
+<!-- VERIFY(owner): this BigQuery variant has NOT been run — the demo project (264) is Snowflake.
+It matters more than it used to: new Free Plan projects default to BigQuery (storage/index.md), so
+this is the block most new readers hit. Two specific things to settle on a BigQuery project:
+(1) `SELECT * EXCEPT (_timestamp)` assumes the input tables carry a `_timestamp` column. The
+Snowflake run produced exactly 15 + 8 = 23 columns, i.e. no `_timestamp` reached the query there,
+so if BigQuery staging behaves the same the EXCEPT will fail with "column _timestamp not found"
+and should simply be dropped. (2) The original also referenced `Level`.`Level` inside the CTE,
 corrected to `Level` here but unverified. -->
 
 ## Run it and check the result
 
 Click **Run Transformation** and confirm with **Run**. That creates a background job which copies
-the input tables in, runs your SQL, and writes `opportunity_denorm` back to Storage. The job log
-spells the mechanism out — *"Loading 4 tables to workspace"*, then *"Cloned table … into workspace
-WORKSPACE_… as opportunity"* — which is the mapping model from the top of this page, in action.
+the input tables in, runs your SQL, and writes `opportunity_denorm` back to Storage. On the Snowflake run behind these
+screenshots the job log spelled the mechanism out — *"Loading 4 tables to workspace"*, then
+*"Cloned table … into workspace WORKSPACE_… as opportunity"* — which is the mapping model from the
+top of this page, in action.
 
 ![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
 
@@ -229,7 +233,9 @@ seconds — and a green **Success** means it worked.
 
 ![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
 
-Then open **Storage**: there is a new bucket `out.c-denormalize-opportunities` holding
+Then open **Storage**: there is a new bucket `out.c-denormalize-opportunities` — listed as
+`denormalize-opportunities` with an **OUT** badge, the same way the `in.c-` prefix was hidden in
+step 2 — holding
 `opportunity_denorm` — **639 rows and 23 columns**. That row count is the same as the source
 `opportunity` table, which is the quickest sanity check that the three joins matched every row
 without duplicating any.
@@ -261,6 +267,11 @@ experimenting.
   hit this here — but with your own data, cast defensively:
   `TRY_CAST("Probability" AS NUMBER(38,9))` on Snowflake,
   `SAFE_CAST(Probability AS INT64)` on BigQuery.
+- **`SELECT * EXCEPT: column _timestamp not found`** (BigQuery). The query strips a system
+  column your input tables do not have — delete `EXCEPT (_timestamp)` and run again. If instead
+  the output mapping rejects an unexpected `_timestamp` column, put it back. Which of the two you
+  hit depends on how your project stages input tables; see
+  [mappings](/transformations/mappings/).
 - **You want to see what the query actually returns before saving.** That is what a
   [workspace](/getting-started/transform/workspace/) is for.
 

@@ -146,7 +146,8 @@ depends on.
 
 - **The job fails with a 404.** The path is wrong, or missing its leading slash. Base URL and
   path are concatenated, so `https://help.keboola.com` + `/getting-started/user.csv` is right,
-  while a base URL with a trailing slash gives you a double slash.
+  while a base URL with a trailing slash gives you a double slash. Open the full URL in a browser
+  to see whether the file is really there.
 - **Every row arrives as one column.** The **Delimiter** setting does not match the file. These
   files are comma-separated.
 - **The first data row is missing, or columns are called `col_1`.** Wrong header option — set
