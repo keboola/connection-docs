@@ -180,7 +180,7 @@ WITH tmp_level AS (
 ),
 tmp_opportunity AS (
     SELECT
-        * EXCEPT (_timestamp),
+        *,
         CASE
             WHEN CAST(Probability as INT64) < 50 THEN 'Poor'
             WHEN CAST(Probability as INT64) < 70 THEN 'Good'
@@ -210,12 +210,14 @@ JOIN
 
 <!-- VERIFY(owner): this BigQuery variant has NOT been run — the demo project (264) is Snowflake.
 It matters more than it used to: new Free Plan projects default to BigQuery (storage/index.md), so
-this is the block most new readers hit. Two specific things to settle on a BigQuery project:
-(1) `SELECT * EXCEPT (_timestamp)` assumes the input tables carry a `_timestamp` column. The
-Snowflake run produced exactly 15 + 8 = 23 columns, i.e. no `_timestamp` reached the query there,
-so if BigQuery staging behaves the same the EXCEPT will fail with "column _timestamp not found"
-and should simply be dropped. (2) The original also referenced `Level`.`Level` inside the CTE,
-corrected to `Level` here but unverified. -->
+this is the block most new readers hit. What is left to check is BigQuery
+DIALECT only: the CTE form, the CAST syntax, and that the unquoted identifiers resolve. Two traps
+already resolved from our own docs, so do not re-introduce them: (1) the original carried
+`SELECT * EXCEPT (_timestamp)`, which looked BigQuery-specific but is not — `_timestamp` appears
+only when input tables are staged by CLONE, on either backend
+(transformations/mappings/index.md:238), and the documented fix is the dropTimestampColumn input
+mapping option rather than editing the query, so the EXCEPT is gone and the troubleshooting list
+covers it. (2) The original referenced `Level`.`Level` inside the CTE, corrected to `Level`. -->
 
 ## Run it and check the result
 
@@ -267,11 +269,12 @@ experimenting.
   hit this here — but with your own data, cast defensively:
   `TRY_CAST("Probability" AS NUMBER(38,9))` on Snowflake,
   `SAFE_CAST(Probability AS INT64)` on BigQuery.
-- **`SELECT * EXCEPT: column _timestamp not found`** (BigQuery). The query strips a system
-  column your input tables do not have — delete `EXCEPT (_timestamp)` and run again. If instead
-  the output mapping rejects an unexpected `_timestamp` column, put it back. Which of the two you
-  hit depends on how your project stages input tables; see
-  [mappings](/transformations/mappings/).
+- **`Invalid columns: _timestamp`** when the output is written. Your input tables were staged by
+  *cloning*, which copies Keboola's internal `_timestamp` column along with the data — and that
+  column cannot be written back to Storage. It is not backend-specific and it is not a problem with
+  the query. The clean fix is the **`dropTimestampColumn`** option on the input mapping; see
+  [the `_timestamp` system column](/transformations/mappings/#_timestamp-system-column). The run
+  behind these screenshots was copy-staged, so the column never appeared.
 - **You want to see what the query actually returns before saving.** That is what a
   [workspace](/getting-started/transform/workspace/) is for.
 
