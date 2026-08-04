@@ -119,7 +119,11 @@
   const ENEMY_R = 18;
   const SQUID_R = 30;
   const START_LIVES = 3;
-  const INVULN_FRAMES = 72; // ~1.2s at 60fps
+  /* One more life every five levels, up to this. Without it the game was a
+     three-mistake run: playtesters reliably died on level 10 with all three lives
+     and nobody ever saw the level-15 boss. */
+  const MAX_LIVES = 5;
+  const INVULN_FRAMES = 90; // ~1.5s at 60fps
   const HI_KEY = 'kbc-inkdash-hi';
 
   const BRAND = '#097CF7';
@@ -167,17 +171,23 @@
       /* Named on the level that introduces it, boss or not. */
       intro: ENEMY_TYPES.find((t) => t.from === level),
       squids,
-      /* The cap tracks the field: the play state is twice as deep as the resting
-         panel, so there is room to dodge past the 8 a shallow strip topped out
-         at — but a cap there still has to be, or late levels become a wall
-         rather than harder.
+      /* Grows every other level and stops at 9. It used to add one per level up to
+         11, which is what turned level 9 onward into a wall — measured on real
+         players, runs ended at 10 with all three lives spent.
 
          Once a squid is on the field the swarm gets out of the way almost
          entirely: 11 jellyfish plus a charging boss was unreadable chaos, and the
          boss is the level. Three or four of them, and the room to dodge is the
          point. */
-      count: squids ? (squids >= 2 ? 3 : 4) : Math.min(3 + (level - 1), 11),
-      speed: 1.7 + 0.28 * (level - 1),
+      count: squids
+        ? (squids >= 2 ? 3 : 4)
+        : Math.min(3 + Math.floor((level - 1) * 0.75), 9),
+      /* Approaches 4.7 instead of climbing forever. The old linear ramp
+         (1.7 + 0.28 per level) passed the player's own cap of 7 around level 20,
+         so late levels were not hard, they were unplayable: nothing to dodge to.
+         Pressure past the plateau comes from density and from the chasers, which
+         is pressure a player can actually answer. */
+      speed: 1.7 + 3 * (1 - Math.exp(-(level - 1) / 6)),
     };
   }
 
@@ -466,6 +476,38 @@
     function reflowAmbient() {
       if (Math.abs(W - ambientW) < W * 0.12 && H === ambientH) return;
       spawnAmbient();
+    }
+
+    /* Emptiest of a handful of candidate spots — the one whose nearest enemy is
+       furthest away. Six fixed candidates rather than random sampling: the field
+       is small, the answer has to be instant, and a deterministic set means the
+       respawn never lands somewhere absurd like hard against a wall. */
+    function respawnSpot() {
+      const top = playTop();
+      const bottom = playBottom();
+      const mid = (top + bottom) / 2;
+      const candidates = [
+        { x: W * 0.2, y: mid },
+        { x: W * 0.8, y: mid },
+        { x: W * 0.5, y: top + (bottom - top) * 0.18 },
+        { x: W * 0.5, y: bottom - (bottom - top) * 0.18 },
+        { x: W * 0.2, y: top + (bottom - top) * 0.22 },
+        { x: W * 0.8, y: bottom - (bottom - top) * 0.22 },
+      ];
+
+      let best = candidates[0]!;
+      let bestClearance = -1;
+      for (const c of candidates) {
+        let nearest = Infinity;
+        for (const e of enemies) {
+          nearest = Math.min(nearest, Math.hypot(e.x - c.x, e.y - c.y) - radiusOf(e.type));
+        }
+        if (nearest > bestClearance) {
+          bestClearance = nearest;
+          best = c;
+        }
+      }
+      return best;
     }
 
     function spawnLevel() {
@@ -843,8 +885,14 @@
             lives -= 1;
             invuln = INVULN_FRAMES;
             killedBy = e.type.code;
-            player.x = W * 0.25;
-            player.y = H / 2;
+            /* Respawn in the emptiest corner of the field, not always the same
+               one. Returning to a fixed point on a crowded level dropped the
+               player straight back into the crowd that just hit them, and the
+               remaining lives went in a couple of seconds — the single loudest
+               complaint from playtesting. */
+            const spot = respawnSpot();
+            player.x = spot.x;
+            player.y = spot.y;
             player.vx = 0;
             player.vy = 0;
             pointerTarget = null;
@@ -870,6 +918,13 @@
         banner = plan.intro
           ? `Level ${level} · ${plan.intro.code} incoming`
           : `Level ${level}`;
+        /* Every fifth level hands a life back, up to MAX_LIVES. Announced on the
+           same banner rather than in its own, so surviving to the reward reads as
+           part of reaching the level. */
+        if (level % 5 === 0 && lives < MAX_LIVES) {
+          lives += 1;
+          banner += ' · +1 life';
+        }
         bannerTimer = 80;
         spawnLevel();
       }
