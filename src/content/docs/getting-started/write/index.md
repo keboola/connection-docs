@@ -12,9 +12,11 @@ warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started
 
 <!-- Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching
 "Sheets" returns 5 components with Google Sheets Data Source and Data Destination adjacent, which is
-why the page now names the type explicitly. Steps 2-3 are NOT verified even though they need no
-OAuth — see the VERIFY below. Steps 4-12 need a Google OAuth authorization only the owner can
-create, so their captures are still the legacy ones. -->
+why the page now names the type explicitly. Step 2 verified the same day: Add Component on the
+destination card opens a dialog whose only button is Connect To My Data (the HTTP connector also
+offers Use With Demo Data because it declares has-sample-data; this one does not). Steps 4-12 need a
+Google OAuth authorization only the owner can create, so their captures are still the legacy
+ones. -->
 
 ## What you need
 
@@ -43,12 +45,8 @@ Google Sheets is the easiest destination to try. The
 
    ![Screenshot - Search for the Google Sheets destination](/getting-started/write/01-find-destination.png)
 
-2. Click **Add Component**, then **Connect To My Data**.
-
-   <!-- VERIFY(owner): inherited from the previous version of this page and not walked. The HTTP
-   connector shows the Connect To My Data / Use With Demo Data choice because it declares the
-   has-sample-data feature; keboola.wr-google-sheets does not declare it, so this destination may
-   go straight to the create-configuration dialog. Checkable without authorizing anything. -->
+2. Click **Add Component**, then **Connect To My Data** — the only button here, unlike the HTTP
+   connector in step 2, which also offered demo data.
 
    ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
 
