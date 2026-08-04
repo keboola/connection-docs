@@ -597,7 +597,7 @@ With the automatic mapping (without any `mappings` configuration), the following
 users:
 
 |id|name|contacts\_email|contacts\_phone|contacts\_addresses|contacts\_skype|
-|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 |123|John Doe|john.doe@example.com|987345765|users.contacts_912c86dec7acdb9d8a17c97eb464aec6||
 |234|Jane Doe|jane.doe@example.com||users.contacts_4cf9e859113127acb138872cc630e75f|jane.doe|
 
