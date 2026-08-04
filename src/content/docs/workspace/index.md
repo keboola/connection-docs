@@ -267,7 +267,7 @@ advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with t
 
 ### Read-Only Input Mapping
 
-*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+*Note: You must be using [new transformations](/transformations/) to see this feature.*
 
 The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
 For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.

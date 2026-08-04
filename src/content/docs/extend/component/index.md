@@ -45,7 +45,7 @@ from our side. It also takes care of executing your component in its own [isolat
 ## Requirements
 Before you start developing a new component, you should
 
-- have a [Keboola project](/#development-project) where you can test your code.
+- have a [Keboola project](https://developers.keboola.com/#development-project) where you can test your code.
 - get yourself acquainted with Docker. You should be
 able to run `docker` commands. Strictly speaking, you can get away
 with not using them, but it will certainly speed things up for you.

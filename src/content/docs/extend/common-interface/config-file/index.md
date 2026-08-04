@@ -26,7 +26,7 @@ way you wish. Your component should validate the contents of this section. For p
 data, use [encryption](/overview/encryption/). This section is not available in Transformations.
 - `image_parameters`: See [below](#image-parameters).
 - `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/) or 
-[Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-workspace) .
+[Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-database-workspace) .
 - `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. All
 actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
@@ -213,7 +213,7 @@ write the usage file regularly** during the component run, not only at the end.
 validated and a wrong format will cause a component failure.*
 
 ## Examples
-To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder). You will get a
+To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](https://api.keboola.com/?service=job-queue#post-/jobs).
@@ -387,7 +387,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 ```
 
 #### Input mapping — column types
-This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/workspaces/-workspaceId-/load). It also acts the same way as `columns` setting allowing you to limit the table columns.
+This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-database-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/workspaces/-workspaceId-/load). It also acts the same way as `columns` setting allowing you to limit the table columns.
 If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
 
 ```json

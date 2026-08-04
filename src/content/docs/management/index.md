@@ -15,7 +15,7 @@ Everything that happens with your data in Keboola at any stage of your project i
 It enables you to use your uploaded data for other tables, access previous versions of your tables, and
 extract all your project data. Everything done in Keboola is traceable, and if possible, also recoverable.
 
-- [**Jobs**](/management/jobs/#jobs) — give you an overview of all your jobs,
+- [**Jobs**](/management/jobs/) — give you an overview of all your jobs,
 running and finished (what tables were modified, how much data was transferred and
 what events occurred during the job execution).
 - [**Storage Jobs**](/management/jobs/#storage-jobs) — track all data

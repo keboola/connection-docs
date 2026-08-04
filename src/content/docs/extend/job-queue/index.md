@@ -23,13 +23,13 @@ All [components](/extend/component/), including our internal R and Python Transf
 The Job Queue functionality can be described in the following steps:
 
 - Download and build the specified Docker image.
-- Download all [tables](/extend/common-interface/folders/#dataintables-folder) and [files](/extend/common-interface/folders/#datainfiles-folder) specified in the input mapping from Storage.
+- Download all [tables](/extend/common-interface/folders/#folder-dataintables) and [files](/extend/common-interface/folders/#folder-datainfiles) specified in the input mapping from Storage.
 - Create a [configuration file](/extend/common-interface/config-file/).
 - Run [before processors](/extend/component/processors/) if there are any.
 - Run the Docker image (create a Docker container).
 - Run [after processors](/extend/component/processors/) if there are any.
-- Upload all [tables](/extend/common-interface/folders/#dataouttables-folder) and
-[files](/extend/common-interface/folders/#dataoutfiles-folder) in the output mapping to Storage.
+- Upload all [tables](/extend/common-interface/folders/#folder-dataouttables) and
+[files](/extend/common-interface/folders/#folder-dataoutfiles) in the output mapping to Storage.
 - Delete the container and all temporary files.
 
 When the component execution is finished, Job Queue automatically collects the exit code and the content of STDOUT and STDERR.
@@ -65,7 +65,7 @@ The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
 
 - run a [component](/extend/component/).
 - [encrypt values](/overview/encryption/).
-- [prepare the data folder](/extend/component/running/#preparing-the-data-folder).
+- [prepare the data folder](/extend/component/running/#preparing-data-folder).
 - run [component actions](/extend/common-interface/actions/).
 - run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).
 

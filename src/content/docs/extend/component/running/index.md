@@ -197,7 +197,7 @@ the component locally. You should now be able to run the component with it:
 If you want to run a component during development, it is the easiest to build it locally and
 [run the built version](/extend/component/tutorial/debugging/). If you want to run a production code component, you
 need to do a couple of things. Let's assume you want to run the `keboola-test.ex-docs-tutorial` component and you have
-already [prepared the data directory](#preparing-the-data-folder).
+already [prepared the data directory](#preparing-data-folder).
 
 The next step is to obtain the repository settings and credentials from the
 [Developer Portal](https://components.keboola.com/). You can either use the [API](https://api.keboola.com/?service=developer-portal) or
@@ -262,7 +262,7 @@ This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), 
 
 ## Running Transformations
 Both R and Python transformations are implemented as Docker components. They can be run
-locally as well. Use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder) to obtain the data directory.
+locally as well. Use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder) to obtain the data directory.
 In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), specify the full
 configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
 for both R and Python transformations.
