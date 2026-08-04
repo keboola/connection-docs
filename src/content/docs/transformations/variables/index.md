@@ -54,45 +54,11 @@ or
 
 
 ### Flow Usage
-When you use [flows](/flows/) to automate transformations with variables, you can
-either rely on the default values, or you can override them for each flow task.
-This can be done by configuration of task parameters:
-
-![Screenshot - Orchestration Task Parameters](/transformations/variables/orchestration-parameters.png)
-
-There you can set variable values override:
-
-![Screenshot - Task Parameters](/transformations/variables/task-parameters.png)
-
-In the [above example](/transformations/variables/#example), you can override the default 
-value by **adding** the following code to the configuration json:
-
-```json
-    "variableValuesData": {
-        "values": [
-            {
-                "name": "multiplier",
-                "value": "1000"
-            }
-        ]
-    }
-```
-
-The resulting configuration will look similar to this:
-
-```json
-{
-    "config": "6939",
-    "variableValuesData": {
-        "values": [
-            {
-                "name": "multiplier",
-                "value": "1000"
-            }
-        ]
-    }
-}
-```
+A flow can either rely on a variable's default value or supply its own. A flow variable
+whose name matches a variable declared here fills it in when the job runs — see
+[How Variables Reach Component Jobs](/flows/#how-variables-reach-component-jobs). To
+override a value on one specific task instead, set it in that task's
+[advanced parameters](/flows/#control-task-execution).
 
 ## Shared Code
 Shared code is slightly related to variables in that it is another option how to make the
