@@ -1,12 +1,12 @@
 ---
 title: 'Load from Google Sheets'
 slug: 'getting-started/load/googlesheets'
-description: 'Load a table from an external spreadsheet automatically using the Google Sheets data source connector instead of uploading a file by hand.'
+description: 'Load a table from an external spreadsheet using the Google Sheets data source connector, with an authorized account rather than a public URL.'
 redirect_from:
   - /tutorial/load/googlesheets/
 ---
 
-A side trip from [Load Your Data](/getting-started/load/): instead of uploading a file by hand, you will pull the data straight out of a spreadsheet with the Google Sheets data source connector.
+A side trip from [Load Your Data](/getting-started/load/): the same kind of load, but from a spreadsheet you own — so the connector needs an authorized Google account instead of a public URL.
 
 
 

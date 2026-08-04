@@ -123,7 +123,8 @@ click **Set Up Schedule**.
 
 The schedule appears in the tab with a toggle, so you can pause it without deleting it, and the
 tab shows a count. A flow can hold **several** schedules: they work independently, and the flow
-runs whenever any of them fires. Times are UTC.
+runs whenever any of them fires. The schedule I set showed as `At 08:45, every day (UTC)`, so
+check the timezone the list displays before relying on it.
 
 ![Screenshot - The schedule](/getting-started/automate/07-schedule-set.png)
 

@@ -56,7 +56,7 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
 2. Click **Create Transformation**. The **New Transformation** dialog lists what this project
    can run — *Snowflake SQL Transformation*, *Python*, *R*, and *DuckDB Transformation* (beta),
-   or *BigQuery SQL Transformation* on a BigQuery project.
+   or the Google BigQuery equivalent on a BigQuery project.
 
    **This list is how you find out which SQL dialect you need.** New
    [Free Plan](/management/payg-project/) projects default to the
@@ -161,8 +161,8 @@ column names in the sample data are mixed case.
 
 ### If your project uses BigQuery
 
-[BigQuery](/transformations/bigquery/) does not quote identifiers this way, and CTEs replace
-the temporary tables. The result is the same table:
+[BigQuery](/transformations/bigquery/) does not quote identifiers this way, and CTEs replace the
+temporary tables. It is written to produce the same table:
 
 ```sql
 CREATE TABLE opportunity_denorm AS
@@ -223,8 +223,8 @@ WORKSPACE_… as opportunity"* — which is the mapping model from the top of th
 
 ![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
 
-A **Snowflake SQL job has been scheduled** notification appears with a **Show job** link; you can
-also find it under **Jobs**. It takes under a minute — the run behind these screenshots took 53
+A notification appears with a **Show job** link — *Snowflake SQL job has been scheduled*, or your
+backend's equivalent — and you can also find it under **Jobs**. It takes under a minute — the run behind these screenshots took 53
 seconds — and a green **Success** means it worked.
 
 ![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
@@ -238,8 +238,9 @@ The 23 columns are the original 15 plus the eight the SQL added: `ProbabilityCla
 `UserSalesMarket`, `UserGlobalMarket`, `AccountName`, `AccountRegion`, `AccountStatus` and
 `AccountFirstOrder`.
 
-The table list also has a **Recently Updated By** column, showing `Denormalize opportunities /
-Snowflake SQL` — the fastest way to answer "where did this table come from?" months later.
+The table list also has a **Recently Updated By** column, naming the transformation and its
+backend (`Denormalize opportunities / Snowflake SQL` here) — the fastest way to answer "where did
+this table come from?" months later.
 
 ![Screenshot - The new table in Storage](/getting-started/transform/10-table-in-storage.png)
 

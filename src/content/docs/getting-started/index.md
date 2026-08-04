@@ -73,8 +73,8 @@ Optional side trips, once the main path makes sense. None of them are needed to 
 arc:
 
 - **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
-  **[Load from a Database](/getting-started/load/database/)** — do the loading step the way a
-  real project does it, with a connector instead of a manual upload.
+  **[Load from a Database](/getting-started/load/database/)** — load from a source that needs
+  credentials, rather than the public URL step 2 uses.
 - **[Use a Workspace](/getting-started/transform/workspace/)** — develop and test SQL against
   a copy of your data before committing it to a transformation.
 - **[Ad-Hoc Data Analysis](/getting-started/ad-hoc/)** — explore arbitrary data in a Python

@@ -9,7 +9,7 @@ Step 1 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 1 of 6). The project-screen tour below was verified live in
 project 264 on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components /
-Workspaces / Transformations / Data Catalog / Semantic Layer (Beta) / Jobs, and Kai appears as
+Workspaces / Transformations / Data Catalog / Jobs, and Kai appears as
 "Kai Agent" with a Beta pill. Free Plan limits are sourced from /management/payg-project/. The
 sign-up wizard is deliberately NOT walked — creating accounts is out of scope for automated
 verification — so those three lines rest on the Pay As You Go page. -->
@@ -35,8 +35,11 @@ You have three ways in, in order of how quickly they get you started:
 
 1. **Free Plan** — [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
    right now. It is enough for everything in this guide: 250 GB of Storage and up to 60
-   minutes of job runtime a month (the free allowance tracks your previous month's usage, so
-   a brand-new project starts at the full 60). See [Pay As You Go](/management/payg-project/)
+   minutes of job runtime a month (the free allowance tracks your previous month's usage).
+
+   <!-- VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
+   actual usage from the previous month" but never states what a project gets in its first month.
+   Worth stating on that page. --> See [Pay As You Go](/management/payg-project/)
    for the full list of limits — including that the Free Plan does not let you choose a stack
    and gives you one project.
 2. **Join an existing project** — ask an admin of your company's Keboola organization to

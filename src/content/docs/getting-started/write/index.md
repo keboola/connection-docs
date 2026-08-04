@@ -12,9 +12,9 @@ warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started
 
 <!-- Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching
 "Sheets" returns 5 components with Google Sheets Data Source and Data Destination adjacent, which is
-why the page now names the type explicitly. Steps 4-12 are NOT yet verified — they need a Google
-OAuth authorization in the project, which only the owner can create, so those captures are still the
-legacy ones. -->
+why the page now names the type explicitly. Steps 2-3 are NOT verified even though they need no
+OAuth — see the VERIFY below. Steps 4-12 need a Google OAuth authorization only the owner can
+create, so their captures are still the legacy ones. -->
 
 ## What you need
 
@@ -38,12 +38,17 @@ Google Sheets is the easiest destination to try. The
 1. Open **Components** and search for `Sheets`. Five results come back, and the first two are
    **Google Sheets — Data Source** and **Google Sheets — Data Destination**: near-identical
    names, opposite jobs. Pick the **Data Destination** one (component ID
-   `keboola.wr-google-sheets`) and click **Add Component**. Picking the data source by mistake
-   makes the rest of this page impossible.
+   `keboola.wr-google-sheets`). Picking the data source by mistake makes the rest of this page
+   impossible.
 
    ![Screenshot - Search for the Google Sheets destination](/getting-started/write/01-find-destination.png)
 
 2. Click **Add Component**, then **Connect To My Data**.
+
+   <!-- VERIFY(owner): inherited from the previous version of this page and not walked. The HTTP
+   connector shows the Connect To My Data / Use With Demo Data choice because it declares the
+   has-sample-data feature; keboola.wr-google-sheets does not declare it, so this destination may
+   go straight to the create-configuration dialog. Checkable without authorizing anything. -->
 
    ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
 
@@ -104,9 +109,11 @@ guessed. -->
 
     ![Screenshot - Name and save the sheet](/getting-started/write/writing10.png)
 
-    **Update rows** replaces the sheet's contents on every run. The alternative, **Append
-    rows**, adds to the bottom — right for a log, wrong for a table you want to reflect
-    current state.
+    **Update rows** replaces the sheet's contents on every run. The alternative appends to the
+    bottom instead — right for a log, wrong for a table you want to reflect current state.
+
+    <!-- VERIFY(owner): "Update rows" comes from the previous version of this page; the exact label
+    of the append option was never documented here and is unverified. -->
 
 ## Run it and check the result
 

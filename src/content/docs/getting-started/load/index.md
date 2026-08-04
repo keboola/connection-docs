@@ -13,7 +13,7 @@ Step 2 of the [Getting Started](/getting-started/) arc.
 <!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
 and cannot take new configurations (verified live in project 264, 2026-08-04). Every label,
 default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http, and
-the run succeeded in 32s. Note our own connector page
+the four-row run took 2 min 4 s. Note our own connector page
 (components/extractors/storage/http/index.md) still says "Add Table"; the UI says "Add Row". -->
 
 ## What you need
@@ -96,6 +96,7 @@ sharing the configuration's base URL.
 
    - **Save Settings → Table name** is already `opportunity`, taken from the row name.
    - **Delimiter** `,` and **Enclosure** `"` are already right for these files.
+   - Leave **Incremental load** off: each run should replace the table, not append to it.
    - **Header & Primary Key → Read Header** already reads *Read the header from the file(s)
      header*, which is what you want — the sample files carry column names on the first line.
      Leave it alone. (The alternatives are typing the columns yourself or having them generated
@@ -122,8 +123,9 @@ Watch it in **Jobs**. The rows are fetched one after another, so expect a couple
 all four — the run behind these screenshots took 2 minutes 4 seconds.
 
 Then open **Storage**. Data lives in **buckets**, and each bucket holds tables. The connector
-created a bucket of its own — named after the configuration, shown with an **IN** badge —
-holding four tables: `opportunity`, `account`, `user` and `level`.
+created a bucket of its own — its name is the component plus the configuration's ID, like
+`keboola-ex-http-01kz5050bhhezq9scmd0t9c73f`, shown with an **IN** badge — holding four tables:
+`opportunity`, `account`, `user` and `level`.
 
 ![Screenshot - The four tables in Storage](/getting-started/load/06-storage-tables.png)
 
@@ -147,8 +149,8 @@ depends on.
   while a base URL with a trailing slash gives you a double slash.
 - **Every row arrives as one column.** The **Delimiter** setting does not match the file. These
   files are comma-separated.
-- **The first data row is missing, or columns are called `col_1`.** Wrong header option — pick
-  **Read from the file(s) header**.
+- **The first data row is missing, or columns are called `col_1`.** Wrong header option — set
+  **Read Header** back to *Read the header from the file(s) header*.
 - **The table is empty but the job succeeded.** The URL returned an HTML error page instead of a
   CSV. Open it in a browser to see what actually comes back.
 - **You want the four files fetched at the same time.** Raise **Parallel jobs** on the
