@@ -36,14 +36,26 @@
  */
 ---
 
-<div class="inkdash" data-state="idle">
+{/* tabindex="-1" so start() has somewhere to put focus. The start button hides
+    itself when a game begins, which dropped focus to <body> — nothing announced,
+    and a screen-reader user had no idea what had just happened. */}
+<div class="inkdash" data-state="idle" tabindex="-1">
   <canvas class="inkdash-canvas" aria-hidden="true"></canvas>
+
+  {/* Before the controls on purpose: read linearly, "this is optional" has to
+      arrive BEFORE the button it excuses, and `aria-describedby` ties it to that
+      button so it is announced with it rather than only in reading order. */}
+  <p class="sr-only" id="inkdash-note">
+    This is an optional game and is not needed to use the documentation. The
+    search above and the links below are what you want if you are looking for a
+    page. While it runs, press Escape or the Stop button to leave.
+  </p>
 
   {/* The start control is a real button covering the whole panel: click and tap
       work everywhere, and space/Enter work natively once it has focus — so we
       never register a global space handler and never take scrolling from the
       page. The pill inside is styling, not a nested control. */}
-  <button class="inkdash-start" type="button">
+  <button class="inkdash-start" type="button" aria-describedby="inkdash-note">
     <span class="inkdash-start-msg">Well, since you are here…</span>
     <span class="inkdash-start-cta">Play</span>
   </button>
@@ -51,19 +63,21 @@
   {/* A sibling of the start button, not a child: its <kbd> chips would otherwise
       be read out as part of the button's name. It sits on top of that button, so
       the CSS has to let clicks pass through it. */}
+  {/* Two wordings, one line. Below 600px the <kbd> version wrapped to two lines
+      and used to be hidden outright — which left a phone with no statement of how
+      to move OR how to get out, since there is no Esc key and drag-to-swim means
+      the field's edges are not an exit either. */}
   <p class="inkdash-hint">
-    <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>WASD</kbd> to swim, or just drag ·
-    <kbd>Esc</kbd> to leave
+    <span class="inkdash-hint-keys">
+      <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>WASD</kbd> to swim, or just drag ·
+      <kbd>Esc</kbd> to leave
+    </span>
+    <span class="inkdash-hint-touch">Drag to swim · tap Stop to leave</span>
   </p>
 
   {/* Outside the start button on purpose: that button is hidden while a game
       runs, and this is the only way out for anyone without an Esc key. */}
   <button class="inkdash-stop" type="button">Stop</button>
-
-  <p class="sr-only">
-    This is an optional game and is not needed to use the documentation. Use the
-    search above or the links below to find what you were looking for.
-  </p>
 </div>
 
 <script>
@@ -332,6 +346,18 @@
     type State = 'idle' | 'playing' | 'dead';
     let state: State = 'idle';
 
+    /* Whether the panel is in the viewport, measured at the moment it is asked
+       rather than read from the IntersectionObserver below. The observer is right
+       for pausing the loop, but wrong as the keyboard's source of truth: it is
+       asynchronous, it carries an 80px margin, and it does not fire at all in a
+       background tab — three ways for the game to keep swallowing arrow keys while
+       the panel is nowhere near the screen. One layout read per movement keydown
+       is nothing next to the frame we are already drawing. */
+    const panelInView = () => {
+      const b = root.getBoundingClientRect();
+      return b.bottom > 0 && b.top < window.innerHeight;
+    };
+
     let hi = 0;
     try {
       hi = parseInt(localStorage.getItem(HI_KEY) || '0', 10) || 0;
@@ -543,6 +569,11 @@
       spawnLevel();
       state = 'playing';
 
+      /* The button that was just clicked is now display:none, which drops focus
+         to <body>. Take it onto the panel instead — not onto Stop, where a
+         habitual space press would quit the game it just started. */
+      root.focus({ preventScroll: true });
+
       /* The panel is the last thing on the page, so the field it just grew into
          is very likely half below the viewport. Only scroll when it doesn't
          already fit — an unconditional scrollIntoView yanks the page for anyone
@@ -599,10 +630,14 @@
         stop('idle');
         return;
       }
-      // Only swallow movement keys while a game is running, so the page keeps
-      // its normal keyboard scrolling the rest of the time. Space is never
-      // captured — starting is the button's job.
-      if (state !== 'playing') return;
+      /* Only swallow movement keys while a game is running AND the panel is
+         actually on screen. Both halves are load-bearing: without the first the
+         page loses keyboard scrolling entirely, and without the second a game
+         left running while the reader scrolls down to the recovery links keeps
+         eating the arrow keys — measured, the page would not move at all, with
+         nothing on screen to explain why (the "Esc to leave" hint is hidden
+         during play). Space is never captured — starting is the button's job. */
+      if (state !== 'playing' || !panelInView()) return;
       if (MOVE_KEYS.has(e.key)) {
         e.preventDefault();
         keys.add(e.key.length === 1 ? e.key.toLowerCase() : e.key);
@@ -1249,6 +1284,9 @@
       if (!raf) return;
       cancelAnimationFrame(raf);
       raf = 0;
+      /* Drop held keys: resuming with a stuck arrow would send the octopus into
+         a wall while the reader was somewhere else entirely. */
+      keys.clear();
     };
     const io = new IntersectionObserver(
       (entries) => {

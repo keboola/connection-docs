@@ -2120,7 +2120,12 @@ nav.sidebar {
   font-size: 12.5px;
   line-height: 1.5;
   text-align: center;
-  color: var(--sl-color-gray-3);
+  /* Not --sl-color-gray-3: this line is painted on the canvas wash, not on the
+     page background, and against the light theme's sea blue it measured 3.71:1 —
+     under AA for 12.5px text, on the only visible statement of the controls and
+     the Esc exit. These two hold up on their own theme's water. */
+  color: var(--sl-color-white);
+  opacity: 0.85;
 }
 
 .inkdash[data-state='playing'] .inkdash-hint { display: none; }
@@ -2137,18 +2142,23 @@ nav.sidebar {
    pill and a hint that has wrapped to two lines. Both texts give way and the
    pill stays: the hint is keyboard guidance, and at this width the visitor is
    overwhelmingly on a touch device that drags instead. */
-@media (max-width: 600px) {
-  .inkdash-hint,
-  .inkdash-start-msg { display: none; }
+.inkdash-hint-touch { display: none; }
 
-  .inkdash-start { padding-bottom: 16px; }
+@media (max-width: 600px) {
+  /* The message gives way, the hint swaps to its touch wording — one line either
+     way, and a phone keeps being told how to move and how to leave. */
+  .inkdash-start-msg,
+  .inkdash-hint-keys { display: none; }
+
+  .inkdash-hint-touch { display: inline; }
 }
 
 /* Half the size it used to be (60×40 → 30×20): it is an escape hatch for anyone
    without an Esc key, not a control anybody aims for, and at full size it ate a
-   visible corner of the field. Below the 44px touch-target guideline on purpose —
-   Esc and the field's own edges are the primary ways out, and a tap that misses
-   costs nothing here. */
+   visible corner of the field.
+   It only LOOKS that small — the ::before below gives it a 44px tap target, since
+   on a phone this is the only way out (there is no Esc, and drag-to-swim means
+   the field's edges are not an exit either). */
 .inkdash-stop {
   position: absolute;
   right: 6px;
@@ -2170,6 +2180,13 @@ nav.sidebar {
 }
 
 .inkdash[data-state='playing'] .inkdash-stop { display: block; }
+
+/* Invisible hit area, so the visual stays 43×21 while the target clears 44px. */
+.inkdash-stop::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
 
 .inkdash-stop:hover { opacity: 0.8; }
 

@@ -169,10 +169,24 @@ const pages = entries
 
     /* Hand the search button a query. The top guess's title beats the raw typo:
        searching "data strems" through Pagefind — which indexes content, not
-       addresses — returns noise, while "Data Streams" returns the real thing. */
-    root.dataset.nfQuery = ranked.length
+       addresses — returns noise, while "Data Streams" returns the real thing.
+
+       The fallback is sanitised, not raw. `/overview/404.html` used to publish
+       "404.html", so the page's primary call to action opened the search on
+       "8 results for 404.html" — Binary Files, R transformations — confirming the
+       "this page is broken" reading it exists to dispel. Same for any URL whose
+       last segment is a filename. Publishing nothing is better than publishing
+       noise: the button then opens search empty and focused. */
+    const fallback = wantLast
+      .replace(/\.[a-z0-9]{2,5}$/i, '')
+      .replace(/[-_]+/g, ' ')
+      .trim();
+    const query = ranked.length
       ? ranked[0]!.page.t
-      : wantLast.replace(/[-_]+/g, ' ').trim();
+      : /^404$|^\d+$/.test(fallback)
+        ? ''
+        : fallback;
+    if (query) root.dataset.nfQuery = query;
 
     if (ranked.length) {
       const box = root.querySelector<HTMLElement>('.nf-guesses');
