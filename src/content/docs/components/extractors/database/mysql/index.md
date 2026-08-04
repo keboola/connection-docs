@@ -18,7 +18,7 @@ This [standard connector](https://components.keboola.com/components/keboola.ex-d
 It is a straightforward approach suitable for most use cases, allowing for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
 All connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and 
-offer an [advanced mode](/components/extractors/database/sqldb/). 
+offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
 Basic configuration is covered in the [Tutorial - Loading Data from Database](/tutorial/load/database/). 
 
@@ -336,7 +336,7 @@ Descriptions of MySQL binlog configuration properties:
 | `log_bin` | The value of `log_bin` is the base name of the sequence of binlog files. |
 | `binlog_format` | The `binlog-format` must be set to `ROW` or `row`. |
 | `binlog_row_image` | The `binlog_row_image` must be set to `FULL` or `full`. |
-| `binlog_expire_logs_seconds` | The `binlog_expire_logs_seconds` corresponds to the deprecated system variable `expire_logs_days`. This is the number of seconds for automatic binlog file removal. The default is `2592000`, which equals 30 days. Set the value to match the needs of your environment. See [MySQL purges binlog files](#functionality). |
+| `binlog_expire_logs_seconds` | The `binlog_expire_logs_seconds` corresponds to the deprecated system variable `expire_logs_days`. This is the number of seconds for automatic binlog file removal. The default is `2592000`, which equals 30 days. Set the value to match the needs of your environment. See [MySQL purges binlog files](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-purges-binlog-files-used-by-debezium). |
 
 #### Enabling GTIDs
 
