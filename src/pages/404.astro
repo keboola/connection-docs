@@ -37,18 +37,19 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
   prev={false}
   next={false}
 >
-  {/* First, under the title and the lede — a design call, not an accident: the
-      octopus is the page's face, and burying it under the recovery block made it
-      read as an afterthought. It costs the block below vertical space, which is
-      exactly why the panel rests at ~215px and only takes the full field while
-      somebody is playing and nobody is reading anything. */}
-  <InkDash />
-
   {/* Requested path, closest matches, parent section, and the two ways out —
       one block, because "did you mean" and "get me out of here" are one job. The
       standalone support@ line that used to sit here is gone: the same address is
       already a bullet in the list below. */}
   <NotFoundSuggestions />
+
+  {/* Under the Home/Search buttons, so everything that actually recovers the
+      visit — the failed address, the closest pages, and the two ways out — comes
+      first, and the game is what you find once you have been offered the exits.
+      It still costs the link list below some fold space, which is exactly why the
+      panel rests at ~215px and only takes the full field while somebody is
+      playing and nobody is reading the links. */}
+  <InkDash />
 
   <h2>Where you might be headed</h2>
 

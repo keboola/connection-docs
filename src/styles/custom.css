@@ -2030,16 +2030,16 @@ nav.sidebar {
 
 /* --- Ink-dash panel ---
    A framed scene whose water, light and particulate are drawn on the canvas. It
-   sits first on the page, above the whole recovery block, so every pixel of its
-   resting height is spent out of that block's fold budget — hence compact at
-   rest, full field only while playing. */
+   sits under the Home/Search buttons and above the fallback link list, so every
+   pixel of its resting height is spent out of that list's fold budget — hence
+   compact at rest, full field only while playing. */
 .inkdash {
   position: relative;
   max-width: 720px;
   /* Air on both sides, per the designer, so it reads as its own thing rather than
-     as part of the recovery block underneath. Every 10px here still spends the
-     margin the recovery links have above the fold, so it is 2rem and not more. */
-  margin: 1.5rem 0 2rem;
+     as the tail of the recovery block above it. Every 10px here still spends the
+     margin the link list has above the fold, so it stops at 1.75rem. */
+  margin: 1.5rem 0 1.75rem;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 10px;
   /* The canvas is square-cornered, so the panel has to clip it to its radius. */

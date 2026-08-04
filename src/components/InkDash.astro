@@ -7,11 +7,11 @@
  * in localStorage. Everything is drawn in code — no sprite assets — so it stays
  * crisp on retina and follows the light/dark theme.
  *
- * The panel sits FIRST on the page, under the title and the lede, so its height is
- * spent out of the recovery block's budget — everything that actually helps is
- * below it. Hence the split that carries the layout: COMPACT WHILE RESTING
- * (~215px) and only growing to the playable geometry once a game starts. A
- * permanently tall panel pushed the recovery links below the fold (measured), a
+ * The panel sits under the Home/Search buttons — after everything that recovers
+ * the visit, before the fallback link list — so its height is spent out of that
+ * list's fold budget. Hence the split that carries the layout: COMPACT WHILE
+ * RESTING (~215px) and only growing to the playable geometry once a game starts. A
+ * permanently tall panel pushed those links below the fold (measured), a
  * permanently short one left a field too shallow to dodge in — and nobody is
  * reading recovery links while playing, so that is when the height is free to
  * take. start() scrolls the grown field into view when it doesn't fit.
@@ -48,9 +48,9 @@
       button so it is announced with it rather than only in reading order. */}
   <p class="sr-only" id="inkdash-note">
     This is an optional game and is not needed to use the documentation. The
-    suggestions, the search button and the links below are what you want if you
-    are looking for a page. While it runs, press Escape or the Stop button to
-    leave.
+    suggestions and the Home and Search buttons above, and the links below, are
+    what you want if you are looking for a page. While it runs, press Escape or
+    the Stop button to leave.
   </p>
 
   {/* The start control is a real button covering the whole panel: click and tap
