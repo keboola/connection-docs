@@ -42,9 +42,11 @@ scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
   check-cli-reference.mjs  # CI gate: docs `kbagent` usage vs _data/cli/command-reference.md
-  migrate.mjs, switchover.mjs  # legacy one-time Jekyll→Astro migration (no longer used)
+  check-redirects.mjs      # dev→help URL contract (PRDCT-565): generates and checks
+                           # _data/redirects/dev-to-help.tsv (--gen/--build/--flippable/--live)
 astro.config.mjs  # Astro + Starlight config
 _data/navigation.yml  # sidebar source (consumed by convert-nav.mjs)
+_data/redirects/dev-to-help.tsv  # the dev→help URL contract (checked by check-redirects.mjs)
 _data/cli/command-reference.md  # generated kbagent reference, auto-synced from
                       # keboola/cli releases (sync-cli-reference.yml) — don't hand-edit
 ```
