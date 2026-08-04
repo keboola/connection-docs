@@ -14,9 +14,10 @@ Step 3 of the [Getting Started](/getting-started/) arc.
 "Create Transformation", the dialog is "New Transformation", the sections are "Table Input
 Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select,
 and Queries offers "Create Multiple Queries". The Snowflake SQL ran successfully against the four
-HTTP tables. Fresh captures so far: 00-transformations, 01-new-transformation,
-02-name-transformation, 03-input-source. The mapping, code, run and Storage shots are still the
-legacy captures — the live run was cut short by a network outage. -->
+HTTP tables. The SQL was RUN twice (jobs 95584510 and
+95584854, 53s and 43s) producing out.c-denormalize-opportunities.opportunity_denorm with 639 rows
+and 23 columns both times — so the output bucket really is plural, and the transformation is
+re-runnable. All ten screenshots are fresh captures from that walk. -->
 
 ## What you need
 
@@ -64,8 +65,6 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
    ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
 
-   ![Screenshot - Create a transformation](/getting-started/transform/create-transformation.png)
-
 3. Name it `Denormalize opportunities`, add a description, and in **Folder** type `Opportunity`
    and pick **Create folder "Opportunity"**. Folders are cosmetic, but they are the difference
    between a browsable project and a wall of configurations. Ignore **Use predefined code
@@ -91,7 +90,7 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
 You should end up with four inputs — `opportunity`, `account`, `user`, `level`:
 
-![Screenshot - The finished input mapping](/getting-started/transform/input-mapping3.png)
+![Screenshot - The finished input mapping](/getting-started/transform/04-input-mapping.png)
 
 Input mapping has more to it — incremental processing with **Changed in Last**, column
 filters, data filters. None of it is needed here; see
@@ -102,8 +101,6 @@ process.
 
 1. In **Table Output Mapping**, click **New Table Output**.
 
-   ![Screenshot - New output mapping](/getting-started/transform/output-mapping1.png)
-
 2. In **Table name**, enter `opportunity_denorm`. This is the name of a table your SQL will
    create — it does not exist yet.
 
@@ -112,13 +109,17 @@ process.
    the transformation (note the plural), and the table. Neither the bucket nor the table exists
    yet; both are created the first time the transformation runs.
 
-   ![Screenshot - The finished output mapping](/getting-started/transform/output-mapping2.png)
+   ![Screenshot - The finished output mapping](/getting-started/transform/06-output-mapping.png)
 
 ## Write the queries
 
-In the **Queries** section, click **Create Multiple Queries**. Your SQL lives in a *code*
-inside a *block*: the editor gives you `Block 1` with one code in it. Name the code
-`Opportunity denorm`, paste the SQL for **your project's backend**, and click **Save**.
+In the empty **Queries** section, click **Create Multiple Queries**. Your SQL lives in a *code*
+inside a *block*: you get `Block 1` holding one code. Name the code `Opportunity denorm`, paste
+the SQL for **your project's backend**, and save.
+
+Later you can add another code to the same block with **New Code**, or a whole second block with
+**New Code Block** — that is how a longer transformation gets organized. Once there is code,
+the **Queries** header offers **Copy Code** and **Edit Code**.
 
 ### If your project uses Snowflake
 
@@ -156,7 +157,7 @@ is in the output mapping, so the two `tmp_` tables vanish when the job finishes.
 Every identifier is double-quoted because Snowflake uppercases unquoted ones, and the
 column names in the sample data are mixed case.
 
-![Screenshot - The code block](/getting-started/transform/new-code.png)
+![Screenshot - The configured transformation](/getting-started/transform/07-configured.png)
 
 ### If your project uses BigQuery
 
@@ -215,22 +216,35 @@ corrected to `Level` here but unverified. -->
 
 ## Run it and check the result
 
-Click **Run Transformation**. That creates a background job which copies the input tables in,
-runs your SQL, and writes `opportunity_denorm` back to Storage.
+Click **Run Transformation** and confirm with **Run**. That creates a background job which copies
+the input tables in, runs your SQL, and writes `opportunity_denorm` back to Storage. The job log
+spells the mechanism out — *"Loading 4 tables to workspace"*, then *"Cloned table … into workspace
+WORKSPACE_… as opportunity"* — which is the mapping model from the top of this page, in action.
 
-![Screenshot - Running the transformation](/getting-started/transform/run-transformation.png)
+![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
 
-Watch it in **Jobs**, or via the notification that appears when the job starts. A green
-job means it worked.
+A **Snowflake SQL job has been scheduled** notification appears with a **Show job** link; you can
+also find it under **Jobs**. It takes under a minute — the run behind these screenshots took 53
+seconds — and a green **Success** means it worked.
 
-![Screenshot - Successful job](/getting-started/transform/transf-successful.png)
+![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
 
 Then open **Storage**: there is a new bucket `out.c-denormalize-opportunities` holding
-`opportunity_denorm`. The table list has a **Recently updated by** column showing which
-configuration last wrote to each table — the fastest way to answer "where did this table
-come from?" months later.
+`opportunity_denorm` — **639 rows and 23 columns**. That row count is the same as the source
+`opportunity` table, which is the quickest sanity check that the three joins matched every row
+without duplicating any.
 
-![Screenshot - The new table in Storage](/getting-started/transform/table-in-storage.png)
+The 23 columns are the original 15 plus the eight the SQL added: `ProbabilityClass`, `UserName`,
+`UserSalesMarket`, `UserGlobalMarket`, `AccountName`, `AccountRegion`, `AccountStatus` and
+`AccountFirstOrder`.
+
+The table list also has a **Recently Updated By** column, showing `Denormalize opportunities /
+Snowflake SQL` — the fastest way to answer "where did this table come from?" months later.
+
+![Screenshot - The new table in Storage](/getting-started/transform/10-table-in-storage.png)
+
+Running the transformation again simply rebuilds the table; it is safe to re-run while you are
+experimenting.
 
 ## If it goes wrong
 
