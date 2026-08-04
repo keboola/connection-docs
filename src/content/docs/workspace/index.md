@@ -90,7 +90,7 @@ We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces wi
 **Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
 
 - `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
-- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu.
+- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu. Keboola can generate the key pair for you, or you can [bring your own](#bringing-your-own-key-pair) and register only the public key.
 
 ![Workspace - Snowflake](/workspace/workspace-connect-snowflake-person.png)
 
@@ -117,8 +117,10 @@ Below are links to documentation for popular database IDEs used by Keboola users
 - [VSCode/Cursore DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
 ##### Private Key Security and Encryption
-We generate the private key unencrypted and recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
+When Keboola generates the key pair, the private key is unencrypted, so we recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
 In case you need to store the private key locally and want to protect it from unauthorized access, you can follow the instructions below based on your OS to encrypt it using [OpenSSL](https://www.openssl.org/):
+
+If your tool requires a passphrase-protected private key, you can also [bring your own key pair](#bringing-your-own-key-pair) instead.
 
 **macOS & Linux**
 
@@ -151,6 +153,22 @@ openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encryp
 * `-out private_key_encrypted.pem` → encrypted key file
 
 👉 You’ll be prompted to set a password.
+
+##### Bringing Your Own Key Pair
+Some third-party tools (such as SAS CI360) require a passphrase-protected private key. Keboola only needs the public half of the pair, so you can create it yourself and register just the public key.
+
+Generate the pair as follows (on Windows, with OpenSSL installed as described above). You'll be prompted to set a passphrase:
+
+```
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -aes-256-cbc -out private_key_encrypted.pem
+openssl rsa -in private_key_encrypted.pem -pubout -out public_key.pem
+```
+
+To register the key, open the **Connect** menu on your workspace and use **Use Own Key** next to **Reset Key Pair**, then paste the contents of `public_key.pem` or drop the file onto the field. It must be an RSA key of at least 2048 bits, in PEM (`-----BEGIN PUBLIC KEY-----`) or base64-encoded DER format. Convert a PKCS #1 key with `openssl rsa -RSAPublicKey_in -in public_key.pem -pubout`, or an OpenSSH one with `ssh-keygen -e -m PKCS8 -f public_key.pub`.
+
+:::caution
+Registering a public key replaces the one currently on the workspace, so the previous key pair stops working immediately.
+:::
 
 ##### Private Key Conversion to .p8 Format
 Some third-party BI tools (such as Metabase) require private keys in `.p8` format instead of the default `.pem` format provided by Keboola. You can convert your private key using OpenSSL with the following command:
@@ -283,6 +301,10 @@ valuable results, or when you trained a new model which you'd like to use in tra
 For Snowflake and BigQuery workspaces, you can also export a single table directly from the workspace schema to
 [File Storage](/storage/files/) via the Storage API. See
 [Exporting Workspace Tables to Files](/workspace/table-export/) for details.
+
+Snowflake and BigQuery workspaces can also skip unloading entirely and write to a Storage table directly with
+[Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping). The workspace gets write
+access to the selected table as soon as the mapping is saved, so no **Unload Data** run is needed.
 
 ### Data Persistency (beta)
 When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.

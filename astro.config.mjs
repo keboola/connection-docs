@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
+import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 
 export default defineConfig({
@@ -16,6 +18,7 @@ export default defineConfig({
   },
   integrations: [
     redirectFrom(),
+    pageMarkdown(),
     starlight({
       title: 'Keboola User Documentation',
       favicon: '/favicon.ico',
@@ -52,5 +55,7 @@ export default defineConfig({
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
     }),
+    // Must come AFTER starlight() so MDX code blocks use astro-expressive-code.
+    mdx(),
   ],
 });

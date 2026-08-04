@@ -10,11 +10,16 @@
     "preview": "astro preview",
     "astro": "astro",
     "gen:sidebar": "node scripts/convert-nav.mjs",
+    "check:cli": "node scripts/check-cli-reference.mjs",
     "audit": "node scripts/audit-phase2.mjs",
     "lint": "node scripts/lint-docs.mjs",
-    "check:render": "node scripts/check-render.mjs"
+    "lint:baseline": "node scripts/lint-docs.mjs --update-baseline",
+    "check:render": "node scripts/check-render.mjs",
+    "check:redirects": "node scripts/check-redirects.mjs --build",
+    "check:redirects:baseline": "node scripts/check-redirects.mjs --build --baseline"
   },
   "dependencies": {
+    "@astrojs/mdx": "^5.0.2",
     "@astrojs/starlight": "^0.38",
     "astro": "^6",
     "marked": "^18.0.4",

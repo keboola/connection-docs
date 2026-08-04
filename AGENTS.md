@@ -41,9 +41,12 @@ api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
 scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
+  check-cli-reference.mjs  # CI gate: docs `kbagent` usage vs _data/cli/command-reference.md
   migrate.mjs, switchover.mjs  # legacy one-time Jekyll→Astro migration (no longer used)
 astro.config.mjs  # Astro + Starlight config
 _data/navigation.yml  # sidebar source (consumed by convert-nav.mjs)
+_data/cli/command-reference.md  # generated kbagent reference, auto-synced from
+                      # keboola/cli releases (sync-cli-reference.yml) — don't hand-edit
 ```
 
 ## Core rules
