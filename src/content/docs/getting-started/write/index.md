@@ -10,7 +10,11 @@ Data that never leaves the platform is not worth much. This step pushes your joi
 out to a Google Sheet — the same move, under the same mechanism, that later sends data to a
 warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
 
-<!-- Tutorial-type page (step 4 of 6). UI labels and screenshots pending live verification in demo project 264. -->
+<!-- Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching
+"Sheets" returns 5 components with Google Sheets Data Source and Data Destination adjacent, which is
+why the page now names the type explicitly. Steps 4-12 are NOT yet verified — they need a Google
+OAuth authorization in the project, which only the owner can create, so those captures are still the
+legacy ones. -->
 
 ## What you need
 
@@ -31,12 +35,13 @@ Google Sheets is the easiest destination to try. The
 
 ## Configure the destination
 
-1. Open **Components**, click **Add Component**, and search for `Sheets`. Several results
-   come back, including a *data source* and a *data destination* with almost the same name —
-   pick **Google Sheets** *data destination* (component ID `keboola.wr-google-sheets`).
-   Picking the data source by mistake makes the rest of this page impossible.
+1. Open **Components** and search for `Sheets`. Five results come back, and the first two are
+   **Google Sheets — Data Source** and **Google Sheets — Data Destination**: near-identical
+   names, opposite jobs. Pick the **Data Destination** one (component ID
+   `keboola.wr-google-sheets`) and click **Add Component**. Picking the data source by mistake
+   makes the rest of this page impossible.
 
-   ![Screenshot - Search for the Google Sheets destination](/getting-started/write/writing1.png)
+   ![Screenshot - Search for the Google Sheets destination](/getting-started/write/01-find-destination.png)
 
 2. Click **Add Component**, then **Connect To My Data**.
 
