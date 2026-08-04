@@ -10,13 +10,15 @@ You have four configurations that each do one thing when you click Run. A **flow
 into one pipeline that runs in the right order, at the right time, without you.
 Step 5 of the [Getting Started](/getting-started/) arc.
 
-<!-- Tutorial-type page (step 5 of 6). Written against Conditional Flows (the current flow
-type; demo project 264 reports conditional_flows: true via the MCP project info). Terminology
-sourced from /flows/. WARNING: every screenshot on this page is still the legacy-flow capture
-inherited from /tutorial/automate/ — they show the drag-and-drop builder, a "Continue on
-Failure" toggle that Conditional Flows do not have, and a two-task first phase instead of
-four. All 15 must be re-shot; captions are written for the intended new shots, not the current
-images. -->
+<!-- Tutorial-type page (step 5 of 6). Walked live in project 264 on 2026-08-04: built and ran
+[TUTORIAL] Opportunity pipeline (flow 01kz5yndzrc4zvkwch85qg4x28), created a schedule and read the
+Notifications tab. Corrections found: phases are labelled "Phase 1/2/..." not "Step 1"; the + between
+phases adds a PHASE, not a task; the Builder needs an explicit Save before Run flow is enabled;
+scheduling is Schedules tab > Create Schedule > Set Up Schedule, NOT "Set Schedule" as /flows/ still
+says; the Notifications tab edits in place with Success/Errors/Processing cards and has no "Edit
+Notifications" button and no Warnings card, contrary to /management/notifications/. The third phase
+(Google Sheets destination) is not yet in the screenshots — it needs an OAuth authorization the
+owner has to create. -->
 
 ## What you need
 
@@ -52,33 +54,46 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
 
 ## Build the flow
 
-1. Go to **Flows** — labelled **Conditional Flows** where both kinds exist — and click
-   **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and you land
-   in the **Builder**.
+1. Open **Flows** in the navigation — the section itself is titled **Conditional Flows** — and
+   click **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and click
+   **Create Flow** again in the dialog.
 
-   ![Screenshot - Create a flow](/getting-started/automate/automate1.png)
+   ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
 
-2. Use the plus icon (**+**) to add your first task and pick **Component**. Select the
-   `[TUTORIAL] Sample data` HTTP configuration.
+2. You land in the **Builder** on an empty canvas, with an **Add Task** menu already open:
+   **Component**, **Notification**, **Variable** and **Build with Kai**. Choose **Component**.
 
-   ![Screenshot - Add the first component task](/getting-started/automate/automate2.png)
+   ![Screenshot - The Add Task menu](/getting-started/automate/02-add-task.png)
 
-3. Add a **new phase** and put the `Denormalize opportunities` transformation in it. Being in a
-   later phase is what guarantees the tables have landed before the SQL runs.
+3. **Select Component** opens. It lists what the project has, with a configuration count each —
+   pick **HTTP**, then the `[TUTORIAL] Sample data` configuration. It drops onto the canvas as a
+   task inside a box labelled **Phase 1**.
 
-   ![Screenshot - The transformation in its own phase](/getting-started/automate/automate4.png)
+   ![Screenshot - Select the component](/getting-started/automate/03-select-component.png)
 
-4. Add a third phase holding the Google Sheets destination configuration.
+4. Click the **+** below Phase 1. That is the control that starts a **new phase** — the plus
+   between phases adds a phase, not a task to the one above it. Add the
+   `Denormalize opportunities` transformation there. Being in a later phase is what guarantees
+   the tables have landed before the SQL runs.
 
-   ![Screenshot - The destination phase](/getting-started/automate/automate5.png)
+   ![Screenshot - A second phase](/getting-started/automate/04-second-phase.png)
 
-   <!-- VERIFY(owner): name the exact builder affordance for "add a task into this phase" vs
-   "start a new phase" once walked live — the legacy captures predate the conditional-flow
-   builder. -->
+5. Repeat for a third phase holding the Google Sheets destination configuration.
+
+6. Click **Save**. The Builder keeps your changes as a draft until you do — **Reset** throws
+   them away, and **Run flow** stays disabled until the flow is saved.
 
 You now have three phases: the load, then the transformation, then the delivery.
 
-![Screenshot - The finished flow](/getting-started/automate/automate10.png)
+![Screenshot - The finished flow](/getting-started/automate/05-flow-saved.png)
+
+:::note[Clicking a task opens its settings]
+Worth knowing early: selecting a task gives you **Edit Configuration**, **Run rows** (for
+row-based components like your HTTP connector, so a flow can run a subset of rows), **Retry
+After Failure**, **Delay Before Start** — and **Continue on Failure**, which reads *Handled via
+Conditions*, because in Conditional Flows that behaviour comes from
+[conditions](/flows/#conditions) rather than a toggle.
+:::
 
 :::note[If you took the connector side trips]
 If you also added the Google Sheets or database connector, put them in the first phase
@@ -86,52 +101,71 @@ alongside the HTTP configuration — that is where the parallelism above becomes
 the transformation's **input mapping** and point it at the tables those connectors produce,
 since they land in their own buckets. A flow that runs the right components against the wrong
 input mapping succeeds and produces nothing useful.
-
-![Screenshot - Edit the input mapping](/getting-started/automate/automate12.png)
 :::
 
 ## Run it
 
-Click **Run Flow** to run it once by hand before scheduling it. Every task creates its own
-job, so **Jobs** tells you exactly which step failed if one does, and the flow's run detail
-shows the phases completing in order.
+Click **Run flow** and confirm with **Run**. A *Conditional Flows job has been scheduled*
+notification appears with a **Show job** link, and while the run is in progress the header offers
+**Terminate flow**.
+
+Every task creates its own job, so **Jobs** tells you exactly which step failed if one does, and
+the flow's own **All Runs** tab shows each run with its phases.
 
 ## Set a schedule
 
-Click **Set Schedule** and choose when the flow runs — a predefined interval or your own.
-Daily at 6:15 UTC is a reasonable choice for this pipeline.
+Open the flow's **Schedules** tab and click **Create Schedule**. Pick a predefined interval —
+**Every 15 minutes**, **Every hour**, **Once a day**, **Once a week**, **End of month** — or set
+your own under **Set Your Own** (every day/week/month, at an hour and minute you choose). Then
+click **Set Up Schedule**.
 
-![Screenshot - Set a schedule](/getting-started/automate/automate13.png)
+![Screenshot - Create a schedule](/getting-started/automate/06-create-schedule.png)
+
+The schedule appears in the tab with a toggle, so you can pause it without deleting it, and the
+tab shows a count. A flow can hold **several** schedules: they work independently, and the flow
+runs whenever any of them fires. Times are UTC.
+
+![Screenshot - The schedule](/getting-started/automate/07-schedule-set.png)
 
 If you share a stack with other projects, scheduling slightly off the hour avoids the busiest
-moments. A flow can also be triggered when a table changes instead of on a clock — see
+moments. A schedule can also be driven by a table changing rather than a clock — see
 [Schedule and Automate](/flows/#schedule-and-automate).
 
 ## Get told when it breaks
 
 An automated pipeline that fails silently is worse than a manual one. Open the flow's
-**Notifications** tab, click **Edit Notifications**, and enter the email addresses (or a
-webhook URL) that should hear about failures.
+**Notifications** tab — there is nothing to click into, you edit it in place. Three cards:
 
-![Screenshot - Set up notifications](/getting-started/automate/automate15.png)
+| Card | Fires when |
+|---|---|
+| **Success** | the flow finishes successfully |
+| **Errors** | the flow finishes with an error |
+| **Processing** | the job runs longer than usual, by a percentage you set |
 
-You can be told when the flow **finishes with an error**, when it finishes with a **warning**,
-and when it takes significantly longer than its own average. Error notifications on every
-scheduled production flow are the one setting nobody should skip — see
-[Notifications](/management/notifications/).
+Each takes **Email** addresses (pick colleagues or type any address) or a **Webhook** URL. Fill
+in **Errors** at minimum — on a scheduled production flow that is the one setting nobody should
+skip.
 
-There is a second, finer mechanism: a **Notification** task placed inside the flow, driven by
-a [condition](/flows/#conditions) such as *if any task in the flow ended with an error*. That
-is what you reach for when a single flow needs different alerts for different failures; the
-Notifications tab is enough here.
+![Screenshot - Notifications](/getting-started/automate/08-notifications.png)
+
+There is a second, finer mechanism: a **Notification** task placed inside the flow, driven by a
+[condition](/flows/#conditions) such as *if any task in the flow ended with an error*. That is
+what you reach for when one flow needs different alerts for different failures; these three cards
+are enough here.
 
 ## Check it worked
 
-- The flow's run history shows one successful run with all three phases green.
-- **Jobs** lists more entries than you might expect: a job per task (the load, the
-  transformation, the delivery), a **Conditional Flows phase** job per phase, and the
-  **Conditional Flows** job for the run itself. That is normal.
-- The schedule is shown on the flow, with the next run time.
+The flow's **All Runs** tab is the place to look: a duration chart over time, then a table of
+runs with who or what started them — your name for a manual run, *scheduled run* for the
+schedule — plus duration and status. Expand a run to see its phases.
+
+![Screenshot - All runs](/getting-started/automate/09-all-runs.png)
+
+- One run with status **Success**. End to end this pipeline takes around three minutes, most of
+  it the four HTTP fetches.
+- **Jobs** lists more entries than you might expect: a job per task, a **Conditional Flows
+  phase** job per phase, and the **Conditional Flows** job for the run itself. That is normal.
+- The **Schedules** tab shows a count, and the schedule can be toggled off without deleting it.
 
 ## If it goes wrong
 
@@ -153,8 +187,10 @@ Kai can build the flow for you and explain what it did:
 > Create a flow that runs my `[TUTORIAL] Sample data` HTTP configuration, then the
 > `Denormalize opportunities` transformation, then the Google Sheets destination.
 
-Set the schedule and the notifications yourself afterwards — those are quick, and it is worth
-seeing where they live.
+The Builder has Kai built in for exactly this: **Build with Kai** sits in the **Add Task** menu on
+an empty canvas, and **Modify with Kai** is in the flow's header once it has tasks. Set the
+schedule and the notifications yourself afterwards — those are quick, and it is worth seeing where
+they live.
 :::
 
 **Next:** [Where to go next →](/getting-started/next-steps/)
