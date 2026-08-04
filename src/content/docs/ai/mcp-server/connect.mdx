@@ -14,7 +14,7 @@ Get your AI client talking to your Keboola project. Every route below does the s
 
 {/* VERIFY(owner: Jordan/Matyáš): client-side menu paths (Claude Settings → Connectors, ChatGPT Developer mode, Windsurf Cascade → Plugins) move often; worth a live pass per client. */}
 
-{/* VERIFY(owner: Matyáš): the Keboola-side path and tab set — this page says Project Settings → MCP Server tab (matching the server README); confirm the current client tabs there, including whether a MAKE tab exists. The only public evidence was the stale screenshot dropped in this split. */}
+{/* Keboola-side path and tab set verified live in demo project 264 on 2026-08-04: avatar menu carries both "Project Settings" and "Keboola MCP Server"; the settings page (H1 "Settings") has tabs Project | Users | API Tokens | CLI Sync | Features | AI Rules | Kai Agent | MCP Server | IDE Connections, and the MCP tab has a client tab each for Claude.ai, Claude Desktop, Claude Code, ChatGPT, Cursor, Make, Windsurf, Other. */}
 
 **You'll need** a Keboola project and an account whose role has the permissions you want the assistant to have — over OAuth it inherits exactly those.
 
@@ -30,11 +30,13 @@ The MCP Server runs on every multi-tenant stack, and **your stack is the host in
 | EU Ireland Azure (north-europe) | `https://mcp.north-europe.azure.keboola.com/mcp` |
 | EU Frankfurt GCP (europe-west3) | `https://mcp.europe-west3.gcp.keboola.com/mcp` |
 
-You can also copy it from the platform: open the **avatar menu** (top right) → **Keboola MCP Server** — or **[Project Settings](/management/project/) → the MCP Server tab**. That page has a **Copy URL to clipboard** button plus per-client instructions, and an install button for some clients.
+You can also copy it from the platform: open the **avatar menu** (top right) → **Keboola MCP Server** — or **[Project Settings](/management/project/) → the MCP Server tab**. That page has a **Copy URL to clipboard** button, plus per-client instructions and an install button for some clients.
+
+![The MCP Server tab in Keboola project settings: a tab strip with Project, Users, API Tokens, CLI Sync, Features, AI Rules, Kai Agent, MCP Server and IDE Connections; below it Installation Instructions with a tab per client (Claude.ai, Claude Desktop, Claude Code, ChatGPT, Cursor, Make, Windsurf, Other), the numbered steps for the selected client, and the project's Integration URL next to a Copy URL to clipboard button](/ai/mcp-server/project-settings-mcp-server.png)
 
 Wherever you take it from, **paste the full URL**. The `<YOUR_REGION>` placeholder in the snippets below is a stand-in for the whole host: on the default stack the region segment disappears entirely (`mcp.keboola.com`), and on GCP/Azure it carries the provider (`us-east4.gcp`, `north-europe.azure`).
 
-{/* SCREENSHOT(nikita): avatar menu → Keboola MCP Server in demo project 264, showing the Integration URL + Copy URL to clipboard. The previous shot (management/project/mcp-server/screenshot.png) was dropped in the split — it showed a stale /sse URL from a non-demo project. */}
+{/* Screenshot captured 2026-08-04 in demo project 264 (europe-west3, KBC Toy Co. / L0 - Shopify), production branch, showing the current /mcp Integration URL. Replaces the dropped management/project/mcp-server/screenshot.png, which showed a stale /sse URL from a non-demo project. */}
 
 ## Step 2 — Set up your client
 
