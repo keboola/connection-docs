@@ -42,6 +42,8 @@ scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
   check-cli-reference.mjs  # CI gate: docs `kbagent` usage vs _data/cli/command-reference.md
+  check-redirects.mjs      # dev→help URL contract (PRDCT-565): generates and checks
+                           # _data/redirects/dev-to-help.tsv (--gen/--build/--flippable/--live)
   migrate.mjs, switchover.mjs  # legacy one-time Jekyll→Astro migration (no longer used)
 astro.config.mjs  # Astro + Starlight config
 _data/navigation.yml  # sidebar source (consumed by convert-nav.mjs)
@@ -97,7 +99,10 @@ Images: place alongside the Markdown and reference with an absolute path
 ## Workflow & deployment
 
 - Docs-as-code: changes go through PRs; a maintainer reviews and merges.
-- Production deploys via GitHub Actions (`.github/workflows/main.yml`) on push to
-  `main` (build → `aws s3 sync` to `help.keboola.com`).
+- **Production is served by Vercel.** `help.keboola.com` deploys from `main`
+  through Vercel; PRs get Vercel preview URLs.
+- `.github/workflows/main.yml` still runs an `aws s3 sync` to the old S3 bucket.
+  That is **not** what serves production — don't reason about caching, 404
+  handling, or trailing slashes from it.
 - The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs
   `AI_SERVICE_URL` + `KBC_STORAGE_API_TOKEN` env vars.

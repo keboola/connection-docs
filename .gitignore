@@ -22,10 +22,20 @@ dist
 AUDIT_LOG.md
 UI_FIXES_LOG.md
 DEV_DOCS_INTEGRATION.md
+reports/
+AUG5-BRIEFING.md
+DEV-MIGRATION-PLAN.md
+SECTION-MAP.md
+_graph/
+
+# Obsidian vault config — the vault lives elsewhere; this is a stray local artifact
+.obsidian/
 
 # Claude / local dev tools — screenshots saved during dev sessions
 # (CLAUDE.md and AGENTS.md are committed — agent/contributor guides.)
 scripts/screenshot.mjs
+scripts/shoot.mjs
+screenshots.manifest.json
 screenshot-*.png
 audit-*.png
 check-*.png
@@ -44,7 +54,10 @@ sidebar-scroll-test.png
 
 # internal working files — local-only, never ship in docs PRs
 apps-section/
-.claude/
+# no trailing slash on purpose: some of us keep .claude as a symlink to a rig kept
+# outside the repo, and `.claude/` matches directories only — which left the symlink
+# itself untracked-and-committable.
+.claude
 
 # local screenshot-capture session (never commit)
 apps-section/auth.json
