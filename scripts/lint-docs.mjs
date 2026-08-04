@@ -87,8 +87,10 @@ for (const file of htmlFiles) {
     if (!resolves(path)) {
       if (isImg || /\.(png|jpe?g|gif|svg|webp|avif)$/i.test(path)) add('missing-image', 'error', r, path);
       else add('broken-link', 'error', r, path);
-    } else if (isImg && /\.(png|jpe?g|gif|webp|avif)$/i.test(path)) {
-      // referenced placeholder: resolves but suspiciously tiny
+    } else if (isImg && /\.(png|jpe?g|gif|webp|avif)$/i.test(path) && !path.startsWith('/_astro/')) {
+      // referenced placeholder: resolves but suspiciously tiny.
+      // /_astro/ is skipped: those are build-hashed theme assets (the Starlight logo is
+      // ~2 KB and appears on every page), not docs content anyone can fix.
       const f = [join(DIST, path), join(DIST, path.replace(/^\//, ''))].find(existsSync);
       try { if (f && statSync(f).size < 6000) add('placeholder-image', 'warn', r, path); } catch {}
     }
@@ -104,7 +106,10 @@ const DEPRECATED = [
 for (const file of mdFiles) {
   const rel = relative(SRC, file);
   const raw = readFileSync(file, 'utf8');
-  const fm = raw.match(/^---\n([\s\S]*?)\n---\n/);
+  // \r?\n throughout: 56 pages close their frontmatter with `---\r\n`, and an LF-only
+  // regex treats the whole block as absent — which reported every one of them as
+  // missing title/slug/description.
+  const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---[ \t]*\r?\n/);
   const front = fm ? fm[1] : '';
   const body = fm ? raw.slice(fm[0].length) : raw;
 
