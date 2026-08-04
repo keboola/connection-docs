@@ -45,7 +45,7 @@ Before you continue with this tutorial, make sure you
 - can log in to one of the Keboola [stacks](/overview/#stacks)
 - have a [Github](https://github.com/) account.
 
-*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending Keboola.
+*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://www.travis-ci.com/) services, they are not required for extending Keboola.
 We use them because we like them the most. The [deployment documentation](/extend/component/deployment/) shows how to configure,
 for example, [Bitbucket](/extend/component/deployment/#bitbucket-integration) and [GitLab](/extend/component/deployment/#gitlab-integration)
 integrations.*
@@ -118,7 +118,7 @@ cookiecutter gh:keboola/cookiecutter-python-component```
     - You can execute the component via normal local environment without docker installed.
     - Set any additional dependencies for your project in `requirements.txt`
  
- More information on the template [here](https://bitbucket.org/kds_consulting_team/kbc-python-template/src/master/README.md)
+ More information on the template [here](https://github.com/keboola/cookiecutter-python-component)
    
 ## CI Setup
  - Bitbucket: Enable [pipelines](https://confluence.atlassian.com/bitbucket/get-started-with-bitbucket-pipelines-792298921.html) in the repository.
@@ -133,7 +133,7 @@ cookiecutter gh:keboola/cookiecutter-python-component```
  - `KBC_DEVELOPERPORTAL_VENDOR` - dev portal vendor
  - `KBC_STORAGE_TOKEN` - (optional) in case you wish to run KBC automated tests
 
-[https://github.com/keboola/cookiecutter-python-component]()
+[https://github.com/keboola/cookiecutter-python-component](https://github.com/keboola/cookiecutter-python-component)
 
 ### PHP, R or just CI pipeline for GitHub or Bitbucket
 

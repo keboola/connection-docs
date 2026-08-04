@@ -18,7 +18,7 @@ components that modify external resources (e.g., database writers) and those tha
 
 ### Is a Component Executed in a Branch Context?
 
-When the [Job Queue](/extend/job-queue/) executes a job in a branch, it sets the [`KBC_BRANCHID` environment variable](/extend/common-interface/environment/#environment-variables) to the current branch ID, which is unique accross the stack. 
+When the [Job Queue](/extend/job-queue/) executes a job in a branch, it sets the [`KBC_BRANCHID` environment variable](/extend/common-interface/environment/#environment-variables) to the current branch ID, which is unique across the stack. 
 
 Typically, the fact that a component is executed in a branch is not very important to the component itself. It behaves the same way, and the Keboola job runner does all the heavy lifting.
 

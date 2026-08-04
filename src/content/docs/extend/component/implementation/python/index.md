@@ -65,7 +65,7 @@ locally with `pip3 install keboola.component`.
 
 A generated [API documentation](https://htmlpreview.github.io/?https://raw.githubusercontent.com/keboola/python-component/main/docs/api-html/component/interface.html)
 is available for the package, and an actual working example can be found in our
-[Python template](https://bitbucket.org/kds_consulting_team/kbc-python-template/src/master/src/component.py).
+[Python template](https://github.com/keboola/cookiecutter-python-component/blob/main/%7B%7Bcookiecutter.repository_folder_name%7D%7D/src/component.py).
 
 ### Initialization
 
@@ -112,7 +112,7 @@ ci = CommonInterface()
 
 # A ValueError error is raised if the config.json file does not exists in the data dir.
 # Checks for required parameters and throws ValueError if any is missing.
-ci.validate_configuration(REQUIRED_PARAMETERS)
+ci.validate_configuration_parameters(REQUIRED_PARAMETERS)
 
 # print Keboola Project ID from the environment variable if present:
 logging.info(ci.environment_variables.project_id)
@@ -121,7 +121,7 @@ logging.info(ci.environment_variables.project_id)
 logging.info(ci.configuration.parameters[SOME_PARAMETER])
 ```
 
-The above would read the `somemyParameter_user_parameter` parameter from the user-supplied configuration:
+The above would read the `myParameter` parameter from the user-supplied configuration:
 
 ```json
 {

@@ -64,7 +64,7 @@ deploy:
 The `.travis.yml` file offers a vast number of [configuration options](https://docs.travis-ci.com/user/customizing-the-build/).
 We only need a few of them though. The options `sudo`, `language` and `services` define that all we need is Docker.
 The `before_script` section executes a single shell command which
-[builds the image](/extend/component/tutorial/debugging/#step-2--build-the-image) and tags it `keboola-component`. The
+[builds the image](/extend/component/tutorial/debugging/#step-2--build-image) and tags it `keboola-component`. The
 tag is completely arbitrary at this moment, but we'll need it later. The `after_success` section simply lists the
 built images in the log.
 
@@ -177,7 +177,7 @@ component repository and tag were automatically set:
 
 The component is now runnable in Keboola. You can view all settings in our
 [example repository](https://github.com/keboola/ex-docs-tutorial). You can also
-review [Travis Configuration](https://travis-ci.org/keboola/ex-docs-tutorial/).
+review [Travis Configuration](https://app.travis-ci.com/keboola/ex-docs-tutorial).
 
 *Note that it takes up to **5 minutes** before the changes in the Developer Portal propagate to all Keboola instances in all regions.*
 

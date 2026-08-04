@@ -46,9 +46,9 @@ The `image_parameters` contents are configured in the [component settings](https
 text fields: **Image Parameters** and **Stack Parameters**.
 
 Both JSONs are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
-provide different values for different [Keboola Stacks](/overview/api/#regions-and-endpoints). Values in
+provide different values for different [Keboola Stacks](https://developers.keboola.com/overview/api/#stacks-and-endpoints). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
-*Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
+*Stack Parameters* are indexed with [Storage URL](https://developers.keboola.com/overview/api/#stacks-and-endpoints) or the given region.
 
 Given the following *Image Parameters*:
 
@@ -114,7 +114,7 @@ As with configurations, the encrypted values must be prefixed with the hash sign
 you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
 When using the [encryption API](https://api.keboola.com/?service=encryption#post-/encrypt), provide only the `componentId`
 parameter (using `projectId` or `configId` will make the cipher unusable).
-Also take care to use the correct [API URL](/overview/api/#regions-and-endpoints) to obtain
+Also take care to use the correct [API URL](https://developers.keboola.com/overview/api/#stacks-and-endpoints) to obtain
 ciphers for each region you need.
 
 ## State File
@@ -213,7 +213,7 @@ write the usage file regularly** during the component run, not only at the end.
 validated and a wrong format will cause a component failure.*
 
 ## Examples
-To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder). You will get a
+To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](https://api.keboola.com/?service=job-queue#post-/jobs).
@@ -247,15 +247,15 @@ A sample configuration file might look like this:
                     "source": "destination.csv",
                     "destination": "out.c-main.test",
                     "incremental": false,
-                    "colummns": [],
+                    "columns": [],
                     "primary_key": [],
                     "delete_where": [],
                     "delimiter": ",",
                     "enclosure": "\""
                 },
                 {
-                    "source": "write-alwayss.csv",
-                    "destination": "out.c-main.output-even-on-error"
+                    "source": "write-always.csv",
+                    "destination": "out.c-main.output-even-on-error",
                     "write_always": true
                 }
             ],

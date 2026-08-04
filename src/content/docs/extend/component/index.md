@@ -18,7 +18,7 @@ As a developer, you implement the application logic in a language of your choice
 git repository. The component must adhere to our [common interface](/extend/common-interface/).
 To start quickly, use our component generators for [Python](https://github.com/keboola/cookiecutter-python-component) or [PHP, CI pipelines](https://github.com/keboola/component-generator) that can generate a skeleton of the component for you. We also provide libraries to help you with implementation in
 [Python](https://github.com/keboola/python-component) and
-[PHP](https://github.com/keboola/php-docker-application).
+[PHP](https://github.com/keboola/php-component).
 Check our example component in [Python](https://github.com/keboola/cookiecutter-python-component/tree/main/%7B%7Bcookiecutter.repository_folder_name%7D%7D).
 
 The main part of the [common interface](/extend/common-interface/) is the specification how 
