@@ -10,7 +10,13 @@ Four raw tables are not much use on their own. This step joins them into one wid
 SQL, and introduces the mechanism that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
-<!-- Tutorial-type page (step 3 of 6). SQL verified against Snowflake syntax; UI labels and screenshots pending live verification in demo project 264. -->
+<!-- Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
+"Create Transformation", the dialog is "New Transformation", the sections are "Table Input
+Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select,
+and Queries offers "Create Multiple Queries". The Snowflake SQL ran successfully against the four
+HTTP tables. Fresh captures so far: 00-transformations, 01-new-transformation,
+02-name-transformation, 03-input-source. The mapping, code, run and Storage shots are still the
+legacy captures — the live run was cut short by a network outage. -->
 
 ## What you need
 
@@ -45,43 +51,45 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
 1. Open **Transformations**.
 
-   ![Screenshot - Transformations section](/getting-started/transform/transformations-intro.png)
+   ![Screenshot - Transformations section](/getting-started/transform/00-transformations.png)
 
-2. Click **Create Transformation** and **note which SQL transformations your project offers** —
-   *Snowflake SQL* or *BigQuery SQL* (and possibly *DuckDB*, in beta). Which ones appear
-   depends on the project: new [Free Plan](/management/payg-project/) projects default to the
-   [BigQuery backend](/storage/), while contract customers choose theirs. Pick the SQL
-   transformation your project offers, and use the matching query block below.
+2. Click **Create Transformation**. The **New Transformation** dialog lists what this project
+   can run — *Snowflake SQL Transformation*, *Python*, *R*, and *DuckDB Transformation* (beta),
+   or *BigQuery SQL Transformation* on a BigQuery project.
 
-   <!-- VERIFY(owner): button label — this page says "Create Transformation",
-   transformations/duckdb/index.md:22 says "New Transformation", and the dialog in
-   create-transformation.png is titled "New Transformation". Settle it on the live walk. -->
+   **This list is how you find out which SQL dialect you need.** New
+   [Free Plan](/management/payg-project/) projects default to the
+   [BigQuery backend](/storage/); contract customers choose theirs. Pick the SQL transformation
+   your project offers, and use the matching query block below.
+
+   ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
 
    ![Screenshot - Create a transformation](/getting-started/transform/create-transformation.png)
 
-3. Name it `Denormalize opportunities`, add a description, and put it in a folder called
-   `Opportunity`. Folders are cosmetic but they are the difference between a browsable
-   project and a wall of configurations.
+3. Name it `Denormalize opportunities`, add a description, and in **Folder** type `Opportunity`
+   and pick **Create folder "Opportunity"**. Folders are cosmetic, but they are the difference
+   between a browsable project and a wall of configurations. Ignore **Use predefined code
+   pattern**. Click **Create transformation**.
 
-   ![Screenshot - Name the transformation](/getting-started/transform/name-transformation.png)
+   ![Screenshot - Name the transformation](/getting-started/transform/02-name-transformation.png)
 
 ## Set the input mapping
 
-1. Click **New Table Input**.
+1. In **Table Input Mapping**, click **Add Table Input**.
 
-   ![Screenshot - New input mapping](/getting-started/transform/input-mapping1.png)
+2. **Source** searches your Storage as you type — type `opportunity` and tick the table. The
+   picker is multi-select, so you can tick `account`, `user` and `level` in the same go; it
+   keeps a count of what you have chosen.
 
-2. Set **Source** to your `account` table — the field searches, so typing `acc` finds it.
-   **Table name** fills in automatically as `account`; that is the name your SQL will use, and
-   it is what makes the queries below work regardless of which bucket the table lives in. Click
-   **Add Input**.
+   ![Screenshot - Selecting source tables](/getting-started/transform/03-input-source.png)
 
-3. Add the other three the same way — `opportunity`, `user` and `level`. You can select
-   several tables at once.
+3. With a single table selected, **Table name** fills in automatically — `opportunity`. That is
+   the name your SQL uses, and it is what makes the queries below work no matter which bucket
+   the table actually lives in.
 
-   ![Screenshot - Adding several input tables](/getting-started/transform/IM-add-tables.png)
+4. Click **Add Input**.
 
-You should end up with four inputs:
+You should end up with four inputs — `opportunity`, `account`, `user`, `level`:
 
 ![Screenshot - The finished input mapping](/getting-started/transform/input-mapping3.png)
 
@@ -92,22 +100,24 @@ process.
 
 ## Set the output mapping
 
-1. Click **New Table Output**.
+1. In **Table Output Mapping**, click **New Table Output**.
 
    ![Screenshot - New output mapping](/getting-started/transform/output-mapping1.png)
 
 2. In **Table name**, enter `opportunity_denorm`. This is the name of a table your SQL will
    create — it does not exist yet.
 
-3. **Destination** auto-fills to `out.c-denormalize-opportunities.opportunity_denorm` — the
-   `out` stage, a new bucket named after the transformation, and the table. Neither the
-   bucket nor the table exists yet; both are created the first time the transformation runs.
+3. **Destination** is filled in for you from the transformation's name:
+   `out.c-denormalize-opportunities.opportunity_denorm` — the `out` stage, a bucket named after
+   the transformation (note the plural), and the table. Neither the bucket nor the table exists
+   yet; both are created the first time the transformation runs.
 
    ![Screenshot - The finished output mapping](/getting-started/transform/output-mapping2.png)
 
 ## Write the queries
 
-Click **New Code**. The editor creates `Block 1` and puts a code inside it — name that code
+In the **Queries** section, click **Create Multiple Queries**. Your SQL lives in a *code*
+inside a *block*: the editor gives you `Block 1` with one code in it. Name the code
 `Opportunity denorm`, paste the SQL for **your project's backend**, and click **Save**.
 
 ### If your project uses Snowflake
@@ -205,8 +215,8 @@ corrected to `Level` here but unverified. -->
 
 ## Run it and check the result
 
-Click **Run Transformation**. That creates a background job which copies the input tables
-in, runs your SQL, and writes `opportunity_denorm` back to Storage.
+Click **Run Transformation**. That creates a background job which copies the input tables in,
+runs your SQL, and writes `opportunity_denorm` back to Storage.
 
 ![Screenshot - Running the transformation](/getting-started/transform/run-transformation.png)
 
