@@ -32,6 +32,8 @@ jobs:
         run: npm run build
       - name: "Content lint (gated vs baseline)"
         run: npm run lint
+      - name: "dev→help URL contract"
+        run: npm run check:redirects
       - name: "Install Playwright browser"
         run: npx playwright install --with-deps chromium
       - name: "Render / layout checks"

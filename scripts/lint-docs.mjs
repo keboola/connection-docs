@@ -37,12 +37,18 @@ function walk(dir, test) {
 const htmlFiles = walk(DIST, (f) => f.endsWith('.html') && !f.includes('/pagefind/'));
 const route = (f) => '/' + relative(DIST, f).replace(/index\.html$/, '').replace(/\.html$/, '');
 const norm = (p) => ('/' + p.replace(/^\/+|\/+$/g, '')); // collapse trailing slash for matching
+// isFile, not existsSync: a page directory outlives its index.html because the
+// page's images sit in it, so `dist/<route>/` still exists after the page stops
+// being built — and a bare existsSync would call that dead route healthy.
+// Measured: deleting dist/storage/tables/index.html reported 0 findings this way
+// and 390 broken links once every candidate had to be a file.
+const isFile = (f) => { try { return statSync(f).isFile(); } catch { return false; } };
 function resolves(p) {
   p = p.split('#')[0].split('?')[0];
   if (!p) return true;
   return [join(DIST, p), join(DIST, p, 'index.html'),
     join(DIST, p.replace(/\/$/, '') + '.html'),
-    join(DIST, p.replace(/\/$/, '') + '/index.html')].some(existsSync);
+    join(DIST, p.replace(/\/$/, '') + '/index.html')].some(isFile);
 }
 
 // ---- build a route -> Set(ids) map from the built HTML ---------------------

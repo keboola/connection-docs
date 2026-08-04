@@ -89,10 +89,39 @@ Images: place alongside the Markdown and reference with an absolute path
 ## Verify before pushing
 
 - `npm run build` is clean (no fatal errors).
-- For link/image/table changes, run `node scripts/audit-phase2.mjs` after building.
+- `npm run lint` and `npm run check:redirects` pass — the same gates CI runs, so
+  running them after a build saves a round trip. `npm run audit` prints the wider
+  read-only report when you want the full picture.
 - For CSS that must survive client-side navigation, verify in a **production
   build** (`astro build && astro preview`) — dev injects `<style>` tags that
   don't survive Astro view-transition swaps.
+
+## CI gates on pull requests
+
+`.github/workflows/branch.yml` builds every PR and then runs four checks. Two are
+**ratchets, not absolute gates**: the docs carry real inherited debt (broken links
+into pages that still live on developers.keboola.com), so they compare against a
+committed baseline and fail only on breakage *this branch introduced*.
+
+| Check | Fails when | Baseline |
+|---|---|---|
+| `npm run lint` | a PR adds a broken link or anchor, a missing/placeholder image, frontmatter without a title/slug, an unclosed fence, a raw HTML table, a Liquid leftover or a deprecated term | `scripts/lint-baseline.json` |
+| `npm run check:redirects` | a PR orphans a dev URL that used to resolve — a page moved, renamed or deleted without a redirect | `_data/redirects/not-yet-migrated.txt` |
+| `npm run check:cli` | docs reference `kbagent` commands or flags the CLI no longer has | — (absolute) |
+| `npm run check:render` | a table or layout regresses across viewports | — (absolute) |
+
+When a gate fires and the finding is genuinely expected debt, rebaseline and say
+why in the PR:
+
+```bash
+npm run build
+npm run lint:baseline              # or: npm run check:redirects:baseline
+```
+
+Both baselines shrinking over time is the point — they double as the remaining
+cleanup list. Growing one needs a sentence of justification. **Never rebaseline to
+silence a detector** — fix the detector first, then rebaseline; a stale baseline
+hides real defects.
 
 ## Workflow & deployment
 
