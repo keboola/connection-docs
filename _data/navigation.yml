@@ -104,36 +104,31 @@ items:
   - url: /data-apps/
     title: Apps
     items:
+      - url: /data-apps/what-are-apps/
+        title: What are apps?
+      - title: Build
+        items:
+          - url: /data-apps/getting-started/
+            title: With Kai
+          - url: /data-apps/build-locally/
+            title: Locally
+      - title: Run & share
+        items:
+          - url: /data-apps/authentication/
+            title: Authentication
+          - url: /data-apps/publish-and-share/
+            title: Publish and share
+      - url: /data-apps/reference/
+        title: Reference
       - url: /data-apps/streamlit/
         title: Streamlit Apps
-      - url: /data-apps/python-js/
-        title: Python/JS Apps
-      - url: /data-apps/authentication/
-        title: Authentication
         items:
-          - url: /data-apps/authentication/auth0/
-            title: Auth0
-          - url: /data-apps/authentication/google-cloud-platform/
-            title: Google Cloud Platform
-          - url: /data-apps/authentication/microsoft-entra-id/
-            title: Microsoft Entra ID
-          - url: /data-apps/authentication/okta/
-            title: Okta
-      - url: /data-apps/general-design-guide/
-        title: General Design Guide
-      - url: /data-apps/lock-streamlit-version/
-        title: Locking Streamlit Version
-        items:
-          - url: /data-apps/lock-streamlit-version/code-deployment/
-            title: Code Deployment
-          - url: /data-apps/lock-streamlit-version/git-deployment/
-            title: Git Repository Deployment
-      - url: /data-apps/backend-versions/
-        title: Backend Versions
-      - url: /data-apps/storage-access/
-        title: Storage Access
-      - url: /data-apps/terminal-log-tab/
-        title: Terminal Log Tab
+          - url: /data-apps/streamlit/lock-version/
+            title: Lock package versions
+          - url: /data-apps/streamlit/design-guide/
+            title: Streamlit design guide
+          - url: /data-apps/streamlit/migrate-to-python-js/
+            title: Migrate to Python/JS
 
   - url: /components/
     title: Components
@@ -521,6 +516,9 @@ items:
 
       - url: /components/branches/
         title: Development Branches
+        items:
+          - url: /components/branches/merge-requests/
+            title: Merge Requests
 
       - url: /components/ip-addresses/
         title: IP Addresses
@@ -636,6 +634,24 @@ items:
       - url: /transformations/code-patterns/
         title: Code Patterns
 
+  - url: /cli/
+    title: CLI
+    items:
+      - url: /cli/getting-started/
+        title: Get Started
+      - url: /cli/concepts/
+        title: How It Works
+      - url: /cli/workflows/
+        title: How-to Guides
+      - url: /cli/for-agents/
+        title: Use with AI Agents
+      - url: /cli/commands/
+        title: Command Reference
+      - url: /cli/web-ui/
+        title: Web UI
+      - url: /cli/troubleshooting/
+        title: Troubleshooting
+
   - url: /workspace/
     title: Workspaces
     items:
@@ -720,6 +736,101 @@ items:
 
       - url: /ai/mcp-server/
         title: MCP Server
+
+  - url: /extend/
+    title: Extending Keboola
+    items:
+      - url: /extend/component/
+        title: Components
+        items:
+          - url: /extend/component/tutorial/
+            title: Tutorial
+            items:
+              - url: /extend/component/tutorial/input-mapping/
+                title: Input Mapping
+              - url: /extend/component/tutorial/output-mapping/
+                title: Output Mapping
+              - url: /extend/component/tutorial/configuration/
+                title: Configuration
+              - url: /extend/component/tutorial/processors/
+                title: Processors
+              - url: /extend/component/tutorial/debugging/
+                title: Debugging
+          - url: /extend/component/processors/
+            title: Processors
+          - url: /extend/component/code-patterns/
+            title: Code Patterns
+            items:
+              - url: /extend/component/code-patterns/interface/
+                title: Interface
+              - url: /extend/component/code-patterns/tutorial/
+                title: Tutorial
+          - url: /extend/component/implementation/
+            title: Implementation Notes
+            items:
+              - url: /extend/component/implementation/php/
+                title: PHP Implementation Notes
+              - url: /extend/component/implementation/python/
+                title: Python Implementation Notes
+              - url: /extend/component/implementation/r/
+                title: R Implementation Notes
+          - url: /extend/component/running/
+            title: Running Components
+          - url: /extend/component/ui-options/
+            title: UI Options
+            items:
+              - url: /extend/component/ui-options/configuration-schema/
+                title: Configuration Schema
+                items:
+                  - url: /extend/component/ui-options/configuration-schema/examples
+                    title: Examples
+                  - url: /extend/component/ui-options/configuration-schema/sync-action-examples
+                    title: Sync Action Examples
+              - url: /extend/component/ui-options/default-configuration/
+                title: Default Configuration
+          - url: /extend/component/deployment/
+            title: Deployment
+      - url: /extend/common-interface/
+        title: Common Interface
+        items:
+          - url: /extend/common-interface/folders/
+            title: Data Folders
+          - url: /extend/common-interface/config-file/
+            title: Configuration File
+          - url: /extend/common-interface/environment/
+            title: Environment
+          - url: /extend/common-interface/manifest-files/
+            title: Manifest Files
+            items:
+              - url: /extend/common-interface/manifest-files/in-tables-manifests/
+                title: IN tables
+              - url: /extend/common-interface/manifest-files/in-files-manifests/
+                title: IN files
+              - url: /extend/common-interface/manifest-files/in-files-s3-staging/
+                title: IN files S3 staging
+              - url: /extend/common-interface/manifest-files/in-files-abs-staging/
+                title: IN files ABS staging
+              - url: /extend/common-interface/manifest-files/out-tables-manifests/
+                title: OUT tables
+              - url: /extend/common-interface/manifest-files/out-tables-manifests-native-types/
+                title: OUT tables with Native Types
+              - url: /extend/common-interface/manifest-files/out-files-manifests/
+                title: OUT files
+          - url: /extend/common-interface/oauth/
+            title: OAuth2
+          - url: /extend/common-interface/actions/
+            title: Actions
+          - url: /extend/common-interface/logging/
+            title: Logging
+          - url: /extend/common-interface/development-branches/
+            title: Development branches
+      - url: /extend/job-queue/
+        title: Job Queue
+      - url: /extend/publish/
+        title: Publishing Component
+        items:
+          - url: /extend/publish/checklist/
+            title: Checklist
 
   - url: /external-integrations/
     title: External Integrations
