@@ -14,11 +14,13 @@ Most people never do this: [connecting a client](/ai/mcp-server/connect/) to Keb
 
 ## Before you start
 
-Set these environment variables — they're what the local server authenticates with:
+You need **[Docker](https://docs.docker.com/engine/install/)** or **Python 3.10+ with [`uv`](https://docs.astral.sh/uv/)**, and admin rights on the Keboola project.
+
+Set these environment variables — they're what the local server authenticates with. Export them in the shell you start the server from, or hand them to the client in its `env` block (both forms appear below):
 
 - `KBC_STORAGE_TOKEN` — your Keboola [Storage API token](/management/project/tokens/).
 - `KBC_WORKSPACE_SCHEMA` — the [workspace](/tutorial/manipulate/workspace/) schema used for SQL queries (**Dataset Name** on BigQuery). Only needed with a custom Storage token; with a master token the server provisions the workspace itself.
-- `KBC_STORAGE_API_URL` — your Keboola instance API URL, e.g. `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`.
+- `KBC_STORAGE_API_URL` — your Keboola instance API URL. It's the host you see in the browser: `https://connection.keboola.com` on the default stack, otherwise `https://connection.<stack>.keboola.com` (`eu-central-1`, `us-east4.gcp`, `north-europe.azure`, `europe-west3.gcp`). Note this is the `connection.*` host, not the `mcp.*` one from [Connect an AI client](/ai/mcp-server/connect/#step-1--get-your-server-url).
 - `KBC_BRANCH_ID` *(optional)* — a [development branch](/components/branches/) to scope operations to. Defaults to production.
 
 <!-- VERIFY(owner: Matyáš): the previous version of this page also told BigQuery users to set GOOGLE_APPLICATION_CREDENTIALS and mount a GCP service-account key into the container. Removed: the variable appears nowhere in keboola/mcp-server, there is no google-cloud/google-auth dependency in pyproject.toml, and BigQuery workspace queries have gone through the Query Service since AJDA-2801 (2026-05-29) using the Storage API workspace credentials. Restore if a BigQuery-backed project still needs it. -->
@@ -45,9 +47,9 @@ Set these environment variables — they're what the local server authenticates 
      --api-url https://connection.YOUR_REGION.keboola.com
    ```
 
-   The same command covers Snowflake and BigQuery projects — on BigQuery, `KBC_WORKSPACE_SCHEMA` is the workspace's **Dataset Name**. `--rm` removes the container when it stops. Inside Docker the server listens on `stdio` by default, which suits clients that invoke and manage Docker commands themselves.
+   The same command covers Snowflake and BigQuery projects — on BigQuery, `KBC_WORKSPACE_SCHEMA` is the workspace's **Dataset Name**. `--rm` removes the container when it stops. Inside Docker the server listens on `stdio` by default.
 
-**Result:** a running server your client can talk to. To have Cursor launch it for you:
+**Result:** a server speaking `stdio` — which only does something with a client on the other end of the pipe, so you don't normally run this command by hand. Let the client run it. In Cursor:
 
 ```json
 {
@@ -82,16 +84,29 @@ Cursor passes `KBC_STORAGE_TOKEN` and `KBC_WORKSPACE_SCHEMA` from its `env` bloc
 uvx keboola_mcp_server --api-url $KBC_STORAGE_API_URL
 ```
 
-**Result:** the server starts and communicates over `stdio`. `--api-url` can be passed explicitly instead of relying on `KBC_STORAGE_API_URL`. To listen on a network host/port instead (Streamable HTTP on something like `localhost:8000`), pass the corresponding flags to `keboola_mcp_server`. For day-to-day use with Claude or Cursor you don't normally run this by hand — the client manages the server's lifecycle.
+**Result:** the server starts and communicates over `stdio`. `--api-url` can be passed explicitly instead of relying on `KBC_STORAGE_API_URL`. For day-to-day use with Claude or Cursor you don't run this by hand — the client manages the server's lifecycle.
 
 More about the package is in the [Keboola MCP Server repository](https://github.com/keboola/mcp-server).
+
+## Run it in Streamable HTTP mode
+
+**Goal:** an HTTP endpoint on your machine, for clients that connect over Streamable HTTP rather than launching a process.
+
+```bash
+uvx keboola_mcp_server --transport streamable-http --host 127.0.0.1 --port 8000 \
+  --api-url $KBC_STORAGE_API_URL
+```
+
+The same flags work in the container — add `-p 127.0.0.1:8000:8000` to `docker run` and `--host 0.0.0.0` to the server so the port is reachable from outside it.
+
+**Result:** the server answers at `http://localhost:8000/mcp`. `keboola_mcp_server --help` lists the full flag set (`--transport`, `--host`, `--port`, `--api-url`, `--storage-token`, `--workspace-schema`, `--log-level`).
 
 ## Point a client at your local instance
 
 A manually started server listens on `stdio`, or on an HTTP port if you started it in Streamable HTTP mode:
 
 - **`stdio` clients** — configure the client to launch the local `keboola_mcp_server` executable and talk over standard input/output.
-- **Streamable HTTP clients** — connect to the host and port you started, e.g. `http://localhost:8000/mcp`. Credentials go in the server's environment variables or CLI flags (or in HTTP headers from the client) — the server no longer reads them from the URL query string.
+- **Streamable HTTP clients** — connect to the host and port you started, e.g. `http://localhost:8000/mcp`. Credentials travel either in the server's own environment variables / CLI flags, or in request headers from the client (`X-Storage-Token`, `X-Workspace-Schema`). **Not in the URL** — the server stopped reading its config from the query string, so `?storage_token=…` silently yields *"Storage API token is not provided."*
 
 **Example — Cursor against a local `uvx` instance:**
 
@@ -120,6 +135,8 @@ Example `mcp_servers.json` snippet:
 ```
 
 You can load that template straight into Cursor: [![Install MCP Server using uvx](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJjb21tYW5kIjoidXZ4IGtlYm9vbGFfbWNwX3NlcnZlciAtLWFwaS11cmwgaHR0cHM6Ly9jb25uZWN0aW9uLllPVVJfUkVHSU9OLmtlYm9vbGEuY29tIiwiZW52Ijp7IktCQ19TVE9SQUdFX1RPS0VOIjoieW91cl9rZWJvb2xhX3N0b3JhZ2VfdG9rZW4iLCJLQkNfV09SS1NQQUNFX1NDSEVNQSI6InlvdXJfd29ya3NwYWNlX3NjaGVtYSJ9fQ%3D%3D)
+
+The template ships with placeholders — after installing it, edit all three (`YOUR_REGION` in the API URL, `your_keboola_storage_token`, `your_workspace_schema`) in Cursor's MCP settings.
 
 :::note
 Tool-authorization headers (`X-Allowed-Tools` and friends) don't apply to `stdio`. Locally, the Storage token and workspace schema you pass in are what bound the server — see the [tools reference](/ai/mcp-server/tools/#restricting-tool-access).

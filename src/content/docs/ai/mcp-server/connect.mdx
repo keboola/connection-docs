@@ -16,9 +16,11 @@ Get your AI client talking to your Keboola project. Every route below does the s
 
 {/* VERIFY(owner: Matyáš): the Keboola-side path and tab set — this page says Project Settings → MCP Server tab (matching the server README); confirm the current client tabs there, including whether a MAKE tab exists. The only public evidence was the stale screenshot dropped in this split. */}
 
+**You'll need** a Keboola project and an account whose role has the permissions you want the assistant to have — over OAuth it inherits exactly those.
+
 ## Step 1 — Get your server URL
 
-The MCP Server runs on every multi-tenant stack. Your URL is `https://mcp.<YOUR_REGION>.keboola.com/mcp`:
+The MCP Server runs on every multi-tenant stack, and **your stack is the host in your Keboola URL**: `connection.<stack>.keboola.com` in the browser means `mcp.<stack>.keboola.com` for MCP. Copy the whole URL from the row that matches:
 
 | Stack (region) | Server URL |
 |---|---|
@@ -28,9 +30,11 @@ The MCP Server runs on every multi-tenant stack. Your URL is `https://mcp.<YOUR_
 | EU Ireland Azure (north-europe) | `https://mcp.north-europe.azure.keboola.com/mcp` |
 | EU Frankfurt GCP (europe-west3) | `https://mcp.europe-west3.gcp.keboola.com/mcp` |
 
-You can also copy it from the platform: **[Project Settings](/management/project/) → MCP Server** tab, which also shows client-specific instructions and an install button for some clients.
+You can also copy it from the platform: open the **avatar menu** (top right) → **Keboola MCP Server** — or **[Project Settings](/management/project/) → the MCP Server tab**. That page has a **Copy URL to clipboard** button plus per-client instructions, and an install button for some clients.
 
-{/* SCREENSHOT(nikita): Project Settings → MCP Server tab in demo project 264, showing the Integration URL. The previous shot (management/project/mcp-server/screenshot.png) was dropped in the split — it showed a stale /sse URL from a non-demo project. */}
+Wherever you take it from, **paste the full URL**. The `<YOUR_REGION>` placeholder in the snippets below is a stand-in for the whole host: on the default stack the region segment disappears entirely (`mcp.keboola.com`), and on GCP/Azure it carries the provider (`us-east4.gcp`, `north-europe.azure`).
+
+{/* SCREENSHOT(nikita): avatar menu → Keboola MCP Server in demo project 264, showing the Integration URL + Copy URL to clipboard. The previous shot (management/project/mcp-server/screenshot.png) was dropped in the split — it showed a stale /sse URL from a non-demo project. */}
 
 ## Step 2 — Set up your client
 
@@ -40,11 +44,11 @@ You can also copy it from the platform: **[Project Settings](/management/project
     Custom connectors are available on the Free, Pro, Max, Team, and Enterprise plans; each user adds the connector for themselves (Free is limited to one custom connector) and authenticates separately. Rolling a connector out **organization-wide** on Team/Enterprise is done by an Organization Owner under Organization settings → Connectors.
     :::
 
-    1. In Claude, go to **Settings → Connectors**.
-    2. Click **Add custom connector**.
-    3. Give it a name (Keboola) and paste in your integration URL — `https://mcp.<YOUR_REGION>.keboola.com/mcp`.
+    1. In Claude, go to **Customize → Connectors**.
+    2. Click **+**, then **Add custom connector**.
+    3. Give it a name (Keboola) and paste in the full server URL from [step 1](#step-1--get-your-server-url).
     4. Click **Add**.
-    5. Authenticate with your Keboola account and select the project you want to connect to.
+    5. Click **Connect** on the new connector, authenticate with your Keboola account, and select the project you want to connect to.
 
     **Fallback — the `mcp-remote` adapter.** For MCP clients that don't yet support native remote (OAuth) connections, bridge to the remote server with [`mcp-remote`](https://github.com/geelen/mcp-remote). This requires Node.js on your computer.
 
@@ -94,17 +98,27 @@ You can also copy it from the platform: **[Project Settings](/management/project
 
     **Alternatively**, install it from the platform:
 
-    1. Go to [Project Settings](/management/project/) → the **MCP Server** tab.
+    1. Open the **avatar menu** → **Keboola MCP Server** (or [Project Settings](/management/project/) → the **MCP Server** tab).
     2. Open the **Cursor** tab.
-    3. Click **Install In Cursor**.
+    3. Click the **Add Keboola MCP server to Cursor** button.
     4. Log in to your Keboola account and select the project.
+  </TabItem>
+
+  <TabItem label="Claude Code">
+    One command, using the full server URL from [step 1](#step-1--get-your-server-url):
+
+    ```bash
+    claude mcp add --transport http keboola https://mcp.<YOUR_REGION>.keboola.com/mcp
+    ```
+
+    Then run `/mcp` in Claude Code and authenticate with your Keboola account to select the project.
   </TabItem>
 
   <TabItem label="Windsurf">
     Windsurf supports MCP through its native integration with Cascade. Add the server with a manual configuration:
 
-    1. Open Windsurf settings and go to **Cascade → Plugins**.
-    2. Click **Add MCP Plugin**, or edit `mcp_config.json` directly.
+    1. Open the **MCPs** panel in Cascade (in current builds: **Settings → Cascade → MCP Servers**).
+    2. Add a custom server, or edit `mcp_config.json` directly (`~/.codeium/windsurf/mcp_config.json`).
     3. Add the Keboola MCP Server configuration:
 
        ```json
@@ -117,15 +131,15 @@ You can also copy it from the platform: **[Project Settings](/management/project
        }
        ```
 
-    4. Replace `<YOUR_REGION>` with your stack URL from [step 1](#step-1--get-your-server-url).
-    5. Press the refresh button.
+    4. Put the full server URL from [step 1](#step-1--get-your-server-url) in `serverUrl`.
+    5. Refresh the server list.
     6. Authenticate with your Keboola account and select the project.
 
-    For detailed instructions and troubleshooting, see the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin).
+    For detailed instructions and troubleshooting, see the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp).
   </TabItem>
 
   <TabItem label="VS Code">
-    VS Code reaches MCP servers through GitHub Copilot's agent mode. You need VS Code with the **GitHub Copilot** extension and a Copilot subscription (Pro, Business, or Enterprise).
+    VS Code reaches MCP servers through GitHub Copilot's agent mode. You need VS Code with the **GitHub Copilot** extension enabled.
 
     1. Make sure the GitHub Copilot extension is up to date.
     2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **MCP: Add Server**.
@@ -143,8 +157,8 @@ You can also copy it from the platform: **[Project Settings](/management/project
        }
        ```
 
-    5. Replace `<YOUR_REGION>` with your stack URL from [step 1](#step-1--get-your-server-url), and save.
-    6. Restart VS Code, or run **MCP: Restart Servers** from the Command Palette.
+    5. Put the full server URL from [step 1](#step-1--get-your-server-url) in `url`, and save.
+    6. Restart VS Code, or check the server from the Command Palette with **MCP: List Servers**.
     7. Authenticate with your Keboola account and select the project.
 
     **Using the tools:** open the Chat view, enable agent mode, and click **Tools** to see the available Keboola tools. Type `#` in the chat to reference a specific tool or resource.
@@ -154,9 +168,9 @@ You can also copy it from the platform: **[Project Settings](/management/project
 
   <TabItem label="Make">
     1. Create your scenario in Make.
-    2. Add the **MCP Client** module to it.
-    3. Go to [Project Settings](/management/project/) → the **MCP Server** tab, then open the **MAKE** section.
-    4. Copy the integration URL shown there and enter it as the server URL in the MCP Client module. Make loads the available Keboola tools automatically.
+    2. Search for and add the **MCP Client** module.
+    3. Select **Keboola** from the module's dropdown.
+    4. Paste the server URL from [step 1](#step-1--get-your-server-url) (the platform's **Make** tab has a copy button) and save. Make loads the available Keboola tools automatically.
   </TabItem>
 
   <TabItem label="Any other client">
@@ -166,7 +180,7 @@ You can also copy it from the platform: **[Project Settings](/management/project
     2. Paste it into your assistant's settings.
     3. Save and refresh the assistant. You'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
 
-    If your client can't do remote OAuth yet, bridge to it with the [`mcp-remote` adapter](#step-2--set-up-your-client) shown in the Claude tab, or [run the server locally](/ai/mcp-server/self-hosted/).
+    If your client can't do remote OAuth yet, bridge to it with the `mcp-remote` adapter — open the **Claude** tab above for the config — or [run the server locally](/ai/mcp-server/self-hosted/).
   </TabItem>
 </Tabs>
 
@@ -174,7 +188,7 @@ You can also copy it from the platform: **[Project Settings](/management/project
 
 ## Scope the connection to a development branch
 
-To keep an agent's changes off production, send the `X-Branch-Id` HTTP header with your [development branch](/components/branches/) ID (running locally, set `KBC_BRANCH_ID` instead). Without it, the server works on production.
+To keep an agent's changes off production, send the `X-Branch-Id` HTTP header with your [development branch](/components/branches/) ID. Whether you can set a custom header at all depends on the client — check its documentation; the desktop clients above generally can't, so the reliable route is [running the server yourself](/ai/mcp-server/self-hosted/) with `KBC_BRANCH_ID` set. Without either, the server works on production.
 
 ## Connect from your own code
 
@@ -198,40 +212,64 @@ For API examples and configuration options, see the [official MCP connector docu
 The [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/mcp/) ships with first-class MCP support. Start the Keboola MCP Server (locally via `uvx`, or remotely over Streamable HTTP) and register it:
 
 ```python
+import asyncio
+
 from agents import Agent, Runner
 from agents.mcp import MCPServerStdio
 
-async with MCPServerStdio(
-    params={"command": "uvx", "args": ["keboola_mcp_server"]}
-) as mcp:
-    agent = Agent(
-        name="Assistant",
-        instructions="Use the Keboola tools to achieve the task",
-        mcp_servers=[mcp],
-    )
-    result = await Runner.run(agent, "Load yesterday's CSV into Snowflake")
+async def main():
+    async with MCPServerStdio(
+        params={
+            "command": "uvx",
+            "args": [
+                "keboola_mcp_server",
+                "--api-url", "https://connection.<YOUR_REGION>.keboola.com",
+            ],
+            "env": {
+                "KBC_STORAGE_TOKEN": "YOUR_KEBOOLA_STORAGE_TOKEN",
+                "KBC_WORKSPACE_SCHEMA": "YOUR_WORKSPACE_SCHEMA",
+            },
+        }
+    ) as mcp:
+        agent = Agent(
+            name="Assistant",
+            instructions="Use the Keboola tools to achieve the task",
+            mcp_servers=[mcp],
+        )
+        result = await Runner.run(agent, "Load yesterday's CSV into Snowflake")
+        print(result.final_output)
+
+asyncio.run(main())
 ```
 
-The SDK calls `list_tools()` on the server automatically, making every Keboola operation available to the model.
+The SDK calls `list_tools()` on the server automatically, making every Keboola operation available to the model. The server needs credentials of its own — without `KBC_STORAGE_TOKEN` every tool call comes back with *"Storage API token is not provided."* See [Run the server yourself](/ai/mcp-server/self-hosted/) for what those values are.
 
 ### LangChain
 
 [LangChain](https://python.langchain.com/docs/) has an official MCP adapter, [`langchain-mcp-adapters`](https://github.com/langchain-ai/langchain-mcp-adapters). Point its `MultiServerMCPClient` at the server and load the tools into your agent:
 
 ```python
+import asyncio
+
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
-client = MultiServerMCPClient(
-    {
-        "keboola": {
-            "transport": "streamable_http",
-            "url": "https://mcp.<YOUR_REGION>.keboola.com/mcp",
+async def main():
+    client = MultiServerMCPClient(
+        {
+            "keboola": {
+                "transport": "streamable_http",
+                "url": "https://mcp.<YOUR_REGION>.keboola.com/mcp",
+                "headers": {"Authorization": "Bearer YOUR_OAUTH_ACCESS_TOKEN"},
+            }
         }
-    }
-)
-tools = await client.get_tools()
-# pass `tools` to your LangChain / LangGraph agent
+    )
+    tools = await client.get_tools()
+    # pass `tools` to your LangChain / LangGraph agent
+
+asyncio.run(main())
 ```
+
+The hosted endpoints enforce OAuth — an unauthenticated call returns `401`. Either carry an access token as shown, or point the client at a [server you run yourself](/ai/mcp-server/self-hosted/), which authenticates with a Storage token instead.
 
 ### Other frameworks
 
