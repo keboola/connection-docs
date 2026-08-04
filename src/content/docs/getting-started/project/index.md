@@ -7,7 +7,12 @@ description: Create a Keboola project on the Free Plan, understand what a projec
 Everything you do in Keboola happens inside a **project**. This page gets you into one.
 Step 1 of the [Getting Started](/getting-started/) arc.
 
-<!-- Tutorial-type page (step 1 of 6). Free Plan limits sourced from /management/payg-project/; sign-up flow and project screen pending live verification. -->
+<!-- Tutorial-type page (step 1 of 6). The project-screen tour below was verified live in
+project 264 on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components /
+Workspaces / Transformations / Data Catalog / Semantic Layer (Beta) / Jobs, and Kai appears as
+"Kai Agent" with a Beta pill. Free Plan limits are sourced from /management/payg-project/. The
+sign-up wizard is deliberately NOT walked — creating accounts is out of scope for automated
+verification — so those three lines rest on the Pay As You Go page. -->
 
 ## What you need
 
@@ -57,7 +62,8 @@ After signing in you land on the project dashboard. Five places matter for this 
   application you can add to the project. This is where you configure how data gets in and out.
 - **Transformations** — the code that reshapes your data: SQL, Python and R, plus dbt on
   paid plans.
-- **Storage** — every table and file in the project, organized into buckets.
+- **Storage** — every table and file in the project, organized into buckets. Its tabs cover
+  **Tables & Buckets**, **Files**, **Data Streams**, **Storage Jobs** and **Events**.
 - **Flows** — the automation layer: what runs, in what order, on what schedule. Projects that
   have both kinds show this as **Conditional Flows**.
 - **Jobs** — the log of everything that has run, successfully or not.
@@ -77,8 +83,8 @@ list — empty is fine, that is what you are about to change.
   a new account; a fresh Free Plan project will not have access to your team's data.
 
 :::tip[Or ask Kai]
-Keboola's built-in assistant can orient you in a project you did not build. Look for **Kai**
-in the project navigation — it has to be enabled first, and it is not on every stack, so see
+Keboola's built-in assistant can orient you in a project you did not build. Look for
+**Kai Agent** in the top bar — it has to be enabled first, and it is not on every stack, so see
 [Get started with Kai](/kai/getting-started/) if you cannot find it. Then ask:
 
 > What is in this project? Summarize the buckets, configurations and flows it contains.
