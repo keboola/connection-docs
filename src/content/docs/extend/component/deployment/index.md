@@ -1,5 +1,6 @@
 ---
 title: Deployment
+description: If you created your component according to the tutorial, you already have a deployment pipeline set up.
 slug: 'extend/component/deployment'
 redirect_from:
   - /extend/docker/tutorial/automated-build/

@@ -1,5 +1,6 @@
 ---
 title: "Part 4: Flow Automation"
+description: So far, you have learned to use Keboola to load tables manually or using a data source connector, manipulate data in SQL, and write data into a Google…
 slug: 'tutorial/automate'
 ---
 

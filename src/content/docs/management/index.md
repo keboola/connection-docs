@@ -1,5 +1,6 @@
 ---
 title: Management
+description: Everything you do in Keboola must take place within a Keboola Project, its basic organizational unit. All projects are grouped into Organizations.
 slug: 'management'
 redirect_from:
   - /tutorial/management/

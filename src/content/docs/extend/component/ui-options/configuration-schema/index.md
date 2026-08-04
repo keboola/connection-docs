@@ -1,5 +1,6 @@
 ---
 title: Configuration Schema
+description: The default input for a component configuration is a JSON text area.
 slug: 'extend/component/ui-options/configuration-schema'
 redirect_from:
     - /extend/registration/configuration-schema/

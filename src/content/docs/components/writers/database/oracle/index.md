@@ -1,5 +1,6 @@
 ---
 title: Oracle
+description: This data destination connector sends data to an Oracle database.
 slug: 'components/writers/database/oracle'
 redirect_from:
     - /writers/database/oracle/

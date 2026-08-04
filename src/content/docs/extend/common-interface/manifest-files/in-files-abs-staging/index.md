@@ -1,5 +1,6 @@
 ---
 title: ABS Staging
+description: When using Azure Blob Storage for direct data exchange, the manifest files in the component’s working directory will contain an additional abs section with…
 slug: 'extend/common-interface/manifest-files/in-files-abs-staging'
 ---
 

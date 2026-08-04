@@ -1,5 +1,6 @@
 ---
 title: Code Pattern Interface
+description: This page describes how code patterns work internally as part of Keboola.
 slug: 'extend/component/code-patterns/interface'
 ---
 

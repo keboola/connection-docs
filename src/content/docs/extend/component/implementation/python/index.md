@@ -1,5 +1,6 @@
 ---
 title: Python Implementation Notes
+description: Use the official images if possible. Usually, the alpine versions are sufficient and are the smallest and fastest. We recommend using our templates.
 slug: 'extend/component/implementation/python'
 redirect_from:
     - /extend/custom-science/python/

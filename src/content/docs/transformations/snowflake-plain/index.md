@@ -1,5 +1,6 @@
 ---
 title: Snowflake Transformation
+description: Snowflake has many advantages.
 slug: 'transformations/snowflake-plain'
 redirect_from:
   - /transformations/snowflake/

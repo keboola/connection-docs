@@ -1,5 +1,6 @@
 ---
 title: Other Data Destination Connectors
+description: Data destination connectors export data from Keboola to external systems.
 slug: 'components/writers/other'
 redirect_from:
     - /writers/other/

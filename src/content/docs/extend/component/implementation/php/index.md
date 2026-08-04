@@ -1,5 +1,6 @@
 ---
 title: PHP Implementation Notes
+description: Use the official images if possible. Usually, the alpine versions are sufficient and are the smallest and fastest.
 slug: 'extend/component/implementation/php'
 redirect_from:
     - /extend/custom-science/php/

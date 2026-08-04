@@ -1,5 +1,6 @@
 ---
 title: ERP Data Source Connectors
+description: Data source connectors import data from external sources and integrate it to the Keboola environment. Keboola provides the following ERP data source connectors.
 slug: 'components/extractors/erp'
 redirect_from:
     - /extractors/erp/

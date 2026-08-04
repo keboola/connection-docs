@@ -1,5 +1,6 @@
 ---
 title: Manifest Files Specification
+description: A manifest file contains additional information about tables and files injected to the /data/in folders.
 slug: 'extend/common-interface/manifest-files'
 ---
 
