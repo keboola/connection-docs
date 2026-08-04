@@ -2208,7 +2208,57 @@ nav.sidebar {
   transition: opacity 0.15s;
 }
 
+/* Touch D-pad, bottom-left over the water. Hidden everywhere by default — which
+   also keeps its four buttons out of the tab order on desktop, where the arrow
+   keys already do the job. Translucent because it sits ON the play field: the
+   corner it covers is the cheapest corner to lose, and the octopus stays readable
+   underneath. */
+.inkdash-pad {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: none;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(2, 40px);
+  gap: 5px;
+  /* The pad must eat the gesture, not hand it to the page as a scroll. */
+  touch-action: none;
+}
+
 .inkdash[data-state='playing'] .inkdash-stop { display: block; }
+
+@media (hover: none) and (pointer: coarse) {
+  .inkdash[data-state='playing'] .inkdash-pad { display: grid; }
+}
+
+.pad-up { grid-column: 2; grid-row: 1; }
+.pad-left { grid-column: 1; grid-row: 2; }
+.pad-down { grid-column: 2; grid-row: 2; }
+.pad-right { grid-column: 3; grid-row: 2; }
+
+.inkdash-pad-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: color-mix(in srgb, var(--sl-color-bg) 55%, transparent);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  color: var(--sl-color-white);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1;
+  opacity: 0.6;
+  cursor: pointer;
+  /* No highlight flash on tap, and no text selection from a held press. */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.inkdash-pad-btn:active {
+  opacity: 0.95;
+  background: color-mix(in srgb, var(--sl-color-accent) 45%, transparent);
+}
 
 /* Invisible hit area, so the visual stays 43×21 while the target clears 44px. */
 .inkdash-stop::before {

@@ -74,12 +74,26 @@
       <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>WASD</kbd> to swim, or just drag ·
       <kbd>Esc</kbd> to leave
     </span>
-    <span class="inkdash-hint-touch">Drag to swim · tap Stop to leave</span>
+    <span class="inkdash-hint-touch">Arrows or drag to swim · tap Stop to leave</span>
   </p>
 
   {/* Outside the start button on purpose: that button is hidden while a game
       runs, and this is the only way out for anyone without an Esc key. */}
   <button class="inkdash-stop" type="button">Stop</button>
+
+  {/* Touch controls. Dragging works, but on a phone your thumb then sits on top
+      of the field you are trying to read — so a translucent D-pad in the corner,
+      shown only on coarse pointers and only while a game runs. It feeds the same
+      key set the keyboard fills, so nothing downstream knows the difference, and
+      two buttons at once give a diagonal. Real buttons with labels rather than
+      canvas-drawn hit zones: `display: none` on desktop keeps them out of the tab
+      order there, and here they are the only controls a screen reader can find. */}
+  <div class="inkdash-pad">
+    <button class="inkdash-pad-btn pad-up" type="button" data-dir="ArrowUp" aria-label="Swim up">↑</button>
+    <button class="inkdash-pad-btn pad-left" type="button" data-dir="ArrowLeft" aria-label="Swim left">←</button>
+    <button class="inkdash-pad-btn pad-down" type="button" data-dir="ArrowDown" aria-label="Swim down">↓</button>
+    <button class="inkdash-pad-btn pad-right" type="button" data-dir="ArrowRight" aria-label="Swim right">→</button>
+  </div>
 </div>
 
 <script>
@@ -721,8 +735,32 @@
       if (state === 'playing') stop('idle');
     };
 
+    /* D-pad. Each button owns its own pointer: capture on press so the release
+       lands here even if the thumb slides off, and hold the direction in the same
+       `keys` set the keyboard uses — which is what makes two buttons at once come
+       out as a diagonal for free. preventDefault stops the press from turning into
+       a scroll or a double-tap zoom. */
+    const padButtons = [...root.querySelectorAll<HTMLButtonElement>('.inkdash-pad-btn')];
+    const padDown = (e: PointerEvent) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+      const dir = btn.dataset.dir;
+      if (!dir || state !== 'playing') return;
+      e.preventDefault();
+      keys.add(dir);
+      btn.setPointerCapture?.(e.pointerId);
+    };
+    const padUp = (e: PointerEvent) => {
+      const dir = (e.currentTarget as HTMLButtonElement).dataset.dir;
+      if (dir) keys.delete(dir);
+    };
+
     startBtn.addEventListener('click', start);
     stopBtn.addEventListener('click', onStopClick);
+    for (const btn of padButtons) {
+      btn.addEventListener('pointerdown', padDown);
+      btn.addEventListener('pointerup', padUp);
+      btn.addEventListener('pointercancel', padUp);
+    }
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
     window.addEventListener('blur', onBlur);
@@ -1374,6 +1412,11 @@
       canvas.removeEventListener('pointermove', onPointerMove);
       canvas.removeEventListener('pointerup', onPointerUp);
       canvas.removeEventListener('pointercancel', onPointerUp);
+      for (const btn of padButtons) {
+        btn.removeEventListener('pointerdown', padDown);
+        btn.removeEventListener('pointerup', padUp);
+        btn.removeEventListener('pointercancel', padUp);
+      }
     };
   }
 
