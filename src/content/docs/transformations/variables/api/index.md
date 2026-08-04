@@ -14,6 +14,9 @@ the [Job API](/integrate/jobs/) before reading on.
 
 See [Tutorial](/transformations/variables/api/tutorial) for step-by-step example.
 
+This page covers variables **through the API**. To define and use them in the UI instead,
+see [Variables](/transformations/variables/).
+
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
 You can enter variables anywhere in the JSON of the configuration body. The configuration body is the contents of 
@@ -583,7 +586,11 @@ The following rules describe the evaluation sequence:
 - `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence. A reference to stored values can't be mixed with providing the values inline. 
 - If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
 
-## Shared Code
+## Shared Code via the API
+This chapter is the API story only — creating shared code with the create-configuration call and
+referencing it from a configuration. For creating and editing shared code in the UI, see
+[Shared Code](/transformations/variables/#shared-code).
+
 Related to variables is the Shared Code feature. Shared code allows to share parts of configuration code. In a 
 configuration it is also replaced using the [Moustache syntax](https://mustache.github.io/mustache.5.html). Shared code
 is referenced using `shared_code_id` and `shared_code_row_ids` configuration nodes. Unlike variables, shared code can't 

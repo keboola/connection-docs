@@ -10,6 +10,9 @@ which differ in only a limited number of values. You can have, for example, a tr
 processes all orders from the Meals department. With variables, you can modify it to work for the
 Drinks department, too.
 
+This page covers variables in the UI. To define, override, or read them programmatically, see
+[Variables API](/transformations/variables/api/).
+
 ## Variables
 Transformation variables are unrelated to the transformation code itself. It means that they do not manifest themselves
 as SQL or Python variables. Transformation variables are evaluated before the transformation is run and
@@ -61,6 +64,10 @@ override a value on one specific task instead, set it in that task's
 [advanced parameters](/flows/#control-task-execution).
 
 ## Shared Code
+This chapter covers creating and using shared code in the UI. For the API — creating it against
+the `keboola.shared-code` component and referencing it with `shared_code_id` /
+`shared_code_row_ids` — see [Shared Code via the API](/transformations/variables/api/#shared-code-via-the-api).
+
 Shared code is slightly related to variables in that it is another option how to make the
 transformation code more dynamic. Shared code allows you to share pieces of code between
 otherwise unrelated transformations. Like with the variables, the shared code is evaluated
