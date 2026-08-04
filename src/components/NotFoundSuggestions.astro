@@ -33,13 +33,19 @@ const pages = entries
 ---
 
 <div class="nf-help" aria-live="polite">
-  <p class="nf-asked" hidden>
-    <span class="nf-asked-lead">There's no page at</span>
-    <code class="nf-asked-path"></code>
-  </p>
-
+  {/* One quiet line carries both the address that failed and the lead-in to the
+      guesses. It used to be a paragraph of its own — "There's no page at" plus a
+      code badge — which read as a second error message stacked under the first.
+      The address still has to be named, though: not naming it is exactly what led
+      a reviewer to conclude the LINK was broken rather than the page missing. */}
   <div class="nf-guesses" hidden>
-    <p class="nf-guesses-lead">Did you mean:</p>
+    {/* `not-content` for the same reason as the buttons: Starlight's inline-code
+        rule outranks a plain class, and it gave the address a tinted badge — the
+        loud treatment this line exists to avoid. */}
+    <p class="nf-lead not-content">
+      <code class="nf-lead-path"></code>
+      <span class="nf-lead-tail"></span>
+    </p>
     <ul class="nf-guesses-list"></ul>
   </div>
 
@@ -47,8 +53,37 @@ const pages = entries
     Or browse <a class="nf-parent-link" href="/"></a>.
   </p>
 
-  <p class="nf-search-row">
-    <button class="notfound-search" type="button" id="notfound-search">
+  {/* Two ways out, side by side, rather than one wide primary: "start over" and
+      "look it up" are the only two things a visitor can do here that always work,
+      and neither is obviously the more likely one. Home is a real <a> — it is a
+      navigation, and middle-click and "open in new tab" have to work; Search is a
+      <button> because it opens Starlight's modal. */}
+  {/* `not-content` because Starlight styles every <a> inside .sl-markdown-content
+      with its own link colour, and that selector outranks a plain class — the Home
+      button rendered as accent-blue text on the accent-blue fill, i.e. an empty
+      blue rectangle. The class is Starlight's own escape hatch: its prose rules
+      are all written :not(:where(.not-content *)). */}
+  <p class="nf-actions not-content">
+    <a class="nf-btn nf-btn-primary" href="/">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M3 10.5 12 3l9 7.5"></path>
+        <path d="M5 9.5V21h14V9.5"></path>
+      </svg>
+      <span>Home</span>
+    </a>
+
+    <button class="nf-btn nf-btn-secondary" type="button" id="notfound-search">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -64,7 +99,7 @@ const pages = entries
         <circle cx="11" cy="11" r="8"></circle>
         <path d="m21 21-4.3-4.3"></path>
       </svg>
-      <span>Search the documentation</span>
+      <span>Search</span>
     </button>
   </p>
 </div>
@@ -123,7 +158,7 @@ const pages = entries
 
     /* Idempotent: this runs both directly and on astro:page-load, and appending
        twice would duplicate every guess. */
-    root.querySelectorAll<HTMLElement>('.nf-asked, .nf-guesses, .nf-parent')
+    root.querySelectorAll<HTMLElement>('.nf-guesses, .nf-parent')
       .forEach((el) => { el.hidden = true; });
     const listEl = root.querySelector<HTMLElement>('.nf-guesses-list');
     if (listEl) listEl.textContent = '';
@@ -141,12 +176,6 @@ const pages = entries
     const isDirect = /^\/(404(\.html)?\/?)?$/.test(path);
     if (isDirect || !pages.length) return;
 
-    const askedEl = root.querySelector<HTMLElement>('.nf-asked');
-    const pathEl = root.querySelector<HTMLElement>('.nf-asked-path');
-    if (askedEl && pathEl) {
-      pathEl.textContent = path;
-      askedEl.hidden = false;
-    }
 
     /* Score on the whole path and on the final segment, keep the better of the
        two, and nudge matches that at least share a top-level section. */
@@ -188,9 +217,20 @@ const pages = entries
         : fallback;
     if (query) root.dataset.nfQuery = query;
 
-    if (ranked.length) {
+    /* The block always shows once we know a real path failed — with guesses when
+       there are any, and with just the address and a plain statement when there
+       are none. Silence there would leave the visitor with nothing but the H1. */
+    {
       const box = root.querySelector<HTMLElement>('.nf-guesses');
       const list = root.querySelector<HTMLElement>('.nf-guesses-list');
+      const pathEl = root.querySelector<HTMLElement>('.nf-lead-path');
+      const tailEl = root.querySelector<HTMLElement>('.nf-lead-tail');
+      if (pathEl) pathEl.textContent = path;
+      if (tailEl) {
+        tailEl.textContent = ranked.length
+          ? '· did you mean:'
+          : '· nothing matches that address';
+      }
       if (box && list) {
         for (const { page } of ranked) {
           const li = document.createElement('li');

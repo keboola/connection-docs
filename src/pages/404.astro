@@ -23,12 +23,11 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
 <StarlightPage
   frontmatter={{
     title: 'Page Not Found',
-    /* One line on purpose. The block below already names the path that failed,
-       so a longer lede repeats it and costs vertical space the recovery links
-       need — measured, it was the difference between them landing above the
-       fold or below it. This still carries a direct visit to /404.html, where
-       that block hides itself. */
-    description: "That page doesn't exist. Here's what's nearby.",
+    /* Four words on purpose. The block below already names the path that failed
+       and offers what's nearby, so a longer lede repeats it and costs vertical
+       space the recovery links need. This still carries a direct visit to
+       /404.html, where that block hides itself, and it is the meta description. */
+    description: "That page doesn't exist.",
     tableOfContents: false,
     pagefind: false,
     hideMeta: true,
@@ -38,24 +37,24 @@ import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
   prev={false}
   next={false}
 >
-  {/* Requested path, closest matches, parent section and the search button —
-      one block, because "did you mean" and "search yourself" are one job. The
+  {/* First, under the title and the lede — a design call, not an accident: the
+      octopus is the page's face, and burying it under the recovery block made it
+      read as an afterthought. It costs the block below vertical space, which is
+      exactly why the panel rests at ~215px and only takes the full field while
+      somebody is playing and nobody is reading anything. */}
+  <InkDash />
+
+  {/* Requested path, closest matches, parent section, and the two ways out —
+      one block, because "did you mean" and "get me out of here" are one job. The
       standalone support@ line that used to sit here is gone: the same address is
       already a bullet in the list below. */}
   <NotFoundSuggestions />
 
-  {/* Directly after the search button, before the recovery links. It costs those
-      links vertical space — at a 1280×800 viewport the list now starts around the
-      fold instead of well above it — which is exactly why the compact resting
-      state and the grow-on-Play split matter here: at rest the panel is ~215px,
-      and it only takes the full field while somebody is playing and nobody is
-      reading the links. */}
-  <InkDash />
-
   <h2>Where you might be headed</h2>
 
+  {/* No "Documentation home" bullet: the Home button above is the same link, and
+      offering one address twice on a page about a wrong address is noise. */}
   <ul>
-    <li><a href="/">Documentation home</a> — start over from the top.</li>
     <li>
       <a href="https://connection.keboola.com">connection.keboola.com</a> — log in to Keboola.
     </li>

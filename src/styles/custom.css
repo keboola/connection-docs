@@ -1923,27 +1923,35 @@ nav.sidebar {
   margin: 1rem 0 1.1rem;
 }
 
-.nf-asked {
-  margin: 0 0 0.5rem;
-  font-size: 15px;
-}
-
-.nf-asked-path {
-  overflow-wrap: anywhere;
-}
-
 .nf-guesses {
   margin: 0 0 0.5rem;
 }
 
-.nf-guesses-lead {
+/* The address that failed and the lead-in to the guesses, on one quiet line. Two
+   stacked paragraphs — an error sentence with a code badge, then an uppercase
+   "DID YOU MEAN" — read as the page shouting twice about the same thing. */
+.nf-lead {
   margin: 0 0 0.35rem;
   font-family: var(--font-sans);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  line-height: 1.6;
   color: var(--sl-color-gray-3);
+}
+
+/* Stripped of Starlight's inline-code chrome: on this line the address is a quiet
+   fact, and a badge with its own background pulled the eye straight back to the
+   thing that went wrong. Monospace still separates it from the sentence. */
+.nf-lead-path {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 13px;
+  color: var(--sl-color-gray-2);
+  overflow-wrap: anywhere;
+}
+
+.nf-lead-tail {
+  margin-left: 0.15rem;
 }
 
 .nf-guesses-list {
@@ -1976,21 +1984,22 @@ nav.sidebar {
   font-size: 15px;
 }
 
-.nf-search-row {
+/* Two actions in a row: Home and Search. One shape, two weights — two filled
+   accent buttons side by side fight each other, and nothing here justifies
+   shouting twice. */
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin: 0;
 }
 
-.notfound-search {
+.nf-btn {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   padding: 10px 18px;
-  background: var(--sl-color-accent);
-  border: 1px solid var(--sl-color-accent);
   border-radius: 8px;
-  /* Literal white: Starlight flips --sl-color-white to near black in the light
-     theme, which would put dark text on the blue accent. */
-  color: #fff;
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 600;
@@ -1998,19 +2007,39 @@ nav.sidebar {
   transition: opacity 0.15s;
 }
 
-.notfound-search:hover { opacity: 0.85; }
+.nf-btn-primary {
+  background: var(--sl-color-accent);
+  border: 1px solid var(--sl-color-accent);
+  /* Literal white: Starlight flips --sl-color-white to near black in the light
+     theme, which would put dark text on the blue accent. */
+  color: #fff;
+  /* Starlight underlines links in prose; this one is a button. */
+  text-decoration: none;
+}
+
+.nf-btn-secondary {
+  background: none;
+  border: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+}
+
+.nf-btn:hover { opacity: 0.85; }
+
+.nf-btn-secondary:hover { background: var(--sl-color-gray-6); }
+
 
 /* --- Ink-dash panel ---
    A framed scene whose water, light and particulate are drawn on the canvas. It
-   sits between the search button and the recovery links, so every pixel of its
-   resting height is spent out of those links' fold budget — hence compact at
+   sits first on the page, above the whole recovery block, so every pixel of its
+   resting height is spent out of that block's fold budget — hence compact at
    rest, full field only while playing. */
 .inkdash {
   position: relative;
   max-width: 720px;
-  /* Tight, and measured: it is wedged between two blocks, and every 10px here
-     spends the margin the recovery links have above the fold. */
-  margin: 0.6rem 0 1rem;
+  /* Air on both sides, per the designer, so it reads as its own thing rather than
+     as part of the recovery block underneath. Every 10px here still spends the
+     margin the recovery links have above the fold, so it is 2rem and not more. */
+  margin: 1.5rem 0 2rem;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 10px;
   /* The canvas is square-cornered, so the panel has to clip it to its radius. */
