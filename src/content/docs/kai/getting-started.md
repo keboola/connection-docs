@@ -19,7 +19,7 @@ Every user can see the Kai button in their project (on supported stacks). To ena
 
 ## Opening Kai
 
-Click the **KAI** button in your project's top navigation bar, or use keyboard shortcuts:
+Click the **Kai Agent** button (marked *Beta*) in your project's top bar, or use keyboard shortcuts:
 
 | Shortcut | Action |
 |----------|--------|

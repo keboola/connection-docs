@@ -12,16 +12,17 @@ This data source connector loads a single CSV file from an HTTP/HTTPS URL and st
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **HTTP** connector.
 
-Enter a base URL -- the prefix for all downloaded CSV files from a given website
+Open **Base URL and Connection Options** and enter a base URL -- the prefix for all downloaded CSV files from a given website
 *(for example, `https://help.keboola.com`; you can then test the extraction on our sample tables)*.
 
 ![Screenshot - Base URL](/components/extractors/storage/http/http-1.png)
 
 The base URL can also contain folder specification if the same folder is used for all files downloaded using this base URL.
 
-## Add Tables
-To create a new table, click the **Add Table** button and assign a name.
-It will be used to create the destination table name in Storage and can be modified.
+## Add Rows
+Each file you download is a configuration row. Click **Add Row** in the **Rows** section,
+assign a name, and click **Create**. The name seeds the destination table name in Storage and
+can be changed afterwards.
 
 ![Screenshot - Create table](/components/extractors/storage/http/http-2.png)
 
@@ -42,9 +43,9 @@ want to load one of our tutorial tables, enter its path, e.g., `/tutorial/opport
 
 ![Screenshot - Save Settings](/components/extractors/storage/http/http-4.png)
 
-- The initial value in **Table Name** is derived from the configuration table name. You can change it at any time; however,
+- The initial value in **Table name** is derived from the row name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved to cannot be changed.
-- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
+- **Incremental load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
 - **Delimiter** and **Enclosure** specify the CSV settings.
 
@@ -52,7 +53,7 @@ incremental load depends on other settings (mainly **Primary Key**).
 
 ![Screenshot - Header & Primary Key](/components/extractors/storage/http/http-5.png)
 
-There are three options for determining column names:
+The **Read Header** option defaults to *Read the header from the file(s) header*. There are three options for determining column names:
 
  - **Set header manually** --- This option enables the **Set Headers** input to manually specify all columns in the table.
  - **Read from the file(s) header** --- This option assumes that each file has a header on the first line.

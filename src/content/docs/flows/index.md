@@ -362,7 +362,9 @@ You can also create the notification inside of condition as a New Phase, name it
 
 ## Schedule and Automate
 
-Click on **Set Schedule** in your flow and select when you want the flow to run. You can select predefined intervals or set your own. Another option is to use triggers to initiate the run.
+Open the flow's **Schedules** tab and click **Create Schedule**, then choose when the flow runs — a predefined interval (**Every 15 minutes**, **Every hour**, **Once a day**, **Once a week**, **End of month**) or your own under **Set Your Own** — and confirm with **Set Up Schedule**. Another option is to use triggers to initiate the run.
+
+A flow can hold several schedules. They work independently, and the flow runs whenever any of them fires. Each one has a toggle, so you can pause a schedule without deleting it.
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 

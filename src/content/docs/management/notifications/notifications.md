@@ -22,7 +22,16 @@ Notifications in Keboola can be set up at various levels — from individual job
 
 ![Screenshot - Flow Notifications](/management/notifications/orchestration-main-1.png)
 
-Then click **Edit Notifications** and set notifications for particular situations:
+In a [Conditional Flow](/flows/), the **Notifications** tab is edited in place — there is no
+separate edit step. It offers three cards, each taking **email addresses** (individual or group)
+or a **webhook URL**:
+
+- **Success** --- the flow finishes successfully.
+- **Errors** --- the flow finishes with an error.
+- **Processing** --- the job runs longer than usual, by a percentage you set.
+
+In a [Legacy Flow](/flows/flows-legacy/), click **Edit Notifications** and set notifications for
+particular situations:
 
 ![Screenshot - Notification Details](/management/notifications/orch-notifications.png)
 
@@ -32,7 +41,7 @@ You can:
 
 Notifications can be sent when:
 - The flow finishes with an **error**.
-- Some tasks fail and the flow finishes with a **warning** (requires [*Continue on Error*](/flows/#control-task-execution)).
+- Some tasks fail and the flow finishes with a **warning** (requires [*Continue on Error*](/flows/flows-legacy/)). Conditional Flows express this through [conditions](/flows/#conditions) instead, so they have no separate warning notification.
 - The flow takes significantly longer than usual. --- e.g., when you set the threshold to 20% and an flow usually runs 
 for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as a running average of the last 20 executions of the flow.
 
@@ -40,7 +49,7 @@ for 100 minutes but it is still not finished after 120 minutes, a notification w
 
 ***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production flows.*
   
-### 2. Flow Notifications
+### 2. Flow Notification Scope
 - Alert users about the success, warning, or failure of Flows. Flow notifications are only for the flow as a whole (not per-component).  
 - Notifications can be sent to individuals or group email addresses.  
 
