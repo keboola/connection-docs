@@ -42,7 +42,7 @@ The preview opens a side-by-side view: the **Current Legacy Flow** on the left a
 Use this view to:
 
 - Verify that all phases and tasks from the original Legacy Flow are represented in the Conditional Flow.
-- Read through the structural changes so you understand how Legacy Flow concepts (such as the **Continue on Failure** toggle) have been translated into Conditional Flow primitives.
+- Read through the structural changes so you understand how Legacy Flow concepts (such as the **Continue on Failure** toggle) have been translated into Conditional Flow primitives. Conditional Flows have no per-task **Continue on Failure** toggle - the behavior is migrated into a condition on the phase; see [Continue on Failure in Conditional Flows](/flows/flow-migration-guide/continue-on-failure/).
 
 The preview is read-only. No changes are made to your project until you explicitly start the migration.
 
