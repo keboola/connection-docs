@@ -8,14 +8,18 @@ redirect_from:
 
 
 
-This data source connector allows you to look up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades.
-Data are provided by the [Dark Sky API](https://darksky.net/dev).
+:::caution[Deprecated — this connector no longer works]
+**Support for the Dark Sky API ended on March 31, 2023**, and Apple replaced it with [WeatherKit](https://developer.apple.com/weatherkit/). Because the upstream API is gone, this connector cannot fetch data, and new API keys cannot be obtained. The component is marked deprecated and is no longer offered when creating a configuration.
 
-To configure the connector, you need to provide tables with locations, your Dark Sky API key, units to use, and a desired forecast granularity.
+If you still have a Dark Sky configuration, it will fail. Remove it, or switch to the [Weather API connector](/components/extractors/other/weather-api/), which covers forecast, real-time, and historical weather. The page below is kept only to explain existing configurations.
+:::
+
+This data source connector looked up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades. Data were provided by the Dark Sky API.
+
+To configure the connector, you provided tables with locations, your Dark Sky API key, the units to use, and a desired forecast granularity.
 
 ## API Secret Key
-Before you start, please create an account in the [Dark Sky API](https://darksky.net/dev). Log in and get your API Secret key.
-Dark Sky offers 1,000 API calls a day for free.
+The connector authenticated with a Dark Sky API Secret key. **New keys are no longer issued** — the sign-up and documentation pages now redirect to Apple's WeatherKit announcement.
 
 ![Screenshot - Dark Sky API key](/components/extractors/other/dark-sky/dark-sky-token.png)
 
@@ -55,6 +59,6 @@ The connector produces one table called `weather` with the following columns:
 - `value` --- value of the weather condition
 
 Data are always imported incrementally.
-You can find the description of all weather conditions in the [Dark Sky API Documentation](https://darksky.net/dev/docs#data-point-object).
+The Dark Sky API documentation that described these weather conditions is no longer published.
 
 
