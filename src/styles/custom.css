@@ -1911,3 +1911,365 @@ nav.sidebar {
   margin: 4px 0;
 }
 .skill-download-btn:hover { opacity: 0.85; color: var(--sl-color-white); }
+
+/* ==========================================================================
+   404 page — recovery block + Ink-dash panel
+   ========================================================================== */
+
+/* --- "did you mean" recovery block --- */
+.nf-help {
+  /* Tight on purpose: every 10px here decides whether the recovery links
+     below the game panel land above the fold. */
+  margin: 1rem 0 1.1rem;
+}
+
+.nf-guesses {
+  margin: 0 0 0.5rem;
+}
+
+/* The address that failed and the lead-in to the guesses, on one quiet line. Two
+   stacked paragraphs — an error sentence with a code badge, then an uppercase
+   "DID YOU MEAN" — read as the page shouting twice about the same thing. */
+.nf-lead {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--sl-color-gray-3);
+}
+
+/* Stripped of Starlight's inline-code chrome: on this line the address is a quiet
+   fact, and a badge with its own background pulled the eye straight back to the
+   thing that went wrong. Monospace still separates it from the sentence. */
+.nf-lead-path {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 13px;
+  color: var(--sl-color-gray-2);
+  overflow-wrap: anywhere;
+}
+
+.nf-lead-tail {
+  margin-left: 0.15rem;
+}
+
+.nf-guesses-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nf-guesses-list li {
+  margin: 0 0 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+}
+
+.nf-guesses-list a {
+  font-weight: 600;
+}
+
+.nf-guess-path {
+  font-family: var(--__sl-font-mono, ui-monospace, monospace);
+  font-size: 12.5px;
+  color: var(--sl-color-gray-3);
+  overflow-wrap: anywhere;
+}
+
+.nf-parent {
+  margin: 0 0 0.7rem;
+  font-size: 15px;
+}
+
+/* Two actions in a row: Home and Search. One shape, two weights — two filled
+   accent buttons side by side fight each other, and nothing here justifies
+   shouting twice. */
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.nf-btn-primary {
+  background: var(--sl-color-accent);
+  border: 1px solid var(--sl-color-accent);
+  /* Literal white: Starlight flips --sl-color-white to near black in the light
+     theme, which would put dark text on the blue accent. */
+  color: #fff;
+  /* Starlight underlines links in prose; this one is a button. */
+  text-decoration: none;
+}
+
+.nf-btn-secondary {
+  background: none;
+  border: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+}
+
+.nf-btn:hover { opacity: 0.85; }
+
+.nf-btn-secondary:hover { background: var(--sl-color-gray-6); }
+
+
+/* --- Ink-dash panel ---
+   A framed scene whose water, light and particulate are drawn on the canvas. It
+   sits under the Home/Search buttons and above the fallback link list, so every
+   pixel of its resting height is spent out of that list's fold budget — hence
+   compact at rest, full field only while playing. */
+.inkdash {
+  position: relative;
+  max-width: 720px;
+  /* Air on both sides, per the designer, so it reads as its own thing rather than
+     as the tail of the recovery block above it. Every 10px here still spends the
+     margin the link list has above the fold, so it stops at 1.75rem. */
+  margin: 1.5rem 0 1.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+  /* The canvas is square-cornered, so the panel has to clip it to its radius. */
+  overflow: hidden;
+}
+
+.inkdash-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Sizing lives here, not in the component, and there are two of it: compact at
+     rest, so the recovery links below stay within reach of the fold, and the full
+     field once a game starts. Each pairs with a world height (H_IDLE / H_PLAY) over the SAME
+     world width, which is what keeps the drawing scale identical in both — the
+     octopus must not change size when the panel grows, only gain water above and
+     below it.
+
+     That shared width is 840, not the ~960 it used to be: fewer world units in
+     the same box means everything is drawn bigger (~0.86 CSS px per world unit),
+     and scale is the one real cure for "small sprites in an empty rectangle".
+
+     Each state also holds a min-height: below a phone width the panel stops
+     shrinking and the game narrows its world instead. Letting the aspect ratio
+     win there produced an 87px-tall field — unplayable, a third of it taken by
+     the Stop button in the corner. */
+  aspect-ratio: 840 / 250;
+  min-height: 170px;
+}
+
+.inkdash[data-state='playing'] .inkdash-canvas {
+  aspect-ratio: 840 / 540;
+  min-height: 360px;
+  /* Only capture touch gestures while a game runs — otherwise the panel would
+     swallow page scrolling on mobile. */
+  touch-action: none;
+}
+
+/* Covers the whole panel so click and tap work anywhere on it, and space/Enter
+   work natively once focused — no global key handler, so page scrolling stays
+   intact. The pill inside carries the call to action. */
+.inkdash-start {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  /* One centred ROW along the bottom, under a centred octopus. Stacking the
+     message above the pill costs ~30px of the resting panel's ~215px, which is
+     exactly what forced the earlier layouts to either shrink the octopus to
+     nothing or shove it off to one side. A row keeps the hero big and centred. */
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
+  /* Bottom padding clears the hint line, which is a sibling rather than a child
+     of this button. */
+  padding: 12px 22px 40px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  text-align: center;
+}
+
+.inkdash[data-state='playing'] .inkdash-start { display: none; }
+
+.inkdash-start-msg {
+  /* The row is bottom-aligned, so the text needs the pill's own vertical padding
+     back to sit on the same optical line as its label. */
+  padding-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+
+.inkdash-start-cta {
+  padding: 8px 22px;
+  background: var(--sl-color-accent);
+  border-radius: 6px;
+  /* Literal white, not --sl-color-white: Starlight flips that token to near
+     black in the light theme, which would put dark text on the blue accent. */
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+.inkdash-start:hover .inkdash-start-cta { opacity: 0.85; }
+
+/* The button covers the whole panel, so its own focus ring would trace the
+   entire frame. Put the ring on the pill instead — that is what looks pressable. */
+.inkdash-start:focus-visible { outline: none; }
+
+.inkdash-start:focus-visible .inkdash-start-cta {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 2px;
+}
+
+.inkdash-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11px;
+  margin: 0;
+  padding: 0 12px;
+  /* Painted over the full-cover start button, so clicks have to pass through. */
+  pointer-events: none;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: center;
+  /* Not --sl-color-gray-3: this line is painted on the canvas wash, not on the
+     page background, and against the light theme's sea blue it measured 3.71:1 —
+     under AA for 12.5px text, on the only visible statement of the controls and
+     the Esc exit. These two hold up on their own theme's water. */
+  color: var(--sl-color-white);
+  opacity: 0.85;
+}
+
+.inkdash[data-state='playing'] .inkdash-hint { display: none; }
+
+.inkdash-hint kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 4px;
+  background: var(--sl-color-gray-6);
+  font-size: 11px;
+}
+
+/* Below this width the resting panel cannot hold the octopus, the message, the
+   pill and a hint that has wrapped to two lines. Both texts give way and the
+   pill stays: the hint is keyboard guidance, and at this width the visitor is
+   overwhelmingly on a touch device that drags instead. */
+.inkdash-hint-touch { display: none; }
+
+@media (max-width: 600px) {
+  /* The message gives way, the hint swaps to its touch wording — one line either
+     way, and a phone keeps being told how to move and how to leave. */
+  .inkdash-start-msg,
+  .inkdash-hint-keys { display: none; }
+
+  .inkdash-hint-touch { display: inline; }
+}
+
+/* Half the size it used to be (60×40 → 30×20): it is an escape hatch for anyone
+   without an Esc key, not a control anybody aims for, and at full size it ate a
+   visible corner of the field.
+   It only LOOKS that small — the ::before below gives it a 44px tap target, since
+   on a phone this is the only way out (there is no Esc, and drag-to-swim means
+   the field's edges are not an exit either). */
+.inkdash-stop {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  display: none;
+  min-width: 30px;
+  min-height: 20px;
+  padding: 3px 8px;
+  background: color-mix(in srgb, var(--sl-color-bg) 72%, transparent);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 5px;
+  color: var(--sl-color-white);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+/* Touch D-pad, bottom-left over the water. Hidden everywhere by default — which
+   also keeps its four buttons out of the tab order on desktop, where the arrow
+   keys already do the job. Translucent because it sits ON the play field: the
+   corner it covers is the cheapest corner to lose, and the octopus stays readable
+   underneath. */
+.inkdash-pad {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: none;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(2, 40px);
+  gap: 5px;
+  /* The pad must eat the gesture, not hand it to the page as a scroll. */
+  touch-action: none;
+}
+
+.inkdash[data-state='playing'] .inkdash-stop { display: block; }
+
+@media (hover: none) and (pointer: coarse) {
+  .inkdash[data-state='playing'] .inkdash-pad { display: grid; }
+}
+
+.pad-up { grid-column: 2; grid-row: 1; }
+.pad-left { grid-column: 1; grid-row: 2; }
+.pad-down { grid-column: 2; grid-row: 2; }
+.pad-right { grid-column: 3; grid-row: 2; }
+
+.inkdash-pad-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: color-mix(in srgb, var(--sl-color-bg) 55%, transparent);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  color: var(--sl-color-white);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1;
+  opacity: 0.6;
+  cursor: pointer;
+  /* No highlight flash on tap, and no text selection from a held press. */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.inkdash-pad-btn:active {
+  opacity: 0.95;
+  background: color-mix(in srgb, var(--sl-color-accent) 45%, transparent);
+}
+
+/* Invisible hit area, so the visual stays 43×21 while the target clears 44px. */
+.inkdash-stop::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
+
+.inkdash-stop:hover { opacity: 0.8; }
+
+.notfound-partners {
+  font-size: 13.5px;
+  color: var(--sl-color-gray-3);
+}
