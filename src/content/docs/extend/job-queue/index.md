@@ -47,7 +47,7 @@ The component is responsible for these processes:
 Job Queue is responsible for the following processes:
 
 - **Authentication:** Job Queue makes sure the component is run by authorized users/tokens.
-It is not possible to run a component anonymously. The component does not have an access to the Keboola token
+It is not possible to run a component anonymously. The component does not have access to the Keboola token
 itself, and it receives only limited information about the project and the end-user.
 - **Starting and stopping** the component: Job Queue will boot a Docker container which contains the
 component. This ensures the component runs in a precisely defined environment, which is guaranteed to

@@ -177,7 +177,7 @@ component repository and tag were automatically set:
 
 The component is now runnable in Keboola. You can view all settings in our
 [example repository](https://github.com/keboola/ex-docs-tutorial). You can also
-review [Travis Configuration](https://travis-ci.org/keboola/ex-docs-tutorial/).
+review [Travis Configuration](https://app.travis-ci.com/keboola/ex-docs-tutorial).
 
 *Note that it takes up to **5 minutes** before the changes in the Developer Portal propagate to all Keboola instances in all regions.*
 

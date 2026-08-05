@@ -182,7 +182,7 @@ The component can run arbitrary queries against the database. The database crede
       "host": "database.example.com",
       "warehouse": "test",
       "database": "my-db",
-      "schema": "my-schema"
+      "schema": "my-schema",
       "user": "john-doe",
       "password": "secret"
     }
@@ -214,7 +214,7 @@ and unloaded from when the job finishes (when staging storage output is set).
 The workspace is created just before the job starts and is deleted when the job is terminated.
 
 If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
-data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
+data folder similarly to how it does when using the default [local filesystem](/extend/common-interface/folders/#root-folder-data).
 
 ### Files
 Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if a file 'test.txt' with ID '12345' is in 
@@ -226,9 +226,9 @@ the input mapping then the file will appear in the storage blob container with U
 Synapse only exports tables as sliced files.
 So for example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as 
 destination then in the ABS workspace you will find it with the following structure:
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier1].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier2].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier3].txt
   
 ### Mappings
 
@@ -236,7 +236,7 @@ To sum up, below is a sample storage configuration and where the files are writt
 
 | Direction | Source | Destination |
 | --- | --- | --- |
-| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-inpupt-table.csv/[random identifier].txt` |
+| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-input-table.csv/[random identifier].txt` |
 | input | file with tag `my-input-files` named `input-file.txt` | `[abs-workspace-root]/data/in/files/test.txt/12345` |
 | output | `[abs-workspace-root]/data/out/tables/my-output-table.csv` | out.c-main.my-table-from-abs-workspace |
 | output | `[abs-workspace-root]/data/out/files/my-file.txt` | file `my-file.txt` with tag `uploaded-from-abs-workspace` |
@@ -257,7 +257,7 @@ To sum up, below is a sample storage configuration and where the files are writt
           "tags": ["my-input-files"]
         }
       ]
-    }
+    },
     "output": {
       "tables": [
         {
@@ -295,7 +295,7 @@ shown below.
   "authorization": {
     "workspace": {
       "container": "azure-storage-blob-container",
-      "connectionString": "azure-storage-blob-SAS-connection-string",
+      "connectionString": "azure-storage-blob-SAS-connection-string"
     }
   }
 }
