@@ -90,9 +90,10 @@ export VARIABLE_CONFIG_ID="1234"
 
 **The created *variable configuration* defines the names and types of variables.**
 
-You can create additional configurations that contain (default) [Variable Values](/flows/variables/api/#variable-values).
+Default values live in **configuration rows of this same variable configuration**, referenced from the
+main configuration by `variables_values_id` — see [Variable Values](/flows/variables/api/#variable-values).
 
-In this example, the values of the variables are entered directly to the [run API call](#run-extractor-configuration) (see bellow),
+In this example, the values of the variables are entered directly to the [run API call](#run-extractor-configuration) (see below),
 so configuration with the variable values is not used.
 
 ## Create extractor configuration
@@ -152,37 +153,40 @@ export EXTRACTOR_CONFIG_ID="4567"
 
 ## Run extractor configuration
 
-Define values of the variables.
+Define values of the variables. Both values are quoted — the API declares a variable value as a
+string.
 ```shell
 export VARIABLES_VALUES='
 [
     {"name": "outputBucket", "value": "my-bucket"},
-    {"name": "id", "value": 1}
+    {"name": "id", "value": "1"}
 ]
 '
 ```
 
-In this example are values of the variables part of the run job request.
+In this example the values of the variables are part of the run job request.
 
 For other ways to define values see the [Variables documentation](/flows/variables/api/#variable-values).
 
 Use [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) to run *extractor configuration*.
+The body is passed on standard input, so the multi-line `$VARIABLES_VALUES` survives intact — inlining
+it as `'$VARIABLES_VALUES'` makes `bash` split it on whitespace and truncates the request.
 ```shell
 curl --include \
      --request POST \
      --header "Content-Type: application/json" \
      --header "X-StorageApi-Token: $TOKEN" \
-     --data-binary '
-        {
-            "component": "'$COMPONENT_ID'",
-            "config": "'$EXTRACTOR_CONFIG_ID'",
-            "mode": "run",
-            "variableValuesData": {
-                "values": '$VARIABLES_VALUES'
-            }
-        }
-     ' \
-"$JOB_QUEUE_HOST/jobs"
+     --data-binary @- \
+     "$JOB_QUEUE_HOST/jobs" <<EOF
+{
+    "component": "$COMPONENT_ID",
+    "config": "$EXTRACTOR_CONFIG_ID",
+    "mode": "run",
+    "variableValuesData": {
+        "values": $VARIABLES_VALUES
+    }
+}
+EOF
 ```
 
 ## Check the job result

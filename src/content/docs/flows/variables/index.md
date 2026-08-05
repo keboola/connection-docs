@@ -88,13 +88,14 @@ A **Static Value** is a fixed text or number you enter directly. Useful for thre
 
 ![Set Variable panel with Static Value selected](/flows/conditional-flows-variables-static-set.png)
 
-**JSON equivalent** (useful when authoring a flow as a template or via the API):
+**JSON equivalent** (useful when authoring a flow as a template or via the API). The `value` field is
+a string in the flow schema, so quote numbers — an unquoted `3600` fails validation:
 
 ```json
 {
   "type": "variable",
   "name": "max_duration",
-  "value": 3600
+  "value": "3600"
 }
 ```
 
@@ -251,9 +252,10 @@ not passed to the job itself.
 ### Task Parameters on a Single Task
 
 To set a value on one specific task instead, use its **Task Parameters**: select the task, click
-**Set advanced parameters**, and add `variableValuesData` to the payload. These are the parameters
-sent to the underlying [run-job API call](/flows/variables/api/#step-4--run-job), so this path does
-not depend on the variable also being declared in the flow.
+**Set advanced parameters**, and add `variableValuesData` to the task payload. This path does not
+depend on the variable also being declared as a flow variable. The `variableValuesData` shape is the
+same one [running a job](/flows/variables/api/#step-4--run-job) takes, but the surrounding fields are
+the task's own (`componentId` / `configId`), not the job API's `component` / `config`:
 
 ```json
 {
@@ -264,7 +266,7 @@ not depend on the variable also being declared in the flow.
     "values": [
       {
         "name": "multiplier",
-        "value": 1000
+        "value": "1000"
       }
     ]
   }

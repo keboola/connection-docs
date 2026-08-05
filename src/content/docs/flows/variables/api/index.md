@@ -36,9 +36,9 @@ To enable replacement of variables, the *main configuration* has to reference th
 If there is no *variable configuration* referenced, no replacement is made (the *main configuration* is completely
 static). Variables can be used in any place of any configuration except legacy transformations (the component with 
 the ID `transformation`; it can still be used in a specific transformation -- e.g., `keboola.python-transformation-v2` 
-or `keboola.snowflake-transformation`, etc.), and a legacy orchestrator configuration
-(`keboola.orchestrator`). A flow does not carry placeholders of its own — it *supplies* values to
-the configurations it runs, which is covered in
+or `keboola.snowflake-transformation`, etc.), and a flow configuration of either type
+(`keboola.flow` or the legacy `keboola.orchestrator`). A flow does not carry placeholders of its
+own — it *supplies* values to the configurations it runs, which is covered in
 [Driving Variables from a Flow](#driving-variables-from-a-flow).
 
 ## Variable Configuration
@@ -281,8 +281,9 @@ variables you actually use in the main configuration. For example, the main conf
 configuration with *firstVar* and *secondVar* variables, but you're using `{{ firstVar}}` and
 `{{ thirdVar}}` in the configuration code. Then you have to provide values at least for *firstVar* 
 and *secondVar* variables. If you provide values for all *firstVar*, *secondVar*, and *thirdVar*, all of them will 
-be replaced. If you omit *thirdVar*, it will be replaced by an empty string. If you omit one of *firstVar*, 
-*secondVar*, an error will be raised.
+be replaced. Omitting a value raises an error — a referenced placeholder with no value is reported as
+`Missing values for placeholders: "thirdVar"`, and a declared variable with no value as
+`No value provided for variable "firstVar".` Neither is silently replaced with an empty string.
 
 The second rule is that the three options of passing values are mutually exclusive. If you provide values using 
 `variableValuesId` or `variableValuesData`, it overrides the default values (if provided). You can't use 
@@ -507,13 +508,18 @@ This applies to **legacy** flows only. New flows use `keboola.flow`, described a
 - Variables can be entered in task configuration.
 - Variables can be entered when running an orchestration.
 
-Entering variable values in task configurations allows the orchestration to run configurations with variables. 
-Variable values are entered in the `actionParameters` property. The parameters are identical to 
-[running a job](/flows/variables/api/#step-4--run-job).
+Entering variable values in task configurations allows the orchestration to run configurations with
+variables; the parameters are identical to [running a job](/flows/variables/api/#step-4--run-job).
+When running an orchestration, you can also provide variable values for the whole run, and those
+override the ones set on individual tasks.
 
-When running an orchestration, you can also provide variable values for an entire orchestration. In that case, 
-the provided values will override those set in individual orchestration tasks. The parameters are identical 
-to [running a job](/flows/variables/api/#step-4--run-job).
+:::caution[Inherited claim]
+The two bullets above come from the pre-2026 orchestrator documentation and are **not** reproducible
+from any public schema: the `keboola.orchestrator` task object declares `componentId`, `configId`,
+`configData`, `mode`, `configRowIds`, `tag`, and `previousJobId` — no variable fields. Treat the
+task-level and run-level overrides as unverified for this component, and prefer the conditional-flow
+path above.
+:::
 
 #### Step 5 -- Create Orchestration
 You have to use the 
@@ -609,10 +615,10 @@ See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 There is a number of places where variable values can be provided (either as a reference to an existing row with 
 values or as an array of `values`):
 
-- Parameters supplied when the flow job is run
-- Parameters in a flow task's `task` setting
 - Parameters in the component job itself
 - Default values stored in configuration (`variables_values_id` property)
+- For legacy flows only: parameters supplied when the orchestration is run, and parameters in an
+  orchestration task's `task` setting
 
 In a conditional flow, a matching-name [flow variable](#conditional-flows) is a further source of a
 value; it is merged by the flow runner before the job starts.
@@ -628,9 +634,9 @@ Note that in stored configurations snake_case is used instead of camelCase.
 
 The following rules describe the evaluation sequence:
 
-- Values provided in job parameters (a component job or a flow job) override the stored values.
-- Values provided in a flow job override the stored values in `task`.
-- Values provided in `task` override values stored in the component configuration.
+- Values provided in job parameters override the stored values.
+- In a legacy flow, values provided when the orchestration is run override the stored values in
+  `task`, and values in `task` override values stored in the component configuration.
 - `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence. A reference to stored values can't be mixed with providing the values inline. 
 - If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
 
