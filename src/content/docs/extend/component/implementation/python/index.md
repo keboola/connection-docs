@@ -11,7 +11,7 @@ Use the [official images](https://hub.docker.com/_/python/) if possible. Usually
 smallest and fastest. We recommend using [our templates](https://github.com/keboola/component-generator/tree/master/templates).
 
 ## Working with CSV Files
-We advise you to follow the guidelines for the [Python transformation](/transformations/python/#development-tutorial).
+We advise you to follow the guidelines for the [Python transformation](/transformations/python-plain/#development-tutorial).
 
 The build-in CSV functions for Python work well except when the data in the CSV file contain a null character. This is
 [usually fixed](https://stackoverflow.com/questions/4166070/python-csv-error-line-contains-null-byte) by
@@ -163,7 +163,7 @@ Apart from that, all input tables provided by user also include manifest file wi
 
 Tables and their manifest files are represented by the `keboola.component.dao.TableDefinition` object and may be loaded 
 using the convenience method `get_input_tables_definitions()`. The result object contains all metadata about the table,
-such as [manifest file](/extend/common-interface/manifest-files/#dataintables-manifests) representations (if present), system path and name.
+such as [manifest file](/extend/common-interface/manifest-files/in-tables-manifests/) representations (if present), system path and name.
 
 #### Manifest & input folder content
 
@@ -223,7 +223,7 @@ for table in tables:
 
 ### Output tables - manifest files and processing results
 
-The component may define output [manifest files](/extend/common-interface/manifest-files/#dataouttables-manifests) 
+The component may define output [manifest files](/extend/common-interface/manifest-files/out-tables-manifests/) 
 that define options on storing the results back to the Keboola Storage. This library provides methods that simplifies 
 the manifest file creation and allows defining the export options.
 

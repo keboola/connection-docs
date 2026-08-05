@@ -114,7 +114,7 @@ The following is an example of specifying columns in the manifest file `/data/ou
     }
 
 All files from the folder are uploaded irrespective of their name or extension. They are uploaded
-to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger than 5GB](/storage/file-uploads/#limits). The slices may be compressed by gzip.
+to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger than 5GB](/storage/files/#limits). The slices may be compressed by gzip.
 A rule of thumb is that slices are [best around 10-100 MB](https://docs.snowflake.net/manuals/user-guide/data-load-considerations-prepare.html#splitting-large-data-files-before-loading) in size **compressed**.
 
 ### Folder /data/in/files/
@@ -135,7 +135,7 @@ In this case, the data folders contain only [manifest files](/extend/common-inte
 not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **AWS S3** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
-[`s3` section](/extend/common-interface/manifest-files/#s3-staging).
+[`s3` section](/extend/common-interface/manifest-files/in-files-s3-staging/).
 
 **Note**: Exchanging data via S3 is currently only available for input mapping.
 
@@ -145,7 +145,7 @@ In this case, the data folders contain only [manifest files](/extend/common-inte
 not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **ABS** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
-[`abs` section](/extend/common-interface/manifest-files/#abs-staging).
+[`abs` section](/extend/common-interface/manifest-files/in-files-abs-staging/).
 
 **Note**: Exchanging data via ABS is currently only available for input mapping.
 
@@ -198,7 +198,7 @@ When exchanging data via workspace, there are couple of differences to loading d
 are always saved to the directory structure.
 - The `days` attribute is not supported for filtering table, use `changed_since` instead.
 - [Automatic Incremental Processing](/storage/tables/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.
-- When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/#dataouttables-manifests) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
+- When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/out-tables-manifests/) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
 
 **Note**: Currently only some combinations of input/output staging storage settings are supported:
 `local<->local`, `local<->s3`, `workspace-snowflake<->workspace-snowflake`, `workspace-redshift<->workspace-redshift`.

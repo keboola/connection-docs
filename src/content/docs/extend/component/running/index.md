@@ -155,7 +155,7 @@ there is a **Run with Configuration** example with the the following JSON in its
 }
 ```
 
-When you create a configuration in Keboola, it is assigned a configuration ID --- `328831433` --- in our example.
+When you create a configuration in Keboola, it is assigned a configuration ID — `328831433` — in our example.
 Use this ID instead of manually crafting the request body. You need to replace `328831433` with your own
 configuration ID. The request URL is as follows:
 
@@ -186,7 +186,7 @@ If curious, view the job progress under **Jobs** in Keboola:
 
 ![Job progress screenshot](/extend/component/running/sandbox-progress.png)
 
-The job will usually take slightly longer than the normal run job. When finished go to **Storage** --- **Files** in
+The job will usually take slightly longer than the normal run job. When finished go to **Storage** — **Files** in
 Keboola. There you will find a `stage_0.zip` file with the data folder before the component was run and `stage_output.zip` before
 the component output mapping was supposed to be done. You can now use this folder from `stage_0.zip` to run
 the component locally. You should now be able to run the component with it:
@@ -197,7 +197,7 @@ the component locally. You should now be able to run the component with it:
 If you want to run a component during development, it is the easiest to build it locally and
 [run the built version](/extend/component/tutorial/debugging/). If you want to run a production code component, you
 need to do a couple of things. Let's assume you want to run the `keboola-test.ex-docs-tutorial` component and you have
-already [prepared the data directory](#preparing-the-data-folder).
+already [prepared the data directory](#preparing-data-folder).
 
 The next step is to obtain the repository settings and credentials from the
 [Developer Portal](https://components.keboola.com/). You can either use the [API](https://api.keboola.com/?service=developer-portal) or
