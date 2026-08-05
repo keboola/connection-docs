@@ -197,11 +197,11 @@ Python and R transformations.
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/transformations/variables/#shared-code'>Shared code</a></th> 
+    <th><a href='/transformations/shared-code/'>Shared code</a></th> 
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/transformations/variables/#variables'>Variables</a></th> 
+    <th><a href='/flows/variables/#configuration-variables'>Variables</a></th> 
     <td>✓</td>
 </tr>
 <tr>
@@ -217,9 +217,9 @@ standard [API](https://developers.keboola.com/integrate/storage/api/configuratio
 and run configurations and that creating your own 
 [transformation components](https://developers.keboola.com/extend/component/) is possible.
 
-Transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
+Transformations support [sharing pieces of code](/transformations/shared-code/), 
 encouraging users to create reusable blocks of code. They also support 
-[variables](/transformations/variables/#variables) that can be used to parametrize transformations.
+[variables](/flows/variables/#configuration-variables) that can be used to parametrize transformations.
 
 Apart from that, transformations come with [workspaces](/workspace/) (previously named Sandboxes),
 which have many new features, such as loading and unloading data with a running workspace or resuming the workspace.

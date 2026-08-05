@@ -1,12 +1,14 @@
 ---
 title: Variables Tutorial
-slug: 'transformations/variables/api/tutorial'
+slug: 'flows/variables/api/tutorial'
+description: Walk through parametrizing a component configuration with variables end to end, using the API.
 redirect_from:
     - /integrate/variables/tutorial/
+    - /transformations/variables/api/tutorial/
 ---
 
 
-This tutorial will guide you through basic usage of [Variables](/transformations/variables/api/) in the component configuration.
+This tutorial will guide you through basic usage of [Variables](/flows/variables/api/) in the component configuration.
 The result will be the parametrized configuration of the [Generic Extractor](/components/extractors/generic-extractor/),
 but this approach can be applied to any component. 
 
@@ -40,7 +42,7 @@ export TOKEN="..."
 
 ## Define variables
 
-The next step is to define the variables in a [Variable Configuration](/transformations/variables/api/#variable-configuration).
+The next step is to define the variables in a [Variable Configuration](/flows/variables/api/#variable-configuration).
 
 Define name and type of the variables.
 ```shell
@@ -88,7 +90,7 @@ export VARIABLE_CONFIG_ID="1234"
 
 **The created *variable configuration* defines the names and types of variables.**
 
-You can create additional configurations that contain (default) [Variable Values](/transformations/variables/api/#variable-values).
+You can create additional configurations that contain (default) [Variable Values](/flows/variables/api/#variable-values).
 
 In this example, the values of the variables are entered directly to the [run API call](#run-extractor-configuration) (see bellow),
 so configuration with the variable values is not used.
@@ -162,7 +164,7 @@ export VARIABLES_VALUES='
 
 In this example are values of the variables part of the run job request.
 
-For other ways to define values see the [Variables documentation](/transformations/variables/api/#variable-values).
+For other ways to define values see the [Variables documentation](/flows/variables/api/#variable-values).
 
 Use [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) to run *extractor configuration*.
 ```shell
@@ -196,11 +198,11 @@ The `status` progresses from `processing` to `success` when the job finishes (or
 
 In the Keboola UI you can see the same job — in the picture below, the entered values of the variables were used.
 
-![Screenshot -- Job](/transformations/variables/api/tutorial-1.png)
+![Screenshot -- Job](/flows/variables/api/tutorial-1.png)
 
 A note about the replaced variables is in the job logs.
 
-![Screenshot -- Job Logs](/transformations/variables/api/tutorial-2.png)
+![Screenshot -- Job Logs](/flows/variables/api/tutorial-2.png)
 
-See the [Variables documentation](/transformations/variables/api/#variable-values) for more information.
+See the [Variables documentation](/flows/variables/api/#variable-values) for more information.
 

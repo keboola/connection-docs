@@ -1,8 +1,10 @@
 ---
 title: Variables API
-slug: 'transformations/variables/api'
+slug: 'flows/variables/api'
+description: Define, override, and resolve configuration variables through the API, and drive them from a flow.
 redirect_from:
     - /integrate/variables/
+    - /transformations/variables/api/
 ---
 
 
@@ -12,10 +14,10 @@ resolved at [job runtime](/integrate/jobs/).
 **Important:** Make sure you're familiar with the [Configuration API](/storage/api/configurations/) and 
 the [Job API](/integrate/jobs/) before reading on.
 
-See [Tutorial](/transformations/variables/api/tutorial) for step-by-step example.
+See [Tutorial](/flows/variables/api/tutorial) for step-by-step example.
 
 This page covers variables **through the API**. To define and use them in the UI instead,
-see [Variables](/transformations/variables/).
+see [Variables](/flows/variables/).
 
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
@@ -34,7 +36,10 @@ To enable replacement of variables, the *main configuration* has to reference th
 If there is no *variable configuration* referenced, no replacement is made (the *main configuration* is completely
 static). Variables can be used in any place of any configuration except legacy transformations (the component with 
 the ID `transformation`; it can still be used in a specific transformation -- e.g., `keboola.python-transformation-v2` 
-or `keboola.snowflake-transformation`, etc.), and an orchestrator (see [below](#orchestrator-integration)). 
+or `keboola.snowflake-transformation`, etc.), and a legacy orchestrator configuration
+(`keboola.orchestrator`). A flow does not carry placeholders of its own — it *supplies* values to
+the configurations it runs, which is covered in
+[Driving Variables from a Flow](#driving-variables-from-a-flow).
 
 ## Variable Configuration
 A *variable configuration* is a standard configuration tied to a special dedicated `keboola.variables` component. 
@@ -233,8 +238,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 
 ```
 
-The `variables_id` property contains the ID of the [variable configuration](/transformations/variables/api/#step-1--create-variable-configuration) - e.g., `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/transformations/variables/api/#step-2--create-default-values-for-variables) - e.g., `807952812`.
+The `variables_id` property contains the ID of the [variable configuration](/flows/variables/api/#step-1--create-variable-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](/flows/variables/api/#step-2--create-default-values-for-variables) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 ```python
@@ -297,11 +302,11 @@ with the following body:
 }
 ```
 
-The `config` property contains the ID of the [main configuration](/transformations/variables/api/#step-3--create-main-configuration).
+The `config` property contains the ID of the [main configuration](/flows/variables/api/#step-3--create-main-configuration).
 Before executing the API call, you have to create the source table. Unless you modified the mapping in the 
-[example](/transformations/variables/api/#step-3--create-main-configuration), you have to create a bucket named
+[example](/flows/variables/api/#step-3--create-main-configuration), you have to create a bucket named
 **variable-testing** in the **in** stage. Then create a table called **batman** with columns  **COUNTRY** 
-and **CARS**. You can use this [sample CSV file](/transformations/variables/api/countries.csv).
+and **CARS**. You can use this [sample CSV file](/flows/variables/api/countries.csv).
 
 After you create the input table, you can run the job. 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#31486ac2-ea52-4f19-a039-2ee1b1ae5863). 
@@ -379,7 +384,7 @@ where you can verify that the variables were replaced.
 </details>
 
 #### Option 2 -- Run a job with stored values
-Similarly to the [default values](/transformations/variables/api/#step-2--create-default-values-for-variables), 
+Similarly to the [default values](/flows/variables/api/#step-2--create-default-values-for-variables), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 ```json
@@ -399,7 +404,7 @@ you can store another set of values. Let's add another configuration row to the 
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#fbe487b5-cd68-4318-8219-7c067ebef795). 
 You will obtain an ID of the row. Then create a table called **watman** with 
-columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/transformations/variables/api/countries.csv).
+columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/flows/variables/api/countries.csv).
 
 Run a job with parameters and provide the ID of the main configuration in the `config` property and 
 the ID of the value row in `variableValuesId`:
@@ -456,21 +461,61 @@ The output table will contain:
 |Finlandbatman|3358232scatman|
 |Italybatman|41393877scatman|
 
-## Orchestrator Integration
-Variables in a configuration interact with an orchestrator in two ways:
+## Driving Variables from a Flow
+A flow does not contain placeholders of its own. It *supplies* values to the configurations it
+runs, and the mechanism differs between the two flow types.
+
+### Conditional Flows
+In a conditional flow (the `keboola.flow` component), a flow declares its own variables with a **variable task** — `"type": "variable"` with
+either a fixed `value` or a computed `source`. When a job task runs, those flow variables are
+merged into the component's variables, and a flow variable replaces a value **only for a name the
+variable configuration already declares**. Names the configuration does not declare are ignored.
+
+The `variableOverrides` field on a job task decides which flow variables reach that task. Omit it
+to apply all of them, set it to `[]` to apply none, or list names to apply only those. The field is
+read by the flow runner and is not passed to the job.
+
+```json
+{
+    "id": "run-transformation",
+    "name": "Run transformation",
+    "phase": "main",
+    "task": {
+        "type": "job",
+        "componentId": "keboola.python-transformation-v2",
+        "configId": "807968875",
+        "mode": "run",
+        "variableOverrides": ["alias"]
+    }
+}
+```
+
+To set a value on one task without declaring a flow variable, put `variableValuesId` or
+`variableValuesData` in the task's advanced parameters; the payload is the same as for
+[running a job](/flows/variables/api/#step-4--run-job). See
+[Variables](/flows/variables/#driving-a-configuration-variable-from-a-flow) for the UI path.
+
+### Legacy Flows
+Legacy flows (the `keboola.orchestrator` component) carry variable values on the task itself, and
+accept values for an entire run.
+
+:::caution
+This applies to **legacy** flows only. New flows use `keboola.flow`, described above — see the
+[Flow Migration Guide](/flows/flow-migration-guide/).
+:::
 
 - Variables can be entered in task configuration.
 - Variables can be entered when running an orchestration.
 
 Entering variable values in task configurations allows the orchestration to run configurations with variables. 
 Variable values are entered in the `actionParameters` property. The parameters are identical to 
-[running a job](/transformations/variables/api/#step-4--run-job).
+[running a job](/flows/variables/api/#step-4--run-job).
 
 When running an orchestration, you can also provide variable values for an entire orchestration. In that case, 
 the provided values will override those set in individual orchestration tasks. The parameters are identical 
-to [running a job](/transformations/variables/api/#step-4--run-job).
+to [running a job](/flows/variables/api/#step-4--run-job).
 
-### Step 5 -- Create Orchestration
+#### Step 5 -- Create Orchestration
 You have to use the 
 [Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs)
 to create a configuration of the `keboola.orchestrator` component. 
@@ -504,18 +549,18 @@ You can use the following data in the configuration:
 ```
 
 The contents of the `task` property are identical to the body 
-of the [run job API call](/transformations/variables/api/#step-4--run-job). Here, the value `807968875` refers to the ID 
+of the [run job API call](/flows/variables/api/#step-4--run-job). Here, the value `807968875` refers to the ID 
 of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
 You can use the `variableValuesData` field in the same manner.
 Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#9f2f9da0-59eb-4f33-a206-e5add24725d1).
 
-### Step 6 -- Run Orchestration
+#### Step 6 -- Run Orchestration
 When running an orchestration which contains configurations referencing variables, you have to provide their
 values. You can either rely on the stored values (either at the component configuration or in the orchestration task) 
 or you can provide the values at runtime.
 
-#### Option 1 -- Rely on stored values
+##### Option 1 -- Rely on stored values
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. In its simplest form, the request body needs to contain just the ID of the orchestration
 (obtained in the previous step):
@@ -530,11 +575,11 @@ to run an orchestration. In its simplest form, the request body needs to contain
 
 As long as the variable values can be found somewhere, this is sufficient. See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#3ebdc3f5-a940-4f0d-860b-ec311f704a7e).
 
-#### Option 2 -- Provide values
+##### Option 2 -- Provide values
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
 to override variable values set to individual tasks. The calling convention is the same as shown in the 
-[basic job run](/transformations/variables/api/#step-4--run-job). The same rules also apply, notably that you can't 
+[basic job run](/flows/variables/api/#step-4--run-job). The same rules also apply, notably that you can't 
 use `variableValuesId` and `variableValuesData` together. 
 A sample request body:
 
@@ -564,169 +609,34 @@ See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=
 There is a number of places where variable values can be provided (either as a reference to an existing row with 
 values or as an array of `values`):
 
-- Parameters in the orchestration
-- Parameters in `task` setting of the orchestration
+- Parameters supplied when the flow job is run
+- Parameters in a flow task's `task` setting
 - Parameters in the component job itself
 - Default values stored in configuration (`variables_values_id` property)
 
+In a conditional flow, a matching-name [flow variable](#conditional-flows) is a further source of a
+value; it is merged by the flow runner before the job starts.
+
 The following diagram shows the parameters mentioned on this page and to what they refer to:
 
-![Screenshot -- Properties references](/transformations/variables/api/variables.svg)
+![Screenshot -- Properties references](/flows/variables/api/variables.svg)
 
 In a nutshell, `variableValuesId` always refers to the row of the variable configuration associated with the 
 main configuration. The main configuration is referenced in the `config` parameter. From another point of view,
-the `config` parameter represents the configuration (either a component or an orchestration) to be run.
+the `config` parameter represents the configuration (either a component or a flow) to be run.
 Note that in stored configurations snake_case is used instead of camelCase.
 
 The following rules describe the evaluation sequence:
 
-- Values provided in job parameters (a component job or an orchestration job) override the stored values.
-- Values provided in an orchestration job override the stored values in `task`.
+- Values provided in job parameters (a component job or a flow job) override the stored values.
+- Values provided in a flow job override the stored values in `task`.
 - Values provided in `task` override values stored in the component configuration.
 - `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence. A reference to stored values can't be mixed with providing the values inline. 
 - If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
 
-## Shared Code via the API
-This chapter is the API story only — creating shared code with the create-configuration call and
-referencing it from a configuration. For creating and editing shared code in the UI, see
-[Shared Code](/transformations/variables/#shared-code).
+## Shared Code
+Shared code is the sibling feature that substitutes *code* rather than *values*, using the same
+Moustache syntax and the `keboola.shared-code` component. Its API — creating a piece with the
+create-configuration call and referencing it with `shared_code_id` / `shared_code_row_ids` — is
+documented in [Shared Code via the API](/transformations/shared-code/#shared-code-via-the-api).
 
-Related to variables is the Shared Code feature. Shared code allows to share parts of configuration code. In a 
-configuration it is also replaced using the [Moustache syntax](https://mustache.github.io/mustache.5.html). Shared code
-is referenced using `shared_code_id` and `shared_code_row_ids` configuration nodes. Unlike variables, shared code can't 
-be overridden at runtime (so there are no parameters to set when running a job or in orchestration).
-Shared code can, however, contain its own variables which need to be merged to those of the main configuration.
-
-### Creating Shared Code
-Shared code pieces is stored as configuration rows of a dedicated component `keboola.shared-code`. Before creating a 
-piece of a shared code, you first have to create a configuration. Notice that the UI uses certain configurations for
-certain components so you might want to check the existing configurations of `keboola.shared-code` component before
-crating a new configuration.
-
-To create a configuration, use the [create configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs). The configuration content is ignored, i.e all you need to provide is name:
-
-```bash
-curl --location --request POST 'https://connection.keboola.com/v2/storage/components/keboola.shared-code/configs' \
---header 'X-StorageAPI-Token: my-token' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'name=python-code'
-```
-
-Let's assume that the created configuration ID is `618884794`.
-Next step is to create the shared code piece itself. To do this create a configuration row of the above configuration
-with the configuration row content containing a piece of share code, for example:
-
-```json
-{
-    "code_content": [
-        "from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"
-    ]
-}
-```
-
-It is advisable to set a reasonable `rowId` of the row, because it will be used later to reference the shared code:
-
-```bash
-curl --location --request POST 'https://connection.keboola.com/v2/storage/components/keboola.shared-code/configs/618884794/rows' \
---header 'X-StorageApi-Token: my-token' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'configuration={
-	"code_content": ["from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"]
-}
-' \
---data-urlencode 'rowId=dumpfiles'
-```
-
-The above example creates a piece of shared python code named `dumpfiles` which contains the 
-following python code:
-
-```python
-from os import listdir
-from os.path import isfile, join
-
-mypath = '/data/in/files'
-onlyfiles = [f for f in listdir(mypath)]
-print(onlyfiles)
-mypath = '/data/in/user'
-onlyfiles = [f for f in listdir(mypath)]
-print(onlyfiles)
-```
-
-### Using Shared Code
-To use a piece of shared code, you have to reference it in a configuration using `shared_code_id` which is the ID of the shared code configuration and `shared_code_row_ids` which is an array of IDS of shared code pieces. With the above example you need to add the following nodes to the configuration:
-
-```json
-{
-    "storage": {...},
-    "parameters": {...},
-    "shared_code_id": "618884794",
-    "shared_code_row_ids": ["dumpfiles"]
-}
-```
-
-With that all moustache references to `{{ dumpfiles}}` will be replaced by the shared code piece. All other
-moustache references will be kept untouched and be treated like variables. E.g: the following configuration:
-
-```json
-{
-    "storage": {},
-    "parameters": {
-        "blocks": [
-            {
-                "name": "Main block",
-                "codes": [
-                    {
-                        "name": "Main code",
-                        "script": ["{{ someOtherPlaceholder}}"]
-                    },
-                    {
-                        "name": "Debug",
-                        "script": ["{{ dumpfiles}}"]
-                    }
-                ]
-            }
-        ]
-    },
-    "variables_id": "618878103",
-    "variables_values_id": "618878104",
-    "shared_code_id": "618884794",
-    "shared_code_row_ids": ["dumpfiles"]
-}
-```
-
-Will be modified to:
-
-```json
-{
-    "storage": {},
-    "parameters": {
-        "blocks": [
-            {
-                "name": "Main block",
-                "codes": [
-                    {
-                        "name": "Main code",
-                        "script": ["{{ someOtherPlaceholder}}"]
-                    },
-                    {
-                        "name": "Debug",
-                        "script": ["from os import listdir\nfrom os.path import isfile, join\n\nmypath = '\''/data/in/files'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)\nmypath = '\''/data/in/user'\''\nonlyfiles = [f for f in listdir(mypath)]\nprint(onlyfiles)"]
-                    }
-                ]
-            }
-        ]
-    },
-    "variables_id": "618878103",
-    "variables_values_id": "618878104",
-    "shared_code_id": "618884794",
-    "shared_code_row_ids": ["dumpfiles"]
-}
-```
-
-The variables then need to contain `someOtherPlaceholder` variable in order to produce a fully functional configuration.
-The same way if the shared code piece contains any variables, they have to be set when running the configuration.
-
-**Important:** The replacement of the shared code piece occurs only within an array of the configuration JSON. In the above code, the shared code reference is `"script": ["{{ someOtherPlaceholder}}"]` which is the only valid form of a Shared Code reference. For example
-`"script": ["some code {{ someOtherPlaceholder}} some other code"]` or `"script": "{{ someOtherPlaceholder}}"` are invalid Shared Code references which may not be replaced the way you intend.
-
-**Important:** The replacement of the shared code piece merges the `code_content` array containing the shared code definition with the array containing the shared code reference. With a shared code reference in form `"script": ["a", "{{ someOtherPlaceholder}}", "b"]` and shared code definition in form `"code_content": ["c", "d"]` the resulting replacement would be `"script": ["a", "c", "d", "b"]`.

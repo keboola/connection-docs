@@ -95,6 +95,15 @@ items:
   - url: /flows/
     title: Conditional Flows
     items:
+      - url: /flows/variables/
+        title: Variables
+        items:
+          - url: /flows/variables/api/
+            title: Variables API
+            items:
+              - url: /flows/variables/api/tutorial/
+                title: Tutorial
+
       - url: /flows/flows-legacy/
         title: Legacy Flows
 
@@ -583,14 +592,8 @@ items:
       - url: /transformations/mappings/
         title: Mappings
         
-      - url: /transformations/variables/
-        title: Variables & Shared Code
-        items:
-          - url: /transformations/variables/api/
-            title: Variables API
-            items:
-              - url: /transformations/variables/api/tutorial/
-                title: Tutorial
+      - url: /transformations/shared-code/
+        title: Shared Code
 
       - url: /transformations/dbt/
         title: dbt Transformation

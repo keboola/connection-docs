@@ -104,13 +104,13 @@ choice allows for either updating existing records (upserting) or simply adding 
 ### Use Variables
 Variables are placeholders for values frequently used in your transformation scripts, which is especially useful for common filter conditions.
 By defining a value as a variable, you can easily update it in one spot rather than changing it everywhere it appears. Check out more details on using variables
-[here](/transformations/variables/).
+[here](/flows/variables/).
 
 ***Note:** For complex setups, you can even set variables dynamically through API calls when running components.*
 
 ### Reuse Code via Shared Codes
 Often, you'll find certain code patterns or functions repeated in various transformations for specific tasks. To simplify this, use
-[shared code](/transformations/variables/?ref=changelog.keboola.com#shared-code), a feature that lets you store and manage these common
+[shared code](/transformations/shared-code/), a feature that lets you store and manage these common
 script segments in one place. Changes to shared codes automatically update in every transformation that uses them, keeping your projects 
 consistent and easier to manage.
 

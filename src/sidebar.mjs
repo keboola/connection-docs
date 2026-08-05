@@ -80,6 +80,21 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "flows" },
+      {
+        label: "Variables",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "flows/variables" },
+          {
+            label: "Variables API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "flows/variables/api" },
+              { slug: "flows/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
       { slug: "flows/flows-legacy" },
       { slug: "flows/flow-migration-guide" },
     ],
@@ -426,21 +441,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      {
-        label: "Variables & Shared Code",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "transformations/variables" },
-          {
-            label: "Variables API",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "transformations/variables/api" },
-              { slug: "transformations/variables/api/tutorial" },
-            ],
-          },
-        ],
-      },
+      { slug: "transformations/shared-code" },
       {
         label: "dbt Transformation",
         collapsed: true,
