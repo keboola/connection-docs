@@ -14,7 +14,7 @@ This connector supports the most recent versions of both SQL Server and Azure SQ
 This [standard SQL database connector](/components/extractors/database/sqldb) performs queries against the source database to synchronize data. 
 It offers a straightforward approach suitable for most use cases, enabling [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-All SQL database connectors are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and offer an [advanced mode](/components/extractors/database/sqldb/). 
+All SQL database connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/). 
 
 For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database data source connector](/tutorial/load/database/). 
 
@@ -35,7 +35,7 @@ Upon selecting a CDC-enabled table, the `CDC Mode` option will become visible in
 
 ### Functionality
 
-Once you activate the `CDC mode`, the component will synchronize new increments using the system function [`cdc_get_net_changes](https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-net-changes-capture-instance-transact-sql?view=sql-server-ver16). 
+Once you activate the `CDC mode`, the component will synchronize new increments using the system function [`cdc_get_net_changes`](https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-net-changes-capture-instance-transact-sql?view=sql-server-ver16). 
 This utilizes dynamic boundaries based on the component state, ensuring that only the most recent changes are retrieved. The primary advantage of this method is its ability to swiftly capture all modifications, **including deletions**.
 
 The table's initial load will undergo a full sync, similar to the standard [incremental fetching](/components/extractors/database/#incremental-fetching) mode. After the initial load, CDC tables come to play.

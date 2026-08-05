@@ -9,15 +9,15 @@ slug: 'components/extractors/database/mysql'
 
 Our connectors support the latest versions of MySQL and AWS Aurora. You can choose among different strategies to synchronize your data:
 
-- [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log-based CDC](/components/extractors/database/mysql#log-based-binlog-cdc)
+- [Query-based connector](/components/extractors/database/sqldb/#initial-setup)
+- [Log-based CDC](/components/extractors/database/mysql/#mysql-log-based-cdc)
 
 ## Query-Based Connector
 
 This [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) performs queries against the source database to sync data. 
 It is a straightforward approach suitable for most use cases, allowing for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-All connectors are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and 
+All connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and 
 offer an [advanced mode](/components/extractors/database/sqldb/). 
 
 Basic configuration is covered in the [Tutorial - Loading Data from Database](/tutorial/load/database/). 
@@ -124,7 +124,7 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 ### Data Type Mapping
 
-MySQL data types are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+MySQL data types are mapped to [Keboola Base Types](/storage/tables/data-types/#base-types) as follows:
 
 | Source Type | Base Type | Note                                                                 |
 |-------------|-----------|----------------------------------------------------------------------|
@@ -558,7 +558,7 @@ There are two types of masks available:
 The connector masks the length of string columns in the output data. 
 The string is replaced with the specified number of  `*` characters.
 
-See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars).
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-column-mask-with-length-chars).
 
 #### Hash Mask
 
@@ -570,7 +570,7 @@ Supported hash functions are described in the [MessageDigest section](https://do
 
 ***Note:** The hashing strategy version 2 is used to ensure fidelity across job runs and configurations.*
 
-See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash).
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-column-mask-hash).
 
 ### Sync Options
 

@@ -32,7 +32,7 @@ Several variants of connectors may exist for each database type, depending on th
 These connectors work on a relational level, performing queries against the source database to synchronize data.
 This straightforward approach suits most use cases and supports Timestamp-based CDC replication.
 
-All are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and offer an [advanced mode](/components/extractors/database/sqldb/).
+All are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/).
 
 Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/).
 
@@ -55,7 +55,7 @@ database, which is quite similar to SQL databases and also supports the [advance
 
 - [MongoDB connector](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB for MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 - [CosmosDB connector](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
-- [Azure Storage Table connector](/components/extractors/database/cosmosdb/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+- [Azure Storage Table connector](/components/extractors/database/azure-storage-table/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
 
