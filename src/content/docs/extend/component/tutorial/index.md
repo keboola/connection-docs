@@ -12,7 +12,7 @@ Keboola.
 
 A Keboola component is a Docker image. When a job runs, the [Job Queue](/extend/job-queue/) executes the image's
 `ENTRYPOINT` or `CMD`, so your image must define one of them. Component images are stored in Amazon AWS ECR
-provisioned by the [Developer Portal](https://components.keboola.com/) --- the only supported registry --- and are
+provisioned by the [Developer Portal](https://components.keboola.com/) — the only supported registry — and are
 pushed there by the [deploy script](/extend/component/deployment/) in your CI pipeline.
 
 ## Before You Start
@@ -23,7 +23,7 @@ which manages the list of components available in Keboola.
 The Developer Portal uses different credentials than Keboola. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
 
-When you log in to the Developer Portal, you have to join a **vendor** --- an organization of
+When you log in to the Developer Portal, you have to join a **vendor** — an organization of
 developers. Every Keboola component has to have a vendor assigned. If you join an existing vendor, a
 vendor administrator has to approve your request. If you do not work for a company, create a
 vendor with your name (even a single developer has to be assigned to a vendor). When you join or create a vendor
@@ -32,7 +32,7 @@ you should also receive access to a development Keboola project.
 ![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
 
 In order to create a **new vendor**, a Keboola administrator has to approve your request, and you will
-receive a [development project](/#development-project) in Keboola. In addition to that, you need to provide us
+receive a [development project](https://developers.keboola.com/#development-project) in Keboola. In addition to that, you need to provide us
 with a channel for receiving internal errors from your components. Anything supported
 by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services)
 is available, though e-mail or a Slack channel is most commonly used.
@@ -61,7 +61,7 @@ Choose the appropriate [component type](/extend/component/#component-types):
 
 - `extractor` -- brings data into Keboola
 - `writer` -- sends data out of Keboola
-- `transformation` -- does some transformation of the data, [read more](/transformations/#new-transformations)
+- `transformation` -- does some transformation of the data, [read more](/transformations/)
 - `code pattern` -- generates code for transformation's component, [read more](/extend/component/code-patterns)
 - `application` -- another arbitrary component
 

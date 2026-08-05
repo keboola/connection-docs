@@ -56,7 +56,7 @@ The following image illustrates the usage pattern change:
 
 ![Schema -- Multi project](/catalog/multi-project/multi-project-2.png)
 
-- All Oracle data source connectors have been isolated into a separate project --- `Oracle`:
+- All Oracle data source connectors have been isolated into a separate project — `Oracle`:
     - The Oracle DBAs take care of that project and share outside the `Oracle` bucket.
     - Most tables are shared as they are extracted, with some transformations compensating for the changes in CRM tables. The `ora-is` tables are 
     processed via transformations where the useful columns are renamed from their 6 character names to meaningful names, and the more obscure 
