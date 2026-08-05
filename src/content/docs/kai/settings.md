@@ -200,5 +200,5 @@ The job can run anywhere — a CI pipeline triggered on changes to the source do
 ### Troubleshooting
 
 - **File uploaded but Kai doesn't see it** — check that the tag is exactly `kai-context` or `kai-skill`, the file is under 50 KB, there are at most 10 tagged files, and the conversation was started *after* the upload.
-- **Skill missing from the `/` menu** — the `.md` frontmatter must contain both `name` and `description`; a `.skill` archive must contain `SKILL.md` at its root.
+- **Skill shows without a description, under a wrong name, or Kai doesn't invoke it** — add `name` and `description` to the `.md` frontmatter. Uploads from the Settings UI enforce the frontmatter, but API uploads don't — a file without it still appears in the `/` menu under a name derived from its file name, with no description to tell Kai when to use it. A `.skill` archive must contain `SKILL.md` at its root (or at the root of a single top-level directory).
 - **File expired or disappeared** — it was uploaded without the permanent flag; re-upload it as permanent (uploads from the Settings UI are always permanent).
