@@ -56,13 +56,15 @@ or
 ### Flow Usage
 When you use [flows](/flows/) to automate transformations with variables, you can
 either rely on the default values, or you can override them for each flow task.
-This can be done by configuration of task parameters:
+This can be done through the task's parameters. Select the transformation task in the flow's
+Builder to open its settings:
 
-![Screenshot - Orchestration Task Parameters](/transformations/variables/orchestration-parameters.png)
+![Task settings for a transformation task in a flow, with the Set advanced parameters link](/transformations/variables/orchestration-parameters.png)
 
-There you can set variable values override:
+Click **Set advanced parameters**. The editor opens pre-filled with the task's `type`,
+`mode`, `componentId`, and `configId` — add the variable values override there and click **Set**:
 
-![Screenshot - Task Parameters](/transformations/variables/task-parameters.png)
+![The Task Parameters editor holding the task's type, mode, componentId, and configId](/transformations/variables/task-parameters.png)
 
 In the [above example](/transformations/variables/#example), you can override the default 
 value by **adding** the following code to the configuration json:
