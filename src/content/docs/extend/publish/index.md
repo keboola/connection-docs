@@ -69,7 +69,7 @@ exchange rates are available from a base currency (USD, EUR) to 30 destination c
 CZK, EUR, GBP, HKD, HRK, HUF, CHF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY,
 ZAR). The rates are available for all working days from 4 January 1999 up to present.*
 - Component icons must be of representative and reasonable quality. Make sure the icon license allows you to use it.
-- Components must correctly state the data flow --- [UI options](/extend/component/ui-options/). Use
+- Components must correctly state the data flow — [UI options](/extend/component/ui-options/). Use
 `appInfo.dataOut` and `appInfo.dataIn` for this purpose:
     - Use `appInfo.dataIn` for extractors, which bring data into a Keboola project (omit `appInfo.dataOut` for extractors).
     - Use `appInfo.dataOut` for writers, which send data outside (omit `appInfo.dataIn` for writers).
@@ -84,7 +84,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 ### Component Configuration
 
 - Use only the necessary [UI options](/extend/component/ui-options/) (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
-- For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) --- do not use the `genericDockerUI-tableOutput` flag.
+- For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) — do not use the `genericDockerUI-tableOutput` flag.
 - Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
 - Use a [configuration schema](/extend/component/ui-options/configuration-schema/).
     - List all properties in the `required` field.

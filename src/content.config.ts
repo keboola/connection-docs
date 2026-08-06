@@ -13,6 +13,10 @@ export const collections = {
         icon: z.string().optional(),
         section: z.string().optional(),
         beacon: z.boolean().optional(),
+        // Suppresses the page-head meta chrome (eyebrow pill + "Copy as
+        // Markdown" split button). Used by utility pages like 404 where that
+        // chrome is noise — a 404 has no section and nothing worth copying.
+        hideMeta: z.boolean().optional(),
       }),
     }),
   }),
