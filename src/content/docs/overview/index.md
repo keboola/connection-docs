@@ -120,7 +120,7 @@ The platform automates infrastructure, user, and data management, offering servi
 and reverse billing. Components can be private or shared with Keboola users via our marketplace featuring applications mainly from 3rd parties 
 to enhance workflows and support a composable enterprise.
 
-Components can be run as standard pieces of our Flows [/tutorial/automate/#main-header], obtaining the full support and services (a link to your
+Components can be run as standard pieces of our [Flows](/flows/), obtaining the full support and services (a link to your
 [components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
 
 ### Keboola CLI
@@ -160,7 +160,7 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes how to handle multiple stacks 
+Our [developer documentation](https://developers.keboola.com/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
 when working with the API in more detail.
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.
@@ -176,6 +176,6 @@ This token system enables easy [sharing of specific resources](/management/proje
 
 ### Input and Output Mapping
 To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. 
-A secure [workspace](/workspace/#main-header) is created with data copied from the tables specified 
+A secure [workspace](/workspace/) is created with data copied from the tables specified 
 in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed successfully, only tables and files defined
 in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.

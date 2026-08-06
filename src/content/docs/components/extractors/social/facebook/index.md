@@ -62,10 +62,10 @@ The [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) e
 posts created by a Facebook Page. Each post contains fields such as `caption`, `message`, `created_time`
 and `type`. The fields parameter in such case is `caption,message,created_time,type`.
 
-- **Fields/Endpoint Nesting** ---
+- **Fields/Endpoint Nesting** —
     Posts can contain comments and these can be included in the *fields* as well: `caption,message,created_time,type,comments{message,created_time,from}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/graph-api/reference/comment) field/endpoint for each post (feed endpoint). This way, more endpoints can be nested and there is no limit of nesting levels. If you wanted to include likes of posts comments, the fields parameter would be: `caption,message,created_time,type,comments{message,created_time,from,likes{name,username}}`.
 
-- **Fields Parametrization** ---
+- **Fields Parametrization** —
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.
     Typical parameters would be `since`, `until` or `limit`,
     or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/graph-api/reference/insights) endpoint.
@@ -85,8 +85,8 @@ example, if the endpoint is `feed`, then all posts created within the specified 
 
 The *Since*/*Until* parameter is parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php) and can be specified
 
-- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
-- **relatively** --- e.g. `14 days ago` or `last month`.
+- **absolutely** — as a unix timestamp or in the `yyyy-mm-dd` format, or
+- **relatively** — e.g. `14 days ago` or `last month`.
 
 For consistent results, specify both the *since* and *until* parameters. It is also recommended that the 
 time range does not exceed 6 months.
@@ -105,12 +105,12 @@ Each row of a table represents one object. Each table has the primary key auto-d
 extraction, so the table data is **imported incrementally**. The columns of the output tables represent
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
 
-- `id` --- ID returned by the Facebook Graph API
-- `ex_account_id` --- ID of the Facebook Page corresponding to the object stored in the row
-- `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example,
+- `id` — ID returned by the Facebook Graph API
+- `ex_account_id` — ID of the Facebook Page corresponding to the object stored in the row
+- `fb_graph_node` — Describes the "vertical position" of the object in the resulting tree. For example,
 for comments it will be `page_feed_comments`, for sub-comments (i.e. comments of comments) it will be
 `page_feed_comments_comments`.
-- `parent_id` --- Refers to the `id` column of a parent object represented by some other row and table.
+- `parent_id` — Refers to the `id` column of a parent object represented by some other row and table.
 For instance, if the row is representing a comment object, its parent is a post and `parent_id`
 is the ID of the post. The parent object type can be also determined from the `fb_graph_node` column as a
 substring from the beginning until the last occurrence of an underscore. To give an example, if

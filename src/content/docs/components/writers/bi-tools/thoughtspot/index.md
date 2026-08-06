@@ -46,7 +46,7 @@ more details on designing the data schema.
 
 ![Screenshot - Table Type](/components/writers/bi-tools/thoughtspot/thoughtspot-5.png)
 
-There are two main options how the data destination connector can write data to tables --- **Full Load** mode and **Incremental Load** mode.
+There are two main options how the data destination connector can write data to tables — **Full Load** mode and **Incremental Load** mode.
 
 ![Screenshot - Table Options](/components/writers/bi-tools/thoughtspot/thoughtspot-6.png)
 

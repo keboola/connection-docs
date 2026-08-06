@@ -12,7 +12,7 @@ Use the [official images](https://hub.docker.com/_/python/) if possible. Usually
 smallest and fastest. We recommend using [our templates](https://github.com/keboola/component-generator/tree/master/templates).
 
 ## Working with CSV Files
-We advise you to follow the guidelines for the [Python transformation](/transformations/python/#development-tutorial).
+We advise you to follow the guidelines for the [Python transformation](/transformations/python-plain/#development-tutorial).
 
 The build-in CSV functions for Python work well except when the data in the CSV file contain a null character. This is
 [usually fixed](https://stackoverflow.com/questions/4166070/python-csv-error-line-contains-null-byte) by
@@ -66,7 +66,7 @@ locally with `pip3 install keboola.component`.
 
 A generated [API documentation](https://htmlpreview.github.io/?https://raw.githubusercontent.com/keboola/python-component/main/docs/api-html/component/interface.html)
 is available for the package, and an actual working example can be found in our
-[Python template](https://bitbucket.org/kds_consulting_team/kbc-python-template/src/master/src/component.py).
+[Python template](https://github.com/keboola/cookiecutter-python-component/blob/main/%7B%7Bcookiecutter.repository_folder_name%7D%7D/src/component.py).
 
 ### Initialization
 
@@ -113,7 +113,7 @@ ci = CommonInterface()
 
 # A ValueError error is raised if the config.json file does not exists in the data dir.
 # Checks for required parameters and throws ValueError if any is missing.
-ci.validate_configuration(REQUIRED_PARAMETERS)
+ci.validate_configuration_parameters(REQUIRED_PARAMETERS)
 
 # print Keboola Project ID from the environment variable if present:
 logging.info(ci.environment_variables.project_id)
@@ -122,7 +122,7 @@ logging.info(ci.environment_variables.project_id)
 logging.info(ci.configuration.parameters[SOME_PARAMETER])
 ```
 
-The above would read the `somemyParameter_user_parameter` parameter from the user-supplied configuration:
+The above would read the `myParameter` parameter from the user-supplied configuration:
 
 ```json
 {
@@ -164,7 +164,7 @@ Apart from that, all input tables provided by user also include manifest file wi
 
 Tables and their manifest files are represented by the `keboola.component.dao.TableDefinition` object and may be loaded 
 using the convenience method `get_input_tables_definitions()`. The result object contains all metadata about the table,
-such as [manifest file](/extend/common-interface/manifest-files/#dataintables-manifests) representations (if present), system path and name.
+such as [manifest file](/extend/common-interface/manifest-files/in-tables-manifests/) representations (if present), system path and name.
 
 #### Manifest & input folder content
 
@@ -224,7 +224,7 @@ for table in tables:
 
 ### Output tables - manifest files and processing results
 
-The component may define output [manifest files](/extend/common-interface/manifest-files/#dataouttables-manifests) 
+The component may define output [manifest files](/extend/common-interface/manifest-files/out-tables-manifests/) 
 that define options on storing the results back to the Keboola Storage. This library provides methods that simplifies 
 the manifest file creation and allows defining the export options.
 

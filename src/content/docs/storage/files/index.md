@@ -50,7 +50,7 @@ If you copy a link of a non-public file, you will obtain a URL in the following 
 
     https://s3.amazonaws.com/kbc-sapi-files/exp-15/1134/files/2016/06/12/191341241.private.csv?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJ2N244XSWYVVYVLQ%2F20160617%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20160617T174909Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=30007ae706388816aaf3bd9ad585d9a30df6ab50dcc126881efbe6423ef57909
 
-Such a URL is valid for only one hour from the time of its generation --- the time when the File upload list 
+Such a URL is valid for only one hour from the time of its generation — the time when the File upload list 
 was shown to you, not when you clicked the link.
 
 **Important:** The URL itself does not require any other authorization.

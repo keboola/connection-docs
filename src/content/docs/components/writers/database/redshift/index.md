@@ -23,8 +23,8 @@ The first step is to **Set Up Credentials**:
 
 There are two modes of operation of the connector:
 
-- **Own Redshift database** --- Use this when you have your own Redshift database -- i.e., you have your own Redshift cluster, or someone gave you credentials of a database to write to.
-- **Keboola Redshift database** --- In this mode, the connector will create a new database for you and **give you credentials** to it.
+- **Own Redshift database** — Use this when you have your own Redshift database -- i.e., you have your own Redshift cluster, or someone gave you credentials of a database to write to.
+- **Keboola Redshift database** — In this mode, the connector will create a new database for you and **give you credentials** to it.
 
 ### Own Redshift Database
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
@@ -50,7 +50,7 @@ A Keboola Redshift database is created by the connector and the credentials are 
 
 ![Screenshot - Provisioned Credentials](/components/writers/database/redshift/redshift-3.png)
 
-You can share the credentials with services that need to access your data --- for example, with [Tableau Online](https://www.tableau.com/products/cloud-bi).
+You can share the credentials with services that need to access your data — for example, with [Tableau Online](https://www.tableau.com/products/cloud-bi).
 Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world. This means that it must not be receiving
 any data (outside those provided by the connector itself, of course). This is a contractual limitation.
 Also note that the number of provisioned Redshift databases is part of [project limits](/management/project/limits/).
@@ -78,7 +78,7 @@ When done configuring the columns, don't forget to **Save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
-can write data to tables --- **Full Load** and **Incremental Load**.
+can write data to tables — **Full Load** and **Incremental Load**.
 
 ![Screenshot - Table Options](/components/writers/database/redshift/redshift-7.png)
 
@@ -99,7 +99,7 @@ Additionally, you can specify a **Primary key** of the table, a simple column **
 
 ## Using Keboola Provisioned Database
 The connector offers the option to create a [Keboola Provisioned database](#keboola-redshift-database) for you. You can
-use this database to connect Keboola to a wide range of consumers --- especially Business Intelligence tools and Analytics.
+use this database to connect Keboola to a wide range of consumers — especially Business Intelligence tools and Analytics.
 The database can be queried in real time but is still completely isolated from your project Storage.
 
 ### Connect to Looker

@@ -30,12 +30,12 @@ You can also request an upgrade by clicking the **Request Increase** button crea
 
 Business limits vary based on your contract (refer to it to see which ones apply in your case):
 
-- **Projects** --- the number of Keboola projects (workspaces dedicated for data use cases)
-- **Users** --- the number of [project users](/management/project/users).
+- **Projects** — the number of Keboola projects (workspaces dedicated for data use cases)
+- **Users** — the number of [project users](/management/project/users).
 [Keboola support users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [tokens](/management/project/tokens). 
-- **Project Power** --- measured in [Time Credits/Units](#project-power---time-credits)
-- **Storage size** --- the sum of the sizes of the tables in your [Table Storage](/storage)
+- **Project Power** — measured in [Time Credits/Units](#project-power--time-credits)
+- **Storage size** — the sum of the sizes of the tables in your [Table Storage](/storage)
 
 ### Project Power -- Time Credits
 
@@ -104,10 +104,10 @@ The storage size is the sum of the sizes of the tables in your [table Storage](/
 [Aliases](/storage/tables/#aliases) and [linked buckets](/catalog/) do 
 not count towards this number, and neither do [files](/storage/files/).
 
-The table storage size is measured as it is reported by the underlying [backend](/storage/#backend-properties). 
+The table storage size is measured as it is reported by the underlying [backend](/storage/#storage-data). 
 This means that the reported size is substantially smaller than the size of imported raw CSV files, thanks to 
 compression used by the database backend. This also means that reported sizes of the same data may differ slightly 
-across projects with different [backends](/storage/#backend-properties) (or between buckets in a project
+across projects with different [backends](/storage/#storage-data) (or between buckets in a project
 with mixed backends).
 
 ## Platform Limits

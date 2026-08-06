@@ -21,7 +21,7 @@ depends fully on your component code (or Dockerfile). If you want to use a diffe
 **use the [`KBC_DATADIR` environment variable](/extend/common-interface/environment/#environment-variables)**. In production,
 this variable will always be set to `/data/`. During development, you can set it to your liking.
 
-To create a data folder sample, use the [Debug mode](/extend/component/running/#preparing-the-data-folder) on the
+To create a data folder sample, use the [Debug mode](/extend/component/running/#preparing-data-folder) on the
 [Create Job API](https://api.keboola.com/?service=job-queue#post-/jobs).
 All the resources you need in your component will be provided in a ZIP archive.
 
@@ -115,7 +115,7 @@ The following is an example of specifying columns in the manifest file `/data/ou
     }
 
 All files from the folder are uploaded irrespective of their name or extension. They are uploaded
-to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger than 5GB](/storage/file-uploads/#limits). The slices may be compressed by gzip.
+to Storage in parallel and in an undefined order. Use sliced tables in case you want to upload tables [larger than 5GB](/storage/files/#limits). The slices may be compressed by gzip.
 A rule of thumb is that slices are [best around 10-100 MB](https://docs.snowflake.net/manuals/user-guide/data-load-considerations-prepare.html#splitting-large-data-files-before-loading) in size **compressed**.
 
 ### Folder /data/in/files/
@@ -136,7 +136,7 @@ In this case, the data folders contain only [manifest files](/extend/common-inte
 not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **AWS S3** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
-[`s3` section](/extend/common-interface/manifest-files/#s3-staging).
+[`s3` section](/extend/common-interface/manifest-files/in-files-s3-staging/).
 
 **Note**: Exchanging data via S3 is currently only available for input mapping.
 
@@ -146,7 +146,7 @@ In this case, the data folders contain only [manifest files](/extend/common-inte
 not the actual data. This mode of operation can be enabled by setting the **Staging storage input** option to **ABS** in
 [component settings](https://components.keboola.com/). If this option is enabled, all the data folders
 will contain only manifest files, extended with an additional
-[`abs` section](/extend/common-interface/manifest-files/#abs-staging).
+[`abs` section](/extend/common-interface/manifest-files/in-files-abs-staging/).
 
 **Note**: Exchanging data via ABS is currently only available for input mapping.
 
@@ -183,7 +183,7 @@ The component can run arbitrary queries against the database. The database crede
       "host": "database.example.com",
       "warehouse": "test",
       "database": "my-db",
-      "schema": "my-schema"
+      "schema": "my-schema",
       "user": "john-doe",
       "password": "secret"
     }
@@ -199,7 +199,7 @@ When exchanging data via workspace, there are couple of differences to loading d
 are always saved to the directory structure.
 - The `days` attribute is not supported for filtering table, use `changed_since` instead.
 - [Automatic Incremental Processing](/storage/tables/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.
-- When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/#dataouttables-manifests) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
+- When used for output mapping, the `columns` of the output table **must be** specified, this can be done either in the [output manifest](/extend/common-interface/manifest-files/out-tables-manifests/) or in the [output mapping](/extend/common-interface/config-file/#output-mapping--headless-csv).
 
 **Note**: Currently only some combinations of input/output staging storage settings are supported:
 `local<->local`, `local<->s3`, `workspace-snowflake<->workspace-snowflake`, `workspace-redshift<->workspace-redshift`.
@@ -215,7 +215,7 @@ and unloaded from when the job finishes (when staging storage output is set).
 The workspace is created just before the job starts and is deleted when the job is terminated.
 
 If this option is enabled, the data and the manifests will be loaded to the azure storage blob container under the 
-data folder similarly to how it does when using the default [local filesystem](extend/common-interface/folders/#root-folder-data).
+data folder similarly to how it does when using the default [local filesystem](/extend/common-interface/folders/#root-folder-data).
 
 ### Files
 Files are loaded into the workspace as `[file name]/[file ID]`.  For example, if a file 'test.txt' with ID '12345' is in 
@@ -227,9 +227,9 @@ the input mapping then the file will appear in the storage blob container with U
 Synapse only exports tables as sliced files.
 So for example, if you set as table input mapping the table `in.c-main.my-input` as source and `my-input.csv` as 
 destination then in the ABS workspace you will find it with the following structure:
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier1].txt
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier2].txt
-- [containerName]/data/in/tables/my-inpupt.csv/[random identifier3].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier1].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier2].txt
+- [containerName]/data/in/tables/my-input.csv/[random identifier3].txt
   
 ### Mappings
 
@@ -237,7 +237,7 @@ To sum up, below is a sample storage configuration and where the files are writt
 
 | Direction | Source | Destination |
 | --- | --- | --- |
-| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-inpupt-table.csv/[random identifier].txt` |
+| input | in.c-main.my-table-from-abs-workspace | Many slices like `[abs-workspace-root]/data/in/tables/my-input-table.csv/[random identifier].txt` |
 | input | file with tag `my-input-files` named `input-file.txt` | `[abs-workspace-root]/data/in/files/test.txt/12345` |
 | output | `[abs-workspace-root]/data/out/tables/my-output-table.csv` | out.c-main.my-table-from-abs-workspace |
 | output | `[abs-workspace-root]/data/out/files/my-file.txt` | file `my-file.txt` with tag `uploaded-from-abs-workspace` |
@@ -258,7 +258,7 @@ To sum up, below is a sample storage configuration and where the files are writt
           "tags": ["my-input-files"]
         }
       ]
-    }
+    },
     "output": {
       "tables": [
         {
@@ -296,7 +296,7 @@ shown below.
   "authorization": {
     "workspace": {
       "container": "azure-storage-blob-container",
-      "connectionString": "azure-storage-blob-SAS-connection-string",
+      "connectionString": "azure-storage-blob-SAS-connection-string"
     }
   }
 }

@@ -91,7 +91,7 @@ We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces wi
 **Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
 
 - `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
-- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu.
+- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu. Keboola can generate the key pair for you, or you can [bring your own](#bringing-your-own-key-pair) and register only the public key.
 
 ![Workspace - Snowflake](/workspace/workspace-connect-snowflake-person.png)
 
@@ -118,8 +118,10 @@ Below are links to documentation for popular database IDEs used by Keboola users
 - [VSCode/Cursore DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
 ##### Private Key Security and Encryption
-We generate the private key unencrypted and recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
+When Keboola generates the key pair, the private key is unencrypted, so we recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
 In case you need to store the private key locally and want to protect it from unauthorized access, you can follow the instructions below based on your OS to encrypt it using [OpenSSL](https://www.openssl.org/):
+
+If your tool requires a passphrase-protected private key, you can also [bring your own key pair](#bringing-your-own-key-pair) instead.
 
 **macOS & Linux**
 
@@ -152,6 +154,22 @@ openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encryp
 * `-out private_key_encrypted.pem` → encrypted key file
 
 👉 You’ll be prompted to set a password.
+
+##### Bringing Your Own Key Pair
+Some third-party tools (such as SAS CI360) require a passphrase-protected private key. Keboola only needs the public half of the pair, so you can create it yourself and register just the public key.
+
+Generate the pair as follows (on Windows, with OpenSSL installed as described above). You'll be prompted to set a passphrase:
+
+```
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -aes-256-cbc -out private_key_encrypted.pem
+openssl rsa -in private_key_encrypted.pem -pubout -out public_key.pem
+```
+
+To register the key, open the **Connect** menu on your workspace and use **Use Own Key** next to **Reset Key Pair**, then paste the contents of `public_key.pem` or drop the file onto the field. It must be an RSA key of at least 2048 bits, in PEM (`-----BEGIN PUBLIC KEY-----`) or base64-encoded DER format. Convert a PKCS #1 key with `openssl rsa -RSAPublicKey_in -in public_key.pem -pubout`, or an OpenSSH one with `ssh-keygen -e -m PKCS8 -f public_key.pub`.
+
+:::caution
+Registering a public key replaces the one currently on the workspace, so the previous key pair stops working immediately.
+:::
 
 ##### Private Key Conversion to .p8 Format
 Some third-party BI tools (such as Metabase) require private keys in `.p8` format instead of the default `.pem` format provided by Keboola. You can convert your private key using OpenSSL with the following command:
@@ -242,7 +260,7 @@ When loading data, you have the option to **Clean workspace before loading**. Wh
 - **Stored procedures**
 - **User-defined functions (UDFs)**
 
-This is by design --- Keboola does not create stored procedures or UDFs, so it does not manage or remove them during cleanup. If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
+This is by design — Keboola does not create stored procedures or UDFs, so it does not manage or remove them during cleanup. If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
 
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
@@ -250,7 +268,7 @@ advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with t
 
 ### Read-Only Input Mapping
 
-*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+*Note: You must be using [new transformations](/transformations/) to see this feature.*
 
 The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
 For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
@@ -324,7 +342,7 @@ You can also create workspaces from transformations.
 Apart from developing transformations, you can use workspaces to perform ad-hoc analysis 
 of production data of your choice. A workspace provides you with a safe and isolated environment
 where you can experiment. The input mapping isolation also means that you can work on live
-production projects without data in the workspace constantly changing --- you update them
+production projects without data in the workspace constantly changing — you update them
 on demand by loading data into the workspace.
 
 A comprehensive [video guide](https://www.youtube.com/watch?v=iQMnh9nqRiE) on this subject is available on our YouTube channel.

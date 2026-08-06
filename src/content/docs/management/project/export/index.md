@@ -103,13 +103,13 @@ The data takeout may take a considerable amount of time if your project is large
 ## Exported Data
 The exported project has the following general structure:
 
-- `buckets.json` --- all buckets in the project and their metadata. **Linked buckets are not exported.*
-- `tables.json` --- all tables in the project and their metadata (bucket, columns, description, etc.)
+- `buckets.json` — all buckets in the project and their metadata. **Linked buckets are not exported.*
+- `tables.json` — all tables in the project and their metadata (bucket, columns, description, etc.)
 Table aliases are not exported.
-- `configurations.json` --- all components used in the project and *main properties* of their configurations
-- `/in/`, `/out/` and `/sys/` folders --- all project tables in the CSV format (compressed with
+- `configurations.json` — all components used in the project and *main properties* of their configurations
+- `/in/`, `/out/` and `/sys/` folders — all project tables in the CSV format (compressed with
 [gzip](http://www.gzip.org/)). **Important**: `sys` tables contain only configuration of older components and may not be present in your project.
-- /configurations/ --- all configurations created in the project organized by component names into a folder.
+- /configurations/ — all configurations created in the project organized by component names into a folder.
 Each configuration lists *all properties* (including configuration rows) and *all versions* of each configuration.
 These also contain definitions of all your transformation queries.
 

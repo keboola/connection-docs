@@ -188,14 +188,14 @@ into a Storage table using [Direct Mode output mapping](/transformations/mapping
 
 Keboola creates the Storage table (creating the bucket first if it does not exist yet) and registers it as a
 Direct Mode output mapping, which grants the workspace write access to that table. The working table you started
-from is used only as the template for the column structure --- it is not copied or modified.
+from is used only as the template for the column structure — it is not copied or modified.
 
 The new table shows up in the **Writable tables** section of the Storage Explorer with the **DG** badge, and you
 can `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` it from your next query. Use the three-dots menu there to remove
 the mapping, which also revokes the workspace's write access.
 
 :::caution
-In Direct Mode, you are responsible for deduplication, data types, and error handling --- Keboola performs no
+In Direct Mode, you are responsible for deduplication, data types, and error handling — Keboola performs no
 validation on direct writes. Read the
 [good and bad practices](/transformations/mappings/#good-practices) before using it in production.
 :::

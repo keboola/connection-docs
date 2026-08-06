@@ -9,7 +9,7 @@ slug: 'storage/tables/csv-files'
 All data imported to and exported from Storage has to be in the CSV format.
 
 In many cases, our data source and destination connectors take care of the necessary conversion,
-but sometimes you have to be aware of the supported formats --- for
+but sometimes you have to be aware of the supported formats — for
 example, when you are [loading data manually](/tutorial/load/).
 
 ## Input CSV Format

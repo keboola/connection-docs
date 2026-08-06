@@ -40,7 +40,7 @@ Allows users to get AI suggestions when searching for a component. To activate t
 ### AI Rules
 
 The AI Rules section allows users to define specific instructions for AI functionality within Keboola platform.
-[Learn more about AI Rules →](/management/project/ai-rules/#main-header)
+[Learn more about AI Rules →](/management/project/ai-rules/)
 
 ### AI-Generated Descriptions
 Automatically generates a description using AI.

@@ -26,11 +26,11 @@ Defining a [configuration schema](/extend/component/ui-options/configuration-sch
 This flag provides a UI for setting the table input [mapping](/transformations/mappings/).
 You can set the following options:
 
-- *Source* --- the name of the table in Storage
-- Destination *file name* --- the name of the .csv file passed to the component
-- *Columns* --- select only some columns of the source table
-- *Days* --- load only rows modified in the specified number of days; useful for incremental loads; set to 0 to load all data
-- *Data filter* --- a simple filter for selecting specified rows only
+- *Source* — the name of the table in Storage
+- Destination *file name* — the name of the .csv file passed to the component
+- *Columns* — select only some columns of the source table
+- *Days* — load only rows modified in the specified number of days; useful for incremental loads; set to 0 to load all data
+- *Data filter* — a simple filter for selecting specified rows only
 
 ![Table input screenshot](/extend/component/ui-options/table-input-0.png)
 
@@ -47,11 +47,11 @@ if the component is using the [default bucket](/extend/common-interface/folders/
 
 With this UI, you can set the following options:
 
-- *Source* --- the name of the .csv file retrieved from the component
-- *Destination* --- the name of the table in Storage, the destination bucket should exist already
-- *Incremental* --- if checked, the loaded data will be appended to the contents of the destination table
-- *Primary key* --- set the primary key for your destination table --- multiple columns are allowed
-- *Delete rows* --- delete some rows from the destination table using a simple filter
+- *Source* — the name of the .csv file retrieved from the component
+- *Destination* — the name of the table in Storage, the destination bucket should exist already
+- *Incremental* — if checked, the loaded data will be appended to the contents of the destination table
+- *Primary key* — set the primary key for your destination table — multiple columns are allowed
+- *Delete rows* — delete some rows from the destination table using a simple filter
 
 ![Table output screenshot](/extend/component/ui-options/table-output-0.png)
 
@@ -72,10 +72,10 @@ JSON validation and syntax highlighting.
 ## genericDockerUI-fileInput
 This flag provides a UI for setting the file input mapping. You can set the following options:
 
-- *File tags* --- select files by the file tags listed in **File Uploads**
-- *Query* --- [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
+- *File tags* — select files by the file tags listed in **File Uploads**
+- *Query* — [ElasticSearch query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax)
 to select files from **File Uploads**
-- *Processed tags* --- used for [incremental processing](/extend/common-interface/config-file/#incremental-processing)
+- *Processed tags* — used for [incremental processing](/extend/common-interface/config-file/#incremental-processing)
 
 ![File input screenshot](/extend/component/ui-options/file-input-0.png)
 
@@ -89,10 +89,10 @@ The configuration provided in this input is available in the `storage.input` sec
 ## genericDockerUI-fileOutput
 This flag provides a UI for setting the file output mapping. You can set the following options:
 
-- *Source* --- the name of the file produced by the component
-- *File tags* --- the file tags assigned to the produced file
-- *Is public* --- the file is accessible to anyone knowing its URL
-- *Is permanent* --- the file will not be deleted after 15 days
+- *Source* — the name of the file produced by the component
+- *File tags* — the file tags assigned to the produced file
+- *Is public* — the file is accessible to anyone knowing its URL
+- *Is permanent* — the file will not be deleted after 15 days
 
 ![File output screenshot](/extend/component/ui-options/file-output-0.png)
 

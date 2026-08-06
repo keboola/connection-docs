@@ -9,8 +9,8 @@ slug: 'transformations/duckdb'
 [DuckDB](https://duckdb.org/) is an in-process analytical database designed for fast SQL analytics. 
 It brings several advantages to Keboola transformations:
 
-- **In-process execution** --- no external database server needed
-- **Columnar storage** --- optimized for analytical queries
+- **In-process execution** — no external database server needed
+- **Columnar storage** — optimized for analytical queries
 - **Block-based orchestration** with automatic dependency analysis
 - **Parallel execution** of independent scripts within blocks
 - **Cost-effective** alternative to cloud data warehouses for small to medium datasets
@@ -36,13 +36,13 @@ The configuration page allows you to set up input/output mappings, write SQL que
 
 On the right side panel, you can configure:
 
-- **Timeout** --- maximum execution time (default: 1 hour)
-- **Backend size** --- amount of memory allocated for the transformation (see [Dynamic Backends](#dynamic-backends))
-- **DuckDB version** --- select which DuckDB version to use (see [DuckDB Version](#duckdb-version))
-- **Automatic data types** --- automatically assign data types to output tables
-- **Use parquet for input tables** --- use Parquet format instead of CSV for input data (see [Parquet Format](#parquet-format))
-- **Infer input table data types** --- infer data types from input tables (see [Infer Input Table Data Types](#infer-input-table-data-types))
-- **Debug mode** --- enable debug logging for troubleshooting
+- **Timeout** — maximum execution time (default: 1 hour)
+- **Backend size** — amount of memory allocated for the transformation (see [Dynamic Backends](#dynamic-backends))
+- **DuckDB version** — select which DuckDB version to use (see [DuckDB Version](#duckdb-version))
+- **Automatic data types** — automatically assign data types to output tables
+- **Use parquet for input tables** — use Parquet format instead of CSV for input data (see [Parquet Format](#parquet-format))
+- **Infer input table data types** — infer data types from input tables (see [Infer Input Table Data Types](#infer-input-table-data-types))
+- **Debug mode** — enable debug logging for troubleshooting
 
 ### DuckDB Version
 
@@ -67,10 +67,10 @@ This means you can organize your transformation into logical blocks and let the 
 
 DuckDB transformations provide four **sync actions** for debugging and visualization without running the full transformation:
 
-- **Syntax check** (`syntax_check`) --- validates your SQL syntax without executing any queries. Useful for catching errors before running the transformation.
-- **Lineage visualization** (`lineage_visualization`) --- generates a markdown diagram of data dependencies, showing how tables flow through your transformation.
-- **Execution plan visualization** (`execution_plan_visualization`) --- shows the planned execution order with blocks and batches, illustrating how the automatic DAG organizes your queries.
-- **Expected input tables** (`expected_input_tables`) --- displays the list of input tables that the transformation expects based on the SQL analysis.
+- **Syntax check** (`syntax_check`) — validates your SQL syntax without executing any queries. Useful for catching errors before running the transformation.
+- **Lineage visualization** (`lineage_visualization`) — generates a markdown diagram of data dependencies, showing how tables flow through your transformation.
+- **Execution plan visualization** (`execution_plan_visualization`) — shows the planned execution order with blocks and batches, illustrating how the automatic DAG organizes your queries.
+- **Expected input tables** (`expected_input_tables`) — displays the list of input tables that the transformation expects based on the SQL analysis.
 
 These actions are available from the transformation configuration page and are helpful for understanding and debugging complex transformations.
 
@@ -187,7 +187,7 @@ This is different from Snowflake, where unquoted identifiers become uppercase.
 
 ### Optimizing SQL Queries
 
-**Filter and project early** --- apply `WHERE` clauses as close to the source table as possible and select only the columns you need. 
+**Filter and project early** — apply `WHERE` clauses as close to the source table as possible and select only the columns you need. 
 This reduces the amount of data DuckDB needs to scan.
 
 ```sql
@@ -197,7 +197,7 @@ FROM products
 WHERE category = 'electronics' AND price > 100;
 ```
 
-**Use EXPLAIN for performance analysis** --- prefix your query with `EXPLAIN` to see the execution plan and identify expensive operations.
+**Use EXPLAIN for performance analysis** — prefix your query with `EXPLAIN` to see the execution plan and identify expensive operations.
 
 ```sql
 EXPLAIN SELECT product_category, SUM(price) AS total_revenue 
@@ -211,7 +211,7 @@ ORDER BY total_revenue DESC;
 
 DuckDB provides several quality-of-life SQL extensions that simplify common patterns:
 
-**GROUP BY ALL** --- automatically groups by all non-aggregated columns:
+**GROUP BY ALL** — automatically groups by all non-aggregated columns:
 
 ```sql
 SELECT product, category, SUM(sales) 
@@ -219,14 +219,14 @@ FROM orders
 GROUP BY ALL;
 ```
 
-**EXCLUDE** --- select all columns except specific ones:
+**EXCLUDE** — select all columns except specific ones:
 
 ```sql
 SELECT * EXCLUDE (password, ssn, credit_card) 
 FROM users;
 ```
 
-**ASOF JOIN** --- useful for time-series data where timestamps do not match exactly:
+**ASOF JOIN** — useful for time-series data where timestamps do not match exactly:
 
 ```sql
 SELECT 
@@ -240,7 +240,7 @@ ASOF JOIN weather w
 ON s.score_time >= w.timestamp;
 ```
 
-**SUMMARIZE** --- quick data profiling with min, max, null percentage, and unique counts:
+**SUMMARIZE** — quick data profiling with min, max, null percentage, and unique counts:
 
 ```sql
 SUMMARIZE SELECT * FROM my_table;
@@ -340,9 +340,9 @@ FROM "pipeline_stages";
 ```
 
 **Key patterns used:**
-- `TRY_CAST(NULLIF("column", '') AS TYPE)` --- safely converts empty strings to `NULL` before casting. This avoids errors when the source data contains empty values.
-- `"column"::BOOLEAN` --- shorthand type cast syntax.
-- Each statement ends with a **semicolon** (`;`) --- required when multiple statements are in a single script.
+- `TRY_CAST(NULLIF("column", '') AS TYPE)` — safely converts empty strings to `NULL` before casting. This avoids errors when the source data contains empty values.
+- `"column"::BOOLEAN` — shorthand type cast syntax.
+- Each statement ends with a **semicolon** (`;`) — required when multiple statements are in a single script.
 
 ## When to Use DuckDB vs. Snowflake
 

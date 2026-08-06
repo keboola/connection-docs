@@ -5,7 +5,7 @@ slug: 'extend/common-interface/logging'
 ---
 
 
-There are two main, mutually exclusive, ways in which your component can display events Keboola end-users:
+There are two main, mutually exclusive, ways in which your component can display events to Keboola end-users:
 
 1. Using [standard output and standard error](https://en.wikipedia.org/wiki/Standard_streams)
 2. Using [Graylog GELF](http://docs.graylog.org/en/3.1/pages/gelf.html) compatible logger
@@ -29,7 +29,7 @@ of the component and forwards the STDOUT content live to [Storage API Events](ht
 (log level `info`). The content of STDERR is collected and added (if not empty) as the last event of the job with level `error`.
 The events are displayed in a [Job detail](/management/jobs/).
 
-The entire output from a component is filter for sensitive values. The [Job Queue](/extend/job-queue/)
+The entire output from a component is filtered for sensitive values. The [Job Queue](/extend/job-queue/)
 keeps track of all encrypted values and if it encounters them in the component output, it replaces
 them by `[hidden]` placeholder. This prevents accidental leaking of sensitive information for
 example in exception traces.

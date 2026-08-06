@@ -69,12 +69,12 @@ The [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) 
 created ads. Each ad can contain fields such as `id`, `name` and `adset_id`. The fields parameter in such
 case is `id,name,adset_id`.
 
-- **Fields/Endpoint Nesting** ---
+- **Fields/Endpoint Nesting** —
     Ads can contain recommendations and these can be included in the *fields* as well: `id,name,adset_id,recommendations{title,code,message}`. The comma separated list
     in between the curly brackets `{}` specifies fields of the "nested" field/endpoint
     [ad-recommendation](https://developers.facebook.com/docs/marketing-api/reference/ad-recommendation). This way more endpoints can be nested and there is no limit of nesting levels.
 
-- **Fields Parametrization** ---
+- **Fields Parametrization** —
     Each field can be parametrized by a dot followed by a modifier name and a value in brackets.
     A typical parameter could be `since`, `until`, `limit`, or any other parameters or modifiers that the particular endpoint offers such as `date_preset` for the [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights) endpoint.
     The following is an example of parametrized fields:     `insights.action_breakdowns(action_type).date_preset(last_month).time_increment(1){ad_id,impressions,reach,actions,clicks,spend}`
@@ -121,9 +121,9 @@ extraction, so the table data is **imported incrementally**. The columns of the 
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set
 of columns:
 
-- `ex_account_id` --- ID of the ad account corresponding to the object stored in the row.
-- `fb_graph_node` --- Describes the "vertical position" of the object in the resulting tree. For example, for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
-- `parent_id` ---  Refers to the `id` column of a parent object represented by another row and/or
+- `ex_account_id` — ID of the ad account corresponding to the object stored in the row.
+- `fb_graph_node` — Describes the "vertical position" of the object in the resulting tree. For example, for ads it will be `page_ads`, for ads insights it will be `page_ads_insights`.
+- `parent_id` — Refers to the `id` column of a parent object represented by another row and/or
 table. For instance, if the row is representing an insight object, its parent is an ad and `parent_id`
 is the ID of the ad. The parent object type can be also determined from the `fb_graph_node` column as a
 substring from the beginning until the last occurrence of an underscore, e.g. `page_ads_insights` ->

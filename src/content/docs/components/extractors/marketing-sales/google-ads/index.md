@@ -29,8 +29,8 @@ Optionally, you can specify the start (*since*) and end (*until*) dates of downl
 The *Since*/*Until* parameter is parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php) and 
 can be specified
 
-- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
-- **relatively** --- e.g. `14 days ago` or `last month`.
+- **absolutely** — as a unix timestamp or in the `yyyy-mm-dd` format, or
+- **relatively** — e.g. `14 days ago` or `last month`.
 
 In each GAQL query, pick columns to download from allowed report values, and the FROM clause from allowed report types.
 You also need to specify the name of the query and destination table in Storage. 

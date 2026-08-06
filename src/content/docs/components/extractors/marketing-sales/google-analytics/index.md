@@ -18,11 +18,11 @@ This connector now works exclusively with **Google Analytics 4 (GA4)** via the [
 ## Features
 The Google Analytics connector uses the [Google Analytics Data API (v1)](https://developers.google.com/analytics/devguides/reporting/data/v1), which provides:
 
- - **Flexible metrics and dimensions** --- Query any combination of GA4 metrics and dimensions available in your property.
+ - **Flexible metrics and dimensions** — Query any combination of GA4 metrics and dimensions available in your property.
 
- - **Multiple date ranges** --- Get data in up to four date ranges in a single request, useful for period-over-period comparisons.
+ - **Multiple date ranges** — Get data in up to four date ranges in a single request, useful for period-over-period comparisons.
 
- - **Dimension and metric filters** --- Filter the report data server-side before it reaches Keboola.
+ - **Dimension and metric filters** — Filter the report data server-side before it reaches Keboola.
 
 ## How Data Loading Works
 

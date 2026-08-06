@@ -44,7 +44,7 @@ After you set up the project, you will see the **Go To Project** button.
 [Date dimension](https://help.gooddata.com/doc/enterprise/en/dashboards-and-insights/dates-and-times/) is an important concept of the GoodData LDM.
 It is the question of the LDM design to determine for which columns a date dimension should be created. One rule of thumb
 is that different date columns in a single table should have different date dimensions. On the other hand, you might want
-to share a date dimension between different tables --- a *main* date representing an event of something.
+to share a date dimension between different tables — a *main* date representing an event of something.
 It is also possible to have different date dimensions representing, e.g., a calendar year and a fiscal year.
 
 ![Screenshot - Add Date Dimension](/components/writers/bi-tools/gooddata/gooddata-4.png)
@@ -80,14 +80,14 @@ Setting the table columns involves configuration of three things:
 Consult the [GoodData documentation](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) for
 the limits of each data type.
 - **Type** of the column that defines the role of the column in LDM. The column types are:
-    - `IGNORE` --- The column is excluded from the load and will not be created in the GoodData project.
-    - `FACT` --- The [Fact component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) --- a numerical piece of arbitrary data used to define metrics, e.g., *Price* column.
-    - `ATTRIBUTE` --- The [Attribute component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models) of the LDM model --- a discrete set of alphanumeric or numeric data, e.g., *Eye Color* column containing values *Blue*, *Brown*, and *Green*.
-    - `CONNECTION_POINT` --- The [Connection point component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) --- acts like a primary key, i.e., it is used to identify the rows of the table.
-    - `REFERENCE` --- A column which defines a [Relation](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) between tables. You have to select a **Reference** column as a target to which the relation points to. The target must be a `CONNECTION_POINT` already defined in another table.
-    - `DATE` --- A date column --- you have to select a corresponding [date dimension](#date-dimension) for it.
-    - `LABEL` --- A [Label attribute](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels) that allows you to display alternative values for a column. You have to select a **Reference** column, which is the name of an attribute column in the same table. The label column is used as a secondary view of the reference column in the GoodData UI. For example, you can create a reference column `FullName` and add a label column `Surname`. You can define multiple labels for a single attribute.
-    - `HYPERLINK` --- A [Hyperlink attribute](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels), which acts as a link in the reports. You have to select a **Reference**, which is the name of an attribute column in the same table. The reference column is the one that will be used as a label, the hyperlink column is the one that is expected to contain the address.
+    - `IGNORE` — The column is excluded from the load and will not be created in the GoodData project.
+    - `FACT` — The [Fact component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models) — a numerical piece of arbitrary data used to define metrics, e.g., *Price* column.
+    - `ATTRIBUTE` — The [Attribute component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models) of the LDM model — a discrete set of alphanumeric or numeric data, e.g., *Eye Color* column containing values *Blue*, *Brown*, and *Green*.
+    - `CONNECTION_POINT` — The [Connection point component](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) — acts like a primary key, i.e., it is used to identify the rows of the table.
+    - `REFERENCE` — A column which defines a [Relation](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/connection-points-in-logical-data-models) between tables. You have to select a **Reference** column as a target to which the relation points to. The target must be a `CONNECTION_POINT` already defined in another table.
+    - `DATE` — A date column — you have to select a corresponding [date dimension](#date-dimension) for it.
+    - `LABEL` — A [Label attribute](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels) that allows you to display alternative values for a column. You have to select a **Reference** column, which is the name of an attribute column in the same table. The label column is used as a secondary view of the reference column in the GoodData UI. For example, you can create a reference column `FullName` and add a label column `Surname`. You can define multiple labels for a single attribute.
+    - `HYPERLINK` — A [Hyperlink attribute](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/attributes-in-logical-data-models#AttributesinLogicalDataModels-TypesofAttributeLabels), which acts as a link in the reports. You have to select a **Reference**, which is the name of an attribute column in the same table. The reference column is the one that will be used as a label, the hyperlink column is the one that is expected to contain the address.
 
 ![Screenshot - Hyperlink configuration](/components/writers/bi-tools/gooddata/gooddata-7.png)
 
@@ -127,6 +127,6 @@ GoodData, and depending on the size and nature of your project, either of them m
 Since the project is partially managed by the data destination connector, there are some things you should be aware of.
 
 The connector manages the LDM in the project. If you make changes to the LDM using other tools, they will be overwritten by the connector 
---- unless it is used solely in **Load data only** mode. You can review the LDM in the GoodData project management:
+— unless it is used solely in **Load data only** mode. You can review the LDM in the GoodData project management:
 
 ![Screenshot - GoodData Logical Data Model](/components/writers/bi-tools/gooddata/gooddata-model.png)

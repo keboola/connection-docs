@@ -11,7 +11,7 @@ redirect_from:
 
 
 Components allow you to [extend](/extend/) Keboola.
-The data interface to components is very similar to [Transformations](/transformations/) --- data is exchanged as
+The data interface to components is very similar to [Transformations](/transformations/) — data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
 
 ### Intro to Component Creation
@@ -19,7 +19,7 @@ As a developer, you implement the application logic in a language of your choice
 git repository. The component must adhere to our [common interface](/extend/common-interface/).
 To start quickly, use our component generators for [Python](https://github.com/keboola/cookiecutter-python-component) or [PHP, CI pipelines](https://github.com/keboola/component-generator) that can generate a skeleton of the component for you. We also provide libraries to help you with implementation in
 [Python](https://github.com/keboola/python-component) and
-[PHP](https://github.com/keboola/php-docker-application).
+[PHP](https://github.com/keboola/php-component).
 Check our example component in [Python](https://github.com/keboola/cookiecutter-python-component/tree/main/%7B%7Bcookiecutter.repository_folder_name%7D%7D).
 
 The main part of the [common interface](/extend/common-interface/) is the specification how 
@@ -46,7 +46,7 @@ from our side. It also takes care of executing your component in its own [isolat
 ## Requirements
 Before you start developing a new component, you should
 
-- have a [Keboola project](/#development-project) where you can test your code.
+- have a [Keboola project](https://developers.keboola.com/#development-project) where you can test your code.
 - get yourself acquainted with Docker. You should be
 able to run `docker` commands. Strictly speaking, you can get away
 with not using them, but it will certainly speed things up for you.

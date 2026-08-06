@@ -25,7 +25,7 @@ Depending on your contract details and permissions, the `Organizations` feature 
 *Note: If you do not see the `Organizations` section in your account settings,
 you are not a member of any organization.*
 
-To see the organization a project is assigned to, go to **Users & Settings** --- the tab
+To see the organization a project is assigned to, go to **Users & Settings** — the tab
 [**Settings**](/management/project/).
 <br> To see all organizations you are a member of, go to [**Account Settings**](/management/account/).
 
@@ -37,14 +37,14 @@ An **organization admin** (also referred to as an organization member) is a user
 ### What Organization Admins Can Do
 Organization admins have the following capabilities:
 
-- **Project Access** --- Join and leave any project within the organization without requiring an invitation. This makes it easy for organization admins to provide support or oversight across multiple projects.
-- **Create New Projects** --- Set up new Keboola projects within the organization.
-- **Manage Data Sharing** --- Share and manage [shared buckets](/catalog/#sharing-types) across projects in the organization. Organization admins can share buckets to all organization members and manage bucket sharing settings.
-- **Manage Organization Members** --- Invite new members to the organization and remove existing members.
-- **Organization Settings** --- Configure organization-wide settings such as [Auto Join](#auto-join) and [MFA requirements](#require-mfa).
-- **Billing Access** --- View and edit billing details for the organization.
-- **Support Access Control** --- Allow or restrict [Keboola Support](/management/support/#require-approval-for-support-access) from joining projects in the organization.
-- **Development Branches** --- In projects with [protected default branches](/components/branches/), organization admins have additional permissions to manage development branches even without a specific project role.
+- **Project Access** — Join and leave any project within the organization without requiring an invitation. This makes it easy for organization admins to provide support or oversight across multiple projects.
+- **Create New Projects** — Set up new Keboola projects within the organization.
+- **Manage Data Sharing** — Share and manage [shared buckets](/catalog/#sharing-types) across projects in the organization. Organization admins can share buckets to all organization members and manage bucket sharing settings.
+- **Manage Organization Members** — Invite new members to the organization and remove existing members.
+- **Organization Settings** — Configure organization-wide settings such as [Auto Join](#auto-join) and [MFA requirements](#require-mfa).
+- **Billing Access** — View and edit billing details for the organization.
+- **Support Access Control** — Allow or restrict [Keboola Support](/management/support/#require-approval-for-support-access) from joining projects in the organization.
+- **Development Branches** — In projects with [protected default branches](/components/branches/), organization admins have additional permissions to manage development branches even without a specific project role.
 
 ### Organization Admin vs. Project Roles
 It is important to understand that organization admin status is separate from [project user roles](/management/project/users/#user-roles). Being an organization admin does not automatically grant you a role within individual projects. However, organization admins can join any project in the organization at will.
@@ -91,7 +91,7 @@ Project templates differ mainly in the project expiration time. Some may be subj
 ## Organization Settings
 
 ### Auto Join 
-Some organizations may prefer to explicitly approve [access](/management/project/users/#who-can-access-a-project) 
+Some organizations may prefer to explicitly approve [access](/management/project/users/#who-can-access-project) 
 to their project by the [support team](/management/support/#require-approval-for-support-access). 
 To disable Auto Join and require approval for support accounts, click the **Change** link to modify the settings:
 

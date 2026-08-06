@@ -29,7 +29,7 @@ On the **Account Settings** page, you can do the following:
 - Work with [organizations and maintainers](/management/organization/)
 
 ## Changing Password
-To change your password, go to your account settings --- the **Account & Security** section.
+To change your password, go to your account settings — the **Account & Security** section.
 
 ![Screenshot -- Account Settings](/management/account/change-password.png)
 
@@ -41,15 +41,15 @@ We highly recommend enabling the multi-factor authentication (MFA) on your accou
 
 We support two types of MFA: 
 
-1. **Time-based one-time password** (TOTP) --- a **software**-based authentication technique. 
+1. **Time-based one-time password** (TOTP) — a **software**-based authentication technique. 
 When logging into a site supporting TOTP, the authenticator app generates a six-digit one-time password 
 that you must enter in addition to your usual login details. You can use a phone or another device 
-as a virtual multi-factor authentication (TOTP) device. Follow the [instructions](#totp-multi-factor-authentication). 
+as a virtual multi-factor authentication (TOTP) device. Follow the [instructions](#totp). 
 
-2. **Universal 2nd Factor** (U2F) --- a **hardware** device. When signing in, activate your security key as suggested in 
+2. **Universal 2nd Factor** (U2F) — a **hardware** device. When signing in, activate your security key as suggested in 
 its documentation (e.g., by pressing a button) rather than typing in a verification code.
 For using security keys, use the [FIDO U2F](https://fidoalliance.org/) standard.
-Follow the [instructions](#u2f-multi-factor-authentication).
+Follow the [instructions](#u2f).
 
 ### TOTP 
 [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)
@@ -137,7 +137,7 @@ To do that, follow the key's documentation (e.g., press the button):
 ![Screenshot -- Enable U2F -- Step 7](/management/account/enable-u2f-6.png)
 
 ## Invitations
-The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-a-user) to.
+The **Invitations** page shows a project or a list of projects you have been [invited](/management/project/users/#inviting-user) to.
 When you accept an invitation, you'll become a user of the project and will be redirected there. 
 When you decline the invitation, you'll lose the opportunity to enter the project.
 
@@ -161,7 +161,7 @@ Fill in an arbitrary token name and click the **Create Token** button:
 
 The token will be shown to you.
 
-**Important:** Be sure to note it --- it cannot be retrieved!
+**Important:** Be sure to note it — it cannot be retrieved!
 
 ![Screenshot -- Manage Token Created](/management/account/manage-token-created.png)
 
