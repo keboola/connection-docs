@@ -24,6 +24,21 @@ ones. -->
   [Transform Your Data](/getting-started/transform/).
 - A Google account you can authorize.
 
+:::tip[Do it with Kai — except the authorization]
+Kai configures data destinations the same way it configures data sources
+([Integration Setup](/kai/use-cases/#integration-setup)), so it can create and fill in this
+configuration for you:
+
+```text
+Create a Google Sheets data destination configuration called "[TUTORIAL] Opportunity denorm to
+Sheets" that writes out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet.
+```
+
+**The Google authorization is yours to do**, in steps 4–7 below — it is a consent screen in your
+Google account, not something the assistant can click through. Expect to hand the configuration
+back to Kai after you have authorized it.
+:::
+
 ## Sending data out
 
 Getting data out is handled by **data destination connectors** — the mirror image of the
@@ -137,13 +152,7 @@ you started with. That is the whole pipeline, end to end.
   Delete the sheet from the configuration and add it again so the column list is rebuilt.
 - **You cannot open the spreadsheet.** It lives in the authorized Google account, not
   yours — if you authorized a colleague's account, ask them to share it.
-
-:::tip[Or ask Kai]
-Kai can confirm the delivery matched the source:
-
-> Read the last Google Sheets destination job and tell me whether it succeeded and what it
-> reported, then give me the row count of
-> `out.c-denormalize-opportunities.opportunity_denorm`.
-:::
+- **You want the delivery checked against the source.** Kai can read both sides:
+  `Read the last Google Sheets destination job, tell me whether it succeeded, and compare what it wrote with the row count of out.c-denormalize-opportunities.opportunity_denorm.`
 
 **Next:** [Automate it with a flow →](/getting-started/automate/)

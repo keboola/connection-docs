@@ -29,6 +29,22 @@ That does not matter. What the SQL depends on is the **Table name** you give eac
 input mapping below: those must be exactly `opportunity`, `account`, `user` and `level`, or you
 have to edit the queries to match.
 
+:::tip[Do it with Kai]
+Writing SQL transformations is Kai's home ground
+([SQL Transformations](/kai/use-cases/#sql-transformations)), and it knows your backend, so it
+writes the dialect your project actually runs. Open **Kai Agent** in the top bar and ask:
+
+```text
+Create a SQL transformation called "Denormalize opportunities" that joins my opportunity, account,
+user and level tables into one wide table out.c-denormalize-opportunities.opportunity_denorm.
+Outline the approach first, then build it and run it.
+```
+
+Asking for the outline first is worth it — you get to read the joins before they run, which is the
+whole point of the [mapping model](#how-a-transformation-works) explained below. Either way, check
+the result the same way: 639 rows, 23 columns.
+:::
+
 ## How a transformation works
 
 A transformation never runs against your Storage tables directly. Keboola copies the tables
@@ -277,13 +293,9 @@ experimenting.
   behind these screenshots was copy-staged, so the column never appeared.
 - **You want to see what the query actually returns before saving.** That is what a
   [workspace](/getting-started/transform/workspace/) is for.
-
-:::tip[Or ask Kai]
-Kai reads the job log, so it is faster at this than you are:
-
-> My transformation `Denormalize opportunities` failed. Read the last job's log and tell me
-> what to fix.
-:::
+- **You would rather not read the log yourself.** Kai has it open already
+  ([Troubleshooting](/kai/use-cases/#troubleshooting)):
+  `My transformation "Denormalize opportunities" failed. Read the last job's log and tell me what to fix.`
 
 ## Going further
 

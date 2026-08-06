@@ -14,6 +14,18 @@ Google Drive is commonly used for sharing small reference tables between differe
 For our purposes, create a Google spreadsheet from the [level.csv](/getting-started/level.csv) file.
 Imagine someone shared the *level* table with you through Google Drive.
 
+:::tip[Do it with Kai — except the authorization]
+Once the spreadsheet exists, Kai can create the connector configuration for you
+([Integration Setup](/kai/use-cases/#integration-setup)):
+
+```text
+Create a Google Sheets data source configuration that loads my "level" spreadsheet into Storage.
+```
+
+The **Google authorization is yours to do** — it is a consent screen in your own Google account.
+Authorize the configuration first, then let Kai pick the sheet and run it.
+:::
+
 ## Prepare
 Go to [Google Spreadsheets](https://www.google.com/sheets/about/) and start a new blank spreadsheet. Then go to
 *File* – *Import* and upload the [level.csv](/getting-started/level.csv) file.

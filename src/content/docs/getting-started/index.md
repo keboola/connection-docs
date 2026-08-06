@@ -49,6 +49,20 @@ If you would rather understand the pieces before touching them, read the
 what a stack is. This guide explains each piece as it comes up, so you can also just start.
 :::
 
+## Two ways to do every step
+
+Each step below can be done by clicking through the UI or by asking **Kai**, Keboola's built-in
+assistant, to do it — same configuration, same result. Every page carries a **Do it with Kai**
+block with the exact prompt, right next to the manual steps it replaces.
+
+The clicking is written out in full and stays the primary path, for two reasons: Kai is in
+**Public Beta** and an organization admin has to enable it, so the button may simply not be there
+yet; and the arc's later steps assume you have seen where a configuration, a mapping and a phase
+live. Do it by hand once, then let Kai do it forever after.
+
+See [Get started with Kai](/kai/getting-started/) for turning it on, and
+[use cases](/kai/use-cases/) for what else it does.
+
 ## The steps
 
 1. **[Get a Project](/getting-started/project/)** — create or join one, learn what a project

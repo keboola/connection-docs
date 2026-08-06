@@ -71,6 +71,21 @@ After signing in you land on the project dashboard. Five places matter for this 
   have both kinds show this as **Conditional Flows**.
 - **Jobs** — the log of everything that has run, successfully or not.
 
+:::tip[Ask Kai to orient you]
+This is the one step of the arc Kai cannot do for you — it lives *inside* a project, so there has
+to be a project first. From here on, every step has a **Do it with Kai** block that replaces the
+clicking.
+
+Look for **Kai Agent**, marked *Beta*, in the top bar. It has to be enabled first and it is not on
+every stack, so see [Get started with Kai](/kai/getting-started/) if you cannot find it. On a
+project you inherit rather than create, the first question is usually
+([Data Exploration](/kai/use-cases/#data-exploration)):
+
+```text
+I'm new to this project. Give me an overview of the data structure and what each bucket contains.
+```
+:::
+
 ## Check it worked
 
 You are ready for the next step when you can open **Storage** and see the project's bucket
@@ -84,16 +99,5 @@ list — empty is fine, that is what you are about to change.
   is still pending. Confirm the exact URL with whoever invited you.
 - **Your company uses SSO.** Sign in through your organization's link rather than creating
   a new account; a fresh Free Plan project will not have access to your team's data.
-
-:::tip[Or ask Kai]
-Keboola's built-in assistant can orient you in a project you did not build. Look for
-**Kai Agent** in the top bar — it has to be enabled first, and it is not on every stack, so see
-[Get started with Kai](/kai/getting-started/) if you cannot find it. Then ask:
-
-> What is in this project? Summarize the buckets, configurations and flows it contains.
-
-On the empty project you just created there is nothing to summarize yet — this one pays off
-later, or on a project you inherit.
-:::
 
 **Next:** [Load your data →](/getting-started/load/)

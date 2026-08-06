@@ -31,6 +31,23 @@ Everything from the previous steps, in one project:
 - the Google Sheets destination from
   [Send Your Data Somewhere](/getting-started/write/).
 
+:::tip[Do it with Kai]
+Building a pipeline out of configurations you already have is a documented Kai job
+([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
+**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
+flow's header once it has tasks.
+
+```text
+Create a flow that runs my "[TUTORIAL] Sample data" HTTP configuration, then the
+"Denormalize opportunities" transformation, then the Google Sheets destination — each one in its
+own phase, in that order.
+```
+
+Set the **schedule** and the **notifications** yourself afterwards, in the tabs shown below. Both
+are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
+gets told about is just a button.
+:::
+
 ## Phases and tasks
 
 A flow is a list of **phases**. Each phase holds one or more **tasks** — a component
@@ -185,17 +202,7 @@ schedule — plus duration and status. Expand a run to see its phases.
   while flow jobs themselves consume none, the component jobs they start do.
 - **Jobs queue instead of running.** Too many parallel tasks in one phase; Storage jobs are
   typically capped at 10 in parallel. Split the phase.
-
-:::tip[Or ask Kai]
-Kai can build the flow for you and explain what it did:
-
-> Create a flow that runs my `[TUTORIAL] Sample data` HTTP configuration, then the
-> `Denormalize opportunities` transformation, then the Google Sheets destination.
-
-The Builder has Kai built in for exactly this: **Build with Kai** sits in the **Add Task** menu on
-an empty canvas, and **Modify with Kai** is in the flow's header once it has tasks. Set the
-schedule and the notifications yourself afterwards — those are quick, and it is worth seeing where
-they live.
-:::
+- **The run detail is a wall of jobs and you want the short version.** Ask Kai, which reads all of
+  them: `My flow run failed. Which task failed, and why?`
 
 **Next:** [Where to go next →](/getting-started/next-steps/)

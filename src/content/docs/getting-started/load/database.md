@@ -12,6 +12,22 @@ via a [Google Sheets data source connector](/getting-started/load/googlesheets/)
 Now, let's explore loading data from an external database using the Snowflake Database data source (the procedure is the same for all our database data sources).
 We will use our own sample Snowflake database, so do not worry about having to get database credentials from anyone.
 
+:::tip[Do it with Kai]
+Database connectors are configured the same way as any other data source
+([Integration Setup](/kai/use-cases/#integration-setup)) — hand Kai the credentials from the step
+below and let it build the configuration and its query:
+
+```text
+Set up a Snowflake data source connector against host kebooladev.snowflakecomputing.com,
+warehouse DEV, with username, password, database and schema all set to HELP_TUTORIAL. Load the
+opportunity table into Storage.
+```
+
+Those are the sample credentials from [step 5](#configure-snowflake-data-source-connector) below —
+read them there if the prompt and the steps ever disagree. The pattern is the same for every
+database connector Keboola supports, which is the reason to walk it once by hand.
+:::
+
 ## Configure Snowflake Data Source Connector
 1. Start by going into the **Components** section and click **Add Component**.
 
