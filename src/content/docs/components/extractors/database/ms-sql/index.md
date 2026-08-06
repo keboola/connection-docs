@@ -14,7 +14,7 @@ This connector supports the most recent versions of both SQL Server and Azure SQ
 This [standard SQL database connector](/components/extractors/database/sqldb) performs queries against the source database to synchronize data. 
 It offers a straightforward approach suitable for most use cases, enabling [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-All SQL database connectors are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and offer an [advanced mode](/components/extractors/database/sqldb/). 
+All SQL database connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
 For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database data source connector](/getting-started/load/database/). 
 

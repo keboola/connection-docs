@@ -259,7 +259,7 @@ When loading data, you have the option to **Clean workspace before loading**. Wh
 - **Stored procedures**
 - **User-defined functions (UDFs)**
 
-This is by design --- Keboola does not create stored procedures or UDFs, so it does not manage or remove them during cleanup. If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
+This is by design — Keboola does not create stored procedures or UDFs, so it does not manage or remove them during cleanup. If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
 
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
@@ -267,7 +267,7 @@ advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with t
 
 ### Read-Only Input Mapping
 
-*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+*Note: You must be using [new transformations](/transformations/) to see this feature.*
 
 The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
 For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
@@ -341,7 +341,7 @@ You can also create workspaces from transformations.
 Apart from developing transformations, you can use workspaces to perform ad-hoc analysis 
 of production data of your choice. A workspace provides you with a safe and isolated environment
 where you can experiment. The input mapping isolation also means that you can work on live
-production projects without data in the workspace constantly changing --- you update them
+production projects without data in the workspace constantly changing — you update them
 on demand by loading data into the workspace.
 
 A comprehensive [video guide](https://www.youtube.com/watch?v=iQMnh9nqRiE) on this subject is available on our YouTube channel.

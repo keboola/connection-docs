@@ -16,13 +16,13 @@ single [component](/components/).
 
 Two mapping types must be set up before running a transformation:
 
-1. **Input Mapping** --- This is a list of Storage tables used in your transformation.
+1. **Input Mapping** — This is a list of Storage tables used in your transformation.
 If an input mapping does not fit well to your use case, then a [read-only input mapping](/transformations/mappings/#read-only-input-mapping) offers straightforward access to the data, and will drastically reduce the execution time.
 This feature is useful in the following scenarios:
    - Slow transformations where a clone is not used (input mapping)
    - Complex flows that move data from a data source to the workspace where they are accessed by other apps
    - Cases where updating data in Storage via output mapping causes multiple data movement operations
-2. **Output Mapping** --- This is a list of tables written into Storage after running the transformation. 
+2. **Output Mapping** — This is a list of tables written into Storage after running the transformation. 
 Tables not listed are neither modified nor permanently stored (i.e., they are temporary). 
 They are deleted from the transformation staging area when the execution finishes. 
 
@@ -54,7 +54,7 @@ Depending on the transformation backend, the table input mapping process can do 
 
 - **Database Staging**: Copy the selected tables to *tables* in a newly created *database* schema. If you have not selected any tables and [read-only input mappings](/transformations/mappings/#read-only-input-mapping) are enabled, you can access them automatically in the workspace. In this case the tables are not copied.
 - **File Staging**: Export the selected tables to *CSV files* and copy them to a designated staging *Storage* 
-(not to be confused with a [file mapping](/transformations/mappings/#file-mapping), as we're still working with tables).
+(not to be confused with a [file mapping](/transformations/mappings/#file-input-mapping), as we're still working with tables).
 
 Depending on the transformation types, you can either build your transformations working 
 with database tables or with CSV files. Furthermore, the CSV files can be placed locally with the transformation
@@ -73,22 +73,22 @@ When using table with native data types, following options will not be available
 :::
 
 
-- **Source** --- Select a table or a bucket in Storage as the source table for your transformation. If you select 
+- **Source** — Select a table or a bucket in Storage as the source table for your transformation. If you select 
 a bucket, it is the equivalent of selecting all tables currently present in the bucket. It does not automatically 
 add future tables to the selection.
-- **File name** / **Table Name** --- Enter the destination name of the mapping that is the *Source* table/file 
+- **File name** / **Table Name** — Enter the destination name of the mapping that is the *Source* table/file 
 name to be used inside the transformation. This is an arbitrary name you'd like to use as a reference for the table 
 inside the transformation script (it fills in automatically, but it can be changed). For **File Staging**, it is a good 
 idea to add the `.csv` extension. For **Database Staging**, the table name is automatically quoted, which means you can 
 use an arbitrary name. It also means that they may be case sensitive, for instance, if the destination is in Snowflake staging.
-- **Columns** --- Select specific columns if you do not want to import them all; 
+- **Columns** — Select specific columns if you do not want to import them all; 
 this saves processing time for larger tables.
-- **Changed in last** --- If you use [incremental processing](/storage/tables/#incremental-processing), 
+- **Changed in last** — If you use [incremental processing](/storage/tables/#incremental-processing), 
 this comes in handy; import only rows changed or created within the selected time period. 
 The supported time dimensions are `minutes`, `hours`, and `days`.
-- **Data filter** --- Filter source rows to the rows that match this single-column multiple-values filter. 
+- **Data filter** — Filter source rows to the rows that match this single-column multiple-values filter. 
 When used together with *Changed in last*, the returned rows must match both conditions.
-- **Data types** --- Configure [data types](#data-types).
+- **Data types** — Configure [data types](#data-types).
 
 If the terms *source* and *destination* look confusing, consult the image below. We always use them in a specific
 context. That means input mapping destination is the same file as the source for a transformation script.
@@ -118,15 +118,15 @@ fail. In such a case, it's reasonable to revert to `VARCHAR` types -- for exampl
 
 #### Loading type (Snowflake and BigQuery)
 When working with large tables, it may become important to understand how the tables are loaded into a staging
-database. Keboola uses three loading strategies --- `COPY`, `CLONE`, and `VIEW` --- plus an `AUTO` mode (the default)
+database. Keboola uses three loading strategies — `COPY`, `CLONE`, and `VIEW` — plus an `AUTO` mode (the default)
 that picks the best available strategy for each table:
 
-- **`CLONE`** --- a highly optimized operation that loads an arbitrarily large table in near-constant time, because it
+- **`CLONE`** — a highly optimized operation that loads an arbitrarily large table in near-constant time, because it
 physically moves no data. `CLONE` can't be combined with filters, data type configurations, or incremental loading.
 It is supported on **Snowflake** and **BigQuery** backends.
-- **`COPY`** --- a full physical copy of the data into the staging database. Always available; used when neither `CLONE`
+- **`COPY`** — a full physical copy of the data into the staging database. Always available; used when neither `CLONE`
 nor `VIEW` can be applied (for example, when filters or data types are configured).
-- **`VIEW`** --- loads the table as a read-only view instead of copying any data; the data is read live from its source
+- **`VIEW`** — loads the table as a read-only view instead of copying any data; the data is read live from its source
 location. Used for **linked, external, and alias tables**.
 
 You can set the strategy per table with the **Load type** option in the input mapping (**Auto**, **Copy**, **Clone**, or **View**):
@@ -134,7 +134,7 @@ You can set the strategy per table with the **Load type** option in the input ma
 ![Load type options in the input mapping](/transformations/mappings/load-type-options.png)
 
 **How `AUTO` decides.** `AUTO` prefers `CLONE` whenever the table can be cloned. On **BigQuery**, tables that can't be
-cloned --- **linked, external, and alias tables** --- are loaded as a read-only `VIEW`. When filters, data type
+cloned — **linked, external, and alias tables** — are loaded as a read-only `VIEW`. When filters, data type
 configurations, or incremental loading are used (which neither `CLONE` nor `VIEW` supports), `AUTO` falls back to `COPY`.
 If you explicitly request `CLONE` for a table that can't be cloned (for example, a [linked-bucket](/catalog/) table on
 BigQuery, or any table with incompatible options such as `incremental`), the request fails.
@@ -145,7 +145,7 @@ In the input mapping, tables that will be loaded as a read-only view are marked 
 
 :::note[Default load type on BigQuery]
 On BigQuery, the default input-mapping load type is controlled by the **BigQuery Input Mapping – Default Load Type View**
-feature. While this feature is enabled --- the current state in most projects --- input tables default to `VIEW`, just as
+feature. While this feature is enabled — the current state in most projects — input tables default to `VIEW`, just as
 before. That's perfectly fine, and nothing changes for you.
 
 To make `CLONE` the default in your project right now, **disable** the **BigQuery Input Mapping – Default Load Type View**
@@ -164,7 +164,7 @@ inside the transformation. Also, when you need more complex filters (filtering b
 remove the filter completely from the input mapping, take advantage of the clone loading, and do the filtering inside of the
 transformation.
 
-You can verify the table loading type in the events --- copy table:
+You can verify the table loading type in the events — copy table:
 
 ![Table Copy](/transformations/mappings/table-copy.png)
 
@@ -181,7 +181,7 @@ This function is automatically enabled in transformations.
 
 ##### Read-only input mapping
 
-*Note: You must be using [new transformations](/transformations/#new-transformations) to see this feature.*
+*Note: You must be using [new transformations](/transformations/) to see this feature.*
 
 When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
 Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
@@ -276,15 +276,15 @@ simplify the transformation script implementation (no need to worry about cleanu
 
 Keep in mind that every table or file specified in the output mapping must be physically present in the staging area. 
 A missing source table for the output mapping is an error. This is important when the results of a transformation are 
-empty --- you have to ensure that an empty table or an empty file (with a header or 
+empty — you have to ensure that an empty table or an empty file (with a header or 
 a [manifest](https://developers.keboola.com/extend/common-interface/manifest-files/#dataouttables-manifests)) is created.
 
 ### Table Output Mapping
 Depending on the transformation backend, the table output mapping process can do the following:
 
-- In case of **Database Staging** --- copy the specified tables from the staging *database* into 
+- In case of **Database Staging** — copy the specified tables from the staging *database* into 
 the project [Storage tables](/storage/tables/).
-- In case of **File Staging** --- import the specified *CSV files* into project [Storage tables](/storage/tables/).
+- In case of **File Staging** — import the specified *CSV files* into project [Storage tables](/storage/tables/).
 
 The supported staging database type is [Snowflake](https://www.snowflake.com/).
 The supported staging for CSV files is a storage local to the transformation.
@@ -294,20 +294,20 @@ The supported staging for CSV files is a storage local to the transformation.
 *See an example of [setting up an output mapping](/getting-started/transform/#set-the-output-mapping) in our tutorial.*
 
 #### Options
-- **Table** --- Enter the name of the table that should be created in the transformation. 
-- **Destination** --- Select or type in the name of the [Storage](/storage/tables/) output table that will contain 
+- **Table** — Enter the name of the table that should be created in the transformation. 
+- **Destination** — Select or type in the name of the [Storage](/storage/tables/) output table that will contain 
 the results of your transformation (i.e., contents of the Output Mapping *source* table). 
 	- If this table does not exist yet, it will be created once the transformation runs. 
 	- If this table already exists in Storage, the source table must match the structure of the destination table (all 
 	columns must be present, new columns will be added automatically).  
-- **Incremental** --- Check this option to make sure that in case the *Destination* table already exists, 
+- **Incremental** — Check this option to make sure that in case the *Destination* table already exists, 
 it is not overwritten, but resulting data is appended to it. However, any existing row having the same primary key 
 as a new row will be replaced. See the description of 
 [incremental loading](/storage/tables/#incremental-loading) for a detailed explanation and examples.
-- **Primary key** --- The [primary key](/storage/tables/#primary-keys) of the destination table; if the table already exists, 
+- **Primary key** — The [primary key](/storage/tables/#primary-keys) of the destination table; if the table already exists, 
 the primary key must match. Feel free to use a multi-column primary key.
-- **Deduplication Strategy** --- This allows to switch in Snowflake transformations from the default load Upsert to Insert. Upsert option uses deduplication based on primary keys and ensures data quality. By switching to Insert, the load performs faster but skips deduplication and type casting - meaning you are responsible for uniqueness and correct data types. As this option is for high data maturity users, you can ask our support to enable this for your project as Deduplication Strategy is under feature flag.
--  **Delete rows** --- When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
+- **Deduplication Strategy** — This allows to switch in Snowflake transformations from the default load Upsert to Insert. Upsert option uses deduplication based on primary keys and ensures data quality. By switching to Insert, the load performs faster but skips deduplication and type casting - meaning you are responsible for uniqueness and correct data types. As this option is for high data maturity users, you can ask our support to enable this for your project as Deduplication Strategy is under feature flag.
+-  **Delete rows** — When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
    1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
    2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. 
   This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table. Please note that this option **is available in the production environment only** and **is not supported in development branches** (e.g. for testing or configuration changes in a development branch, the option will not be applied).
@@ -355,8 +355,8 @@ Only the files stored directly in the `out/files/` directory can be mapped, subd
 ![File Output Mapping](/transformations/mappings/file-output-mapping.png)
 
 #### Options
-- **Source** --- Name of the source file for mapping
-- **Tag** --- Tags which will be applied to the target file uploaded in [Storage](/storage/tables/)
+- **Source** — Name of the source file for mapping
+- **Tag** — Tags which will be applied to the target file uploaded in [Storage](/storage/tables/)
 - **Permanent** - This option makes the file stay in the file Storage, until you delete it manually. 
 If unchecked, the target file will be deleted after 15 days.
 
@@ -364,7 +364,7 @@ If unchecked, the target file will be deleted after 15 days.
 Direct Mode Output Mapping lets your transformation write directly to Storage tables instead of going through
 the standard copy-based output mapping process. With Direct Mode output mapping enabled, the transformation
 user receives write privileges on specific Storage tables. Any `INSERT`, `UPDATE`, `DELETE`,
-or `TRUNCATE` you run in your transformation SQL can be applied immediately to the destination table --- there is no
+or `TRUNCATE` you run in your transformation SQL can be applied immediately to the destination table — there is no
 separate import step.
 
 This feature is available as a **private beta** and must be enabled by [Keboola Support](/management/support/).
@@ -375,12 +375,12 @@ This feature is available as a **private beta** and must be enabled by [Keboola 
 Direct Mode output mapping is designed for **advanced users with high data maturity** who are comfortable writing
 production-quality SQL and managing data consistency themselves. Typical use cases include:
 
-- **Large incremental loads** --- Standard output mapping on a 150 GB table with a single-row append can take over
+- **Large incremental loads** — Standard output mapping on a 150 GB table with a single-row append can take over
   an hour due to deduplication and copy overhead. Direct Mode output mapping reduces this to seconds.
-- **Minimal overhead workflows** --- When the standard mapping pipeline (copy to staging, deduplicate, import)
+- **Minimal overhead workflows** — When the standard mapping pipeline (copy to staging, deduplicate, import)
   creates unnecessary overhead for your workload.
 
-**Performance comparison** (incremental load --- 1 row added to a 150 GB table):
+**Performance comparison** (incremental load — 1 row added to a 150 GB table):
 
 | Method | Approximate Time |
 |--------|-----------------|
@@ -391,7 +391,7 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 #### Supported Backends
 Direct Mode output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
 including [transformations](/transformations/), [data apps](/components/data-apps/), and
-[workspaces](/workspace/) --- both standalone Snowflake/BigQuery workspaces and workspaces opened in the
+[workspaces](/workspace/) — both standalone Snowflake/BigQuery workspaces and workspaces opened in the
 [SQL Editor](/workspace/sql-editor/).
 
 #### How It Works
@@ -401,7 +401,7 @@ When a component with Direct Mode output mapping runs:
 2. Your transformation SQL operates directly on Storage tables using their read-only storage paths
    (e.g., `"KBC_USE4_33"."in.c-raw-data"."my-table"`).
 3. After the transformation finishes, Keboola runs a **refresh job** that updates table metadata,
-   row counts, and statistics. No data is copied --- the changes are already in place.
+   row counts, and statistics. No data is copied — the changes are already in place.
 
 In a **workspace**, there is no job to wait for: the write privileges are granted as soon as you save the
 Direct Mode output mapping, so you can write to the Storage table from your very next query. Removing the
@@ -421,7 +421,7 @@ In Snowflake and BigQuery transformations and workspaces, add an output mapping 
 **Guided Mode** to **Direct Mode**. Pick an existing Storage table as the destination; the dialog then shows the
 full table path to copy into your SQL.
 
-The mode cannot be switched on an existing mapping --- delete the mapping and create a new one instead.
+The mode cannot be switched on an existing mapping — delete the mapping and create a new one instead.
 
 Under the hood, Direct Mode is the `unload_strategy` field on the output table in the configuration JSON:
 
@@ -441,14 +441,14 @@ Under the hood, Direct Mode is the `unload_strategy` field on the output table i
 ```
 
 The `unload_strategy` field accepts two values:
-- `direct-grant` --- Write directly to the Storage table (Direct Mode output mapping).
-- `copy` --- Standard output mapping (default when the field is omitted).
+- `direct-grant` — Write directly to the Storage table (Direct Mode output mapping).
+- `copy` — Standard output mapping (default when the field is omitted).
 
-You can mix both strategies in a single transformation --- some tables can use Direct Mode output mapping while
+You can mix both strategies in a single transformation — some tables can use Direct Mode output mapping while
 others use the standard copy strategy.
 
 #### Workspaces
-In a workspace, Direct Mode output mapping replaces the **Unload Data** round trip --- you write to the Storage
+In a workspace, Direct Mode output mapping replaces the **Unload Data** round trip — you write to the Storage
 table directly from the workspace instead of loading data into Storage afterwards.
 
 In a **standalone Snowflake or BigQuery workspace**, open the **Output Mapping** section in the workspace detail,
@@ -461,7 +461,7 @@ In the **[SQL Editor](/workspace/sql-editor/)**, you can also create the destina
 3. Click **CREATE WRITABLE TABLE**.
 
 Keboola creates the Storage table (creating the bucket first if it does not exist yet) and registers it as a
-Direct Mode output mapping. The source working table itself is not modified or copied --- only its column
+Direct Mode output mapping. The source working table itself is not modified or copied — only its column
 structure is used as the template for the new Storage table.
 
 The new table appears in the **Writable tables** section of the Storage Explorer with the **DG** badge, and the
@@ -529,16 +529,16 @@ currently share the same Snowflake schema as production. Writing via Direct Mode
 
 #### Limitations
 
-- **No automatic deduplication** --- Primary keys on Snowflake and BigQuery are not enforced by the
+- **No automatic deduplication** — Primary keys on Snowflake and BigQuery are not enforced by the
   backend, so they will not prevent duplicates on direct writes. You must handle deduplication in your SQL.
-- **No type checking or casting** --- Column types are not validated against Storage metadata.
-- **No schema changes** --- You cannot alter table structure (add/remove/rename columns). Use
+- **No type checking or casting** — Column types are not validated against Storage metadata.
+- **No schema changes** — You cannot alter table structure (add/remove/rename columns). Use
   [Storage](/storage/tables/) for schema modifications.
-- **No automatic rollback** --- If a transformation fails mid-execution, the table may be left in a
+- **No automatic rollback** — If a transformation fails mid-execution, the table may be left in a
   partially written state. Wrap related operations in transactions to mitigate this.
-- **Limited auditability** --- Only an import event is created on success, compared to the more
+- **Limited auditability** — Only an import event is created on success, compared to the more
   detailed event trail of standard output mapping.
-- **Development branch isolation not supported** --- Dev branch writes affect production data
+- **Development branch isolation not supported** — Dev branch writes affect production data
   on Snowflake. Use caution when testing.
-- **Read-only, external, and linked buckets are not supported** --- Direct Mode output mapping cannot write
+- **Read-only, external, and linked buckets are not supported** — Direct Mode output mapping cannot write
   to buckets that are read-only, external schemas, or linked from another project.

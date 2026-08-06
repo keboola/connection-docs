@@ -105,7 +105,7 @@ you can develop the transformation script locally.
 
 The script itself is expected to be in the `data` directory. The script name is arbitrary. The `data` directory name
 is also arbitrary, we use it as general reference to the above folder structure. It is possible to use relative 
-directories --- the current directory of the transformation is always the `data` directory. That means you can move 
+directories — the current directory of the transformation is always the `data` directory. That means you can move 
 the script to a Keboola transformation with no changes. To develop a Python transformation 
 that takes a [sample CSV file](/transformations/python-plain/source.csv) locally, follow these steps:
 

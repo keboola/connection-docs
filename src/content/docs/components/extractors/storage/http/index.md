@@ -54,10 +54,10 @@ incremental load depends on other settings (mainly **Primary Key**).
 
 There are three options for determining column names:
 
- - **Set header manually** --- This option enables the **Set Headers** input to manually specify all columns in the table.
- - **Read from the file(s) header** --- This option assumes that each file has a header on the first line.
+ - **Set header manually** — This option enables the **Set Headers** input to manually specify all columns in the table.
+ - **Read from the file(s) header** — This option assumes that each file has a header on the first line.
  A random file will be chosen to extract the header and the first line in all files will be removed.
- - **Generate automatically** --- The columns will be named sequentially as `col_1`, `col_2` and so on.
+ - **Generate automatically** — The columns will be named sequentially as `col_1`, `col_2` and so on.
 
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**. 
 

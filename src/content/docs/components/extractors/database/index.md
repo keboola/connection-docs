@@ -32,7 +32,7 @@ Several variants of connectors may exist for each database type, depending on th
 These connectors work on a relational level, performing queries against the source database to synchronize data.
 This straightforward approach suits most use cases and supports Timestamp-based CDC replication.
 
-All are [configured](/components/extractors/database/sqldb/#create-new-configuration) similarly and offer an [advanced mode](/components/extractors/database/sqldb/).
+All are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode).
 
 Their basic configuration is also part of the [Tutorial - Loading Data from Database](/getting-started/load/database/).
 
@@ -51,7 +51,7 @@ Typically, these connectors are useful in the following scenarios:
 
 Unlike the connectors for SQL databases, connectors for **NoSQL databases** require a different configuration (except
 the [BigQuery data source connector](/components/extractors/database/bigquery/) for the [BigQuery](https://cloud.google.com/bigquery/)
-database, which is quite similar to SQL databases and also supports the [advanced mode](/components/extractors/database/sqldb/)):
+database, which is quite similar to SQL databases and also supports the [advanced mode](/components/extractors/database/sqldb/#advanced-mode)):
 
 - [MongoDB connector](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB for MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 - [CosmosDB connector](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
