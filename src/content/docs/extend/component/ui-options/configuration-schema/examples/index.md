@@ -244,7 +244,7 @@ The above code will create the following user interface:
 
 ### Loading Options (Incremental vs Full)
 
-This may be combined in [loading options block](/extend/component/ui-options/configuration-schema/examples/#example-1---object-blocks-loading-options).
+This may be combined in [loading options block](/extend/component/ui-options/configuration-schema/examples/#example-1--object-blocks-loading-options).
 
 ```json
 {

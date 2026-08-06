@@ -38,7 +38,7 @@ Sharing data via the data catalog is useful in numerous ways -- for example:
   instead of distributing updates throughout your company, you can create a project with the product table shared to
   the rest of the company. Regardless of how and how often the table is updated, this ensures that everyone always looks at the
   same data.
-- You might want to use [**Multi-project architecture**](#multi-project-architecture).
+- You might want to use [**Multi-project architecture**](/catalog/multi-project/).
 
 The following terminology is used:
 
@@ -118,7 +118,7 @@ Select the tables and/or buckets you want to share:
 
 ![Screenshot -- Select Tables](/catalog/catalog-7.png)
 
-Enter the bucket name and a [sharing type](#sharing-type). Assign a **Datashare Owner**, and optionally customize the bucket color and enter a description:
+Enter the bucket name and a [sharing type](#sharing-types). Assign a **Datashare Owner**, and optionally customize the bucket color and enter a description:
 
 ![Screenshot -- Select Tables](/catalog/catalog-8.png)
 
