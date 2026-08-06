@@ -35,15 +35,21 @@ Kai [configures data destinations](/kai/) as well as data sources, but this step
 order to it: **the Google authorization is yours**, in steps 4–6 below. It is a consent screen in
 your own Google account, not something the assistant can click through.
 
-So do steps 1–6 by hand, then hand the rest over:
+So do steps 1–6 by hand, then open **Kai Agent** in the top bar and hand the rest over:
 
 ```text
 In my "[TUTORIAL] Opportunity denorm to Sheets" configuration, write
-out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet and run it.
+out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet called
+"[TUTORIAL] Opportunity denorm", into a sheet named opportunity_denorm, set to update rows rather
+than append. Then run it.
 ```
 
-Check the result the same way [the steps below do](#run-it-and-check-the-result) — every row of
-`opportunity_denorm` in the sheet, joined columns included.
+Naming all three matters: step 5 puts this on a **daily schedule**, so an appending sheet grows by
+639 rows a day, and the check below looks for that spreadsheet name.
+
+**Check:** the sheet holds every row of `opportunity_denorm`, joined columns included, exactly as
+in [Run it and check the result](#run-it-and-check-the-result). If it does not, open the
+configuration and fix the wizard by hand from step 8 — everything Kai set is editable there.
 :::
 
 ## Sending data out

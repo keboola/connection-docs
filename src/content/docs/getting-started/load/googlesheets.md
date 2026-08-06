@@ -15,17 +15,25 @@ For our purposes, create a Google spreadsheet from the [level.csv](/getting-star
 Imagine someone shared the *level* table with you through Google Drive.
 
 :::tip[Do it with Kai — after you authorize]
-Kai can create the connector configuration for you
-([Integration Setup](/kai/use-cases/#integration-setup)):
+Kai can create the configuration
+([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar:
 
 ```text
-Create a Google Sheets data source configuration for loading a spreadsheet into Storage.
+Create a Google Sheets data source configuration called "[TUTORIAL] Level from Sheets".
 ```
 
-Two parts stay yours, both because they happen inside Google rather than Keboola: the
-**authorization** consent screen, and the **Drive file picker** where you choose the spreadsheet
-(steps 5–9 below). Once the sheet is selected, Kai can run the configuration and tell you what
-landed.
+Then do **steps 5–9 yourself** — both happen inside Google, not Keboola: the authorization consent
+screen, and the Drive picker where you choose the *spreadsheet* you made above. After step 9, hand
+it back:
+
+```text
+In "[TUTORIAL] Level from Sheets", select the sheet inside that spreadsheet, run the
+configuration, and tell me what table it created and how many rows it has.
+```
+
+**Check:** a new table with 28 rows, as in [step 12](#configure-google-sheets-data-source-connector).
+Watch the wording — the *spreadsheet* is the file in Drive (step 9), the *sheet* is the tab inside
+it (step 10).
 :::
 
 ## Prepare

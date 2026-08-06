@@ -56,12 +56,16 @@ or by asking **Kai**, Keboola's built-in assistant, to do them. Each of those pa
 **Do it with Kai** block with a copy-pasteable prompt, right next to the manual steps it replaces.
 
 Two things stay yours either way: creating the project in step 1, since Kai works *inside* a
-project, and authorizing a Google account in step 4, since that is a consent screen in your own
-Google account.
+project, and the Google screens in step 4 — the authorization consent, and choosing a file in
+Drive. On those pages the Kai block picks up after you are done.
 
 The clicking is written out in full and stays the primary path, because the later steps assume
 you have seen where a configuration, a mapping and a phase live. Do it by hand once, then let Kai
-do it after that.
+do it after that. Each block also ends with what to check, and what to do when Kai's version does
+not match — assume you will need that at least once.
+
+Kai asks before it changes anything: project-modifying actions raise an approval dialog in the
+chat, so expect to confirm rather than watch it run unattended.
 
 Kai is in **Public Beta**. The button is visible to every user on a supported stack, but the
 feature has to be switched on — an organization admin can do it from the chat screen or in

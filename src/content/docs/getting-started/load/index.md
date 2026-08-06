@@ -29,18 +29,19 @@ Setting up a data source connector is one of the things Kai does
 for the whole configuration at once:
 
 ```text
-Create an HTTP data source configuration called "[TUTORIAL] Sample data" that fetches these four
-files into the tables opportunity, account, user and level, then run it and tell me the row counts:
-https://help.keboola.com/getting-started/opportunity.csv
-https://help.keboola.com/getting-started/account.csv
-https://help.keboola.com/getting-started/user.csv
-https://help.keboola.com/getting-started/level.csv
+Create one HTTP data source configuration called "[TUTORIAL] Sample data", with base URL
+https://help.keboola.com and four rows — one per file — fetching /getting-started/opportunity.csv,
+/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
+tables opportunity, account, user and level. Then run it and tell me the row counts.
 ```
 
-Check the result the same way [the steps below do](#check-it-worked) — four tables in Storage,
-639 / 275 / 28 / 28 rows. Doing it by hand once is still worth the ten minutes:
-[step 5](/getting-started/automate/) assumes you know where a configuration and its rows live, and
-the four files here are four **rows** of one configuration — a shape you want to have seen.
+One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
+runs this as a single task and the parallelism note below assumes that shape.
+
+**Check:** four tables in Storage with 639 / 275 / 28 / 28 rows, and a **Rows** list showing four
+entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it and
+follow the numbered steps — the ten minutes are worth it anyway, since the rest of the arc assumes
+you have seen where a configuration and its rows live.
 :::
 
 ## The sample data

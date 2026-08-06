@@ -14,8 +14,8 @@ We will use our own sample Snowflake database, so do not worry about having to g
 
 :::tip[Do it with Kai]
 Database connectors are configured the same way as any other data source
-([Integration Setup](/kai/use-cases/#integration-setup)). Say what you want connected, not what
-your credentials are:
+([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and
+say what you want connected, not what your credentials are:
 
 ```text
 Set up a Snowflake data source connector against our sample database and load the OPPORTUNITY,

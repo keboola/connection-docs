@@ -35,14 +35,22 @@ Writing SQL transformations is Kai's home ground
 schemas in front of it. Open **Kai Agent** in the top bar and ask:
 
 ```text
-Create a SQL transformation called "Denormalize opportunities" that joins my opportunity, account,
-user and level tables into one wide table out.c-denormalize-opportunities.opportunity_denorm.
+Create a SQL transformation called "Denormalize opportunities" writing to
+out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
+ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
+user as UserName plus their sales and global market, join the account as AccountName plus region,
+status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
 Outline the approach first, then build it and run it.
 ```
 
-Asking for the outline first is worth it — you get to read the joins before they run, which is the
-whole point of the [mapping model](#how-a-transformation-works) explained below. Either way, check
-the result the same way: 639 rows, 23 columns.
+Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
+different set, and the check below will not match. Asking for the outline first is worth it too:
+you get to read the joins before they run, which is what the
+[mapping model](#how-a-transformation-works) is about.
+
+**Check:** 639 rows, 23 columns. If the count differs, the columns differ — read the SQL in
+[Write the queries](#write-the-queries) to see what the arc expects, and either re-prompt or fix
+the code in place. Later steps only depend on the table name, so a close-enough table is fine.
 :::
 
 ## How a transformation works
