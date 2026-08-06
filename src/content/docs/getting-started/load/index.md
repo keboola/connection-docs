@@ -29,15 +29,18 @@ Setting up a data source connector is one of the things Kai does
 for the whole configuration at once:
 
 ```text
-Create an HTTP data source configuration called "[TUTORIAL] Sample data" with the base URL
-https://help.keboola.com and four rows fetching /getting-started/opportunity.csv,
-/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
-tables opportunity, account, user and level. Then run it and tell me the row counts.
+Create an HTTP data source configuration called "[TUTORIAL] Sample data" that fetches these four
+files into the tables opportunity, account, user and level, then run it and tell me the row counts:
+https://help.keboola.com/getting-started/opportunity.csv
+https://help.keboola.com/getting-started/account.csv
+https://help.keboola.com/getting-started/user.csv
+https://help.keboola.com/getting-started/level.csv
 ```
 
 Check the result the same way [the steps below do](#check-it-worked) — four tables in Storage,
 639 / 275 / 28 / 28 rows. Doing it by hand once is still worth the ten minutes:
-[step 5](/getting-started/automate/) assumes you know where a configuration and its rows live.
+[step 5](/getting-started/automate/) assumes you know where a configuration and its rows live, and
+the four files here are four **rows** of one configuration — a shape you want to have seen.
 :::
 
 ## The sample data

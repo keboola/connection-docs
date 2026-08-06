@@ -71,6 +71,11 @@ After signing in you land on the project dashboard. Five places matter for this 
   have both kinds show this as **Conditional Flows**.
 - **Jobs** — the log of everything that has run, successfully or not.
 
+<!-- VERIFY(owner): "Kai cannot create a project" is an inference, not a documented limit — it
+follows from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current
+project"), but no Kai page states it outright. Confirm there is no project-creation tool, and
+consider stating the boundary on kai/index.md. -->
+
 :::tip[Ask Kai to orient you]
 This is the one step of the arc Kai cannot do for you — it lives *inside* a project, so there has
 to be a project first. From here on, every step has a **Do it with Kai** block that replaces the

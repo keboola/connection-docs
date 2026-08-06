@@ -39,9 +39,13 @@ flow's header once it has tasks.
 
 ```text
 Create a flow that runs my "[TUTORIAL] Sample data" HTTP configuration, then the
-"Denormalize opportunities" transformation, then the Google Sheets destination — each one in its
-own phase, in that order.
+"Denormalize opportunities" transformation, then the Google Sheets destination, in that order.
 ```
+
+Then check the ordering yourself on the canvas: the three tasks have to sit in **three separate
+phases**, because each one needs the previous one's output. If they land in one phase, drag them
+apart — that is what [phases and tasks](#phases-and-tasks) below are about, and it is the one
+thing worth eyeballing rather than trusting.
 
 Set the **schedule** and the **notifications** yourself afterwards, in the tabs shown below. Both
 are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody

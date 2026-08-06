@@ -14,16 +14,18 @@ Google Drive is commonly used for sharing small reference tables between differe
 For our purposes, create a Google spreadsheet from the [level.csv](/getting-started/level.csv) file.
 Imagine someone shared the *level* table with you through Google Drive.
 
-:::tip[Do it with Kai — except the authorization]
-Once the spreadsheet exists, Kai can create the connector configuration for you
+:::tip[Do it with Kai — after you authorize]
+Kai can create the connector configuration for you
 ([Integration Setup](/kai/use-cases/#integration-setup)):
 
 ```text
-Create a Google Sheets data source configuration that loads my "level" spreadsheet into Storage.
+Create a Google Sheets data source configuration for loading a spreadsheet into Storage.
 ```
 
-The **Google authorization is yours to do** — it is a consent screen in your own Google account.
-Authorize the configuration first, then let Kai pick the sheet and run it.
+Two parts stay yours, both because they happen inside Google rather than Keboola: the
+**authorization** consent screen, and the **Drive file picker** where you choose the spreadsheet
+(steps 5–9 below). Once the sheet is selected, Kai can run the configuration and tell you what
+landed.
 :::
 
 ## Prepare

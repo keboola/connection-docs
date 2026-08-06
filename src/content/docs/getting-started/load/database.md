@@ -14,18 +14,21 @@ We will use our own sample Snowflake database, so do not worry about having to g
 
 :::tip[Do it with Kai]
 Database connectors are configured the same way as any other data source
-([Integration Setup](/kai/use-cases/#integration-setup)) — hand Kai the credentials from the step
-below and let it build the configuration and its query:
+([Integration Setup](/kai/use-cases/#integration-setup)). Say what you want connected, not what
+your credentials are:
 
 ```text
-Set up a Snowflake data source connector against host kebooladev.snowflakecomputing.com,
-warehouse DEV, with username, password, database and schema all set to HELP_TUTORIAL. Load the
-opportunity table into Storage.
+Set up a Snowflake data source connector against our sample database and load the OPPORTUNITY,
+ACCOUNT and USER tables into Storage.
 ```
 
-Those are the sample credentials from [step 5](#configure-snowflake-data-source-connector) below —
-read them there if the prompt and the steps ever disagree. The pattern is the same for every
-database connector Keboola supports, which is the reason to walk it once by hand.
+**Never paste a password into the chat.** Kai prompts you for credentials through a secure form
+instead — that is its documented behavior, and
+[Kai's own guidance](/kai/getting-started/#tips-for-new-users) says the same. The values to type into
+that form are the sample ones in [step 5](#configure-snowflake-data-source-connector) below.
+
+The pattern is identical for every database connector Keboola supports, which is the reason to
+walk it once by hand.
 :::
 
 ## Configure Snowflake Data Source Connector

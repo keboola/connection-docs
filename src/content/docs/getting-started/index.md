@@ -49,19 +49,25 @@ If you would rather understand the pieces before touching them, read the
 what a stack is. This guide explains each piece as it comes up, so you can also just start.
 :::
 
-## Two ways to do every step
+## Two ways to do most steps
 
-Each step below can be done by clicking through the UI or by asking **Kai**, Keboola's built-in
-assistant, to do it — same configuration, same result. Every page carries a **Do it with Kai**
-block with the exact prompt, right next to the manual steps it replaces.
+The building steps — load, transform, deliver, automate — can be done by clicking through the UI
+or by asking **Kai**, Keboola's built-in assistant, to do them. Each of those pages carries a
+**Do it with Kai** block with a copy-pasteable prompt, right next to the manual steps it replaces.
 
-The clicking is written out in full and stays the primary path, for two reasons: Kai is in
-**Public Beta** and an organization admin has to enable it, so the button may simply not be there
-yet; and the arc's later steps assume you have seen where a configuration, a mapping and a phase
-live. Do it by hand once, then let Kai do it forever after.
+Two things stay yours either way: creating the project in step 1, since Kai works *inside* a
+project, and authorizing a Google account in step 4, since that is a consent screen in your own
+Google account.
 
-See [Get started with Kai](/kai/getting-started/) for turning it on, and
-[use cases](/kai/use-cases/) for what else it does.
+The clicking is written out in full and stays the primary path, because the later steps assume
+you have seen where a configuration, a mapping and a phase live. Do it by hand once, then let Kai
+do it after that.
+
+Kai is in **Public Beta**. The button is visible to every user on a supported stack, but the
+feature has to be switched on — an organization admin can do it from the chat screen or in
+**Settings → Features**, or you can ask Keboola Support. There is also a monthly message
+allowance, which matters on the Free Plan. See [Get started with Kai](/kai/getting-started/) for
+both, and [use cases](/kai/use-cases/) for what else it does.
 
 ## The steps
 

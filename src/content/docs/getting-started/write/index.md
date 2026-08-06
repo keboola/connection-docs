@@ -24,19 +24,26 @@ ones. -->
   [Transform Your Data](/getting-started/transform/).
 - A Google account you can authorize.
 
-:::tip[Do it with Kai — except the authorization]
-Kai configures data destinations the same way it configures data sources
-([Integration Setup](/kai/use-cases/#integration-setup)), so it can create and fill in this
-configuration for you:
+<!-- VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the
+conservative reading, not a documented limit — kai/use-cases.md advertises setting up a generic
+extractor "with pagination and OAuth authentication", which is about configuring auth, not granting
+it. Same caveat on load/googlesheets.md. Worth documenting on kai/ what Kai can and cannot do
+around authorizations. -->
+
+:::tip[Do it with Kai — after you authorize]
+Kai [configures data destinations](/kai/) as well as data sources, but this step has an
+order to it: **the Google authorization is yours**, in steps 4–6 below. It is a consent screen in
+your own Google account, not something the assistant can click through.
+
+So do steps 1–6 by hand, then hand the rest over:
 
 ```text
-Create a Google Sheets data destination configuration called "[TUTORIAL] Opportunity denorm to
-Sheets" that writes out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet.
+In my "[TUTORIAL] Opportunity denorm to Sheets" configuration, write
+out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet and run it.
 ```
 
-**The Google authorization is yours to do**, in steps 4–7 below — it is a consent screen in your
-Google account, not something the assistant can click through. Expect to hand the configuration
-back to Kai after you have authorized it.
+Check the result the same way [the steps below do](#run-it-and-check-the-result) — every row of
+`opportunity_denorm` in the sheet, joined columns included.
 :::
 
 ## Sending data out

@@ -31,8 +31,8 @@ have to edit the queries to match.
 
 :::tip[Do it with Kai]
 Writing SQL transformations is Kai's home ground
-([SQL Transformations](/kai/use-cases/#sql-transformations)), and it knows your backend, so it
-writes the dialect your project actually runs. Open **Kai Agent** in the top bar and ask:
+([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
+schemas in front of it. Open **Kai Agent** in the top bar and ask:
 
 ```text
 Create a SQL transformation called "Denormalize opportunities" that joins my opportunity, account,
