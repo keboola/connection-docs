@@ -36,7 +36,7 @@ Then create a [service account](https://cloud.google.com/bigquery/docs/authentic
 of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 ***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
-[load them from Google Sheets](/tutorial/load/googlesheets/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
+[load them from Google Sheets](/tutorial/load/googlesheets/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manual-data-loading).*
 
 ### Prepare
 Before you start, have a Google service account and a Google Storage bucket ready.

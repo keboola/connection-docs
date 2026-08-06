@@ -1,0 +1,1448 @@
+---
+/**
+ * InkDash.astro — a small canvas game for the 404 page.
+ *
+ * The Keboola octopus swims (arrow keys / WASD, or drag on touch), collects data
+ * cubes and dodges HTTP-error jellyfish. Three lives, endless levels, high score
+ * in localStorage. Everything is drawn in code — no sprite assets — so it stays
+ * crisp on retina and follows the light/dark theme.
+ *
+ * The panel sits under the Home/Search buttons — after everything that recovers
+ * the visit, before the fallback link list — so its height is spent out of that
+ * list's fold budget. Hence the split that carries the layout: COMPACT WHILE
+ * RESTING (~215px) and only growing to the playable geometry once a game starts. A
+ * permanently tall panel pushed those links below the fold (measured), a
+ * permanently short one left a field too shallow to dodge in — and nobody is
+ * reading recovery links while playing, so that is when the height is free to
+ * take. start() scrolls the grown field into view when it doesn't fit.
+ *
+ * The scene is OPEN WATER — no seabed, no floor line. Depth comes from the wash,
+ * three things layered over it (slanted light shafts, drifting particulate sized
+ * and paced together so the small stuff reads as far away, a vignette) and from
+ * drawing big: the world is 840 units wide, not 960, which is what keeps the
+ * octopus from being a speck in an empty rectangle.
+ *
+ * Four things this deliberately gets right:
+ *   1. It never steals the keyboard. Movement keys are only preventDefault-ed
+ *      while a game runs, and starting is a real <button> rather than a global
+ *      space handler — hijacking space would break page scrolling.
+ *   2. It tears down on `astro:before-swap`. This site runs ClientRouter and a
+ *      broken internal link lands here through a client-side swap, so a leaked
+ *      rAF loop and window listeners are a real risk.
+ *   3. Enemies differ by SHAPE, not only by their number: labels are dropped on
+ *      narrow panels (below ~7 CSS px they are a smudge), so on a phone the code
+ *      is invisible and the silhouette has to carry the difference.
+ *   4. HUD text is sized in CSS pixels, not world units, or it shrinks with the
+ *      panel and becomes unreadable on a phone.
+ */
+---
+
+{/* tabindex="-1" so start() has somewhere to put focus. The start button hides
+    itself when a game begins, which dropped focus to <body> — nothing announced,
+    and a screen-reader user had no idea what had just happened. */}
+<div class="inkdash" data-state="idle" tabindex="-1">
+  <canvas class="inkdash-canvas" aria-hidden="true"></canvas>
+
+  {/* Before the controls on purpose: read linearly, "this is optional" has to
+      arrive BEFORE the button it excuses, and `aria-describedby` ties it to that
+      button so it is announced with it rather than only in reading order. */}
+  <p class="sr-only" id="inkdash-note">
+    This is an optional game and is not needed to use the documentation. The
+    suggestions and the Home and Search buttons above, and the links below, are
+    what you want if you are looking for a page. While it runs, press Escape or
+    the Stop button to leave.
+  </p>
+
+  {/* The start control is a real button covering the whole panel: click and tap
+      work everywhere, and space/Enter work natively once it has focus — so we
+      never register a global space handler and never take scrolling from the
+      page. The pill inside is styling, not a nested control. */}
+  <button class="inkdash-start" type="button" aria-describedby="inkdash-note">
+    <span class="inkdash-start-msg">Well, since you are here…</span>
+    <span class="inkdash-start-cta">Play</span>
+  </button>
+
+  {/* A sibling of the start button, not a child: its <kbd> chips would otherwise
+      be read out as part of the button's name. It sits on top of that button, so
+      the CSS has to let clicks pass through it. */}
+  {/* Two wordings, one line. Below 600px the <kbd> version wrapped to two lines
+      and used to be hidden outright — which left a phone with no statement of how
+      to move OR how to get out, since there is no Esc key and drag-to-swim means
+      the field's edges are not an exit either. */}
+  <p class="inkdash-hint">
+    <span class="inkdash-hint-keys">
+      <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>WASD</kbd> to swim, or just drag ·
+      <kbd>Esc</kbd> to leave
+    </span>
+    <span class="inkdash-hint-touch">Arrows or drag to swim · tap Stop to leave</span>
+  </p>
+
+  {/* Outside the start button on purpose: that button is hidden while a game
+      runs, and this is the only way out for anyone without an Esc key. */}
+  <button class="inkdash-stop" type="button">Stop</button>
+
+  {/* Touch controls. Dragging works, but on a phone your thumb then sits on top
+      of the field you are trying to read — so a translucent D-pad in the corner,
+      shown only on coarse pointers and only while a game runs. It feeds the same
+      key set the keyboard fills, so nothing downstream knows the difference, and
+      two buttons at once give a diagonal. Real buttons with labels rather than
+      canvas-drawn hit zones: `display: none` on desktop keeps them out of the tab
+      order there, and here they are the only controls a screen reader can find. */}
+  <div class="inkdash-pad">
+    <button class="inkdash-pad-btn pad-up" type="button" data-dir="ArrowUp" aria-label="Swim up">↑</button>
+    <button class="inkdash-pad-btn pad-left" type="button" data-dir="ArrowLeft" aria-label="Swim left">←</button>
+    <button class="inkdash-pad-btn pad-down" type="button" data-dir="ArrowDown" aria-label="Swim down">↓</button>
+    <button class="inkdash-pad-btn pad-right" type="button" data-dir="ArrowRight" aria-label="Swim right">→</button>
+  </div>
+</div>
+
+<script>
+  /* ---------------- world (logical units) ---------------- */
+  /* Two world heights, one per state: compact at rest, the full field in play.
+     Both are paired in CSS with a rendered height that keeps CSS-pixels-per-world
+     -unit at ~0.86 either way, so the octopus does NOT change size when the panel
+     grows — only more water appears above and below it.
+
+     BASE_W is 840 rather than the panel's own 960-ish proportions: fewer world
+     units across the same box means everything is drawn bigger. That is the one
+     effective cure for "small sprites in an empty rectangle" — atmosphere helps,
+     but scale is what makes the scene feel inhabited.
+
+     Within a state H is fixed and the world's WIDTH follows the panel's real
+     aspect ratio (see CSS). At a phone width a fixed-width world would render an
+     87px-tall panel — unplayable, the 40px Stop button alone covering half of it.
+     So CSS holds a minimum height and the world narrows instead of shortening. */
+  const BASE_W = 840;
+  const H_IDLE = 250;
+  const H_PLAY = 540;
+  let H = H_IDLE;
+
+  /* Open water: the floor is the panel edge, with just enough margin that a
+     sprite never clips against it. There is no seabed line — it made the scene
+     read as a shallow tank, and the version everyone liked didn't have one. */
+  const FLOOR_PAD = 6;
+
+  const PLAYER_R = 17;
+  const ACCEL = 0.62;
+  const FRICTION = 0.9;
+  const MAX_SPEED = 7;
+
+  const CUBE_HALF = 8;
+  const CUBES_PER_LEVEL = 10;
+
+  const ENEMY_R = 18;
+  const SQUID_R = 30;
+  const START_LIVES = 3;
+  /* One more life every five levels, up to this. Without it the game was a
+     three-mistake run: playtesters reliably died on level 10 with all three lives
+     and nobody ever saw the level-15 boss. */
+  const MAX_LIVES = 5;
+  const INVULN_FRAMES = 90; // ~1.5s at 60fps
+  const HI_KEY = 'kbc-inkdash-hi';
+
+  const BRAND = '#097CF7';
+  const CUBE_COLOR = '#12b886';
+
+  /* Enemy roster as data, not scattered conditionals. `from` is the level the
+     type first appears on; all of them stay in play afterwards. Colours stay in
+     one warm-red family so "hazard" reads instantly, and the three behaviors are
+     three SILHOUETTES — dome drifter, spiked diamond chaser, big squid — because
+     on a narrow panel the labels drop out and the shape has to carry it. */
+  const ENEMY_TYPES = [
+    { code: '404', from: 1, behavior: 'drift', color: '#e8384f' },
+    { code: '500', from: 2, behavior: 'drift', color: '#d92d43' },
+    { code: '403', from: 3, behavior: 'drift', color: '#e8574f' },
+    { code: '429', from: 4, behavior: 'drift', color: '#c92a3f' },
+    { code: '502', from: 5, behavior: 'drift', color: '#b62438' },
+    { code: '504', from: 6, behavior: 'chase', color: '#8f1d2c' },
+    /* The deep-water boss: darkest, biggest, and the only one that moves in
+       bursts. See the 'lunge' branch in update() for what it actually does. */
+    { code: '503', from: 15, behavior: 'lunge', color: '#6b1030' },
+  ] as const;
+
+  type EnemyType = (typeof ENEMY_TYPES)[number];
+
+  const radiusOf = (t: EnemyType) => (t.behavior === 'lunge' ? SQUID_R : ENEMY_R);
+
+  /* Squid pacing. Deliberately NOT derived from the level's speed: the read of the
+     thing is a stalk broken by one uncontrolled shove, and that has to hold on
+     level 25 too. The stalk is still slower than the player's 7 — the shove is
+     nearly twice it, which is exactly why the wind-up telegraph exists. */
+  const GLIDE_SPEED = 2;
+  const WIND_FRAMES = 24; // ~0.4s telegraph
+  const LUNGE_SPEED = 12.4;
+  const LUNGE_FRAMES = 40;
+
+  /** Enemy roster, count and speed for a level. */
+  function levelPlan(level: number) {
+    /* Bosses are spawned by explicit count, so they must stay out of the random
+       pool — otherwise level 15 could roll a field of nothing but squids. */
+    const available = ENEMY_TYPES.filter((t) => t.from <= level && t.behavior !== 'lunge');
+    const squids = level >= 15 ? Math.min(1 + Math.floor((level - 15) / 4), 3) : 0;
+    return {
+      available,
+      newest: available[available.length - 1]!,
+      /* Named on the level that introduces it, boss or not. */
+      intro: ENEMY_TYPES.find((t) => t.from === level),
+      squids,
+      /* Grows every other level and stops at 9. It used to add one per level up to
+         11, which is what turned level 9 onward into a wall — measured on real
+         players, runs ended at 10 with all three lives spent.
+
+         Once a squid is on the field the swarm gets out of the way almost
+         entirely: 11 jellyfish plus a charging boss was unreadable chaos, and the
+         boss is the level. Three or four of them, and the room to dodge is the
+         point. */
+      count: squids
+        ? (squids >= 2 ? 3 : 4)
+        : Math.min(3 + Math.floor((level - 1) * 0.75), 9),
+      /* Approaches 4.7 instead of climbing forever. The old linear ramp
+         (1.7 + 0.28 per level) passed the player's own cap of 7 around level 20,
+         so late levels were not hard, they were unplayable: nothing to dodge to.
+         Pressure past the plateau comes from density and from the chasers, which
+         is pressure a player can actually answer. */
+      speed: 1.7 + 3 * (1 - Math.exp(-(level - 1) / 6)),
+    };
+  }
+
+  const MOVE_KEYS = new Set([
+    'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+    'w', 'a', 's', 'd', 'W', 'A', 'S', 'D',
+  ]);
+
+  function initInkDash() {
+    const root = document.querySelector<HTMLElement>('.inkdash');
+    if (!root) return null;
+
+    const canvas = root.querySelector<HTMLCanvasElement>('.inkdash-canvas');
+    const startBtn = root.querySelector<HTMLButtonElement>('.inkdash-start');
+    const startMsg = root.querySelector<HTMLElement>('.inkdash-start-msg');
+    const startCta = root.querySelector<HTMLElement>('.inkdash-start-cta');
+    const stopBtn = root.querySelector<HTMLButtonElement>('.inkdash-stop');
+    if (!canvas || !startBtn || !startMsg || !startCta || !stopBtn) return null;
+
+    /* H is module-level state, so a re-boot (ClientRouter swap) has to put the
+       world back to the resting height it renders at. */
+    H = H_IDLE;
+    root.dataset.state = 'idle';
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------------- theme ---------------- */
+    let dark = true;
+    const readTheme = () => {
+      const attr = document.documentElement.dataset.theme;
+      dark = attr
+        ? attr === 'dark'
+        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+    readTheme();
+    const themeObserver = new MutationObserver(() => {
+      readTheme();
+      invalidateWash();
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    const ink = () => (dark ? 'rgba(255,255,255,0.86)' : 'rgba(9,32,56,0.86)');
+    /* Not as dim as it sounds in the light theme: the wash it sits on is now a
+       saturated sea blue rather than near-white, so 0.34 alpha disappeared. */
+    const inkDim = () => (dark ? 'rgba(255,255,255,0.42)' : 'rgba(9,32,56,0.56)');
+
+    const lerp3 = (a: number[], b: number[], t: number) => [
+      a[0]! + (b[0]! - a[0]!) * t,
+      a[1]! + (b[1]! - a[1]!) * t,
+      a[2]! + (b[2]! - a[2]!) * t,
+    ];
+    const css3 = (c: number[], alpha = 1) =>
+      `rgba(${Math.round(c[0]!)},${Math.round(c[1]!)},${Math.round(c[2]!)},${alpha})`;
+
+    /* "Going deeper" as levels climb: the wash keeps its shape and slides toward
+       a darker, more indigo end of the same ramp. */
+    const depth = () => Math.min((level - 1) / 6, 1);
+
+    /* Top and bottom stop of the water. Opaque, saturated, and deliberately not
+       pale: a near-white gradient read as a marketing banner rather than as the
+       sea, which is the whole reason this palette changed. Sea blue in the light
+       theme (#cfe6f5 → #7fb4d8), deep navy in the dark one (#071426 → #123a5c). */
+    const water = () => {
+      const d = depth();
+      return dark
+        ? [lerp3([10, 27, 48], [12, 14, 44], d), lerp3([22, 69, 110], [30, 32, 96], d)]
+        : [lerp3([207, 230, 245], [168, 198, 222], d), lerp3([127, 180, 216], [96, 132, 196], d)];
+    };
+
+    /* The wash and the vignette are two gradients that only change when the box,
+       the theme or the level's depth changes — building them per frame was pure
+       waste in a decoration nobody is watching most of the time. Rebuilt lazily
+       on the next draw after invalidateWash(). */
+    let washGrad: CanvasGradient | null = null;
+    let vignetteGrad: CanvasGradient | null = null;
+    const invalidateWash = () => {
+      washGrad = null;
+      vignetteGrad = null;
+    };
+
+    /* Sunlight from above. White in both themes — tinting it to the water only
+       made it vanish. */
+    const rayAlpha = () => (dark ? 0.07 : 0.1);
+    /* Particulate: white in the dark theme reads as plankton catching the light;
+       in the light theme white on sea blue does the same without going chalky. */
+    const moteColor = (a: number) =>
+      dark ? `rgba(255,255,255,${a})` : `rgba(255,255,255,${a * 1.25})`;
+
+    /* A halo behind cubes and jellyfish, so they sit IN the water rather than on
+       top of a flat fill. One cached radial-gradient bitmap per colour, drawn with
+       drawImage: ctx.shadowBlur is the obvious way and costs a full-canvas blur
+       per object — twenty of those a frame is a measurable stall on a phone. */
+    const glowCache = new Map<string, HTMLCanvasElement>();
+    const rgba = (hex: string, a: number) => {
+      const n = parseInt(hex.slice(1), 16);
+      return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+    };
+    const glowSprite = (color: string) => {
+      /* Keyed by theme as well as colour: a halo strong enough to be seen in deep
+         navy is a smudge on daylight water. */
+      const key = `${color}|${dark ? 'd' : 'l'}`;
+      const hit = glowCache.get(key);
+      if (hit) return hit;
+      const size = 64;
+      const off = document.createElement('canvas');
+      off.width = size;
+      off.height = size;
+      const octx = off.getContext('2d')!;
+      const peak = dark ? 0.5 : 0.26;
+      const g = octx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      /* Three stops, not two: a straight colour→transparent ramp reads as a flat
+         disc with a visible rim rather than as light bleeding into water. */
+      g.addColorStop(0, rgba(color, peak));
+      g.addColorStop(0.35, rgba(color, peak * 0.4));
+      g.addColorStop(1, rgba(color, 0));
+      octx.fillStyle = g;
+      octx.fillRect(0, 0, size, size);
+      glowCache.set(key, off);
+      return off;
+    };
+    const glow = (x: number, y: number, r: number, color: string) => {
+      const s = glowSprite(color);
+      ctx.drawImage(s, x - r, y - r, r * 2, r * 2);
+    };
+
+    /* ---------------- canvas sizing (DPR-aware) ---------------- */
+    let scale = 1;
+    /* CSS pixels per world unit. The canvas transform draws in world units, so
+       a fixed world-unit font shrinks with the panel: at a 340px-wide panel a
+       15-unit label lands at ~5px. HUD text goes through cssPx() to stay
+       physically constant. */
+    let cssPerWorld = 1;
+    let W = BASE_W; // world units across; recomputed from the rendered aspect
+    const cssPx = (size: number) => size / cssPerWorld;
+
+    /* CSS owns the panel's rendered size — an aspect ratio and a min-height per
+       state — and this only reads it. Setting the height from here instead would
+       both cause a layout shift on load and risk an observer feedback loop. */
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      cssPerWorld = rect.height / H; // uniform, so world units stay square
+      scale = cssPerWorld * dpr;
+      W = rect.width / cssPerWorld;
+    };
+    /* resize() stays pure geometry; the observer also re-lays-out the atmosphere,
+       which is spread across the world box. Split this way because the first
+       resize() runs before the scene arrays are declared below — calling into
+       them from here would hit their temporal dead zone. */
+    const ro = new ResizeObserver(() => {
+      resize();
+      reflowAmbient();
+      invalidateWash();
+    });
+    ro.observe(canvas);
+    resize();
+
+    /* ---------------- state ---------------- */
+    type State = 'idle' | 'playing' | 'dead';
+    let state: State = 'idle';
+
+    /* Whether the panel is in the viewport, measured at the moment it is asked
+       rather than read from the IntersectionObserver below. The observer is right
+       for pausing the loop, but wrong as the keyboard's source of truth: it is
+       asynchronous, it carries an 80px margin, and it does not fire at all in a
+       background tab — three ways for the game to keep swallowing arrow keys while
+       the panel is nowhere near the screen. One layout read per movement keydown
+       is nothing next to the frame we are already drawing. */
+    const panelInView = () => {
+      const b = root.getBoundingClientRect();
+      return b.bottom > 0 && b.top < window.innerHeight;
+    };
+
+    let hi = 0;
+    try {
+      hi = parseInt(localStorage.getItem(HI_KEY) || '0', 10) || 0;
+    } catch {}
+
+    let score = 0;
+    let lives = START_LIVES;
+    let level = 1;
+    let invuln = 0;
+    let banner = '';
+    let bannerTimer = 0;
+    let tick = 0;
+    let killedBy = '404';
+
+    const player = { x: W * 0.25, y: H / 2, vx: 0, vy: 0 };
+    let cubes: { x: number; y: number; phase: number }[] = [];
+    /* `mode` and `timer` only mean anything for the squid's three-state cycle;
+       the drifters and the chaser carry them unused rather than earning a second
+       array and a second draw loop. */
+    let enemies: {
+      x: number; y: number; vx: number; vy: number; type: EnemyType;
+      mode: 'glide' | 'wind' | 'lunge'; timer: number;
+    }[] = [];
+    /* Particulate in one array, not one per layer: size, speed and alpha are
+       correlated on purpose, so the small faint slow ones read as far away and
+       the big ones as close. That correlation IS the parallax — separate layer
+       bookkeeping would buy nothing. `front` is the only real split: a handful of
+       large motes drift over the player, which is what sells the water as a
+       volume the octopus is inside rather than a backdrop behind it. */
+    let motes: {
+      x: number; y: number; r: number; v: number; a: number; drift: number; front: boolean;
+    }[] = [];
+
+    /* Light shafts: fixed geometry per scene, breathing only in alpha. */
+    let rays: { x: number; w: number; slant: number; phase: number }[] = [];
+
+    /* World box the current atmosphere was laid out for. */
+    let ambientW = 0;
+    let ambientH = 0;
+
+    const keys = new Set<string>();
+    let pointerTarget: { x: number; y: number } | null = null;
+
+    const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+    /* The band kept clear for the HUD scales with the HUD text, which is sized
+       in CSS pixels: on a narrow strip a constant band would let one-row HUD
+       text sit on top of the play field. */
+    const topBand = () => Math.max(24, cssPx(17) + cssPx(9));
+    const playTop = () => topBand() + PLAYER_R;
+    const playBottom = () => H - FLOOR_PAD - PLAYER_R;
+
+    /* Atmosphere is per-SCENE, not per-level: motes and shafts belong to the
+       panel, so the resting state gets them too — an idle box of flat gradient is
+       exactly what read as lifeless. Called again when the panel resizes, since
+       both are laid out across the world box. */
+    function spawnAmbient() {
+      const area = (W * H) / 1000;
+      /* Kept lean on purpose: this is an easter egg, and past ~40 motes the extra
+         arcs cost frame time nobody can see the benefit of. */
+      motes = Array.from({ length: Math.round(Math.min(Math.max(area * 0.14, 18), 40)) }, () => {
+        /* One roll drives size, speed and opacity together: near motes are big,
+           quick and brighter, far ones small, slow and faint. */
+        const near = Math.pow(rand(0, 1), 1.7);
+        return {
+          x: rand(0, W),
+          y: rand(0, H),
+          r: 0.7 + near * 2.2,
+          v: 0.12 + near * 0.55,
+          a: 0.05 + near * 0.16,
+          drift: rand(0, Math.PI * 2),
+          front: false,
+        };
+      });
+
+      /* The few large ones that pass in FRONT of everything. Kept faint and
+         soft-edged: at full opacity they read as dirt on the screen. */
+      for (let i = 0; i < 6; i++) {
+        motes.push({
+          x: rand(0, W),
+          y: rand(0, H),
+          r: rand(4, 9),
+          v: rand(0.8, 1.4),
+          a: rand(0.05, 0.09),
+          drift: rand(0, Math.PI * 2),
+          front: true,
+        });
+      }
+
+      rays = Array.from({ length: 3 }, (_, i) => ({
+        x: W * (0.14 + i * 0.3) + rand(-30, 30),
+        w: rand(W * 0.06, W * 0.13),
+        slant: rand(0.18, 0.42),
+        phase: rand(0, Math.PI * 2),
+      }));
+
+      ambientW = W;
+      ambientH = H;
+    }
+
+    /* Only re-scatter when the box has actually changed shape. A ResizeObserver
+       fires on every pixel of a window drag, and respawning on each one makes the
+       whole scene twitch. */
+    function reflowAmbient() {
+      if (Math.abs(W - ambientW) < W * 0.12 && H === ambientH) return;
+      spawnAmbient();
+    }
+
+    /* Emptiest of a handful of candidate spots — the one whose nearest enemy is
+       furthest away. Six fixed candidates rather than random sampling: the field
+       is small, the answer has to be instant, and a deterministic set means the
+       respawn never lands somewhere absurd like hard against a wall. */
+    function respawnSpot() {
+      const top = playTop();
+      const bottom = playBottom();
+      const mid = (top + bottom) / 2;
+      const candidates = [
+        { x: W * 0.2, y: mid },
+        { x: W * 0.8, y: mid },
+        { x: W * 0.5, y: top + (bottom - top) * 0.18 },
+        { x: W * 0.5, y: bottom - (bottom - top) * 0.18 },
+        { x: W * 0.2, y: top + (bottom - top) * 0.22 },
+        { x: W * 0.8, y: bottom - (bottom - top) * 0.22 },
+      ];
+
+      let best = candidates[0]!;
+      let bestClearance = -1;
+      for (const c of candidates) {
+        let nearest = Infinity;
+        for (const e of enemies) {
+          nearest = Math.min(nearest, Math.hypot(e.x - c.x, e.y - c.y) - radiusOf(e.type));
+        }
+        if (nearest > bestClearance) {
+          bestClearance = nearest;
+          best = c;
+        }
+      }
+      return best;
+    }
+
+    function spawnLevel() {
+      const plan = levelPlan(level);
+
+      cubes = [];
+      let guard = 0;
+      while (cubes.length < CUBES_PER_LEVEL && guard++ < 800) {
+        const c = {
+          x: rand(40, W - 40),
+          y: rand(playTop(), playBottom()),
+          phase: rand(0, Math.PI * 2),
+        };
+        const clearOfPlayer = Math.hypot(c.x - player.x, c.y - player.y) > 80;
+        const clearOfCubes = cubes.every((o) => Math.hypot(o.x - c.x, o.y - c.y) > 52);
+        if (clearOfPlayer && clearOfCubes) cubes.push(c);
+      }
+
+      enemies = [];
+      /* Squids first, then the pool: they are the big ones, so they get first
+         pick of the clear space rather than being squeezed into what's left. */
+      const squidType = ENEMY_TYPES.find((t) => t.behavior === 'lunge')!;
+      const total = plan.squids + plan.count;
+
+      for (let i = 0; i < total; i++) {
+        const squid = i < plan.squids;
+        /* One of the level's newest pool type is guaranteed, so a new code
+           actually shows up on the level that introduces it. */
+        const type = squid
+          ? squidType
+          : i === plan.squids
+            ? plan.newest
+            : plan.available[Math.floor(rand(0, plan.available.length))]!;
+
+        const r = radiusOf(type);
+        const eTop = topBand() + r;
+        const eBottom = H - FLOOR_PAD - r;
+
+        /* Spread across the whole strip, keeping clear of the player's corner
+           and of each other. Confining spawns to one half — the first attempt at
+           "don't land on the player" — bunched later levels into a wall on the
+           right and left the other half trivially safe. A squid needs more room
+           on both counts, hence the radius-scaled distances. */
+        let x = 0;
+        let y = 0;
+        let tries = 0;
+        do {
+          x = rand(r + 12, W - r - 12);
+          y = rand(eTop, eBottom);
+          tries++;
+        } while (
+          tries < 60 &&
+          (Math.hypot(x - player.x, y - player.y) < 190 + (squid ? 80 : 0) ||
+            enemies.some((o) => Math.hypot(o.x - x, o.y - y) < 52 + r + radiusOf(o.type) * 0.5))
+        );
+
+        const dir = rand(0, Math.PI * 2);
+        const speed = squid
+          ? GLIDE_SPEED
+          : type.behavior === 'chase'
+            ? plan.speed * 0.55
+            : plan.speed;
+        enemies.push({
+          x, y,
+          vx: Math.cos(dir) * speed,
+          vy: Math.sin(dir) * speed,
+          type,
+          mode: 'glide',
+          /* Staggered, so two squids don't shove in unison. */
+          timer: squid ? rand(50, 110) : 0,
+        });
+      }
+    }
+
+    function start() {
+      score = 0;
+      lives = START_LIVES;
+      level = 1;
+      invuln = 0;
+      banner = '';
+      bannerTimer = 0;
+
+      /* Grow to the play geometry BEFORE anything reads W or H. The attribute
+         flip is what resizes the panel (CSS holds both aspect ratios), and
+         resize() re-reads the result, so spawning below lands in the full field
+         rather than in the resting one.
+
+         Deliberately not animated: the world's width is derived from the rendered
+         box, so a height transition would re-scale the field on every frame of
+         it — and the ResizeObserver would churn through the whole thing. */
+      H = H_PLAY;
+      root.dataset.state = 'playing';
+      resize();
+      spawnAmbient();
+      invalidateWash();
+
+      player.x = W * 0.25;
+      player.y = H / 2;
+      player.vx = 0;
+      player.vy = 0;
+      pointerTarget = null;
+      keys.clear();
+      spawnLevel();
+      state = 'playing';
+
+      /* The button that was just clicked is now display:none, which drops focus
+         to <body>. Take it onto the panel instead — not onto Stop, where a
+         habitual space press would quit the game it just started. */
+      root.focus({ preventScroll: true });
+
+      /* The panel is the last thing on the page, so the field it just grew into
+         is very likely half below the viewport. Only scroll when it doesn't
+         already fit — an unconditional scrollIntoView yanks the page for anyone
+         who had it in view already. */
+      const box = root.getBoundingClientRect();
+      if (box.top < 0 || box.bottom > window.innerHeight) {
+        /* The panel grows downward, so on a short viewport the new field can run
+           past the bottom even from mid-page. window.scrollTo, not
+           element.scrollIntoView: an ancestor in the Starlight layout is itself a
+           scroll container, so scrollIntoView scrolled THAT — measured, the page
+           moved 5px and the field stayed below the fold. Centre the panel when it
+           fits, otherwise pin it near the top. */
+        const margin = Math.max(12, (window.innerHeight - box.height) / 2);
+        window.scrollTo({
+          top: Math.max(0, window.scrollY + box.top - margin),
+          behavior: reduceMotion ? 'auto' : 'smooth',
+        });
+      }
+    }
+
+    /* Called on every exit path, not just death — quitting with a good score
+       should still record it. */
+    function recordHighScore() {
+      if (score <= hi) return;
+      hi = score;
+      try {
+        localStorage.setItem(HI_KEY, String(hi));
+      } catch {}
+    }
+
+    function stop(reason: 'dead' | 'idle') {
+      state = reason;
+      /* Back to the compact panel on every exit — including death, so the links
+         below come back into reach instead of staying pushed down by a field
+         nobody is playing in. */
+      H = H_IDLE;
+      root.dataset.state = reason;
+      resize();
+      spawnAmbient();
+      invalidateWash();
+      keys.clear();
+      pointerTarget = null;
+      recordHighScore();
+      startMsg.textContent =
+        reason === 'dead'
+          ? `Caught by a ${killedBy} — score ${score}.`
+          : 'Well, since you are here…';
+      startCta.textContent = reason === 'dead' ? 'Play again' : 'Play';
+    }
+
+    /* ---------------- input ---------------- */
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (state === 'playing' && e.key === 'Escape') {
+        stop('idle');
+        return;
+      }
+      /* Only swallow movement keys while a game is running AND the panel is
+         actually on screen. Both halves are load-bearing: without the first the
+         page loses keyboard scrolling entirely, and without the second a game
+         left running while the reader scrolls down to the recovery links keeps
+         eating the arrow keys — measured, the page would not move at all, with
+         nothing on screen to explain why (the "Esc to leave" hint is hidden
+         during play). Space is never captured — starting is the button's job. */
+      if (state !== 'playing' || !panelInView()) return;
+      if (MOVE_KEYS.has(e.key)) {
+        e.preventDefault();
+        keys.add(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+      }
+    };
+    const onKeyUp = (e: KeyboardEvent) => {
+      keys.delete(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+    };
+    const onBlur = () => keys.clear();
+
+    /* Clamped into the play area, not just converted: a finger dragged above the
+       top edge (into the HUD band) or past a side used to leave the target
+       outside the field, and the octopus would push into the wall forever. */
+    const pointerPos = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * W;
+      const y = ((e.clientY - rect.top) / rect.height) * H;
+      return {
+        x: Math.max(PLAYER_R, Math.min(W - PLAYER_R, x)),
+        y: Math.max(playTop(), Math.min(playBottom(), y)),
+      };
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (state !== 'playing') return;
+      pointerTarget = pointerPos(e);
+      canvas.setPointerCapture?.(e.pointerId);
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (state !== 'playing' || !pointerTarget) return;
+      e.preventDefault();
+      pointerTarget = pointerPos(e);
+    };
+    const onPointerUp = () => {
+      pointerTarget = null;
+    };
+    const onStopClick = () => {
+      if (state === 'playing') stop('idle');
+    };
+
+    /* D-pad. Each button owns its own pointer: capture on press so the release
+       lands here even if the thumb slides off, and hold the direction in the same
+       `keys` set the keyboard uses — which is what makes two buttons at once come
+       out as a diagonal for free. preventDefault stops the press from turning into
+       a scroll or a double-tap zoom. */
+    const padButtons = [...root.querySelectorAll<HTMLButtonElement>('.inkdash-pad-btn')];
+    const padDown = (e: PointerEvent) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+      const dir = btn.dataset.dir;
+      if (!dir || state !== 'playing') return;
+      e.preventDefault();
+      keys.add(dir);
+      btn.setPointerCapture?.(e.pointerId);
+    };
+    const padUp = (e: PointerEvent) => {
+      const dir = (e.currentTarget as HTMLButtonElement).dataset.dir;
+      if (dir) keys.delete(dir);
+    };
+
+    startBtn.addEventListener('click', start);
+    stopBtn.addEventListener('click', onStopClick);
+    for (const btn of padButtons) {
+      btn.addEventListener('pointerdown', padDown);
+      btn.addEventListener('pointerup', padUp);
+      btn.addEventListener('pointercancel', padUp);
+    }
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('blur', onBlur);
+    canvas.addEventListener('pointerdown', onPointerDown);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerup', onPointerUp);
+    canvas.addEventListener('pointercancel', onPointerUp);
+
+    /* ---------------- update ---------------- */
+    function update(dt: number) {
+      let ax = 0;
+      let ay = 0;
+      if (keys.has('arrowleft') || keys.has('ArrowLeft') || keys.has('a')) ax -= 1;
+      if (keys.has('arrowright') || keys.has('ArrowRight') || keys.has('d')) ax += 1;
+      if (keys.has('arrowup') || keys.has('ArrowUp') || keys.has('w')) ay -= 1;
+      if (keys.has('arrowdown') || keys.has('ArrowDown') || keys.has('s')) ay += 1;
+
+      if (pointerTarget && !ax && !ay) {
+        const dx = pointerTarget.x - player.x;
+        const dy = pointerTarget.y - player.y;
+        const d = Math.hypot(dx, dy);
+        if (d > 4) {
+          ax = dx / d;
+          ay = dy / d;
+        }
+      }
+
+      if (ax || ay) {
+        const m = Math.hypot(ax, ay) || 1;
+        player.vx += (ax / m) * ACCEL * dt;
+        player.vy += (ay / m) * ACCEL * dt;
+      }
+
+      player.vx *= Math.pow(FRICTION, dt);
+      player.vy *= Math.pow(FRICTION, dt);
+
+      const sp = Math.hypot(player.vx, player.vy);
+      if (sp > MAX_SPEED) {
+        player.vx = (player.vx / sp) * MAX_SPEED;
+        player.vy = (player.vy / sp) * MAX_SPEED;
+      }
+
+      /* Clamping the POSITION alone was a real bug: holding a direction into a
+         wall kept accelerating, so vx sat at -MAX_SPEED while the octopus looked
+         parked, and letting go left friction and the opposite input a second of
+         work before it moved at all — it read as "stuck to the wall". Kill the
+         component that points into the wall instead. Killed, not reflected: a
+         player bouncing off scenery reads as losing control, which is the same
+         complaint from the other side. */
+      const nx = player.x + player.vx * dt;
+      if (nx < PLAYER_R) {
+        player.x = PLAYER_R;
+        if (player.vx < 0) player.vx = 0;
+      } else if (nx > W - PLAYER_R) {
+        player.x = W - PLAYER_R;
+        if (player.vx > 0) player.vx = 0;
+      } else {
+        player.x = nx;
+      }
+
+      const ny = player.y + player.vy * dt;
+      if (ny < playTop()) {
+        player.y = playTop();
+        if (player.vy < 0) player.vy = 0;
+      } else if (ny > playBottom()) {
+        player.y = playBottom();
+        if (player.vy > 0) player.vy = 0;
+      } else {
+        player.y = ny;
+      }
+
+      for (const e of enemies) {
+        if (e.type.behavior === 'chase') {
+          /* Steers toward the player instead of bouncing — slower, but it never
+             gives up, which is the new pressure the later levels add. */
+          const dx = player.x - e.x;
+          const dy = player.y - e.y;
+          const d = Math.hypot(dx, dy) || 1;
+          const sp2 = Math.hypot(e.vx, e.vy) || 1;
+          e.vx += (dx / d) * 0.05 * dt;
+          e.vy += (dy / d) * 0.05 * dt;
+          const cap = sp2 > 2.6 ? 2.6 / sp2 : 1;
+          e.vx *= cap;
+          e.vy *= cap;
+        } else if (e.type.behavior === 'lunge') {
+          /* The squid: a slow stalk, a wind-up, then one shove it cannot steer.
+             Three states rather than a blend, because the wind-up has to be
+             legible — the player is owed the tell before a 6-unit charge. */
+          e.timer -= dt;
+          const dx = player.x - e.x;
+          const dy = player.y - e.y;
+          const d = Math.hypot(dx, dy) || 1;
+
+          if (e.mode === 'glide') {
+            e.vx += (dx / d) * 0.07 * dt;
+            e.vy += (dy / d) * 0.07 * dt;
+            const sp2 = Math.hypot(e.vx, e.vy);
+            if (sp2 > GLIDE_SPEED) {
+              e.vx = (e.vx / sp2) * GLIDE_SPEED;
+              e.vy = (e.vy / sp2) * GLIDE_SPEED;
+            }
+            if (e.timer <= 0) {
+              e.mode = 'wind';
+              e.timer = WIND_FRAMES;
+            }
+          } else if (e.mode === 'wind') {
+            /* Almost stops and pulls slightly BACK — the visual tell, and the
+               same motion a real squid makes filling its mantle. */
+            e.vx = e.vx * Math.pow(0.82, dt) - (dx / d) * 0.03 * dt;
+            e.vy = e.vy * Math.pow(0.82, dt) - (dy / d) * 0.03 * dt;
+            if (e.timer <= 0) {
+              /* Direction is taken ONCE, here. Everything after this is
+                 ballistic: that is what "loses control of itself" means. */
+              e.vx = (dx / d) * LUNGE_SPEED;
+              e.vy = (dy / d) * LUNGE_SPEED;
+              e.mode = 'lunge';
+              e.timer = LUNGE_FRAMES;
+            }
+          } else {
+            e.vx *= Math.pow(0.99, dt);
+            e.vy *= Math.pow(0.99, dt);
+            if (e.timer <= 0 || Math.hypot(e.vx, e.vy) < 1.6) {
+              e.mode = 'glide';
+              e.timer = rand(70, 150);
+            }
+          }
+        }
+
+        e.x += e.vx * dt;
+        e.y += e.vy * dt;
+
+        const r = radiusOf(e.type);
+        if (e.x < r || e.x > W - r) {
+          e.vx *= -1;
+          e.x = Math.max(r, Math.min(W - r, e.x));
+        }
+        const top = topBand() + r;
+        const bottom = H - FLOOR_PAD - r;
+        if (e.y < top || e.y > bottom) {
+          e.vy *= -1;
+          e.y = Math.max(top, Math.min(bottom, e.y));
+        }
+      }
+
+      for (let i = cubes.length - 1; i >= 0; i--) {
+        const c = cubes[i]!;
+        if (Math.hypot(c.x - player.x, c.y - player.y) < PLAYER_R + CUBE_HALF) {
+          cubes.splice(i, 1);
+          score += 10;
+        }
+      }
+
+      if (invuln > 0) invuln -= dt;
+      else {
+        for (const e of enemies) {
+          /* The forgiveness is bigger on the squid: its hitbox should feel like
+             the mantle, not the tentacle spread. */
+          const reach = e.type.behavior === 'lunge' ? SQUID_R - 8 : ENEMY_R - 4;
+          if (Math.hypot(e.x - player.x, e.y - player.y) < PLAYER_R + reach) {
+            lives -= 1;
+            invuln = INVULN_FRAMES;
+            killedBy = e.type.code;
+            /* Respawn in the emptiest corner of the field, not always the same
+               one. Returning to a fixed point on a crowded level dropped the
+               player straight back into the crowd that just hit them, and the
+               remaining lives went in a couple of seconds — the single loudest
+               complaint from playtesting. */
+            const spot = respawnSpot();
+            player.x = spot.x;
+            player.y = spot.y;
+            player.vx = 0;
+            player.vy = 0;
+            pointerTarget = null;
+            if (lives <= 0) {
+              stop('dead');
+              return;
+            }
+            banner = `${lives} ${lives === 1 ? 'life' : 'lives'} left`;
+            bannerTimer = 60;
+            break;
+          }
+        }
+      }
+
+      if (cubes.length === 0) {
+        level += 1;
+        score += 50;
+        /* The wash is level-dependent (depth()), so the cache has to go with it. */
+        invalidateWash();
+        const plan = levelPlan(level);
+        /* Name the newcomer on the level that introduces it — otherwise a new
+           code just quietly appears among the others. */
+        banner = plan.intro
+          ? `Level ${level} · ${plan.intro.code} incoming`
+          : `Level ${level}`;
+        /* Every fifth level hands a life back, up to MAX_LIVES. Announced on the
+           same banner rather than in its own, so surviving to the reward reads as
+           part of reaching the level. */
+        if (level % 5 === 0 && lives < MAX_LIVES) {
+          lives += 1;
+          banner += ' · +1 life';
+        }
+        bannerTimer = 80;
+        spawnLevel();
+      }
+
+      if (bannerTimer > 0) {
+        bannerTimer -= dt;
+        if (bannerTimer <= 0) banner = '';
+      }
+
+    }
+
+    /* Runs in every state, unlike update() — the resting panel is the same body
+       of water and freezing it there is what made it look like a picture of a
+       gradient. Under prefers-reduced-motion the caller skips this entirely. */
+    function driftAmbient(dt: number) {
+      for (const m of motes) {
+        m.y -= m.v * dt;
+        m.x += Math.sin(tick * 0.01 + m.drift) * 0.12 * dt;
+        if (m.y < -m.r) {
+          m.y = H + m.r;
+          m.x = rand(0, W);
+        }
+      }
+    }
+
+    /* ---------------- draw ---------------- */
+    /* Five tentacles fanning outward from under the head, drawn first so the
+       head hides their roots — matches the logo silhouette. Kept thin and well
+       spread: at small sizes they otherwise merge into one blob and the whole
+       thing reads as a lightbulb. */
+    function octopus(x: number, y: number, t: number, wiggle: boolean, s = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      if (s !== 1) ctx.scale(s, s);
+
+      ctx.strokeStyle = BRAND;
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 4.2;
+      for (let i = 0; i < 5; i++) {
+        const spread = (i - 2) / 2; // -1 … 1
+        const sway = wiggle ? Math.sin(t * 0.12 + i * 0.8) * 3.5 : 0;
+        ctx.beginPath();
+        ctx.moveTo(spread * 9, 13);
+        ctx.quadraticCurveTo(spread * 17 + sway, 26, spread * 25 + sway * 1.4, 33);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = BRAND;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 17, 19, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(-6.5, -2, 3.6, 0, Math.PI * 2);
+      ctx.arc(6.5, -2, 3.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    /* The level-15 boss. Head and tentacles lead, the mantle trails behind with
+       two wing fins near its tail — an arrowhead with tentacles, which is the only
+       squid that survives being 50px tall. Everything is laid out facing local -Y
+       and the whole sprite is rotated onto the heading, so a lunge reads as a
+       direction rather than a teleport. The wind-up gathers the arms and squashes
+       the mantle: that squeeze IS the tell the player dodges on.
+
+       A lighter rim, not a lighter fill: the body has to stay the darkest thing in
+       the roster (darkest = worst, established by the 504 chaser) while still
+       separating from deep navy water. */
+    function squid(e: (typeof enemies)[number]) {
+      const R = SQUID_R;
+      const sp = Math.hypot(e.vx, e.vy);
+      /* Nearly still it faces the player, so the stalk always looks intentional. */
+      const heading = sp > 0.25
+        ? Math.atan2(e.vy, e.vx)
+        : Math.atan2(player.y - e.y, player.x - e.x);
+      const wind = e.mode === 'wind';
+      const lunge = e.mode === 'lunge';
+
+      glow(e.x, e.y, R * (wind ? 2.5 : 2), e.type.color);
+
+      ctx.save();
+      ctx.translate(e.x, e.y);
+      /* +PI/2 maps local -Y onto the heading. */
+      ctx.rotate(heading + Math.PI / 2);
+      ctx.scale(1, wind ? 0.86 : lunge ? 1.1 : 1);
+      ctx.lineCap = 'round';
+
+      // tentacles: 6 short arms and 2 long ones, swept back on a lunge
+      const reach = wind ? 0.55 : lunge ? 1.25 : 1;
+      const spread = wind ? 0.45 : 1;
+      ctx.strokeStyle = e.type.color;
+      ctx.lineWidth = 3;
+      for (let i = -3; i <= 3; i++) {
+        if (i === 0) continue;
+        const long = Math.abs(i) === 3;
+        const tipY = -R * (long ? 1.5 : 1.05) * reach + (lunge ? R * 0.5 : 0);
+        const sway = Math.sin(tick * 0.1 + i) * (long ? 4.5 : 2.6) * (wind ? 0.3 : 1);
+        ctx.beginPath();
+        ctx.moveTo(i * 2.6, -R * 0.5);
+        ctx.quadraticCurveTo(
+          i * 6.5 * spread + sway,
+          (-R * 0.5 + tipY) / 2,
+          i * 9.5 * spread + sway * 1.4,
+          tipY
+        );
+        ctx.stroke();
+      }
+
+      // fins — wings past the mantle's own outline, so the tail end is unmistakable
+      ctx.fillStyle = e.type.color;
+      ctx.beginPath();
+      ctx.moveTo(0, R * 0.66);
+      ctx.lineTo(R * 0.82, R * 0.3);
+      ctx.lineTo(0, R * 0.12);
+      ctx.closePath();
+      ctx.moveTo(0, R * 0.66);
+      ctx.lineTo(-R * 0.82, R * 0.3);
+      ctx.lineTo(0, R * 0.12);
+      ctx.closePath();
+      ctx.fill();
+
+      // mantle: blunt head at the front, tapering to a point at the tail
+      ctx.beginPath();
+      ctx.moveTo(0, R);
+      ctx.quadraticCurveTo(R * 0.5, R * 0.2, R * 0.36, -R * 0.42);
+      ctx.quadraticCurveTo(0, -R * 0.78, -R * 0.36, -R * 0.42);
+      ctx.quadraticCurveTo(-R * 0.5, R * 0.2, 0, R);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,120,150,0.5)';
+      ctx.lineWidth = 1.8;
+      ctx.stroke();
+
+      // eyes — the only white on it, and what makes it read as "it sees you"
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(-R * 0.23, -R * 0.3, R * 0.15, 0, Math.PI * 2);
+      ctx.arc(R * 0.23, -R * 0.3, R * 0.15, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(10,0,10,0.8)';
+      ctx.beginPath();
+      ctx.arc(-R * 0.23, -R * 0.34, R * 0.07, 0, Math.PI * 2);
+      ctx.arc(R * 0.23, -R * 0.34, R * 0.07, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      /* Label upright in world space, not rotated with the body — a spinning
+         number is unreadable, and the same legibility floor applies as elsewhere. */
+      if (13 * cssPerWorld >= 7) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '700 13px ui-sans-serif, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(e.type.code, e.x, e.y - SQUID_R - 8);
+      }
+    }
+
+    /* Drifters are domes; the chaser is a diamond with spikes; the squid has its
+       own function above. The shape is the real signal — labels vanish on narrow
+       panels. */
+    function enemy(e: (typeof enemies)[number]) {
+      if (e.type.behavior === 'lunge') {
+        squid(e);
+        return;
+      }
+      glow(e.x, e.y, ENEMY_R * 2.1, e.type.color);
+      ctx.save();
+      ctx.translate(e.x, e.y);
+      ctx.fillStyle = e.type.color;
+      ctx.strokeStyle = e.type.color;
+      ctx.lineCap = 'round';
+
+      if (e.type.behavior === 'chase') {
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(0, -ENEMY_R);
+        ctx.lineTo(ENEMY_R * 0.92, 0);
+        ctx.lineTo(0, ENEMY_R * 0.72);
+        ctx.lineTo(-ENEMY_R * 0.92, 0);
+        ctx.closePath();
+        ctx.fill();
+        for (let i = -1; i <= 1; i++) {
+          const sway = Math.sin(tick * 0.18 + i) * 2.5;
+          ctx.beginPath();
+          ctx.moveTo(i * 7, ENEMY_R * 0.6);
+          ctx.quadraticCurveTo(i * 7 + sway, ENEMY_R * 0.6 + 8, i * 7 + sway * 1.6, ENEMY_R * 0.6 + 16);
+          ctx.stroke();
+        }
+      } else {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, ENEMY_R, ENEMY_R * 0.78, 0, Math.PI, 0);
+        ctx.fill();
+        ctx.lineWidth = 2.2;
+        for (let i = -1; i <= 1; i++) {
+          const sway = Math.sin(tick * 0.14 + i) * 2.6;
+          ctx.beginPath();
+          ctx.moveTo(i * 7.5, 0);
+          ctx.quadraticCurveTo(i * 7.5 + sway, 8, i * 7.5 + sway * 1.5, 15);
+          ctx.stroke();
+        }
+      }
+
+      if (13 * cssPerWorld >= 7) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '600 12px ui-sans-serif, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(e.type.code, 0, e.type.behavior === 'chase' ? -2 : -7);
+      }
+
+      ctx.restore();
+    }
+
+    /* Slanted shafts from the surface. Drawn per frame rather than cached: the
+       cost here is compositing four translucent quads, which a cached bitmap would
+       still have to pay, and a cache would need invalidating on resize, theme flip
+       AND every level's depth shift. */
+    function lightShafts() {
+      const base = rayAlpha();
+      for (const r of rays) {
+        const breathe = reduceMotion ? 1 : 0.75 + 0.25 * Math.sin(tick * 0.008 + r.phase);
+        const g = ctx.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, `rgba(255,255,255,${base * breathe})`);
+        g.addColorStop(0.55, `rgba(255,255,255,${base * breathe * 0.35})`);
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(r.x, 0);
+        ctx.lineTo(r.x + r.w, 0);
+        ctx.lineTo(r.x + r.w + r.slant * H, H);
+        ctx.lineTo(r.x + r.slant * H * 0.8, H);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    function drawMotes(front: boolean) {
+      for (const m of motes) {
+        if (m.front !== front) continue;
+        ctx.fillStyle = moteColor(m.a);
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    /* Darkens the edges so the scene has a centre. Without it the wash meets the
+       frame at full strength and the panel reads as a filled rectangle. */
+    function vignette() {
+      if (!vignetteGrad) {
+        vignetteGrad = ctx.createRadialGradient(
+          W / 2, H / 2, Math.min(W, H) * 0.25,
+          W / 2, H / 2, Math.max(W, H) * 0.68
+        );
+        vignetteGrad.addColorStop(0, 'rgba(0,0,0,0)');
+        vignetteGrad.addColorStop(1, dark ? 'rgba(0,0,0,0.3)' : 'rgba(6,38,70,0.2)');
+      }
+      ctx.fillStyle = vignetteGrad;
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    function draw() {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+      /* The water fills every state, resting included — it is the panel's look,
+         and without it the frame encloses nothing. */
+      if (!washGrad) {
+        const [top, bottom] = water();
+        washGrad = ctx.createLinearGradient(0, 0, 0, H);
+        washGrad.addColorStop(0, css3(top!));
+        /* A third stop, weighted toward the deep end at a third of the way down:
+           with a plain two-stop ramp the upper half of the light theme sat near
+           white and the whole panel read as a marketing banner. The endpoints are
+           unchanged — only where the water gets serious. */
+        washGrad.addColorStop(0.32, css3(lerp3(top!, bottom!, 0.55)));
+        washGrad.addColorStop(1, css3(bottom!));
+      }
+      ctx.fillStyle = washGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      /* Order matters and is the same in every state: far particulate sits inside
+         the wash, the shafts cut across it, entities live in front of both, the
+         big near motes pass over them and the vignette closes the box. */
+      drawMotes(false);
+      lightShafts();
+
+      if (state === 'idle' || state === 'dead') {
+        /* The hero of the resting panel: centred and big, as in the version this
+           went back to. The copy is a single centred ROW pinned to the bottom
+           (see CSS) rather than a stack — that is what leaves room for a 2.2×
+           octopus in a panel this short. Swimming mid-water, not parked on a
+           floor — an octopus isn't a dinosaur.
+
+           High enough that the tentacles clear that row: at 2.05× they reach
+           ~68 world units below the head, and the copy starts at ~0.62H. */
+        octopus(W / 2, H * 0.29, tick, !reduceMotion, 2.05);
+        drawMotes(true);
+        vignette();
+        return;
+      }
+
+      for (const c of cubes) {
+        const bob = Math.sin(tick * 0.06 + c.phase) * 2.5;
+        glow(c.x, c.y + bob, CUBE_HALF * 3, CUBE_COLOR);
+        ctx.save();
+        ctx.translate(c.x, c.y + bob);
+        ctx.fillStyle = CUBE_COLOR;
+        ctx.beginPath();
+        ctx.roundRect(-CUBE_HALF, -CUBE_HALF, CUBE_HALF * 2, CUBE_HALF * 2, 2.5);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+        ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.moveTo(-CUBE_HALF + 2.5, -1.8);
+        ctx.lineTo(CUBE_HALF - 2.5, -1.8);
+        ctx.moveTo(-CUBE_HALF + 2.5, 2.6);
+        ctx.lineTo(CUBE_HALF - 2.5, 2.6);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      for (const e of enemies) enemy(e);
+
+      // player (blinks while invulnerable)
+      if (invuln <= 0 || Math.floor(tick / 6) % 2 === 0) {
+        octopus(player.x, player.y, tick, true);
+      }
+
+      drawMotes(true);
+      /* Before the HUD, never over it: dimming the score to frame the scene is
+         not a trade worth making. */
+      vignette();
+
+      /* HUD on one row, sized in CSS pixels so it stays legible on a phone. One
+         row even in the taller play field: a second would buy nothing the corner
+         labels don't already say. */
+      const pad = cssPx(13);
+      const row = cssPx(17);
+      const roomy = cssPerWorld * W > 520;
+
+      ctx.font = `600 ${cssPx(13)}px ui-sans-serif, system-ui, sans-serif`;
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = ink();
+      ctx.textAlign = 'left';
+      ctx.fillText(`Score ${score}`, pad, row);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = inkDim();
+      ctx.fillText(
+        roomy
+          ? `Lv ${level} · ${'●'.repeat(lives)} · Best ${hi}`
+          : `L${level} · ${'●'.repeat(lives)} · ${hi}`,
+        W - pad,
+        row
+      );
+
+      if (banner) {
+        ctx.font = `700 ${cssPx(20)}px ui-sans-serif, system-ui, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = ink();
+        ctx.fillText(banner, W / 2, H * 0.5);
+      }
+    }
+
+    /* ---------------- loop ---------------- */
+    /* The resting panel is a scene too, so it needs its atmosphere before the
+       first frame — not only once a game starts. */
+    spawnAmbient();
+
+    let raf = 0;
+    let last = 0;
+    let onScreen = true;
+    let halfFrame = false;
+    /* Time skipped by half-rate frames, carried into the next drawn one — without
+       it the resting drift would run at half SPEED rather than half frame rate. */
+    let carry = 0;
+
+    const frame = (now: number) => {
+      const dt = last ? Math.min((now - last) / 16.667, 2.5) : 1;
+      last = now;
+      raf = requestAnimationFrame(frame);
+      carry += dt;
+
+      /* Half rate while nobody is playing. The resting panel is decoration: at 30
+         fps the drift is indistinguishable and the work halves. A game gets every
+         frame — input latency is the one thing not worth saving here. */
+      if (state !== 'playing') {
+        halfFrame = !halfFrame;
+        if (halfFrame) return;
+      }
+
+      const step = Math.min(carry, 2.5);
+      carry = 0;
+      tick += step;
+      if (state === 'playing') update(step);
+      if (!reduceMotion) driftAmbient(step);
+      draw();
+    };
+
+    /* Nothing animates while the panel is out of view or the tab is in the
+       background. A hidden tab already stops rAF by itself, but a panel scrolled
+       off a visible page does not — and this thing sits on a page people scroll
+       past. Cheapest possible fix for "an easter egg must not cost CPU". */
+    const wake = () => {
+      if (raf || !onScreen || document.hidden) return;
+      last = 0; // fresh clock, or dt jumps by however long we slept
+      raf = requestAnimationFrame(frame);
+    };
+    const sleep = () => {
+      if (!raf) return;
+      cancelAnimationFrame(raf);
+      raf = 0;
+      /* Drop held keys: resuming with a stuck arrow would send the octopus into
+         a wall while the reader was somewhere else entirely. */
+      keys.clear();
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        onScreen = entries[entries.length - 1]!.isIntersecting;
+        if (onScreen) wake();
+        else sleep();
+      },
+      { rootMargin: '80px' }
+    );
+    io.observe(root);
+    const onVisibility = () => (document.hidden ? sleep() : wake());
+    document.addEventListener('visibilitychange', onVisibility);
+    wake();
+
+    /* ---------------- teardown ---------------- */
+    return () => {
+      sleep();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
+      ro.disconnect();
+      themeObserver.disconnect();
+      startBtn.removeEventListener('click', start);
+      stopBtn.removeEventListener('click', onStopClick);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup', onKeyUp);
+      window.removeEventListener('blur', onBlur);
+      canvas.removeEventListener('pointerdown', onPointerDown);
+      canvas.removeEventListener('pointermove', onPointerMove);
+      canvas.removeEventListener('pointerup', onPointerUp);
+      canvas.removeEventListener('pointercancel', onPointerUp);
+      for (const btn of padButtons) {
+        btn.removeEventListener('pointerdown', padDown);
+        btn.removeEventListener('pointerup', padUp);
+        btn.removeEventListener('pointercancel', padUp);
+      }
+    };
+  }
+
+  let teardown: (() => void) | null = null;
+
+  /* Tears down any previous instance first, so booting twice is safe. */
+  const boot = () => {
+    teardown?.();
+    teardown = initInkDash();
+  };
+
+  /* Don't depend on catching the initial `astro:page-load`: whether this module
+     executes before ClientRouter dispatches it is a bundling-order detail. Boot
+     directly for this load, and let page-load handle later swaps. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  document.addEventListener('astro:page-load', boot);
+
+  // ClientRouter swaps the DOM out from under us — drop the loop and the
+  // window-level listeners before that happens.
+  document.addEventListener('astro:before-swap', () => {
+    teardown?.();
+    teardown = null;
+  });
+</script>
