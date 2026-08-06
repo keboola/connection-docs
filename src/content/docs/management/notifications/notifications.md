@@ -14,52 +14,50 @@ Notifications in Keboola can be set up at various levels — from individual job
 ## Overview of Notification Types
 
 ### 1. Flow Notifications
-- Notify users about [Flow](/flows/) results: success, warning, or failure.  
-- Can be configured for specific scenarios such as manual triggers or errors.  
+- Notify users about [Flow](/flows/) results: success, error, or an unusually long run.
+- They cover the flow as a whole, not individual components — for that, see [Job Notifications](#2-job-notifications).
+- Recipients can be project users, other email addresses, or webhook URLs.
 
 #### How to Configure
-- When a glow is automated, it runs without any user intervention. This means that if the flow fails, no one will know about it unless you set notifications:
+An automated flow runs without anyone watching it, so if it fails, nobody finds out unless
+notifications are set.
 
-![Screenshot - Flow Notifications](/management/notifications/orchestration-main-1.png)
+Open the flow and go to the **Notifications** tab. The tab has one card per event, and each card
+takes recipients directly — there is nothing to save separately.
 
-Then click **Edit Notifications** and set notifications for particular situations:
-
-![Screenshot - Notification Details](/management/notifications/orch-notifications.png)
-
-You can:
-- Enter **email addresses** (individual or group).
-- Enter a **webhook URL** to trigger an external system.
+![The Notifications tab of a flow with the Success, Errors, and Processing cards](/management/notifications/flow-notifications.png)
 
 Notifications can be sent when:
+- The flow finishes **successfully**.
 - The flow finishes with an **error**.
-- Some tasks fail and the flow finishes with a **warning** (requires [*Continue on Error*](/flows/#control-task-execution)).
-- The flow takes significantly longer than usual. --- e.g., when you set the threshold to 20% and an flow usually runs 
-for 100 minutes but it is still not finished after 120 minutes, a notification will be sent. The *usual* run length is computed as a running average of the last 20 executions of the flow.
+- The flow is still **processing** well past its usual run length. The overtime is expressed as a
+percentage of the *usual* length — e.g., at 20%, a flow that normally takes 100 minutes notifies
+once it is still running after 120. The usual length is a running average of recent executions.
+
+The cards above are the ones a [Conditional Flow](/flows/) has. [Legacy Flows](/flows/flows-legacy/)
+also carry a **Warnings** card, because a legacy task with *Continue on Failure* enabled lets the
+flow finish with a warning status; Conditional Flows express the same rule as a
+[condition](/flows/#conditions) instead. See the [migration guide](/flows/flow-migration-guide/continue-on-failure/).
+
+Each card offers **Email** and **Webhook** delivery on separate sub-tabs; the count next to each
+tells you how many recipients are already configured. For emails, pick project users from the
+dropdown or type any address.
 
 **Note:** When triggered manually, only the user who started the flow receives the notification.
 
 ***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production flows.*
-  
-### 2. Flow Notifications
-- Alert users about the success, warning, or failure of Flows. Flow notifications are only for the flow as a whole (not per-component).  
-- Notifications can be sent to individuals or group email addresses.  
 
-#### How to Configure
-From the **Notifications** tab in a Flow:
-- Select one or more project users.
-- Enter other email addresses or webhook URLs.
+<!-- VERIFY(owner): four claims on this page predate this PR and no public source confirms them.
+     1. The averaging window for the processing-overtime event (docs have said "last 20 executions")
+        and whether it counts only successful runs.
+     2. Manual-run routing: does the user who started the flow REPLACE the configured recipients or
+        add to them?
+     3. "Not supported in development branches" — is it that subscriptions can't be created in a
+        branch, or that branch jobs emit no events? Event payloads do carry branch.id.
+     4. The outbound webhook's 5-second timeout and no-retry policy (see Webhook Notifications). -->
 
-![Set Up Notifications](/management/notifications/flow-notifications.png)
 
-Notifications can be sent when:
-- The flow completes successfully.
-- The flow completes with warnings.
-- The flow fails with an error.
-- The job runs longer than expected.
-
-Once everything is configured, the flow will automatically run at the scheduled time. Alternatively, you can run the entire flow manually by clicking **Run Flow**.
-
-### 3. Job Notifications
+### 2. Job Notifications
 - Receive updates about success or failure of individual component jobs. Job Notifications might be especially helpful if you need a notification on status of a specific component within a more complex flow.
 
 #### How to Configure
@@ -69,7 +67,7 @@ Open a component configuration and go to the **Notifications** tab:
 
 Use this to monitor specific transformations, data loads, or other components individually.
 
-### 4. App Notifications
+### 3. App Notifications
 - Get notified when an [App](/data-apps/) task completes, fails, or runs significantly longer than expected.  
 - Since apps are often used by external users, notifications help ensure any issues or downtime are addressed as quickly as possible.
   
@@ -80,7 +78,7 @@ App notifications are configured within the **component configuration** of the a
 - Open the **Notifications** tab.
 - Enter one or more **email addresses** or **webhook URLs**.
 
-### 5. Credit Consumption Notifications
+### 4. Credit Consumption Notifications
 - Send alerts when credit usage crosses a threshold.
 - **Email notifications only**, configured at the **organization level**.
 - **Only email notifications are supported** — webhook delivery is **not available** for this type.
@@ -100,7 +98,7 @@ Keboola supports webhook notifications alongside email. This allows real-time al
 - Flow notifications  
 - Job notifications 
 
-![Webhook Setup UI](/management/notifications/webhook-notification.png)
+![The Webhook sub-tab of a notification card, with the webhook URL field](/management/notifications/webhook-notification.png)
 
 #### Example Payload
 

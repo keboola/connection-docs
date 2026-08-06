@@ -23,7 +23,7 @@ table mappings, and creates new DuckDB transformation configurations automatical
 
 **Important:** The automatic migration is **not 100% accurate**. The success rate depends on the complexity of your SQL, 
 data types, and Snowflake-specific features used. Expect that roughly **25% of migrated transformations will require manual 
-adjustments** --- for example, fixing case sensitivity issues, replacing unsupported functions, or adjusting data type casts. 
+adjustments** — for example, fixing case sensitivity issues, replacing unsupported functions, or adjusting data type casts. 
 Always review and test the migrated configurations before using them in production.
 
 ### Tutorial: Migrating Snowflake Transformations
@@ -33,11 +33,11 @@ Always review and test the migrated configurations before using them in producti
 In your Keboola project, go to **Components** and search for **Transformation Migration**. Create a new configuration.
 Set the following parameters:
 
-- **Source Branch** --- select the branch containing your Snowflake transformations (default: `default`).
-- **Destination Branch** --- choose an existing dev branch for the migrated configurations, or create a new one.
-- **Source Transformation Type** --- select `Snowflake`.
-- **Destination Transformation Type** --- select `DuckDB`.
-- **Destination Config Name Pattern** --- use `%s` as a placeholder for the original name 
+- **Source Branch** — select the branch containing your Snowflake transformations (default: `default`).
+- **Destination Branch** — choose an existing dev branch for the migrated configurations, or create a new one.
+- **Source Transformation Type** — select `Snowflake`.
+- **Destination Transformation Type** — select `DuckDB`.
+- **Destination Config Name Pattern** — use `%s` as a placeholder for the original name 
   (e.g., `%s` keeps the same name, `%s_duckdb` appends a suffix).
 
 ![Migration Component Configuration](/transformations/duckdb/migration-component.png)
@@ -65,7 +65,7 @@ were migrated successfully and provide links to the newly created DuckDB configu
 #### Step 5: Review and Adjust the Migrated Configuration
 
 Open the newly created DuckDB transformation. The component preserves all input/output table mappings and runtime settings.
-**Review the SQL code carefully** --- some queries may need manual adjustments due to syntax differences between 
+**Review the SQL code carefully** — some queries may need manual adjustments due to syntax differences between 
 Snowflake and DuckDB (see the sections below for common differences).
 
 ![Migrated DuckDB Transformation](/transformations/duckdb/migration-result.png)
@@ -81,7 +81,7 @@ Snowflake and DuckDB (see the sections below for common differences).
 
 - The automatic SQL translation is **not perfect**. Complex queries, Snowflake-specific functions, and edge cases 
   in data types may not be converted correctly.
-- Roughly **25% of migrated transformations** will need some manual fixes --- typically related to case sensitivity, 
+- Roughly **25% of migrated transformations** will need some manual fixes — typically related to case sensitivity, 
   unsupported functions, or data type differences.
 - The component is **experimental** and may contain unhandled bugs or have various limitations.
 - Always **test the migrated transformations** on a dev branch before deploying to production.
@@ -197,8 +197,8 @@ The following functions have the same syntax in both Snowflake and DuckDB:
 
 - `SUBSTRING(str, start, len)`
 - `POSITION('x' IN str)`
-- `CONCAT(a, b)` --- both handle `NULL` gracefully
-- `a || b` --- both return `NULL` if any input is `NULL`
+- `CONCAT(a, b)` — both handle `NULL` gracefully
+- `a || b` — both return `NULL` if any input is `NULL`
 - `LIMIT n`
 - `FETCH FIRST n ROWS`
 - `COALESCE(a, b, c)`
@@ -266,12 +266,12 @@ To access the regular table explicitly, use its fully qualified name: `memory.ma
 
 ## Migration Tips
 
-1. **Start with SQLGlot** --- it handles most syntax conversions automatically.
-2. **Watch out for case sensitivity** --- Snowflake defaults to uppercase, DuckDB to lowercase.
-3. **Test queries incrementally** --- migrate one block at a time and verify results.
-4. **Use Kai AI assistant** --- it can help identify and fix syntax differences.
-5. **Check column aliases** --- DuckDB handles column aliases differently than Snowflake in some contexts. `GROUP BY ALL` can help resolve alias-related issues.
-6. **Verify aggregate functions** --- if your input tables are non-typed, enable **Infer input table data types** or add explicit `CAST()` calls to avoid type errors with functions like `SUM()` or `AVG()`.
+1. **Start with SQLGlot** — it handles most syntax conversions automatically.
+2. **Watch out for case sensitivity** — Snowflake defaults to uppercase, DuckDB to lowercase.
+3. **Test queries incrementally** — migrate one block at a time and verify results.
+4. **Use Kai AI assistant** — it can help identify and fix syntax differences.
+5. **Check column aliases** — DuckDB handles column aliases differently than Snowflake in some contexts. `GROUP BY ALL` can help resolve alias-related issues.
+6. **Verify aggregate functions** — if your input tables are non-typed, enable **Infer input table data types** or add explicit `CAST()` calls to avoid type errors with functions like `SUM()` or `AVG()`.
 
 ## DuckDB Snowflake Extension
 
