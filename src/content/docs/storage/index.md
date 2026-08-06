@@ -23,8 +23,8 @@ It is also recorded in [Events](/management/project/tokens/#token-events) and
 ## Storage Data
 The Storage component manages all data stored in each Keboola project:
 
-- [Data tables](/storage/tables/) (Table Storage) --- organized into [buckets](/storage/buckets/)
-- [Data files](/storage/files/) (File Storage) --- all raw files uploaded to your project
+- [Data tables](/storage/tables/) (Table Storage) — organized into [buckets](/storage/buckets/)
+- [Data files](/storage/files/) (File Storage) — all raw files uploaded to your project
 - [Component configurations](/components/)
 
 Different storage technologies are used for the above data:

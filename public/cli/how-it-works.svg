@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <!-- Editable concept diagram: how kbagent works. No vendor logos. White bg for both themes. -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="860" height="400" fill="#ffffff" rx="8"/>
+
+  <!-- Actors -->
+  <g>
+    <rect x="30" y="70" width="150" height="54" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="105" y="93" text-anchor="middle" font-size="15" font-weight="600" fill="#312e81">You</text>
+    <text x="105" y="112" text-anchor="middle" font-size="12" fill="#4338ca">terminal / scripts / CI</text>
+
+    <rect x="30" y="150" width="150" height="54" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="105" y="173" text-anchor="middle" font-size="15" font-weight="600" fill="#312e81">AI agent</text>
+    <text x="105" y="192" text-anchor="middle" font-size="12" fill="#4338ca">Claude Code, cron tasks</text>
+  </g>
+
+  <!-- kbagent box -->
+  <g>
+    <rect x="250" y="60" width="200" height="220" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="350" y="90" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d">kbagent</text>
+    <text x="350" y="108" text-anchor="middle" font-size="12" fill="#166534">runs on your machine</text>
+
+    <rect x="270" y="124" width="160" height="60" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+    <text x="350" y="147" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">Config store</text>
+    <text x="350" y="164" text-anchor="middle" font-size="11.5" fill="#166534">project aliases + tokens</text>
+    <text x="350" y="177" text-anchor="middle" font-size="11.5" fill="#166534">global or per-directory</text>
+
+    <rect x="270" y="198" width="160" height="60" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+    <text x="350" y="219" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">serve</text>
+    <text x="350" y="236" text-anchor="middle" font-size="11.5" fill="#166534">local API for the Web UI</text>
+    <text x="350" y="249" text-anchor="middle" font-size="11.5" fill="#166534">and scheduled agents</text>
+  </g>
+
+  <!-- Firewall -->
+  <g>
+    <rect x="500" y="60" width="94" height="220" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2" stroke-dasharray="7 4"/>
+    <text x="547" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#7c2d12">Permission</text>
+    <text x="547" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#7c2d12">firewall</text>
+    <text x="547" y="152" text-anchor="middle" font-size="11.5" fill="#9a3412">--deny-writes</text>
+    <text x="547" y="168" text-anchor="middle" font-size="11.5" fill="#9a3412">--deny-destructive</text>
+    <text x="547" y="184" text-anchor="middle" font-size="11.5" fill="#9a3412">persisted policies</text>
+    <text x="547" y="212" text-anchor="middle" font-size="11.5" fill="#9a3412">blocks operation</text>
+    <text x="547" y="227" text-anchor="middle" font-size="11.5" fill="#9a3412">classes, not</text>
+    <text x="547" y="242" text-anchor="middle" font-size="11.5" fill="#9a3412">single commands</text>
+  </g>
+
+  <!-- Keboola stacks -->
+  <g>
+    <rect x="668" y="52" width="162" height="64" rx="10" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="749" y="78" text-anchor="middle" font-size="14" font-weight="600" fill="#0c4a6e">Project A · US stack</text>
+    <text x="749" y="98" text-anchor="middle" font-size="12" fill="#075985">Storage · Jobs · Flows APIs</text>
+
+    <rect x="668" y="132" width="162" height="64" rx="10" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="749" y="158" text-anchor="middle" font-size="14" font-weight="600" fill="#0c4a6e">Project B · EU stack</text>
+    <text x="749" y="178" text-anchor="middle" font-size="12" fill="#075985">Storage · Jobs · Flows APIs</text>
+
+    <rect x="668" y="212" width="162" height="64" rx="10" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="749" y="238" text-anchor="middle" font-size="14" font-weight="600" fill="#0c4a6e">… whole organization</text>
+    <text x="749" y="258" text-anchor="middle" font-size="12" fill="#075985">read commands fan out</text>
+  </g>
+
+  <!-- Web UI box -->
+  <g>
+    <rect x="250" y="316" width="200" height="54" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="1.5"/>
+    <text x="350" y="339" text-anchor="middle" font-size="14" font-weight="600" fill="#581c87">Web UI</text>
+    <text x="350" y="357" text-anchor="middle" font-size="12" fill="#7e22ce">localhost dashboard in your browser</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#64748b" stroke-width="1.8" fill="none">
+    <path d="M 180 97 L 244 110" marker-end="url(#arrow)"/>
+    <path d="M 180 177 L 244 170" marker-end="url(#arrow)"/>
+    <path d="M 450 140 L 494 140" marker-end="url(#arrow)"/>
+    <path d="M 594 140 L 662 108" marker-end="url(#arrow)"/>
+    <path d="M 594 155 L 662 166" marker-end="url(#arrow)"/>
+    <path d="M 594 200 L 662 236" marker-end="url(#arrow)"/>
+    <path d="M 350 280 L 350 310" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Arrow labels -->
+  <text x="212" y="88" text-anchor="middle" font-size="11" fill="#64748b">commands</text>
+  <text x="472" y="128" text-anchor="middle" font-size="11" fill="#64748b">HTTPS</text>
+</svg>

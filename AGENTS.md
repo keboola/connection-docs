@@ -41,9 +41,14 @@ api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
 scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
-  migrate.mjs, switchover.mjs  # legacy one-time Jekyll→Astro migration (no longer used)
+  check-cli-reference.mjs  # CI gate: docs `kbagent` usage vs _data/cli/command-reference.md
+  migrate.mjs, switchover.mjs  # legacy Jekyll→Astro migration — DO NOT RUN: no dry-run,
+                      # no confirmation, and it deletes every page whose Jekyll source is
+                      # gone from the repo root — which today is all of them
 astro.config.mjs  # Astro + Starlight config
 _data/navigation.yml  # sidebar source (consumed by convert-nav.mjs)
+_data/cli/command-reference.md  # generated kbagent reference, auto-synced from
+                      # keboola/cli releases (sync-cli-reference.yml) — don't hand-edit
 ```
 
 ## Core rules
@@ -90,11 +95,23 @@ Images: place alongside the Markdown and reference with an absolute path
 - For CSS that must survive client-side navigation, verify in a **production
   build** (`astro build && astro preview`) — dev injects `<style>` tags that
   don't survive Astro view-transition swaps.
+- `astro preview` enforces `trailingSlash: 'always'` and answers a URL without a
+  slash with its own "Not Found" page instead of the site's 404. To check the 404
+  locally, open `/404.html` directly; production normalizes the slash and does not
+  behave this way.
 
 ## Workflow & deployment
 
 - Docs-as-code: changes go through PRs; a maintainer reviews and merges.
-- Production deploys via GitHub Actions (`.github/workflows/main.yml`) on push to
-  `main` (build → `aws s3 sync` to `help.keboola.com`).
+- **`help.keboola.com` is served by Vercel.** Every PR also gets a Vercel preview
+  deployment — use it to check rendering before asking for review.
+- Vercel applies its defaults, since `vercel.json` only sets cache headers for
+  `/pagefind/*`: a missing trailing slash is normalized, and `404.html` from the
+  build root is returned for unmatched paths. **Don't move the 404 out of the
+  build root.**
+- `.github/workflows/main.yml` still builds and runs `aws s3 sync` to
+  `s3://help.keboola.com` on every push to `main`. It succeeds, but it is not
+  what serves the live domain — don't reason about production routing, redirects,
+  or cache headers from it.
 - The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs
   `AI_SERVICE_URL` + `KBC_STORAGE_API_TOKEN` env vars.

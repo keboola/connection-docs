@@ -1,24 +1,67 @@
 ---
 /**
- * "Copy as Markdown" button — converts the current page content to markdown
- * and copies it to the clipboard. Shows a checkmark confirmation after copying.
+ * Page markdown/LLM actions — a split button next to the page title.
+ * Primary action: "Copy as Markdown" (converts the page content to markdown
+ * and copies it to the clipboard, with a checkmark confirmation).
+ * The chevron opens a menu with additional actions: View as Markdown (the
+ * page's raw `index.md` emitted by the page-markdown integration), Open in
+ * ChatGPT, and Open in Claude (each pre-filled with a "read this page" prompt).
  */
 ---
-<button
-  id="copy-md-btn"
-  class="copy-md-btn"
-  title="Copy page as Markdown"
-  aria-label="Copy page as Markdown"
->
-  <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-  </svg>
-  <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-    <polyline points="20 6 9 17 4 12"></polyline>
-  </svg>
-  <span class="copy-md-label">Copy as Markdown</span>
-</button>
+<div class="copy-md-group" id="copy-md-group">
+  <button
+    id="copy-md-btn"
+    class="copy-md-btn"
+    title="Copy page as Markdown"
+    aria-label="Copy page as Markdown"
+  >
+    <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+    <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="copy-md-label">Copy as Markdown</span>
+  </button>
+  <button
+    id="copy-md-toggle"
+    class="copy-md-toggle"
+    title="More page actions"
+    aria-label="More page actions"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="copy-md-menu" id="copy-md-menu" hidden>
+    <a data-md-action="view" href="#" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+      </svg>
+      <span>View as Markdown</span>
+    </a>
+    <a data-md-action="chatgpt" href="#" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 3h7v7"></path>
+        <path d="M10 14 21 3"></path>
+        <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+      </svg>
+      <span>Open in ChatGPT</span>
+    </a>
+    <a data-md-action="claude" href="#" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 3h7v7"></path>
+        <path d="M10 14 21 3"></path>
+        <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+      </svg>
+      <span>Open in Claude</span>
+    </a>
+  </div>
+</div>
 
 <style>
   .copy-md-btn {
@@ -175,8 +218,58 @@
     });
   }
 
+  function initActionsMenu() {
+    var toggle = document.getElementById('copy-md-toggle');
+    var menu = document.getElementById('copy-md-menu');
+    var group = document.getElementById('copy-md-group');
+    if (!toggle || !menu || !group || toggle.dataset.bound) return;
+    toggle.dataset.bound = '1';
+
+    function setOpen(open) {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      setOpen(menu.hidden);
+    });
+    document.addEventListener('click', function(e) {
+      if (!menu.hidden && !group.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !menu.hidden) setOpen(false);
+    });
+    // Close after choosing an action so the menu isn't left open on return.
+    menu.addEventListener('click', function() { setOpen(false); });
+  }
+
+  // The menu links depend on the current page, so recompute them on EVERY
+  // navigation (unlike listeners, which bind once behind dataset.bound).
+  function updateMenuLinks() {
+    var menu = document.getElementById('copy-md-menu');
+    if (!menu) return;
+    // trailingSlash is 'always', so the raw markdown emitted by the
+    // page-markdown integration lives at <page>/index.md.
+    var mdUrl = location.origin + location.pathname + 'index.md';
+    var prompt = 'Read ' + mdUrl + ' so I can ask questions about it';
+
+    var view = menu.querySelector('[data-md-action="view"]');
+    var chatgpt = menu.querySelector('[data-md-action="chatgpt"]');
+    var claude = menu.querySelector('[data-md-action="claude"]');
+    if (view) view.href = location.pathname + 'index.md';
+    if (chatgpt) chatgpt.href = 'https://chatgpt.com/?hints=search&q=' + encodeURIComponent(prompt);
+    if (claude) claude.href = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+  }
+
+  function initPageActions() {
+    initCopyBtn();
+    initActionsMenu();
+    updateMenuLinks();
+  }
+
   // Run on initial load and on Astro view transitions
-  initCopyBtn();
-  document.addEventListener('astro:page-load', initCopyBtn);
-  document.addEventListener('astro:after-swap', initCopyBtn);
+  initPageActions();
+  document.addEventListener('astro:page-load', initPageActions);
+  document.addEventListener('astro:after-swap', initPageActions);
 </script>
