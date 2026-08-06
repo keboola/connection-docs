@@ -402,6 +402,8 @@ export const sidebar = [
         items: [
           { label: "Overview", slug: "storage/data-streams" },
           { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/reference" },
+          { slug: "storage/data-streams/tutorial" },
         ],
       },
       { slug: "storage/files" },

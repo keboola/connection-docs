@@ -21,38 +21,38 @@ The data can be sent in two ways:
 
 *Click on the section names if you want to learn more.*
 
-- [**api**](/components/writers/generic-writer/configuration/#api) --- [REQUIRED] sets the basic properties of the API.
-    - [**base_url**](/components/writers/generic-writer/configuration/#base-url) ---  [REQUIRED] defines the URL to which the API requests
+- [**api**](/components/writers/generic-writer/configuration/#api) — [REQUIRED] sets the basic properties of the API.
+    - [**base_url**](/components/writers/generic-writer/configuration/#base-url) —  [REQUIRED] defines the URL to which the API requests
       should be sent.
-    - [**authentication**](/components/writers/generic-writer/configuration/#authentication) --- needs to be configured for any API
+    - [**authentication**](/components/writers/generic-writer/configuration/#authentication) — needs to be configured for any API
       which is not public.
-    - [**retry_config**](/components/writers/generic-writer/configuration/#retry-config) --- automatically, and repeatedly, retries
+    - [**retry_config**](/components/writers/generic-writer/configuration/#retry-config) — automatically, and repeatedly, retries
       failed HTTP requests.
-    - [**default_query_parameters**](/components/writers/generic-writer/configuration/#default-query-parameters) --- sets the
+    - [**default_query_parameters**](/components/writers/generic-writer/configuration/#default-query-parameters) — sets the
       default query parameters sent with each API call.
-    - [**default_headers**](/components/writers/generic-writer/configuration/#default-headers) --- sets the default query headers
+    - [**default_headers**](/components/writers/generic-writer/configuration/#default-headers) — sets the default query headers
       sent with each API call.
-    - [**ssl_verification**](/components/writers/generic-writer/configuration/#ssl-verification) --- allows turning off the SSL certificate
+    - [**ssl_verification**](/components/writers/generic-writer/configuration/#ssl-verification) — allows turning off the SSL certificate
       verification. Use with caution.
-    - [**timeout**](/components/writers/generic-writer/configuration/#timeout) --- maximum time in seconds for which the component
+    - [**timeout**](/components/writers/generic-writer/configuration/#timeout) — maximum time in seconds for which the component
       waits after each request (defaults to None if not set).
-- [**user_parameters**](/components/writers/generic-writer/configuration/#user-parameters) --- user parameters to be used in various
+- [**user_parameters**](/components/writers/generic-writer/configuration/#user-parameters) — user parameters to be used in various
   contexts, e.g. passwords. Supports dynamic functions.
-- [**request_parameters**](/components/writers/generic-writer/configuration/#request-parameters) --- [REQUIRED] HTTP parameters of the request
-    - [**method**](/components/writers/generic-writer/configuration/#method) --- [REQUIRED] defines the HTTP method of the requests.
-    - [**endpoint_path**](/components/writers/generic-writer/configuration/#endpoint-path) --- [REQUIRED] relative path of the endpoint.
-    - [**query_parameters**](/components/writers/generic-writer/configuration/#query-parameters) --- query parameters sent with each
+- [**request_parameters**](/components/writers/generic-writer/configuration/#request-parameters) — [REQUIRED] HTTP parameters of the request
+    - [**method**](/components/writers/generic-writer/configuration/#method) — [REQUIRED] defines the HTTP method of the requests.
+    - [**endpoint_path**](/components/writers/generic-writer/configuration/#endpoint-path) — [REQUIRED] relative path of the endpoint.
+    - [**query_parameters**](/components/writers/generic-writer/configuration/#query-parameters) — query parameters sent with each
       request
-    - [**headers**](/components/writers/generic-writer/configuration/#headers) --- headers sent with each request
-- [**request_content**](/components/writers/generic-writer/configuration/#request-content) --- [REQUIRED] defines how the data is sent
-    - [**content_type**](/components/writers/generic-writer/configuration/#content-type) --- [REQUIRED] defines how the data is transferred (
+    - [**headers**](/components/writers/generic-writer/configuration/#headers) — headers sent with each request
+- [**request_content**](/components/writers/generic-writer/configuration/#request-content) — [REQUIRED] defines how the data is sent
+    - [**content_type**](/components/writers/generic-writer/configuration/#content-type) — [REQUIRED] defines how the data is transferred (
       JSON, binary file, Empty, etc.)
-    - [**json_mapping**](/components/writers/generic-writer/configuration/#json-mapping) --- defines the CSV 2 JSON conversion in
+    - [**json_mapping**](/components/writers/generic-writer/configuration/#json-mapping) — defines the CSV 2 JSON conversion in
       case of JSON content type.
-    - [**iterate_by_columns**](/components/writers/generic-writer/configuration/#iterate-by-columns) --- defines set of columns in
+    - [**iterate_by_columns**](/components/writers/generic-writer/configuration/#iterate-by-columns) — defines set of columns in
       the input data that are excluded from the content and may be used instead of placeholders within the
       `request_parameters`. The input table is iterated row by row, e.g. 1 row = 1 request
-- [**debug**](/components/writers/generic-writer/configuration/#debug) --- Turns on more verbose logging for debugging purposes.
+- [**debug**](/components/writers/generic-writer/configuration/#debug) — Turns on more verbose logging for debugging purposes.
 
 There are also simple pre-defined [**functions**](/components/writers/generic-writer/configuration/#dynamic-functions) available,
 adding extra flexibility when needed.
@@ -173,9 +173,9 @@ all remaining rows. To vary the URL per row, put the placeholder in `endpoint_pa
 
 Here you can set parameters of the request retry in case of failure.
 
-- `max_retries` --- Number of maximum retries before failure (DEFAULT `1`)
-- `codes` --- List of HTTP codes to retry on, e.g. [503, 429] (DEFAULT `500`, `502`, `504`)
-- `backoff_factor` --- backoff factor of the exponential backoff. (DEFAULT `0.3`)
+- `max_retries` — Number of maximum retries before failure (DEFAULT `1`)
+- `codes` — List of HTTP codes to retry on, e.g. [503, 429] (DEFAULT `500`, `502`, `504`)
+- `backoff_factor` — backoff factor of the exponential backoff. (DEFAULT `0.3`)
 
 ```json
 {

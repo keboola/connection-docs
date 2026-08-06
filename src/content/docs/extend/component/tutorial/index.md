@@ -12,7 +12,7 @@ Keboola.
 
 A Keboola component is a Docker image. When a job runs, the [Job Queue](/extend/job-queue/) executes the image's
 `ENTRYPOINT` or `CMD`, so your image must define one of them. Component images are stored in Amazon AWS ECR
-provisioned by the [Developer Portal](https://components.keboola.com/) --- the only supported registry --- and are
+provisioned by the [Developer Portal](https://components.keboola.com/) — the only supported registry — and are
 pushed there by the [deploy script](/extend/component/deployment/) in your CI pipeline.
 
 ## Before You Start
@@ -23,7 +23,7 @@ which manages the list of components available in Keboola.
 The Developer Portal uses different credentials than Keboola. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
 
-When you log in to the Developer Portal, you have to join a **vendor** --- an organization of
+When you log in to the Developer Portal, you have to join a **vendor** — an organization of
 developers. Every Keboola component has to have a vendor assigned. If you join an existing vendor, a
 vendor administrator has to approve your request. If you do not work for a company, create a
 vendor with your name (even a single developer has to be assigned to a vendor). When you join or create a vendor
@@ -32,7 +32,7 @@ you should also receive access to a development Keboola project.
 ![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
 
 In order to create a **new vendor**, a Keboola administrator has to approve your request, and you will
-receive a [development project](/#development-project) in Keboola. In addition to that, you need to provide us
+receive a [development project](https://developers.keboola.com/#development-project) in Keboola. In addition to that, you need to provide us
 with a channel for receiving internal errors from your components. Anything supported
 by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services)
 is available, though e-mail or a Slack channel is most commonly used.
@@ -45,7 +45,7 @@ Before you continue with this tutorial, make sure you
 - can log in to one of the Keboola [stacks](/overview/#stacks)
 - have a [Github](https://github.com/) account.
 
-*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://travis-ci.org/) services, they are not required for extending Keboola.
+*Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://www.travis-ci.com/) services, they are not required for extending Keboola.
 We use them because we like them the most. The [deployment documentation](/extend/component/deployment/) shows how to configure,
 for example, [Bitbucket](/extend/component/deployment/#bitbucket-integration) and [GitLab](/extend/component/deployment/#gitlab-integration)
 integrations.*
@@ -61,7 +61,7 @@ Choose the appropriate [component type](/extend/component/#component-types):
 
 - `extractor` -- brings data into Keboola
 - `writer` -- sends data out of Keboola
-- `transformation` -- does some transformation of the data, [read more](/transformations/#new-transformations)
+- `transformation` -- does some transformation of the data, [read more](/transformations/)
 - `code pattern` -- generates code for transformation's component, [read more](/extend/component/code-patterns)
 - `application` -- another arbitrary component
 
@@ -118,7 +118,7 @@ cookiecutter gh:keboola/cookiecutter-python-component```
     - You can execute the component via normal local environment without docker installed.
     - Set any additional dependencies for your project in `requirements.txt`
  
- More information on the template [here](https://bitbucket.org/kds_consulting_team/kbc-python-template/src/master/README.md)
+ More information on the template [here](https://github.com/keboola/cookiecutter-python-component)
    
 ## CI Setup
  - Bitbucket: Enable [pipelines](https://confluence.atlassian.com/bitbucket/get-started-with-bitbucket-pipelines-792298921.html) in the repository.
@@ -133,7 +133,7 @@ cookiecutter gh:keboola/cookiecutter-python-component```
  - `KBC_DEVELOPERPORTAL_VENDOR` - dev portal vendor
  - `KBC_STORAGE_TOKEN` - (optional) in case you wish to run KBC automated tests
 
-[https://github.com/keboola/cookiecutter-python-component]()
+[https://github.com/keboola/cookiecutter-python-component](https://github.com/keboola/cookiecutter-python-component)
 
 ### PHP, R or just CI pipeline for GitHub or Bitbucket
 
