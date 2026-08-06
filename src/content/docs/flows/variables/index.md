@@ -251,11 +251,15 @@ not passed to the job itself.
 
 ### Task Parameters on a Single Task
 
-To set a value on one specific task instead, use its **Task Parameters**: select the task, click
-**Set advanced parameters**, and add `variableValuesData` to the task payload. This path does not
+To set a value on one specific task instead, use its **Task Parameters**: select the task in the
+flow's Builder to open its settings, click **Set advanced parameters**, and add `variableValuesData`
+to the task payload. The editor opens pre-filled with the task's `type`, `mode`, `componentId` and
+`configId`; add the override there and click **Set**. This path does not
 depend on the variable also being declared as a flow variable. The `variableValuesData` shape is the
 same one [running a job](/flows/variables/api/#step-4--run-job) takes, but the surrounding fields are
 the task's own (`componentId` / `configId`), not the job API's `component` / `config`:
+
+![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
 
 ```json
 {
