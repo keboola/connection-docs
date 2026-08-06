@@ -72,7 +72,7 @@ As with other Keboola components, the Generic Extractor connector is available o
 [GitHub](https://github.com/keboola/generic-extractor/). Apart from the
 main repository, it uses some vital libraries (which partially define its capabilities):
 
-- [Juicer](https://github.com/keboola/juicer) --- component responsible for processing HTTP JSON responses
-- [CSV Map](https://github.com/keboola/php-csvmap) --- library that converts JSON data into CSV tables
-- [Filter](https://github.com/keboola/php-filter) --- library that allows to match values together
-- [JSON Parser](https://github.com/keboola/php-jsonparser) --- JSON parser which produces CSV tables while maintaining relations
+- [Juicer](https://github.com/keboola/juicer) — component responsible for processing HTTP JSON responses
+- [CSV Map](https://github.com/keboola/php-csvmap) — library that converts JSON data into CSV tables
+- [Filter](https://github.com/keboola/php-filter) — library that allows to match values together
+- [JSON Parser](https://github.com/keboola/php-jsonparser) — JSON parser which produces CSV tables while maintaining relations

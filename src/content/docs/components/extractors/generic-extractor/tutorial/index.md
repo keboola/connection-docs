@@ -7,7 +7,7 @@ redirect_from:
 
 
 In this tutorial, we will guide you through configuring Generic Extractor for a new API.
-In our case, MailChimp --- an email marketing service.
+In our case, MailChimp — an email marketing service.
 
 Even though there already is a MailChimp extractor available in Keboola as a
 [component](/components/extractors/generic-extractor/publish/) based on Generic Extractor,
@@ -73,10 +73,10 @@ requests and responses. The response body is in [JSON](/components/extractors/ge
 Now you have everything you need to actually start extracting the data. Continue with your Generic Extractor
 configuration here:
 
-- [Basic configuration](/components/extractors/generic-extractor/tutorial/basic/) --- sets the basic properties of the API and describes the actual extraction.
-- [Pagination](/components/extractors/generic-extractor/tutorial/pagination/) --- breaks a result with a
+- [Basic configuration](/components/extractors/generic-extractor/tutorial/basic/) — sets the basic properties of the API and describes the actual extraction.
+- [Pagination](/components/extractors/generic-extractor/tutorial/pagination/) — breaks a result with a
 		large number of items into separate pages.
-- [Jobs](/components/extractors/generic-extractor/tutorial/jobs/) --- describes the API endpoints
+- [Jobs](/components/extractors/generic-extractor/tutorial/jobs/) — describes the API endpoints
 		(resources) to be extracted.
-- [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) --- describes how the JSON
+- [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON
 		response is converted into CSV files that will be imported into Storage.

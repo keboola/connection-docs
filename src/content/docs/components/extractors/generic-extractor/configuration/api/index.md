@@ -93,7 +93,7 @@ Because there are many authorization methods used by different APIs, there are a
 [configuration options](/components/extractors/generic-extractor/configuration/api/authentication/).
 
 ## Retry Configuration
-By default, Generic Extractor **automatically retries failed HTTP requests** --- repeatedly, and on most errors.
+By default, Generic Extractor **automatically retries failed HTTP requests** — repeatedly, and on most errors.
 This is one of the big advantages over writing your own extractor from scratch. Tweak the retry setting to optimize
 the speed of an extraction or to avoid unwanted flooding of the API.
 
@@ -171,7 +171,7 @@ supported codes in the [cURL documentation](https://curl.haxx.se/libcurl/c/libcu
 There is no way to set the actual backoff strategy as it is derived automatically from the
 content of the HTTP header specified in `retryHeader`. Generic Extractor will fallback to the
 exponential backoff strategy in case the header contents are invalid (that includes, e.g., a typo
-in the header name). Make sure to check that the backoff is correct --- the times can be verified
+in the header name). Make sure to check that the backoff is correct — the times can be verified
 in the [debug](/components/extractors/generic-extractor/running/#debug-mode) messages:
 
     Http request failed, retrying in 1s
@@ -186,7 +186,7 @@ The `http` configuration option allows you to set the timeouts, default headers 
 ### Headers
 The `http.headers` configuration allows you to **set the default headers sent with
 each API call**. The configuration is an object where names are the names of
-the headers and values are their values --- for instance:
+the headers and values are their values — for instance:
 
 ```json
 "http": {

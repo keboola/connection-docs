@@ -25,8 +25,8 @@ page, the `offset` is 10. This is the same kind of pagination as in SQL.
 
 The offset pagination method is configured with the following basic properties:
 
-- `method` --- for MailChimp, set this property to `offset`.
-- `offsetParam` --- name of the API parameter which defines the [page offset](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
+- `method` — for MailChimp, set this property to `offset`.
+- `offsetParam` — name of the API parameter which defines the [page offset](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
 - `limitParam` -- name of the API parameters which define the [page size (limit)](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
 
 So, for MailChimp, configure the pagination this way:
@@ -161,7 +161,7 @@ In this part of the tutorial, you learned how to set up simple pagination. This 
 because most APIs use some sort of pagination and without proper setting you would be 
 getting incomplete data. The next two parts of our tutorial deal with setting up jobs and mapping:
 
-- [Jobs](/components/extractors/generic-extractor/tutorial/jobs/) --- describe the API endpoints 
+- [Jobs](/components/extractors/generic-extractor/tutorial/jobs/) — describe the API endpoints 
 		(resources) to be extracted.
-- [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) --- describes how the JSON 
+- [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON 
 		response is converted into CSV files that will be imported into Storage.

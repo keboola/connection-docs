@@ -40,39 +40,39 @@ However, in some cases, you might need to perform some manual adjustments in ord
 *Click on the section names if you want to learn more.*
 
 - **parameters**
-    - [**api**](/components/extractors/generic-extractor/configuration/api/) --- sets the basic properties of the API.
-        - [**baseUrl**](/components/extractors/generic-extractor/configuration/api/#base-url) --- defines the URL to which the
+    - [**api**](/components/extractors/generic-extractor/configuration/api/) — sets the basic properties of the API.
+        - [**baseUrl**](/components/extractors/generic-extractor/configuration/api/#base-url) — defines the URL to which the
         API requests should be sent.
-        - [**caCertificate**](/components/extractors/generic-extractor/configuration/api/#ca-certificate) --- defines custom certificate authority bundle in `crt`/`pem` format.
-        - [**#clientCertificate**](/components/extractors/generic-extractor/configuration/api/#client-certificate) --- defines client certificate and private key in `crt`/`pem` format.
-        - [**pagination**](/components/extractors/generic-extractor/configuration/api/pagination/) --- breaks a result with many items into separate pages.
-        - [**authentication**](/components/extractors/generic-extractor/configuration/api/authentication/) --- needs to be
+        - [**caCertificate**](/components/extractors/generic-extractor/configuration/api/#ca-certificate) — defines custom certificate authority bundle in `crt`/`pem` format.
+        - [**#clientCertificate**](/components/extractors/generic-extractor/configuration/api/#client-certificate) — defines client certificate and private key in `crt`/`pem` format.
+        - [**pagination**](/components/extractors/generic-extractor/configuration/api/pagination/) — breaks a result with many items into separate pages.
+        - [**authentication**](/components/extractors/generic-extractor/configuration/api/authentication/) — needs to be
         configured for any API which is not public.
-        - [**retryConfig**](/components/extractors/generic-extractor/configuration/api/#retry-configuration) --- automatically
+        - [**retryConfig**](/components/extractors/generic-extractor/configuration/api/#retry-configuration) — automatically
         and repeatedly, retries failed HTTP requests.
-        - [**http**](/components/extractors/generic-extractor/configuration/api/#default-http-options) --- sets the timeouts, default
+        - [**http**](/components/extractors/generic-extractor/configuration/api/#default-http-options) — sets the timeouts, default
         headers, and parameters sent with each API call.
     - **aws**
-      - [**signature**](/components/extractors/generic-extractor/configuration/aws-signature) --- defines AWS credentials for signature request
-    - [**config**](/components/extractors/generic-extractor/configuration/config/) --- describes the actual extraction.
-        - [**debug**](/components/extractors/generic-extractor/running/#debug-mode) --- shows all HTTP requests sent by
+      - [**signature**](/components/extractors/generic-extractor/configuration/aws-signature) — defines AWS credentials for signature request
+    - [**config**](/components/extractors/generic-extractor/configuration/config/) — describes the actual extraction.
+        - [**debug**](/components/extractors/generic-extractor/running/#debug-mode) — shows all HTTP requests sent by
         Generic Extractor.
-        - [**outputBucket**](/components/extractors/generic-extractor/configuration/config/#output-bucket) --- defines the name
+        - [**outputBucket**](/components/extractors/generic-extractor/configuration/config/#output-bucket) — defines the name
         of a Storage Bucket in which the extracted tables will be stored.
-        - [**http**](/components/extractors/generic-extractor/configuration/config/#http) --- sets the HTTP headers sent with
+        - [**http**](/components/extractors/generic-extractor/configuration/config/#http) — sets the HTTP headers sent with
         every request.
-        - [**jobs**](/components/extractors/generic-extractor/configuration/config/jobs/) --- describes the API endpoints
+        - [**jobs**](/components/extractors/generic-extractor/configuration/config/jobs/) — describes the API endpoints
         (resources) to be extracted.
-        - [**mappings**](/components/extractors/generic-extractor/configuration/config/#mappings) --- describes how the JSON
+        - [**mappings**](/components/extractors/generic-extractor/configuration/config/#mappings) — describes how the JSON
         response is converted into CSV files that will be imported into Storage.
-        - [**incrementalOutput**](/components/extractors/generic-extractor/incremental/) ---  loads the extracted data into
+        - [**incrementalOutput**](/components/extractors/generic-extractor/incremental/) —  loads the extracted data into
         Storage incrementally.
-        - [**userData**](/components/extractors/generic-extractor/configuration/config/#user-data) --- adds arbitrary data to
+        - [**userData**](/components/extractors/generic-extractor/configuration/config/#user-data) — adds arbitrary data to
         extracted records.
-        - [**sshProxy**](/components/extractors/generic-extractor/configuration/ssh-proxy/) --- securely access HTTP(s) endpoints inside your private Network.
-        - [**iterations**](/components/extractors/generic-extractor/configuration/iterations/) --- executes a configuration multiple times, each time
+        - [**sshProxy**](/components/extractors/generic-extractor/configuration/ssh-proxy/) — securely access HTTP(s) endpoints inside your private Network.
+        - [**iterations**](/components/extractors/generic-extractor/configuration/iterations/) — executes a configuration multiple times, each time
   with different values.
-- [**authorization**](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) --- allows injecting OAuth authentication.
+- [**authorization**](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) — allows injecting OAuth authentication.
 
 There are also simple pre-defined [**functions**](/components/extractors/generic-extractor/functions/) available, adding extra
 flexibility when needed.

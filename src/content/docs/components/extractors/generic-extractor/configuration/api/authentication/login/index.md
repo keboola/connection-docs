@@ -54,21 +54,21 @@ A sample Login authentication looks like this:
 ## Configuration Parameters
 The following configuration parameters are supported for the `login` type of authentication:
 
-- `loginRequest` (required, object) --- a [job-like](/components/extractors/generic-extractor/configuration/config/jobs/) object describing the login request; it has the following properties:
-    - `endpoint` (required, string) --- an API endpoint for the login request; the same rules as for the [Job `endpoint`](/components/extractors/generic-extractor/configuration/config/jobs/#specifying-endpoint) apply here.
-    - `params` (optional, object) --- an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters).
-    - `method` (optional, string) --- an HTTP method to send the request; this defines how the [parameters are sent](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters) to the API. The default value is `GET`.
-    - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names will be used as HTTP header names, and the values will be used as the value of the respective header.
-- `format` (optional, string) --- defines the expected format of `loginRequest`; the allowed values are `json` (default) and `text`. If the format is text, then it is converted to a json with field `data` (see [example](#configuration-with-headers-and-text-response). This conversion will also be applied in case the response is a JSON [scalar](/components/extractors/generic-extractor/tutorial/json/#data-values). But in that case, format `json` has to be used (see [example [EX129]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/129-login-auth-scalar)).
-- `apiRequest` (optional, object) --- an object which defines how the result of the **login request** will be used in the actual API request; it contains the following properties:
-    - `headers` (optional, object) --- an object with key-value properties containing HTTP headers. The names are header names, the values are paths in the JSON response from which the actual values are extracted.
-    - `query` (optional, object) --- an object with key-value properties containing URL query parameters. The names are parameter names, and the values are paths in the JSON response from which the actual values are extracted.
-- `expires` (optional, mixed) --- either an integer value specifying a fixed number of seconds after which the **login request** will be sent again (see an [example](#expiration-basic)); or, an object with the following properties:
-    - `response` (required, string) --- a path in the JSON response which contains the expiration time. It can be either:
+- `loginRequest` (required, object) — a [job-like](/components/extractors/generic-extractor/configuration/config/jobs/) object describing the login request; it has the following properties:
+    - `endpoint` (required, string) — an API endpoint for the login request; the same rules as for the [Job `endpoint`](/components/extractors/generic-extractor/configuration/config/jobs/#specifying-endpoint) apply here.
+    - `params` (optional, object) — an object with key-value properties containing request parameters; object keys are parameters names; values are transformed the [same way as in jobs](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters).
+    - `method` (optional, string) — an HTTP method to send the request; this defines how the [parameters are sent](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters) to the API. The default value is `GET`.
+    - `headers` (optional, object) — an object with key-value properties containing HTTP headers. The names will be used as HTTP header names, and the values will be used as the value of the respective header.
+- `format` (optional, string) — defines the expected format of `loginRequest`; the allowed values are `json` (default) and `text`. If the format is text, then it is converted to a json with field `data` (see [example](#configuration-with-headers-and-text-response). This conversion will also be applied in case the response is a JSON [scalar](/components/extractors/generic-extractor/tutorial/json/#data-values). But in that case, format `json` has to be used (see [example [EX129]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/129-login-auth-scalar)).
+- `apiRequest` (optional, object) — an object which defines how the result of the **login request** will be used in the actual API request; it contains the following properties:
+    - `headers` (optional, object) — an object with key-value properties containing HTTP headers. The names are header names, the values are paths in the JSON response from which the actual values are extracted.
+    - `query` (optional, object) — an object with key-value properties containing URL query parameters. The names are parameter names, and the values are paths in the JSON response from which the actual values are extracted.
+- `expires` (optional, mixed) — either an integer value specifying a fixed number of seconds after which the **login request** will be sent again (see an [example](#expiration-basic)); or, an object with the following properties:
+    - `response` (required, string) — a path in the JSON response which contains the expiration time. It can be either:
         - a string which can be processed by the [`strtotime` function](https://www.php.net/manual/en/function.strtotime.php) (see an [example](#expiration-from-response)), or
         - a numeric [timestamp](https://en.wikipedia.org/wiki/Unix_time) (with `"relative": false`), or
         - a number of seconds for which the credentials are valid (with `"relative": true`).
-    - `relative` (optional, boolean) --- When true, the expiration time is relative to the current time. The default value is `false`.
+    - `relative` (optional, boolean) — When true, the expiration time is relative to the current time. The default value is `false`.
 
 Note that the values in `apiRequest.headers` and `apiRequest.query` take precedence over the values specified in the
 `api.http.defaultOptions.headers` (see an [example](#parameter-overriding)). If `expires` is not set, the login request
@@ -348,19 +348,19 @@ with this header:
 
 The request URL contains the following query parameters:
 
-- `debug=1` --- coming from the `api.http.defaultOptions.params` option
-- `orderBy=userName` --- coming from the `config.jobs.params` option, which overrides the value specified in `api.http.defaultOptions.params`
-- `secretKey[0]=none` --- coming from the `config.jobs.params` option, which overrides the value specified in `api.http.defaultOptions.params`
-- `secretKey[1]=a1b2c3d435f6` --- coming from the `api.authentication.apiRequest.query` option
-- `customerId[0]=234` --- coming from the `config.jobs.params` option
-- `customerId[1]=abc` --- coming from the `api.authentication.apiRequest.query` option
-- `apiToken=987654` --- coming from the `api.authentication.apiRequest.query` option
+- `debug=1` — coming from the `api.http.defaultOptions.params` option
+- `orderBy=userName` — coming from the `config.jobs.params` option, which overrides the value specified in `api.http.defaultOptions.params`
+- `secretKey[0]=none` — coming from the `config.jobs.params` option, which overrides the value specified in `api.http.defaultOptions.params`
+- `secretKey[1]=a1b2c3d435f6` — coming from the `api.authentication.apiRequest.query` option
+- `customerId[0]=234` — coming from the `config.jobs.params` option
+- `customerId[1]=abc` — coming from the `api.authentication.apiRequest.query` option
+- `apiToken=987654` — coming from the `api.authentication.apiRequest.query` option
 
 The request headers contain:
 
-- `X-Mode` --- coming from the `api.http.defaultOptions.headers` option
-- `X-Account-Id` --- coming from the `api.authentication.apiRequest.headers` option, which overrides the values specified in `api.http.defaultOptions.headers`
-- `X-SecretKey` --- coming from the `api.authentication.apiRequest.headers` option
+- `X-Mode` — coming from the `api.http.defaultOptions.headers` option
+- `X-Account-Id` — coming from the `api.authentication.apiRequest.headers` option, which overrides the values specified in `api.http.defaultOptions.headers`
+- `X-SecretKey` — coming from the `api.authentication.apiRequest.headers` option
 
 As you can see, the headers specified elsewhere are **overwritten** by the `api.authentication.apiRequest` while the parameters
 specified elsewhere are **merged** with the `api.authentication.apiRequest`.
@@ -506,7 +506,7 @@ See [example [EX084]](https://github.com/keboola/generic-extractor/tree/master/d
 
 ### Login Authentication with Functions
 Suppose you have an API which requires you to send a username and password separated by a colon and
-base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
+base64 encoded — for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
 `X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token
 which can be used with other API calls.
 
@@ -571,14 +571,14 @@ See [example [EX100]](https://github.com/keboola/generic-extractor/tree/master/d
 ### Login Authentication with Login and API Request
 Suppose you have an API similar to the one in the [previous example](#login-authentication-with-functions).
 It requires you to send a username and password separated by a colon and
-base64 encoded --- for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
+base64 encoded — for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
 `X-Authorization` header to an `/auth` endpoint. The difference is that the login endpoint returns a token
 which must be further processed. The other API requests expects that the received token is concatenated again
-with the user name --- for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g.
+with the user name — for example, `JohnDoe:d868d581b2f` and an SHA1 hash is generated (e.g.
 `09e4e6977b72ecc9fa2120f49a4a74f5c268d277`). This value must be sent as an `auth` query parameter.
 
 The `loginRequest` part of the following configuration is the same as in the
-[previous example](#login-authentication-with-functions) --- it reads both the login and password parameters
+[previous example](#login-authentication-with-functions) — it reads both the login and password parameters
 from the `config` section and uses the `login` authorization method to send them to the special `/auth` endpoint.
 The `apiRequest` part of the configuration uses the [`sha1`](/components/extractors/generic-extractor/functions/#sha1) function on
 the result of the [`concat`](/components/extractors/generic-extractor/functions/#concat) function. The `concat` function takes

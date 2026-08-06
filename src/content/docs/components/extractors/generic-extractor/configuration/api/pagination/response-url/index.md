@@ -25,22 +25,22 @@ next page in the response. This scroller is suitable for APIs supporting the
 ## Configuration Parameters
 The following configuration parameters are supported for the `response.url` pagination method:
 
-- `urlKey` (optional, string) --- path in the response to the field which contains the URL of the next request; 
+- `urlKey` (optional, string) — path in the response to the field which contains the URL of the next request; 
 the default value is `next_page`.
-- `delimiter` (optional, string) --- char used as the delimiter of the nested keys in the `urlKey`; 
+- `delimiter` (optional, string) — char used as the delimiter of the nested keys in the `urlKey`; 
 the default value is `.`.
 - `paramIsQuery` (optional, boolean) 
-	- if `true` --- URL is assumed to be only [query string](/components/extractors/generic-extractor/tutorial/rest/#url) parameters; 
+	- if `true` — URL is assumed to be only [query string](/components/extractors/generic-extractor/tutorial/rest/#url) parameters; 
 	the parameters in the response **override** the [parameters in the job](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters). 
-	- if `false` --- URL with a path is assumed. `false` is the default value; the parameters in the response 
+	- if `false` — URL with a path is assumed. `false` is the default value; the parameters in the response 
 	**are overridden** by the parameters in the job. 
 - `includeParams` (optional, boolean) 
-	- if `true` --- job parameters **are added** to the parameters of the URL provided in the response; the default value is `false`. 
+	- if `true` — job parameters **are added** to the parameters of the URL provided in the response; the default value is `false`. 
 
 See the [examples below](#examples).
 
 ### Stopping Condition
-The pagination ends **when the value of the `urlKey` parameter is empty** --- the key is not present at all, is null,
+The pagination ends **when the value of the `urlKey` parameter is empty** — the key is not present at all, is null,
 is an empty string or is `false`. Be careful when configuring the `urlKey` parameter. If you, for example, misspell the
 key name, the extraction will not go beyond the first page. 
 [Common stopping conditions](/components/extractors/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.

@@ -476,7 +476,7 @@ or the [`http.headers` in config](/components/extractors/generic-extractor/confi
 See an [example](#headers).
 
 ### Parameters Context
-The Parameters function context is used when setting job [request parameters --- `params`](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters).
+The Parameters function context is used when setting job [request parameters — `params`](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters).
 It contains [configuration attributes](/#function-contexts) plus the times of the current
 (`currentStart`) and previous (`previousStart`) run of Generic Extractor.
 The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).

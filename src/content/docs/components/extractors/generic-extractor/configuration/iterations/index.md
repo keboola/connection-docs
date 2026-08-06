@@ -72,7 +72,7 @@ is honoured.
 
 ### Iterating Parameters
 Suppose, you have an API which takes a URL parameter `account_id`, which restricts the returned data to a
-certain account. The following configuration executes the entire configuration for two accounts --- `345` and `456`:
+certain account. The following configuration executes the entire configuration for two accounts — `345` and `456`:
 
 ```json
 {

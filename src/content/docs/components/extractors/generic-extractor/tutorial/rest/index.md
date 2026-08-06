@@ -35,11 +35,11 @@ For example, the address
 
 is composed of:
 
-- `https` --- **Protocol** (HTTP or HTTPS),
-- `www.example.com` --- **Host** --- network address of the HTTP server,
-- `8080` --- **port** --- Optional network identifier within the target server; its default value is `80`.
-- `/customers/acme/order/` --- Optional **path** to a **resource** we wish to obtain; its default value is `\`.
-- `show=deleted&fields=all` --- Optional **request parameters** (also called **query string** or **query
+- `https` — **Protocol** (HTTP or HTTPS),
+- `www.example.com` — **Host** — network address of the HTTP server,
+- `8080` — **port** — Optional network identifier within the target server; its default value is `80`.
+- `/customers/acme/order/` — Optional **path** to a **resource** we wish to obtain; its default value is `\`.
+- `show=deleted&fields=all` — Optional **request parameters** (also called **query string** or **query
 string parameters**), separated by the character `&` (ampersand); the actual parameters are:
     - `show` with the value `deleted`, and
     - `fields` with the value `all`.
@@ -71,10 +71,10 @@ tutorial because they ultimately refer to the same thing.*
 An HTTP **Method** describes a type of the request to make. It also called an **HTTP Verb** because it 
 describes what to do with the **resource**. Common HTTP verbs are:
 
-- `GET` --- Obtain a resource.
-- `POST` and `PATCH` --- Update a resource.
-- `PUT` --- Create a resource.
-- `DELETE` --- Delete a resource.
+- `GET` — Obtain a resource.
+- `POST` and `PATCH` — Update a resource.
+- `PUT` — Create a resource.
+- `DELETE` — Delete a resource.
 
 Since Generic Extractor only reads data from another API, you will mostly use the `GET` method (and sometimes the 
 `POST` method). The other HTTP methods are not important for us. 
@@ -96,9 +96,9 @@ But they can also send them in the request **body**. These are sometimes called 
 ## HTTP Response
 An HTTP response is composed of:
 
-- Response Headers --- same as the request headers (only sent by the server)
-- Response Body --- actual content of the resource
-- Status Code --- status of the request
+- Response Headers — same as the request headers (only sent by the server)
+- Response Body — actual content of the resource
+- Status Code — status of the request
 
 #### HTTP Status
 The HTTP Status and [status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) represent 

@@ -92,7 +92,7 @@ along with the output tables created in `/out/tables` sub-directory of the curre
 It is recommended to remove the contents of the `out/tables` directory before running the extractor again.
 
 **Important:** Generic Extractor itself is not able to decrypt encrypted values. That means that when you
-supply the configuration directly in the `config.json` file, you must always provide decrypted values --- e.g.:
+supply the configuration directly in the `config.json` file, you must always provide decrypted values — e.g.:
 
 ```json
 {

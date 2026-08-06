@@ -12,11 +12,11 @@ configuration options.*
 Unless the API you want to extract from is completely public, you need an authentication and possibly authorization method.
 There are many authentication methods available. Generic Extractor supports the following ones:
 
-- [URL Query](/components/extractors/generic-extractor/configuration/api/authentication/query/) authentication --- sends credentials in the URL of each API request.
-- [Basic HTTP](/components/extractors/generic-extractor/configuration/api/authentication/basic/) authentication --- sends credentials in the `Authorization` header of each API request.
-- [Login](/components/extractors/generic-extractor/configuration/api/authentication/login/) authentication --- obtains temporary credentials (token) by logging in and then sends them in the URL or headers of each API request.
-- [OAuth 1.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth10/) authentication --- authenticates with [OAuth 1.0 scheme](#oauth).
-- [OAuth 2.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/) authentication --- authenticates with [OAuth 2.0 scheme](#oauth).
+- [URL Query](/components/extractors/generic-extractor/configuration/api/authentication/query/) authentication — sends credentials in the URL of each API request.
+- [Basic HTTP](/components/extractors/generic-extractor/configuration/api/authentication/basic/) authentication — sends credentials in the `Authorization` header of each API request.
+- [Login](/components/extractors/generic-extractor/configuration/api/authentication/login/) authentication — obtains temporary credentials (token) by logging in and then sends them in the URL or headers of each API request.
+- [OAuth 1.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth10/) authentication — authenticates with [OAuth 1.0 scheme](#oauth).
+- [OAuth 2.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/) authentication — authenticates with [OAuth 2.0 scheme](#oauth).
 - [OAuth 2.0 Login](/components/extractors/generic-extractor/configuration/api/authentication/oauth20-login/) authentication ---
 crossover between the [OAuth 2.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/) and
 [Login](/components/extractors/generic-extractor/configuration/api/authentication/login/) authentication.
@@ -65,7 +65,7 @@ The OAuth protocol defines a scheme in which credentials are exchanged between t
 
 The OAuth specification defines what kind of information is exchanged in which steps. It is not a precise
 specification and leaves quite some freedom for implementation. Also, there are two versions of
-OAuth --- 1.0 and 2.0. They are completely incompatible (both the authentication steps and the exchanged fields differ).
+OAuth — 1.0 and 2.0. They are completely incompatible (both the authentication steps and the exchanged fields differ).
 Generic Extractor supports both [OAuth 1.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth10/)
 and  [OAuth 2.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/). If you are developing a new component using Generic Extractor
 [templates](/components/extractors/generic-extractor/publish/#submission) and want to use and test OAuth authentication,

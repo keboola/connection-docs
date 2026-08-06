@@ -29,11 +29,11 @@ the [Developer Portal](https://components.keboola.com/). Choose an appropriate n
 have created the component, edit it, and fill in the following details:
 
 - **Repository**
-    - **Type** --- AWS ECR
+    - **Type** — AWS ECR
     - **Image Name** -- `147946154733.dkr.ecr.us-east-1.amazonaws.com/developer-portal-v2/ex-generic-v2`
     - **Tag** -- see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/releases)
     - **Region** -- leave empty
-- **UI options** --- set to `genericTemplatesUI`
+- **UI options** — set to `genericTemplatesUI`
 
 For a list of available tags, see the [Generic Extractor GitHub repository](https://github.com/keboola/generic-extractor/). It is also possible to use the `latest` tag, which points to the highest available tag. However,
 we recommend that you configure your component with a specific tag and update it manually to avoid problems with breaking changes
@@ -123,10 +123,10 @@ and you identify that four values of that configuration need to be specified by 
 
 For each of the values, create a parameter of the appropriate type:
 
-- `JohnDoe` --- a string parameter `login`
-- `TopSecret` --- a string parameter `#password` (it will be encrypted)
-- `123` --- a numeric parameter `accountId`
-- `active` --- an enumeration parameter `userType` with values `active`, `inactive`, `all`
+- `JohnDoe` — a string parameter `login`
+- `TopSecret` — a string parameter `#password` (it will be encrypted)
+- `123` — a numeric parameter `accountId`
+- `active` — an enumeration parameter `userType` with values `active`, `inactive`, `all`
 
 The parameter names are completely arbitrary. However, they must not conflict with existing
 configuration properties of [Generic Extractor](/components/extractors/generic-extractor/configuration/config/) (e.g., `jobs`, `mappings`).

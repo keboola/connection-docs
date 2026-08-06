@@ -26,18 +26,18 @@ of value in the response which must be used in the next request.
 ## Configuration Parameters
 The following configuration parameters are supported for the `response.param` method of pagination:
 
-- `responseParam` (required, string) --- path to the key which contains the value used for scrolling
-- `queryParam` (required, string) --- name of the [query string](/components/extractors/generic-extractor/tutorial/rest/#url) parameter in which
+- `responseParam` (required, string) — path to the key which contains the value used for scrolling
+- `queryParam` (required, string) — name of the [query string](/components/extractors/generic-extractor/tutorial/rest/#url) parameter in which
 the above value should be sent to the API; the `queryParam` **overrides** the values from the [job
 parameters](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters)
 (see an [example](#overriding-parameters)).
-- `includeParams` (optional, boolean) --- when `true`, the job parameters
+- `includeParams` (optional, boolean) — when `true`, the job parameters
 **are added** to the provided URL. The default value is `false`.
-- `scrollRequest` (optional, object) --- [job-like](/components/extractors/generic-extractor/configuration/config/jobs/) object (supported fields are
+- `scrollRequest` (optional, object) — [job-like](/components/extractors/generic-extractor/configuration/config/jobs/) object (supported fields are
 `endpoint`, `method` and `params`) which allows to sent an initial scrolling request (see an [example](#using-scroll-request)).
 
 ### Stopping Condition
-The pagination ends **when the value of `responseParam` parameters is empty** --- the key is not present at all, is null, is
+The pagination ends **when the value of `responseParam` parameters is empty** — the key is not present at all, is null, is
 an empty string, or is `false`. Take care when configuring the `responseParam` parameter. If you, for example, misspell the name of
 the key, the extraction will not go beyond the first page.
 [Common stopping conditions](/components/extractors/generic-extractor/configuration/api/pagination/#stopping-strategy) also apply.
@@ -148,7 +148,7 @@ for instance, the [Elastic](https://www.elastic.co/guide/en/elasticsearch/refere
 Another example is an API which has something like a search endpoint which needs an initial request and
 then allows you to scroll through the results (this is not exactly [RESTful](/components/extractors/generic-extractor/tutorial/rest/) though).
 
-Let's consider an API which --- to list users --- requires that you send a POST request to the
+Let's consider an API which — to list users — requires that you send a POST request to the
 `/search` endpoint with the configuration:
 
 ```json

@@ -30,11 +30,11 @@ An example configuration:
 ## Configuration Parameters
 The following configuration parameters are supported for the `offset` method of pagination:
 
-- `limit` (required, integer) --- page size
-- `limitParam` (optional, string) --- name of the parameter in which the API expects the page size; the default value is `limit`.
-- `offsetParam` (optional, string) --- name of the parameter in which the API expects the item offset; the default value is `offset`.
-- `firstPageParams` (optional, boolean) --- when false, the first page is retrieved without the page parameters; the default value is `true`.
-- `offsetFromJob` (optional, boolean) --- when true, the offset parameter value is taken from the job parameters; the default value is `false`.
+- `limit` (required, integer) — page size
+- `limitParam` (optional, string) — name of the parameter in which the API expects the page size; the default value is `limit`.
+- `offsetParam` (optional, string) — name of the parameter in which the API expects the item offset; the default value is `offset`.
+- `firstPageParams` (optional, boolean) — when false, the first page is retrieved without the page parameters; the default value is `true`.
+- `offsetFromJob` (optional, boolean) — when true, the offset parameter value is taken from the job parameters; the default value is `false`.
 
 The limit value is configured by the `limit` parameter, but it may be overridden in 
 the [job parameters](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters). The offset value is computed automatically starting from 0, but it may be overridden in the job parameters if `offsetFromJob` is set to `true`.
@@ -44,7 +44,7 @@ the [job parameters](/components/extractors/generic-extractor/configuration/conf
 [underflow condition](/components/extractors/generic-extractor/configuration/api/pagination/#stopping-strategy) would be triggered.
 
 ### Stopping Condition
-Scrolling is stopped **when the result contains less items than requested**	 --- specified in the
+Scrolling is stopped **when the result contains less items than requested**	 — specified in the
 `limit` configuration (underflow). This also includes an instance when no items are returned, or the 
 response is empty.
 

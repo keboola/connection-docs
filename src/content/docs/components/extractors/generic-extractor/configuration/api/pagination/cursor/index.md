@@ -27,10 +27,10 @@ request, you must tell the API to start with ID 101.
 ## Configuration Parameters
 The following configuration parameters are supported for the `cursor` method of pagination:
 
-- `idKey` (required, string) --- path to the key which contains the value of the cursor; the path is entered relative to the exported items.
-- `param` (required, string) --- name of the [query string](/components/extractors/generic-extractor/tutorial/rest/#url) parameter in which the above **cursor value** should be sent to the API.
-- `increment` (optional, integer) --- value by which the cursor value will be incremented/decremented; the default value is `0`.
-- `reverse` (optional, boolean) --- when `true`, the cursor is reversed; the default value is `false`.
+- `idKey` (required, string) — path to the key which contains the value of the cursor; the path is entered relative to the exported items.
+- `param` (required, string) — name of the [query string](/components/extractors/generic-extractor/tutorial/rest/#url) parameter in which the above **cursor value** should be sent to the API.
+- `increment` (optional, integer) — value by which the cursor value will be incremented/decremented; the default value is `0`.
+- `reverse` (optional, boolean) — when `true`, the cursor is reversed; the default value is `false`.
 
 In default mode, Generic Extractor examines the response and finds the **maximum** value in the
 property specified in the `idKey`. Then it adds `increment` to the value and sends it to the 
@@ -108,7 +108,7 @@ reverse order. Let's say a request to `/users?startWith=last` will produce:
 }
 ```
 
-To retrieve the next set of results, send a request to `GET /users?startWith=344` --- i.e. with the
+To retrieve the next set of results, send a request to `GET /users?startWith=344` — i.e. with the
 ID lower than the lowest one already retrieved. The following configuration does exactly that:
 
 ```json
@@ -142,7 +142,7 @@ ID lower than the lowest one already retrieved. The following configuration does
 ```
 
 The important part is `"reverse": true` which causes Generic Extractor to look for the lowest value of the
-property specified in `idKey` (user id). Another important part --- `"increment": -1` causes ID to be lowered 
+property specified in `idKey` (user id). Another important part — `"increment": -1` causes ID to be lowered 
 by 1 between the requests. Also notice that the initial value of the API parameter `startWith` is specified 
 in the `jobs.params` configuration and it is overridden by the scroller in the subsequent requests.
 

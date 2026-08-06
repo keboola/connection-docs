@@ -12,7 +12,7 @@ Each [job](/components/extractors/generic-extractor/configuration/config/jobs/) 
 [`scroller`](/components/extractors/generic-extractor/configuration/config/jobs/#scroller) in its configuration.
 
 This is useful mainly if the API has inconsistent pagination methods among various API calls. 
-It may be also useful in case you need to vary parameters --- for instance, set different page sizes for
+It may be also useful in case you need to vary parameters — for instance, set different page sizes for
 different endpoints.
 
 ```json
@@ -39,8 +39,8 @@ different endpoints.
 ## Configuration
 The following configuration parameters are supported for the `multiple` method of pagination:
 
-- `scrollers` (required, object) --- object with configuration of the scrollers (see below)
-- `default` (optional, string) --- name of a scroller used for all jobs without a specified scroller; if not 
+- `scrollers` (required, object) — object with configuration of the scrollers (see below)
+- `default` (optional, string) — name of a scroller used for all jobs without a specified scroller; if not 
 specified, then the jobs with no assigned scroller will not use any type of pagination.
 
 The `scrollers` configuration is an object whose keys are arbitrary scroller names. The values of the 

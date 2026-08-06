@@ -155,8 +155,8 @@ This section contains a number of examples using child jobs.
 ### Basic Example
 Let's say that you have an API with two endpoints:
 
-- `/users/` --- Returns a list of users.
-- `/user/?` --- Returns user details with a given user ID.
+- `/users/` — Returns a list of users.
+- `/user/?` — Returns user details with a given user ID.
 
 The `users` endpoint returns a response like this:
 
@@ -246,7 +246,7 @@ user__user-id:
 Notice that the table representing child resources contains all the responses
 merged into a single table; the [usual merging rules](/components/extractors/generic-extractor/configuration/config/jobs/#merging-response) apply.
 
-Also notice that a new column --- `parent_id` was added, containing the **placeholder value** used
+Also notice that a new column — `parent_id` was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
 Its name is created by joining the `parent_` prefix to the **placeholder path**.
 
@@ -540,10 +540,10 @@ jobs are nested only one level deep, there is no other option anyway. Let's see 
 
 Assume that you have an API with the following endpoints:
 
-- `/users/` --- Returns a list of users.
-- `/user/?` --- Returns user details with given user ID.
-- `/user/?/orders` --- Returns a list of user orders.
-- `/user/?/orders/?` --- Returns order detail with given user and order ID.
+- `/users/` — Returns a list of users.
+- `/user/?` — Returns user details with given user ID.
+- `/user/?/orders` — Returns a list of user orders.
+- `/user/?/orders/?` — Returns order detail with given user and order ID.
 
 The `users` endpoint returns a response like this:
 
@@ -999,8 +999,8 @@ the child jobs to obtain the `user-detail` table. See [example [EX106]](https://
 ### Simple Filter
 Let's assume that you have an API which has two endpoints:
 
-- `users` --- Returns a list of users.
-- `users/?` --- Returns a user detail.
+- `users` — Returns a list of users.
+- `users/?` — Returns a user detail.
 
 The `users` endpoint returns a response like this:
 

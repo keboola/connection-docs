@@ -27,16 +27,16 @@ If you need to use the item offset, use the [Offset Scroller](/components/extrac
 ## Configuration Parameters
 The following configuration parameters are supported for the `pagenum` method of pagination:
 
-- `limit` (optional, integer) --- page size
-- `limitParam`(optional, string) --- name of the parameter in which the API expects the page size; the default value is `limit`.
-- `pageParam` (optional, string) --- name of the parameter in which the API expects the page number; the default value is `page`.
-- `firstPageParams` (optional, boolean) --- when `false`, the first page will be retrieved without the page parameters; the default 
+- `limit` (optional, integer) — page size
+- `limitParam`(optional, string) — name of the parameter in which the API expects the page size; the default value is `limit`.
+- `pageParam` (optional, string) — name of the parameter in which the API expects the page number; the default value is `page`.
+- `firstPageParams` (optional, boolean) — when `false`, the first page will be retrieved without the page parameters; the default 
 value is `true`.
-- `firstPage` (optional, integer) --- index of the first page; the default value is `1`.
+- `firstPage` (optional, integer) — index of the first page; the default value is `1`.
 
 ### Stopping Condition
 The `pagenum` scroller uses similar stopping condition as the [`offset` scroller](/components/extractors/generic-extractor/configuration/api/pagination/offset/#stopping-condition). 
-Scrolling is stopped in case of an underflow --- when the result contains **less items than requested** (including zero). However, 
+Scrolling is stopped in case of an underflow — when the result contains **less items than requested** (including zero). However, 
 in the `pagenum` scroller, the **`limit` parameter is not required** and has **no default value**. This means that if you omit it, 
 the scrolling will stop only if an empty page is encountered.
 

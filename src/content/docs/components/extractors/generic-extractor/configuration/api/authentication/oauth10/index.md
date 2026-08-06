@@ -73,9 +73,9 @@ Then, inject the OAuth credentials into the configuration root:
 
 The `authorization` field has a single property `oauth_api`, which has a single property `credentials` with three child properties:
 
-- `#data` --- contains the response from the service provider, the response is a JSON string (not an object!).
-- `appKey` --- contains the [Consumer Key](https://oauth.net/core/1.0/#anchor3).
-- `#appSecret` --- contains the [Consumer Secret](https://oauth.net/core/1.0/#anchor3) (use an empty string if
+- `#data` — contains the response from the service provider, the response is a JSON string (not an object!).
+- `appKey` — contains the [Consumer Key](https://oauth.net/core/1.0/#anchor3).
+- `#appSecret` — contains the [Consumer Secret](https://oauth.net/core/1.0/#anchor3) (use an empty string if
 not used by the service provider).
 
 With the above configuration, Generic Extractor generates the `Authorization` header; the signature

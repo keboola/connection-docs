@@ -52,8 +52,8 @@ values used in the [job configurations](/components/extractors/generic-extractor
 second level of keys are the names of the properties found (or expected) in the response.
 Then, the value is an object with the following properties:
 
-- `type` (optional, string) --- Mapping type, either `column`, `table` or `user`. The default value is `column`.
-- `mapping` (required, object) --- Mapping configuration; depends on the mapping type.
+- `type` (optional, string) — Mapping type, either `column`, `table` or `user`. The default value is `column`.
+- `mapping` (required, object) — Mapping configuration; depends on the mapping type.
 
 The following configuration shows a sample mapping configuration for dataType `users` and column `id`:
 
@@ -99,11 +99,11 @@ Column mapping represents a basic mapping type that allows you to select extract
 columns, rename them, and optionally set a primary key on them. The mapping
 configuration requires:
 
-- `type` (optional, string) --- Can be omitted or must be `column`.
-- `mapping` (required, object) --- Object with two properties:
-  - `destination` (required, string) --- Name of the column in the output table
-  - `primaryKey` (optional, boolean) --- If `true`, then a primary key will be set on the column. The default value is `false`.
-- `forceType` (optional, boolean) --- If set to `true`, the property will not be processed and will be stored as an encoded
+- `type` (optional, string) — Can be omitted or must be `column`.
+- `mapping` (required, object) — Object with two properties:
+  - `destination` (required, string) — Name of the column in the output table
+  - `primaryKey` (optional, boolean) — If `true`, then a primary key will be set on the column. The default value is `false`.
+- `forceType` (optional, boolean) — If set to `true`, the property will not be processed and will be stored as an encoded
 JSON (see an [example](#mapping-without-processing)).
 
 ### User Mapping
@@ -115,16 +115,16 @@ in child jobs (see an [example](#mapping-child-jobs)).
 Table mapping allows you to create a new table from a particular property of the response object. Table
 mapping is, by default, used for arrays. The mapping configuration requires:
 
-- `type` (required, string) --- Must be set to `table`.
-- `destination` (required, string) --- Name of the output table.
-- `tableMapping` (required, object) --- Object with another mapping configuration (required unless `parentKey.disable` is
-set to `true` --- see below).
-- `parentKey` (optional, object) --- Configuration of the parent-child relationship between tables:
-    - `destination` (optional, string) --- Name of the column which links to the parent table. The default value is the name
+- `type` (required, string) — Must be set to `table`.
+- `destination` (required, string) — Name of the output table.
+- `tableMapping` (required, object) — Object with another mapping configuration (required unless `parentKey.disable` is
+set to `true` — see below).
+- `parentKey` (optional, object) — Configuration of the parent-child relationship between tables:
+    - `destination` (optional, string) — Name of the column which links to the parent table. The default value is the name
 	of the parent table with the suffix `_pkey`. See an [example](#using-primary-keys).
-    - `primaryKey` (optional, boolean) --- Set to `true` to mark the link column as a primary key for the child table too.
+    - `primaryKey` (optional, boolean) — Set to `true` to mark the link column as a primary key for the child table too.
 	The default value is `false`. See an [example](#using-primary-keys).
-    - `disable` (optional, boolean) --- Completely disables the parent-child relationship, disables configured
+    - `disable` (optional, boolean) — Completely disables the parent-child relationship, disables configured
 	`tableMapping`. See an [example](#disabled-parent-key).
 
 The following configuration takes the `contacts` property from the response and makes a new table
@@ -302,7 +302,7 @@ Let's say that you have an API endpoint `/users` which returns a response simila
 ]
 ```
 
-More details about the user can be retrieved through another endpoint --- `/user/{id}`, where `{id}` is
+More details about the user can be retrieved through another endpoint — `/user/{id}`, where `{id}` is
 the user ID:
 
 ```json
@@ -968,7 +968,7 @@ a specific user. To avoid this, you can directly map a nested property:
 
 The mapping for the `primary-address` table is now **not nested** inside the mapping for the
 `contacts` table. Therefore, it links directly to the `users` table. The content is the same because
-the mapping still refers to the same property --- the first item of the `addresses` property of `contacts`
+the mapping still refers to the same property — the first item of the `addresses` property of `contacts`
 (`contacts.addresses.0`). The following table is produced:
 
 |street|country|users_pk|
@@ -976,7 +976,7 @@ the mapping still refers to the same property --- the first item of the `address
 |Blossom Avenue|United Kingdom|b5d72095c441b3a3d6f23ad8142c3f8b|
 |Whiteheaven Mansions|United Kingdom|5f7f2ab65a680f1a9387a8fafe6b9050|
 
-The user table now contains an additional column --- `primary-address`:
+The user table now contains an additional column — `primary-address`:
 
 |id|name|user-contact|primary-address|
 |---|---|---|---|
@@ -1403,7 +1403,7 @@ disabling the relationship:
 ```
 
 The important part is `parentKey.disable` set to `true` in the `children` mapping. Then, an already
-existing mapping can be referenced --- `"destination": "users"` defines that the children are to be mapped using
+existing mapping can be referenced — `"destination": "users"` defines that the children are to be mapped using
 the same configuration as their parents.
 
 Notice that the `children` mapping contains no `tableMapping` configuration. This is because the mapping of

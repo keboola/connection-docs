@@ -6,7 +6,7 @@ redirect_from:
 ---
 
 
-Extracting data incrementally is universally beneficial --- it **speeds up the extraction** and **lowers the load** on both the API and
+Extracting data incrementally is universally beneficial — it **speeds up the extraction** and **lowers the load** on both the API and
 [Keboola Storage](/storage/) (thus saving 
 [credits](/management/limits/#project-power)).
 

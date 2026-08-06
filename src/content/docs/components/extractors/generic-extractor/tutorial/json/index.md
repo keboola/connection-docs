@@ -61,19 +61,19 @@ followed by a comma.*
 ### Terminology
 The terminology varies a lot and other expressions are also commonly used: 
 
-- Object --- also a record / structure / dictionary / hash table / keyed list / key value / associative array
-- Property --- also a field / key / index
-- Array --- also a collection / list / vector / ordinal array / sequence
+- Object — also a record / structure / dictionary / hash table / keyed list / key value / associative array
+- Property — also a field / key / index
+- Array — also a collection / list / vector / ordinal array / sequence
 
 ## Data Values
 Each property value always has one of the following data types:
 
-- String --- text
-- Number --- number
-- Integer --- whole number (without decimal part)
-- Boolean --- value which is either `true` or `false`
-- Array --- ordered list of values
-- Object --- collection of named values
+- String — text
+- Number — number
+- Integer — whole number (without decimal part)
+- Boolean — value which is either `true` or `false`
+- Array — ordered list of values
+- Object — collection of named values
 
 The types `string`, `number`, `integer` and `boolean` represent **scalar values** (simple). The types `array` and 
 `object` represent **structured values** (they are composed of other values). For example:

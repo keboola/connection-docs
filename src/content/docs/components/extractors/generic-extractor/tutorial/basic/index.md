@@ -211,8 +211,8 @@ the `dataField` refers to the `campaigns` property in the JSON retrieved as the 
 The above tutorial demonstrates a very basic configuration of Generic Extractor. The extractor is capable
 of doing much more; see other parts of this tutorial for an explanation of pagination, jobs and mapping:
 
-- [Pagination](/components/extractors/generic-extractor/tutorial/pagination/) --- breaks a result with many items into separate pages.
-- [Jobs](/components/extractors/generic-extractor/tutorial/jobs/) --- describe the API endpoints
+- [Pagination](/components/extractors/generic-extractor/tutorial/pagination/) — breaks a result with many items into separate pages.
+- [Jobs](/components/extractors/generic-extractor/tutorial/jobs/) — describe the API endpoints
 		(resources) to be extracted.
-- [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) --- describes how the JSON
+- [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON
 		response is converted into CSV files that will be imported into Storage.

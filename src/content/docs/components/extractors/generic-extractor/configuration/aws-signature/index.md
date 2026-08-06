@@ -30,7 +30,7 @@ A sample AWS signature configuration looks like this:
 See [example [EX143]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/143-aws-signature-request).
 
 ## AWS Signature Credentials
-- **accessKeyId** --- AWS access key ID
-- **#secretKey** --- AWS secret access key
-- **serviceName** --- Signing to a particular service name
-- **regionName** --- Signing to a particular region name
+- **accessKeyId** — AWS access key ID
+- **#secretKey** — AWS secret access key
+- **serviceName** — Signing to a particular service name
+- **regionName** — Signing to a particular region name

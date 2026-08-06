@@ -159,7 +159,7 @@ It is highly recommended to use the relative URL fragments. This means that the
 
 Use the other two options for handling exceptions in the API extraction (for instance, falling back
 to an older API version). Note that using a different domain (or even a base path) may
-interfere with the authentication --- depending on the specification of the target API.
+interfere with the authentication — depending on the specification of the target API.
 
 Also, closely follow the target API specification regarding trailing slashes. For some APIs,
 both `https://example.com/3.0/campaign` and `https://example.com/3.0/campaign/` URLs may
@@ -295,7 +295,7 @@ use that property.
 Apart from cases where required, the `dataField` configuration may also be set to override the
 above default behaviour. The `dataField` parameter contains a
 [dot separated path](/components/extractors/generic-extractor/tutorial/json/) to the response property you want to
-extract. The `dataField` parameter may be written in two ways --- either as a simple string or
+extract. The `dataField` parameter may be written in two ways — either as a simple string or
 as an object with the `path` property. For instance, these two configurations are equivalent:
 
 ```json
@@ -319,7 +319,7 @@ as an object with the `path` property. For instance, these two configurations ar
 ```
 
 ### Data Field Delimiter
-The path to the response property is by default expected to be dot separated. That is --- a path
+The path to the response property is by default expected to be dot separated. That is — a path
 `members.active` refers to the property `active` nested inside the property `members`. If you need to refer to a
 property containing a dot, you have to change the data field path delimiter to some other character. This can be
 done using the `delimiter` property:
@@ -364,7 +364,7 @@ be useful in these cases:
 
 The value of the `responseFilter` property is either a path to a property in the response, or
 an array of such paths. The path is dot-separated unless set otherwise in the `responseFilterDelimiter` configuration.
-If you want to refer to the items of an array, use `[]` --- see an [example below](#skip-flattening-in-nested-objects).
+If you want to refer to the items of an array, use `[]` — see an [example below](#skip-flattening-in-nested-objects).
 The same result can be achieved using `forceType` parameter in
 [column mapping](/components/extractors/generic-extractor/configuration/config/mappings/#column-mapping).
 
@@ -1250,7 +1250,7 @@ object. With the above settings you will obtain a table like this:
 
 See [example [EX019]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/019-different-delimiter).
 
-### Setting delimiter --- more complex
+### Setting delimiter — more complex
 For the custom set delimiter in the response filter, you need to have a complex API response. For example:
 
 ```json

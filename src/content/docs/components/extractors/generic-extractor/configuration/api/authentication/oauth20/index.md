@@ -31,11 +31,11 @@ The OAuth 2.0 authentication process is described by the [following diagram](htt
 In the diagram, step `6` represents the end of authentication and the actual communication with
 the API (extraction of data) may begin.
 The final authorization section of the Generic Extractor configuration is generated between
-steps `5` and `6`. When a component is published, steps `1` --- `6` of the process are handled by
+steps `5` and `6`. When a component is published, steps `1` — `6` of the process are handled by
 Keboola (and the end-user).
 
 To **develop and test** a new component with the OAuth authorization, go through
-steps `1` --- `6` manually. At step `5`, you will obtain a response which needs to be put
+steps `1` — `6` manually. At step `5`, you will obtain a response which needs to be put
 in the `authorization.oauth_api.credentials.data` section of the configuration. The response can be
 either plaintext or a JSON. Let's say you obtain a simple plaintext string:
 
@@ -68,9 +68,9 @@ The following configuration needs to be supplied to Generic Extractor:
 The `authorization` field has a single property `oauth_api` with a single property `credentials`. This
 has three child properties:
 
-- `#data` --- contains the response from the service provider; the response is a plaintext string or a JSON string (not an object!).
-- `appKey` --- contains the Client ID (use an empty string if not used by the service provider).
-- `#appSecret` --- contains the Client Secret (use an empty string if not used by the service provider).
+- `#data` — contains the response from the service provider; the response is a plaintext string or a JSON string (not an object!).
+- `appKey` — contains the Client ID (use an empty string if not used by the service provider).
+- `#appSecret` — contains the Client Secret (use an empty string if not used by the service provider).
 
 Note that the properties `appKey` and `#appSecret` must exist even if not used by the API; set them
 to empty strings. For more information about OAuth 2, see the [official documentation](https://oauth.net/2/)
@@ -79,10 +79,10 @@ or learn [more about Keboola-OAuth integration](/extend/common-interface/oauth).
 ## Configuration Parameters
 The following configuration parameters are supported for the `oauth20` authentication type:
 
-- `format` (optional, string) --- If the OAuth service provider response is JSON, use the only possible
+- `format` (optional, string) — If the OAuth service provider response is JSON, use the only possible
 value -- `json`. Otherwise do not specify format at all (plaintext is assumed).
-- `headers` (optional, object) --- Object whose properties represent the key-value pairs sent as HTTP headers.
-- `query` (optional, object) --- Object whose properties represent the key-value pairs of the URL query.
+- `headers` (optional, object) — Object whose properties represent the key-value pairs sent as HTTP headers.
+- `query` (optional, object) — Object whose properties represent the key-value pairs of the URL query.
 
 At least one of the `headers` or `query` options should always be specified; otherwise no authentication
 will be sent with the API requests. Both fields also allow and practically require using
