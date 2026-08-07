@@ -12,22 +12,29 @@ to Keboola.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **GitHub** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization), and
-select the template you wish to use. There are two configuration templates available:
 
-- `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/#incremental-loading).
-- `Full Mode` -- always gets everything.
+### Authentication
+In the authorization section, enter a **GitHub Personal Access Token (PAT)** with the required scopes: `read:org` and `repo`.
+You can create a PAT in [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
 
-![Screenshot - GitHub configuration](/components/extractors/other/github/github-1.png)
+### Endpoints
+Select one or more **Endpoints to Extract**:
 
-You can download:
+- `organizations` -- your GitHub organizations
+- `organization_members` -- members of your organizations
+- `organization_teams` -- teams within your organizations
+- `organization_repositories` -- repositories owned by your organizations
+- `repository_issues` -- issues in a repository
+- `repository_commits` -- commits in a repository
 
-- Your Organizations
-- Organization Members
-- Organization Teams
-- Organization Repositories
-- Repository Issues
-- Repository Commits
+### Row Configuration
+Click **Add Row** to add one or more [configuration rows](/components/#configuration-rows).
+Each row specifies the scope of extraction:
 
-After you select the template, remember to **save** the configuration.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+- **Organization Name** -- GitHub organization name (required for organization-related endpoints).
+- **Repository Owner** -- repository owner username or organization name (required for repository-specific endpoints).
+- **Repository Name** -- repository name (required for repository-specific endpoints).
+- **Issue State** -- filter issues by state: `all` (default), `open`, or `closed` (for the `repository_issues` endpoint).
+- **Commits Since** -- only fetch commits after this date in ISO 8601 format (e.g., `2024-01-01T00:00:00Z`). Leave empty for all commits (for the `repository_commits` endpoint).
+
+Remember to **save** the configuration.
