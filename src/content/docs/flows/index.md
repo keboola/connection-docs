@@ -370,7 +370,7 @@ Click **Run flow** in the flow header to run the whole flow. The arrow next to t
 
 ### Run selected tasks
 
-Use this when only a part of the pipeline needs to run — for example after fixing one transformation, without waiting for the extractors again.
+Use this when only a part of the flow needs to run — for example after fixing one transformation, without waiting for the extractors again.
 
 1. Open the **Builder** tab and choose **Run selected tasks** from the **Run flow** button.
 2. Click the tasks you want to run. The canvas is read-only while selecting; each phase shows how many of its tasks are selected and offers **Select all tasks in this phase** and **Select this phase and everything after it**.
