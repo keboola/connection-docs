@@ -364,6 +364,49 @@ You can also create the notification inside of condition as a New Phase, name it
 
 ![](/flows/conditional-flows-notification-2.png)
 
+## Run the Flow
+
+Click **Run flow** in the flow header to run the whole flow with its saved configuration. Save or reset your changes first — an unsaved flow cannot be run.
+
+The arrow next to the button offers the partial runs described below. Both use the **saved** configuration, so a task you just edited runs as it is stored, not as it looks on the canvas.
+
+### Run selected tasks
+
+Use this when only a part of the pipeline needs to run — for example after fixing one transformation, without waiting for the extractors again.
+
+1. Open the **Builder** tab and choose **Run selected tasks** from the **Run flow** button.
+2. Click the tasks you want to run. Selected tasks stay highlighted, the rest dim, and each phase shows how many of its tasks are selected.
+3. Click **Run *n* tasks** in the panel in the top-right corner. **Cancel** or `Esc` leaves the mode without running anything.
+
+While selecting, the canvas is read-only: adding, editing, moving, and deleting tasks, phases, and conditions is unavailable.
+
+Two shortcuts appear above each phase:
+
+- **Select all tasks in this phase** (and its counterpart to deselect them).
+- **Select this phase and everything after it** — adds the phase and every phase reachable from it, for the "fix one spot and run the rest of the pipeline" case.
+
+What runs:
+
+- Only the selected tasks run. **Phase conditions are ignored** — the run does not branch, it simply executes what you picked.
+- Phases with nothing selected are skipped, and the run continues to the next phase that has a selection.
+- Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected; a run never enables them.
+- Tasks run with the same phase grouping as in the flow, so tasks selected within one phase still run in parallel.
+- The run appears in **All Runs** like any other flow job, and the canvas shows its progress through the flow.
+
+:::caution
+A selection that spans two parallel branches of a condition is not supported yet and the job fails with a user error. Select tasks along a single path through the flow.
+:::
+
+### Re-run failed tasks
+
+After a flow run that failed, **Re-run failed tasks** appears in the same **Run flow** button. It reuses the results of tasks that already finished successfully — no new job runs for them — and re-runs the rest. The current flow configuration is used, so any changes made since the last run apply only to the tasks that re-run. The scope of the original run is preserved: re-running a partial run does not expand it to the whole flow.
+
+The same action is available on the flow's job detail in **Jobs**.
+
+### Run a single phase or task
+
+Hovering over a phase or a task on the canvas reveals a **run** icon that runs just that phase or task. Conditions are ignored and disabled tasks stay disabled. Unlike a selected-tasks run, this run is isolated: no other phase is entered and no edges of the flow are traversed.
+
 ## Schedule and Automate
 
 Open the **Schedules** tab in your flow and click **Create Schedule**. A flow can have several
