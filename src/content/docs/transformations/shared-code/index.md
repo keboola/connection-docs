@@ -9,7 +9,7 @@ description: Share pieces of transformation code between otherwise unrelated tra
 Shared code lets you share pieces of code between otherwise unrelated transformations. Write a
 snippet once, link it into as many transformations as you like, and edit it in one place.
 
-It is a sibling of [variables](/flows/variables/): both make transformation code more dynamic and
+It is a sibling of [variables](/components/variables/): both make transformation code more dynamic and
 both are resolved before the transformation runs, but variables substitute *values* while shared
 code substitutes *code*. Shared code can contain variables of its own — see
 [Shared Code with Variables](#example-shared-code-with-variables).

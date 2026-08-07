@@ -302,7 +302,7 @@ If you need to make modifications to the code for a specific transformation, you
 
 ### Variables
 
-Variables allow you to parametrize transformations. For how they work, see [Variables](/flows/variables/).
+Variables allow you to parametrize transformations. For how they work, see [Variables](/components/variables/).
 Variables can be created, edited, used or removed inside of SQL Editor.
 
 #### Using Variables in Transformations and Workspaces

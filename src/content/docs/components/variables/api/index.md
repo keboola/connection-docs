@@ -1,6 +1,6 @@
 ---
-title: Variables API
-slug: 'flows/variables/api'
+title: Variables Through the API
+slug: 'components/variables/api'
 description: Define, override, and resolve configuration variables through the API, and drive them from a flow.
 redirect_from:
     - /integrate/variables/
@@ -14,10 +14,10 @@ resolved at [job runtime](/integrate/jobs/).
 **Important:** Make sure you're familiar with the [Configuration API](/storage/api/configurations/) and 
 the [Job API](/integrate/jobs/) before reading on.
 
-See [Tutorial](/flows/variables/api/tutorial) for step-by-step example.
+See [Tutorial](/components/variables/api/tutorial) for step-by-step example.
 
 This page covers variables **through the API**. To define and use them in the UI instead,
-see [Variables](/flows/variables/).
+see [Variables](/components/variables/).
 
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
@@ -238,8 +238,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 
 ```
 
-The `variables_id` property contains the ID of the [variable configuration](/flows/variables/api/#step-1--create-variable-configuration) - e.g., `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/flows/variables/api/#step-2--create-default-values-for-variables) - e.g., `807952812`.
+The `variables_id` property contains the ID of the [variable configuration](/components/variables/api/#step-1--create-variable-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](/components/variables/api/#step-2--create-default-values-for-variables) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 ```python
@@ -303,11 +303,11 @@ with the following body:
 }
 ```
 
-The `config` property contains the ID of the [main configuration](/flows/variables/api/#step-3--create-main-configuration).
+The `config` property contains the ID of the [main configuration](/components/variables/api/#step-3--create-main-configuration).
 Before executing the API call, you have to create the source table. Unless you modified the mapping in the 
-[example](/flows/variables/api/#step-3--create-main-configuration), you have to create a bucket named
+[example](/components/variables/api/#step-3--create-main-configuration), you have to create a bucket named
 **variable-testing** in the **in** stage. Then create a table called **batman** with columns  **COUNTRY** 
-and **CARS**. You can use this [sample CSV file](/flows/variables/api/countries.csv).
+and **CARS**. You can use this [sample CSV file](/components/variables/api/countries.csv).
 
 After you create the input table, you can run the job. 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#31486ac2-ea52-4f19-a039-2ee1b1ae5863). 
@@ -385,7 +385,7 @@ where you can verify that the variables were replaced.
 </details>
 
 #### Option 2 -- Run a job with stored values
-Similarly to the [default values](/flows/variables/api/#step-2--create-default-values-for-variables), 
+Similarly to the [default values](/components/variables/api/#step-2--create-default-values-for-variables), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 ```json
@@ -405,7 +405,7 @@ you can store another set of values. Let's add another configuration row to the 
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#fbe487b5-cd68-4318-8219-7c067ebef795). 
 You will obtain an ID of the row. Then create a table called **watman** with 
-columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/flows/variables/api/countries.csv).
+columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/components/variables/api/countries.csv).
 
 Run a job with parameters and provide the ID of the main configuration in the `config` property and 
 the ID of the value row in `variableValuesId`:
@@ -493,8 +493,8 @@ read by the flow runner and is not passed to the job.
 
 To set a value on one task without declaring a flow variable, put `variableValuesId` or
 `variableValuesData` in the task's advanced parameters; the payload is the same as for
-[running a job](/flows/variables/api/#step-4--run-job). See
-[Variables](/flows/variables/#driving-a-configuration-variable-from-a-flow) for the UI path.
+[running a job](/components/variables/api/#step-4--run-job). See
+[Variables](/components/variables/#driving-a-configuration-variable-from-a-flow) for the UI path.
 
 ### Legacy Flows
 Legacy flows (the `keboola.orchestrator` component) carry variable values on the task itself, and
@@ -509,7 +509,7 @@ This applies to **legacy** flows only. New flows use `keboola.flow`, described a
 - Variables can be entered when running an orchestration.
 
 Entering variable values in task configurations allows the orchestration to run configurations with
-variables; the parameters are identical to [running a job](/flows/variables/api/#step-4--run-job).
+variables; the parameters are identical to [running a job](/components/variables/api/#step-4--run-job).
 When running an orchestration, you can also provide variable values for the whole run, and those
 override the ones set on individual tasks.
 
@@ -555,7 +555,7 @@ You can use the following data in the configuration:
 ```
 
 The contents of the `task` property are identical to the body 
-of the [run job API call](/flows/variables/api/#step-4--run-job). Here, the value `807968875` refers to the ID 
+of the [run job API call](/components/variables/api/#step-4--run-job). Here, the value `807968875` refers to the ID 
 of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
 You can use the `variableValuesData` field in the same manner.
 Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
@@ -585,7 +585,7 @@ As long as the variable values can be found somewhere, this is sufficient. See [
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
 to override variable values set to individual tasks. The calling convention is the same as shown in the 
-[basic job run](/flows/variables/api/#step-4--run-job). The same rules also apply, notably that you can't 
+[basic job run](/components/variables/api/#step-4--run-job). The same rules also apply, notably that you can't 
 use `variableValuesId` and `variableValuesData` together. 
 A sample request body:
 
@@ -625,7 +625,7 @@ value; it is merged by the flow runner before the job starts.
 
 The following diagram shows the parameters mentioned on this page and to what they refer to:
 
-![Screenshot -- Properties references](/flows/variables/api/variables.svg)
+![Screenshot -- Properties references](/components/variables/api/variables.svg)
 
 In a nutshell, `variableValuesId` always refers to the row of the variable configuration associated with the 
 main configuration. The main configuration is referenced in the `config` parameter. From another point of view,

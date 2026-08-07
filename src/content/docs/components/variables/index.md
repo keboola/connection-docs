@@ -1,6 +1,6 @@
 ---
 title: Variables
-slug: 'flows/variables'
+slug: 'components/variables'
 description: Parametrize a component configuration with placeholders, define variables inside a flow, and drive one from the other.
 redirect_from:
     - /transformations/variables/
@@ -19,7 +19,7 @@ flow runs a component — and this page covers both, plus the bridge between the
 You do not need a flow to use configuration variables — a single transformation with a default
 value works on its own. Start there if that is all you need.
 
-To define, override, or read variables programmatically, see [Variables API](/flows/variables/api/).
+To define, override, or read variables programmatically, see [Variables Through the API](/components/variables/api/).
 For sharing *code* rather than values between transformations, see
 [Shared Code](/transformations/shared-code/).
 
@@ -57,11 +57,11 @@ CREATE OR REPLACE TABLE "result" AS
 
 When you define a variable, you have to provide its default value:
 
-![Screenshot - Variables Configuration](/flows/variables/variables-setting.png)
+![Screenshot - Variables Configuration](/components/variables/variables-setting.png)
 
 When you run a transformation, you can provide a runtime override of the default value:
 
-![Screenshot - Running Transformation](/flows/variables/variables-run.png)
+![Screenshot - Running Transformation](/components/variables/variables-run.png)
 
 When a variable is referenced in the code but not defined, or its value is missing,
 you'll get an error:
@@ -256,7 +256,7 @@ flow's Builder to open its settings, click **Set advanced parameters**, and add 
 to the task payload. The editor opens pre-filled with the task's `type`, `mode`, `componentId` and
 `configId`; add the override there and click **Set**. This path does not
 depend on the variable also being declared as a flow variable. The `variableValuesData` shape is the
-same one [running a job](/flows/variables/api/#step-4--run-job) takes, but the surrounding fields are
+same one [running a job](/components/variables/api/#step-4--run-job) takes, but the surrounding fields are
 the task's own (`componentId` / `configId`), not the job API's `component` / `config`:
 
 ![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
@@ -288,5 +288,5 @@ A value for the same variable can arrive from several places:
 
 Two rules are worth remembering: a flow variable only ever *replaces* a value for a name the
 configuration already declares, and values supplied at run time take precedence over the stored
-default. See [Variables Evaluation Sequence](/flows/variables/api/#variables-evaluation-sequence)
+default. See [Variables Evaluation Sequence](/components/variables/api/#variables-evaluation-sequence)
 for the API-level view and the diagram of how these properties refer to each other.

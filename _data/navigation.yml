@@ -95,15 +95,6 @@ items:
   - url: /flows/
     title: Conditional Flows
     items:
-      - url: /flows/variables/
-        title: Variables
-        items:
-          - url: /flows/variables/api/
-            title: Variables API
-            items:
-              - url: /flows/variables/api/tutorial/
-                title: Tutorial
-
       - url: /flows/flows-legacy/
         title: Legacy Flows
 
@@ -144,6 +135,15 @@ items:
     items:
       - url: /components/running-jobs-in-parallel/
         title: Running Jobs in Parallel
+
+      - url: /components/variables/
+        title: Variables
+        items:
+          - url: /components/variables/api/
+            title: Variables Through the API
+            items:
+              - url: /components/variables/api/tutorial/
+                title: Tutorial
 
       - url: /components/extractors/
         title: Data Source Connectors

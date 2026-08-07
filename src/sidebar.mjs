@@ -80,21 +80,6 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "flows" },
-      {
-        label: "Variables",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "flows/variables" },
-          {
-            label: "Variables API",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "flows/variables/api" },
-              { slug: "flows/variables/api/tutorial" },
-            ],
-          },
-        ],
-      },
       { slug: "flows/flows-legacy" },
       { slug: "flows/flow-migration-guide" },
     ],
@@ -140,6 +125,21 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "components" },
       { slug: "components/running-jobs-in-parallel" },
+      {
+        label: "Variables",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/variables" },
+          {
+            label: "Variables Through the API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/variables/api" },
+              { slug: "components/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
       {
         label: "Data Source Connectors",
         collapsed: true,

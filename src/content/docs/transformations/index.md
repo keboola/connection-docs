@@ -201,7 +201,7 @@ Python and R transformations.
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/flows/variables/#configuration-variables'>Variables</a></th> 
+    <th><a href='/components/variables/#configuration-variables'>Variables</a></th> 
     <td>✓</td>
 </tr>
 <tr>
@@ -219,7 +219,7 @@ and run configurations and that creating your own
 
 Transformations support [sharing pieces of code](/transformations/shared-code/), 
 encouraging users to create reusable blocks of code. They also support 
-[variables](/flows/variables/#configuration-variables) that can be used to parametrize transformations.
+[variables](/components/variables/#configuration-variables) that can be used to parametrize transformations.
 
 Apart from that, transformations come with [workspaces](/workspace/) (previously named Sandboxes),
 which have many new features, such as loading and unloading data with a running workspace or resuming the workspace.

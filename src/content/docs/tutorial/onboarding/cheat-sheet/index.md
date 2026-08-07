@@ -104,7 +104,7 @@ choice allows for either updating existing records (upserting) or simply adding 
 ### Use Variables
 Variables are placeholders for values frequently used in your transformation scripts, which is especially useful for common filter conditions.
 By defining a value as a variable, you can easily update it in one spot rather than changing it everywhere it appears. Check out more details on using variables
-[here](/flows/variables/).
+[here](/components/variables/).
 
 ***Note:** For complex setups, you can even set variables dynamically through API calls when running components.*
 

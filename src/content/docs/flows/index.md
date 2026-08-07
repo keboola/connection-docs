@@ -52,7 +52,7 @@ Select a task in the Builder to open its settings.
 
 - To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
-overriding a [variable](/flows/variables/#task-parameters-on-a-single-task) for that one task.
+overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
 
 ![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
 
@@ -89,7 +89,7 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ### 3. What the Condition Compares (Subject)
 
-Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/flows/variables/#using-variables-in-conditions)).
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/components/variables/#using-variables-in-conditions)).
 
 In the **Phases / Tasks** tab you can choose:
 
@@ -100,7 +100,7 @@ In the **Phases / Tasks** tab you can choose:
 | ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
 | ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
 | ***phase* > Continue on Failure** | Passes when **every** task in that phase succeeded, except the tasks you explicitly allow to fail. See [Continue on Failure](#4-continue-on-failure). |
-| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/flows/variables/#dynamic-value) variables). |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/#dynamic-value) variables). |
 
 For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
 
@@ -162,7 +162,7 @@ Task ids that no longer belong to the phase (for example a deleted or disabled t
 
 A flow can define its own variables — static, or computed at run time from a task result — and use
 them in conditions or pass them into the components it runs. See
-[Variables](/flows/variables/) for both flow variables and the configuration variables they can
+[Variables](/components/variables/) for both flow variables and the configuration variables they can
 drive.
 
 ## Retry
