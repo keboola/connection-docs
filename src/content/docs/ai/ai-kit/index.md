@@ -1,6 +1,7 @@
 ---
 title: AI Kit
 slug: 'ai/ai-kit'
+description: AI Kit — a marketplace of Keboola-aware plugins for AI coding assistants — the developer, component-developer, and data-app-developer plugins, and how to install them.
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: Kai Python Client
 slug: 'kai/python-client'
+description: Use the Kai Python client and CLI to call the Kai API programmatically — install, authenticate with a master token, stream responses, and embed Kai in apps.
 ---
 
 
