@@ -126,6 +126,21 @@ export const sidebar = [
       { label: "Overview", slug: "components" },
       { slug: "components/running-jobs-in-parallel" },
       {
+        label: "Variables",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/variables" },
+          {
+            label: "Variables Through the API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/variables/api" },
+              { slug: "components/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
+      {
         label: "Data Source Connectors",
         collapsed: true,
         items: [
@@ -428,7 +443,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      { slug: "transformations/shared-code" },
       {
         label: "dbt Transformation",
         collapsed: true,

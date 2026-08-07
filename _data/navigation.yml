@@ -136,6 +136,15 @@ items:
       - url: /components/running-jobs-in-parallel/
         title: Running Jobs in Parallel
 
+      - url: /components/variables/
+        title: Variables
+        items:
+          - url: /components/variables/api/
+            title: Variables Through the API
+            items:
+              - url: /components/variables/api/tutorial/
+                title: Tutorial
+
       - url: /components/extractors/
         title: Data Source Connectors
         items:
@@ -587,8 +596,8 @@ items:
       - url: /transformations/mappings/
         title: Mappings
         
-      - url: /transformations/variables/
-        title: Variables & Shared Code
+      - url: /transformations/shared-code/
+        title: Shared Code
 
       - url: /transformations/dbt/
         title: dbt Transformation
