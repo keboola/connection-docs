@@ -11,15 +11,15 @@ Kai is now in **Public Beta** and available to all users in supported stacks.
 
 ### Enabling Kai
 
-Every user can see the Kai button in their project (on supported stacks). To enable Kai:
+Every user can see **Kai Agent** in their project (on supported stacks). To enable Kai:
 
-- **Organization Admins** — Can enable the feature directly from the chat screen when first clicking the Kai button
+- **Organization Admins** — Can enable the feature directly from the chat screen when first opening Kai Agent
 - **Other users** — Need to ask their Organization Admin to enable the feature, or [contact Keboola Support](mailto:support@keboola.com) for assistance
 - **Settings** — Kai can also be enabled via **Settings → Features** in your project
 
 ## Opening Kai
 
-Click the **KAI** button in your project's top navigation bar, or use keyboard shortcuts:
+Click **Kai Agent**, marked with a *Beta* pill, in your project's top bar, or use keyboard shortcuts:
 
 | Shortcut | Action |
 |----------|--------|
