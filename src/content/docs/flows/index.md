@@ -376,7 +376,9 @@ Use this when only a part of the pipeline needs to run — for example after fix
 
 1. Open the **Builder** tab and choose **Run selected tasks** from the **Run flow** button.
 2. Click the tasks you want to run. Selected tasks stay highlighted, the rest dim, and each phase shows how many of its tasks are selected.
-3. Click **Run *n* tasks** in the panel in the top-right corner. **Cancel** or `Esc` leaves the mode without running anything.
+3. Click **Run tasks** in the panel in the top-right corner. **Cancel** or `Esc` leaves the mode without running anything.
+
+![Builder in selection mode: the "Run selected tasks — 2 of 7 tasks selected" panel with Cancel and Run Tasks, two highlighted phases and a dimmed one](/flows/run-selected-tasks.png)
 
 While selecting, the canvas is read-only: adding, editing, moving, and deleting tasks, phases, and conditions is unavailable.
 
