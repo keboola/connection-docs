@@ -1,5 +1,5 @@
 ---
-title: 'Load Your Data'
+title: 'Get Your Data In'
 slug: 'getting-started/load'
 description: 'Load your first four tables into Keboola Storage with the HTTP data source connector, pulling the sample CSV files straight from a URL.'
 redirect_from:

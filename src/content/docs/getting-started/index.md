@@ -6,15 +6,23 @@ redirect_from:
   - /tutorial/
 ---
 
-Keboola is a platform for moving data around and doing something useful to it on the way:
-pull it out of the systems that hold it, reshape it, put the result where people need it, and
-keep doing that on a schedule without anyone watching. This guide walks you through that
-whole loop once, on sample data, in under an hour.
+Somebody asks a question about the business, and the data that would answer it sits in four
+separate exports where nothing lines up. That is the situation this guide starts from, and it is
+the ordinary one.
 
 <!-- Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. -->
 
-By the end you will have a pipeline that is genuinely running. Not a demo — the same
-mechanism a production project uses, just smaller.
+The question here is one any sales team asks:
+
+> **Where is the money in this pipeline, and how much of what is still open is unlikely to land?**
+
+You have a quarter of deals, the accounts they belong to, and the reps who own them — 639
+opportunities across 275 accounts and 28 people. Nobody can answer the question from those files,
+because a deal row identifies its owner by an ID, not by a name, and nothing says which of the
+open deals are actually going anywhere.
+
+In about 45 minutes you will have a table that answers it, delivered to a spreadsheet, rebuilt
+every morning without you. Everything happens in the browser; nothing needs installing.
 
 ## What you will build
 
@@ -25,9 +33,9 @@ mechanism a production project uses, just smaller.
 | Deliver | that table appears in a Google Sheet | a **data destination connector** |
 | Automate | all of it runs daily, in order, and emails you if it breaks | a **flow** |
 
-The data is a small sales pipeline: opportunities, the accounts they belong to, the users who
-own them, and each user's seniority. The join produces the table someone would actually want
-to look at — every opportunity with its account, its owner, and how likely it is to close.
+The joined table is the one someone would actually read: every deal with its account, the rep who
+owns it by name, that rep's seniority, and how likely the deal is to close. It is not a demo —
+this is the mechanism a production project uses, just smaller.
 
 ## Before you start
 
@@ -77,13 +85,13 @@ both, and [use cases](/kai/use-cases/) for what else it does.
 
 1. **[Get a Project](/getting-started/project/)** — create or join one, learn what a project
    and a stack are, find your way around.
-2. **[Load Your Data](/getting-started/load/)** — pull the four sample files into Storage with
+2. **[Get Your Data In](/getting-started/load/)** — pull the four sample files into Storage with
    a connector, and understand buckets, tables and stages.
-3. **[Transform Your Data](/getting-started/transform/)** — write the SQL that joins them,
-   and see how input and output mapping keep your source data safe.
-4. **[Send Your Data Somewhere](/getting-started/write/)** — push the result to a Google
+3. **[Join It into an Answer](/getting-started/transform/)** — write the SQL that turns IDs into
+   names and buckets every deal, and see how input and output mapping keep your source data safe.
+4. **[Deliver the Answer](/getting-started/write/)** — push the result to a Google
    Sheet with a data destination connector.
-5. **[Automate It with a Flow](/getting-started/automate/)** — run the whole thing in order,
+5. **[Run It on a Schedule](/getting-started/automate/)** — run the whole thing in order,
    on a schedule, with notifications.
 6. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
    you actually want to do, including how to drive Keboola from an AI assistant, an IDE, or

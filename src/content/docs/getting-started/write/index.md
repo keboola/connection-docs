@@ -1,5 +1,5 @@
 ---
-title: 'Send Your Data Somewhere'
+title: 'Deliver the Answer'
 slug: 'getting-started/write'
 description: 'Send the table you just built out of Keboola into a Google Sheet using the Google Sheets data destination connector.'
 redirect_from:
@@ -21,7 +21,7 @@ ones. -->
 ## What you need
 
 - The table `opportunity_denorm` in Storage, from
-  [Transform Your Data](/getting-started/transform/).
+  [Join It into an Answer](/getting-started/transform/).
 - A Google account you can authorize.
 
 <!-- VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the

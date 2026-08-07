@@ -6,7 +6,7 @@ redirect_from:
   - /tutorial/load/googlesheets/
 ---
 
-A side trip from [Load Your Data](/getting-started/load/): the same kind of load, but from a spreadsheet you own — so the connector needs an authorized Google account instead of a public URL.
+A side trip from [Get Your Data In](/getting-started/load/): the same kind of load, but from a spreadsheet you own — so the connector needs an authorized Google account instead of a public URL.
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: 'Transform Your Data'
+title: 'Join It into an Answer'
 slug: 'getting-started/transform'
 description: 'Create an SQL transformation that joins your loaded tables into one denormalized table, and learn how input and output mapping keep Storage safe.'
 redirect_from:
@@ -22,7 +22,7 @@ re-runnable. All ten screenshots are fresh captures from that walk. -->
 ## What you need
 
 Four tables in Storage — `opportunity`, `account`, `user` and `level` — from
-[Load Your Data](/getting-started/load/). They sit in whatever bucket the connector created,
+[Get Your Data In](/getting-started/load/). They sit in whatever bucket the connector created,
 and its name contains a configuration ID, so yours will not match the screenshots.
 
 That does not matter. What the SQL depends on is the **Table name** you give each table in the

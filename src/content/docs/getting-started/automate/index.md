@@ -1,5 +1,5 @@
 ---
-title: 'Automate It with a Flow'
+title: 'Run It on a Schedule'
 slug: 'getting-started/automate'
 description: 'Wire your connectors and transformation into a single flow, run its tasks in parallel where possible, give it a schedule, and get notified when it fails.'
 redirect_from:
@@ -25,11 +25,11 @@ owner has to create. -->
 Everything from the previous steps, in one project:
 
 - the `[TUTORIAL] Sample data` HTTP configuration from
-  [Load Your Data](/getting-started/load/),
+  [Get Your Data In](/getting-started/load/),
 - the `Denormalize opportunities` transformation from
-  [Transform Your Data](/getting-started/transform/),
+  [Join It into an Answer](/getting-started/transform/),
 - the Google Sheets destination from
-  [Send Your Data Somewhere](/getting-started/write/).
+  [Deliver the Answer](/getting-started/write/).
 
 :::tip[Do it with Kai]
 Building a pipeline out of configurations you already have is a documented Kai job

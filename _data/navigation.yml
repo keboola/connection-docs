@@ -33,16 +33,16 @@ items:
         title: Get a Project
 
       - url: /getting-started/load/
-        title: Load Your Data
+        title: Get Your Data In
 
       - url: /getting-started/transform/
-        title: Transform Your Data
+        title: Join It into an Answer
 
       - url: /getting-started/write/
-        title: Send Your Data Somewhere
+        title: Deliver the Answer
 
       - url: /getting-started/automate/
-        title: Automate It with a Flow
+        title: Run It on a Schedule
 
       - url: /getting-started/next-steps/
         title: Where to Go Next
