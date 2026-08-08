@@ -6,9 +6,9 @@ redirect_from:
   - /tutorial/
 ---
 
-Somebody asks a question about the business, and the data that would answer it sits in four
-separate exports where nothing lines up. That is the situation this guide starts from, and it is
-the ordinary one.
+Somebody asks a question about the business, and the answer is spread across four exports, none of
+which holds the whole picture. That is the situation this guide starts from, and it is the
+ordinary one.
 
 <!-- Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. -->
 
@@ -17,11 +17,12 @@ The question here is one any sales team asks:
 > **Where is the money in this pipeline, and how much of what is still open is unlikely to land?**
 
 You have a quarter of deals, the accounts they belong to, and the reps who own them — 639
-opportunities across 275 accounts and 28 people. Nobody can answer the question from those files,
-because a deal row identifies its owner by an ID, not by a name, and nothing says which of the
-open deals are actually going anywhere.
+opportunities created in Q1 2015, across 275 accounts and 28 people. The deals file alone tells
+you how much is at stake and how likely each deal is to close. What it cannot tell you is *whose*
+and *where*: it identifies owners and accounts by ID, so the moment the question becomes "which
+reps, which regions", the export stops answering.
 
-In about 45 minutes you will have a table that answers it, delivered to a spreadsheet, rebuilt
+In under an hour you will have a table that answers all of it, delivered to a spreadsheet, rebuilt
 every morning without you. Everything happens in the browser; nothing needs installing.
 
 ## What you will build
@@ -33,9 +34,9 @@ every morning without you. Everything happens in the browser; nothing needs inst
 | Deliver | that table appears in a Google Sheet | a **data destination connector** |
 | Automate | all of it runs daily, in order, and emails you if it breaks | a **flow** |
 
-The joined table is the one someone would actually read: every deal with its account, the rep who
-owns it by name, that rep's seniority, and how likely the deal is to close. It is not a demo —
-this is the mechanism a production project uses, just smaller.
+The joined table is the one someone would actually read: every deal with its account and region,
+the rep who owns it by name and market, and a plain-language verdict on how likely it is to close.
+It is not a demo — this is the mechanism a production project uses, just smaller.
 
 ## Before you start
 

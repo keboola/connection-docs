@@ -48,7 +48,7 @@ you have seen where a configuration and its rows live.
 
 ## The sample data
 
-Four small tables: a quarter of deals (639 opportunities from Q1 2015), the 275 accounts those
+Four small tables: a quarter of deals (639 opportunities created in Q1 2015), the 275 accounts those
 deals belong to, the 28 reps who own them, and each rep's seniority level. Each table is only
 half the story — a deal names an account and an owner by ID, not by name, and a rep's seniority
 lives in a fourth table entirely. They are published here, and the connector reads them over HTTPS:

@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 The answer in that sheet is true this morning, because you ran every step by hand. Tomorrow it is
-a screenshot. A **flow** chains your four configurations in the order each one needs the last and
+a screenshot. A **flow** chains your three configurations in the order each one needs the last and
 runs them on a schedule, so the answer keeps up with the pipeline without you.
 Step 5 of the [Getting Started](/getting-started/) arc.
 

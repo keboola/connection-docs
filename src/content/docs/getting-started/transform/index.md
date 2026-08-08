@@ -6,11 +6,12 @@ redirect_from:
   - /tutorial/manipulate/
 ---
 
-Of the 192 opportunities still open, 145 — about 89% of the open amount — sit below 50%
-probability. You cannot see that in four separate tables. This step joins `opportunity`,
-`account`, `user` and `level` with SQL into one 639-row table that turns `OwnerId` into a rep's
-name and buckets every deal by probability, and it introduces the mapping model that keeps your
-source data safe while you do it.
+Of the 192 opportunities still open, 145 of them — carrying about 89% of the open amount — sit
+below 50% probability. The deals table already says that much; what it will not say is whose those
+deals are or which regions they sit in, because it names owners and accounts by ID. This step
+joins `opportunity`, `account`, `user` and `level` with SQL into one 639-row table that turns
+those IDs into names and buckets every deal by probability, and it introduces the mapping model
+that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
