@@ -80,6 +80,7 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "flows" },
+      { slug: "flows/variables" },
       { slug: "flows/flows-legacy" },
       { slug: "flows/flow-migration-guide" },
     ],
