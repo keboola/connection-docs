@@ -18,7 +18,7 @@ Find more information in the [official documentation](https://docs.oracle.com/en
 
 ### Authorization and Credentials
 
-First, it is necessary to set up the connection parameters in the [Credentials section](https://help.keboola.com/components/extractors/database/sqldb/#initial-setup). 
+First, it is necessary to set up the connection parameters in the [Credentials section](/components/extractors/database/sqldb/#initial-setup). 
 The `Account ID` and `Role ID` variables correspond to your account ID and role ID. These values, along with the hostname and role, are available on the SuiteAnalytics Connect Driver Download page 
 under Your Configuration. 
 
@@ -27,7 +27,7 @@ For more information, see [Finding Your Settings Portlet](https://docs.oracle.co
 
 ### Row or Table Configuration
 
-The configuration concepts are the same as for standard [SQL DB data sources](https://help.keboola.com/components/extractors/database/sqldb/).
+The configuration concepts are the same as for standard [SQL DB data sources](/components/extractors/database/sqldb/).
 
 You may select specific columns and tables to be downloaded, or switch to `Advanced mode` to provide a custom query. Data may be imported incrementally using the `incremental fetching` feature, 
 allowing the user to retrieve only new or updated data from their NetSuite account.

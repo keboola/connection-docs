@@ -71,5 +71,5 @@ adds the row number in the source file.
 
 ![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-6.png)
 
-The connector also supports [Advanced mode](/components/#advanced-mode), all supported
+The connector also supports [Debug mode](/components/#debug-mode), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/ex-ftp).

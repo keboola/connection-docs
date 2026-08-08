@@ -5,7 +5,7 @@ slug: 'components/extractors/communication/email-imap/query-syntax'
 
 
 To combine multiple keywords enclose the query in brackets, 
-e.g. the following matchess all unseen emails received from address `sender-email@example.com` with subject `the subject`: 
+e.g. the following matches all unseen emails received from address `sender-email@example.com` with subject `the subject`: 
 `(FROM "sender-email@example.com" SUBJECT "the subject" UNSEEN)`
 
 ## Keywords

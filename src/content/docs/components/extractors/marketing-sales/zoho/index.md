@@ -19,14 +19,14 @@ If you need additional endpoints, please submit your request to [ideas.keboola.c
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Zoho** data source connector.
 
-Click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Ad Account you want to extract. Then, select 
+Click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Zoho CRM data you want to extract. Then, select 
 a [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers) of your Zoho instance during the authorization process.
 
 Once done, you must enter the **account's user email address (`user_email`)** you used to generate the Self Client.
 
 ### Creating a New Report
 To create a new report to download, click **Add Row**. 
-Each report you download will be a [configuration row](https://help.keboola.com/components/#configuration-rows).
+Each report you download will be a [configuration row](/components/#configuration-rows).
 
 After that, set up the **Module records download configuration (`module_records_download_config`)**. This step is required.  
 Then, set up the job configuration:

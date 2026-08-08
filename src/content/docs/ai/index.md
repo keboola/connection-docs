@@ -31,6 +31,10 @@ Model Context Protocol server integration for seamless communication between AI 
 
 Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means and produce consistent, validated answers. Currently in private beta.
 [Learn more about the Semantic Layer →](/ai/semantic-layer/)
+### Machine-Readable API Index
+
+Every Keboola stack publishes a machine-readable index of its APIs at `https://api.<stack>/apis.json` (for example, [`https://api.keboola.com/apis.json`](https://api.keboola.com/apis.json)). The index lists each service with its base `apiUrl` and a link to its OpenAPI specification (`openApiSpecUrl`) — a convenient overview for agentic usage: AI agents, MCP servers, and other tooling that discovers Keboola's APIs programmatically.
+[View the API index →](https://api.keboola.com/apis.json)
 
 ### AI Component Suggestions
 
@@ -39,7 +43,7 @@ Allows users to get AI suggestions when searching for a component. To activate t
 ### AI Rules
 
 The AI Rules section allows users to define specific instructions for AI functionality within Keboola platform.
-[Learn more about AI Rules →](/management/project/ai-rules/#main-header)
+[Learn more about AI Rules →](/management/project/ai-rules/)
 
 ### AI-Generated Descriptions
 Automatically generates a description using AI.

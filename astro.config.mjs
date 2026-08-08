@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
+import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 
 export default defineConfig({
@@ -16,9 +18,15 @@ export default defineConfig({
   },
   integrations: [
     redirectFrom(),
+    pageMarkdown(),
     starlight({
       title: 'Keboola User Documentation',
       favicon: '/favicon.ico',
+      // We ship our own 404 (src/pages/404.astro) so it can drop the doc-page
+      // chrome and host the InkDash game. Without this, Starlight's built-in
+      // routes/static/404.astro collides with it — currently a warning, a hard
+      // error in later Astro versions.
+      disable404Route: true,
       logo: {
         // Dark near-black wordmark for light theme; brand-blue (#097CF7,
         // Azure Radiance) variant for dark theme so it stays legible + on-brand.
@@ -52,5 +60,7 @@ export default defineConfig({
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
     }),
+    // Must come AFTER starlight() so MDX code blocks use astro-expressive-code.
+    mdx(),
   ],
 });

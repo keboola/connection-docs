@@ -22,12 +22,12 @@ In the Authorization settings, fill in the following items:
 * Password for K2
 * Service name; specification of the concrete API service, which you want to use
 * Use SSH; if checked SSH setting opens up, and SSH tunnels will be used for connections
-* Source Url; the root address of API. For example http://mujserver.cz
+* Source URL; the address that is used to query the K2 API, e.g. https://myk2server.com
 
 ![Screenshot - Authorization](/components/extractors/erp/k2/auth_config.png)
 
 Once all these settings are set click save and you can create a
-new [Configuration row](https://help.keboola.com/components/#configuration-rows)
+new [Configuration row](/components/#configuration-rows)
 by clicking the **Add row** button.
 
 ## SSH Tunnel Configuration
@@ -40,9 +40,10 @@ In the SSH settings, fill in the following items:
 
 * Username; The SSH User for connecting to your SSH server
 * Private Key; The base64-encoded private key for the key pair associated with your SSH server
+* Private Key Password; The password for the provided private key (leave empty if the key is not password-protected)
 * Tunnel Host; the host name or host IP associated with your SSH server (Note: Don't use the load balancer as host)
-* Remote Address; the address that is used to query the K2 API e.g. k2api.myfirm.cz
-* Remote Port; The port of the K2 API e.g. 8080
+* K2 API Source Address; the address that is used to query the K2 API e.g. k2api.myfirm.cz
+* K2 API Port; The port of the K2 API e.g. 8080
 
 Once all are filled in click **save**.
 
@@ -51,7 +52,7 @@ Once all are filled in click **save**.
 In the row configuration fill in the name of the **Data object** (classname) that you want to fetch. You can optionally fill
 in the **Fields** that you wish to fetch, if left empty all the fields are fetched. The fields should be separated
 by a comma. After this, you can fill in **Conditions** on what data to fetch. These conditions, and how to construct them are explained
-in the [K2 documentation](https://help.k2.cz/k2gaia/02/en/10023272.htm#o57577).
+in the [K2 documentation](https://help.k2.cz/k2gaia/12/en/10023272.htm).
 
 ![Screenshot - Authorization](/components/extractors/erp/k2/config_row.png)
 

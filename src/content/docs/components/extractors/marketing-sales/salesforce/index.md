@@ -80,7 +80,7 @@ You can also configure:
 - **API Version** -- Select the Salesforce API version to use for data extraction.
 - **Proxy Settings** -- Configure an HTTPS proxy server if required by your network setup.
 
-After configuring the authorization, you can set up individual queries or objects in the [row based configuration](https://help.keboola.com/components/#configuration-rows).
+After configuring the authorization, you can set up individual queries or objects in the [row based configuration](/components/#configuration-rows).
 
 ![Screenshot - Row configuration](/components/extractors/marketing-sales/salesforce/row_config.png)
 

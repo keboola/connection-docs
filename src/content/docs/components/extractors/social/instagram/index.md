@@ -17,7 +17,7 @@ the configuration process is almost identical to configuring the [Facebook](/com
 
 ## Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
-page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-api/getting-started#connect).
+page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started/).
 
 [Create a new configuration](/components/#creating-component-configuration) of the **Instagram** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with a Facebook account 
@@ -58,21 +58,21 @@ the output table name will be `foo_insights`.
 ### Endpoint
 The *Endpoint* option describes a significant URL part of the request made to the Facebook Instagram API.
 The absolute URL is in the following form: `https://graph.facebook.com/<api_version>/<endpoint>`.
-A typical example would be the [media](https://developers.facebook.com/docs/graph-api/reference/instagram-media).
+A typical example would be the [media](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-media).
 If left empty, the *Endpoint* option references data of the Instagram Business Account itself, which in fact 
-refers to the [user](https://developers.facebook.com/docs/graph-api/reference/instagram-user) endpoint.
+refers to the [user](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user) endpoint.
 
 ### Fields
 The *Fields* option describes data returned from the endpoint. Typically, it is a comma-separated list of
 fields, but it also can be used to parametrize the fields and nest more endpoints into it.
-The [media](https://developers.facebook.com/docs/graph-api/reference/instagram-media) endpoint returns all
+The [media](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-media) endpoint returns all
 media objects created by an Instagram account. Each media object contains fields such as `caption`, `comments_count`, `created_time`
 and `like_count`. The fields parameter in such case is `caption,comments_count,created_time,like_count`.
 
-- **Fields/Endpoint Nesting** ---
+- **Fields/Endpoint Nesting** —
     Media can contain comments and those can be included in the *fields* as well: `caption,message,created_time,like_count,comments{text,replies,timestamp,like_count,user}`. The comma separated list in between the curly brackets `{}` specifies fields of the "nested" [comment](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-comment) field/endpoint for each media. This way, more endpoints can be nested, and there is no limit of nesting levels.
 
-- **Fields Parametrization** ---
+- **Fields Parametrization** —
     Each field can be parametrized by a dot following a parameter/modifier name and a value in brackets.
     Typical parameters would be `since`, `until` or `limit`,
     or modifiers that the particular endpoint offers such as `metrics` for the [insights](https://developers.facebook.com/docs/instagram-api/guides/insights) endpoint.
@@ -92,8 +92,8 @@ example, if the endpoint is `feed`, then all media objects created within the sp
 
 The *Since*/*Until* parameter is parsed via the [strtotime function](https://www.php.net/manual/en/function.strtotime.php) and can be specified
 
-- **absolutely** --- as a unix timestamp or in the `yyyy-mm-dd` format, or
-- **relatively** --- e.g., `14 days ago` or `last month`.
+- **absolutely** — as a unix timestamp or in the `yyyy-mm-dd` format, or
+- **relatively** — e.g., `14 days ago` or `last month`.
 
 For consistent results, specify both the *since* and *until* parameters.
 
@@ -111,12 +111,12 @@ Each row of a table represents one object. Each table has the primary key auto-d
 extraction, so the table data is **imported incrementally**. The columns of the output tables represent
 fields from the `Fields` query option. Moreover, each table will always contain the following basic set of columns:
 
-- `id` --- id returned by the Facebook Graph API
-- `ex_account_id` --- id of the Instagram Business Account corresponding to the object stored in the row
-- `fb_graph_node` --- describes the "vertical position" of the object in the resulting tree. For example,
+- `id` — id returned by the Facebook Graph API
+- `ex_account_id` — id of the Instagram Business Account corresponding to the object stored in the row
+- `fb_graph_node` — describes the "vertical position" of the object in the resulting tree. For example,
 for media objects it will be `page_media`, for comments of media it will be
 `page_media_comments`.
-- `parent_id` --- refers to the `id` column of a parent object represented by another row and table.
+- `parent_id` — refers to the `id` column of a parent object represented by another row and table.
 For instance, if the row is representing a comment object, its parent is a media object, and `parent_id`
 is the id of the media object. The parent object type can be also determined from the `fb_graph_node` column as a
 substring from the beginning until the last occurrence of an underscore. To give an example, if

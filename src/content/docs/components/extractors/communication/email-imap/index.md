@@ -47,10 +47,10 @@ Check with your email provider if you need more details.
 
 ### Example Using GMAIL Account
 
-- Enable and create an [app password](https://support.google.com/accounts/answer/185833?hl=en) specificly for this integration. Name it, for instance, `Keboola extractor`.
+- Enable and create an [app password](https://support.google.com/accounts/answer/185833?hl=en) specifically for this integration. Name it, for instance, `Keboola extractor`.
 - Enter your email address in the `Username` field.
 - Enter the generated app password in the `Password` field.
-- In the `IMAP host field`, entere the Gmail imap address: `imap.gmail.com`.
+- In the `IMAP host field`, enter the Gmail IMAP address: `imap.gmail.com`.
 - Use port `993`.
 
 ## Configuration
@@ -106,7 +106,7 @@ If your attachments are in CSV format, you can use this combination of processor
 
 - Set the `folder` parameter in the [first processor](https://github.com/keboola/processor-move-files) to match the resulting table name.
 - Use the [second processor](https://components.keboola.com/components/keboola.processor-create-manifest) to define that the result will always replace the destination table and expects header in the CSV file.
-- ***Note:** In this setup, all attachments will be stored in the same table, so they msut share the same structure.*
+- ***Note:** In this setup, all attachments will be stored in the same table, so they must share the same structure.*
 
 ```json
 {
@@ -149,7 +149,7 @@ If your attachments are in CSV format, you can use this combination of processor
 
 If your attachments are in XLSX format, you can use this combination of processors to store them in Table Storage:
 
-- The [first processor](https://components.keboola.com/components/kds-team.processor-xlsx2csv) converts each XSLX sheet into a separate table.
+- The [first processor](https://components.keboola.com/components/kds-team.processor-xlsx2csv) converts each XLSX sheet into a separate table.
 - The [second processor](https://github.com/keboola/processor-move-files) moves the converted files for output staging to the tables folder.
 
 ```json
@@ -213,7 +213,7 @@ A single table named `emails` contains the email contents.
 
 Results are inserted incrementally to avoid duplicates.
 
-**Columns:** `'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'body', 'headers', 'number_of_attachments', 'size'`
+**Columns:** `'pk', 'uid', 'mail_box', 'date', 'from', 'to', 'subject', 'body', 'body_html', 'headers', 'number_of_attachments', 'size', 'attachment_names'`
 
 
 ### Attachments

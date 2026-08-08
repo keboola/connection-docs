@@ -12,4 +12,5 @@ The following data source connectors allow access to data from social networks:
 - [Facebook Pages](/components/extractors/social/facebook/)
 - [Instagram](/components/extractors/social/instagram/)
 - [YouTube](/components/extractors/social/youtube/)
+- [YouTube Reporting](/components/extractors/social/youtube-reporting/)
 - And [more](https://components.keboola.com/components)

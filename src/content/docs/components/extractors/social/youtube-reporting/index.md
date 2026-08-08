@@ -95,7 +95,7 @@ the [YouTube Reporting API documentation](https://developers.google.com/youtube/
 ## Functionality Notes
 
 - The component uses the [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reports/) to
-  create and run reports that measure the results of YouTube advertising campaigns.
+  create and run reports that give insights into the performance of your YouTube content.
 - All reports are downloaded incrementally and "upserted" into the destination table.
 - **IMPORTANT:** The reporting service creates standardised reports every 24 hours. Each report type has one job associated with it.
   Multiple report versions may be associated with a single job. Each report covers data for one 24-hour period. More than one report may be
