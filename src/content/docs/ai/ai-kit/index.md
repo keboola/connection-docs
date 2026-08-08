@@ -7,7 +7,7 @@ slug: 'ai/ai-kit'
 
 AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components, data apps, and maintain code quality using AI-powered tools.
 
-AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides three specialized plugins that cover different aspects of Keboola development, from general code quality to building production-ready components and data applications.
+AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides specialized plugins that cover different aspects of Keboola development, from general code quality to building production-ready components, data applications, and semantic layer models.
 
 The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build Streamlit data apps, review code for security issues, and automate common development workflows.
 
@@ -25,6 +25,8 @@ After installation, enable the plugins you need:
 /plugin install developer
 /plugin install component-developer
 /plugin install dataapp-developer
+/plugin install sl-toolkit
+/plugin install powerbi-to-sl
 ```
 
 ## Available Plugins
@@ -105,6 +107,20 @@ to my Streamlit dashboard. Default to showing external users only.
 The agent will automatically validate the schema, query distinct values, create filter functions, add UI controls, update all page modules, and verify the filter works in the browser.
 
 [View Data App Developer Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer)
+
+### Semantic Layer Toolkit Plugin
+
+The Semantic Layer Toolkit (`sl-toolkit`) lets you build, inspect, validate, and edit [semantic layer](/ai/semantic-layer/) models from your AI coding assistant. It provides the `/sl-build` wizard for generating a new semantic model from your project's tables, `/sl-show` for listing a model's datasets, metrics, relationships, constraints, and glossary terms, and `/sl-validate` for consistency checks. Adding, editing, and removing semantic objects works conversationally — just describe the change.
+
+The semantic layer is currently in private beta; see the [Semantic Layer documentation](/ai/semantic-layer/) for availability.
+
+[View Semantic Layer Toolkit Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/sl-toolkit)
+
+### Power BI to Semantic Layer Plugin
+
+The `powerbi-to-sl` plugin migrates an existing Microsoft Power BI semantic model into the [Keboola semantic layer](/ai/semantic-layer/). It translates Power BI tables, measures, and relationships into their Keboola semantic layer equivalents and produces schema-validated payloads ready to push with `sl-toolkit`, flagging anything that needs human attention in a warnings report.
+
+[View Power BI Migration Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/powerbi-to-sl)
 
 ## Best Practices
 

@@ -741,6 +741,9 @@ items:
       - url: /ai/mcp-server/
         title: MCP Server
 
+      - url: /ai/semantic-layer/
+        title: Semantic Layer
+
   - url: /extend/
     title: Extending Keboola
     items:
