@@ -1,6 +1,7 @@
 ---
 title: Native Data Types
 slug: 'storage/tables/data-types'
+description: Native Data Types preserve source column types (NUMERIC, DATE, BOOLEAN, …) end-to-end in Storage — benefits, drawbacks, and how to change types on typed tables.
 ---
 
 
@@ -142,7 +143,7 @@ Execute the transformation and wait for it to complete.
 **Step 4: Verify the Schema**  
 Once the transformation is finished, check the schema of the newly created table, `typed_table`. It should now include the appropriate data types.
 
-***Note:** [Incremental loading](/storage/tables/#incremental-loading) cannot be used when creating a typed table in this manner.*
+***Note:** [Incremental loading](/storage/tables/incremental-loading/) cannot be used when creating a typed table in this manner.*
 
 ## Incremental Loading
 The behavior of incremental loading differs between **typed** and **non-typed tables**:
@@ -150,7 +151,7 @@ The behavior of incremental loading differs between **typed** and **non-typed ta
 - **Typed tables:** Only the columns in the table's **primary key** are compared to detect changes.
 - **Non-typed tables:** The entire row is compared, and rows are updated if **any value** has changed.
 
-For more information, refer to our documentation on [incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables).
+For more information, refer to our documentation on [incremental loading](/storage/tables/incremental-loading/#difference-between-tables-with-native-datatypes-and-string-tables).
 
 ## Handling NULLs
 Data can contain `NULL` values or empty strings, which are converted differently based on the processing backend.

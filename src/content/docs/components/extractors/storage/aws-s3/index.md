@@ -143,7 +143,7 @@ The **additional source settings** section allows you to set up the following:
 
 - The initial value in **Storage Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved cannot be changed.
-- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
+- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/incremental-loading/). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
 - **Primary Key** can be used to specify the primary key in Storage; it can be used with **Incremental Load**
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.

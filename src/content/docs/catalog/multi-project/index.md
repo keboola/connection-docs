@@ -29,7 +29,7 @@ anything else really.
 Let's say that you have an existing Keboola project that contains:
 
 - Oracle database data source connector with the following configurations:
-    - `ora-history` -- The source database is over 2TB; the largest table is `op_history`, which can be easily loaded [incrementally](/storage/tables/#incremental-loading) as records are only added; it is updated every 10 minutes.
+    - `ora-history` -- The source database is over 2TB; the largest table is `op_history`, which can be easily loaded [incrementally](/storage/tables/incremental-loading/) as records are only added; it is updated every 10 minutes.
     - `ora-crm` -- Tables from a CRM system. Major updates are being made to the CRM, so the structure of the tables changes often. Every two weeks, a column is renamed or a table is split into two.
     - `ora-common` -- Auxiliary tables with addresses and product names that are updated 4 times a year with data from the parent company.
     - `ora-is` -- Extracts `ORA_IS_XXX` bunch of tables which represent a port of a legacy information system, where column names had to fit into a 6 character limit.
