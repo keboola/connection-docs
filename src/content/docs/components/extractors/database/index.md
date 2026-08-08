@@ -34,7 +34,7 @@ This straightforward approach suits most use cases and supports Timestamp-based 
 
 All are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode).
 
-Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/).
+Their basic configuration is also part of the [Tutorial - Loading Data from Database](/getting-started/load/database/).
 
 ### Log-Based Connectors
 

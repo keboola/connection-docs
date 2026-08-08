@@ -16,7 +16,7 @@ It offers a straightforward approach suitable for most use cases, enabling [time
 
 All SQL database connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database data source connector](/tutorial/load/database/). 
+For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database data source connector](/getting-started/load/database/). 
 
 ## CDC (Change Data Capture) Mode
 

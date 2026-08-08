@@ -9,7 +9,7 @@ redirect_from:
 
 This data source connector allows you to import data from email attachments to Keboola.
 It extracts data from systems generating exports only as CSV files attached to an email.
-It can also be used instead of repeated [manual imports of CSV](/tutorial/load/) files.
+It can also be used instead of repeatedly importing CSV files by hand.
 
 Tables only get imported with the data source connector running. The import is **not** triggered by an email
 being sent or received. When running, the data source connector imports all emails received since its previous run.
