@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.76.1 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.80.0 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
@@ -58,6 +58,50 @@ Check if a specific operation is allowed.
 |---|---|---|
 | `operation` (positional) | yes | |
 
+## `auth`
+
+Programmatic browser login (PKCE / device code) -- user-scoped sessions
+
+### `kbagent auth login`
+
+Sign in to a Keboola stack via browser login (PKCE) or device code.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias to log into |
+| `--device-code` |  | Force the device-authorization flow (skip the browser loopback) |
+| `--register-projects` |  | Register every project this session can access under a local alias |
+
+### `kbagent auth status`
+
+Show the programmatic-auth session health for a stack.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias to inspect |
+
+### `kbagent auth logout`
+
+Revoke and clear the local programmatic-auth session for a stack.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias to log out of |
+| `--remove-projects` |  | Also remove local project aliases registered from this session |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent auth register-projects`
+
+Register accessible projects from the current session as local aliases.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias |
+| `--all` |  | Register every accessible project. Mutually exclusive with --project-id. |
+| `--project-id` `<int>` |  | Register only this project id (repeatable). Mutually exclusive with --all. |
+| `--alias` `<str>` |  | Alias override as ID=ALIAS (repeatable). Applies in every mode, including as the prefilled default inside the interactive picker. |
+| `--yes` / `-y` |  | Skip the picker's final confirmation prompt |
+
 ## `project`
 
 Manage connected Keboola projects
@@ -92,7 +136,7 @@ Edit an existing Keboola project connection.
 |---|---|---|
 | `--project` `<str>` | yes | Alias of the project to edit |
 | `--url` `<str>` |  | New Keboola stack URL |
-| `--token` `<str>` |  | New Storage API token |
+| `--token` `<str>` |  | New Storage API token. On a project registered by 'kbagent auth login' this deliberately converts it to a static-token project, which 'kbagent auth logout --remove-projects' no longer cleans up; a warning says so. |
 | `--new-alias` `<str>` |  | Rename the project alias. Updates the config.json projects key AND the default_project field if it matched. Renames the nested sync directory <cwd>/<old-alias>/ when present (with -2-suffix collision handling). Lineage cache (if any) is NOT auto-updated; rebuild with 'kbagent lineage build' after the rename. |
 | `--dry-run` |  | Preview the edit without mutating state. Validates --new-alias, detects collision against existing projects, predicts the disk-rename method (git_mv vs shutil_move), and surfaces the lineage-cache warning if any -- all read-only. Errors (collision, invalid format) raise the same exit codes as the live path. No API call is made for --token in dry-run mode. |
 
@@ -457,6 +501,7 @@ Update a configuration's metadata and/or content.
 | `--configuration-file` `<path>` |  | Path to a JSON file with configuration content |
 | `--set` `<str>` |  | Set a nested value: PATH VALUE (e.g. --set 'parameters.db.host=new-host') |
 | `--merge` |  | Deep-merge into existing config instead of replacing |
+| `--change-description` `<str>` |  | Version changeDescription for the audit trail (default: auto-generated) |
 | `--dry-run` |  | Show what would change without applying |
 | `--branch` `<int>` |  | Update in a specific dev branch ID (defaults to active branch) |
 | `--allow-plaintext-on-encrypt-failure` |  | Allow write even if secret encryption fails (DANGEROUS: secrets stored as plaintext) |
@@ -651,6 +696,7 @@ Update an existing configuration row.
 | `--configuration` `<str>` |  | Row configuration JSON: inline, @file.json, or - for stdin |
 | `--set` `<str>` |  | Set a nested value: PATH=VALUE (e.g. --set 'parameters.table=orders') |
 | `--merge` |  | Deep-merge into existing row config instead of replacing |
+| `--change-description` `<str>` |  | Version changeDescription for the audit trail (default: auto-generated) |
 | `--dry-run` |  | Show what would change without applying |
 | `--is-disabled` |  | Disable the row (mutually exclusive with --is-enabled) |
 | `--is-enabled` |  | Enable the row (mutually exclusive with --is-disabled) |
