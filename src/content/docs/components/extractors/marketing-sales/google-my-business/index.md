@@ -1,5 +1,6 @@
 ---
 title: Google My Business
+description: This data source connector allows you to collect daily metrics, reviews, media and questions for your businesses that have a Google Business profile.
 slug: 'components/extractors/marketing-sales/google-my-business'
 redirect_from:
     - /extractors/marketing-sales/google-my-business/

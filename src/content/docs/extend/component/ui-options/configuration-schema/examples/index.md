@@ -1,5 +1,6 @@
 ---
 title: UI Element Examples
+description: JSON schema allows for design of some advanced UI elements. Some of these are often reused in many components.
 slug: 'extend/component/ui-options/configuration-schema/examples'
 
 ---

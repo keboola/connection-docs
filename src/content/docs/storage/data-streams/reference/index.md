@@ -1,5 +1,6 @@
 ---
 title: Data Streams Reference
+description: This is the technical reference for the Data Streams feature—the underlying Stream API, column types, mapping templates, import conditions, and delivery…
 slug: 'storage/data-streams/reference'
 redirect_from:
     - /integrate/data-streams/overview/

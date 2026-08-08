@@ -1,5 +1,6 @@
 ---
 title: API Tokens
+description: All operations in a Keboola project must be authorized. This is technically done using API tokens (also called Storage API tokens, SAPI tokens, and Storage…
 slug: 'management/project/tokens'
 redirect_from:
   - /storage/tokens/

@@ -1,5 +1,6 @@
 ---
 title: Output Mapping
+description: In this part of the tutorial, you will see how to use output mapping.
 slug: 'extend/component/tutorial/output-mapping'
 ---
 

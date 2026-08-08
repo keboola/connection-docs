@@ -1,5 +1,6 @@
 ---
 title: Environment Specification
+description: Components use several channels to exchange information with Keboola, primarily through structured folders and configuration files.
 slug: 'extend/common-interface/environment'
 ---
 

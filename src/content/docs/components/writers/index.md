@@ -1,5 +1,6 @@
 ---
 title: Data Destination Connectors
+description: "Data destination connectors are Keboola components that take transformed and processed output data from Keboola and deliver it into its final destination: the…"
 slug: 'components/writers'
 redirect_from:
     - /writers/

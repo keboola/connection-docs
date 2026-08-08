@@ -1,5 +1,6 @@
 ---
 title: MCP Server
+description: The Keboola MCP Server allows you to connect your MCP clients (Cursor, Claude, Windsurf, VS Code) and AI assistants to your Keboola Project and give them the…
 slug: 'management/project/mcp-server'
 ---
 

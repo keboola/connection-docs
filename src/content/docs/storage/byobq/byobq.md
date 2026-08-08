@@ -1,5 +1,6 @@
 ---
 title: How to Connect BigQuery
+description: This guide is designed to walk you through the essential processes of setting up and configuring various Google Cloud resources for connecting your BigQuery…
 slug: 'storage/byobq'
 ---
 
