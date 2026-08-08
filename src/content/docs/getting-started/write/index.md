@@ -6,8 +6,8 @@ redirect_from:
   - /tutorial/write/
 ---
 
-Data that never leaves the platform is not worth much. This step pushes your joined table
-out to a Google Sheet — the same move, under the same mechanism, that later sends data to a
+Whoever asked where the money is will look in a spreadsheet, not in Keboola. This step
+delivers the 639-row table to a Google Sheet — the same mechanism that later sends data to a
 warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching

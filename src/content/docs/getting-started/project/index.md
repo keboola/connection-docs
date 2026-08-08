@@ -4,7 +4,7 @@ slug: 'getting-started/project'
 description: Create a Keboola project on the Free Plan, understand what a project and a stack are, and find your way around the project screen before you load any data.
 ---
 
-Everything you do in Keboola happens inside a **project**. This page gets you into one.
+Before you can dig into any of that, you need a **project** to work in. This page just gets you one.
 Step 1 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 1 of 6). The project-screen tour below was verified live in

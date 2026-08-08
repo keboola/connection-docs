@@ -6,8 +6,10 @@ redirect_from:
   - /tutorial/load/
 ---
 
-Nothing in Keboola happens until there is data in **Storage**. This step puts four tables
-there using a **data source connector** — the thing that does all real loading in Keboola.
+A deal row in this pipeline carries an `OwnerId`, not a rep's name — and the deals, the accounts
+they belong to, the reps who own them and those reps' seniority arrive as four separate files.
+None of them answers anything alone. This step gets all four into Storage so the next step can
+join them into one table.
 Step 2 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
@@ -46,9 +48,10 @@ you have seen where a configuration and its rows live.
 
 ## The sample data
 
-Four small tables describing a sales pipeline: opportunities, the accounts they belong to,
-the users who own them, and each user's seniority level. They are published here, and the
-connector reads them over HTTPS:
+Four small tables: a quarter of deals (639 opportunities from Q1 2015), the 275 accounts those
+deals belong to, the 28 reps who own them, and each rep's seniority level. Each table is only
+half the story — a deal names an account and an owner by ID, not by name, and a rep's seniority
+lives in a fourth table entirely. They are published here, and the connector reads them over HTTPS:
 
 | Table | File |
 |---|---|

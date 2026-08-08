@@ -6,8 +6,9 @@ redirect_from:
   - /tutorial/automate/
 ---
 
-You have four configurations that each do one thing when you click Run. A **flow** turns them
-into one pipeline that runs in the right order, at the right time, without you.
+The answer in that sheet is true this morning, because you ran every step by hand. Tomorrow it is
+a screenshot. A **flow** chains your four configurations in the order each one needs the last and
+runs them on a schedule, so the answer keeps up with the pipeline without you.
 Step 5 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 5 of 6). Walked live in project 264 on 2026-08-04: built and ran

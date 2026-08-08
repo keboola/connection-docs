@@ -4,8 +4,10 @@ slug: 'getting-started/next-steps'
 description: You have a running pipeline — here is what to learn next depending on what you want to do, and how to drive Keboola from an AI assistant, an IDE, or your terminal.
 ---
 
-You now have a pipeline that loads data, reshapes it, delivers it, and runs itself on a
-schedule. That is the whole shape of working in Keboola; everything else is a variation on it.
+You had a question: where is the money in this pipeline, and how much of what is still open is
+unlikely to land. It is answered, and it stays answered — the pipeline rebuilds that sheet every
+morning whether or not anyone thinks to ask again. That is the whole shape of working in Keboola;
+everything else is a variation on it.
 Step 6, the last, of the [Getting Started](/getting-started/) arc.
 
 <!-- Explanation-type page (step 6 of 6): a routing page, no steps of its own. Kai Public Beta status per /kai/; agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
