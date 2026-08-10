@@ -8,7 +8,7 @@ description: Configure Kai's tool permissions, system instructions, context file
 
 Kai's settings let you personalize how Kai behaves in your project. Open the Kai chat panel and click the **Settings** icon (gear) to access them. Settings are **per-user and per-project**, so each team member can configure their own preferences independently.
 
-The settings panel has two tabs: **Tool Permissions** and **System Instructions**. Project-wide customization — project-level instructions, [context files](#context-files), and [skill files](#skill-files) — is managed in **Settings → Kai Assistant** in the main Keboola navigation.
+The settings panel has two tabs: **Tool Permissions** and **System Instructions**. Project-wide customization — project-level instructions, [context files](#context-files), and [skill files](#skill-files) — is managed in **Settings → Kai Agent** in the main Keboola navigation (the tab is labeled **Kai Assistant** in projects not yet upgraded to the new Kai engine).
 
 ## Tool Permissions
 
@@ -50,7 +50,7 @@ System Instructions let you provide Kai with persistent context and guidelines s
 
 Project-level instructions apply to **all users** in the project. They are managed in the project settings:
 
-1. Go to **Settings → Kai Assistant** in the main Keboola navigation.
+1. Go to **Settings → Kai Agent** in the main Keboola navigation.
 2. Enter your instructions in the **System instructions** text field.
 3. The instructions auto-save.
 
@@ -100,7 +100,7 @@ This means user-level instructions can refine or add to the project-level instru
 
 Context files (also called knowledge files) are Markdown documents that Kai reads automatically at the start of every conversation. Use them to give Kai project knowledge that is too long for system instructions: data standards, naming conventions, business glossaries, or documentation of your data model.
 
-To manage them, go to **Settings → Kai Assistant** in the main Keboola navigation and use the **Context files** card:
+To manage them, go to **Settings → Kai Agent** in the main Keboola navigation and use the **Context files** card:
 
 1. Click **Upload** and select a Markdown (`.md`) file.
 2. The file is uploaded and takes effect in every **new** conversation (running conversations are not affected).
@@ -124,7 +124,7 @@ Under the hood, context files are ordinary [Storage Files](/storage/files/) tagg
 
 Skills are reusable, on-demand playbooks that appear in the chat's **`/` slash-command menu** alongside Kai's built-in skills. Unlike context files, Kai loads a skill only when it is invoked — making skills the right place for longer, task-specific instructions (e.g., "build the monthly report," "onboard a new data source") that shouldn't consume context in every chat.
 
-Manage them in **Settings → Kai Assistant** using the **Skill files** card. Two formats are accepted:
+Manage them in **Settings → Kai Agent** using the **Skill files** card. Two formats are accepted:
 
 1. **A single `.md` file** starting with YAML frontmatter. The `name` and `description` fields are required — the description tells Kai when to invoke the skill:
 
