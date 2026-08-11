@@ -73,6 +73,10 @@ you have seen where a configuration, a mapping and a phase live. Do it by hand o
 do it after that. Each block also ends with what to check, and what to do when Kai's version does
 not match — assume you will need that at least once.
 
+Building is only half of what Kai is for. Step 5 closes by pointing it at the table you just built
+and asking it the question at the top of this page — the other reason to keep the panel open, and
+the last thing you do in the arc.
+
 Kai asks before it changes anything: project-modifying actions raise an approval dialog in the
 chat, so expect to confirm rather than watch it run unattended.
 

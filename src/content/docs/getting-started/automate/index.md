@@ -19,7 +19,11 @@ scheduling is Schedules tab > Create Schedule > Set Up Schedule, NOT "Set Schedu
 says; the Notifications tab edits in place with Success/Errors/Processing cards and has no "Edit
 Notifications" button and no Warnings card, contrary to /management/notifications/. The third phase
 (Google Sheets destination) is not yet in the screenshots — it needs an OAuth authorization the
-owner has to create. -->
+owner has to create. The closing section, "Ask it the question you started with", is grounded in
+/kai/ (Query databases, calculate metrics), /kai/use-cases/#data-exploration and
+/kai/settings/#tool-permissions (read-only tools default to Always allow); its numbers are
+re-derived from public/getting-started/*.csv. The prompts themselves have not been run against Kai
+in the demo project, the same standard as the arc's other Kai blocks. -->
 
 ## What you need
 
@@ -213,5 +217,47 @@ schedule — plus duration and status. Expand a run to see its phases.
   typically capped at 10 in parallel. Split the phase.
 - **The run detail is a wall of jobs and you want the short version.** Ask Kai, which reads all of
   them: `My flow run failed. Which task failed, and why?`
+
+## Ask it the question you started with
+
+You built all of this to answer one thing: where the money in this pipeline is, and how much of
+what is still open is unlikely to land. The table is in Storage and the sheet is in Drive — and
+nobody has actually said the answer out loud yet.
+
+That part is Kai's other job. Everywhere else in this guide it stood in for your clicking; here it
+reads what you built. Querying a table and calculating a metric is
+[Data Exploration](/kai/use-cases/#data-exploration), and it needs nothing set up. Nothing below
+changes the project either: reading is what Kai's read-only tools do, and those are allowed
+without asking by default — so expect an answer rather than an approval dialog, unless this
+project's [tool permissions](/kai/settings/#tool-permissions) have been set to ask.
+
+:::tip[Do it with Kai]
+```text
+Using out.c-denormalize-opportunities.opportunity_denorm, answer this: of the deals still open —
+StageName does not start with "Closed" — how many are there, how many of those fall in the Poor
+ProbabilityClass, and what share of the total open Amount do the Poor ones carry?
+```
+
+**Check:** **192** deals still open, **145** of them Poor, and those 145 carry about **89%** of the
+open amount. That is the answer this guide was built to produce, and you now have it from your own
+project rather than from a page. The `Amount` column in this sample data carries no currency unit,
+so read the totals as bare numbers.
+
+An answer is a place to start, not to stop. The obvious follow-up:
+
+```text
+Which sales reps — the UserName column — carry that at-risk open amount? Largest first.
+```
+
+**Check:** it is concentrated, not spread — the top rep alone holds roughly a third of it. That is
+the kind of thing nobody sees in four CSV files, and it took one question because the pipeline had
+already put the rep's name next to the deal.
+
+**If the numbers come out different**, Kai wrote its own SQL and may have drawn the line
+somewhere else — cast `Probability` differently, or counted "open" another way. The definition
+this guide uses is the `ProbabilityClass` your transformation already wrote; read
+[Write the queries](/getting-started/transform/#write-the-queries) and ask Kai to use that column
+rather than re-prompting blind.
+:::
 
 **Next:** [Where to go next →](/getting-started/next-steps/)
