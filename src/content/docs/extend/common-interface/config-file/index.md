@@ -26,7 +26,7 @@ way you wish. Your component should validate the contents of this section. For p
 data, use [encryption](/overview/encryption/). This section is not available in Transformations.
 - `image_parameters`: See [below](#image-parameters).
 - `authorization`: Contains Oauth2 [authorization contents](/extend/common-interface/oauth/) or 
-[Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-workspace) .
+[Workspace credentials](/extend/common-interface/folders/#exchanging-data-via-database-workspace) .
 - `action`: Name of the [action](/extend/common-interface/actions/) to execute; defaults to `run`. All
 actions except `run` have a strict execution time limit of 30 seconds.
 See [actions](/extend/common-interface/actions/) for more details.
@@ -46,9 +46,9 @@ The `image_parameters` contents are configured in the [component settings](https
 text fields: **Image Parameters** and **Stack Parameters**.
 
 Both JSONs are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
-provide different values for different [Keboola Stacks](/overview/api/#regions-and-endpoints). Values in
+provide different values for different [Keboola Stacks](https://developers.keboola.com/overview/api/#stacks-and-endpoints). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
-*Stack Parameters* are indexed with [Storage URL](/overview/api/#regions-and-endpoints) or the given region.
+*Stack Parameters* are indexed with [Storage URL](https://developers.keboola.com/overview/api/#stacks-and-endpoints) or the given region.
 
 Given the following *Image Parameters*:
 
@@ -114,7 +114,7 @@ As with configurations, the encrypted values must be prefixed with the hash sign
 you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
 When using the [encryption API](https://api.keboola.com/?service=encryption#post-/encrypt), provide only the `componentId`
 parameter (using `projectId` or `configId` will make the cipher unusable).
-Also take care to use the correct [API URL](/overview/api/#regions-and-endpoints) to obtain
+Also take care to use the correct [API URL](https://developers.keboola.com/overview/api/#stacks-and-endpoints) to obtain
 ciphers for each region you need.
 
 ## State File
@@ -213,7 +213,7 @@ write the usage file regularly** during the component run, not only at the end.
 validated and a wrong format will cause a component failure.*
 
 ## Examples
-To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-the-data-folder). You will get a
+To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
 You can also use these configuration structure to create an API request for
 actually [running a component](https://api.keboola.com/?service=job-queue#post-/jobs).
@@ -247,15 +247,15 @@ A sample configuration file might look like this:
                     "source": "destination.csv",
                     "destination": "out.c-main.test",
                     "incremental": false,
-                    "colummns": [],
+                    "columns": [],
                     "primary_key": [],
                     "delete_where": [],
                     "delimiter": ",",
                     "enclosure": "\""
                 },
                 {
-                    "source": "write-alwayss.csv",
-                    "destination": "out.c-main.output-even-on-error"
+                    "source": "write-always.csv",
+                    "destination": "out.c-main.output-even-on-error",
                     "write_always": true
                 }
             ],
@@ -305,7 +305,7 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `enclosure`
   - `write_always`
 
-#### Input mapping --- basic
+#### Input mapping — basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`
 and `/data/tables/in/accounts.csv`.
 
@@ -351,7 +351,7 @@ In an API request, this would be passed as:
 }
 ```
 
-#### Input mapping --- incremental load
+#### Input mapping — incremental load
 Download 2 days of data from the `in.c-storage.StoredData` table to `/data/tables/in/in.c-storage.StoredData`.
 
 ```json
@@ -369,7 +369,7 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 ```
 
-#### Input mapping --- select columns
+#### Input mapping — select columns
 
 ```json
 {
@@ -386,8 +386,8 @@ Download 2 days of data from the `in.c-storage.StoredData` table to `/data/table
 }
 ```
 
-#### Input mapping --- column types
-This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/workspaces/-workspaceId-/load). It also acts the same way as `columns` setting allowing you to limit the table columns.
+#### Input mapping — column types
+This is applicable only to [workspace mapping](/extend/common-interface/folders/#exchanging-data-via-database-workspace), for CSV files this setting has no effect. The `column_types` setting maps to [Storage API load options](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/workspaces/-workspaceId-/load). It also acts the same way as `columns` setting allowing you to limit the table columns.
 If both `column_types` and `columns` setting are used, then the listed columns must match. If you omit `columns` and use only `column_types` (recommended) then `columns` will be propagated automatically from `column_types`.
 
 ```json
@@ -414,7 +414,7 @@ If both `column_types` and `columns` setting are used, then the listed columns m
 }
 ```
 
-#### Input mapping --- filtered table
+#### Input mapping — filtered table
 
 ```json
 {
@@ -434,7 +434,7 @@ If both `column_types` and `columns` setting are used, then the listed columns m
 }
 ```
 
-#### Output mapping --- basic
+#### Output mapping — basic
 Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`.
 
 ```json
@@ -452,7 +452,7 @@ Upload `/data/out/tables/out.c-main.data.csv` to `out.c-main.data`.
 }
 ```
 
-#### Output mapping --- headless CSV
+#### Output mapping — headless CSV
 Upload `/data/out/tables/data.csv`, a CSV file without headers on its first line, to the table `out.c-main.data`.
 
 ```json
@@ -471,7 +471,7 @@ Upload `/data/out/tables/data.csv`, a CSV file without headers on its first line
 }
 ```
 
-#### Output mapping --- set additional properties
+#### Output mapping — set additional properties
 Incrementally upload `/data/out/tables/data.csv` to `out.c-main.data`
 with a compound primary key set on the columns `column1` and `column2`.
 
@@ -492,7 +492,7 @@ with a compound primary key set on the columns `column1` and `column2`.
 }
 ```
 
-#### Output mapping --- write even if the job fails
+#### Output mapping — write even if the job fails
 If you have a table that you are updating during the execution of the job 
 and you want to output that table even if the job fails then you can use the `write_always` flag 
 
@@ -512,7 +512,7 @@ and you want to output that table even if the job fails then you can use the `wr
 }
 ```
 
-#### Output mapping --- delete rows
+#### Output mapping — delete rows
 Delete data from the `destination` table before uploading the CSV file (only makes sense with `incremental: true`).
 
 The `delete_where` parameter provides a flexible way to specify which records should be deleted from the target table before loading new data into it. It supports time-based filters and multiple filter conditions:
@@ -740,7 +740,7 @@ All files matching the search will be downloaded to the `/data/in/files` folder.
 The name of each file has the `fileId_fileName` format. Each file will also contain a
 [manifest](/extend/common-interface/manifest-files/) with all information about the file.
 
-#### Input mapping --- query
+#### Input mapping — query
 
 ```json
 {
@@ -765,7 +765,7 @@ This will download with files with matching `.zip` **and** having the `docker-de
     /data/in/files/75807657_fooBarBaz.zip
     /data/in/files/75807657_fooBarBaz.zip.manifest
 
-#### Output mapping --- basic
+#### Output mapping — basic
 Define additional properties for uploaded files in the output mapping configuration.
 If that file is not present in the `/data/out/files` folder, an error will be thrown.
 
