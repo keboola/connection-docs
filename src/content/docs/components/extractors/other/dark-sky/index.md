@@ -29,9 +29,9 @@ The connector authenticated with a Dark Sky API Secret key. **New keys are no lo
 The connector fetches weather conditions for locations provided by you in one or more tables.
 Each table must contain the following columns in this particular order:
 
-- `latitude` --- The latitude of a location (in decimal degrees); positive is north, negative is south.
-- `longitude` --- The longitude of a location (in decimal degrees); positive is east, negative is west.
-- `date` (optional) --- The date in format `YYYY-MM-DD`. By default, the current date is used.
+- `latitude` — The latitude of a location (in decimal degrees); positive is north, negative is south.
+- `longitude` — The longitude of a location (in decimal degrees); positive is east, negative is west.
+- `date` (optional) — The date in format `YYYY-MM-DD`. By default, the current date is used.
 
 Column names are not important. The only condition that has to be matched is the column order. 
 If you have a table with more columns, or the order of your columns is different, use the advanced input mapping and 
@@ -51,12 +51,12 @@ You can test the extraction on this [sample file](/components/extractors/other/d
 ## Extraction Output
 The connector produces one table called `weather` with the following columns:
 
-- `primary` --- hash of the latitude, longitude, date and key used for incremental saving of data
-- `latitude` --- latitude of the location
-- `longitude` --- longitude of the location
-- `date` --- date and time of the weather condition
-- `key` --- name of the weather condition (e.g., `temperature`, `windSpeed`)
-- `value` --- value of the weather condition
+- `primary` — hash of the latitude, longitude, date and key used for incremental saving of data
+- `latitude` — latitude of the location
+- `longitude` — longitude of the location
+- `date` — date and time of the weather condition
+- `key` — name of the weather condition (e.g., `temperature`, `windSpeed`)
+- `value` — value of the weather condition
 
 Data are always imported incrementally.
 The Dark Sky API documentation that described these weather conditions is no longer published.
