@@ -8,8 +8,9 @@ redirect_from:
 
 A deal row in this pipeline carries an `OwnerId`, not a rep's name — and the deals, the accounts
 they belong to, the reps who own them and those reps' seniority arrive as four separate files.
-None of them answers anything alone. This step gets all four into Storage so the next step can
-join them into one table.
+Apart, the deals file will tell you how much is open and how likely it is to close, but not whose
+it is or where. This step gets all four into Storage so the next step can join them into one
+table.
 Step 2 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
