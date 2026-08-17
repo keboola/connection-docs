@@ -61,7 +61,7 @@ In your table settings, you can:
 :::
 
 :::note[No primary key support]
-Data streams do **not** support primary keys --- every incoming event is **appended** to the
+Data streams do **not** support primary keys — every incoming event is **appended** to the
 table and no deduplication happens on import.
 
 If you need unique rows (e.g., one row per event ID), it is up to you to decide whether
