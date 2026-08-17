@@ -81,7 +81,7 @@ With the upcoming workspace access changes, this editor will serve as the go-to 
 
 ✅ MT/PAYG
 
-Projects using Keboola's shared Snowflake backend (MT/PAYG) will no longer be able to use the [Keboola-provisioned Snowflake database](/components/writers/database/snowflake/#using-keboola-provisioned-database) as a data destination for Snowflake Writer.
+Projects using Keboola's shared Snowflake backend (MT/PAYG) will no longer be able to use the [Keboola-provisioned Snowflake database](/components/writers/database/snowflake/#using-keboola-snowflake-database) as a data destination for Snowflake Writer.
 
 The option to use the Keboola Snowflake database has been used mainly for connecting 3rd party BI tools. This use case will be covered by the recently released [Data Gateway](/components/applications/data-gateway/) component.
 

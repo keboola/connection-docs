@@ -87,7 +87,7 @@ The settings on both places must match, otherwise you will receive an error:
     Output mapping does not match destination table: primary key '' does not match 'Id' in 'out.c-tutorial.opportunity_denorm' (check transformations Denormalize opportunities (id opportunity.denormalize-opportunities)).
 
 This means that you cannot change the primary key of a table arbitrarily. Also note that you cannot set
-the primary key on a column which contains duplicates --- you will receive the following error:
+the primary key on a column which contains duplicates — you will receive the following error:
 
     Cannot create new primary key, duplicate values in primary key columns
 
@@ -279,12 +279,12 @@ Here we can see a **significant change in the incremental load**. The `_timestam
 ### Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
 can be later used in input mapping of many components (especially [transformations](/transformations/mappings/#input-mapping)).
-Incremental processing is available in two flavors --- *automatic* and *manual*. Incremental processing makes sense only for
+Incremental processing is available in two flavors — *automatic* and *manual*. Incremental processing makes sense only for
 components reading data from the Storage (e.g., transformations and writers). Note that this is not supported for all components yet.
 
 #### Automatic incremental processing
 With automatic incremental processing, the component will receive only data modified from the last **successful** run of that component.
-Extending the [above example](#incremental-loading) --- if you have a table with a primary key defined on the column `name`:
+Extending the [above example](#incremental-loading) — if you have a table with a primary key defined on the column `name`:
 
 |name|money|
 |---|---|
@@ -342,7 +342,7 @@ This enables the component to process only a specified increment of the data:
 
 ![Screenshot - Incremental Processing](/storage/tables/incremental-processing.png)
 
-Extending the [above example](#incremental-loading) --- if you have a table with a primary key defined on the column `name`:
+Extending the [above example](#incremental-loading) — if you have a table with a primary key defined on the column `name`:
 
 |name|money|
 |---|---|
