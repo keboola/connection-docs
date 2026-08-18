@@ -82,6 +82,13 @@ before it can join them, and the sheet needs the joined table before it can deli
 
 Each phase here holds a single task, so nothing runs in parallel yet. Parallelism shows up the
 moment you have a second source: two connectors both go in phase 1 and run at the same time.
+<!-- VERIFY(owner): this sentence and the "If you took the connector side trips" note below both
+promise two tasks can share phase 1, and neither shows how to put a second task INTO an existing
+phase — the numbered steps only cover the + that starts a new one, and /flows/ asserts the
+capability without a UI path either. The pre-migration version said to drag the second task into
+the "Step 1" box, but that is Legacy Flow Builder language (see /flows/flows-legacy/); this
+walkthrough is Conditional Flows, so the claim was not carried over rather than guessed. One
+walked sentence would close both spots. -->
 Inside your HTTP configuration the four tables are already fetched by one job — row-based
 components like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel).
 

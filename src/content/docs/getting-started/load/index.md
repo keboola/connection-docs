@@ -186,6 +186,13 @@ depends on.
 
 ## Going further
 
+Which way you load depends on how far along the project is. A public URL is the quickest way
+to get real data into a project you just created, which is why a proof of concept usually
+starts there. Production data rarely sits on one — it is behind credentials, in a database or
+a SaaS account, and it keeps changing, so the run you kicked off by hand becomes one that
+repeats on a schedule. Both side trips are this same step against a source you have to
+authorize first.
+
 - [Load from Google Sheets](/getting-started/load/googlesheets/) — the same data pulled from a
   spreadsheet, with an authorized account instead of a public URL.
 - [Load from a database](/getting-started/load/database/) — the pattern every database connector

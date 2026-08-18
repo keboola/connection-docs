@@ -57,6 +57,12 @@ projects in your organization can link it read-only instead of copying it.
 [best practices cheat sheet](/overview/onboarding/cheat-sheet/) for naming and structure
 before the project grows.
 
+**"The connector I need does not exist."** Build it. The
+[Component Quick Start](/extend/component/tutorial/) walks writing and packaging one, and
+joining or creating a vendor comes with access to a development Keboola project to test it
+in. Making it available to everyone else is a separate, approval-gated step:
+[publishing](/extend/publish/).
+
 **"I am rolling this out to a team."** Start with the
 [platform onboarding](/overview/onboarding/) guides: a usage blueprint, project
 architecture, a business data model, and governance.
