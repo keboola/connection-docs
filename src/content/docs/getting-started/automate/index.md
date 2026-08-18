@@ -22,8 +22,14 @@ Notifications" button and no Warnings card, contrary to /management/notification
 owner has to create. The closing section, "Ask it the question you started with", is grounded in
 /kai/ (Query databases, calculate metrics), /kai/use-cases/#data-exploration and
 /kai/settings/#tool-permissions (read-only tools default to Always allow); its numbers are
-re-derived from public/getting-started/*.csv. The prompts themselves have not been run against Kai
-in the demo project, the same standard as the arc's other Kai blocks. -->
+re-derived from public/getting-started/*.csv. Both prompts were run against live Kai (Kai Agent,
+Beta, top bar) in project 264 on 2026-08-18: prompt 1 returned 192 open deals, 145 of them Poor and
+89.37% of the open Amount (355,597 of 397,888); prompt 2 returned the rep ranking, with the top rep
+alone on nearly a third (113K across 12 deals) and the top four on ~76% — the figures and the
+concentration this section claims. No approval dialog appeared for either prompt: Kai fetched the
+table detail and ran the query unprompted, which confirms live the read-only-tools sentence the
+fact-checker had flagged as thinly cited. Kai did print the totals with a $ sign that the sample
+data does not carry — which is what the bare-numbers caveat in the check is for. -->
 
 ## What you need
 
