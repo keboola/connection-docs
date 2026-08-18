@@ -24,19 +24,29 @@ Before you start, you should have a basic understanding of the [Python language]
 ## Introduction
 Let's say you want to experiment with the US unemployment data. It is provided by the
 [U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm) (BLS), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
-contains unemployment rates by month. The easiest way to access the data is via
+contains unemployment rates by month.
+
+<!-- VERIFY(owner): both bls.gov links answer 403 to every automated request made from here, with
+no redirect, including with full browser headers — consistent with the BLS blocking datacenter IPs
+rather than with a dead page. Not changed; needs one look from an ordinary browser. Checked
+2026-08-18. -->
+
+The easiest way to access the data is via
 [Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
-[Bureau of Labor Statistics Data](https://cloud.google.com/bigquery/public-data/bureau-of-labor-statistics).
+[Bureau of Labor Statistics](https://console.cloud.google.com/marketplace/product/bls-public-data/bureau-of-labor-statistics)
+data — the `bigquery-public-data.bls` dataset.
 
 Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola
-with the help of our BigQuery data source connector. Preview the table data in
-[Google BigQuery](https://bigquery.cloud.google.com/table/bigquery-public-data:bls.unemployment_cps?tab=preview).
+with the help of our BigQuery data source connector. Open the table in
+[Google BigQuery](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bls&t=unemployment_cps&page=table)
+and use the **Preview** tab to see the rows.
 
 ## Using BigQuery Connector
-To work with Google BigQuery, create an account, and [enable billing](https://cloud.google.com/bigquery/public-data/). Remember,
-querying public data is only [free up to 1TB a month](https://cloud.google.com/bigquery/public-data/).
+To work with Google BigQuery, create an account. Querying public data is
+[free up to 1 TB a month](https://cloud.google.com/bigquery/public-data) without enabling billing;
+past that you need to [enable billing](https://cloud.google.com/billing/docs/how-to/modify-project).
 
-Then create a [service account](https://cloud.google.com/bigquery/docs/authentication/#service_accounts) for authentication 
+Then create a [service account](https://cloud.google.com/iam/docs/service-accounts-create) for authentication 
 of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 ***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
@@ -167,7 +177,7 @@ click on **Create Sandbox**. Wait for the process to finish:
 
 ![Screenshot - Sandbox Configuration](/getting-started/ad-hoc/transformation-3.png)
 
-When finished, connect to the web version of the [Jupyter Notebook](http://jupyter.org/).
+When finished, connect to the web version of the [Jupyter Notebook](https://jupyter.org/).
 It allows you to run arbitrary code by clicking the **Connect** button:
 
 ![Screenshot - Sandbox Credentials](/getting-started/ad-hoc/transformation-4.png)
@@ -255,7 +265,7 @@ simply copy&paste it into a [Transformation](/getting-started/transform/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](https://jupyter.org/). The same can be done in the
-[R language](https://www.r-project.org/) using [RStudio](https://rstudio.com/).
+[R language](https://www.r-project.org/) using [RStudio](https://posit.co/products/open-source/rstudio/).
 For more information about workspaces (including disk and memory limits), see the
 [corresponding documentation](/workspace/).
 
