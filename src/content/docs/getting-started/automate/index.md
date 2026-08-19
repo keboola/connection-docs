@@ -92,7 +92,7 @@ canvas (**Component**, **Notification**, **Variable**), scoped to that phase. Do
 with the **+** *below* a phase, which starts a new phase instead. That toolbar belongs to the
 phase; the one that appears on the card itself is the task's, and carries **Run task** and its
 settings.
-<!-- Walked live in project 264 on 2026-08-18 in the [TUTORIAL] Opportunity pipeline builder: the
+<!-- Walked live in project 264 on 2026-08-19 in the [TUTORIAL] Opportunity pipeline builder: the
 phase's own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification /
 Variable. Nothing was saved. The pre-migration page said to drag the second task into the "Step 1"
 box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. -->

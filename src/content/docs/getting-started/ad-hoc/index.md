@@ -26,7 +26,7 @@ Let's say you want to experiment with the US unemployment data. It is provided b
 [U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm) (BLS), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
 contains unemployment rates by month.
 
-<!-- Both bls.gov links opened in a real browser on 2026-08-18 and are live: /cps/tables.htm serves
+<!-- Both bls.gov links opened in a real browser on 2026-08-19 and are live: /cps/tables.htm serves
 "CPS Tables", /web/empsit/cpseea10.htm serves "A-10. Unemployment rates by age, sex, and marital
 status, seasonally adjusted". They answer 403 to curl from the same host even with full browser
 headers, so BLS filters on request fingerprint, not on IP — a 403 on these two from any link
