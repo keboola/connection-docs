@@ -80,8 +80,10 @@ you have seen where a configuration and its rows live.
 
 ## Create the configuration
 
-1. Open **Components** and search for `HTTP`. Two results come back — pick plain **HTTP**
-   (*Data Source*), not **HTTP Advanced**, and click **Add Component**.
+1. Open **Components** and search for `HTTP`. Pick the plain **HTTP** (*Data Source*) — the one
+   described as *Downloading CSV files from any HTTP, and HTTPS URL* — and click **Add Component**.
+   The other match, **HTTP Advanced** (Beta), is a different component. Newer connectors with HTTP
+   in the name may also appear; go by that description rather than by position in the list.
 
    ![Screenshot - Find the HTTP data source connector](/getting-started/load/01-find-http.png)
 
@@ -94,7 +96,21 @@ you have seen where a configuration and its rows live.
 
    ![Screenshot - Create the configuration](/getting-started/load/02-create-configuration.png)
 
-4. Open **Base URL and Connection Options** and set **Base URL** to the prefix shared by every
+4. **If the configuration opens with a single File URL field, switch to Advanced Mode.** A new
+   configuration may start in a simplified mode that takes one URL and nothing else — no base URL,
+   no rows. Its own hint says as much: switch modes if you "want to load more files at once". Use
+   **Advanced Mode**, top right, and confirm. Note this is one-way: the button disappears
+   afterwards, and the change is recorded on the configuration as *Disable simplified mode*. If you
+   already see **Base URL and Connection Options** and a **Rows** section, you are in the right
+   mode and there is nothing to switch.
+   <!-- VERIFY(owner): the simplified mode was seen once, in a brand-new Free Plan project (6211)
+   on 2026-08-19; project 264 went straight to the base-URL form on 2026-08-04, which is what
+   screenshots 02/03 still show — hence "may". The connector reference
+   (components/extractors/storage/http/index.md) documents only Base URL + rows and does not
+   mention the mode at all, so this page is currently the only source for it. That page needs the
+   mode documented; it also still says "Add Table" where the UI says "Add Row". -->
+
+5. Open **Base URL and Connection Options** and set **Base URL** to the prefix shared by every
    file this configuration downloads, then click **Save**:
 
    ```
@@ -108,16 +124,16 @@ you have seen where a configuration and its rows live.
 Each file is a [configuration row](/components/#configuration-rows) — its own path and settings,
 sharing the configuration's base URL.
 
-5. In the **Rows** section, click **Add Row**, name it `opportunity`, and click **Create**. The
+6. In the **Rows** section, click **Add Row**, name it `opportunity`, and click **Create**. The
    row name becomes the Storage table name, so use exactly this spelling.
 
-6. Under **Download Settings**, set **Path** to the file, relative to the base URL:
+7. Under **Download Settings**, set **Path** to the file, relative to the base URL:
 
    ```
    /getting-started/opportunity.csv
    ```
 
-7. Check the rest of the row and click **Save**:
+8. Check the rest of the row and click **Save**:
 
    - **Save Settings → Table name** is already `opportunity`, taken from the row name.
    - **Delimiter** `,` and **Enclosure** `"` are already right for these files.
@@ -129,7 +145,7 @@ sharing the configuration's base URL.
 
    ![Screenshot - Row path and save settings](/getting-started/load/04-row-settings.png)
 
-8. Repeat steps 5–7 for the other three files:
+9. Repeat steps 6–8 for the other three files:
 
    | Row name | Path |
    |---|---|
@@ -137,10 +153,10 @@ sharing the configuration's base URL.
    | `user` | `/getting-started/user.csv` |
    | `level` | `/getting-started/level.csv` |
 
-9. Back on the configuration, click **Run Component** and confirm with **Run**. One job fetches
-   all four rows.
+10. Back on the configuration, click **Run Component** and confirm with **Run**. One job fetches
+    all four rows.
 
-   ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
+    ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
 
 ## Check it worked
 

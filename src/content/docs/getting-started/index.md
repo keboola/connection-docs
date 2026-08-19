@@ -78,7 +78,15 @@ and asking it the question at the top of this page — the other reason to keep 
 the last thing you do in the arc.
 
 Kai asks before it changes anything: project-modifying actions raise an approval dialog in the
-chat, so expect to confirm rather than watch it run unattended.
+chat, so expect to confirm rather than watch it run unattended. Expect one prompt per object rather
+than one per request — asking for step 2's whole configuration in a single sentence still raised
+six: the configuration, each of its four rows, and running the job. Questions that only read do not
+ask, because read-only tools are allowed by default. If the clicking gets tiring, click
+**Always allow** in the dialog, or pre-approve what you trust in
+[tool permissions](/kai/settings/#tool-permissions).
+<!-- VERIFY(owner): the chat also surfaced a tip for a "plan mode" — "have Kai draft a plan you can
+approve before any changes" — which would fit here, but nothing under kai/ documents it. Confirm
+the name and document it on kai/, then it can replace the Always-allow advice above. -->
 
 Kai is in **Public Beta**. The button is visible to every user on a supported stack, but the
 feature has to be switched on — an organization admin can do it from the chat screen or in

@@ -64,8 +64,9 @@ After signing in you land on the project dashboard. Five places matter for this 
 
 - **Components** — every data source connector, data destination connector, and
   application you can add to the project. This is where you configure how data gets in and out.
-- **Transformations** — the code that reshapes your data: SQL, Python and R, plus dbt on
-  paid plans.
+- **Transformations** — the code that reshapes your data: SQL, Python, R, and dbt. Which of
+  them a project offers is listed in its own **Create Transformation** dialog, so that dialog is
+  the answer to "what can this project run?".
 - **Storage** — every table and file in the project, organized into buckets. Its tabs cover
   **Tables & Buckets**, **Files**, **Data Streams**, **Storage Jobs** and **Events**.
 - **Flows** — the automation layer: what runs, in what order, on what schedule. Projects that

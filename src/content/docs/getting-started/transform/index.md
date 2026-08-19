@@ -82,8 +82,16 @@ the code in place. Later steps only depend on the table name, so a close-enough 
    ![Screenshot - Transformations section](/getting-started/transform/00-transformations.png)
 
 2. Click **Create Transformation**. The **New Transformation** dialog lists what this project
-   can run — *Snowflake SQL Transformation*, *Python*, *R*, and *DuckDB Transformation* (beta).
-   On a BigQuery project the SQL entry is the Google BigQuery one instead.
+   can run, and it differs by project: an SQL entry for your backend — *Snowflake SQL
+   Transformation* or *Google BigQuery Transformation* — plus *Python*, *R*, *DuckDB* (Beta),
+   and on some projects *dbt Core*. Take the dialog as the authority on your project rather than
+   this sentence.
+   <!-- VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
+   Beta in the dialog. That contradicts management/pay-as-you-go/index.md, whose Free Plan limits
+   say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,
+   which says new PAYG projects get dbt activated by default. The repo never labels dbt Beta.
+   Three pages disagree; the dialog is what a reader sees, so this sentence defers to it, but the
+   PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. -->
 
    **This list is how you find out which SQL dialect you need.** New
    [Free Plan](/management/payg-project/) projects default to the
@@ -94,8 +102,8 @@ the code in place. Later steps only depend on the table name, so a close-enough 
 
 3. Name it `Denormalize opportunities`, add a description, and in **Folder** type `Opportunity`
    and pick **Create folder "Opportunity"**. Folders are cosmetic, but they are the difference
-   between a browsable project and a wall of configurations. Ignore **Use predefined code
-   pattern**. Click **Create transformation**.
+   between a browsable project and a wall of configurations. If the dialog offers **Use predefined
+   code pattern**, ignore it. Click **Create transformation**.
 
    ![Screenshot - Name the transformation](/getting-started/transform/02-name-transformation.png)
 
@@ -129,8 +137,19 @@ process.
 
 1. In **Table Output Mapping**, click **New Table Output**.
 
-2. In **Table name**, enter `opportunity_denorm`. This is the name of a table your SQL will
-   create — it does not exist yet.
+   Output mapping opens in **Guided Mode** — the standard, copy-based mapping the steps below
+   describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
+   Storage and is a
+   [private beta](/transformations/mappings/#direct-mode-output-mapping).
+   <!-- VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
+   Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
+   2026-08-19) with no such request. Either that gate has changed or the mappings page is stale. -->
+
+2. Name the table `opportunity_denorm`. This is the name of a table your SQL will create — it does
+   not exist yet. The field is labelled **Table name**, or **Which table should we save?** in
+   Guided Mode. If the dialog warns you about case-sensitivity and suggests an UPPERCASE name,
+   ignore the suggestion here and match your SQL exactly: the query blocks below create
+   `opportunity_denorm` in lower case, and the name has to be the one the query actually creates.
 
 3. **Destination** is filled in for you from the transformation's name:
    `out.c-denormalize-opportunities.opportunity_denorm` — the `out` stage, a bucket named after
@@ -142,8 +161,18 @@ process.
 ## Write the queries
 
 In the empty **Queries** section, click **Create Multiple Queries**. Your SQL lives in a *code*
-inside a *block*: you get `Block 1` holding one code. Name the code `Opportunity denorm`, paste
-the SQL for **your project's backend**, and save.
+inside a *block*: you get `Block 1` holding one code. Paste the SQL for **your project's backend**
+and save.
+
+You may get an editor for that one code, where you can also name it — call it
+`Opportunity denorm`. You may instead get a single **All Queries** editor holding every block and
+code at once, with the structure marked by comment lines like `/* ===== BLOCK: Block 1 ===== */`;
+there, replace the `-- Your code goes here` line and leave those markers alone, since they are what
+keeps the blocks apart.
+<!-- VERIFY(owner): the All Queries editor was what opened in project 6211 on 2026-08-19, and
+neither it nor the /* ===== BLOCK ===== */ markers are documented anywhere else in the repo.
+It may be the same thing as the Edit Code control named below rather than a project-dependent
+variant — worth one look before this wording settles. -->
 
 Later you can add another code to the same block with **New Code**, or a whole second block with
 **New Code Block** — that is how a longer transformation gets organized. Once there is code,
