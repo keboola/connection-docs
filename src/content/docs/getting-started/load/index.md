@@ -13,6 +13,9 @@ it is or where. This step gets all four into Storage so the next step can join t
 table.
 Step 2 of the [Getting Started](/getting-started/) arc.
 
+**Two ways to do it:** click through the numbered steps, or hand the whole configuration to Kai in
+one prompt — the **Do it with Kai** block sits just before them.
+
 <!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
 and cannot take new configurations (verified live in project 264, 2026-08-04). Every label,
 default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http, and

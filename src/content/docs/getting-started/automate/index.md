@@ -11,6 +11,10 @@ a screenshot. A **flow** chains your three configurations in the order each one 
 runs them on a schedule, so the answer keeps up with the pipeline without you.
 Step 5 of the [Getting Started](/getting-started/) arc.
 
+**Two ways to do it:** click through the numbered steps, or ask Kai to build the flow — the
+**Do it with Kai** block sits just before them. Setting the schedule and the notifications is
+yours either way.
+
 <!-- Tutorial-type page (step 5 of 6). Walked live in project 264 on 2026-08-04: built and ran
 [TUTORIAL] Opportunity pipeline (flow 01kz5yndzrc4zvkwch85qg4x28), created a schedule and read the
 Notifications tab. Corrections found: phases are labelled "Phase 1/2/..." not "Step 1"; the + between

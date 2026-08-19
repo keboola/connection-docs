@@ -8,6 +8,9 @@ Everything you build in this guide lives inside a **project**: the data you load
 write, the flow that runs them on a schedule. This page just gets you one.
 Step 1 of the [Getting Started](/getting-started/) arc.
 
+**No Kai path here:** Kai works *inside* a project, so this one step is yours. From step 2 on,
+every building step can be done either way.
+
 <!-- Tutorial-type page (step 1 of 6). The project-screen tour below was verified live in
 project 264 on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components /
 Workspaces / Transformations / Data Catalog / Jobs, and Kai appears as

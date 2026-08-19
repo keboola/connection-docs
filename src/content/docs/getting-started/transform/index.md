@@ -14,6 +14,9 @@ those IDs into names and buckets every deal by probability, and it introduces th
 that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
+**Two ways to do it:** click through the numbered steps, or ask Kai for the whole transformation —
+the **Do it with Kai** block sits just before them.
+
 <!-- Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
 "Create Transformation", the dialog is "New Transformation", the sections are "Table Input
 Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select,

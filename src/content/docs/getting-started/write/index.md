@@ -10,6 +10,9 @@ Whoever asked where the money is will look in a spreadsheet, not in Keboola. Thi
 delivers the 639-row table to a Google Sheet — the same mechanism that later sends data to a
 warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
 
+**Two ways to do it, but in one order:** the Google authorization is yours either way — steps 1–6
+below — and Kai can take it from there. See the **Do it with Kai** block just before the steps.
+
 <!-- Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching
 "Sheets" returns 5 components with Google Sheets Data Source and Data Destination adjacent, which is
 why the page now names the type explicitly. Step 2 verified the same day: Add Component on the
