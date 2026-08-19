@@ -61,6 +61,6 @@ export default defineConfig({
       },
     }),
     // Must come AFTER starlight() so MDX code blocks use astro-expressive-code.
-    mdx(),
+    mdx({ gfm: true }),
   ],
 });
