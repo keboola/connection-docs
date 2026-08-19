@@ -61,6 +61,9 @@ export default defineConfig({
       },
     }),
     // Must come AFTER starlight() so MDX code blocks use astro-expressive-code.
-    mdx(),
+    // GFM has to be asked for explicitly here. Without it, MDX pages render
+    // pipe tables as literal text — visible corruption, and the reason no page
+    // could safely be converted from .md before now.
+    mdx({ gfm: true }),
   ],
 });
