@@ -200,6 +200,35 @@ You can also create the notification inside of condition as a New Phase, name it
 
 ![](/flows/conditional-flows-notification-2.png)
 
+## Run the Flow
+
+Click **Run flow** in the flow header to run the whole flow. The arrow next to the button offers the partial runs below. All of them use the **saved** configuration, so save or reset your changes first.
+
+### Run selected tasks
+
+Use this when only a part of the flow needs to run — for example after fixing one transformation, without waiting for the extractors again.
+
+1. Open the **Builder** tab and choose **Run selected tasks** from the **Run flow** button.
+2. Click the tasks you want to run. The canvas is read-only while selecting; each phase shows how many of its tasks are selected and offers **Select all tasks in this phase** and **Select this phase and everything after it**.
+3. Click **Run tasks**. **Cancel** or `Esc` leaves the mode without running anything.
+
+![Builder in selection mode: the "Run selected tasks — 2 of 7 tasks selected" panel with Cancel and Run Tasks, two highlighted phases and a dimmed one](/flows/run-selected-tasks.png)
+
+What runs:
+
+- Only the selected tasks. **Conditions are ignored** — the selected phases run one after another, including phases in different branches of a condition, and a phase several branches lead into runs only once. Phases with nothing selected are skipped.
+- Tasks selected within one phase still run in parallel, as they do in a normal run.
+- Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
+- A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
+
+### Re-run failed tasks
+
+After a failed run, **Re-run failed tasks** appears in the same **Run flow** button, and on the flow's job detail in **Jobs**. Tasks that already finished successfully are skipped and their results reused; the rest re-run with the current flow configuration.
+
+### Run a single phase or task
+
+Hovering over a phase or a task reveals a **run** icon that runs just that phase or task in isolation — no other phase is entered and no conditions are evaluated.
+
 ## Schedule and Automate
 
 Open the **Schedules** tab in your flow and click **Create Schedule**. A flow can have several
