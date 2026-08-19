@@ -61,8 +61,8 @@ what a stack is. This guide explains each piece as it comes up, so you can also 
 ## Two ways to do most steps
 
 The building steps — load, transform, deliver, automate — can be done by clicking through the UI
-or by asking **Kai**, Keboola's built-in assistant, to do them. Each of those pages carries a
-**Do it with Kai** block with a copy-pasteable prompt, right next to the manual steps it replaces.
+or by asking **Kai**, Keboola's built-in assistant, to do them. Each of those pages puts both paths side by
+side: a **Do it with Kai** tab on steps 2, 3 and 5, and a **Do it with Kai** block on step 4.
 
 Two things stay yours either way: creating the project in step 1, since Kai works *inside* a
 project, and the Google screens in step 4 — the authorization consent, and choosing a file in

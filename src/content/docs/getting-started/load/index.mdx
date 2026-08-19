@@ -6,6 +6,8 @@ redirect_from:
   - /tutorial/load/
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 A deal row in this pipeline carries an `OwnerId`, not a rep's name — and the deals, the accounts
 they belong to, the reps who own them and those reps' seniority arrive as four separate files.
 Apart, the deals file will tell you how much is open and how likely it is to close, but not whose
@@ -13,14 +15,15 @@ it is or where. This step gets all four into Storage so the next step can join t
 table.
 Step 2 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it:** click through the numbered steps, or hand the whole configuration to Kai in
-one prompt — the **Do it with Kai** block sits just before them.
+**Two ways to do it** — pick a tab in *Set it up* below. The clicking is written out in full and
+stays the primary path, because later steps assume you have seen where a configuration and its rows
+live; Kai does the same job in one prompt.
 
-<!-- Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
+{/* Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
 and cannot take new configurations (verified live in project 264, 2026-08-04). Every label,
 default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http, and
 the four-row run took 2 min 4 s. Note our own connector page
-(components/extractors/storage/http/index.md) still says "Add Table"; the UI says "Add Row". -->
+(components/extractors/storage/http/index.md) still says "Add Table"; the UI says "Add Row". */}
 
 ## What you need
 
@@ -60,28 +63,12 @@ flow, which is what [step 5](/getting-started/automate/) depends on.
 One configuration can fetch **many** files, so you will build a single configuration holding
 four tables rather than four separate configurations.
 
-:::tip[Do it with Kai]
-Setting up a data source connector is one of the things Kai does
-([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and ask
-for the whole configuration at once:
+## Set it up
 
-```text
-Create one HTTP data source configuration called "[TUTORIAL] Sample data", with base URL
-https://help.keboola.com and four rows — one per file — fetching /getting-started/opportunity.csv,
-/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
-tables opportunity, account, user and level. Then run it and tell me the row counts.
-```
+<Tabs syncKey="howto">
+<TabItem label="Do it yourself">
 
-One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
-runs this as a single task and the parallelism note below assumes that shape.
-
-**Check:** four tables in Storage with 639 / 275 / 28 / 28 rows, and a **Rows** list showing four
-entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it and
-follow the numbered steps — the ten minutes are worth it anyway, since the rest of the arc assumes
-you have seen where a configuration and its rows live.
-:::
-
-## Create the configuration
+**Create the configuration**
 
 1. Open **Components** and search for `HTTP`. Pick the plain **HTTP** (*Data Source*) — the one
    described as *Downloading CSV files from any HTTP, and HTTPS URL* — and click **Add Component**.
@@ -106,12 +93,12 @@ you have seen where a configuration and its rows live.
    afterwards, and the change is recorded on the configuration as *Disable simplified mode*. If you
    already see **Base URL and Connection Options** and a **Rows** section, you are in the right
    mode and there is nothing to switch.
-   <!-- VERIFY(owner): the simplified mode was seen once, in a brand-new Free Plan project (6211)
+   {/* VERIFY(owner): the simplified mode was seen once, in a brand-new Free Plan project (6211)
    on 2026-08-19; project 264 went straight to the base-URL form on 2026-08-04, which is what
    screenshots 02/03 still show — hence "may". The connector reference
    (components/extractors/storage/http/index.md) documents only Base URL + rows and does not
    mention the mode at all, so this page is currently the only source for it. That page needs the
-   mode documented; it also still says "Add Table" where the UI says "Add Row". -->
+   mode documented; it also still says "Add Table" where the UI says "Add Row". */}
 
 5. Open **Base URL and Connection Options** and set **Base URL** to the prefix shared by every
    file this configuration downloads, then click **Save**:
@@ -122,7 +109,7 @@ you have seen where a configuration and its rows live.
 
    ![Screenshot - Set the base URL](/getting-started/load/03-base-url.png)
 
-## Add the four tables
+**Add the four tables**
 
 Each file is a [configuration row](/components/#configuration-rows) — its own path and settings,
 sharing the configuration's base URL.
@@ -160,6 +147,31 @@ sharing the configuration's base URL.
     all four rows.
 
     ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
+
+</TabItem>
+<TabItem label="Do it with Kai">
+
+Setting up a data source connector is one of the things Kai does
+([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and ask
+for the whole configuration at once:
+
+```text
+Create one HTTP data source configuration called "[TUTORIAL] Sample data", with base URL
+https://help.keboola.com and four rows — one per file — fetching /getting-started/opportunity.csv,
+/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
+tables opportunity, account, user and level. Then run it and tell me the row counts.
+```
+
+One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
+runs this as a single task and the parallelism note below assumes that shape.
+
+**Check:** four tables in Storage with 639 / 275 / 28 / 28 rows, and a **Rows** list showing four
+entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it and
+switch to the **Do it yourself** tab — the ten minutes are worth it anyway, since the rest of the arc assumes
+you have seen where a configuration and its rows live.
+
+</TabItem>
+</Tabs>
 
 ## Check it worked
 

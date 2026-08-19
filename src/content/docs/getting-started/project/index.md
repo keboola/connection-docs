@@ -83,8 +83,9 @@ consider stating the boundary on kai/index.md. -->
 
 :::tip[Ask Kai to orient you]
 This is the one step of the arc Kai cannot do for you — it lives *inside* a project, so there has
-to be a project first. From here on, each building step carries a **Do it with Kai** block; on
-step 4 it takes over only after you have authorized Google yourself.
+to be a project first. From here on, each building step offers both paths — a
+**Do it with Kai** tab on steps 2, 3 and 5, a block on step 4, where it takes over only after you
+have authorized Google yourself.
 
 Look for **Kai Agent**, marked *Beta*, in the top bar. It has to be enabled first and it is not on
 every stack, so see [Get started with Kai](/kai/getting-started/) if you cannot find it. On a
@@ -103,7 +104,7 @@ Two things. The second one is worth settling now rather than halfway through ste
 - Open **Storage** and you can see the project's bucket list. Empty is fine — that is what you
   are about to change.
 - **Kai Agent** in the top bar opens a chat panel when you click it. Worth confirming now,
-  because every building step from here offers a **Do it with Kai** shortcut. If the button is
+  because every building step from here offers a **Do it with Kai** path. If the button is
   missing, or clicking it asks you to switch the feature on, that is the Public Beta gate — an
   organization admin does it, and a non-admin needs them or Support. There is also a monthly
   message allowance, and it is smaller on Pay As You Go.

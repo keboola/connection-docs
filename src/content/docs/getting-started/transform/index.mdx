@@ -6,6 +6,8 @@ redirect_from:
   - /tutorial/manipulate/
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Of the 192 opportunities still open, 145 of them — carrying about 89% of the open amount — sit
 below 50% probability. The deals table already says that much; what it will not say is whose those
 deals are or which regions they sit in, because it names owners and accounts by ID. This step
@@ -14,17 +16,17 @@ those IDs into names and buckets every deal by probability, and it introduces th
 that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it:** click through the numbered steps, or ask Kai for the whole transformation —
-the **Do it with Kai** block sits just before them.
+**Two ways to do it** — pick a tab in *Set it up* below. Either way you run it and check the
+result afterwards, in the section below the tabs.
 
-<!-- Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
+{/* Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
 "Create Transformation", the dialog is "New Transformation", the sections are "Table Input
 Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select,
 and Queries offers "Create Multiple Queries". The Snowflake SQL ran successfully against the four
 HTTP tables. The SQL was RUN twice (jobs 95584510 and
 95584854, 53s and 43s) producing out.c-denormalize-opportunities.opportunity_denorm with 639 rows
 and 23 columns both times — so the output bucket really is plural, and the transformation is
-re-runnable. All ten screenshots are fresh captures from that walk. -->
+re-runnable. All ten screenshots are fresh captures from that walk. */}
 
 ## What you need
 
@@ -55,30 +57,12 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 
 ![Screenshot - How mapping works](/getting-started/transform/mapping.png)
 
-:::tip[Do it with Kai]
-Writing SQL transformations is Kai's home ground
-([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
-schemas in front of it. Open **Kai Agent** in the top bar and ask:
+## Set it up
 
-```text
-Create a SQL transformation called "Denormalize opportunities" writing to
-out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
-ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
-user as UserName plus their sales and global market, join the account as AccountName plus region,
-status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
-Outline the approach first, then build it and run it.
-```
+<Tabs syncKey="howto">
+<TabItem label="Do it yourself">
 
-Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
-different set, and the check below will not match. Asking for the outline first is worth it too:
-you get to read the joins before they run, which is what the mapping model above is about.
-
-**Check:** 639 rows, 23 columns. If the count differs, the columns differ — read the SQL in
-[Write the queries](#write-the-queries) to see what the arc expects, and either re-prompt or fix
-the code in place. Later steps only depend on the table name, so a close-enough table is fine.
-:::
-
-## Create the transformation
+**Create the transformation**
 
 1. Open **Transformations**.
 
@@ -89,12 +73,12 @@ the code in place. Later steps only depend on the table name, so a close-enough 
    Transformation* or *Google BigQuery Transformation* — plus *Python*, *R*, *DuckDB* (Beta),
    and on some projects *dbt Core*. Take the dialog as the authority on your project rather than
    this sentence.
-   <!-- VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
+   {/* VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
    Beta in the dialog. That contradicts management/pay-as-you-go/index.md, whose Free Plan limits
    say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,
    which says new PAYG projects get dbt activated by default. The repo never labels dbt Beta.
    Three pages disagree; the dialog is what a reader sees, so this sentence defers to it, but the
-   PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. -->
+   PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. */}
 
    **This list is how you find out which SQL dialect you need.** New
    [Free Plan](/management/payg-project/) projects default to the
@@ -110,7 +94,7 @@ the code in place. Later steps only depend on the table name, so a close-enough 
 
    ![Screenshot - Name the transformation](/getting-started/transform/02-name-transformation.png)
 
-## Set the input mapping
+**Set the input mapping**
 
 1. In **Table Input Mapping**, click **Add Table Input**.
 
@@ -136,7 +120,7 @@ filters, data filters. None of it is needed here; see
 [input mapping](/transformations/mappings/#input-mapping) when you have a large table to
 process.
 
-## Set the output mapping
+**Set the output mapping**
 
 1. In **Table Output Mapping**, click **New Table Output**.
 
@@ -144,9 +128,9 @@ process.
    describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
    Storage and is a
    [private beta](/transformations/mappings/#direct-mode-output-mapping).
-   <!-- VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
+   {/* VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
-   2026-08-19) with no such request. Either that gate has changed or the mappings page is stale. -->
+   2026-08-19) with no such request. Either that gate has changed or the mappings page is stale. */}
 
 2. Name the table `opportunity_denorm`. This is the name of a table your SQL will create — it does
    not exist yet. The field is labelled **Table name**, or **Which table should we save?** in
@@ -161,7 +145,7 @@ process.
 
    ![Screenshot - The finished output mapping](/getting-started/transform/06-output-mapping.png)
 
-## Write the queries
+**Write the queries**
 
 In the empty **Queries** section, click **Create Multiple Queries**. Your SQL lives in a *code*
 inside a *block*: you get `Block 1` holding one code. Paste the SQL for **your project's backend**
@@ -172,16 +156,16 @@ You may get an editor for that one code, where you can also name it — call it
 code at once, with the structure marked by comment lines like `/* ===== BLOCK: Block 1 ===== */`;
 there, replace the `-- Your code goes here` line and leave those markers alone, since they are what
 keeps the blocks apart.
-<!-- VERIFY(owner): the All Queries editor was what opened in project 6211 on 2026-08-19, and
-neither it nor the /* ===== BLOCK ===== */ markers are documented anywhere else in the repo.
+{/* VERIFY(owner): the All Queries editor was what opened in project 6211 on 2026-08-19, and
+neither it nor its BLOCK/CODE comment markers are documented anywhere else in the repo.
 It may be the same thing as the Edit Code control named below rather than a project-dependent
-variant — worth one look before this wording settles. -->
+variant — worth one look before this wording settles. */}
 
 Later you can add another code to the same block with **New Code**, or a whole second block with
 **New Code Block** — that is how a longer transformation gets organized. Once there is code,
 the **Queries** header offers **Copy Code** and **Edit Code**.
 
-### If your project uses Snowflake
+**If your project uses Snowflake**
 
 ```sql
 CREATE TABLE "tmp_level" AS
@@ -219,7 +203,7 @@ column names in the sample data are mixed case.
 
 ![Screenshot - The configured transformation](/getting-started/transform/07-configured.png)
 
-### If your project uses BigQuery
+**If your project uses BigQuery**
 
 [BigQuery](/transformations/bigquery/) does not quote identifiers this way, and CTEs replace the
 temporary tables. It is written to produce the same table:
@@ -267,7 +251,7 @@ JOIN
     tmp_level ON user.Name = tmp_level.Name;
 ```
 
-<!-- Walked live on 2026-08-19 in a brand-new Free Plan project (6211, us-east4.gcp, BigQuery
+{/* Walked live on 2026-08-19 in a brand-new Free Plan project (6211, us-east4.gcp, BigQuery
 backend) created for exactly this: the four HTTP rows loaded 639/275/28/28, then this block ran and
 produced out.c-denormalize-opportunities.opportunity_denorm with 639 rows. Storage showed the OUT
 badge and "Recently updated by: Denormalize opportunities / Google BigQuery". Column count not
@@ -286,7 +270,34 @@ The struct's two fields are the level table's own columns, which is the tell. Qu
 
 Still true from the earlier note: `SELECT * EXCEPT (_timestamp)` stays out. `_timestamp` appears
 only on CLONE-staged inputs on either backend (transformations/mappings/index.md:238); this run was
-workspace-staged and never saw it, and EXCEPT on an absent column is itself an error. -->
+workspace-staged and never saw it, and EXCEPT on an absent column is itself an error. */}
+
+</TabItem>
+<TabItem label="Do it with Kai">
+
+Writing SQL transformations is Kai's home ground
+([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
+schemas in front of it. Open **Kai Agent** in the top bar and ask:
+
+```text
+Create a SQL transformation called "Denormalize opportunities" writing to
+out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
+ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
+user as UserName plus their sales and global market, join the account as AccountName plus region,
+status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
+Outline the approach first, then build it and run it.
+```
+
+Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
+different set, and the check below will not match. Asking for the outline first is worth it too:
+you get to read the joins before they run, which is what the mapping model above is about.
+
+**Check:** 639 rows, 23 columns. If the count differs, the columns differ — switch to the **Do it yourself** tab and read
+**Write the queries** to see what the arc expects, and either re-prompt or fix
+the code in place. Later steps only depend on the table name, so a close-enough table is fine.
+
+</TabItem>
+</Tabs>
 
 ## Run it and check the result
 

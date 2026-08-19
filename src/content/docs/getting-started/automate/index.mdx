@@ -6,16 +6,17 @@ redirect_from:
   - /tutorial/automate/
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 The answer in that sheet is true this morning, because you ran every step by hand. Tomorrow it is
 a screenshot. A **flow** chains your three configurations in the order each one needs the last and
 runs them on a schedule, so the answer keeps up with the pipeline without you.
 Step 5 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it:** click through the numbered steps, or ask Kai to build the flow — the
-**Do it with Kai** block sits just before them. Setting the schedule and the notifications is
-yours either way.
+**Two ways to do it** — pick a tab in *Set it up* below. Running it, scheduling it and setting
+notifications come afterwards and are yours either way.
 
-<!-- Tutorial-type page (step 5 of 6). Walked live in project 264 on 2026-08-04: built and ran
+{/* Tutorial-type page (step 5 of 6). Walked live in project 264 on 2026-08-04: built and ran
 [TUTORIAL] Opportunity pipeline (flow 01kz5yndzrc4zvkwch85qg4x28), created a schedule and read the
 Notifications tab. Corrections found: phases are labelled "Phase 1/2/..." not "Step 1"; the + between
 phases adds a PHASE, not a task; the Builder needs an explicit Save before Run flow is enabled;
@@ -33,7 +34,7 @@ alone on nearly a third (113K across 12 deals) and the top four on ~76% — the 
 concentration this section claims. No approval dialog appeared for either prompt: Kai fetched the
 table detail and ran the query unprompted, which confirms live the read-only-tools sentence the
 fact-checker had flagged as thinly cited. Kai did print the totals with a $ sign that the sample
-data does not carry — which is what the bare-numbers caveat in the check is for. -->
+data does not carry — which is what the bare-numbers caveat in the check is for. */}
 
 ## What you need
 
@@ -71,39 +72,20 @@ canvas (**Component**, **Notification**, **Variable**), scoped to that phase. Do
 with the **+** *below* a phase, which starts a new phase instead. That toolbar belongs to the
 phase; the one that appears on the card itself is the task's, and carries **Run task** and its
 settings.
-<!-- Walked live in project 264 on 2026-08-19 in the [TUTORIAL] Opportunity pipeline builder: the
+{/* Walked live in project 264 on 2026-08-19 in the [TUTORIAL] Opportunity pipeline builder: the
 phase's own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification /
 Variable. Nothing was saved. The pre-migration page said to drag the second task into the "Step 1"
-box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. -->
+box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. */}
 
 Flows can also branch on what happened: retry a task, take a different path on failure, end
 early. That is [conditions](/flows/#conditions), and you need none of it yet.
 
-:::tip[Do it with Kai]
-Building a pipeline out of configurations you already have is a documented Kai job
-([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
-**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
-flow's header once it has tasks.
+## Set it up
 
-```text
-Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
-configuration first, then the "Denormalize opportunities" transformation, then the
-"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
-```
+<Tabs syncKey="howto">
+<TabItem label="Do it yourself">
 
-If you skipped step 4, drop the third one and ask for two phases.
-
-**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
-previous one's output, so the split is the whole point, for the reason the section above just
-gave. If it came out as one phase, the fix is the one the numbered steps use: the **+** below a
-phase starts a new phase — add the later tasks there and remove them from the first.
-
-Set the **schedule** and the **notifications** yourself afterwards, in the tabs shown below. Both
-are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
-gets told about is just a button.
-:::
-
-## Build the flow
+**Build the flow**
 
 1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
    **Conditional Flows**, which is what these screenshots show. Click **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and click
@@ -129,7 +111,8 @@ gets told about is just a button.
 
    ![Screenshot - A second phase](/getting-started/automate/04-second-phase.png)
 
-5. Repeat for a third phase holding the Google Sheets destination configuration.
+5. Repeat for a third phase holding the Google Sheets destination configuration. If you skipped
+   [step 4](/getting-started/write/), stop at two phases.
 
 6. Click **Save**. The Builder keeps your changes as a draft until you do — **Save** and
    **Reset** only appear while there are unsaved changes, and **Run flow** stays disabled until
@@ -141,6 +124,37 @@ You now have three phases: the load, then the transformation, then the delivery.
 
 *The capture above shows the first two phases; the delivery phase sits below them, off the bottom
 of the frame.*
+
+
+
+</TabItem>
+<TabItem label="Do it with Kai">
+
+Building a pipeline out of configurations you already have is a documented Kai job
+([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
+**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
+flow's header once it has tasks.
+
+```text
+Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
+configuration first, then the "Denormalize opportunities" transformation, then the
+"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
+```
+
+If you skipped [step 4](/getting-started/write/), drop the third one and ask for two phases.
+
+**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
+previous one's output, so the split is the whole point, for the reason the section above just
+gave. If it came out as one phase, the fix is the one the numbered steps use — switch to the
+**Do it yourself** tab: the **+** below a phase starts a new phase — add the later tasks there and remove them from the first.
+
+Set the **schedule** and the **notifications** yourself afterwards, in the flow's own **Schedules**
+and **Notifications** tabs — the sections below the tabs. Both
+are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
+gets told about is just a button.
+
+</TabItem>
+</Tabs>
 
 :::note[Clicking a task opens its settings]
 Worth knowing early: selecting a task gives you **Edit Configuration**, **Run rows** (for
@@ -159,6 +173,9 @@ input mapping succeeds and produces nothing useful.
 :::
 
 ## Run it
+
+If **Run flow** is disabled, the Builder is still holding your changes as a draft — click
+**Save** first. That applies however the flow got built, including when Kai built it for you.
 
 Click **Run flow** and confirm with **Run**. A *Conditional Flows job has been scheduled*
 notification appears with a **Show job** link, and while the run is in progress the header offers
@@ -252,7 +269,7 @@ changes the project either: reading is what Kai's read-only tools do, and those 
 without asking by default — so expect an answer rather than an approval dialog, unless this
 project's [tool permissions](/kai/settings/#tool-permissions) have been set to ask.
 
-:::tip[Do it with Kai]
+:::tip[Ask Kai the question]
 ```text
 Using out.c-denormalize-opportunities.opportunity_denorm, answer this: of the deals still open —
 StageName does not start with "Closed" — how many are there, how many of those fall in the Poor
@@ -277,7 +294,7 @@ already put the rep's name next to the deal.
 **If the numbers come out different**, Kai wrote its own SQL and may have drawn the line
 somewhere else — cast `Probability` differently, or counted "open" another way. The definition
 this guide uses is the `ProbabilityClass` your transformation already wrote; read
-[Write the queries](/getting-started/transform/#write-the-queries) and ask Kai to use that column
+[Set it up](/getting-started/transform/#set-it-up), in the **Do it yourself** tab, and ask Kai to use that column
 rather than re-prompting blind.
 :::
 
