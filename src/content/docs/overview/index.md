@@ -107,12 +107,12 @@ organization, keep track of individual access rights, and promote clear visibili
 
 ## Extending the Platform 
 The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
-can be [extended](https://developers.keboola.com/extend/) with **arbitrary code to extract, transform, or write data**.
+can be [extended](/extend/) with **arbitrary code to extract, transform, or write data**.
 
 You can extend the platform by creating
 
-- [components](https://developers.keboola.com/extend/#component) (used as data source and destination connectors and applications).
-- components based on the [Generic Extractor](https://developers.keboola.com/extend/#generic-extractor/).
+- [components](/extend/#component) (used as data source and destination connectors and applications).
+- components based on the [Generic Extractor](/extend/#generic-extractor).
 
 Keboola, your in-house teams, or 3rd parties can create all components while using already existing data, ETL processes, and workflows. 
 The platform automates infrastructure, user, and data management, offering services like [data catalog](/catalog/), operational metadata, governance, 
@@ -120,7 +120,7 @@ and reverse billing. Components can be private or shared with Keboola users via 
 to enhance workflows and support a composable enterprise.
 
 Components can be run as standard pieces of our [Flows](/flows/), obtaining the full support and services (a link to your
-[components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
+[components](https://components.keboola.com/components), [logs, etc.](/extend/common-interface/)).
 
 ### Keboola CLI
 [**kbagent**](/cli/) is Keboola's command-line interface — manage projects, configs, jobs, storage, and flows across your whole organization from the terminal, on your own or with an AI coding agent. See the [CLI section](/cli/) to get started.

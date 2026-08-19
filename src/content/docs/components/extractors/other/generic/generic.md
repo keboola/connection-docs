@@ -21,7 +21,7 @@ Features such as cURL import, request tests, output mapping generator, and dynam
 
 Because you have to write it yourself, we included the
 [Generic Extractor guide](https://developers.keboola.com/extend/generic-extractor/) in our [Developer 
-Documentation](https://developers.keboola.com/extend/). 
+Documentation](/extend/). 
 
 No other programming or software engineering skills are necessary. Even though configuring the Generic Extractor may seem quite 
 complex at first, once you understand the concept, you can extract desired data within (tens of) minutes. 
