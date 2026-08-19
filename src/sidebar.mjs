@@ -471,6 +471,7 @@ export const sidebar = [
       { slug: "cli/commands" },
       { slug: "cli/web-ui" },
       { slug: "cli/troubleshooting" },
+      { slug: "cli/keboola-as-code" },
     ],
   },
   {
