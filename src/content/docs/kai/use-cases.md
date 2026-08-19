@@ -1,6 +1,7 @@
 ---
 title: Kai Use Cases & Examples
 slug: 'kai/use-cases'
+description: Practical example prompts for Kai — troubleshooting, SQL transformations, integration setup, apps, documentation, data exploration, and multi-step pipelines.
 ---
 
 

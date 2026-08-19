@@ -1,6 +1,7 @@
 ---
 title: Kai Best Practices
 slug: 'kai/best-practices'
+description: Get better results from Kai — prompt with business context, plan before building, iterate, work in dev branches, and keep credentials out of chat.
 ---
 
 

@@ -9,6 +9,8 @@ description: Configure Kai's tool permissions, system instructions, context file
 Kai's settings let you personalize how Kai behaves in your project. Open the Kai chat panel and click the **Settings** icon (gear) to access them. Settings are **per-user and per-project**, so each team member can configure their own preferences independently.
 
 The settings panel has two tabs: **Tool Permissions** and **System Instructions**. Project-wide customization — project-level instructions, [context files](#context-files), and [skill files](#skill-files) — is managed in **Settings → Kai Agent** in the main Keboola navigation (the tab is labeled **Kai Assistant** in projects not yet upgraded to the new Kai engine).
+<!-- TODO(human-review): confirm the "Settings → Features" path for enabling Kai on a project. -->
+
 
 ## Tool Permissions
 
