@@ -2,6 +2,7 @@
 title: Storage API
 slug: 'storage/api'
 redirect_from:
+    - /integrate/storage/
     - /integrate/storage/api/
 ---
 
