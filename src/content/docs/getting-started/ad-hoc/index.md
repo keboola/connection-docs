@@ -26,10 +26,11 @@ Let's say you want to experiment with the US unemployment data. It is provided b
 [U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm) (BLS), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
 contains unemployment rates by month.
 
-<!-- VERIFY(owner): both bls.gov links answer 403 to every automated request made from here, with
-no redirect, including with full browser headers — consistent with the BLS blocking datacenter IPs
-rather than with a dead page. Not changed; needs one look from an ordinary browser. Checked
-2026-08-18. -->
+<!-- Both bls.gov links opened in a real browser on 2026-08-18 and are live: /cps/tables.htm serves
+"CPS Tables", /web/empsit/cpseea10.htm serves "A-10. Unemployment rates by age, sex, and marital
+status, seasonally adjusted". They answer 403 to curl from the same host even with full browser
+headers, so BLS filters on request fingerprint, not on IP — a 403 on these two from any link
+checker running here is a false positive, not a dead link. -->
 
 The easiest way to access the data is via
 [Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
