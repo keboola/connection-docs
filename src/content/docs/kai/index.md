@@ -39,7 +39,7 @@ Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pil
 
 ## Getting Started
 
-Kai is now in **Public Beta** and available to all users. Look for the **KAI** button in your project's navigation bar.
+Kai is now in **Public Beta** and available to all users. Look for the **Kai Agent** button, marked *Beta*, in your project's top bar.
 
 - **Organization Admins** can enable Kai directly from the chat screen
 - **Other users** can request access from their Organization Admin or [contact Keboola Support](mailto:support@keboola.com)
