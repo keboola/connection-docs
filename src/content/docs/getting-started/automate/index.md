@@ -82,15 +82,20 @@ before it can join them, and the sheet needs the joined table before it can deli
 
 Each phase here holds a single task, so nothing runs in parallel yet. Parallelism shows up the
 moment you have a second source: two connectors both go in phase 1 and run at the same time.
-<!-- VERIFY(owner): this sentence and the "If you took the connector side trips" note below both
-promise two tasks can share phase 1, and neither shows how to put a second task INTO an existing
-phase — the numbered steps only cover the + that starts a new one, and /flows/ asserts the
-capability without a UI path either. The pre-migration version said to drag the second task into
-the "Step 1" box, but that is Legacy Flow Builder language (see /flows/flows-legacy/); this
-walkthrough is Conditional Flows, so the claim was not carried over rather than guessed. One
-walked sentence would close both spots. -->
+
 Inside your HTTP configuration the four tables are already fetched by one job — row-based
 components like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel).
+
+To add that second task to a phase that already has one, hover the phase and click the **+** in
+the small toolbar that appears on its top edge — it opens the same **Add Task** menu as an empty
+canvas (**Component**, **Notification**, **Variable**), scoped to that phase. Do not confuse it
+with the **+** *below* a phase, which starts a new phase instead. That toolbar belongs to the
+phase; the one that appears on the card itself is the task's, and carries **Run task** and its
+settings.
+<!-- Walked live in project 264 on 2026-08-18 in the [TUTORIAL] Opportunity pipeline builder: the
+phase's own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification /
+Variable. Nothing was saved. The pre-migration page said to drag the second task into the "Step 1"
+box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. -->
 
 Flows can also branch on what happened: retry a task, take a different path on failure, end
 early. That is [conditions](/flows/#conditions), and you need none of it yet.
