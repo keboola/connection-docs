@@ -83,9 +83,8 @@ consider stating the boundary on kai/index.md. -->
 
 :::tip[Ask Kai to orient you]
 This is the one step of the arc Kai cannot do for you — it lives *inside* a project, so there has
-to be a project first. From here on, each building step offers both paths — a
-**Do it with Kai** tab on steps 2, 3 and 5, a block on step 4, where it takes over only after you
-have authorized Google yourself.
+to be a project first. From here on, each building step offers both paths as a
+**Do it with Kai** tab — on step 4 it takes over only after you have authorized Google yourself.
 
 Look for **Kai Agent**, marked *Beta*, in the top bar. It has to be enabled first and it is not on
 every stack, so see [Get started with Kai](/kai/getting-started/) if you cannot find it. On a

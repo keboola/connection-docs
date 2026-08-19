@@ -73,7 +73,7 @@ Everything you just did by clicking can be done by an AI assistant instead — t
 exposes the same operations three ways, and which one you pick depends on where you work.
 
 - **[Kai](/kai/)** — the assistant built into the project, and the one you have been using
-  through this guide's **Do it with Kai** blocks. It already knows your configurations, table
+  through this guide's **Do it with Kai** tabs. It already knows your configurations, table
   schemas, and job logs, so it is the fastest way to ask "why did this fail?" or "write me the
   transformation that joins these tables." No setup; currently in Public Beta.
   [Use cases](/kai/use-cases/) covers what it does beyond the arc — dashboards, project

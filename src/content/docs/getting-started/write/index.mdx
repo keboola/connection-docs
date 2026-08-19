@@ -6,20 +6,23 @@ redirect_from:
   - /tutorial/write/
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Whoever asked where the money is will look in a spreadsheet, not in Keboola. This step
 delivers the 639-row table to a Google Sheet — the same mechanism that later sends data to a
 warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it, but in one order:** the Google authorization is yours either way — steps 1–6
-below — and Kai can take it from there. See the **Do it with Kai** block just before the steps.
+**Two ways to do it, in one order:** steps 1–6 below are yours either way — the configuration and
+the Google authorization. After that, pick a tab in *Set it up*. Running it and checking the
+result, below the tabs, is shared again.
 
-<!-- Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching
+{/* Tutorial-type page (step 4 of 6). Step 1 verified live in project 264 on 2026-08-04: searching
 "Sheets" returns 5 components with Google Sheets Data Source and Data Destination adjacent, which is
 why the page now names the type explicitly. Step 2 verified the same day: Add Component on the
 destination card opens a dialog whose only button is Connect To My Data (the HTTP connector also
 offers Use With Demo Data because it declares has-sample-data; this one does not). Steps 4-12 need a
 Google OAuth authorization only the owner can create, so their captures are still the legacy
-ones. -->
+ones. */}
 
 ## What you need
 
@@ -38,32 +41,11 @@ another component in your flow.
 Google Sheets is the easiest destination to try. The
 [full catalogue](/components/writers/) covers databases, BI tools, and cloud storage.
 
-<!-- VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the
+{/* VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the
 conservative reading, not a documented limit — kai/use-cases.md advertises setting up a generic
 extractor "with pagination and OAuth authentication", which is about configuring auth, not granting
 it. Same caveat on load/googlesheets.md. Worth documenting on kai/ what Kai can and cannot do
-around authorizations. -->
-:::tip[Do it with Kai — after you authorize]
-Kai [configures data destinations](/kai/) as well as data sources, but this step has an
-order to it: **the Google authorization is yours**, in steps 4–6 below. It is a consent screen in
-your own Google account, not something the assistant can click through.
-
-So do steps 1–6 by hand, then open **Kai Agent** in the top bar and hand the rest over:
-
-```text
-In my "[TUTORIAL] Opportunity denorm to Sheets" configuration, write
-out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet called
-"[TUTORIAL] Opportunity denorm", into a sheet named opportunity_denorm, set to update rows rather
-than append. Then run it.
-```
-
-Naming all three matters: step 5 puts this on a **daily schedule**, so an appending sheet grows by
-639 rows a day, and the check below looks for that spreadsheet name.
-
-**Check:** the sheet holds every row of `opportunity_denorm`, joined columns included, exactly as
-in [Run it and check the result](#run-it-and-check-the-result). If it does not, open the
-configuration and fix the wizard by hand from step 8 — everything Kai set is editable there.
-:::
+around authorizations. */}
 
 ## Configure the destination
 
@@ -76,7 +58,7 @@ configuration and fix the wizard by hand from step 8 — everything Kai set is e
    ![Screenshot - Search for the Google Sheets destination](/getting-started/write/01-find-destination.png)
 
 2. Click **Add Component**, then **Connect To My Data** — the only button here, unlike the HTTP
-   connector in step 2, which also offered demo data.
+   connector in [step 2](/getting-started/load/), which also offered demo data.
 
    ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
 
@@ -106,13 +88,18 @@ The authorization belongs to this configuration. Keboola stores component secret
 there is no decryption API, so the credentials are never readable back out of the
 configuration.
 
-<!-- VERIFY(owner): the previous version of this page claimed the authorization "will only
+{/* VERIFY(owner): the previous version of this page claimed the authorization "will only
 allow you to write data into a Google Spreadsheet". The exact OAuth scopes requested by
 keboola.wr-google-sheets are not published, and step 9 lets the reader pick an existing
 spreadsheet from Drive, which implies more than spreadsheet-write. Claim removed rather than
-guessed. -->
+guessed. */}
 
-## Pick the table and the sheet
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Do it yourself">
+
+**Pick the table and the sheet**
 
 7. Click **New Table**.
 
@@ -140,8 +127,34 @@ guessed. -->
     **Update rows** replaces the sheet's contents on every run. The alternative appends to the
     bottom instead — right for a log, wrong for a table you want to reflect current state.
 
-    <!-- VERIFY(owner): "Update rows" comes from the previous version of this page; the exact label
-    of the append option was never documented here and is unverified. -->
+    {/* VERIFY(owner): "Update rows" comes from the previous version of this page; the exact label
+    of the append option was never documented here and is unverified. */}
+
+</TabItem>
+<TabItem label="Do it with Kai">
+
+Kai [configures data destinations](/kai/) as well as data sources. The configuration and the
+authorization above are yours either way — that consent screen is in your own Google account, not
+something an assistant can click through. Everything after it, Kai can do: open **Kai Agent** in
+the top bar and hand it over.
+
+```text
+In my "[TUTORIAL] Opportunity denorm to Sheets" configuration, write
+out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet called
+"[TUTORIAL] Opportunity denorm", into a sheet named opportunity_denorm, set to update rows rather
+than append.
+```
+
+Naming all three matters: [step 5](/getting-started/automate/) puts this on a **daily schedule**, so an appending sheet grows by
+639 rows a day, and the check at the end of this tab looks for that spreadsheet name.
+
+**Check:** the sheet holds every row of `opportunity_denorm`, joined columns included, exactly as
+in [Run it and check the result](#run-it-and-check-the-result). If it does not, switch to the
+**Do it yourself** tab and edit the sheet Kai created — its **Destination** and **Options**, steps 9
+and 10 — since everything Kai set is editable there.
+
+</TabItem>
+</Tabs>
 
 ## Run it and check the result
 
