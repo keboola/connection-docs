@@ -195,7 +195,7 @@ Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `de
 | `integrate/storage/api/index.md` | `/integrate/storage/api/` | Storage › Storage API | `/storage/api/` | reference | high | — |
 | `integrate/storage/api/tde-exporter.md` | `/integrate/storage/api/tde-exporter/` | Storage › Storage API | `/storage/api/tde-exporter/` | reference | high | — |
 | `integrate/storage/docker-cli-client.md` | `/integrate/storage/docker-cli-client/` | Storage › Storage API clients | `/storage/api/clients/docker-cli/` | reference | high | — — legacy CLI client |
-| `integrate/storage/index.md` | `/integrate/storage/` | Storage | `/storage/` | explanation | med | MERGE → /storage/ (help CANONICAL) — concept overlap; fold technical layer, flag facts |
+| `integrate/storage/index.md` | `/integrate/storage/` | Storage › Storage API | `/storage/api/` | explanation | high | MERGE — original call said fold into /storage/, but batch 1 (#1053) factually built the technical layer at /storage/api/ (+ clients/); the 301 must follow the content. #1053 needs `redirect_from: /integrate/storage/` on storage/api/index.md |
 | `integrate/storage/php-client.md` | `/integrate/storage/php-client/` | Storage › Storage API clients | `/storage/api/clients/php-client/` | reference | high | — |
 | `integrate/storage/python-client.md` | `/integrate/storage/python-client/` | Storage › Storage API clients | `/storage/api/clients/python-client/` | reference | high | — |
 | `integrate/storage/r-client.md` | `/integrate/storage/r-client/` | Storage › Storage API clients | `/storage/api/clients/r-client/` | reference | high | — |

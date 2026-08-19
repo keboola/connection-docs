@@ -165,7 +165,7 @@
 /integrate/storage/api/	/storage/api/	moved
 /integrate/storage/api/tde-exporter/	/storage/api/tde-exporter/	moved
 /integrate/storage/docker-cli-client/	/storage/api/clients/docker-cli/	moved
-/integrate/storage/	/storage/	moved
+/integrate/storage/	/storage/api/	redirect
 /integrate/storage/php-client/	/storage/api/clients/php-client/	moved
 /integrate/storage/python-client/	/storage/api/clients/python-client/	moved
 /integrate/storage/r-client/	/storage/api/clients/r-client/	moved
