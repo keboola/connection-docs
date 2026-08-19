@@ -92,6 +92,8 @@ Images: place alongside the Markdown and reference with an absolute path
 
 - `npm run build` is clean (no fatal errors).
 - For link/image/table changes, run `node scripts/audit-phase2.mjs` after building.
+  It also validates link **anchors** (`BROKEN LINK ANCHORS`), so run it after
+  renaming any heading — a rename silently breaks every link into that section.
 - For CSS that must survive client-side navigation, verify in a **production
   build** (`astro build && astro preview`) — dev injects `<style>` tags that
   don't survive Astro view-transition swaps.
