@@ -1,6 +1,7 @@
 ---
 title: CSV Files
 slug: 'storage/tables/csv-files'
+description: The CSV formats Storage accepts and produces — delimiters, enclosures, encoding, line breaks, and step-by-step CSV export/import with Microsoft Excel.
 ---
 
 

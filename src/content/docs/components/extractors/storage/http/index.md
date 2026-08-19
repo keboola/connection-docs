@@ -44,7 +44,7 @@ want to load one of our tutorial tables, enter its path, e.g., `/tutorial/opport
 
 - The initial value in **Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved to cannot be changed.
-- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
+- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/incremental-loading/). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
 - **Delimiter** and **Enclosure** specify the CSV settings.
 

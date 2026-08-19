@@ -44,7 +44,7 @@ If you are extracting *time-bound* data (i.e., anything **except** `Brands`), yo
 - **Date From**: only data modified after this date are downloaded. Use the `YYYY-MM-DD` format or a human readable description, e.g., `5 days ago`, `1 month ago`, `yesterday`, etc. You can also set this as `last run`, which will fetch data from the last run of the component; if no previous successful run exists, all data up to specified **Date To** will be downloaded.
 - **Date To**: only data modified before this date are downloaded. Use the `YYYY-MM-DD` format or a a human readable description, e.g., `5 days ago`, `1 week ago`, `today`, etc.
 
-Finally, in the **Destination** part of the row configuration, you must choose the **Load Type**; i. e., whether you want to use [incremental loading](/storage/tables/#incremental-loading) (by selecting `Incremental Load`) or full loading (by selecting `Full Load`).
+Finally, in the **Destination** part of the row configuration, you must choose the **Load Type**; i. e., whether you want to use [incremental loading](/storage/tables/incremental-loading/) (by selecting `Incremental Load`) or full loading (by selecting `Full Load`).
 
 ![Row configuration entry](/components/extractors/marketing-sales/bigcommerce/row_config.png)
 
