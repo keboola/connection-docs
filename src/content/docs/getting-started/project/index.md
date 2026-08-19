@@ -4,7 +4,8 @@ slug: 'getting-started/project'
 description: Create a Keboola project on the Free Plan, understand what a project and a stack are, and find your way around the project screen before you load any data.
 ---
 
-Before you can dig into any of that, you need a **project** to work in. This page just gets you one.
+Everything you build in this guide lives inside a **project**: the data you load, the SQL you
+write, the flow that runs them on a schedule. This page just gets you one.
 Step 1 of the [Getting Started](/getting-started/) arc.
 
 <!-- Tutorial-type page (step 1 of 6). The project-screen tour below was verified live in
@@ -93,8 +94,19 @@ I'm new to this project. Give me an overview of the data structure and what each
 
 ## Check it worked
 
-You are ready for the next step when you can open **Storage** and see the project's bucket
-list — empty is fine, that is what you are about to change.
+Two things. The second one is worth settling now rather than halfway through step 2:
+
+- Open **Storage** and you can see the project's bucket list. Empty is fine — that is what you
+  are about to change.
+- **Kai Agent** in the top bar opens a chat panel when you click it. Worth confirming now,
+  because every building step from here offers a **Do it with Kai** shortcut. If the button is
+  missing, or clicking it asks you to switch the feature on, that is the Public Beta gate — an
+  organization admin does it, and a non-admin needs them or Support. There is also a monthly
+  message allowance, and it is smaller on Pay As You Go.
+
+  Not having Kai does not block the build: every step's clicking path is written out in full.
+  The one place you will miss it is step 5's closing question, which only Kai answers — you can
+  run the same aggregate in a [workspace](/getting-started/transform/workspace/) instead.
 
 ## If it goes wrong
 

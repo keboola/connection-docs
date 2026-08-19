@@ -26,27 +26,6 @@ A Keboola project you can sign in to. If you do not have one, start with
 
 Nothing to download — the connector fetches the files itself.
 
-:::tip[Do it with Kai]
-Setting up a data source connector is one of the things Kai does
-([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and ask
-for the whole configuration at once:
-
-```text
-Create one HTTP data source configuration called "[TUTORIAL] Sample data", with base URL
-https://help.keboola.com and four rows — one per file — fetching /getting-started/opportunity.csv,
-/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
-tables opportunity, account, user and level. Then run it and tell me the row counts.
-```
-
-One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
-runs this as a single task and the parallelism note below assumes that shape.
-
-**Check:** four tables in Storage with 639 / 275 / 28 / 28 rows, and a **Rows** list showing four
-entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it and
-follow the numbered steps — the ten minutes are worth it anyway, since the rest of the arc assumes
-you have seen where a configuration and its rows live.
-:::
-
 ## The sample data
 
 Four small tables: a quarter of deals (639 opportunities created in Q1 2015), the 275 accounts those
@@ -77,6 +56,27 @@ flow, which is what [step 5](/getting-started/automate/) depends on.
 
 One configuration can fetch **many** files, so you will build a single configuration holding
 four tables rather than four separate configurations.
+
+:::tip[Do it with Kai]
+Setting up a data source connector is one of the things Kai does
+([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and ask
+for the whole configuration at once:
+
+```text
+Create one HTTP data source configuration called "[TUTORIAL] Sample data", with base URL
+https://help.keboola.com and four rows — one per file — fetching /getting-started/opportunity.csv,
+/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
+tables opportunity, account, user and level. Then run it and tell me the row counts.
+```
+
+One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
+runs this as a single task and the parallelism note below assumes that shape.
+
+**Check:** four tables in Storage with 639 / 275 / 28 / 28 rows, and a **Rows** list showing four
+entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it and
+follow the numbered steps — the ten minutes are worth it anyway, since the rest of the arc assumes
+you have seen where a configuration and its rows live.
+:::
 
 ## Create the configuration
 

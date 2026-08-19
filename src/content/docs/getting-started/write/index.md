@@ -24,12 +24,22 @@ ones. -->
   [Join It into an Answer](/getting-started/transform/).
 - A Google account you can authorize.
 
+## Sending data out
+
+Getting data out is handled by **data destination connectors** — the mirror image of the
+data source connectors you loaded with. The pattern is always the same: authorize the
+target, pick the Storage table, say where it goes, run it. Sending processed data back into
+the operational systems it came from is often called **reverse ETL**; in Keboola it is just
+another component in your flow.
+
+Google Sheets is the easiest destination to try. The
+[full catalogue](/components/writers/) covers databases, BI tools, and cloud storage.
+
 <!-- VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the
 conservative reading, not a documented limit — kai/use-cases.md advertises setting up a generic
 extractor "with pagination and OAuth authentication", which is about configuring auth, not granting
 it. Same caveat on load/googlesheets.md. Worth documenting on kai/ what Kai can and cannot do
 around authorizations. -->
-
 :::tip[Do it with Kai — after you authorize]
 Kai [configures data destinations](/kai/) as well as data sources, but this step has an
 order to it: **the Google authorization is yours**, in steps 4–6 below. It is a consent screen in
@@ -51,17 +61,6 @@ Naming all three matters: step 5 puts this on a **daily schedule**, so an append
 in [Run it and check the result](#run-it-and-check-the-result). If it does not, open the
 configuration and fix the wizard by hand from step 8 — everything Kai set is editable there.
 :::
-
-## Sending data out
-
-Getting data out is handled by **data destination connectors** — the mirror image of the
-data source connectors you loaded with. The pattern is always the same: authorize the
-target, pick the Storage table, say where it goes, run it. Sending processed data back into
-the operational systems it came from is often called **reverse ETL**; in Keboola it is just
-another component in your flow.
-
-Google Sheets is the easiest destination to try. The
-[full catalogue](/components/writers/) covers databases, BI tools, and cloud storage.
 
 ## Configure the destination
 

@@ -33,30 +33,6 @@ That does not matter. What the SQL depends on is the **Table name** you give eac
 input mapping below: those must be exactly `opportunity`, `account`, `user` and `level`, or you
 have to edit the queries to match.
 
-:::tip[Do it with Kai]
-Writing SQL transformations is Kai's home ground
-([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
-schemas in front of it. Open **Kai Agent** in the top bar and ask:
-
-```text
-Create a SQL transformation called "Denormalize opportunities" writing to
-out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
-ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
-user as UserName plus their sales and global market, join the account as AccountName plus region,
-status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
-Outline the approach first, then build it and run it.
-```
-
-Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
-different set, and the check below will not match. Asking for the outline first is worth it too:
-you get to read the joins before they run, which is what the
-[mapping model](#how-a-transformation-works) is about.
-
-**Check:** 639 rows, 23 columns. If the count differs, the columns differ — read the SQL in
-[Write the queries](#write-the-queries) to see what the arc expects, and either re-prompt or fix
-the code in place. Later steps only depend on the table name, so a close-enough table is fine.
-:::
-
 ## How a transformation works
 
 A transformation never runs against your Storage tables directly. Keboola copies the tables
@@ -75,6 +51,29 @@ That is the safeguard: the only tables your transformation can change are the on
 the output mapping. It is also what lets Keboola track data lineage across the project.
 
 ![Screenshot - How mapping works](/getting-started/transform/mapping.png)
+
+:::tip[Do it with Kai]
+Writing SQL transformations is Kai's home ground
+([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
+schemas in front of it. Open **Kai Agent** in the top bar and ask:
+
+```text
+Create a SQL transformation called "Denormalize opportunities" writing to
+out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
+ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
+user as UserName plus their sales and global market, join the account as AccountName plus region,
+status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
+Outline the approach first, then build it and run it.
+```
+
+Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
+different set, and the check below will not match. Asking for the outline first is worth it too:
+you get to read the joins before they run, which is what the mapping model above is about.
+
+**Check:** 639 rows, 23 columns. If the count differs, the columns differ — read the SQL in
+[Write the queries](#write-the-queries) to see what the arc expects, and either re-prompt or fix
+the code in place. Later steps only depend on the table name, so a close-enough table is fine.
+:::
 
 ## Create the transformation
 

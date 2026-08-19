@@ -42,31 +42,6 @@ Everything from the previous steps, in one project:
 - the Google Sheets destination from
   [Deliver the Answer](/getting-started/write/).
 
-:::tip[Do it with Kai]
-Building a pipeline out of configurations you already have is a documented Kai job
-([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
-**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
-flow's header once it has tasks.
-
-```text
-Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
-configuration first, then the "Denormalize opportunities" transformation, then the
-"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
-```
-
-If you skipped step 4, drop the third one and ask for two phases.
-
-**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
-previous one's output, so the split is the whole point — see
-[phases and tasks](#phases-and-tasks) below. If it came out as one phase, the fix is the one the
-numbered steps use: the **+** below a phase starts a new phase — add the later tasks there and
-remove them from the first.
-
-Set the **schedule** and the **notifications** yourself afterwards, in the tabs shown below. Both
-are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
-gets told about is just a button.
-:::
-
 ## Phases and tasks
 
 A flow is a list of **phases**. Each phase holds one or more **tasks** — a component
@@ -99,6 +74,30 @@ box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does
 
 Flows can also branch on what happened: retry a task, take a different path on failure, end
 early. That is [conditions](/flows/#conditions), and you need none of it yet.
+
+:::tip[Do it with Kai]
+Building a pipeline out of configurations you already have is a documented Kai job
+([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
+**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
+flow's header once it has tasks.
+
+```text
+Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
+configuration first, then the "Denormalize opportunities" transformation, then the
+"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
+```
+
+If you skipped step 4, drop the third one and ask for two phases.
+
+**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
+previous one's output, so the split is the whole point, for the reason the section above just
+gave. If it came out as one phase, the fix is the one the numbered steps use: the **+** below a
+phase starts a new phase — add the later tasks there and remove them from the first.
+
+Set the **schedule** and the **notifications** yourself afterwards, in the tabs shown below. Both
+are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
+gets told about is just a button.
+:::
 
 ## Build the flow
 
