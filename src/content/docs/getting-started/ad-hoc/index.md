@@ -48,13 +48,13 @@ To work with Google BigQuery, create an account. Querying public data is
 past that you need to [enable billing](https://cloud.google.com/billing/docs/how-to/modify-project).
 
 Then create a [service account](https://cloud.google.com/iam/docs/service-accounts-create) for authentication 
-of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+of the Google BigQuery data source connector, and create a Google Cloud Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 ***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
 [load them from Google Sheets](/getting-started/load/googlesheets/). Or, export them to a CSV file, publish it, and [load it over HTTP](/getting-started/load/).*
 
 ### Prepare
-Before you start, have a Google service account and a Google Storage bucket ready.
+Before you start, have a Google service account and a Google Cloud Storage bucket ready.
 
 #### Service account
 To create a Google service account, go to the 
@@ -75,8 +75,8 @@ Finally, create a new JSON key and download it to your computer:
 
 ![Screenshot - Google Service Account Download](/getting-started/ad-hoc/cloud-platform-service-account-5.png)
 
-#### Google Storage bucket
-To create a Google Storage bucket, go to the [**Google Cloud Platform console > Storage**](https://console.cloud.google.com/storage/browser)
+#### Google Cloud Storage bucket
+To create a Google Cloud Storage bucket, go to the [**Google Cloud Platform console > Storage**](https://console.cloud.google.com/storage/browser)
 and create a new bucket:
 
 ![Screenshot - Google Cloud Platform](/getting-started/ad-hoc/cloud-platform-storage-1.png)
@@ -91,13 +91,13 @@ Do not set a retention policy on the bucket. The bucket contains only temporary 
 Now you're ready to load the data into Keboola. Go to the section **Components**, 
 and click the green button **Add Component**:
 
-![Screenshot - Extractors](/getting-started/ad-hoc/ex-bigquery-1.png)
+![Screenshot - Components](/getting-started/ad-hoc/ex-bigquery-1.png)
 
 Use the search to find the Google BigQuery data source:
 
-![Screenshot - BigQuery Extractor](/getting-started/ad-hoc/ex-bigquery-2.png)
+![Screenshot - Add New Component search for Google BigQuery](/getting-started/ad-hoc/ex-bigquery-2.png)
 
-Click **+ Add Component** and then **Connect to My Data**: 
+Click **+ Add Component** and then **Connect To My Data**: 
 
 ![Screenshot - New Configuration](/getting-started/ad-hoc/ex-bigquery-3.png)
 
@@ -221,7 +221,7 @@ dataset is called
 
 There are a number of ways how to get the data from Eurostat -- e.g., you can download it in TSV
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
-[REST API](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-migrating/json)
+[REST API](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started)
 for downloading the data. This could be processed using the
 [Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
@@ -270,10 +270,16 @@ The above tutorial is done in the [Python language](https://www.python.org/) usi
 For more information about workspaces (including disk and memory limits), see the
 [corresponding documentation](/workspace/).
 
+<!-- VERIFY(owner): is RStudio still an offered workspace type? workspace/index.md:24-26 gives
+JupyterLab with the matching kernel for both Python and R, and "rstudio" otherwise survives only as
+a sandbox-type enum — in _data/telemetry_tables.yml and, rendered on a published page, in
+components/extractors/other/telemetry-data/telemetry-data.md. If it is retired, this pairing needs
+rewriting as a whole rather than swapping the R half. -->
+
 ## Final Note
 This is the end of our stroll around Keboola. On our walk, we missed quite a few things:
 Applications, Python and R transformations, Snowflake features, to name a few.
 However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola can help in connecting different systems together.
 
-[Return to the beginning](/getting-started/) or [contact us](/).
+[Return to the beginning](/getting-started/) or [contact us](/management/support/).
