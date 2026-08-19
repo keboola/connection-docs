@@ -8,8 +8,10 @@
  */
 import Default from '@astrojs/starlight/components/Footer.astro';
 import AskKaiDrawer from './AskKaiDrawer.astro';
+import Feedback from './Feedback.astro';
 import SearchPersistFix from './SearchPersistFix.astro';
 ---
+<Feedback />
 <Default><slot /></Default>
 <AskKaiDrawer />
 <SearchPersistFix />
