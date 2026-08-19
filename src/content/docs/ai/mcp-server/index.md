@@ -252,6 +252,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Search & Discovery** – Find components, configurations, and objects across your project.  
 - **Project & OAuth** – Read project info and set up OAuth authorizations for components.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
+- **Semantic Layer** – Ground queries in your business definitions and validate AI-generated SQL against your business rules. Private beta — see [Semantic Layer](/ai/semantic-layer/).
 
 ## Restricting Tool Access
 
