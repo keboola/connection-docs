@@ -14,6 +14,8 @@ Notice that each translated address requires one API call.
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** connector.
 
+In the configuration, you can optionally set the **Language** parameter (`lang`) to control the language of the API response. Default: `en`. See the [what3words API documentation](https://developer.what3words.com/public-api/docsv2) for supported language codes.
+
 ## Augment What3words Address
 In this mode of operation, you identify [what3words](https://what3words.com/about) addresses, and the connector
 then fetches the geographical latitude and longitude coordinates for the places. 
