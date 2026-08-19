@@ -83,7 +83,7 @@ Example API call result.
 }
 ```
 
-Save *variable configuration* `id` from the the result to the environment variable.
+Save *variable configuration* `id` from the result to the environment variable.
 ```shell
 export VARIABLE_CONFIG_ID="1234"
 ```

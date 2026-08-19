@@ -130,8 +130,7 @@ following piece of code
 
 ```json
 {
-    "code": "SELECT \"COUNTRY\" || '{{ alias}}' || '{{=<< >>=}} {{ as-is}} <<={{}}=>>' 
-    AS \"COUNTRY\", \"CARS\" || '{{ size}}' AS \"CARS\" FROM \"my-table\""
+    "code": "SELECT \"COUNTRY\" || '{{ alias}}' || '{{=<< >>=}} {{ as-is}} <<={{}}=>>' AS \"COUNTRY\", \"CARS\" || '{{ size}}' AS \"CARS\" FROM \"my-table\""
 }
 ```
 
@@ -139,8 +138,7 @@ will be interpreted as (assuming the variables `alias=batman` and `size=big` are
 
 ```json
 {
-    "code": "SELECT \"COUNTRY\" || 'batman' || '{{ as-is}}' 
-    AS \"COUNTRY\", \"CARS\" || 'big' AS \"CARS\" FROM \"my-table\""
+    "code": "SELECT \"COUNTRY\" || 'batman' || '{{ as-is}}' AS \"COUNTRY\", \"CARS\" || 'big' AS \"CARS\" FROM \"my-table\""
 }
 ```
 
@@ -250,11 +248,11 @@ csvdel = ','
 csvquo = '"'
 with open('in/tables/{{alias}}.csv', mode='rt', encoding='utf-8') as in_file, open('out/tables/new-table.csv', mode='wt', encoding='utf-8') as out_file:
     writer = csv.DictWriter(out_file, fieldnames=['COUNTRY', 'CARS'], lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
-        writer.writeheader()
-        lazy_lines = (line.replace('\0', '') for line in in_file)
-        reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
-        for row in reader:
-            writer.writerow({'COUNTRY': row['COUNTRY'] + '{{ alias }}', 'CARS': row['CARS'] + '{{ size }}'})
+    writer.writeheader()
+    lazy_lines = (line.replace('\0', '') for line in in_file)
+    reader = csv.DictReader(lazy_lines, lineterminator=csvlt, delimiter=csvdel, quotechar=csvquo)
+    for row in reader:
+        writer.writerow({'COUNTRY': row['COUNTRY'] + '{{ alias }}', 'CARS': row['CARS'] + '{{ size }}'})
 
 from pathlib import Path
 import sys
@@ -375,7 +373,7 @@ where you can verify that the variables were replaced.
             }
         ]
     },
-    "variables_id": "807943784",
+    "variables_id": "807968875",
     "variables_values_id": "807952812",
     "image_parameters": {},
     "action": "run",
@@ -413,7 +411,7 @@ the ID of the value row in `variableValuesId`:
 ```json
 {
     "component": "keboola.python-transformation-v2",
-    "config": "807968875",
+    "config": "807943784",
     "mode": "run",
     "variableValuesId": "807957572"
 }
@@ -435,7 +433,7 @@ Variable values are entered in the `variableValuesData` property:
 ```json
 {
     "component": "keboola.python-transformation-v2",
-    "config": "807968875",
+    "config": "807943784",
     "mode": "run",
     "variableValuesData": {
         "values": [
@@ -484,7 +482,7 @@ read by the flow runner and is not passed to the job.
     "task": {
         "type": "job",
         "componentId": "keboola.python-transformation-v2",
-        "configId": "807968875",
+        "configId": "807943784",
         "mode": "run",
         "variableOverrides": ["alias"]
     }
@@ -543,7 +541,7 @@ You can use the following data in the configuration:
             "phase": 2468,
             "task": {
                 "componentId": "keboola.python-transformation-v2",
-                "configId": "807968875",
+                "configId": "807943784",
                 "mode": "run",
                 "variableValuesId": "807952812"
             },
@@ -555,7 +553,7 @@ You can use the following data in the configuration:
 ```
 
 The contents of the `task` property are identical to the body 
-of the [run job API call](/components/variables/api/#step-4--run-job). Here, the value `807968875` refers to the ID 
+of the [run job API call](/components/variables/api/#step-4--run-job). Here, the value `807943784` refers to the ID 
 of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
 You can use the `variableValuesData` field in the same manner.
 Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
