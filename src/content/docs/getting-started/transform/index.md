@@ -198,9 +198,9 @@ WITH tmp_level AS (
     SELECT
         Name,
         CASE
-            WHEN Level = 'S' THEN 'Senior'
-            WHEN Level = 'M' THEN 'Intermediate'
-            WHEN Level = 'J' THEN 'Junior'
+            WHEN level.Level = 'S' THEN 'Senior'
+            WHEN level.Level = 'M' THEN 'Intermediate'
+            WHEN level.Level = 'J' THEN 'Junior'
         END AS Level
     FROM
         level
@@ -235,16 +235,26 @@ JOIN
     tmp_level ON user.Name = tmp_level.Name;
 ```
 
-<!-- VERIFY(owner): this BigQuery variant has NOT been run — the demo project (264) is Snowflake.
-It matters more than it used to: new Free Plan projects default to BigQuery (storage/index.md), so
-this is the block most new readers hit. What is left to check is BigQuery
-DIALECT only: the CTE form, the CAST syntax, and that the unquoted identifiers resolve. Two traps
-already resolved from our own docs, so do not re-introduce them: (1) the original carried
-`SELECT * EXCEPT (_timestamp)`, which looked BigQuery-specific but is not — `_timestamp` appears
-only when input tables are staged by CLONE, on either backend
-(transformations/mappings/index.md:238), and the documented fix is the dropTimestampColumn input
-mapping option rather than editing the query, so the EXCEPT is gone and the troubleshooting list
-covers it. (2) The original referenced `Level`.`Level` inside the CTE, corrected to `Level`. -->
+<!-- Walked live on 2026-08-19 in a brand-new Free Plan project (6211, us-east4.gcp, BigQuery
+backend) created for exactly this: the four HTTP rows loaded 639/275/28/28, then this block ran and
+produced out.c-denormalize-opportunities.opportunity_denorm with 639 rows. Storage showed the OUT
+badge and "Recently updated by: Denormalize opportunities / Google BigQuery". Column count not
+counted by hand.
+
+The block did NOT work as first written, and the cause was a deliberate edit in this rewrite. The
+pre-migration page qualified the CTE column as `Level`.`Level`; that was "corrected" to a bare
+`Level`, and BigQuery then resolves `Level` to the range variable for the table `level` rather than
+to its column, so the CASE compares a STRUCT to a STRING:
+
+  No matching signature for operator = for argument types:
+  STRUCT<Name STRING, Level STRING>, STRING   at [4:15]
+
+The struct's two fields are the level table's own columns, which is the tell. Qualifying it as
+`level.Level` fixes it, verified by the run above. Do not un-qualify it again.
+
+Still true from the earlier note: `SELECT * EXCEPT (_timestamp)` stays out. `_timestamp` appears
+only on CLONE-staged inputs on either backend (transformations/mappings/index.md:238); this run was
+workspace-staged and never saw it, and EXCEPT on an absent column is itself an error. -->
 
 ## Run it and check the result
 
