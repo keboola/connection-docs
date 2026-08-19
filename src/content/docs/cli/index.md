@@ -17,7 +17,7 @@ kbagent is in beta. Commands and output formats may still change.
 :::
 
 :::note
-kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
+kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented under [Keboola as Code CLI](/cli/keboola-as-code/). That tool is still supported for now; new command-line work should use kbagent.
 <!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
 :::
 

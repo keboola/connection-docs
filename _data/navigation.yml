@@ -656,6 +656,9 @@ items:
       - url: /cli/troubleshooting/
         title: Troubleshooting
 
+      - url: /cli/keboola-as-code/
+        title: Keboola as Code (legacy)
+
   - url: /workspace/
     title: Workspaces
     items:
