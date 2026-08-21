@@ -16,8 +16,9 @@ those IDs into names and buckets every deal by probability, and it introduces th
 that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it** — pick a tab in *Set it up* below. Either way you run it and check the
-result afterwards, in the section below the tabs.
+**Two ways to do it** — pick a tab in *Set it up* below. Doing it yourself, you run it
+afterwards in the section below the tabs; doing it with Kai, the run is part of the prompt —
+there you only check the result.
 
 {/* Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
 "Create Transformation", the dialog is "New Transformation", the sections are "Table Input
@@ -300,6 +301,9 @@ the columns differ: re-prompt, or fix the code in place. Later steps only depend
 </Tabs>
 
 ## Run it and check the result
+
+*Coming from the Kai tab? The run already happened — the prompt asked for it. Skip to the
+row-count check below.*
 
 Click **Run Transformation** and confirm with **Run**. That creates a background job which copies
 the input tables in, runs your SQL, and writes `opportunity_denorm` back to Storage. On the Snowflake run behind these
