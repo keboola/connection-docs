@@ -1,5 +1,6 @@
 ---
 title: Telemetry Dashboards
+description: The telemetry dashboards help you understand how your Keboola projects and organization consume resources.
 slug: 'management/telemetry/telemetry-dashboards'
 ---
 

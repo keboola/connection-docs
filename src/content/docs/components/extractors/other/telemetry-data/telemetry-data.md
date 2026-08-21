@@ -1,5 +1,6 @@
 ---
 title: Telemetry Data
+description: The Telemetry Data connector allows you to retrieve data about your project or your entire organization.
 slug: 'components/extractors/other/telemetry-data'
 redirect_from:
     - /extractors/other/telemetry-data/

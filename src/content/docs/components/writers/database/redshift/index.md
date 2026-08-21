@@ -1,5 +1,6 @@
 ---
 title: Redshift
+description: This data destination connector sends data to a Redshift database.
 slug: 'components/writers/database/redshift'
 redirect_from:
     - /writers/database/redshift/

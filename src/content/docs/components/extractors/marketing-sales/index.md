@@ -1,5 +1,6 @@
 ---
 title: Marketing/Sales Data Source Connectors 
+description: Data source connectors import data from external sources and integrate it to the Keboola environment.
 slug: 'components/extractors/marketing-sales'
 redirect_from:
     - /extractors/marketing-sales/

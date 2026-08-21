@@ -1,5 +1,6 @@
 ---
 title: ECB Currency Rates
+description: This data source connector uses the Fixer API to download currency exchange rates as published by the European Central Bank (ECB).
 slug: 'components/extractors/other/currency-rates'
 redirect_from:
     - /extractors/other/currency-rates/

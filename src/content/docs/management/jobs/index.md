@@ -1,5 +1,6 @@
 ---
 title: Jobs
+description: Most of the things done in Keboola run as background, asynchronous jobs. For an overview of all jobs, running and finished, go to the Jobs section.
 slug: 'management/jobs'
 ---
 

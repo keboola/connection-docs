@@ -1,5 +1,6 @@
 ---
 title: Common Interface
+description: To exchange data between your component and Keboola, use a predefined set of input and output folders for tables and files, a configuration file, environment…
 slug: 'extend/common-interface'
 ---
 

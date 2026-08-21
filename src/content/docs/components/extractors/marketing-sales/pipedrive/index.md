@@ -1,5 +1,6 @@
 ---
 title: Pipedrive
+description: This data source connector uses the Pipedrive API to import data from Pipedrive.
 slug: 'components/extractors/marketing-sales/pipedrive'
 redirect_from:
     - /extractors/marketing-sales/pipedrive/

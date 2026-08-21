@@ -1,5 +1,6 @@
 ---
 title: LinkedIn Pages 
+description: This data source connector downloads data from the LinkedIn Pages API related to organizations, their posts, and statistics about performance of their pages…
 slug: 'components/extractors/marketing-sales/linkedin-pages'
 redirect_from:
     - /extractors/marketing-sales/linkedin-pages/
