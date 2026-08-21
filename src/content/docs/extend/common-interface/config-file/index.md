@@ -185,34 +185,6 @@ are run simultaneously in the **same project**, the one writing data later wins.
 as an HTTP cookie than as a database. A typical use for the state file would be saving the last record
 loaded from some API to enable incremental loads.
 
-## Usage File
-
-Unlike the state file, the **usage file is one way only** and has a pre-defined structure.
-The usage file is used to pass information from the component to Keboola.
-Metrics stored are used to determine how much resources the job consumed and translate the usage to Keboola
-credits; this is very useful when you need your customers to pay using your component or service.
-
-The usage file is located at `/data/out/usage.json`. It should contain an array of objects
-keeping information about the consumed resources. The objects have to contain only two keys, `metric`
-and `value`, as in the example bellow:
-
-```json
-[
-    {
-        "metric": "API calls",
-        "value": 150
-    }
-]
-```
-
-This structure is processed and stored within a job, so it can be analyzed, processed and aggregated later.
-
-To keep track of the consumed resources in the case of a component failure, **it is recommended to
-write the usage file regularly** during the component run, not only at the end.
-
-*Note: As the structure of the state file is pre-defined, the content of the usage file is strictly
-validated and a wrong format will cause a component failure.*
-
 ## Examples
 To create an example configuration, use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder). You will get a
 `stage_0.zip` archive in your **Storage** > **File Uploads**, which will contain the `config.json` file.
