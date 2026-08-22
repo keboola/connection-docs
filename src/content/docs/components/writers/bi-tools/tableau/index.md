@@ -18,8 +18,9 @@ to be used together with [Tableau Desktop](https://www.tableau.com/products/desk
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
-Our Getting Started tutorial will guide you through the process of [writing data
-from Keboola to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
+New to data destination connectors? [Deliver the Answer](/getting-started/write/) in
+Getting Started walks through the pattern on a simpler destination first. You can also watch our
+[Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Tableau** connector.
