@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.76.1 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.87.0 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
@@ -58,6 +58,63 @@ Check if a specific operation is allowed.
 |---|---|---|
 | `operation` (positional) | yes | |
 
+## `auth`
+
+Programmatic browser login (PKCE / device code) -- user-scoped sessions
+
+### `kbagent auth login`
+
+Sign in to a Keboola stack via browser login (PKCE) or device code.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias to log into |
+| `--device-code` |  | Force the device-authorization flow (skip the browser loopback) |
+| `--register-projects` |  | Register every project this session can access under a local alias |
+
+### `kbagent auth login-password`
+
+Sign in via email + password (+ TOTP if the account has MFA) -- no browser.
+
+| Option | Required | Description |
+|---|---|---|
+| `--email` `<str>` | yes | Account email. Also settable via KBC_LOGIN_EMAIL. |
+| `--password` `<str>` |  | Account password. Prefer KBC_LOGIN_PASSWORD (a CI secret in the step's env: block) or --password-stdin over typing this flag directly -- it avoids the value landing in shell history or a process listing. |
+| `--password-stdin` |  | Read the password from stdin instead of --password/KBC_LOGIN_PASSWORD. On a TTY this is a hidden prompt (Enter to confirm); on a pipe it reads until EOF (e.g. `echo "$PASS" | kbagent auth login-password --password-stdin ...`). |
+| `--totp-secret` `<str>` |  | Base32 TOTP seed (from the account's authenticator enrollment, NOT a 6-digit code) -- required if the account has TOTP-based MFA configured. kbagent computes the current code from this itself, so no human ever types a live code. Also settable via KBC_LOGIN_TOTP_SECRET. |
+| `--stack` `<str>` |  | Stack URL or a registered project alias to log into |
+| `--register-projects` |  | Register every project this session can access under a local alias |
+
+### `kbagent auth status`
+
+Show the programmatic-auth session health for a stack.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias to inspect |
+
+### `kbagent auth logout`
+
+Revoke and clear the local programmatic-auth session for a stack.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias to log out of |
+| `--remove-projects` |  | Also remove local project aliases registered from this session |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent auth register-projects`
+
+Register accessible projects from the current session as local aliases.
+
+| Option | Required | Description |
+|---|---|---|
+| `--stack` `<str>` |  | Stack URL or a registered project alias |
+| `--all` |  | Register every accessible project. Mutually exclusive with --project-id. |
+| `--project-id` `<int>` |  | Register only this project id (repeatable). Mutually exclusive with --all. |
+| `--alias` `<str>` |  | Alias override as ID=ALIAS (repeatable). Applies in every mode, including as the prefilled default inside the interactive picker. |
+| `--yes` / `-y` |  | Skip the picker's final confirmation prompt |
+
 ## `project`
 
 Manage connected Keboola projects
@@ -92,7 +149,7 @@ Edit an existing Keboola project connection.
 |---|---|---|
 | `--project` `<str>` | yes | Alias of the project to edit |
 | `--url` `<str>` |  | New Keboola stack URL |
-| `--token` `<str>` |  | New Storage API token |
+| `--token` `<str>` |  | New Storage API token. On a project registered by 'kbagent auth login' this deliberately converts it to a static-token project, which 'kbagent auth logout --remove-projects' no longer cleans up; a warning says so. |
 | `--new-alias` `<str>` |  | Rename the project alias. Updates the config.json projects key AND the default_project field if it matched. Renames the nested sync directory <cwd>/<old-alias>/ when present (with -2-suffix collision handling). Lineage cache (if any) is NOT auto-updated; rebuild with 'kbagent lineage build' after the rename. |
 | `--dry-run` |  | Preview the edit without mutating state. Validates --new-alias, detects collision against existing projects, predicts the disk-rename method (git_mv vs shutil_move), and surfaces the lineage-cache warning if any -- all read-only. Errors (collision, invalid format) raise the same exit codes as the live path. No API call is made for --token in dry-run mode. |
 
@@ -332,6 +389,14 @@ Mint a scoped Storage API token (secret shown once).
 | `--can-read-all-file-uploads` |  | Allow reading files uploaded by OTHER tokens (default: only its own) |
 | `--expires-in` `<int>` |  | Lifetime in seconds (omit = never expires) |
 
+### `kbagent token list`
+
+List the project's Storage API tokens (no secrets -- those are mint-only).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` / `-p` `<str>` | yes | Project alias |
+
 ### `kbagent token delete`
 
 Revoke a Storage API token immediately (destructive; only non-master tokens).
@@ -351,6 +416,18 @@ Rotate a token: generate a new value and invalidate the old one (secret shown on
 | `--project` / `-p` `<str>` | yes | Project alias |
 | `--token-id` `<str>` | yes | ID of the token to rotate |
 | `--yes` / `-y` |  | Skip confirmation prompt |
+
+## `billing`
+
+PAYG credit balance across projects (issue #594).
+
+### `kbagent billing credits`
+
+Show the current PAYG credit balance for one or more projects.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (repeatable; omit for all registered projects) |
 
 ## `component`
 
@@ -457,6 +534,7 @@ Update a configuration's metadata and/or content.
 | `--configuration-file` `<path>` |  | Path to a JSON file with configuration content |
 | `--set` `<str>` |  | Set a nested value: PATH VALUE (e.g. --set 'parameters.db.host=new-host') |
 | `--merge` |  | Deep-merge into existing config instead of replacing |
+| `--change-description` `<str>` |  | Version changeDescription for the audit trail (default: auto-generated) |
 | `--dry-run` |  | Show what would change without applying |
 | `--branch` `<int>` |  | Update in a specific dev branch ID (defaults to active branch) |
 | `--allow-plaintext-on-encrypt-failure` |  | Allow write even if secret encryption fails (DANGEROUS: secrets stored as plaintext) |
@@ -651,6 +729,7 @@ Update an existing configuration row.
 | `--configuration` `<str>` |  | Row configuration JSON: inline, @file.json, or - for stdin |
 | `--set` `<str>` |  | Set a nested value: PATH=VALUE (e.g. --set 'parameters.table=orders') |
 | `--merge` |  | Deep-merge into existing row config instead of replacing |
+| `--change-description` `<str>` |  | Version changeDescription for the audit trail (default: auto-generated) |
 | `--dry-run` |  | Show what would change without applying |
 | `--is-disabled` |  | Disable the row (mutually exclusive with --is-enabled) |
 | `--is-enabled` |  | Enable the row (mutually exclusive with --is-disabled) |
@@ -669,6 +748,52 @@ Delete a configuration row.
 | `--row-id` `<str>` | yes | Row ID to delete |
 | `--branch` `<int>` |  | Delete from a specific dev branch ID (defaults to active branch) |
 | `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent config state-get`
+
+Read the runtime ``state`` dict of a configuration or one of its rows.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--component-id` `<str>` | yes | Component ID |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--row-id` `<str>` |  | Read this row's state instead of the config's root state |
+| `--branch` `<int>` |  | Dev branch ID (defaults to active branch) |
+
+### `kbagent config state-set`
+
+Overwrite the runtime ``state`` dict of a configuration or one of its rows.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--component-id` `<str>` | yes | Component ID |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--state` `<str>` | yes | New state as inline JSON object, @file, or - for stdin |
+| `--row-id` `<str>` |  | Write this row's state instead of the config's root state |
+| `--branch` `<int>` |  | Dev branch ID (defaults to active branch) |
+| `--dry-run` |  | Show what would change without applying |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent config clone`
+
+Duplicate a configuration, whole -- including runtime, storage and authorization.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Source project alias |
+| `--component-id` `<str>` | yes | Component ID (e.g. keboola.wr-db-snowflake) |
+| `--config-id` `<str>` | yes | Configuration ID to clone |
+| `--name` `<str>` | yes | Name for the new configuration |
+| `--target-project` `<str>` |  | Clone into a different project (default: same project) |
+| `--description` `<str>` |  | Description for the clone (default: inherit the source's) |
+| `--set` `<str>` |  | Override a value in the clone: PATH=VALUE (repeatable) |
+| `--secret` `<str>` |  | Re-supply an encrypted value for a cross-project clone: PATH=VALUE (repeatable). Encrypted in the TARGET project on write. |
+| `--branch` `<int>` |  | Source dev branch (defaults to the active branch) |
+| `--target-branch` `<int>` |  | Target dev branch (defaults to the target's active branch) |
+| `--dry-run` |  | Show the plan (and any missing secrets) without writing |
+| `--allow-plaintext-on-encrypt-failure` |  | Allow the clone even if secret encryption fails (DANGEROUS: plaintext secrets) |
 
 ### `kbagent config oauth-url`
 
@@ -727,6 +852,7 @@ Create a Keboola data app end-to-end (POST + encrypt + PUT + deploy).
 | `--size` `<str>` |  | Runtime size: tiny, small, medium, or large. |
 | `--auto-suspend` `<int>` |  | Auto-suspend after N seconds idle (0 disables). |
 | `--type` `<str>` |  | Runtime type. Default 'python-js' covers Python AND Node apps. |
+| `--workspace` / `--no-workspace` |  | Grant the app Storage access by writing runtime.workspace.enabled=true (default). This is what makes the platform inject WORKSPACE_ID / QUERY_SERVICE_URL / KBC_WORKSPACE_MANIFEST_PATH -- without it an app that reads Storage deploys and reports running while serving no data. Pass --no-workspace only for an app that never touches Storage. |
 | `--branch` `<int>` |  | Keboola dev branch ID (defaults to production). |
 | `--no-deploy` |  | Skip the deploy step; create the shell + Storage config only. |
 | `--wait` |  | Block until state == running (or error). Respects pitfall #1: stopped is not terminal. |
@@ -1800,6 +1926,30 @@ Audit schedules by cron window or job-freshness.
 | `--not-run-since` `<int>` |  | Only include schedules whose parent config has not produced a job in the last N days (or never ran). Pass 0 to force the last_run_at lookup for every row without applying a staleness filter. NOTE: Queue API is not branch-aware -- combining with --branch still compares against production jobs. |
 | `--branch` `<int>` |  | Dev branch ID (requires single --project) |
 
+## `notification`
+
+Audit notification subscriptions across projects (Flow Notifications tab)
+
+### `kbagent notification list`
+
+List notification subscriptions (Flow Notifications tab) across projects.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (repeatable; omit for all registered projects) |
+| `--event` `<str>` |  | Event name filter, e.g. 'job-failed'. Known events: job-failed, job-succeeded, job-succeeded-with-warning, job-processing-long, phase-job-failed, phase-job-succeeded, phase-job-succeeded-with-warning, phase-job-processing-long. Not validated against that list -- the service may add more. |
+| `--component-id` `<str>` |  | Only subscriptions filtering on this component (e.g. keboola.flow) |
+| `--config-id` `<str>` |  | Only subscriptions filtering on this configuration ID |
+
+### `kbagent notification detail`
+
+Show one notification subscription, including its raw filter list.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--subscription-id` `<str>` | yes | Notification subscription ID |
+
 ## `branch`
 
 Manage development branches
@@ -2001,30 +2151,6 @@ Create a workspace from a transformation config.
 | `--config-id` `<str>` | yes | Configuration ID |
 | `--row-id` `<str>` |  | Optional row ID for row-based transformations |
 | `--backend` `<str>` |  | Workspace backend (auto-detected from project if omitted) |
-
-## `tool`
-
-MCP tools - interact with Keboola via MCP server
-
-### `kbagent tool list`
-
-List available MCP tools from the keboola-mcp-server.
-
-| Option | Required | Description |
-|---|---|---|
-| `--project` `<str>` |  | Project alias to query tools from (uses first available if not set) |
-| `--branch` `<int>` |  | Development branch ID (requires --project or active branch) |
-
-### `kbagent tool call`
-
-Call an MCP tool on keboola-mcp-server.
-
-| Option | Required | Description |
-|---|---|---|
-| `tool_name` (positional) | yes | |
-| `--project` `<str>` |  | Project alias (required for write tools, optional for read tools) |
-| `--input` `<str>` |  | Tool input as JSON string, @file.json, or - for stdin |
-| `--branch` `<int>` |  | Development branch ID (forces single-project mode) |
 
 ## `sync`
 
@@ -2618,16 +2744,12 @@ Register a new scheduled task.
 | `--cron` `<str>` |  | Cron expression (UTC) |
 | `--manual` |  | Skip cron firing -- only run when triggered manually or as downstream. |
 | `--enabled` / `--disabled` |  | Initial enabled state. |
-| `--type` `<str>` |  | Action type when not using --from-file: ai_agent|cli_command|mcp_tool |
+| `--type` `<str>` |  | Action type when not using --from-file: ai_agent|cli_command |
 | `--from-file` `<str>` |  | Full action JSON ({"type": "...", "params": {...}}). PATH, @path, or - for stdin. |
 | `--cli` `<str>` |  | ai_agent: claude|codex|gemini |
 | `--prompt` `<str>` |  | ai_agent: prompt body |
 | `--extra-arg` `<str>` |  | ai_agent: extra CLI arg (repeatable). Forwarded to claude/codex/gemini. |
 | `--argv` `<str>` |  | cli_command: argv element (repeatable). 'kbagent' prefix is auto-added. |
-| `--tool` `<str>` |  | mcp_tool: tool name (e.g. get_jobs) |
-| `--mcp-project` `<str>` |  | mcp_tool: project alias to dispatch into. |
-| `--mcp-branch` `<int>` |  | mcp_tool: branch ID (optional). |
-| `--input` `<str>` |  | mcp_tool: JSON input. Inline, @path, or -. |
 | `--timeout` `<int>` |  | Action timeout in seconds. |
 | `--trigger-task-id` `<str>` |  | Chain: ID of downstream task to fire after this one. |
 | `--trigger-on` `<str>` |  | Chain filter: success|error|always. |
@@ -2711,16 +2833,12 @@ Execute an action ad-hoc (no persistence, no scheduling).
 |---|---|---|
 | `--name` `<str>` |  | Name shown in event init payload. |
 | `--stream` |  | Stream events live instead of returning the final run record. |
-| `--type` `<str>` |  | ai_agent|cli_command|mcp_tool |
+| `--type` `<str>` |  | ai_agent|cli_command |
 | `--from-file` `<str>` |  | Action JSON (or @path / -). |
 | `--cli` `<str>` |  |  |
 | `--prompt` `<str>` |  |  |
 | `--extra-arg` `<str>` |  |  |
 | `--argv` `<str>` |  |  |
-| `--tool` `<str>` |  |  |
-| `--mcp-project` `<str>` |  |  |
-| `--mcp-branch` `<int>` |  |  |
-| `--input` `<str>` |  |  |
 | `--timeout` `<int>` |  |  |
 
 ### `kbagent agent cron-preview`
@@ -2893,19 +3011,15 @@ Initialize a local .kbagent/ workspace in the current directory.
 |---|---|---|
 | `--from-global` |  | Copy projects from the global config into the new local workspace. |
 | `--project` `<str>` |  | Copy only the named project(s) from the global config (repeatable). Implies --from-global. Without it, all global projects are copied. |
-| `--read-only` |  | Set read-only permission policy (blocks all write CLI commands and MCP tools). |
+| `--read-only` |  | Set read-only permission policy (blocks all write CLI commands). |
 
 ### `kbagent doctor`
 
 Run health checks on CLI configuration and project connectivity.
 
-| Option | Required | Description |
-|---|---|---|
-| `--fix` |  | Auto-fix issues: install MCP server binary for faster startup. |
-
 ### `kbagent version`
 
-Show kbagent version and check for dependency updates.
+Show the kbagent version and check for updates.
 
 | Option | Required | Description |
 |---|---|---|
@@ -2913,7 +3027,7 @@ Show kbagent version and check for dependency updates.
 
 ### `kbagent update`
 
-Update kbagent + keboola-mcp-server to the latest versions.
+Update kbagent to the latest version.
 
 | Option | Required | Description |
 |---|---|---|
@@ -2960,6 +3074,6 @@ Search for items (tables, buckets, configs, flows, …) by name or content.
 | `query` (positional) | yes | |
 | `--project` / `-p` `<str>` |  | Project alias to search (repeatable; defaults to all projects). |
 | `--type` / `-t` `<str>` |  | Item type to restrict results. Repeatable. Valid values: table, bucket, config, flow, data-app, transformation. |
-| `--search-type` `<str>` |  | Search mode. ``textual`` (default) searches item names via the Storage API. ``config-based`` scans full configuration JSON bodies. |
+| `--search-type` `<str>` |  | Search mode. ``textual`` (default) searches item names via the Storage API. ``config-based`` scans full configuration JSON bodies. Both modes match case-insensitively. |
 | `--limit` / `-l` `<int range>` |  | Maximum number of results per project (textual search only, 1-100). |
 | `--regex` / `-r` |  | Run the query as a regular expression (opt-in). Case-insensitive whole-term match against entity names only (not column names): 'report' will NOT match 'monthly_report' -- use '.*report.*'. Textual search only. |
