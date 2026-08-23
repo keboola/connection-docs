@@ -25,6 +25,7 @@ After installation, enable the plugins you need:
 /plugin install developer
 /plugin install component-developer
 /plugin install dataapp-developer
+/plugin install kbagent
 ```
 
 ## Available Plugins

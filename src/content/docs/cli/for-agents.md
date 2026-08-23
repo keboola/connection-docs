@@ -15,11 +15,11 @@ description: 'Give an AI coding agent safe control of Keboola with kbagent — t
 ## Claude Code plugin
 
 :::tip[Add kbagent to Claude Code]
-Run these two commands **inside Claude Code** to install the plugin from the CLI's own marketplace (use the copy button on the block):
+Run these two commands **inside Claude Code** to install the plugin from Keboola's [AI Kit](/ai/ai-kit/) marketplace (use the copy button on the block):
 
 ```
-/plugin marketplace add keboola/cli
-/plugin install kbagent@keboola-agent-cli
+/plugin marketplace add keboola/ai-kit
+/plugin install kbagent@keboola-claude-kit
 ```
 :::
 
@@ -64,7 +64,7 @@ export KBAGENT_CONVERSATION_ID="<unique-id>"
 - **[AI Kit](/ai/ai-kit/)** — coding-assistant plugins for building Keboola components and apps.
 - **[Kai](/kai/)** — the in-product assistant; `kbagent kai ask -m "why did last night's load fail?"` puts the same assistant in your shell *(beta)*.
 
-<!-- Plugin install string (marketplace `keboola-agent-cli`, plugin `kbagent`) and the /keboola → keboola-expert subagent description confirmed by Padak against source (review, v0.66.1). -->
+<!-- Plugin install string (marketplace `keboola-claude-kit`, plugin `kbagent`) and the /keboola → keboola-expert subagent description confirmed by Padak against source (review, v0.66.1). -->
 
 ---
 
