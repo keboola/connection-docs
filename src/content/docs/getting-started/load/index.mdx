@@ -8,10 +8,10 @@ redirect_from:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-A deal row in this pipeline carries an `OwnerId`, not a rep's name — and the deals, the accounts
-they belong to, the reps who own them and those reps' seniority arrive as four separate files.
-Apart, the deals file will tell you how much is open and how likely it is to close, but not whose
-it is or where. This step gets all four into Storage so the next step can join them into one
+A sighting row in this dataset carries an `aphia_id`, not an octopus's name — and the sightings,
+the species register, the depth zones and the ocean basins arrive as four separate files. Apart,
+the sightings file can plot 10,000 dots, but it cannot say which octopus any dot is or which
+ocean it sits in. This step gets all four into Storage so the next step can join them into one
 table.
 Step 2 of the [Getting Started](/getting-started/) arc.
 
@@ -19,10 +19,11 @@ Step 2 of the [Getting Started](/getting-started/) arc.
 run included; the clicking is still written out in full, and it is worth seeing once where a
 configuration and its rows live — later steps refer back to that.
 
-{/* Tutorial-type page (step 2 of 6). Rebuilt on the HTTP connector: CSV Import is deprecated
+{/* Tutorial-type page (step 2 of 7). Rebuilt on the HTTP connector: CSV Import is deprecated
 and cannot take new configurations (verified live in project 264, 2026-08-04). Every label,
-default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http, and
-the four-row run took 2 min 4 s. Note our own connector page
+default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http.
+2026-08-25: dataset swapped to the octopus files (PRDCT-487 arc rework) — run timing and all
+screenshots pend the octopus re-walk in 264. Note our own connector page
 (components/extractors/storage/http/index.md) still says "Add Table"; the UI says "Add Row". */}
 
 ## What you need
@@ -34,20 +35,24 @@ Nothing to download — the connector fetches the files itself.
 
 ## The sample data
 
-Four small tables: a quarter of deals (639 opportunities created in Q1 2015), the 275 accounts those
-deals belong to, the 28 reps who own them, and each rep's seniority level. Each table is only
-half the story — a deal names an account and an owner by ID, not by name, and a rep's seniority
-lives in a fourth table entirely. They are published here, and the connector reads them over HTTPS:
+Four tables: 10,000 recorded octopus sightings (1900–2026, with coordinates and — for almost
+half — a depth), the register of the 201 species they belong to, the five ocean depth zones,
+and the ocean basins as coordinate ranges. Each table is only half the story — a sighting names
+its species by `aphia_id`, not by name, and nothing in it says "Twilight zone" or
+"North Atlantic". They are published here, and the connector reads them over HTTPS:
 
 | Table | File |
 |---|---|
-| opportunities | [`/getting-started/opportunity.csv`](/getting-started/opportunity.csv) |
-| accounts | [`/getting-started/account.csv`](/getting-started/account.csv) |
-| users | [`/getting-started/user.csv`](/getting-started/user.csv) |
-| levels | [`/getting-started/level.csv`](/getting-started/level.csv) |
+| sightings | [`/getting-started/occurrences.csv`](/getting-started/occurrences.csv) |
+| species register | [`/getting-started/species.csv`](/getting-started/species.csv) |
+| depth zones | [`/getting-started/depth_zones.csv`](/getting-started/depth_zones.csv) |
+| ocean basins | [`/getting-started/basins.csv`](/getting-started/basins.csv) |
 
-All characters in this data are fictitious, and any resemblance to real persons, living, dead,
-undead, unborn, or otherwise semi-existent is purely coincidental.
+Every octopus in this data is real: the sightings are a fixed sample of the
+[Ocean Biodiversity Information System](https://obis.org/) (OBIS) records for the order
+Octopoda, with species names from the [World Register of Marine Species](https://www.marinespecies.org/).
+The basins table is a deliberately rough coordinate-box approximation — good enough to answer
+"which ocean", and honest about being a teaching table.
 
 ## How loading works
 
@@ -73,19 +78,20 @@ Setting up a data source connector is one of the things Kai does
 for the whole configuration at once:
 
 ```text
-Create one HTTP data source configuration called "[TUTORIAL] Sample data", with base URL
-https://help.keboola.com and four rows — one per file — fetching /getting-started/opportunity.csv,
-/getting-started/account.csv, /getting-started/user.csv and /getting-started/level.csv into the
-tables opportunity, account, user and level. Then run it and tell me the row counts.
+Create one HTTP data source configuration called "[TUTORIAL] Octopus sightings", with base URL
+https://help.keboola.com and four rows — one per file — fetching /getting-started/occurrences.csv,
+/getting-started/species.csv, /getting-started/depth_zones.csv and /getting-started/basins.csv
+into the tables occurrences, species, depth_zones and basins. Then run it and tell me the row
+counts.
 ```
 
 One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
 runs this as a single task and the parallelism note below assumes that shape.
 
-**Check:** four tables in Storage with 639 / 275 / 28 / 28 rows, and a **Rows** list showing four
-entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it and
-switch to the **Do it yourself** tab — the ten minutes are worth it anyway, since the rest of the arc assumes
-you have seen where a configuration and its rows live.
+**Check:** four tables in Storage with 10,000 / 201 / 5 / 13 rows, and a **Rows** list showing
+four entries, as in [Check it worked](#check-it-worked). If Kai built something else, delete it
+and switch to the **Do it yourself** tab — the ten minutes are worth it anyway, since the rest of
+the arc assumes you have seen where a configuration and its rows live.
 
 </TabItem>
 <TabItem label="Do it yourself">
@@ -102,7 +108,7 @@ you have seen where a configuration and its rows live.
 2. Choose **Connect To My Data**. (**Use With Demo Data** sets the connector up against a
    dataset Keboola prepared — handy for a look around, but here you want your own URL.)
 
-3. Replace the suggested name with `[TUTORIAL] Sample data`, add a description, and click
+3. Replace the suggested name with `[TUTORIAL] Octopus sightings`, add a description, and click
    **Create Configuration**. Descriptions are what keep a project readable six months later;
    see the [best practices cheat sheet](/overview/onboarding/cheat-sheet/).
 
@@ -135,18 +141,18 @@ you have seen where a configuration and its rows live.
 Each file is a [configuration row](/components/#configuration-rows) — its own path and settings,
 sharing the configuration's base URL.
 
-6. In the **Rows** section, click **Add Row**, name it `opportunity`, and click **Create**. The
+6. In the **Rows** section, click **Add Row**, name it `occurrences`, and click **Create**. The
    row name becomes the Storage table name, so use exactly this spelling.
 
 7. Under **Download Settings**, set **Path** to the file, relative to the base URL:
 
    ```
-   /getting-started/opportunity.csv
+   /getting-started/occurrences.csv
    ```
 
 8. Check the rest of the row and click **Save**:
 
-   - **Save Settings → Table name** is already `opportunity`, taken from the row name.
+   - **Save Settings → Table name** is already `occurrences`, taken from the row name.
    - **Delimiter** `,` and **Enclosure** `"` are already right for these files.
    - Leave **Incremental load** off: each run should replace the table, not append to it.
    - **Header & Primary Key → Read Header** already reads *Read the header from the file(s)
@@ -160,9 +166,9 @@ sharing the configuration's base URL.
 
    | Row name | Path |
    |---|---|
-   | `account` | `/getting-started/account.csv` |
-   | `user` | `/getting-started/user.csv` |
-   | `level` | `/getting-started/level.csv` |
+   | `species` | `/getting-started/species.csv` |
+   | `depth_zones` | `/getting-started/depth_zones.csv` |
+   | `basins` | `/getting-started/basins.csv` |
 
 10. Back on the configuration, click **Run Component** and confirm with **Run**. One job fetches
     all four rows.
@@ -175,18 +181,18 @@ sharing the configuration's base URL.
 ## Check it worked
 
 Watch it in **Jobs**. The rows are fetched one after another, so expect a couple of minutes for
-all four — the run behind these screenshots took 2 minutes 4 seconds.
+all four.
 
 Then open **Storage**. Data lives in **buckets**, and each bucket holds tables. The connector
 created a bucket of its own — its name is the component plus the configuration's ID, like
 `keboola-ex-http-01kz5050bhhezq9scmd0t9c73f`, shown with an **IN** badge — holding four tables:
-`opportunity`, `account`, `user` and `level`.
+`occurrences`, `species`, `depth_zones` and `basins`.
 
 ![Screenshot - The four tables in Storage](/getting-started/load/06-storage-tables.png)
 
-Click a table and open its **Data Sample** tab to see the real contents. `opportunity` should
-have 639 rows with columns like `AccountId`, `Amount` and `StageName`; `account` 275; `user` and
-`level` 28 each. If that matches, this step is done.
+Click a table and open its **Data Sample** tab to see the real contents. `occurrences` should
+have 10,000 rows with columns like `aphia_id`, `latitude` and `depth_m`; `species` 201 rows;
+`depth_zones` 5; `basins` 13. If that matches, this step is done.
 
 ![Screenshot - Table detail with data sample](/getting-started/load/07-table-detail.png)
 
@@ -212,7 +218,7 @@ depends on.
 - **You want the four files fetched at the same time.** Raise **Parallel jobs** on the
   configuration — the connector then processes its rows concurrently.
 - **You would rather have Kai read the job.** It has the log and the tables in front of it:
-  `Read the last HTTP connector job and tell me what failed, then show me a sample of opportunity.`
+  `Read the last HTTP connector job and tell me what failed, then show me a sample of occurrences.`
 
 ## Going further
 

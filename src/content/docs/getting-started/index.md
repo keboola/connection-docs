@@ -1,31 +1,34 @@
 ---
 title: 'Getting Started with Keboola'
 slug: 'getting-started'
-description: "Build your first working data pipeline in Keboola: load data, join it with SQL, send the result to a spreadsheet, and put the whole thing on a schedule."
+description: "Build your first working data pipeline in Keboola: load 10,000 octopus sightings, join them with SQL, deliver a spreadsheet, run it on a schedule, and ship a map app."
 redirect_from:
   - /tutorial/
 ---
 
-Somebody asks a question about the business, and the answer is spread across four exports, none of
-which holds the whole picture. That is the situation this guide starts from, and it is the
-ordinary one.
+Somebody claims that an octopus has been recorded near almost every coastline on Earth. You have
+the data to check — a century of ocean records — but it is spread across four files, none of
+which answers alone. That is the situation this guide starts from, and swap octopuses for orders
+or sensors and it is the ordinary one.
 
 <!-- Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. -->
 
-The question here is one any sales team asks:
+The question the arc answers:
 
-> **Where is the money in this pipeline, and how much of what is still open is unlikely to land?**
+> **How close to your coast does an octopus live — and how deep down do they really go?**
 
-You have a quarter of deals, the accounts they belong to, and the reps who own them — 639
-opportunities created in Q1 2015, across 275 accounts and 28 people. The deals file alone tells
-you how much is at stake and how likely each deal is to close. What it cannot tell you is *whose*
-and *where*: it identifies owners and accounts by ID, so the moment the question becomes "which
-reps, which regions", the export stops answering.
+You have 10,000 recorded octopus sightings from 1900 to 2026 — 201 species, each point with
+coordinates and, for almost half of them, a depth. The sightings file alone can plot dots. What
+it cannot tell you is *who* and *where* in any human sense: it names species by a numeric ID and
+says nothing about oceans or depth zones, so the moment the question becomes "which octopus,
+which ocean, how deep", the file stops answering. Three small lookup tables — species names,
+depth zones, ocean basins — hold the missing halves, and joining them is the whole trick.
 
-In under an hour you will have a table that answers all of it, delivered to a spreadsheet, rebuilt
-every morning without you — a working, scheduled pipeline, not an exercise. Most steps are one
-Kai prompt: copy it, watch it build, check the result; every step also has the click-through
-version. Everything happens in the browser; nothing needs installing.
+In under an hour you will have a table that answers all of it, delivered to a spreadsheet,
+rebuilt every morning without you, and an interactive map where you type your own coordinates
+and get the nearest recorded octopus — a working, scheduled pipeline with an app on top, not an
+exercise. Most steps are one Kai prompt: copy it, watch it build, check the result; every step
+also has the click-through version. Everything happens in the browser; nothing needs installing.
 
 ## What you will build
 
@@ -35,10 +38,12 @@ version. Everything happens in the browser; nothing needs installing.
 | Transform | SQL joins them into one wide table | a **transformation** |
 | Deliver | that table appears in a Google Sheet | a **data destination connector** |
 | Automate | all of it runs daily, in order, and emails you if it breaks | a **flow** |
+| Answer | a map of every sighting, with a "how close to me?" field | a **data app** |
 
-The joined table is the one someone would actually read: every deal with its account and region,
-the rep who owns it by name and market, and a plain-language verdict on how likely it is to close.
-It is not a demo — this is the mechanism a production project uses, just smaller.
+The joined table is the one someone would actually read: every sighting with its species by
+name, the ocean basin it sits in, and the depth zone it came from — down to a dumbo octopus
+recorded 4,838 meters below the surface. It is not a demo — this is the mechanism a production
+project uses, just smaller.
 
 ## Before you start
 
@@ -62,9 +67,9 @@ what a stack is. This guide explains each piece as it comes up, so you can also 
 
 ## Two ways to do most steps
 
-The building steps — load, transform, deliver, automate — can be done by asking **Kai**,
-Keboola's built-in assistant, or by clicking through the UI yourself. Each of those pages puts
-both paths side by side: steps 2, 3, 4 and 5 open with a **Do it with Kai** tab, and a
+The building steps — load, transform, deliver, automate, and the app — can be done by asking
+**Kai**, Keboola's built-in assistant, or by clicking through the UI yourself. Each of those
+pages puts both paths side by side: steps 2 through 6 open with a **Do it with Kai** tab, and a
 **Do it yourself** tab next to it.
 
 Two things stay yours either way: creating the project in step 1, since Kai works *inside* a
@@ -77,9 +82,10 @@ mapping and a phase live — and it is worth doing by hand at least once. Each K
 what to check, and what to do when Kai's version does not match — assume you will need that at
 least once.
 
-Building is only half of what Kai is for. Step 5 closes by pointing it at the table you just built
-and asking it the question at the top of this page — the other reason to keep the panel open, and
-the last thing you do in the arc.
+Building is only half of what Kai is for. Step 5 closes by pointing it at the table you just
+built and asking it the question at the top of this page; step 6 then turns that answer into an
+app anyone can open — with a field for your own coordinates, which is where the question stops
+being rhetorical.
 
 Kai asks before it changes anything: project-modifying actions raise an approval dialog in the
 chat, so expect to confirm rather than watch it run unattended. Expect one prompt per object rather
@@ -103,14 +109,16 @@ both, and [use cases](/kai/use-cases/) for what else it does.
 1. **[Get a Project](/getting-started/project/)** — create or join one, learn what a project
    and a stack are, find your way around.
 2. **[Get Your Data In](/getting-started/load/)** — pull the four sample files into Storage with
-   a connector, and understand buckets, tables and stages.
-3. **[Transform Data](/getting-started/transform/)** — write the SQL that turns IDs into
-   names and buckets every deal, and see how input and output mapping keep your source data safe.
+   a connector, and understand buckets, tables and stages. One Kai prompt, run included.
+3. **[Transform Data](/getting-started/transform/)** — the SQL that turns species IDs into
+   names and places every sighting in its ocean and depth zone. One Kai prompt builds and runs it.
 4. **[Deliver the Answer](/getting-started/write/)** — push the result to a Google
-   Sheet with a data destination connector.
+   Sheet with a data destination connector. You authorize; one Kai prompt does the rest.
 5. **[Run It on a Schedule](/getting-started/automate/)** — run the whole thing in order,
-   on a schedule, with notifications.
-6. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
+   on a schedule, with notifications. Kai wires the flow; the schedule is two clicks.
+6. **[Build the App](/getting-started/app/)** — a map of every sighting with a
+   "how close to me?" field, described to Kai in one sentence and published with one button.
+7. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
    you actually want to do, including how to drive Keboola from an AI assistant, an IDE, or
    your terminal.
 
