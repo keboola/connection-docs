@@ -404,6 +404,7 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/tables" },
+          { slug: "storage/tables/incremental-loading" },
           { slug: "storage/tables/data-types" },
           { slug: "storage/tables/csv-files" },
           { slug: "storage/tables/uploads" },

@@ -15,7 +15,7 @@ to Keboola.
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization), and
 select the template you wish to use. There are two configuration templates available:
 
-- `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/#incremental-loading).
+- `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/incremental-loading/).
 - `Full Mode` -- always gets everything.
 
 ![Screenshot - GitHub configuration](/components/extractors/other/github/github-1.png)

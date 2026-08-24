@@ -30,7 +30,7 @@ In the [Configuration Row](/components/#configuration-rows) fill in
 
 ![Screenshot - Configuration Row](/components/extractors/other/azure-cost/row.png)
 
-If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones. 
+If the [**Incremental Load**](/storage/tables/incremental-loading/) is set to true, the new data will be appended to the old ones. 
 This way you can import new data, e.g., from today, without deleting the data imported before.
 
 ## Output Table
