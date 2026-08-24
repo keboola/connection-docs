@@ -10,7 +10,7 @@ morning whether or not anyone thinks to ask again. That is the whole shape of wo
 everything else is a variation on it.
 Step 6, the last, of the [Getting Started](/getting-started/) arc.
 
-<!-- Explanation-type page (step 6 of 6): a routing page, no steps of its own. Kai Public Beta status per /kai/; agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
+<!-- Explanation-type page (step 6 of 6): a routing page, no steps of its own. Beta labels for the Kai button removed per Jordan 2026-08-21 (UI pill retires 2026-09-15); the kai/ section still carries Public Beta wording — schedule the same removal there. Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
 
 ## What you built
 

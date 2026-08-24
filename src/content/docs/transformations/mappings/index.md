@@ -64,7 +64,7 @@ The supported database type is [Snowflake](https://www.snowflake.com/).
 
 ![Table Input mapping](/transformations/mappings/table-input-mapping.png)
 
-*See an example of [setting up an input mapping](/getting-started/transform/#set-it-up) in our tutorial.*
+*See an example of [setting up an input mapping](/getting-started/transform/#set-it-up) in our tutorial — in the **Do it yourself** tab.*
 
 #### Options
 
@@ -291,7 +291,7 @@ The supported staging for CSV files is a storage local to the transformation.
 
 ![Table Output Mapping](/transformations/mappings/table-output-mapping.png)
 
-*See an example of [setting up an output mapping](/getting-started/transform/#set-it-up) in our tutorial.*
+*See an example of [setting up an output mapping](/getting-started/transform/#set-it-up) in our tutorial — in the **Do it yourself** tab.*
 
 #### Options
 - **Table** — Enter the name of the table that should be created in the transformation. 

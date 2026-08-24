@@ -166,10 +166,11 @@ Conditions*, because in Conditional Flows that behaviour comes from
 
 :::note[If you took the connector side trips]
 If you also added the Google Sheets or database connector, put them in the first phase
-alongside the HTTP configuration — that is where the parallelism above becomes real. Then open
-the transformation's **input mapping** and point it at the tables those connectors produce,
-since they land in their own buckets. A flow that runs the right components against the wrong
-input mapping succeeds and produces nothing useful.
+alongside the HTTP configuration — that is where the parallelism above becomes real. Then make
+the transformation read from the tables those connectors produce, since they land in their own
+buckets: on a hand-built transformation, repoint its **input mapping**; on a Kai-built one there
+is no input mapping — re-prompt Kai to include the new tables. A flow that runs the right
+components against the wrong inputs succeeds and produces nothing useful.
 :::
 
 ## Run it
