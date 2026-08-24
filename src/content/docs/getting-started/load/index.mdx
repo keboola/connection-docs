@@ -206,7 +206,7 @@ depends on.
 ## If it goes wrong
 
 - **The job fails with a 404.** The path is wrong, or missing its leading slash. Base URL and
-  path are concatenated, so `https://help.keboola.com` + `/getting-started/user.csv` is right,
+  path are concatenated, so `https://help.keboola.com` + `/getting-started/occurrences.csv` is right,
   while a base URL with a trailing slash gives you a double slash. Open the full URL in a browser
   to see whether the file is really there.
 - **Every row arrives as one column.** The **Delimiter** setting does not match the file. These
@@ -229,8 +229,8 @@ a SaaS account, and it keeps changing, so the run you kicked off by hand becomes
 repeats on a schedule. Both side trips are this same step against a source you have to
 authorize first.
 
-- [Load from Google Sheets](/getting-started/load/googlesheets/) — the same data pulled from a
-  spreadsheet, with an authorized account instead of a public URL.
+- [Load from Google Sheets](/getting-started/load/googlesheets/) — a small reference table pulled
+  from a spreadsheet you own, with an authorized account instead of a public URL.
 - [Load from a database](/getting-started/load/database/) — the pattern every database connector
   follows.
 

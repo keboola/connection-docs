@@ -12,8 +12,8 @@ Of the 10,000 sightings, 4,465 carry a depth — and the deepest of them comes f
 down. The sightings table already says that much; what it will not say is *which* octopus that
 was or *where* in any human sense, because it names species by a numeric ID and locations as raw
 coordinates. This step joins `occurrences`, `species`, `depth_zones` and `basins` with SQL into
-one 10,000-row atlas that turns IDs into names and places every sighting in its ocean and depth
-zone, and it introduces the mapping model that keeps your source data safe while you do it.
+one 10,000-row atlas that turns IDs into names and places every sighting in its ocean — and,
+where a depth was recorded, its depth zone — and it introduces the mapping model that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
 **Two ways to do it** — pick a tab in *Set it up* below. Doing it with Kai, the run is part of
@@ -350,8 +350,9 @@ dropped sightings.
 
 The 12 columns are the original 7 plus the five the SQL added: `scientific_name`, `family`,
 `display_name`, `depth_zone` and `basin`. Open the **Data Sample** tab and the atlas already
-answers things the raw file could not — sort by `depth_m` and the deepest row is a
-*Grimpoteuthis challengeri*, a dumbo octopus, recorded at **4,838 meters** in the abyssal zone.
+answers things the raw file could not — sort by `depth_m` descending and the deepest row is
+*Grimpoteuthis challengeri* — a dumbo octopus, though the data only knows its Latin name —
+recorded at **4,838 meters** in the abyssal zone.
 
 The table list also has a **Recently Updated By** column, naming the transformation and its
 backend (`Octopus atlas / Snowflake SQL` here) — the fastest way to answer "where did this table

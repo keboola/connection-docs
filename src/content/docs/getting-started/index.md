@@ -41,8 +41,8 @@ also has the click-through version. Everything happens in the browser; nothing n
 | Answer | a map of every sighting, with a "how close to me?" field | a **data app** |
 
 The joined table is the one someone would actually read: every sighting with its species by
-name, the ocean basin it sits in, and the depth zone it came from — down to a dumbo octopus
-recorded 4,838 meters below the surface. It is not a demo — this is the mechanism a production
+name, the ocean basin it sits in and — where a depth was recorded — its depth zone, down to a
+dumbo octopus (*Grimpoteuthis challengeri*) recorded 4,838 meters below the surface. It is not a demo — this is the mechanism a production
 project uses, just smaller.
 
 ## Before you start
