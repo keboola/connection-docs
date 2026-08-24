@@ -44,6 +44,9 @@ items:
       - url: /getting-started/automate/
         title: Run It on a Schedule
 
+      - url: /getting-started/app/
+        title: Build the App
+
       - url: /getting-started/next-steps/
         title: Where to Go Next
 

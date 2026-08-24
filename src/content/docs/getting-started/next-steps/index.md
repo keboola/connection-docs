@@ -4,13 +4,13 @@ slug: 'getting-started/next-steps'
 description: You have a running pipeline — here is what to learn next depending on what you want to do, and how to drive Keboola from an AI assistant, an IDE, or your terminal.
 ---
 
-You had a question: where is the money in this pipeline, and how much of what is still open is
-unlikely to land. It is answered, and it stays answered — the pipeline rebuilds that sheet every
-morning whether or not anyone thinks to ask again. That is the whole shape of working in Keboola;
-everything else is a variation on it.
-Step 6, the last, of the [Getting Started](/getting-started/) arc.
+You had a question: how close to your coast does an octopus live, and how deep down do they
+really go. It is answered, and it stays answered — the pipeline rebuilds the sheet every morning
+whether or not anyone thinks to ask again, and the map answers anyone who opens it. That is the
+whole shape of working in Keboola; everything else is a variation on it.
+Step 7, the last, of the [Getting Started](/getting-started/) arc.
 
-<!-- Explanation-type page (step 6 of 6): a routing page, no steps of its own. Beta labels for the Kai button removed per Jordan 2026-08-21 (UI pill retires 2026-09-15); the kai/ section still carries Public Beta wording — schedule the same removal there. Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
+<!-- Explanation-type page (step 7 of 7): a routing page, no steps of its own. Beta labels for the Kai button removed per Jordan 2026-08-21 (UI pill retires 2026-09-15); the kai/ section still carries Public Beta wording — schedule the same removal there. Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
 
 ## What you built
 
@@ -20,6 +20,7 @@ Step 6, the last, of the [Getting Started](/getting-started/) arc.
 | SQL transformation | joins the raw tables into one table | **Transformations** |
 | Google Sheets destination | delivers the result outside Keboola | **Components** |
 | Flow | runs all of it, in order, on a schedule | **Flows** |
+| Data app | the map anyone can open, with the "how close to me?" field | **Apps** |
 
 Every job that ran is in **Jobs**, and every table it touched is in **Storage**.
 

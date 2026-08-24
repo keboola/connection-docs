@@ -16,8 +16,10 @@ Step 5 of the [Getting Started](/getting-started/) arc.
 **Two ways to do it** — pick a tab in *Set it up* below. Running it, scheduling it and setting
 notifications come afterwards and are yours either way.
 
-{/* Tutorial-type page (step 5 of 6). Walked live in project 264 on 2026-08-04: built and ran
-[TUTORIAL] Opportunity pipeline (flow 01kz5yndzrc4zvkwch85qg4x28), created a schedule and read the
+{/* Tutorial-type page (step 5 of 7). 2026-08-25: dataset swapped to the octopus atlas (PRDCT-487
+arc rework); flow names, closing Kai prompts and their check numbers are re-derived from the
+shipped CSVs offline and pend the live re-run in 264, as do all screenshots. UI mechanics below
+walked live in 264 on 2026-08-04: built and ran a tutorial flow, created a schedule and read the
 Notifications tab. Corrections found: phases are labelled "Phase 1/2/..." not "Step 1"; the + between
 phases adds a PHASE, not a task; the Builder needs an explicit Save before Run flow is enabled;
 scheduling is Schedules tab > Create Schedule > Set Up Schedule, NOT "Set Schedule" as /flows/ still
@@ -27,22 +29,19 @@ Notifications" button and no Warnings card, contrary to /management/notification
 owner has to create. The closing section, "Ask it the question you started with", is grounded in
 /kai/ (Query databases, calculate metrics), /kai/use-cases/#data-exploration and
 /kai/settings/#tool-permissions (read-only tools default to Always allow); its numbers are
-re-derived from public/getting-started/*.csv. Both prompts were run against live Kai (Kai Agent,
-Beta, top bar) in project 264 on 2026-08-18: prompt 1 returned 192 open deals, 145 of them Poor and
-89.37% of the open Amount (355,597 of 397,888); prompt 2 returned the rep ranking, with the top rep
-alone on nearly a third (113K across 12 deals) and the top four on ~76% — the figures and the
-concentration this section claims. No approval dialog appeared for either prompt: Kai fetched the
-table detail and ran the query unprompted, which confirms live the read-only-tools sentence the
-fact-checker had flagged as thinly cited. Kai did print the totals with a $ sign that the sample
-data does not carry — which is what the bare-numbers caveat in the check is for. */}
+re-derived from public/getting-started/*.csv (North Atlantic 2,632 sightings = 26%, 50 distinct
+species; deepest 4,838 m Grimpoteuthis challengeri, abyssal). The deals-era predecessors of these
+prompts were run against live Kai in 264 on 2026-08-18 with no approval dialog — read-only tools
+ran unprompted, which grounds the read-only sentence below; the octopus prompts themselves pend
+the live re-run. */}
 
 ## What you need
 
 Everything from the previous steps, in one project:
 
-- the `[TUTORIAL] Sample data` HTTP configuration from
+- the `[TUTORIAL] Octopus sightings` HTTP configuration from
   [Get Your Data In](/getting-started/load/),
-- the `Denormalize opportunities` transformation from
+- the `Octopus atlas` transformation from
   [Transform Data](/getting-started/transform/),
 - the Google Sheets destination from
   [Deliver the Answer](/getting-started/write/).
@@ -72,7 +71,7 @@ canvas (**Component**, **Notification**, **Variable**), scoped to that phase. Do
 with the **+** *below* a phase, which starts a new phase instead. That toolbar belongs to the
 phase; the one that appears on the card itself is the task's, and carries **Run task** and its
 settings.
-{/* Walked live in project 264 on 2026-08-19 in the [TUTORIAL] Opportunity pipeline builder: the
+{/* Walked live in project 264 on 2026-08-19 in the deals-era tutorial flow builder: the
 phase's own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification /
 Variable. Nothing was saved. The pre-migration page said to drag the second task into the "Step 1"
 box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. */}
@@ -91,9 +90,9 @@ Building a pipeline out of configurations you already have is a documented Kai j
 flow's header once it has tasks.
 
 ```text
-Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
-configuration first, then the "Denormalize opportunities" transformation, then the
-"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
+Create a flow called "[TUTORIAL] Octopus pipeline" that runs my "[TUTORIAL] Octopus sightings"
+HTTP configuration first, then the "Octopus atlas" transformation, then the
+"[TUTORIAL] Octopus atlas to Sheets" destination — three phases, one task each, in that order.
 ```
 
 If you skipped [step 4](/getting-started/write/), drop the third one and ask for two phases.
@@ -114,7 +113,7 @@ gets told about is just a button.
 **Build the flow**
 
 1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
-   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**. Name it `[TUTORIAL] Opportunity pipeline`, add a description, and click
+   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**. Name it `[TUTORIAL] Octopus pipeline`, add a description, and click
    **Create Flow** again in the dialog.
 
    ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
@@ -125,14 +124,14 @@ gets told about is just a button.
    ![Screenshot - The Add Task menu](/getting-started/automate/02-add-task.png)
 
 3. **Select Component** opens. It lists what the project has, with a configuration count each —
-   pick **HTTP**, then the `[TUTORIAL] Sample data` configuration. It drops onto the canvas as a
+   pick **HTTP**, then the `[TUTORIAL] Octopus sightings` configuration. It drops onto the canvas as a
    task inside a box labelled **Phase 1**.
 
    ![Screenshot - Select the component](/getting-started/automate/03-select-component.png)
 
 4. Click the **+** below Phase 1. That is the control that starts a **new phase** — the plus
    between phases adds a phase, not a task to the one above it. Add the
-   `Denormalize opportunities` transformation there. Being in a later phase is what guarantees
+   `Octopus atlas` transformation there. Being in a later phase is what guarantees
    the tables have landed before the SQL runs.
 
    ![Screenshot - A second phase](/getting-started/automate/04-second-phase.png)
@@ -259,9 +258,9 @@ schedule — plus duration and status. Expand a run to see its phases.
 
 ## Ask it the question you started with
 
-You built all of this to answer one thing: where the money in this pipeline is, and how much of
-what is still open is unlikely to land. The table is in Storage and the sheet is in Drive — and
-nobody has actually said the answer out loud yet.
+You built all of this to answer one thing: how close to your coast an octopus lives, and how
+deep down they really go. The atlas is in Storage and the sheet is in Drive — and nobody has
+actually said the answer out loud yet.
 
 That part is Kai's other job. Everywhere else in this guide it stood in for your clicking; here it
 reads what you built. Querying a table and calculating a metric is
@@ -272,31 +271,33 @@ project's [tool permissions](/kai/settings/#tool-permissions) have been set to a
 
 :::tip[Ask Kai the question]
 ```text
-Using out.c-denormalize-opportunities.opportunity_denorm, answer this: of the deals still open —
-StageName does not start with "Closed" — how many are there, how many of those fall in the Poor
-ProbabilityClass, and what share of the total open Amount do the Poor ones carry?
+Using out.c-octopus-atlas.octopus_atlas, answer this: which ocean basin has the most recorded
+octopus sightings, what share of all 10,000 sightings does it carry, and how many distinct
+species were recorded there?
 ```
 
-**Check:** **192** deals still open, **145** of them Poor, and those 145 carry about **89%** of the
-open amount. That is the answer this guide was built to produce, and you now have it from your own
-project rather than from a page. The `Amount` column in this sample data carries no currency unit,
-so read the totals as bare numbers.
+**Check:** the **North Atlantic**, with **2,632** sightings — about **26%** of the atlas — from
+**50** distinct species. You now have that from your own project rather than from a page.
 
-An answer is a place to start, not to stop. The obvious follow-up:
+An answer is a place to start, not to stop. The second half of the arc's question:
 
 ```text
-Which sales reps — the UserName column — carry that at-risk open amount? Largest first.
+And how deep do they really go — what is the deepest sighting in the atlas, which species was
+it, and which depth zone does that fall in?
 ```
 
-**Check:** it is concentrated, not spread — the top rep alone holds roughly a third of it. That is
-the kind of thing nobody sees in four CSV files, and it took one question because the pipeline had
-already put the rep's name next to the deal.
+**Check:** **4,838 meters** — *Grimpoteuthis challengeri*, a dumbo octopus, squarely in the
+**abyssal zone**. That is the kind of thing nobody sees in four CSV files, and it took one
+question because the pipeline had already put the zone next to the depth.
 
-**If the numbers come out different**, Kai wrote its own SQL and may have drawn the line
-somewhere else — cast `Probability` differently, or counted "open" another way. The definition
-this guide uses is the `ProbabilityClass` your transformation already wrote; read
-[Set it up](/getting-started/transform/#set-it-up), in the **Do it yourself** tab, and ask Kai to use that column
-rather than re-prompting blind.
+**If the numbers come out different**, Kai wrote its own SQL and may have drawn the lines
+somewhere else — counted basins from raw coordinates, or treated empty depths as zeros. The
+definitions this guide uses are the `basin` and `depth_zone` columns your transformation already
+wrote; read [Set it up](/getting-started/transform/#set-it-up), in the **Do it yourself** tab,
+and ask Kai to use those columns rather than re-prompting blind.
 :::
 
-**Next:** [Where to go next →](/getting-started/next-steps/)
+The one part of the question still open is *"how close to **your** coast?"* — a number is a poor
+answer to that. The last building step turns the atlas into a map anyone can open.
+
+**Next:** [Build the app →](/getting-started/app/)
