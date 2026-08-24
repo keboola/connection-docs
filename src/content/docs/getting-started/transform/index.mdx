@@ -1,43 +1,43 @@
 ---
 title: 'Transform Data'
 slug: 'getting-started/transform'
-description: 'Create an SQL transformation that joins your loaded tables into one denormalized table, and learn how input and output mapping keep Storage safe.'
+description: 'Create an SQL transformation that joins the octopus sightings with their species names, depth zones and ocean basins, and learn how mappings keep Storage safe.'
 redirect_from:
   - /tutorial/manipulate/
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Of the 192 opportunities still open, 145 of them — carrying about 89% of the open amount — sit
-below 50% probability. The deals table already says that much; what it will not say is whose those
-deals are or which regions they sit in, because it names owners and accounts by ID. This step
-joins `opportunity`, `account`, `user` and `level` with SQL into one 639-row table that turns
-those IDs into names and buckets every deal by probability, and it introduces the mapping model
-that keeps your source data safe while you do it.
+Of the 10,000 sightings, 4,465 carry a depth — and the deepest of them comes from 4,838 meters
+down. The sightings table already says that much; what it will not say is *which* octopus that
+was or *where* in any human sense, because it names species by a numeric ID and locations as raw
+coordinates. This step joins `occurrences`, `species`, `depth_zones` and `basins` with SQL into
+one 10,000-row atlas that turns IDs into names and places every sighting in its ocean and depth
+zone, and it introduces the mapping model that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
 **Two ways to do it** — pick a tab in *Set it up* below. Doing it with Kai, the run is part of
 the prompt — you only check the result. Doing it yourself, you run it afterwards in the section
 below the tabs.
 
-{/* Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
-"Create Transformation", the dialog is "New Transformation", the sections are "Table Input
-Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select,
-and Queries offers "Create Multiple Queries". The Snowflake SQL ran successfully against the four
-HTTP tables. The SQL was RUN twice (jobs 95584510 and
-95584854, 53s and 43s) producing out.c-denormalize-opportunities.opportunity_denorm with 639 rows
-and 23 columns both times — so the output bucket really is plural, and the transformation is
-re-runnable. All ten screenshots are fresh captures from that walk. */}
+{/* Tutorial-type page (step 3 of 7). UI labels walked live in project 264 on 2026-08-04: the
+button is "Create Transformation", the dialog is "New Transformation", the sections are "Table
+Input Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is
+multi-select, and Queries offers "Create Multiple Queries". 2026-08-25: dataset swapped to the
+octopus files (PRDCT-487 arc rework). The 10,000x12 check numbers below come from simulating the
+join offline against the shipped CSVs (verified: every row matches exactly one basin, zero
+duplicates, 4,465 rows get a depth zone); the SQL itself, job timings and all screenshots pend
+the live re-walk in 264. */}
 
 ## What you need
 
-Four tables in Storage — `opportunity`, `account`, `user` and `level` — from
+Four tables in Storage — `occurrences`, `species`, `depth_zones` and `basins` — from
 [Get Your Data In](/getting-started/load/). They sit in whatever bucket the connector created,
 and its name contains a configuration ID, so yours will not match the screenshots.
 
 That does not matter. What the SQL depends on is the **Table name** you give each table in the
-input mapping below: those must be exactly `opportunity`, `account`, `user` and `level`, or you
-have to edit the queries to match.
+input mapping below: those must be exactly `occurrences`, `species`, `depth_zones` and `basins`,
+or you have to edit the queries to match.
 
 ## How a transformation works
 
@@ -68,23 +68,26 @@ Writing SQL transformations is Kai's home ground
 schemas in front of it. Open **Kai Agent** in the top bar and ask:
 
 ```text
-Create a SQL transformation called "Denormalize opportunities" writing to
-out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
-ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
-user as UserName plus their sales and global market, join the account as AccountName plus region,
-status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
+Create a SQL transformation called "Octopus atlas" writing to out.c-octopus-atlas.octopus_atlas.
+Start from every column of occurrences with latitude, longitude and depth_m cast to numbers.
+Join species on aphia_id, adding scientific_name, family, and a display_name that falls back to
+the scientific name when common_name is empty. Add depth_zones.zone_name as depth_zone by depth
+range (left join — many sightings have no depth). Add basins.basin by latitude and longitude
+range; use half-open ranges (>= min and < max) so boundary points match exactly one basin.
 Outline the approach first, then build it and run it.
 ```
 
-Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
-different set, and the check below will not match. Asking for the outline first is worth it too:
-you get to read the joins before they run. One difference from the hand-built version: Kai builds
-the transformation on **read-only input**, so you will not see an input mapping in its
-configuration — the mapping sections on this page describe the hand-built path.
+Spelling out the derived columns is the point — ask only for "a map table" and you will get a
+different set, and the check below will not match. The half-open-ranges sentence matters most:
+with BETWEEN, a sighting sitting exactly on a basin boundary lands in two basins and the row
+count comes out above 10,000. Asking for the outline first is worth it too: you get to read the
+joins before they run. One difference from the hand-built version: Kai builds the transformation
+on **read-only input**, so you will not see an input mapping in its configuration — the mapping
+sections on this page describe the hand-built path.
 
-**Check:** 639 rows, 23 columns — the original 15 plus the eight named in
+**Check:** 10,000 rows, 12 columns — the original 7 plus the five named in
 [Run it and check the result](#run-it-and-check-the-result), below the tabs. If the count differs,
-the columns differ: re-prompt, or fix the code in place. Later steps only depend on the table name, so a close-enough table is fine.
+the joins differ: re-prompt, or fix the code in place. Later steps only depend on the table name, so a close-enough table is fine.
 
 </TabItem>
 <TabItem label="Do it yourself">
@@ -114,8 +117,8 @@ the columns differ: re-prompt, or fix the code in place. Later steps only depend
 
    ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
 
-3. Name it `Denormalize opportunities`, add a description, and in **Folder** type `Opportunity`
-   and pick **Create folder "Opportunity"**. Folders are cosmetic, but they are the difference
+3. Name it `Octopus atlas`, add a description, and in **Folder** type `Octopus`
+   and pick **Create folder "Octopus"**. Folders are cosmetic, but they are the difference
    between a browsable project and a wall of configurations. If the dialog offers **Use predefined
    code pattern**, ignore it. Click **Create transformation**.
 
@@ -125,14 +128,14 @@ the columns differ: re-prompt, or fix the code in place. Later steps only depend
 
 1. In **Table Input Mapping**, click **Add Table Input**.
 
-2. **Source** searches your Storage as you type. Type `opportunity` and tick the table; the
-   picker is multi-select, so tick `account`, `user` and `level` too — it keeps a count of what
-   you have chosen.
+2. **Source** searches your Storage as you type. Type `occurrences` and tick the table; the
+   picker is multi-select, so tick `species`, `depth_zones` and `basins` too — it keeps a count
+   of what you have chosen.
 
    ![Screenshot - Selecting source tables](/getting-started/transform/03-input-source.png)
 
 3. Click **Add Input**. Each table arrives with its **Input Table** name taken from the source
-   table — `opportunity`, `account`, `user`, `level`.
+   table — `occurrences`, `species`, `depth_zones`, `basins`.
 
    **Those four names are what your SQL uses**, which is why the queries below work no matter
    which bucket the tables actually live in. If you add a table on its own rather than in a
@@ -159,16 +162,16 @@ process.
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
    2026-08-19) with no such request. Either that gate has changed or the mappings page is stale. */}
 
-2. Name the table `opportunity_denorm`. This is the name of a table your SQL will create — it does
+2. Name the table `octopus_atlas`. This is the name of a table your SQL will create — it does
    not exist yet. The field is labelled **Table name**, or **Which table should we save?** in
    Guided Mode. If the dialog warns you about case-sensitivity and suggests an UPPERCASE name,
    ignore the suggestion here and match your SQL exactly: the query blocks below create
-   `opportunity_denorm` in lower case, and the name has to be the one the query actually creates.
+   `octopus_atlas` in lower case, and the name has to be the one the query actually creates.
 
 3. **Destination** is filled in for you from the transformation's name:
-   `out.c-denormalize-opportunities.opportunity_denorm` — the `out` stage, a bucket named after
-   the transformation (note the plural), and the table. Neither the bucket nor the table exists
-   yet; both are created the first time the transformation runs.
+   `out.c-octopus-atlas.octopus_atlas` — the `out` stage, a bucket named after the
+   transformation, and the table. Neither the bucket nor the table exists yet; both are created
+   the first time the transformation runs.
 
    ![Screenshot - The finished output mapping](/getting-started/transform/06-output-mapping.png)
 
@@ -179,7 +182,7 @@ inside a *block*: you get `Block 1` holding one code. Paste the SQL for **your p
 and save.
 
 You may get an editor for that one code, where you can also name it — call it
-`Opportunity denorm`. You may instead get a single **All Queries** editor holding every block and
+`Octopus atlas`. You may instead get a single **All Queries** editor holding every block and
 code at once, with the structure marked by comment lines like `/* ===== BLOCK: Block 1 ===== */`;
 there, replace the `-- Your code goes here` line and leave those markers alone, since they are what
 keeps the blocks apart.
@@ -195,38 +198,57 @@ the **Queries** header offers **Copy Code** and **Edit Code**.
 **If your project uses Snowflake**
 
 ```sql
-CREATE TABLE "tmp_level" AS
-    SELECT "Name", CASE
-        WHEN "Level" = 'S' THEN 'Senior'
-        WHEN "Level" = 'M' THEN 'Intermediate'
-        WHEN "Level" = 'J' THEN 'Junior' END AS "Level"
-    FROM "level";
+CREATE TABLE "tmp_occurrences" AS
+    SELECT "occurrence_id", "aphia_id",
+        TRY_TO_DOUBLE("latitude")  AS "latitude",
+        TRY_TO_DOUBLE("longitude") AS "longitude",
+        TRY_TO_DOUBLE("depth_m")   AS "depth_m",
+        "year", "event_date"
+    FROM "occurrences";
 
-CREATE TABLE "tmp_opportunity" AS
-    SELECT *, CASE
-        WHEN "Probability" < 50 THEN 'Poor'
-        WHEN "Probability" < 70 THEN 'Good'
-        ELSE 'Excellent' END AS "ProbabilityClass"
-    FROM "opportunity";
+CREATE TABLE "tmp_basins" AS
+    SELECT "basin",
+        TRY_TO_DOUBLE("min_lat") AS "min_lat", TRY_TO_DOUBLE("max_lat") AS "max_lat",
+        TRY_TO_DOUBLE("min_lon") AS "min_lon", TRY_TO_DOUBLE("max_lon") AS "max_lon"
+    FROM "basins";
 
-CREATE TABLE "opportunity_denorm" AS
-    SELECT "tmp_opportunity".*,
-        "user"."Name" AS "UserName", "user"."Sales_Market" AS "UserSalesMarket",
-        "user"."Global_Market" AS "UserGlobalMarket",
-        "account"."Name" AS "AccountName", "account"."Region" AS "AccountRegion",
-        "account"."Status" AS "AccountStatus", "account"."FirstOrder" AS "AccountFirstOrder"
-    FROM "tmp_opportunity"
-        JOIN "user" ON "tmp_opportunity"."OwnerId" = "user"."Id"
-        JOIN "account" ON "tmp_opportunity"."AccountId" = "account"."Id"
-        JOIN "tmp_level" ON "user"."Name" = "tmp_level"."Name";
+CREATE TABLE "tmp_zones" AS
+    SELECT "zone_name",
+        TRY_TO_DOUBLE("min_depth_m") AS "min_depth_m",
+        TRY_TO_DOUBLE("max_depth_m") AS "max_depth_m"
+    FROM "depth_zones";
+
+CREATE TABLE "octopus_atlas" AS
+    SELECT "tmp_occurrences".*,
+        "species"."scientific_name",
+        "species"."family",
+        COALESCE(NULLIF("species"."common_name", ''), "species"."scientific_name") AS "display_name",
+        "tmp_zones"."zone_name" AS "depth_zone",
+        "tmp_basins"."basin"
+    FROM "tmp_occurrences"
+        JOIN "species"
+            ON "tmp_occurrences"."aphia_id" = "species"."aphia_id"
+        JOIN "tmp_basins"
+            ON "tmp_occurrences"."latitude"  >= "tmp_basins"."min_lat"
+           AND "tmp_occurrences"."latitude"  <  "tmp_basins"."max_lat"
+           AND "tmp_occurrences"."longitude" >= "tmp_basins"."min_lon"
+           AND "tmp_occurrences"."longitude" <  "tmp_basins"."max_lon"
+        LEFT JOIN "tmp_zones"
+            ON "tmp_occurrences"."depth_m" >= "tmp_zones"."min_depth_m"
+           AND "tmp_occurrences"."depth_m" <  "tmp_zones"."max_depth_m";
 ```
 
-Three queries, in order: spell out the seniority codes; classify each opportunity by how
-likely it is to close; then join everything into `opportunity_denorm`. Only that last table
-is in the output mapping, so the two `tmp_` tables vanish when the job finishes.
+Four queries, in order: three that cast the CSV text columns into real numbers — tables loaded
+from CSV arrive as text, and `depth_m` is empty on more than half the rows, which is exactly what
+`TRY_TO_DOUBLE` turns into a clean `NULL` — then one join that builds the atlas. Only that last
+table is in the output mapping, so the three `tmp_` tables vanish when the job finishes.
 
-Every identifier is double-quoted because Snowflake uppercases unquoted ones, and the
-column names in the sample data are mixed case.
+Two join details carry the meaning. The species join is a plain equality, but `depth_zone` comes
+from a **LEFT JOIN** — a sighting without a depth keeps its row and gets a `NULL` zone rather
+than disappearing. And both range joins are **half-open** (`>= min AND < max`): with `BETWEEN`,
+a sighting sitting exactly on a basin boundary would land in two basins and duplicate its row.
+
+Every identifier is double-quoted because Snowflake uppercases unquoted ones.
 
 ![Screenshot - The configured transformation](/getting-started/transform/07-configured.png)
 
@@ -236,68 +258,67 @@ column names in the sample data are mixed case.
 temporary tables. It is written to produce the same table:
 
 ```sql
-CREATE TABLE opportunity_denorm AS
-WITH tmp_level AS (
+CREATE TABLE octopus_atlas AS
+WITH tmp_occurrences AS (
     SELECT
-        Name,
-        CASE
-            WHEN level.Level = 'S' THEN 'Senior'
-            WHEN level.Level = 'M' THEN 'Intermediate'
-            WHEN level.Level = 'J' THEN 'Junior'
-        END AS Level
+        occurrence_id,
+        aphia_id,
+        SAFE_CAST(latitude AS FLOAT64)  AS latitude,
+        SAFE_CAST(longitude AS FLOAT64) AS longitude,
+        SAFE_CAST(depth_m AS FLOAT64)   AS depth_m,
+        year,
+        event_date
     FROM
-        level
+        occurrences
 ),
-tmp_opportunity AS (
+tmp_basins AS (
     SELECT
-        *,
-        CASE
-            WHEN CAST(Probability as INT64) < 50 THEN 'Poor'
-            WHEN CAST(Probability as INT64) < 70 THEN 'Good'
-            ELSE 'Excellent'
-        END AS ProbabilityClass
+        basin,
+        SAFE_CAST(min_lat AS FLOAT64) AS min_lat,
+        SAFE_CAST(max_lat AS FLOAT64) AS max_lat,
+        SAFE_CAST(min_lon AS FLOAT64) AS min_lon,
+        SAFE_CAST(max_lon AS FLOAT64) AS max_lon
     FROM
-        opportunity
+        basins
+),
+tmp_zones AS (
+    SELECT
+        zone_name,
+        SAFE_CAST(min_depth_m AS FLOAT64) AS min_depth_m,
+        SAFE_CAST(max_depth_m AS FLOAT64) AS max_depth_m
+    FROM
+        depth_zones
 )
 SELECT
-    tmp_opportunity.*,
-    user.Name AS UserName,
-    user.Sales_Market AS UserSalesMarket,
-    user.Global_Market AS UserGlobalMarket,
-    account.Name AS AccountName,
-    account.Region AS AccountRegion,
-    account.Status AS AccountStatus,
-    account.FirstOrder AS AccountFirstOrder
+    tmp_occurrences.*,
+    species.scientific_name,
+    species.family,
+    COALESCE(NULLIF(species.common_name, ''), species.scientific_name) AS display_name,
+    tmp_zones.zone_name AS depth_zone,
+    tmp_basins.basin
 FROM
-    tmp_opportunity
+    tmp_occurrences
 JOIN
-    user ON tmp_opportunity.OwnerId = user.Id
+    species ON tmp_occurrences.aphia_id = species.aphia_id
 JOIN
-    account ON tmp_opportunity.AccountId = account.Id
-JOIN
-    tmp_level ON user.Name = tmp_level.Name;
+    tmp_basins ON tmp_occurrences.latitude  >= tmp_basins.min_lat
+              AND tmp_occurrences.latitude  <  tmp_basins.max_lat
+              AND tmp_occurrences.longitude >= tmp_basins.min_lon
+              AND tmp_occurrences.longitude <  tmp_basins.max_lon
+LEFT JOIN
+    tmp_zones ON tmp_occurrences.depth_m >= tmp_zones.min_depth_m
+             AND tmp_occurrences.depth_m <  tmp_zones.max_depth_m;
 ```
 
-{/* Walked live on 2026-08-19 in a brand-new Free Plan project (6211, us-east4.gcp, BigQuery
-backend) created for exactly this: the four HTTP rows loaded 639/275/28/28, then this block ran and
-produced out.c-denormalize-opportunities.opportunity_denorm with 639 rows. Storage showed the OUT
-badge and "Recently updated by: Denormalize opportunities / Google BigQuery". Column count not
-counted by hand.
-
-The block did NOT work as first written, and the cause was a deliberate edit in this rewrite. The
-pre-migration page qualified the CTE column as `Level`.`Level`; that was "corrected" to a bare
-`Level`, and BigQuery then resolves `Level` to the range variable for the table `level` rather than
-to its column, so the CASE compares a STRUCT to a STRING:
-
-  No matching signature for operator = for argument types:
-  STRUCT<Name STRING, Level STRING>, STRING   at [4:15]
-
-The struct's two fields are the level table's own columns, which is the tell. Qualifying it as
-`level.Level` fixes it, verified by the run above. Do not un-qualify it again.
-
-Still true from the earlier note: `SELECT * EXCEPT (_timestamp)` stays out. `_timestamp` appears
-only on CLONE-staged inputs on either backend (transformations/mappings/index.md:238); this run was
-workspace-staged and never saw it, and EXCEPT on an absent column is itself an error. */}
+{/* 2026-08-25: SQL rewritten for the octopus dataset (PRDCT-487); NOT yet run live on either
+backend — the re-walk in 264 must run both blocks and update the timings/screenshots. Lessons
+carried over from the deals-era BigQuery walk (2026-08-19, project 6211) that still bind here:
+(1) qualify every CTE/table column in BigQuery — a bare column name that matches a table name
+resolves to the range variable and CASE/comparisons then fail with "STRUCT<...> vs STRING"; the
+block above qualifies everything for that reason. (2) `SELECT * EXCEPT (_timestamp)` stays out:
+_timestamp appears only on CLONE-staged inputs (transformations/mappings/index.md), and EXCEPT on
+an absent column is itself an error. Offline verification of the join semantics (shipped CSVs,
+half-open ranges): 10,000 rows, each matching exactly one basin; 4,465 get a depth zone. */}
 
 </TabItem>
 </Tabs>
@@ -308,33 +329,33 @@ workspace-staged and never saw it, and EXCEPT on an absent column is itself an e
 row-count check below.*
 
 Click **Run Transformation** and confirm with **Run**. That creates a background job which copies
-the input tables in, runs your SQL, and writes `opportunity_denorm` back to Storage. On the Snowflake run behind these
-screenshots the job log spelled the mechanism out — *"Loading 4 tables to workspace"*, then
-*"Cloned table … into workspace WORKSPACE_… as opportunity"* — which is the mapping model from the
-top of this page, in action.
+the input tables in, runs your SQL, and writes `octopus_atlas` back to Storage. The job log
+spells the mechanism out — *"Loading 4 tables to workspace"*, then a line per table cloned into
+the workspace — which is the mapping model from the top of this page, in action.
 
 ![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
 
 A notification appears with a **Show job** link — *Snowflake SQL job has been scheduled*, or your
-backend's equivalent — and you can also find it under **Jobs**. It takes under a minute — the run behind these screenshots took 53
-seconds — and a green **Success** means it worked.
+backend's equivalent — and you can also find it under **Jobs**. It takes about a minute, and a
+green **Success** means it worked.
 
 ![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
 
-Then open **Storage**: there is a new bucket `out.c-denormalize-opportunities` — listed as
-`denormalize-opportunities` with an **OUT** badge, the same way the `in.c-` prefix was hidden in
-step 2 — holding
-`opportunity_denorm` — **639 rows and 23 columns**. That row count is the same as the source
-`opportunity` table, which is the quickest sanity check that the three joins matched every row
-without duplicating any.
+Then open **Storage**: there is a new bucket `out.c-octopus-atlas` — listed as `octopus-atlas`
+with an **OUT** badge, the same way the `in.c-` prefix was hidden in step 2 — holding
+`octopus_atlas` — **10,000 rows and 12 columns**. That row count is the same as the source
+`occurrences` table, which is the quickest sanity check that the joins matched every row without
+duplicating any: more than 10,000 means a range join double-matched, fewer means an inner join
+dropped sightings.
 
-The 23 columns are the original 15 plus the eight the SQL added: `ProbabilityClass`, `UserName`,
-`UserSalesMarket`, `UserGlobalMarket`, `AccountName`, `AccountRegion`, `AccountStatus` and
-`AccountFirstOrder`.
+The 12 columns are the original 7 plus the five the SQL added: `scientific_name`, `family`,
+`display_name`, `depth_zone` and `basin`. Open the **Data Sample** tab and the atlas already
+answers things the raw file could not — sort by `depth_m` and the deepest row is a
+*Grimpoteuthis challengeri*, a dumbo octopus, recorded at **4,838 meters** in the abyssal zone.
 
 The table list also has a **Recently Updated By** column, naming the transformation and its
-backend (`Denormalize opportunities / Snowflake SQL` here) — the fastest way to answer "where did
-this table come from?" months later.
+backend (`Octopus atlas / Snowflake SQL` here) — the fastest way to answer "where did this table
+come from?" months later.
 
 ![Screenshot - The new table in Storage](/getting-started/transform/10-table-in-storage.png)
 
@@ -343,18 +364,20 @@ experimenting.
 
 ## If it goes wrong
 
-- **`Object 'ACCOUNT' does not exist`** (Snowflake). A table is missing from the input
+- **`Object 'SPECIES' does not exist`** (Snowflake). A table is missing from the input
   mapping, or the **Table name** inside the transformation differs from what the SQL uses.
   Snowflake uppercases unquoted identifiers, which is why every identifier is double-quoted.
   On BigQuery the equivalent error is `Table ... was not found`.
 - **The job succeeds but Storage has no new table.** The output mapping is empty or names a
-  table your SQL never creates. The names must match exactly: `opportunity_denorm`.
+  table your SQL never creates. The names must match exactly: `octopus_atlas`.
 - **`Numeric value '' is not recognized`.** Tables loaded from CSV arrive as text columns
-  unless you give them types, so an empty cell is `''` rather than `NULL` and a comparison
-  like `"Probability" < 50` fails on it. The sample data has no empty values, so you will not
-  hit this here — but with your own data, cast defensively:
-  `TRY_CAST("Probability" AS NUMBER(38,9))` on Snowflake,
-  `SAFE_CAST(Probability AS INT64)` on BigQuery.
+  unless you give them types, so an empty cell is `''` rather than `NULL` — and `depth_m` is
+  empty on more than half of these rows, which is why the queries cast with
+  `TRY_TO_DOUBLE` (Snowflake) / `SAFE_CAST` (BigQuery) before comparing. If you see this
+  error, a cast got dropped somewhere.
+- **The atlas has more than 10,000 rows.** A range join double-matched: a sighting sitting
+  exactly on a boundary fell into two basins or two zones. That happens when `BETWEEN`
+  (inclusive on both ends) replaces the half-open `>= min AND < max` the queries use.
 - **`Invalid columns: _timestamp`** when the output is written. Your input tables were staged by
   *cloning*, which copies Keboola's internal `_timestamp` column along with the data — and that
   column cannot be written back to Storage. It is not backend-specific and it is not a problem with
@@ -365,7 +388,7 @@ experimenting.
   [workspace](/getting-started/transform/workspace/) is for.
 - **You would rather not read the log yourself.** Kai has it open already
   ([Troubleshooting](/kai/use-cases/#troubleshooting)):
-  `My transformation "Denormalize opportunities" failed. Read the last job's log and tell me what to fix.`
+  `My transformation "Octopus atlas" failed. Read the last job's log and tell me what to fix.`
 
 ## Going further
 
