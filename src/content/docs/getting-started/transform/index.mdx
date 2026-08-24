@@ -1,5 +1,5 @@
 ---
-title: 'Join It into an Answer'
+title: 'Transform Data'
 slug: 'getting-started/transform'
 description: 'Create an SQL transformation that joins your loaded tables into one denormalized table, and learn how input and output mapping keep Storage safe.'
 redirect_from:
@@ -16,9 +16,9 @@ those IDs into names and buckets every deal by probability, and it introduces th
 that keeps your source data safe while you do it.
 Step 3 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it** — pick a tab in *Set it up* below. Doing it yourself, you run it
-afterwards in the section below the tabs; doing it with Kai, the run is part of the prompt —
-there you only check the result.
+**Two ways to do it** — pick a tab in *Set it up* below. Doing it with Kai, the run is part of
+the prompt — you only check the result. Doing it yourself, you run it afterwards in the section
+below the tabs.
 
 {/* Tutorial-type page (step 3 of 6). Walked live in project 264 on 2026-08-04: the button is
 "Create Transformation", the dialog is "New Transformation", the sections are "Table Input
@@ -61,6 +61,32 @@ the output mapping. It is also what lets Keboola track data lineage across the p
 ## Set it up
 
 <Tabs syncKey="howto">
+<TabItem label="Do it with Kai">
+
+Writing SQL transformations is Kai's home ground
+([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
+schemas in front of it. Open **Kai Agent** in the top bar and ask:
+
+```text
+Create a SQL transformation called "Denormalize opportunities" writing to
+out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
+ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
+user as UserName plus their sales and global market, join the account as AccountName plus region,
+status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
+Outline the approach first, then build it and run it.
+```
+
+Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
+different set, and the check below will not match. Asking for the outline first is worth it too:
+you get to read the joins before they run. One difference from the hand-built version: Kai builds
+the transformation on **read-only input**, so you will not see an input mapping in its
+configuration — the mapping sections on this page describe the hand-built path.
+
+**Check:** 639 rows, 23 columns — the original 15 plus the eight named in
+[Run it and check the result](#run-it-and-check-the-result), below the tabs. If the count differs,
+the columns differ: re-prompt, or fix the code in place. Later steps only depend on the table name, so a close-enough table is fine.
+
+</TabItem>
 <TabItem label="Do it yourself">
 
 **Create the transformation**
@@ -272,30 +298,6 @@ The struct's two fields are the level table's own columns, which is the tell. Qu
 Still true from the earlier note: `SELECT * EXCEPT (_timestamp)` stays out. `_timestamp` appears
 only on CLONE-staged inputs on either backend (transformations/mappings/index.md:238); this run was
 workspace-staged and never saw it, and EXCEPT on an absent column is itself an error. */}
-
-</TabItem>
-<TabItem label="Do it with Kai">
-
-Writing SQL transformations is Kai's home ground
-([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
-schemas in front of it. Open **Kai Agent** in the top bar and ask:
-
-```text
-Create a SQL transformation called "Denormalize opportunities" writing to
-out.c-denormalize-opportunities.opportunity_denorm. Start from every column of opportunity, add a
-ProbabilityClass column (Poor under 50, Good under 70, Excellent otherwise), join the owner from
-user as UserName plus their sales and global market, join the account as AccountName plus region,
-status and first order, and expand the level codes S/M/J to Senior/Intermediate/Junior.
-Outline the approach first, then build it and run it.
-```
-
-Spelling out the derived columns is the point — ask only for "a wide table" and you will get a
-different set, and the check below will not match. Asking for the outline first is worth it too:
-you get to read the joins before they run, which is what the mapping model above is about.
-
-**Check:** 639 rows, 23 columns — the original 15 plus the eight named in
-[Run it and check the result](#run-it-and-check-the-result), below the tabs. If the count differs,
-the columns differ: re-prompt, or fix the code in place. Later steps only depend on the table name, so a close-enough table is fine.
 
 </TabItem>
 </Tabs>

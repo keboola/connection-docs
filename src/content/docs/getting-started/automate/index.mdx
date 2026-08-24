@@ -43,7 +43,7 @@ Everything from the previous steps, in one project:
 - the `[TUTORIAL] Sample data` HTTP configuration from
   [Get Your Data In](/getting-started/load/),
 - the `Denormalize opportunities` transformation from
-  [Join It into an Answer](/getting-started/transform/),
+  [Transform Data](/getting-started/transform/),
 - the Google Sheets destination from
   [Deliver the Answer](/getting-started/write/).
 
@@ -83,6 +83,32 @@ early. That is [conditions](/flows/#conditions), and you need none of it yet.
 ## Set it up
 
 <Tabs syncKey="howto">
+<TabItem label="Do it with Kai">
+
+Building a pipeline out of configurations you already have is a documented Kai job
+([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
+**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
+flow's header once it has tasks.
+
+```text
+Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
+configuration first, then the "Denormalize opportunities" transformation, then the
+"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
+```
+
+If you skipped [step 4](/getting-started/write/), drop the third one and ask for two phases.
+
+**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
+previous one's output, so the split is the whole point, for the reason the section above just
+gave. If it came out as one phase, the fix is the one the numbered steps use — switch to the
+**Do it yourself** tab: the **+** below a phase starts a new phase — add the later tasks there and remove them from the first.
+
+Set the **schedule** and the **notifications** yourself afterwards, in the flow's own **Schedules**
+and **Notifications** tabs — the sections below the tabs. Both
+are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
+gets told about is just a button.
+
+</TabItem>
 <TabItem label="Do it yourself">
 
 **Build the flow**
@@ -126,32 +152,6 @@ You now have three phases: the load, then the transformation, then the delivery.
 of the frame.*
 
 
-
-</TabItem>
-<TabItem label="Do it with Kai">
-
-Building a pipeline out of configurations you already have is a documented Kai job
-([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
-**Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
-flow's header once it has tasks.
-
-```text
-Create a flow called "[TUTORIAL] Opportunity pipeline" that runs my "[TUTORIAL] Sample data" HTTP
-configuration first, then the "Denormalize opportunities" transformation, then the
-"[TUTORIAL] Opportunity denorm to Sheets" destination — three phases, one task each, in that order.
-```
-
-If you skipped [step 4](/getting-started/write/), drop the third one and ask for two phases.
-
-**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
-previous one's output, so the split is the whole point, for the reason the section above just
-gave. If it came out as one phase, the fix is the one the numbered steps use — switch to the
-**Do it yourself** tab: the **+** below a phase starts a new phase — add the later tasks there and remove them from the first.
-
-Set the **schedule** and the **notifications** yourself afterwards, in the flow's own **Schedules**
-and **Notifications** tabs — the sections below the tabs. Both
-are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
-gets told about is just a button.
 
 </TabItem>
 </Tabs>

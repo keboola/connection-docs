@@ -23,7 +23,9 @@ and *where*: it identifies owners and accounts by ID, so the moment the question
 reps, which regions", the export stops answering.
 
 In under an hour you will have a table that answers all of it, delivered to a spreadsheet, rebuilt
-every morning without you. Everything happens in the browser; nothing needs installing.
+every morning without you — a working, scheduled pipeline, not an exercise. Most steps are one
+Kai prompt: copy it, watch it build, check the result; every step also has the click-through
+version. Everything happens in the browser; nothing needs installing.
 
 ## What you will build
 
@@ -60,18 +62,20 @@ what a stack is. This guide explains each piece as it comes up, so you can also 
 
 ## Two ways to do most steps
 
-The building steps — load, transform, deliver, automate — can be done by clicking through the UI
-or by asking **Kai**, Keboola's built-in assistant, to do them. Each of those pages puts both paths side by
-side: a **Do it with Kai** tab on steps 2, 3, 4 and 5.
+The building steps — load, transform, deliver, automate — can be done by asking **Kai**,
+Keboola's built-in assistant, or by clicking through the UI yourself. Each of those pages puts
+both paths side by side: steps 2, 3, 4 and 5 open with a **Do it with Kai** tab, and a
+**Do it yourself** tab next to it.
 
 Two things stay yours either way: creating the project in step 1, since Kai works *inside* a
 project, and the Google authorization in step 4 — that consent screen is in your own account. On
 step 4 the shared steps sit above the tabs, and the Kai tab picks up after them.
 
-The clicking is written out in full and stays the primary path, because the later steps assume
-you have seen where a configuration, a mapping and a phase live. Do it by hand once, then let Kai
-do it after that. Each block also ends with what to check, and what to do when Kai's version does
-not match — assume you will need that at least once.
+**Kai is the default path**: copy the prompt, watch it build, check the result. The clicking is
+still written out in full for when you want to see the mechanics — where a configuration, a
+mapping and a phase live — and it is worth doing by hand at least once. Each Kai block ends with
+what to check, and what to do when Kai's version does not match — assume you will need that at
+least once.
 
 Building is only half of what Kai is for. Step 5 closes by pointing it at the table you just built
 and asking it the question at the top of this page — the other reason to keep the panel open, and
@@ -88,7 +92,7 @@ ask, because read-only tools are allowed by default. If the clicking gets tiring
 approve before any changes" — which would fit here, but nothing under kai/ documents it. Confirm
 the name and document it on kai/, then it can replace the Always-allow advice above. -->
 
-Kai is in **Public Beta**. The button is visible to every user on a supported stack, but the
+The **Kai Agent** button is visible to every user on a supported stack, but the
 feature has to be switched on — an organization admin can do it from the chat screen or in
 **Settings → Features**, or you can ask Keboola Support. There is also a monthly message
 allowance, which matters on the Free Plan. See [Get started with Kai](/kai/getting-started/) for
@@ -100,7 +104,7 @@ both, and [use cases](/kai/use-cases/) for what else it does.
    and a stack are, find your way around.
 2. **[Get Your Data In](/getting-started/load/)** — pull the four sample files into Storage with
    a connector, and understand buckets, tables and stages.
-3. **[Join It into an Answer](/getting-started/transform/)** — write the SQL that turns IDs into
+3. **[Transform Data](/getting-started/transform/)** — write the SQL that turns IDs into
    names and buckets every deal, and see how input and output mapping keep your source data safe.
 4. **[Deliver the Answer](/getting-started/write/)** — push the result to a Google
    Sheet with a data destination connector.

@@ -27,7 +27,7 @@ ones. */}
 ## What you need
 
 - The table `opportunity_denorm` in Storage, from
-  [Join It into an Answer](/getting-started/transform/).
+  [Transform Data](/getting-started/transform/).
 - A Google account you can authorize.
 
 ## Sending data out
@@ -97,6 +97,29 @@ guessed. */}
 ## Set it up
 
 <Tabs syncKey="howto">
+<TabItem label="Do it with Kai">
+
+Kai [configures data destinations](/kai/) as well as data sources. The configuration and the
+authorization above are yours either way — that consent screen is in your own Google account, not
+something an assistant can click through. Everything after it, Kai can do: open **Kai Agent** in
+the top bar and hand it over.
+
+```text
+In my "[TUTORIAL] Opportunity denorm to Sheets" configuration, write
+out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet called
+"[TUTORIAL] Opportunity denorm", into a sheet named opportunity_denorm, set to update rows rather
+than append. Then run it.
+```
+
+Naming all three matters: [step 5](/getting-started/automate/) puts this on a **daily schedule**, so an appending sheet grows by
+639 rows a day, and the check at the end of this tab looks for that spreadsheet name.
+
+**Check:** the sheet holds every row of `opportunity_denorm`, joined columns included, exactly as
+in [Run it and check the result](#run-it-and-check-the-result). If it does not, switch to the
+**Do it yourself** tab and edit the sheet Kai created — its **Destination** and **Options**, steps 9
+and 10 — since everything Kai set is editable there.
+
+</TabItem>
 <TabItem label="Do it yourself">
 
 **Pick the table and the sheet**
@@ -129,29 +152,6 @@ guessed. */}
 
     {/* VERIFY(owner): "Update rows" comes from the previous version of this page; the exact label
     of the append option was never documented here and is unverified. */}
-
-</TabItem>
-<TabItem label="Do it with Kai">
-
-Kai [configures data destinations](/kai/) as well as data sources. The configuration and the
-authorization above are yours either way — that consent screen is in your own Google account, not
-something an assistant can click through. Everything after it, Kai can do: open **Kai Agent** in
-the top bar and hand it over.
-
-```text
-In my "[TUTORIAL] Opportunity denorm to Sheets" configuration, write
-out.c-denormalize-opportunities.opportunity_denorm to a new spreadsheet called
-"[TUTORIAL] Opportunity denorm", into a sheet named opportunity_denorm, set to update rows rather
-than append. Then run it.
-```
-
-Naming all three matters: [step 5](/getting-started/automate/) puts this on a **daily schedule**, so an appending sheet grows by
-639 rows a day, and the check at the end of this tab looks for that spreadsheet name.
-
-**Check:** the sheet holds every row of `opportunity_denorm`, joined columns included, exactly as
-in [Run it and check the result](#run-it-and-check-the-result). If it does not, switch to the
-**Do it yourself** tab and edit the sheet Kai created — its **Destination** and **Options**, steps 9
-and 10 — since everything Kai set is editable there.
 
 </TabItem>
 </Tabs>
