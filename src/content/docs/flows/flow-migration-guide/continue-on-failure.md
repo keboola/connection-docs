@@ -2,20 +2,36 @@
 title: Continue on Failure in Conditional Flows
 slug: 'flows/flow-migration-guide/continue-on-failure'
 description: >-
-  Conditional Flows have no Continue on Failure toggle, so the Legacy Flow
-  "continue on failure + warning notification" behavior is not migrated
-  automatically. Learn how to reproduce it using conditions.
+  Conditional Flows have no per-task Continue on Failure toggle. The Legacy Flow
+  behavior is migrated into a Continue on Failure condition on the phase; learn
+  what the migration produces and how to build or extend it yourself.
 ---
 
-When you migrate a [Legacy Flow](/flows/flows-legacy/) to a [Conditional Flow](/flows/) using the [Migration Guide](/flows/flow-migration-guide/), the **Continue on Failure** behavior does not carry over automatically. This page explains why and shows how to reproduce it with conditions.
+In [Legacy Flows](/flows/flows-legacy/), enabling **Continue on Failure** on a task made the task finish with a **warning** status instead of failing the whole Flow. [Conditional Flows](/flows/) have no per-task toggle - the same rule is expressed with a [condition](/flows/#conditions) on the phase.
 
-:::caution[Known issue]
-Conditional Flows have no **Continue on Failure** toggle. In Legacy Flows, enabling **Continue on Failure** on a task made the task finish with a **warning** status instead of failing the whole Flow, and could send a warning notification. Because Conditional Flows have no **Continue on Failure** toggle, this behavior is not migrated automatically — you have to rebuild it manually using [conditions](/flows/#conditions).
+## What the migration produces
+
+When you migrate a Legacy Flow using the [Migration Guide](/flows/flow-migration-guide/), tasks with **Continue on Failure** enabled are translated into a **Continue on Failure** condition on their phase: all tasks of the phase must succeed, except those that had the toggle on. You don't have to rebuild anything manually.
+
+You can review and change the result in the Builder - the condition uses the [Continue on Failure](/flows/#4-continue-on-failure) subject, and the tasks allowed to fail are listed in the **All tasks of the phase must succeed, except** selector.
+
+:::caution
+Flows migrated **before** this behavior was introduced carry an older condition shape: an *All Tasks in Phase* statement combined with per-task *failed* statements using **OR**. That shape passes as soon as one of the tolerated tasks fails, even when a task that had to succeed failed as well. Such flows are not rewritten automatically - if you rely on the behavior, replace the condition with the **Continue on Failure** subject.
 :::
 
-## Workaround: reproduce continue-on-failure with conditions
+## Build it yourself
 
-In Conditional Flows, you recreate this behavior with a condition that branches on a task's job status. The example below starts from a first phase named **Extract Data** that contains two tasks: a GitHub extractor (**My GitHub**) and a Google Sheets extractor (**Vouchers and Global Bars**).
+You can add the same condition to any phase, whether it came from a migration or not:
+
+1. Add a condition to the phase.
+2. As the subject, pick the phase and then **Continue on Failure**.
+3. In the **All tasks of the phase must succeed, except** selector, pick the tasks that are allowed to fail.
+
+Every other task in the phase must succeed for the branch to be taken. Leave the selector empty to require that the whole phase succeeds.
+
+## Notify when a task fails
+
+If you also want to be notified, branch on the failing task's status and route the Flow through a phase with a **Notification** task. The example below starts from a first phase named **Extract Data** that contains two tasks: a GitHub extractor (**My GitHub**) and a Google Sheets extractor (**Vouchers and Global Bars**).
 
 1. Start with the **Extract Data** phase containing the GitHub and Google Sheets extractor tasks.
 
@@ -42,5 +58,5 @@ In Conditional Flows, you recreate this behavior with a condition that branches 
    ![The resulting Flow: the Notification branch rejoins Phase 2](/flows/flow-migration-guide/continue-on-failure-6.png)
 
 :::caution
-Any task that does **not** have a condition on the *failed* status — such as the Google Sheets extractor in this example — still fails the whole Flow if it finishes with an error. Add a failed-status condition to every task that should be allowed to continue on failure.
+A per-task branch like this only covers the task it is attached to. Any other task of the phase - such as the Google Sheets extractor in this example - still fails the whole Flow if it finishes with an error. Use the **Continue on Failure** subject to allow several tasks to fail at once.
 :::

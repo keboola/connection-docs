@@ -249,6 +249,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Components & Transformations** – Create, edit, and launch them with natural language.  
 - **Storage** – Browse, edit, and document buckets, tables, and columns.  
 - **SQL** – Run and manage SQL queries.  
+- **Semantic layer** – Explore the project's semantic models and validate queries against them.  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
 - **Data Apps** – Create, deploy, and manage Streamlit and Python/JS data apps.  
@@ -302,6 +303,7 @@ The following tools are classified as read-only (they do not modify data). The l
 | Flows | `get_flows`, `get_flow_examples`, `get_flow_schema` |
 | Storage | `get_buckets`, `get_tables` |
 | SQL | `query_data` |
+| Semantic | `get_semantic_context`, `get_semantic_schema`, `search_semantic_context`, `validate_semantic_query` |
 | Data Apps | `get_data_apps` |
 | Jobs | `get_jobs` |
 | Search | `search`, `find_component_id` |
@@ -577,7 +579,7 @@ For detailed instructions and SDKs for building your own MCP client, refer to th
 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
-For CLI control, dev environments, or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
+Prefer a terminal or want to give an agent sandboxed, multi-project control? See the [kbagent CLI](/cli/) — it can also call MCP tools via `kbagent tool`. For dev environments or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
 
 
 ## Support and Feedback
