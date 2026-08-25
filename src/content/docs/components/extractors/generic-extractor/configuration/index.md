@@ -15,10 +15,6 @@ nesting. The **configuration map** is also available as a [separate article](/co
 
 ### User Interface
 
-:::caution[Public Beta]
-This feature is currently in public beta. Please provide feedback using the feedback button in your project.
-:::
-
 Recently, we created a convenient user interface that allows you to build a configuration for the Generic Extractor without writing JSON code. 
 You can set up and test the connection in a few clicks, just like you are used to in some other popular API development tools. 
 

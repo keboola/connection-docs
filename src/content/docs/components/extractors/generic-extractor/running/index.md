@@ -9,8 +9,6 @@ redirect_from:
 Generic Extractor is normally run from within the Keboola user interface. It can be found in the **Extractors** section
 and all you need to do is provide its configuration JSON. No other settings are necessary.
 
-![Screenshot - Generic Extractor Configuration](/components/extractors/generic-extractor/configuration.png)
-
 Because creating the configuration JSON can be a non-trivial task, there are some things which can help
 you in developing the configuration.
 

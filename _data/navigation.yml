@@ -404,7 +404,7 @@ items:
             title: Generic Extractor
             items:
               - url: /components/extractors/generic-extractor/tutorial/
-                title: Generic Extractor Tutorial
+                title: Tutorial
                 items:
                   - url: /components/extractors/generic-extractor/tutorial/rest/
                     title: REST HTTP API Introduction
