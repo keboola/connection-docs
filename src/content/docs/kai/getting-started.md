@@ -1,17 +1,19 @@
 ---
 title: Getting Started with Kai
 slug: 'kai/getting-started'
+description: Enable Kai in your project, open the chat with keyboard shortcuts, and send your first prompts.
 ---
 
 
 
 ## Access
 
-Kai is now in **Public Beta** and available to all users in supported stacks.
+<!-- VERIFY(Jordan): single-tenant stack availability. The kai-assistant service is live on all five multi-tenant stacks (checked 2026-08-25 via each stack's public service index); whether single-tenant stacks get Kai is not publicly checkable. If they do, widen the sentence below. -->
+Kai is now in **Public Beta** and available to all users on all [multi-tenant stacks](/overview/#stacks).
 
 ### Enabling Kai
 
-Every user can see the Kai button in their project (on supported stacks). To enable Kai:
+Every user can see the Kai button in their project. To enable Kai:
 
 - **Organization Admins** — Can enable the feature directly from the chat screen when first clicking the Kai button
 - **Other users** — Need to ask their Organization Admin to enable the feature, or [contact Keboola Support](mailto:support@keboola.com) for assistance
@@ -23,8 +25,10 @@ Click the **KAI** button in your project's top navigation bar, or use keyboard s
 
 | Shortcut | Action |
 |----------|--------|
-| **A** | Open the chat window (shows recent conversation) |
-| **Ctrl + Shift + A** | Open a new chat |
+| **A** | Open or close the chat window (opens with your recent conversation) |
+| **Shift + A** | Start a new chat (opens the window if it's closed) |
+| **]** | Switch the open chat between the side panel and full-screen layout |
+| **Ctrl + Enter** (Mac: **⌘ + Enter**) | Approve a pending tool call (see [Action Approval](#action-approval) below) |
 
 ![Kai Chat Panel](/kai/kai-welcome.png)
 
@@ -50,7 +54,7 @@ Click the **KAI** button in your project's top navigation bar, or use keyboard s
 
 When Kai wants to modify your project, you'll see a tool approval prompt. Review what Kai wants to do before approving. All actions are logged in your project's audit trail.
 
-You can also click **Always allow** directly in the approval dialog to skip future confirmations for that specific tool.
+You can also click **Always allow** directly in the approval dialog to skip future confirmations for that specific tool. To approve the pending tool call from the keyboard, press **Ctrl + Enter** (Mac: **⌘ + Enter**).
 
 For more granular control, see [Tool Permissions](/kai/settings/#tool-permissions) in Kai Settings.
 
