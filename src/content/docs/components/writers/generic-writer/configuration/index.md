@@ -278,7 +278,7 @@ See [example 024](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/
 #### BearerToken
 
 Authorization using the `Bearer token` in the header. E.g. each request will be sent with
-header: `"authorization": "Bearer XXXX""`
+header: `"authorization": "Bearer XXXX"`
 
 **Example**:
 
