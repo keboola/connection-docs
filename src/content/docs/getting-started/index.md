@@ -28,7 +28,9 @@ In under an hour you will have a table that answers all of it, delivered to a sp
 rebuilt every morning without you, and an interactive map where you type your own coordinates
 and get the nearest recorded octopus — a working, scheduled pipeline with an app on top, not an
 exercise. Most steps are one Kai prompt: copy it, watch it build, check the result; every step
-also has the click-through version. Everything happens in the browser; nothing needs installing.
+also has the click-through version. Everything happens in the browser; nothing needs installing,
+and a [free project](https://connection.us-east4.gcp.keboola.com/wizard) covers all of it — no
+sales call.
 
 ## What you will build
 
@@ -59,7 +61,8 @@ project uses, just smaller. And this is where it ends up:
   and build step 5's flow with two phases instead of three — loading and transforming on a
   schedule is a real pipeline, just one that keeps its result inside Keboola.
 
-Nothing needs installing. Everything below happens in the browser.
+Nothing needs installing. Everything below happens in the browser — and if you take the Kai
+tabs, the whole build needs maybe fifteen minutes of your attention.
 
 :::note[New to the platform entirely?]
 If you would rather understand the pieces before touching them, read the
