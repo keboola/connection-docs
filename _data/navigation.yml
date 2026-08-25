@@ -490,6 +490,14 @@ items:
               - url: /components/writers/other/yourpass/
                 title: YourPass
 
+          - url: /components/writers/generic-writer/
+            title: Generic Writer
+            items:
+              - url: /components/writers/generic-writer/configuration/
+                title: Configuration
+              - url: /components/writers/generic-writer/configuration-examples/
+                title: Configuration Examples
+
       - url: /components/applications/
         title: Applications
         items:
@@ -543,6 +551,10 @@ items:
         items:
           - url: /storage/data-streams/opentelemetry/
             title: OpenTelemetry (OTLP)
+          - url: /storage/data-streams/reference/
+            title: Reference
+          - url: /storage/data-streams/tutorial/
+            title: Tutorial
 
       - url: /storage/files/
         title: Files

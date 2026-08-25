@@ -331,6 +331,15 @@ export const sidebar = [
               { slug: "components/writers/other/yourpass" },
             ],
           },
+          {
+            label: "Generic Writer",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/generic-writer" },
+              { slug: "components/writers/generic-writer/configuration" },
+              { slug: "components/writers/generic-writer/configuration-examples" },
+            ],
+          },
         ],
       },
       {
@@ -393,6 +402,8 @@ export const sidebar = [
         items: [
           { label: "Overview", slug: "storage/data-streams" },
           { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/reference" },
+          { slug: "storage/data-streams/tutorial" },
         ],
       },
       { slug: "storage/files" },

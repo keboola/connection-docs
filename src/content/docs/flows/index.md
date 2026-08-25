@@ -42,7 +42,9 @@ You can also set up parallelization **within a component** (configuration), dire
 
 ### Control Task Execution
 
-![Task Parameters](/flows/task-parameters.png)
+Select a task in the Builder to open its settings.
+
+![Task settings for a selected task: Component Enabled, Retry After Failure, Delay Before Start, and Continue on Failure shown as Handled via Conditions](/flows/task-settings.png)
 
 - If you need to temporarily skip something, disable the task. The task will then be excluded from the flow.
 
@@ -50,6 +52,8 @@ You can also set up parallelization **within a component** (configuration), dire
 
 - To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
+
+![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
 
 ***Example of the advanced parameter:** changing a variable in transformation:*
 
@@ -360,15 +364,52 @@ You can also create the notification inside of condition as a New Phase, name it
 
 ![](/flows/conditional-flows-notification-2.png)
 
+## Run the Flow
+
+Click **Run flow** in the flow header to run the whole flow. The arrow next to the button offers the partial runs below. All of them use the **saved** configuration, so save or reset your changes first.
+
+### Run selected tasks
+
+Use this when only a part of the flow needs to run — for example after fixing one transformation, without waiting for the extractors again.
+
+1. Open the **Builder** tab and choose **Run selected tasks** from the **Run flow** button.
+2. Click the tasks you want to run. The canvas is read-only while selecting; each phase shows how many of its tasks are selected and offers **Select all tasks in this phase** and **Select this phase and everything after it**.
+3. Click **Run tasks**. **Cancel** or `Esc` leaves the mode without running anything.
+
+![Builder in selection mode: the "Run selected tasks — 2 of 7 tasks selected" panel with Cancel and Run Tasks, two highlighted phases and a dimmed one](/flows/run-selected-tasks.png)
+
+What runs:
+
+- Only the selected tasks. **Conditions are ignored** — the selected phases run one after another, including phases in different branches of a condition, and a phase several branches lead into runs only once. Phases with nothing selected are skipped.
+- Tasks selected within one phase still run in parallel, as they do in a normal run.
+- Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
+- A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
+
+### Re-run failed tasks
+
+After a failed run, **Re-run failed tasks** appears in the same **Run flow** button, and on the flow's job detail in **Jobs**. Tasks that already finished successfully are skipped and their results reused; the rest re-run with the current flow configuration.
+
+### Run a single phase or task
+
+Hovering over a phase or a task reveals a **run** icon that runs just that phase or task in isolation — no other phase is entered and no conditions are evaluated.
+
 ## Schedule and Automate
 
-Click on **Set Schedule** in your flow and select when you want the flow to run. You can select predefined intervals or set your own. Another option is to use triggers to initiate the run.
+Open the **Schedules** tab in your flow and click **Create Schedule**. A flow can have several
+schedules; they work independently, and the flow runs when any one of them triggers. Each schedule
+has its own toggle, so you can turn one off without deleting it.
+
+![The Schedules tab with the Create Schedule button and one existing schedule](/flows/schedules-tab.png)
+
+A schedule is either **Date & Time** or **Triggered**. For Date & Time, pick one of the predefined
+intervals (every 15 minutes, every hour, once a day, once a week, end of month) or set your own, then
+click **Set Up Schedule**. The dialog works in UTC and previews the next runs before you commit.
+
+![The Create Schedule dialog: schedule type, predefined intervals, a custom interval, and the Set Up Schedule button](/flows/create-schedule.png)
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
-
-![Set Schedule](/flows/set-schedule.png)
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
 
