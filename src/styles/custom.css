@@ -1182,6 +1182,14 @@ nav.sidebar {
   border: 1px solid var(--border-1);
   background: var(--bg-2);
 }
+/* Looping demo clips ("GIFs") get the same frame as screenshots */
+.sl-markdown-content video:not(:where(.not-content *)) {
+  border-radius: 8px;
+  border: 1px solid var(--border-1);
+  background: var(--bg-2);
+  max-width: 100%;
+  height: auto;
+}
 
 /* Mobile / tablet */
 @media (max-width: 50rem) {
