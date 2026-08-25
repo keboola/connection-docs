@@ -82,6 +82,11 @@ mapping and a phase live — and it is worth doing by hand at least once. Each K
 what to check, and what to do when Kai's version does not match — assume you will need that at
 least once.
 
+In principle the whole arc fits into one long Kai request — data, atlas, sheet, flow and app in
+a single prompt. This guide keeps one prompt per step so every result stays checkable and you
+know what exists when you want to change it later; nothing here is hard, it is just five easy
+things in a row.
+
 Building is only half of what Kai is for. Step 5 closes by pointing it at the table you just
 built and asking it the question at the top of this page; step 6 then turns that answer into an
 app anyone can open — with a field for your own coordinates, which is where the question stops
