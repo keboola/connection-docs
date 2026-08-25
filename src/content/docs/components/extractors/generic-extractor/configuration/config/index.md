@@ -160,9 +160,8 @@ will produce the following `users` table:
 |234|Jane Doe|fullExtract|development|
 
 The `userData` values are added to the parent jobs only. They will not affect the
-[child jobs](/components/extractors/generic-extractor/configuration/config/jobs/children). If the result table contains
-columns with the same names as the `userData` properties. If there is already a column with the same name,
-the `userData` column will be renamed.
+[child jobs](/components/extractors/generic-extractor/configuration/config/jobs/children). If the result table already
+contains a column with the same name as a `userData` property, the `userData` column will be renamed.
 
 See [example [EX076]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).
 

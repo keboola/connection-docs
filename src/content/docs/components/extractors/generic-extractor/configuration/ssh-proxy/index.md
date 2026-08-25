@@ -10,7 +10,7 @@ redirect_from:
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various
 configuration options.*
 
-An SSH proxy for Generic Extractor allows you tu securely access HTTP(s) endpoints inside your private network.
+An SSH proxy for Generic Extractor allows you to securely access HTTP(s) endpoints inside your private network.
 It creates an SSH tunnel, and all traffic from Generic Extractor is forwarded through the tunnel to the destination server.
 
 A sample `config` configuration can look like this:

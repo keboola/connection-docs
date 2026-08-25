@@ -120,7 +120,7 @@ situations can arise:
 [`pagenum`](/components/extractors/generic-extractor/configuration/api/pagination/pagenum/) and
 [`offset` methods](/components/extractors/generic-extractor/configuration/api/pagination/pagenum/) will stop, and other methods will probably stop
 too (depends on how empty the response is).
-- Less common — API returns an **error** — in this case a different stopping condition such as [`nextFlag`](#next-page-flag) or
+- Less common — API returns an **error** — in this case a different stopping condition such as [`nextPageFlag`](#next-page-flag) or
 [`forceStop`](#force-stop) has to be used.
 - Less common — API keeps returning the **last page**, the extraction is stopped when a page is obtained twice (see
 [example [041]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/041-paging-stop-same)). If the API returns
@@ -236,8 +236,8 @@ and [example [EX140]](https://github.com/keboola/generic-extractor/tree/master/d
 Limit stop configuration allows you to stop scrolling when a specified number of items is extracted.
 The supported options are:
 
-- `count` (required, integer) — total number of items to extract
-- `field` (required, string) — path to the key which contains the value with total number of items
+- `count` (required if `field` not set, integer) — total number of items to extract
+- `field` (required if `count` not set, string) — path to the key which contains the value with total number of items
 
 The two options are **mutually exclusive**, but one of them is required. In both cases, the total number of items may not be
 honored exactly. If the total amount is not divisible by the page size, then the leftover from the last page (if any)
@@ -337,7 +337,7 @@ It means that the scrolling will **continue** till the field `hasMore` is presen
 In this case, setting `ifNotSet` is not necessary.
 
 See [example [EX045]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/045-next-page-flag-has-more)
-and [example [EX139]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/139-pagination-hasmore-child-filter)] (combining with child jobs).
+and [example [EX139]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/139-pagination-hasmore-child-filter) (combining with child jobs).
 
 ### Non-Boolean Has-More Scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present only in the
