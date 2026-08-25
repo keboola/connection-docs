@@ -24,6 +24,28 @@ Step 7, the last, of the [Getting Started](/getting-started/) arc.
 
 Every job that ran is in **Jobs**, and every table it touched is in **Storage**.
 
+## Next time: one prompt
+
+You built this arc one step at a time so every result stayed checkable. Now that you have seen
+the pieces, you no longer need five prompts — in a fresh project, the whole thing is one
+request:
+
+```text
+Load the four CSVs from https://help.keboola.com/getting-started/ — occurrences.csv,
+species.csv, depth_zones.csv and basins.csv — into Storage. Join them into one octopus_atlas
+table with display names, depth zones and ocean basins. Deliver it to a Google Sheet, wire
+loading, joining and delivering into a flow that runs daily, and build me a map app of all the
+sightings with a nearest-sighting search by coordinates.
+```
+
+Kai will still ask you to approve what it creates, and the Google authorization stays yours —
+but that is the entire difference between one sentence and this guide. Swap the file URLs for
+your own data and the same sentence builds *your* pipeline instead.
+<!-- VERIFY(owner): this consolidated prompt is the per-step prompts joined; it has not yet been
+run end-to-end as one request. Run it in a scratch context during the re-walk and calibrate the
+wording (approval count, whether Kai orders the phases correctly) before GA. Direction blessed by
+Jordan on the 08-21 call ("technically all of this could be one prompt"). -->
+
 ## Pick your next thing
 
 **"My real data is not a CSV file on a public URL."** Browse the

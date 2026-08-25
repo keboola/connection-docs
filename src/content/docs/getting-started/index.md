@@ -43,7 +43,9 @@ also has the click-through version. Everything happens in the browser; nothing n
 The joined table is the one someone would actually read: every sighting with its species by
 name, the ocean basin it sits in and — where a depth was recorded — its depth zone, down to a
 dumbo octopus (*Grimpoteuthis challengeri*) recorded 4,838 meters below the surface. It is not a demo — this is the mechanism a production
-project uses, just smaller.
+project uses, just smaller. And this is where it ends up:
+
+![The finished app — a world map of every sighting, with filters and a nearest-octopus search](/getting-started/app/octopus-map-preview.png)
 
 ## Before you start
 
@@ -65,49 +67,24 @@ If you would rather understand the pieces before touching them, read the
 what a stack is. This guide explains each piece as it comes up, so you can also just start.
 :::
 
-## Two ways to do most steps
+## Two ways to do every step
 
-The building steps — load, transform, deliver, automate, and the app — can be done by asking
-**Kai**, Keboola's built-in assistant, or by clicking through the UI yourself. Each of those
-pages puts both paths side by side: steps 2 through 6 open with a **Do it with Kai** tab, and a
-**Do it yourself** tab next to it.
+Steps 2 through 6 open with a **Do it with Kai** tab — copy the prompt, watch it build, check
+the result — and a **Do it yourself** tab with every click written out, for when you want to
+see the mechanics. Only two things stay yours either way: creating the project (step 1) and the
+Google authorization in step 4.
 
-Two things stay yours either way: creating the project in step 1, since Kai works *inside* a
-project, and the Google authorization in step 4 — that consent screen is in your own account. On
-step 4 the shared steps sit above the tabs, and the Kai tab picks up after them.
-
-**Kai is the default path**: copy the prompt, watch it build, check the result. The clicking is
-still written out in full for when you want to see the mechanics — where a configuration, a
-mapping and a phase live — and it is worth doing by hand at least once. Each Kai block ends with
-what to check, and what to do when Kai's version does not match — assume you will need that at
-least once.
-
-In principle the whole arc fits into one long Kai request — data, atlas, sheet, flow and app in
-a single prompt. This guide keeps one prompt per step so every result stays checkable and you
-know what exists when you want to change it later; nothing here is hard, it is just five easy
-things in a row.
-
-Building is only half of what Kai is for. Step 5 closes by pointing it at the table you just
-built and asking it the question at the top of this page; step 6 then turns that answer into an
-app anyone can open — with a field for your own coordinates, which is where the question stops
-being rhetorical.
-
-Kai asks before it changes anything: project-modifying actions raise an approval dialog in the
-chat, so expect to confirm rather than watch it run unattended. Expect one prompt per object rather
-than one per request — asking for step 2's whole configuration in a single sentence still raised
-six: the configuration, each of its four rows, and running the job. Questions that only read do not
-ask, because read-only tools are allowed by default. If the clicking gets tiring, click
-**Always allow** in the dialog, or pre-approve what you trust in
-[tool permissions](/kai/settings/#tool-permissions).
+Kai asks before it changes anything — expect one approval dialog per object it creates;
+questions that only read do not ask. If the confirming gets tiring, click **Always allow**, or
+pre-approve tools in [tool permissions](/kai/settings/#tool-permissions).
 <!-- VERIFY(owner): the chat also surfaced a tip for a "plan mode" — "have Kai draft a plan you can
 approve before any changes" — which would fit here, but nothing under kai/ documents it. Confirm
 the name and document it on kai/, then it can replace the Always-allow advice above. -->
 
-The **Kai Agent** button is visible to every user on a supported stack, but the
-feature has to be switched on — an organization admin can do it from the chat screen or in
-**Settings → Features**, or you can ask Keboola Support. There is also a monthly message
-allowance, which matters on the Free Plan. See [Get started with Kai](/kai/getting-started/) for
-both, and [use cases](/kai/use-cases/) for what else it does.
+The **Kai Agent** button sits in the top bar; an organization admin switches the feature on, and
+Free Plan projects get a monthly message allowance — see
+[Get started with Kai](/kai/getting-started/). And once you have seen the five pieces, they
+collapse: [the last page shows the whole arc as one prompt](/getting-started/next-steps/#next-time-one-prompt).
 
 ## The steps
 
