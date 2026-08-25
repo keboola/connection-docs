@@ -25,8 +25,12 @@ After installation, enable the plugins you need:
 /plugin install developer
 /plugin install component-developer
 /plugin install dataapp-developer
-/plugin install kbagent
+/plugin install kbagent@keboola-claude-kit
 ```
+
+`keboola-claude-kit` is the name of the marketplace this repository publishes, and it is the only Claude Code plugin marketplace Keboola operates.
+
+The `kbagent` plugin also gives you a `/kbagent:setup` command that installs and connects the [kbagent CLI](/cli/) for you. See [kbagent for AI agents](/cli/for-agents/) for the per-client setup steps, including Claude Desktop and the clients with no plugin.
 
 ## Available Plugins
 
