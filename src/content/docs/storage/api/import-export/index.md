@@ -24,7 +24,7 @@ The imported files must conform to the [RFC4180 Specification](https://tools.iet
 ![Schema of file upload process](/storage/api/async-import-handling.svg)
 
 Exporting a table from Storage is analogous to its importing. First, data is [asynchronously
-exported](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously/asynchronous-export) from
+exported](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/export-async) from
 Table Storage into File Uploads. Then you can request to [download
 the file](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/files/-fileId-), which will give you
 access to an S3 server for the actual file download.

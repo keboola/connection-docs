@@ -68,6 +68,7 @@ use Keboola\StorageApi\Client;
 
 $client = new Client([
   'token' => 'your-token',
+  'url' => 'https://connection.keboola.com',
 ]);
 ```
 
@@ -87,6 +88,7 @@ use Keboola\StorageApi\Client;
 
 $client = new Client([
     'token' => 'your-token',
+    'url' => 'https://connection.keboola.com',
 ]);
 $csvFile = new CsvFile('./new-table.csv');
 $client->createTableAsync('in.c-main', 'new-table', $csvFile);
@@ -104,6 +106,7 @@ use Keboola\StorageApi\Client;
 
 $client = new Client([
     'token' => 'your-token',
+    'url' => 'https://connection.keboola.com',
 ]);
 $csvFile = new CsvFile('./new-table.csv');
 $client->writeTableAsync('in.c-main.new-table', $csvFile);
@@ -121,6 +124,7 @@ use Keboola\StorageApi\Client;
 
 $client = new Client([
     'token' => 'your-token',
+    'url' => 'https://connection.keboola.com',
 ]);
 $csvFile = new CsvFile('./new-table.csv');
 $client->writeTableAsync('in.c-main.new-table', $csvFile, ['incremental' => true]);
@@ -140,7 +144,8 @@ use Keboola\StorageApi\Client;
 use Keboola\StorageApi\TableExporter;
 
 $client = new Client([
-    'token' => 'your-token'
+    'token' => 'your-token',
+    'url' => 'https://connection.keboola.com',
 ]);
 
 $exporter = new TableExporter($client);
