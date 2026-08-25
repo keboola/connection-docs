@@ -7,7 +7,7 @@ slug: 'kai/getting-started'
 
 ## Access
 
-Kai is now in **Public Beta** and available to all users in supported stacks.
+Kai is available on all supported stacks; the feature has to be enabled in your project first.
 
 ### Enabling Kai
 
@@ -19,13 +19,14 @@ Every user can see the Kai button in their project (on supported stacks). To ena
 
 ## Opening Kai
 
-Click the **KAI** button in your project's top navigation bar, or use keyboard shortcuts:
+Click the **Kai Agent** button in your project's top bar, or use keyboard shortcuts:
 
 | Shortcut | Action |
 |----------|--------|
 | **A** | Open the chat window (shows recent conversation) |
 | **Ctrl + Shift + A** | Open a new chat |
 
+<!-- TODO(human-review, Jordan): kai-welcome.png still shows the Beta badge/pill on the Kai button. It cannot be reshot clean before the pill retires on 2026-09-15 — reshoot after that date. -->
 ![Kai Chat Panel](/kai/kai-welcome.png)
 
 ## Example Prompts
@@ -84,7 +85,7 @@ This makes interactions more natural—you can say "analyze this job" while view
 
 ## Rate Limits
 
-**Kai is free during the public beta period.**
+<!-- VERIFY(Jordan): the pricing line that stood here was removed with the beta scrub (pill retires 2026-09-15, call 2026-08-21). Confirm whether a pricing/entitlement statement replaces it or the per-plan message limits below stand alone — pricing is not documented here per the guardrail. -->
 
 Each user receives **150 turns (messages) per month per project** on contracted plans. The limit resets at the beginning of each calendar month.
 
