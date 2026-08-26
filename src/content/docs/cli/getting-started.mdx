@@ -84,7 +84,7 @@ kbagent project add --project prod \
 
 `prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
 
-A Storage API token is enough for browsing. Some commands need an admin (master) token — `token create` requires the `canManageTokens` permission, and creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
+A Storage API token is enough for browsing. Some commands need an admin (master) token, e.g. creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 
 :::caution
 kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
