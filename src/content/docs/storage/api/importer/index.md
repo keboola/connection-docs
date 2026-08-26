@@ -1,5 +1,6 @@
 ---
 title: Storage API Importer
+description: The whole process of importing a table into Storage can be simplified with the Storage API Importer Service.
 slug: 'storage/api/importer'
 redirect_from:
     - /integrate/storage/api/importer/

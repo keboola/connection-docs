@@ -1,5 +1,6 @@
 ---
 title: Columns and primary key of report configuration presets
+description: Reference of the columns and primary keys each Bing Ads report preset downloads, per aggregation level.
 slug: 'components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk'
 redirect_from:
     - /extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/

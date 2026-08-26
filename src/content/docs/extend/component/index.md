@@ -1,6 +1,6 @@
 ---
 title: Components
-description: Components allow you to extend Keboola. The data interface to components is very similar to Transformations --- data is exchanged as CSV files in designated…
+description: Components allow you to extend Keboola. The data interface to components is very similar to Transformations — data is exchanged as CSV files in designated…
 slug: 'extend/component'
 redirect_from:
     - /extend/docker/
