@@ -7,7 +7,7 @@ slug: 'ai/ai-kit'
 
 AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components, data apps, and maintain code quality using AI-powered tools.
 
-AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides three specialized plugins that cover different aspects of Keboola development, from general code quality to building production-ready components and data applications.
+AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides four plugins that cover different aspects of Keboola development, from general code quality to building production-ready components and data applications, plus driving your projects from the terminal.
 
 The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build Streamlit data apps, review code for security issues, and automate common development workflows.
 
@@ -28,9 +28,7 @@ After installation, enable the plugins you need:
 /plugin install kbagent@keboola-claude-kit
 ```
 
-`keboola-claude-kit` is the name of the marketplace this repository publishes, and it is the only Claude Code plugin marketplace Keboola operates.
-
-The `kbagent` plugin also gives you a `/kbagent:setup` command that installs and connects the [kbagent CLI](/cli/) for you. See [kbagent for AI agents](/cli/for-agents/) for the per-client setup steps, including Claude Desktop and the clients with no plugin.
+`keboola-claude-kit` is the marketplace name this repository publishes, and the one to install Keboola plugins from.
 
 ## Available Plugins
 
@@ -57,6 +55,12 @@ The `/create-pr` command analyzes your changes and creates a pull request with a
 The plugin includes Linear MCP integration for issue tracking and project management, and auto-installs team-wide permission settings for safe git operations.
 
 [View Developer Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/developer)
+
+### kbagent Plugin
+
+The kbagent Plugin teaches an AI client the [kbagent CLI](/cli/), so the assistant can run jobs, read configurations and search across your Keboola projects. It adds a `/keboola` command backed by a `keboola-expert` subagent, a skill that understands plain-language asks like "set up kbagent for my Keboola project", and in Claude Code a `/kbagent:setup` command that installs and connects the CLI in one step.
+
+The plugin's source lives in the CLI repo at [`plugins/kbagent`](https://github.com/keboola/cli/tree/main/plugins/kbagent); this marketplace publishes it from there through a `git-subdir` source. Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app can all install it, each by its own route. See [kbagent for AI agents](/cli/for-agents/) for the steps per client.
 
 ### Component Developer Plugin
 

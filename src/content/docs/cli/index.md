@@ -59,7 +59,7 @@ The pages read in order, from first run to deep reference:
 1. **[Get started](/cli/getting-started/)** — install (macOS / Linux / Windows), connect a project, run your first commands.
 2. **[How it works](/cli/concepts/)** — the connection model, multi-project, dev branches, GitOps sync, and the safety firewall.
 3. **[How-to guides](/cli/workflows/)** — task recipes: onboard an org, dev-branch workflow, GitOps sync, audits, CI/CD tokens, encryption.
-4. **[Use with AI agents](/cli/for-agents/)** — the Claude Code plugin, `kbagent context`, and sandboxing an agent.
+4. **[Use with AI agents](/cli/for-agents/)** — the kbagent plugin and its setup in each AI client, `kbagent context`, and sandboxing an agent.
 5. **[Command reference](/cli/commands/)** — every command group, global flags, JSON output, and error codes.
 6. **[Web UI](/cli/web-ui/)** — the optional local browser dashboard.
 
