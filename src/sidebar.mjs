@@ -126,6 +126,21 @@ export const sidebar = [
       { label: "Overview", slug: "components" },
       { slug: "components/running-jobs-in-parallel" },
       {
+        label: "Variables",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/variables" },
+          {
+            label: "Variables Through the API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/variables/api" },
+              { slug: "components/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
+      {
         label: "Data Source Connectors",
         collapsed: true,
         items: [
@@ -416,6 +431,15 @@ export const sidebar = [
               { slug: "components/writers/other/yourpass" },
             ],
           },
+          {
+            label: "Generic Writer",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/generic-writer" },
+              { slug: "components/writers/generic-writer/configuration" },
+              { slug: "components/writers/generic-writer/configuration-examples" },
+            ],
+          },
         ],
       },
       {
@@ -505,6 +529,21 @@ export const sidebar = [
         ],
       },
       { slug: "storage/byobq" },
+      {
+        label: "Storage API",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/api" },
+          { slug: "storage/api/configurations" },
+          { slug: "storage/api/import-export" },
+          { slug: "storage/api/importer" },
+          { slug: "storage/api/tde-exporter" },
+          { slug: "storage/api/clients/python-client" },
+          { slug: "storage/api/clients/r-client" },
+          { slug: "storage/api/clients/php-client" },
+          { slug: "storage/api/clients/docker-cli" },
+        ],
+      },
     ],
   },
   {
@@ -513,7 +552,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      { slug: "transformations/shared-code" },
       {
         label: "dbt Transformation",
         collapsed: true,

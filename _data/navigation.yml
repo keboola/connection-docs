@@ -136,6 +136,15 @@ items:
       - url: /components/running-jobs-in-parallel/
         title: Running Jobs in Parallel
 
+      - url: /components/variables/
+        title: Variables
+        items:
+          - url: /components/variables/api/
+            title: Variables Through the API
+            items:
+              - url: /components/variables/api/tutorial/
+                title: Tutorial
+
       - url: /components/extractors/
         title: Data Source Connectors
         items:
@@ -572,6 +581,14 @@ items:
               - url: /components/writers/other/yourpass/
                 title: YourPass
 
+          - url: /components/writers/generic-writer/
+            title: Generic Writer
+            items:
+              - url: /components/writers/generic-writer/configuration/
+                title: Configuration
+              - url: /components/writers/generic-writer/configuration-examples/
+                title: Configuration Examples
+
       - url: /components/applications/
         title: Applications
         items:
@@ -663,14 +680,34 @@ items:
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 
+      - url: /storage/api/
+        title: Storage API
+        items:
+          - url: /storage/api/configurations/
+            title: Configurations
+          - url: /storage/api/import-export/
+            title: Import & Export
+          - url: /storage/api/importer/
+            title: API Importer
+          - url: /storage/api/tde-exporter/
+            title: TDE Exporter
+          - url: /storage/api/clients/python-client/
+            title: Python client
+          - url: /storage/api/clients/r-client/
+            title: R client
+          - url: /storage/api/clients/php-client/
+            title: PHP client
+          - url: /storage/api/clients/docker-cli/
+            title: Docker CLI client
+
   - url: /transformations/
     title: Transformations
     items:
       - url: /transformations/mappings/
         title: Mappings
         
-      - url: /transformations/variables/
-        title: Variables & Shared Code
+      - url: /transformations/shared-code/
+        title: Shared Code
 
       - url: /transformations/dbt/
         title: dbt Transformation
