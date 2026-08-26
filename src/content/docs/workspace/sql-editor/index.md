@@ -303,7 +303,7 @@ If you need to make modifications to the code for a specific transformation, you
 
 ### Variables
 
-Variables allow you to parametrize transformations. More information can be found [here](https://help.keboola.com/transformations/variables/).
+Variables allow you to parametrize transformations. For how they work, see [Variables](/components/variables/).
 Variables can be created, edited, used or removed inside of SQL Editor.
 
 #### Using Variables in Transformations and Workspaces

@@ -57,11 +57,15 @@ In case your AI assistant supports remote connection, you can connect to Keboola
    - You can find the url in your Keboola [Project Settings](/management/project/) under the tab `MCP Server`
      - In there you can also find specific instructions for various clients.
 2. Copy the server URL and paste it into your AI assistant's settings.
-3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account and select the project you want to connect to.
+3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) below).
 
 :::note
 When using the remote server with OAuth, you get the permissions that match your role in Keboola. If you wish to control permissions more granularly, run the server locally and specify your own **Storage Token** and **Workspace Schema** — see [Running the MCP Server Locally](#running-the-mcp-server-locally).
 :::
+
+### Choosing Your Project(s)
+
+Authenticating doesn't pin your session to a single project up front. Once you're connected, ask your assistant something like *"what Keboola projects can you access?"* — it will list every project reachable by your account and ask which one(s) you want to work in. You can work across several projects at once, or re-scope to a different project or subset at any point later in the conversation.
 
 
 ### Using with Claude Desktop
@@ -75,7 +79,7 @@ Custom connectors are available on the Free, Pro, Max, Team, and Enterprise plan
 - Give the connector a name (Keboola) and paste in your Integration URL
   - `https://mcp.<YOUR_REGION>.keboola.com/mcp`
 - Click **"Add"**
-- You'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
+- You'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 #### Via mcp-remote adapter (fallback)
 
@@ -99,7 +103,7 @@ For MCP clients that don't yet support native remote (OAuth) connections, you ca
   }
 }
 ```
-4. Restart Claude Desktop, you'll be prompted to authenticate with your Keboola account and select the project you want to connect to.
+4. Restart Claude Desktop, you'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 ### Using with ChatGPT
 
@@ -140,7 +144,7 @@ ChatGPT Plus, Pro, Business, and Enterprise users can connect to Keboola's MCP S
 
 1. After clicking "Create," you will be redirected to the Keboola platform to authorize the connection
 2. Sign in to your Keboola account if prompted
-3. Select the specific Keboola project you want to connect to
+3. Once authorized, ask ChatGPT which Keboola project(s) you want to work in (see [Choosing Your Project(s)](#choosing-your-projects) above) — it will list everything your account can access
 4. Once authorized, you will be redirected back to ChatGPT
 5. A confirmation message "Keboola is now connected" will appear at the top of the screen
 
@@ -165,7 +169,7 @@ Click the button related to your region below:
 1. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`.
 2. Click the Cursor tab.
 3. Click the **"Install In Cursor"** button.
-4. You'll be prompted to login into your Keboola account and select the project you want to connect to.
+4. You'll be prompted to log in to your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above).
 
 ### Using with Windsurf
 
@@ -187,7 +191,7 @@ Windsurf supports MCP through its native integration with Cascade. Add Keboola's
 
 4. Replace `<YOUR_REGION>` with your specific stack URL from the [available stack URLs](#remote-server-setup)
 5. Press the refresh button after adding the configuration
-6. You'll be prompted to authenticate with your Keboola account and select the project
+6. You'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above)
 
 For detailed instructions and troubleshooting, see the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin).
 
@@ -220,7 +224,7 @@ VS Code supports MCP servers through GitHub Copilot's agent mode. Follow these s
 5. Replace `<YOUR_REGION>` with your specific stack URL from the [available stack URLs](#remote-server-setup)
 6. Save the configuration file
 7. Restart VS Code or run **"MCP: Restart Servers"** from the Command Palette
-8. You'll be prompted to authenticate with your Keboola account and select the project
+8. You'll be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) above)
 
 #### Using MCP Tools in VS Code
 
@@ -349,6 +353,10 @@ The sections below cover running the server locally and integrating it programma
 
 While MCP clients like Cursor or Claude typically manage the MCP server automatically, you might want to run the Keboola MCP Server locally for development, testing, or when using a custom client. You can run it via Docker or via the `uv`/`uvx` command.
 
+:::caution
+**Storage Token Deprecation:** Configuring the local server with a static `KBC_STORAGE_TOKEN`, as shown below, is deprecated in favor of the browser-based `login` command (see [Authenticating Without a Static Storage Token](#authenticating-without-a-static-storage-token) below). It still works today — there is a deprecation period while existing setups migrate — but support for it will be removed in a future release.
+:::
+
 ### Using Docker (recommended)
 
 For a consistent and isolated environment, running the Keboola MCP Server via [Docker](https://docker.com/get-started/) is often the recommended approach for local execution, especially if you don't want to manage Python environments directly or are integrating with clients that can manage Docker containers.
@@ -444,6 +452,25 @@ uvx keboola_mcp_server --api-url $KBC_STORAGE_API_URL
 ```
 
 The `KBC_STORAGE_API_URL` was set as an environment variable but can also be provided manually via the `--api-url` flag. The command starts the server communicating via `stdio`. To run the server in `Streamable HTTP` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
+
+### Authenticating Without a Static Storage Token
+
+Instead of setting a static `KBC_STORAGE_TOKEN`, you can sign in once with your browser; the server stores the session and refreshes it automatically:
+
+```bash
+uvx keboola_mcp_server login --api-url https://connection.YOUR_REGION.keboola.com
+```
+
+This saves a stack-wide session to `~/.keboola/mcp/credentials.json` (readable only by you). Afterwards, start the server with only `KBC_STORAGE_API_URL` set — no token required. Which project(s) to work on is then chosen from within the conversation itself (see [Choosing Your Project(s)](#choosing-your-projects) above), not at login time.
+
+| Command | What it does |
+|---------|--------------|
+| `login --api-url <url>` | Sign in to a stack |
+| `login --force` | Sign in again / switch account |
+| `login --show-token` | Print the current session token (debugging) |
+| `logout [--api-url <url>] [--all]` | Remove the stored session for a stack (or all stacks) |
+
+For containers or CI where a browser login isn't possible, supply a Keboola [access or personal access token](/management/project/tokens/) directly via `KBC_STORAGE_TOKEN`, together with `KBC_PROJECT_ID` to select the project. These stack-wide programmatic tokens are prefixed `kbc_at_` (access token) or `kbc_pat_` (personal access token); a legacy project-bound Storage token does not need `KBC_PROJECT_ID`, since the project is already encoded in the token itself.
 
 ### Connecting a client to a localhost instance
 
