@@ -3,108 +3,132 @@ title: kbagent for AI agents
 slug: 'cli/for-agents'
 sidebar:
   label: Use with AI Agents
-description: 'Give an AI coding agent safe control of Keboola with kbagent — the Claude Code plugin and /keboola subagent, read-only sandboxing, the conversation ID, and the kbagent context reference.'
+description: 'Give an AI coding agent safe control of Keboola with kbagent: the plugin and /keboola subagent, per-client setup for Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app, read-only sandboxing, the conversation ID, and the kbagent context reference.'
 ---
 
 
 
-[kbagent](/cli/) is built to be driven by AI coding agents (Claude Code, Cursor, Copilot), not just humans. It gives an agent a stable command surface, a machine-readable reference, and safety rails so it can operate Keboola without you handing over unrestricted access.
+[kbagent](/cli/) is built to be driven by AI coding agents (Claude Code, Claude Desktop, Cursor, VS Code, the ChatGPT app) as well as humans. It gives an agent a stable command surface, a machine-readable reference, and safety rails so it can operate Keboola without you handing over unrestricted access.
 
 <!-- Source: keboola/cli README ("For AI agents") + `kbagent context` + `kbagent doctor`, verified 2026-07-13. -->
 
-## Claude Code plugin
+## The kbagent plugin
 
-:::tip[Add kbagent to Claude Code]
-Run these two commands **inside Claude Code** to install the plugin from Keboola's [AI Kit](/ai/ai-kit/) marketplace (use the copy button on the block):
+The plugin teaches an AI client the CLI. It adds a **`/keboola`** slash command that spawns a `keboola-expert` subagent with fresh context and hard rules (fetch the current reference, dry-run first, prefer the CLI over raw REST/MCP, gate on version), plus a structured verification payload. It also ships a skill, so where the plugin is installed you can just ask for what you want in plain language ("set up kbagent for my Keboola project", "log me out of Keboola") instead of copying commands.
 
-```
-/plugin marketplace add keboola/ai-kit
-/plugin install kbagent@keboola-claude-kit
-```
+The plugin lives in the CLI repo at [`plugins/kbagent`](https://github.com/keboola/cli/tree/main/plugins/kbagent) and ships from Keboola's [AI Kit](/ai/ai-kit/) marketplace, which is named `keboola-claude-kit`.
+
+Five clients can install it: Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app. Each has its own route, and all five are below. The plugin does not connect your project. That is a separate step, so you need both.
+
+In every client's plugin list, **`keboola-cli`** sits next to `kbagent`. Pick `kbagent`. `keboola-cli` is the unrelated legacy `kbc` CLI.
+
+:::caution[Added the marketplace from keboola/cli before?]
+Earlier versions of this page pointed at `keboola/cli`. Nothing moves you off it. Run `/plugin marketplace remove keboola-agent-cli` first, then add `keboola/ai-kit` and install the plugin again. `kbagent doctor` names the marketplace you are on.
 :::
-
-The plugin installs via Claude Code's marketplace, not as a downloaded file — so it's a command you run in the assistant, not a button. It adds a **`/keboola`** slash command that spawns a `keboola-expert` subagent with fresh context and hard rules (fetch the current reference, dry-run first, prefer the CLI over raw REST/MCP, gate on version), plus a structured verification payload. `kbagent doctor` tells you whether the plugin is installed.
-
-Where the plugin is installed you can also **just ask** for what you want in plain language ("set up kbagent for my Keboola project", "log me out of Keboola") instead of copying commands. The plugin ships a skill that knows those verbs and runs the right commands for you.
 
 ### The `/kbagent:setup` shortcut
 
-The plugin adds a **`/kbagent:setup`** command that gets you most of the way in one step. Pass a stack URL or a project name as its argument. It installs the CLI if it is missing, checks whether a project is already connected and skips ahead if one is, and it is safe to run twice.
+Claude Code is the only client that can run **`/kbagent:setup`**. Pass it a stack URL. It installs the CLI if it is missing, signs you in, registers every project you can reach on that stack, and verifies the result. Anything already done is skipped, so re-running it is safe.
 
-What it does **not** do today is finish. When it reaches the sign-in it hands you a command to run in a terminal yourself:
-
-<!-- kbagent-check: skip-next. `auth` shipped in kbagent 0.80.0; the synced command reference is still v0.76.1, so the gate cannot see it yet. -->
-```bash
-kbagent auth login --stack https://connection.keboola.com --register-projects
-```
-
-So treat `/kbagent:setup` as a shortcut, and the manual sequence below as the path that actually completes. Known limitation, tracked in [keboola/cli#704](https://github.com/keboola/cli/issues/704): once the sign-in can happen in chat, the short flow becomes the real one.
+The other four clients have no way to run it. They also cannot finish the sign-in it performs, because the browser hands back to a terminal ([keboola/cli#704](https://github.com/keboola/cli/issues/704)). So they install the CLI and connect the project in a terminal first, then add the plugin from their own UI.
 
 <!-- `/kbagent:setup` behaviour from keboola/cli#625; the login hand-off back to a terminal was reproduced in Claude Code, Cursor and Claude Desktop on 2026-08-26 (keboola/cli#704). Marketplace `keboola-claude-kit` from keboola/ai-kit#102. -->
 
 ## Set up your client
 
 :::tip[You sign in once per machine]
-Every client reads the same local kbagent config, so a sign-in or a connected project from one tool is already there in the next one. Set it up in your terminal or in Claude Code, and Cursor and Claude Desktop see it with no further work.
+Every tool reads the same local config, so a project you connected from one client is already there in the others. Run `kbagent project list`. If your project is listed, skip the terminal steps and go straight to your client's plugin steps.
 :::
+
+### First, in a terminal
+
+Every client except Claude Code starts here.
+
+1. [Install the CLI](/cli/getting-started/) for your operating system.
+2. Connect your project:
+
+   ```bash
+   kbagent project add --project 'My project' --url https://connection.keboola.com
+   ```
+
+3. Check what you have: `kbagent doctor`
+
+Use a real terminal for all three. `project add` prompts for a token with hidden input, and that needs a TTY an agent's tool-run shell does not have. Interactively you need no token at all, because it signs you in through the browser.
+
+`kbagent doctor` sits here, with the steps it checks. It looks for a plugin under `~/.claude/plugins/cache`, so it cannot see a Cursor, VS Code or ChatGPT app install, and it cannot confirm the plugin half of your setup.
+
+Then follow your client below.
 
 ### Claude Code
 
-Plugin support: marketplace by command, slash commands work.
+Claude Code is already a terminal, so it can do the whole setup itself.
 
-1. Start Claude Code: `claude`
+1. Start it: `claude`
 2. Add the marketplace: `/plugin marketplace add keboola/ai-kit`
 3. Install the plugin: `/plugin install kbagent@keboola-claude-kit`
-4. Optionally run `/kbagent:setup https://connection.keboola.com` to install the CLI and check what is already connected.
-5. In a terminal, sign in:
-   <!-- kbagent-check: skip-next -->
-   `kbagent auth login --stack https://connection.keboola.com --register-projects`
-6. Verify: `kbagent doctor`
-
-### Cursor
-
-Plugin support: marketplace through the UI, slash commands work. The plugin is optional here, the flow completes without it.
-
-1. Open **Add Marketplace → Import from Github** and paste the **full URL**: `https://github.com/keboola/ai-kit`
-2. Install the `kbagent` plugin from the marketplace.
-3. In a terminal, sign in:
-   <!-- kbagent-check: skip-next -->
-   `kbagent auth login --stack https://connection.keboola.com --register-projects`
-4. Verify: `kbagent doctor`
-
-:::caution[Cursor needs the full URL]
-The `keboola/ai-kit` short form that works in Claude Code and Claude Desktop is **rejected** by Cursor with `[invalid_argument] Error`, which says nothing about the cause. Paste `https://github.com/keboola/ai-kit` instead.
-:::
+4. Run the setup: `/kbagent:setup https://connection.keboola.com`
+   <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
+5. Ask it: `kbagent list my projects`
 
 ### Claude Desktop
 
-Plugin support: marketplace through the UI, but **no slash commands at all**. `/kbagent:setup` answers "Unknown command" and `/plugin` answers "/plugin isn't available in this environment", so Claude Desktop can never run the setup command however the plugin got installed. Set up by hand.
+Claude Desktop has no slash commands in its chat. `/plugin` answers "/plugin isn't available in this environment", and both `/kbagent:setup` and `/kbagent` answer "Unknown command". The plugin goes in through the UI instead.
 
-1. [Install the CLI](/cli/getting-started/) for your operating system.
-2. In a terminal, sign in:
-   <!-- kbagent-check: skip-next -->
-   `kbagent auth login --stack https://connection.keboola.com --register-projects`
-3. Verify: `kbagent doctor`
+1. Do the terminal steps above.
+2. Open **Customise → Plugins → Add → Add from marketplace** and paste `keboola/ai-kit`. The short form works here.
+3. Find the card titled **kbagent** and click its plus.
+   <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
+4. Ask in the chat: `kbagent list my projects`
 
-To add the plugin anyway (it gives the chat the `keboola-expert` subagent and the skill), open **Customise → Plugins → Add → Add from marketplace**, enter `keboola/ai-kit` (the short form works here), then install the card titled **Kbagent** with its **plus button**. Don't pick `keboola-cli` in that same directory: that is the unrelated legacy `kbc` CLI.
+Type that last one without a leading slash. `/kbagent …` fails here.
 
-### VS Code, Codex, Devin Desktop
+### Cursor
 
-No kbagent plugin exists for these clients yet, so there is no `/kbagent:setup` to run.
+1. Do the terminal steps above.
+2. Open **Customise → Browse Marketplace → Add Marketplace → Import from GitHub**.
+3. Paste the full URL as the repository: `https://github.com/keboola/ai-kit`
+4. Find the `kbagent` row under **Keboola Ai Kit** and press **Add**.
+   <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
+5. Ask in the chat: `kbagent list my projects`
 
-1. Open the client.
-2. [Install the CLI](/cli/getting-started/) for your operating system.
-3. Run `kbagent context` so the agent learns the command surface.
-4. In a terminal, sign in:
-   <!-- kbagent-check: skip-next -->
-   `kbagent auth login --stack https://connection.keboola.com --register-projects`
-5. Verify: `kbagent doctor`
+:::caution[Cursor needs the full URL]
+The short `keboola/ai-kit` form that works in Claude Code and Claude Desktop is rejected here with `[invalid_argument] Error`, which says nothing about the cause. Paste `https://github.com/keboola/ai-kit`.
+:::
+
+### VS Code
+
+VS Code's Copilot reads the Claude plugin format (`.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`), so AI Kit works there unchanged.
+
+1. Do the terminal steps above.
+2. Open the Command Palette (`⇧⌘P`, or `Ctrl+Shift+P` on Windows) and run **Chat: Install Plugin from Source**. Several palette entries start with "Install", so match the whole name.
+3. Paste `https://github.com/keboola/ai-kit` as the source, then confirm the Trust prompt. VS Code asks because a plugin can run code.
+4. Pick `kbagent` from the picker.
+   <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
+5. Open the Chat panel (`⌃⌘I`, or `Ctrl+Alt+I` on Windows) and ask: `kbagent list my projects`
+
+### ChatGPT app
+
+The ChatGPT app, formerly Codex, accepts `.claude-plugin/marketplace.json` and `git-subdir` sources, which is how AI Kit publishes the plugin. Nothing Codex-specific is needed.
+
+1. Do the terminal steps above.
+2. In **Settings**, turn on **Developer mode**. Without it the app has nowhere to add a marketplace from. Its warning mentions unverified connectors and permanent data loss. Here that means the plugin runs the CLI under your own login, so it can do whatever your token can.
+3. In the plugins view, open **Add → Add a marketplace** and paste `https://github.com/keboola/ai-kit` as the source. Leave **Git ref** and **Sparse paths** empty. The grey text in them is placeholder, and `plugins/codex` in particular reads like a value you should keep.
+4. Switch to the **Personal** tab, where an added marketplace is listed, and install `kbagent`.
+   <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
+5. Ask in the chat: `kbagent list my projects`
+
+The same two steps work from a shell:
+
+```bash
+codex plugin marketplace add https://github.com/keboola/ai-kit
+codex plugin add kbagent@keboola-claude-kit
+```
 
 ### Plain terminal
 
-No AI client involved: [install the CLI](/cli/getting-started/), [connect your project](/cli/getting-started/), and verify with `kbagent doctor`.
+No AI client involved: [install the CLI](/cli/getting-started/), [connect your project](/cli/getting-started/), verify with `kbagent doctor`, and list what you can reach with `kbagent project list`.
 
-<!-- Per-client behaviour (marketplace form accepted, slash-command availability, `/kbagent:setup` outcome, Claude Desktop's Customise → Plugins path, plus button, "Kbagent" card title, Cursor's Import from Github full-URL requirement and its [invalid_argument] Error) tested against live clients on 2026-08-26. -->
+<!-- Per-client routes (marketplace form accepted, slash-command availability, `/kbagent:setup` outcome, Claude Desktop's Customise → Plugins path and "kbagent" card, Cursor's Import from GitHub full-URL requirement and its [invalid_argument] Error, VS Code's "Chat: Install Plugin from Source" palette entry, the ChatGPT app's Developer mode and Personal tab) tested against live clients on 2026-08-26; the same routes are what the Keboola UI shows on Settings → Developer settings → Agentic CLI. Devin is hidden from that surface, so it gets no per-client route here. -->
 
 ## The `context` reference
 
