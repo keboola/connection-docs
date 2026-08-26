@@ -47,7 +47,15 @@ name, the ocean basin it sits in and — where a depth was recorded — its dept
 dumbo octopus (*Grimpoteuthis challengeri*) recorded 4,838 meters below the surface. It is not a demo — this is the mechanism a production
 project uses, just smaller. And this is where it ends up:
 
-![The finished app — a world map of every sighting, with filters and a nearest-octopus search](/getting-started/app/octopus-map-preview.png)
+<video autoplay loop muted playsinline poster="/getting-started/map-tour-poster.png" aria-label="The finished app — a world map of every sighting, toured stop by stop: the North Atlantic, the nearest sighting to Prague, and the deepest record">
+  <source src="/getting-started/map-tour.mp4" type="video/mp4" />
+</video>
+
+<!-- Animated tour of the finished app's map (scripts/compositor.html scene map-tour, local,
+gitignored; background = the committed octopus-map-preview.png app screenshot). The three stops
+are the arc's verified numbers: North Atlantic 2,632 sightings, Prague nearest = musky octopus
+495 km, deepest = Grimpoteuthis challengeri 4,838 m. -->
+
 
 ## Before you start
 
