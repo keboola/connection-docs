@@ -444,6 +444,21 @@ export const sidebar = [
         ],
       },
       { slug: "storage/byobq" },
+      {
+        label: "Storage API",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/api" },
+          { slug: "storage/api/configurations" },
+          { slug: "storage/api/import-export" },
+          { slug: "storage/api/importer" },
+          { slug: "storage/api/tde-exporter" },
+          { slug: "storage/api/clients/python-client" },
+          { slug: "storage/api/clients/r-client" },
+          { slug: "storage/api/clients/php-client" },
+          { slug: "storage/api/clients/docker-cli" },
+        ],
+      },
     ],
   },
   {
