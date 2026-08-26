@@ -22,21 +22,30 @@ Fill in the **name**, and, optionally, the **description**. Then click **Add Row
 
 ![Screenshot - Add Row Modal](/components/extractors/other/azure-cost/modal.png)
 
-In the [Configuration Row](/components/#configuration-rows) fill in 
+In the [Configuration Row](/components/#configuration-rows) fill in:
+
 - **Destination Table** -- the name of the table in the project's bucket where the results are written.
-- **Grouping Dimension** -- the columns you are targeting.
-- **Time Frame** -- the predefined or custom time frame.
-- And, optionally, other fields. 
+- **Type** -- the cost data type: `ActualCost` (default), `AmortizedCost`, or `Usage`.
+- **Aggregation** -- the cost metric to aggregate: `Cost` (default), `CostUSD`, `PreTaxCostUSD`, `UsageQuantity`, or `PreTaxCost`.
+- **Granularity** -- time granularity of the results: `Daily` (default), `Monthly`, or `None`.
+- **Grouping Dimension** -- one or more columns to group costs by. Available values: `ServiceName`, `ResourceGroupName`, `ResourceLocation`, `ResourceType`, `ResourceId`, `MeterCategory`, `MeterSubCategory`, `Meter`, `ServiceTier`, `BillingPeriod`, `InvoiceNumber`, `PartNumber`, `PricingModel`, `ChargeType`, `PublisherType`, `ReservationId`, `ReservationName`, `Frequency`, `ResourceGuid`.
+- **Time Frame** -- the predefined or custom time frame: `WeekToDate`, `MonthToDate` (default), `BillingMonthToDate`, `TheLastMonth`, `TheLastBillingMonth`, or `Custom`. When `Custom` is selected, specify a **Start** and **End** date in `YYYY-MM-DD` format.
 
 ![Screenshot - Configuration Row](/components/extractors/other/azure-cost/row.png)
 
-If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones. 
+If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones.
 This way you can import new data, e.g., from today, without deleting the data imported before.
+
+### Authentication
+The connector supports two authentication methods:
+
+- **OAuth** -- click **Authorize Account** to authorize with your Azure account. You can optionally specify a **Tenant ID** to restrict authorization to a specific Azure AD tenant.
+- **Service Principal** -- provide `tenant`, `username`, and `password` credentials for a registered Azure AD application. This method is useful for automated or headless scenarios.
 
 ## Output Table
 
 The output table contains the following columns:
-- Time dimension, if enabled; art of the primary key
+- Time dimension, if enabled; part of the primary key
 - Columns from the grouping dimension; part of the primary key
 - **Cost**/**Usage** column
 - **Currency** column
