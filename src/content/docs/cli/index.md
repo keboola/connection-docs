@@ -12,10 +12,6 @@ It's just as comfortable in your own hands: one tool for every project from the 
 
 <!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
 
-:::caution[Beta]
-kbagent is in beta. Commands and output formats may still change.
-:::
-
 :::note
 kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
 <!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
