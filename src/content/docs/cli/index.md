@@ -43,7 +43,6 @@ curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
 
 Connect your projects. A browser opens, and you finish the sign-in there:
 
-<!-- kbagent-check: skip-next. The vendored reference is v0.76.1, which predates the `auth` group; the v0.91.0 bump that adds it is PR #1044. Drop this skip once that merges. -->
 ```bash
 kbagent auth login --stack https://connection.keboola.com --register-projects
 ```

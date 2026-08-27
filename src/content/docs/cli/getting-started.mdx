@@ -85,9 +85,9 @@ Confirm it's on your `PATH` (all platforms):
 
 ```console
 $ kbagent --version
-kbagent v0.66.0
+kbagent v0.91.0
 ```
-{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. Windows block (winget uv + release wheel + `uv tool update-shell`, Git-bash and self-contained-zip alternatives, no WinGet package, stale Chocolatey) copied from the "Windows" section of keboola/cli's README, which is the source of truth for it. */}
+{/* Verified locally 2026-07-13 (macOS) via uv; version sample tracks the vendored command reference. Windows block (winget uv + release wheel + `uv tool update-shell`, Git-bash and self-contained-zip alternatives, no WinGet package, stale Chocolatey) copied from the "Windows" section of keboola/cli's README, which is the source of truth for it. */}
 
 :::note
 On macOS and Linux the install script does not touch the `PATH` of the shell that ran it. If `kbagent: command not found` comes back right afterwards, the install worked and your `PATH` has not caught up. Run `source $HOME/.local/bin/env`, or open a new terminal.
@@ -107,7 +107,6 @@ At your own keyboard, this is the shortest route. It needs no token.
 
 First sign in to the stack:
 
-{/* kbagent-check: skip-next. The vendored reference is v0.76.1, which predates the `auth` group; the v0.91.0 bump that adds it is PR #1044. Drop this skip and the one below once that merges. */}
 ```bash
 kbagent auth login --stack https://connection.keboola.com
 ```
@@ -116,7 +115,6 @@ That opens a browser, and you finish the sign-in there. On a machine with no bro
 
 Then pick which projects to register locally:
 
-{/* kbagent-check: skip-next. See the note above. */}
 ```bash
 kbagent auth register-projects
 ```

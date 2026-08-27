@@ -45,7 +45,6 @@ Every tool reads the same local config, so a project you connected from one clie
 Every client except Claude Code starts here.
 
 1. [Install the CLI](/cli/getting-started/) for your operating system.
-   <!-- kbagent-check: skip-next. `kbagent auth` lands in the vendored reference with the v0.91.0 bump (PR #1044). -->
 2. [Connect your project](/cli/getting-started/#step-2--connect-your-project). Sign in with `kbagent auth login`, or register it with a Storage API token.
 3. Check what you have: `kbagent doctor`
 
@@ -161,7 +160,7 @@ export KBAGENT_CONVERSATION_ID="<unique-id>"
 ## How it fits with the other AI tools
 
 - **kbagent** — the agent's hands on your projects from the terminal, with sandboxing.
-- **[MCP server](/ai/mcp-server/)** — direct tool calls over MCP; kbagent can also call MCP tools via `kbagent tool`.
+- **[MCP server](/ai/mcp-server/)** — direct tool calls over MCP.
 - **[AI Kit](/ai/ai-kit/)** — coding-assistant plugins for building Keboola components and apps.
 - **[Kai](/kai/)** — the in-product assistant; `kbagent kai ask -m "why did last night's load fail?"` puts the same assistant in your shell *(beta)*.
 
