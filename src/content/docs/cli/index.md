@@ -35,12 +35,22 @@ kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) docu
 
 ## In one minute
 
+Install it (recommended on macOS/Linux; Windows has its own path under [Get started](/cli/getting-started/)):
+
 ```bash
-# install (recommended on macOS/Linux; Windows → Get started)
 curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
-# connect a project
-kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
-# explore
+```
+
+Connect your projects. A browser opens, and you finish the sign-in there:
+
+<!-- kbagent-check: skip-next. The vendored reference is v0.76.1, which predates the `auth` group; the v0.91.0 bump that adds it is PR #1044. Drop this skip once that merges. -->
+```bash
+kbagent auth login --stack https://connection.keboola.com --register-projects
+```
+
+Then explore:
+
+```bash
 kbagent doctor
 kbagent job list --limit 5
 kbagent search "customer_id"
@@ -50,7 +60,7 @@ A minute in, `doctor` has confirmed the connection, you've seen your last five j
 
 ## Why a CLI (and not just the UI)?
 
-The UI is great for one project, one change at a time. kbagent is for the things the UI makes hard: doing the same thing across **many projects at once**, putting your configuration **under version control**, wiring Keboola into **CI/CD**, and letting an **AI agent** do the work while you keep approval of anything destructive. It talks only to your Keboola stacks, stores its connections locally, and never needs a browser.
+The UI is great for one project, one change at a time. kbagent is for the things the UI makes hard: doing the same thing across **many projects at once**, putting your configuration **under version control**, wiring Keboola into **CI/CD**, and letting an **AI agent** do the work while you keep approval of anything destructive. It talks only to your Keboola stacks and stores its connections locally. Signing in opens a browser once; after that every command runs in your terminal, and a Storage API token skips the browser entirely.
 
 ## This section
 
