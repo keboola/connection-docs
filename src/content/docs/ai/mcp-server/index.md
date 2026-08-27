@@ -301,13 +301,13 @@ The following tools are classified as read-only (they do not modify data). The l
 |----------|-------|
 | Components | `get_configs`, `get_components`, `get_config_examples`, `run_sync_action` |
 | Flows | `get_flows`, `get_flow_examples`, `get_flow_schema` |
-| Storage | `get_buckets`, `get_tables` |
+| Storage | `get_buckets`, `get_shared_buckets`, `get_tables` |
 | SQL | `query_data` |
 | Semantic | `get_semantic_context`, `get_semantic_schema`, `search_semantic_context`, `validate_semantic_query` |
 | Data Apps | `get_data_apps` |
 | Jobs | `get_jobs` |
 | Search | `search`, `find_component_id` |
-| Project | `get_project_info` |
+| Project | `get_accessible_projects`, `get_project_info`, `set_project_scope` |
 | Documentation | `docs_query` |
 
 ### Examples
