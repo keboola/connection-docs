@@ -17,13 +17,11 @@ the Google authorization. After that, pick a tab in *Set it up*. Doing it with K
 part of the prompt; doing it yourself, you run it below the tabs. Checking the result is shared.
 
 {/* Tutorial-type page (step 4 of 7). 2026-08-25: dataset swapped to the octopus atlas
-(PRDCT-487 arc rework); screenshots pend the re-walk. Step 1 verified live in project 264 on 2026-08-04: searching
-"Sheets" returns 5 components with Google Sheets Data Source and Data Destination adjacent, which is
-why the page now names the type explicitly. Step 2 verified the same day: Add Component on the
-destination card opens a dialog whose only button is Connect To My Data (the HTTP connector also
-offers Use With Demo Data because it declares has-sample-data; this one does not). Steps 4-12 need a
-Google OAuth authorization only the owner can create, so their captures are still the legacy
-ones. */}
+(PRDCT-487 arc rework). Stills reshot live in 264 on 2026-08-27 (01, writing2, 3, 7, 11) against
+the octopus configs. Steps 4-6 keep the legacy captures deliberately — they are Google's own
+consent screens, dataset-independent, and redoing the OAuth would invalidate the live
+authorization. Steps 8-10 have no captures until the fresh-project walk (see the comment at
+step 8). */}
 
 ## What you need
 
@@ -58,7 +56,8 @@ around authorizations. */}
 
    ![Screenshot - Search for the Google Sheets destination](/getting-started/write/01-find-destination.png)
 
-2. Click **Add Component**, then **Connect To My Data** — the only button here, unlike the HTTP
+2. Click **Add Component** (**Create Configuration** on the card once the component already has
+   configurations), then **Connect To My Data** — the only button here, unlike the HTTP
    connector in [step 2](/getting-started/load/), which also offered demo data.
 
    ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
@@ -129,7 +128,7 @@ chips, and the octopus pointer on the Success badge. */}
 
 **Check:** the sheet holds every row of `octopus_atlas`, joined columns included, exactly as
 in [Run it and check the result](#run-it-and-check-the-result). If it does not, switch to the
-**Do it yourself** tab and edit the sheet Kai created — its **Destination** and **Options**, steps 9
+**Do it yourself** tab and edit the sheet Kai created — its spreadsheet and sheet settings, steps 9
 and 10 — since everything Kai set is editable there.
 
 </TabItem>
@@ -137,28 +136,28 @@ and 10 — since everything Kai set is editable there.
 
 **Pick the table and the sheet**
 
-7. Click **New Table**.
+7. Click **New Sheet**.
 
-   ![Screenshot - New table](/getting-started/write/writing7.png)
+   ![Screenshot - New sheet](/getting-started/write/writing7.png)
 
-8. Select `out.c-octopus-atlas.octopus_atlas` and click **Next**.
+8. The **Add Sheet** wizard opens — three short steps you move through with **Next**. On the
+   first, pick `out.c-octopus-atlas.octopus_atlas` as the **Input Table** and click **Next**.
+   (The list hides tables this configuration already writes; an empty configuration offers
+   everything in Storage.)
 
-   ![Screenshot - Select the Storage table](/getting-started/write/writing8.png)
+   {/* Wizard re-verified live in 264 on 2026-08-27: the button is NEW SHEET, the dialog is
+   "Add Sheet", a PREVIOUS/NEXT stepper; first step = Input Table plus an optional Show details
+   toggle (columns / changed-in-last / data filter). Screenshots for steps 8-10 pend a
+   fresh-project walk — 264's wizard hides octopus_atlas because the existing sheet already
+   maps it, so an honest capture is impossible there. */}
 
-   You are now in a small wizard with tabs — **Source**, **Destination**, **Options** —
-   which is why the next two steps feel like one long form.
-
-9. On **Destination**, choose **New spreadsheet** and name the *spreadsheet* — the file that
+9. On the spreadsheet step, choose **New spreadsheet** and name the *spreadsheet* — the file that
    will appear in Drive. Use `[TUTORIAL] Octopus atlas`. An existing spreadsheet works too;
    you pick it from the authorized account's Drive. Click **Next**.
 
-   ![Screenshot - New spreadsheet](/getting-started/write/writing9.png)
-
-10. On **Options**, name the *sheet* — the tab inside that file — `octopus_atlas`, select
+10. On the last step, name the *sheet* — the tab inside that file — `octopus_atlas`, select
     **Update rows**, and click **Save Sheet**. This creates the empty spreadsheet in the authorized
     account, ready to receive data.
-
-    ![Screenshot - Name and save the sheet](/getting-started/write/writing10.png)
 
     **Update rows** replaces the sheet's contents on every run. The alternative appends to the
     bottom instead — right for a log, wrong for a table you want to reflect current state.

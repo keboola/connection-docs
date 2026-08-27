@@ -17,16 +17,16 @@ Step 5 of the [Getting Started](/getting-started/) arc.
 notifications come afterwards and are yours either way.
 
 {/* Tutorial-type page (step 5 of 7). 2026-08-25: dataset swapped to the octopus atlas (PRDCT-487
-arc rework); flow names, closing Kai prompts and their check numbers are re-derived from the
-shipped CSVs offline and pend the live re-run in 264, as do all screenshots. UI mechanics below
-walked live in 264 on 2026-08-04: built and ran a tutorial flow, created a schedule and read the
-Notifications tab. Corrections found: phases are labelled "Phase 1/2/..." not "Step 1"; the + between
-phases adds a PHASE, not a task; the Builder needs an explicit Save before Run flow is enabled;
-scheduling is Schedules tab > Create Schedule > Set Up Schedule, NOT "Set Schedule" as /flows/ still
-says; the Notifications tab edits in place with Success/Errors/Processing cards and has no "Edit
-Notifications" button and no Warnings card, contrary to /management/notifications/. The third phase
-(Google Sheets destination) is not yet in the screenshots — it needs an OAuth authorization the
-owner has to create. The closing section, "Ask it the question you started with", is grounded in
+arc rework); the whole flow was then built, run and scheduled live in 264 (2026-08-25/26), and all
+screenshots reshot against it on 2026-08-27 — including the third (Google Sheets) phase, now that
+the OAuth exists. The captures show the finished flow with renamed phases (Extract/Transform/Load);
+fresh phases are labelled "Phase 1/2/...", which the italic note under step 4 covers. UI mechanics
+walked live in 264 on 2026-08-04 and re-checked 2026-08-27: the + between phases adds a PHASE, not
+a task; the Builder needs an explicit Save before Run flow is enabled; scheduling is Schedules tab >
+Create Schedule > Set Up Schedule, NOT "Set Schedule" as /flows/ still says; the Notifications tab
+edits in place with Success/Errors/Processing cards and has no "Edit Notifications" button and no
+Warnings card, contrary to /management/notifications/. Create Flow now opens a chooser
+("Get your data connected!") — see the VERIFY at step 1. The closing section, "Ask it the question you started with", is grounded in
 /kai/ (Query databases, calculate metrics), /kai/use-cases/#data-exploration and
 /kai/settings/#tool-permissions (read-only tools default to Always allow); its numbers are
 re-derived from public/getting-started/*.csv (North Atlantic 2,632 sightings = 26%, 50 distinct
@@ -113,21 +113,27 @@ gets told about is just a button.
 **Build the flow**
 
 1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
-   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**. Name it `[TUTORIAL] Octopus pipeline`, add a description, and click
-   **Create Flow** again in the dialog.
+   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**; on the
+   screen that opens, take **Build It Yourself** — the prompt field above it is the Kai path
+   from the other tab. Name the flow `[TUTORIAL] Octopus pipeline` and add a description.
 
    ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
+
+   {/* Chooser screen ("Get your data connected!", Prompt Input / Build It Yourself) verified
+   live in 264 on 2026-08-27. VERIFY(owner): where exactly the name is entered after Build It
+   Yourself is unverified — confirming means creating a flow object in 264; check during the
+   fresh-project walk. */}
 
 2. You land in the **Builder** on an empty canvas, with an **Add Task** menu already open:
    **Component**, **Notification**, **Variable** and **Build with Kai**. Choose **Component**.
 
    ![Screenshot - The Add Task menu](/getting-started/automate/02-add-task.png)
 
-3. **Select Component** opens. It lists what the project has, with a configuration count each —
-   pick **HTTP**, then the `[TUTORIAL] Octopus sightings` configuration. It drops onto the canvas as a
-   task inside a box labelled **Phase 1**.
+3. A component picker opens, listing what the project has, grouped by component with each
+   one's configurations — pick **HTTP**, then the `[TUTORIAL] Octopus sightings` configuration.
+   It drops onto the canvas as a task inside a box labelled **Phase 1**.
 
-   ![Screenshot - Select the component](/getting-started/automate/03-select-component.png)
+   ![Screenshot - Pick the component and configuration](/getting-started/automate/03-select-component.png)
 
 4. Click the **+** below Phase 1. That is the control that starts a **new phase** — the plus
    between phases adds a phase, not a task to the one above it. Add the
@@ -135,6 +141,10 @@ gets told about is just a button.
    the tables have landed before the SQL runs.
 
    ![Screenshot - A second phase](/getting-started/automate/04-second-phase.png)
+
+   *The captures on this page show the finished flow, where the phases have been renamed —
+   **Extract**, **Transform**, **Load**. Yours start life as **Phase 1**, **Phase 2**, … until
+   you rename them.*
 
 5. Repeat for a third phase holding the Google Sheets destination configuration. If you skipped
    [step 4](/getting-started/write/), stop at two phases.
@@ -146,9 +156,6 @@ gets told about is just a button.
 You now have three phases: the load, then the transformation, then the delivery.
 
 ![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
-
-*The capture above shows the first two phases; the delivery phase sits below them, off the bottom
-of the frame.*
 
 
 
