@@ -18,8 +18,6 @@ This walkthrough takes you from nothing to browsing a real project with [kbagent
 
 Pick your operating system:
 
-{/* VERIFY(owner: Padak): provisional canon — install script marked Recommended on macOS/Linux (matches the landing page and README), uv as the alternative. Flip the labels if uv-first is preferred. */}
-
 <Tabs syncKey="os">
   <TabItem label="macOS">
     **Recommended** — the prebuilt wheel via the install script:
@@ -61,6 +59,8 @@ Pick your operating system:
 
     Skip the first line if you already have [uv](https://docs.astral.sh/uv/). That line installs uv itself. The whole block works in the in-box Windows PowerShell 5.1, so you don't need PowerShell 7.
 
+    The second line calls the GitHub API without a token. If you are rate-limited or behind a proxy that blocks it, `$ver` comes back empty and the third line asks uv for a URL that does not exist, which surfaces as a 404. Check with `echo $ver`. If it is empty, read the version off the [releases page](https://github.com/keboola/cli/releases/latest) and set it by hand, e.g. `$ver = "0.91.0"`.
+
     Then **open a new shell**. `uv tool update-shell` edits the persisted `PATH`, and the session you ran it in will not see the change.
 
     Two alternatives:
@@ -99,27 +99,53 @@ On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv
 
 ## Step 2 — Connect your project
 
-Register the project with the CLI so you (or your agent) can reach it:
+Register a project with the CLI so you (or your agent) can reach it. There are two ways in: sign in through the browser, or hand kbagent a Storage API token.
+
+### Sign in through the browser
+
+At your own keyboard, this is the shortest route. It needs no token.
+
+First sign in to the stack:
+
+{/* kbagent-check: skip-next. The vendored reference is v0.76.1, which predates the `auth` group; the v0.91.0 bump that adds it is PR #1044. Drop this skip and the one below once that merges. */}
+```bash
+kbagent auth login --stack https://connection.keboola.com
+```
+
+That opens a browser, and you finish the sign-in there. On a machine with no browser it prints a code you type into a page on another device instead.
+
+Then pick which projects to register locally:
+
+{/* kbagent-check: skip-next. See the note above. */}
+```bash
+kbagent auth register-projects
+```
+
+It shows a picker of every project the account can reach and registers the ones you choose. Add `--all` to register all of them without the picker.
+
+Both commands need a real terminal. There is no headless path through `auth login`.
+
+### Or register one project with a token
 
 ```bash
-kbagent project add --project prod --url https://connection.keboola.com
+kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
 ```
+
+`project add` is the static-token route. It reads the token from `--token`, or from `KBC_TOKEN` if you'd rather keep it off the command line. With neither, it prompts with hidden input, so the value never lands in your shell history. That prompt needs a TTY an agent's tool-run shell does not have.
 
 Swap the URL for your own stack. `prod` is an **alias** you pick. You use it with `--project` later, or set it as the default with `kbagent project use prod`. Add as many projects as you want.
 
-Run this in a real terminal. Interactively you need no token, because `project add` signs you in through the browser. When it does ask for a token it prompts with hidden input, so the value never lands in your shell history, and that prompt needs a TTY an agent's tool-run shell does not have.
-
-You sign in once per machine. Every tool reads the same local config, so a project you connected here is already there in Claude Code, Cursor, VS Code and the rest. `kbagent project list` shows what is registered.
+You sign in once per machine. Every tool reads the same local config, so a project you connected here is already there in Claude Code, Cursor, VS Code and the rest. `kbagent project list` shows what is registered, and its `Auth` column says `session` or `static` per project.
 
 ### When you need a token
 
-CI, containers, headless hosts, and anything else that cannot open a browser need a Storage API token. A few features need a static token rather than a browser session too: Kai, data apps, the semantic layer, streams, and the Python SDK.
+CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. A few features need a static token rather than a browser session too: Kai, data apps, the semantic layer, streams, and the Python SDK.
 
 **These docs cannot create a token for you.** Open your project in the Keboola UI and go to **Settings → Developer settings → Agentic CLI**. That page builds the exact `kbagent project add` command for your project and your stack, and it can include a read-only token in it. Copy it from there.
 
-Pass the token as `--token`, or set `KBC_TOKEN` so it stays off the command line.
+If you don't see **Agentic CLI** in your project's settings, create the token yourself under **Settings → API Tokens** and pass it as `--token`. [API tokens](/management/project/tokens/) covers that screen.
 
-{/* Step 2 mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>`, the once-per-machine sign-in, and the read-only token that page can put into the command. Static-token-only features (Kai, data apps, semantic layer, streams, Python SDK) from keboola/cli docs/auth.md. */}
+{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features (Kai, data apps, semantic layer, streams, Python SDK) from keboola/cli docs/auth.md on main. */}
 
 A Storage API token is enough for browsing. Some commands need an admin (master) token, e.g. creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 
