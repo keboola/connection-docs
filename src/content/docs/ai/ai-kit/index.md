@@ -7,9 +7,9 @@ slug: 'ai/ai-kit'
 
 AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components, data apps, and maintain code quality using AI-powered tools.
 
-AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides four plugins that cover different aspects of Keboola development, from general code quality to building production-ready components and data applications, plus driving your projects from the terminal.
+AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and data applications to driving your projects from the terminal and modelling your semantic layer.
 
-The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build Streamlit data apps, review code for security issues, and automate common development workflows.
+The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build data apps, review a project for SQL and security problems, and automate common development workflows.
 
 ## Installation
 
@@ -22,39 +22,20 @@ To install AI Kit, run the following command in your AI coding assistant:
 After installation, enable the plugins you need:
 
 ```bash
-/plugin install developer
-/plugin install component-developer
-/plugin install dataapp-developer
+/plugin install component-developer@keboola-claude-kit
+/plugin install dataapp-developer@keboola-claude-kit
 /plugin install kbagent@keboola-claude-kit
+/plugin install keboola-cli@keboola-claude-kit
+/plugin install keboola-git@keboola-claude-kit
+/plugin install powerbi-to-sl@keboola-claude-kit
+/plugin install sl-toolkit@keboola-claude-kit
 ```
 
 `keboola-claude-kit` is the marketplace name this repository publishes, and the one to install Keboola plugins from.
 
+<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-08-26: component-developer 3.3.2, dataapp-developer 1.5.1, kbagent 0.91.0, keboola-cli 1.1.1, keboola-git 1.0.1, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
+
 ## Available Plugins
-
-### Developer Plugin
-
-The Developer Plugin provides a comprehensive toolkit for code quality, security analysis, and workflow automation. It includes four specialized agents and a PR creation command.
-
-**Agents:**
-
-The **Code Reviewer** (`@code-reviewer`) is an expert code reviewer that checks for bugs, logic errors, security vulnerabilities, and project guidelines compliance. It uses confidence-based filtering to report only high-priority issues.
-
-The **Security Agent** (`@code-security`) performs cross-language security analysis for Python, Go, PHP, JavaScript, and other languages. It integrates with automated security scanners and identifies CWE/CVE vulnerabilities with actionable fixes.
-
-The **Code Mess Detector** (`@code-mess-detector`) analyzes code written during rapid prototyping for common quality issues like inconsistent naming, missing error handling, code duplication, and dead code. It generates detailed reports for systematic cleanup.
-
-The **Code Mess Fixer** (`@code-mess-fixer`) systematically applies fixes based on Code Mess Detector reports, working through issues by priority and tracking progress.
-
-**Commands:**
-
-The `/create-pr` command analyzes your changes and creates a pull request with an AI-generated title and description, following conventional commit format.
-
-**Integrations:**
-
-The plugin includes Linear MCP integration for issue tracking and project management, and auto-installs team-wide permission settings for safe git operations.
-
-[View Developer Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/developer)
 
 ### kbagent Plugin
 
@@ -90,6 +71,30 @@ The component should support incremental loads based on a timestamp field.
 
 [View Component Developer Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/component-developer)
 
+### Keboola CLI Plugin
+
+The Keboola CLI Plugin is a project management and review toolkit built on the older `kbc` sync CLI. It ships a ten-agent review team that analyses a project for SQL quality, security, performance, financial logic, and template readiness. It is a separate tool from the kbagent plugin above. If you want the agent interface to your projects, install `kbagent`.
+
+[View Keboola CLI Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/keboola-cli)
+
+### Keboola Git Plugin
+
+The Keboola Git Plugin works with Keboola-managed Git (Forgejo) repositories for Python/JS data apps, which can host their source in Keboola rather than GitHub. It provisions repositories, mints push credentials, and copies source between GitHub and Keboola git through the kbagent CLI. It also carries the 15 MB push cap and the build-at-deploy workaround it forces.
+
+[View Keboola Git Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/keboola-git)
+
+### Semantic Layer Toolkit
+
+The `sl-toolkit` plugin inspects, validates, and builds semantic layer models through the metastore API. `/sl-show` lists a model's datasets, metrics, and relationships, `/sl-validate` checks it for phantom fields and dangling references, and `/sl-build` walks a greenfield model from schema discovery to push. Adding and editing model objects works conversationally, with no slash command.
+
+[View Semantic Layer Toolkit Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/sl-toolkit)
+
+### Power BI to Semantic Layer
+
+The `powerbi-to-sl` plugin migrates an existing Microsoft Power BI semantic model into a Keboola semantic layer model, translating tables, columns, measures, and relationships. It is the brownfield companion to `sl-toolkit`, which generates a new model instead.
+
+[View Power BI to Semantic Layer Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/powerbi-to-sl)
+
 ### Data App Developer Plugin
 
 The Data App Developer Plugin is a specialized toolkit for building production-ready Streamlit data apps for Keboola deployment. It features a systematic validate, build, and verify workflow that ensures features work correctly the first time.
@@ -117,7 +122,7 @@ The agent will automatically validate the schema, query distinct values, create 
 
 ## Best Practices
 
-When using AI Kit, start with the appropriate plugin for your task. Use the Developer Plugin for general code quality and security reviews, the Component Developer Plugin when building new Keboola components or adding features to existing ones, and the Data App Developer Plugin when creating or modifying Streamlit data apps.
+When using AI Kit, start with the appropriate plugin for your task. Use the Component Developer Plugin when building new Keboola components or adding features to existing ones, the Data App Developer Plugin when creating or modifying data apps, the kbagent Plugin to drive your projects from the terminal, and the Semantic Layer Toolkit when modelling metrics.
 
 For component development, always follow the two-PR workflow strategy: create a base PR with the cookiecutter-generated structure, then a separate implementation PR with your custom logic. This prevents premature CI/CD triggers.
 
