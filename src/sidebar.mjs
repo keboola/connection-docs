@@ -292,7 +292,7 @@ export const sidebar = [
             items: [
               { label: "Overview", slug: "components/extractors/generic-extractor" },
               {
-                label: "Generic Extractor Tutorial",
+                label: "Tutorial",
                 collapsed: true,
                 items: [
                   { label: "Overview", slug: "components/extractors/generic-extractor/tutorial" },
@@ -660,6 +660,7 @@ export const sidebar = [
       { label: "Overview", slug: "ai" },
       { slug: "ai/ai-kit" },
       { slug: "ai/mcp-server" },
+      { slug: "ai/semantic-layer" },
     ],
   },
   {
