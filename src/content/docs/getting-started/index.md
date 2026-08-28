@@ -17,12 +17,19 @@ The question the arc answers:
 
 > **How close to your coast does an octopus live — and how deep down do they really go?**
 
-You have 10,000 recorded octopus sightings from 1900 to 2026 — 201 species, each point with
-coordinates and, for almost half of them, a depth. The sightings file alone can plot dots. What
-it cannot tell you is *who* and *where* in any human sense: it names species by a numeric ID and
-says nothing about oceans or depth zones, so the moment the question becomes "which octopus,
-which ocean, how deep", the file stops answering. Three small lookup tables — species names,
-depth zones, ocean basins — hold the missing halves, and joining them is the whole trick.
+<video autoplay loop muted playsinline poster="/getting-started/map-tour-poster.png" aria-label="Four raw CSV files where a numeric species ID means nothing on its own, then the arc's question, then the finished app answering it: the North Atlantic as the crowded basin, the nearest sighting to Prague, and the deepest record at 4,838 meters">
+  <source src="/getting-started/map-tour.mp4" type="video/mp4" />
+</video>
+
+<!-- Hero clip, three acts (scripts/compositor.html scene map-tour, local + gitignored; the map
+background is the committed octopus-map-preview.png app screenshot):
+  1. the four raw files, rows verbatim from public/getting-started/*.csv — aphia_id 140605 means
+     nothing in occurrences.csv and is Octopus vulgaris in species.csv;
+  2. the question, held long enough to read — this frame is also the poster;
+  3. the finished app answering it, on the arc's verified numbers: North Atlantic 2,632 sightings,
+     Prague nearest = musky octopus 495 km, deepest = Grimpoteuthis challengeri 4,838 m.
+Placed above the fold per Jordan's 2026-08-21 feedback ("Overview section too vague: reader
+can't tell what they'll get out of it"). -->
 
 In under an hour you will have a table that answers all of it, delivered to a spreadsheet,
 rebuilt every morning without you, and an interactive map where you type your own coordinates
@@ -42,20 +49,17 @@ sales call.
 | Automate | all of it runs daily, in order, and emails you if it breaks | a **flow** |
 | Answer | a map of every sighting, with a "how close to me?" field | a **data app** |
 
+You have 10,000 recorded octopus sightings from 1900 to 2026 — 201 species, each point with
+coordinates and, for almost half of them, a depth. The sightings file alone can plot dots. What
+it cannot tell you is *who* and *where* in any human sense: it names species by a numeric ID and
+says nothing about oceans or depth zones, so the moment the question becomes "which octopus,
+which ocean, how deep", the file stops answering. Three small lookup tables — species names,
+depth zones, ocean basins — hold the missing halves, and joining them is the whole trick.
+
 The joined table is the one someone would actually read: every sighting with its species by
 name, the ocean basin it sits in and — where a depth was recorded — its depth zone, down to a
-dumbo octopus (*Grimpoteuthis challengeri*) recorded 4,838 meters below the surface. It is not a demo — this is the mechanism a production
-project uses, just smaller. And this is where it ends up:
-
-<video autoplay loop muted playsinline poster="/getting-started/map-tour-poster.png" aria-label="The finished app — a world map of every sighting, toured stop by stop: the North Atlantic, the nearest sighting to Prague, and the deepest record">
-  <source src="/getting-started/map-tour.mp4" type="video/mp4" />
-</video>
-
-<!-- Animated tour of the finished app's map (scripts/compositor.html scene map-tour, local,
-gitignored; background = the committed octopus-map-preview.png app screenshot). The three stops
-are the arc's verified numbers: North Atlantic 2,632 sightings, Prague nearest = musky octopus
-495 km, deepest = Grimpoteuthis challengeri 4,838 m. -->
-
+dumbo octopus (*Grimpoteuthis challengeri*) recorded 4,838 meters below the surface. It is not a
+demo — this is the mechanism a production project uses, just smaller.
 
 ## Before you start
 
