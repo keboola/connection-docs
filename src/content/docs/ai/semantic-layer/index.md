@@ -28,7 +28,7 @@ Instead of every AI conversation having to rediscover which table holds revenue,
 
 ## Core concepts
 
-A **semantic model** is a collection of semantic objects stored centrally in Keboola. There are six semantic object types:
+A **semantic model** is a collection of semantic objects stored centrally in Keboola. Six semantic object types make up a model:
 
 | Object type | What it describes |
 |---|---|
@@ -40,6 +40,10 @@ A **semantic model** is a collection of semantic objects stored centrally in Keb
 | `semantic-constraint` | A business rule with a severity (`error`, `warning`, or `info`) that queries can be checked against. |
 
 A project can contain multiple semantic models. Each object is a JSON document validated against a published JSON schema.
+
+There is also a seventh type, `semantic-reference-data` — a per-dimension member store holding the
+full member list for a dimension, such as a chart of accounts. It is not part of a model's build,
+export, or diff, and is managed with `kbagent semantic-layer reference-data`.
 
 ## Building a semantic model
 
@@ -53,10 +57,13 @@ metrics, relationships, glossary terms, and constraints without leaving the plat
 read-only and are edited explicitly, and each one shows the AI guidance it carries — so you can see
 what an assistant reads when it uses that object.
 
-<!-- VERIFY(Jordan): exact UI labels and navigation path. The editor shipped in kbc-ui (AI-3589,
-plus AI-3615 read-only + edit toggle and AI-3616 AI-guidance display), but keboola/ui is private,
-so the wording here describes behaviour rather than naming on-screen controls. Revision history
-and the lineage graph (AI-3617/3618) were still in review and are deliberately not documented. -->
+<!-- VERIFY(Jordan): this whole section. The editor shipped in kbc-ui (AI-3589, plus AI-3615
+read-only + edit toggle and AI-3616 AI-guidance display), but keboola/ui is private, so the wording
+describes behaviour rather than naming on-screen controls, and none of it is checkable from public
+sources. The "AI guidance" sentence in particular rests only on AI-3616 — cut it if that is not
+what ships. Confirm this describes the product UI and not `kbagent serve --ui`, which has its own
+Semantic Layer surface. Revision history and the lineage graph (AI-3617/3618) were still in review
+and are deliberately left out. -->
 
 ### With the CLI
 
@@ -92,9 +99,10 @@ Adding, editing, and removing semantic objects doesn't need commands — just de
 > "Rename the Revenue metric to Total Revenue."
 
 :::note
-`/sl-build` and `/sl-validate --deep` read your project's schemas through the `kbagent` binary, so
-they need the [Keboola CLI](/cli/getting-started/) installed and on your `PATH`. `/sl-show`, plain
-`/sl-validate`, and conversational edits do not.
+`/sl-build` and `/sl-validate --deep` read your project's schemas through the `kbagent` binary from
+the [Keboola CLI](/cli/getting-started/). Without it on your `PATH` they still run, but `/sl-build`
+asks you to describe your tables instead of reading them, and the deep checks are skipped.
+`/sl-show`, plain `/sl-validate`, and conversational edits don't use it at all.
 :::
 
 [View the Semantic Layer Toolkit on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/sl-toolkit)
@@ -103,7 +111,7 @@ they need the [Keboola CLI](/cli/getting-started/) installed and on your `PATH`.
 
 If you already maintain a semantic model in Microsoft Power BI, the `powerbi-to-sl` plugin translates it into Keboola semantic layer objects: Power BI tables become semantic datasets, measures become semantic metrics (DAX expressions are preserved verbatim for review), and relationships become semantic relationships. The recommended input is a TMDL export produced by Microsoft's Power BI Modeling MCP server in read-only mode.
 
-The plugin flags anything that needs human attention — such as complex DAX or unmapped data types — in a warnings report. Pushing the result to your project is then handled by `sl-toolkit`.
+The plugin flags anything that needs human attention — such as complex DAX or unmapped data types — in a warnings report. Pushing the result to your project is not automatic — hand it to `sl-toolkit`, or push it yourself.
 
 [View the Power BI migration plugin on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/powerbi-to-sl)
 
