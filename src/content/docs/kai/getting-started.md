@@ -26,7 +26,7 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 | **A** | Open the chat window (shows recent conversation) |
 | **Ctrl + Shift + A** | Open a new chat |
 
-![Kai Chat Panel](/kai/kai-welcome.png)
+![Kai open in a project](/kai/kai-open.png)
 
 ## Example Prompts
 
@@ -46,33 +46,66 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 - "Help me create a Google Sheets extractor"
 - "Create a SQL transformation that calculates monthly totals from my sales data"
 
+For prompts that get better answers, see
+[Effective Prompting](/kai/best-practices/#effective-prompting) in Best Practices.
+
 ## Action Approval
 
-When Kai wants to modify your project, you'll see a tool approval prompt. Review what Kai wants to do before approving. All actions are logged in your project's audit trail.
+Before Kai changes anything, it requests your approval: creating a configuration,
+modifying a transformation, or running a job. Read-only operations do not require
+approval.
 
-You can also click **Always allow** directly in the approval dialog to skip future confirmations for that specific tool.
+Each request shows the exact parameters Kai will use.
 
-For more granular control, see [Tool Permissions](/kai/settings/#tool-permissions) in Kai Settings.
+![Kai asking for approval before running a job](/kai/kai-action-approval.png)
 
-## Contextual Awareness & Follow Mode
+You have three options:
 
-Kai is aware of what you're currently viewing in the Keboola UI. Every message you send includes your current page location, so Kai understands your context without needing explicit references.
+- **Approve** — run this action once.
+- **Decline** — do not run it.
+- **Always allow** — run it, and stop asking for that tool in future.
 
-### How Context Works
+All actions are logged in your project's audit trail.
+
+For more granular control, see [Tool Permissions](/kai/settings/#tool-permissions) in
+Kai Settings.
+
+## Chat Controls
+
+The chat panel has controls in two places: along the top of the panel, and below the
+message box.
+
+### Panel header
+
+| Button | Control | What it does |
+|--------|---------|--------------|
+| ![New chat](/kai/kai-new-chat.png) | **New chat** | Start a fresh conversation. Kai keeps no context from the previous one. |
+| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | Collect debug details for the current conversation, including the chat ID, trace link, project and stack. Include them when you report a problem so Keboola support can investigate. |
+| ![Settings](/kai/kai-settings-gear.png) | **Settings** | Open your [Tool Permissions and System Instructions](/kai/settings/). These are personal to you and apply to this project only. Project-wide settings live in **Settings → Kai Agent**. |
+| ![Expand](/kai/kai-expand-chat.png) | **Expand** | Widen the panel. The expanded view also lists your chat history, so you can reopen a previous conversation. Useful when Kai returns a long table or diagram. |
+| ![Close](/kai/kai-close-chat.png) | **Close** | Close the panel. Your conversation is kept. |
+
+### Below the message box
+
+| Button | Control | What it does |
+|--------|---------|--------------|
+| ![Upload file](/kai/kai-upload-file.png) | **Upload files** | Attach a file or image to your message. Useful for a screenshot of an error, a sample CSV, or a spec you want Kai to work from. |
+| ![Plan mode](/kai/kai-plan-mode.png) | **Plan mode** | Kai explores your project read-only, drafts a plan of what it intends to do, and waits for your approval before changing anything. Use it for larger requests, such as setting up a pipeline or restructuring a set of transformations. You can also start it by typing `/plan`. |
+| ![Follow mode](/kai/kai-follow-mode.png) | **Follow mode** | Your browser navigates along as Kai works, so you can watch what it reads and modifies. Toggle it on or off at any time. |
+
+## Contextual Awareness
+
+Kai is aware of what you're currently viewing in the Keboola UI. Every message you send
+includes your current page location, so Kai understands your context without needing
+explicit references.
 
 - **Automatic context capture** — When you send a message, Kai receives your current URL path (e.g., which configuration, job, or table you're viewing)
 - **Context-aware responses** — Kai uses this information to provide relevant suggestions and can reference "this configuration" or "the current job" naturally
 - **Dynamic updates** — Kai checks for the latest context during conversations, so you can navigate to different pages and Kai will adapt
 
-### Follow Mode
-
-Follow mode lets you watch Kai work in real-time:
-
-- **Automatic navigation** — When Kai accesses a configuration, table, or other resource, your browser navigates to that page automatically
-- **Visual feedback** — See exactly what Kai is reading or modifying as it happens
-- **Toggle control** — Enable or disable follow mode from the chat interface based on your preference
-
-This makes interactions more natural—you can say "analyze this job" while viewing a job, and Kai knows exactly which job you mean. When Kai investigates an issue across multiple configurations, you can follow along as it moves through your project.
+This means you can say "analyze this job" while viewing a job, and Kai knows exactly
+which job you mean. Turn on [Follow mode](#below-the-message-box) to watch it move through your project as
+it works.
 
 ## Tips for New Users
 
