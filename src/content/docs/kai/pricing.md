@@ -24,12 +24,40 @@ Organization Admins can [set up limits for your team](#setting-limits) to cap ho
 
 ## How Kai is billed
 
-Kai is billed **per conversation**, based on the work the conversation does. A short
-question costs less than a full data app build, in the same way that a five-minute
-query costs less than an hour of warehouse time.
+Kai is billed for the work it does. Every time Kai finishes a reply, the PPU charge is
+derived from what that reply actually cost to produce — the language model tokens it
+consumed and the infrastructure it ran on.
 
-You are not charged for opening the chat panel, for typing, or for conversations
-Kai cannot complete.
+A short question costs less than a full data app build, in the same way that a
+five-minute query costs less than an hour of warehouse time.
+
+You are not charged for opening the chat panel, for typing, or for a reply Kai
+cannot finish.
+
+### What one PPU buys
+
+Typical costs for common pieces of work. Each figure covers the whole conversation —
+every reply it took to get to the result — measured across Kai usage in mid-2026:
+
+| Piece of work | Typical cost (PPU) | Per 1 PPU |
+|---------------|--------------------|-----------|
+| Build or modify a data app | 4.3 | 0.2 |
+| Diagnose a failed job or pipeline | 1.4 | 0.7 |
+| Answer an analytical question about your data | 1.2 | 0.8 |
+| Debug and fix a broken transformation | 1.2 | 0.9 |
+| Set up or check a data source | 1.0 | 1 |
+| Trace data lineage | 0.9 | 1 |
+| Get help understanding the platform | 0.8 | 1 |
+| Write and run a SQL query | 0.4 | 3 |
+| Explore project and storage structure | 0.4 | 3 |
+| Create a SQL transformation | 0.3 | 3 |
+
+The median conversation across all Kai traffic costs about **1.1 PPU**, and simple work —
+writing a query, exploring a project, creating a transformation — runs three to four
+conversations per PPU.
+
+These are medians, not a price list. A longer or more involved run of the same piece of work
+costs more, so treat the figures as indicative and expect your own numbers to vary.
 
 ## Tracking Kai project spend
 
