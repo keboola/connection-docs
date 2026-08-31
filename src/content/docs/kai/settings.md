@@ -167,7 +167,12 @@ Under the hood, context files are ordinary [Storage Files](/storage/files/) tagg
 
 ## Skill Files
 
-Skills are reusable, on-demand playbooks that appear in the chat's **`/` slash-command menu** alongside Kai's built-in skills. Unlike context files, Kai loads a skill only when it is invoked — making skills the right place for longer, task-specific instructions (e.g., "build the monthly report," "onboard a new data source") that shouldn't consume context in every chat.
+A skill is a playbook Kai runs when you need it. Skills appear in the chat's **`/` slash-command menu** alongside Kai's built-in skills. Use them for longer, task-specific instructions such as "build the monthly report" or "onboard a new data source".
+
+:::tip[Difference between a Skill and a Context file]
+A context file is read in every conversation and it can take up your context window space.
+A skill is used only when called, or when your request matches the skill's description.
+:::
 
 Manage them in **Settings → Kai Agent** using the **Skill files** card.
 
