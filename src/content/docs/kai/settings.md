@@ -14,6 +14,8 @@ The settings panel has two tabs: **Tool Permissions** and **System Instructions*
 
 Tool Permissions let you control which tools Kai is allowed to use. This eliminates the need to manually approve each action — you can pre-approve tools you trust and block those you don't want Kai to use.
 
+These are your own settings. They apply to your Kai in this project and change nothing for your teammates, who set their own.
+
 ![Kai Settings — Tool Permissions](/kai/kai-settings-tool-permissions.png)
 
 ### Tool Categories
@@ -27,11 +29,11 @@ Tools are organized into two categories:
 
 For each tool, you can set one of three permission levels:
 
-| Permission | Behavior |
-|------------|----------|
-| **Always allow** | The tool runs automatically without asking for confirmation. |
-| **Always ask** | Kai must request your approval each time before using the tool. |
-| **Block** | The tool is completely disabled and Kai cannot use it. |
+|  | Permission | Behavior |
+|--|------------|----------|
+| ![Always allow](/kai/kai-perm-always-allow.png) | **Always allow** | The tool runs automatically without asking for confirmation. |
+| ![Always ask](/kai/kai-perm-always-ask.png) | **Always ask** | Kai must request your approval each time before using the tool. |
+| ![Block](/kai/kai-perm-block.png) | **Block** | The tool is completely disabled and Kai cannot use it. |
 
 ### Setting Permissions
 
@@ -44,9 +46,15 @@ Your permissions persist across all conversations within the same project.
 
 ## System Instructions
 
-System Instructions let you provide Kai with persistent context and guidelines so you don't have to repeat yourself in every chat. Instructions exist at two levels: **project-level** (shared across all users) and **user-level** (personal to you). User-level instructions amend project-level instructions — both are included in every conversation.
+System instructions are standing rules Kai follows in every conversation, so you stop repeating yourself. "Always use snake_case." "Our fiscal year starts in April." "Respond in German."
+
+They exist at two levels. **Project-level** instructions apply to everyone in the project. **User-level** instructions are personal to you and are added on top. Both are included in every conversation.
+
+Instructions are the place for short rules. For longer knowledge, such as a data model or a business glossary, use [context files](#context-files). For a step-by-step procedure you invoke when you need it, use [skill files](#skill-files).
 
 ### Project-Level Instructions
+
+![Project-level system instructions in Settings → Kai Agent](/kai/kai-settings-project-instructions.png)
 
 Project-level instructions apply to **all users** in the project. They are managed in the project settings:
 
@@ -63,6 +71,8 @@ Use project-level instructions for team-wide standards such as:
 Project-level instructions can be edited by project admins and managers.
 
 ### User-Level Instructions
+
+![User-level system instructions in the Kai chat panel](/kai/kai-settings-user-instructions.png)
 
 User-level instructions are **personal to you** and are added on top of the project-level instructions. They are configured in the Kai chat panel:
 
@@ -102,7 +112,9 @@ Context files (also called knowledge files) are Markdown documents that Kai read
 
 To manage them, go to **Settings → Kai Agent** in the main Keboola navigation and use the **Context files** card:
 
-1. Click **Upload** and select a Markdown (`.md`) file.
+![Context files card in Settings → Kai Agent](/kai/kai-settings-context-files.png)
+
+1. Drag a Markdown (`.md`) file onto the card, or click **Select Files**.
 2. The file is uploaded and takes effect in every **new** conversation (running conversations are not affected).
 3. To replace a file, upload the new version and delete the old one.
 
@@ -114,6 +126,39 @@ Rules and limits:
 - A file named `CLAUDE.md` becomes Kai's top-level memory file; all other files are loaded as always-on rules alongside it.
 - Context files apply **project-wide** — every user's conversations include them.
 
+### Example
+
+A context file is ordinary Markdown with no required structure. Give it headings and keep
+it to things Kai cannot work out from the project itself:
+
+```markdown
+# Data standards
+
+## Buckets
+
+- `in.c-*` holds raw extractor output. Never modify it directly.
+- `out.c-*` holds tables other teams and BI tools read.
+
+## Naming
+
+- Staging tables take an `stg_` prefix.
+- Columns are snake_case.
+- Timestamps end in `_at` and are always UTC.
+
+## Business rules
+
+- The fiscal year starts in April.
+- Revenue excludes VAT and any order with `status = 'cancelled'`.
+- An active customer has placed an order in the last 90 days.
+
+## Glossary
+
+- **ARR** is annual recurring revenue and excludes one-off services.
+- **Churn** means no order in 180 days, not a cancelled contract.
+```
+
+If you upload only one file, name it `CLAUDE.md` so it becomes Kai's top-level memory file.
+
 :::tip
 Every context file is read in every conversation, so keep the set small and focused. One well-structured standards document usually works better than many overlapping files.
 :::
@@ -124,7 +169,11 @@ Under the hood, context files are ordinary [Storage Files](/storage/files/) tagg
 
 Skills are reusable, on-demand playbooks that appear in the chat's **`/` slash-command menu** alongside Kai's built-in skills. Unlike context files, Kai loads a skill only when it is invoked — making skills the right place for longer, task-specific instructions (e.g., "build the monthly report," "onboard a new data source") that shouldn't consume context in every chat.
 
-Manage them in **Settings → Kai Agent** using the **Skill files** card. Two formats are accepted:
+Manage them in **Settings → Kai Agent** using the **Skill files** card.
+
+![Skill files card in Settings → Kai Agent](/kai/kai-settings-skill-files.png)
+
+Two formats are accepted:
 
 1. **A single `.md` file** starting with YAML frontmatter. The `name` and `description` fields are required — the description tells Kai when to invoke the skill:
 
@@ -148,6 +197,44 @@ Rules and limits:
 - A project skill with the same `name` as a built-in skill replaces the built-in one.
 
 Skill files are Storage Files tagged **`kai-skill`**.
+
+### How a skill gets invoked
+
+You can call a skill in two ways:
+
+- **Call it yourself** by typing `/` in the chat and picking it from the menu.
+- **Let Kai call it** when your request matches the skill's `description`.
+
+![Calling a skill from the slash-command menu](/kai/kai-skill-slash-menu.png)
+
+This is why the `description` matters more than anything else in the file. Kai matches
+against it, and the menu shows it to whoever is choosing. Write what the
+skill does, then when to use it, including the words your team actually types. A good one is
+long and specific:
+
+```yaml
+description: Build narrative, scroll-driven data stories where scroll position drives
+  charts, color, and animation. Use whenever the user wants a "scrollytelling" app, a
+  "data story", a "narrative dashboard", or wants to turn a dataset into a guided
+  scrolling experience instead of an explore-it-yourself dashboard.
+```
+
+Compare that with `description: Data stories`, which gives Kai nothing to match on.
+
+### What to write a skill for
+
+Write a skill when you want Kai to do something a particular way, every time.
+
+- **House style.** Your brand palette, layout conventions and component choices, so every
+  data app someone builds looks like it belongs to your company.
+- **A recurring procedure.** Month-end close, onboarding a new data source, the same set of
+  quality checks.
+- **A specialised output** Kai would not produce by default, where the instructions run to
+  pages rather than paragraphs. This is what `.skill` archives are for: a `SKILL.md` plus
+  reference files it can read when needed.
+
+Skills are project-wide, so one person can encode the standard once and the whole team gets
+it.
 
 ## Managing Files via API or CLI
 
