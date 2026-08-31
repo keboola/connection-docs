@@ -13,9 +13,9 @@ Kai is now in **Public Beta** and available to all users in supported stacks.
 
 Every user can see the Kai button in their project (on supported stacks). To enable Kai:
 
-- **Organization Admins** — Can enable the feature directly from the chat screen when first clicking the Kai button
-- **Other users** — Need to ask their Organization Admin to enable the feature, or [contact Keboola Support](mailto:support@keboola.com) for assistance
-- **Settings** — Kai can also be enabled via **Settings → Features** in your project
+- **Organization Admins** can enable the feature directly from the chat screen when first clicking the Kai button.
+- **Other users** need to ask their Organization Admin to enable the feature, or [contact Keboola Support](mailto:support@keboola.com) for assistance.
+- Kai can also be enabled via **Settings → Features** in your project.
 
 ## Opening Kai
 
@@ -24,27 +24,36 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 | Shortcut | Action |
 |----------|--------|
 | **A** | Open the chat window (shows recent conversation) |
-| **Ctrl + Shift + A** | Open a new chat |
+| **Shift + A** | Open a new chat |
 
 ![Kai open in a project](/kai/kai-open.png)
 
 ## Example Prompts
 
-**Explore your project:**
-- "What tables do we have in this project?"
-- "Show me the latest job runs and their status"
-- "What extractors are configured?"
+**Get oriented in an unfamiliar project:**
+- "What is the purpose of this project? Summarize what it does end to end."
+- "What data is being ingested, from which sources, and how often?"
+- "What output tables does this project produce, and what feeds each one?"
+- "Trace the lineage from the raw source tables to the final output tables."
 
-**Analyze data:**
-- "Show me the schema for the orders table"
-- "How many rows are in the customers table?"
+**Understand a specific part of it:**
+- "Explain what this transformation does and why the joins are shaped this way."
+- "Which configurations write to the `orders` table, and which read from it?"
+- "Is anything here unused? Tables nothing reads, configurations nothing runs."
 
-**Debug issues:**
-- "Analyze the latest failed job and tell me what went wrong"
+**Debug a failure:**
+- "Analyze the latest failed job and tell me what went wrong."
+- "This flow started failing last week. What changed in its configuration?"
+- "Why did this job take 40 minutes when it usually takes 5?"
 
-**Build things:**
-- "Help me create a Google Sheets extractor"
-- "Create a SQL transformation that calculates monthly totals from my sales data"
+**Maintain and improve:**
+- "Help me optimize the core pipeline to reduce costs."
+- "Which jobs in this project run longest, and what would you change first?"
+- "This transformation full-loads every run. Can it be incremental?"
+
+**Build something new:**
+- "Set up a Google Sheets extractor for this spreadsheet and load it into a new bucket."
+- "Create a SQL transformation that calculates monthly revenue per customer from `orders`."
 
 For prompts that get better answers, see
 [Effective Prompting](/kai/best-practices/#effective-prompting) in Best Practices.
