@@ -54,12 +54,13 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 **Build something new:**
 - "Set up a Google Sheets extractor for this spreadsheet and load it into a new bucket."
 - "Create a SQL transformation that calculates monthly revenue per customer from `orders`."
-- "No connector exists for the Acme API. Build one with the Generic Extractor, using these
-  API docs: https://api.acme.com/docs. Handle authentication and pagination."
+- "No connector exists for the Acme API. Build an integration that pulls orders into
+  Storage, using these API docs: https://api.acme.com/docs. Handle authentication and
+  pagination."
 
 Building an integration for an API that has no ready-made connector is one of the stronger
-things to hand Kai — point it at the API documentation and let it work out the
-[Generic Extractor](/components/extractors/generic-extractor/) configuration.
+things to hand Kai. Point it at the API documentation, say which data you need and where it
+should land, and let it work out the implementation.
 
 For prompts that get better answers, see
 [Effective Prompting](/kai/best-practices/#effective-prompting) in Best Practices.
