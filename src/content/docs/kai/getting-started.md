@@ -54,13 +54,15 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 **Build something new:**
 - "Set up a Google Sheets extractor for this spreadsheet and load it into a new bucket."
 - "Create a SQL transformation that calculates monthly revenue per customer from `orders`."
-- "No connector exists for the Acme API. Build an integration that pulls orders into
-  Storage, using these API docs: https://api.acme.com/docs. Handle authentication and
-  pagination."
+- "Build an integration with the Acme API that pulls orders. Its API documentation is
+  attached. Handle authentication and pagination."
 
 Building an integration for an API that has no ready-made connector is one of the stronger
-things to hand Kai. Point it at the API documentation, say which data you need and where it
-should land, and let it work out the implementation.
+things to hand Kai. For security reasons Kai cannot open links, so give it the API
+documentation as a file:
+attach it with [Upload files](#below-the-message-box), or add it as a
+[context file](/kai/settings/#context-files) if you will be working with that API
+repeatedly. A URL on its own is not enough unless the API is well known.
 
 For prompts that get better answers, see
 [Effective Prompting](/kai/best-practices/#effective-prompting) in Best Practices.
@@ -96,7 +98,7 @@ message box.
 | Button | Control | What it does |
 |--------|---------|--------------|
 | ![New chat](/kai/kai-new-chat.png) | **New chat** | Start a fresh conversation. Kai keeps no context from the previous one. |
-| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | Collect debug details for the current conversation, including the chat ID, trace link, project and stack. Include them when you report a problem so Keboola support can investigate. |
+| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | Open a dialog that sends a support ticket for the current conversation, already filled in with the details Keboola support needs, such as the conversation ID. You can also copy those details instead of sending the ticket. |
 | ![Settings](/kai/kai-settings-gear.png) | **Settings** | Open your [Tool Permissions and System Instructions](/kai/settings/). These are personal to you and apply to this project only. Project-wide settings live in **Settings → Kai Agent**. |
 | ![Expand](/kai/kai-expand-chat.png) | **Expand** | Widen the panel. The expanded view also lists your chat history, so you can reopen a previous conversation. Useful when Kai returns a long table or diagram. |
 | ![Close](/kai/kai-close-chat.png) | **Close** | Close the panel. Your conversation is kept. |
@@ -105,7 +107,7 @@ message box.
 
 | Button | Control | What it does |
 |--------|---------|--------------|
-| ![Upload file](/kai/kai-upload-file.png) | **Upload files** | Attach a file or image to your message. Useful for a screenshot of an error, a sample CSV, or a spec you want Kai to work from. |
+| ![Upload file](/kai/kai-upload-file.png) | **Upload files** | Attach a file or image to your message. Useful for a screenshot of an error, a sample CSV, a spec you want Kai to work from, or documentation Kai has no other way to read — for security reasons, it cannot open links. |
 | ![Plan mode](/kai/kai-plan-mode.png) | **Plan mode** | Kai explores your project read-only, drafts a plan of what it intends to do, and waits for your approval before changing anything. Use it for larger requests, such as setting up a pipeline or restructuring a set of transformations. You can also start it by typing `/plan`. |
 | ![Follow mode](/kai/kai-follow-mode.png) | **Follow mode** | Your browser navigates along as Kai works, so you can watch what it reads and modifies. Toggle it on or off at any time. |
 
@@ -117,7 +119,6 @@ explicit references.
 
 - **Automatic context capture** — When you send a message, Kai receives your current URL path (e.g., which configuration, job, or table you're viewing)
 - **Context-aware responses** — Kai uses this information to provide relevant suggestions and can reference "this configuration" or "the current job" naturally
-- **Dynamic updates** — Kai checks for the latest context during conversations, so you can navigate to different pages and Kai will adapt
 
 This means you can say "analyze this job" while viewing a job, and Kai knows exactly
 which job you mean. Turn on [Follow mode](#below-the-message-box) to watch it move through your project as
