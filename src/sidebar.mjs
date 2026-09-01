@@ -236,7 +236,6 @@ export const sidebar = [
               { slug: "components/extractors/storage/azure-datalake-gen2" },
               { slug: "components/extractors/storage/ftp" },
               { slug: "components/extractors/storage/google-drive" },
-              { slug: "components/extractors/storage/google-sheets" },
               { slug: "components/extractors/storage/http" },
               { slug: "components/extractors/storage/storage-api" },
               { slug: "components/extractors/storage/onedrive-excel-sheets" },

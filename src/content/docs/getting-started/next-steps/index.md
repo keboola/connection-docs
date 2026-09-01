@@ -52,7 +52,7 @@ Jordan on the 08-21 call ("technically all of this could be one prompt"). -->
 [data source connectors](/components/extractors/) — databases, APIs, cloud storage, ad
 platforms, CRMs. They configure the same way the HTTP connector did, and drop into a flow the
 same way. Two worked examples are in this guide already:
-[Google Sheets](/components/extractors/storage/google-sheets/) and
+[Google Sheets](/components/extractors/storage/google-drive/) and
 [a database](/components/extractors/database/sqldb/#try-it-with-our-sample-database).
 
 **"My transformation needs to be more than one query."** [Transformations](/transformations/)

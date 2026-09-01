@@ -319,9 +319,6 @@ items:
                 title: FTP
 
               - url: /components/extractors/storage/google-drive/
-                title: Google Drive
-
-              - url: /components/extractors/storage/google-sheets/
                 title: Google Sheets
 
               - url: /components/extractors/storage/http/
