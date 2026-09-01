@@ -131,7 +131,7 @@ message box.
 | Button | Control | What it does |
 |--------|---------|--------------|
 | ![New chat](/kai/kai-new-chat.png) | **New chat** | Start a fresh conversation. Kai keeps no context from the previous one. |
-| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | Open a dialog that sends a support ticket for the current conversation, already filled in with the details Keboola support needs, such as the conversation ID. You can also copy those details instead of sending the ticket. |
+| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | **Send support ticket** opens the support form with the details Keboola support needs — conversation ID, trace link, project, stack — pre-filled in its description. You still write the summary, pick a severity, and send it. **Copy debug info** puts the same details on your clipboard instead. On stacks without support tickets, the button only copies. |
 | ![Settings](/kai/kai-settings-gear.png) | **Settings** | Open your [Tool Permissions and System Instructions](/kai/settings/). These are personal to you and apply to this project only. Project-wide settings live in **Settings → Kai Agent**. |
 | ![Expand](/kai/kai-expand-chat.png) | **Expand** | Widen the panel. The expanded view also lists your chat history, so you can reopen a previous conversation. Useful when Kai returns a long table or diagram. |
 | ![Close](/kai/kai-close-chat.png) | **Close** | Close the panel. Your conversation is kept. |
@@ -179,7 +179,7 @@ description, so you can find what is available without memorizing names.
 |---------|--------------|
 | `/plan` | Turn on [plan mode](#plan-mode) for this message. The same as the Plan mode button. |
 | `/compact` | Summarize the conversation so far and continue from that summary. See below. |
-| `/feedback` | Report a bug or send feedback. By default Kai copies the debug details Keboola support needs — conversation ID, project, stack — to your clipboard. Ask it to "open a ticket" and it opens the support form with those details filled in instead, the same form as the **Report a bug** button in the panel header. |
+| `/feedback` | Report a bug or send feedback. Kai copies the debug details to your clipboard by default. Ask it to "open a ticket" and it opens the same support form as [Report a bug](#panel-header), pre-filled the same way. |
 
 ### Compacting a long conversation
 
