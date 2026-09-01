@@ -21,32 +21,37 @@ one; [Workspaces](/workspace/) covers what they are and how they behave in full.
 
 ![Select a Workspace](/workspace/create/workspaces2.png)
 
-3. Enter a *Name* and a *Description*. Additionally, take note that you can grant access to the workspace, allowing other users to collaborate with you.
-Click **Create Workspace**.
+3. Enter a *Name* and an optional *Description*. **Share with all project users** decides whether
+colleagues can open the workspace too — leave it off for a personal playground. Click
+**Create Workspace**.
 
 ![Name the Workspace](/workspace/create/workspaces3.png)
 
-4. A creation job will initiate, and your workspace will soon appear among the configurations.
+4. A creation job runs, and the workspace appears in the list with an **Active** badge.
 
 ![Creating Job](/workspace/create/workspaces4.png)
 
-5. Click the workspace name to access the details.
+5. Click the workspace name to open its detail.
 
 ![Access Details of the Job](/workspace/create/workspaces5.png)
 
-   At the outset, you'll need to configure the **table input mapping**, much like we did when setting up a transformation. 
-   Subsequently, click **Load Data** to clone the datasets from Storage to your workspace. The data will be cloned to your workspace 
-   in a state as of the moment of loading. To refresh the data in a Workspace, you need to click **Load Data** again. 
-   
-   If you wish to have read access to all data in your Storage without physically cloning it into the workspace, 
-   check the *Grant read-only access to all storage data* option when creating a workspace. However, this is a feature we do not cover here.
+   The banner at the top says **Read-Only Access to all project data is granted for this
+   workspace** — you can query every table in Storage straight away, with nothing to load first.
+   That is why **Load data** and **Unload data** in the right-hand menu are greyed out: they exist
+   for the other way of working, where you clone selected tables into the workspace and refresh
+   them yourself. **Workspace Parameters** records what you got — the backend, the backend size,
+   and the authentication type.
 
-![Set Input Mapping](/workspace/create/workspaces6.png)
+![Workspace detail](/workspace/create/workspaces6.png)
 
-6. Click **Connect**. You'll see the credentials you can use to connect to the workspace using any of your preferred IDEs. Alternatively,
-click the **Connect** button again to access the Web-based Snowflake SQL IDE (please note that this only applies if your project uses a Snowflake backend).
+6. Click **Open SQL Editor** to query the data right in the browser. The editor lists every bucket
+   under **Storage Explorer**, and the result appears below the code block.
 
-![Connect](/workspace/create/workspaces7.png)
+![The SQL editor](/workspace/create/workspaces7.png)
+
+   To use your own tools instead, follow **Set up SQL client connection** in the top banner — it
+   hands you a JDBC URL for DBeaver, DataGrip or VS Code through the open-source
+   [Keboola JDBC driver](/workspace/jdbc-driver/).
 
 
 After completing the development of your queries, you can then copy and paste them into a
