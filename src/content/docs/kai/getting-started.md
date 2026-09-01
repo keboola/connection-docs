@@ -116,10 +116,13 @@ that case it stays on, because Kai is still planning.
 When Kai needs a decision from you — which tables to model, which of two approaches to take — it
 asks with clickable options instead of a paragraph of prose. Pick one and Kai carries on.
 
+![Kai asking which of three approaches to take](/kai/kai-clarifying-question.png)
+
 - Some questions take **more than one answer**; select as many as apply.
 - Every question has a free-text **Other** field, so you are never limited to the options offered.
-- Questions can arrive as a short series, one step at a time.
-- You can skip a question and let Kai decide.
+- Questions can arrive as a short series, one step at a time. The counter in the corner shows how
+  far through you are, and you can step back to change an earlier answer.
+- **Skip** a question and Kai decides for you.
 
 ## Chat Controls
 
@@ -131,7 +134,7 @@ message box.
 | Button | Control | What it does |
 |--------|---------|--------------|
 | ![New chat](/kai/kai-new-chat.png) | **New chat** | Start a fresh conversation. Kai keeps no context from the previous one. |
-| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | **Send support ticket** opens the support form with the details Keboola support needs — conversation ID, trace link, project, stack — pre-filled in its description. You still write the summary, pick a severity, and send it. **Copy debug info** puts the same details on your clipboard instead. On stacks without support tickets, the button only copies. |
+| ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | **Send support ticket** opens the support form with the details Keboola support needs — conversation ID, trace link, project, stack — pre-filled in its description. You still write the summary, pick a severity, and send it. **Copy debug info** puts the same details on your clipboard instead. On stacks without support tickets, **Report a bug** only copies. |
 | ![Settings](/kai/kai-settings-gear.png) | **Settings** | Open your [Tool Permissions and System Instructions](/kai/settings/). These are personal to you and apply to this project only. Project-wide settings live in **Settings → Kai Agent**. |
 | ![Expand](/kai/kai-expand-chat.png) | **Expand** | Widen the panel. The expanded view also lists your chat history, so you can reopen a previous conversation. Useful when Kai returns a long table or diagram. |
 | ![Close](/kai/kai-close-chat.png) | **Close** | Close the panel. Your conversation is kept. |
@@ -159,15 +162,20 @@ conversation.
 back to something you attached much earlier in the same conversation. Images and PDFs are read
 directly by Kai, so a screenshot of a failing job or a PDF spec works as well as plain text.
 
-Since Kai cannot open links, a file is how you hand it anything that lives on the web. For
-documentation you will reuse across conversations, add a
-[context file](/kai/settings/#context-files) instead of attaching it every time.
+Since Kai cannot open links, a file is how you hand it anything that lives on the web.
 
 Two limits are worth knowing:
 
 - **10 MB per file.** Anything larger is skipped.
 - Attachments are stored as non-permanent files, so they are **deleted after 15 days**, like any
   other non-permanent file in Storage. Reopen an older chat and Kai no longer has them.
+
+:::tip[Do you want the file in every conversation?]
+An attachment belongs to one chat and is gone after 15 days. To give Kai a document it should read
+every time, such as an API reference or your naming conventions, add it as a
+[context file](/kai/settings/#context-files) instead. Context files are stored permanently and Kai
+reads them at the start of every conversation, until you remove them.
+:::
 
 ## Slash Commands
 
@@ -188,10 +196,10 @@ replaces the earlier turns with a summary so there is room to keep going. Kai al
 own when a conversation grows too long, without you asking.
 
 **Your messages stay on screen, and that is intended.** Compaction adds a *Conversation compacted.*
-line to the transcript and removes nothing above it — the transcript stays a full record of what
-happened. What changes is what Kai is working from: past that line, Kai reads a summary of the
-earlier conversation rather than the messages themselves. So a detail you can still scroll up and
-read is not necessarily a detail Kai still has.
+line and removes nothing above it, so you keep the full transcript.
+
+What changes is what Kai reads. Everything above that line now reaches Kai as a summary, not as the
+original messages. So you can scroll up and read a detail that Kai no longer has.
 
 Anything you type after the command steers the summary, which is worth doing when you know what
 matters:
