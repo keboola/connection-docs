@@ -52,18 +52,6 @@ items:
 
       - title: Going Further
         items:
-          - url: /getting-started/load/googlesheets/
-            title: Load from Google Sheets
-
-          - url: /getting-started/load/database/
-            title: Load from a Database
-
-          - url: /getting-started/transform/workspace/
-            title: Use a Workspace
-
-          - url: /getting-started/ad-hoc/
-            title: Ad-Hoc Data Analysis
-
           - url: /getting-started/branches/
             title: Development Branches
             items:
@@ -332,6 +320,9 @@ items:
 
               - url: /components/extractors/storage/google-drive/
                 title: Google Drive
+
+              - url: /components/extractors/storage/google-sheets/
+                title: Google Sheets
 
               - url: /components/extractors/storage/http/
                 title: HTTP
@@ -675,6 +666,12 @@ items:
     items:
       - url: /workspace/snowflake-workspaces-access-changes/
         title: Snowflake Workspaces Access Changes
+
+      - url: /workspace/create/
+        title: Create a Workspace
+
+      - url: /workspace/ad-hoc-analysis/
+        title: Ad-Hoc Data Analysis
 
       - url: /workspace/sql-editor/
         title: SQL Editor

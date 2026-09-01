@@ -52,13 +52,13 @@ Jordan on the 08-21 call ("technically all of this could be one prompt"). -->
 [data source connectors](/components/extractors/) — databases, APIs, cloud storage, ad
 platforms, CRMs. They configure the same way the HTTP connector did, and drop into a flow the
 same way. Two worked examples are in this guide already:
-[Google Sheets](/getting-started/load/googlesheets/) and
-[a database](/getting-started/load/database/).
+[Google Sheets](/components/extractors/storage/google-sheets/) and
+[a database](/components/extractors/database/sqldb/#try-it-with-our-sample-database).
 
 **"My transformation needs to be more than one query."** [Transformations](/transformations/)
 covers SQL, Python, R and dbt, code blocks and phases, shared code, and
 [variables](/transformations/variables/). To develop against a copy of your data
-interactively, use a [workspace](/getting-started/transform/workspace/).
+interactively, use a [workspace](/workspace/create/).
 
 **"I need to send data somewhere specific."** The
 [data destination connectors](/components/writers/) cover databases, BI tools, and
@@ -69,7 +69,7 @@ storage — the Google Sheets one you used is the simplest of the family.
 and review a diff before merging anything into production.
 
 **"I want to explore data rather than build a pipeline."** Do
-[ad-hoc analysis](/getting-started/ad-hoc/) in a Python or R workspace, or query Storage
+[ad-hoc analysis](/workspace/ad-hoc-analysis/) in a Python or R workspace, or query Storage
 directly from a [SQL workspace](/workspace/).
 
 **"Other people need this data."** Publish it to the [Data Catalog](/catalog/) so other

@@ -13,6 +13,6 @@ It is the simplest approach suitable for most use cases and allows for  [time-st
 They are all [configured](/components/extractors/database/sqldb/#initial-setup) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/getting-started/load/database/). 
+Their basic configuration is covered in [Initial Setup](/components/extractors/database/sqldb/#initial-setup). 
 
 

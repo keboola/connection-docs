@@ -127,12 +127,12 @@ assumes so you can also land on one directly and catch up.
 Optional side trips, once the main path makes sense. None of them are needed to finish the
 arc:
 
-- **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
-  **[Load from a Database](/getting-started/load/database/)** — load from a source that needs
-  credentials, rather than the public URL step 2 uses.
-- **[Use a Workspace](/getting-started/transform/workspace/)** — develop and test SQL against
+- **[Google Sheets](/components/extractors/storage/google-sheets/)** and
+  **[a database](/components/extractors/database/sqldb/#try-it-with-our-sample-database)** — load
+  from a source that needs credentials, rather than the public URL step 2 uses.
+- **[Use a Workspace](/workspace/create/)** — develop and test SQL against
   a copy of your data before committing it to a transformation.
-- **[Ad-Hoc Data Analysis](/getting-started/ad-hoc/)** — explore arbitrary data in a Python
+- **[Ad-Hoc Data Analysis](/workspace/ad-hoc-analysis/)** — explore arbitrary data in a Python
   or R notebook rather than building a pipeline.
 - **[Development Branches](/getting-started/branches/)** — change a running project safely,
   review the diff, then merge.

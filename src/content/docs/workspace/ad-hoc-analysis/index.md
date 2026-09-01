@@ -1,21 +1,22 @@
 ---
 title: 'Ad-Hoc Data Analysis'
-slug: 'getting-started/ad-hoc'
+slug: 'workspace/ad-hoc-analysis'
 description: "Explore arbitrary data in a Python workspace: bring in a public BigQuery dataset, plot it in a Jupyter notebook, and install your own libraries."
 redirect_from:
   - /tutorial/ad-hoc/
+  - /getting-started/ad-hoc/
 ---
 
+Not every question deserves a pipeline. When you want to poke at data once — plot it, model it,
+throw it away — a **Python workspace** gives you a Jupyter notebook with your own libraries and no
+obligation to productionize anything. This page works through one such exploration end to end:
+pulling a public dataset in with the BigQuery connector, charting it in a notebook, and installing
+a library the base image does not carry.
 
-After you have loaded your tables, either [from a URL](/getting-started/load/) or
-[using a data source connector](/getting-started/load/database/), [manipulated the data](/getting-started/transform/) in SQL,
-written it [into Google Sheets](/getting-started/write/), and
-set everything to run [automatically](/getting-started/automate/), let's take a look at some additional Keboola 
-features related to doing ad-hoc analysis.
-
-This part of the tutorial shows how to work with arbitrary data in Python
-in a completely unrestricted way. Although our examples use the Python language,
-the very same can be achieved using R.
+Although the examples use Python, the very same can be achieved using R. If you have not created a
+workspace before, start with [Create a Workspace](/workspace/create/); if you would rather build a
+repeatable pipeline than explore, that is the
+[Getting Started arc](/getting-started/) instead.
 
 Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
 
@@ -51,7 +52,7 @@ Then create a [service account](https://cloud.google.com/iam/docs/service-accoun
 of the Google BigQuery data source connector, and create a Google Cloud Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 ***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
-[load them from Google Sheets](/getting-started/load/googlesheets/). Or, export them to a CSV file, publish it, and [load it over HTTP](/getting-started/load/).*
+[load them from Google Sheets](/components/extractors/storage/google-sheets/). Or, export them to a CSV file, publish it, and [load it over HTTP](/getting-started/load/).*
 
 ### Prepare
 Before you start, have a Google service account and a Google Cloud Storage bucket ready.
@@ -61,29 +62,29 @@ To create a Google service account, go to the
 [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts)
 and create a new service account:
 
-![Screenshot - Google Service Account](/getting-started/ad-hoc/cloud-platform-service-account-1.png)
+![Screenshot - Google Service Account](/workspace/ad-hoc-analysis/cloud-platform-service-account-1.png)
 
 Name the service account:
 
-![Screenshot - Google Service Account Detail](/getting-started/ad-hoc/cloud-platform-service-account-3.png)
+![Screenshot - Google Service Account Detail](/workspace/ad-hoc-analysis/cloud-platform-service-account-3.png)
 
 Grant the roles **BigQuery Data Editor**, **BigQuery Job User** and **Storage Object Admin** to your service account:
 
-![Screenshot - Google Service Account Permissions](/getting-started/ad-hoc/cloud-platform-service-account-4.png)
+![Screenshot - Google Service Account Permissions](/workspace/ad-hoc-analysis/cloud-platform-service-account-4.png)
 
 Finally, create a new JSON key and download it to your computer:
 
-![Screenshot - Google Service Account Download](/getting-started/ad-hoc/cloud-platform-service-account-5.png)
+![Screenshot - Google Service Account Download](/workspace/ad-hoc-analysis/cloud-platform-service-account-5.png)
 
 #### Google Cloud Storage bucket
 To create a Google Cloud Storage bucket, go to the [**Google Cloud Platform console > Storage**](https://console.cloud.google.com/storage/browser)
 and create a new bucket:
 
-![Screenshot - Google Cloud Platform](/getting-started/ad-hoc/cloud-platform-storage-1.png)
+![Screenshot - Google Cloud Platform](/workspace/ad-hoc-analysis/cloud-platform-storage-1.png)
 
 Enter the bucket's name and choose where to store your data (the location type *Region* is okay for our purpose):
 
-![Screenshot - Create Bucket](/getting-started/ad-hoc/cloud-platform-storage-3.png)
+![Screenshot - Create Bucket](/workspace/ad-hoc-analysis/cloud-platform-storage-3.png)
 
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
@@ -91,39 +92,39 @@ Do not set a retention policy on the bucket. The bucket contains only temporary 
 Now you're ready to load the data into Keboola. Go to the section **Components**, 
 and click the green button **Add Component**:
 
-![Screenshot - Components](/getting-started/ad-hoc/ex-bigquery-1.png)
+![Screenshot - Components](/workspace/ad-hoc-analysis/ex-bigquery-1.png)
 
 Use the search to find the Google BigQuery data source:
 
-![Screenshot - Add New Component search for Google BigQuery](/getting-started/ad-hoc/ex-bigquery-2.png)
+![Screenshot - Add New Component search for Google BigQuery](/workspace/ad-hoc-analysis/ex-bigquery-2.png)
 
 Click **+ Add Component** and then **Connect To My Data**: 
 
-![Screenshot - New Configuration](/getting-started/ad-hoc/ex-bigquery-3.png)
+![Screenshot - New Configuration](/workspace/ad-hoc-analysis/ex-bigquery-3.png)
 
 Name the configuration (e.g., 'Bls Unemployment') and describe it if you want. Then, click **Create Configuration**:
 
-![Screenshot - New Configuration Name](/getting-started/ad-hoc/ex-bigquery-4.png)
+![Screenshot - New Configuration Name](/workspace/ad-hoc-analysis/ex-bigquery-4.png)
 
 Then set the service account key:
 
-![Screenshot - Big Query Authorization](/getting-started/ad-hoc/ex-bigquery-5.png)
+![Screenshot - Big Query Authorization](/workspace/ad-hoc-analysis/ex-bigquery-5.png)
 
 Open the downloaded key you have created above in a text editor, copy & paste it in the input field, click **Submit** and then **Save**.
 
-![Screenshot - Service Account Copy](/getting-started/ad-hoc/ex-bigquery-6.png)
+![Screenshot - Service Account Copy](/workspace/ad-hoc-analysis/ex-bigquery-6.png)
 
 Fill the bucket you have created above:
 
-![Screenshot - Big Query Unload](/getting-started/ad-hoc/ex-bigquery-7.png)
+![Screenshot - Big Query Unload](/workspace/ad-hoc-analysis/ex-bigquery-7.png)
 
 After that configure the actual extraction queries by clicking the **Add Query** button:
 
-![Screenshot - Big Query Configured](/getting-started/ad-hoc/ex-bigquery-8.png)
+![Screenshot - Big Query Configured](/workspace/ad-hoc-analysis/ex-bigquery-8.png)
 
 Name the query, e.g., `Unemployment rates`:
 
-![Screenshot - New Query Name](/getting-started/ad-hoc/ex-bigquery-9.png)
+![Screenshot - New Query Name](/workspace/ad-hoc-analysis/ex-bigquery-9.png)
 
 Check *Create your own query using an SQL editor*, uncheck the *Use Legacy SQL* setting, and paste the following code in the *SQL Query* field:
 
@@ -140,11 +141,11 @@ The `LNS14000000` series will pick the unemployment rates only.
 
 Then **Save** the query configuration.
 
-![Screenshot - Query Configuration](/getting-started/ad-hoc/ex-bigquery-10.png)
+![Screenshot - Query Configuration](/workspace/ad-hoc-analysis/ex-bigquery-10.png)
 
 Now run the configuration to bring the data to Keboola:
 
-![Screenshot - Finished Configuration](/getting-started/ad-hoc/ex-bigquery-11.png)
+![Screenshot - Finished Configuration](/workspace/ad-hoc-analysis/ex-bigquery-11.png)
 
 Running the data source connector creates a background job that
 
@@ -167,25 +168,25 @@ To explore the data, go to [**Workspaces**](/workspace/).
 Provided for each user and project automatically, it is an isolated environment in which you can experiment without
 interfering with any production code.
 
-![Screenshot - Transformations](/getting-started/ad-hoc/transformation-1.png)
+![Screenshot - Transformations](/workspace/ad-hoc-analysis/transformation-1.png)
 
 Click on **New Sandbox** next to Python (Jupyter):
 
-![Screenshot - Create Sandbox](/getting-started/ad-hoc/transformation-2.png)
+![Screenshot - Create Sandbox](/workspace/ad-hoc-analysis/transformation-2.png)
 
 Select the unemployment rates table (`in.c-keboola-ex-google-bigquery-v2-548939034.unemployment-rates` in this case), 
 click on **Create Sandbox**. Wait for the process to finish:
 
-![Screenshot - Sandbox Configuration](/getting-started/ad-hoc/transformation-3.png)
+![Screenshot - Sandbox Configuration](/workspace/ad-hoc-analysis/transformation-3.png)
 
 When finished, connect to the web version of the [Jupyter Notebook](https://jupyter.org/).
 It allows you to run arbitrary code by clicking the **Connect** button:
 
-![Screenshot - Sandbox Credentials](/getting-started/ad-hoc/transformation-4.png)
+![Screenshot - Sandbox Credentials](/workspace/ad-hoc-analysis/transformation-4.png)
 
 When prompted, enter the password from the Sandbox screen:
 
-![Screenshot - Sandbox Login](/getting-started/ad-hoc/sandbox-1.png)
+![Screenshot - Sandbox Login](/workspace/ad-hoc-analysis/sandbox-1.png)
 
 You can now run arbitrary code in Python, using common data scientist tools like
 [Pandas](https://pandas.pydata.org/) or [Matplotlib](https://matplotlib.org/).
@@ -211,7 +212,7 @@ plt.suptitle('US Unemployment Rate', size=15)
 plt.show()
 ```
 
-![Screenshot - Sandbox Result](/getting-started/ad-hoc/sandbox-2.png)
+![Screenshot - Sandbox Result](/workspace/ad-hoc-analysis/sandbox-2.png)
 
 ## Adding Libraries
 Now that you can experiment with the U.S. unemployment data extracted from Google BigQuery (or any other data extracted in any other way),
@@ -258,7 +259,7 @@ plt.suptitle('EU Unemployment Rate', size=15)
 plt.show()
 ```
 
-![Screenshot - Sandbox Result](/getting-started/ad-hoc/sandbox-3.png)
+![Screenshot - Sandbox Result](/workspace/ad-hoc-analysis/sandbox-3.png)
 
 ## Wrap Up
 You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly,

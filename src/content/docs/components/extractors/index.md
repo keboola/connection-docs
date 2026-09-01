@@ -30,8 +30,8 @@ Even though data source connectors are generally designed for [**automated and r
 they can be triggered manually at any time.
 
 - For manual import of ad-hoc data, see [Data Import in Storage](/storage/files/). To load your first tables with a connector, see [Get Your Data In](/getting-started/load/).
-- Configure a [sample data source connector](/getting-started/load/googlesheets/) (Google Sheets).
-- Configure a [database data source connector](/getting-started/load/database/);
+- Configure a [sample data source connector](/components/extractors/storage/google-sheets/) (Google Sheets).
+- Configure a [database data source connector](/components/extractors/database/sqldb/#initial-setup);
 other SQL database data source connectors are configured in the exact same way.
 
 As bringing data into Keboola is the main purpose of a data source connectors, go the path of least resistance:

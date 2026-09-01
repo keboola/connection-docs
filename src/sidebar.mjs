@@ -45,10 +45,6 @@ export const sidebar = [
         label: "Going Further",
         collapsed: true,
         items: [
-          { slug: "getting-started/load/googlesheets" },
-          { slug: "getting-started/load/database" },
-          { slug: "getting-started/transform/workspace" },
-          { slug: "getting-started/ad-hoc" },
           {
             label: "Development Branches",
             collapsed: true,
@@ -240,6 +236,7 @@ export const sidebar = [
               { slug: "components/extractors/storage/azure-datalake-gen2" },
               { slug: "components/extractors/storage/ftp" },
               { slug: "components/extractors/storage/google-drive" },
+              { slug: "components/extractors/storage/google-sheets" },
               { slug: "components/extractors/storage/http" },
               { slug: "components/extractors/storage/storage-api" },
               { slug: "components/extractors/storage/onedrive-excel-sheets" },
@@ -483,6 +480,8 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "workspace" },
       { slug: "workspace/snowflake-workspaces-access-changes" },
+      { slug: "workspace/create" },
+      { slug: "workspace/ad-hoc-analysis" },
       { slug: "workspace/sql-editor" },
       {
         label: "Keboola JDBC Driver",
