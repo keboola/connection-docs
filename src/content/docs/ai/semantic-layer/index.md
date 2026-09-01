@@ -6,14 +6,19 @@ description: Describe your data in business terms — datasets, metrics, relatio
 
 :::caution[Beta]
 The semantic layer is in beta. It runs on Keboola's multi-tenant stacks and is not offered on
-single-tenant stacks. If your project has no **Semantic Layer** section, contact our
-[support team](mailto:support@keboola.com).
+single-tenant stacks. The **Semantic Layer** section in the UI is enabled per project separately
+from the semantic layer itself, so your project can already hold a semantic model — one built by
+Kai, for example — before the section appears. If your project has no **Semantic Layer** section,
+contact our [support team](mailto:support@keboola.com).
 :::
 
 <!-- VERIFY(Jordan): plan-level availability wording. Verified: metastore is deployed on all five
 multi-tenant stacks and absent on single-tenant; PAYG projects were switched on 2026-07-29. The
 multi-tenant rollout was still in progress at the last project update, so this page describes
-availability by stack rather than by plan. -->
+availability by stack rather than by plan. The UI-vs-capability split is per the 2026-08-19
+#kbc-news-feed announcement, verified verbatim: the `semantic-layer` project feature gates only
+the sidebar UI, while Kai/MCP create and use models unconditionally wherever the metastore
+service is available — see davidesner's comment on PR #1103. -->
 
 Keboola's semantic layer lets you describe your project's data in business terms — datasets, metrics, relationships, glossary terms, and business rules. AI assistants connected to your project through the [MCP Server](/ai/mcp-server/) use these definitions to understand what your data *means*, not just how it is stored.
 
