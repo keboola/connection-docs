@@ -68,6 +68,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "kai" },
       { slug: "kai/getting-started" },
+      { slug: "kai/pricing" },
       { slug: "kai/settings" },
       { slug: "kai/use-cases" },
       { slug: "kai/best-practices" },
@@ -292,7 +293,7 @@ export const sidebar = [
             items: [
               { label: "Overview", slug: "components/extractors/generic-extractor" },
               {
-                label: "Generic Extractor Tutorial",
+                label: "Tutorial",
                 collapsed: true,
                 items: [
                   { label: "Overview", slug: "components/extractors/generic-extractor/tutorial" },
