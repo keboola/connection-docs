@@ -53,6 +53,10 @@ Test changes safely by creating a development branch in the Keboola UI, then wor
 - **Let Kai read logs** — instead of pasting, use `"Read the latest job log for ex-google-analytics"`
 - **Attach what Kai cannot reach** — for security reasons Kai cannot open links, so upload
   a file rather than pasting a URL
+- **Compact rather than lose your place** — in a long session that is still on topic, run
+  [`/compact`](/kai/getting-started/#compacting-a-long-conversation) and name what has to survive
+  the summary. It keeps the thread going where a new chat would drop everything. If the topic has
+  actually changed, start a new chat instead — compacting carries context you no longer want
 
 ## Security
 

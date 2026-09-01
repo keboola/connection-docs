@@ -88,6 +88,39 @@ All actions are logged in your project's audit trail.
 For more granular control, see [Tool Permissions](/kai/settings/#tool-permissions) in
 Kai Settings.
 
+## Plan Mode
+
+For anything bigger than a single change — setting up a pipeline, restructuring a set of
+transformations — start in plan mode. Kai explores your project read-only, then shows you what it
+intends to do and waits. Nothing changes until you approve.
+
+Turn it on with the **Plan mode** button below the message box, or type `/plan` in your message.
+They do the same thing; the button just inserts the command for you. `/plan` works anywhere in a
+sentence, so "help me /plan a revenue model" is a valid plan-mode prompt.
+
+When Kai finishes exploring, it presents the plan as a card with three choices:
+
+- **Approve** — Kai leaves plan mode and starts working. Shortcut: **Cmd/Ctrl + Enter**.
+- **Request changes** — say what is wrong and Kai revises the plan, staying in plan mode.
+- **Dismiss** — close the plan and do nothing.
+
+Prefer **Request changes** over dismissing. Kai keeps everything it learned while exploring, so
+revising a plan costs far less than starting over.
+
+The message box is hidden while a plan card is waiting, so resolve the card before you carry on
+chatting. Resolving it also switches plan mode back off for you, unless you requested changes — in
+that case it stays on, because Kai is still planning.
+
+## When Kai Asks You a Question
+
+When Kai needs a decision from you — which tables to model, which of two approaches to take — it
+asks with clickable options instead of a paragraph of prose. Pick one and Kai carries on.
+
+- Some questions take **more than one answer**; select as many as apply.
+- Every question has a free-text **Other** field, so you are never limited to the options offered.
+- Questions can arrive as a short series, one step at a time.
+- You can skip a question and let Kai decide.
+
 ## Chat Controls
 
 The chat panel has controls in two places: along the top of the panel, and below the
@@ -107,9 +140,68 @@ message box.
 
 | Button | Control | What it does |
 |--------|---------|--------------|
-| ![Upload file](/kai/kai-upload-file.png) | **Upload files** | Attach a file or image to your message. Useful for a screenshot of an error, a sample CSV, a spec you want Kai to work from, or documentation Kai has no other way to read — for security reasons, it cannot open links. |
-| ![Plan mode](/kai/kai-plan-mode.png) | **Plan mode** | Kai explores your project read-only, drafts a plan of what it intends to do, and waits for your approval before changing anything. Use it for larger requests, such as setting up a pipeline or restructuring a set of transformations. You can also start it by typing `/plan`. |
+| ![Upload file](/kai/kai-upload-file.png) | **Upload files** | Attach a file or image to your message — a screenshot of an error, a sample CSV, a spec, or documentation Kai has no other way to read. See [Attaching files](#attaching-files). |
+| ![Plan mode](/kai/kai-plan-mode.png) | **Plan mode** | Kai explores your project read-only, drafts a plan, and waits for your approval before changing anything. See [Plan Mode](#plan-mode). |
 | ![Follow mode](/kai/kai-follow-mode.png) | **Follow mode** | Your browser navigates along as Kai works, so you can watch what it reads and modifies. Toggle it on or off at any time. |
+
+### Attaching files
+
+Use **Upload files**, or drag and drop or paste straight into the chat. You can attach several
+files at once. What happens next depends on the file type.
+
+**CSV, TSV, and `.gz` files become Storage tables.** Kai opens the table-creation dialog and loads
+the file into the `in.c-uploads-from-Kai` bucket, creating that bucket the first time. Kai then
+works with the table, so the data is queryable like anything else in your project and outlives the
+conversation.
+
+**Every other file is attached to the conversation.** It is uploaded to your project's
+[File Storage](/storage/files/) and restored each time you return to that chat, so you can refer
+back to something you attached much earlier in the same conversation. Images and PDFs are read
+directly by Kai, so a screenshot of a failing job or a PDF spec works as well as plain text.
+
+Since Kai cannot open links, a file is how you hand it anything that lives on the web. For
+documentation you will reuse across conversations, add a
+[context file](/kai/settings/#context-files) instead of attaching it every time.
+
+Two limits are worth knowing:
+
+- **10 MB per file.** Anything larger is skipped.
+- Attachments are stored as non-permanent files, so they are **deleted after 15 days**, like any
+  other non-permanent file in Storage. Reopen an older chat and Kai no longer has them.
+
+## Slash Commands
+
+Type `/` in the message box to open a searchable menu. It lists the three built-in commands below
+plus any [skill files](/kai/settings/#skill-files) uploaded to your project, each with a
+description, so you can find what is available without memorizing names.
+
+| Command | What it does |
+|---------|--------------|
+| `/plan` | Turn on [plan mode](#plan-mode) for this message. The same as the Plan mode button. |
+| `/compact` | Summarize the conversation so far and continue from that summary. See below. |
+| `/feedback` | Report a bug or send feedback. By default Kai copies the debug details Keboola support needs — conversation ID, project, stack — to your clipboard. Ask it to "open a ticket" and it opens the support form with those details filled in instead, the same form as the **Report a bug** button in the panel header. |
+
+### Compacting a long conversation
+
+Kai works from a limited amount of conversation at a time. When a chat gets long, `/compact`
+replaces the earlier turns with a summary so there is room to keep going. Kai also compacts on its
+own when a conversation grows too long, without you asking.
+
+**Your messages stay on screen, and that is intended.** Compaction adds a *Conversation compacted.*
+line to the transcript and removes nothing above it — the transcript stays a full record of what
+happened. What changes is what Kai is working from: past that line, Kai reads a summary of the
+earlier conversation rather than the messages themselves. So a detail you can still scroll up and
+read is not necessarily a detail Kai still has.
+
+Anything you type after the command steers the summary, which is worth doing when you know what
+matters:
+
+```
+/compact keep the column mapping we worked out for the orders table
+```
+
+Compaction cannot be undone, so name what you need before you run it. For when to compact rather
+than start a new chat, see [Manage Context](/kai/best-practices/#manage-context) in Best Practices.
 
 ## Contextual Awareness
 
