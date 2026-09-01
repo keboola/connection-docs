@@ -41,7 +41,7 @@ After installation, enable the plugins you need:
 
 The kbagent Plugin teaches an AI client the [kbagent CLI](/cli/), so the assistant can run jobs, read configurations and search across your Keboola projects. It adds a `/keboola` command backed by a `keboola-expert` subagent, a skill that understands plain-language asks like "set up kbagent for my Keboola project", and in Claude Code a `/kbagent:setup` command that installs and connects the CLI in one step.
 
-The plugin's source lives in the CLI repo at [`plugins/kbagent`](https://github.com/keboola/cli/tree/main/plugins/kbagent); this marketplace publishes it from there through a `git-subdir` source. Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app can all install it, each by its own route. See [kbagent for AI agents](/cli/for-agents/) for the steps per client.
+The plugin's source lives in the CLI repo at [`plugins/kbagent`](https://github.com/keboola/cli/tree/main/plugins/kbagent); this marketplace publishes it from there through a `git-subdir` source. Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app can all install it, each by its own route. See [kbagent with AI agents](/cli/for-agents/) for the steps per client.
 
 ### Component Developer Plugin
 

@@ -1,5 +1,5 @@
 ---
-title: kbagent for AI agents
+title: kbagent with AI agents
 slug: 'cli/for-agents'
 sidebar:
   label: Use with AI Agents
@@ -87,7 +87,7 @@ Type that last one without a leading slash. `/kbagent …` fails here.
 5. Ask in the chat: `kbagent list my projects`
 
 :::caution[Cursor needs the full URL]
-The short `keboola/ai-kit` form that works in Claude Code and Claude Desktop is rejected here with `[invalid_argument] Error`, which says nothing about the cause. Paste `https://github.com/keboola/ai-kit`.
+The short `keboola/ai-kit` form that works in Claude Code and Claude Desktop is rejected here with `[invalid_argument] Error`. Paste `https://github.com/keboola/ai-kit`.
 :::
 
 ### VS Code
