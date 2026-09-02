@@ -61,7 +61,7 @@ the extractor is [published](/components/extractors/generic-extractor/publish/) 
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
 The following configuration will make Generic Extractor put all extracted tables in the `ge-tutorial` bucket
-(the names of the tables are defined by the [`dataType`](/components/extractors/generic-extractor/configuration/config/jobs/#dataType) setting):
+(the names of the tables are defined by the [`dataType`](/components/extractors/generic-extractor/configuration/config/jobs/#data-type) setting):
 
 ```json
 {
