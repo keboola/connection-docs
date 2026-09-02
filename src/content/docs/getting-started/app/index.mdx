@@ -1,21 +1,30 @@
 ---
-title: 'Build the App'
+title: 'Put it in front of someone'
 slug: 'getting-started/app'
 description: 'Turn the octopus atlas into a shareable map app with a "how close to me?" field, described to Kai in one sentence and published with one button.'
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="Tutorial" minutes="10" />
 
 A spreadsheet answers the person who asked. An app answers everyone who is curious — including
 the half of the original question no table can settle: *how close to **your** coast does an
 octopus live?* This step turns `octopus_atlas` into a published map with a field for your own
 coordinates.
-Step 6 of the [Getting Started](/getting-started/) arc.
 
-**Two ways to do it** — the Kai tab below is the whole path here. Building an app by hand is its
-own topic with its own section; the second tab says where to go for it.
+**Where you are:** the joined table exists in Storage. **When you finish:** a running app with
+its own URL, and a password so you decide who sees it.
 
-{/* Tutorial-type page (step 6 of 7), NEW in the octopus rework (PRDCT-487, 2026-08-25). UI flow
+<PathIntro yours="deciding who gets the URL and the password" />
+
+Building an app by hand is its own topic with its own section; the second tab says where to go
+for it.
+
+{/* Tutorial-type page, NEW in the octopus rework (PRDCT-487, 2026-08-25). UI flow
 and labels are taken from data-apps/getting-started.md ("+ Create App", the "Describe what you
 want to build..." prompt screen, Confirmation required with Approve/Decline/Always allow, the
 Preview/Code split-screen builder, "Publish to Production", status Active, Open App, default auth
@@ -25,10 +34,15 @@ re-walk in project 264. VERIFY(owner): whether the Free Plan includes data apps 
 this step needs the same "skippable" framing as the Google step; check /management/payg-project/
 during the live walk. */}
 
-## What you need
-
-- The table `octopus_atlas` in Storage, from [Transform Data](/getting-started/transform/) — or
-  fresher, from the flow that now rebuilds it on a schedule.
+<Prereqs needs={['project']}>
+  <li>
+    The joined table in Storage, from <a href="/getting-started/transform/">Transform data</a>.
+  </li>
+  <li>
+    An <strong>Apps</strong> section in the navigation. Not every project has data apps enabled —
+    see <a href="/data-apps/what-are-apps/">what apps are</a>, or ask your organization admin.
+  </li>
+</Prereqs>
 
 ## What a data app is
 
@@ -80,7 +94,7 @@ scripts/compositor.html (local, gitignored): pacing, chips, octopus pointer on t
 Re-record against the published app after the deploy lands. */}
 
 **Check:** the map shows sightings on every continent's coastline; filtering by basin matches
-the counts Kai gave you in [step 5](/getting-started/automate/) — the North Atlantic is the
+the counts you can check in Storage — the North Atlantic is the
 crowded one — and the nearest-sighting panel updates when you change the coordinates. If the
 app came out different, tell Kai what to change in the same chat — **Make changes** — and
 publish again; the draft is editable until you like it.
@@ -99,8 +113,6 @@ the Kai tab first; come back when the app you want is one the description field 
 
 ## If it goes wrong
 
-- **There is no Apps section in the navigation.** Not every project has data apps enabled; see
-  [What are apps](/data-apps/what-are-apps/) for availability, or ask your organization admin.
 - **The app builds but the map is empty.** The app is reading the wrong table — tell Kai the
   full table ID, `out.c-octopus-atlas.octopus_atlas`, in the chat and republish.
 - **The nearest-sighting answer looks wrong.** Coordinates are easy to swap: latitude first
@@ -113,5 +125,3 @@ the Kai tab first; come back when the app you want is one the description field 
   default password, and who can reach the URL.
 - [Build locally](/data-apps/build-locally/) — the Git-based workflow once an app outgrows
   its first description.
-
-**Next:** [Where to go next →](/getting-started/next-steps/)

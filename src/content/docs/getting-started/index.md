@@ -113,7 +113,7 @@ collapse: [the last page shows the whole arc as one prompt](/getting-started/nex
    Sheet with a data destination connector. You authorize; one Kai prompt does the rest.
 5. **[Run It on a Schedule](/getting-started/automate/)** — run the whole thing in order,
    on a schedule, with notifications. Kai wires the flow; the schedule is two clicks.
-6. **[Build the App](/getting-started/app/)** — a map of every sighting with a
+6. **[Put it in front of someone](/getting-started/app/)** — a map of every sighting with a
    "how close to me?" field, described to Kai in one sentence and published with one button.
 7. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
    you actually want to do, including how to drive Keboola from an AI assistant, an IDE, or
