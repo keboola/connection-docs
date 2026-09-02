@@ -1,5 +1,5 @@
 ---
-title: 'Load from a Database'
+title: 'Load from a database'
 slug: 'getting-started/load/database'
 description: 'Load tables from an external database using the Snowflake data source connector — the same pattern applies to every database connector Keboola supports.'
 redirect_from:

@@ -128,11 +128,11 @@ Optional side trips, once the main path makes sense. None of them are needed to 
 arc:
 
 - **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
-  **[Load from a Database](/getting-started/load/database/)** — load from a source that needs
+  **[Load from a database](/getting-started/load/database/)** — load from a source that needs
   credentials, rather than the public URL step 2 uses.
-- **[Use a Workspace](/getting-started/transform/workspace/)** — develop and test SQL against
+- **[Use a workspace](/getting-started/transform/workspace/)** — develop and test SQL against
   a copy of your data before committing it to a transformation.
-- **[Ad-Hoc Data Analysis](/getting-started/ad-hoc/)** — explore arbitrary data in a Python
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** — explore arbitrary data in a Python
   or R notebook rather than building a pipeline.
 - **[Development Branches](/getting-started/branches/)** — change a running project safely,
   review the diff, then merge.

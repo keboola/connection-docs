@@ -1,5 +1,5 @@
 ---
-title: 'Use a Workspace'
+title: 'Use a workspace'
 slug: 'getting-started/transform/workspace'
 description: 'Create a workspace — an isolated environment with a copy of your production data — to develop and test transformation code safely.'
 redirect_from:
