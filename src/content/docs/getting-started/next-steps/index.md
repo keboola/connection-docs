@@ -10,7 +10,7 @@ whether or not anyone thinks to ask again, and the map answers anyone who opens 
 whole shape of working in Keboola; everything else is a variation on it.
 Step 7, the last, of the [Getting Started](/getting-started/) arc.
 
-<!-- Explanation-type page (step 7 of 7): a routing page, no steps of its own. Beta labels for the Kai button removed per Jordan 2026-08-21 (UI pill retires 2026-09-15); the kai/ section still carries Public Beta wording — schedule the same removal there. Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
+<!-- Explanation-type page: a routing page, no steps of its own. Beta labels for the Kai button removed per Jordan 2026-08-21 (UI pill retires 2026-09-15); the kai/ section still carries Public Beta wording — schedule the same removal there. Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
 
 ## What you built
 

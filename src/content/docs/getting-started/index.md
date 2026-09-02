@@ -111,7 +111,7 @@ collapse: [the last page shows the whole arc as one prompt](/getting-started/nex
    names and places every sighting in its ocean and depth zone. One Kai prompt builds and runs it.
 4. **[Send a table to Google Sheets](/getting-started/write/)** — push the result to a Google
    Sheet with a data destination connector. You authorize; one Kai prompt does the rest.
-5. **[Run It on a Schedule](/getting-started/automate/)** — run the whole thing in order,
+5. **[Make it run every morning](/getting-started/automate/)** — run the whole thing in order,
    on a schedule, with notifications. Kai wires the flow; the schedule is two clicks.
 6. **[Put it in front of someone](/getting-started/app/)** — a map of every sighting with a
    "how close to me?" field, described to Kai in one sentence and published with one button.

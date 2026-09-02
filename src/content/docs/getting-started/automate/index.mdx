@@ -1,5 +1,5 @@
 ---
-title: 'Run It on a Schedule'
+title: 'Make it run every morning'
 slug: 'getting-started/automate'
 description: 'Wire your connectors and transformation into a single flow, run its tasks in parallel where possible, give it a schedule, and get notified when it fails.'
 redirect_from:
@@ -7,16 +7,22 @@ redirect_from:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-The answer in that sheet is true this morning, because you ran every step by hand. Tomorrow it is
-a screenshot. A **flow** chains your three configurations in the order each one needs the last and
-runs them on a schedule, so the answer keeps up with the pipeline without you.
-Step 5 of the [Getting Started](/getting-started/) arc.
+<PageMeta genre="Tutorial" minutes="15" />
 
-**Two ways to do it** — pick a tab in *Set it up* below. Running it, scheduling it and setting
-notifications come afterwards and are yours either way.
+Your answer is true this morning, because you ran every step by hand. Tomorrow it is a
+screenshot. A **flow** chains your configurations in the order each one needs the last and runs
+them on a schedule, so the result keeps up with the data without you.
 
-{/* Tutorial-type page (step 5 of 7). 2026-08-25: dataset swapped to the octopus atlas (PRDCT-487
+**Where you are:** the pieces work individually, each run by hand. **When you finish:** one flow
+that runs them in order every morning and emails you when it breaks.
+
+<PathIntro yours="nothing — but running, scheduling and notifications come after the tabs and are the same either way" />
+
+{/* Tutorial-type page. Ordinal removed 2026-09-02 (see DECISIONS.md). 2026-08-25: dataset swapped to the octopus atlas (PRDCT-487
 arc rework); the whole flow was then built, run and scheduled live in 264 (2026-08-25/26), and all
 screenshots reshot against it on 2026-08-27 — including the third (Google Sheets) phase, now that
 the OAuth exists. The captures show the finished flow with renamed phases (Extract/Transform/Load);
@@ -26,7 +32,11 @@ a task; the Builder needs an explicit Save before Run flow is enabled; schedulin
 Create Schedule > Set Up Schedule, NOT "Set Schedule" as /flows/ still says; the Notifications tab
 edits in place with Success/Errors/Processing cards and has no "Edit Notifications" button and no
 Warnings card, contrary to /management/notifications/. Create Flow now opens a chooser
-("Get your data connected!") — see the VERIFY at step 1. The closing section, "Ask it the question you started with", is grounded in
+("Get your data connected!") — see the VERIFY on the first step below. NOTE 2026-09-02: the
+closing section that used to live here ("Ask it the question you started with") moved to
+getting-started/ask/ — its Kai grounding and re-derived numbers travelled with it. The rest of
+this comment still applies to this page. Formerly documented here and kept for provenance: it was
+grounded in
 /kai/ (Query databases, calculate metrics), /kai/use-cases/#data-exploration and
 /kai/settings/#tool-permissions (read-only tools default to Always allow); its numbers are
 re-derived from public/getting-started/*.csv (North Atlantic 2,632 sightings = 26%, 50 distinct
@@ -35,16 +45,19 @@ prompts were run against live Kai in 264 on 2026-08-18 with no approval dialog �
 ran unprompted, which grounds the read-only sentence below; the octopus prompts themselves pend
 the live re-run. */}
 
-## What you need
-
-Everything from the previous steps, in one project:
-
-- the `[TUTORIAL] Octopus sightings` HTTP configuration from
-  [Get Your Data In](/getting-started/load/),
-- the `Octopus atlas` transformation from
-  [Transform Data](/getting-started/transform/),
-- the Google Sheets destination from
-  [Send a table to Google Sheets](/getting-started/write/).
+<Prereqs needs={['project']}>
+  <li>
+    The connector configuration from <a href="/getting-started/load/">Get your data in</a>.
+  </li>
+  <li>
+    The transformation from <a href="/getting-started/transform/">Transform data</a>.
+  </li>
+  <li>
+    Optionally the destination from{' '}
+    <a href="/getting-started/write/">Send a table to Google Sheets</a> — without it the flow has
+    two phases instead of three, which is still a real pipeline.
+  </li>
+</Prereqs>
 
 ## Phases and tasks
 
@@ -95,7 +108,7 @@ HTTP configuration first, then the "Octopus atlas" transformation, then the
 "[TUTORIAL] Octopus atlas to Sheets" destination — three phases, one task each, in that order.
 ```
 
-If you skipped [step 4](/getting-started/write/), drop the third one and ask for two phases.
+If you skipped [the spreadsheet](/getting-started/write/), drop the third one and ask for two phases.
 
 **Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
 previous one's output, so the split is the whole point, for the reason the section above just
@@ -147,7 +160,7 @@ gets told about is just a button.
    you rename them.*
 
 5. Repeat for a third phase holding the Google Sheets destination configuration. If you skipped
-   [step 4](/getting-started/write/), stop at two phases.
+   [the spreadsheet](/getting-started/write/), stop at two phases.
 
 6. Click **Save**. The Builder keeps your changes as a draft until you do — **Save** and
    **Reset** only appear while there are unsaved changes, and **Run flow** stays disabled until
