@@ -1,6 +1,7 @@
 ---
 title: Jobs
 slug: 'management/jobs'
+description: Track component jobs in Keboola — the jobs log and search syntax, the job lifecycle and states, waiting and parallelism limits, and how to terminate a running job.
 ---
 
 
@@ -14,7 +15,7 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 
 - what tables were imported (created by the job and imported into your Storage).
 - what tables were exported (read from your Storage by the job).
-- how many [credits](/management/project/limits/#project-power) were used by running the job.
+- how many [credits](/management/project/limits/#project-power--time-credits) were used by running the job.
 - what events occurred during the job execution.
 - what exact parameters were used for the job (this might be useful when working with the [API](https://developers.keboola.com/integrate/jobs/#apis-for-working-with-jobs)).
 
@@ -74,12 +75,12 @@ Until a job is finished (i.e., it is waiting or processing), it can be terminate
 a few seconds.*
 
 In some cases, a job can have **child jobs**. They are identified by having their `RunId` delimited with
-a dot --- e.g., `347371952.3473719650`. In this case, the job `3473719650` run is in fact a child
+a dot — e.g., `347371952.3473719650`. In this case, the job `3473719650` run is in fact a child
 job to `347371952`. Terminating the parent job will automatically terminate the child job too. 
 Terminating the child job will probably cause the parent to terminate or fail.
 
 ## Waiting Jobs
-When a job is run, it is always put in the waiting state to wait for our **infrastructure** --- 
+When a job is run, it is always put in the waiting state to wait for our **infrastructure** —
 [worker](https://developers.keboola.com/integrate/jobs/) to start executing it.
 This usually takes anywhere from several seconds to a couple of minutes at most. 
 
@@ -92,20 +93,6 @@ the waiting state under the following conditions:
 - If there is already a running job of the **same configuration**.
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
 
-## Storage Jobs
-Not only we record all jobs executed in your Keboola project, we also record all data that was uploaded
-into it. Go to **Storage** and click the **Jobs** tab:
+## Storage jobs
 
-![Screenshot - Storage Jobs](/management/jobs/storage-jobs.png)
-
-When you click an **importTable** job, you'll see the Storage job detail:
-
-![Screenshot - Storage Job Detail](/management/jobs/storage-jobs-detail.png)
-
-Clicking **File ID** will take you to the **Files** section in **Storage**,
-where all data pushed into your Keboola project is stored.
-You can download the data and import it into other tables, or you can revert to an older table version.
-
-![Screenshot - Files](/management/jobs/storage-file-uploads.png)
-
-A comprehensive [video guide](https://www.youtube.com/watch?v=qIkSgzVmJa0) on this subject is available on our YouTube channel.
+Component jobs are separate from **Storage jobs** — the low-level record of data loaded to and unloaded from Table Storage. For the Storage → Jobs view and its details, see [Storage jobs](/storage/jobs/).

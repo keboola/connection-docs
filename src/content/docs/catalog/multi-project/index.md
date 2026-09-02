@@ -25,6 +25,10 @@ only a *usage pattern* of the Keboola platform. The idea is to create separate p
 analyzing and writing data. The projects structure can follow the organization structure, technological structure, or
 anything else really.
 
+:::tip
+This page explains the concept with a worked example. For a guided walkthrough of *when and how* to adopt it for your organization, see the [Multi-Project Architecture Guide](/tutorial/onboarding/architecture-guide/).
+:::
+
 ## Example Scenario
 Let's say that you have an existing Keboola project that contains:
 
@@ -56,7 +60,7 @@ The following image illustrates the usage pattern change:
 
 ![Schema -- Multi project](/catalog/multi-project/multi-project-2.png)
 
-- All Oracle data source connectors have been isolated into a separate project --- `Oracle`:
+- All Oracle data source connectors have been isolated into a separate project — `Oracle`:
     - The Oracle DBAs take care of that project and share outside the `Oracle` bucket.
     - Most tables are shared as they are extracted, with some transformations compensating for the changes in CRM tables. The `ora-is` tables are 
     processed via transformations where the useful columns are renamed from their 6 character names to meaningful names, and the more obscure 

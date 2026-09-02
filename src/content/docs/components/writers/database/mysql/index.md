@@ -49,7 +49,7 @@ When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
-can write data to tables --- **Full Load** and **Incremental Load**.
+can write data to tables — **Full Load** and **Incremental Load**.
 
 ![Screenshot - Table Options](/components/writers/database/mysql/mysql-6.png)
 

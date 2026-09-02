@@ -9,8 +9,8 @@ slug: 'components/extractors/database/postgresql'
 
 Our connectors support the most recent versions of PostgreSQL. You may choose different strategies to sync your data:
 
-- [Query-based connector](/components/extractors/database/sqldb/#create-new-configuration)
-- [Log-based CDC](/components/extractors/database/postgresql/#log-based-cdc)
+- [Query-based connector](/components/extractors/database/sqldb/#initial-setup)
+- [Log-based CDC](/components/extractors/database/postgresql/#postgresql-log-based-cdc)
 
 
 ## Query-Based Connector
@@ -18,8 +18,8 @@ Our connectors support the most recent versions of PostgreSQL. You may choose di
 This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database to sync data. 
 It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
-They are all [configured](/components/extractors/database/sqldb/#create-new-configuration) in the same way and 
-have an [advanced mode](/components/extractors/database/sqldb/). 
+They are all [configured](/components/extractors/database/sqldb/#initial-setup) in the same way and 
+have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
 Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
 

@@ -68,6 +68,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "kai" },
       { slug: "kai/getting-started" },
+      { slug: "kai/pricing" },
       { slug: "kai/settings" },
       { slug: "kai/use-cases" },
       { slug: "kai/best-practices" },
@@ -125,6 +126,21 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "components" },
       { slug: "components/running-jobs-in-parallel" },
+      {
+        label: "Variables",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/variables" },
+          {
+            label: "Variables Through the API",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/variables/api" },
+              { slug: "components/variables/api/tutorial" },
+            ],
+          },
+        ],
+      },
       {
         label: "Data Source Connectors",
         collapsed: true,
@@ -254,7 +270,6 @@ export const sidebar = [
               { slug: "components/extractors/other/dark-sky" },
               { slug: "components/extractors/other/dynamodb-streams" },
               { slug: "components/extractors/other/currency-rates" },
-              { slug: "components/extractors/other/generic" },
               { slug: "components/extractors/other/geocoding-augmentation" },
               { slug: "components/extractors/other/github" },
               { slug: "components/extractors/other/google-search-console" },
@@ -270,6 +285,92 @@ export const sidebar = [
               { slug: "components/extractors/other/weather-api" },
               { slug: "components/extractors/other/what3words" },
               { slug: "components/extractors/other/yourpass" },
+            ],
+          },
+          {
+            label: "Generic Extractor",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/extractors/generic-extractor" },
+              {
+                label: "Tutorial",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "components/extractors/generic-extractor/tutorial" },
+                  { slug: "components/extractors/generic-extractor/tutorial/rest" },
+                  { slug: "components/extractors/generic-extractor/tutorial/json" },
+                  { slug: "components/extractors/generic-extractor/tutorial/basic" },
+                  { slug: "components/extractors/generic-extractor/tutorial/pagination" },
+                  { slug: "components/extractors/generic-extractor/tutorial/jobs" },
+                  { slug: "components/extractors/generic-extractor/tutorial/mapping" },
+                ],
+              },
+              {
+                label: "Configuration",
+                collapsed: true,
+                items: [
+                  { label: "Overview", slug: "components/extractors/generic-extractor/configuration" },
+                  {
+                    label: "API Configuration",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "components/extractors/generic-extractor/configuration/api" },
+                      {
+                        label: "Pagination",
+                        collapsed: true,
+                        items: [
+                          { label: "Overview", slug: "components/extractors/generic-extractor/configuration/api/pagination" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/pagination/response-url" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/pagination/response-param" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/pagination/offset" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/pagination/pagenum" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/pagination/cursor" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/pagination/multiple" },
+                        ],
+                      },
+                      {
+                        label: "Authentication",
+                        collapsed: true,
+                        items: [
+                          { label: "Overview", slug: "components/extractors/generic-extractor/configuration/api/authentication" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/query" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/basic" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/bearer_token" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/api_key" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/login" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/oauth_cc" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/oauth10" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/oauth20" },
+                          { slug: "components/extractors/generic-extractor/configuration/api/authentication/oauth20-login" },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    label: "Extraction Configuration",
+                    collapsed: true,
+                    items: [
+                      { label: "Overview", slug: "components/extractors/generic-extractor/configuration/config" },
+                      {
+                        label: "Jobs",
+                        collapsed: true,
+                        items: [
+                          { label: "Overview", slug: "components/extractors/generic-extractor/configuration/config/jobs" },
+                          { slug: "components/extractors/generic-extractor/configuration/config/jobs/children" },
+                        ],
+                      },
+                      { slug: "components/extractors/generic-extractor/configuration/config/mappings" },
+                    ],
+                  },
+                  { slug: "components/extractors/generic-extractor/configuration/iterations" },
+                  { slug: "components/extractors/generic-extractor/configuration/ssh-proxy" },
+                ],
+              },
+              { slug: "components/extractors/generic-extractor/map" },
+              { slug: "components/extractors/generic-extractor/functions" },
+              { slug: "components/extractors/generic-extractor/incremental" },
+              { slug: "components/extractors/generic-extractor/running" },
+              { slug: "components/extractors/generic-extractor/publish" },
             ],
           },
         ],
@@ -329,6 +430,15 @@ export const sidebar = [
               { label: "Overview", slug: "components/writers/other" },
               { slug: "components/writers/other/azure-event-hub" },
               { slug: "components/writers/other/yourpass" },
+            ],
+          },
+          {
+            label: "Generic Writer",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/generic-writer" },
+              { slug: "components/writers/generic-writer/configuration" },
+              { slug: "components/writers/generic-writer/configuration-examples" },
             ],
           },
         ],
@@ -393,6 +503,8 @@ export const sidebar = [
         items: [
           { label: "Overview", slug: "storage/data-streams" },
           { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/reference" },
+          { slug: "storage/data-streams/tutorial" },
         ],
       },
       { slug: "storage/files" },
@@ -418,6 +530,21 @@ export const sidebar = [
         ],
       },
       { slug: "storage/byobq" },
+      {
+        label: "Storage API",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/api" },
+          { slug: "storage/api/configurations" },
+          { slug: "storage/api/import-export" },
+          { slug: "storage/api/importer" },
+          { slug: "storage/api/tde-exporter" },
+          { slug: "storage/api/clients/python-client" },
+          { slug: "storage/api/clients/r-client" },
+          { slug: "storage/api/clients/php-client" },
+          { slug: "storage/api/clients/docker-cli" },
+        ],
+      },
     ],
   },
   {
@@ -426,7 +553,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "transformations" },
       { slug: "transformations/mappings" },
-      { slug: "transformations/variables" },
+      { slug: "transformations/shared-code" },
       {
         label: "dbt Transformation",
         collapsed: true,

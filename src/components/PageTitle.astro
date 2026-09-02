@@ -122,8 +122,9 @@ const ICON_MAP: Record<string, string> = {
   'transformations/dbt': '🔧',
   'transformations/bigquery': '🔷',
   'transformations/oracle': '🅾️',
+  'components/variables': '🔣',
   'transformations/mappings': '🔁',
-  'transformations/variables': '📝',
+  'transformations/shared-code': '📝',
   'transformations/code-patterns': '🎯',
   /* Tutorial sub-pages */
   'tutorial/load': '📥',
@@ -156,6 +157,11 @@ const pageIcon: string | undefined =
 const lastUpdated = (entry?.data as any)?.lastUpdated
   ?? (route as any)?.lastUpdated;
 
+/* Utility pages (404) opt out of the meta chrome via `hideMeta`. We key off an
+   explicit flag rather than the slug because under <StarlightPage> the entry id
+   is derived from the URL and is not stable for the 404 route. */
+const hideMeta = (entry?.data as any)?.hideMeta === true;
+
 /* Ask Kai is reached from the header and from the search modal — no per-page
    block is rendered. `ask` frontmatter kept available for future use. */
 void ask;
@@ -163,7 +169,7 @@ void ask;
 
 <div class="b-pagehead">
   <div class="b-meta-row">
-    <span class="b-pill">{sectionLabel}</span>
+    {!hideMeta && <span class="b-pill">{sectionLabel}</span>}
     {lastUpdated && (
       <span class="b-meta-text">
         Updated {new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
@@ -176,7 +182,7 @@ void ask;
       {pageIcon && <span class="b-title-icon" aria-hidden="true">{pageIcon}</span>}
       <span>{title}<slot /></span>
     </h1>
-    <CopyMarkdown />
+    {!hideMeta && <CopyMarkdown />}
   </div>
 
   {lede && <p class="b-lede">{lede}</p>}
