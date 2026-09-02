@@ -38,3 +38,4 @@ Each row specifies the scope of extraction:
 - **Commits Since** -- only fetch commits after this date in ISO 8601 format (e.g., `2024-01-01T00:00:00Z`). Leave empty for all commits (for the `repository_commits` endpoint).
 
 Remember to **save** the configuration.
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).

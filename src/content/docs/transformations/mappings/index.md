@@ -42,7 +42,7 @@ You can always rely on the following:
 While this makes some operations seemingly unnecessarily complicated, it ensures that transformations
 are repeatable and you can't inadvertently overwrite data in the project Storage. For ad-hoc
 operations, we recommend you use **[workspaces](/workspace/)**. For 
-bulk operations, consider taking advantage of **[variables](/transformations/variables/)**
+bulk operations, consider taking advantage of **[variables](/components/variables/)**
 and [programmatic automation](https://developers.keboola.com/automate/).
 
 ## Input Mapping
