@@ -523,9 +523,9 @@ the Storage table metadata. Mismatched types may cause errors or silent data inc
 `SWAP TABLE` on Storage tables through Direct Mode output mapping. Schema changes must be done through
 [Storage](/storage/tables/).
 
-**Do not use Direct Mode output mapping in development branches for production data.** Development branches
-currently share the same Snowflake schema as production. Writing via Direct Mode output mapping in a dev branch
-**will modify production data**. This limitation is being addressed in a future release.
+**Direct Mode output mapping in development branches requires the [Branched storage](/components/branches/) feature.** Without the Branched storage Development branches
+share the same Snowflake schema as production. Writing via Direct Mode output mapping in a development branch
+**will modify production data**. 
 
 #### Limitations
 
@@ -538,7 +538,7 @@ currently share the same Snowflake schema as production. Writing via Direct Mode
   partially written state. Wrap related operations in transactions to mitigate this.
 - **Limited auditability** — Only an import event is created on success, compared to the more
   detailed event trail of standard output mapping.
-- **Development branch isolation not supported** — Dev branch writes affect production data
+- **Development branch isolation requires [Branched storage](/components/branches/) feature** — Without the feature Dev branch writes affect production data
   on Snowflake. Use caution when testing.
 - **Read-only, external, and linked buckets are not supported** — Direct Mode output mapping cannot write
   to buckets that are read-only, external schemas, or linked from another project.
