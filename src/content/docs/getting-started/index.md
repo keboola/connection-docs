@@ -134,7 +134,7 @@ arc:
   a copy of your data before committing it to a transformation.
 - **[Ad-Hoc Data Analysis](/workspace/ad-hoc-analysis/)** — explore arbitrary data in a Python
   or R notebook rather than building a pipeline.
-- **[Development Branches](/getting-started/branches/)** — change a running project safely,
+- **[Development Branches](/components/branches/tutorial/)** — change a running project safely,
   review the diff, then merge.
 
 ## If you are planning a rollout, not learning the tool

@@ -254,7 +254,7 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 - **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
 
 :::caution
-*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/getting-started/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change.
+*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/components/branches/tutorial/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change.
 :::
 
 #### Incremental file processing

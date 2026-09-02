@@ -1,9 +1,10 @@
 ---
 title: 'Prepare Table-Manipulating Configurations'
-slug: 'getting-started/branches/prepare-tables'
+slug: 'components/branches/tutorial/prepare-tables'
 description: "Set up the table-manipulating configurations used by the development branches walkthrough: a data source connector and an SQL transformation in production."
 redirect_from:
   - /tutorial/branches/prepare-tables/
+  - /getting-started/branches/prepare-tables/
 ---
 
 
@@ -20,17 +21,17 @@ branches in a non-empty project.
 Let's start with a data pipeline that pulls data about bitcoin prices and creates a list of top five days when the price 
 was the highest. You will prepare the production configurations, so that you can try working with branches later.
 
-Start by pulling the bitcoin data. To simplify this, you can download a [prepared CSV file](/getting-started/branches/bitcoin_price.csv) using the [HTTP data source connector](/components/extractors/storage/http/).
+Start by pulling the bitcoin data. To simplify this, you can download a [prepared CSV file](/components/branches/tutorial/bitcoin_price.csv) using the [HTTP data source connector](/components/extractors/storage/http/).
 
 ### Set Up Connector
 
 Create a new [HTTP connector](/components/extractors/storage/http/) configuration. Fill in **Base URL** 
 to `https://help.keboola.com`. Then add a new table to the connector, named `bitcoin_price`, and fill in the **Path** 
-to `/getting-started/branches/bitcoin_price.csv`. **Table Name** should be `bitcoin_price`.
+to `/components/branches/tutorial/bitcoin_price.csv`. **Table Name** should be `bitcoin_price`.
 
-![Prepared HTTP extractor row](/getting-started/branches/figures/http-ex-prod-row.png)
+![Prepared HTTP extractor row](/components/branches/tutorial/figures/http-ex-prod-row.png)
 
-![Prepared HTTP extractor](/getting-started/branches/figures/http-ex-prod-set-up.png)
+![Prepared HTTP extractor](/components/branches/tutorial/figures/http-ex-prod-set-up.png)
 
 Run the connector, and verify that a new table `in.c-keboola-ex-http-682373219.bitcoin_price` was created.
 
@@ -40,15 +41,15 @@ on the screenshot.*
 ### Set Up Transformation 
 Create a new [Snowflake transformation](/transformations/snowflake-plain/) named `Bitcoin`.
 
-![New snowflake transformation](/getting-started/branches/figures/new-snflk.png)
+![New snowflake transformation](/components/branches/tutorial/figures/new-snflk.png)
 
 In the **Table Input Mapping** section, fill in the table `bitcoin_price` that you created by running the HTTP connector. 
 
-![Snowflake input mapping](/getting-started/branches/figures/snflk-prod-im.png)
+![Snowflake input mapping](/components/branches/tutorial/figures/snflk-prod-im.png)
 
 In **Table Output Mapping**, add a table `top_prices` that will be created in the transformation.
 
-![Snowflake output mapping](/getting-started/branches/figures/snflk-prod-om.png)
+![Snowflake output mapping](/components/branches/tutorial/figures/snflk-prod-om.png)
 
 Finally, add a new code to `Block 1` named `Top prices` with the following query:
 
@@ -58,15 +59,15 @@ CREATE TABLE "top_prices" AS SELECT * FROM "bitcoin_price" ORDER BY PRICE DESC L
 
 ```
 
-![Snowflake output mapping](/getting-started/branches/figures/snflk-prod-code1.png)
+![Snowflake output mapping](/components/branches/tutorial/figures/snflk-prod-code1.png)
 
 
-![Finished transformation](/getting-started/branches/figures/transformation-prod-set-up.png)
+![Finished transformation](/components/branches/tutorial/figures/transformation-prod-set-up.png)
 
 Save the transformation and run it. Then verify that there is a new table `out.c-bitcoin.top_prices` containing 
 five values from the source data -- dates and amounts from when bitcoin had the most value.
 
-![New table](/getting-started/branches/figures/snflk-new-table.png)
+![New table](/components/branches/tutorial/figures/snflk-new-table.png)
 
-Now you have the production set up. In [the next section](/getting-started/branches/prepare-files/) of our tutorial, you'll set up 
+Now you have the production set up. In [the next section](/components/branches/tutorial/prepare-files/) of our tutorial, you'll set up 
 a Python transformation using file storage. After that, you can give the branches a test run. 

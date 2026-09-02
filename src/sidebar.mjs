@@ -41,25 +41,6 @@ export const sidebar = [
       { slug: "getting-started/automate" },
       { slug: "getting-started/app" },
       { slug: "getting-started/next-steps" },
-      {
-        label: "Going Further",
-        collapsed: true,
-        items: [
-          {
-            label: "Development Branches",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "getting-started/branches" },
-              { slug: "getting-started/branches/prepare-tables" },
-              { slug: "getting-started/branches/prepare-files" },
-              { slug: "getting-started/branches/tables-in-branch" },
-              { slug: "getting-started/branches/files-in-branch" },
-              { slug: "getting-started/branches/project-diff" },
-              { slug: "getting-started/branches/merge-to-production" },
-            ],
-          },
-        ],
-      },
     ],
   },
   {
@@ -367,6 +348,19 @@ export const sidebar = [
         items: [
           { label: "Overview", slug: "components/branches" },
           { slug: "components/branches/merge-requests" },
+          {
+            label: "Branches Tutorial",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/branches/tutorial" },
+              { slug: "components/branches/tutorial/prepare-tables" },
+              { slug: "components/branches/tutorial/prepare-files" },
+              { slug: "components/branches/tutorial/tables-in-branch" },
+              { slug: "components/branches/tutorial/files-in-branch" },
+              { slug: "components/branches/tutorial/project-diff" },
+              { slug: "components/branches/tutorial/merge-to-production" },
+            ],
+          },
         ],
       },
       { slug: "components/ip-addresses" },

@@ -1,22 +1,23 @@
 ---
 title: 'Working with Files in a Branch'
-slug: 'getting-started/branches/files-in-branch'
+slug: 'components/branches/tutorial/files-in-branch'
 description: 'See how File Storage behaves inside a development branch and how branch-created files are tagged and kept apart from production files.'
 redirect_from:
   - /tutorial/branches/files-in-branch/
+  - /getting-started/branches/files-in-branch/
 ---
 
 
 
 Now that you have created a branch from configurations in production and tested how 
-[tables behave in development branches](/getting-started/branches/tables-in-branch/), let's do the same with
+[tables behave in development branches](/components/branches/tutorial/tables-in-branch/), let's do the same with
 [files](/storage/files/). 
 
 ## Run Transformation in Branch 
 
 In your development branch, go to **Transformations**, select the transformation `Sample Python transformation` and run it.
 
-![Screenshot - Run Transformation in Development Branch](/getting-started/branches/figures/python-branch-overview.png)
+![Screenshot - Run Transformation in Development Branch](/components/branches/tutorial/figures/python-branch-overview.png)
 
 ## File Tags
 When the job finishes, go to **Storage -- Files**. You can see that the `demoFile.txt` was created but is was not
@@ -24,7 +25,7 @@ assigned the tag `demoOutput`. It was assigned the tag `1835-demoOutput` instead
 this branch. You can also see the ID in the URL. This is how the development branch files are distinguished from
 the files that were created in the production environment.
 
-![Screenshot - Development Branch Output](/getting-started/branches/figures/12-dev-branch-output.png)
+![Screenshot - Development Branch Output](/components/branches/tutorial/figures/12-dev-branch-output.png)
 
 ## Change Configuration
 Now it is time to make the changes to the transformation and test them. Go to **Transformations**, find `Sample Python 
@@ -40,12 +41,12 @@ print("Output written to demoFile.txt")
 
 ```
 
-![Screenshot - Edit Code Block](/getting-started/branches/figures/python-branch-change-code.png)
+![Screenshot - Edit Code Block](/components/branches/tutorial/figures/python-branch-change-code.png)
 
 The transformation will do exactly the same as before, but it will add `Output written to demoFile.txt` message to
 the output log. Save the code block and run the transformation again. You can see in the job log that it did indeed output the log message. 
 
-![Screenshot - Job Log](/getting-started/branches/figures/14-jobs-log.png)
+![Screenshot - Job Log](/components/branches/tutorial/figures/14-jobs-log.png)
 
 The file was uploaded to Storage again.
 
@@ -56,13 +57,13 @@ affect the production transformation in any way.
 Go to **Transformations**, open the `Sample Python transformation` transformation and check the code block to see that there is still the original version without the log output that we created at the beginning. It was not overwritten by the changes we made in the development
 branch.
 
-![Screenshot - Check Variable In Production](/getting-started/branches/figures/20-check-block1.png)
+![Screenshot - Check Variable In Production](/components/branches/tutorial/figures/20-check-block1.png)
 
 To make sure nothing has changed, run the transformation in production again. When it finishes, go to **Storage --
 Files**. You can see that `demoFile.txt` was created. Because it ran in production, it was assigned the
 tag `demoOutput` without any prefix.
 
-![Screenshot - Storage File in Production](/getting-started/branches/figures/21-storage-files-prod.png)
+![Screenshot - Storage File in Production](/components/branches/tutorial/figures/21-storage-files-prod.png)
 
 This concludes the file manipulation part of this tutorial. You examined how files behave in branches. Now you can 
-examine the [changes you have made in the branch](/getting-started/branches/project-diff). 
+examine the [changes you have made in the branch](/components/branches/tutorial/project-diff). 

@@ -65,7 +65,7 @@ interactively, use a [workspace](/workspace/create/).
 storage — the Google Sheets one you used is the simplest of the family.
 
 **"I do not want to break production while I experiment."**
-[Development branches](/getting-started/branches/) let you change configurations, run them,
+[Development branches](/components/branches/tutorial/) let you change configurations, run them,
 and review a diff before merging anything into production.
 
 **"I want to explore data rather than build a pipeline."** Do

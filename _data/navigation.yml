@@ -50,29 +50,6 @@ items:
       - url: /getting-started/next-steps/
         title: Where to Go Next
 
-      - title: Going Further
-        items:
-          - url: /getting-started/branches/
-            title: Development Branches
-            items:
-              - url: /getting-started/branches/prepare-tables/
-                title: Prepare Tables
-
-              - url: /getting-started/branches/prepare-files/
-                title: Prepare Files
-
-              - title: Tables in Branch
-                url: /getting-started/branches/tables-in-branch/
-
-              - title: Files in Branch
-                url: /getting-started/branches/files-in-branch/
-
-              - url: /getting-started/branches/project-diff/
-                title: Project Diff
-
-              - title: Merge to Production
-                url: /getting-started/branches/merge-to-production/
-
   - url: /kai/
     title: Kai - AI Assistant
     items:
@@ -521,6 +498,27 @@ items:
         items:
           - url: /components/branches/merge-requests/
             title: Merge Requests
+
+          - url: /components/branches/tutorial/
+            title: Branches Tutorial
+            items:
+              - url: /components/branches/tutorial/prepare-tables/
+                title: Prepare Tables
+
+              - url: /components/branches/tutorial/prepare-files/
+                title: Prepare Files
+
+              - url: /components/branches/tutorial/tables-in-branch/
+                title: Tables in Branch
+
+              - url: /components/branches/tutorial/files-in-branch/
+                title: Files in Branch
+
+              - url: /components/branches/tutorial/project-diff/
+                title: Project Diff
+
+              - url: /components/branches/tutorial/merge-to-production/
+                title: Merge to Production
 
       - url: /components/ip-addresses/
         title: IP Addresses
