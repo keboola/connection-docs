@@ -50,6 +50,11 @@ not yet done).
 | Five delivery failure modes | `getting-started/write/index.mdx` | page 7 keeps at most one; the rest go to `/components/writers/storage/google-sheets/` |
 | The configuration-rows teaching (one configuration, four rows) | `getting-started/load/index.mdx` | **at risk** in wave two's data split — the arc is its only teaching site and `automate` depends on it. Needs a destination before the split lands. |
 
+| `## Check it worked`, the All Runs reading, job topology, and four of the five flow failure modes | `automate/index.mdx` | new page `getting-started/check/`; a short verification block stays on `automate` so page 6 does not end blind | moved |
+| The "everything succeeds but the sheet is unchanged" failure | `automate/index.mdx` | `getting-started/check/`, generalized to any delivery task — **caught in review: my own carve dropped it, and it existed nowhere else** | moved |
+| The step → effect → where-it-lives table | `next-steps/index.md` | `getting-started/check/` | moved |
+| The row-count sanity check and its two failure directions | `transform/index.mdx` prose | `getting-started/check/`, stated once as "the one number that proves the join" | moved |
+
 ## Deliberate deletions
 
 | Content | Why | Where the information survives |

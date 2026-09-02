@@ -50,6 +50,9 @@ items:
       - url: /getting-started/app/
         title: Build the App
 
+      - url: /getting-started/check/
+        title: Check it worked
+
       - url: /getting-started/next-steps/
         title: Where to Go Next
 

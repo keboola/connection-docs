@@ -41,6 +41,7 @@ export const sidebar = [
       { slug: "getting-started/automate" },
       { slug: "getting-started/ask" },
       { slug: "getting-started/app" },
+      { slug: "getting-started/check" },
       { slug: "getting-started/next-steps" },
       {
         label: "Going Further",

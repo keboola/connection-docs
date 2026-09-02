@@ -235,31 +235,9 @@ are enough here.
 
 ## Check it worked
 
-The flow's **All Runs** tab is the place to look: a duration chart over time, then a table of
-runs with who or what started them — your name for a manual run, *scheduled run* for the
-schedule — plus duration and status. Expand a run to see its phases.
+The **Schedules** tab should show a count, and the flow's **All Runs** tab a run with status
+**Success** — your name against a manual run, *scheduled run* against the automatic one.
 
-![Screenshot - All runs](/getting-started/automate/09-all-runs.png)
-
-- One run with status **Success**. End to end this pipeline takes around three minutes, most of
-  it the four HTTP fetches.
-- **Jobs** lists more entries than you might expect: a job per task, a **Conditional Flows
-  phase** job per phase, and the **Conditional Flows** job for the run itself. That is normal.
-- The **Schedules** tab shows a count, and the schedule can be toggled off without deleting it.
-
-## If it goes wrong
-
-- **The transformation fails inside the flow but works on its own.** Its phase is running
-  before the load finishes — check that the connector sits in an *earlier* phase, not the same
-  one.
-- **Everything succeeds but the sheet is unchanged.** The destination ran before the
-  transformation wrote its output, or its phase is missing entirely. Read the run detail top
-  to bottom.
-- **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the
-  project is out of runtime credits — Free Plan projects get up to 60 minutes a month, and
-  while flow jobs themselves consume none, the component jobs they start do.
-- **Jobs queue instead of running.** Too many parallel tasks in one phase; Storage jobs are
-  typically capped at 10 in parallel. Split the phase.
-- **The run detail is a wall of jobs and you want the short version.** Ask Kai, which reads all of
-  them: `My flow run failed. Which task failed, and why?`
-
+Tomorrow morning there will be a second run you did not start. Reading a run in detail, the job
+topology behind it, and the failures worth knowing are on
+[Check it worked](/getting-started/check/).

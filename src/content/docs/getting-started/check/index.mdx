@@ -1,0 +1,89 @@
+---
+title: 'Check it worked'
+slug: 'getting-started/check'
+description: 'What should be in Storage and Jobs once the pipeline runs, how to read a flow run, and the failures that actually happen.'
+---
+
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+
+<PageMeta genre="How-to" minutes="5" />
+
+Everything you built leaves a trace in two places: **Storage** holds the tables, **Jobs** holds
+every run that produced them. This page says what should be there, and what to do when it is not.
+
+**Where you are:** the pipeline has run at least once, by hand or on its schedule.
+
+{/* How-to page, NEW 2026-09-02. Assembled from verification content that already existed but was
+marooned on five pages: the "what you built" table from next-steps, the All Runs reading and the
+job topology from automate, the row-count sanity check from transform, and the Storage inventory
+from project. Reviewers noted the section had no single verification page at all — PostHog and
+Firecrawl do not either, so this is a place to be better than the field. Numbers below are from
+the live walk in project 264 (2026-08-25/26). */}
+
+## What you should have
+
+| What you built | What it does | Where it lives |
+|---|---|---|
+| HTTP configuration | brings raw data into the project | **Components** |
+| SQL transformation | joins the raw tables into one table | **Transformations** |
+| Flow | runs all of it, in order, on a schedule | **Flows** |
+| Data app | the map anyone can open | **Apps** |
+
+Every job that ran is in **Jobs**; every table it touched is in **Storage**.
+
+## The one number that proves the join
+
+The joined table should hold **exactly as many rows as the readings table it came from** — 10,000
+in and 10,000 out.
+
+That single count catches both directions of failure:
+
+- **More** than the source means a join double-matched a row. The usual cause is a range join
+  written with `BETWEEN` instead of a half-open `>= min AND < max`, so a value sitting exactly on
+  a boundary belongs to two ranges at once.
+- **Fewer** means an inner join dropped rows that had no match — a code in the readings with no
+  entry in the lookup table.
+
+Open the table's **Data Sample** and the added columns should be populated, not empty. Column
+count is the second check: the original columns plus the ones the SQL derived.
+
+## Reading a flow run
+
+The flow's **All Runs** tab is the place to look: a duration chart over time, then a table of
+runs with who or what started them — your name for a manual run, *scheduled run* for the
+schedule — plus duration and status. Expand a run to see its phases.
+
+![Screenshot - All runs](/getting-started/check/09-all-runs.png)
+
+- One run with status **Success**. End to end this pipeline takes around three minutes, most of
+  it the HTTP fetches.
+- **Jobs** lists more entries than you might expect: a job per task, a **Conditional Flows
+  phase** job per phase, and the **Conditional Flows** job for the run itself. That is normal —
+  the phase jobs are the ordering, not extra work.
+- The **Schedules** tab shows a count, and a schedule can be toggled off without deleting it.
+
+:::tip[Let Kai read the run for you]
+```text
+My flow run failed. Which task failed, and why?
+```
+Kai reads every job in the run, which is faster than expanding them one at a time.
+:::
+
+## The failures that actually happen
+
+- **The transformation fails inside the flow but works on its own.** Its phase is running before
+  the load finishes — check that the connector sits in an *earlier* phase, not the same one.
+- **Every task succeeds but the destination is unchanged.** A delivery task ran before the
+  transformation wrote its output, or its phase is missing from the flow entirely. Read the run
+  detail top to bottom: the phases run in the order shown.
+- **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the
+  project is out of runtime credits. Flow jobs themselves consume none; the component jobs they
+  start do.
+- **Jobs queue instead of running.** Too many parallel tasks in one phase — Storage jobs are
+  typically capped at 10 in parallel. Split the phase.
+
+Failures specific to one step stay on that step's page: loading problems on
+[Get your data in](/getting-started/load/), SQL and mapping problems on
+[Transform data](/getting-started/transform/), delivery problems on
+[Send a table to Google Sheets](/getting-started/write/), and app problems on
+[Put it in front of someone](/getting-started/app/).
