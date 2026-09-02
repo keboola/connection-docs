@@ -1,0 +1,45 @@
+---
+// Cold-start block (c): prerequisites, rendered from one place.
+//
+// Hand-written prerequisite lists drift within a release cycle — Cloudflare
+// renders its prerequisites partial 4,087 times across 1,966 pages for exactly
+// this reason. At our scale one component does, but the principle is the same:
+// change the wording here, not on nine pages.
+//
+// The `needs` prop names the shared prerequisites by key; anything page-specific
+// goes in the default slot as extra <li> items.
+//
+// Usage:  <Prereqs needs={['project']} />
+//         <Prereqs needs={['project', 'google']}>
+//           <li>The table <code>x</code> in Storage, from the previous page.</li>
+//         </Prereqs>
+
+interface Props {
+  /** Shared prerequisites, in the order they should appear. */
+  needs?: Array<'project' | 'google' | 'kai' | 'nothing'>;
+}
+
+const { needs = ['project'] } = Astro.props;
+
+// One source of truth for the wording of every shared prerequisite.
+const SHARED: Record<string, string> = {
+  project:
+    'A Keboola project. <a href="/getting-started/project/">Get a project</a> covers creating or joining one — the Free Plan covers this guide.',
+  google:
+    'A Google account, only for the step that writes to a spreadsheet. The consent screen lives in your own account, so it is the one thing an assistant cannot click for you.',
+  kai:
+    'The <strong>Kai Agent</strong> button in the top bar. An organization admin switches the feature on; see <a href="/kai/getting-started/">Get started with Kai</a>.',
+  nothing:
+    'Nothing else. No installs, no credentials, no files to download.',
+};
+
+const items = needs.filter((k) => SHARED[k]);
+---
+
+<div class="gs-prereqs">
+  <p class="gs-prereqs__label">Before you start</p>
+  <ul class="gs-prereqs__list">
+    {items.map((key) => <li set:html={SHARED[key]} />)}
+    <slot />
+  </ul>
+</div>

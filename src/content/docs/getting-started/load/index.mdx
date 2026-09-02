@@ -1,5 +1,5 @@
 ---
-title: 'Get Your Data In'
+title: 'Get your data in'
 slug: 'getting-started/load'
 description: 'Load your first four tables into Keboola Storage with the HTTP data source connector, pulling the sample CSV files straight from a URL.'
 redirect_from:
@@ -7,31 +7,33 @@ redirect_from:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-A sighting row in this dataset carries an `aphia_id`, not an octopus's name — and the sightings,
-the species register, the depth zones and the ocean basins arrive as four separate files. Apart,
-the sightings file can plot 10,000 dots, but it cannot say which octopus any dot is or which
-ocean it sits in. This step gets all four into Storage so the next step can join them into one
-table.
-Step 2 of the [Getting Started](/getting-started/) arc.
+<PageMeta genre="Tutorial" minutes="10" />
 
-**Two ways to do it** — pick a tab in *Set it up* below. Kai does the whole job in one prompt,
-run included; the clicking is still written out in full, and it is worth seeing once where a
-configuration and its rows live — later steps refer back to that.
+Data arrives split across files that cannot answer a question on their own. Here it is four:
+the readings themselves, plus three small lookup tables that spell out what the readings' codes
+mean. Apart, the readings file can plot 10,000 dots but cannot say what any dot *is*. This page
+gets all four into Storage, so the next page can join them into one table that can.
 
-{/* Tutorial-type page (step 2 of 7). Rebuilt on the HTTP connector: CSV Import is deprecated
-and cannot take new configurations (verified live in project 264, 2026-08-04). Every label,
-default and dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http.
-2026-08-25: dataset swapped to the octopus files (PRDCT-487 arc rework) — run timing and all
-screenshots pend the octopus re-walk in 264. Note our own connector page
-(components/extractors/storage/http/index.md) still says "Add Table"; the UI says "Add Row". */}
+**Where you are:** you have a project, and Storage is empty. **When you finish:** four tables in
+Storage and a connector configuration you can re-run.
 
-## What you need
+<Prereqs needs={['project', 'nothing']} />
 
-A Keboola project you can sign in to. If you do not have one, start with
-[Get a Project](/getting-started/project/).
+<PathIntro yours="creating the project itself" />
 
-Nothing to download — the connector fetches the files itself.
+{/* Tutorial-type page. Ordinal removed 2026-09-02: page order lives in the sidebar, not in
+the copy (see DECISIONS.md). Rebuilt on the HTTP connector: CSV Import is deprecated and cannot
+take new configurations (verified live in project 264, 2026-08-04). Every label, default and
+dialog below was walked live in project 264 on 2026-08-04 with keboola.ex-http; the run was
+re-walked on the current sample on 2026-08-25 and the captures reshot 2026-08-27. Note our own
+connector page (components/extractors/storage/http/index.md) still says "Add Table"; the UI says
+"Add Row" — and its lede still claims the connector "loads a single CSV file", which this page's
+four-row configuration contradicts. */}
+
 
 ## The sample data
 
@@ -63,7 +65,7 @@ but they all end the same way: rows in a Storage table.
 
 You will use the **HTTP** connector, which downloads CSV files from a URL. It is the simplest
 one that still behaves like a real connector — it can be re-run, scheduled, and dropped into a
-flow, which is what [step 5](/getting-started/automate/) depends on.
+flow, which is what [Run it on a schedule](/getting-started/automate/) depends on.
 
 One configuration can fetch **many** files, so you will build a single configuration holding
 four tables rather than four separate configurations.
@@ -85,7 +87,7 @@ into the tables occurrences, species, depth_zones and basins. Then run it and te
 counts.
 ```
 
-One configuration with four rows, not four configurations: [step 5](/getting-started/automate/)
+One configuration with four rows, not four configurations: [the flow](/getting-started/automate/)
 runs this as a single task and the parallelism note below assumes that shape.
 
 **Check:** four tables in Storage with 10,000 / 201 / 5 / 13 rows, and a **Rows** list showing

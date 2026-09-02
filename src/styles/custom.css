@@ -2281,3 +2281,56 @@ nav.sidebar {
   font-size: 13.5px;
   color: var(--sl-color-gray-3);
 }
+
+/* ---------------------------------------------------------------------------
+   Getting Started — cold-start blocks
+   Components: src/components/getting-started/{PageMeta,Prereqs,PathIntro}.astro
+   All four blocks exist so a page survives being landed on cold from a search
+   engine (decision of 2026-09-02, see DECISIONS.md). Styles live here per
+   AGENTS.md — never as <style> blocks in the components.
+   --------------------------------------------------------------------------- */
+
+/* (a) genre · guide · time budget */
+.gs-pagemeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  font-size: var(--sl-text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-3);
+}
+.gs-pagemeta__genre {
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.gs-pagemeta__sep { color: var(--sl-color-gray-4); }
+
+/* (c) prerequisites, from one partial */
+.gs-prereqs {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+}
+.gs-prereqs__label {
+  margin: 0 0 0.4rem;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-2);
+}
+.gs-prereqs__list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.gs-prereqs__list > li + li { margin-top: 0.3rem; }
+
+/* the tab convention, stated once */
+.gs-pathintro { margin: 0 0 1.5rem; }
+.gs-pathintro > p { margin: 0 0 0.6rem; }
+.gs-pathintro__recovery { color: var(--sl-color-gray-2); }
