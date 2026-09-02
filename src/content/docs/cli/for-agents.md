@@ -28,11 +28,11 @@ Earlier versions of this page pointed at `keboola/cli`. Nothing moves you off it
 
 ### The `/kbagent:setup` shortcut
 
-Claude Code is the only client that can run **`/kbagent:setup`**. Pass it a stack URL. It installs the CLI if it is missing, starts the browser sign-in, registers every project you can reach on that stack, and verifies the result. You finish the sign-in in your terminal. Anything already done is skipped, so re-running it is safe.
+Claude Code is the only client that can run **`/kbagent:setup`**. Pass it a stack URL. It installs the CLI if it is missing, then signs you in itself: it starts the browser sign-in in the background and relays a URL and code into the chat for you to approve, usually a single click. Once you're signed in, it registers every project you can reach on that stack and verifies the result. Anything already done is skipped, so re-running it is safe.
 
 The other four clients cannot run it. Install the CLI and connect your project in a terminal first, then add the plugin from your client's UI.
 
-<!-- `/kbagent:setup` behaviour from keboola/cli#625. Marketplace `keboola-claude-kit` from keboola/ai-kit#102. -->
+<!-- `/kbagent:setup` behaviour from keboola/cli#625, updated for the in-chat device-code login from keboola/cli#722 (v0.92.0). Marketplace `keboola-claude-kit` from keboola/ai-kit#102. -->
 
 ## Set up your client
 
