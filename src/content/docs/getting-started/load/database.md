@@ -79,4 +79,3 @@ please navigate to Advanced Mode. Note that we do not cover the advanced mode op
 
 ![Advanced Mode](/getting-started/load/db-picture8.png)
 
-**Next:** [Transform your data →](/getting-started/transform/)

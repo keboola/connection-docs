@@ -143,4 +143,3 @@ This guide is for one person building one pipeline. For introducing Keboola to a
 project architecture, a data model, naming conventions, governance — start with
 [Platform Onboarding](/overview/onboarding/) instead.
 
-**Next:** [Get a project →](/getting-started/project/)

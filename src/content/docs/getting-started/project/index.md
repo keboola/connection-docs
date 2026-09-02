@@ -122,4 +122,3 @@ Two things. The second one is worth settling now rather than halfway through ste
 - **Your company uses SSO.** Sign in through your organization's link rather than creating
   a new account; a fresh Free Plan project will not have access to your team's data.
 
-**Next:** [Load your data →](/getting-started/load/)

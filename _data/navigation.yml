@@ -33,63 +33,61 @@ items:
         title: Get a Project
 
       - url: /getting-started/load/
-        title: Get Your Data In
+        title: Get your data in
 
       - url: /getting-started/transform/
-        title: Transform Data
-
-      - url: /getting-started/write/
-        title: Deliver the Answer
-
-      - url: /getting-started/automate/
-        title: Run It on a Schedule
+        title: Transform data
 
       - url: /getting-started/ask/
         title: Ask a question and get an answer
 
       - url: /getting-started/app/
-        title: Build the App
+        title: Put it in front of someone
+
+      - url: /getting-started/automate/
+        title: Make it run every morning
 
       - url: /getting-started/check/
         title: Check it worked
 
       - url: /getting-started/going-further/
         title: Going further
-
-      - title: Going Further
         items:
+          - url: /getting-started/write/
+            title: Send a table to Google Sheets
+
           - url: /getting-started/load/googlesheets/
             title: Load from Google Sheets
 
           - url: /getting-started/load/database/
-            title: Load from a Database
+            title: Load from a database
 
           - url: /getting-started/transform/workspace/
-            title: Use a Workspace
+            title: Use a workspace
 
           - url: /getting-started/ad-hoc/
-            title: Ad-Hoc Data Analysis
+            title: Ad-hoc data analysis
 
           - url: /getting-started/branches/
-            title: Development Branches
+            title: Development branches
             items:
               - url: /getting-started/branches/prepare-tables/
-                title: Prepare Tables
+                title: Prepare tables
 
               - url: /getting-started/branches/prepare-files/
-                title: Prepare Files
+                title: Prepare files
 
-              - title: Tables in Branch
-                url: /getting-started/branches/tables-in-branch/
+              - url: /getting-started/branches/tables-in-branch/
+                title: Tables in a branch
 
-              - title: Files in Branch
-                url: /getting-started/branches/files-in-branch/
+              - url: /getting-started/branches/files-in-branch/
+                title: Files in a branch
 
               - url: /getting-started/branches/project-diff/
-                title: Project Diff
+                title: Project diff
 
-              - title: Merge to Production
-                url: /getting-started/branches/merge-to-production/
+              - url: /getting-started/branches/merge-to-production/
+                title: Merge to production
 
   - url: /kai/
     title: Kai - AI Assistant

@@ -66,7 +66,7 @@ not yet done).
 | Content | Why | Where the information survives |
 |---|---|---|
 | Eight `db-picture*.png` captures of the Snowflake connector setup | Re-shot the same Add Component → credentials → select-tables flow that `sqldb-1..4` already illustrate on the destination page | `/components/extractors/database/sqldb/#initial-setup` (done, PR #1109) |
-| Ten hand-written `**Next:**` pointers | Starlight generates pagination from sidebar order; the hand-written ones had already drifted — six pointed at the wrong page | sidebar order |
+| Seven hand-written `**Next:**`/`**Back to:**` pointers | Starlight generates pagination from sidebar order (`pagination: true` in astro.config.mjs), and the hand-written ones had drifted — several pointed at pages that had moved. Verified after removal: transform → "Ask a question and get an answer", app → "Make it run every morning", check → end of section, all generated correctly | sidebar order |
 | Chapter numbering in titles and bodies ("Step 3 of 7") | The new titles are outcomes; numbering breaks the moment a page moves, and no surveyed vendor uses it | reading order lives in the sidebar |
 | `writing1.png` | Orphan — grep-confirmed unreferenced | n/a |
 
