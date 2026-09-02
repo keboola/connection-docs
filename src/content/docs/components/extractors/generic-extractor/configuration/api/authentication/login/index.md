@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/login/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 Use the Login authentication to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests.

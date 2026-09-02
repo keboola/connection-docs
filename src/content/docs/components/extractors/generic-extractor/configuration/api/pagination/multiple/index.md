@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/multiple/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 Setting the pagination method to `multiple` allows you to use **multiple scrollers on a single API**.
 This type of pagination contains the definition of all scrollers used in the entire configuration.

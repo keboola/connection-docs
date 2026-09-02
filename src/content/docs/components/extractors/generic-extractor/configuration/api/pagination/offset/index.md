@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/offset/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The Offset scroller handles a pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **item offset** parameter. This 

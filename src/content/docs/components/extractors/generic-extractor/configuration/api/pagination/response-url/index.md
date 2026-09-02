@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/response-url/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The Response URL Scroller can be used with APIs that provide the URL of the 
 next page in the response. This scroller is suitable for APIs supporting the 

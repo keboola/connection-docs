@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/rest/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 An [API (Application Programming Interface)](https://en.wikipedia.org/wiki/Application_programming_interface) is 
 an [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to an application, or a **service**
@@ -134,3 +136,4 @@ to get responses from virtually any HTTP REST API. Since the REST rules are not 
 is not possible to ensure that Generic Extractor will be capable of reading 100% of APIs, 
 even when declared as RESTful by someone.
 
+**Next:** [JSON introduction →](/components/extractors/generic-extractor/tutorial/json/)

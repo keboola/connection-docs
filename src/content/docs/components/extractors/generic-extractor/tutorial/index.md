@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 In this tutorial, we will guide you through configuring Generic Extractor for a new API.
 In our case, MailChimp — an email marketing service.
@@ -80,3 +82,5 @@ configuration here:
 		(resources) to be extracted.
 - [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON
 		response is converted into CSV files that will be imported into Storage.
+
+**Next:** [REST HTTP API introduction →](/components/extractors/generic-extractor/tutorial/rest/)

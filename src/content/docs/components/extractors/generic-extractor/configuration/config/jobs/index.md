@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *If new to Generic Extractor, learn about [jobs in our tutorial](/components/extractors/generic-extractor/tutorial/jobs/) first.*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various

@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/jobs/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 On your way through the Generic Extractor tutorial, you have learned about
 
@@ -238,3 +240,5 @@ MailChimp API and giving us a lot of trouble, is best to be ignored. The answer 
 
 You might also have noticed some duplicate records in the table `in.c-ge-tutorial.campaigns__campaign_id__content` 
 along the way. You'll look into this as well.
+
+**Next:** [Mapping →](/components/extractors/generic-extractor/tutorial/mapping/)

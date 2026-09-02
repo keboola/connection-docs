@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 OAuth 2.0 Authentication is one of [two OAuth methods](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [components registered in the developer portal](/components/extractors/generic-extractor/publish/).

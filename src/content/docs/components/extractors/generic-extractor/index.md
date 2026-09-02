@@ -6,6 +6,8 @@ redirect_from:
     - /components/extractors/other/generic/
 ---
 
+<!-- Explanation-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 Generic Extractor is a [Keboola component](/overview/) that acts like a customizable
 [HTTP REST](/components/extractors/generic-extractor/tutorial/rest/) client. It can be configured to extract data

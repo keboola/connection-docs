@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/ssh-proxy/
 ---
 
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/).*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various

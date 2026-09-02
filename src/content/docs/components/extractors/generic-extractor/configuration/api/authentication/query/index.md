@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/query/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 Query Authentication provides the simplest authentication method, in which
 the credentials are sent in the [request URL](/components/extractors/generic-extractor/tutorial/rest#url).
 This method is most often used with APIs that authenticate using API tokens and

@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/incremental/
 ---
 
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 Extracting data incrementally is universally beneficial — it **speeds up the extraction** and **lowers the load** on both the API and
 [Keboola Storage](/storage/) (thus saving 

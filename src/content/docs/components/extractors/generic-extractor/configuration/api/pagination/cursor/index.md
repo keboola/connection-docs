@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/cursor/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The Cursor Scroller can be used with an API which expects the client to maintain a cursor (pointer)
 to the last obtained item. For example, on the first request, it returns items with ID 1-100; for the second

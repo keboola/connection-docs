@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/mapping/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 In the previous part of the tutorial, you [extracted the content of a MailChimp campaign](/components/extractors/generic-extractor/tutorial/jobs/). 
 Now, it's time to clean up the response.
@@ -350,3 +352,5 @@ The key of the mapping supports dot notation to traverse into children. So, if t
 ```
 
 As you changed the delimiter from the default `.` to `/`, it's no longer parsed as two separate keys `created` and `date`, but rather just a single key `created.date`.
+
+**Next:** [Configuration reference →](/components/extractors/generic-extractor/configuration/)

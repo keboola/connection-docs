@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/running/
 ---
 
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 Generic Extractor is normally run from within the Keboola user interface. It can be found in the **Extractors** section
 and all you need to do is provide its configuration JSON. No other settings are necessary.

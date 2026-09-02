@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/config/mappings/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 *If you are new to Generic Extractor, learn about [mapping in our tutorial](/components/extractors/generic-extractor/tutorial/mapping/) first.*
 *Use the [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various configuration options.*
 

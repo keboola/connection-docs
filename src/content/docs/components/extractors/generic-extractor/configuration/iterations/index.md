@@ -6,6 +6,8 @@ redirect_from:
     - /extend/generic-extractor/iterations/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The `iterations` section allows you to **execute a configuration multiple times, each time with different
 values**. The most typical use for `iterations` is extraction of the same data from multiple accounts.

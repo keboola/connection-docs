@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/basic/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 Before configuring Generic Extractor, you should have a basic understanding
 of [REST API](/components/extractors/generic-extractor/tutorial/rest/) and
@@ -216,3 +218,5 @@ of doing much more; see other parts of this tutorial for an explanation of pagin
 		(resources) to be extracted.
 - [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON
 		response is converted into CSV files that will be imported into Storage.
+
+**Next:** [Pagination →](/components/extractors/generic-extractor/tutorial/pagination/)

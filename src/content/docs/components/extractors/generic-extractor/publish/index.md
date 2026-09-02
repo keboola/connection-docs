@@ -6,6 +6,8 @@ redirect_from:
     - /extend/generic-extractor/registration/
 ---
 
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 It is possible to publish a Generic Extractor configuration as a completely separate component.
 This enables sharing the API extractor between various projects and simplifies its further configuration.

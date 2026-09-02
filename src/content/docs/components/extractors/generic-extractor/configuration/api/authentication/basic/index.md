@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/basic/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 Basic Authentication provides the [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 method. It requires entering a username and password in the configuration and sends the encoded values in the 
 `Authorization` header. 
