@@ -32,7 +32,7 @@ Claude Code is the only client that can run **`/kbagent:setup`**. Pass it a stac
 
 The other four clients cannot run it. Install the CLI and connect your project in a terminal first, then add the plugin from your client's UI.
 
-<!-- `/kbagent:setup` behaviour from keboola/cli#625. No client finishes the browser sign-in in-chat: keboola/cli#704 tabulates that, and it was reproduced in Claude Code, Cursor and Claude Desktop on 2026-08-26. Marketplace `keboola-claude-kit` from keboola/ai-kit#102. -->
+<!-- `/kbagent:setup` behaviour from keboola/cli#625. Marketplace `keboola-claude-kit` from keboola/ai-kit#102. -->
 
 ## Set up your client
 
