@@ -30,4 +30,4 @@ After you select one of the two templates, remember to **save** the configuratio
 
 ![Slack Configuration](/components/extractors/communication/slack/slack-1.png)
 
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).

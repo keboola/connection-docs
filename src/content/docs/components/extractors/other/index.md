@@ -16,7 +16,7 @@ connectors that do not fall into any of the above mentioned categories:
 - [Dark Sky](/components/extractors/other/dark-sky/) — **deprecated**; the Dark Sky API shut down on March 31, 2023, so this connector no longer works.
 - [DynamoDB Streams](/components/extractors/other/dynamodb-streams/) — captures information about every modification to data items in DynamoDB table.
 - [ECB Currency Rates](/components/extractors/other/currency-rates) — imports currency exchange rates as published by the European Central Bank.
-- [Generic Extractor](/components/extractors/other/generic/) — can be configured to work with virtually any API.
+- [Generic Extractor](/components/extractors/generic-extractor/) — can be configured to work with virtually any API.
 - [Geocoding-Augmentation](/components/extractors/other/geocoding-augmentation) —
 provides detailed data for locations specified by their names, address or coordinates.
 - [GitHub](/components/extractors/other/github/) — imports data from GitHub, a software development platform.

@@ -41,7 +41,7 @@ Available templates:
 
 **Save** the configuration before you run the extraction.
 
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ## API Limits
 Each user account is permitted up to 10 simultaneous connections, and you’ll receive an error message if you reach the limit.

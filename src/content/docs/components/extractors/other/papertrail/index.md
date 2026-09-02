@@ -31,6 +31,6 @@ This option downloads all records matching the query within the retention period
 ![Screenshot - Papertrail configuration](/components/extractors/other/papertrail/papertrail-1.png)
 
 When done, **Save** the configuration.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 **Important:** Data is always imported incrementally.

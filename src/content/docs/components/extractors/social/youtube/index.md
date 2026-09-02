@@ -26,7 +26,7 @@ Select one of the two available **templates**:
 
 ![Screenshot - Create configuration](/components/extractors/social/youtube/youtube-1.png)
 
-You can [switch to the JSON editor](/components/extractors/other/generic/#template-mode) for more advanced configurations.
+You can [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode) for more advanced configurations.
 
 ### Advanced Configuration
 To give a simple example, the configuration for details about your channel looks like this:
@@ -49,7 +49,7 @@ The endpoint is under `# HTTP URL:`, where you omit the base URL `https://www.go
 
 ![Screenshot - YouTube API](/components/extractors/social/youtube/api_sample.png)
 
-You can use other [Generic Extractor's](/components/extractors/other/generic/) functionality, too, including nesting. This example downloads your channel, iterates through its playlists, and gets all their videos:
+You can use other [Generic Extractor's](/components/extractors/generic-extractor/) functionality, too, including nesting. This example downloads your channel, iterates through its playlists, and gets all their videos:
 
 ```json
 {

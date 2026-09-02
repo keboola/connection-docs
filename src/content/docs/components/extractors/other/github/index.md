@@ -31,4 +31,4 @@ You can download:
 - Repository Commits
 
 After you select the template, remember to **save** the configuration.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).

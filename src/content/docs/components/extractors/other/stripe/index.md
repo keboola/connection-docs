@@ -24,4 +24,4 @@ To configure what data you want to extract, you can select one of the configurat
 
 When done, **Save** the configuration. 
 
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
