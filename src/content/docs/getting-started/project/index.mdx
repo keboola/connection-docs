@@ -4,24 +4,36 @@ slug: 'getting-started/project'
 description: Create a Keboola project on the Free Plan, understand what a project and a stack are, and find your way around the project screen before you load any data.
 ---
 
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+
+<PageMeta genre="Tutorial" minutes="5" />
+
 Everything you build in this guide lives inside a **project**: the data you load, the SQL you
 write, the flow that runs them on a schedule. This page just gets you one.
-Step 1 of the [Getting Started](/getting-started/) arc.
 
-**No Kai path here:** Kai works *inside* a project, so this one step is yours. From step 2 on,
-every building step can be done either way.
+**Where you are:** nothing exists yet. **When you finish:** a project you can sign in to, and
+you know where its Storage, Jobs and Components live.
 
-<!-- Tutorial-type page (step 1 of 7). The project-screen tour below was verified live in
+**No Kai path here:** Kai works *inside* a project, so this one page is yours. Every page after
+it can be done either way.
+
+{/* Tutorial-type page. Ordinal removed 2026-09-02 (see DECISIONS.md). Converted .md -> .mdx the
+same day so the shared cold-start components can be imported. The project-screen tour below was
+verified live in
 project 264 on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components /
 Workspaces / Transformations / Data Catalog / Jobs, and Kai appears as
 "Kai Agent" with a Beta pill. Free Plan limits are sourced from /management/payg-project/. The
 sign-up wizard is deliberately NOT walked — creating accounts is out of scope for automated
-verification — so those three lines rest on the Pay As You Go page. -->
+verification — so those three lines rest on the Pay As You Go page. */}
 
-## What you need
-
-Nothing except an email address. If your company already uses Keboola, ask a colleague
-to invite you instead of creating your own project — you probably want to work in theirs.
+<Prereqs needs={[]}>
+  <li>An email address — nothing else.</li>
+  <li>
+    If your company already uses Keboola, ask a colleague to invite you instead of creating your
+    own project — you probably want to work in theirs.
+  </li>
+</Prereqs>
 
 ## What a project is
 
@@ -41,9 +53,9 @@ You have three ways in, in order of how quickly they get you started:
    right now. It is enough for everything in this guide: 250 GB of Storage and up to 60
    minutes of job runtime a month (the free allowance tracks your previous month's usage).
 
-   <!-- VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
+   {/* VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
    actual usage from the previous month" but never states what a project gets in its first month.
-   Worth stating on that page. --> See [Pay As You Go](/management/payg-project/)
+   Worth stating on that page. */} See [Pay As You Go](/management/payg-project/)
    for the full list of limits — including that the Free Plan does not let you choose a stack
    and gives you one project.
 2. **Join an existing project** — ask an admin of your company's Keboola organization to
@@ -77,10 +89,10 @@ After signing in you land on the project dashboard. Five places matter for this 
   have both kinds show this as **Conditional Flows**.
 - **Jobs** — the log of everything that has run, successfully or not.
 
-<!-- VERIFY(owner): "Kai cannot create a project" is an inference, not a documented limit — it
+{/* VERIFY(owner): "Kai cannot create a project" is an inference, not a documented limit — it
 follows from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current
 project"), but no Kai page states it outright. Confirm there is no project-creation tool, and
-consider stating the boundary on kai/index.md. -->
+consider stating the boundary on kai/index.md. */}
 
 :::tip[Ask Kai to orient you]
 This is the one step of the arc Kai cannot do for you — it lives *inside* a project, so there has

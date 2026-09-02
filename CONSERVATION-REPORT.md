@@ -33,33 +33,16 @@ not yet done).
 | The Apps-availability caveat | duplicated in `app/index.mdx` prose and its troubleshooting list | `Prereqs` on that page, once | merged |
 | Ordinals and the "Two ways to do it" paragraph on `transform` and `app` | both pages | `PageMeta` / `PathIntro` | moved |
 
-## Pending — wave one, not yet executed
+## Pending
 
 | Content | From | Planned destination |
 |---|---|---|
-| Project isolation, the three entry routes, Storage/Jobs locators, the three sign-in failure modes, the Kai orientation prompt, and the Kai-free workspace fallback | `getting-started/project/index.md` | merged into page 1 (`getting-started/index.mdx`) |
-| `## Ask it the question you started with` | `getting-started/automate/index.mdx` | new page 4, `getting-started/ask/` |
-| `## Check it worked`, job topology, All Runs reading | `getting-started/automate/index.mdx` | new page 7, `getting-started/check/` — a verification block stays behind on page 6 |
-| The step → effect → UI table | `getting-started/next-steps/index.md` | new page 7, `getting-started/check/` |
-| Job-log reading and the row-count sanity check | `getting-started/transform/index.mdx` | new page 7, `getting-started/check/` |
-| The one-prompt consolidated block | `getting-started/next-steps/index.md` | new page 4, `getting-started/ask/` — without the "now that you have seen the pieces" framing, which is false on page 4 of 7, and without the flow/app clauses that describe later pages |
-| Kai / MCP / kbagent comparison and eight of the nine "pick your next thing" entries | `getting-started/next-steps/index.md` | new `getting-started/going-further/` — minus the "In beta" clause, retired 15 Sep 2026 |
-| `## Phases and tasks`, notification cards | `getting-started/automate/index.mdx` | `/flows/` and `/management/notifications/` — **only the parts those pages lack**; the existing notifications page is richer than the arc's table and must not be overwritten |
-| `## How a transformation works`, mapping explanation | `getting-started/transform/index.mdx` | `/transformations/` |
-| `## Sending data out` | `getting-started/write/index.mdx` | `/components/writers/` |
-| Five delivery failure modes | `getting-started/write/index.mdx` | page 7 keeps at most one; the rest go to `/components/writers/storage/google-sheets/` |
-| The configuration-rows teaching (one configuration, four rows) | `getting-started/load/index.mdx` | **at risk** in wave two's data split — the arc is its only teaching site and `automate` depends on it. Needs a destination before the split lands. |
-
-| `## Check it worked`, the All Runs reading, job topology, and four of the five flow failure modes | `automate/index.mdx` | new page `getting-started/check/`; a short verification block stays on `automate` so page 6 does not end blind | moved |
-| The "everything succeeds but the sheet is unchanged" failure | `automate/index.mdx` | `getting-started/check/`, generalized to any delivery task — **caught in review: my own carve dropped it, and it existed nowhere else** | moved |
-| The step → effect → where-it-lives table | `next-steps/index.md` | `getting-started/check/` | moved |
-| The row-count sanity check and its two failure directions | `transform/index.mdx` prose | `getting-started/check/`, stated once as "the one number that proves the join" | moved |
-
-| `## Pick your next thing` (eight of nine entries), `## Drive Keboola with an agent`, `## When you get stuck` | `next-steps/index.md` | new `getting-started/going-further/`, which inherits `/getting-started/next-steps/` as a redirect | moved |
-| `## What you built` table | `next-steps/index.md` | `getting-started/check/` — it is verification, not routing | moved |
-| The ninth entry, "I am rolling this out to a team" | `next-steps/index.md` | the architecture tier — it is the one entry that is not a next step for this guide's reader | moved out of section |
-| The kbagent "In beta" clause | `next-steps/index.md` | **dropped** — the beta pill retires 2026-09-15 per Jordan (21 Aug) | dropped |
-| The side-trip list, each with a reason to read it | scattered across the arc's "Going further" blocks | `getting-started/going-further/` | merged |
+| Project isolation, the three entry routes, the Storage/Jobs locators, the three sign-in failure modes and the Kai orientation prompt | `project/index.mdx` | merged into page 1 — **blocked** on the pre-seeded-project decision, which decides whether pages 1 and 2 merge at all |
+| `## Phases and tasks`, notification cards | `automate/index.mdx` | `/flows/` and `/management/notifications/` — **only the parts those pages lack**; the existing notifications page is richer than the arc's table and must not be overwritten |
+| `## How a transformation works`, the mapping explanation | `transform/index.mdx` | `/transformations/` |
+| `## Sending data out` | `write/index.mdx` | `/components/writers/` |
+| Four of the five delivery failure modes | `write/index.mdx` | `/components/writers/storage/google-sheets/`; `check/` keeps the one that is about flow ordering |
+| The configuration-rows teaching (one configuration, four rows) | `load/index.mdx` | **at risk** in wave two's data split — the arc is its only teaching site and `automate` depends on it. Needs a destination before the split lands. |
 
 ## Deliberate deletions
 

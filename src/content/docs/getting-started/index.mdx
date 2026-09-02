@@ -6,12 +6,17 @@ redirect_from:
   - /tutorial/
 ---
 
+import PageMeta from '../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../components/getting-started/Prereqs.astro';
+
+<PageMeta genre="Tutorial" minutes="45" />
+
 Somebody claims that an octopus has been recorded near almost every coastline on Earth. You have
 the data to check — a century of ocean records — but it is spread across four files, none of
 which answers alone. That is the situation this guide starts from, and swap octopuses for orders
 or sensors and it is the ordinary one.
 
-<!-- Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. -->
+{/* Tutorial-hub page: the arc index. Links every step and the optional deep-dives; carries no steps of its own. */}
 
 The question the arc answers:
 
@@ -21,7 +26,7 @@ The question the arc answers:
   <source src="/getting-started/map-tour.mp4" type="video/mp4" />
 </video>
 
-<!-- Hero clip, three acts (scripts/compositor.html scene map-tour, local + gitignored; the map
+{/* Hero clip, three acts (scripts/compositor.html scene map-tour, local + gitignored; the map
 background is the committed octopus-map-preview.png app screenshot):
   1. the four raw files, rows verbatim from public/getting-started/*.csv — aphia_id 140605 means
      nothing in occurrences.csv and is Octopus vulgaris in species.csv;
@@ -29,7 +34,7 @@ background is the committed octopus-map-preview.png app screenshot):
   3. the finished app answering it, on the arc's verified numbers: North Atlantic 2,632 sightings,
      Prague nearest = musky octopus 495 km, deepest = Grimpoteuthis challengeri 4,838 m.
 Placed above the fold per Jordan's 2026-08-21 feedback ("Overview section too vague: reader
-can't tell what they'll get out of it"). -->
+can't tell what they'll get out of it"). */}
 
 In under an hour you will have a table that answers all of it, delivered to a spreadsheet,
 rebuilt every morning without you, and an interactive map where you type your own coordinates
@@ -63,18 +68,19 @@ demo — this is the mechanism a production project uses, just smaller.
 
 ## Before you start
 
-- **A project.** [Step 1](/getting-started/project/) gets you one. The Free Plan covers this
-  guide's work — the whole arc uses roughly six minutes of job runtime — as long as your project
-  has runtime minutes available.
-- **Basic SQL.** One `SELECT` with a couple of `JOIN`s. If you have never written SQL, the
-  queries are given in full and you can paste them — in both Snowflake and BigQuery form,
-  since which one you need depends on your project.
-- **A Google account**, for the delivery step. If you would rather not connect one, skip step 4
-  and build step 5's flow with two phases instead of three — loading and transforming on a
-  schedule is a real pipeline, just one that keeps its result inside Keboola.
+<Prereqs needs={['project', 'kai']}>
+  <li>
+    <strong>No SQL required.</strong> Kai writes the queries; the click-through pages give every
+    query in full if you would rather read them.
+  </li>
+  <li>
+    <strong>A Google account</strong> only if you want the spreadsheet side trip — that consent
+    screen is in your own account.
+  </li>
+</Prereqs>
 
-Nothing needs installing. Everything below happens in the browser — and if you take the Kai
-tabs, the whole build needs maybe fifteen minutes of your attention.
+Nothing needs installing. Everything happens in the browser, and the whole build needs about
+forty-five minutes of your attention.
 
 :::note[New to the platform entirely?]
 If you would rather understand the pieces before touching them, read the
@@ -92,9 +98,9 @@ Google authorization in step 4.
 Kai asks before it changes anything — expect one approval dialog per object it creates;
 questions that only read do not ask. If the confirming gets tiring, click **Always allow**, or
 pre-approve tools in [tool permissions](/kai/settings/#tool-permissions).
-<!-- VERIFY(owner): the chat also surfaced a tip for a "plan mode" — "have Kai draft a plan you can
+{/* VERIFY(owner): the chat also surfaced a tip for a "plan mode" — "have Kai draft a plan you can
 approve before any changes" — which would fit here, but nothing under kai/ documents it. Confirm
-the name and document it on kai/, then it can replace the Always-allow advice above. -->
+the name and document it on kai/, then it can replace the Always-allow advice above. */}
 
 The **Kai Agent** button sits in the top bar; an organization admin switches the feature on, and
 Free Plan projects get a monthly message allowance — see
