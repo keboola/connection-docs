@@ -8,11 +8,11 @@ You have a project and a question. This page hands both to Kai in a single promp
 build the entire pipeline — the loading, the SQL, the daily schedule, and a map app — while you
 watch. Step 2 of the [Getting Started](/getting-started/) arc.
 
-{/* Tutorial page, NEW in the one-prompt rework. The prompt below and every number on this page
+<!-- Tutorial page, NEW in the one-prompt rework. The prompt below and every number on this page
 come from a live run in demo project 264 on 2026-09-02: 14 minutes wall clock, 11 approvals,
 oneprompt_atlas at 10,000 rows with display_name / depth_zone / basin, flow "[ONEPROMPT] Octopus
 pipeline" scheduled 06:00 UTC, app "[ONEPROMPT] Octopus map" rendering in the draft preview.
-Transcript kept in the PR. */}
+Transcript kept in the PR. -->
 
 ## What you need
 

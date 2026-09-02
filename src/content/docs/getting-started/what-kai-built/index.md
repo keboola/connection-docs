@@ -8,8 +8,8 @@ One prompt produced four things in your project. This page opens each one, tells
 proves it worked, and names the concept behind it — so the next pipeline you build, you already
 know where to look. Step 3 of the [Getting Started](/getting-started/) arc.
 
-{/* Tutorial page, NEW in the one-prompt rework. Every number verified live in project 264 on
-2026-09-02 against the artifacts Kai created from the step-2 prompt. */}
+<!-- Tutorial page, NEW in the one-prompt rework. Every number verified live in project 264 on
+2026-09-02 against the artifacts Kai created from the step-2 prompt. -->
 
 ## The data source — four tables in Storage
 
