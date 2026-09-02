@@ -1,6 +1,6 @@
 ---
 title: Snowflake Workspaces Access Changes
-description: By end of the year 2025, all projects using Keboola’s shared Snowflake backend (Multi-tenant or Pay-As-You-Go) will lose direct access to SQL workspaces, as…
+description: 'Direct Snowflake login from IDEs and BI tools is being removed for shared-backend projects — what is deprecated, when, and the tools replacing it.'
 slug: 'workspace/snowflake-workspaces-access-changes'
 redirect_from:
   - /transformations/workspace/snowflake-workspaces-access-changes/

@@ -1,6 +1,6 @@
 ---
 title: Python Implementation Notes
-description: Use the official images if possible. Usually, the alpine versions are sufficient and are the smallest and fastest. We recommend using our templates.
+description: 'Write a Keboola component in Python — choosing a base image, the keboola.component package, parsing the configuration, and input and output mapping.'
 slug: 'extend/component/implementation/python'
 redirect_from:
     - /extend/custom-science/python/

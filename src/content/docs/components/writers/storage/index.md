@@ -1,6 +1,6 @@
 ---
 title: Storage Data Destination Connectors
-description: Data destination connectors export data from Keboola to external systems.
+description: 'Data destination connectors for object and file storage — deliver Keboola output to S3, Azure Blob Storage, and similar targets.'
 slug: 'components/writers/storage'
 redirect_from:
     - /writers/storage/

@@ -1,6 +1,6 @@
 ---
 title: "Part 6: Development Branches"
-description: The feature Development Branches allows you to modify component configurations without interfering with the running configurations or entire automated…
+description: 'Change component configurations safely in a development branch, without touching running configurations or automated pipelines.'
 slug: 'tutorial/branches'
 ---
 

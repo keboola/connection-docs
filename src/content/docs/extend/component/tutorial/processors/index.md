@@ -1,6 +1,6 @@
 ---
 title: Processors
-description: Processors are an optional part of a component configuration. While they are not at all necessary in the development of new components for Keboola, we think…
+description: 'Add processors to a component configuration — optional pre- and post-processing steps that save you writing the same handling into every component.'
 slug: 'extend/component/tutorial/processors'
 ---
 

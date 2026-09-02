@@ -1,6 +1,6 @@
 ---
 title: Extraction Configuration
-description: To configure your first Generic Extractor, follow our tutorial. Use Parameter Map to help you navigate among various configuration options.
+description: 'Configure a Generic Extractor run — jobs, mappings, output bucket, HTTP options, incremental output, user data, and debug.'
 slug: 'components/extractors/generic-extractor/configuration/config'
 redirect_from:
     - /extend/generic-extractor/configuration/config/

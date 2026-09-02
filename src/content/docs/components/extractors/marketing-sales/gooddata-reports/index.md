@@ -1,6 +1,6 @@
 ---
 title: GoodData Reports
-description: The GoodData Reports data source connector uses the GoodData API to import reports from the GoodData business intelligence platform and stores the data in…
+description: 'Import reports from the GoodData business intelligence platform into Keboola Storage.'
 slug: 'components/extractors/marketing-sales/gooddata-reports'
 redirect_from:
     - /extractors/marketing-sales/gooddata-reports/

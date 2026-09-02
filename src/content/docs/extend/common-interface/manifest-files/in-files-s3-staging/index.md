@@ -1,6 +1,6 @@
 ---
 title: S3 Staging
-description: When using AWS S3 for direct data exchange, the manifest files in the component’s working directory will contain an additional s3 section with credentials for…
+description: 'Download file data straight from AWS S3 — the s3 section added to input file manifests and the credentials it carries.'
 slug: 'extend/common-interface/manifest-files/in-files-s3-staging'
 ---
 

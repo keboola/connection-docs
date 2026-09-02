@@ -1,6 +1,6 @@
 ---
 title: Data Streams
-description: "Keboola's Data Streams feature allows users to receive streaming event data directly into Keboola Storage without needing additional steps, such as setting up…"
+description: 'Receive streaming event data straight into Keboola Storage — no data source connector, middleware, or extra pipeline steps to set up.'
 slug: 'storage/data-streams'
 redirect_from:
     - /integrate/data-streams/

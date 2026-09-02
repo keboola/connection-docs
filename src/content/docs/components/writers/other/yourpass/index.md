@@ -1,6 +1,6 @@
 ---
 title: YourPass
-description: YourPass enables users to create passes for mobile wallets; e.g., for boarding passes, loyalty points, or tickets.
+description: 'Create and update mobile wallet passes in YourPass — boarding passes, loyalty cards, and tickets — from Keboola data.'
 slug: 'components/writers/other/yourpass'
 redirect_from:
     - /writers/other/yourpass/

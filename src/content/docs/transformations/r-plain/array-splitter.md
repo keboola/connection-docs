@@ -1,6 +1,6 @@
 ---
 title: Array Splitting
-description: Array splitting is what you do if you have a list of values in a single cell delimited by a character (a comma, semi-colon, etc.), and want each of those…
+description: 'Split a delimited list held in one cell into separate rows — a ready-to-use R script and how to prepare your data for it.'
 slug: 'transformations/r-plain/array-splitter'
 redirect_from:
     - /manipulation/transformations/r/array-splitter/

@@ -1,6 +1,6 @@
 ---
 title: "Cheat Sheet: Best Practices"
-description: How you use Keboola can differ significantly. From setting up automated data pipelines with Flows to managing components such as data sources, destinations…
+description: 'Best practices for running Keboola day to day — data sources, destinations, transformations, and Flows, whatever the size of your project.'
 slug: 'tutorial/onboarding/cheat-sheet'
 ---
 

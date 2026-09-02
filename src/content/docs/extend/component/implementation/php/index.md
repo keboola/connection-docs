@@ -1,6 +1,6 @@
 ---
 title: PHP Implementation Notes
-description: Use the official images if possible. Usually, the alpine versions are sufficient and are the smallest and fastest.
+description: 'Write a Keboola component in PHP — choosing a base image, handling dependencies, reading the configuration, and working with input and output mapping.'
 slug: 'extend/component/implementation/php'
 redirect_from:
     - /extend/custom-science/php/

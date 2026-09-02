@@ -1,6 +1,6 @@
 ---
 title: Common Interface
-description: To exchange data between your component and Keboola, use a predefined set of input and output folders for tables and files, a configuration file, environment…
+description: 'The contract between your component and Keboola — the input and output folders, the configuration file, manifests, and environment variables your code reads and writes.'
 slug: 'extend/common-interface'
 ---
 

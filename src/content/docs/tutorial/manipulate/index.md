@@ -1,6 +1,6 @@
 ---
 title: "Part 2: Data Manipulation"
-description: "At this juncture, you're acquainted with the swift process of loading data into Keboola, resulting in four new tables in your Storage: account, opportunity…"
+description: 'Transform the tables you loaded — write your first SQL transformation over the account, opportunity, level, and user tables.'
 slug: 'tutorial/manipulate'
 ---
 

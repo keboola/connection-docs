@@ -1,6 +1,6 @@
 ---
 title: ČEPS
-description: ČEPS, a.s. is a company providing operation of the electricity transmission system in the Czech Republic This component enables you to extract publicly…
+description: 'Extract publicly available Czech electricity transmission system data from the ČEPS API into Storage.'
 slug: 'components/extractors/other/ceps'
 ---
 

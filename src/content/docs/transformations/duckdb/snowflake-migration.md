@@ -1,6 +1,6 @@
 ---
 title: Snowflake to DuckDB Migration
-description: This guide covers the key differences between Snowflake and DuckDB SQL dialects and provides practical advice for migrating your Snowflake transformations to…
+description: 'Migrate Snowflake transformations to DuckDB — the SQL dialect differences that bite, and how to work around them.'
 slug: 'transformations/duckdb/snowflake-migration'
 ---
 

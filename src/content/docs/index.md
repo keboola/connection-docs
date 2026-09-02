@@ -1,6 +1,6 @@
 ---
 title: Keboola User Documentation
-description: Welcome to the Keboola documentation—a comprehensive resource offering step-by-step guidance and reference information to help users seamlessly navigate the…
+description: 'Step-by-step guides and reference for the Keboola platform — load data, transform it, automate pipelines, and deliver results to where they are used.'
 slug: ''
 ---
 

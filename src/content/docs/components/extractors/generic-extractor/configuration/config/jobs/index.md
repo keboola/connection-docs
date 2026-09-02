@@ -1,6 +1,6 @@
 ---
 title: Jobs
-description: If new to Generic Extractor, learn about jobs in our tutorial first. Use Parameter Map to help you navigate among various configuration options.
+description: 'Define what Generic Extractor requests — endpoint, HTTP method, request parameters, data type and data field, response filters, and how responses are merged.'
 slug: 'components/extractors/generic-extractor/configuration/config/jobs'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/

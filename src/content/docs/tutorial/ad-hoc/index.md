@@ -1,6 +1,6 @@
 ---
 title: "Part 5: Ad-Hoc Data Analysis"
-description: After you have loaded your tables, either manually or using a data source connector, manipulated the data in SQL, written it into Google Sheets, and set…
+description: 'Explore your data ad hoc in a workspace — connect BigQuery, query the tables you loaded, and add the libraries you need.'
 slug: 'tutorial/ad-hoc'
 ---
 

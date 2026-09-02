@@ -1,6 +1,6 @@
 ---
 title: YourPass
-description: YourPass enables users to create passes for mobile wallets; e.g., for boarding passes, loyalty points, or tickets.
+description: 'Import mobile wallet passes and their events from YourPass into Keboola Storage.'
 slug: 'components/extractors/other/yourpass'
 redirect_from:
     - /extractors/other/yourpass/

@@ -1,6 +1,6 @@
 ---
 title: OAuth 1.0 Authentication
-description: Note that this configuration option is not yet supported and the test endpoint button will not work.
+description: 'Authenticate Generic Extractor requests with OAuth 1.0 — the credentials the method expects and how the signature is assembled.'
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth10'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth10/

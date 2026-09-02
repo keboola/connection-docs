@@ -1,6 +1,6 @@
 ---
 title: Page Number Scroller
-description: The Page Number Scroller handles a pagination strategy in which the API splits the results into pages of the same size (limit parameter) and navigates through…
+description: 'Page through an API by page number — the Page Number scroller''s parameters, and when to use it instead of item offsets.'
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/pagenum'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/pagenum/

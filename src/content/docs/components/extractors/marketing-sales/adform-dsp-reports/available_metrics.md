@@ -1,6 +1,6 @@
 ---
 title: Available Metrics
-description: Note that this list can be retrieved also via this API call.
+description: 'Every metric available in Adform DSP reports, and the API call that returns the current list.'
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-metrics'
 ---
 

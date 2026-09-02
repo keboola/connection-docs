@@ -1,6 +1,6 @@
 ---
 title: Child Jobs
-description: If new to Generic Extractor, learn about jobs in our tutorial first. Use Parameter Map to help you navigate among various configuration options.
+description: 'Run a nested job for each parent record — child job placeholders, filters, and how child results map back to the parent.'
 slug: 'components/extractors/generic-extractor/configuration/config/jobs/children'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/children/
