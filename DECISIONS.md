@@ -138,15 +138,16 @@ where present. Adding a `title:` to navigation.yml still does nothing; use
 
 ## Open — carried as VERIFY(owner) flags in the pages
 
-These are product facts an agent must not guess. Fourteen flags are live in the
-section as of 2026-09-02; the ones that block rebuild work are:
+These are product facts an agent must not guess. Two of the seven below were
+closed on 2026-09-02 by checking the product rather than by guessing; the rest
+still block rebuild work.
 
 | Question | Where flagged | Blocks |
 |---|---|---|
-| Can Kai create a project? | `project/index.md` | page 1's Kai coverage |
+| Can Kai create a project? | `project/index.mdx` | page 1's Kai coverage |
 | Does the Free Plan include data apps? | `app/index.mdx` | whether the app step needs "skippable" framing |
-| Does a "plan mode" exist, and what is it called? | `index.md` | replacing the "Always allow" advice |
+| ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
 | Can Kai set a schedule and notifications? | `automate/index.mdx` | how far the Kai tab reaches on page 6 |
-| Has the consolidated one-prompt block ever run end to end? | `next-steps/index.md` | now answered: yes, 2026-09-02, 14 min / 11 approvals — see the run in PR #1110 |
-| Is the monthly Kai allowance per project or per organization? | `project/index.md` | the pricing guardrail wording |
+| ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
+| Is the monthly Kai allowance per project or per organization? | `project/index.mdx` | the pricing guardrail wording |
 | Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
