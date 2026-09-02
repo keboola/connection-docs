@@ -45,10 +45,19 @@ not yet done).
 | Chapter numbering in titles and bodies ("Step 3 of 7") | The new titles are outcomes; numbering breaks the moment a page moves, and no surveyed vendor uses it | reading order lives in the sidebar |
 | `writing1.png` | Orphan — grep-confirmed unreferenced | n/a |
 
-## Known regression, being fixed in this wave
+## Regression found and fixed in this wave
 
 `public/getting-started/transform/04-input-mapping.png`,
-`06-output-mapping.png` and `07-configured.png` are **byte-identical**
-(`1feaa6990456e936707f2f20554368b0`), and `05` is missing. Three captions point
-at the same picture. Introduced by the 27 Aug reshoot, not inherited. Re-shoot
-required regardless of the dataset decision.
+`06-output-mapping.png` and `07-configured.png` were **byte-identical**
+(`1feaa6990456e936707f2f20554368b0`) — three captions pointing a reader at the
+same picture. Introduced by the 27 Aug reshoot, not inherited: the shoot used
+`scrollIntoViewIfNeeded` on a page that fitted the viewport, so all three
+"scrolls" produced the same frame.
+
+Re-shot 2026-09-02 as **element/region captures** rather than full-page ones, so
+each frame is necessarily distinct and shows only its own panel — which also
+matches the house rule that doc screenshots are UI locators. `04` shows the four
+input rows, `06` the single output row, `07` the Queries/Blocks panel where the
+code lives (the SQL itself stays transcribed in fenced blocks on the page, not
+in an image). `05` was never referenced by any page — the numbering simply
+skips it; no file is owed.
