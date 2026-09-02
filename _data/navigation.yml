@@ -32,6 +32,12 @@ items:
       - url: /getting-started/project/
         title: Get a Project
 
+      - url: /getting-started/one-prompt/
+        title: Build It in One Prompt
+
+      - url: /getting-started/what-kai-built/
+        title: What Kai Built
+
       - url: /getting-started/load/
         title: Get Your Data In
 

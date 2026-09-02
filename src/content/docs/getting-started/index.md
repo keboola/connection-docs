@@ -1,7 +1,7 @@
 ---
 title: 'Getting Started with Keboola'
 slug: 'getting-started'
-description: "Build your first working data pipeline in Keboola: load 10,000 octopus sightings, join them with SQL, deliver a spreadsheet, run it on a schedule, and ship a map app."
+description: "Build your first working data pipeline in Keboola in one prompt: 10,000 octopus sightings loaded, joined, scheduled and mapped — then take it apart to see how it works."
 redirect_from:
   - /tutorial/
 ---
@@ -82,45 +82,48 @@ If you would rather understand the pieces before touching them, read the
 what a stack is. This guide explains each piece as it comes up, so you can also just start.
 :::
 
-## Two ways to do every step
+## How this guide works
 
-Steps 2 through 6 open with a **Do it with Kai** tab — copy the prompt, watch it build, check
-the result — and a **Do it yourself** tab with every click written out, for when you want to
-see the mechanics. Only two things stay yours either way: creating the project (step 1) and the
-Google authorization in step 4.
+**You build it once, in one prompt.** Paste one paragraph into Kai and it does the whole
+pipeline — the connector, the SQL, the scheduled flow, the app — asking you to approve each
+change. In our run that took fourteen minutes and eleven approvals. Then you take the result
+apart: every artifact, what number proves it worked, and the concept behind it.
 
-Kai asks before it changes anything — expect one approval dialog per object it creates;
-questions that only read do not ask. If the confirming gets tiring, click **Always allow**, or
-pre-approve tools in [tool permissions](/kai/settings/#tool-permissions).
-<!-- VERIFY(owner): the chat also surfaced a tip for a "plan mode" — "have Kai draft a plan you can
-approve before any changes" — which would fit here, but nothing under kai/ documents it. Confirm
-the name and document it on kai/, then it can replace the Always-allow advice above. -->
+That order is deliberate. You get something that works before you learn how it works, and the
+tour afterwards means you can build the next one yourself.
+
+**If you would rather do it by hand**, every step also exists as a click-through walkthrough —
+[Get Your Data In](/getting-started/load/) onward. Same pipeline, same result, every setting
+shown. Use it when you want to know exactly where something lives, or when you are teaching
+somebody else.
+
+Two things stay yours either way: creating the project, and the Google authorization if you want
+the spreadsheet step — that consent screen is in your own Google account.
 
 The **Kai Agent** button sits in the top bar; an organization admin switches the feature on, and
 Free Plan projects get a monthly message allowance — see
-[Get started with Kai](/kai/getting-started/). And once you have seen the five pieces, they
-collapse: [the last page shows the whole arc as one prompt](/getting-started/next-steps/#next-time-one-prompt).
+[Get started with Kai](/kai/getting-started/).
 
 ## The steps
 
 1. **[Get a Project](/getting-started/project/)** — create or join one, learn what a project
    and a stack are, find your way around.
-2. **[Get Your Data In](/getting-started/load/)** — pull the four sample files into Storage with
-   a connector, and understand buckets, tables and stages. One Kai prompt, run included.
-3. **[Transform Data](/getting-started/transform/)** — the SQL that turns species IDs into
-   names and places every sighting in its ocean and depth zone. One Kai prompt builds and runs it.
-4. **[Deliver the Answer](/getting-started/write/)** — push the result to a Google
-   Sheet with a data destination connector. You authorize; one Kai prompt does the rest.
-5. **[Run It on a Schedule](/getting-started/automate/)** — run the whole thing in order,
-   on a schedule, with notifications. Kai wires the flow; the schedule is two clicks.
-6. **[Build the App](/getting-started/app/)** — a map of every sighting with a
-   "how close to me?" field, described to Kai in one sentence and published with one button.
-7. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
-   you actually want to do, including how to drive Keboola from an AI assistant, an IDE, or
-   your terminal.
+2. **[Build It in One Prompt](/getting-started/one-prompt/)** — the prompt, what Kai does with
+   it, and what it will ask you to approve.
+3. **[What Kai Built](/getting-started/what-kai-built/)** — open the connector, the
+   transformation, the scheduled flow and the app; check the numbers; learn the four concepts.
+4. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what you
+   actually want to do, including how to drive Keboola from an AI assistant, an IDE, or your
+   terminal.
 
-Read them in order. Each step ends with a link to the next, and every page states what it
-assumes so you can also land on one directly and catch up.
+### Or build it by hand
+
+The same pipeline, one setting at a time:
+[Get Your Data In](/getting-started/load/) ·
+[Transform Data](/getting-started/transform/) ·
+[Deliver the Answer](/getting-started/write/) ·
+[Run It on a Schedule](/getting-started/automate/) ·
+[Build the App](/getting-started/app/)
 
 ## Going further
 
