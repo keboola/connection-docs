@@ -1,5 +1,6 @@
 ---
 title: REST HTTP API Introduction
+description: An API (Application Programming Interface) is an interface) to an application, or a service designed for machine access.
 slug: 'components/extractors/generic-extractor/tutorial/rest'
 redirect_from:
     - /extend/generic-extractor/tutorial/rest/

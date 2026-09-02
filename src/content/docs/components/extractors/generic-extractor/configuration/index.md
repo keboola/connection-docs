@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor Configuration
+description: To configure your first Generic Extractor, follow our tutorial.
 slug: 'components/extractors/generic-extractor/configuration'
 redirect_from:
     - /extend/generic-extractor/configuration/

@@ -1,5 +1,6 @@
 ---
 title: Query Authentication
+description: Query Authentication provides the simplest authentication method, in which the credentials are sent in the request URL.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/query'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/query/

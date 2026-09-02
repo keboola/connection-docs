@@ -1,5 +1,6 @@
 ---
 title: Authentication
+description: To configure your first Generic Extractor, follow our tutorial. Use Parameter Map to help you navigate among various configuration options.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/

@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor Parameter Map
+description: To configure your first Generic Extractor, follow our tutorial.
 slug: 'components/extractors/generic-extractor/map'
 redirect_from:
     - /extend/generic-extractor/map/

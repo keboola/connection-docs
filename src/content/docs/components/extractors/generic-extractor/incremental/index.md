@@ -1,5 +1,6 @@
 ---
 title: Incremental Loading
+description: Extracting data incrementally is universally beneficial — it speeds up the extraction and lowers the load on both the API and Keboola Storage (thus saving…
 slug: 'components/extractors/generic-extractor/incremental'
 redirect_from:
     - /extend/generic-extractor/incremental/

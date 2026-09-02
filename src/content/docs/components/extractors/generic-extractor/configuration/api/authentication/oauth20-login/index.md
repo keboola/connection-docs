@@ -1,5 +1,6 @@
 ---
 title: Login Using OAuth 2.0 Authentication
+description: Note that this configuration option is not yet supported and the test endpoint button will not work.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20-login'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20-login/
