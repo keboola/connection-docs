@@ -43,9 +43,13 @@ function convertItem(item) {
     return { label: 'Home', slug: 'index' };
   }
 
-  // Leaf node — no children
+  // Leaf node — no children.
+  // By default the sidebar label comes from the page's own frontmatter title.
+  // An explicit `label:` in navigation.yml overrides it — use that when the
+  // sidebar needs a shorter label than the page title (`title:` alone is NOT
+  // read here, so adding one has no effect).
   if (!hasChildren) {
-    return { slug };
+    return item.label ? { label: item.label, slug } : { slug };
   }
 
   // Branch node — has children
@@ -59,7 +63,10 @@ function convertItem(item) {
     label: item.title,
     collapsed: true,
     items: [
-      { label: 'Overview', slug },  // parent page labeled "Overview" to avoid duplicating group name
+      // The landing page defaults to "Overview" so it does not repeat the group
+      // name; `label:` on the group overrides it where the page has a real name
+      // of its own.
+      { label: item.label ?? 'Overview', slug },
       ...childItems,
     ],
   };
