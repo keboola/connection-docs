@@ -55,6 +55,12 @@ not yet done).
 | The step → effect → where-it-lives table | `next-steps/index.md` | `getting-started/check/` | moved |
 | The row-count sanity check and its two failure directions | `transform/index.mdx` prose | `getting-started/check/`, stated once as "the one number that proves the join" | moved |
 
+| `## Pick your next thing` (eight of nine entries), `## Drive Keboola with an agent`, `## When you get stuck` | `next-steps/index.md` | new `getting-started/going-further/`, which inherits `/getting-started/next-steps/` as a redirect | moved |
+| `## What you built` table | `next-steps/index.md` | `getting-started/check/` — it is verification, not routing | moved |
+| The ninth entry, "I am rolling this out to a team" | `next-steps/index.md` | the architecture tier — it is the one entry that is not a next step for this guide's reader | moved out of section |
+| The kbagent "In beta" clause | `next-steps/index.md` | **dropped** — the beta pill retires 2026-09-15 per Jordan (21 Aug) | dropped |
+| The side-trip list, each with a reason to read it | scattered across the arc's "Going further" blocks | `getting-started/going-further/` | merged |
+
 ## Deliberate deletions
 
 | Content | Why | Where the information survives |

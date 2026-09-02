@@ -53,8 +53,8 @@ items:
       - url: /getting-started/check/
         title: Check it worked
 
-      - url: /getting-started/next-steps/
-        title: Where to Go Next
+      - url: /getting-started/going-further/
+        title: Going further
 
       - title: Going Further
         items:

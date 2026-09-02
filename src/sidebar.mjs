@@ -42,7 +42,7 @@ export const sidebar = [
       { slug: "getting-started/ask" },
       { slug: "getting-started/app" },
       { slug: "getting-started/check" },
-      { slug: "getting-started/next-steps" },
+      { slug: "getting-started/going-further" },
       {
         label: "Going Further",
         collapsed: true,

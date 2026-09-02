@@ -1,59 +1,54 @@
 ---
-title: Where to Go Next
-slug: 'getting-started/next-steps'
-description: You have a running pipeline — here is what to learn next depending on what you want to do, and how to drive Keboola from an AI assistant, an IDE, or your terminal.
+title: 'Going further'
+slug: 'getting-started/going-further'
+description: 'Where to go once the first pipeline runs: the next thing to learn based on what you actually want to do, the three ways to drive Keboola from an agent, and where to get help.'
+redirect_from:
+  - /getting-started/next-steps/
+  - /tutorial/onward/
 ---
 
-You had a question: how close to your coast does an octopus live, and how deep down do they
-really go. It is answered, and it stays answered — the pipeline rebuilds the sheet every morning
-whether or not anyone thinks to ask again, and the map answers anyone who opens it. That is the
-whole shape of working in Keboola; everything else is a variation on it.
-Step 7, the last, of the [Getting Started](/getting-started/) arc.
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 
-<!-- Explanation-type page: a routing page, no steps of its own. Beta labels for the Kai button removed per Jordan 2026-08-21 (UI pill retires 2026-09-15); the kai/ section still carries Public Beta wording — schedule the same removal there. Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
+<PageMeta genre="Explanation" minutes="5" guide="Going further" />
 
-## What you built
+The pipeline runs and keeps running. That is the whole shape of working in Keboola; everything
+else is a variation on it. This page routes you to the next thing based on what you want to do,
+rather than on what comes next in a sequence.
 
-| Step | What it does | Where it lives |
-|---|---|---|
-| HTTP configuration | brings raw data into the project | **Components** |
-| SQL transformation | joins the raw tables into one table | **Transformations** |
-| Google Sheets destination | delivers the result outside Keboola | **Components** |
-| Flow | runs all of it, in order, on a schedule | **Flows** |
-| Data app | the map anyone can open, with the "how close to me?" field | **Apps** |
+<!-- Explanation-type page: a router, no steps of its own. Carries /getting-started/next-steps/,
+which was the arc's closing page — its "what you built" table moved to getting-started/check/ and
+its consolidated one-prompt block to getting-started/ask/, since both are verification and
+Kai content rather than routing. The kbagent "In beta" clause is dropped here: the beta pill
+retires 2026-09-15 per Jordan (21 Aug). The "rolling this out to a team" entry moved to the
+architecture tier — it is the one entry that is not a next step for the reader of this guide.
+Agent surfaces per /kai/, /ai/mcp-server/, /cli/. -->
 
-Every job that ran is in **Jobs**, and every table it touched is in **Storage**.
+## The side trips
 
-## Next time: one prompt
+The guide's linear path is the shortest one that produces something real. These are the branches
+off it, each worth reading for a specific reason:
 
-You built this arc one step at a time so every result stayed checkable. Now that you have seen
-the pieces, you no longer need five prompts — in a fresh project, the whole thing is one
-request:
-
-```text
-Load the four CSVs from https://help.keboola.com/getting-started/ — occurrences.csv,
-species.csv, depth_zones.csv and basins.csv — into Storage. Join them into one octopus_atlas
-table with display names, depth zones and ocean basins. Deliver it to a Google Sheet, wire
-loading, joining and delivering into a flow that runs daily, and build me a map app of all the
-sightings with a nearest-sighting search by coordinates.
-```
-
-Kai will still ask you to approve what it creates, and the Google authorization stays yours —
-but that is the entire difference between one sentence and this guide. Swap the file URLs for
-your own data and the same sentence builds *your* pipeline instead.
-<!-- VERIFY(owner): this consolidated prompt is the per-step prompts joined; it has not yet been
-run end-to-end as one request. Run it in a scratch context during the re-walk and calibrate the
-wording (approval count, whether Kai orders the phases correctly) before GA. Direction blessed by
-Jordan on the 08-21 call ("technically all of this could be one prompt"). -->
+- **[Send a table to Google Sheets](/getting-started/write/)** — delivery: getting a Storage
+  table back out to where people read it.
+- **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
+  **[from a database](/getting-started/load/database/)** — sources that need credentials rather
+  than a public URL.
+- **[Use a workspace](/getting-started/transform/workspace/)** — develop and test SQL against a
+  copy of your data before committing it to a transformation.
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** — explore data in a Python or R notebook
+  instead of building a pipeline.
+- **[Development branches](/getting-started/branches/)** — change a running project safely,
+  review the diff, then merge.
 
 ## Pick your next thing
 
 **"My real data is not a CSV file on a public URL."** Browse the
 [data source connectors](/components/extractors/) — databases, APIs, cloud storage, ad
 platforms, CRMs. They configure the same way the HTTP connector did, and drop into a flow the
-same way. Two worked examples are in this guide already:
-[Google Sheets](/getting-started/load/googlesheets/) and
-[a database](/getting-started/load/database/).
+same way. Two worked examples sit in this tier: [Google Sheets](/getting-started/load/googlesheets/) —
+a source that needs an authorized account rather than a public URL — and
+[a database](/getting-started/load/database/), which you can walk against Keboola's own sample
+Snowflake database without credentials of your own.
 
 **"My transformation needs to be more than one query."** [Transformations](/transformations/)
 covers SQL, Python, R and dbt, code blocks and phases, shared code, and
@@ -86,10 +81,6 @@ joining or creating a vendor comes with access to a development Keboola project 
 in. Making it available to everyone else is a separate, approval-gated step:
 [publishing](/extend/publish/).
 
-**"I am rolling this out to a team."** Start with the
-[platform onboarding](/overview/onboarding/) guides: a usage blueprint, project
-architecture, a business data model, and governance.
-
 ## Drive Keboola with an agent
 
 Everything you just did by clicking can be done by an AI assistant instead — the platform
@@ -105,8 +96,7 @@ exposes the same operations three ways, and which one you pick depends on where 
   speaks the Model Context Protocol (Claude, Cursor, and others). Use this when you want
   your coding agent to read and change the project while you work on code.
 - **[kbagent CLI](/cli/)** — Keboola from the terminal: projects, configurations, jobs,
-  storage, and flows, scriptable, and usable by a coding agent that has a shell. In beta, so
-  commands and output formats may still change. Start with
+  storage, and flows, scriptable, and usable by a coding agent that has a shell. Start with
   [the CLI quickstart](/cli/getting-started/).
 
 If you are documenting or automating your own work on top of Keboola, the
@@ -118,5 +108,3 @@ If you are documenting or automating your own work on top of Keboola, the
   the project context attached.
 - [keboolastatus.com](https://keboolastatus.com/) — platform status, worth subscribing to.
 - [changelog.keboola.com](https://changelog.keboola.com/) — what shipped recently.
-
-**Back to:** [Getting Started →](/getting-started/)

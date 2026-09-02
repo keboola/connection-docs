@@ -99,7 +99,7 @@ the name and document it on kai/, then it can replace the Always-allow advice ab
 The **Kai Agent** button sits in the top bar; an organization admin switches the feature on, and
 Free Plan projects get a monthly message allowance — see
 [Get started with Kai](/kai/getting-started/). And once you have seen the five pieces, they
-collapse: [the last page shows the whole arc as one prompt](/getting-started/next-steps/#next-time-one-prompt).
+collapse: [the same request works as one prompt](/getting-started/ask/#the-same-request-as-one-prompt).
 
 ## The steps
 
@@ -115,7 +115,7 @@ collapse: [the last page shows the whole arc as one prompt](/getting-started/nex
    on a schedule, with notifications. Kai wires the flow; the schedule is two clicks.
 6. **[Put it in front of someone](/getting-started/app/)** — a map of every sighting with a
    "how close to me?" field, described to Kai in one sentence and published with one button.
-7. **[Where to Go Next](/getting-started/next-steps/)** — what to learn next based on what
+7. **[Going further](/getting-started/going-further/)** — what to learn next based on what
    you actually want to do, including how to drive Keboola from an AI assistant, an IDE, or
    your terminal.
 

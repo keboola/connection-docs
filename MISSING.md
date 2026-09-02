@@ -12,7 +12,7 @@ guide asserts without a verified source.
 |---|---|---|
 | No "check it worked" page | Verification is scattered across five pages, so a reader who lands mid-guide cannot tell whether their own run is healthy. Absent at PostHog and Firecrawl too — a place to be better than the field. | new page 7, `getting-started/check/` |
 | No page for the "AI answer" step | Michal asked for *"něco typu AI answer"*; today the closest thing is a closing section misfiled at the bottom of the automation page. | new page 4, `getting-started/ask/` |
-| No landing page for the going-further tier | The nav group has never had one, so the group's landing slot renders as a second "Overview". | new `getting-started/going-further/` |
+| ~~No landing page for the going-further tier~~ | Done 2026-09-02: `getting-started/going-further/` exists and carries `next-steps`. | — |
 | No shared prerequisites partial | Every page hand-writes its prerequisites, so they drift within a release. Cloudflare renders one partial 4,087 times across 1,966 pages for exactly this reason. | `src/components/getting-started/Prereqs.astro` |
 | The guide never says "run it again tomorrow and the answer moved" | The scheduling step is the one that teaches least, because the sample data is static. Airbyte has the same gap and never narrates it. | page 6, once the data has a live half |
 | The manual path has no CLI coverage per task | `kbagent` exists and has a reference section, but no task page shows the same task done with it. | tabs on task pages, if decision #3 lands |
