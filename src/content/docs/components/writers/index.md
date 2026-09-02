@@ -30,7 +30,7 @@ Each data destination connector can have multiple configurations. Each configura
 Even though destination connectors are generally designed for [**automated and repeated**](/flows/) data collection,
 they can be triggered manually at any time.
 
-For a worked example, see [Deliver the Answer](/getting-started/write/) in Getting Started, which writes a Storage table out to a Google Sheet.
+For a worked example, see [Send a table to Google Sheets](/getting-started/write/), which walks one destination end to end.
 
 You can also watch the following videos:
 

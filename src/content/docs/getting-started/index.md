@@ -109,7 +109,7 @@ collapse: [the last page shows the whole arc as one prompt](/getting-started/nex
    a connector, and understand buckets, tables and stages. One Kai prompt, run included.
 3. **[Transform Data](/getting-started/transform/)** — the SQL that turns species IDs into
    names and places every sighting in its ocean and depth zone. One Kai prompt builds and runs it.
-4. **[Deliver the Answer](/getting-started/write/)** — push the result to a Google
+4. **[Send a table to Google Sheets](/getting-started/write/)** — push the result to a Google
    Sheet with a data destination connector. You authorize; one Kai prompt does the rest.
 5. **[Run It on a Schedule](/getting-started/automate/)** — run the whole thing in order,
    on a schedule, with notifications. Kai wires the flow; the schedule is two clicks.

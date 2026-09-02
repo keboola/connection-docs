@@ -1,5 +1,5 @@
 ---
-title: 'Deliver the Answer'
+title: 'Send a table to Google Sheets'
 slug: 'getting-started/write'
 description: 'Send the table you just built out of Keboola into a Google Sheet using the Google Sheets data destination connector.'
 redirect_from:
@@ -7,27 +7,38 @@ redirect_from:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-Whoever asked how deep octopuses really go will look in a spreadsheet, not in Keboola. This step
-delivers the 10,000-row atlas to a Google Sheet — the same mechanism that later sends data to a
-warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
+<PageMeta genre="How-to" minutes="10" guide="Going further" />
 
-**Two ways to do it, in one order:** steps 1–6 below are yours either way — the configuration and
-the Google authorization. After that, pick a tab in *Set it up*. Doing it with Kai, the run is
-part of the prompt; doing it yourself, you run it below the tabs. Checking the result is shared.
+Whoever asked the question will look in a spreadsheet, not in Keboola. This page delivers a
+Storage table to a Google Sheet — the same mechanism that sends data to a warehouse, a BI tool,
+or a CRM.
 
-{/* Tutorial-type page (step 4 of 7). 2026-08-25: dataset swapped to the octopus atlas
+**Where you are:** the table you want to send is in Storage. **When you finish:** the same rows
+in a spreadsheet, refreshed on every run.
+
+<PathIntro yours="the Google consent screen — it lives in your own account, so no assistant can click it for you" />
+
+The configuration and the Google authorization below are yours either way; the tabs pick up
+afterwards.
+
+{/* How-to page (moved out of the linear guide 2026-09-02: delivery is one destination among
+many, so it reads as a how-to rather than a required step — see DECISIONS.md). Formerly step 4. 2026-08-25: dataset swapped to the octopus atlas
 (PRDCT-487 arc rework). Stills reshot live in 264 on 2026-08-27 (01, writing2, 3, 7, 11) against
 the octopus configs. Steps 4-6 keep the legacy captures deliberately — they are Google's own
 consent screens, dataset-independent, and redoing the OAuth would invalidate the live
 authorization. Steps 8-10 have no captures until the fresh-project walk (see the comment at
 step 8). */}
 
-## What you need
-
-- The table `octopus_atlas` in Storage, from
-  [Transform Data](/getting-started/transform/).
-- A Google account you can authorize.
+<Prereqs needs={['project', 'google']}>
+  <li>
+    The table you want to deliver, in Storage — from{' '}
+    <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
+  </li>
+</Prereqs>
 
 ## Sending data out
 
@@ -58,7 +69,7 @@ around authorizations. */}
 
 2. Click **Add Component** (**Create Configuration** on the card once the component already has
    configurations), then **Connect To My Data** — the only button here, unlike the HTTP
-   connector in [step 2](/getting-started/load/), which also offered demo data.
+   connector in [Get your data in](/getting-started/load/), which also offered demo data.
 
    ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
 
@@ -111,7 +122,7 @@ out.c-octopus-atlas.octopus_atlas to a new spreadsheet called
 than append. Then run it.
 ```
 
-Naming all three matters: [step 5](/getting-started/automate/) puts this on a **daily schedule**, so an appending sheet grows by
+Naming all three matters: [the flow](/getting-started/automate/) puts this on a **daily schedule**, so an appending sheet grows by
 10,000 rows a day, and the check at the end of this tab looks for that spreadsheet name.
 The whole exchange, condensed to twenty seconds:
 
@@ -199,4 +210,3 @@ pipeline, end to end.
 - **You want the delivery checked against the source.** Kai can read both sides:
   `Read the last Google Sheets destination job, tell me whether it succeeded, and compare what it wrote with the row count of out.c-octopus-atlas.octopus_atlas.`
 
-**Next:** [Automate it with a flow →](/getting-started/automate/)

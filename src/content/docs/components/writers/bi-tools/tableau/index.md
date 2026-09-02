@@ -18,7 +18,7 @@ to be used together with [Tableau Desktop](https://www.tableau.com/products/desk
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
-New to data destination connectors? [Deliver the Answer](/getting-started/write/) in
+New to data destination connectors? [Send a table to Google Sheets](/getting-started/write/) in
 Getting Started walks through the pattern on a simpler destination first. You can also watch our
 [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
