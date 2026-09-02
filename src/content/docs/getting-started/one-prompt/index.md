@@ -26,10 +26,10 @@ Open **Kai Agent** in the top bar and paste this:
 ```text
 Load the four CSVs from https://help.keboola.com/getting-started/ — occurrences.csv,
 species.csv, depth_zones.csv and basins.csv — into Storage as a single HTTP data source
-configuration called "[TUTORIAL] Octopus sightings". Then join them into one table called
+configuration called "Octopus sightings". Then join them into one table called
 octopus_atlas that has, for every sighting, its species display name, its ocean basin and its
-depth zone. Wire the loading and the joining into a flow called "[TUTORIAL] Octopus pipeline"
-that runs every day at 6am UTC. Finally build me a data app called "[TUTORIAL] Octopus map" — a
+depth zone. Wire the loading and the joining into a flow called "Octopus pipeline"
+that runs every day at 6am UTC. Finally build me a data app called "Octopus map" — a
 world map of every sighting coloured by depth zone, with a field where I type my own latitude
 and longitude and it tells me the nearest recorded sighting.
 ```

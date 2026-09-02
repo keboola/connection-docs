@@ -23,7 +23,7 @@ Open **Storage**. There is a new bucket holding four tables, one per CSV:
 | `basins` | 13 | ocean basins as latitude/longitude boxes |
 
 The thing that fetched them is a **[data source connector](/components/extractors/)** — in
-**Components**, the configuration Kai named `[TUTORIAL] Octopus sightings`. Open it and note the
+**Components**, the configuration Kai named `Octopus sightings`. Open it and note the
 shape: **one** configuration with **four rows**, not four configurations. A row is one file with
 its own path; they share the configuration's base URL and its credentials, which is what makes a
 connector re-runnable.
@@ -56,7 +56,7 @@ Reading generated code is a skill worth having; this is the cheapest way to prac
 
 ## The flow — the pipeline, in order, on a clock
 
-**Flows** holds `[TUTORIAL] Octopus pipeline` with two phases:
+**Flows** holds `Octopus pipeline` with two phases:
 
 ![Screenshot - The flow Kai assembled, with its two phases and a schedule](/getting-started/one-prompt/flow.png)
 
@@ -69,7 +69,7 @@ now on the pipeline rebuilds itself every morning without you. Add yourself to
 
 ## The app — the answer, shareable
 
-**Apps** holds `[TUTORIAL] Octopus map` as a **draft**: a world map of all 10,000 sightings
+**Apps** holds `Octopus map` as a **draft**: a world map of all 10,000 sightings
 coloured by depth zone, with filters and a nearest-sighting search. Type your own coordinates and
 it answers the question the arc started with. From Prague — 50.08, 14.43 — the nearest recorded
 octopus is a musky octopus 495 km away, recorded in 1910.
