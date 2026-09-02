@@ -16,7 +16,7 @@ Transcript kept in the PR. */}
 
 ## What you need
 
-- A project — [step 1](/getting-started/project/) gets you one.
+- A project — [Get a Project](/getting-started/project/) gets you one.
 - Nothing else. No installs, no credentials, no files to download.
 
 ## The prompt
@@ -68,7 +68,7 @@ job.
 
 One thing in this guide is yours alone: **authorizing Google**. If you also want the table
 delivered to a spreadsheet, Kai can create and configure the
-[Google Sheets destination](/components/extractors/storage/google-drive/), but the consent screen
+[Google Sheets destination](/components/writers/storage/google-sheets/), but the consent screen
 lives in your own Google account, so you sign in yourself and hand the conversation back. That is
 why the prompt above stops at the app — see
 [Deliver the Answer](/getting-started/write/) for the spreadsheet step.

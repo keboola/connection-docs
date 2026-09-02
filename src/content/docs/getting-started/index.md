@@ -63,18 +63,18 @@ demo — this is the mechanism a production project uses, just smaller.
 
 ## Before you start
 
-- **A project.** [Step 1](/getting-started/project/) gets you one. The Free Plan covers this
-  guide's work — the whole arc uses roughly six minutes of job runtime — as long as your project
-  has runtime minutes available.
-- **Basic SQL.** One `SELECT` with a couple of `JOIN`s. If you have never written SQL, the
-  queries are given in full and you can paste them — in both Snowflake and BigQuery form,
-  since which one you need depends on your project.
-- **A Google account**, for the delivery step. If you would rather not connect one, skip step 4
-  and build step 5's flow with two phases instead of three — loading and transforming on a
-  schedule is a real pipeline, just one that keeps its result inside Keboola.
+- **A project.** [Get a Project](/getting-started/project/) gets you one. The Free Plan covers
+  this guide's work — the whole build uses roughly six minutes of job runtime — as long as your
+  project has runtime minutes available.
+- **No SQL required.** Kai writes the queries. If you want to read them — and it is worth reading
+  them once — [What Kai Built](/getting-started/what-kai-built/) explains what each join does, and
+  the by-hand pages give every query in full, in both Snowflake and BigQuery form.
+- **A Google account** only if you want the spreadsheet step, which needs a consent screen Kai
+  cannot click for you. Skip it and you still have a real pipeline — loading, joining and an app,
+  rebuilt on a schedule, with the result living in Keboola.
 
-Nothing needs installing. Everything below happens in the browser — and if you take the Kai
-tabs, the whole build needs maybe fifteen minutes of your attention.
+Nothing needs installing. Everything happens in the browser, and the whole build needs about
+fifteen minutes of your attention — most of it spent approving what Kai proposes.
 
 :::note[New to the platform entirely?]
 If you would rather understand the pieces before touching them, read the
