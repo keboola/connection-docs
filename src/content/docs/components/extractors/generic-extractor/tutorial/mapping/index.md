@@ -217,7 +217,7 @@ Note that the `destination` value is arbitrary but must be a valid column name.
 The data type name (`content`) must match the value of the `dataType` property 
 as defined in some jobs.
 
-## Parent Reference
+## Parent reference
 The above mapping works, but it is missing the campaign ID, and you cannot
 match the content to some campaign records. Therefore, you must extract the campaign ID 
 from the context (i.e., the job parameter). This can be done using a special `user` mapping.
@@ -331,9 +331,9 @@ the extracted data later in [Transformations](/transformations/).
 However, if you intend to use your configuration regularly or want to make it into a component, 
 setting up a mapping is recommended.
 
-## Tips and Tricks
+## Tips and tricks
 
-### Key Containing a Dot Character
+### Key containing a dot character
 
 The key of the mapping supports dot notation to traverse into children. So, if the key contains a dot, you need to change the delimiter. See the following example: 
 

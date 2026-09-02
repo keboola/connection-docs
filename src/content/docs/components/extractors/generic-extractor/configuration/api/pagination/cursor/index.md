@@ -26,7 +26,7 @@ request, you must tell the API to start with ID 101.
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `cursor` method of pagination:
 
 - `idKey` (required, string) — path to the key which contains the value of the cursor; the path is entered relative to the exported items.
@@ -43,7 +43,7 @@ The request parameter specified in the `param` configuration overwrites the para
 [job parameters](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters). Other job parameters are carried over without modification 
 (see an [example](#reverse-configuration)).
 
-### Stopping Condition
+### Stopping condition
 The pagination ends **when the `dataField` of the response contains no items**. Because of this, each 
 run with the `cursor` scroller produces a similar warning:
     
@@ -54,7 +54,7 @@ This is expected behavior. [Common stopping conditions](/components/extractors/g
 ## Examples
 This section contains two API pagination examples where the Cursor Scroller is used.
 
-### Basic Configuration
+### Basic configuration
 Let's say you have an API which has an endpoint `/users` returning the following response:
 
 ```json
@@ -91,7 +91,7 @@ Notice that the `idKey` parameter is relative to the extracted array of items (`
 
 See [example [EX060]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/060-pagination-cursor-basic).
 
-### Reverse Configuration
+### Reverse configuration
 Some APIs return items starting with the newest item and therefore need to be queried for offset in 
 reverse order. Let's say a request to `/users?startWith=last` will produce:
 

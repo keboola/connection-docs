@@ -29,7 +29,7 @@ An example configuration:
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `offset` method of pagination:
 
 - `limit` (required, integer) — page size
@@ -45,7 +45,7 @@ the [job parameters](/components/extractors/generic-extractor/configuration/conf
 100 items at most and you set the limit 1000, it would cause the extraction to stop after the first page. This is because the 
 [underflow condition](/components/extractors/generic-extractor/configuration/api/pagination/#stopping-strategy) would be triggered.
 
-### Stopping Condition
+### Stopping condition
 Scrolling is stopped **when the result contains less items than requested**	 — specified in the
 `limit` configuration (underflow). This also includes an instance when no items are returned, or the 
 response is empty.
@@ -88,7 +88,7 @@ All [common stopping conditions](/components/extractors/generic-extractor/config
 ## Examples
 This section contains three examples of API pagination using the Offset Scroller.
 
-### Basic Scrolling
+### Basic scrolling
 This is the simplest scrolling setup:
 
 ```json
@@ -103,7 +103,7 @@ The next request has `limit=20` and `offset=20`, for example, `/users?limit=20&o
 See [example [EX043]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/043-paging-stop-underflow) and
 [example [EX044] with a more structured response](https://github.com/keboola/generic-extractor/tree/master/doc/examples/044-paging-stop-underflow-struct).
 
-### Renaming Parameters
+### Renaming parameters
 The `limitParam` and `offsetParam` configuration options allow you to rename the limit and 
 offset for the needs of a specific API:
 
@@ -121,7 +121,7 @@ and `skip=0`, for example, `/users?count=2&skip=0`.
 
 See [example [EX049]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/049-pagination-offset-rename).
 
-### Overriding Limit and Offset
+### Overriding limit and offset
 It is possible to override both the limit and offset parameters of a specific API job. 
 This is useful in case you want to use different limits for different API endpoints.
 

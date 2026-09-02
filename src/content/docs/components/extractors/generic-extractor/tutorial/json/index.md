@@ -12,7 +12,7 @@ redirect_from:
 data. Before you start working with JSON, familiarize yourself with basic programming jargon. It is also recommended 
 to have a text editor with JSON support (you can also use an [online editor](http://www.jsoneditoronline.org/)).
 
-## Object Representation
+## Object representation
 To describe structured data, JSON uses **objects** and **arrays**. 
 
 ### Objects
@@ -67,7 +67,7 @@ The terminology varies a lot and other expressions are also commonly used:
 - Property — also a field / key / index
 - Array — also a collection / list / vector / ordinal array / sequence
 
-## Data Values
+## Data values
 Each property value always has one of the following data types:
 
 - String — text

@@ -41,7 +41,7 @@ loads by using [`previousStart`](/components/extractors/generic-extractor/functi
 
 ## Examples
 
-### Previous Start Example
+### Previous start example
 Assume you have an API supporting a parameter `modified_since` which expects a 
 [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time). The response then contains only the 
 records that were modified after the specified date. The following configuration can be used:
@@ -84,7 +84,7 @@ The last successful time is stored in the [configuration state](/extend/common-i
 If for some reason you need to reset it, 
 [update the configuration via API](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-).
 
-### Previous Start Date
+### Previous start date
 If an API similar to the one in the [above example](#previous-start-example) requires the date to be 
 sent as a string, the following jobs configuration (which uses the [`date` function](/components/extractors/generic-extractor/functions/#date))
 can be used:
@@ -123,7 +123,7 @@ Otherwise the configuration behaves the same way as the [previous example](#prev
 
 See [example [EX108]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/108-incremental-load-date).
 
-### Incremental Load From To
+### Incremental load from to
 Another option is an API which requires the `from` and `to` parameters. The following
 configuration generates the `from` date as the date of the last extraction (using the [`time.previousStart` 
 value](/components/extractors/generic-extractor/functions/#parameters-context)). It also generates the `to` date as the date 
@@ -166,7 +166,7 @@ This configuration will send a request similar to this one:
 
 See [example [EX109]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/109-incremental-load-from-to).
 
-### Incremental Relative Load
+### Incremental relative load
 Suppose you have an API supporting the `from` and `to` parameters as in [the above example](#incremental-load-from-to) and 
 want to extract the last day data. It can be done using the following configuration:
 

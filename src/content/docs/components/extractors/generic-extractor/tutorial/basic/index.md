@@ -23,7 +23,7 @@ and comprises [several sections](/components/extractors/generic-extractor/config
 A [user interface](/components/extractors/generic-extractor/configuration/#user-interface) is available that can help you with the configuration
  and generate the JSON configuration for you.
 
-### Base Configuration
+### Base configuration
 The first configuration part is a `Base Configuration` section where you can set the Base URL and Authentication method of the 
 API you connect to.
 
@@ -74,7 +74,7 @@ configuration section:
 The `password` property is prefixed with the hash mark `#`, meaning the value will be [encrypted](/overview/encryption/) once
 you save the configuration.
 
-### Endpoint Section
+### Endpoint section
 Once you set up the Base Configuration, you can set up the actual endpoint to be queried. 
 
 Start by clicking the **+ New Endpoint** button:
@@ -171,7 +171,7 @@ represented in a single column of the `campaigns` table. Generic Extractor, ther
 value with a generated key, for example, `campaigns_75d5b14d79d034cd07a9d95d5f0ca5bd`, and automatically
 creates a new table that has the column `JSON_parentId` with that value so that you can join the tables together.
 
-### Final JSON Configuration
+### Final JSON configuration
 The main parts of the configuration and their nesting are shown in the following schema:
 
 ![Schema - Generic Extractor configuration](/components/extractors/generic-extractor/generic-intro.png)

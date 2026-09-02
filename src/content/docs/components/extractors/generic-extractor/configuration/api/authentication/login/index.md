@@ -11,7 +11,7 @@ redirect_from:
 Use the Login authentication to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests.
 
-## User Interface
+## User interface
 
 Note that this configuration option is not yet covered. You can add the JSON configuration using the `Custom` auth method.
 
@@ -53,7 +53,7 @@ A sample Login authentication looks like this:
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `login` type of authentication:
 
 - `loginRequest` (required, object) — a [job-like](/components/extractors/generic-extractor/configuration/config/jobs/) object describing the login request; it has the following properties:
@@ -79,7 +79,7 @@ is called only once before all other requests. To call the login request before 
 ## Examples
 Below are several examples showing you how to use various login authentication related features in Generic Extractor.
 
-### Configuration with Headers
+### Configuration with headers
 Let's say you have an API which requires every API call to be authorized with the `X-ApiToken` header. The value of that header (an API
 token) is obtained by calling the `/login` endpoint with the headers `X-Login` and `X-Password`. The `/login` endpoint response looks
 like this:
@@ -130,7 +130,7 @@ will contain the header:
 
 See [example [EX079]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/079-login-auth-headers).
 
-### Configuration with Headers and Text Response
+### Configuration with headers and text response
 Let's say you have an API like the above, but it returns the login response as a plain text:
 
     a1b2c3d435f6
@@ -183,7 +183,7 @@ will contain the header:
 
 See [example [EX128]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/128-login-auth-text).
 
-### Configuration with Query Parameters
+### Configuration with query parameters
 Let's say you have an API which requires an [HTTP POST](https://en.wikipedia.org/wiki/POST_(HTTP)) request with `username` and
 `password` to the endpoint `/login/form`.
 On a successful login, it returns the following response:
@@ -246,7 +246,7 @@ so the second API call will be sent as:
 See [example [EX080]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/080-login-auth-query).
 Notice that the example uses completely different URL for the login request.
 
-### Parameter Overriding
+### Parameter overriding
 The above examples show how to use query parameters and headers separately. However, they can be mixed freely; they can also be
 mixed with parameters and headers entered elsewhere in the configuration. The following example shows how parameters from
 different places are merged together:
@@ -407,7 +407,7 @@ This causes Generic Extractor to call the **login request** every hour.
 
 See [example [EX082]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/082-login-auth-expires).
 
-### Expiration from Response
+### Expiration from response
 In case the credentials provided by the **login request** have a time-limited validity, use the `expires` option.
 If the validity of the credentials is returned in the response, modify the [first example](#configuration-with-headers) to this:
 
@@ -455,7 +455,7 @@ This assumes that the response of the **login request** looks like this:
 
 See [example [EX083]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/083-login-auth-expires-date).
 
-### Relative Expiration from Response
+### Relative expiration from response
 In case the API returns credentials validity in the **login request** and that validity is expressed in seconds,
 use the `expires` option together with setting `relative` to `true`.
 The result is the behavior of the [first example](#expiration-basic) but the value is taken
@@ -506,7 +506,7 @@ This assumes that the response of the **login request** looks like this:
 
 See [example [EX084]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/084-login-auth-expires-seconds).
 
-### Login Authentication with Functions
+### Login authentication with functions
 Suppose you have an API which requires you to send a username and password separated by a colon and
 base64 encoded — for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the
 `X-Authorization` header to an `/auth` endpoint. The login endpoint then returns a token
@@ -570,7 +570,7 @@ uses the `login` authorization method to send them to the special `/auth` endpoi
 
 See [example [EX100]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/100-function-login-headers).
 
-### Login Authentication with Login and API Request
+### Login authentication with login and API request
 Suppose you have an API similar to the one in the [previous example](#login-authentication-with-functions).
 It requires you to send a username and password separated by a colon and
 base64 encoded — for example, `JohnDoe:TopSecret` (base64 encoded to `Sm9obkRvZTpUb3BTZWNyZXQ=`) in the

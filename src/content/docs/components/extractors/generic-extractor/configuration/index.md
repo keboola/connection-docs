@@ -15,7 +15,7 @@ To get an overall idea of what to expect when configuring Generic Extractor, loo
 Then review a [sample configuration](#configuration-map) featuring all configuration options and their
 nesting. The **configuration map** is also available as a [separate article](/components/extractors/generic-extractor/map/).
 
-### User Interface
+### User interface
 
 Recently, we created a convenient user interface that allows you to build a configuration for the Generic Extractor without writing JSON code. 
 You can set up and test the connection in a few clicks, just like you are used to in some other popular API development tools. 
@@ -34,7 +34,7 @@ In such cases, you will be notified in the UI what sections are not supported.
 ***NOTE:** The new UI does not affect the functionality of old configurations. All configurations will continue to work. 
 However, in some cases, you might need to perform some manual adjustments in order to make the UI compatible.*
 
-### JSON Configuration Sections
+### JSON configuration sections
 *Click on the section names if you want to learn more.*
 
 - **parameters**
@@ -79,7 +79,7 @@ Generic Extractor can be run from within the [**Keboola user interface**](/compo
 configuration [JSON](/components/extractors/generic-extractor/tutorial/json/) is needed), or [**locally**](/components/extractors/generic-extractor/running/#running-locally)
 (Docker is needed).
 
-### Configuration Map
+### Configuration map
 The following sample configuration shows various configuration options and their nesting.
 You can use the map to navigate between them. The parameter map is also available
 [separately](/components/extractors/generic-extractor/map/), and we recommend pinning it to your toolbar for quick reference.

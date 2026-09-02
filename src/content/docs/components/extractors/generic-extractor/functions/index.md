@@ -91,7 +91,7 @@ These forms can be combined freely. They can be also nested in a virtually unlim
 }
 ```
 
-### User Interface
+### User interface
 You may create functions in the user interface's `User Parameters` or `User Data` sections. 
 You can also create the functions directly from other configuration contexts, e.g., when defining the query parameters on the endpoint.
 
@@ -103,7 +103,7 @@ The UI also offers a convenient way to evaluate the function and see the results
 
 ![img.png](/components/extractors/generic-extractor/function_eval.gif)
 
-## Supported Functions
+## Supported functions
 
 ### md5
 The [`md5` function](https://www.php.net/manual/en/function.md5.php) calculates the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of a
@@ -385,11 +385,11 @@ considered 'empty'.
 
 See an [example](#optional-job-parameters).
 
-## Function Contexts
+## Function contexts
 Every place in the Generic Extractor configuration in which a function may be used may allow different arguments of the function.
 This is referred to as a **function context**. Many contexts share access to **configuration attributes**.
 
-### Configuration Attributes
+### Configuration attributes
 The configuration attributes are accessible in specific function contexts and they represent the entire [`config`](/components/extractors/generic-extractor/configuration/config/)
 section of the Generic Extractor configuration. There is some processing involved:
 
@@ -464,20 +464,20 @@ will be converted to the following function context:
 
 See [example [EX119]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/119-function-nested-config).
 
-### Base URL Context
+### Base URL context
 The Base URL function context is used when setting the [`baseURL` for API](/components/extractors/generic-extractor/configuration/api/#base-url), and it
 contains [configuration attributes](/#function-contexts).
 
 See an [example](#api-base-url).
 
-### Headers Context
+### Headers context
 The Headers function context is used when setting the [`http.headers` for API](/components/extractors/generic-extractor/configuration/api/#headers)
 or the [`http.headers` in config](/components/extractors/generic-extractor/configuration/config/#http), and it contains
 [configuration attributes](/#function-contexts).
 
 See an [example](#headers).
 
-### Parameters Context
+### Parameters context
 The Parameters function context is used when setting job [request parameters — `params`](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters).
 It contains [configuration attributes](/#function-contexts) plus the times of the current
 (`currentStart`) and previous (`previousStart`) run of Generic Extractor.
@@ -524,7 +524,7 @@ See an [example of using parameters context](#job-parameters).
 
 The `time` values are used in [incremental processing](/components/extractors/generic-extractor/incremental/).
 
-### Placeholder Context
+### Placeholder context
 The Placeholder function context refers to configuration of [placeholders in child jobs](/components/extractors/generic-extractor/configuration/config/jobs/children/#placeholders).
 When using function to process a placeholder value, the placeholder must be specified as an object with the `path` property.
 Therefore instead of writing:
@@ -561,7 +561,7 @@ of the placeholder.
 
 See an [example](#job-placeholders).
 
-### User Data Context
+### User data context
 The User Data function context is used when setting the [`userData`](/components/extractors/generic-extractor/configuration/config/#user-data).
 The parameters context contains [configuration attributes](/#function-contexts) plus the times of the current (`currentStart`) and
 previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore
@@ -569,7 +569,7 @@ same as the [Parameters Context](#parameters-context).
 
 See an [example](#user-data).
 
-### Login Authentication Context
+### Login authentication context
 The Login Authentication function context is used in the
 [login authentication](/components/extractors/generic-extractor/configuration/api/authentication/login/) method.
 Functions are supported in both [`loginRequest`](/components/extractors/generic-extractor/configuration/api/authentication/login/#configuration-parameters)
@@ -611,7 +611,7 @@ See an [example](/components/extractors/generic-extractor/configuration/api/auth
 [complicated example](/components/extractors/generic-extractor/configuration/api/authentication/login/#login-authentication-with-login-and-api-request) of using functions in
 both login request and API request.
 
-### Query Authentication Context
+### Query authentication context
 The Query Authentication function context is used in the
 [query authentication](/components/extractors/generic-extractor/configuration/api/authentication/query/) method.
 The Query Authentication Context contains [configuration attributes](/#function-contexts) plus
@@ -689,7 +689,7 @@ leads to the following function context:
 
 See the [basic example](#api-default-parameter) and a [more complicated example](#api-query-authentication).
 
-### OAuth 2.0 Authentication Context
+### OAuth 2.0 authentication context
 The OAuth Authentication Context is used for the
 [`oauth20`](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/) authentication method
 (it is not applicable to `oauth10`) and contains the following:
@@ -788,7 +788,7 @@ the application is published) are added to the `authorization` section.
 
 For usage, see [OAuth examples](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/).
 
-### OAuth 2.0 Login Authentication Context
+### OAuth 2.0 login authentication context
 The OAuth Login Authentication Context is used for the
 [`oauth20.login`](/components/extractors/generic-extractor/configuration/api/authentication/oauth20-login/) authentication method
 (it is not applicable to `oauth20`). The OAuth Login Authentication context contains
@@ -855,7 +855,7 @@ For usage, see [OAuth Login examples](/components/extractors/generic-extractor/c
 
 ## Examples
 
-### API Base URL
+### API base URL
 When [publishing your Generic Extractor configuration](/components/extractors/generic-extractor/publish/), chances are
 you want the end-user to provide a part of the API configuration. Due to the limitations of
 [how templates work](/components/extractors/generic-extractor/publish/#configuration-considerations), the parameter
@@ -913,7 +913,7 @@ final API URL (`http://example.com/api/1.0/`):
 See [example [EX087] with concat](https://github.com/keboola/generic-extractor/tree/master/doc/examples/087-function-baseurl)
 or an alternative [example [EX088] with sprintf](https://github.com/keboola/generic-extractor/tree/master/doc/examples/088-function-baseurl-sprintf).
 
-### API Default Parameters
+### API default parameters
 Suppose you have an API which expects a `tokenHash` parameter to be sent with every request. The
 token hash is supposed to be generated by the SHA-256 hashing algorithm from a token and secret
 you obtain.
@@ -1011,7 +1011,7 @@ the single `users` job.
 
 See [example [EX098]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/098-function-hmac).
 
-### API Query Authentication
+### API query authentication
 Suppose you have an API with only a single endpoint `/items` to which you have to
 pass a `type` parameter to list resources of a given type. On top of that, the API requires
 an `apiToken` parameter and a `signature` parameter (a hash of the token and type) to be sent with every request.
@@ -1084,7 +1084,7 @@ token and resource type (`"query": "type"` is taken from the `jobs.params.type` 
 
 See [example [EX101]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/101-function-query-auth).
 
-### Job Placeholders
+### Job placeholders
 Let's say you have an API with an endpoint `/users`, returning a list of users, and an
 endpoint `/user/{userId}`, returning details of a specific user with a given ID. The list response
 looks like this:
@@ -1146,7 +1146,7 @@ See [example [EX085]](https://github.com/keboola/generic-extractor/tree/master/d
 or a not-so-useful [example [EX086]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/086-function-job-placeholders-reference)
 (using reference).
 
-### Job Parameters
+### Job parameters
 Let's say you have an API which requires you to send a hash of a certain value with every request. Specifically,
 each request must be done with the [HTTP POST method](/components/extractors/generic-extractor/tutorial/rest/#method) with content:
 
@@ -1196,7 +1196,7 @@ See [example [EX089]](https://github.com/keboola/generic-extractor/tree/master/d
 or an alternative [example [EX090] with SHA1 hash](https://github.com/keboola/generic-extractor/tree/master/doc/examples/090-function-job-parameters-sha1).
 or an alternative [example [EX136]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/136-post-request-functions) with more deeply nested functions.
 
-### Optional Job Parameters
+### Optional job parameters
 Let's say you have an API which allows you to send the list of columns to be contained in the API response.
 For example, to list users and include their `id`, `name` and `login` properties, call
 `/users?showColumns=id,name,login`. Also, you want to enter these values as an array in the `config` section because
@@ -1241,7 +1241,7 @@ The following configuration does exactly that:
 
 See [example [EX097]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/097-function-ifempty).
 
-### User Data
+### User data
 Assume that you have an API returning a response that does not contain any time information. For example:
 
 ```json
@@ -1370,7 +1370,7 @@ in the [`config` section](/components/extractors/generic-extractor/configuration
 See [example [EX093]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/093-function-api-http-headers) or an
 [alternative example [EX094] setting headers in the `config` section](https://github.com/keboola/generic-extractor/tree/master/doc/examples/094-function-config-headers).
 
-### Nested Functions
+### Nested functions
 If the API in the [above example](#headers) tries to mimic the
 [HTTP authentication](/components/extractors/generic-extractor/configuration/api/authentication/basic/),
 the header has to be sent as a [base64 encoded](https://en.wikipedia.org/wiki/Base64#MIME) value.

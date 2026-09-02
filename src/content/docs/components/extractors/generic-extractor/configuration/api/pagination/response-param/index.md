@@ -25,7 +25,7 @@ of value in the response which must be used in the next request.
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `response.param` method of pagination:
 
 - `responseParam` (required, string) — path to the key which contains the value used for scrolling
@@ -38,7 +38,7 @@ parameters](/components/extractors/generic-extractor/configuration/config/jobs/#
 - `scrollRequest` (optional, object) — [job-like](/components/extractors/generic-extractor/configuration/config/jobs/) object (supported fields are
 `endpoint`, `method` and `params`) which allows to sent an initial scrolling request (see an [example](#using-scroll-request)).
 
-### Stopping Condition
+### Stopping condition
 The pagination ends **when the value of `responseParam` parameters is empty** — the key is not present at all, is null, is
 an empty string, or is `false`. Take care when configuring the `responseParam` parameter. If you, for example, misspell the name of
 the key, the extraction will not go beyond the first page.
@@ -47,7 +47,7 @@ the key, the extraction will not go beyond the first page.
 ## Examples
 The following API pagination examples demonstrate the use of the Response Parameter Scroller.
 
-### Basic Configuration
+### Basic configuration
 Assume you have an API which returns, for instance, the next page number inside the response:
 
 ```json
@@ -100,7 +100,7 @@ is sent to `/users?page=2`.
 
 See [example [EX057]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/057-pagination-response-param-basic).
 
-### Overriding Parameters
+### Overriding parameters
 The following configuration passes the parameter `orderBy` to every request:
 
 ```json
@@ -143,7 +143,7 @@ and the second request to `/users?page=2&orderBy=id`.
 
 See [example [EX058]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/058-pagination-response-param-override).
 
-### Using Scroll Request
+### Using scroll request
 The response param scroller supports sending of an initial scrolling request. This can be used
 in situations where the API requires special initialization of a scrolling endpoint;
 for instance, the [Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/5.2/search-request-scroll.html).

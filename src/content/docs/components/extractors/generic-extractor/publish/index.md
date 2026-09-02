@@ -12,7 +12,7 @@ redirect_from:
 It is possible to publish a Generic Extractor configuration as a completely separate component.
 This enables sharing the API extractor between various projects and simplifies its further configuration.
 
-## Configuration Considerations
+## Configuration considerations
 Before converting your configuration to a universally available component, consider
 what values in the configuration should be provided by the end-user (typically authentication values).
 Then design a [configuration schema](/extend/component/ui-options/configuration-schema/) for setting

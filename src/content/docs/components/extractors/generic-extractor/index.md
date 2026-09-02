@@ -23,7 +23,7 @@ an entirely new extractor for Keboola in **less than an hour**.
 
 To get started quickly, follow our [Generic Extractor tutorial](/components/extractors/generic-extractor/tutorial).
 
-## Generic Extractor Requirements
+## Generic Extractor requirements
 Generic Extractor allows you to extract data from an API into Keboola only by configuring it.
 No programming skills or additional tools are required. You just need to do two easy things before you start:
 
@@ -31,7 +31,7 @@ No programming skills or additional tools are required. You just need to do two 
 - Have the documentation of your chosen API at hand. The API should be [RESTful](/components/extractors/generic-extractor/tutorial/rest/)
 and, more or less, follow the HTTP specification.
 
-## Configuration & Development
+## Configuration & development
 Again, if you are new to Generic Extractor, we strongly suggest you go through the
 [Generic Extractor tutorial](/components/extractors/generic-extractor/tutorial/). It outlines the basic principles and the most important features.
 
@@ -43,7 +43,7 @@ Features such as cURL import, request tests, output mapping generator, or dynami
 If you intend to develop a more complicated configuration, check out how to [run Generic Extractor locally](/components/extractors/generic-extractor/running/).
 The documentation includes [several examples](https://github.com/keboola/generic-extractor/tree/master/doc) that [can also be run locally](/components/extractors/generic-extractor/running/#running-examples).
 
-## Publishing Generic Extractor Configuration
+## Publishing Generic Extractor configuration
 Each Generic Extractor configuration can be [published](/components/extractors/generic-extractor/publish/) as
 a new standalone component. However, for registration, configurations must be
 [converted to templates](/components/extractors/generic-extractor/publish/#submission).
@@ -55,7 +55,7 @@ do not limit the configuration. You can always switch to JSON
 
 Also, templates can be used only with published components based on Generic Extractor configurations.
 
-## Template Mode
+## Template mode
 Generic Extractor is used as the base for many data source connectors. These components allow you to select pre-defined configurations
 -- templates -- without the need to configure Generic Extractor manually.
 
@@ -69,7 +69,7 @@ The code will be pre-filled for you based on that template.
 
 When finished editing, save the configuration. You can always switch back to the templates, but you'll lose your customizations.
 
-## Generic Extractor Source
+## Generic Extractor source
 As with other Keboola components, the Generic Extractor connector is available on
 [GitHub](https://github.com/keboola/generic-extractor/). Apart from the
 main repository, it uses some vital libraries (which partially define its capabilities):

@@ -54,7 +54,7 @@ The name of the scroller must be used in a specific [job `scroller` parameter](/
 A `default` scroller can be set (must be one of the names defined in `scrollers`). In that case, all jobs
 without an assigned scroller will use the default one.
 
-### Stopping Condition
+### Stopping condition
 There are no specific stopping conditions for the `multiple` pagination. Each scroller acts upon its 
 normal stopping conditions.
 
