@@ -108,7 +108,7 @@ This means user-level instructions can refine or add to the project-level instru
 
 ## Context Files
 
-Context files (also called knowledge files) are Markdown documents that Kai reads automatically at the start of every conversation. Use them to give Kai project knowledge that is too long for system instructions: data standards, naming conventions, business glossaries, or documentation of your data model.
+Context files (also called knowledge files) are Markdown documents that Kai reads automatically at the start of every conversation. Use them to give Kai project knowledge that is too long for system instructions: data standards, naming conventions, business glossaries, or documentation of your data model. For security reasons Kai cannot open links, so anything it needs to read has to arrive as a file — context files are the place for documentation it should have in every conversation, such as the API reference for a system you integrate with repeatedly.
 
 To manage them, go to **Settings → Kai Agent** in the main Keboola navigation and use the **Context files** card:
 
