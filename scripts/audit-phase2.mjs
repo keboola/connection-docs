@@ -89,7 +89,7 @@ for (const file of htmlFiles) {
     }
 
     if (!resolves(url)) {
-      if (isImg || /\.(png|jpe?g|gif|svg|webp|avif)$/i.test(url)) {
+      if (isImg || /\.(png|jpe?g|gif|svg|webp|avif|mp4|webm)$/i.test(url)) {
         findings.missingImages.push({ page: r, url });
       } else {
         findings.brokenLinks.push({ page: r, url });

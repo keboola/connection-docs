@@ -21,7 +21,7 @@ in the section [Server Specific Notes](#server-specific-notes).
 Before you start configuring your SQL data source connector, consider [setting up an SSH tunnel](/components/extractors/database/#connecting-to-database) to secure your connection to your internal database and 
 avoid exposing your database server to the Internet.
 
-***Note:** Our [tutorial](/tutorial/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
+***Note:** Our [tutorial](/getting-started/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
 
 ## Initial Setup
 After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
