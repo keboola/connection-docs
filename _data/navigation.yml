@@ -77,6 +77,9 @@ items:
       - url: /kai/getting-started/
         title: Getting Started
 
+      - url: /kai/pricing/
+        title: Pricing and Limits
+
       - url: /kai/settings/
         title: Settings
 

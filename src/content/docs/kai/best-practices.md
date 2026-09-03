@@ -51,6 +51,12 @@ Test changes safely by creating a development branch in the Keboola UI, then wor
 - **One topic per chat** — don't mix unrelated tasks
 - **Reset when stuck** — if Kai gets confused after 2-3 tries, start fresh with clearer context
 - **Let Kai read logs** — instead of pasting, use `"Read the latest job log for ex-google-analytics"`
+- **Attach what Kai cannot reach** — for security reasons Kai cannot open links, so upload
+  a file rather than pasting a URL
+- **Compact rather than lose your place** — in a long session that is still on topic, run
+  [`/compact`](/kai/getting-started/#compacting-a-long-conversation) and name what has to survive
+  the summary. It keeps the thread going where a new chat would drop everything. If the topic has
+  actually changed, start a new chat instead — compacting carries context you no longer want
 
 ## Security
 
@@ -71,6 +77,9 @@ Test changes safely by creating a development branch in the Keboola UI, then wor
 - **Don't argue with a confused Kai** — reset the conversation instead
 - **Don't skip verification** — always review business logic, data quality rules, and production deployments
 - **Don't expect cross-project knowledge** — Kai only sees your current project
+- **Don't paste a link and expect Kai to read it** — for security reasons Kai cannot open
+  links. Attach the document to your message, or add it as a
+  [context file](/kai/settings/#context-files) if you need it in every conversation
 
 ## Team Tips
 
