@@ -1,5 +1,6 @@
 ---
 title: R Implementation Notes
+description: We recommend using the Rocker version-stable images. The R base image does not keep older R versions, so the upgrades are not under your control.
 slug: 'extend/component/implementation/r'
 redirect_from:
     - /extend/custom-science/r/

@@ -1,5 +1,6 @@
 ---
 title: R Transformation
+description: 'R transformations for advanced statistical computation — vector and matrix handling, ready-made algorithms, and how to run R code in Keboola.'
 slug: 'transformations/r-plain'
 redirect_from:
   - /transformations/r/

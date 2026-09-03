@@ -1,5 +1,6 @@
 ---
 title: "Cheat Sheet: Best Practices"
+description: 'Best practices for running Keboola day to day — data sources, destinations, transformations, and Flows, whatever the size of your project.'
 slug: 'tutorial/onboarding/cheat-sheet'
 ---
 

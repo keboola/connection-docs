@@ -1,5 +1,6 @@
 ---
 title: Authentication
+description: 'Choose how Generic Extractor authenticates — URL query, Basic HTTP, Bearer token, API key, Login, and the OAuth methods.'
 slug: 'components/extractors/generic-extractor/configuration/api/authentication'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/

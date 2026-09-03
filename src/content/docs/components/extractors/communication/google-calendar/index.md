@@ -1,5 +1,6 @@
 ---
 title: Google Calendar
+description: 'Import calendars and their events from Google Calendar into Storage — organizers, locations, attendees, and reminders.'
 slug: 'components/extractors/communication/google-calendar'
 redirect_from:
     - /extractors/communication/google-calendar/

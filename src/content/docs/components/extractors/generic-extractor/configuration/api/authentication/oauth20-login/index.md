@@ -1,5 +1,6 @@
 ---
 title: Login Using OAuth 2.0 Authentication
+description: 'Send a one-time login request to obtain temporary credentials, then sign later requests with them — the OAuth 2.0 Login method.'
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20-login'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20-login/

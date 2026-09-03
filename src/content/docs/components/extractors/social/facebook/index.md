@@ -1,5 +1,6 @@
 ---
 title: Facebook Pages
+description: 'Extract your Facebook Pages feed, comments, likes, and page insights through the Facebook Graph API.'
 slug: 'components/extractors/social/facebook'
 redirect_from:
     - /extractors/social/facebook/

@@ -1,5 +1,6 @@
 ---
 title: Iterations
+description: The iterations section allows you to execute a configuration multiple times, each time with different values.
 slug: 'components/extractors/generic-extractor/configuration/iterations'
 redirect_from:
     - /extend/generic-extractor/configuration/iterations/

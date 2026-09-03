@@ -1,5 +1,6 @@
 ---
 title: "Part 5: Ad-Hoc Data Analysis"
+description: 'Explore your data ad hoc in a workspace — connect BigQuery, query the tables you loaded, and add the libraries you need.'
 slug: 'tutorial/ad-hoc'
 ---
 

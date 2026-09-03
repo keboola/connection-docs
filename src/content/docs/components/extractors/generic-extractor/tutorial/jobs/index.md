@@ -1,5 +1,6 @@
 ---
 title: Jobs Tutorial
+description: On your way through the Generic Extractor tutorial, you have learned about Basic configuration and Configuration of pagination.
 slug: 'components/extractors/generic-extractor/tutorial/jobs'
 redirect_from:
     - /extend/generic-extractor/tutorial/jobs/

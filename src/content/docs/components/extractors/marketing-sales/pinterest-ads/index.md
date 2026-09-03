@@ -1,5 +1,6 @@
 ---
 title: Pinterest Ads
+description: 'Import Pinterest Ads data — campaigns, ad groups, pins, and their performance — into Keboola Storage.'
 slug: 'components/extractors/marketing-sales/pinterest-ads'
 ---
 

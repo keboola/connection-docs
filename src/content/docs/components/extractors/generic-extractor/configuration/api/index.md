@@ -1,5 +1,6 @@
 ---
 title: API Configuration
+description: 'Describe the API you extract from — base URL, pagination, authentication, retry rules, certificates, and default HTTP options.'
 slug: 'components/extractors/generic-extractor/configuration/api'
 redirect_from:
     - /extend/generic-extractor/configuration/api/

@@ -1,5 +1,6 @@
 ---
 title: Project Limits
+description: Each Keboola standard project has two kinds of limits.
 slug: 'management/project/limits'
 redirect_from:
   - /management/limits/

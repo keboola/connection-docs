@@ -1,5 +1,6 @@
 ---
 title: Exporting Workspace Tables to Files
+description: You can export a table that lives in a Snowflake or BigQuery workspace schema to File Storage via the Storage API.
 slug: 'workspace/table-export'
 ---
 

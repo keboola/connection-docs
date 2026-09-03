@@ -1,5 +1,6 @@
 ---
 title: How to Connect BigQuery
+description: 'Set up the Google Cloud resources needed to connect your own BigQuery to Keboola — folder, project, service account, and permissions.'
 slug: 'storage/byobq'
 ---
 

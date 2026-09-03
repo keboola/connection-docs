@@ -1,5 +1,6 @@
 ---
 title: Storage API
+description: If you are new to Keboola, you should make yourself familiar with the Storage component before you start using it.
 slug: 'storage/api'
 redirect_from:
     - /integrate/storage/

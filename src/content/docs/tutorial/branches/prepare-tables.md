@@ -1,5 +1,6 @@
 ---
 title: Prepare Table-Manipulating Configurations
+description: In this part of our tutorial about development branches, you will prepare component configurations that manipulate tables and buckets in Storage.
 slug: 'tutorial/branches/prepare-tables'
 ---
 

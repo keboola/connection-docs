@@ -1,5 +1,6 @@
 ---
 title: Project Diff
+description: 'Finish the branch lifecycle — review what changed and merge a development branch back into production.'
 slug: 'tutorial/branches/project-diff'
 ---
 
