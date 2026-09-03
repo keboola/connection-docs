@@ -57,18 +57,27 @@ semantic MCP tools stay hidden until at least one model exists. There are three 
 
 ### In the Keboola UI
 
-Your project's Semantic Layer section lets you browse a model and work through its datasets,
-metrics, relationships, glossary terms, and constraints without leaving the platform. Objects open
-read-only and are edited explicitly, and each one shows the AI guidance it carries — so you can see
-what an assistant reads when it uses that object.
+Your project's **Semantic Layer** section lists the project's semantic models:
 
-<!-- VERIFY(Jordan): this whole section. The editor shipped in kbc-ui (AI-3589, plus AI-3615
-read-only + edit toggle and AI-3616 AI-guidance display), but keboola/ui is private, so the wording
-describes behaviour rather than naming on-screen controls, and none of it is checkable from public
-sources. The "AI guidance" sentence in particular rests only on AI-3616 — cut it if that is not
-what ships. Confirm this describes the product UI and not `kbagent serve --ui`, which has its own
-Semantic Layer surface. Revision history and the lineage graph (AI-3617/3618) were still in review
-and are deliberately left out. -->
+![The Semantic Layer section in the Keboola UI, listing the project's semantic models](/ai/semantic-layer/semantic-layer-models.png)
+
+A model opens as one tab per object type — datasets, metrics, constraints, relationships, and
+glossary terms:
+
+![A semantic model opened in the UI, with one tab per semantic object type](/ai/semantic-layer/semantic-layer-model.png)
+
+Objects open read-only, showing exactly the definition an AI assistant reads — a metric, for
+example, shows its SQL expression and description — and are edited explicitly via **Edit**. A
+**Metadata** tab tracks the object's revision, schema version, and branch:
+
+![A metric opened read-only in the UI, with its SQL expression, description, and an Edit button](/ai/semantic-layer/semantic-layer-metric.png)
+
+<!-- Live-verified 2026-09-03 against the demo project (europe-west3 /projects/264, project
+feature `semantic-layer` on): sidebar item, model list, per-type tabs, read-only object view with
+Edit, Metadata tab (revision / schema version / branch). Screenshots captured the same session via
+Playwright (shoot.mjs conventions: 1600x950, news popup suppressed). The earlier draft's "AI
+guidance" sentence (AI-3616) was cut — no such field ships in the object view today. Revision
+history and the lineage graph (AI-3617/3618) remain deliberately left out. -->
 
 ### With the CLI
 
