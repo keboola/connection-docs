@@ -73,7 +73,9 @@ schedule — plus duration and status. Expand a run to see its phases.
 ```text
 My flow run failed. Which task failed, and why?
 ```
-Kai reads every job in the run, which is faster than expanding them one at a time.
+Kai reads the run's job logs, which is faster than expanding them one at a time.
+{/* VERIFY(owner): kai/ documents reading *a* job log, not traversing every child job of a flow
+run. The prompt is safe either way; the capability sentence is the unverified part. */}
 :::
 
 ## The failures that actually happen
@@ -84,8 +86,11 @@ Kai reads every job in the run, which is faster than expanding them one at a tim
   transformation wrote its output, or its phase is missing from the flow entirely. Read the run
   detail top to bottom: the phases run in the order shown.
 - **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the
-  project is out of runtime credits. Flow jobs themselves consume none; the component jobs they
-  start do.
+  project is out of runtime credits.
+  {/* VERIFY(owner): the arc previously stated "flow jobs themselves consume none; the component
+  jobs they start do". management/project/limits/ has no orchestrator/flow row at all, and
+  flows/index.md says only that each job consumes credits independently. Billing claim — removed
+  here until an owner confirms it. */}
 - **Jobs queue instead of running.** Too many parallel tasks in one phase — Storage jobs are
   typically capped at 10 in parallel. Split the phase.
 

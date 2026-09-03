@@ -94,6 +94,11 @@ count comes out above 10,000. Asking for the outline first is worth it too: you 
 joins before they run. One difference from the hand-built version: Kai builds the transformation
 on **read-only input**, so you will not see an input mapping in its configuration — the mapping
 sections on this page describe the hand-built path.
+{/* VERIFY(owner): the read-only-input behaviour is Jordan's correction from the 5 Aug review and
+is repeated here as fact, but nothing under kai/ documents it and it has not been re-walked since
+the dataset changed. It is load-bearing: read-only input needs bucket-ID-qualified table names
+(workspace/index.md:285), which the prompt above does not use. Re-walk the Kai tab in 264 and
+record the result, or qualify both. */}
 
 **Check:** 10,000 rows, 12 columns — the original 7 plus the five named in
 [Run it and check the result](#run-it-and-check-the-result), below the tabs. If the count differs,
