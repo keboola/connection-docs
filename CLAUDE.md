@@ -60,7 +60,9 @@ The full repo guide — stack, structure, commands, and conventions — lives in
 - Conserve content: every removed paragraph → a new home or a logged deletion
   (CONSERVATION-REPORT + MISSING list). Never drop silently.
 - Current guardrails: don't assert E2B as hosting; don't say Streamlit is retired;
-  don't document pricing / in-app Kai-toggle / semantic layer.
+  don't document semantic layer. (Kai pricing and the in-app enable toggle are now
+  shipped docs — `kai/pricing.md`, Settings → Features in `kai/getting-started.md` —
+  and fine to edit.)
 - Stakeholder likes/dislikes + the paste-ready prompt block live in the local
   `apps-section/` bundle (gitignored), not here.
 
