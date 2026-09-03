@@ -46,11 +46,11 @@ Your permissions persist across all conversations within the same project.
 
 ## System Instructions
 
-System instructions are standing rules Kai follows in every conversation, so you stop repeating yourself. "Always use snake_case." "Our fiscal year starts in April." "Respond in German."
+System instructions are standing rules Kai follows in every conversation, so you stop repeating yourself. "Always use snake_case." "Prefix staging tables with `stg_`." "Respond in German."
 
 They exist at two levels. **Project-level** instructions apply to everyone in the project. **User-level** instructions are personal to you and are added on top. Both are included in every conversation.
 
-Instructions are the place for short rules. For longer knowledge, such as a data model or a business glossary, use [context files](#context-files). For a step-by-step procedure you invoke when you need it, use [skill files](#skill-files).
+Instructions are the place for short rules. For longer knowledge, such as data standards and project-wide conventions, use [context files](#context-files). For a step-by-step procedure you invoke when you need it, use [skill files](#skill-files).
 
 ### Project-Level Instructions
 
@@ -66,7 +66,7 @@ Use project-level instructions for team-wide standards such as:
 
 - **Naming conventions** — e.g., "Always prefix staging tables with `stg_` and use snake_case for all column names."
 - **Coding standards** — e.g., "Write SQL transformations using CTEs instead of subqueries. Always include comments explaining business logic."
-- **Project context** — e.g., "Our fiscal year starts in April. Revenue calculations should exclude returns and use the `completed_at` date."
+- **Pipeline conventions** — e.g., "Load `in.c-*` buckets incrementally and never modify them in place. Build output tables from staging tables instead of one deep query."
 
 Project-level instructions can be edited by project admins and managers.
 
@@ -102,13 +102,13 @@ This means user-level instructions can refine or add to the project-level instru
 - Each instruction field supports up to **4,000 characters**.
 - Keep instructions clear and specific — vague guidelines are less effective.
 - Update instructions as your project evolves and conventions change.
-- Focus on rules Kai can't infer from your project data alone (e.g., business logic, team preferences).
+- Focus on rules Kai can't infer from your project data alone (e.g., team conventions and preferences).
 - If Kai doesn't seem to follow an instruction, try rephrasing it more directly.
-- For knowledge that outgrows the 4,000-character limit — data standards documents, business glossaries — use [context files](#context-files) instead.
+- For knowledge that outgrows the 4,000-character limit, such as data standards and project-wide conventions, use [context files](#context-files) instead.
 
 ## Context Files
 
-Context files (also called knowledge files) are Markdown documents that Kai reads automatically at the start of every conversation. Use them to give Kai project knowledge that is too long for system instructions: data standards, naming conventions, business glossaries, or documentation of your data model. For security reasons Kai cannot open links, so anything it needs to read has to arrive as a file — context files are the place for documentation it should have in every conversation, such as the API reference for a system you integrate with repeatedly.
+Context files (also called knowledge files) are Markdown documents that Kai reads automatically at the start of every conversation. Use them to give Kai project knowledge that is too long for system instructions: data standards and project-wide conventions. Kai cannot open links for security reasons, so anything it needs to read has to arrive as a file. Reference material for a single task, such as the documentation for one external system, is better placed in a [skill file](#skill-files), which is loaded only when the skill runs.
 
 To manage them, go to **Settings → Kai Agent** in the main Keboola navigation and use the **Context files** card:
 
@@ -145,16 +145,21 @@ it to things Kai cannot work out from the project itself:
 - Columns are snake_case.
 - Timestamps end in `_at` and are always UTC.
 
-## Business rules
+## Transformations
 
-- The fiscal year starts in April.
-- Revenue excludes VAT and any order with `status = 'cancelled'`.
-- An active customer has placed an order in the last 90 days.
+- Avoid deep chains of CTEs. Split a long query into intermediate staging tables and
+  assemble the final output table from those.
+- Materialize anything more than one transformation reads instead of recomputing it.
+- Filter and deduplicate before joining, not after.
+- List columns explicitly when writing an output table. No `SELECT *` into a table
+  other teams depend on.
+- An incremental load needs a primary key. Full loads are for
+  small lookup tables only.
 
-## Glossary
+## Integrations
 
-- **ARR** is annual recurring revenue and excludes one-off services.
-- **Churn** means no order in 180 days, not a cancelled contract.
+- When a new integration is needed, prefer a Custom Python component over the
+  Generic Extractor.
 ```
 
 If you upload only one file, name it `CLAUDE.md` so it becomes Kai's top-level memory file.
@@ -168,6 +173,8 @@ Under the hood, context files are ordinary [Storage Files](/storage/files/) tagg
 ## Skill Files
 
 A skill is a playbook Kai runs when you need it. Skills appear in the chat's **`/` slash-command menu** alongside Kai's built-in skills. Use them for longer, task-specific instructions such as "build the monthly report" or "onboard a new data source".
+
+Kai skills use the open [Agent Skills](https://agentskills.io/home) format: a Markdown file with `name` and `description` frontmatter, optionally packaged with the supporting files it references.
 
 :::tip[Difference between a Skill and a Context file]
 A context file is read in every conversation and it can take up your context window space.
@@ -212,10 +219,10 @@ You can call a skill in two ways:
 
 ![Calling a skill from the slash-command menu](/kai/kai-skill-slash-menu.png)
 
-This is why the `description` matters more than anything else in the file. Kai matches
-against it, and the menu shows it to whoever is choosing. Write what the
-skill does, then when to use it, including the words your team actually types. A good one is
-long and specific:
+Kai reads only each skill's `name` and `description` up front, then loads the body when it
+decides the skill applies (progressive disclosure). That makes the `description` decisive
+for skills Kai invokes itself. Write what it does, then when to use it, in the words your
+team actually types:
 
 ```yaml
 description: Build narrative, scroll-driven data stories where scroll position drives
@@ -240,6 +247,11 @@ Write a skill when you want Kai to do something a particular way, every time.
 
 Skills are project-wide, so one person can encode the standard once and the whole team gets
 it.
+
+For writing the skill itself, the Agent Skills project publishes
+[best practices for skill creators](https://agentskills.io/skill-creation/best-practices):
+how to structure `SKILL.md`, how long to make it, and when to move detail into separate
+reference files.
 
 ## Managing Files via API or CLI
 
