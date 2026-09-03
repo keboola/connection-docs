@@ -172,7 +172,7 @@ Under the hood, context files are ordinary [Storage Files](/storage/files/) tagg
 
 ## Skill Files
 
-A skill is a playbook Kai runs when you need it. Skills appear in the chat's **`/` slash-command menu** alongside Kai's built-in skills. Use them for longer, task-specific instructions such as "build the monthly report" or "onboard a new data source".
+A skill is a playbook Kai runs when you need it. The skills you upload appear in the chat's **`/` slash-command menu**. Use them for longer, task-specific instructions such as "build the monthly report" or "onboard a new data source". Kai also carries built-in skills that it invokes on its own when they are relevant; those are not listed in the menu.
 
 Kai skills use the open [Agent Skills](https://agentskills.io/home) format: a Markdown file with `name` and `description` frontmatter, optionally packaged with the supporting files it references.
 
