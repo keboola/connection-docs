@@ -7,7 +7,7 @@ slug: 'kai/getting-started'
 
 ## Access
 
-Kai is now in **Public Beta** and available to all users in supported stacks.
+Kai is available on all supported stacks; the feature has to be enabled in your project first.
 
 ### Enabling Kai
 
@@ -26,6 +26,7 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 | **A** | Open the chat window (shows recent conversation) |
 | **Shift + A** | Open a new chat |
 
+<!-- TODO(human-review, Jordan): kai-open.png still shows the Beta pill on the Kai Agent button. It cannot be reshot clean before the pill retires on 2026-09-15 — reshoot after that date. -->
 ![Kai open in a project](/kai/kai-open.png)
 
 ## Example Prompts
@@ -234,13 +235,13 @@ it works.
 
 ## Rate Limits
 
-**Kai is free during the public beta period.**
+Until Kai becomes generally available on **15 September 2026**, each user gets
+**150 messages per month per project** on contracted plans, resetting at the start of
+each calendar month. Pay-As-You-Go plans get **50**. Your current usage is shown in the
+chat interface.
 
-Each user receives **150 turns (messages) per month per project** on contracted plans. The limit resets at the beginning of each calendar month.
-
-- **Pay-As-You-Go (PAYG) plans** have a lower limit of **50 messages per user per month**
-- Your current usage is displayed in the chat interface
-- Need more? [Contact Keboola Support](mailto:support@keboola.com) to discuss custom limits for your project
+After that date the message counter is replaced by PPU credit consumption and the spend
+limits an Organization Admin sets. See [Kai pricing and limits](/kai/pricing/).
 
 ## Troubleshooting
 
