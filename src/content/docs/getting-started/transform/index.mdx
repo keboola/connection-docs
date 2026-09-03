@@ -1,5 +1,5 @@
 ---
-title: 'Transform Data'
+title: 'Transform data'
 slug: 'getting-started/transform'
 description: 'Create an SQL transformation that joins the octopus sightings with their species names, depth zones and ocean basins, and learn how mappings keep Storage safe.'
 redirect_from:
@@ -7,20 +7,26 @@ redirect_from:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="Tutorial" minutes="15" />
 
 Of the 10,000 sightings, 4,465 carry a depth — and the deepest of them comes from 4,838 meters
 down. The sightings table already says that much; what it will not say is *which* octopus that
 was or *where* in any human sense, because it names species by a numeric ID and locations as raw
 coordinates. This step joins `occurrences`, `species`, `depth_zones` and `basins` with SQL into
 one 10,000-row atlas that turns IDs into names and places every sighting in its ocean — and,
-where a depth was recorded, its depth zone — and it introduces the mapping model that keeps your source data safe while you do it.
-Step 3 of the [Getting Started](/getting-started/) arc.
+where a depth was recorded, its depth zone — and it introduces the mapping model that keeps your
+source data safe while you do it.
 
-**Two ways to do it** — pick a tab in *Set it up* below. Doing it with Kai, the run is part of
-the prompt — you only check the result. Doing it yourself, you run it afterwards in the section
-below the tabs.
+**Where you are:** the four raw tables are in Storage and nothing has been joined yet.
+**When you finish:** one table that answers the question, and a transformation you can re-run.
 
-{/* Tutorial-type page (step 3 of 7). UI labels walked live in project 264 on 2026-08-04: the
+<PathIntro yours="nothing on this page — both paths are fully automatable" />
+
+{/* Tutorial-type page. Ordinal removed 2026-09-02 (see DECISIONS.md). UI labels walked live in project 264 on 2026-08-04: the
 button is "Create Transformation", the dialog is "New Transformation", the sections are "Table
 Input Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is
 multi-select, and Queries offers "Create Multiple Queries". 2026-08-25: dataset swapped to the
@@ -29,11 +35,15 @@ join offline against the shipped CSVs (verified: every row matches exactly one b
 duplicates, 4,465 rows get a depth zone); the SQL itself, job timings and all screenshots pend
 the live re-walk in 264. */}
 
-## What you need
-
-Four tables in Storage — `occurrences`, `species`, `depth_zones` and `basins` — from
-[Get Your Data In](/getting-started/load/). They sit in whatever bucket the connector created,
-and its name contains a configuration ID, so yours will not match the screenshots.
+<Prereqs needs={['project']}>
+  <li>
+    Four tables in Storage — <code>occurrences</code>, <code>species</code>,
+    <code>depth_zones</code> and <code>basins</code> — from{' '}
+    <a href="/getting-started/load/">Get your data in</a>. They sit in whatever bucket the
+    connector created, and its name contains a configuration ID, so yours will not match the
+    screenshots.
+  </li>
+</Prereqs>
 
 That does not matter. What the SQL depends on is the **Table name** you give each table in the
 input mapping below: those must be exactly `occurrences`, `species`, `depth_zones` and `basins`,
@@ -84,6 +94,11 @@ count comes out above 10,000. Asking for the outline first is worth it too: you 
 joins before they run. One difference from the hand-built version: Kai builds the transformation
 on **read-only input**, so you will not see an input mapping in its configuration — the mapping
 sections on this page describe the hand-built path.
+{/* VERIFY(owner): the read-only-input behaviour is Jordan's correction from the 5 Aug review and
+is repeated here as fact, but nothing under kai/ documents it and it has not been re-walked since
+the dataset changed. It is load-bearing: read-only input needs bucket-ID-qualified table names
+(workspace/index.md:285), which the prompt above does not use. Re-walk the Kai tab in 264 and
+record the result, or qualify both. */}
 
 **Check:** 10,000 rows, 12 columns — the original 7 plus the five named in
 [Run it and check the result](#run-it-and-check-the-result), below the tabs. If the count differs,
@@ -393,8 +408,7 @@ experimenting.
 
 ## Going further
 
-- [Use a Workspace](/getting-started/transform/workspace/) — develop and test queries
+- [Use a workspace](/getting-started/transform/workspace/) — develop and test queries
   against a copy of the data before committing them to a transformation. This is how the
   work is really done.
 
-**Next:** [Send your data somewhere →](/getting-started/write/)

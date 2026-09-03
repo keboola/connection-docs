@@ -1,0 +1,61 @@
+---
+// The tab convention, stated once, on every page that has tabs.
+//
+// Replaces the per-page paragraphs that explained the same thing in slightly
+// different words — and fixes the review finding that steps referenced Kai
+// without ever saying upfront what the tabs are or what Kai will ask of you.
+//
+// This is the "combined UI + API format" agreed on 5 August, and the same
+// mechanism Michal asked for independently on 2 September ("Mám tam nějaký
+// prompt? Jak to zpracuje to CLI?"). Prompt first, by construction.
+//
+// Usage:  <PathIntro />                       — the default: Kai asks for approvals
+//         <PathIntro approvals={false} />     — read-only pages, where it does not
+//         <PathIntro yours="the Google consent screen" />
+---
+
+<div class="gs-pathintro">
+  {
+    Astro.props.manual === false ? (
+      <p>
+        <strong>This page is a prompt.</strong> The <strong>Do it with Kai</strong> tab describes
+        what you want and Kai builds it. There is no click-by-click equivalent here — building
+        this by hand is a development workflow with its own section, and the second tab says
+        where to go for it.
+      </p>
+    ) : (
+      <p>
+        <strong>Two ways to do this, one page.</strong> The <strong>Do it with Kai</strong> tab
+        is a prompt you paste; the <strong>Do it yourself</strong> tab is the same task
+        click by click, for when you want to see where each setting lives. Either
+        tab reaches the same result — pick one and carry on.
+      </p>
+    )
+  }
+
+  {
+    Astro.props.approvals !== false && (
+      <p>
+        Kai asks before it changes anything: expect one approval dialog per
+        object it creates, showing the exact configuration it is about to write.
+        Questions that only read do not ask. If confirming each one gets
+        tiring, turn on <strong>plan mode</strong> in the chat's message box — Kai drafts the
+        whole plan and you approve it once — or pre-approve tools in{' '}
+        <a href="/kai/settings/#tool-permissions">tool permissions</a>.
+      </p>
+    )
+  }
+
+  {
+    Astro.props.yours && (
+      <p>
+        One thing stays yours either way: {Astro.props.yours}.
+      </p>
+    )
+  }
+
+  <p class="gs-pathintro__recovery">
+    If Kai builds something other than what the page describes, say so in the
+    same chat — it edits what it made. Nothing here is one-way.
+  </p>
+</div>
