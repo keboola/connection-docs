@@ -15,12 +15,23 @@
 ---
 
 <div class="gs-pathintro">
-  <p>
-    <strong>Two ways to do this, one page.</strong> The <strong>Do it with Kai</strong> tab
-    is a prompt you paste; the <strong>Do it yourself</strong> tab is the same task
-    click by click, for when you want to see where each setting lives. Either
-    tab reaches the same result — pick one and carry on.
-  </p>
+  {
+    Astro.props.manual === false ? (
+      <p>
+        <strong>This page is a prompt.</strong> The <strong>Do it with Kai</strong> tab describes
+        what you want and Kai builds it. There is no click-by-click equivalent here — building
+        this by hand is a development workflow with its own section, and the second tab says
+        where to go for it.
+      </p>
+    ) : (
+      <p>
+        <strong>Two ways to do this, one page.</strong> The <strong>Do it with Kai</strong> tab
+        is a prompt you paste; the <strong>Do it yourself</strong> tab is the same task
+        click by click, for when you want to see where each setting lives. Either
+        tab reaches the same result — pick one and carry on.
+      </p>
+    )
+  }
 
   {
     Astro.props.approvals !== false && (

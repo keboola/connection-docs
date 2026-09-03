@@ -69,8 +69,9 @@ configuration to run, a notification to send, a variable to set.
 
 That is the whole model, and it makes the ordering obvious: things that can happen at the same
 time go in one phase; things that depend on each other go in separate phases. Your pipeline is
-three phases — extract, transform, deliver — because the transformation needs the four tables
-before it can join them, and the sheet needs the joined table before it can deliver it.
+two phases — load, then transform — because the transformation needs the tables before it can
+join them. If you also took the [spreadsheet side trip](/getting-started/write/), delivery is a
+third phase, for the same reason: it needs the joined table before it can send it.
 
 Each phase here holds a single task, so nothing runs in parallel yet. Parallelism shows up the
 moment you have a second source: two connectors both go in phase 1 and run at the same time.
@@ -104,13 +105,14 @@ flow's header once it has tasks.
 
 ```text
 Create a flow called "[TUTORIAL] Octopus pipeline" that runs my "[TUTORIAL] Octopus sightings"
-HTTP configuration first, then the "Octopus atlas" transformation, then the
-"[TUTORIAL] Octopus atlas to Sheets" destination — three phases, one task each, in that order.
+HTTP configuration first, then the "Octopus atlas" transformation — two phases, one task each,
+in that order.
 ```
 
-If you skipped [the spreadsheet](/getting-started/write/), drop the third one and ask for two phases.
+If you also took the [spreadsheet side trip](/getting-started/write/), add its destination as a
+third phase: `…then the "[TUTORIAL] Octopus atlas to Sheets" destination — three phases, one task each, in that order.`
 
-**Check:** the canvas shows **three separate phases**, not three tasks in one. Each step needs the
+**Check:** the canvas shows **separate phases**, not several tasks in one. Each step needs the
 previous one's output, so the split is the whole point, for the reason the section above just
 gave. If it came out as one phase, the fix is the one the numbered steps use — switch to the
 **Do it yourself** tab: the **+** below a phase starts a new phase — add the later tasks there and remove them from the first.
@@ -159,14 +161,15 @@ gets told about is just a button.
    **Extract**, **Transform**, **Load**. Yours start life as **Phase 1**, **Phase 2**, … until
    you rename them.*
 
-5. Repeat for a third phase holding the Google Sheets destination configuration. If you skipped
-   [the spreadsheet](/getting-started/write/), stop at two phases.
+5. Two phases are the pipeline. If you also took the
+   [spreadsheet side trip](/getting-started/write/), repeat once more for a third phase holding
+   its Google Sheets destination.
 
 6. Click **Save**. The Builder keeps your changes as a draft until you do — **Save** and
    **Reset** only appear while there are unsaved changes, and **Run flow** stays disabled until
    you save.
 
-You now have three phases: the load, then the transformation, then the delivery.
+You now have two phases: the load, then the transformation — three if you added the delivery.
 
 ![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
 

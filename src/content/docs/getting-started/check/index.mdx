@@ -44,8 +44,15 @@ That single count catches both directions of failure:
 - **Fewer** means an inner join dropped rows that had no match — a code in the readings with no
   entry in the lookup table.
 
-Open the table's **Data Sample** and the added columns should be populated, not empty. Column
-count is the second check: the original columns plus the ones the SQL derived.
+Open the table's **Data Sample** and check the added columns the right way round: the ones
+derived from a straight lookup are filled on **every** row, while a column that depends on an
+optional value is filled only where that value exists. In this sample, `depth_zone` is populated
+on **4,465** of the 10,000 rows, because only that many sightings recorded a depth — the join is
+a LEFT JOIN precisely so the other 5,535 survive instead of being dropped.
+
+So the failure signals are the extremes: a derived column empty on *every* row means the join
+matched nothing, and `depth_zone` filled on all 10,000 means depths were invented. Column count
+is the second check: the original columns plus the ones the SQL derived.
 
 ## Reading a flow run
 

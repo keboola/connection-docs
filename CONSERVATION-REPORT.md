@@ -53,6 +53,20 @@ not yet done).
 | Chapter numbering in titles and bodies ("Step 3 of 7") | The new titles are outcomes; numbering breaks the moment a page moves, and no surveyed vendor uses it | reading order lives in the sidebar |
 | `writing1.png` | Orphan — grep-confirmed unreferenced | n/a |
 
+## Verification pass, 2026-09-02 — what it caught
+
+A fact-check of all ten pages plus three walkthroughs (linear, cold landing, project without Kai)
+found 85 issues. The ones that were real defects in this branch, now fixed:
+
+| Defect | Where | Why it mattered |
+|---|---|---|
+| The page printed its own source code | `going-further/index.md` | It was `.md`, so the MDX import never compiled: the built page showed `import PageMeta from …` as body text and `gs-pagemeta` appeared zero times. The same trap as the earlier `.md`/`.mdx` comment bug — third occurrence on this branch. Renamed to `.mdx`. |
+| Verification called a correct build broken | `check/index.mdx` | It said the added columns "should be populated, not empty". `depth_zone` is empty on **5,535 of 10,000** rows by design — only 4,465 sightings recorded a depth, and the LEFT JOIN keeps the rest. Rewritten to name the real failure signals: a derived column empty on *every* row, or `depth_zone` filled on all 10,000. |
+| The hub advertised the pre-rebuild route | `index.mdx` | Its numbered list still read project → load → transform → **write** → automate → app, omitting both new pages and selling the spreadsheet as a required step, while the sidebar and generated pagination said otherwise. Rebuilt to match. |
+| The flow was still built around the spreadsheet | `automate/index.mdx` | The prompt, the check and "you now have three phases" assumed a page that now sits *after* this one in Going further. Two phases are the default; delivery is the add-on. |
+| A promised click-through path that does not exist | `app/index.mdx`, `index.mdx`, `ask/index.mdx` | `PathIntro` claimed "the same task click by click … either tab reaches the same result", but the app's second tab has no procedure — building by hand is a git-and-code workflow. Kai is now a stated prerequisite there, and the two Kai-only pages are named honestly on all three pages. |
+| Ordinals pointing at the wrong pages | `project/index.mdx` | "step 4 … authorize Google" and "step 5's closing question" survived the sweep and now named different pages entirely. Replaced with page names. |
+
 ## Regression found and fixed in this wave
 
 `public/getting-started/transform/04-input-mapping.png`,

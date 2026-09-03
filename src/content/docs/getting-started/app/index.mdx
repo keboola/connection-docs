@@ -19,10 +19,8 @@ coordinates.
 **Where you are:** the joined table exists in Storage. **When you finish:** a running app with
 its own URL, and a password so you decide who sees it.
 
-<PathIntro yours="deciding who gets the URL and the password" />
+<PathIntro manual={false} yours="deciding who gets the URL and the password" />
 
-Building an app by hand is its own topic with its own section; the second tab says where to go
-for it.
 
 {/* Tutorial-type page, NEW in the octopus rework (PRDCT-487, 2026-08-25). UI flow
 and labels are taken from data-apps/getting-started.md ("+ Create App", the "Describe what you
@@ -34,7 +32,7 @@ re-walk in project 264. VERIFY(owner): whether the Free Plan includes data apps 
 this step needs the same "skippable" framing as the Google step; check /management/payg-project/
 during the live walk. */}
 
-<Prereqs needs={['project']}>
+<Prereqs needs={['project', 'kai']}>
   <li>
     The joined table in Storage, from <a href="/getting-started/transform/">Transform data</a>.
   </li>
