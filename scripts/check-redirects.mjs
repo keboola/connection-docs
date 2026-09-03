@@ -19,6 +19,7 @@
 //   moved    — page gets a topic home on help (final_help_path)
 //   redirect — dev landing/duplicate; 301 straight to the canonical
 //   dies     — site chrome (404, homepage) — no mapping required, listed for completeness
+//   external — deliberately not on help; 301 goes off-site (e.g. the tool's own repository)
 //   unsure   — PLACEMENT-MAP row awaiting a PRDCT-550 call; final path is the proposal
 
 import fs from 'node:fs';
@@ -35,6 +36,7 @@ const mode = process.argv[2];
 const clean = (p) => {
   if (!p || p === '—' || p === '-') return null;
   let s = p.replace(/`/g, '').trim();
+  if (/^https?:\/\//.test(s)) return s;   // off-site destination — kept verbatim
   if (!s.startsWith('/')) return null;
   if (!s.endsWith('/') && !/\.[a-z]+$/.test(s)) s += '/';
   return s;
@@ -50,7 +52,8 @@ function parsePlacementMap() {
     if (!dev) continue;
     const tgt = clean(target);
     let status;
-    if (/NOT MIGRATED/i.test(dedup) && !tgt) status = 'dies';
+    if (tgt && /^https?:\/\//.test(tgt)) status = 'external';
+    else if (/NOT MIGRATED/i.test(dedup) && !tgt) status = 'dies';
     else if (/REDIRECT/i.test(dedup) || section.trim().startsWith('—')) status = 'redirect';
     else status = 'moved';
     if (/UNSURE/i.test(dedup) || /UNSURE/i.test(section)) status = 'unsure';
@@ -90,8 +93,9 @@ function checkBuild() {
   if (!fs.existsSync(DIST)) fail('dist/ missing — run `npm run build` first');
   const rows = readTsv();
   const lost = [], pending = [];
+  const external = rows.filter((r) => r.status === 'external').length;
   for (const r of rows) {
-    if (r.status === 'dies') continue;
+    if (r.status === 'dies' || r.status === 'external') continue;
     const finalServes = inDist(r.tgt);
     // The dev path serving something only counts as conservation when the page is
     // staying put (identity redirect). For a row that moves, a live dev path may be
@@ -107,6 +111,7 @@ function checkBuild() {
     console.log(`… ${pending.length} pending (final home not merged yet — expected until batches land):`);
     pending.slice(0, 15).forEach((p) => console.log(`   ${p}`));
   }
+  if (external) console.log(`… ${external} URL(s) redirect off-site by decision (not expected in dist)`);
   if (lost.length) {
     console.error(`✗ ${lost.length} dev URL(s) resolve NOWHERE in dist — conservation broken:`);
     lost.forEach((p) => console.error(`   ${p}`));
@@ -142,7 +147,7 @@ async function live() {
   for (const r of rows) {
     const res = await fetch(DEV_HOST + r.dev, { redirect: 'manual' }).catch(() => null);
     const loc = res?.headers.get('location') ?? '';
-    const expected = HELP_HOST + (r.tgt || r.dev);
+    const expected = r.status === 'external' ? r.tgt : HELP_HOST + (r.tgt || r.dev);
     const ok = res && [301, 308].includes(res.status) && (loc === expected || loc.replace(/\/$/, '') === expected.replace(/\/$/, ''));
     if (!ok) { bad++; console.error(`✗ ${r.dev}: got ${res?.status ?? 'ERR'} ${loc || ''} — want 301 ${expected}`); }
   }
