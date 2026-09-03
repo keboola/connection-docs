@@ -5,12 +5,14 @@ redirect_from:
     - /extend/generic-extractor/tutorial/json/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 [JSON (JavaScript Object Notation)](http://www.json.org/) is an easy-to-work-with format for describing structured 
 data. Before you start working with JSON, familiarize yourself with basic programming jargon. It is also recommended 
 to have a text editor with JSON support (you can also use an [online editor](http://www.jsoneditoronline.org/)).
 
-## Object Representation
+## Object representation
 To describe structured data, JSON uses **objects** and **arrays**. 
 
 ### Objects
@@ -65,7 +67,7 @@ The terminology varies a lot and other expressions are also commonly used:
 - Property — also a field / key / index
 - Array — also a collection / list / vector / ordinal array / sequence
 
-## Data Values
+## Data values
 Each property value always has one of the following data types:
 
 - String — text
@@ -145,3 +147,5 @@ The order of items in an object is not important. It is also worth noting that `
 ## Summary
 This page contains a little introduction to JSON documents. We intentionally avoided many details, 
 but you should now understand what JSON is, and how to write some stuff in it.
+
+**Next:** [Basic configuration →](/components/extractors/generic-extractor/tutorial/basic/)

@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/config/mappings/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 *If you are new to Generic Extractor, learn about [mapping in our tutorial](/components/extractors/generic-extractor/tutorial/mapping/) first.*
 *Use the [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various configuration options.*
 
@@ -70,12 +72,12 @@ The following configuration shows a sample mapping configuration for dataType `u
 }
 ```
 
-### User Interface
+### User interface
 In the UI, the mapping can be created for each endpoint in the `Endpoints`.`Mapping section` by clicking `Create Mapping` toggle.
 
 ![Create mapping](/components/extractors/generic-extractor/tutorial/create_mapping_toggle.png)
 
-#### Mapping Detection
+#### Mapping detection
 
 You may opt to generate the mapping automatically by clicking the `Infer Mapping` button in the top right corner. 
 
@@ -94,7 +96,7 @@ Currently, the automatic detection outputs only single table mapping. You can co
 the `Nesting Level` property. For example, a depth of 1 transforms `{"address": {"street": "Main", "details": {"postcode": "170 00"}}}` into two columns: `address_street` and `address_details`. 
 All elements that have ambiguous types or are beyond the specified depth are stored in a single column as JSON, e.g., with the [`force_type`](/components/extractors/generic-extractor/configuration/config/mappings/#mapping-without-processing) option.
 
-### Column Mapping
+### Column mapping
 Column mapping represents a basic mapping type that allows you to select extracted
 columns, rename them, and optionally set a primary key on them. The mapping
 configuration requires:
@@ -106,12 +108,12 @@ configuration requires:
 - `forceType` (optional, boolean) — If set to `true`, the property will not be processed and will be stored as an encoded
 JSON (see an [example](#mapping-without-processing)).
 
-### User Mapping
+### User mapping
 User mapping has the same configuration as the [column mapping](#column-mapping). The only difference is
 that it applies to *virtual properties*. This is useful mainly for working with auto-generated properties/columns
 in child jobs (see an [example](#mapping-child-jobs)).
 
-### Table Mapping
+### Table mapping
 Table mapping allows you to create a new table from a particular property of the response object. Table
 mapping is, by default, used for arrays. The mapping configuration requires:
 
@@ -155,7 +157,7 @@ The following configuration takes the `contacts` property from the response and 
 ## Examples
 The following examples demonstrate how to map JSON responses to CSV files.
 
-### Automatic Mapping
+### Automatic mapping
 Without any configuration, the following JSON response:
 
 ```json
@@ -218,7 +220,7 @@ when the API returns a completely empty response in which case no tables are cre
 When Manual mapping is used, the generated table structure always honors the mapping setting.
 See [example [EX137]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/137-mapping-tables-nested-empty).
 
-### Basic Manual Mapping
+### Basic manual mapping
 Maybe you are not interested in the user `interests` and want to simplify the user table
 to three columns: `country`, `name` and `id`. The following mapping configuration does the trick:
 
@@ -286,7 +288,7 @@ correct settings, the following table will be produced:
 
 See [example [EX064]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/064-mapping-basic).
 
-### Mapping Child Jobs
+### Mapping child jobs
 Let's say that you have an API endpoint `/users` which returns a response similar to:
 
 ```json
@@ -385,7 +387,7 @@ column `parent_id` does not really exist in the response as it is generated dyna
 
 See [example [EX065]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/065-mapping-child-jobs).
 
-### Mapping without Processing
+### Mapping without processing
 The `forceType` configuration property allows you to skip a part of the API response from processing.
 With the following API response:
 
@@ -475,7 +477,7 @@ The same result can be achieved by using the [`responseFilter` job property](/co
 
 See [example [EX073]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/073-mapping-forceType).
 
-### Table Mapping Examples
+### Table mapping examples
 
 #### Basic table mapping
 Because all output columns must be listed in a mapping, using only column mapping settings skips
