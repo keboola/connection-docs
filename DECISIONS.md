@@ -134,6 +134,55 @@ rebuild.
 where present. Adding a `title:` to navigation.yml still does nothing; use
 `label:` when the sidebar needs a shorter name than the page title.
 
+## 2026-09-03 — The sample world is Boolabean, a fictional coffee chain
+
+**Decided by:** Nikita, on the delegated call ("придумай сам"), against the five
+criteria in the 2 Sep memo.
+
+**The name.** Every natural café or bakery name is taken by a real business —
+checked Kolache Bar, Kettle & Crumb, Poppyseed, Bakelane, Crumbline, Kettleflow;
+all of them exist. `jaffle_shop` collides the same way, so uniqueness is not the
+criterion — *not impersonating anyone* is. So the name follows Databricks'
+Wanderbricks and Snowflake's Tasty Bytes: a pun on our own brand.
+**Boolabean** — Keboola plus coffee bean. Obviously invented, easy to say and
+search, and free.
+
+**The schema is deliberately mundane**, per the evidence: five tables,
+`stores` / `products` / `sales` / `staffing` / `weather_daily`. Whimsy lives only
+in the product values — "Iced Latte, Extremely Iced", "Cold Brew, Patient",
+"Decaf, Genuinely" — which is the Metabase slot ("Lightweight Wool Computer").
+No theme word appears in a page title or the sidebar.
+
+**The static half is generated but the weather is real.** `scripts/gen-boolabean.py`
+pulls 92 days of actual observations from open-meteo's archive API for each
+café's real coordinates, then generates sales that genuinely depend on it. Seeded,
+so the numbers the guide quotes are reproducible.
+
+**The live half is not shipped.** The guide fetches tomorrow's forecast from
+open-meteo at read time — no authentication — which is what finally makes the
+scheduling step teach something: run it again tomorrow and the answer has moved.
+dltHub pays the same price for the same reason.
+
+**The question is business-shaped and only answerable at the end:**
+*"Should we put an extra person on this weekend?"*
+
+Verified in the data before committing to it:
+
+| Signal | Result |
+|---|---|
+| Iced-to-hot drink ratio by temperature band | 0.45 below 18 °C → 1.54 above 28 °C |
+| Rain, terrace cafés vs indoor | −25% vs −12% — the terrace is the difference |
+| Rosters vs actual demand | 55 stretched days of 552; 29 of them 26 °C+, 16 on a weekend |
+
+The rosters are planned from each café's typical week, not from what actually
+happened — a manager writing next week's rota does not know the weather. That is
+why a shortfall exists at all, and it is the thing the forecast join predicts.
+
+**Cost, stated plainly:** the live source adds one connector configuration the
+static-only version would not need, and open-meteo's CSV is two-block with units
+in the header (`temperature_2m_max (°C)`), so it needs a `skip-lines` processor —
+the same processor Kai reached for unprompted in the 2 Sep run.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
