@@ -125,7 +125,7 @@ Components can be run as standard pieces of our [Flows](/flows/), obtaining the 
 ### Keboola CLI
 [**kbagent**](/cli/) is Keboola's command-line interface — manage projects, configs, jobs, storage, and flows across your whole organization from the terminal, on your own or with an AI coding agent. See the [CLI section](/cli/) to get started.
 
-The legacy [Keboola as Code CLI](https://developers.keboola.com/cli/) (`kbc`) is still available for operating your pipeline from Windows, macOS, and Linux.
+The legacy [Keboola as Code CLI](https://github.com/keboola/keboola-as-code) (`kbc`) is still available for operating your pipeline from Windows, macOS, and Linux.
 
 ## AI Assistance
 The Keboola AI feature can increase your productivity in several areas, such as:
