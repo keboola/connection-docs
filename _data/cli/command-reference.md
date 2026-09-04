@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.91.0 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.92.0 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
@@ -16,6 +16,7 @@ Available on every command:
 | `--config-dir` `<str>` |  | Override config directory path. |
 | `--deny-writes` |  | Session-only firewall: block write, destructive, AND admin operations (the wide net -- project add/remove/edit, org setup, storage writes and deletes, etc.). Merges with any persisted policy. |
 | `--deny-destructive` |  | Session-only firewall: block ONLY data-destructive operations (storage delete-table/delete-bucket/delete-column, job terminate, branch delete, etc.). Admin ops like 'project remove' and 'org setup' are NOT blocked -- use --deny-writes for the wide net. |
+| `--conversation-id` `<str>` |  | Conversation/session ID sent as the X-Conversation-ID header on every API request (platform observability). Equivalent to setting KBAGENT_CONVERSATION_ID, and takes precedence over it. Exists because agent harnesses do not persist shell state between tool calls, so a standalone `export` cannot set it -- and prefixing every command with `export ...` stops the command matching a `Bash(kbagent ...)` permission allow-rule. |
 | `--allow-env-manage-token` |  | Read KBC_MANAGE_API_TOKEN from the environment. Without this flag the env var is ignored (with a warning) and an interactive TTY prompt is required. Default-deny since 0.29.0; closes the AI-exfiltration risk where subprocesses inherit the manage token. |
 | `--install-completion` |  | Install completion for the current shell. |
 | `--show-completion` |  | Show completion for the current shell, to copy it or customize the installation. |
@@ -1934,6 +1935,16 @@ Remove all schedules bound to a flow (deletes keboola.scheduler configs).
 | `--branch` `<int>` |  | Dev branch ID |
 | `--dry-run` |  | List the scheduler configs that would be removed without executing |
 | `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent flow triggers`
+
+Show every trigger kbagent can see for a flow (cron + table triggers).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--flow-id` `<str>` | yes | Flow configuration ID |
+| `--branch` `<int>` |  | Dev branch ID. Narrows the CRON half only -- the Storage triggers route is production-only and has no branch-scoped variant. |
 
 ## `schedule`
 
