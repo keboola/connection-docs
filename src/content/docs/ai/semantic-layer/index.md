@@ -20,7 +20,7 @@ availability by stack rather than by plan. The UI-vs-capability split is per the
 the sidebar UI, while Kai/MCP create and use models unconditionally wherever the metastore
 service is available — see davidesner's comment on PR #1103. -->
 
-Keboola's semantic layer lets you describe your project's data in business terms — datasets, metrics, relationships, glossary terms, and business rules. AI assistants connected to your project through the [MCP Server](/ai/mcp-server/) use these definitions to understand what your data *means*, not just how it is stored.
+Keboola's semantic layer lets you describe your project's data in business terms — datasets, metrics, relationships, glossary terms, and business rules. [Kai](/kai/), AI assistants connected to your project through the [MCP Server](/ai/mcp-server/), and the [Keboola CLI](/cli/) all read these definitions to understand what your data *means*, not just how it is stored.
 
 Instead of every AI conversation having to rediscover which table holds revenue, how orders join to customers, or which business rules a query must respect, you define these facts once. Every AI assistant working with your project then grounds its answers — and the SQL it generates — in the same shared definitions.
 
@@ -53,7 +53,34 @@ export, or diff, and is managed with `kbagent semantic-layer reference-data`.
 ## Building a semantic model
 
 Start here: a project with no semantic model has nothing for an AI assistant to ground on, and the
-semantic MCP tools stay hidden until at least one model exists. There are three ways to build one.
+semantic MCP tools stay hidden until at least one model exists. There are four ways to build one.
+
+### With Kai
+
+The quickest way is to ask [Kai](/kai/), the assistant built into Keboola. Kai builds and maintains
+semantic models from a chat inside your project, with nothing to install:
+
+> "Build a semantic model from the tables in the `out.c-sales` bucket."
+> "Add a net profit margin metric to the sales model, and a rule that flags a margin above 100%."
+
+Kai reads your buckets and tables, asks which numbers the business actually tracks, drafts the
+model, and validates it before writing anything. It then asks for your approval, and the approval
+card names the model and how many objects of each type the call will write, so you see the whole
+change before it happens. Editing, removing, and sharing objects in a model you already have work
+the same way: describe the change in plain language, review it, approve it. See
+[Action approval](/kai/getting-started/#action-approval).
+
+A model Kai creates is visible only in the project it was created in. Kai can also share it
+read-only with named sibling projects, or with every project in your organization; widening a model
+to the whole organization requires an organization admin.
+
+<!-- Verified 2026-09-07 against keboola/ui, packages/kai-agent-sandbox/skills/semantic-layer-building/SKILL.md
+at main: four write tools (apply_semantic_model / update_semantic_objects / delete_semantic_objects /
+share_semantic_objects), all approval-gated, approval card carries the model name and per-type counts;
+explore-then-draft-then-validate order; project scope by default, `targeted` settable by a project
+admin, `organization` reserved to organization-admin. Kai is not gated by the `semantic-layer`
+project feature (that gates the sidebar UI only); see the enablement callout above. Kai's write
+tools themselves are documented in depth under PRDCT-671. -->
 
 ### In the Keboola UI
 
@@ -84,7 +111,8 @@ history and the lineage graph (AI-3617/3618) remain deliberately left out. -->
 The [Keboola CLI](/cli/commands/) carries a `semantic-layer` command group covering the whole
 lifecycle without an AI in the loop — `build` a model from a list of storage tables, `show`,
 `export`, `diff`, `validate`, `promote` a model between projects, and add or edit individual
-metrics, datasets, relationships, constraints, and glossary terms:
+metrics, datasets, relationships, constraints, and glossary terms. It also reads the model the way
+an assistant does, with `search-context` and `get-context`:
 
 ```bash
 kbagent semantic-layer --help
