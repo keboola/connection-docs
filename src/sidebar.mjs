@@ -637,7 +637,6 @@ export const sidebar = [
           { slug: "management/project/export" },
           { slug: "management/project/migration" },
           { slug: "management/project/delete" },
-          { slug: "management/project/ai-rules" },
           { slug: "management/project/mcp-server" },
         ],
       },
