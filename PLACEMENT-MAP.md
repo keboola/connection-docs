@@ -14,7 +14,9 @@ Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `de
 | **Storage › Storage API** (`/storage/api/`) | Storage owns its API reference + clients. |
 | ~~**CLI › Keboola as Code CLI** (`/cli/keboola-as-code/`)~~ **dropped** | David, 2026-09-02: the 59 legacy CLI pages are **not** ported into help. A move into the tool's own repository was proposed (keboola-as-code#2654) and **rejected by the repo owner on 2026-09-03**, so no documentation destination exists at all: the dev URLs 301 to the repository root, and the pages themselves survive only in developers-docs git history (deletion PR: keboola/developers-docs#417). Known loss, recorded deliberately: end-user installation instructions (brew tap, apt/rpm/apk with GPG keys, WinGet, Chocolatey, Scoop, MSI) exist nowhere else, and 21 of the CLI's 68 embedded help texts are empty — including all six `dbt` and all five `remote workspace` commands.|
 
-## UNSURE (need owner call)
+## Owner calls — topic homes (post-retirement, PRDCT-550)
+
+These no longer gate the dev-domain retirement: the pages land 1:1 at their dev paths (connection-docs#1120, the `/extend/` precedent). Each answer below now means a normal in-help move with a `redirect_from`.
 | page | question |
 |---|---|
 | `/overview/api/` | split: stacks/intro → Core concepts vs per-service catalogue → api.keboola.com redirect. How much survives as a page? |
@@ -32,9 +34,9 @@ Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `de
 |---|---|---|---|---|---|---|
 | `404.md` | `/404.html` | — (site chrome, dies with dev site) | `—` | — | high | NOT MIGRATED — help has its own 404 |
 | `automate/index.md` | `/automate/` | — (landing dies) | `/flows/` | — | med | REDIRECT → /flows/ (automation home) — thin landing |
-| `automate/run-job.md` | `/automate/run-job/` | Core concepts (NEW) | `/concepts/jobs/run-a-job/` | how-to | med | — — UNSURE: alt /management/jobs/run-via-api/ |
-| `automate/run-orchestration.md` | `/automate/run-orchestration/` | Flows | `/flows/run-via-api/` | how-to | med | — |
-| `automate/set-schedule.md` | `/automate/set-schedule/` | Flows | `/flows/set-schedule-api/` | how-to | med | — — UNSURE: alt /management/schedules/; API-driven scheduling |
+| `automate/run-job.md` | `/automate/run-job/` | Developer Reference (moved) | `/automate/run-job/` | how-to | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/concepts/jobs/run-a-job/` |
+| `automate/run-orchestration.md` | `/automate/run-orchestration/` | Developer Reference (moved) | `/automate/run-orchestration/` | how-to | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/flows/run-via-api/` |
+| `automate/set-schedule.md` | `/automate/set-schedule/` | Developer Reference (moved) | `/automate/set-schedule/` | how-to | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/flows/set-schedule-api/` |
 | `cli/commands/ci/index.md` | `/cli/commands/ci/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
 | `cli/commands/ci/workflows/index.md` | `/cli/commands/ci/workflows/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
 | `cli/commands/dbt/generate/env/index.md` | `/cli/commands/dbt/generate/env/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
@@ -175,18 +177,18 @@ Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `de
 | `extend/generic-writer/configuration/configuration.md` | `/extend/generic-writer/configuration/` | Components › Data Destination Connectors | `/components/writers/generic-writer/configuration/` | reference | high | — |
 | `extend/generic-writer/index.md` | `/extend/generic-writer/` | Components › Data Destination Connectors | `/components/writers/generic-writer/` | reference | high | — |
 | `extend/index.md` | `/extend/` | Extending Keboola | `/extend/` | explanation | high | — — section landing |
-| `extend/job-queue/index.md` | `/extend/job-queue/` | Extending Keboola | `/extend/job-queue/` | reference | med | — — UNSURE: could live under Core concepts › Jobs instead |
+| `extend/job-queue/index.md` | `/extend/job-queue/` | Extending Keboola | `/extend/job-queue/` | reference | med | identity, kept under /extend/ per #1046; Core concepts › Jobs remains an option for PRDCT-550 |
 | `extend/publish/checklist.md` | `/extend/publish/checklist/` | Extending Keboola | `/extend/publish/checklist/` | how-to | high | — — marketplace publishing |
 | `extend/publish/index.md` | `/extend/publish/` | Extending Keboola | `/extend/publish/` | how-to | high | — — marketplace publishing |
 | `index.md` | `/` | — (weave done: PR #1022) | `/` | explanation | high | MERGED → help home — home combined in #1022 |
-| `integrate/artifacts/index.md` | `/integrate/artifacts/` | Components › Development | `/components/development/artifacts/` | reference | med | — — UNSURE: artifacts = component-level feature; alt: /storage/files/ |
-| `integrate/artifacts/tutorial.md` | `/integrate/artifacts/tutorial/` | Components › Development | `/components/development/artifacts/tutorial/` | reference | med | — — UNSURE: artifacts = component-level feature; alt: /storage/files/ |
+| `integrate/artifacts/index.md` | `/integrate/artifacts/` | Developer Reference (moved) | `/integrate/artifacts/` | reference | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/components/development/artifacts/` |
+| `integrate/artifacts/tutorial.md` | `/integrate/artifacts/tutorial/` | Developer Reference (moved) | `/integrate/artifacts/tutorial/` | reference | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/components/development/artifacts/tutorial/` |
 | `integrate/data-streams/index.md` | `/integrate/data-streams/` | Storage (weave done: PR #1023) | `/storage/data-streams/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
 | `integrate/data-streams/overview/index.md` | `/integrate/data-streams/overview/` | Storage (weave done: PR #1023) | `/storage/data-streams/reference/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
 | `integrate/data-streams/tutorial/index.md` | `/integrate/data-streams/tutorial/` | Storage (weave done: PR #1023) | `/storage/data-streams/tutorial/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
 | `integrate/database/index.md` | `/integrate/database/` | Components (fold done: PR #1019) | `/components/extractors/database/` | how-to | high | REDIRECT → canonical — SSH-tunnel folded in #1019 |
 | `integrate/index.md` | `/integrate/` | — (landing dies) | `/overview/` | — | med | REDIRECT → /overview/ (or /storage/api/) — thin landing; content already on combined home |
-| `integrate/jobs/index.md` | `/integrate/jobs/` | Core concepts (NEW) | `/concepts/jobs/` | explanation+reference | med | MERGE candidate w/ /management/jobs/ (help = UI how-to) — Jordan: job is a core concept; Queue API detail stays on this page |
+| `integrate/jobs/index.md` | `/integrate/jobs/` | Developer Reference (moved) | `/integrate/jobs/` | explanation+reference | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/concepts/jobs/` |
 | `integrate/mcp.md` | `/integrate/mcp/` | AI (merged: PR #1001) | `/ai/mcp-server/` | — | high | REDIRECT → /ai/mcp-server/ — MCP canonical on help |
 | `integrate/orchestrator/index.md` | `/integrate/orchestrator/` | — (empty stub) | `/flows/` | — | high | REDIRECT → /flows/ — dev page is an empty comment stub |
 | `integrate/storage/api/configurations.md` | `/integrate/storage/api/configurations/` | Storage › Storage API | `/storage/api/configurations/` | reference | high | — |
@@ -201,7 +203,84 @@ Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `de
 | `integrate/storage/r-client.md` | `/integrate/storage/r-client/` | Storage › Storage API clients | `/storage/api/clients/r-client/` | reference | high | — |
 | `integrate/variables/index.md` | `/integrate/variables/` | Components › Variables | `/components/variables/api/` | reference | high | help variables page CANONICAL (UI concept) — dev page = keboola.variables API reference sub-page; section settled by owner (Matyáš 2026-08-04, Jordan 2026-08-05): variables are a base component, so Components, not Transformations — executed in #1051 |
 | `integrate/variables/tutorial.md` | `/integrate/variables/tutorial/` | Components › Variables | `/components/variables/api/tutorial/` | reference | high | help variables page CANONICAL (UI concept) — dev page = keboola.variables API reference sub-page; section settled by owner (Matyáš 2026-08-04, Jordan 2026-08-05) — executed in #1051 |
-| `overview/api/index.md` | `/overview/api/` | FLAG — split | `/concepts/api-basics/` | explanation+index | flag | intro/stacks → Core concepts; per-service list → api.keboola.com — prompt rule: API reference NOT re-homed — redirect to api.keboola.com; intro remains |
-| `overview/encryption.md` | `/overview/encryption/` | Components › Development | `/components/development/encryption/` | reference | med | — — UNSURE: alt Core concepts › security; used by component developers |
+| `overview/api/index.md` | `/overview/api/` | Developer Reference (moved) | `/overview/api/` | explanation+index | flag | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/concepts/api-basics/` |
+| `overview/encryption.md` | `/overview/encryption/` | Developer Reference (moved) | `/overview/encryption/` | reference | med | IDENTITY (2026-09-08): landed 1:1 on help in connection-docs#1120, the /extend/ precedent (#1046). Topic home stays an owner call (PRDCT-550), post-retirement; earlier proposal was `/components/development/encryption/` |
 | `overview/index.md` | `/overview/` | — (weave done: PR #1022) | `/overview/` | explanation | high | MERGED → /overview/ — overview combined in #1022 |
 | `overview/repositories.md` | `/overview/repositories/` | — (killed: PR #1022) | `/overview/` | — | high | REDIRECT → /overview/ — content folded into overview |
+
+
+## Aliases — Jekyll `redirect_from` paths the dev site still honours (26)
+
+Not pages: URL aliases the dev site serves through `jekyll-redirect-from`. Help already resolves every one through `redirect_from` on the canonical page (carried by the phase-1 script); they are listed so the contract — and `--live` on cutover day — covers them. Status `alias`.
+
+| source | old URL | target section | target path | Diátaxis | conf | dedup |
+|---|---|---|---|---|---|---|
+| `extend/component/running/index.md` | `/extend/common-interface/sandbox/` | alias | `/extend/component/running/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/index.md` | `/extend/custom-science/` | alias | `/extend/component/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/index.md` | `/extend/custom-science/development/` | alias | `/extend/component/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/php.md` | `/extend/custom-science/php/` | alias | `/extend/component/implementation/php/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/python.md` | `/extend/custom-science/python/` | alias | `/extend/component/implementation/python/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/tutorial/index.md` | `/extend/custom-science/quick-start/` | alias | `/extend/component/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/r.md` | `/extend/custom-science/r/` | alias | `/extend/component/implementation/r/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/job-queue/index.md` | `/extend/docker-runner/` | alias | `/extend/job-queue/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/processors.md` | `/extend/docker-runner/processors/` | alias | `/extend/component/processors/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/index.md` | `/extend/docker/` | alias | `/extend/component/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/index.md` | `/extend/docker/images/` | alias | `/extend/component/implementation/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/tutorial/index.md` | `/extend/docker/quick-start/` | alias | `/extend/component/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/running/index.md` | `/extend/docker/running/` | alias | `/extend/component/running/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/deployment/index.md` | `/extend/docker/tutorial/automated-build/` | alias | `/extend/component/deployment/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/generic-extractor/configuration/iterations.md` | `/extend/generic-extractor/iterations/` | alias | `/components/extractors/generic-extractor/configuration/iterations/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/generic-extractor/publish.md` | `/extend/generic-extractor/registration/` | alias | `/components/extractors/generic-extractor/publish/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/publish/index.md` | `/extend/registration/` | alias | `/extend/publish/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/publish/index.md` | `/extend/registration/checklist/` | alias | `/extend/publish/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/ui-options/configuration-schema.md` | `/extend/registration/configuration-schema/` | alias | `/extend/component/ui-options/configuration-schema/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/deployment/index.md` | `/extend/registration/deployment/` | alias | `/extend/component/deployment/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/processors.md` | `/integrate/docker-runner/processors/` | alias | `/extend/component/processors/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/data-streams/index.md` | `/integrate/push-data/` | alias | `/storage/data-streams/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/data-streams/overview/index.md` | `/integrate/push-data/overview/` | alias | `/storage/data-streams/reference/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/data-streams/tutorial/index.md` | `/integrate/push-data/tutorial/` | alias | `/storage/data-streams/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/storage/docker-cli-client.md` | `/integrate/storage/php-cli-client/` | alias | `/storage/api/clients/docker-cli/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/jobs/index.md` | `/overview/jobs/` | alias | `/integrate/jobs/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+
+## Cutover runbook — retiring developers.keboola.com (PRDCT-565)
+
+**End state:** the domain is a permanent 301 redirector, content lives on help, the repository is archived. DNS stays (383 files across the `keboola` org, six components in the registry and the outside web link the domain; a dead DNS would break all of it and pass no search signal).
+
+**Preconditions, each checkable from this repo:**
+1. connection-docs#1120 is on `main` — every non-CLI dev URL resolves on help.
+2. developers-docs#417 is merged — the 59 `/cli/**` pages are stubs pointing at the repository.
+3. `npm run build && node scripts/check-redirects.mjs --build` on `main` prints **0 lost**.
+
+**Edge rule — one CloudFront Function (viewer-request) on the distribution in front of `s3://developers.keboola.com` (us-east-1; the AWS account whose keys the developers-docs deploy workflow uses — its repo admins know which):**
+
+```js
+function handler(event) {
+  var req = event.request;
+  var uri = req.uri;
+  // help's /cli/ is kbagent, a different product: legacy Keboola-as-Code readers go to the repository
+  if (uri === '/cli' || uri.indexOf('/cli/') === 0) {
+    return { statusCode: 301, statusDescription: 'Moved Permanently',
+      headers: { location: { value: 'https://github.com/keboola/keboola-as-code' } } };
+  }
+  if (uri.slice(-11) === '/index.html') uri = uri.slice(0, -10);
+  if (uri === '/sitemap.xml') uri = '/sitemap-index.xml';
+  var keys = Object.keys(req.querystring);
+  var qs = keys.length ? '?' + keys.map(function (k) { return k + '=' + req.querystring[k].value; }).join('&') : '';
+  return { statusCode: 301, statusDescription: 'Moved Permanently',
+    headers: { location: { value: 'https://help.keboola.com' + uri + qs } } };
+}
+```
+
+Why a host-swap and not a per-path map at the edge: help already resolves every dev path — identity pages, or `redirect_from` stubs on the canonical page — so the map lives in exactly one place (this file → the TSV) and the edge stays dumb. `/cli/**` is the single carve-out (David Esner / Martin Vaško, 2026-09-03). Fragments survive a 301 client-side.
+
+**Second hop quality.** Help answers non-identity paths with meta-refresh pages today. Search engines handle 301 → meta-refresh, but a 301 → 301 chain is cleaner: `node scripts/check-redirects.mjs --vercel` prints the `redirects` block for `vercel.json`. Wire it in a separate PR, after checking Vercel's per-project redirect limit against the rule count it prints.
+
+**Cutover day:**
+1. Deploy the function, wait for propagation.
+2. `node scripts/check-redirects.mjs --live` — must print ✓ for every row: a 301 off the dev domain, landing on the contract target after following help's own redirects.
+3. Spot-check by hand: `/extend/component/tutorial/`, `/extend/docker/`, `/cli/commands/sync/pull/`, `/integrate/push-data/`, `/`, `/sitemap.xml`.
+4. developers-docs: disable `.github/workflows/main.yml`, replace the README with "moved to help.keboola.com", **archive** the repository. Empty the S3 bucket — nothing serves from it any more.
+5. Google Search Console: *Change of address* from the dev property to help (both must be verified; the dev verification file is `google9cde6c6b9250e5a4.html` in that repo).
+6. Watch 30 days: help 404s under `/extend|/integrate|/overview|/automate` (Vercel logs) — each one is a missing alias, fixed with a `redirect_from`. CloudFront request volume on the dev distribution is the only signal that would ever justify touching DNS.
+
+**Rollback:** remove the function. Until the bucket is emptied, the S3 content serves again with its own meta-refresh stubs.
