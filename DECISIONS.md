@@ -232,12 +232,29 @@ written** (forecast window 2026-09-08 … 09-14) that is the whole answer; the f
   no `BETWEEN` anywhere. The roster is `ROUND(AVG(staff_on_shift))` per `DAYNAME` — exact, because
   the headcount is constant per store and weekday (42 combinations, 0 with two values).
 - output aliases were unquoted, so Snowflake returned `STORE_NAME … SHORT_HANDED` in upper case.
-  Cosmetic; the page's own SQL quotes its aliases.
+  **Not cosmetic, as the next run showed** — see "The output-mapping trap" below. The page's own SQL
+  leaves aliases unquoted too, and says why.
 
 **Product behaviour the pages must state honestly (seen twice, 3 Sep and 8 Sep):** on a
 four-part prompt Kai answers "I'll tackle this in stages", fetches the component schema, and
 stops after the first stage until told to continue. The staged version needed no nudge at all.
 The `ask/` paragraph on "the same request as one prompt" says so instead of promising a one-shot.
+
+**The output-mapping trap (plan-mode run, 2026-09-08, job 102863448):** Kai's second
+transformation quoted its aliases in lower case (`AS "store_name"`) while writing into the
+`staffing_outlook` table the first run had already created with upper-case columns. The job
+failed in 26 s with
+
+> Failed to process output mapping: Failed to load table
+> "out.c-Boolabean-staffing-outlook.staffing_outlook": Some columns are missing in the csv
+> file. Missing columns: STORE_NAME, CITY, … Expected columns: STORE_NAME, CITY, …
+
+The mechanism is not "Snowflake wants upper case" (Kai's reading) but that an **existing Storage
+table's column names must match exactly, case included**, and Snowflake upper-cases unquoted
+identifiers. The reader hits this the first time they edit the SQL and re-run: a change in
+quoting is enough. Kai diagnosed and fixed it unprompted (upper-cased the ten aliases). This is
+the failure mode `transform/` and `check/` carry; the fix is one line — quote consistently or
+not at all — and the message is quoted verbatim so it can be searched.
 
 **Plan mode, measured (staged run with plan mode on, 2026-09-08):** Kai writes a plan file,
 shows "Ready for approval", and after that approval asks for every change exactly as before —
@@ -245,7 +262,19 @@ the load stage took 8 approvals to the control run's 7. Plan mode is a review ga
 approve once. `PathIntro.astro` and `index.mdx` said the opposite; both corrected the same day. A
 second thing seen only in plan mode: Kai handed control back while the load job was still running
 ("Checking status every 2 seconds…" → "What's next?"), so a reader may need to ask for the row
-counts — the pages should not promise the report arrives unprompted.
+counts — the pages should not promise the report arrives unprompted. Only the **first** prompt of
+the chat got a written plan; the forecast, transform and ask prompts ran with the ordinary
+per-change approvals (3, 3, 0). The second plan-mode run ended at 23.7 min with the ask stage
+timed out, for a reason that is mine: Kai's "run the transformation again" card is textually
+identical to the first run's card and the runner skipped it as already approved, so the
+approval expired on Kai's side ("The re-run approval timed out, so I've paused"). Runner fixed;
+the third plan-mode run is the clean figure: **14.3 min, 15 approvals (8 + 3 + 4 + 0), no
+nudge**, all four stages done — against the control run's 14.4 min and 12. The output-mapping
+trap fired again (quoted lower-case aliases into the existing upper-case table), Kai fixed and
+re-ran it unprompted, and the answer came out identical: 42 rows, Brno on Tuesday at 84.4 per
+person. Two of two plan-mode runs hit the trap; the control run, which wrote the table first, did
+not — so the page shows the failure as what happens on a *second* run, which is when a reader
+meets it.
 
 **Measurement notes for table A of the plan:** the chat shows no "Used monthly budget" indicator
 in project 264 any more, so turns consumed could not be logged; approvals were counted only when
