@@ -9,6 +9,10 @@
 // mechanism Michal asked for independently on 2 September ("Mám tam nějaký
 // prompt? Jak to zpracuje to CLI?"). Prompt first, by construction.
 //
+// Plan mode, checked live 2026-09-08 (two staged runs in project 264): it adds ONE approval of
+// the written plan and then asks for every change exactly as before — 8 approvals to the
+// control run's 7. So it is offered here as a review gate, not as a way to approve once.
+//
 // Usage:  <PathIntro />                       — the default: Kai asks for approvals
 //         <PathIntro approvals={false} />     — read-only pages, where it does not
 //         <PathIntro yours="the Google consent screen" />
@@ -39,9 +43,11 @@
         Kai asks before it changes anything: expect one approval dialog per
         object it creates, showing the exact configuration it is about to write.
         Questions that only read do not ask. If confirming each one gets
-        tiring, turn on <strong>plan mode</strong> in the chat's message box — Kai drafts the
-        whole plan and you approve it once — or pre-approve tools in{' '}
-        <a href="/kai/settings/#tool-permissions">tool permissions</a>.
+        tiring, pre-approve tools in{' '}
+        <a href="/kai/settings/#tool-permissions">tool permissions</a>. The chat's{' '}
+        <strong>plan mode</strong> button is a different thing: Kai writes the steps down
+        and asks you to approve the plan before it starts — and then still asks for each
+        change. Use it when you want to read the plan first, not to save clicks.
       </p>
     )
   }

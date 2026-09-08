@@ -96,13 +96,17 @@ see the mechanics. Only two things stay yours either way: creating the project (
 Google authorization in step 4.
 
 Kai asks before it changes anything — expect one approval dialog per object it creates;
-questions that only read do not ask. If confirming each one gets tiring, turn on **plan mode**
-with the button in the chat's message box: Kai drafts the whole plan and you approve it once,
-instead of approving every step. Failing that, **Always allow** and
-[tool permissions](/kai/settings/#tool-permissions) do the same job more bluntly.
+questions that only read do not ask. If confirming each one gets tiring, **Always allow** on a
+dialog and [tool permissions](/kai/settings/#tool-permissions) pre-approve a tool for the rest
+of the chat or the project. The chat's **plan mode** button is a different thing: Kai writes the
+steps down and asks you to approve the plan before it starts — and then still asks for each
+change. Use it when you want to read the plan first.
 {/* Plan mode confirmed live 2026-09-02: the composer carries a button labelled "Enable plan
-mode" (aria-label), alongside "Disable follow mode". The earlier VERIFY asked for the name — this
-is it. Still owed: a description on the kai/ pages, which document neither mode. */}
+mode" (aria-label), alongside "Disable follow mode". What it does was measured on 2026-09-08 in
+two staged runs in project 264: one approval of the written plan, then every per-object approval
+exactly as without it (8 to the control run's 7). The earlier wording promised "approve it once"
+— wrong, corrected here. Still owed: a description on the kai/ pages, which document neither
+mode. */}
 
 The **Kai Agent** button sits in the top bar; an organization admin switches the feature on, and
 Free Plan projects get a monthly message allowance — see

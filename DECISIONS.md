@@ -163,8 +163,21 @@ open-meteo at read time — no authentication — which is what finally makes th
 scheduling step teach something: run it again tomorrow and the answer has moved.
 dltHub pays the same price for the same reason.
 
-**The question is business-shaped and only answerable at the end:**
-*"Should we put an extra person on this weekend?"*
+**The question, after testing it against the data:**
+*"Which day next week will leave a café short-handed?"*
+
+It started as *"should we put an extra person on this weekend?"* — and the data
+said no. Rosters already allow for the weekend (the Prague café goes from three
+people to four), so the weekend is the part the manager has already solved. What
+the roster cannot see is the weather: a 26 °C Monday is riskier than a cool
+Saturday, because nobody staffed up for it. In the forecast tested on 2026-09-03,
+the two stretched days were a Monday and a Tuesday, and the weekend was fine.
+
+Keeping the weekend wording would have produced a guide whose closing question
+answers "no" — so the question changed to fit the data, not the other way round.
+This is also a better demonstration: the insight is that *the roster is built on
+the day of the week and demand is built on the weather*, which is exactly the
+kind of thing you only see once two sources are joined.
 
 Verified in the data before committing to it:
 
@@ -185,6 +198,62 @@ the same processor Kai reached for unprompted in the 2 Sep run.
 
 ---
 
+## 2026-09-08 — The pipeline runs as four prompts, and the numbers match
+
+**Decision:** the section teaches the Boolabean pipeline as four prompts in one Kai chat —
+load, forecast, transform, ask — because that is what was run end to end in project 264 today
+and checked against an offline reference. "Everything in one prompt" stays an experiment
+paragraph, not the spine of the section.
+
+**What ran (control run, plan mode off, 14.4 min, 12 approvals, 0 nudges):**
+
+| stage | minutes | approvals | Kai's report | independent check (Storage API) |
+|---|---|---|---|---|
+| load — `1-load.txt` | 5.6 | 7 (config, 5 rows, run) | stores 6, products 18, sales 9,761, staffing 552, weather_daily 552 | identical |
+| forecast — `2-forecast.txt` | 3.5 | 3 | forecast 42 rows, columns `location_id, time, temperature_2m_max, precipitation_sum` | identical |
+| transform — `3-transform.txt` | 3.7 | 2 (create, run) | `staffing_outlook` 42 rows; most stretched Brno, Tue 2026-09-08, 31.2 °C dry, ~169 units / 2 staff = 84.4 | 42 rows, 42 distinct (store, date), 0 empty cells, 4 short-handed, 32.0–84.4 per person |
+| ask — `4-ask.txt` | 1.3 | 0 (read-only) | "a thin start-of-week roster colliding with warm, dry weather" | — |
+
+Kai's four flagged rows match the offline reference (a Python re-implementation of the same spec,
+run on the same day's forecast) to the decimal: Brno Tue 84.4 and Mon 83.5, Prague Mon 73.0 and Tue 71.3. **On the day this was
+written** (forecast window 2026-09-08 … 09-14) that is the whole answer; the forecast is live, so
+`check/` states the shape — 42 rows, a handful of red days — and not these values.
+
+**What Kai did differently from the plan, and why it stands:**
+
+- open-meteo's preamble: the prompt said "skip the first eight lines"; Kai set `skip-lines: 9`
+  and named the four columns in the manifest instead of reading the header. Same 42 rows, and the
+  names come out without the header's unit suffixes (`temperature_2m_max (°C)` → `temperature_2m_max`).
+  The UI tab can show either; the SQL on page 3 uses the clean names.
+- the transformation reads the source tables by fully qualified name
+  (`"KBC_EUW3_264"."in.c-keboola-ex-http-…"."sales"`) with an **empty input mapping** — the
+  read-only-input behaviour Jordan described on 5 Aug, now observed rather than reported.
+- half-open bands as `CASE WHEN t < 18 … WHEN t < 23 … WHEN t < 28 … ELSE`, twenty `TRY_CAST`s,
+  no `BETWEEN` anywhere. The roster is `ROUND(AVG(staff_on_shift))` per `DAYNAME` — exact, because
+  the headcount is constant per store and weekday (42 combinations, 0 with two values).
+- output aliases were unquoted, so Snowflake returned `STORE_NAME … SHORT_HANDED` in upper case.
+  Cosmetic; the page's own SQL quotes its aliases.
+
+**Product behaviour the pages must state honestly (seen twice, 3 Sep and 8 Sep):** on a
+four-part prompt Kai answers "I'll tackle this in stages", fetches the component schema, and
+stops after the first stage until told to continue. The staged version needed no nudge at all.
+The `ask/` paragraph on "the same request as one prompt" says so instead of promising a one-shot.
+
+**Plan mode, measured (staged run with plan mode on, 2026-09-08):** Kai writes a plan file,
+shows "Ready for approval", and after that approval asks for every change exactly as before —
+the load stage took 8 approvals to the control run's 7. Plan mode is a review gate, not a way to
+approve once. `PathIntro.astro` and `index.mdx` said the opposite; both corrected the same day. A
+second thing seen only in plan mode: Kai handed control back while the load job was still running
+("Checking status every 2 seconds…" → "What's next?"), so a reader may need to ask for the row
+counts — the pages should not promise the report arrives unprompted.
+
+**Measurement notes for table A of the plan:** the chat shows no "Used monthly budget" indicator
+in project 264 any more, so turns consumed could not be logged; approvals were counted only when
+the click removed an enabled button in a card not seen before (the previous runner clicked one
+resolved card 172 times, because approval cards keep their buttons in the chat history).
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
@@ -202,7 +271,7 @@ still block rebuild work.
 | Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
 | Does the Kai **Add Task** menu offer three items or four (is **Build with Kai** in it)? | `automate/index.mdx` | the Kai tab's first instruction. Live check 2026-09-02 confirmed **Modify with Kai** in the flow header; the menu itself did not open to automation |
 | Does `/kai/use-cases/#complex-workflows` cover assembling *existing* configurations into a flow? | `automate/index.mdx` | whether that citation stands — the page documents building pipelines from scratch |
-| Does Kai really build transformations on read-only input, and does that need bucket-ID-qualified table names? | `transform/index.mdx` | the Kai tab's prompt, which uses unqualified names |
+| ~~Does Kai really build transformations on read-only input, and does that need bucket-ID-qualified table names?~~ | closed 2026-09-08 | **Yes, and yes.** The live transformation in project 264 has an empty input mapping and reads `"KBC_EUW3_264"."in.c-keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a"."sales"` by full name — see the 2026-09-08 entry above. |
 | Can Kai traverse every child job of a flow run, or only read one job log? | `check/index.mdx` | one sentence; the prompt is safe either way |
 | Do flow jobs themselves consume credits? | `check/index.mdx` | removed from the page until confirmed — no row for it in `management/project/limits/` |
 | **Time-critical:** `kai/pricing.md` says that from **15 September 2026** Kai moves to PPU credits and the message counter is "replaced" — but `kai/getting-started.md` still states 150 turns/month (50 on PAYG), and the section inherits that number | `project/index.mdx` | the allowance sentence, in 12 days |
