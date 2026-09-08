@@ -49,7 +49,7 @@ API tokens are created
 Automatically created tokens have the lowest possible permissions for their task and also set expiration if possible.
 These are the typical reasons to manually create a new API token:
 
-- You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
+- You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](/storage/api/).
 - You need to limit access to certain data (for example, share a single table) or components.
 
 Although tokens cannot be used to directly log in to the Keboola user interface, they do allow executing almost all 
@@ -61,7 +61,7 @@ token string was revealed to unauthorized persons.
 When creating a new token, the following rules apply:
 
 - Tokens by default give **no access** to any of the Keboola component configurations.
-- Token bearers can only access **permitted** Storage buckets via the [Storage API](http://developers.keboola.com/integrate/storage/) or
+- Token bearers can only access **permitted** Storage buckets via the [Storage API](/storage/api/) or
 [Storage console](https://storage-api-console.keboola.com/). 
 - Tokens **cannot** be used to run any actions in your project. However, they can trigger flows.
 - Tokens **cannot** be used to create other tokens (only a master token can be used to create new tokens).
@@ -162,7 +162,7 @@ your data with selected users, the buckets can be also used for writing;
 people can send data directly to your Keboola project instead of struggling with FTP or e-mail attachments.
 To revoke the access, simply delete or refresh the token.
 
-The token can then be used with the [Storage API](https://developers.keboola.com/integrate/) 
+The token can then be used with the [Storage API](/storage/api/) 
 or [other APIs](https://developers.keboola.com/overview/api/). 
 
 ### Storage Console

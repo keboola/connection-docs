@@ -133,7 +133,7 @@ The bottom right panel shows a list of the configuration versions. Use the list 
 - roll back to an older version.
 
 All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
-The [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/) explains how to work with configurations.
+The [developer guide](/storage/api/configurations/) explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.
 
@@ -332,7 +332,7 @@ Clicking the **Debug mode** link allows you to access the JSON configuration dir
 
 By editing the full JSON configuration, you can set up the component (all options are
 described in the component repository) and the processors (to learn more about processors, 
-see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
+see the [Developers Docs](/extend/component/processors/)).
 
 ![Screenshot - Advanced](/components/configuration-24.png)
 
