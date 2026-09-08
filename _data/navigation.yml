@@ -963,3 +963,25 @@ items:
     items:
       - url: /external-integrations/n8n/
         title: n8n
+
+  # --- Developer reference, moved 1:1 from developers.keboola.com (PRDCT-582). Permanent topic homes are an owner call (PRDCT-550); the group dissolves as they are made. ---
+  - url: /overview/api/
+    title: Developer Reference (moved)
+    items:
+      - url: /overview/api/
+        title: Our APIs
+      - url: /overview/encryption/
+        title: Encryption
+      - url: /integrate/jobs/
+        title: Component Jobs
+      - url: /integrate/artifacts/
+        title: Artifacts
+        items:
+          - url: /integrate/artifacts/tutorial/
+            title: Artifacts Tutorial
+      - url: /automate/run-job/
+        title: Run a Job
+      - url: /automate/run-orchestration/
+        title: Run Orchestration
+      - url: /automate/set-schedule/
+        title: Set Schedule

@@ -773,4 +773,25 @@ export const sidebar = [
       { slug: "external-integrations/n8n" },
     ],
   },
+  {
+    label: "Developer Reference (moved)",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "overview/api" },
+      { slug: "overview/api" },
+      { slug: "overview/encryption" },
+      { slug: "integrate/jobs" },
+      {
+        label: "Artifacts",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "integrate/artifacts" },
+          { slug: "integrate/artifacts/tutorial" },
+        ],
+      },
+      { slug: "automate/run-job" },
+      { slug: "automate/run-orchestration" },
+      { slug: "automate/set-schedule" },
+    ],
+  },
 ];

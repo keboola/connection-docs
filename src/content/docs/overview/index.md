@@ -1,6 +1,9 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+redirect_from:
+    - /integrate/
+    - /overview/repositories/
 ---
 
 

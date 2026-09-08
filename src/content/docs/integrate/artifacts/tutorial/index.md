@@ -1,7 +1,15 @@
 ---
 title: Artifacts Tutorial
 slug: 'integrate/artifacts/tutorial'
+description: "Produce and consume artifacts from a Python transformation step by step, using curl against the Storage and Queue APIs."
 ---
+
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
 
 
 This tutorial will show you how to work with artifacts.
@@ -45,7 +53,7 @@ This file will be then uploaded as "artifact" to File Storage.
 
 3. The file is now visible in File Storage with appropriate tags
 
-   ![Artifacts - File Storage](/integrate/artifacts/artifacts-tutorial-2.png)
+   ![Artifacts - File Storage](/integrate/artifacts/artifacts-tutorial-3.png)
 
 ### 2. Produce & consume artifacts
 

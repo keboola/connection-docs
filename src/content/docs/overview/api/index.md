@@ -1,7 +1,15 @@
 ---
 title: Our APIs
 slug: 'overview/api'
+description: "Where Keboola's public APIs live, how to call them from the API console or Postman, and which ones need a Storage API token."
 ---
+
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
 
 
 All our [Keboola services](/overview/) have a public API on [api.keboola.com](https://api.keboola.com/). We recommend using either the API Console or Postman Client for sending requests to our

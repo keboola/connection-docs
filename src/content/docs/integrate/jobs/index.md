@@ -1,9 +1,17 @@
 ---
 title: Component Jobs
 slug: 'integrate/jobs'
+description: "How asynchronous component jobs are created, queued and polled through the Queue API, with job states and parameters explained."
 redirect_from:
     - /overview/jobs/
 ---
+
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
 
 
 Most operations, such as extracting data or running an application are executed in Keboola as
@@ -175,7 +183,7 @@ When you create a job it is in the `created` state. In a success scenario it wil
  project side. This means that the reasons for waiting jobs lie solely in what jobs are already running in the given project. There are three core reasons for waiting jobs:
  - If you run two jobs of the same configuration, the second one will wait until the first one is finished. This behavior is 
  called "configuration lock" and protects your project from [race conditions](https://en.wikipedia.org/wiki/Race_condition). 
- - Orchestration [phases](/orchestrator/tasks/#organize-tasks). When you run an orchestration, the jobs for all phases are created. Phases that depend on other phases enter the `waiting` state.
+ - Orchestration [phases](/flows/#phases-and-tasks). When you run an orchestration, the jobs for all phases are created. Phases that depend on other phases enter the `waiting` state.
  - Setting parallel limits. If you run a configuration with 10 tables and set parallelism to 2, then 10 jobs will be created, 2 will enter `processing` 
  state and 8 of them will immediately enter the `waiting` state. 
  
@@ -475,7 +483,7 @@ to [live test](/extend/component/deployment/#test-live-configurations) an image.
 ```
 
 The debug mode creates a job that prepares the data folder including the serialized configuration files. Then it compresses the 
-[data folder](/extend/component/running/#preparing-the-data-folder) and uploads it to your project's Files in Storage. This way you will get a snapshot 
+[data folder](/extend/component/running/#preparing-data-folder) and uploads it to your project's Files in Storage. This way you will get a snapshot 
 of what the data folder looked like before the component started. If processors are used, a snapshot of the data folder is created before each processor. After the entire component finishes, another snapshot is made. For example, if you run component A with processor B and C in the after section, you will receive:
 
 - `stage_0` file with contents of the data folder before component A was run

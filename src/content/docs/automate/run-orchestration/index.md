@@ -1,7 +1,15 @@
 ---
 title: Run Orchestration
 slug: 'automate/run-orchestration'
+description: "Start an orchestration or flow job through the API the same way you run a single component configuration."
 ---
+
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
 
 Running an [Orchestration](/orchestrator/) or Flow is in principle same as running 
 a [job](/automate/run-job/). 

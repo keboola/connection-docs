@@ -1,9 +1,17 @@
 ---
 title: Set Schedule
 slug: 'automate/set-schedule'
+description: "Attach one or more time schedules to any configuration through the Scheduler API, beyond what the UI offers for orchestrations."
 ---
 
-In the UI, you can set a time schedule for [orchestration](/orchestrator/running/#automation).
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
+
+In the UI, you can set a time schedule for [orchestration](/flows/flows-legacy/#schedule-and-automate).
 Via the API you can set a time schedule for any [configuration](/components/) or even multiple 
 schedules for a single configuration.
 

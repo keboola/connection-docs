@@ -1,14 +1,22 @@
 ---
 title: Artifacts
 slug: 'integrate/artifacts'
+description: "What artifacts are, the extra files a component produces or consumes, and how they pass between jobs in a project. Preview feature."
 ---
+
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
 
 
 *Note: This is a preview feature and as such may change considerably in the future. The project must have an `artifacts` feature enabled.*
 
 **Artifacts** are additional files that can be produced or consumed by a [component](/extend/component). 
 
-See [Tutorial](/integrate/artifacts/tutorial) for step-by-step example.
+See [Tutorial](/integrate/artifacts/tutorial/) for step-by-step example.
 
 ## Introduction
 In some cases it's useful if a component not only extracts, transforms or uploads data, but also generate some other output, metadata or other runtime-discovered data.

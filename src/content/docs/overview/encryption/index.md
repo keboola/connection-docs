@@ -1,7 +1,15 @@
 ---
 title: Encryption
 slug: 'overview/encryption'
+description: "How the Encryption API protects sensitive configuration values, what it can encrypt, and why nothing outside a running component can decrypt them."
 ---
+
+:::note[Moved from developers.keboola.com]
+This page came here from the developer documentation unchanged and keeps its original
+address for now. When it gets a permanent place in these docs, this URL will redirect
+there, so links to it keep working.
+:::
+<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
 
 
 Many [Keboola components](/overview/) use the Encryption API to encrypt sensitive values
@@ -103,7 +111,7 @@ The `Content-Type` header in the request differentiates whether the body is trea
 ### Encryption Parameters
 The Encryption API accepts the following **optional** parameters:
 
-- `componentId` --- ID of a [Keboola component](/extend/component/tutorial/#creating-a-component),
+- `componentId` --- ID of a [Keboola component](/extend/component/tutorial/#creating-component),
 - `projectId` --- ID of a Keboola project,
 - `configId` --- ID of a component configuration, and
 - `branchType` --- Branch type --- either `default` (meaning the default production branch) or `dev` (meaning any development branch other than the production).
@@ -134,7 +142,7 @@ This cipher type helps encrypt information shared across multiple components, e.
 The following rules apply to all ciphers:
 
 - Providing only a `configId` without a `projectId` is not allowed. Similarly, providing only `branchType` without `projectId` is also not allowed.
-- Cipher decryption is only possible in the [region](/overview/api/#regions-and-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
+- Cipher decryption is only possible in the [region](/overview/api/#stacks-and-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
 - There is no decryption API; the cipher is decrypted internally before a component is run.
 - Ciphering a value that is already encrypted does not change its encryption.
 - There is no way to retrieve the component, project, configuration ID, or branch type from the cipher.
