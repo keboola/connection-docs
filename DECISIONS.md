@@ -375,6 +375,29 @@ captures are Google's screens and are unaffected.
 
 ---
 
+## 2026-09-09 — The flow has three phases, and Kai set its schedule
+
+**Decision:** `automate/` teaches a three-phase flow: the two HTTP configurations in parallel, then
+the transformation, then the data app redeploy (with the Sheets destination alongside it for
+readers who took that side trip). Schedule 06:00 Europe/Prague, before the first café opens.
+
+**Observed:** Kai built exactly that from the prompt on the page (flow `01m23dcqs9j2gw0q9z8y25j9v2`,
+three approvals: create, update, run), named the phases itself ("Extract source data", "Build
+staffing outlook", "Redeploy data app"), and created a real Scheduler configuration
+(`0 6 * * *`, Europe/Prague, enabled). That closes the VERIFY on whether Kai can set a schedule:
+it can, when asked. Notifications were not asked of it and the page keeps them manual.
+
+**First run:** phase 1 success in 121 s (the sales configuration fans out into a job per row),
+phase 2 success in 41 s, phase 3 error after 282 s: the data app deploy failed with "Internal
+Server Error occurred." The run is kept as the worked example on `check/`: a red run whose earlier
+phases did their work. What the failure means for the app page is recorded separately once the
+retry is in.
+
+**Screenshots:** all nine automate captures and the All Runs capture show the previous flow;
+MISSING.md carries the reshoot.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
@@ -386,7 +409,7 @@ still block rebuild work.
 | Can Kai create a project? | `project/index.mdx` | page 1's Kai coverage |
 | Does the Free Plan include data apps? | `app/index.mdx` | whether the app step needs "skippable" framing |
 | ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
-| Can Kai set a schedule and notifications? | `automate/index.mdx` | how far the Kai tab reaches on page 6 |
+| ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
 | ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
 | Is the monthly Kai allowance per project or per organization? | `project/index.mdx` | the pricing guardrail wording |
 | Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |

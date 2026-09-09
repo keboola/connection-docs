@@ -1,7 +1,7 @@
 ---
 title: 'Make it run every morning'
 slug: 'getting-started/automate'
-description: 'Wire your connectors and transformation into a single flow, run its tasks in parallel where possible, give it a schedule, and get notified when it fails.'
+description: 'Wire your two connectors, the transformation and the app into a single flow, run the two loads in parallel, give it a 06:00 schedule, and get notified when it fails.'
 redirect_from:
   - /tutorial/automate/
 ---
@@ -13,85 +13,80 @@ import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
 <PageMeta genre="Tutorial" minutes="15" />
 
-Your answer is true this morning, because you ran every step by hand. Tomorrow it is a
-screenshot. A **flow** chains your configurations in the order each one needs the last and runs
-them on a schedule, so the result keeps up with the data without you.
+Your table is true this morning, because you ran every step by hand. Tomorrow the forecast has
+moved on and the table has not. A **flow** chains your configurations in the order each one needs
+the last and runs them on a schedule, so the outlook is rebuilt before the first café opens,
+without you.
 
 **Where you are:** the pieces work individually, each run by hand. **When you finish:** one flow
 that runs them in order every morning and emails you when it breaks.
 
-<PathIntro yours="nothing — but running, scheduling and notifications come after the tabs and are the same either way" />
+<PathIntro yours="nothing on the canvas; notifications come after the tabs and are the same either way" />
 
-{/* Tutorial-type page. Ordinal removed 2026-09-02 (see DECISIONS.md). 2026-08-25: dataset swapped to the octopus atlas (PRDCT-487
-arc rework); the whole flow was then built, run and scheduled live in 264 (2026-08-25/26), and all
-screenshots reshot against it on 2026-08-27 — including the third (Google Sheets) phase, now that
-the OAuth exists. The captures show the finished flow with renamed phases (Extract/Transform/Load);
-fresh phases are labelled "Phase 1/2/...", which the italic note under step 4 covers. UI mechanics
-walked live in 264 on 2026-08-04 and re-checked 2026-08-27: the + between phases adds a PHASE, not
-a task; the Builder needs an explicit Save before Run flow is enabled; scheduling is Schedules tab >
-Create Schedule > Set Up Schedule, NOT "Set Schedule" as /flows/ still says; the Notifications tab
-edits in place with Success/Errors/Processing cards and has no "Edit Notifications" button and no
-Warnings card, contrary to /management/notifications/. Create Flow now opens a chooser
-("Get your data connected!") — see the VERIFY on the first step below. NOTE 2026-09-02: the
-closing section that used to live here ("Ask it the question you started with") moved to
-getting-started/ask/ — its Kai grounding and re-derived numbers travelled with it. The rest of
-this comment still applies to this page. Formerly documented here and kept for provenance: it was
-grounded in
-/kai/ (Query databases, calculate metrics), /kai/use-cases/#data-exploration and
-/kai/settings/#tool-permissions (read-only tools default to Always allow); its numbers are
-re-derived from public/getting-started/*.csv (North Atlantic 2,632 sightings = 26%, 50 distinct
-species; deepest 4,838 m Grimpoteuthis challengeri, abyssal). The deals-era predecessors of these
-prompts were run against live Kai in 264 on 2026-08-18 with no approval dialog — read-only tools
-ran unprompted, which grounds the read-only sentence below; the octopus prompts themselves pend
-the live re-run. */}
+{/* Tutorial-type page. 2026-09-09: dataset swapped to Boolabean; the flow was built live in
+project 264 by Kai from the prompt in the Kai tab (flow 01m23dcqs9j2gw0q9z8y25j9v2, 3 approvals:
+create, update with the schedule, run). Kai named the phases "Extract source data" / "Build
+staffing outlook" / "Redeploy data app", put the two HTTP configurations in phase 1, and created a
+real Scheduler configuration (cron "0 6 * * *", timezone Europe/Prague, enabled) — which closes
+the VERIFY on whether Kai can set a schedule: yes. Notifications were not asked of Kai and stay
+manual on this page. First run (job 103117022): phase 1 success in 121 s (the sales configuration
+fans out into one job per row), phase 2 success in 41 s, phase 3 (the data app deploy) error
+"Internal Server Error occurred." after 282 s; total 460 s. See DECISIONS.md 2026-09-09 for what
+that means for the app page. UI mechanics walked live in 264 on 2026-08-04 and re-checked
+2026-08-27: the + between phases adds a PHASE, not a task; the Builder needs an explicit Save
+before Run flow is enabled; scheduling is Schedules tab > Create Schedule > Set Up Schedule, NOT
+"Set Schedule" as /flows/ still says; the Notifications tab edits in place with
+Success/Errors/Processing cards and has no "Edit Notifications" button and no Warnings card,
+contrary to /management/notifications/. Create Flow opens a chooser ("Get your data connected!").
+Screenshots 01–09 show the previous sample's flow (phases renamed Extract/Transform/Load); phase 2
+reshoots them from "Boolabean morning outlook". */}
 
 <Prereqs needs={['project']}>
   <li>
-    The connector configuration from <a href="/getting-started/load/">Get your data in</a>.
+    The two connector configurations from <a href="/getting-started/load/">Get your data in</a>.
   </li>
   <li>
     The transformation from <a href="/getting-started/transform/">Transform data</a>.
   </li>
   <li>
-    Optionally the destination from{' '}
-    <a href="/getting-started/write/">Send a table to Google Sheets</a> — without it the flow has
-    two phases instead of three, which is still a real pipeline.
+    Optionally the app from <a href="/getting-started/app/">Put it in front of someone</a> and the
+    destination from <a href="/getting-started/write/">Send a table to Google Sheets</a>. Without
+    them the flow has two phases instead of three, which is still a real pipeline.
   </li>
 </Prereqs>
 
 ## Phases and tasks
 
-A flow is a list of **phases**. Each phase holds one or more **tasks** — a component
-configuration to run, a notification to send, a variable to set.
+A flow is a list of **phases**. Each phase holds one or more **tasks**: a component configuration
+to run, a notification to send, a variable to set.
 
 - **Tasks inside one phase run in parallel.**
 - **Phases run one after another**, and the flow only moves on when a phase is finished.
 
 That is the whole model, and it makes the ordering obvious: things that can happen at the same
 time go in one phase; things that depend on each other go in separate phases. Your pipeline is
-two phases — load, then transform — because the transformation needs the tables before it can
-join them. If you also took the [spreadsheet side trip](/getting-started/write/), delivery is a
-third phase, for the same reason: it needs the joined table before it can send it.
+three phases. The two connectors do not need each other, so they share phase 1 and fetch at the
+same time. The transformation needs both of their tables, so it is phase 2. The app reads the
+table the transformation writes, so redeploying it is phase 3, and if you took the
+[spreadsheet side trip](/getting-started/write/), its destination sits in phase 3 as well, for the
+same reason.
 
-Each phase here holds a single task, so nothing runs in parallel yet. Parallelism shows up the
-moment you have a second source: two connectors both go in phase 1 and run at the same time.
+Inside the sales configuration the five files are already fetched by one job. Row-based components
+like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel), and in **Jobs**
+you will see that one task fan out into a job per row.
 
-Inside your HTTP configuration the four tables are already fetched by one job — row-based
-components like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel).
+To add a second task to a phase that already has one, hover the phase and click the **+** in the
+small toolbar that appears on its top edge. It opens the same **Add Task** menu as an empty canvas
+(**Component**, **Notification**, **Variable**), scoped to that phase. Do not confuse it with the
+**+** *below* a phase, which starts a new phase instead. That toolbar belongs to the phase; the one
+that appears on the card itself is the task's, and carries **Run task** and its settings.
+{/* Walked live in project 264 on 2026-08-19 in the previous tutorial flow builder: the phase's
+own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification / Variable.
+Nothing was saved. The pre-migration page said to drag the second task into the "Step 1" box;
+that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. */}
 
-To add that second task to a phase that already has one, hover the phase and click the **+** in
-the small toolbar that appears on its top edge — it opens the same **Add Task** menu as an empty
-canvas (**Component**, **Notification**, **Variable**), scoped to that phase. Do not confuse it
-with the **+** *below* a phase, which starts a new phase instead. That toolbar belongs to the
-phase; the one that appears on the card itself is the task's, and carries **Run task** and its
-settings.
-{/* Walked live in project 264 on 2026-08-19 in the deals-era tutorial flow builder: the
-phase's own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification /
-Variable. Nothing was saved. The pre-migration page said to drag the second task into the "Step 1"
-box — that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. */}
-
-Flows can also branch on what happened: retry a task, take a different path on failure, end
-early. That is [conditions](/flows/#conditions), and you need none of it yet.
+Flows can also branch on what happened: retry a task, take a different path on failure, end early.
+That is [conditions](/flows/#conditions), and you need none of it yet.
 
 {/* VERIFY(owner): live check 2026-09-02 in project 264 confirmed **Modify with Kai** in the flow
 header (it is not only a data-app control). NOT confirmed, and asserted below: that **Build with
@@ -109,26 +104,33 @@ Builder in 264 and correct or flag. */}
 Building a pipeline out of configurations you already have is a documented Kai job
 ([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Builder has it wired in:
 **Build with Kai** sits in the **Add Task** menu on an empty canvas, and **Modify with Kai** in the
-flow's header once it has tasks.
+flow's header once it has tasks. The same request works from **Kai Agent** in the top bar, which
+is where this one was run:
 
 ```text
-Create a flow called "[TUTORIAL] Octopus pipeline" that runs my "[TUTORIAL] Octopus sightings"
-HTTP configuration first, then the "Octopus atlas" transformation — two phases, one task each,
-in that order.
+Create a flow called "Boolabean morning outlook" with three phases, in this order:
+1. Phase 1 runs the two HTTP data source configurations "Boolabean sales" and "Boolabean
+   forecast" in parallel.
+2. Phase 2 runs the transformation "Boolabean staffing outlook".
+3. Phase 3 redeploys the data app "Staffing Outlook Grid" so it shows the new table.
+Then give the flow a schedule: every day at 06:00 Europe/Prague. Then run the flow once now and
+tell me whether every phase succeeded and how long the run took.
 ```
 
-If you also took the [spreadsheet side trip](/getting-started/write/), add its destination as a
-third phase: `…then the "[TUTORIAL] Octopus atlas to Sheets" destination — three phases, one task each, in that order.`
+Leave out the third phase if you skipped the app; add `and the "Boolabean outlook to Sheets"
+destination` to it if you took the spreadsheet side trip. Expect three approvals: the flow, the
+schedule, the run.
 
-**Check:** the canvas shows **separate phases**, not several tasks in one. Each step needs the
-previous one's output, so the split is the whole point, for the reason the section above just
-gave. If it came out as one phase, the fix is the one the numbered steps use — switch to the
-**Do it yourself** tab: the **+** below a phase starts a new phase — add the later tasks there and remove them from the first.
+**Check:** the canvas shows **three separate phases**, not several tasks in one, with the two
+connectors side by side in the first. Each later phase needs the previous one's output, so the
+split is the whole point. If it came out as one phase, the fix is the one the numbered steps use:
+switch to the **Do it yourself** tab, where the **+** below a phase starts a new phase, and move
+the later tasks there. Then open the flow's **Schedules** tab: the schedule Kai set is there, with
+its timezone, and can be paused with its toggle.
 
-Set the **schedule** and the **notifications** yourself afterwards, in the flow's own **Schedules**
-and **Notifications** tabs — the sections below the tabs. Both
-are two clicks, and they are the part people forget exists — a flow nobody scheduled and nobody
-gets told about is just a button.
+Kai set the schedule because the prompt asked for it. **Notifications** are still yours, in the
+flow's own tab below; they are two clicks, and they are the part people forget exists. A flow
+nobody gets told about is just a button.
 
 </TabItem>
 <TabItem label="Do it yourself">
@@ -137,8 +139,8 @@ gets told about is just a button.
 
 1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
    **Conditional Flows**, which is what these screenshots show. Click **Create Flow**; on the
-   screen that opens, take **Build It Yourself** — the prompt field above it is the Kai path
-   from the other tab. Name the flow `[TUTORIAL] Octopus pipeline` and add a description.
+   screen that opens, take **Build It Yourself**. The prompt field above it is the Kai path from
+   the other tab. Name the flow `Boolabean morning outlook` and add a description.
 
    ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
 
@@ -152,93 +154,101 @@ gets told about is just a button.
 
    ![Screenshot - The Add Task menu](/getting-started/automate/02-add-task.png)
 
-3. A component picker opens, listing what the project has, grouped by component with each
-   one's configurations — pick **HTTP**, then the `[TUTORIAL] Octopus sightings` configuration.
-   It drops onto the canvas as a task inside a box labelled **Phase 1**.
+3. A component picker opens, listing what the project has, grouped by component with each one's
+   configurations. Pick **HTTP**, then the `Boolabean sales` configuration. It drops onto the
+   canvas as a task inside a box labelled **Phase 1**.
 
    ![Screenshot - Pick the component and configuration](/getting-started/automate/03-select-component.png)
 
-4. Click the **+** below Phase 1. That is the control that starts a **new phase** — the plus
-   between phases adds a phase, not a task to the one above it. Add the
-   `Octopus atlas` transformation there. Being in a later phase is what guarantees
-   the tables have landed before the SQL runs.
+4. Hover **Phase 1** and click the **+** in the toolbar on its top edge, the one that adds a task
+   *to this phase*. Pick **HTTP** again, then `Boolabean forecast`. The two connectors now sit side
+   by side and will run at the same time.
+
+5. Click the **+** *below* Phase 1. That is the control that starts a **new phase**. Add the
+   `Boolabean staffing outlook` transformation there. Being in a later phase is what guarantees
+   both tables have landed before the SQL runs.
 
    ![Screenshot - A second phase](/getting-started/automate/04-second-phase.png)
 
-   *The captures on this page show the finished flow, where the phases have been renamed —
-   **Extract**, **Transform**, **Load**. Yours start life as **Phase 1**, **Phase 2**, … until
-   you rename them.*
+   *The captures on this page show a finished flow whose phases have been renamed. Yours start
+   life as **Phase 1**, **Phase 2**, … until you rename them.*
 
-5. Two phases are the pipeline. If you also took the
-   [spreadsheet side trip](/getting-started/write/), repeat once more for a third phase holding
-   its Google Sheets destination.
+6. If you built the app, click the **+** below Phase 2 and add the `Staffing Outlook Grid` data
+   app to the new phase; a data app is a component like the others and appears in the same picker.
+   If you took the [spreadsheet side trip](/getting-started/write/), its destination goes into
+   this phase too.
+   {/* VERIFY(owner): the data app task was added by Kai through the API in the live build; how
+   the component picker groups data apps (under Apps, or by component name) was not walked. The
+   task exists in the flow as keboola.data-apps / 01m23crd87d02y8gd0q8499x67. */}
 
-6. Click **Save**. The Builder keeps your changes as a draft until you do — **Save** and
-   **Reset** only appear while there are unsaved changes, and **Run flow** stays disabled until
-   you save.
+7. Click **Save**. The Builder keeps your changes as a draft until you do. **Save** and **Reset**
+   only appear while there are unsaved changes, and **Run flow** stays disabled until you save.
 
-You now have two phases: the load, then the transformation — three if you added the delivery.
+You now have three phases: the two loads, then the transformation, then the app.
 
 ![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
-
-
 
 </TabItem>
 </Tabs>
 
 :::note[Clicking a task opens its settings]
 Worth knowing early: selecting a task gives you **Edit Configuration**, **Run rows** (for
-row-based components like your HTTP connector, so a flow can run a subset of rows), **Retry
-After Failure**, **Delay Before Start** — and **Continue on Failure**, which reads *Handled via
+row-based components like your HTTP connector, so a flow can run a subset of rows), **Retry After
+Failure**, **Delay Before Start**, and **Continue on Failure**, which reads *Handled via
 Conditions*, because in Conditional Flows that behaviour comes from
 [conditions](/flows/#conditions) rather than a toggle.
 :::
 
 :::note[If you took the connector side trips]
-If you also added the Google Sheets or database connector, put them in the first phase
-alongside the HTTP configuration — that is where the parallelism above becomes real. Then make
-the transformation read from the tables those connectors produce, since they land in their own
+If you also added the Google Sheets or database connector, put them in the first phase alongside
+the two HTTP configurations; that is the same parallelism, with a third source. Then make the
+transformation read from the tables those connectors produce, since they land in their own
 buckets: on a hand-built transformation, repoint its **input mapping**; on a Kai-built one there
-is no input mapping — re-prompt Kai to include the new tables. A flow that runs the right
+is no input mapping, so re-prompt Kai to include the new tables. A flow that runs the right
 components against the wrong inputs succeeds and produces nothing useful.
 :::
 
 ## Run it
 
-If **Run flow** is disabled, the Builder is still holding your changes as a draft — click
-**Save** first. That applies however the flow got built, including when Kai built it for you.
+If **Run flow** is disabled, the Builder is still holding your changes as a draft: click **Save**
+first. That applies however the flow got built, including when Kai built it for you.
 
 Click **Run flow** and confirm with **Run**. A *Conditional Flows job has been scheduled*
 notification appears with a **Show job** link, and while the run is in progress the header offers
 **Terminate flow**.
 
 Every task creates its own job, so **Jobs** tells you exactly which step failed if one does, and
-the flow's own **All Runs** tab shows each run with its phases.
+the flow's own **All Runs** tab shows each run with its phases. Expect the loads to take a couple
+of minutes and the transformation under one; the app phase is the slow one, because a deploy
+builds and starts a container.
 
 ## Set a schedule
 
-Open the flow's **Schedules** tab and click **Create Schedule**. Choose **Once a day** — that
-matches the daily pipeline this guide set out to build. The other predefined intervals are **Every
-15 minutes**, **Every hour**, **Once a week** and **End of month**, or set your own under **Set Your
-Own** (every day/week/month, at an hour and minute you pick). Then click **Set Up Schedule**.
+*Coming from the Kai tab? The schedule is already there; open the tab to see it, and skip to
+notifications.*
+
+Open the flow's **Schedules** tab and click **Create Schedule**. The predefined intervals are
+**Every 15 minutes**, **Every hour**, **Once a day**, **Once a week** and **End of month**; for a
+fixed hour use **Set Your Own** (every day/week/month, at an hour and minute you pick) and set
+06:00, before the first café opens. Then click **Set Up Schedule**.
 
 ![Screenshot - Create a schedule](/getting-started/automate/06-create-schedule.png)
 
 The schedule appears in the tab with a toggle, so you can pause it without deleting it, and the
 tab shows a count. A flow can hold **several** schedules: they work independently, and the flow
-runs whenever any of them fires. The schedule I set showed as `At 08:45, every day (UTC)`, so
-check the timezone the list displays before relying on it.
+runs whenever any of them fires. Check the timezone the list displays before relying on it; a
+schedule set by hand may show in UTC, and 06:00 UTC is 08:00 in Prague in summer.
 
 ![Screenshot - The schedule](/getting-started/automate/07-schedule-set.png)
 
 If you share a stack with other projects, scheduling slightly off the hour avoids the busiest
-moments. A schedule can also be driven by a table changing rather than a clock — see
+moments. A schedule can also be driven by a table changing rather than a clock; see
 [Schedule and Automate](/flows/#schedule-and-automate).
 
 ## Get told when it breaks
 
 An automated pipeline that fails silently is worse than a manual one. Open the flow's
-**Notifications** tab — there is nothing to click into, you edit it in place. Three cards:
+**Notifications** tab; there is nothing to click into, you edit it in place. Three cards:
 
 | Card | Fires when |
 |---|---|
@@ -246,9 +256,8 @@ An automated pipeline that fails silently is worse than a manual one. Open the f
 | **Errors** | the flow finishes with an error |
 | **Processing** | the job runs longer than usual, by a percentage you set |
 
-Each takes **Email** addresses (pick colleagues or type any address) or a **Webhook** URL. Fill
-in **Errors** at minimum — on a scheduled production flow that is the one setting nobody should
-skip.
+Each takes **Email** addresses (pick colleagues or type any address) or a **Webhook** URL. Fill in
+**Errors** at minimum; on a scheduled production flow that is the one setting nobody should skip.
 
 ![Screenshot - Notifications](/getting-started/automate/08-notifications.png)
 
@@ -259,9 +268,13 @@ are enough here.
 
 ## Check it worked
 
-The **Schedules** tab should show a count, and the flow's **All Runs** tab a run with status
-**Success** — your name against a manual run, *scheduled run* against the automatic one.
+The **Schedules** tab should show a count, and the flow's **All Runs** tab a run, with your name
+against a manual run and *scheduled run* against the automatic one.
 
-Tomorrow morning there will be a second run you did not start. Reading a run in detail, the job
-topology behind it, and the failures worth knowing are on
-[Check it worked](/getting-started/check/).
+A run can end red and still have done most of its work. Phases run in order, so when the app phase
+fails, the two data phases before it have already succeeded and `staffing_outlook` has already
+been rebuilt; the run detail shows exactly which phase stopped. That is the first thing to read
+when the Errors email arrives, and [Check it worked](/getting-started/check/) walks through it.
+
+Tomorrow morning there will be a second run you did not start, on a forecast that has moved by a
+day.
