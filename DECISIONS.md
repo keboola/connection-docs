@@ -304,6 +304,32 @@ phase-2 clip lands.
 
 ---
 
+## 2026-09-09 — The forecast is a second configuration, and by hand it is JSON
+
+**Decision:** `load/` builds two HTTP configurations: `Boolabean sales` with five rows for the
+static files, and `Boolabean forecast` with one row for the open-meteo URL. The Kai tab is two
+prompts, the click-through tab finishes the forecast row in the **Code Editor**.
+
+**Why two:** the forecast lives on another host, so it cannot share the base URL, and the flow on
+page 5 wants to refresh it every morning while the history stays put. Kai split it the same way
+unprompted in all three runs.
+
+**Why JSON:** the visual row form has no field for skipping the seven metadata lines and the blank
+line before open-meteo's header. Its **Header & Primary Key** section offers *Read the header from
+the file(s) header*, *Set Header* and a primary key, nothing about leading lines (form read live
+in project 264, 2026-09-09). The skip needs the `keboola.processor-skip-lines` processor, and a row
+carrying it opens in the code editor only: the **Visual Editor** button is disabled with the
+tooltip "Can't close the code editor, the configuration is not compatible. Revert your changes to
+allow switching back to the visual editor." The page shows the exact `processors` block Kai wrote
+and says the disabled button is expected, rather than pretending the form can do it.
+
+**Nine, not eight:** Kai skipped the header too and named the columns in the manifest, so the
+columns come out as `temperature_2m_max` instead of the header's `temperature_2m_max (°C)`. The
+page teaches that version and names the alternative (8 with *Read the header*) in "If it goes
+wrong", with its symptom.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

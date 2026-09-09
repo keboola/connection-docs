@@ -48,6 +48,7 @@ not yet done).
 
 | What | Where it was | Why it is gone |
 |---|---|---|
+| The OBIS / WoRMS provenance paragraph and the "every octopus in this data is real" line | `load/index.mdx` | Retired with the octopus dataset (DECISIONS 2026-09-03). The new sample is declared fictional on the page in one sentence; the only real source is the live forecast, and that is said too. |
 | The hub's hero clip `map-tour.mp4` (octopus tour, 25 s) and its poster | `index.mdx` | The sample world changed on 2026-09-03; a clip answering the old question under the new text would mislead. Phase 2 re-shoots it from the live pipeline in project 264. Until then the "What you will build" table carries Jordan's first-screen requirement. Tracked in MISSING.md. |
 | "No Kai path here" call-out and the project page's own `PageMeta` (5 min) | `project/index.mdx` | The step is now a section of the hub; its five minutes fold into the hub's total, to be re-measured in the phase-3 stopwatch pass. |
 
