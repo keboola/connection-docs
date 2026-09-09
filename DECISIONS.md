@@ -330,6 +330,32 @@ wrong", with its symptom.
 
 ---
 
+## 2026-09-09 — Transform data keeps its title, and its SQL was run in the shape the page shows
+
+**Title:** stays *Transform data*. The plan floated *Combine it with data you don't have* for this
+page; dropped, because Jordan asked for exactly *Transform data* on 21 Aug after finding the
+previous clever title confusing. A second clever title is not the fix for a confusing one.
+
+**SQL:** the Snowflake block on the page is not Kai's query copied out. Kai built on read-only
+input with fully qualified table names, which is not what a reader with an input mapping types. The
+page's block uses the mapped names (`sales`, `weather_daily`, `staffing`, `stores`, `forecast`),
+quoted identifiers and readable band labels, and it was run in that exact form through a temporary
+transformation in project 264 with that exact input mapping (job 103114885, 61 s, then deleted
+along with its bucket): 42 rows, 42 distinct (store, date), 0 empty cells, 4 short-handed, top row
+Brno / Tue / 84.4, identical to Kai's output and to the offline reference. The BigQuery block is a
+translation and carries a `VERIFY(owner)`; MISSING.md lists the run.
+
+**Case convention:** the page quotes its output aliases, so the table gets lower-case columns. The
+Kai runs did the opposite (unquoted → upper case), which is how the output-mapping trap fired on
+8 September. The page names the trap by its exact error text in "If it goes wrong" and says it
+happens in both directions: Kai first, then hand-written, or the reverse.
+
+**Structural checks instead of numbers:** the check section asks for 42 rows, no repeated (café,
+date), and a *few* flagged rows, with "two to eight is usual, zero in a wet week is right" in place
+of a count. The day-of-writing values live in a comment and here, not in the reader's text.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
