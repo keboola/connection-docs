@@ -17,7 +17,7 @@ either starts or waits in the queue until it can. Because the execution is async
 with jobs through the API always means two steps: create the job, then wait for it to finish.
 
 The API for that is the [Queue API](https://api.keboola.com/?service=job-queue). It creates,
-terminates and lists jobs. Every component sets its own upper limits on how long a job may run and
+terminates and lists jobs; the service itself is described in [Job Queue](/extend/job-queue/). Every component sets its own upper limits on how long a job may run and
 how much memory it may use; those limits are a safeguard, set by the component developer.
 
 ## Run a job
@@ -33,7 +33,7 @@ config: 493493
 ```
 
 To list components and their configurations through the API instead, call
-[GET /v2/storage](https://api.keboola.com/?service=storage#get-/v2/storage). Each component
+[GET /v2/storage](https://api.keboola.com/?service=storage). Each component
 in the response carries an `id` and a `configurations` array whose items carry their own `id`.
 
 Then create a [Storage API token](/management/project/tokens/) for the calls. Make it as narrow as
@@ -81,9 +81,11 @@ The job starts on its own. The field you need next is `url`: it is the resource 
 
 ### Run a flow
 
-A flow runs the same way. The only difference is the component: `keboola.flow` for flows,
-`keboola.orchestrator` for legacy orchestrations. Both are their own components in the platform;
-the API call shape is identical, with the flow's configuration ID in `config`.
+A flow runs the same way. The only difference is the component: `keboola.flow` for
+[Conditional Flows](/flows/), `keboola.orchestrator` for [Legacy Flows](/flows/flows-legacy/). They
+are two separate components in the platform; the API call shape is identical, with the flow's
+configuration ID in `config`. The component line in the flow's own job detail (see
+[Run a job](#run-a-job)) tells you which one you have.
 
 ```bash
 curl --location --request POST 'https://queue.keboola.com/jobs' \
@@ -107,11 +109,11 @@ keep polling until `isFinished` is `true`, or until `status` is one of the final
 
 ## Run a debug job
 
-A debug job does everything a normal job does up to the point where the component runs, and
-uploads snapshots of the [data folder](/extend/component/running/#preparing-data-folder) to your
-project's Files instead of writing any output to Storage. Use `debug` as the mode; optionally pin
+A debug job runs the component like a normal job, but uploads snapshots of the
+[data folder](/extend/component/running/#preparing-data-folder) to your project's Files and never
+writes the component's output to Storage. Use `debug` as the mode; optionally pin
 the component version with `tag` to [live-test](/extend/component/deployment/#test-live-configurations)
-an image:
+an image. Send it to the same `POST /jobs` as above:
 
 ```json
 {
@@ -162,13 +164,16 @@ drive jobs are below.
 
 ![Job state transitions](/management/jobs/api/states.png)
 
+The diagram predates `warning`, which a container job reaches when one of its child jobs fails.
+
 A job enters `waiting` only for reasons inside your project, that is, because of what else is
 running there:
 
 - Two jobs of the same configuration: the second waits for the first. This *configuration lock*
   protects the project from [race conditions](https://en.wikipedia.org/wiki/Race_condition).
-- Flow [phases](/flows/#phases-and-tasks): running a flow creates the jobs for all phases at once,
-  and a phase that depends on another waits.
+- Phases of a [Legacy Flow](/flows/flows-legacy/): running one creates the jobs for all phases at
+  once, and a phase that depends on another waits.
+  <!-- VERIFY(owner): how Conditional Flows (keboola.flow) create their phase jobs. Their page says the next phase is decided after the previous one completes, and the job queue assigns phaseContainer only to keboola.orchestrator jobs, so this bullet is scoped to Legacy Flows (2026-09-09 review). -->
 - Parallel limits: a configuration with 10 rows and parallelism 2 creates 10 jobs, 2 start
   `processing` and 8 wait.
 
@@ -179,7 +184,7 @@ out of `created` yourself.
 Only `processing` counts as runtime (`durationSeconds`) and is billed. `waiting` and `created`
 jobs cost nothing; they are a plan of what will happen.
 
-`terminated`, `cancelled`, `success` and `error` are final; `isFinished` turns `true`. The job
+`success`, `warning`, `error`, `cancelled` and `terminated` are final; `isFinished` turns `true`. The job
 object is immutable and eventually consistent: you cannot change a job after creating it, and the
 fields that do change stop changing once the job is final. Next to `status` there is
 `desiredStatus`, either `processing` or `terminating`. It flips to `terminating` when you request
@@ -212,9 +217,11 @@ configurations may share an ID across components or branches.
 
 Alternatively, send the whole configuration in `configData`. That is the contents of the
 `configuration` node of a
-[stored configuration](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-),
+[stored configuration](https://api.keboola.com/?service=storage),
 not the entire response. With `configData`, `configRowIds` and `branchId` are ignored, and
-`config` is not read for configuration data. `config` may still be required when the component
+`config` is not read for configuration data.
+<!-- VERIFY(owner): whether branchId is really ignored when configData is supplied; the runtime resolver suggests it may still select the branch (2026-09-09 review). -->
+`config` may still be required when the component
 uses a [default bucket](/extend/component/tutorial/output-mapping/#configuring-default-bucket),
 because the referenced configuration then names the output bucket. `configData` always fully
 overrides `config`.
@@ -231,10 +238,11 @@ Runtime settings change how a job runs, not what it does:
 
 - `backend.type`: for Snowflake transformations, the size of the
   [Snowflake warehouse](/transformations/snowflake-plain/#dynamic-backends); otherwise the
-  [container size](/transformations/python-plain/#dynamic-backends). Values are `small`, `medium`,
-  `large`.
-- `parallelism`: runs [configuration rows](/components/#configuration-rows) in parallel. An integer,
-  or `infinity` for all rows at once. Unset, rows run one after another.
+  [container size](/transformations/python-plain/#dynamic-backends). Values are `xsmall`, `small`,
+  `medium`, `large`.
+- `parallelism`: runs [configuration rows](/components/#configuration-rows) in parallel. An integer
+  from 2 to 100; `infinity` is still accepted for compatibility but is capped at 100. Unset, rows run
+  one after another.
 - `tag`: runs a specific version of the component's code, mostly during development and debugging.
 
 Runtime settings can live in the component configuration, in the job request (which overrides the
@@ -262,9 +270,9 @@ configuration keeps running the old image after new versions ship.
 `type` is one of `standard`, `container`, `phaseContainer`, `orchestrationContainer` or
 `retryContainer`. Only `standard` jobs do actual work, consume billable time and count towards
 resource limits; the others are virtual containers around standard jobs. A `container` holds the
-[parallel executions](#job-runtime-configuration) of configuration rows, a `phaseContainer` the
-standard jobs of one flow phase, an `orchestrationContainer` the phase jobs of a whole
-[flow](/flows/). These containers have a strong parent-child relationship: when a child fails, the
+[parallel executions](#job-runtime-configuration) of configuration rows; an `orchestrationContainer`
+holds a whole flow run; inside a [Legacy Flow](/flows/flows-legacy/) run, a `phaseContainer` holds
+the jobs of one phase. These containers have a strong parent-child relationship: when a child fails, the
 container fails too, subject to the `onError` setting. You never choose the type; it is set
 automatically.
 
@@ -275,13 +283,13 @@ automatically.
 The [Queue API](https://api.keboola.com/?service=job-queue) is the core. Calls from other services
 that usually come up alongside it:
 
-- [Create configurations](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs)
-- [List job events](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/events)
-- [Encrypt values](https://api.keboola.com/?service=encryption#post-/encrypt)
+- [Create configurations](https://api.keboola.com/?service=storage)
+- [List job events](https://api.keboola.com/?service=storage)
+- [Encrypt values](https://api.keboola.com/?service=encryption)
 - [Run synchronous actions](https://api.keboola.com/?service=sync-actions#sync-actions/POST/actions)
 - [Subscribe to job events](https://api.keboola.com/?service=notification#notification/tag/project-subscriptions/POST/project-subscriptions)
 - [Schedule jobs](/flows/schedule-api/)
 
-Component jobs are not the only asynchronous operations. [Storage jobs](https://api.keboola.com/?service=storage#get-/v2/storage/jobs/-jobId-),
-created for instance by [asynchronous imports](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-id-/tables-async)
+Component jobs are not the only asynchronous operations. [Storage jobs](https://api.keboola.com/?service=storage),
+created for instance by [asynchronous imports](https://api.keboola.com/?service=storage)
 and exports, follow the same idea with their own details.

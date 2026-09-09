@@ -20,7 +20,7 @@ First, store the [API endpoints](/overview/#apis-and-service-endpoints) as envir
 
 We will need:
 - [Storage API](/storage/api/) to store the variable definitions and the extractor configuration.
-- [Job Queue API](/extend/job-queue/) to run the extractor job from the configuration.
+- [Jobs API](/management/jobs/api/#run-a-job) to run the extractor job from the configuration.
 
 The host names depend on your [stack](/overview/#apis-and-service-endpoints):
 

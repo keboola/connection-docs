@@ -46,9 +46,9 @@ The `image_parameters` contents are configured in the [component settings](https
 text fields: **Image Parameters** and **Stack Parameters**.
 
 Both JSONs are merged into the `image_parameters` of the configuration file. The *Stack Parameters* 
-provide different values for different [Keboola Stacks](/overview/#apis-and-service-endpoints). Values in
+provide different values for different [Keboola Stacks](/overview/#stacks). Values in
 *Stack Parameters* are merged with those in *Image Parameters* with *Stack Parameters* having a higher priority.
-*Stack Parameters* are indexed with [Storage URL](/overview/#apis-and-service-endpoints) or the given region.
+*Stack Parameters* are indexed with [Storage URL](/overview/#stacks) or the given region.
 
 Given the following *Image Parameters*:
 

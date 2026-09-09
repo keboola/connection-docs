@@ -1,6 +1,7 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
 redirect_from:
     - /integrate/
     - /overview/repositories/
@@ -182,11 +183,13 @@ works against the portal of its own stack:
 
 Most calls take a [Storage API token](/management/project/tokens/) in the `X-StorageApi-Token` header and 
 exchange JSON. Each service runs on its own host inside the stack, such as `queue.keboola.com` or 
-`encryption.eu-central-1.keboola.com`; calling a host of another stack fails with an invalid-token error. 
+`encryption.eu-central-1.keboola.com`. Use the hosts of your own stack: a token-authenticated call to 
+another stack's host answers with an invalid-token error. 
 The authoritative list of service URLs for your stack is the [Storage API](https://api.keboola.com/?service=storage) 
-index call, `GET /v2/storage`, in its `services` array. For tooling and AI agents, each portal also publishes a 
-machine-readable index at `https://api.<stack domain>/apis.json` that lists every service with its `apiUrl` 
-and a link to its OpenAPI specification. A [Postman collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest) 
+index call, `GET /v2/storage` (no token needed), in its `services` array. For tooling and AI agents, each portal also publishes a machine-readable index at 
+`https://api.<stack domain>/apis.json`. It lists the services the portal documents, not every service in the 
+stack, each with its `apiUrl` and a link to its OpenAPI specification; use `apiUrl` from the index as the base 
+URL rather than the `servers` inside the spec, and take `openApiSpecUrl` exactly as given. A [Postman collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest) 
 holds sample requests; for a worked call, see [running a job through the API](/management/jobs/api/).
 
 ### Jobs

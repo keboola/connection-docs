@@ -14,10 +14,11 @@ Optionally, you can use
 * [logging](/extend/common-interface/logging),
 * [manifest files](/extend/common-interface/manifest-files/) for working with table and file meta-data,
 * the [OAuth](/extend/common-interface/oauth/) part of the configuration file, and
-* [actions](/extend/common-interface/actions/) for quick synchronous tasks.
+* [actions](/extend/common-interface/actions/) for quick synchronous tasks,
+* [artifacts](/extend/common-interface/artifacts/) to pass extra files between jobs (preview feature).
 
-In addition to that, [Job Queue](/extend/job-queue/) provides tools for
-[encryption](/extend/common-interface/encryption/) and [OAuth2 authorization](/extend/common-interface/oauth/).
+Sensitive configuration values are protected by [encryption](/extend/common-interface/encryption/), and third-party
+access by [OAuth2 authorization](/extend/common-interface/oauth/).
 
 To quickly get the picture, have a look a [random sample data folder](/extend/data.zip).
 

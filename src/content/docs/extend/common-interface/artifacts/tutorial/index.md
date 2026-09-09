@@ -1,7 +1,7 @@
 ---
 title: Artifacts Tutorial
 slug: 'extend/common-interface/artifacts/tutorial'
-description: "Produce and consume artifacts from a Python transformation step by step, using curl against the Storage and Queue APIs."
+description: "Produce and consume artifacts from a Python transformation step by step, using curl against the Storage API."
 redirect_from:
     - /integrate/artifacts/tutorial/
 ---
@@ -14,8 +14,10 @@ But these principles would work inside any component.
 
 In the examples, we use the `curl` console tool to interact with our APIs.
 
-*Note: `artifacts` feature needs to be enabled in your project. Please contact [support@keboola.com](mailto:support@keboola.com) to enable the feature in your project*
-*Note 2: `artifacts` configuration can be created or edited only via [Configuration API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs) for now*
+:::note
+The `artifacts` feature must be enabled in your project; contact [support@keboola.com](mailto:support@keboola.com) to enable it.
+Artifacts configuration can be created or edited only through the [Storage API](https://api.keboola.com/?service=storage), not in the UI.
+:::
 
 ## Examples
 
@@ -28,6 +30,8 @@ For each example we will need [Storage API Token](/management/project/tokens/) t
     export STORAGE_API_HOST="https://connection.keboola.com"
     export TOKEN="..."
     ```
+
+   Use the connection host of your [stack](/overview/#stacks).
 
 ### 1. Produce artifact
 
@@ -77,17 +81,17 @@ The script of the transformation will look like following.
 Files read from `/data/artifacts/in/runs/*/*` will be displayed at output - these are the artifact files downloaded.
 The script will also generate a new artifact and write it to `/data/artifacts/out/current/myartifact1` as in previous example.
 
-    ```python
-    import os
-    import glob
-   
-    # Download
-    print(glob.glob("/data/artifacts/in/runs/*/*")) 
-   
-    # Upload 
-    with open("/data/artifacts/out/current/myartifact1", "w") as file:
-      file.write("value1")
-    ```
+```python
+import os
+import glob
+
+# Download
+print(glob.glob("/data/artifacts/in/runs/*/*"))
+
+# Upload
+with open("/data/artifacts/out/current/myartifact1", "w") as file:
+  file.write("value1")
+```
 1. Run this curl command to create the configuration:
 
     ```shell
@@ -98,6 +102,7 @@ The script will also generate a new artifact and write it to `/data/artifacts/ou
     --data-urlencode 'name=Artifacts upload & download' \
     --data-urlencode 'description=Test Artifacts upload & download'
     ```
+1. Run the configuration (in the UI, or through the [Jobs API](/management/jobs/api/#run-a-job)) and open its job log. The first run prints `[]`: there are no previous runs to download from yet. Run it again and the log lists `/data/artifacts/in/runs/jobId-<first job id>/myartifact1`.
 
 ### 3. Consume artifacts from different component
 Similar to previous example we will create a configuration of Python Transformation component. 
@@ -113,12 +118,13 @@ But this time we will download artifacts produced by the configuration from `Exa
     curl -X POST "$STORAGE_API_HOST/v2/storage/branch/default/components/keboola.python-transformation-v2/configs" \
     -H "X-StorageApi-Token: $TOKEN" \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-urlencode 'configuration={"parameters":{"blocks":[{"name":"Block 1","codes":[{"name":"artifacts","script":["import os\nimport glob\n\n# Download\nprint(glob.glob(\"/data/artifacts/in/custom/*/*\"))"]}]}]},"artifacts":{"custom":{"enabled":true,"component_id":"keboola.python-transformation","config_id":"$CONFIG_ID","branch_id":"default","filter":{"limit":5}}}}' \
+    --data-urlencode 'configuration={"parameters":{"blocks":[{"name":"Block 1","codes":[{"name":"artifacts","script":["import os\nimport glob\n\n# Download\nprint(glob.glob(\"/data/artifacts/in/custom/*/*\"))"]}]}]},"artifacts":{"custom":{"enabled":true,"filter":{"component_id":"keboola.python-transformation-v2","config_id":"'"$CONFIG_ID"'","branch_id":"default","limit":5}}}}' \
     --data-urlencode 'name=Artifacts upload & download' \
     --data-urlencode 'description=Test Artifacts upload & download'    
     ```
+3. Run the consumer configuration and open its job log: it lists the producer's artifact under `/data/artifacts/in/custom/jobId-<producer job id>/`.
    
-The whole configuration now looks like this:
+The whole configuration now looks like this (with the numeric ID you exported in place of `1234567`):
 
    ```json
     {
@@ -140,10 +146,10 @@ The whole configuration now looks like this:
         "artifacts": {
             "custom": {
                 "enabled": true,
-                "component_id": "keboola.python-transformation",
-                "config_id": "$CONFIG_ID",
-                "branch_id": "default",
                 "filter": {
+                    "component_id": "keboola.python-transformation-v2",
+                    "config_id": "1234567",
+                    "branch_id": "default",
                     "limit": 5
                 }
             }
@@ -163,8 +169,9 @@ The configuration producing artifact needs to be in a phase that precedes the co
 
    ```python
    import os
-   with open(path+\"/myartifact-shared\", \"w\") as file:
-     file.write(\"value1\")"
+   path = "/data/artifacts/out/shared"
+   with open(path + "/myartifact3", "w") as file:
+     file.write("value1")
    ```
    
    Run curl command to create the configuration:
@@ -210,6 +217,9 @@ The configuration producing artifact needs to be in a phase that precedes the co
     --data-urlencode 'description=Artifacts download shared'    
     ```
 
-3. Now put each of the configurations into an Orchestration. "Artifacts shared Producer" into phase 1 and "Artifacts shared Consumer" into phase 2.
+3. Now put each of the configurations into a [Legacy Flow](/flows/flows-legacy/) (orchestration): "Artifacts shared Producer" into phase 1 and "Artifacts shared Consumer" into phase 2.
+   <!-- VERIFY(owner): do shared artifacts also work between tasks of a Conditional Flow (keboola.flow)? If yes, this example and its screenshot should use the Flows UI (2026-09-09 review). -->
 
    ![Artifacts orchestration](/extend/common-interface/artifacts/artifacts-tutorial-4.png)
+
+4. Run it. The consumer's job log lists `/data/artifacts/in/shared/jobId-<producer job id>/myartifact3`.

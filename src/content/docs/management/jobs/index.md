@@ -57,8 +57,7 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **Jobs from either HTTP data source or Google Sheets data destination connector** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
-For more technical information about background jobs, see our 
-[Developers documentation](/management/jobs/api/).
+For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/management/jobs/api/).
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 

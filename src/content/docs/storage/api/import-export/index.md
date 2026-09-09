@@ -113,7 +113,7 @@ curl --request POST --header "Content-Type: application/json" --header "X-Storag
 ```
 
 This will create an asynchronous job, importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.
-Then [poll for the job results](/management/jobs/api/#job-polling), or review its status in the UI.
+Then [poll for the job results](/storage/jobs/), or review its status in the UI.
 
 #### Python Example
 The above process is implemented in the following example script in Python. This script uses the

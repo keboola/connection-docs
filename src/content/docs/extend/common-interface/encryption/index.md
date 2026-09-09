@@ -8,7 +8,7 @@ redirect_from:
 
 <!-- Reference-type page. Moved from developers.keboola.com/overview/encryption/ (PRDCT-582). Parameters, cipher prefixes and validation rules verified against encryption.keboola.com/docs/swagger.yaml by the 2026-06-22 audit (PRDCT-363). The two UI screenshots predate the current UI; reshoot when convenient. -->
 
-Many [Keboola components](/overview/) use the Encryption API to encrypt sensitive values
+Many [Keboola components](/extend/component/) use the Encryption API to encrypt sensitive values
 intended for secure storage. These values are then decrypted within the component itself. 
 This process ensures that the encrypted values are only accessible inside the components and not
 by API users. Additionally, no decryption API is available, meaning end-users cannot decrypt
@@ -18,7 +18,7 @@ Decryption occurs solely during the serialization of configuration to the Docker
 configuration file. The decrypted data are stored on the Docker host drive and are promptly 
 deleted after the container's completion. The component code exclusively accesses the decrypted data.
 
-## UI Interaction
+## UI interaction
 When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.
 For instance, consider the following configuration:
 
@@ -30,6 +30,9 @@ After saving, the configuration appears as follows:
 
 Once saved, the value becomes encrypted and irreversible. The component defines which values are
 encrypted, indicating that not all values can be encrypted unless explicitly supported by the component.
+
+Inside the component the values arrive decrypted in the [configuration file](/extend/common-interface/config-file/);
+Image and Stack Parameters follow [their own encryption rules](/extend/common-interface/config-file/#encryption).
 
 For example, a component requiring the following configuration:
 
@@ -45,7 +48,7 @@ prefix `#` to `username` is ineffective, as the component does not recognize suc
 even though its value would be encrypted and decrypted normally. Internally, the
 [Encryption API](#encrypting-data-with-api) encrypts these values before saving.
 
-### UI Configuration Adjustment
+### UI configuration adjustment
 The UI prioritizes encrypted values over plain ones. If both `password` and `#password` are provided, only `#password` will be retained.
 Consequently, this configuration:
 
@@ -53,7 +56,7 @@ Consequently, this configuration:
 {
     "username": "JohnDoe",
     "#password": "KBC::ProjectSecure::ENCODEDSTRING",
-    "password": "secret",
+    "password": "secret"
 }
 ```
 
@@ -66,8 +69,8 @@ will be transformed to:
 }
 ```
 
-## Encrypting Data with API
-The [Encryption API](https://api.keboola.com/?service=encryption#post-/encrypt) can handle
+## Encrypting data with API
+The [Encryption API](https://api.keboola.com/?service=encryption) can handle
 both strings and arbitrary JSON data. For strings, the entire string is encrypted. In JSON data,
 only scalar keys starting with `#` are encrypted. For example, encrypting the following:
 
@@ -104,7 +107,7 @@ yields
 
 The `Content-Type` header in the request differentiates whether the body is treated as a string (`text/plain`) or JSON (`application/json`).
 
-### Encryption Parameters
+### Encryption parameters
 The Encryption API accepts the following **optional** parameters:
 
 - `componentId` --- ID of a [Keboola component](/extend/component/tutorial/#creating-component),
@@ -138,7 +141,7 @@ This cipher type helps encrypt information shared across multiple components, e.
 The following rules apply to all ciphers:
 
 - Providing only a `configId` without a `projectId` is not allowed. Similarly, providing only `branchType` without `projectId` is also not allowed.
-- Cipher decryption is only possible in the [region](/overview/#apis-and-service-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
+- Cipher decryption is only possible in the [region](/overview/#stacks) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
 - There is no decryption API; the cipher is decrypted internally before a component is run.
 - Ciphering a value that is already encrypted does not change its encryption.
 - There is no way to retrieve the component, project, configuration ID, or branch type from the cipher.

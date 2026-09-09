@@ -105,7 +105,7 @@ items:
         title: Migration Guide
 
       - url: /flows/schedule-api/
-        title: Schedule via API
+        title: Schedule via the API
 
   - url: /data-apps/
     title: Apps

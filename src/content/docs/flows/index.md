@@ -251,6 +251,8 @@ click **Set Up Schedule**. The dialog works in UTC and previews the next runs be
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
 
+To schedule any configuration, or a single configuration row, through the API, see [Schedule via the API](/flows/schedule-api/).
+
 ## Check Run History
 
 Once your flow is running, you can track its progress and debug issues using the **All Runs** tab.
