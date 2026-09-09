@@ -35,8 +35,8 @@ Key → Read Header / Set Header / Primary Key). The two configurations and thei
 processor and explicit column names, and that row opens in the code editor only: the Visual
 Editor button is disabled with the tooltip "Can't close the code editor, the configuration is not
 compatible. Revert your changes to allow switching back to the visual editor." (read live
-2026-09-09). Our own connector page (components/extractors/storage/http/index.md) still says "Add
-Table"; the UI says "Add Row". Screenshots 01–07 still show the previous sample's configuration
+2026-09-09). Our own connector page (components/extractors/storage/http/index.md) now says "Add Row" too
+(checked 2026-09-09). Screenshots 01–07 still show the previous sample's configuration
 name; phase 2 reshoots them from the Boolabean configurations. */}
 
 ## The sample data
@@ -214,8 +214,8 @@ settings, sharing the configuration's base URL.
    | `staffing` | `/getting-started/boolabean/staffing.csv` |
    | `weather_daily` | `/getting-started/boolabean/weather_daily.csv` |
 
-10. Back on the configuration, click **Run Component** and confirm with **Run**. One job fetches
-    all five rows.
+10. Back on the configuration, click **Run Component** and confirm with **Run**. One run fetches
+    all five rows; in **Jobs** it may fan out into a job per row under the one you started.
 
     ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
 
@@ -256,8 +256,8 @@ settings, sharing the configuration's base URL.
 
 ## Check it worked
 
-Watch it in **Jobs**. The rows of the first configuration are fetched one after another, so expect
-a couple of minutes for all five; the forecast takes seconds.
+Watch it in **Jobs**. The rows of the first configuration are fetched in turn, so expect a couple
+of minutes for all five; the forecast takes seconds.
 
 Then open **Storage**. Data lives in **buckets**, and each bucket holds tables. Each connector
 configuration created a bucket of its own, named after the component plus the configuration's

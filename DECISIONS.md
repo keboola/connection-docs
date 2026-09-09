@@ -425,6 +425,38 @@ which needs no password.
 
 ---
 
+## 2026-09-09 — Fact-check of the rewritten pages: two real errors, corrected
+
+The fact-checker pass (CLAUDE.md standing authorization) over the nine rewritten pages found about
+45 claims confirmed, two wrong, and a handful of drifts. All fixed the same day; recorded here
+because both errors were mine and both would have misled a reader with a correct table.
+
+**Wrong, and load-bearing:** `check/` and `transform/` said an empty `expected_units` happens on a
+*cold, wet* forecast day and that a filled value on such a day would mean the bands were drawn
+wrong. Computed from `weather_daily.csv` with the page's own `CASE`: every café has cold, wet
+history (2–13 days); five of six have **no cold, dry** day at all. The band with no history is cold
+and dry. Both pages now say so, and `check/` no longer turns a correct table into a failure signal.
+
+**Wrong, inherited from the octopus design:** "more than 42 rows means the `BETWEEN` trap". That
+was true when bands were a lookup table joined by range. With `CASE` bands (first match wins),
+`GROUP BY` per (café, band) and equality joins, nothing in the query can multiply rows; the output
+is bounded by the 42 forecast rows however the thresholds are written. Where a boundary day lands
+still matters (nine summer days sit exactly on a temperature threshold, twelve exactly on 0.5 mm),
+and the two `CASE`s must match, but the symptom is an empty average, not a 43rd row. Both pages now
+name the real causes of a count over 42: duplicated input rows (incremental load left on, a café
+listed twice).
+
+**Drifts corrected:** the hub's step list said "one sentence … one button" and "the schedule is two
+clicks", both predating the 09-09 observations; the hub's opening roster now matches the Brno café
+(2, 2, then 3); `check/` said six tables are joined (five are); the auto-sleep figure was this
+app's setting, not a default; the automate prompt names an app the reader was never told to name
+(now: "use your app's own name"); `load/` no longer asserts one job for a direct run; three Open
+rows pointed at the deleted project page. New `VERIFY(owner)`: whether Guided Mode's auto-filled
+destination keeps the capital B of `out.c-Boolabean-staffing-outlook`; the time-critical Kai
+allowance sentence on the hub.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
@@ -433,17 +465,17 @@ still block rebuild work.
 
 | Question | Where flagged | Blocks |
 |---|---|---|
-| Can Kai create a project? | `project/index.mdx` | page 1's Kai coverage |
+| Can Kai create a project? | `index.mdx` (Get a project) | page 1's Kai coverage |
 | Does the Free Plan include data apps? | `app/index.mdx` | whether the app step needs "skippable" framing |
 | ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
 | ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
 | ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
-| Is the monthly Kai allowance per project or per organization? | `project/index.mdx` | the pricing guardrail wording |
+| Is the monthly Kai allowance per project or per organization? | `index.mdx` (Get a project) | the pricing guardrail wording |
 | Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
 | Does the Kai **Add Task** menu offer three items or four (is **Build with Kai** in it)? | `automate/index.mdx` | the Kai tab's first instruction. Live check 2026-09-02 confirmed **Modify with Kai** in the flow header; the menu itself did not open to automation |
 | Does `/kai/use-cases/#complex-workflows` cover assembling *existing* configurations into a flow? | `automate/index.mdx` | whether that citation stands — the page documents building pipelines from scratch |
 | ~~Does Kai really build transformations on read-only input, and does that need bucket-ID-qualified table names?~~ | closed 2026-09-08 | **Yes, and yes.** The live transformation in project 264 has an empty input mapping and reads `"KBC_EUW3_264"."in.c-keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a"."sales"` by full name — see the 2026-09-08 entry above. |
 | Can Kai traverse every child job of a flow run, or only read one job log? | `check/index.mdx` | one sentence; the prompt is safe either way |
 | Do flow jobs themselves consume credits? | `check/index.mdx` | removed from the page until confirmed — no row for it in `management/project/limits/` |
-| **Time-critical:** `kai/pricing.md` says that from **15 September 2026** Kai moves to PPU credits and the message counter is "replaced" — but `kai/getting-started.md` still states 150 turns/month (50 on PAYG), and the section inherits that number | `project/index.mdx` | the allowance sentence, in 12 days |
+| **Time-critical:** `kai/pricing.md` says that from **15 September 2026** Kai moves to PPU credits and the message counter is "replaced" — but `kai/getting-started.md` still states 150 turns/month (50 on PAYG), and the section inherits that number | `index.mdx` (Get a project) | the allowance sentence, in 12 days |
 | On a BigQuery project — the Free Plan default — is there a browser SQL path at all? | `transform/workspace.md` | the Kai-free fallback, and the hub's "nothing needs installing" promise |

@@ -22,8 +22,9 @@ URL and a password, so you decide who sees it.
 <PathIntro manual={false} yours="deciding who gets the URL and the password" />
 
 {/* Tutorial-type page. Walked live in project 264 on 2026-09-09 with the prompt below
-(boolabean-run/app-build/). Observed: the Create App screen has a textarea "Describe what you want
-to build..." and a send control; below it, "or create manually" offers Streamlit and Python/JS. Kai
+(boolabean-run/app-build/). Observed: the Apps list's button reads "Create App" (accessible text; data-apps/getting-started.md
+writes it "+ Create App", the plus being the icon), the Create App screen has a textarea "Describe
+what you want to build..." and a send control; below it, "or create manually" offers Streamlit and Python/JS. Kai
 created the production configuration first ("Prod app created"), then a DRAFT pinned to a branch
 ("Staffing Outlook Grid draft", branch init), booted the draft dev container (a Python/JS app: npm
 install, Vite), wrote the code, and opened a live preview: "This is a private draft that updates
@@ -92,7 +93,9 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    ```
 
    Saying what *not* to build is half the prompt. Left to itself Kai adds filters and a second
-   chart, and the grid stops being the thing you glance at.
+   chart, and the grid stops being the thing you glance at. Kai also names the app itself; ours
+   came out as *Staffing Outlook Grid*, and the flow on the next page refers to it by that name.
+   Use whatever yours is called.
 
 3. Kai creates the app's configuration, then a **draft** pinned to its own branch, and asks
    before it writes code: one **Confirmation required** card with **Approve**, **Decline** and
@@ -144,9 +147,9 @@ Kai tab first; come back when the app you want is one the description field cann
   and send that to [Support](/management/support/). The rest of the pipeline is unaffected: the
   table is rebuilt every morning whether or not the app is up, and the draft preview still shows
   it.
-- **Nothing happens for a minute after you open the app.** It went to sleep. Apps stop after
-  fifteen minutes without visitors (**Auto Sleep** on the app's page) and wake on the next request,
-  which is the wait you are seeing.
+- **Nothing happens for a minute after you open the app.** It went to sleep. Apps stop after a
+  while without visitors (**Auto Sleep** on the app's page; ours was set to fifteen minutes) and
+  wake on the next request, which is the wait you are seeing.
 
 ## Going further
 

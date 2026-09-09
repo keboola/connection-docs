@@ -28,7 +28,7 @@ capture still shows the previous flow; phase 2 reshoots it. */}
 | What you built | What it does | Where it lives |
 |---|---|---|
 | Two HTTP configurations | bring the five files and the live forecast into the project | **Components** |
-| SQL transformation | joins the six tables into `staffing_outlook` | **Transformations** |
+| SQL transformation | joins five of the six tables into `staffing_outlook` | **Transformations** |
 | Data app | the grid anyone can open | **Apps** |
 | Flow | runs all of it, in order, every morning | **Flows** |
 
@@ -40,9 +40,9 @@ named after the connector configurations, and one `out.c-Boolabean-staffing-outl
 `staffing_outlook` should hold **exactly 42 rows**: six cafés times the seven days in the
 forecast. Both inputs are fixed, so the count is too, and it catches both directions of failure:
 
-- **More** than 42 means a join matched twice. The usual cause is a weather band written with
-  `BETWEEN` instead of a half-open `< 18 … < 23 … < 28`, so a forecast day sitting exactly on a
-  boundary belongs to two bands at once and appears twice.
+- **More** than 42 means an input has duplicate rows: the forecast loaded twice with incremental
+  load switched on, or a café listed twice in `stores`. The joins themselves cannot multiply rows;
+  every band and every roster value is one row per café.
 - **Fewer** means a join dropped rows: a `location_id` that did not map onto a `store_id`, or a
   forecast that came back with fewer than seven days.
 
@@ -50,12 +50,14 @@ Open the table's **Data Sample** and check the columns the right way round. `sto
 `date`, `weekday`, the two forecast columns and `rostered_staff` are filled on **every** row; they
 come from straight lookups. `expected_units` and `expected_units_per_person` can be empty on a
 row, and that is not an error: it means the summer never had a day in that café's weather band, so
-there is no history to average. `short_handed` is true on a **few** rows, never on all of them and
-rarely on none; a cool, wet week can flag nothing, and then the grid is right to be all quiet.
+there is no history to average. In this sample the band with no history is *cold and dry*: five of
+the six cafés never saw a dry day under 18 °C all summer, while cold, wet days happened everywhere.
+`short_handed` is true on a **few** rows, never on all of them and rarely on none; our week had
+four, and a cool, wet week can flag nothing, in which case the grid is right to be all quiet.
 
 So the failure signals are the extremes: a lookup column empty on any row means a join matched
-nothing, and `expected_units` filled on every row of a week that includes a cold, wet day would
-mean the bands were drawn wrong. Column count is the second check: ten.
+nothing, and `expected_units` empty on *every* row means the two band expressions in the SQL no
+longer match each other. Column count is the second check: ten.
 
 ## Reading a flow run
 
@@ -74,7 +76,8 @@ duration and status. Expand a run to see its phases.
   anyway. Read the run detail top to bottom and you know which step to look at, and which not to.
 - **Jobs** lists more entries than you might expect: a job per task, a **Conditional Flows
   phase** job per phase, the **Conditional Flows** job for the run itself, and for a row-based
-  connector a job per row under its task, so the five-file configuration alone shows as six lines.
+  connector run from a flow a job per row under its task, so the five-file configuration alone
+  shows as six lines.
   That is normal; the extra jobs are the ordering, not extra work.
 - The **Schedules** tab shows a count, and a schedule can be toggled off without deleting it.
 
@@ -99,7 +102,7 @@ run. The prompt is safe either way; the capability sentence is the unverified pa
   can fail for reasons that have nothing to do with your data. The table is already rebuilt; open
   the app's page and deploy it again from there, and if the error repeats, that is one for
   [Support](/management/support/) with the job link.
-- **The forecast table has 42 rows but the outlook has more.** The band boundaries: see the one
+- **The forecast table has 42 rows but the outlook has more.** Duplicate input rows: see the one
   number above.
 - **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the
   project is out of runtime credits.
