@@ -1,5 +1,5 @@
 ---
-title: 'Project Diff'
+title: 'Review the project diff'
 slug: 'getting-started/branches/project-diff'
 description: 'Review every configuration change a development branch introduces, side by side with production, before you merge it.'
 redirect_from:

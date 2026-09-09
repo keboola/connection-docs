@@ -1,5 +1,5 @@
 ---
-title: 'Working with Tables in a Branch'
+title: 'Work with tables in a branch'
 slug: 'getting-started/branches/tables-in-branch'
 description: 'See how buckets and tables behave inside a development branch, and how branch table names differ from their production counterparts.'
 redirect_from:

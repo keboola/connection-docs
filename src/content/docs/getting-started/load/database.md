@@ -1,5 +1,5 @@
 ---
-title: 'Load from a Database'
+title: 'Load from a database'
 slug: 'getting-started/load/database'
 description: 'Load tables from an external database using the Snowflake data source connector — the same pattern applies to every database connector Keboola supports.'
 redirect_from:
@@ -25,7 +25,7 @@ ACCOUNT and USER tables into Storage.
 **Never paste a password into the chat.** Kai prompts you for credentials through a secure form
 instead — that is its documented behavior, and
 [Kai's own guidance](/kai/getting-started/#tips-for-new-users) says the same. The values to type into
-that form are the sample ones in [step 5](#configure-snowflake-data-source-connector) below.
+that form are the sample ones under [Configure Snowflake data source connector](#configure-snowflake-data-source-connector) below.
 
 The pattern is identical for every database connector Keboola supports, which is the reason to
 walk it once by hand.
@@ -79,4 +79,3 @@ please navigate to Advanced Mode. Note that we do not cover the advanced mode op
 
 ![Advanced Mode](/getting-started/load/db-picture8.png)
 
-**Next:** [Transform your data →](/getting-started/transform/)

@@ -1,5 +1,5 @@
 ---
-title: 'Use a Workspace'
+title: 'Use a workspace'
 slug: 'getting-started/transform/workspace'
 description: 'Create a workspace — an isolated environment with a copy of your production data — to develop and test transformation code safely.'
 redirect_from:
@@ -51,4 +51,3 @@ click the **Connect** button again to access the Web-based Snowflake SQL IDE (pl
 After completing the development of your queries, you can then copy and paste them into a transformation configuration, 
 as we did in the [previous step](/getting-started/transform/).
 
-**Next:** [Send your data somewhere →](/getting-started/write/)

@@ -1,40 +1,72 @@
 ---
-title: 'Build the App'
+title: 'Put it in front of someone'
 slug: 'getting-started/app'
-description: 'Turn the octopus atlas into a shareable map app with a "how close to me?" field, described to Kai in one sentence and published with one button.'
+description: 'Turn the staffing outlook into a shareable grid app, six cafés by seven days with the short-handed cells in red, described to Kai in one prompt and published from the builder.'
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-A spreadsheet answers the person who asked. An app answers everyone who is curious — including
-the half of the original question no table can settle: *how close to **your** coast does an
-octopus live?* This step turns `octopus_atlas` into a published map with a field for your own
-coordinates.
-Step 6 of the [Getting Started](/getting-started/) arc.
+<PageMeta genre="Tutorial" minutes="10" />
 
-**Two ways to do it** — the Kai tab below is the whole path here. Building an app by hand is its
-own topic with its own section; the second tab says where to go for it.
+A chat answer reaches the person who asked. The manager of the Brno café does not want to ask; she
+wants to glance at next week on Monday morning and see which day is red. This step turns
+`staffing_outlook` into a published grid app: six cafés down, seven days across, a number in every
+cell and a red cell where it will hurt.
 
-{/* Tutorial-type page (step 6 of 7), NEW in the octopus rework (PRDCT-487, 2026-08-25). UI flow
-and labels are taken from data-apps/getting-started.md ("+ Create App", the "Describe what you
-want to build..." prompt screen, Confirmation required with Approve/Decline/Always allow, the
-Preview/Code split-screen builder, "Publish to Production", status Active, Open App, default auth
-Basic (Password)) — that page's Kai flow was walked live for its own screenshots. This page has
-NOT yet been walked live: the prompt, the app behavior, run timing and all screenshots pend the
-re-walk in project 264. VERIFY(owner): whether the Free Plan includes data apps — if it does not,
-this step needs the same "skippable" framing as the Google step; check /management/payg-project/
-during the live walk. */}
+**Where you are:** `staffing_outlook` exists in Storage. **When you finish:** an app with its own
+URL and a password, so you decide who sees it.
 
-## What you need
+<PathIntro manual={false} yours="deciding who gets the URL and the password" />
 
-- The table `octopus_atlas` in Storage, from [Transform Data](/getting-started/transform/) — or
-  fresher, from the flow that now rebuilds it on a schedule.
+{/* Tutorial-type page. Walked live in project 264 on 2026-09-09 with the prompt below
+(boolabean-run/app-build/). Observed: the Apps list's button reads "Create App" (accessible text; data-apps/getting-started.md
+writes it "+ Create App", the plus being the icon), the Create App screen has a textarea "Describe
+what you want to build..." and a send control; below it, "or create manually" offers Streamlit and Python/JS. Kai
+created the production configuration first ("Prod app created"), then a DRAFT pinned to a branch
+("Staffing Outlook Grid draft", branch init), booted the draft dev container (a Python/JS app: npm
+install, Vite), wrote the code, and opened a live preview: "This is a private draft that updates
+live as Kai builds. Publish it when you're ready to share a production app with your team." One
+approval card (Decline / Always allow / Approve). Buttons in the builder: Preview, Code, Publish to
+production. Total 5 min 44 s to a running draft. The production configuration: name "Staffing
+Outlook Grid", Authentication Basic (password), code in a Keboola-managed private Git repository
+(branch main), backend Python / JS, size XSmall, auto sleep 15 minutes, URL prefix
+"<prefix>-74021219.hub.europe-west3.gcp.keboola.com".
+
+VERIFY(owner), load-bearing: what "Publish to production" does. Clicking it (twice, 2026-09-09)
+produced no dialog, no new configuration version and no deploy job; the production app stayed "Not
+Deployed" and later "Stopped" with a "Start App" / "Deploy App" button. Two production deploys
+(one from the flow's third phase, one started directly) failed after ~4.5 minutes with an
+application error ("Internal Server Error occurred.", exception IDs
+exception-487cc0e043d506af8724e741ae41f6d2 and exception-cf5c58db76911f60fed6c9fe4f8e95fc); All
+Runs shows pairs of "Finished 20 s" then "Failed 0 s", Terminal Logs says "The App is not running".
+Either the publish did not carry the draft's code to the main branch, or the deploy fails for a
+platform reason; we could not tell which from the project side. The page therefore describes the
+draft honestly, says production needs a deploy and may fail, and does not promise an Active app.
+data-apps/getting-started.md, which documents this flow with its own screenshots, should be checked
+against this. Whether the Free Plan includes data apps is still unsettled in our own docs (see the
+Prereqs). The previous clip (app-preview.mp4) and the octopus-map-preview.png came off with the old
+sample world; phase 2 records the grid from the draft preview, which needs no password. */}
+
+<Prereqs needs={['project', 'kai']}>
+  <li>
+    A project with <strong>Apps</strong> in the navigation. Whether the Free Plan includes data
+    apps is not settled in our own docs; if the section is missing, this page is the one you can
+    skip, and the flow on the next page simply has two phases instead of three.
+  </li>
+  <li>
+    The <code>staffing_outlook</code> table in Storage, from{' '}
+    <a href="/getting-started/transform/">Transform data</a>.
+  </li>
+</Prereqs>
 
 ## What a data app is
 
 A **data app** is a small web application that runs inside Keboola and reads your Storage tables
-— a map, a dashboard, an explorer — with its own URL you can send to anyone you choose to share
-it with. Like everything else in this guide it is a component: it can sit in a flow, and the
+(a grid, a dashboard, an explorer) with its own URL you can send to anyone you choose. Like
+everything else in this guide it is a component: it can sit in a flow, and the
 [Apps section](/data-apps/) covers it in full.
 
 ## Set it up
@@ -42,76 +74,88 @@ it with. Like everything else in this guide it is a component: it can sit in a f
 <Tabs syncKey="howto">
 <TabItem label="Do it with Kai">
 
-Describing an app is a one-sentence job, and the Apps section has Kai wired in as the primary
-way to build one ([Build your first app with Kai](/data-apps/getting-started/)).
+Describing an app is a one-paragraph job, and the Apps section has Kai wired in as the primary way
+to build one ([Build your first app with Kai](/data-apps/getting-started/)).
 
-1. Open **Apps** in the navigation and click **+ Create App**. You land on the
-   **Build web apps from your Keboola data** screen with a prompt field.
+1. Open **Apps** in the navigation and click **Create App**. You land on the **Build web apps from
+   your Keboola data** screen: a prompt field that says *Describe what you want to build...*, and
+   below it, under *or create manually*, the Streamlit and Python/JS routes of the other tab.
 
-2. Describe the app:
+2. Describe the app and send it:
 
    ```text
-   Build a data app from out.c-octopus-atlas.octopus_atlas: a world map of all 10,000 octopus
-   sightings colored by depth_zone, with sidebar filters for basin and display_name. Add two
-   number inputs for my latitude and longitude, and show the nearest recorded sighting to that
-   point — its display_name, distance in kilometers, depth_m and year.
+   Build a data app from the table out.c-Boolabean-staffing-outlook.staffing_outlook. Show one
+   grid: a row per café (store_name and city) and a column per forecast date, in date order.
+   Each cell shows expected_units_per_person as the big number, with the weekday,
+   forecast_temp_c and forecast_rain_mm in small text underneath. Colour a cell red when
+   short_handed is true and leave the other cells neutral. Above the grid, one caption line:
+   how many café-days in the table are short-handed. No filters, no other charts, no sidebar.
    ```
 
-3. Kai explores the table, then asks before it builds — a **Confirmation required** card with
-   **Approve** / **Decline** / **Always allow**. Approve, and watch the split-screen builder:
-   **Preview** on one side, **Code** on the other, updating as it works.
+   Saying what *not* to build is half the prompt. Left to itself Kai adds filters and a second
+   chart, and the grid stops being the thing you glance at. Kai also names the app itself; ours
+   came out as *Staffing Outlook Grid*, and the flow on the next page refers to it by that name.
+   Use whatever yours is called.
 
-4. When the draft looks right, click **Publish to Production**. The app deploys, its status
-   turns **Active**, and Kai hands you the app URL and a password — the default authentication
-   is **Basic (Password)**, so the map is not public until you decide who gets the link and the
-   password.
+3. Kai creates the app's configuration, then a **draft** pinned to its own branch, and asks
+   before it writes code: one **Confirmation required** card with **Approve**, **Decline** and
+   **Always allow**. Approve, and the builder splits into **Preview** and **Code**, with a line
+   above them that says it plainly: *This is a private draft that updates live as Kai builds.*
+   Expect five to six minutes from the prompt to a grid you can look at; most of that is the
+   draft's container installing and starting.
 
-5. Click **Open App**, type your coordinates, and the arc's question stops being rhetorical.
-   Here it is answering for Prague:
+4. Read the preview. Six rows, seven columns, one big number per cell, red where
+   `short_handed` is true, and the caption's count matching the number of red cells. If it is
+   not that, say so in the same chat; the draft updates in place.
 
-<video autoplay loop muted playsinline poster="/getting-started/app/app-preview-poster.png">
-  <source src="/getting-started/app/app-preview.mp4" type="video/mp4" />
-</video>
+5. When the draft is right, click **Publish to production**. Then open the app's own page from
+   **Apps**. In our project its status still read **Not Deployed** at that point, with a
+   **Deploy App** button, so publishing and starting are two steps: click **Deploy App**. A
+   deploy builds and starts a container, which takes a few minutes; when it finishes the status
+   turns **Active**, **Open App** appears, and the app asks for the password from its
+   **Authentication** setting, **Basic** by default, so the grid is not public until you decide
+   who gets the link and the password.
 
-{/* Clip recorded live in project 264 on 2026-08-26 (scripts/record.mjs, clip id app-preview):
-typing 50.08 / 14.43 into the draft preview returns "Nearest Sighting: musky octopus, 495.1 km,
-1910" — the put-in-your-own-coordinates moment on camera. Post-produced with
-scripts/compositor.html (local, gitignored): pacing, chips, octopus pointer on the result card.
-Re-record against the published app after the deploy lands. */}
-
-**Check:** the map shows sightings on every continent's coastline; filtering by basin matches
-the counts Kai gave you in [step 5](/getting-started/automate/) — the North Atlantic is the
-crowded one — and the nearest-sighting panel updates when you change the coordinates. If the
-app came out different, tell Kai what to change in the same chat — **Make changes** — and
-publish again; the draft is editable until you like it.
+**Check:** **Open App** shows the same grid as the preview did, and the caption's count equals
+both the number of red cells and the number of rows where `short_handed` is true in Storage
+(four, on the day this was written). A deploy that ends in **Failed** with nothing in **Terminal
+Logs** is not your grid's fault; see below.
 
 </TabItem>
 <TabItem label="Do it yourself">
 
-Building an app by hand means a Git repository and your own Streamlit or Python/JS code — a
-real development workflow, not a form. It has its own pages:
-[create an app manually](/data-apps/getting-started/#create-an-app-manually) for the UI flow,
-and [Build locally](/data-apps/build-locally/) for the repo-based workflow. Finish the arc with
-the Kai tab first; come back when the app you want is one the description field cannot hold.
+Building an app by hand means a Git repository and your own Streamlit or Python/JS code, a real
+development workflow rather than a form. It has its own pages:
+[create an app manually](/data-apps/getting-started/#create-an-app-manually) for the UI flow, and
+[Build locally](/data-apps/build-locally/) for the repo-based workflow. Finish the guide with the
+Kai tab first; come back when the app you want is one the description field cannot hold.
 
 </TabItem>
 </Tabs>
 
 ## If it goes wrong
 
-- **There is no Apps section in the navigation.** Not every project has data apps enabled; see
-  [What are apps](/data-apps/what-are-apps/) for availability, or ask your organization admin.
-- **The app builds but the map is empty.** The app is reading the wrong table — tell Kai the
-  full table ID, `out.c-octopus-atlas.octopus_atlas`, in the chat and republish.
-- **The nearest-sighting answer looks wrong.** Coordinates are easy to swap: latitude first
-  (positive = north), longitude second (positive = east). A minus sign on the wrong one puts
-  you in a different hemisphere — and the nearest octopus in a different ocean.
+- **The grid is empty, or shows another table.** The app is reading the wrong table. Give Kai the
+  full table ID, `out.c-Boolabean-staffing-outlook.staffing_outlook`, in the same chat and let the
+  draft update.
+- **The red cells do not match the caption.** Kai coloured on a threshold of its own instead of the
+  `short_handed` column. Tell it to use the column; the transformation already decided what red
+  means, and the app should not decide again.
+- **The deploy of the production app fails, and Terminal Logs says the app is not running.** The
+  draft ran, so the code works; the production container did not come up. Deploy once more from
+  the app's page. After several failures the platform disables the app: a banner says it failed to
+  start automatically multiple times, and the button becomes **Start App**. If it fails again, open
+  the failed job from **All Runs**, note its exception ID, and send that to
+  [Support](/management/support/). The rest of the pipeline is unaffected: the
+  table is rebuilt every morning whether or not the app is up, and the draft preview still shows
+  it.
+- **Nothing happens for a minute after you open the app.** It went to sleep. Apps stop after a
+  while without visitors (**Auto Sleep** on the app's page; ours was set to fifteen minutes) and
+  wake on the next request, which is the wait you are seeing.
 
 ## Going further
 
-- [Publish and share](/data-apps/publish-and-share/) — authentication options beyond the
-  default password, and who can reach the URL.
-- [Build locally](/data-apps/build-locally/) — the Git-based workflow once an app outgrows
-  its first description.
-
-**Next:** [Where to go next →](/getting-started/next-steps/)
+- [Publish and share](/data-apps/publish-and-share/): authentication options beyond the default
+  password, and who can reach the URL.
+- [Build locally](/data-apps/build-locally/): the Git-based workflow once an app outgrows its
+  first description.

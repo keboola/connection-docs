@@ -1,0 +1,19 @@
+product_id,product_name,category,price_czk
+P01,Filter of the Day,coffee,79
+P02,Stubborn Espresso,coffee,65
+P03,"Flat White, No Notes",coffee,95
+P04,"Iced Latte, Extremely Iced",coffee,109
+P05,"Cold Brew, Patient",coffee,115
+P06,Cappuccino Classic,coffee,89
+P07,"Decaf, Genuinely",coffee,85
+P08,"Matcha, Ceremonial-ish",other,119
+P09,"Hot Chocolate, Serious",other,99
+P10,"Lemonade, Homemade",other,75
+P11,Poppy Seed Kolache,bakery,55
+P12,Apricot Kolache,bakery,55
+P13,Almond Croissant,bakery,69
+P14,"Cinnamon Roll, Generous",bakery,75
+P15,Rye Sourdough Slice,bakery,45
+P16,"Cheesecake, Baked",bakery,89
+P17,Ham & Cheese Toastie,food,129
+P18,Soup of the Morning,food,109

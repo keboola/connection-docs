@@ -1,62 +1,100 @@
 ---
-title: 'Transform Data'
+title: 'Transform data'
 slug: 'getting-started/transform'
-description: 'Create an SQL transformation that joins the octopus sightings with their species names, depth zones and ocean basins, and learn how mappings keep Storage safe.'
+description: 'Create an SQL transformation that joins a summer of sales, rosters and weather with a live forecast into one table per café and day, and learn how mappings keep Storage safe.'
 redirect_from:
   - /tutorial/manipulate/
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-Of the 10,000 sightings, 4,465 carry a depth — and the deepest of them comes from 4,838 meters
-down. The sightings table already says that much; what it will not say is *which* octopus that
-was or *where* in any human sense, because it names species by a numeric ID and locations as raw
-coordinates. This step joins `occurrences`, `species`, `depth_zones` and `basins` with SQL into
-one 10,000-row atlas that turns IDs into names and places every sighting in its ocean — and,
-where a depth was recorded, its depth zone — and it introduces the mapping model that keeps your source data safe while you do it.
-Step 3 of the [Getting Started](/getting-started/) arc.
+<PageMeta genre="Tutorial" minutes="15" />
 
-**Two ways to do it** — pick a tab in *Set it up* below. Doing it with Kai, the run is part of
-the prompt — you only check the result. Doing it yourself, you run it afterwards in the section
-below the tabs.
+The sales table knows how many cups each café sold on each day of the summer. The weather table
+knows what kind of day it was. The roster knows how many people were on shift, and the forecast
+knows what next week looks like. None of them knows what the others know. This step joins all
+five with SQL into one table, `staffing_outlook`: 42 rows, one per café per forecast day, each
+saying how busy that day should be, who is rostered, and whether that is enough. It also
+introduces the mapping model that keeps your source data safe while you do it.
 
-{/* Tutorial-type page (step 3 of 7). UI labels walked live in project 264 on 2026-08-04: the
-button is "Create Transformation", the dialog is "New Transformation", the sections are "Table
-Input Mapping" (Add Table Input) and "Table Output Mapping" (New Table Output), Source is
-multi-select, and Queries offers "Create Multiple Queries". 2026-08-25: dataset swapped to the
-octopus files (PRDCT-487 arc rework). The 10,000x12 check numbers below come from simulating the
-join offline against the shipped CSVs (verified: every row matches exactly one basin, zero
-duplicates, 4,465 rows get a depth zone); the SQL itself, job timings and all screenshots pend
-the live re-walk in 264. */}
+**Where you are:** six raw tables are in Storage and nothing has been joined yet. **When you
+finish:** one table that answers the question, and a transformation you can re-run.
 
-## What you need
+{/* Tutorial-type page. UI labels walked live in project 264 on 2026-08-04: the button is "Create
+Transformation", the dialog is "New Transformation", the sections are "Table Input Mapping" (Add
+Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select, and Queries
+offers "Create Multiple Queries". 2026-09-09: dataset swapped to Boolabean. The Snowflake block
+below was run as-is through a temporary transformation with exactly the input mapping this page
+describes (project 264, job 103114885, 61 s): 42 rows, 42 distinct (store, date), 0 empty cells, 4
+short-handed, top row Brno / Tue 2026-09-08 / 84.4, identical to Kai's read-only-input version
+from the 2026-09-08 runs and to the offline reference. The BigQuery block is a translation and has
+NOT been run (decision 7 in the plan; no BigQuery project). Screenshots 00–10 still show the
+previous sample's names; phase 2 reshoots them. */}
 
-Four tables in Storage — `occurrences`, `species`, `depth_zones` and `basins` — from
-[Get Your Data In](/getting-started/load/). They sit in whatever bucket the connector created,
-and its name contains a configuration ID, so yours will not match the screenshots.
+<Prereqs needs={['project']}>
+  <li>
+    Six tables in Storage from <a href="/getting-started/load/">Get your data in</a>:
+    <code>stores</code>, <code>products</code>, <code>sales</code>, <code>staffing</code> and{' '}
+    <code>weather_daily</code> in one bucket, <code>forecast</code> in another. The bucket names
+    contain configuration IDs, so yours will not match the screenshots.
+  </li>
+</Prereqs>
 
-That does not matter. What the SQL depends on is the **Table name** you give each table in the
-input mapping below: those must be exactly `occurrences`, `species`, `depth_zones` and `basins`,
-or you have to edit the queries to match.
+<PathIntro />
+
+The bucket names do not matter. What the SQL depends on is the **Table name** you give each table
+in the input mapping below: those must be exactly `sales`, `weather_daily`, `staffing`, `stores` and
+`forecast`, or you have to edit the queries to match. (`products` is not needed for this table.)
 
 ## How a transformation works
 
-A transformation never runs against your Storage tables directly. Keboola copies the tables
-you ask for into a temporary database schema, runs your queries there, and copies back only
-the results you ask for. Three settings control that:
+A transformation never runs against your Storage tables directly. Keboola copies the tables you
+ask for into a temporary database schema, runs your queries there, and copies back only the
+results you ask for. Three settings control that:
 
-1. **[Input mapping](/transformations/mappings/#input-mapping)** — which Storage tables get
-   copied in, and what they are called inside the transformation. Anything you do not list
-   is not visible to your code.
-2. **[Output mapping](/transformations/mappings/#output-mapping)** — which tables your code
-   produces get written back to Storage, and where. Anything you do not list is thrown away
-   when the job ends.
-3. **Queries** — the SQL itself, organized into named code blocks.
+1. **[Input mapping](/transformations/mappings/#input-mapping)** decides which Storage tables get
+   copied in, and what they are called inside the transformation. Anything you do not list is not
+   visible to your code.
+2. **[Output mapping](/transformations/mappings/#output-mapping)** decides which tables your code
+   produces get written back to Storage, and where. Anything you do not list is thrown away when
+   the job ends.
+3. **Queries** are the SQL itself, organized into named code blocks.
 
-That is the safeguard: the only tables your transformation can change are the ones named in
-the output mapping. It is also what lets Keboola track data lineage across the project.
+That is the safeguard: the only tables your transformation can change are the ones named in the
+output mapping. It is also what lets Keboola track data lineage across the project.
 
 ![Screenshot - How mapping works](/getting-started/transform/mapping.png)
+
+## What the SQL has to do
+
+Four ideas, and the queries below are those four in order:
+
+1. **Daily demand.** Sum `units` per café per day, and put that day's temperature and rain next
+   to it.
+2. **Weather bands.** Sort every summer day into a temperature band (under 18 °C, 18 to under 23,
+   23 to under 28, 28 and over) and a rain band (dry under 0.5 mm, wet otherwise), then average
+   the daily demand per café per band. That average is what a day like that has produced before.
+3. **Roster.** From `staffing`, one headcount per café per weekday. The chain rosters by weekday,
+   so this is a single value for every combination.
+4. **The outlook.** Put each forecast day into its bands, look up the café's average for that
+   band and the roster for that weekday, divide one by the other, and flag anything over 67 cups
+   per person.
+
+The bands are **half-open**: `< 18`, then `< 23`, then `< 28`, then everything else, and a day at
+exactly 23.0 °C belongs to exactly one of them. The same `CASE` appears twice in the query, once
+for the summer and once for the forecast, and the two have to agree to the character: a forecast
+day sorted into a band the history side never produced finds no average and comes out empty.
+Nine summer days sit exactly on 18, 23 or 28 °C and twelve exactly on 0.5 mm, so where the
+boundary falls is not academic.
+
+Before either tab: find out which SQL your project speaks. Open **Transformations** and click
+**Create Transformation**; the **New Transformation** dialog lists what this project can run, and
+the SQL entry is either *Snowflake SQL Transformation* or *Google BigQuery Transformation*. New
+[Free Plan](/management/payg-project/) projects default to the [BigQuery backend](/storage/);
+contract customers choose theirs. Close the dialog and carry that word into whichever tab you use.
 
 ## Set it up
 
@@ -68,26 +106,51 @@ Writing SQL transformations is Kai's home ground
 schemas in front of it. Open **Kai Agent** in the top bar and ask:
 
 ```text
-Create a SQL transformation called "Octopus atlas" writing to out.c-octopus-atlas.octopus_atlas.
-Start from every column of occurrences with latitude, longitude and depth_m cast to numbers.
-Join species on aphia_id, adding scientific_name, family, and a display_name that falls back to
-the scientific name when common_name is empty. Add depth_zones.zone_name as depth_zone by depth
-range (left join — many sightings have no depth). Add basins.basin by latitude and longitude
-range; use half-open ranges (>= min and < max) so boundary points match exactly one basin.
-Outline the approach first, then build it and run it.
+Build a Snowflake transformation called "Boolabean staffing outlook" with one output table,
+staffing_outlook. Storage columns arrive as text, so cast before you compare or average.
+
+1. Daily demand: from sales, sum units per store per date, and join weather_daily on store_id
+   and date.
+2. Weather bands: temperature under 18, 18 to under 23, 23 to under 28, and 28 and over, each
+   split into dry (rain under 0.5 mm) and wet (0.5 mm or more). Use half-open ranges so no day
+   lands in two bands. Average the daily units per store per band.
+3. Roster: from staffing, the rostered headcount per store per weekday. It is the same every
+   week, so this is one value per store and weekday.
+4. Forecast: the forecast table's location_id 0 to 5 maps to store_id S01 to S06 in that order,
+   the order the coordinates appear in the request URL.
+5. Output one row per store per forecast day with exactly these columns: store_name, city,
+   date, weekday, forecast_temp_c, forecast_rain_mm, expected_units (the store's historical
+   average in the matching band), rostered_staff, expected_units_per_person, and short_handed,
+   true when that figure exceeds 67.
+
+Run it, then tell me how many rows staffing_outlook has and which store and day come out most
+stretched.
 ```
 
-Spelling out the derived columns is the point — ask only for "a map table" and you will get a
-different set, and the check below will not match. The half-open-ranges sentence matters most:
-with BETWEEN, a sighting sitting exactly on a basin boundary lands in two basins and the row
-count comes out above 10,000. Asking for the outline first is worth it too: you get to read the
-joins before they run. One difference from the hand-built version: Kai builds the transformation
-on **read-only input**, so you will not see an input mapping in its configuration — the mapping
-sections on this page describe the hand-built path.
+On a BigQuery project, say "BigQuery transformation" in the first line; everything else stands.
+The column list in point 5 is what the later pages type into their prompts and checks, so keep it
+as written.
+{/* Guide test 2026-09-09: the live run's prompt described the columns in words and Kai chose
+these exact names on its own, upper-cased because it did not quote its aliases (Snowflake schema
+STORE_NAME … SHORT_HANDED). The list was added so a reader's Kai lands on the same names; it has
+not been re-run in this wording. */}
 
-**Check:** 10,000 rows, 12 columns — the original 7 plus the five named in
-[Run it and check the result](#run-it-and-check-the-result), below the tabs. If the count differs,
-the joins differ: re-prompt, or fix the code in place. Later steps only depend on the table name, so a close-enough table is fine.
+Spelling out the five parts is the point. Ask only for "a staffing table" and you get a different
+set of columns, and the check below will not match. The half-open sentence matters most, and the
+cast sentence second: Kai samples the tables first to see the date format and the text values, and
+then casts everything it compares.
+
+Kai builds the transformation on **read-only input**: it reads the source tables by their full
+Storage names and leaves the input mapping empty, so you will not see one in its configuration. The
+mapping sections of this page describe the hand-built path; the result is the same table. Expect two
+approvals, one for the transformation and one for the run.
+{/* Observed in all three 2026-09-08 runs: storage.input.tables empty, tables addressed as
+"KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the VERIFY(owner) that stood here
+since 5 Aug; see DECISIONS.md 2026-09-08. */}
+
+**Check:** Kai reports `staffing_outlook` with **42 rows** and names the most stretched café and
+day. If the count differs, the joins differ: re-prompt, or fix the code in place. Later steps
+depend only on the table name, so a close-enough table is fine.
 
 </TabItem>
 <TabItem label="Do it yourself">
@@ -98,11 +161,10 @@ the joins differ: re-prompt, or fix the code in place. Later steps only depend o
 
    ![Screenshot - Transformations section](/getting-started/transform/00-transformations.png)
 
-2. Click **Create Transformation**. The **New Transformation** dialog lists what this project
-   can run, and it differs by project: an SQL entry for your backend — *Snowflake SQL
-   Transformation* or *Google BigQuery Transformation* — plus *Python*, *R*, *DuckDB* (Beta),
-   and on some projects *dbt Core*. Take the dialog as the authority on your project rather than
-   this sentence.
+2. Click **Create Transformation**. The **New Transformation** dialog lists what this project can
+   run, and it differs by project: an SQL entry for your backend, *Snowflake SQL Transformation* or
+   *Google BigQuery Transformation*, plus *Python*, *R*, *DuckDB* (Beta), and on some projects
+   *dbt Core*. Take the dialog as the authority on your project rather than this sentence.
    {/* VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
    Beta in the dialog. That contradicts management/pay-as-you-go/index.md, whose Free Plan limits
    say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,
@@ -110,17 +172,14 @@ the joins differ: re-prompt, or fix the code in place. Later steps only depend o
    Three pages disagree; the dialog is what a reader sees, so this sentence defers to it, but the
    PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. */}
 
-   **This list is how you find out which SQL dialect you need.** New
-   [Free Plan](/management/payg-project/) projects default to the
-   [BigQuery backend](/storage/); contract customers choose theirs. Pick the SQL transformation
-   your project offers, and use the matching query block below.
+   Pick the SQL transformation your project offers, and use the matching query block below.
 
    ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
 
-3. Name it `Octopus atlas`, add a description, and in **Folder** type `Octopus`
-   and pick **Create folder "Octopus"**. Folders are cosmetic, but they are the difference
-   between a browsable project and a wall of configurations. If the dialog offers **Use predefined
-   code pattern**, ignore it. Click **Create transformation**.
+3. Name it `Boolabean staffing outlook`, add a description, and in **Folder** type `Boolabean` and
+   pick **Create folder "Boolabean"**. Folders are cosmetic, but they are the difference between a
+   browsable project and a wall of configurations. If the dialog offers **Use predefined code
+   pattern**, ignore it. Click **Create transformation**.
 
    ![Screenshot - Name the transformation](/getting-started/transform/02-name-transformation.png)
 
@@ -128,50 +187,52 @@ the joins differ: re-prompt, or fix the code in place. Later steps only depend o
 
 1. In **Table Input Mapping**, click **Add Table Input**.
 
-2. **Source** searches your Storage as you type. Type `occurrences` and tick the table; the
-   picker is multi-select, so tick `species`, `depth_zones` and `basins` too — it keeps a count
-   of what you have chosen.
+2. **Source** searches your Storage as you type. Type `sales` and tick the table; the picker is
+   multi-select, so tick `weather_daily`, `staffing`, `stores` and `forecast` too. It keeps a
+   count of what you have chosen, and it does not mind that `forecast` sits in a different bucket.
 
    ![Screenshot - Selecting source tables](/getting-started/transform/03-input-source.png)
 
 3. Click **Add Input**. Each table arrives with its **Input Table** name taken from the source
-   table — `occurrences`, `species`, `depth_zones`, `basins`.
+   table: `sales`, `weather_daily`, `staffing`, `stores`, `forecast`.
 
-   **Those four names are what your SQL uses**, which is why the queries below work no matter
-   which bucket the tables actually live in. If you add a table on its own rather than in a
-   batch, the dialog exposes the same value as a **Table name** field you can edit.
+   **Those five names are what your SQL uses**, which is why the queries below work no matter
+   which buckets the tables actually live in. If you add a table on its own rather than in a batch,
+   the dialog exposes the same value as a **Table name** field you can edit.
 
-You should end up with four inputs, listed as **Source Table → Input Table**:
+You should end up with five inputs, listed as **Source Table → Input Table**:
 
 ![Screenshot - The finished input mapping](/getting-started/transform/04-input-mapping.png)
 
-Input mapping has more to it — incremental processing with **Changed in Last**, column
-filters, data filters. None of it is needed here; see
-[input mapping](/transformations/mappings/#input-mapping) when you have a large table to
-process.
+Input mapping has more to it: incremental processing with **Changed in Last**, column filters,
+data filters. None of it is needed here; see
+[input mapping](/transformations/mappings/#input-mapping) when you have a large table to process.
 
 **Set the output mapping**
 
 1. In **Table Output Mapping**, click **New Table Output**.
 
-   Output mapping opens in **Guided Mode** — the standard, copy-based mapping the steps below
+   Output mapping opens in **Guided Mode**, the standard, copy-based mapping the steps below
    describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
-   Storage and is a
-   [private beta](/transformations/mappings/#direct-mode-output-mapping).
+   Storage and is a [private beta](/transformations/mappings/#direct-mode-output-mapping).
    {/* VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
    2026-08-19) with no such request. Either that gate has changed or the mappings page is stale. */}
 
-2. Name the table `octopus_atlas`. This is the name of a table your SQL will create — it does
+2. Name the table `staffing_outlook`. This is the name of a table your SQL will create; it does
    not exist yet. The field is labelled **Table name**, or **Which table should we save?** in
    Guided Mode. If the dialog warns you about case-sensitivity and suggests an UPPERCASE name,
    ignore the suggestion here and match your SQL exactly: the query blocks below create
-   `octopus_atlas` in lower case, and the name has to be the one the query actually creates.
+   `staffing_outlook` in lower case, and the name has to be the one the query actually creates.
 
 3. **Destination** is filled in for you from the transformation's name:
-   `out.c-octopus-atlas.octopus_atlas` — the `out` stage, a bucket named after the
-   transformation, and the table. Neither the bucket nor the table exists yet; both are created
-   the first time the transformation runs.
+   `out.c-Boolabean-staffing-outlook.staffing_outlook`, that is the `out` stage, a bucket named
+   after the transformation, and the table.
+   {/* VERIFY(owner): the bucket ID with a capital B is the one Kai's build created through the
+   API (DECISIONS.md 2026-09-08). Whether the Guided Mode auto-fill keeps the transformation
+   name's capital or lower-cases it was not read live; bucket IDs are case-sensitive and three
+   other pages type this ID, so one look at the auto-filled field settles it. */} Neither the bucket nor the table exists yet; both are
+   created the first time the transformation runs.
 
    ![Screenshot - The finished output mapping](/getting-started/transform/06-output-mapping.png)
 
@@ -181,220 +242,289 @@ In the empty **Queries** section, click **Create Multiple Queries**. Your SQL li
 inside a *block*: you get `Block 1` holding one code. Paste the SQL for **your project's backend**
 and save.
 
-You may get an editor for that one code, where you can also name it — call it
-`Octopus atlas`. You may instead get a single **All Queries** editor holding every block and
-code at once, with the structure marked by comment lines like `/* ===== BLOCK: Block 1 ===== */`;
-there, replace the `-- Your code goes here` line and leave those markers alone, since they are what
-keeps the blocks apart.
+You may get an editor for that one code, where you can also name it; call it `Staffing outlook`.
+You may instead get a single **All Queries** editor holding every block and code at once, with the
+structure marked by comment lines like `/* ===== BLOCK: Block 1 ===== */`; there, replace the
+`-- Your code goes here` line and leave those markers alone, since they are what keeps the blocks
+apart.
 {/* VERIFY(owner): the All Queries editor was what opened in project 6211 on 2026-08-19, and
-neither it nor its BLOCK/CODE comment markers are documented anywhere else in the repo.
-It may be the same thing as the Edit Code control named below rather than a project-dependent
-variant — worth one look before this wording settles. */}
+neither it nor its BLOCK/CODE comment markers are documented anywhere else in the repo. It may be
+the same thing as the Edit Code control named below rather than a project-dependent variant; worth
+one look before this wording settles. */}
 
 Later you can add another code to the same block with **New Code**, or a whole second block with
-**New Code Block** — that is how a longer transformation gets organized. Once there is code,
-the **Queries** header offers **Copy Code** and **Edit Code**.
+**New Code Block**; that is how a longer transformation gets organized. Once there is code, the
+**Queries** header offers **Copy Code** and **Edit Code**.
 
 **If your project uses Snowflake**
 
 ```sql
-CREATE TABLE "tmp_occurrences" AS
-    SELECT "occurrence_id", "aphia_id",
-        TRY_TO_DOUBLE("latitude")  AS "latitude",
-        TRY_TO_DOUBLE("longitude") AS "longitude",
-        TRY_TO_DOUBLE("depth_m")   AS "depth_m",
-        "year", "event_date"
-    FROM "occurrences";
-
-CREATE TABLE "tmp_basins" AS
-    SELECT "basin",
-        TRY_TO_DOUBLE("min_lat") AS "min_lat", TRY_TO_DOUBLE("max_lat") AS "max_lat",
-        TRY_TO_DOUBLE("min_lon") AS "min_lon", TRY_TO_DOUBLE("max_lon") AS "max_lon"
-    FROM "basins";
-
-CREATE TABLE "tmp_zones" AS
-    SELECT "zone_name",
-        TRY_TO_DOUBLE("min_depth_m") AS "min_depth_m",
-        TRY_TO_DOUBLE("max_depth_m") AS "max_depth_m"
-    FROM "depth_zones";
-
-CREATE TABLE "octopus_atlas" AS
-    SELECT "tmp_occurrences".*,
-        "species"."scientific_name",
-        "species"."family",
-        COALESCE(NULLIF("species"."common_name", ''), "species"."scientific_name") AS "display_name",
-        "tmp_zones"."zone_name" AS "depth_zone",
-        "tmp_basins"."basin"
-    FROM "tmp_occurrences"
-        JOIN "species"
-            ON "tmp_occurrences"."aphia_id" = "species"."aphia_id"
-        JOIN "tmp_basins"
-            ON "tmp_occurrences"."latitude"  >= "tmp_basins"."min_lat"
-           AND "tmp_occurrences"."latitude"  <  "tmp_basins"."max_lat"
-           AND "tmp_occurrences"."longitude" >= "tmp_basins"."min_lon"
-           AND "tmp_occurrences"."longitude" <  "tmp_basins"."max_lon"
-        LEFT JOIN "tmp_zones"
-            ON "tmp_occurrences"."depth_m" >= "tmp_zones"."min_depth_m"
-           AND "tmp_occurrences"."depth_m" <  "tmp_zones"."max_depth_m";
+CREATE TABLE "staffing_outlook" AS
+WITH "daily_demand" AS (
+    SELECT "store_id",
+        TRY_TO_DATE("date")          AS "d",
+        SUM(TRY_TO_NUMBER("units"))  AS "daily_units"
+    FROM "sales"
+    GROUP BY "store_id", TRY_TO_DATE("date")
+),
+"demand_weather" AS (
+    SELECT dd."store_id", dd."daily_units",
+        TRY_TO_DOUBLE(w."temp_max_c") AS "temp_max_c",
+        TRY_TO_DOUBLE(w."rain_mm")    AS "rain_mm"
+    FROM "daily_demand" dd
+    JOIN "weather_daily" w
+        ON w."store_id" = dd."store_id" AND TRY_TO_DATE(w."date") = dd."d"
+),
+"band_avg" AS (
+    SELECT "store_id",
+        CASE WHEN "temp_max_c" < 18 THEN 'cold'
+             WHEN "temp_max_c" < 23 THEN 'mild'
+             WHEN "temp_max_c" < 28 THEN 'warm'
+             ELSE 'hot' END           AS "temp_band",
+        CASE WHEN "rain_mm" < 0.5 THEN 'dry' ELSE 'wet' END AS "rain_band",
+        AVG("daily_units")            AS "expected_units"
+    FROM "demand_weather"
+    WHERE "temp_max_c" IS NOT NULL AND "rain_mm" IS NOT NULL
+    GROUP BY 1, 2, 3
+),
+"roster" AS (
+    SELECT "store_id",
+        DAYNAME(TRY_TO_DATE("date"))                    AS "weekday",
+        ROUND(AVG(TRY_TO_NUMBER("staff_on_shift")))     AS "rostered_staff"
+    FROM "staffing"
+    GROUP BY 1, 2
+),
+"forecast_days" AS (
+    SELECT 'S0' || (TRY_TO_NUMBER("location_id") + 1)   AS "store_id",
+        TRY_TO_DATE("time")                             AS "d",
+        DAYNAME(TRY_TO_DATE("time"))                    AS "weekday",
+        TRY_TO_DOUBLE("temperature_2m_max")             AS "temp_max_c",
+        TRY_TO_DOUBLE("precipitation_sum")              AS "rain_mm"
+    FROM "forecast"
+)
+SELECT st."store_name", st."city",
+    f."d"                                   AS "date",
+    f."weekday",
+    f."temp_max_c"                          AS "forecast_temp_c",
+    f."rain_mm"                             AS "forecast_rain_mm",
+    ROUND(b."expected_units", 1)            AS "expected_units",
+    r."rostered_staff",
+    ROUND(b."expected_units" / NULLIF(r."rostered_staff", 0), 1) AS "expected_units_per_person",
+    CASE WHEN b."expected_units" / NULLIF(r."rostered_staff", 0) > 67 THEN TRUE ELSE FALSE END AS "short_handed"
+FROM "forecast_days" f
+JOIN "stores" st ON st."store_id" = f."store_id"
+LEFT JOIN "band_avg" b
+    ON b."store_id" = f."store_id"
+   AND b."temp_band" = CASE WHEN f."temp_max_c" < 18 THEN 'cold'
+                            WHEN f."temp_max_c" < 23 THEN 'mild'
+                            WHEN f."temp_max_c" < 28 THEN 'warm'
+                            ELSE 'hot' END
+   AND b."rain_band" = CASE WHEN f."rain_mm" < 0.5 THEN 'dry' ELSE 'wet' END
+LEFT JOIN "roster" r ON r."store_id" = f."store_id" AND r."weekday" = f."weekday"
+ORDER BY f."d", st."store_name";
 ```
 
-Four queries, in order: three that cast the CSV text columns into real numbers — tables loaded
-from CSV arrive as text, and `depth_m` is empty on more than half the rows, which is exactly what
-`TRY_TO_DOUBLE` turns into a clean `NULL` — then one join that builds the atlas. Only that last
-table is in the output mapping, so the three `tmp_` tables vanish when the job finishes.
+One statement, five named steps. Every value it compares or averages is cast first: tables loaded
+from CSV arrive as text, and `TRY_TO_NUMBER`, `TRY_TO_DOUBLE` and `TRY_TO_DATE` turn anything that
+is not a number or a date into a clean `NULL` instead of an error. The `WHERE` in `band_avg` then
+keeps such rows out of the averages.
 
-Two join details carry the meaning. The species join is a plain equality, but `depth_zone` comes
-from a **LEFT JOIN** — a sighting without a depth keeps its row and gets a `NULL` zone rather
-than disappearing. And both range joins are **half-open** (`>= min AND < max`): with `BETWEEN`,
-a sighting sitting exactly on a basin boundary would land in two basins and duplicate its row.
+Three join details carry the meaning. The forecast joins `stores` with a plain equality on the
+café ID it derives from `location_id`. The averages and the roster come in through **LEFT JOIN**s,
+so a forecast day whose kind of weather never happened this summer keeps its row with an empty
+`expected_units` rather than disappearing. And the two band `CASE`s, one on the history side and
+one on the forecast side, have to be written identically, or days fall between the bands. None of
+the joins can add rows: each band average and each roster value is one row per café, so the
+output is bounded by the 42 forecast rows however the thresholds are written.
 
-Every identifier is double-quoted because Snowflake uppercases unquoted ones.
+Every identifier is double-quoted because Snowflake upper-cases unquoted ones. Quoting the output
+aliases too is what gives the table lower-case column names; keep to one convention, because a
+table that already exists remembers the case of its columns (see the check below).
 
 ![Screenshot - The configured transformation](/getting-started/transform/07-configured.png)
 
 **If your project uses BigQuery**
 
-[BigQuery](/transformations/bigquery/) does not quote identifiers this way, and CTEs replace the
-temporary tables. It is written to produce the same table:
+[BigQuery](/transformations/bigquery/) does not quote identifiers this way. Backticks are
+optional, and the block uses them on `date` and `time` only to keep those column names
+unambiguous; `SAFE_CAST` stands in for the `TRY_` functions. It is
+written to produce the same table:
 
 ```sql
-CREATE TABLE octopus_atlas AS
-WITH tmp_occurrences AS (
-    SELECT
-        occurrence_id,
-        aphia_id,
-        SAFE_CAST(latitude AS FLOAT64)  AS latitude,
-        SAFE_CAST(longitude AS FLOAT64) AS longitude,
-        SAFE_CAST(depth_m AS FLOAT64)   AS depth_m,
-        year,
-        event_date
-    FROM
-        occurrences
+CREATE TABLE staffing_outlook AS
+WITH daily_demand AS (
+    SELECT store_id,
+        SAFE_CAST(`date` AS DATE)          AS d,
+        SUM(SAFE_CAST(units AS INT64))     AS daily_units
+    FROM sales
+    GROUP BY store_id, d
 ),
-tmp_basins AS (
-    SELECT
-        basin,
-        SAFE_CAST(min_lat AS FLOAT64) AS min_lat,
-        SAFE_CAST(max_lat AS FLOAT64) AS max_lat,
-        SAFE_CAST(min_lon AS FLOAT64) AS min_lon,
-        SAFE_CAST(max_lon AS FLOAT64) AS max_lon
-    FROM
-        basins
+demand_weather AS (
+    SELECT dd.store_id, dd.daily_units,
+        SAFE_CAST(w.temp_max_c AS FLOAT64) AS temp_max_c,
+        SAFE_CAST(w.rain_mm AS FLOAT64)    AS rain_mm
+    FROM daily_demand dd
+    JOIN weather_daily w
+        ON w.store_id = dd.store_id AND SAFE_CAST(w.`date` AS DATE) = dd.d
 ),
-tmp_zones AS (
-    SELECT
-        zone_name,
-        SAFE_CAST(min_depth_m AS FLOAT64) AS min_depth_m,
-        SAFE_CAST(max_depth_m AS FLOAT64) AS max_depth_m
-    FROM
-        depth_zones
+band_avg AS (
+    SELECT store_id,
+        CASE WHEN temp_max_c < 18 THEN 'cold'
+             WHEN temp_max_c < 23 THEN 'mild'
+             WHEN temp_max_c < 28 THEN 'warm'
+             ELSE 'hot' END                AS temp_band,
+        CASE WHEN rain_mm < 0.5 THEN 'dry' ELSE 'wet' END AS rain_band,
+        AVG(daily_units)                   AS expected_units
+    FROM demand_weather
+    WHERE temp_max_c IS NOT NULL AND rain_mm IS NOT NULL
+    GROUP BY 1, 2, 3
+),
+roster AS (
+    SELECT store_id,
+        FORMAT_DATE('%a', SAFE_CAST(`date` AS DATE))          AS weekday,
+        ROUND(AVG(SAFE_CAST(staff_on_shift AS INT64)))        AS rostered_staff
+    FROM staffing
+    GROUP BY 1, 2
+),
+forecast_days AS (
+    SELECT CONCAT('S0', CAST(SAFE_CAST(location_id AS INT64) + 1 AS STRING)) AS store_id,
+        SAFE_CAST(`time` AS DATE)                              AS d,
+        FORMAT_DATE('%a', SAFE_CAST(`time` AS DATE))           AS weekday,
+        SAFE_CAST(temperature_2m_max AS FLOAT64)               AS temp_max_c,
+        SAFE_CAST(precipitation_sum AS FLOAT64)                AS rain_mm
+    FROM forecast
 )
-SELECT
-    tmp_occurrences.*,
-    species.scientific_name,
-    species.family,
-    COALESCE(NULLIF(species.common_name, ''), species.scientific_name) AS display_name,
-    tmp_zones.zone_name AS depth_zone,
-    tmp_basins.basin
-FROM
-    tmp_occurrences
-JOIN
-    species ON tmp_occurrences.aphia_id = species.aphia_id
-JOIN
-    tmp_basins ON tmp_occurrences.latitude  >= tmp_basins.min_lat
-              AND tmp_occurrences.latitude  <  tmp_basins.max_lat
-              AND tmp_occurrences.longitude >= tmp_basins.min_lon
-              AND tmp_occurrences.longitude <  tmp_basins.max_lon
-LEFT JOIN
-    tmp_zones ON tmp_occurrences.depth_m >= tmp_zones.min_depth_m
-             AND tmp_occurrences.depth_m <  tmp_zones.max_depth_m;
+SELECT st.store_name, st.city,
+    f.d                                     AS `date`,
+    f.weekday,
+    f.temp_max_c                            AS forecast_temp_c,
+    f.rain_mm                               AS forecast_rain_mm,
+    ROUND(b.expected_units, 1)              AS expected_units,
+    r.rostered_staff,
+    ROUND(b.expected_units / NULLIF(r.rostered_staff, 0), 1) AS expected_units_per_person,
+    COALESCE(b.expected_units / NULLIF(r.rostered_staff, 0) > 67, FALSE) AS short_handed
+FROM forecast_days f
+JOIN stores st ON st.store_id = f.store_id
+LEFT JOIN band_avg b
+    ON b.store_id = f.store_id
+   AND b.temp_band = CASE WHEN f.temp_max_c < 18 THEN 'cold'
+                          WHEN f.temp_max_c < 23 THEN 'mild'
+                          WHEN f.temp_max_c < 28 THEN 'warm'
+                          ELSE 'hot' END
+   AND b.rain_band = CASE WHEN f.rain_mm < 0.5 THEN 'dry' ELSE 'wet' END
+LEFT JOIN roster r ON r.store_id = f.store_id AND r.weekday = f.weekday
+ORDER BY f.d, st.store_name;
 ```
 
-{/* 2026-08-25: SQL rewritten for the octopus dataset (PRDCT-487); NOT yet run live on either
-backend — the re-walk in 264 must run both blocks and update the timings/screenshots. Lessons
-carried over from the deals-era BigQuery walk (2026-08-19, project 6211) that still bind here:
-(1) qualify every CTE/table column in BigQuery — a bare column name that matches a table name
-resolves to the range variable and CASE/comparisons then fail with "STRUCT<...> vs STRING"; the
-block above qualifies everything for that reason. (2) `SELECT * EXCEPT (_timestamp)` stays out:
-_timestamp appears only on CLONE-staged inputs (transformations/mappings/index.md), and EXCEPT on
-an absent column is itself an error. Offline verification of the join semantics (shipped CSVs,
-half-open ranges): 10,000 rows, each matching exactly one basin; 4,465 get a depth zone. */}
+{/* VERIFY(owner): the BigQuery block is a translation of the verified Snowflake block and has not
+been run: there is no BigQuery project available to this work (plan decision 7). Points to check
+on a real run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
+FORMAT_DATE('%a') returning Mon/Tue like Snowflake's DAYNAME, and that every column is qualified
+(the 2026-08-19 lesson from project 6211: a bare column name that matches a table name resolves to
+the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 2026-08-25 note
+about `SELECT * EXCEPT (_timestamp)` still applies: _timestamp appears only on CLONE-staged inputs
+(transformations/mappings/index.md), and EXCEPT on an absent column is itself an error, so the
+block does not use it. */}
 
 </TabItem>
 </Tabs>
 
 ## Run it and check the result
 
-*Coming from the Kai tab? The run already happened — the prompt asked for it. Skip to the
-row-count check below.*
+*Coming from the Kai tab? The run already happened; the prompt asked for it. Skip to the row-count
+check below.*
 
 Click **Run Transformation** and confirm with **Run**. That creates a background job which copies
-the input tables in, runs your SQL, and writes `octopus_atlas` back to Storage. The job log
-spells the mechanism out — *"Loading 4 tables to workspace"*, then a line per table cloned into
-the workspace — which is the mapping model from the top of this page, in action.
+the input tables in, runs your SQL, and writes `staffing_outlook` back to Storage: the mapping
+model from the top of this page, in action.
 
 ![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
 
-A notification appears with a **Show job** link — *Snowflake SQL job has been scheduled*, or your
-backend's equivalent — and you can also find it under **Jobs**. It takes about a minute, and a
+A notification appears with a **Show job** link (*Snowflake SQL job has been scheduled*, or your
+backend's equivalent) and you can also find it under **Jobs**. It takes about a minute, and a
 green **Success** means it worked.
 
 ![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
 
-Then open **Storage**: there is a new bucket `out.c-octopus-atlas` — listed as `octopus-atlas`
-with an **OUT** badge, the same way the `in.c-` prefix was hidden in step 2 — holding
-`octopus_atlas` — **10,000 rows and 12 columns**. That row count is the same as the source
-`occurrences` table, which is the quickest sanity check that the joins matched every row without
-duplicating any: more than 10,000 means a range join double-matched, fewer means an inner join
-dropped sightings.
+Then open **Storage**: there is a new bucket `out.c-Boolabean-staffing-outlook`, listed as
+`Boolabean-staffing-outlook` with an **OUT** badge the same way the `in.c-` prefix was hidden
+before, holding `staffing_outlook` with **42 rows and 10 columns**.
 
-The 12 columns are the original 7 plus the five the SQL added: `scientific_name`, `family`,
-`display_name`, `depth_zone` and `basin`. Open the **Data Sample** tab and the atlas already
-answers things the raw file could not — sort by `depth_m` descending and the deepest row is
-*Grimpoteuthis challengeri* — a dumbo octopus, though the data only knows its Latin name —
-recorded at **4,838 meters** in the abyssal zone.
+Three checks, in order of how much they tell you:
+
+- **42 rows**, which is six cafés times seven forecast days. More than 42 means an input table
+  has duplicate rows (a forecast loaded twice with incremental load on, a café listed twice);
+  fewer means a join dropped a café or a day, most often because `location_id` did not map onto
+  a `store_id`.
+- **No two rows share a café and a date.** Open the **Data Sample** tab and sort by `store_name`;
+  each café should show seven different dates.
+- **`short_handed` is true on a few rows, not on all and not on none.** Sort by
+  `expected_units_per_person` descending: the top row is the café and day the whole guide is
+  about, and the next page asks Kai to explain it. How many rows are flagged depends on the
+  forecast; our week had four, and a cool, wet week can flag nothing, which is the table being
+  right.
+
+The 10 columns are `store_name`, `city`, `date`, `weekday`, `forecast_temp_c`,
+`forecast_rain_mm`, `expected_units`, `rostered_staff`, `expected_units_per_person` and
+`short_handed`. If Kai built the table, Storage may show them in upper case: Snowflake upper-cases
+an alias that is not quoted, and the names are the same names. An empty `expected_units` on a row is not an error: it means the summer never had
+a day in that café's band, so there is no history to average. In this sample that band is *cold
+and dry*: five of the six cafés had no dry day under 18 °C all summer.
+
+{/* On the day this was written (forecast 2026-09-08 to 09-14): 4 rows flagged, top row Boolabean
+Zelný trh (Brno), Tue 2026-09-08, 31.2 °C, 0 mm, 168.8 expected units, 2 rostered, 84.4 per person.
+Recorded in DECISIONS.md, deliberately not on the page: decision 6. */}
 
 The table list also has a **Recently Updated By** column, naming the transformation and its
-backend (`Octopus atlas / Snowflake SQL` here) — the fastest way to answer "where did this table
-come from?" months later.
+backend (`Boolabean staffing outlook / Snowflake SQL` here), the fastest way to answer "where did
+this table come from?" months later.
 
 ![Screenshot - The new table in Storage](/getting-started/transform/10-table-in-storage.png)
 
-Running the transformation again simply rebuilds the table; it is safe to re-run while you are
-experimenting.
+Running the transformation again rebuilds the table; it is safe to re-run while you are
+experimenting. Tomorrow's forecast gives you tomorrow's table, which is what the scheduling page
+is for.
 
 ## If it goes wrong
 
-- **`Object 'SPECIES' does not exist`** (Snowflake). A table is missing from the input
-  mapping, or the **Table name** inside the transformation differs from what the SQL uses.
-  Snowflake uppercases unquoted identifiers, which is why every identifier is double-quoted.
-  On BigQuery the equivalent error is `Table ... was not found`.
-- **The job succeeds but Storage has no new table.** The output mapping is empty or names a
-  table your SQL never creates. The names must match exactly: `octopus_atlas`.
-- **`Numeric value '' is not recognized`.** Tables loaded from CSV arrive as text columns
-  unless you give them types, so an empty cell is `''` rather than `NULL` — and `depth_m` is
-  empty on more than half of these rows, which is why the queries cast with
-  `TRY_TO_DOUBLE` (Snowflake) / `SAFE_CAST` (BigQuery) before comparing. If you see this
-  error, a cast got dropped somewhere.
-- **The atlas has more than 10,000 rows.** A range join double-matched: a sighting sitting
-  exactly on a boundary fell into two basins or two zones. That happens when `BETWEEN`
-  (inclusive on both ends) replaces the half-open `>= min AND < max` the queries use.
+- **`Object 'SALES' does not exist`** (Snowflake). A table is missing from the input mapping, or
+  the **Table name** inside the transformation differs from what the SQL uses. Snowflake
+  upper-cases unquoted identifiers, which is why every identifier is double-quoted. On BigQuery the
+  equivalent error is `Table ... was not found`.
+- **The job succeeds but Storage has no new table.** The output mapping is empty or names a table
+  your SQL never creates. The names must match exactly: `staffing_outlook`.
+- **`Failed to process output mapping … Some columns are missing in the csv file. Missing
+  columns: STORE_NAME, CITY, …`** The table already exists in Storage, with column names in a
+  different case from the ones your query produced this time. An existing table remembers the
+  exact names of its columns, and Snowflake upper-cases an alias you did not quote, so switching
+  between quoted and unquoted aliases between runs is enough to trigger it. Either keep the alias
+  style that created the table, or delete the table in Storage and run again. It happens when the
+  Kai tab created the table first and the hand-written query writes into it, and the other way
+  round.
+- **`Numeric value '' is not recognized`.** Tables loaded from CSV arrive as text columns unless
+  you give them types, so an empty cell is `''` rather than `NULL`. The queries cast with `TRY_TO_`
+  (Snowflake) or `SAFE_CAST` (BigQuery) before comparing; if you see this error, a cast got dropped
+  somewhere.
+- **The table has more than 42 rows.** An input has duplicates. The forecast configuration ran
+  with **Incremental load** on and appended a second copy, or `stores` lists a café twice. The
+  joins cannot do this on their own; look at the inputs, and switch incremental load off on the
+  forecast row.
+- **Every row has an empty `expected_units`.** The band `CASE` on the forecast side does not
+  produce the same labels as the one on the history side, so nothing joins. Compare the two
+  expressions character by character.
 - **`Invalid columns: _timestamp`** when the output is written. Your input tables were staged by
-  *cloning*, which copies Keboola's internal `_timestamp` column along with the data — and that
+  *cloning*, which copies Keboola's internal `_timestamp` column along with the data, and that
   column cannot be written back to Storage. It is not backend-specific and it is not a problem with
   the query. The clean fix is the **`dropTimestampColumn`** option on the input mapping; see
-  [the `_timestamp` system column](/transformations/mappings/#_timestamp-system-column). The run
-  behind these screenshots was copy-staged, so the column never appeared.
+  [the `_timestamp` system column](/transformations/mappings/#_timestamp-system-column).
 - **You want to see what the query actually returns before saving.** That is what a
   [workspace](/getting-started/transform/workspace/) is for.
 - **You would rather not read the log yourself.** Kai has it open already
   ([Troubleshooting](/kai/use-cases/#troubleshooting)):
-  `My transformation "Octopus atlas" failed. Read the last job's log and tell me what to fix.`
+  `My transformation "Boolabean staffing outlook" failed. Read the last job's log and tell me what to fix.`
 
 ## Going further
 
-- [Use a Workspace](/getting-started/transform/workspace/) — develop and test queries
-  against a copy of the data before committing them to a transformation. This is how the
-  work is really done.
-
-**Next:** [Send your data somewhere →](/getting-started/write/)
+- [Use a workspace](/getting-started/transform/workspace/) to develop and test queries against a
+  copy of the data before committing them to a transformation. This is how the work is really
+  done.

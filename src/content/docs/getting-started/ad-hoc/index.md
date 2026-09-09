@@ -1,5 +1,5 @@
 ---
-title: 'Ad-Hoc Data Analysis'
+title: 'Ad-hoc data analysis'
 slug: 'getting-started/ad-hoc'
 description: "Explore arbitrary data in a Python workspace: bring in a public BigQuery dataset, plot it in a Jupyter notebook, and install your own libraries."
 redirect_from:

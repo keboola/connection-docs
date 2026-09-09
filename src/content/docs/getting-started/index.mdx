@@ -1,0 +1,257 @@
+---
+title: 'Getting started with Keboola'
+slug: 'getting-started'
+description: 'Build your first working data pipeline in Keboola: load five CSV files and a live forecast, join them with SQL, ask the result a question, publish it as an app, and schedule it to rebuild every morning.'
+redirect_from:
+  - /tutorial/
+  - /getting-started/project/
+---
+
+import PageMeta from '../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../components/getting-started/Prereqs.astro';
+
+<PageMeta genre="Tutorial" minutes="60" />
+
+A small café chain writes its rosters the way most small businesses do: by the day of the week.
+In Brno that means two people on Monday and Tuesday and three the rest of the week. Demand does not read the roster. It
+reads the weather, so a hot, dry Tuesday outsells a wet Saturday, and the two people behind the
+counter find out at eleven in the morning.
+
+{/* Tutorial-hub page: the arc index plus the "get a project" step, merged here on 2026-09-09.
+Timing: 60 is the sum of the pages' own budgets (10+15+5+10+15+5) and matches "under an hour";
+the measured Kai path on 2026-09-08/09 was about 30 minutes of wall time. Re-measure in the
+phase-3 stopwatch pass and set both from that.
+Links every step and the optional deep-dives. The sample world is Boolabean, a fictional chain
+(DECISIONS.md, 2026-09-03); the theme stays out of the title and description — none of the twelve
+documentation sites surveyed puts the sample's topic there. */}
+
+The question this guide answers:
+
+> **Which day next week will leave a café short-handed?**
+
+You have the data to answer it: a summer of sales, the rosters that served it, and the weather
+each day, spread across five files, none of which answers alone. The sixth piece does not exist
+yet. Next week's weather comes from a public forecast API that needs no account, and it is the
+reason the answer changes every morning.
+
+{/* Hero clip removed 2026-09-09: the octopus map tour contradicted the text once the sample world
+changed. Phase 2 re-shoots it in three acts — the five files, the question held long enough to
+read (poster frame), the finished grid with its red cells — from the live pipeline in project 264.
+Tracked in MISSING.md. Jordan's 2026-08-21 point ("reader can't tell what they'll get") is carried
+by the table below until the clip is back. */}
+
+In under an hour you will have a table that answers the question for six cafés and seven days, an
+app anyone can open to read it, and a flow that rebuilds both before the first café opens. It is a
+working, scheduled pipeline rather than an exercise. Most steps are one Kai prompt: copy it, watch
+it build, check the result. Every step also has the click-through version. Everything happens in
+the browser, nothing needs installing, and a
+[free project](https://connection.us-east4.gcp.keboola.com/wizard) covers all of it without a
+sales call.
+
+## What you will build
+
+| Phase | What happens | Keboola calls it |
+|---|---|---|
+| Load | five CSV files and a live forecast, fetched from URLs, become six tables | a **data source connector** |
+| Transform | SQL joins them into one table: a café, a day, the demand to expect, the crew rostered, a flag | a **transformation** |
+| Ask | the question, answered out of that table in plain words | **Kai** reading your data |
+| Publish | a grid of six cafés by seven days, red where it will hurt | a **data app** |
+| Automate | all of it re-runs every morning on the new forecast, and tells you if it breaks | a **flow** |
+| Check | what should be in Storage and Jobs, and the failures that actually happen | — |
+
+The sales file alone can plot a summer. It cannot tell you what any of it *means*: it names cafés
+and products by ID, it knows nothing about who was on shift, and it has no idea what the weather
+was. Four small tables (the cafés, the menu, the daily roster, the daily weather) hold the missing
+halves, and the forecast turns a history into a warning. Joining them is the whole trick.
+
+The joined table is the one a manager would read: one row per café per forecast day, with the
+temperature and rain expected, the demand that kind of day has produced before, the crew rostered
+for that weekday, and how many cups each of them would have to sell. Cross a line and the row is
+flagged. Some weeks nobody crosses it, because a cool, wet forecast is a quiet one, and the grid
+says so. A quiet week is still an answer.
+
+{/* Data facts, from public/getting-started/boolabean/*.csv: six cafés (Prague, Brno, Ostrava,
+Plzeň, Olomouc, Liberec), 18 products, 9,761 sales rows for June–August 2026, 552 roster rows with
+2–4 people on shift, 552 weather rows, and a 42-row live forecast (6 × 7). Values on the day of
+writing live in DECISIONS.md (2026-09-08), not here — decision 6, the forecast moves daily. */}
+
+## Get a project
+
+Everything you build lives inside a **project**: the data you load, the SQL you write, the flow
+that runs them. Kai works *inside* a project, so getting one is the one step it cannot do for you.
+It comes first, and it is yours.
+
+<Prereqs needs={[]}>
+  <li>An email address, and nothing else, for the project itself.</li>
+  <li>
+    If your company already uses Keboola, ask a colleague to invite you instead of creating your
+    own project; you probably want to work in theirs.
+  </li>
+  <li>
+    <strong>No SQL required.</strong> Kai writes the queries; the click-through pages give every
+    query in full if you would rather read them.
+  </li>
+    <li>
+    <strong>A Google account</strong> only if you take the spreadsheet side trip; that consent
+    screen is in your own account.
+  </li>
+  <li>
+    Once you have the project: the <strong>Kai Agent</strong> button in its top bar. An
+    organization admin switches the feature on; see{' '}
+    <a href="/kai/getting-started/">Get started with Kai</a>.
+  </li>
+</Prereqs>
+
+Three ways in, in order of how quickly they get you started:
+
+1. **Free Plan**: [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
+   right now. It is enough for everything in this guide: 250 GB of Storage and up to 60 minutes
+   of job runtime a month (the free allowance tracks your previous month's usage).
+
+   {/* VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
+   actual usage from the previous month" but never states what a project gets in its first month.
+   Worth stating on that page. */} See [Pay As You Go](/management/payg-project/) for the full
+   list of limits, including that the Free Plan does not let you choose a stack and gives you one
+   project.
+2. **Join an existing project**: ask an admin of your company's Keboola organization to invite
+   you. They do it from **Users & Settings** in the project, with **Invite User**.
+3. **Talk to us**: for a trial of a full project with a chosen stack and no Free Plan limits,
+   [contact Keboola](https://www.keboola.com/contact).
+
+A project is a self-contained workspace with its own data storage, configurations, users and
+billing. Nothing leaks between projects unless you deliberately share it through the
+[Data Catalog](/catalog/). Each project lives on one **stack**, a full, independent instance of
+Keboola in one cloud provider and one region, such as `connection.eu-central-1.keboola.com` (AWS
+Frankfurt). Projects never span stacks, and an account on one stack does not exist on another, so
+the URL you sign in at is part of your project's identity. You do not pick a stack here: self-serve
+projects are created on a fixed one, and any other stack comes through a sales contract, the
+**Talk to us** route above. The list of stacks is in the [platform overview](/overview/#stacks).
+Larger organizations run several projects;
+[Multi-Project Architecture](/overview/onboarding/architecture-guide/) covers that when you get to
+it.
+
+### Find your way around
+
+After signing in you land on the project dashboard. Five places matter for this guide:
+
+- **Components** holds every data source connector, data destination connector, and application
+  you can add to the project. This is where you configure how data gets in and out.
+- **Transformations** is the code that reshapes your data: SQL, Python, R, and dbt. Which of them a
+  project offers is listed in its own **Create Transformation** dialog, so that dialog is the
+  answer to "what can this project run?".
+- **Storage** lists every table and file in the project, organized into buckets. Its tabs cover
+  **Tables & Buckets**, **Files**, **Data Streams**, **Storage Jobs** and **Events**.
+- **Flows** is the automation layer: what runs, in what order, on what schedule. Projects that have
+  both kinds show this as **Conditional Flows**.
+- **Jobs** is the log of everything that has run, successfully or not.
+
+{/* The project-screen tour was verified live in project 264 on 2026-08-04: the nav reads
+Dashboard / Flows / Storage / Apps / Components / Workspaces / Transformations / Data Catalog /
+Jobs, and Kai appears as "Kai Agent" with a Beta pill. Free Plan limits are sourced from
+/management/payg-project/. The sign-up wizard is deliberately NOT walked — creating accounts is out
+of scope for automated verification — so those three lines rest on the Pay As You Go page.
+
+VERIFY(owner): "Kai cannot create a project" is an inference, not a documented limit — it follows
+from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current project"), but no
+Kai page states it outright. Confirm there is no project-creation tool, and consider stating the
+boundary on kai/index.md. */}
+
+:::tip[Ask Kai to orient you]
+Look for **Kai Agent** in the top bar. It has to be enabled first and it is not on every stack, so
+see [Get started with Kai](/kai/getting-started/) if you cannot find it. On a project you inherit
+rather than create, the first question is usually
+([Data Exploration](/kai/use-cases/#data-exploration)):
+
+```text
+I'm new to this project. Give me an overview of the data structure and what each bucket contains.
+```
+:::
+
+**Check it worked.** Open **Storage** and you can see the project's bucket list. Empty is fine;
+that is what you are about to change. **Kai Agent** opens a chat panel when you click it. If the
+button is missing, or clicking it asks you to switch the feature on, that is the feature gate: an
+organization admin does it, and a non-admin needs them or Support. There is also a monthly message
+allowance, and it is smaller on Pay As You Go.
+{/* VERIFY(owner), time-critical: kai/getting-started.md still states a monthly turn allowance
+(150, 50 on PAYG) while kai/pricing.md says the counter is replaced by PPU credits from
+15 September 2026. This sentence is true today and may be wrong next week; whoever reconciles
+those two pages should reword it. */}
+
+**If it goes wrong.** The sign-up email never arrives: check spam, then try again. A half-finished
+registration does not block a retry with the same address. You sign in and see no project: you are
+on the wrong stack, or your invite is still pending, so confirm the exact URL with whoever invited
+you. Your company uses SSO: sign in through your organization's link rather than creating a new
+account, because a fresh Free Plan project will not have access to your team's data.
+
+## Two ways to do every step
+
+Every building page opens with a **Do it with Kai** tab (copy the prompt, watch it build, check the
+result) and a **Do it yourself** tab with every click written out, for when you want to see the
+mechanics. The project above is the one thing that had to be yours; the Google authorization on
+the spreadsheet side trip is the other.
+
+Kai asks before it changes anything: expect one approval dialog per object it creates, while
+questions that only read do not ask. If confirming each one gets tiring, **Always allow** on a
+dialog and [tool permissions](/kai/settings/#tool-permissions) pre-approve a tool for the rest of
+the chat or the project. The chat's **plan mode** button is a different thing. Kai writes the steps
+down and asks you to approve the plan before it starts, and then still asks for each change. Use
+it when you want to read the plan first.
+{/* Plan mode confirmed live 2026-09-02: the composer carries a button labelled "Enable plan
+mode" (aria-label), alongside "Disable follow mode". What it does was measured on 2026-09-08 in
+two staged runs in project 264: one approval of the written plan, then every per-object approval
+exactly as without it (8 to the control run's 7). The earlier wording promised "approve it once"
+— wrong, corrected here. Still owed: a description on the kai/ pages, which document neither
+mode. */}
+
+Not having Kai does not block the build. The loading, the SQL and the flow each carry a
+click-through path in full. Two pages assume Kai:
+[Ask a question and get an answer](/getting-started/ask/), where you can run the same query in a
+[workspace](/getting-started/transform/workspace/) instead, and
+[Put it in front of someone](/getting-started/app/), whose manual route is a development workflow
+in the Apps section. Once you have seen the pieces, they collapse:
+[the same request works as one prompt](/getting-started/ask/#the-same-request-as-one-prompt),
+with one caveat that page states.
+
+## The steps
+
+1. **[Get your data in](/getting-started/load/)** pulls the five files and the live forecast into
+   Storage with a connector, and explains buckets, tables and stages. Two Kai prompts, runs
+   included.
+2. **[Transform data](/getting-started/transform/)** writes the SQL that puts each forecast day
+   next to the demand that kind of weather has produced before, and the crew on that weekday's
+   roster. One Kai prompt builds and runs it.
+3. **[Ask a question and get an answer](/getting-started/ask/)** puts the guide's question to your
+   own data and has Kai answer it out of the table you just built.
+4. **[Put it in front of someone](/getting-started/app/)** turns the table into the six-by-seven
+   grid, described to Kai in one paragraph and published from the builder.
+5. **[Make it run every morning](/getting-started/automate/)** runs the whole thing in order, on a
+   schedule, with notifications. Kai wires the flow and, if you ask, the schedule; notifications
+   are two clicks.
+6. **[Check it worked](/getting-started/check/)** says what should be in Storage and Jobs, gives
+   the one number that proves the join, and lists the failures that actually happen.
+
+Read them in order, or land on any one of them: each states where you should be, what it needs,
+and how to tell it worked. The **Next** control at the foot of every page follows this order.
+
+## Going further
+
+Optional side trips, once the main path makes sense. None of them are needed to finish the
+guide:
+
+- **[Send a table to Google Sheets](/getting-started/write/)** delivers the result to where
+  people actually read it. It needs a Google account you can authorize.
+- **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
+  **[Load from a database](/getting-started/load/database/)** load from a source that needs
+  credentials, rather than from the public URLs the guide uses.
+- **[Use a workspace](/getting-started/transform/workspace/)** is where you develop and test SQL
+  against a copy of your data before committing it to a transformation.
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** explores arbitrary data in a Python or R
+  notebook rather than building a pipeline.
+- **[Development Branches](/getting-started/branches/)** changes a running project safely: make
+  the change, review the diff, then merge.
+
+## If you are planning a rollout, not learning the tool
+
+This guide is for one person building one pipeline. For introducing Keboola to a team, with
+project architecture, a data model, naming conventions and governance, start with
+[Platform Onboarding](/overview/onboarding/) instead.

@@ -96,4 +96,3 @@ or navigate directly to the **Storage** section to explore the data.
 Another side trip: load the same kind of data with the
 [database data source connector](/getting-started/load/database/).
 
-**Next:** [Transform your data →](/getting-started/transform/)
