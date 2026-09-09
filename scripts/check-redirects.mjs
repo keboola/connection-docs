@@ -19,7 +19,7 @@
 // TSV columns: dev_path <TAB> final_help_path <TAB> status
 //   moved    — page gets a topic home on help (final_help_path)
 //   redirect — dev landing/duplicate; 301 straight to the canonical
-//   dies     — site chrome (404, homepage) — no mapping required, listed for completeness
+//   dies     — site chrome (404.html) — nothing to map, listed for completeness
 //   external — deliberately not on help; 301 goes off-site (e.g. the tool's own repository)
 //   unsure   — PLACEMENT-MAP row awaiting a PRDCT-550 call; final path is the proposal
 //   alias    — not a page: a Jekyll redirect_from the dev site honours; help resolves it via redirect_from on the canonical page
@@ -89,38 +89,45 @@ const inDist = (p) => {
   const c = p.replace(/^\//, '').replace(/\/$/, '');
   return ['index.html', '.html'].some((suf) =>
     fs.existsSync(path.join(DIST, suf === 'index.html' ? path.join(c, 'index.html') : c + suf))) ||
-    fs.existsSync(path.join(DIST, c)); // literal (e.g. 404.html)
+    (() => { try { return fs.statSync(path.join(DIST, c)).isFile(); } catch { return false; } })(); // literal file (e.g. 404.html)
 };
+
+// the meta-refresh target of a redirect page in dist, as a site-relative path; null if the path is not a redirect page
+const redirectTargetInDist = (p) => {
+  const c = p.replace(/^\//, '').replace(/\/$/, '');
+  const f = path.join(DIST, c, 'index.html');
+  if (!fs.existsSync(f)) return null;
+  const m = fs.readFileSync(f, 'utf8').match(/http-equiv="refresh"\s+content="\d+;\s*url=([^"]+)"/i);
+  return m ? m[1].replace(/^https?:\/\/help\.keboola\.com/, '') : null;
+};
+const samePath = (a, b) => a.replace(/\/$/, '') === b.replace(/\/$/, '');
 
 function checkBuild() {
   if (!fs.existsSync(DIST)) fail('dist/ missing — run `npm run build` first');
   const rows = readTsv();
-  const lost = [], pending = [];
+  const lost = [];
   const external = rows.filter((r) => r.status === 'external').length;
   for (const r of rows) {
     if (r.status === 'dies' || r.status === 'external') continue;
-    const finalServes = inDist(r.tgt);
-    // The dev path serving something only counts as conservation when the page is
-    // staying put (identity redirect). For a row that moves, a live dev path may be
-    // an unrelated page that happens to occupy the URL — /cli/* is exactly that today
-    // (kbagent sits there; the Keboola-as-Code pages this row maps never landed), so
-    // trusting it would report conservation while readers land on a different tool.
     const identity = !r.tgt || r.tgt === r.dev;
-    const devServes = identity && inDist(r.dev);
-    if (!devServes && !finalServes) lost.push(r.dev);
-    else if (r.tgt && !finalServes) pending.push(`${r.dev} → ${r.tgt} (final target not built yet)`);
-  }
-  if (pending.length) {
-    console.log(`… ${pending.length} pending (final home not merged yet — expected until batches land):`);
-    pending.slice(0, 15).forEach((p) => console.log(`   ${p}`));
+    if (identity) {
+      if (!inDist(r.dev)) lost.push(`${r.dev} (page missing)`);
+      continue;
+    }
+    // moved / redirect / alias: the edge host-swap forwards the dev path verbatim, so help must serve a
+    // redirect page there that points at the contract target, and the target itself must exist.
+    if (!inDist(r.tgt)) { lost.push(`${r.dev} → ${r.tgt} (target not built)`); continue; }
+    const stub = redirectTargetInDist(r.dev);
+    if (!stub) lost.push(`${r.dev} (no redirect page in dist — a host-swapped request would 404)`);
+    else if (!samePath(stub, r.tgt)) lost.push(`${r.dev} redirects to ${stub}, contract says ${r.tgt}`);
   }
   if (external) console.log(`… ${external} URL(s) redirect off-site by decision (not expected in dist)`);
   if (lost.length) {
-    console.error(`✗ ${lost.length} dev URL(s) resolve NOWHERE in dist — conservation broken:`);
+    console.error(`✗ ${lost.length} contract row(s) not honoured by dist:`);
     lost.forEach((p) => console.error(`   ${p}`));
     process.exit(1);
   }
-  console.log(`✓ conservation holds: ${rows.length} mapped URLs all reachable in dist (or explicitly dying chrome)`);
+  console.log(`✓ conservation holds: ${rows.length} mapped URLs — identity pages present, every moved/redirect/alias path serves a redirect page to its contract target`);
 }
 
 function flippable() {
@@ -134,7 +141,7 @@ function flippable() {
       const p = clean(m[1].split('#')[0]);
       if (!p || p === '/') continue; // bare-domain links are a homepage-cutover call, not a mechanical flip
       const row = byDev.get(p);
-      const target = row?.status === 'moved' || row?.status === 'redirect' ? row.tgt || p : null;
+      const target = row?.status === 'moved' || row?.status === 'redirect' || row?.status === 'alias' ? row.tgt || p : null;
       if (target && inDist(target))
         hits.push(`${f.replace(ROOT + '/', '')}: ${m[0]} → ${target}`);
     }
@@ -188,8 +195,9 @@ async function live() {
 // second hop a real 301 instead of a meta-refresh page. Printed, not written: wiring it into
 // vercel.json is a production routing change and gets its own PR.
 function vercel() {
-  const rows = readTsv().filter((r) => r.status !== 'dies' && r.tgt && r.tgt !== r.dev);
-  const redirects = rows.map((r) => ({ source: r.dev, destination: r.tgt, permanent: true }));
+  // external rows never reach help: the edge function answers /cli/* itself, and help's /cli/ is kbagent
+  const rows = readTsv().filter((r) => r.status !== 'dies' && r.status !== 'external' && r.tgt && r.tgt !== r.dev);
+  const redirects = rows.map((r) => ({ source: r.dev, destination: r.tgt, statusCode: 301 }));
   console.log(JSON.stringify({ redirects }, null, 2));
   console.error(`${redirects.length} rules — check Vercel's per-project redirect limit before wiring these in`);
 }

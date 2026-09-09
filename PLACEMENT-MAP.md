@@ -16,7 +16,7 @@ Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `de
 
 ## Owner calls — topic homes (post-retirement, PRDCT-550)
 
-These no longer gate the dev-domain retirement: the pages land 1:1 at their dev paths (connection-docs#1120, the `/extend/` precedent). Each answer below now means a normal in-help move with a `redirect_from`.
+These no longer gate the dev-domain retirement: connection-docs#1120 merged the eight pages into their topic homes (Jobs API under Management › Jobs, Encryption and Artifacts under Common Interface, Scheduler API under Flows, the API overview folded into `/overview/`), so six of the seven calls are settled; only `/extend/job-queue/` remains, and it already sits under `/extend/`.
 | page | question |
 |---|---|
 | `/overview/api/` | split: stacks/intro → Core concepts vs per-service catalogue → api.keboola.com redirect. How much survives as a page? |
@@ -261,6 +261,8 @@ function handler(event) {
     return { statusCode: 301, statusDescription: 'Moved Permanently',
       headers: { location: { value: 'https://github.com/keboola/keboola-as-code' } } };
   }
+  // Search Console verifies the dev property by fetching this file with a 200; keep serving it until the Change of Address is done
+  if (uri === '/google9cde6c6b9250e5a4.html') return req;
   if (uri.slice(-11) === '/index.html') uri = uri.slice(0, -10);
   if (uri === '/sitemap.xml') uri = '/sitemap-index.xml';
   var keys = Object.keys(req.querystring);
@@ -272,14 +274,14 @@ function handler(event) {
 
 Why a host-swap and not a per-path map at the edge: help already resolves every dev path — identity pages, or `redirect_from` stubs on the canonical page — so the map lives in exactly one place (this file → the TSV) and the edge stays dumb. `/cli/**` is the single carve-out (David Esner / Martin Vaško, 2026-09-03). Fragments survive a 301 client-side.
 
-**Second hop quality.** Help answers non-identity paths with meta-refresh pages today. Search engines handle 301 → meta-refresh, but a 301 → 301 chain is cleaner: `node scripts/check-redirects.mjs --vercel` prints the `redirects` block for `vercel.json`. Wire it in a separate PR, after checking Vercel's per-project redirect limit against the rule count it prints.
+**Second hop quality.** Help answers non-identity paths with meta-refresh pages today. Search engines handle 301 → meta-refresh, but a 301 → 301 chain is cleaner: `node scripts/check-redirects.mjs --vercel` prints the `redirects` block for `vercel.json` (`statusCode: 301`; the 59 off-site CLI rows are excluded because help's `/cli/` is kbagent and the edge answers `/cli/*` itself). Wire it in a separate PR, after checking Vercel's per-project redirect limit against the rule count it prints.
 
 **Cutover day:**
 1. Deploy the function, wait for propagation.
 2. `node scripts/check-redirects.mjs --live` — must print ✓ for every row: a 301 off the dev domain, landing on the contract target after following help's own redirects.
 3. Spot-check by hand: `/extend/component/tutorial/`, `/extend/docker/`, `/cli/commands/sync/pull/`, `/integrate/push-data/`, `/`, `/sitemap.xml`.
-4. developers-docs: disable `.github/workflows/main.yml`, replace the README with "moved to help.keboola.com", **archive** the repository. Empty the S3 bucket — nothing serves from it any more.
-5. Google Search Console: *Change of address* from the dev property to help (both must be verified; the dev verification file is `google9cde6c6b9250e5a4.html` in that repo).
+4. Google Search Console: *Change of address* from the dev property to help. Both properties must stay verified, and Google verifies the dev one by fetching `google9cde6c6b9250e5a4.html` with a 200, so the function passes that one path through and the file stays in the bucket until the change of address is complete (Google recommends keeping the redirects for at least 180 days).
+5. developers-docs: disable `.github/workflows/main.yml`, replace the README with "moved to help.keboola.com", **archive** the repository. Keep the bucket until step 4 is done; then it can be emptied — nothing else serves from it.
 6. Watch 30 days: help 404s under `/extend|/integrate|/overview|/automate` (Vercel logs) — each one is a missing alias, fixed with a `redirect_from`. CloudFront request volume on the dev distribution is the only signal that would ever justify touching DNS.
 
 **Rollback:** remove the function. Until the bucket is emptied, the S3 content serves again with its own meta-refresh stubs.
