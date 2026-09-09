@@ -13,7 +13,7 @@ the ins and outs of Keboola.
 
 **New to Keboola?** Work through [Getting Started](/getting-started/). In about 30 minutes you
 build a real pipeline — load data, transform it with SQL, deliver the result, and put it on a
-schedule. It starts by [getting you a project](/getting-started/project/), free.
+schedule. It starts by [getting you a project](/getting-started/#get-a-project), free.
 
 Prefer to understand the pieces first? The [platform overview](/overview/) explains what the
 components are, how Storage works, and what a stack is.

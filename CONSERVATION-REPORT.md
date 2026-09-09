@@ -37,7 +37,7 @@ not yet done).
 
 | Content | From | Planned destination |
 |---|---|---|
-| Project isolation, the three entry routes, the Storage/Jobs locators, the three sign-in failure modes and the Kai orientation prompt | `project/index.mdx` | merged into page 1 — **blocked** on the pre-seeded-project decision, which decides whether pages 1 and 2 merge at all |
+| Project isolation, the three entry routes, what a stack is, the five locators, the Kai orientation prompt, the two checks and the three sign-in failure modes | `project/index.mdx` | `getting-started/index.mdx` → **Get a project** (routes, project + stack in one paragraph, **Find your way around**, the tip, **Check it worked** and **If it goes wrong** as two bold-led paragraphs); the two `VERIFY(owner)` comments travelled with their facts; `/getting-started/project/` redirects to the hub | merged 2026-09-09 |
 | `## Phases and tasks`, notification cards | `automate/index.mdx` | `/flows/` and `/management/notifications/` — **only the parts those pages lack**; the existing notifications page is richer than the arc's table and must not be overwritten |
 | `## How a transformation works`, the mapping explanation | `transform/index.mdx` | `/transformations/` |
 | `## Sending data out` | `write/index.mdx` | `/components/writers/` |
@@ -45,6 +45,12 @@ not yet done).
 | The configuration-rows teaching (one configuration, four rows) | `load/index.mdx` | **at risk** in wave two's data split — the arc is its only teaching site and `automate` depends on it. Needs a destination before the split lands. |
 
 ## Deliberate deletions
+
+| What | Where it was | Why it is gone |
+|---|---|---|
+| The hub's hero clip `map-tour.mp4` (octopus tour, 25 s) and its poster | `index.mdx` | The sample world changed on 2026-09-03; a clip answering the old question under the new text would mislead. Phase 2 re-shoots it from the live pipeline in project 264. Until then the "What you will build" table carries Jordan's first-screen requirement. Tracked in MISSING.md. |
+| "No Kai path here" call-out and the project page's own `PageMeta` (5 min) | `project/index.mdx` | The step is now a section of the hub; its five minutes fold into the hub's total, to be re-measured in the phase-3 stopwatch pass. |
+
 
 | Content | Why | Where the information survives |
 |---|---|---|

@@ -283,6 +283,27 @@ resolved card 172 times, because approval cards keep their buttons in the chat h
 
 ---
 
+## 2026-09-09 — The hub absorbs "Get a project"
+
+**Decision:** `getting-started/project/` is no longer a page. Its content is the **Get a project**
+section of the hub, and the old URL redirects there.
+
+**Why:** it was the only step without a Kai path, it took five minutes, and every reader of the hub
+needs it before step one anyway — so the hub kept sending people away and back. Michal's ask was
+that the first screen shows what you get; the steps list now starts with data, not with sign-up.
+The wave-one plan already called for this merge; the Boolabean rewrite was the natural moment,
+because the hub had to be rewritten top to bottom regardless.
+
+**What stayed and where:** everything — CONSERVATION-REPORT.md lists the mapping block by block,
+including both `VERIFY(owner)` comments. Nothing on the page was a fact only the project page
+carried. Four inbound links repointed (`docs/index.md`, `pay-as-you-go/`, the shared `Prereqs`
+partial, the nav); `src/sidebar.mjs` regenerated and lost one line.
+
+**Cost:** the hub is longer (about 230 lines against 158), and its first screen is text until the
+phase-2 clip lands.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
