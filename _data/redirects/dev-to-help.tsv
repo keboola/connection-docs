@@ -2,9 +2,9 @@
 # dev_path	final_help_path	status
 /404.html		dies
 /automate/	/flows/	redirect
-/automate/run-job/	/automate/run-job/	moved
-/automate/run-orchestration/	/automate/run-orchestration/	moved
-/automate/set-schedule/	/automate/set-schedule/	moved
+/automate/run-job/	/management/jobs/api/	redirect
+/automate/run-orchestration/	/management/jobs/api/	redirect
+/automate/set-schedule/	/flows/schedule-api/	moved
 /cli/commands/ci/	https://github.com/keboola/keboola-as-code	external
 /cli/commands/ci/workflows/	https://github.com/keboola/keboola-as-code	external
 /cli/commands/dbt/generate/env/	https://github.com/keboola/keboola-as-code	external
@@ -149,14 +149,14 @@
 /extend/publish/checklist/	/extend/publish/checklist/	moved
 /extend/publish/	/extend/publish/	moved
 /	/	redirect
-/integrate/artifacts/	/integrate/artifacts/	moved
-/integrate/artifacts/tutorial/	/integrate/artifacts/tutorial/	moved
+/integrate/artifacts/	/extend/common-interface/artifacts/	moved
+/integrate/artifacts/tutorial/	/extend/common-interface/artifacts/tutorial/	moved
 /integrate/data-streams/	/storage/data-streams/	redirect
 /integrate/data-streams/overview/	/storage/data-streams/reference/	redirect
 /integrate/data-streams/tutorial/	/storage/data-streams/tutorial/	redirect
 /integrate/database/	/components/extractors/database/	redirect
 /integrate/	/overview/	redirect
-/integrate/jobs/	/integrate/jobs/	moved
+/integrate/jobs/	/management/jobs/api/	moved
 /integrate/mcp/	/ai/mcp-server/	redirect
 /integrate/orchestrator/	/flows/	redirect
 /integrate/storage/api/configurations/	/storage/api/configurations/	moved
@@ -171,8 +171,8 @@
 /integrate/storage/r-client/	/storage/api/clients/r-client/	moved
 /integrate/variables/	/components/variables/api/	moved
 /integrate/variables/tutorial/	/components/variables/api/tutorial/	moved
-/overview/api/	/overview/api/	moved
-/overview/encryption/	/overview/encryption/	moved
+/overview/api/	/overview/	redirect
+/overview/encryption/	/extend/common-interface/encryption/	moved
 /overview/	/overview/	redirect
 /overview/repositories/	/overview/	redirect
 /extend/common-interface/sandbox/	/extend/component/running/	alias
@@ -200,4 +200,4 @@
 /integrate/push-data/overview/	/storage/data-streams/reference/	alias
 /integrate/push-data/tutorial/	/storage/data-streams/tutorial/	alias
 /integrate/storage/php-cli-client/	/storage/api/clients/docker-cli/	alias
-/overview/jobs/	/integrate/jobs/	alias
+/overview/jobs/	/management/jobs/api/	alias
