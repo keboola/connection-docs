@@ -23,32 +23,34 @@ its consolidated one-prompt block to getting-started/ask/, since both are verifi
 Kai content rather than routing. The kbagent "In beta" clause is dropped here: the beta pill
 retires 2026-09-15 per Jordan (21 Aug). The "rolling this out to a team" entry moved to the
 architecture tier — it is the one entry that is not a next step for the reader of this guide.
-Agent surfaces per /kai/, /ai/mcp-server/, /cli/. */}
+Agent surfaces per /kai/, /ai/mcp-server/, /cli/. 2026-09-09: no sample-world content on this
+page; the Google Sheets sentence now describes the side trip rather than "the one you used",
+since delivery left the main path. */}
 
 ## The side trips
 
 The guide's linear path is the shortest one that produces something real. These are the branches
 off it, each worth reading for a specific reason:
 
-- **[Send a table to Google Sheets](/getting-started/write/)** — delivery: getting a Storage
+- **[Send a table to Google Sheets](/getting-started/write/)** is delivery: getting a Storage
   table back out to where people read it.
 - **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
-  **[from a database](/getting-started/load/database/)** — sources that need credentials rather
+  **[from a database](/getting-started/load/database/)** are sources that need credentials rather
   than a public URL.
-- **[Use a workspace](/getting-started/transform/workspace/)** — develop and test SQL against a
-  copy of your data before committing it to a transformation.
-- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** — explore data in a Python or R notebook
+- **[Use a workspace](/getting-started/transform/workspace/)** is where you develop and test SQL
+  against a copy of your data before committing it to a transformation.
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** explores data in a Python or R notebook
   instead of building a pipeline.
-- **[Development branches](/getting-started/branches/)** — change a running project safely,
-  review the diff, then merge.
+- **[Development branches](/getting-started/branches/)** change a running project safely: make
+  the change, review the diff, then merge.
 
 ## Pick your next thing
 
 **"My real data is not a CSV file on a public URL."** Browse the
-[data source connectors](/components/extractors/) — databases, APIs, cloud storage, ad
-platforms, CRMs. They configure the same way the HTTP connector did, and drop into a flow the
-same way. Two worked examples sit in this tier: [Google Sheets](/getting-started/load/googlesheets/) —
-a source that needs an authorized account rather than a public URL — and
+[data source connectors](/components/extractors/): databases, APIs, cloud storage, ad platforms,
+CRMs. They configure the same way the HTTP connector did, and drop into a flow the same way. Two
+worked examples sit in this tier: [Google Sheets](/getting-started/load/googlesheets/), a source
+that needs an authorized account rather than a public URL, and
 [a database](/getting-started/load/database/), which you can walk against Keboola's own sample
 Snowflake database without credentials of your own.
 
@@ -58,8 +60,8 @@ covers SQL, Python, R and dbt, code blocks and phases, shared code, and
 interactively, use a [workspace](/getting-started/transform/workspace/).
 
 **"I need to send data somewhere specific."** The
-[data destination connectors](/components/writers/) cover databases, BI tools, and
-storage — the Google Sheets one you used is the simplest of the family.
+[data destination connectors](/components/writers/) cover databases, BI tools, and storage. The
+Google Sheets one from the side trip is the simplest of the family.
 
 **"I do not want to break production while I experiment."**
 [Development branches](/getting-started/branches/) let you change configurations, run them,
@@ -85,20 +87,19 @@ in. Making it available to everyone else is a separate, approval-gated step:
 
 ## Drive Keboola with an agent
 
-Everything you just did by clicking can be done by an AI assistant instead — the platform
-exposes the same operations three ways, and which one you pick depends on where you work.
+Everything you just did by clicking can be done by an AI assistant instead. The platform exposes
+the same operations three ways, and which one you pick depends on where you work.
 
-- **[Kai](/kai/)** — the assistant built into the project, and the one you have been using
-  through this guide's **Do it with Kai** tabs. It already knows your configurations, table
-  schemas, and job logs, so it is the fastest way to ask "why did this fail?" or "write me the
-  transformation that joins these tables." No setup.
-  [Use cases](/kai/use-cases/) covers what it does beyond the arc — dashboards, project
-  documentation, table descriptions, cohort analysis.
-- **[MCP server](/ai/mcp-server/)** — connect Keboola to an AI assistant or IDE that
-  speaks the Model Context Protocol (Claude, Cursor, and others). Use this when you want
-  your coding agent to read and change the project while you work on code.
-- **[kbagent CLI](/cli/)** — Keboola from the terminal: projects, configurations, jobs,
-  storage, and flows, scriptable, and usable by a coding agent that has a shell. Start with
+- **[Kai](/kai/)** is the assistant built into the project, the one you have been using through
+  this guide's **Do it with Kai** tabs. It already knows your configurations, table schemas, and
+  job logs, so it is the fastest way to ask "why did this fail?" or "write me the transformation
+  that joins these tables." No setup. [Use cases](/kai/use-cases/) covers what it does beyond the
+  arc: dashboards, project documentation, table descriptions, cohort analysis.
+- **[MCP server](/ai/mcp-server/)** connects Keboola to an AI assistant or IDE that speaks the
+  Model Context Protocol (Claude, Cursor, and others). Use this when you want your coding agent to
+  read and change the project while you work on code.
+- **[kbagent CLI](/cli/)** is Keboola from the terminal: projects, configurations, jobs, storage,
+  and flows, scriptable, and usable by a coding agent that has a shell. Start with
   [the CLI quickstart](/cli/getting-started/).
 
 If you are documenting or automating your own work on top of Keboola, the
@@ -106,7 +107,7 @@ If you are documenting or automating your own work on top of Keboola, the
 
 ## When you get stuck
 
-- [Support](/management/support/) — the support form inside your project reaches us with
-  the project context attached.
-- [keboolastatus.com](https://keboolastatus.com/) — platform status, worth subscribing to.
-- [changelog.keboola.com](https://changelog.keboola.com/) — what shipped recently.
+- [Support](/management/support/): the support form inside your project reaches us with the
+  project context attached.
+- [keboolastatus.com](https://keboolastatus.com/): platform status, worth subscribing to.
+- [changelog.keboola.com](https://changelog.keboola.com/): what shipped recently.
