@@ -33,7 +33,8 @@ capture still shows the previous flow; phase 2 reshoots it. */}
 | Flow | runs all of it, in order, every morning | **Flows** |
 
 Every job that ran is in **Jobs**; every table it touched is in **Storage**: two `in.c-` buckets
-named after the connector configurations, and one `out.c-Boolabean-staffing-outlook` bucket.
+named after the connector and the configuration ID (`keboola-ex-http-…`), and one
+`out.c-Boolabean-staffing-outlook` bucket.
 
 ## The one number that proves the join
 
@@ -67,9 +68,8 @@ duration and status. Expand a run to see its phases.
 
 ![Screenshot - All runs](/getting-started/check/09-all-runs.png)
 
-- A run with status **Success** is the goal. End to end this pipeline takes a few minutes: the two
-  loads finish inside two minutes, the transformation inside one, and the app deploy is the slow
-  part.
+- A run with status **Success** is the goal. End to end this pipeline takes a few minutes: the two loads take about two minutes, the
+  transformation under one, and the app deploy is the slow part.
 - **A run with status Error is not all lost.** Phases run in order, so the phases before the
   failed one have completed and their tables are updated. Our first run of the flow ended red at
   the app phase while both data phases were green, and `staffing_outlook` had been rebuilt
@@ -100,8 +100,10 @@ run. The prompt is safe either way; the capability sentence is the unverified pa
   not refreshed by it.
 - **The app phase fails and the rest succeeds.** A deploy builds and starts a container, and it
   can fail for reasons that have nothing to do with your data. The table is already rebuilt; open
-  the app's page and deploy it again from there, and if the error repeats, that is one for
-  [Support](/management/support/) with the job link.
+  the app's page and start it again from there. After several failed starts the platform disables
+  the app (a banner says it failed to start automatically multiple times, and the button reads
+  **Start App**), and the flow's app phase will keep failing until someone starts it by hand. If
+  the error repeats, that is one for [Support](/management/support/) with the job link.
 - **The forecast table has 42 rows but the outlook has more.** Duplicate input rows: see the one
   number above.
 - **The scheduled run never happens.** The schedule was saved but the flow is disabled, or the

@@ -121,13 +121,18 @@ into a table called forecast:
 
 https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,49.5938,50.7663&longitude=14.4426,16.6083,18.2833,13.3776,17.2509,15.0562&daily=temperature_2m_max,precipitation_sum&timezone=Europe%2FPrague&format=csv
 
-It is open-meteo's CSV export: seven lines of metadata, then a blank line, then the real header
-row, so skip the first eight lines. Its columns are location_id, time, the daily maximum
-temperature and the daily precipitation. Run it, then tell me how many rows the forecast table has.
+It is open-meteo's CSV export: seven lines of metadata, a blank line, then the header row, then
+42 data rows. Load only the data rows and name the columns location_id, time,
+temperature_2m_max and precipitation_sum. Run it, then tell me how many rows the forecast table
+has.
 ```
 
-Kai inspects the file, skips the metadata and the header, and names the four columns itself
-rather than keeping the header's `temperature_2m_max (°C)`. Three approvals this time.
+Kai inspects the file, skips the nine leading lines and names the four columns as asked, rather
+than keeping the header's `temperature_2m_max (°C)`. Three approvals this time.
+{/* Guide test 2026-09-09: the live run's prompt said "skip the first eight lines" and described the
+columns in words; Kai read the file and chose 9 + explicit names on its own. The prompt now asks
+for that outcome directly so a literal reader's Kai does not load the header as data. Not re-run
+in this wording. */}
 
 **Check:** a `forecast` table with **42** rows and the columns `location_id`, `time`,
 `temperature_2m_max` and `precipitation_sum`. If Kai built something else, delete it and switch to

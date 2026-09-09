@@ -23,8 +23,6 @@ introduces the mapping model that keeps your source data safe while you do it.
 **Where you are:** six raw tables are in Storage and nothing has been joined yet. **When you
 finish:** one table that answers the question, and a transformation you can re-run.
 
-<PathIntro />
-
 {/* Tutorial-type page. UI labels walked live in project 264 on 2026-08-04: the button is "Create
 Transformation", the dialog is "New Transformation", the sections are "Table Input Mapping" (Add
 Table Input) and "Table Output Mapping" (New Table Output), Source is multi-select, and Queries
@@ -45,10 +43,11 @@ previous sample's names; phase 2 reshoots them. */}
   </li>
 </Prereqs>
 
-That does not matter. What the SQL depends on is the **Table name** you give each table in the
-input mapping below: those must be exactly `sales`, `weather_daily`, `staffing`, `stores` and
-`forecast`, or you have to edit the queries to match. (`products` is not needed for this table; the
-menu comes back on later pages.)
+<PathIntro />
+
+The bucket names do not matter. What the SQL depends on is the **Table name** you give each table
+in the input mapping below: those must be exactly `sales`, `weather_daily`, `staffing`, `stores` and
+`forecast`, or you have to edit the queries to match. (`products` is not needed for this table.)
 
 ## How a transformation works
 
@@ -91,6 +90,12 @@ day sorted into a band the history side never produced finds no average and come
 Nine summer days sit exactly on 18, 23 or 28 °C and twelve exactly on 0.5 mm, so where the
 boundary falls is not academic.
 
+Before either tab: find out which SQL your project speaks. Open **Transformations** and click
+**Create Transformation**; the **New Transformation** dialog lists what this project can run, and
+the SQL entry is either *Snowflake SQL Transformation* or *Google BigQuery Transformation*. New
+[Free Plan](/management/payg-project/) projects default to the [BigQuery backend](/storage/);
+contract customers choose theirs. Close the dialog and carry that word into whichever tab you use.
+
 ## Set it up
 
 <Tabs syncKey="howto">
@@ -113,16 +118,22 @@ staffing_outlook. Storage columns arrive as text, so cast before you compare or 
    week, so this is one value per store and weekday.
 4. Forecast: the forecast table's location_id 0 to 5 maps to store_id S01 to S06 in that order,
    the order the coordinates appear in the request URL.
-5. Output one row per store per forecast day: store_name, city, date, weekday, forecast
-   temperature, forecast rain, expected units (the store's historical average in the matching
-   band), rostered staff, expected units per rostered person, and short_handed, true when that
-   figure exceeds 67.
+5. Output one row per store per forecast day with exactly these columns: store_name, city,
+   date, weekday, forecast_temp_c, forecast_rain_mm, expected_units (the store's historical
+   average in the matching band), rostered_staff, expected_units_per_person, and short_handed,
+   true when that figure exceeds 67.
 
 Run it, then tell me how many rows staffing_outlook has and which store and day come out most
 stretched.
 ```
 
 On a BigQuery project, say "BigQuery transformation" in the first line; everything else stands.
+The column list in point 5 is what the later pages type into their prompts and checks, so keep it
+as written.
+{/* Guide test 2026-09-09: the live run's prompt described the columns in words and Kai chose
+these exact names on its own, upper-cased because it did not quote its aliases (Snowflake schema
+STORE_NAME … SHORT_HANDED). The list was added so a reader's Kai lands on the same names; it has
+not been re-run in this wording. */}
 
 Spelling out the five parts is the point. Ask only for "a staffing table" and you get a different
 set of columns, and the check below will not match. The half-open sentence matters most, and the
@@ -161,10 +172,7 @@ depend only on the table name, so a close-enough table is fine.
    Three pages disagree; the dialog is what a reader sees, so this sentence defers to it, but the
    PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. */}
 
-   **This list is how you find out which SQL dialect you need.** New
-   [Free Plan](/management/payg-project/) projects default to the
-   [BigQuery backend](/storage/); contract customers choose theirs. Pick the SQL transformation your
-   project offers, and use the matching query block below.
+   Pick the SQL transformation your project offers, and use the matching query block below.
 
    ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
 
@@ -458,7 +466,8 @@ Three checks, in order of how much they tell you:
 
 The 10 columns are `store_name`, `city`, `date`, `weekday`, `forecast_temp_c`,
 `forecast_rain_mm`, `expected_units`, `rostered_staff`, `expected_units_per_person` and
-`short_handed`. An empty `expected_units` on a row is not an error: it means the summer never had
+`short_handed`. If Kai built the table, Storage may show them in upper case: Snowflake upper-cases
+an alias that is not quoted, and the names are the same names. An empty `expected_units` on a row is not an error: it means the summer never had
 a day in that café's band, so there is no history to average. In this sample that band is *cold
 and dry*: five of the six cafés had no dry day under 18 °C all summer.
 

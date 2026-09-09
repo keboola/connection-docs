@@ -143,8 +143,10 @@ Kai tab first; come back when the app you want is one the description field cann
   means, and the app should not decide again.
 - **The deploy of the production app fails, and Terminal Logs says the app is not running.** The
   draft ran, so the code works; the production container did not come up. Deploy once more from
-  the app's page. If it fails again, open the failed job from **All Runs**, note its exception ID,
-  and send that to [Support](/management/support/). The rest of the pipeline is unaffected: the
+  the app's page. After several failures the platform disables the app: a banner says it failed to
+  start automatically multiple times, and the button becomes **Start App**. If it fails again, open
+  the failed job from **All Runs**, note its exception ID, and send that to
+  [Support](/management/support/). The rest of the pipeline is unaffected: the
   table is rebuilt every morning whether or not the app is up, and the draft preview still shows
   it.
 - **Nothing happens for a minute after you open the app.** It went to sleep. Apps stop after a

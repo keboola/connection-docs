@@ -457,6 +457,35 @@ allowance sentence on the hub.
 
 ---
 
+## 2026-09-09 — Guide test: followable by a human and by an agent, no blockers
+
+The guide-tester pass (cold read of all nine pages plus read-only label checks in project 264
+against the objects the pages describe) found no blocker and three things a reader would have had
+to guess; fixed the same day.
+
+- **Column names.** The transform prompt described the ten output columns in words; the later
+  pages type them exactly. The prompt now lists them. Kai's own build had produced those names, in
+  upper case because it did not quote its aliases, so the check now says upper case is the same
+  names. Not re-run in the new wording (noted on the page).
+- **Which SQL dialect.** How to find out was inside the click-through tab only, while the Kai
+  prompt opened with "Snowflake" and the Free Plan defaults to BigQuery. The "look in the New
+  Transformation dialog" paragraph now sits above the tabs.
+- **Two diagnoses for one symptom** (more than 42 rows) between `transform/` and `check/`: already
+  aligned by the fact-check commit; the tester read the page mid-edit.
+
+Also from the live read: after several failed starts the platform **disables** a data app (banner
+"failed to start automatically multiple times", button **Start App**), so the scheduled flow's app
+phase keeps failing until someone starts it by hand — now stated on `app/` and `check/`. The
+phase-scoped Add Task menu has exactly Component / Notification / Variable; the empty-canvas menu
+stays unverified, and the automate page now says "in some projects" for Build with Kai. The
+forecast prompt asks for nine skipped lines and the four column names directly, which is what Kai
+did on its own in the live run. Everything else the tester checked live matched the pages: nav,
+Storage tabs, the HTTP card and row form, the transformation sections, the flow's tabs and phase
+names, the schedule's timezone, the Notifications cards, the Jobs fan-out (six lines for the
+five-file configuration), the data app's settings, all links and the Next order.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
