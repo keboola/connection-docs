@@ -398,6 +398,33 @@ MISSING.md carries the reshoot.
 
 ---
 
+## 2026-09-09 — The app is a six-by-seven grid, built live to a running draft; production is flagged
+
+**Decision (plan decision 4):** the app shows the answer directly: a grid, cafés down and forecast
+days across, one number per cell, red where `short_handed` is true, one caption with the count. No
+map, no filters. A map of six cafés would be a picture of the Czech Republic with six dots; the
+question is about days, not places.
+
+**Observed in the builder (project 264, 2026-09-09, 5 min 44 s):** prompt → one approval → Kai
+creates the production configuration, then a draft on its own branch, boots a Python/JS dev
+container, writes the code, opens a live preview ("This is a private draft that updates live as Kai
+builds"). Buttons: Preview, Code, Publish to production. The page teaches exactly that sequence,
+including the sentence about saying what *not* to build.
+
+**Not observed, and flagged:** an Active production app. "Publish to production" produced no
+dialog, no configuration version and no job, twice; the production app read "Not Deployed" and
+two deploys (the flow's phase 3 and a direct one) failed after about 4.5 minutes with "Internal
+Server Error occurred." and nothing in Terminal Logs. The page therefore says publishing and
+starting are two steps, tells the reader what a failed deploy looks like and what to send Support,
+and never promises the grid is up. Exception IDs are in the page comment and in MISSING.md for a
+bug report. The daily flow in 264 will keep failing at phase 3 until this is resolved; leaving it
+is deliberate, because a red phase next to green ones is the example `check/` uses.
+
+**Media:** the map clip and its stills are gone; phase 2 records the grid from the draft preview,
+which needs no password.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
