@@ -15,7 +15,7 @@ TDE (Tableau Data Extract) is a legacy Tableau format, superseded by Hyper (`.hy
 This component is normally a part of the [Tableau Writer](/tutorial/write/),
 but it can also be used as a standalone component.
 
-Users can [run a TDE exporter job](/integrate/jobs/) as any other Keboola component or register it
+Users can [run a TDE exporter job](/management/jobs/api/) as any other Keboola component or register it
 as an orchestration task. After the exporter finishes, the resulting TDE files will be available in the
 *Storage* --- *File uploads* section where you can download them via UI or [API](/storage/api/import-export/).
 
@@ -29,7 +29,7 @@ To run the TDE exporter with a stored configuration, first
 [create the configuration](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
 See [below](#custom-configuration) for the required configuration contents.
 This call will give you the ID of the newly created configuration (for instance, `new-configuration-id`).
-Then [create a job](/integrate/jobs/) with the specified configuration:
+Then [create a job](/management/jobs/api/) with the specified configuration:
 
 ```json
 {

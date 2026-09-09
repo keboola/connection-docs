@@ -35,7 +35,7 @@ Or sending data with different user parameters that are present in the input tab
 
 There are a variety of use-cases for the generic writer. You may create, update or even delete objects via RESTful API or just trigger 
 simple webhooks by sending GET requests to specified endpoints or send notifications to slack. The setup is quite straightforward and it 
-allows you to leverage secure [encrypted parameters](https://developers.keboola.com/overview/encryption/) and dynamic functions. 
+allows you to leverage secure [encrypted parameters](/extend/common-interface/encryption/) and dynamic functions. 
 
 **The typical use cases are:**
 

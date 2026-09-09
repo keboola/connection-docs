@@ -52,7 +52,7 @@ Select a task in the Builder to open its settings.
 
 - Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. To let selected tasks fail while the rest of the phase must succeed, use the [Continue on Failure](#4-continue-on-failure) condition subject. See also [Retry](#retry) for automatic retries of failed tasks.
 
-- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
+- To modify the parameters sent to the underlying [API call](/management/jobs/api/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
 overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
 

@@ -1,16 +1,12 @@
 ---
 title: Encryption
-slug: 'overview/encryption'
+slug: 'extend/common-interface/encryption'
 description: "How the Encryption API protects sensitive configuration values, what it can encrypt, and why nothing outside a running component can decrypt them."
+redirect_from:
+    - /overview/encryption/
 ---
 
-:::note[Moved from developers.keboola.com]
-This page came here from the developer documentation unchanged and keeps its original
-address for now. When it gets a permanent place in these docs, this URL will redirect
-there, so links to it keep working.
-:::
-<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
-
+<!-- Reference-type page. Moved from developers.keboola.com/overview/encryption/ (PRDCT-582). Parameters, cipher prefixes and validation rules verified against encryption.keboola.com/docs/swagger.yaml by the 2026-06-22 audit (PRDCT-363). The two UI screenshots predate the current UI; reshoot when convenient. -->
 
 Many [Keboola components](/overview/) use the Encryption API to encrypt sensitive values
 intended for secure storage. These values are then decrypted within the component itself. 
@@ -26,11 +22,11 @@ deleted after the container's completion. The component code exclusively accesse
 When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.
 For instance, consider the following configuration:
 
-![Screenshot - Configuration editor - before](/overview/encryption-1.png)
+![Screenshot - Configuration editor - before](/extend/common-interface/encryption/encryption-1.png)
 
 After saving, the configuration appears as follows:
 
-![Screenshot - Configuration editor - after](/overview/encryption-2.png)
+![Screenshot - Configuration editor - after](/extend/common-interface/encryption/encryption-2.png)
 
 Once saved, the value becomes encrypted and irreversible. The component defines which values are
 encrypted, indicating that not all values can be encrypted unless explicitly supported by the component.
@@ -142,7 +138,7 @@ This cipher type helps encrypt information shared across multiple components, e.
 The following rules apply to all ciphers:
 
 - Providing only a `configId` without a `projectId` is not allowed. Similarly, providing only `branchType` without `projectId` is also not allowed.
-- Cipher decryption is only possible in the [region](/overview/api/#stacks-and-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
+- Cipher decryption is only possible in the [region](/overview/#apis-and-service-endpoints) where the cipher was created. For example, ciphers with prefixes `KBC::ProjectSecureKV::` (Azure) or `KBC::ProjectSecureGKMS::` (GCP), instead of `KBC::ProjectSecure::` (AWS), use the same business logic but are specific to their region and technology and are not interchangeable.
 - There is no decryption API; the cipher is decrypted internally before a component is run.
 - Ciphering a value that is already encrypted does not change its encryption.
 - There is no way to retrieve the component, project, configuration ID, or branch type from the cipher.

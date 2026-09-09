@@ -19,7 +19,7 @@ The values obtained from the end user will be stored in the [`config` property](
 Modify your configuration to read those values from there.
 
 Do not forget that if you prefix a value with a hash `#`, it will be
-[encrypted](/overview/encryption/) once the configuration is saved.
+[encrypted](/extend/common-interface/encryption/) once the configuration is saved.
 Also, try to make the extractor [work incrementally](/components/extractors/generic-extractor/incremental/)
 if possible.
 

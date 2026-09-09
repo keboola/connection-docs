@@ -1,16 +1,12 @@
 ---
 title: Artifacts Tutorial
-slug: 'integrate/artifacts/tutorial'
+slug: 'extend/common-interface/artifacts/tutorial'
 description: "Produce and consume artifacts from a Python transformation step by step, using curl against the Storage and Queue APIs."
+redirect_from:
+    - /integrate/artifacts/tutorial/
 ---
 
-:::note[Moved from developers.keboola.com]
-This page came here from the developer documentation unchanged and keeps its original
-address for now. When it gets a permanent place in these docs, this URL will redirect
-there, so links to it keep working.
-:::
-<!-- Identity-path landing: the permanent topic home is an owner call (PRDCT-550). Source: devdocs/main@708d21d8 via the phase-1 branch f4e5ecd0; only link form and two anchor ids differ. -->
-
+<!-- Tutorial-type page. Moved from developers.keboola.com/integrate/artifacts/tutorial/ (PRDCT-582); calls consistent with the artifact filesystem paths and the Storage configurations API (2026-06-22 audit, PRDCT-368). -->
 
 This tutorial will show you how to work with artifacts.
 In the following example we will use Python Transformation component to produce and consume artifacts.
@@ -45,15 +41,15 @@ This file will be then uploaded as "artifact" to File Storage.
       file.write("this is my artifact file content")
     ```
 
-    ![Artifacts - transformation](/integrate/artifacts/artifacts-tutorial-1.png)
+    ![Artifacts - transformation](/extend/common-interface/artifacts/artifacts-tutorial-1.png)
 
 2. Run the transformation - it should upload the file to File Storage as "artifact"
 
-    ![Artifacts - Job](/integrate/artifacts/artifacts-tutorial-2.png)
+    ![Artifacts - Job](/extend/common-interface/artifacts/artifacts-tutorial-2.png)
 
 3. The file is now visible in File Storage with appropriate tags
 
-   ![Artifacts - File Storage](/integrate/artifacts/artifacts-tutorial-3.png)
+   ![Artifacts - File Storage](/extend/common-interface/artifacts/artifacts-tutorial-3.png)
 
 ### 2. Produce & consume artifacts
 
@@ -203,7 +199,7 @@ The configuration producing artifact needs to be in a phase that precedes the co
    print(glob.glob("/data/artifacts/in/shared/*/*")) 
    ```
    
-   Run curl command to create the configurtion:
+   Run curl command to create the configuration:
    
    ```shell
     curl -X POST "$STORAGE_API_HOST/v2/storage/branch/default/components/keboola.python-transformation-v2/configs" \
@@ -216,4 +212,4 @@ The configuration producing artifact needs to be in a phase that precedes the co
 
 3. Now put each of the configurations into an Orchestration. "Artifacts shared Producer" into phase 1 and "Artifacts shared Consumer" into phase 2.
 
-   ![Artifacts orchestration](/integrate/artifacts/artifacts-tutorial-4.png)
+   ![Artifacts orchestration](/extend/common-interface/artifacts/artifacts-tutorial-4.png)

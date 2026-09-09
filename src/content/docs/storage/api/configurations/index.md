@@ -265,7 +265,7 @@ If the component is executed more than once, the operations are executed in the 
 - run with the second row configuration (merged with root configuration)
 - output mapping for the second row
 
-All of these are executed in a single [job](/integrate/jobs/). However, even though multiple rows are executed in a single
+All of these are executed in a single [job](/management/jobs/api/). However, even though multiple rows are executed in a single
 job, the actual executions are still completely isolated. I.e., there is no way to share anything between the rows
 (apart from the common `configuration`). It also means that the outputs of the first row are available in the Keboola project before
 the second row starts, and the inputs for the second row are read only after the first row finishes processing.

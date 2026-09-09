@@ -104,6 +104,9 @@ items:
       - url: /flows/flow-migration-guide/
         title: Migration Guide
 
+      - url: /flows/schedule-api/
+        title: Schedule via API
+
   - url: /data-apps/
     title: Apps
     items:
@@ -808,6 +811,9 @@ items:
 
       - url: /management/jobs/
         title: Jobs
+        items:
+          - url: /management/jobs/api/
+            title: Jobs API
 
       - url: /management/notifications/
         title: Notifications
@@ -925,6 +931,11 @@ items:
             title: Configuration File
           - url: /extend/common-interface/environment/
             title: Environment
+          - url: /extend/common-interface/artifacts/
+            title: Artifacts
+            items:
+              - url: /extend/common-interface/artifacts/tutorial/
+                title: Tutorial
           - url: /extend/common-interface/manifest-files/
             title: Manifest Files
             items:
@@ -944,6 +955,8 @@ items:
                 title: OUT files
           - url: /extend/common-interface/oauth/
             title: OAuth2
+          - url: /extend/common-interface/encryption/
+            title: Encryption
           - url: /extend/common-interface/actions/
             title: Actions
           - url: /extend/common-interface/logging/
@@ -963,25 +976,3 @@ items:
     items:
       - url: /external-integrations/n8n/
         title: n8n
-
-  # --- Developer reference, moved 1:1 from developers.keboola.com (PRDCT-582). Permanent topic homes are an owner call (PRDCT-550); the group dissolves as they are made. ---
-  - url: /overview/api/
-    title: Developer Reference (moved)
-    items:
-      - url: /overview/api/
-        title: Our APIs
-      - url: /overview/encryption/
-        title: Encryption
-      - url: /integrate/jobs/
-        title: Component Jobs
-      - url: /integrate/artifacts/
-        title: Artifacts
-        items:
-          - url: /integrate/artifacts/tutorial/
-            title: Artifacts Tutorial
-      - url: /automate/run-job/
-        title: Run a Job
-      - url: /automate/run-orchestration/
-        title: Run Orchestration
-      - url: /automate/set-schedule/
-        title: Set Schedule

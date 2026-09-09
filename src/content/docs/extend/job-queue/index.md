@@ -9,7 +9,7 @@ redirect_from:
 Job Queue is a core Keboola Service, which
 provides an interface for running Keboola components. Every component in Keboola is
 represented by a Docker image.
-Running a component means creating and executing an [asynchronous job](/integrate/jobs/).
+Running a component means creating and executing an [asynchronous job](/management/jobs/api/).
 
 Developing functionality in [Docker](https://www.docker.com/) allows you to focus only on the application logic; all communication
 with the [Storage API](https://api.keboola.com/?service=storage) will be handled by Job Queue. You can encapsulate any application into a Docker image
@@ -64,7 +64,7 @@ to have no network access.
 The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
 
 - run a [component](/extend/component/).
-- [encrypt values](/overview/encryption/).
+- [encrypt values](/extend/common-interface/encryption/).
 - [prepare the data folder](/extend/component/running/#preparing-data-folder).
 - run [component actions](/extend/common-interface/actions/).
 - run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).
@@ -82,7 +82,7 @@ all of them are optional:
 - `storage` — configuration of [input and output mapping](/extend/common-interface/folders/); specific options correspond to the options of the
 [unload data](https://keboola.docs.apiary.io/#reference/tables/unload-data-asynchronously) and
 [load data](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async) API calls.
-- `runtime` — [runtime settings](/integrate/jobs/#job-runtime-configuration) (`tag`, `backend`, `parallelism`); most notably `runtime.tag`
+- `runtime` — [runtime settings](/management/jobs/api/#job-runtime-configuration) (`tag`, `backend`, `parallelism`); most notably `runtime.tag`
 pins the Docker image tag that jobs of this configuration run, which is the usual way of testing a development build of a component
 - `processors` — configuration of [Processors](/extend/component/processors/)
 - `authorization` — OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration
