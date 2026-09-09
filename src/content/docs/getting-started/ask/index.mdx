@@ -1,7 +1,7 @@
 ---
 title: 'Ask a question and get an answer'
 slug: 'getting-started/ask'
-description: 'Put the question to your own data: Kai reads the table you built and answers it, and the same request can be given as one prompt instead of five.'
+description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up, and the same pipeline can be asked for as one prompt.'
 ---
 
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
@@ -9,90 +9,107 @@ import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 
 <PageMeta genre="Tutorial" minutes="5" />
 
-You built the table to answer something. Nobody has said the answer out loud yet — this page
-does, out of your own project rather than out of a page.
+You built the table to answer something. Nobody has said the answer out loud yet. This page does,
+out of your own project rather than out of a page.
 
-**Where you are:** the joined table is in Storage. **When you finish:** the arc's question
+**Where you are:** `staffing_outlook` is in Storage. **When you finish:** the guide's question
 answered from your data, and a second answer you did not have to build anything new to get.
 
 <Prereqs needs={['project', 'kai']}>
   <li>
-    The joined table in Storage, from <a href="/getting-started/transform/">Transform data</a>.
+    The <code>staffing_outlook</code> table in Storage, from{' '}
+    <a href="/getting-started/transform/">Transform data</a>.
   </li>
 </Prereqs>
 
-{/* Tutorial-type page, NEW 2026-09-02. Assembled from content that already existed but was
-misfiled: the closing section of automate/index.mdx (Michal asked for a page like this — "něco
-typu AI answer" — and it was buried at the bottom of the automation page), plus the consolidated
-one-prompt block from next-steps. The clip and both prompts were calibrated live in project 264
-on 2026-08-26; the one-prompt block was run end to end on 2026-09-02 (14 min, 11 approvals — see
-PR #1110). Kai's on-camera answer matches the documented checks exactly: North Atlantic, 2,632
-sightings, 26.32%, 50 distinct species. */}
+{/* Tutorial-type page. Both prompts below were run live in project 264 on 2026-09-08 and
+2026-09-09 (boolabean-run, the staged runs' ask.txt and ask-followup/): the first as the
+fourth prompt of the staged runs, 0 approvals, 1.3–1.6 min; the second alone in a fresh chat, 0
+approvals. Kai's figures matched the table and the offline reference to the decimal. The
+"one prompt" paragraph reports the 2026-09-03 and 2026-09-08 observations recorded in DECISIONS.md.
+The previous clip (kai-ask-basin.mp4) came off with the old sample world; phase 2 records the new
+one from the live chat. */}
 
 ## Reading is different from building
 
 Everywhere else in this guide Kai stood in for your clicking. Here it reads what you built.
 Querying a table and calculating a metric is
-[Data Exploration](/kai/use-cases/#data-exploration), and it needs nothing set up. Nothing on
-this page changes the project either: reading is what Kai's read-only tools do, and those are
-allowed without asking by default — so expect an answer rather than an approval dialog, unless
-this project's [tool permissions](/kai/settings/#tool-permissions) have been set to ask.
-
-This is the whole interaction — the pointer marks where the answer lands:
-
-<video autoplay loop muted playsinline poster="/getting-started/ask/kai-ask-basin-poster.png">
-  <source src="/getting-started/ask/kai-ask-basin.mp4" type="video/mp4" />
-</video>
+[Data Exploration](/kai/use-cases/#data-exploration), and it needs nothing set up. Nothing on this
+page changes the project either: reading is what Kai's read-only tools do, and those are allowed
+without asking by default. Expect an answer rather than an approval dialog, unless this project's
+[tool permissions](/kai/settings/#tool-permissions) have been set to ask.
 
 ## Ask it
 
 :::tip[The question the guide started with]
 ```text
-Using out.c-octopus-atlas.octopus_atlas, answer this: which ocean basin has the most recorded
-octopus sightings, what share of all 10,000 sightings does it carry, and how many distinct
-species were recorded there?
+Using staffing_outlook: which café is short-handed on which day next week, and what in the
+forecast makes that day different from the rest of its week?
 ```
 
-**Check:** the **North Atlantic**, with **2,632** sightings — about **26%** of the table — from
-**50** distinct species.
+**Check:** Kai names the flagged café-days (the rows where `short_handed` is true) and, for each,
+says what the forecast does on that day that it does not do on the days around it. The pattern to
+look for in its answer is the one the guide was built on: the flagged days are the ones where a
+thin roster meets a warm, dry forecast, while the days that stay safe are wetter, cooler, or better
+staffed. Kai should say that in its own words, with the temperatures and rain figures from the
+table.
 :::
+
+The answer changes with the forecast. On the day this page was written, two cafés were flagged on
+the same two days, both at the start of the week, and Kai put it as *"a thin start-of-week roster
+colliding with warm, dry weather"*. In a wet week Kai will tell you nobody is short-handed, and
+that is the table being right.
 
 An answer is a place to start, not to stop:
 
 ```text
-And how deep do they really go — what is the deepest sighting in the table, which species was
-it, and which depth zone does that fall in?
+Using staffing_outlook: if one extra person joined the roster on every short-handed day, which
+of those days would still be over 67 expected units per person, and what would each day's
+figure become?
 ```
 
-**Check:** **4,838 meters**, *Grimpoteuthis challengeri*, squarely in the **abyssal zone**. That
-is the kind of thing nobody sees in four separate files, and it took one question because the
-pipeline had already put the zone next to the depth.
+**Check:** Kai recomputes the per-person figure for every flagged row with one more person and
+lists the before and after. On the day this was written the answer was *none of them*: one extra
+person brought every flagged day well under the line. That is the kind of thing nobody can see in
+five separate files, and it took one question because the pipeline had already put the roster next
+to the demand.
 
 **If the numbers come out different**, Kai wrote its own SQL and may have drawn the lines
-somewhere else — counted regions from raw coordinates, or treated empty depths as zeros. The
-definitions this guide uses are the columns your transformation already wrote; point Kai at those
-rather than re-prompting blind.
+somewhere else: rounded before dividing, or read `short_handed` as text. The definitions this guide
+uses are the columns your transformation already wrote, so point Kai at those (`expected_units`,
+`rostered_staff`, `expected_units_per_person`) rather than re-prompting blind.
 
 ## No Kai in your project?
 
 The loading, the SQL and the flow each have a click-through path written out in full; this page
-and the app are the two that assume Kai. Run the same aggregate yourself in a
-[workspace](/getting-started/transform/workspace/) — it is the same SQL against the same table.
+and the app are the two that assume Kai. Run the same query yourself in a
+[workspace](/getting-started/transform/workspace/): it is plain SQL against the same table, and
+"one more person" is `expected_units / (rostered_staff + 1)`.
 
 ## The same request, as one prompt
 
 You built this one step at a time so every result stayed checkable. Once you have seen the
-pieces, the loading and the joining are one request rather than two:
+pieces, the loading, the forecast and the joining are one request rather than three:
 
 ```text
-Load the four CSVs from https://help.keboola.com/getting-started/ — occurrences.csv,
-species.csv, depth_zones.csv and basins.csv — into Storage. Then join them into one table with
-display names, depth zones and ocean basins, and tell me which ocean basin has the most
-sightings.
+Load the five CSV files at https://help.keboola.com/getting-started/boolabean/ (stores,
+products, sales, staffing, weather_daily) into Storage as one HTTP data source configuration.
+Add a second HTTP configuration for the open-meteo forecast CSV for the six cafés. Then build a
+transformation that joins them into staffing_outlook, one row per café per forecast day with
+expected units per rostered person and a short_handed flag over 67, and tell me which café and
+day come out most stretched.
 ```
 
-Kai still asks you to approve what it creates. Swap the file URLs for your own data and the same
-sentence builds *your* pipeline instead.
+Two things to know before you paste it. Kai still asks you to approve each object it creates, so a
+prompt this size is a dozen approvals rather than one. And on a request with several parts Kai
+tends to answer *"I'll tackle this in stages"*, do the first stage, and stop until you say
+*continue*; in our runs the same work as four separate prompts in one chat needed no nudging at
+all. The one-prompt version works. It is a shortcut for the second time, not a replacement for
+having seen the pieces once.
+{/* Measured: 2026-09-03 and 2026-09-08, a four-part prompt stopped after stage one both times;
+the four-prompt version ran to the end in 14 minutes with 12 approvals and 0 nudges (DECISIONS.md,
+2026-09-08). The exact one-prompt wording above has not itself been run since the dataset
+changed; its parts are the four prompts that have, and the approvals count is theirs. */}
 
-The part of the question still open is *"how close to **your** coast?"* — a number is a poor
-answer to that. The next page turns the table into a map anyone can open.
+The part of the question still open is *who else needs to see this*. A chat answer reaches the
+person who asked. The next page turns the table into a grid anyone can open.
