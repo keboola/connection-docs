@@ -356,6 +356,25 @@ of a count. The day-of-writing values live in a comment and here, not in the rea
 
 ---
 
+## 2026-09-09 — The Sheets side trip sends staffing_outlook after all
+
+**Decision:** `write/` is re-themed in text to `staffing_outlook`; its captures and clip are not
+reshot in this PR.
+
+**Why the text changes:** plan decision 5 said to leave the side trips with "their own examples",
+because reshooting the Google flow needs Nikita's OAuth. The example on this page was the table the
+main path used to build, `out.c-octopus-atlas.octopus_atlas`, which no reader of the new guide
+will have. Keeping it would have made the page a dead end at step 8. Changing names in text costs
+nothing and needs no authorization, so the names change: configuration `Boolabean outlook to
+Sheets`, spreadsheet `Boolabean staffing outlook`, sheet `staffing_outlook`, 42 rows.
+
+**Why the media does not:** the Keboola-side stills and the clip show the previous configuration
+and would need a live Google authorization to redo, so they stay as UI locators with a MISSING.md
+entry, and the clip comes off the page rather than showing the wrong thing. The Google consent
+captures are Google's screens and are unaffected.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
