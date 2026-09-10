@@ -10,5 +10,22 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/tutorial/:file(opportunity|account|user|level).csv",
+      "destination": "/getting-started/:file.csv",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/branches/:file(bitcoin_price|bitcoin_transactions).csv",
+      "destination": "/getting-started/branches/:file.csv",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/onboarding/usage-blueprint/keboola-platform-usage-blueprint-document.docx",
+      "destination": "/overview/onboarding/usage-blueprint/keboola-platform-usage-blueprint-document.docx",
+      "permanent": true
+    }
   ]
 }

@@ -15,7 +15,7 @@ Running the connector creates a background job that
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
 
-***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-connector).*
+***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/getting-started/ad-hoc/#using-bigquery-connector).*
 
 ## Initial Setup
 
@@ -36,7 +36,7 @@ Finally, click **+ Create Key** to create a new JSON key, and then click **Creat
 ![Screenshot - Create JSON key](/components/extractors/database/bigquery/googlecloud-3.png)
 
 ### Bucket
-The data source connector uses a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+The data source connector uses a Google Cloud Storage bucket as a temporary storage for off-loading the data from BigQuery.
 Go to the [**Google Cloud Platform Console > Storage >  Cloud Storage > Browser**](https://console.cloud.google.com/storage/browser)
 and click **Create Bucket**. **Name** the bucket and select its **location** (must be the same as of your dataset).
 

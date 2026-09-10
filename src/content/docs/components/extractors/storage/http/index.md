@@ -27,7 +27,7 @@ can be changed afterwards.
 ![Screenshot - Create table](/components/extractors/storage/http/http-2.png)
 
 Each table has different settings (path, load type, etc.) but they all share the same base URL.
-The configuration can extract as many tables as you wish *(to add more test tables, use our other sample tables: /tutorial/account.csv, /tutorial/level.csv, and /tutorial/user.csv)*. Configured tables are stored as [configuration rows](/components/#configuration-rows).
+The configuration can extract as many tables as you wish *(to add more test tables, use our other sample tables: /getting-started/account.csv, /getting-started/level.csv, and /getting-started/user.csv)*. Configured tables are stored as [configuration rows](/components/#configuration-rows).
 
 ### Specify File to Download
 
@@ -37,7 +37,7 @@ which will be imported into a single table in Storage.
 ![Screenshot - Download Settings](/components/extractors/storage/http/http-3.png)
 
 *(If you used our example base URL `https://help.keboola.com` and
-want to load one of our tutorial tables, enter its path, e.g., `/tutorial/opportunity.csv`.)*
+want to load one of our tutorial tables, enter its path, e.g., `/getting-started/opportunity.csv`.)*
 
 ### Save Settings
 

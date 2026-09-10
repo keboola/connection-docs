@@ -7,6 +7,8 @@ slug: 'management/payg-project'
 
 You can now start working with Keboola for free. Simply [sign up](https://connection.us-east4.gcp.keboola.com/wizard) on the website and create a free project.
 
+Once you have one, [Get a Project](/getting-started/project/) walks you through your first steps in it.
+
 ## Free Plan Limits
 Free Plan projects have the following limits:
 

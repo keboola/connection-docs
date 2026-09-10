@@ -1,0 +1,202 @@
+---
+title: 'Deliver the Answer'
+slug: 'getting-started/write'
+description: 'Send the table you just built out of Keboola into a Google Sheet using the Google Sheets data destination connector.'
+redirect_from:
+  - /tutorial/write/
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Whoever asked how deep octopuses really go will look in a spreadsheet, not in Keboola. This step
+delivers the 10,000-row atlas to a Google Sheet — the same mechanism that later sends data to a
+warehouse, a BI tool, or a CRM. Step 4 of the [Getting Started](/getting-started/) arc.
+
+**Two ways to do it, in one order:** steps 1–6 below are yours either way — the configuration and
+the Google authorization. After that, pick a tab in *Set it up*. Doing it with Kai, the run is
+part of the prompt; doing it yourself, you run it below the tabs. Checking the result is shared.
+
+{/* Tutorial-type page (step 4 of 7). 2026-08-25: dataset swapped to the octopus atlas
+(PRDCT-487 arc rework). Stills reshot live in 264 on 2026-08-27 (01, writing2, 3, 7, 11) against
+the octopus configs. Steps 4-6 keep the legacy captures deliberately — they are Google's own
+consent screens, dataset-independent, and redoing the OAuth would invalidate the live
+authorization. Steps 8-10 have no captures until the fresh-project walk (see the comment at
+step 8). */}
+
+## What you need
+
+- The table `octopus_atlas` in Storage, from
+  [Transform Data](/getting-started/transform/).
+- A Google account you can authorize.
+
+## Sending data out
+
+Getting data out is handled by **data destination connectors** — the mirror image of the
+data source connectors you loaded with. The pattern is always the same: authorize the
+target, pick the Storage table, say where it goes, run it. Sending processed data back into
+the operational systems it came from is often called **reverse ETL**; in Keboola it is just
+another component in your flow.
+
+Google Sheets is the easiest destination to try. The
+[full catalogue](/components/writers/) covers databases, BI tools, and cloud storage.
+
+{/* VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the
+conservative reading, not a documented limit — kai/use-cases.md advertises setting up a generic
+extractor "with pagination and OAuth authentication", which is about configuring auth, not granting
+it. Same caveat on load/googlesheets.md. Worth documenting on kai/ what Kai can and cannot do
+around authorizations. */}
+
+## Configure the destination
+
+1. Open **Components** and search for `Sheets`. Five results come back, and the first two are
+   **Google Sheets — Data Source** and **Google Sheets — Data Destination**: near-identical
+   names, opposite jobs. Pick the **Data Destination** one (component ID
+   `keboola.wr-google-sheets`). Picking the data source by mistake makes the rest of this page
+   impossible.
+
+   ![Screenshot - Search for the Google Sheets destination](/getting-started/write/01-find-destination.png)
+
+2. Click **Add Component** (**Create Configuration** on the card once the component already has
+   configurations), then **Connect To My Data** — the only button here, unlike the HTTP
+   connector in [step 2](/getting-started/load/), which also offered demo data.
+
+   ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
+
+3. Name the configuration `[TUTORIAL] Octopus atlas to Sheets`, add a description, and
+   click **Create Configuration**.
+
+   ![Screenshot - Name the configuration](/getting-started/write/writing3.png)
+
+## Authorize your Google account
+
+4. Authorize the account you want to write into.
+
+   ![Screenshot - Authorize a Google account](/getting-started/write/writing4.png)
+
+5. Name the authorization and click **Sign in with Google**. Use **external authorization**
+   instead if a colleague — not you — owns the target account; Keboola sends them a link
+   and never sees their credentials.
+
+   ![Screenshot - Sign in with Google](/getting-started/write/writing5.png)
+
+6. Click **Allow**.
+
+   ![Screenshot - Grant access](/getting-started/write/writing6.png)
+
+The authorization belongs to this configuration. Keboola stores component secrets as
+[encrypted configuration parameters](https://developers.keboola.com/overview/encryption/) —
+there is no decryption API, so the credentials are never readable back out of the
+configuration.
+
+{/* VERIFY(owner): the previous version of this page claimed the authorization "will only
+allow you to write data into a Google Spreadsheet". The exact OAuth scopes requested by
+keboola.wr-google-sheets are not published, and step 9 lets the reader pick an existing
+spreadsheet from Drive, which implies more than spreadsheet-write. Claim removed rather than
+guessed. */}
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Do it with Kai">
+
+Kai [configures data destinations](/kai/) as well as data sources. The configuration and the
+authorization above are yours either way — that consent screen is in your own Google account, not
+something an assistant can click through. Everything after it, Kai can do: open **Kai Agent** in
+the top bar and hand it over.
+
+```text
+In my "[TUTORIAL] Octopus atlas to Sheets" configuration, write
+out.c-octopus-atlas.octopus_atlas to a new spreadsheet called
+"[TUTORIAL] Octopus atlas", into a sheet named octopus_atlas, set to update rows rather
+than append. Then run it.
+```
+
+Naming all three matters: [step 5](/getting-started/automate/) puts this on a **daily schedule**, so an appending sheet grows by
+10,000 rows a day, and the check at the end of this tab looks for that spreadsheet name.
+The whole exchange, condensed to twenty seconds:
+
+<video autoplay loop muted playsinline poster="/getting-started/write/kai-write-poster.png">
+  <source src="/getting-started/write/kai-write.mp4" type="video/mp4" />
+</video>
+
+{/* Clip recorded live in project 264 on 2026-08-26 (scripts/record.mjs, clip id kai-write, 342 s
+real time). On camera Kai reads the config, notices the sheet was titled "Sheet1", shows
+the diff, asks for approval, fixes it and runs the job to Success (25 s, job 100174944) — which
+doubles as the live calibration of this prompt AND of the page's "everything Kai set is editable"
+claim. Post-produced with scripts/compositor.html (local, gitignored): variable pacing, caption
+chips, and the octopus pointer on the Success badge. */}
+
+**Check:** the sheet holds every row of `octopus_atlas`, joined columns included, exactly as
+in [Run it and check the result](#run-it-and-check-the-result). If it does not, switch to the
+**Do it yourself** tab and edit the sheet Kai created — its spreadsheet and sheet settings, steps 9
+and 10 — since everything Kai set is editable there.
+
+</TabItem>
+<TabItem label="Do it yourself">
+
+**Pick the table and the sheet**
+
+7. Click **New Sheet**.
+
+   ![Screenshot - New sheet](/getting-started/write/writing7.png)
+
+8. The **Add Sheet** wizard opens — three short steps you move through with **Next**. On the
+   first, pick `out.c-octopus-atlas.octopus_atlas` as the **Input Table** and click **Next**.
+   (The list hides tables this configuration already writes; an empty configuration offers
+   everything in Storage.)
+
+   {/* Wizard re-verified live in 264 on 2026-08-27: the button is NEW SHEET, the dialog is
+   "Add Sheet", a PREVIOUS/NEXT stepper; first step = Input Table plus an optional Show details
+   toggle (columns / changed-in-last / data filter). Screenshots for steps 8-10 pend a
+   fresh-project walk — 264's wizard hides octopus_atlas because the existing sheet already
+   maps it, so an honest capture is impossible there. */}
+
+9. On the spreadsheet step, choose **New spreadsheet** and name the *spreadsheet* — the file that
+   will appear in Drive. Use `[TUTORIAL] Octopus atlas`. An existing spreadsheet works too;
+   you pick it from the authorized account's Drive. Click **Next**.
+
+10. On the last step, name the *sheet* — the tab inside that file — `octopus_atlas`, select
+    **Update rows**, and click **Save Sheet**. This creates the empty spreadsheet in the authorized
+    account, ready to receive data.
+
+    **Update rows** replaces the sheet's contents on every run. The alternative appends to the
+    bottom instead — right for a log, wrong for a table you want to reflect current state.
+
+    {/* VERIFY(owner): "Update rows" comes from the previous version of this page; the exact label
+    of the append option was never documented here and is unverified. */}
+
+</TabItem>
+</Tabs>
+
+## Run it and check the result
+
+*Coming from the Kai tab? The run already happened — the prompt asked for it. Start at step 12.*
+
+11. Click **Run Component**.
+
+12. When the job finishes, click the spreadsheet name — `[TUTORIAL] Octopus atlas` — to open
+    it in Google Drive.
+
+    ![Screenshot - Open the spreadsheet](/getting-started/write/writing11.png)
+
+The sheet should hold every row of `octopus_atlas`, with the joined columns —
+`display_name`, `depth_zone`, `basin` — that did not exist in any of the four CSVs you started
+with. Sort it by `depth_m` descending and *Grimpoteuthis challengeri* — a dumbo octopus, though the
+data only knows its Latin name — sits at the top, 4,838 meters down. That is the whole
+pipeline, end to end.
+
+## If it goes wrong
+
+- **The job fails with a permission error.** The authorization expired or was revoked in the
+  Google account. Re-authorize the configuration; the sheet selection survives.
+- **The spreadsheet stays empty.** The table was saved in the configuration but the
+  component has not run since — click **Run Component**. If it did run, check in **Jobs**
+  whether the source table had any rows.
+- **Only some columns arrive.** The sheet was created against an older version of the table.
+  Delete the sheet from the configuration and add it again so the column list is rebuilt.
+- **You cannot open the spreadsheet.** It lives in the authorized Google account, not
+  yours — if you authorized a colleague's account, ask them to share it.
+- **You want the delivery checked against the source.** Kai can read both sides:
+  `Read the last Google Sheets destination job, tell me whether it succeeded, and compare what it wrote with the row count of out.c-octopus-atlas.octopus_atlas.`
+
+**Next:** [Automate it with a flow →](/getting-started/automate/)

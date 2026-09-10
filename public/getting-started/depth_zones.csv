@@ -1,0 +1,6 @@
+zone,zone_name,min_depth_m,max_depth_m
+sunlight,"Sunlight zone (epipelagic)",0,200
+twilight,"Twilight zone (mesopelagic)",200,1000
+midnight,"Midnight zone (bathypelagic)",1000,4000
+abyss,"Abyssal zone (abyssopelagic)",4000,6000
+hadal,"Hadal zone (trenches)",6000,11000
