@@ -833,9 +833,6 @@ items:
           - url: /management/project/delete/
             title: Project Deletion
 
-          - url: /management/project/ai-rules/
-            title: AI Rules
-
           - url: /management/project/mcp-server/
             title: MCP Server
 
